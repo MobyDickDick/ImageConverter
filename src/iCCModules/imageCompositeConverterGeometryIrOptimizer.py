@@ -14,7 +14,9 @@ from typing import Any
 GeometryIr = list[dict[str, object]]
 RenderFn = Callable[[GeometryIr], object]
 ErrorFn = Callable[[object], float]
-CandidateProvider = Callable[[dict[str, object], GeometryIr, int], Iterable[dict[str, object]]]
+CandidateProvider = Callable[
+    [dict[str, object], GeometryIr, int], Iterable[dict[str, object]]
+]
 
 
 def _element_name(element: dict[str, object]) -> str:
@@ -25,7 +27,9 @@ def _clone_ir(geometry_ir: GeometryIr) -> GeometryIr:
     return copy.deepcopy(geometry_ir)
 
 
-def _with_element(geometry_ir: GeometryIr, step_index: int, element: dict[str, object]) -> GeometryIr:
+def _with_element(
+    geometry_ir: GeometryIr, step_index: int, element: dict[str, object]
+) -> GeometryIr:
     candidate_ir = _clone_ir(geometry_ir)
     candidate_ir[step_index] = copy.deepcopy(element)
     return candidate_ir
@@ -74,10 +78,19 @@ def _default_candidate_provider(
     bbox = element.get("bbox")
     if isinstance(bbox, list) and len(bbox) == 4:
         coarse_delta = 0.02
-        fine_deltas = (0.0025, 0.005, 0.01) if element.get("kind") in {"ColorPatch", "RectBorder"} else (coarse_delta,)
+        fine_deltas = (
+            (0.0025, 0.005, 0.01)
+            if element.get("kind") in {"ColorPatch", "RectBorder"}
+            else (coarse_delta,)
+        )
         probes = []
         for idx in range(4):
-            for delta in (-coarse_delta, *(-d for d in fine_deltas), *fine_deltas, coarse_delta):
+            for delta in (
+                -coarse_delta,
+                *(-d for d in fine_deltas),
+                *fine_deltas,
+                coarse_delta,
+            ):
                 if (idx, delta) not in probes:
                     probes.append((idx, delta))
         for idx, delta in probes:
@@ -119,9 +132,13 @@ def _default_candidate_provider(
                     if not isinstance(candidate_points, list):
                         continue
                     candidate_point = candidate_points[point_index]
-                    if not (isinstance(candidate_point, list) and len(candidate_point) >= 2):
+                    if not (
+                        isinstance(candidate_point, list) and len(candidate_point) >= 2
+                    ):
                         continue
-                    candidate_point[coord_index] = _clamp01(float(candidate_point[coord_index]) + delta)
+                    candidate_point[coord_index] = _clamp01(
+                        float(candidate_point[coord_index]) + delta
+                    )
                     candidate["points"] = candidate_points
                     yield candidate
 
@@ -181,7 +198,9 @@ def _default_candidate_provider(
                 yield candidate
 
         stroke_gradient = element.get("stroke_gradient")
-        if isinstance(stroke_gradient, dict) and isinstance(stroke_gradient.get("stops"), list):
+        if isinstance(stroke_gradient, dict) and isinstance(
+            stroke_gradient.get("stops"), list
+        ):
             for stop_index, stop in enumerate(stroke_gradient["stops"]):
                 if not isinstance(stop, dict):
                     continue
@@ -193,10 +212,14 @@ def _default_candidate_provider(
                         continue
                     candidate = copy.deepcopy(element)
                     candidate_gradient = candidate.get("stroke_gradient")
-                    if not isinstance(candidate_gradient, dict) or not isinstance(candidate_gradient.get("stops"), list):
+                    if not isinstance(candidate_gradient, dict) or not isinstance(
+                        candidate_gradient.get("stops"), list
+                    ):
                         continue
                     candidate_stops = candidate_gradient["stops"]
-                    if stop_index >= len(candidate_stops) or not isinstance(candidate_stops[stop_index], dict):
+                    if stop_index >= len(candidate_stops) or not isinstance(
+                        candidate_stops[stop_index], dict
+                    ):
                         continue
                     candidate_stops[stop_index]["color"] = color
                     yield candidate
@@ -209,12 +232,18 @@ def _default_candidate_provider(
                         continue
                     candidate = copy.deepcopy(element)
                     candidate_gradient = candidate.get("stroke_gradient")
-                    if not isinstance(candidate_gradient, dict) or not isinstance(candidate_gradient.get("stops"), list):
+                    if not isinstance(candidate_gradient, dict) or not isinstance(
+                        candidate_gradient.get("stops"), list
+                    ):
                         continue
                     candidate_stops = candidate_gradient["stops"]
-                    if stop_index >= len(candidate_stops) or not isinstance(candidate_stops[stop_index], dict):
+                    if stop_index >= len(candidate_stops) or not isinstance(
+                        candidate_stops[stop_index], dict
+                    ):
                         continue
-                    candidate_stops[stop_index]["offset"] = _format_percent_offset(candidate_offset)
+                    candidate_stops[stop_index]["offset"] = _format_percent_offset(
+                        candidate_offset
+                    )
                     yield candidate
 
         fill = str(element.get("fill", "")).strip().lower()
@@ -245,7 +274,19 @@ def _default_candidate_provider(
 
     if element.get("kind") in {"ColorPatch", "RectBorder"}:
         fill_opacity = float(element.get("fill_opacity", 1.0))
-        for candidate_opacity in (0.75, 0.85, 0.9, 0.925, 0.95, 0.975, 1.0):
+        for candidate_opacity in (
+            0.75,
+            0.85,
+            0.9,
+            0.9125,
+            0.925,
+            0.9375,
+            0.95,
+            0.9625,
+            0.975,
+            0.9875,
+            1.0,
+        ):
             if abs(candidate_opacity - fill_opacity) < 1e-9:
                 continue
             candidate = copy.deepcopy(element)
@@ -253,14 +294,28 @@ def _default_candidate_provider(
             yield candidate
 
         stroke_opacity = float(element.get("stroke_opacity", 1.0))
-        for candidate_opacity in (0.75, 0.85, 0.9, 0.925, 0.95, 0.975, 1.0):
+        for candidate_opacity in (
+            0.75,
+            0.85,
+            0.9,
+            0.9125,
+            0.925,
+            0.9375,
+            0.95,
+            0.9625,
+            0.975,
+            0.9875,
+            1.0,
+        ):
             if abs(candidate_opacity - stroke_opacity) < 1e-9:
                 continue
             candidate = copy.deepcopy(element)
             candidate["stroke_opacity"] = candidate_opacity
             yield candidate
 
-    if element.get("kind") in {"ColorPatch", "RectBorder"} and isinstance(element.get("fill"), str):
+    if element.get("kind") in {"ColorPatch", "RectBorder"} and isinstance(
+        element.get("fill"), str
+    ):
         fill = str(element.get("fill", "")).strip().lower()
         if fill not in {"", "none", "transparent"}:
             for color in (
@@ -311,7 +366,9 @@ def _default_candidate_provider(
                 yield candidate
 
 
-def evaluateGeometryIrImpl(geometry_ir: GeometryIr, *, render_fn: RenderFn, error_fn: ErrorFn) -> float:
+def evaluateGeometryIrImpl(
+    geometry_ir: GeometryIr, *, render_fn: RenderFn, error_fn: ErrorFn
+) -> float:
     """Render and score a Geometry-IR chain."""
 
     return float(error_fn(render_fn(_clone_ir(geometry_ir))))
@@ -336,7 +393,9 @@ def optimizeGeometryIrSequentiallyImpl(
 
     current_ir = _clone_ir(geometry_ir)
     provider = candidate_provider or _default_candidate_provider
-    current_error = evaluateGeometryIrImpl(current_ir, render_fn=render_fn, error_fn=error_fn)
+    current_error = evaluateGeometryIrImpl(
+        current_ir, render_fn=render_fn, error_fn=error_fn
+    )
     initial_error = current_error
     steps: list[dict[str, object]] = []
 
@@ -345,9 +404,13 @@ def optimizeGeometryIrSequentiallyImpl(
         best_error = current_error
         best_ir = current_ir
 
-        for candidate_element in provider(copy.deepcopy(element), _clone_ir(current_ir), step_index):
+        for candidate_element in provider(
+            copy.deepcopy(element), _clone_ir(current_ir), step_index
+        ):
             probe_ir = _with_element(current_ir, step_index, candidate_element)
-            candidate_error = evaluateGeometryIrImpl(probe_ir, render_fn=render_fn, error_fn=error_fn)
+            candidate_error = evaluateGeometryIrImpl(
+                probe_ir, render_fn=render_fn, error_fn=error_fn
+            )
             if candidate_error < best_error - min_improvement:
                 best_error = candidate_error
                 best_ir = probe_ir
@@ -396,7 +459,11 @@ def selectGeometryIrForRenderingImpl(params: dict[str, Any]) -> GeometryIr:
         return geometry_ir
 
     emergency_ir = params.get("one_shot_emergency_geometry_ir")
-    if params.get("allow_one_shot_emergency") is True and isinstance(emergency_ir, list) and emergency_ir:
+    if (
+        params.get("allow_one_shot_emergency") is True
+        and isinstance(emergency_ir, list)
+        and emergency_ir
+    ):
         params["geometry_phase_mode"] = "one_shot_emergency"
         return emergency_ir
 
@@ -587,9 +654,13 @@ def _mutate_right_rotated_valve_parameter(
     elif parameter == "connector_start_x":
         connector[0][0] = float(connector[0][0]) + delta
     elif parameter == "stroke_width":
-        element["stroke_width"] = max(0.002, float(element.get("stroke_width", 0.04)) + delta)
+        element["stroke_width"] = max(
+            0.002, float(element.get("stroke_width", 0.04)) + delta
+        )
     elif parameter == "connector_width":
-        element["connector_width"] = max(0.002, float(element.get("connector_width", 0.075)) + delta)
+        element["connector_width"] = max(
+            0.002, float(element.get("connector_width", 0.075)) + delta
+        )
     return candidate
 
 
@@ -612,10 +683,15 @@ def refineRightRotatedValveGeometryImpl(
 
     current_ir = _clone_ir(geometry_ir)
     current_rendered = render_fn(current_ir)
-    current_error = float("inf") if current_rendered is None else float(error_fn(current_rendered))
+    current_error = (
+        float("inf") if current_rendered is None else float(error_fn(current_rendered))
+    )
     initial_error = current_error
     steps: list[dict[str, object]] = []
-    if not current_ir or current_ir[0].get("kind") != "RightRotatedTopKelleThreeWayValveGlyph":
+    if (
+        not current_ir
+        or current_ir[0].get("kind") != "RightRotatedTopKelleThreeWayValveGlyph"
+    ):
         return {
             "mode": "right_rotated_valve_geometry",
             "geometry_ir": current_ir,
@@ -659,7 +735,12 @@ def refineRightRotatedValveGeometryImpl(
                     if probe_error < current_error - min_improvement and (
                         best_probe is None or probe_error < best_probe[0]
                     ):
-                        best_probe = (probe_error, probe_ir, probe_rendered, direction * step)
+                        best_probe = (
+                            probe_error,
+                            probe_ir,
+                            probe_rendered,
+                            direction * step,
+                        )
                 if best_probe is None:
                     continue
                 previous_error = current_error
@@ -818,7 +899,10 @@ def optimizeGeometryIrRegistrationImpl(
         error_fn=error_fn,
         min_improvement=min_improvement,
     )
-    if float(generic_element_refinement["final_error"]) < current_error - min_improvement:
+    if (
+        float(generic_element_refinement["final_error"])
+        < current_error - min_improvement
+    ):
         current_ir = generic_element_refinement["geometry_ir"]
         current_rendered = render_fn(current_ir)
         current_error = float(generic_element_refinement["final_error"])

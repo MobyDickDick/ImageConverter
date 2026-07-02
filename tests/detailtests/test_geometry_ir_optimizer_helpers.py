@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import pytest
 
-from src.iCCModules import imageCompositeConverterGeometryIrOptimizer as optimizer_helpers
+from src.iCCModules import (
+    imageCompositeConverterGeometryIrOptimizer as optimizer_helpers,
+)
 
 
 def test_sequential_optimizer_accepts_only_improving_element_candidates() -> None:
@@ -39,7 +41,12 @@ def test_sequential_optimizer_accepts_only_improving_element_candidates() -> Non
     assert result["geometry_ir"][1]["stroke_width"] == 0.04
     assert result["final_error"] == 0.0
     assert [step["accepted"] for step in result["steps"]] == [True, True]
-    assert set(result["steps"][0]) >= {"step_index", "element", "best_delta", "accepted"}
+    assert set(result["steps"][0]) >= {
+        "step_index",
+        "element",
+        "best_delta",
+        "accepted",
+    }
 
 
 def test_sequential_optimizer_rejects_regression_and_keeps_current_ir() -> None:
@@ -68,7 +75,6 @@ def test_sequential_optimizer_rejects_regression_and_keeps_current_ir() -> None:
     ]
 
 
-
 def test_default_optimizer_refines_rect_bbox_with_subpixel_probe() -> None:
     ir = [
         {
@@ -83,24 +89,32 @@ def test_default_optimizer_refines_rect_bbox_with_subpixel_probe() -> None:
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if abs(candidate_ir[0]["bbox"][0] - 0.105) < 1e-9
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if abs(candidate_ir[0]["bbox"][0] - 0.105) < 1e-9 else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["bbox"][0] == pytest.approx(0.105)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
 
+
 def test_default_optimizer_refines_neutral_rect_fill_color() -> None:
-    ir = [{"kind": "RectBorder", "id": "rect", "bbox": [0.0, 0.0, 1.0, 1.0], "fill": "#e8e8e8"}]
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "rect",
+            "bbox": [0.0, 0.0, 1.0, 1.0],
+            "fill": "#e8e8e8",
+        }
+    ]
 
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["fill"] == "#b1c1cc"
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["fill"] == "#b1c1cc" else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["fill"] == "#b1c1cc"
@@ -122,9 +136,9 @@ def test_default_optimizer_refines_neutral_rect_to_warm_light_fill() -> None:
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["fill"] == "#f2b8b4"
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["fill"] == "#f2b8b4" else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["fill"] == "#f2b8b4"
@@ -145,24 +159,32 @@ def test_default_optimizer_refines_rect_to_fine_warm_light_fill() -> None:
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["fill"] == "#f2bab6"
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["fill"] == "#f2bab6" else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["fill"] == "#f2bab6"
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
 
+
 def test_default_optimizer_refines_neutral_rect_to_green_tinted_fill() -> None:
-    ir = [{"kind": "ColorPatch", "id": "background", "bbox": [0.0, 0.0, 1.0, 1.0], "fill": "#ffffff"}]
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "background",
+            "bbox": [0.0, 0.0, 1.0, 1.0],
+            "fill": "#ffffff",
+        }
+    ]
 
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["fill"] == "#bfd4ba"
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["fill"] == "#bfd4ba" else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["fill"] == "#bfd4ba"
@@ -193,8 +215,6 @@ def test_default_optimizer_refines_polygon_path_points_locally() -> None:
     assert result["steps"][0]["accepted"] is True
 
 
-
-
 def test_default_optimizer_refines_polygon_path_points_with_fine_local_probe() -> None:
     ir = [
         {
@@ -210,9 +230,9 @@ def test_default_optimizer_refines_polygon_path_points_with_fine_local_probe() -
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["points"][1][1] == 0.71
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["points"][1][1] == 0.71 else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["points"][1][1] == pytest.approx(0.71)
@@ -235,9 +255,9 @@ def test_default_optimizer_refines_polygon_path_points_with_subpixel_probe() -> 
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["points"][2][0] == 0.485
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["points"][2][0] == 0.485 else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["points"][2][0] == pytest.approx(0.485)
@@ -245,8 +265,9 @@ def test_default_optimizer_refines_polygon_path_points_with_subpixel_probe() -> 
     assert result["steps"][0]["accepted"] is True
 
 
-
-def test_default_optimizer_refines_polygon_path_points_with_subfine_subpixel_probe() -> None:
+def test_default_optimizer_refines_polygon_path_points_with_subfine_subpixel_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "PolygonPath",
@@ -261,14 +282,15 @@ def test_default_optimizer_refines_polygon_path_points_with_subfine_subpixel_pro
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["points"][2][0] == pytest.approx(0.4825)
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["points"][2][0] == pytest.approx(0.4825) else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["points"][2][0] == pytest.approx(0.4825)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
+
 
 def test_default_optimizer_refines_polygon_path_stroke_with_neutral_palette() -> None:
     ir = [
@@ -285,9 +307,9 @@ def test_default_optimizer_refines_polygon_path_stroke_with_neutral_palette() ->
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke"] == "#969696"
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["stroke"] == "#969696" else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke"] == "#969696"
@@ -310,9 +332,9 @@ def test_default_optimizer_refines_polygon_path_fill_with_chart_palette() -> Non
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["fill"] == "#e3162a"
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["fill"] == "#e3162a" else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["fill"] == "#e3162a"
@@ -320,7 +342,9 @@ def test_default_optimizer_refines_polygon_path_fill_with_chart_palette() -> Non
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_polygon_path_stroke_width_with_absolute_probe() -> None:
+def test_default_optimizer_refines_polygon_path_stroke_width_with_absolute_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "PolygonPath",
@@ -335,9 +359,9 @@ def test_default_optimizer_refines_polygon_path_stroke_width_with_absolute_probe
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke_width"] == 0.034
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["stroke_width"] == 0.034 else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_width"] == 0.034
@@ -345,8 +369,9 @@ def test_default_optimizer_refines_polygon_path_stroke_width_with_absolute_probe
     assert result["steps"][0]["accepted"] is True
 
 
-
-def test_default_optimizer_refines_polygon_path_stroke_width_with_fine_absolute_probe() -> None:
+def test_default_optimizer_refines_polygon_path_stroke_width_with_fine_absolute_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "PolygonPath",
@@ -361,16 +386,19 @@ def test_default_optimizer_refines_polygon_path_stroke_width_with_fine_absolute_
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke_width"] == 0.029
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["stroke_width"] == 0.029 else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.029)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
 
-def test_default_optimizer_refines_polygon_path_stroke_width_with_subfine_absolute_probe() -> None:
+
+def test_default_optimizer_refines_polygon_path_stroke_width_with_subfine_absolute_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "PolygonPath",
@@ -385,9 +413,9 @@ def test_default_optimizer_refines_polygon_path_stroke_width_with_subfine_absolu
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke_width"] == pytest.approx(0.0265)
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["stroke_width"] == pytest.approx(0.0265) else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.0265)
@@ -412,9 +440,11 @@ def test_default_optimizer_refines_polygon_path_linecap_and_linejoin() -> None:
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["linejoin"] == "bevel"
-        else (1.0 if candidate_ir[0]["linecap"] == "square" else 10.0),
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["linejoin"] == "bevel"
+            else (1.0 if candidate_ir[0]["linecap"] == "square" else 10.0)
+        ),
     )
 
     assert result["geometry_ir"][0]["linejoin"] == "bevel"
@@ -438,9 +468,9 @@ def test_default_optimizer_refines_polygon_path_opacity() -> None:
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0].get("stroke_opacity") == 0.85
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0].get("stroke_opacity") == 0.85 else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(0.85)
@@ -470,9 +500,11 @@ def test_default_optimizer_refines_polygon_path_stroke_gradient_stops() -> None:
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke_gradient"]["stops"][1]["color"] == "#8fc78e"
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["color"] == "#8fc78e"
+            else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["color"] == "#8fc78e"
@@ -503,9 +535,11 @@ def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets() -> Non
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+            else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
@@ -513,7 +547,9 @@ def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets() -> Non
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_fine_probe() -> None:
+def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_fine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "PolygonPath",
@@ -536,9 +572,11 @@ def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_fin
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+            else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
@@ -546,7 +584,9 @@ def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_fin
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_subfine_probe() -> None:
+def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_subfine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "PolygonPath",
@@ -569,9 +609,11 @@ def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_sub
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+            else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
@@ -579,7 +621,9 @@ def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_sub
     assert result["steps"][0]["accepted"] is True
 
 
-def test_select_geometry_ir_prefers_elementwise_result_and_requires_explicit_one_shot_emergency() -> None:
+def test_select_geometry_ir_prefers_elementwise_result_and_requires_explicit_one_shot_emergency() -> (
+    None
+):
     optimized = [{"kind": "RectBorder", "id": "optimized"}]
     raw = [{"kind": "RectBorder", "id": "raw"}]
     emergency = [{"kind": "RectBorder", "id": "emergency"}]
@@ -592,12 +636,17 @@ def test_select_geometry_ir_prefers_elementwise_result_and_requires_explicit_one
     assert optimizer_helpers.selectGeometryIrForRenderingImpl(params) == []
     assert params["geometry_phase_mode"] == "no_geometry_ir"
 
-    params = {"one_shot_emergency_geometry_ir": emergency, "allow_one_shot_emergency": True}
+    params = {
+        "one_shot_emergency_geometry_ir": emergency,
+        "allow_one_shot_emergency": True,
+    }
     assert optimizer_helpers.selectGeometryIrForRenderingImpl(params) == emergency
     assert params["geometry_phase_mode"] == "one_shot_emergency"
 
 
-def test_transform_geometry_ir_preserves_semantics_and_transforms_supported_geometry() -> None:
+def test_transform_geometry_ir_preserves_semantics_and_transforms_supported_geometry() -> (
+    None
+):
     ir = [
         {
             "kind": "ExampleGlyph",
@@ -761,9 +810,9 @@ def test_default_optimizer_refines_rect_border_stroke_with_neutral_palette() -> 
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke"] == "#adadad"
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["stroke"] == "#adadad" else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke"] == "#adadad"
@@ -772,14 +821,21 @@ def test_default_optimizer_refines_rect_border_stroke_with_neutral_palette() -> 
 
 
 def test_default_optimizer_refines_rect_bbox_with_fine_edge_probe() -> None:
-    ir = [{"kind": "RectBorder", "id": "rect", "bbox": [0.0, 0.0, 1.0, 1.0], "fill": "#e8e8e8"}]
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "rect",
+            "bbox": [0.0, 0.0, 1.0, 1.0],
+            "fill": "#e8e8e8",
+        }
+    ]
 
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["bbox"] == [0.01, 0.0, 1.0, 1.0]
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["bbox"] == [0.01, 0.0, 1.0, 1.0] else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["bbox"] == [0.01, 0.0, 1.0, 1.0]
@@ -802,9 +858,9 @@ def test_default_optimizer_refines_rect_border_stroke_width_with_fine_probe() ->
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke_width"] == pytest.approx(0.035)
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["stroke_width"] == pytest.approx(0.035) else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.035)
@@ -827,9 +883,9 @@ def test_default_optimizer_refines_rect_opacity_with_neutral_probe() -> None:
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0].get("fill_opacity") == 0.95
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0].get("fill_opacity") == 0.95 else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(0.95)
@@ -851,9 +907,9 @@ def test_default_optimizer_refines_color_patch_opacity_with_fine_probe() -> None
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0].get("fill_opacity") == pytest.approx(0.925)
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0].get("fill_opacity") == pytest.approx(0.925) else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(0.925)
@@ -876,12 +932,69 @@ def test_default_optimizer_refines_rect_border_stroke_opacity_with_fine_probe() 
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0].get("stroke_opacity") == pytest.approx(0.975)
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0].get("stroke_opacity") == pytest.approx(0.975)
+            else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(0.975)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_subfine_probe() -> None:
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "backbottom_light_grey_fill_subfine",
+            "bbox": [0.0, 0.0, 1.0, 1.0],
+            "fill": "#e8e8e8",
+            "fill_opacity": 0.95,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0].get("fill_opacity") == pytest.approx(0.9375)
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(0.9375)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_subfine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "backbottom_light_grey_outline_subfine",
+            "bbox": [0.0, 0.0, 1.0, 1.0],
+            "fill": "none",
+            "stroke": "#8a8a8a",
+            "stroke_opacity": 0.975,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0].get("stroke_opacity") == pytest.approx(0.9875)
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(0.9875)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
 
@@ -900,9 +1013,9 @@ def test_default_optimizer_refines_vertical_rule_stroke_width_with_fine_probe() 
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke_width"] == pytest.approx(0.050)
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["stroke_width"] == pytest.approx(0.050) else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.050)
@@ -910,7 +1023,9 @@ def test_default_optimizer_refines_vertical_rule_stroke_width_with_fine_probe() 
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_horizontal_rule_stroke_width_with_fine_probe() -> None:
+def test_default_optimizer_refines_horizontal_rule_stroke_width_with_fine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "HorizontalRule",
@@ -924,9 +1039,9 @@ def test_default_optimizer_refines_horizontal_rule_stroke_width_with_fine_probe(
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke_width"] == pytest.approx(0.060)
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["stroke_width"] == pytest.approx(0.060) else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.060)
@@ -947,9 +1062,9 @@ def test_default_optimizer_refines_color_patch_bbox_with_subpixel_probe() -> Non
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["bbox"][1] == pytest.approx(0.1975)
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["bbox"][1] == pytest.approx(0.1975) else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["bbox"][1] == pytest.approx(0.1975)
@@ -971,9 +1086,9 @@ def test_default_optimizer_refines_rect_border_bbox_with_subpixel_probe() -> Non
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["bbox"][2] == pytest.approx(0.3025)
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["bbox"][2] == pytest.approx(0.3025) else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["bbox"][2] == pytest.approx(0.3025)
@@ -981,7 +1096,9 @@ def test_default_optimizer_refines_rect_border_bbox_with_subpixel_probe() -> Non
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_vertical_rule_stroke_width_with_subfine_probe() -> None:
+def test_default_optimizer_refines_vertical_rule_stroke_width_with_subfine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "VerticalRule",
@@ -995,9 +1112,9 @@ def test_default_optimizer_refines_vertical_rule_stroke_width_with_subfine_probe
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke_width"] == pytest.approx(0.0525)
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["stroke_width"] == pytest.approx(0.0525) else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.0525)
@@ -1005,7 +1122,9 @@ def test_default_optimizer_refines_vertical_rule_stroke_width_with_subfine_probe
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_horizontal_rule_stroke_width_with_subfine_probe() -> None:
+def test_default_optimizer_refines_horizontal_rule_stroke_width_with_subfine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "HorizontalRule",
@@ -1019,9 +1138,9 @@ def test_default_optimizer_refines_horizontal_rule_stroke_width_with_subfine_pro
     result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
-        error_fn=lambda candidate_ir: 0.0
-        if candidate_ir[0]["stroke_width"] == pytest.approx(0.0575)
-        else 10.0,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["stroke_width"] == pytest.approx(0.0575) else 10.0
+        ),
     )
 
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.0575)
