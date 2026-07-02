@@ -278,8 +278,11 @@ def _default_candidate_provider(
                 "#c8dcc2",
                 "#bfd4ba",
                 "#f2b8b4",
+                "#f2bab6",
                 "#f2bcb8",
+                "#f3beb9",
                 "#f3c0bc",
+                "#f4c2be",
                 "#f4c4c0",
             ):
                 if color == fill:
