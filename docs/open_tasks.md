@@ -3996,3 +3996,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Qualität:** Die isolierte Metrik bleibt gegenüber Run UG stabil bei `Mean-Delta²=763.174377` (`Fehler/Pixel=0.010206`), weil keine neue Konturstärkenprobe den bisherigen Stand weiter verbessert.
 - **Perception-Lerneffekt:** `GE1410_L` bleibt `generalisiert`; die Änderung verallgemeinert die nachgelagerte PolygonPath-Konturregistrierung, nicht die reine Bilddetektion.
 - **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste zu `SE0041_1` rotieren oder weiteres allgemeines PolygonPath-Antialiasing-Feintuning untersuchen.
+
+### Fortschritt vs. Blocker (Session 2026-07-02, GE9012_6M Ultrafine-Opacity-Probes Run UO)
+
+- **Fortschritt:** Der aktive Plan-B-Kandidat `GE9012_6M` wurde mit einer weiteren katalogfreien Geometry-IR-Optimiererweiterung abgesichert: `ColorPatch`- und `RectBorder`-Elemente prüfen nun zusätzliche 0,00625er-Zwischenstufen für `fill_opacity` und `stroke_opacity`.
+- **Sicherung:** Der fokussierte Geometry-IR-Optimierer-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `GE9012_6M` endet mit Exit `0` und bleibt metrisch stabil.
+- **Qualität:** Die isolierte Metrik bleibt gegenüber Run UN stabil bei `Mean-Delta²=15386.639648` (`Fehler/Pixel=0.044122`), weil keine neue Opacity-Zwischenstufe den bisherigen Stand weiter verbessert.
+- **Perception-Lerneffekt:** `GE9012_6M` bleibt `nur Sonderfall`; die Änderung verallgemeinert die nachgelagerte Rechteck-/Farbflächen-Opacity-Registrierung, nicht die reine Bilddetektion.
+- **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste zu `GE9013_1M` rotieren oder weiteres allgemeines Rechteck-/BackBottom-Antialiasing-Feintuning untersuchen.

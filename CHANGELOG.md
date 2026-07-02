@@ -1,3 +1,4 @@
+- GE9012_6M Run UO adds ultrafine catalog-free `ColorPatch`/`RectBorder` opacity probes while the isolated BackBottom-square metric remains stable.
 - IDO-P2 Run SL closes IDO-10 through IDO-15 in the documented backlog after the absolute runtime-ID zero check, tying connector, badge, valve/kelle, and optimization migrations to neutral measurable metadata.
 - IDO-17 Run RG neutralizes Valve-Head SVG gradient identifiers and helper documentation in runtime code, lowering the legacy runtime-ID ratchet to 295 occurrences while keeping `head_style=ac0223_triple_valve` behavior intact.
 - IDO-17 Run RM neutralizes non-decision catalog-ID mentions in comments, docstrings, and a Geometry-IR log message; the hardcoding ratchet now passes with 246 legacy occurrences remaining.
