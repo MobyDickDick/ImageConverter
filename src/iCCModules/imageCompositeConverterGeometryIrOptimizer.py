@@ -113,7 +113,7 @@ def _default_candidate_provider(
             if not (isinstance(point, list) and len(point) >= 2):
                 continue
             for coord_index in (0, 1):
-                for delta in (-0.02, -0.01, -0.005, 0.005, 0.01, 0.02):
+                for delta in (-0.02, -0.01, -0.005, -0.0025, 0.0025, 0.005, 0.01, 0.02):
                     candidate = copy.deepcopy(element)
                     candidate_points = candidate.get("points")
                     if not isinstance(candidate_points, list):
