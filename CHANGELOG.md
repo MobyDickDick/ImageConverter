@@ -1,3 +1,4 @@
+- Plan-B Run US adds microfine catalog-free absolute stroke-width probes for `RectBorder`, `HorizontalRule`, and `VerticalRule` Geometry-IR elements while the isolated SE0041_1 Square-Badge metric remains stable.
 - GE9012_6M Run UO adds ultrafine catalog-free `ColorPatch`/`RectBorder` opacity probes while the isolated BackBottom-square metric remains stable.
 - IDO-P2 Run SL closes IDO-10 through IDO-15 in the documented backlog after the absolute runtime-ID zero check, tying connector, badge, valve/kelle, and optimization migrations to neutral measurable metadata.
 - IDO-17 Run RG neutralizes Valve-Head SVG gradient identifiers and helper documentation in runtime code, lowering the legacy runtime-ID ratchet to 295 occurrences while keeping `head_style=ac0223_triple_valve` behavior intact.
