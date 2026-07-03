@@ -17,6 +17,8 @@ def test_legacy_three_digit_family_filter_selects_padded_family_only() -> None:
     """AC010 is a legacy spelling for AC0010, not for the AC0100 family."""
 
     assert remaining_helpers._inRequestedRange("AC0010.jpg", "AC010", "AC010")
+    assert remaining_helpers._inRequestedRange("AC0010.jpg", "AC010_M", "AC010_M")
+    assert remaining_helpers._inRequestedRange("AC0010.jpg", "AC010_S", "AC010_S")
     assert remaining_helpers._inRequestedRange("AC0010_M.jpg", "AC010_M", "AC010_M")
     assert remaining_helpers._inRequestedRange("AC0010_S.jpg", "AC010_S", "AC010_S")
     assert not remaining_helpers._inRequestedRange("AC0100_L.jpg", "AC010", "AC010")
