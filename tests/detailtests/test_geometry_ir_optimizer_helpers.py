@@ -342,6 +342,33 @@ def test_default_optimizer_refines_polygon_path_points_with_ultrafine_subpixel_p
     assert result["steps"][0]["accepted"] is True
 
 
+def test_default_optimizer_refines_polygon_path_points_with_microfine_subpixel_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "microfine_subpixel_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["points"][2][0] == pytest.approx(0.480625) else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["points"][2][0] == pytest.approx(0.480625)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
 def test_default_optimizer_refines_polygon_path_stroke_with_neutral_palette() -> None:
     ir = [
         {
