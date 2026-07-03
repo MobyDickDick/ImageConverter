@@ -50,6 +50,25 @@ def test_render_geometry_ir_to_svg_contains_centralized_primitives() -> None:
     assert svg.endswith("</svg>")
 
 
+def test_ac0100_reference_description_builds_algorithmic_heat_exchanger_chain() -> None:
+    """AC0100 size variants must remain description/raster driven, not sample driven."""
+
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
+        "horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links."
+    )
+
+    assert [element["kind"] for element in ir] == [
+        "HorizontalGradient",
+        "RectBorder",
+        "DiagonalBand",
+        "PlusGlyph",
+        "MinusGlyph",
+    ]
+    assert [element["direction"] for element in ir if element["kind"] == "DiagonalBand"] == ["tr_bl"]
+    assert all(element.get("position") == "top_left" for element in ir if element["kind"] in {"PlusGlyph", "MinusGlyph"})
+
+
 def test_render_geometry_ir_ac0010_top_glyphs_stay_inside_canvas_and_main_rect() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
