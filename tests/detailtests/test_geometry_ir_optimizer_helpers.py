@@ -1085,7 +1085,6 @@ def test_default_optimizer_refines_rect_border_stroke_opacity_with_subfine_probe
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
 
-
 def test_default_optimizer_refines_vertical_rule_stroke_width_with_fine_probe() -> None:
     ir = [
         {
@@ -1182,7 +1181,6 @@ def test_default_optimizer_refines_rect_border_bbox_with_subpixel_probe() -> Non
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
 
-
 def test_default_optimizer_refines_vertical_rule_stroke_width_with_subfine_probe() -> (
     None
 ):
@@ -1234,6 +1232,57 @@ def test_default_optimizer_refines_horizontal_rule_stroke_width_with_subfine_pro
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
 
+
+def test_default_optimizer_refines_vertical_rule_stroke_width_with_ultrafine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "VerticalRule",
+            "id": "square_badge_stem_ultrafine",
+            "bbox": [0.46, 0.56, 0.08, 0.32],
+            "stroke": "#666666",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["stroke_width"] == pytest.approx(0.05375) else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.05375)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_horizontal_rule_stroke_width_with_ultrafine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "HorizontalRule",
+            "id": "square_badge_arm_ultrafine",
+            "bbox": [0.02, 0.48, 0.30, 0.08],
+            "stroke": "#666666",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["stroke_width"] == pytest.approx(0.05625) else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.05625)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
 
 def test_default_optimizer_refines_color_patch_opacity_with_ultrafine_probe() -> None:
     ir = [

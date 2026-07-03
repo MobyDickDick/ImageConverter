@@ -467,3 +467,4 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – GE1410_L Subfine-PolygonPath-Stroke-Width-Probes Run UL (2026-07-02)](next_arbeitspaket_2026-07-02_runUL.md)
 - [Nächstes Arbeitspaket – GE9012_6M Subfine-Opacity-Probes Run UN (2026-07-02)](next_arbeitspaket_2026-07-02_runUN.md)
 - [Nächstes Arbeitspaket – GE9013_1M Subfine-Warm-Fill-Probes Run UO (2026-07-02)](next_arbeitspaket_2026-07-02_runUO.md)
+- [Nächstes Arbeitspaket – SE0041_1 Ultrafine-Rule-Stroke-Probes Run US (2026-07-03)](next_arbeitspaket_2026-07-03_runUS.md)
