@@ -528,6 +528,33 @@ def test_default_optimizer_refines_rule_stroke_width_with_microfine_absolute_pro
     assert result["steps"][0]["accepted"] is True
 
 
+def test_default_optimizer_refines_rule_stroke_width_with_nanofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "VerticalRule",
+            "id": "square_badge_stem_nanofine",
+            "bbox": [0.45, 0.64, 0.10, 0.34],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_width"] == pytest.approx(0.0553125)
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.0553125)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
 def test_default_optimizer_refines_polygon_path_linecap_and_linejoin() -> None:
     ir = [
         {
