@@ -334,20 +334,20 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 Arbeitsreihenfolge für die nächsten Sessions (explizit von **leicht zu erledigen**
 bis **schwierig/zeitintensiv**):
 
-1. **N3/N4 – Run-Dokumentation sofort nach jedem Lauf nachpflegen**  
+1. **N3/N4 – Run-Dokumentation sofort nach jedem Lauf nachpflegen** 
    _Leicht_: rein organisatorisch, schnell abschließbar, verhindert Wissensverlust.
-2. **T5.x – isolierte Kurzläufe mit klaren Repro-Schritten**  
+2. **T5.x – isolierte Kurzläufe mit klaren Repro-Schritten** 
    _Niedrige bis mittlere Komplexität_: kleine, klar eingegrenzte Fehlerbilder.
-3. **N5 – Sample-Pair-Validierung (automatisierter Kurz-Batch)**  
+3. **N5 – Sample-Pair-Validierung (automatisierter Kurz-Batch)** 
    _Mittel_: reproduzierbar, aber mit Tool-/Umgebungsabhängigkeiten.
-4. **N6 – SVG-Variationssuite erweitern und Metriken stabilisieren**  
+4. **N6 – SVG-Variationssuite erweitern und Metriken stabilisieren** 
    _Mittel bis erhöht_: mehr Variantenraum und Auswertungslogik.
-5. **N7 – gezielte AC08-Einzelreferenz-Nachläufe**  
+5. **N7 – gezielte AC08-Einzelreferenz-Nachläufe** 
    _Erhöht_: diagnoseintensiv, aber weiterhin begrenzter Scope pro Referenz.
 6. **Kategorie: ganz zuletzt abarbeiten (wiederholt erfolglos)**
-   - **N2 – Stabilitätsnachweis über längere Laufstrecken konsolidieren**  
+   - **N2 – Stabilitätsnachweis über längere Laufstrecken konsolidieren** 
      _Ganz zuletzt_: wiederholt per Timeout/Exit `124` gescheitert; braucht längere Laufzeiten und saubere Evidenzkette.
-   - **N1 – Vollbereich `AC0800..AC0899` mit finalem Exit `0` nachweisen**  
+   - **N1 – Vollbereich `AC0800..AC0899` mit finalem Exit `0` nachweisen** 
      _Ganz zuletzt_: höchste Laufzeit, größte Timeout-/Stagnationsgefahr und ebenfalls wiederholt erfolglos.
 
 
@@ -1115,13 +1115,13 @@ Abarbeitungsregel: Nach jedem Bearbeitungsschritt wird bei weiterhin offenen Auf
     - Ziel: Pro Runde maschinenlesbar loggen, warum weiter iteriert wird (`reason=improved|stagnation_retry|unlock_retry|micro_search_retry`) bzw. warum beendet wird.
     - Akzeptanzkriterium: Lauf-Log enthält pro Runde genau einen `continue_or_stop`-Entscheidungseintrag mit Begründung und Restbudget.
 
-  
+ 
   - 2026-05-01: Validierungsloop ergänzt um strukturierte `validation_abort_decision`-Logevents (u. a. für Budget- und Stagnationsabbrüche sowie Schwellwert-Stopp), damit T5.16-Probeläufe maschinenlesbar auswertbar sind.
 - [x] T5.16.C (hohe Priorität): Frühabbruch bei stabiler Nicht-Verbesserung implementieren.
     - Ziel: Nach konfigurierbarer Anzahl Runden ohne signifikante Fehlerverbesserung (und bereits ausgeführten Unlock-/Fallback-Schritten) die Variante deterministisch beenden.
     - Akzeptanzkriterium: Weniger Folgerunden ohne Qualitätsgewinn in T5.16-Probeläufen; keine Regression in bestehenden AC08-Detailtests.
 
-  
+ 
     - 2026-05-01: Validierungsloop um stabilen Frühabbruch ergänzt (`stopped_due_to_stable_non_improvement` + strukturierte `validation_abort_decision: ... reason=stable_non_improvement`). Schwellwerte sind parametrisierbar über `validation_stable_improvement_epsilon` und `validation_stable_no_improvement_rounds`; neuer Detailtest bestätigt den kontrollierten Abbruchpfad.
 
   - [x] T5.16.D (hohe Priorität): Micro-Eval-Deduplizierung ergänzen.
@@ -2260,16 +2260,18 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - [ ] Direkt danach Kurzprüfung: Fehler/Timeout + tatsächlich verarbeitete IDs.
   - **Session 2026-06-26 (Run SY, B-AC08-01):** Standard-Run mit fixer Toolchain und äußerem Timeout erfolgreich ausgeführt: `PYTHONPATH=vendor/linux-py310/site-packages:. PYENV_VERSION=3.10.20 timeout 300 python -m src.iCCModules.imageCompositeConverterCli artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir /tmp/ic-b-ac08-01-20260626 --start AC0800 --end AC0840 --deterministic-order 2>&1 | tee artifacts/converted_images/reports/B-AC08-01_standard_run_2026-06-26.log` endete mit Exit `0`. Die Kurzprüfung ergab `49` Konvertiert-Meldungen für `29` eindeutige Varianten aus den `10` geplanten Basis-IDs; `AC0820_M.jpg` ist lokal nicht vorhanden, daher ist der Block für vorhandene Inputs vollständig. Auffällig bleiben sechs dokumentierte Fallback-Meldungen für `AC0840_*`/Qualitäts-Nachläufe, aber kein Timeout und kein Batch-Abbruch.
   - **Session 2026-07-02 (Run UI, B-AC08-02):** Nächster Standard-Run mit fixer Toolchain und äußerem Timeout erfolgreich ausgeführt: `PYTHONPATH=vendor/linux-py310/site-packages:. PYENV_VERSION=3.10.20 timeout 300 python -m src.iCCModules.imageCompositeConverterCli artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir /tmp/ic-b-ac08-02-20260702 --start AC0841 --end AC0850 --deterministic-order 2>&1 | tee artifacts/converted_images/reports/B-AC08-02_standard_run_2026-07-02.log` endete mit Exit `0`. Die Kurzprüfung ergab `62` Konvertiert-Meldungen für `30` eindeutige Varianten aus allen `10` geplanten Basis-IDs (`AC0841` bis `AC0850`), also keine lokale Datenlücke. Der Lauf enthält keinen Timeout, keinen Traceback und kein `conversion_failed`; auffällig bleiben `4` Semantik-Abgleich-`ERROR`-Meldungen für `AC0843_*` in Fallback-/Nachbesserungspfaden sowie `48` Qualitäts-`WARN`-Meldungen, daher ist der Block als stabiler Lauf mit Qualitätsfolgepunkten in A4 zu reviewen.
+  - **Session 2026-07-04 (Run UK, B-AC08-03):** Nächster Standard-Run mit fixer Toolchain und äußerem Timeout erfolgreich ausgeführt: `PYTHONPATH=vendor/linux-py310/site-packages:. PYENV_VERSION=3.10.20 timeout 300 python -m src.iCCModules.imageCompositeConverterCli artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir /tmp/ic-b-ac08-03-20260704 --start AC0851 --end AC0882 --deterministic-order 2>&1 | tee artifacts/converted_images/reports/B-AC08-03_standard_run_2026-07-04.log` endete mit Exit `0`. Die Kurzprüfung ergab `47` Konvertiert-Meldungen für `18` eindeutige Varianten aus `6` lokal vorhandenen Basis-IDs (`AC0861`, `AC0862`, `AC0863`, `AC0864`, `AC0870`, `AC0882`); die geplanten Basis-IDs `AC0851` bis `AC0860` sowie `AC0881` sind lokal nicht vorhanden. Der Lauf enthält keinen Timeout, keinen Traceback, kein `conversion_failed` und keine `ERROR`-Meldung; auffällig bleiben `43` Qualitäts-`WARN`-Meldungen mit räumlich konzentrierten Differenzen, daher ist der Block als stabiler Lauf mit Datenlücken und Qualitätsfolgepunkten in A4 reviewt.
 
-- [x] **A4 Review pro Block dokumentieren** (2026-07-04 Run UJ: Reviews für `B-AC08-01` und `B-AC08-02` dokumentiert; beide Blöcke sind laufzeitstabil, mit Datenlücke `AC0820_M.jpg` in `B-AC08-01` sowie Qualitätsfolgepunkten `AC0840_*`, `AC0843_*` und wiederkehrenden räumlichen Qualitätswarnungen.)
+- [x] **A4 Review pro Block dokumentieren** (2026-07-04 Run UK: Reviews für `B-AC08-01`, `B-AC08-02` und `B-AC08-03` dokumentiert; alle drei Blöcke sind laufzeitstabil, mit Datenlücken `AC0820_M.jpg` in `B-AC08-01` sowie fehlenden lokalen Basis-IDs `AC0851` bis `AC0860` und `AC0881` in `B-AC08-03`; Qualitätsfolgepunkte bleiben `AC0840_*`, `AC0843_*` und wiederkehrende räumliche Qualitätswarnungen.)
   - [x] In der Doku je Block festhalten: Log-Pfad, Ergebnis (`stabil`/`instabil`), Kurznotiz (3–5 Sätze).
   - [x] Bei `instabil` Ursache markieren: Datenlücke / Range-Filter / Laufzeit / Qualitätsbefund.
   - **Review B-AC08-01 (Run UH, 2026-07-01):** Log-Pfad: `artifacts/converted_images/reports/B-AC08-01_standard_run_2026-06-26.log`; Ergebnis: `stabil`. Der Standard-Run endete ohne Timeout, Traceback, ERROR oder `conversion_failed` und schrieb den Abschlussmarker `Abgeschlossen! Ausgaben unter: /tmp/ic-b-ac08-01-20260626`. Die Kurzprüfung bestätigt `49` Konvertiert-Meldungen und `29` eindeutige Varianten aus den `10` geplanten Basis-IDs; die einzige Datenlücke bleibt `AC0820_M.jpg`, das lokal nicht vorhanden ist. Für `AC0840_*` treten weiterhin dokumentierte Fallback-/Manual-Review-Elementfits auf, sie verursachen aber keinen Batch-Abbruch und werden daher als Qualitätsfolgepunkt statt Laufzeitblocker bewertet. Der Block erfüllt damit die Review-Kriterien bis `Review`; die endgültige `Done`-Entscheidung bleibt bei A6 gebündelt.
   - **Review B-AC08-02 (Run UJ, 2026-07-04):** Log-Pfad: `artifacts/converted_images/reports/B-AC08-02_standard_run_2026-07-02.log`; Ergebnis: `stabil mit Qualitätsfolgepunkten`. Der Standard-Run endete mit Exit `0`, Abschlussmarker und ohne Timeout, Traceback oder `conversion_failed`. Die Kurzprüfung bestätigt `62` Konvertiert-Meldungen und deckt alle `30` erwarteten Varianten aus den `10` geplanten Basis-IDs `AC0841` bis `AC0850` ab; es gibt keine lokale Datenlücke. Vier Semantik-Abgleich-`ERROR`-Meldungen betreffen `AC0843_*` und werden durch Fallback-/Nachbesserungspfade abgefangen, während `48` Qualitäts-`WARN`-Meldungen wiederkehrende räumlich konzentrierte Differenzen markieren. Der Block erfüllt damit die Review-Kriterien bis `Review`; die Warn-/ERROR-Befunde werden als A5-/A6-Qualitätsfolgepunkte bewertet und nicht als Laufzeitblocker.
+  - **Review B-AC08-03 (Run UK, 2026-07-04):** Log-Pfad: `artifacts/converted_images/reports/B-AC08-03_standard_run_2026-07-04.log`; Ergebnis: `stabil mit Datenlücken und Qualitätsfolgepunkten`. Der Standard-Run endete mit Exit `0`, Abschlussmarker und ohne Timeout, Traceback, `conversion_failed` oder `ERROR`. Die Kurzprüfung bestätigt `47` Konvertiert-Meldungen und `18` eindeutige Varianten; verarbeitet wurden alle lokal vorhandenen Varianten der Basis-IDs `AC0861`, `AC0862`, `AC0863`, `AC0864`, `AC0870` und `AC0882`. Die im A2-Blockplan genannten Basis-IDs `AC0851`, `AC0852`, `AC0853`, `AC0854`, `AC0860` und `AC0881` sind lokal nicht vorhanden und werden als Datenlücke statt Laufzeitblocker bewertet. `43` Qualitäts-`WARN`-Meldungen markieren weiterhin räumlich konzentrierte Differenzen, sodass der Block bis `Review` erfüllt ist und die Befunde in A5/A6 eingehen.
 
-- [ ] **A5 Qualitäts-Checkpoint nach je 3 Blöcken**
-  - [ ] Fehlertrend und wiederkehrende Problem-IDs prüfen.
-  - [ ] Entscheiden: weiter skalieren **oder** Plan-B-Selektionslogik nachjustieren.
+- [x] **A5 Qualitäts-Checkpoint nach je 3 Blöcken** (2026-07-04 Run UK: Nach `B-AC08-01` bis `B-AC08-03` geprüft; alle drei Standard-Runs sind laufzeitstabil, aber wiederkehrende räumliche Qualitätswarnungen und Datenlücken bleiben als A6-/A7-Folgepunkte sichtbar. Entscheidung: weiter mit A6/A7 statt Plan-B-Selektionslogik nachjustieren, weil kein Timeout, Traceback oder Batch-Abbruch vorliegt.)
+  - [x] Fehlertrend und wiederkehrende Problem-IDs prüfen.
+  - [x] Entscheiden: weiter skalieren **oder** Plan-B-Selektionslogik nachjustieren.
 
 - [ ] **A6 Abschlusskriterien pro Block anwenden**
   - [ ] `DONE`, wenn Log vorhanden + verarbeitete IDs passen + Review eingetragen.
@@ -2282,6 +2284,13 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 
 - [ ] **A8 Kanban-Status pflegen**
 
+
+### Fortschritt vs. Blocker (Session 2026-07-04, B-AC08-03 Standard-Run + Review Run UK)
+
+- **Fortschritt (Primäraufgaben A3/A4/A5):** Der nächste dokumentierte Block `B-AC08-03` wurde als Standard-Run mit fixer Toolchain, äußerem `timeout 300`, deterministischer Reihenfolge und Log via `tee` ausgeführt, direkt reviewt und als dritter Review-Block in den Qualitäts-Checkpoint aufgenommen.
+- **Ergebnis:** `artifacts/converted_images/reports/B-AC08-03_standard_run_2026-07-04.log` endete mit Exit `0` und Abschlussmarker; es gab keinen Timeout, keinen Traceback, kein `conversion_failed` und keine `ERROR`-Meldung.
+- **Befund:** Die Kurzprüfung zählt `47` Konvertiert-Meldungen für `18` eindeutige Varianten; verarbeitet wurden alle lokal vorhandenen Varianten von `AC0861`, `AC0862`, `AC0863`, `AC0864`, `AC0870` und `AC0882`, während `AC0851` bis `AC0860` sowie `AC0881` lokal fehlen. `43` Qualitäts-`WARN`-Meldungen bleiben als räumlich konzentrierte Differenzen sichtbar.
+- **Nächster sinnvoller Schritt:** A6 für die drei reviewten Blöcke anwenden und die Datenlücken aus `B-AC08-01`/`B-AC08-03` in A7 einordnen; keine Plan-B-Selektionsnachjustierung nötig, weil die Laufzeitstabilität gegeben ist.
 
 ### Fortschritt vs. Blocker (Session 2026-07-04, B-AC08-02 Review Run UJ)
 
@@ -3214,7 +3223,7 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ## Roadmap: Ketten-Architektur für geometrische Bildkonvertierung (PR-Plan, 2026-05-27)
 
-Ziel: Die Konvertierung soll strikt als **Kette** laufen:  
+Ziel: Die Konvertierung soll strikt als **Kette** laufen: 
 1) Bildbeschreibung prüfen/normalisieren → 2) Geometrie-Elemente ableiten → 3) Element-für-Element optimieren → 4) Bedingungen/Policies anwenden → 5) Finalauswahl.
 
 ### Neue Prioritätsgewichtung ab 2026-05-28
