@@ -58,14 +58,61 @@ def parse_semantic_badge_layout_overrides(text: str) -> dict[str, float | str]:
     return overrides
 
 
+def _normalize_semantic_text(text: str) -> str:
+    """Normalize free-form description text for semantic badge parsing."""
+    return re.sub(r"\s+", " ", str(text or "").lower()).strip()
+
+
+def _has_any(normalized: str, tokens: tuple[str, ...]) -> bool:
+    return any(token in normalized for token in tokens)
+
+
+def _has_rotation_phrase(normalized: str, direction: str) -> bool:
+    """Return true for common 'rotated toward direction' spellings.
+
+    The matcher is deliberately direction/verb based instead of tied to one
+    catalog sentence. It accepts the common OCR/description typo 'gredreht'
+    alongside the correct German 'gedreht'.
+    """
+    return bool(
+        re.search(rf"\bnach\s+{re.escape(direction)}\s+g(?:e|re)dreht\b", normalized)
+    )
+
+
+def _extract_badge_label(normalized: str) -> str | None:
+    """Extract a generic badge label from quoted text or semantic keywords."""
+    quoted = re.search(
+        r'["„“](?P<label>[A-Za-zÄÖÜäöü0-9]{1,4})(?:[_\s-]*2)?["„“]',
+        normalized,
+    )
+    if quoted:
+        label = quoted.group("label")
+        if label.lower() == "rf":
+            return "rF"
+        return label.upper() if len(label) == 1 else label.upper()
+    if re.search(r"\bco(?:[_\s\-\^]*2|[₂²])\b", normalized):
+        return "CO_2"
+    if re.search(r"\bco\b", normalized):
+        return "CO"
+    if re.search(r"\brf\b", normalized) or "relative feuchtigkeit" in normalized:
+        return "rF"
+    if "voc" in normalized:
+        return "VOC"
+    if "temperatur" in normalized:
+        return "T"
+    if "motor" in normalized:
+        return "M"
+    return None
+
+
 def _description_expects_left_circle_connector(desc: str) -> bool:
     """Return true when text describes a horizontal connector left of a circle."""
-    normalized = re.sub(r"\s+", " ", str(desc or "").lower()).strip()
+    normalized = _normalize_semantic_text(desc)
     if not normalized:
         return False
-    direct_left = any(
-        token in normalized
-        for token in (
+    direct_left = _has_any(
+        normalized,
+        (
             "waagrechter strich links",
             "horizontaler strich links",
             "linie links vom kreis",
@@ -82,31 +129,31 @@ def _description_expects_left_circle_connector(desc: str) -> bool:
             "links am kreis",
             "links neben dem kreis",
             "links vom kreis",
-            "waagrecht nach links",
-        )
+        ),
+    ) or bool(
+        re.search(r"\b(?:waagrecht|horizontal)\w*\s+(?:griff\s+)?nach\s+links\b", normalized)
     )
-    rotated_right_handle = (
-        "griff nach rechts gedreht" in normalized
-        or "anschluss nach rechts gedreht" in normalized
-        or (
-            "nach rechts gedreht" in normalized
-            and "text" in normalized
-            and "horizontal" in normalized
-        )
-    )
-    has_circle = any(token in normalized for token in ("kreis", "badge", "kelle")) or bool(
+    has_circle = _has_any(normalized, ("kreis", "badge", "kelle")) or bool(
         extract_documented_alias_refs(normalized)
     )
-    has_horizontal_connector = any(
-        token in normalized
-        for token in ("waagrecht", "horizontal", "strich", "linie", "anschluss", "griff")
+    has_horizontal_connector = _has_any(
+        normalized,
+        ("waagrecht", "horizontal", "strich", "linie", "anschluss", "griff"),
+    )
+    rotated_right_handle = (
+        _has_rotation_phrase(normalized, "rechts")
+        and (
+            _has_any(normalized, ("griff", "anschluss", "linie"))
+            or bool(extract_documented_alias_refs(normalized))
+        )
+        and _has_any(normalized, ("text", "waagrecht", "horizontal"))
     )
     return bool((direct_left or rotated_right_handle) and has_circle and has_horizontal_connector)
 
 
 def _description_expects_right_circle_connector(desc: str) -> bool:
     """Return true when text describes a horizontal connector right of a circle."""
-    normalized = re.sub(r"\s+", " ", str(desc or "").lower()).strip()
+    normalized = _normalize_semantic_text(desc)
     if not normalized:
         return False
     direct_right = any(
@@ -140,25 +187,28 @@ def _description_expects_right_circle_connector(desc: str) -> bool:
         or "anschluss unten" in normalized
     )
     rotated_left_handle = (
-        "griff nach links gedreht" in normalized
-        or "anschluss nach links gedreht" in normalized
-        or (
-            "nach links gedreht" in normalized
-            and "text" in normalized
-            and "horizontal" in normalized
-        )
+        _has_rotation_phrase(normalized, "links")
+        and _has_any(normalized, ("griff", "anschluss", "linie", "text"))
+        and _has_any(normalized, ("horizontal", "waagrecht", "text"))
     )
     has_circle = any(token in normalized for token in ("kreis", "badge", "kelle"))
     has_horizontal_connector = any(
         token in normalized
         for token in ("waagrecht", "horizontal", "strich", "linie", "anschluss", "griff")
     )
-    return bool((direct_right or rotated_down_handle or rotated_left_handle) and has_circle and has_horizontal_connector)
+    rotation_points_left = _has_rotation_phrase(normalized, "rechts") and _has_any(
+        normalized, ("text", "waagrecht", "horizontal")
+    )
+    return bool(
+        (direct_right or (rotated_down_handle and not rotation_points_left) or rotated_left_handle)
+        and has_circle
+        and has_horizontal_connector
+    )
 
 
 def _description_expects_top_circle_connector(desc: str) -> bool:
     """Return true when text describes a vertical connector above a circle."""
-    normalized = re.sub(r"\s+", " ", str(desc or "").lower()).strip()
+    normalized = _normalize_semantic_text(desc)
     if not normalized:
         return False
     direct_top = any(
@@ -192,7 +242,7 @@ def _description_expects_top_circle_connector(desc: str) -> bool:
 
 def _description_expects_bottom_circle_connector(desc: str) -> bool:
     """Return true when text describes a vertical connector below a circle."""
-    normalized = re.sub(r"\s+", " ", str(desc or "").lower()).strip()
+    normalized = _normalize_semantic_text(desc)
     if not normalized:
         return False
     direct_bottom = any(
@@ -322,7 +372,7 @@ def apply_semantic_badge_family_rules(
 
 def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, object]) -> bool:
     """Infer semantic badge elements from free-form German descriptions."""
-    normalized = re.sub(r"\s+", " ", str(desc or "").lower()).strip()
+    normalized = _normalize_semantic_text(desc)
     if not normalized:
         return False
 
@@ -345,32 +395,13 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
         return False
 
     has_badge_shape = any(token in normalized for token in ("kelle", "kreis", "badge"))
-    has_orientation_hint = any(
-        token in normalized
-        for token in (
-            "griff nach unten",
-            "griff nach oben",
-            "senkrecht nach unten",
-            "senkrecht nach oben",
-            "waagrecht nach links",
-            "waagrecht nach rechts",
-            "waagrechter strich links",
-            "waagrechter strich rechts",
-            "linie links vom kreis",
-            "linie links neben dem kreis",
-            "strich links vom kreis",
-            "strich links neben dem kreis",
-            "anschluss links vom kreis",
-            "linker anschluss",
-            "linke anschlusslinie",
-            "kreis rechts von der linie",
-            "kreis rechts vom strich",
-            "oberer anschluss",
-            "obere anschlusslinie",
-            "unterer anschluss",
-            "untere anschlusslinie",
-            "horizontale linie",
-            "vertikale linie",
+    has_orientation_hint = bool(
+        re.search(r"\b(?:griff|anschluss|linie|strich)\b", normalized)
+        and (
+            re.search(r"\b(?:links|rechts|oben|unten)\b", normalized)
+            or re.search(r"\b(?:waagrecht|horizontal|senkrecht|vertikal)\w*\b", normalized)
+            or _has_rotation_phrase(normalized, "links")
+            or _has_rotation_phrase(normalized, "rechts")
         )
     )
     if not has_badge_shape:
@@ -380,12 +411,17 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
     if "ohne buchstabe" in normalized:
         elements.append("SEMANTIC: Kreis ohne Buchstabe")
         params["label"] = ""
-    elif any(token in normalized for token in ("\"m\"", " m ", "motor")):
-        elements.append("SEMANTIC: Kreis + Buchstabe")
-        params["label"] = "M"
-    elif "voc" in normalized:
-        elements.append("SEMANTIC: Kreis + Buchstabe VOC")
-        params["label"] = "VOC"
+    else:
+        label = _extract_badge_label(normalized)
+        if label:
+            elements.append(
+                (
+                    f"SEMANTIC: Kreis + Buchstabe {label}"
+                    if len(label) > 1
+                    else "SEMANTIC: Kreis + Buchstabe"
+                )
+            )
+            params["label"] = label
 
     if _description_expects_top_circle_connector(normalized):
         elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")

@@ -1,6 +1,77 @@
 from __future__ import annotations
 
 
+def _generic_description_badge_params(width: int, height: int, params: dict) -> dict | None:
+    """Build catalog-free circle/text badge params from semantic description elements."""
+    elements = [str(element).lower() for element in params.get("elements", [])]
+    if not any("kreis" in element for element in elements):
+        return None
+
+    expects_left = any("waagrechter strich links" in element for element in elements)
+    expects_right = any("waagrechter strich rechts" in element for element in elements)
+    expects_top = any("senkrechter strich oben" in element for element in elements)
+    expects_bottom = any("senkrechter strich hinter" in element for element in elements)
+    min_side = float(max(1, min(width, height)))
+    stroke = max(1.0, min_side * 0.045)
+    r = max(1.0, (min_side - 3.0) / 2.0)
+    cx = float(width) / 2.0
+    cy = float(height) / 2.0
+    if expects_left:
+        cx = max(r + stroke, float(width) - r - stroke)
+    elif expects_right:
+        cx = min(float(width) - r - stroke, r + stroke)
+    if expects_top:
+        cy = max(r + stroke, float(height) - r - stroke)
+    elif expects_bottom:
+        cy = min(float(height) - r - stroke, r + stroke)
+
+    label = str(params.get("label", "") or "")
+    badge = {
+        "cx": cx,
+        "cy": cy,
+        "r": r,
+        "stroke_circle": stroke,
+        "fill_gray": 242,
+        "stroke_gray": 127,
+        "text_gray": 102,
+        "draw_text": bool(label),
+        "label": label,
+        "text_mode": "path_t" if label.upper() == "T" else label.lower(),
+        "s": 0.0100 * (min_side / 30.0),
+        "tx": cx - (4.0 * (min_side / 30.0)),
+        "ty": cy - (6.0 * (min_side / 30.0)),
+        "width": float(width),
+        "height": float(height),
+        "arm_enabled": False,
+    }
+    arm_stroke = max(1.0, stroke)
+    if expects_left:
+        badge.update(
+            {
+                "connector_direction": "left",
+                "arm_enabled": True,
+                "arm_x1": 0.0,
+                "arm_y1": cy,
+                "arm_x2": max(0.0, cx - r - arm_stroke / 2.0),
+                "arm_y2": cy,
+                "arm_stroke": arm_stroke,
+            }
+        )
+    elif expects_right:
+        badge.update(
+            {
+                "connector_direction": "right",
+                "arm_enabled": True,
+                "arm_x1": min(float(width), cx + r + arm_stroke / 2.0),
+                "arm_y1": cy,
+                "arm_x2": float(width),
+                "arm_y2": cy,
+                "arm_stroke": arm_stroke,
+            }
+        )
+    return badge
+
+
 def applySquareBadgeVariantParamsImpl(badge_params: dict, *, width: int, height: int) -> dict:
     """Apply catalog-free square-badge variant defaults measured from the canvas.
 
@@ -82,6 +153,8 @@ def runSemanticBadgeIterationImpl(
             if badge_params is not None:
                 badge_params["param_source_ref"] = badge_param_source_ref
                 badge_params["variant_name"] = variant_name
+    if badge_params is None:
+        badge_params = _generic_description_badge_params(width, height, params)
     if badge_params is None:
         return None
 

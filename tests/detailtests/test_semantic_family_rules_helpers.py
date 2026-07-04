@@ -175,6 +175,36 @@ def test_apply_semantic_badge_family_rules_derives_legacy_right_connectors_witho
         )
 
 
+def test_apply_semantic_badge_description_rules_extracts_generic_quoted_label() -> None:
+    params: dict[str, object] = {"elements": []}
+
+    applied = helpers.apply_semantic_badge_description_rules(
+        desc='neutrale Kelle mit Text "x" und horizontalem Griff nach links',
+        params=params,
+    )
+
+    assert applied is True
+    assert params["label"] == "X"
+    assert "SEMANTIC: Kreis + Buchstabe" in params["elements"]
+    assert "SEMANTIC: waagrechter Strich links vom Kreis" in params["elements"]
+
+def test_apply_semantic_badge_description_rules_derives_left_t_badge_from_rotated_handle_text() -> None:
+    params: dict[str, object] = {"elements": []}
+
+    applied = helpers.apply_semantic_badge_description_rules(
+        desc=(
+            'grauer kreis mit text "t" (temperatur), mit griff nach unten; '
+            'nach rechts gredreht. text ("t") waagrecht geschrieben.'
+        ),
+        params=params,
+    )
+
+    assert applied is True
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == "T"
+    assert "SEMANTIC: Kreis + Buchstabe" in params["elements"]
+    assert "SEMANTIC: waagrechter Strich links vom Kreis" in params["elements"]
+
 def test_apply_semantic_badge_description_rules_derives_left_connector_from_relation_text() -> None:
     params: dict[str, object] = {"elements": []}
 
