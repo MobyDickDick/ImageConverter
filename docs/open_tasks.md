@@ -4021,3 +4021,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Qualität:** Die isolierte Metrik bleibt gegenüber Run UO stabil bei `Mean-Delta²=15386.639648` (`Fehler/Pixel=0.044122`), weil keine neue Opacity-Zwischenstufe den bisherigen Stand weiter verbessert.
 - **Perception-Lerneffekt:** `GE9012_6M` bleibt `nur Sonderfall`; die Änderung verallgemeinert die nachgelagerte Rechteck-/Farbflächen-Opacity-Registrierung, nicht die reine Bilddetektion.
 - **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste zu `GE9013_1M` rotieren oder weiteres allgemeines Rechteck-/BackBottom-Antialiasing-Feintuning untersuchen.
+
+### Fortschritt vs. Blocker (Session 2026-07-04, PolygonPath Ultrafine-Stroke-Width-Probes Run VC)
+
+- **Fortschritt:** Der dokumentierte Anschluss für weitere allgemeine Antialiasing-/Stroke-Probes wurde als katalogfreie Geometry-IR-Optimiererweiterung umgesetzt: `PolygonPath`-Elemente prüfen nun zusätzlich absolute `stroke_width ± 0.00125`-Probes.
+- **Sicherung:** Der fokussierte Geometry-IR-Optimierer-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `GE1410_L` endet mit Exit `0`.
+- **Qualität:** Die isolierte GE1410_L-Metrik liegt bei `Mean-Delta²=759.441589` (`Fehler/Pixel=0.010179`).
+- **Perception-Lerneffekt:** Die Änderung verallgemeinert die nachgelagerte PolygonPath-Konturregistrierung, nicht die reine Bilddetektion.
+- **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste weiter rotieren oder weiteres allgemeines PolygonPath-Antialiasing-/Gradient-Feintuning untersuchen.

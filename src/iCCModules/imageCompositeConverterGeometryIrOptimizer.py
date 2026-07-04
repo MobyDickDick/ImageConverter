@@ -109,7 +109,16 @@ def _default_candidate_provider(
             yield candidate
 
         if element.get("kind") == "PolygonPath":
-            for delta in (-0.01, -0.005, -0.0025, 0.0025, 0.005, 0.01):
+            for delta in (
+                -0.01,
+                -0.005,
+                -0.0025,
+                -0.00125,
+                0.00125,
+                0.0025,
+                0.005,
+                0.01,
+            ):
                 candidate = copy.deepcopy(element)
                 candidate["stroke_width"] = max(0.001, stroke_width + delta)
                 yield candidate
