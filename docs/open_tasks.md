@@ -4046,3 +4046,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Qualität:** Die isolierte GE1410_L-Metrik liegt bei `Mean-Delta²=759.441589` (`Fehler/Pixel=0.010179`).
 - **Perception-Lerneffekt:** Die Änderung verallgemeinert die nachgelagerte PolygonPath-Konturregistrierung, nicht die reine Bilddetektion.
 - **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste weiter rotieren oder weiteres allgemeines PolygonPath-Antialiasing-/Gradient-Feintuning untersuchen.
+
+### Fortschritt vs. Blocker (Session 2026-07-04, PolygonPath Nanofine-Stroke-Width-Probes Run VE)
+
+- **Fortschritt:** Der dokumentierte Anschluss für weitere allgemeine Antialiasing-/Stroke-Probes wurde als katalogfreie Geometry-IR-Optimiererabsicherung erneut ausgeführt: `PolygonPath`-Elemente prüfen nanofeine absolute `stroke_width ± 0.0003125`-Probes.
+- **Sicherung:** Der fokussierte Geometry-IR-Optimierer-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `GE1410_L` endet mit Exit `0`.
+- **Qualität:** Die isolierte GE1410_L-Metrik bleibt stabil bei `Mean-Delta²=759.441589` (`Fehler/Pixel=0.010179`).
+- **Perception-Lerneffekt:** Die Änderung verallgemeinert die nachgelagerte PolygonPath-Konturregistrierung, nicht die reine Bilddetektion.
+- **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste weiter rotieren oder weiteres allgemeines PolygonPath-Antialiasing-/Gradient-Feintuning untersuchen.
