@@ -474,3 +474,4 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – GE9013_1M Nanofine-Warm-Fill-Probes Run UY (2026-07-04)](next_arbeitspaket_2026-07-04_runUY.md)
 - [Nächstes Arbeitspaket – DLG0021 Microfine-Stroke-Gradient-Offset-Probes Run UZ (2026-07-04)](next_arbeitspaket_2026-07-04_runUZ.md)
 - [Nächstes Arbeitspaket – GE1410_L Nanofine-PolygonPath-Point-Probes Run VA (2026-07-04)](next_arbeitspaket_2026-07-04_runVA.md)
+- [Nächstes Arbeitspaket – SE0041_1 Picofine-Rule-Stroke-Width-Probes Run VB (2026-07-04)](next_arbeitspaket_2026-07-04_runVB.md)
