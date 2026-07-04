@@ -636,6 +636,38 @@ def test_default_optimizer_refines_polygon_path_stroke_width_with_nanofine_absol
     assert result["steps"][0]["accepted"] is True
 
 
+def test_default_optimizer_refines_polygon_path_stroke_width_with_picofine_absolute_probe() -> (
+    None
+):
+    geometry_ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "picofine_antialias_sensitive_triangle",
+            "points": [[0.1, 0.2], [0.8, 0.2], [0.4, 0.7]],
+            "stroke_width": 0.024,
+            "fill": "none",
+            "stroke": "#24678d",
+        }
+    ]
+
+    def error_fn(candidate_ir: list[dict[str, object]]) -> float:
+        return (
+            0.0
+            if candidate_ir[0]["stroke_width"] == pytest.approx(0.02415625)
+            else 10.0
+        )
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        geometry_ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=error_fn,
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.02415625)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
 def test_default_optimizer_refines_rule_stroke_width_with_microfine_absolute_probe() -> (
     None
 ):
