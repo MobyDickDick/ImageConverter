@@ -1684,3 +1684,56 @@ def test_default_optimizer_refines_rect_border_stroke_opacity_with_nanofine_prob
     assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(0.9828125)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_picofine_probe() -> None:
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "backbottom_light_grey_fill_picofine",
+            "bbox": [0.0, 0.0, 1.0, 1.0],
+            "fill": "#e8e8e8",
+            "fill_opacity": 0.9125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0].get("fill_opacity") == pytest.approx(0.91328125)
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(0.91328125)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_picofine_probe() -> None:
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "backbottom_light_grey_outline_picofine",
+            "bbox": [0.0, 0.0, 1.0, 1.0],
+            "fill": "none",
+            "stroke": "#8a8a8a",
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0].get("stroke_opacity") == pytest.approx(0.98359375)
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(0.98359375)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
