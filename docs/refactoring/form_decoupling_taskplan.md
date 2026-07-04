@@ -1,144 +1,119 @@
-# Aufgabenplan: Entkopplung der Formen vom Konvertierungsprogramm
+# Aufgabenplan: generische Bild-und-Beschreibung-zu-SVG-Konvertierung
 
-## Zielbild
-Das Konvertierungsprogramm darf **keine form-spezifischen Regeln** mehr enthalten (z. B. `AC0800_L`-Sonderlogik). Es arbeitet nur noch auf Basis einer externen Umsetzungsbeschreibung mit optimierbaren Parametern.
+## Projektziel
 
-## Ergebnis-Artefakte
-1. **Sprachbeschreibung** je Form (fachliche Beschreibung, ohne Algorithmik).
-2. **Umsetzungsbeschreibung** je Form (Geometrie-/Farbprimitive + Parameterraum).
-3. **Generischer Konvertierungsalgorithmus** (ohne Formwissen):
-   - Parameter variieren
-   - Rendern
-   - Vergleichen
-   - Parameterraum einengen
-4. **Fehlschlag-Analysebericht** je entfernte Form inkl. Algorithmus-Verbesserungsvorschlag.
+Gegeben sind ein Rasterbild und eine Bildbeschreibung. Daraus soll der Konverter
+ein SVG mit optimaler Qualität erzeugen, gemessen primär an der Fehlerquote der
+Pixelfehler zwischen gerendertem SVG und Zielbild.
 
----
+## Leitentscheidung
 
-## Arbeitspaket A – Vollständige Bestandsaufnahme der Formabhängigkeiten
+Die bisherige Aufgabenliste wird von vielen formbezogenen Einzelarbeiten auf
+wenige, überprüfbare Produktziele verdichtet. Priorität haben nur Arbeiten, die
+entweder die Pixelmetrik verbessern, form-/bild-ID-spezifische Runtime-Logik
+entfernen oder die Reproduzierbarkeit der Qualitätsentscheidung erhöhen.
 
-### A1. Formcodes im Code inventarisieren
-- [ ] Alle harten Formreferenzen (`ACxxxx`, `GExxxx`, `ARxxxx`, etc.) im Runtime-Code auflisten.
-- [ ] Treffer kategorisieren:
-  - **erlaubt**: Daten-/Beschreibungsdateien
-  - **nicht erlaubt**: Konvertierungs-/Optimierungslogik
-- [ ] Ergebnis als CSV ablegen: `artifacts/reports/form_code_inventory.csv`
+Nicht mehr priorisiert werden weitere Kandidaten-Feinschritte, die nur einen
+einzelnen Bildcode stabilisieren und keinen wiederverwendbaren Algorithmus
+verbessern.
 
-### A2. Module mit implizitem Formwissen markieren
-- [ ] Prüfen und klassifizieren (Startliste):
-  - `src/iCCModules/imageCompositeConverterSemantic*.py`
-  - `src/iCCModules/imageCompositeConverterAc08Gate.py`
-  - `src/iCCModules/imageCompositeConverterForms.py`
-  - `src/iCCModules/imageCompositeConverterFormsSymmetricChords.py`
-  - `src/iCCModules/imageCompositeConverterDualArrow*.py`
-  - `src/iCCModules/imageCompositeConverterRemaining.py`
-  - `src/imageCompositeConverter.py`
-- [ ] Für jedes Modul dokumentieren:
-  - Welche Formkenntnis eingebaut ist
-  - Warum sie aktuell benötigt wird
-  - In welches Datenmodell sie verschoben wird
+## Umgeordnete Roadmap
 
-### A3. Baseline-Qualität einfrieren
-- [ ] Referenzlauf für alle bisher bekannten Formen durchführen.
-- [ ] Metriken sichern (z. B. Score, Pixel-Diff, Erfolg/Fehlschlag, Laufzeit).
-- [ ] Baseline-Bericht ablegen: `artifacts/reports/form_decoupling_baseline_YYYY-MM-DD.md`
+### P0 – Qualitätsziel und Messverfahren fixieren
 
----
+1. [ ] Eine zentrale Qualitätsdefinition festlegen: Primärmetrik
+   `mean_delta2`, sekundär `normalized_mse`, Kantenfehler und Laufzeit.
+2. [ ] Akzeptanzschwellen je Bildklasse definieren: einfache Symbole,
+   Text-/Badge-Symbole, Mehrkomponentenbilder und breite/hohe Sonderformate.
+3. [ ] Einen reproduzierbaren Holdout-Satz festlegen, der nicht als
+   Bild-ID-Sonderlogik im Runtime-Code verwendet werden darf.
+4. [ ] Einen täglichen oder manuellen Quality-Report erzeugen, der Baseline,
+   aktuelles Ergebnis, Regressionen und Top-Fehlerfälle in einer Datei bündelt.
 
-## Arbeitspaket B – Ziel-Datenmodell für Umsetzungsbeschreibungen
+### P1 – Harte Bild- und Formabhängigkeiten entfernen
 
-### B1. Schema definieren
-- [ ] Einheitliches Schema für Formumsetzung festlegen (JSON/YAML):
-  - `shape_type` (z. B. circle, line, polygon, arrow, badge)
-  - `parameters` (Name, Typ, Min/Max, Schrittweite/Prior)
-  - `constraints` (z. B. Symmetrie, Achsenbindung)
-  - `style_layers` (z. B. Rand/Hintergrund, Füllung)
-  - `objective_weights` (Form-, Farb-, Kanten-Fehler)
-- [ ] Validierungsregeln festlegen (Pflichtfelder, Wertebereiche).
+5. [x] Formcode-Inventar automatisch erzeugen.
+6. [ ] Runtime-Treffer in `erlaubt` und `nicht erlaubt` klassifizieren.
+7. [ ] CI-Guard aktivieren, der neue bild-/form-ID-spezifische Branches in
+   Runtime-Modulen blockiert.
+8. [ ] Bestehende Sonderpfade nur dann behalten, wenn sie als generisches
+   Primitive-, Topologie- oder Optimierungsverhalten formuliert sind.
 
-### B2. Beispielmigration AC0800_L
-- [ ] AC0800_L als Referenzfall anlegen:
-  - Kreis
-  - Rand dunkel
-  - Hintergrund hell
-  - Parameter: Mittelpunkt, Radius, Randbreite, Randfarbe, Hintergrundfarbe
-- [ ] Sicherstellen, dass die Konvertierung **nur** aus dieser Beschreibung gespeist wird.
+### P2 – Einheitliche Zwischenrepräsentation etablieren
 
-### B3. Beschreibungsspeicher aufbauen
-- [ ] Ablagestruktur festlegen, z. B. `artifacts/descriptions/implementations/<FORM>.yaml`
-- [ ] Loader + Schema-Validator integrieren.
+9. [ ] Schema v1 für Geometry-IR/Umsetzungsbeschreibung festschreiben:
+   Primitive, Parameterbereiche, Constraints, Style-Layer und Objective-Weights.
+10. [ ] Loader und Validator für diese Beschreibung integrieren.
+11. [ ] Bildbeschreibung, Perception-Seeds und vorhandene Heuristiken in dieselbe
+    IR übersetzen, statt getrennte Pfade für einzelne Familien zu pflegen.
+12. [ ] SVG-Emission ausschließlich aus der IR ableiten.
 
----
+### P3 – Initialisierung aus Bild und Beschreibung verbessern
 
-## Arbeitspaket C – Formwissen aus dem Konverter entfernen (iterativ je Formfamilie)
+13. [ ] Beschreibungsparser auf eine kleine, stabile Vokabularschicht reduzieren:
+    Formen, Lage, Größe, Farbe, Anzahl, Text/Glyphen und Wiederholungsmuster.
+14. [ ] Perception-Seeds für Kanten, Farbfelder, Linien, Polygone, Kreise/Ringe
+    und Textbereiche vereinheitlichen.
+15. [ ] Fusion-Regel festlegen: Beschreibung bestimmt Topologie-Prioren,
+    Bildsignal bestimmt konkrete Parameter, Pixelmetrik entscheidet.
+16. [ ] Fehlende oder widersprüchliche Beschreibungsteile mit niedriger
+    Konfidenz markieren, nicht durch Bild-ID-Wissen ersetzen.
 
-### C1. Priorisierte Reihenfolge
-- [ ] Familie 1: einfache Kreis-/Ringformen (z. B. AC08xx-Basis)
-- [ ] Familie 2: Pfeile/Badges
-- [ ] Familie 3: Mehrkomponentenformen
-- [ ] Familie 4: Sonderfälle/Legacy
+### P4 – Generische Optimierung statt Einzelbild-Tuning
 
-### C2. Iterationsschritt je Form
-Für **jede** Form/Familie exakt dieses Vorgehen:
-1. [ ] Form-spezifische Logik im Konverter identifizieren.
-2. [ ] In Umsetzungsbeschreibung überführen.
-3. [ ] Sonderlogik im Konverter entfernen.
-4. [ ] Regression gegen Baseline fahren.
-5. [ ] Fehlschläge analysieren und dokumentieren.
-6. [ ] Algorithmus generisch verbessern (ohne neue Form-Sonderfälle).
-7. [ ] Verbesserung auf bereits migrierte Formen gegenprüfen.
+17. [ ] Coarse-to-fine-Optimierung für alle IR-Primitive vereinheitlichen.
+18. [ ] Multi-Start-Strategie für lokale Minima einführen.
+19. [ ] Adaptive Schrittweiten je Parameterklasse implementieren: Position,
+    Größe, Stroke, Farbe, Opacity, Gradient und Text.
+20. [ ] Elementweise Verbesserungen nur übernehmen, wenn die gerenderte
+    Pixelmetrik strikt besser wird.
+21. [ ] Optionalen globalen Suchschritt nach der Elementoptimierung anwenden,
+    begrenzt durch Laufzeitbudget und Regressionstest.
 
-### C3. Verbotene Rückfälle absichern
-- [ ] CI-Regel: neue form-spezifische `if form == ...` in Runtime-Modulen blockieren.
-- [ ] Lint-Check für harte Formcodes außerhalb erlaubter Datenpfade.
+### P5 – Fehleranalyse produktiv machen
 
----
+22. [ ] Für jeden Top-Fehlerfall automatisch die Fehlerklasse bestimmen:
+    falsche Topologie, schlechte Initialisierung, Farbfehler, Kantenversatz,
+    Text/Glyphenfehler, Antialiasing oder lokales Minimum.
+23. [ ] Pro Fehlerklasse genau eine generische Verbesserungsaufgabe ableiten.
+24. [ ] Kandidatenrotation auf maximal fünf aktive Fälle begrenzen und nur als
+    Diagnose verwenden, nicht als Implementierungsgrund für Sonderlogik.
+25. [ ] Fehlschlagberichte mit Reproduktionskommando, Metrik vorher/nachher und
+    erwarteter generischer Verbesserung ablegen.
 
-## Arbeitspaket D – Fehlschlaganalyse & algorithmische Verbesserung
+### P6 – Regression und Abschluss
 
-### D1. Standardisierte Fehlerklassen
-- [ ] Suchraum zu eng/zu weit
-- [ ] Falsche Initialisierung
-- [ ] Nicht identifizierbare Kanten/Farben
-- [ ] Topologiefehler (falsche Primitive)
-- [ ] Lokales Minimum/instabile Optimierung
+26. [ ] Smoke-Tests für Parser, IR, Renderer, Optimierer und SVG-Emission bündeln.
+27. [ ] Holdout-Regression gegen bild-ID-unabhängige Namen ausführen.
+28. [ ] Qualitätsregression blockieren, wenn ein akzeptierter Fall sichtbar oder
+    metrisch signifikant schlechter wird.
+29. [ ] Abschlusskriterium: keine verbotene Runtime-Sonderlogik, stabile
+    Reproduzierbarkeit und ein priorisiertes generisches Backlog für die
+    verbleibenden Fehlschläge.
 
-### D2. Verbesserungs-Backlog (generisch)
-- [ ] Bessere Initialisierung (multi-start, coarse-to-fine)
-- [ ] Adaptive Schrittweiten / Bayesian/TPE-ähnliche Suche
-- [ ] Robustere Metrik-Kombination (Kanten + Farbe + Form)
-- [ ] Dynamische Gewichtung nach Konfidenz
-- [ ] Frühabbruch/Restart-Strategien
+## Gekürzte nächste 10 Aufgaben
 
-### D3. Pflichtartefakt je fehlgeschlagener Form
-- [ ] Datei: `artifacts/reports/failure_analysis/<FORM>.md`
-- [ ] Inhalte:
-  - Symptom
-  - Reproduktionskommando
-  - Metriken vorher/nachher
-  - Root Cause
-  - Generische Verbesserung
-  - Nebeneffekte auf andere Formen
+1. [ ] Aktuellen Quality-Report erzeugen und die fünf größten reproduzierbaren
+   Fehlerfälle bestimmen.
+2. [ ] Runtime-Formcode-Inventar aktualisieren und nicht erlaubte Treffer
+   markieren.
+3. [ ] CI-Guard gegen neue Runtime-Bildcodes scharf schalten.
+4. [ ] Geometry-IR-Schema v1 in einem kleinen JSON/YAML-Vertrag festlegen.
+5. [ ] Loader/Validator für den Vertrag implementieren.
+6. [ ] Einen einfachen Kreis-/Ringfall vollständig über IR statt Sonderlogik
+   konvertieren.
+7. [ ] Eine generische Coarse-to-fine-Optimierung für mindestens drei Primitive
+   nachweisen.
+8. [ ] Beschreibung-Bild-Fusion für Formen, Farben und Positionen vereinheitlichen.
+9. [ ] Top-Fehlerfälle automatisch klassifizieren und daraus generische
+   Optimierungsaufgaben erzeugen.
+10. [ ] Holdout-Regression ausführen und die Roadmap anhand der Metriken neu
+    sortieren.
 
----
+## Streichungen gegenüber der alten Liste
 
-## Arbeitspaket E – Abschlusskriterien
-
-- [ ] Im Konvertierungsprogramm existiert keine Form-Sonderlogik mehr.
-- [ ] Jede Form ist über Umsetzungsbeschreibung + Parameterraum modelliert.
-- [ ] Qualitätsziel: keine signifikante Verschlechterung gegenüber Baseline.
-- [ ] Für verbleibende Fehlschläge existiert ein priorisiertes, generisches Verbesserungs-Backlog.
-
----
-
-## Konkrete nächste 10 Tasks (umsetzungsbereit)
-1. [x] `form_code_inventory.csv` automatisch erzeugen. (2026-04-26: `python tools/generate_form_code_inventory.py`)
-2. [ ] Runtime-Module in "erlaubt/nicht erlaubt" markieren.
-3. [ ] Schema v1 für Umsetzungsbeschreibungen festschreiben.
-4. [ ] Loader + Schema-Validierung implementieren.
-5. [ ] AC0800_L vollständig auf datengetriebene Umsetzung migrieren.
-6. [ ] AC0800_L-Sonderlogik im Konverter löschen.
-7. [ ] Vollen Regressionstestlauf starten und Baseline vergleichen.
-8. [ ] Fehlschlaganalyse für neu fehlgeschlagene Formen dokumentieren.
-9. [ ] Erste generische Optimierungsverbesserung implementieren.
-10. [ ] CI-Guard gegen neue form-spezifische Runtime-Branches einführen.
+- Einzelne Familien-Migrationslisten ohne direkte Messwirkung werden gestrichen.
+- Pflichtartefakte pro Form werden nur noch für Top-Fehlerfälle erstellt.
+- Manuelle Plan-B-Feinschritte bleiben erlaubt, zählen aber nur als erledigt,
+  wenn daraus eine wiederverwendbare IR-, Perception- oder Optimierungsregel
+  entsteht.
