@@ -680,7 +680,7 @@ def _prefer_description_geometry_candidate(geometry_ir: list[dict[str, object]],
     # Heat-exchanger descriptions are safer than generic stripe pixel fits: the
     # text declares the rectangle, gradient, diagonal and plus/minus glyph
     # contract.  Keep that contract for direct descriptions and for
-    # reference-derived size variants ("Wie AC0010 ...") so conversion remains a
+    # reference-derived size variants ("Wie <reference> ...") so conversion remains a
     # reusable description algorithm instead of drifting to per-image fitted
     # output.  Raster registration can still tune the Geometry-IR proportions.
     return _is_description_heat_exchanger_geometry(geometry_ir)
@@ -1186,7 +1186,7 @@ def runNonCompositeIterationImpl(
                 ):
                     # Direct canonical heat-exchanger descriptions may still yield
                     # to a much better generated algorithmic fit.  Reference-derived
-                    # size variants ("Wie AC0010 ...") keep the declared
+                    # size variants ("Wie <reference> ...") keep the declared
                     # Geometry-IR contract and use raster registration for
                     # proportional tuning instead of switching to a free-form fit.
                     best_geometry_candidate = best_pixel_candidate
