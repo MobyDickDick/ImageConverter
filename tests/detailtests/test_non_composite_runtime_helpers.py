@@ -968,7 +968,7 @@ def test_description_driven_symbol_algorithm_skips_samples_for_all_ac0100_sizes(
     assert artifacts and all(rendered == "algorithm_rendered" for _svg, rendered in artifacts)
 
 
-def test_reference_derived_heat_exchanger_geometry_ir_does_not_override_better_elementwise_fit() -> None:
+def test_reference_derived_heat_exchanger_geometry_ir_prefers_description_contract() -> None:
     geometry_ir = [
         {"kind": "HorizontalGradient"},
         {"kind": "RectBorder"},
@@ -978,7 +978,7 @@ def test_reference_derived_heat_exchanger_geometry_ir_does_not_override_better_e
     ]
 
     assert non_composite_runtime_helpers._is_description_heat_exchanger_geometry(geometry_ir)
-    assert not non_composite_runtime_helpers._prefer_description_geometry_candidate(
+    assert non_composite_runtime_helpers._prefer_description_geometry_candidate(
         geometry_ir,
         description="Wie AC0010: Heizelement mit horizontalem Farbverlauf und Diagonale.",
     )
@@ -1988,7 +1988,7 @@ def test_description_geometry_candidate_yields_to_much_better_algorithmic_raster
     assert artifacts and artifacts[0][1] == "structured_rendered"
 
 
-def test_reference_heat_exchanger_variants_remain_pixel_selectable_but_optimizable() -> None:
+def test_reference_heat_exchanger_variants_keep_description_contract_and_registration() -> None:
     description = (
         "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
         "horizontaler Farbverlauf dunkel-hell-dunkel sowie graue Diagonale von oben rechts nach unten links."
@@ -1997,4 +1997,4 @@ def test_reference_heat_exchanger_variants_remain_pixel_selectable_but_optimizab
 
     assert non_composite_runtime_helpers._is_description_heat_exchanger_geometry(geometry_ir) is True
     assert non_composite_runtime_helpers._description_reuses_reference_family(description) is True
-    assert non_composite_runtime_helpers._prefer_description_geometry_candidate(geometry_ir, description=description) is False
+    assert non_composite_runtime_helpers._prefer_description_geometry_candidate(geometry_ir, description=description) is True
