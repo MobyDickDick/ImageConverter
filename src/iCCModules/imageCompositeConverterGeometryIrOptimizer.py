@@ -79,7 +79,7 @@ def _default_candidate_provider(
     if isinstance(bbox, list) and len(bbox) == 4:
         coarse_delta = 0.02
         fine_deltas = (
-            (0.00125, 0.0025, 0.005, 0.01)
+            (0.000625, 0.00125, 0.0025, 0.005, 0.01)
             if element.get("kind") in {"ColorPatch", "RectBorder"}
             else (coarse_delta,)
         )
