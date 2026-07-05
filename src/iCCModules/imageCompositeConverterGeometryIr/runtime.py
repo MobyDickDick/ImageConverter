@@ -176,6 +176,52 @@ def _annotate_kelle_valve_element(
     )
     return element
 
+
+def _build_diagonal_stripe_panel_ir(desc: str) -> list[dict[str, object]]:
+    stripe_hint = _has_any(desc, ("diagonalstreifen", "diagonal streifen", "diagonale streifen", "schraege streifen", "schräge streifen"))
+    rotated_horizontal_hint = (
+        _has_any(desc, ("90° nach rechts", "90 grad nach rechts", "rechts gedreht"))
+        and _has_any(desc, ("drei graue horizontale linien", "drei horizontale linien", "3 schliessflächen", "3 schließflächen"))
+    )
+    color_hint = _has_any(desc, ("rot", "orange", "rotorange", "rot/orange")) or rotated_horizontal_hint
+    panel_hint = _has_any(desc, ("rechteck", "panel", "icon", "rand", "rahmen"))
+    count_hint = 3 if _has_any(desc, ("drei", "3")) else 0
+    direction_hint = _has_any(desc, ("links oben", "rechts unten", "von links oben nach rechts unten")) or rotated_horizontal_hint
+    if not ((stripe_hint or rotated_horizontal_hint) and color_hint and panel_hint and count_hint == 3):
+        return []
+    return [
+        {
+            "kind": "DiagonalStripePanel",
+            "id": "diagonal_stripe_panel",
+            "bbox": [0.07, 0.18, 0.86, 0.64],
+            "inner_inset": 0.055,
+            "corner_radius": 0.015,
+            "border_width": 0.035,
+            "border_color": "#777777",
+            "gradient_axis": "vertical",
+            "gradient_stops": [
+                {"offset": "0%", "color": "#d7191c"},
+                {"offset": "52%", "color": "#f04a23"},
+                {"offset": "100%", "color": "#f28b22"},
+            ],
+            "stripe_count": 3,
+            "stripe_direction": "top_left_to_bottom_right" if direction_hint else "top_left_to_bottom_right",
+            "stripe_width": 0.115,
+            "stripe_spacing": 0.245,
+            "stripe_fill": "#f8f8f2",
+            "semantic_status": "semantic_diagonal_stripe_panel",
+            "primitive_decomposition": {
+                "schema_version": "diagonal_stripe_panel_v1",
+                "primitives": [
+                    {"role": "panel_border", "kind": "RectBorder"},
+                    {"role": "panel_fill", "kind": "ColorPatch", "gradient_axis": "vertical"},
+                    {"role": "diagonal_stripes", "kind": "PolygonPath", "count": 3},
+                ],
+            },
+        }
+    ]
+
+
 def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, object]]:
     """Map a normalized German image description to an ordered geometry IR chain.
 
@@ -186,6 +232,10 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     desc = _normalize_text(description)
     if not desc:
         return []
+
+    diagonal_stripe_panel = _build_diagonal_stripe_panel_ir(desc)
+    if diagonal_stripe_panel:
+        return diagonal_stripe_panel
 
     elements: list[dict[str, object]] = []
     rect_hint = _has_any(desc, ("rechteck", "viereck", "quadrat", "kühlelement", "heizelement", "rechteck-plus-minus-bildbeschreibung"))
@@ -1689,6 +1739,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     svg: list[str] = []
     rect_x, rect_y, rect_w, rect_h = _find_rect(geometry_ir, w, h)
     needs_gradient = any(element.get("kind") == "HorizontalGradient" for element in geometry_ir)
+    diagonal_stripe_panels = [element for element in geometry_ir if element.get("kind") == "DiagonalStripePanel"]
     stroke_gradient_elements = [
         element for element in geometry_ir
         if isinstance(element.get("stroke_gradient"), dict)
@@ -1704,8 +1755,20 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
         "MainDiagonalMirroredTopKelleThreeWayValveGlyph",
     }
     needs_vertical_valve_defs = any(element.get("kind") in valve_gradient_kinds for element in geometry_ir)
-    if needs_gradient or needs_vertical_valve_defs or stroke_gradient_elements:
+    if needs_gradient or needs_vertical_valve_defs or stroke_gradient_elements or diagonal_stripe_panels:
         svg.append("  <defs>")
+        for panel in diagonal_stripe_panels:
+            gradient_id = html.escape(str(panel.get("gradient_id", f"{panel.get('id', 'diagonal_stripe_panel')}-gradient")))
+            svg.append(f'    <linearGradient id="{gradient_id}" x1="0%" y1="0%" x2="0%" y2="100%">')
+            stops = panel.get("gradient_stops", [])
+            if not isinstance(stops, list) or not stops:
+                stops = [{"offset": "0%", "color": "#d7191c"}, {"offset": "100%", "color": "#f28b22"}]
+            for stop in stops:
+                if isinstance(stop, dict):
+                    offset = html.escape(str(stop.get("offset", "0%")))
+                    color = html.escape(str(stop.get("color", "#d7191c")))
+                    svg.append(f'      <stop offset="{offset}" stop-color="{color}"/>')
+            svg.append("    </linearGradient>")
         if needs_gradient:
             svg.append('    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">')
             svg.append('      <stop offset="0%" stop-color="#8f8f8f"/>')
@@ -2162,6 +2225,42 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                     f'stroke="{stroke}" stroke-width="{_fmt(sw)}" fill="{fill}" '
                     f'stroke-linejoin="{linejoin}" stroke-linecap="{linecap}"{opacity_attrs}/>'
                 )
+        elif kind == "DiagonalStripePanel":
+            x, y, bw, bh = _scaled_bbox(element, w, h)
+            inset = float(element.get("inner_inset", 0.055)) * min(bw, bh)
+            radius = float(element.get("corner_radius", 0.015)) * min(w, h)
+            border_sw = float(element.get("border_width", 0.035)) * min(w, h)
+            border = html.escape(str(element.get("border_color", "#777777")))
+            gradient_id = html.escape(str(element.get("gradient_id", f"{element_id}-gradient")))
+            ix, iy = x + inset, y + inset
+            iw, ih = max(0.0, bw - 2 * inset), max(0.0, bh - 2 * inset)
+            svg.append(
+                f'  <rect id="{element_id}_fill" x="{_fmt(ix)}" y="{_fmt(iy)}" width="{_fmt(iw)}" height="{_fmt(ih)}" '
+                f'rx="{_fmt(radius)}" ry="{_fmt(radius)}" fill="url(#{gradient_id})" stroke="none"/>'
+            )
+            count = max(1, int(element.get("stripe_count", 3)))
+            stripe_width = float(element.get("stripe_width", 0.115)) * min(iw, ih)
+            spacing = float(element.get("stripe_spacing", 0.245)) * iw
+            fill = html.escape(str(element.get("stripe_fill", "#f8f8f2")))
+            start_cx = ix + iw * 0.30 - spacing * (count - 1) / 2.0
+            for stripe_index in range(count):
+                cx = start_cx + spacing * stripe_index
+                y0 = iy - ih * 0.08
+                y1 = iy + ih * 1.08
+                dx = ih * 0.72
+                half = stripe_width / 2.0
+                points = [
+                    (cx - half, y0),
+                    (cx + half, y0),
+                    (cx + dx + half, y1),
+                    (cx + dx - half, y1),
+                ]
+                point_text = " ".join(f"{_fmt(px)},{_fmt(py)}" for px, py in points)
+                svg.append(f'  <polygon id="{element_id}_stripe_{stripe_index + 1}" points="{point_text}" fill="{fill}" stroke="none"/>')
+            svg.append(
+                f'  <rect id="{element_id}_border" x="{_fmt(x)}" y="{_fmt(y)}" width="{_fmt(bw)}" height="{_fmt(bh)}" '
+                f'rx="{_fmt(radius)}" ry="{_fmt(radius)}" fill="none" stroke="{border}" stroke-width="{_fmt(border_sw)}"/>'
+            )
         elif kind == "DiagonalBand":
             stroke = html.escape(str(element.get("stroke", "#707070")))
             sw = float(element.get("stroke_width", 0.045)) * min(w, h)

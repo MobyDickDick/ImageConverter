@@ -677,6 +677,8 @@ def _description_reuses_reference_family(description: str) -> bool:
 def _prefer_description_geometry_candidate(geometry_ir: list[dict[str, object]], *, description: str) -> bool:
     if _prefer_semantic_description_geometry(geometry_ir):
         return True
+    if any(str(element.get("kind", "")) == "DiagonalStripePanel" for element in geometry_ir):
+        return True
     # Heat-exchanger descriptions are safer than generic stripe pixel fits: the
     # text declares the rectangle, gradient, diagonal and plus/minus glyph
     # contract.  Keep that contract for direct descriptions and for
@@ -1127,9 +1129,17 @@ def runNonCompositeIterationImpl(
                             for key, value in optimizer_result.items()
                             if key not in {"geometry_ir", "rendered"}
                         }
+                    description_status = (
+                        "semantic_diagonal_stripe_panel"
+                        if any(
+                            str(element.get("kind", "")) == "DiagonalStripePanel"
+                            for element in description_geometry_ir
+                        )
+                        else "non_composite_description_geometry_ir"
+                    )
                     candidates.append(
                         {
-                            "status": "non_composite_description_geometry_ir",
+                            "status": description_status,
                             "svg": geometry_ir_svg,
                             "rendered": description_rendered,
                             "error": description_error,
