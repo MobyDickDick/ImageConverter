@@ -476,3 +476,4 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – GE1410_L Nanofine-PolygonPath-Point-Probes Run VA (2026-07-04)](next_arbeitspaket_2026-07-04_runVA.md)
 - [Nächstes Arbeitspaket – SE0041_1 Picofine-Rule-Stroke-Width-Probes Run VB (2026-07-04)](next_arbeitspaket_2026-07-04_runVB.md)
 - [Nächstes Arbeitspaket – PolygonPath Ultrafine-Stroke-Width-Probes Run VC (2026-07-04)](next_arbeitspaket_2026-07-04_runVC.md)
+- [Nächstes Arbeitspaket – GE1410_L Picofine-PolygonPath-Point-Probes Run VH (2026-07-05)](next_arbeitspaket_2026-07-05_runVH.md)
