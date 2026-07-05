@@ -99,3 +99,20 @@ def test_run_semantic_badge_iteration_impl_finalizes_semantic_ok() -> None:
     )
 
     assert result == {"mode": "semantic_badge", "cx": 44.0, "width": 200.0, "height": 100.0}
+
+
+def test_generic_description_badge_params_builds_left_text_connector_without_recipe() -> None:
+    params = {
+        "elements": ["SEMANTIC: Kreis + Buchstabe", "SEMANTIC: waagrechter Strich links vom Kreis"],
+        "label": "X",
+    }
+
+    badge = semantic_badge_runtime_helpers._generic_description_badge_params(39, 26, params)
+
+    assert badge is not None
+    assert badge["draw_text"] is True
+    assert badge["label"] == "X"
+    assert badge["connector_direction"] == "left"
+    assert badge["arm_enabled"] is True
+    assert badge["arm_x1"] == 0.0
+    assert badge["arm_x2"] < badge["cx"]
