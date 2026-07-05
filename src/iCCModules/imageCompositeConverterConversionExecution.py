@@ -388,6 +388,30 @@ def _formatQualityValue(value: object) -> str:
     return f"{numeric:.6f}"
 
 
+def _formatIterationSummary(
+    params: object,
+    best_iter: int,
+    actual_iterations: object,
+    requested_iterations: object,
+    details: dict[str, object] | None = None,
+) -> str:
+    """Describe iteration telemetry without confusing validation rounds with composite search iterations."""
+    executed_text = f"ausgeführt={actual_iterations}/{requested_iterations}"
+    mode = str(params.get("mode", "")).strip() if isinstance(params, dict) else ""
+    if mode == "composite":
+        return f"beste Composite-Iteration={int(best_iter)}, {executed_text}"
+    best_validation_round = str((details or {}).get("best_validation_round", "")).strip()
+    executed_validation_rounds = str((details or {}).get("executed_validation_rounds", "")).strip()
+    if best_validation_round:
+        if executed_validation_rounds:
+            return (
+                f"beste Validierungsrunde={best_validation_round}/{executed_validation_rounds}, "
+                f"beste Composite-Iteration=n/a, {executed_text}"
+            )
+        return f"beste Validierungsrunde={best_validation_round}, beste Composite-Iteration=n/a, {executed_text}"
+    return f"beste Composite-Iteration=n/a (direkte/semantische Pipeline), {executed_text}"
+
+
 def _formatFailureTelemetryJson(details: dict[str, object] | None) -> str:
     if not details:
         return ""
@@ -948,8 +972,7 @@ def convertOneImpl(
         f"Qualität: Fehler/Pixel={_formatQualityValue(row['error_per_pixel'])}, "
         f"Mean-Delta²={_formatQualityValue(row['mean_delta2'])}, "
         f"{spatial_quality_text}"
-        f"beste Iteration={int(best_iter)}, "
-        f"ausgeführt={row['actual_iterations']}/{row['requested_iterations']} | "
+        f"{_formatIterationSummary(params, int(best_iter), row['actual_iterations'], row['requested_iterations'], details)} | "
         f"Dauer={elapsed_sec:.1f}s"
     )
     _emit_anchor_variant_event("variant_done", status="ok")
