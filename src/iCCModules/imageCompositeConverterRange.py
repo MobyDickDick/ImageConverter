@@ -189,9 +189,9 @@ def inRequestedRangeImpl(
         # A single requested family is an exact family-prefix filter, not a
         # numeric interval.  Without this guard, differently padded numeric
         # aliases can collapse to the same integer and pollute the batch.
-        # Free-form partial tokens such as "AC08" are intentionally handled
-        # below by the substring matcher so interactive prefix filters keep
-        # selecting AC0800..AC0899 variants.
+        # Free-form partial tokens such as an AC-family two-digit prefix are
+        # intentionally handled below by the substring matcher so interactive
+        # prefix filters keep selecting the matching four-digit variants.
         return False
     if (
         explicit_start
