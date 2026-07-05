@@ -105,6 +105,16 @@ def _extract_badge_label(normalized: str) -> str | None:
     return None
 
 
+def _description_expects_co2_superscript(normalized: str) -> bool:
+    """Return true when free text asks for a raised CO² index."""
+    return bool(
+        "co²" in normalized
+        or re.search(r"\bco\s*\^\s*2\b", normalized)
+        or "hochgestellt" in normalized
+        or "superscript" in normalized
+    )
+
+
 def _description_expects_left_circle_connector(desc: str) -> bool:
     """Return true when text describes a horizontal connector left of a circle."""
     normalized = _normalize_semantic_text(desc)
@@ -121,6 +131,9 @@ def _description_expects_left_circle_connector(desc: str) -> bool:
             "strich links neben dem kreis",
             "anschluss links vom kreis",
             "linker anschluss",
+            "griff links",
+            "griff nach links",
+            "linker griff",
             "linke anschlusslinie",
             "linke linie",
             "kreis rechts von der linie",
@@ -313,6 +326,8 @@ def apply_semantic_badge_family_rules(
     elif re.search(r"\bco(?:[_\s\-\^]*2|[₂²])\b", desc):
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO_2")
         params["label"] = "CO_2"
+        if _description_expects_co2_superscript(desc):
+            params["co2_index_mode"] = "superscript"
     elif re.search(r"\bco\b", desc):
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO")
         params["label"] = "CO"
@@ -422,6 +437,8 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
                 )
             )
             params["label"] = label
+            if label == "CO_2" and _description_expects_co2_superscript(normalized):
+                params["co2_index_mode"] = "superscript"
 
     if _description_expects_top_circle_connector(normalized):
         elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")

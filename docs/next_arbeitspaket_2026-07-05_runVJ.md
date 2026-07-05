@@ -82,3 +82,28 @@ AC0832-Koordinaten, die exakten Beispiel-SVG-Transformationen oder eine
 Runtime-Abfrage auf `AC0832` übernommen würden. Vor der Umsetzung soll zusätzlich
 protokolliert werden, ob Kreis, Griff und Text bereits als Perception-Seeds vor
 der ersten Optimierungsiteration erkannt werden.
+
+## 6) Umsetzung / Ergebnis (Run VJ)
+
+Run VJ ergänzt die freie Beschreibungskopplung für linke CO²-Kellen-Badges: Eine
+neutrale Beschreibung mit `Kelle`, `Griff links`, `CO²` und `hochgestellter 2`
+setzt nun katalogfrei dieselben semantischen Constraints wie der vorhandene
+linke Circle-/Arm-Badge-Pfad (`semantic_badge`, Label `CO_2`, linker
+Horizontal-Connector und `co2_index_mode=superscript`). Zusätzlich ist der
+AC0832-Renderer strukturell abgesichert: Die generierte SVG enthält einen linken
+horizontalen Griff, einen Kreis sowie getrennte `CO`- und hochgestellte `2`-
+Textelemente statt eines Raster-Fallbacks.
+
+Der gezielte AC0832-Einzellauf bestätigt weiterhin den semantischen Badge-Pfad
+für `AC0832_L/M/S` (`mode=semantic_badge`, Elemente `circle,arm,text`). Die in
+den vorhandenen XML-Beschreibungen enthaltene Aliasformulierung nennt nur die
+Rotation und keinen expliziten CO²-Text; deshalb bleibt der konkrete Lauf beim
+bisherigen Alias-Label `T`. Der neu ergänzte CO²-/Superscript-Zweig ist über
+freie, katalogfreie Zielbeschreibungen abgesichert und vermeidet weiterhin neue
+Runtime-Bild-ID-Abfragen.
+
+### Sicherung
+
+- `PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/detailtests/test_semantic_family_rules_helpers.py::test_apply_semantic_badge_description_rules_derives_left_handle_co2_superscript_badge tests/test_image_composite_converter.py::test_generate_badge_svg_ac0832_has_left_handle_circle_and_superscript_label` → `2 passed`.
+- `PYTHONPATH=vendor/linux-py310/site-packages:. python tools/check_no_new_image_id_hardcoding.py` → `PASS: no image-ID hardcoding found in runtime source code (0 occurrences).`
+- `PYTHONPATH=vendor/linux-py310/site-packages:. timeout 120 python -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir /tmp/ic-ac0832-runVJ --start AC0832_L --end AC0832_S --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --deterministic-order` → Exit `0`; der Lauf protokolliert für `AC0832_L/M/S` den semantischen Badge-Pfad mit `Elemente=circle,arm,text`.

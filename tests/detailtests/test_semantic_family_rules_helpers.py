@@ -188,6 +188,24 @@ def test_apply_semantic_badge_description_rules_extracts_generic_quoted_label() 
     assert "SEMANTIC: Kreis + Buchstabe" in params["elements"]
     assert "SEMANTIC: waagrechter Strich links vom Kreis" in params["elements"]
 
+
+def test_apply_semantic_badge_description_rules_derives_left_handle_co2_superscript_badge() -> None:
+    """Free-form CO²-kelle text should set left handle and raised index constraints."""
+    params: dict[str, object] = {"elements": []}
+
+    applied = helpers.apply_semantic_badge_description_rules(
+        desc="Kelle mit Griff links, kreisrunde Scheibe und CO² mit hochgestellter 2",
+        params=params,
+    )
+
+    assert applied is True
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == "CO_2"
+    assert params["co2_index_mode"] == "superscript"
+    assert "SEMANTIC: Kreis + Buchstabe CO_2" in params["elements"]
+    assert "SEMANTIC: waagrechter Strich links vom Kreis" in params["elements"]
+
+
 def test_apply_semantic_badge_description_rules_derives_left_t_badge_from_rotated_handle_text() -> None:
     params: dict[str, object] = {"elements": []}
 
