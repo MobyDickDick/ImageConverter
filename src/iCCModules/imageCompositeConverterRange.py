@@ -85,14 +85,7 @@ def matchesPartialRangeTokenImpl(
     stem = normalize_range_token_fn(get_base_name_fn(os.path.splitext(filename)[0]))
     if not stem:
         return False
-    if token in stem:
-        return True
-
-    pos = 0
-    for char in stem:
-        if pos < len(token) and char == token[pos]:
-            pos += 1
-    return pos == len(token)
+    return token in stem
 
 
 def extractSymbolFamilyImpl(name: str) -> str | None:
@@ -180,13 +173,25 @@ def inRequestedRangeImpl(
         return lower <= explicit_stem <= upper
 
     exact_prefix_match = matches_exact_prefix_filter_fn(filename, start_ref, end_ref)
-    same_normalized_family = bool(normalized_start and normalized_start == normalize_range_token_fn(end_ref))
+    normalized_end = normalize_range_token_fn(end_ref)
+    same_normalized_family = bool(normalized_start and normalized_start == normalized_end)
+    normalized_start_parts = extract_ref_parts_fn(normalized_start)
+    normalized_end_parts = extract_ref_parts_fn(normalized_end)
+    both_bounds_are_partial_tokens = (
+        start_parts is None
+        and end_parts is None
+        and normalized_start_parts is None
+        and normalized_end_parts is None
+    )
     if exact_prefix_match:
         return True
-    if same_normalized_family and start_ref and end_ref:
+    if same_normalized_family and start_ref and end_ref and not both_bounds_are_partial_tokens:
         # A single requested family is an exact family-prefix filter, not a
         # numeric interval.  Without this guard, differently padded numeric
         # aliases can collapse to the same integer and pollute the batch.
+        # Free-form partial tokens such as an AC-family two-digit prefix are
+        # intentionally handled below by the substring matcher so interactive
+        # prefix filters keep selecting the matching four-digit variants.
         return False
     if (
         explicit_start

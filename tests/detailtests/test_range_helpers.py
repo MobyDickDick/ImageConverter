@@ -24,3 +24,14 @@ def test_legacy_three_digit_family_filter_selects_padded_family_only() -> None:
     assert not remaining_helpers._inRequestedRange("AC0100_L.jpg", "AC010", "AC010")
     assert not remaining_helpers._inRequestedRange("AC0100_M.jpg", "AC010_M", "AC010_M")
     assert not remaining_helpers._inRequestedRange("AC0100_S.jpg", "AC010_S", "AC010_S")
+
+
+def test_two_digit_partial_prefix_filter_selects_ac08_family() -> None:
+    """AC08..AC08 is a partial prefix filter for the AC0800..AC0899 family."""
+
+    assert remaining_helpers._inRequestedRange("AC0800_L.jpg", "AC08", "AC08")
+    assert remaining_helpers._inRequestedRange("AC0813_M.jpg", "AC08", "AC08")
+    assert remaining_helpers._inRequestedRange("AC0899_S.jpg", "AC08", "AC08")
+    assert not remaining_helpers._inRequestedRange("AC0080_L.jpg", "AC08", "AC08")
+    assert not remaining_helpers._inRequestedRange("AC0538_1L_sia.jpg", "AC08", "AC08")
+    assert not remaining_helpers._inRequestedRange("AC0900_L.jpg", "AC08", "AC08")
