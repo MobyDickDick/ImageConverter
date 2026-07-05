@@ -15,6 +15,7 @@ Der reproduzierbare Review mit `tools/review_conversion_quality.py --max-candida
 ## Ad-hoc Plan-B-Aufgabe (2026-07-05)
 
 - `AC0512_1_L` – vom Nutzer angefragte Generalisierungsaufgabe für ein querformatiges rotes/oranges Rechteck-Icon mit grauem Rand und drei parallelen weissen Diagonalstreifen. Die Aufgabe ist als separater Plan-B-Contract dokumentiert in `docs/next_arbeitspaket_2026-07-05_runVI.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
+- `AC0832` – vom Nutzer angefragte Generalisierungsaufgabe für eine linke Kelle mit runder CO²-Scheibe und hochgestellter `2`. Die Aufgabe ist als separater Plan-B-Contract dokumentiert in `docs/next_arbeitspaket_2026-07-05_runVJ.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
