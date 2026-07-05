@@ -144,6 +144,9 @@ def test_validate_badge_by_elements_stops_on_stable_non_improvement_after_fallba
     )
     assert any("stopped_due_to_stable_non_improvement" in line for line in logs)
     assert any("validation_abort_decision: stage=round_loop, reason=stable_non_improvement" in line for line in logs)
+    assert "best_validation_round=1" in logs
+    assert "executed_validation_rounds=2" in logs
+    assert "best_validation_error=25.000000" in logs
 
 
 def test_action_validation_wrappers_forward_progress_callback(monkeypatch) -> None:

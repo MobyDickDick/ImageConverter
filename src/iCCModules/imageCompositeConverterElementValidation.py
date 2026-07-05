@@ -557,6 +557,8 @@ def validateBadgeByElementsImpl(
 
     best_params = copy_module.deepcopy(params)
     best_full_err = float("inf")
+    best_validation_round = 0
+    executed_validation_rounds = 0
     previous_round_state: tuple[tuple[tuple[str, float], ...], float] | None = None
     fallback_search_active = False
     stable_no_improvement_rounds = 0
@@ -627,6 +629,7 @@ def validateBadgeByElementsImpl(
     params["defer_connector_symmetry"] = True
 
     for round_idx in range(max_rounds):
+        executed_validation_rounds = round_idx + 1
         _report_progress(f"Validierungsrunde {round_idx + 1}/{max_rounds} gestartet")
         if is_anchor_telemetry_test:
             logs.append(f"{anchor_telemetry_prefix} PHASE round_start round={round_idx + 1}")
@@ -872,6 +875,7 @@ def validateBadgeByElementsImpl(
         improved_this_round = False
         if math_module.isfinite(full_err) and full_err < best_full_err:
             best_full_err = full_err
+            best_validation_round = round_idx + 1
             best_params = copy_module.deepcopy(params)
             improved_this_round = (not math_module.isfinite(previous_best_err)) or ((previous_best_err - full_err) > stable_improvement_epsilon)
 
@@ -1028,6 +1032,9 @@ def validateBadgeByElementsImpl(
         )
         if best_restore_released:
             logs.append("phase2_status: deactivated")
+        logs.append(f"best_validation_round={best_validation_round}")
+        logs.append(f"executed_validation_rounds={executed_validation_rounds}")
+        logs.append(f"best_validation_error={best_full_err:.6f}")
         logs.append(f"phase2_rollback: {'yes' if rollback_applied else 'no'}")
     else:
         logs.append("phase2_rollback: no")

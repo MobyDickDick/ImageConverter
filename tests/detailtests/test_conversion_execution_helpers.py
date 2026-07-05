@@ -70,7 +70,11 @@ def test_convert_one_impl_success_reads_convergence_and_delta2(tmp_path: Path) -
         debug_ac0811_dir=None,
         debug_element_diff_dir=None,
         run_iteration_pipeline_fn=lambda *_args, **_kwargs: ("AC0800_S", "desc", {"mode": "semantic_badge"}, 2, 12.0),
-        read_validation_log_details_fn=lambda _path: {"convergence": "plateau"},
+        read_validation_log_details_fn=lambda _path: {
+            "convergence": "plateau",
+            "best_validation_round": "2",
+            "executed_validation_rounds": "5",
+        },
         render_svg_to_numpy_fn=lambda _svg, _w, _h: object(),
         calculate_delta2_stats_fn=lambda _img, _rendered: (1.25, 0.75),
         get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
@@ -95,7 +99,7 @@ def test_convert_one_impl_success_reads_convergence_and_delta2(tmp_path: Path) -
     assert console_messages[1].startswith(
         "[INFO] Konvertiert AC0800_S.jpg | Parameter: mode=semantic_badge | "
         "Qualität: Fehler/Pixel=1.000000, Mean-Delta²=1.250000, "
-        "beste Iteration=2, ausgeführt=3/3 | Dauer="
+        "beste Validierungsrunde=2/5, beste Composite-Iteration=n/a, ausgeführt=3/3 | Dauer="
     )
     assert console_messages[1].endswith("s")
 
