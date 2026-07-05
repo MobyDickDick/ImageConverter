@@ -677,12 +677,13 @@ def _description_reuses_reference_family(description: str) -> bool:
 def _prefer_description_geometry_candidate(geometry_ir: list[dict[str, object]], *, description: str) -> bool:
     if _prefer_semantic_description_geometry(geometry_ir):
         return True
-    # Canonical heat-exchanger descriptions are safer than generic stripe pixel
-    # fits: the description declares the rectangle, gradient, diagonal and
-    # plus/minus glyph contract.  Reference-derived variants ("Wie ...") may
-    # differ by size/raster details, so those variants should still be allowed
-    # to choose the measured elementwise fit by pixel error.
-    return _is_description_heat_exchanger_geometry(geometry_ir) and not _description_reuses_reference_family(description)
+    # Heat-exchanger descriptions are safer than generic stripe pixel fits: the
+    # text declares the rectangle, gradient, diagonal and plus/minus glyph
+    # contract.  Keep that contract for direct descriptions and for
+    # reference-derived size variants ("Wie AC0010 ...") so conversion remains a
+    # reusable description algorithm instead of drifting to per-image fitted
+    # output.  Raster registration can still tune the Geometry-IR proportions.
+    return _is_description_heat_exchanger_geometry(geometry_ir)
 
 
 def _try_build_description_geometry_ir_svg(width: int, height: int, *, description: str) -> str | None:
@@ -1180,14 +1181,14 @@ def runNonCompositeIterationImpl(
                 if (
                     best_pixel_candidate is not semantic_description_candidate
                     and _is_description_heat_exchanger_geometry(list(semantic_description_candidate.get("geometry_ir", [])))
+                    and not _description_reuses_reference_family(description)
                     and pixel_error * 2.0 < semantic_error
                 ):
-                    # Keep the documented semantic algorithm as the default, but do not
-                    # force it when raster evidence shows that its generic proportions
-                    # are far outside the actual symbol.  This preserves an
-                    # algorithmic reconstruction (no samples/templates) while allowing
-                    # heat-exchanger size variants to derive geometry from the image
-                    # plus description instead of a fixed saved output.
+                    # Direct canonical heat-exchanger descriptions may still yield
+                    # to a much better generated algorithmic fit.  Reference-derived
+                    # size variants ("Wie AC0010 ...") keep the declared
+                    # Geometry-IR contract and use raster registration for
+                    # proportional tuning instead of switching to a free-form fit.
                     best_geometry_candidate = best_pixel_candidate
                     selection_reason = "raster_fit_overrides_poor_description_geometry"
                 else:
