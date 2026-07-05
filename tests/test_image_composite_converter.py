@@ -4057,6 +4057,21 @@ def test_co2_layout_superscript_keeps_clear_gap_from_o_glyph() -> None:
     assert superscript_gap >= float(layout["font_size"]) * 0.06
 
 
+def test_generate_badge_svg_ac0832_has_left_handle_circle_and_superscript_label() -> None:
+    """The AC0832-style CO² kelle badge should render semantic parts, not a raster fallback."""
+    params = Action.make_badge_params(25, 15, "AC0832", None)
+    svg = Action.generateBadgeSvg(25, 15, params)
+
+    assert '<line x1="0.0000"' in svg
+    assert "<circle " in svg
+    assert ">CO</text>" in svg
+    assert ">2</text>" in svg
+
+    layout = Action._co2_layout(params)
+    assert layout["index_mode"] == "superscript"
+    assert float(layout["subscript_y"]) < float(layout["y_base"])
+
+
 def test_normalize_centered_co2_label_reduces_oversized_co_cluster() -> None:
     """Centered CO₂ labels should stay clearly smaller than the enclosing ring."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
