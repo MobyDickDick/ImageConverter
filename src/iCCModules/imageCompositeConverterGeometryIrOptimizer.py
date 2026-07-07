@@ -446,6 +446,7 @@ def _default_candidate_provider(
                 "#f2b8b5",
                 "#f2b9b5",
                 "#f2b9b6",
+                "#f2b9b7",
                 "#f2bab6",
                 "#f2bab7",
                 "#f2bbb7",
