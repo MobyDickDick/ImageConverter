@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 import src.imageCompositeConverter as image_composite_converter
+from src.iCCModules.imageCompositeConverterGeometryIr import runtime as geometry_ir_helpers
 from src.imageCompositeConverter import Action, _clip
 
 conv = image_composite_converter
@@ -8928,3 +8929,60 @@ def test_reflection_routes_connector_free_rh_badge_to_geometry_ir() -> None:
         "TextGlyph",
     ]
     assert "anschlussfreies kreis-/text-badge" in params["elements"][0].lower()
+
+
+def test_small_rf_circle_badge_description_uses_optical_text_registration() -> None:
+    description = (
+        'Kleines 28x28 Kreisbadge mit hellgrauer Füllung, grauer Kontur und '
+        'zentriertem Text "rF" ohne Griff-/Leitungslinie außerhalb des Kreises.'
+    )
+
+    geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+    text = next(element for element in geometry_ir if element["kind"] == "TextGlyph")
+
+    assert text["text"] == "rF"
+    assert float(text["font_size"]) >= 0.70
+    assert text["fill"] == "#7f7f7f"
+    assert text["font_weight"] == "600"
+    assert text["optical_bbox_profile"] == "short_rf_circle_badge"
+    assert text["anchor_x"] == pytest.approx(0.50)
+    assert text["anchor_y"] == pytest.approx(0.50)
+    assert text["scale_x"] == pytest.approx(0.9965)
+    assert text["scale_y"] == pytest.approx(1.0036)
+
+
+def test_text_glyph_renderer_honors_anchor_baseline_and_scale_parameters() -> None:
+    geometry_ir = [
+        {
+            "kind": "CircleBackground",
+            "id": "badge_circle",
+            "bbox": [0.035, 0.035, 0.93, 0.93],
+            "fill": "#f2f2f2",
+            "stroke": "#7f7f7f",
+            "stroke_width": 0.035,
+        },
+        {
+            "kind": "TextGlyph",
+            "id": "badge_text",
+            "text": "rF",
+            "bbox_ref": "badge_circle",
+            "fill": "#7f7f7f",
+            "font_size": 0.737,
+            "font_weight": "600",
+            "anchor_x": 0.50,
+            "anchor_y": 0.50,
+            "baseline_adjust": 0.0,
+            "scale_x": 0.9965,
+            "scale_y": 1.0036,
+        },
+    ]
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(28, 28, geometry_ir)
+
+    assert "<ellipse" in svg
+    assert ">rF</text>" in svg
+    assert 'font-size="20.636"' in svg
+    assert 'font-weight="600"' in svg
+    assert 'x="14" y="14"' in svg
+    assert 'scale(0.997 1.004)' in svg
+    assert "data:image" not in svg
