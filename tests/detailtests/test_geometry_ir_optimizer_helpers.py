@@ -215,6 +215,28 @@ def test_default_optimizer_refines_rect_to_nanofine_warm_light_fill() -> None:
     assert result["steps"][0]["accepted"] is True
 
 
+def test_default_optimizer_refines_rect_to_femtofine_warm_light_fill() -> None:
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "backbottom_warm_fill_femtofine",
+            "bbox": [0.0, 0.0, 1.0, 1.0],
+            "fill": "#f2b9b5",
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["fill"] == "#f3b9b5" else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill"] == "#f3b9b5"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
 def test_default_optimizer_refines_rect_to_picofine_warm_light_fill() -> None:
     ir = [
         {
