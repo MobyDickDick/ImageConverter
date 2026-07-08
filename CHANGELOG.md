@@ -11,6 +11,8 @@
 - IDO-17 Run RV neutralizes two remaining catalog-specific CLI option names for semantic focus debugging and Valve-Head bestlist repair, lowering the runtime-ID ratchet to 156 occurrences while preserving internal argparse destinations.
 - The complete core test suite was revalidated with 765 passing tests, and its full pytest output is now versioned as a GitHub review artifact.
 
+- Plan-B Run WA adds zeptofine catalog-free opacity probes (`0.98271484375`/`0.98291015625`) for rectangular `ColorPatch` and `RectBorder` Geometry-IR elements while the isolated GE9012_6M BackBottom-square metric remains stable.
+
 ## 2026-06-01
 - AC0100_L/M/S now use renderer-stable algorithmic gradient bands in the non-composite elementwise symbol fit, dropping the local QA metric from roughly 53k mean_delta2 to below 4k without selecting fixed sample SVGs or template transfer.
 - GitHub Actions now runs the satisfactory regression battery as a separate heavy job, reconverting all stored successful baseline variants and failing on worse mean_delta2 quality.
