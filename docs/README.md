@@ -481,3 +481,5 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – SE0041_1 Zeptofine-Rule-Stroke-Width-Probes Run VT (2026-07-07)](next_arbeitspaket_2026-07-07_runVT.md)
 - [Nächstes Arbeitspaket – GE9012_6M Attofine-Opacity-Probes Run VU (2026-07-07)](next_arbeitspaket_2026-07-07_runVU.md)
 - [Nächstes Arbeitspaket – AC0840_L rF-Kreisbadge Textregistrierung Plan-B Run VX (2026-07-08)](next_arbeitspaket_2026-07-08_runVX.md)
+
+- [Nächstes Arbeitspaket – GE9012_6M Zeptofine-Opacity-Probes Run WA (2026-07-08)](next_arbeitspaket_2026-07-08_runWA.md)
