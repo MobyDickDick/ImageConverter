@@ -1119,28 +1119,41 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         elements.append(circle)
         if circle_badge_label:
             font_size = 0.42 if len(circle_badge_label) <= 2 else 0.30
+            text_style: dict[str, object] = {}
+            if circle_badge_label == "rF" and _has_any(desc, ("28×28", "28x28", "kleines", "kleiner", "kleine")):
+                font_size = 0.737
+                text_style = {
+                    "fill": "#7f7f7f",
+                    "font_weight": "600",
+                    "anchor_x": 0.50,
+                    "anchor_y": 0.50,
+                    "baseline_adjust": 0.0,
+                    "scale_x": 0.9965,
+                    "scale_y": 1.0036,
+                    "optical_bbox_profile": "short_rf_circle_badge",
+                }
             text_position = _extract_circle_badge_text_position(desc)
             relation = "centered_in" if text_position == "center" else f"{text_position}_inside"
-            elements.append(
-                {
-                    "kind": "TextGlyph",
-                    "id": text_id,
-                    "text": circle_badge_label,
-                    "bbox_ref": circle_id,
-                    "target_ref": circle_id,
-                    "relation": relation,
-                    "text_position": text_position,
-                    "text_anchor": _circle_badge_text_anchor(text_position),
-                    "glyph_evidence": {
-                        "source": "description_text",
-                        "normalized_text": circle_badge_label,
-                        "position": text_position,
-                    },
-                    "fill": "#666666",
-                    "font_size": font_size,
-                    "font_weight": "700",
-                }
-            )
+            text_element = {
+                "kind": "TextGlyph",
+                "id": text_id,
+                "text": circle_badge_label,
+                "bbox_ref": circle_id,
+                "target_ref": circle_id,
+                "relation": relation,
+                "text_position": text_position,
+                "text_anchor": _circle_badge_text_anchor(text_position),
+                "glyph_evidence": {
+                    "source": "description_text",
+                    "normalized_text": circle_badge_label,
+                    "position": text_position,
+                },
+                "fill": "#666666",
+                "font_size": font_size,
+                "font_weight": "700",
+            }
+            text_element.update(text_style)
+            elements.append(text_element)
         return elements
 
     if connector_free_rh_badge_hint:
@@ -2139,8 +2152,21 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             fill = html.escape(str(element.get("fill", "#555555")))
             font_size = float(element.get("font_size", 0.105)) * min(w, h)
             font_weight = html.escape(str(element.get("font_weight", "600")))
+            anchor_x = float(element.get("anchor_x", 0.50))
+            anchor_y = float(element.get("anchor_y", 0.55))
+            baseline_adjust = float(element.get("baseline_adjust", 0.0)) * min(w, h)
+            text_x = x + bw * anchor_x
+            text_y = y + bh * anchor_y + baseline_adjust
+            scale_x = float(element.get("scale_x", 1.0))
+            scale_y = float(element.get("scale_y", 1.0))
+            transform = ""
+            if abs(scale_x - 1.0) > 1e-9 or abs(scale_y - 1.0) > 1e-9:
+                transform = (
+                    f' transform="translate({_fmt(text_x)} {_fmt(text_y)}) '
+                    f'scale({_fmt(scale_x)} {_fmt(scale_y)}) translate({_fmt(-text_x)} {_fmt(-text_y)})"'
+                )
             svg.append(
-                f'  <text id="{element_id}" x="{_fmt(x + bw * 0.50)}" y="{_fmt(y + bh * 0.55)}" '
+                f'  <text id="{element_id}" x="{_fmt(text_x)}" y="{_fmt(text_y)}"{transform} '
                 f'fill="{fill}" font-family="Arial, Helvetica, sans-serif" font-size="{_fmt(font_size)}" '
                 f'font-weight="{font_weight}" text-anchor="middle" dominant-baseline="middle">{raw_text}</text>'
             )

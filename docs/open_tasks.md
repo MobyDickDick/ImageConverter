@@ -334,20 +334,20 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 Arbeitsreihenfolge für die nächsten Sessions (explizit von **leicht zu erledigen**
 bis **schwierig/zeitintensiv**):
 
-1. **N3/N4 – Run-Dokumentation sofort nach jedem Lauf nachpflegen** 
+1. **N3/N4 – Run-Dokumentation sofort nach jedem Lauf nachpflegen**
    _Leicht_: rein organisatorisch, schnell abschließbar, verhindert Wissensverlust.
-2. **T5.x – isolierte Kurzläufe mit klaren Repro-Schritten** 
+2. **T5.x – isolierte Kurzläufe mit klaren Repro-Schritten**
    _Niedrige bis mittlere Komplexität_: kleine, klar eingegrenzte Fehlerbilder.
-3. **N5 – Sample-Pair-Validierung (automatisierter Kurz-Batch)** 
+3. **N5 – Sample-Pair-Validierung (automatisierter Kurz-Batch)**
    _Mittel_: reproduzierbar, aber mit Tool-/Umgebungsabhängigkeiten.
-4. **N6 – SVG-Variationssuite erweitern und Metriken stabilisieren** 
+4. **N6 – SVG-Variationssuite erweitern und Metriken stabilisieren**
    _Mittel bis erhöht_: mehr Variantenraum und Auswertungslogik.
-5. **N7 – gezielte AC08-Einzelreferenz-Nachläufe** 
+5. **N7 – gezielte AC08-Einzelreferenz-Nachläufe**
    _Erhöht_: diagnoseintensiv, aber weiterhin begrenzter Scope pro Referenz.
 6. **Kategorie: ganz zuletzt abarbeiten (wiederholt erfolglos)**
-   - **N2 – Stabilitätsnachweis über längere Laufstrecken konsolidieren** 
+   - **N2 – Stabilitätsnachweis über längere Laufstrecken konsolidieren**
      _Ganz zuletzt_: wiederholt per Timeout/Exit `124` gescheitert; braucht längere Laufzeiten und saubere Evidenzkette.
-   - **N1 – Vollbereich `AC0800..AC0899` mit finalem Exit `0` nachweisen** 
+   - **N1 – Vollbereich `AC0800..AC0899` mit finalem Exit `0` nachweisen**
      _Ganz zuletzt_: höchste Laufzeit, größte Timeout-/Stagnationsgefahr und ebenfalls wiederholt erfolglos.
 
 
@@ -1115,13 +1115,13 @@ Abarbeitungsregel: Nach jedem Bearbeitungsschritt wird bei weiterhin offenen Auf
     - Ziel: Pro Runde maschinenlesbar loggen, warum weiter iteriert wird (`reason=improved|stagnation_retry|unlock_retry|micro_search_retry`) bzw. warum beendet wird.
     - Akzeptanzkriterium: Lauf-Log enthält pro Runde genau einen `continue_or_stop`-Entscheidungseintrag mit Begründung und Restbudget.
 
- 
+
   - 2026-05-01: Validierungsloop ergänzt um strukturierte `validation_abort_decision`-Logevents (u. a. für Budget- und Stagnationsabbrüche sowie Schwellwert-Stopp), damit T5.16-Probeläufe maschinenlesbar auswertbar sind.
 - [x] T5.16.C (hohe Priorität): Frühabbruch bei stabiler Nicht-Verbesserung implementieren.
     - Ziel: Nach konfigurierbarer Anzahl Runden ohne signifikante Fehlerverbesserung (und bereits ausgeführten Unlock-/Fallback-Schritten) die Variante deterministisch beenden.
     - Akzeptanzkriterium: Weniger Folgerunden ohne Qualitätsgewinn in T5.16-Probeläufen; keine Regression in bestehenden AC08-Detailtests.
 
- 
+
     - 2026-05-01: Validierungsloop um stabilen Frühabbruch ergänzt (`stopped_due_to_stable_non_improvement` + strukturierte `validation_abort_decision: ... reason=stable_non_improvement`). Schwellwerte sind parametrisierbar über `validation_stable_improvement_epsilon` und `validation_stable_no_improvement_rounds`; neuer Detailtest bestätigt den kontrollierten Abbruchpfad.
 
   - [x] T5.16.D (hohe Priorität): Micro-Eval-Deduplizierung ergänzen.
@@ -3223,7 +3223,7 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ## Roadmap: Ketten-Architektur für geometrische Bildkonvertierung (PR-Plan, 2026-05-27)
 
-Ziel: Die Konvertierung soll strikt als **Kette** laufen: 
+Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 1) Bildbeschreibung prüfen/normalisieren → 2) Geometrie-Elemente ableiten → 3) Element-für-Element optimieren → 4) Bedingungen/Policies anwenden → 5) Finalauswahl.
 
 ### Neue Prioritätsgewichtung ab 2026-05-28
@@ -4070,3 +4070,10 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Qualität:** Die isolierte DLG0021-Metrik bleibt gegenüber Run VR stabil bei `Mean-Delta²=17056.199219` (`Fehler/Pixel=0.077702`), weil keine neue Gradient-Offset-Probe den bisherigen Stand weiter verbessert.
 - **Perception-Lerneffekt:** `DLG0021` bleibt `nur Sonderfall`; die Änderung verallgemeinert die nachgelagerte Gradient-Stroke-Registrierung, nicht die reine Bilddetektion.
 - **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste zu `GE1410_L` rotieren oder weiteres allgemeines PolygonPath-/Gradient-Feintuning untersuchen.
+
+### Fortschritt vs. Blocker (Session 2026-07-08, AC0840_L rF-Kreisbadge Textregistrierung Plan-B Run VX)
+
+- **Fortschritt:** Das dokumentierte AC0840_L-Plan-B-Paket wurde katalogfrei umgesetzt: Kleine rF-Kreisbadges erzeugen im Beschreibungspfad weiterhin `CircleBackground` plus `TextGlyph`, tragen nun aber optische Textregistrierungsparameter für größere, mittig registrierte Kurzlabels.
+- **Sicherung:** Die neuen fokussierten Regressionstests für die 28×28-rF-Parameter und den SVG-Renderer laufen grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`, und der isolierte AC0840_L-CLI-Lauf endet mit Exit `0`.
+- **Perception-Lerneffekt:** `AC0840_L` bleibt Test-/Dokumentationskontext; die Runtime-Änderung ist `generalisiert`, weil sie an Badge-/Glyph-Merkmale und nicht an eine Bild-ID gekoppelt ist.
+- **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Rotation fortfahren oder weitere allgemeine Text-/Antialiasing-Probes für kurze Kreisbadge-Labels untersuchen.
