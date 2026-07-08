@@ -16,6 +16,7 @@ Der reproduzierbare Review mit `tools/review_conversion_quality.py --max-candida
 
 - `AC0512_1_L` – vom Nutzer angefragte Generalisierungsaufgabe für ein querformatiges rotes/oranges Rechteck-Icon mit grauem Rand und drei parallelen weissen Diagonalstreifen. Die Aufgabe ist als separater Plan-B-Contract dokumentiert in `docs/next_arbeitspaket_2026-07-05_runVI.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
 - `AC0832` – vom Nutzer angefragte Generalisierungsaufgabe für eine linke Kelle mit runder CO²-Scheibe und hochgestellter `2`. Die Aufgabe ist als separater Plan-B-Contract dokumentiert in `docs/next_arbeitspaket_2026-07-05_runVJ.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
+- `AC0840_L` – vom Nutzer angefragte Plan-B-Aufgabe für ein 28×28-AC08-`rF`-Kreisbadge, bei dem die bisherige Konvertierung den Text zu klein und gegenüber der Vorlage versetzt rendert. Die Aufgabe ist als separater Textregistrierungs-Contract dokumentiert in `docs/next_arbeitspaket_2026-07-08_runVX.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
