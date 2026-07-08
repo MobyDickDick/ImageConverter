@@ -4062,3 +4062,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Qualität:** Die isolierte DLG0021-Metrik bleibt gegenüber Run UZ stabil bei `Mean-Delta²=17056.199219` (`Fehler/Pixel=0.077702`), weil keine neue Gradient-Offset-Probe den bisherigen Stand weiter verbessert.
 - **Perception-Lerneffekt:** `DLG0021` bleibt `nur Sonderfall`; die Änderung verallgemeinert die nachgelagerte Gradient-Stroke-Registrierung, nicht die reine Bilddetektion.
 - **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste zu `GE1410_L` rotieren oder weiteres allgemeines PolygonPath-Antialiasing-/Gradient-Feintuning untersuchen.
+
+### Fortschritt vs. Blocker (Session 2026-07-08, DLG0021 Zeptofine-Gradient-Offset-Probes Run VW)
+
+- **Fortschritt:** Der dokumentierte DLG0021-Gradient-Folgepunkt wurde als katalogfreie Geometry-IR-Optimiererweiterung umgesetzt: `PolygonPath`-Stroke-Gradient-Offsets prüfen nun zusätzlich zeptofeine ±0,009765625-Prozentpunkte.
+- **Sicherung:** Der fokussierte Geometry-IR-Optimierer-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `DLG0021` endet mit Exit `0`.
+- **Qualität:** Die isolierte DLG0021-Metrik bleibt gegenüber Run VR stabil bei `Mean-Delta²=17056.199219` (`Fehler/Pixel=0.077702`), weil keine neue Gradient-Offset-Probe den bisherigen Stand weiter verbessert.
+- **Perception-Lerneffekt:** `DLG0021` bleibt `nur Sonderfall`; die Änderung verallgemeinert die nachgelagerte Gradient-Stroke-Registrierung, nicht die reine Bilddetektion.
+- **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste zu `GE1410_L` rotieren oder weiteres allgemeines PolygonPath-/Gradient-Feintuning untersuchen.
