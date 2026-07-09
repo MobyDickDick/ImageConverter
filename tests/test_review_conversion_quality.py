@@ -12,6 +12,7 @@ from tools.review_conversion_quality import (
     normalized_mse,
     review_variant,
     select_plan_b_candidates,
+    select_top_error_cases,
     write_reports,
 )
 
@@ -122,6 +123,19 @@ def test_select_plan_b_candidates_prioritizes_failed_success_then_compact_diffs(
     ]
 
 
+def test_select_top_error_cases_ranks_reproducible_mean_delta2() -> None:
+    records = [
+        _record("AC_SMALL", 0.01, source="successful_conversion"),
+        _record("AC_MISSING", None, source="successful_conversion", status="missing_pair"),
+        _record("AC_LARGE", 0.30, source="diff_inventory"),
+        _record("AC_MEDIUM", 0.20, source="diff_inventory"),
+    ]
+
+    selected = select_top_error_cases(records, max_cases=2)
+
+    assert [record.variant for record in selected] == ["AC_LARGE", "AC_MEDIUM"]
+
+
 def test_write_reports_keeps_candidate_priority_machine_readable(tmp_path: Path) -> None:
     successful = [_record("AC_BAD", 0.06, source="successful_conversion")]
     diffs = [_record("AC_DIFF", 0.2, source="diff_inventory")]
@@ -136,6 +150,7 @@ def test_write_reports_keeps_candidate_priority_machine_readable(tmp_path: Path)
     )
 
     assert summary["metrics"]["selected_candidates"] == 2
+    assert summary["metrics"]["top_error_cases"] == 2
     report = json.loads((tmp_path / "conversion_quality_review_v2.json").read_text())
     assert [item["variant"] for item in report["selected_candidates"]] == [
         "AC_BAD",
@@ -143,7 +158,8 @@ def test_write_reports_keeps_candidate_priority_machine_readable(tmp_path: Path)
     ]
     rows = list(csv.DictReader((tmp_path / "plan_b_candidate_triage_v1.csv").open()))
     assert [row["priority"] for row in rows] == ["1", "2"]
-
+    top_rows = list(csv.DictReader((tmp_path / "top_reproducible_error_cases_v1.csv").open()))
+    assert [row["rank"] for row in top_rows] == ["1", "2"]
 
 
 def test_ac0022_committed_dual_arrow_svg_uses_mask_refinement_below_review_gate() -> None:

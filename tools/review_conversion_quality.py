@@ -18,6 +18,7 @@ from src.imageCompositeConverter import Action
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_THRESHOLD = 0.045945679012345676
 DEFAULT_MAX_CANDIDATES = 5
+DEFAULT_TOP_ERROR_CASES = 5
 DEFAULT_MAX_IMAGE_AREA = 3_200
 
 IMAGE_DIRS = (
@@ -214,6 +215,18 @@ def _record_dict(record: QualityRecord) -> dict[str, object]:
     return data
 
 
+def select_top_error_cases(
+    records: Iterable[QualityRecord],
+    *,
+    max_cases: int = DEFAULT_TOP_ERROR_CASES,
+) -> list[QualityRecord]:
+    """Return the largest reproducible renderable errors by primary metric."""
+    return sorted(
+        (record for record in records if record.status == "ok" and record.mean_delta2 is not None),
+        key=lambda record: (-(record.mean_delta2 or 0.0), record.variant),
+    )[:max_cases]
+
+
 def write_reports(
     output_dir: Path,
     successful_records: Sequence[QualityRecord],
@@ -223,6 +236,7 @@ def write_reports(
     threshold: float,
     max_image_area: int,
     max_candidates: int = DEFAULT_MAX_CANDIDATES,
+    top_error_cases: Sequence[QualityRecord] | None = None,
 ) -> dict[str, object]:
     output_dir.mkdir(parents=True, exist_ok=True)
     records = [*successful_records, *diff_records]
@@ -232,6 +246,8 @@ def write_reports(
         writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(_record_dict(record) for record in records)
+
+    top_error_cases = list(top_error_cases) if top_error_cases is not None else select_top_error_cases(records)
 
     candidate_path = output_dir / "plan_b_candidate_triage_v1.csv"
     with candidate_path.open("w", encoding="utf-8", newline="") as handle:
@@ -244,10 +260,22 @@ def write_reports(
         for priority, record in enumerate(candidates, start=1):
             writer.writerow({"priority": priority, **_record_dict(record)})
 
+    top_errors_path = output_dir / "top_reproducible_error_cases_v1.csv"
+    with top_errors_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=["rank", *fields],
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        for rank, record in enumerate(top_error_cases, start=1):
+            writer.writerow({"rank": rank, **_record_dict(record)})
+
     summary = {
         "schema_version": "conversion_quality_review_v2",
         "threshold_normalized_mse": threshold,
         "max_plan_b_candidates": max_candidates,
+        "max_top_error_cases": len(top_error_cases),
         "max_candidate_image_area": max_image_area,
         "metrics": {
             "successful_variants": len(successful_records),
@@ -260,10 +288,13 @@ def write_reports(
             "diff_variants": len(diff_records),
             "diff_renderable_pairs": sum(record.status == "ok" for record in diff_records),
             "selected_candidates": len(candidates),
+            "top_error_cases": len(top_error_cases),
         },
         "selected_candidates": [_record_dict(record) for record in candidates],
+        "top_reproducible_error_cases": [_record_dict(record) for record in top_error_cases],
         "records_csv": _relative(csv_path, PROJECT_ROOT) if csv_path.is_relative_to(PROJECT_ROOT) else str(csv_path),
         "candidate_triage_csv": _relative(candidate_path, PROJECT_ROOT) if candidate_path.is_relative_to(PROJECT_ROOT) else str(candidate_path),
+        "top_error_cases_csv": _relative(top_errors_path, PROJECT_ROOT) if top_errors_path.is_relative_to(PROJECT_ROOT) else str(top_errors_path),
     }
     json_path = output_dir / "conversion_quality_review_v2.json"
     json_path.write_text(json.dumps(summary, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -303,6 +334,7 @@ def main() -> int:
         max_image_area=args.max_image_area,
         excluded_variants=args.exclude,
     )
+    top_error_cases = select_top_error_cases([*successful_records, *diff_records])
     summary = write_reports(
         PROJECT_ROOT / args.output_dir,
         successful_records,
@@ -311,9 +343,11 @@ def main() -> int:
         threshold=args.threshold,
         max_image_area=args.max_image_area,
         max_candidates=args.max_candidates,
+        top_error_cases=top_error_cases,
     )
     print(json.dumps(summary["metrics"], sort_keys=True))
     print("selected=" + ",".join(record.variant for record in candidates))
+    print("top_errors=" + ",".join(record.variant for record in top_error_cases))
     return 0
 
 

@@ -1,0 +1,6 @@
+rank,variant,source,image_path,svg_path,width,height,mean_delta2,normalized_mse,status,image_area
+1,AC0835_S,successful_conversion,artifacts/images_to_convert/AC0835_S.jpg,src/artifacts/converted_images/converted_svgs/AC0835_S.svg,15,15,8714.9462890625,0.044674849617134436,ok,225
+2,AC0838_M,successful_conversion,artifacts/images_to_convert/nonconvertable/AC0838_M.jpg,src/artifacts/converted_images/converted_svgs/AC0838_M.svg,20,35,7789.17431640625,0.039929126317602204,ok,700
+3,AC0835_L,successful_conversion,artifacts/images_to_convert/AC0835_L.jpg,src/artifacts/converted_images/converted_svgs/AC0835_L.svg,25,25,7629.90234375,0.039112660995770855,ok,625
+4,AC0820_L,successful_conversion,artifacts/images_to_convert/AC0820_L.jpg,src/artifacts/converted_images/converted_svgs/AC0820_L.svg,30,30,7458.4033203125,0.03823351695661925,ok,900
+5,AC0837_S,successful_conversion,artifacts/images_to_convert/AC0837_S.jpg,src/artifacts/converted_images/converted_svgs/AC0837_S.svg,25,15,7265.9677734375,0.03724704740965013,ok,375

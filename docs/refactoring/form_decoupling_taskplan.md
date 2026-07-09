@@ -93,7 +93,7 @@ verbessern.
 
 ## Gekürzte nächste 10 Aufgaben
 
-1. [ ] Aktuellen Quality-Report erzeugen und die fünf größten reproduzierbaren
+1. [x] Aktuellen Quality-Report erzeugen und die fünf größten reproduzierbaren
    Fehlerfälle bestimmen.
 2. [ ] Runtime-Formcode-Inventar aktualisieren und nicht erlaubte Treffer
    markieren.
