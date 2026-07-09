@@ -487,3 +487,28 @@ def test_run_conversion_finalization_quarantines_unsatisfactory_artifacts_before
     assert not (reports_dir / "successful_conversions_bestlist" / "AC0801_L.svg").exists()
     assert (source_dir / "AC0801_L.jpg").exists()
     assert result_map["AC0801_L.jpg"]["status"] == "quality_failed"
+
+
+def test_mark_poor_conversions_renames_svg_when_error_per_pixel_exceeds_fallback_gate(tmp_path):
+    svg_dir = tmp_path / "svg"
+    svg_dir.mkdir()
+    (svg_dir / "AC0999_L.svg").write_text("<svg><rect width='10' height='10'/></svg>", encoding="utf-8")
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    # Fewer than three successful AC08 rows means no dynamic mean-delta threshold can be computed.
+    (reports_dir / "successful_conversions.txt").write_text("", encoding="utf-8")
+
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+        svg_out_dir=str(svg_dir),
+        result_map={
+            "AC0999_L.jpg": {
+                "variant": "AC0999_L",
+                "mean_delta2": 0.0,
+                "error_per_pixel": 18.5,
+            }
+        },
+        reports_out_dir=str(reports_dir),
+    )
+
+    assert (svg_dir / "Failed_AC0999_L.svg").exists()
+    assert not (svg_dir / "AC0999_L.svg").exists()
