@@ -4077,3 +4077,10 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Sicherung:** Die neuen fokussierten Regressionstests für die 28×28-rF-Parameter und den SVG-Renderer laufen grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`, und der isolierte AC0840_L-CLI-Lauf endet mit Exit `0`.
 - **Perception-Lerneffekt:** `AC0840_L` bleibt Test-/Dokumentationskontext; die Runtime-Änderung ist `generalisiert`, weil sie an Badge-/Glyph-Merkmale und nicht an eine Bild-ID gekoppelt ist.
 - **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Rotation fortfahren oder weitere allgemeine Text-/Antialiasing-Probes für kurze Kreisbadge-Labels untersuchen.
+
+### Fortschritt vs. Blocker (Session 2026-07-09, Batch-Checkpoint Resume-Audit Run XB)
+
+- **Fortschritt:** Der nach Run XA dokumentierte Resume-Nachweis wurde als auditierbare Checkpoint-Übernahme ergänzt: aus `conversion_result_map.json` übernommene Resume-Zeilen erhalten nun `resume_source=conversion_checkpoint`, während stale Snapshot-Zeilen weiterhin ignoriert und nicht angefragte Dateien als Restarbeit belassen werden.
+- **Sicherung:** Der fokussierte Resume-Helper-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`.
+- **Perception-Lerneffekt:** Keine neue Bilddetektion; die Änderung verbessert die operative Nachvollziehbarkeit langer Plan-B-/Batch-Läufe.
+- **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Rotation fortfahren oder den Checkpoint-Resume-Pfad mit einem echten CLI-Abbruch-/Fortsetzungsrun gegen reale Artefakte nachweisen.
