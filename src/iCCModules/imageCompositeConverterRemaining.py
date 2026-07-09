@@ -1189,6 +1189,7 @@ def convertRange(
     def _writeIncrementalCheckpoint(meta: dict[str, object]) -> None:
         """Persist resumable batch state after each completed conversion task."""
         checkpoint_path = Path(reports_out_dir) / "conversion_checkpoint.json"
+        result_map_path = Path(reports_out_dir) / "conversion_result_map.json"
         checkpoint_payload = {
             "schema_version": "conversion_checkpoint_v1",
             "stage": str(meta.get("stage", "")),
@@ -1199,11 +1200,16 @@ def convertRange(
             "batch_failure_count": len(batch_failures),
             "run_seed": int(Action.STOCHASTIC_RUN_SEED),
             "pass_seed_offset": int(Action.STOCHASTIC_SEED_OFFSET),
+            "result_map_path": result_map_path.name,
             "last_event": dict(meta),
         }
         _writeConversionBestlistMetrics(conversion_bestlist_path, conversion_bestlist_rows)
         _writeBatchFailureSummary(reports_out_dir, batch_failures)
         _writeQualityPassReport(reports_out_dir, quality_logs)
+        result_map_path.write_text(
+            json.dumps(result_map, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
         checkpoint_path.write_text(
             json.dumps(checkpoint_payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
