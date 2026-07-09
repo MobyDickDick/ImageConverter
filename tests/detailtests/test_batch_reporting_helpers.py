@@ -350,3 +350,35 @@ def test_partition_checkpoint_resume_rows_scopes_snapshot_to_requested_files():
     assert remaining == ["GE9012_6M.jpg"]
     assert set(resume_rows) == {"GE1410_L.jpg"}
     assert resume_rows["GE1410_L.jpg"]["filename"] == "GE1410_L.jpg"
+    assert resume_rows["GE1410_L.jpg"]["resume_source"] == "conversion_checkpoint"
+
+
+def test_partition_checkpoint_resume_rows_preserves_existing_fields_for_end_to_end_resume():
+    remaining, resume_rows = helpers.partitionCheckpointResumeRowsImpl(
+        process_files=["DLG0021.jpg", "GE1410_L.jpg", "GE9012_6M.jpg"],
+        checkpoint_result_map={
+            "DLG0021.jpg": {
+                "filename": "DLG0021.jpg",
+                "variant": "DLG0021",
+                "status": "semantic_ok",
+                "mean_delta2": 17056.199219,
+            },
+            "GE1410_L.jpg": {
+                "filename": "GE1410_L.jpg",
+                "variant": "GE1410_L",
+                "status": "semantic_ok",
+                "mean_delta2": 759.441589,
+            },
+            "STALE.jpg": {
+                "filename": "STALE.jpg",
+                "variant": "STALE",
+                "status": "semantic_ok",
+            },
+        },
+    )
+
+    assert remaining == ["GE9012_6M.jpg"]
+    assert list(resume_rows) == ["DLG0021.jpg", "GE1410_L.jpg"]
+    assert resume_rows["DLG0021.jpg"]["mean_delta2"] == 17056.199219
+    assert resume_rows["GE1410_L.jpg"]["variant"] == "GE1410_L"
+    assert {row["resume_source"] for row in resume_rows.values()} == {"conversion_checkpoint"}

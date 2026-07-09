@@ -320,6 +320,7 @@ def partitionCheckpointResumeRowsImpl(
         if isinstance(row, dict):
             normalized = dict(row)
             normalized.setdefault("filename", filename)
+            normalized["resume_source"] = "conversion_checkpoint"
             resume_rows[filename] = normalized
         else:
             remaining.append(filename)
