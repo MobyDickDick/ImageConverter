@@ -51,6 +51,47 @@ def test_run_quality_passes_updates_result_map_and_bestlist() -> None:
     assert len(quality_logs) == 2
 
 
+def test_run_quality_passes_exposes_per_candidate_seed_and_checkpoint_hooks() -> None:
+    result_map = {
+        "AC0800_S.jpg": {"filename": "AC0800_S.jpg", "variant": "AC0800_S", "error_per_pixel": 0.8, "mean_delta2": 10.0},
+        "AC0801_S.jpg": {"filename": "AC0801_S.jpg", "variant": "AC0801_S", "error_per_pixel": 0.9, "mean_delta2": 11.0},
+    }
+    candidate_hooks: list[tuple[int, int, str]] = []
+    checkpoints: list[dict[str, object]] = []
+
+    stop = conversion_quality_pass_helpers.runQualityPassesImpl(
+        max_quality_passes=1,
+        stop_after_failure=False,
+        deterministic_order=True,
+        rng=object(),
+        base_iterations=5,
+        allowed_error_per_pixel=0.5,
+        skip_variants=set(),
+        result_map=result_map,
+        quality_logs=[],
+        conversion_bestlist_rows={},
+        convert_one_fn=lambda filename, **_kwargs: (
+            {"filename": filename, "variant": filename.rsplit(".", 1)[0], "error_per_pixel": 0.2, "mean_delta2": 5.0},
+            False,
+        ),
+        select_open_quality_cases_fn=lambda rows, **_kwargs: rows,
+        select_middle_lower_tercile_fn=lambda _rows: [],
+        iteration_strategy_for_pass_fn=lambda _pass_idx, _base: (7, 8),
+        adaptive_iteration_budget_for_quality_row_fn=lambda _row, planned: planned,
+        evaluate_quality_pass_candidate_fn=lambda _old, new: (True, "improved", 0.8, float(new["error_per_pixel"]), 10.0, 5.0),
+        store_conversion_bestlist_snapshot_fn=lambda _variant, _row: None,
+        restore_conversion_bestlist_snapshot_fn=lambda _variant: None,
+        before_candidate_fn=lambda pass_idx, candidate_idx, filename, _row: candidate_hooks.append(
+            (pass_idx, candidate_idx, filename)
+        ),
+        checkpoint_fn=lambda payload: checkpoints.append(dict(payload)),
+    )
+
+    assert stop is False
+    assert candidate_hooks == [(1, 1, "AC0800_S.jpg"), (1, 2, "AC0801_S.jpg")]
+    assert [row["candidate_index"] for row in checkpoints] == [1, 2]
+
+
 def test_run_quality_passes_restores_snapshot_when_not_improved() -> None:
     result_map = {
         "AC0838_M.jpg": {"filename": "AC0838_M.jpg", "variant": "AC0838_M", "error_per_pixel": 0.4, "mean_delta2": 4.0}
