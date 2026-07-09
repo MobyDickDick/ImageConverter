@@ -9,6 +9,9 @@ import re
 import statistics
 
 
+_FALLBACK_MAX_ERROR_PER_PIXEL = 18.0
+
+
 def _parseSemicolonKeyValueLine(raw_line: str) -> tuple[str, dict[str, str]]:
     stripped = raw_line.split("#", 1)[0].strip()
     if not stripped:
@@ -194,7 +197,16 @@ def _markPoorConversionsWithFailedPrefix(
             continue
 
         mean_delta2 = float(row.get("mean_delta2", float("inf")))
-        quality_fail = math.isfinite(mean_delta2) and math.isfinite(threshold) and mean_delta2 > threshold
+        error_per_pixel = float(row.get("error_per_pixel", float("inf")))
+        mean_delta2_fail = math.isfinite(mean_delta2) and math.isfinite(threshold) and mean_delta2 > threshold
+        # Small local runs often do not have enough successful AC08 rows to build
+        # a dynamic mean-delta threshold.  Without a fallback, visibly poor
+        # vectorizations with a very high per-pixel error kept their normal SVG
+        # name and looked like accepted conversions.  Keep the dynamic AC08 gate
+        # when available, but always reject candidates that exceed the generic
+        # per-pixel quality ceiling used by the ranking/reporting pipeline.
+        error_per_pixel_fail = math.isfinite(error_per_pixel) and error_per_pixel > _FALLBACK_MAX_ERROR_PER_PIXEL
+        quality_fail = mean_delta2_fail or error_per_pixel_fail
         raster_fail = (not fallback_mode_active) and _svgContainsEmbeddedRaster(svg_path)
         trivial_fail = (not fallback_mode_active) and _svgIsTrivialFallback(svg_path)
         is_skipped_variant = str(status_by_variant.get(variant, "")).startswith("skipped_")
