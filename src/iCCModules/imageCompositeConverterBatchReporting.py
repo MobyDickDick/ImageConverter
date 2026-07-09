@@ -296,6 +296,38 @@ def loadConversionCheckpointResultMapImpl(checkpoint_path: str) -> dict[str, dic
     return normalized
 
 
+
+def partitionCheckpointResumeRowsImpl(
+    *,
+    process_files: list[str],
+    checkpoint_result_map: dict[str, dict[str, object]],
+) -> tuple[list[str], dict[str, dict[str, object]]]:
+    """Split requested files into remaining work and resumable checkpoint rows.
+
+    Only rows whose filename is part of the current request are reused. This
+    keeps resume mode scoped to the active range while preserving the exact
+    filename keys expected by downstream reporting.
+    """
+
+    if not checkpoint_result_map:
+        return list(process_files), {}
+
+    requested = set(process_files)
+    resume_rows: dict[str, dict[str, object]] = {}
+    remaining: list[str] = []
+    for filename in process_files:
+        row = checkpoint_result_map.get(filename)
+        if isinstance(row, dict):
+            normalized = dict(row)
+            normalized.setdefault("filename", filename)
+            resume_rows[filename] = normalized
+        else:
+            remaining.append(filename)
+
+    # Ignore stale checkpoint rows from other ranges.
+    resume_rows = {filename: row for filename, row in resume_rows.items() if filename in requested}
+    return remaining, resume_rows
+
 def readKeyValueReportImpl(report_path: str) -> dict[str, str]:
     """Read a simple key=value report artifact into a dictionary."""
 

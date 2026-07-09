@@ -1166,9 +1166,33 @@ def convertRange(
         force_reconvert=force_reconvert,
     )
     result_map.update(reusable_rows)
+    checkpoint_resume_enabled = os.environ.get("ICC_RESUME_FROM_CHECKPOINT", "").strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+    checkpoint_resume_rows: dict[str, dict[str, object]] = {}
+    if checkpoint_resume_enabled and not force_reconvert:
+        checkpoint_path = Path(reports_out_dir) / "conversion_checkpoint.json"
+        checkpoint_result_map = batch_reporting_helpers.loadConversionCheckpointResultMapImpl(str(checkpoint_path))
+        process_files, checkpoint_resume_rows = batch_reporting_helpers.partitionCheckpointResumeRowsImpl(
+            process_files=process_files,
+            checkpoint_result_map=checkpoint_result_map,
+        )
+        result_map.update(checkpoint_resume_rows)
+        for row in checkpoint_resume_rows.values():
+            variant = str(row.get("variant", "")).strip().upper()
+            if variant and variant not in conversion_bestlist_rows:
+                conversion_bestlist_rows[variant] = dict(row)
+        if checkpoint_resume_rows:
+            print(
+                f"[INFO] Checkpoint-Resume: {len(checkpoint_resume_rows)} bereits abgeschlossene "
+                f"Konvertierungen aus conversion_checkpoint.json geladen; {len(process_files)} Dateien bleiben offen."
+            )
     reused_variants = {
         str(row.get("variant", "")).strip().upper()
-        for row in reusable_rows.values()
+        for row in list(reusable_rows.values()) + list(checkpoint_resume_rows.values())
         if str(row.get("variant", "")).strip()
     }
     if reusable_rows:

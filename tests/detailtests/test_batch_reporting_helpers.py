@@ -336,3 +336,17 @@ def test_load_conversion_checkpoint_result_map_ignores_invalid_artifacts(tmp_pat
         encoding="utf-8",
     )
     assert helpers.loadConversionCheckpointResultMapImpl(str(invalid_checkpoint)) == {}
+
+
+def test_partition_checkpoint_resume_rows_scopes_snapshot_to_requested_files():
+    remaining, resume_rows = helpers.partitionCheckpointResumeRowsImpl(
+        process_files=["GE1410_L.jpg", "GE9012_6M.jpg"],
+        checkpoint_result_map={
+            "GE1410_L.jpg": {"variant": "GE1410_L", "status": "semantic_ok"},
+            "STALE.jpg": {"variant": "STALE", "status": "semantic_ok"},
+        },
+    )
+
+    assert remaining == ["GE9012_6M.jpg"]
+    assert set(resume_rows) == {"GE1410_L.jpg"}
+    assert resume_rows["GE1410_L.jpg"]["filename"] == "GE1410_L.jpg"
