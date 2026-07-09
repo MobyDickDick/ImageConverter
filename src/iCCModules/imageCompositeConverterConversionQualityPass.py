@@ -26,6 +26,8 @@ def runQualityPassesImpl(
     store_conversion_bestlist_snapshot_fn,
     restore_conversion_bestlist_snapshot_fn,
     before_pass_fn=None,
+    before_candidate_fn=None,
+    checkpoint_fn=None,
     continue_after_max_if_improved: bool = False,
 ) -> bool:
     pass_idx = 1
@@ -58,8 +60,10 @@ def runQualityPassesImpl(
         if len(candidates) > 1 and not deterministic_order:
             rng.shuffle(candidates)
 
-        for row in candidates:
+        for candidate_idx, row in enumerate(candidates, start=1):
             filename = str(row["filename"])
+            if before_candidate_fn is not None:
+                before_candidate_fn(pass_idx, candidate_idx, filename, row)
             current_test_id = str(os.environ.get("PYTEST_CURRENT_TEST", ""))
             anchor_test_active = "test_ac08_semantic_anchor_variants_convert_without_failed_svg" in current_test_id
             if anchor_test_active:
@@ -105,6 +109,18 @@ def runQualityPassesImpl(
                     "badge_validation_rounds": badge_rounds,
                 }
             )
+            if checkpoint_fn is not None:
+                checkpoint_fn(
+                    {
+                        "stage": "quality_pass",
+                        "pass": pass_idx,
+                        "candidate_index": candidate_idx,
+                        "filename": filename,
+                        "variant": str(new_row.get("variant", row.get("variant", ""))).strip().upper(),
+                        "improved": improved,
+                        "decision": decision,
+                    }
+                )
 
         if not improved_in_pass and not structured_candidates_in_pass:
             break

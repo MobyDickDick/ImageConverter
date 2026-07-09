@@ -118,3 +118,36 @@ def test_initial_pass_continues_after_failed_file() -> None:
 
     assert stop_after_failure is True
     assert "AC0801_S.jpg" in result_map
+
+
+def test_initial_pass_exposes_per_variant_seed_and_checkpoint_hooks() -> None:
+    hook_calls: list[tuple[int, str]] = []
+    checkpoints: list[dict[str, object]] = []
+
+    stop_after_failure = initial_pass_helpers.runInitialConversionPassImpl(
+        process_files=["AC0800_S.jpg", "AC0801_S.jpg"],
+        result_map={},
+        existing_donor_rows=[],
+        conversion_bestlist_rows={},
+        folder_path="in",
+        svg_out_dir="svg",
+        diff_out_dir="diff",
+        rng=object(),
+        deterministic_order=True,
+        base_iterations=2,
+        convert_one_fn=lambda filename, **_kwargs: (
+            {"filename": filename, "variant": filename.rsplit(".", 1)[0], "error_per_pixel": 1.0},
+            False,
+        ),
+        try_template_transfer_fn=lambda **_kwargs: (None, None),
+        is_conversion_bestlist_candidate_better_fn=lambda _previous, _candidate: True,
+        store_conversion_bestlist_snapshot_fn=lambda _variant, _row: None,
+        restore_conversion_bestlist_snapshot_fn=lambda _variant: None,
+        choose_conversion_bestlist_row_fn=lambda row, _previous, _restored: row,
+        before_variant_fn=lambda idx, filename: hook_calls.append((idx, filename)),
+        checkpoint_fn=lambda payload: checkpoints.append(dict(payload)),
+    )
+
+    assert stop_after_failure is False
+    assert hook_calls == [(1, "AC0800_S.jpg"), (2, "AC0801_S.jpg")]
+    assert [row["variant_index"] for row in checkpoints] == [1, 2]

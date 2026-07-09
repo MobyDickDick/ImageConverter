@@ -1186,6 +1186,29 @@ def convertRange(
     early_gate_pending = set(process_files)
     conversion_timeout_sec = max(0.0, float(os.environ.get("ICC_CONVERSION_TIMEOUT_SEC", "0") or "0"))
 
+    def _writeIncrementalCheckpoint(meta: dict[str, object]) -> None:
+        """Persist resumable batch state after each completed conversion task."""
+        checkpoint_path = Path(reports_out_dir) / "conversion_checkpoint.json"
+        checkpoint_payload = {
+            "schema_version": "conversion_checkpoint_v1",
+            "stage": str(meta.get("stage", "")),
+            "filename": str(meta.get("filename", "")),
+            "variant": str(meta.get("variant", "")),
+            "processed_result_count": len(result_map),
+            "bestlist_count": len(conversion_bestlist_rows),
+            "batch_failure_count": len(batch_failures),
+            "run_seed": int(Action.STOCHASTIC_RUN_SEED),
+            "pass_seed_offset": int(Action.STOCHASTIC_SEED_OFFSET),
+            "last_event": dict(meta),
+        }
+        _writeConversionBestlistMetrics(conversion_bestlist_path, conversion_bestlist_rows)
+        _writeBatchFailureSummary(reports_out_dir, batch_failures)
+        _writeQualityPassReport(reports_out_dir, quality_logs)
+        checkpoint_path.write_text(
+            json.dumps(checkpoint_payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+
     def _runOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
         return conversion_execution_helpers.convertOneImpl(
             filename=filename,
@@ -1285,6 +1308,8 @@ def convertRange(
             and str(batch_failures[-1].get("reason", "")) != "TimeoutError"
             and "validation_time_budget_exceeded" not in str(batch_failures[-1].get("details", ""))
         ),
+        before_variant_fn=lambda variant_idx, _filename: setattr(Action, "STOCHASTIC_SEED_OFFSET", variant_idx),
+        checkpoint_fn=_writeIncrementalCheckpoint,
     )
 
     current_rows = [
@@ -1341,7 +1366,13 @@ def convertRange(
                 svg_out_dir,
                 reports_out_dir,
             ),
-            before_pass_fn=lambda pass_idx: setattr(Action, "STOCHASTIC_SEED_OFFSET", pass_idx),
+            before_pass_fn=lambda pass_idx: setattr(Action, "STOCHASTIC_SEED_OFFSET", pass_idx * 100_000),
+            before_candidate_fn=lambda pass_idx, candidate_idx, _filename, _row: setattr(
+                Action,
+                "STOCHASTIC_SEED_OFFSET",
+                (pass_idx * 100_000) + candidate_idx,
+            ),
+            checkpoint_fn=_writeIncrementalCheckpoint,
             continue_after_max_if_improved=False,
         )
 

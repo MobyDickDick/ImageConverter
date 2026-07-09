@@ -42,6 +42,8 @@ def runInitialConversionPassImpl(
     restore_conversion_bestlist_snapshot_fn,
     choose_conversion_bestlist_row_fn,
     should_stop_after_failure_fn=None,
+    before_variant_fn=None,
+    checkpoint_fn=None,
 ) -> bool:
     stop_after_failure = False
     current_test_id = str(__import__("os").environ.get("PYTEST_CURRENT_TEST", ""))
@@ -49,6 +51,8 @@ def runInitialConversionPassImpl(
     seen_variants: set[str] = set()
     total_variants = max(1, len(process_files))
     for variant_idx, filename in enumerate(process_files, start=1):
+        if before_variant_fn is not None:
+            before_variant_fn(variant_idx, filename)
         if anchor_test_active:
             variant = str(filename).rsplit(".", 1)[0].upper()
             if variant in seen_variants:
@@ -99,6 +103,15 @@ def runInitialConversionPassImpl(
         else:
             restored_row = restore_conversion_bestlist_snapshot_fn(variant)
             result_map[filename] = choose_conversion_bestlist_row_fn(row, previous_row, restored_row)
+        if checkpoint_fn is not None:
+            checkpoint_fn(
+                {
+                    "stage": "initial_pass",
+                    "variant_index": variant_idx,
+                    "filename": filename,
+                    "variant": variant,
+                }
+            )
 
     return stop_after_failure
 
