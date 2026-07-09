@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-06-19)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `401` · Erledigt `362` · Offen `39`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `404` · Erledigt `367` · Offen `37`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 

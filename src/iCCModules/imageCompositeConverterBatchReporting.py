@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import math
 import os
 
@@ -252,6 +253,47 @@ def writeChainTelemetryBatchReportImpl(
             f.write(f"{key}={_formatScorecardValue(drift_gate.get(key))}\n")
 
     return csv_path, txt_path, rows
+
+
+def loadConversionCheckpointResultMapImpl(checkpoint_path: str) -> dict[str, dict[str, object]]:
+    """Load the result-map snapshot referenced by an incremental checkpoint.
+
+    The checkpoint stores ``result_map_path`` as either a relative filename in
+    the same reports directory or an absolute path. Invalid, missing, or legacy
+    checkpoint files deliberately resolve to an empty map so resume/audit callers
+    can fall back to a cold run without wrapping imports in exception handlers.
+    """
+
+    if not os.path.exists(checkpoint_path):
+        return {}
+    try:
+        with open(checkpoint_path, "r", encoding="utf-8") as f:
+            checkpoint = json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return {}
+    if not isinstance(checkpoint, dict):
+        return {}
+
+    raw_result_map_path = checkpoint.get("result_map_path")
+    if not isinstance(raw_result_map_path, str) or not raw_result_map_path.strip():
+        return {}
+    result_map_path = raw_result_map_path.strip()
+    if not os.path.isabs(result_map_path):
+        result_map_path = os.path.join(os.path.dirname(checkpoint_path), result_map_path)
+
+    try:
+        with open(result_map_path, "r", encoding="utf-8") as f:
+            result_map = json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return {}
+    if not isinstance(result_map, dict):
+        return {}
+
+    normalized: dict[str, dict[str, object]] = {}
+    for filename, row in result_map.items():
+        if isinstance(filename, str) and isinstance(row, dict):
+            normalized[filename] = dict(row)
+    return normalized
 
 
 def readKeyValueReportImpl(report_path: str) -> dict[str, str]:
