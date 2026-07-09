@@ -74,3 +74,52 @@ def test_run_text_glyph_evaluation_report_writes_json_and_csv(tmp_path: Path) ->
     rows = list(csv.DictReader(csv_report.open(encoding="utf-8")))
     assert [row["expected_text"] for row in rows[:4]] == ["M", "+", "-", "VOC"]
     assert any(row["sample_type"] == "real" for row in rows)
+
+
+def test_description_tokenizer_keeps_plan_b_p_glyph_signal() -> None:
+    from tools.perception_detection_contract import _glyph_tokens_from_description
+
+    assert "P" in _glyph_tokens_from_description("Kreis mit Buchstabe P")
+    assert "P" in _glyph_tokens_from_description(None)
+
+
+def test_detect_perception_candidates_includes_text_glyph_for_plan_b_badge() -> None:
+    cv2 = pytest.importorskip("cv2")
+    np = pytest.importorskip("numpy")
+    from tools.perception_detection_contract import (
+        detect_perception_candidates,
+        merge_perception_candidates_into_geometry_ir,
+    )
+
+    image = np.full((30, 30, 3), 255, dtype=np.uint8)
+    cv2.circle(image, (15, 15), 14, (127, 127, 127), 1, cv2.LINE_AA)
+    cv2.circle(image, (15, 15), 13, (242, 242, 242), -1, cv2.LINE_AA)
+    cv2.putText(
+        image,
+        "P",
+        (8, 22),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.78,
+        (127, 127, 127),
+        2,
+        cv2.LINE_AA,
+    )
+
+    candidates = detect_perception_candidates(
+        image,
+        description="heller Kreis mit mittigem Buchstaben P",
+        source="test_ac850_plan_b",
+    )
+
+    circles = [
+        candidate for candidate in candidates if candidate.kind in {"circle", "ring"}
+    ]
+    glyphs = [candidate for candidate in candidates if candidate.kind == "text_glyph"]
+    assert circles
+    assert glyphs
+    seeded_ir = merge_perception_candidates_into_geometry_ir(image, candidates, [])
+    circle_background = next(
+        element for element in seeded_ir if element["kind"] == "CircleBackground"
+    )
+    assert max(circle_background["bbox"][2], circle_background["bbox"][3]) >= 0.8
+    assert glyphs[0].geometry["text"] == "P"

@@ -239,7 +239,23 @@ def merge_circle_ring_candidates_into_geometry_ir(
     ]
     if not circle_candidates:
         return merged
-    best = sorted(circle_candidates, key=lambda item: item.confidence, reverse=True)[0]
+    min_side = max(float(min(image.shape[:2])), 1.0)
+
+    def _circle_seed_score(
+        candidate: PerceptionPrimitiveCandidate,
+    ) -> tuple[float, float]:
+        radius = float(candidate.geometry.get("radius_px", 0.0))
+        bbox = _candidate_normalized_bbox(candidate, image)
+        bbox_span = max(float(bbox[2]), float(bbox[3])) if len(bbox) == 4 else 0.0
+        # Glyph interiors can look circular and sometimes receive a stronger raw
+        # template/contour confidence than the actual badge outline.  Circle
+        # seeding is meant for the background, so prefer physically larger
+        # circle candidates while still using confidence as the primary quality
+        # signal among similarly sized candidates.
+        size_score = max(radius / min_side, bbox_span / 2.0)
+        return (float(candidate.confidence) + min(size_score, 0.5), size_score)
+
+    best = sorted(circle_candidates, key=_circle_seed_score, reverse=True)[0]
     bbox = best.geometry.get("geometry_ir_bbox")
     if not isinstance(bbox, list) or len(bbox) != 4:
         bbox = _normalized_bbox_dict(best, image)
@@ -503,7 +519,7 @@ def _glyph_tokens_from_description(description: str | None) -> list[str]:
             tokens.append(cleaned.upper())
 
     upper_text = text.upper()
-    for token in ["M", "+", "-", "VOC", "CO2"]:
+    for token in ["M", "+", "-", "VOC", "CO2", *list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")]:
         if token in tokens:
             continue
         if token in {"+", "-"}:
@@ -512,7 +528,7 @@ def _glyph_tokens_from_description(description: str | None) -> list[str]:
         elif re.search(rf"(?<![A-Z0-9]){re.escape(token)}(?![A-Z0-9])", upper_text):
             tokens.append(token)
 
-    return tokens or ["M", "+", "-", "VOC", "CO2"]
+    return tokens or ["M", "+", "-", "VOC", "CO2", *list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")]
 
 
 def _threshold_text_image(image):
@@ -678,6 +694,14 @@ def detect_perception_candidates(
         detect_minus_candidates(image, description=description, source=source)
     )
     candidates.extend(detect_circle_ring_candidates(image, source=source))
+    candidates.extend(
+        detect_text_glyph_candidates(
+            image,
+            description=description,
+            source=source,
+            min_score=0.48,
+        )
+    )
     contour_candidates = [
         candidate
         for candidate in _contour_candidates(image, source=source)
@@ -1121,7 +1145,9 @@ def fuse_description_constraints_with_perception_candidates(
     }
 
 
-def build_fusion_uncertainty_contract(decisions: list[dict[str, Any]]) -> dict[str, Any]:
+def build_fusion_uncertainty_contract(
+    decisions: list[dict[str, Any]],
+) -> dict[str, Any]:
     """Return the IDO-09 machine-readable review contract for fusion results.
 
     The contract deliberately separates confidently matched geometry from cases
@@ -1773,8 +1799,21 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "description": "Kompaktes Dialogsymbol mit farbigen Flächen, Konturen und möglichem Text-/Glyph-Anteil.",
         "perception_question": "Werden dominante Farbflächen, Konturen oder Glyphen als katalogfreie Primitive erkannt?",
         "expected_first_primitive": "color_patch",
-        "expected_candidate_kinds": ["color_patch", "polygon_path", "line", "rectangle", "text_glyph"],
-        "expected_seed_kinds": ["ColorPatch", "PolygonPath", "HorizontalRule", "VerticalRule", "RectBorder", "TextGlyph"],
+        "expected_candidate_kinds": [
+            "color_patch",
+            "polygon_path",
+            "line",
+            "rectangle",
+            "text_glyph",
+        ],
+        "expected_seed_kinds": [
+            "ColorPatch",
+            "PolygonPath",
+            "HorizontalRule",
+            "VerticalRule",
+            "RectBorder",
+            "TextGlyph",
+        ],
     },
     {
         "variant": "GE1410_L",
@@ -1783,8 +1822,21 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "description": "Kompaktes GE-Symbol mit Kontur-, Linien- und Farbflächenstruktur.",
         "perception_question": "Werden Kontur, Linien oder Farbflächen als katalogfreie Primitive erkannt?",
         "expected_first_primitive": "color_patch",
-        "expected_candidate_kinds": ["color_patch", "polygon_path", "line", "rectangle", "circle"],
-        "expected_seed_kinds": ["ColorPatch", "PolygonPath", "HorizontalRule", "VerticalRule", "RectBorder", "CircleBackground"],
+        "expected_candidate_kinds": [
+            "color_patch",
+            "polygon_path",
+            "line",
+            "rectangle",
+            "circle",
+        ],
+        "expected_seed_kinds": [
+            "ColorPatch",
+            "PolygonPath",
+            "HorizontalRule",
+            "VerticalRule",
+            "RectBorder",
+            "CircleBackground",
+        ],
     },
     {
         "variant": "SE0041_1",
@@ -1793,8 +1845,19 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "description": "Schmales SE-Symbol mit Linien-, Kontur- und Farbflächenanteilen.",
         "perception_question": "Tauchen die dominanten Linien oder Farbflächen als generische Perception-Kandidaten auf?",
         "expected_first_primitive": "line",
-        "expected_candidate_kinds": ["line", "polygon_path", "color_patch", "rectangle"],
-        "expected_seed_kinds": ["VerticalRule", "HorizontalRule", "PolygonPath", "ColorPatch", "RectBorder"],
+        "expected_candidate_kinds": [
+            "line",
+            "polygon_path",
+            "color_patch",
+            "rectangle",
+        ],
+        "expected_seed_kinds": [
+            "VerticalRule",
+            "HorizontalRule",
+            "PolygonPath",
+            "ColorPatch",
+            "RectBorder",
+        ],
     },
     {
         "variant": "GE9012_6M",
@@ -1803,8 +1866,18 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "description": "Breites GE-Symbol mit horizontaler Struktur und farbigen Flächen.",
         "perception_question": "Wird die horizontale Struktur als katalogfreier Linien-/Polygon- oder Farbflächenkandidat erkannt?",
         "expected_first_primitive": "line",
-        "expected_candidate_kinds": ["line", "polygon_path", "color_patch", "rectangle"],
-        "expected_seed_kinds": ["HorizontalRule", "PolygonPath", "ColorPatch", "RectBorder"],
+        "expected_candidate_kinds": [
+            "line",
+            "polygon_path",
+            "color_patch",
+            "rectangle",
+        ],
+        "expected_seed_kinds": [
+            "HorizontalRule",
+            "PolygonPath",
+            "ColorPatch",
+            "RectBorder",
+        ],
     },
     {
         "variant": "GE9013_1M",
@@ -1813,10 +1886,21 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "description": "Schmales GE-Symbol mit vertikaler Struktur und farbigen Flächen.",
         "perception_question": "Wird die vertikale Struktur als katalogfreier Linien-/Polygon- oder Farbflächenkandidat erkannt?",
         "expected_first_primitive": "line",
-        "expected_candidate_kinds": ["line", "polygon_path", "color_patch", "rectangle"],
-        "expected_seed_kinds": ["VerticalRule", "PolygonPath", "ColorPatch", "RectBorder"],
+        "expected_candidate_kinds": [
+            "line",
+            "polygon_path",
+            "color_patch",
+            "rectangle",
+        ],
+        "expected_seed_kinds": [
+            "VerticalRule",
+            "PolygonPath",
+            "ColorPatch",
+            "RectBorder",
+        ],
     },
 ]
+
 
 def _resolve_first_existing_path(candidates: list[str]) -> Path | None:
     for candidate in candidates:
