@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import json
 from pathlib import Path
 
 from src.iCCModules import imageCompositeConverterBatchReporting as helpers
@@ -287,3 +288,51 @@ def test_check_chain_telemetry_drift_summary_rejects_missing_artifact(tmp_path: 
     assert result["accepted"] is False
     assert result["status"] == "missing"
     assert result["reasons"] == ["summary_missing"]
+
+
+def test_load_conversion_checkpoint_result_map_reads_relative_snapshot(tmp_path: Path):
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    result_map_path = reports_dir / "conversion_result_map.json"
+    result_map_path.write_text(
+        json.dumps(
+            {
+                "GE1410_L.jpg": {
+                    "variant": "GE1410_L",
+                    "status": "semantic_ok",
+                    "mean_delta2": 759.441589,
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    checkpoint_path = reports_dir / "conversion_checkpoint.json"
+    checkpoint_path.write_text(
+        json.dumps(
+            {
+                "schema_version": "conversion_checkpoint_v1",
+                "result_map_path": "conversion_result_map.json",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    result_map = helpers.loadConversionCheckpointResultMapImpl(str(checkpoint_path))
+
+    assert result_map["GE1410_L.jpg"]["variant"] == "GE1410_L"
+    assert result_map["GE1410_L.jpg"]["status"] == "semantic_ok"
+
+
+def test_load_conversion_checkpoint_result_map_ignores_invalid_artifacts(tmp_path: Path):
+    missing_checkpoint = tmp_path / "missing_checkpoint.json"
+    assert helpers.loadConversionCheckpointResultMapImpl(str(missing_checkpoint)) == {}
+
+    invalid_checkpoint = tmp_path / "conversion_checkpoint.json"
+    invalid_checkpoint.write_text("not json", encoding="utf-8")
+    assert helpers.loadConversionCheckpointResultMapImpl(str(invalid_checkpoint)) == {}
+
+    invalid_checkpoint.write_text(
+        json.dumps({"schema_version": "conversion_checkpoint_v1", "result_map_path": "missing.json"}),
+        encoding="utf-8",
+    )
+    assert helpers.loadConversionCheckpointResultMapImpl(str(invalid_checkpoint)) == {}
