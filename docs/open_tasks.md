@@ -4099,3 +4099,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Sicherung:** Der fokussierte Resume-Helper-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`.
 - **Perception-Lerneffekt:** Keine neue Bilddetektion; die Änderung verbessert die operative Nachvollziehbarkeit langer Plan-B-/Batch-Läufe.
 - **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Rotation fortfahren oder den Checkpoint-Resume-Pfad mit einem echten CLI-Abbruch-/Fortsetzungsrun gegen reale Artefakte nachweisen.
+
+### Fortschritt vs. Blocker (Session 2026-07-10, DLG0021 Quarter-Yoctofine-Gradient-Offset-Probes Run XD)
+
+- **Fortschritt:** Der dokumentierte DLG0021-Gradient-Folgepunkt wurde als katalogfreie Geometry-IR-Optimiererweiterung umgesetzt: `PolygonPath`-Stroke-Gradient-Offsets prüfen nun zusätzlich quarter-yoctofeine ±0,001220703125-Prozentpunkte.
+- **Sicherung:** Der fokussierte Geometry-IR-Optimierer-Testblock läuft grün. Der isolierte CLI-Lauf für `DLG0021` endet mit Exit `0`.
+- **Qualität:** Die isolierte DLG0021-Metrik sinkt gegenüber Run XC auf `Mean-Delta²=16540.876953` (`Fehler/Pixel=0.075956`).
+- **Perception-Lerneffekt:** `DLG0021` bleibt `nur Sonderfall`; die Änderung verallgemeinert die nachgelagerte Gradient-Stroke-Registrierung, nicht die reine Bilddetektion.
+- **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste zu `GE1410_L` rotieren oder weiteres allgemeines PolygonPath-/Gradient-Feintuning prüfen.
