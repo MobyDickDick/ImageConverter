@@ -1191,14 +1191,15 @@ def runNonCompositeIterationImpl(
                 if (
                     best_pixel_candidate is not semantic_description_candidate
                     and _is_description_heat_exchanger_geometry(list(semantic_description_candidate.get("geometry_ir", [])))
-                    and not _description_reuses_reference_family(description)
                     and pixel_error * 2.0 < semantic_error
                 ):
                     # Direct canonical heat-exchanger descriptions may still yield
-                    # to a much better generated algorithmic fit.  Reference-derived
-                    # size variants ("Wie <reference> ...") keep the declared
-                    # Geometry-IR contract and use raster registration for
-                    # proportional tuning instead of switching to a free-form fit.
+                    # to a much better generated algorithmic fit.  The same rule
+                    # applies to reference-derived size variants ("Wie
+                    # <reference> ..."): they must reuse the heat-exchanger
+                    # algorithm, but must not force a poorer registered
+                    # Geometry-IR candidate when the raster-derived element-wise
+                    # algorithm fits substantially better.
                     best_geometry_candidate = best_pixel_candidate
                     selection_reason = "raster_fit_overrides_poor_description_geometry"
                 else:
