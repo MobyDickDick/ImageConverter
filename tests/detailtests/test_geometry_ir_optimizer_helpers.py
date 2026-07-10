@@ -329,6 +329,40 @@ def test_default_optimizer_refines_polygon_path_points_locally() -> None:
     assert result["steps"][0]["accepted"] is True
 
 
+def test_default_optimizer_refines_polygon_path_by_whole_shape_translation() -> None:
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "translated_checkmark",
+            "points": [[0.20, 0.50], [0.50, 0.70], [0.80, 0.10]],
+            "fill": "none",
+            "stroke": "#3c9f44",
+            "stroke_width": 0.08,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if all(
+                candidate_point[0] == pytest.approx(expected_x)
+                for candidate_point, expected_x in zip(
+                    candidate_ir[0]["points"], (0.21, 0.51, 0.81)
+                )
+            )
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["points"][0] == pytest.approx([0.21, 0.50])
+    assert result["geometry_ir"][0]["points"][1] == pytest.approx([0.51, 0.70])
+    assert result["geometry_ir"][0]["points"][2] == pytest.approx([0.81, 0.10])
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
 def test_default_optimizer_refines_polygon_path_points_with_fine_local_probe() -> None:
     ir = [
         {

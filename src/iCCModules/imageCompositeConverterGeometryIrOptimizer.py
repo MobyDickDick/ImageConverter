@@ -164,6 +164,48 @@ def _default_candidate_provider(
 
     points = element.get("points")
     if element.get("kind") == "PolygonPath" and isinstance(points, list) and points:
+        valid_points = [
+            [float(point[0]), float(point[1])]
+            for point in points
+            if isinstance(point, list) and len(point) >= 2
+        ]
+        if len(valid_points) == len(points):
+            for coord_index in (0, 1):
+                for delta in (
+                    -0.04,
+                    -0.02,
+                    -0.01,
+                    -0.005,
+                    -0.0025,
+                    -0.00125,
+                    -0.000625,
+                    -0.0003125,
+                    -0.00015625,
+                    -0.000078125,
+                    0.000078125,
+                    0.00015625,
+                    0.0003125,
+                    0.000625,
+                    0.00125,
+                    0.0025,
+                    0.005,
+                    0.01,
+                    0.02,
+                    0.04,
+                ):
+                    shifted_points = []
+                    for point in valid_points:
+                        shifted_point = list(point)
+                        shifted_point[coord_index] = _clamp01(
+                            shifted_point[coord_index] + delta
+                        )
+                        shifted_points.append(shifted_point)
+                    if shifted_points == valid_points:
+                        continue
+                    candidate = copy.deepcopy(element)
+                    candidate["points"] = shifted_points
+                    yield candidate
+
         for point_index, point in enumerate(points):
             if not (isinstance(point, list) and len(point) >= 2):
                 continue
