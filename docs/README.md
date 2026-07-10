@@ -486,3 +486,5 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – Batch-Checkpoint Result-Map-Spiegelung Run WY (2026-07-09)](next_arbeitspaket_2026-07-09_runWY.md)
 
 - [Nächstes Arbeitspaket – DLG0021 Half-Yoctofine-Gradient-Probes Run XC (2026-07-09)](next_arbeitspaket_2026-07-09_runXC.md)
+
+- [Nächstes Arbeitspaket – DLG0021 Quarter-Yoctofine-Gradient-Probes Run XD (2026-07-10)](next_arbeitspaket_2026-07-10_runXD.md)

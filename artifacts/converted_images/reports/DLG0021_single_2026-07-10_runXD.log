@@ -1,0 +1,20 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+[INFO] Konvertiere DLG0021.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite DLG0021.jpg ---
+Bildbeschreibung: Haken vor Checkbox (grauer Rand, weiss gefüllt). Haken: Füllung grüner Farbverlauf oben dunkel, unten hellgrau. Dunkelgraue Umrandung
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0021.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.413043, localized_error_fraction=0.772816).
+[INFO] Konvertiert DLG0021.jpg | Parameter: mode=auto, label=M, variant_name=DLG0021 | Qualität: Fehler/Pixel=0.075956, Mean-Delta²=16540.876953, Raumscore=48015.193867, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.3s
+[INFO] Konvertiere DLG0021.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite DLG0021.jpg ---
+Bildbeschreibung: Haken vor Checkbox (grauer Rand, weiss gefüllt). Haken: Füllung grüner Farbverlauf oben dunkel, unten hellgrau. Dunkelgraue Umrandung
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0021.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.413043, localized_error_fraction=0.772816).
+[INFO] Konvertiert DLG0021.jpg | Parameter: mode=auto, label=M, variant_name=DLG0021 | Qualität: Fehler/Pixel=0.075956, Mean-Delta²=16540.876953, Raumscore=48015.193867, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.3s
+[INFO] Übersichts-Kacheln erzeugt: diff=/tmp/ic-dlg0021-runXD/reports/overview_diff_tiles.png, svg=/tmp/ic-dlg0021-runXD/reports/overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: /tmp/ic-dlg0021-runXD
