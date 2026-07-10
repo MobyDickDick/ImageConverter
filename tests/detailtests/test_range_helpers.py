@@ -14,16 +14,21 @@ def test_exact_same_family_range_does_not_match_shorter_numeric_alias() -> None:
 
 
 def test_legacy_three_digit_family_filter_selects_padded_family_only() -> None:
-    """AC010 is a legacy spelling for AC0010, not for the AC0100 family."""
+    """Bare AC010 is a legacy spelling for AC0010, not for the AC0100 family."""
 
     assert remaining_helpers._inRequestedRange("AC0010.jpg", "AC010", "AC010")
-    assert remaining_helpers._inRequestedRange("AC0010.jpg", "AC010_M", "AC010_M")
-    assert remaining_helpers._inRequestedRange("AC0010.jpg", "AC010_S", "AC010_S")
-    assert remaining_helpers._inRequestedRange("AC0010_M.jpg", "AC010_M", "AC010_M")
-    assert remaining_helpers._inRequestedRange("AC0010_S.jpg", "AC010_S", "AC010_S")
     assert not remaining_helpers._inRequestedRange("AC0100_L.jpg", "AC010", "AC010")
-    assert not remaining_helpers._inRequestedRange("AC0100_M.jpg", "AC010_M", "AC010_M")
-    assert not remaining_helpers._inRequestedRange("AC0100_S.jpg", "AC010_S", "AC010_S")
+
+
+def test_three_digit_size_variant_filter_selects_concrete_catalog_variant() -> None:
+    """AC010_M is a shorthand for AC0100_M and must not collapse to AC0010."""
+
+    assert remaining_helpers._inRequestedRange("AC0100_L.jpg", "AC010_L", "AC010_L")
+    assert remaining_helpers._inRequestedRange("AC0100_M.jpg", "AC010_M", "AC010_M")
+    assert remaining_helpers._inRequestedRange("AC0100_S.jpg", "AC010_S", "AC010_S")
+    assert not remaining_helpers._inRequestedRange("AC0010.jpg", "AC010_M", "AC010_M")
+    assert not remaining_helpers._inRequestedRange("AC0010_M.jpg", "AC010_M", "AC010_M")
+    assert not remaining_helpers._inRequestedRange("AC0010_S.jpg", "AC010_S", "AC010_S")
 
 
 def test_two_digit_partial_prefix_filter_selects_ac08_family() -> None:

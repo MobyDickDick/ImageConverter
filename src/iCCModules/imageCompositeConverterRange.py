@@ -27,10 +27,21 @@ def normalizeExplicitRangeTokenImpl(value: str) -> str:
 def isExplicitSizeVariantTokenImpl(token: str) -> bool:
     return bool(
         re.match(
-            r"^[A-Z]{2,3}\d{4}(?:[1-9]|[1-9]S|L|M|S|W|X)(?:SIA)?$",
+            r"^[A-Z]{2,3}\d{3,4}(?:[1-9]|[1-9]S|L|M|S|W|X)(?:SIA)?$",
             token,
         )
     )
+
+
+def canonicalExplicitSizeVariantTokenImpl(token: str) -> str:
+    """Normalize shorthand size-variant refs without collapsing to a family."""
+
+    normalized = re.sub(r"[^A-Z0-9]", "", str(token or "").upper())
+    match = re.match(r"^([A-Z]{2,3})(\d{3})([1-9]|[1-9]S|L|M|S|W|X)(SIA)?$", normalized)
+    if not match:
+        return normalized
+    prefix, digits, suffix, sia = match.groups()
+    return f"{prefix}{digits}0{suffix}{sia or ''}"
 
 
 def compactRangeTokenImpl(value: str, normalize_range_token_fn: Callable[[str], str]) -> str:
@@ -118,7 +129,8 @@ def matchesExactPrefixFilterImpl(
         and is_explicit_size_variant_token_fn(explicit_start)
         and explicit_start != start_token
     ):
-        return explicit_stem == explicit_start
+        canonical_explicit = canonicalExplicitSizeVariantTokenImpl(explicit_start)
+        return explicit_stem in {explicit_start, canonical_explicit}
     stem = normalize_range_token_fn(get_base_name_fn(os.path.splitext(filename)[0]))
     if not stem:
         return False
@@ -168,8 +180,13 @@ def inRequestedRangeImpl(
         and normalize_range_token_fn(start_ref) == normalize_range_token_fn(end_ref)
     )
     if explicit_variant_span:
-        lower, upper = sorted((explicit_start, explicit_end))
-        explicit_stem = normalize_explicit_range_token_fn(filename)
+        lower, upper = sorted(
+            (
+                canonicalExplicitSizeVariantTokenImpl(explicit_start),
+                canonicalExplicitSizeVariantTokenImpl(explicit_end),
+            )
+        )
+        explicit_stem = canonicalExplicitSizeVariantTokenImpl(normalize_explicit_range_token_fn(filename))
         return lower <= explicit_stem <= upper
 
     exact_prefix_match = matches_exact_prefix_filter_fn(filename, start_ref, end_ref)
@@ -200,7 +217,9 @@ def inRequestedRangeImpl(
         and normalized_start
         and explicit_start != normalized_start
     ):
-        return False
+        explicit_stem = normalize_explicit_range_token_fn(filename)
+        canonical_explicit = canonicalExplicitSizeVariantTokenImpl(explicit_start)
+        return explicit_stem in {explicit_start, canonical_explicit}
 
     if start_parts is None and end_parts is None:
         return matches_partial_range_token_fn(filename, start_ref, end_ref) if (start_ref or end_ref) else True
