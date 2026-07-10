@@ -4107,3 +4107,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Qualität:** Die isolierte DLG0021-Metrik sinkt gegenüber Run XC auf `Mean-Delta²=16540.876953` (`Fehler/Pixel=0.075956`).
 - **Perception-Lerneffekt:** `DLG0021` bleibt `nur Sonderfall`; die Änderung verallgemeinert die nachgelagerte Gradient-Stroke-Registrierung, nicht die reine Bilddetektion.
 - **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste zu `GE1410_L` rotieren oder weiteres allgemeines PolygonPath-/Gradient-Feintuning prüfen.
+
+### Fortschritt vs. Blocker (Session 2026-07-10, SE0041_1 Half-Yoctofine-Rule-/RectBorder-Stroke-Probes Run XF)
+
+- **Fortschritt:** Der nach Run XE dokumentierte Rotationsschritt zu `SE0041_1` wurde als katalogfreie Geometry-IR-Optimiererweiterung umgesetzt: `RectBorder`-, `HorizontalRule`- und `VerticalRule`-Elemente prüfen nun zusätzlich half-yoctofeine absolute `stroke_width ± 0.000009765625`-Probes.
+- **Sicherung:** Der fokussierte Geometry-IR-Optimierer-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `SE0041_1` endet mit Exit `0`.
+- **Qualität:** Die isolierte SE0041_1-Metrik bleibt gegenüber Run TS/VZ stabil bei `Mean-Delta²=2436.707764` (`Fehler/Pixel=0.015932`), weil keine neue Konturstärkenprobe den bisherigen Stand weiter verbessert.
+- **Perception-Lerneffekt:** `SE0041_1` bleibt `nur Sonderfall`; die Änderung verallgemeinert die nachgelagerte Rechteck-/Rule-Konturregistrierung, nicht die reine Bilddetektion.
+- **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste zu `GE9012_6M` rotieren oder weiteres allgemeines Rechteck-/BackBottom-Antialiasing-Feintuning untersuchen.
