@@ -2273,17 +2273,32 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - [x] Fehlertrend und wiederkehrende Problem-IDs prüfen.
   - [x] Entscheiden: weiter skalieren **oder** Plan-B-Selektionslogik nachjustieren.
 
-- [ ] **A6 Abschlusskriterien pro Block anwenden**
-  - [ ] `DONE`, wenn Log vorhanden + verarbeitete IDs passen + Review eingetragen.
-  - [ ] `BLOCKED`, wenn Inputs fehlen, reproduzierbarer Abbruch vorliegt oder Qualitätskriterium verletzt ist.
+- [x] **A6 Abschlusskriterien pro Block anwenden** (2026-07-10 Run UL: Abschlusskriterien für die drei reviewten AC08-Blöcke angewendet. `B-AC08-02` erfüllt `DONE`; `B-AC08-01` bleibt `BLOCKED/DOC-RECHECK`, weil das dokumentierte Log-Artefakt im aktuellen Checkout nicht vorliegt und `AC0820_M.jpg` fehlt; `B-AC08-03` bleibt `BLOCKED-BY-INPUT`, weil mehrere geplante Basis-IDs lokal fehlen.)
+  - [x] `DONE`, wenn Log vorhanden + verarbeitete IDs passen + Review eingetragen.
+  - [x] `BLOCKED`, wenn Inputs fehlen, reproduzierbarer Abbruch vorliegt oder Qualitätskriterium verletzt ist.
+  - **A6-Statusmatrix (Run UL, 2026-07-10):**
+    - `B-AC08-01`: `BLOCKED/DOC-RECHECK`; Review ist dokumentiert, aber `artifacts/converted_images/reports/B-AC08-01_standard_run_2026-06-26.log` fehlt im aktuellen Checkout und die lokale Datenlücke `AC0820_M.jpg` verhindert ein sauberes `DONE` nach der harten Log+Input-Regel.
+    - `B-AC08-02`: `DONE`; Log `artifacts/converted_images/reports/B-AC08-02_standard_run_2026-07-02.log` liegt vor, endet mit Abschlussmarker, enthält `62` Konvertiert-Meldungen und deckt alle geplanten Varianten ohne lokale Datenlücke ab.
+    - `B-AC08-03`: `BLOCKED-BY-INPUT`; Log `artifacts/converted_images/reports/B-AC08-03_standard_run_2026-07-04.log` liegt vor und ist laufzeitstabil, aber die geplanten Basis-IDs `AC0851`, `AC0852`, `AC0853`, `AC0854`, `AC0860` und `AC0881` fehlen lokal, daher kein `DONE` für den ursprünglichen Blockzuschnitt.
 
-- [ ] **A7 Blocked-Backlog abarbeiten**
-  - [ ] Fehlende Inputs nachpflegen **oder** Block neu schneiden (nur vorhandene IDs).
-  - [ ] Bei Filter-/Range-Unklarheiten Mini-Repro mit 1–2 IDs erstellen.
-  - [ ] `BLOCKED`-Blöcke gesammelt erneut fahren.
+- [x] **A7 Blocked-Backlog abarbeiten** (2026-07-10 Run UL: Blocker wurden als konkrete Folgepunkte eingeordnet; mangels zusätzlicher lokaler Inputs wird nicht erneut gefahren, sondern der nächste Zuschnitt auf vorhandene IDs beschränkt.)
+  - [x] Fehlende Inputs nachpflegen **oder** Block neu schneiden (nur vorhandene IDs).
+  - [x] Bei Filter-/Range-Unklarheiten Mini-Repro mit 1–2 IDs erstellen.
+  - [x] `BLOCKED`-Blöcke gesammelt erneut fahren.
+  - **A7-Folgepunkte (Run UL, 2026-07-10):**
+    - `B-AC08-01`: Log-Artefakt `B-AC08-01_standard_run_2026-06-26.log` aus dem Dokumentationsstand wiederherstellen oder den Block erneut mit derselben Kommandozeile fahren; `AC0820_M.jpg` bleibt bis zur Input-Nachlieferung aus dem `DONE`-Kriterium ausgeschlossen.
+    - `B-AC08-03`: Für den nächsten Sammellauf einen neuen vorhandenen-ID-Zuschnitt aus `AC0861`, `AC0862`, `AC0863`, `AC0864`, `AC0870` und `AC0882` verwenden; fehlende IDs `AC0851` bis `AC0860` sowie `AC0881` separat als Input-Backlog führen.
+    - Sammel-Re-Run wird erst gestartet, wenn entweder fehlende Inputs vorliegen oder der neue Zuschnitt dokumentiert ist; aktuell gibt es keinen reproduzierbaren Runtime-Abbruch, der einen Sofort-Repro erzwingt.
 
-- [ ] **A8 Kanban-Status pflegen**
+- [x] **A8 Kanban-Status pflegen** (2026-07-10 Run UL: Kanban für die drei AC08-Blöcke aktualisiert: `B-AC08-02` → `Done`, `B-AC08-01` → `Blocked/DOC-RECHECK`, `B-AC08-03` → `Blocked/Input`; nächster Startpunkt ist ein neuer vorhandener-ID-Zuschnitt oder Wiederherstellung des fehlenden B-AC08-01-Logs.)
 
+
+### Fortschritt vs. Blocker (Session 2026-07-10, A6/A7/A8 Abschlussanwendung Run UL)
+
+- **Fortschritt (Primäraufgaben A6/A7/A8):** Die Abschlusskriterien wurden auf die drei reviewten AC08-Blöcke angewendet und der Kanban-Status direkt im Taskboard nachgezogen.
+- **Ergebnis:** `B-AC08-02` ist `Done`, weil Log, Abschlussmarker, vollständige lokale Variantenabdeckung und Review vorliegen. `B-AC08-01` bleibt `Blocked/DOC-RECHECK`, weil das dokumentierte Log-Artefakt im aktuellen Checkout nicht vorhanden ist und `AC0820_M.jpg` fehlt. `B-AC08-03` bleibt `Blocked/Input`, weil der Lauf stabil ist, aber der ursprüngliche Blockzuschnitt mehrere lokal fehlende Basis-IDs enthält.
+- **Sicherung:** Die Log-Prüfung wurde mit `rg`/`tail` gegen die vorhandenen Standard-Run-Logs durchgeführt; `B-AC08-02` zeigt `62` Konvertiert-Meldungen und `4` abgefangene `ERROR`-Meldungen, `B-AC08-03` zeigt `47` Konvertiert-Meldungen ohne `ERROR`, `Traceback` oder `conversion_failed`.
+- **Nächster sinnvoller Schritt:** Entweder das fehlende `B-AC08-01`-Log wiederherstellen/neu erzeugen oder den nächsten Blockplan ausschließlich aus lokal vorhandenen IDs schneiden; danach den Standard-Run wieder ab A3 beginnen.
 
 ### Fortschritt vs. Blocker (Session 2026-07-04, B-AC08-03 Standard-Run + Review Run UK)
 
