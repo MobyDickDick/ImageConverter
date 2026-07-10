@@ -484,3 +484,5 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 
 - [Nächstes Arbeitspaket – GE9012_6M Zeptofine-Opacity-Probes Run WA (2026-07-08)](next_arbeitspaket_2026-07-08_runWA.md)
 - [Nächstes Arbeitspaket – Batch-Checkpoint Result-Map-Spiegelung Run WY (2026-07-09)](next_arbeitspaket_2026-07-09_runWY.md)
+
+- [Nächstes Arbeitspaket – DLG0021 Half-Yoctofine-Gradient-Probes Run XC (2026-07-09)](next_arbeitspaket_2026-07-09_runXC.md)
