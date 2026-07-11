@@ -50,6 +50,19 @@
         "ZZ9999"
       ],
       "justMyCode": false
+    },
+    {
+      "name": "ImageConverter: review quality Plan-B boundary",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "tools.review_conversion_quality",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "args": [
+        "--output-dir",
+        "artifacts/evaluation/conversion_quality_review_v2"
+      ],
+      "justMyCode": false
     }
   ]
 }

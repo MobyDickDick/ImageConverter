@@ -215,6 +215,58 @@ def _record_dict(record: QualityRecord) -> dict[str, object]:
     return data
 
 
+
+def quality_sort_key(record: QualityRecord) -> tuple[int, float, str]:
+    """Sort renderable records from best to worst while keeping failures last."""
+    if record.status == "ok" and record.normalized_mse is not None:
+        return (0, record.normalized_mse, record.variant)
+    return (1, float("inf"), record.variant)
+
+
+def build_quality_ranking(records: Iterable[QualityRecord]) -> list[QualityRecord]:
+    """Return the complete quality order, lower normalized MSE first."""
+    return sorted(records, key=quality_sort_key)
+
+
+def select_threshold_boundary_triple(
+    records: Iterable[QualityRecord],
+    *,
+    threshold: float = DEFAULT_THRESHOLD,
+) -> list[QualityRecord]:
+    """Select last passing record and first two failing records in quality order."""
+    ranking = build_quality_ranking(
+        record
+        for record in records
+        if record.status == "ok" and record.normalized_mse is not None
+    )
+    passing = [record for record in ranking if (record.normalized_mse or 0.0) <= threshold]
+    failing = [record for record in ranking if (record.normalized_mse or 0.0) > threshold]
+    selected: list[QualityRecord] = []
+    if passing:
+        selected.append(passing[-1])
+    selected.extend(failing[:2])
+    return selected
+
+
+def build_boundary_conversion_command(
+    records: Sequence[QualityRecord],
+    *,
+    input_dir: Path = Path("artifacts/images_to_convert"),
+    descriptions_path: Path = Path("artifacts/images_to_convert/Finale_Wurzelformen_V3.xml"),
+    output_dir: Path = Path("artifacts/converted_images"),
+    iterations: int = 64,
+) -> str:
+    """Build a single converter invocation constrained to the boundary variants."""
+    variants = " ".join(record.variant for record in records)
+    return (
+        f"for variant in {variants}; do "
+        "ICC_FORCE_RECONVERT=1 python -m src.imageCompositeConverter "
+        f"{input_dir} --descriptions-path {descriptions_path} "
+        f"--output-dir {output_dir} --iterations {iterations} "
+        "--start $variant --end $variant --deterministic-order || exit $?; "
+        "done"
+    )
+
 def select_top_error_cases(
     records: Iterable[QualityRecord],
     *,
@@ -237,6 +289,8 @@ def write_reports(
     max_image_area: int,
     max_candidates: int = DEFAULT_MAX_CANDIDATES,
     top_error_cases: Sequence[QualityRecord] | None = None,
+    boundary_records: Sequence[QualityRecord] | None = None,
+    boundary_command: str | None = None,
 ) -> dict[str, object]:
     output_dir.mkdir(parents=True, exist_ok=True)
     records = [*successful_records, *diff_records]
@@ -247,7 +301,46 @@ def write_reports(
         writer.writeheader()
         writer.writerows(_record_dict(record) for record in records)
 
+    ranking = build_quality_ranking(records)
+    ranking_path = output_dir / "conversion_quality_ranking_v1.csv"
+    with ranking_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=["rank", "meets_threshold", *fields],
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        for rank, record in enumerate(ranking, start=1):
+            meets_threshold = (
+                record.status == "ok"
+                and record.normalized_mse is not None
+                and record.normalized_mse <= threshold
+            )
+            writer.writerow({"rank": rank, "meets_threshold": int(meets_threshold), **_record_dict(record)})
+
     top_error_cases = list(top_error_cases) if top_error_cases is not None else select_top_error_cases(records)
+    boundary_records = list(boundary_records) if boundary_records is not None else select_threshold_boundary_triple(records, threshold=threshold)
+    boundary_command = boundary_command if boundary_command is not None else build_boundary_conversion_command(boundary_records)
+
+    boundary_path = output_dir / "plan_b_boundary_triple_v1.csv"
+    with boundary_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=["boundary_role", *fields],
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        failing_index = 0
+        for record in boundary_records:
+            if record.normalized_mse is not None and record.normalized_mse <= threshold:
+                role = "last_passing"
+            else:
+                failing_index += 1
+                role = "first_failing" if failing_index == 1 else "second_failing"
+            writer.writerow({"boundary_role": role, **_record_dict(record)})
+
+    command_path = output_dir / "plan_b_boundary_conversion_command.sh"
+    command_path.write_text(boundary_command + "\n", encoding="utf-8")
 
     candidate_path = output_dir / "plan_b_candidate_triage_v1.csv"
     with candidate_path.open("w", encoding="utf-8", newline="") as handle:
@@ -289,11 +382,18 @@ def write_reports(
             "diff_renderable_pairs": sum(record.status == "ok" for record in diff_records),
             "selected_candidates": len(candidates),
             "top_error_cases": len(top_error_cases),
+            "ranked_records": len(ranking),
+            "boundary_triple_records": len(boundary_records),
         },
         "selected_candidates": [_record_dict(record) for record in candidates],
         "top_reproducible_error_cases": [_record_dict(record) for record in top_error_cases],
+        "boundary_triple": [_record_dict(record) for record in boundary_records],
+        "boundary_conversion_command": boundary_command,
         "records_csv": _relative(csv_path, PROJECT_ROOT) if csv_path.is_relative_to(PROJECT_ROOT) else str(csv_path),
+        "ranking_csv": _relative(ranking_path, PROJECT_ROOT) if ranking_path.is_relative_to(PROJECT_ROOT) else str(ranking_path),
         "candidate_triage_csv": _relative(candidate_path, PROJECT_ROOT) if candidate_path.is_relative_to(PROJECT_ROOT) else str(candidate_path),
+        "boundary_triple_csv": _relative(boundary_path, PROJECT_ROOT) if boundary_path.is_relative_to(PROJECT_ROOT) else str(boundary_path),
+        "boundary_conversion_command_path": _relative(command_path, PROJECT_ROOT) if command_path.is_relative_to(PROJECT_ROOT) else str(command_path),
         "top_error_cases_csv": _relative(top_errors_path, PROJECT_ROOT) if top_errors_path.is_relative_to(PROJECT_ROOT) else str(top_errors_path),
     }
     json_path = output_dir / "conversion_quality_review_v2.json"
@@ -348,6 +448,8 @@ def main() -> int:
     print(json.dumps(summary["metrics"], sort_keys=True))
     print("selected=" + ",".join(record.variant for record in candidates))
     print("top_errors=" + ",".join(record.variant for record in top_error_cases))
+    print("boundary_triple=" + ",".join(record.variant for record in summary["boundary_triple"]))
+    print("boundary_command=" + str(summary["boundary_conversion_command"]))
     return 0
 
 
