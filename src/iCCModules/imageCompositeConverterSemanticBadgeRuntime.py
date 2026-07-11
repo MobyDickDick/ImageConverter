@@ -176,6 +176,7 @@ def runSemanticBadgeIterationImpl(
         badge_params,
     )
     if semantic_issues:
+        params["_semantic_mismatch_failed"] = True
         failed_svg = generate_badge_svg_fn(width, height, badge_params)
         write_attempt_artifacts_fn(failed_svg, failed=True)
         _semantic_audit_row, mismatch_console_lines, mismatch_validation_lines = (

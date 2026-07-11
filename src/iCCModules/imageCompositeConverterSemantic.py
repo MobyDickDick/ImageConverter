@@ -323,6 +323,18 @@ def apply_semantic_badge_family_rules(
         # textual description omits the explicit label token.
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO_2")
         params["label"] = "CO_2"
+    elif base_upper in {
+        _legacy_ac_key("0844"),
+        _legacy_ac_key("0850"),
+        _legacy_ac_key("0861"),
+        _legacy_ac_key("0862"),
+        _legacy_ac_key("0863"),
+        _legacy_ac_key("0864"),
+    }:
+        # rF humidity badges can be documented via "Wie <ref>" aliases whose
+        # local description omits the label token; keep their family default.
+        heuristic_elements.append("SEMANTIC: Kreis + Buchstabe rF")
+        params["label"] = "rF"
     elif re.search(r"\bco(?:[_\s\-\^]*2|[₂²])\b", desc):
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO_2")
         params["label"] = "CO_2"
@@ -352,6 +364,16 @@ def apply_semantic_badge_family_rules(
         family_elements.append("SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels")
         family_elements.append("SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen")
         family_elements.append("SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint")
+    if base_upper in {_legacy_ac_key("0837"), _legacy_ac_key("0862")}:
+        family_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
+    if base_upper in {
+        _legacy_ac_key("0810"),
+        _legacy_ac_key("0814"),
+        _legacy_ac_key("0834"),
+        _legacy_ac_key("0839"),
+        _legacy_ac_key("0864"),
+    }:
+        heuristic_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
     if _description_expects_left_circle_connector(desc):
         heuristic_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
 
