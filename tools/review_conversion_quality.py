@@ -8,7 +8,7 @@ import csv
 import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Iterable, Sequence
+from typing import Iterable, Mapping, Sequence
 
 import cv2
 import numpy as np
@@ -214,6 +214,17 @@ def _record_dict(record: QualityRecord) -> dict[str, object]:
     data["image_area"] = record.image_area
     return data
 
+
+def _variant_name(record: QualityRecord | Mapping[str, object]) -> str:
+    """Return a variant name from an in-memory record or serialized summary row."""
+    if isinstance(record, QualityRecord):
+        return record.variant
+    return str(record["variant"])
+
+
+def variants_csv(records: Iterable[QualityRecord | Mapping[str, object]]) -> str:
+    """Format variant names from live records or JSON-ready dictionaries."""
+    return ",".join(_variant_name(record) for record in records)
 
 
 def quality_sort_key(record: QualityRecord) -> tuple[int, float, str]:
@@ -446,9 +457,9 @@ def main() -> int:
         top_error_cases=top_error_cases,
     )
     print(json.dumps(summary["metrics"], sort_keys=True))
-    print("selected=" + ",".join(record.variant for record in candidates))
-    print("top_errors=" + ",".join(record.variant for record in top_error_cases))
-    print("boundary_triple=" + ",".join(record.variant for record in summary["boundary_triple"]))
+    print("selected=" + variants_csv(candidates))
+    print("top_errors=" + variants_csv(top_error_cases))
+    print("boundary_triple=" + variants_csv(summary["boundary_triple"]))
     print("boundary_command=" + str(summary["boundary_conversion_command"]))
     return 0
 
