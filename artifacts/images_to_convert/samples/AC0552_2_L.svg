@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Vektorisierung des hochgeladenen 60×30-Pixel-Bildes -->
+
+<svg
+   width="21.166668mm"
+   height="10.583333mm"
+   viewBox="0 0 21.166668 10.583333"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="greenGrad"
+       x1="0"
+       y1="0"
+       x2="0"
+       y2="1"
+       gradientUnits="objectBoundingBox">
+      <stop
+         offset="0"
+         style="stop-color:#5fa668;stop-opacity:1"
+         id="stop1" />
+      <stop
+         offset="0.38"
+         style="stop-color:#4ccd5b;stop-opacity:1"
+         id="stop2" />
+      <stop
+         offset="0.46"
+         style="stop-color:#4bcb5b;stop-opacity:1"
+         id="stop3" />
+      <stop
+         offset="1"
+         style="stop-color:#5ca669;stop-opacity:1"
+         id="stop4" />
+    </linearGradient>
+    <clipPath
+       id="innerClip">
+      <rect
+         x="0.176389"
+         y="0.176389"
+         width="20.81389"
+         height="10.230555"
+         id="rect4" />
+    </clipPath>
+    <linearGradient
+       id="greenGrad-0"
+       x1="0"
+       y1="0"
+       x2="0"
+       y2="14.967094"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.4142137,0,0,0.70710673,-13.043387,-1.1841692)">
+      <stop
+         offset="0"
+         style="stop-color:#5fa668;stop-opacity:1"
+         id="stop1-9" />
+      <stop
+         offset="0.38"
+         style="stop-color:#4ccd5b;stop-opacity:1"
+         id="stop2-4" />
+      <stop
+         offset="0.46"
+         style="stop-color:#4bcb5b;stop-opacity:1"
+         id="stop3-8" />
+      <stop
+         offset="1"
+         style="stop-color:#5ca669;stop-opacity:1"
+         id="stop4-8" />
+    </linearGradient>
+  </defs>
+  <!-- grüne Fläche mit grauem Rand -->
+  <rect
+     x="0.176389"
+     y="0.176389"
+     width="20.81389"
+     height="10.230555"
+     fill="url(#greenGrad)"
+     stroke="#9b9b9b"
+     stroke-width="0.352778"
+     id="rect5"
+     style="stroke:none" />
+  <!-- weisses, nach unten gerichtetes V -->
+  <path
+     d="M 0.176389,5.020833 L 10.583334,10.054167 L 20.990279,5.020833"
+     fill="none"
+     stroke="#ffffff"
+     stroke-width="0.705556"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     clip-path="url(#innerClip)"
+     id="path5" />
+  <rect
+     x="0.17638899"
+     y="0.17638899"
+     width="20.81389"
+     height="10.230555"
+     fill="url(#greenGrad)"
+     stroke="#9b9b9b"
+     stroke-width="0.352778"
+     id="rect5-4"
+     style="fill:none" />
+</svg>
