@@ -1320,7 +1320,7 @@ class Action:
         img_svg: np.ndarray,
         focus_mask: np.ndarray | None = None,
     ) -> np.ndarray:
-        return diffing_helpers.createDiffImageImpl(
+        return diffing_helpers.createSignedDiffImageImpl(
             img_orig,
             img_svg,
             cv2_module=cv2,

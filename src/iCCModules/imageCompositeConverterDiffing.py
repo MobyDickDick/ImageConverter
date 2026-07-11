@@ -9,6 +9,45 @@ def createDiffImageImpl(
     np_module,
     focus_mask=None,
 ):
+    """Return a source copy with upper-quartile delta² pixels blacked out."""
+    if img_svg.shape[:2] != img_orig.shape[:2]:
+        img_svg = cv2_module.resize(
+            img_svg,
+            (img_orig.shape[1], img_orig.shape[0]),
+            interpolation=cv2_module.INTER_AREA,
+        )
+
+    diff = img_svg.astype(np_module.int32) - img_orig.astype(np_module.int32)
+    delta2 = np_module.sum(diff * diff, axis=2)
+
+    eligible_mask = None
+    if focus_mask is not None:
+        if focus_mask.shape[:2] != img_orig.shape[:2]:
+            focus_mask = cv2_module.resize(
+                focus_mask.astype(np_module.uint8),
+                (img_orig.shape[1], img_orig.shape[0]),
+                interpolation=cv2_module.INTER_NEAREST,
+            )
+        eligible_mask = focus_mask > 0
+
+    ranked_diff = img_orig.copy()
+    quartile_mask, _selection_count = _top_quartile_delta2_mask(
+        delta2,
+        np_module=np_module,
+        eligible_mask=eligible_mask,
+    )
+    ranked_diff[quartile_mask] = 0
+    return ranked_diff
+
+
+def createSignedDiffImageImpl(
+    img_orig,
+    img_svg,
+    *,
+    cv2_module,
+    np_module,
+    focus_mask=None,
+):
     """Return a signed, normalized RGB delta visualization.
 
     Pixels where the generated image is brighter are tinted cyan; pixels where

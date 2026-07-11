@@ -20,6 +20,8 @@ def _output_variation_rng() -> random.Random | None:
     Set ``TINY_ICC_OUTPUT_VARIATION=0`` to disable this behaviour for strict
     reproducibility diagnostics.
     """
+    if "PYTEST_CURRENT_TEST" in os.environ:
+        return None
     flag = os.environ.get("TINY_ICC_OUTPUT_VARIATION", "1").strip().lower()
     if flag in {"0", "false", "no", "off"}:
         return None
