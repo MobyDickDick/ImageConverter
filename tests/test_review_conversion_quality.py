@@ -9,9 +9,12 @@ import pytest
 
 from tools.review_conversion_quality import (
     QualityRecord,
+    build_boundary_conversion_command,
+    build_quality_ranking,
     normalized_mse,
     review_variant,
     select_plan_b_candidates,
+    select_threshold_boundary_triple,
     select_top_error_cases,
     write_reports,
 )
@@ -123,6 +126,45 @@ def test_select_plan_b_candidates_prioritizes_failed_success_then_compact_diffs(
     ]
 
 
+
+def test_quality_ranking_and_boundary_triple_select_threshold_neighbors() -> None:
+    records = [
+        _record("AC_FAIL_2", 0.09, source="diff_inventory"),
+        _record("AC_PASS_1", 0.01, source="diff_inventory"),
+        _record("AC_FAIL_1", 0.06, source="diff_inventory"),
+        _record("AC_PASS_2", 0.04, source="diff_inventory"),
+    ]
+
+    ranking = build_quality_ranking(records)
+    boundary = select_threshold_boundary_triple(records, threshold=0.05)
+
+    assert [record.variant for record in ranking] == [
+        "AC_PASS_1",
+        "AC_PASS_2",
+        "AC_FAIL_1",
+        "AC_FAIL_2",
+    ]
+    assert [record.variant for record in boundary] == [
+        "AC_PASS_2",
+        "AC_FAIL_1",
+        "AC_FAIL_2",
+    ]
+
+
+def test_boundary_conversion_command_runs_three_isolated_ranges() -> None:
+    records = [
+        _record("AC_PASS_2", 0.04, source="diff_inventory"),
+        _record("AC_FAIL_1", 0.06, source="diff_inventory"),
+        _record("AC_FAIL_2", 0.09, source="diff_inventory"),
+    ]
+
+    command = build_boundary_conversion_command(records, iterations=96)
+
+    assert command.startswith("for variant in AC_PASS_2 AC_FAIL_1 AC_FAIL_2; do ")
+    assert "--iterations 96" in command
+    assert "--start $variant --end $variant" in command
+    assert "ICC_FORCE_RECONVERT=1" in command
+
 def test_select_top_error_cases_ranks_reproducible_mean_delta2() -> None:
     records = [
         _record("AC_SMALL", 0.01, source="successful_conversion"),
@@ -151,6 +193,8 @@ def test_write_reports_keeps_candidate_priority_machine_readable(tmp_path: Path)
 
     assert summary["metrics"]["selected_candidates"] == 2
     assert summary["metrics"]["top_error_cases"] == 2
+    assert summary["metrics"]["ranked_records"] == 2
+    assert summary["metrics"]["boundary_triple_records"] == 2
     report = json.loads((tmp_path / "conversion_quality_review_v2.json").read_text())
     assert [item["variant"] for item in report["selected_candidates"]] == [
         "AC_BAD",
@@ -160,6 +204,11 @@ def test_write_reports_keeps_candidate_priority_machine_readable(tmp_path: Path)
     assert [row["priority"] for row in rows] == ["1", "2"]
     top_rows = list(csv.DictReader((tmp_path / "top_reproducible_error_cases_v1.csv").open()))
     assert [row["rank"] for row in top_rows] == ["1", "2"]
+    ranking_rows = list(csv.DictReader((tmp_path / "conversion_quality_ranking_v1.csv").open()))
+    assert [row["rank"] for row in ranking_rows] == ["1", "2"]
+    boundary_rows = list(csv.DictReader((tmp_path / "plan_b_boundary_triple_v1.csv").open()))
+    assert [row["boundary_role"] for row in boundary_rows] == ["first_failing", "second_failing"]
+    assert (tmp_path / "plan_b_boundary_conversion_command.sh").read_text().startswith("for variant in AC_BAD AC_DIFF")
 
 
 def test_ac0022_committed_dual_arrow_svg_uses_mask_refinement_below_review_gate() -> None:

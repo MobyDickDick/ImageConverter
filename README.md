@@ -81,6 +81,28 @@ Auch frische Composite-Konvertierungen beenden ihre Epsilon-Suche nun selbststä
 Die Parameter können im Block `early_abort` der `quality_tercile_config.json` angepasst werden (`enabled`, `probe_iterations`, `threshold_multiplier`). Für einzelne Läufe stehen außerdem `ICC_EARLY_QUALITY_ABORT`, `ICC_EARLY_QUALITY_PROBE_ITERATIONS` und `ICC_EARLY_QUALITY_MULTIPLIER` zur Verfügung.
 
 
+### Qualitätsranking und Plan-B-Grenzaufruf lokal erzeugen
+
+```bash
+python -m tools.review_conversion_quality \
+  --output-dir artifacts/evaluation/conversion_quality_review_v2
+```
+
+Der Lauf erstellt eine vollständige Qualitätsreihenfolge unter
+`artifacts/evaluation/conversion_quality_review_v2/conversion_quality_ranking_v1.csv`
+und wählt für die Plan-B-Rotation die drei Grenzfälle aus:
+
+1. das letzte Bild, das den Qualitäts-Schwellwert noch erfüllt,
+2. das erste Bild, das ihn nicht mehr erfüllt,
+3. das zweite Bild, das ihn nicht mehr erfüllt.
+
+Die Auswahl steht in `plan_b_boundary_triple_v1.csv`. Der direkt ausführbare
+Konvertierungsaufruf steht zusätzlich in
+`plan_b_boundary_conversion_command.sh` und wird beim Lauf auch als
+`boundary_command=...` auf der Konsole ausgegeben. In VS Code kann derselbe
+Lauf über die Debug-Konfiguration
+`ImageConverter: review quality Plan-B boundary` gestartet werden.
+
 ### Weak-Family-Pipeline (Top-N + Vorher/Nachher)
 
 ```bash
