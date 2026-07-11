@@ -16,6 +16,7 @@ from tools.review_conversion_quality import (
     select_plan_b_candidates,
     select_threshold_boundary_triple,
     select_top_error_cases,
+    variants_csv,
     write_reports,
 )
 
@@ -209,6 +210,7 @@ def test_write_reports_keeps_candidate_priority_machine_readable(tmp_path: Path)
     boundary_rows = list(csv.DictReader((tmp_path / "plan_b_boundary_triple_v1.csv").open()))
     assert [row["boundary_role"] for row in boundary_rows] == ["first_failing", "second_failing"]
     assert (tmp_path / "plan_b_boundary_conversion_command.sh").read_text().startswith("for variant in AC_BAD AC_DIFF")
+    assert variants_csv(summary["boundary_triple"]) == "AC_BAD,AC_DIFF"
 
 
 def test_ac0022_committed_dual_arrow_svg_uses_mask_refinement_below_review_gate() -> None:
