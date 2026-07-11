@@ -134,6 +134,8 @@ def matchesExactPrefixFilterImpl(
     stem = normalize_range_token_fn(get_base_name_fn(os.path.splitext(filename)[0]))
     if not stem:
         return False
+    if re.match(r"^[A-Z]{2,3}\d{3}$", start_token):
+        return stem.startswith(start_token)
     canonical_start_token = _canonical_legacy_short_family_token(start_token)
     # Family filters match the normalized family exactly.  Standard size
     # variants normalize back to the family token, while auxiliary files keep

@@ -9,13 +9,12 @@ def createDiffImageImpl(
     np_module,
     focus_mask=None,
 ):
-    """Return a source-image copy with ranked per-pixel delta² errors blacked out.
+    """Return a signed, normalized RGB delta visualization.
 
-    The visual diff is intentionally spatial: for every pixel, compute
-    ``(ΔR)² + (ΔG)² + (ΔB)²``, sort those pixel errors descending, and mark only
-    the upper quartile of source-image pixels black.  A successful conversion
-    should therefore show whether the strongest 25% of pixel errors form
-    localized structures rather than an over-random scatter across the image.
+    Pixels where the generated image is brighter are tinted cyan; pixels where
+    it is darker are tinted red.  The tint is normalized by the strongest
+    eligible absolute luminance delta so small and large symbols remain
+    comparable, while zero-delta and out-of-focus pixels keep the source tone.
     """
     if img_svg.shape[:2] != img_orig.shape[:2]:
         img_svg = cv2_module.resize(
@@ -24,10 +23,10 @@ def createDiffImageImpl(
             interpolation=cv2_module.INTER_AREA,
         )
 
-    diff = img_svg.astype(np_module.int32) - img_orig.astype(np_module.int32)
-    delta2 = np_module.sum(diff * diff, axis=2)
+    diff = img_svg.astype(np_module.float32) - img_orig.astype(np_module.float32)
+    signed_delta = np_module.mean(diff, axis=2)
 
-    eligible_mask = None
+    eligible_mask = np_module.ones(signed_delta.shape, dtype=bool)
     if focus_mask is not None:
         if focus_mask.shape[:2] != img_orig.shape[:2]:
             focus_mask = cv2_module.resize(
@@ -37,15 +36,39 @@ def createDiffImageImpl(
             )
         eligible_mask = focus_mask > 0
 
-    ranked_diff = img_orig.copy()
-    quartile_mask, _selection_count = _top_quartile_delta2_mask(
-        delta2, np_module=np_module, eligible_mask=eligible_mask
+    changed_mask = eligible_mask & (np_module.abs(signed_delta) > 0)
+    if not bool(np_module.any(changed_mask)):
+        return img_orig.copy()
+
+    max_abs_delta = float(np_module.max(np_module.abs(signed_delta[changed_mask])))
+    if max_abs_delta <= 0.0:
+        return img_orig.copy()
+
+    magnitude = np_module.zeros(signed_delta.shape, dtype=np_module.float32)
+    magnitude[changed_mask] = np_module.clip(
+        np_module.abs(signed_delta[changed_mask]) / max_abs_delta,
+        0.0,
+        1.0,
     )
-    ranked_order = np_module.flatnonzero(quartile_mask.reshape(-1))
-    if ranked_order.size:
-        flat_ranked = ranked_diff.reshape(-1, ranked_diff.shape[2])
-        flat_ranked[ranked_order] = 0
-    return ranked_diff
+
+    result = img_orig.astype(np_module.float32).copy()
+    positive_tint = np_module.array([43.0, 43.0, 13.0], dtype=np_module.float32)
+    negative_tint = np_module.array([-7.0, -7.0, 23.0], dtype=np_module.float32)
+
+    positive_mask = changed_mask & (signed_delta > 0)
+    negative_mask = changed_mask & (signed_delta < 0)
+    if bool(np_module.any(positive_mask)):
+        result[positive_mask] = (
+            result[positive_mask] * 0.85
+            + magnitude[positive_mask, None] * positive_tint
+        )
+    if bool(np_module.any(negative_mask)):
+        result[negative_mask] = (
+            result[negative_mask] * 0.85
+            + magnitude[negative_mask, None] * negative_tint
+        )
+
+    return np_module.clip(np_module.rint(result), 0, 255).astype(np_module.uint8)
 
 
 def _top_quartile_delta2_mask(delta2, *, np_module, eligible_mask=None):

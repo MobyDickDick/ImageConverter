@@ -51,6 +51,8 @@ def runPreparedIterationModeImpl(
         )
         if semantic_result is not None:
             return semantic_result
+        if params.get("_semantic_mismatch_failed"):
+            return None
         print_fn("  -> Plan B aktiv: Semantic-Badge konnte nicht parametrisiert werden; nutze Sample-/Element-Fallback.")
         return run_non_composite_iteration_fn(
             mode="manual_review",

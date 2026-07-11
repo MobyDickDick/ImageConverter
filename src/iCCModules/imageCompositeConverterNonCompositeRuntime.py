@@ -3,13 +3,120 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import random
 import re
 from pathlib import Path
+import time
 import numpy as np
 
 from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
 from src.iCCModules import imageCompositeConverterGeometryIrOptimizer as geometry_ir_optimizer
 from tools.perception_detection_contract import build_perception_seeded_geometry_ir
+
+
+def _output_variation_rng() -> random.Random | None:
+    """Return a per-conversion RNG for small output variations.
+
+    Set ``TINY_ICC_OUTPUT_VARIATION=0`` to disable this behaviour for strict
+    reproducibility diagnostics.
+    """
+    flag = os.environ.get("TINY_ICC_OUTPUT_VARIATION", "1").strip().lower()
+    if flag in {"0", "false", "no", "off"}:
+        return None
+    return random.Random(time.time_ns() ^ os.getpid())
+
+
+def _jitter_number(
+    value: object,
+    rng: random.Random,
+    delta: float,
+    *,
+    low: float = 0.0,
+    high: float = 1.0,
+) -> object:
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return value
+    return max(low, min(high, numeric + rng.uniform(-abs(delta), abs(delta))))
+
+
+def _jitter_geometry_ir_for_output_variation(geometry_ir: object, rng: random.Random) -> object:
+    """Apply tiny visual differences so repeated conversions are not identical."""
+    if not isinstance(geometry_ir, list):
+        return geometry_ir
+    varied = json.loads(json.dumps(geometry_ir))
+    for element in varied:
+        if not isinstance(element, dict):
+            continue
+        bbox = element.get("bbox")
+        if isinstance(bbox, list) and len(bbox) == 4:
+            element["bbox"] = [
+                _jitter_number(bbox[0], rng, 0.003),
+                _jitter_number(bbox[1], rng, 0.003),
+                _jitter_number(bbox[2], rng, 0.002, low=0.01),
+                _jitter_number(bbox[3], rng, 0.002, low=0.01),
+            ]
+        for line_key in (
+            "left_line",
+            "right_line",
+            "upper_line",
+            "lower_line",
+            "stem_line",
+            "handle_line",
+        ):
+            line = element.get(line_key)
+            if isinstance(line, list):
+                varied_line = []
+                for point in line:
+                    if isinstance(point, list) and len(point) == 2:
+                        varied_line.append(
+                            [
+                                _jitter_number(point[0], rng, 0.003),
+                                _jitter_number(point[1], rng, 0.003),
+                            ]
+                        )
+                    else:
+                        varied_line.append(point)
+                element[line_key] = varied_line
+        if "stroke_width" in element:
+            element["stroke_width"] = _jitter_number(
+                element.get("stroke_width"),
+                rng,
+                0.0015,
+                low=0.001,
+                high=1.0,
+            )
+    return varied
+
+
+def _apply_svg_output_variation(svg_content: str, rng: random.Random, *, width: int, height: int) -> str:
+    """Wrap drawable SVG content in a tiny per-run transform."""
+    if "</svg>" not in svg_content:
+        return svg_content
+    dx = rng.uniform(-max(0.08, width * 0.0025), max(0.08, width * 0.0025))
+    dy = rng.uniform(-max(0.08, height * 0.0025), max(0.08, height * 0.0025))
+    angle = rng.uniform(-0.18, 0.18)
+    cx = width * 0.5
+    cy = height * 0.5
+    open_group = (
+        f'  <g data-output-variation="1" '
+        f'transform="translate({dx:.4f} {dy:.4f}) rotate({angle:.4f} {cx:.4f} {cy:.4f})">\n'
+    )
+    if "</defs>" in svg_content:
+        return svg_content.replace("</defs>", "</defs>\n" + open_group, 1).replace(
+            "</svg>",
+            "  </g>\n</svg>",
+            1,
+        )
+    first_newline = svg_content.find("\n")
+    if first_newline >= 0:
+        return (
+            svg_content[: first_newline + 1]
+            + open_group
+            + svg_content[first_newline + 1 :].replace("</svg>", "  </g>\n</svg>", 1)
+        )
+    return svg_content.replace(">", ">\n" + open_group, 1).replace("</svg>", "  </g>\n</svg>", 1)
 
 
 def _build_vector_placeholder_svg(width: int, height: int, *, description: str = "") -> str:
@@ -1024,6 +1131,19 @@ def runNonCompositeIterationImpl(
                 f"(status={generated_status}, err={generated_err:.3f})."
             )
             write_validation_log_fn(generated_log_lines)
+            variation_rng = _output_variation_rng()
+            if variation_rng is not None:
+                varied_svg_content = _apply_svg_output_variation(
+                    generated_svg_content,
+                    variation_rng,
+                    width=width,
+                    height=height,
+                )
+                varied_rendered = render_svg_to_numpy_fn(varied_svg_content, width, height)
+                if varied_rendered is not None:
+                    generated_svg_content = varied_svg_content
+                    generated_rendered = varied_rendered
+                    generated_err = calculate_error_fn(perc_img, varied_rendered)
             write_attempt_artifacts_fn(generated_svg_content, generated_rendered)
             return base_name, description, params, 1, generated_err
 
@@ -1215,6 +1335,23 @@ def runNonCompositeIterationImpl(
             perception_seed_count = int(best_geometry_candidate["perception_seed_count"])
             status = str(best_geometry_candidate["status"])
             log_lines = [f"status={status}"]
+            variation_rng = _output_variation_rng()
+            if variation_rng is not None and isinstance(geometry_ir, list):
+                varied_geometry_ir = _jitter_geometry_ir_for_output_variation(geometry_ir, variation_rng)
+                if varied_geometry_ir != geometry_ir:
+                    varied_svg_content = geometry_ir_helpers.renderGeometryIrToSvgImpl(
+                        width,
+                        height,
+                        varied_geometry_ir,
+                    )
+                    varied_rendered = render_svg_to_numpy_fn(varied_svg_content, width, height)
+                    if varied_rendered is not None:
+                        svg_content = varied_svg_content
+                        svg_rendered = varied_rendered
+                        svg_err = calculate_error_fn(perc_img, varied_rendered)
+                        geometry_ir = varied_geometry_ir
+                        params["optimized_geometry_ir"] = varied_geometry_ir
+                        log_lines.append("output_variation=1")
             if status == "non_composite_elementwise_symbol_fit":
                 log_lines.extend(str(line) for line in best_geometry_candidate.get("step_logs", []))
                 fit_params = best_geometry_candidate.get("fit_params", {})
@@ -1387,5 +1524,19 @@ def runNonCompositeIterationImpl(
                 write_attempt_artifacts_fn(sample_svg_content, None)
                 return base_name, description, params, 1, svg_err
 
+    variation_rng = _output_variation_rng()
+    if variation_rng is not None:
+        varied_svg_content = _apply_svg_output_variation(
+            svg_content,
+            variation_rng,
+            width=width,
+            height=height,
+        )
+        if varied_svg_content != svg_content:
+            varied_rendered = render_svg_to_numpy_fn(varied_svg_content, width, height)
+            if varied_rendered is not None:
+                svg_content = varied_svg_content
+                svg_rendered = varied_rendered
+                svg_err = calculate_error_fn(perc_img, varied_rendered)
     write_attempt_artifacts_fn(svg_content, svg_rendered)
     return base_name, description, params, 1, svg_err

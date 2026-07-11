@@ -303,9 +303,15 @@ def finalizeAc08StyleImpl(
         )
         if preserve_centered_t_badge_geometry and key in p
     }
+    numeric_catalog_symbol = symbol_name.startswith("AC") and symbol_name[2:].isdigit()
+    vertical_voc_preserve_keys = (
+        ("circle_radius_lower_bound_px",)
+        if numeric_catalog_symbol
+        else ("min_circle_radius", "circle_radius_lower_bound_px")
+    )
     preserved_vertical_voc_keys = {
         key: p[key]
-        for key in ("min_circle_radius", "circle_radius_lower_bound_px")
+        for key in vertical_voc_preserve_keys
         if vertical_text_connector_badge and str(p.get("text_mode", "")).lower() == "voc" and key in p
     }
     for key in (
