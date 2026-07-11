@@ -1,3 +1,4 @@
+- Plan-B Run XK adds quarter-yoctofine catalog-free absolute stroke-width probes for RectBorder/Rule Geometry-IR elements, confirms the isolated SE0041_1 metric remains stable, and refreshes the requested AC0838_M VOC Plan-B run.
 - Plan-B Run XJ adds quarter-yoctofine catalog-free PolygonPath point and stroke-width probes, documents the two newly added sample SVGs as separate ad-hoc Plan-B roundtrip contracts, and keeps the isolated GE1410_L metric in the same residual band.
 - Plan-B roundtrip probes now vary SVG geometry before rasterization (scale and relative position) and document the SVG→image→SVG contract so converter work targets raster element recognition rather than numeric description copying.
 - Plan-B Run VQ adds a catalog-free picofine warm fill probe (`#f2b9b7`) for rectangular `ColorPatch` and `RectBorder` Geometry-IR elements, extending the GE9013_1M BackBottom warm-square optimization space without runtime image-ID coupling.
