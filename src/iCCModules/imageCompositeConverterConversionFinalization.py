@@ -116,6 +116,56 @@ def _svgIsTrivialFallback(svg_path: Path) -> bool:
     return has_minimal_canvas and has_white_rect
 
 
+
+def _svgIsLowInformationBlank(svg_path: Path) -> bool:
+    """Return True for SVGs that contain only a pale canvas/frame and no symbol ink.
+
+    This catches failed conversions that preserve a background rectangle while
+    dropping all semantic foreground content (letters, stems, paths, etc.).
+    The rule is deliberately structural and catalog-independent: any path,
+    text, circle/ellipse, line, polygon/polyline, embedded image, or dark rect
+    keeps the SVG out of this blank bucket.
+    """
+    try:
+        content = svg_path.read_text(encoding="utf-8").lower()
+    except OSError:
+        return False
+
+    if any(token in content for token in ("<path", "<text", "<circle", "<ellipse", "<line", "<polyline", "<polygon", "<image")):
+        return False
+
+    rect_attrs = re.findall(r"<rect\b([^>/]*)(?:/?>)", content)
+    if not rect_attrs:
+        return False
+
+    def _channel_is_light(value: str) -> bool:
+        value = value.strip().lower()
+        if value in {"none", "transparent"}:
+            return True
+        if value.startswith("#"):
+            hex_value = value[1:]
+            if len(hex_value) == 3:
+                hex_value = "".join(ch * 2 for ch in hex_value)
+            if len(hex_value) == 6:
+                try:
+                    channels = [int(hex_value[idx : idx + 2], 16) for idx in (0, 2, 4)]
+                except ValueError:
+                    return False
+                return min(channels) >= 200
+        if value.startswith("rgb"):
+            nums = [int(n) for n in re.findall(r"\d+", value)[:3]]
+            return len(nums) == 3 and min(nums) >= 200
+        return value in {"white", "whitesmoke"}
+
+    for attrs in rect_attrs:
+        style = dict(re.findall(r"([a-z-]+)\s*:\s*([^;]+)", attrs))
+        attr_values = dict(re.findall(r'([a-z:-]+)\s*=\s*[\'\"]([^\'\"]+)[\'\"]', attrs))
+        fill = style.get("fill", attr_values.get("fill", "#000000"))
+        stroke = style.get("stroke", attr_values.get("stroke", "none"))
+        if not (_channel_is_light(fill) and _channel_is_light(stroke)):
+            return False
+    return True
+
 def _collectValidationStatusesByVariant(reports_out_dir: str) -> dict[str, str]:
     reports_dir = Path(reports_out_dir)
     if not reports_dir.exists():
@@ -208,7 +258,7 @@ def _markPoorConversionsWithFailedPrefix(
         error_per_pixel_fail = math.isfinite(error_per_pixel) and error_per_pixel > _FALLBACK_MAX_ERROR_PER_PIXEL
         quality_fail = mean_delta2_fail or error_per_pixel_fail
         raster_fail = (not fallback_mode_active) and _svgContainsEmbeddedRaster(svg_path)
-        trivial_fail = (not fallback_mode_active) and _svgIsTrivialFallback(svg_path)
+        trivial_fail = (not fallback_mode_active) and (_svgIsTrivialFallback(svg_path) or _svgIsLowInformationBlank(svg_path))
         is_skipped_variant = str(status_by_variant.get(variant, "")).startswith("skipped_")
         if is_skipped_variant:
             # Skipped variants have no fresh quality metric from this run,
