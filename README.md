@@ -89,8 +89,11 @@ python -m tools.review_conversion_quality \
 ```
 
 Der Lauf erstellt eine vollständige Qualitätsreihenfolge unter
-`artifacts/evaluation/conversion_quality_review_v2/conversion_quality_ranking_v1.csv`
-und wählt für die Plan-B-Rotation die drei Grenzfälle aus:
+`artifacts/evaluation/conversion_quality_review_v2/conversion_quality_ranking_v1.csv`.
+Die Plan-B-Kandidatenauswahl berücksichtigt Diff-Fälle standardmäßig bis zu
+einer Bildfläche von `6_400` Pixeln (`--max-image-area`), sodass auch
+mittelgroße Icons in die nächste Rotation nachrücken können. Außerdem wählt der
+Report für die Plan-B-Rotation die drei Grenzfälle aus:
 
 1. das letzte Bild, das den Qualitäts-Schwellwert noch erfüllt,
 2. das erste Bild, das ihn nicht mehr erfüllt,
