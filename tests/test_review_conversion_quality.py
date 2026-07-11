@@ -127,6 +127,13 @@ def test_select_plan_b_candidates_prioritizes_failed_success_then_compact_diffs(
     ]
 
 
+def test_default_plan_b_candidate_area_includes_medium_icons() -> None:
+    diffs = [_record("AC_MEDIUM_ICON", 0.20, source="diff_inventory", width=80, height=80)]
+
+    selected = select_plan_b_candidates([], diffs, threshold=0.05, max_candidates=1)
+
+    assert [record.variant for record in selected] == ["AC_MEDIUM_ICON"]
+
 
 def test_quality_ranking_and_boundary_triple_select_threshold_neighbors() -> None:
     records = [
