@@ -274,6 +274,39 @@ def test_mark_poor_conversions_renames_image_only_svg_without_detectable_raster_
     assert not (svg_dir / "AC0414_2_M.svg").exists()
 
 
+
+def test_mark_poor_conversions_renames_low_information_blank_frame_svg(tmp_path):
+    svg_dir = tmp_path / "svg"
+    svg_dir.mkdir()
+    (svg_dir / "AC0731_L.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="23" height="47" viewBox="0 0 23 47">'
+        '<rect x="1" y="1" width="21" height="45" fill="#f7f7f7" stroke="#d8d8d8"/>'
+        '</svg>',
+        encoding="utf-8",
+    )
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "successful_conversions.txt").write_text("", encoding="utf-8")
+
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+        svg_out_dir=str(svg_dir),
+        result_map={"AC0731_L.jpg": {"variant": "AC0731_L", "mean_delta2": 0.0}},
+        reports_out_dir=str(reports_dir),
+    )
+
+    assert (svg_dir / "Failed_AC0731_L.svg").exists()
+    assert not (svg_dir / "AC0731_L.svg").exists()
+
+
+def test_low_information_blank_detection_keeps_dark_rect_symbol(tmp_path):
+    svg_path = tmp_path / "dark_rect.svg"
+    svg_path.write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg"><rect width="8" height="8" fill="#333333"/></svg>',
+        encoding="utf-8",
+    )
+
+    assert finalization_helpers._svgIsLowInformationBlank(svg_path) is False
+
 def test_canonicalize_failed_attempt_svg_names_from_suffix_format(tmp_path):
     svg_dir = tmp_path / "svg"
     svg_dir.mkdir()
