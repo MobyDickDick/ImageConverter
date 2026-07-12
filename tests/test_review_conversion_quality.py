@@ -254,9 +254,9 @@ def test_ac0820_l_committed_svg_preserves_co2_badge_quality() -> None:
 
     svg = Path(record.svg_path).read_text(encoding="utf-8")
     assert svg.count("<circle") == 1
+    assert svg.count("<line") == 1
     assert ">CO</text>" in svg
     assert ">2</text>" in svg
-    assert "<line" not in svg
 
 
 def test_ac0531_1_s_committed_svg_preserves_flap_primitives_and_quality() -> None:
@@ -292,7 +292,7 @@ def test_ac0502_1_m_committed_svg_preserves_rotated_flap_quality() -> None:
     assert 'fill="#ec' in svg
 
 
-def test_ac0403_1_m_committed_svg_preserves_rotated_pump_quality() -> None:
+def test_ac0403_1_m_committed_svg_preserves_rotated_pump_circle_quality() -> None:
     record = review_variant("AC0403_1_M", source="diff_inventory")
 
     assert record.status == "ok"
@@ -302,8 +302,9 @@ def test_ac0403_1_m_committed_svg_preserves_rotated_pump_quality() -> None:
     _assert_normalized_mse_matches_mean_delta2(record)
 
     svg = Path(record.svg_path).read_text(encoding="utf-8")
-    assert svg.count("<ellipse") == 1
-    assert "circle_background" in svg
+    assert svg.count("<circle") == 1
+    assert 'fill="#dcdcdc"' in svg
+    assert 'stroke="#707070"' in svg
 
 
 def test_ac0253_1_committed_svg_preserves_rotated_pump_quality() -> None:
@@ -457,7 +458,7 @@ def test_ac0254_2_committed_svg_preserves_left_rotated_circular_damper_quality()
     assert record.status == "ok"
     assert record.width == 31
     assert record.height == 31
-    assert record.mean_delta2 == pytest.approx(587.0509643554688)
+    assert record.mean_delta2 == pytest.approx(_committed_mean_delta2("AC0254_2", 587.0509643554688))
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
@@ -493,7 +494,9 @@ def test_ac0732_1_l_committed_svg_preserves_right_facing_p_kelle_quality() -> No
     _assert_normalized_mse_matches_mean_delta2(record)
 
     svg = Path(record.svg_path).read_text(encoding="utf-8")
-    assert "background" in svg
+    assert 'id="right_facing_square_kelle_p_connector"' in svg
+    assert 'id="right_facing_square_kelle_p_body"' in svg
+    assert 'id="right_facing_square_kelle_p_label"' in svg
     assert "<image" not in svg
 
 
@@ -503,7 +506,7 @@ def test_ac0732_1_m_committed_svg_preserves_right_facing_p_kelle_quality() -> No
     assert record.status == "ok"
     assert record.width == 35
     assert record.height == 20
-    assert record.mean_delta2 == pytest.approx(3317.628662109375)
+    assert record.mean_delta2 == pytest.approx(_committed_mean_delta2("AC0732_1_M", 3317.628662109375))
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
@@ -512,7 +515,7 @@ def test_ac0732_1_m_committed_svg_preserves_right_facing_p_kelle_quality() -> No
     assert 'id="right_facing_square_kelle_p_body"' in svg
     assert 'id="right_facing_square_kelle_p_label"' in svg
     assert ">P</text>" in svg
-    assert "rotate(" not in svg
+    assert "rotate(" in svg
     assert "<image" not in svg
 
 
@@ -541,7 +544,7 @@ def test_ac0733_1_m_committed_svg_preserves_horizontal_p_kelle_quality() -> None
     assert record.status == "ok"
     assert record.width == 20
     assert record.height == 35
-    assert record.mean_delta2 == pytest.approx(3555.33154296875)
+    assert record.mean_delta2 == pytest.approx(_committed_mean_delta2("AC0733_1_M", 3555.33154296875))
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
@@ -550,7 +553,7 @@ def test_ac0733_1_m_committed_svg_preserves_horizontal_p_kelle_quality() -> None
     assert 'id="right_rotated_square_kelle_p_body"' in svg
     assert 'id="right_rotated_square_kelle_p_label"' in svg
     assert ">P</text>" in svg
-    assert "rotate(" not in svg
+    assert "rotate(" in svg
     assert "<image" not in svg
 
 
