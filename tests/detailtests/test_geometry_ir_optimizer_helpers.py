@@ -3261,3 +3261,56 @@ def test_default_optimizer_refines_rule_stroke_width_with_quarter_yoctofine_abso
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.0549951171875)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_quarter_yoctofine_probe() -> None:
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_quarter_yoctofine_fill",
+            "bbox": [0.10, 0.15, 0.80, 0.70],
+            "fill": "#e0e0e0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0].get("fill_opacity") == pytest.approx(0.98280029296875)
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(0.98280029296875)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_quarter_yoctofine_probe() -> None:
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_quarter_yoctofine_outline",
+            "bbox": [0.10, 0.15, 0.80, 0.70],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0].get("stroke_opacity") == pytest.approx(0.98282470703125)
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(0.98282470703125)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
