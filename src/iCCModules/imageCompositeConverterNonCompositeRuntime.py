@@ -257,10 +257,16 @@ def _try_build_plain_framed_panel_svg(width: int, height: int, *, description: s
     fill_lum = float(np.nanmean(fill_rgb))
     core_std = float(np.nanstd(core))
     border_contrast = fill_lum - border_lum
-    if border_contrast < 12.0 or core_std > 24.0:
+    inner_lum = inner.mean(axis=2) if inner.ndim == 3 else inner
+    row_profile = np.nanmedian(inner_lum, axis=1)
+    column_profile = np.nanmedian(inner_lum, axis=0)
+    row_range = float(np.nanpercentile(row_profile, 90) - np.nanpercentile(row_profile, 10))
+    column_range = float(np.nanpercentile(column_profile, 90) - np.nanpercentile(column_profile, 10))
+    mostly_one_axis_gradient = max(row_range, column_range) >= 8.0 and min(row_range, column_range) <= max(3.0, max(row_range, column_range) * 0.30)
+    if border_contrast < 12.0 or (core_std > 24.0 and not mostly_one_axis_gradient):
         return None
     vertical_range = float(max(np.nanmean(top_rgb), fill_lum, np.nanmean(bottom_rgb)) - min(np.nanmean(top_rgb), fill_lum, np.nanmean(bottom_rgb)))
-    if vertical_range >= 8.0:
+    if vertical_range >= 8.0 or row_range >= 8.0:
         return _build_framed_vertical_gradient_panel_svg(
             width,
             height,
@@ -530,7 +536,6 @@ def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> d
     right = lum[:, min(w - 1, int(w * 0.9))]
     center_is_brighter = float(np.nanmean(mid)) > float((np.nanmean(left) + np.nanmean(right)) * 0.5)
     grad_center = 50.0 if center_is_brighter else 45.0
-    contrast = max(1.0, float(np.nanpercentile(lum, 90) - np.nanpercentile(lum, 10)))
     # Estimate the smooth panel background from robust axis medians.  Older
     # logic always used columns and therefore turned vertical grey panels into
     # left-to-right bands with incorrect colours.  Compare both axes and use the
@@ -1546,7 +1551,7 @@ def runNonCompositeIterationImpl(
                 if perception_seed_count:
                     log_lines.extend(
                         [
-                            f"perception_seeded_geometry_ir=1",
+                            "perception_seeded_geometry_ir=1",
                             f"perception_seed_count={perception_seed_count}",
                         ]
                     )
