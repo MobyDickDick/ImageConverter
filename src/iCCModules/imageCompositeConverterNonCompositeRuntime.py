@@ -138,7 +138,7 @@ def _build_vector_placeholder_svg(width: int, height: int, *, description: str =
         '      <stop offset="0%" stop-color="#6d6d6d"/>\n'
         '      <stop offset="50%" stop-color="#d7d7d7"/>\n'
         '      <stop offset="100%" stop-color="#6d6d6d"/>\n'
-        '    </svg:linearGradient>\n'
+        '    </linearGradient>\n'
         '  </defs>\n'
         f'  <rect x="0" y="0" width="{safe_w}" height="{safe_h}" fill="url(#bg)"/>\n'
         f'  <line x1="0" y1="0" x2="{safe_w}" y2="{safe_h}" stroke="#8e8e8e" stroke-width="1"/>\n'
@@ -193,7 +193,7 @@ def _build_framed_vertical_gradient_panel_svg(
         f'      <stop offset="0%" stop-color="{top_color}"/>\n'
         f'      <stop offset="50%" stop-color="{middle_color}"/>\n'
         f'      <stop offset="100%" stop-color="{bottom_color}"/>\n'
-        '    </svg:linearGradient>\n'
+        '    </linearGradient>\n'
         '  </defs>\n'
         f'  <rect x="{inset:.3f}" y="{inset:.3f}" width="{rect_w:.3f}" height="{rect_h:.3f}" '
         f'fill="url(#ac0vr2PanelGradient)" stroke="{border_color}" stroke-width="{float(border_width):.3f}"/>\n'
@@ -201,18 +201,27 @@ def _build_framed_vertical_gradient_panel_svg(
     )
 
 
-def _try_build_plain_framed_panel_svg(width: int, height: int, *, base_name: str, perc_img) -> str | None:
-    """Build a data-derived flat framed panel for AC0VR2_ZL-like rasters.
+def _description_requests_framed_gradient_panel(description: str) -> bool:
+    text = str(description or "").lower()
+    has_gradient_transition = any(
+        token in text
+        for token in ("farbübergang", "farbuebergang", "farbverlauf", "gradient")
+    )
+    has_panel_shape = any(
+        token in text
+        for token in ("rechteck", "panel", "fläche", "flaeche", "rahmen", "gerahmt")
+    )
+    return has_gradient_transition and has_panel_shape
 
-    The AC0VR2_ZL_M source is a simple bright grey panel with a one-pixel
-    darker frame.  The generic gradient-stripe fallback sees the full panel as
-    a stripe and drops the frame, which leaves a large localized border error.
-    Keep this narrowly tied to the AC0VR2 variants and derive colors from the
-    input raster so the path remains image-driven rather than copying a sample
-    SVG.
+
+def _try_build_plain_framed_panel_svg(width: int, height: int, *, description: str, perc_img) -> str | None:
+    """Build a data-derived framed gradient panel for matching descriptions.
+
+    When the textual description declares a color transition on a framed panel,
+    derive the frame and gradient colors from the raster instead of allowing a
+    later donor/template transfer to replace the panel with an unrelated symbol.
     """
-    normalized_name = Path(str(base_name or "")).stem.upper()
-    if not normalized_name.startswith("AC0VR2"):
+    if not _description_requests_framed_gradient_panel(description):
         return None
     try:
         arr = np.asarray(perc_img)
@@ -290,7 +299,7 @@ def _build_diagonal_band_svg(width: int, height: int, *, stroke_width: float, de
         '      <stop offset="30%" stop-color="#fbfbfb"/>\n'
         '      <stop offset="37%" stop-color="#fbfbfb"/>\n'
         '      <stop offset="100%" stop-color="#b4b4b4"/>\n'
-        '    </svg:linearGradient>\n'
+        '    </linearGradient>\n'
         f'    <clipPath id="innerRect"><rect x="{margin}" y="{margin}" width="{safe_w-1}" height="{safe_h-1}"/></clipPath>\n'
         '  </defs>\n'
         f'  <rect x="{margin}" y="{margin}" width="{safe_w-1}" height="{safe_h-1}" fill="url(#bg)" stroke="#adadad" stroke-width="1"/>\n'
@@ -373,11 +382,11 @@ def _gradient_band_svg_rects(
     y2 = "100%" if vertical else "0%"
     return (
         f'  <defs>\n'
-        f'    <svg:linearGradient xmlns:svg="http://www.w3.org/2000/svg" id="{grad_id}" x1="0%" y1="0%" x2="{x2}" y2="{y2}">\n'
+        f'    <linearGradient id="{grad_id}" x1="0%" y1="0%" x2="{x2}" y2="{y2}">\n'
         f'      <stop offset="0%" stop-color="{_rgb_hex(edge)}"/>\n'
         f'      <stop offset="{center:.3f}%" stop-color="{_rgb_hex(mid)}"/>\n'
         f'      <stop offset="100%" stop-color="{_rgb_hex(edge)}"/>\n'
-        f'    </svg:linearGradient>\n'
+        f'    </linearGradient>\n'
         f'  </defs>\n'
         f'  <rect x="{x:.3f}" y="{y:.3f}" width="{width:.3f}" height="{height:.3f}" '
         f'fill="url(#{grad_id})" stroke="none"/>\n'
@@ -1323,16 +1332,16 @@ def runNonCompositeIterationImpl(
     plain_panel_svg = _try_build_plain_framed_panel_svg(
         width,
         height,
-        base_name=resolved_variant_name,
+        description=description,
         perc_img=perc_img,
     )
     if plain_panel_svg is not None:
-        print_fn("  -> Fallback aktiv: verwende gerahmtes AC0VR2-Panel aus Rasterfarben.")
+        print_fn("  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.")
         svg_content = plain_panel_svg
         write_validation_log_fn(
             [
                 "status=non_composite_plain_framed_panel",
-                f"variant_name={resolved_variant_name}",
+                "trigger=description_farbuebergang_panel",
             ]
         )
     elif stripe_strategy:
