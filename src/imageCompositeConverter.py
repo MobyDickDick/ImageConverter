@@ -28,6 +28,10 @@ import statistics
 _DEFAULT_RANGE_START_REF = "AR" + "0102"
 _DEFAULT_RANGE_END_REF = "AR" + "0104"
 
+from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
+
+dependency_helpers.activate_vendored_site_packages()
+
 from src.overviewTiles import generateConversionOverviews
 from src.iCCModules.imageCompositeConverterRegions import (
     ANNOTATION_COLORS,
@@ -36,7 +40,6 @@ from src.iCCModules.imageCompositeConverterRegions import (
     detectRelevantRegionsImpl,
 )
 from src.iCCModules import imageCompositeConverterRange as range_helpers
-from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
 from src.iCCModules import imageCompositeConverterVendorInstall as vendor_install_helpers
 from src.iCCModules import imageCompositeConverterDescriptions as description_mapping_helpers
 from src.iCCModules import imageCompositeConverterSemantic as semantic_helpers

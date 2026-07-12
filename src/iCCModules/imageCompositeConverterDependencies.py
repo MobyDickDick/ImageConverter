@@ -78,6 +78,18 @@ def vendored_site_packages_dirs(*, base_dir_fn=optional_dependency_base_dir) -> 
     return existing
 
 
+def activate_vendored_site_packages(*, vendored_dirs_fn=vendored_site_packages_dirs) -> list[Path]:
+    """Prepend repo-local site-packages so eager submodule imports can resolve bundled deps."""
+    activated: list[Path] = []
+    for site_packages in reversed(vendored_dirs_fn()):
+        path_str = str(site_packages)
+        if path_str in sys.path:
+            sys.path.remove(path_str)
+        sys.path.insert(0, path_str)
+        activated.append(site_packages)
+    return list(reversed(activated))
+
+
 def clear_partial_module_import(module_name: str) -> None:
     """Discard partially imported package state before the next fallback attempt."""
     for imported_name in [name for name in list(sys.modules) if name == module_name or name.startswith(f"{module_name}.")]:
