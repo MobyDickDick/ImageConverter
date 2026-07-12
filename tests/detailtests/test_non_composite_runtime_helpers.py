@@ -277,6 +277,37 @@ def test_ac0vr2_plain_panel_fallback_preserves_frame_before_gradient_stripe() ->
     assert 'stroke="#c5c5c5"' in artifacts[0][0]
 
 
+
+def test_ac0vr2_plain_panel_fallback_preserves_vertical_gradient_for_bright_core() -> None:
+    raster = np.empty((30, 60, 3), dtype=np.uint8)
+    for y in range(30):
+        if y <= 9:
+            t = y / 9.0
+            value = int(round(180 + (251 - 180) * t))
+        elif y <= 11:
+            value = 251
+        else:
+            t = (y - 11) / 18.0
+            value = int(round(251 + (180 - 251) * t))
+        raster[y, :, :] = value
+    raster[0, :, :] = 173
+    raster[-1, :, :] = 173
+    raster[:, 0, :] = 173
+    raster[:, -1, :] = 173
+
+    svg = non_composite_runtime_helpers._try_build_plain_framed_panel_svg(
+        60,
+        30,
+        description="Unzugeordnete AC0VR2_ZL-Panelvariante.",
+        perc_img=raster,
+    )
+
+    assert svg is not None
+    assert 'linearGradient id="ac0vr2PanelGradient"' in svg
+    assert 'x2="0%" y2="100%"' in svg
+    assert 'fill="url(#ac0vr2PanelGradient)"' in svg
+    assert '<rect x="0.500" y="0.500" width="59.000" height="29.000"' in svg
+
 def test_run_non_composite_iteration_impl_gradient_stripe_returns_iteration_tuple() -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
@@ -296,7 +327,7 @@ def test_run_non_composite_iteration_impl_gradient_stripe_returns_iteration_tupl
         render_embedded_raster_svg_fn=lambda _path: "<svg embedded/>",
         build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
         build_gradient_stripe_validation_log_lines_fn=lambda **kwargs: [
-            f"status=non_composite_gradient_stripe_visual_override",
+            "status=non_composite_gradient_stripe_visual_override",
             f"stops={kwargs['strategy_stop_count']}",
         ],
         write_validation_log_fn=logs.append,
