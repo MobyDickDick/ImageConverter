@@ -1,21 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0412",
-  "best_error": 28.35925925925926,
+  "best_error": 28.56037037037037,
   "best_iter": 1,
   "convergence": "",
-  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
-  "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.8599999999860302,
-  "error_per_pixel": 0.03151028806584363,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.890999999945052,
+  "error_per_pixel": 0.031733744855967076,
   "error_pixel_cluster_count": 19.0,
-  "error_pixel_cluster_excess": 0.2555753968253968,
+  "error_pixel_cluster_excess": 0.21986111111111112,
   "error_pixel_count": 224.0,
   "filename": "AC0412_2_M.jpg",
   "h": 30,
-  "largest_error_pixel_cluster_fraction": 0.5044642857142857,
-  "localized_error_fraction": 0.4846345482093337,
-  "mean_delta2": 4493.919921875,
+  "largest_error_pixel_cluster_fraction": 0.46875,
+  "localized_error_fraction": 0.48347888381230836,
+  "mean_delta2": 4504.10107421875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -455,16 +455,16 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.0952,
-          0.0952,
-          0.8096,
-          0.8096
+          0.09813712659592354,
+          0.09684863111999234,
+          0.80866431643052,
+          0.8101933269874713
         ],
         "fill": "#d8d8d8",
         "id": "compressor_circle",
         "kind": "CircleBackground",
         "stroke": "#8d8d8d",
-        "stroke_width": 0.16580000000000014
+        "stroke_width": 0.16705670138622483
       },
       {
         "circle_ref": "compressor_circle",
@@ -472,26 +472,26 @@
         "kind": "UpwardCompressorGlyph",
         "left_line": [
           [
-            0.28,
-            0.78
+            0.28197951785567527,
+            0.777168692439507
           ],
           [
-            0.42,
-            0.16
+            0.42079190813122974,
+            0.16081835126961988
           ]
         ],
         "right_line": [
           [
-            0.72,
-            0.78
+            0.7213399804240498,
+            0.7773488725067006
           ],
           [
-            0.58,
-            0.16
+            0.5799517276442524,
+            0.16170789825048099
           ]
         ],
         "stroke": "#666666",
-        "stroke_width": 0.3813400000000003
+        "stroke_width": 0.38010036096379496
       }
     ],
     "semantic_conflicts": [],
@@ -505,9 +505,9 @@
     "variant_name": "AC0412_2_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 8646.854761188051,
-  "std_delta2": 4299.36767578125,
-  "tile_std_delta2": 2971.064705575477,
+  "spatial_quality_score": 8568.31123608172,
+  "std_delta2": 4270.84716796875,
+  "tile_std_delta2": 2967.8917969315075,
   "variant": "AC0412_2_M",
   "w": 30
 }

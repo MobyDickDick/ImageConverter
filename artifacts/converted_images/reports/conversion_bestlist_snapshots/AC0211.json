@@ -1,15 +1,88 @@
 {
+  "actual_iterations": 64,
   "base": "AC0211",
-  "best_error": 10.9225,
+  "best_error": 9.587962962962964,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0030340277777777774,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.297000000020489,
+  "error_per_pixel": 0.00266332304526749,
+  "error_pixel_cluster_count": 30.0,
+  "error_pixel_cluster_excess": 0.5440345488175452,
+  "error_pixel_count": 841.0,
   "filename": "AC0211.jpg",
   "h": 60,
-  "mean_delta2": 1062.035888671875,
+  "largest_error_pixel_cluster_fraction": 0.7776456599286563,
+  "localized_error_fraction": 0.5274018768712893,
+  "mean_delta2": 1025.1578369140625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.06,
+            0.06,
+            0.88,
+            0.88
+          ],
+          "confidence": 0.75,
+          "fill": "#45aa5e",
+          "id": "description_element_1",
+          "kind": "CircleBackground",
+          "source": "description",
+          "stroke": "#8d8d8d",
+          "stroke_width": 0.02
+        },
+        {
+          "circle_ref": "compressor_circle",
+          "confidence": 0.75,
+          "id": "description_element_2",
+          "kind": "UpwardCompressorGlyph",
+          "left_line": [
+            [
+              0.28,
+              0.78
+            ],
+            [
+              0.42,
+              0.16
+            ]
+          ],
+          "right_line": [
+            [
+              0.72,
+              0.78
+            ],
+            [
+              0.58,
+              0.16
+            ]
+          ],
+          "source": "description",
+          "stroke": "#d7d7d7",
+          "stroke_width": 0.04
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "compressor_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "circle"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -68,8 +141,347 @@
         "stroke_width": 0.04
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 20.549814814814816,
+        "initial_error": 20.549814814814816,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 20.51351851851852,
+      "generic_element_refinement": {
+        "final_error": 20.51351851851852,
+        "initial_error": 20.549814814814816,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.014074074074073906,
+            "element": "compressor_circle",
+            "error_after": 20.535740740740742,
+            "error_before": 20.549814814814816,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.022222222222222143,
+            "element": "upward_compressor",
+            "error_after": 20.51351851851852,
+            "error_before": 20.535740740740742,
+            "step_index": 1
+          }
+        ]
+      },
+      "initial_error": 78.36787037037037,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.22999999999999993,
+        "scale_y": 0.24999999999999992,
+        "stroke_scale": 3.4999999999999996,
+        "translate_x": -0.04,
+        "translate_y": -0.6
+      },
+      "steps": [
+        {
+          "best_delta": 2.619537037037034,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 0.04018518518518022,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 8.563703703703709,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 6.831018518518519,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.8946296296296339,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 0.8688888888888826,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 7.522685185185189,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 4.9694444444444414,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 0.792500000000004,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.5
+        },
+        {
+          "best_delta": 1.2758333333333312,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.24
+        },
+        {
+          "best_delta": 5.669074074074075,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 3.1600925925925907,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 0.6607407407407422,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.75
+        },
+        {
+          "best_delta": 0.6146296296296327,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 1.709074074074067,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.32
+        },
+        {
+          "best_delta": 4.079444444444448,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 1.6781481481481464,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 0.596481481481483,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.0
+        },
+        {
+          "best_delta": 1.0231481481481488,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.4
+        },
+        {
+          "best_delta": 2.007685185185185,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 0.7398148148148138,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 0.15240740740740932,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.25
+        },
+        {
+          "best_delta": 0.23972222222221973,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.4042592592592591,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.48000000000000004
+        },
+        {
+          "best_delta": 0.12583333333333613,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.5
+        },
+        {
+          "best_delta": 0.36814814814814767,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.56
+        },
+        {
+          "best_delta": 0.008518518518517482,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.75
+        },
+        {
+          "best_delta": 0.05314814814814994,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.64
+        },
+        {
+          "best_delta": 0.01712962962962905,
+          "parameter": "translate_y",
+          "stage": 1,
+          "value": -0.6
+        },
+        {
+          "best_delta": 0.009629629629628766,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 2.9
+        },
+        {
+          "best_delta": 0.038333333333333997,
+          "parameter": "translate_x",
+          "stage": 1,
+          "value": 0.04
+        },
+        {
+          "best_delta": 0.01981481481481495,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 3.05
+        },
+        {
+          "best_delta": 0.02111111111111086,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 3.1999999999999997
+        },
+        {
+          "best_delta": 0.020462962962962905,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 3.3499999999999996
+        },
+        {
+          "best_delta": 0.009629629629628766,
+          "parameter": "translate_x",
+          "stage": 1,
+          "value": 0.0
+        },
+        {
+          "best_delta": 0.0008333333333325754,
+          "parameter": "translate_x",
+          "stage": 1,
+          "value": -0.04
+        },
+        {
+          "best_delta": 0.006388888888888999,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 3.4999999999999996
+        },
+        {
+          "best_delta": 0.0009259259259266628,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 3.4199999999999995
+        },
+        {
+          "best_delta": 0.00018518518518462201,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 3.4599999999999995
+        },
+        {
+          "best_delta": 0.0008333333333325754,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 0.22999999999999993
+        },
+        {
+          "best_delta": 0.003981481481481808,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 3.4999999999999996
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.03530006784384806,
+          0.0341569677153852,
+          0.8995612348198947,
+          0.9009554185925033
+        ],
+        "fill": "#EAECEB",
+        "id": "compressor_circle",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8227,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "ring",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#E8EAE9",
+        "stroke_width": 0.18917786193266067
+      },
+      {
+        "circle_ref": "compressor_circle",
+        "id": "upward_compressor",
+        "kind": "UpwardCompressorGlyph",
+        "left_line": [
+          [
+            0.2804075959241704,
+            0.7786762266510948
+          ],
+          [
+            0.41766626493680975,
+            0.15729304483777193
+          ]
+        ],
+        "right_line": [
+          [
+            0.7199023867861948,
+            0.7778247283000657
+          ],
+          [
+            0.5814607399873112,
+            0.1621978216617228
+          ]
+        ],
+        "stroke": "#d7d7d7",
+        "stroke_width": 0.04009168266607501
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -80,7 +492,10 @@
     "top_source_ref": null,
     "variant_name": "AC0211"
   },
-  "std_delta2": 2802.019775390625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 2530.1466671003304,
+  "std_delta2": 2955.24267578125,
+  "tile_std_delta2": 876.4395147616508,
   "variant": "AC0211",
   "w": 60
 }

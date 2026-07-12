@@ -1,15 +1,37 @@
 {
+  "actual_iterations": 64,
   "base": "AC0302",
-  "best_error": 16.79,
+  "best_error": 16.202291666666667,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.01049375,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.6879999999655411,
+  "error_per_pixel": 0.010126432291666668,
+  "error_pixel_cluster_count": 8.0,
+  "error_pixel_cluster_excess": 0.734018765903308,
+  "error_pixel_count": 393.0,
   "filename": "AC0302_1_S.jpg",
   "h": 40,
-  "mean_delta2": 4941.361328125,
+  "largest_error_pixel_cluster_fraction": 0.9796437659033079,
+  "localized_error_fraction": 0.7109346753577411,
+  "mean_delta2": 2468.949462890625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -31,6 +53,55 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.023354077678999274,
+          0.02468392369130801,
+          0.9004636840208554,
+          0.8988839880693446
+        ],
+        "fill": "#E0204A",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.99,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#DD234C",
+        "stroke_width": 0.03562301574549058
+      },
+      {
+        "bbox": [
+          0.05079649704579933,
+          0.2470376900398471,
+          0.8988016000381255,
+          0.09968271623905665
+        ],
+        "fill": "#E0274F",
+        "font_size": 0.81,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7021,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -41,7 +112,10 @@
     "top_source_ref": null,
     "variant_name": "AC0302_1_S"
   },
-  "std_delta2": 13525.7470703125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 15550.832138584648,
+  "std_delta2": 6223.15185546875,
+  "tile_std_delta2": 6838.144965217415,
   "variant": "AC0302_1_S",
   "w": 40
 }

@@ -239,7 +239,11 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
 
     elements: list[dict[str, object]] = []
     rect_hint = _has_any(desc, ("rechteck", "viereck", "quadrat", "kühlelement", "heizelement", "rechteck-plus-minus-bildbeschreibung"))
-    gradient_hint = _has_any(desc, ("farbverlauf", "gradient")) and _has_any(desc, ("horizontal", "dunkel-hell-dunkel", "dunkel–hell–dunkel"))
+    gradient_transition_hint = _has_any(desc, ("farbübergang", "farbuebergang", "farbverlauf", "gradient"))
+    gradient_hint = gradient_transition_hint and (
+        _has_any(desc, ("farbübergang", "farbuebergang"))
+        or _has_any(desc, ("horizontal", "vertikal", "senkrecht", "dunkel-hell-dunkel", "dunkel–hell–dunkel"))
+    )
     diagonal_hint = _has_any(desc, ("diagonal", "diagonale", "diagonalen", "andreaskreuz", "kreuz"))
     checkmark_token_hint = _has_any(desc, ("haken", "checkmark", "check-mark", "prüfhaken", "haekchen", "häkchen"))
     checkbox_token_hint = _has_any(desc, ("checkbox", "check box", "kästchen", "kaestchen"))

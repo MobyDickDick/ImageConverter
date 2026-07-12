@@ -1,0 +1,134 @@
+{
+  "actual_iterations": 64,
+  "base": "GE9002_7M",
+  "best_error": 102.51027777777777,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.5320000000065193,
+  "error_per_pixel": 0.04271261574074074,
+  "error_pixel_cluster_count": 1.0,
+  "error_pixel_cluster_excess": 0.8016666666666666,
+  "error_pixel_count": 476.0,
+  "filename": "GE9002_7M.jpg",
+  "h": 20,
+  "largest_error_pixel_cluster_fraction": 1.0,
+  "localized_error_fraction": 0.6543596203882001,
+  "mean_delta2": 67192.8515625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE9002_7M",
+        "source": "base_name",
+        "text": "Wie GE9001: stillisierte Röhre. Im Prinzip sehr dünnes Rechteck, hochkant, horizontaler Farbverlauf rot/grau/rot. Geometrische Variante: 90° nach rechts gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "GE9001"
+    ],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9002_7M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 177105.5160621578,
+  "std_delta2": 68774.2109375,
+  "tile_std_delta2": 62177.019533464896,
+  "variant": "GE9002_7M",
+  "w": 120
+}

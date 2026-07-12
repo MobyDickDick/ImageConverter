@@ -1,14 +1,44 @@
 {
+  "actual_iterations": 64,
   "base": "NAV0020",
-  "best_error": 53.47248015873016,
+  "best_error": 7.503308531746032,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0001591442861866969,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 16.92200000002049,
+  "error_per_pixel": 2.2331275392101284e-05,
+  "error_pixel_cluster_count": 409.0,
+  "error_pixel_cluster_excess": 0.6073522219597349,
+  "error_pixel_count": 84509.0,
   "filename": "NAV0020.JPG",
   "h": 1200,
-  "mean_delta2": 11436.1044921875,
+  "largest_error_pixel_cluster_fraction": 0.8588671029121159,
+  "localized_error_fraction": 0.5528659790089888,
+  "mean_delta2": 281.4061584472656,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "NAV0020",
@@ -21,6 +51,7 @@
       "AC0551"
     ],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -33,7 +64,10 @@
     "top_source_ref": null,
     "variant_name": "NAV0020"
   },
-  "std_delta2": 2937.722900390625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 697.3098483131748,
+  "std_delta2": 761.4325561523438,
+  "tile_std_delta2": 239.56400883727247,
   "variant": "NAV0020",
   "w": 280
 }

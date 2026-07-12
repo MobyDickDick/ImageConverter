@@ -1,21 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0107",
-  "best_error": 17.14406349206349,
+  "best_error": 17.460063492063494,
   "best_iter": 1,
   "convergence": "",
-  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.7349999999860302,
-  "error_per_pixel": 0.003265535903250189,
-  "error_pixel_cluster_count": 19.0,
-  "error_pixel_cluster_excess": 0.3007704654895666,
-  "error_pixel_count": 1335.0,
+  "elapsed_seconds": 0.8120000000344589,
+  "error_per_pixel": 0.0033257263794406653,
+  "error_pixel_cluster_count": 20.0,
+  "error_pixel_cluster_excess": 0.0691479140328698,
+  "error_pixel_count": 1356.0,
   "filename": "GE0107_S.jpg",
   "h": 35,
-  "largest_error_pixel_cluster_fraction": 0.5550561797752809,
-  "localized_error_fraction": 0.8877817396198652,
-  "mean_delta2": 3393.643310546875,
+  "largest_error_pixel_cluster_fraction": 0.3274336283185841,
+  "localized_error_fraction": 0.8852546449207751,
+  "mean_delta2": 3389.2421875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -233,16 +233,16 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.0008000000000001339,
-          0.3422,
-          0.9983999999999997,
-          0.8568
+          0.003543503814123386,
+          0.34043418644066087,
+          0.9991837474330654,
+          0.858796495726716
         ],
         "fill": "#d8d8d8",
         "id": "main_rect",
         "kind": "RectBorder",
         "stroke": "#adadad",
-        "stroke_width": 0.00875
+        "stroke_width": 0.008516702180086617
       }
     ],
     "semantic_conflicts": [],
@@ -256,9 +256,9 @@
     "variant_name": "GE0107_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 11833.10973492622,
-  "std_delta2": 12917.40234375,
-  "tile_std_delta2": 6595.899663986198,
+  "spatial_quality_score": 11394.783818358832,
+  "std_delta2": 12859.4921875,
+  "tile_std_delta2": 6560.9977533093515,
   "variant": "GE0107_S",
   "w": 150
 }

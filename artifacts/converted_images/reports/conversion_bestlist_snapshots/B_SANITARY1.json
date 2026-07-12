@@ -1,0 +1,128 @@
+{
+  "actual_iterations": 64,
+  "base": "B_SANITARY1",
+  "best_error": 18.045209176788124,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.5150000000139698,
+  "error_per_pixel": 0.006088127252627572,
+  "error_pixel_cluster_count": 27.0,
+  "error_pixel_cluster_excess": 0.1508097165991903,
+  "error_pixel_count": 741.0,
+  "filename": "b_sanitary1.jpg",
+  "h": 52,
+  "largest_error_pixel_cluster_fraction": 0.4008097165991903,
+  "localized_error_fraction": 0.5701745617874494,
+  "mean_delta2": 1711.220703125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "b_sanitary1",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999. Symbol wie in GE0206 (Röhre mit drei Wassertropfen rechts)"
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0206"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.15610654607608182,
+          0.09799552897219369,
+          0.7708221934970695,
+          0.8479008610469395
+        ],
+        "fill": "#8BC2E8",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9785,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#B5D4EA",
+        "stroke_width": 0.0327198141308068
+      },
+      {
+        "bbox": [
+          0.19572454683501594,
+          0.3258900626988843,
+          0.017070352545102974,
+          0.4033431334198302
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8608,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.20175,
+            0.32692
+          ],
+          [
+            0.20175,
+            0.73077
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.017899384612386837
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "B_SANITARY1"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 4305.1824978994955,
+  "std_delta2": 2551.4619140625,
+  "tile_std_delta2": 1753.4735545580975,
+  "variant": "B_SANITARY1",
+  "w": 57
+}

@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0201",
-  "best_error": 28.14,
+  "best_error": 14.03648148148148,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.45300000000861473,
-  "error_per_pixel": 0.007816666666666666,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 1.3900000000139698,
+  "error_per_pixel": 0.003899022633744856,
+  "error_pixel_cluster_count": 53.0,
+  "error_pixel_cluster_excess": 0.1525339429204766,
+  "error_pixel_count": 802.0,
   "filename": "GE0201_M.jpg",
   "h": 60,
-  "localized_error_fraction": 0.3951991868864761,
-  "mean_delta2": 3814.1455078125,
+  "largest_error_pixel_cluster_fraction": 0.37531172069825436,
+  "localized_error_fraction": 0.642404123957061,
+  "mean_delta2": 1196.01611328125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -45,6 +51,88 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.030975795778948774,
+          0.0490303633692784,
+          0.8989019081425116,
+          0.8987036090769013
+        ],
+        "fill": "#91BEDF",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9886,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#BFD7E8",
+        "stroke_width": 0.036101257642193685
+      },
+      {
+        "bbox": [
+          0.8653130021683221,
+          0.26920724517549555,
+          0.05158665674463777,
+          0.5174378918624061
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8506,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.89167,
+            0.26667
+          ],
+          [
+            0.89167,
+            0.78334
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.05113934660380599
+      },
+      {
+        "bbox": [
+          0.06742211094621298,
+          0.6320958132923447,
+          0.401537036859862,
+          0.06766731319362018
+        ],
+        "fill": "#83B4DC",
+        "font_size": 0.36,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.6223,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top+bottom+left",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -56,9 +144,9 @@
     "variant_name": "GE0201_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 5910.7046080546625,
-  "std_delta2": 3413.990234375,
-  "tile_std_delta2": 1850.1097828642905,
+  "spatial_quality_score": 4200.192087737905,
+  "std_delta2": 1936.46484375,
+  "tile_std_delta2": 2626.8797564814927,
   "variant": "GE0201_M",
   "w": 60
 }

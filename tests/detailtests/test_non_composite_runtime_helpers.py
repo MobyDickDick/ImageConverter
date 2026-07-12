@@ -230,6 +230,84 @@ def test_run_non_composite_iteration_impl_manual_review_uses_gradient_stripe_pla
     assert artifacts == [("<svg gradient/>", "rendered")]
     assert prints and "Plan B aktiv" in prints[0]
 
+
+def test_ac0vr2_plain_panel_fallback_preserves_frame_before_gradient_stripe() -> None:
+    logs: list[list[str]] = []
+    prints: list[str] = []
+    artifacts: list[tuple[str, object]] = []
+    raster = np.ones((30, 60, 3), dtype=np.uint8) * 240
+    raster[0, :, :] = 197
+    raster[-1, :, :] = 197
+    raster[:, 0, :] = 197
+    raster[:, -1, :] = 197
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="auto",
+        params={"mode": "auto", "variant_name": "AC0VR2_ZL_M"},
+        stripe_strategy={"bbox": {"x": 0, "y": 0, "width": 60, "height": 30}, "stops": [0, 1]},
+        semantic_mode_visual_override=False,
+        width=60,
+        height=30,
+        base_name="AC0VR2",
+        description="Unzugeordnete AC0VR2_ZL-Panelvariante.",
+        perc_img=raster,
+        img_path="AC0VR2_ZL_M.jpg",
+        print_fn=prints.append,
+        render_embedded_raster_svg_fn=lambda _path: "<svg />",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda svg, *_args, **_kwargs: svg,
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 0.2 if "stroke=" in rendered else 0.8,
+        image_variant_name="AC0VR2_ZL_M",
+    )
+
+    assert result == (
+        "AC0VR2",
+        "Unzugeordnete AC0VR2_ZL-Panelvariante.",
+        {"mode": "auto", "variant_name": "AC0VR2_ZL_M"},
+        1,
+        0.2,
+    )
+    assert logs and logs[0][0] == "status=non_composite_plain_framed_panel"
+    assert "gerahmtes AC0VR2-Panel" in prints[0]
+    assert artifacts and 'fill="#f0f0f0"' in artifacts[0][0]
+    assert 'stroke="#c5c5c5"' in artifacts[0][0]
+
+
+
+def test_ac0vr2_plain_panel_fallback_preserves_vertical_gradient_for_bright_core() -> None:
+    raster = np.empty((30, 60, 3), dtype=np.uint8)
+    for y in range(30):
+        if y <= 9:
+            t = y / 9.0
+            value = int(round(180 + (251 - 180) * t))
+        elif y <= 11:
+            value = 251
+        else:
+            t = (y - 11) / 18.0
+            value = int(round(251 + (180 - 251) * t))
+        raster[y, :, :] = value
+    raster[0, :, :] = 173
+    raster[-1, :, :] = 173
+    raster[:, 0, :] = 173
+    raster[:, -1, :] = 173
+
+    svg = non_composite_runtime_helpers._try_build_plain_framed_panel_svg(
+        60,
+        30,
+        description="Unzugeordnete AC0VR2_ZL-Panelvariante.",
+        perc_img=raster,
+    )
+
+    assert svg is not None
+    assert 'linearGradient id="ac0vr2PanelGradient"' in svg
+    assert 'x2="0%" y2="100%"' in svg
+    assert 'fill="url(#ac0vr2PanelGradient)"' in svg
+    assert '<rect x="0.500" y="0.500" width="59.000" height="29.000"' in svg
+
 def test_run_non_composite_iteration_impl_gradient_stripe_returns_iteration_tuple() -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
@@ -249,7 +327,7 @@ def test_run_non_composite_iteration_impl_gradient_stripe_returns_iteration_tupl
         render_embedded_raster_svg_fn=lambda _path: "<svg embedded/>",
         build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
         build_gradient_stripe_validation_log_lines_fn=lambda **kwargs: [
-            f"status=non_composite_gradient_stripe_visual_override",
+            "status=non_composite_gradient_stripe_visual_override",
             f"stops={kwargs['strategy_stop_count']}",
         ],
         write_validation_log_fn=logs.append,
@@ -1998,3 +2076,41 @@ def test_reference_heat_exchanger_variants_keep_description_contract_and_registr
     assert non_composite_runtime_helpers._is_description_heat_exchanger_geometry(geometry_ir) is True
     assert non_composite_runtime_helpers._description_reuses_reference_family(description) is True
     assert non_composite_runtime_helpers._prefer_description_geometry_candidate(geometry_ir, description=description) is True
+
+
+def test_symbol_raster_estimation_uses_smooth_vertical_gradient_for_full_panel() -> None:
+    raster = np.full((30, 60, 3), 255, dtype=np.uint8)
+    for y in range(30):
+        if y <= 9:
+            t = y / 9.0
+            value = int(round(180 + (251 - 180) * t))
+        elif y <= 11:
+            value = 251
+        else:
+            t = (y - 11) / 18.0
+            value = int(round(251 + (180 - 251) * t))
+        raster[y, :] = (value, value, value)
+    raster[0, :] = (173, 173, 173)
+    raster[-1, :] = (173, 173, 173)
+    raster[:, 0] = (173, 173, 173)
+    raster[:, -1] = (173, 173, 173)
+
+    params = non_composite_runtime_helpers._derive_symbol_params_from_raster(
+        width=60,
+        height=30,
+        perc_img=raster,
+    )
+    svg = non_composite_runtime_helpers._build_structured_symbol_svg(
+        60,
+        30,
+        **params,
+    )
+
+    assert params["gradient_vertical"] is True
+    assert params["gradient_edge"] <= "#c0c0c0"
+    assert params["gradient_mid"] == "#fbfbfb"
+    assert '<svg:linearGradient xmlns:svg="http://www.w3.org/2000/svg" id="smoothPanelGradient_' in svg
+    assert 'x2="0%" y2="100%"' in svg
+    assert f'stop-color="{params["gradient_edge"]}"' in svg
+    assert 'stop-color="#fbfbfb"' in svg
+    assert svg.count('<rect x="') <= 4

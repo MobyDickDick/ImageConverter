@@ -1,0 +1,72 @@
+{
+  "actual_iterations": 64,
+  "base": "AR0084",
+  "best_error": 31.32806324110672,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 1.062999999965541,
+  "error_per_pixel": 0.020637722820228407,
+  "error_pixel_cluster_count": 32.0,
+  "error_pixel_cluster_excess": 0.15328557312252966,
+  "error_pixel_count": 384.0,
+  "filename": "AR0084.jpg",
+  "h": 33,
+  "largest_error_pixel_cluster_fraction": 0.40625,
+  "localized_error_fraction": 0.6474547642979466,
+  "mean_delta2": 6570.984375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AR0084",
+        "source": "base_name",
+        "text": "Wie AR0083, nach rechts gedreht, Text \"M\" horizontal"
+      }
+    ],
+    "documented_alias_refs": [
+      "AR0083"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AR0084"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 16527.56924776322,
+  "std_delta2": 13037.7177734375,
+  "tile_std_delta2": 8359.58985864774,
+  "variant": "AR0084",
+  "w": 46
+}

@@ -1,0 +1,78 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0923",
+  "best_error": 24.084285714285713,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.7190000000409782,
+  "error_per_pixel": 0.03440612244897959,
+  "error_pixel_cluster_count": 19.0,
+  "error_pixel_cluster_excess": 0.14459069020866772,
+  "error_pixel_count": 178.0,
+  "filename": "AC0923_M.jpg",
+  "h": 35,
+  "largest_error_pixel_cluster_fraction": 0.398876404494382,
+  "localized_error_fraction": 0.6500929997146482,
+  "mean_delta2": 6945.61279296875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0923",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0923. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      },
+      {
+        "key": "AC0923_M",
+        "source": "variant_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0923. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0923_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 20270.498177991216,
+  "std_delta2": 15565.75,
+  "tile_std_delta2": 9617.543427713614,
+  "variant": "AC0923_M",
+  "w": 20
+}

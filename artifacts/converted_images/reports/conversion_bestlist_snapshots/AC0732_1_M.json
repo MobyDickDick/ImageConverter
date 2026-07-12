@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0732",
-  "best_error": 12.296666666666667,
+  "best_error": 12.46952380952381,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.29699999999138527,
-  "error_per_pixel": 0.017566666666666668,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.077999999979511,
+  "error_per_pixel": 0.01781360544217687,
+  "error_pixel_cluster_count": 8.0,
+  "error_pixel_cluster_excess": 0.3834920634920635,
+  "error_pixel_count": 126.0,
   "filename": "AC0732_1_M.jpg",
   "h": 20,
-  "localized_error_fraction": 0.9296976325602625,
-  "mean_delta2": 3317.628662109375,
+  "largest_error_pixel_cluster_fraction": 0.5634920634920635,
+  "localized_error_fraction": 0.9530151437808405,
+  "mean_delta2": 3358.28564453125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -121,6 +127,21 @@
         "steps": []
       },
       "final_error": 12.296666666666667,
+      "generic_element_refinement": {
+        "final_error": 12.296666666666667,
+        "initial_error": 12.296666666666667,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "right_facing_square_kelle_p",
+            "error_after": 12.296666666666667,
+            "error_before": 12.296666666666667,
+            "step_index": 0
+          }
+        ]
+      },
       "initial_error": 14.847619047619048,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -199,9 +220,9 @@
     "variant_name": "AC0732_1_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 12012.463644862091,
-  "std_delta2": 11544.650390625,
-  "tile_std_delta2": 8658.28928283026,
+  "spatial_quality_score": 13167.604265349215,
+  "std_delta2": 12248.2607421875,
+  "tile_std_delta2": 9196.295057988984,
   "variant": "AC0732_1_M",
   "w": 35
 }

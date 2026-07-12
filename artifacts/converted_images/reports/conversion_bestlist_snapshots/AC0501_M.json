@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0501",
-  "best_error": 14.4,
+  "best_error": 13.569074074074074,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.7660000000032596,
-  "error_per_pixel": 0.008,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.6099999999860302,
+  "error_per_pixel": 0.007538374485596707,
+  "error_pixel_cluster_count": 32.0,
+  "error_pixel_cluster_excess": 0.21027964205816554,
+  "error_pixel_count": 447.0,
   "filename": "AC0501_M.jpg",
   "h": 60,
-  "localized_error_fraction": 0.803706486744806,
-  "mean_delta2": 1767.022216796875,
+  "largest_error_pixel_cluster_fraction": 0.45861297539149887,
+  "localized_error_fraction": 0.8074591943266082,
+  "mean_delta2": 1597.4766845703125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -106,7 +112,30 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 34.3537037037037,
+      "final_error": 34.07314814814815,
+      "generic_element_refinement": {
+        "final_error": 34.07314814814815,
+        "initial_error": 34.3537037037037,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.1255555555555503,
+            "element": "main_rect",
+            "error_after": 34.22814814814815,
+            "error_before": 34.3537037037037,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.15500000000000114,
+            "element": "diagonal_1_tr_bl",
+            "error_after": 34.07314814814815,
+            "error_before": 34.22814814814815,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 54.86462962962963,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -227,7 +256,7 @@
       {
         "bbox": [
           0.5024000000000001,
-          0.006000000000000061,
+          0.005375000000000061,
           0.4751999999999999,
           0.9879999999999999
         ],
@@ -244,7 +273,7 @@
         "kind": "DiagonalBand",
         "rect_ref": "main_rect",
         "stroke": "#707070",
-        "stroke_width": 0.0189
+        "stroke_width": 0.016065
       }
     ],
     "semantic_conflicts": [],
@@ -258,9 +287,9 @@
     "variant_name": "AC0501_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 5563.719451207669,
-  "std_delta2": 7466.66455078125,
-  "tile_std_delta2": 3123.449862878387,
+  "spatial_quality_score": 5389.542154054807,
+  "std_delta2": 7464.3837890625,
+  "tile_std_delta2": 3133.178705120499,
   "variant": "AC0501_M",
   "w": 30
 }

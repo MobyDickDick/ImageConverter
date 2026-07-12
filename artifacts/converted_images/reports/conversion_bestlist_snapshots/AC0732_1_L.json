@@ -1,15 +1,71 @@
 {
+  "actual_iterations": 64,
   "base": "AC0732",
-  "best_error": 33.44207407407407,
+  "best_error": 14.437925925925926,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.02972628806584362,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.890999999945052,
+  "error_per_pixel": 0.012833711934156378,
+  "error_pixel_cluster_count": 9.0,
+  "error_pixel_cluster_excess": 0.4517622739018088,
+  "error_pixel_count": 172.0,
   "filename": "AC0732_1_L.jpg",
   "h": 25,
-  "mean_delta2": 12783.177734375,
+  "largest_error_pixel_cluster_fraction": 0.6046511627906976,
+  "localized_error_fraction": 0.9091701068919634,
+  "mean_delta2": 3803.799072265625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_bbox": [
+            0.4,
+            0.04,
+            0.54,
+            0.92
+          ],
+          "body_fill": "#d92645",
+          "body_stroke": "#a0a0a0",
+          "body_stroke_width": 0.04,
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.0,
+              0.5
+            ],
+            [
+              0.4,
+              0.5
+            ]
+          ],
+          "connector_stroke": "#808080",
+          "connector_width": 0.08,
+          "font_size": 0.38,
+          "font_weight": "600",
+          "id": "description_element_1",
+          "kind": "RightFacingSquareKellePGlyph",
+          "label": "P",
+          "label_center": [
+            0.64,
+            0.52
+          ],
+          "label_fill": "#dedede",
+          "source": "description"
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -28,9 +84,137 @@
       "AC072"
     ],
     "elements": [],
-    "geometry_ir": [],
+    "geometry_ir": [
+      {
+        "body_bbox": [
+          0.4,
+          0.04,
+          0.54,
+          0.92
+        ],
+        "body_fill": "#d92645",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.0,
+            0.5
+          ],
+          [
+            0.4,
+            0.5
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.08,
+        "font_size": 0.38,
+        "font_weight": "600",
+        "id": "right_facing_square_kelle_p",
+        "kind": "RightFacingSquareKellePGlyph",
+        "label": "P",
+        "label_center": [
+          0.64,
+          0.52
+        ],
+        "label_fill": "#dedede"
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 14.126222222222221,
+        "initial_error": 14.126222222222221,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 14.126222222222221,
+      "generic_element_refinement": {
+        "final_error": 14.126222222222221,
+        "initial_error": 14.126222222222221,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "right_facing_square_kelle_p",
+            "error_after": 14.126222222222221,
+            "error_before": 14.126222222222221,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 20.80503703703704,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.9299999999999999,
+        "scale_y": 1.0,
+        "stroke_scale": 1.0,
+        "translate_x": -0.01,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.6405925925925935,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 2.6041481481481483,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 0.9299999999999999
+        },
+        {
+          "best_delta": 3.304592592592593,
+          "parameter": "translate_x",
+          "stage": 2,
+          "value": -0.02
+        },
+        {
+          "best_delta": 0.12948148148148242,
+          "parameter": "translate_x",
+          "stage": 3,
+          "value": -0.01
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "body_bbox": [
+          0.397,
+          0.03999999999999998,
+          0.5022,
+          0.92
+        ],
+        "body_fill": "#d92645",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.02500000000000003,
+            0.5
+          ],
+          [
+            0.397,
+            0.5
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.08,
+        "font_size": 0.3534,
+        "font_weight": "600",
+        "id": "right_facing_square_kelle_p",
+        "kind": "RightFacingSquareKellePGlyph",
+        "label": "P",
+        "label_center": [
+          0.6202,
+          0.52
+        ],
+        "label_fill": "#dedede"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -41,7 +225,10 @@
     "top_source_ref": null,
     "variant_name": "AC0732_1_L"
   },
-  "std_delta2": 23059.958984375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 14034.252166216758,
+  "std_delta2": 12581.849609375,
+  "tile_std_delta2": 8852.45826204489,
   "variant": "AC0732_1_L",
   "w": 45
 }

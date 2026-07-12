@@ -1,0 +1,78 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0413",
+  "best_error": 33.3375,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 1.047000000020489,
+  "error_per_pixel": 0.08334375,
+  "error_pixel_cluster_count": 21.0,
+  "error_pixel_cluster_excess": 0.0,
+  "error_pixel_count": 100.0,
+  "filename": "AC0413_2_S.jpg",
+  "h": 20,
+  "largest_error_pixel_cluster_fraction": 0.12,
+  "localized_error_fraction": 0.5682474473972383,
+  "mean_delta2": 7206.49755859375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0413",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0413 (Variante S). Die automatische Regionsanalyse hat nur eine Textfläche erkannt; dadurch wurde bisher eine generische Platzhalterbeschreibung erzeugt. Für die Konvertierung ist die Geometrie als kleiner Kreis (ca. 20×20 px) mit innenliegender Zeichenkette zu behandeln; die konkrete Zeichenkette bleibt ohne belastbares OCR-Ergebnis manuell zu prüfen."
+      },
+      {
+        "key": "AC0413_2_S",
+        "source": "variant_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0413_2. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0413_2_S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 13197.48004684965,
+  "std_delta2": 12893.9443359375,
+  "tile_std_delta2": 5412.944705675916,
+  "variant": "AC0413_2_S",
+  "w": 20
+}

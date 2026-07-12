@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0401",
-  "best_error": 51.99629629629629,
+  "best_error": 30.976296296296297,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.9680000000080327,
-  "error_per_pixel": 0.05777366255144033,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.5470000000204891,
+  "error_per_pixel": 0.034418106995884774,
+  "error_pixel_cluster_count": 17.0,
+  "error_pixel_cluster_excess": 0.09932539682539682,
+  "error_pixel_count": 224.0,
   "filename": "AC0401_2_M.jpg",
   "h": 30,
-  "localized_error_fraction": 0.5316400656397606,
-  "mean_delta2": 18838.17578125,
+  "largest_error_pixel_cluster_fraction": 0.3482142857142857,
+  "localized_error_fraction": 0.5428747050130986,
+  "mean_delta2": 5102.86865234375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -85,7 +91,9 @@
       }
     ],
     "documented_alias_refs": [],
-    "elements": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
     "geometry_ir": [
       {
         "bbox": [
@@ -121,95 +129,26 @@
         ]
       }
     ],
-    "geometry_ir_optimizer_result": {
-      "element_refinement": {
-        "final_error": 51.99629629629629,
-        "initial_error": 51.99629629629629,
-        "mode": "right_rotated_valve_geometry",
-        "steps": []
-      },
-      "final_error": 51.99629629629629,
-      "initial_error": 52.538518518518515,
-      "mode": "geometry_ir_raster_registration",
-      "parameters": {
-        "scale_x": 1.0,
-        "scale_y": 1.0,
-        "stroke_scale": 1.46,
-        "translate_x": 0.0,
-        "translate_y": 0.0
-      },
-      "steps": [
-        {
-          "best_delta": 0.40296296296295964,
-          "parameter": "stroke_scale",
-          "stage": 0,
-          "value": 1.25
-        },
-        {
-          "best_delta": 0.13814814814814724,
-          "parameter": "stroke_scale",
-          "stage": 0,
-          "value": 1.5
-        },
-        {
-          "best_delta": 0.0011111111111148375,
-          "parameter": "stroke_scale",
-          "stage": 3,
-          "value": 1.46
-        }
-      ]
-    },
     "label": "M",
-    "mode": "auto",
-    "optimized_geometry_ir": [
-      {
-        "bbox": [
-          0.015000000000000013,
-          0.015000000000000013,
-          0.97,
-          0.97
-        ],
-        "fill": "#de2048",
-        "id": "pump_circle",
-        "kind": "CircleBackground",
-        "stroke": "#9a7d82",
-        "stroke_width": 0.026279999999999998
-      },
-      {
-        "circle_ref": "pump_circle",
-        "fill": "#e7e7e7",
-        "id": "pump_triangle",
-        "kind": "PumpTriangleGlyph",
-        "points": [
-          [
-            0.18,
-            0.76
-          ],
-          [
-            0.82,
-            0.76
-          ],
-          [
-            0.5,
-            0.09999999999999998
-          ]
-        ]
-      }
-    ],
+    "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
       "layout_override",
       "description_heuristic"
     ],
-    "semantic_sources": {},
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
     "top_source_ref": null,
     "variant_name": "AC0401_2_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 36694.13679706193,
-  "std_delta2": 19320.548828125,
-  "tile_std_delta2": 15179.245731057814,
+  "spatial_quality_score": 12331.38625984068,
+  "std_delta2": 6500.99462890625,
+  "tile_std_delta2": 4819.475301928945,
   "variant": "AC0401_2_M",
   "w": 30
 }

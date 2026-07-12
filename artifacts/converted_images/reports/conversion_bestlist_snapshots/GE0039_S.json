@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0039",
-  "best_error": 26.206133333333334,
+  "best_error": 44.644666666666666,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.8129999999946449,
-  "error_per_pixel": 0.010482453333333334,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.25,
+  "error_per_pixel": 0.017857866666666666,
+  "error_pixel_cluster_count": 13.0,
+  "error_pixel_cluster_excess": 0.6316387096774194,
+  "error_pixel_count": 558.0,
   "filename": "GE0039_S.jpg",
   "h": 50,
-  "localized_error_fraction": 0.5975323424026091,
-  "mean_delta2": 5710.6630859375,
+  "largest_error_pixel_cluster_fraction": 0.8548387096774194,
+  "localized_error_fraction": 0.49603108920688643,
+  "mean_delta2": 10768.49609375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -43,24 +49,30 @@
     "documented_alias_refs": [
       "GE0038"
     ],
-    "elements": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
     "geometry_ir": [],
     "label": "M",
-    "mode": "auto",
+    "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
       "layout_override",
       "description_heuristic"
     ],
-    "semantic_sources": {},
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
     "top_source_ref": null,
     "variant_name": "GE0039_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 19629.88165668775,
-  "std_delta2": 11430.15625,
-  "tile_std_delta2": 9488.179357454508,
+  "spatial_quality_score": 23647.712139558796,
+  "std_delta2": 13302.1787109375,
+  "tile_std_delta2": 8140.940113351217,
   "variant": "GE0039_S",
   "w": 50
 }

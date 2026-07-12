@@ -1,15 +1,51 @@
 {
+  "actual_iterations": 64,
   "base": "GE0101",
-  "best_error": 18.737190476190477,
+  "best_error": 14.394238095238094,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0026767414965986397,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.4070000000065193,
+  "error_per_pixel": 0.0020563197278911562,
+  "error_pixel_cluster_count": 17.0,
+  "error_pixel_cluster_excess": 0.6077019704433497,
+  "error_pixel_count": 1856.0,
   "filename": "GE0101_M.jpg",
   "h": 40,
-  "mean_delta2": 1905.6744384765625,
+  "largest_error_pixel_cluster_fraction": 0.8728448275862069,
+  "localized_error_fraction": 0.6478777251793868,
+  "mean_delta2": 1396.2645263671875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "#d8d8d8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -43,8 +79,154 @@
         "stroke_width": 0.035
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 14.35057142857143,
+        "initial_error": 14.35057142857143,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 14.148904761904761,
+      "generic_element_refinement": {
+        "final_error": 14.148904761904761,
+        "initial_error": 14.35057142857143,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.201666666666668,
+            "element": "main_rect",
+            "error_after": 14.148904761904761,
+            "error_before": 14.35057142857143,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 31.093095238095238,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.5599999999999996,
+        "scale_y": 1.38,
+        "stroke_scale": 0.21,
+        "translate_x": 0.0,
+        "translate_y": 0.16
+      },
+      "steps": [
+        {
+          "best_delta": 0.9613333333333323,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 2.128333333333334,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.9565238095238087,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 1.8861428571428576,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 2.0143809523809537,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 2.3809047619047625,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.16
+        },
+        {
+          "best_delta": 1.4148571428571408,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.836666666666666,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 0.8223809523809535,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.4499999999999997
+        },
+        {
+          "best_delta": 0.4136190476190471,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 0.6649047619047614,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 1.356428571428573,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.5999999999999996
+        },
+        {
+          "best_delta": 0.5677619047619036,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.1113333333333344,
+          "parameter": "scale_y",
+          "stage": 1,
+          "value": 1.38
+        },
+        {
+          "best_delta": 0.04123809523809463,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 1.5599999999999996
+        },
+        {
+          "best_delta": 0.18571428571428505,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 0.21
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.0008159325944419506,
+          0.2996037676270925,
+          1.0,
+          0.7730547867434531
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#969696",
+        "stroke_width": 0.006656575699435947
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -55,7 +237,10 @@
     "top_source_ref": null,
     "variant_name": "GE0101_M"
   },
-  "std_delta2": 3536.2998046875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 3816.446909623376,
+  "std_delta2": 3140.381103515625,
+  "tile_std_delta2": 1630.865182681657,
   "variant": "GE0101_M",
   "w": 175
 }

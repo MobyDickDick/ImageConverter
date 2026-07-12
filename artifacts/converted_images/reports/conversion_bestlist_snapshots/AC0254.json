@@ -1,21 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0254",
-  "best_error": 38.6264308012487,
+  "best_error": 36.24488380159556,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
   "diff_error_distribution_status": "random_like",
-  "elapsed_seconds": 0.7190000000409782,
-  "error_per_pixel": 0.040193996671434654,
-  "error_pixel_cluster_count": 31.0,
+  "elapsed_seconds": 1.7179999999934807,
+  "error_per_pixel": 0.03771580000166032,
+  "error_pixel_cluster_count": 32.0,
   "error_pixel_cluster_excess": 0.09230817326372295,
   "error_pixel_count": 233.0,
   "filename": "AC0254.jpg",
   "h": 31,
   "largest_error_pixel_cluster_fraction": 0.33476394849785407,
-  "localized_error_fraction": 0.6303083898429122,
-  "mean_delta2": 8312.7578125,
+  "localized_error_fraction": 0.6309634071261137,
+  "mean_delta2": 7978.2412109375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -476,7 +476,7 @@
         "circle_stroke": "#78957d",
         "id": "left_rotated_circular_damper",
         "kind": "LeftRotatedCircularDamperGlyph",
-        "stroke_width": 0.17680000000000004
+        "stroke_width": 0.17769438151296565
       }
     ],
     "semantic_conflicts": [],
@@ -490,9 +490,9 @@
     "variant_name": "AC0254"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 23534.298853378365,
-  "std_delta2": 12953.279296875,
-  "tile_std_delta2": 10375.558846319893,
+  "spatial_quality_score": 23576.758132995048,
+  "std_delta2": 12105.7509765625,
+  "tile_std_delta2": 10387.978360052422,
   "variant": "AC0254",
   "w": 31
 }

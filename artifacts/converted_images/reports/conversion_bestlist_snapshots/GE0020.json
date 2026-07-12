@@ -1,0 +1,119 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0020",
+  "best_error": 29.763933195721524,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.437999999965541,
+  "error_per_pixel": 0.005585275510550108,
+  "error_pixel_cluster_count": 41.0,
+  "error_pixel_cluster_excess": 0.5105574236274181,
+  "error_pixel_count": 1332.0,
+  "filename": "GE0020.jpg",
+  "h": 73,
+  "largest_error_pixel_cluster_fraction": 0.7605105105105106,
+  "localized_error_fraction": 0.6537555996042667,
+  "mean_delta2": 5627.76806640625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0020",
+        "source": "base_name",
+        "text": "\"rotieren\" Zeichen (dunkelblauer Kreis, welcher an einer Stelle unterbrochen ist von einem Dreick/Pfeil). Hintergrund GE0999"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.03862724396406596,
+          0.04164206567318819,
+          0.9051723635544333,
+          0.9044439763892684
+        ],
+        "fill": "#77A5C0",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9885,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#CCDFEB",
+        "stroke_width": 0.037647687879932966
+      },
+      {
+        "bbox": [
+          0.20773757564862663,
+          0.8228927618484699,
+          0.5769290222291172,
+          0.05675167949779845
+        ],
+        "fill": "#83B0CE",
+        "font_size": 0.51781,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8607,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "full_image",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0020"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 13954.452033789483,
+  "std_delta2": 9161.0009765625,
+  "tile_std_delta2": 5762.640204753981,
+  "variant": "GE0020",
+  "w": 73
+}

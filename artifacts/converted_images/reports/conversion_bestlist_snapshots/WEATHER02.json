@@ -1,0 +1,152 @@
+{
+  "actual_iterations": 64,
+  "base": "WEATHER02",
+  "best_error": 35.26650541969005,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 1.5150000000139698,
+  "error_per_pixel": 0.009477695624748737,
+  "error_pixel_cluster_count": 61.0,
+  "error_pixel_cluster_excess": 0.2068569247969292,
+  "error_pixel_count": 862.0,
+  "filename": "weather02.jpg",
+  "h": 61,
+  "largest_error_pixel_cluster_fraction": 0.4385150812064965,
+  "localized_error_fraction": 0.5380989144465157,
+  "mean_delta2": 7492.39697265625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "weather02",
+        "source": "base_name",
+        "text": "Wie weather01, jedoch mit drei Regentropfen, welche aus der Wolcke fallen"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.1976040665568014,
+          0.03268831936579148,
+          0.8013962496687241,
+          0.9166993360828615
+        ],
+        "fill": "#B3BDC7",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9247,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#CCD3D8",
+        "stroke_width": 0.03793921397955054
+      },
+      {
+        "bbox": [
+          0.5272381058233224,
+          0.6694355903519703,
+          0.03149393402323945,
+          0.3296100454349205
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8891,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.54099,
+            0.67213
+          ],
+          [
+            0.54099,
+            1.0
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.03354333367642291
+      },
+      {
+        "bbox": [
+          0.7546032593991647,
+          0.37955886878587514,
+          0.246450035891416,
+          0.3095951561570859
+        ],
+        "fill": "#99A2B0",
+        "font_size": 0.28033,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7458,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "full_image",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "P"
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "WEATHER02"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 16062.256695241816,
+  "std_delta2": 13180.30078125,
+  "tile_std_delta2": 6202.18063963461,
+  "variant": "WEATHER02",
+  "w": 61
+}

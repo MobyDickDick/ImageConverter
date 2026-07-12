@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0553",
-  "best_error": 26.304166666666667,
+  "best_error": 24.94875,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.8590000000258442,
-  "error_per_pixel": 0.032880208333333334,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.7190000000409782,
+  "error_per_pixel": 0.0311859375,
+  "error_pixel_cluster_count": 3.0,
+  "error_pixel_cluster_excess": 0.38423076923076926,
+  "error_pixel_count": 208.0,
   "filename": "AC0553_2_S.jpg",
   "h": 40,
-  "localized_error_fraction": 0.7182349681924223,
-  "mean_delta2": 4480.45751953125,
+  "largest_error_pixel_cluster_fraction": 0.6442307692307693,
+  "localized_error_fraction": 0.7177008515563604,
+  "mean_delta2": 4224.59619140625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -48,6 +54,108 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.0011213986637630931,
+          0.0010013572667985507,
+          0.9985265466209129,
+          0.9986063282126298
+        ],
+        "fill": "#61BC6D",
+        "id": "perception_rect_border",
+        "kind": "RectBorder",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9316,
+          "detector": "contour",
+          "kind": "rectangle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#7DB184",
+        "stroke_width": 0.061234279811350295
+      },
+      {
+        "bbox": [
+          0.0,
+          0.29951385351907694,
+          0.8019887129394547,
+          0.3994487463228941
+        ],
+        "fill": "#5AC567",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9699,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#6AC674",
+        "stroke_width": 0.05136657503720526
+      },
+      {
+        "bbox": [
+          0.92441326063143,
+          0.001963125812339598,
+          0.04818901185827842,
+          0.9767378766282199
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 1.0,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.95,
+            0.0
+          ],
+          [
+            0.95,
+            0.975
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.049367913563697706
+      },
+      {
+        "bbox": [
+          0.4978300791262152,
+          0.24833196285870876,
+          0.24999187261663894,
+          0.7241259713198593
+        ],
+        "fill": "#4CC75A",
+        "font_size": 0.6525,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7046,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "full_image",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "I"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -59,9 +167,9 @@
     "variant_name": "AC0553_2_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 11313.4326686577,
-  "std_delta2": 8524.544921875,
-  "tile_std_delta2": 5099.16253899578,
+  "spatial_quality_score": 12017.2044067649,
+  "std_delta2": 8442.5078125,
+  "tile_std_delta2": 5051.386972107733,
   "variant": "AC0553_2_S",
   "w": 20
 }

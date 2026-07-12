@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0022",
-  "best_error": 15.2696,
+  "best_error": 21.691866666666666,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.7660000000032596,
-  "error_per_pixel": 0.00610784,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.8910000000614673,
+  "error_per_pixel": 0.008676746666666667,
+  "error_pixel_cluster_count": 47.0,
+  "error_pixel_cluster_excess": 0.15028193202146692,
+  "error_pixel_count": 559.0,
   "filename": "GE0022_S.jpg",
   "h": 50,
-  "localized_error_fraction": 0.4277494513202069,
-  "mean_delta2": 1600.7559814453125,
+  "largest_error_pixel_cluster_fraction": 0.3738819320214669,
+  "localized_error_fraction": 0.445421027610949,
+  "mean_delta2": 2490.854736328125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -43,24 +49,30 @@
     "documented_alias_refs": [
       "GE0021"
     ],
-    "elements": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
     "geometry_ir": [],
     "label": "M",
-    "mode": "auto",
+    "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
       "layout_override",
       "description_heuristic"
     ],
-    "semantic_sources": {},
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
     "top_source_ref": null,
     "variant_name": "GE0022_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 5894.2412783839945,
-  "std_delta2": 2566.0595703125,
-  "tile_std_delta2": 1851.9334522108732,
+  "spatial_quality_score": 4632.470278592203,
+  "std_delta2": 2635.466552734375,
+  "tile_std_delta2": 1511.0742339024782,
   "variant": "GE0022_S",
   "w": 50
 }

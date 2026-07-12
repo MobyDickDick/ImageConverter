@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0501",
-  "best_error": 11.890833333333333,
+  "best_error": 11.132916666666667,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.3129999999946449,
-  "error_per_pixel": 0.014863541666666667,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.859000000054948,
+  "error_per_pixel": 0.013916145833333332,
+  "error_pixel_cluster_count": 25.0,
+  "error_pixel_cluster_excess": 0.07669117647058826,
+  "error_pixel_count": 221.0,
   "filename": "AC0501_S.jpg",
   "h": 40,
-  "localized_error_fraction": 0.6141803908074542,
-  "mean_delta2": 784.657470703125,
+  "largest_error_pixel_cluster_fraction": 0.35294117647058826,
+  "localized_error_fraction": 0.6058466950246839,
+  "mean_delta2": 684.4037475585938,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -106,7 +112,30 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 34.84041666666667,
+      "final_error": 34.25625,
+      "generic_element_refinement": {
+        "final_error": 34.25625,
+        "initial_error": 34.84041666666667,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.5841666666666683,
+            "element": "main_rect",
+            "error_after": 34.25625,
+            "error_before": 34.84041666666667,
+            "step_index": 0
+          },
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "diagonal_1_tr_bl",
+            "error_after": 34.25625,
+            "error_before": 34.25625,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 54.62708333333333,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -231,7 +260,7 @@
           0.43919999999999987,
           0.9879999999999999
         ],
-        "fill": "#d8d8d8",
+        "fill": "#d0d0d0",
         "id": "main_rect",
         "kind": "RectBorder",
         "stroke": "#666666",
@@ -258,9 +287,9 @@
     "variant_name": "AC0501_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 1775.330335433271,
-  "std_delta2": 1500.769775390625,
-  "tile_std_delta2": 768.8061672279383,
+  "spatial_quality_score": 1569.943344145977,
+  "std_delta2": 1486.826904296875,
+  "tile_std_delta2": 638.6497674418702,
   "variant": "AC0501_S",
   "w": 20
 }

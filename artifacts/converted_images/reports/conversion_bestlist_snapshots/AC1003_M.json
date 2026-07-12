@@ -1,0 +1,79 @@
+{
+  "actual_iterations": 64,
+  "base": "AC1003",
+  "best_error": 29.52,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.6720000000204891,
+  "error_per_pixel": 0.04217142857142857,
+  "error_pixel_cluster_count": 29.0,
+  "error_pixel_cluster_excess": 0.11666666666666667,
+  "error_pixel_count": 105.0,
+  "filename": "AC1003_M.jpg",
+  "h": 35,
+  "largest_error_pixel_cluster_fraction": 0.26666666666666666,
+  "localized_error_fraction": 0.6518042716373996,
+  "mean_delta2": 7404.4541015625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC1003",
+        "source": "base_name",
+        "text": "Wie AC1001: Wie AC1000, jedoch mit Kelle (graue horizontale Linie) nach unten. Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC1000",
+      "AC1001"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC1003_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 17908.496248436008,
+  "std_delta2": 13623.998046875,
+  "tile_std_delta2": 7652.269307362732,
+  "variant": "AC1003_M",
+  "w": 20
+}

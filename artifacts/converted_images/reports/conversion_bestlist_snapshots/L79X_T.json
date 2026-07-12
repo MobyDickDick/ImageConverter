@@ -1,15 +1,37 @@
 {
+  "actual_iterations": 64,
   "base": "L79X_T",
-  "best_error": 9.73860696517413,
+  "best_error": 9.2418407960199,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0014535234276379298,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.3440000000409782,
+  "error_per_pixel": 0.0013793792232865522,
+  "error_pixel_cluster_count": 30.0,
+  "error_pixel_cluster_excess": 0.3528380211962301,
+  "error_pixel_count": 1628.0,
   "filename": "L79x_T.jpg",
   "h": 67,
-  "mean_delta2": 1873.60205078125,
+  "largest_error_pixel_cluster_fraction": 0.5958230958230958,
+  "localized_error_fraction": 0.9524583471605275,
+  "mean_delta2": 1875.9449462890625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -39,7 +61,10 @@
     "top_source_ref": null,
     "variant_name": "L79X_T"
   },
-  "std_delta2": 11886.453125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 7557.564218823903,
+  "std_delta2": 11590.99609375,
+  "tile_std_delta2": 4445.774111800776,
   "variant": "L79X_T",
   "w": 100
 }

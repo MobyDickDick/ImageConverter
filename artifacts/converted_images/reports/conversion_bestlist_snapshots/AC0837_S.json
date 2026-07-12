@@ -1,10 +1,12 @@
 {
-  "actual_iterations": 65,
+  "actual_iterations": 64,
   "base": "AC0837",
   "best_error": 24.010666666666665,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.6559999999881256,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.734000000054948,
   "error_per_pixel": 0.06402844444444444,
   "error_pixel_cluster_count": 17.0,
   "error_pixel_cluster_excess": 0.1324153005464481,
@@ -13,7 +15,7 @@
   "h": 15,
   "largest_error_pixel_cluster_fraction": 0.29508196721311475,
   "localized_error_fraction": 0.7428114329890265,
-  "mean_delta2": 3344.303955078125,
+  "mean_delta2": 5215.50390625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -108,8 +110,8 @@
       "AC0836"
     ],
     "elements": [
-      "SEMANTIC: Kreis + Buchstabe VOC",
       "SEMANTIC: waagrechter Strich links vom Kreis",
+      "SEMANTIC: Kreis + Buchstabe VOC",
       "SEMANTIC: waagrechter Strich rechts vom Kreis"
     ],
     "geometry_ir": [
@@ -163,14 +165,16 @@
         "SEMANTIC: waagrechter Strich links vom Kreis",
         "SEMANTIC: waagrechter Strich rechts vom Kreis"
       ],
-      "family_rule": []
+      "family_rule": [
+        "SEMANTIC: waagrechter Strich links vom Kreis"
+      ]
     },
     "top_source_ref": null,
     "variant_name": "AC0837_S"
   },
-  "requested_iterations": 65,
+  "requested_iterations": 64,
   "spatial_quality_score": 14310.483379895899,
-  "std_delta2": 9528.55078125,
+  "std_delta2": 10939.0048828125,
   "tile_std_delta2": 7186.436626123313,
   "variant": "AC0837_S",
   "w": 25

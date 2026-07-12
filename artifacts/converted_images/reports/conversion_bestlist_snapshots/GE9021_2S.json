@@ -1,50 +1,390 @@
 {
   "actual_iterations": 64,
   "base": "GE9021",
-  "best_error": 36.95333333333333,
+  "best_error": 27.84,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.7029999999995198,
-  "error_per_pixel": 0.12317777777777777,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.7820000000065193,
+  "error_per_pixel": 0.0928,
+  "error_pixel_cluster_count": 3.0,
+  "error_pixel_cluster_excess": 0.5238967136150234,
+  "error_pixel_count": 71.0,
   "filename": "GE9021_2S.jpg",
   "h": 30,
-  "localized_error_fraction": 0.5097714380975785,
-  "mean_delta2": 9076.4404296875,
+  "largest_error_pixel_cluster_fraction": 0.7605633802816901,
+  "localized_error_fraction": 0.7253126208585794,
+  "mean_delta2": 7796.18017578125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
     "description_constraints": {
-      "elements": [],
+      "elements": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "confidence": 0.75,
+          "fill": "#ffffff",
+          "id": "description_element_1",
+          "kind": "ColorPatch",
+          "source": "description",
+          "stroke": "none"
+        },
+        {
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "PolygonPath",
+          "linecap": "butt",
+          "linejoin": "round",
+          "points": [
+            [
+              0.235,
+              0.0
+            ],
+            [
+              0.235,
+              0.835
+            ],
+            [
+              0.5,
+              0.965
+            ],
+            [
+              0.765,
+              0.835
+            ],
+            [
+              0.765,
+              0.0
+            ]
+          ],
+          "primitive_decomposition": {
+            "primitives": [
+              {
+                "kind": "LineSegment",
+                "role": "left_vertical_leg"
+              },
+              {
+                "kind": "ArcSegment",
+                "role": "bottom_round_connector"
+              },
+              {
+                "kind": "LineSegment",
+                "role": "right_vertical_leg"
+              }
+            ],
+            "schema_version": "u_loop_primitive_decomposition_v1"
+          },
+          "role": "u_loop",
+          "source": "description",
+          "stroke": "#f2db18",
+          "stroke_width": 0.115
+        }
+      ],
       "relations": [],
       "schema_version": "description_geometry_constraints_v1",
       "source": "description",
       "uncertainty": {
-        "confidence": 0.0,
-        "reasons": [
-          "no_supported_geometry_constraint"
-        ],
-        "status": "needs_review"
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
       }
     },
     "description_contract": {
       "deficits": [],
-      "has_conditions": false,
-      "has_geometry_terms": false,
-      "has_reference": true,
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
       "status": "ok"
     },
     "description_fragments": [
       {
         "key": "GE9021",
         "source": "base_name",
-        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+        "text": "Weißer schmaler Hintergrund mit gelber U-Form: zwei senkrechte gelbe Linien laufen links und rechts nach unten und sind unten durch einen runden gelben Bogen verbunden."
       }
     ],
     "documented_alias_refs": [],
     "elements": [],
-    "geometry_ir": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "fill": "#ffffff",
+        "id": "u_loop_background",
+        "kind": "ColorPatch",
+        "stroke": "none"
+      },
+      {
+        "fill": "none",
+        "id": "yellow_u_loop",
+        "kind": "PolygonPath",
+        "linecap": "butt",
+        "linejoin": "round",
+        "points": [
+          [
+            0.235,
+            0.0
+          ],
+          [
+            0.235,
+            0.835
+          ],
+          [
+            0.5,
+            0.965
+          ],
+          [
+            0.765,
+            0.835
+          ],
+          [
+            0.765,
+            0.0
+          ]
+        ],
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "LineSegment",
+              "role": "left_vertical_leg"
+            },
+            {
+              "kind": "ArcSegment",
+              "role": "bottom_round_connector"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "right_vertical_leg"
+            }
+          ],
+          "schema_version": "u_loop_primitive_decomposition_v1"
+        },
+        "role": "u_loop",
+        "stroke": "#f2db18",
+        "stroke_width": 0.115
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 44.89555555555555,
+        "initial_error": 44.89555555555555,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 28.105555555555554,
+      "generic_element_refinement": {
+        "final_error": 28.105555555555554,
+        "initial_error": 44.89555555555555,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 8.557777777777773,
+            "element": "u_loop_background",
+            "error_after": 36.33777777777778,
+            "error_before": 44.89555555555555,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 8.232222222222227,
+            "element": "yellow_u_loop",
+            "error_after": 28.105555555555554,
+            "error_before": 36.33777777777778,
+            "step_index": 1
+          }
+        ]
+      },
+      "initial_error": 60.352222222222224,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.74,
+        "scale_y": 1.0,
+        "stroke_scale": 0.38,
+        "translate_x": 0.0,
+        "translate_y": -0.09
+      },
+      "steps": [
+        {
+          "best_delta": 0.87777777777778,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 1.4299999999999997,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.4455555555555577,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.3844444444444406,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.954444444444448,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 4.9566666666666634,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 0.2055555555555557,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 1.3233333333333377,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 1.6211111111111052,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 0.24111111111111683,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 0.4266666666666623,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.0
+        },
+        {
+          "best_delta": 0.4611111111111157,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 0.74
+        },
+        {
+          "best_delta": 1.0577777777777726,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 0.42
+        },
+        {
+          "best_delta": 0.006666666666667709,
+          "parameter": "translate_y",
+          "stage": 3,
+          "value": -0.09
+        },
+        {
+          "best_delta": 0.005555555555552871,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 1.02
+        },
+        {
+          "best_delta": 0.03777777777778368,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 0.38
+        },
+        {
+          "best_delta": 0.02111111111111086,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 1.0
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.13176865615626446,
+          0.0,
+          0.7412884249281047,
+          0.9997257548455668
+        ],
+        "fill": "#b8c8d0",
+        "id": "u_loop_background",
+        "kind": "ColorPatch",
+        "stroke": "none"
+      },
+      {
+        "fill": "none",
+        "id": "yellow_u_loop",
+        "kind": "PolygonPath",
+        "linecap": "butt",
+        "linejoin": "round",
+        "points": [
+          [
+            0.3039,
+            -0.09
+          ],
+          [
+            0.3039,
+            0.745
+          ],
+          [
+            0.5,
+            0.875
+          ],
+          [
+            0.6960999999999999,
+            0.745
+          ],
+          [
+            0.6960999999999999,
+            -0.09
+          ]
+        ],
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "LineSegment",
+              "role": "left_vertical_leg"
+            },
+            {
+              "kind": "ArcSegment",
+              "role": "bottom_round_connector"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "right_vertical_leg"
+            }
+          ],
+          "schema_version": "u_loop_primitive_decomposition_v1"
+        },
+        "role": "u_loop",
+        "stroke": "#176f28",
+        "stroke_width": 0.04389090459877241
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -56,9 +396,9 @@
     "variant_name": "GE9021_2S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 17929.123675412062,
-  "std_delta2": 16799.931640625,
-  "tile_std_delta2": 8252.755568528535,
+  "spatial_quality_score": 18788.095175242914,
+  "std_delta2": 16346.154296875,
+  "tile_std_delta2": 11574.203267524343,
   "variant": "GE9021_2S",
   "w": 10
 }

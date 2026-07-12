@@ -1,29 +1,49 @@
 {
   "actual_iterations": 64,
   "base": "AC0713",
-  "best_error": 29.586666666666666,
+  "best_error": 43.482962962962965,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.40600000000085856,
-  "error_per_pixel": 0.02629925925925926,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 1.797000000020489,
+  "error_per_pixel": 0.038651522633744856,
+  "error_pixel_cluster_count": 15.0,
+  "error_pixel_cluster_excess": 0.02155305867665419,
+  "error_pixel_count": 178.0,
   "filename": "AC0713_1_L.jpg",
   "h": 45,
-  "localized_error_fraction": 0.7023019776209328,
-  "mean_delta2": 7251.375,
+  "largest_error_pixel_cluster_fraction": 0.1797752808988764,
+  "localized_error_fraction": 0.5393478153899399,
+  "mean_delta2": 13458.083984375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
     "description_constraints": {
-      "elements": [],
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "#d8d8d8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
       "relations": [],
       "schema_version": "description_geometry_constraints_v1",
       "source": "description",
       "uncertainty": {
-        "confidence": 0.0,
-        "reasons": [
-          "no_supported_geometry_constraint"
-        ],
-        "status": "needs_review"
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
       }
     },
     "description_contract": {
@@ -43,24 +63,44 @@
     "documented_alias_refs": [
       "AC0701"
     ],
-    "elements": [],
-    "geometry_ir": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
     "label": "M",
-    "mode": "auto",
+    "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
       "layout_override",
       "description_heuristic"
     ],
-    "semantic_sources": {},
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
     "top_source_ref": null,
     "variant_name": "AC0713_1_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 60129.86942579066,
-  "std_delta2": 12634.4794921875,
-  "tile_std_delta2": 28834.774293719194,
+  "spatial_quality_score": 27011.842664083502,
+  "std_delta2": 15902.6337890625,
+  "tile_std_delta2": 11515.227038515648,
   "variant": "AC0713_1_L",
   "w": 25
 }

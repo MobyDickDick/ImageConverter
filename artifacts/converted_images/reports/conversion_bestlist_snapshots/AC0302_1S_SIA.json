@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0302",
-  "best_error": 45.87979166666667,
+  "best_error": 25.61375,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.46899999999914144,
-  "error_per_pixel": 0.02867486979166667,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.8130000000819564,
+  "error_per_pixel": 0.01600859375,
+  "error_pixel_cluster_count": 26.0,
+  "error_pixel_cluster_excess": 0.4273167293233082,
+  "error_pixel_count": 399.0,
   "filename": "AC0302_1S_sia.jpg",
   "h": 40,
-  "localized_error_fraction": 0.4036567899539499,
-  "mean_delta2": 10369.4794921875,
+  "largest_error_pixel_cluster_fraction": 0.6766917293233082,
+  "localized_error_fraction": 0.557408975475483,
+  "mean_delta2": 6670.4599609375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -47,6 +53,88 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.0494692170252659,
+          0.04964147105660072,
+          0.8993968316231599,
+          0.9019375645919351
+        ],
+        "fill": "#E02F55",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9728,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#D52D54",
+        "stroke_width": 0.03547729189029817
+      },
+      {
+        "bbox": [
+          0.02683363516300858,
+          0.1220769715129942,
+          0.20120808961087402,
+          0.7999900920072741
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7412,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.125,
+            0.125
+          ],
+          [
+            0.125,
+            0.925
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.20112563478980894
+      },
+      {
+        "bbox": [
+          0.22696569082101403,
+          0.32740111550504575,
+          0.40006210529507996,
+          0.10103462403192984
+        ],
+        "fill": "#E0254D",
+        "font_size": 0.36,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7054,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -58,9 +146,9 @@
     "variant_name": "AC0302_1S_SIA"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 18248.32681207524,
-  "std_delta2": 9140.9580078125,
-  "tile_std_delta2": 5172.769033517991,
+  "spatial_quality_score": 19689.4722116344,
+  "std_delta2": 14166.7216796875,
+  "tile_std_delta2": 7198.8165785481915,
   "variant": "AC0302_1S_SIA",
   "w": 40
 }

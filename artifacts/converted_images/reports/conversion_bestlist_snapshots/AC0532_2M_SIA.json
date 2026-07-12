@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0532_2M",
-  "best_error": 9.645925925925926,
+  "best_error": 9.336666666666666,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.4840000000003783,
-  "error_per_pixel": 0.005358847736625515,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 2.047000000020489,
+  "error_per_pixel": 0.005187037037037037,
+  "error_pixel_cluster_count": 10.0,
+  "error_pixel_cluster_excess": 0.438974358974359,
+  "error_pixel_count": 156.0,
   "filename": "AC0532_2M_sia.jpg",
   "h": 30,
-  "localized_error_fraction": 0.9808503872290253,
-  "mean_delta2": 2271.122314453125,
+  "largest_error_pixel_cluster_fraction": 0.5256410256410257,
+  "localized_error_fraction": 0.978310120944256,
+  "mean_delta2": 2075.52001953125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -108,7 +114,30 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 9.645925925925926,
+      "final_error": 9.264814814814814,
+      "generic_element_refinement": {
+        "final_error": 9.264814814814814,
+        "initial_error": 9.645925925925926,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.3764814814814823,
+            "element": "main_rect",
+            "error_after": 9.269444444444444,
+            "error_before": 9.645925925925926,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.004629629629629761,
+            "element": "diagonal_1_tr_bl",
+            "error_after": 9.264814814814814,
+            "error_before": 9.269444444444444,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 33.5162962962963,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -306,16 +335,16 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.0756,
-          0.29100000000000004,
-          0.20879999999999999,
-          0.4179999999999999
+          0.0754414918950615,
+          0.2935025853030549,
+          0.20946777824453588,
+          0.4199206838540233
         ],
-        "fill": "#d8d8d8",
+        "fill": "#b1c1cc",
         "id": "main_rect",
         "kind": "RectBorder",
         "stroke": "#666666",
-        "stroke_width": 0.09239999999999998
+        "stroke_width": 0.0912430189828246
       },
       {
         "clip_to": "main_rect",
@@ -324,7 +353,7 @@
         "kind": "DiagonalBand",
         "rect_ref": "main_rect",
         "stroke": "#707070",
-        "stroke_width": 0.11879999999999996
+        "stroke_width": 0.13585494198099674
       }
     ],
     "semantic_conflicts": [],
@@ -338,9 +367,9 @@
     "variant_name": "AC0532_2M_SIA"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 7891.5226903452985,
-  "std_delta2": 7770.55517578125,
-  "tile_std_delta2": 4353.267463968443,
+  "spatial_quality_score": 7640.015688130067,
+  "std_delta2": 7157.759765625,
+  "tile_std_delta2": 3914.071954531912,
   "variant": "AC0532_2M_SIA",
   "w": 60
 }

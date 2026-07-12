@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC5020",
-  "best_error": 38.99048611111111,
+  "best_error": 38.31313271604938,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.4850000000005821,
-  "error_per_pixel": 0.0009025575488683128,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.5619999999180436,
+  "error_per_pixel": 0.0008868780721307727,
+  "error_pixel_cluster_count": 34.0,
+  "error_pixel_cluster_excess": 0.6160509187258799,
+  "error_pixel_count": 10288.0,
   "filename": "AC5020_M.jpg",
   "h": 180,
-  "localized_error_fraction": 0.5055908366658354,
-  "mean_delta2": 6483.654296875,
+  "largest_error_pixel_cluster_fraction": 0.854199066874028,
+  "localized_error_fraction": 0.540148110683264,
+  "mean_delta2": 6408.1953125,
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
@@ -49,6 +55,108 @@
     "geometry_ir": [],
     "label": "",
     "mode": "insufficient_description",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.0012454156296398608,
+          0.1178347971156991,
+          1.0,
+          0.8722816797623463
+        ],
+        "fill": "#AEAEB0",
+        "id": "perception_rect_border",
+        "kind": "RectBorder",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9472,
+          "detector": "contour",
+          "kind": "rectangle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#D2D3D4",
+        "stroke_width": 0.05379431011959478
+      },
+      {
+        "bbox": [
+          0.3552392680229514,
+          0.13703203234709557,
+          0.5833194409573015,
+          0.7789455730433095
+        ],
+        "fill": "#A4A4A5",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.943,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#A2A2A3",
+        "stroke_width": 0.0318918024453509
+      },
+      {
+        "bbox": [
+          0.9295166241333578,
+          0.15138683252483898,
+          0.010538901194632156,
+          0.48788272355228635
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 1.0,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.93333,
+            0.15
+          ],
+          [
+            0.93333,
+            0.63889
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.015716878260455314
+      },
+      {
+        "bbox": [
+          0.17148046048438742,
+          0.6664713769099161,
+          0.10003223950822003,
+          0.19600604543589853
+        ],
+        "fill": "#CDCDCD",
+        "font_size": 0.175,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.867,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top+bottom+left",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "F"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -60,9 +168,9 @@
     "variant_name": "AC5020_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 12035.939533508361,
-  "std_delta2": 6655.17626953125,
-  "tile_std_delta2": 4492.69244828456,
+  "spatial_quality_score": 14525.576102286488,
+  "std_delta2": 6962.00927734375,
+  "tile_std_delta2": 4938.974376026898,
   "variant": "AC5020_M",
   "w": 240
 }

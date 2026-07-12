@@ -1,0 +1,227 @@
+{
+  "actual_iterations": 64,
+  "base": "GE9024",
+  "best_error": 27.026666666666667,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.3429999999934807,
+  "error_per_pixel": 0.09008888888888889,
+  "error_pixel_cluster_count": 7.0,
+  "error_pixel_cluster_excess": 0.17579710144927538,
+  "error_pixel_count": 69.0,
+  "filename": "GE9024_7S.jpg",
+  "h": 10,
+  "largest_error_pixel_cluster_fraction": 0.4057971014492754,
+  "localized_error_fraction": 0.7141725738594464,
+  "mean_delta2": 7820.033203125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "confidence": 0.75,
+          "fill": "#e8e8e8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "primitive_decomposition": {
+            "primitives": [
+              {
+                "kind": "ColorPatch",
+                "role": "light_grey_fill"
+              }
+            ],
+            "schema_version": "light_grey_square_decomposition_v1"
+          },
+          "role": "reference_light_grey_square",
+          "source": "description",
+          "stroke": "none",
+          "stroke_width": 0.0
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE9024",
+        "source": "base_name",
+        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "fill": "#e8e8e8",
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.0
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 26.78,
+        "initial_error": 26.78,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 26.165555555555557,
+      "generic_element_refinement": {
+        "final_error": 26.165555555555557,
+        "initial_error": 26.78,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.6144444444444446,
+            "element": "backbottom_light_grey_square",
+            "error_after": 26.165555555555557,
+            "error_before": 26.78,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 31.17111111111111,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.0,
+        "scale_y": 0.85,
+        "stroke_scale": 1.0,
+        "translate_x": -0.11,
+        "translate_y": -0.15000000000000002
+      },
+      "steps": [
+        {
+          "best_delta": 0.4355555555555526,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.6366666666666667,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.3555555555555578,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.8588888888888881,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 0.03777777777777658,
+          "parameter": "translate_x",
+          "stage": 1,
+          "value": -0.12
+        },
+        {
+          "best_delta": 0.04222222222222172,
+          "parameter": "translate_y",
+          "stage": 2,
+          "value": -0.14
+        },
+        {
+          "best_delta": 0.012222222222224133,
+          "parameter": "translate_x",
+          "stage": 3,
+          "value": -0.11
+        },
+        {
+          "best_delta": 0.01222222222222058,
+          "parameter": "translate_y",
+          "stage": 3,
+          "value": -0.15000000000000002
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          1.0,
+          0.8519917051422118
+        ],
+        "fill": "#e8e8e8",
+        "fill_opacity": 0.75,
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.001
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9024_7S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 21023.850449434314,
+  "std_delta2": 12117.4609375,
+  "tile_std_delta2": 11557.176252183875,
+  "variant": "GE9024_7S",
+  "w": 30
+}

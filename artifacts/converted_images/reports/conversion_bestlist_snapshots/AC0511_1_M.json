@@ -1,21 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0511",
-  "best_error": 37.028888888888886,
+  "best_error": 37.053703703703704,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
   "diff_error_distribution_status": "random_like",
-  "elapsed_seconds": 0.6880000000819564,
-  "error_per_pixel": 0.020571604938271603,
-  "error_pixel_cluster_count": 39.0,
+  "elapsed_seconds": 1.375,
+  "error_per_pixel": 0.02058539094650206,
+  "error_pixel_cluster_count": 51.0,
   "error_pixel_cluster_excess": 0.0,
-  "error_pixel_count": 455.0,
+  "error_pixel_count": 450.0,
   "filename": "AC0511_1_M.jpg",
   "h": 60,
-  "largest_error_pixel_cluster_fraction": 0.189010989010989,
-  "localized_error_fraction": 0.4651859454233911,
-  "mean_delta2": 6395.0068359375,
+  "largest_error_pixel_cluster_fraction": 0.16666666666666666,
+  "localized_error_fraction": 0.46481387007673164,
+  "mean_delta2": 6414.1279296875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -154,9 +154,9 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 103.10888888888888,
+      "final_error": 103.09962962962963,
       "generic_element_refinement": {
-        "final_error": 103.10888888888888,
+        "final_error": 103.09962962962963,
         "initial_error": 103.35666666666667,
         "mode": "elementwise_geometry_ir",
         "steps": [
@@ -170,18 +170,18 @@
           },
           {
             "accepted": true,
-            "best_delta": 0.10000000000000853,
+            "best_delta": 0.10944444444444912,
             "element": "main_rect",
-            "error_after": 103.25666666666666,
+            "error_after": 103.24722222222222,
             "error_before": 103.35666666666667,
             "step_index": 1
           },
           {
             "accepted": true,
-            "best_delta": 0.147777777777776,
+            "best_delta": 0.14759259259258783,
             "element": "horizontal_rule_set",
-            "error_after": 103.10888888888888,
-            "error_before": 103.25666666666666,
+            "error_after": 103.09962962962963,
+            "error_before": 103.24722222222222,
             "step_index": 2
           }
         ]
@@ -389,8 +389,8 @@
         "fill": "none",
         "id": "main_rect",
         "kind": "RectBorder",
-        "stroke": "#606060",
-        "stroke_width": 0.1456
+        "stroke": "#666666",
+        "stroke_width": 0.14685
       },
       {
         "id": "horizontal_rule_set",
@@ -417,9 +417,9 @@
     "variant_name": "AC0511_1_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 10930.9182293209,
-  "std_delta2": 6512.32568359375,
-  "tile_std_delta2": 3235.564688752873,
+  "spatial_quality_score": 10939.204041535879,
+  "std_delta2": 6467.6455078125,
+  "tile_std_delta2": 3207.497924515072,
   "variant": "AC0511_1_M",
   "w": 30
 }

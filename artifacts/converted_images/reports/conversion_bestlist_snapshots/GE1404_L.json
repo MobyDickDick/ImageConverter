@@ -1,0 +1,79 @@
+{
+  "actual_iterations": 64,
+  "base": "GE1404",
+  "best_error": 32.772345679012346,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.375,
+  "error_per_pixel": 0.02427581161408322,
+  "error_pixel_cluster_count": 10.0,
+  "error_pixel_cluster_excess": 0.7109405031854013,
+  "error_pixel_count": 343.0,
+  "filename": "GE1404_L.jpg",
+  "h": 30,
+  "largest_error_pixel_cluster_fraction": 0.9650145772594753,
+  "localized_error_fraction": 0.4930579866338646,
+  "mean_delta2": 4919.55859375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE1404",
+        "source": "base_name",
+        "text": "Wie GE1401: Wie AC0150, jedoch ist die kräftige graue Ecke/ Winkel unten statt rechts. . Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0150",
+      "GE1401"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "GE1404_L"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 12140.695772044844,
+  "std_delta2": 6525.38134765625,
+  "tile_std_delta2": 4453.038582583653,
+  "variant": "GE1404_L",
+  "w": 45
+}

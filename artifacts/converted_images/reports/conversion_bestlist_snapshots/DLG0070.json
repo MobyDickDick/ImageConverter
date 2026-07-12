@@ -1,0 +1,238 @@
+{
+  "actual_iterations": 64,
+  "base": "DLG0070",
+  "best_error": 6.230555555555555,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.1410000000614673,
+  "error_per_pixel": 0.004720117845117845,
+  "error_pixel_cluster_count": 10.0,
+  "error_pixel_cluster_excess": 0.6354899358548993,
+  "error_pixel_count": 274.0,
+  "filename": "DLG0070.JPG",
+  "h": 20,
+  "largest_error_pixel_cluster_fraction": 0.843065693430657,
+  "localized_error_fraction": 0.8901545972335232,
+  "mean_delta2": 410.59771728515625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "confidence": 0.75,
+          "fill": "#e8e8e8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "primitive_decomposition": {
+            "primitives": [
+              {
+                "kind": "ColorPatch",
+                "role": "light_grey_fill"
+              }
+            ],
+            "schema_version": "light_grey_square_decomposition_v1"
+          },
+          "role": "reference_light_grey_square",
+          "source": "description",
+          "stroke": "none",
+          "stroke_width": 0.0
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "DLG0070",
+        "source": "base_name",
+        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "fill": "#e8e8e8",
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.0
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 7.153282828282828,
+        "initial_error": 7.153282828282828,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 6.210858585858586,
+      "generic_element_refinement": {
+        "final_error": 6.210858585858586,
+        "initial_error": 7.153282828282828,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.9424242424242424,
+            "element": "backbottom_light_grey_square",
+            "error_after": 6.210858585858586,
+            "error_before": 7.153282828282828,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 16.038131313131313,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.3999999999999999,
+        "scale_y": 1.0,
+        "stroke_scale": 1.0,
+        "translate_x": 0.44,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.1696969696969699,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.9848484848484844,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 1.0727272727272723,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.16
+        },
+        {
+          "best_delta": 0.9803030303030305,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 1.0651515151515145,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.24
+        },
+        {
+          "best_delta": 0.9818181818181824,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 1.0616161616161612,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.32
+        },
+        {
+          "best_delta": 0.9989898989898993,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 1.0202020202020208,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.4
+        },
+        {
+          "best_delta": 0.5494949494949495,
+          "parameter": "translate_x",
+          "stage": 1,
+          "value": 0.44
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.7423576269032593,
+          0.0026066777945167527,
+          0.4003841029898106,
+          0.998209132121302
+        ],
+        "fill": "#e0e0e0",
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.001
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "DLG0070"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 1496.3359218111163,
+  "std_delta2": 1094.082763671875,
+  "tile_std_delta2": 914.7786770901432,
+  "variant": "DLG0070",
+  "w": 66
+}

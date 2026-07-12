@@ -1,0 +1,352 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0017",
+  "best_error": 37.067515432098766,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.9219999999040738,
+  "error_per_pixel": 0.007150369489216583,
+  "error_pixel_cluster_count": 68.0,
+  "error_pixel_cluster_excess": 0.3641975308641975,
+  "error_pixel_count": 1296.0,
+  "filename": "GE0017.jpg",
+  "h": 72,
+  "largest_error_pixel_cluster_fraction": 0.6141975308641975,
+  "localized_error_fraction": 0.7608447556779331,
+  "mean_delta2": 10074.7412109375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [
+        {
+          "confidence": 0.75,
+          "id": "description_element_1",
+          "kind": "MinusGlyph",
+          "position": "top_center",
+          "source": "description",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0017",
+        "source": "base_name",
+        "text": "Weisses Abbrechen/ Fehler-Zeichen (Kreux) vor rfotem Hintergrund"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_center",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 88.50347222222223,
+        "initial_error": 88.50347222222223,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 87.95582561728395,
+      "generic_element_refinement": {
+        "final_error": 87.95582561728395,
+        "initial_error": 88.50347222222223,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.5476466049382793,
+            "element": "minus_glyph",
+            "error_after": 87.95582561728395,
+            "error_before": 88.50347222222223,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 90.40078446502058,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "stroke_scale": 6.42,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.07150205761317352,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 0.07445987654320163,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.5
+        },
+        {
+          "best_delta": 0.12442129629630472,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.75
+        },
+        {
+          "best_delta": 0.10172325102880109,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.0
+        },
+        {
+          "best_delta": 0.08262602880658676,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.25
+        },
+        {
+          "best_delta": 0.1356738683127645,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.5
+        },
+        {
+          "best_delta": 0.1318801440329196,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.75
+        },
+        {
+          "best_delta": 0.12454989711933706,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.0
+        },
+        {
+          "best_delta": 0.14917695473251058,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.25
+        },
+        {
+          "best_delta": 0.10519547325102963,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.5
+        },
+        {
+          "best_delta": 0.17155349794238361,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.75
+        },
+        {
+          "best_delta": 0.13393775720165024,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 4.0
+        },
+        {
+          "best_delta": 0.0997942386831312,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 4.25
+        },
+        {
+          "best_delta": 0.06063528806583918,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 4.5
+        },
+        {
+          "best_delta": 0.08346193415637515,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 4.75
+        },
+        {
+          "best_delta": 0.10423096707819468,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 5.0
+        },
+        {
+          "best_delta": 0.05516975308641747,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 5.25
+        },
+        {
+          "best_delta": 0.015110596707813784,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 5.5
+        },
+        {
+          "best_delta": 0.023662551440338575,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 5.75
+        },
+        {
+          "best_delta": 0.025977366255133916,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 6.0
+        },
+        {
+          "best_delta": 0.009709362139915356,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 6.25
+        },
+        {
+          "best_delta": 0.0019933127572073772,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 6.5
+        },
+        {
+          "best_delta": 0.010866769547320132,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 6.42
+        }
+      ]
+    },
+    "label": "",
+    "mode": "insufficient_description",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.02774995919436969,
+          0.02921512061491604,
+          0.94314116073206,
+          0.94615834198306
+        ],
+        "fill": "#E04B4A",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9551,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#EAA3A2",
+        "stroke_width": 0.03798150452376817
+      },
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_center",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025320300038296405
+      },
+      {
+        "bbox": [
+          0.4420706103768197,
+          0.5814211217023809,
+          0.11052374966977078,
+          0.4028698711495529
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7445,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.5,
+            0.58333
+          ],
+          [
+            0.5,
+            0.98611
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.1102847775056684
+      },
+      {
+        "bbox": [
+          0.6131738929546175,
+          0.4192428069728399,
+          0.38932003675498017,
+          0.08532118648976038
+        ],
+        "fill": "#D2262B",
+        "font_size": 0.35,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8119,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "full_image",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0017"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 29306.182859599117,
+  "std_delta2": 18641.203125,
+  "tile_std_delta2": 14969.902785035632,
+  "variant": "GE0017",
+  "w": 72
+}

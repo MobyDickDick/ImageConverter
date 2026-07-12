@@ -1,18 +1,85 @@
 {
+  "actual_iterations": 64,
   "base": "AC0403",
-  "best_error": 59.85666666666667,
+  "best_error": 40.794444444444444,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0665074074074074,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 1.062999999965541,
+  "error_per_pixel": 0.04532716049382716,
+  "error_pixel_cluster_count": 18.0,
+  "error_pixel_cluster_excess": 0.11545092177379171,
+  "error_pixel_count": 223.0,
   "filename": "AC0403_1_M.jpg",
   "h": 30,
-  "mean_delta2": 21687.341796875,
+  "largest_error_pixel_cluster_fraction": 0.3632286995515695,
+  "localized_error_fraction": 0.5718671955353634,
+  "mean_delta2": 10889.138671875,
   "params": {
+    "badge_param_source_ref": "AC0401",
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.015,
+            0.015,
+            0.97,
+            0.97
+          ],
+          "confidence": 0.75,
+          "fill": "#de2048",
+          "id": "description_element_1",
+          "kind": "CircleBackground",
+          "source": "description",
+          "stroke": "#9a7d82",
+          "stroke_width": 0.018
+        },
+        {
+          "circle_ref": "pump_circle",
+          "confidence": 0.75,
+          "fill": "#e7e7e7",
+          "id": "description_element_2",
+          "kind": "PumpTriangleGlyph",
+          "points": [
+            [
+              0.18,
+              0.24
+            ],
+            [
+              0.82,
+              0.24
+            ],
+            [
+              0.5,
+              0.9
+            ]
+          ],
+          "source": "description"
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "pump_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "circle"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
-      "has_conditions": false,
+      "has_conditions": true,
       "has_geometry_terms": true,
       "has_reference": true,
       "status": "ok"
@@ -28,21 +95,65 @@
       "AC0251",
       "AC0401"
     ],
-    "elements": [],
-    "geometry_ir": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe",
+      "REFERENZ: Abgeleitet aus AC0401"
+    ],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.015,
+          0.015,
+          0.97,
+          0.97
+        ],
+        "fill": "#de2048",
+        "id": "pump_circle",
+        "kind": "CircleBackground",
+        "stroke": "#9a7d82",
+        "stroke_width": 0.018
+      },
+      {
+        "circle_ref": "pump_circle",
+        "fill": "#e7e7e7",
+        "id": "pump_triangle",
+        "kind": "PumpTriangleGlyph",
+        "points": [
+          [
+            0.18,
+            0.24
+          ],
+          [
+            0.82,
+            0.24
+          ],
+          [
+            0.5,
+            0.9
+          ]
+        ]
+      }
+    ],
     "label": "M",
-    "mode": "auto",
+    "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
       "layout_override",
       "description_heuristic"
     ],
-    "semantic_sources": {},
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
     "top_source_ref": null,
     "variant_name": "AC0403_1_M"
   },
-  "std_delta2": 22866.4765625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 25526.107811147787,
+  "std_delta2": 14332.0166015625,
+  "tile_std_delta2": 10386.562072071683,
   "variant": "AC0403_1_M",
   "w": 30
 }

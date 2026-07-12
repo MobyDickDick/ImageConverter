@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0206",
-  "best_error": 15.202777777777778,
+  "best_error": 14.95861111111111,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.7349999999860302,
-  "error_per_pixel": 0.004222993827160494,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.7029999999795109,
+  "error_per_pixel": 0.00415516975308642,
+  "error_pixel_cluster_count": 40.0,
+  "error_pixel_cluster_excess": 0.11235199485199487,
+  "error_pixel_count": 777.0,
   "filename": "GE0206_M.jpg",
   "h": 60,
-  "localized_error_fraction": 0.6385732635760819,
-  "mean_delta2": 1700.181640625,
+  "largest_error_pixel_cluster_fraction": 0.3281853281853282,
+  "localized_error_fraction": 0.650268402235858,
+  "mean_delta2": 1662.15087890625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -45,6 +51,29 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.03580808113770282,
+          0.051807238869621804,
+          0.901894846235648,
+          0.8994399878911558
+        ],
+        "fill": "#8EBDDF",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9813,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#C1D8E8",
+        "stroke_width": 0.03693282262947706
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -56,9 +85,9 @@
     "variant_name": "GE0206_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 3905.4480924901686,
-  "std_delta2": 2708.9384765625,
-  "tile_std_delta2": 1751.6638476266623,
+  "spatial_quality_score": 3968.8578255695807,
+  "std_delta2": 2695.84130859375,
+  "tile_std_delta2": 1751.8196547412426,
   "variant": "GE0206_M",
   "w": 60
 }

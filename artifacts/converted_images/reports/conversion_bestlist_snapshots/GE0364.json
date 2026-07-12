@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0364",
-  "best_error": 22.102896103083754,
+  "best_error": 22.253768687058233,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.28099999998812564,
-  "error_per_pixel": 0.004147662995512057,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.0780000000959262,
+  "error_per_pixel": 0.004175974608192575,
+  "error_pixel_cluster_count": 67.0,
+  "error_pixel_cluster_excess": 0.2560529191229135,
+  "error_pixel_count": 1332.0,
   "filename": "GE0364.jpg",
   "h": 73,
-  "localized_error_fraction": 0.5374415397107989,
-  "mean_delta2": 3389.03662109375,
+  "largest_error_pixel_cluster_fraction": 0.506006006006006,
+  "localized_error_fraction": 0.7351169178609889,
+  "mean_delta2": 3490.30029296875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -45,6 +51,88 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.02473298077921746,
+          0.04334898711790876,
+          0.9326318712751716,
+          0.931392117779979
+        ],
+        "fill": "#8DB6D6",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9845,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#C7DEEE",
+        "stroke_width": 0.038566317801177336
+      },
+      {
+        "bbox": [
+          0.19309868714788495,
+          0.1663934353214159,
+          0.013067834544887746,
+          0.41082986236591174
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8622,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.19863,
+            0.16438
+          ],
+          [
+            0.19863,
+            0.57534
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.012881032001038252
+      },
+      {
+        "bbox": [
+          0.7506554330705811,
+          0.614141844466215,
+          0.20449999848429978,
+          0.2603114992955319
+        ],
+        "fill": "#B3CBE2",
+        "font_size": 0.23424,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.822,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "bottom+right",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "F"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -56,9 +144,9 @@
     "variant_name": "GE0364"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 12577.223870502137,
-  "std_delta2": 7279.88623046875,
-  "tile_std_delta2": 5276.823367004873,
+  "spatial_quality_score": 9676.752702979516,
+  "std_delta2": 7440.439453125,
+  "tile_std_delta2": 4597.572098041569,
   "variant": "GE0364",
   "w": 73
 }

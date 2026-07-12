@@ -1,21 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE1000",
-  "best_error": 17.67111111111111,
+  "best_error": 17.645555555555557,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.9379999999655411,
-  "error_per_pixel": 0.019634567901234565,
+  "elapsed_seconds": 0.7650000000139698,
+  "error_per_pixel": 0.019606172839506174,
   "error_pixel_cluster_count": 5.0,
   "error_pixel_cluster_excess": 0.6976767676767677,
   "error_pixel_count": 88.0,
   "filename": "GE1000_L.jpg",
   "h": 30,
   "largest_error_pixel_cluster_fraction": 0.7954545454545454,
-  "localized_error_fraction": 0.9001085861877796,
-  "mean_delta2": 4653.75341796875,
+  "localized_error_fraction": 0.8995345220527428,
+  "mean_delta2": 4655.43017578125,
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
@@ -397,10 +397,10 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.53,
-          0.42500000000000004,
-          0.15999999999999995,
-          0.13999999999999996
+          0.5292366864568735,
+          0.42683479466953805,
+          0.16086175823299437,
+          0.14146300398226155
         ],
         "constraint": "inside_rect_border",
         "id": "background_gradient",
@@ -413,16 +413,16 @@
       },
       {
         "bbox": [
-          0.53,
-          0.44500000000000006,
-          0.15999999999999995,
-          0.13999999999999996
+          0.5280576432028904,
+          0.44352350641564603,
+          0.1596231677762132,
+          0.13833238986902333
         ],
         "fill": "none",
         "id": "main_rect",
         "kind": "RectBorder",
         "stroke": "#8a8a8a",
-        "stroke_width": 0.07805000000000002
+        "stroke_width": 0.07901860538282406
       }
     ],
     "semantic_conflicts": [],
@@ -436,9 +436,9 @@
     "variant_name": "GE1000_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 16434.70884958265,
-  "std_delta2": 11744.7080078125,
-  "tile_std_delta2": 8377.67628480473,
+  "spatial_quality_score": 16435.041761521694,
+  "std_delta2": 11772.7568359375,
+  "tile_std_delta2": 8373.19410057926,
   "variant": "GE1000_L",
   "w": 30
 }

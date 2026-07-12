@@ -1,14 +1,44 @@
 {
+  "actual_iterations": 64,
   "base": "WEATHER01",
-  "best_error": 30.29364866075428,
+  "best_error": 28.176655021051687,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.008141265428850922,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.9690000000409782,
+  "error_per_pixel": 0.007572334055644098,
+  "error_pixel_cluster_count": 36.0,
+  "error_pixel_cluster_excess": 0.09426194624375195,
+  "error_pixel_count": 963.0,
   "filename": "weather01.jpg",
   "h": 61,
-  "mean_delta2": 7065.64111328125,
+  "largest_error_pixel_cluster_fraction": 0.3530633437175493,
+  "localized_error_fraction": 0.5425208764601647,
+  "mean_delta2": 6169.84423828125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "weather01",
@@ -18,8 +48,65 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.17969426138350264,
+          0.08315428455590089,
+          0.8188250702846174,
+          0.8851192040048147
+        ],
+        "fill": "#C1C9D1",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8997,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#D5DBDF",
+        "stroke_width": 0.0366058126904188
+      },
+      {
+        "bbox": [
+          0.540145342821782,
+          0.06750646046147755,
+          0.09938848309863973,
+          0.5920533656043693
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7607,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.59016,
+            0.06557
+          ],
+          [
+            0.59016,
+            0.65573
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.09801143946636527
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -30,7 +117,10 @@
     "top_source_ref": null,
     "variant_name": "WEATHER01"
   },
-  "std_delta2": 14109.7763671875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 14102.360909614068,
+  "std_delta2": 11887.669921875,
+  "tile_std_delta2": 5661.876916755824,
   "variant": "WEATHER01",
   "w": 61
 }
