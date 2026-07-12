@@ -306,6 +306,29 @@ def test_default_optimizer_refines_rect_to_half_yoctofine_warm_light_fill() -> N
     assert result["steps"][0]["accepted"] is True
 
 
+def test_default_optimizer_refines_rect_to_quarter_yoctofine_warm_light_fill() -> None:
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "backbottom_warm_fill_quarter_yoctofine",
+            "bbox": [0.0, 0.0, 1.0, 1.0],
+            "fill": "#f3bab8",
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0 if candidate_ir[0]["fill"] == "#f3bab9" else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill"] == "#f3bab9"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
 def test_default_optimizer_refines_neutral_rect_to_green_tinted_fill() -> None:
     ir = [
         {
