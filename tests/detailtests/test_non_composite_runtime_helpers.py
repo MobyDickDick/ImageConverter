@@ -230,6 +230,53 @@ def test_run_non_composite_iteration_impl_manual_review_uses_gradient_stripe_pla
     assert artifacts == [("<svg gradient/>", "rendered")]
     assert prints and "Plan B aktiv" in prints[0]
 
+
+def test_ac0vr2_plain_panel_fallback_preserves_frame_before_gradient_stripe() -> None:
+    logs: list[list[str]] = []
+    prints: list[str] = []
+    artifacts: list[tuple[str, object]] = []
+    raster = np.ones((30, 60, 3), dtype=np.uint8) * 240
+    raster[0, :, :] = 197
+    raster[-1, :, :] = 197
+    raster[:, 0, :] = 197
+    raster[:, -1, :] = 197
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="auto",
+        params={"mode": "auto", "variant_name": "AC0VR2_ZL_M"},
+        stripe_strategy={"bbox": {"x": 0, "y": 0, "width": 60, "height": 30}, "stops": [0, 1]},
+        semantic_mode_visual_override=False,
+        width=60,
+        height=30,
+        base_name="AC0VR2",
+        description="Unzugeordnete AC0VR2_ZL-Panelvariante.",
+        perc_img=raster,
+        img_path="AC0VR2_ZL_M.jpg",
+        print_fn=prints.append,
+        render_embedded_raster_svg_fn=lambda _path: "<svg />",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda svg, *_args, **_kwargs: svg,
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 0.2 if "stroke=" in rendered else 0.8,
+        image_variant_name="AC0VR2_ZL_M",
+    )
+
+    assert result == (
+        "AC0VR2",
+        "Unzugeordnete AC0VR2_ZL-Panelvariante.",
+        {"mode": "auto", "variant_name": "AC0VR2_ZL_M"},
+        1,
+        0.2,
+    )
+    assert logs and logs[0][0] == "status=non_composite_plain_framed_panel"
+    assert "gerahmtes AC0VR2-Panel" in prints[0]
+    assert artifacts and 'fill="#f0f0f0"' in artifacts[0][0]
+    assert 'stroke="#c5c5c5"' in artifacts[0][0]
+
+
 def test_run_non_composite_iteration_impl_gradient_stripe_returns_iteration_tuple() -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
