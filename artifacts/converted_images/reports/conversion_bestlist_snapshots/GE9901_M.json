@@ -1,0 +1,133 @@
+{
+  "actual_iterations": 64,
+  "base": "GE9901",
+  "best_error": 2.764883333333333,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 4.047000000020489,
+  "error_per_pixel": 5.760173611111111e-06,
+  "error_pixel_cluster_count": 5.0,
+  "error_pixel_cluster_excess": 0.9352854656222803,
+  "error_pixel_count": 30640.0,
+  "filename": "GE9901_M.jpg",
+  "h": 600,
+  "largest_error_pixel_cluster_fraction": 0.9991187989556136,
+  "localized_error_fraction": 0.9848165141217549,
+  "mean_delta2": 238.36871337890625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE9901",
+        "source": "base_name",
+        "text": "Wie GE0010: grauer Hintergrund links blaue Fläche mit vertikalem Farbverlauf oben dunkel, unten ein wenig heller und rechts geschwungene Linie (Wellenform mit 1-Ausbuchtung nach und 1-Ausbuchtung nach rechts). Auf der linken Seite ist noch eine Art Sichelform und ganz links eine einzelne weiße Linie. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0010"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.27446517950604354,
+          0.6688246107894829,
+          0.01,
+          0.04728545419486269
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 1.0,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.27249,
+            0.67167
+          ],
+          [
+            0.27249,
+            0.71834
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.001
+      },
+      {
+        "bbox": [
+          0.18492625017148215,
+          0.9458857748439988,
+          0.04600230416211044,
+          0.01
+        ],
+        "fill": "#B4D7EE",
+        "font_size": 0.0405,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7021,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top+bottom+left",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9901_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 10149.803410092236,
+  "std_delta2": 1491.13818359375,
+  "tile_std_delta2": 4831.486665142854,
+  "variant": "GE9901_M",
+  "w": 800
+}

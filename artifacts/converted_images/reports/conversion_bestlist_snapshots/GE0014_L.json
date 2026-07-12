@@ -1,15 +1,45 @@
 {
+  "actual_iterations": 64,
   "base": "GE0014",
-  "best_error": 53.59530612244898,
+  "best_error": 23.653945578231294,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.010937817576009996,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.547000000020489,
+  "error_per_pixel": 0.004827335832292101,
+  "error_pixel_cluster_count": 85.0,
+  "error_pixel_cluster_excess": 0.29645292100126963,
+  "error_pixel_count": 1077.0,
   "filename": "GE0014_L.jpg",
   "h": 70,
-  "mean_delta2": 16600.8359375,
+  "largest_error_pixel_cluster_fraction": 0.5162488393686165,
+  "localized_error_fraction": 0.7330896627059204,
+  "mean_delta2": 4597.42919921875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "confidence": 0.75,
+          "id": "description_element_1",
+          "kind": "PlusGlyph",
+          "position": "top_center",
+          "source": "description",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -37,8 +67,156 @@
         "stroke_width": 0.025
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 53.44231292517007,
+        "initial_error": 53.44231292517007,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 53.44231292517007,
+      "generic_element_refinement": {
+        "final_error": 53.44231292517007,
+        "initial_error": 53.44231292517007,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "plus_glyph",
+            "error_after": 53.44231292517007,
+            "error_before": 53.44231292517007,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 53.87986394557823,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "stroke_scale": 0.33,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.2368027210884307,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.1606802721088485,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 0.03544217687074536,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 0.004625850340133297,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 0.33
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.04490201995909261,
+          0.04547520793632316,
+          0.9140291371421349,
+          0.9125878672131397
+        ],
+        "fill": "#8CB8DA",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.978,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#C2D4E3",
+        "stroke_width": 0.035594063170294885
+      },
+      {
+        "id": "plus_glyph",
+        "kind": "PlusGlyph",
+        "position": "top_center",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.02462360679923045
+      },
+      {
+        "bbox": [
+          0.06891099852586123,
+          0.1981521448319201,
+          0.08754430537683887,
+          0.6012870451883076
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7792,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.11428,
+            0.2
+          ],
+          [
+            0.11428,
+            0.8
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.08423323221465867
+      },
+      {
+        "bbox": [
+          0.5828778100312021,
+          0.41239714176051784,
+          0.39851828560050306,
+          0.08562435913191907
+        ],
+        "fill": "#9BC3E3",
+        "font_size": 0.36,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7187,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "right",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -49,7 +227,10 @@
     "top_source_ref": null,
     "variant_name": "GE0014_L"
   },
-  "std_delta2": 23431.716796875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 12707.440683756187,
+  "std_delta2": 10093.083984375,
+  "tile_std_delta2": 5649.432531907436,
   "variant": "GE0014_L",
   "w": 70
 }

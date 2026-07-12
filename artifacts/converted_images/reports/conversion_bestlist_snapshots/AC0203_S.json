@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0203",
-  "best_error": 19.15,
+  "best_error": 24.883333333333333,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.9379999999946449,
-  "error_per_pixel": 0.038299999999999994,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.8130000000819564,
+  "error_per_pixel": 0.04976666666666667,
+  "error_pixel_cluster_count": 18.0,
+  "error_pixel_cluster_excess": 0.043113402061855655,
+  "error_pixel_count": 97.0,
   "filename": "AC0203_S.jpg",
   "h": 25,
-  "localized_error_fraction": 0.6411391172117825,
-  "mean_delta2": 3527.31005859375,
+  "largest_error_pixel_cluster_fraction": 0.23711340206185566,
+  "localized_error_fraction": 0.6502712542104825,
+  "mean_delta2": 4679.7421875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -144,7 +150,30 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 30.797333333333334,
+      "final_error": 30.589333333333332,
+      "generic_element_refinement": {
+        "final_error": 30.589333333333332,
+        "initial_error": 30.797333333333334,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.11599999999999966,
+            "element": "compressor_circle",
+            "error_after": 30.681333333333335,
+            "error_before": 30.797333333333334,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.0920000000000023,
+            "element": "main_diagonal_mirrored_compressor",
+            "error_after": 30.589333333333332,
+            "error_before": 30.681333333333335,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 77.42666666666666,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -354,16 +383,16 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.6604000000000001,
-          0.10999999999999999,
-          0.2991999999999999,
-          0.21999999999999992
+          0.6613473873413547,
+          0.10928553763594578,
+          0.30064727364111166,
+          0.22143446164392
         ],
         "fill": "#df2249",
         "id": "compressor_circle",
         "kind": "CircleBackground",
         "stroke": "#8d8d8d",
-        "stroke_width": 0.055
+        "stroke_width": 0.06228739137023648
       },
       {
         "circle_ref": "compressor_circle",
@@ -371,26 +400,26 @@
         "kind": "MainDiagonalMirroredCompressorGlyph",
         "left_line": [
           [
-            0.09,
-            0.22
+            0.08870151826288193,
+            0.21913740243715663
           ],
           [
-            0.39,
-            1.01
+            0.3892418594155306,
+            1.0
           ]
         ],
         "right_line": [
           [
-            0.91,
-            0.22
+            0.9079096447430819,
+            0.22295089081090996
           ],
           [
-            0.61,
-            1.01
+            0.6097753514554113,
+            1.0
           ]
         ],
         "stroke": "#f4f4f4",
-        "stroke_width": 0.088
+        "stroke_width": 0.07546275649634021
       }
     ],
     "semantic_conflicts": [],
@@ -404,9 +433,9 @@
     "variant_name": "AC0203_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 15799.856032777683,
-  "std_delta2": 8217.8017578125,
-  "tile_std_delta2": 6914.926139508455,
+  "spatial_quality_score": 16001.524690824004,
+  "std_delta2": 9387.2763671875,
+  "tile_std_delta2": 7012.934681453707,
   "variant": "AC0203_S",
   "w": 20
 }

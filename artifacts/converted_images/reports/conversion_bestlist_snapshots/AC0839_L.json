@@ -1,19 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0839",
-  "best_error": 20.408,
+  "best_error": 21.506666666666668,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.1090000000258442,
-  "error_per_pixel": 0.018140444444444445,
-  "error_pixel_cluster_count": 11.0,
-  "error_pixel_cluster_excess": 0.48497456492637214,
-  "error_pixel_count": 166.0,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 2.0790000000270084,
+  "error_per_pixel": 0.019117037037037037,
+  "error_pixel_cluster_count": 20.0,
+  "error_pixel_cluster_excess": 0.314952380952381,
+  "error_pixel_count": 168.0,
   "filename": "AC0839_L.jpg",
   "h": 25,
-  "largest_error_pixel_cluster_fraction": 0.6325301204819277,
-  "localized_error_fraction": 0.8366692823415803,
-  "mean_delta2": 4069.53076171875,
+  "largest_error_pixel_cluster_fraction": 0.4642857142857143,
+  "localized_error_fraction": 0.8094070320731924,
+  "mean_delta2": 5666.4560546875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -109,8 +111,8 @@
     ],
     "elements": [
       "SEMANTIC: Kreis + Buchstabe VOC",
-      "SEMANTIC: waagrechter Strich links vom Kreis",
-      "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      "SEMANTIC: waagrechter Strich rechts vom Kreis",
+      "SEMANTIC: waagrechter Strich links vom Kreis"
     ],
     "geometry_ir": [
       {
@@ -160,8 +162,8 @@
     "semantic_sources": {
       "description_heuristic": [
         "SEMANTIC: Kreis + Buchstabe VOC",
-        "SEMANTIC: waagrechter Strich links vom Kreis",
-        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+        "SEMANTIC: waagrechter Strich rechts vom Kreis",
+        "SEMANTIC: waagrechter Strich links vom Kreis"
       ],
       "family_rule": []
     },
@@ -169,9 +171,9 @@
     "variant_name": "AC0839_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 16861.26757355548,
-  "std_delta2": 12025.5703125,
-  "tile_std_delta2": 7837.877925292549,
+  "spatial_quality_score": 17028.76996845926,
+  "std_delta2": 13256.9931640625,
+  "tile_std_delta2": 8013.062732916469,
   "variant": "AC0839_L",
   "w": 45
 }

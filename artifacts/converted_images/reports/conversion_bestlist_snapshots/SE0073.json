@@ -1,41 +1,55 @@
 {
   "actual_iterations": 64,
   "base": "SE0073",
-  "best_error": 21.207,
+  "best_error": 34.229,
   "best_iter": 1,
   "convergence": "",
-  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
-  "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.890999999945052,
-  "error_per_pixel": 0.021207,
-  "error_pixel_cluster_count": 2.0,
-  "error_pixel_cluster_excess": 0.48373819742489277,
-  "error_pixel_count": 233.0,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 1.4690000000409782,
+  "error_per_pixel": 0.034229,
+  "error_pixel_cluster_count": 11.0,
+  "error_pixel_cluster_excess": 0.21334959349593496,
+  "error_pixel_count": 246.0,
   "filename": "SE0073.jpg",
   "h": 40,
-  "largest_error_pixel_cluster_fraction": 0.7167381974248928,
-  "localized_error_fraction": 0.7094800940174614,
-  "mean_delta2": 4537.455078125,
+  "largest_error_pixel_cluster_fraction": 0.45934959349593496,
+  "localized_error_fraction": 0.5161555357784501,
+  "mean_delta2": 7021.5869140625,
   "params": {
     "badge_param_source_ref": "SE0072",
     "bottom_shape": null,
     "contract_status": "ok",
     "description_constraints": {
-      "elements": [],
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "#d8d8d8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
       "relations": [],
       "schema_version": "description_geometry_constraints_v1",
       "source": "description",
       "uncertainty": {
-        "confidence": 0.0,
-        "reasons": [
-          "no_supported_geometry_constraint"
-        ],
-        "status": "needs_review"
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
       }
     },
     "description_contract": {
       "deficits": [],
-      "has_conditions": true,
+      "has_conditions": false,
       "has_geometry_terms": true,
       "has_reference": true,
       "status": "ok"
@@ -51,17 +65,26 @@
       "SE0072"
     ],
     "elements": [
-      "SEMANTIC: Viereck ohne Buchstabe",
-      "SEMANTIC: senkrechter Strich hinter dem Viereck",
-      "SEMANTIC: waagrechter Strich rechts vom Viereck",
-      "REFERENZ: Abgeleitet aus AC0811",
-      "GEOMETRIE: Referenz-Badge mit viereckigem Kopf statt runder Kopfkontur",
+      "SEMANTIC: Kreis + Buchstabe",
       "REFERENZ: Abgeleitet aus SE0041",
       "REFERENZ: Abgeleitet aus SE0072"
     ],
-    "geometry_ir": [],
-    "head_style": "square_badge",
-    "label": "",
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "label": "T",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
@@ -71,20 +94,16 @@
     ],
     "semantic_sources": {
       "description_heuristic": [
-        "SEMANTIC: waagrechter Strich rechts vom Kreis"
-      ],
-      "family_rule": [
-        "SEMANTIC: Kreis ohne Buchstabe",
-        "SEMANTIC: senkrechter Strich hinter dem Kreis"
+        "SEMANTIC: Kreis + Buchstabe"
       ]
     },
     "top_source_ref": null,
     "variant_name": "SE0073"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 13404.862354489089,
-  "std_delta2": 11203.39453125,
-  "tile_std_delta2": 7085.305946431479,
+  "spatial_quality_score": 14707.91081948692,
+  "std_delta2": 11292.642578125,
+  "tile_std_delta2": 5915.328104147422,
   "variant": "SE0073",
   "w": 25
 }

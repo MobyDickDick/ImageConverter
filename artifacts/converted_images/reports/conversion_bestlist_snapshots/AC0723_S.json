@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0723",
-  "best_error": 21.978666666666665,
+  "best_error": 28.69333333333333,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.9530000000086147,
-  "error_per_pixel": 0.058609777777777775,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.9060000000754371,
+  "error_per_pixel": 0.07651555555555554,
+  "error_pixel_cluster_count": 7.0,
+  "error_pixel_cluster_excess": 0.28476190476190477,
+  "error_pixel_count": 70.0,
   "filename": "AC0723_S.jpg",
   "h": 25,
-  "localized_error_fraction": 0.6961216725355907,
-  "mean_delta2": 4758.576171875,
+  "largest_error_pixel_cluster_fraction": 0.4714285714285714,
+  "localized_error_fraction": 0.7035539408837636,
+  "mean_delta2": 6399.69580078125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -77,7 +83,9 @@
     "documented_alias_refs": [
       "AC0701"
     ],
-    "elements": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
     "geometry_ir": [
       {
         "body_bbox": [
@@ -113,185 +121,26 @@
         "label_fill": "#dedede"
       }
     ],
-    "geometry_ir_optimizer_result": {
-      "element_refinement": {
-        "final_error": 27.03022222222222,
-        "initial_error": 27.03022222222222,
-        "mode": "right_rotated_valve_geometry",
-        "steps": []
-      },
-      "final_error": 27.03022222222222,
-      "initial_error": 61.650666666666666,
-      "mode": "geometry_ir_raster_registration",
-      "parameters": {
-        "scale_x": 0.2099999999999999,
-        "scale_y": 0.7,
-        "stroke_scale": 1.25,
-        "translate_x": 0.0,
-        "translate_y": -0.02
-      },
-      "steps": [
-        {
-          "best_delta": 0.038222222222223934,
-          "parameter": "translate_y",
-          "stage": 0,
-          "value": 0.08
-        },
-        {
-          "best_delta": 0.44088888888888533,
-          "parameter": "scale_x",
-          "stage": 0,
-          "value": 0.85
-        },
-        {
-          "best_delta": 1.8462222222222238,
-          "parameter": "scale_y",
-          "stage": 0,
-          "value": 0.85
-        },
-        {
-          "best_delta": 0.607999999999997,
-          "parameter": "stroke_scale",
-          "stage": 0,
-          "value": 1.25
-        },
-        {
-          "best_delta": 2.2151111111111135,
-          "parameter": "translate_y",
-          "stage": 0,
-          "value": 0.0
-        },
-        {
-          "best_delta": 5.054222222222222,
-          "parameter": "scale_x",
-          "stage": 0,
-          "value": 0.7
-        },
-        {
-          "best_delta": 5.656888888888886,
-          "parameter": "scale_y",
-          "stage": 0,
-          "value": 0.7
-        },
-        {
-          "best_delta": 5.95644444444445,
-          "parameter": "scale_x",
-          "stage": 0,
-          "value": 0.5499999999999999
-        },
-        {
-          "best_delta": 1.2408888888888825,
-          "parameter": "scale_y",
-          "stage": 0,
-          "value": 0.5499999999999999
-        },
-        {
-          "best_delta": 0.840888888888891,
-          "parameter": "translate_y",
-          "stage": 0,
-          "value": -0.08
-        },
-        {
-          "best_delta": 4.384888888888888,
-          "parameter": "scale_x",
-          "stage": 0,
-          "value": 0.3999999999999999
-        },
-        {
-          "best_delta": 1.109333333333332,
-          "parameter": "scale_y",
-          "stage": 0,
-          "value": 0.3999999999999999
-        },
-        {
-          "best_delta": 1.5911111111111147,
-          "parameter": "scale_x",
-          "stage": 0,
-          "value": 0.24999999999999992
-        },
-        {
-          "best_delta": 0.32355555555555426,
-          "parameter": "scale_y",
-          "stage": 0,
-          "value": 0.5499999999999999
-        },
-        {
-          "best_delta": 0.13333333333333286,
-          "parameter": "translate_y",
-          "stage": 0,
-          "value": 0.0
-        },
-        {
-          "best_delta": 0.6115555555555581,
-          "parameter": "scale_y",
-          "stage": 0,
-          "value": 0.7
-        },
-        {
-          "best_delta": 0.5377777777777766,
-          "parameter": "translate_y",
-          "stage": 2,
-          "value": -0.02
-        },
-        {
-          "best_delta": 2.0311111111111124,
-          "parameter": "scale_x",
-          "stage": 2,
-          "value": 0.2099999999999999
-        }
-      ]
-    },
     "label": "M",
-    "mode": "auto",
-    "optimized_geometry_ir": [
-      {
-        "body_bbox": [
-          0.39920000000000005,
-          0.41000000000000003,
-          0.20159999999999992,
-          0.40599999999999997
-        ],
-        "body_fill": "#d92645",
-        "body_stroke": "#a0a0a0",
-        "body_stroke_width": 0.04,
-        "connector": [
-          [
-            0.5,
-            0.13000000000000003
-          ],
-          [
-            0.5,
-            0.41000000000000003
-          ]
-        ],
-        "connector_stroke": "#808080",
-        "connector_width": 0.1,
-        "font_size": 0.09239999999999995,
-        "font_weight": "600",
-        "id": "vertically_mirrored_square_kelle_t",
-        "kind": "VerticallyMirroredSquareKelleTGlyph",
-        "label": "T",
-        "label_center": [
-          0.5,
-          0.592
-        ],
-        "label_fill": "#dedede"
-      }
-    ],
+    "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
       "layout_override",
       "description_heuristic"
     ],
-    "semantic_sources": {},
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
     "top_source_ref": null,
     "variant_name": "AC0723_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 15882.32884791562,
-  "std_delta2": 10909.564453125,
-  "tile_std_delta2": 9230.664346812031,
+  "spatial_quality_score": 16559.968599359123,
+  "std_delta2": 12554.2265625,
+  "tile_std_delta2": 8737.574704266995,
   "variant": "AC0723_S",
   "w": 15
 }

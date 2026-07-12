@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0037",
-  "best_error": 26.2408,
+  "best_error": 24.801733333333335,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.7190000000118744,
-  "error_per_pixel": 0.01049632,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.8900000000139698,
+  "error_per_pixel": 0.009920693333333334,
+  "error_pixel_cluster_count": 14.0,
+  "error_pixel_cluster_excess": 0.5332071174377224,
+  "error_pixel_count": 562.0,
   "filename": "GE0037_S.jpg",
   "h": 50,
-  "localized_error_fraction": 0.6216023658640228,
-  "mean_delta2": 5731.3759765625,
+  "largest_error_pixel_cluster_fraction": 0.7580071174377224,
+  "localized_error_fraction": 0.7769350250739482,
+  "mean_delta2": 4976.7685546875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -47,6 +53,55 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.02268157055762187,
+          0.04040779048745356,
+          0.9196630374631962,
+          0.9181127831982036
+        ],
+        "fill": "#7CA8C3",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9877,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#CBDBE6",
+        "stroke_width": 0.038032571302629915
+      },
+      {
+        "bbox": [
+          0.6813296284494174,
+          0.5186425648085715,
+          0.30137631138173354,
+          0.3783998934684633
+        ],
+        "fill": "#CCE1ED",
+        "font_size": 0.342,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8216,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "full_image",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "F"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -58,9 +113,9 @@
     "variant_name": "GE0037_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 20128.881868296525,
-  "std_delta2": 11461.44921875,
-  "tile_std_delta2": 9462.186574849684,
+  "spatial_quality_score": 13765.968984131228,
+  "std_delta2": 10149.2412109375,
+  "tile_std_delta2": 6769.224021907736,
   "variant": "GE0037_S",
   "w": 50
 }

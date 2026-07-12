@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0201",
-  "best_error": 26.86,
+  "best_error": 25.864,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.25,
-  "error_per_pixel": 0.05372,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.7029999999795109,
+  "error_per_pixel": 0.051728,
+  "error_pixel_cluster_count": 19.0,
+  "error_pixel_cluster_excess": 0.3008453608247423,
+  "error_pixel_count": 97.0,
   "filename": "AC0201_S_sia.jpg",
   "h": 25,
-  "localized_error_fraction": 0.7679910588008031,
-  "mean_delta2": 3900.7080078125,
+  "largest_error_pixel_cluster_fraction": 0.4948453608247423,
+  "localized_error_fraction": 0.605766985275451,
+  "mean_delta2": 4845.43212890625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -143,6 +149,29 @@
         "steps": []
       },
       "final_error": 29.468,
+      "generic_element_refinement": {
+        "final_error": 29.468,
+        "initial_error": 29.468,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "compressor_circle",
+            "error_after": 29.468,
+            "error_before": 29.468,
+            "step_index": 0
+          },
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "upward_compressor",
+            "error_after": 29.468,
+            "error_before": 29.468,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 69.438,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -406,16 +435,16 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          -0.029199999999999948,
-          0.6900000000000001,
-          0.3783999999999999,
-          0.21999999999999992
+          0.0,
+          0.6909335782226292,
+          0.37832751241372353,
+          0.21828841327314
         ],
         "fill": "#45aa5e",
         "id": "compressor_circle",
         "kind": "CircleBackground",
         "stroke": "#8d8d8d",
-        "stroke_width": 0.0726
+        "stroke_width": 0.0738833838853415
       },
       {
         "circle_ref": "compressor_circle",
@@ -423,26 +452,26 @@
         "kind": "UpwardCompressorGlyph",
         "left_line": [
           [
-            0.28,
-            0.78
+            0.27766122102425395,
+            0.7786053391484016
           ],
           [
-            0.42,
-            0.16
+            0.422652115975138,
+            0.15922736055142453
           ]
         ],
         "right_line": [
           [
-            0.72,
-            0.78
+            0.7204495345493988,
+            0.7816436461330096
           ],
           [
-            0.58,
-            0.16
+            0.5802530863755038,
+            0.1629780695537004
           ]
         ],
         "stroke": "#d7d7d7",
-        "stroke_width": 0.1452
+        "stroke_width": 0.14601005464435754
       }
     ],
     "semantic_conflicts": [],
@@ -456,9 +485,9 @@
     "variant_name": "AC0201_S_SIA"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 9555.92205557532,
-  "std_delta2": 6501.9453125,
-  "tile_std_delta2": 4686.212209546957,
+  "spatial_quality_score": 15014.333181019305,
+  "std_delta2": 9239.513671875,
+  "tile_std_delta2": 6409.948196289811,
   "variant": "AC0201_S_SIA",
   "w": 20
 }

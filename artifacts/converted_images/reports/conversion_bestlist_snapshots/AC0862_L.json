@@ -1,19 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0862",
-  "best_error": 23.102222222222224,
+  "best_error": 24.203555555555557,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.5,
-  "error_per_pixel": 0.020535308641975312,
-  "error_pixel_cluster_count": 22.0,
-  "error_pixel_cluster_excess": 0.18145593869731802,
-  "error_pixel_count": 145.0,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 2.547000000020489,
+  "error_per_pixel": 0.02151427160493827,
+  "error_pixel_cluster_count": 27.0,
+  "error_pixel_cluster_excess": 0.13734550989345512,
+  "error_pixel_count": 146.0,
   "filename": "AC0862_L.jpg",
   "h": 25,
-  "largest_error_pixel_cluster_fraction": 0.3103448275862069,
-  "localized_error_fraction": 0.6757250047142299,
-  "mean_delta2": 6080.8798828125,
+  "largest_error_pixel_cluster_fraction": 0.2671232876712329,
+  "localized_error_fraction": 0.6465658134914076,
+  "mean_delta2": 6534.64794921875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -106,8 +108,8 @@
     ],
     "documented_alias_refs": [],
     "elements": [
-      "SEMANTIC: Kreis + Buchstabe rF",
-      "SEMANTIC: waagrechter Strich links vom Kreis"
+      "SEMANTIC: waagrechter Strich links vom Kreis",
+      "SEMANTIC: Kreis + Buchstabe rF"
     ],
     "geometry_ir": [
       {
@@ -159,15 +161,17 @@
         "SEMANTIC: Kreis + Buchstabe rF",
         "SEMANTIC: waagrechter Strich links vom Kreis"
       ],
-      "family_rule": []
+      "family_rule": [
+        "SEMANTIC: waagrechter Strich links vom Kreis"
+      ]
     },
     "top_source_ref": null,
     "variant_name": "AC0862_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 15708.835402492823,
-  "std_delta2": 13589.4462890625,
-  "tile_std_delta2": 7256.399353140995,
+  "spatial_quality_score": 16139.122492310513,
+  "std_delta2": 14092.8583984375,
+  "tile_std_delta2": 7324.572760698274,
   "variant": "AC0862_L",
   "w": 45
 }

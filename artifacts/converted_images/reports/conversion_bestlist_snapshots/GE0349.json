@@ -1,0 +1,156 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0349",
+  "best_error": 23.738844444444446,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.172000000020489,
+  "error_per_pixel": 0.004220239012345679,
+  "error_pixel_cluster_count": 63.0,
+  "error_pixel_cluster_excess": 0.35945936418004404,
+  "error_pixel_count": 1412.0,
+  "filename": "GE0349.jpg",
+  "h": 75,
+  "largest_error_pixel_cluster_fraction": 0.6104815864022662,
+  "localized_error_fraction": 0.7857937001824129,
+  "mean_delta2": 4279.31298828125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0349",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999. Schraubenzieher (oben rechts nach unten links) vor Schraubenschlüssel (oben links anach unten rechts). Komplexe Form"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.029154968889586956,
+          0.024498784358822405,
+          0.9323760202307867,
+          0.9338841967736774
+        ],
+        "fill": "#87B6D5",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9846,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#C4D9E8",
+        "stroke_width": 0.03601668126096287
+      },
+      {
+        "bbox": [
+          0.06470657987717578,
+          0.1062660623209648,
+          0.18578897605906805,
+          0.7458981347645383
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7271,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.16001,
+            0.10667
+          ],
+          [
+            0.16001,
+            0.85334
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.18761719106169636
+      },
+      {
+        "bbox": [
+          0.47898085130133417,
+          0.5861349510509712,
+          0.06829872902296902,
+          0.3853296195701863
+        ],
+        "fill": "#689FC8",
+        "font_size": 0.348,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7047,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top+bottom+left",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "I"
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0349"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 17100.922246584956,
+  "std_delta2": 9348.4609375,
+  "tile_std_delta2": 7884.462366018081,
+  "variant": "GE0349",
+  "w": 75
+}

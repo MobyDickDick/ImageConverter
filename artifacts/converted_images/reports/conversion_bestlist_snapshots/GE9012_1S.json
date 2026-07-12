@@ -1,0 +1,220 @@
+{
+  "actual_iterations": 64,
+  "base": "GE9012",
+  "best_error": 38.58222222222222,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.7970000000204891,
+  "error_per_pixel": 0.1286074074074074,
+  "error_pixel_cluster_count": 3.0,
+  "error_pixel_cluster_excess": 0.5238095238095237,
+  "error_pixel_count": 70.0,
+  "filename": "GE9012_1S.jpg",
+  "h": 10,
+  "largest_error_pixel_cluster_fraction": 0.7571428571428571,
+  "localized_error_fraction": 0.7166399951747485,
+  "mean_delta2": 10389.787109375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "confidence": 0.75,
+          "fill": "#e8e8e8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "primitive_decomposition": {
+            "primitives": [
+              {
+                "kind": "ColorPatch",
+                "role": "light_grey_fill"
+              }
+            ],
+            "schema_version": "light_grey_square_decomposition_v1"
+          },
+          "role": "reference_light_grey_square",
+          "source": "description",
+          "stroke": "none",
+          "stroke_width": 0.0
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE9012",
+        "source": "base_name",
+        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "fill": "#e8e8e8",
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.0
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 47.19444444444444,
+        "initial_error": 47.19444444444444,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 37.07222222222222,
+      "generic_element_refinement": {
+        "final_error": 37.07222222222222,
+        "initial_error": 47.19444444444444,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 10.12222222222222,
+            "element": "backbottom_light_grey_square",
+            "error_after": 37.07222222222222,
+            "error_before": 47.19444444444444,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 51.17666666666667,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.92,
+        "scale_y": 0.85,
+        "stroke_scale": 1.0,
+        "translate_x": -0.07,
+        "translate_y": -0.12
+      },
+      "steps": [
+        {
+          "best_delta": 0.7955555555555591,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.4766666666666666,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.1266666666666652,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.2788888888888863,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 0.2822222222222237,
+          "parameter": "translate_y",
+          "stage": 1,
+          "value": -0.12
+        },
+        {
+          "best_delta": 0.004444444444445139,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 0.92
+        },
+        {
+          "best_delta": 0.017777777777780557,
+          "parameter": "translate_x",
+          "stage": 3,
+          "value": -0.07
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          0.9211089619726138,
+          0.8486438994148112
+        ],
+        "fill": "#f2b8b4",
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.0013469410123967955
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9012_1S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 29301.16372223391,
+  "std_delta2": 14707.583984375,
+  "tile_std_delta2": 14351.151663224455,
+  "variant": "GE9012_1S",
+  "w": 30
+}

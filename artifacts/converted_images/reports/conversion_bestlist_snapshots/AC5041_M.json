@@ -1,15 +1,37 @@
 {
+  "actual_iterations": 64,
   "base": "AC5041",
-  "best_error": 72.62152380952381,
+  "best_error": 55.182587301587304,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0034581678004535145,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 2.109000000054948,
+  "error_per_pixel": 0.0026277422524565385,
+  "error_pixel_cluster_count": 53.0,
+  "error_pixel_cluster_excess": 0.28361672473867594,
+  "error_pixel_count": 5166.0,
   "filename": "AC5041_M.jpg",
   "h": 140,
-  "mean_delta2": 27891.0625,
+  "largest_error_pixel_cluster_fraction": 0.5296167247386759,
+  "localized_error_fraction": 0.4985198553614488,
+  "mean_delta2": 17145.556640625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -39,7 +61,10 @@
     "top_source_ref": null,
     "variant_name": "AC5041_M"
   },
-  "std_delta2": 22614.24609375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 34323.21986651214,
+  "std_delta2": 17541.072265625,
+  "tile_std_delta2": 12771.857649621628,
   "variant": "AC5041_M",
   "w": 150
 }

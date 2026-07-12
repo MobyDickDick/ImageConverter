@@ -1,29 +1,49 @@
 {
   "actual_iterations": 64,
   "base": "AC0703",
-  "best_error": 16.405333333333335,
+  "best_error": 24.744,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.7969999999913853,
-  "error_per_pixel": 0.04374755555555556,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.2339999999385327,
+  "error_per_pixel": 0.065984,
+  "error_pixel_cluster_count": 9.0,
+  "error_pixel_cluster_excess": 0.20503286384976524,
+  "error_pixel_count": 71.0,
   "filename": "AC0703_S.jpg",
   "h": 25,
-  "localized_error_fraction": 0.7345619357350746,
-  "mean_delta2": 3525.968017578125,
+  "largest_error_pixel_cluster_fraction": 0.39436619718309857,
+  "localized_error_fraction": 0.7363406970821265,
+  "mean_delta2": 4758.80810546875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
     "description_constraints": {
-      "elements": [],
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "#d8d8d8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
       "relations": [],
       "schema_version": "description_geometry_constraints_v1",
       "source": "description",
       "uncertainty": {
-        "confidence": 0.0,
-        "reasons": [
-          "no_supported_geometry_constraint"
-        ],
-        "status": "needs_review"
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
       }
     },
     "description_contract": {
@@ -43,24 +63,44 @@
     "documented_alias_refs": [
       "AC0701"
     ],
-    "elements": [],
-    "geometry_ir": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
     "label": "M",
-    "mode": "auto",
+    "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
       "layout_override",
       "description_heuristic"
     ],
-    "semantic_sources": {},
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
     "top_source_ref": null,
     "variant_name": "AC0703_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 7878.781982478209,
-  "std_delta2": 9388.7490234375,
-  "tile_std_delta2": 4464.5665998281565,
+  "spatial_quality_score": 13639.849529315634,
+  "std_delta2": 9887.1357421875,
+  "tile_std_delta2": 7930.479199579363,
   "variant": "AC0703_S",
   "w": 15
 }

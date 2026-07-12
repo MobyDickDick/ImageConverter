@@ -1,0 +1,154 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0302",
+  "best_error": 13.617037037037036,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.3279999999795109,
+  "error_per_pixel": 0.0037825102880658435,
+  "error_pixel_cluster_count": 1.0,
+  "error_pixel_cluster_excess": 0.7791666666666667,
+  "error_pixel_count": 795.0,
+  "filename": "AC0302_1_M.jpg",
+  "h": 60,
+  "largest_error_pixel_cluster_fraction": 1.0,
+  "localized_error_fraction": 0.6294436382606459,
+  "mean_delta2": 3495.307861328125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0302",
+        "source": "base_name",
+        "text": "Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0301"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.014310429651575501,
+          0.014518672901126965,
+          0.9314046351352083,
+          0.9336989940621298
+        ],
+        "fill": "#E02049",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9866,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#B96677",
+        "stroke_width": 0.03881868201234471
+      },
+      {
+        "bbox": [
+          0.8320067672576626,
+          0.1656914437342725,
+          0.03412809629245936,
+          0.701371509375941
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9181,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.85,
+            0.16667
+          ],
+          [
+            0.85,
+            0.86667
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.0323706841252729
+      },
+      {
+        "bbox": [
+          0.11836483513925794,
+          0.16465369493000304,
+          0.31767964613467276,
+          0.06847981935269477
+        ],
+        "fill": "#DF214A",
+        "font_size": 0.285,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.6975,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0302_1_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 9802.837286660639,
+  "std_delta2": 10877.4365234375,
+  "tile_std_delta2": 3766.2397372658875,
+  "variant": "AC0302_1_M",
+  "w": 60
+}

@@ -1,15 +1,70 @@
 {
+  "actual_iterations": 64,
   "base": "AC0542",
-  "best_error": 35.416666666666664,
+  "best_error": 18.282222222222224,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.039351851851851846,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.0,
+  "error_per_pixel": 0.02031358024691358,
+  "error_pixel_cluster_count": 5.0,
+  "error_pixel_cluster_excess": 0.7353153153153152,
+  "error_pixel_count": 222.0,
   "filename": "AC0542_M.jpg",
   "h": 30,
-  "mean_delta2": 7501.85009765625,
+  "largest_error_pixel_cluster_fraction": 0.9819819819819819,
+  "localized_error_fraction": 0.8427770704215999,
+  "mean_delta2": 2610.13671875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "#d8d8d8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        },
+        {
+          "clip_to": "main_rect",
+          "confidence": 0.75,
+          "direction": "tr_bl",
+          "id": "description_element_2",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.045
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "rect"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -52,8 +107,147 @@
         "stroke_width": 0.045
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 39.51777777777778,
+        "initial_error": 39.51777777777778,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 38.85111111111111,
+      "generic_element_refinement": {
+        "final_error": 38.85111111111111,
+        "initial_error": 39.51777777777778,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.6000000000000014,
+            "element": "main_rect",
+            "error_after": 38.91777777777778,
+            "error_before": 39.51777777777778,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.06666666666666998,
+            "element": "diagonal_1_tr_bl",
+            "error_after": 38.85111111111111,
+            "error_before": 38.91777777777778,
+            "step_index": 1
+          }
+        ]
+      },
+      "initial_error": 53.46,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.38,
+        "scale_y": 1.2999999999999998,
+        "stroke_scale": 0.25,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 2.2566666666666677,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 2.3022222222222197,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 0.3211111111111151,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 1.0088888888888903,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 1.0988888888888866,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 1.3088888888888874,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 1.3744444444444426,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 0.5133333333333354,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 1.2688888888888883,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 1.0288888888888934,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 0.8611111111111072,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.5988888888888866,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 1.38
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.25160000000000005,
+          0.006000000000000061,
+          0.5167999999999999,
+          0.9879999999999999
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.00875
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.0095625
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -64,7 +258,10 @@
     "top_source_ref": null,
     "variant_name": "AC0542_M"
   },
-  "std_delta2": 15628.4677734375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 8767.780677578397,
+  "std_delta2": 7397.93505859375,
+  "tile_std_delta2": 3896.4437305891665,
   "variant": "AC0542_M",
   "w": 30
 }

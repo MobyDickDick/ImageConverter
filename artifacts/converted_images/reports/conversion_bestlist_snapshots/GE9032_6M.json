@@ -1,21 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE9032_6M",
-  "best_error": 27.691458333333333,
+  "best_error": 27.7825,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.8900000000139698,
-  "error_per_pixel": 0.017307161458333335,
+  "elapsed_seconds": 1.5939999999245629,
+  "error_per_pixel": 0.0173640625,
   "error_pixel_cluster_count": 3.0,
-  "error_pixel_cluster_excess": 0.3298471223021583,
+  "error_pixel_cluster_excess": 0.32625000000000004,
   "error_pixel_count": 278.0,
   "filename": "GE9032_6M.jpg",
   "h": 40,
-  "largest_error_pixel_cluster_fraction": 0.5035971223021583,
-  "localized_error_fraction": 0.8984882611685033,
-  "mean_delta2": 9501.9306640625,
+  "largest_error_pixel_cluster_fraction": 0.5,
+  "localized_error_fraction": 0.8891867846951753,
+  "mean_delta2": 9524.67578125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -233,10 +233,10 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.38,
-          0.37500000000000006,
-          0.7,
-          0.24999999999999992
+          0.3774109891820882,
+          0.3749304907333655,
+          0.6997515233275781,
+          0.24814955447092643
         ],
         "fill": "#b1c1cc",
         "id": "backbottom_light_grey_square",
@@ -252,7 +252,7 @@
         },
         "role": "reference_light_grey_square",
         "stroke": "none",
-        "stroke_width": 0.001
+        "stroke_width": 0.0020893669126199423
       }
     ],
     "semantic_conflicts": [],
@@ -266,9 +266,9 @@
     "variant_name": "GE9032_6M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 31031.798819280066,
-  "std_delta2": 21619.41796875,
-  "tile_std_delta2": 15648.72322071885,
+  "spatial_quality_score": 30872.100597683348,
+  "std_delta2": 21610.732421875,
+  "tile_std_delta2": 15590.128747620154,
   "variant": "GE9032_6M",
   "w": 40
 }

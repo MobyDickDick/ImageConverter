@@ -1,15 +1,37 @@
 {
+  "actual_iterations": 64,
   "base": "AC0302_1L",
-  "best_error": 74.32104166666667,
+  "best_error": 26.85421875,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.011612662760416668,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.390999999945052,
+  "error_per_pixel": 0.0041959716796875005,
+  "error_pixel_cluster_count": 55.0,
+  "error_pixel_cluster_excess": 0.546941613018598,
+  "error_pixel_count": 1398.0,
   "filename": "AC0302_1L_sia.jpg",
   "h": 80,
-  "mean_delta2": 36602.8359375,
+  "largest_error_pixel_cluster_fraction": 0.765379113018598,
+  "localized_error_fraction": 0.5240942345369236,
+  "mean_delta2": 8034.20947265625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -31,6 +53,88 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.049649498658675253,
+          0.015255237549538708,
+          0.9230546101402608,
+          0.9254540883976295
+        ],
+        "fill": "#E02A51",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9699,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#AB6C7A",
+        "stroke_width": 0.03821331658704508
+      },
+      {
+        "bbox": [
+          0.19756938390020257,
+          0.06509883277433137,
+          0.07687710383290466,
+          0.8632321849642217
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 1.0,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.2375,
+            0.0625
+          ],
+          [
+            0.2375,
+            0.925
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.07476547772157385
+      },
+      {
+        "bbox": [
+          0.025554131114110753,
+          0.2850671855694489,
+          0.20194663761369328,
+          0.05149605937860076
+        ],
+        "fill": "#D05670",
+        "font_size": 0.18,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7951,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -41,7 +145,10 @@
     "top_source_ref": null,
     "variant_name": "AC0302_1L_SIA"
   },
-  "std_delta2": 37470.203125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 18585.303518825232,
+  "std_delta2": 16386.28515625,
+  "tile_std_delta2": 6603.093701022853,
   "variant": "AC0302_1L_SIA",
   "w": 80
 }

@@ -1,15 +1,37 @@
 {
+  "actual_iterations": 64,
   "base": "GE1201",
-  "best_error": 55.0775,
+  "best_error": 21.67,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.13769375,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 2.030999999959022,
+  "error_per_pixel": 0.054175,
+  "error_pixel_cluster_count": 7.0,
+  "error_pixel_cluster_excess": 0.2420360824742268,
+  "error_pixel_count": 97.0,
   "filename": "GE1201_M.jpg",
   "h": 20,
-  "mean_delta2": 24688.818359375,
+  "largest_error_pixel_cluster_fraction": 0.4845360824742268,
+  "localized_error_fraction": 0.7156179432023255,
+  "mean_delta2": 3968.91259765625,
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [
         "missing_geometry_terms"
@@ -33,6 +55,55 @@
     "geometry_ir": [],
     "label": "",
     "mode": "insufficient_description",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0014056663225061059,
+          0.90174090516023,
+          0.9007169890339473
+        ],
+        "fill": "#F2D623",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9891,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#E3C964",
+        "stroke_width": 0.04954598037173635
+      },
+      {
+        "bbox": [
+          0.15207577478518686,
+          3.517363072191989e-05,
+          0.7502441251589141,
+          0.9987875246982922
+        ],
+        "fill": "#EFD846",
+        "font_size": 0.9,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7723,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "full_image",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "D"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -43,7 +114,10 @@
     "top_source_ref": null,
     "variant_name": "GE1201_M"
   },
-  "std_delta2": 19550.12890625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 10387.878220634922,
+  "std_delta2": 6342.13232421875,
+  "tile_std_delta2": 4595.567203446087,
   "variant": "GE1201_M",
   "w": 20
 }

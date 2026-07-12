@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0001",
-  "best_error": 46.79906666666667,
+  "best_error": 35.754533333333335,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.48399999999674037,
-  "error_per_pixel": 0.018719626666666666,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.25,
+  "error_per_pixel": 0.014301813333333333,
+  "error_pixel_cluster_count": 2.0,
+  "error_pixel_cluster_excess": 0.6151721925133691,
+  "error_pixel_count": 561.0,
   "filename": "GE0001_S.jpg",
   "h": 50,
-  "localized_error_fraction": 0.6519886124771068,
-  "mean_delta2": 12749.673828125,
+  "largest_error_pixel_cluster_fraction": 0.839572192513369,
+  "localized_error_fraction": 0.7678385929570708,
+  "mean_delta2": 9581.876953125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -61,33 +67,138 @@
     ],
     "geometry_ir_optimizer_result": {
       "element_refinement": {
-        "final_error": 59.33493333333333,
-        "initial_error": 59.33493333333333,
+        "final_error": 57.8516,
+        "initial_error": 57.8516,
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 59.33493333333333,
-      "initial_error": 59.346,
+      "final_error": 57.57,
+      "generic_element_refinement": {
+        "final_error": 57.57,
+        "initial_error": 57.8516,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.2815999999999974,
+            "element": "minus_glyph",
+            "error_after": 57.57,
+            "error_before": 57.8516,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 59.63826666666667,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
         "scale_x": 1.0,
         "scale_y": 1.0,
-        "stroke_scale": 1.1,
+        "stroke_scale": 4.96,
         "translate_x": 0.0,
         "translate_y": 0.0
       },
       "steps": [
         {
-          "best_delta": 0.003066666666661888,
+          "best_delta": 0.15533333333333132,
           "parameter": "stroke_scale",
           "stage": 0,
           "value": 1.25
         },
         {
-          "best_delta": 0.008000000000002672,
+          "best_delta": 0.05706666666667104,
           "parameter": "stroke_scale",
-          "stage": 1,
-          "value": 1.1
+          "stage": 0,
+          "value": 1.5
+        },
+        {
+          "best_delta": 0.05453333333333177,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.75
+        },
+        {
+          "best_delta": 0.0018666666666646847,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.0
+        },
+        {
+          "best_delta": 0.05306666666666615,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.25
+        },
+        {
+          "best_delta": 0.1039999999999992,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.5
+        },
+        {
+          "best_delta": 0.19653333333333478,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.75
+        },
+        {
+          "best_delta": 0.19266666666666765,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.0
+        },
+        {
+          "best_delta": 0.14146666666666619,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.25
+        },
+        {
+          "best_delta": 0.07213333333333338,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.5
+        },
+        {
+          "best_delta": 0.028266666666667106,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.75
+        },
+        {
+          "best_delta": 0.14946666666666886,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 4.0
+        },
+        {
+          "best_delta": 0.14439999999999742,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 4.25
+        },
+        {
+          "best_delta": 0.23013333333333463,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 4.5
+        },
+        {
+          "best_delta": 0.15639999999999787,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 4.75
+        },
+        {
+          "best_delta": 0.046133333333337134,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 5.0
+        },
+        {
+          "best_delta": 0.0031999999999996476,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 4.96
         }
       ]
     },
@@ -95,11 +206,91 @@
     "mode": "auto",
     "optimized_geometry_ir": [
       {
+        "bbox": [
+          0.038424460411032035,
+          0.04100403367319834,
+          0.9184295627963642,
+          0.9201927634183489
+        ],
+        "fill": "#8AB3D0",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9581,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#C9DBE9",
+        "stroke_width": 0.03826383345058857
+      },
+      {
         "id": "minus_glyph",
         "kind": "MinusGlyph",
         "position": "top_center",
         "stroke": "#4f4f4f",
-        "stroke_width": 0.027500000000000004
+        "stroke_width": 0.023933482735300014
+      },
+      {
+        "bbox": [
+          0.07732615734478512,
+          0.07912755960960428,
+          0.32003673678613226,
+          0.8405563722037206
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.6953,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.24,
+            0.08
+          ],
+          [
+            0.24,
+            0.92
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.3200159867122277
+      },
+      {
+        "bbox": [
+          0.017319910739343466,
+          0.49963015067161815,
+          0.31972643459137107,
+          0.08105611970736303
+        ],
+        "fill": "#87B0CF",
+        "font_size": 0.288,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8161,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "full_image",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
       }
     ],
     "semantic_conflicts": [],
@@ -113,9 +304,9 @@
     "variant_name": "GE0001_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 29908.36651715242,
-  "std_delta2": 21372.6953125,
-  "tile_std_delta2": 13631.359355343191,
+  "spatial_quality_score": 29295.841888037594,
+  "std_delta2": 18200.55078125,
+  "tile_std_delta2": 14351.218203931177,
   "variant": "GE0001_S",
   "w": 50
 }

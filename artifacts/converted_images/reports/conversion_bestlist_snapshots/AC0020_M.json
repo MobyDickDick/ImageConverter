@@ -1,14 +1,44 @@
 {
+  "actual_iterations": 64,
   "base": "AC0020",
   "best_error": 11.833434343434343,
   "best_iter": 1,
   "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.75,
   "error_per_pixel": 0.0035858891949801038,
+  "error_pixel_cluster_count": 9.0,
+  "error_pixel_cluster_excess": 0.4712173609291765,
+  "error_pixel_count": 347.0,
   "filename": "AC0020_M.jpg",
   "h": 110,
+  "largest_error_pixel_cluster_fraction": 0.5763688760806917,
+  "localized_error_fraction": 0.6372155734970598,
   "mean_delta2": 3474.62890625,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0020",
@@ -20,6 +50,7 @@
     "elements": [
       "SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)"
     ],
+    "geometry_ir": [],
     "label": "",
     "mode": "dual_arrow_badge",
     "semantic_conflicts": [],
@@ -32,7 +63,10 @@
     "top_source_ref": null,
     "variant_name": "AC0020_M"
   },
+  "requested_iterations": 64,
+  "spatial_quality_score": 10111.510769438126,
   "std_delta2": 11570.3251953125,
+  "tile_std_delta2": 5629.530750585961,
   "variant": "AC0020_M",
   "w": 30
 }

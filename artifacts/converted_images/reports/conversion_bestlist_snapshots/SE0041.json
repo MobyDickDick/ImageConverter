@@ -1,0 +1,140 @@
+{
+  "actual_iterations": 64,
+  "base": "SE0041",
+  "best_error": 21.33116883116883,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.6570000000065193,
+  "error_per_pixel": 0.017314260414909764,
+  "error_pixel_cluster_count": 11.0,
+  "error_pixel_cluster_excess": 0.21058744310352023,
+  "error_pixel_count": 311.0,
+  "filename": "SE0041.jpg",
+  "h": 44,
+  "largest_error_pixel_cluster_fraction": 0.4630225080385852,
+  "localized_error_fraction": 0.8328687446698421,
+  "mean_delta2": 4762.62646484375,
+  "params": {
+    "badge_param_source_ref": "AC0811",
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_bbox": [
+            0.02,
+            0.04,
+            0.96,
+            0.56
+          ],
+          "body_fill": "#e11e48",
+          "body_stroke": "#a0a0a0",
+          "body_stroke_width": 0.04,
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.5,
+              0.6
+            ],
+            [
+              0.5,
+              1.0
+            ]
+          ],
+          "connector_stroke": "#808080",
+          "connector_width": 0.08,
+          "id": "description_element_1",
+          "kind": "UprightSquareKelleGlyph",
+          "source": "description"
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "SE0041",
+        "source": "base_name",
+        "text": "Wie AC0811, jecoch ist der Kreis viereckig anstatt rund gezeichnet."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0811"
+    ],
+    "elements": [
+      "SEMANTIC: Viereck ohne Buchstabe",
+      "SEMANTIC: senkrechter Strich hinter dem Viereck",
+      "SEMANTIC: waagrechter Strich rechts vom Viereck",
+      "REFERENZ: Abgeleitet aus AC0811",
+      "GEOMETRIE: Referenz-Badge mit viereckigem Kopf statt runder Kopfkontur"
+    ],
+    "geometry_ir": [
+      {
+        "body_bbox": [
+          0.02,
+          0.04,
+          0.96,
+          0.56
+        ],
+        "body_fill": "#e11e48",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.5,
+            0.6
+          ],
+          [
+            0.5,
+            1.0
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.08,
+        "id": "upright_square_kelle",
+        "kind": "UprightSquareKelleGlyph"
+      }
+    ],
+    "head_style": "square_badge",
+    "label": "",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich hinter dem Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "SE0041"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 15054.506996072143,
+  "std_delta2": 12840.4033203125,
+  "tile_std_delta2": 8441.123761609006,
+  "variant": "SE0041",
+  "w": 28
+}

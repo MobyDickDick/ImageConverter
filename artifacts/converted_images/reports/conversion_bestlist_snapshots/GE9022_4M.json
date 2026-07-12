@@ -1,0 +1,220 @@
+{
+  "actual_iterations": 64,
+  "base": "GE9022_4M",
+  "best_error": 30.548333333333332,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 1.515999999945052,
+  "error_per_pixel": 0.025456944444444442,
+  "error_pixel_cluster_count": 3.0,
+  "error_pixel_cluster_excess": 0.10635964912280704,
+  "error_pixel_count": 285.0,
+  "filename": "GE9022_4M.jpg",
+  "h": 20,
+  "largest_error_pixel_cluster_fraction": 0.34385964912280703,
+  "localized_error_fraction": 0.5396955080728781,
+  "mean_delta2": 4320.64013671875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "confidence": 0.75,
+          "fill": "#e8e8e8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "primitive_decomposition": {
+            "primitives": [
+              {
+                "kind": "ColorPatch",
+                "role": "light_grey_fill"
+              }
+            ],
+            "schema_version": "light_grey_square_decomposition_v1"
+          },
+          "role": "reference_light_grey_square",
+          "source": "description",
+          "stroke": "none",
+          "stroke_width": 0.0
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE9022_4M",
+        "source": "base_name",
+        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "fill": "#e8e8e8",
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.0
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 28.317777777777778,
+        "initial_error": 28.317777777777778,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 27.666666666666668,
+      "generic_element_refinement": {
+        "final_error": 27.666666666666668,
+        "initial_error": 28.317777777777778,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.6511111111111099,
+            "element": "backbottom_light_grey_square",
+            "error_after": 27.666666666666668,
+            "error_before": 28.317777777777778,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 33.019444444444446,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.0,
+        "scale_y": 0.85,
+        "stroke_scale": 1.0,
+        "translate_x": 0.1,
+        "translate_y": -0.16999999999999998
+      },
+      "steps": [
+        {
+          "best_delta": 0.13555555555555543,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 1.5838888888888896,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.4088888888888889,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 1.3155555555555551,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 0.0400000000000027,
+          "parameter": "translate_x",
+          "stage": 2,
+          "value": 0.1
+        },
+        {
+          "best_delta": 0.10111111111110915,
+          "parameter": "translate_y",
+          "stage": 2,
+          "value": -0.18
+        },
+        {
+          "best_delta": 0.11666666666666714,
+          "parameter": "translate_y",
+          "stage": 3,
+          "value": -0.16999999999999998
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.09972895073931823,
+          0.0,
+          1.0,
+          0.8512185994134184
+        ],
+        "fill": "#d8d8d8",
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.001
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9022_4M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 8943.018170171335,
+  "std_delta2": 5256.98828125,
+  "tile_std_delta2": 3895.9092618580244,
+  "variant": "GE9022_4M",
+  "w": 60
+}

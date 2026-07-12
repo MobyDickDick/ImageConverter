@@ -1,21 +1,18 @@
 {
-  "batch_failure_count": 0,
-  "bestlist_count": 1,
-  "filename": "DLG0021.jpg",
+  "batch_failure_count": 17,
+  "bestlist_count": 505,
+  "filename": "GE0033_S.jpg",
   "last_event": {
-    "candidate_index": 1,
-    "decision": "rejected_spatial_regression",
-    "filename": "DLG0021.jpg",
-    "improved": false,
-    "pass": 2,
-    "stage": "quality_pass",
-    "variant": "DLG0021"
+    "filename": "GE0033_S.jpg",
+    "stage": "initial_pass",
+    "variant": "GE0033_S",
+    "variant_index": 521
   },
-  "pass_seed_offset": 200001,
-  "processed_result_count": 1,
+  "pass_seed_offset": 521,
+  "processed_result_count": 505,
   "result_map_path": "conversion_result_map.json",
-  "run_seed": 165904424,
+  "run_seed": 616105023,
   "schema_version": "conversion_checkpoint_v1",
-  "stage": "quality_pass",
-  "variant": "DLG0021"
+  "stage": "initial_pass",
+  "variant": "GE0033_S"
 }

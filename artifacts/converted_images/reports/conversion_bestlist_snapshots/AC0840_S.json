@@ -1,19 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0840",
-  "best_error": 36.14222222222222,
+  "best_error": 39.24444444444445,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.26600000000325963,
-  "error_per_pixel": 0.1606320987654321,
-  "error_pixel_cluster_count": 23.0,
-  "error_pixel_cluster_excess": 0.0870498084291188,
-  "error_pixel_count": 58.0,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 2.625,
+  "error_per_pixel": 0.17441975308641977,
+  "error_pixel_cluster_count": 15.0,
+  "error_pixel_cluster_excess": 0.0,
+  "error_pixel_count": 50.0,
   "filename": "AC0840_S.jpg",
   "h": 15,
-  "largest_error_pixel_cluster_fraction": 0.3448275862068966,
-  "localized_error_fraction": 0.6668288726682887,
-  "mean_delta2": 6411.60009765625,
+  "largest_error_pixel_cluster_fraction": 0.22,
+  "localized_error_fraction": 0.6275764634768749,
+  "mean_delta2": 9352.61328125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -105,7 +107,9 @@
       }
     ],
     "documented_alias_refs": [],
-    "elements": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe rF"
+    ],
     "geometry_ir": [
       {
         "badge_role": "circle_text_badge",
@@ -143,7 +147,7 @@
         "text_position": "center"
       }
     ],
-    "label": "M",
+    "label": "rF",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
@@ -151,14 +155,19 @@
       "layout_override",
       "description_heuristic"
     ],
-    "semantic_sources": {},
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe rF"
+      ],
+      "family_rule": []
+    },
     "top_source_ref": null,
     "variant_name": "AC0840_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 15182.31780722695,
-  "std_delta2": 9995.849609375,
-  "tile_std_delta2": 6134.252534596462,
+  "spatial_quality_score": 20919.41404697232,
+  "std_delta2": 14701.9833984375,
+  "tile_std_delta2": 8668.426091074627,
   "variant": "AC0840_S",
   "w": 15
 }

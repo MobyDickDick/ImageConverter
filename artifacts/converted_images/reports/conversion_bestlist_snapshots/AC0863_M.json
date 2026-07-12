@@ -1,10 +1,12 @@
 {
-  "actual_iterations": 65,
+  "actual_iterations": 64,
   "base": "AC0863",
   "best_error": 20.087142857142858,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.0150000000139698,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 2.015999999945052,
   "error_per_pixel": 0.02869591836734694,
   "error_pixel_cluster_count": 19.0,
   "error_pixel_cluster_excess": 0.25175388967468176,
@@ -49,11 +51,11 @@
     ],
     "elements": [
       "SEMANTIC: senkrechter Strich oben vom Kreis",
-      "SEMANTIC: Kreis + Buchstabe",
+      "SEMANTIC: Kreis + Buchstabe rF",
       "SEMANTIC: waagrechter Strich links vom Kreis"
     ],
     "geometry_ir": [],
-    "label": "T",
+    "label": "rF",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
@@ -63,7 +65,7 @@
     ],
     "semantic_sources": {
       "description_heuristic": [
-        "SEMANTIC: Kreis + Buchstabe",
+        "SEMANTIC: Kreis + Buchstabe rF",
         "SEMANTIC: waagrechter Strich links vom Kreis"
       ],
       "family_rule": [
@@ -73,7 +75,7 @@
     "top_source_ref": null,
     "variant_name": "AC0863_M"
   },
-  "requested_iterations": 65,
+  "requested_iterations": 64,
   "spatial_quality_score": 17276.22664345657,
   "std_delta2": 13588.96875,
   "tile_std_delta2": 9353.801910206448,

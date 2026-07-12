@@ -1,0 +1,70 @@
+{
+  "actual_iterations": 64,
+  "base": "Z_285",
+  "best_error": 31.033738191632928,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.7650000000139698,
+  "error_per_pixel": 0.12564266474345315,
+  "error_pixel_cluster_count": 4.0,
+  "error_pixel_cluster_excess": 0.7006007574768187,
+  "error_pixel_count": 62.0,
+  "filename": "z_285.jpg",
+  "h": 19,
+  "largest_error_pixel_cluster_fraction": 0.9516129032258065,
+  "localized_error_fraction": 0.7142977811519499,
+  "mean_delta2": 6332.33984375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "z_285",
+        "source": "base_name",
+        "text": "z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "Z_285"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 21915.122808899523,
+  "std_delta2": 10369.4921875,
+  "tile_std_delta2": 8249.544274583615,
+  "variant": "Z_285",
+  "w": 13
+}

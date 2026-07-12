@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0531",
-  "best_error": 11.24375,
+  "best_error": 11.2125,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.6559999999881256,
-  "error_per_pixel": 0.014054687500000001,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.75,
+  "error_per_pixel": 0.014015625,
+  "error_pixel_cluster_count": 22.0,
+  "error_pixel_cluster_excess": 0.08736486486486483,
+  "error_pixel_count": 222.0,
   "filename": "AC0531_S.jpg",
   "h": 40,
-  "localized_error_fraction": 0.7506915552059918,
-  "mean_delta2": 839.1412353515625,
+  "largest_error_pixel_cluster_fraction": 0.36486486486486486,
+  "localized_error_fraction": 0.70937885643768,
+  "mean_delta2": 765.7650146484375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -108,7 +114,30 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 30.75875,
+      "final_error": 30.5925,
+      "generic_element_refinement": {
+        "final_error": 30.5925,
+        "initial_error": 30.75875,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.166249999999998,
+            "element": "main_rect",
+            "error_after": 30.5925,
+            "error_before": 30.75875,
+            "step_index": 0
+          },
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "diagonal_1_tr_bl",
+            "error_after": 30.5925,
+            "error_before": 30.5925,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 51.2975,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -240,7 +269,7 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.5332000000000001,
+          0.5357000000000001,
           0.006000000000000061,
           0.4535999999999999,
           0.9879999999999999
@@ -272,9 +301,9 @@
     "variant_name": "AC0531_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 2440.6047005894343,
-  "std_delta2": 2442.671142578125,
-  "tile_std_delta2": 1476.8414018535927,
+  "spatial_quality_score": 2105.400171771336,
+  "std_delta2": 2005.2923583984375,
+  "tile_std_delta2": 1148.865512323397,
   "variant": "AC0531_S",
   "w": 20
 }

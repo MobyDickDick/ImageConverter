@@ -1,0 +1,153 @@
+{
+  "actual_iterations": 64,
+  "base": "GE9902",
+  "best_error": 5.041904861111111,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 6.859000000054948,
+  "error_per_pixel": 1.0503968460648147e-05,
+  "error_pixel_cluster_count": 9.0,
+  "error_pixel_cluster_excess": 0.8317514463336941,
+  "error_pixel_count": 53578.0,
+  "filename": "GE9902_M.jpg",
+  "h": 600,
+  "largest_error_pixel_cluster_fraction": 0.9433722796670275,
+  "localized_error_fraction": 0.8250930575604969,
+  "mean_delta2": 313.3230895996094,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE9902",
+        "source": "base_name",
+        "text": "Wie GE0010: grauer Hintergrund links blaue Fläche mit vertikalem Farbverlauf oben dunkel, unten ein wenig heller und rechts geschwungene Linie (Wellenform mit 1-Ausbuchtung nach und 1-Ausbuchtung nach rechts). Auf der linken Seite ist noch eine Art Sichelform und ganz links eine einzelne weiße Linie. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0010"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          0.2147012633275699,
+          1.0
+        ],
+        "fill": "#AACFE8",
+        "id": "perception_rect_border",
+        "kind": "RectBorder",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9481,
+          "detector": "contour",
+          "kind": "rectangle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#B0D2EA",
+        "stroke_width": 0.01743844783452053
+      },
+      {
+        "bbox": [
+          0.2119898548820246,
+          0.0012170173439782599,
+          0.01,
+          0.8638797986961346
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 1.0,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.21375,
+            0.0
+          ],
+          [
+            0.21375,
+            0.865
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.001
+      },
+      {
+        "bbox": [
+          0.1488973106098574,
+          0.5822757590871644,
+          0.0346898651078885,
+          0.010522559187257266
+        ],
+        "fill": "#B5D8EE",
+        "font_size": 0.0315,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.669,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top+bottom+left",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9902_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 1078.5190513628575,
+  "std_delta2": 846.2637329101562,
+  "tile_std_delta2": 542.5321565595497,
+  "variant": "GE9902_M",
+  "w": 800
+}

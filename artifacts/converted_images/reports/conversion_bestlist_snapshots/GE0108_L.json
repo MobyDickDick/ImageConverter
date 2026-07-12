@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0108",
-  "best_error": 20.678418604651164,
+  "best_error": 20.402852713178294,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.2030000000086147,
-  "error_per_pixel": 0.0019235738236884803,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.9220000000204891,
+  "error_per_pixel": 0.0018979397872723996,
+  "error_pixel_cluster_count": 23.0,
+  "error_pixel_cluster_excess": 0.3792126303827266,
+  "error_pixel_count": 2865.0,
   "filename": "GE0108_L.jpg",
   "h": 50,
-  "localized_error_fraction": 0.8874391426221401,
-  "mean_delta2": 4905.1337890625,
+  "largest_error_pixel_cluster_fraction": 0.6457242582897034,
+  "localized_error_fraction": 0.6867825692176982,
+  "mean_delta2": 2830.059814453125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -47,6 +53,108 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.0006408693232033283,
+          0.0009382229136187378,
+          0.9989707698292863,
+          0.9988146204074937
+        ],
+        "fill": "#DCDFE1",
+        "id": "perception_rect_border",
+        "kind": "RectBorder",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9436,
+          "detector": "contour",
+          "kind": "rectangle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#CACBCD",
+        "stroke_width": 0.0598993099783795
+      },
+      {
+        "bbox": [
+          0.07712407961288406,
+          0.21715459907816242,
+          0.1412447669085985,
+          0.6008686332726499
+        ],
+        "fill": "#387090",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.95,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#427695",
+        "stroke_width": 0.024199991784491646
+      },
+      {
+        "bbox": [
+          0.9858764541110929,
+          0.01802576153083244,
+          0.01,
+          0.9214059890065124
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 1.0,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.99069,
+            0.02
+          ],
+          [
+            0.99069,
+            0.94
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.04478344294305689
+      },
+      {
+        "bbox": [
+          0.20516674695948411,
+          0.5194053036472737,
+          0.05644224344530262,
+          0.3585116329583145
+        ],
+        "fill": "#BBC7CF",
+        "font_size": 0.324,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8947,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "left",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "L"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -58,9 +166,9 @@
     "variant_name": "GE0108_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 17065.308049303534,
-  "std_delta2": 15435.064453125,
-  "tile_std_delta2": 11074.13614637135,
+  "spatial_quality_score": 8112.653998815651,
+  "std_delta2": 9267.1162109375,
+  "tile_std_delta2": 3848.696447102767,
   "variant": "GE0108_L",
   "w": 215
 }

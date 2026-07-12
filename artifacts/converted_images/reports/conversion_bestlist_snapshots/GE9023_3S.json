@@ -1,21 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE9023",
-  "best_error": 19.466666666666665,
+  "best_error": 19.51222222222222,
   "best_iter": 1,
   "convergence": "",
-  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.6720000000204891,
-  "error_per_pixel": 0.06488888888888888,
-  "error_pixel_cluster_count": 2.0,
-  "error_pixel_cluster_excess": 0.43045197740112995,
-  "error_pixel_count": 59.0,
+  "elapsed_seconds": 1.047000000020489,
+  "error_per_pixel": 0.06504074074074073,
+  "error_pixel_cluster_count": 3.0,
+  "error_pixel_cluster_excess": 0.1932128514056225,
+  "error_pixel_count": 83.0,
   "filename": "GE9023_3S.jpg",
   "h": 30,
-  "largest_error_pixel_cluster_fraction": 0.6271186440677966,
-  "localized_error_fraction": 0.8409385608569455,
-  "mean_delta2": 4334.1533203125,
+  "largest_error_pixel_cluster_fraction": 0.46987951807228917,
+  "localized_error_fraction": 0.8417954072267189,
+  "mean_delta2": 4329.1201171875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -203,10 +203,10 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.19500000000000006,
-          0.09000000000000002,
-          0.6099999999999999,
-          0.96
+          0.19283818252157753,
+          0.08749545551091756,
+          0.6100037774664726,
+          0.9592381472548932
         ],
         "fill": "#c8dcc2",
         "id": "backbottom_light_grey_square",
@@ -236,9 +236,9 @@
     "variant_name": "GE9023_3S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 14434.009183326822,
-  "std_delta2": 10170.1748046875,
-  "tile_std_delta2": 8650.226564925246,
+  "spatial_quality_score": 13901.263623254883,
+  "std_delta2": 10144.9697265625,
+  "tile_std_delta2": 8615.768305950853,
   "variant": "GE9023_3S",
   "w": 10
 }

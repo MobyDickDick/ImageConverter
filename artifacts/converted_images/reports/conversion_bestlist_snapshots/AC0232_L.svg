@@ -1,0 +1,21 @@
+<svg width="75" height="50" viewBox="0 0 75 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="vertical-two-way-valve-body-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a8a8a8"/>
+      <stop offset="100%" stop-color="#fbfbfb"/>
+    </linearGradient>
+    <linearGradient id="vertical-two-way-valve-circle-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f7f7f7"/>
+    </linearGradient>
+  </defs>
+  <g data-output-variation="1" transform="translate(0.1235 -0.0889) rotate(-0.1642 37.5000 25.0000)">
+
+  <path id="left_rotated_top_kelle_three_way_valve_connector" d="M 15.413 25 L 26.092 25" stroke="#8f8f8f" stroke-width="8.137" fill="none" stroke-linecap="butt"/>
+  <path id="left_rotated_top_kelle_three_way_valve_body_1" d="M 26.092 25 L 15.746 47.08 L 36.439 47.08 Z" fill="#d7d7d7" stroke="#969696" stroke-width="4.355" stroke-linejoin="miter"/>
+  <path id="left_rotated_top_kelle_three_way_valve_body_2" d="M 26.092 25 L 15.746 2.92 L 36.439 2.92 Z" fill="#d7d7d7" stroke="#969696" stroke-width="4.355" stroke-linejoin="miter"/>
+  <path id="left_rotated_top_kelle_three_way_valve_body_3" d="M 26.092 25 L 49.455 32.682 L 49.455 17.318 Z" fill="#d7d7d7" stroke="#969696" stroke-width="4.355" stroke-linejoin="miter"/>
+  <circle id="left_rotated_top_kelle_three_way_valve_circle" cx="1.061" cy="25" r="10.013" fill="#fafafa" stroke="#969696" stroke-width="4.355"/>
+  <text id="left_rotated_top_kelle_three_way_valve_label" x="1.061" y="25" fill="#666666" font-family="Arial, Helvetica, sans-serif" font-size="14.24" font-weight="700" text-anchor="middle" dominant-baseline="middle">M</text>
+  </g>
+</svg>

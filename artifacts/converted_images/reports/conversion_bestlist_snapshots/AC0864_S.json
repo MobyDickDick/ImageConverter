@@ -1,19 +1,21 @@
 {
-  "actual_iterations": 65,
+  "actual_iterations": 64,
   "base": "AC0864",
-  "best_error": 21.370666666666665,
+  "best_error": 18.376,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.875,
-  "error_per_pixel": 0.05698844444444444,
-  "error_pixel_cluster_count": 19.0,
-  "error_pixel_cluster_excess": 0.4697853107344633,
-  "error_pixel_count": 59.0,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.672000000020489,
+  "error_per_pixel": 0.04900266666666667,
+  "error_pixel_cluster_count": 16.0,
+  "error_pixel_cluster_excess": 0.35079569892473117,
+  "error_pixel_count": 62.0,
   "filename": "AC0864_S.jpg",
   "h": 15,
-  "largest_error_pixel_cluster_fraction": 0.6271186440677966,
-  "localized_error_fraction": 0.8714099537171345,
-  "mean_delta2": 3584.912109375,
+  "largest_error_pixel_cluster_fraction": 0.5161290322580645,
+  "localized_error_fraction": 0.8672911926049597,
+  "mean_delta2": 3551.048095703125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -49,11 +51,12 @@
       "AC0862"
     ],
     "elements": [
-      "SEMANTIC: Kreis + Buchstabe",
+      "SEMANTIC: Kreis + Buchstabe rF",
+      "SEMANTIC: waagrechter Strich rechts vom Kreis",
       "SEMANTIC: waagrechter Strich links vom Kreis"
     ],
     "geometry_ir": [],
-    "label": "T",
+    "label": "rF",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
@@ -63,7 +66,8 @@
     ],
     "semantic_sources": {
       "description_heuristic": [
-        "SEMANTIC: Kreis + Buchstabe",
+        "SEMANTIC: Kreis + Buchstabe rF",
+        "SEMANTIC: waagrechter Strich rechts vom Kreis",
         "SEMANTIC: waagrechter Strich links vom Kreis"
       ],
       "family_rule": []
@@ -71,10 +75,10 @@
     "top_source_ref": null,
     "variant_name": "AC0864_S"
   },
-  "requested_iterations": 65,
-  "spatial_quality_score": 12400.745271544065,
-  "std_delta2": 10041.8046875,
-  "tile_std_delta2": 7183.38009387543,
+  "requested_iterations": 64,
+  "spatial_quality_score": 16166.42453618459,
+  "std_delta2": 9757.80859375,
+  "tile_std_delta2": 8440.360138911186,
   "variant": "AC0864_S",
   "w": 25
 }

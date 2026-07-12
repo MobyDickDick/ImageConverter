@@ -1,0 +1,108 @@
+{
+  "actual_iterations": 64,
+  "base": "SE0082",
+  "best_error": 38.945238095238096,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.734000000054948,
+  "error_per_pixel": 0.046363378684807256,
+  "error_pixel_cluster_count": 17.0,
+  "error_pixel_cluster_excess": 0.058939802336028746,
+  "error_pixel_count": 212.0,
+  "filename": "SE0082.jpg",
+  "h": 24,
+  "largest_error_pixel_cluster_fraction": 0.3113207547169811,
+  "localized_error_fraction": 0.5008786056039656,
+  "mean_delta2": 9194.7646484375,
+  "params": {
+    "badge_param_source_ref": "SE0041",
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "#d8d8d8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "SE0082",
+        "source": "base_name",
+        "text": "Wie SE0041, aber nach rechts gekippt. \"M\" steht waagrecht geschrieben."
+      }
+    ],
+    "documented_alias_refs": [
+      "SE0041"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe",
+      "REFERENZ: Abgeleitet aus SE0041"
+    ],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "label": "M",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "SE0082"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 18342.714592888955,
+  "std_delta2": 15180.638671875,
+  "tile_std_delta2": 7843.93658313736,
+  "variant": "SE0082",
+  "w": 35
+}

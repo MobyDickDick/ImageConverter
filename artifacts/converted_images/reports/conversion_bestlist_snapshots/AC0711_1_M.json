@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0711",
-  "best_error": 8.666190476190476,
+  "best_error": 46.51571428571429,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.9690000000118744,
-  "error_per_pixel": 0.012380272108843536,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 1.202999999979511,
+  "error_per_pixel": 0.06645102040816327,
+  "error_pixel_cluster_count": 18.0,
+  "error_pixel_cluster_excess": 0.0,
+  "error_pixel_count": 125.0,
   "filename": "AC0711_1_M.jpg",
   "h": 35,
-  "localized_error_fraction": 0.9362854546809126,
-  "mean_delta2": 1859.969970703125,
+  "largest_error_pixel_cluster_fraction": 0.176,
+  "localized_error_fraction": 0.5244225902247492,
+  "mean_delta2": 13113.830078125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -69,7 +75,9 @@
     "documented_alias_refs": [
       "AC0701"
     ],
-    "elements": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
     "geometry_ir": [
       {
         "body_bbox": [
@@ -97,111 +105,26 @@
         "kind": "UprightSquareKelleGlyph"
       }
     ],
-    "geometry_ir_optimizer_result": {
-      "element_refinement": {
-        "final_error": 8.666190476190476,
-        "initial_error": 8.666190476190476,
-        "mode": "right_rotated_valve_geometry",
-        "steps": []
-      },
-      "final_error": 8.666190476190476,
-      "initial_error": 18.783333333333335,
-      "mode": "geometry_ir_raster_registration",
-      "parameters": {
-        "scale_x": 0.9600000000000001,
-        "scale_y": 0.9299999999999999,
-        "stroke_scale": 1.25,
-        "translate_x": 0.0,
-        "translate_y": 0.02
-      },
-      "steps": [
-        {
-          "best_delta": 1.8195238095238118,
-          "parameter": "scale_y",
-          "stage": 0,
-          "value": 0.85
-        },
-        {
-          "best_delta": 0.8266666666666644,
-          "parameter": "stroke_scale",
-          "stage": 0,
-          "value": 1.25
-        },
-        {
-          "best_delta": 0.4009523809523827,
-          "parameter": "scale_y",
-          "stage": 1,
-          "value": 0.9299999999999999
-        },
-        {
-          "best_delta": 0.1290476190476184,
-          "parameter": "translate_y",
-          "stage": 1,
-          "value": 0.04
-        },
-        {
-          "best_delta": 0.14095238095238116,
-          "parameter": "scale_x",
-          "stage": 1,
-          "value": 0.92
-        },
-        {
-          "best_delta": 4.602380952380953,
-          "parameter": "translate_y",
-          "stage": 2,
-          "value": 0.02
-        },
-        {
-          "best_delta": 2.197619047619048,
-          "parameter": "scale_x",
-          "stage": 2,
-          "value": 0.9600000000000001
-        }
-      ]
-    },
     "label": "M",
-    "mode": "auto",
-    "optimized_geometry_ir": [
-      {
-        "body_bbox": [
-          0.03919999999999996,
-          0.09219999999999999,
-          0.9216000000000001,
-          0.5208
-        ],
-        "body_fill": "#e11e48",
-        "body_stroke": "#a0a0a0",
-        "body_stroke_width": 0.04,
-        "connector": [
-          [
-            0.5,
-            0.613
-          ],
-          [
-            0.5,
-            0.985
-          ]
-        ],
-        "connector_stroke": "#808080",
-        "connector_width": 0.1,
-        "id": "upright_square_kelle",
-        "kind": "UprightSquareKelleGlyph"
-      }
-    ],
+    "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
       "layout_override",
       "description_heuristic"
     ],
-    "semantic_sources": {},
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
     "top_source_ref": null,
     "variant_name": "AC0711_1_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 6936.914206155979,
-  "std_delta2": 8553.1103515625,
-  "tile_std_delta2": 4767.692932065508,
+  "spatial_quality_score": 30416.670603888007,
+  "std_delta2": 16402.7578125,
+  "tile_std_delta2": 12000.160792277866,
   "variant": "AC0711_1_M",
   "w": 20
 }

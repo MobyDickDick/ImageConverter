@@ -1,15 +1,37 @@
 {
+  "actual_iterations": 64,
   "base": "GE0354",
-  "best_error": 34.190518518518516,
+  "best_error": 20.230874074074073,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0060783144032921805,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 1.125,
+  "error_per_pixel": 0.0035965998353909463,
+  "error_pixel_cluster_count": 83.0,
+  "error_pixel_cluster_excess": 0.14787661691542292,
+  "error_pixel_count": 1407.0,
   "filename": "GE0354.jpg",
   "h": 75,
-  "mean_delta2": 6169.84326171875,
+  "largest_error_pixel_cluster_fraction": 0.39800995024875624,
+  "localized_error_fraction": 0.5241391189144495,
+  "mean_delta2": 2628.54150390625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -29,6 +51,88 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.025374205559489667,
+          0.04125935853779237,
+          0.9317506648449553,
+          0.9327187583012346
+        ],
+        "fill": "#9EC6DD",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8834,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "ring",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#C6DEEB",
+        "stroke_width": 0.1958853481887036
+      },
+      {
+        "bbox": [
+          0.38706946306145773,
+          0.053421580781339836,
+          0.011335953474360744,
+          0.37421231243232655
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8547,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.39333,
+            0.05333
+          ],
+          [
+            0.39333,
+            0.42666
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.012330904664008506
+      },
+      {
+        "bbox": [
+          0.21497063606950942,
+          0.8527898499363037,
+          0.5594156627160514,
+          0.0528575034172283
+        ],
+        "fill": "#81B1CD",
+        "font_size": 0.504,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7375,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top+bottom",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -39,7 +143,10 @@
     "top_source_ref": null,
     "variant_name": "GE0354"
   },
-  "std_delta2": 6840.294921875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 5304.283628604361,
+  "std_delta2": 5832.98876953125,
+  "tile_std_delta2": 2151.661734877206,
   "variant": "GE0354",
   "w": 75
 }

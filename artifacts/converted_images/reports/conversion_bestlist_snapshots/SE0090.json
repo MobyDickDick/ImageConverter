@@ -1,21 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "SE0090",
-  "best_error": 17.1904,
+  "best_error": 17.4848,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.6720000000204891,
-  "error_per_pixel": 0.02750464,
-  "error_pixel_cluster_count": 19.0,
-  "error_pixel_cluster_excess": 0.6120631578947369,
-  "error_pixel_count": 152.0,
+  "elapsed_seconds": 0.7820000000065193,
+  "error_per_pixel": 0.02797568,
+  "error_pixel_cluster_count": 23.0,
+  "error_pixel_cluster_excess": 0.5831949044585988,
+  "error_pixel_count": 157.0,
   "filename": "SE0090.jpg",
   "h": 25,
-  "largest_error_pixel_cluster_fraction": 0.8552631578947368,
-  "localized_error_fraction": 0.7192104611593185,
-  "mean_delta2": 3334.483154296875,
+  "largest_error_pixel_cluster_fraction": 0.8343949044585988,
+  "localized_error_fraction": 0.7129727937262385,
+  "mean_delta2": 3300.297607421875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -179,9 +179,9 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          -0.06,
-          -0.03,
-          1.0,
+          0.0,
+          0.0,
+          0.9986156717383283,
           1.0
         ],
         "fill": "#f0f0f0",
@@ -212,9 +212,9 @@
     "variant_name": "SE0090"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 9780.877509934897,
-  "std_delta2": 8738.8212890625,
-  "tile_std_delta2": 4065.4466426790455,
+  "spatial_quality_score": 9563.87620137762,
+  "std_delta2": 8584.8984375,
+  "tile_std_delta2": 3962.38391260235,
   "variant": "SE0090",
   "w": 25
 }

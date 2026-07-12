@@ -1,0 +1,59 @@
+run-meta: run_seed=616105023 pass_seed_offset=162 trace_id=621649984569
+status=semantic_ok
+quality=borderline
+quality_reason=semantic_ok_trotz_hohem_elementfehler:text=108.449
+quality_elevated_elements=circle,text
+redraw_variation: seed=621649984569 changed_params=cx:10.000->10.084 | cy:10.000->10.015 | r:9.000->8.863 | stroke_circle:1.000->1.079
+semantic-guard: Textmodus aktiv (m).
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=133.993
+circle: Breiten-Bracketing stroke_circle 1.000->2.000; Kandidaten=1.000->133.993, 1.500->104.828, 2.500->104.828, 3.500->108.342, 4.500->108.342
+circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=10.000, cy=10.000, best_err=104.828)
+perf_probe: circle_center_elapsed round=1 elapsed=0.03s
+circle: Radius-Bracketing r 8.500->9.000 (best_err=103.832, full_err=41.900); Kandidaten=7.650->138.865, 8.500->104.828, 9.000->103.832, 9.500->103.832
+perf_probe: circle_radius_elapsed round=1 elapsed=0.02s
+text: Fehler=108.449
+perf_probe: global_search_elapsed round=1 elapsed=0.00s
+Runde 1: Gesamtfehler=41.900; Qualität (MAE-basiert, höher=besser): 80.59% -> 83.57% | mittlere Pixelabweichung (MAE, kleiner=besser): 49.500 -> 41.900 | Mean-Delta² (kleiner=besser): 12832.215 -> 10718.370 | Qualitätsgewinn=+7.600 (+15.35%) | Wirkung=verbessert
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=103.832
+circle: Breiten-Bracketing stroke_circle 2.000->1.000; Kandidaten=1.000->94.140, 2.000->103.832, 3.000->106.388, 3.500->107.298, 4.500->107.298
+circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=10.000, cy=10.000, best_err=94.140)
+perf_probe: circle_center_elapsed round=2 elapsed=0.03s
+circle: Radius-Bracketing keine relevante Änderung (r: 9.000, best_err=94.140, full_err=32.913); Kandidaten=8.100->129.100, 9.000->94.140, 9.500->94.193, 9.600->94.193
+perf_probe: circle_radius_elapsed round=2 elapsed=0.02s
+text: Fehler=108.449
+perf_probe: global_search_elapsed round=2 elapsed=0.00s
+Runde 2: Gesamtfehler=32.913; Qualität (MAE-basiert, höher=besser): 83.57% -> 87.09% | mittlere Pixelabweichung (MAE, kleiner=besser): 41.900 -> 32.913 | Mean-Delta² (kleiner=besser): 10718.370 -> 8339.947 | Qualitätsgewinn=+8.987 (+21.45%) | Wirkung=verbessert
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=94.140
+circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->94.140, 1.500->103.832, 2.500->103.832, 3.500->107.298, 4.500->107.298
+circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=10.000, cy=10.000, best_err=94.140)
+perf_probe: circle_center_elapsed round=3 elapsed=0.03s
+circle: Radius-Bracketing keine relevante Änderung (r: 9.000, best_err=94.140, full_err=32.913); Kandidaten=8.100->129.100, 9.000->94.140, 9.500->94.193, 9.600->94.193
+perf_probe: circle_radius_elapsed round=3 elapsed=0.00s
+text: Fehler=108.449
+perf_probe: global_search_elapsed round=3 elapsed=0.00s
+Runde 3: Gesamtfehler=32.913; Qualität (MAE-basiert, höher=besser): 87.09% -> 87.09% | mittlere Pixelabweichung (MAE, kleiner=besser): 32.913 -> 32.913 | Mean-Delta² (kleiner=besser): 8339.947 -> 8339.947 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
+Runde 4: elementweise Validierung gestartet
+circle: Fehler=94.140
+circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->94.140, 1.500->103.832, 2.500->103.832, 3.500->107.298, 4.500->107.298
+text: Fehler=108.449
+perf_probe: global_search_elapsed round=4 elapsed=0.00s
+Runde 4: Gesamtfehler=32.913; Qualität (MAE-basiert, höher=besser): 87.09% -> 87.09% | mittlere Pixelabweichung (MAE, kleiner=besser): 32.913 -> 32.913 | Mean-Delta² (kleiner=besser): 8339.947 -> 8339.947 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert
+stable_improvement_probe: round=4, improved=false, count=1/2, eps=0.0200
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
+validation_abort_decision: stage=round_loop, reason=stagnation_identical_fingerprint, error=32.913, round=4
+best_validation_round=2
+executed_validation_rounds=4
+best_validation_error=32.912500
+phase2_rollback: no
+circle: Farb-Stochastic-Survivor aktiviert (fill_gray=192, err=8427.000)
+circle: Farb-Bracketing fill_gray 242->192; Kandidaten=178->7997.000, 200->8726.000, 210->9092.000, 220->9461.000, 226->9682.000, 230->9896.000, 234->10278.000, 240->10941.000, 242->11196.000, 250->12292.000, 255->13009.000
+circle: Farb-Bracketing stroke_gray 127->152; Kandidaten=95->10061.000, 96->10010.000, 111->9247.000, 112->9197.000, 119->8843.000, 127->8427.000, 128->8375.000, 135->8058.000, 143->7814.000, 144->7793.000, 152->7684.000, 159->7817.000, 160->7852.000, 171->8295.000, 178->8570.000
+circle: Farboptimierung in Abschlussphase angewendet
+text: Farb-Bracketing text_gray 102->134; Kandidaten=70->121.699, 86->114.990, 94->111.715, 96->110.917, 102->108.449, 110->105.377, 112->104.740, 118->102.990, 128->100.909, 134->100.715, 144->101.070, 152->101.498, 160->102.498, 167->103.457, 171->104.014
+text: Farboptimierung in Abschlussphase angewendet

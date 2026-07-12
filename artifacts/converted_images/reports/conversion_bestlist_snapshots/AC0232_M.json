@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0232",
-  "best_error": 38.38740740740741,
+  "best_error": 38.41037037037037,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.9539999999979045,
-  "error_per_pixel": 0.02843511659807956,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.9529999999795109,
+  "error_per_pixel": 0.02845212620027435,
+  "error_pixel_cluster_count": 30.0,
+  "error_pixel_cluster_excess": 0.31746936527605674,
+  "error_pixel_count": 269.0,
   "filename": "AC0232_M.jpg",
   "h": 30,
-  "localized_error_fraction": 0.4738099101478825,
-  "mean_delta2": 8796.923828125,
+  "largest_error_pixel_cluster_fraction": 0.516728624535316,
+  "localized_error_fraction": 0.5194007333613385,
+  "mean_delta2": 8975.4150390625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -263,6 +269,21 @@
         "steps": []
       },
       "final_error": 38.38740740740741,
+      "generic_element_refinement": {
+        "final_error": 38.38740740740741,
+        "initial_error": 38.38740740740741,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "left_rotated_top_kelle_three_way_valve",
+            "error_after": 38.38740740740741,
+            "error_before": 38.38740740740741,
+            "step_index": 0
+          }
+        ]
+      },
       "initial_error": 43.901234567901234,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -513,7 +534,7 @@
           "schema_version": "kelle_valve_primitive_decomposition_v1"
         },
         "stroke": "#969696",
-        "stroke_width": 0.039599999999999996,
+        "stroke_width": 0.04018900363404056,
         "text_fill": "#666666",
         "transform": {
           "rotation_deg": 270,
@@ -532,9 +553,9 @@
     "variant_name": "AC0232_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 15958.941774605122,
-  "std_delta2": 11323.6083984375,
-  "tile_std_delta2": 5977.084695815793,
+  "spatial_quality_score": 18913.454930491927,
+  "std_delta2": 12719.89453125,
+  "tile_std_delta2": 6872.49712297888,
   "variant": "AC0232_M",
   "w": 45
 }

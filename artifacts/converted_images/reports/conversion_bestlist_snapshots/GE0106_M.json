@@ -1,21 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0106",
-  "best_error": 14.911333333333333,
+  "best_error": 15.593666666666667,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.8279999999795109,
-  "error_per_pixel": 0.002130190476190476,
-  "error_pixel_cluster_count": 10.0,
-  "error_pixel_cluster_excess": 0.7287353629976581,
-  "error_pixel_count": 1830.0,
+  "elapsed_seconds": 1.312999999965541,
+  "error_per_pixel": 0.002227666666666667,
+  "error_pixel_cluster_count": 14.0,
+  "error_pixel_cluster_excess": 0.7237039623500836,
+  "error_pixel_count": 1882.0,
   "filename": "GE0106_M.jpg",
   "h": 40,
-  "largest_error_pixel_cluster_fraction": 0.9901639344262295,
-  "localized_error_fraction": 0.7364430734408632,
-  "mean_delta2": 1840.94091796875,
+  "largest_error_pixel_cluster_fraction": 0.9925611052072264,
+  "localized_error_fraction": 0.7110451062983207,
+  "mean_delta2": 1921.552978515625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -209,16 +209,16 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.0008000000000001339,
-          0.402,
-          0.9983999999999997,
-          0.728
+          0.0,
+          0.40339412860175755,
+          1.0,
+          0.7279467351082662
         ],
         "fill": "#d8d8d8",
         "id": "main_rect",
         "kind": "RectBorder",
         "stroke": "#7f7f7f",
-        "stroke_width": 0.00875
+        "stroke_width": 0.008840399259077066
       }
     ],
     "semantic_conflicts": [],
@@ -232,9 +232,9 @@
     "variant_name": "GE0106_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 5885.104199872517,
-  "std_delta2": 5077.54296875,
-  "tile_std_delta2": 3070.2962704361194,
+  "spatial_quality_score": 5973.57952326694,
+  "std_delta2": 5105.49658203125,
+  "tile_std_delta2": 3069.4683996123576,
   "variant": "GE0106_M",
   "w": 175
 }

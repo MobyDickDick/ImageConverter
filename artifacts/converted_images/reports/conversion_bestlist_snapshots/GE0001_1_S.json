@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0001",
-  "best_error": 43.97613333333334,
+  "best_error": 33.1912,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.25,
-  "error_per_pixel": 0.017590453333333336,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.7339999999385327,
+  "error_per_pixel": 0.01327648,
+  "error_pixel_cluster_count": 9.0,
+  "error_pixel_cluster_excess": 0.7488620320855615,
+  "error_pixel_count": 561.0,
   "filename": "GE0001_1_S.jpg",
   "h": 50,
-  "localized_error_fraction": 0.6688959944936554,
-  "mean_delta2": 11576.4638671875,
+  "largest_error_pixel_cluster_fraction": 0.9732620320855615,
+  "localized_error_fraction": 0.757125852081271,
+  "mean_delta2": 7939.14892578125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -61,33 +67,96 @@
     ],
     "geometry_ir_optimizer_result": {
       "element_refinement": {
-        "final_error": 55.2136,
-        "initial_error": 55.2136,
+        "final_error": 54.6236,
+        "initial_error": 54.6236,
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 55.2136,
-      "initial_error": 55.297066666666666,
+      "final_error": 54.34493333333333,
+      "generic_element_refinement": {
+        "final_error": 54.34493333333333,
+        "initial_error": 54.6236,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.2786666666666733,
+            "element": "minus_glyph",
+            "error_after": 54.34493333333333,
+            "error_before": 54.6236,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 55.18026666666667,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
         "scale_x": 1.0,
         "scale_y": 1.0,
-        "stroke_scale": 0.5,
+        "stroke_scale": 3.07,
         "translate_x": 0.0,
         "translate_y": 0.0
       },
       "steps": [
         {
-          "best_delta": 0.04546666666666255,
+          "best_delta": 0.09986666666667077,
           "parameter": "stroke_scale",
           "stage": 0,
-          "value": 0.75
+          "value": 1.25
         },
         {
-          "best_delta": 0.03800000000000381,
+          "best_delta": 0.04373333333332852,
           "parameter": "stroke_scale",
           "stage": 0,
-          "value": 0.5
+          "value": 1.5
+        },
+        {
+          "best_delta": 0.0054666666666705055,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.75
+        },
+        {
+          "best_delta": 0.026933333333332143,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.0
+        },
+        {
+          "best_delta": 0.07813333333333361,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.25
+        },
+        {
+          "best_delta": 0.0909333333333322,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.5
+        },
+        {
+          "best_delta": 0.10320000000000107,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.75
+        },
+        {
+          "best_delta": 0.0942666666666625,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.0
+        },
+        {
+          "best_delta": 0.006533333333337055,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 3.15
+        },
+        {
+          "best_delta": 0.0075999999999964984,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 3.07
         }
       ]
     },
@@ -95,11 +164,58 @@
     "mode": "auto",
     "optimized_geometry_ir": [
       {
+        "bbox": [
+          0.037481656484038284,
+          0.040457611901658516,
+          0.9183919608119021,
+          0.9203662434803661
+        ],
+        "fill": "#ACAAC0",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.963,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#C9DBE9",
+        "stroke_width": 0.03694564442234317
+      },
+      {
         "id": "minus_glyph",
         "kind": "MinusGlyph",
         "position": "top_center",
         "stroke": "#4f4f4f",
-        "stroke_width": 0.0125
+        "stroke_width": 0.02430005658641301
+      },
+      {
+        "bbox": [
+          0.6588399979623253,
+          0.5190736658757876,
+          0.32040440411190607,
+          0.07828393807153694
+        ],
+        "fill": "#ACA6BD",
+        "font_size": 0.288,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8161,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "full_image",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
       }
     ],
     "semantic_conflicts": [],
@@ -113,9 +229,9 @@
     "variant_name": "GE0001_1_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 27632.04744681563,
-  "std_delta2": 19480.431640625,
-  "tile_std_delta2": 12596.776362385363,
+  "spatial_quality_score": 24092.407189546662,
+  "std_delta2": 14561.3828125,
+  "tile_std_delta2": 10491.888731846684,
   "variant": "GE0001_1_S",
   "w": 50
 }

@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "B_TREND",
-  "best_error": 21.897859797513778,
+  "best_error": 21.161988978597975,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.26600000000325963,
-  "error_per_pixel": 0.008419015685318639,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.7650000000139698,
+  "error_per_pixel": 0.008136097262052278,
+  "error_pixel_cluster_count": 15.0,
+  "error_pixel_cluster_excess": 0.5015878948736197,
+  "error_pixel_count": 611.0,
   "filename": "b_trend_his.jpg",
   "h": 51,
-  "localized_error_fraction": 0.7548305776497725,
-  "mean_delta2": 3880.76171875,
+  "largest_error_pixel_cluster_fraction": 0.7364975450081833,
+  "localized_error_fraction": 0.7093907917964104,
+  "mean_delta2": 3830.21337890625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -45,6 +51,88 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.03700617393087163,
+          0.05890218728096005,
+          0.9025329642329606,
+          0.9009928003122555
+        ],
+        "fill": "#8DB9D7",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.975,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#CBE1EF",
+        "stroke_width": 0.03732776622873813
+      },
+      {
+        "bbox": [
+          0.6445540629330458,
+          0.15808974695215794,
+          0.04033461737085843,
+          0.6276060024527237
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9017,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.66667,
+            0.15686
+          ],
+          [
+            0.66667,
+            0.78431
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.04034197873605062
+      },
+      {
+        "bbox": [
+          0.47228568105745494,
+          0.15648842533024593,
+          0.33460530625338075,
+          0.11641397891684756
+        ],
+        "fill": "#6792AF",
+        "font_size": 0.3,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.6065,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top+right",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -56,9 +144,9 @@
     "variant_name": "B_TREND_HIS"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 10491.72546472955,
-  "std_delta2": 8361.6845703125,
-  "tile_std_delta2": 6069.833640502226,
+  "spatial_quality_score": 10940.55321409012,
+  "std_delta2": 8885.15234375,
+  "tile_std_delta2": 5333.9667668530465,
   "variant": "B_TREND_HIS",
   "w": 51
 }

@@ -1,19 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0890",
-  "best_error": 18.148888888888887,
+  "best_error": 18.827111111111112,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.375,
-  "error_per_pixel": 0.004033086419753086,
-  "error_pixel_cluster_count": 60.0,
-  "error_pixel_cluster_excess": 0.11033004199296331,
-  "error_pixel_count": 979.0,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.062000000034459,
+  "error_per_pixel": 0.004183802469135803,
+  "error_pixel_cluster_count": 18.0,
+  "error_pixel_cluster_excess": 0.4070673952641166,
+  "error_pixel_count": 610.0,
   "filename": "AC0890_L.jpg",
   "h": 75,
-  "largest_error_pixel_cluster_fraction": 0.32788559754851887,
-  "localized_error_fraction": 0.764510557244902,
-  "mean_delta2": 3861.234619140625,
+  "largest_error_pixel_cluster_fraction": 0.5426229508196722,
+  "localized_error_fraction": 0.636361120556633,
+  "mean_delta2": 4191.6787109375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -145,7 +147,7 @@
         "text_position": "center"
       }
     ],
-    "label": "M",
+    "label": "T",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
@@ -162,9 +164,9 @@
     "variant_name": "AC0890_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 11724.814731710874,
-  "std_delta2": 11926.9658203125,
-  "tile_std_delta2": 7098.818544591615,
+  "spatial_quality_score": 11107.375295072294,
+  "std_delta2": 11192.630859375,
+  "tile_std_delta2": 4869.377895234897,
   "variant": "AC0890_L",
   "w": 60
 }

@@ -1,50 +1,354 @@
 {
   "actual_iterations": 64,
   "base": "GE9021",
-  "best_error": 46.684444444444445,
+  "best_error": 29.363333333333333,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.6399999999994179,
-  "error_per_pixel": 0.15561481481481482,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.812999999965541,
+  "error_per_pixel": 0.09787777777777777,
+  "error_pixel_cluster_count": 4.0,
+  "error_pixel_cluster_excess": 0.5095238095238095,
+  "error_pixel_count": 70.0,
   "filename": "GE9021_6S.jpg",
   "h": 30,
-  "localized_error_fraction": 0.5450794156274468,
-  "mean_delta2": 12536.8603515625,
+  "largest_error_pixel_cluster_fraction": 0.7428571428571429,
+  "localized_error_fraction": 0.7738470583720597,
+  "mean_delta2": 7035.84326171875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
     "description_constraints": {
-      "elements": [],
+      "elements": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "confidence": 0.75,
+          "fill": "#ffffff",
+          "id": "description_element_1",
+          "kind": "ColorPatch",
+          "source": "description",
+          "stroke": "none"
+        },
+        {
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "PolygonPath",
+          "linecap": "butt",
+          "linejoin": "round",
+          "points": [
+            [
+              0.235,
+              0.0
+            ],
+            [
+              0.235,
+              0.835
+            ],
+            [
+              0.5,
+              0.965
+            ],
+            [
+              0.765,
+              0.835
+            ],
+            [
+              0.765,
+              0.0
+            ]
+          ],
+          "primitive_decomposition": {
+            "primitives": [
+              {
+                "kind": "LineSegment",
+                "role": "left_vertical_leg"
+              },
+              {
+                "kind": "ArcSegment",
+                "role": "bottom_round_connector"
+              },
+              {
+                "kind": "LineSegment",
+                "role": "right_vertical_leg"
+              }
+            ],
+            "schema_version": "u_loop_primitive_decomposition_v1"
+          },
+          "role": "u_loop",
+          "source": "description",
+          "stroke": "#f2db18",
+          "stroke_width": 0.115
+        }
+      ],
       "relations": [],
       "schema_version": "description_geometry_constraints_v1",
       "source": "description",
       "uncertainty": {
-        "confidence": 0.0,
-        "reasons": [
-          "no_supported_geometry_constraint"
-        ],
-        "status": "needs_review"
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
       }
     },
     "description_contract": {
       "deficits": [],
-      "has_conditions": false,
-      "has_geometry_terms": false,
-      "has_reference": true,
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
       "status": "ok"
     },
     "description_fragments": [
       {
         "key": "GE9021",
         "source": "base_name",
-        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+        "text": "Weißer schmaler Hintergrund mit gelber U-Form: zwei senkrechte gelbe Linien laufen links und rechts nach unten und sind unten durch einen runden gelben Bogen verbunden."
       }
     ],
     "documented_alias_refs": [],
     "elements": [],
-    "geometry_ir": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "fill": "#ffffff",
+        "id": "u_loop_background",
+        "kind": "ColorPatch",
+        "stroke": "none"
+      },
+      {
+        "fill": "none",
+        "id": "yellow_u_loop",
+        "kind": "PolygonPath",
+        "linecap": "butt",
+        "linejoin": "round",
+        "points": [
+          [
+            0.235,
+            0.0
+          ],
+          [
+            0.235,
+            0.835
+          ],
+          [
+            0.5,
+            0.965
+          ],
+          [
+            0.765,
+            0.835
+          ],
+          [
+            0.765,
+            0.0
+          ]
+        ],
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "LineSegment",
+              "role": "left_vertical_leg"
+            },
+            {
+              "kind": "ArcSegment",
+              "role": "bottom_round_connector"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "right_vertical_leg"
+            }
+          ],
+          "schema_version": "u_loop_primitive_decomposition_v1"
+        },
+        "role": "u_loop",
+        "stroke": "#f2db18",
+        "stroke_width": 0.115
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 50.284444444444446,
+        "initial_error": 50.284444444444446,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 28.33888888888889,
+      "generic_element_refinement": {
+        "final_error": 28.33888888888889,
+        "initial_error": 50.284444444444446,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 10.352222222222224,
+            "element": "u_loop_background",
+            "error_after": 39.93222222222222,
+            "error_before": 50.284444444444446,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 11.593333333333334,
+            "element": "yellow_u_loop",
+            "error_after": 28.33888888888889,
+            "error_before": 39.93222222222222,
+            "step_index": 1
+          }
+        ]
+      },
+      "initial_error": 66.92555555555556,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.74,
+        "scale_y": 0.94,
+        "stroke_scale": 0.67,
+        "translate_x": 0.0,
+        "translate_y": -0.07
+      },
+      "steps": [
+        {
+          "best_delta": 2.0711111111111222,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 1.4966666666666626,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.2766666666666637,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.9655555555555608,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 4.092222222222219,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 5.788888888888891,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 0.27999999999999403,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 0.74
+        },
+        {
+          "best_delta": 0.024444444444448266,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 0.96
+        },
+        {
+          "best_delta": 0.6233333333333348,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 0.67
+        },
+        {
+          "best_delta": 0.006666666666667709,
+          "parameter": "translate_y",
+          "stage": 3,
+          "value": -0.07
+        },
+        {
+          "best_delta": 0.015555555555550882,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 0.94
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.13199206222926652,
+          0.0,
+          0.7405042110858435,
+          0.938985805322633
+        ],
+        "fill": "#b1c1cc",
+        "id": "u_loop_background",
+        "kind": "ColorPatch",
+        "stroke": "none"
+      },
+      {
+        "fill": "none",
+        "id": "yellow_u_loop",
+        "kind": "PolygonPath",
+        "linecap": "butt",
+        "linejoin": "round",
+        "points": [
+          [
+            0.3039,
+            -0.03999999999999998
+          ],
+          [
+            0.3039,
+            0.7448999999999999
+          ],
+          [
+            0.5,
+            0.8671
+          ],
+          [
+            0.6960999999999999,
+            0.7448999999999999
+          ],
+          [
+            0.6960999999999999,
+            -0.03999999999999998
+          ]
+        ],
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "LineSegment",
+              "role": "left_vertical_leg"
+            },
+            {
+              "kind": "ArcSegment",
+              "role": "bottom_round_connector"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "right_vertical_leg"
+            }
+          ],
+          "schema_version": "u_loop_primitive_decomposition_v1"
+        },
+        "role": "u_loop",
+        "stroke": "#2f8f3d",
+        "stroke_width": 0.07630023177499465
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -56,9 +360,9 @@
     "variant_name": "GE9021_6S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 22619.991033222363,
-  "std_delta2": 20647.50390625,
-  "tile_std_delta2": 8874.971777685181,
+  "spatial_quality_score": 23245.634844681394,
+  "std_delta2": 16298.44140625,
+  "tile_std_delta2": 15474.488627827055,
   "variant": "GE9021_6S",
   "w": 10
 }

@@ -1,15 +1,37 @@
 {
+  "actual_iterations": 64,
   "base": "AC0731",
-  "best_error": 39.912,
+  "best_error": 37.27466666666667,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.106432,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.9530000000959262,
+  "error_per_pixel": 0.09939911111111112,
+  "error_pixel_cluster_count": 5.0,
+  "error_pixel_cluster_excess": 0.6847619047619048,
+  "error_pixel_count": 70.0,
   "filename": "AC0731_1_S.jpg",
   "h": 25,
-  "mean_delta2": 10097.203125,
+  "largest_error_pixel_cluster_fraction": 0.8714285714285714,
+  "localized_error_fraction": 0.7686285311612068,
+  "mean_delta2": 12474.2080078125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -31,6 +53,88 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.06655088277895578,
+          0.157982343832166,
+          0.7998821144256131,
+          0.48031738381166444
+        ],
+        "fill": "#DD5572",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9511,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#DE637D",
+        "stroke_width": 0.06660709613345256
+      },
+      {
+        "bbox": [
+          0.46425523786850575,
+          0.36094610698228236,
+          0.0682437771441873,
+          0.6417187078060648
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.908,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.5,
+            0.36
+          ],
+          [
+            0.5,
+            1.0
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.06652115528708145
+      },
+      {
+        "bbox": [
+          0.06634160519308399,
+          0.16261463350401892,
+          0.8683566769414092,
+          0.6782735468526638
+        ],
+        "fill": "#E59EAD",
+        "font_size": 0.78,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.5005,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "full_image",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "P"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -41,7 +145,10 @@
     "top_source_ref": null,
     "variant_name": "AC0731_1_S"
   },
-  "std_delta2": 12935.673828125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 48040.056288358566,
+  "std_delta2": 20482.453125,
+  "tile_std_delta2": 18685.90088124053,
   "variant": "AC0731_1_S",
   "w": 15
 }

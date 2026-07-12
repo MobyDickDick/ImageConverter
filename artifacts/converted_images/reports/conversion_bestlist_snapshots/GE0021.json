@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0021",
-  "best_error": 25.989178707700006,
+  "best_error": 27.06205041596297,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.9070000000065193,
-  "error_per_pixel": 0.004876933516175644,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.3440000000409782,
+  "error_per_pixel": 0.005078260539681548,
+  "error_pixel_cluster_count": 48.0,
+  "error_pixel_cluster_excess": 0.6946555846835134,
+  "error_pixel_count": 1336.0,
   "filename": "GE0021.jpg",
   "h": 73,
-  "localized_error_fraction": 0.6224447056669552,
-  "mean_delta2": 4994.78857421875,
+  "largest_error_pixel_cluster_fraction": 0.9453592814371258,
+  "localized_error_fraction": 0.8134398814410605,
+  "mean_delta2": 4767.07373046875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -45,6 +51,55 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.04325307079469294,
+          0.05503581187909595,
+          0.9051983710198827,
+          0.9042843700925426
+        ],
+        "fill": "#82AEC9",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.986,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#CEE1ED",
+        "stroke_width": 0.034663130985066064
+      },
+      {
+        "bbox": [
+          0.7683596483656813,
+          0.14889986495323088,
+          0.1937321299037218,
+          0.2619264402595833
+        ],
+        "fill": "#C7DFED",
+        "font_size": 0.23424,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.6974,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "L"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -56,9 +111,9 @@
     "variant_name": "GE0021"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 15075.07196924641,
-  "std_delta2": 9830.888671875,
-  "tile_std_delta2": 6886.558083233941,
+  "spatial_quality_score": 15263.527532389264,
+  "std_delta2": 8364.791015625,
+  "tile_std_delta2": 7520.9102588334545,
   "variant": "GE0021",
   "w": 73
 }

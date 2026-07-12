@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "NAV0000",
-  "best_error": 10.224885015734689,
+  "best_error": 9.797664003873154,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.0469999999913853,
-  "error_per_pixel": 0.00037127396571295164,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.5,
+  "error_per_pixel": 0.0003557612201842104,
+  "error_pixel_cluster_count": 5.0,
+  "error_pixel_cluster_excess": 0.7287301182374151,
+  "error_pixel_count": 7430.0,
   "filename": "NAV0000.jpg",
   "h": 81,
-  "localized_error_fraction": 0.5723454107541319,
-  "mean_delta2": 531.3375244140625,
+  "largest_error_pixel_cluster_fraction": 0.9985195154777927,
+  "localized_error_fraction": 0.48760772497250066,
+  "mean_delta2": 443.6300354003906,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -78,7 +84,22 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 10.224885015734689,
+      "final_error": 9.667707576857904,
+      "generic_element_refinement": {
+        "final_error": 9.667707576857904,
+        "initial_error": 10.224885015734689,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.557177438876785,
+            "element": "main_rect",
+            "error_after": 9.667707576857904,
+            "error_before": 10.224885015734689,
+            "step_index": 0
+          }
+        ]
+      },
       "initial_error": 26.719474703461632,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -198,16 +219,16 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          -0.0119999999999999,
-          0.43320000000000003,
-          1.0239999999999998,
-          0.6607999999999999
+          0.0,
+          0.430393880192498,
+          1.0,
+          0.6607951871766314
         ],
         "fill": "#d8d8d8",
         "id": "main_rect",
         "kind": "RectBorder",
-        "stroke": "#666666",
-        "stroke_width": 0.007350000000000001
+        "stroke": "#b8b8b8",
+        "stroke_width": 0.006703528007752686
       }
     ],
     "semantic_conflicts": [],
@@ -221,9 +242,9 @@
     "variant_name": "NAV0000"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 1165.597194588607,
-  "std_delta2": 1201.255126953125,
-  "tile_std_delta2": 490.24494961875075,
+  "spatial_quality_score": 1005.1712152143526,
+  "std_delta2": 828.0974731445312,
+  "tile_std_delta2": 303.623718691708,
   "variant": "NAV0000",
   "w": 340
 }

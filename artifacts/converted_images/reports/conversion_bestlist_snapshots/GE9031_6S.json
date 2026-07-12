@@ -1,21 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE9031",
-  "best_error": 26.3775,
+  "best_error": 27.645,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.6870000000344589,
-  "error_per_pixel": 0.06594375000000001,
+  "elapsed_seconds": 1.1570000000065193,
+  "error_per_pixel": 0.0691125,
   "error_pixel_cluster_count": 8.0,
   "error_pixel_cluster_excess": 0.125,
   "error_pixel_count": 80.0,
   "filename": "GE9031_6S.jpg",
   "h": 20,
   "largest_error_pixel_cluster_fraction": 0.325,
-  "localized_error_fraction": 0.8000478809490484,
-  "mean_delta2": 6662.357421875,
+  "localized_error_fraction": 0.7718323870424028,
+  "mean_delta2": 6905.91015625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -245,10 +245,10 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.34,
-          -0.04999999999999999,
-          0.4199999999999999,
-          0.7
+          0.3376197016937431,
+          0.0,
+          0.421881064004066,
+          0.7006371829674091
         ],
         "fill": "#b1c1cc",
         "id": "backbottom_light_grey_square",
@@ -264,7 +264,7 @@
         },
         "role": "reference_light_grey_square",
         "stroke": "none",
-        "stroke_width": 0.001
+        "stroke_width": 0.0013887241280782113
       }
     ],
     "semantic_conflicts": [],
@@ -278,9 +278,9 @@
     "variant_name": "GE9031_6S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 18653.78795085587,
-  "std_delta2": 12898.7666015625,
-  "tile_std_delta2": 8445.501045435467,
+  "spatial_quality_score": 18772.891933999344,
+  "std_delta2": 12883.970703125,
+  "tile_std_delta2": 8398.600455996004,
   "variant": "GE9031_6S",
   "w": 20
 }

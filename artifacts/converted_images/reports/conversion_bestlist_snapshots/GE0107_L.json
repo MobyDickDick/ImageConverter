@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0107",
-  "best_error": 18.205271317829457,
+  "best_error": 18.28812403100775,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.32800000000861473,
-  "error_per_pixel": 0.0016935136109608798,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.9849999999860302,
+  "error_per_pixel": 0.0017012208400937442,
+  "error_pixel_cluster_count": 33.0,
+  "error_pixel_cluster_excess": 0.6507042952909046,
+  "error_pixel_count": 2810.0,
   "filename": "GE0107_L.jpg",
   "h": 50,
-  "localized_error_fraction": 0.8453587570123039,
-  "mean_delta2": 3774.826904296875,
+  "largest_error_pixel_cluster_fraction": 0.9120996441281138,
+  "localized_error_fraction": 0.8499611923974622,
+  "mean_delta2": 3748.486328125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -80,7 +86,22 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 18.205271317829457,
+      "final_error": 18.060217054263568,
+      "generic_element_refinement": {
+        "final_error": 18.060217054263568,
+        "initial_error": 18.205271317829457,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.14505426356588913,
+            "element": "main_rect",
+            "error_after": 18.060217054263568,
+            "error_before": 18.205271317829457,
+            "step_index": 0
+          }
+        ]
+      },
       "initial_error": 34.715906976744186,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -206,16 +227,16 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.0008000000000001339,
-          0.3420000000000001,
-          0.9983999999999997,
-          0.728
+          0.001885647024923452,
+          0.34190448503153803,
+          0.9981679484168663,
+          0.7298238946553206
         ],
         "fill": "#d8d8d8",
         "id": "main_rect",
         "kind": "RectBorder",
-        "stroke": "#666666",
-        "stroke_width": 0.00875
+        "stroke": "#969696",
+        "stroke_width": 0.009351238614923738
       }
     ],
     "semantic_conflicts": [],
@@ -229,9 +250,9 @@
     "variant_name": "GE0107_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 12043.652832854725,
-  "std_delta2": 13567.18359375,
-  "tile_std_delta2": 6906.728748072202,
+  "spatial_quality_score": 13231.744422294127,
+  "std_delta2": 13527.994140625,
+  "tile_std_delta2": 6894.251281761782,
   "variant": "GE0107_L",
   "w": 215
 }

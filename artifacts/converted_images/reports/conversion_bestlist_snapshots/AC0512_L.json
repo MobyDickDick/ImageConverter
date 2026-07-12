@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0512",
-  "best_error": 22.034375,
+  "best_error": 22.129375,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.9529999999995198,
-  "error_per_pixel": 0.0068857421875,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.40600000007543713,
+  "error_per_pixel": 0.0069154296874999995,
+  "error_pixel_cluster_count": 23.0,
+  "error_pixel_cluster_excess": 0.6389264298892989,
+  "error_pixel_count": 813.0,
   "filename": "AC0512_L.jpg",
   "h": 40,
-  "localized_error_fraction": 0.6728533793904575,
-  "mean_delta2": 3388.545654296875,
+  "largest_error_pixel_cluster_fraction": 0.8929889298892989,
+  "localized_error_fraction": 0.666585370908061,
+  "mean_delta2": 3392.9609375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -17,62 +23,62 @@
       "elements": [
         {
           "bbox": [
-            0.32,
-            0.12,
-            0.36,
-            0.76
+            0.07,
+            0.18,
+            0.86,
+            0.64
           ],
+          "border_color": "#777777",
+          "border_width": 0.035,
           "confidence": 0.75,
-          "constraint": "inside_rect_border",
+          "corner_radius": 0.015,
+          "gradient_axis": "vertical",
+          "gradient_stops": [
+            {
+              "color": "#d7191c",
+              "offset": "0%"
+            },
+            {
+              "color": "#f04a23",
+              "offset": "52%"
+            },
+            {
+              "color": "#f28b22",
+              "offset": "100%"
+            }
+          ],
           "id": "description_element_1",
-          "kind": "HorizontalGradient",
+          "inner_inset": 0.055,
+          "kind": "DiagonalStripePanel",
+          "primitive_decomposition": {
+            "primitives": [
+              {
+                "kind": "RectBorder",
+                "role": "panel_border"
+              },
+              {
+                "gradient_axis": "vertical",
+                "kind": "ColorPatch",
+                "role": "panel_fill"
+              },
+              {
+                "count": 3,
+                "kind": "PolygonPath",
+                "role": "diagonal_stripes"
+              }
+            ],
+            "schema_version": "diagonal_stripe_panel_v1"
+          },
+          "semantic_status": "semantic_diagonal_stripe_panel",
           "source": "description",
-          "stops": [
-            "#8f8f8f",
-            "#dedede",
-            "#8f8f8f"
-          ]
-        },
-        {
-          "bbox": [
-            0.32,
-            0.12,
-            0.36,
-            0.76
-          ],
-          "confidence": 0.75,
-          "fill": "none",
-          "id": "description_element_2",
-          "kind": "RectBorder",
-          "source": "description",
-          "stroke": "#666666",
-          "stroke_width": 0.035
-        },
-        {
-          "confidence": 0.75,
-          "id": "description_element_3",
-          "kind": "HorizontalRuleSet",
-          "positions": [
-            0.3,
-            0.5,
-            0.7
-          ],
-          "rect_ref": "main_rect",
-          "source": "description",
-          "stroke": "#707070",
-          "stroke_width": 0.026,
-          "x_inset": 0.1
+          "stripe_count": 3,
+          "stripe_direction": "top_left_to_bottom_right",
+          "stripe_fill": "#f8f8f2",
+          "stripe_spacing": 0.245,
+          "stripe_width": 0.115
         }
       ],
-      "relations": [
-        {
-          "confidence": 0.75,
-          "object": "main_rect",
-          "source": "description",
-          "subject": "description_element_3",
-          "type": "rect"
-        }
-      ],
+      "relations": [],
       "schema_version": "description_geometry_constraints_v1",
       "source": "description",
       "uncertainty": {
@@ -102,185 +108,61 @@
     "geometry_ir": [
       {
         "bbox": [
-          0.32,
-          0.12,
-          0.36,
-          0.76
+          0.07,
+          0.18,
+          0.86,
+          0.64
         ],
-        "constraint": "inside_rect_border",
-        "id": "background_gradient",
-        "kind": "HorizontalGradient",
-        "stops": [
-          "#8f8f8f",
-          "#dedede",
-          "#8f8f8f"
-        ]
-      },
-      {
-        "bbox": [
-          0.32,
-          0.12,
-          0.36,
-          0.76
+        "border_color": "#777777",
+        "border_width": 0.035,
+        "corner_radius": 0.015,
+        "gradient_axis": "vertical",
+        "gradient_stops": [
+          {
+            "color": "#d7191c",
+            "offset": "0%"
+          },
+          {
+            "color": "#f04a23",
+            "offset": "52%"
+          },
+          {
+            "color": "#f28b22",
+            "offset": "100%"
+          }
         ],
-        "fill": "none",
-        "id": "main_rect",
-        "kind": "RectBorder",
-        "stroke": "#666666",
-        "stroke_width": 0.035
-      },
-      {
-        "id": "horizontal_rule_set",
-        "kind": "HorizontalRuleSet",
-        "positions": [
-          0.3,
-          0.5,
-          0.7
-        ],
-        "rect_ref": "main_rect",
-        "stroke": "#707070",
-        "stroke_width": 0.026,
-        "x_inset": 0.1
+        "id": "diagonal_stripe_panel",
+        "inner_inset": 0.055,
+        "kind": "DiagonalStripePanel",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "RectBorder",
+              "role": "panel_border"
+            },
+            {
+              "gradient_axis": "vertical",
+              "kind": "ColorPatch",
+              "role": "panel_fill"
+            },
+            {
+              "count": 3,
+              "kind": "PolygonPath",
+              "role": "diagonal_stripes"
+            }
+          ],
+          "schema_version": "diagonal_stripe_panel_v1"
+        },
+        "semantic_status": "semantic_diagonal_stripe_panel",
+        "stripe_count": 3,
+        "stripe_direction": "top_left_to_bottom_right",
+        "stripe_fill": "#f8f8f2",
+        "stripe_spacing": 0.245,
+        "stripe_width": 0.115
       }
     ],
-    "geometry_ir_optimizer_result": {
-      "element_refinement": {
-        "final_error": 36.930104166666666,
-        "initial_error": 36.930104166666666,
-        "mode": "right_rotated_valve_geometry",
-        "steps": []
-      },
-      "final_error": 36.930104166666666,
-      "initial_error": 52.8703125,
-      "mode": "geometry_ir_raster_registration",
-      "parameters": {
-        "scale_x": 1.02,
-        "scale_y": 1.2999999999999998,
-        "stroke_scale": 0.42,
-        "translate_x": 0.16,
-        "translate_y": 0.0
-      },
-      "steps": [
-        {
-          "best_delta": 0.8756249999999994,
-          "parameter": "translate_y",
-          "stage": 0,
-          "value": 0.08
-        },
-        {
-          "best_delta": 1.3116666666666674,
-          "parameter": "scale_y",
-          "stage": 0,
-          "value": 1.15
-        },
-        {
-          "best_delta": 0.7340625000000003,
-          "parameter": "stroke_scale",
-          "stage": 0,
-          "value": 0.75
-        },
-        {
-          "best_delta": 0.46864583333333343,
-          "parameter": "translate_x",
-          "stage": 0,
-          "value": 0.08
-        },
-        {
-          "best_delta": 2.0491666666666646,
-          "parameter": "scale_x",
-          "stage": 0,
-          "value": 0.85
-        },
-        {
-          "best_delta": 0.4490624999999966,
-          "parameter": "scale_y",
-          "stage": 0,
-          "value": 1.2999999999999998
-        },
-        {
-          "best_delta": 0.7481250000000017,
-          "parameter": "stroke_scale",
-          "stage": 0,
-          "value": 0.5
-        },
-        {
-          "best_delta": 0.9164583333333312,
-          "parameter": "translate_x",
-          "stage": 0,
-          "value": 0.16
-        },
-        {
-          "best_delta": 2.0047916666666694,
-          "parameter": "translate_y",
-          "stage": 0,
-          "value": 0.0
-        },
-        {
-          "best_delta": 5.888854166666668,
-          "parameter": "scale_x",
-          "stage": 0,
-          "value": 1.0
-        },
-        {
-          "best_delta": 0.05562499999999915,
-          "parameter": "stroke_scale",
-          "stage": 2,
-          "value": 0.42
-        },
-        {
-          "best_delta": 0.43812499999999943,
-          "parameter": "scale_x",
-          "stage": 3,
-          "value": 1.02
-        }
-      ]
-    },
     "label": "M",
     "mode": "auto",
-    "optimized_geometry_ir": [
-      {
-        "bbox": [
-          0.47640000000000005,
-          0.006000000000000061,
-          0.36719999999999997,
-          0.9879999999999999
-        ],
-        "constraint": "inside_rect_border",
-        "id": "background_gradient",
-        "kind": "HorizontalGradient",
-        "stops": [
-          "#8f8f8f",
-          "#dedede",
-          "#8f8f8f"
-        ]
-      },
-      {
-        "bbox": [
-          0.47640000000000005,
-          0.006000000000000061,
-          0.36719999999999997,
-          0.9879999999999999
-        ],
-        "fill": "none",
-        "id": "main_rect",
-        "kind": "RectBorder",
-        "stroke": "#666666",
-        "stroke_width": 0.014700000000000001
-      },
-      {
-        "id": "horizontal_rule_set",
-        "kind": "HorizontalRuleSet",
-        "positions": [
-          0.3,
-          0.5,
-          0.7
-        ],
-        "rect_ref": "main_rect",
-        "stroke": "#707070",
-        "stroke_width": 0.01092,
-        "x_inset": 0.1
-      }
-    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -292,9 +174,9 @@
     "variant_name": "AC0512_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 8304.180099888246,
-  "std_delta2": 7626.4619140625,
-  "tile_std_delta2": 3677.9208340244472,
+  "spatial_quality_score": 9340.17731755438,
+  "std_delta2": 7582.97021484375,
+  "tile_std_delta2": 3651.649622984694,
   "variant": "AC0512_L",
   "w": 80
 }

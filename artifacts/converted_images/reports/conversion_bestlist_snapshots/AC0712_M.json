@@ -1,21 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0712",
-  "best_error": 18.252857142857142,
+  "best_error": 28.248571428571427,
   "best_iter": 1,
   "convergence": "",
-  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
-  "diff_error_distribution_status": "random_like",
-  "elapsed_seconds": 0.7190000000409782,
-  "error_per_pixel": 0.02607551020408163,
-  "error_pixel_cluster_count": 17.0,
-  "error_pixel_cluster_excess": 0.22142857142857145,
-  "error_pixel_count": 125.0,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.172000000020489,
+  "error_per_pixel": 0.040355102040816326,
+  "error_pixel_cluster_count": 15.0,
+  "error_pixel_cluster_excess": 0.39975369458128074,
+  "error_pixel_count": 145.0,
   "filename": "AC0712_M.jpg",
   "h": 20,
-  "largest_error_pixel_cluster_fraction": 0.4,
-  "localized_error_fraction": 0.6818828625147357,
-  "mean_delta2": 3654.34716796875,
+  "largest_error_pixel_cluster_fraction": 0.6068965517241379,
+  "localized_error_fraction": 0.584023147930194,
+  "mean_delta2": 6788.734375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -83,7 +83,9 @@
     "documented_alias_refs": [
       "AC0701"
     ],
-    "elements": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
     "geometry_ir": [
       {
         "body_bbox": [
@@ -119,152 +121,26 @@
         "label_fill": "#dedede"
       }
     ],
-    "geometry_ir_optimizer_result": {
-      "element_refinement": {
-        "final_error": 30.430476190476192,
-        "initial_error": 30.430476190476192,
-        "mode": "right_rotated_valve_geometry",
-        "steps": []
-      },
-      "final_error": 30.430476190476192,
-      "generic_element_refinement": {
-        "final_error": 30.430476190476192,
-        "initial_error": 30.430476190476192,
-        "mode": "elementwise_geometry_ir",
-        "steps": [
-          {
-            "accepted": false,
-            "best_delta": 0.0,
-            "element": "left_rotated_square_kelle_t",
-            "error_after": 30.430476190476192,
-            "error_before": 30.430476190476192,
-            "step_index": 0
-          }
-        ]
-      },
-      "initial_error": 53.249047619047616,
-      "mode": "geometry_ir_raster_registration",
-      "parameters": {
-        "scale_x": 0.2099999999999999,
-        "scale_y": 0.98,
-        "stroke_scale": 1.25,
-        "translate_x": -0.09,
-        "translate_y": 0.0
-      },
-      "steps": [
-        {
-          "best_delta": 5.834761904761905,
-          "parameter": "scale_x",
-          "stage": 0,
-          "value": 0.85
-        },
-        {
-          "best_delta": 0.7371428571428567,
-          "parameter": "stroke_scale",
-          "stage": 0,
-          "value": 1.25
-        },
-        {
-          "best_delta": 3.1885714285714286,
-          "parameter": "scale_x",
-          "stage": 0,
-          "value": 0.7
-        },
-        {
-          "best_delta": 1.7385714285714258,
-          "parameter": "scale_x",
-          "stage": 0,
-          "value": 0.5499999999999999
-        },
-        {
-          "best_delta": 0.5447619047619057,
-          "parameter": "scale_x",
-          "stage": 0,
-          "value": 0.3999999999999999
-        },
-        {
-          "best_delta": 3.0238095238095255,
-          "parameter": "translate_x",
-          "stage": 0,
-          "value": -0.08
-        },
-        {
-          "best_delta": 5.833333333333329,
-          "parameter": "scale_x",
-          "stage": 0,
-          "value": 0.24999999999999992
-        },
-        {
-          "best_delta": 1.12857142857143,
-          "parameter": "scale_x",
-          "stage": 2,
-          "value": 0.2099999999999999
-        },
-        {
-          "best_delta": 0.7666666666666657,
-          "parameter": "translate_x",
-          "stage": 3,
-          "value": -0.09
-        },
-        {
-          "best_delta": 0.022380952380952834,
-          "parameter": "scale_y",
-          "stage": 3,
-          "value": 0.98
-        }
-      ]
-    },
     "label": "M",
-    "mode": "auto",
-    "optimized_geometry_ir": [
-      {
-        "body_bbox": [
-          0.38438000000000005,
-          0.049199999999999966,
-          0.09806999999999996,
-          0.9016000000000001
-        ],
-        "body_fill": "#d92645",
-        "body_stroke": "#a0a0a0",
-        "body_stroke_width": 0.04,
-        "connector": [
-          [
-            0.30500000000000005,
-            0.5
-          ],
-          [
-            0.38438000000000005,
-            0.5
-          ]
-        ],
-        "connector_stroke": "#808080",
-        "connector_width": 0.1,
-        "font_size": 0.09239999999999995,
-        "font_weight": "600",
-        "id": "left_rotated_square_kelle_t",
-        "kind": "LeftRotatedSquareKelleTGlyph",
-        "label": "T",
-        "label_center": [
-          0.43331,
-          0.5196000000000001
-        ],
-        "label_fill": "#dedede"
-      }
-    ],
+    "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
       "layout_override",
       "description_heuristic"
     ],
-    "semantic_sources": {},
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
     "top_source_ref": null,
     "variant_name": "AC0712_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 21986.442322710234,
-  "std_delta2": 9232.1640625,
-  "tile_std_delta2": 9699.270814092813,
+  "spatial_quality_score": 14134.439359162507,
+  "std_delta2": 13833.9775390625,
+  "tile_std_delta2": 5966.142442670918,
   "variant": "AC0712_M",
   "w": 35
 }

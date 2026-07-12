@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0202",
-  "best_error": 14.139066666666666,
+  "best_error": 14.274666666666667,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.0930000000007567,
-  "error_per_pixel": 0.005655626666666667,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.8429999999934807,
+  "error_per_pixel": 0.005709866666666666,
+  "error_pixel_cluster_count": 19.0,
+  "error_pixel_cluster_excess": 0.6972,
+  "error_pixel_count": 625.0,
   "filename": "AC0202_1.jpg",
   "h": 50,
-  "localized_error_fraction": 0.7400636903746624,
-  "mean_delta2": 2370.021240234375,
+  "largest_error_pixel_cluster_fraction": 0.9472,
+  "localized_error_fraction": 0.737689813996458,
+  "mean_delta2": 2502.4599609375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -142,7 +148,30 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 64.972,
+      "final_error": 64.734,
+      "generic_element_refinement": {
+        "final_error": 64.734,
+        "initial_error": 64.972,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.06546666666666567,
+            "element": "compressor_circle",
+            "error_after": 64.90653333333333,
+            "error_before": 64.972,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.17253333333333387,
+            "element": "rightward_compressor",
+            "error_after": 64.734,
+            "error_before": 64.90653333333333,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 68.0724,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -226,16 +255,24 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.06119999999999997,
-          0.07119999999999997,
-          0.8976000000000001,
-          0.8976000000000001
+          0.05977986966705251,
+          0.057026038463939034,
+          0.8782195235222577,
+          0.8793171824377262
         ],
-        "fill": "#45aa5e",
+        "fill": "#DC244A",
         "id": "compressor_circle",
         "kind": "CircleBackground",
-        "stroke": "#8d8d8d",
-        "stroke_width": 0.025999999999999995
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.99,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#C06678",
+        "stroke_width": 0.03599842770881413
       },
       {
         "circle_ref": "compressor_circle",
@@ -243,26 +280,52 @@
         "kind": "RightwardCompressorGlyph",
         "lower_line": [
           [
-            0.22,
-            0.91
+            0.22259345003000455,
+            0.9086551408056542
           ],
           [
-            1.01,
-            0.61
+            1.0,
+            0.6080895773618856
           ]
         ],
         "stroke": "#f4f4f4",
-        "stroke_width": 0.0416,
+        "stroke_width": 0.03345212053042162,
         "upper_line": [
           [
-            0.22,
-            0.09
+            0.2193745778745081,
+            0.0912583333471016
           ],
           [
-            1.01,
-            0.39
+            1.0,
+            0.3903675810401492
           ]
         ]
+      },
+      {
+        "bbox": [
+          0.7209174997281749,
+          0.5210991047720118,
+          0.27840520035259275,
+          0.38067619842876455
+        ],
+        "fill": "#E07E93",
+        "font_size": 0.342,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8019,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "right",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "F"
       }
     ],
     "semantic_conflicts": [],
@@ -276,9 +339,9 @@
     "variant_name": "AC0202_1"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 8834.589491904226,
-  "std_delta2": 7359.68115234375,
-  "tile_std_delta2": 4774.1484369710115,
+  "spatial_quality_score": 10547.346392406183,
+  "std_delta2": 7952.1904296875,
+  "tile_std_delta2": 5066.168639924384,
   "variant": "AC0202_1",
   "w": 50
 }

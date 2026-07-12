@@ -1,19 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0864",
-  "best_error": 19.055714285714284,
+  "best_error": 21.56,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.9539999999979045,
-  "error_per_pixel": 0.027222448979591835,
-  "error_pixel_cluster_count": 17.0,
-  "error_pixel_cluster_excess": 0.34800277392510404,
-  "error_pixel_count": 103.0,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.422000000020489,
+  "error_per_pixel": 0.030799999999999998,
+  "error_pixel_cluster_count": 14.0,
+  "error_pixel_cluster_excess": 0.20714285714285713,
+  "error_pixel_count": 100.0,
   "filename": "AC0864_M.jpg",
   "h": 20,
-  "largest_error_pixel_cluster_fraction": 0.49514563106796117,
-  "localized_error_fraction": 0.8600738938737931,
-  "mean_delta2": 5308.744140625,
+  "largest_error_pixel_cluster_fraction": 0.35,
+  "localized_error_fraction": 0.7917225144022885,
+  "mean_delta2": 5642.8115234375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -49,11 +51,12 @@
       "AC0862"
     ],
     "elements": [
-      "SEMANTIC: Kreis + Buchstabe",
+      "SEMANTIC: Kreis + Buchstabe rF",
+      "SEMANTIC: waagrechter Strich rechts vom Kreis",
       "SEMANTIC: waagrechter Strich links vom Kreis"
     ],
     "geometry_ir": [],
-    "label": "T",
+    "label": "rF",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
@@ -63,7 +66,8 @@
     ],
     "semantic_sources": {
       "description_heuristic": [
-        "SEMANTIC: Kreis + Buchstabe",
+        "SEMANTIC: Kreis + Buchstabe rF",
+        "SEMANTIC: waagrechter Strich rechts vom Kreis",
         "SEMANTIC: waagrechter Strich links vom Kreis"
       ],
       "family_rule": []
@@ -72,9 +76,9 @@
     "variant_name": "AC0864_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 17162.557900611115,
-  "std_delta2": 14060.953125,
-  "tile_std_delta2": 8279.08072374656,
+  "spatial_quality_score": 17740.546965227164,
+  "std_delta2": 13048.9921875,
+  "tile_std_delta2": 8237.644751543854,
   "variant": "AC0864_M",
   "w": 35
 }

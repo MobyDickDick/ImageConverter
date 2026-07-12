@@ -1,15 +1,63 @@
 {
+  "actual_iterations": 64,
   "base": "AC0711",
-  "best_error": 20.677333333333333,
+  "best_error": 24.21511111111111,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.018379851851851852,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 1.125,
+  "error_per_pixel": 0.021524543209876543,
+  "error_pixel_cluster_count": 14.0,
+  "error_pixel_cluster_excess": 0.22880106453759147,
+  "error_pixel_count": 167.0,
   "filename": "AC0711_L.jpg",
   "h": 45,
-  "mean_delta2": 4708.576171875,
+  "largest_error_pixel_cluster_fraction": 0.3772455089820359,
+  "localized_error_fraction": 0.6419487211344992,
+  "mean_delta2": 6021.1787109375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_bbox": [
+            0.02,
+            0.04,
+            0.96,
+            0.56
+          ],
+          "body_fill": "#e11e48",
+          "body_stroke": "#a0a0a0",
+          "body_stroke_width": 0.04,
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.5,
+              0.6
+            ],
+            [
+              0.5,
+              1.0
+            ]
+          ],
+          "connector_stroke": "#808080",
+          "connector_width": 0.08,
+          "id": "description_element_1",
+          "kind": "UprightSquareKelleGlyph",
+          "source": "description"
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -27,21 +75,56 @@
     "documented_alias_refs": [
       "AC0701"
     ],
-    "elements": [],
-    "geometry_ir": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
+    "geometry_ir": [
+      {
+        "body_bbox": [
+          0.02,
+          0.04,
+          0.96,
+          0.56
+        ],
+        "body_fill": "#e11e48",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.5,
+            0.6
+          ],
+          [
+            0.5,
+            1.0
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.08,
+        "id": "upright_square_kelle",
+        "kind": "UprightSquareKelleGlyph"
+      }
+    ],
     "label": "M",
-    "mode": "auto",
+    "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
       "layout_override",
       "description_heuristic"
     ],
-    "semantic_sources": {},
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
     "top_source_ref": null,
     "variant_name": "AC0711_L"
   },
-  "std_delta2": 11495.1162109375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 15296.879176975242,
+  "std_delta2": 13396.3330078125,
+  "tile_std_delta2": 6661.913157552574,
   "variant": "AC0711_L",
   "w": 25
 }

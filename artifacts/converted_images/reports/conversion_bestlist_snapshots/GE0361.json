@@ -1,14 +1,44 @@
 {
+  "actual_iterations": 64,
   "base": "GE0361",
-  "best_error": 44.26702946143742,
+  "best_error": 19.157878276099332,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.008306817313086398,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.3280000000959262,
+  "error_per_pixel": 0.0035950231330642395,
+  "error_pixel_cluster_count": 71.0,
+  "error_pixel_cluster_excess": 0.5000402913252006,
+  "error_pixel_count": 1339.0,
   "filename": "GE0361.jpg",
   "h": 73,
-  "mean_delta2": 12311.3662109375,
+  "largest_error_pixel_cluster_fraction": 0.7513069454817027,
+  "localized_error_fraction": 0.7876352683141202,
+  "mean_delta2": 2794.72412109375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "GE0361",
@@ -18,8 +48,91 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.02455548655198233,
+          0.04293082884332389,
+          0.9322671580669434,
+          0.9301216885179096
+        ],
+        "fill": "#8EBEDE",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9822,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#C6DEEE",
+        "stroke_width": 0.036660640322093874
+      },
+      {
+        "bbox": [
+          0.5505823997504955,
+          0.6329577809602247,
+          0.015542212236900724,
+          0.3556036334420509
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.92,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.5548,
+            0.63014
+          ],
+          [
+            0.5548,
+            0.9863
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.013738563658719038
+      },
+      {
+        "bbox": [
+          0.7531559217762491,
+          0.6178960553594945,
+          0.20539886017150316,
+          0.2601261266554749
+        ],
+        "fill": "#B1D2E9",
+        "font_size": 0.23424,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.822,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "bottom+right",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "F"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -30,7 +143,10 @@
     "top_source_ref": null,
     "variant_name": "GE0361"
   },
-  "std_delta2": 18210.314453125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 8803.108456297128,
+  "std_delta2": 7163.21044921875,
+  "tile_std_delta2": 4537.832722921422,
   "variant": "GE0361",
   "w": 73
 }

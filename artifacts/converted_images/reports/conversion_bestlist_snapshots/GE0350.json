@@ -1,21 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0350",
-  "best_error": 18.70074074074074,
+  "best_error": 18.915614814814816,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.4690000000409782,
-  "error_per_pixel": 0.003324576131687243,
-  "error_pixel_cluster_count": 73.0,
-  "error_pixel_cluster_excess": 0.48832525252525255,
-  "error_pixel_count": 1408.0,
+  "elapsed_seconds": 0.9839999999385327,
+  "error_per_pixel": 0.0033627759670781894,
+  "error_pixel_cluster_count": 56.0,
+  "error_pixel_cluster_excess": 0.4548808598071756,
+  "error_pixel_count": 1406.0,
   "filename": "GE0350.jpg",
   "h": 75,
-  "largest_error_pixel_cluster_fraction": 0.7386363636363636,
-  "localized_error_fraction": 0.8684501674878019,
-  "mean_delta2": 3107.67578125,
+  "largest_error_pixel_cluster_fraction": 0.7048364153627311,
+  "localized_error_fraction": 0.8623527769720589,
+  "mean_delta2": 3128.254638671875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -53,6 +53,55 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.025350582226176074,
+          0.039933153741256035,
+          0.9314216123701521,
+          0.9349078861368137
+        ],
+        "fill": "#95BFD9",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9858,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#CCE1ED",
+        "stroke_width": 0.03830538238828799
+      },
+      {
+        "bbox": [
+          0.7627459239548509,
+          0.6143107038277358,
+          0.1981024271139023,
+          0.2515204100933382
+        ],
+        "fill": "#B5D2E3",
+        "font_size": 0.228,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8227,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "full_image",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "F"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -64,9 +113,9 @@
     "variant_name": "GE0350"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 10860.575168207883,
-  "std_delta2": 8737.037109375,
-  "tile_std_delta2": 6504.377659639794,
+  "spatial_quality_score": 10817.221279525404,
+  "std_delta2": 8730.7978515625,
+  "tile_std_delta2": 6494.869844848451,
   "variant": "GE0350",
   "w": 75
 }

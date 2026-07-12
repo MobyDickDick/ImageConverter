@@ -1,0 +1,107 @@
+{
+  "actual_iterations": 64,
+  "base": "AC1004",
+  "best_error": 29.88,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.765999999945052,
+  "error_per_pixel": 0.07968,
+  "error_pixel_cluster_count": 18.0,
+  "error_pixel_cluster_excess": 0.17308333333333334,
+  "error_pixel_count": 64.0,
+  "filename": "AC1004_S.jpg",
+  "h": 15,
+  "largest_error_pixel_cluster_fraction": 0.34375,
+  "localized_error_fraction": 0.6354861806208729,
+  "mean_delta2": 6625.76806640625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "clip_to": "main_rect",
+          "confidence": 0.75,
+          "direction": "tr_bl",
+          "id": "description_element_1",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.045
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_1",
+          "type": "rect"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC1004",
+        "source": "base_name",
+        "text": "Wie AC1001: Wie AC1000, jedoch mit Kelle (graue horizontale Linie) nach unten. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC1000",
+      "AC1001"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
+    "geometry_ir": [
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.045
+      }
+    ],
+    "label": "M",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC1004_S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 15999.93244137299,
+  "std_delta2": 12208.5703125,
+  "tile_std_delta2": 7061.766517445091,
+  "variant": "AC1004_S",
+  "w": 25
+}

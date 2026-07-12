@@ -1,21 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0023",
-  "best_error": 16.306533333333334,
+  "best_error": 16.07133333333333,
   "best_iter": 1,
   "convergence": "",
-  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.75,
-  "error_per_pixel": 0.006522613333333334,
-  "error_pixel_cluster_count": 8.0,
-  "error_pixel_cluster_excess": 0.28781855670103096,
-  "error_pixel_count": 582.0,
+  "elapsed_seconds": 1.2809999999590218,
+  "error_per_pixel": 0.0064285333333333325,
+  "error_pixel_cluster_count": 19.0,
+  "error_pixel_cluster_excess": 0.2504608228980322,
+  "error_pixel_count": 559.0,
   "filename": "GE0023_S.jpg",
   "h": 50,
-  "largest_error_pixel_cluster_fraction": 0.520618556701031,
-  "localized_error_fraction": 0.4644378753328394,
-  "mean_delta2": 1730.02197265625,
+  "largest_error_pixel_cluster_fraction": 0.4740608228980322,
+  "localized_error_fraction": 0.8296368269431681,
+  "mean_delta2": 1700.9307861328125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -53,6 +53,88 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.041717061232198656,
+          0.03832904255488767,
+          0.9216845937989777,
+          0.9190539283740358
+        ],
+        "fill": "#AFCADD",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9526,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#CBDBE6",
+        "stroke_width": 0.03599702151379124
+      },
+      {
+        "bbox": [
+          0.7805036167165466,
+          0.15923811541467287,
+          0.14111461690615756,
+          0.6788045217694901
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7334,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.85,
+            0.16
+          ],
+          [
+            0.85,
+            0.84
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.1414206469910298
+      },
+      {
+        "bbox": [
+          0.12077819241774354,
+          0.19952837042833796,
+          0.3595402304971912,
+          0.11846710953108415
+        ],
+        "fill": "#ADCFE3",
+        "font_size": 0.324,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.6782,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -64,9 +146,9 @@
     "variant_name": "GE0023_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 4592.9545824321585,
-  "std_delta2": 2304.45849609375,
-  "tile_std_delta2": 1492.4345743761658,
+  "spatial_quality_score": 11172.682244680807,
+  "std_delta2": 2243.495361328125,
+  "tile_std_delta2": 7674.408967286249,
   "variant": "GE0023_S",
   "w": 50
 }

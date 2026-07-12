@@ -1,0 +1,226 @@
+{
+  "actual_iterations": 64,
+  "base": "GE9023_5M",
+  "best_error": 33.39888888888889,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 1.375,
+  "error_per_pixel": 0.02783240740740741,
+  "error_pixel_cluster_count": 3.0,
+  "error_pixel_cluster_excess": 0.10338928150765608,
+  "error_pixel_count": 283.0,
+  "filename": "GE9023_5M.jpg",
+  "h": 60,
+  "largest_error_pixel_cluster_fraction": 0.3392226148409894,
+  "localized_error_fraction": 0.5321053101560022,
+  "mean_delta2": 7941.7158203125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "confidence": 0.75,
+          "fill": "#e8e8e8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "primitive_decomposition": {
+            "primitives": [
+              {
+                "kind": "ColorPatch",
+                "role": "light_grey_fill"
+              }
+            ],
+            "schema_version": "light_grey_square_decomposition_v1"
+          },
+          "role": "reference_light_grey_square",
+          "source": "description",
+          "stroke": "none",
+          "stroke_width": 0.0
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE9023_5M",
+        "source": "base_name",
+        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "fill": "#e8e8e8",
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.0
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 32.065,
+        "initial_error": 32.065,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 30.22222222222222,
+      "generic_element_refinement": {
+        "final_error": 30.22222222222222,
+        "initial_error": 32.065,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 1.8427777777777763,
+            "element": "backbottom_light_grey_square",
+            "error_after": 30.22222222222222,
+            "error_before": 32.065,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 37.24666666666667,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.85,
+        "scale_y": 1.0,
+        "stroke_scale": 1.0,
+        "translate_x": -0.18000000000000002,
+        "translate_y": 0.11
+      },
+      "steps": [
+        {
+          "best_delta": 1.5911111111111111,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 0.48611111111111427,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 1.3452777777777811,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 1.4288888888888849,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 0.03305555555555628,
+          "parameter": "translate_x",
+          "stage": 1,
+          "value": -0.2
+        },
+        {
+          "best_delta": 0.10916666666666686,
+          "parameter": "translate_y",
+          "stage": 1,
+          "value": 0.12
+        },
+        {
+          "best_delta": 0.17527777777777942,
+          "parameter": "translate_x",
+          "stage": 2,
+          "value": -0.18000000000000002
+        },
+        {
+          "best_delta": 0.012777777777777999,
+          "parameter": "translate_y",
+          "stage": 3,
+          "value": 0.11
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.11270808600168665,
+          0.8495289950105643,
+          1.0
+        ],
+        "fill": "#f4c4c0",
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.001
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9023_5M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 16152.152648440306,
+  "std_delta2": 9273.1162109375,
+  "tile_std_delta2": 6833.659004039532,
+  "variant": "GE9023_5M",
+  "w": 20
+}

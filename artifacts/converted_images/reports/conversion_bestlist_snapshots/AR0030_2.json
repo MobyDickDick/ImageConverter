@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AR0030",
-  "best_error": 42.775104166666665,
+  "best_error": 27.554375,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.312999999994645,
-  "error_per_pixel": 0.013367220052083333,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.9530000000959262,
+  "error_per_pixel": 0.0086107421875,
+  "error_pixel_cluster_count": 54.0,
+  "error_pixel_cluster_excess": 0.14500000000000002,
+  "error_pixel_count": 800.0,
   "filename": "AR0030_2.jpg",
   "h": 80,
-  "localized_error_fraction": 0.45486739339868015,
-  "mean_delta2": 8298.794921875,
+  "largest_error_pixel_cluster_fraction": 0.395,
+  "localized_error_fraction": 0.42800413147672345,
+  "mean_delta2": 3555.62939453125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -106,7 +112,30 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 59.10177083333333,
+      "final_error": 52.57604166666667,
+      "generic_element_refinement": {
+        "final_error": 52.57604166666667,
+        "initial_error": 59.10177083333333,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 6.200729166666669,
+            "element": "main_rect",
+            "error_after": 52.901041666666664,
+            "error_before": 59.10177083333333,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.32499999999999574,
+            "element": "diagonal_1_tr_bl",
+            "error_after": 52.57604166666667,
+            "error_before": 52.901041666666664,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 85.52177083333333,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -369,7 +398,7 @@
           0.6515999999999998,
           0.8435999999999999
         ],
-        "fill": "#d8d8d8",
+        "fill": "#b1c1cc",
         "id": "main_rect",
         "kind": "RectBorder",
         "stroke": "#666666",
@@ -382,7 +411,7 @@
         "kind": "DiagonalBand",
         "rect_ref": "main_rect",
         "stroke": "#707070",
-        "stroke_width": 0.13995000000000005
+        "stroke_width": 0.16094250000000004
       }
     ],
     "semantic_conflicts": [],
@@ -396,9 +425,9 @@
     "variant_name": "AR0030_2"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 14469.079088594346,
-  "std_delta2": 10271.3681640625,
-  "tile_std_delta2": 4979.5496637817905,
+  "spatial_quality_score": 6253.277920502394,
+  "std_delta2": 5280.71044921875,
+  "tile_std_delta2": 1845.6025871213335,
   "variant": "AR0030_2",
   "w": 40
 }

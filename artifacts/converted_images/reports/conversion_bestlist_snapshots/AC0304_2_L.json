@@ -1,15 +1,37 @@
 {
+  "actual_iterations": 64,
   "base": "AC0304",
-  "best_error": 12.704739583333334,
+  "best_error": 14.138385416666667,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0019851155598958332,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.702999999979511,
+  "error_per_pixel": 0.0022091227213541665,
+  "error_pixel_cluster_count": 2.0,
+  "error_pixel_cluster_excess": 0.7558114270386267,
+  "error_pixel_count": 1398.0,
   "filename": "AC0304_2_L.jpg",
   "h": 80,
-  "mean_delta2": 2979.5673828125,
+  "largest_error_pixel_cluster_fraction": 0.9742489270386266,
+  "localized_error_fraction": 0.6741000671880922,
+  "mean_delta2": 3337.64501953125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -31,6 +53,88 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.052042720087033804,
+          0.01048966450600032,
+          0.9256014493118776,
+          0.9237319043999918
+        ],
+        "fill": "#4EA85A",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9854,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#88B48E",
+        "stroke_width": 0.03829689951838018
+      },
+      {
+        "bbox": [
+          0.05252468143166519,
+          0.30191742367562485,
+          0.010525635875792846,
+          0.3995242334845533
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.86,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.05625,
+            0.3
+          ],
+          [
+            0.05625,
+            0.7
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.011699748525970902
+      },
+      {
+        "bbox": [
+          0.8238022489916171,
+          0.18936679998424072,
+          0.17554538623618893,
+          0.23714779164425243
+        ],
+        "fill": "#97C69D",
+        "font_size": 0.21375,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7115,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "L"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -41,7 +145,10 @@
     "top_source_ref": null,
     "variant_name": "AC0304_2_L"
   },
-  "std_delta2": 8969.5849609375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 9831.711087220849,
+  "std_delta2": 10036.7919921875,
+  "tile_std_delta2": 3994.5165480694313,
   "variant": "AC0304_2_L",
   "w": 80
 }

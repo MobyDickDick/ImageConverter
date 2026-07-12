@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE9902",
-  "best_error": 5.029883897569444,
+  "best_error": 4.636994357638889,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.2179999999934807,
-  "error_per_pixel": 1.6373319979067203e-05,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 3.4530000000959262,
+  "error_per_pixel": 1.5094382674605758e-05,
+  "error_pixel_cluster_count": 15.0,
+  "error_pixel_cluster_excess": 0.7146659809897842,
+  "error_pixel_count": 38910.0,
   "filename": "GE9902_S.jpg",
   "h": 480,
-  "localized_error_fraction": 0.808051118950616,
-  "mean_delta2": 356.53057861328125,
+  "largest_error_pixel_cluster_fraction": 0.8413261372397841,
+  "localized_error_fraction": 0.8070776114505203,
+  "mean_delta2": 273.7799072265625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -47,6 +53,87 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          0.21411411441424,
+          1.0
+        ],
+        "fill": "#AACFE8",
+        "id": "perception_rect_border",
+        "kind": "RectBorder",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9477,
+          "detector": "contour",
+          "kind": "rectangle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#B7D5EB",
+        "stroke_width": 0.017702886636255025
+      },
+      {
+        "bbox": [
+          0.21080310400368144,
+          0.0,
+          0.01,
+          0.8615347935484076
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 1.0,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.21406,
+            0.0
+          ],
+          [
+            0.21406,
+            0.8625
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.002468653337127991
+      },
+      {
+        "bbox": [
+          0.13898496074031805,
+          0.6566922992974125,
+          0.04182527966281919,
+          0.012877472067870311
+        ],
+        "fill": "#B4D7ED",
+        "font_size": 0.03938,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.669,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top+bottom+left",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -58,9 +145,9 @@
     "variant_name": "GE9902_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 1075.9106370347176,
-  "std_delta2": 1250.951904296875,
-  "tile_std_delta2": 561.0294037749846,
+  "spatial_quality_score": 1172.9102940990351,
+  "std_delta2": 590.4375,
+  "tile_std_delta2": 561.1952201516262,
   "variant": "GE9902_S",
   "w": 640
 }

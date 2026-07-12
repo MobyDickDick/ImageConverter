@@ -1,14 +1,46 @@
 {
+  "actual_iterations": 64,
   "base": "AC0301_2L",
-  "best_error": 61.34041666666667,
+  "best_error": 27.23609375,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.009584440104166668,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.312999999965541,
+  "error_per_pixel": 0.0042556396484375,
+  "error_pixel_cluster_count": 24.0,
+  "error_pixel_cluster_excess": 0.6857695179180887,
+  "error_pixel_count": 1465.0,
   "filename": "AC0301_2L_sia.jpg",
   "h": 80,
-  "mean_delta2": 18128.1796875,
+  "largest_error_pixel_cluster_fraction": 0.9146757679180887,
+  "localized_error_fraction": 0.5776057324764793,
+  "mean_delta2": 6969.19580078125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
     "description_fragments": [
       {
         "key": "AC0301_2L_sia",
@@ -17,9 +49,94 @@
       }
     ],
     "documented_alias_refs": [],
-    "elements": [],
-    "label": "M",
-    "mode": "auto",
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.009710623588749504,
+          0.05092050702852104,
+          0.924115308224631,
+          0.9236633258696042
+        ],
+        "fill": "#57AB62",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9691,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#7C9A80",
+        "stroke_width": 0.03598921722704195
+      },
+      {
+        "bbox": [
+          0.6894843357269815,
+          0.034868850460866144,
+          0.274857067538087,
+          0.7635115264915149
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.6913,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.825,
+            0.0375
+          ],
+          [
+            0.825,
+            0.8
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.27461482376706653
+      },
+      {
+        "bbox": [
+          0.5847216064367667,
+          0.16236384244546978,
+          0.2998770370206418,
+          0.05155296619246287
+        ],
+        "fill": "#59A363",
+        "font_size": 0.27,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7662,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -30,7 +147,10 @@
     "top_source_ref": null,
     "variant_name": "AC0301_2L_SIA"
   },
-  "std_delta2": 20958.609375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 17664.631875822317,
+  "std_delta2": 14606.1513671875,
+  "tile_std_delta2": 6511.122645311892,
   "variant": "AC0301_2L_SIA",
   "w": 80
 }
