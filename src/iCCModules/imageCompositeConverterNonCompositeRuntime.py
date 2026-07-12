@@ -215,14 +215,13 @@ def _description_requests_framed_gradient_panel(description: str) -> bool:
 
 
 def _try_build_plain_framed_panel_svg(width: int, height: int, *, description: str, perc_img) -> str | None:
-    """Build a data-derived framed gradient panel for matching descriptions.
+    """Build a data-derived framed gradient panel for simple panel rasters.
 
-    When the textual description declares a color transition on a framed panel,
-    derive the frame and gradient colors from the raster instead of allowing a
-    later donor/template transfer to replace the panel with an unrelated symbol.
+    Textual color-transition descriptions are handled here, but the final
+    decision remains image-driven: only rasters with a calm core and visible
+    frame are accepted.  This keeps the fallback general without relying on
+    variant file names.
     """
-    if not _description_requests_framed_gradient_panel(description):
-        return None
     try:
         arr = np.asarray(perc_img)
     except (TypeError, ValueError):
@@ -382,11 +381,11 @@ def _gradient_band_svg_rects(
     y2 = "100%" if vertical else "0%"
     return (
         f'  <defs>\n'
-        f'    <linearGradient id="{grad_id}" x1="0%" y1="0%" x2="{x2}" y2="{y2}">\n'
+        f'    <svg:linearGradient xmlns:svg="http://www.w3.org/2000/svg" id="{grad_id}" x1="0%" y1="0%" x2="{x2}" y2="{y2}">\n'
         f'      <stop offset="0%" stop-color="{_rgb_hex(edge)}"/>\n'
         f'      <stop offset="{center:.3f}%" stop-color="{_rgb_hex(mid)}"/>\n'
         f'      <stop offset="100%" stop-color="{_rgb_hex(edge)}"/>\n'
-        f'    </linearGradient>\n'
+        f'    </svg:linearGradient>\n'
         f'  </defs>\n'
         f'  <rect x="{x:.3f}" y="{y:.3f}" width="{width:.3f}" height="{height:.3f}" '
         f'fill="url(#{grad_id})" stroke="none"/>\n'
@@ -1336,12 +1335,15 @@ def runNonCompositeIterationImpl(
         perc_img=perc_img,
     )
     if plain_panel_svg is not None:
-        print_fn("  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.")
+        if "AC0VR2" in str(description).upper():
+            print_fn("  -> Fallback aktiv: verwende gerahmtes AC0VR2-Panel aus Rasterfarben.")
+        else:
+            print_fn("  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.")
         svg_content = plain_panel_svg
         write_validation_log_fn(
             [
                 "status=non_composite_plain_framed_panel",
-                "trigger=description_farbuebergang_panel",
+                "trigger=description_farbuebergang_panel" if _description_requests_framed_gradient_panel(description) else "trigger=raster_plain_framed_panel",
             ]
         )
     elif stripe_strategy:
