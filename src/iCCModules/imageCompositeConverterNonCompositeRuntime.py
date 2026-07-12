@@ -138,7 +138,7 @@ def _build_vector_placeholder_svg(width: int, height: int, *, description: str =
         '      <stop offset="0%" stop-color="#6d6d6d"/>\n'
         '      <stop offset="50%" stop-color="#d7d7d7"/>\n'
         '      <stop offset="100%" stop-color="#6d6d6d"/>\n'
-        '    </linearGradient>\n'
+        '    </svg:linearGradient>\n'
         '  </defs>\n'
         f'  <rect x="0" y="0" width="{safe_w}" height="{safe_h}" fill="url(#bg)"/>\n'
         f'  <line x1="0" y1="0" x2="{safe_w}" y2="{safe_h}" stroke="#8e8e8e" stroke-width="1"/>\n'
@@ -193,7 +193,7 @@ def _build_framed_vertical_gradient_panel_svg(
         f'      <stop offset="0%" stop-color="{top_color}"/>\n'
         f'      <stop offset="50%" stop-color="{middle_color}"/>\n'
         f'      <stop offset="100%" stop-color="{bottom_color}"/>\n'
-        '    </linearGradient>\n'
+        '    </svg:linearGradient>\n'
         '  </defs>\n'
         f'  <rect x="{inset:.3f}" y="{inset:.3f}" width="{rect_w:.3f}" height="{rect_h:.3f}" '
         f'fill="url(#ac0vr2PanelGradient)" stroke="{border_color}" stroke-width="{float(border_width):.3f}"/>\n'
@@ -290,7 +290,7 @@ def _build_diagonal_band_svg(width: int, height: int, *, stroke_width: float, de
         '      <stop offset="30%" stop-color="#fbfbfb"/>\n'
         '      <stop offset="37%" stop-color="#fbfbfb"/>\n'
         '      <stop offset="100%" stop-color="#b4b4b4"/>\n'
-        '    </linearGradient>\n'
+        '    </svg:linearGradient>\n'
         f'    <clipPath id="innerRect"><rect x="{margin}" y="{margin}" width="{safe_w-1}" height="{safe_h-1}"/></clipPath>\n'
         '  </defs>\n'
         f'  <rect x="{margin}" y="{margin}" width="{safe_w-1}" height="{safe_h-1}" fill="url(#bg)" stroke="#adadad" stroke-width="1"/>\n'
@@ -342,6 +342,7 @@ def _gradient_band_svg_rects(
     mid_hex: str,
     center_percent: float,
     bands: int = 48,
+    vertical: bool = False,
 ) -> str:
     def _rgb(color: str, fallback: int) -> np.ndarray:
         value = str(color or "").strip().lstrip("#")
@@ -354,24 +355,33 @@ def _gradient_band_svg_rects(
 
     edge = _rgb(edge_hex, 0x8F)
     mid = _rgb(mid_hex, 0xDE)
-    safe_bands = max(4, int(bands))
-    center = max(1.0, min(99.0, float(center_percent))) / 100.0
-    parts: list[str] = []
-    for index in range(safe_bands):
-        t = (index + 0.5) / safe_bands
-        if t <= center:
-            ratio = t / center
-            color = edge * (1.0 - ratio) + mid * ratio
-        else:
-            ratio = (t - center) / (1.0 - center)
-            color = mid * (1.0 - ratio) + edge * ratio
-        band_x = x + width * index / safe_bands
-        band_w = width / safe_bands + max(0.02, width * 0.001)
-        parts.append(
-            f'  <rect x="{band_x:.3f}" y="{y:.3f}" width="{band_w:.3f}" height="{height:.3f}" '
-            f'fill="{_rgb_hex(color)}" stroke="none"/>')
-    return "\n".join(parts) + ("\n" if parts else "")
-
+    center = max(1.0, min(99.0, float(center_percent)))
+    grad_key = "|".join(
+        (
+            f"{float(x):.3f}",
+            f"{float(y):.3f}",
+            f"{float(width):.3f}",
+            f"{float(height):.3f}",
+            str(edge_hex),
+            str(mid_hex),
+            f"{center:.3f}",
+            str(bool(vertical)),
+        )
+    )
+    grad_id = f"smoothPanelGradient_{hashlib.sha1(grad_key.encode('utf-8')).hexdigest()[:8]}"
+    x2 = "0%" if vertical else "100%"
+    y2 = "100%" if vertical else "0%"
+    return (
+        f'  <defs>\n'
+        f'    <svg:linearGradient xmlns:svg="http://www.w3.org/2000/svg" id="{grad_id}" x1="0%" y1="0%" x2="{x2}" y2="{y2}">\n'
+        f'      <stop offset="0%" stop-color="{_rgb_hex(edge)}"/>\n'
+        f'      <stop offset="{center:.3f}%" stop-color="{_rgb_hex(mid)}"/>\n'
+        f'      <stop offset="100%" stop-color="{_rgb_hex(edge)}"/>\n'
+        f'    </svg:linearGradient>\n'
+        f'  </defs>\n'
+        f'  <rect x="{x:.3f}" y="{y:.3f}" width="{width:.3f}" height="{height:.3f}" '
+        f'fill="url(#{grad_id})" stroke="none"/>\n'
+    )
 
 def _build_structured_symbol_svg(
     width: int,
@@ -402,6 +412,7 @@ def _build_structured_symbol_svg(
     chevron_center_x_ratio: float = 0.5,
     chevron_peak_x_ratio: float = 1.0,
     chevron_peak_y_ratio: float = 0.5,
+    gradient_vertical: bool = False,
 ) -> str:
     safe_w = max(1, int(width or 1))
     safe_h = max(1, int(height or 1))
@@ -438,12 +449,15 @@ def _build_structured_symbol_svg(
         mid_hex=gradient_mid,
         center_percent=gradient_center,
         bands=max(16, min(64, safe_w * 2)),
+        vertical=gradient_vertical,
     )
+    clip_def = f'  <clipPath id="innerRect"><rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}"/></clipPath>\n'
+    if "<defs>" in gradient_rects:
+        gradient_rects = gradient_rects.replace("  </defs>\n", clip_def + "  </defs>\n", 1)
+    else:
+        gradient_rects = "  <defs>\n" + clip_def + "  </defs>\n" + gradient_rects
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" viewBox="0 0 {safe_w} {safe_h}">\n'
-        '  <defs>\n'
-        f'    <clipPath id="innerRect"><rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}"/></clipPath>\n'
-        '  </defs>\n'
         f'  <rect x="0" y="0" width="{safe_w}" height="{safe_h}" fill="#ffffff" stroke="none"/>\n'
         f'{gradient_rects}'
         f'  <rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}" fill="none" stroke="{_color_hex(border_gray)}" stroke-width="{border_thickness:.2f}"/>\n'
@@ -509,23 +523,41 @@ def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> d
     center_is_brighter = float(np.nanmean(mid)) > float((np.nanmean(left) + np.nanmean(right)) * 0.5)
     grad_center = 50.0 if center_is_brighter else 45.0
     contrast = max(1.0, float(np.nanpercentile(lum, 90) - np.nanpercentile(lum, 10)))
-    # Estimate the horizontal background from robust column medians. This
-    # rejects thin diagonals and glyphs and works for both dark and light
-    # symbol families without imposing the former 190..250 midpoint clamp.
+    # Estimate the smooth panel background from robust axis medians.  Older
+    # logic always used columns and therefore turned vertical grey panels into
+    # left-to-right bands with incorrect colours.  Compare both axes and use the
+    # axis with stronger variation so full-width AC-style panels preserve their
+    # top-to-bottom highlight.
     inner = lum[1:-1, 1:-1] if h > 2 and w > 2 else lum
     column_profile = np.nanmedian(inner, axis=0)
-    flank_count = max(1, int(round(column_profile.size * 0.20)))
-    edge = int(round(float(np.nanmedian(np.concatenate((column_profile[:flank_count], column_profile[-flank_count:]))))))
-    midc = int(round(float(np.nanmax(column_profile))))
+    row_profile = np.nanmedian(inner, axis=1)
+    column_var = float(np.nanpercentile(column_profile, 90) - np.nanpercentile(column_profile, 10))
+    row_var = float(np.nanpercentile(row_profile, 90) - np.nanpercentile(row_profile, 10))
+    gradient_vertical = row_var > column_var * 1.25
+    gradient_profile = row_profile if gradient_vertical else column_profile
+    flank_count = max(1, int(round(gradient_profile.size * 0.20)))
+    flank_values = np.concatenate((gradient_profile[:flank_count], gradient_profile[-flank_count:]))
+    if gradient_vertical:
+        # Vertical glass/metal panels often brighten immediately below the top
+        # edge.  Use a lower flank percentile rather than the median so the
+        # generated stop follows the source edge colour instead of washing it
+        # out toward the highlight.
+        edge = int(round(float(np.nanpercentile(flank_values, 25))))
+    else:
+        edge = int(round(float(np.nanmedian(flank_values))))
+    midc = int(round(float(np.nanmax(gradient_profile))))
     edge = max(0, min(255, edge))
     midc = max(0, min(255, midc))
     edge_color = _gray_hex(edge)
     mid_color = _gray_hex(midc)
     if color is not None:
         color_inner = color[1:-1, 1:-1] if h > 2 and w > 2 else color
-        color_profile = np.nanmedian(color_inner, axis=0)
+        color_profile = np.nanmedian(color_inner, axis=1 if gradient_vertical else 0)
         flank_colors = np.concatenate((color_profile[:flank_count], color_profile[-flank_count:]), axis=0)
-        edge_color = _rgb_hex(np.nanmedian(flank_colors, axis=0))
+        if gradient_vertical:
+            edge_color = _rgb_hex(np.nanpercentile(flank_colors, 25, axis=0))
+        else:
+            edge_color = _rgb_hex(np.nanmedian(flank_colors, axis=0))
         # The SVG frame and a bright chevron can dominate the absolute
         # brightest column.  Estimate the light gradient stop from the central
         # band instead, where a dark-light-dark horizontal gradient declares
@@ -535,7 +567,10 @@ def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> d
         center_end = min(color_profile.shape[0], int(round(color_profile.shape[0] * 0.65)))
         center_colors = color_profile[center_start:center_end]
         if center_colors.size:
-            mid_color = _rgb_hex(np.nanmedian(center_colors, axis=0))
+            if gradient_vertical:
+                mid_color = _rgb_hex(np.nanmax(center_colors, axis=0))
+            else:
+                mid_color = _rgb_hex(np.nanmedian(center_colors, axis=0))
         else:
             mid_color = _rgb_hex(color_profile[color_profile.shape[0] // 2])
     nonwhite_threshold = min(252.0, max(float(np.nanpercentile(lum, 92)) - 3.0, float(np.nanpercentile(lum, 70))))
@@ -574,6 +609,7 @@ def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> d
         "gradient_center": grad_center,
         "gradient_edge": edge_color,
         "gradient_mid": mid_color,
+        "gradient_vertical": gradient_vertical,
         "diag1_width": max(1.0, min(2.8, 1.0 + dark_ratio * scale * 0.02)),
         "diag2_width": 0.0,
         "diagonal_inset_ratio": diagonal_inset_ratio,
