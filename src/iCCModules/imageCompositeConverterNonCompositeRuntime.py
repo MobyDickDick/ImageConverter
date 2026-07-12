@@ -150,6 +150,127 @@ def _build_vector_placeholder_svg(width: int, height: int, *, description: str =
     )
 
 
+def _build_plain_framed_panel_svg(
+    width: int,
+    height: int,
+    *,
+    fill_color: str,
+    border_color: str,
+    border_width: float = 1.0,
+) -> str:
+    safe_w = max(1, int(width or 1))
+    safe_h = max(1, int(height or 1))
+    inset = max(0.0, float(border_width) * 0.5)
+    rect_w = max(0.0, safe_w - float(border_width))
+    rect_h = max(0.0, safe_h - float(border_width))
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" viewBox="0 0 {safe_w} {safe_h}">\n'
+        f'  <rect x="{inset:.3f}" y="{inset:.3f}" width="{rect_w:.3f}" height="{rect_h:.3f}" '
+        f'fill="{fill_color}" stroke="{border_color}" stroke-width="{float(border_width):.3f}"/>\n'
+        '</svg>\n'
+    )
+
+
+def _build_framed_vertical_gradient_panel_svg(
+    width: int,
+    height: int,
+    *,
+    top_color: str,
+    middle_color: str,
+    bottom_color: str,
+    border_color: str,
+    border_width: float = 1.0,
+) -> str:
+    safe_w = max(1, int(width or 1))
+    safe_h = max(1, int(height or 1))
+    inset = max(0.0, float(border_width) * 0.5)
+    rect_w = max(0.0, safe_w - float(border_width))
+    rect_h = max(0.0, safe_h - float(border_width))
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" viewBox="0 0 {safe_w} {safe_h}">\n'
+        '  <defs>\n'
+        '    <linearGradient id="ac0vr2PanelGradient" x1="0%" y1="0%" x2="0%" y2="100%">\n'
+        f'      <stop offset="0%" stop-color="{top_color}"/>\n'
+        f'      <stop offset="50%" stop-color="{middle_color}"/>\n'
+        f'      <stop offset="100%" stop-color="{bottom_color}"/>\n'
+        '    </linearGradient>\n'
+        '  </defs>\n'
+        f'  <rect x="{inset:.3f}" y="{inset:.3f}" width="{rect_w:.3f}" height="{rect_h:.3f}" '
+        f'fill="url(#ac0vr2PanelGradient)" stroke="{border_color}" stroke-width="{float(border_width):.3f}"/>\n'
+        '</svg>\n'
+    )
+
+
+def _try_build_plain_framed_panel_svg(width: int, height: int, *, base_name: str, perc_img) -> str | None:
+    """Build a data-derived flat framed panel for AC0VR2_ZL-like rasters.
+
+    The AC0VR2_ZL_M source is a simple bright grey panel with a one-pixel
+    darker frame.  The generic gradient-stripe fallback sees the full panel as
+    a stripe and drops the frame, which leaves a large localized border error.
+    Keep this narrowly tied to the AC0VR2 variants and derive colors from the
+    input raster so the path remains image-driven rather than copying a sample
+    SVG.
+    """
+    normalized_name = Path(str(base_name or "")).stem.upper()
+    if not normalized_name.startswith("AC0VR2"):
+        return None
+    try:
+        arr = np.asarray(perc_img)
+    except (TypeError, ValueError):
+        return None
+    if arr.ndim < 2 or arr.size == 0:
+        return None
+    if arr.shape[0] < 3 or arr.shape[1] < 3:
+        return None
+    rgb = arr[..., :3][..., ::-1].astype(np.float32) if arr.ndim == 3 else np.repeat(arr[..., None], 3, axis=2)
+    h, w = rgb.shape[:2]
+    border_pixels = np.concatenate(
+        (
+            rgb[0, :, :],
+            rgb[-1, :, :],
+            rgb[:, 0, :],
+            rgb[:, -1, :],
+        ),
+        axis=0,
+    )
+    inner = rgb[1:-1, 1:-1, :]
+    core_y0 = max(1, int(round(h * 0.20)))
+    core_y1 = min(h - 1, int(round(h * 0.80)))
+    core_x0 = max(1, int(round(w * 0.15)))
+    core_x1 = min(w - 1, int(round(w * 0.85)))
+    core = rgb[core_y0:core_y1, core_x0:core_x1, :]
+    if core.size == 0:
+        core = inner
+    border_rgb = np.nanmedian(border_pixels, axis=0)
+    top_rgb = np.nanmedian(rgb[max(1, int(round(h * 0.08))): max(2, int(round(h * 0.25))), core_x0:core_x1, :].reshape(-1, 3), axis=0)
+    fill_rgb = np.nanmedian(core.reshape(-1, 3), axis=0)
+    bottom_rgb = np.nanmedian(rgb[min(h - 2, int(round(h * 0.75))): max(min(h - 1, int(round(h * 0.92))), min(h - 2, int(round(h * 0.75))) + 1), core_x0:core_x1, :].reshape(-1, 3), axis=0)
+    border_lum = float(np.nanmean(border_rgb))
+    fill_lum = float(np.nanmean(fill_rgb))
+    core_std = float(np.nanstd(core))
+    border_contrast = fill_lum - border_lum
+    if border_contrast < 12.0 or core_std > 24.0:
+        return None
+    vertical_range = float(max(np.nanmean(top_rgb), fill_lum, np.nanmean(bottom_rgb)) - min(np.nanmean(top_rgb), fill_lum, np.nanmean(bottom_rgb)))
+    if vertical_range >= 8.0:
+        return _build_framed_vertical_gradient_panel_svg(
+            width,
+            height,
+            top_color=_rgb_hex(top_rgb),
+            middle_color=_rgb_hex(fill_rgb),
+            bottom_color=_rgb_hex(bottom_rgb),
+            border_color=_rgb_hex(border_rgb),
+            border_width=1.0,
+        )
+    return _build_plain_framed_panel_svg(
+        width,
+        height,
+        fill_color=_rgb_hex(fill_rgb),
+        border_color=_rgb_hex(border_rgb),
+        border_width=1.0,
+    )
+
+
 def _description_requests_diagonal_band(description: str) -> bool:
     text = (description or "").lower()
     return "diagon" in text and "links unten" in text and "rechts oben" in text
@@ -1160,7 +1281,25 @@ def runNonCompositeIterationImpl(
         return None
 
     description_driven_algorithm_available = False
-    if stripe_strategy:
+    resolved_variant_name = str(
+        image_variant_name or params.get("variant_name") or Path(img_path).stem or base_name
+    )
+    plain_panel_svg = _try_build_plain_framed_panel_svg(
+        width,
+        height,
+        base_name=resolved_variant_name,
+        perc_img=perc_img,
+    )
+    if plain_panel_svg is not None:
+        print_fn("  -> Fallback aktiv: verwende gerahmtes AC0VR2-Panel aus Rasterfarben.")
+        svg_content = plain_panel_svg
+        write_validation_log_fn(
+            [
+                "status=non_composite_plain_framed_panel",
+                f"variant_name={resolved_variant_name}",
+            ]
+        )
+    elif stripe_strategy:
         print_fn("  -> Fallback aktiv: verwende Gradient-Stripe-Strategie.")
         svg_content = build_gradient_stripe_svg_fn(width, height, stripe_strategy)
         strategy_stop_count = len(list(stripe_strategy.get("stops", [])))
@@ -1176,9 +1315,6 @@ def runNonCompositeIterationImpl(
             width, height, description=description, perc_img=perc_img
         )
         description_geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
-        resolved_variant_name = str(
-            image_variant_name or params.get("variant_name") or Path(img_path).stem or base_name
-        )
         description_geometry_ir = _apply_image_variant_geometry(
             description_geometry_ir, base_name=resolved_variant_name
         )
