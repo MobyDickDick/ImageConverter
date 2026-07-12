@@ -2045,3 +2045,41 @@ def test_reference_heat_exchanger_variants_keep_description_contract_and_registr
     assert non_composite_runtime_helpers._is_description_heat_exchanger_geometry(geometry_ir) is True
     assert non_composite_runtime_helpers._description_reuses_reference_family(description) is True
     assert non_composite_runtime_helpers._prefer_description_geometry_candidate(geometry_ir, description=description) is True
+
+
+def test_symbol_raster_estimation_uses_smooth_vertical_gradient_for_full_panel() -> None:
+    raster = np.full((30, 60, 3), 255, dtype=np.uint8)
+    for y in range(30):
+        if y <= 9:
+            t = y / 9.0
+            value = int(round(180 + (251 - 180) * t))
+        elif y <= 11:
+            value = 251
+        else:
+            t = (y - 11) / 18.0
+            value = int(round(251 + (180 - 251) * t))
+        raster[y, :] = (value, value, value)
+    raster[0, :] = (173, 173, 173)
+    raster[-1, :] = (173, 173, 173)
+    raster[:, 0] = (173, 173, 173)
+    raster[:, -1] = (173, 173, 173)
+
+    params = non_composite_runtime_helpers._derive_symbol_params_from_raster(
+        width=60,
+        height=30,
+        perc_img=raster,
+    )
+    svg = non_composite_runtime_helpers._build_structured_symbol_svg(
+        60,
+        30,
+        **params,
+    )
+
+    assert params["gradient_vertical"] is True
+    assert params["gradient_edge"] <= "#c0c0c0"
+    assert params["gradient_mid"] == "#fbfbfb"
+    assert '<svg:linearGradient xmlns:svg="http://www.w3.org/2000/svg" id="smoothPanelGradient_' in svg
+    assert 'x2="0%" y2="100%"' in svg
+    assert f'stop-color="{params["gradient_edge"]}"' in svg
+    assert 'stop-color="#fbfbfb"' in svg
+    assert svg.count('<rect x="') <= 4
