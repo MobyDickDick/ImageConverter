@@ -53,6 +53,8 @@ def _has_description_driven_geometry_ir(params: object) -> bool:
         return False
     geometry_ir = params.get("geometry_ir")
     if not isinstance(geometry_ir, list):
+        geometry_ir = params.get("optimized_geometry_ir")
+    if not isinstance(geometry_ir, list):
         return False
     description_kinds = {
         "HorizontalGradient",
