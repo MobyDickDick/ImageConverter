@@ -47,10 +47,6 @@ def detectGradientStripeStrategyImpl(
     bh = y1 - y0 + 1
     if bw < max(3, int(w * float(min_relative_width))):
         return None
-    if h > 24 and bh > max(2, int(h * float(max_relative_height))):
-        return None
-    if (float(bw) / float(max(1, bh))) < 4.0:
-        return None
 
     crop = img[y0 : y1 + 1, x0 : x1 + 1]
     col_rgb = crop.mean(axis=0)[:, ::-1]  # average over y, convert BGR -> RGB
@@ -58,6 +54,17 @@ def detectGradientStripeStrategyImpl(
     axis_x_var = float(np_module.mean(np_module.linalg.norm(col_rgb - col_rgb.mean(axis=0), axis=1)))
     axis_y_var = float(np_module.mean(np_module.linalg.norm(row_rgb - row_rgb.mean(axis=0), axis=1)))
     vertical = axis_y_var > axis_x_var
+
+    dominant_var = max(axis_x_var, axis_y_var)
+    cross_axis_var = min(axis_x_var, axis_y_var)
+    mostly_full_panel = bw >= int(w * 0.70) and bh >= int(h * 0.70)
+    directional_gradient = dominant_var >= 8.0 and cross_axis_var <= max(3.0, dominant_var * 0.35)
+    allow_full_panel_gradient = mostly_full_panel and directional_gradient
+
+    if h > 24 and bh > max(2, int(h * float(max_relative_height))) and not allow_full_panel_gradient:
+        return None
+    if (float(bw) / float(max(1, bh))) < 4.0 and not allow_full_panel_gradient:
+        return None
     samples = row_rgb if vertical else col_rgb
 
     min_step = max(1, len(samples) // 12)

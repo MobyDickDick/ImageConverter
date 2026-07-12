@@ -57,3 +57,29 @@ def test_detect_gradient_stripe_strategy_skips_tiny_canvas_height() -> None:
     strategy = helpers.detectGradientStripeStrategyImpl(img, np_module=np)
 
     assert strategy is None
+
+
+def test_detect_gradient_strategy_handles_full_height_vertical_panel() -> None:
+    img = np.full((30, 60, 3), 255, dtype=np.uint8)
+    for y in range(30):
+        if y <= 8:
+            t = y / 8.0
+            value = int(round(180 + (251 - 180) * t))
+        elif y <= 11:
+            value = 251
+        else:
+            t = (y - 11) / 18.0
+            value = int(round(251 + (180 - 251) * t))
+        img[y, :] = np.array([value, value, value], dtype=np.uint8)
+    img[0, :] = np.array([173, 173, 173], dtype=np.uint8)
+    img[-1, :] = np.array([173, 173, 173], dtype=np.uint8)
+    img[:, 0] = np.array([173, 173, 173], dtype=np.uint8)
+    img[:, -1] = np.array([173, 173, 173], dtype=np.uint8)
+
+    strategy = helpers.detectGradientStripeStrategyImpl(img, np_module=np)
+
+    assert strategy is not None
+    assert strategy["vertical"] is True
+    assert strategy["bbox"] == {"x": 0.0, "y": 0.0, "width": 60.0, "height": 30.0}
+    assert len(strategy["stops"]) >= 3
+    assert strategy["stops"][0]["color"] == "#adadad"
