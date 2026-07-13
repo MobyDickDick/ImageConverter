@@ -507,6 +507,31 @@ def test_build_geometry_ir_maps_ac0212_vertical_two_way_valve_motor_description(
     assert ir[0]["label"] == "M"
 
 
+def test_build_geometry_ir_maps_compact_zweiwegventil_motorensymbol_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Zweiwegventil mit Motorensymbol: Kreis oben mit senkrechtem Griff nach unten, "
+        "zwei spitze Dreiecke berühren sich in der Mitte."
+    )
+
+    assert [element["kind"] for element in ir] == ["TopTwoWayValveMotorGlyph"]
+    assert ir[0]["id"] == "top_two_way_valve_motor"
+    assert ir[0]["label"] == ""
+    assert ir[0]["primitive_decomposition"]["orientation"] == "top"
+
+
+def test_render_geometry_ir_to_svg_contains_top_two_way_valve_motor_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Zweiwegventil mit Motorensymbol"
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(30, 40, ir)
+
+    assert "vertical-two-way-valve-body-gradient" in svg
+    assert 'id="top_two_way_valve_motor_body"' in svg
+    assert 'id="top_two_way_valve_motor_connector"' in svg
+    assert 'id="top_two_way_valve_motor_circle"' in svg
+    assert 'top_two_way_valve_motor_label' not in svg
+
 def test_render_geometry_ir_to_svg_contains_ac0212_vertical_two_way_valve_motor_primitives() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         '2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
