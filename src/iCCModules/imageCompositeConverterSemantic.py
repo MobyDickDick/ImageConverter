@@ -420,6 +420,7 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
             "VerticalTwoWayValveMotorGlyph",
             "LeftRotatedTwoWayValveMotorGlyph",
             "Rotated180TwoWayValveMotorGlyph",
+            "TopTwoWayValveMotorGlyph",
             "TopKelleThreeWayValveGlyph",
             "LeftRotatedTopKelleThreeWayValveGlyph",
             "RightRotatedTopKelleThreeWayValveGlyph",
