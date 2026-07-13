@@ -2114,3 +2114,33 @@ def test_symbol_raster_estimation_uses_smooth_vertical_gradient_for_full_panel()
     assert f'stop-color="{params["gradient_edge"]}"' in svg
     assert 'stop-color="#fbfbfb"' in svg
     assert svg.count('<rect x="') <= 4
+
+
+def test_framed_gradient_panel_detection_skips_structural_symbol_descriptions() -> None:
+    assert not non_composite_runtime_helpers._description_requests_framed_gradient_panel(
+        "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
+        "Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links"
+    )
+    assert non_composite_runtime_helpers._description_requests_framed_gradient_panel(
+        "Gerahmtes Rechteck mit horizontalem Farbverlauf."
+    )
+
+
+def test_plain_panel_builder_skips_heat_exchanger_symbol_rasters() -> None:
+    raster = np.full((40, 20, 3), 220, dtype=np.uint8)
+    raster[0, :, :] = 120
+    raster[-1, :, :] = 120
+    raster[:, 0, :] = 120
+    raster[:, -1, :] = 120
+
+    svg = non_composite_runtime_helpers._try_build_plain_framed_panel_svg(
+        20,
+        40,
+        description=(
+            "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
+            "Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links"
+        ),
+        perc_img=raster,
+    )
+
+    assert svg is None

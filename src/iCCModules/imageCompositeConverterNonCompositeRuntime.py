@@ -211,7 +211,20 @@ def _description_requests_framed_gradient_panel(description: str) -> bool:
         token in text
         for token in ("rechteck", "panel", "fläche", "flaeche", "rahmen", "gerahmt")
     )
-    return has_gradient_transition and has_panel_shape
+    has_structural_symbol = any(
+        token in text
+        for token in (
+            "plus",
+            "minus",
+            "+",
+            "-zeichen",
+            "diagonale",
+            "diagonalen",
+            "andreaskreuz",
+            "diagonalkreuz",
+        )
+    )
+    return has_gradient_transition and has_panel_shape and not has_structural_symbol
 
 
 def _try_build_plain_framed_panel_svg(width: int, height: int, *, description: str, perc_img) -> str | None:
@@ -222,6 +235,21 @@ def _try_build_plain_framed_panel_svg(width: int, height: int, *, description: s
     frame are accepted.  This keeps the fallback general without relying on
     variant file names.
     """
+    text = str(description or "").lower()
+    if any(
+        token in text
+        for token in (
+            "plus",
+            "minus",
+            "+",
+            "-zeichen",
+            "diagonale",
+            "diagonalen",
+            "andreaskreuz",
+            "diagonalkreuz",
+        )
+    ):
+        return None
     try:
         arr = np.asarray(perc_img)
     except (TypeError, ValueError):
@@ -1347,6 +1375,15 @@ def runNonCompositeIterationImpl(
         else:
             print_fn("  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.")
         svg_content = plain_panel_svg
+        svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
+        if svg_rendered is None:
+            record_render_failure_fn(
+                "non_composite_plain_framed_panel_render_failed",
+                svg_content=svg_content,
+                params_snapshot=params,
+            )
+            return None
+        svg_err = calculate_error_fn(perc_img, svg_rendered)
         write_validation_log_fn(
             [
                 "status=non_composite_plain_framed_panel",
