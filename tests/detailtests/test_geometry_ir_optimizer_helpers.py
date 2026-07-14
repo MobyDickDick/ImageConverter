@@ -237,6 +237,7 @@ def test_default_optimizer_refines_rect_to_femtofine_warm_light_fill() -> None:
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
 
+
 def test_default_optimizer_refines_rect_to_picofine_warm_light_fill() -> None:
     ir = [
         {
@@ -764,7 +765,6 @@ def test_default_optimizer_refines_polygon_path_points_with_half_yoctofine_subpi
     assert result["steps"][0]["accepted"] is True
 
 
-
 def test_default_optimizer_refines_polygon_path_points_with_quarter_yoctofine_subpixel_probe() -> (
     None
 ):
@@ -823,7 +823,6 @@ def test_default_optimizer_refines_polygon_path_points_with_sixteenth_yoctofine_
     assert result["steps"][0]["accepted"] is True
 
 
-
 def test_default_optimizer_refines_polygon_path_points_with_thirtysecond_yoctofine_subpixel_probe() -> (
     None
 ):
@@ -851,6 +850,7 @@ def test_default_optimizer_refines_polygon_path_points_with_thirtysecond_yoctofi
     assert result["geometry_ir"][0]["points"][2][0] == pytest.approx(0.4800006103515625)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
+
 
 def test_default_optimizer_refines_polygon_path_stroke_width_with_yoctofine_absolute_probe() -> (
     None
@@ -1117,9 +1117,7 @@ def test_default_optimizer_refines_polygon_path_stroke_width_with_ultrafine_abso
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
         error_fn=lambda candidate_ir: (
-            0.0
-            if candidate_ir[0]["stroke_width"] == pytest.approx(0.02525)
-            else 10.0
+            0.0 if candidate_ir[0]["stroke_width"] == pytest.approx(0.02525) else 10.0
         ),
     )
 
@@ -1146,9 +1144,7 @@ def test_default_optimizer_refines_polygon_path_stroke_width_with_microfine_abso
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
         error_fn=lambda candidate_ir: (
-            0.0
-            if candidate_ir[0]["stroke_width"] == pytest.approx(0.024625)
-            else 10.0
+            0.0 if candidate_ir[0]["stroke_width"] == pytest.approx(0.024625) else 10.0
         ),
     )
 
@@ -1175,9 +1171,7 @@ def test_default_optimizer_refines_polygon_path_stroke_width_with_nanofine_absol
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
         error_fn=lambda candidate_ir: (
-            0.0
-            if candidate_ir[0]["stroke_width"] == pytest.approx(0.0243125)
-            else 10.0
+            0.0 if candidate_ir[0]["stroke_width"] == pytest.approx(0.0243125) else 10.0
         ),
     )
 
@@ -1304,6 +1298,7 @@ def test_default_optimizer_refines_polygon_path_stroke_width_with_zeptofine_abso
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
 
+
 def test_default_optimizer_refines_rule_stroke_width_with_microfine_absolute_probe() -> (
     None
 ):
@@ -1321,9 +1316,7 @@ def test_default_optimizer_refines_rule_stroke_width_with_microfine_absolute_pro
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
         error_fn=lambda candidate_ir: (
-            0.0
-            if candidate_ir[0]["stroke_width"] == pytest.approx(0.055625)
-            else 10.0
+            0.0 if candidate_ir[0]["stroke_width"] == pytest.approx(0.055625) else 10.0
         ),
     )
 
@@ -1349,9 +1342,7 @@ def test_default_optimizer_refines_rule_stroke_width_with_nanofine_absolute_prob
         ir,
         render_fn=lambda candidate_ir: candidate_ir,
         error_fn=lambda candidate_ir: (
-            0.0
-            if candidate_ir[0]["stroke_width"] == pytest.approx(0.0553125)
-            else 10.0
+            0.0 if candidate_ir[0]["stroke_width"] == pytest.approx(0.0553125) else 10.0
         ),
     )
 
@@ -1388,7 +1379,6 @@ def test_default_optimizer_refines_rule_stroke_width_with_picofine_absolute_prob
     assert result["steps"][0]["accepted"] is True
 
 
-
 def test_default_optimizer_refines_polygon_path_stroke_width_with_thirtysecond_yoctofine_absolute_probe() -> (
     None
 ):
@@ -1416,6 +1406,7 @@ def test_default_optimizer_refines_polygon_path_stroke_width_with_thirtysecond_y
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.0240006103515625)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
+
 
 def test_default_optimizer_refines_rect_border_stroke_width_with_half_yoctofine_absolute_probe() -> (
     None
@@ -1471,6 +1462,7 @@ def test_default_optimizer_refines_rule_stroke_width_with_half_yoctofine_absolut
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.05500244140625)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
+
 
 def test_default_optimizer_refines_polygon_path_linecap_and_linejoin() -> None:
     ir = [
@@ -2343,6 +2335,7 @@ def test_default_optimizer_refines_rect_border_stroke_opacity_with_subfine_probe
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
 
+
 def test_default_optimizer_refines_vertical_rule_stroke_width_with_fine_probe() -> None:
     ir = [
         {
@@ -2438,6 +2431,7 @@ def test_default_optimizer_refines_rect_border_bbox_with_subpixel_probe() -> Non
     assert result["geometry_ir"][0]["bbox"][2] == pytest.approx(0.3025)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
+
 
 def test_default_optimizer_refines_vertical_rule_stroke_width_with_subfine_probe() -> (
     None
@@ -2542,6 +2536,7 @@ def test_default_optimizer_refines_horizontal_rule_stroke_width_with_ultrafine_p
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
 
+
 def test_default_optimizer_refines_color_patch_opacity_with_ultrafine_probe() -> None:
     ir = [
         {
@@ -2568,7 +2563,9 @@ def test_default_optimizer_refines_color_patch_opacity_with_ultrafine_probe() ->
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_opacity_with_ultrafine_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_ultrafine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -2595,7 +2592,9 @@ def test_default_optimizer_refines_rect_border_stroke_opacity_with_ultrafine_pro
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_color_patch_bbox_with_ultrafine_subpixel_probe() -> None:
+def test_default_optimizer_refines_color_patch_bbox_with_ultrafine_subpixel_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "ColorPatch",
@@ -2618,7 +2617,9 @@ def test_default_optimizer_refines_color_patch_bbox_with_ultrafine_subpixel_prob
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_bbox_with_ultrafine_subpixel_probe() -> None:
+def test_default_optimizer_refines_rect_border_bbox_with_ultrafine_subpixel_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -2642,7 +2643,9 @@ def test_default_optimizer_refines_rect_border_bbox_with_ultrafine_subpixel_prob
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_color_patch_bbox_with_picofine_subpixel_probe() -> None:
+def test_default_optimizer_refines_color_patch_bbox_with_picofine_subpixel_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "ColorPatch",
@@ -2665,7 +2668,9 @@ def test_default_optimizer_refines_color_patch_bbox_with_picofine_subpixel_probe
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_bbox_with_picofine_subpixel_probe() -> None:
+def test_default_optimizer_refines_rect_border_bbox_with_picofine_subpixel_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -2715,7 +2720,9 @@ def test_default_optimizer_refines_color_patch_opacity_with_microfine_probe() ->
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_opacity_with_microfine_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_microfine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -2768,7 +2775,9 @@ def test_default_optimizer_refines_color_patch_opacity_with_nanofine_probe() -> 
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_opacity_with_nanofine_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_nanofine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -2821,7 +2830,9 @@ def test_default_optimizer_refines_color_patch_opacity_with_picofine_probe() -> 
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_opacity_with_picofine_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_picofine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -2848,7 +2859,9 @@ def test_default_optimizer_refines_rect_border_stroke_opacity_with_picofine_prob
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_width_with_attofine_absolute_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_width_with_attofine_absolute_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -2874,7 +2887,9 @@ def test_default_optimizer_refines_rect_border_stroke_width_with_attofine_absolu
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rule_stroke_width_with_attofine_absolute_probe() -> None:
+def test_default_optimizer_refines_rule_stroke_width_with_attofine_absolute_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "VerticalRule",
@@ -2926,7 +2941,9 @@ def test_default_optimizer_refines_color_patch_opacity_with_femtofine_probe() ->
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_opacity_with_femtofine_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_femtofine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -2953,7 +2970,9 @@ def test_default_optimizer_refines_rect_border_stroke_opacity_with_femtofine_pro
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_width_with_zeptofine_absolute_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_width_with_zeptofine_absolute_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -2979,7 +2998,9 @@ def test_default_optimizer_refines_rect_border_stroke_width_with_zeptofine_absol
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rule_stroke_width_with_zeptofine_absolute_probe() -> None:
+def test_default_optimizer_refines_rule_stroke_width_with_zeptofine_absolute_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "HorizontalRule",
@@ -3031,7 +3052,9 @@ def test_default_optimizer_refines_color_patch_opacity_with_attofine_probe() -> 
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_opacity_with_attofine_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_attofine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -3058,7 +3081,9 @@ def test_default_optimizer_refines_rect_border_stroke_opacity_with_attofine_prob
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_width_with_yoctofine_absolute_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_width_with_yoctofine_absolute_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -3084,7 +3109,9 @@ def test_default_optimizer_refines_rect_border_stroke_width_with_yoctofine_absol
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rule_stroke_width_with_yoctofine_absolute_probe() -> None:
+def test_default_optimizer_refines_rule_stroke_width_with_yoctofine_absolute_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "HorizontalRule",
@@ -3110,7 +3137,9 @@ def test_default_optimizer_refines_rule_stroke_width_with_yoctofine_absolute_pro
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_width_with_half_yoctofine_absolute_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_width_with_half_yoctofine_absolute_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -3136,7 +3165,9 @@ def test_default_optimizer_refines_rect_border_stroke_width_with_half_yoctofine_
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rule_stroke_width_with_half_yoctofine_absolute_probe() -> None:
+def test_default_optimizer_refines_rule_stroke_width_with_half_yoctofine_absolute_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "HorizontalRule",
@@ -3188,7 +3219,9 @@ def test_default_optimizer_refines_color_patch_opacity_with_zeptofine_probe() ->
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_opacity_with_zeptofine_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_zeptofine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -3241,7 +3274,9 @@ def test_default_optimizer_refines_color_patch_opacity_with_yoctofine_probe() ->
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_opacity_with_yoctofine_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_yoctofine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -3267,8 +3302,9 @@ def test_default_optimizer_refines_rect_border_stroke_opacity_with_yoctofine_pro
     assert result["steps"][0]["accepted"] is True
 
 
-
-def test_default_optimizer_refines_color_patch_opacity_with_half_yoctofine_probe() -> None:
+def test_default_optimizer_refines_color_patch_opacity_with_half_yoctofine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "ColorPatch",
@@ -3294,7 +3330,9 @@ def test_default_optimizer_refines_color_patch_opacity_with_half_yoctofine_probe
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_opacity_with_half_yoctofine_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_half_yoctofine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -3319,6 +3357,7 @@ def test_default_optimizer_refines_rect_border_stroke_opacity_with_half_yoctofin
     assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(0.9828369140625)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
+
 
 def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_half_yoctofine_probe() -> (
     None
@@ -3429,7 +3468,6 @@ def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_qua
     assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
-
 
 
 def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_sixteenth_yoctofine_probe() -> (
@@ -3543,7 +3581,9 @@ def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_six
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_width_with_quarter_yoctofine_absolute_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_width_with_quarter_yoctofine_absolute_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -3569,7 +3609,9 @@ def test_default_optimizer_refines_rect_border_stroke_width_with_quarter_yoctofi
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rule_stroke_width_with_quarter_yoctofine_absolute_probe() -> None:
+def test_default_optimizer_refines_rule_stroke_width_with_quarter_yoctofine_absolute_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "HorizontalRule",
@@ -3595,7 +3637,9 @@ def test_default_optimizer_refines_rule_stroke_width_with_quarter_yoctofine_abso
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_color_patch_opacity_with_quarter_yoctofine_probe() -> None:
+def test_default_optimizer_refines_color_patch_opacity_with_quarter_yoctofine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "ColorPatch",
@@ -3621,7 +3665,9 @@ def test_default_optimizer_refines_color_patch_opacity_with_quarter_yoctofine_pr
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_opacity_with_quarter_yoctofine_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_quarter_yoctofine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -3648,7 +3694,9 @@ def test_default_optimizer_refines_rect_border_stroke_opacity_with_quarter_yocto
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_color_patch_opacity_with_eighth_yoctofine_probe() -> None:
+def test_default_optimizer_refines_color_patch_opacity_with_eighth_yoctofine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "ColorPatch",
@@ -3674,7 +3722,9 @@ def test_default_optimizer_refines_color_patch_opacity_with_eighth_yoctofine_pro
     assert result["steps"][0]["accepted"] is True
 
 
-def test_default_optimizer_refines_rect_border_stroke_opacity_with_eighth_yoctofine_probe() -> None:
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_eighth_yoctofine_probe() -> (
+    None
+):
     ir = [
         {
             "kind": "RectBorder",
@@ -3696,7 +3746,9 @@ def test_default_optimizer_refines_rect_border_stroke_opacity_with_eighth_yoctof
         ),
     )
 
-    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(0.982818603515625)
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.982818603515625
+    )
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
 
@@ -3753,5 +3805,65 @@ def test_default_optimizer_refines_rule_stroke_width_with_quarter_yoctofine_abso
     )
 
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.055001220703125)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_sixteenth_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_sixteenth_yoctofine_fill",
+            "bbox": [0.10, 0.15, 0.80, 0.70],
+            "fill": "#e8e8e8",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0].get("fill_opacity") == pytest.approx(0.9828094482421875)
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(0.9828094482421875)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_sixteenth_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_sixteenth_yoctofine_outline",
+            "bbox": [0.10, 0.15, 0.80, 0.70],
+            "stroke": "#d0d0d0",
+            "stroke_width": 0.02,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0].get("stroke_opacity")
+            == pytest.approx(0.9828155517578125)
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828155517578125
+    )
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
