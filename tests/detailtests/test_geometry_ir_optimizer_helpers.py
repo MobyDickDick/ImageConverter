@@ -3891,3 +3891,100 @@ def test_default_optimizer_refines_rect_border_stroke_opacity_with_sixteenth_yoc
     )
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_thirtysecond_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_thirtysecond_yoctofine_fill",
+            "bbox": [0.10, 0.15, 0.80, 0.70],
+            "fill": "#e8e8e8",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0].get("fill_opacity") == pytest.approx(0.98281097412109375)
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(0.98281097412109375)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_thirtysecond_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_thirtysecond_yoctofine_outline",
+            "bbox": [0.10, 0.15, 0.80, 0.70],
+            "stroke": "#d0d0d0",
+            "stroke_width": 0.02,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0].get("stroke_opacity")
+            == pytest.approx(0.98281402587890625)
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.98281402587890625
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_128th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "gradient-checkmark-128th-yoctofine",
+            "points": [[0.20, 0.50], [0.50, 0.70], [0.80, 0.10]],
+            "fill": "none",
+            "stroke": "#3c9f44",
+            "stroke_width": 0.08,
+            "stroke_gradient": {
+                "id": "green-gradient",
+                "stops": [
+                    {"offset": "0%", "color": "#176f28"},
+                    {"offset": "50.00003814697265625%", "color": "#43ad49"},
+                    {"offset": "100%", "color": "#c8d0c3"},
+                ],
+            },
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
