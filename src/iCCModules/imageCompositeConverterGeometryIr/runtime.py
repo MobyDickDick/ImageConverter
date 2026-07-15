@@ -452,8 +452,11 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     main_diagonal_mirrored_compressor_hint = rightward_compressor_hint and _has_any(
         desc, ("hauptdiagonal gespiegelt", "diagonal gespiegelt", "gespiegelt")
     )
-    two_way_vertical_valve_hint = _has_any(desc, ("2-weg ventil", "2 weg ventil")) and _has_any(
-        desc, ("kelle mit kreis", "horizontale verbindungslinie", "zwei spitze dreiecke")
+    two_way_vertical_valve_hint = _has_any(desc, ("2-weg ventil", "2 weg ventil", "zweiwegventil", "zwei weg ventil")) and _has_any(
+        desc, ("kelle mit kreis", "horizontale verbindungslinie", "zwei spitze dreiecke", "motorensymbol", "motor symbol")
+    )
+    top_two_way_valve_hint = two_way_vertical_valve_hint and _has_any(
+        desc, ("motorensymbol", "motor symbol", "kreis oben", "griff nach unten", "senkrechtem griff")
     )
     left_rotated_two_way_valve_hint = two_way_vertical_valve_hint and _has_any(
         desc, ("90° nach links", "90° links", "90 grad nach links", "nach links gedreht")
@@ -1001,6 +1004,33 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         return elements
 
     if two_way_vertical_valve_hint:
+        if top_two_way_valve_hint and not (rotated_180_two_way_valve_hint or left_rotated_two_way_valve_hint):
+            elements.append(
+                {
+                    "kind": "TopTwoWayValveMotorGlyph",
+                    "id": "top_two_way_valve_motor",
+                    "body_path": [[0.107, 0.640], [0.107, 0.955], [0.500, 0.797], [0.893, 0.955], [0.893, 0.640], [0.500, 0.797]],
+                    "circle": [0.500, 0.280, 0.270],
+                    "connector": [[0.500, 0.473], [0.500, 0.813]],
+                    "label": "",
+                    "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                    "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                    "stroke": "#858585",
+                    "connector_stroke": "#858585",
+                    "text_fill": "#666666",
+                    "stroke_width": 0.036,
+                    "connector_width": 0.072,
+                    "font_size": 0.0,
+                    "font_weight": "700",
+                }
+            )
+            _annotate_two_way_valve_element(
+                elements[-1],
+                label="",
+                orientation="top",
+                rotation_deg=90,
+            )
+            return elements
         if rotated_180_two_way_valve_hint:
             elements.append(
                 {
@@ -1765,6 +1795,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
         "VerticalTwoWayValveMotorGlyph",
         "LeftRotatedTwoWayValveMotorGlyph",
         "Rotated180TwoWayValveMotorGlyph",
+        "TopTwoWayValveMotorGlyph",
         "TopKelleThreeWayValveGlyph",
         "LeftRotatedTopKelleThreeWayValveGlyph",
         "RightRotatedTopKelleThreeWayValveGlyph",

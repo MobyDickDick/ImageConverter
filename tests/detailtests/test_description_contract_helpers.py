@@ -395,6 +395,18 @@ def test_description_parser_attaches_geometry_ir_for_ac0212_vertical_two_way_val
     assert [element["kind"] for element in params["geometry_ir"]] == ["VerticalTwoWayValveMotorGlyph"]
 
 
+def test_description_parser_attaches_geometry_ir_for_compact_zweiwegventil_motorensymbol() -> None:
+    _desc, params = _parse(
+        "Zweiwegventil mit Motorensymbol: Kreis oben mit senkrechtem Griff nach unten, "
+        "zwei spitze Dreiecke berühren sich in der Mitte."
+    )
+
+    assert params["contract_status"] == "ok"
+    element = params["geometry_ir"][0]
+    assert element["kind"] == "TopTwoWayValveMotorGlyph"
+    assert element["primitive_decomposition"]["orientation"] == "top"
+    assert element["label"] == ""
+
 def test_description_parser_decomposes_neutral_two_way_valve_without_catalog_id() -> None:
     _desc, params = _parse(
         '2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '

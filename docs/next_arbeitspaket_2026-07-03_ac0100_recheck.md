@@ -36,3 +36,20 @@ und Rasterbild.
   → Exit `0`, `AC0010` erfolgreich konvertiert
 - `timeout 120 env PYTHONPATH=vendor/linux-py310/site-packages:. python -m src.imageCompositeConverter artifacts/images_to_convert --descriptions-path artifacts/descriptions/Finale_Wurzelformen_V3.xml --output-dir /tmp/icctest2 --start AC0100 --end AC0100 --deterministic-order`
   → Exit `0`, `AC0100_L/M/S` erfolgreich konvertiert
+
+## Nachtrag 2026-07-13
+
+Beim erneuten Abarbeiten des Pakets fiel auf, dass der allgemeine gerahmte
+Gradient-Panel-Fallback strukturelle Heizelement-Beschreibungen mit
+Plus-/Minus-Glyphen und Diagonale zu früh übernehmen konnte. Dadurch wurde der
+algorithmische Geometry-/Symbolpfad für kompakte AC0100-Varianten nicht mehr
+zuverlässig erreicht; in einem reproduzierbaren Lauf endete dieser Pfad sogar
+mit einem `UnboundLocalError`, weil der frühe Panel-Zweig kein gerendertes SVG
+für die spätere Qualitätsberechnung initialisierte.
+
+Die Korrektur bleibt allgemein: Beschreibungen mit strukturellen Symbolen
+(`Plus`, `Minus`, Diagonalen/Andreaskreuz) werden nicht mehr vom simplen
+Panel-Fallback abgefangen, sondern laufen weiter in den vorhandenen
+beschreibungs- und rastergetriebenen Symbol-/Geometry-IR-Pfad. Falls der
+Panel-Fallback für echte einfache Panels greift, rendert und bewertet er sein
+SVG nun unmittelbar, bevor die gemeinsame Artefakt-/Qualitätslogik weiterläuft.

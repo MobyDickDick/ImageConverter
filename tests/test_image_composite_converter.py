@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 import src.imageCompositeConverter as image_composite_converter
+from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
 from src.iCCModules.imageCompositeConverterGeometryIr import runtime as geometry_ir_helpers
 from src.imageCompositeConverter import Action, _clip
 
@@ -49,6 +50,24 @@ def test_vendored_site_packages_dirs_prefers_linux_vendor_on_linux(monkeypatch: 
     dirs = image_composite_converter._vendored_site_packages_dirs()
 
     assert dirs.index(vendor_dir) < dirs.index(venv_dir)
+
+
+def test_activate_vendored_site_packages_prepends_repo_bundles(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """Eager converter imports should see vendored packages before submodule imports run."""
+    first_vendor = tmp_path / "vendor" / "linux-py310" / "site-packages"
+    second_vendor = tmp_path / ".venv" / "lib" / "python3.10" / "site-packages"
+    first_vendor.mkdir(parents=True)
+    second_vendor.mkdir(parents=True)
+    original_sys_path = list(sys.path)
+    monkeypatch.setattr(sys, "path", ["existing-entry", str(second_vendor), *original_sys_path])
+
+    activated = dependency_helpers.activate_vendored_site_packages(
+        vendored_dirs_fn=lambda: [first_vendor, second_vendor]
+    )
+
+    assert activated == [first_vendor, second_vendor]
+    assert sys.path[:2] == [str(first_vendor), str(second_vendor)]
+    assert sys.path.count(str(second_vendor)) == 1
 
 
 def test_load_optional_module_recovers_after_failed_partial_package(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
