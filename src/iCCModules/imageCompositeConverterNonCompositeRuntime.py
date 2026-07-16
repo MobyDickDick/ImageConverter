@@ -775,6 +775,36 @@ def _fit_symbol_element_by_element(
     current["plus_width"] = float(current["plus_width"]) if has_plus else 0.0
     current["minus_width"] = 1.0 if has_minus else 0.0
     current["center_dot_radius"] = max(1.0, min(width, height) * 0.12) if has_center_dot else 0.0
+    heat_exchanger_contract = (
+        "heizelement" in description_text
+        and "farbverlauf" in description_text
+        and "diagon" in description_text
+        and has_plus
+        and has_minus
+    )
+    if heat_exchanger_contract:
+        # Stabilize the reusable heat-exchanger search around raster-visible
+        # primitives instead of letting the greedy pass drift to bright gradient
+        # highlights for the top-left glyphs.  These are neutral algorithm seeds:
+        # every value remains inside the subsequent candidate search and can be
+        # moved by pixel-error evaluation for differently sized inputs.
+        current.update(
+            {
+                "rect_x_inset_ratio": min(float(current["rect_x_inset_ratio"]), 0.02),
+                "rect_y_inset_ratio": min(float(current["rect_y_inset_ratio"]), 0.02),
+                "diag1_width": max(float(current["diag1_width"]), 2.8),
+                "diagonal_inset_ratio": max(float(current["diagonal_inset_ratio"]), 0.04),
+                "plus_x_ratio": min(max(float(current["plus_x_ratio"]), 0.30), 0.36),
+                "glyph_y_ratio": min(max(float(current["glyph_y_ratio"]), 0.12), 0.18),
+                "plus_half_ratio": min(max(float(current["plus_half_ratio"]), 0.10), 0.14),
+                "minus_gap_ratio": 2.1,
+                "minus_width": 0.8,
+                "glyph_gray": 130.0,
+                "diag_gray": 145.0,
+                "border_gray": 154.0,
+                "gradient_mid": "#f5f5f5",
+            }
+        )
     if glyph_is_top and float(current["glyph_y_ratio"]) > 0.30:
         # A bright gradient highlight can otherwise be mistaken for the glyph.
         # Keep the raster-derived x/size estimates, but restore the semantic
@@ -1535,25 +1565,45 @@ def runNonCompositeIterationImpl(
             )
             best_pixel_candidate = min(candidates, key=lambda candidate: float(candidate["error"]))
             if semantic_description_candidate is not None:
-                semantic_error = float(semantic_description_candidate["error"])
-                pixel_error = float(best_pixel_candidate["error"])
-                if (
-                    best_pixel_candidate is not semantic_description_candidate
-                    and _is_description_heat_exchanger_geometry(list(semantic_description_candidate.get("geometry_ir", [])))
-                    and pixel_error * 2.0 < semantic_error
-                ):
-                    # Direct canonical heat-exchanger descriptions may still yield
-                    # to a much better generated algorithmic fit.  The same rule
-                    # applies to reference-derived size variants ("Wie
-                    # <reference> ..."): they must reuse the heat-exchanger
-                    # algorithm, but must not force a poorer registered
-                    # Geometry-IR candidate when the raster-derived element-wise
-                    # algorithm fits substantially better.
-                    best_geometry_candidate = best_pixel_candidate
-                    selection_reason = "raster_fit_overrides_poor_description_geometry"
+                semantic_layout_warnings = geometry_ir_helpers.validateGeometryIrGlyphLayoutImpl(
+                    width,
+                    height,
+                    list(semantic_description_candidate.get("geometry_ir", [])),
+                )
+                elementwise_heat_exchanger_candidate = next(
+                    (
+                        candidate
+                        for candidate in candidates
+                        if candidate["status"] == "non_composite_elementwise_symbol_fit"
+                        and _is_description_heat_exchanger_geometry(
+                            list(semantic_description_candidate.get("geometry_ir", []))
+                        )
+                    ),
+                    None,
+                )
+                if elementwise_heat_exchanger_candidate is not None and semantic_layout_warnings:
+                    best_geometry_candidate = elementwise_heat_exchanger_candidate
+                    selection_reason = "raster_fit_overrides_invalid_description_geometry_layout"
                 else:
-                    best_geometry_candidate = semantic_description_candidate
-                    selection_reason = "semantic_description_geometry"
+                    semantic_error = float(semantic_description_candidate["error"])
+                    pixel_error = float(best_pixel_candidate["error"])
+                    if (
+                        best_pixel_candidate is not semantic_description_candidate
+                        and _is_description_heat_exchanger_geometry(list(semantic_description_candidate.get("geometry_ir", [])))
+                        and pixel_error * 2.0 < semantic_error
+                    ):
+                        # Direct canonical heat-exchanger descriptions may still yield
+                        # to a much better generated algorithmic fit.  The same rule
+                        # applies to reference-derived size variants ("Wie
+                        # <reference> ..."): they must reuse the heat-exchanger
+                        # algorithm, but must not force a poorer registered
+                        # Geometry-IR candidate when the raster-derived element-wise
+                        # algorithm fits substantially better.
+                        best_geometry_candidate = best_pixel_candidate
+                        selection_reason = "raster_fit_overrides_poor_description_geometry"
+                    else:
+                        best_geometry_candidate = semantic_description_candidate
+                        selection_reason = "semantic_description_geometry"
             else:
                 best_geometry_candidate = best_pixel_candidate
                 selection_reason = "best_pixel_error"
