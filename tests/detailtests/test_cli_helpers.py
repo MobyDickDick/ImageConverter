@@ -215,6 +215,102 @@ def test_run_main_impl_prints_vendor_command_and_exits() -> None:
     assert "pip install x" in stdout.getvalue()
 
 
+def test_run_main_impl_convert_mode_rejects_missing_semantic_description() -> None:
+    args = argparse.Namespace(
+        _render_svg_subprocess=False,
+        isolate_svg_render=False,
+        isolate_svg_render_timeout_sec=3.0,
+        log_file="",
+        ac08_regression_set=False,
+        print_linux_vendor_command=False,
+        vendor_dir="vendor",
+        vendor_platform="manylinux",
+        vendor_python_version="310",
+        interactive_range=False,
+        start="AC0001",
+        end="AC0001",
+        mode="convert",
+        bootstrap_deps=False,
+        folder_path="images",
+        iterations=1,
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        deterministic_order=False,
+    )
+    stdout = io.StringIO()
+
+    with contextlib.redirect_stdout(stdout):
+        rc = cli_helpers.runMainImpl(
+            args,
+            run_svg_render_subprocess_entrypoint_fn=lambda: 11,
+            set_svg_render_subprocess_enabled_fn=lambda _enabled: None,
+            set_svg_render_subprocess_timeout_fn=lambda _timeout: None,
+            optional_log_capture_fn=contextlib.nullcontext,
+            build_linux_vendor_install_command_fn=lambda **_kwargs: ["pip"],
+            prompt_interactive_range_fn=lambda _args: ("AC0001", "AC0001"),
+            resolve_cli_csv_and_output_fn=lambda _args: ("", None),
+            load_description_mapping_fn=lambda _path: (_ for _ in ()).throw(AssertionError("must not load")),
+            bootstrap_required_image_dependencies_fn=lambda: [],
+            analyze_range_fn=lambda *_args, **_kwargs: "annotated",
+            convert_range_fn=lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("must not convert")),
+            format_user_diagnostic_fn=lambda exc: str(exc),
+            description_mapping_error_type=RuntimeError,
+            ac08_regression_set_name="ac08-set",
+            ac08_regression_variants=("AC0800_L",),
+        )
+
+    assert rc == 2
+    assert "Input-Contract v1 verletzt" in stdout.getvalue()
+    assert "semantic_description fehlt" in stdout.getvalue()
+
+
+def test_run_main_impl_convert_mode_rejects_missing_semantic_description_file() -> None:
+    args = argparse.Namespace(
+        _render_svg_subprocess=False,
+        isolate_svg_render=False,
+        isolate_svg_render_timeout_sec=3.0,
+        log_file="",
+        ac08_regression_set=False,
+        print_linux_vendor_command=False,
+        vendor_dir="vendor",
+        vendor_platform="manylinux",
+        vendor_python_version="310",
+        interactive_range=False,
+        start="AC0001",
+        end="AC0001",
+        mode="convert",
+        bootstrap_deps=False,
+        folder_path="images",
+        iterations=1,
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        deterministic_order=False,
+    )
+    stdout = io.StringIO()
+
+    with contextlib.redirect_stdout(stdout), mock.patch("os.path.exists", return_value=False):
+        rc = cli_helpers.runMainImpl(
+            args,
+            run_svg_render_subprocess_entrypoint_fn=lambda: 11,
+            set_svg_render_subprocess_enabled_fn=lambda _enabled: None,
+            set_svg_render_subprocess_timeout_fn=lambda _timeout: None,
+            optional_log_capture_fn=contextlib.nullcontext,
+            build_linux_vendor_install_command_fn=lambda **_kwargs: ["pip"],
+            prompt_interactive_range_fn=lambda _args: ("AC0001", "AC0001"),
+            resolve_cli_csv_and_output_fn=lambda _args: ("missing.xml", None),
+            load_description_mapping_fn=lambda _path: (_ for _ in ()).throw(AssertionError("must not load")),
+            bootstrap_required_image_dependencies_fn=lambda: [],
+            analyze_range_fn=lambda *_args, **_kwargs: "annotated",
+            convert_range_fn=lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("must not convert")),
+            format_user_diagnostic_fn=lambda exc: str(exc),
+            description_mapping_error_type=RuntimeError,
+            ac08_regression_set_name="ac08-set",
+            ac08_regression_variants=("AC0800_L",),
+        )
+
+    assert rc == 2
+    assert "semantic_description-Datei nicht gefunden: missing.xml" in stdout.getvalue()
+
 def test_run_main_impl_convert_mode_invokes_convert_with_selected_variants() -> None:
     args = argparse.Namespace(
         _render_svg_subprocess=False,
@@ -469,6 +565,7 @@ def test_run_main_impl_convert_mode_warns_but_returns_0_when_batch_failures_exis
     stdout = io.StringIO()
     with (
         mock.patch("src.iCCModules.imageCompositeConverterCli._hasBatchFailures", return_value=True),
+        mock.patch("os.path.exists", return_value=True),
         contextlib.redirect_stdout(stdout),
     ):
         rc = cli_helpers.runMainImpl(
@@ -521,6 +618,7 @@ def test_run_main_impl_convert_mode_returns_1_when_strict_batch_failures_enabled
     stdout = io.StringIO()
     with (
         mock.patch("src.iCCModules.imageCompositeConverterCli._hasBatchFailures", return_value=True),
+        mock.patch("os.path.exists", return_value=True),
         contextlib.redirect_stdout(stdout),
     ):
         rc = cli_helpers.runMainImpl(

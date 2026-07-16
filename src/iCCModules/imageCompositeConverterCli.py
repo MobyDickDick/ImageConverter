@@ -547,11 +547,19 @@ def runMainImpl(
                 print(f"\nAbgeschlossen! Ausgaben unter: {target_output_root}")
                 return 0
 
-            if not csv_path:
-                print("[WARN] Keine CSV/TSV/XML angegeben oder gefunden. Einige Symbole können ohne Beschreibung übersprungen werden.")
-            elif not os.path.exists(csv_path):
-                print(f"[WARN] CSV/TSV/XML-Datei nicht gefunden: {csv_path}")
-            elif args.mode == "convert":
+            if args.mode == "convert" and not str(args.folder_path or "").strip():
+                print("[ERROR] Input-Contract v1 verletzt: image_path/input-dir fehlt.")
+                return 2
+            if args.mode == "convert" and not csv_path:
+                print(
+                    "[ERROR] Input-Contract v1 verletzt: semantic_description fehlt "
+                    "(--descriptions-path/--csv-path oder automatisch erkannte Beschreibungstabelle erforderlich)."
+                )
+                return 2
+            if args.mode == "convert" and not os.path.exists(csv_path):
+                print(f"[ERROR] Input-Contract v1 verletzt: semantic_description-Datei nicht gefunden: {csv_path}")
+                return 2
+            if csv_path and args.mode == "convert":
                 load_description_mapping_fn(csv_path)
 
             if args.bootstrap_deps:
