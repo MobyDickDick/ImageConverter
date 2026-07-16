@@ -4393,3 +4393,59 @@ def test_default_optimizer_refines_rule_stroke_width_with_256th_yoctofine_absolu
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.0550000762939453125)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_width_with_512th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "square_badge_head_512th_yoctofine",
+            "bbox": [0.22, 0.08, 0.56, 0.44],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.05500003814697265625) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.05500003814697265625)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rule_stroke_width_with_512th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "VerticalRule",
+            "id": "square_badge_stem_512th_yoctofine",
+            "bbox": [0.48, 0.22, 0.08, 0.56],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.05499996185302735) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.05499996185302735)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
