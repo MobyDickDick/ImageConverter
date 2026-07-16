@@ -2354,9 +2354,16 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 
 ## Neue Leitaufgaben aus Zielabgleich 2026-05-15 (JPEG + sprachliche Beschreibung)
 
-- [ ] **ZG1 (P0): Input-Contract v1 verbindlich machen**
+- [x] **ZG1 (P0): Input-Contract v1 verbindlich machen**
   - Pflichtinput: `image_path` (JPEG) + `semantic_description` (V5-JSON oder Adapter aus XML).
   - Akzeptanz: Lauf bricht mit klarer Fehlermeldung ab, wenn eines der beiden Felder fehlt.
+  - Umsetzung: Der Konvertierungs-CLI-Pfad erzwingt den Input-Contract v1 jetzt
+    vor dem Laden der Beschreibung und vor `convertRange`: ein leerer
+    Bildordnerpfad, fehlender `--descriptions-path`/`--csv-path` beziehungsweise
+    eine nicht vorhandene Beschreibungstabelle beendet den Lauf mit Exitcode `2`
+    und einer expliziten `Input-Contract v1 verletzt`-Meldung. Detailtests
+    sichern sowohl fehlende als auch nicht auffindbare `semantic_description`
+    ab; Analyse-/Annotate-Pfade bleiben davon unberührt.
 
 - [ ] **ZG2 (P0): Bildspezifische Logik aus Hauptpfad entfernen**
   - Inventur aller dateiname-/familienabhängigen Heuristiken, danach Migration auf beschreibungsgetriebete Regeln.
