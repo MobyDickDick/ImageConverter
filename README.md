@@ -231,3 +231,18 @@ python tools/run_pytest_profile.py core-green
 python tools/run_pytest_profile.py extended tests/test_image_composite_converter.py -k ac08
 python tools/run_pytest_profile.py research
 ```
+
+### Sample-SVGs mit Bestenlisten-Snapshots vergleichen
+
+Die Dateien unter `artifacts/images_to_convert/samples` sind Referenz- bzw. Plan-B-Vorlagen, während `artifacts/converted_images/reports/conversion_bestlist_snapshots` die jeweils akzeptierten Konvertierungsartefakte enthält. Diese Snapshots können deshalb stark abweichen: sie stammen aus semantischen Generatoren, optimierten Qualitätsläufen, restaurierten früheren Bestwerten oder nur in geloggten Plan-B-Fällen direkt aus einem Sample.
+
+Zur Prüfung der Herkunft und der strukturellen Unterschiede kann ein CSV-Audit erzeugt werden:
+
+```bash
+python tools/compare_sample_bestlist_svgs.py \
+  --samples-dir artifacts/images_to_convert/samples \
+  --snapshot-dir artifacts/converted_images/reports/conversion_bestlist_snapshots \
+  --output artifacts/converted_images/reports/sample_bestlist_svg_comparison.csv
+```
+
+Der Report enthält pro Variante u. a. Byte-Grössen, Elementanzahl, `<image>`-Tags, den geloggten Validierungsstatus und eine kurze Erklärung, warum Sample und Bestenlisten-SVG identisch sind oder voneinander abweichen.
