@@ -13,11 +13,14 @@ def test_exact_same_family_range_does_not_match_shorter_numeric_alias() -> None:
     assert not remaining_helpers._inRequestedRange("AC0100_from_sample.jpg", "AC0100", "AC0100")
 
 
-def test_legacy_three_digit_family_filter_selects_padded_family_only() -> None:
-    """Bare AC010 is a legacy spelling for AC0010, not for the AC0100 family."""
+def test_legacy_three_digit_family_filter_selects_singleton_and_padded_size_family() -> None:
+    """Bare AC010 keeps AC0010 and also includes the AC0100 size variants."""
 
     assert remaining_helpers._inRequestedRange("AC0010.jpg", "AC010", "AC010")
-    assert not remaining_helpers._inRequestedRange("AC0100_L.jpg", "AC010", "AC010")
+    assert remaining_helpers._inRequestedRange("AC0100_L.jpg", "AC010", "AC010")
+    assert remaining_helpers._inRequestedRange("AC0100_M.jpg", "AC010", "AC010")
+    assert remaining_helpers._inRequestedRange("AC0100_S.jpg", "AC010", "AC010")
+    assert not remaining_helpers._inRequestedRange("AC0100_from_sample.jpg", "AC010", "AC010")
 
 
 def test_three_digit_size_variant_filter_selects_concrete_catalog_variant() -> None:
