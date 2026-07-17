@@ -136,8 +136,14 @@ def matchesExactPrefixFilterImpl(
         return False
     legacy_match = re.match(r"^([A-Z]{2,3})0([1-9]0)$", start_token)
     if legacy_match:
+        # Three-digit UI shorthands are ambiguous in the legacy corpus: a bare
+        # token denotes the historical singleton, while operators also use the
+        # suffixed spelling for the padded size family. Treat the bare token as
+        # a family request that includes both algorithmic sources instead of
+        # silently dropping the padded variants.
         legacy_family = f"{legacy_match.group(1)}00{legacy_match.group(2)}"
-        return stem == legacy_family
+        padded_size_family = f"{legacy_match.group(1)}{start_token[-3:]}0"
+        return stem in {legacy_family, padded_size_family}
     if re.match(r"^[A-Z]{2,3}\d{3}$", start_token):
         return stem.startswith(start_token)
     canonical_start_token = _canonical_legacy_short_family_token(start_token)
