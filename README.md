@@ -210,7 +210,8 @@ PY
 
 Wenn VS Code beim Starten mit `debugpy` einen Fehler wie `Couldn't spawn debuggee: [WinError 5] Zugriff verweigert` meldet und in der geloggten `Command line` nur der Ordner `...\.venv\Scripts` statt `...\.venv\Scripts\python.exe` auftaucht, ist meist der Python-Interpreter falsch ausgewählt.
 
-- Wähle in VS Code über `Python: Select Interpreter` explizit die Datei `.venv\Scripts\python.exe` aus — **nicht** den Ordner `.venv\Scripts`.
+- Die Workspace-Einstellung `.vscode/settings.json` zeigt für Windows direkt auf `${workspaceFolder}/.venv/Scripts/python.exe`, damit `debugpy` nicht versehentlich den Ordner `.venv\Scripts` als ausführbare Datei startet.
+- Prüfe bei bestehenden lokalen VS-Code-Profilen trotzdem über `Python: Select Interpreter`, dass explizit die Datei `.venv\Scripts\python.exe` ausgewählt ist — **nicht** der Ordner `.venv\Scripts`.
 - Verwende bevorzugt die mitgelieferte Debug-Konfiguration `ImageConverter: convert interactive range`; sie startet den Einstiegspunkt als Modul (`python -m src.imageCompositeConverter`) und setzt das Workspace-Verzeichnis korrekt.
 - Falls du lieber direkt im Terminal prüfst, funktioniert derselbe Start auch ohne Debugger mit `python -m src.imageCompositeConverter artifacts/images_to_convert --interactive-range`.
 
