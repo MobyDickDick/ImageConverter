@@ -1241,7 +1241,7 @@ def _sanitize_sample_svg(svg_content: str) -> str:
     return sanitized
 
 
-def _try_load_sample_svg(*, img_path: str, base_name: str, description: str = ""):
+def _try_load_sample_svg(*, img_path: str, base_name: str, description: str = "", image_variant_name: str | None = None):
     img_parent = Path(img_path).parent
     has_explicit_image_dir = img_parent != Path(".")
     fallback_dirs: list[str] = []
@@ -1266,7 +1266,11 @@ def _try_load_sample_svg(*, img_path: str, base_name: str, description: str = ""
         seen_dirs.add(normalized)
         samples_dirs.append(normalized)
 
-    sample_candidates = _build_sample_candidates(base_name)
+    sample_candidates = _build_sample_candidates(str(image_variant_name or base_name))
+    if image_variant_name and str(image_variant_name).upper() != str(base_name).upper():
+        sample_candidates.extend(
+            candidate for candidate in _build_sample_candidates(base_name) if candidate not in sample_candidates
+        )
     reference_family = _extract_reference_family_from_description(description)
     if reference_family and reference_family != base_name.upper():
         sample_candidates = _prepend_reference_candidates(sample_candidates, reference_family)
@@ -1313,7 +1317,12 @@ def runNonCompositeIterationImpl(
     sample_svg = (
         None
         if algorithmic_description_available
-        else _try_load_sample_svg(img_path=img_path, base_name=base_name, description=description)
+        else _try_load_sample_svg(
+            img_path=img_path,
+            base_name=base_name,
+            description=description,
+            image_variant_name=image_variant_name,
+        )
     )
 
     if mode == "manual_review":
@@ -1407,7 +1416,7 @@ def runNonCompositeIterationImpl(
                 )
             else:
                 sample_err = calculate_error_fn(perc_img, sample_rendered)
-                sample_is_exact_variant = Path(sample_svg_path).stem == str(base_name)
+                sample_is_exact_variant = Path(sample_svg_path).stem.upper() == str(image_variant_name or base_name).upper()
                 if sample_is_exact_variant or sample_err + 1e-6 < generated_err:
                     print_fn(
                         "  -> Plan B Vergleich aktiv: verwende vorhandene Sample-SVG "
