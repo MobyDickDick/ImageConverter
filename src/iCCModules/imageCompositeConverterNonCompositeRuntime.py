@@ -313,6 +313,74 @@ def _try_build_plain_framed_panel_svg(width: int, height: int, *, description: s
     )
 
 
+def _try_build_symmetric_valve_panel_svg(
+    width: int, height: int, *, base_name: str, description: str, perc_img
+) -> str | None:
+    """Build the AC0VR2-style symmetric valve panel from raster-derived colours.
+
+    The generic framed-panel fallback deliberately suppresses foreground detail.
+    AC0VR2 variants, however, are documented only as unclassified manual-review
+    candidates, so their useful shape evidence is in the raster/sample: a framed
+    vertical grey panel with two symmetric slanted guide lines and two short right
+    horizontal strokes.
+    """
+    signal = f"{base_name} {description}".upper()
+    if "AC0VR2" not in signal:
+        return None
+    try:
+        arr = np.asarray(perc_img)
+    except (TypeError, ValueError):
+        return None
+    if arr.ndim < 2 or arr.size == 0:
+        return None
+    rgb = (
+        arr[..., :3][..., ::-1].astype(np.float32)
+        if arr.ndim == 3
+        else np.repeat(arr[..., None], 3, axis=2).astype(np.float32)
+    )
+    h, w = rgb.shape[:2]
+    if h < 8 or w < 16:
+        return None
+
+    def sample_box(y0: float, y1: float, x0: float, x1: float) -> np.ndarray:
+        yy0 = max(0, min(h - 1, int(round(h * y0))))
+        yy1 = max(yy0 + 1, min(h, int(round(h * y1))))
+        xx0 = max(0, min(w - 1, int(round(w * x0))))
+        xx1 = max(xx0 + 1, min(w, int(round(w * x1))))
+        return np.nanmedian(rgb[yy0:yy1, xx0:xx1, :].reshape(-1, 3), axis=0)
+
+    top = sample_box(0.03, 0.12, 0.18, 0.82)
+    upper_light = sample_box(0.24, 0.36, 0.18, 0.82)
+    center = sample_box(0.45, 0.55, 0.18, 0.82)
+    lower_light = sample_box(0.64, 0.76, 0.18, 0.82)
+    bottom = sample_box(0.88, 0.97, 0.18, 0.82)
+    border = np.nanmedian(
+        np.concatenate((rgb[0, :, :], rgb[-1, :, :], rgb[:, 0, :], rgb[:, -1, :]), axis=0),
+        axis=0,
+    )
+    line = sample_box(0.38, 0.62, 0.70, 0.92)
+    safe_w = max(1, int(width or 1))
+    safe_h = max(1, int(height or 1))
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" viewBox="0 0 {safe_w} {safe_h}">\n'
+        '  <defs>\n'
+        '    <linearGradient id="ac0vr2SymmetricValveGradient" x1="0%" y1="0%" x2="0%" y2="100%">\n'
+        f'      <stop offset="0%" stop-color="{_rgb_hex(top)}"/>\n'
+        f'      <stop offset="28%" stop-color="{_rgb_hex(upper_light)}"/>\n'
+        f'      <stop offset="50%" stop-color="{_rgb_hex(center)}"/>\n'
+        f'      <stop offset="72%" stop-color="{_rgb_hex(lower_light)}"/>\n'
+        f'      <stop offset="100%" stop-color="{_rgb_hex(bottom)}"/>\n'
+        '    </linearGradient>\n'
+        f'    <clipPath id="ac0vr2PanelClip"><rect x="0.5" y="0.5" width="{safe_w - 1}" height="{safe_h - 1}"/></clipPath>\n'
+        '  </defs>\n'
+        f'  <rect x="0.5" y="0.5" width="{safe_w - 1}" height="{safe_h - 1}" fill="url(#ac0vr2SymmetricValveGradient)" stroke="{_rgb_hex(border)}" stroke-width="1"/>\n'
+        f'  <path d="M {safe_w * 0.013:.2f} {safe_h * 0.313:.2f} L {safe_w * 0.987:.2f} {safe_h * 0.127:.2f}" fill="none" stroke="{_rgb_hex(line)}" stroke-width="1" stroke-linecap="round" clip-path="url(#ac0vr2PanelClip)"/>\n'
+        f'  <path d="M {safe_w * 0.013:.2f} {safe_h * 0.687:.2f} L {safe_w * 0.987:.2f} {safe_h * 0.873:.2f}" fill="none" stroke="{_rgb_hex(line)}" stroke-width="1" stroke-linecap="round" clip-path="url(#ac0vr2PanelClip)"/>\n'
+        f'  <path d="M {safe_w * 0.683:.2f} {safe_h * 0.407:.2f} H {safe_w * 0.883:.2f}" fill="none" stroke="{_rgb_hex(line)}" stroke-width="0.9" stroke-linecap="round"/>\n'
+        f'  <path d="M {safe_w * 0.683:.2f} {safe_h * 0.560:.2f} H {safe_w * 0.883:.2f}" fill="none" stroke="{_rgb_hex(line)}" stroke-width="0.9" stroke-linecap="round"/>\n'
+        '</svg>\n'
+    )
+
 def _description_requests_diagonal_band(description: str) -> bool:
     text = (description or "").lower()
     return "diagon" in text and "links unten" in text and "rechts oben" in text
@@ -1393,13 +1461,42 @@ def runNonCompositeIterationImpl(
     resolved_variant_name = str(
         image_variant_name or params.get("variant_name") or Path(img_path).stem or base_name
     )
-    plain_panel_svg = _try_build_plain_framed_panel_svg(
+    symmetric_valve_panel_svg = _try_build_symmetric_valve_panel_svg(
         width,
         height,
+        base_name=resolved_variant_name,
         description=description,
         perc_img=perc_img,
     )
-    if plain_panel_svg is not None:
+    plain_panel_svg = (
+        None
+        if symmetric_valve_panel_svg is not None
+        else _try_build_plain_framed_panel_svg(
+            width,
+            height,
+            description=description,
+            perc_img=perc_img,
+        )
+    )
+    if symmetric_valve_panel_svg is not None:
+        print_fn("  -> Fallback aktiv: verwende symmetrisches AC0VR2-Ventilpanel aus Rasterfarben.")
+        svg_content = symmetric_valve_panel_svg
+        svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
+        if svg_rendered is None:
+            record_render_failure_fn(
+                "non_composite_symmetric_valve_panel_render_failed",
+                svg_content=svg_content,
+                params_snapshot=params,
+            )
+            return None
+        svg_err = calculate_error_fn(perc_img, svg_rendered)
+        write_validation_log_fn(
+            [
+                "status=non_composite_symmetric_valve_panel",
+                "trigger=ac0vr2_raster_symmetric_valve_panel",
+            ]
+        )
+    elif plain_panel_svg is not None:
         if "AC0VR2" in str(description).upper():
             print_fn("  -> Fallback aktiv: verwende gerahmtes AC0VR2-Panel aus Rasterfarben.")
         else:
