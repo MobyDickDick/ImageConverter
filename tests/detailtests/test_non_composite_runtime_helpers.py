@@ -315,6 +315,57 @@ def test_ac0vr2_plain_panel_fallback_preserves_frame_before_gradient_stripe() ->
 
 
 
+def test_ac0vr2_symmetric_valve_panel_samples_line_colours_separately() -> None:
+    raster = np.ones((30, 60, 3), dtype=np.uint8) * 240
+    raster[0, :, :] = 176
+    raster[-1, :, :] = 176
+    raster[:, 0, :] = 176
+    raster[:, -1, :] = 176
+    # Diagonal guide evidence is light, while the short right strokes are darker.
+    raster[9, :, :] = 235
+    raster[20, :, :] = 235
+    raster[12, 41:54, :] = 180
+    raster[17, 41:54, :] = 180
+
+    svg = non_composite_runtime_helpers._try_build_symmetric_valve_panel_svg(
+        60,
+        30,
+        base_name="AC0VR2",
+        description="Unzugeordnete AC0VR2_AB-Panelvariante.",
+        perc_img=raster,
+    )
+
+    assert svg is not None
+    assert 'stroke="#f0f0f0" stroke-width="1"' in svg
+    assert 'stroke="#b4b4b4" stroke-width="0.9"' in svg
+
+
+def test_ac0vr2_symmetric_valve_panel_enforces_darker_centre_gradient() -> None:
+    raster = np.ones((30, 60, 3), dtype=np.uint8) * 240
+    raster[0:3, 10:50, :] = 207
+    raster[7:11, 10:50, :] = 240
+    raster[13:17, 10:50, :] = 250
+    raster[19:23, 10:50, :] = 240
+    raster[27:30, 10:50, :] = 207
+    raster[0, :, :] = 176
+    raster[-1, :, :] = 176
+    raster[:, 0, :] = 176
+    raster[:, -1, :] = 176
+
+    svg = non_composite_runtime_helpers._try_build_symmetric_valve_panel_svg(
+        60,
+        30,
+        base_name="AC0VR2",
+        description="Unzugeordnete AC0VR2_AB-Panelvariante.",
+        perc_img=raster,
+    )
+
+    assert svg is not None
+    assert '<stop offset="28%" stop-color="#f0f0f0"/>' in svg
+    assert '<stop offset="50%" stop-color="#e8e8e8"/>' in svg
+    assert '<stop offset="72%" stop-color="#f0f0f0"/>' in svg
+
+
 def test_ac0vr2_plain_panel_fallback_preserves_vertical_gradient_for_bright_core() -> None:
     raster = np.empty((30, 60, 3), dtype=np.uint8)
     for y in range(30):
