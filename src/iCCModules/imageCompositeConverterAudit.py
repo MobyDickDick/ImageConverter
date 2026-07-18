@@ -53,30 +53,45 @@ def collectDescriptionFragmentsImpl(
     canonical_base = get_base_name_fn(base_name).upper()
     canonical_variant = get_base_name_fn(variant_name).upper()
 
-    lookup_keys = [
-        ("base_name", str(base_name)),
-        ("variant_name", str(variant_name)),
-        ("canonical_base", canonical_base),
-        ("canonical_variant", canonical_variant),
-    ]
     fragments: list[dict[str, str]] = []
     seen_lookup_keys: set[str] = set()
     seen_texts: set[str] = set()
-    for source, key in lookup_keys:
-        normalized_key = str(key or "").strip()
-        if not normalized_key:
-            continue
-        if normalized_key in seen_lookup_keys:
-            continue
-        seen_lookup_keys.add(normalized_key)
-        value = str(raw_desc.get(normalized_key, "") or "").strip()
-        if not value:
-            continue
-        normalized_value = " ".join(value.split())
-        if normalized_value in seen_texts:
-            continue
-        seen_texts.add(normalized_value)
-        fragments.append({"source": source, "key": normalized_key, "text": value})
+
+    def _append_matching_fragments(lookup_keys: list[tuple[str, str]]) -> None:
+        for source, key in lookup_keys:
+            normalized_key = str(key or "").strip()
+            if not normalized_key:
+                continue
+            if normalized_key in seen_lookup_keys:
+                continue
+            seen_lookup_keys.add(normalized_key)
+            value = str(raw_desc.get(normalized_key, "") or "").strip()
+            if not value:
+                continue
+            normalized_value = " ".join(value.split())
+            if normalized_value in seen_texts:
+                continue
+            seen_texts.add(normalized_value)
+            fragments.append({"source": source, "key": normalized_key, "text": value})
+
+    exact_variant_lookup_keys = [("variant_name", str(variant_name))]
+    variant_is_collapsed_to_base = (
+        bool(str(base_name or "").strip())
+        and str(base_name).strip().upper() == canonical_variant
+        and str(variant_name).strip().upper() != str(base_name).strip().upper()
+    )
+    if variant_is_collapsed_to_base and str(variant_name).strip() in raw_desc:
+        _append_matching_fragments(exact_variant_lookup_keys)
+        if fragments:
+            return fragments
+
+    lookup_keys = [
+        ("base_name", str(base_name)),
+        *exact_variant_lookup_keys,
+        ("canonical_base", canonical_base),
+        ("canonical_variant", canonical_variant),
+    ]
+    _append_matching_fragments(lookup_keys)
     return fragments
 
 

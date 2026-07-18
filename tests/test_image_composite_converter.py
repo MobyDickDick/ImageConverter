@@ -1359,6 +1359,19 @@ def test_parse_description_uses_normalized_base_for_custom_suffix_variants() -> 
     assert params["variant_name"] == "AC0VR2_AB_M"
 
 
+def test_parse_description_prefers_exact_custom_variant_over_canonical_family_alias() -> None:
+    raw = {
+        "AC0VR2": "Falscher Familienalias mit Haken vor Checkbox.",
+        "AC0VR2_AB_M": "Exakte AC0VR2_AB-Panelvariante mit Rechteck und Linien.",
+    }
+
+    desc, params = image_composite_converter.Reflection(raw).parse_description("AC0VR2", "AC0VR2_AB_M.jpg")
+
+    assert "exakte ac0vr2_ab-panelvariante" in desc
+    assert "haken" not in desc
+    assert params["variant_name"] == "AC0VR2_AB_M"
+
+
 def test_parse_description_recognizes_co2_with_caret_notation() -> None:
     """Descriptions using CO^2 notation must still activate the CO₂ semantic label."""
     raw = {"AC0831": "die Beschriftung fehlt ($CO^2$)."}

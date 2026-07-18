@@ -43,3 +43,11 @@ def test_two_digit_partial_prefix_filter_selects_ac08_family() -> None:
     assert not remaining_helpers._inRequestedRange("AC0080_L.jpg", "AC08", "AC08")
     assert not remaining_helpers._inRequestedRange("AC0538_1L_sia.jpg", "AC08", "AC08")
     assert not remaining_helpers._inRequestedRange("AC0900_L.jpg", "AC08", "AC08")
+
+
+def test_underscored_exact_variant_filter_selects_only_that_file() -> None:
+    """An exact custom variant request must not expand to all files sharing its normalized family."""
+
+    assert remaining_helpers._inRequestedRange("AC0VR2_AB_M.jpg", "AC0VR2_AB_M", "AC0VR2_AB_M")
+    assert not remaining_helpers._inRequestedRange("AC0VR2_M.jpg", "AC0VR2_AB_M", "AC0VR2_AB_M")
+    assert not remaining_helpers._inRequestedRange("AC0VR2_ZL_M.jpg", "AC0VR2_AB_M", "AC0VR2_AB_M")
