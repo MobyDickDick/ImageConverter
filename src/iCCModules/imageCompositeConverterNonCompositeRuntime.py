@@ -349,16 +349,30 @@ def _try_build_symmetric_valve_panel_svg(
         xx1 = max(xx0 + 1, min(w, int(round(w * x1))))
         return np.nanmedian(rgb[yy0:yy1, xx0:xx1, :].reshape(-1, 3), axis=0)
 
+    def sample_segment(x0: float, y0: float, x1: float, y1: float, *, radius: int = 0) -> np.ndarray:
+        samples = []
+        for t in np.linspace(0.08, 0.92, max(w, h)):
+            cx = int(round((x0 + (x1 - x0) * float(t)) * (w - 1)))
+            cy = int(round((y0 + (y1 - y0) * float(t)) * (h - 1)))
+            yy0 = max(0, cy - radius)
+            yy1 = min(h, cy + radius + 1)
+            xx0 = max(0, cx - radius)
+            xx1 = min(w, cx + radius + 1)
+            samples.append(rgb[yy0:yy1, xx0:xx1, :].reshape(-1, 3))
+        return np.nanmedian(np.concatenate(samples, axis=0), axis=0)
+
     top = sample_box(0.03, 0.12, 0.18, 0.82)
     upper_light = sample_box(0.24, 0.36, 0.18, 0.82)
     center = sample_box(0.45, 0.55, 0.18, 0.82)
     lower_light = sample_box(0.64, 0.76, 0.18, 0.82)
+    center = np.minimum(center, np.minimum(upper_light, lower_light) - 8.0)
     bottom = sample_box(0.88, 0.97, 0.18, 0.82)
     border = np.nanmedian(
         np.concatenate((rgb[0, :, :], rgb[-1, :, :], rgb[:, 0, :], rgb[:, -1, :]), axis=0),
         axis=0,
     )
-    line = sample_box(0.38, 0.62, 0.70, 0.92)
+    diagonal_line = sample_segment(0.013, 0.313, 0.987, 0.127)
+    short_line = sample_segment(0.683, 0.407, 0.883, 0.407)
     safe_w = max(1, int(width or 1))
     safe_h = max(1, int(height or 1))
     return (
@@ -374,10 +388,10 @@ def _try_build_symmetric_valve_panel_svg(
         f'    <clipPath id="ac0vr2PanelClip"><rect x="0.5" y="0.5" width="{safe_w - 1}" height="{safe_h - 1}"/></clipPath>\n'
         '  </defs>\n'
         f'  <rect x="0.5" y="0.5" width="{safe_w - 1}" height="{safe_h - 1}" fill="url(#ac0vr2SymmetricValveGradient)" stroke="{_rgb_hex(border)}" stroke-width="1"/>\n'
-        f'  <path d="M {safe_w * 0.013:.2f} {safe_h * 0.313:.2f} L {safe_w * 0.987:.2f} {safe_h * 0.127:.2f}" fill="none" stroke="{_rgb_hex(line)}" stroke-width="1" stroke-linecap="round" clip-path="url(#ac0vr2PanelClip)"/>\n'
-        f'  <path d="M {safe_w * 0.013:.2f} {safe_h * 0.687:.2f} L {safe_w * 0.987:.2f} {safe_h * 0.873:.2f}" fill="none" stroke="{_rgb_hex(line)}" stroke-width="1" stroke-linecap="round" clip-path="url(#ac0vr2PanelClip)"/>\n'
-        f'  <path d="M {safe_w * 0.683:.2f} {safe_h * 0.407:.2f} H {safe_w * 0.883:.2f}" fill="none" stroke="{_rgb_hex(line)}" stroke-width="0.9" stroke-linecap="round"/>\n'
-        f'  <path d="M {safe_w * 0.683:.2f} {safe_h * 0.560:.2f} H {safe_w * 0.883:.2f}" fill="none" stroke="{_rgb_hex(line)}" stroke-width="0.9" stroke-linecap="round"/>\n'
+        f'  <path d="M {safe_w * 0.013:.2f} {safe_h * 0.313:.2f} L {safe_w * 0.987:.2f} {safe_h * 0.127:.2f}" fill="none" stroke="{_rgb_hex(diagonal_line)}" stroke-width="1" stroke-linecap="round" clip-path="url(#ac0vr2PanelClip)"/>\n'
+        f'  <path d="M {safe_w * 0.013:.2f} {safe_h * 0.687:.2f} L {safe_w * 0.987:.2f} {safe_h * 0.873:.2f}" fill="none" stroke="{_rgb_hex(diagonal_line)}" stroke-width="1" stroke-linecap="round" clip-path="url(#ac0vr2PanelClip)"/>\n'
+        f'  <path d="M {safe_w * 0.683:.2f} {safe_h * 0.407:.2f} H {safe_w * 0.883:.2f}" fill="none" stroke="{_rgb_hex(short_line)}" stroke-width="0.9" stroke-linecap="round"/>\n'
+        f'  <path d="M {safe_w * 0.683:.2f} {safe_h * 0.560:.2f} H {safe_w * 0.883:.2f}" fill="none" stroke="{_rgb_hex(short_line)}" stroke-width="0.9" stroke-linecap="round"/>\n'
         '</svg>\n'
     )
 

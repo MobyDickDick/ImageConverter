@@ -726,7 +726,12 @@ def convertOneImpl(
     _base, _desc, params, best_iter, best_error = res
     details = read_validation_log_details_fn(log_file)
     status = str(details.get("status", ""))
-    if status in {"non_composite_plan_b_sample_svg_selected", "non_composite_pure_svg_placeholder"}:
+    copied_plan_b_sample_svg = False
+    if status in {
+        "manual_review_plan_b_sample_svg",
+        "non_composite_plan_b_sample_svg_selected",
+        "non_composite_pure_svg_placeholder",
+    }:
         print_fn(
             f"[WARN] {filename}: Keine echte Konvertierung; "
             "verwende Plan-B/Sample-SVG als Platzhalter."
@@ -747,6 +752,7 @@ def convertOneImpl(
         if sample_svg_path:
             try:
                 shutil.copyfile(sample_svg_path, svg_path)
+                copied_plan_b_sample_svg = True
                 failed_svg_path = os.path.join(svg_out_dir, f"Failed_{base}.svg")
                 if os.path.exists(failed_svg_path):
                     os.unlink(failed_svg_path)
@@ -811,7 +817,7 @@ def convertOneImpl(
         _emit_anchor_variant_event("variant_done", status="poor_conversion_placeholder_svg")
         return None, True
 
-    if previous_svg_content.strip():
+    if previous_svg_content.strip() and not copied_plan_b_sample_svg:
         previous_svg_path = os.path.join(svg_out_dir, f"{base}.__previous__.svg")
         try:
             with open(previous_svg_path, "w", encoding="utf-8") as handle:
