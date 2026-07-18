@@ -268,6 +268,49 @@ def test_run_non_composite_iteration_impl_prefers_exact_image_variant_sample_svg
     assert artifacts and "id='variant'" in artifacts[0][0]
 
 
+def test_run_non_composite_iteration_impl_treats_filename_variant_sample_as_exact_even_if_generated_is_better(tmp_path) -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    image_dir = tmp_path / "images"
+    samples_dir = image_dir / "samples"
+    samples_dir.mkdir(parents=True)
+    (samples_dir / "AC0VR2_AB_M.svg").write_text("<svg><rect id='exact-variant'/></svg>", encoding="utf-8")
+
+    def _render(content, *_args, **_kwargs):
+        return content
+
+    def _error(_target, rendered):
+        return 5.0 if "exact-variant" in rendered else 1.0
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="manual_review",
+        params={"mode": "manual_review", "review_reason": "Bitte prüfen"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=60,
+        height=30,
+        base_name="AC0VR2",
+        description="desc",
+        perc_img=np.ones((30, 60, 3), dtype=np.uint8) * 180,
+        img_path=str(image_dir / "AC0VR2_AB_M.jpg"),
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg />",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg />",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=_render,
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=_error,
+        image_variant_name="AC0VR2_AB_M.jpg",
+    )
+
+    assert result == ("AC0VR2", "desc", {"mode": "manual_review", "review_reason": "Bitte prüfen"}, 1, 5.0)
+    assert logs[0][0] == "status=manual_review_plan_b_sample_svg"
+    assert "AC0VR2_AB_M.svg" in logs[0][1]
+    assert artifacts and "id='exact-variant'" in artifacts[0][0]
+
+
 def test_ac0vr2_plain_panel_fallback_preserves_frame_before_gradient_stripe() -> None:
     logs: list[list[str]] = []
     prints: list[str] = []

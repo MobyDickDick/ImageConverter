@@ -1430,7 +1430,7 @@ def runNonCompositeIterationImpl(
                 )
             else:
                 sample_err = calculate_error_fn(perc_img, sample_rendered)
-                sample_is_exact_variant = Path(sample_svg_path).stem.upper() == str(image_variant_name or base_name).upper()
+                sample_is_exact_variant = Path(sample_svg_path).stem.upper() == Path(str(image_variant_name or base_name)).stem.upper()
                 if sample_is_exact_variant or sample_err + 1e-6 < generated_err:
                     print_fn(
                         "  -> Plan B Vergleich aktiv: verwende vorhandene Sample-SVG "
