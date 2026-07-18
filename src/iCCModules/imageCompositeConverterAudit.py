@@ -53,16 +53,40 @@ def collectDescriptionFragmentsImpl(
     canonical_base = get_base_name_fn(base_name).upper()
     canonical_variant = get_base_name_fn(variant_name).upper()
 
-    lookup_keys = [
-        ("base_name", str(base_name)),
+    exact_variant_lookup_keys = [
         ("variant_name", str(variant_name)),
+    ]
+    fallback_lookup_keys = [
+        ("base_name", str(base_name)),
         ("canonical_base", canonical_base),
         ("canonical_variant", canonical_variant),
     ]
     fragments: list[dict[str, str]] = []
     seen_lookup_keys: set[str] = set()
     seen_texts: set[str] = set()
-    for source, key in lookup_keys:
+
+    def _append_matching_fragments(lookup_keys: list[tuple[str, str]]) -> None:
+        for source, key in lookup_keys:
+            normalized_key = str(key or "").strip()
+            if not normalized_key:
+                continue
+            if normalized_key in seen_lookup_keys:
+                continue
+            seen_lookup_keys.add(normalized_key)
+            value = str(raw_desc.get(normalized_key, "") or "").strip()
+            if not value:
+                continue
+            normalized_value = " ".join(value.split())
+            if normalized_value in seen_texts:
+                continue
+            seen_texts.add(normalized_value)
+            fragments.append({"source": source, "key": normalized_key, "text": value})
+
+    _append_matching_fragments(exact_variant_lookup_keys)
+    if fragments:
+        return fragments
+
+    for source, key in fallback_lookup_keys:
         normalized_key = str(key or "").strip()
         if not normalized_key:
             continue

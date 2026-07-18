@@ -183,6 +183,15 @@ def inRequestedRangeImpl(
     explicit_end = normalize_explicit_range_token_fn(end_ref)
     normalized_start = normalize_range_token_fn(start_ref)
 
+    explicit_stem = normalize_explicit_range_token_fn(filename)
+    if (
+        explicit_start
+        and explicit_start == explicit_end
+        and "_" in str(start_ref or "")
+        and not is_explicit_size_variant_token_fn(explicit_start)
+    ):
+        return explicit_stem == explicit_start
+
     explicit_variant_span = (
         explicit_start
         and explicit_end
