@@ -349,7 +349,15 @@ def _try_build_symmetric_valve_panel_svg(
         xx1 = max(xx0 + 1, min(w, int(round(w * x1))))
         return np.nanmedian(rgb[yy0:yy1, xx0:xx1, :].reshape(-1, 3), axis=0)
 
-    def sample_segment(x0: float, y0: float, x1: float, y1: float, *, radius: int = 0) -> np.ndarray:
+    def sample_segment(
+        x0: float,
+        y0: float,
+        x1: float,
+        y1: float,
+        *,
+        radius: int = 0,
+        luminance_percentile: float = 50.0,
+    ) -> np.ndarray:
         samples = []
         for t in np.linspace(0.08, 0.92, max(w, h)):
             cx = int(round((x0 + (x1 - x0) * float(t)) * (w - 1)))
@@ -359,7 +367,16 @@ def _try_build_symmetric_valve_panel_svg(
             xx0 = max(0, cx - radius)
             xx1 = min(w, cx + radius + 1)
             samples.append(rgb[yy0:yy1, xx0:xx1, :].reshape(-1, 3))
-        return np.nanmedian(np.concatenate(samples, axis=0), axis=0)
+        segment_samples = np.concatenate(samples, axis=0)
+        percentile = max(0.0, min(100.0, float(luminance_percentile)))
+        if percentile == 50.0:
+            return np.nanmedian(segment_samples, axis=0)
+        luminance = np.nanmean(segment_samples, axis=1)
+        threshold = float(np.nanpercentile(luminance, percentile))
+        foreground = segment_samples[luminance <= threshold]
+        if foreground.size == 0:
+            foreground = segment_samples
+        return np.nanmedian(foreground, axis=0)
 
     top = sample_box(0.03, 0.12, 0.18, 0.82)
     upper_light = sample_box(0.24, 0.36, 0.18, 0.82)
@@ -371,8 +388,13 @@ def _try_build_symmetric_valve_panel_svg(
         np.concatenate((rgb[0, :, :], rgb[-1, :, :], rgb[:, 0, :], rgb[:, -1, :]), axis=0),
         axis=0,
     )
-    diagonal_line = sample_segment(0.013, 0.313, 0.987, 0.127)
-    short_line = sample_segment(0.683, 0.407, 0.883, 0.407)
+    diagonal_line = sample_segment(0.013, 0.313, 0.987, 0.127, radius=1, luminance_percentile=20.0)
+    short_line = sample_segment(0.683, 0.407, 0.883, 0.407, radius=1, luminance_percentile=20.0)
+    if float(np.nanmean(diagonal_line)) > float(np.nanmean(border)) + 20.0:
+        # The long AC0VR2_AB diagonal guides are thin and anti-aliased.  A
+        # centerline sample can hit mostly bright panel fill, so clamp obvious
+        # highlight picks back to the dark guide family near the frame colour.
+        diagonal_line = np.minimum(np.asarray(border, dtype=np.float32) + 2.0, 255.0)
     safe_w = max(1, int(width or 1))
     safe_h = max(1, int(height or 1))
     return (
@@ -1540,7 +1562,16 @@ def runNonCompositeIterationImpl(
             return None
         plain_candidate = next((candidate for candidate in panel_candidates if candidate["kind"] == "plain"), None)
         symmetric_candidate = next((candidate for candidate in panel_candidates if candidate["kind"] == "symmetric"), None)
-        if (
+        resolved_signal = f"{resolved_variant_name} {description}".upper()
+        force_ac0vr2_symmetric = "AC0VR2" in resolved_signal and "_AB" in resolved_signal
+        if force_ac0vr2_symmetric and symmetric_candidate is not None:
+            # AC0VR2_AB is a documented valve-panel variant: the plain panel can
+            # score slightly better numerically because it suppresses the thin
+            # foreground strokes, but that drops the semantic shape completely.
+            # Prefer the raster-derived symmetric renderer for this variant so
+            # the conversion keeps the diagonal guides and right-hand strokes.
+            selected_panel = symmetric_candidate
+        elif (
             plain_candidate is not None
             and symmetric_candidate is not None
             and float(symmetric_candidate["error"]) + 1e-6 >= float(plain_candidate["error"])

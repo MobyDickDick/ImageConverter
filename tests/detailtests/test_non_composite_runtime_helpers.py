@@ -358,17 +358,65 @@ def test_ac0vr2_plain_panel_fallback_preserves_frame_before_gradient_stripe() ->
 
 
 
+def test_ac0vr2_ab_panel_prefers_semantic_valve_over_plain_error_win() -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    raster = np.ones((30, 60, 3), dtype=np.uint8) * 240
+    raster[0:3, 10:50, :] = 207
+    raster[7:11, 10:50, :] = 240
+    raster[13:17, 10:50, :] = 250
+    raster[19:23, 10:50, :] = 240
+    raster[27:30, 10:50, :] = 207
+    raster[0, :, :] = 176
+    raster[-1, :, :] = 176
+    raster[:, 0, :] = 176
+    raster[:, -1, :] = 176
+    raster[9, :, :] = 235
+    raster[20, :, :] = 235
+    raster[12, 41:54, :] = 180
+    raster[17, 41:54, :] = 180
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="auto",
+        params={"mode": "auto", "variant_name": "AC0VR2_AB_M"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=60,
+        height=30,
+        base_name="AC0VR2",
+        description="Unzugeordnete AC0VR2_AB-Panelvariante.",
+        perc_img=raster,
+        img_path="AC0VR2_AB_M.jpg",
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg />",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda svg, *_args, **_kwargs: svg,
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 0.1 if "ac0vr2PanelGradient" in rendered else 0.9,
+        image_variant_name="AC0VR2_AB_M",
+    )
+
+    assert result is not None
+    assert logs and logs[0][0] == "status=non_composite_symmetric_valve_panel"
+    assert artifacts and "ac0vr2SymmetricValveGradient" in artifacts[0][0]
+    assert 'path d="M 0.78 9.39 L 59.22 3.81"' in artifacts[0][0]
+    assert artifacts[0][0].count('<rect x="') <= 3
+
+
 def test_ac0vr2_symmetric_valve_panel_samples_line_colours_separately() -> None:
     raster = np.ones((30, 60, 3), dtype=np.uint8) * 240
     raster[0, :, :] = 176
     raster[-1, :, :] = 176
     raster[:, 0, :] = 176
     raster[:, -1, :] = 176
-    # Diagonal guide evidence is light, while the short right strokes are darker.
-    raster[9, :, :] = 235
-    raster[20, :, :] = 235
-    raster[12, 41:54, :] = 180
-    raster[17, 41:54, :] = 180
+    # Diagonal guide evidence is darker than the panel highlight, while the short right strokes are separate.
+    raster[9, :, :] = 175
+    raster[20, :, :] = 175
+    raster[12, 41:54, :] = 178
+    raster[17, 41:54, :] = 178
 
     svg = non_composite_runtime_helpers._try_build_symmetric_valve_panel_svg(
         60,
@@ -379,8 +427,8 @@ def test_ac0vr2_symmetric_valve_panel_samples_line_colours_separately() -> None:
     )
 
     assert svg is not None
-    assert 'stroke="#f0f0f0" stroke-width="1"' in svg
-    assert 'stroke="#b4b4b4" stroke-width="0.9"' in svg
+    assert 'stroke="#b2b2b2" stroke-width="1"' in svg
+    assert 'stroke="#b2b2b2" stroke-width="0.9"' in svg
 
 
 def test_ac0vr2_symmetric_valve_panel_enforces_darker_centre_gradient() -> None:
