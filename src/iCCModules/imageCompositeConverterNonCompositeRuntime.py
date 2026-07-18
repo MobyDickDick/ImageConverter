@@ -1468,55 +1468,84 @@ def runNonCompositeIterationImpl(
         description=description,
         perc_img=perc_img,
     )
-    plain_panel_svg = (
-        None
-        if symmetric_valve_panel_svg is not None
-        else _try_build_plain_framed_panel_svg(
-            width,
-            height,
-            description=description,
-            perc_img=perc_img,
-        )
+    plain_panel_svg = _try_build_plain_framed_panel_svg(
+        width,
+        height,
+        description=description,
+        perc_img=perc_img,
     )
-    if symmetric_valve_panel_svg is not None:
-        print_fn("  -> Fallback aktiv: verwende symmetrisches AC0VR2-Ventilpanel aus Rasterfarben.")
-        svg_content = symmetric_valve_panel_svg
-        svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
-        if svg_rendered is None:
-            record_render_failure_fn(
-                "non_composite_symmetric_valve_panel_render_failed",
-                svg_content=svg_content,
-                params_snapshot=params,
-            )
+    selected_panel_status = ""
+    selected_panel_trigger = ""
+    selected_panel_print = ""
+    if symmetric_valve_panel_svg is not None or plain_panel_svg is not None:
+        panel_candidates: list[dict[str, object]] = []
+        if plain_panel_svg is not None:
+            plain_rendered = render_svg_to_numpy_fn(plain_panel_svg, width, height)
+            if plain_rendered is None:
+                record_render_failure_fn(
+                    "non_composite_plain_framed_panel_render_failed",
+                    svg_content=plain_panel_svg,
+                    params_snapshot=params,
+                )
+            else:
+                panel_candidates.append(
+                    {
+                        "kind": "plain",
+                        "svg": plain_panel_svg,
+                        "rendered": plain_rendered,
+                        "error": calculate_error_fn(perc_img, plain_rendered),
+                    }
+                )
+        if symmetric_valve_panel_svg is not None:
+            symmetric_rendered = render_svg_to_numpy_fn(symmetric_valve_panel_svg, width, height)
+            if symmetric_rendered is None:
+                record_render_failure_fn(
+                    "non_composite_symmetric_valve_panel_render_failed",
+                    svg_content=symmetric_valve_panel_svg,
+                    params_snapshot=params,
+                )
+            else:
+                panel_candidates.append(
+                    {
+                        "kind": "symmetric",
+                        "svg": symmetric_valve_panel_svg,
+                        "rendered": symmetric_rendered,
+                        "error": calculate_error_fn(perc_img, symmetric_rendered),
+                    }
+                )
+        if not panel_candidates:
             return None
-        svg_err = calculate_error_fn(perc_img, svg_rendered)
-        write_validation_log_fn(
-            [
-                "status=non_composite_symmetric_valve_panel",
-                "trigger=ac0vr2_raster_symmetric_valve_panel",
-            ]
-        )
-    elif plain_panel_svg is not None:
-        if "AC0VR2" in str(description).upper():
-            print_fn("  -> Fallback aktiv: verwende gerahmtes AC0VR2-Panel aus Rasterfarben.")
+        plain_candidate = next((candidate for candidate in panel_candidates if candidate["kind"] == "plain"), None)
+        symmetric_candidate = next((candidate for candidate in panel_candidates if candidate["kind"] == "symmetric"), None)
+        if (
+            plain_candidate is not None
+            and symmetric_candidate is not None
+            and float(symmetric_candidate["error"]) + 1e-6 >= float(plain_candidate["error"])
+        ):
+            selected_panel = plain_candidate
         else:
-            print_fn("  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.")
-        svg_content = plain_panel_svg
-        svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
-        if svg_rendered is None:
-            record_render_failure_fn(
-                "non_composite_plain_framed_panel_render_failed",
-                svg_content=svg_content,
-                params_snapshot=params,
+            selected_panel = min(panel_candidates, key=lambda candidate: float(candidate["error"]))
+        svg_content = str(selected_panel["svg"])
+        svg_rendered = selected_panel["rendered"]
+        svg_err = float(selected_panel["error"])
+        if selected_panel["kind"] == "symmetric":
+            selected_panel_status = "non_composite_symmetric_valve_panel"
+            selected_panel_trigger = "trigger=ac0vr2_raster_symmetric_valve_panel"
+            selected_panel_print = "  -> Fallback aktiv: verwende symmetrisches AC0VR2-Ventilpanel aus Rasterfarben."
+        else:
+            selected_panel_status = "non_composite_plain_framed_panel"
+            selected_panel_trigger = (
+                "trigger=description_farbuebergang_panel"
+                if _description_requests_framed_gradient_panel(description)
+                else "trigger=raster_plain_framed_panel"
             )
-            return None
-        svg_err = calculate_error_fn(perc_img, svg_rendered)
-        write_validation_log_fn(
-            [
-                "status=non_composite_plain_framed_panel",
-                "trigger=description_farbuebergang_panel" if _description_requests_framed_gradient_panel(description) else "trigger=raster_plain_framed_panel",
-            ]
-        )
+            selected_panel_print = (
+                "  -> Fallback aktiv: verwende gerahmtes AC0VR2-Panel aus Rasterfarben."
+                if "AC0VR2" in str(description).upper()
+                else "  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben."
+            )
+        print_fn(selected_panel_print)
+        write_validation_log_fn([f"status={selected_panel_status}", selected_panel_trigger])
     elif stripe_strategy:
         print_fn("  -> Fallback aktiv: verwende Gradient-Stripe-Strategie.")
         svg_content = build_gradient_stripe_svg_fn(width, height, stripe_strategy)
