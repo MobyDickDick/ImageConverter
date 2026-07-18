@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import src.imageCompositeConverter as converter
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as helpers
 
@@ -83,3 +85,17 @@ def test_detect_gradient_strategy_handles_full_height_vertical_panel() -> None:
     assert strategy["bbox"] == {"x": 0.0, "y": 0.0, "width": 60.0, "height": 30.0}
     assert len(strategy["stops"]) >= 3
     assert strategy["stops"][0]["color"] == "#adadad"
+
+
+def test_ac0vr2_ab_m_sample_uses_smooth_gradients_not_stripe_columns() -> None:
+    sample_path = Path("artifacts/images_to_convert/samples/AC0VR2_AB_M.svg")
+    snapshot_path = Path("artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0VR2_AB_M.svg")
+    svg = sample_path.read_text(encoding="utf-8")
+
+    assert snapshot_path.read_text(encoding="utf-8") == svg
+    assert svg.count("<linearGradient") == 2
+    assert svg.count("<rect") == 3
+    assert svg.count("<path") == 4
+    assert 'width="0.981"' not in svg
+    assert 'fill="url(#verticalGrey)"' in svg
+    assert 'fill="url(#horizontalSheen)"' in svg
