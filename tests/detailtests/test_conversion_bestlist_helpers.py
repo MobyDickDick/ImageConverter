@@ -60,6 +60,27 @@ def test_candidate_prefers_neutral_valve_head_metadata_without_catalog_base() ->
     assert better is True
 
 
+def test_candidate_at_least_as_good_allows_equal_bestlist_quality() -> None:
+    previous = {"status": "semantic_ok", "error_per_pixel": 0.2, "mean_delta2": 1.5}
+    candidate = {"status": "semantic_ok", "error_per_pixel": 0.2, "mean_delta2": 1.5}
+
+    assert bestlist_helpers.isConversionBestlistCandidateAtLeastAsGoodImpl(previous, candidate) is True
+
+
+def test_candidate_at_least_as_good_rejects_pixel_regression() -> None:
+    previous = {"status": "semantic_ok", "error_per_pixel": 0.2, "mean_delta2": 1.5}
+    candidate = {"status": "semantic_ok", "error_per_pixel": 0.21, "mean_delta2": 1.5}
+
+    assert bestlist_helpers.isConversionBestlistCandidateAtLeastAsGoodImpl(previous, candidate) is False
+
+
+def test_candidate_at_least_as_good_rejects_semantic_regression() -> None:
+    previous = {"status": "semantic_ok", "error_per_pixel": 0.2, "mean_delta2": 1.5}
+    candidate = {"status": "semantic_mismatch", "error_per_pixel": 0.1, "mean_delta2": 1.0}
+
+    assert bestlist_helpers.isConversionBestlistCandidateAtLeastAsGoodImpl(previous, candidate) is False
+
+
 def test_bestlist_manifest_read_write_roundtrip(tmp_path: Path) -> None:
     manifest = tmp_path / "conversion_bestlist.csv"
     rows = {

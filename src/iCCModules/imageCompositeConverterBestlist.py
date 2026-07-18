@@ -200,6 +200,57 @@ def isConversionBestlistCandidateBetterImpl(
     return bool(improved)
 
 
+def isConversionBestlistCandidateAtLeastAsGoodImpl(
+    previous_row: dict[str, object] | None,
+    candidate_row: dict[str, object],
+) -> bool:
+    """Return whether a candidate may be emitted without regressing the best-list.
+
+    Unlike :func:`isConversionBestlistCandidateBetterImpl`, equality is accepted
+    here.  This is used as a final guard for explicit review/conversion tasks:
+    every selected output must be at least as good as the previously accepted
+    best-list snapshot, otherwise the snapshot is restored.
+    """
+
+    if previous_row is None:
+        return True
+
+    prev_status = str(previous_row.get("status", "")).strip().lower()
+    cand_status = str(candidate_row.get("status", "")).strip().lower()
+    if prev_status == "semantic_ok" and cand_status != "semantic_ok":
+        return False
+    if prev_status != "semantic_ok" and cand_status == "semantic_ok":
+        return True
+
+    def _has_ac0223_valve_head(row: dict[str, object] | None) -> bool:
+        if not isinstance(row, dict):
+            return False
+        params = row.get("params")
+        if not isinstance(params, dict):
+            return False
+        return str(params.get("head_style", "")).lower() == "ac0223_triple_valve"
+
+    if _has_ac0223_valve_head(candidate_row) and not _has_ac0223_valve_head(previous_row):
+        return True
+
+    tolerance = 1e-9
+    prev_spatial = _as_float(previous_row.get("spatial_quality_score"))
+    cand_spatial = _as_float(candidate_row.get("spatial_quality_score"))
+    if math.isfinite(prev_spatial) and math.isfinite(cand_spatial):
+        return cand_spatial <= prev_spatial + max(tolerance, abs(prev_spatial) * tolerance)
+
+    for key in ("error_per_pixel", "mean_delta2"):
+        previous_value = _as_float(previous_row.get(key))
+        candidate_value = _as_float(candidate_row.get(key))
+        if not math.isfinite(previous_value):
+            continue
+        if not math.isfinite(candidate_value):
+            return False
+        if candidate_value > previous_value + max(tolerance, abs(previous_value) * tolerance):
+            return False
+    return True
+
+
 def chooseConversionBestlistRowImpl(
     candidate_row: dict[str, object],
     previous_row: dict[str, object] | None,
