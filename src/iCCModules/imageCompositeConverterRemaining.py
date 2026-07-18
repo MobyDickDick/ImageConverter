@@ -1047,6 +1047,38 @@ def _restoreSatisfactoryBaselineIfBetter(
         report_path.write_text("\n".join(restored) + "\n", encoding="utf-8")
         _writeConversionBestlistMetrics(conversion_bestlist_path, conversion_bestlist_rows)
 
+
+def _restoreBestlistSnapshotsForSelectedRegressions(
+    *,
+    files: list[str],
+    result_map: dict[str, dict[str, object]],
+    conversion_bestlist_rows: dict[str, dict[str, object]],
+    svg_out_dir: str,
+    reports_out_dir: str,
+) -> None:
+    """Ensure selected review outputs are never worse than best-list snapshots."""
+
+    restored: list[str] = []
+    for filename in files:
+        row = result_map.get(filename)
+        if not isinstance(row, dict):
+            continue
+        variant = str(row.get("variant", "")).strip().upper() or Path(filename).stem.upper()
+        previous_row = conversion_bestlist_rows.get(variant)
+        if conversion_bestlist_helpers.isConversionBestlistCandidateAtLeastAsGoodImpl(previous_row, row):
+            continue
+        restored_row = _restoreConversionBestlistSnapshot(variant, svg_out_dir, reports_out_dir)
+        result_map[filename] = _chooseConversionBestlistRow(row, previous_row, restored_row)
+        restored.append(variant)
+
+    if restored:
+        report_path = Path(reports_out_dir) / "conversion_bestlist_regression_restores.log"
+        report_path.write_text(
+            "\n".join(f"{variant}: restored best-list snapshot" for variant in sorted(set(restored))) + "\n",
+            encoding="utf-8",
+        )
+
+
 def convertRange(
     folder_path: str,
     csv_path: str,
@@ -1405,6 +1437,14 @@ def convertRange(
             checkpoint_fn=_writeIncrementalCheckpoint,
             continue_after_max_if_improved=False,
         )
+
+    _restoreBestlistSnapshotsForSelectedRegressions(
+        files=files,
+        result_map=result_map,
+        conversion_bestlist_rows=conversion_bestlist_rows,
+        svg_out_dir=svg_out_dir,
+        reports_out_dir=reports_out_dir,
+    )
 
     conversion_finalization_helpers.runConversionFinalizationImpl(
         reports_out_dir=reports_out_dir,
