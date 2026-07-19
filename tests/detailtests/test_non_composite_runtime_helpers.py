@@ -406,6 +406,53 @@ def test_ac0vr2_ab_panel_prefers_semantic_valve_over_plain_error_win() -> None:
     assert artifacts[0][0].count('<rect x="') <= 3
 
 
+def test_ac0vr2_am_panel_prefers_smooth_semantic_valve_over_plain_panel() -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    raster = np.ones((30, 60, 3), dtype=np.uint8) * 240
+    raster[0:3, 10:50, :] = 207
+    raster[7:11, 10:50, :] = 240
+    raster[13:17, 10:50, :] = 250
+    raster[19:23, 10:50, :] = 240
+    raster[27:30, 10:50, :] = 207
+    raster[0, :, :] = 176
+    raster[-1, :, :] = 176
+    raster[:, 0, :] = 176
+    raster[:, -1, :] = 176
+    raster[9, :, :] = 235
+    raster[20, :, :] = 235
+    raster[12, 41:54, :] = 180
+    raster[17, 41:54, :] = 180
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="auto",
+        params={"mode": "auto", "variant_name": "AC0VR2_AM_M"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=60,
+        height=30,
+        base_name="AC0VR2",
+        description="Unzugeordnete AC0VR2_AM-Panelvariante.",
+        perc_img=raster,
+        img_path="AC0VR2_AM_M.jpg",
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg />",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda svg, *_args, **_kwargs: svg,
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 0.1 if "ac0vr2PanelGradient" in rendered else 0.9,
+        image_variant_name="AC0VR2_AM_M",
+    )
+
+    assert result is not None
+    assert logs and logs[0][0] == "status=non_composite_symmetric_valve_panel"
+    assert artifacts and "ac0vr2SymmetricValveGradient" in artifacts[0][0]
+    assert artifacts[0][0].count('<rect x="') <= 3
+    assert 'width="0.981"' not in artifacts[0][0]
+
 def test_ac0vr2_ab_symmetric_valve_panel_disables_output_variation(monkeypatch) -> None:
     monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
     monkeypatch.setenv("TINY_ICC_OUTPUT_VARIATION", "1")

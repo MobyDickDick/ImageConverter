@@ -1541,13 +1541,16 @@ def runNonCompositeIterationImpl(
         plain_candidate = next((candidate for candidate in panel_candidates if candidate["kind"] == "plain"), None)
         symmetric_candidate = next((candidate for candidate in panel_candidates if candidate["kind"] == "symmetric"), None)
         resolved_signal = f"{resolved_variant_name} {description}".upper()
-        force_ac0vr2_symmetric = "AC0VR2" in resolved_signal and "_AB" in resolved_signal
+        force_ac0vr2_symmetric = "AC0VR2" in resolved_signal and "_ZL" not in resolved_signal
         if force_ac0vr2_symmetric and symmetric_candidate is not None:
-            # AC0VR2_AB is a documented valve-panel variant: the plain panel can
-            # score slightly better numerically because it suppresses the thin
-            # foreground strokes, but that drops the semantic shape completely.
-            # Prefer the raster-derived symmetric renderer for this variant so
-            # the conversion keeps the diagonal guides and right-hand strokes.
+            # AC0VR2 panel variants (including AM/AB) are documented valve panels:
+            # the plain panel can score slightly better numerically because it
+            # suppresses thin foreground strokes, but that drops the semantic
+            # shape completely and may regress to stripe-like fallback output.
+            # Prefer the raster-derived symmetric renderer for these variants so
+            # the conversion keeps a real gradient, diagonal guides and the
+            # right-hand strokes.  ZL remains excluded because it is covered by
+            # the plain framed-panel contract.
             selected_panel = symmetric_candidate
         elif (
             plain_candidate is not None
