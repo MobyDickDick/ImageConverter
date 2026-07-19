@@ -8,7 +8,7 @@ from src.iCCModules import imageCompositeConverterGradientStripeStrategy as help
 np = converter._importWithVendoredFallback("numpy")
 
 
-def test_detect_gradient_stripe_strategy_extracts_bbox_and_stops() -> None:
+def test_detect_gradient_stripe_strategy_is_disabled() -> None:
     img = np.full((20, 120, 3), 255, dtype=np.uint8)
     for x in range(10, 111):
         t = (x - 10) / 100.0
@@ -24,14 +24,10 @@ def test_detect_gradient_stripe_strategy_extracts_bbox_and_stops() -> None:
 
     strategy = helpers.detectGradientStripeStrategyImpl(img, np_module=np)
 
-    assert strategy is not None
-    assert strategy["bbox"] == {"x": 10.0, "y": 4.0, "width": 101.0, "height": 5.0}
-    assert len(strategy["stops"]) >= 2
-    assert strategy["stops"][0]["offset"] == 0.0
-    assert strategy["stops"][-1]["offset"] == 1.0
+    assert strategy is None
 
 
-def test_build_gradient_stripe_svg_renders_gradient_stops() -> None:
+def test_build_gradient_stripe_svg_returns_smooth_gradient_panel() -> None:
     strategy = {
         "bbox": {"x": 1.0, "y": 2.0, "width": 30.0, "height": 4.0},
         "vertical": False,
@@ -44,11 +40,11 @@ def test_build_gradient_stripe_svg_renders_gradient_stops() -> None:
 
     svg = helpers.buildGradientStripeSvgImpl(40, 10, strategy)
 
-    assert 'linearGradient id="detectedStripeGradient"' in svg
-    assert 'offset="0.000%" stop-color="#112233"' in svg
-    assert 'offset="40.000%" stop-color="#445566"' in svg
-    assert 'offset="100.000%" stop-color="#778899"' in svg
-    assert 'rect x="1.0000" y="2.0000" width="30.0000" height="4.0000"' in svg
+    assert 'linearGradient id="smoothPanelGradient"' in svg
+    assert 'offset="0%" stop-color="#112233"' in svg
+    assert 'offset="100%" stop-color="#778899"' in svg
+    assert 'detectedStripeGradient' not in svg
+    assert 'rect x="0" y="0" width="40" height="10"' in svg
 
 
 def test_detect_gradient_stripe_strategy_skips_tiny_canvas_height() -> None:
@@ -61,7 +57,7 @@ def test_detect_gradient_stripe_strategy_skips_tiny_canvas_height() -> None:
     assert strategy is None
 
 
-def test_detect_gradient_strategy_handles_full_height_vertical_panel() -> None:
+def test_detect_gradient_strategy_ignores_full_height_vertical_panel() -> None:
     img = np.full((30, 60, 3), 255, dtype=np.uint8)
     for y in range(30):
         if y <= 8:
@@ -80,11 +76,7 @@ def test_detect_gradient_strategy_handles_full_height_vertical_panel() -> None:
 
     strategy = helpers.detectGradientStripeStrategyImpl(img, np_module=np)
 
-    assert strategy is not None
-    assert strategy["vertical"] is True
-    assert strategy["bbox"] == {"x": 0.0, "y": 0.0, "width": 60.0, "height": 30.0}
-    assert len(strategy["stops"]) >= 3
-    assert strategy["stops"][0]["color"] == "#adadad"
+    assert strategy is None
 
 
 def test_ac0vr2_ab_m_sample_uses_smooth_gradients_not_stripe_columns() -> None:

@@ -2314,7 +2314,7 @@ def test_run_iteration_pipeline_converts_non_composite_to_usable_svg(
     }
 
 
-def test_run_iteration_pipeline_overrides_semantic_badge_for_detected_gradient_stripe(
+def test_run_iteration_pipeline_uses_non_stripe_fallback_for_gradient_panel(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -2362,7 +2362,8 @@ def test_run_iteration_pipeline_overrides_semantic_badge_for_detected_gradient_s
 
     assert res is not None
     log_text = (reports_dir / "Z_203_element_validation.log").read_text(encoding="utf-8")
-    assert "status=non_composite_gradient_stripe_visual_override" in log_text
+    assert "gradient_stripe" not in log_text
+    assert "status=non_composite_perception_seeded_geometry_ir" in log_text
 
 
 def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> None:

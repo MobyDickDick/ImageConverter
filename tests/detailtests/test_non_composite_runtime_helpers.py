@@ -198,7 +198,7 @@ def test_run_non_composite_iteration_impl_manual_review_writes_skip_log() -> Non
     assert logs == [["status=skipped_manual_review", "manual_review_reason=Bitte prüfen"]]
     assert prints and prints[-1] == "  -> Überspringe Bild: Bitte prüfen"
 
-def test_run_non_composite_iteration_impl_manual_review_uses_gradient_stripe_plan_b() -> None:
+def test_run_non_composite_iteration_impl_manual_review_ignores_gradient_stripe_plan_b() -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
     prints: list[str] = []
@@ -226,9 +226,9 @@ def test_run_non_composite_iteration_impl_manual_review_uses_gradient_stripe_pla
     )
 
     assert result == ("Z_203", "desc", {"mode": "manual_review", "review_reason": "Bitte prüfen"}, 1, 0.9)
-    assert logs == [["status=non_composite_gradient_stripe"]]
-    assert artifacts == [("<svg gradient/>", "rendered")]
-    assert prints and "Plan B aktiv" in prints[0]
+    assert logs == [["status=manual_review_generated_vector_placeholder"]]
+    assert artifacts and artifacts[0][0] != "<svg gradient/>"
+    assert prints and "elementweise iterative Annäherung" in prints[0]
 
 def test_run_non_composite_iteration_impl_prefers_exact_image_variant_sample_svg(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -406,6 +406,50 @@ def test_ac0vr2_ab_panel_prefers_semantic_valve_over_plain_error_win() -> None:
     assert artifacts[0][0].count('<rect x="') <= 3
 
 
+def test_ac0vr2_ab_symmetric_valve_panel_disables_output_variation(monkeypatch) -> None:
+    monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
+    monkeypatch.setenv("TINY_ICC_OUTPUT_VARIATION", "1")
+    artifacts: list[tuple[str, object]] = []
+    logs: list[list[str]] = []
+    raster = np.ones((30, 60, 3), dtype=np.uint8) * 240
+    raster[0, :, :] = 176
+    raster[-1, :, :] = 176
+    raster[:, 0, :] = 176
+    raster[:, -1, :] = 176
+    raster[9, :, :] = 175
+    raster[20, :, :] = 175
+    raster[12, 41:54, :] = 178
+    raster[17, 41:54, :] = 178
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="auto",
+        params={"mode": "auto", "variant_name": "AC0VR2_AB_M"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=60,
+        height=30,
+        base_name="AC0VR2",
+        description="Unzugeordnete AC0VR2_AB-Panelvariante.",
+        perc_img=raster,
+        img_path="AC0VR2_AB_M.jpg",
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg />",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda svg, *_args, **_kwargs: svg,
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, _rendered: 0.1,
+        image_variant_name="AC0VR2_AB_M",
+    )
+
+    assert result is not None
+    assert logs and logs[0][0] == "status=non_composite_symmetric_valve_panel"
+    assert artifacts and "ac0vr2SymmetricValveGradient" in artifacts[0][0]
+    assert 'data-output-variation="1"' not in artifacts[0][0]
+
+
 def test_ac0vr2_symmetric_valve_panel_samples_line_colours_separately() -> None:
     raster = np.ones((30, 60, 3), dtype=np.uint8) * 240
     raster[0, :, :] = 176
@@ -487,7 +531,7 @@ def test_ac0vr2_plain_panel_fallback_preserves_vertical_gradient_for_bright_core
     assert 'fill="url(#ac0vr2PanelGradient)"' in svg
     assert '<rect x="0.500" y="0.500" width="59.000" height="29.000"' in svg
 
-def test_run_non_composite_iteration_impl_gradient_stripe_returns_iteration_tuple() -> None:
+def test_run_non_composite_iteration_impl_ignores_gradient_stripe_strategy() -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
 
@@ -517,8 +561,8 @@ def test_run_non_composite_iteration_impl_gradient_stripe_returns_iteration_tupl
     )
 
     assert result == ("Z_203", "desc", {"mode": "non_composite"}, 1, 1.25)
-    assert logs == [["status=non_composite_gradient_stripe_visual_override", "stops=3"]]
-    assert artifacts == [("<svg gradient/>", "rendered")]
+    assert logs == [["status=non_composite_pure_svg_placeholder_vector"]]
+    assert artifacts and artifacts[0][0] != "<svg gradient/>"
 
 def test_run_non_composite_iteration_impl_prefers_sample_svg_when_better(tmp_path) -> None:
     logs: list[list[str]] = []
