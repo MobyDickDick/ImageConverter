@@ -1120,10 +1120,7 @@ def _description_reuses_reference_family(description: str) -> bool:
 def _prefer_description_geometry_candidate(geometry_ir: list[dict[str, object]], *, description: str) -> bool:
     if _prefer_semantic_description_geometry(geometry_ir):
         return True
-    if any(str(element.get("kind", "")) == "DiagonalStripePanel" for element in geometry_ir):
-        return True
-    # Heat-exchanger descriptions are safer than generic stripe pixel fits: the
-    # text declares the rectangle, gradient, diagonal and plus/minus glyph
+    # Heat-exchanger descriptions declare rectangle, gradient, diagonal and plus/minus glyph
     # contract.  Keep that contract for direct descriptions and for
     # reference-derived size variants ("Wie <reference> ...") so conversion remains a
     # reusable description algorithm instead of drifting to per-image fitted
@@ -1347,9 +1344,7 @@ def runNonCompositeIterationImpl(
     calculate_error_fn,
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
-    algorithmic_description_available = mode != "manual_review" and (
-        bool(stripe_strategy) or _has_description_driven_symbol_algorithm(description)
-    )
+    algorithmic_description_available = mode != "manual_review" and _has_description_driven_symbol_algorithm(description)
     sample_svg = (
         None
         if algorithmic_description_available
@@ -1386,24 +1381,6 @@ def runNonCompositeIterationImpl(
                 ]
             else:
                 generated_log_lines = ["status=manual_review_iterative_diagonal_band_render_failed"]
-        elif stripe_strategy:
-            print_fn("  -> Plan B aktiv: nutze erkannte Gradient-Stripe-Strategie trotz Manual-Review.")
-            generated_svg_content = build_gradient_stripe_svg_fn(width, height, stripe_strategy)
-            strategy_stop_count = len(list(stripe_strategy.get("stops", [])))
-            generated_rendered = render_svg_to_numpy_fn(generated_svg_content, width, height)
-            if generated_rendered is None:
-                record_render_failure_fn(
-                    "manual_review_gradient_stripe_render_failed",
-                    svg_content=generated_svg_content,
-                    params_snapshot=params,
-                )
-            else:
-                generated_err = calculate_error_fn(perc_img, generated_rendered)
-                generated_status = "manual_review_gradient_stripe"
-                generated_log_lines = build_gradient_stripe_validation_log_lines_fn(
-                    semantic_mode_visual_override=semantic_mode_visual_override,
-                    strategy_stop_count=strategy_stop_count,
-                )
         else:
             print_fn("  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.")
             try:
@@ -1522,6 +1499,7 @@ def runNonCompositeIterationImpl(
     selected_panel_status = ""
     selected_panel_trigger = ""
     selected_panel_print = ""
+    selected_panel_locks_output_variation = False
     if symmetric_valve_panel_svg is not None or plain_panel_svg is not None:
         panel_candidates: list[dict[str, object]] = []
         if plain_panel_svg is not None:
@@ -1586,6 +1564,7 @@ def runNonCompositeIterationImpl(
             selected_panel_status = "non_composite_symmetric_valve_panel"
             selected_panel_trigger = "trigger=ac0vr2_raster_symmetric_valve_panel"
             selected_panel_print = "  -> Fallback aktiv: verwende symmetrisches AC0VR2-Ventilpanel aus Rasterfarben."
+            selected_panel_locks_output_variation = True
         else:
             selected_panel_status = "non_composite_plain_framed_panel"
             selected_panel_trigger = (
@@ -1600,16 +1579,6 @@ def runNonCompositeIterationImpl(
             )
         print_fn(selected_panel_print)
         write_validation_log_fn([f"status={selected_panel_status}", selected_panel_trigger])
-    elif stripe_strategy:
-        print_fn("  -> Fallback aktiv: verwende Gradient-Stripe-Strategie.")
-        svg_content = build_gradient_stripe_svg_fn(width, height, stripe_strategy)
-        strategy_stop_count = len(list(stripe_strategy.get("stops", [])))
-        write_validation_log_fn(
-            build_gradient_stripe_validation_log_lines_fn(
-                semantic_mode_visual_override=semantic_mode_visual_override,
-                strategy_stop_count=strategy_stop_count,
-            )
-        )
     else:
         print_fn("  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.")
         perception_seeded = _try_build_perception_seeded_geometry_ir_svg(
@@ -1688,14 +1657,7 @@ def runNonCompositeIterationImpl(
                             for key, value in optimizer_result.items()
                             if key not in {"geometry_ir", "rendered"}
                         }
-                    description_status = (
-                        "semantic_diagonal_stripe_panel"
-                        if any(
-                            str(element.get("kind", "")) == "DiagonalStripePanel"
-                            for element in description_geometry_ir
-                        )
-                        else "non_composite_description_geometry_ir"
-                    )
+                    description_status = "non_composite_description_geometry_ir"
                     candidates.append(
                         {
                             "status": description_status,
@@ -1915,17 +1877,6 @@ def runNonCompositeIterationImpl(
                 svg_err = calculate_error_fn(perc_img, svg_rendered)
                 # continue with plan-b sample comparison below using placeholder baseline
 
-    if stripe_strategy:
-        svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
-        if svg_rendered is None:
-            record_render_failure_fn(
-                "non_composite_pure_svg_render_failed",
-                svg_content=svg_content,
-                params_snapshot=params,
-            )
-            return None
-        svg_err = calculate_error_fn(perc_img, svg_rendered)
-
     if sample_svg and not description_driven_algorithm_available:
         sample_svg_path, sample_svg_content = sample_svg
         sample_rendered = render_svg_to_numpy_fn(sample_svg_content, width, height)
@@ -1983,7 +1934,7 @@ def runNonCompositeIterationImpl(
                 write_attempt_artifacts_fn(sample_svg_content, None)
                 return base_name, description, params, 1, svg_err
 
-    variation_rng = _output_variation_rng()
+    variation_rng = None if selected_panel_locks_output_variation else _output_variation_rng()
     if variation_rng is not None:
         varied_svg_content = _apply_svg_output_variation(
             svg_content,

@@ -29,13 +29,13 @@ def test_resolve_semantic_validation_debug_dir_impl_uses_generic_debug_fallback(
     assert (tmp_path / "semantic-debug" / "neutral_symbol_m").is_dir()
 
 
-def test_build_non_composite_gradient_stripe_validation_log_lines_impl_marks_override() -> None:
+def test_build_non_composite_gradient_stripe_validation_log_lines_impl_marks_disabled() -> None:
     lines = helpers.buildNonCompositeGradientStripeValidationLogLinesImpl(
         semantic_mode_visual_override=True,
         strategy_stop_count=4,
     )
 
     assert lines == [
-        "status=non_composite_gradient_stripe_visual_override",
-        "strategy=gradient_stripe;stop_count=4",
+        "status=non_composite_smooth_gradient_strategy_disabled",
+        "strategy=smooth_gradient;legacy_stop_count_ignored=1",
     ]

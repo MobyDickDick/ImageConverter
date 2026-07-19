@@ -26,12 +26,7 @@ def buildNonCompositeGradientStripeValidationLogLinesImpl(
     semantic_mode_visual_override: bool,
     strategy_stop_count: int,
 ) -> list[str]:
-    log_status = (
-        "non_composite_gradient_stripe_visual_override"
-        if semantic_mode_visual_override
-        else "non_composite_gradient_stripe"
-    )
     return [
-        f"status={log_status}",
-        f"strategy=gradient_stripe;stop_count={strategy_stop_count}",
+        "status=non_composite_smooth_gradient_strategy_disabled",
+        "strategy=smooth_gradient;legacy_stop_count_ignored=1",
     ]
