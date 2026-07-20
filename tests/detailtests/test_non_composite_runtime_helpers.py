@@ -2058,7 +2058,7 @@ def test_ac0224_sia_prefers_semantic_geometry_and_uses_crossed_square(monkeypatc
 
 
 
-def test_ac0010_allows_much_better_algorithmic_raster_fit_over_generic_description(monkeypatch) -> None:
+def test_ac0010_rejects_deprecated_stripe_fit_even_when_pixel_error_is_lower(monkeypatch) -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
     description = (
@@ -2106,11 +2106,12 @@ def test_ac0010_allows_much_better_algorithmic_raster_fit_over_generic_descripti
         image_variant_name="AC0010",
     )
 
-    assert result == ("AC0010", description, {"mode": "non_composite"}, 1, 1.0)
-    assert logs[-1][0] == "status=non_composite_elementwise_symbol_fit"
-    assert "non_composite_selection=raster_fit_overrides_poor_description_geometry" in logs[-1]
-    assert artifacts and artifacts[0][1] == "generic_rendered"
-    assert "generic-stripe-pixel-fit" in artifacts[0][0]
+    assert result == ("AC0010", description, {"mode": "non_composite"}, 1, 40.0)
+    assert logs[-1][0] == "status=non_composite_description_geometry_ir"
+    assert "non_composite_selection=semantic_description_geometry" in logs[-1]
+    assert artifacts and artifacts[0][1] == "geometry_rendered"
+    assert "generic-stripe-pixel-fit" not in artifacts[0][0]
+    assert 'fill="url(#geometry-ir-horizontal-gradient)"' in artifacts[0][0]
 
 def test_symbol_fit_keeps_description_declared_top_left_glyph_in_top_region(monkeypatch) -> None:
     initial = {
@@ -2384,6 +2385,19 @@ def test_symbol_raster_estimation_uses_smooth_vertical_gradient_for_full_panel()
     assert f'stop-color="{params["gradient_edge"]}"' in svg
     assert 'stop-color="#fbfbfb"' in svg
     assert svg.count('<rect x="') <= 4
+
+
+
+def test_deprecated_stripe_fit_detector_allows_real_linear_gradients() -> None:
+    description = "Gerahmtes Rechteck mit Farbverlauf."
+    assert not non_composite_runtime_helpers._is_deprecated_stripe_fit_svg(
+        '<svg><linearGradient id="g"/><rect fill="url(#g)"/></svg>',
+        description=description,
+    )
+    assert non_composite_runtime_helpers._is_deprecated_stripe_fit_svg(
+        "<svg id='generic-stripe-pixel-fit'><rect/><rect/></svg>",
+        description=description,
+    )
 
 
 def test_framed_gradient_panel_detection_skips_structural_symbol_descriptions() -> None:

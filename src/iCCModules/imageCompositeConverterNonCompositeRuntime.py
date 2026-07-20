@@ -529,6 +529,21 @@ def _gradient_band_svg_rects(
         f'fill="url(#{grad_id})" stroke="none"/>\n'
     )
 
+
+
+def _is_deprecated_stripe_fit_svg(svg_content: object, *, description: str = "") -> bool:
+    """Detect legacy pixel-fit stripe SVGs that should not beat smooth gradients."""
+    svg = str(svg_content or "").lower()
+    desc = str(description or "").lower()
+    requests_gradient = any(token in desc for token in ("farbverlauf", "farbuebergang", "farbübergang", "gradient"))
+    if not requests_gradient:
+        return False
+    if "lineargradient" in svg or "radialgradient" in svg:
+        return False
+    if "generic-stripe-pixel-fit" in svg:
+        return True
+    return svg.count("<rect") >= 6 and ("stripe" in svg or "band" in svg)
+
 def _build_structured_symbol_svg(
     width: int,
     height: int,
@@ -1736,6 +1751,7 @@ def runNonCompositeIterationImpl(
                         best_pixel_candidate is not semantic_description_candidate
                         and _is_description_heat_exchanger_geometry(list(semantic_description_candidate.get("geometry_ir", [])))
                         and pixel_error * 2.0 < semantic_error
+                        and not _is_deprecated_stripe_fit_svg(best_pixel_candidate.get("svg"), description=description)
                     ):
                         # Direct canonical heat-exchanger descriptions may still yield
                         # to a much better generated algorithmic fit.  The same rule
