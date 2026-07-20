@@ -61,11 +61,13 @@ jobs:
 
       - name: Upload completion-profile test evidence
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: completion-profile-test-evidence
           path: artifacts/test-evidence
           if-no-files-found: error
+          retention-days: 1
 
   batch-artifact-drift-gate:
     runs-on: ubuntu-latest
@@ -185,11 +187,13 @@ jobs:
 
       - name: Upload satisfactory regression debug data
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: satisfactory-regression-debug
           path: artifacts/converted_images/reports/satisfactory-regression-debug
           if-no-files-found: warn
+          retention-days: 1
 
   full-heavy-conversion-suite:
     if: github.event_name == 'workflow_dispatch' && inputs.run_heavy_diagnostics
@@ -238,9 +242,10 @@ jobs:
 
       - name: Upload catalog shard
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: catalog-conversion-shard-${{ matrix.shard }}
           path: artifacts/catalog-conversion/shard-*
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 3
