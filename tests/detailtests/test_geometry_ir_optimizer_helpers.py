@@ -5312,3 +5312,64 @@ def test_default_optimizer_refines_polygon_path_fill_opacity_with_high_midpoint_
     assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(0.975)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_opacity_with_quarter_midpoint_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "generic_checkmark_quarter_midpoint_stroke_opacity",
+            "points": [[0.20, 0.50], [0.45, 0.72], [0.82, 0.14]],
+            "fill": "none",
+            "stroke": "#43ad49",
+            "stroke_width": 0.08,
+            "stroke_opacity": 0.90,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0].get("stroke_opacity")
+            == pytest.approx(0.9125, abs=1e-12)
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(0.9125)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_fill_opacity_with_quarter_midpoint_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "generic_filled_path_quarter_midpoint_opacity",
+            "points": [[0.20, 0.20], [0.78, 0.20], [0.50, 0.78]],
+            "fill": "#d9001b",
+            "stroke": "none",
+            "fill_opacity": 0.95,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0].get("fill_opacity")
+            == pytest.approx(0.9625, abs=1e-12)
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(0.9625)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
