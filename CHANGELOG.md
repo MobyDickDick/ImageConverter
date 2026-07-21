@@ -1,4 +1,9 @@
 - Plan-B Run YH adds 512th-yoctofine catalog-free absolute stroke-width probes for RectBorder/Rule Geometry-IR elements and documents the SE0041_1 optimizer-only learning effect.
+
+### Plan-B Run YU (2026-07-20)
+
+- Run YU ergänzt katalogfreie 4096th-yoctofeine Opacity-Zwischenprobes für `ColorPatch.fill_opacity` und `RectBorder.stroke_opacity`, sodass die BackBottom-/Rechteck-Feinregistrierung nach Run YT wieder in der aktiven Rotation zu `GE9013_1M` fortgesetzt werden kann.
+
 - Plan-B Run XO adds sixteenth-yoctofine catalog-free PolygonPath point and stroke-width probes while the isolated GE1410_L diagram-triangle run remains green.
 - Plan-B Run XK adds quarter-yoctofine catalog-free absolute stroke-width probes for RectBorder/Rule Geometry-IR elements, confirms the isolated SE0041_1 metric remains stable, and refreshes the requested AC0838_M VOC Plan-B run.
 - Plan-B Run XJ adds quarter-yoctofine catalog-free PolygonPath point and stroke-width probes, documents the two newly added sample SVGs as separate ad-hoc Plan-B roundtrip contracts, and keeps the isolated GE1410_L metric in the same residual band.
