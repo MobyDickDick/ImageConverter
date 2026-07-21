@@ -489,3 +489,4 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 
 - [Nächstes Arbeitspaket – DLG0021 Quarter-Yoctofine-Gradient-Probes Run XD (2026-07-10)](next_arbeitspaket_2026-07-10_runXD.md)
 - [Nächstes Arbeitspaket – GE9013_1M Eighth-Yoctofine-Warmfill-Probe Run XR (2026-07-12)](next_arbeitspaket_2026-07-12_runXR.md)
+- [Nächstes Arbeitspaket – DLG0021 PolygonPath-Midpoint-Opacity-Probes Run YV (2026-07-21)](next_arbeitspaket_2026-07-21_runYV.md)
