@@ -2428,3 +2428,34 @@ def test_plain_panel_builder_skips_heat_exchanger_symbol_rasters() -> None:
     )
 
     assert svg is None
+
+
+def test_heat_exchanger_element_fit_scales_width_candidates_from_raster_size() -> None:
+    captured_svgs: list[str] = []
+    small = np.full((40, 20, 3), 210, dtype=np.uint8)
+    small[1:-1, 1:-1] = 190
+    small[:, 9:11] = 245
+    small[np.arange(2, 38), np.linspace(18, 2, 36).astype(int)] = 120
+    description = (
+        "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
+        "horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links."
+    )
+
+    def _render(svg: str, *_args):
+        captured_svgs.append(svg)
+        return np.zeros_like(small)
+
+    result = non_composite_runtime_helpers._fit_symbol_element_by_element(
+        width=64,
+        height=64,
+        description=description,
+        perc_img=small,
+        render_svg_to_numpy_fn=_render,
+        calculate_error_fn=lambda _target, _rendered: 1.0,
+    )
+
+    assert result is not None
+    _err, _svg, _rendered, params, _logs = result
+    assert float(params["diag1_width"]) <= 2.8
+    assert float(params["plus_width"]) <= 1.6
+    assert not any('stroke-width="4.00"' in svg for svg in captured_svgs)
