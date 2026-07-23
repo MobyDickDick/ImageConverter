@@ -846,6 +846,13 @@ def _fit_symbol_element_by_element(
     calculate_error_fn,
 ) -> tuple[float, str, object, dict[str, float | str], list[str]] | None:
     current = _derive_symbol_params_from_raster(width=width, height=height, perc_img=perc_img)
+    scale = max(1.0, min(float(width or 1), float(height or 1)))
+    try:
+        raster_shape = np.asarray(perc_img).shape
+        if len(raster_shape) >= 2:
+            scale = max(1.0, min(float(raster_shape[1] or 1), float(raster_shape[0] or 1)))
+    except (TypeError, ValueError):
+        pass
     description_text = (description or "").casefold()
     glyph_is_top = any(token in description_text for token in ("oben links", "top left", "top-left"))
     has_plus = "plus" in description_text or "+" in description_text
@@ -911,13 +918,11 @@ def _fit_symbol_element_by_element(
             {
                 "rect_x_inset_ratio": min(float(current["rect_x_inset_ratio"]), 0.02),
                 "rect_y_inset_ratio": min(float(current["rect_y_inset_ratio"]), 0.02),
-                "diag1_width": max(float(current["diag1_width"]), 2.8),
-                "diagonal_inset_ratio": max(float(current["diagonal_inset_ratio"]), 0.04),
-                "plus_x_ratio": min(max(float(current["plus_x_ratio"]), 0.30), 0.36),
-                "glyph_y_ratio": min(max(float(current["glyph_y_ratio"]), 0.12), 0.18),
-                "plus_half_ratio": min(max(float(current["plus_half_ratio"]), 0.10), 0.14),
-                "minus_gap_ratio": 2.1,
-                "minus_width": 0.8,
+                "diag1_width": max(float(current["diag1_width"]), min(2.8, max(1.0, scale * 0.09))),
+                "diagonal_inset_ratio": max(float(current["diagonal_inset_ratio"]), min(0.04, scale / max(width, height, 1) * 0.04)),
+                "glyph_y_ratio": min(float(current["glyph_y_ratio"]), 0.22),
+                "minus_gap_ratio": max(1.4, min(2.1, scale * 0.075)),
+                "minus_width": max(0.8, min(1.2, scale * 0.04)),
                 "glyph_gray": 130.0,
                 "diag_gray": 145.0,
                 "border_gray": 154.0,
@@ -936,22 +941,26 @@ def _fit_symbol_element_by_element(
     gradient_edge_seed = float(int(str(current["gradient_edge"])[1:3], 16))
     gradient_mid_seed = float(int(str(current["gradient_mid"])[1:3], 16))
     diagonal_gray_seed = current["diag_gray"]
+    stroke_upper = max(1.0, min(4.0, scale * 0.12))
+    glyph_stroke_upper = max(0.8, min(2.2, scale * 0.08))
+    diag_width_candidates = tuple(
+        value for value in (0.8, 1.0, 1.4, 1.8, 2.2, 2.8, 3.2, 3.6, 4.0) if value <= stroke_upper + 1e-6
+    ) or (stroke_upper,)
+    glyph_width_candidates = tuple(
+        value for value in (0.8, 1.0, 1.2, 1.6, 2.2) if value <= glyph_stroke_upper + 1e-6
+    ) or (glyph_stroke_upper,)
     refinement_steps: list[tuple[str, tuple[float | str, ...]]] = [
-        ("border_thickness", (0.8, 1.0, 1.2, 1.4, 1.8)),
+        ("border_thickness", tuple(value for value in (0.8, 1.0, 1.2, 1.4, 1.8) if value <= max(1.0, min(1.8, scale * 0.09)) + 1e-6)),
         ("rect_x_inset_ratio", _candidate_window(float(current["rect_x_inset_ratio"]), (-0.04, -0.02, 0.0, 0.02, 0.04), minimum=0.0, maximum=0.20, include_limits=False)),
         ("rect_y_inset_ratio", _candidate_window(float(current["rect_y_inset_ratio"]), (-0.04, -0.02, 0.0, 0.02, 0.04), minimum=0.0, maximum=0.20, include_limits=False)),
         ("gradient_center", (40.0, 45.0, 50.0, 55.0, 60.0)),
         (
             "diag1_width",
-            (0.8, 1.0, 1.4, 1.8, 2.2, 2.8, 3.2, 3.6, 4.0)
-            if float(current["diag1_width"]) > 0
-            else (0.0,),
+            diag_width_candidates if float(current["diag1_width"]) > 0 else (0.0,),
         ),
         (
             "diag2_width",
-            (0.8, 1.0, 1.4, 1.8, 2.2, 2.8, 3.2, 3.6, 4.0)
-            if float(current["diag2_width"]) > 0
-            else (0.0,),
+            diag_width_candidates if float(current["diag2_width"]) > 0 else (0.0,),
         ),
         (
             "diagonal_inset_ratio",
@@ -959,7 +968,7 @@ def _fit_symbol_element_by_element(
             if (float(current["diag1_width"]) > 0 or float(current["diag2_width"]) > 0)
             else (0.0,),
         ),
-        ("chevron_width", (0.8, 1.0, 1.4, 1.8, 2.2, 2.8) if has_right_chevron else (0.0,)),
+        ("chevron_width", tuple(value for value in diag_width_candidates if value <= 2.8) if has_right_chevron else (0.0,)),
         (
             "chevron_inset_ratio",
             _candidate_window(
@@ -991,9 +1000,9 @@ def _fit_symbol_element_by_element(
             "plus_half_ratio",
             _candidate_window(float(current["plus_half_ratio"]), (-0.03, -0.015, 0.0, 0.015, 0.03), minimum=0.04, maximum=0.16, include_limits=False),
         ),
-        ("plus_width", (0.8, 1.0, 1.2, 1.6, 2.2) if has_plus else (0.0,)),
+        ("plus_width", glyph_width_candidates if has_plus else (0.0,)),
         ("minus_gap_ratio", (1.5, 1.8, 2.1)),
-        ("minus_width", (0.8, 1.0, 1.2, 1.6, 2.2) if has_minus else (0.0,)),
+        ("minus_width", glyph_width_candidates if has_minus else (0.0,)),
         ("center_dot_radius", (0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.2) if has_center_dot else (0.0,)),
         ("center_dot_gray", (40.0, 55.0, 70.0, 80.0, 95.0, 110.0, 130.0, 150.0) if has_center_dot else (float(current["center_dot_gray"]),)),
         ("glyph_gray", (55.0, 70.0, 85.0, 100.0, 115.0, 130.0, 150.0, 180.0, 210.0, 241.0)),
