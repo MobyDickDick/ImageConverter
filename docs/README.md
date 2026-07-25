@@ -8,6 +8,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Abschlussentscheidung – FP-D14 Run OA (2026-06-05)](abschlussentscheidung_2026-06-05_runOA.md)
 - [AC0030 Hard-Abnahme (2026-05-24)](ac0030_hard_acceptance_2026-05-24.md)
 - [AC0100 Quality Follow-up (2026-05-31, Abschluss Run NK 2026-06-02)](ac0100_quality_followup_2026-05-31.md)
+- [Nächstes Arbeitspaket – AC0010/AC0100 Renderer-Reparatur (2026-07-25)](next_arbeitspaket_2026-07-25_ac0100_renderer_fix.md)
 - [AC0120 Recheck (2026-05-27)](ac0120_recheck_2026-05-27_run.md)
 - [N1-Plan-B Microbatch AC0800..AC0809 – Run DA_PB (2026-05-14)](ac0800_ac0809_planb_runDA_2026-05-14_summary.md)
 - [N1-Plan-B Microbatch AC0800..AC0809 – Run DB_PB (2026-05-14)](ac0800_ac0809_planb_runDB_2026-05-14_summary.md)

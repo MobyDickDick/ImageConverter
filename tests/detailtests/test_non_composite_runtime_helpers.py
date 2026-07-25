@@ -2337,6 +2337,44 @@ def test_description_geometry_candidate_yields_to_much_better_algorithmic_raster
     assert artifacts and artifacts[0][1] == "structured_rendered"
 
 
+def test_description_geometry_candidate_yields_to_any_better_algorithmic_raster_fit() -> None:
+    """Preview scores need no arbitrary 2x margin for the raster-driven algorithm."""
+    logs: list[list[str]] = []
+    description = (
+        "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
+        "Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links"
+    )
+
+    def _render(content, *_args, **_kwargs):
+        return "description_rendered" if "geometry-ir-horizontal-gradient" in content else "structured_rendered"
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=40,
+        height=80,
+        base_name="NEUTRAL_HEAT_EXCHANGER",
+        description=description,
+        perc_img=np.ones((80, 40, 3), dtype=np.uint8) * 210,
+        img_path="/tmp/neutral-heat-exchanger.jpg",
+        print_fn=lambda _message: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg baseline/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=gradient"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=_render,
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda *_args: None,
+        calculate_error_fn=lambda _target, rendered: 120.0 if rendered == "description_rendered" else 100.0,
+    )
+
+    assert result == ("NEUTRAL_HEAT_EXCHANGER", description, {"mode": "non_composite"}, 1, 100.0)
+    assert logs[0][0] == "status=non_composite_elementwise_symbol_fit"
+    assert "non_composite_selection=raster_fit_overrides_poor_description_geometry" in logs[0]
+
+
 def test_reference_heat_exchanger_variants_keep_description_contract_and_registration() -> None:
     description = (
         "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
@@ -2349,7 +2387,7 @@ def test_reference_heat_exchanger_variants_keep_description_contract_and_registr
     assert non_composite_runtime_helpers._prefer_description_geometry_candidate(geometry_ir, description=description) is True
 
 
-def test_symbol_raster_estimation_uses_smooth_vertical_gradient_for_full_panel() -> None:
+def test_symbol_raster_estimation_uses_renderer_stable_vertical_gradient_bands() -> None:
     raster = np.full((30, 60, 3), 255, dtype=np.uint8)
     for y in range(30):
         if y <= 9:
@@ -2380,11 +2418,11 @@ def test_symbol_raster_estimation_uses_smooth_vertical_gradient_for_full_panel()
     assert params["gradient_vertical"] is True
     assert params["gradient_edge"] <= "#c0c0c0"
     assert params["gradient_mid"] == "#fbfbfb"
-    assert '<svg:linearGradient xmlns:svg="http://www.w3.org/2000/svg" id="smoothPanelGradient_' in svg
-    assert 'x2="0%" y2="100%"' in svg
-    assert f'stop-color="{params["gradient_edge"]}"' in svg
-    assert 'stop-color="#fbfbfb"' in svg
-    assert svg.count('<rect x="') <= 4
+    assert "linearGradient" not in svg
+    assert svg.count('<rect x="') >= 32
+    # Vertical bands span the panel width while advancing along the y axis.
+    assert '<rect x="0.500" y="0.500" width="59.000" height="0.482"' in svg
+    assert 'fill="#' in svg
 
 
 
