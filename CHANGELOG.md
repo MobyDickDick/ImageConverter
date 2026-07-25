@@ -30,6 +30,8 @@
 All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
+- AC0010/AC0100 gradient panels now use renderer-stable, raster-scaled color bands in both horizontal and vertical element-wise fits. Candidate selection no longer requires an arbitrary 2x preview-score advantage, restoring algorithmic conversion quality for the base image and all L/M/S variants without sample or template data.
+
 - Run YT blocks deprecated stripe-like raster-fit SVGs from overriding smooth semantic gradient Geometry-IR candidates when descriptions request a color gradient.
 
 - Plan-B Run UI adds catalog-free fine opacity probes (`0.925`/`0.975`) for rectangular `ColorPatch` and `RectBorder` Geometry-IR elements, extending the GE9012_6M BackBottom/light-grey-square optimization space without runtime image-ID coupling.

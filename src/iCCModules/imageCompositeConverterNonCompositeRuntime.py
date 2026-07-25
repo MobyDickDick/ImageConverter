@@ -501,33 +501,30 @@ def _gradient_band_svg_rects(
 
     edge = _rgb(edge_hex, 0x8F)
     mid = _rgb(mid_hex, 0xDE)
-    center = max(1.0, min(99.0, float(center_percent)))
-    grad_key = "|".join(
-        (
-            f"{float(x):.3f}",
-            f"{float(y):.3f}",
-            f"{float(width):.3f}",
-            f"{float(height):.3f}",
-            str(edge_hex),
-            str(mid_hex),
-            f"{center:.3f}",
-            str(bool(vertical)),
+    safe_bands = max(4, int(bands))
+    center = max(1.0, min(99.0, float(center_percent))) / 100.0
+    parts: list[str] = []
+    for index in range(safe_bands):
+        t = (index + 0.5) / safe_bands
+        if t <= center:
+            ratio = t / center
+            color = edge * (1.0 - ratio) + mid * ratio
+        else:
+            ratio = (t - center) / (1.0 - center)
+            color = mid * (1.0 - ratio) + edge * ratio
+        if vertical:
+            band_x, band_y = x, y + height * index / safe_bands
+            band_w = width
+            band_h = height / safe_bands + max(0.02, height * 0.001)
+        else:
+            band_x, band_y = x + width * index / safe_bands, y
+            band_w = width / safe_bands + max(0.02, width * 0.001)
+            band_h = height
+        parts.append(
+            f'  <rect x="{band_x:.3f}" y="{band_y:.3f}" width="{band_w:.3f}" height="{band_h:.3f}" '
+            f'fill="{_rgb_hex(color)}" stroke="none"/>'
         )
-    )
-    grad_id = f"smoothPanelGradient_{hashlib.sha1(grad_key.encode('utf-8')).hexdigest()[:8]}"
-    x2 = "0%" if vertical else "100%"
-    y2 = "100%" if vertical else "0%"
-    return (
-        f'  <defs>\n'
-        f'    <svg:linearGradient xmlns:svg="http://www.w3.org/2000/svg" id="{grad_id}" x1="0%" y1="0%" x2="{x2}" y2="{y2}">\n'
-        f'      <stop offset="0%" stop-color="{_rgb_hex(edge)}"/>\n'
-        f'      <stop offset="{center:.3f}%" stop-color="{_rgb_hex(mid)}"/>\n'
-        f'      <stop offset="100%" stop-color="{_rgb_hex(edge)}"/>\n'
-        f'    </svg:linearGradient>\n'
-        f'  </defs>\n'
-        f'  <rect x="{x:.3f}" y="{y:.3f}" width="{width:.3f}" height="{height:.3f}" '
-        f'fill="url(#{grad_id})" stroke="none"/>\n'
-    )
+    return "\n".join(parts) + ("\n" if parts else "")
 
 
 
@@ -1759,11 +1756,14 @@ def runNonCompositeIterationImpl(
                     if (
                         best_pixel_candidate is not semantic_description_candidate
                         and _is_description_heat_exchanger_geometry(list(semantic_description_candidate.get("geometry_ir", [])))
-                        and pixel_error * 2.0 < semantic_error
+                        and pixel_error < semantic_error
                         and not _is_deprecated_stripe_fit_svg(best_pixel_candidate.get("svg"), description=description)
                     ):
-                        # Direct canonical heat-exchanger descriptions may still yield
-                        # to a much better generated algorithmic fit.  The same rule
+                        # Direct canonical heat-exchanger descriptions yield to the
+                        # better generated algorithmic fit.  Requiring a 2x margin
+                        # hid real regressions because the preview score can compress
+                        # the difference between two gradient renderings even when the
+                        # final raster metric differs substantially.  The same rule
                         # applies to reference-derived size variants ("Wie
                         # <reference> ..."): they must reuse the heat-exchanger
                         # algorithm, but must not force a poorer registered
