@@ -524,37 +524,6 @@ def _smooth_gradient_svg_rect(
     )
 
 
-def _gradient_evaluation_rects(
-    *, x: float, y: float, width: float, height: float, edge_hex: str,
-    mid_hex: str, center_percent: float, vertical: bool, bands: int = 64,
-) -> str:
-    """Rasterizer compatibility paint used only while scoring candidates.
-
-    PyMuPDF currently paints SVG gradients black.  The returned rectangles are
-    never returned or persisted as conversion output; they merely let the
-    optimizer score the same interpolated colours it emits as a native gradient.
-    """
-    def rgb(color: str) -> np.ndarray:
-        value = color.lstrip("#")
-        return np.asarray([int(value[i:i + 2], 16) for i in (0, 2, 4)], dtype=np.float32)
-
-    edge, middle = rgb(edge_hex), rgb(mid_hex)
-    center = max(0.01, min(0.99, center_percent / 100.0))
-    rectangles = []
-    for index in range(bands):
-        t = (index + 0.5) / bands
-        ratio = t / center if t <= center else (1.0 - t) / (1.0 - center)
-        color = edge * (1.0 - ratio) + middle * ratio
-        bx, by = (x, y + height * index / bands) if vertical else (x + width * index / bands, y)
-        bw, bh = (width, height / bands + 0.02) if vertical else (width / bands + 0.02, height)
-        rectangles.append(
-            f'  <rect x="{bx:.3f}" y="{by:.3f}" width="{bw:.3f}" height="{bh:.3f}" '
-            f'fill="{_rgb_hex(color)}" stroke="none"/>'
-        )
-    return "\n".join(rectangles) + "\n"
-
-
-
 def _is_deprecated_stripe_fit_svg(svg_content: object, *, description: str = "") -> bool:
     """Detect legacy pixel-fit stripe SVGs that should not beat smooth gradients."""
     svg = str(svg_content or "").lower()
@@ -598,7 +567,6 @@ def _build_structured_symbol_svg(
     chevron_peak_x_ratio: float = 1.0,
     chevron_peak_y_ratio: float = 0.5,
     gradient_vertical: bool = False,
-    _evaluation_renderer_compat: bool = False,
 ) -> str:
     safe_w = max(1, int(width or 1))
     safe_h = max(1, int(height or 1))
@@ -636,12 +604,6 @@ def _build_structured_symbol_svg(
         center_percent=gradient_center,
         vertical=gradient_vertical,
     )
-    if _evaluation_renderer_compat:
-        gradient_rects = _gradient_evaluation_rects(
-            x=content_x, y=content_y, width=content_w, height=content_h,
-            edge_hex=gradient_edge, mid_hex=gradient_mid,
-            center_percent=gradient_center, vertical=gradient_vertical,
-        )
     clip_def = f'  <clipPath id="innerRect"><rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}"/></clipPath>\n'
     if "<defs>" in gradient_rects:
         gradient_rects = gradient_rects.replace("  </defs>\n", clip_def + "  </defs>\n", 1)
@@ -1070,10 +1032,7 @@ def _fit_symbol_element_by_element(
                     ]
                 )
             svg = _build_structured_symbol_svg(width, height, **candidate)
-            evaluation_svg = _build_structured_symbol_svg(
-                width, height, **candidate, _evaluation_renderer_compat=True
-            )
-            rendered = render_svg_to_numpy_fn(evaluation_svg, width, height)
+            rendered = render_svg_to_numpy_fn(svg, width, height)
             if rendered is None:
                 continue
             err = calculate_error_fn(perc_img, rendered)
