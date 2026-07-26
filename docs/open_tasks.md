@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-06-19)
+## Aufgaben-Gesamtzähler (Snapshot 2026-07-26)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `404` · Erledigt `367` · Offen `37`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `401` · Erledigt `374` · Offen `27`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
