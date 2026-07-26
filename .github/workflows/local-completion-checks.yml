@@ -121,7 +121,6 @@ jobs:
         run: python tools/run_pytest_profile.py ${{ matrix.profile }}
 
   safe-baseline:
-    if: github.event_name == 'workflow_dispatch' && inputs.run_heavy_diagnostics
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -142,7 +141,6 @@ jobs:
         run: ./tools/run_safe_test_baseline.sh
 
   regression-checks:
-    if: github.event_name == 'workflow_dispatch' && inputs.run_heavy_diagnostics
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -196,7 +194,6 @@ jobs:
           retention-days: 1
 
   full-heavy-conversion-suite:
-    if: github.event_name == 'workflow_dispatch' && inputs.run_heavy_diagnostics
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -217,7 +214,6 @@ jobs:
         run: python -m pytest -q -rs tests/test_image_composite_converter.py
 
   full-catalog-conversion:
-    if: github.event_name == 'workflow_dispatch' && inputs.run_full_catalog
     runs-on: ubuntu-latest
     timeout-minutes: 330
     strategy:
