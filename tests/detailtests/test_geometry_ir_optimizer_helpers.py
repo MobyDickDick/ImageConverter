@@ -6008,6 +6008,66 @@ def test_default_optimizer_refines_polygon_path_points_with_8192th_yoctofine_sub
     assert result["steps"][0]["accepted"] is True
 
 
+def test_default_optimizer_refines_rect_border_stroke_width_with_16384th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "square_badge_head_16384th_yoctofine",
+            "bbox": [0.22, 0.18, 0.56, 0.36],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.0550000011920929) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.0550000011920929
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rule_stroke_width_with_16384th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "VerticalRule",
+            "id": "square_badge_stem_16384th_yoctofine",
+            "bbox": [0.44, 0.24, 0.08, 0.56],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.0550000011920929) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.0550000011920929
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
 def test_default_optimizer_refines_polygon_path_stroke_width_with_8192th_yoctofine_absolute_probe() -> (
     None
 ):
