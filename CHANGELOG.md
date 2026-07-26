@@ -1,3 +1,4 @@
+- Plan-B Run ZN adds 8192th-yoctofine catalog-free PolygonPath stroke-gradient offset probes and documents the DLG0021 optimizer-only learning effect.
 - Plan-B Run YH adds 512th-yoctofine catalog-free absolute stroke-width probes for RectBorder/Rule Geometry-IR elements and documents the SE0041_1 optimizer-only learning effect.
 
 ### Plan-B Run YU (2026-07-20)
