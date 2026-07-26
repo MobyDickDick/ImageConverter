@@ -2418,7 +2418,8 @@ def test_symbol_raster_estimation_uses_continuous_vertical_gradient() -> None:
     assert params["gradient_vertical"] is True
     assert params["gradient_edge"] <= "#c0c0c0"
     assert params["gradient_mid"] == "#fbfbfb"
-    assert '<linearGradient id="panelGradient" x1="0%" y1="0%" x2="0%" y2="100%">' in svg
+    assert '<linearGradient id="panelGradient" gradientUnits="userSpaceOnUse"' in svg
+    assert 'x1="0.500" y1="0.500" x2="0.500" y2="29.500"' in svg
     assert f'<stop offset="{params["gradient_center"]:g}%" stop-color="#fbfbfb"/>' in svg
     assert svg.count('fill="url(#panelGradient)"') == 1
     assert svg.count('<rect x="') == 4  # clip, canvas, gradient panel, frame

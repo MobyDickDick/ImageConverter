@@ -506,10 +506,14 @@ def _smooth_gradient_svg_rect(
 ) -> str:
     """Return one continuous SVG gradient, never a stack of raster-fit bands."""
     center = max(1.0, min(99.0, float(center_percent)))
-    x2, y2 = ("0%", "100%") if vertical else ("100%", "0%")
+    x1 = x
+    y1 = y
+    x2 = x if vertical else x + width
+    y2 = y + height if vertical else y
     return (
         '  <defs>\n'
-        f'    <linearGradient id="panelGradient" x1="0%" y1="0%" x2="{x2}" y2="{y2}">\n'
+        f'    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" '
+        f'x1="{x1:.3f}" y1="{y1:.3f}" x2="{x2:.3f}" y2="{y2:.3f}">\n'
         f'      <stop offset="0%" stop-color="{edge_hex}"/>\n'
         f'      <stop offset="{center:g}%" stop-color="{mid_hex}"/>\n'
         f'      <stop offset="100%" stop-color="{edge_hex}"/>\n'
@@ -518,6 +522,36 @@ def _smooth_gradient_svg_rect(
         f'  <rect x="{x:.3f}" y="{y:.3f}" width="{width:.3f}" height="{height:.3f}" '
         'fill="url(#panelGradient)" stroke="none"/>\n'
     )
+
+
+def _gradient_evaluation_rects(
+    *, x: float, y: float, width: float, height: float, edge_hex: str,
+    mid_hex: str, center_percent: float, vertical: bool, bands: int = 64,
+) -> str:
+    """Rasterizer compatibility paint used only while scoring candidates.
+
+    PyMuPDF currently paints SVG gradients black.  The returned rectangles are
+    never returned or persisted as conversion output; they merely let the
+    optimizer score the same interpolated colours it emits as a native gradient.
+    """
+    def rgb(color: str) -> np.ndarray:
+        value = color.lstrip("#")
+        return np.asarray([int(value[i:i + 2], 16) for i in (0, 2, 4)], dtype=np.float32)
+
+    edge, middle = rgb(edge_hex), rgb(mid_hex)
+    center = max(0.01, min(0.99, center_percent / 100.0))
+    rectangles = []
+    for index in range(bands):
+        t = (index + 0.5) / bands
+        ratio = t / center if t <= center else (1.0 - t) / (1.0 - center)
+        color = edge * (1.0 - ratio) + middle * ratio
+        bx, by = (x, y + height * index / bands) if vertical else (x + width * index / bands, y)
+        bw, bh = (width, height / bands + 0.02) if vertical else (width / bands + 0.02, height)
+        rectangles.append(
+            f'  <rect x="{bx:.3f}" y="{by:.3f}" width="{bw:.3f}" height="{bh:.3f}" '
+            f'fill="{_rgb_hex(color)}" stroke="none"/>'
+        )
+    return "\n".join(rectangles) + "\n"
 
 
 
@@ -564,6 +598,7 @@ def _build_structured_symbol_svg(
     chevron_peak_x_ratio: float = 1.0,
     chevron_peak_y_ratio: float = 0.5,
     gradient_vertical: bool = False,
+    _evaluation_renderer_compat: bool = False,
 ) -> str:
     safe_w = max(1, int(width or 1))
     safe_h = max(1, int(height or 1))
@@ -601,15 +636,28 @@ def _build_structured_symbol_svg(
         center_percent=gradient_center,
         vertical=gradient_vertical,
     )
+    if _evaluation_renderer_compat:
+        gradient_rects = _gradient_evaluation_rects(
+            x=content_x, y=content_y, width=content_w, height=content_h,
+            edge_hex=gradient_edge, mid_hex=gradient_mid,
+            center_percent=gradient_center, vertical=gradient_vertical,
+        )
     clip_def = f'  <clipPath id="innerRect"><rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}"/></clipPath>\n'
     if "<defs>" in gradient_rects:
         gradient_rects = gradient_rects.replace("  </defs>\n", clip_def + "  </defs>\n", 1)
     else:
         gradient_rects = "  <defs>\n" + clip_def + "  </defs>\n" + gradient_rects
+    # Some of the lightweight SVG renderers used by the quality loop only
+    # resolve paint servers that are declared before the first painted node.
+    # Keep definitions and geometry separate so the white canvas cannot make a
+    # later gradient reference render as transparent/black during optimization.
+    definitions, gradient_panel = gradient_rects.split("  </defs>\n", 1)
+    definitions += "  </defs>\n"
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" viewBox="0 0 {safe_w} {safe_h}">\n'
+        f'{definitions}'
         f'  <rect x="0" y="0" width="{safe_w}" height="{safe_h}" fill="#ffffff" stroke="none"/>\n'
-        f'{gradient_rects}'
+        f'{gradient_panel}'
         f'  <rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}" fill="none" stroke="{_color_hex(border_gray)}" stroke-width="{border_thickness:.2f}"/>\n'
         + (f'  <line x1="{diag_x1:g}" y1="{diag_y0:g}" x2="{diag_x0:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag1_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag1_width > 0 else '')
         + (f'  <line x1="{diag_x0:g}" y1="{diag_y0:g}" x2="{diag_x1:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag2_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag2_width > 0 else '')
@@ -1022,7 +1070,10 @@ def _fit_symbol_element_by_element(
                     ]
                 )
             svg = _build_structured_symbol_svg(width, height, **candidate)
-            rendered = render_svg_to_numpy_fn(svg, width, height)
+            evaluation_svg = _build_structured_symbol_svg(
+                width, height, **candidate, _evaluation_renderer_compat=True
+            )
+            rendered = render_svg_to_numpy_fn(evaluation_svg, width, height)
             if rendered is None:
                 continue
             err = calculate_error_fn(perc_img, rendered)
