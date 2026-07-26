@@ -6968,9 +6968,17 @@ def test_parse_args_uses_console_prompt_defaults_for_missing_range() -> None:
     assert args.end is None
 
 
-def test_main_prompts_for_range_when_start_and_end_are_missing(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_main_prompts_for_range_when_start_and_end_are_missing(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
     prompts: list[str] = []
-    monkeypatch.setattr(conv, "_resolveCliCsvAndOutput", lambda _args: ("", "out_dir"))
+    descriptions = tmp_path / "descriptions.csv"
+    descriptions.write_text("Wurzelform;Beschreibung\n", encoding="utf-8")
+    monkeypatch.setattr(
+        conv,
+        "_resolveCliCsvAndOutput",
+        lambda _args: (str(descriptions), "out_dir"),
+    )
     monkeypatch.setattr(conv, "convertRange", lambda *_args, **_kwargs: "out_dir")
     monkeypatch.setattr(conv, "_optionalLogCapture", lambda _path: contextlib.nullcontext())
 
@@ -6988,8 +6996,16 @@ def test_main_prompts_for_range_when_start_and_end_are_missing(monkeypatch: pyte
     assert prompts == ["Namen von: ", "Namen bis: "]
 
 
-def test_main_skips_range_prompt_when_start_and_end_are_provided(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(conv, "_resolveCliCsvAndOutput", lambda _args: ("", "out_dir"))
+def test_main_skips_range_prompt_when_start_and_end_are_provided(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    descriptions = tmp_path / "descriptions.csv"
+    descriptions.write_text("Wurzelform;Beschreibung\n", encoding="utf-8")
+    monkeypatch.setattr(
+        conv,
+        "_resolveCliCsvAndOutput",
+        lambda _args: (str(descriptions), "out_dir"),
+    )
     monkeypatch.setattr(conv, "convertRange", lambda *_args, **_kwargs: "out_dir")
     monkeypatch.setattr(conv, "_optionalLogCapture", lambda _path: contextlib.nullcontext())
 
@@ -7003,8 +7019,16 @@ def test_main_skips_range_prompt_when_start_and_end_are_provided(monkeypatch: py
     assert rc == 0
 
 
-def test_main_uses_fixed_ac08_regression_set(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(conv, "_resolveCliCsvAndOutput", lambda _args: ("table.csv", "out_dir"))
+def test_main_uses_fixed_ac08_regression_set(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    descriptions = tmp_path / "table.csv"
+    descriptions.write_text("Wurzelform;Beschreibung\n", encoding="utf-8")
+    monkeypatch.setattr(
+        conv,
+        "_resolveCliCsvAndOutput",
+        lambda _args: (str(descriptions), "out_dir"),
+    )
     monkeypatch.setattr(conv, "_optionalLogCapture", lambda _path: contextlib.nullcontext())
     captured: dict[str, object] = {}
 
@@ -7122,14 +7146,13 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "batch-artifact-drift-gate:" in ci_workflow
     assert "drift_status=pass" in ci_workflow
     assert "./tools/run_local_completion_checks.sh --require-drift-summary" in ci_workflow
-    assert "run_heavy_diagnostics:" in ci_workflow
     assert "pytest-profile-matrix:" in ci_workflow
     assert "python tools/run_pytest_profile.py ${{ matrix.profile }}" in ci_workflow
     assert "safe-baseline:" in ci_workflow
-    assert "safe-baseline:\n    if: github.event_name == 'workflow_dispatch' && inputs.run_heavy_diagnostics" in ci_workflow
+    assert "safe-baseline:\n    runs-on: ubuntu-latest" in ci_workflow
     assert "./tools/run_safe_test_baseline.sh" in ci_workflow
     assert "regression-checks:" in ci_workflow
-    assert "regression-checks:\n    if: github.event_name == 'workflow_dispatch' && inputs.run_heavy_diagnostics" in ci_workflow
+    assert "regression-checks:\n    runs-on: ubuntu-latest" in ci_workflow
     assert "./tools/run_regression_checks.sh" in ci_workflow
     assert ci_workflow.count("RUN_HEAVY_CONVERSION_TESTS: '1'") >= 4
     assert "satisfactory-regression-battery:" in ci_workflow
@@ -7138,14 +7161,16 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "actions/upload-artifact@v4" in ci_workflow
     assert "satisfactory-regression-debug" in ci_workflow
     assert "full-heavy-conversion-suite:" in ci_workflow
-    assert "full-heavy-conversion-suite:\n    if: github.event_name == 'workflow_dispatch' && inputs.run_heavy_diagnostics" in ci_workflow
+    assert "full-heavy-conversion-suite:\n    runs-on: ubuntu-latest" in ci_workflow
     assert "python -m pytest -q -rs tests/test_image_composite_converter.py" in ci_workflow
+    assert "full-catalog-conversion:\n    runs-on: ubuntu-latest" in ci_workflow
+    assert "shard: [0, 1, 2, 3, 4, 5, 6, 7]" in ci_workflow
     assert "pull_request:" in ci_workflow
     assert "workflow_dispatch:" in ci_workflow
     assert "--print-linux-vendor-command" in workflow_doc
     assert "python tools/run_pytest_profile.py core-green" in workflow_doc
     assert "python tools/run_pytest_profile.py extended" in workflow_doc
-    assert "run_heavy_diagnostics" in workflow_doc
+    assert "automatisch" in workflow_doc
     assert "./tools/run_safe_test_baseline.sh" in workflow_doc
     assert "./tools/run_regression_checks.sh" in workflow_doc
     assert "satisfactory-regression-battery" in workflow_doc

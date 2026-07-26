@@ -8,17 +8,6 @@ on:
       - master
       - work
   workflow_dispatch:
-    inputs:
-      run_heavy_diagnostics:
-        description: 'Run opt-in heavy conversion diagnostics (safe baseline, regression checks, full heavy suite)'
-        required: false
-        type: boolean
-        default: false
-      run_full_catalog:
-        description: 'Convert the complete raster catalog in parallel shards (60 second limit per image)'
-        required: false
-        type: boolean
-        default: false
 
 jobs:
   image-id-hardcoding-ratchet:

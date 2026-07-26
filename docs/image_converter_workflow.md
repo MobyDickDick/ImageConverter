@@ -164,12 +164,13 @@ dasselbe Abschlussprofil mit verpflichtender Drift-Artefaktprüfung:
 
 Damit möglichst wenige längere Testbatterien lokal gestartet werden müssen,
 lagert GitHub Actions außerdem die dokumentierten Zusatzprofile in eigene Jobs
-aus. Die schnellen Pytest-Profile laufen automatisch; die bekannten schweren
+aus. Die schnellen Pytest-Profile und die bekannten schweren
 Konvertierungsdiagnosen (`safe-baseline`, `regression-checks` und
-`full-heavy-conversion-suite`) laufen nur, wenn der manuelle
-`workflow_dispatch`-Input `run_heavy_diagnostics` aktiviert wird. Dadurch bleiben
-Pull Requests grünfähig, während die langen T6-/TB1-Diagnosen weiterhin in
-GitHub statt lokal reproduziert werden können:
+`full-heavy-conversion-suite`) laufen automatisch für Pull Requests, Pushes auf
+die Hauptarbeitszweige und manuelle Starts. Auch die vollständige
+Katalogkonvertierung wird automatisch in acht Shards ausgeführt. Dadurch zeigt
+GitHub nicht mehr nur sechs von zehn konfigurierten Workflow-Bereichen als
+ausgeführt an:
 
 ```bash
 python tools/run_pytest_profile.py core-green
