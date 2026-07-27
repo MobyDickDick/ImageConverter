@@ -138,3 +138,6 @@ All notable changes to ImageConverter will be documented in this file.
 
 - `AC0864` als semantisches AC08-`rF`-Badge mit horizontal gespiegelter Rechtsarm-Geometrie ergänzt; der reale 25x15-Ein-Datei-Lauf endet mit `status=semantic_ok`, `best_error=17.986667` und `mean_delta2=3699.607910`.
 - Den letzten aktiven PF8-Kandidaten nach generalisiertem Kreis-/Linien-Lerneffekt entfernt; Kandidatenliste und Linkage-Report sind nun synchron leer und warten auf eine neue Qualitätsauswertung.
+# Run ZY (2026-07-27)
+
+- Add general 65536th-yoctofine `PolygonPath` point and stroke-width probes for antialiasing-sensitive geometry registration.
