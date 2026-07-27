@@ -1,3 +1,4 @@
+- Plan-B Run ZW adds 4194304th-yoctofine catalog-free opacity probes for ColorPatch/RectBorder Geometry-IR elements and documents the GE9013_1M optimizer-only learning effect.
 - Plan-B Run ZV adds 2097152nd-yoctofine catalog-free opacity probes for ColorPatch/RectBorder Geometry-IR elements and documents the GE9012_6M optimizer-only learning effect.
 - Plan-B Run ZU adds 65536th-yoctofine catalog-free absolute stroke-width probes for RectBorder/Rule Geometry-IR elements and documents the SE0041_1 optimizer-only learning effect.
 - Plan-B Run ZT adds 32768th-yoctofine catalog-free PolygonPath point and stroke-width probes and documents the GE1410_L generalized optimizer learning effect.
