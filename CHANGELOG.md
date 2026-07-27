@@ -141,4 +141,5 @@ All notable changes to ImageConverter will be documented in this file.
 - Den letzten aktiven PF8-Kandidaten nach generalisiertem Kreis-/Linien-Lerneffekt entfernt; Kandidatenliste und Linkage-Report sind nun synchron leer und warten auf eine neue Qualitätsauswertung.
 # Run ZY (2026-07-27)
 
+- Plan-B Run AAA adds 8388608th-yoctofine catalog-free opacity probes for ColorPatch/RectBorder Geometry-IR elements and documents the GE9012_6M optimizer-only learning effect.
 - Add general 65536th-yoctofine `PolygonPath` point and stroke-width probes for antialiasing-sensitive geometry registration.
