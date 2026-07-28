@@ -485,6 +485,8 @@ def _default_candidate_provider(
                     -0.0000000059604644775390625,
                     -0.00000000298023223876953125,
                     -0.000000001490116119384765625,
+                    -0.0000000007450580596923828125,
+                    0.0000000007450580596923828125,
                     0.000000001490116119384765625,
                     0.00000000298023223876953125,
                     0.0000000059604644775390625,
@@ -514,7 +516,7 @@ def _default_candidate_provider(
                     0.10,
                 ):
                     candidate_offset = _clamp01(stop_offset + delta)
-                    if abs(candidate_offset - stop_offset) < 1e-9:
+                    if abs(candidate_offset - stop_offset) < 1e-12:
                         continue
                     candidate = copy.deepcopy(element)
                     candidate_gradient = candidate.get("stroke_gradient")
