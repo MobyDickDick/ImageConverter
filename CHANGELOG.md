@@ -161,3 +161,4 @@ All notable changes to ImageConverter will be documented in this file.
 - Plan-B Run AAB adds 16777216th-yoctofine catalog-free opacity probes for ColorPatch/RectBorder Geometry-IR elements and documents the GE9013_1M optimizer-only learning effect.
 - Plan-B Run AAA adds 8388608th-yoctofine catalog-free opacity probes for ColorPatch/RectBorder Geometry-IR elements and documents the GE9012_6M optimizer-only learning effect.
 - Add general 65536th-yoctofine `PolygonPath` point and stroke-width probes for antialiasing-sensitive geometry registration.
+- Plan-B Run AAT adds 2097152nd-yoctofine catalog-free absolute stroke-width probes for RectBorder/Rule Geometry-IR elements and documents the SE0041_1 optimizer-only learning effect.
