@@ -1,3 +1,4 @@
+- Plan-B Run AAW adds 1048576th-yoctofine catalog-free stroke-gradient offset probes for PolygonPath Geometry-IR elements and documents the DLG0021 optimizer-only learning effect.
 - Plan-B Run AAS adds 1048576th-yoctofine catalog-free PolygonPath point and stroke-width probes and documents the GE1410_L generalized optimizer learning effect.
 - Plan-B Run AAR adds 524288th-yoctofine catalog-free stroke-gradient offset probes for PolygonPath Geometry-IR elements and documents the DLG0021 optimizer-only learning effect.
 - Plan-B Run AAQ adds 1073741824th-yoctofine catalog-free ColorPatch/RectBorder opacity probes and documents the GE9013_1M optimizer-only learning effect.
