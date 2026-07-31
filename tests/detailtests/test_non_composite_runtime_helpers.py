@@ -2195,7 +2195,7 @@ def test_symbol_fit_honors_declared_diagonal_and_center_dot_without_inventing_gl
     assert params["center_dot_radius"] > 0
     assert params["plus_width"] == 0
     assert params["minus_width"] == 0
-    assert svg.count("<line") == 1
+    assert svg.count("<line ") == 1
     assert svg.count("<circle") == 1
 
 
@@ -2222,7 +2222,7 @@ def test_symbol_fit_renders_description_declared_right_chevron_without_inventing
     assert params["diag2_width"] == 0
     assert params["chevron_peak_x_ratio"] >= 0.88
     assert svg.count("<path") == 1
-    assert svg.count("<line") == 0
+    assert svg.count("<line ") == 0
 
 
 def test_symbol_fit_rotates_declared_diagonal_for_quarter_turn_variant() -> None:
@@ -2256,7 +2256,7 @@ def test_symbol_fit_rotates_declared_diagonal_for_quarter_turn_variant() -> None
     x1, y1, x2, y2 = map(float, line_match.groups())
     assert x1 < x2
     assert y1 < y2
-    assert svg.count("<line") == 1
+    assert svg.count("<line ") == 1
     assert svg.count("<circle") == 1
 
 
@@ -2387,7 +2387,7 @@ def test_reference_heat_exchanger_variants_keep_description_contract_and_registr
     assert non_composite_runtime_helpers._prefer_description_geometry_candidate(geometry_ir, description=description) is True
 
 
-def test_symbol_raster_estimation_uses_renderer_stable_vertical_gradient_bands() -> None:
+def test_symbol_raster_estimation_uses_continuous_vertical_gradient() -> None:
     raster = np.full((30, 60, 3), 255, dtype=np.uint8)
     for y in range(30):
         if y <= 9:
@@ -2418,11 +2418,12 @@ def test_symbol_raster_estimation_uses_renderer_stable_vertical_gradient_bands()
     assert params["gradient_vertical"] is True
     assert params["gradient_edge"] <= "#c0c0c0"
     assert params["gradient_mid"] == "#fbfbfb"
-    assert "linearGradient" not in svg
-    assert svg.count('<rect x="') >= 32
-    # Vertical bands span the panel width while advancing along the y axis.
-    assert '<rect x="0.500" y="0.500" width="59.000" height="0.482"' in svg
-    assert 'fill="#' in svg
+    assert '<linearGradient id="panelGradient" gradientUnits="userSpaceOnUse"' in svg
+    assert 'x1="0.500" y1="0.500" x2="0.500" y2="29.500"' in svg
+    assert f'<stop offset="{params["gradient_center"]:g}%" stop-color="#fbfbfb"/>' in svg
+    assert svg.count('fill="url(#panelGradient)"') == 1
+    assert svg.count('<rect x="') == 4  # clip, canvas, gradient panel, frame
+    assert 'height="0.482"' not in svg
 
 
 

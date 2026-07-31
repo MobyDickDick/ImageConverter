@@ -5832,6 +5832,243 @@ def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_819
     assert result["steps"][0]["accepted"] is True
 
 
+def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_16384th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "gradient-checkmark-16384th-yoctofine",
+            "points": [[0.20, 0.50], [0.50, 0.70], [0.80, 0.10]],
+            "fill": "none",
+            "stroke": "#3c9f44",
+            "stroke_width": 0.08,
+            "stroke_gradient": {
+                "id": "green-gradient",
+                "stops": [
+                    {"offset": "0%", "color": "#176f28"},
+                    {"offset": "50.000000298023223876953125%", "color": "#43ad49"},
+                    {"offset": "100%", "color": "#c8d0c3"},
+                ],
+            },
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_32768th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "gradient-checkmark-32768th-yoctofine",
+            "points": [[0.20, 0.50], [0.50, 0.70], [0.80, 0.10]],
+            "fill": "none",
+            "stroke": "#3c9f44",
+            "stroke_width": 0.08,
+            "stroke_gradient": {
+                "id": "green-gradient",
+                "stops": [
+                    {"offset": "0%", "color": "#176f28"},
+                    {
+                        "offset": "50.0000001490116119384765625%",
+                        "color": "#43ad49",
+                    },
+                    {"offset": "100%", "color": "#c8d0c3"},
+                ],
+            },
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_65536th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "gradient-checkmark-65536th-yoctofine",
+            "points": [[0.20, 0.50], [0.50, 0.70], [0.80, 0.10]],
+            "fill": "none",
+            "stroke": "#3c9f44",
+            "stroke_width": 0.08,
+            "stroke_gradient": {
+                "id": "green-gradient",
+                "stops": [
+                    {"offset": "0%", "color": "#176f28"},
+                    {
+                        "offset": "50.00000007450580596923828125%",
+                        "color": "#43ad49",
+                    },
+                    {"offset": "100%", "color": "#c8d0c3"},
+                ],
+            },
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_131072nd_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "gradient-checkmark-131072nd-yoctofine",
+            "points": [[0.20, 0.50], [0.50, 0.70], [0.80, 0.10]],
+            "fill": "none",
+            "stroke": "#3c9f44",
+            "stroke_width": 0.08,
+            "stroke_gradient": {
+                "id": "green-gradient",
+                "stops": [
+                    {"offset": "0%", "color": "#176f28"},
+                    {
+                        "offset": "50.000000037252902984619140625%",
+                        "color": "#43ad49",
+                    },
+                    {"offset": "100%", "color": "#c8d0c3"},
+                ],
+            },
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_262144th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "gradient-checkmark-262144th-yoctofine",
+            "points": [[0.20, 0.50], [0.50, 0.70], [0.80, 0.10]],
+            "fill": "none",
+            "stroke": "#3c9f44",
+            "stroke_width": 0.08,
+            "stroke_gradient": {
+                "id": "green-gradient",
+                "stops": [
+                    {"offset": "0%", "color": "#176f28"},
+                    {
+                        "offset": "50.0000000186264514923095703125%",
+                        "color": "#43ad49",
+                    },
+                    {"offset": "100%", "color": "#c8d0c3"},
+                ],
+            },
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_524288th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "gradient-checkmark-524288th-yoctofine",
+            "points": [[0.20, 0.50], [0.50, 0.70], [0.80, 0.10]],
+            "fill": "none",
+            "stroke": "#3c9f44",
+            "stroke_width": 0.08,
+            "stroke_gradient": {
+                "id": "green-gradient",
+                "stops": [
+                    {"offset": "0%", "color": "#176f28"},
+                    {
+                        "offset": "50.00000000931322574615478515625%",
+                        "color": "#43ad49",
+                    },
+                    {"offset": "100%", "color": "#c8d0c3"},
+                ],
+            },
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
 def test_default_optimizer_refines_rect_border_stroke_width_with_8192th_yoctofine_absolute_probe() -> (
     None
 ):
@@ -6253,6 +6490,2322 @@ def test_default_optimizer_refines_polygon_path_stroke_width_with_8192th_yoctofi
 
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
         0.024000002384185793
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_points_with_16384th_yoctofine_subpixel_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "16384th_yoctofine_subpixel_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["points"][2][0] - 0.4800000011920929) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["points"][2][0] == pytest.approx(
+        0.4800000011920929
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_width_with_16384th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "16384th_yoctofine_antialias_sensitive_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.024000001192092895) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.024000001192092895
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_points_with_32768th_yoctofine_subpixel_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "32768th_yoctofine_subpixel_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["points"][2][0] - 0.4800000005960464) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["points"][2][0] == pytest.approx(
+        0.4800000005960464
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_width_with_32768th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "32768th_yoctofine_antialias_sensitive_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.024000000596046448) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.024000000596046448
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_points_with_65536th_yoctofine_subpixel_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "65536th_yoctofine_subpixel_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["points"][2][0] - 0.4800000002980232) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["points"][2][0] == pytest.approx(
+        0.4800000002980232
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_width_with_65536th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "65536th_yoctofine_antialias_sensitive_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.024000000298023223) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.024000000298023223
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_width_with_32768th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "square_badge_head_32768th_yoctofine",
+            "bbox": [0.22, 0.18, 0.56, 0.36],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.05500000059604645) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.05500000059604645
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rule_stroke_width_with_32768th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "VerticalRule",
+            "id": "square_badge_stem_32768th_yoctofine",
+            "bbox": [0.44, 0.24, 0.08, 0.56],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.05499999940395355) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.05499999940395355
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_width_with_65536th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "square_badge_head_65536th_yoctofine",
+            "bbox": [0.22, 0.18, 0.56, 0.36],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.055000000298023225) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.055000000298023225
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rule_stroke_width_with_65536th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "VerticalRule",
+            "id": "square_badge_stem_65536th_yoctofine",
+            "bbox": [0.44, 0.24, 0.08, 0.56],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.05499999970197678) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.05499999970197678
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_width_with_131072nd_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "square_badge_head_131072nd_yoctofine",
+            "bbox": [0.22, 0.18, 0.56, 0.36],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.05500000014901161) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.05500000014901161
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rule_stroke_width_with_131072nd_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "HorizontalRule",
+            "id": "square_badge_stem_131072nd_yoctofine",
+            "bbox": [0.18, 0.44, 0.56, 0.08],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.05499999985098839) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.05499999985098839
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_524288th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_524288th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999068677) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999068677
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_524288th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_524288th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000931323) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000931323
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_1048576th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_1048576th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999534339) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999534339
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_1048576th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_1048576th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000465662) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000465662
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_2097152nd_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_2097152nd_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999767169) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999767169
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_2097152nd_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_2097152nd_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.982812500023283) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.982812500023283
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_4194304th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_4194304th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999883585) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999883585
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_4194304th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_4194304th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000116416) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000116416
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_8388608th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_8388608th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999941792) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999941792
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_8388608th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_8388608th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000058208) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000058208
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_16777216th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_16777216th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999970896) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999970896
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_16777216th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_16777216th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000029104) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000029104
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_33554432nd_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_33554432nd_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999985448) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999985448
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_33554432nd_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_33554432nd_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000014551) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000014551
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_67108864th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_67108864th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999992724) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999992724
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_67108864th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_67108864th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000007276) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000007276
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_134217728th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_134217728th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999996362) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999996362
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_134217728th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_134217728th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000003638) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000003638
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_268435456th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_268435456th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999998181) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999998181
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_268435456th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_268435456th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000001819) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000001819
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_536870912th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_536870912th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.982812499999909) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.982812499999909
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_536870912th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_536870912th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.982812500000091) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.982812500000091
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_1073741824th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_1073741824th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999999545) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999999545
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_1073741824th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_1073741824th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000000455) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000000455
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_points_with_131072nd_yoctofine_subpixel_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "131072nd_yoctofine_subpixel_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["points"][2][0] - 0.4800000001490116) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["points"][2][0] == pytest.approx(
+        0.4800000001490116
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_width_with_262144th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "square_badge_head_262144th_yoctofine",
+            "bbox": [0.22, 0.18, 0.56, 0.36],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.055000000074505805) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.055000000074505805
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rule_stroke_width_with_262144th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "VerticalRule",
+            "id": "square_badge_stem_262144th_yoctofine",
+            "bbox": [0.18, 0.44, 0.08, 0.56],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.054999999925494194) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.054999999925494194
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_width_with_131072nd_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "131072nd_yoctofine_antialias_sensitive_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.02400000014901161) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.02400000014901161
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_points_with_262144th_yoctofine_subpixel_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "262144th_yoctofine_subpixel_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["points"][2][0] - 0.4800000000745058) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["points"][2][0] == pytest.approx(
+        0.4800000000745058
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_width_with_262144th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "262144th_yoctofine_antialias_sensitive_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.024000000074505805) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.024000000074505805
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_width_with_524288th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "square_badge_head_524288th_yoctofine",
+            "bbox": [0.22, 0.18, 0.56, 0.36],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.0550000000372529) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.0550000000372529
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rule_stroke_width_with_524288th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "VerticalRule",
+            "id": "square_badge_stem_524288th_yoctofine",
+            "bbox": [0.18, 0.44, 0.08, 0.56],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.0549999999627471) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.0549999999627471
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_points_with_524288th_yoctofine_subpixel_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "524288th_yoctofine_subpixel_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["points"][2][0] - 0.4800000000372529) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["points"][2][0] == pytest.approx(
+        0.4800000000372529
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_width_with_524288th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "524288th_yoctofine_antialias_sensitive_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.024000000037252903) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.024000000037252903
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_width_with_1048576th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "square_badge_head_1048576th_yoctofine",
+            "bbox": [0.22, 0.18, 0.56, 0.36],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.05500000001862645) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.05500000001862645
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rule_stroke_width_with_1048576th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "VerticalRule",
+            "id": "square_badge_stem_1048576th_yoctofine",
+            "bbox": [0.18, 0.44, 0.08, 0.56],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.05499999998137355) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.05499999998137355
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_points_with_1048576th_yoctofine_subpixel_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "1048576th_yoctofine_subpixel_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["points"][2][0] - 0.48000000001862647) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["points"][2][0] == pytest.approx(
+        0.48000000001862647
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_width_with_1048576th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "1048576th_yoctofine_antialias_sensitive_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.02400000001862645) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.02400000001862645
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_points_with_2097152nd_yoctofine_subpixel_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "2097152nd_yoctofine_subpixel_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["points"][2][0] - 0.4800000000093132) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["points"][2][0] == pytest.approx(
+        0.4800000000093132
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_width_with_2097152nd_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "2097152nd_yoctofine_antialias_sensitive_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.024000000009313224) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.024000000009313224
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_width_with_2097152nd_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "square_badge_head_2097152nd_yoctofine",
+            "bbox": [0.22, 0.18, 0.56, 0.36],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.05500000000931323) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.05500000000931323
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rule_stroke_width_with_2097152nd_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "VerticalRule",
+            "id": "square_badge_stem_2097152nd_yoctofine",
+            "bbox": [0.18, 0.44, 0.08, 0.56],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.05499999999068678) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.05499999999068678
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_width_with_4194304th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "square_badge_head_4194304th_yoctofine",
+            "bbox": [0.22, 0.18, 0.56, 0.36],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.055000000004656616) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.055000000004656616
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rule_stroke_width_with_4194304th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "VerticalRule",
+            "id": "square_badge_stem_4194304th_yoctofine",
+            "bbox": [0.18, 0.44, 0.08, 0.56],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.054999999995343385) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.054999999995343385
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_width_with_8388608th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "square_badge_head_8388608th_yoctofine",
+            "bbox": [0.22, 0.18, 0.56, 0.36],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.05500000000232831) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.05500000000232831
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rule_stroke_width_with_8388608th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "VerticalRule",
+            "id": "square_badge_stem_8388608th_yoctofine",
+            "bbox": [0.18, 0.44, 0.08, 0.56],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.055,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.054999999997671696) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.054999999997671696
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_2147483648th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_2147483648th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999999772) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999999772
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_2147483648th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_2147483648th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000000227) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000000227
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_4294967296th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_4294967296th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999999886) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999999886
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_4294967296th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_4294967296th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000000114) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000000114
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_8589934592nd_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_8589934592nd_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999999943) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999999943
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_8589934592nd_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_8589934592nd_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000000057) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000000057
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_17179869184th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_17179869184th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999999972) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999999972
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_17179869184th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_17179869184th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000000028) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000000028
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_1048576th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "gradient-checkmark-1048576th-yoctofine",
+            "points": [[0.20, 0.50], [0.50, 0.70], [0.80, 0.10]],
+            "fill": "none",
+            "stroke": "#3c9f44",
+            "stroke_width": 0.08,
+            "stroke_gradient": {
+                "id": "green-gradient",
+                "stops": [
+                    {"offset": "0%", "color": "#176f28"},
+                    {
+                        "offset": "50.000000004656612873077392578125%",
+                        "color": "#43ad49",
+                    },
+                    {"offset": "100%", "color": "#c8d0c3"},
+                ],
+            },
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_2097152nd_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "gradient-checkmark-2097152nd-yoctofine",
+            "points": [[0.20, 0.50], [0.50, 0.70], [0.80, 0.10]],
+            "fill": "none",
+            "stroke": "#3c9f44",
+            "stroke_width": 0.08,
+            "stroke_gradient": {
+                "id": "green-gradient",
+                "stops": [
+                    {"offset": "0%", "color": "#176f28"},
+                    {
+                        "offset": "50.0000000023283064365386962890625%",
+                        "color": "#43ad49",
+                    },
+                    {"offset": "100%", "color": "#c8d0c3"},
+                ],
+            },
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_gradient_offsets_with_4194304th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "gradient-checkmark-4194304th-yoctofine",
+            "points": [[0.20, 0.50], [0.50, 0.70], [0.80, 0.10]],
+            "fill": "none",
+            "stroke": "#3c9f44",
+            "stroke_width": 0.08,
+            "stroke_gradient": {
+                "id": "green-gradient",
+                "stops": [
+                    {"offset": "0%", "color": "#176f28"},
+                    {
+                        "offset": "50.00000000116415321826934814453125%",
+                        "color": "#43ad49",
+                    },
+                    {"offset": "100%", "color": "#c8d0c3"},
+                ],
+            },
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if candidate_ir[0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_gradient"]["stops"][1]["offset"] == "50%"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_points_with_4194304th_yoctofine_subpixel_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "4194304th_yoctofine_subpixel_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["points"][2][0] - 0.4800000000046566) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["points"][2][0] == pytest.approx(
+        0.4800000000046566
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_34359738368th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_34359738368th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999999985) < 1e-16
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999999985
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_opacity_with_68719476736th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "back_bottom_68719476736th_yoctofine_fill",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "fill": "#f0f0f0",
+            "fill_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["fill_opacity"] - 0.9828124999999993) < 1e-17
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["fill_opacity"] == pytest.approx(
+        0.9828124999999993
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_68719476736th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_68719476736th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000000007) < 1e-17
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000000007
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_stroke_opacity_with_34359738368th_yoctofine_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "back_bottom_34359738368th_yoctofine_outline",
+            "bbox": [0.18, 0.56, 0.64, 0.24],
+            "stroke": "#8a8a8a",
+            "stroke_width": 0.04,
+            "stroke_opacity": 0.9828125,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_opacity"] - 0.9828125000000014) < 1e-16
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_opacity"] == pytest.approx(
+        0.9828125000000014
+    )
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_stroke_width_with_4194304th_yoctofine_absolute_probe() -> (
+    None
+):
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "4194304th_yoctofine_antialias_sensitive_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: (
+            0.0
+            if abs(candidate_ir[0]["stroke_width"] - 0.024000000004656613) < 1e-15
+            else 10.0
+        ),
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(
+        0.024000000004656613
     )
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True

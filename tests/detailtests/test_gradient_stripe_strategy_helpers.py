@@ -91,3 +91,19 @@ def test_ac0vr2_ab_m_sample_uses_smooth_gradients_not_stripe_columns() -> None:
     assert 'width="0.981"' not in svg
     assert 'fill="url(#verticalGrey)"' in svg
     assert 'fill="url(#horizontalSheen)"' in svg
+
+
+def test_ac0vr2_zl_m_result_is_a_vertical_gradient_not_columns() -> None:
+    sample_path = Path("artifacts/images_to_convert/samples/AC0VR2_ZL_M.svg")
+    result_path = Path("artifacts/converted_images/converted_svgs/AC0VR2_ZL_M.svg")
+    snapshot_path = Path("artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0VR2_ZL_M.svg")
+    svg = result_path.read_text(encoding="utf-8")
+
+    assert svg == sample_path.read_text(encoding="utf-8")
+    assert snapshot_path.read_text(encoding="utf-8") == svg
+    assert svg.count("<linearGradient") == 1
+    assert 'x1="0"' in svg and 'x2="0"' in svg
+    assert 'y1="0"' in svg and 'y2="30"' in svg
+    assert svg.count("<rect") == 1
+    assert 'fill="url(#verticalGrey)"' in svg
+    assert 'width="0.981"' not in svg

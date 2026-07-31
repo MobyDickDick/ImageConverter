@@ -180,18 +180,23 @@ def _build_framed_vertical_gradient_panel_svg(
     bottom_color: str,
     border_color: str,
     border_width: float = 1.0,
+    middle_start: float = 50.0,
+    middle_end: float | None = None,
 ) -> str:
     safe_w = max(1, int(width or 1))
     safe_h = max(1, int(height or 1))
     inset = max(0.0, float(border_width) * 0.5)
     rect_w = max(0.0, safe_w - float(border_width))
     rect_h = max(0.0, safe_h - float(border_width))
+    start = max(0.0, min(100.0, float(middle_start)))
+    end = start if middle_end is None else max(start, min(100.0, float(middle_end)))
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" viewBox="0 0 {safe_w} {safe_h}">\n'
         '  <defs>\n'
         '    <linearGradient id="ac0vr2PanelGradient" x1="0%" y1="0%" x2="0%" y2="100%">\n'
         f'      <stop offset="0%" stop-color="{top_color}"/>\n'
-        f'      <stop offset="50%" stop-color="{middle_color}"/>\n'
+        f'      <stop offset="{start:g}%" stop-color="{middle_color}"/>\n'
+        f'      <stop offset="{end:g}%" stop-color="{middle_color}"/>\n'
         f'      <stop offset="100%" stop-color="{bottom_color}"/>\n'
         '    </linearGradient>\n'
         '  </defs>\n'
@@ -295,6 +300,14 @@ def _try_build_plain_framed_panel_svg(width: int, height: int, *, description: s
         return None
     vertical_range = float(max(np.nanmean(top_rgb), fill_lum, np.nanmean(bottom_rgb)) - min(np.nanmean(top_rgb), fill_lum, np.nanmean(bottom_rgb)))
     if vertical_range >= 8.0 or row_range >= 8.0:
+        peak_floor = float(np.nanmax(row_profile)) - max(1.0, row_range * 0.04)
+        peak_rows = np.flatnonzero(row_profile >= peak_floor)
+        middle_start = 50.0
+        middle_end = 50.0
+        if peak_rows.size:
+            denominator = max(1, row_profile.size - 1)
+            middle_start = float(peak_rows[0]) * 100.0 / denominator
+            middle_end = float(peak_rows[-1]) * 100.0 / denominator
         return _build_framed_vertical_gradient_panel_svg(
             width,
             height,
@@ -303,6 +316,8 @@ def _try_build_plain_framed_panel_svg(width: int, height: int, *, description: s
             bottom_color=_rgb_hex(bottom_rgb),
             border_color=_rgb_hex(border_rgb),
             border_width=1.0,
+            middle_start=middle_start,
+            middle_end=middle_end,
         )
     return _build_plain_framed_panel_svg(
         width,
@@ -478,7 +493,7 @@ def _rgb_hex(values) -> str:
     return "#" + "".join(f"{channel:02x}" for channel in channels)
 
 
-def _gradient_band_svg_rects(
+def _smooth_gradient_svg_rect(
     *,
     x: float,
     y: float,
@@ -487,45 +502,26 @@ def _gradient_band_svg_rects(
     edge_hex: str,
     mid_hex: str,
     center_percent: float,
-    bands: int = 48,
     vertical: bool = False,
 ) -> str:
-    def _rgb(color: str, fallback: int) -> np.ndarray:
-        value = str(color or "").strip().lstrip("#")
-        if len(value) >= 6:
-            try:
-                return np.asarray([int(value[index:index + 2], 16) for index in (0, 2, 4)], dtype=np.float32)
-            except ValueError:
-                pass
-        return np.asarray([fallback, fallback, fallback], dtype=np.float32)
-
-    edge = _rgb(edge_hex, 0x8F)
-    mid = _rgb(mid_hex, 0xDE)
-    safe_bands = max(4, int(bands))
-    center = max(1.0, min(99.0, float(center_percent))) / 100.0
-    parts: list[str] = []
-    for index in range(safe_bands):
-        t = (index + 0.5) / safe_bands
-        if t <= center:
-            ratio = t / center
-            color = edge * (1.0 - ratio) + mid * ratio
-        else:
-            ratio = (t - center) / (1.0 - center)
-            color = mid * (1.0 - ratio) + edge * ratio
-        if vertical:
-            band_x, band_y = x, y + height * index / safe_bands
-            band_w = width
-            band_h = height / safe_bands + max(0.02, height * 0.001)
-        else:
-            band_x, band_y = x + width * index / safe_bands, y
-            band_w = width / safe_bands + max(0.02, width * 0.001)
-            band_h = height
-        parts.append(
-            f'  <rect x="{band_x:.3f}" y="{band_y:.3f}" width="{band_w:.3f}" height="{band_h:.3f}" '
-            f'fill="{_rgb_hex(color)}" stroke="none"/>'
-        )
-    return "\n".join(parts) + ("\n" if parts else "")
-
+    """Return one continuous SVG gradient, never a stack of raster-fit bands."""
+    center = max(1.0, min(99.0, float(center_percent)))
+    x1 = x
+    y1 = y
+    x2 = x if vertical else x + width
+    y2 = y + height if vertical else y
+    return (
+        '  <defs>\n'
+        f'    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" '
+        f'x1="{x1:.3f}" y1="{y1:.3f}" x2="{x2:.3f}" y2="{y2:.3f}">\n'
+        f'      <stop offset="0%" stop-color="{edge_hex}"/>\n'
+        f'      <stop offset="{center:g}%" stop-color="{mid_hex}"/>\n'
+        f'      <stop offset="100%" stop-color="{edge_hex}"/>\n'
+        '    </linearGradient>\n'
+        '  </defs>\n'
+        f'  <rect x="{x:.3f}" y="{y:.3f}" width="{width:.3f}" height="{height:.3f}" '
+        'fill="url(#panelGradient)" stroke="none"/>\n'
+    )
 
 
 def _is_deprecated_stripe_fit_svg(svg_content: object, *, description: str = "") -> bool:
@@ -598,7 +594,7 @@ def _build_structured_symbol_svg(
     chevron_peak_y = safe_h * max(0.0, min(1.0, float(chevron_peak_y_ratio)))
     chevron_y0 = inset + (safe_h - 1 - 2 * inset) * chevron_inset
     chevron_y1 = safe_h - 1 - (safe_h - 1 - 2 * inset) * chevron_inset
-    gradient_rects = _gradient_band_svg_rects(
+    gradient_rects = _smooth_gradient_svg_rect(
         x=content_x,
         y=content_y,
         width=content_w,
@@ -606,7 +602,6 @@ def _build_structured_symbol_svg(
         edge_hex=gradient_edge,
         mid_hex=gradient_mid,
         center_percent=gradient_center,
-        bands=max(16, min(64, safe_w * 2)),
         vertical=gradient_vertical,
     )
     clip_def = f'  <clipPath id="innerRect"><rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}"/></clipPath>\n'
@@ -614,10 +609,17 @@ def _build_structured_symbol_svg(
         gradient_rects = gradient_rects.replace("  </defs>\n", clip_def + "  </defs>\n", 1)
     else:
         gradient_rects = "  <defs>\n" + clip_def + "  </defs>\n" + gradient_rects
+    # Some of the lightweight SVG renderers used by the quality loop only
+    # resolve paint servers that are declared before the first painted node.
+    # Keep definitions and geometry separate so the white canvas cannot make a
+    # later gradient reference render as transparent/black during optimization.
+    definitions, gradient_panel = gradient_rects.split("  </defs>\n", 1)
+    definitions += "  </defs>\n"
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" viewBox="0 0 {safe_w} {safe_h}">\n'
+        f'{definitions}'
         f'  <rect x="0" y="0" width="{safe_w}" height="{safe_h}" fill="#ffffff" stroke="none"/>\n'
-        f'{gradient_rects}'
+        f'{gradient_panel}'
         f'  <rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}" fill="none" stroke="{_color_hex(border_gray)}" stroke-width="{border_thickness:.2f}"/>\n'
         + (f'  <line x1="{diag_x1:g}" y1="{diag_y0:g}" x2="{diag_x0:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag1_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag1_width > 0 else '')
         + (f'  <line x1="{diag_x0:g}" y1="{diag_y0:g}" x2="{diag_x1:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag2_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag2_width > 0 else '')
