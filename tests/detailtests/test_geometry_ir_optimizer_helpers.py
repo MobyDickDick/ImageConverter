@@ -8658,6 +8658,44 @@ def test_default_optimizer_refines_polygon_path_points_with_4194304th_yoctofine_
     assert result["steps"][0]["accepted"] is True
 
 
+def test_default_optimizer_refines_polygon_path_with_8388608th_yoctofine_probes() -> None:
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "8388608th-yoctofine-point-triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        },
+        {
+            "kind": "PolygonPath",
+            "id": "8388608th-yoctofine-width-triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.50]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        },
+    ]
+
+    target_point = 0.4800000000023283
+    target_width = 0.024000000002328306
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: 10.0
+        * (abs(candidate_ir[0]["points"][2][0] - target_point) >= 1e-16)
+        + 10.0
+        * (abs(candidate_ir[1]["stroke_width"] - target_width) >= 1e-16),
+    )
+
+    point_candidate, width_candidate = result["geometry_ir"]
+    assert point_candidate["points"][2][0] == pytest.approx(target_point, abs=1e-16)
+    assert width_candidate["stroke_width"] == pytest.approx(target_width, abs=1e-16)
+    assert all(step["accepted"] for step in result["steps"])
+
+
 def test_default_optimizer_refines_color_patch_opacity_with_34359738368th_yoctofine_probe() -> (
     None
 ):
