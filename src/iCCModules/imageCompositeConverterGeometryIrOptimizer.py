@@ -669,6 +669,7 @@ def _default_candidate_provider(
             0.982812499999994315658113919198513031005859375,
             0.9828124999999971578290569595992565155029296875,
             0.98281249999999857891452847979962825775146484375,
+            0.982812499999999289457264239899814128875732421875,
             0.9828125,
             0.98291015625,
             0.9830078125,
@@ -679,7 +680,7 @@ def _default_candidate_provider(
             0.9875,
             1.0,
         ):
-            if abs(candidate_opacity - fill_opacity) < 1e-15:
+            if abs(candidate_opacity - fill_opacity) < 1e-16:
                 continue
             candidate = copy.deepcopy(element)
             candidate["fill_opacity"] = candidate_opacity
@@ -712,6 +713,7 @@ def _default_candidate_provider(
             0.9826171875,
             0.98271484375,
             0.9828125,
+            0.982812500000000710542735760100185871124267578125,
             0.98281250000000142108547152020037174224853515625,
             0.9828125000000028421709430404007434844970703125,
             0.982812500000005684341886080801486968994140625,
@@ -757,7 +759,7 @@ def _default_candidate_provider(
             0.9875,
             1.0,
         ):
-            if abs(candidate_opacity - stroke_opacity) < 1e-15:
+            if abs(candidate_opacity - stroke_opacity) < 1e-16:
                 continue
             candidate = copy.deepcopy(element)
             candidate["stroke_opacity"] = candidate_opacity
