@@ -347,7 +347,7 @@ def test_archive_successful_conversion_artifacts_moves_image_and_copies_svg(tmp_
     )
 
     assert (reports_dir / "successful_conversions_bestlist" / "AC0831_L.svg").exists()
-    assert (reports_dir / "archived_source_images" / "AC0831_L.jpg").exists()
+    assert (source_dir / "succesessfulConvertedImages" / "AC0831_L.jpg").exists()
     assert not (source_dir / "AC0831_L.jpg").exists()
 
 

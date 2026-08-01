@@ -51,6 +51,12 @@ endet in diesem Fall standardmäßig trotzdem mit Exitcode `0`; für CI-/Gate-L�
 die bei solchen Einzelfehlern abbrechen sollen, kann `--fail-on-batch-failures`
 gesetzt werden.
 
+Konvertierungen, die das konfigurierte Pixel-Qualitätsgate bestehen und ein
+verwendbares SVG erzeugen, werden nach dem Lauf aus dem Eingangsordner nach
+`artifacts/images_to_convert/succesessfulConvertedImages` verschoben. Nicht
+ausreichende Konvertierungen bleiben für einen späteren Nachbesserungslauf im
+Eingangsordner.
+
 Für einen vollständigen, kostenkontrollierten Kataloglauf steht
 `tools/run_catalog_conversion.py` zur Verfügung. Das Skript verarbeitet eine
 stabile Teilmenge des Katalogs, startet jedes Bild isoliert und setzt standardmäßig
