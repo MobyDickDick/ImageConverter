@@ -1318,14 +1318,44 @@ def build_diagonal_circle_cross_diagram_geometry_ir(
 def build_diagonal_circle_step_diagram_geometry_ir(
     diagram_bbox: list[float],
     *,
+    step_points: list[list[float]] | None = None,
+    step_stroke_ratio: float = 0.05,
     source: str = "diagonal_circle_step_diagram_family",
 ) -> list[dict[str, object]]:
-    """Build a scale-independent diagonal/circle diagram with a step trace."""
+    """Build a scale-independent diagonal/circle diagram with a step trace.
+
+    ``step_points`` are four field-relative points.  Detectors can therefore
+    pass measured geometry without coupling this reusable builder to pixels or
+    filenames; callers without raster evidence retain the neutral seed.
+    """
     if len(diagram_bbox) != 4:
         raise ValueError("diagram_bbox must contain normalized x, y, width and height")
     x, y, width, height = (float(value) for value in diagram_bbox)
     if width <= 0.0 or height <= 0.0:
         raise ValueError("diagram_bbox width and height must be positive")
+    relative_step_points = step_points or [
+        [0.8, 0.21],
+        [0.8, 0.403],
+        [0.2, 0.597],
+        [0.2, 0.79],
+    ]
+    if len(relative_step_points) != 4 or any(
+        len(value) != 2 for value in relative_step_points
+    ):
+        raise ValueError("step_points must contain four x/y pairs")
+    # Keep noisy raster estimates inside the topology's deliberately narrow
+    # registration envelope.
+    bounds = (
+        (0.67, 0.93, 0.08, 0.32),
+        (0.67, 0.93, 0.30, 0.52),
+        (0.07, 0.33, 0.48, 0.70),
+        (0.07, 0.33, 0.68, 0.92),
+    )
+    constrained_points = [
+        [min(max(float(px), x0), x1), min(max(float(py), y0), y1)]
+        for (px, py), (x0, x1, y0, y1) in zip(relative_step_points, bounds)
+    ]
+    step_stroke_ratio = min(max(float(step_stroke_ratio), 0.03), 0.09)
 
     def point(relative_x: float, relative_y: float) -> list[float]:
         return [_round_number(x + relative_x * width, 6), _round_number(y + relative_y * height, 6)]
@@ -1339,7 +1369,15 @@ def build_diagonal_circle_step_diagram_geometry_ir(
         {**path, "id": "diagram_diagonal_connector", "points": [point(-1.375, 1.1), point(-0.175, -0.1)], "stroke": "#8a8a8a", "stroke_width": stroke_width},
         {**path, "id": "diagram_horizontal_connector", "points": [point(-0.7285, 0.5), point(-0.01, 0.5)], "stroke": "#8a8a8a", "stroke_width": stroke_width},
         {"kind": "ColorPatch", "id": "diagram_red_field", "bbox": [_round_number(v, 6) for v in diagram_bbox], "fill": "#df1f48", "stroke": "none", "perception_seed": seed_meta},
-        {**path, "id": "diagram_step_trace", "points": [point(0.8, 0.21), point(0.8, 0.403), point(0.2, 0.597), point(0.2, 0.79)], "stroke": "#ffffff", "stroke_width": _round_number(0.05 * min(width, height), 6)},
+        {
+            **path,
+            "id": "diagram_step_trace",
+            "points": [point(px, py) for px, py in constrained_points],
+            "stroke": "#ffffff",
+            "stroke_width": _round_number(
+                step_stroke_ratio * min(width, height), 6
+            ),
+        },
         {"kind": "RectBorder", "id": "diagram_field_border", "bbox": [_round_number(v, 6) for v in diagram_bbox], "fill": "none", "stroke": "#8a8a8a", "stroke_width": _round_number(0.05 * min(width, height), 6), "perception_seed": seed_meta},
         {"kind": "CircleBackground", "id": "diagram_circle_anchor", "bbox": [_round_number(x - 0.925 * width, 6), _round_number(y + 0.325 * height, 6), _round_number(0.35 * width, 6), _round_number(0.35 * height, 6)], "fill": "#e6e6e6", "stroke": "#8a8a8a", "stroke_width": _round_number(0.09 * min(width, height), 6), "perception_seed": seed_meta},
     ]
@@ -1469,7 +1507,7 @@ def detect_diagonal_circle_step_diagram_geometry_ir(
     saturated = cv2.morphologyEx(saturated, cv2.MORPH_CLOSE, np.ones((3, 3), dtype=np.uint8))
     contours, _ = cv2.findContours(saturated, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     circles = detect_circle_ring_candidates(image, source=source)
-    matches: list[tuple[float, list[float]]] = []
+    matches: list[tuple[float, list[float], list[list[float]], float]] = []
 
     for contour in contours:
         x, y, field_width, field_height = cv2.boundingRect(contour)
@@ -1504,6 +1542,52 @@ def detect_diagonal_circle_step_diagram_geometry_ir(
                 (np.count_nonzero(falling) >= diagonal_support and
                  np.count_nonzero(rising) >= diagonal_support)):
             continue
+
+        # Estimate both vertical runs and their adjoining middle endpoints
+        # from white raster evidence. Quantiles suppress JPEG speckles while
+        # retaining sub-family variation. Coordinates stay field-relative so
+        # the result remains viewport independent.
+        right_y, right_x = np.nonzero(
+            bright & (normalized_x >= 0.62) & (normalized_y <= 0.58)
+        )
+        left_y, left_x = np.nonzero(
+            bright & (normalized_x <= 0.38) & (normalized_y >= 0.42)
+        )
+        if len(right_y) < minimum_vertical or len(left_y) < minimum_vertical:
+            continue
+        right_x_value = float(np.median(right_x)) / max(field_width - 1, 1)
+        left_x_value = float(np.median(left_x)) / max(field_width - 1, 1)
+        step_points = [
+            [
+                right_x_value,
+                float(np.quantile(right_y, 0.1)) / max(field_height - 1, 1),
+            ],
+            [
+                right_x_value,
+                float(np.quantile(right_y, 0.9)) / max(field_height - 1, 1),
+            ],
+            [
+                left_x_value,
+                float(np.quantile(left_y, 0.1)) / max(field_height - 1, 1),
+            ],
+            [
+                left_x_value,
+                float(np.quantile(left_y, 0.9)) / max(field_height - 1, 1),
+            ],
+        ]
+        trace_mask = np.zeros(bright.shape, dtype=np.uint8)
+        trace_mask[
+            bright
+            & (normalized_x >= 0.08)
+            & (normalized_x <= 0.92)
+            & (normalized_y >= 0.08)
+            & (normalized_y <= 0.92)
+        ] = 255
+        distance = cv2.distanceTransform(trace_mask, cv2.DIST_L2, 5)
+        measured_width = 2.0 * float(distance.max()) / max(
+            min(field_width, field_height), 1
+        )
+        stroke_ratio = min(max(measured_width, 0.03), 0.09)
         center_y = y + field_height / 2.0
         if not any(
             circle.center["x"] < x
@@ -1513,12 +1597,26 @@ def detect_diagonal_circle_step_diagram_geometry_ir(
         ):
             continue
         bbox = [x / width, y / height, field_width / width, field_height / height]
-        matches.append((area / box_area + np.count_nonzero(middle_trace) / box_area, bbox))
+        matches.append(
+            (
+                area / box_area + np.count_nonzero(middle_trace) / box_area,
+                bbox,
+                step_points,
+                stroke_ratio,
+            )
+        )
 
     if not matches:
         return []
-    _, best_bbox = max(matches, key=lambda match: match[0])
-    return build_diagonal_circle_step_diagram_geometry_ir(best_bbox, source=source)
+    _, best_bbox, best_points, best_stroke_ratio = max(
+        matches, key=lambda match: match[0]
+    )
+    return build_diagonal_circle_step_diagram_geometry_ir(
+        best_bbox,
+        step_points=best_points,
+        step_stroke_ratio=best_stroke_ratio,
+        source=source,
+    )
 
 
 def _candidate_decision_key(
