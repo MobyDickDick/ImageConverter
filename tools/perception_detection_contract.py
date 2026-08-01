@@ -1201,6 +1201,9 @@ def build_perception_seeded_geometry_ir(
     source: str = "perception_seeded_geometry_ir",
 ) -> list[dict[str, object]]:
     """Build description IR and seed it with PF candidates before non-composite fitting."""
+    family_seed = detect_diagonal_circle_cross_diagram_geometry_ir(image, source=source)
+    if family_seed:
+        return family_seed
     base = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description or "")
     candidates = detect_perception_candidates(
         image, source=source, description=description
@@ -1307,6 +1310,110 @@ def build_diagonal_circle_cross_diagram_geometry_ir(
             "perception_seed": seed_meta,
         },
     ]
+
+
+def detect_diagonal_circle_cross_diagram_geometry_ir(
+    image,
+    *,
+    source: str = "raster_diagonal_circle_cross_detector",
+) -> list[dict[str, object]]:
+    """Detect the diagram field topology and initialize its shared family seed.
+
+    The detector intentionally uses visual evidence only: a saturated, roughly
+    square field must contain bright pixels on both diagonals and have a circle
+    candidate to its left.  The detected field bbox is the sole geometry passed
+    to :func:`build_diagonal_circle_cross_diagram_geometry_ir`.
+    """
+    import cv2  # type: ignore
+    import numpy as np  # type: ignore
+
+    if image is None or getattr(image, "ndim", 0) not in {2, 3}:
+        raise ValueError("image must be a grayscale or color raster")
+    height, width = image.shape[:2]
+    if height < 3 or width < 3:
+        return []
+
+    color_image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR) if image.ndim == 2 else image
+    hsv = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
+    saturated = cv2.inRange(hsv, (0, 90, 45), (179, 255, 255))
+    saturated = cv2.morphologyEx(
+        saturated, cv2.MORPH_CLOSE, np.ones((3, 3), dtype=np.uint8)
+    )
+    contours, _ = cv2.findContours(
+        saturated, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+    )
+    circles = detect_circle_ring_candidates(image, source=source)
+    matches: list[tuple[float, list[float]]] = []
+
+    for contour in contours:
+        x, y, field_width, field_height = cv2.boundingRect(contour)
+        area = float(cv2.contourArea(contour))
+        box_area = float(field_width * field_height)
+        if box_area <= 0 or area / box_area < 0.55:
+            continue
+        aspect = field_width / max(float(field_height), 1.0)
+        side_ratio = min(field_width / width, field_height / height)
+        if not 0.72 <= aspect <= 1.38 or not 0.22 <= side_ratio <= 0.8:
+            continue
+
+        # White diagonal strokes cut holes into the saturated-color mask and
+        # JPEG antialiasing can remove the outermost colored pixel.  Restore a
+        # small symmetric border before inspecting the field topology.
+        padding = max(1, int(round(min(field_width, field_height) * 0.08)))
+        x = max(0, x - padding)
+        y = max(0, y - padding)
+        field_width = min(width - x, field_width + 2 * padding)
+        field_height = min(height - y, field_height + 2 * padding)
+        box_area = float(field_width * field_height)
+
+        field = color_image[y : y + field_height, x : x + field_width]
+        # JPEG chroma subsampling darkens thin white strokes over saturated red
+        # substantially (the compact 60x30 fixture peaks near gray 208).
+        bright = cv2.cvtColor(field, cv2.COLOR_BGR2GRAY) >= 170
+        diagonal_tolerance = max(1.5, min(field_width, field_height) * 0.14)
+        ys, xs = np.indices(bright.shape)
+        falling_distance = np.abs(
+            xs / max(field_width - 1, 1) + ys / max(field_height - 1, 1) - 1.0
+        ) * min(field_width, field_height)
+        rising_distance = np.abs(
+            xs / max(field_width - 1, 1) - ys / max(field_height - 1, 1)
+        ) * min(field_width, field_height)
+        falling_support = int(
+            np.count_nonzero(bright & (falling_distance <= diagonal_tolerance))
+        )
+        rising_support = int(
+            np.count_nonzero(bright & (rising_distance <= diagonal_tolerance))
+        )
+        minimum_support = max(3, int(min(field_width, field_height) * 0.35))
+        if falling_support < minimum_support or rising_support < minimum_support:
+            continue
+
+        field_center_y = y + field_height / 2.0
+        left_circles = [
+            circle
+            for circle in circles
+            if circle.center["x"] < x
+            and abs(circle.center["y"] - field_center_y) <= field_height * 0.45
+            and 0.08 * field_height
+            <= float(circle.geometry.get("radius_px", 0.0))
+            <= 0.35 * field_height
+        ]
+        if not left_circles:
+            continue
+
+        normalized_bbox = [
+            x / float(width),
+            y / float(height),
+            field_width / float(width),
+            field_height / float(height),
+        ]
+        score = area / box_area + min(falling_support, rising_support) / box_area
+        matches.append((score, normalized_bbox))
+
+    if not matches:
+        return []
+    _, best_bbox = max(matches, key=lambda match: match[0])
+    return build_diagonal_circle_cross_diagram_geometry_ir(best_bbox, source=source)
 
 
 def _candidate_decision_key(

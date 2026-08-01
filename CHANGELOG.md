@@ -56,6 +56,8 @@
 - IDO-17 Run RE removes three documentation-only catalog tokens from semantic badge defaults/fitting and ratchets the legacy runtime-ID baseline to 302 occurrences.
 - IDO-17 Run QZ removes the remaining vertical VOC badge CY guardrail from catalog-ID dispatch; element validation now uses text/connector/template geometry signals and the runtime-ID ratchet drops to 322 legacy occurrences.
 # Changelog
+
+- Run ABJ connects the generalized diagonal/circle/cross family seed to real raster perception: saturated square-field, crossed bright-diagonal, and left-circle evidence now select the shared normalized AC0502 L/M topology without filename knowledge.
 - IDO-17 Run RV neutralizes two remaining catalog-specific CLI option names for semantic focus debugging and Valve-Head bestlist repair, lowering the runtime-ID ratchet to 156 occurrences while preserving internal argparse destinations.
 - The complete core test suite was revalidated with 765 passing tests, and its full pytest output is now versioned as a GitHub review artifact.
 
