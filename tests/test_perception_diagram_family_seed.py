@@ -114,6 +114,23 @@ def test_diagonal_circle_step_seed_uses_distinct_topology() -> None:
     )
 
 
+def test_diagonal_circle_step_seed_constrains_measured_trace_geometry() -> None:
+    geometry_ir = build_diagonal_circle_step_diagram_geometry_ir(
+        [0.7, 0.25, 0.25, 0.5],
+        step_points=[[0.99, 0.01], [0.75, 0.41], [0.25, 0.59], [0.01, 0.99]],
+        step_stroke_ratio=0.2,
+    )
+
+    trace = geometry_ir[3]
+    assert trace["points"] == [
+        [0.9325, 0.29],
+        [0.8875, 0.455],
+        [0.7625, 0.545],
+        [0.7175, 0.71],
+    ]
+    assert trace["stroke_width"] == pytest.approx(0.0225)
+
+
 def test_step_detector_classifies_real_raster_but_rejects_cross_family() -> None:
     cv2 = pytest.importorskip("cv2")
     step_image = cv2.imread("artifacts/images_to_convert/AC0538_1L_sia.jpg")
@@ -122,6 +139,11 @@ def test_step_detector_classifies_real_raster_but_rejects_cross_family() -> None
     geometry_ir = detect_diagonal_circle_step_diagram_geometry_ir(step_image)
 
     assert geometry_ir[3]["id"] == "diagram_step_trace"
+    neutral_trace = build_diagonal_circle_step_diagram_geometry_ir(
+        geometry_ir[2]["bbox"]
+    )[3]
+    assert geometry_ir[3]["points"] != neutral_trace["points"]
+    assert geometry_ir[3]["stroke_width"] != neutral_trace["stroke_width"]
     assert detect_diagonal_circle_step_diagram_geometry_ir(cross_image) == []
 
 
