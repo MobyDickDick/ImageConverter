@@ -1043,7 +1043,14 @@ def validateBadgeByElementsImpl(
 
     remaining_budget = _remaining_budget_seconds()
     min_required_for_final_color_pass = max(10.0, 0.12 * configured_budget) if configured_budget > 0.0 else 0.0
-    if configured_budget > 0.0 and remaining_budget < min_required_for_final_color_pass:
+    skip_final_color_optimization = bool(
+        params.get("skip_final_color_optimization", False)
+    )
+    if skip_final_color_optimization:
+        logs.append(
+            "final_color_pass_skipped: lokale Kompaktvarianten verwenden kanonische Farben"
+        )
+    elif configured_budget > 0.0 and remaining_budget < min_required_for_final_color_pass:
         if is_anchor_telemetry_test:
             logs.append(f"{anchor_telemetry_prefix} PHASE final_color_pass_budget_fallback")
         logs.append(

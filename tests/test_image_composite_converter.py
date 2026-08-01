@@ -1661,6 +1661,11 @@ def test_finalize_ac08_small_variant_keeps_only_small_variant_metadata() -> None
     assert params["ac08_small_variant_mode"] is True
     assert params["ac08_small_variant_reason"] in {"variant_suffix+min_dim", "variant_suffix", "min_dim"}
     assert int(params["validation_mask_dilate_px"]) >= 1
+    assert params["enable_global_search_mode"] is False
+    assert params["global_search_disabled_reason"] == "small_variant_local_fit"
+    assert params["validation_round_cap"] == 3
+    assert params["validation_round_cap_reason"] == "small_variant_local_fit"
+    assert params["skip_final_color_optimization"] is True
     assert "arm_len_min_ratio" not in params or float(params["arm_len_min_ratio"]) <= 0.75
 
 

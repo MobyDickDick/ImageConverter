@@ -210,6 +210,13 @@ def runSemanticBadgeIterationImpl(
         base_name=perc_base_name,
     )
     effective_badge_validation_rounds = int(badge_validation_rounds)
+    configured_round_cap = int(
+        badge_params.get("validation_round_cap", effective_badge_validation_rounds)
+        or effective_badge_validation_rounds
+    )
+    effective_badge_validation_rounds = min(
+        effective_badge_validation_rounds, max(1, configured_round_cap)
+    )
     if (
         bool(badge_params.get("arm_enabled", False))
         and str(badge_params.get("connector_direction", "")).lower() == "left"

@@ -75,6 +75,20 @@ def configureAc08SmallVariantModeImpl(
     if not is_small:
         return p
 
+    # Local element bracketing already covers the deliberately narrow search
+    # corridors of tiny badges.  The global sampler is disproportionately
+    # expensive here because every candidate starts a separate SVG-renderer
+    # subprocess; on 25x15 fixtures that looked like a pytest deadlock after
+    # the last element progress message.  Keep standard-size badges on global
+    # search and use the deterministic local path for all geometry-classified
+    # compact variants.
+    p["enable_global_search_mode"] = False
+    p["global_search_disabled_reason"] = "small_variant_local_fit"
+    p["validation_round_cap"] = min(
+        3, max(1, int(p.get("validation_round_cap", 3) or 3))
+    )
+    p["validation_round_cap_reason"] = "small_variant_local_fit"
+    p["skip_final_color_optimization"] = True
     p["validation_mask_dilate_px"] = int(max(1, int(p.get("validation_mask_dilate_px", 1))))
     p["small_variant_antialias_bias"] = float(max(0.0, float(p.get("small_variant_antialias_bias", 0.08))))
 
