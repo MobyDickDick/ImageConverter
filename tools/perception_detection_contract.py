@@ -1208,6 +1208,107 @@ def build_perception_seeded_geometry_ir(
     return merge_perception_candidates_into_geometry_ir(image, candidates, base)
 
 
+def build_diagonal_circle_cross_diagram_geometry_ir(
+    diagram_bbox: list[float],
+    *,
+    source: str = "diagonal_circle_cross_diagram_family",
+) -> list[dict[str, object]]:
+    """Build the scale-independent seed for a diagonal/circle/cross diagram.
+
+    ``diagram_bbox`` is the normalized bounding box of the square diagram field.
+    All remaining geometry is expressed relative to that detected field.  This
+    deliberately keeps viewport sizes and sample names out of the seed and lets
+    the same topology initialize differently sized renderings.
+    """
+    if len(diagram_bbox) != 4:
+        raise ValueError("diagram_bbox must contain normalized x, y, width and height")
+    x, y, width, height = (float(value) for value in diagram_bbox)
+    if width <= 0.0 or height <= 0.0:
+        raise ValueError("diagram_bbox width and height must be positive")
+
+    def point(relative_x: float, relative_y: float) -> list[float]:
+        return [
+            _round_number(x + relative_x * width, 6),
+            _round_number(y + relative_y * height, 6),
+        ]
+
+    seed_meta = {
+        "kind": "diagram_topology",
+        "confidence": 1.0,
+        "source": source,
+        "detector": "normalized_primitive_relations",
+        "candidate_schema_version": "perception_family_seed_v1",
+    }
+    circle_bbox = [
+        _round_number(x - 0.925 * width, 6),
+        _round_number(y + 0.325 * height, 6),
+        _round_number(0.35 * width, 6),
+        _round_number(0.35 * height, 6),
+    ]
+    common_path = {
+        "kind": "PolygonPath",
+        "fill": "none",
+        "closed": False,
+        "perception_seed": seed_meta,
+    }
+    return [
+        {
+            **common_path,
+            "id": "diagram_diagonal_connector",
+            "points": [point(-1.375, 1.1), point(-0.175, -0.1)],
+            "stroke": "#8a8a8a",
+            "stroke_width": _round_number(0.1 * min(width, height), 6),
+        },
+        {
+            **common_path,
+            "id": "diagram_horizontal_connector",
+            "points": [point(-0.7285, 0.5), point(-0.01, 0.5)],
+            "stroke": "#8a8a8a",
+            "stroke_width": _round_number(0.1 * min(width, height), 6),
+        },
+        {
+            "kind": "ColorPatch",
+            "id": "diagram_red_field",
+            "bbox": [_round_number(value, 6) for value in diagram_bbox],
+            "fill": "#df1f48",
+            "stroke": "none",
+            "perception_seed": seed_meta,
+        },
+        {
+            **common_path,
+            "id": "diagram_cross_falling",
+            "points": [point(0.0034, 0.9963), point(0.9966, 0.0037)],
+            "stroke": "#ffffff",
+            "stroke_width": _round_number(0.05 * min(width, height), 6),
+        },
+        {
+            **common_path,
+            "id": "diagram_cross_rising",
+            "points": [point(0.0034, 0.0037), point(0.9966, 0.9963)],
+            "stroke": "#ffffff",
+            "stroke_width": _round_number(0.05 * min(width, height), 6),
+        },
+        {
+            "kind": "RectBorder",
+            "id": "diagram_field_border",
+            "bbox": [_round_number(value, 6) for value in diagram_bbox],
+            "fill": "none",
+            "stroke": "#8a8a8a",
+            "stroke_width": _round_number(0.05 * min(width, height), 6),
+            "perception_seed": seed_meta,
+        },
+        {
+            "kind": "CircleBackground",
+            "id": "diagram_circle_anchor",
+            "bbox": circle_bbox,
+            "fill": "#e6e6e6",
+            "stroke": "#8a8a8a",
+            "stroke_width": _round_number(0.09 * min(width, height), 6),
+            "perception_seed": seed_meta,
+        },
+    ]
+
+
 def _candidate_decision_key(
     candidate: PerceptionPrimitiveCandidate,
 ) -> tuple[str, str, float]:
