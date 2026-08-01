@@ -1,3 +1,4 @@
+- Run ABM measures AC0538 field and border colors plus guarded circle-anchor geometry from raster candidates, and extends the catalog-free step classifier to the compact 1M and green 2L variants.
 - Run ABL estimates the four step-trace points and stroke width from raster evidence within guarded normalized bounds, replacing the fixed neutral AC0538 trace pose without filename knowledge.
 - Plan-B Run ABG adds 4194304th-yoctofine catalog-free stroke-gradient offset probes for PolygonPath Geometry-IR elements and documents the DLG0021 optimizer-only learning effect.
 - Plan-B Run ABE adds 34359738368th-yoctofine catalog-free opacity probes for ColorPatch/RectBorder Geometry-IR elements and documents the GE9012_6M optimizer-only learning effect.

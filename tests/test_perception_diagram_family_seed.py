@@ -131,6 +131,36 @@ def test_diagonal_circle_step_seed_constrains_measured_trace_geometry() -> None:
     assert trace["stroke_width"] == pytest.approx(0.0225)
 
 
+def test_diagonal_circle_step_seed_accepts_guarded_raster_appearance() -> None:
+    geometry_ir = build_diagonal_circle_step_diagram_geometry_ir(
+        [0.7, 0.25, 0.25, 0.5],
+        field_fill="#d02040",
+        border_stroke="#777879",
+        circle_bbox=[-2.0, 0.0, 0.9, 0.1],
+    )
+
+    assert geometry_ir[2]["fill"] == "#d02040"
+    assert geometry_ir[4]["stroke"] == "#777879"
+    assert geometry_ir[5]["bbox"] == [0.425, 0.35, 0.125, 0.125]
+
+
+@pytest.mark.parametrize(
+    "sample", ["AC0538_1L_sia", "AC0538_1M_sia", "AC0538_2L_sia"]
+)
+def test_step_detector_measures_appearance_across_size_and_color_variants(
+    sample: str,
+) -> None:
+    cv2 = pytest.importorskip("cv2")
+    image = cv2.imread(f"artifacts/images_to_convert/{sample}.jpg")
+
+    geometry_ir = detect_diagonal_circle_step_diagram_geometry_ir(image)
+    neutral = build_diagonal_circle_step_diagram_geometry_ir(geometry_ir[2]["bbox"])
+
+    assert geometry_ir[2]["fill"] != neutral[2]["fill"]
+    assert geometry_ir[4]["stroke"] != neutral[4]["stroke"]
+    assert geometry_ir[5]["bbox"] != neutral[5]["bbox"]
+
+
 def test_step_detector_classifies_real_raster_but_rejects_cross_family() -> None:
     cv2 = pytest.importorskip("cv2")
     step_image = cv2.imread("artifacts/images_to_convert/AC0538_1L_sia.jpg")
