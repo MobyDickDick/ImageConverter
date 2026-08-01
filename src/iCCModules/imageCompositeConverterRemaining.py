@@ -736,6 +736,8 @@ def _selectOpenQualityCases(
     *,
     allowed_error_per_pixel: float,
     skip_variants: set[str] | None = None,
+    max_mean_delta2: float | None = None,
+    max_std_delta2: float | None = None,
 ) -> list[dict[str, object]]:
     """Return unresolved quality cases sorted from worst to best.
 
@@ -746,6 +748,8 @@ def _selectOpenQualityCases(
         rows,
         allowed_error_per_pixel=allowed_error_per_pixel,
         skip_variants=skip_variants,
+        max_mean_delta2=max_mean_delta2,
+        max_std_delta2=max_std_delta2,
     )
 
 def _iterationStrategyForPass(pass_idx: int, base_iterations: int) -> tuple[int, int]:
@@ -1234,6 +1238,7 @@ def convertRange(
             "Mit ICC_FORCE_RECONVERT=1 kann eine vollständige Neuberechnung erzwungen werden."
         )
     cfg = _loadQualityConfig(reports_out_dir)
+    max_mean_delta2, max_std_delta2 = quality_threshold_helpers.resolvePixelErrorAcceptanceImpl(cfg)
     early_quality_gate = early_quality_gate_helpers.resolveEarlyQualityGateImpl(
         cfg,
         existing_donor_rows,
@@ -1407,6 +1412,8 @@ def convertRange(
             rng=rng,
             base_iterations=base_iterations,
             allowed_error_per_pixel=allowed_error_pp,
+            max_mean_delta2=max_mean_delta2,
+            max_std_delta2=max_std_delta2,
             skip_variants=skip_variants,
             result_map=result_map,
             quality_logs=quality_logs,

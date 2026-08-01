@@ -44,6 +44,23 @@ def test_select_open_quality_cases_keeps_structured_diff_even_below_error_thresh
     assert [entry["variant"] for entry in selected] == ["AC0800_S"]
 
 
+def test_select_open_quality_cases_applies_configured_mean_and_std_limits() -> None:
+    rows = [
+        {"variant": "OK", "error_per_pixel": 0.2, "mean_delta2": 4.0, "std_delta2": 8.0},
+        {"variant": "MEAN", "error_per_pixel": 0.2, "mean_delta2": 6.0, "std_delta2": 8.0},
+        {"variant": "STD", "error_per_pixel": 0.2, "mean_delta2": 4.0, "std_delta2": 11.0},
+    ]
+
+    selected = pass_helpers.selectOpenQualityCasesImpl(
+        rows,
+        allowed_error_per_pixel=1.0,
+        max_mean_delta2=5.0,
+        max_std_delta2=10.0,
+    )
+
+    assert {entry["variant"] for entry in selected} == {"MEAN", "STD"}
+
+
 def test_initial_badge_validation_rounds_scale_with_iteration_budget() -> None:
     assert initial_pass.resolveInitialBadgeValidationRoundsImpl(64, override="") == 8
     assert initial_pass.resolveInitialBadgeValidationRoundsImpl(128, override="") == 12

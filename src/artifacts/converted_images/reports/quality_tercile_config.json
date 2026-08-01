@@ -1,6 +1,11 @@
 {
   "allowed_error_per_pixel": 0.045945679012345676,
+  "pixel_error_acceptance": {
+    "max_mean_delta2": 300.0,
+    "max_std_delta2": 3000.0,
+    "basis": "strict-rgb-rmse-10"
+  },
   "skip_variants": [],
-  "notes": "Varianten in skip_variants werden in Folge-Pässen nicht erneut konvertiert. Loeschen der Datei setzt den Ablauf zurueck, dann werden wieder alle Bitmaps bearbeitet.",
+  "notes": "Pro Pixel gilt delta2=(dR^2+dG^2+dB^2). max_mean_delta2=300 entspricht RMSE 10 je Farbkanal auf der Skala 0..255; max_std_delta2=3000 begrenzt stark lokal konzentrierte Fehler. null deaktiviert das jeweilige Kriterium.",
   "source": "manual-config"
 }

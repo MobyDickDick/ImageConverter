@@ -45,6 +45,11 @@ def test_load_and_write_quality_config_roundtrip(tmp_path: Path) -> None:
     assert loaded["allowed_error_per_pixel"] == 0.123
     assert loaded["skip_variants"] == ["AC0800_S", "AC0811_L"]
     assert loaded["source"] == "unit-test"
+    assert loaded["pixel_error_acceptance"] == {
+        "max_mean_delta2": 300.0,
+        "max_std_delta2": 3000.0,
+        "basis": "strict-rgb-rmse-10",
+    }
 
 
 def test_load_quality_config_handles_invalid_payload(tmp_path: Path) -> None:
@@ -87,6 +92,31 @@ def test_write_quality_config_preserves_early_abort_tuning(tmp_path: Path) -> No
         "enabled": False,
         "probe_iterations": 5,
         "threshold_multiplier": 12.0,
+    }
+
+
+def test_write_quality_config_preserves_pixel_error_acceptance(tmp_path: Path) -> None:
+    path = tmp_path / "quality_tercile_config.json"
+    path.write_text(
+        '{"pixel_error_acceptance":{"max_mean_delta2":125.0,"max_std_delta2":40.0}}',
+        encoding="utf-8",
+    )
+
+    quality_config_helpers.writeQualityConfigImpl(
+        str(tmp_path),
+        allowed_error_per_pixel=0.5,
+        skipped_variants=[],
+        source="test",
+        quality_config_path_fn=lambda _reports: str(path),
+    )
+
+    loaded = quality_config_helpers.loadQualityConfigImpl(
+        str(tmp_path), quality_config_path_fn=lambda _reports: str(path)
+    )
+    assert loaded["pixel_error_acceptance"] == {
+        "max_mean_delta2": 125.0,
+        "max_std_delta2": 40.0,
+        "basis": "user-configured",
     }
 
 

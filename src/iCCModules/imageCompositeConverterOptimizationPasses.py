@@ -53,6 +53,8 @@ def selectOpenQualityCasesImpl(
     *,
     allowed_error_per_pixel: float,
     skip_variants: set[str] | None = None,
+    max_mean_delta2: float | None = None,
+    max_std_delta2: float | None = None,
 ) -> list[dict[str, object]]:
     """Return unresolved quality cases sorted from worst to best."""
     skips = {str(v).upper() for v in (skip_variants or set()) if str(v).strip()}
@@ -66,8 +68,18 @@ def selectOpenQualityCasesImpl(
             continue
         distribution_status = str(row.get("diff_error_distribution_status", "")).strip().lower()
         has_structured_residual = distribution_status == "structured"
+        mean_delta2 = float(row.get("mean_delta2", float("inf")))
+        std_delta2 = float(row.get("std_delta2", float("inf")))
+        exceeds_mean_limit = max_mean_delta2 is not None and (
+            not math.isfinite(mean_delta2) or mean_delta2 > max_mean_delta2
+        )
+        exceeds_std_limit = max_std_delta2 is not None and (
+            not math.isfinite(std_delta2) or std_delta2 > max_std_delta2
+        )
         if (
             not has_structured_residual
+            and not exceeds_mean_limit
+            and not exceeds_std_limit
             and math.isfinite(allowed_error_per_pixel)
             and err <= allowed_error_per_pixel
         ):

@@ -8,6 +8,11 @@ import math
 import os
 from pathlib import Path
 
+from src.iCCModules.imageCompositeConverterQualityThreshold import (
+    RECOMMENDED_MAX_MEAN_DELTA2,
+    RECOMMENDED_MAX_STD_DELTA2,
+)
+
 
 def svgHrefMimeTypeImpl(path: str | Path) -> str:
     ext = Path(path).suffix.lower()
@@ -71,6 +76,11 @@ def writeQualityConfigImpl(
         "probe_iterations": 3,
         "threshold_multiplier": 8.0,
     }
+    pixel_error_acceptance: dict[str, object] = {
+        "max_mean_delta2": RECOMMENDED_MAX_MEAN_DELTA2,
+        "max_std_delta2": RECOMMENDED_MAX_STD_DELTA2,
+        "basis": "strict-rgb-rmse-10",
+    }
     if os.path.exists(path):
         try:
             with open(path, "r", encoding="utf-8") as existing_file:
@@ -78,6 +88,11 @@ def writeQualityConfigImpl(
             existing_early_abort = existing_payload.get("early_abort", {}) if isinstance(existing_payload, dict) else {}
             if isinstance(existing_early_abort, dict):
                 early_abort_config.update(existing_early_abort)
+            existing_acceptance = existing_payload.get("pixel_error_acceptance", {}) if isinstance(existing_payload, dict) else {}
+            if isinstance(existing_acceptance, dict):
+                pixel_error_acceptance.update(existing_acceptance)
+                if existing_acceptance and "basis" not in existing_acceptance:
+                    pixel_error_acceptance["basis"] = "user-configured"
         except (json.JSONDecodeError, OSError):
             pass
 
@@ -85,10 +100,15 @@ def writeQualityConfigImpl(
         "allowed_error_per_pixel": float(max(0.0, normalized_error_pp)),
         "skip_variants": sorted(set(skipped_variants)),
         "early_abort": early_abort_config,
+        "pixel_error_acceptance": pixel_error_acceptance,
         "notes": (
             "Varianten in skip_variants werden in Folge-Pässen nicht erneut konvertiert. "
             "early_abort prueft einen kurzen Probelauf gegen die gespeicherte Erfolgsgrenze; "
             "threshold_multiplier ist bewusst konservativ, um aufholbare Starts nicht abzubrechen. "
+            "max_mean_delta2 und max_std_delta2 definieren optional die maximal erlaubte mittlere "
+            "quadratische Pixelabweichung und deren Standardabweichung; null deaktiviert das Kriterium. "
+            "Die konservativen Vorgaben 300/3000 bedeuten beim Mittelwert hoechstens RMSE 10 je "
+            "Farbkanal (Skala 0..255); die Std-Grenze verhindert stark konzentrierte Restfehler. "
             "Loeschen der Datei setzt den Ablauf zurueck, dann werden wieder alle Bitmaps bearbeitet."
         ),
         "source": source,

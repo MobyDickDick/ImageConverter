@@ -918,9 +918,17 @@ def convertOneImpl(
         "elapsed_seconds": float(elapsed_sec),
         "best_error": float(best_error),
         "convergence": str(details.get("convergence", "")).strip().lower(),
+        # This is the optimizer's (mode-dependent) objective normalized by the
+        # image area. It is not MSE and must not be interpreted as a colour
+        # distance; mean_delta2/RGB-RMSE below are the comparable pixel metrics.
         "error_per_pixel": float(best_error) / pixel_count,
         "mean_delta2": float(mean_delta2),
         "std_delta2": float(std_delta2),
+        "rgb_rmse_per_channel": (
+            math.sqrt(float(mean_delta2) / 3.0)
+            if math.isfinite(float(mean_delta2)) and float(mean_delta2) >= 0.0
+            else float("inf")
+        ),
         "tile_std_delta2": float(tile_std_delta2),
         "localized_error_fraction": float(localized_error_fraction),
         "error_pixel_count": float(error_pixel_count),
@@ -975,8 +983,9 @@ def convertOneImpl(
     print_fn(
         f"[INFO] Konvertiert {filename} | "
         f"Parameter: {_formatCompactParams(params)} | "
-        f"Qualität: Fehler/Pixel={_formatQualityValue(row['error_per_pixel'])}, "
+        f"Qualität: Optimierungsfehler/Pixel={_formatQualityValue(row['error_per_pixel'])}, "
         f"Mean-Delta²={_formatQualityValue(row['mean_delta2'])}, "
+        f"RGB-RMSE/Kanal={_formatQualityValue(row['rgb_rmse_per_channel'])}, "
         f"{spatial_quality_text}"
         f"{_formatIterationSummary(params, int(best_iter), row['actual_iterations'], row['requested_iterations'], details)} | "
         f"Dauer={elapsed_sec:.1f}s"
