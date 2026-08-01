@@ -5,8 +5,10 @@ import pytest
 from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
 from tools.perception_detection_contract import (
     build_diagonal_circle_cross_diagram_geometry_ir,
+    build_diagonal_circle_step_diagram_geometry_ir,
     build_perception_seeded_geometry_ir,
     detect_diagonal_circle_cross_diagram_geometry_ir,
+    detect_diagonal_circle_step_diagram_geometry_ir,
 )
 
 
@@ -93,3 +95,40 @@ def test_generic_perception_pipeline_selects_detected_diagram_family() -> None:
 
     assert geometry_ir[0]["id"] == "diagram_diagonal_connector"
     assert geometry_ir[-1]["id"] == "diagram_circle_anchor"
+
+
+def test_diagonal_circle_step_seed_uses_distinct_topology() -> None:
+    geometry_ir = build_diagonal_circle_step_diagram_geometry_ir([0.7, 0.25, 0.25, 0.5])
+
+    assert [element["id"] for element in geometry_ir] == [
+        "diagram_diagonal_connector",
+        "diagram_horizontal_connector",
+        "diagram_red_field",
+        "diagram_step_trace",
+        "diagram_field_border",
+        "diagram_circle_anchor",
+    ]
+    assert all(
+        element["perception_seed"]["detector"] == "normalized_step_primitive_relations"
+        for element in geometry_ir
+    )
+
+
+def test_step_detector_classifies_real_raster_but_rejects_cross_family() -> None:
+    cv2 = pytest.importorskip("cv2")
+    step_image = cv2.imread("artifacts/images_to_convert/AC0538_1L_sia.jpg")
+    cross_image = cv2.imread("artifacts/images_to_convert/AC0502_1L_sia.jpg")
+
+    geometry_ir = detect_diagonal_circle_step_diagram_geometry_ir(step_image)
+
+    assert geometry_ir[3]["id"] == "diagram_step_trace"
+    assert detect_diagonal_circle_step_diagram_geometry_ir(cross_image) == []
+
+
+def test_generic_perception_pipeline_selects_step_diagram_family() -> None:
+    cv2 = pytest.importorskip("cv2")
+    image = cv2.imread("artifacts/images_to_convert/AC0538_1L_sia.jpg")
+
+    geometry_ir = build_perception_seeded_geometry_ir(image)
+
+    assert geometry_ir[3]["id"] == "diagram_step_trace"

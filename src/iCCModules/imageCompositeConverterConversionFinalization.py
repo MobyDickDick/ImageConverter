@@ -349,7 +349,9 @@ def _archiveSuccessfulConversionArtifacts(*,
     """Archive successful source images and copy their SVGs into a bestlist folder."""
     reports_dir = Path(reports_out_dir)
     bestlist_dir = reports_dir / "successful_conversions_bestlist"
-    archive_dir = reports_dir / "archived_source_images"
+    # Keep accepted inputs beside the intake directory so the next batch cannot
+    # reconvert them, while leaving rejected inputs in place for another pass.
+    archive_dir = Path(folder_path) / "succesessfulConvertedImages"
     bestlist_dir.mkdir(parents=True, exist_ok=True)
     archive_dir.mkdir(parents=True, exist_ok=True)
 
