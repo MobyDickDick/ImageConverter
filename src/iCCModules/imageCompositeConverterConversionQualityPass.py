@@ -13,6 +13,8 @@ def runQualityPassesImpl(
     rng,
     base_iterations: int,
     allowed_error_per_pixel: float,
+    max_mean_delta2: float | None = None,
+    max_std_delta2: float | None = None,
     skip_variants: set[str],
     result_map: dict[str, dict[str, object]],
     quality_logs: list[dict[str, object]],
@@ -39,14 +41,22 @@ def runQualityPassesImpl(
             before_pass_fn(pass_idx)
 
         current_rows = [row for row in result_map.values() if _isFiniteNumber(row.get("error_per_pixel", float("inf")))]
+        acceptance_limits_configured = max_mean_delta2 is not None or max_std_delta2 is not None
+        acceptance_kwargs = {}
+        if acceptance_limits_configured:
+            acceptance_kwargs = {
+                "max_mean_delta2": max_mean_delta2,
+                "max_std_delta2": max_std_delta2,
+            }
         candidates = select_open_quality_cases_fn(
             current_rows,
             allowed_error_per_pixel=allowed_error_per_pixel,
             skip_variants=skip_variants,
+            **acceptance_kwargs,
         )
-        if not candidates:
+        if not candidates and not acceptance_limits_configured:
             candidates = select_middle_lower_tercile_fn(current_rows)
-        if not candidates:
+        if not candidates and not acceptance_limits_configured:
             candidates = _selectIsolatedRefinementCandidate(
                 current_rows,
                 skip_variants=skip_variants,

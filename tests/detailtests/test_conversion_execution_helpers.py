@@ -98,7 +98,7 @@ def test_convert_one_impl_success_reads_convergence_and_delta2(tmp_path: Path) -
     )
     assert console_messages[1].startswith(
         "[INFO] Konvertiert AC0800_S.jpg | Parameter: mode=semantic_badge | "
-        "Qualität: Fehler/Pixel=1.000000, Mean-Delta²=1.250000, "
+        "Qualität: Optimierungsfehler/Pixel=1.000000, Mean-Delta²=1.250000, RGB-RMSE/Kanal=0.645497, "
         "beste Validierungsrunde=2/5, beste Composite-Iteration=n/a, ausgeführt=3/3 | Dauer="
     )
     assert console_messages[1].endswith("s")

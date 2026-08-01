@@ -2323,8 +2323,16 @@ def _selectOpenQualityCases(
     *,
     allowed_error_per_pixel: float,
     skip_variants: set[str] | None = None,
+    max_mean_delta2: float | None = None,
+    max_std_delta2: float | None = None,
 ) -> list[dict[str, object]]:
-    return imageCompositeConverterRemaining_helpers._selectOpenQualityCases(rows, allowed_error_per_pixel=allowed_error_per_pixel, skip_variants=skip_variants)
+    return imageCompositeConverterRemaining_helpers._selectOpenQualityCases(
+        rows,
+        allowed_error_per_pixel=allowed_error_per_pixel,
+        skip_variants=skip_variants,
+        max_mean_delta2=max_mean_delta2,
+        max_std_delta2=max_std_delta2,
+    )
 
 
 def _iterationStrategyForPass(pass_idx: int, base_iterations: int) -> tuple[int, int]:

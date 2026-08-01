@@ -6,6 +6,34 @@ import math
 
 AUTO_ALLOWED_ERROR_FLOOR = 1.0
 
+# Conservative defaults on the raw squared RGB-distance scale.  A mean_delta2
+# of 300 corresponds to an RMSE of sqrt(300 / 3) == 10 intensity levels per
+# colour channel (on the 0..255 scale).  The std limit additionally rejects
+# strongly concentrated errors that a tolerable mean can otherwise hide.
+RECOMMENDED_MAX_MEAN_DELTA2 = 300.0
+RECOMMENDED_MAX_STD_DELTA2 = 3_000.0
+
+
+def resolvePixelErrorAcceptanceImpl(cfg: dict[str, object]) -> tuple[float | None, float | None]:
+    """Read optional mean/std pixel-delta limits from the quality config.
+
+    For each pixel, ``delta2 = dR² + dG² + dB²``. ``mean_delta2`` is the mean
+    of those values and ``std_delta2`` their standard deviation. Missing, malformed,
+    negative, or non-finite limits disable only the corresponding criterion.
+    """
+    raw = cfg.get("pixel_error_acceptance", {})
+    if not isinstance(raw, dict):
+        return None, None
+
+    def _limit(key: str) -> float | None:
+        try:
+            value = float(raw.get(key))
+        except (TypeError, ValueError):
+            return None
+        return value if math.isfinite(value) and value >= 0.0 else None
+
+    return _limit("max_mean_delta2"), _limit("max_std_delta2")
+
 
 def resolveAllowedErrorPerPixelImpl(
     current_rows: list[dict[str, object]],

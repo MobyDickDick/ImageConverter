@@ -49,3 +49,12 @@ def test_resolve_allowed_error_falls_back_to_initial_and_manual_override() -> No
     )
     assert allowed_manual == 0.42
     assert source_manual == "manual-config"
+
+
+def test_resolve_pixel_error_acceptance_reads_independent_optional_limits() -> None:
+    assert quality_threshold_helpers.resolvePixelErrorAcceptanceImpl(
+        {"pixel_error_acceptance": {"max_mean_delta2": "12.5", "max_std_delta2": 7}}
+    ) == (12.5, 7.0)
+    assert quality_threshold_helpers.resolvePixelErrorAcceptanceImpl(
+        {"pixel_error_acceptance": {"max_mean_delta2": -1, "max_std_delta2": None}}
+    ) == (None, None)
