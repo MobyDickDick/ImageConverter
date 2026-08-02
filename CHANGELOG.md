@@ -1,3 +1,4 @@
+- Run ABR persists structured optimization render-timeout/error counters in conversion result rows and exports them as aggregation-ready `Iteration_Log.csv` columns.
 - Run ABQ distinguishes renderer timeouts from malformed/failed SVG renders and reports both counters in global-vector and color-bracketing optimization telemetry.
 - Run ABP limits each global-vector and final-color renderer subprocess to the remaining validation budget while preserving the configured default timeout for ordinary renders.
 - Run ABO forwards the validation deadline into global-vector and final-color candidate searches, preventing either optimizer from starting further subprocess renders after its wall-clock budget is exhausted.
