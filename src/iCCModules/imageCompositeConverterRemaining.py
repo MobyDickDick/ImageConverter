@@ -604,6 +604,9 @@ def _writeOptimizationRenderTelemetryComparison(reports_out_dir: str, current_su
         reports_out_dir,
         current_summary_path,
         baseline_path,
+        regression_gate_enabled=os.environ.get(
+            "ICC_OPTIMIZATION_RENDER_TELEMETRY_REGRESSION_GATE", ""
+        ).strip().lower() in {"1", "true", "yes", "on"},
     )
 
 def _writeStrategySwitchTemplateTransfersReport(
