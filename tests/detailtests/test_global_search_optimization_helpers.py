@@ -151,6 +151,42 @@ def test_global_search_skips_when_less_than_two_parameters_are_active() -> None:
     assert any("benötigt >=2" in line for line in logs)
 
 
+def test_global_search_stops_before_render_when_validation_deadline_expired(monkeypatch) -> None:
+    img = _Image(10, 10)
+    logs: list[str] = []
+    renders: list[dict] = []
+    params = {
+        "enable_global_search_mode": True,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 3.0,
+        "_optimization_deadline_monotonic": 10.0,
+    }
+    monkeypatch.setattr(helpers.time, "monotonic", lambda: 10.0)
+
+    improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=8,
+        global_parameter_vector_cls=_Vector,
+        global_parameter_vector_bounds_fn=_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _Rng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=lambda _img, probe: renders.append(probe) or 1.0,
+        log_global_parameter_vector_fn=lambda *_args, **_kwargs: None,
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert improved is False
+    assert renders == []
+    assert any("Validierungszeitbudget ausgeschöpft" in line for line in logs)
+
+
 def test_global_search_logs_reduced_mode_for_two_or_three_active_parameters() -> None:
     img = _Image(10, 10)
     logs: list[str] = []

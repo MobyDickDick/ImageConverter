@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import dataclasses
 import math
+import time
 import weakref
 from collections import OrderedDict
 
@@ -52,6 +53,17 @@ def optimizeGlobalParameterVectorSamplingImpl(
     """Global multi-parameter baseline search over the shared vector."""
     if not bool(params.get("enable_global_search_mode", False)):
         return False
+
+    deadline = float(params.get("_optimization_deadline_monotonic", 0.0) or 0.0)
+    budget_exhausted_logged = False
+
+    def budgetExhausted() -> bool:
+        nonlocal budget_exhausted_logged
+        exhausted = deadline > 0.0 and time.monotonic() >= deadline
+        if exhausted and not budget_exhausted_logged:
+            logs.append("global-search: abgebrochen (Validierungszeitbudget ausgeschöpft)")
+            budget_exhausted_logged = True
+        return exhausted
 
     near_optimum_eps_floor = 0.06
     near_optimum_eps_rel = 0.02
@@ -171,6 +183,8 @@ def optimizeGlobalParameterVectorSamplingImpl(
 
     def evalVector(candidate) -> float:
         nonlocal eval_hits, eval_requests
+        if budgetExhausted():
+            return float("inf")
         eval_requests += 1
         probe = candidate.apply_to_params(params)
         if probe.get("arm_enabled"):
@@ -492,8 +506,10 @@ def optimizeGlobalParameterVectorSamplingImpl(
             "global-search: deterministischer track übersprungen "
             f"(grund=stochastic-konvergiert, delta_err={start_err - stochastic_err:.3f})"
         )
-    else:
+    elif not budgetExhausted():
         deterministic_best, deterministic_err, deterministic_improved = runDeterministicTrack()
+    else:
+        deterministic_best, deterministic_err, deterministic_improved = stochastic_best, float("inf"), False
 
     winner_name = "stochastic"
     winner = stochastic_best
