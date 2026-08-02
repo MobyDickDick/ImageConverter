@@ -110,6 +110,76 @@ def test_write_optimization_render_telemetry_comparison_reports_signed_deltas(tm
         "render_timeouts": {"baseline": 5, "current": 2, "delta": -3},
         "render_errors": {"baseline": 1, "current": 4, "delta": 3},
     }
+    assert comparison["variant_deltas"] == []
+
+
+def test_write_optimization_render_telemetry_comparison_reports_variant_union(tmp_path: Path):
+    baseline_path = tmp_path / "baseline.json"
+    current_path = tmp_path / "current.json"
+    baseline_path.write_text(json.dumps({
+        "schema_version": "optimization_render_telemetry_summary_v1",
+        "affected_variants": [
+            {"variant": "ac010_m", "render_timeouts": 2, "render_errors": 1},
+            {"variant": "AC020_S", "render_timeouts": 1, "render_errors": 0},
+        ],
+    }), encoding="utf-8")
+    current_path.write_text(json.dumps({
+        "schema_version": "optimization_render_telemetry_summary_v1",
+        "affected_variants": [
+            {"variant": "AC010_M", "render_timeouts": 1, "render_errors": 3},
+            {"variant": "AC030_L", "render_timeouts": 4, "render_errors": 0},
+        ],
+    }), encoding="utf-8")
+
+    output_path = helpers.writeOptimizationRenderTelemetryComparisonImpl(
+        str(tmp_path), str(current_path), str(baseline_path)
+    )
+
+    comparison = json.loads(Path(output_path).read_text(encoding="utf-8"))
+    assert comparison["variant_deltas"] == [
+        {
+            "variant": "AC010_M",
+            "counters": {
+                "render_timeouts": {"baseline": 2, "current": 1, "delta": -1},
+                "render_errors": {"baseline": 1, "current": 3, "delta": 2},
+            },
+        },
+        {
+            "variant": "AC020_S",
+            "counters": {
+                "render_timeouts": {"baseline": 1, "current": 0, "delta": -1},
+                "render_errors": {"baseline": 0, "current": 0, "delta": 0},
+            },
+        },
+        {
+            "variant": "AC030_L",
+            "counters": {
+                "render_timeouts": {"baseline": 0, "current": 4, "delta": 4},
+                "render_errors": {"baseline": 0, "current": 0, "delta": 0},
+            },
+        },
+    ]
+
+
+def test_write_optimization_render_telemetry_comparison_rejects_invalid_variant_counter(tmp_path: Path):
+    baseline_path = tmp_path / "baseline.json"
+    current_path = tmp_path / "current.json"
+    baseline_path.write_text(json.dumps({
+        "schema_version": "optimization_render_telemetry_summary_v1",
+        "affected_variants": [{"variant": "AC010_M", "render_timeouts": -1}],
+    }), encoding="utf-8")
+    current_path.write_text(json.dumps({
+        "schema_version": "optimization_render_telemetry_summary_v1",
+    }), encoding="utf-8")
+
+    try:
+        helpers.writeOptimizationRenderTelemetryComparisonImpl(
+            str(tmp_path), str(current_path), str(baseline_path)
+        )
+    except ValueError as exc:
+        assert "non-negative integer" in str(exc)
+    else:
+        raise AssertionError("invalid per-variant counters must not produce a comparison")
 
 
 def test_write_optimization_render_telemetry_comparison_rejects_wrong_schema(tmp_path: Path):
