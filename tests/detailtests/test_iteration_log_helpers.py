@@ -20,7 +20,11 @@ def test_write_iteration_log_and_collect_semantic_rows(tmp_path: Path):
             "h": 100,
         },
         "AC0811_S.jpg": {
-            "params": {"elements": ["circle", "stem"], "mode": "semantic_badge"},
+            "params": {
+                "elements": ["circle", "stem"],
+                "mode": "semantic_badge",
+                "_optimization_render_telemetry": {"timeouts": 2, "errors": 1},
+            },
             "best_iter": 5,
             "best_error": 8.0,
             "error_per_pixel": 0.05,
@@ -38,9 +42,9 @@ def test_write_iteration_log_and_collect_semantic_rows(tmp_path: Path):
     )
 
     log_text = log_path.read_text(encoding="utf-8-sig")
-    assert "Dateiname;Gefundene Elemente;Beste Iteration;Diff-Score;FehlerProPixel" in log_text
-    assert "AC0800_L.jpg;circle;2;12.35;0.12345679" in log_text
-    assert "AC0811_S.jpg;circle + stem;5;8.00;0.05000000" in log_text
+    assert "Dateiname;Gefundene Elemente;Beste Iteration;Diff-Score;FehlerProPixel;Render-Timeouts;Render-Fehler" in log_text
+    assert "AC0800_L.jpg;circle;2;12.35;0.12345679;0;0" in log_text
+    assert "AC0811_S.jpg;circle + stem;5;8.00;0.05000000;2;1" in log_text
     assert "AC9999_X.jpg" not in log_text
     assert semantic_rows == [
         {
@@ -52,3 +56,22 @@ def test_write_iteration_log_and_collect_semantic_rows(tmp_path: Path):
             "error": 8.0,
         }
     ]
+
+
+def test_iteration_log_prefers_public_optimization_render_telemetry(tmp_path: Path):
+    log_path = tmp_path / "Iteration_Log.csv"
+    row = {
+        "params": {"elements": [], "_optimization_render_telemetry": {"timeouts": 9, "errors": 9}},
+        "optimization_render_telemetry": {"render_timeouts": 3, "render_errors": 4},
+        "best_iter": 0,
+        "best_error": 1.0,
+        "error_per_pixel": 0.1,
+        "base": "AC0001",
+        "variant": "AC0001",
+    }
+
+    helpers.writeIterationLogAndCollectSemanticImpl(
+        files=["AC0001.jpg"], result_map={"AC0001.jpg": row}, log_path=str(log_path)
+    )
+
+    assert "AC0001.jpg;;0;1.00;0.10000000;3;4" in log_path.read_text(encoding="utf-8-sig")

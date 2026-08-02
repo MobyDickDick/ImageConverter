@@ -941,6 +941,13 @@ def convertOneImpl(
         "base": base_name,
         "variant": os.path.splitext(filename)[0].upper(),
     }
+    raw_render_telemetry = params.get("_optimization_render_telemetry", {})
+    if not isinstance(raw_render_telemetry, dict):
+        raw_render_telemetry = {}
+    row["optimization_render_telemetry"] = {
+        "render_timeouts": max(0, int(raw_render_telemetry.get("timeouts", 0) or 0)),
+        "render_errors": max(0, int(raw_render_telemetry.get("errors", 0) or 0)),
+    }
     error_distribution_status, error_distribution_reason = _classifyDiffErrorDistribution(row)
     row["diff_error_distribution_status"] = error_distribution_status
     row["diff_error_distribution_reason"] = error_distribution_reason
