@@ -317,6 +317,7 @@ def _renderSvgToNumpyViaSubprocess(
     size_h: int,
     *,
     timeout_sec: float | None = None,
+    status_callback=None,
 ):
     return rendering_helpers.render_svg_to_numpy_via_subprocess(
         svg_string,
@@ -328,6 +329,7 @@ def _renderSvgToNumpyViaSubprocess(
             if timeout_sec is None
             else min(SVG_RENDER_SUBPROCESS_TIMEOUT_SEC, max(0.01, float(timeout_sec)))
         ),
+        status_callback=status_callback,
     )
 
 def _render_svg_to_numpy_inprocess(svg_string: str, size_w: int, size_h: int):
@@ -340,9 +342,12 @@ def _render_svg_to_numpy_via_subprocess(
     size_h: int,
     *,
     timeout_sec: float | None = None,
+    status_callback=None,
 ):
     """Snake-case compatibility wrapper for tests and helper call sites."""
-    return _renderSvgToNumpyViaSubprocess(svg_string, size_w, size_h, timeout_sec=timeout_sec)
+    return _renderSvgToNumpyViaSubprocess(
+        svg_string, size_w, size_h, timeout_sec=timeout_sec, status_callback=status_callback
+    )
 
 def _is_fitz_open_monkeypatched() -> bool:
     return rendering_runtime_helpers.is_fitz_open_monkeypatched(fitz_module=fitz)

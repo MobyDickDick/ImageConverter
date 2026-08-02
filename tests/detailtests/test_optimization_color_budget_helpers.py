@@ -49,10 +49,30 @@ def test_element_color_error_limits_single_render_to_remaining_budget(monkeypatc
         generate_badge_svg_fn=lambda *_args: "<svg/>",
         element_only_params_fn=lambda params, _element: params,
         fit_to_original_size_fn=lambda _img, rendered: rendered,
-        render_svg_to_numpy_fn=lambda _svg, _w, _h, *, timeout_sec: timeouts.append(timeout_sec) or object(),
+        render_svg_to_numpy_fn=lambda _svg, _w, _h, *, timeout_sec, status_callback: timeouts.append(timeout_sec) or object(),
         masked_union_error_in_bbox_fn=lambda *_args: 1.0,
         element_match_error_fn=lambda *_args, **_kwargs: 2.0,
     )
 
     assert error == 2.0
     assert timeouts == [0.75]
+
+
+def test_element_color_error_counts_regular_render_failure(monkeypatch) -> None:
+    monkeypatch.setattr(helpers.time, "monotonic", lambda: 12.25)
+    params = {"_optimization_deadline_monotonic": 13.0}
+
+    error = helpers.elementErrorForColorImpl(
+        np.zeros((2, 2, 3), dtype=np.uint8), params, "text", "text_gray", 128,
+        np.ones((2, 2), dtype=np.uint8),
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        generate_badge_svg_fn=lambda *_args: "<svg/>",
+        element_only_params_fn=lambda values, _element: values,
+        fit_to_original_size_fn=lambda _img, rendered: rendered,
+        render_svg_to_numpy_fn=lambda *_args, **kwargs: kwargs["status_callback"]("error"),
+        masked_union_error_in_bbox_fn=lambda *_args: 1.0,
+        element_match_error_fn=lambda *_args, **_kwargs: 2.0,
+    )
+
+    assert error == float("inf")
+    assert params["_optimization_render_telemetry"] == {"timeouts": 0, "errors": 1}

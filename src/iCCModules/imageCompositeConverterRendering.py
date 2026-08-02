@@ -201,6 +201,7 @@ def render_svg_to_numpy_via_subprocess(
     *,
     np_module,
     timeout_sec: float,
+    status_callback=None,
 ):
     if np_module is None:
         return None
@@ -264,8 +265,12 @@ def render_svg_to_numpy_via_subprocess(
                 f"size={size_w}x{size_h} payload_bytes={len(payload)} elapsed={elapsed:.2f}s",
                 flush=True,
             )
+        if status_callback is not None:
+            status_callback("timeout")
         return None
     except Exception:
+        if status_callback is not None:
+            status_callback("error")
         return None
     elapsed = time.monotonic() - started
     _SUBPROCESS_RENDER_AGG["calls"] += 1
@@ -289,12 +294,18 @@ def render_svg_to_numpy_via_subprocess(
             flush=True,
         )
     if completed.returncode != 0 or not completed.stdout:
+        if status_callback is not None:
+            status_callback("error")
         return None
     try:
         response = json.loads(completed.stdout.decode("utf-8"))
     except Exception:
+        if status_callback is not None:
+            status_callback("error")
         return None
     if not isinstance(response, dict) or not response.get("ok", False):
+        if status_callback is not None:
+            status_callback("error")
         return None
     try:
         w = int(response["w"])

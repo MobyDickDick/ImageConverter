@@ -108,3 +108,21 @@ def test_svg_render_subprocess_inherits_runtime_pythonpath(monkeypatch) -> None:
     pythonpath = str(child_env.get("PYTHONPATH", ""))
     assert "/runtime/vendor" in pythonpath.split(os.pathsep)
     assert "/workspace/project" in pythonpath.split(os.pathsep)
+
+
+def test_svg_render_subprocess_reports_timeout_status(monkeypatch) -> None:
+    from src.iCCModules import imageCompositeConverterRendering as rendering
+
+    def raise_timeout(*_args, **_kwargs):
+        raise rendering.subprocess.TimeoutExpired("renderer", 0.1)
+
+    statuses: list[str] = []
+    monkeypatch.setattr(rendering.subprocess, "run", raise_timeout)
+
+    result = rendering.render_svg_to_numpy_via_subprocess(
+        "<svg/>", 1, 1, np_module=__import__("numpy"), timeout_sec=0.1,
+        status_callback=statuses.append,
+    )
+
+    assert result is None
+    assert statuses == ["timeout"]

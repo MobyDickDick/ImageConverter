@@ -397,10 +397,11 @@ def _renderSvgToNumpyInprocess(svg_string: str, size_w: int, size_h: int):
 
 
 def _renderSvgToNumpyViaSubprocess(
-    svg_string: str, size_w: int, size_h: int, *, timeout_sec: float | None = None
+    svg_string: str, size_w: int, size_h: int, *, timeout_sec: float | None = None,
+    status_callback=None,
 ):
     return imageCompositeConverterRemaining_helpers._renderSvgToNumpyViaSubprocess(
-        svg_string, size_w, size_h, timeout_sec=timeout_sec
+        svg_string, size_w, size_h, timeout_sec=timeout_sec, status_callback=status_callback
     )
 
 
@@ -409,10 +410,11 @@ def _render_svg_to_numpy_inprocess(svg_string: str, size_w: int, size_h: int):
 
 
 def _render_svg_to_numpy_via_subprocess(
-    svg_string: str, size_w: int, size_h: int, *, timeout_sec: float | None = None
+    svg_string: str, size_w: int, size_h: int, *, timeout_sec: float | None = None,
+    status_callback=None,
 ):
     return imageCompositeConverterRemaining_helpers._render_svg_to_numpy_via_subprocess(
-        svg_string, size_w, size_h, timeout_sec=timeout_sec
+        svg_string, size_w, size_h, timeout_sec=timeout_sec, status_callback=status_callback
     )
 
 
@@ -1129,9 +1131,12 @@ class Action:
 
     @staticmethod
     def render_svg_to_numpy(
-        svg_content: str, w: int, h: int, *, timeout_sec: float | None = None
+        svg_content: str, w: int, h: int, *, timeout_sec: float | None = None,
+        status_callback=None,
     ):
-        return Action.renderSvgToNumpy(svg_content, w, h, timeout_sec=timeout_sec)
+        return Action.renderSvgToNumpy(
+            svg_content, w, h, timeout_sec=timeout_sec, status_callback=status_callback
+        )
 
     @staticmethod
     def _detect_semantic_primitives(
@@ -1319,12 +1324,14 @@ class Action:
         size_h: int,
         *,
         timeout_sec: float | None = None,
+        status_callback=None,
     ):
         return render_dispatch_helpers.renderSvgToNumpyImpl(
             svg_string,
             size_w,
             size_h,
             timeout_sec=timeout_sec,
+            status_callback=status_callback,
             svg_render_subprocess_enabled=SVG_RENDER_SUBPROCESS_ENABLED,
             under_pytest_runtime=_UNDER_PYTEST_RUNTIME,
             svg_render_subprocess_explicit=SVG_RENDER_SUBPROCESS_EXPLICIT,

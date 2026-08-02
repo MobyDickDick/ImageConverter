@@ -195,13 +195,33 @@ def test_full_badge_error_limits_single_render_to_remaining_budget(monkeypatch) 
         _Image(10, 10),
         {"_optimization_deadline_monotonic": 9.0},
         fit_to_original_size_fn=lambda _img, rendered: rendered,
-        render_svg_to_numpy_fn=lambda _svg, _w, _h, *, timeout_sec: timeouts.append(timeout_sec) or object(),
+        render_svg_to_numpy_fn=lambda _svg, _w, _h, *, timeout_sec, status_callback: timeouts.append(timeout_sec) or object(),
         generate_badge_svg_fn=lambda *_args: "<svg/>",
         calculate_error_fn=lambda *_args: 3.0,
     )
 
     assert error == 3.0
     assert timeouts == [1.5]
+
+
+def test_full_badge_error_counts_timeout_separately_from_render_error(monkeypatch) -> None:
+    monkeypatch.setattr(helpers.time, "monotonic", lambda: 7.5)
+    telemetry = {"timeouts": 0, "errors": 0}
+
+    error = helpers.fullBadgeErrorForParamsImpl(
+        _Image(10, 10),
+        {
+            "_optimization_deadline_monotonic": 9.0,
+            "_optimization_render_telemetry": telemetry,
+        },
+        fit_to_original_size_fn=lambda _img, rendered: rendered,
+        render_svg_to_numpy_fn=lambda _svg, _w, _h, **kwargs: kwargs["status_callback"]("timeout"),
+        generate_badge_svg_fn=lambda *_args: "<svg/>",
+        calculate_error_fn=lambda *_args: 3.0,
+    )
+
+    assert error == float("inf")
+    assert telemetry == {"timeouts": 1, "errors": 0}
 
 
 def test_global_search_logs_reduced_mode_for_two_or_three_active_parameters() -> None:
