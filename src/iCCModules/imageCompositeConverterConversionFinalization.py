@@ -526,11 +526,14 @@ def runConversionFinalizationImpl(
     harmonize_semantic_size_variants_fn,
     run_post_conversion_reporting_fn,
     write_chain_telemetry_batch_report_fn=None,
+    write_optimization_render_telemetry_summary_fn=None,
 ) -> list[dict[str, object]]:
     """Write run artifacts and trigger semantic harmonization/reporting."""
     write_quality_pass_report_fn(reports_out_dir, quality_logs)
     write_conversion_bestlist_metrics_fn(conversion_bestlist_path, conversion_bestlist_rows)
     write_batch_failure_summary_fn(reports_out_dir, batch_failures)
+    if write_optimization_render_telemetry_summary_fn is not None:
+        write_optimization_render_telemetry_summary_fn(reports_out_dir, result_map)
     if strategy_logs:
         write_strategy_switch_template_transfers_report_fn(reports_out_dir, strategy_logs)
     if write_chain_telemetry_batch_report_fn is not None:

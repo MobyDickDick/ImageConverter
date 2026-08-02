@@ -590,6 +590,12 @@ def _readValidationLogDetails(log_path: str) -> dict[str, str]:
 def _writeBatchFailureSummary(reports_out_dir: str, failures: list[dict[str, str]]) -> None:
     return batch_reporting_helpers.writeBatchFailureSummaryImpl(reports_out_dir, failures)
 
+def _writeOptimizationRenderTelemetrySummary(
+    reports_out_dir: str,
+    result_map: dict[str, dict[str, object]],
+) -> str:
+    return batch_reporting_helpers.writeOptimizationRenderTelemetrySummaryImpl(reports_out_dir, result_map)
+
 def _writeStrategySwitchTemplateTransfersReport(
     reports_out_dir: str,
     strategy_rows: list[dict[str, object]],
@@ -1492,6 +1498,7 @@ def convertRange(
         write_quality_pass_report_fn=_writeQualityPassReport,
         write_conversion_bestlist_metrics_fn=_writeConversionBestlistMetrics,
         write_batch_failure_summary_fn=_writeBatchFailureSummary,
+        write_optimization_render_telemetry_summary_fn=_writeOptimizationRenderTelemetrySummary,
         write_strategy_switch_template_transfers_report_fn=_writeStrategySwitchTemplateTransfersReport,
         write_iteration_log_and_collect_semantic_results_fn=_writeIterationLogAndCollectSemanticResults,
         write_chain_telemetry_batch_report_fn=_writeChainTelemetryBatchReport,
