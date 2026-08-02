@@ -565,9 +565,17 @@ def fullBadgeErrorForParamsImpl(
 ) -> float:
     """Evaluate full-image error for an already prepared badge parameter dict."""
     h, w = img_orig.shape[:2]
+    deadline = float(params.get("_optimization_deadline_monotonic", 0.0) or 0.0)
+    remaining = max(0.01, deadline - time.monotonic()) if deadline > 0.0 else None
+    render_args = (generate_badge_svg_fn(w, h, params), w, h)
+    rendered = (
+        render_svg_to_numpy_fn(*render_args, timeout_sec=remaining)
+        if remaining is not None
+        else render_svg_to_numpy_fn(*render_args)
+    )
     render = fit_to_original_size_fn(
         img_orig,
-        render_svg_to_numpy_fn(generate_badge_svg_fn(w, h, params), w, h),
+        rendered,
     )
     if render is None:
         return float("inf")
