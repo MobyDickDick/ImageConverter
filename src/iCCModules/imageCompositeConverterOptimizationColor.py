@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 import os
+import time
 from collections.abc import Callable
 
 
@@ -77,11 +78,19 @@ def optimizeElementColorBracketImpl(
     if mask_orig is None or int(mask_orig.sum()) == 0:
         return False
 
+    deadline = float(params.get("_optimization_deadline_monotonic", 0.0) or 0.0)
+
+    def budget_exhausted() -> bool:
+        return deadline > 0.0 and time.monotonic() >= deadline
+
     changed_any = False
     local_gray = mean_gray_for_mask_fn(img_orig, mask_orig)
     sampled = int(round(local_gray)) if local_gray is not None else None
 
     for color_key in element_color_keys_fn(element, params):
+        if budget_exhausted():
+            logs.append(f"{element}: Farb-Bracketing abgebrochen (Validierungszeitbudget ausgeschöpft)")
+            break
         current = int(round(float(params.get(color_key, 128))))
         low_limit = int(clip_scalar_fn(int(params.get(f"{color_key}_min", 0)), 0, 255))
         high_limit = int(clip_scalar_fn(int(params.get(f"{color_key}_max", 255)), 0, 255))
@@ -100,10 +109,16 @@ def optimizeElementColorBracketImpl(
             candidates.update(int(clip_scalar_fn(v, low_limit, high_limit)) for v in {96, 112, 128, 144, 152, 160, 171})
 
         values = sorted(v for v in candidates if low_limit <= v <= high_limit)
-        errs = [
-            element_error_for_color_fn(img_orig, params, element, color_key, v, mask_orig)
-            for v in values
-        ]
+        evaluated_values: list[int] = []
+        errs: list[float] = []
+        for value in values:
+            if budget_exhausted():
+                logs.append(f"{element}: Farb-Bracketing abgebrochen (Validierungszeitbudget ausgeschöpft)")
+                break
+            evaluated_values.append(value)
+            errs.append(element_error_for_color_fn(img_orig, params, element, color_key, value, mask_orig))
+        if len(evaluated_values) != len(values):
+            break
         if not all(math.isfinite(e) for e in errs):
             logs.append(
                 f"{element}: Farb-Bracketing abgebrochen ({color_key}) wegen nicht-finiten Fehlern "

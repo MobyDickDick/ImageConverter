@@ -1,3 +1,4 @@
+- Run ABO forwards the validation deadline into global-vector and final-color candidate searches, preventing either optimizer from starting further subprocess renders after its wall-clock budget is exhausted.
 - Run ABN removes the apparent AC0834_S test deadlock by keeping geometry-classified compact AC08 badges on local element fitting, capping validation at three rounds, and skipping the redundant subprocess-heavy final color search before canonical colors are restored.
 - Run ABM measures AC0538 field and border colors plus guarded circle-anchor geometry from raster candidates, and extends the catalog-free step classifier to the compact 1M and green 2L variants.
 - Run ABL estimates the four step-trace points and stroke width from raster evidence within guarded normalized bounds, replacing the fixed neutral AC0538 trace pose without filename knowledge.

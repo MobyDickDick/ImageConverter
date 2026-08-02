@@ -835,11 +835,16 @@ def validateBadgeByElementsImpl(
             if is_anchor_telemetry_test:
                 logs.append(f"{anchor_telemetry_prefix} PHASE global_search_start round={round_idx + 1}")
             global_search_started_at = float(time_module.monotonic())
-            global_search_changed = optimize_global_parameter_vector_sampling_fn(
-                img_orig,
-                params,
-                logs,
-            )
+            if configured_budget > 0.0:
+                params["_optimization_deadline_monotonic"] = validation_started_at + variant_budget_sec
+            try:
+                global_search_changed = optimize_global_parameter_vector_sampling_fn(
+                    img_orig,
+                    params,
+                    logs,
+                )
+            finally:
+                params.pop("_optimization_deadline_monotonic", None)
             global_search_elapsed = float(time_module.monotonic()) - global_search_started_at
             logs.append(
                 f"perf_probe: global_search_elapsed round={round_idx + 1} elapsed={global_search_elapsed:.2f}s"
@@ -1132,7 +1137,12 @@ def validateBadgeByElementsImpl(
             mask_orig = extract_badge_element_mask_fn(img_orig, params, element)
             if mask_orig is None:
                 continue
-            color_changed = optimize_element_color_bracket_fn(img_orig, params, element, mask_orig, logs)
+            if configured_budget > 0.0:
+                params["_optimization_deadline_monotonic"] = validation_started_at + variant_budget_sec
+            try:
+                color_changed = optimize_element_color_bracket_fn(img_orig, params, element, mask_orig, logs)
+            finally:
+                params.pop("_optimization_deadline_monotonic", None)
             if color_changed:
                 logs.append(f"{element}: Farboptimierung in Abschlussphase angewendet")
         if is_anchor_telemetry_test:
