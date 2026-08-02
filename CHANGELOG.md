@@ -1,3 +1,4 @@
+- Run ABU extends optimization-render telemetry comparisons with deterministic per-variant timeout/error deltas across the baseline/current union.
 - Run ABT compares the current optimization-render telemetry summary with an explicitly selected baseline and writes signed timeout/error deltas as JSON.
 - Run ABS aggregates optimizer render timeouts/errors across each conversion batch and records the affected variants in a structured JSON summary.
 - Run ABR persists structured optimization render-timeout/error counters in conversion result rows and exports them as aggregation-ready `Iteration_Log.csv` columns.

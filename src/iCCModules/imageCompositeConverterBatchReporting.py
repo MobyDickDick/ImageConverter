@@ -108,6 +108,23 @@ def writeOptimizationRenderTelemetryComparisonImpl(
             raise ValueError(f"invalid non-negative integer field {name!r}")
         return value
 
+    def _variant_counters(summary: dict[str, object]) -> dict[str, dict[str, int]]:
+        entries = summary.get("affected_variants", [])
+        if not isinstance(entries, list):
+            raise ValueError("invalid affected_variants field")
+        variants: dict[str, dict[str, int]] = {}
+        for entry in entries:
+            if not isinstance(entry, dict):
+                raise ValueError("affected_variants entries must be objects")
+            raw_variant = entry.get("variant")
+            if not isinstance(raw_variant, str) or not raw_variant.strip():
+                raise ValueError("affected_variants entries require a non-empty variant")
+            variant = raw_variant.strip().upper()
+            totals = variants.setdefault(variant, {"render_timeouts": 0, "render_errors": 0})
+            for name in ("render_timeouts", "render_errors"):
+                totals[name] += _counter(entry, name)
+        return variants
+
     current = _load_summary(current_summary_path)
     baseline = _load_summary(baseline_summary_path)
     counters: dict[str, dict[str, int]] = {}
@@ -120,11 +137,27 @@ def writeOptimizationRenderTelemetryComparisonImpl(
             "delta": current_value - baseline_value,
         }
 
+    current_variants = _variant_counters(current)
+    baseline_variants = _variant_counters(baseline)
+    variant_deltas: list[dict[str, object]] = []
+    for variant in sorted(current_variants.keys() | baseline_variants.keys()):
+        variant_counters: dict[str, dict[str, int]] = {}
+        for name in ("render_timeouts", "render_errors"):
+            current_value = current_variants.get(variant, {}).get(name, 0)
+            baseline_value = baseline_variants.get(variant, {}).get(name, 0)
+            variant_counters[name] = {
+                "baseline": baseline_value,
+                "current": current_value,
+                "delta": current_value - baseline_value,
+            }
+        variant_deltas.append({"variant": variant, "counters": variant_counters})
+
     payload = {
         "schema_version": "optimization_render_telemetry_comparison_v1",
         "baseline_summary": os.path.abspath(baseline_summary_path),
         "current_summary": os.path.abspath(current_summary_path),
         "counters": counters,
+        "variant_deltas": variant_deltas,
     }
     output_path = os.path.join(reports_out_dir, "optimization_render_telemetry_comparison.json")
     with open(output_path, "w", encoding="utf-8") as handle:
