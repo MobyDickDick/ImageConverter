@@ -90,6 +90,8 @@ def writeOptimizationRenderTelemetryComparisonImpl(
     reports_out_dir: str,
     current_summary_path: str,
     baseline_summary_path: str,
+    *,
+    regression_gate_enabled: bool = False,
 ) -> str:
     """Compare two explicitly selected optimizer telemetry batch summaries."""
 
@@ -159,6 +161,27 @@ def writeOptimizationRenderTelemetryComparisonImpl(
         "counters": counters,
         "variant_deltas": variant_deltas,
     }
+    if regression_gate_enabled:
+        regressions = [
+            {
+                "variant": item["variant"],
+                "counters": [
+                    name
+                    for name in ("render_timeouts", "render_errors")
+                    if item["counters"][name]["delta"] > 0
+                ],
+            }
+            for item in variant_deltas
+            if any(
+                item["counters"][name]["delta"] > 0
+                for name in ("render_timeouts", "render_errors")
+            )
+        ]
+        payload["regression_gate"] = {
+            "status": "regression" if regressions else "passed",
+            "regression_count": len(regressions),
+            "regressions": regressions,
+        }
     output_path = os.path.join(reports_out_dir, "optimization_render_telemetry_comparison.json")
     with open(output_path, "w", encoding="utf-8") as handle:
         json.dump(payload, handle, ensure_ascii=False, indent=2, sort_keys=True)

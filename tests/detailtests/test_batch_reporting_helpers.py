@@ -200,6 +200,64 @@ def test_write_optimization_render_telemetry_comparison_rejects_wrong_schema(tmp
         raise AssertionError("wrong schemas must not produce a comparison")
 
 
+def test_write_optimization_render_telemetry_comparison_marks_variant_regressions(tmp_path: Path):
+    baseline_path = tmp_path / "baseline.json"
+    current_path = tmp_path / "current.json"
+    baseline_path.write_text(json.dumps({
+        "schema_version": "optimization_render_telemetry_summary_v1",
+        "affected_variants": [
+            {"variant": "AC010_M", "render_timeouts": 2, "render_errors": 1},
+            {"variant": "AC020_S", "render_timeouts": 3, "render_errors": 0},
+        ],
+    }), encoding="utf-8")
+    current_path.write_text(json.dumps({
+        "schema_version": "optimization_render_telemetry_summary_v1",
+        "affected_variants": [
+            {"variant": "AC010_M", "render_timeouts": 3, "render_errors": 3},
+            {"variant": "AC020_S", "render_timeouts": 1, "render_errors": 0},
+        ],
+    }), encoding="utf-8")
+
+    output_path = helpers.writeOptimizationRenderTelemetryComparisonImpl(
+        str(tmp_path), str(current_path), str(baseline_path), regression_gate_enabled=True
+    )
+
+    comparison = json.loads(Path(output_path).read_text(encoding="utf-8"))
+    assert comparison["regression_gate"] == {
+        "status": "regression",
+        "regression_count": 1,
+        "regressions": [
+            {"variant": "AC010_M", "counters": ["render_timeouts", "render_errors"]}
+        ],
+    }
+
+
+def test_write_optimization_render_telemetry_comparison_gate_passes_improvements(tmp_path: Path):
+    baseline_path = tmp_path / "baseline.json"
+    current_path = tmp_path / "current.json"
+    baseline_path.write_text(json.dumps({
+        "schema_version": "optimization_render_telemetry_summary_v1",
+        "affected_variants": [
+            {"variant": "AC010_M", "render_timeouts": 2, "render_errors": 1},
+        ],
+    }), encoding="utf-8")
+    current_path.write_text(json.dumps({
+        "schema_version": "optimization_render_telemetry_summary_v1",
+        "affected_variants": [],
+    }), encoding="utf-8")
+
+    output_path = helpers.writeOptimizationRenderTelemetryComparisonImpl(
+        str(tmp_path), str(current_path), str(baseline_path), regression_gate_enabled=True
+    )
+
+    comparison = json.loads(Path(output_path).read_text(encoding="utf-8"))
+    assert comparison["regression_gate"] == {
+        "status": "passed",
+        "regression_count": 0,
+        "regressions": [],
+    }
+
+
 def test_write_strategy_switch_template_transfers_report_formats_values(tmp_path: Path):
     helpers.writeStrategySwitchTemplateTransfersImpl(
         reports_out_dir=str(tmp_path),
