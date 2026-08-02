@@ -1,3 +1,4 @@
+- Run ABW connects the optimization telemetry regression gate to an opt-in CLI exit code for CI jobs.
 - Run ABV adds an opt-in machine-readable regression gate that flags per-variant increases in optimization render timeouts or errors.
 - Run ABU extends optimization-render telemetry comparisons with deterministic per-variant timeout/error deltas across the baseline/current union.
 - Run ABT compares the current optimization-render telemetry summary with an explicitly selected baseline and writes signed timeout/error deltas as JSON.

@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import contextlib
 import io
+import os
 import sys
 from pathlib import Path
 from unittest import mock
@@ -21,6 +22,7 @@ def test_parse_args_impl_applies_named_iterations_override() -> None:
     assert args.folder_path == "images"
     assert args.iterations == 17
     assert args.fail_on_batch_failures is False
+    assert args.fail_on_optimization_render_regression is False
 
 
 def test_parse_args_impl_accepts_strict_batch_failure_exit_flag() -> None:
@@ -32,6 +34,17 @@ def test_parse_args_impl_accepts_strict_batch_failure_exit_flag() -> None:
     )
 
     assert args.fail_on_batch_failures is True
+
+
+def test_parse_args_impl_accepts_optimization_telemetry_regression_exit_flag() -> None:
+    args = cli_helpers.parseArgsImpl(
+        argv=["images", "--fail-on-optimization-render-regression"],
+        ac08_regression_set_name="ac08-regression",
+        ac08_regression_variants=("AC0800_L",),
+        svg_render_subprocess_timeout_sec=5.0,
+    )
+
+    assert args.fail_on_optimization_render_regression is True
 
 
 def test_parse_args_impl_accepts_input_dir_alias() -> None:
@@ -539,6 +552,27 @@ AC0030.jpg;raster_embedded_svg;embedded_raster_detected;d;l
     assert cli_helpers._hasBatchFailures(str(tmp_path)) is True
 
 
+def test_has_optimization_render_telemetry_regression_reads_gate_status(tmp_path: Path) -> None:
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "optimization_render_telemetry_comparison.json").write_text(
+        '{"regression_gate": {"status": "regression"}}\n', encoding="utf-8"
+    )
+
+    assert cli_helpers._hasOptimizationRenderTelemetryRegression(str(tmp_path)) is True
+
+
+def test_has_optimization_render_telemetry_regression_ignores_missing_gate(tmp_path: Path) -> None:
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "optimization_render_telemetry_comparison.json").write_text(
+        '{"schema_version": "optimization_render_telemetry_comparison_v1"}\n',
+        encoding="utf-8",
+    )
+
+    assert cli_helpers._hasOptimizationRenderTelemetryRegression(str(tmp_path)) is False
+
+
 def test_run_main_impl_convert_mode_warns_but_returns_0_when_batch_failures_exist() -> None:
     args = argparse.Namespace(
         _render_svg_subprocess=False,
@@ -642,6 +676,64 @@ def test_run_main_impl_convert_mode_returns_1_when_strict_batch_failures_enabled
 
     assert rc == 1
     assert "--fail-on-batch-failures aktiv" in stdout.getvalue()
+
+
+def test_run_main_impl_returns_1_for_optimization_telemetry_regression(monkeypatch) -> None:
+    args = argparse.Namespace(
+        _render_svg_subprocess=False,
+        isolate_svg_render=False,
+        isolate_svg_render_timeout_sec=3.0,
+        log_file="",
+        ac08_regression_set=False,
+        print_linux_vendor_command=False,
+        vendor_dir="vendor",
+        vendor_platform="manylinux",
+        vendor_python_version="310",
+        interactive_range=False,
+        start="AC0030",
+        end="AC0030",
+        mode="convert",
+        bootstrap_deps=False,
+        folder_path="images",
+        iterations=5,
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        deterministic_order=True,
+        fail_on_optimization_render_regression=True,
+    )
+    monkeypatch.setenv("ICC_OPTIMIZATION_RENDER_TELEMETRY_BASELINE", "baseline.json")
+    stdout = io.StringIO()
+    with (
+        mock.patch("src.iCCModules.imageCompositeConverterCli._hasBatchFailures", return_value=False),
+        mock.patch(
+            "src.iCCModules.imageCompositeConverterCli._hasOptimizationRenderTelemetryRegression",
+            return_value=True,
+        ),
+        mock.patch("os.path.exists", return_value=True),
+        contextlib.redirect_stdout(stdout),
+    ):
+        rc = cli_helpers.runMainImpl(
+            args,
+            run_svg_render_subprocess_entrypoint_fn=lambda: 11,
+            set_svg_render_subprocess_enabled_fn=lambda _enabled: None,
+            set_svg_render_subprocess_timeout_fn=lambda _timeout: None,
+            optional_log_capture_fn=contextlib.nullcontext,
+            build_linux_vendor_install_command_fn=lambda **_kwargs: ["pip"],
+            prompt_interactive_range_fn=lambda _args: ("AC0030", "AC0030"),
+            resolve_cli_csv_and_output_fn=lambda _args: ("descriptions.csv", "out"),
+            load_description_mapping_fn=lambda _path: None,
+            bootstrap_required_image_dependencies_fn=lambda: [],
+            analyze_range_fn=lambda *_args, **_kwargs: "annotated",
+            convert_range_fn=lambda *_args, **_kwargs: "converted",
+            format_user_diagnostic_fn=lambda exc: str(exc),
+            description_mapping_error_type=RuntimeError,
+            ac08_regression_set_name="ac08-set",
+            ac08_regression_variants=("AC0800_L",),
+        )
+
+    assert rc == 1
+    assert os.environ["ICC_OPTIMIZATION_RENDER_TELEMETRY_REGRESSION_GATE"] == "1"
+    assert "Optimierungs-Rendertelemetrie erzwingt Exitcode 1" in stdout.getvalue()
 
 
 def test_parse_args_accepts_single_ac08_regression_segment() -> None:
