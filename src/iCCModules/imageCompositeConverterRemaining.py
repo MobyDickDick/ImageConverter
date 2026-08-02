@@ -596,6 +596,16 @@ def _writeOptimizationRenderTelemetrySummary(
 ) -> str:
     return batch_reporting_helpers.writeOptimizationRenderTelemetrySummaryImpl(reports_out_dir, result_map)
 
+def _writeOptimizationRenderTelemetryComparison(reports_out_dir: str, current_summary_path: str) -> str | None:
+    baseline_path = os.environ.get("ICC_OPTIMIZATION_RENDER_TELEMETRY_BASELINE", "").strip()
+    if not baseline_path:
+        return None
+    return batch_reporting_helpers.writeOptimizationRenderTelemetryComparisonImpl(
+        reports_out_dir,
+        current_summary_path,
+        baseline_path,
+    )
+
 def _writeStrategySwitchTemplateTransfersReport(
     reports_out_dir: str,
     strategy_rows: list[dict[str, object]],
@@ -1499,6 +1509,7 @@ def convertRange(
         write_conversion_bestlist_metrics_fn=_writeConversionBestlistMetrics,
         write_batch_failure_summary_fn=_writeBatchFailureSummary,
         write_optimization_render_telemetry_summary_fn=_writeOptimizationRenderTelemetrySummary,
+        write_optimization_render_telemetry_comparison_fn=_writeOptimizationRenderTelemetryComparison,
         write_strategy_switch_template_transfers_report_fn=_writeStrategySwitchTemplateTransfersReport,
         write_iteration_log_and_collect_semantic_results_fn=_writeIterationLogAndCollectSemanticResults,
         write_chain_telemetry_batch_report_fn=_writeChainTelemetryBatchReport,

@@ -84,6 +84,52 @@ def test_write_optimization_render_telemetry_summary_handles_empty_batch(tmp_pat
     assert summary["affected_variants"] == []
 
 
+def test_write_optimization_render_telemetry_comparison_reports_signed_deltas(tmp_path: Path):
+    baseline_path = tmp_path / "baseline.json"
+    current_path = tmp_path / "current.json"
+    baseline_path.write_text(json.dumps({
+        "schema_version": "optimization_render_telemetry_summary_v1",
+        "render_timeouts": 5,
+        "render_errors": 1,
+    }), encoding="utf-8")
+    current_path.write_text(json.dumps({
+        "schema_version": "optimization_render_telemetry_summary_v1",
+        "render_timeouts": 2,
+        "render_errors": 4,
+    }), encoding="utf-8")
+
+    output_path = helpers.writeOptimizationRenderTelemetryComparisonImpl(
+        str(tmp_path), str(current_path), str(baseline_path)
+    )
+
+    comparison = json.loads(Path(output_path).read_text(encoding="utf-8"))
+    assert comparison["schema_version"] == "optimization_render_telemetry_comparison_v1"
+    assert comparison["baseline_summary"] == str(baseline_path.resolve())
+    assert comparison["current_summary"] == str(current_path.resolve())
+    assert comparison["counters"] == {
+        "render_timeouts": {"baseline": 5, "current": 2, "delta": -3},
+        "render_errors": {"baseline": 1, "current": 4, "delta": 3},
+    }
+
+
+def test_write_optimization_render_telemetry_comparison_rejects_wrong_schema(tmp_path: Path):
+    baseline_path = tmp_path / "baseline.json"
+    current_path = tmp_path / "current.json"
+    baseline_path.write_text('{"schema_version": "old"}', encoding="utf-8")
+    current_path.write_text(
+        '{"schema_version": "optimization_render_telemetry_summary_v1"}', encoding="utf-8"
+    )
+
+    try:
+        helpers.writeOptimizationRenderTelemetryComparisonImpl(
+            str(tmp_path), str(current_path), str(baseline_path)
+        )
+    except ValueError as exc:
+        assert "unsupported" in str(exc)
+    else:
+        raise AssertionError("wrong schemas must not produce a comparison")
+
+
 def test_write_strategy_switch_template_transfers_report_formats_values(tmp_path: Path):
     helpers.writeStrategySwitchTemplateTransfersImpl(
         reports_out_dir=str(tmp_path),
