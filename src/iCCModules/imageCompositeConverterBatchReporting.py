@@ -86,6 +86,53 @@ def writeOptimizationRenderTelemetrySummaryImpl(
     return output_path
 
 
+def writeOptimizationRenderTelemetryComparisonImpl(
+    reports_out_dir: str,
+    current_summary_path: str,
+    baseline_summary_path: str,
+) -> str:
+    """Compare two explicitly selected optimizer telemetry batch summaries."""
+
+    def _load_summary(path: str) -> dict[str, object]:
+        with open(path, "r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+        if not isinstance(payload, dict):
+            raise ValueError(f"optimization telemetry summary must be an object: {path}")
+        if payload.get("schema_version") != "optimization_render_telemetry_summary_v1":
+            raise ValueError(f"unsupported optimization telemetry summary schema: {path}")
+        return payload
+
+    def _counter(summary: dict[str, object], name: str) -> int:
+        value = summary.get(name, 0)
+        if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+            raise ValueError(f"invalid non-negative integer field {name!r}")
+        return value
+
+    current = _load_summary(current_summary_path)
+    baseline = _load_summary(baseline_summary_path)
+    counters: dict[str, dict[str, int]] = {}
+    for name in ("render_timeouts", "render_errors"):
+        current_value = _counter(current, name)
+        baseline_value = _counter(baseline, name)
+        counters[name] = {
+            "baseline": baseline_value,
+            "current": current_value,
+            "delta": current_value - baseline_value,
+        }
+
+    payload = {
+        "schema_version": "optimization_render_telemetry_comparison_v1",
+        "baseline_summary": os.path.abspath(baseline_summary_path),
+        "current_summary": os.path.abspath(current_summary_path),
+        "counters": counters,
+    }
+    output_path = os.path.join(reports_out_dir, "optimization_render_telemetry_comparison.json")
+    with open(output_path, "w", encoding="utf-8") as handle:
+        json.dump(payload, handle, ensure_ascii=False, indent=2, sort_keys=True)
+        handle.write("\n")
+    return output_path
+
+
 def _chainTelemetryRows(result_map: dict[str, dict[str, object]]) -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
     for filename, result_row in result_map.items():
