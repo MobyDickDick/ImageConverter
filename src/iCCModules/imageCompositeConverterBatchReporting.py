@@ -7,6 +7,8 @@ import json
 import math
 import os
 
+from src.iCCModules.imageCompositeConverterIterationLog import optimizationRenderTelemetryImpl
+
 
 def readValidationLogDetailsImpl(log_path: str) -> dict[str, str]:
     if not os.path.exists(log_path):
@@ -42,6 +44,46 @@ def writeBatchFailureSummaryImpl(reports_out_dir: str, failures: list[dict[str, 
                     failure.get("log_file", ""),
                 ]
             )
+
+
+def writeOptimizationRenderTelemetrySummaryImpl(
+    reports_out_dir: str,
+    result_map: dict[str, dict[str, object]],
+) -> str:
+    """Persist batch totals and affected variants for optimizer render failures."""
+    affected: list[dict[str, object]] = []
+    total_timeouts = 0
+    total_errors = 0
+    for filename, row in result_map.items():
+        telemetry = optimizationRenderTelemetryImpl(row)
+        render_timeouts = telemetry["render_timeouts"]
+        render_errors = telemetry["render_errors"]
+        total_timeouts += render_timeouts
+        total_errors += render_errors
+        if render_timeouts or render_errors:
+            affected.append(
+                {
+                    "variant": str(row.get("variant") or os.path.splitext(filename)[0]).strip().upper(),
+                    "filename": filename,
+                    "render_timeouts": render_timeouts,
+                    "render_errors": render_errors,
+                }
+            )
+
+    affected.sort(key=lambda item: (str(item["variant"]), str(item["filename"])))
+    payload = {
+        "schema_version": "optimization_render_telemetry_summary_v1",
+        "conversion_count": len(result_map),
+        "affected_variant_count": len({str(item["variant"]) for item in affected}),
+        "render_timeouts": total_timeouts,
+        "render_errors": total_errors,
+        "affected_variants": affected,
+    }
+    output_path = os.path.join(reports_out_dir, "optimization_render_telemetry_summary.json")
+    with open(output_path, "w", encoding="utf-8") as handle:
+        json.dump(payload, handle, ensure_ascii=False, indent=2, sort_keys=True)
+        handle.write("\n")
+    return output_path
 
 
 def _chainTelemetryRows(result_map: dict[str, dict[str, object]]) -> list[dict[str, object]]:

@@ -1,3 +1,4 @@
+- Run ABS aggregates optimizer render timeouts/errors across each conversion batch and records the affected variants in a structured JSON summary.
 - Run ABR persists structured optimization render-timeout/error counters in conversion result rows and exports them as aggregation-ready `Iteration_Log.csv` columns.
 - Run ABQ distinguishes renderer timeouts from malformed/failed SVG renders and reports both counters in global-vector and color-bracketing optimization telemetry.
 - Run ABP limits each global-vector and final-color renderer subprocess to the remaining validation budget while preserving the configured default timeout for ordinary renders.

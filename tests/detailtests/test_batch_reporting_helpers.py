@@ -35,6 +35,55 @@ def test_write_batch_failure_summary_writes_expected_columns(tmp_path: Path):
     ]
 
 
+def test_write_optimization_render_telemetry_summary_aggregates_affected_variants(tmp_path: Path):
+    output_path = helpers.writeOptimizationRenderTelemetrySummaryImpl(
+        str(tmp_path),
+        {
+            "AC010_M.jpg": {
+                "variant": "AC010_M",
+                "optimization_render_telemetry": {"render_timeouts": 2, "render_errors": 1},
+                "params": {"_optimization_render_telemetry": {"timeouts": 99, "errors": 99}},
+            },
+            "AC010.jpg": {"params": {"_optimization_render_telemetry": {"timeouts": 3, "errors": 0}}},
+            "AC010_S.jpg": {"variant": "AC010_S", "params": {}},
+        },
+    )
+
+    summary = json.loads(Path(output_path).read_text(encoding="utf-8"))
+    assert summary == {
+        "schema_version": "optimization_render_telemetry_summary_v1",
+        "conversion_count": 3,
+        "affected_variant_count": 2,
+        "render_timeouts": 5,
+        "render_errors": 1,
+        "affected_variants": [
+            {
+                "variant": "AC010",
+                "filename": "AC010.jpg",
+                "render_timeouts": 3,
+                "render_errors": 0,
+            },
+            {
+                "variant": "AC010_M",
+                "filename": "AC010_M.jpg",
+                "render_timeouts": 2,
+                "render_errors": 1,
+            },
+        ],
+    }
+
+
+def test_write_optimization_render_telemetry_summary_handles_empty_batch(tmp_path: Path):
+    output_path = helpers.writeOptimizationRenderTelemetrySummaryImpl(str(tmp_path), {})
+
+    summary = json.loads(Path(output_path).read_text(encoding="utf-8"))
+    assert summary["conversion_count"] == 0
+    assert summary["affected_variant_count"] == 0
+    assert summary["render_timeouts"] == 0
+    assert summary["render_errors"] == 0
+    assert summary["affected_variants"] == []
+
+
 def test_write_strategy_switch_template_transfers_report_formats_values(tmp_path: Path):
     helpers.writeStrategySwitchTemplateTransfersImpl(
         reports_out_dir=str(tmp_path),

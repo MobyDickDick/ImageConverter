@@ -11,6 +11,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – AC0010/AC0100 Renderer-Reparatur (2026-07-25)](next_arbeitspaket_2026-07-25_ac0100_renderer_fix.md)
 - [Nächstes Arbeitspaket – getrennte Renderfehler-Telemetrie Run ABQ (2026-08-02)](next_arbeitspaket_2026-08-02_runABQ.md)
 - [Nächstes Arbeitspaket – strukturierter Optimierungsreport Run ABR (2026-08-02)](next_arbeitspaket_2026-08-02_runABR.md)
+- [Nächstes Arbeitspaket – Optimierungs-Telemetrie Batch-Summary Run ABS (2026-08-02)](next_arbeitspaket_2026-08-02_runABS.md)
 - [Nächstes Arbeitspaket – Restbudget pro Render-Subprozess Run ABP (2026-08-02)](next_arbeitspaket_2026-08-02_runABP.md)
 - [Nächstes Arbeitspaket – Optimierungsdeadline für Renderkandidaten Run ABO (2026-08-01)](next_arbeitspaket_2026-08-01_runABO.md)
 - [Nächstes Arbeitspaket – AC08-Kompaktvalidierung ohne Render-Long-Tail Run ABN (2026-08-01)](next_arbeitspaket_2026-08-01_runABN.md)
