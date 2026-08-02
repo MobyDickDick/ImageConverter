@@ -161,13 +161,16 @@ def optimizeGlobalParameterVectorSamplingImpl(
     eval_cache: dict[tuple, float] = {}
     eval_requests = 0
     eval_hits = 0
+    render_telemetry = {"timeouts": 0, "errors": 0}
+    params["_optimization_render_telemetry"] = render_telemetry
 
     def log_eval_telemetry():
         cache_hit_rate = (eval_hits / eval_requests) if eval_requests else 0.0
         logs.append(
             "global-search: evaluate-telemetrie "
             f"(requests={eval_requests}, cache_hits={eval_hits}, hit_rate={cache_hit_rate:.3f}, "
-            f"render_aufrufe={eval_requests - eval_hits})"
+            f"render_aufrufe={eval_requests - eval_hits}, "
+            f"render_timeouts={render_telemetry['timeouts']}, render_fehler={render_telemetry['errors']})"
         )
 
     def clampVector(candidate):
@@ -567,12 +570,23 @@ def fullBadgeErrorForParamsImpl(
     h, w = img_orig.shape[:2]
     deadline = float(params.get("_optimization_deadline_monotonic", 0.0) or 0.0)
     remaining = max(0.01, deadline - time.monotonic()) if deadline > 0.0 else None
+    render_status = {"value": None}
+    telemetry = params.get("_optimization_render_telemetry")
+
+    def record_status(status: str) -> None:
+        render_status["value"] = status
+
     render_args = (generate_badge_svg_fn(w, h, params), w, h)
     rendered = (
-        render_svg_to_numpy_fn(*render_args, timeout_sec=remaining)
+        render_svg_to_numpy_fn(
+            *render_args, timeout_sec=remaining, status_callback=record_status
+        )
         if remaining is not None
         else render_svg_to_numpy_fn(*render_args)
     )
+    if rendered is None and isinstance(telemetry, dict):
+        key = "timeouts" if render_status["value"] == "timeout" else "errors"
+        telemetry[key] = int(telemetry.get(key, 0)) + 1
     render = fit_to_original_size_fn(
         img_orig,
         rendered,

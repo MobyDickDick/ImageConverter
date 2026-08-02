@@ -43,11 +43,22 @@ def elementErrorForColorImpl(
     elem_svg = generate_badge_svg_fn(w, h, element_only_params_fn(probe, element))
     deadline = float(params.get("_optimization_deadline_monotonic", 0.0) or 0.0)
     remaining = max(0.01, deadline - time.monotonic()) if deadline > 0.0 else None
+    render_status = {"value": None}
+    telemetry = params.setdefault("_optimization_render_telemetry", {"timeouts": 0, "errors": 0})
+
+    def record_status(status: str) -> None:
+        render_status["value"] = status
+
     rendered = (
-        render_svg_to_numpy_fn(elem_svg, w, h, timeout_sec=remaining)
+        render_svg_to_numpy_fn(
+            elem_svg, w, h, timeout_sec=remaining, status_callback=record_status
+        )
         if remaining is not None
         else render_svg_to_numpy_fn(elem_svg, w, h)
     )
+    if rendered is None:
+        key = "timeouts" if render_status["value"] == "timeout" else "errors"
+        telemetry[key] = int(telemetry.get(key, 0)) + 1
     elem_render = fit_to_original_size_fn(img_orig, rendered)
     if elem_render is None:
         return float("inf")
@@ -127,8 +138,11 @@ def optimizeElementColorBracketImpl(
         if len(evaluated_values) != len(values):
             break
         if not all(math.isfinite(e) for e in errs):
+            telemetry = params.get("_optimization_render_telemetry", {})
             logs.append(
                 f"{element}: Farb-Bracketing abgebrochen ({color_key}) wegen nicht-finiten Fehlern "
+                f"(render_timeouts={int(telemetry.get('timeouts', 0))}, "
+                f"render_fehler={int(telemetry.get('errors', 0))}); "
                 + ", ".join(f"{v}->{e:.3f}" for v, e in zip(values, errs, strict=False))
             )
             continue

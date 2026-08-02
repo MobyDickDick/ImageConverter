@@ -31,6 +31,7 @@ def renderSvgToNumpyImpl(
     size_h: int,
     *,
     timeout_sec: float | None = None,
+    status_callback=None,
     svg_render_subprocess_enabled: bool,
     under_pytest_runtime: bool,
     svg_render_subprocess_explicit: bool = False,
@@ -68,6 +69,7 @@ def renderSvgToNumpyImpl(
                 size_w,
                 size_h,
                 timeout_sec=timeout_sec,
+                status_callback=status_callback,
             )
             if timeout_sec is not None
             else render_svg_to_numpy_via_subprocess_fn(svg_string, size_w, size_h)
