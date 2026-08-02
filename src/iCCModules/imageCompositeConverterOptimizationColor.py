@@ -41,7 +41,14 @@ def elementErrorForColorImpl(
 
     h, w = img_orig.shape[:2]
     elem_svg = generate_badge_svg_fn(w, h, element_only_params_fn(probe, element))
-    elem_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(elem_svg, w, h))
+    deadline = float(params.get("_optimization_deadline_monotonic", 0.0) or 0.0)
+    remaining = max(0.01, deadline - time.monotonic()) if deadline > 0.0 else None
+    rendered = (
+        render_svg_to_numpy_fn(elem_svg, w, h, timeout_sec=remaining)
+        if remaining is not None
+        else render_svg_to_numpy_fn(elem_svg, w, h)
+    )
+    elem_render = fit_to_original_size_fn(img_orig, rendered)
     if elem_render is None:
         return float("inf")
 

@@ -187,6 +187,23 @@ def test_global_search_stops_before_render_when_validation_deadline_expired(monk
     assert any("Validierungszeitbudget ausgeschöpft" in line for line in logs)
 
 
+def test_full_badge_error_limits_single_render_to_remaining_budget(monkeypatch) -> None:
+    timeouts: list[float] = []
+    monkeypatch.setattr(helpers.time, "monotonic", lambda: 7.5)
+
+    error = helpers.fullBadgeErrorForParamsImpl(
+        _Image(10, 10),
+        {"_optimization_deadline_monotonic": 9.0},
+        fit_to_original_size_fn=lambda _img, rendered: rendered,
+        render_svg_to_numpy_fn=lambda _svg, _w, _h, *, timeout_sec: timeouts.append(timeout_sec) or object(),
+        generate_badge_svg_fn=lambda *_args: "<svg/>",
+        calculate_error_fn=lambda *_args: 3.0,
+    )
+
+    assert error == 3.0
+    assert timeouts == [1.5]
+
+
 def test_global_search_logs_reduced_mode_for_two_or_three_active_parameters() -> None:
     img = _Image(10, 10)
     logs: list[str] = []

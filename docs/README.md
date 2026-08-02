@@ -9,6 +9,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [AC0030 Hard-Abnahme (2026-05-24)](ac0030_hard_acceptance_2026-05-24.md)
 - [AC0100 Quality Follow-up (2026-05-31, Abschluss Run NK 2026-06-02)](ac0100_quality_followup_2026-05-31.md)
 - [Nächstes Arbeitspaket – AC0010/AC0100 Renderer-Reparatur (2026-07-25)](next_arbeitspaket_2026-07-25_ac0100_renderer_fix.md)
+- [Nächstes Arbeitspaket – Restbudget pro Render-Subprozess Run ABP (2026-08-02)](next_arbeitspaket_2026-08-02_runABP.md)
 - [Nächstes Arbeitspaket – Optimierungsdeadline für Renderkandidaten Run ABO (2026-08-01)](next_arbeitspaket_2026-08-01_runABO.md)
 - [Nächstes Arbeitspaket – AC08-Kompaktvalidierung ohne Render-Long-Tail Run ABN (2026-08-01)](next_arbeitspaket_2026-08-01_runABN.md)
 - [Nächstes Arbeitspaket – Rasterappearance und AC0538-Größenvarianten Run ABM (2026-08-01)](next_arbeitspaket_2026-08-01_runABM.md)

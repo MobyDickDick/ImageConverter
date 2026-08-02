@@ -30,6 +30,7 @@ def renderSvgToNumpyImpl(
     size_w: int,
     size_h: int,
     *,
+    timeout_sec: float | None = None,
     svg_render_subprocess_enabled: bool,
     under_pytest_runtime: bool,
     svg_render_subprocess_explicit: bool = False,
@@ -61,7 +62,16 @@ def renderSvgToNumpyImpl(
             return rendered.copy() if hasattr(rendered, "copy") else rendered
 
     if svg_render_subprocess_enabled and not is_fitz_open_monkeypatched_fn():
-        rendered = render_svg_to_numpy_via_subprocess_fn(svg_string, size_w, size_h)
+        rendered = (
+            render_svg_to_numpy_via_subprocess_fn(
+                svg_string,
+                size_w,
+                size_h,
+                timeout_sec=timeout_sec,
+            )
+            if timeout_sec is not None
+            else render_svg_to_numpy_via_subprocess_fn(svg_string, size_w, size_h)
+        )
         if rendered is not None:
             _RENDER_CACHE[cache_key] = rendered
             _RENDER_CACHE.move_to_end(cache_key)
