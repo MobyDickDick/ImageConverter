@@ -29,6 +29,10 @@ def test_build_baseline_alias_maps_both_repository_variables() -> None:
         "gh variable set OPTIMIZATION_RENDER_TELEMETRY_BASELINE_ARTIFACT_NAME "
         "--body optimization-render-telemetry-baseline-456-2",
     ]
+    assert alias["verification_command"] == (
+        "gh workflow run optimization-render-telemetry-gate-example.yml "
+        "-f shard_start=AC0100_S -f shard_end=AC0100_S -f promote_baseline=false"
+    )
     assert alias["verification_dispatch"] == {
         "workflow": "optimization-render-telemetry-gate-example.yml",
         "inputs": {
@@ -53,6 +57,18 @@ def test_build_baseline_alias_rejects_invalid_shard(field: str, value: object) -
     provenance[field] = value
     with pytest.raises(ValueError, match="non-empty string"):
         build_baseline_alias(provenance)
+
+
+def test_build_baseline_alias_shell_quotes_verification_shards() -> None:
+    provenance = _provenance()
+    provenance["shard_start"] = "AC 0100_S"
+    provenance["shard_end"] = "AC'0100_S"
+    alias = build_baseline_alias(provenance)
+    assert alias["verification_command"] == (
+        "gh workflow run optimization-render-telemetry-gate-example.yml "
+        "-f shard_start='AC 0100_S' -f shard_end='AC'\"'\"'0100_S' "
+        "-f promote_baseline=false"
+    )
 
 
 def test_alias_cli_writes_manifest(tmp_path, monkeypatch) -> None:

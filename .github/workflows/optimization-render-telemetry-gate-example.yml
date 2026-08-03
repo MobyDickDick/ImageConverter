@@ -242,7 +242,6 @@ jobs:
           python - <<'PY'
           import json
           import os
-          import shlex
           from pathlib import Path
 
           alias = json.loads(Path("promoted-baseline/recommended-baseline-alias.json").read_text(encoding="utf-8"))
@@ -255,15 +254,8 @@ jobs:
               for command in alias["activation_commands"]:
                   summary.write(f"{command}\n")
               summary.write("```\n")
-              dispatch = alias["verification_dispatch"]
-              inputs = dispatch["inputs"]
               summary.write("\nThen verify the activated alias without baseline overrides:\n\n")
-              summary.write(
-                  f"`gh workflow run {dispatch['workflow']} "
-                  f"-f shard_start={shlex.quote(inputs['shard_start'])} "
-                  f"-f shard_end={shlex.quote(inputs['shard_end'])} "
-                  "-f promote_baseline=false`\n"
-              )
+              summary.write(f"`{alias['verification_command']}`\n")
           PY
 
       - name: Upload versioned baseline
