@@ -1,3 +1,4 @@
+- Run ABZ adds an explicit cross-run baseline channel to the catalog telemetry workflow and validates the selected promoted artifact's version, provenance, and shard before gating.
 - Run ABY replaces the synthetic telemetry CI baseline with a configurable real catalog shard and an explicit, provenance-bearing promotion job for accepted baselines.
 - Run ABW connects the optimization telemetry regression gate to an opt-in CLI exit code for CI jobs.
 - Run ABV adds an opt-in machine-readable regression gate that flags per-variant increases in optimization render timeouts or errors.
