@@ -10,6 +10,7 @@ from typing import Any
 
 
 ALIAS_SCHEMA_VERSION = "optimization_render_telemetry_baseline_alias_v1"
+GATE_WORKFLOW = "optimization-render-telemetry-gate-example.yml"
 
 
 def build_baseline_alias(provenance: dict[str, Any]) -> dict[str, Any]:
@@ -22,6 +23,12 @@ def build_baseline_alias(provenance: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("Baseline source run ID must be a positive integer")
     if isinstance(run_attempt, bool) or not isinstance(run_attempt, int) or run_attempt <= 0:
         raise ValueError("Baseline source run attempt must be a positive integer")
+    shard_start = provenance.get("shard_start")
+    shard_end = provenance.get("shard_end")
+    if not isinstance(shard_start, str) or not shard_start.strip():
+        raise ValueError("Baseline shard start must be a non-empty string")
+    if not isinstance(shard_end, str) or not shard_end.strip():
+        raise ValueError("Baseline shard end must be a non-empty string")
     artifact_name = f"optimization-render-telemetry-baseline-{run_id}-{run_attempt}"
     return {
         "schema_version": ALIAS_SCHEMA_VERSION,
@@ -31,9 +38,17 @@ def build_baseline_alias(provenance: dict[str, Any]) -> dict[str, Any]:
             "OPTIMIZATION_RENDER_TELEMETRY_BASELINE_RUN_ID": str(run_id),
             "OPTIMIZATION_RENDER_TELEMETRY_BASELINE_ARTIFACT_NAME": artifact_name,
         },
+        "verification_dispatch": {
+            "workflow": GATE_WORKFLOW,
+            "inputs": {
+                "shard_start": shard_start,
+                "shard_end": shard_end,
+                "promote_baseline": False,
+            },
+        },
         "source_sha": provenance.get("source_sha"),
-        "shard_start": provenance.get("shard_start"),
-        "shard_end": provenance.get("shard_end"),
+        "shard_start": shard_start,
+        "shard_end": shard_end,
     }
 
 
