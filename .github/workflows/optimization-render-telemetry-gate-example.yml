@@ -1,0 +1,89 @@
+name: Optimization render telemetry gate example
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish-baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Create telemetry baseline
+        run: |
+          mkdir -p telemetry-baseline
+          cat > telemetry-baseline/optimization_render_telemetry_summary.json <<'JSON'
+          {
+            "schema_version": "optimization_render_telemetry_summary_v1",
+            "conversion_count": 0,
+            "affected_variant_count": 0,
+            "render_timeouts": 0,
+            "render_errors": 0,
+            "affected_variants": []
+          }
+          JSON
+
+      - name: Upload telemetry baseline
+        uses: actions/upload-artifact@v4
+        with:
+          name: optimization-render-telemetry-baseline
+          path: telemetry-baseline/optimization_render_telemetry_summary.json
+          if-no-files-found: error
+          retention-days: 1
+
+  strict-converter-call:
+    needs: publish-baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Download telemetry baseline
+        uses: actions/download-artifact@v4
+        with:
+          name: optimization-render-telemetry-baseline
+          path: telemetry-baseline
+
+      - name: Run isolated strict telemetry gate
+        env:
+          ICC_OPTIMIZATION_RENDER_TELEMETRY_BASELINE: telemetry-baseline/optimization_render_telemetry_summary.json
+        run: >-
+          python -m src.imageCompositeConverter
+          artifacts/images_to_convert
+          --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml
+          --output-dir artifacts/ci-optimization-render-telemetry
+          --start CI_TELEMETRY_SENTINEL
+          --end CI_TELEMETRY_SENTINEL
+          --deterministic-order
+          --fail-on-optimization-render-regression
+
+      - name: Verify passing gate artifact
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          report = Path(
+              "artifacts/ci-optimization-render-telemetry/reports/"
+              "optimization_render_telemetry_comparison.json"
+          )
+          payload = json.loads(report.read_text(encoding="utf-8"))
+          assert payload["regression_gate"]["status"] == "passed", payload
+          PY
+
+      - name: Upload gate reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: optimization-render-telemetry-gate-reports
+          path: artifacts/ci-optimization-render-telemetry/reports
+          if-no-files-found: warn
+          retention-days: 3
