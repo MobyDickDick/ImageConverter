@@ -195,6 +195,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
       - name: Download accepted candidate
         uses: actions/download-artifact@v4
         with:
@@ -226,6 +229,27 @@ jobs:
               json.dumps(provenance, indent=2, sort_keys=True) + "\n",
               encoding="utf-8",
           )
+          PY
+
+      - name: Build recommended baseline alias manifest
+        run: >-
+          python tools/build_optimization_telemetry_baseline_alias.py
+          promoted-baseline/provenance.json
+          promoted-baseline/recommended-baseline-alias.json
+
+      - name: Publish alias activation summary
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          alias = json.loads(Path("promoted-baseline/recommended-baseline-alias.json").read_text(encoding="utf-8"))
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
+              summary.write("## Promoted telemetry baseline\n\n")
+              summary.write("Update both repository variables together before the alias is active:\n\n")
+              for name, value in alias["repository_variables"].items():
+                  summary.write(f"- `{name}` = `{value}`\n")
           PY
 
       - name: Upload versioned baseline
