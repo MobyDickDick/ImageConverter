@@ -23,6 +23,12 @@ vollständige Provenienz- und Shard-Prüfung aus Run ABZ aktiv. Ein fehlender od
 nur halb gepflegter Alias bricht daher mit einer verständlichen Meldung ab,
 statt implizit ein beliebiges Artefakt zu verwenden.
 
+Die Auflösung liegt in
+`tools/resolve_optimization_telemetry_baseline.py` und ist unabhängig vom
+Workflow testbar. Insbesondere werden manuelle Werte nicht einzeln mit
+Repository-Werten vermischt: Entweder sind beide Overrides gesetzt oder beide
+Werte stammen aus dem Repository-Alias.
+
 ## 3) Aufgabenstand und nächster Schritt
 
 Dieses Anschlussstück ist kein eigener Checkbox-Eintrag in

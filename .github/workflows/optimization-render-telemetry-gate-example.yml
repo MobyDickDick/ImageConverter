@@ -88,9 +88,6 @@ jobs:
     needs: record-reference-shard
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    env:
-      BASELINE_RUN_ID: ${{ inputs.baseline_run_id || vars.OPTIMIZATION_RENDER_TELEMETRY_BASELINE_RUN_ID }}
-      BASELINE_ARTIFACT_NAME: ${{ inputs.baseline_artifact_name || vars.OPTIMIZATION_RENDER_TELEMETRY_BASELINE_ARTIFACT_NAME }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -101,32 +98,32 @@ jobs:
           python-version: '3.10'
 
       - name: Validate resolved baseline alias
-        run: |
-          python - <<'PY'
-          import os
-          import re
-
-          run_id = os.environ["BASELINE_RUN_ID"]
-          artifact_name = os.environ["BASELINE_ARTIFACT_NAME"]
-          assert re.fullmatch(r"[1-9][0-9]*", run_id), (
-              "Set both telemetry baseline repository variables or provide both workflow overrides"
-          )
-          assert re.fullmatch(
-              rf"optimization-render-telemetry-baseline-{run_id}-[1-9][0-9]*",
-              artifact_name,
-          ), "Baseline artifact name must belong to the resolved run ID"
-          PY
+        id: baseline
+        run: >-
+          python tools/resolve_optimization_telemetry_baseline.py
+          --input-run-id "$INPUT_RUN_ID"
+          --input-artifact-name "$INPUT_ARTIFACT_NAME"
+          --variable-run-id "$VARIABLE_RUN_ID"
+          --variable-artifact-name "$VARIABLE_ARTIFACT_NAME"
+          --github-output "$GITHUB_OUTPUT"
+        env:
+          INPUT_RUN_ID: ${{ inputs.baseline_run_id }}
+          INPUT_ARTIFACT_NAME: ${{ inputs.baseline_artifact_name }}
+          VARIABLE_RUN_ID: ${{ vars.OPTIMIZATION_RENDER_TELEMETRY_BASELINE_RUN_ID }}
+          VARIABLE_ARTIFACT_NAME: ${{ vars.OPTIMIZATION_RENDER_TELEMETRY_BASELINE_ARTIFACT_NAME }}
 
       - name: Download explicitly selected promoted baseline
         uses: actions/download-artifact@v4
         with:
-          name: ${{ env.BASELINE_ARTIFACT_NAME }}
+          name: ${{ steps.baseline.outputs.artifact_name }}
           path: telemetry-baseline
-          run-id: ${{ env.BASELINE_RUN_ID }}
+          run-id: ${{ steps.baseline.outputs.run_id }}
           github-token: ${{ github.token }}
 
       - name: Validate promoted baseline provenance
         env:
+          BASELINE_ARTIFACT_NAME: ${{ steps.baseline.outputs.artifact_name }}
+          BASELINE_RUN_ID: ${{ steps.baseline.outputs.run_id }}
           SHARD_START: ${{ inputs.shard_start }}
           SHARD_END: ${{ inputs.shard_end }}
         run: |
