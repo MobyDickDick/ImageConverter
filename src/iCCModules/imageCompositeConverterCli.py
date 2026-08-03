@@ -206,6 +206,15 @@ def parseArgsImpl(
             "Einzelfehler nur als Warnung."
         ),
     )
+    parser.add_argument(
+        "--fail-on-optimization-render-regression",
+        action="store_true",
+        help=(
+            "Aktiviert das Optimierungs-Telemetrie-Gate und beendet den CLI-Lauf mit "
+            "Exitcode 1, wenn eine Variante mehr Render-Timeouts oder Renderfehler als "
+            "die über ICC_OPTIMIZATION_RENDER_TELEMETRY_BASELINE gewählte Baseline hat."
+        ),
+    )
     parser.add_argument("--_render-svg-subprocess", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
     if args.input_dir:
@@ -408,6 +417,19 @@ def _hasBatchFailures(reports_out_dir: str) -> bool:
         return False
 
 
+def _hasOptimizationRenderTelemetryRegression(output_dir: str) -> bool:
+    comparison_path = Path(output_dir) / "reports" / "optimization_render_telemetry_comparison.json"
+    try:
+        with comparison_path.open("r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+    except (OSError, json.JSONDecodeError):
+        return False
+    if not isinstance(payload, dict):
+        return False
+    gate = payload.get("regression_gate")
+    return isinstance(gate, dict) and gate.get("status") == "regression"
+
+
 @lru_cache(maxsize=1)
 def _semanticBadgeFullRange() -> tuple[str, str] | None:
     config_path = (
@@ -559,6 +581,19 @@ def runMainImpl(
             if args.mode == "convert" and not os.path.exists(csv_path):
                 print(f"[ERROR] Input-Contract v1 verletzt: semantic_description-Datei nicht gefunden: {csv_path}")
                 return 2
+            if args.mode == "convert" and bool(
+                getattr(args, "fail_on_optimization_render_regression", False)
+            ):
+                baseline_path = os.environ.get(
+                    "ICC_OPTIMIZATION_RENDER_TELEMETRY_BASELINE", ""
+                ).strip()
+                if not baseline_path:
+                    print(
+                        "[ERROR] --fail-on-optimization-render-regression erfordert "
+                        "ICC_OPTIMIZATION_RENDER_TELEMETRY_BASELINE."
+                    )
+                    return 2
+                os.environ["ICC_OPTIMIZATION_RENDER_TELEMETRY_REGRESSION_GATE"] = "1"
             if csv_path and args.mode == "convert":
                 load_description_mapping_fn(csv_path)
 
@@ -610,6 +645,14 @@ def runMainImpl(
                 if bool(getattr(args, "fail_on_batch_failures", False)):
                     print("[ERROR] --fail-on-batch-failures aktiv: Batch-Einzelfehler erzwingen Exitcode 1.")
                     return 1
+            if args.mode == "convert" and bool(
+                getattr(args, "fail_on_optimization_render_regression", False)
+            ) and _hasOptimizationRenderTelemetryRegression(str(out_dir)):
+                print(
+                    "[ERROR] --fail-on-optimization-render-regression aktiv: "
+                    "Optimierungs-Rendertelemetrie erzwingt Exitcode 1."
+                )
+                return 1
             return 0
         except description_mapping_error_type as exc:
             print(f"[ERROR] {format_user_diagnostic_fn(exc)}")
