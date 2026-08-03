@@ -4,7 +4,7 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-07-26)
+## Aufgaben-Gesamtzähler (Snapshot 2026-08-03)
 
 **Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `401` · Erledigt `374` · Offen `27`
 

@@ -1,42 +1,34 @@
-name: Optimization render telemetry gate example
+name: Optimization render telemetry catalog gate
 
 on:
   workflow_dispatch:
+    inputs:
+      shard_start:
+        description: First catalog variant in the deterministic reference shard
+        required: true
+        default: AC0100_S
+        type: string
+      shard_end:
+        description: Last catalog variant in the deterministic reference shard
+        required: true
+        default: AC0100_S
+        type: string
+      promote_baseline:
+        description: Publish the accepted candidate as a versioned baseline artifact
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   contents: read
 
+env:
+  TELEMETRY_CANDIDATE_NAME: optimization-render-telemetry-baseline-candidate
+
 jobs:
-  publish-baseline:
+  record-reference-shard:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Create telemetry baseline
-        run: |
-          mkdir -p telemetry-baseline
-          cat > telemetry-baseline/optimization_render_telemetry_summary.json <<'JSON'
-          {
-            "schema_version": "optimization_render_telemetry_summary_v1",
-            "conversion_count": 0,
-            "affected_variant_count": 0,
-            "render_timeouts": 0,
-            "render_errors": 0,
-            "affected_variants": []
-          }
-          JSON
-
-      - name: Upload telemetry baseline
-        uses: actions/upload-artifact@v4
-        with:
-          name: optimization-render-telemetry-baseline
-          path: telemetry-baseline/optimization_render_telemetry_summary.json
-          if-no-files-found: error
-          retention-days: 1
-
-  strict-converter-call:
-    needs: publish-baseline
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -46,23 +38,76 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Download telemetry baseline
+      - name: Record catalog-shard reference
+        env:
+          SHARD_START: ${{ inputs.shard_start }}
+          SHARD_END: ${{ inputs.shard_end }}
+        run: >-
+          python -m src.imageCompositeConverter
+          artifacts/images_to_convert
+          --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml
+          --output-dir artifacts/ci-optimization-render-reference
+          --start "$SHARD_START"
+          --end "$SHARD_END"
+          --deterministic-order
+          --fail-on-batch-failures
+
+      - name: Validate baseline candidate
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          report = Path(
+              "artifacts/ci-optimization-render-reference/reports/"
+              "optimization_render_telemetry_summary.json"
+          )
+          payload = json.loads(report.read_text(encoding="utf-8"))
+          assert payload["schema_version"] == "optimization_render_telemetry_summary_v1", payload
+          assert payload["conversion_count"] > 0, payload
+          PY
+
+      - name: Upload baseline candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.TELEMETRY_CANDIDATE_NAME }}
+          path: artifacts/ci-optimization-render-reference/reports/optimization_render_telemetry_summary.json
+          if-no-files-found: error
+          retention-days: 7
+
+  strict-converter-call:
+    needs: record-reference-shard
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Download baseline candidate
         uses: actions/download-artifact@v4
         with:
-          name: optimization-render-telemetry-baseline
+          name: ${{ env.TELEMETRY_CANDIDATE_NAME }}
           path: telemetry-baseline
 
-      - name: Run isolated strict telemetry gate
+      - name: Run strict telemetry gate on catalog shard
         env:
           ICC_OPTIMIZATION_RENDER_TELEMETRY_BASELINE: telemetry-baseline/optimization_render_telemetry_summary.json
+          SHARD_START: ${{ inputs.shard_start }}
+          SHARD_END: ${{ inputs.shard_end }}
         run: >-
           python -m src.imageCompositeConverter
           artifacts/images_to_convert
           --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml
           --output-dir artifacts/ci-optimization-render-telemetry
-          --start CI_TELEMETRY_SENTINEL
-          --end CI_TELEMETRY_SENTINEL
+          --start "$SHARD_START"
+          --end "$SHARD_END"
           --deterministic-order
+          --fail-on-batch-failures
           --fail-on-optimization-render-regression
 
       - name: Verify passing gate artifact
@@ -86,4 +131,51 @@ jobs:
           name: optimization-render-telemetry-gate-reports
           path: artifacts/ci-optimization-render-telemetry/reports
           if-no-files-found: warn
-          retention-days: 3
+          retention-days: 7
+
+  promote-baseline:
+    if: ${{ inputs.promote_baseline }}
+    needs: strict-converter-call
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Download accepted candidate
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.TELEMETRY_CANDIDATE_NAME }}
+          path: promoted-baseline
+
+      - name: Add promotion provenance
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+          SOURCE_RUN_ID: ${{ github.run_id }}
+          SOURCE_RUN_ATTEMPT: ${{ github.run_attempt }}
+          SHARD_START: ${{ inputs.shard_start }}
+          SHARD_END: ${{ inputs.shard_end }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          provenance = {
+              "schema_version": "optimization_render_telemetry_baseline_provenance_v1",
+              "source_sha": os.environ["SOURCE_SHA"],
+              "source_run_id": int(os.environ["SOURCE_RUN_ID"]),
+              "source_run_attempt": int(os.environ["SOURCE_RUN_ATTEMPT"]),
+              "shard_start": os.environ["SHARD_START"],
+              "shard_end": os.environ["SHARD_END"],
+          }
+          Path("promoted-baseline/provenance.json").write_text(
+              json.dumps(provenance, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+      - name: Upload versioned baseline
+        uses: actions/upload-artifact@v4
+        with:
+          name: optimization-render-telemetry-baseline-${{ github.run_id }}-${{ github.run_attempt }}
+          path: promoted-baseline
+          if-no-files-found: error
+          retention-days: 30
