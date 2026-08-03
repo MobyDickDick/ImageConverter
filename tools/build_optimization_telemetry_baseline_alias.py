@@ -11,6 +11,8 @@ from typing import Any
 
 ALIAS_SCHEMA_VERSION = "optimization_render_telemetry_baseline_alias_v1"
 GATE_WORKFLOW = "optimization-render-telemetry-gate-example.yml"
+RUN_ID_VARIABLE = "OPTIMIZATION_RENDER_TELEMETRY_BASELINE_RUN_ID"
+ARTIFACT_NAME_VARIABLE = "OPTIMIZATION_RENDER_TELEMETRY_BASELINE_ARTIFACT_NAME"
 
 
 def build_baseline_alias(provenance: dict[str, Any]) -> dict[str, Any]:
@@ -30,14 +32,19 @@ def build_baseline_alias(provenance: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(shard_end, str) or not shard_end.strip():
         raise ValueError("Baseline shard end must be a non-empty string")
     artifact_name = f"optimization-render-telemetry-baseline-{run_id}-{run_attempt}"
+    repository_variables = {
+        RUN_ID_VARIABLE: str(run_id),
+        ARTIFACT_NAME_VARIABLE: artifact_name,
+    }
     return {
         "schema_version": ALIAS_SCHEMA_VERSION,
         "run_id": str(run_id),
         "artifact_name": artifact_name,
-        "repository_variables": {
-            "OPTIMIZATION_RENDER_TELEMETRY_BASELINE_RUN_ID": str(run_id),
-            "OPTIMIZATION_RENDER_TELEMETRY_BASELINE_ARTIFACT_NAME": artifact_name,
-        },
+        "repository_variables": repository_variables,
+        "activation_commands": [
+            f"gh variable set {name} --body {value}"
+            for name, value in repository_variables.items()
+        ],
         "verification_dispatch": {
             "workflow": GATE_WORKFLOW,
             "inputs": {
