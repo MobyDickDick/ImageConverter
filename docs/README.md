@@ -508,3 +508,4 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – Produktive Telemetrie-Baseline-Promotion Run ABY (2026-08-03)](next_arbeitspaket_2026-08-03_runABY.md)
 - [Nächstes Arbeitspaket – Dauerhafter Telemetrie-Baseline-Kanal Run ABZ (2026-08-03)](next_arbeitspaket_2026-08-03_runABZ.md)
 - [Nächstes Arbeitspaket – Empfohlener Telemetrie-Baseline-Alias Run ACA (2026-08-03)](next_arbeitspaket_2026-08-03_runACA.md)
+- [Nächstes Arbeitspaket – Aktivierbarer Telemetrie-Baseline-Alias Run ACB (2026-08-03)](next_arbeitspaket_2026-08-03_runACB.md)
