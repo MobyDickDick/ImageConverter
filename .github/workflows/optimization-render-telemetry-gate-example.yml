@@ -250,6 +250,15 @@ jobs:
               summary.write("Update both repository variables together before the alias is active:\n\n")
               for name, value in alias["repository_variables"].items():
                   summary.write(f"- `{name}` = `{value}`\n")
+              dispatch = alias["verification_dispatch"]
+              inputs = dispatch["inputs"]
+              summary.write("\nThen verify the activated alias without baseline overrides:\n\n")
+              summary.write(
+                  f"`gh workflow run {dispatch['workflow']} "
+                  f"-f shard_start={inputs['shard_start']} "
+                  f"-f shard_end={inputs['shard_end']} "
+                  "-f promote_baseline=false`\n"
+              )
           PY
 
       - name: Upload versioned baseline
