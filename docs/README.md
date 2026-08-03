@@ -510,3 +510,4 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – Empfohlener Telemetrie-Baseline-Alias Run ACA (2026-08-03)](next_arbeitspaket_2026-08-03_runACA.md)
 - [Nächstes Arbeitspaket – Aktivierbarer Telemetrie-Baseline-Alias Run ACB (2026-08-03)](next_arbeitspaket_2026-08-03_runACB.md)
 - [Nächstes Arbeitspaket – Telemetrie-Alias-Aktivierungscheck Run ACC (2026-08-03)](next_arbeitspaket_2026-08-03_runACC.md)
+- [Nächstes Arbeitspaket – Ausführbares Telemetrie-Alias-Aktivierungsrezept Run ACD (2026-08-03)](next_arbeitspaket_2026-08-03_runACD.md)

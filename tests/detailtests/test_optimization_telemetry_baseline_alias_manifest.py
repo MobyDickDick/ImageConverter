@@ -24,6 +24,11 @@ def test_build_baseline_alias_maps_both_repository_variables() -> None:
         "OPTIMIZATION_RENDER_TELEMETRY_BASELINE_RUN_ID": "456",
         "OPTIMIZATION_RENDER_TELEMETRY_BASELINE_ARTIFACT_NAME": "optimization-render-telemetry-baseline-456-2",
     }
+    assert alias["activation_commands"] == [
+        "gh variable set OPTIMIZATION_RENDER_TELEMETRY_BASELINE_RUN_ID --body 456",
+        "gh variable set OPTIMIZATION_RENDER_TELEMETRY_BASELINE_ARTIFACT_NAME "
+        "--body optimization-render-telemetry-baseline-456-2",
+    ]
     assert alias["verification_dispatch"] == {
         "workflow": "optimization-render-telemetry-gate-example.yml",
         "inputs": {

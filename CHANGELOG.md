@@ -198,3 +198,4 @@ All notable changes to ImageConverter will be documented in this file.
 - Plan-B Run AAX adds general 2097152nd-yoctofine `PolygonPath` point and stroke-width probes and documents the GE1410_L optimizer-only learning effect.
 - Plan-B Run ABH adds catalog-free 8388608th-yoctofine PolygonPath point/stroke-width probes and records reproducible Plan-B contracts for the three new AC0502/AC0538 samples.
 - Plan-B Run ABI adds a catalog-free, normalized Geometry-IR family seed for diagonal/circle/cross diagrams and improves both AC0502 L/M sample deltas by more than 85 percent against their Run-ABH roundtrip baselines.
+- Run ACD adds copy-ready `gh variable set` commands to promoted telemetry aliases and quotes shard values in the no-override verification dispatch.
