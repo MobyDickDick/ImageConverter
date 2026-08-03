@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from json import JSONDecodeError
 from pathlib import Path
 from typing import Any
 
@@ -54,8 +55,32 @@ def main() -> int:
     parser.add_argument("receipt", type=Path)
     args = parser.parse_args()
 
-    alias = json.loads(args.alias.read_text(encoding="utf-8"))
-    receipt = json.loads(args.receipt.read_text(encoding="utf-8"))
+    documents: dict[str, dict[str, Any]] = {}
+    load_errors: list[str] = []
+    for label, path in (("alias", args.alias), ("receipt", args.receipt)):
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except OSError as exc:
+            load_errors.append(f"cannot read {label}: {exc}")
+            continue
+        except JSONDecodeError as exc:
+            load_errors.append(
+                f"{label} is not valid JSON: line {exc.lineno} column {exc.colno}"
+            )
+            continue
+        if not isinstance(payload, dict):
+            load_errors.append(f"{label} root must be a JSON object")
+            continue
+        documents[label] = payload
+
+    if load_errors:
+        print("Telemetry alias verification: FAIL")
+        for error in load_errors:
+            print(f"- {error}")
+        return 1
+
+    alias = documents["alias"]
+    receipt = documents["receipt"]
     errors = verification_errors(alias, receipt)
     if errors:
         print("Telemetry alias verification: FAIL")

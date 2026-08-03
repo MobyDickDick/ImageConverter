@@ -514,3 +514,5 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – Ausführbares Telemetrie-Alias-Aktivierungsrezept Run ACD (2026-08-03)](next_arbeitspaket_2026-08-03_runACD.md)
 - [Nächstes Arbeitspaket – Maschinenlesbarer Telemetrie-Alias-Prüfbefehl Run ACE (2026-08-03)](next_arbeitspaket_2026-08-03_runACE.md)
 - [Nächstes Arbeitspaket – Telemetrie-Alias-Verifikationsbeleg Run ACF (2026-08-03)](next_arbeitspaket_2026-08-03_runACF.md)
+- [Nächstes Arbeitspaket – Telemetrie-Alias-Verifikationsgate Run ACG (2026-08-03)](next_arbeitspaket_2026-08-03_runACG.md)
+- [Nächstes Arbeitspaket – Robustes Telemetrie-Alias-Verifikationsgate Run ACH (2026-08-03)](next_arbeitspaket_2026-08-03_runACH.md)
