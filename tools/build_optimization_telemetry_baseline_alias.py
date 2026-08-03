@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shlex
 from pathlib import Path
 from typing import Any
 
@@ -36,22 +37,29 @@ def build_baseline_alias(provenance: dict[str, Any]) -> dict[str, Any]:
         RUN_ID_VARIABLE: str(run_id),
         ARTIFACT_NAME_VARIABLE: artifact_name,
     }
+    verification_inputs = {
+        "shard_start": shard_start,
+        "shard_end": shard_end,
+        "promote_baseline": False,
+    }
     return {
         "schema_version": ALIAS_SCHEMA_VERSION,
         "run_id": str(run_id),
         "artifact_name": artifact_name,
         "repository_variables": repository_variables,
         "activation_commands": [
-            f"gh variable set {name} --body {value}"
+            f"gh variable set {name} --body {shlex.quote(value)}"
             for name, value in repository_variables.items()
         ],
+        "verification_command": (
+            f"gh workflow run {GATE_WORKFLOW} "
+            f"-f shard_start={shlex.quote(shard_start)} "
+            f"-f shard_end={shlex.quote(shard_end)} "
+            "-f promote_baseline=false"
+        ),
         "verification_dispatch": {
             "workflow": GATE_WORKFLOW,
-            "inputs": {
-                "shard_start": shard_start,
-                "shard_end": shard_end,
-                "promote_baseline": False,
-            },
+            "inputs": verification_inputs,
         },
         "source_sha": provenance.get("source_sha"),
         "shard_start": shard_start,
