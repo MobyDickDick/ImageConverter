@@ -1,0 +1,76 @@
+import copy
+import json
+
+from tools.check_optimization_telemetry_alias_verification import (
+    main,
+    verification_errors,
+)
+from tools.record_optimization_telemetry_alias_verification import (
+    build_verification_receipt,
+)
+
+
+def _alias() -> dict[str, object]:
+    return {
+        "schema_version": "optimization_render_telemetry_baseline_alias_v1",
+        "run_id": "456",
+        "artifact_name": "optimization-render-telemetry-baseline-456-2",
+        "source_sha": "abc123",
+        "verification_dispatch": {
+            "workflow": "optimization-render-telemetry-gate-example.yml",
+            "inputs": {
+                "shard_start": "AC0100_S",
+                "shard_end": "AC0100_S",
+                "promote_baseline": False,
+            },
+        },
+    }
+
+
+def test_passed_receipt_matches_alias() -> None:
+    alias = _alias()
+    receipt = build_verification_receipt(
+        alias, workflow_run_id=987, gate_status="passed"
+    )
+    assert verification_errors(alias, receipt) == []
+
+
+def test_checker_reports_failed_gate_and_tampered_provenance() -> None:
+    alias = _alias()
+    receipt = build_verification_receipt(
+        alias, workflow_run_id=987, gate_status="failed"
+    )
+    receipt["baseline_source_sha"] = "different"
+    assert verification_errors(alias, receipt) == [
+        "receipt baseline_source_sha does not match alias",
+        "verification gate did not pass",
+        "receipt is not marked as verified",
+    ]
+
+
+def test_checker_rejects_verified_flag_inconsistent_with_status() -> None:
+    alias = _alias()
+    receipt = build_verification_receipt(
+        alias, workflow_run_id=987, gate_status="cancelled"
+    )
+    receipt["verified"] = True
+    assert "verification gate did not pass" in verification_errors(alias, receipt)
+
+
+def test_cli_returns_nonzero_for_receipt_from_other_alias(
+    tmp_path, monkeypatch, capsys
+) -> None:
+    alias = _alias()
+    other_alias = copy.deepcopy(alias)
+    other_alias["run_id"] = "789"
+    receipt = build_verification_receipt(
+        other_alias, workflow_run_id=987, gate_status="passed"
+    )
+    alias_path = tmp_path / "alias.json"
+    receipt_path = tmp_path / "receipt.json"
+    alias_path.write_text(json.dumps(alias), encoding="utf-8")
+    receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+    monkeypatch.setattr("sys.argv", ["check.py", str(alias_path), str(receipt_path)])
+
+    assert main() == 1
+    assert "baseline_run_id does not match alias" in capsys.readouterr().out
