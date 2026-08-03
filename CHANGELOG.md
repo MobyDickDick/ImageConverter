@@ -1,3 +1,4 @@
+- Run ACG adds a strict telemetry-alias verification gate that rejects failed receipts and receipts whose workflow, dispatch, baseline artifact, run, or source provenance does not match the promoted alias.
 - Run ACC adds the exact no-override verification dispatch to each promoted telemetry-baseline alias manifest and workflow summary, with validated shard coordinates.
 - Run ACB adds a validated activation manifest for promoted telemetry baselines and publishes the paired repository-variable values in the workflow summary.
 - Run ACA lets the catalog telemetry workflow resolve its recommended promoted baseline from paired repository variables, keeps optional manual overrides, and rejects incomplete, mixed-source, or cross-run aliases with a unit-tested resolver before download.
