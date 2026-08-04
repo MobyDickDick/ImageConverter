@@ -10,6 +10,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [AC0100 Quality Follow-up (2026-05-31, Abschluss Run NK 2026-06-02)](ac0100_quality_followup_2026-05-31.md)
 - [Nächstes Arbeitspaket – AC0010/AC0100 Renderer-Reparatur (2026-07-25)](next_arbeitspaket_2026-07-25_ac0100_renderer_fix.md)
 - [Nächstes Arbeitspaket – Telemetrie-Alias-Verifikationsgate Run ACG (2026-08-03)](next_arbeitspaket_2026-08-03_runACG.md)
+- [Nächstes Arbeitspaket – Merge-sichere Workflow-Kontextprüfung Run ACM (2026-08-04)](next_arbeitspaket_2026-08-04_runACM.md)
 - [Nächstes Arbeitspaket – Kontextgebundenes Telemetrie-Alias-Gate Run ACL (2026-08-04)](next_arbeitspaket_2026-08-04_runACL.md)
 - [Nächstes Arbeitspaket – Automatischer Telemetrie-Alias-Beleg Run ACH (2026-08-03)](next_arbeitspaket_2026-08-03_runACH.md)
 - [Nächstes Arbeitspaket – Revisionsgebundener Telemetrie-Alias-Beleg Run ACI (2026-08-04)](next_arbeitspaket_2026-08-04_runACI.md)
