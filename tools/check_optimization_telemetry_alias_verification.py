@@ -28,6 +28,17 @@ def verification_errors(
 ) -> list[str]:
     """Return every reason why *receipt* does not verify *alias*."""
     errors: list[str] = []
+    expected_context = (expected_workflow_run_id, expected_workflow_run_attempt)
+    if (expected_workflow_run_id is None) != (
+        expected_workflow_run_attempt is None
+    ):
+        errors.append("expected workflow run ID and attempt must be provided together")
+    for label, value in zip(("run ID", "run attempt"), expected_context):
+        if value is not None and (
+            isinstance(value, bool) or not isinstance(value, int) or value <= 0
+        ):
+            errors.append(f"expected workflow {label} is not a positive integer")
+
     if alias.get("schema_version") != ALIAS_SCHEMA_VERSION:
         errors.append("unsupported telemetry baseline alias schema")
     if receipt.get("schema_version") != RECEIPT_SCHEMA_VERSION:
