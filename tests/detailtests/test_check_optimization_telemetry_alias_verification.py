@@ -32,6 +32,7 @@ def test_passed_receipt_matches_alias() -> None:
     receipt = build_verification_receipt(
         alias,
         workflow_run_id=987,
+        workflow_run_attempt=2,
         gate_status="passed",
         verification_source_sha="abc123",
     )
@@ -43,6 +44,7 @@ def test_checker_reports_failed_gate_and_tampered_provenance() -> None:
     receipt = build_verification_receipt(
         alias,
         workflow_run_id=987,
+        workflow_run_attempt=2,
         gate_status="failed",
         verification_source_sha="abc123",
     )
@@ -59,6 +61,7 @@ def test_checker_rejects_verified_flag_inconsistent_with_status() -> None:
     receipt = build_verification_receipt(
         alias,
         workflow_run_id=987,
+        workflow_run_attempt=2,
         gate_status="cancelled",
         verification_source_sha="abc123",
     )
@@ -71,12 +74,28 @@ def test_checker_rejects_tampered_verification_source_revision() -> None:
     receipt = build_verification_receipt(
         alias,
         workflow_run_id=987,
+        workflow_run_attempt=2,
         gate_status="passed",
         verification_source_sha="abc123",
     )
     receipt["verification_source_sha"] = "different"
     assert verification_errors(alias, receipt) == [
         "verification source SHA does not match alias"
+    ]
+
+
+def test_checker_rejects_missing_workflow_run_attempt() -> None:
+    alias = _alias()
+    receipt = build_verification_receipt(
+        alias,
+        workflow_run_id=987,
+        workflow_run_attempt=2,
+        gate_status="passed",
+        verification_source_sha="abc123",
+    )
+    del receipt["verification_workflow_run_attempt"]
+    assert verification_errors(alias, receipt) == [
+        "verification workflow run attempt is not a positive integer"
     ]
 
 
@@ -89,6 +108,7 @@ def test_cli_returns_nonzero_for_receipt_from_other_alias(
     receipt = build_verification_receipt(
         other_alias,
         workflow_run_id=987,
+        workflow_run_attempt=2,
         gate_status="passed",
         verification_source_sha="abc123",
     )
