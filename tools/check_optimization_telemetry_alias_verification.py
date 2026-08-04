@@ -10,12 +10,10 @@ from pathlib import Path
 from typing import Any
 
 ALIAS_SCHEMA_VERSION = "optimization_render_telemetry_baseline_alias_v1"
-RECEIPT_SCHEMA_VERSION = "optimization_render_telemetry_alias_verification_v1"
+RECEIPT_SCHEMA_VERSION = "optimization_render_telemetry_alias_verification_v2"
 
 
-def verification_errors(
-    alias: dict[str, Any], receipt: dict[str, Any]
-) -> list[str]:
+def verification_errors(alias: dict[str, Any], receipt: dict[str, Any]) -> list[str]:
     """Return every reason why *receipt* does not verify *alias*."""
     errors: list[str] = []
     if alias.get("schema_version") != ALIAS_SCHEMA_VERSION:
@@ -38,6 +36,8 @@ def verification_errors(
     for field, expected_value in expected.items():
         if receipt.get(field) != expected_value:
             errors.append(f"receipt {field} does not match alias")
+    if receipt.get("verification_source_sha") != alias.get("source_sha"):
+        errors.append("verification source SHA does not match alias")
 
     run_id = receipt.get("verification_workflow_run_id")
     if isinstance(run_id, bool) or not isinstance(run_id, int) or run_id <= 0:

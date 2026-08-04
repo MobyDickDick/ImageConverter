@@ -9,7 +9,6 @@ import shlex
 from pathlib import Path
 from typing import Any
 
-
 ALIAS_SCHEMA_VERSION = "optimization_render_telemetry_baseline_alias_v1"
 GATE_WORKFLOW = "optimization-render-telemetry-gate-example.yml"
 RUN_ID_VARIABLE = "OPTIMIZATION_RENDER_TELEMETRY_BASELINE_RUN_ID"
@@ -18,14 +17,24 @@ ARTIFACT_NAME_VARIABLE = "OPTIMIZATION_RENDER_TELEMETRY_BASELINE_ARTIFACT_NAME"
 
 def build_baseline_alias(provenance: dict[str, Any]) -> dict[str, Any]:
     """Return a validated, machine-readable alias from promotion provenance."""
-    if provenance.get("schema_version") != "optimization_render_telemetry_baseline_provenance_v1":
+    if (
+        provenance.get("schema_version")
+        != "optimization_render_telemetry_baseline_provenance_v1"
+    ):
         raise ValueError("Unsupported telemetry baseline provenance schema")
     run_id = provenance.get("source_run_id")
     run_attempt = provenance.get("source_run_attempt")
     if isinstance(run_id, bool) or not isinstance(run_id, int) or run_id <= 0:
         raise ValueError("Baseline source run ID must be a positive integer")
-    if isinstance(run_attempt, bool) or not isinstance(run_attempt, int) or run_attempt <= 0:
+    if (
+        isinstance(run_attempt, bool)
+        or not isinstance(run_attempt, int)
+        or run_attempt <= 0
+    ):
         raise ValueError("Baseline source run attempt must be a positive integer")
+    source_sha = provenance.get("source_sha")
+    if not isinstance(source_sha, str) or not source_sha.strip():
+        raise ValueError("Baseline source SHA must be a non-empty string")
     shard_start = provenance.get("shard_start")
     shard_end = provenance.get("shard_end")
     if not isinstance(shard_start, str) or not shard_start.strip():
@@ -52,7 +61,7 @@ def build_baseline_alias(provenance: dict[str, Any]) -> dict[str, Any]:
             for name, value in repository_variables.items()
         ],
         "verification_command": (
-            f"gh workflow run {GATE_WORKFLOW} "
+            f"gh workflow run {GATE_WORKFLOW} --ref {shlex.quote(source_sha)} "
             f"-f shard_start={shlex.quote(shard_start)} "
             f"-f shard_end={shlex.quote(shard_end)} "
             "-f promote_baseline=false"
@@ -61,7 +70,7 @@ def build_baseline_alias(provenance: dict[str, Any]) -> dict[str, Any]:
             "workflow": GATE_WORKFLOW,
             "inputs": verification_inputs,
         },
-        "source_sha": provenance.get("source_sha"),
+        "source_sha": source_sha,
         "shard_start": shard_start,
         "shard_end": shard_end,
     }
@@ -75,7 +84,9 @@ def main() -> int:
     provenance = json.loads(args.provenance.read_text(encoding="utf-8"))
     alias = build_baseline_alias(provenance)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(alias, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    args.output.write_text(
+        json.dumps(alias, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     return 0
 
 

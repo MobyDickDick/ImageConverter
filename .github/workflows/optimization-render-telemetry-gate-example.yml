@@ -183,11 +183,13 @@ jobs:
       - name: Record and verify alias activation receipt
         env:
           VERIFICATION_WORKFLOW_RUN_ID: ${{ github.run_id }}
+          VERIFICATION_SOURCE_SHA: ${{ github.sha }}
         run: |
           python tools/record_optimization_telemetry_alias_verification.py \
             telemetry-baseline/recommended-baseline-alias.json \
             telemetry-alias-verification.json \
             --workflow-run-id "$VERIFICATION_WORKFLOW_RUN_ID" \
+            --verification-source-sha "$VERIFICATION_SOURCE_SHA" \
             --gate-status passed
           python tools/check_optimization_telemetry_alias_verification.py \
             telemetry-baseline/recommended-baseline-alias.json \
