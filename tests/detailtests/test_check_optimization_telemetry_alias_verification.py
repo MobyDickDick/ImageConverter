@@ -84,7 +84,7 @@ def test_checker_rejects_tampered_verification_source_revision() -> None:
     ]
 
 
-def test_checker_rejects_missing_workflow_run_attempt() -> None:
+def test_checker_rejects_missing_verification_run_attempt() -> None:
     alias = _alias()
     receipt = build_verification_receipt(
         alias,
