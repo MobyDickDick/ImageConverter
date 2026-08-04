@@ -37,5 +37,8 @@ def test_workflow_records_checks_and_uploads_passed_alias_receipt() -> None:
         "${{ github.run_id }}-${{ github.run_attempt }}"
         in workflow[upload_step:]
     )
+    assert "verification_artifact_name" in Path(
+        "tools/record_optimization_telemetry_alias_verification.py"
+    ).read_text(encoding="utf-8")
     assert "if-no-files-found: error" in workflow[upload_step:]
     assert "retention-days: 30" in workflow[upload_step:]

@@ -99,7 +99,7 @@ def test_checker_rejects_missing_verification_run_attempt() -> None:
     ]
 
 
-def test_checker_binds_receipt_to_expected_workflow_attempt() -> None:
+def test_checker_rejects_artifact_name_from_other_attempt() -> None:
     alias = _alias()
     receipt = build_verification_receipt(
         alias,
@@ -108,15 +108,11 @@ def test_checker_binds_receipt_to_expected_workflow_attempt() -> None:
         gate_status="passed",
         verification_source_sha="abc123",
     )
-
-    assert verification_errors(
-        alias,
-        receipt,
-        expected_workflow_run_id=654,
-        expected_workflow_run_attempt=3,
-    ) == [
-        "verification workflow run ID does not match expected run",
-        "verification workflow run attempt does not match expected run",
+    receipt["verification_artifact_name"] = (
+        "optimization-render-telemetry-alias-verification-987-1"
+    )
+    assert verification_errors(alias, receipt) == [
+        "verification artifact name does not match workflow attempt"
     ]
 
 

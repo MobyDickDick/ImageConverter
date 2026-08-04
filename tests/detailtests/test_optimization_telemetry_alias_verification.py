@@ -34,9 +34,12 @@ def test_build_verification_receipt_binds_passed_run_to_alias() -> None:
         verification_source_sha="abc123",
     )
     assert receipt == {
-        "schema_version": "optimization_render_telemetry_alias_verification_v3",
+        "schema_version": "optimization_render_telemetry_alias_verification_v4",
         "verification_workflow_run_id": 987,
         "verification_workflow_run_attempt": 2,
+        "verification_artifact_name": (
+            "optimization-render-telemetry-alias-verification-987-2"
+        ),
         "verification_source_sha": "abc123",
         "gate_status": "passed",
         "verified": True,
