@@ -195,7 +195,9 @@ jobs:
             --gate-status passed
           python tools/check_optimization_telemetry_alias_verification.py \
             telemetry-baseline/recommended-baseline-alias.json \
-            telemetry-alias-verification.json
+            telemetry-alias-verification.json \
+            --expected-workflow-run-id "$VERIFICATION_WORKFLOW_RUN_ID" \
+            --expected-workflow-run-attempt "$VERIFICATION_WORKFLOW_RUN_ATTEMPT"
 
       - name: Upload verified alias activation receipt
         uses: actions/upload-artifact@v4
