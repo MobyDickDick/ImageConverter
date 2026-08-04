@@ -61,6 +61,13 @@ def verification_errors(
         or run_attempt <= 0
     ):
         errors.append("verification workflow run attempt is not a positive integer")
+    if expected_workflow_run_id is not None and run_id != expected_workflow_run_id:
+        errors.append("verification workflow run ID does not match expected run")
+    if (
+        expected_workflow_run_attempt is not None
+        and run_attempt != expected_workflow_run_attempt
+    ):
+        errors.append("verification workflow run attempt does not match expected run")
     if (
         isinstance(run_id, int)
         and not isinstance(run_id, bool)
