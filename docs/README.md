@@ -11,6 +11,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – AC0010/AC0100 Renderer-Reparatur (2026-07-25)](next_arbeitspaket_2026-07-25_ac0100_renderer_fix.md)
 - [Nächstes Arbeitspaket – Telemetrie-Alias-Verifikationsgate Run ACG (2026-08-03)](next_arbeitspaket_2026-08-03_runACG.md)
 - [Nächstes Arbeitspaket – Automatischer Telemetrie-Alias-Beleg Run ACH (2026-08-03)](next_arbeitspaket_2026-08-03_runACH.md)
+- [Nächstes Arbeitspaket – Revisionsgebundener Telemetrie-Alias-Beleg Run ACI (2026-08-04)](next_arbeitspaket_2026-08-04_runACI.md)
 - [Nächstes Arbeitspaket – CI-Exit für Optimierungs-Telemetrie Run ABW (2026-08-02)](next_arbeitspaket_2026-08-02_runABW.md)
 - [Nächstes Arbeitspaket – CI-Beispiel für Optimierungs-Telemetrie Run ABX (2026-08-03)](next_arbeitspaket_2026-08-03_runABX.md)
 - [Nächstes Arbeitspaket – Dauerhafter Telemetrie-Baseline-Kanal Run ABZ (2026-08-03)](next_arbeitspaket_2026-08-03_runABZ.md)
@@ -516,4 +517,3 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – Maschinenlesbarer Telemetrie-Alias-Prüfbefehl Run ACE (2026-08-03)](next_arbeitspaket_2026-08-03_runACE.md)
 - [Nächstes Arbeitspaket – Telemetrie-Alias-Verifikationsbeleg Run ACF (2026-08-03)](next_arbeitspaket_2026-08-03_runACF.md)
 - [Nächstes Arbeitspaket – Telemetrie-Alias-Verifikationsgate Run ACG (2026-08-03)](next_arbeitspaket_2026-08-03_runACG.md)
-- [Nächstes Arbeitspaket – Robustes Telemetrie-Alias-Verifikationsgate Run ACH (2026-08-03)](next_arbeitspaket_2026-08-03_runACH.md)

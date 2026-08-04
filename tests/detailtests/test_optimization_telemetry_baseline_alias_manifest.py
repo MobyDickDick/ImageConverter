@@ -31,7 +31,8 @@ def test_build_baseline_alias_maps_both_repository_variables() -> None:
     ]
     assert alias["verification_command"] == (
         "gh workflow run optimization-render-telemetry-gate-example.yml "
-        "-f shard_start=AC0100_S -f shard_end=AC0100_S -f promote_baseline=false"
+        "--ref abc123 -f shard_start=AC0100_S -f shard_end=AC0100_S "
+        "-f promote_baseline=false"
     )
     assert alias["verification_dispatch"] == {
         "workflow": "optimization-render-telemetry-gate-example.yml",
@@ -43,15 +44,21 @@ def test_build_baseline_alias_maps_both_repository_variables() -> None:
     }
 
 
-@pytest.mark.parametrize("field,value", [("source_run_id", 0), ("source_run_attempt", True)])
-def test_build_baseline_alias_rejects_invalid_identity(field: str, value: object) -> None:
+@pytest.mark.parametrize(
+    "field,value", [("source_run_id", 0), ("source_run_attempt", True)]
+)
+def test_build_baseline_alias_rejects_invalid_identity(
+    field: str, value: object
+) -> None:
     provenance = _provenance()
     provenance[field] = value
     with pytest.raises(ValueError, match="positive integer"):
         build_baseline_alias(provenance)
 
 
-@pytest.mark.parametrize("field,value", [("shard_start", ""), ("shard_end", None)])
+@pytest.mark.parametrize(
+    "field,value", [("source_sha", ""), ("shard_start", ""), ("shard_end", None)]
+)
 def test_build_baseline_alias_rejects_invalid_shard(field: str, value: object) -> None:
     provenance = _provenance()
     provenance[field] = value
@@ -66,7 +73,7 @@ def test_build_baseline_alias_shell_quotes_verification_shards() -> None:
     alias = build_baseline_alias(provenance)
     assert alias["verification_command"] == (
         "gh workflow run optimization-render-telemetry-gate-example.yml "
-        "-f shard_start='AC 0100_S' -f shard_end='AC'\"'\"'0100_S' "
+        "--ref abc123 -f shard_start='AC 0100_S' -f shard_end='AC'\"'\"'0100_S' "
         "-f promote_baseline=false"
     )
 
@@ -75,6 +82,8 @@ def test_alias_cli_writes_manifest(tmp_path, monkeypatch) -> None:
     provenance_path = tmp_path / "provenance.json"
     output_path = tmp_path / "alias.json"
     provenance_path.write_text(json.dumps(_provenance()), encoding="utf-8")
-    monkeypatch.setattr("sys.argv", ["build_alias.py", str(provenance_path), str(output_path)])
+    monkeypatch.setattr(
+        "sys.argv", ["build_alias.py", str(provenance_path), str(output_path)]
+    )
     assert main() == 0
     assert json.loads(output_path.read_text(encoding="utf-8"))["run_id"] == "456"

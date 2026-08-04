@@ -30,7 +30,10 @@ def _alias() -> dict[str, object]:
 def test_passed_receipt_matches_alias() -> None:
     alias = _alias()
     receipt = build_verification_receipt(
-        alias, workflow_run_id=987, gate_status="passed"
+        alias,
+        workflow_run_id=987,
+        gate_status="passed",
+        verification_source_sha="abc123",
     )
     assert verification_errors(alias, receipt) == []
 
@@ -38,7 +41,10 @@ def test_passed_receipt_matches_alias() -> None:
 def test_checker_reports_failed_gate_and_tampered_provenance() -> None:
     alias = _alias()
     receipt = build_verification_receipt(
-        alias, workflow_run_id=987, gate_status="failed"
+        alias,
+        workflow_run_id=987,
+        gate_status="failed",
+        verification_source_sha="abc123",
     )
     receipt["baseline_source_sha"] = "different"
     assert verification_errors(alias, receipt) == [
@@ -51,10 +57,27 @@ def test_checker_reports_failed_gate_and_tampered_provenance() -> None:
 def test_checker_rejects_verified_flag_inconsistent_with_status() -> None:
     alias = _alias()
     receipt = build_verification_receipt(
-        alias, workflow_run_id=987, gate_status="cancelled"
+        alias,
+        workflow_run_id=987,
+        gate_status="cancelled",
+        verification_source_sha="abc123",
     )
     receipt["verified"] = True
     assert "verification gate did not pass" in verification_errors(alias, receipt)
+
+
+def test_checker_rejects_tampered_verification_source_revision() -> None:
+    alias = _alias()
+    receipt = build_verification_receipt(
+        alias,
+        workflow_run_id=987,
+        gate_status="passed",
+        verification_source_sha="abc123",
+    )
+    receipt["verification_source_sha"] = "different"
+    assert verification_errors(alias, receipt) == [
+        "verification source SHA does not match alias"
+    ]
 
 
 def test_cli_returns_nonzero_for_receipt_from_other_alias(
@@ -64,7 +87,10 @@ def test_cli_returns_nonzero_for_receipt_from_other_alias(
     other_alias = copy.deepcopy(alias)
     other_alias["run_id"] = "789"
     receipt = build_verification_receipt(
-        other_alias, workflow_run_id=987, gate_status="passed"
+        other_alias,
+        workflow_run_id=987,
+        gate_status="passed",
+        verification_source_sha="abc123",
     )
     alias_path = tmp_path / "alias.json"
     receipt_path = tmp_path / "receipt.json"
