@@ -116,6 +116,27 @@ def test_checker_rejects_artifact_name_from_other_attempt() -> None:
     ]
 
 
+def test_checker_binds_receipt_to_expected_workflow_attempt() -> None:
+    alias = _alias()
+    receipt = build_verification_receipt(
+        alias,
+        workflow_run_id=987,
+        workflow_run_attempt=2,
+        gate_status="passed",
+        verification_source_sha="abc123",
+    )
+
+    assert verification_errors(
+        alias,
+        receipt,
+        expected_workflow_run_id=654,
+        expected_workflow_run_attempt=3,
+    ) == [
+        "verification workflow run ID does not match expected run",
+        "verification workflow run attempt does not match expected run",
+    ]
+
+
 def test_cli_returns_nonzero_for_receipt_from_other_alias(
     tmp_path, monkeypatch, capsys
 ) -> None:

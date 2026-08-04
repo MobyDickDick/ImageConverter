@@ -27,10 +27,9 @@ Run-ID, Versuch, Beleginhalt und Upload-Name bilden nun einen gemeinsam
 prüfbaren Vertrag. Ein heruntergeladener positiver Nachweis kann ohne Wissen
 über den ursprünglichen Workflow-Aufbau seinem deterministischen
 Artefaktcontainer zugeordnet werden.
-=======
-# Nächstes Arbeitspaket – Kontextgebundenes Telemetrie-Alias-Gate Run ACL (2026-08-04)
+## 4) Kontextgebundenes Telemetrie-Alias-Gate
 
-Run ACL schließt an den versuchsspezifischen Artefaktnamen aus Run ACK an.
+Run ACL schließt außerdem an den versuchsspezifischen Artefaktnamen aus Run ACK an.
 Ein Beleg enthielt zwar bereits Run-ID und Run-Attempt, der eigenständige
 Checker prüfte diese Werte bislang aber nur auf ihr Format und nicht gegen den
 Workflow-Kontext, in dem der Beleg konsumiert wird.
