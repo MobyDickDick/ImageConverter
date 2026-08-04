@@ -13,7 +13,13 @@ ALIAS_SCHEMA_VERSION = "optimization_render_telemetry_baseline_alias_v1"
 RECEIPT_SCHEMA_VERSION = "optimization_render_telemetry_alias_verification_v3"
 
 
-def verification_errors(alias: dict[str, Any], receipt: dict[str, Any]) -> list[str]:
+def verification_errors(
+    alias: dict[str, Any],
+    receipt: dict[str, Any],
+    *,
+    expected_workflow_run_id: int | None = None,
+    expected_workflow_run_attempt: int | None = None,
+) -> list[str]:
     """Return every reason why *receipt* does not verify *alias*."""
     errors: list[str] = []
     if alias.get("schema_version") != ALIAS_SCHEMA_VERSION:
@@ -49,6 +55,13 @@ def verification_errors(alias: dict[str, Any], receipt: dict[str, Any]) -> list[
         or run_attempt <= 0
     ):
         errors.append("verification workflow run attempt is not a positive integer")
+    if expected_workflow_run_id is not None and run_id != expected_workflow_run_id:
+        errors.append("verification workflow run ID does not match expected run")
+    if (
+        expected_workflow_run_attempt is not None
+        and run_attempt != expected_workflow_run_attempt
+    ):
+        errors.append("verification workflow run attempt does not match expected run")
     if receipt.get("gate_status") != "passed":
         errors.append("verification gate did not pass")
     if receipt.get("verified") is not True:
@@ -60,6 +73,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("alias", type=Path)
     parser.add_argument("receipt", type=Path)
+    parser.add_argument("--expected-workflow-run-id", type=int)
+    parser.add_argument("--expected-workflow-run-attempt", type=int)
     args = parser.parse_args()
 
     documents: dict[str, dict[str, Any]] = {}
@@ -88,7 +103,12 @@ def main() -> int:
 
     alias = documents["alias"]
     receipt = documents["receipt"]
-    errors = verification_errors(alias, receipt)
+    errors = verification_errors(
+        alias,
+        receipt,
+        expected_workflow_run_id=args.expected_workflow_run_id,
+        expected_workflow_run_attempt=args.expected_workflow_run_attempt,
+    )
     if errors:
         print("Telemetry alias verification: FAIL")
         for error in errors:

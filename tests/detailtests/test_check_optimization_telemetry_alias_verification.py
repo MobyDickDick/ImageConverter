@@ -99,6 +99,27 @@ def test_checker_rejects_missing_verification_run_attempt() -> None:
     ]
 
 
+def test_checker_binds_receipt_to_expected_workflow_attempt() -> None:
+    alias = _alias()
+    receipt = build_verification_receipt(
+        alias,
+        workflow_run_id=987,
+        workflow_run_attempt=2,
+        gate_status="passed",
+        verification_source_sha="abc123",
+    )
+
+    assert verification_errors(
+        alias,
+        receipt,
+        expected_workflow_run_id=654,
+        expected_workflow_run_attempt=3,
+    ) == [
+        "verification workflow run ID does not match expected run",
+        "verification workflow run attempt does not match expected run",
+    ]
+
+
 def test_cli_returns_nonzero_for_receipt_from_other_alias(
     tmp_path, monkeypatch, capsys
 ) -> None:
@@ -120,6 +141,38 @@ def test_cli_returns_nonzero_for_receipt_from_other_alias(
 
     assert main() == 1
     assert "baseline_run_id does not match alias" in capsys.readouterr().out
+
+
+def test_cli_returns_nonzero_for_receipt_from_other_workflow_attempt(
+    tmp_path, monkeypatch, capsys
+) -> None:
+    alias = _alias()
+    receipt = build_verification_receipt(
+        alias,
+        workflow_run_id=987,
+        workflow_run_attempt=2,
+        gate_status="passed",
+        verification_source_sha="abc123",
+    )
+    alias_path = tmp_path / "alias.json"
+    receipt_path = tmp_path / "receipt.json"
+    alias_path.write_text(json.dumps(alias), encoding="utf-8")
+    receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+    monkeypatch.setattr(
+        "sys.argv",
+        [
+            "check.py",
+            str(alias_path),
+            str(receipt_path),
+            "--expected-workflow-run-id",
+            "987",
+            "--expected-workflow-run-attempt",
+            "3",
+        ],
+    )
+
+    assert main() == 1
+    assert "run attempt does not match expected run" in capsys.readouterr().out
 
 
 def test_cli_reports_all_document_loading_errors(tmp_path, monkeypatch, capsys) -> None:

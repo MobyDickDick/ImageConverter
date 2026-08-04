@@ -26,6 +26,13 @@ def test_workflow_records_checks_and_uploads_passed_alias_receipt() -> None:
     ) in workflow[upload_step:]
     assert "tools/check_optimization_telemetry_alias_verification.py" in workflow
     assert (
+        '--expected-workflow-run-id "$VERIFICATION_WORKFLOW_RUN_ID"' in workflow
+    )
+    assert (
+        '--expected-workflow-run-attempt "$VERIFICATION_WORKFLOW_RUN_ATTEMPT"'
+        in workflow
+    )
+    assert (
         "name: optimization-render-telemetry-alias-verification-"
         "${{ github.run_id }}-${{ github.run_attempt }}"
         in workflow[upload_step:]
