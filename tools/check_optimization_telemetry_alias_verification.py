@@ -51,32 +51,42 @@ def verification_errors(
     if receipt.get("verification_source_sha") != alias.get("source_sha"):
         errors.append("verification source SHA does not match alias")
 
-    run_id = receipt.get("verification_workflow_run_id")
-    if isinstance(run_id, bool) or not isinstance(run_id, int) or run_id <= 0:
+    run_id_value = receipt.get("verification_workflow_run_id")
+    run_id = _positive_int(run_id_value)
+    if run_id is None:
         errors.append("verification workflow run ID is not a positive integer")
-    run_attempt = receipt.get("verification_workflow_run_attempt")
-    if (
-        isinstance(run_attempt, bool)
-        or not isinstance(run_attempt, int)
-        or run_attempt <= 0
-    ):
+    run_attempt_value = receipt.get("verification_workflow_run_attempt")
+    run_attempt = _positive_int(run_attempt_value)
+    if run_attempt is None:
         errors.append("verification workflow run attempt is not a positive integer")
-    if (
-        isinstance(run_id, int)
-        and not isinstance(run_id, bool)
-        and run_id > 0
-        and isinstance(run_attempt, int)
-        and not isinstance(run_attempt, bool)
-        and run_attempt > 0
-        and receipt.get("verification_artifact_name")
+    if run_id is not None and run_attempt is not None and (
+        receipt.get("verification_artifact_name")
         != verification_artifact_name(run_id, run_attempt)
     ):
         errors.append("verification artifact name does not match workflow attempt")
+    if expected_workflow_run_id is not None and run_id != expected_workflow_run_id:
+        errors.append("run ID does not match expected run")
+    if (
+        expected_workflow_run_attempt is not None
+        and run_attempt != expected_workflow_run_attempt
+    ):
+        errors.append("run attempt does not match expected run")
     if receipt.get("gate_status") != "passed":
         errors.append("verification gate did not pass")
     if receipt.get("verified") is not True:
         errors.append("receipt is not marked as verified")
     return errors
+
+
+def _positive_int(value: Any) -> int | None:
+    """Return a positive integer for JSON numeric/string values, else ``None``."""
+    if isinstance(value, bool):
+        return None
+    try:
+        converted = int(value)
+    except (TypeError, ValueError):
+        return None
+    return converted if converted > 0 else None
 
 
 def main() -> int:

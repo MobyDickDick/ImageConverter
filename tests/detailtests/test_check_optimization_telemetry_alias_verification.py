@@ -171,6 +171,60 @@ def test_cli_returns_nonzero_for_receipt_from_other_workflow_attempt(
     assert "run attempt does not match expected run" in capsys.readouterr().out
 
 
+def test_checker_coerces_string_workflow_attempt_before_comparing() -> None:
+    alias = _alias()
+    receipt = build_verification_receipt(
+        alias,
+        workflow_run_id=987,
+        workflow_run_attempt=2,
+        gate_status="passed",
+        verification_source_sha="abc123",
+    )
+    receipt["verification_workflow_run_attempt"] = "2"
+
+    assert verification_errors(
+        alias,
+        receipt,
+        expected_workflow_run_id=987,
+        expected_workflow_run_attempt=2,
+    ) == []
+
+
+def test_checker_reports_string_workflow_attempt_mismatch() -> None:
+    alias = _alias()
+    receipt = build_verification_receipt(
+        alias,
+        workflow_run_id=987,
+        workflow_run_attempt=2,
+        gate_status="passed",
+        verification_source_sha="abc123",
+    )
+    receipt["verification_workflow_run_attempt"] = "2"
+
+    assert "run attempt does not match expected run" in verification_errors(
+        alias,
+        receipt,
+        expected_workflow_run_attempt=3,
+    )
+
+
+def test_checker_reports_workflow_run_id_mismatch() -> None:
+    alias = _alias()
+    receipt = build_verification_receipt(
+        alias,
+        workflow_run_id=987,
+        workflow_run_attempt=2,
+        gate_status="passed",
+        verification_source_sha="abc123",
+    )
+
+    assert "run ID does not match expected run" in verification_errors(
+        alias,
+        receipt,
+        expected_workflow_run_id=988,
+    )
+
+
 def test_cli_reports_all_document_loading_errors(tmp_path, monkeypatch, capsys) -> None:
     alias_path = tmp_path / "alias.json"
     receipt_path = tmp_path / "receipt.json"
