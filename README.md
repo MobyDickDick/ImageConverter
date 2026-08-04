@@ -33,6 +33,18 @@ The recommended local verification workflow lives in
 
 ## Quick start
 
+### Paarweise verschiedene Knoten erzeugen
+
+```bash
+python tools/generate_knots.py --count 10 --output-dir artifacts/generated_knots
+```
+
+Der Generator schreibt für jeden Knoten ein gleichnamiges SVG-/PNG-Paar. Er
+erzeugt höchstens eine einfache Schleife (den Unknoten); alle weiteren Ausgaben
+sind paarweise verschiedene Torusknoten `T(2,q)`. Deren verwendete alternierende
+Standarddiagramme sind bereits Reidemeister-reduziert und haben die minimale
+Kreuzungszahl `q`. Mit `--no-unknot` werden ausschließlich echte Knoten erzeugt.
+
 ### Convert images into SVG outputs
 
 ```bash
