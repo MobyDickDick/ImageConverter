@@ -183,12 +183,14 @@ jobs:
       - name: Record and verify alias activation receipt
         env:
           VERIFICATION_WORKFLOW_RUN_ID: ${{ github.run_id }}
+          VERIFICATION_WORKFLOW_RUN_ATTEMPT: ${{ github.run_attempt }}
           VERIFICATION_SOURCE_SHA: ${{ github.sha }}
         run: |
           python tools/record_optimization_telemetry_alias_verification.py \
             telemetry-baseline/recommended-baseline-alias.json \
             telemetry-alias-verification.json \
             --workflow-run-id "$VERIFICATION_WORKFLOW_RUN_ID" \
+            --workflow-run-attempt "$VERIFICATION_WORKFLOW_RUN_ATTEMPT" \
             --verification-source-sha "$VERIFICATION_SOURCE_SHA" \
             --gate-status passed
           python tools/check_optimization_telemetry_alias_verification.py \
@@ -198,7 +200,7 @@ jobs:
       - name: Upload verified alias activation receipt
         uses: actions/upload-artifact@v4
         with:
-          name: optimization-render-telemetry-alias-verification-${{ github.run_id }}
+          name: optimization-render-telemetry-alias-verification-${{ github.run_id }}-${{ github.run_attempt }}
           path: telemetry-alias-verification.json
           if-no-files-found: error
           retention-days: 30

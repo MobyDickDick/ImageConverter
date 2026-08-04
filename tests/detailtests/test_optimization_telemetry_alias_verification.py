@@ -29,12 +29,14 @@ def test_build_verification_receipt_binds_passed_run_to_alias() -> None:
     receipt = build_verification_receipt(
         _alias(),
         workflow_run_id=987,
+        workflow_run_attempt=2,
         gate_status="passed",
         verification_source_sha="abc123",
     )
     assert receipt == {
-        "schema_version": "optimization_render_telemetry_alias_verification_v2",
+        "schema_version": "optimization_render_telemetry_alias_verification_v3",
         "verification_workflow_run_id": 987,
+        "verification_workflow_run_attempt": 2,
         "verification_source_sha": "abc123",
         "gate_status": "passed",
         "verified": True,
@@ -54,6 +56,7 @@ def test_failed_verification_is_recorded_without_being_verified() -> None:
     receipt = build_verification_receipt(
         _alias(),
         workflow_run_id=987,
+        workflow_run_attempt=2,
         gate_status="failed",
         verification_source_sha="abc123",
     )
@@ -66,6 +69,7 @@ def test_build_verification_receipt_rejects_other_source_revision() -> None:
         build_verification_receipt(
             _alias(),
             workflow_run_id=987,
+            workflow_run_attempt=2,
             gate_status="passed",
             verification_source_sha="different",
         )
@@ -79,6 +83,21 @@ def test_build_verification_receipt_rejects_invalid_run_id(
         build_verification_receipt(
             _alias(),
             workflow_run_id=workflow_run_id,
+            workflow_run_attempt=2,
+            gate_status="passed",
+            verification_source_sha="abc123",
+        )
+
+
+@pytest.mark.parametrize("workflow_run_attempt", [0, -1, True])
+def test_build_verification_receipt_rejects_invalid_run_attempt(
+    workflow_run_attempt: int,
+) -> None:
+    with pytest.raises(ValueError, match="run attempt must be a positive integer"):
+        build_verification_receipt(
+            _alias(),
+            workflow_run_id=987,
+            workflow_run_attempt=workflow_run_attempt,
             gate_status="passed",
             verification_source_sha="abc123",
         )
@@ -98,6 +117,8 @@ def test_verification_receipt_cli_writes_machine_readable_result(
             str(receipt_path),
             "--workflow-run-id",
             "987",
+            "--workflow-run-attempt",
+            "2",
             "--verification-source-sha",
             "abc123",
             "--gate-status",

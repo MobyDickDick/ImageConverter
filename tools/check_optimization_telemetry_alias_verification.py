@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 ALIAS_SCHEMA_VERSION = "optimization_render_telemetry_baseline_alias_v1"
-RECEIPT_SCHEMA_VERSION = "optimization_render_telemetry_alias_verification_v2"
+RECEIPT_SCHEMA_VERSION = "optimization_render_telemetry_alias_verification_v3"
 
 
 def verification_errors(alias: dict[str, Any], receipt: dict[str, Any]) -> list[str]:
@@ -42,6 +42,13 @@ def verification_errors(alias: dict[str, Any], receipt: dict[str, Any]) -> list[
     run_id = receipt.get("verification_workflow_run_id")
     if isinstance(run_id, bool) or not isinstance(run_id, int) or run_id <= 0:
         errors.append("verification workflow run ID is not a positive integer")
+    run_attempt = receipt.get("verification_workflow_run_attempt")
+    if (
+        isinstance(run_attempt, bool)
+        or not isinstance(run_attempt, int)
+        or run_attempt <= 0
+    ):
+        errors.append("verification workflow run attempt is not a positive integer")
     if receipt.get("gate_status") != "passed":
         errors.append("verification gate did not pass")
     if receipt.get("verified") is not True:

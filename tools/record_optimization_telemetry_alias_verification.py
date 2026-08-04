@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-RECEIPT_SCHEMA_VERSION = "optimization_render_telemetry_alias_verification_v2"
+RECEIPT_SCHEMA_VERSION = "optimization_render_telemetry_alias_verification_v3"
 ALIAS_SCHEMA_VERSION = "optimization_render_telemetry_baseline_alias_v1"
 GATE_STATUSES = {"passed", "failed", "cancelled", "timed_out"}
 
@@ -17,6 +17,7 @@ def build_verification_receipt(
     alias: dict[str, Any],
     *,
     workflow_run_id: int,
+    workflow_run_attempt: int,
     gate_status: str,
     verification_source_sha: str,
 ) -> dict[str, Any]:
@@ -25,6 +26,12 @@ def build_verification_receipt(
         raise ValueError("Unsupported telemetry baseline alias schema")
     if isinstance(workflow_run_id, bool) or workflow_run_id <= 0:
         raise ValueError("Verification workflow run ID must be a positive integer")
+    if (
+        isinstance(workflow_run_attempt, bool)
+        or not isinstance(workflow_run_attempt, int)
+        or workflow_run_attempt <= 0
+    ):
+        raise ValueError("Verification workflow run attempt must be a positive integer")
     if gate_status not in GATE_STATUSES:
         raise ValueError(
             "Gate status must be one of: " + ", ".join(sorted(GATE_STATUSES))
@@ -42,6 +49,7 @@ def build_verification_receipt(
     return {
         "schema_version": RECEIPT_SCHEMA_VERSION,
         "verification_workflow_run_id": workflow_run_id,
+        "verification_workflow_run_attempt": workflow_run_attempt,
         "verification_source_sha": verification_source_sha,
         "gate_status": gate_status,
         "verified": gate_status == "passed",
@@ -58,6 +66,7 @@ def main() -> int:
     parser.add_argument("alias", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--workflow-run-id", required=True, type=int)
+    parser.add_argument("--workflow-run-attempt", required=True, type=int)
     parser.add_argument("--verification-source-sha", required=True)
     parser.add_argument("--gate-status", required=True, choices=sorted(GATE_STATUSES))
     args = parser.parse_args()
@@ -66,6 +75,7 @@ def main() -> int:
     receipt = build_verification_receipt(
         alias,
         workflow_run_id=args.workflow_run_id,
+        workflow_run_attempt=args.workflow_run_attempt,
         gate_status=args.gate_status,
         verification_source_sha=args.verification_source_sha,
     )
