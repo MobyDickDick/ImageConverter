@@ -21,5 +21,10 @@ def test_workflow_records_checks_and_uploads_passed_alias_receipt() -> None:
     assert '--verification-source-sha "$VERIFICATION_SOURCE_SHA"' in workflow
     assert '--workflow-run-attempt "$VERIFICATION_WORKFLOW_RUN_ATTEMPT"' in workflow
     assert "tools/check_optimization_telemetry_alias_verification.py" in workflow
+    assert (
+        "name: optimization-render-telemetry-alias-verification-"
+        "${{ github.run_id }}-${{ github.run_attempt }}"
+        in workflow[upload_step:]
+    )
     assert "if-no-files-found: error" in workflow[upload_step:]
     assert "retention-days: 30" in workflow[upload_step:]
