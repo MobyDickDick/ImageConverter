@@ -10,7 +10,13 @@ from pathlib import Path
 from typing import Any
 
 ALIAS_SCHEMA_VERSION = "optimization_render_telemetry_baseline_alias_v1"
-RECEIPT_SCHEMA_VERSION = "optimization_render_telemetry_alias_verification_v3"
+RECEIPT_SCHEMA_VERSION = "optimization_render_telemetry_alias_verification_v4"
+VERIFICATION_ARTIFACT_PREFIX = "optimization-render-telemetry-alias-verification"
+
+
+def verification_artifact_name(workflow_run_id: int, workflow_run_attempt: int) -> str:
+    """Return the required artifact name for one workflow attempt."""
+    return f"{VERIFICATION_ARTIFACT_PREFIX}-{workflow_run_id}-{workflow_run_attempt}"
 
 
 def verification_errors(alias: dict[str, Any], receipt: dict[str, Any]) -> list[str]:
@@ -49,6 +55,17 @@ def verification_errors(alias: dict[str, Any], receipt: dict[str, Any]) -> list[
         or run_attempt <= 0
     ):
         errors.append("verification workflow run attempt is not a positive integer")
+    if (
+        isinstance(run_id, int)
+        and not isinstance(run_id, bool)
+        and run_id > 0
+        and isinstance(run_attempt, int)
+        and not isinstance(run_attempt, bool)
+        and run_attempt > 0
+        and receipt.get("verification_artifact_name")
+        != verification_artifact_name(run_id, run_attempt)
+    ):
+        errors.append("verification artifact name does not match workflow attempt")
     if receipt.get("gate_status") != "passed":
         errors.append("verification gate did not pass")
     if receipt.get("verified") is not True:

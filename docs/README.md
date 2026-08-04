@@ -14,6 +14,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – Revisionsgebundener Telemetrie-Alias-Beleg Run ACI (2026-08-04)](next_arbeitspaket_2026-08-04_runACI.md)
 - [Nächstes Arbeitspaket – Versuchssicherer Telemetrie-Alias-Beleg Run ACJ (2026-08-04)](next_arbeitspaket_2026-08-04_runACJ.md)
 - [Nächstes Arbeitspaket – Versuchssicheres Telemetrie-Alias-Artefakt Run ACK (2026-08-04)](next_arbeitspaket_2026-08-04_runACK.md)
+- [Nächstes Arbeitspaket – Selbstbeschreibendes Telemetrie-Alias-Artefakt Run ACL (2026-08-04)](next_arbeitspaket_2026-08-04_runACL.md)
 - [Nächstes Arbeitspaket – CI-Exit für Optimierungs-Telemetrie Run ABW (2026-08-02)](next_arbeitspaket_2026-08-02_runABW.md)
 - [Nächstes Arbeitspaket – CI-Beispiel für Optimierungs-Telemetrie Run ABX (2026-08-03)](next_arbeitspaket_2026-08-03_runABX.md)
 - [Nächstes Arbeitspaket – Dauerhafter Telemetrie-Baseline-Kanal Run ABZ (2026-08-03)](next_arbeitspaket_2026-08-03_runABZ.md)

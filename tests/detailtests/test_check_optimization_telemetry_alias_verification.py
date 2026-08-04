@@ -99,6 +99,23 @@ def test_checker_rejects_missing_workflow_run_attempt() -> None:
     ]
 
 
+def test_checker_rejects_artifact_name_from_other_attempt() -> None:
+    alias = _alias()
+    receipt = build_verification_receipt(
+        alias,
+        workflow_run_id=987,
+        workflow_run_attempt=2,
+        gate_status="passed",
+        verification_source_sha="abc123",
+    )
+    receipt["verification_artifact_name"] = (
+        "optimization-render-telemetry-alias-verification-987-1"
+    )
+    assert verification_errors(alias, receipt) == [
+        "verification artifact name does not match workflow attempt"
+    ]
+
+
 def test_cli_returns_nonzero_for_receipt_from_other_alias(
     tmp_path, monkeypatch, capsys
 ) -> None:

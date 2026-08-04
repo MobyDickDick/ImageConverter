@@ -8,9 +8,15 @@ import json
 from pathlib import Path
 from typing import Any
 
-RECEIPT_SCHEMA_VERSION = "optimization_render_telemetry_alias_verification_v3"
+RECEIPT_SCHEMA_VERSION = "optimization_render_telemetry_alias_verification_v4"
 ALIAS_SCHEMA_VERSION = "optimization_render_telemetry_baseline_alias_v1"
 GATE_STATUSES = {"passed", "failed", "cancelled", "timed_out"}
+VERIFICATION_ARTIFACT_PREFIX = "optimization-render-telemetry-alias-verification"
+
+
+def verification_artifact_name(workflow_run_id: int, workflow_run_attempt: int) -> str:
+    """Return the immutable artifact name for one workflow attempt."""
+    return f"{VERIFICATION_ARTIFACT_PREFIX}-{workflow_run_id}-{workflow_run_attempt}"
 
 
 def build_verification_receipt(
@@ -50,6 +56,9 @@ def build_verification_receipt(
         "schema_version": RECEIPT_SCHEMA_VERSION,
         "verification_workflow_run_id": workflow_run_id,
         "verification_workflow_run_attempt": workflow_run_attempt,
+        "verification_artifact_name": verification_artifact_name(
+            workflow_run_id, workflow_run_attempt
+        ),
         "verification_source_sha": verification_source_sha,
         "gate_status": gate_status,
         "verified": gate_status == "passed",
