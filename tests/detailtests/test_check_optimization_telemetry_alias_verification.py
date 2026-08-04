@@ -74,3 +74,29 @@ def test_cli_returns_nonzero_for_receipt_from_other_alias(
 
     assert main() == 1
     assert "baseline_run_id does not match alias" in capsys.readouterr().out
+
+
+def test_cli_reports_all_document_loading_errors(tmp_path, monkeypatch, capsys) -> None:
+    alias_path = tmp_path / "alias.json"
+    receipt_path = tmp_path / "receipt.json"
+    alias_path.write_text("{not-json", encoding="utf-8")
+    receipt_path.write_text("[]", encoding="utf-8")
+    monkeypatch.setattr("sys.argv", ["check.py", str(alias_path), str(receipt_path)])
+
+    assert main() == 1
+    output = capsys.readouterr().out
+    assert "Telemetry alias verification: FAIL" in output
+    assert "alias is not valid JSON: line 1 column 2" in output
+    assert "receipt root must be a JSON object" in output
+
+
+def test_cli_reports_missing_documents_as_gate_failure(
+    tmp_path, monkeypatch, capsys
+) -> None:
+    alias_path = tmp_path / "missing-alias.json"
+    receipt_path = tmp_path / "missing-receipt.json"
+    monkeypatch.setattr("sys.argv", ["check.py", str(alias_path), str(receipt_path)])
+
+    assert main() == 1
+    output = capsys.readouterr().out
+    assert output.count("cannot read") == 2
