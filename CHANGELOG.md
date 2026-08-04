@@ -1,3 +1,4 @@
+- Run ACK gives each telemetry-alias verification receipt artifact an attempt-specific name so workflow reruns remain independently retrievable.
 - Run ACJ binds telemetry-alias verification receipts to the exact workflow run attempt so reruns cannot overwrite the identity of the verified execution.
 - Run ACI binds every successful telemetry-alias verification receipt to the exact promoted source revision and rejects cross-revision evidence.
 - Run ACH records, validates, and uploads a run-bound telemetry-alias verification receipt automatically after the no-override gate passes.
