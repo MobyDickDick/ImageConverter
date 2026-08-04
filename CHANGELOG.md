@@ -192,6 +192,8 @@ All notable changes to ImageConverter will be documented in this file.
 - Den letzten aktiven PF8-Kandidaten nach generalisiertem Kreis-/Linien-Lerneffekt entfernt; Kandidatenliste und Linkage-Report sind nun synchron leer und warten auf eine neue Qualitätsauswertung.
 # Run ZY (2026-07-27)
 
+- Run ACL binds telemetry-alias verification receipts to the expected workflow run ID and attempt when the CI gate consumes them.
+
 - Run ABX adds a manually dispatched, isolated GitHub Actions example that transfers an optimization-render telemetry baseline between jobs, exercises the strict converter exit contract, verifies the passing gate report, and preserves diagnostic reports as an artifact.
 
 - Plan-B Run ABF adds 68719476736th-yoctofine catalog-free opacity probes for ColorPatch/RectBorder Geometry-IR elements and documents the GE9013_1M optimizer-only learning effect.

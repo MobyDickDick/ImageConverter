@@ -19,7 +19,13 @@ def verification_artifact_name(workflow_run_id: int, workflow_run_attempt: int) 
     return f"{VERIFICATION_ARTIFACT_PREFIX}-{workflow_run_id}-{workflow_run_attempt}"
 
 
-def verification_errors(alias: dict[str, Any], receipt: dict[str, Any]) -> list[str]:
+def verification_errors(
+    alias: dict[str, Any],
+    receipt: dict[str, Any],
+    *,
+    expected_workflow_run_id: int | None = None,
+    expected_workflow_run_attempt: int | None = None,
+) -> list[str]:
     """Return every reason why *receipt* does not verify *alias*."""
     errors: list[str] = []
     if alias.get("schema_version") != ALIAS_SCHEMA_VERSION:
@@ -77,6 +83,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("alias", type=Path)
     parser.add_argument("receipt", type=Path)
+    parser.add_argument("--expected-workflow-run-id", type=int)
+    parser.add_argument("--expected-workflow-run-attempt", type=int)
     args = parser.parse_args()
 
     documents: dict[str, dict[str, Any]] = {}
@@ -105,7 +113,12 @@ def main() -> int:
 
     alias = documents["alias"]
     receipt = documents["receipt"]
-    errors = verification_errors(alias, receipt)
+    errors = verification_errors(
+        alias,
+        receipt,
+        expected_workflow_run_id=args.expected_workflow_run_id,
+        expected_workflow_run_attempt=args.expected_workflow_run_attempt,
+    )
     if errors:
         print("Telemetry alias verification: FAIL")
         for error in errors:
