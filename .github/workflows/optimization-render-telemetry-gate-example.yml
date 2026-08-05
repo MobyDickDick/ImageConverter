@@ -185,6 +185,7 @@ jobs:
           VERIFICATION_WORKFLOW_RUN_ID: ${{ github.run_id }}
           VERIFICATION_WORKFLOW_RUN_ATTEMPT: ${{ github.run_attempt }}
           VERIFICATION_SOURCE_SHA: ${{ github.sha }}
+          VERIFICATION_ARTIFACT_NAME: optimization-render-telemetry-alias-verification-${{ github.run_id }}-${{ github.run_attempt }}
         run: |
           python tools/record_optimization_telemetry_alias_verification.py \
             telemetry-baseline/recommended-baseline-alias.json \
@@ -197,7 +198,8 @@ jobs:
             telemetry-baseline/recommended-baseline-alias.json \
             telemetry-alias-verification.json \
             --expected-workflow-run-id "$VERIFICATION_WORKFLOW_RUN_ID" \
-            --expected-workflow-run-attempt "$VERIFICATION_WORKFLOW_RUN_ATTEMPT"
+            --expected-workflow-run-attempt "$VERIFICATION_WORKFLOW_RUN_ATTEMPT" \
+            --expected-verification-artifact-name "$VERIFICATION_ARTIFACT_NAME"
 
       - name: Upload verified alias activation receipt
         uses: actions/upload-artifact@v4
