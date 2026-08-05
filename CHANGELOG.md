@@ -1,3 +1,4 @@
+- Run ACN requires the expected telemetry-alias workflow run ID and attempt as one complete, positive-integer context so a verification cannot be accidentally bound along only one workflow dimension.
 - Run ACM restores strict comparison of telemetry-alias receipts with the expected workflow run and attempt after the Run ACL merge and adds a direct regression test for both mismatches.
 - Run ACL persists the attempt-specific telemetry-alias verification artifact name in the receipt and rejects receipts whose artifact identity does not match their workflow run and attempt.
 - Run ACK gives each telemetry-alias verification receipt artifact an attempt-specific name so workflow reruns remain independently retrievable.

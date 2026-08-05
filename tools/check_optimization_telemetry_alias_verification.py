@@ -25,9 +25,19 @@ def verification_errors(
     *,
     expected_workflow_run_id: int | None = None,
     expected_workflow_run_attempt: int | None = None,
+    expected_verification_artifact_name: str | None = None,
 ) -> list[str]:
     """Return every reason why *receipt* does not verify *alias*."""
     errors: list[str] = []
+    expected_context = (expected_workflow_run_id, expected_workflow_run_attempt)
+    if (expected_workflow_run_id is None) != (expected_workflow_run_attempt is None):
+        errors.append("expected workflow run ID and attempt must be provided together")
+    for label, value in zip(("run ID", "run attempt"), expected_context):
+        if value is not None and (
+            isinstance(value, bool) or not isinstance(value, int) or value <= 0
+        ):
+            errors.append(f"expected workflow {label} is not a positive integer")
+
     if alias.get("schema_version") != ALIAS_SCHEMA_VERSION:
         errors.append("unsupported telemetry baseline alias schema")
     if receipt.get("schema_version") != RECEIPT_SCHEMA_VERSION:
@@ -95,6 +105,7 @@ def main() -> int:
     parser.add_argument("receipt", type=Path)
     parser.add_argument("--expected-workflow-run-id", type=int)
     parser.add_argument("--expected-workflow-run-attempt", type=int)
+    parser.add_argument("--expected-verification-artifact-name")
     args = parser.parse_args()
 
     documents: dict[str, dict[str, Any]] = {}
@@ -128,6 +139,7 @@ def main() -> int:
         receipt,
         expected_workflow_run_id=args.expected_workflow_run_id,
         expected_workflow_run_attempt=args.expected_workflow_run_attempt,
+        expected_verification_artifact_name=args.expected_verification_artifact_name,
     )
     if errors:
         print("Telemetry alias verification: FAIL")
