@@ -177,6 +177,25 @@ def test_checker_rejects_invalid_expected_workflow_context() -> None:
     ]
 
 
+def test_checker_binds_receipt_to_expected_artifact_name() -> None:
+    alias = _alias()
+    receipt = build_verification_receipt(
+        alias,
+        workflow_run_id=987,
+        workflow_run_attempt=2,
+        gate_status="passed",
+        verification_source_sha="abc123",
+    )
+
+    assert verification_errors(
+        alias,
+        receipt,
+        expected_verification_artifact_name=(
+            "optimization-render-telemetry-alias-verification-987-3"
+        ),
+    ) == ["verification artifact name does not match expected artifact"]
+
+
 def test_cli_returns_nonzero_for_receipt_from_other_alias(
     tmp_path, monkeypatch, capsys
 ) -> None:
@@ -225,11 +244,15 @@ def test_cli_returns_nonzero_for_receipt_from_other_workflow_attempt(
             "987",
             "--expected-workflow-run-attempt",
             "3",
+            "--expected-verification-artifact-name",
+            "optimization-render-telemetry-alias-verification-987-3",
         ],
     )
 
     assert main() == 1
-    assert "run attempt does not match expected run" in capsys.readouterr().out
+    output = capsys.readouterr().out
+    assert "run attempt does not match expected run" in output
+    assert "artifact name does not match expected artifact" in output
 
 
 def test_cli_reports_all_document_loading_errors(tmp_path, monkeypatch, capsys) -> None:
