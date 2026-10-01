@@ -11,6 +11,7 @@ _DEFAULT_RANGE_END_REF = "AR" + "0104"
 from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
 from src.iCCModules import imageCompositeConverterDependencyBootstrapRuntime as dependency_bootstrap_runtime_helpers
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
+from src.iCCModules import imageCompositeConverterBatchRunState as batch_run_state_helpers
 from src.iCCModules import imageCompositeConverterBestlist as conversion_bestlist_helpers
 from src.iCCModules import imageCompositeConverterChainTelemetry as chain_telemetry_helpers
 from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_badge_helpers
@@ -1289,8 +1290,11 @@ def convertRange(
         "on",
     }
     checkpoint_resume_rows: dict[str, dict[str, object]] = {}
+    checkpoint_path = Path(reports_out_dir) / "conversion_checkpoint.json"
+    previous_run_id, previous_started_at = batch_run_state_helpers.readCheckpointIdentityImpl(checkpoint_path)
+    run_id = previous_run_id if checkpoint_resume_enabled and previous_run_id else batch_run_state_helpers.newRunIdImpl()
+    started_at = previous_started_at if checkpoint_resume_enabled and previous_started_at else batch_run_state_helpers.utcNowImpl()
     if checkpoint_resume_enabled and not force_reconvert:
-        checkpoint_path = Path(reports_out_dir) / "conversion_checkpoint.json"
         checkpoint_result_map = batch_reporting_helpers.loadConversionCheckpointResultMapImpl(str(checkpoint_path))
         process_files, checkpoint_resume_rows = batch_reporting_helpers.partitionCheckpointResumeRowsImpl(
             process_files=process_files,
@@ -1302,9 +1306,11 @@ def convertRange(
             if variant and variant not in conversion_bestlist_rows:
                 conversion_bestlist_rows[variant] = dict(row)
         if checkpoint_resume_rows:
+            snapshot_path = batch_run_state_helpers.snapshotResumeArtifactsImpl(reports_out_dir, run_id=run_id)
             print(
                 f"[INFO] Checkpoint-Resume: {len(checkpoint_resume_rows)} bereits abgeschlossene "
-                f"Konvertierungen aus conversion_checkpoint.json geladen; {len(process_files)} Dateien bleiben offen."
+                f"Konvertierungen aus conversion_checkpoint.json geladen; {len(process_files)} Dateien bleiben offen. "
+                f"Snapshot: {snapshot_path}"
             )
     reused_variants = {
         str(row.get("variant", "")).strip().upper()
@@ -1343,6 +1349,8 @@ def convertRange(
         result_map_path = Path(reports_out_dir) / "conversion_result_map.json"
         checkpoint_payload = {
             "schema_version": "conversion_checkpoint_v1",
+            "run_id": run_id,
+            "started_at": started_at,
             "stage": str(meta.get("stage", "")),
             "filename": str(meta.get("filename", "")),
             "variant": str(meta.get("variant", "")),
@@ -1357,14 +1365,8 @@ def convertRange(
         _writeConversionBestlistMetrics(conversion_bestlist_path, conversion_bestlist_rows)
         _writeBatchFailureSummary(reports_out_dir, batch_failures)
         _writeQualityPassReport(reports_out_dir, quality_logs)
-        result_map_path.write_text(
-            json.dumps(result_map, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
-        checkpoint_path.write_text(
-            json.dumps(checkpoint_payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
+        batch_run_state_helpers.atomicWriteJsonImpl(result_map_path, result_map)
+        batch_run_state_helpers.atomicWriteJsonImpl(checkpoint_path, checkpoint_payload)
 
     def _runOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
         return conversion_execution_helpers.convertOneImpl(
@@ -1596,6 +1598,38 @@ def convertRange(
             batch_failures=batch_failures,
         )
     _moveNonconvertableSources(folder_path=folder_path, batch_failures=batch_failures)
+
+    completion_manifest = batch_run_state_helpers.buildCompletionManifestImpl(
+        run_id=run_id,
+        started_at=started_at,
+        input_count=len(files),
+        result_map=result_map,
+        failures=batch_failures,
+        run_seed=run_seed,
+        resumed_result_count=len(checkpoint_resume_rows),
+    )
+    batch_run_state_helpers.atomicWriteJsonImpl(
+        Path(reports_out_dir) / "conversion_result_map.json",
+        result_map,
+    )
+    batch_run_state_helpers.atomicWriteJsonImpl(
+        Path(reports_out_dir) / "conversion_run_manifest.json",
+        completion_manifest,
+    )
+    batch_run_state_helpers.atomicWriteJsonImpl(
+        checkpoint_path,
+        {
+            "schema_version": "conversion_checkpoint_v1",
+            "run_id": run_id,
+            "started_at": started_at,
+            "stage": "complete",
+            "processed_result_count": len(result_map),
+            "batch_failure_count": len(batch_failures),
+            "run_seed": int(run_seed),
+            "result_map_path": "conversion_result_map.json",
+            "completion_manifest_path": "conversion_run_manifest.json",
+        },
+    )
 
     debug_event(
         "run_completed",
