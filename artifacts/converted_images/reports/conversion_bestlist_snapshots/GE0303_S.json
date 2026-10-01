@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "GE0303",
-  "best_error": 20.006666666666668,
+  "best_error": 20.3056,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.6720000000204891,
-  "error_per_pixel": 0.008002666666666667,
-  "error_pixel_cluster_count": 33.0,
-  "error_pixel_cluster_excess": 0.3293513513513514,
-  "error_pixel_count": 555.0,
+  "elapsed_seconds": 0.25,
+  "error_per_pixel": 0.00812224,
+  "error_pixel_cluster_count": 30.0,
+  "error_pixel_cluster_excess": 0.31041364452423703,
+  "error_pixel_count": 557.0,
   "filename": "GE0303_S.jpg",
   "h": 50,
-  "largest_error_pixel_cluster_fraction": 0.5513513513513514,
-  "localized_error_fraction": 0.8656029157079768,
-  "mean_delta2": 4534.4638671875,
+  "largest_error_pixel_cluster_fraction": 0.533213644524237,
+  "localized_error_fraction": 0.8635274587221824,
+  "mean_delta2": 4368.4482421875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
@@ -43,8 +47,8 @@
     },
     "description_fragments": [
       {
-        "key": "GE0303",
-        "source": "base_name",
+        "key": "GE0303_S",
+        "source": "variant_name",
         "text": "Hintergrund: GE0999: Vordergrund britische Flagge"
       }
     ],
@@ -55,6 +59,55 @@
     "geometry_ir": [],
     "label": "",
     "mode": "insufficient_description",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.03966622132301481,
+          0.04278146627089791,
+          0.9208294654434488,
+          0.9215642728460334
+        ],
+        "fill": "#94BCD6",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9831,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#D1E0EB",
+        "stroke_width": 0.03620156096674485
+      },
+      {
+        "bbox": [
+          0.6995096945525303,
+          0.5017737264870265,
+          0.3004598716560969,
+          0.38080940893483595
+        ],
+        "fill": "#BED3DC",
+        "font_size": 0.342,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7995,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "full_image",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "F"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -66,9 +119,10 @@
     "variant_name": "GE0303_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 14449.425246292216,
-  "std_delta2": 12222.8935546875,
-  "tile_std_delta2": 8140.993581054195,
+  "rgb_rmse_per_channel": 38.15952586265322,
+  "spatial_quality_score": 14406.740154685624,
+  "std_delta2": 11529.90625,
+  "tile_std_delta2": 8134.178344098007,
   "variant": "GE0303_S",
   "w": 50
 }

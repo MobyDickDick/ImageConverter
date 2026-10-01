@@ -1,15 +1,41 @@
 {
+  "actual_iterations": 64,
   "base": "AC0533",
-  "best_error": 11.442037037037037,
+  "best_error": 11.497777777777777,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.006356687242798354,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.20300000000861473,
+  "error_per_pixel": 0.006387654320987654,
+  "error_pixel_cluster_count": 15.0,
+  "error_pixel_cluster_excess": 0.2563675213675214,
+  "error_pixel_count": 325.0,
   "filename": "AC0533_M_sia.jpg",
   "h": 60,
-  "mean_delta2": 2392.554931640625,
+  "largest_error_pixel_cluster_fraction": 0.4369230769230769,
+  "localized_error_fraction": 0.7331837724180835,
+  "mean_delta2": 2864.8798828125,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -18,11 +44,6 @@
       "status": "ok"
     },
     "description_fragments": [
-      {
-        "key": "AC0533",
-        "source": "base_name",
-        "text": "Unzugeordnete Wurzelform aus der Serie AC0533_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen."
-      },
       {
         "key": "AC0533_M_sia",
         "source": "variant_name",
@@ -47,7 +68,11 @@
     "top_source_ref": null,
     "variant_name": "AC0533_M_SIA"
   },
-  "std_delta2": 7680.16943359375,
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 32.88521333151687,
+  "spatial_quality_score": 8925.009625694644,
+  "std_delta2": 8865.18359375,
+  "tile_std_delta2": 3730.821288107767,
   "variant": "AC0533_M_SIA",
   "w": 30
 }

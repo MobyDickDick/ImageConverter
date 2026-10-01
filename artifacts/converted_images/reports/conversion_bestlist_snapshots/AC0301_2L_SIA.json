@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "AC0301_2L",
-  "best_error": 27.23609375,
+  "best_error": 25.57953125,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 1.312999999965541,
-  "error_per_pixel": 0.0042556396484375,
-  "error_pixel_cluster_count": 24.0,
-  "error_pixel_cluster_excess": 0.6857695179180887,
-  "error_pixel_count": 1465.0,
+  "elapsed_seconds": 0.25,
+  "error_per_pixel": 0.0039968017578125,
+  "error_pixel_cluster_count": 25.0,
+  "error_pixel_cluster_excess": 0.7047244669876204,
+  "error_pixel_count": 1454.0,
   "filename": "AC0301_2L_sia.jpg",
   "h": 80,
-  "largest_error_pixel_cluster_fraction": 0.9146757679180887,
-  "localized_error_fraction": 0.5776057324764793,
-  "mean_delta2": 6969.19580078125,
+  "largest_error_pixel_cluster_fraction": 0.9319119669876204,
+  "localized_error_fraction": 0.5780444737600751,
+  "mean_delta2": 6857.35791015625,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
@@ -58,10 +62,10 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.009710623588749504,
-          0.05092050702852104,
-          0.924115308224631,
-          0.9236633258696042
+          0.01472948388967791,
+          0.0479556266177102,
+          0.924530060793787,
+          0.9237741279751269
         ],
         "fill": "#57AB62",
         "id": "perception_circle_background",
@@ -75,14 +79,14 @@
           "source": "non_composite_perception_seed"
         },
         "stroke": "#7C9A80",
-        "stroke_width": 0.03598921722704195
+        "stroke_width": 0.03598944082889291
       },
       {
         "bbox": [
-          0.6894843357269815,
-          0.034868850460866144,
-          0.274857067538087,
-          0.7635115264915149
+          0.6899301820766757,
+          0.03528344504201858,
+          0.2751617119944759,
+          0.7612471019675694
         ],
         "id": "perception_line",
         "kind": "OrthogonalPolyline",
@@ -108,14 +112,14 @@
           ]
         ],
         "stroke": "#4f4f4f",
-        "stroke_width": 0.27461482376706653
+        "stroke_width": 0.27611559631984667
       },
       {
         "bbox": [
-          0.5847216064367667,
-          0.16236384244546978,
-          0.2998770370206418,
-          0.05155296619246287
+          0.5879935524652028,
+          0.16273998712303422,
+          0.30195254121564047,
+          0.05043154676319375
         ],
         "fill": "#59A363",
         "font_size": 0.27,
@@ -148,9 +152,10 @@
     "variant_name": "AC0301_2L_SIA"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 17664.631875822317,
-  "std_delta2": 14606.1513671875,
-  "tile_std_delta2": 6511.122645311892,
+  "rgb_rmse_per_channel": 47.80989406024744,
+  "spatial_quality_score": 17494.663672708615,
+  "std_delta2": 14542.0830078125,
+  "tile_std_delta2": 6479.390796110345,
   "variant": "AC0301_2L_SIA",
   "w": 80
 }

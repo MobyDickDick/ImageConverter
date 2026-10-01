@@ -1,15 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "AC0502_1L",
-  "best_error": 14.541666666666666,
+  "best_error": 5.4705208333333335,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.7659999999996217,
-  "error_per_pixel": 0.004544270833333333,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.28199999999196734,
+  "error_per_pixel": 0.0017095377604166668,
+  "error_pixel_cluster_count": 22.0,
+  "error_pixel_cluster_excess": 0.5237761563876652,
+  "error_pixel_count": 227.0,
   "filename": "AC0502_1L_sia.jpg",
   "h": 40,
-  "localized_error_fraction": 0.9374022752535742,
-  "mean_delta2": 5375.82958984375,
+  "largest_error_pixel_cluster_fraction": 0.5947136563876652,
+  "localized_error_fraction": 0.86497419992914,
+  "mean_delta2": 930.5328369140625,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -108,7 +118,30 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 14.541666666666666,
+      "final_error": 12.882395833333334,
+      "generic_element_refinement": {
+        "final_error": 12.882395833333334,
+        "initial_error": 14.541666666666666,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 1.6017708333333331,
+            "element": "main_rect",
+            "error_after": 12.939895833333333,
+            "error_before": 14.541666666666666,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.05749999999999922,
+            "element": "diagonal_1_tr_bl",
+            "error_after": 12.882395833333334,
+            "error_before": 12.939895833333333,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 34.69197916666667,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -257,26 +290,163 @@
     "mode": "auto",
     "optimized_geometry_ir": [
       {
-        "bbox": [
-          0.7012,
-          0.2744,
-          0.23759999999999995,
-          0.4712
+        "closed": false,
+        "fill": "none",
+        "id": "diagram_diagonal_connector",
+        "kind": "PolygonPath",
+        "perception_seed": {
+          "candidate_schema_version": "perception_family_seed_v1",
+          "confidence": 1.0,
+          "detector": "normalized_primitive_relations",
+          "kind": "diagram_topology",
+          "source": "non_composite_perception_seed"
+        },
+        "points": [
+          [
+            0.35625,
+            0.8
+          ],
+          [
+            0.65625,
+            0.2
+          ]
         ],
-        "fill": "#d8d8d8",
-        "id": "main_rect",
-        "kind": "RectBorder",
-        "stroke": "#666666",
-        "stroke_width": 0.02485
+        "stroke": "#8a8a8a",
+        "stroke_width": 0.0255262472067049
       },
       {
-        "clip_to": "main_rect",
-        "direction": "tr_bl",
-        "id": "diagonal_1_tr_bl",
-        "kind": "DiagonalBand",
-        "rect_ref": "main_rect",
-        "stroke": "#707070",
-        "stroke_width": 0.03195
+        "closed": false,
+        "fill": "none",
+        "id": "diagram_horizontal_connector",
+        "kind": "PolygonPath",
+        "perception_seed": {
+          "candidate_schema_version": "perception_family_seed_v1",
+          "confidence": 1.0,
+          "detector": "normalized_primitive_relations",
+          "kind": "diagram_topology",
+          "source": "non_composite_perception_seed"
+        },
+        "points": [
+          [
+            0.517875,
+            0.5
+          ],
+          [
+            0.6975,
+            0.5
+          ]
+        ],
+        "stroke": "#8a8a8a",
+        "stroke_width": 0.025890460051574696
+      },
+      {
+        "bbox": [
+          0.6986766032056935,
+          0.2517635521105278,
+          0.24935501565334467,
+          0.501599659143054
+        ],
+        "fill": "#df1f48",
+        "id": "diagram_red_field",
+        "kind": "ColorPatch",
+        "perception_seed": {
+          "candidate_schema_version": "perception_family_seed_v1",
+          "confidence": 1.0,
+          "detector": "normalized_primitive_relations",
+          "kind": "diagram_topology",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "none"
+      },
+      {
+        "closed": false,
+        "fill": "none",
+        "id": "diagram_cross_falling",
+        "kind": "PolygonPath",
+        "perception_seed": {
+          "candidate_schema_version": "perception_family_seed_v1",
+          "confidence": 1.0,
+          "detector": "normalized_primitive_relations",
+          "kind": "diagram_topology",
+          "source": "non_composite_perception_seed"
+        },
+        "points": [
+          [
+            0.70085,
+            0.74815
+          ],
+          [
+            0.94915,
+            0.25185
+          ]
+        ],
+        "stroke": "#ffffff",
+        "stroke_width": 0.013986014025984313
+      },
+      {
+        "closed": false,
+        "fill": "none",
+        "id": "diagram_cross_rising",
+        "kind": "PolygonPath",
+        "perception_seed": {
+          "candidate_schema_version": "perception_family_seed_v1",
+          "confidence": 1.0,
+          "detector": "normalized_primitive_relations",
+          "kind": "diagram_topology",
+          "source": "non_composite_perception_seed"
+        },
+        "points": [
+          [
+            0.70085,
+            0.25185
+          ],
+          [
+            0.94915,
+            0.74815
+          ]
+        ],
+        "stroke": "#ffffff",
+        "stroke_width": 0.013854315617643295
+      },
+      {
+        "bbox": [
+          0.6998101252077921,
+          0.2503544073983148,
+          0.24888341841400655,
+          0.4989077376384721
+        ],
+        "fill": "none",
+        "id": "diagram_field_border",
+        "kind": "RectBorder",
+        "perception_seed": {
+          "candidate_schema_version": "perception_family_seed_v1",
+          "confidence": 1.0,
+          "detector": "normalized_primitive_relations",
+          "kind": "diagram_topology",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#8a8a8a",
+        "stroke_width": 0.01232695357297436
+      },
+      {
+        "bbox": [
+          0.4669180065448555,
+          0.41202051617078206,
+          0.08897923740594463,
+          0.175181529253332
+        ],
+        "fill": "#e6e6e6",
+        "id": "diagram_circle_anchor",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_family_seed_v1",
+          "confidence": 1.0,
+          "detector": "normalized_primitive_relations",
+          "kind": "diagram_topology",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#8a8a8a",
+        "stroke_width": 0.022453686555664435
       }
     ],
     "semantic_conflicts": [],
@@ -290,9 +460,10 @@
     "variant_name": "AC0502_1L_SIA"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 17913.518270309745,
-  "std_delta2": 14811.42578125,
-  "tile_std_delta2": 10473.803198493795,
+  "rgb_rmse_per_channel": 17.61185998992405,
+  "spatial_quality_score": 3186.510387458095,
+  "std_delta2": 3598.0537109375,
+  "tile_std_delta2": 1451.340998047334,
   "variant": "AC0502_1L_SIA",
   "w": 80
 }

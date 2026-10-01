@@ -1,15 +1,41 @@
 {
+  "actual_iterations": 64,
   "base": "WEATHER05",
-  "best_error": 20.219922959777836,
+  "best_error": 16.56660395950909,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.005434002407895146,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.28100000000267755,
+  "error_per_pixel": 0.004452191335530527,
+  "error_pixel_cluster_count": 21.0,
+  "error_pixel_cluster_excess": 0.4442212761142308,
+  "error_pixel_count": 893.0,
   "filename": "weather05.jpg",
   "h": 61,
-  "mean_delta2": 3991.403564453125,
+  "largest_error_pixel_cluster_fraction": 0.6842105263157895,
+  "localized_error_fraction": 0.766014335583623,
+  "mean_delta2": 2338.17431640625,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -39,7 +65,11 @@
     "top_source_ref": null,
     "variant_name": "WEATHER05"
   },
-  "std_delta2": 9852.29296875,
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 35.05740270435047,
+  "spatial_quality_score": 11115.802277566227,
+  "std_delta2": 6922.30029296875,
+  "tile_std_delta2": 5480.491480827404,
   "variant": "WEATHER05",
   "w": 61
 }

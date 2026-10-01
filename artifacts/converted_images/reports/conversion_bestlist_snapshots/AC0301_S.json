@@ -1,15 +1,41 @@
 {
+  "actual_iterations": 64,
   "base": "AC0301",
-  "best_error": 13.08375,
+  "best_error": 13.085,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.00817734375,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.23500000000058208,
+  "error_per_pixel": 0.008178125000000001,
+  "error_pixel_cluster_count": 1.0,
+  "error_pixel_cluster_excess": 0.769375,
+  "error_pixel_count": 369.0,
   "filename": "AC0301_S.jpg",
   "h": 40,
-  "mean_delta2": 1675.6424560546875,
+  "largest_error_pixel_cluster_fraction": 1.0,
+  "localized_error_fraction": 0.5389113487037781,
+  "mean_delta2": 1670.5762939453125,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [
         "missing_geometry_terms"
@@ -21,8 +47,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0301",
-        "source": "base_name",
+        "key": "AC0301_S",
+        "source": "variant_name",
         "text": "Kompresor grauer Hintergrund nach oben"
       }
     ],
@@ -33,6 +59,29 @@
     "geometry_ir": [],
     "label": "",
     "mode": "insufficient_description",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.026142939473539305,
+          0.025218722592325153,
+          0.9016635801173802,
+          0.9004268670632934
+        ],
+        "fill": "#E2E2E2",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.8376,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "ring",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#E3E3E3",
+        "stroke_width": 0.1880547578668339
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -43,7 +92,11 @@
     "top_source_ref": null,
     "variant_name": "AC0301_S"
   },
-  "std_delta2": 4158.998046875,
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 23.59785508575806,
+  "spatial_quality_score": 4231.789980064039,
+  "std_delta2": 4159.66552734375,
+  "tile_std_delta2": 1535.1440426133279,
   "variant": "AC0301_S",
   "w": 40
 }

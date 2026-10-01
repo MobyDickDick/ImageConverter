@@ -1,0 +1,49 @@
+run-meta: run_seed=221693115 pass_seed_offset=39 trace_id=223688356974
+status=semantic_ok
+quality=borderline
+quality_reason=semantic_ok_trotz_hohem_elementfehler:text=95.561
+quality_elevated_elements=circle,text
+redraw_variation: seed=223688356974 changed_params=cx:10.500->10.694 | cy:7.500->7.662 | r:8.000->8.117 | stroke_circle:1.000->1.011
+semantic-guard: Textmodus aktiv (voc).
+small_variant_mode_active: reason=min_dim, min_dim=14.800, mask_dilate_px=1, text_mode=voc, arm_min_ratio=0.000, stem_min_ratio=0.000
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=91.022
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 10.000->11.500, cy 10.000->7.500 (best_err=72.679)
+perf_probe: circle_center_elapsed round=1 elapsed=0.06s
+circle: Radius-Bracketing r 7.400->8.000 (best_err=72.679, full_err=42.498); Kandidaten=7.200->72.679, 7.500->72.679, 8.400->72.679
+perf_probe: circle_radius_elapsed round=1 elapsed=0.00s
+text: Fehler=101.154
+text: Breiten-Bracketing voc_font_scale 0.562->0.900; Kandidaten=0.900->98.410, 1.125->104.498, 1.350->100.572, 1.650->107.439, 1.950->111.668, 2.175->108.941, 2.400->106.417
+perf_probe: global_search_elapsed round=1 elapsed=0.00s
+Runde 1: Gesamtfehler=45.450; Qualität (MAE-basiert, höher=besser): 82.01% -> 82.18% | mittlere Pixelabweichung (MAE, kleiner=besser): 45.867 -> 45.450 | Mean-Delta² (kleiner=besser): 12239.947 -> 11768.025 | Qualitätsgewinn=+0.417 (+0.91%) | Wirkung=verbessert
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=74.436
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 11.500->10.500, cy 7.500->7.500 (best_err=67.317)
+perf_probe: circle_center_elapsed round=2 elapsed=0.03s
+circle: Radius-Bracketing keine relevante Änderung (r: 8.000, best_err=67.317, full_err=43.080); Kandidaten=7.200->67.317, 7.500->67.317, 8.000->67.317, 9.000->67.317
+perf_probe: circle_radius_elapsed round=2 elapsed=0.00s
+text: Fehler=95.561
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->95.561, 1.035->104.943, 1.125->104.403, 1.350->100.717, 1.650->104.689, 1.950->111.498, 2.175->109.556, 2.400->106.605
+perf_probe: global_search_elapsed round=2 elapsed=0.00s
+Runde 2: Gesamtfehler=43.080; Qualität (MAE-basiert, höher=besser): 82.18% -> 83.11% | mittlere Pixelabweichung (MAE, kleiner=besser): 45.450 -> 43.080 | Mean-Delta² (kleiner=besser): 11768.025 -> 10758.045 | Qualitätsgewinn=+2.370 (+5.21%) | Wirkung=verbessert
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=67.980
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=10.500, cy=7.500, best_err=67.317)
+perf_probe: circle_center_elapsed round=3 elapsed=0.02s
+circle: Radius-Bracketing keine relevante Änderung (r: 8.000, best_err=67.317, full_err=43.080); Kandidaten=7.200->67.317, 7.500->67.317, 8.000->67.317, 9.000->67.317
+perf_probe: circle_radius_elapsed round=3 elapsed=0.00s
+text: Fehler=95.561
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->95.561, 1.035->104.943, 1.125->104.403, 1.350->100.717, 1.650->104.689, 1.950->111.498, 2.175->109.556, 2.400->106.605
+perf_probe: global_search_elapsed round=3 elapsed=0.00s
+Runde 3: Gesamtfehler=43.080; Qualität (MAE-basiert, höher=besser): 83.11% -> 83.11% | mittlere Pixelabweichung (MAE, kleiner=besser): 43.080 -> 43.080 | Mean-Delta² (kleiner=besser): 10758.045 -> 10758.045 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
+validation_abort_decision: stage=round_loop, reason=stagnation_identical_fingerprint, error=43.080, round=3
+best_validation_round=2
+executed_validation_rounds=3
+best_validation_error=43.080000
+phase2_rollback: no
+final_color_pass_skipped: lokale Kompaktvarianten verwenden kanonische Farben

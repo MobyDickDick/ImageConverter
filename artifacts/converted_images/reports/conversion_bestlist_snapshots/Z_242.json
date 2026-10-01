@@ -1,15 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "Z_242",
-  "best_error": 29.525974025974026,
+  "best_error": 25.283549783549784,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.889999999984866,
-  "error_per_pixel": 0.0958635520323832,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.21899999999732245,
+  "error_per_pixel": 0.0820894473491876,
+  "error_pixel_cluster_count": 9.0,
+  "error_pixel_cluster_excess": 0.25649350649350644,
+  "error_pixel_count": 77.0,
   "filename": "z_242.jpg",
   "h": 11,
-  "localized_error_fraction": 0.5808207103415693,
-  "mean_delta2": 6435.0,
+  "largest_error_pixel_cluster_fraction": 0.5064935064935064,
+  "localized_error_fraction": 0.6262909450924709,
+  "mean_delta2": 5086.0908203125,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -56,9 +66,10 @@
     "variant_name": "Z_242"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 14448.94221854378,
-  "std_delta2": 13049.5029296875,
-  "tile_std_delta2": 6586.647369646354,
+  "rgb_rmse_per_channel": 44.37045164483529,
+  "spatial_quality_score": 14193.92262409313,
+  "std_delta2": 11725.0302734375,
+  "tile_std_delta2": 6338.657825731615,
   "variant": "Z_242",
   "w": 28
 }

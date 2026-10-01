@@ -1,0 +1,75 @@
+{
+  "actual_iterations": 64,
+  "base": "NAV0016",
+  "best_error": 23.142222222222223,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.23399999999674037,
+  "error_per_pixel": 0.01714238683127572,
+  "error_pixel_cluster_count": 10.0,
+  "error_pixel_cluster_excess": 0.3413456059609906,
+  "error_pixel_count": 338.0,
+  "filename": "NAV0016.JPG",
+  "h": 30,
+  "largest_error_pixel_cluster_fraction": 0.591715976331361,
+  "localized_error_fraction": 0.7743745279683323,
+  "mean_delta2": 4670.23828125,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "NAV0016",
+        "source": "base_name",
+        "text": "Hintergrund NAV0010. Symbole der Wassertropfen und der Röhre wie bei GE0206"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "NAV0016"
+  },
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 39.885311248446044,
+  "spatial_quality_score": 14315.88651028185,
+  "std_delta2": 10380.2451171875,
+  "tile_std_delta2": 7889.176070058997,
+  "variant": "NAV0016",
+  "w": 45
+}

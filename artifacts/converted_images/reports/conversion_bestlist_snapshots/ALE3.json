@@ -1,15 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "ALE3",
-  "best_error": 44.04011437908497,
+  "best_error": 46.42165032679738,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.7660000000032596,
-  "error_per_pixel": 0.005397072840574138,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.4370000000053551,
+  "error_per_pixel": 0.0056889277361271305,
+  "error_pixel_cluster_count": 107.0,
+  "error_pixel_cluster_excess": 0.5622549019607843,
+  "error_pixel_count": 2040.0,
   "filename": "ALE3.jpg",
   "h": 96,
-  "localized_error_fraction": 0.5543558275687038,
-  "mean_delta2": 9591.6806640625,
+  "largest_error_pixel_cluster_fraction": 0.8122549019607843,
+  "localized_error_fraction": 0.5056276407880894,
+  "mean_delta2": 9481.2568359375,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
@@ -49,6 +59,108 @@
     "geometry_ir": [],
     "label": "",
     "mode": "insufficient_description",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0006853102311983384,
+          0.9992075208217872,
+          1.0
+        ],
+        "fill": "#66627E",
+        "id": "perception_rect_border",
+        "kind": "RectBorder",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.939,
+          "detector": "contour",
+          "kind": "rectangle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#8B869E",
+        "stroke_width": 0.060371794446249696
+      },
+      {
+        "bbox": [
+          0.03827433696205572,
+          0.18589069143394465,
+          0.9163918598957256,
+          0.8143424128797324
+        ],
+        "fill": "#6A6785",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9868,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#746F89",
+        "stroke_width": 0.036350155906316794
+      },
+      {
+        "bbox": [
+          0.0,
+          0.13625545003597186,
+          0.03772744159030125,
+          0.6656482256291625
+        ],
+        "id": "perception_line",
+        "kind": "OrthogonalPolyline",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 1.0,
+          "detector": "detect_vertical_lines",
+          "evidence": {
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p"
+          },
+          "kind": "line",
+          "source": "hough"
+        },
+        "points": [
+          [
+            0.01177,
+            0.13542
+          ],
+          [
+            0.01177,
+            0.80209
+          ]
+        ],
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.03635434113193795
+      },
+      {
+        "bbox": [
+          0.23389402744003648,
+          0.10414203162442148,
+          0.04696305716598788,
+          0.488378578392908
+        ],
+        "fill": "#4E4D70",
+        "font_size": 0.44062,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.99,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "full_image",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "I"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -60,9 +172,10 @@
     "variant_name": "ALE3"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 19566.26325784406,
-  "std_delta2": 13181.9892578125,
-  "tile_std_delta2": 8050.902444083878,
+  "rgb_rmse_per_channel": 56.217603518048506,
+  "spatial_quality_score": 20507.302463729422,
+  "std_delta2": 11562.8916015625,
+  "tile_std_delta2": 6734.2064797281355,
   "variant": "ALE3",
   "w": 85
 }

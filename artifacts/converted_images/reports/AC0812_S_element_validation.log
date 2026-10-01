@@ -1,0 +1,32 @@
+run-meta: run_seed=221693115 pass_seed_offset=52 trace_id=223688358287
+status=semantic_ok
+semantic_audit_status=semantic_ok
+semantic_audit_lookup_keys=AC0812_S
+semantic_audit_recognized_description_elements=Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+semantic_audit_derived_elements=SEMANTIC: Kreis ohne Buchstabe | SEMANTIC: waagrechter Strich rechts vom Kreis
+semantic_audit_priority_order=family_rule > layout_override > description_heuristic
+semantic_audit_conflicts=
+quality=borderline
+quality_reason=semantic_ok_trotz_hohem_elementfehler:circle=48.592
+quality_elevated_elements=arm,circle
+redraw_variation: seed=223688358287 changed_params=cx:10.250->10.093 | cy:7.500->7.514 | r:6.000->6.103 | stroke_circle:1.000->1.047 | arm_stroke:1.000->1.025
+semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
+small_variant_mode_active: reason=min_dim, min_dim=12.000, mask_dilate_px=1, text_mode=, arm_min_ratio=0.750, stem_min_ratio=0.000
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=48.592
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 17.500->18.000, cy 7.500->7.500 (best_err=38.560)
+perf_probe: circle_center_elapsed round=1 elapsed=0.02s
+circle: Radius-Bracketing keine relevante Änderung (r: 6.000, best_err=38.560, full_err=15.056); Kandidaten=5.400->62.297, 6.000->38.560, 6.500->41.147, 7.200->41.147
+perf_probe: circle_radius_elapsed round=1 elapsed=0.02s
+arm: Fehler=42.346
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 11.500); Kandidaten=8.500->49.458, 11.500->42.346, 12.500->42.346, 17.000->42.346, 21.000->42.346, 25.000->42.346
+perf_probe: global_search_elapsed round=1 elapsed=0.00s
+Runde 1: Gesamtfehler=15.059; Qualität (MAE-basiert, höher=besser): 93.60% -> 94.09% | mittlere Pixelabweichung (MAE, kleiner=besser): 16.331 -> 15.059 | Mean-Delta² (kleiner=besser): 3117.040 -> 2828.136 | Qualitätsgewinn=+1.272 (+7.79%) | Wirkung=verbessert
+best_validation_round=1
+executed_validation_rounds=1
+best_validation_error=15.058667
+phase2_rollback: no
+final_color_pass_skipped: lokale Kompaktvarianten verwenden kanonische Farben
+semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (links/rechts aus Parametern).

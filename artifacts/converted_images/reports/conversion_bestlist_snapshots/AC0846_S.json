@@ -1,19 +1,25 @@
 {
-  "actual_iterations": 65,
+  "actual_iterations": 64,
   "base": "AC0846",
-  "best_error": 35.464,
+  "best_error": 30.528,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.26600000000325963,
-  "error_per_pixel": 0.09457066666666666,
-  "error_pixel_cluster_count": 2.0,
-  "error_pixel_cluster_excess": 0.6731751412429379,
-  "error_pixel_count": 59.0,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.1870000000053551,
+  "error_per_pixel": 0.081408,
+  "error_pixel_cluster_count": 21.0,
+  "error_pixel_cluster_excess": 0.03405464480874318,
+  "error_pixel_count": 61.0,
   "filename": "AC0846_S.jpg",
   "h": 25,
-  "largest_error_pixel_cluster_fraction": 0.8305084745762712,
-  "localized_error_fraction": 0.9448842141128369,
-  "mean_delta2": 5447.2958984375,
+  "largest_error_pixel_cluster_fraction": 0.19672131147540983,
+  "localized_error_fraction": 0.6919671881403537,
+  "mean_delta2": 7523.47216796875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -39,8 +45,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0846",
-        "source": "base_name",
+        "key": "AC0846_S",
+        "source": "variant_name",
         "text": "Unzugeordnete Wurzelform aus der Serie AC0846. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen."
       }
     ],
@@ -62,10 +68,11 @@
     "top_source_ref": null,
     "variant_name": "AC0846_S"
   },
-  "requested_iterations": 65,
-  "spatial_quality_score": 19712.162859107186,
-  "std_delta2": 13343.1298828125,
-  "tile_std_delta2": 10075.948630358358,
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 49.85584525398786,
+  "spatial_quality_score": 18664.795686815494,
+  "std_delta2": 14139.4482421875,
+  "tile_std_delta2": 8794.947026211947,
   "variant": "AC0846_S",
   "w": 15
 }

@@ -1,15 +1,73 @@
 {
+  "actual_iterations": 64,
   "base": "GE0106",
-  "best_error": 33.289904761904765,
+  "best_error": 12.608888888888888,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0063409342403628124,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.23399999999674037,
+  "error_per_pixel": 0.0024016931216931216,
+  "error_pixel_cluster_count": 19.0,
+  "error_pixel_cluster_excess": 0.19789000976244714,
+  "error_pixel_count": 1317.0,
   "filename": "GE0106_S.jpg",
   "h": 35,
-  "mean_delta2": 5331.16455078125,
+  "largest_error_pixel_cluster_fraction": 0.44874715261959,
+  "localized_error_fraction": 0.8109000320759753,
+  "mean_delta2": 1385.9949951171875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -19,8 +77,8 @@
     },
     "description_fragments": [
       {
-        "key": "GE0106",
-        "source": "base_name",
+        "key": "GE0106_S",
+        "source": "variant_name",
         "text": "Wie GE0100: leicht abgerundetes Rechteck mit grauem Rand, vertikaler Farbverlauf von weiss (oben) nach grau (unten). . Geometrische Variante: identisch zur Referenz."
       }
     ],
@@ -36,7 +94,23 @@
           0.64,
           0.56
         ],
-        "fill": "#d8d8d8",
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "none",
         "id": "main_rect",
         "kind": "RectBorder",
         "stroke": "#666666",
@@ -55,7 +129,11 @@
     "top_source_ref": null,
     "variant_name": "GE0106_S"
   },
-  "std_delta2": 8673.78515625,
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 21.49414645213271,
+  "spatial_quality_score": 4770.098748266602,
+  "std_delta2": 5027.9541015625,
+  "tile_std_delta2": 3398.17653428343,
   "variant": "GE0106_S",
   "w": 150
 }

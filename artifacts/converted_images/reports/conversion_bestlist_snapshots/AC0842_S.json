@@ -1,19 +1,25 @@
 {
-  "actual_iterations": 65,
+  "actual_iterations": 64,
   "base": "AC0842",
-  "best_error": 23.765333333333334,
+  "best_error": 21.032,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.4059999999881256,
-  "error_per_pixel": 0.06337422222222222,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.34399999999732245,
+  "error_per_pixel": 0.056085333333333334,
   "error_pixel_cluster_count": 11.0,
-  "error_pixel_cluster_excess": 0.13358730158730156,
-  "error_pixel_count": 63.0,
+  "error_pixel_cluster_excess": 0.4475698924731183,
+  "error_pixel_count": 62.0,
   "filename": "AC0842_S.jpg",
   "h": 15,
-  "largest_error_pixel_cluster_fraction": 0.30158730158730157,
-  "localized_error_fraction": 0.841110772224885,
-  "mean_delta2": 5508.240234375,
+  "largest_error_pixel_cluster_fraction": 0.6129032258064516,
+  "localized_error_fraction": 0.8350949068125473,
+  "mean_delta2": 4327.19189453125,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -99,8 +105,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0842",
-        "source": "base_name",
+        "key": "AC0842_S",
+        "source": "variant_name",
         "text": "Kreisförmiges Badge. Abweichung: mit Text \"rF\" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises."
       }
     ],
@@ -164,10 +170,11 @@
     "top_source_ref": null,
     "variant_name": "AC0842_S"
   },
-  "requested_iterations": 65,
-  "spatial_quality_score": 16695.835964477224,
-  "std_delta2": 13075.7373046875,
-  "tile_std_delta2": 8571.846422422628,
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 37.97890596340399,
+  "spatial_quality_score": 13886.169091203028,
+  "std_delta2": 11111.2763671875,
+  "tile_std_delta2": 6902.437936852959,
   "variant": "AC0842_S",
   "w": 25
 }

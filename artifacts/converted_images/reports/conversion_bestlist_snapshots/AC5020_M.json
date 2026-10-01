@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "AC5020",
-  "best_error": 38.31313271604938,
+  "best_error": 38.20487654320988,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 1.5619999999180436,
-  "error_per_pixel": 0.0008868780721307727,
-  "error_pixel_cluster_count": 34.0,
-  "error_pixel_cluster_excess": 0.6160509187258799,
-  "error_pixel_count": 10288.0,
+  "elapsed_seconds": 0.39100000000325963,
+  "error_per_pixel": 0.0008843721422039324,
+  "error_pixel_cluster_count": 32.0,
+  "error_pixel_cluster_excess": 0.6186494762503023,
+  "error_pixel_count": 10259.0,
   "filename": "AC5020_M.jpg",
   "h": 180,
-  "largest_error_pixel_cluster_fraction": 0.854199066874028,
-  "localized_error_fraction": 0.540148110683264,
-  "mean_delta2": 6408.1953125,
+  "largest_error_pixel_cluster_fraction": 0.8561263281021542,
+  "localized_error_fraction": 0.5432607657984428,
+  "mean_delta2": 6375.78076171875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
@@ -43,8 +47,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC5020",
-        "source": "base_name",
+        "key": "AC5020_M",
+        "source": "variant_name",
         "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Das ist ein \"Rückkühler\" also ein Aussenluftkühlgerät für Heisses Wasser (oder eine Heisse Flüssigkeit). Ob oben sind zwei Röhren um die heisse Luft abzuleiten, oben rchts sind zwei Gitterroste, um die kalte Luft einströmen zu lassen. Unten rechts ist ein grosse Öffnung (?). Auf der Llinken Seite ist oben links ein grau-blauer Punkt."
       }
     ],
@@ -58,10 +62,10 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.0012454156296398608,
-          0.1178347971156991,
-          1.0,
-          0.8722816797623463
+          0.0011301844285374297,
+          0.1164145897480911,
+          0.9991432066273287,
+          0.8739050406333887
         ],
         "fill": "#AEAEB0",
         "id": "perception_rect_border",
@@ -74,14 +78,14 @@
           "source": "non_composite_perception_seed"
         },
         "stroke": "#D2D3D4",
-        "stroke_width": 0.05379431011959478
+        "stroke_width": 0.05353822804299312
       },
       {
         "bbox": [
-          0.3552392680229514,
-          0.13703203234709557,
-          0.5833194409573015,
-          0.7789455730433095
+          0.35166120086844604,
+          0.136352745226455,
+          0.5847785654056341,
+          0.7761129158157005
         ],
         "fill": "#A4A4A5",
         "id": "perception_circle_background",
@@ -95,14 +99,14 @@
           "source": "non_composite_perception_seed"
         },
         "stroke": "#A2A2A3",
-        "stroke_width": 0.0318918024453509
+        "stroke_width": 0.031599345500309274
       },
       {
         "bbox": [
-          0.9295166241333578,
-          0.15138683252483898,
-          0.010538901194632156,
-          0.48788272355228635
+          0.9248015644225597,
+          0.15069390442585903,
+          0.012941214257898306,
+          0.4880844353433918
         ],
         "id": "perception_line",
         "kind": "OrthogonalPolyline",
@@ -128,14 +132,14 @@
           ]
         ],
         "stroke": "#4f4f4f",
-        "stroke_width": 0.015716878260455314
+        "stroke_width": 0.01610522645810629
       },
       {
         "bbox": [
-          0.17148046048438742,
-          0.6664713769099161,
-          0.10003223950822003,
-          0.19600604543589853
+          0.17335189151612745,
+          0.6671321508212966,
+          0.10063091917945574,
+          0.19425319728835372
         ],
         "fill": "#CDCDCD",
         "font_size": 0.175,
@@ -168,9 +172,10 @@
     "variant_name": "AC5020_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 14525.576102286488,
-  "std_delta2": 6962.00927734375,
-  "tile_std_delta2": 4938.974376026898,
+  "rgb_rmse_per_channel": 46.100545049991005,
+  "spatial_quality_score": 14506.692589399721,
+  "std_delta2": 6883.16943359375,
+  "tile_std_delta2": 4945.358492486651,
   "variant": "AC5020_M",
   "w": 240
 }

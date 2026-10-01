@@ -1,18 +1,107 @@
 {
+  "actual_iterations": 64,
   "base": "AC0512",
-  "best_error": 33.735,
+  "best_error": 22.09777777777778,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.018741666666666667,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.2970000000059372,
+  "error_per_pixel": 0.012276543209876544,
+  "error_pixel_cluster_count": 6.0,
+  "error_pixel_cluster_excess": 0.1885743552663292,
+  "error_pixel_count": 461.0,
   "filename": "AC0512_M.jpg",
   "h": 30,
-  "mean_delta2": 6365.16845703125,
+  "largest_error_pixel_cluster_fraction": 0.44468546637744033,
+  "localized_error_fraction": 0.7452785618984549,
+  "mean_delta2": 3249.098388671875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_3",
+          "kind": "HorizontalRuleSet",
+          "positions": [
+            0.3,
+            0.5,
+            0.7
+          ],
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.026,
+          "x_inset": 0.1
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_3",
+          "type": "rect"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
-        "key": "AC0512",
-        "source": "base_name",
+        "key": "AC0512_M",
+        "source": "variant_name",
         "text": "Wie AC0511: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel. Offene Klappe mit 3 Schliessflächen. Geometrische Variante: 90° nach rechts gedreht."
       }
     ],
@@ -20,8 +109,231 @@
       "AC0511"
     ],
     "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      },
+      {
+        "id": "horizontal_rule_set",
+        "kind": "HorizontalRuleSet",
+        "positions": [
+          0.3,
+          0.5,
+          0.7
+        ],
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.026,
+        "x_inset": 0.1
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 34.32111111111111,
+        "initial_error": 34.32111111111111,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 33.82055555555556,
+      "generic_element_refinement": {
+        "final_error": 33.82055555555556,
+        "initial_error": 34.32111111111111,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "background_gradient",
+            "error_after": 34.32111111111111,
+            "error_before": 34.32111111111111,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.5005555555555503,
+            "element": "main_rect",
+            "error_after": 33.82055555555556,
+            "error_before": 34.32111111111111,
+            "step_index": 1
+          },
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "horizontal_rule_set",
+            "error_after": 33.82055555555556,
+            "error_before": 33.82055555555556,
+            "step_index": 2
+          }
+        ]
+      },
+      "initial_error": 49.778888888888886,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.0499999999999998,
+        "scale_y": 1.2999999999999998,
+        "stroke_scale": 0.25,
+        "translate_x": -0.16,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 1.4344444444444449,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.568333333333328,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.33222222222222797,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 1.1266666666666652,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.8299999999999983,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 2.238888888888887,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 0.1472222222222257,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 4.182222222222222,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.0
+        },
+        {
+          "best_delta": 1.9027777777777786,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.9527777777777757,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 0.04222222222222172,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 0.053888888888891984,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.35111111111110915,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 1.0699999999999998
+        },
+        {
+          "best_delta": 0.2950000000000017,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 1.0499999999999998
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.15100000000000005,
+          0.006000000000000061,
+          0.37799999999999995,
+          0.9879999999999999
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.15100000000000005,
+          0.006000000000000061,
+          0.39799999999999996,
+          0.9879999999999999
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.00875
+      },
+      {
+        "id": "horizontal_rule_set",
+        "kind": "HorizontalRuleSet",
+        "positions": [
+          0.3,
+          0.5,
+          0.7
+        ],
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.0065,
+        "x_inset": 0.1
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -32,7 +344,11 @@
     "top_source_ref": null,
     "variant_name": "AC0512_M"
   },
-  "std_delta2": 10908.197265625,
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 32.90946362710821,
+  "spatial_quality_score": 8808.145396415477,
+  "std_delta2": 6801.0244140625,
+  "tile_std_delta2": 3869.081984574374,
   "variant": "AC0512_M",
   "w": 60
 }

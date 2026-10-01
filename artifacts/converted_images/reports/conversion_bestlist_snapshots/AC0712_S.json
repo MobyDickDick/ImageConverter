@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "AC0712",
-  "best_error": 27.794666666666668,
+  "best_error": 26.698666666666668,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
   "diff_error_distribution_status": "random_like",
-  "elapsed_seconds": 0.7810000000754371,
-  "error_per_pixel": 0.07411911111111111,
-  "error_pixel_cluster_count": 16.0,
-  "error_pixel_cluster_excess": 0.2,
-  "error_pixel_count": 75.0,
+  "elapsed_seconds": 0.29699999999138527,
+  "error_per_pixel": 0.07119644444444445,
+  "error_pixel_cluster_count": 15.0,
+  "error_pixel_cluster_excess": 0.10635497835497834,
+  "error_pixel_count": 77.0,
   "filename": "AC0712_S.jpg",
   "h": 15,
-  "largest_error_pixel_cluster_fraction": 0.4,
-  "localized_error_fraction": 0.6057417368802573,
-  "mean_delta2": 5567.94384765625,
+  "largest_error_pixel_cluster_fraction": 0.3116883116883117,
+  "localized_error_fraction": 0.6081397370375852,
+  "mean_delta2": 4980.240234375,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -75,8 +79,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0712",
-        "source": "base_name",
+        "key": "AC0712_S",
+        "source": "variant_name",
         "text": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
       }
     ],
@@ -138,9 +142,10 @@
     "variant_name": "AC0712_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 14105.524773830453,
-  "std_delta2": 10244.4541015625,
-  "tile_std_delta2": 7590.260068962706,
+  "rgb_rmse_per_channel": 43.081101222602044,
+  "spatial_quality_score": 13299.041390579589,
+  "std_delta2": 8909.55859375,
+  "tile_std_delta2": 6921.0256233948085,
   "variant": "AC0712_S",
   "w": 25
 }

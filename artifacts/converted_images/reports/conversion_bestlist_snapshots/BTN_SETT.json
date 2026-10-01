@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "BTN_SETT",
-  "best_error": 20.579841355042642,
+  "best_error": 20.199391662193594,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.875,
-  "error_per_pixel": 0.0007364409144763873,
-  "error_pixel_cluster_count": 90.0,
-  "error_pixel_cluster_excess": 0.4099110545144125,
-  "error_pixel_count": 6998.0,
+  "elapsed_seconds": 0.34300000000803266,
+  "error_per_pixel": 0.0007228266832060688,
+  "error_pixel_cluster_count": 89.0,
+  "error_pixel_cluster_excess": 0.5970345274693101,
+  "error_pixel_count": 6930.0,
   "filename": "btn_sett.jpg",
   "h": 81,
-  "largest_error_pixel_cluster_fraction": 0.6603315232923692,
-  "localized_error_fraction": 0.8943364403336503,
+  "largest_error_pixel_cluster_fraction": 0.845021645021645,
+  "localized_error_fraction": 0.8943455802882212,
   "mean_delta2": 4383.404296875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -62,9 +66,10 @@
     "variant_name": "BTN_SETT"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 15400.830257022213,
+  "rgb_rmse_per_channel": 38.22479255175887,
+  "spatial_quality_score": 16017.477597399198,
   "std_delta2": 15439.6044921875,
-  "tile_std_delta2": 8796.118073824842,
+  "tile_std_delta2": 8950.67606898282,
   "variant": "BTN_SETT",
   "w": 345
 }

@@ -1,15 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "AC0233",
-  "best_error": 26.12814814814815,
+  "best_error": 26.134074074074075,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.3129999999946449,
-  "error_per_pixel": 0.019354183813443074,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.21799999999348074,
+  "error_per_pixel": 0.01935857338820302,
+  "error_pixel_cluster_count": 22.0,
+  "error_pixel_cluster_excess": 0.3338078703703704,
+  "error_pixel_count": 256.0,
   "filename": "AC0233_M.jpg",
   "h": 45,
-  "localized_error_fraction": 0.7173895929268935,
-  "mean_delta2": 6351.193359375,
+  "largest_error_pixel_cluster_fraction": 0.5234375,
+  "localized_error_fraction": 0.7140740316023002,
+  "mean_delta2": 6433.708984375,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -140,8 +150,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0233",
-        "source": "base_name",
+        "key": "AC0233_M",
+        "source": "variant_name",
         "text": "Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, \"M\" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). Geometrische Variante: 180° gedreht."
       }
     ],
@@ -263,6 +273,21 @@
         "steps": []
       },
       "final_error": 26.12814814814815,
+      "generic_element_refinement": {
+        "final_error": 26.12814814814815,
+        "initial_error": 26.12814814814815,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "rotated_180_top_kelle_three_way_valve",
+            "error_after": 26.12814814814815,
+            "error_before": 26.12814814814815,
+            "step_index": 0
+          }
+        ]
+      },
       "initial_error": 35.61283950617284,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -459,7 +484,7 @@
           "schema_version": "kelle_valve_primitive_decomposition_v1"
         },
         "stroke": "#969696",
-        "stroke_width": 0.0904,
+        "stroke_width": 0.0894835305980523,
         "text_fill": "#666666",
         "transform": {
           "rotation_deg": 180,
@@ -478,9 +503,10 @@
     "variant_name": "AC0233_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 16766.934629938016,
-  "std_delta2": 14558.625,
-  "tile_std_delta2": 8636.901179675646,
+  "rgb_rmse_per_channel": 46.309498609446564,
+  "spatial_quality_score": 17984.523859887307,
+  "std_delta2": 14703.1640625,
+  "tile_std_delta2": 8672.150253897556,
   "variant": "AC0233_M",
   "w": 30
 }

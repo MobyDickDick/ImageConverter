@@ -1,15 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "AC0304",
-  "best_error": 16.769166666666667,
+  "best_error": 16.54375,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.125,
-  "error_per_pixel": 0.010480729166666668,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.23399999999674037,
+  "error_per_pixel": 0.01033984375,
+  "error_pixel_cluster_count": 20.0,
+  "error_pixel_cluster_excess": 0.6964593828715365,
+  "error_pixel_count": 397.0,
   "filename": "AC0304_1_S.jpg",
   "h": 40,
-  "localized_error_fraction": 0.6911210321599145,
-  "mean_delta2": 4971.263671875,
+  "largest_error_pixel_cluster_fraction": 0.9445843828715366,
+  "localized_error_fraction": 0.6958309623323249,
+  "mean_delta2": 4661.357421875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -35,8 +45,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0304",
-        "source": "base_name",
+        "key": "AC0304_1_S",
+        "source": "variant_name",
         "text": "Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz."
       }
     ],
@@ -47,6 +57,55 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.026856502746068205,
+          0.02587281774162331,
+          0.8990385577743499,
+          0.9005935501425198
+        ],
+        "fill": "#E0204A",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.99,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#DD214B",
+        "stroke_width": 0.03482416310170706
+      },
+      {
+        "bbox": [
+          0.04802594834407058,
+          0.2503426429048271,
+          0.9008510485522394,
+          0.1005048128794798
+        ],
+        "fill": "#E0274F",
+        "font_size": 0.81,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7021,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "-"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -58,9 +117,10 @@
     "variant_name": "AC0304_1_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 13097.07477458063,
-  "std_delta2": 13662.390625,
-  "tile_std_delta2": 6547.706587356753,
+  "rgb_rmse_per_channel": 39.41808984833825,
+  "spatial_quality_score": 13874.219955464465,
+  "std_delta2": 12911.9443359375,
+  "tile_std_delta2": 6120.257465615545,
   "variant": "AC0304_1_S",
   "w": 40
 }

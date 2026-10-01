@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "GE0035",
-  "best_error": 17.70503401360544,
+  "best_error": 17.764625850340135,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 1.437000000034459,
-  "error_per_pixel": 0.00361327224767458,
-  "error_pixel_cluster_count": 74.0,
-  "error_pixel_cluster_excess": 0.6003928762516242,
+  "elapsed_seconds": 0.2970000000059372,
+  "error_per_pixel": 0.003625433847008191,
+  "error_pixel_cluster_count": 65.0,
+  "error_pixel_cluster_excess": 0.611628831307804,
   "error_pixel_count": 1068.0,
   "filename": "GE0035_L.jpg",
   "h": 70,
-  "largest_error_pixel_cluster_fraction": 0.8183520599250936,
-  "localized_error_fraction": 0.8508682153528864,
-  "mean_delta2": 2793.27392578125,
+  "largest_error_pixel_cluster_fraction": 0.8295880149812734,
+  "localized_error_fraction": 0.8457567080452012,
+  "mean_delta2": 2786.419677734375,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -41,8 +45,8 @@
     },
     "description_fragments": [
       {
-        "key": "GE0035",
-        "source": "base_name",
+        "key": "GE0035_L",
+        "source": "variant_name",
         "text": "Wie GE0026, ober ohne Hintergrund"
       }
     ],
@@ -56,10 +60,10 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.041892285175022,
-          0.05600736761061652,
-          0.9146991939836123,
-          0.913311276606002
+          0.04212174697601014,
+          0.05700493114832166,
+          0.9142358698301692,
+          0.9139320852031092
         ],
         "fill": "#8FB7D2",
         "id": "perception_circle_background",
@@ -73,14 +77,14 @@
           "source": "non_composite_perception_seed"
         },
         "stroke": "#C9DBE7",
-        "stroke_width": 0.03801986392310602
+        "stroke_width": 0.03778902644843314
       },
       {
         "bbox": [
-          0.3360017917553314,
-          0.27033011994395634,
-          0.04235830302204282,
-          0.46971554072080696
+          0.33591291932302075,
+          0.2710845392624652,
+          0.04300047058107624,
+          0.4703982289006123
         ],
         "id": "perception_line",
         "kind": "OrthogonalPolyline",
@@ -106,14 +110,14 @@
           ]
         ],
         "stroke": "#4f4f4f",
-        "stroke_width": 0.04144271565788823
+        "stroke_width": 0.04318933029609213
       },
       {
         "bbox": [
-          0.19779635047661487,
-          0.829246478397502,
-          0.5983022771997765,
-          0.057108934939110866
+          0.2026056269540565,
+          0.82698804363932,
+          0.5988127255606387,
+          0.05821292414186204
         ],
         "fill": "#83ACCA",
         "font_size": 0.54,
@@ -146,9 +150,10 @@
     "variant_name": "GE0035_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 9607.318678730433,
-  "std_delta2": 7317.06591796875,
-  "tile_std_delta2": 5391.509258203461,
+  "rgb_rmse_per_channel": 30.47632785039549,
+  "spatial_quality_score": 9545.41313295721,
+  "std_delta2": 7272.52734375,
+  "tile_std_delta2": 5313.019961303318,
   "variant": "GE0035_L",
   "w": 70
 }

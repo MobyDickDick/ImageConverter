@@ -1,15 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "AC0572",
-  "best_error": 16.61722222222222,
+  "best_error": 16.34777777777778,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.75,
-  "error_per_pixel": 0.00923179012345679,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.23500000000058208,
+  "error_per_pixel": 0.0090820987654321,
+  "error_pixel_cluster_count": 19.0,
+  "error_pixel_cluster_excess": 0.6423730684326712,
+  "error_pixel_count": 453.0,
   "filename": "AC0572_M.jpg",
   "h": 60,
-  "localized_error_fraction": 0.8259601342348697,
-  "mean_delta2": 2578.068359375,
+  "largest_error_pixel_cluster_fraction": 0.8940397350993378,
+  "localized_error_fraction": 0.8281537727365249,
+  "mean_delta2": 2448.2451171875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -35,11 +45,6 @@
     },
     "description_fragments": [
       {
-        "key": "AC0572",
-        "source": "base_name",
-        "text": "Unzugeordnete Wurzelform aus der Serie AC0572. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen."
-      },
-      {
         "key": "AC0572_M",
         "source": "variant_name",
         "text": "Unzugeordnete Wurzelform aus der Serie AC0572. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen."
@@ -64,9 +69,10 @@
     "variant_name": "AC0572_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 7515.134296075753,
-  "std_delta2": 7164.0537109375,
-  "tile_std_delta2": 3574.089625549748,
+  "rgb_rmse_per_channel": 28.567143814689747,
+  "spatial_quality_score": 7951.2666470117,
+  "std_delta2": 6913.529296875,
+  "tile_std_delta2": 3412.574096753496,
   "variant": "AC0572_M",
   "w": 30
 }

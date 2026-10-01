@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "GE9042_2M",
-  "best_error": 17.043333333333333,
+  "best_error": 17.039375,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 0.9379999999655411,
-  "error_per_pixel": 0.010652083333333333,
+  "elapsed_seconds": 0.32800000000861473,
+  "error_per_pixel": 0.010649609375,
   "error_pixel_cluster_count": 2.0,
   "error_pixel_cluster_excess": 0.449702380952381,
   "error_pixel_count": 210.0,
   "filename": "GE9042_2M.jpg",
   "h": 40,
   "largest_error_pixel_cluster_fraction": 0.580952380952381,
-  "localized_error_fraction": 0.9096322728366166,
-  "mean_delta2": 4201.19580078125,
+  "localized_error_fraction": 0.9091939856889912,
+  "mean_delta2": 4183.23046875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -209,10 +213,10 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.40165373673125754,
-          0.39829671087166235,
-          0.7006112963206155,
-          0.6997898854173595
+          0.39814334596989015,
+          0.3990949874515878,
+          0.701225216022537,
+          0.6994296699298762
         ],
         "fill": "#e0e0e0",
         "id": "backbottom_light_grey_square",
@@ -228,7 +232,7 @@
         },
         "role": "reference_light_grey_square",
         "stroke": "none",
-        "stroke_width": 0.0018848414394416063
+        "stroke_width": 0.0015047763186416658
       }
     ],
     "semantic_conflicts": [],
@@ -242,9 +246,10 @@
     "variant_name": "GE9042_2M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 14266.388986780188,
-  "std_delta2": 11284.3955078125,
-  "tile_std_delta2": 6998.9173959613745,
+  "rgb_rmse_per_channel": 37.34180172742071,
+  "spatial_quality_score": 14193.687164939145,
+  "std_delta2": 11193.3486328125,
+  "tile_std_delta2": 6958.276429918018,
   "variant": "GE9042_2M",
   "w": 40
 }

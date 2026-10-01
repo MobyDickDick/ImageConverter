@@ -1,15 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "AC0160",
-  "best_error": 12.9509875,
+  "best_error": 11.53913125,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.125,
-  "error_per_pixel": 8.0943671875e-05,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.8439999999973224,
+  "error_per_pixel": 7.21195703125e-05,
+  "error_pixel_cluster_count": 297.0,
+  "error_pixel_cluster_excess": 0.6571998596058726,
+  "error_pixel_count": 31741.0,
   "filename": "AC0160_L.jpg",
   "h": 400,
-  "localized_error_fraction": 0.7787030064802223,
-  "mean_delta2": 2296.7421875,
+  "largest_error_pixel_cluster_fraction": 0.8555811096058725,
+  "localized_error_fraction": 0.7782343453555695,
+  "mean_delta2": 1593.2060546875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -85,8 +95,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0160",
-        "source": "base_name",
+        "key": "AC0160_L",
+        "source": "variant_name",
         "text": "Differenzdruckmessung oben kleines graues Rechteck mit \"dp\" geschrieben, vor halbem Rechteck mit doppelten grauen Rand"
       }
     ],
@@ -138,7 +148,38 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 12.9509875,
+      "final_error": 12.91521875,
+      "generic_element_refinement": {
+        "final_error": 12.91521875,
+        "initial_error": 12.9509875,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.0058437500000003695,
+            "element": "half_double_rect",
+            "error_after": 12.94514375,
+            "error_before": 12.9509875,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.029925000000000423,
+            "element": "dp_label_box",
+            "error_after": 12.91521875,
+            "error_before": 12.94514375,
+            "step_index": 1
+          },
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "dp_label_text",
+            "error_after": 12.91521875,
+            "error_before": 12.91521875,
+            "step_index": 2
+          }
+        ]
+      },
       "initial_error": 18.86781875,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -235,7 +276,7 @@
       {
         "bbox": [
           0.3824,
-          0.4804,
+          0.4604,
           0.2352,
           0.2822
         ],
@@ -251,7 +292,7 @@
         "bbox": [
           0.437,
           0.29780000000000006,
-          0.12599999999999997,
+          0.14599999999999996,
           0.166
         ],
         "fill": "#d7d7d7",
@@ -281,9 +322,10 @@
     "variant_name": "AC0160_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 6660.102323294568,
-  "std_delta2": 7860.81591796875,
-  "tile_std_delta2": 3281.9701277579097,
+  "rgb_rmse_per_channel": 23.04492753071342,
+  "spatial_quality_score": 5285.693117427115,
+  "std_delta2": 6292.73876953125,
+  "tile_std_delta2": 2447.181352645148,
   "variant": "AC0160_L",
   "w": 400
 }

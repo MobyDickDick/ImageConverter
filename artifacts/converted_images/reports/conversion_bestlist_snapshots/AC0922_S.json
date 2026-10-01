@@ -1,15 +1,41 @@
 {
+  "actual_iterations": 64,
   "base": "AC0922",
-  "best_error": 19.869333333333334,
+  "best_error": 19.85333333333333,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.05298488888888889,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.1879999999946449,
+  "error_per_pixel": 0.05294222222222222,
+  "error_pixel_cluster_count": 20.0,
+  "error_pixel_cluster_excess": 0.20361290322580644,
+  "error_pixel_count": 93.0,
   "filename": "AC0922_S.jpg",
   "h": 15,
-  "mean_delta2": 5359.11181640625,
+  "largest_error_pixel_cluster_fraction": 0.45161290322580644,
+  "localized_error_fraction": 0.6846879695006443,
+  "mean_delta2": 4518.1201171875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -19,8 +45,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0922",
-        "source": "base_name",
+        "key": "AC0922_S",
+        "source": "variant_name",
         "text": "Unzugeordnete Wurzelform aus der Serie AC0922. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen."
       }
     ],
@@ -42,7 +68,11 @@
     "top_source_ref": null,
     "variant_name": "AC0922_S"
   },
-  "std_delta2": 14738.6220703125,
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 47.38452589475634,
+  "spatial_quality_score": 16968.535640921902,
+  "std_delta2": 12158.724609375,
+  "tile_std_delta2": 7153.646870995052,
   "variant": "AC0922_S",
   "w": 25
 }

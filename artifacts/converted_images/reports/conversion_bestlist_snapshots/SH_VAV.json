@@ -1,15 +1,41 @@
 {
+  "actual_iterations": 64,
   "base": "SH",
-  "best_error": 23.445,
+  "best_error": 11.465555555555556,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.013025,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.21899999999732245,
+  "error_per_pixel": 0.006369753086419753,
+  "error_pixel_cluster_count": 36.0,
+  "error_pixel_cluster_excess": 0.21422455916719774,
+  "error_pixel_count": 523.0,
   "filename": "SH_VAV.jpg",
   "h": 30,
-  "mean_delta2": 3047.485107421875,
+  "largest_error_pixel_cluster_fraction": 0.5047801147227533,
+  "localized_error_fraction": 0.6636155355385474,
+  "mean_delta2": 1063.5400390625,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -19,8 +45,8 @@
     },
     "description_fragments": [
       {
-        "key": "SH",
-        "source": "base_name",
+        "key": "SH_VAV",
+        "source": "variant_name",
         "text": "Unzugeordnete Wurzelform aus der Serie SH_VAV. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (VAV). Bitte einer finalen Wurzelform-Kategorie zuordnen."
       }
     ],
@@ -42,7 +68,11 @@
     "top_source_ref": null,
     "variant_name": "SH_VAV"
   },
-  "std_delta2": 4500.6201171875,
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 18.828524805575363,
+  "spatial_quality_score": 2726.6634848140448,
+  "std_delta2": 2821.4228515625,
+  "tile_std_delta2": 1106.4845626738106,
   "variant": "SH_VAV",
   "w": 60
 }

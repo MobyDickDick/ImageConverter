@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "AC0501",
-  "best_error": 29.221666666666668,
+  "best_error": 28.905,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
   "diff_error_distribution_status": "random_like",
-  "elapsed_seconds": 0.7190000000409782,
-  "error_per_pixel": 0.036527083333333335,
-  "error_pixel_cluster_count": 22.0,
-  "error_pixel_cluster_excess": 0.21999999999999997,
+  "elapsed_seconds": 0.3120000000053551,
+  "error_per_pixel": 0.036131250000000004,
+  "error_pixel_cluster_count": 28.0,
+  "error_pixel_cluster_excess": 0.18,
   "error_pixel_count": 200.0,
   "filename": "AC0501_1_S.jpg",
   "h": 40,
-  "largest_error_pixel_cluster_fraction": 0.47,
-  "localized_error_fraction": 0.3425015910019215,
-  "mean_delta2": 4057.9775390625,
+  "largest_error_pixel_cluster_fraction": 0.43,
+  "localized_error_fraction": 0.3520941564591174,
+  "mean_delta2": 3761.717529296875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -74,8 +78,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0501",
-        "source": "base_name",
+        "key": "AC0501_1_S",
+        "source": "variant_name",
         "text": "Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau"
       }
     ],
@@ -347,9 +351,10 @@
     "variant_name": "AC0501_1_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 6021.056277776745,
-  "std_delta2": 2431.491943359375,
-  "tile_std_delta2": 1493.7521652992739,
+  "rgb_rmse_per_channel": 35.41053294005836,
+  "spatial_quality_score": 5491.8040918000115,
+  "std_delta2": 2024.1927490234375,
+  "tile_std_delta2": 1202.8970113771272,
   "variant": "AC0501_1_S",
   "w": 20
 }

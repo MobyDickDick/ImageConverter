@@ -1,15 +1,41 @@
 {
+  "actual_iterations": 64,
   "base": "AC0537",
-  "best_error": 10.069375,
+  "best_error": 10.165625,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0031466796875000004,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.21899999999732245,
+  "error_per_pixel": 0.0031767578125,
+  "error_pixel_cluster_count": 3.0,
+  "error_pixel_cluster_excess": 0.24916260445682453,
+  "error_pixel_count": 718.0,
   "filename": "AC0537_L_sia.jpg",
   "h": 80,
-  "mean_delta2": 2637.0732421875,
+  "largest_error_pixel_cluster_fraction": 0.4735376044568245,
+  "localized_error_fraction": 0.7836146712783686,
+  "mean_delta2": 2369.63623046875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -18,11 +44,6 @@
       "status": "ok"
     },
     "description_fragments": [
-      {
-        "key": "AC0537",
-        "source": "base_name",
-        "text": "Unzugeordnete Wurzelform aus der Serie AC0537_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen."
-      },
       {
         "key": "AC0537_L_sia",
         "source": "variant_name",
@@ -47,7 +68,11 @@
     "top_source_ref": null,
     "variant_name": "AC0537_L_SIA"
   },
-  "std_delta2": 9349.4423828125,
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 30.110811514339552,
+  "spatial_quality_score": 8047.639700149687,
+  "std_delta2": 8366.5205078125,
+  "tile_std_delta2": 3522.260203494368,
   "variant": "AC0537_L_SIA",
   "w": 40
 }

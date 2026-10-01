@@ -1,0 +1,6 @@
+run-meta: run_seed=529189183 pass_seed_offset=19 trace_id=533951887566
+status=semantic_mismatch
+best_attempt_svg=AC0704_1_S_failed.svg
+semantic_connector_classification=ambiguous;circle_source=none;horizontal_candidates=1;vertical_candidates=2
+issue=Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar
+issue=Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt

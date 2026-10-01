@@ -1,15 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "GE1204",
-  "best_error": 25.5975,
+  "best_error": 28.446666666666665,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.9529999999795109,
-  "error_per_pixel": 0.06399375,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.23399999999674037,
+  "error_per_pixel": 0.07111666666666666,
+  "error_pixel_cluster_count": 8.0,
+  "error_pixel_cluster_excess": 0.23618421052631577,
+  "error_pixel_count": 95.0,
   "filename": "GE1204_M.jpg",
   "h": 20,
-  "localized_error_fraction": 0.7708021236845938,
-  "mean_delta2": 4754.47265625,
+  "largest_error_pixel_cluster_fraction": 0.47368421052631576,
+  "localized_error_fraction": 0.7141345486556543,
+  "mean_delta2": 5018.1474609375,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -35,8 +45,8 @@
     },
     "description_fragments": [
       {
-        "key": "GE1204",
-        "source": "base_name",
+        "key": "GE1204_M",
+        "source": "variant_name",
         "text": "Wie GE1202: Wie GE1200, jedoch rote Farbe innen (grauer Rand ist gleich). Geometrische Variante: identisch zur Referenz."
       }
     ],
@@ -48,6 +58,55 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0019353939716364168,
+          0.9014388209637286,
+          0.9017048055186802
+        ],
+        "fill": "#3671A5",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.99,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#6289A5",
+        "stroke_width": 0.0488642130107385
+      },
+      {
+        "bbox": [
+          0.1480339864562465,
+          0.0,
+          0.7494213605666632,
+          0.9992763145257404
+        ],
+        "fill": "#5D8AB2",
+        "font_size": 0.9,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7805,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "full_image",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "B"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -59,9 +118,10 @@
     "variant_name": "GE1204_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 12989.749824176255,
-  "std_delta2": 8841.2900390625,
-  "tile_std_delta2": 6853.912146483839,
+  "rgb_rmse_per_channel": 40.89884864287136,
+  "spatial_quality_score": 13319.952956049148,
+  "std_delta2": 8445.654296875,
+  "tile_std_delta2": 6304.129295718804,
   "variant": "GE1204_M",
   "w": 20
 }

@@ -1,0 +1,28 @@
+run-meta: run_seed=221693115 pass_seed_offset=19 trace_id=223688354954
+status=semantic_ok
+quality=borderline
+quality_reason=semantic_ok_trotz_hohem_elementfehler:circle=80.988
+quality_elevated_elements=arm,circle,text
+redraw_variation: seed=223688354954 changed_params=cx:20.000->20.265 | cy:10.000->9.970 | r:7.000->7.028 | stroke_circle:1.000->1.027 | arm_stroke:1.000->1.084
+semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
+small_variant_mode_active: reason=min_dim, min_dim=14.800, mask_dilate_px=1, text_mode=path_t, arm_min_ratio=0.750, stem_min_ratio=0.000
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=80.988
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 17.500->20.000, cy 10.000->10.000 (best_err=72.248)
+perf_probe: circle_center_elapsed round=1 elapsed=1.14s
+circle: Radius-Bracketing r 7.400->7.000 (best_err=67.104, full_err=24.703); Kandidaten=6.845->67.104, 7.000->67.104, 7.500->73.204, 9.600->95.974
+perf_probe: circle_radius_elapsed round=1 elapsed=0.19s
+arm: Fehler=29.232
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 12.500); Kandidaten=9.500->35.445, 12.500->29.232, 16.000->29.232, 22.000->29.232, 28.500->29.232, 35.000->29.232
+text: Fehler=77.962
+text: Breiten-Bracketing keine relevante Änderung (s: 0.007); Kandidaten=0.000->88.984
+perf_probe: global_search_elapsed round=1 elapsed=0.00s
+Runde 1: Gesamtfehler=24.680; Qualität (MAE-basiert, höher=besser): 88.83% -> 90.32% | mittlere Pixelabweichung (MAE, kleiner=besser): 28.489 -> 24.680 | Mean-Delta² (kleiner=besser): 7307.168 -> 6184.157 | Qualitätsgewinn=+3.809 (+13.37%) | Wirkung=verbessert
+best_validation_round=1
+executed_validation_rounds=1
+best_validation_error=24.680000
+phase2_rollback: no
+final_color_pass_skipped: lokale Kompaktvarianten verwenden kanonische Farben
+semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (links/rechts aus Parametern).

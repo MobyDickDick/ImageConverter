@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "GE0034",
-  "best_error": 27.2136,
+  "best_error": 30.5008,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 1.327999999979511,
-  "error_per_pixel": 0.01088544,
+  "elapsed_seconds": 0.25,
+  "error_per_pixel": 0.01220032,
   "error_pixel_cluster_count": 7.0,
-  "error_pixel_cluster_excess": 0.6815878354203936,
-  "error_pixel_count": 559.0,
+  "error_pixel_cluster_excess": 0.6775607843137255,
+  "error_pixel_count": 561.0,
   "filename": "GE0034_S.jpg",
   "h": 50,
-  "largest_error_pixel_cluster_fraction": 0.9051878354203936,
-  "localized_error_fraction": 0.6387961598797961,
-  "mean_delta2": 5484.2333984375,
+  "largest_error_pixel_cluster_fraction": 0.9019607843137255,
+  "localized_error_fraction": 0.6394401647812451,
+  "mean_delta2": 5191.2705078125,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -41,8 +45,8 @@
     },
     "description_fragments": [
       {
-        "key": "GE0034",
-        "source": "base_name",
+        "key": "GE0034_S",
+        "source": "variant_name",
         "text": "Wie GE0025, aber ohne Hintergrund"
       }
     ],
@@ -56,10 +60,10 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.041973240016032,
-          0.03834697650786615,
-          0.9200630380372716,
-          0.9218885408426841
+          0.04215283024126704,
+          0.038930713161466075,
+          0.9184674269410746,
+          0.9195602360043664
         ],
         "fill": "#719FBC",
         "id": "perception_circle_background",
@@ -73,14 +77,14 @@
           "source": "non_composite_perception_seed"
         },
         "stroke": "#CBDBE6",
-        "stroke_width": 0.03743320092439729
+        "stroke_width": 0.0382134571746041
       },
       {
         "bbox": [
-          0.6971791434808712,
-          0.52003810278228,
-          0.30037469098639014,
-          0.3792808885222941
+          0.70180698180252,
+          0.5175071354246381,
+          0.3003282381906489,
+          0.38159712186482114
         ],
         "fill": "#BAD0E0",
         "font_size": 0.342,
@@ -113,9 +117,10 @@
     "variant_name": "GE0034_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 13691.740327243695,
-  "std_delta2": 10121.30859375,
-  "tile_std_delta2": 5805.789008226993,
+  "rgb_rmse_per_channel": 41.59835937394847,
+  "spatial_quality_score": 13675.246002445361,
+  "std_delta2": 6513.4716796875,
+  "tile_std_delta2": 5801.5690978914245,
   "variant": "GE0034_S",
   "w": 50
 }

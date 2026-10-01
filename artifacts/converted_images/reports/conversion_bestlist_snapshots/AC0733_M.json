@@ -1,13 +1,13 @@
 {
   "actual_iterations": 64,
   "base": "AC0733",
-  "best_error": 29.77095238095238,
+  "best_error": 27.677142857142858,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
   "diff_error_distribution_status": "random_like",
-  "elapsed_seconds": 0.9690000000409782,
-  "error_per_pixel": 0.04252993197278911,
+  "elapsed_seconds": 0.20299999999406282,
+  "error_per_pixel": 0.039538775510204086,
   "error_pixel_cluster_count": 13.0,
   "error_pixel_cluster_excess": 0.23736263736263735,
   "error_pixel_count": 130.0,
@@ -15,7 +15,11 @@
   "h": 35,
   "largest_error_pixel_cluster_fraction": 0.4230769230769231,
   "localized_error_fraction": 0.687619331078588,
-  "mean_delta2": 7449.2626953125,
+  "mean_delta2": 7375.75732421875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -75,8 +79,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0733",
-        "source": "base_name",
+        "key": "AC0733_M",
+        "source": "variant_name",
         "text": "Wie AC0733, aber nach rechts gedreht, Text immer noch horizontal \"P\""
       }
     ],
@@ -358,8 +362,9 @@
     "variant_name": "AC0733_M"
   },
   "requested_iterations": 64,
+  "rgb_rmse_per_channel": 49.83058864898313,
   "spatial_quality_score": 19295.349714089345,
-  "std_delta2": 14226.8583984375,
+  "std_delta2": 15397.44140625,
   "tile_std_delta2": 8626.943267277658,
   "variant": "AC0733_M",
   "w": 20

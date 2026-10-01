@@ -1,13 +1,13 @@
 {
   "actual_iterations": 64,
   "base": "AC0502",
-  "best_error": 15.938888888888888,
+  "best_error": 12.743333333333334,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 1.3589999999385327,
-  "error_per_pixel": 0.008854938271604938,
+  "elapsed_seconds": 0.34399999999732245,
+  "error_per_pixel": 0.00707962962962963,
   "error_pixel_cluster_count": 25.0,
   "error_pixel_cluster_excess": 0.30154957648231195,
   "error_pixel_count": 446.0,
@@ -16,6 +16,10 @@
   "largest_error_pixel_cluster_fraction": 0.5493273542600897,
   "localized_error_fraction": 0.724726662356927,
   "mean_delta2": 1656.8843994140625,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -74,8 +78,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0502",
-        "source": "base_name",
+        "key": "AC0502_M",
+        "source": "variant_name",
         "text": "Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht."
       }
     ],
@@ -391,6 +395,7 @@
     "variant_name": "AC0502_M"
   },
   "requested_iterations": 64,
+  "rgb_rmse_per_channel": 23.500953168003367,
   "spatial_quality_score": 4956.089659964139,
   "std_delta2": 5640.00927734375,
   "tile_std_delta2": 2606.4386761822075,

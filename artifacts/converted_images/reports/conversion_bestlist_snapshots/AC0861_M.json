@@ -1,19 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "AC0861",
-  "best_error": 20.422857142857143,
+  "best_error": 24.77857142857143,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 3.187000000005355,
-  "error_per_pixel": 0.029175510204081635,
-  "error_pixel_cluster_count": 16.0,
-  "error_pixel_cluster_excess": 0.21214992927864212,
-  "error_pixel_count": 101.0,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.3899999999994179,
+  "error_per_pixel": 0.03539795918367347,
+  "error_pixel_cluster_count": 25.0,
+  "error_pixel_cluster_excess": 0.25251082251082246,
+  "error_pixel_count": 99.0,
   "filename": "AC0861_M.jpg",
   "h": 35,
-  "largest_error_pixel_cluster_fraction": 0.3564356435643564,
-  "localized_error_fraction": 0.848384939542797,
-  "mean_delta2": 5229.43701171875,
+  "largest_error_pixel_cluster_fraction": 0.3939393939393939,
+  "localized_error_fraction": 0.7923331635722736,
+  "mean_delta2": 6959.361328125,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -99,8 +105,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0861",
-        "source": "base_name",
+        "key": "AC0861_M",
+        "source": "variant_name",
         "text": "Kreisförmiges Badge. Abweichung: mit Text \"rF\" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises."
       }
     ],
@@ -166,9 +172,10 @@
     "variant_name": "AC0861_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 15891.989007823346,
-  "std_delta2": 12339.76953125,
-  "tile_std_delta2": 7472.657133364553,
+  "rgb_rmse_per_channel": 48.16416831395514,
+  "spatial_quality_score": 20140.35541059491,
+  "std_delta2": 14814.357421875,
+  "tile_std_delta2": 9349.475493359558,
   "variant": "AC0861_M",
   "w": 20
 }

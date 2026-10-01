@@ -1,15 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "GE0023",
-  "best_error": 19.406111111111112,
+  "best_error": 23.831944444444446,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.8600000000005821,
-  "error_per_pixel": 0.005390586419753087,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.23399999999674037,
+  "error_per_pixel": 0.006619984567901235,
+  "error_pixel_cluster_count": 83.0,
+  "error_pixel_cluster_excess": 0.07349636976533128,
+  "error_pixel_count": 857.0,
   "filename": "GE0023_1_M.jpg",
   "h": 60,
-  "localized_error_fraction": 0.3870067098738023,
-  "mean_delta2": 2770.62548828125,
+  "largest_error_pixel_cluster_fraction": 0.3115519253208868,
+  "localized_error_fraction": 0.4000843823837677,
+  "mean_delta2": 2807.984619140625,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -35,8 +45,8 @@
     },
     "description_fragments": [
       {
-        "key": "GE0023",
-        "source": "base_name",
+        "key": "GE0023_1_M",
+        "source": "variant_name",
         "text": "Wie GE0021: Dicker Pfeil nach oben vor blaugrauem Hintergrund. Hintergrund GE0999. Geometrische Variante: 180° gedreht."
       }
     ],
@@ -58,9 +68,10 @@
     "variant_name": "GE0023_1_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 5450.931886710978,
-  "std_delta2": 4004.759033203125,
-  "tile_std_delta2": 1566.008942458334,
+  "rgb_rmse_per_channel": 30.59403329158931,
+  "spatial_quality_score": 4449.966518918975,
+  "std_delta2": 2307.518798828125,
+  "tile_std_delta2": 1329.0640209999913,
   "variant": "GE0023_1_M",
   "w": 60
 }

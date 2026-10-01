@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "GE9011_2M",
-  "best_error": 46.639722222222225,
+  "best_error": 46.85138888888889,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 1.327999999979511,
-  "error_per_pixel": 0.038866435185185184,
+  "elapsed_seconds": 0.2970000000059372,
+  "error_per_pixel": 0.03904282407407408,
   "error_pixel_cluster_count": 3.0,
-  "error_pixel_cluster_excess": 0.4999213836477987,
-  "error_pixel_count": 265.0,
+  "error_pixel_cluster_excess": 0.49429440389294405,
+  "error_pixel_count": 274.0,
   "filename": "GE9011_2M.jpg",
   "h": 60,
-  "largest_error_pixel_cluster_fraction": 0.720754716981132,
-  "localized_error_fraction": 0.5956259739315535,
-  "mean_delta2": 12562.3779296875,
+  "largest_error_pixel_cluster_fraction": 0.7226277372262774,
+  "localized_error_fraction": 0.5936355176848674,
+  "mean_delta2": 12552.6572265625,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -180,9 +184,9 @@
       {
         "bbox": [
           0.0,
-          0.08851907291697389,
-          0.8501438715740889,
-          1.0
+          0.0885817916564892,
+          0.8516764811003097,
+          0.9986072823806487
         ],
         "fill": "#b8c8d0",
         "id": "backbottom_light_grey_square",
@@ -198,7 +202,7 @@
         },
         "role": "reference_light_grey_square",
         "stroke": "none",
-        "stroke_width": 0.0012231171643287278
+        "stroke_width": 0.001
       }
     ],
     "semantic_conflicts": [],
@@ -212,9 +216,10 @@
     "variant_name": "GE9011_2M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 29673.48845903703,
-  "std_delta2": 15409.4638671875,
-  "tile_std_delta2": 10703.700716239486,
+  "rgb_rmse_per_channel": 64.68553992602081,
+  "spatial_quality_score": 29510.648911411972,
+  "std_delta2": 15250.0537109375,
+  "tile_std_delta2": 10581.584212790414,
   "variant": "GE9011_2M",
   "w": 20
 }

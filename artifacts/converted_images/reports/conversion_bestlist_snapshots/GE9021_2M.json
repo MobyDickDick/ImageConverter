@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "GE9021_2M",
-  "best_error": 28.00138888888889,
+  "best_error": 28.676666666666666,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
   "diff_error_distribution_status": "random_like",
-  "elapsed_seconds": 0.7810000000754371,
-  "error_per_pixel": 0.023334490740740742,
-  "error_pixel_cluster_count": 10.0,
-  "error_pixel_cluster_excess": 0.1078205128205128,
-  "error_pixel_count": 286.0,
+  "elapsed_seconds": 1.2660000000032596,
+  "error_per_pixel": 0.023897222222222222,
+  "error_pixel_cluster_count": 9.0,
+  "error_pixel_cluster_excess": 0.11398998822143697,
+  "error_pixel_count": 283.0,
   "filename": "GE9021_2M.jpg",
   "h": 60,
-  "largest_error_pixel_cluster_fraction": 0.34615384615384615,
-  "localized_error_fraction": 0.6745282041657127,
-  "mean_delta2": 8481.6875,
+  "largest_error_pixel_cluster_fraction": 0.3498233215547703,
+  "localized_error_fraction": 0.6606563199526932,
+  "mean_delta2": 8903.03125,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -361,10 +365,10 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.125,
-          -0.10999999999999999,
-          0.75,
-          1.02
+          0.12400935257648849,
+          0.0,
+          0.7492429124788651,
+          1.0
         ],
         "fill": "#e8e8e8",
         "id": "u_loop_background",
@@ -418,7 +422,7 @@
         },
         "role": "u_loop",
         "stroke": "#176f28",
-        "stroke_width": 0.033350000000000005
+        "stroke_width": 0.032492111044437104
       }
     ],
     "semantic_conflicts": [],
@@ -432,9 +436,10 @@
     "variant_name": "GE9021_2M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 24597.54399970161,
-  "std_delta2": 17841.06640625,
-  "tile_std_delta2": 13727.494964828164,
+  "rgb_rmse_per_channel": 56.134331304841126,
+  "spatial_quality_score": 23910.203146498097,
+  "std_delta2": 19055.78515625,
+  "tile_std_delta2": 12644.571865051088,
   "variant": "GE9021_2M",
   "w": 20
 }

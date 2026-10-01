@@ -1,15 +1,41 @@
 {
+  "actual_iterations": 64,
   "base": "AC0301",
-  "best_error": 13.468125,
+  "best_error": 13.347708333333333,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.00210439453125,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.26600000000325963,
+  "error_per_pixel": 0.0020855794270833333,
+  "error_pixel_cluster_count": 5.0,
+  "error_pixel_cluster_excess": 0.7774238323192556,
+  "error_pixel_count": 1397.0,
   "filename": "AC0301_1_L.jpg",
   "h": 80,
-  "mean_delta2": 3987.5556640625,
+  "largest_error_pixel_cluster_fraction": 0.9957050823192556,
+  "localized_error_fraction": 0.6878690353734991,
+  "mean_delta2": 3815.161865234375,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [
         "missing_geometry_terms"
@@ -21,8 +47,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0301",
-        "source": "base_name",
+        "key": "AC0301_1_L",
+        "source": "variant_name",
         "text": "Kompresor grauer Hintergrund nach oben"
       }
     ],
@@ -33,6 +59,55 @@
     "geometry_ir": [],
     "label": "",
     "mode": "insufficient_description",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.060020643937479065,
+          0.05976930865007027,
+          0.9014661352803336,
+          0.8998915583797882
+        ],
+        "fill": "#E11F49",
+        "id": "perception_circle_background",
+        "kind": "CircleBackground",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.9861,
+          "detection_source": "hough",
+          "detector": "detect_circle_rings",
+          "kind": "circle",
+          "source": "non_composite_perception_seed"
+        },
+        "stroke": "#D14362",
+        "stroke_width": 0.03539669366597327
+      },
+      {
+        "bbox": [
+          0.8248808026382063,
+          0.18534952722050443,
+          0.17662347257119726,
+          0.23590949824882096
+        ],
+        "fill": "#E37C93",
+        "font_size": 0.21375,
+        "id": "perception_text_glyph",
+        "kind": "TextGlyph",
+        "perception_seed": {
+          "candidate_schema_version": "perception_primitive_candidate_v1",
+          "confidence": 0.7206,
+          "detector": "template_match_text_glyph",
+          "evidence": {
+            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
+            "description_hint": "top",
+            "detector": "template_match_text_glyph",
+            "threshold_model": "binary_inverse_threshold_210"
+          },
+          "kind": "text_glyph",
+          "source": "non_composite_perception_seed"
+        },
+        "text": "L"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -43,7 +118,11 @@
     "top_source_ref": null,
     "variant_name": "AC0301_1_L"
   },
-  "std_delta2": 12754.9189453125,
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 35.66119209651848,
+  "spatial_quality_score": 11400.859683140665,
+  "std_delta2": 12059.654296875,
+  "tile_std_delta2": 4444.7171933615,
   "variant": "AC0301_1_L",
   "w": 80
 }

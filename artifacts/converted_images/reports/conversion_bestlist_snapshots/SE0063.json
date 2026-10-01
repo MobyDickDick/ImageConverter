@@ -1,0 +1,111 @@
+{
+  "actual_iterations": 64,
+  "base": "SE0063",
+  "best_error": 36.266,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.5149999999994179,
+  "error_per_pixel": 0.036266,
+  "error_pixel_cluster_count": 11.0,
+  "error_pixel_cluster_excess": 0.11692307692307691,
+  "error_pixel_count": 260.0,
+  "filename": "SE0063.jpg",
+  "h": 40,
+  "largest_error_pixel_cluster_fraction": 0.3769230769230769,
+  "localized_error_fraction": 0.5558571731568995,
+  "mean_delta2": 8005.72216796875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "#d8d8d8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "SE0063",
+        "source": "base_name",
+        "text": "Wie AC0811, jecoch ist der Kreis viereckig anstatt rund gezeichnet. Abweichung: anstelle von \"T\" steht ein \"P\" Abweichung: nach rechts gekippt. \"P\" steht waagrecht geschrieben. Abweichung: nach rechts gekippt. \"P\" steht waagrecht geschrieben."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0811"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "label": "T",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "SE0063"
+  },
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 51.658242865873625,
+  "spatial_quality_score": 17543.432218795017,
+  "std_delta2": 13246.580078125,
+  "tile_std_delta2": 8136.600302370793,
+  "variant": "SE0063",
+  "w": 25
+}

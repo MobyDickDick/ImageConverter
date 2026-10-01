@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "AC0732",
-  "best_error": 23.82133333333333,
+  "best_error": 24.202666666666666,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
   "diff_error_distribution_status": "random_like",
-  "elapsed_seconds": 0.8429999999934807,
-  "error_per_pixel": 0.06352355555555556,
-  "error_pixel_cluster_count": 7.0,
+  "elapsed_seconds": 0.23500000000058208,
+  "error_per_pixel": 0.06454044444444444,
+  "error_pixel_cluster_count": 8.0,
   "error_pixel_cluster_excess": 0.19281159420289856,
   "error_pixel_count": 69.0,
   "filename": "AC0732_S.jpg",
   "h": 15,
   "largest_error_pixel_cluster_fraction": 0.37681159420289856,
-  "localized_error_fraction": 0.6521185809506318,
-  "mean_delta2": 5993.76806640625,
+  "localized_error_fraction": 0.6455443888512393,
+  "mean_delta2": 5466.64013671875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -75,8 +79,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0732",
-        "source": "base_name",
+        "key": "AC0732_S",
+        "source": "variant_name",
         "text": "wie AC072, aber nach rechts gredreht, Text immer noch horizontal \"P\""
       }
     ],
@@ -280,9 +284,10 @@
     "variant_name": "AC0732_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 22989.979164203745,
-  "std_delta2": 13811.7314453125,
-  "tile_std_delta2": 10932.748632981667,
+  "rgb_rmse_per_channel": 55.518964946673854,
+  "spatial_quality_score": 22851.872190900405,
+  "std_delta2": 11745.40234375,
+  "tile_std_delta2": 10753.206039737508,
   "variant": "AC0732_S",
   "w": 25
 }

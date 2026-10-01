@@ -1,15 +1,41 @@
 {
+  "actual_iterations": 64,
   "base": "L79X",
-  "best_error": 11.078059701492537,
+  "best_error": 10.13592039800995,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0016534417464914234,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.23399999999674037,
+  "error_per_pixel": 0.0015128239400014852,
+  "error_pixel_cluster_count": 42.0,
+  "error_pixel_cluster_excess": 0.29675591845391164,
+  "error_pixel_count": 1689.0,
   "filename": "L79x_TSP.jpg",
   "h": 67,
-  "mean_delta2": 2033.567626953125,
+  "largest_error_pixel_cluster_fraction": 0.5488454706927176,
+  "localized_error_fraction": 0.9257875871927835,
+  "mean_delta2": 1948.6541748046875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -18,11 +44,6 @@
       "status": "ok"
     },
     "description_fragments": [
-      {
-        "key": "L79x",
-        "source": "base_name",
-        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Form wie L609x_LCD, jedoch irgendwie andere Proportionen"
-      },
       {
         "key": "L79x_TSP",
         "source": "variant_name",
@@ -44,7 +65,11 @@
     "top_source_ref": null,
     "variant_name": "L79X_TSP"
   },
-  "std_delta2": 11908.462890625,
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 25.48629811490014,
+  "spatial_quality_score": 7504.448910639907,
+  "std_delta2": 11355.7841796875,
+  "tile_std_delta2": 4278.075377260152,
   "variant": "L79X_TSP",
   "w": 100
 }

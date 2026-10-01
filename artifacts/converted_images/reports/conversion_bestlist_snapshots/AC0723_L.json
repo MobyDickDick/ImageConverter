@@ -1,15 +1,75 @@
 {
+  "actual_iterations": 64,
   "base": "AC0723",
-  "best_error": 24.396444444444445,
+  "best_error": 26.442666666666668,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.021685728395061728,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.29699999999138527,
+  "error_per_pixel": 0.023504592592592594,
+  "error_pixel_cluster_count": 2.0,
+  "error_pixel_cluster_excess": 0.5432316384180791,
+  "error_pixel_count": 177.0,
   "filename": "AC0723_L.jpg",
   "h": 45,
-  "mean_delta2": 6033.14111328125,
+  "largest_error_pixel_cluster_fraction": 0.7005649717514124,
+  "localized_error_fraction": 0.6526660461342112,
+  "mean_delta2": 7191.1201171875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_bbox": [
+            0.02,
+            0.4,
+            0.96,
+            0.58
+          ],
+          "body_fill": "#d92645",
+          "body_stroke": "#a0a0a0",
+          "body_stroke_width": 0.04,
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.5,
+              0.0
+            ],
+            [
+              0.5,
+              0.4
+            ]
+          ],
+          "connector_stroke": "#808080",
+          "connector_width": 0.08,
+          "font_size": 0.44,
+          "font_weight": "600",
+          "id": "description_element_1",
+          "kind": "VerticallyMirroredSquareKelleTGlyph",
+          "label": "T",
+          "label_center": [
+            0.5,
+            0.66
+          ],
+          "label_fill": "#dedede",
+          "source": "description"
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -19,29 +79,73 @@
     },
     "description_fragments": [
       {
-        "key": "AC0723",
-        "source": "base_name",
+        "key": "AC0723_L",
+        "source": "variant_name",
         "text": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: Vertikal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises."
       }
     ],
     "documented_alias_refs": [
       "AC0701"
     ],
-    "elements": [],
-    "geometry_ir": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
+    "geometry_ir": [
+      {
+        "body_bbox": [
+          0.02,
+          0.4,
+          0.96,
+          0.58
+        ],
+        "body_fill": "#d92645",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.5,
+            0.0
+          ],
+          [
+            0.5,
+            0.4
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.08,
+        "font_size": 0.44,
+        "font_weight": "600",
+        "id": "vertically_mirrored_square_kelle_t",
+        "kind": "VerticallyMirroredSquareKelleTGlyph",
+        "label": "T",
+        "label_center": [
+          0.5,
+          0.66
+        ],
+        "label_fill": "#dedede"
+      }
+    ],
     "label": "M",
-    "mode": "auto",
+    "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
       "layout_override",
       "description_heuristic"
     ],
-    "semantic_sources": {},
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
     "top_source_ref": null,
     "variant_name": "AC0723_L"
   },
-  "std_delta2": 12980.3232421875,
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 48.28138821447315,
+  "spatial_quality_score": 18596.69670256125,
+  "std_delta2": 15484.4814453125,
+  "tile_std_delta2": 7715.897609862954,
   "variant": "AC0723_L",
   "w": 25
 }

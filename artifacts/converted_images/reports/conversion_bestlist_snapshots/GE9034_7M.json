@@ -1,13 +1,13 @@
 {
   "actual_iterations": 64,
   "base": "GE9034_7M",
-  "best_error": 16.652708333333333,
+  "best_error": 16.632916666666667,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
   "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 1.422000000020489,
-  "error_per_pixel": 0.010407942708333333,
+  "elapsed_seconds": 0.2970000000059372,
+  "error_per_pixel": 0.010395572916666667,
   "error_pixel_cluster_count": 3.0,
   "error_pixel_cluster_excess": 0.182246835443038,
   "error_pixel_count": 316.0,
@@ -16,6 +16,10 @@
   "largest_error_pixel_cluster_fraction": 0.379746835443038,
   "localized_error_fraction": 0.7689984917939133,
   "mean_delta2": 4695.56201171875,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -217,8 +221,8 @@
         "bbox": [
           0.0,
           0.0,
-          0.7013940846898454,
-          0.7017582848215932
+          0.6989171378003682,
+          0.7010873529695513
         ],
         "fill": "#e8e8e8",
         "fill_opacity": 0.75,
@@ -235,7 +239,7 @@
         },
         "role": "reference_light_grey_square",
         "stroke": "none",
-        "stroke_width": 0.002134346892142363
+        "stroke_width": 0.001
       }
     ],
     "semantic_conflicts": [],
@@ -249,6 +253,7 @@
     "variant_name": "GE9034_7M"
   },
   "requested_iterations": 64,
+  "rgb_rmse_per_channel": 39.56244857487442,
   "spatial_quality_score": 13241.051961680056,
   "std_delta2": 10124.11328125,
   "tile_std_delta2": 6374.925025118609,

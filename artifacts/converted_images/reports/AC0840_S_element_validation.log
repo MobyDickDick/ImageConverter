@@ -1,0 +1,47 @@
+run-meta: run_seed=221693115 pass_seed_offset=65 trace_id=223688359600
+status=semantic_ok
+quality=borderline
+quality_reason=semantic_ok_trotz_hohem_elementfehler:text=83.446
+quality_elevated_elements=circle,text
+redraw_variation: seed=223688359600 changed_params=cx:8.000->7.917 | cy:7.500->7.482 | r:7.000->6.948 | stroke_circle:1.000->1.044
+semantic-guard: Textmodus aktiv (rf).
+small_variant_mode_active: reason=min_dim, min_dim=10.000, mask_dilate_px=1, text_mode=rf, arm_min_ratio=0.000, stem_min_ratio=0.000
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=83.012
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 7.500->8.500, cy 7.500->7.500 (best_err=65.777)
+perf_probe: circle_center_elapsed round=1 elapsed=0.34s
+circle: Radius-Bracketing r 5.000->5.500 (best_err=69.827, full_err=40.347); Kandidaten=5.400->65.777, 5.500->69.827, 6.000->71.375
+perf_probe: circle_radius_elapsed round=1 elapsed=0.14s
+text: Fehler=71.678
+text: Breiten-Bracketing rf_font_scale 0.580->1.203; Kandidaten=1.050->76.464, 1.203->73.052, 1.355->76.875, 1.558->83.159, 1.762->80.414, 1.914->79.269, 2.067->76.665
+perf_probe: global_search_elapsed round=1 elapsed=0.00s
+Runde 1: Gesamtfehler=40.009; Qualität (MAE-basiert, höher=besser): 81.08% -> 84.31% | mittlere Pixelabweichung (MAE, kleiner=besser): 48.236 -> 40.009 | Mean-Delta² (kleiner=besser): 12238.360 -> 9643.787 | Qualitätsgewinn=+8.227 (+17.06%) | Wirkung=verbessert
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=69.827
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 8.500->9.000, cy 7.500->7.500 (best_err=66.859)
+perf_probe: circle_center_elapsed round=2 elapsed=0.19s
+circle: Radius-Bracketing r 5.500->6.000 (best_err=66.859, full_err=40.596); Kandidaten=5.400->68.809, 5.500->66.859, 6.000->66.859, 6.500->66.859
+perf_probe: circle_radius_elapsed round=2 elapsed=0.27s
+text: Fehler=79.855
+text: Breiten-Bracketing rf_font_scale 1.203->1.223; Kandidaten=1.050->78.186, 1.203->79.855, 1.223->76.504, 1.383->80.431, 1.395->80.560, 1.625->82.741, 1.855->80.676, 2.027->78.107, 2.200->77.535
+perf_probe: global_search_elapsed round=2 elapsed=0.00s
+Runde 2: Gesamtfehler=40.600; Qualität (MAE-basiert, höher=besser): 84.31% -> 84.08% | mittlere Pixelabweichung (MAE, kleiner=besser): 40.009 -> 40.600 | Mean-Delta² (kleiner=besser): 9643.787 -> 9494.573 | Qualitätsgewinn=-0.591 (-1.48%) | Wirkung=verschlechtert
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=67.593
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 9.000->8.000, cy 7.500->7.500 (best_err=66.741)
+perf_probe: circle_center_elapsed round=3 elapsed=0.08s
+circle: Radius-Bracketing r 6.000->7.000 (best_err=64.562, full_err=33.916); Kandidaten=5.400->84.555, 6.000->66.741, 6.500->64.562, 7.000->64.562
+perf_probe: circle_radius_elapsed round=3 elapsed=0.11s
+text: Fehler=83.446
+text: Breiten-Stochastic-Survivor aktiviert (rf_font_scale=1.717, err=73.839)
+text: Breiten-Bracketing rf_font_scale 1.223->1.717; Kandidaten=1.050->74.431, 1.223->83.446, 1.395->80.976, 1.406->80.593, 1.625->75.011, 1.855->76.569, 2.027->81.428, 2.200->86.112
+perf_probe: global_search_elapsed round=3 elapsed=0.00s
+Runde 3: Gesamtfehler=36.178; Qualität (MAE-basiert, höher=besser): 84.08% -> 85.81% | mittlere Pixelabweichung (MAE, kleiner=besser): 40.600 -> 36.178 | Mean-Delta² (kleiner=besser): 9494.573 -> 8953.200 | Qualitätsgewinn=+4.422 (+10.89%) | Wirkung=verbessert
+best_validation_round=3
+executed_validation_rounds=3
+best_validation_error=36.177778
+phase2_rollback: no
+final_color_pass_skipped: lokale Kompaktvarianten verwenden kanonische Farben

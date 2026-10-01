@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "AC0531",
-  "best_error": 28.423541666666665,
+  "best_error": 32.25114583333333,
   "best_iter": 1,
   "convergence": "",
   "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
   "diff_error_distribution_status": "random_like",
-  "elapsed_seconds": 1.0469999999040738,
-  "error_per_pixel": 0.008882356770833332,
-  "error_pixel_cluster_count": 70.0,
+  "elapsed_seconds": 1.2030000000086147,
+  "error_per_pixel": 0.010078483072916667,
+  "error_pixel_cluster_count": 65.0,
   "error_pixel_cluster_excess": 0.0,
-  "error_pixel_count": 801.0,
+  "error_pixel_count": 804.0,
   "filename": "AC0531_2_L.jpg",
   "h": 80,
-  "largest_error_pixel_cluster_fraction": 0.1947565543071161,
-  "localized_error_fraction": 0.42017754021335574,
-  "mean_delta2": 3455.203125,
+  "largest_error_pixel_cluster_fraction": 0.24502487562189054,
+  "localized_error_fraction": 0.39808633945747746,
+  "mean_delta2": 3872.64990234375,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -74,8 +78,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0531",
-        "source": "base_name",
+        "key": "AC0531_2_L",
+        "source": "variant_name",
         "text": "Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: identisch zur Referenz."
       }
     ],
@@ -517,9 +521,10 @@
     "variant_name": "AC0531_2_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 5976.831620042991,
-  "std_delta2": 4913.2841796875,
-  "tile_std_delta2": 2440.8689702121183,
+  "rgb_rmse_per_channel": 35.92886445159727,
+  "spatial_quality_score": 6312.630908172383,
+  "std_delta2": 4757.52880859375,
+  "tile_std_delta2": 2335.014368263916,
   "variant": "AC0531_2_L",
   "w": 40
 }
