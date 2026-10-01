@@ -111,6 +111,18 @@ def parseArgsImpl(
         help="Schreibt bei fehlgeschlagenen JPG-Konvertierungen automatisch JPEG-Lade-Diagnosen als JSON in den Report-Ordner.",
     )
     parser.add_argument(
+        "--debug-trace",
+        nargs="?",
+        const="auto",
+        default=None,
+        metavar="PATH",
+        help=(
+            "Schreibt eine strukturierte JSONL-Ablaufspur mit Auswahl, Strategie, "
+            "Qualitaetswerten und Template-Transfer-Entscheidungen. Ohne PATH wird "
+            "reports/conversion_debug_trace.jsonl verwendet."
+        ),
+    )
+    parser.add_argument(
         "--bootstrap-deps",
         action="store_true",
         help=(
@@ -638,6 +650,7 @@ def runMainImpl(
                     selected_variants,
                     bool(args.deterministic_order),
                     bool(getattr(args, "debug_jpeg_load", False)),
+                    getattr(args, "debug_trace", None),
                 )
             print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
             if args.mode == "convert" and _hasBatchFailures(str(out_dir)):

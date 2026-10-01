@@ -44,6 +44,7 @@ def runInitialConversionPassImpl(
     should_stop_after_failure_fn=None,
     before_variant_fn=None,
     checkpoint_fn=None,
+    debug_event_fn=None,
 ) -> bool:
     stop_after_failure = False
     current_test_id = str(__import__("os").environ.get("PYTEST_CURRENT_TEST", ""))
@@ -64,13 +65,26 @@ def runInitialConversionPassImpl(
             os.environ["ICC_ANCHOR_VARIANT_TOTAL"] = str(total_variants)
             os.environ["ICC_ANCHOR_RUN_CONTEXT"] = f"initial_pass:{variant_idx}/{total_variants}"
         badge_rounds = resolveInitialBadgeValidationRoundsImpl(base_iterations)
+        if debug_event_fn is not None:
+            debug_event_fn(
+                "variant_started",
+                filename=filename,
+                variant_index=variant_idx,
+                variant_total=len(process_files),
+                iteration_budget=base_iterations,
+                badge_validation_rounds=badge_rounds,
+            )
         row, failed = convert_one_fn(filename, iteration_budget=base_iterations, badge_rounds=badge_rounds)
         if failed:
+            if debug_event_fn is not None:
+                debug_event_fn("variant_failed", filename=filename, stage="native_conversion")
             stop_after_failure = True
             if should_stop_after_failure_fn is not None and should_stop_after_failure_fn(filename):
                 break
             continue
         if row is None:
+            if debug_event_fn is not None:
+                debug_event_fn("variant_skipped", filename=filename, reason="converter_returned_no_row")
             continue
 
         donor_rows = [
@@ -80,7 +94,7 @@ def runInitialConversionPassImpl(
         ]
         donor_rows.extend(prev for prev in existing_donor_rows if str(prev.get("filename", "")) != filename)
         if donor_rows:
-            transferred, _detail = try_template_transfer_fn(
+            transferred, transfer_detail = try_template_transfer_fn(
                 target_row=row,
                 donor_rows=donor_rows,
                 folder_path=folder_path,
@@ -89,10 +103,28 @@ def runInitialConversionPassImpl(
                 rng=rng,
                 deterministic_order=deterministic_order,
             )
+            if debug_event_fn is not None:
+                debug_event_fn(
+                    "template_transfer_evaluated",
+                    filename=filename,
+                    donor_count=len(donor_rows),
+                    accepted=transferred is not None,
+                    detail=transfer_detail or {},
+                    reason=("improved_pixel_error" if transferred is not None else "no_compatible_improvement"),
+                )
             if transferred is not None and float(transferred.get("error_per_pixel", float("inf"))) + 1e-9 < float(
                 row.get("error_per_pixel", float("inf"))
             ):
                 row = transferred
+        elif debug_event_fn is not None:
+            debug_event_fn(
+                "template_transfer_evaluated",
+                filename=filename,
+                donor_count=0,
+                accepted=False,
+                detail={},
+                reason="no_donor_rows_available",
+            )
 
         variant = str(row.get("variant", "")).strip().upper()
         previous_row = conversion_bestlist_rows.get(variant)
@@ -112,6 +144,8 @@ def runInitialConversionPassImpl(
                     "variant": variant,
                 }
             )
+        if debug_event_fn is not None:
+            debug_event_fn("variant_completed", filename=filename, row=row)
 
     return stop_after_failure
 

@@ -29,6 +29,34 @@ python -m src.imageCompositeConverter \
   --end AC0814
 ```
 
+### Nachvollziehen, warum eine Konvertierung schlecht ist
+
+Mit `--debug-trace` schreibt der Konverter zusaetzlich eine maschinenlesbare
+JSONL-Ablaufspur nach `reports/conversion_debug_trace.jsonl`:
+
+```bash
+python -m src.imageCompositeConverter artifacts/images_to_convert \
+  --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml \
+  --output-dir artifacts/debug-conversion \
+  --start AC0811_L --end AC0811_L \
+  --deterministic-order --debug-trace
+```
+
+Jede Zeile ist ein eigenstaendiges JSON-Objekt. Die Spur dokumentiert unter
+anderem die tatsaechlich ausgewaehlten Dateien, Zufallsseed und Budgets,
+inkrementell wiederverwendete Ergebnisse, Qualitaetsschwellen, den erkannten
+Strategiemodus und die Zahl der Geometrieelemente. Fuer Template-Transfers
+werden Anzahl der Spender, Annahme/Ablehnung, gewaehlter Spender, Rotation,
+Skalierung und der Fehler vor/nach dem Transfer festgehalten. So ist sichtbar,
+ob ein Bild neu analysiert, nur aus dem Cache uebernommen oder mangels einer
+kompatiblen Verbesserung nicht von einer anderen Variante abgeleitet wurde.
+
+Ein eigener Zielpfad kann direkt hinter der Option angegeben werden:
+
+```bash
+python -m src.imageCompositeConverter ... --debug-trace artifacts/test-evidence/my-run.jsonl
+```
+
 ## Artefakt- und Log-Pfade
 
 `artifacts/converted_images/` ist für erzeugte Bild-/SVG-/CSV- und Review-Artefakte reserviert. Neue Laufzeitlogs sollen nicht mehr unter `artifacts/converted_images/` abgelegt werden, damit synchronisierte Arbeitskopien wie `myCloud/imageConverter/artifacts/converted_image(s)` keine Logdateien enthalten. Für neue Nachweise bitte stattdessen `artifacts/test-evidence/*.log` verwenden und die zugehörige Zusammenfassung als Markdown daneben ablegen.

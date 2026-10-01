@@ -36,6 +36,22 @@ def test_parse_args_impl_accepts_strict_batch_failure_exit_flag() -> None:
     assert args.fail_on_batch_failures is True
 
 
+def test_parse_args_impl_accepts_debug_trace_with_optional_path() -> None:
+    common = {
+        "ac08_regression_set_name": "ac08-regression",
+        "ac08_regression_variants": ("AC0800_L",),
+        "svg_render_subprocess_timeout_sec": 5.0,
+    }
+
+    automatic = cli_helpers.parseArgsImpl(argv=["images", "--debug-trace"], **common)
+    explicit = cli_helpers.parseArgsImpl(
+        argv=["images", "--debug-trace", "diagnostics/run.jsonl"], **common
+    )
+
+    assert automatic.debug_trace == "auto"
+    assert explicit.debug_trace == "diagnostics/run.jsonl"
+
+
 def test_parse_args_impl_accepts_optimization_telemetry_regression_exit_flag() -> None:
     args = cli_helpers.parseArgsImpl(
         argv=["images", "--fail-on-optimization-render-regression"],

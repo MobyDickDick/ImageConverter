@@ -44,6 +44,7 @@ from src.iCCModules import imageCompositeConverterSemanticAuditLogging as semant
 from src.iCCModules import imageCompositeConverterSemanticAc0223Runtime as semantic_ac0223_runtime_helpers
 from src.iCCModules import imageCompositeConverterSemanticValidationContext as semantic_validation_context_helpers
 from src.iCCModules import imageCompositeConverterSemanticValidationLogging as semantic_validation_logging_helpers
+from src.iCCModules import imageCompositeConverterDebugTrace as debug_trace_helpers
 from src.iCCModules import imageCompositeConverterSemanticValidationRuntime as semantic_validation_runtime_helpers
 from src.iCCModules import imageCompositeConverterSemanticValidationFinalization as semantic_validation_finalization_helpers
 from src.iCCModules import imageCompositeConverterSemanticMismatchReporting as semantic_mismatch_reporting_helpers
@@ -1135,6 +1136,7 @@ def convertRange(
     selected_variants: set[str] | None = None,
     deterministic_order: bool = False,
     debug_jpeg_load: bool = False,
+    debug_trace_path: str | None = None,
 ) -> str:
     out_root = output_root or _defaultConvertedSymbolsRoot()
     svg_out_dir = _convertedSvgOutputDir(out_root)
@@ -1150,6 +1152,10 @@ def convertRange(
     os.makedirs(failed_svg_out_dir, exist_ok=True)
     os.makedirs(failed_png_out_dir, exist_ok=True)
     os.makedirs(reports_out_dir, exist_ok=True)
+    resolved_debug_trace_path = debug_trace_helpers.resolveDebugTracePathImpl(
+        debug_trace_path, reports_out_dir
+    )
+    debug_event = debug_trace_helpers.createDebugTraceEmitterImpl(resolved_debug_trace_path)
 
     normalized_selected_variants, files = _listRequestedImageFiles(
         folder_path,
@@ -1157,6 +1163,20 @@ def convertRange(
         end_ref,
         selected_variants=selected_variants,
     )
+    debug_event(
+        "run_started",
+        input_dir=os.path.abspath(folder_path),
+        descriptions_path=os.path.abspath(csv_path),
+        output_dir=os.path.abspath(out_root),
+        start_ref=start_ref,
+        end_ref=end_ref,
+        requested_iterations=iterations,
+        deterministic_order=deterministic_order,
+        selected_variants=sorted(normalized_selected_variants or []),
+        matched_files=files,
+    )
+    if resolved_debug_trace_path is not None:
+        print(f"[DEBUG] Strukturierte Ablaufspur: {resolved_debug_trace_path}")
     if not files:
         summary_text = conversion_input_helpers.inputSelectionSummaryImpl(
             folder_path=folder_path,
@@ -1168,6 +1188,11 @@ def convertRange(
         (Path(reports_out_dir) / "input_selection_summary.txt").write_text(summary_text, encoding="utf-8")
         print(summary_text.rstrip())
     if cv2 is None or np is None:
+        debug_event(
+            "embedded_raster_fallback",
+            reason="numpy_or_opencv_unavailable",
+            matched_file_count=len(files),
+        )
         _runEmbeddedRasterFallback(
             files=files,
             folder_path=folder_path,
@@ -1183,6 +1208,14 @@ def convertRange(
             if base_svg.exists():
                 base_svg.unlink()
             failed_svg.rename(base_svg)
+        debug_event(
+            "run_completed",
+            result_count=0,
+            failure_count=0,
+            reused_count=0,
+            output_dir=os.path.abspath(out_root),
+            fallback="embedded_raster",
+        )
         return out_root
     rng = _conversionRandom()
     run_seed = 0 if deterministic_order else rng.randrange(1 << 30)
@@ -1241,6 +1274,13 @@ def convertRange(
         descriptions_path=csv_path,
         force_reconvert=force_reconvert,
     )
+    debug_event(
+        "incremental_partition",
+        reused_count=len(reusable_rows),
+        recomputed_count=len(process_files),
+        force_reconvert=force_reconvert,
+        reused_variants=sorted(str(row.get("variant", "")) for row in reusable_rows.values()),
+    )
     result_map.update(reusable_rows)
     checkpoint_resume_enabled = os.environ.get("ICC_RESUME_FROM_CHECKPOINT", "").strip().lower() in {
         "1",
@@ -1283,6 +1323,16 @@ def convertRange(
         cfg,
         existing_donor_rows,
         successful_threshold_fn=_computeSuccessfulConversionsErrorThreshold,
+    )
+    debug_event(
+        "policy_resolved",
+        run_seed=run_seed,
+        base_iterations=base_iterations,
+        max_quality_passes=max_quality_passes,
+        quality_pass_policy_reason=quality_pass_policy_reason,
+        max_mean_delta2=max_mean_delta2,
+        max_std_delta2=max_std_delta2,
+        early_quality_gate=early_quality_gate,
     )
     early_gate_pending = set(process_files)
     conversion_timeout_sec = max(0.0, float(os.environ.get("ICC_CONVERSION_TIMEOUT_SEC", "0") or "0"))
@@ -1417,6 +1467,11 @@ def convertRange(
         ),
         before_variant_fn=lambda variant_idx, _filename: setattr(Action, "STOCHASTIC_SEED_OFFSET", variant_idx),
         checkpoint_fn=_writeIncrementalCheckpoint,
+        debug_event_fn=lambda event, **fields: debug_event(
+            event,
+            **({**fields, "row": debug_trace_helpers.summarizeConversionRowImpl(fields.get("row"))}
+               if "row" in fields else fields),
+        ),
     )
 
     current_rows = [
@@ -1427,6 +1482,13 @@ def convertRange(
     allowed_error_pp, threshold_source, _successful_threshold, _initial_threshold = _resolveAllowedErrorPerPixel(
         current_rows,
         cfg,
+    )
+    debug_event(
+        "quality_threshold_resolved",
+        allowed_error_per_pixel=allowed_error_pp,
+        source=threshold_source,
+        successful_threshold=_successful_threshold,
+        initial_threshold=_initial_threshold,
     )
 
     # Newly calculated variants remain eligible for stochastic quality passes.
@@ -1534,6 +1596,14 @@ def convertRange(
             batch_failures=batch_failures,
         )
     _moveNonconvertableSources(folder_path=folder_path, batch_failures=batch_failures)
+
+    debug_event(
+        "run_completed",
+        result_count=len(result_map),
+        failure_count=len(batch_failures),
+        reused_count=len(reused_variants),
+        output_dir=os.path.abspath(out_root),
+    )
 
     Action.STOCHASTIC_SEED_OFFSET = 0
     Action.STOCHASTIC_RUN_SEED = 0
