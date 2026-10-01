@@ -428,6 +428,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nicht-Grün-Triage – FP-D4 Run NO (2026-06-03)](non_green_triage_2026-06-03_runNO.md)
 - [Nicht konvertierbare Klassen – Beispiele (Stand 2026-05-14)](nonconvertable_classes_examples_2026-05-14.md)
 - [Open Tasks](open_tasks.md)
+- [Nächste Arbeitspakete aus den hochgeladenen Artefakten (2026-10-01)](next_arbeitspakete_aus_artifacts_2026-10-01.md)
 - [Offene Test-Aufgaben (Stand 2026-05-19)](open_test_tasks_2026-05-19.md)
 - [Untersuchung: Warum die SVG-Konvertierung „harzig“ ist (Stand 2026-04-12)](optimization_investigation_2026-04-12.md)
 - [_PerTestTimeout Inventar (Stand 2026-05-21)](per_test_timeout_inventory_2026-05-21.md)
