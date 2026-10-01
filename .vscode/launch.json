@@ -12,7 +12,8 @@
         "artifacts/images_to_convert",
         "--descriptions-path",
         "artifacts/descriptions/Finale_Wurzelformen_V3.xml",
-        "--interactive-range"
+        "--interactive-range",
+        "--debug-trace"
       ],
       "justMyCode": false
     },
@@ -47,7 +48,8 @@
         "--start",
         "AC0000",
         "--end",
-        "ZZ9999"
+        "ZZ9999",
+        "--debug-trace"
       ],
       "justMyCode": false
     },
