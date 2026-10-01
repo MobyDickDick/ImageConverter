@@ -1,10 +1,10 @@
- __pycache__/
- .pytest_cache/
- .pytest_cache
- .tinylanguage/
- .tinylanguage
- .vens
- # Virtual environments
+__pycache__/
+.pytest_cache/
+.tinylanguage/
+.tinylanguage
+.vens
+# Virtual environments
+.venv/
 venv/
 dist/*
 !dist/tinylanguage_bundle.zip
@@ -17,6 +17,15 @@ vscode-extension/tinylanguage-vscode-0.1.0.vsix
 # Profiling artifacts
 artifacts/perf/**/*.prof
 /.venv-py314
+
+# Local analysis and runtime output
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+*.prof
+*.tmp
+*.local.log
 
 # Generated report tiles (binary)
 artifacts/converted_images/reports/reports/overview_svg_tiles.png

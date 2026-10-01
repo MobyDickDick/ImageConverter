@@ -157,6 +157,20 @@ python -m src.imageCompositeConverter \
 
 ## Tests and checks
 
+### Lokale Arbeitskopie bereinigen
+
+Unter Windows zeigt `cleanup.bat` ohne Argumente zunächst nur entbehrliche lokale
+Dateien an (virtuelle Umgebungen, Python-/Test-Caches, Profiler-Ausgaben und
+lokale Logs). Erst `cleanup.bat --apply` löscht diese Dateien. Projektartefakte,
+Quelldaten und die vendorten Linux-Abhängigkeiten bleiben dabei erhalten.
+
+Bereits in Git-Commits enthaltene entbehrliche Dateien können mit
+`cleanup.bat --purge-history` und dem separat zu installierenden
+`git-filter-repo` aus der gesamten Historie entfernt werden. Dieser Modus setzt
+einen sauberen Arbeitsbaum voraus, schreibt alle betroffenen Commit-IDs neu und
+erfordert anschließend eine sorgfältige Prüfung sowie einen koordinierten
+Force-Push. Andere Arbeitskopien sollten danach neu geklont werden.
+
 ```bash
 python -m compileall src tests
 python tools/check_no_new_image_id_hardcoding.py
