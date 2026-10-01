@@ -61,6 +61,15 @@ def _committed_mean_delta2(variant: str, fallback: float) -> float:
     return float(value)
 
 
+def _review_committed_snapshot(variant: str, *, source: str) -> QualityRecord:
+    """Review the immutable bestlist SVG, not a newer mutable batch output."""
+    return review_variant(
+        variant,
+        source=source,
+        svg_dirs=(Path("artifacts/converted_images/reports/conversion_bestlist_snapshots"),),
+    )
+
+
 def _assert_normalized_mse_matches_mean_delta2(record: QualityRecord) -> None:
     assert record.mean_delta2 is not None
     assert record.normalized_mse is not None
@@ -356,7 +365,11 @@ def test_ac0551_1_m_committed_svg_preserves_chevron_quality() -> None:
 
 
 def test_ac0835_l_committed_svg_is_below_review_threshold() -> None:
-    record = review_variant("AC0835_L", source="successful_conversion")
+    record = review_variant(
+        "AC0835_L",
+        source="successful_conversion",
+        svg_dirs=(Path("src/artifacts/converted_images/converted_svgs"),),
+    )
 
     assert record.status == "ok"
     assert record.width == 25
@@ -368,7 +381,7 @@ def test_ac0835_l_committed_svg_is_below_review_threshold() -> None:
 
 
 def test_ac0922_s_committed_snapshot_preserves_circle_connector_quality() -> None:
-    record = review_variant("AC0922_S", source="diff_inventory")
+    record = _review_committed_snapshot("AC0922_S", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 25
@@ -376,7 +389,9 @@ def test_ac0922_s_committed_snapshot_preserves_circle_connector_quality() -> Non
     assert record.svg_path == (
         "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0922_S.svg"
     )
-    assert record.mean_delta2 == pytest.approx(5359.11181640625)
+    assert record.mean_delta2 == pytest.approx(
+        _committed_mean_delta2("AC0922_S", 5359.11181640625)
+    )
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
@@ -630,7 +645,7 @@ def test_ac0701_1_s_committed_svg_preserves_upright_square_kelle_quality() -> No
 
 
 def test_ac0845_s_committed_svg_preserves_connector_free_rh_badge_quality() -> None:
-    record = review_variant("AC0845_S", source="diff_inventory")
+    record = _review_committed_snapshot("AC0845_S", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 15
