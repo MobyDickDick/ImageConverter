@@ -1,0 +1,227 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+[INFO] Konvertiere DLG0000.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite DLG0000.jpg ---
+Bildbeschreibung: Wie AC0100: Wie AC0010. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0000.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.842458, localized_error_fraction=0.757859).
+[INFO] Konvertiert DLG0000.jpg | Parameter: mode=auto, label=M, variant_name=DLG0000 | Qualität: Optimierungsfehler/Pixel=0.000094, Mean-Delta²=242.439453, RGB-RMSE/Kanal=8.989614, Raumscore=804.331761, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.5s
+[INFO] Konvertiere DLG0001.JPG | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite DLG0001.JPG ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0001.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.997565, localized_error_fraction=0.500566).
+[INFO] Konvertiert DLG0001.JPG | Parameter: mode=auto, label=M, variant_name=DLG0001 | Qualität: Optimierungsfehler/Pixel=0.000001, Mean-Delta²=23.857569, RGB-RMSE/Kanal=2.820022, Raumscore=67.530551, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=31.0s
+[INFO] Konvertiere DLG0002.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite DLG0002.jpg ---
+Bildbeschreibung: Rechteck mit vertikalem Farbverlauf weiss nach grau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0002.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.598193, localized_error_fraction=0.554856).
+[INFO] Konvertiert DLG0002.jpg | Parameter: mode=auto, label=M, variant_name=DLG0002 | Qualität: Optimierungsfehler/Pixel=0.000343, Mean-Delta²=362.636200, RGB-RMSE/Kanal=10.994486, Raumscore=782.325851, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere DLG0003.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite DLG0003.jpg ---
+Bildbeschreibung: Wie DLG0002: Rechteck mit vertikalem Farbverlauf weiss nach grau. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0003.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.574223, localized_error_fraction=0.544042).
+[INFO] Konvertiert DLG0003.jpg | Parameter: mode=auto, label=M, variant_name=DLG0003 | Qualität: Optimierungsfehler/Pixel=0.000344, Mean-Delta²=375.565399, RGB-RMSE/Kanal=11.188765, Raumscore=805.301121, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere DLG0010.JPG | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite DLG0010.JPG ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0010.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.774648, localized_error_fraction=0.734636).
+[INFO] Konvertiert DLG0010.JPG | Parameter: mode=auto, label=M, variant_name=DLG0010 | Qualität: Optimierungsfehler/Pixel=0.004496, Mean-Delta²=866.408447, RGB-RMSE/Kanal=16.994199, Raumscore=2515.853686, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere DLG0010_1.JPG | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite DLG0010_1.JPG ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0010_1.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.892100, localized_error_fraction=0.763440).
+[INFO] Konvertiert DLG0010_1.JPG | Parameter: mode=auto, label=M, variant_name=DLG0010_1 | Qualität: Optimierungsfehler/Pixel=0.021527, Mean-Delta²=28032.726562, RGB-RMSE/Kanal=96.665621, Raumscore=83130.160765, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere DLG0011.JPG | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite DLG0011.JPG ---
+Bildbeschreibung: Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0011.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.854809, localized_error_fraction=0.738439).
+[INFO] Konvertiert DLG0011.JPG | Parameter: mode=auto, label=M, variant_name=DLG0011 | Qualität: Optimierungsfehler/Pixel=0.006943, Mean-Delta²=2468.676514, RGB-RMSE/Kanal=28.686097, Raumscore=7092.237213, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere DLG0012.JPG | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite DLG0012.JPG ---
+Bildbeschreibung: leicht abgerundetes Rechteck mit horizontalem Farbverlauf zwischen zwei blaugrauen Farbtönen.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert DLG0012.JPG | Parameter: mode=auto, label=M, variant_name=DLG0012 | Qualität: Optimierungsfehler/Pixel=0.002316, Mean-Delta²=154.658951, RGB-RMSE/Kanal=7.180041, Raumscore=406.860381, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.4s
+[INFO] Konvertiere DLG0013.JPG | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite DLG0013.JPG ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0013.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.889599, localized_error_fraction=0.752095).
+[INFO] Konvertiert DLG0013.JPG | Parameter: mode=auto, label=M, variant_name=DLG0013 | Qualität: Optimierungsfehler/Pixel=0.001224, Mean-Delta²=798.484680, RGB-RMSE/Kanal=16.314459, Raumscore=2382.674420, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=2.6s
+[INFO] Konvertiere DLG0014.JPG | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite DLG0014.JPG ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0014.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.719070, localized_error_fraction=0.673136).
+[INFO] Konvertiert DLG0014.JPG | Parameter: mode=auto, label=M, variant_name=DLG0014 | Qualität: Optimierungsfehler/Pixel=0.000884, Mean-Delta²=332.514984, RGB-RMSE/Kanal=10.527978, Raumscore=904.263723, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=3.1s
+[INFO] Konvertiere DLG0010_1.JPG | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite DLG0010_1.JPG ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0010_1.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.892100, localized_error_fraction=0.763440).
+[INFO] Konvertiert DLG0010_1.JPG | Parameter: mode=auto, label=M, variant_name=DLG0010_1 | Qualität: Optimierungsfehler/Pixel=0.021467, Mean-Delta²=28032.726562, RGB-RMSE/Kanal=96.665621, Raumscore=83130.160765, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere DLG0011.JPG | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite DLG0011.JPG ---
+Bildbeschreibung: Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0011.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.854809, localized_error_fraction=0.738439).
+[INFO] Konvertiert DLG0011.JPG | Parameter: mode=auto, label=M, variant_name=DLG0011 | Qualität: Optimierungsfehler/Pixel=0.006940, Mean-Delta²=2468.676514, RGB-RMSE/Kanal=28.686097, Raumscore=7092.237213, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere DLG0010.JPG | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite DLG0010.JPG ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0010.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.766017, localized_error_fraction=0.728480).
+[INFO] Konvertiert DLG0010.JPG | Parameter: mode=auto, label=M, variant_name=DLG0010 | Qualität: Optimierungsfehler/Pixel=0.004509, Mean-Delta²=861.193787, RGB-RMSE/Kanal=16.942981, Raumscore=2477.934569, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere DLG0013.JPG | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite DLG0013.JPG ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0013.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.888483, localized_error_fraction=0.730620).
+[INFO] Konvertiert DLG0013.JPG | Parameter: mode=auto, label=M, variant_name=DLG0013 | Qualität: Optimierungsfehler/Pixel=0.001193, Mean-Delta²=768.065369, RGB-RMSE/Kanal=16.000681, Raumscore=2264.267818, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=2.0s
+[INFO] Konvertiere DLG0014.JPG | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite DLG0014.JPG ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0014.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.719070, localized_error_fraction=0.673136).
+[INFO] Konvertiert DLG0014.JPG | Parameter: mode=auto, label=M, variant_name=DLG0014 | Qualität: Optimierungsfehler/Pixel=0.000945, Mean-Delta²=332.514984, RGB-RMSE/Kanal=10.527978, Raumscore=904.263723, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=3.4s
+[INFO] Konvertiere DLG0003.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite DLG0003.jpg ---
+Bildbeschreibung: Wie DLG0002: Rechteck mit vertikalem Farbverlauf weiss nach grau. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0003.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.600253, localized_error_fraction=0.557485).
+[INFO] Konvertiert DLG0003.jpg | Parameter: mode=auto, label=M, variant_name=DLG0003 | Qualität: Optimierungsfehler/Pixel=0.000343, Mean-Delta²=365.224213, RGB-RMSE/Kanal=11.033649, Raumscore=792.045164, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.2s
+[INFO] Konvertiere DLG0002.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite DLG0002.jpg ---
+Bildbeschreibung: Rechteck mit vertikalem Farbverlauf weiss nach grau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0002.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.598193, localized_error_fraction=0.554856).
+[INFO] Konvertiert DLG0002.jpg | Parameter: mode=auto, label=M, variant_name=DLG0002 | Qualität: Optimierungsfehler/Pixel=0.000342, Mean-Delta²=362.636200, RGB-RMSE/Kanal=10.994486, Raumscore=782.325851, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.2s
+[INFO] Konvertiere DLG0000.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite DLG0000.jpg ---
+Bildbeschreibung: Wie AC0100: Wie AC0010. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0000.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.870133, localized_error_fraction=0.681914).
+[INFO] Konvertiert DLG0000.jpg | Parameter: mode=auto, label=M, variant_name=DLG0000 | Qualität: Optimierungsfehler/Pixel=0.000088, Mean-Delta²=176.668701, RGB-RMSE/Kanal=7.673954, Raumscore=548.545132, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.3s
+[INFO] Konvertiere DLG0001.JPG | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite DLG0001.JPG ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0001.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.997565, localized_error_fraction=0.500566).
+[INFO] Konvertiert DLG0001.JPG | Parameter: mode=auto, label=M, variant_name=DLG0001 | Qualität: Optimierungsfehler/Pixel=0.000001, Mean-Delta²=23.857569, RGB-RMSE/Kanal=2.820022, Raumscore=67.530551, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=34.1s
+[INFO] Konvertiere DLG0010_1.JPG | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite DLG0010_1.JPG ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0010_1.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.893822, localized_error_fraction=0.758827).
+[INFO] Konvertiert DLG0010_1.JPG | Parameter: mode=auto, label=M, variant_name=DLG0010_1 | Qualität: Optimierungsfehler/Pixel=0.021528, Mean-Delta²=27953.134766, RGB-RMSE/Kanal=96.528294, Raumscore=82611.465999, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Konvertiere DLG0011.JPG | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite DLG0011.JPG ---
+Bildbeschreibung: Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0011.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.854809, localized_error_fraction=0.738435).
+[INFO] Konvertiert DLG0011.JPG | Parameter: mode=auto, label=M, variant_name=DLG0011 | Qualität: Optimierungsfehler/Pixel=0.006940, Mean-Delta²=2468.528076, RGB-RMSE/Kanal=28.685235, Raumscore=7091.854960, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Konvertiere DLG0010.JPG | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite DLG0010.JPG ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0010.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.766017, localized_error_fraction=0.728480).
+[INFO] Konvertiert DLG0010.JPG | Parameter: mode=auto, label=M, variant_name=DLG0010 | Qualität: Optimierungsfehler/Pixel=0.004512, Mean-Delta²=861.193787, RGB-RMSE/Kanal=16.942981, Raumscore=2477.934569, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Konvertiere DLG0013.JPG | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite DLG0013.JPG ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0013.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.888483, localized_error_fraction=0.730620).
+[INFO] Konvertiert DLG0013.JPG | Parameter: mode=auto, label=M, variant_name=DLG0013 | Qualität: Optimierungsfehler/Pixel=0.001213, Mean-Delta²=768.065369, RGB-RMSE/Kanal=16.000681, Raumscore=2264.267818, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.8s
+[INFO] Konvertiere DLG0014.JPG | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite DLG0014.JPG ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0014.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.719070, localized_error_fraction=0.673136).
+[INFO] Konvertiert DLG0014.JPG | Parameter: mode=auto, label=M, variant_name=DLG0014 | Qualität: Optimierungsfehler/Pixel=0.000872, Mean-Delta²=332.514984, RGB-RMSE/Kanal=10.527978, Raumscore=904.263723, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=3.1s
+[INFO] Konvertiere DLG0003.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite DLG0003.jpg ---
+Bildbeschreibung: Wie DLG0002: Rechteck mit vertikalem Farbverlauf weiss nach grau. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0003.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.616036, localized_error_fraction=0.540897).
+[INFO] Konvertiert DLG0003.jpg | Parameter: mode=auto, label=M, variant_name=DLG0003 | Qualität: Optimierungsfehler/Pixel=0.000342, Mean-Delta²=364.825104, RGB-RMSE/Kanal=11.027618, Raumscore=780.215362, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.2s
+[INFO] Konvertiere DLG0002.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite DLG0002.jpg ---
+Bildbeschreibung: Rechteck mit vertikalem Farbverlauf weiss nach grau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] DLG0002.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.598193, localized_error_fraction=0.554856).
+[INFO] Konvertiert DLG0002.jpg | Parameter: mode=auto, label=M, variant_name=DLG0002 | Qualität: Optimierungsfehler/Pixel=0.000342, Mean-Delta²=362.636200, RGB-RMSE/Kanal=10.994486, Raumscore=782.325851, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.2s
+[INFO] Konvertiere DLG0000.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite DLG0000.jpg ---
+Bildbeschreibung: Wie AC0100: Wie AC0010. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0000.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.870133, localized_error_fraction=0.681914).
+[INFO] Konvertiert DLG0000.jpg | Parameter: mode=auto, label=M, variant_name=DLG0000 | Qualität: Optimierungsfehler/Pixel=0.000090, Mean-Delta²=176.668701, RGB-RMSE/Kanal=7.673954, Raumscore=548.545132, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.2s
+[INFO] Konvertiere DLG0001.JPG | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite DLG0001.JPG ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] DLG0001.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.997565, localized_error_fraction=0.500566).
+[INFO] Konvertiert DLG0001.JPG | Parameter: mode=auto, label=M, variant_name=DLG0001 | Qualität: Optimierungsfehler/Pixel=0.000001, Mean-Delta²=23.857569, RGB-RMSE/Kanal=2.820022, Raumscore=67.530551, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=33.6s
+[INFO] Übersichts-Kacheln erzeugt: diff=/tmp/ic-b-dlg-01-20261002/reports/overview_diff_tiles.png, svg=/tmp/ic-b-dlg-01-20261002/reports/overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: /tmp/ic-b-dlg-01-20261002
