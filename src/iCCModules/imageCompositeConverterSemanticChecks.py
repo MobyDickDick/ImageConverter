@@ -278,19 +278,28 @@ def detectSemanticPrimitivesImpl(
         x_start = max(0, int(round(cx)) - half_width)
         x_stop = min(w, int(round(cx)) + half_width + 1)
         minimum_run = max(3, int(round(float(h) * 0.12)))
-        for y_start, y_stop in (
-            (0, max(0, int(math.floor(cy - radius)) - 1)),
-            (min(h, int(math.ceil(cy + radius)) + 2), h),
+        for y_start, y_stop, exterior_row in (
+            (0, max(0, int(math.floor(cy - radius)) - 1), 0),
+            (min(h, int(math.ceil(cy + radius)) + 2), h, -1),
         ):
             corridor = fg_mask[y_start:y_stop, x_start:x_stop] > 0
             if corridor.size == 0:
                 continue
             longest_run = 0
             for column in range(corridor.shape[1]):
+                # Compact badge stems enter from the canvas edge. Requiring
+                # that anchor keeps a slightly underestimated Hough radius
+                # from exposing the circle ring (or an internal glyph) and
+                # misclassifying the isolated run as a connector.
+                if not bool(corridor[exterior_row, column]):
+                    continue
                 current_run = 0
-                for occupied in corridor[:, column].tolist():
+                pixels = corridor[:, column] if exterior_row == 0 else corridor[::-1, column]
+                for occupied in pixels.tolist():
                     current_run = current_run + 1 if occupied else 0
                     longest_run = max(longest_run, current_run)
+                    if not occupied:
+                        break
             if longest_run >= minimum_run:
                 has_stem = True
                 vertical_candidates = max(1, vertical_candidates)
