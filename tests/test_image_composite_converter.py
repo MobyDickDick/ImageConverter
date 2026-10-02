@@ -212,6 +212,37 @@ def test_detect_semantic_primitives_detects_plain_ring_without_arm() -> None:
     assert observed["text"] is False
 
 
+def test_detect_semantic_primitives_uses_scaled_circle_evidence_for_tiny_variant() -> None:
+    """Small symbol canvases retain a measured circle candidate and its provenance."""
+    if conv.cv2 is None or conv.np is None:
+        pytest.skip("opencv/numpy not available in this environment")
+
+    img = conv.cv2.imread("artifacts/images_to_convert/AC0714_M.jpg")
+    if img is None:
+        pytest.skip("AC0714_M.jpg not available in this environment")
+
+    observed = conv.Action._detect_semantic_primitives(img)
+
+    assert observed["circle"] is True
+    assert observed["circle_detection_source"] == "scaled_hough"
+    assert float(observed["circle_confidence"]) >= 0.6
+    assert observed["circle_geometry"] != "none"
+    assert observed["circle_rejection_reason"] == ""
+
+
+def test_detect_semantic_primitives_does_not_relax_blank_negative_control() -> None:
+    if conv.cv2 is None or conv.np is None:
+        pytest.skip("opencv/numpy not available in this environment")
+
+    img = conv.np.full((15, 25, 3), 255, dtype=conv.np.uint8)
+    observed = conv.Action._detect_semantic_primitives(img)
+
+    assert observed["circle"] is False
+    assert observed["circle_detection_source"] == "none"
+    assert float(observed["circle_confidence"]) == 0.0
+    assert observed["circle_rejection_reason"]
+
+
 @pytest.mark.blocking_conversion
 def test_detect_semantic_primitives_detects_vertical_connector_without_arm() -> None:
     """AC0813 badges should report a vertical connector, not hallucinate a horizontal one."""

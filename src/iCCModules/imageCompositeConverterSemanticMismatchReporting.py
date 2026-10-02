@@ -6,12 +6,18 @@ def buildSemanticConnectorDebugLineImpl(*, structural: dict[str, object]) -> str
     circle_source = str(structural.get("circle_detection_source", "unknown"))
     horizontal_candidates = int(structural.get("horizontal_line_candidates", 0) or 0)
     vertical_candidates = int(structural.get("vertical_line_candidates", 0) or 0)
+    circle_confidence = float(structural.get("circle_confidence", 0.0) or 0.0)
+    circle_geometry = str(structural.get("circle_geometry", "none"))
+    circle_rejection_reason = str(structural.get("circle_rejection_reason", ""))
     return (
         "semantic_connector_classification="
         f"{connector_orientation};"
         f"circle_source={circle_source};"
         f"horizontal_candidates={horizontal_candidates};"
         f"vertical_candidates={vertical_candidates}"
+        f";circle_confidence={circle_confidence:.4f}"
+        f";circle_geometry={circle_geometry}"
+        f";circle_rejection_reason={circle_rejection_reason or 'none'}"
     )
 
 

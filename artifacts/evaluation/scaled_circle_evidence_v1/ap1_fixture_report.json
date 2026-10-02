@@ -1,0 +1,38 @@
+{
+  "schema_version": "scaled_circle_evidence_v1",
+  "generated_at": "2026-10-01T00:00:00Z",
+  "fixtures": [
+    {
+      "decision": "needs_review",
+      "detection_source": "none",
+      "filename": "AC0703_1_M.jpg",
+      "geometry": null,
+      "confidence": 0.0,
+      "rejection_reason": "candidate_clipped_by_canvas"
+    },
+    {
+      "decision": "needs_review",
+      "detection_source": "none",
+      "filename": "AC0704_1_S.jpg",
+      "geometry": null,
+      "confidence": 0.0,
+      "rejection_reason": "no_candidate"
+    },
+    {
+      "decision": "circle",
+      "detection_source": "scaled_hough",
+      "filename": "AC0714_M.jpg",
+      "geometry": {"cx": 17.0, "cy": 12.0, "radius_px": 6.0},
+      "confidence": 0.7787,
+      "rejection_reason": null
+    },
+    {
+      "decision": "negative",
+      "detection_source": "none",
+      "filename": "synthetic_blank_25x15",
+      "geometry": null,
+      "confidence": 0.0,
+      "rejection_reason": "no_candidate"
+    }
+  ]
+}

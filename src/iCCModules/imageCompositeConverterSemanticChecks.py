@@ -38,7 +38,7 @@ def detectSemanticPrimitivesImpl(
     foreground_mask_fn: Callable[[Any], Any],
     circle_from_foreground_mask_fn: Callable[[Any], tuple[float, float, float] | None],
     clip_scalar_fn: Callable[[float, float, float], float],
-) -> dict[str, bool | int | str]:
+) -> dict[str, bool | int | float | str]:
     """Detect coarse semantic primitives directly from the raw bitmap."""
     h, w = img_orig.shape[:2]
     if h <= 0 or w <= 0:
@@ -48,6 +48,9 @@ def detectSemanticPrimitivesImpl(
             "arm": False,
             "text": False,
             "circle_detection_source": "none",
+            "circle_confidence": 0.0,
+            "circle_geometry": "none",
+            "circle_rejection_reason": "empty_image",
             "connector_orientation": "none",
             "horizontal_line_candidates": 0,
             "vertical_line_candidates": 0,
@@ -60,6 +63,9 @@ def detectSemanticPrimitivesImpl(
     min_side = max(1, min(h, w))
     badge = badge_params or {}
     circle_detection_source = "none"
+    circle_confidence = 0.0
+    circle_geometry = "none"
+    circle_rejection_reason = "no_candidate"
 
     circles = cv2.HoughCircles(
         cv2.GaussianBlur(gray, (5, 5), 0),
@@ -98,7 +104,62 @@ def detectSemanticPrimitivesImpl(
             has_circle = True
             circle_geom = (float(cx), float(cy), float(r))
             circle_detection_source = "hough"
+            circle_confidence = 0.8
+            circle_geometry = f"{cx},{cy},{r}"
+            circle_rejection_reason = ""
             break
+
+    # Tiny catalog variants need a lower Hough accumulator threshold than the
+    # coarse semantic guard above.  Keep this as a separate, measured rescue
+    # path: candidates still need foreground coverage around at least half of
+    # the circumference, so lowering the scale-dependent threshold does not
+    # turn every compact glyph or line crossing into a circle.
+    if not has_circle:
+        scaled_circles = cv2.HoughCircles(
+            cv2.GaussianBlur(gray, (5, 5), 0),
+            cv2.HOUGH_GRADIENT,
+            dp=1.1,
+            minDist=max(8.0, min_side * 0.25),
+            param1=90,
+            param2=max(8, int(round(min_side * 0.16))),
+            minRadius=max(3, int(round(min_side * 0.08))),
+            maxRadius=max(8, int(round(min_side * 0.48))),
+        )
+        if scaled_circles is not None and scaled_circles.size > 0:
+            for cx, cy, radius in np.round(scaled_circles[0, :]).astype(int):
+                r = int(max(3, radius))
+                edge_tolerance = max(1.0, float(r) * 0.12)
+                if (
+                    float(cx) - r < -edge_tolerance
+                    or float(cy) - r < -edge_tolerance
+                    or float(cx) + r > float(w - 1) + edge_tolerance
+                    or float(cy) + r > float(h - 1) + edge_tolerance
+                ):
+                    circle_rejection_reason = "candidate_clipped_by_canvas"
+                    continue
+                yy, xx = np.ogrid[:h, :w]
+                dist = np.sqrt((xx - int(cx)) ** 2 + (yy - int(cy)) ** 2)
+                ring = np.abs(dist - float(r)) <= max(1.4, float(r) * 0.20)
+                ring_count = int(np.count_nonzero(ring))
+                coverage = float(np.mean(fg_mask[ring] > 0)) if ring_count else 0.0
+                bins = np.zeros(12, dtype=np.uint8)
+                for py, px in np.argwhere(ring):
+                    if fg_mask[py, px] <= 0:
+                        continue
+                    angle = math.atan2(float(py - cy), float(px - cx))
+                    bins[int(((angle + math.pi) / (2.0 * math.pi)) * 12) % 12] = 1
+                covered_bins = int(np.sum(bins))
+                confidence = min(0.99, 0.45 + coverage * 0.35 + covered_bins / 12.0 * 0.20)
+                if coverage < 0.22 or covered_bins < 6:
+                    circle_rejection_reason = "insufficient_ring_coverage"
+                    continue
+                has_circle = True
+                circle_geom = (float(cx), float(cy), float(r))
+                circle_detection_source = "scaled_hough"
+                circle_confidence = confidence
+                circle_geometry = f"{cx},{cy},{r}"
+                circle_rejection_reason = ""
+                break
 
     if not has_circle:
         fallback_circle = circle_from_foreground_mask_fn(fg_mask > 0)
@@ -106,6 +167,9 @@ def detectSemanticPrimitivesImpl(
             has_circle = True
             circle_geom = fallback_circle
             circle_detection_source = "foreground_mask"
+            circle_confidence = 0.7
+            circle_geometry = ",".join(f"{float(value):.2f}" for value in fallback_circle)
+            circle_rejection_reason = ""
 
     if not has_circle and badge:
         if _supports_ac08_small_circle_geometry_fallback(badge):
@@ -128,6 +192,9 @@ def detectSemanticPrimitivesImpl(
                     has_circle = True
                     circle_geom = (exp_cx, exp_cy, exp_r)
                     circle_detection_source = "geometry_fallback"
+                    circle_confidence = 0.6
+                    circle_geometry = f"{exp_cx:.2f},{exp_cy:.2f},{exp_r:.2f}"
+                    circle_rejection_reason = ""
 
     has_arm = False
     has_stem = False
@@ -253,6 +320,9 @@ def detectSemanticPrimitivesImpl(
         "arm": bool(has_arm),
         "text": bool(has_text),
         "circle_detection_source": circle_detection_source,
+        "circle_confidence": round(float(circle_confidence), 4),
+        "circle_geometry": circle_geometry,
+        "circle_rejection_reason": circle_rejection_reason,
         "connector_orientation": connector_orientation,
         "horizontal_line_candidates": int(horizontal_candidates),
         "vertical_line_candidates": int(vertical_candidates),

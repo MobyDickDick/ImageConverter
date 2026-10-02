@@ -1142,7 +1142,7 @@ class Action:
     def _detect_semantic_primitives(
         img_orig: np.ndarray,
         badge_params: dict | None = None,
-    ) -> dict[str, bool | int | str]:
+    ) -> dict[str, bool | int | float | str]:
         return Action._detectSemanticPrimitives(img_orig, badge_params)
 
     @staticmethod
