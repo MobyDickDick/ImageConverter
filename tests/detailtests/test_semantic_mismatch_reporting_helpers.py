@@ -15,7 +15,10 @@ def test_build_semantic_connector_debug_line_impl_formats_all_fields() -> None:
         == "semantic_connector_classification=vertical;"
         "circle_source=family_fallback;"
         "horizontal_candidates=1;"
-        "vertical_candidates=3"
+        "vertical_candidates=3;"
+        "circle_confidence=0.0000;"
+        "circle_geometry=none;"
+        "circle_rejection_reason=none"
     )
 
 
