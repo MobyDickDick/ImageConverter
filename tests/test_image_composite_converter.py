@@ -261,6 +261,38 @@ def test_detect_semantic_primitives_detects_vertical_connector_without_arm() -> 
     assert observed["connector_orientation"] == "vertical"
 
 
+@pytest.mark.parametrize("variant", ["AC0843_L", "AC0843_M", "AC0843_S"])
+def test_detect_semantic_primitives_scales_ac0843_top_connector(variant: str) -> None:
+    """The same external stem remains detectable at all catalog sizes."""
+    if conv.cv2 is None or conv.np is None:
+        pytest.skip("opencv/numpy not available in this environment")
+
+    img = conv.cv2.imread(f"artifacts/images_to_convert/{variant}.jpg")
+    assert img is not None
+
+    observed = conv.Action._detect_semantic_primitives(img)
+
+    assert observed["circle"] is True
+    assert observed["stem"] is True
+    assert observed["arm"] is False
+    assert observed["connector_orientation"] == "vertical"
+
+
+@pytest.mark.parametrize("variant", ["AC0842_L", "AC0844_L"])
+def test_detect_semantic_primitives_keeps_horizontal_ac084x_controls(variant: str) -> None:
+    """The compact-stem rescue must not reclassify neighboring horizontal badges."""
+    if conv.cv2 is None or conv.np is None:
+        pytest.skip("opencv/numpy not available in this environment")
+
+    img = conv.cv2.imread(f"artifacts/images_to_convert/{variant}.jpg")
+    assert img is not None
+
+    observed = conv.Action._detect_semantic_primitives(img)
+
+    assert observed["arm"] is True
+    assert observed["connector_orientation"] == "horizontal"
+
+
 def test_foreground_mask_keeps_tiny_plain_ring_pixels() -> None:
     """Foreground extraction should preserve faint anti-aliased ring strokes."""
     if conv.cv2 is None or conv.np is None:
@@ -1341,6 +1373,29 @@ def test_parse_description_marks_ac0863_as_rf_upper_arm_badge() -> None:
     assert params["label"] == "rF"
     assert "SEMANTIC: Kreis + Buchstabe rF" in list(params.get("elements", []))
     assert "SEMANTIC: senkrechter Strich oben vom Kreis" in list(params.get("elements", []))
+
+
+def test_parse_description_derives_ac0843_top_connector_from_explicit_geometry() -> None:
+    """An explicit relation must work without a catalog-specific family rule."""
+    description = (
+        'Wie AC0842, jedoch nochmals um 90° nach rechts gedreht; der Griff verläuft '
+        'als senkrechte Linie oberhalb des Kreises, der Text bleibt horizontal lesbar.'
+    )
+    ref = image_composite_converter.Reflection(
+        {
+            "AC0842": (
+                'Grauer Kreis mit Text "rF" und waagrechtem Griff links vom Kreis.'
+            ),
+            "UNSEEN_BADGE": description,
+        }
+    )
+
+    _desc, params = ref.parse_description("UNSEEN_BADGE_L", "UNSEEN_BADGE_L.jpg")
+
+    elements = list(params.get("elements", []))
+    assert params["mode"] == "semantic_badge"
+    assert "SEMANTIC: senkrechter Strich oben vom Kreis" in elements
+    assert "SEMANTIC: waagrechter Strich links vom Kreis" not in elements
 
 
 @pytest.mark.parametrize("variant", ["AC0800_L", "AC0800_M", "AC0800_S"])
