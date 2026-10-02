@@ -480,6 +480,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Schwach, aber noch machbar konvertierbare Formfamilien (2026-05-31)](weak_but_feasible_shape_families_2026-05-31.md)
 - [Nächstes Arbeitspaket – AP3 Qualitätswarteschlange (2026-10-02)](next_arbeitspaket_2026-10-02_ap3.md)
 - [Nächstes Arbeitspaket – A3/A4 Standard-Run B-AR-01 (2026-10-02)](next_arbeitspaket_2026-10-02_b_ar_01.md)
+- [Nächstes Arbeitspaket – A3/A4 Standard-Run B-DLG-01 (2026-10-02)](next_arbeitspaket_2026-10-02_b_dlg_01.md)
 
 - [Nächstes Arbeitspaket – GE1001_M Checkmark-Primitive Run SQ (2026-06-24)](next_arbeitspaket_2026-06-24_runSQ.md)
 - [Nächstes Arbeitspaket – GE9021_7M U-Loop-Primitive Run SR (2026-06-25)](next_arbeitspaket_2026-06-25_runSR.md)
