@@ -2,6 +2,7 @@
 set -euo pipefail
 
 SUMMARY_PATH="artifacts/converted_images/reports/chain_phase_telemetry_summary.txt"
+REPORTS_DIR="artifacts/converted_images/reports"
 REQUIRE_DRIFT_SUMMARY=0
 PYTHON_BIN="${PYTHON:-python}"
 VENDOR_SITE_PACKAGES="vendor/linux-py310/site-packages"
@@ -18,7 +19,8 @@ Runs the standard local completion profile:
   2. syntax/import compilation for src and tests
   3. the pytest suite
   4. the ImageConverter CLI help smoke test
-  5. the chain-telemetry drift gate when a summary artifact is present
+  5. the report-consistency gate when conversion reports are present
+  6. the chain-telemetry drift gate when a summary artifact is present
 
 The repo vendor path is prepended to PYTHONPATH when available so CLI smoke
 checks can resolve bundled runtime dependencies. By default the drift-gate
@@ -66,6 +68,13 @@ run_step "image-ID hardcoding ratchet" "$PYTHON_BIN" tools/check_no_new_image_id
 run_step "compileall" "$PYTHON_BIN" -m compileall src tests
 run_step "pytest" "$PYTHON_BIN" -m pytest
 run_step "ImageConverter CLI help" "$PYTHON_BIN" -m src.imageCompositeConverter --help
+
+if [[ -f "$REPORTS_DIR/conversion_checkpoint.json" ]]; then
+  run_step "report consistency gate" "$PYTHON_BIN" tools/check_report_consistency.py "$REPORTS_DIR"
+else
+  echo "==> report consistency gate"
+  echo "SKIP: conversion checkpoint is missing: ${REPORTS_DIR}/conversion_checkpoint.json"
+fi
 
 if [[ -f "$SUMMARY_PATH" ]]; then
   echo "==> chain telemetry drift gate"
