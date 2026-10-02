@@ -62,25 +62,47 @@ call :require_clean
 if errorlevel 1 exit /b %ERRORLEVEL%
 
 echo Aktiviere schlanke Arbeitskopie ...
-git sparse-checkout init --no-cone
-if errorlevel 1 exit /b %ERRORLEVEL%
-
-for /f "delims=" %%I in ('git rev-parse --git-path info/sparse-checkout') do set "SPARSE_FILE=%%I"
+set "SPARSE_FILE=%TEMP%\ImageConverter-sparse-%RANDOM%-%RANDOM%.txt"
 powershell -NoProfile -ExecutionPolicy Bypass -Command ^
   "$ErrorActionPreference = 'Stop';" ^
   "$patterns = [System.Collections.Generic.List[string]]@('/*', '!/*/', '/src/', '/tests/', '/tools/', '/config/', '/stabilization/', '/.github/', '/.vscode/', '/artifacts/', '!/artifacts/*/', '/artifacts/images_to_convert/', '!/artifacts/images_to_convert/*.jpg', '!/artifacts/images_to_convert/*.JPG', '/artifacts/images_to_convert/nonconvertable/', '!/artifacts/images_to_convert/nonconvertable/*.jpg', '!/artifacts/images_to_convert/nonconvertable/*.JPG', '/artifacts/regression_baseline/', '/artifacts/evaluation/');" ^
   "$subset = Get-Content -LiteralPath 'config/compact_image_subset.txt' | Where-Object { $_ -and -not $_.StartsWith('#') };" ^
   "$subset | ForEach-Object { $patterns.Add('/artifacts/images_to_convert/' + $_) };" ^
   "Set-Content -LiteralPath $env:SPARSE_FILE -Value $patterns -Encoding ASCII"
-if errorlevel 1 exit /b %ERRORLEVEL%
+if errorlevel 1 goto :sparse_pattern_failed
 
-git sparse-checkout reapply
-if errorlevel 1 exit /b %ERRORLEVEL%
+rem Die Porcelain-Schnittstelle setzt die Muster und aktualisiert den Arbeitsbaum
+rem atomar. Das direkte Schreiben nach .git/info plus reapply war je nach
+rem Git-Version wirkungslos, obwohl der Befehl Erfolg meldete.
+git sparse-checkout set --no-cone --stdin < "%SPARSE_FILE%"
+set "SPARSE_EXIT=%ERRORLEVEL%"
+del /q "%SPARSE_FILE%" >nul 2>nul
+if not "%SPARSE_EXIT%"=="0" exit /b %SPARSE_EXIT%
+
+rem Nicht nur dem Exitcode vertrauen: Diese versionierten Beispieldateien muessen
+rem nach einem wirksamen Sparse-Checkout physisch aus der Arbeitskopie fehlen.
+if exist "docs\README.md" goto :sparse_failed
+if exist "vendor\linux-py310\site-packages\PIL\AvifImagePlugin.py" goto :sparse_failed
+if exist "artifacts\converted_images\commented_diff_images\AC0020_M_commented_diff.png" goto :sparse_failed
+if exist "artifacts\images_to_convert\AC0010.jpg" goto :sparse_failed
 
 echo.
-echo Arbeitskopie wurde eingedampft. Starte schnelles Testprofil ...
+echo Arbeitskopie wurde physisch eingedampft.
+echo Hinweis: "git status" bleibt dabei absichtlich sauber; Sparse-Checkout ist
+echo eine lokale Ansicht und keine Dateiaenderung. Starte schnelles Testprofil ...
 call :run_quick_test
 exit /b %ERRORLEVEL%
+
+:sparse_pattern_failed
+del /q "%SPARSE_FILE%" >nul 2>nul
+echo FEHLER: Die Sparse-Checkout-Muster konnten nicht erzeugt werden.
+exit /b 5
+
+:sparse_failed
+echo FEHLER: Git meldete Erfolg, aber ausgeschlossene Dateien sind weiterhin vorhanden.
+echo Die Arbeitskopie wurde nicht nachweisbar eingedampft. Pruefe "git --version"
+echo und "git sparse-checkout list". Es werden keine Tests gestartet.
+exit /b 5
 
 :restore
 call :require_clean

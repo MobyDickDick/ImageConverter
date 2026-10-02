@@ -171,6 +171,11 @@ ausgeblendet, nicht aus Git geloescht. Der Vorgang ist daher mit `--restore`
 umkehrbar. Ohne Argument dampft das Skript die Arbeitskopie ein; `--dry-run`
 zeigt stattdessen nur die geplante Wirkung. Das Eindampfen verlangt einen sauberen
 Arbeitsbaum und startet anschliessend automatisch das kurze `core-green`-Testprofil.
+Die ausgeblendeten versionierten Dateien verschwinden dabei physisch aus dem
+Arbeitsverzeichnis, `git status` bleibt jedoch absichtlich leer: Sparse-Checkout
+ändert nur die lokale Arbeitsbaumansicht und erzeugt keine Git-Änderungen. Das
+Skript prüft deshalb vor dem Teststart anhand ausgeschlossener Beispieldateien,
+dass Git die Muster tatsächlich angewendet hat, und meldet andernfalls einen Fehler.
 
 ```bat
 eindampfen.bat
