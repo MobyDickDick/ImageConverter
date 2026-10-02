@@ -415,6 +415,43 @@ def test_convert_one_impl_marks_timeout_as_batch_error(tmp_path: Path) -> None:
     assert batch_failures[0]["reason"] == "TimeoutError"
 
 
+def test_convert_one_impl_checks_timeout_without_unix_timer(tmp_path: Path, monkeypatch) -> None:
+    reports = tmp_path / "reports"
+    reports.mkdir()
+    batch_failures: list[dict[str, str]] = []
+    monkeypatch.delattr(conversion_execution_helpers.signal, "setitimer", raising=False)
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename="AC0801_S.jpg",
+        folder_path=str(tmp_path),
+        csv_path="descriptions.csv",
+        iteration_budget=3,
+        badge_rounds=5,
+        svg_out_dir=str(tmp_path),
+        diff_out_dir=str(tmp_path),
+        png_out_dir=str(tmp_path / "png"),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=lambda *_args, **_kwargs: (
+            time.sleep(0.02) or ("AC0801_S", "desc", {"mode": "semantic_badge"}, 1, 1.0)
+        ),
+        read_validation_log_details_fn=lambda _path: {},
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: object(),
+        calculate_delta2_stats_fn=lambda _img, _rendered: (0.0, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem,
+        cv2_module=_Cv2Stub(None),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=batch_failures.append,
+        run_timeout_sec=0.001,
+        print_fn=lambda _msg: None,
+    )
+
+    assert row is None
+    assert failed is True
+    assert batch_failures[0]["reason"] == "TimeoutError"
+
+
 def test_convert_one_impl_skipped_status_with_result_marks_embedded_svg_as_failed(tmp_path: Path) -> None:
     folder = tmp_path / "images"
     svg_out = tmp_path / "svg"
