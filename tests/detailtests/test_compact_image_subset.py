@@ -40,6 +40,17 @@ def test_eindampfen_builds_sparse_checkout_from_subset_manifest() -> None:
     assert "!/artifacts/images_to_convert/nonconvertable/*.jpg" in script
     assert "config/compact_image_subset.txt" in script
     assert "'/artifacts/images_to_convert/' + $_" in script
+    assert "git sparse-checkout set --no-cone --stdin" in script
+    assert "git sparse-checkout reapply" not in script
+
+
+def test_eindampfen_verifies_that_excluded_files_are_physically_absent() -> None:
+    script = (PROJECT_ROOT / "eindampfen.bat").read_text(encoding="utf-8")
+
+    assert 'if exist "docs\\README.md" goto :sparse_failed' in script
+    assert 'if exist "artifacts\\images_to_convert\\AC0010.jpg" goto :sparse_failed' in script
+    assert 'echo Arbeitskopie wurde physisch eingedampft.' in script
+    assert ':sparse_failed' in script
 
 
 def test_eindampfen_applies_by_default_and_keeps_explicit_preview() -> None:
