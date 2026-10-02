@@ -2,11 +2,11 @@
 setlocal EnableExtensions
 
 rem Erstellt eine schlanke, jederzeit rueckgaengig zu machende Arbeitskopie.
-rem Ohne Argument wird ausschliesslich angezeigt, was passieren wuerde.
+rem Ohne Argument wird die Arbeitskopie eingedampft. --dry-run zeigt nur die Wirkung.
 
 cd /d "%~dp0"
 
-if "%~1"=="" goto :preview
+if "%~1"=="" goto :apply
 if not "%~2"=="" goto :usage_error
 if /I "%~1"=="--dry-run" goto :preview
 if /I "%~1"=="--apply" goto :apply
@@ -112,8 +112,8 @@ exit /b %ERRORLEVEL%
 
 :help
 echo Verwendung: eindampfen.bat [--dry-run^|--apply^|--restore^|--test]
-echo   --dry-run  Nur Wirkung anzeigen ^(Standard^)
-echo   --apply    Sparse-Checkout aktivieren und Schnelltests ausfuehren
+echo   --dry-run  Nur Wirkung anzeigen
+echo   --apply    Sparse-Checkout aktivieren und Schnelltests ausfuehren ^(Standard^)
 echo   --restore  Alle versionierten Dateien wieder einblenden
 echo   --test     Nur das schnelle core-green-Testprofil ausfuehren
 exit /b 0

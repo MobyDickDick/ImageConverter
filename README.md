@@ -167,14 +167,14 @@ einen bekannten AC0800-Kontrollfall, die fuenf aktuellen Plan-B-Kandidaten sowie
 schwierige Faelle fuer Textregistrierung, Diagrammerkennung und den
 `nonconvertable`-Pfad. Historische Dokumentation, der restliche Bildkatalog,
 vendorte Linux-Binaerdateien und erzeugte Konvertierungsergebnisse werden nur
-ausgeblendet, nicht geloescht. Der Vorgang ist daher mit `--restore` umkehrbar.
-Ohne Argument arbeitet das Skript als sichere Vorschau; `--apply` verlangt einen
-sauberen Arbeitsbaum und startet anschliessend automatisch das kurze
-`core-green`-Testprofil.
+ausgeblendet, nicht aus Git geloescht. Der Vorgang ist daher mit `--restore`
+umkehrbar. Ohne Argument dampft das Skript die Arbeitskopie ein; `--dry-run`
+zeigt stattdessen nur die geplante Wirkung. Das Eindampfen verlangt einen sauberen
+Arbeitsbaum und startet anschliessend automatisch das kurze `core-green`-Testprofil.
 
 ```bat
 eindampfen.bat
-eindampfen.bat --apply
+eindampfen.bat --dry-run
 eindampfen.bat --test
 eindampfen.bat --restore
 ```
