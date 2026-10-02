@@ -11,6 +11,7 @@ PROFILES = {
         "-m",
         "not blocking_conversion and not optional_fixture",
         "tests/detailtests/test_conversion_execution_helpers.py",
+        "tests/detailtests/test_compact_image_subset.py",
         "tests/detailtests/test_iteration_setup_helpers.py",
         "tests/detailtests/test_quality_config_helpers.py",
     ],

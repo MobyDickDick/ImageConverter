@@ -160,8 +160,12 @@ python -m src.imageCompositeConverter \
 ### Lokale Arbeitskopie bereinigen
 
 Fuer kurze Entwicklungszyklen kann `eindampfen.bat` die Arbeitskopie per Git
-Sparse-Checkout auf Code, Tests, Konfiguration sowie die erforderlichen
-Eingabebilder und Regressions-Baselines reduzieren. Historische Dokumentation,
+Sparse-Checkout auf Code, Tests, Konfiguration sowie ein kleines, in
+`config/compact_image_subset.txt` definiertes Subset von neun repraesentativen
+Eingabebildern und die Regressions-Baselines reduzieren. Das Subset enthaelt
+einen bekannten AC0800-Kontrollfall, die fuenf aktuellen Plan-B-Kandidaten sowie
+schwierige Faelle fuer Textregistrierung, Diagrammerkennung und den
+`nonconvertable`-Pfad. Historische Dokumentation, der restliche Bildkatalog,
 vendorte Linux-Binaerdateien und erzeugte Konvertierungsergebnisse werden nur
 ausgeblendet, nicht geloescht. Der Vorgang ist daher mit `--restore` umkehrbar.
 Ohne Argument arbeitet das Skript als sichere Vorschau; `--apply` verlangt einen
