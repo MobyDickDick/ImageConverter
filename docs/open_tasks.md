@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-08-03)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `401` · Erledigt `374` · Offen `27`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `401` · Erledigt `375` · Offen `26`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -2371,7 +2371,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
     sichern sowohl fehlende als auch nicht auffindbare `semantic_description`
     ab; Analyse-/Annotate-Pfade bleiben davon unberührt.
 
-- [ ] **ZG2 (P0): Bildspezifische Logik aus Hauptpfad entfernen**
+- [x] **ZG2 (P0): Bildspezifische Logik aus Hauptpfad entfernen** (2026-10-02: Die bereits abgeschlossene IDO-P2/P3-Migration wurde gegen die ZG2-Akzeptanzkriterien revalidiert. Die absolute Runtime-Nullprüfung findet keine Katalog-ID in `src/`; Filename-Invarianz- und umbenannte Holdout-Referenztests bleiben grün. Details: `docs/next_arbeitspaket_2026-10-02_zg2.md`.)
   - Inventur aller dateiname-/familienabhängigen Heuristiken, danach Migration auf beschreibungsgetriebete Regeln.
   - Akzeptanz: Hauptpfad funktioniert auf Referenzset ohne filename-spezifische Sonderfälle.
 
