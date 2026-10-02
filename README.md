@@ -159,6 +159,26 @@ python -m src.imageCompositeConverter \
 
 ### Lokale Arbeitskopie bereinigen
 
+Fuer kurze Entwicklungszyklen kann `eindampfen.bat` die Arbeitskopie per Git
+Sparse-Checkout auf Code, Tests, Konfiguration sowie die erforderlichen
+Eingabebilder und Regressions-Baselines reduzieren. Historische Dokumentation,
+vendorte Linux-Binaerdateien und erzeugte Konvertierungsergebnisse werden nur
+ausgeblendet, nicht geloescht. Der Vorgang ist daher mit `--restore` umkehrbar.
+Ohne Argument arbeitet das Skript als sichere Vorschau; `--apply` verlangt einen
+sauberen Arbeitsbaum und startet anschliessend automatisch das kurze
+`core-green`-Testprofil.
+
+```bat
+eindampfen.bat
+eindampfen.bat --apply
+eindampfen.bat --test
+eindampfen.bat --restore
+```
+
+Das schnelle Profil ist fuer die taegliche Iteration gedacht. Vor Releases oder
+groesseren Integrationen bleiben die weiter unten beschriebenen erweiterten und
+vollstaendigen Pruefungen erforderlich.
+
 Unter Windows zeigt `cleanup.bat` ohne Argumente zunächst nur entbehrliche lokale
 Dateien an (virtuelle Umgebungen, Python-/Test-Caches, Profiler-Ausgaben und
 lokale Logs). Erst `cleanup.bat --apply` löscht diese Dateien. Projektartefakte,
