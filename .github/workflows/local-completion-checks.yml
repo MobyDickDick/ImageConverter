@@ -200,6 +200,7 @@ jobs:
       - name: Run full heavy image composite suite
         env:
           RUN_HEAVY_CONVERSION_TESTS: '1'
+          PYTEST_PER_TEST_TIMEOUT_SECONDS: '60'
         run: python -m pytest -q -rs tests/test_image_composite_converter.py
 
   full-catalog-conversion:
