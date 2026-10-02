@@ -22,6 +22,7 @@ if importlib.util.find_spec("numpy") is None:
 
 
 _PER_TEST_TIMEOUT_SECONDS = int(os.environ.get("PYTEST_PER_TEST_TIMEOUT_SECONDS", "30"))
+_SIGALRM = getattr(signal, "SIGALRM", None)
 
 
 class _PerTestTimeout(Exception):
@@ -35,12 +36,14 @@ def _timeout_handler(_signum: int, _frame) -> None:
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_call(item: pytest.Item):
     """Apply a hard per-test runtime limit and convert overruns into task-style xfails."""
-    if _PER_TEST_TIMEOUT_SECONDS <= 0:
+    # SIGALRM and signal.alarm() are Unix-only.  On Windows, let the test run
+    # without this optional hard limit instead of failing every test up front.
+    if _PER_TEST_TIMEOUT_SECONDS <= 0 or _SIGALRM is None:
         yield
         return
 
-    previous_handler = signal.getsignal(signal.SIGALRM)
-    signal.signal(signal.SIGALRM, _timeout_handler)
+    previous_handler = signal.getsignal(_SIGALRM)
+    signal.signal(_SIGALRM, _timeout_handler)
     signal.alarm(_PER_TEST_TIMEOUT_SECONDS)
     try:
         yield
@@ -51,4 +54,4 @@ def pytest_runtest_call(item: pytest.Item):
         )
     finally:
         signal.alarm(0)
-        signal.signal(signal.SIGALRM, previous_handler)
+        signal.signal(_SIGALRM, previous_handler)
