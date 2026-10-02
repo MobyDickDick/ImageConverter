@@ -1,0 +1,119 @@
+{
+  "schema_version": "ac0843_semantic_conflict_evidence_v1",
+  "classification": "data_correction_plus_scale_general_detector_fix",
+  "conclusion": "The vertical mark is a real top connector: it is continuous outside the circle in every AC0843 size. The prior description inherited a horizontal arm from AC0842 and was ambiguous after a second rotation.",
+  "description_after": "Grauer Kreis mit dunkler Kontur und horizontal lesbarem Text rF; der Griff verlaeuft als senkrechte Linie oberhalb des Kreises.",
+  "failed_svg": "artifacts/converted_images/converted_svg_failed/AC0843_L.svg",
+  "samples": [
+    {
+      "variant": "AC0843_L",
+      "source_image": "artifacts/images_to_convert/AC0843_L.jpg",
+      "canvas": {
+        "width": 25,
+        "height": 45
+      },
+      "detected": {
+        "circle": true,
+        "stem": true,
+        "arm": false,
+        "text": false,
+        "circle_detection_source": "hough",
+        "circle_confidence": 0.8,
+        "circle_geometry": "12,28,10",
+        "circle_rejection_reason": "",
+        "connector_orientation": "vertical",
+        "horizontal_line_candidates": 0,
+        "vertical_line_candidates": 2
+      },
+      "decision": "description_correction"
+    },
+    {
+      "variant": "AC0843_M",
+      "source_image": "artifacts/images_to_convert/AC0843_M.jpg",
+      "canvas": {
+        "width": 20,
+        "height": 35
+      },
+      "detected": {
+        "circle": true,
+        "stem": true,
+        "arm": false,
+        "text": false,
+        "circle_detection_source": "hough",
+        "circle_confidence": 0.8,
+        "circle_geometry": "10,20,8",
+        "circle_rejection_reason": "",
+        "connector_orientation": "vertical",
+        "horizontal_line_candidates": 0,
+        "vertical_line_candidates": 7
+      },
+      "decision": "description_correction"
+    },
+    {
+      "variant": "AC0843_S",
+      "source_image": "artifacts/images_to_convert/AC0843_S.jpg",
+      "canvas": {
+        "width": 15,
+        "height": 25
+      },
+      "detected": {
+        "circle": true,
+        "stem": true,
+        "arm": false,
+        "text": false,
+        "circle_detection_source": "hough",
+        "circle_confidence": 0.8,
+        "circle_geometry": "4,16,5",
+        "circle_rejection_reason": "",
+        "connector_orientation": "vertical",
+        "horizontal_line_candidates": 0,
+        "vertical_line_candidates": 1
+      },
+      "decision": "description_correction"
+    },
+    {
+      "variant": "AC0842_L",
+      "source_image": "artifacts/images_to_convert/AC0842_L.jpg",
+      "canvas": {
+        "width": 45,
+        "height": 25
+      },
+      "detected": {
+        "circle": true,
+        "stem": false,
+        "arm": true,
+        "text": false,
+        "circle_detection_source": "hough",
+        "circle_confidence": 0.8,
+        "circle_geometry": "30,10,10",
+        "circle_rejection_reason": "",
+        "connector_orientation": "horizontal",
+        "horizontal_line_candidates": 3,
+        "vertical_line_candidates": 0
+      },
+      "decision": "negative_orientation_control"
+    },
+    {
+      "variant": "AC0844_L",
+      "source_image": "artifacts/images_to_convert/AC0844_L.jpg",
+      "canvas": {
+        "width": 45,
+        "height": 25
+      },
+      "detected": {
+        "circle": true,
+        "stem": false,
+        "arm": true,
+        "text": false,
+        "circle_detection_source": "hough",
+        "circle_confidence": 0.8,
+        "circle_geometry": "14,14,10",
+        "circle_rejection_reason": "",
+        "connector_orientation": "horizontal",
+        "horizontal_line_candidates": 2,
+        "vertical_line_candidates": 0
+      },
+      "decision": "negative_orientation_control"
+    }
+  ]
+}

@@ -264,6 +264,39 @@ def detectSemanticPrimitivesImpl(
             if has_arm and has_stem:
                 break
 
+    # HoughLinesP becomes unstable when a real connector is only a few pixels
+    # long.  Recover compact vertical stems from foreground continuity outside
+    # the detected circle.  Restricting the probe to the circle axis and to
+    # pixels beyond the ring prevents letter strokes and circle edges from
+    # becoming connectors.
+    if not has_stem and not has_arm and circle_geom is not None:
+        cx, cy, radius = circle_geom
+        # The coarse Hough center can drift toward the ring on tiny canvases,
+        # so search each column across the circle diameter instead of assuming
+        # that the estimated center pixel is exact.
+        half_width = max(1, int(round(float(radius))))
+        x_start = max(0, int(round(cx)) - half_width)
+        x_stop = min(w, int(round(cx)) + half_width + 1)
+        minimum_run = max(3, int(round(float(h) * 0.12)))
+        for y_start, y_stop in (
+            (0, max(0, int(math.floor(cy - radius)) - 1)),
+            (min(h, int(math.ceil(cy + radius)) + 2), h),
+        ):
+            corridor = fg_mask[y_start:y_stop, x_start:x_stop] > 0
+            if corridor.size == 0:
+                continue
+            longest_run = 0
+            for column in range(corridor.shape[1]):
+                current_run = 0
+                for occupied in corridor[:, column].tolist():
+                    current_run = current_run + 1 if occupied else 0
+                    longest_run = max(longest_run, current_run)
+            if longest_run >= minimum_run:
+                has_stem = True
+                vertical_candidates = max(1, vertical_candidates)
+                strongest_vertical = max(strongest_vertical, longest_run)
+                break
+
     has_text = False
     x1 = max(0, int(round(float(w) * 0.15)))
     x2 = min(w, int(round(float(w) * 0.85)))

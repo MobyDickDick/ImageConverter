@@ -374,14 +374,22 @@ def apply_semantic_badge_family_rules(
         _legacy_ac_key("0864"),
     }:
         heuristic_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
-    if _description_expects_left_circle_connector(desc):
+    # An explicit vertical circle relation is stronger than horizontal wording
+    # inherited through a ``Wie ...`` alias.  Without this precedence rule a
+    # twice-rotated badge can retain the referenced badge's arm *and* gain a
+    # stem, producing a contradictory three-connector description.
+    expects_top_connector = _description_expects_top_circle_connector(desc)
+    expects_bottom_connector = _description_expects_bottom_circle_connector(desc)
+    has_explicit_vertical_connector = expects_top_connector or expects_bottom_connector
+
+    if not has_explicit_vertical_connector and _description_expects_left_circle_connector(desc):
         heuristic_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
 
-    if _description_expects_right_circle_connector(desc):
+    if not has_explicit_vertical_connector and _description_expects_right_circle_connector(desc):
         heuristic_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
-    if _description_expects_top_circle_connector(desc):
+    if expects_top_connector:
         heuristic_elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
-    if _description_expects_bottom_circle_connector(desc):
+    if expects_bottom_connector:
         heuristic_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
     if "senkrechter strich hinter" in desc:
         heuristic_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
@@ -463,13 +471,16 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
             if label == "CO_2" and _description_expects_co2_superscript(normalized):
                 params["co2_index_mode"] = "superscript"
 
-    if _description_expects_top_circle_connector(normalized):
+    expects_top_connector = _description_expects_top_circle_connector(normalized)
+    expects_bottom_connector = _description_expects_bottom_circle_connector(normalized)
+    has_explicit_vertical_connector = expects_top_connector or expects_bottom_connector
+    if expects_top_connector:
         elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
-    if _description_expects_bottom_circle_connector(normalized):
+    if expects_bottom_connector:
         elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
-    if _description_expects_left_circle_connector(normalized):
+    if not has_explicit_vertical_connector and _description_expects_left_circle_connector(normalized):
         elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
-    if _description_expects_right_circle_connector(normalized):
+    if not has_explicit_vertical_connector and _description_expects_right_circle_connector(normalized):
         elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
 
     if not elements and has_orientation_hint:
