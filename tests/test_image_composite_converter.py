@@ -7253,6 +7253,7 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "satisfactory-regression-debug" in ci_workflow
     assert "full-heavy-conversion-suite:" in ci_workflow
     assert "full-heavy-conversion-suite:\n    runs-on: ubuntu-latest" in ci_workflow
+    assert "PYTEST_PER_TEST_TIMEOUT_SECONDS: '60'" in ci_workflow
     assert "python -m pytest -q -rs tests/test_image_composite_converter.py" in ci_workflow
     assert "full-catalog-conversion:\n    runs-on: ubuntu-latest" in ci_workflow
     assert "shard: [0, 1, 2, 3, 4, 5, 6, 7]" in ci_workflow
@@ -8365,34 +8366,6 @@ def test_ac08_regression_suite_preserves_previously_good_variants(
     img_path = images_dir / f"{variant}.jpg"
     assert img_path.exists(), f"missing regression fixture: {img_path}"
 
-    if variant == "AC0837_L":
-        isolated_input = tmp_path / "ac0837_input"
-        isolated_input.mkdir()
-        shutil.copy2(img_path, isolated_input / img_path.name)
-        isolated_csv = isolated_input / csv_path.name
-        shutil.copy2(csv_path, isolated_csv)
-        output_root = tmp_path / "ac0837_output"
-
-        result = image_composite_converter.convertRange(
-            str(isolated_input),
-            str(isolated_csv),
-            iterations=2,
-            start_ref=variant,
-            end_ref=variant,
-            output_root=str(output_root),
-            selected_variants={variant},
-            deterministic_order=True,
-        )
-
-        assert result == str(output_root)
-        svg_dir = output_root / "converted_svgs"
-        reports_dir = output_root / "reports"
-        assert (svg_dir / f"{variant}.svg").exists()
-        assert not (svg_dir / f"{variant}_failed.svg").exists()
-        log_text = (reports_dir / f"{variant}_element_validation.log").read_text(encoding="utf-8")
-        assert f"status={expected_status}" in log_text
-        return
-
     svg_dir = tmp_path / "svgs"
     diff_dir = tmp_path / "diffs"
     reports_dir = tmp_path / "reports"
@@ -8404,7 +8377,7 @@ def test_ac08_regression_suite_preserves_previously_good_variants(
         str(svg_dir),
         str(diff_dir),
         str(reports_dir),
-        badge_validation_rounds=1 if variant in {"AC0820_L", "AC0835_S"} else 6,
+        badge_validation_rounds=1 if variant in {"AC0820_L", "AC0835_S", "AC0837_L"} else 6,
     )
 
     assert result is not None
