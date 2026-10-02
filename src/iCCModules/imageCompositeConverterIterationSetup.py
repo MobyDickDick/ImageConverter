@@ -26,7 +26,10 @@ def buildIterationBaseAndLogPathImpl(
     base = splitext_fn(filename)[0]
     log_path = None
     if reports_out_dir:
-        log_path = join_fn(reports_out_dir, f"{base}_element_validation.log")
+        # Keep generated report references stable across operating systems.
+        # Forward slashes are accepted by Windows file APIs and are also the
+        # portable representation used in reports and tests.
+        log_path = join_fn(reports_out_dir, f"{base}_element_validation.log").replace("\\", "/")
     return base, log_path
 
 

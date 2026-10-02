@@ -24,7 +24,12 @@ _ONE_BY_ONE_TRANSPARENT_PNG = (
 
 @contextmanager
 def _wallClockTimeout(timeout_sec: float | int | None):
-    """Raise ``TimeoutError`` when a block exceeds ``timeout_sec`` on Unix hosts."""
+    """Raise ``TimeoutError`` when a block exceeds ``timeout_sec``.
+
+    Unix can interrupt the block at the deadline via ``setitimer``.  Platforms
+    without that API (notably Windows) still enforce the result contract by
+    checking the elapsed wall-clock time when the block returns.
+    """
     if timeout_sec is None:
         yield
         return
@@ -33,7 +38,11 @@ def _wallClockTimeout(timeout_sec: float | int | None):
         yield
         return
     if not hasattr(signal, "setitimer"):
+        started_at = time.monotonic()
         yield
+        elapsed = time.monotonic() - started_at
+        if elapsed > timeout_value:
+            raise TimeoutError(f"Conversion exceeded wall-clock timeout ({timeout_value:.1f}s).")
         return
     previous_handler = signal.getsignal(signal.SIGALRM)
 

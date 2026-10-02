@@ -31,6 +31,16 @@ def test_build_iteration_base_and_log_path_impl_formats_log_name() -> None:
     assert log_path == "reports/AC0811_S_element_validation.log"
 
 
+def test_build_iteration_base_and_log_path_impl_normalizes_windows_separator() -> None:
+    _base, log_path = iteration_setup_helpers.buildIterationBaseAndLogPathImpl(
+        filename="AC0811_S.jpg",
+        reports_out_dir="reports",
+        join_fn=lambda parent, name: f"{parent}\\{name}",
+    )
+
+    assert log_path == "reports/AC0811_S_element_validation.log"
+
+
 def test_emit_iteration_description_header_impl_prints_description_and_fallback_elements() -> None:
     lines: list[str] = []
 
