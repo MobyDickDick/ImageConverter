@@ -46,7 +46,7 @@ echo.
 echo --apply aktiviert Git Sparse-Checkout. In der Arbeitskopie bleiben:
 echo   - Programmcode: src, config, tools und stabilization
 echo   - Tests und CI-Konfiguration: tests, .github und .vscode
-echo   - notwendige Eingaben und Baselines unter artifacts
+echo   - neun repraesentative Kontroll-, Problem- und Grenzfallbilder
 echo   - alle Dateien im Projektstamm
 echo.
 echo Ausgeblendet werden insbesondere vendor, historische docs sowie erzeugte
@@ -68,7 +68,9 @@ if errorlevel 1 exit /b %ERRORLEVEL%
 for /f "delims=" %%I in ('git rev-parse --git-path info/sparse-checkout') do set "SPARSE_FILE=%%I"
 powershell -NoProfile -ExecutionPolicy Bypass -Command ^
   "$ErrorActionPreference = 'Stop';" ^
-  "$patterns = @('/*', '!/*/', '/src/', '/tests/', '/tools/', '/config/', '/stabilization/', '/.github/', '/.vscode/', '/artifacts/', '!/artifacts/*/', '/artifacts/images_to_convert/', '/artifacts/regression_baseline/', '/artifacts/evaluation/');" ^
+  "$patterns = [System.Collections.Generic.List[string]]@('/*', '!/*/', '/src/', '/tests/', '/tools/', '/config/', '/stabilization/', '/.github/', '/.vscode/', '/artifacts/', '!/artifacts/*/', '/artifacts/images_to_convert/', '!/artifacts/images_to_convert/*.jpg', '!/artifacts/images_to_convert/*.JPG', '/artifacts/images_to_convert/nonconvertable/', '!/artifacts/images_to_convert/nonconvertable/*.jpg', '!/artifacts/images_to_convert/nonconvertable/*.JPG', '/artifacts/regression_baseline/', '/artifacts/evaluation/');" ^
+  "$subset = Get-Content -LiteralPath 'config/compact_image_subset.txt' | Where-Object { $_ -and -not $_.StartsWith('#') };" ^
+  "$subset | ForEach-Object { $patterns.Add('/artifacts/images_to_convert/' + $_) };" ^
   "Set-Content -LiteralPath $env:SPARSE_FILE -Value $patterns -Encoding ASCII"
 if errorlevel 1 exit /b %ERRORLEVEL%
 
