@@ -19,6 +19,19 @@ def _write_fake_python(path: Path) -> None:
     path.chmod(0o755)
 
 
+def _write_fake_python_with_report_failure(path: Path) -> None:
+    path.write_text(
+        "#!/usr/bin/env bash\n"
+        "if [[ \"$*\" == *\"tools/check_report_consistency.py\"* ]]; then\n"
+        "  echo '{\"status\": \"stale/mixed-run\", \"warnings\": [\"checkpoint_has_no_run_id\"]}'\n"
+        "  exit 1\n"
+        "fi\n"
+        "exit 0\n",
+        encoding="utf-8",
+    )
+    path.chmod(0o755)
+
+
 def test_local_completion_checks_runs_image_id_ratchet_before_tests(tmp_path: Path) -> None:
     fake_python = tmp_path / "fake-python"
     fake_python.write_text(
@@ -104,6 +117,55 @@ def test_local_completion_checks_required_drift_warning_remains_fatal(tmp_path: 
     assert result.returncode == 1
     assert "WARN chain telemetry drift gate" in result.stdout
     assert "WARN: advisory drift gate failed" not in result.stdout
+
+
+def test_local_completion_checks_report_failure_is_advisory_by_default(tmp_path: Path) -> None:
+    fake_python = tmp_path / "fake-python"
+    _write_fake_python_with_report_failure(fake_python)
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "conversion_checkpoint.json").write_text("{}", encoding="utf-8")
+
+    result = subprocess.run(
+        ["./tools/run_local_completion_checks.sh", "--reports-dir", str(reports_dir)],
+        cwd=Path(__file__).resolve().parents[2],
+        env={**os.environ, "PYTHON": str(fake_python)},
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 0
+    assert '"status": "stale/mixed-run"' in result.stdout
+    assert "WARN: advisory report consistency gate failed" in result.stdout
+
+
+def test_local_completion_checks_can_require_report_consistency(tmp_path: Path) -> None:
+    fake_python = tmp_path / "fake-python"
+    _write_fake_python_with_report_failure(fake_python)
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "conversion_checkpoint.json").write_text("{}", encoding="utf-8")
+
+    result = subprocess.run(
+        [
+            "./tools/run_local_completion_checks.sh",
+            "--reports-dir",
+            str(reports_dir),
+            "--require-report-consistency",
+        ],
+        cwd=Path(__file__).resolve().parents[2],
+        env={**os.environ, "PYTHON": str(fake_python)},
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 1
+    assert '"status": "stale/mixed-run"' in result.stdout
+    assert "WARN: advisory report consistency gate failed" not in result.stdout
 
 
 def test_run_test_evidence_records_pass_summary(tmp_path: Path) -> None:

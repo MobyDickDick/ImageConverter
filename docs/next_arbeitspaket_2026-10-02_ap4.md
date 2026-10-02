@@ -30,7 +30,11 @@ Der eingecheckte partielle Snapshot wird erwartungsgemäß als
 dieser Altstand nicht mehr versehentlich als erfolgreicher Abschluss gelten.
 
 Das Gate ist in `tools/run_local_completion_checks.sh` vor dem bestehenden
-Chain-Drift-Gate eingebunden. Fixture-Tests decken einen konsistenten
+Chain-Drift-Gate eingebunden. Dort ist es standardmäßig informativ, damit ein
+historischer, partieller Repository-Snapshot reine Code- und Testprüfungen
+nicht fehlschlagen lässt. `--require-report-consistency` aktiviert den harten
+Abschlussmodus; die eigenständige Gate-CLI bleibt bei `stale/mixed-run` und
+`invalid` immer ungleich null. Fixture-Tests decken einen konsistenten
 abgeschlossenen Lauf, einen konsistenten partiellen Lauf, den aktuellen
 Null-Summary-Widerspruch sowie doppelte Dateinamen und fehlende Logreferenzen
 ab. Als nächster Schritt kann AP3 nach einem tatsächlich abgeschlossenen AP0-

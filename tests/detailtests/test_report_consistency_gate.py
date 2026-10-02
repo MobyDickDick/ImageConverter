@@ -52,6 +52,12 @@ def test_complete_snapshot_has_required_provenance_fields(tmp_path: Path) -> Non
     assert report["input_count"] == report["processed_count"] == 2
     assert report["generated_at"]
     assert report["source_report"].endswith("conversion_checkpoint.json")
+    assert report["checked_reports"] == [
+        "conversion_checkpoint.json",
+        "conversion_result_map.json",
+        "conversion_run_manifest.json",
+        "chain_phase_telemetry_summary.txt",
+    ]
 
 
 def test_partial_snapshot_is_incomplete_and_not_a_false_pass(tmp_path: Path) -> None:

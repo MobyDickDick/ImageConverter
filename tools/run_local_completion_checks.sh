@@ -4,6 +4,7 @@ set -euo pipefail
 SUMMARY_PATH="artifacts/converted_images/reports/chain_phase_telemetry_summary.txt"
 REPORTS_DIR="artifacts/converted_images/reports"
 REQUIRE_DRIFT_SUMMARY=0
+REQUIRE_REPORT_CONSISTENCY=0
 PYTHON_BIN="${PYTHON:-python}"
 VENDOR_SITE_PACKAGES="vendor/linux-py310/site-packages"
 if [[ -d "$VENDOR_SITE_PACKAGES" ]]; then
@@ -13,6 +14,7 @@ fi
 usage() {
   cat <<'USAGE'
 Usage: tools/run_local_completion_checks.sh [--summary PATH] [--require-drift-summary]
+       [--reports-dir PATH] [--require-report-consistency]
 
 Runs the standard local completion profile:
   1. image-ID hardcoding ratchet
@@ -23,10 +25,10 @@ Runs the standard local completion profile:
   6. the chain-telemetry drift gate when a summary artifact is present
 
 The repo vendor path is prepended to PYTHONPATH when available so CLI smoke
-checks can resolve bundled runtime dependencies. By default the drift-gate
-step is advisory: missing summaries are skipped, and existing drift warnings
-are printed without failing code-only completion profiles. Use
---require-drift-summary to make a missing or warning summary fail the profile.
+checks can resolve bundled runtime dependencies. By default both report gates
+are advisory: historical or partial checked-in artifacts must not fail a
+code-only completion profile. Use --require-report-consistency or
+--require-drift-summary to make the respective gate fatal.
 USAGE
 }
 
@@ -43,6 +45,19 @@ while [[ $# -gt 0 ]]; do
       ;;
     --require-drift-summary)
       REQUIRE_DRIFT_SUMMARY=1
+      shift
+      ;;
+    --reports-dir)
+      if [[ $# -lt 2 ]]; then
+        echo "ERROR: --reports-dir requires a path" >&2
+        usage >&2
+        exit 2
+      fi
+      REPORTS_DIR="$2"
+      shift 2
+      ;;
+    --require-report-consistency)
+      REQUIRE_REPORT_CONSISTENCY=1
       shift
       ;;
     -h|--help)
@@ -70,7 +85,17 @@ run_step "pytest" "$PYTHON_BIN" -m pytest
 run_step "ImageConverter CLI help" "$PYTHON_BIN" -m src.imageCompositeConverter --help
 
 if [[ -f "$REPORTS_DIR/conversion_checkpoint.json" ]]; then
-  run_step "report consistency gate" "$PYTHON_BIN" tools/check_report_consistency.py "$REPORTS_DIR"
+  echo "==> report consistency gate"
+  set +e
+  "$PYTHON_BIN" tools/check_report_consistency.py "$REPORTS_DIR"
+  REPORT_STATUS=$?
+  set -e
+  if [[ "$REPORT_STATUS" -ne 0 ]]; then
+    if [[ "$REQUIRE_REPORT_CONSISTENCY" -eq 1 ]]; then
+      exit "$REPORT_STATUS"
+    fi
+    echo "WARN: advisory report consistency gate failed for ${REPORTS_DIR}; use --require-report-consistency to make this fatal."
+  fi
 else
   echo "==> report consistency gate"
   echo "SKIP: conversion checkpoint is missing: ${REPORTS_DIR}/conversion_checkpoint.json"

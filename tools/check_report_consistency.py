@@ -78,10 +78,18 @@ def evaluate_report_consistency(reports_dir: str | Path) -> dict[str, Any]:
     warnings: list[str] = []
     checkpoint_path = root / "conversion_checkpoint.json"
     result_map_path = root / "conversion_result_map.json"
+    checked_paths = (
+        checkpoint_path,
+        result_map_path,
+        root / "conversion_run_manifest.json",
+        root / "chain_phase_telemetry_summary.txt",
+        root / "chain_phase_telemetry.csv",
+        root / "batch_failure_summary.csv",
+    )
     checkpoint = _load_json(checkpoint_path, errors, required=True)
     result_map = _load_json(result_map_path, errors, required=True)
-    manifest = _load_json(root / "conversion_run_manifest.json", errors)
-    chain_summary = _load_key_values(root / "chain_phase_telemetry_summary.txt", errors)
+    manifest = _load_json(checked_paths[2], errors)
+    chain_summary = _load_key_values(checked_paths[3], errors)
 
     result_count = len(result_map) if result_map is not None else 0
     run_id = str((checkpoint or {}).get("run_id", "")).strip()
@@ -131,12 +139,12 @@ def evaluate_report_consistency(reports_dir: str | Path) -> dict[str, Any]:
             elif chain_count > result_count:
                 stale_reasons.append("chain_summary_exceeds_result_map")
 
-    telemetry_rows = _csv_rows(root / "chain_phase_telemetry.csv", errors)
+    telemetry_rows = _csv_rows(checked_paths[4], errors)
     telemetry_names = [row.get("filename", "").strip() for row in telemetry_rows]
     if len([name for name in telemetry_names if name]) != len(set(name for name in telemetry_names if name)):
         errors.append("duplicate_filename:chain_phase_telemetry.csv")
 
-    failure_rows = _csv_rows(root / "batch_failure_summary.csv", errors)
+    failure_rows = _csv_rows(checked_paths[5], errors)
     failure_names = [row.get("filename", "").strip() for row in failure_rows]
     if len([name for name in failure_names if name]) != len(set(name for name in failure_names if name)):
         errors.append("duplicate_filename:batch_failure_summary.csv")
@@ -161,7 +169,7 @@ def evaluate_report_consistency(reports_dir: str | Path) -> dict[str, Any]:
         "input_count": input_count,
         "processed_count": result_count,
         "source_report": str(checkpoint_path),
-        "checked_reports": sorted(path.name for path in root.iterdir() if path.is_file()) if root.is_dir() else [],
+        "checked_reports": [path.name for path in checked_paths if path.is_file()],
         "status": status,
         "stage": stage or None,
         "errors": errors,
