@@ -1,0 +1,190 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+[INFO] Konvertiere AR0021.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AR0021.jpg ---
+Bildbeschreibung: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben) Abweichung: ohne "M" in der Kelle oben. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0021.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.394089, localized_error_fraction=0.711180).
+[INFO] Konvertiert AR0021.jpg | Parameter: mode=auto, label=M, variant_name=AR0021 | Qualität: Optimierungsfehler/Pixel=0.011275, Mean-Delta²=2938.843750, RGB-RMSE/Kanal=31.298795, Raumscore=7898.793197, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.5s
+[INFO] Konvertiere AR0022.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AR0022.jpg ---
+Bildbeschreibung: Wie AR0021, nach rechts gedrecht
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0022.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.521127, localized_error_fraction=0.570173).
+[INFO] Konvertiert AR0022.jpg | Parameter: mode=auto, label=M, variant_name=AR0022 | Qualität: Optimierungsfehler/Pixel=0.015355, Mean-Delta²=3969.141602, RGB-RMSE/Kanal=36.373716, Raumscore=8891.856333, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AR0023.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AR0023.jpg ---
+Bildbeschreibung: Wie AR0022: Wie AR0021, nach rechts gedrecht. Geometrische Variante: Hauptdiagonal gespiegelt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0023.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.771971, localized_error_fraction=0.581159).
+[INFO] Konvertiert AR0023.jpg | Parameter: mode=auto, label=M, variant_name=AR0023 | Qualität: Optimierungsfehler/Pixel=0.015442, Mean-Delta²=4750.108398, RGB-RMSE/Kanal=39.791575, Raumscore=11436.418497, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere AR0024.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AR0024.jpg ---
+Bildbeschreibung: Wie AR0022: Wie AR0021, nach rechts gedrecht. Geometrische Variante: Horizontal gespiegelt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0024.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.513064, localized_error_fraction=0.576687).
+[INFO] Konvertiert AR0024.jpg | Parameter: mode=auto, label=M, variant_name=AR0024 | Qualität: Optimierungsfehler/Pixel=0.015433, Mean-Delta²=4831.764648, RGB-RMSE/Kanal=40.132134, Raumscore=11074.213624, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AR0030.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AR0030.jpg ---
+Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0030.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.980050, localized_error_fraction=0.667952).
+[INFO] Konvertiert AR0030.jpg | Parameter: mode=auto, label=M, variant_name=AR0030 | Qualität: Optimierungsfehler/Pixel=0.006709, Mean-Delta²=3291.978027, RGB-RMSE/Kanal=33.125911, Raumscore=10008.040042, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.8s
+[INFO] Konvertiere AR0030_1.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AR0030_1.jpg ---
+Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert AR0030_1.jpg | Parameter: mode=auto, label=M, variant_name=AR0030_1 | Qualität: Optimierungsfehler/Pixel=0.010619, Mean-Delta²=5430.997559, RGB-RMSE/Kanal=42.548003, Raumscore=8640.811824, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.9s
+[INFO] Konvertiere AR0030_2.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AR0030_2.jpg ---
+Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert AR0030_2.jpg | Parameter: mode=auto, label=M, variant_name=AR0030_2 | Qualität: Optimierungsfehler/Pixel=0.008958, Mean-Delta²=3849.139893, RGB-RMSE/Kanal=35.819640, Raumscore=6553.092194, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.9s
+[INFO] Konvertiere AR0041.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AR0041.jpg ---
+Bildbeschreibung: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0041.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.585784, localized_error_fraction=0.758294).
+[INFO] Konvertiert AR0041.jpg | Parameter: mode=auto, label=M, variant_name=AR0041 | Qualität: Optimierungsfehler/Pixel=0.013609, Mean-Delta²=4873.126465, RGB-RMSE/Kanal=40.303542, Raumscore=14351.872674, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.5s
+[INFO] Konvertiere AR0042.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AR0042.jpg ---
+Bildbeschreibung: Wie AR0041, nach rechts gedreht, Text horizontal
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert AR0042.jpg | Parameter: mode=auto, label=M, variant_name=AR0042 | Qualität: Optimierungsfehler/Pixel=0.019968, Mean-Delta²=5932.230957, RGB-RMSE/Kanal=44.468082, Raumscore=11741.918988, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AR0043.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AR0043.jpg ---
+Bildbeschreibung: Wie AR0042, nach rechts gedreht, Text horizontal
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert AR0043.jpg | Parameter: mode=auto, label=M, variant_name=AR0043 | Qualität: Optimierungsfehler/Pixel=0.017851, Mean-Delta²=4821.569336, RGB-RMSE/Kanal=40.089771, Raumscore=9747.483863, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AR0044.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AR0044.jpg ---
+Bildbeschreibung: Wie AR004, 3 nach rechts gerdreht, Texgt horizontal
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert AR0044.jpg | Parameter: mode=auto, label=M, variant_name=AR0044 | Qualität: Optimierungsfehler/Pixel=0.019864, Mean-Delta²=6575.057617, RGB-RMSE/Kanal=46.815445, Raumscore=14579.719946, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere AR0061.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AR0061.jpg ---
+Bildbeschreibung: Wie AR0021, ohne drittes spitzes Dreieck
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert AR0061.jpg | Parameter: mode=auto, label=M, variant_name=AR0061 | Qualität: Optimierungsfehler/Pixel=0.015602, Mean-Delta²=3308.175781, RGB-RMSE/Kanal=33.207307, Raumscore=7309.035225, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AR0023.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AR0023.jpg ---
+Bildbeschreibung: Wie AR0022: Wie AR0021, nach rechts gedrecht. Geometrische Variante: Hauptdiagonal gespiegelt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0023.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.771971, localized_error_fraction=0.581159).
+[INFO] Konvertiert AR0023.jpg | Parameter: mode=auto, label=M, variant_name=AR0023 | Qualität: Optimierungsfehler/Pixel=0.015595, Mean-Delta²=4750.108398, RGB-RMSE/Kanal=39.791575, Raumscore=11436.418497, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere AR0022.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AR0022.jpg ---
+Bildbeschreibung: Wie AR0021, nach rechts gedrecht
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0022.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.521127, localized_error_fraction=0.570173).
+[INFO] Konvertiert AR0022.jpg | Parameter: mode=auto, label=M, variant_name=AR0022 | Qualität: Optimierungsfehler/Pixel=0.015441, Mean-Delta²=3969.141602, RGB-RMSE/Kanal=36.373716, Raumscore=8891.856333, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere AR0024.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AR0024.jpg ---
+Bildbeschreibung: Wie AR0022: Wie AR0021, nach rechts gedrecht. Geometrische Variante: Horizontal gespiegelt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0024.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.587413, localized_error_fraction=0.579901).
+[INFO] Konvertiert AR0024.jpg | Parameter: mode=auto, label=M, variant_name=AR0024 | Qualität: Optimierungsfehler/Pixel=0.015534, Mean-Delta²=3906.130615, RGB-RMSE/Kanal=36.083840, Raumscore=9163.131485, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere AR0041.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AR0041.jpg ---
+Bildbeschreibung: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0041.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.582126, localized_error_fraction=0.755435).
+[INFO] Konvertiert AR0041.jpg | Parameter: mode=auto, label=M, variant_name=AR0041 | Qualität: Optimierungsfehler/Pixel=0.013559, Mean-Delta²=4842.764648, RGB-RMSE/Kanal=40.177791, Raumscore=14205.724465, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.5s
+[INFO] Konvertiere AR0021.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AR0021.jpg ---
+Bildbeschreibung: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben) Abweichung: ohne "M" in der Kelle oben. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0021.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.391626, localized_error_fraction=0.711663).
+[INFO] Konvertiert AR0021.jpg | Parameter: mode=auto, label=M, variant_name=AR0021 | Qualität: Optimierungsfehler/Pixel=0.011274, Mean-Delta²=2935.524658, RGB-RMSE/Kanal=31.281116, Raumscore=7889.239908, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere AR0030.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AR0030.jpg ---
+Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0030.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.980050, localized_error_fraction=0.667952).
+[INFO] Konvertiert AR0030.jpg | Parameter: mode=auto, label=M, variant_name=AR0030 | Qualität: Optimierungsfehler/Pixel=0.006823, Mean-Delta²=3291.978027, RGB-RMSE/Kanal=33.125911, Raumscore=10008.040042, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere AR0024.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AR0024.jpg ---
+Bildbeschreibung: Wie AR0022: Wie AR0021, nach rechts gedrecht. Geometrische Variante: Horizontal gespiegelt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0024.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.587413, localized_error_fraction=0.579901).
+[INFO] Konvertiert AR0024.jpg | Parameter: mode=auto, label=M, variant_name=AR0024 | Qualität: Optimierungsfehler/Pixel=0.015570, Mean-Delta²=3906.130615, RGB-RMSE/Kanal=36.083840, Raumscore=9163.131485, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere AR0023.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AR0023.jpg ---
+Bildbeschreibung: Wie AR0022: Wie AR0021, nach rechts gedrecht. Geometrische Variante: Hauptdiagonal gespiegelt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0023.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.744240, localized_error_fraction=0.578715).
+[INFO] Konvertiert AR0023.jpg | Parameter: mode=auto, label=M, variant_name=AR0023 | Qualität: Optimierungsfehler/Pixel=0.015458, Mean-Delta²=4735.937012, RGB-RMSE/Kanal=39.732174, Raumscore=11288.154494, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere AR0022.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AR0022.jpg ---
+Bildbeschreibung: Wie AR0021, nach rechts gedrecht
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0022.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.521127, localized_error_fraction=0.570173).
+[INFO] Konvertiert AR0022.jpg | Parameter: mode=auto, label=M, variant_name=AR0022 | Qualität: Optimierungsfehler/Pixel=0.015373, Mean-Delta²=3969.141602, RGB-RMSE/Kanal=36.373716, Raumscore=8891.856333, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere AR0041.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AR0041.jpg ---
+Bildbeschreibung: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0041.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.577017, localized_error_fraction=0.757115).
+[INFO] Konvertiert AR0041.jpg | Parameter: mode=auto, label=M, variant_name=AR0041 | Qualität: Optimierungsfehler/Pixel=0.013479, Mean-Delta²=4822.448242, RGB-RMSE/Kanal=40.093425, Raumscore=14172.729211, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.5s
+[INFO] Konvertiere AR0021.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AR0021.jpg ---
+Bildbeschreibung: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben) Abweichung: ohne "M" in der Kelle oben. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0021.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.391626, localized_error_fraction=0.711663).
+[INFO] Konvertiert AR0021.jpg | Parameter: mode=auto, label=M, variant_name=AR0021 | Qualität: Optimierungsfehler/Pixel=0.011300, Mean-Delta²=2935.524658, RGB-RMSE/Kanal=31.281116, Raumscore=7889.239908, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere AR0030.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AR0030.jpg ---
+Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AR0030.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.980050, localized_error_fraction=0.667952).
+[INFO] Konvertiert AR0030.jpg | Parameter: mode=auto, label=M, variant_name=AR0030 | Qualität: Optimierungsfehler/Pixel=0.006692, Mean-Delta²=3291.978027, RGB-RMSE/Kanal=33.125911, Raumscore=10008.040042, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.8s
+[INFO] Übersichts-Kacheln erzeugt: diff=/tmp/ic-b-ar-01-20261002/reports/overview_diff_tiles.png, svg=/tmp/ic-b-ar-01-20261002/reports/overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: /tmp/ic-b-ar-01-20261002
