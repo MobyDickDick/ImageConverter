@@ -1,0 +1,130 @@
+{
+  "evaluations": [
+    {
+      "filename": "AC0010.jpg",
+      "runs": [
+        {
+          "execution_mode": "semantic-only",
+          "exit_code": 0,
+          "repetition": 1,
+          "svg_sha256": "a16e2a28d3e59095354cad78962da501bc6f51b1c30458eb6cb31625fd85bbbb"
+        },
+        {
+          "execution_mode": "semantic-only",
+          "exit_code": 0,
+          "repetition": 2,
+          "svg_sha256": "a16e2a28d3e59095354cad78962da501bc6f51b1c30458eb6cb31625fd85bbbb"
+        }
+      ],
+      "stable": true
+    },
+    {
+      "filename": "AC0120_L.jpg",
+      "runs": [
+        {
+          "execution_mode": "semantic-only",
+          "exit_code": 0,
+          "repetition": 1,
+          "svg_sha256": "cfafb01e51a32b3796b38be002cc018be147ac3b682c9513ed4af5f1cb00d493"
+        },
+        {
+          "execution_mode": "semantic-only",
+          "exit_code": 0,
+          "repetition": 2,
+          "svg_sha256": "cfafb01e51a32b3796b38be002cc018be147ac3b682c9513ed4af5f1cb00d493"
+        }
+      ],
+      "stable": true
+    },
+    {
+      "filename": "AC0201_S.jpg",
+      "runs": [
+        {
+          "execution_mode": "semantic-only",
+          "exit_code": 0,
+          "repetition": 1,
+          "svg_sha256": "ef6a2a9deba634ae77237f8a0d6ce28016905be27c1a8556ca255b418572e0aa"
+        },
+        {
+          "execution_mode": "semantic-only",
+          "exit_code": 0,
+          "repetition": 2,
+          "svg_sha256": "ef6a2a9deba634ae77237f8a0d6ce28016905be27c1a8556ca255b418572e0aa"
+        }
+      ],
+      "stable": true
+    },
+    {
+      "filename": "DLG0021.jpg",
+      "runs": [
+        {
+          "execution_mode": "semantic-only",
+          "exit_code": 0,
+          "repetition": 1,
+          "svg_sha256": "438dd09378faa97d4232f082dfbe6e0dfdebc2b9609d76ebda64abdb153b1029"
+        },
+        {
+          "execution_mode": "semantic-only",
+          "exit_code": 0,
+          "repetition": 2,
+          "svg_sha256": "438dd09378faa97d4232f082dfbe6e0dfdebc2b9609d76ebda64abdb153b1029"
+        }
+      ],
+      "stable": true
+    },
+    {
+      "filename": "GE0104_L.jpg",
+      "runs": [
+        {
+          "execution_mode": "semantic-only",
+          "exit_code": 0,
+          "repetition": 1,
+          "svg_sha256": "fb717f1909dda85ff698559da0fd6ca73f6c1c81bad66ff27c669c0e472881aa"
+        },
+        {
+          "execution_mode": "semantic-only",
+          "exit_code": 0,
+          "repetition": 2,
+          "svg_sha256": "fb717f1909dda85ff698559da0fd6ca73f6c1c81bad66ff27c669c0e472881aa"
+        }
+      ],
+      "stable": true
+    },
+    {
+      "filename": "SE0110.jpg",
+      "runs": [
+        {
+          "execution_mode": "semantic-only",
+          "exit_code": 0,
+          "repetition": 1,
+          "svg_sha256": "0d608c0cc1dc070cad19141bd1020fdf46b90fe2e4eb962d644a13e52637ffc0"
+        },
+        {
+          "execution_mode": "semantic-only",
+          "exit_code": 0,
+          "repetition": 2,
+          "svg_sha256": "0d608c0cc1dc070cad19141bd1020fdf46b90fe2e4eb962d644a13e52637ffc0"
+        }
+      ],
+      "stable": true
+    }
+  ],
+  "input_contract": {
+    "allowed_sources": [
+      "jpeg",
+      "description_table"
+    ],
+    "checkpoint_resume": false,
+    "execution_mode": "semantic-only",
+    "output_variation": false,
+    "template_transfer": false
+  },
+  "repetitions": 2,
+  "schema_version": "semantic_only_benchmark_v1",
+  "summary": {
+    "passed": true,
+    "sample_count": 6,
+    "stable_count": 6,
+    "unstable_count": 0
+  }
+}

@@ -27,13 +27,20 @@ DEFAULT_THRESHOLDS: dict[str, float] = {
     "min_dimension_match": 0.99,
 }
 NOT_REACHABLE_SOURCE_STATUSES = {
+    "budget_exceeded",
     "conversion_failed",
+    "dimension_violation",
     "not_reachable",
     "semantic_conflict",
     "semantic_mismatch",
     "semantic_rejected",
+    "stagnation",
 }
 REQUIRED_METRICS = ("error_per_pixel", "semantic_score", "dimension_match")
+METRIC_HIERARCHY = {
+    "primary": ("semantic_score", "dimension_match"),
+    "secondary": ("error_per_pixel",),
+}
 _SVG_LENGTH = re.compile(r"^\s*([0-9]+(?:\.[0-9]+)?)\s*(?:px)?\s*$", re.IGNORECASE)
 
 
@@ -142,16 +149,28 @@ def evaluate_good_solution(
         status = "not_reachable"
     else:
         assert all(value is not None for value in normalized.values())
-        if normalized["error_per_pixel"] > limits["max_error_per_pixel"]:
-            reasons.append("error_per_pixel_above_max")
+        # Primary constraints are evaluated first and cannot be compensated by
+        # an excellent pixel score.  The pixel metric only refines results that
+        # already satisfy semantics and dimensions.
         if normalized["semantic_score"] < limits["min_semantic_score"]:
             reasons.append("semantic_score_below_min")
         if normalized["dimension_match"] < limits["min_dimension_match"]:
             reasons.append("dimension_match_below_min")
+        if not reasons and normalized["error_per_pixel"] > limits["max_error_per_pixel"]:
+            reasons.append("error_per_pixel_above_max")
         status = "suboptimal" if reasons else "good"
 
     reachability = (
-        classifyNotReachableImpl({"status": normalized_source_status})
+        classifyNotReachableImpl(
+            {
+                "status": normalized_source_status,
+                # A failed physical dimension check has stronger evidence than
+                # the generic missing-metric fallback.
+                "reason": "dimension_violation"
+                if "missing_metric:dimension_match" in reasons
+                else "",
+            }
+        )
         if status == "not_reachable"
         else None
     )
@@ -161,6 +180,16 @@ def evaluate_good_solution(
         "reasons": reasons or ["all_thresholds_satisfied"],
         "metrics": normalized,
         "thresholds": limits,
+        "metric_hierarchy": {name: list(metrics) for name, metrics in METRIC_HIERARCHY.items()},
+        "decision_tier": (
+            "reachability"
+            if status == "not_reachable"
+            else "primary"
+            if any(reason in {"semantic_score_below_min", "dimension_match_below_min"} for reason in reasons)
+            else "secondary"
+            if status == "suboptimal"
+            else "all"
+        ),
         "reachability": reachability,
     }
 
@@ -198,6 +227,7 @@ def build_good_solution_report(
         "schema_version": SCHEMA_VERSION,
         "statuses": list(STATUSES),
         "thresholds": {**DEFAULT_THRESHOLDS, **(thresholds or {})},
+        "metric_hierarchy": {name: list(metrics) for name, metrics in METRIC_HIERARCHY.items()},
         "summary": {"file_count": len(evaluations), **{name: counts[name] for name in STATUSES}},
         "evaluations": evaluations,
     }

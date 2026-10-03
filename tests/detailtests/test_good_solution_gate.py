@@ -25,10 +25,10 @@ def test_good_solution_gate_classifies_all_three_statuses():
     assert good["reasons"] == ["all_thresholds_satisfied"]
     assert suboptimal["status"] == "suboptimal"
     assert suboptimal["reasons"] == [
-        "error_per_pixel_above_max",
         "semantic_score_below_min",
         "dimension_match_below_min",
     ]
+    assert suboptimal["decision_tier"] == "primary"
     assert unreachable["status"] == "not_reachable"
     assert unreachable["reasons"] == [
         "source_status:conversion_failed",
@@ -41,6 +41,31 @@ def test_good_solution_gate_classifies_all_three_statuses():
         "exit_code": 20,
     }
     assert good["reachability"] is None
+    assert good["decision_tier"] == "all"
+
+
+def test_primary_metrics_cannot_be_compensated_by_an_excellent_pixel_score():
+    result = evaluate_good_solution(
+        {"error_per_pixel": 0.0, "semantic_score": 0.84, "dimension_match": 1.0}
+    )
+
+    assert result["status"] == "suboptimal"
+    assert result["decision_tier"] == "primary"
+    assert result["reasons"] == ["semantic_score_below_min"]
+    assert result["metric_hierarchy"] == {
+        "primary": ["semantic_score", "dimension_match"],
+        "secondary": ["error_per_pixel"],
+    }
+
+
+def test_pixel_error_is_secondary_after_primary_metrics_pass():
+    result = evaluate_good_solution(
+        {"error_per_pixel": 0.051, "semantic_score": 0.85, "dimension_match": 0.99}
+    )
+
+    assert result["status"] == "suboptimal"
+    assert result["decision_tier"] == "secondary"
+    assert result["reasons"] == ["error_per_pixel_above_max"]
 
 
 def test_report_exposes_status_thresholds_and_reasons_for_every_file():
@@ -52,6 +77,10 @@ def test_report_exposes_status_thresholds_and_reasons_for_every_file():
     )
 
     assert report["schema_version"] == SCHEMA_VERSION
+    assert report["metric_hierarchy"] == {
+        "primary": ["semantic_score", "dimension_match"],
+        "secondary": ["error_per_pixel"],
+    }
     assert report["summary"] == {"file_count": 2, "good": 1, "suboptimal": 1, "not_reachable": 0}
     assert [row["filename"] for row in report["evaluations"]] == ["a.jpg", "b.jpg"]
     assert all(row["thresholds"] == report["thresholds"] for row in report["evaluations"])
@@ -105,6 +134,35 @@ def test_cli_returns_canonical_exit_code_when_requested(tmp_path):
 
     assert result.returncode == 23
     assert json.loads(result.stdout)["evaluations"][0]["reachability"]["report_code"] == "NR004"
+
+
+def test_canonical_unreachable_statuses_keep_their_specific_classification():
+    expected = {
+        "stagnation": ("NR001", 20),
+        "budget_exceeded": ("NR002", 21),
+        "dimension_violation": ("NR003", 22),
+        "semantic_conflict": ("NR004", 23),
+    }
+
+    for source_status, (report_code, exit_code) in expected.items():
+        result = evaluate_good_solution(
+            {"error_per_pixel": 0.01, "semantic_score": 0.9, "dimension_match": 1.0},
+            source_status=source_status,
+        )
+        assert result["status"] == "not_reachable"
+        assert result["reachability"]["reason"] == source_status
+        assert result["reachability"]["report_code"] == report_code
+        assert result["reachability"]["exit_code"] == exit_code
+
+
+def test_missing_physical_dimension_evidence_is_a_dimension_violation():
+    result = evaluate_good_solution(
+        {"error_per_pixel": 0.01, "semantic_score": 0.9, "dimension_match": None}
+    )
+
+    assert result["status"] == "not_reachable"
+    assert result["reachability"]["reason"] == "dimension_violation"
+    assert result["reachability"]["report_code"] == "NR003"
 
 
 def test_actual_wrong_svg_dimensions_are_a_hard_suboptimal_rule(tmp_path):

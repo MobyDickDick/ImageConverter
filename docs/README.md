@@ -2,6 +2,9 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [Merge-Recovery-Audit vom 2026-10-03](merge_recovery_audit_2026-10-03.md) –
+  geprüfte Merge-Folgen, beibehaltene Verträge und gezielt verworfene
+  Altartefakt-/Klassifikationspfade.
 - [Forms Model (Circle + Handle)](Forms.md)
 - [A7 Mini-Repro AC0840 + gekoppelte Plan-B-Aufgabe – Run 13 (2026-05-15)](a7_ac0840_minirepro_2026-05-15_run13_summary.md)
 - [A7 Mini-Repro AC0840 (Follow-up) + gekoppelte Plan-B-Aufgabe – Run 16 (2026-05-15)](a7_ac0840_minirepro_2026-05-15_run16_summary.md)
@@ -12,6 +15,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – AC0010/AC0100 Renderer-Reparatur (2026-07-25)](next_arbeitspaket_2026-07-25_ac0100_renderer_fix.md)
 - [Nächstes Arbeitspaket – Telemetrie-Alias-Verifikationsgate Run ACG (2026-08-03)](next_arbeitspaket_2026-08-03_runACG.md)
 - [Nächstes Arbeitspaket – AP1 skalierte Kreis-Evidenz (2026-10-01)](next_arbeitspaket_2026-10-01_ap1.md)
+- [Nächstes Arbeitspaket – ZG8 dokumentierte Metrik-Hierarchie (2026-10-03)](next_arbeitspaket_2026-10-03_zg8.md)
 - [Nächstes Arbeitspaket – AP0 Resume-Provenienz und Abschlussmanifest (2026-10-01)](next_arbeitspaket_2026-10-01_ap0.md)
 - [Nächstes Arbeitspaket – Merge-sichere Workflow-Kontextprüfung Run ACM (2026-08-04)](next_arbeitspaket_2026-08-04_runACM.md)
 - [Nächstes Arbeitspaket – Atomarer Workflow-Kontext Run ACN (2026-08-04)](next_arbeitspaket_2026-08-04_runACN.md)
@@ -485,6 +489,10 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – ZG3 Good-Solution-Gate v1 (2026-10-03)](next_arbeitspaket_2026-10-03_zg3.md)
 - [Nächstes Arbeitspaket – ZG4 harte Dimensionstreue (2026-10-03)](next_arbeitspaket_2026-10-03_zg4.md)
 - [Nächstes Arbeitspaket – ZG5 Semantik-first-Ausführungsmodus (2026-10-03)](next_arbeitspaket_2026-10-03_zg5.md)
+- [Nächstes Arbeitspaket – ZG6 robuste Nicht-Erreichbarkeit (2026-10-03)](next_arbeitspaket_2026-10-03_zg6.md)
+- [Nächstes Arbeitspaket – ZG7 Benchmark ohne Sonderwissen (2026-10-03)](next_arbeitspaket_2026-10-03_zg7.md)
+- [Nächstes Arbeitspaket – ZG8 dokumentierte Metrik-Hierarchie (2026-10-03)](next_arbeitspaket_2026-10-03_zg8.md)
+- [Nächstes Arbeitspaket – ZG9 Taskboard-Verankerung (2026-10-03)](next_arbeitspaket_2026-10-03_zg9.md)
 
 - [Nächstes Arbeitspaket – GE1001_M Checkmark-Primitive Run SQ (2026-06-24)](next_arbeitspaket_2026-06-24_runSQ.md)
 - [Nächstes Arbeitspaket – GE9021_7M U-Loop-Primitive Run SR (2026-06-25)](next_arbeitspaket_2026-06-25_runSR.md)
