@@ -121,6 +121,14 @@ def writeConversionBestlistMetricsImpl(manifest_path: Path, rows: dict[str, dict
             )
 
 
+def mergeConversionReportRowsImpl(
+    previous_rows: dict[str, dict[str, object]],
+    current_rows: dict[str, dict[str, object]],
+) -> dict[str, dict[str, object]]:
+    """Accumulate report evidence without using old rows for conversion decisions."""
+    return {**previous_rows, **current_rows}
+
+
 def storeConversionBestlistSnapshotImpl(
     variant: str,
     row: dict[str, object],

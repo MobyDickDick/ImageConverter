@@ -1264,6 +1264,14 @@ def convertRange(
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
     conversion_bestlist_path = _conversionBestlistManifestPath(reports_out_dir)
+    previous_report_bestlist_rows = (
+        _readConversionBestlistMetrics(conversion_bestlist_path, svg_out_dir)
+        if semantic_only
+        else {}
+    )
+    # Semantic-only conversions must not consult earlier rows while selecting or
+    # improving the SVG. Keep them separately only so sequential CLI calls can
+    # append to the cumulative report instead of erasing earlier evidence.
     conversion_bestlist_rows = (
         {} if semantic_only else _readConversionBestlistMetrics(conversion_bestlist_path, svg_out_dir)
     )
@@ -1561,6 +1569,12 @@ def convertRange(
             conversion_bestlist_rows=conversion_bestlist_rows,
             svg_out_dir=svg_out_dir,
             reports_out_dir=reports_out_dir,
+        )
+
+    if semantic_only:
+        conversion_bestlist_rows = conversion_bestlist_helpers.mergeConversionReportRowsImpl(
+            previous_report_bestlist_rows,
+            conversion_bestlist_rows,
         )
 
     conversion_finalization_helpers.runConversionFinalizationImpl(

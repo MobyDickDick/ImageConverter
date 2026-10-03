@@ -25,9 +25,20 @@ Der bisherige inkrementelle Ablauf bleibt mit `--execution-mode standard`
 bewusst als expliziter Kompatibilitätsmodus verfügbar. Der gewählte Modus wird
 als `execution_mode` in der strukturierten Ablaufspur protokolliert.
 
+### Korrektur: kumulative Reports bei mehreren Einzelaufrufen
+
+Frühere Bestlistenzeilen bleiben im `semantic-only`-Modus ausschließlich als
+Reporthistorie erhalten. Sie werden nicht für Auswahl, Optimierung oder
+Wiederherstellung des neuen SVGs verwendet. Nach der aktuellen Konvertierung
+werden alte und neue Reportzeilen zusammengeführt, wobei der aktuelle Lauf bei
+derselben Variante Vorrang hat. Dadurch löscht eine Folge einzelner CLI-Aufrufe
+nicht mehr jeweils die zuvor dokumentierten Varianten.
+
 ## Absicherung und nächster Schritt
 
 CLI-Tests prüfen den sicheren Default, die explizite Auswahl beider Modi und
-die Weitergabe des Semantik-only-Schalters an den Konvertierungslauf. ZG5 ist
-damit abgeschlossen. Die nächste priorisierte Leitaufgabe ist die robuste,
+die Weitergabe des Semantik-only-Schalters an den Konvertierungslauf. Ein
+zusätzlicher Bestlisten-Test sowie der schwere AC0010-/AC0100-Test sichern die
+kumulative Reportführung über vier Einzelaufrufe ab. ZG5 ist damit
+abgeschlossen. Die nächste priorisierte Leitaufgabe ist die robuste,
 einheitliche Nicht-Erreichbarkeitsklassifikation aus P1.

@@ -5,6 +5,22 @@ from pathlib import Path
 from src.iCCModules import imageCompositeConverterBestlist as bestlist_helpers
 
 
+def test_report_row_merge_preserves_previous_variants_and_prefers_current_rows() -> None:
+    previous = {
+        "FIRST": {"variant": "FIRST", "best_error": 4.0},
+        "REBUILT": {"variant": "REBUILT", "best_error": 3.0},
+    }
+    current = {
+        "REBUILT": {"variant": "REBUILT", "best_error": 2.0},
+        "LAST": {"variant": "LAST", "best_error": 1.0},
+    }
+
+    merged = bestlist_helpers.mergeConversionReportRowsImpl(previous, current)
+
+    assert set(merged) == {"FIRST", "REBUILT", "LAST"}
+    assert merged["REBUILT"]["best_error"] == 2.0
+
+
 def test_candidate_better_when_no_previous() -> None:
     assert bestlist_helpers.isConversionBestlistCandidateBetterImpl(
         previous_row=None,
