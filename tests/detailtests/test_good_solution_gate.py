@@ -34,6 +34,13 @@ def test_good_solution_gate_classifies_all_three_statuses():
         "source_status:conversion_failed",
         "missing_metric:semantic_score",
     ]
+    assert unreachable["reachability"] == {
+        "schema_version": "image_converter_reachability_v1",
+        "reason": "stagnation",
+        "report_code": "NR001",
+        "exit_code": 20,
+    }
+    assert good["reachability"] is None
 
 
 def test_report_exposes_status_thresholds_and_reasons_for_every_file():
@@ -71,6 +78,33 @@ def test_cli_writes_the_same_machine_readable_report(tmp_path):
     assert result.returncode == 0, result.stderr
     assert json.loads(result.stdout) == json.loads(output.read_text(encoding="utf-8"))
     assert json.loads(result.stdout)["evaluations"][0]["status"] == "good"
+
+
+def test_cli_returns_canonical_exit_code_when_requested(tmp_path):
+    source = tmp_path / "conversion_result_map.json"
+    source.write_text(
+        json.dumps(
+            {
+                "sample.jpg": {
+                    "status": "semantic_mismatch",
+                    "error_per_pixel": 0.01,
+                    "semantic_score": 0.9,
+                    "dimension_match": 1.0,
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [sys.executable, "tools/evaluate_good_solution_gate.py", str(source), "--fail-on-not-reachable"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 23
+    assert json.loads(result.stdout)["evaluations"][0]["reachability"]["report_code"] == "NR004"
 
 
 def test_actual_wrong_svg_dimensions_are_a_hard_suboptimal_rule(tmp_path):

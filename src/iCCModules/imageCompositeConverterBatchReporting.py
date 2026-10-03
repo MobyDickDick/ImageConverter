@@ -8,6 +8,7 @@ import math
 import os
 
 from src.iCCModules.imageCompositeConverterIterationLog import optimizationRenderTelemetryImpl
+from src.iCCModules.imageCompositeConverterReachability import classifyNotReachableImpl
 
 
 def readValidationLogDetailsImpl(log_path: str) -> dict[str, str]:
@@ -33,8 +34,20 @@ def writeBatchFailureSummaryImpl(reports_out_dir: str, failures: list[dict[str, 
     summary_path = os.path.join(reports_out_dir, "batch_failure_summary.csv")
     with open(summary_path, "w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f, delimiter=";")
-        writer.writerow(["filename", "status", "reason", "details", "log_file"])
+        writer.writerow(
+            [
+                "filename",
+                "status",
+                "reason",
+                "details",
+                "log_file",
+                "reachability_reason",
+                "report_code",
+                "exit_code",
+            ]
+        )
         for failure in failures:
+            reachability = classifyNotReachableImpl(failure)
             writer.writerow(
                 [
                     failure.get("filename", ""),
@@ -42,6 +55,9 @@ def writeBatchFailureSummaryImpl(reports_out_dir: str, failures: list[dict[str, 
                     failure.get("reason", ""),
                     failure.get("details", ""),
                     failure.get("log_file", ""),
+                    reachability["reason"],
+                    reachability["report_code"],
+                    reachability["exit_code"],
                 ]
             )
 
