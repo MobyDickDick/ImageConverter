@@ -2385,7 +2385,12 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - Einheitliche Statusklassifikation `good` / `suboptimal` / `not_reachable` via versionierter Schwellenwerte.
   - Akzeptanz: Status + Schwellen + Gründe stehen pro Datei im Report.
 
-- [ ] **ZG4 (P0): Dimensionstreue als harte Regel erzwingen**
+- [x] **ZG4 (P0): Dimensionstreue als harte Regel erzwingen** (2026-10-03:
+  Das Good-Solution-Gate misst bei Angabe der Raster-/SVG-Verzeichnisse Breite,
+  Höhe und Seitenverhältnis direkt aus den Artefakten. Der schlechteste
+  Übereinstimmungswert ersetzt einen eventuell veralteten Reportwert, sodass
+  Dimensionsabweichungen oberhalb der Toleranz nie als `good` passieren.
+  Details: `docs/next_arbeitspaket_2026-10-03_zg4.md`.)
   - Width/Height/Aspect-Ratio-Abweichung über Toleranz => kein `good`.
   - Akzeptanz: Regressionstest mit absichtlich falscher Dimension liefert `suboptimal` oder `not_reachable`.
 

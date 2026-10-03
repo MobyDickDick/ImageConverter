@@ -4,6 +4,7 @@ import sys
 
 from tools.evaluate_good_solution_gate import (
     SCHEMA_VERSION,
+    _raster_dimensions,
     build_good_solution_report,
     evaluate_good_solution,
 )
@@ -70,3 +71,56 @@ def test_cli_writes_the_same_machine_readable_report(tmp_path):
     assert result.returncode == 0, result.stderr
     assert json.loads(result.stdout) == json.loads(output.read_text(encoding="utf-8"))
     assert json.loads(result.stdout)["evaluations"][0]["status"] == "good"
+
+
+def test_actual_wrong_svg_dimensions_are_a_hard_suboptimal_rule(tmp_path):
+    image_dir = tmp_path / "images"
+    svg_dir = tmp_path / "svgs"
+    image_dir.mkdir()
+    svg_dir.mkdir()
+    # Only the PNG signature and IHDR dimensions are needed by the gate. Keeping
+    # this fixture dependency-free also exercises the CI environment used by the CLI.
+    png_header = (
+        b"\x89PNG\r\n\x1a\n"
+        b"\x00\x00\x00\rIHDR"
+        + (40).to_bytes(4, "big")
+        + (20).to_bytes(4, "big")
+    )
+    (image_dir / "wrong.png").write_bytes(png_header)
+    (svg_dir / "wrong.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"/>',
+        encoding="utf-8",
+    )
+
+    report = build_good_solution_report(
+        {
+            "wrong.png": {
+                "error_per_pixel": 0.01,
+                "semantic_score": 0.95,
+                # A stale caller-supplied value must not bypass the physical check.
+                "dimension_match": 1.0,
+            }
+        },
+        image_dir=image_dir,
+        svg_dir=svg_dir,
+    )
+
+    evaluation = report["evaluations"][0]
+    assert evaluation["status"] == "suboptimal"
+    assert evaluation["reasons"] == ["dimension_match_below_min"]
+    assert evaluation["metrics"]["dimension_match"] == 0.5
+    assert evaluation["dimension_evidence"]["width_match"] == 1.0
+    assert evaluation["dimension_evidence"]["height_match"] == 0.5
+    assert evaluation["dimension_evidence"]["aspect_ratio_match"] == 0.5
+
+
+def test_raster_dimensions_support_jpeg_without_pillow(tmp_path):
+    image_path = tmp_path / "sample.jpg"
+    image_path.write_bytes(
+        b"\xff\xd8"
+        b"\xff\xe0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00"
+        b"\xff\xc0\x00\x11\x08\x00\x14\x00\x28\x03\x01\x11\x00\x02\x11\x00\x03\x11\x00"
+        b"\xff\xd9"
+    )
+
+    assert _raster_dimensions(image_path) == (40, 20)
