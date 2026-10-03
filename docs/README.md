@@ -493,6 +493,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – ZG7 Benchmark ohne Sonderwissen (2026-10-03)](next_arbeitspaket_2026-10-03_zg7.md)
 - [Nächstes Arbeitspaket – ZG8 dokumentierte Metrik-Hierarchie (2026-10-03)](next_arbeitspaket_2026-10-03_zg8.md)
 - [Nächstes Arbeitspaket – ZG9 Taskboard-Verankerung (2026-10-03)](next_arbeitspaket_2026-10-03_zg9.md)
+- [Nächstes Arbeitspaket – ZG7.1 echtes PNG-Zwei-Quellen-Fixture (2026-10-03)](next_arbeitspaket_2026-10-03_zg7_1.md)
 
 - [Nächstes Arbeitspaket – GE1001_M Checkmark-Primitive Run SQ (2026-06-24)](next_arbeitspaket_2026-06-24_runSQ.md)
 - [Nächstes Arbeitspaket – GE9021_7M U-Loop-Primitive Run SR (2026-06-25)](next_arbeitspaket_2026-06-25_runSR.md)

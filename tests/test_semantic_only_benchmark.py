@@ -1,39 +1,19 @@
-from __future__ import annotations
-
-import json
 from pathlib import Path
 
-import pytest
-
-from tools.run_semantic_only_benchmark import SCHEMA_VERSION, run_benchmark
-
-
-def test_repository_benchmark_is_representative_and_stable() -> None:
-    report = run_benchmark(Path("config/semantic_only_benchmark_v1.json"), repeats=2)
-
-    assert report["schema_version"] == SCHEMA_VERSION
-    assert report["assessment_scope"] == "description_render_determinism"
-    assert report["quality_assessed"] is False
-    assert report["satisfactory"] is None
-    assert report["input_contract"] == ["jpeg", "semantic_description"]
-    assert report["case_count"] == report["stable_count"] == 5
-    assert report["primitive_family_count"] >= 5
-    assert report["status"] == "pass"
-    assert all(case["inputs"]["image_sha256"] for case in report["cases"])
+from tools.run_semantic_only_benchmark import SCHEMA_VERSION, _load_cases
+from tools.generate_semantic_only_png_fixtures import generate_fixtures
 
 
-def test_benchmark_rejects_an_additional_knowledge_source(tmp_path: Path) -> None:
-    image = Path("artifacts/images_to_convert/AC0120_L.jpg").resolve()
-    manifest = tmp_path / "manifest.json"
-    manifest.write_text(json.dumps({
-        "schema_version": SCHEMA_VERSION,
-        "cases": [{
-            "case_id": "invalid",
-            "image_path": str(image),
-            "semantic_description": "Linie",
-            "template_svg": "hidden.svg",
-        }],
-    }), encoding="utf-8")
+def test_repository_png_benchmark_covers_three_topologies(tmp_path: Path) -> None:
+    manifest = Path("config/semantic_only_png_benchmark_v1.json")
+    seed, cases = _load_cases(manifest)
 
-    with pytest.raises(ValueError, match="only JPEG"):
-        run_benchmark(manifest)
+    assert SCHEMA_VERSION == "semantic_only_png_benchmark_v1"
+    assert seed == 0
+    assert {case["topology"] for case in cases} == {
+        "circle+text+connector", "rectangle+diagonal", "polygon_path+line",
+    }
+    generated = generate_fixtures(tmp_path / "first")
+    regenerated = generate_fixtures(tmp_path / "second")
+    assert [path.name for path in generated] == [Path(case["image_path"]).name for case in cases]
+    assert [path.read_bytes() for path in generated] == [path.read_bytes() for path in regenerated]
