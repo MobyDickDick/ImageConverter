@@ -2471,6 +2471,19 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
     abgelehnt, isolierte Arbeitsverzeichnisse werden neu erstellt, und die
     Umbenennungsprobe bleibt invariant.
 
+- [x] **ZG7.2 (P0): End-SVG-Metrikvertrag** (2026-10-03: Der Runner rastert
+  jedes tatsächlich gespeicherte SVG erneut und schreibt den versionierten
+  Qualitätsvertrag mit Pixel-, Kanten-, Objektmasken-, Kontinuitäts-,
+  Semantik- und Dimensionsmetriken sowie Objekt- und Fehlerregionen. Nicht
+  messbare Pflichtwerte werden als `not_reachable` und `null` ausgewiesen.
+  Details: `docs/next_arbeitspaket_2026-10-03_zg7_2.md`.)
+  - Akzeptanz: Ein aus demselben synthetischen SVG gerastertes PNG erreicht
+    in allen Metriken den Idealwert; falsche Dimension, fehlendes Textprimitiv
+    und getrennter Anschluss schlagen gezielt fehl.
+  - Exit-Bedingung: Der reale Drei-Fälle-Report liegt unter
+    `artifacts/evaluation/semantic_only_quality_report_v1/` vor und bewertet
+    ausschließlich das gespeicherte End-SVG gegen das jeweilige PNG.
+
 ### Fortschritt vs. Blocker (Session 2026-05-15, N2 Run DK + N2-PB Run DK_PB)
 
 - **Fortschritt:** Die nächste offene dokumentierte Primäraufgabe (`N2`) wurde mit standardisierter Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; gemäß Plan-B-Kopplungsregel wurde direkt anschließend die gekoppelte Microbatch-Aufgabe (`AC0800..AC0809`) erfolgreich mit Exit `0` abgeschlossen.

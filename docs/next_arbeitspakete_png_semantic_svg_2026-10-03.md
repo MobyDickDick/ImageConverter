@@ -56,6 +56,9 @@ End-to-End-Aufruf des `semantic-only`-Konverters ergänzen.
 
 **Abhängigkeit:** ZG7.1
 
+**Status:** Abgeschlossen am 2026-10-03; Vertrag, Kalibrierung und Messbefund
+stehen in `docs/next_arbeitspaket_2026-10-03_zg7_2.md`.
+
 **Ziel:** Qualität statt bloßer Deterministik messen.
 
 **Umfang**

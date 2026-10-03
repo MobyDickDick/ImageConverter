@@ -1,0 +1,693 @@
+{
+  "evaluations": [
+    {
+      "case_id": "circle_text_connector",
+      "inputs": {
+        "allowed_sources": [
+          "png",
+          "semantic_description"
+        ],
+        "description_sha256": "06befe6895afdcf9f7de59d619f0eb78ccb917ee8b48fc050c25c9b1bde2ad91",
+        "image_sha256": "3da96ed332016f1554255efd6e2317c863b116243215102f0381a1c2d691812b"
+      },
+      "quality": {
+        "metrics": {
+          "connector_continuity": 1.0,
+          "dimension_match": 1.0,
+          "edge_alignment": 0.018457992002367973,
+          "error_per_pixel": 0.566286563873291,
+          "object_mask_iou": 0.1557528671846097,
+          "semantic_score": 0.0
+        },
+        "missing_semantics": [
+          "circle",
+          "text",
+          "connector"
+        ],
+        "objects": [
+          {
+            "bbox": [
+              5,
+              12,
+              59,
+              41
+            ],
+            "mask_iou": 0.1557528671846097,
+            "matched_pixels": 421,
+            "object_id": "component-1",
+            "reference_pixels": 424
+          },
+          {
+            "bbox": [
+              19,
+              24,
+              12,
+              17
+            ],
+            "mask_iou": 0.29464285714285715,
+            "matched_pixels": 99,
+            "object_id": "component-2",
+            "reference_pixels": 99
+          }
+        ],
+        "schema_version": "semantic_only_quality_report_v1",
+        "status": "measured",
+        "worst_error_region": {
+          "bbox": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "max_channel_delta": 245
+        }
+      },
+      "rename_invariant": true,
+      "runs": [
+        {
+          "exit_code": 0,
+          "normalized_svg_sha256": "d90f76249813c36225d005848cdde01ee8e21e4e4a566a424c4693badb33288e",
+          "quality": {
+            "metrics": {
+              "connector_continuity": 1.0,
+              "dimension_match": 1.0,
+              "edge_alignment": 0.018457992002367973,
+              "error_per_pixel": 0.566286563873291,
+              "object_mask_iou": 0.1557528671846097,
+              "semantic_score": 0.0
+            },
+            "missing_semantics": [
+              "circle",
+              "text",
+              "connector"
+            ],
+            "objects": [
+              {
+                "bbox": [
+                  5,
+                  12,
+                  59,
+                  41
+                ],
+                "mask_iou": 0.1557528671846097,
+                "matched_pixels": 421,
+                "object_id": "component-1",
+                "reference_pixels": 424
+              },
+              {
+                "bbox": [
+                  19,
+                  24,
+                  12,
+                  17
+                ],
+                "mask_iou": 0.29464285714285715,
+                "matched_pixels": 99,
+                "object_id": "component-2",
+                "reference_pixels": 99
+              }
+            ],
+            "schema_version": "semantic_only_quality_report_v1",
+            "status": "measured",
+            "worst_error_region": {
+              "bbox": [
+                0,
+                0,
+                64,
+                64
+              ],
+              "max_channel_delta": 245
+            }
+          },
+          "renamed_input": false,
+          "repetition": 1,
+          "svg_sha256": "1336cb488a1d87e7479d09e7d78dd5c04508907e111a8379ebc63fe3d3bd6638"
+        },
+        {
+          "exit_code": 0,
+          "normalized_svg_sha256": "d90f76249813c36225d005848cdde01ee8e21e4e4a566a424c4693badb33288e",
+          "quality": {
+            "metrics": {
+              "connector_continuity": 1.0,
+              "dimension_match": 1.0,
+              "edge_alignment": 0.018457992002367973,
+              "error_per_pixel": 0.566286563873291,
+              "object_mask_iou": 0.1557528671846097,
+              "semantic_score": 0.0
+            },
+            "missing_semantics": [
+              "circle",
+              "text",
+              "connector"
+            ],
+            "objects": [
+              {
+                "bbox": [
+                  5,
+                  12,
+                  59,
+                  41
+                ],
+                "mask_iou": 0.1557528671846097,
+                "matched_pixels": 421,
+                "object_id": "component-1",
+                "reference_pixels": 424
+              },
+              {
+                "bbox": [
+                  19,
+                  24,
+                  12,
+                  17
+                ],
+                "mask_iou": 0.29464285714285715,
+                "matched_pixels": 99,
+                "object_id": "component-2",
+                "reference_pixels": 99
+              }
+            ],
+            "schema_version": "semantic_only_quality_report_v1",
+            "status": "measured",
+            "worst_error_region": {
+              "bbox": [
+                0,
+                0,
+                64,
+                64
+              ],
+              "max_channel_delta": 245
+            }
+          },
+          "renamed_input": false,
+          "repetition": 2,
+          "svg_sha256": "1336cb488a1d87e7479d09e7d78dd5c04508907e111a8379ebc63fe3d3bd6638"
+        },
+        {
+          "exit_code": 0,
+          "normalized_svg_sha256": "d90f76249813c36225d005848cdde01ee8e21e4e4a566a424c4693badb33288e",
+          "quality": {
+            "metrics": {
+              "connector_continuity": 1.0,
+              "dimension_match": 1.0,
+              "edge_alignment": 0.018457992002367973,
+              "error_per_pixel": 0.566286563873291,
+              "object_mask_iou": 0.1557528671846097,
+              "semantic_score": 0.0
+            },
+            "missing_semantics": [
+              "circle",
+              "text",
+              "connector"
+            ],
+            "objects": [
+              {
+                "bbox": [
+                  5,
+                  12,
+                  59,
+                  41
+                ],
+                "mask_iou": 0.1557528671846097,
+                "matched_pixels": 421,
+                "object_id": "component-1",
+                "reference_pixels": 424
+              },
+              {
+                "bbox": [
+                  19,
+                  24,
+                  12,
+                  17
+                ],
+                "mask_iou": 0.29464285714285715,
+                "matched_pixels": 99,
+                "object_id": "component-2",
+                "reference_pixels": 99
+              }
+            ],
+            "schema_version": "semantic_only_quality_report_v1",
+            "status": "measured",
+            "worst_error_region": {
+              "bbox": [
+                0,
+                0,
+                64,
+                64
+              ],
+              "max_channel_delta": 245
+            }
+          },
+          "renamed_input": true,
+          "repetition": 3,
+          "svg_sha256": "1336cb488a1d87e7479d09e7d78dd5c04508907e111a8379ebc63fe3d3bd6638"
+        }
+      ],
+      "stable": true,
+      "topology": "circle+text+connector"
+    },
+    {
+      "case_id": "rectangle_diagonal",
+      "inputs": {
+        "allowed_sources": [
+          "png",
+          "semantic_description"
+        ],
+        "description_sha256": "c136d31a0da44cebecdc7eac6344845c2792c721c157a35885482992a880ae73",
+        "image_sha256": "ac497d350867e6808b049a4608473a59f836e3911f973599913c9ffdd7be3641"
+      },
+      "quality": {
+        "metrics": {
+          "connector_continuity": 1.0,
+          "dimension_match": 1.0,
+          "edge_alignment": 0.3826935887336731,
+          "error_per_pixel": 0.06386814266443253,
+          "object_mask_iou": 0.11564625850340136,
+          "semantic_score": 1.0
+        },
+        "missing_semantics": [],
+        "objects": [
+          {
+            "bbox": [
+              9,
+              13,
+              46,
+              39
+            ],
+            "mask_iou": 0.24713242961418144,
+            "matched_pixels": 474,
+            "object_id": "component-1",
+            "reference_pixels": 474
+          },
+          {
+            "bbox": [
+              13,
+              17,
+              38,
+              31
+            ],
+            "mask_iou": 0.11564625850340136,
+            "matched_pixels": 170,
+            "object_id": "component-2",
+            "reference_pixels": 170
+          }
+        ],
+        "schema_version": "semantic_only_quality_report_v1",
+        "status": "measured",
+        "worst_error_region": {
+          "bbox": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "max_channel_delta": 133
+        }
+      },
+      "rename_invariant": true,
+      "runs": [
+        {
+          "exit_code": 0,
+          "normalized_svg_sha256": "261b41f27058e35b22f9cd4c5437ec4cad282b66792cef0a2c17aab0afd9a2b6",
+          "quality": {
+            "metrics": {
+              "connector_continuity": 1.0,
+              "dimension_match": 1.0,
+              "edge_alignment": 0.3826935887336731,
+              "error_per_pixel": 0.06386814266443253,
+              "object_mask_iou": 0.11564625850340136,
+              "semantic_score": 1.0
+            },
+            "missing_semantics": [],
+            "objects": [
+              {
+                "bbox": [
+                  9,
+                  13,
+                  46,
+                  39
+                ],
+                "mask_iou": 0.24713242961418144,
+                "matched_pixels": 474,
+                "object_id": "component-1",
+                "reference_pixels": 474
+              },
+              {
+                "bbox": [
+                  13,
+                  17,
+                  38,
+                  31
+                ],
+                "mask_iou": 0.11564625850340136,
+                "matched_pixels": 170,
+                "object_id": "component-2",
+                "reference_pixels": 170
+              }
+            ],
+            "schema_version": "semantic_only_quality_report_v1",
+            "status": "measured",
+            "worst_error_region": {
+              "bbox": [
+                0,
+                0,
+                64,
+                64
+              ],
+              "max_channel_delta": 133
+            }
+          },
+          "renamed_input": false,
+          "repetition": 1,
+          "svg_sha256": "fe5b611172e15f2e3bb8bc044598b686f7ce7465c937fe37f4f50641ddb36e39"
+        },
+        {
+          "exit_code": 0,
+          "normalized_svg_sha256": "261b41f27058e35b22f9cd4c5437ec4cad282b66792cef0a2c17aab0afd9a2b6",
+          "quality": {
+            "metrics": {
+              "connector_continuity": 1.0,
+              "dimension_match": 1.0,
+              "edge_alignment": 0.3826935887336731,
+              "error_per_pixel": 0.06386814266443253,
+              "object_mask_iou": 0.11564625850340136,
+              "semantic_score": 1.0
+            },
+            "missing_semantics": [],
+            "objects": [
+              {
+                "bbox": [
+                  9,
+                  13,
+                  46,
+                  39
+                ],
+                "mask_iou": 0.24713242961418144,
+                "matched_pixels": 474,
+                "object_id": "component-1",
+                "reference_pixels": 474
+              },
+              {
+                "bbox": [
+                  13,
+                  17,
+                  38,
+                  31
+                ],
+                "mask_iou": 0.11564625850340136,
+                "matched_pixels": 170,
+                "object_id": "component-2",
+                "reference_pixels": 170
+              }
+            ],
+            "schema_version": "semantic_only_quality_report_v1",
+            "status": "measured",
+            "worst_error_region": {
+              "bbox": [
+                0,
+                0,
+                64,
+                64
+              ],
+              "max_channel_delta": 133
+            }
+          },
+          "renamed_input": false,
+          "repetition": 2,
+          "svg_sha256": "fe5b611172e15f2e3bb8bc044598b686f7ce7465c937fe37f4f50641ddb36e39"
+        },
+        {
+          "exit_code": 0,
+          "normalized_svg_sha256": "261b41f27058e35b22f9cd4c5437ec4cad282b66792cef0a2c17aab0afd9a2b6",
+          "quality": {
+            "metrics": {
+              "connector_continuity": 1.0,
+              "dimension_match": 1.0,
+              "edge_alignment": 0.3826935887336731,
+              "error_per_pixel": 0.06386814266443253,
+              "object_mask_iou": 0.11564625850340136,
+              "semantic_score": 1.0
+            },
+            "missing_semantics": [],
+            "objects": [
+              {
+                "bbox": [
+                  9,
+                  13,
+                  46,
+                  39
+                ],
+                "mask_iou": 0.24713242961418144,
+                "matched_pixels": 474,
+                "object_id": "component-1",
+                "reference_pixels": 474
+              },
+              {
+                "bbox": [
+                  13,
+                  17,
+                  38,
+                  31
+                ],
+                "mask_iou": 0.11564625850340136,
+                "matched_pixels": 170,
+                "object_id": "component-2",
+                "reference_pixels": 170
+              }
+            ],
+            "schema_version": "semantic_only_quality_report_v1",
+            "status": "measured",
+            "worst_error_region": {
+              "bbox": [
+                0,
+                0,
+                64,
+                64
+              ],
+              "max_channel_delta": 133
+            }
+          },
+          "renamed_input": true,
+          "repetition": 3,
+          "svg_sha256": "fe5b611172e15f2e3bb8bc044598b686f7ce7465c937fe37f4f50641ddb36e39"
+        }
+      ],
+      "stable": true,
+      "topology": "rectangle+diagonal"
+    },
+    {
+      "case_id": "polygon_line",
+      "inputs": {
+        "allowed_sources": [
+          "png",
+          "semantic_description"
+        ],
+        "description_sha256": "a21f1140ad09ade3304c7ad428705818bbd9dcb3cac7bdccdfd9605bfc31f18f",
+        "image_sha256": "fae46685294301765a2d4e892b53334a45773da5b6380ce0ceed87cfa7a4d488"
+      },
+      "quality": {
+        "metrics": {
+          "connector_continuity": 1.0,
+          "dimension_match": 1.0,
+          "edge_alignment": 0.007984115742146969,
+          "error_per_pixel": 0.47427046298980713,
+          "object_mask_iou": 0.21739130434782608,
+          "semantic_score": 0.0
+        },
+        "missing_semantics": [
+          "polygon_path",
+          "line"
+        ],
+        "objects": [
+          {
+            "bbox": [
+              11,
+              13,
+              42,
+              44
+            ],
+            "mask_iou": 0.21739130434782608,
+            "matched_pixels": 480,
+            "object_id": "component-1",
+            "reference_pixels": 480
+          }
+        ],
+        "schema_version": "semantic_only_quality_report_v1",
+        "status": "measured",
+        "worst_error_region": {
+          "bbox": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "max_channel_delta": 245
+        }
+      },
+      "rename_invariant": true,
+      "runs": [
+        {
+          "exit_code": 0,
+          "normalized_svg_sha256": "875996d2a255b8bac670ae49ffeebdb224ae9d452a59693c775a4cd13d089778",
+          "quality": {
+            "metrics": {
+              "connector_continuity": 1.0,
+              "dimension_match": 1.0,
+              "edge_alignment": 0.007984115742146969,
+              "error_per_pixel": 0.47427046298980713,
+              "object_mask_iou": 0.21739130434782608,
+              "semantic_score": 0.0
+            },
+            "missing_semantics": [
+              "polygon_path",
+              "line"
+            ],
+            "objects": [
+              {
+                "bbox": [
+                  11,
+                  13,
+                  42,
+                  44
+                ],
+                "mask_iou": 0.21739130434782608,
+                "matched_pixels": 480,
+                "object_id": "component-1",
+                "reference_pixels": 480
+              }
+            ],
+            "schema_version": "semantic_only_quality_report_v1",
+            "status": "measured",
+            "worst_error_region": {
+              "bbox": [
+                0,
+                0,
+                64,
+                64
+              ],
+              "max_channel_delta": 245
+            }
+          },
+          "renamed_input": false,
+          "repetition": 1,
+          "svg_sha256": "3d4a832b20aabcf2a55698e8ca36d7fe64b5bfd44bd25df76d79fa0768b49003"
+        },
+        {
+          "exit_code": 0,
+          "normalized_svg_sha256": "875996d2a255b8bac670ae49ffeebdb224ae9d452a59693c775a4cd13d089778",
+          "quality": {
+            "metrics": {
+              "connector_continuity": 1.0,
+              "dimension_match": 1.0,
+              "edge_alignment": 0.007984115742146969,
+              "error_per_pixel": 0.47427046298980713,
+              "object_mask_iou": 0.21739130434782608,
+              "semantic_score": 0.0
+            },
+            "missing_semantics": [
+              "polygon_path",
+              "line"
+            ],
+            "objects": [
+              {
+                "bbox": [
+                  11,
+                  13,
+                  42,
+                  44
+                ],
+                "mask_iou": 0.21739130434782608,
+                "matched_pixels": 480,
+                "object_id": "component-1",
+                "reference_pixels": 480
+              }
+            ],
+            "schema_version": "semantic_only_quality_report_v1",
+            "status": "measured",
+            "worst_error_region": {
+              "bbox": [
+                0,
+                0,
+                64,
+                64
+              ],
+              "max_channel_delta": 245
+            }
+          },
+          "renamed_input": false,
+          "repetition": 2,
+          "svg_sha256": "3d4a832b20aabcf2a55698e8ca36d7fe64b5bfd44bd25df76d79fa0768b49003"
+        },
+        {
+          "exit_code": 0,
+          "normalized_svg_sha256": "875996d2a255b8bac670ae49ffeebdb224ae9d452a59693c775a4cd13d089778",
+          "quality": {
+            "metrics": {
+              "connector_continuity": 1.0,
+              "dimension_match": 1.0,
+              "edge_alignment": 0.007984115742146969,
+              "error_per_pixel": 0.47427046298980713,
+              "object_mask_iou": 0.21739130434782608,
+              "semantic_score": 0.0
+            },
+            "missing_semantics": [
+              "polygon_path",
+              "line"
+            ],
+            "objects": [
+              {
+                "bbox": [
+                  11,
+                  13,
+                  42,
+                  44
+                ],
+                "mask_iou": 0.21739130434782608,
+                "matched_pixels": 480,
+                "object_id": "component-1",
+                "reference_pixels": 480
+              }
+            ],
+            "schema_version": "semantic_only_quality_report_v1",
+            "status": "measured",
+            "worst_error_region": {
+              "bbox": [
+                0,
+                0,
+                64,
+                64
+              ],
+              "max_channel_delta": 245
+            }
+          },
+          "renamed_input": true,
+          "repetition": 3,
+          "svg_sha256": "3d4a832b20aabcf2a55698e8ca36d7fe64b5bfd44bd25df76d79fa0768b49003"
+        }
+      ],
+      "stable": true,
+      "topology": "polygon_path+line"
+    }
+  ],
+  "input_contract": {
+    "allowed_sources": [
+      "png",
+      "semantic_description"
+    ],
+    "execution_mode": "semantic-only",
+    "forbidden_sources": [
+      "reference_svg",
+      "sample_svg",
+      "bestlist",
+      "template_donor"
+    ]
+  },
+  "repetitions": 3,
+  "schema_version": "semantic_only_png_benchmark_v1",
+  "seed": 0,
+  "summary": {
+    "passed": true,
+    "sample_count": 3,
+    "stable_count": 3,
+    "unstable_count": 0
+  }
+}
