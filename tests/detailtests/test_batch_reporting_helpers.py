@@ -25,13 +25,19 @@ def test_write_batch_failure_summary_writes_expected_columns(tmp_path: Path):
     with out_path.open("r", encoding="utf-8", newline="") as handle:
         rows = list(csv.reader(handle, delimiter=";"))
 
-    assert rows[0] == ["filename", "status", "reason", "details", "log_file"]
+    assert rows[0] == [
+        "filename", "status", "reason", "details", "log_file",
+        "reachability_reason", "report_code", "exit_code",
+    ]
     assert rows[1] == [
         "AC0800_S.jpg",
         "semantic_mismatch",
         "semantic_mismatch",
         "circle missing",
         "AC0800_S_element_validation.log",
+        "semantic_conflict",
+        "NR004",
+        "23",
     ]
 
 

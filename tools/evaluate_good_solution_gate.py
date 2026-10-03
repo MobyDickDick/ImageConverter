@@ -5,10 +5,18 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 from collections import Counter
 from pathlib import Path
 from typing import Any, Mapping
 from xml.etree import ElementTree
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from src.iCCModules.imageCompositeConverterReachability import (
+    aggregateNotReachableExitCodeImpl,
+    classifyNotReachableImpl,
+)
 
 
 SCHEMA_VERSION = "good_solution_gate_v1"
@@ -142,12 +150,18 @@ def evaluate_good_solution(
             reasons.append("dimension_match_below_min")
         status = "suboptimal" if reasons else "good"
 
+    reachability = (
+        classifyNotReachableImpl({"status": normalized_source_status})
+        if status == "not_reachable"
+        else None
+    )
     return {
         "schema_version": SCHEMA_VERSION,
         "status": status,
         "reasons": reasons or ["all_thresholds_satisfied"],
         "metrics": normalized,
         "thresholds": limits,
+        "reachability": reachability,
     }
 
 
@@ -195,6 +209,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output", type=Path, help="write the report in addition to stdout")
     parser.add_argument("--image-dir", type=Path, help="source raster directory for hard dimension checks")
     parser.add_argument("--svg-dir", type=Path, help="converted SVG directory for hard dimension checks")
+    parser.add_argument(
+        "--fail-on-not-reachable",
+        action="store_true",
+        help="return the canonical 20..23 exit code when the report contains unreachable results",
+    )
     args = parser.parse_args(argv)
     try:
         rows = json.loads(args.result_map.read_text(encoding="utf-8"))
@@ -210,6 +229,9 @@ def main(argv: list[str] | None = None) -> int:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(serialized, encoding="utf-8")
     print(serialized, end="")
+    if args.fail_on_not_reachable:
+        unreachable = [row["reachability"] for row in report["evaluations"] if row["reachability"]]
+        return aggregateNotReachableExitCodeImpl(unreachable)
     return 0
 
 
