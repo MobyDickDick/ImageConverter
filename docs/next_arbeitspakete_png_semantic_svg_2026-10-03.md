@@ -149,6 +149,10 @@ zu beschädigen.
 
 **Abhängigkeit:** ZG7.4
 
+**Status:** Abgeschlossen am 2026-10-03; versiegelte Baseline,
+Vorher-/Nachher-Report und Gateentscheidungen stehen in
+`docs/next_arbeitspaket_2026-10-03_zg7_5.md`.
+
 **Ziel:** Eine Verbesserung und ein zufriedenstellendes Resultat getrennt und
 ehrlich ausweisen.
 
