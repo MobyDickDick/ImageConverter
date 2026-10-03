@@ -88,6 +88,9 @@ stehen in `docs/next_arbeitspaket_2026-10-03_zg7_2.md`.
 
 **Abhängigkeit:** ZG7.2
 
+**Status:** Abgeschlossen am 2026-10-03; Vertrag, Konfliktprotokoll und
+Abnahmebeleg stehen in `docs/next_arbeitspaket_2026-10-03_zg7_3.md`.
+
 **Ziel:** Beschreibung und Bildbefund gemeinsam zur richtigen Topologie führen.
 
 **Umfang**
