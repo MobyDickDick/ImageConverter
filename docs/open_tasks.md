@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-08-03)
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-03)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `401` · Erledigt `375` · Offen `26`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `407` · Erledigt `386` · Offen `21`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -2403,6 +2403,19 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   `docs/next_arbeitspaket_2026-10-03_zg5.md`.)
   - Feature-Flag `--execution-mode semantic-only` ohne zusätzliche Artefaktquellen.
   - Akzeptanz: CLI-Tests belegen den sicheren Default und den expliziten Opt-in für `standard`.
+
+- [x] **ZG6 (P1): Nicht-Erreichbarkeit robust machen** (2026-10-03:
+  Stagnation, Budgetüberschreitung, Dimensionsverletzung und Semantikkonflikt
+  besitzen nun einheitliche Report- und Exit-Codes. Details:
+  `docs/next_arbeitspaket_2026-10-03_zg6.md`.)
+  - Akzeptanz: Gründe und Codes werden in Batchreport und Good-Solution-Gate reproduzierbar ausgegeben.
+
+- [x] **ZG7 (P1): Benchmark-Set ohne Sonderwissen** (2026-10-03: Das
+  versionierte Sechs-Sample-Manifest und der isolierende Benchmark-Runner
+  verwenden ausschließlich JPEG + Beschreibungstabelle im `semantic-only`-
+  Modus und prüfen zwei unabhängige SVG-Ergebnisse per SHA-256. Details:
+  `docs/next_arbeitspaket_2026-10-03_zg7.md`.)
+  - Akzeptanz: Der Report weist je Sample erfolgreiche, byteidentische Wiederholungen aus und schlägt bei Abweichungen fehl.
 
 
 

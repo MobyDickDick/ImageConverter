@@ -485,6 +485,8 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – ZG3 Good-Solution-Gate v1 (2026-10-03)](next_arbeitspaket_2026-10-03_zg3.md)
 - [Nächstes Arbeitspaket – ZG4 harte Dimensionstreue (2026-10-03)](next_arbeitspaket_2026-10-03_zg4.md)
 - [Nächstes Arbeitspaket – ZG5 Semantik-first-Ausführungsmodus (2026-10-03)](next_arbeitspaket_2026-10-03_zg5.md)
+- [Nächstes Arbeitspaket – ZG6 robuste Nicht-Erreichbarkeit (2026-10-03)](next_arbeitspaket_2026-10-03_zg6.md)
+- [Nächstes Arbeitspaket – ZG7 Benchmark ohne Sonderwissen (2026-10-03)](next_arbeitspaket_2026-10-03_zg7.md)
 
 - [Nächstes Arbeitspaket – GE1001_M Checkmark-Primitive Run SQ (2026-06-24)](next_arbeitspaket_2026-06-24_runSQ.md)
 - [Nächstes Arbeitspaket – GE9021_7M U-Loop-Primitive Run SR (2026-06-25)](next_arbeitspaket_2026-06-25_runSR.md)
