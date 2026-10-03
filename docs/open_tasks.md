@@ -2375,7 +2375,13 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - Inventur aller dateiname-/familienabhängigen Heuristiken, danach Migration auf beschreibungsgetriebete Regeln.
   - Akzeptanz: Hauptpfad funktioniert auf Referenzset ohne filename-spezifische Sonderfälle.
 
-- [ ] **ZG3 (P0): Good-Solution-Gate v1 implementieren**
+- [x] **ZG3 (P0): Good-Solution-Gate v1 implementieren** (2026-10-03: Das neue
+  `tools/evaluate_good_solution_gate.py` klassifiziert jede Result-Map-Zeile
+  deterministisch als `good`, `suboptimal` oder `not_reachable`. Der
+  versionierte Report enthält pro Datei Metriken, angewandte Schwellen und
+  maschinenlesbare Gründe; fehlende Pflichtmetriken und terminale
+  Konvertierungsstatus werden explizit als nicht erreichbar ausgewiesen.
+  Details: `docs/next_arbeitspaket_2026-10-03_zg3.md`.)
   - Einheitliche Statusklassifikation `good` / `suboptimal` / `not_reachable` via versionierter Schwellenwerte.
   - Akzeptanz: Status + Schwellen + Gründe stehen pro Datei im Report.
 
