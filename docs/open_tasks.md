@@ -2394,6 +2394,16 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - Width/Height/Aspect-Ratio-Abweichung über Toleranz => kein `good`.
   - Akzeptanz: Regressionstest mit absichtlich falscher Dimension liefert `suboptimal` oder `not_reachable`.
 
+- [x] **ZG5 (P1): Semantik-first-Ausführungsmodus** (2026-10-03: Der neue
+  voreingestellte Modus `semantic-only` verwendet je Konvertierung nur das
+  aktuelle Rasterbild und dessen Beschreibung. Wiederverwendung vorhandener
+  Resultate, Checkpoint-Resume und Template-Donoren sind darin deaktiviert;
+  der bisherige inkrementelle Ablauf bleibt ausschließlich als expliziter
+  `standard`-Kompatibilitätsmodus verfügbar. Details:
+  `docs/next_arbeitspaket_2026-10-03_zg5.md`.)
+  - Feature-Flag `--execution-mode semantic-only` ohne zusätzliche Artefaktquellen.
+  - Akzeptanz: CLI-Tests belegen den sicheren Default und den expliziten Opt-in für `standard`.
+
 
 
 ### Fortschritt vs. Blocker (Session 2026-05-15, N2 Run DK + N2-PB Run DK_PB)
