@@ -3,6 +3,13 @@
 ImageConverter converts badge/source images into composite SVG outputs and also
 provides annotation/debugging helpers for the source raster files.
 
+Für eine Konvertierung verwendet der Standardmodus genau zwei fachliche
+Quellen: **das zu konvertierende Rasterbild** und **seine sprachliche
+Beschreibung**. Bildbreite und -höhe werden direkt aus diesem Rasterbild
+gelesen; dafür gibt es keine zusätzliche Dimensionsdatei. Bereits erzeugte
+SVGs, Checkpoints oder andere Bilder werden im voreingestellten
+`semantic-only`-Modus nicht als Konvertierungsquelle wiederverwendet.
+
 ## Main entry point
 
 Run the converter via:
@@ -43,6 +50,11 @@ python -m src.imageCompositeConverter \
   --start AC0000 \
   --end ZZ9999
 ```
+
+`--execution-mode semantic-only` ist der Default. Nur der ausdrücklich
+gewählte Kompatibilitätsmodus `--execution-mode standard` darf vorhandene
+Ergebnisartefakte für inkrementelle Wiederverwendung oder Template-Transfer
+heranziehen.
 
 Wenn einzelne Bilder im Batch nicht vektorisierbar sind, läuft die Konvertierung
 weiter und schreibt die Details nach

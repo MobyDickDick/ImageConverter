@@ -23,6 +23,29 @@ def test_parse_args_impl_applies_named_iterations_override() -> None:
     assert args.iterations == 17
     assert args.fail_on_batch_failures is False
     assert args.fail_on_optimization_render_regression is False
+    assert args.execution_mode == "semantic-only"
+
+
+def test_parse_args_impl_accepts_semantic_only_execution_mode() -> None:
+    args = cli_helpers.parseArgsImpl(
+        argv=["images", "--execution-mode", "semantic-only"],
+        ac08_regression_set_name="ac08-regression",
+        ac08_regression_variants=("AC0800_L",),
+        svg_render_subprocess_timeout_sec=5.0,
+    )
+
+    assert args.execution_mode == "semantic-only"
+
+
+def test_parse_args_impl_requires_explicit_opt_in_for_artifact_reuse() -> None:
+    args = cli_helpers.parseArgsImpl(
+        argv=["images", "--execution-mode", "standard"],
+        ac08_regression_set_name="ac08-regression",
+        ac08_regression_variants=("AC0800_L",),
+        svg_render_subprocess_timeout_sec=5.0,
+    )
+
+    assert args.execution_mode == "standard"
 
 
 def test_parse_args_impl_accepts_strict_batch_failure_exit_flag() -> None:
@@ -361,6 +384,7 @@ def test_run_main_impl_convert_mode_invokes_convert_with_selected_variants() -> 
         debug_ac0811_dir="dbg0811",
         debug_element_diff_dir="dbg-elem",
         deterministic_order=True,
+        execution_mode="semantic-only",
     )
     calls: dict[str, object] = {}
 
@@ -393,6 +417,7 @@ def test_run_main_impl_convert_mode_invokes_convert_with_selected_variants() -> 
     assert convert_args[1] == "descriptions.csv"
     assert convert_args[8] == {"AC0800_L", "AC0811_L"}
     assert convert_args[9] is True
+    assert convert_args[12] is True
 
 
 def test_run_main_impl_auto_enables_isolated_render_for_ac08_regression_set() -> None:

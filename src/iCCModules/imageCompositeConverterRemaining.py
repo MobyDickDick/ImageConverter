@@ -1138,6 +1138,7 @@ def convertRange(
     deterministic_order: bool = False,
     debug_jpeg_load: bool = False,
     debug_trace_path: str | None = None,
+    semantic_only: bool = False,
 ) -> str:
     out_root = output_root or _defaultConvertedSymbolsRoot()
     svg_out_dir = _convertedSvgOutputDir(out_root)
@@ -1175,6 +1176,7 @@ def convertRange(
         deterministic_order=deterministic_order,
         selected_variants=sorted(normalized_selected_variants or []),
         matched_files=files,
+        execution_mode="semantic-only" if semantic_only else "standard",
     )
     if resolved_debug_trace_path is not None:
         print(f"[DEBUG] Strukturierte Ablaufspur: {resolved_debug_trace_path}")
@@ -1262,19 +1264,35 @@ def convertRange(
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
     conversion_bestlist_path = _conversionBestlistManifestPath(reports_out_dir)
-    conversion_bestlist_rows = _readConversionBestlistMetrics(conversion_bestlist_path, svg_out_dir)
+    previous_report_bestlist_rows = (
+        _readConversionBestlistMetrics(conversion_bestlist_path, svg_out_dir)
+        if semantic_only
+        else {}
+    )
+    # Semantic-only conversions must not consult earlier rows while selecting or
+    # improving the SVG. Keep them separately only so sequential CLI calls can
+    # append to the cumulative report instead of erasing earlier evidence.
+    conversion_bestlist_rows = (
+        {} if semantic_only else _readConversionBestlistMetrics(conversion_bestlist_path, svg_out_dir)
+    )
     batch_failures: list[dict[str, str]] = []
     stop_after_failure = False
-    existing_donor_rows = _loadExistingConversionRows(out_root, folder_path)
+    # In semantic-only mode neither previous outputs nor other catalog images may
+    # become an input to this conversion. The only evidence is the current raster
+    # and its description from ``csv_path``.
+    existing_donor_rows = [] if semantic_only else _loadExistingConversionRows(out_root, folder_path)
     force_reconvert = os.environ.get("ICC_FORCE_RECONVERT", "").strip().lower() in {"1", "true", "yes", "on"}
-    process_files, reusable_rows = incremental_helpers.partitionReusableConversionsImpl(
-        filenames=process_files,
-        existing_rows=existing_donor_rows,
-        folder_path=folder_path,
-        svg_out_dir=svg_out_dir,
-        descriptions_path=csv_path,
-        force_reconvert=force_reconvert,
-    )
+    if semantic_only:
+        reusable_rows = {}
+    else:
+        process_files, reusable_rows = incremental_helpers.partitionReusableConversionsImpl(
+            filenames=process_files,
+            existing_rows=existing_donor_rows,
+            folder_path=folder_path,
+            svg_out_dir=svg_out_dir,
+            descriptions_path=csv_path,
+            force_reconvert=force_reconvert,
+        )
     debug_event(
         "incremental_partition",
         reused_count=len(reusable_rows),
@@ -1283,7 +1301,7 @@ def convertRange(
         reused_variants=sorted(str(row.get("variant", "")) for row in reusable_rows.values()),
     )
     result_map.update(reusable_rows)
-    checkpoint_resume_enabled = os.environ.get("ICC_RESUME_FROM_CHECKPOINT", "").strip().lower() in {
+    checkpoint_resume_enabled = not semantic_only and os.environ.get("ICC_RESUME_FROM_CHECKPOINT", "").strip().lower() in {
         "1",
         "true",
         "yes",
@@ -1433,6 +1451,17 @@ def convertRange(
             return None, True
         return _runOne(filename, requested_iterations, badge_rounds)
 
+    if semantic_only:
+        store_bestlist_snapshot = lambda _variant, _row: None
+        restore_bestlist_snapshot = lambda _variant: None
+    else:
+        store_bestlist_snapshot = lambda variant, row: _storeConversionBestlistSnapshot(
+            variant, row, svg_out_dir, reports_out_dir
+        )
+        restore_bestlist_snapshot = lambda variant: _restoreConversionBestlistSnapshot(
+            variant, svg_out_dir, reports_out_dir
+        )
+
     # Initial conversion pass for all forms.
     stop_after_failure = conversion_initial_pass_helpers.runInitialConversionPassImpl(
         process_files=process_files,
@@ -1446,19 +1475,12 @@ def convertRange(
         deterministic_order=deterministic_order,
         base_iterations=base_iterations,
         convert_one_fn=_convertOne,
-        try_template_transfer_fn=_tryTemplateTransfer,
+        try_template_transfer_fn=(
+            (lambda **_kwargs: (None, None)) if semantic_only else _tryTemplateTransfer
+        ),
         is_conversion_bestlist_candidate_better_fn=_isConversionBestlistCandidateBetter,
-        store_conversion_bestlist_snapshot_fn=lambda variant, row: _storeConversionBestlistSnapshot(
-            variant,
-            row,
-            svg_out_dir,
-            reports_out_dir,
-        ),
-        restore_conversion_bestlist_snapshot_fn=lambda variant: _restoreConversionBestlistSnapshot(
-            variant,
-            svg_out_dir,
-            reports_out_dir,
-        ),
+        store_conversion_bestlist_snapshot_fn=store_bestlist_snapshot,
+        restore_conversion_bestlist_snapshot_fn=restore_bestlist_snapshot,
         choose_conversion_bestlist_row_fn=_chooseConversionBestlistRow,
         should_stop_after_failure_fn=lambda failed_filename: bool(
             batch_failures
@@ -1528,17 +1550,8 @@ def convertRange(
             iteration_strategy_for_pass_fn=_iterationStrategyForPass,
             adaptive_iteration_budget_for_quality_row_fn=_adaptiveIterationBudgetForQualityRow,
             evaluate_quality_pass_candidate_fn=_evaluateQualityPassCandidate,
-            store_conversion_bestlist_snapshot_fn=lambda variant, row: _storeConversionBestlistSnapshot(
-                variant,
-                row,
-                svg_out_dir,
-                reports_out_dir,
-            ),
-            restore_conversion_bestlist_snapshot_fn=lambda variant: _restoreConversionBestlistSnapshot(
-                variant,
-                svg_out_dir,
-                reports_out_dir,
-            ),
+            store_conversion_bestlist_snapshot_fn=store_bestlist_snapshot,
+            restore_conversion_bestlist_snapshot_fn=restore_bestlist_snapshot,
             before_pass_fn=lambda pass_idx: setattr(Action, "STOCHASTIC_SEED_OFFSET", pass_idx * 100_000),
             before_candidate_fn=lambda pass_idx, candidate_idx, _filename, _row: setattr(
                 Action,
@@ -1549,13 +1562,20 @@ def convertRange(
             continue_after_max_if_improved=False,
         )
 
-    _restoreBestlistSnapshotsForSelectedRegressions(
-        files=files,
-        result_map=result_map,
-        conversion_bestlist_rows=conversion_bestlist_rows,
-        svg_out_dir=svg_out_dir,
-        reports_out_dir=reports_out_dir,
-    )
+    if not semantic_only:
+        _restoreBestlistSnapshotsForSelectedRegressions(
+            files=files,
+            result_map=result_map,
+            conversion_bestlist_rows=conversion_bestlist_rows,
+            svg_out_dir=svg_out_dir,
+            reports_out_dir=reports_out_dir,
+        )
+
+    if semantic_only:
+        conversion_bestlist_rows = conversion_bestlist_helpers.mergeConversionReportRowsImpl(
+            previous_report_bestlist_rows,
+            conversion_bestlist_rows,
+        )
 
     conversion_finalization_helpers.runConversionFinalizationImpl(
         reports_out_dir=reports_out_dir,
@@ -1583,14 +1603,15 @@ def convertRange(
         harmonize_semantic_size_variants_fn=_harmonizeSemanticSizeVariants,
         run_post_conversion_reporting_fn=_runPostConversionReporting,
     )
-    _restoreSatisfactoryBaselineIfBetter(
-        files=files,
-        folder_path=folder_path,
-        svg_out_dir=svg_out_dir,
-        reports_out_dir=reports_out_dir,
-        conversion_bestlist_path=conversion_bestlist_path,
-        conversion_bestlist_rows=conversion_bestlist_rows,
-    )
+    if not semantic_only:
+        _restoreSatisfactoryBaselineIfBetter(
+            files=files,
+            folder_path=folder_path,
+            svg_out_dir=svg_out_dir,
+            reports_out_dir=reports_out_dir,
+            conversion_bestlist_path=conversion_bestlist_path,
+            conversion_bestlist_rows=conversion_bestlist_rows,
+        )
     if debug_jpeg_load:
         _writeJpegFailureDiagnostics(
             folder_path=folder_path,

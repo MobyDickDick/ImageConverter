@@ -77,6 +77,17 @@ def parseArgsImpl(
     )
     parser.add_argument("--output-dir", default=None, help="Explizites Ausgabeverzeichnis")
     parser.add_argument(
+        "--execution-mode",
+        choices=("standard", "semantic-only"),
+        default="semantic-only",
+        help=(
+            "semantic-only (Default)=erzeugt jede Ausgabe ausschließlich aus dem jeweiligen Bild "
+            "und seiner sprachlichen Beschreibung (keine Wiederverwendung, Checkpoints "
+            "oder Template-Donoren); standard=expliziter Kompatibilitätsmodus mit "
+            "vorhandenen Ergebnisartefakten."
+        ),
+    )
+    parser.add_argument(
         "--iterations",
         dest="iterations_override",
         type=int,
@@ -651,6 +662,7 @@ def runMainImpl(
                     bool(args.deterministic_order),
                     bool(getattr(args, "debug_jpeg_load", False)),
                     getattr(args, "debug_trace", None),
+                    getattr(args, "execution_mode", "semantic-only") == "semantic-only",
                 )
             print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
             if args.mode == "convert" and _hasBatchFailures(str(out_dir)):
