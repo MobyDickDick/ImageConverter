@@ -12,6 +12,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – AC0010/AC0100 Renderer-Reparatur (2026-07-25)](next_arbeitspaket_2026-07-25_ac0100_renderer_fix.md)
 - [Nächstes Arbeitspaket – Telemetrie-Alias-Verifikationsgate Run ACG (2026-08-03)](next_arbeitspaket_2026-08-03_runACG.md)
 - [Nächstes Arbeitspaket – AP1 skalierte Kreis-Evidenz (2026-10-01)](next_arbeitspaket_2026-10-01_ap1.md)
+- [Nächstes Arbeitspaket – ZG8 dokumentierte Metrik-Hierarchie (2026-10-03)](next_arbeitspaket_2026-10-03_zg8.md)
 - [Nächstes Arbeitspaket – AP0 Resume-Provenienz und Abschlussmanifest (2026-10-01)](next_arbeitspaket_2026-10-01_ap0.md)
 - [Nächstes Arbeitspaket – Merge-sichere Workflow-Kontextprüfung Run ACM (2026-08-04)](next_arbeitspaket_2026-08-04_runACM.md)
 - [Nächstes Arbeitspaket – Atomarer Workflow-Kontext Run ACN (2026-08-04)](next_arbeitspaket_2026-08-04_runACN.md)
