@@ -27,11 +27,14 @@ DEFAULT_THRESHOLDS: dict[str, float] = {
     "min_dimension_match": 0.99,
 }
 NOT_REACHABLE_SOURCE_STATUSES = {
+    "budget_exceeded",
     "conversion_failed",
+    "dimension_violation",
     "not_reachable",
     "semantic_conflict",
     "semantic_mismatch",
     "semantic_rejected",
+    "stagnation",
 }
 REQUIRED_METRICS = ("error_per_pixel", "semantic_score", "dimension_match")
 METRIC_HIERARCHY = {
@@ -158,7 +161,16 @@ def evaluate_good_solution(
         status = "suboptimal" if reasons else "good"
 
     reachability = (
-        classifyNotReachableImpl({"status": normalized_source_status})
+        classifyNotReachableImpl(
+            {
+                "status": normalized_source_status,
+                # A failed physical dimension check has stronger evidence than
+                # the generic missing-metric fallback.
+                "reason": "dimension_violation"
+                if "missing_metric:dimension_match" in reasons
+                else "",
+            }
+        )
         if status == "not_reachable"
         else None
     )

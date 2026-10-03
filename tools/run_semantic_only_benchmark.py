@@ -1,116 +1,172 @@
 #!/usr/bin/env python3
-"""Run the versioned JPEG + description benchmark without catalog knowledge."""
+"""Run a repeatable JPEG + description benchmark without donor artifacts."""
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
+import os
+import shutil
+import subprocess
 import sys
 from pathlib import Path
-from typing import Any
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-
-from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir
-from tools.evaluate_good_solution_gate import _raster_dimensions
-from tools.filename_invariance import normalize_geometry_ir, normalize_svg_geometry
+from typing import Any, Callable, Sequence
 
 
 SCHEMA_VERSION = "semantic_only_benchmark_v1"
-ALLOWED_CASE_KEYS = {"case_id", "image_path", "semantic_description", "primitive_families"}
+RunCommand = Callable[[Sequence[str]], subprocess.CompletedProcess[str]]
 
 
-def _digest(value: bytes | str) -> str:
-    if isinstance(value, str):
-        value = value.encode("utf-8")
-    return hashlib.sha256(value).hexdigest()
+def _load_samples(manifest_path: Path) -> list[str]:
+    payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if payload.get("schema_version") != SCHEMA_VERSION:
+        raise ValueError(f"manifest schema_version must be {SCHEMA_VERSION}")
+    samples = payload.get("samples")
+    if not isinstance(samples, list) or not samples:
+        raise ValueError("manifest samples must be a non-empty list")
+    normalized: list[str] = []
+    for sample in samples:
+        if not isinstance(sample, str) or Path(sample).name != sample:
+            raise ValueError("every sample must be a plain JPEG filename")
+        if Path(sample).suffix.lower() not in {".jpg", ".jpeg"}:
+            raise ValueError(f"sample is not a JPEG: {sample}")
+        normalized.append(sample)
+    if len(set(normalized)) != len(normalized):
+        raise ValueError("manifest contains duplicate samples")
+    return normalized
 
 
-def run_benchmark(manifest_path: Path, *, repeats: int = 3) -> dict[str, Any]:
-    """Render every two-source case repeatedly and report deterministic output."""
-    if repeats < 2:
-        raise ValueError("repeats must be at least 2")
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    if manifest.get("schema_version") != SCHEMA_VERSION:
-        raise ValueError(f"expected schema_version {SCHEMA_VERSION}")
-    cases = manifest.get("cases")
-    if not isinstance(cases, list) or not cases:
-        raise ValueError("manifest must contain at least one case")
+def _default_runner(command: Sequence[str]) -> subprocess.CompletedProcess[str]:
+    environment = {**os.environ, "TINY_ICC_OUTPUT_VARIATION": "0"}
+    return subprocess.run(
+        command, check=False, capture_output=True, text=True, env=environment
+    )
 
-    results: list[dict[str, Any]] = []
-    seen_ids: set[str] = set()
-    for case in cases:
-        if not isinstance(case, dict) or set(case) - ALLOWED_CASE_KEYS:
-            raise ValueError("benchmark cases may contain only JPEG, description and classification metadata")
-        case_id = str(case.get("case_id", "")).strip()
-        description = str(case.get("semantic_description", "")).strip()
-        if not case_id or case_id in seen_ids or not description:
-            raise ValueError("case_id must be unique and semantic_description must be non-empty")
-        seen_ids.add(case_id)
-        image_path = (manifest_path.parent / str(case.get("image_path", ""))).resolve()
-        if image_path.suffix.lower() not in {".jpg", ".jpeg"} or not image_path.is_file():
-            raise ValueError(f"case {case_id}: image_path must reference an existing JPEG")
-        width, height = _raster_dimensions(image_path)
 
-        output_hashes: list[str] = []
-        ir_hashes: list[str] = []
-        for _alias_index in range(repeats):
-            ir = geometry_ir.buildGeometryIrFromDescriptionImpl(description)
-            if not ir:
-                raise ValueError(f"case {case_id}: description produced no Geometry-IR")
-            svg = geometry_ir.renderGeometryIrToSvgImpl(width, height, ir)
-            ir_hashes.append(_digest(normalize_geometry_ir(ir)))
-            output_hashes.append(_digest(normalize_svg_geometry(svg)))
-        stable = len(set(ir_hashes)) == len(set(output_hashes)) == 1
-        results.append({
-            "case_id": case_id,
-            "inputs": {
-                "image_sha256": _digest(image_path.read_bytes()),
-                "description_sha256": _digest(description),
-                "width": width,
-                "height": height,
-            },
-            "primitive_families": list(case.get("primitive_families", [])),
-            "geometry_ir_sha256": ir_hashes[0],
-            "svg_sha256": output_hashes[0],
-            "repeat_count": repeats,
-            "stable": stable,
-        })
+def _find_svg(output_dir: Path, stem: str) -> Path:
+    matches = [path for path in output_dir.rglob(f"{stem}.svg") if "snapshot" not in str(path).lower()]
+    if len(matches) != 1:
+        raise RuntimeError(f"expected exactly one result SVG for {stem}, found {len(matches)}")
+    return matches[0]
 
-    family_count = len({family for result in results for family in result["primitive_families"]})
-    stable_count = sum(result["stable"] for result in results)
+
+def run_benchmark(
+    manifest_path: Path,
+    image_dir: Path,
+    descriptions_path: Path,
+    work_dir: Path,
+    *,
+    repetitions: int = 2,
+    runner: RunCommand = _default_runner,
+) -> dict[str, Any]:
+    """Run each sample in isolation and compare its SVG digest across repetitions."""
+    if repetitions < 2:
+        raise ValueError("at least two repetitions are required to prove stability")
+    samples = _load_samples(manifest_path)
+    if not descriptions_path.is_file():
+        raise FileNotFoundError(descriptions_path)
+    work_dir.mkdir(parents=True, exist_ok=True)
+    evaluations: list[dict[str, Any]] = []
+
+    for sample in samples:
+        source = image_dir / sample
+        if not source.is_file():
+            raise FileNotFoundError(source)
+        digests: list[str] = []
+        runs: list[dict[str, Any]] = []
+        for repetition in range(1, repetitions + 1):
+            run_root = work_dir / Path(sample).stem / f"run-{repetition}"
+            # A benchmark directory may be reused for a later audit.  Keeping
+            # files from an earlier invocation would let a successful process
+            # be credited with an old SVG and, worse, could expose that process
+            # to donor/checkpoint artifacts.  Recreate the complete sandbox for
+            # every repetition so the declared two-source contract is real.
+            if run_root.exists():
+                shutil.rmtree(run_root)
+            input_dir = run_root / "input"
+            output_dir = run_root / "output"
+            input_dir.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, input_dir / sample)
+            command = [
+                sys.executable,
+                "-m",
+                "src.iCCModules.imageCompositeConverterCli",
+                "--input-dir",
+                str(input_dir),
+                "--descriptions-path",
+                str(descriptions_path),
+                "--output-dir",
+                str(output_dir),
+                "--execution-mode",
+                "semantic-only",
+                "--start",
+                Path(sample).stem,
+                "--end",
+                Path(sample).stem,
+                "--deterministic-order",
+            ]
+            completed = runner(command)
+            run: dict[str, Any] = {
+                "repetition": repetition,
+                "exit_code": completed.returncode,
+                "execution_mode": "semantic-only",
+            }
+            if completed.returncode == 0:
+                svg_path = _find_svg(output_dir, Path(sample).stem)
+                digest = hashlib.sha256(svg_path.read_bytes()).hexdigest()
+                digests.append(digest)
+                run["svg_sha256"] = digest
+            else:
+                run["error"] = (completed.stderr or completed.stdout).strip()[-2000:]
+            runs.append(run)
+        stable = len(digests) == repetitions and len(set(digests)) == 1
+        evaluations.append({"filename": sample, "stable": stable, "runs": runs})
+
+    stable_count = sum(item["stable"] for item in evaluations)
     return {
         "schema_version": SCHEMA_VERSION,
-        "assessment_scope": "description_render_determinism",
-        "quality_assessed": False,
-        "satisfactory": None,
-        "source_manifest": str(manifest_path),
-        "input_contract": ["jpeg", "semantic_description"],
-        "case_count": len(results),
-        "primitive_family_count": family_count,
-        "stable_count": stable_count,
-        "status": "pass" if stable_count == len(results) else "fail",
-        "cases": results,
+        "input_contract": {
+            "allowed_sources": ["jpeg", "description_table"],
+            "execution_mode": "semantic-only",
+            "output_variation": False,
+            "template_transfer": False,
+            "checkpoint_resume": False,
+        },
+        "repetitions": repetitions,
+        "summary": {
+            "sample_count": len(evaluations),
+            "stable_count": stable_count,
+            "unstable_count": len(evaluations) - stable_count,
+            "passed": stable_count == len(evaluations),
+        },
+        "evaluations": evaluations,
     }
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("manifest", type=Path)
-    parser.add_argument("--repeats", type=int, default=3)
-    parser.add_argument("--output", type=Path)
-    args = parser.parse_args()
+    parser.add_argument("--image-dir", type=Path, required=True)
+    parser.add_argument("--descriptions-path", type=Path, required=True)
+    parser.add_argument("--work-dir", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--repetitions", type=int, default=2)
+    args = parser.parse_args(argv)
     try:
-        report = run_benchmark(args.manifest, repeats=args.repeats)
-    except (OSError, ValueError, json.JSONDecodeError) as error:
-        print(f"ERROR: {error}", file=sys.stderr)
-        return 2
-    payload = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
-    if args.output:
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(payload, encoding="utf-8")
-    print(payload, end="")
-    return 0 if report["status"] == "pass" else 1
+        report = run_benchmark(
+            args.manifest,
+            args.image_dir,
+            args.descriptions_path,
+            args.work_dir,
+            repetitions=args.repetitions,
+        )
+    except (OSError, ValueError, json.JSONDecodeError, RuntimeError) as exc:
+        parser.error(str(exc))
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    serialized = json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    args.output.write_text(serialized, encoding="utf-8")
+    print(serialized, end="")
+    return 0 if report["summary"]["passed"] else 1
 
 
 if __name__ == "__main__":
