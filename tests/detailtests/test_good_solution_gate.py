@@ -25,10 +25,10 @@ def test_good_solution_gate_classifies_all_three_statuses():
     assert good["reasons"] == ["all_thresholds_satisfied"]
     assert suboptimal["status"] == "suboptimal"
     assert suboptimal["reasons"] == [
-        "error_per_pixel_above_max",
         "semantic_score_below_min",
         "dimension_match_below_min",
     ]
+    assert suboptimal["decision_tier"] == "primary"
     assert unreachable["status"] == "not_reachable"
     assert unreachable["reasons"] == [
         "source_status:conversion_failed",
@@ -41,6 +41,31 @@ def test_good_solution_gate_classifies_all_three_statuses():
         "exit_code": 20,
     }
     assert good["reachability"] is None
+    assert good["decision_tier"] == "all"
+
+
+def test_primary_metrics_cannot_be_compensated_by_an_excellent_pixel_score():
+    result = evaluate_good_solution(
+        {"error_per_pixel": 0.0, "semantic_score": 0.84, "dimension_match": 1.0}
+    )
+
+    assert result["status"] == "suboptimal"
+    assert result["decision_tier"] == "primary"
+    assert result["reasons"] == ["semantic_score_below_min"]
+    assert result["metric_hierarchy"] == {
+        "primary": ["semantic_score", "dimension_match"],
+        "secondary": ["error_per_pixel"],
+    }
+
+
+def test_pixel_error_is_secondary_after_primary_metrics_pass():
+    result = evaluate_good_solution(
+        {"error_per_pixel": 0.051, "semantic_score": 0.85, "dimension_match": 0.99}
+    )
+
+    assert result["status"] == "suboptimal"
+    assert result["decision_tier"] == "secondary"
+    assert result["reasons"] == ["error_per_pixel_above_max"]
 
 
 def test_report_exposes_status_thresholds_and_reasons_for_every_file():
@@ -52,6 +77,10 @@ def test_report_exposes_status_thresholds_and_reasons_for_every_file():
     )
 
     assert report["schema_version"] == SCHEMA_VERSION
+    assert report["metric_hierarchy"] == {
+        "primary": ["semantic_score", "dimension_match"],
+        "secondary": ["error_per_pixel"],
+    }
     assert report["summary"] == {"file_count": 2, "good": 1, "suboptimal": 1, "not_reachable": 0}
     assert [row["filename"] for row in report["evaluations"]] == ["a.jpg", "b.jpg"]
     assert all(row["thresholds"] == report["thresholds"] for row in report["evaluations"])

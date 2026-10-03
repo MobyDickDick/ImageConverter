@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-03)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `407` · Erledigt `386` · Offen `21`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `408` · Erledigt `387` · Offen `21`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -2416,6 +2416,16 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   Modus und prüfen zwei unabhängige SVG-Ergebnisse per SHA-256. Details:
   `docs/next_arbeitspaket_2026-10-03_zg7.md`.)
   - Akzeptanz: Der Report weist je Sample erfolgreiche, byteidentische Wiederholungen aus und schlägt bei Abweichungen fehl.
+
+- [x] **ZG8 (P2): Dokumentierte Metrik-Hierarchie** (2026-10-03: Das
+  Good-Solution-Gate weist Semantik und Dimensionstreue als nicht
+  kompensierbare Primärmetriken sowie den Pixel-/Farbfehler als Sekundärmetrik
+  aus. `decision_tier` macht je Ergebnis sichtbar, welche Ebene die
+  Entscheidung bestimmt hat. Details:
+  `docs/next_arbeitspaket_2026-10-03_zg8.md`.)
+  - Akzeptanz: Ein sehr guter Pixelwert kann eine verletzte Semantik- oder
+    Dimensionsschwelle nicht kompensieren; Pixelabweichung wird erst nach
+    bestandenen Primärmetriken als sekundärer Grund bewertet.
 
 
 
