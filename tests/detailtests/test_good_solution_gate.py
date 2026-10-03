@@ -70,3 +70,38 @@ def test_cli_writes_the_same_machine_readable_report(tmp_path):
     assert result.returncode == 0, result.stderr
     assert json.loads(result.stdout) == json.loads(output.read_text(encoding="utf-8"))
     assert json.loads(result.stdout)["evaluations"][0]["status"] == "good"
+
+
+def test_actual_wrong_svg_dimensions_are_a_hard_suboptimal_rule(tmp_path):
+    from PIL import Image
+
+    image_dir = tmp_path / "images"
+    svg_dir = tmp_path / "svgs"
+    image_dir.mkdir()
+    svg_dir.mkdir()
+    Image.new("RGB", (40, 20), "white").save(image_dir / "wrong.jpg")
+    (svg_dir / "wrong.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"/>',
+        encoding="utf-8",
+    )
+
+    report = build_good_solution_report(
+        {
+            "wrong.jpg": {
+                "error_per_pixel": 0.01,
+                "semantic_score": 0.95,
+                # A stale caller-supplied value must not bypass the physical check.
+                "dimension_match": 1.0,
+            }
+        },
+        image_dir=image_dir,
+        svg_dir=svg_dir,
+    )
+
+    evaluation = report["evaluations"][0]
+    assert evaluation["status"] == "suboptimal"
+    assert evaluation["reasons"] == ["dimension_match_below_min"]
+    assert evaluation["metrics"]["dimension_match"] == 0.5
+    assert evaluation["dimension_evidence"]["width_match"] == 1.0
+    assert evaluation["dimension_evidence"]["height_match"] == 0.5
+    assert evaluation["dimension_evidence"]["aspect_ratio_match"] == 0.5

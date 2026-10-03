@@ -4,9 +4,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from collections import Counter
 from pathlib import Path
 from typing import Any, Mapping
+from xml.etree import ElementTree
+
+from PIL import Image
 
 
 SCHEMA_VERSION = "good_solution_gate_v1"
@@ -24,6 +28,47 @@ NOT_REACHABLE_SOURCE_STATUSES = {
     "semantic_rejected",
 }
 REQUIRED_METRICS = ("error_per_pixel", "semantic_score", "dimension_match")
+_SVG_LENGTH = re.compile(r"^\s*([0-9]+(?:\.[0-9]+)?)\s*(?:px)?\s*$", re.IGNORECASE)
+
+
+def _match_ratio(expected: float, actual: float) -> float:
+    if expected <= 0 or actual <= 0:
+        return 0.0
+    return min(expected, actual) / max(expected, actual)
+
+
+def measure_dimension_fidelity(image_path: Path, svg_path: Path) -> dict[str, Any]:
+    """Measure SVG canvas width, height and aspect ratio against a raster source."""
+    with Image.open(image_path) as image:
+        raster_width, raster_height = image.size
+
+    root = ElementTree.parse(svg_path).getroot()
+    dimensions: list[float] = []
+    for attribute in ("width", "height"):
+        match = _SVG_LENGTH.fullmatch(root.get(attribute, ""))
+        dimensions.append(float(match.group(1)) if match else 0.0)
+    svg_width, svg_height = dimensions
+    if not svg_width or not svg_height:
+        view_box = root.get("viewBox", "").replace(",", " ").split()
+        if len(view_box) == 4:
+            try:
+                svg_width, svg_height = float(view_box[2]), float(view_box[3])
+            except ValueError:
+                svg_width = svg_height = 0.0
+
+    width_match = _match_ratio(raster_width, svg_width)
+    height_match = _match_ratio(raster_height, svg_height)
+    raster_aspect = raster_width / raster_height
+    svg_aspect = svg_width / svg_height if svg_height else 0.0
+    aspect_ratio_match = _match_ratio(raster_aspect, svg_aspect)
+    return {
+        "raster": {"width": raster_width, "height": raster_height, "aspect_ratio": raster_aspect},
+        "svg": {"width": svg_width, "height": svg_height, "aspect_ratio": svg_aspect},
+        "width_match": width_match,
+        "height_match": height_match,
+        "aspect_ratio_match": aspect_ratio_match,
+        "dimension_match": min(width_match, height_match, aspect_ratio_match),
+    }
 
 
 def _finite_number(value: Any) -> float | None:
@@ -70,19 +115,33 @@ def evaluate_good_solution(
 
 
 def build_good_solution_report(
-    rows: Mapping[str, Any], *, thresholds: Mapping[str, float] | None = None
+    rows: Mapping[str, Any],
+    *,
+    thresholds: Mapping[str, float] | None = None,
+    image_dir: Path | None = None,
+    svg_dir: Path | None = None,
 ) -> dict[str, Any]:
     """Classify every result-map row and return a machine-readable report."""
     evaluations: list[dict[str, Any]] = []
     for map_name, raw_row in sorted(rows.items()):
         row = raw_row if isinstance(raw_row, dict) else {}
         filename = str(row.get("filename") or map_name)
+        metrics = dict(row)
+        dimension_evidence = None
+        if image_dir is not None and svg_dir is not None:
+            image_path = image_dir / filename
+            svg_path = svg_dir / f"{Path(filename).stem}.svg"
+            try:
+                dimension_evidence = measure_dimension_fidelity(image_path, svg_path)
+                metrics["dimension_match"] = dimension_evidence["dimension_match"]
+            except (OSError, ElementTree.ParseError, ValueError):
+                metrics["dimension_match"] = None
         result = evaluate_good_solution(
-            row,
+            metrics,
             source_status=str(row.get("status") or ""),
             thresholds=thresholds,
         )
-        evaluations.append({"filename": filename, **result})
+        evaluations.append({"filename": filename, **result, "dimension_evidence": dimension_evidence})
     counts = Counter(item["status"] for item in evaluations)
     return {
         "schema_version": SCHEMA_VERSION,
@@ -97,6 +156,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("result_map", type=Path, help="conversion_result_map.json to classify")
     parser.add_argument("--output", type=Path, help="write the report in addition to stdout")
+    parser.add_argument("--image-dir", type=Path, help="source raster directory for hard dimension checks")
+    parser.add_argument("--svg-dir", type=Path, help="converted SVG directory for hard dimension checks")
     args = parser.parse_args(argv)
     try:
         rows = json.loads(args.result_map.read_text(encoding="utf-8"))
@@ -104,7 +165,9 @@ def main(argv: list[str] | None = None) -> int:
             raise ValueError("result map must be a JSON object")
     except (OSError, json.JSONDecodeError, ValueError) as exc:
         parser.error(str(exc))
-    report = build_good_solution_report(rows)
+    if (args.image_dir is None) != (args.svg_dir is None):
+        parser.error("--image-dir and --svg-dir must be supplied together")
+    report = build_good_solution_report(rows, image_dir=args.image_dir, svg_dir=args.svg_dir)
     serialized = json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
