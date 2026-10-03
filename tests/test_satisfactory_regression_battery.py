@@ -326,6 +326,11 @@ def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_qua
                 "--end",
                 family,
                 "--deterministic-order",
+                # This battery verifies the compatibility promise for already
+                # accepted outputs, including its explicit satisfactory-baseline
+                # safeguard. Semantic-only cannot consult that baseline.
+                "--execution-mode",
+                "standard",
             ]
         )
         _debug_log(

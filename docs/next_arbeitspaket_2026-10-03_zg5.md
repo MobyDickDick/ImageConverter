@@ -42,3 +42,11 @@ zusätzlicher Bestlisten-Test sowie der schwere AC0010-/AC0100-Test sichern die
 kumulative Reportführung über vier Einzelaufrufe ab. ZG5 ist damit
 abgeschlossen. Die nächste priorisierte Leitaufgabe ist die robuste,
 einheitliche Nicht-Erreichbarkeitsklassifikation aus P1.
+
+Die separate Satisfactory-Regressionsbatterie bleibt bewusst ein Test des
+`standard`-Kompatibilitätsmodus: Ihr Vertrag verlangt ausdrücklich, bereits
+akzeptierte Baseline-Ergebnisse beizubehalten oder zu verbessern. Sie wählt
+diesen Modus daher explizit, statt den voreingestellten `semantic-only`-Modus
+gegen eine dort absichtlich nicht zugelassene Baseline-Wiederherstellung zu
+testen. Dies ändert weder den Default noch den Zwei-Quellen-Vertrag regulärer
+Konvertierungen.
