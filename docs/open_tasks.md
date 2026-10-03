@@ -2459,6 +2459,27 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
     ZG8 sind abgeschlossen, und die Definition of Done des Zielabgleichs ist
     auf diese nachweisbaren Aufgaben abgebildet.
 
+- [x] **ZG6 (P1): Nicht-Erreichbarkeit robust machen** (2026-10-03: Vier
+  kanonische Gründe besitzen reproduzierbare Report- und Exit-Codes; Details:
+  `docs/next_arbeitspaket_2026-10-03_zg6.md`.)
+
+- [ ] **ZG7 (P1): Benchmark-Set ohne Sonderwissen** (2026-10-03: Der erste
+  Scaffold verwendet ausschließlich JPEG und sprachliche Beschreibung, deckt
+  fünf Primitive-Familien ab und weist stabile Geometry-IR-/SVG-Hashes nach.
+  Das ist nur ein Determinismus-Signal und noch kein Qualitätsbenchmark;
+  Details:
+  `docs/next_arbeitspaket_2026-10-03_zg7.md`.)
+  - [x] Zwei-Quellen-Manifest und deterministischer Description-Render-Smoke.
+  - [ ] Den echten `semantic-only`-Konverterpfad inklusive Bildwahrnehmung
+    ausführen und Pixel-, Semantik- und Dimensionsmetriken erfassen.
+  - [ ] Gegen eine versionierte Vorher-Baseline vergleichen und erst dann je
+    Fall `satisfactory=true|false` ausweisen.
+  - Implementierungsreihenfolge und harte Abnahmebedingungen:
+    `docs/png_description_to_svg_implementation_blueprint.md`.
+  - Ausführbare Folgepakete ZG7.1 bis ZG7.6 mit Abhängigkeiten, Deliverables
+    und Exit-Kriterien:
+    `docs/next_arbeitspakete_png_semantic_svg_2026-10-03.md`.
+
 
 
 ### Fortschritt vs. Blocker (Session 2026-05-15, N2 Run DK + N2-PB Run DK_PB)
