@@ -2484,6 +2484,19 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
     `artifacts/evaluation/semantic_only_quality_report_v1/` vor und bewertet
     ausschließlich das gespeicherte End-SVG gegen das jeweilige PNG.
 
+- [x] **ZG7.3 (P0): Constraint-Fusion und Hypothesen-Beam** (2026-10-03:
+  Beschreibungselemente werden über Primitivtyp, relative Lage und
+  Anschlussrichtung mit katalogfreien Perception-Kandidaten fusioniert. Der
+  versionierte Record hält mindestens drei zulässige Hypothesen, Konflikte und
+  Ablehnungsgründe deterministisch fest. Details:
+  `docs/next_arbeitspaket_2026-10-03_zg7_3.md`.)
+  - Akzeptanz: Umbenennung verändert die Hypothesenreihenfolge nicht; ein
+    pixelnäherer Kandidat mit falschem Typ oder falscher Anschlussrichtung kann
+    keine semantisch zulässige Hypothese verdrängen.
+  - Exit-Bedingung: Mehrdeutige Kreis-/Rechteckbelege, Anschlussrichtung und
+    fehlendes Textsignal sind getestet; unauflösbare Fälle enden mit dem
+    stabilen Status `semantic_conflict`.
+
 ### Fortschritt vs. Blocker (Session 2026-05-15, N2 Run DK + N2-PB Run DK_PB)
 
 - **Fortschritt:** Die nächste offene dokumentierte Primäraufgabe (`N2`) wurde mit standardisierter Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; gemäß Plan-B-Kopplungsregel wurde direkt anschließend die gekoppelte Microbatch-Aufgabe (`AC0800..AC0809`) erfolgreich mit Exit `0` abgeschlossen.

@@ -1,0 +1,210 @@
+{
+  "generated_on": "2026-10-03",
+  "records": {
+    "ambiguous_circle": {
+      "beam_width": 3,
+      "conflicts": [],
+      "hypotheses": [
+        {
+          "assignments": [
+            {
+              "candidate_id": "candidate-ea1a1b2414fc",
+              "constraint_id": "shape",
+              "primitive_type": "circle"
+            }
+          ],
+          "confidence": 0.9,
+          "geometry_ir": [
+            {
+              "x": 10
+            }
+          ],
+          "hard_constraints_satisfied": true,
+          "hypothesis_id": "hypothesis-e33b23b50ff0",
+          "pixel_error": 0.2,
+          "rank": 1,
+          "semantic_score": 1.0
+        },
+        {
+          "assignments": [
+            {
+              "candidate_id": "candidate-f7038910c820",
+              "constraint_id": "shape",
+              "primitive_type": "circle"
+            }
+          ],
+          "confidence": 0.8,
+          "geometry_ir": [
+            {
+              "x": 20
+            }
+          ],
+          "hard_constraints_satisfied": true,
+          "hypothesis_id": "hypothesis-18327ea69403",
+          "pixel_error": 0.1,
+          "rank": 2,
+          "semantic_score": 1.0
+        },
+        {
+          "assignments": [
+            {
+              "candidate_id": "candidate-586858ab698f",
+              "constraint_id": "shape",
+              "primitive_type": "circle"
+            }
+          ],
+          "confidence": 0.7,
+          "geometry_ir": [
+            {
+              "x": 30
+            }
+          ],
+          "hard_constraints_satisfied": true,
+          "hypothesis_id": "hypothesis-0115317af7a7",
+          "pixel_error": 0.05,
+          "rank": 3,
+          "semantic_score": 1.0
+        }
+      ],
+      "ranking_policy": [
+        "hard_constraints",
+        "semantic_score",
+        "confidence",
+        "pixel_error"
+      ],
+      "rejected_candidates": [
+        {
+          "candidate_id": "candidate-ca4a5b8af993",
+          "constraint_id": "shape",
+          "reasons": [
+            "primitive_type:rectangle!=circle"
+          ]
+        }
+      ],
+      "rejected_hypotheses": [],
+      "schema_version": "constraint_fusion_beam_v1",
+      "selected_hypothesis_id": "hypothesis-e33b23b50ff0",
+      "status": "resolved"
+    },
+    "connector_direction": {
+      "beam_width": 3,
+      "conflicts": [],
+      "hypotheses": [
+        {
+          "assignments": [
+            {
+              "candidate_id": "candidate-066b32d91e13",
+              "constraint_id": "shape",
+              "primitive_type": "line"
+            }
+          ],
+          "confidence": 0.9,
+          "geometry_ir": [
+            {
+              "direction": "right",
+              "x": 10
+            }
+          ],
+          "hard_constraints_satisfied": true,
+          "hypothesis_id": "hypothesis-5360b41968be",
+          "pixel_error": 0.2,
+          "rank": 1,
+          "semantic_score": 1.0
+        },
+        {
+          "assignments": [
+            {
+              "candidate_id": "candidate-69c94c4c7019",
+              "constraint_id": "shape",
+              "primitive_type": "line"
+            }
+          ],
+          "confidence": 0.8,
+          "geometry_ir": [
+            {
+              "direction": "right",
+              "x": 30
+            }
+          ],
+          "hard_constraints_satisfied": true,
+          "hypothesis_id": "hypothesis-2af71ba587be",
+          "pixel_error": 0.3,
+          "rank": 2,
+          "semantic_score": 1.0
+        },
+        {
+          "assignments": [
+            {
+              "candidate_id": "candidate-ea4f7b6b3aa4",
+              "constraint_id": "shape",
+              "primitive_type": "line"
+            }
+          ],
+          "confidence": 0.7,
+          "geometry_ir": [
+            {
+              "direction": "right",
+              "x": 40
+            }
+          ],
+          "hard_constraints_satisfied": true,
+          "hypothesis_id": "hypothesis-6ee2c0d15313",
+          "pixel_error": 0.4,
+          "rank": 3,
+          "semantic_score": 1.0
+        }
+      ],
+      "ranking_policy": [
+        "hard_constraints",
+        "semantic_score",
+        "confidence",
+        "pixel_error"
+      ],
+      "rejected_candidates": [
+        {
+          "candidate_id": "candidate-de280750f4bd",
+          "constraint_id": "shape",
+          "reasons": [
+            "connector_direction:left!=right"
+          ]
+        }
+      ],
+      "rejected_hypotheses": [],
+      "schema_version": "constraint_fusion_beam_v1",
+      "selected_hypothesis_id": "hypothesis-5360b41968be",
+      "status": "resolved"
+    },
+    "missing_text": {
+      "beam_width": 3,
+      "conflicts": [
+        "missing_compatible_evidence:shape"
+      ],
+      "hypotheses": [],
+      "ranking_policy": [
+        "hard_constraints",
+        "semantic_score",
+        "confidence",
+        "pixel_error"
+      ],
+      "rejected_candidates": [
+        {
+          "candidate_id": "candidate-9d9636d5ea74",
+          "constraint_id": "shape",
+          "reasons": [
+            "primitive_type:circle!=text"
+          ]
+        }
+      ],
+      "rejected_hypotheses": [],
+      "schema_version": "constraint_fusion_beam_v1",
+      "selected_hypothesis_id": null,
+      "status": "semantic_conflict"
+    }
+  },
+  "schema_version": "constraint_fusion_beam_acceptance_v1",
+  "summary": {
+    "rename_invariant": true,
+    "resolved": 2,
+    "semantic_conflict": 1
+  }
+}
