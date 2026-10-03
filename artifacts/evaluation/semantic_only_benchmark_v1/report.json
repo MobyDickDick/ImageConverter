@@ -1,0 +1,103 @@
+{
+  "schema_version": "semantic_only_benchmark_v1",
+  "assessment_scope": "description_render_determinism",
+  "quality_assessed": false,
+  "satisfactory": null,
+  "source_manifest": "config/semantic_only_benchmark_v1.json",
+  "input_contract": [
+    "jpeg",
+    "semantic_description"
+  ],
+  "case_count": 5,
+  "primitive_family_count": 5,
+  "stable_count": 5,
+  "status": "pass",
+  "cases": [
+    {
+      "case_id": "circle_text_connector",
+      "inputs": {
+        "image_sha256": "0bd130a8fcb27f6060bec3c4f1d5d8111976b2fba2d730481c36b2344fd66eef",
+        "description_sha256": "d85eb33803448ab8f395888742b5411d02adea916cbeb4193cee8c02bbcd7dcf",
+        "width": 45,
+        "height": 25
+      },
+      "primitive_families": [
+        "circle",
+        "text",
+        "line"
+      ],
+      "geometry_ir_sha256": "dd020cc0f73b1b4528a0963841cfa13238a6c6cea9cd2c94d60f0e4b33ae9225",
+      "svg_sha256": "37c46cd2ff8e4d195b16df237c41c54563c7d90ad45f71feff26fdebb4ea625d",
+      "repeat_count": 3,
+      "stable": true
+    },
+    {
+      "case_id": "rule_glyph",
+      "inputs": {
+        "image_sha256": "c295a1f816de7c922391387329662d31f90a8cc1b8480b46df34b2e86170c520",
+        "description_sha256": "c4292ee95777a70a0ed7b10ce970e3b6703c870e500d0788a9ca9bc7a83cc02c",
+        "width": 40,
+        "height": 80
+      },
+      "primitive_families": [
+        "line",
+        "text"
+      ],
+      "geometry_ir_sha256": "a229f426bb647f0acea9396af9aa97e59c018635beead7f7ce13181d6f9509fa",
+      "svg_sha256": "55f039c86888de62becc778b26ce8a69e356db88806cbf8279bb1d071062e02e",
+      "repeat_count": 3,
+      "stable": true
+    },
+    {
+      "case_id": "rectangle_panel",
+      "inputs": {
+        "image_sha256": "5b66cae3c0de6a766ab250e803372d7e33dcc41df57f00a93e25e885779e6a08",
+        "description_sha256": "c96420226c582a260f4cfce0d50f215bf8935e9399b54989cfcf2938e1eb457e",
+        "width": 25,
+        "height": 25
+      },
+      "primitive_families": [
+        "rectangle"
+      ],
+      "geometry_ir_sha256": "3265da8a01ee71457594374fc2764d0e2d1b9123f8097b9f07ada5383852e51f",
+      "svg_sha256": "07628de60126c9e5ba5a7ed87e44d6398f086b15ef8d159ec24584d9efb042f4",
+      "repeat_count": 3,
+      "stable": true
+    },
+    {
+      "case_id": "dialog_shape",
+      "inputs": {
+        "image_sha256": "ee5c3ebccdc2c9a4424528975412efae7230966460536ab61a941aeb1ec0f6d0",
+        "description_sha256": "4479b565d0726e12b6effe8ed87625f09c49eca46b806329ee56919551d54fb7",
+        "width": 1600,
+        "height": 1200
+      },
+      "primitive_families": [
+        "rectangle",
+        "path"
+      ],
+      "geometry_ir_sha256": "5638f4e59012878f3cf000c4539560d197d0b4119e334758b5f1b1404adf8e91",
+      "svg_sha256": "4b966df7a1f136d71acb1cc850db92143c384f4357bb16cdca131072d6493ff2",
+      "repeat_count": 3,
+      "stable": true
+    },
+    {
+      "case_id": "status_shape",
+      "inputs": {
+        "image_sha256": "56c7907e7a8b0f02812d0f196766ffd11d5ed6f8d067d6b0444dd34eab498ce5",
+        "description_sha256": "5f206a2932a2b2e30131ac24e1d5a36308f1a79ba588eec3b6a5f9b07db9f2ec",
+        "width": 25,
+        "height": 39
+      },
+      "primitive_families": [
+        "rectangle",
+        "line",
+        "path"
+      ],
+      "geometry_ir_sha256": "76545b675d910e79a2c943ed147649bdf011225b21a87906095d81b80db3f282",
+      "svg_sha256": "8acb4cac256c4c67505d0b79fc86d7b259e8efccec790e8f6cedf2f0fc9ab772",
+      "repeat_count": 3,
+      "stable": true
+    }
+  ]
+}

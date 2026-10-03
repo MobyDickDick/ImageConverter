@@ -1,0 +1,35 @@
+{
+  "schema_version": "semantic_only_benchmark_v1",
+  "cases": [
+    {
+      "case_id": "circle_text_connector",
+      "image_path": "../artifacts/images_to_convert/AC0832_L.jpg",
+      "semantic_description": "Kleines 28x28 Kreisbadge mit hellgrauer Füllung, grauer Kontur und zentriertem Text rF ohne Griff-/Leitungslinie außerhalb des Kreises.",
+      "primitive_families": ["circle", "text", "line"]
+    },
+    {
+      "case_id": "rule_glyph",
+      "image_path": "../artifacts/images_to_convert/AC0120_L.jpg",
+      "semantic_description": "Graues Rechteck mit Plus-Minus-Zeichen oben mittig und horizontalem Farbverlauf dunkel-hell-dunkel.",
+      "primitive_families": ["line", "text"]
+    },
+    {
+      "case_id": "rectangle_panel",
+      "image_path": "../artifacts/images_to_convert/GE1001_M.jpg",
+      "semantic_description": "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel und graue Diagonale oben rechts nach unten links.",
+      "primitive_families": ["rectangle"]
+    },
+    {
+      "case_id": "dialog_shape",
+      "image_path": "../artifacts/images_to_convert/DLG0001.JPG",
+      "semantic_description": "Differenzdruckmessung oben kleines graues Rechteck mit dp geschrieben, vor halbem Rechteck mit doppeltem grauen Rand.",
+      "primitive_families": ["rectangle", "path"]
+    },
+    {
+      "case_id": "status_shape",
+      "image_path": "../artifacts/images_to_convert/SE0021.jpg",
+      "semantic_description": "Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel, graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte.",
+      "primitive_families": ["rectangle", "line", "path"]
+    }
+  ]
+}
