@@ -118,6 +118,10 @@ Abnahmebeleg stehen in `docs/next_arbeitspaket_2026-10-03_zg7_3.md`.
 
 **Abhängigkeit:** ZG7.3
 
+**Status:** Abgeschlossen am 2026-10-03; Optimierungsvertrag,
+Konvergenzprotokoll und Abnahmebeleg stehen in
+`docs/next_arbeitspaket_2026-10-03_zg7_4.md`.
+
 **Ziel:** Geometrie, Kontur, Farbe und Semantik verbessern, ohne die Topologie
 zu beschädigen.
 
