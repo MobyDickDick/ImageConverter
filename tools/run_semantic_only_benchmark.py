@@ -14,6 +14,8 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any, Callable, Sequence
 
+from tools.evaluate_semantic_only_quality import evaluate_quality
+
 
 SCHEMA_VERSION = "semantic_only_png_benchmark_v1"
 RunCommand = Callable[[Sequence[str]], subprocess.CompletedProcess[str]]
@@ -140,6 +142,7 @@ def run_benchmark(
                 svg_path = _find_svg(output_dir, stem)
                 run["svg_sha256"] = _sha256(svg_path)
                 run["normalized_svg_sha256"] = _normalized_svg_digest(svg_path)
+                run["quality"] = evaluate_quality(source, svg_path, case["topology"])
             else:
                 run["error"] = (completed.stderr or completed.stdout).strip()[-2000:]
             runs.append(run)
@@ -156,6 +159,7 @@ def run_benchmark(
                 "description_sha256": hashlib.sha256(case["semantic_description"].encode()).hexdigest(),
             },
             "runs": runs,
+            "quality": runs[0].get("quality"),
         })
     stable_count = sum(item["stable"] for item in evaluations)
     return {
