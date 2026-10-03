@@ -72,6 +72,33 @@ def test_benchmark_reports_changed_output_as_unstable(tmp_path):
     assert report["evaluations"][0]["stable"] is False
 
 
+def test_benchmark_discards_stale_run_artifacts(tmp_path):
+    manifest, image_dir, descriptions = _fixture(tmp_path)
+    work_dir = tmp_path / "work"
+    stale_output = work_dir / "sample" / "run-1" / "output" / "converted_svgs"
+    stale_output.mkdir(parents=True)
+    (stale_output / "sample.svg").write_text("<svg data-stale='true'/>", encoding="utf-8")
+    (work_dir / "sample" / "run-1" / "input" / "donor.svg").parent.mkdir()
+    (work_dir / "sample" / "run-1" / "input" / "donor.svg").write_text(
+        "<svg/>", encoding="utf-8"
+    )
+
+    def clean_runner(command):
+        input_dir = Path(command[command.index("--input-dir") + 1])
+        assert sorted(path.name for path in input_dir.iterdir()) == ["sample.jpg"]
+        output = Path(command[command.index("--output-dir") + 1]) / "converted_svgs"
+        output.mkdir(parents=True)
+        (output / "sample.svg").write_text("<svg data-current='true'/>", encoding="utf-8")
+        return subprocess.CompletedProcess(command, 0, "", "")
+
+    report = run_benchmark(
+        manifest, image_dir, descriptions, work_dir, runner=clean_runner
+    )
+
+    assert report["summary"]["passed"] is True
+    assert "data-stale" not in (stale_output / "sample.svg").read_text(encoding="utf-8")
+
+
 @pytest.mark.parametrize("sample", ["../sample.jpg", "sample.png"])
 def test_manifest_rejects_non_plain_jpeg_inputs(tmp_path, sample):
     manifest, image_dir, descriptions = _fixture(tmp_path)

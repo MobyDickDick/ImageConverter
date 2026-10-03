@@ -136,6 +136,35 @@ def test_cli_returns_canonical_exit_code_when_requested(tmp_path):
     assert json.loads(result.stdout)["evaluations"][0]["reachability"]["report_code"] == "NR004"
 
 
+def test_canonical_unreachable_statuses_keep_their_specific_classification():
+    expected = {
+        "stagnation": ("NR001", 20),
+        "budget_exceeded": ("NR002", 21),
+        "dimension_violation": ("NR003", 22),
+        "semantic_conflict": ("NR004", 23),
+    }
+
+    for source_status, (report_code, exit_code) in expected.items():
+        result = evaluate_good_solution(
+            {"error_per_pixel": 0.01, "semantic_score": 0.9, "dimension_match": 1.0},
+            source_status=source_status,
+        )
+        assert result["status"] == "not_reachable"
+        assert result["reachability"]["reason"] == source_status
+        assert result["reachability"]["report_code"] == report_code
+        assert result["reachability"]["exit_code"] == exit_code
+
+
+def test_missing_physical_dimension_evidence_is_a_dimension_violation():
+    result = evaluate_good_solution(
+        {"error_per_pixel": 0.01, "semantic_score": 0.9, "dimension_match": None}
+    )
+
+    assert result["status"] == "not_reachable"
+    assert result["reachability"]["reason"] == "dimension_violation"
+    assert result["reachability"]["report_code"] == "NR003"
+
+
 def test_actual_wrong_svg_dimensions_are_a_hard_suboptimal_rule(tmp_path):
     image_dir = tmp_path / "images"
     svg_dir = tmp_path / "svgs"

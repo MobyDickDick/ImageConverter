@@ -76,6 +76,13 @@ def run_benchmark(
         runs: list[dict[str, Any]] = []
         for repetition in range(1, repetitions + 1):
             run_root = work_dir / Path(sample).stem / f"run-{repetition}"
+            # A benchmark directory may be reused for a later audit.  Keeping
+            # files from an earlier invocation would let a successful process
+            # be credited with an old SVG and, worse, could expose that process
+            # to donor/checkpoint artifacts.  Recreate the complete sandbox for
+            # every repetition so the declared two-source contract is real.
+            if run_root.exists():
+                shutil.rmtree(run_root)
             input_dir = run_root / "input"
             output_dir = run_root / "output"
             input_dir.mkdir(parents=True, exist_ok=True)
