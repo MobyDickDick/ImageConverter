@@ -24,6 +24,9 @@ Abnahmebeleg vorliegt.
 
 ## ZG7.1 – Echtes Zwei-Quellen-Fixture und Runner
 
+**Status:** Abgeschlossen am 2026-10-03; Abnahmebeleg und Reproduktionsbefehl
+stehen in `docs/next_arbeitspaket_2026-10-03_zg7_1.md`.
+
 **Ziel:** Den bisherigen Description-Render-Smoke durch einen echten
 End-to-End-Aufruf des `semantic-only`-Konverters ergänzen.
 

@@ -29,3 +29,6 @@ htmlcov/
 
 # Generated report tiles (binary)
 artifacts/converted_images/reports/reports/overview_svg_tiles.png
+
+# Reproducibly generated semantic-only benchmark rasters
+/artifacts/semantic_only_png_benchmark/

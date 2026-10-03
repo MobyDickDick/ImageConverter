@@ -1,0 +1,24 @@
+{
+  "schema_version": "semantic_only_png_benchmark_v1",
+  "seed": 0,
+  "cases": [
+    {
+      "case_id": "circle_text_connector",
+      "image_path": "../artifacts/semantic_only_png_benchmark/fixtures/circle_text_connector.png",
+      "semantic_description": "Ein grauer Kreis mit dem zentrierten Text F und einer horizontalen Anschlusslinie nach rechts.",
+      "topology": "circle+text+connector"
+    },
+    {
+      "case_id": "rectangle_diagonal",
+      "image_path": "../artifacts/semantic_only_png_benchmark/fixtures/rectangle_diagonal.png",
+      "semantic_description": "Ein graues Rechteck mit einer grauen Diagonale von links unten nach rechts oben.",
+      "topology": "rectangle+diagonal"
+    },
+    {
+      "case_id": "polygon_line",
+      "image_path": "../artifacts/semantic_only_png_benchmark/fixtures/polygon_line.png",
+      "semantic_description": "Ein grauer dreieckiger Polygonpfad mit einer senkrechten Linie von der Spitze nach unten.",
+      "topology": "polygon_path+line"
+    }
+  ]
+}
