@@ -10,8 +10,6 @@ from pathlib import Path
 from typing import Any, Mapping
 from xml.etree import ElementTree
 
-from PIL import Image
-
 
 SCHEMA_VERSION = "good_solution_gate_v1"
 STATUSES = ("good", "suboptimal", "not_reachable")
@@ -37,10 +35,49 @@ def _match_ratio(expected: float, actual: float) -> float:
     return min(expected, actual) / max(expected, actual)
 
 
+def _raster_dimensions(image_path: Path) -> tuple[int, int]:
+    """Read PNG/JPEG dimensions without adding a runtime image dependency."""
+    data = image_path.read_bytes()
+    if len(data) >= 24 and data[:8] == b"\x89PNG\r\n\x1a\n":
+        width = int.from_bytes(data[16:20], "big")
+        height = int.from_bytes(data[20:24], "big")
+        if width > 0 and height > 0:
+            return width, height
+        raise ValueError("invalid PNG dimensions")
+
+    if len(data) < 4 or data[:2] != b"\xff\xd8":
+        raise ValueError("unsupported raster format")
+    offset = 2
+    sof_markers = {
+        0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7,
+        0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF,
+    }
+    while offset + 1 < len(data):
+        if data[offset] != 0xFF:
+            offset += 1
+            continue
+        marker = data[offset + 1]
+        offset += 2
+        if marker in {0xD8, 0xD9, 0x01} or 0xD0 <= marker <= 0xD7:
+            continue
+        if offset + 1 >= len(data):
+            break
+        segment_length = int.from_bytes(data[offset : offset + 2], "big")
+        if segment_length < 2 or offset + segment_length > len(data):
+            break
+        if marker in sof_markers and segment_length >= 7:
+            height = int.from_bytes(data[offset + 3 : offset + 5], "big")
+            width = int.from_bytes(data[offset + 5 : offset + 7], "big")
+            if width > 0 and height > 0:
+                return width, height
+            raise ValueError("invalid JPEG dimensions")
+        offset += segment_length
+    raise ValueError("could not parse JPEG dimensions")
+
+
 def measure_dimension_fidelity(image_path: Path, svg_path: Path) -> dict[str, Any]:
     """Measure SVG canvas width, height and aspect ratio against a raster source."""
-    with Image.open(image_path) as image:
-        raster_width, raster_height = image.size
+    raster_width, raster_height = _raster_dimensions(image_path)
 
     root = ElementTree.parse(svg_path).getroot()
     dimensions: list[float] = []

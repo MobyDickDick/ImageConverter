@@ -11,6 +11,10 @@ Abmessungen des JPEG- und SVG-Artefakts prüfen. Es ermittelt getrennte
 wird als `dimension_match` in die Gate-Entscheidung übernommen und ersetzt
 bewusst einen möglicherweise veralteten Wert aus der Result-Map.
 
+Die Rasterabmessungen werden direkt aus den standardisierten PNG-/JPEG-Headern
+gelesen. Das Gate bleibt dadurch auch in der schlanken CI-Testumgebung ohne
+optionale Pillow-Installation ausführbar.
+
 Fehlt ein Artefakt oder lässt sich seine Dimension nicht lesen, bleibt die
 Pflichtmetrik unbekannt und der Fall wird `not_reachable`. Liegt einer der drei
 Werte unter der versionierten ZG3-Schwelle von `0.99`, ist das Ergebnis
