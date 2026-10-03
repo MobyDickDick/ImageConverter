@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-03)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `408` · Erledigt `387` · Offen `21`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `409` · Erledigt `388` · Offen `21`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -2363,6 +2363,8 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - [x] **ZG1 (P0): Input-Contract v1 verbindlich machen**
   - Pflichtinput: `image_path` (JPEG) + `semantic_description` (V5-JSON oder Adapter aus XML).
   - Akzeptanz: Lauf bricht mit klarer Fehlermeldung ab, wenn eines der beiden Felder fehlt.
+  - Exit-Bedingung: CLI-Regressionstests decken fehlenden Bildpfad, fehlende
+    Beschreibung und einen erfolgreichen JPEG-plus-Beschreibung-Lauf ab.
   - Umsetzung: Der Konvertierungs-CLI-Pfad erzwingt den Input-Contract v1 jetzt
     vor dem Laden der Beschreibung und vor `convertRange`: ein leerer
     Bildordnerpfad, fehlender `--descriptions-path`/`--csv-path` beziehungsweise
@@ -2374,6 +2376,9 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - [x] **ZG2 (P0): Bildspezifische Logik aus Hauptpfad entfernen** (2026-10-02: Die bereits abgeschlossene IDO-P2/P3-Migration wurde gegen die ZG2-Akzeptanzkriterien revalidiert. Die absolute Runtime-Nullprüfung findet keine Katalog-ID in `src/`; Filename-Invarianz- und umbenannte Holdout-Referenztests bleiben grün. Details: `docs/next_arbeitspaket_2026-10-02_zg2.md`.)
   - Inventur aller dateiname-/familienabhängigen Heuristiken, danach Migration auf beschreibungsgetriebete Regeln.
   - Akzeptanz: Hauptpfad funktioniert auf Referenzset ohne filename-spezifische Sonderfälle.
+  - Exit-Bedingung: Runtime-ID-Nullprüfung, Filename-Invarianz und umbenannter
+    Holdout laufen grün; verbleibende Treffer außerhalb des Runtime-Pfads sind
+    dokumentiert.
 
 - [x] **ZG3 (P0): Good-Solution-Gate v1 implementieren** (2026-10-03: Das neue
   `tools/evaluate_good_solution_gate.py` klassifiziert jede Result-Map-Zeile
@@ -2384,6 +2389,8 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   Details: `docs/next_arbeitspaket_2026-10-03_zg3.md`.)
   - Einheitliche Statusklassifikation `good` / `suboptimal` / `not_reachable` via versionierter Schwellenwerte.
   - Akzeptanz: Status + Schwellen + Gründe stehen pro Datei im Report.
+  - Exit-Bedingung: Positive, suboptimale und nicht erreichbare Fixtures liefern
+    deterministisch genau die drei versionierten Statuswerte.
 
 - [x] **ZG4 (P0): Dimensionstreue als harte Regel erzwingen** (2026-10-03:
   Das Good-Solution-Gate misst bei Angabe der Raster-/SVG-Verzeichnisse Breite,
@@ -2393,6 +2400,8 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   Details: `docs/next_arbeitspaket_2026-10-03_zg4.md`.)
   - Width/Height/Aspect-Ratio-Abweichung über Toleranz => kein `good`.
   - Akzeptanz: Regressionstest mit absichtlich falscher Dimension liefert `suboptimal` oder `not_reachable`.
+  - Exit-Bedingung: Artefaktbasierte Breiten-, Höhen- und
+    Seitenverhältnisabweichungen können das Gate nicht als `good` passieren.
 
 - [x] **ZG5 (P1): Semantik-first-Ausführungsmodus** (2026-10-03: Der neue
   voreingestellte Modus `semantic-only` verwendet je Konvertierung nur das
@@ -2403,12 +2412,18 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   `docs/next_arbeitspaket_2026-10-03_zg5.md`.)
   - Feature-Flag `--execution-mode semantic-only` ohne zusätzliche Artefaktquellen.
   - Akzeptanz: CLI-Tests belegen den sicheren Default und den expliziten Opt-in für `standard`.
+  - Exit-Bedingung: `semantic-only` ist CLI-Default und deaktiviert Resume,
+    Resultatwiederverwendung und Template-Donoren; `standard` bleibt explizit
+    auswählbar.
 
 - [x] **ZG6 (P1): Nicht-Erreichbarkeit robust machen** (2026-10-03:
   Stagnation, Budgetüberschreitung, Dimensionsverletzung und Semantikkonflikt
   besitzen nun einheitliche Report- und Exit-Codes. Details:
   `docs/next_arbeitspaket_2026-10-03_zg6.md`.)
   - Akzeptanz: Gründe und Codes werden in Batchreport und Good-Solution-Gate reproduzierbar ausgegeben.
+  - Exit-Bedingung: Alle vier terminalen Gründe besitzen stabile Reportcodes,
+    werden vom Gate als `not_reachable` klassifiziert und sind durch Tests
+    abgedeckt.
 
 - [x] **ZG7 (P1): Benchmark-Set ohne Sonderwissen** (2026-10-03: Das
   versionierte Sechs-Sample-Manifest und der isolierende Benchmark-Runner
@@ -2416,6 +2431,9 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   Modus und prüfen zwei unabhängige SVG-Ergebnisse per SHA-256. Details:
   `docs/next_arbeitspaket_2026-10-03_zg7.md`.)
   - Akzeptanz: Der Report weist je Sample erfolgreiche, byteidentische Wiederholungen aus und schlägt bei Abweichungen fehl.
+  - Exit-Bedingung: Das versionierte Manifest enthält mindestens drei
+    Formfamilien; der isolierte Zweifachlauf ist stabil und ein absichtlich
+    abweichendes Ergebnis erzeugt einen Fehlerexit.
 
 - [x] **ZG8 (P2): Dokumentierte Metrik-Hierarchie** (2026-10-03: Das
   Good-Solution-Gate weist Semantik und Dimensionstreue als nicht
@@ -2426,6 +2444,20 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - Akzeptanz: Ein sehr guter Pixelwert kann eine verletzte Semantik- oder
     Dimensionsschwelle nicht kompensieren; Pixelabweichung wird erst nach
     bestandenen Primärmetriken als sekundärer Grund bewertet.
+  - Exit-Bedingung: Reportvertrag und Regressionstests weisen für jede
+    Entscheidung die Stufe `reachability`, `primary`, `secondary` oder `all`
+    aus.
+
+- [x] **ZG9 (P2): Leitaufgaben im Taskboard verankern** (2026-10-03: Alle
+  Leitaufgaben ZG1 bis ZG8 besitzen im zentralen Taskboard ein prüfbares
+  Akzeptanzkriterium und eine explizite Exit-Bedingung. Ein Dokumentationstest
+  schützt die Struktur vor versehentlichem Rückbau. Details:
+  `docs/next_arbeitspaket_2026-10-03_zg9.md`.)
+  - Akzeptanz: `docs/open_tasks.md` führt ZG1 bis ZG8 lückenlos und nennt in
+    jedem Aufgabenblock sowohl `Akzeptanz` als auch `Exit-Bedingung`.
+  - Exit-Bedingung: Der Taskboard-Vertrag ist automatisiert geprüft, ZG1 bis
+    ZG8 sind abgeschlossen, und die Definition of Done des Zielabgleichs ist
+    auf diese nachweisbaren Aufgaben abgebildet.
 
 
 
