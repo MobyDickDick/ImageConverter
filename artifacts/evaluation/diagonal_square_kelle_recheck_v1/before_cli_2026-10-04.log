@@ -1,0 +1,123 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Kein interaktives Terminal erkannt; verwende Bereich von '(Anfang)' bis '(Ende)'.
+[INFO] Konvertiere pilot_square.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite pilot_square.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[INFO] unknown: Elementvalidierung gestartet | Runden=8, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 71.89% -> 74.01% | mittlere Pixelabweichung (MAE, kleiner=besser): 71.669 -> 66.267 | Mean-Delta² (kleiner=besser): 30015.035 -> 26521.568 | Qualitätsgewinn=+5.403 (+7.54%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 2/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 74.01% -> 75.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 66.267 -> 63.141 | Mean-Delta² (kleiner=besser): 26521.568 -> 23789.014 | Qualitätsgewinn=+3.125 (+4.72%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 3/8: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 3/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 75.24% -> 75.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 63.141 -> 63.141 | Mean-Delta² (kleiner=besser): 23789.014 -> 23789.014 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/8 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 4/8: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 4/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 75.24% -> 75.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 63.141 -> 63.141 | Mean-Delta² (kleiner=besser): 23789.014 -> 23789.014 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[WARN] pilot_square.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.847222, localized_error_fraction=0.632312).
+[INFO] Konvertiert pilot_square.jpg | Parameter: mode=semantic_badge, label=M, variant_name=PILOT_SQUARE | Qualität: Optimierungsfehler/Pixel=0.164082, Mean-Delta²=22276.960938, RGB-RMSE/Kanal=86.172232, Raumscore=56059.270461, beste Validierungsrunde=2/4, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_large.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_large.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[INFO] unknown: Elementvalidierung gestartet | Runden=8, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 74.89% -> 78.51% | mittlere Pixelabweichung (MAE, kleiner=besser): 64.018 -> 54.806 | Mean-Delta² (kleiner=besser): 28326.398 -> 20389.812 | Qualitätsgewinn=+9.212 (+14.39%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 2/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 78.51% -> 80.53% | mittlere Pixelabweichung (MAE, kleiner=besser): 54.806 -> 49.650 | Mean-Delta² (kleiner=besser): 20389.812 -> 15984.953 | Qualitätsgewinn=+5.156 (+9.41%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 3/8: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 3/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 80.53% -> 80.53% | mittlere Pixelabweichung (MAE, kleiner=besser): 49.650 -> 49.650 | Mean-Delta² (kleiner=besser): 15984.953 -> 15984.953 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/8 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 4/8: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 4/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 80.53% -> 80.53% | mittlere Pixelabweichung (MAE, kleiner=besser): 49.650 -> 49.650 | Mean-Delta² (kleiner=besser): 15984.953 -> 15984.953 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] Konvertiert renamed_holdout_large.jpg | Parameter: mode=semantic_badge, label=M, variant_name=RENAMED_HOLDOUT_LARGE | Qualität: Optimierungsfehler/Pixel=0.041008, Mean-Delta²=14094.021484, RGB-RMSE/Kanal=68.542010, Raumscore=28502.907871, beste Validierungsrunde=2/4, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_medium.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_medium.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[INFO] unknown: Elementvalidierung gestartet | Runden=8, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 73.87% -> 77.92% | mittlere Pixelabweichung (MAE, kleiner=besser): 66.624 -> 56.301 | Mean-Delta² (kleiner=besser): 28981.477 -> 20118.182 | Qualitätsgewinn=+10.322 (+15.49%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 77.92% -> 79.18% | mittlere Pixelabweichung (MAE, kleiner=besser): 56.301 -> 53.100 | Mean-Delta² (kleiner=besser): 20118.182 -> 18071.729 | Qualitätsgewinn=+3.201 (+5.69%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 3/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 3/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 79.18% -> 79.18% | mittlere Pixelabweichung (MAE, kleiner=besser): 53.100 -> 53.100 | Mean-Delta² (kleiner=besser): 18071.729 -> 18071.729 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/8 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 4/8: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 4/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 79.18% -> 79.18% | mittlere Pixelabweichung (MAE, kleiner=besser): 53.100 -> 53.100 | Mean-Delta² (kleiner=besser): 18071.729 -> 18071.729 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] Konvertiert renamed_holdout_medium.jpg | Parameter: mode=semantic_badge, label=M, variant_name=RENAMED_HOLDOUT_MEDIUM | Qualität: Optimierungsfehler/Pixel=0.071535, Mean-Delta²=14914.067383, RGB-RMSE/Kanal=70.507842, Raumscore=28278.658486, beste Validierungsrunde=2/4, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere pilot_square.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite pilot_square.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[INFO] unknown: Elementvalidierung gestartet | Runden=7, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/7 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/7: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/7: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 71.89% -> 74.01% | mittlere Pixelabweichung (MAE, kleiner=besser): 71.669 -> 66.267 | Mean-Delta² (kleiner=besser): 30015.035 -> 26521.568 | Qualitätsgewinn=+5.403 (+7.54%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/7 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/7: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/7: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 74.01% -> 75.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 66.267 -> 63.141 | Mean-Delta² (kleiner=besser): 26521.568 -> 23789.014 | Qualitätsgewinn=+3.125 (+4.72%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/7 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 3/7: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 3/7: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 75.24% -> 75.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 63.141 -> 63.141 | Mean-Delta² (kleiner=besser): 23789.014 -> 23789.014 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 4/7 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 4/7: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 4/7: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 75.24% -> 75.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 63.141 -> 63.141 | Mean-Delta² (kleiner=besser): 23789.014 -> 23789.014 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[WARN] pilot_square.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.847222, localized_error_fraction=0.632312).
+[INFO] Konvertiert pilot_square.jpg | Parameter: mode=semantic_badge, label=M, variant_name=PILOT_SQUARE | Qualität: Optimierungsfehler/Pixel=0.164082, Mean-Delta²=22276.960938, RGB-RMSE/Kanal=86.172232, Raumscore=56059.270461, beste Validierungsrunde=2/4, beste Composite-Iteration=n/a, ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere pilot_square.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite pilot_square.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[INFO] unknown: Elementvalidierung gestartet | Runden=9, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 71.89% -> 74.01% | mittlere Pixelabweichung (MAE, kleiner=besser): 71.669 -> 66.267 | Mean-Delta² (kleiner=besser): 30015.035 -> 26521.568 | Qualitätsgewinn=+5.403 (+7.54%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 74.01% -> 75.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 66.267 -> 63.141 | Mean-Delta² (kleiner=besser): 26521.568 -> 23789.014 | Qualitätsgewinn=+3.125 (+4.72%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 3/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 3/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 75.24% -> 75.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 63.141 -> 63.141 | Mean-Delta² (kleiner=besser): 23789.014 -> 23789.014 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 4/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 4/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 4/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 4/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 75.24% -> 75.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 63.141 -> 63.141 | Mean-Delta² (kleiner=besser): 23789.014 -> 23789.014 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.0s
+[WARN] pilot_square.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.847222, localized_error_fraction=0.632312).
+[INFO] Konvertiert pilot_square.jpg | Parameter: mode=semantic_badge, label=M, variant_name=PILOT_SQUARE | Qualität: Optimierungsfehler/Pixel=0.164082, Mean-Delta²=22276.960938, RGB-RMSE/Kanal=86.172232, Raumscore=56059.270461, beste Validierungsrunde=2/4, beste Composite-Iteration=n/a, ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\diagonal-square-reproduction-final\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\diagonal-square-reproduction-final\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\diagonal-square-reproduction-final\before

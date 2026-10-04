@@ -1,0 +1,77 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Kein interaktives Terminal erkannt; verwende Bereich von '(Anfang)' bis '(Ende)'.
+[INFO] Konvertiere pilot_square.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite pilot_square.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_square.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.731343, localized_error_fraction=0.779742).
+[INFO] Konvertiert pilot_square.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_SQUARE | Qualität: Optimierungsfehler/Pixel=0.019228, Mean-Delta²=569.914673, RGB-RMSE/Kanal=13.783017, Raumscore=1737.034338, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_large.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_large.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_large.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.868293, localized_error_fraction=0.661920).
+[INFO] Konvertiert renamed_holdout_large.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_LARGE | Qualität: Optimierungsfehler/Pixel=0.005291, Mean-Delta²=514.872864, RGB-RMSE/Kanal=13.100545, Raumscore=1439.497952, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_medium.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_medium.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_medium.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.666667, localized_error_fraction=0.705508).
+[INFO] Konvertiert renamed_holdout_medium.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_MEDIUM | Qualität: Optimierungsfehler/Pixel=0.008216, Mean-Delta²=424.822845, RGB-RMSE/Kanal=11.899900, Raumscore=1197.457731, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere pilot_square.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite pilot_square.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_square.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.731343, localized_error_fraction=0.779742).
+[INFO] Konvertiert pilot_square.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_SQUARE | Qualität: Optimierungsfehler/Pixel=0.019228, Mean-Delta²=569.914673, RGB-RMSE/Kanal=13.783017, Raumscore=1737.034338, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Konvertiere renamed_holdout_medium.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_medium.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_medium.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.666667, localized_error_fraction=0.705508).
+[INFO] Konvertiert renamed_holdout_medium.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_MEDIUM | Qualität: Optimierungsfehler/Pixel=0.008216, Mean-Delta²=424.822845, RGB-RMSE/Kanal=11.899900, Raumscore=1197.457731, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Konvertiere renamed_holdout_large.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_large.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_large.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.868293, localized_error_fraction=0.661920).
+[INFO] Konvertiert renamed_holdout_large.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_LARGE | Qualität: Optimierungsfehler/Pixel=0.005291, Mean-Delta²=514.872864, RGB-RMSE/Kanal=13.100545, Raumscore=1439.497952, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere pilot_square.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite pilot_square.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_square.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.731343, localized_error_fraction=0.779742).
+[INFO] Konvertiert pilot_square.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_SQUARE | Qualität: Optimierungsfehler/Pixel=0.019228, Mean-Delta²=569.914673, RGB-RMSE/Kanal=13.783017, Raumscore=1737.034338, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.0s
+[INFO] Konvertiere renamed_holdout_medium.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_medium.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_medium.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.666667, localized_error_fraction=0.705508).
+[INFO] Konvertiert renamed_holdout_medium.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_MEDIUM | Qualität: Optimierungsfehler/Pixel=0.008216, Mean-Delta²=424.822845, RGB-RMSE/Kanal=11.899900, Raumscore=1197.457731, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.0s
+[INFO] Konvertiere renamed_holdout_large.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_large.jpg ---
+Bildbeschreibung: Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_large.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.868293, localized_error_fraction=0.661920).
+[INFO] Konvertiert renamed_holdout_large.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_LARGE | Qualität: Optimierungsfehler/Pixel=0.005291, Mean-Delta²=514.872864, RGB-RMSE/Kanal=13.100545, Raumscore=1439.497952, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\diagonal-square-reproduction-final\after\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\diagonal-square-reproduction-final\after\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\diagonal-square-reproduction-final\after

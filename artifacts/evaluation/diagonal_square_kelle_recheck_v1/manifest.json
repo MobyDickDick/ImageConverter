@@ -1,0 +1,34 @@
+{
+  "schema_version": "diagonal_square_kelle_recheck_manifest_v1",
+  "description": "Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+  "provenance": {
+    "commit": "bd1b1626181f48aed43070752dbe4e46dd0a0165",
+    "baseline_mode": "CLI ablation with main-diagonal square topology disabled; all other runtime paths unchanged",
+    "seed": 0,
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0",
+    "execution_mode": "semantic-only"
+  },
+  "cases": [
+    {
+      "case_id": "pilot_square",
+      "role": "target",
+      "image": "../../images_to_convert/AC0724_1_S.jpg",
+      "before_svg": "before/pilot_square.svg",
+      "after_svg": "after/pilot_square.svg"
+    },
+    {
+      "case_id": "renamed_holdout_medium",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0724_1_M.jpg",
+      "before_svg": "before/renamed_holdout_medium.svg",
+      "after_svg": "after/renamed_holdout_medium.svg"
+    },
+    {
+      "case_id": "renamed_holdout_large",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0724_1_L.jpg",
+      "before_svg": "before/renamed_holdout_large.svg",
+      "after_svg": "after/renamed_holdout_large.svg"
+    }
+  ]
+}

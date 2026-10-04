@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-04, nach Rechteckflächen-Recheck)
+## Aktuelle Kandidaten (Stand: 2026-10-04, nach diagonalem Quadrat-Kellen-Recheck)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -24,18 +24,25 @@ verwendet eine zutreffende Beschreibung der sichtbaren Rechteckstruktur; die
 alte XML-Farbangabe „hellgraues Quadrat“ für das rote Raster bleibt als
 Datenqualitätsfolge dokumentiert. Details: `docs/next_arbeitspaket_2026-10-04_dlg0010_1.md`.
 
-1. `AC0724_1_S` – `mean_delta2=22276.960938`, `normalized_mse=0.114197`.
-2. `AC0252_1` – `mean_delta2=20853.748047`, `normalized_mse=0.106901`.
-3. `AC0731_1_L` – `mean_delta2=18881.216797`, `normalized_mse=0.096790`.
-4. `GE1003_M` – `mean_delta2=17817.699219`, `normalized_mse=0.091338`.
-5. `AC0404_1_L` – `mean_delta2=17112.675781`, `normalized_mse=0.087724`.
+`AC0724_1_S` besteht nach der allgemeinen Hauptdiagonalspiegelung der
+Quadrat-/Griff-Topologie und rastergestützter Innenmarkierung beide Gates
+(`mean_delta2=569.914673`, `edge_alignment=0.842189`). M-/L-Holdouts bestehen
+ebenfalls ohne Regression. Die Innenkontur wird geometrisch erkannt; es wird
+kein T-Label im Parser vorausgesetzt. Details:
+`docs/next_arbeitspaket_2026-10-04_ac0724_1_s.md`.
 
-Die nächste Rotation beginnt mit `AC0724_1_S` und muss den Wert des tatsächlich
+1. `AC0252_1` – `mean_delta2=20853.748047`, `normalized_mse=0.106901`.
+2. `AC0731_1_L` – `mean_delta2=18881.216797`, `normalized_mse=0.096790`.
+3. `GE1003_M` – `mean_delta2=17817.699219`, `normalized_mse=0.091338`.
+4. `AC0404_1_L` – `mean_delta2=17112.675781`, `normalized_mse=0.087724`.
+5. `GE9011_6M` – `mean_delta2=15528.650391`, `normalized_mse=0.079603`.
+
+Die nächste Rotation beginnt mit `AC0252_1` und muss den Wert des tatsächlich
 akzeptierten SVGs vor und nach der Änderung sowie den Gate-Status ausweisen.
 Der vollständige Review über `688` renderbare Paare steht unter
-`artifacts/evaluation/nested_panel_recheck_v1/full_review/`.
-Er schließt die drei separat belegten Gate-Passes `AC0554_2_L`,
-`AC0713_1_S` und `DLG0010_1` explizit aus: Die historische Sammelausgabe enthält noch
+`artifacts/evaluation/diagonal_square_kelle_recheck_v1/full_review/`.
+Er schließt die vier separat belegten Gate-Passes `AC0554_2_L`,
+`AC0713_1_S`, `DLG0010_1` und `AC0724_1_S` explizit aus: Die historische Sammelausgabe enthält noch
 alte SVGs; die akzeptierten Ergebnisse liegen in den jeweiligen Evaluationen.
 
 Abschluss des Runtime-Registrierungspakets `AC0713_1_S` (2026-10-04):
@@ -62,7 +69,12 @@ das CLI meldet dafür weiterhin konzentrierten Restfehler. Details stehen in
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
-Aktueller Recheck: Die Erkennung verschachtelter Rechteckflächen ist
+Aktueller Recheck: Hauptdiagonalspiegelung und rastergestützte Innenmarkierung
+sind `generalisiert`; Ziel und zwei Größen-Holdouts bestehen beide Gates,
+Umbenennung und synthetische Farb-/Lage-/Größenvariationen sind abgesichert.
+Details stehen in `docs/next_arbeitspaket_2026-10-04_ac0724_1_s.md`.
+
+Vorheriger Recheck: Die Erkennung verschachtelter Rechteckflächen ist
 `generalisiert`; sie überträgt Lage, Farben und Größen aus dem Raster auf zwei
 SVG-Primitive und besteht Ziel-/Holdout-Gates sowie Farb-/Größenvariationen.
 Der Beleg steht in `docs/next_arbeitspaket_2026-10-04_dlg0010_1.md`.

@@ -1,0 +1,15 @@
+{
+  "description": "Kelle mit Quadrat anstelle von Kreis oben; 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+  "provenance": {
+    "commit": "39acee42a",
+    "seed": 0,
+    "toolchain": "Python 3.12, numpy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0; baseline generated with OpenCV 5.0.0",
+    "before": "Frozen anonymous runtime recheck before the two kind-set registrations",
+    "after": "Saved outputs from the production semantic-only CLI with XML descriptions"
+  },
+  "cases": [
+    {"case_id": "pilot_target", "role": "target", "image": "../../images_to_convert/AC0713_1_S.jpg", "before_svg": "before/S.svg", "after_svg": "after/S.svg"},
+    {"case_id": "renamed_holdout_medium", "role": "holdout", "image": "../../images_to_convert/AC0713_1_M.jpg", "before_svg": "before/M.svg", "after_svg": "after/M.svg"},
+    {"case_id": "renamed_holdout_large", "role": "holdout", "image": "../../images_to_convert/AC0713_1_L.jpg", "before_svg": "before/L.svg", "after_svg": "after/L.svg"}
+  ]
+}

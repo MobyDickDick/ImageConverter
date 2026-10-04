@@ -1,0 +1,407 @@
+{
+  "baseline": {
+    "baseline_sha256": "4abfd5369815574766b9b99259520f6321b8d352fb98f17eda3243faa8eb9339",
+    "cases": {
+      "pilot_square": {
+        "dimensions": {
+          "height": 15,
+          "width": 25
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.41610366106033325,
+          "error_per_pixel": 0.11419690343457645,
+          "object_mask_iou": 0.5020746887966805,
+          "semantic_score": 0.0
+        }
+      },
+      "renamed_holdout_large": {
+        "dimensions": {
+          "height": 25,
+          "width": 45
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4462244510650635,
+          "error_per_pixel": 0.07224924508201974,
+          "object_mask_iou": 0.6805349182763745,
+          "semantic_score": 0.0
+        }
+      },
+      "renamed_holdout_medium": {
+        "dimensions": {
+          "height": 20,
+          "width": 35
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4669888913631439,
+          "error_per_pixel": 0.0764529918380751,
+          "object_mask_iou": 0.7076566125290024,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "CLI ablation with main-diagonal square topology disabled; all other runtime paths unchanged",
+      "commit": "bd1b1626181f48aed43070752dbe4e46dd0a0165",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "pilot_square": "5aa59da3798ebde025ab259473401da08c4188e5921e513ef22155ab8115a2c1",
+        "renamed_holdout_large": "291c9425fd368af1f541780f76aaae0a49590252e9d24312e5a2ce6e84564d93",
+        "renamed_holdout_medium": "1823b779463eda88efa7e809862c58fa4557e54601f57e61196ad611496b857c"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 569.9146728515625,
+      "after_svg": "after/pilot_square.svg",
+      "after_svg_sha256": "507284ad80a02256df21a98765e278df47d207d834b2c972d043ee15ffcab009",
+      "before_mean_delta2": 22276.9609375,
+      "before_svg": "before/pilot_square.svg",
+      "before_svg_sha256": "391a0d5d5792bdcb6e042873c53bdf2d1f99d760407ba53d54d0d1ffc0638147",
+      "case_id": "pilot_square",
+      "image": "../../images_to_convert/AC0724_1_S.jpg",
+      "input_sha256": "5aa59da3798ebde025ab259473401da08c4188e5921e513ef22155ab8115a2c1",
+      "role": "target"
+    },
+    {
+      "after_mean_delta2": 424.8228454589844,
+      "after_svg": "after/renamed_holdout_medium.svg",
+      "after_svg_sha256": "2a3cbe47cef78ca7383717ba519e82ff8eeb38cc8b88943951219f4613b5c8a1",
+      "before_mean_delta2": 14914.0673828125,
+      "before_svg": "before/renamed_holdout_medium.svg",
+      "before_svg_sha256": "b4ccb62e9173b63ad841cc82894dc87687bce0576db7c5053fa2da898156ed04",
+      "case_id": "renamed_holdout_medium",
+      "image": "../../images_to_convert/AC0724_1_M.jpg",
+      "input_sha256": "1823b779463eda88efa7e809862c58fa4557e54601f57e61196ad611496b857c",
+      "role": "holdout"
+    },
+    {
+      "after_mean_delta2": 514.8728637695312,
+      "after_svg": "after/renamed_holdout_large.svg",
+      "after_svg_sha256": "fd4fe38ca13475276108a6b1af155f5563483694e090cb91b3d267292f7b97ad",
+      "before_mean_delta2": 14094.021484375,
+      "before_svg": "before/renamed_holdout_large.svg",
+      "before_svg_sha256": "d3faab0698ac66eb5dd125b6aba3a8517ac02ce04d2684b4a15b532553da9ff5",
+      "case_id": "renamed_holdout_large",
+      "image": "../../images_to_convert/AC0724_1_L.jpg",
+      "input_sha256": "291c9425fd368af1f541780f76aaae0a49590252e9d24312e5a2ce6e84564d93",
+      "role": "holdout"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "4abfd5369815574766b9b99259520f6321b8d352fb98f17eda3243faa8eb9339",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8421894311904907,
+          "error_per_pixel": 0.0029215156880767015,
+          "object_mask_iou": 0.985781990521327,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.41610366106033325,
+          "error_per_pixel": 0.11419690343457645,
+          "object_mask_iou": 0.5020746887966805,
+          "semantic_score": 0.0
+        },
+        "case_id": "pilot_square",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0029215156880767015,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 11,
+            "path_complexity_ratio": 3.6667,
+            "path_count": 2,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9563,
+            "edge_alignment": 0.8422,
+            "pixel_similarity": 0.9971,
+            "semantic_score": 1.0,
+            "structure_score": 0.9858
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8940659761428833,
+          "error_per_pixel": 0.0026393585224633153,
+          "object_mask_iou": 0.9192751235584844,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4462244510650635,
+          "error_per_pixel": 0.07224924508201974,
+          "object_mask_iou": 0.6805349182763745,
+          "semantic_score": 0.0
+        },
+        "case_id": "renamed_holdout_large",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0026393585224633153,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 11,
+            "path_complexity_ratio": 3.6667,
+            "path_count": 2,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9527,
+            "edge_alignment": 0.8941,
+            "pixel_similarity": 0.9974,
+            "semantic_score": 1.0,
+            "structure_score": 0.9193
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9170145988464355,
+          "error_per_pixel": 0.0021777411019299467,
+          "object_mask_iou": 0.9315789473684211,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4669888913631439,
+          "error_per_pixel": 0.0764529918380751,
+          "object_mask_iou": 0.7076566125290024,
+          "semantic_score": 0.0
+        },
+        "case_id": "renamed_holdout_medium",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0021777411019299467,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 11,
+            "path_complexity_ratio": 3.6667,
+            "path_count": 2,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9616,
+            "edge_alignment": 0.917,
+            "pixel_similarity": 0.9978,
+            "semantic_score": 1.0,
+            "structure_score": 0.9316
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "CLI ablation with main-diagonal square topology disabled; all other runtime paths unchanged",
+      "commit": "bd1b1626181f48aed43070752dbe4e46dd0a0165",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "pilot_square": "5aa59da3798ebde025ab259473401da08c4188e5921e513ef22155ab8115a2c1",
+        "renamed_holdout_large": "291c9425fd368af1f541780f76aaae0a49590252e9d24312e5a2ce6e84564d93",
+        "renamed_holdout_medium": "1823b779463eda88efa7e809862c58fa4557e54601f57e61196ad611496b857c"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 3,
+      "improved": 3,
+      "satisfactory": 3,
+      "technically_completed": 3
+    }
+  },
+  "schema_version": "diagonal_square_kelle_recheck_v1",
+  "semantic_contract": "square at left with centered rightward stem; optional orthogonal interior mark inferred from raster contrast, without OCR claims"
+}

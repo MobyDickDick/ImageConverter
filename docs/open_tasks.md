@@ -14,6 +14,16 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-04)
 
+Das Paket für `AC0724_1_S` ist abgeschlossen: Der Beschreibungspfad spiegelt
+die bestehende Quadrat-/Griff-Topologie an der Hauptdiagonale. Die helle
+Innenmarkierung wird zusätzlich aus Rasterkontrast und Balken-/Stiel-Belegung
+als einfacher Polygonpfad erkannt, ohne ein T-Label vorauszusetzen. Das
+gespeicherte S-CLI-SVG erreicht `mean_delta2=569.914673`; Ziel und M-/L-Holdouts
+bestehen beide harten Gates ohne Regression. `230` Tests sind grün. Die
+bestehenden Restfehlerwarnungen bleiben sichtbar. Der erneuerte Review über
+`688` Paare führt die Rotation jetzt mit `AC0252_1` fort. Details und Repro
+stehen in `docs/next_arbeitspaket_2026-10-04_ac0724_1_s.md`.
+
 Das Rechteckflächen-Paket für `DLG0010_1` ist abgeschlossen: Der katalogfreie
 Rasterregistrierer erhält die helle Innenfläche und das breite Außenfeld.
 Ziel (`mean_delta2=468.700897`) und grauer Holdout (`48.554668`) bestehen beide
@@ -21,7 +31,7 @@ harten Gates ohne Regression. Die Abnahme verwendet eine zutreffende neutrale
 Rechteckbeschreibung; die falsche XML-Farbangabe für das rote Raster bleibt als
 Datenqualitätsfolge dokumentiert. `222` Regressionstests sind grün, und ein
 erneuter CLI-Lauf reproduziert alle vier SVG-Hashes. Der Review über `688`
-Paare führt die Rotation jetzt mit `AC0724_1_S` fort. Details und Repro stehen
+Paare führte die Rotation anschließend mit `AC0724_1_S` fort. Details und Repro stehen
 in `docs/next_arbeitspaket_2026-10-04_dlg0010_1.md`.
 
 Das Runtime-Registrierungspaket für die 180°-Quadrat-Kelle ist abgeschlossen:

@@ -177,6 +177,26 @@ def _annotate_kelle_valve_element(
     return element
 
 
+def _build_main_diagonal_square_kelle() -> dict[str, object]:
+    """Reflect the existing upright topology by exchanging normalized axes."""
+    element = buildGeometryIrFromDescriptionImpl("Kelle mit Quadrat oben")[0]
+    x, y, width, height = element["body_bbox"]
+    element["body_bbox"] = [y, x, height, width]
+    element["connector"] = [[py, px] for px, py in element["connector"]]
+    element["kind"] = "MainDiagonalMirroredSquareKelleGlyph"
+    element["id"] = "main_diagonal_mirrored_square_kelle"
+    element["transform"] = _generic_transform(mirror_axis="main_diagonal")
+    element["primitive_decomposition"] = {
+        "schema_version": "square_kelle_primitive_decomposition_v1",
+        "orientation": "left",
+        "primitives": [
+            {"role": "square_body", "kind": "RectBorder"},
+            {"role": "handle_connector", "kind": "LineSegment"},
+        ],
+    }
+    return element
+
+
 def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, object]]:
     """Map a normalized German image description to an ordered geometry IR chain.
 
@@ -372,6 +392,11 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         "kelle" in desc
         and _has_any(desc, ("180° gedreht", "180 grad gedreht", "um 180°", "um 180 grad"))
         and _has_any(desc, ("quadrat", "viereck"))
+    )
+    main_diagonal_square_kelle_hint = (
+        "kelle" in desc
+        and _has_any(desc, ("quadrat", "viereck"))
+        and _has_any(desc, ("hauptdiagonal gespiegelt", "an der hauptdiagonale gespiegelt"))
     )
     left_rotated_square_kelle_t_hint = (
         "kelle" in desc
@@ -677,6 +702,11 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
             }
         )
         return elements
+
+    if main_diagonal_square_kelle_hint:
+        mirrored = _build_main_diagonal_square_kelle()
+        if mirrored is not None:
+            return [mirrored]
 
     if upright_square_kelle_hint:
         elements.append(
@@ -1861,6 +1891,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
         elif kind in {
             "UprightSquareKelleGlyph",
             "Rotated180SquareKelleGlyph",
+            "MainDiagonalMirroredSquareKelleGlyph",
             "VerticallyMirroredSquareKelleTGlyph",
             "LeftRotatedSquareKelleTGlyph",
             "RightFacingSquareKellePGlyph",
@@ -1869,6 +1900,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             default_body_bbox = {
                 "UprightSquareKelleGlyph": [0.020, 0.040, 0.960, 0.560],
                 "Rotated180SquareKelleGlyph": [0.020, 0.400, 0.960, 0.560],
+                "MainDiagonalMirroredSquareKelleGlyph": [0.040, 0.020, 0.560, 0.960],
                 "VerticallyMirroredSquareKelleTGlyph": [0.020, 0.400, 0.960, 0.580],
                 "LeftRotatedSquareKelleTGlyph": [0.378, 0.040, 0.467, 0.920],
                 "RightFacingSquareKellePGlyph": [0.400, 0.040, 0.540, 0.920],
@@ -1891,6 +1923,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             default_connector = {
                 "UprightSquareKelleGlyph": [[0.500, 0.600], [0.500, 1.000]],
                 "Rotated180SquareKelleGlyph": [[0.500, 0.000], [0.500, 0.400]],
+                "MainDiagonalMirroredSquareKelleGlyph": [[0.600, 0.500], [1.000, 0.500]],
                 "VerticallyMirroredSquareKelleTGlyph": [[0.500, 0.000], [0.500, 0.400]],
                 "LeftRotatedSquareKelleTGlyph": [[0.000, 0.500], [0.378, 0.500]],
                 "RightFacingSquareKellePGlyph": [[0.000, 0.500], [0.400, 0.500]],
@@ -1914,7 +1947,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 f'width="{_fmt(body_w)}" height="{_fmt(body_h)}" fill="{body_fill}" '
                 f'stroke="{body_stroke}" stroke-width="{_fmt(body_sw)}"/>'
             )
-            if kind in {"UprightSquareKelleGlyph", "Rotated180SquareKelleGlyph"}:
+            if kind in {"UprightSquareKelleGlyph", "Rotated180SquareKelleGlyph", "MainDiagonalMirroredSquareKelleGlyph"}:
                 continue
             default_label_center = {
                 "VerticallyMirroredSquareKelleTGlyph": [0.500, 0.660],
