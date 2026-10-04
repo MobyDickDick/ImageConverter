@@ -118,6 +118,10 @@ Abnahmebeleg stehen in `docs/next_arbeitspaket_2026-10-03_zg7_3.md`.
 
 **Abhängigkeit:** ZG7.3
 
+**Status:** Abgeschlossen am 2026-10-03; Optimierungsvertrag,
+Konvergenzprotokoll und Abnahmebeleg stehen in
+`docs/next_arbeitspaket_2026-10-03_zg7_4.md`.
+
 **Ziel:** Geometrie, Kontur, Farbe und Semantik verbessern, ohne die Topologie
 zu beschädigen.
 
@@ -144,6 +148,10 @@ zu beschädigen.
 ## ZG7.5 – Baseline und hartes Zufriedenheitsgate
 
 **Abhängigkeit:** ZG7.4
+
+**Status:** Abgeschlossen am 2026-10-03; versiegelte Baseline,
+Vorher-/Nachher-Report und Gateentscheidungen stehen in
+`docs/next_arbeitspaket_2026-10-03_zg7_5.md`.
 
 **Ziel:** Eine Verbesserung und ein zufriedenstellendes Resultat getrennt und
 ehrlich ausweisen.
@@ -172,6 +180,10 @@ ehrlich ausweisen.
 ## ZG7.6 – Plan-B-Pilot ohne Sonderwissen
 
 **Abhängigkeit:** ZG7.5
+
+**Status:** Abgeschlossen am 2026-10-04; der katalogfreie Pilot, der fremd
+benannte Holdout und die ehrliche negative Gateentscheidung stehen in
+`docs/next_arbeitspaket_2026-10-04_zg7_6.md`.
 
 **Ziel:** Den neuen Pfad an einem echten, bislang unzufriedenstellenden
 Plan-B-Fall prüfen, ohne dafür katalogspezifischen Code hinzuzufügen.

@@ -11,6 +11,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Abschlussentscheidung – FP-D14 Run OA (2026-06-05)](abschlussentscheidung_2026-06-05_runOA.md)
 - [AC0030 Hard-Abnahme (2026-05-24)](ac0030_hard_acceptance_2026-05-24.md)
 - [AC0100 Quality Follow-up (2026-05-31, Abschluss Run NK 2026-06-02)](ac0100_quality_followup_2026-05-31.md)
+- [Wiederholungsprüfung AC0010/AC0100 (2026-10-04)](ac0100_repeat_validation_2026-10-04.md)
 - [Wiederholungsprüfung AC0010/AC0100 (2026-10-01)](ac0100_repeat_validation_2026-10-01.md)
 - [Nächstes Arbeitspaket – AC0010/AC0100 Renderer-Reparatur (2026-07-25)](next_arbeitspaket_2026-07-25_ac0100_renderer_fix.md)
 - [Nächstes Arbeitspaket – Telemetrie-Alias-Verifikationsgate Run ACG (2026-08-03)](next_arbeitspaket_2026-08-03_runACG.md)

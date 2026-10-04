@@ -1,0 +1,70 @@
+{
+  "baseline_sha256": "e8879ae49be04b3551271a8194518142395d6068bd7508b3c8d5600115f8e688",
+  "cases": {
+    "circle_text_connector": {
+      "dimensions": {
+        "height": 64,
+        "width": 64
+      },
+      "metrics": {
+        "connector_continuity": 1.0,
+        "dimension_match": 1.0,
+        "edge_alignment": 0.880211202938,
+        "error_per_pixel": 0.119788797062,
+        "object_mask_iou": 1.0,
+        "semantic_score": 1.0
+      }
+    },
+    "polygon_line": {
+      "dimensions": {
+        "height": 64,
+        "width": 64
+      },
+      "metrics": {
+        "connector_continuity": 1.0,
+        "dimension_match": 1.0,
+        "edge_alignment": 1.0,
+        "error_per_pixel": 0.0,
+        "object_mask_iou": 1.0,
+        "semantic_score": 1.0
+      }
+    },
+    "rectangle_diagonal": {
+      "dimensions": {
+        "height": 64,
+        "width": 64
+      },
+      "metrics": {
+        "connector_continuity": 1.0,
+        "dimension_match": 1.0,
+        "edge_alignment": 0.823617424242,
+        "error_per_pixel": 0.176382575758,
+        "object_mask_iou": 1.0,
+        "semantic_score": 1.0
+      }
+    }
+  },
+  "provenance": {
+    "commit": "a7d253af00f7ed732687ee6f7d89f6a52a56447e",
+    "input_hashes": {
+      "circle_text_connector": {
+        "description_sha256": "06befe6895afdcf9f7de59d619f0eb78ccb917ee8b48fc050c25c9b1bde2ad91",
+        "image_sha256": "3da96ed332016f1554255efd6e2317c863b116243215102f0381a1c2d691812b"
+      },
+      "polygon_line": {
+        "description_sha256": "a21f1140ad09ade3304c7ad428705818bbd9dcb3cac7bdccdfd9605bfc31f18f",
+        "image_sha256": "fae46685294301765a2d4e892b53334a45773da5b6380ce0ceed87cfa7a4d488"
+      },
+      "rectangle_diagonal": {
+        "description_sha256": "c136d31a0da44cebecdc7eac6344845c2792c721c157a35885482992a880ae73",
+        "image_sha256": "ac497d350867e6808b049a4608473a59f836e3911f973599913c9ffdd7be3641"
+      }
+    },
+    "seed": 0,
+    "toolchain": {
+      "optimizer_schema": "multi_objective_optimization_report_v1",
+      "python": "3.10.20"
+    }
+  },
+  "schema_version": "semantic_only_baseline_manifest_v1"
+}

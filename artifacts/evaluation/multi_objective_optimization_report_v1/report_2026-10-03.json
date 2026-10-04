@@ -1,0 +1,434 @@
+{
+  "generated_on": "2026-10-03",
+  "records": {
+    "circle_text_connector": {
+      "accepted_iterations": 7,
+      "budget": 100,
+      "final_loss": {
+        "edge": 0.0,
+        "pixel": 0.0,
+        "semantic": 0.0,
+        "structure": 0.0,
+        "total": 0.0
+      },
+      "geometry_ir": [
+        {
+          "cx": 20.0,
+          "cy": 20,
+          "id": "circle",
+          "kind": "circle",
+          "r": 10.0,
+          "stroke_width": 2.0
+        },
+        {
+          "id": "text",
+          "kind": "text",
+          "x": 18.0,
+          "y": 22
+        },
+        {
+          "id": "connector",
+          "kind": "line",
+          "stroke_width": 2.0,
+          "x1": 30.0,
+          "x2": 44.0,
+          "y1": 20,
+          "y2": 20
+        }
+      ],
+      "initial_loss": {
+        "edge": 0.119788797062,
+        "pixel": 0.119788797062,
+        "semantic": 0.0,
+        "structure": 0.0,
+        "total": 0.07786271809
+      },
+      "iterations": [
+        {
+          "accepted": true,
+          "change": "select:initial",
+          "hard_violations": [],
+          "iteration": 0,
+          "losses": {
+            "edge": 0.119788797062,
+            "pixel": 0.119788797062,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.07786271809
+          },
+          "phase": "discrete"
+        },
+        {
+          "accepted": true,
+          "change": "element[0].cx:19.0->20.0",
+          "hard_violations": [],
+          "iteration": 1,
+          "losses": {
+            "edge": 0.115243342516,
+            "pixel": 0.115243342516,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.074908172635
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[0].r:9.0->10.0",
+          "hard_violations": [],
+          "iteration": 2,
+          "losses": {
+            "edge": 0.106152433425,
+            "pixel": 0.106152433425,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.068999081726
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[0].stroke_width:1.0->2.0",
+          "hard_violations": [],
+          "iteration": 3,
+          "losses": {
+            "edge": 0.060697887971,
+            "pixel": 0.060697887971,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.039453627181
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[1].x:17.0->18.0",
+          "hard_violations": [],
+          "iteration": 4,
+          "losses": {
+            "edge": 0.05564738292,
+            "pixel": 0.05564738292,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.036170798898
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[2].stroke_width:1.0->2.0",
+          "hard_violations": [],
+          "iteration": 5,
+          "losses": {
+            "edge": 0.010192837466,
+            "pixel": 0.010192837466,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.006625344353
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[2].x1:28.0->30.0",
+          "hard_violations": [],
+          "iteration": 6,
+          "losses": {
+            "edge": 0.004132231405,
+            "pixel": 0.004132231405,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.002685950413
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[2].x2:42.0->44.0",
+          "hard_violations": [],
+          "iteration": 7,
+          "losses": {
+            "edge": 0.0,
+            "pixel": 0.0,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.0
+          },
+          "phase": "continuous_coarse"
+        }
+      ],
+      "iterations_used": 7,
+      "rejected_hypotheses": [],
+      "schema_version": "multi_objective_optimization_report_v1",
+      "selected_hypothesis_id": "initial",
+      "status": "optimized",
+      "termination_reason": "converged",
+      "weights": {
+        "edge": 0.25,
+        "pixel": 0.4,
+        "semantic": 0.15,
+        "structure": 0.2
+      }
+    },
+    "polygon_line": {
+      "accepted_iterations": 0,
+      "budget": 100,
+      "final_loss": {
+        "edge": 0.0,
+        "pixel": 0.0,
+        "semantic": 0.0,
+        "structure": 0.0,
+        "total": 0.0
+      },
+      "geometry_ir": [
+        {
+          "id": "polygon",
+          "kind": "polygon",
+          "x": 12,
+          "y": 8
+        },
+        {
+          "id": "line",
+          "kind": "line",
+          "x1": 24,
+          "x2": 24,
+          "y1": 8,
+          "y2": 38
+        }
+      ],
+      "initial_loss": {
+        "edge": 0.0,
+        "pixel": 0.0,
+        "semantic": 0.0,
+        "structure": 0.0,
+        "total": 0.0
+      },
+      "iterations": [
+        {
+          "accepted": true,
+          "change": "select:initial",
+          "hard_violations": [],
+          "iteration": 0,
+          "losses": {
+            "edge": 0.0,
+            "pixel": 0.0,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.0
+          },
+          "phase": "discrete"
+        }
+      ],
+      "iterations_used": 0,
+      "rejected_hypotheses": [],
+      "schema_version": "multi_objective_optimization_report_v1",
+      "selected_hypothesis_id": "initial",
+      "status": "unchanged",
+      "termination_reason": "converged",
+      "weights": {
+        "edge": 0.25,
+        "pixel": 0.4,
+        "semantic": 0.15,
+        "structure": 0.2
+      }
+    },
+    "rectangle_diagonal": {
+      "accepted_iterations": 9,
+      "budget": 100,
+      "final_loss": {
+        "edge": 0.0,
+        "pixel": 0.0,
+        "semantic": 0.0,
+        "structure": 0.0,
+        "total": 0.0
+      },
+      "geometry_ir": [
+        {
+          "height": 22.0,
+          "id": "rectangle",
+          "kind": "rectangle",
+          "stroke_width": 2.0,
+          "width": 32.0,
+          "x": 8.0,
+          "y": 8.0
+        },
+        {
+          "id": "diagonal",
+          "kind": "line",
+          "stroke_width": 2.0,
+          "x1": 8,
+          "x2": 40.0,
+          "y1": 30.0,
+          "y2": 8.0
+        }
+      ],
+      "initial_loss": {
+        "edge": 0.176382575758,
+        "pixel": 0.176382575758,
+        "semantic": 0.0,
+        "structure": 0.0,
+        "total": 0.114648674242
+      },
+      "iterations": [
+        {
+          "accepted": true,
+          "change": "select:initial",
+          "hard_violations": [],
+          "iteration": 0,
+          "losses": {
+            "edge": 0.176382575758,
+            "pixel": 0.176382575758,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.114648674242
+          },
+          "phase": "discrete"
+        },
+        {
+          "accepted": true,
+          "change": "element[0].height:20.0->22.0",
+          "hard_violations": [],
+          "iteration": 1,
+          "losses": {
+            "edge": 0.167291666667,
+            "pixel": 0.167291666667,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.108739583333
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[0].stroke_width:1.0->2.0",
+          "hard_violations": [],
+          "iteration": 2,
+          "losses": {
+            "edge": 0.117291666667,
+            "pixel": 0.117291666667,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.076239583333
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[0].width:31.0->32.0",
+          "hard_violations": [],
+          "iteration": 3,
+          "losses": {
+            "edge": 0.114166666667,
+            "pixel": 0.114166666667,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.074208333333
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[0].x:7.0->8.0",
+          "hard_violations": [],
+          "iteration": 4,
+          "losses": {
+            "edge": 0.101666666667,
+            "pixel": 0.101666666667,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.066083333333
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[0].y:9.0->8.0",
+          "hard_violations": [],
+          "iteration": 5,
+          "losses": {
+            "edge": 0.089166666667,
+            "pixel": 0.089166666667,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.057958333333
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[1].stroke_width:1.0->2.0",
+          "hard_violations": [],
+          "iteration": 6,
+          "losses": {
+            "edge": 0.039166666667,
+            "pixel": 0.039166666667,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.025458333333
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[1].x2:37.0->40.0",
+          "hard_violations": [],
+          "iteration": 7,
+          "losses": {
+            "edge": 0.031666666667,
+            "pixel": 0.031666666667,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.020583333333
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[1].y1:28.0->30.0",
+          "hard_violations": [],
+          "iteration": 8,
+          "losses": {
+            "edge": 0.025,
+            "pixel": 0.025,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.01625
+          },
+          "phase": "continuous_coarse"
+        },
+        {
+          "accepted": true,
+          "change": "element[1].y2:10.0->8.0",
+          "hard_violations": [],
+          "iteration": 9,
+          "losses": {
+            "edge": 0.0,
+            "pixel": 0.0,
+            "semantic": 0.0,
+            "structure": 0.0,
+            "total": 0.0
+          },
+          "phase": "continuous_coarse"
+        }
+      ],
+      "iterations_used": 9,
+      "rejected_hypotheses": [],
+      "schema_version": "multi_objective_optimization_report_v1",
+      "selected_hypothesis_id": "initial",
+      "status": "optimized",
+      "termination_reason": "converged",
+      "weights": {
+        "edge": 0.25,
+        "pixel": 0.4,
+        "semantic": 0.15,
+        "structure": 0.2
+      }
+    }
+  },
+  "schema_version": "multi_objective_optimization_acceptance_v1",
+  "summary": {
+    "fixtures": 3,
+    "hard_constraint_regressions": 0,
+    "improved": 2
+  }
+}
