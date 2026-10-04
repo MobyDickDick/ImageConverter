@@ -368,6 +368,11 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         and _has_any(desc, ("vertikal gespiegelt", "senkrecht gespiegelt"))
         and _has_any(desc, ("quadrat", "viereck"))
     )
+    rotated_180_square_kelle_hint = (
+        "kelle" in desc
+        and _has_any(desc, ("180° gedreht", "180 grad gedreht", "um 180°", "um 180 grad"))
+        and _has_any(desc, ("quadrat", "viereck"))
+    )
     left_rotated_square_kelle_t_hint = (
         "kelle" in desc
         and _has_any(desc, ("nach links gedreht", "90° nach links", "90 grad nach links"))
@@ -706,6 +711,31 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "label_fill": "#dedede",
                 "font_size": 0.440,
                 "font_weight": "600",
+            }
+        )
+        return elements
+
+    if rotated_180_square_kelle_hint:
+        elements.append(
+            {
+                "kind": "Rotated180SquareKelleGlyph",
+                "id": "rotated_180_square_kelle",
+                "body_bbox": [0.020, 0.400, 0.960, 0.560],
+                "body_fill": "#e11e48",
+                "body_stroke": "#a0a0a0",
+                "body_stroke_width": 0.040,
+                "connector": [[0.500, 0.000], [0.500, 0.400]],
+                "connector_stroke": "#808080",
+                "connector_width": 0.080,
+                "transform": _generic_transform(rotation_deg=180),
+                "primitive_decomposition": {
+                    "schema_version": "square_kelle_primitive_decomposition_v1",
+                    "orientation": "bottom",
+                    "primitives": [
+                        {"role": "square_body", "kind": "RectBorder"},
+                        {"role": "handle_connector", "kind": "LineSegment"},
+                    ],
+                },
             }
         )
         return elements
@@ -1830,6 +1860,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                     )
         elif kind in {
             "UprightSquareKelleGlyph",
+            "Rotated180SquareKelleGlyph",
             "VerticallyMirroredSquareKelleTGlyph",
             "LeftRotatedSquareKelleTGlyph",
             "RightFacingSquareKellePGlyph",
@@ -1837,6 +1868,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
         }:
             default_body_bbox = {
                 "UprightSquareKelleGlyph": [0.020, 0.040, 0.960, 0.560],
+                "Rotated180SquareKelleGlyph": [0.020, 0.400, 0.960, 0.560],
                 "VerticallyMirroredSquareKelleTGlyph": [0.020, 0.400, 0.960, 0.580],
                 "LeftRotatedSquareKelleTGlyph": [0.378, 0.040, 0.467, 0.920],
                 "RightFacingSquareKellePGlyph": [0.400, 0.040, 0.540, 0.920],
@@ -1858,6 +1890,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             connector_sw = float(element.get("connector_width", 0.080)) * min(w, h)
             default_connector = {
                 "UprightSquareKelleGlyph": [[0.500, 0.600], [0.500, 1.000]],
+                "Rotated180SquareKelleGlyph": [[0.500, 0.000], [0.500, 0.400]],
                 "VerticallyMirroredSquareKelleTGlyph": [[0.500, 0.000], [0.500, 0.400]],
                 "LeftRotatedSquareKelleTGlyph": [[0.000, 0.500], [0.378, 0.500]],
                 "RightFacingSquareKellePGlyph": [[0.000, 0.500], [0.400, 0.500]],
@@ -1881,7 +1914,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 f'width="{_fmt(body_w)}" height="{_fmt(body_h)}" fill="{body_fill}" '
                 f'stroke="{body_stroke}" stroke-width="{_fmt(body_sw)}"/>'
             )
-            if kind == "UprightSquareKelleGlyph":
+            if kind in {"UprightSquareKelleGlyph", "Rotated180SquareKelleGlyph"}:
                 continue
             default_label_center = {
                 "VerticallyMirroredSquareKelleTGlyph": [0.500, 0.660],

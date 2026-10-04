@@ -27,6 +27,13 @@ akzeptierten SVGs vor und nach der Änderung sowie den Gate-Status ausweisen.
 Beim nächsten vollständigen Qualitätsreview ist die Liste wieder auf maximal
 fünf aktive Einträge aufzufüllen.
 
+Zwischenstand `AC0713_1_S` (2026-10-04): Der 180°-gedrehte Square-Kellen-Pfad
+ist nun katalogfrei als `Rotated180SquareKelleGlyph` registriert und wird nicht
+mehr durch die freie Kreis-Badge-Heuristik überschrieben. Der isolierte Recheck
+verbessert `mean_delta2` von `24899.021484` auf `11805.333008`, bleibt aber mit
+strukturiertem Restfehler offen; Details stehen in
+`docs/next_arbeitspaket_2026-10-04_ac0713_1_s.md`.
+
 ## Ad-hoc Plan-B-Aufgabe (2026-07-05)
 
 - `AC0512_1_L` – vom Nutzer angefragte Generalisierungsaufgabe für ein querformatiges rotes/oranges Rechteck-Icon mit grauem Rand und drei parallelen weissen Diagonalstreifen. Die Aufgabe ist als separater Plan-B-Contract dokumentiert in `docs/next_arbeitspaket_2026-07-05_runVI.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
