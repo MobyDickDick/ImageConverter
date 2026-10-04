@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-04, nach ZG7.6-Pilot)
+## Aktuelle Kandidaten (Stand: 2026-10-04, nach Quadrat-Kellen-Recheck)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -17,21 +17,29 @@ der maschinenlesbare Beleg steht in
 `artifacts/evaluation/semantic_only_plan_b_pilot_v1/report_2026-10-04.json`.
 Die nächste Rotation beginnt deshalb mit dem nächsten weiterhin offenen Fall.
 
-1. `AC0713_1_S` – `mean_delta2=24899.021484`, `normalized_mse=0.127638`.
+1. `DLG0010_1` – `mean_delta2=23882.488281`, `normalized_mse=0.122427`.
 2. `AC0724_1_S` – `mean_delta2=22276.960938`, `normalized_mse=0.114197`.
 3. `AC0252_1` – `mean_delta2=20853.748047`, `normalized_mse=0.106901`.
 4. `AC0731_1_L` – `mean_delta2=18881.216797`, `normalized_mse=0.096790`.
+5. `GE1003_M` – `mean_delta2=17817.699219`, `normalized_mse=0.091338`.
 
-Die nächste Rotation beginnt mit `AC0713_1_S` und muss den Wert des tatsächlich
+Die nächste Rotation beginnt mit `DLG0010_1` und muss den Wert des tatsächlich
 akzeptierten SVGs vor und nach der Änderung sowie den Gate-Status ausweisen.
-Beim nächsten vollständigen Qualitätsreview ist die Liste wieder auf maximal
-fünf aktive Einträge aufzufüllen.
+Der vollständige Review über `688` renderbare Paare steht unter
+`artifacts/evaluation/rotated_square_kelle_recheck_v1/full_review/`.
+Er schließt die beiden separat belegten Gate-Passes `AC0554_2_L` und
+`AC0713_1_S` explizit aus: Die historische Sammelausgabe enthält für beide noch
+alte SVGs; die akzeptierten Ergebnisse liegen in den jeweiligen Evaluationen.
 
-Zwischenstand `AC0713_1_S` (2026-10-04): Der 180°-gedrehte Square-Kellen-Pfad
-ist nun katalogfrei als `Rotated180SquareKelleGlyph` registriert und wird nicht
-mehr durch die freie Kreis-Badge-Heuristik überschrieben. Der isolierte Recheck
-verbessert `mean_delta2` von `24899.021484` auf `11805.333008`, bleibt aber mit
-strukturiertem Restfehler offen; Details stehen in
+Abschluss des Runtime-Registrierungspakets `AC0713_1_S` (2026-10-04):
+`Rotated180SquareKelleGlyph` gehört nun auch zu den beiden Runtime-Kind-Sets.
+Das gespeicherte CLI-SVG erreicht `mean_delta2=2194.829346`,
+`normalized_mse=0.011251`, `edge_alignment=0.734084` und besteht beide harten
+Gates. Die M-/L-Holdouts bestehen ebenfalls, ohne Metrikregression gegenüber
+dem eingefrorenen Vorlauf. Der Beleg steht in
+`artifacts/evaluation/rotated_square_kelle_recheck_v1/report_2026-10-04.json`.
+Die helle Innenmarkierung bleibt eine dokumentierte visuelle Qualitätsfolge;
+das CLI meldet dafür weiterhin konzentrierten Restfehler. Details stehen in
 `docs/next_arbeitspaket_2026-10-04_ac0713_1_s.md`.
 
 ## Ad-hoc Plan-B-Aufgabe (2026-07-05)

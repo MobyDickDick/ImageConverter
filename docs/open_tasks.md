@@ -12,6 +12,19 @@ focused on the actual project scope.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
+### Aktueller Plan-B-Stand (2026-10-04)
+
+Das Runtime-Registrierungspaket für die 180°-Quadrat-Kelle ist abgeschlossen:
+`Rotated180SquareKelleGlyph` wird jetzt in beiden Runtime-Kind-Sets geführt.
+Das gespeicherte S-CLI-SVG erreicht `mean_delta2=2194.829346` und besteht beide
+harten Gates; M-/L-Holdouts bestehen ebenfalls ohne Metrikregression.
+Vier neue Regressionstests sichern Größenübertragung, Umbenennungsinvarianz
+und den Verzicht auf Sample-SVGs. Der vollständige Review über `688` Paare
+führt die Rotation jetzt mit `DLG0010_1` fort. Die nicht beschriebene helle
+Innenmarkierung bleibt als visueller Folgepunkt dokumentiert; die bestehende
+CLI-Restfehlerwarnung bleibt sichtbar. Details und Repro stehen in
+`docs/next_arbeitspaket_2026-10-04_ac0713_1_s.md`.
+
 Das detaillierte Backlog mit Definition of Done, Abhängigkeiten und
 Akzeptanzkriterien steht in `docs/image_description_only_tasks.md`.
 
