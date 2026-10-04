@@ -13,6 +13,7 @@ from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_help
 from src.iCCModules import imageCompositeConverterGeometryIrOptimizer as geometry_ir_optimizer
 from tools.perception_detection_contract import build_perception_seeded_geometry_ir
 from src.iCCModules.imageCompositeConverterNestedPanel import fit_nested_panel
+from src.iCCModules.imageCompositeConverterInteriorMark import fit_rectilinear_interior_mark
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1080,6 +1081,7 @@ DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS = {
     "LeftRotatedCircularDamperGlyph",
     "UprightSquareKelleGlyph",
     "Rotated180SquareKelleGlyph",
+    "MainDiagonalMirroredSquareKelleGlyph",
     "RightRotatedSquareKellePGlyph",
     "RightFacingSquareKellePGlyph",
     "LeftRotatedSquareKelleTGlyph",
@@ -1100,6 +1102,7 @@ SEMANTIC_GEOMETRY_IR_KINDS = {
     "LeftRotatedCircularDamperGlyph",
     "UprightSquareKelleGlyph",
     "Rotated180SquareKelleGlyph",
+    "MainDiagonalMirroredSquareKelleGlyph",
     "RightRotatedSquareKellePGlyph",
     "RightFacingSquareKellePGlyph",
     "LeftRotatedSquareKelleTGlyph",
@@ -1706,6 +1709,21 @@ def runNonCompositeIterationImpl(
                             if key not in {"geometry_ir", "rendered"}
                         }
                     description_status = "non_composite_description_geometry_ir"
+                    interior_mark = fit_rectilinear_interior_mark(
+                        description_geometry_ir, image=perc_img, description=description,
+                        render_fn=lambda candidate_ir: render_svg_to_numpy_fn(
+                            geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, candidate_ir), width, height),
+                        error_fn=lambda rendered: calculate_error_fn(perc_img, rendered),
+                    )
+                    if interior_mark is not None:
+                        description_geometry_ir = interior_mark["geometry_ir"]
+                        description_rendered = interior_mark["rendered"]
+                        description_error = interior_mark["final_error"]
+                        geometry_ir_svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, description_geometry_ir)
+                        params["optimized_geometry_ir"] = description_geometry_ir
+                        params["interior_mark_registration"] = {
+                            key: value for key, value in interior_mark.items() if key not in {"geometry_ir", "rendered"}
+                        }
                     candidates.append(
                         {
                             "status": description_status,

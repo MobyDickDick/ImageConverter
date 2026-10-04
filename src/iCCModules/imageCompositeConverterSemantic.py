@@ -436,6 +436,7 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
             "MainDiagonalMirroredTopKelleThreeWayValveGlyph",
             "UprightSquareKelleGlyph",
             "Rotated180SquareKelleGlyph",
+            "MainDiagonalMirroredSquareKelleGlyph",
             "VerticallyMirroredSquareKelleTGlyph",
             "LeftRotatedSquareKelleTGlyph",
             "RightFacingSquareKellePGlyph",

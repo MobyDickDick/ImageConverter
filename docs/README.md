@@ -6,6 +6,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
   geprüfte Merge-Folgen, beibehaltene Verträge und gezielt verworfene
   Altartefakt-/Klassifikationspfade.
 - [Forms Model (Circle + Handle)](Forms.md)
+- [Diagonal gespiegelte Quadrat-Kelle: Raster-Innenmarkierung und Gate-Abnahme (2026-10-04)](next_arbeitspaket_2026-10-04_ac0724_1_s.md)
 - [Quadrat-Kelle: Runtime-Registrierung, Größen-Holdouts und Gate-Abnahme (2026-10-04)](next_arbeitspaket_2026-10-04_ac0713_1_s.md)
 - [A7 Mini-Repro AC0840 + gekoppelte Plan-B-Aufgabe – Run 13 (2026-05-15)](a7_ac0840_minirepro_2026-05-15_run13_summary.md)
 - [A7 Mini-Repro AC0840 (Follow-up) + gekoppelte Plan-B-Aufgabe – Run 16 (2026-05-15)](a7_ac0840_minirepro_2026-05-15_run16_summary.md)
