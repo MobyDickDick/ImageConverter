@@ -6,7 +6,6 @@ import json
 import os
 from pathlib import Path
 import random
-import runpy
 import shutil
 import subprocess
 import sys
@@ -20,13 +19,14 @@ from tools.evaluate_nested_panel_recheck import evaluate
 def main() -> int:
     if len(sys.argv) > 1 and sys.argv[1] == '--_worker':
         from src.iCCModules import imageCompositeConverterNonCompositeRuntime as runtime
+        from src.iCCModules import imageCompositeConverterCli as cli
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
         if sys.argv[2] == 'before':
             runtime.fit_nested_panel = lambda *args, **kwargs: None
         random.seed(0)
         np.random.seed(0)
-        sys.argv = ['imageCompositeConverterCli', *sys.argv[3:]]
-        runpy.run_module('src.iCCModules.imageCompositeConverterCli', run_name='__main__')
-        return 0
+        return cli.main(sys.argv[3:])
 
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('manifest', type=Path)

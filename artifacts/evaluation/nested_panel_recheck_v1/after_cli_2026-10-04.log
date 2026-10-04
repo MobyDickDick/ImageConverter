@@ -1,54 +1,53 @@
-<frozen runpy>:128: RuntimeWarning: 'src.iCCModules.imageCompositeConverterCli' found in sys.modules after import of package 'src.iCCModules', but prior to execution of 'src.iCCModules.imageCompositeConverterCli'; this may result in unpredictable behaviour
 [INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
 [INFO] Kein interaktives Terminal erkannt; verwende Bereich von '(Anfang)' bis '(Ende)'.
 [INFO] Konvertiere pilot_panel.JPG | Parameter: Iterationen=64, max. Validierungsrunden=8
 
 --- Verarbeite pilot_panel.JPG ---
-Bildbeschreibung: Rechteckfl‰che mit heller rechteckiger Innenfl‰che.
+Bildbeschreibung: Rechteckfl√É¬§che mit heller rechteckiger Innenfl√É¬§che.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Zwei verschachtelte Rechteckfl‰chen aus Rasterbefund registriert.
-[WARN] pilot_panel.JPG: Differenzbild-Fehlerpixel sind nicht zuf‰llig verteilt; Variante bleibt f¸r einen Qualit‰ts-Nachbesserungslauf geˆffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.945455, localized_error_fraction=0.805202).
-[INFO] Konvertiert pilot_panel.JPG | Parameter: mode=auto, label=M, variant_name=PILOT_PANEL | Qualit‰t: Optimierungsfehler/Pixel=0.002412, Mean-Delta≤=468.700897, RGB-RMSE/Kanal=12.499345, Raumscore=1544.932319, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef¸hrt=64/64 | Dauer=0.1s
+  -> Zwei verschachtelte Rechteckfl√§chen aus Rasterbefund registriert.
+[WARN] pilot_panel.JPG: Differenzbild-Fehlerpixel sind nicht zuf√§llig verteilt; Variante bleibt f√ºr einen Qualit√§ts-Nachbesserungslauf ge√∂ffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.945455, localized_error_fraction=0.805202).
+[INFO] Konvertiert pilot_panel.JPG | Parameter: mode=auto, label=M, variant_name=PILOT_PANEL | Qualit√§t: Optimierungsfehler/Pixel=0.002412, Mean-Delta¬≤=468.700897, RGB-RMSE/Kanal=12.499345, Raumscore=1544.932319, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef√ºhrt=64/64 | Dauer=0.1s
 [INFO] Konvertiere renamed_holdout.JPG | Parameter: Iterationen=64, max. Validierungsrunden=8
 
 --- Verarbeite renamed_holdout.JPG ---
-Bildbeschreibung: Rechteckfl‰che mit heller rechteckiger Innenfl‰che.
+Bildbeschreibung: Rechteckfl√É¬§che mit heller rechteckiger Innenfl√É¬§che.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Zwei verschachtelte Rechteckfl‰chen aus Rasterbefund registriert.
-[WARN] renamed_holdout.JPG: Differenzbild-Fehlerpixel sind nicht zuf‰llig verteilt; Variante bleibt f¸r einen Qualit‰ts-Nachbesserungslauf geˆffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.581081, localized_error_fraction=0.773213).
-[INFO] Konvertiert renamed_holdout.JPG | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT | Qualit‰t: Optimierungsfehler/Pixel=0.001115, Mean-Delta≤=48.554668, RGB-RMSE/Kanal=4.023045, Raumscore=139.242216, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef¸hrt=64/64 | Dauer=0.0s
+  -> Zwei verschachtelte Rechteckfl√§chen aus Rasterbefund registriert.
+[WARN] renamed_holdout.JPG: Differenzbild-Fehlerpixel sind nicht zuf√§llig verteilt; Variante bleibt f√ºr einen Qualit√§ts-Nachbesserungslauf ge√∂ffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.581081, localized_error_fraction=0.773213).
+[INFO] Konvertiert renamed_holdout.JPG | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT | Qualit√§t: Optimierungsfehler/Pixel=0.001115, Mean-Delta¬≤=48.554668, RGB-RMSE/Kanal=4.023045, Raumscore=139.242216, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef√ºhrt=64/64 | Dauer=0.1s
 [INFO] Konvertiere pilot_panel.JPG | Parameter: Iterationen=65, max. Validierungsrunden=7
 
 --- Verarbeite pilot_panel.JPG ---
-Bildbeschreibung: Rechteckfl‰che mit heller rechteckiger Innenfl‰che.
+Bildbeschreibung: Rechteckfl√É¬§che mit heller rechteckiger Innenfl√É¬§che.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Zwei verschachtelte Rechteckfl‰chen aus Rasterbefund registriert.
-[WARN] pilot_panel.JPG: Differenzbild-Fehlerpixel sind nicht zuf‰llig verteilt; Variante bleibt f¸r einen Qualit‰ts-Nachbesserungslauf geˆffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.945455, localized_error_fraction=0.805202).
-[INFO] Konvertiert pilot_panel.JPG | Parameter: mode=auto, label=M, variant_name=PILOT_PANEL | Qualit‰t: Optimierungsfehler/Pixel=0.002412, Mean-Delta≤=468.700897, RGB-RMSE/Kanal=12.499345, Raumscore=1544.932319, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef¸hrt=65/65 | Dauer=0.0s
+  -> Zwei verschachtelte Rechteckfl√§chen aus Rasterbefund registriert.
+[WARN] pilot_panel.JPG: Differenzbild-Fehlerpixel sind nicht zuf√§llig verteilt; Variante bleibt f√ºr einen Qualit√§ts-Nachbesserungslauf ge√∂ffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.945455, localized_error_fraction=0.805202).
+[INFO] Konvertiert pilot_panel.JPG | Parameter: mode=auto, label=M, variant_name=PILOT_PANEL | Qualit√§t: Optimierungsfehler/Pixel=0.002412, Mean-Delta¬≤=468.700897, RGB-RMSE/Kanal=12.499345, Raumscore=1544.932319, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef√ºhrt=65/65 | Dauer=0.0s
 [INFO] Konvertiere renamed_holdout.JPG | Parameter: Iterationen=65, max. Validierungsrunden=7
 
 --- Verarbeite renamed_holdout.JPG ---
-Bildbeschreibung: Rechteckfl‰che mit heller rechteckiger Innenfl‰che.
+Bildbeschreibung: Rechteckfl√É¬§che mit heller rechteckiger Innenfl√É¬§che.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Zwei verschachtelte Rechteckfl‰chen aus Rasterbefund registriert.
-[WARN] renamed_holdout.JPG: Differenzbild-Fehlerpixel sind nicht zuf‰llig verteilt; Variante bleibt f¸r einen Qualit‰ts-Nachbesserungslauf geˆffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.581081, localized_error_fraction=0.773213).
-[INFO] Konvertiert renamed_holdout.JPG | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT | Qualit‰t: Optimierungsfehler/Pixel=0.001115, Mean-Delta≤=48.554668, RGB-RMSE/Kanal=4.023045, Raumscore=139.242216, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef¸hrt=65/65 | Dauer=0.0s
+  -> Zwei verschachtelte Rechteckfl√§chen aus Rasterbefund registriert.
+[WARN] renamed_holdout.JPG: Differenzbild-Fehlerpixel sind nicht zuf√§llig verteilt; Variante bleibt f√ºr einen Qualit√§ts-Nachbesserungslauf ge√∂ffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.581081, localized_error_fraction=0.773213).
+[INFO] Konvertiert renamed_holdout.JPG | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT | Qualit√§t: Optimierungsfehler/Pixel=0.001115, Mean-Delta¬≤=48.554668, RGB-RMSE/Kanal=4.023045, Raumscore=139.242216, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef√ºhrt=65/65 | Dauer=0.0s
 [INFO] Konvertiere pilot_panel.JPG | Parameter: Iterationen=92, max. Validierungsrunden=9
 
 --- Verarbeite pilot_panel.JPG ---
-Bildbeschreibung: Rechteckfl‰che mit heller rechteckiger Innenfl‰che.
+Bildbeschreibung: Rechteckfl√É¬§che mit heller rechteckiger Innenfl√É¬§che.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Zwei verschachtelte Rechteckfl‰chen aus Rasterbefund registriert.
-[WARN] pilot_panel.JPG: Differenzbild-Fehlerpixel sind nicht zuf‰llig verteilt; Variante bleibt f¸r einen Qualit‰ts-Nachbesserungslauf geˆffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.945455, localized_error_fraction=0.805202).
-[INFO] Konvertiert pilot_panel.JPG | Parameter: mode=auto, label=M, variant_name=PILOT_PANEL | Qualit‰t: Optimierungsfehler/Pixel=0.002412, Mean-Delta≤=468.700897, RGB-RMSE/Kanal=12.499345, Raumscore=1544.932319, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef¸hrt=92/92 | Dauer=0.0s
+  -> Zwei verschachtelte Rechteckfl√§chen aus Rasterbefund registriert.
+[WARN] pilot_panel.JPG: Differenzbild-Fehlerpixel sind nicht zuf√§llig verteilt; Variante bleibt f√ºr einen Qualit√§ts-Nachbesserungslauf ge√∂ffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.945455, localized_error_fraction=0.805202).
+[INFO] Konvertiert pilot_panel.JPG | Parameter: mode=auto, label=M, variant_name=PILOT_PANEL | Qualit√§t: Optimierungsfehler/Pixel=0.002412, Mean-Delta¬≤=468.700897, RGB-RMSE/Kanal=12.499345, Raumscore=1544.932319, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef√ºhrt=92/92 | Dauer=0.0s
 [INFO] Konvertiere renamed_holdout.JPG | Parameter: Iterationen=92, max. Validierungsrunden=9
 
 --- Verarbeite renamed_holdout.JPG ---
-Bildbeschreibung: Rechteckfl‰che mit heller rechteckiger Innenfl‰che.
+Bildbeschreibung: Rechteckfl√É¬§che mit heller rechteckiger Innenfl√É¬§che.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Zwei verschachtelte Rechteckfl‰chen aus Rasterbefund registriert.
-[WARN] renamed_holdout.JPG: Differenzbild-Fehlerpixel sind nicht zuf‰llig verteilt; Variante bleibt f¸r einen Qualit‰ts-Nachbesserungslauf geˆffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.581081, localized_error_fraction=0.773213).
-[INFO] Konvertiert renamed_holdout.JPG | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT | Qualit‰t: Optimierungsfehler/Pixel=0.001115, Mean-Delta≤=48.554668, RGB-RMSE/Kanal=4.023045, Raumscore=139.242216, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef¸hrt=92/92 | Dauer=0.0s
-[INFO] ‹bersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\dlg-reproduction3\after\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\dlg-reproduction3\after\reports\overview_svg_tiles.png
+  -> Zwei verschachtelte Rechteckfl√§chen aus Rasterbefund registriert.
+[WARN] renamed_holdout.JPG: Differenzbild-Fehlerpixel sind nicht zuf√§llig verteilt; Variante bleibt f√ºr einen Qualit√§ts-Nachbesserungslauf ge√∂ffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.581081, localized_error_fraction=0.773213).
+[INFO] Konvertiert renamed_holdout.JPG | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT | Qualit√§t: Optimierungsfehler/Pixel=0.001115, Mean-Delta¬≤=48.554668, RGB-RMSE/Kanal=4.023045, Raumscore=139.242216, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef√ºhrt=92/92 | Dauer=0.0s
+[INFO] √úbersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\dlg-reproduction-final\after\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\dlg-reproduction-final\after\reports\overview_svg_tiles.png
 
-Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\dlg-reproduction3\after
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\dlg-reproduction-final\after
