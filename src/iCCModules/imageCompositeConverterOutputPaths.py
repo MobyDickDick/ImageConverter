@@ -5,6 +5,11 @@ from __future__ import annotations
 import os
 
 
+def _output_subdir(output_root: str, folder_name: str) -> str:
+    trimmed_root = output_root.rstrip("/\\")
+    return f"{trimmed_root}/{folder_name}"
+
+
 def defaultConvertedSymbolsRootImpl(*, module_file: str) -> str:
     repo_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(module_file))))
     return os.path.join(repo_root, "artifacts", "converted_images")
@@ -13,24 +18,24 @@ def defaultConvertedSymbolsRootImpl(*, module_file: str) -> str:
 def convertedSvgOutputDirImpl(output_root: str) -> str:
     # Keep the historical folder name with the current typo because downstream
     # adjustment tooling expects this exact directory.
-    return os.path.join(output_root, "converted_svgs")
+    return _output_subdir(output_root, "converted_svgs")
 
 
 def diffOutputDirImpl(output_root: str) -> str:
-    return os.path.join(output_root, "diff_pngs")
+    return _output_subdir(output_root, "diff_pngs")
 
 
 def convertedPngOutputDirImpl(output_root: str) -> str:
-    return os.path.join(output_root, "converted_images_png")
+    return _output_subdir(output_root, "converted_images_png")
 
 
 def reportsOutputDirImpl(output_root: str) -> str:
-    return os.path.join(output_root, "reports")
+    return _output_subdir(output_root, "reports")
 
 
 def failedSvgOutputDirImpl(output_root: str) -> str:
-    return os.path.join(output_root, "converted_svg_failed")
+    return _output_subdir(output_root, "converted_svg_failed")
 
 
 def failedPngOutputDirImpl(output_root: str) -> str:
-    return os.path.join(output_root, "converted_images_png_failed")
+    return _output_subdir(output_root, "converted_images_png_failed")

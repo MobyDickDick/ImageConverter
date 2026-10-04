@@ -5,6 +5,13 @@ import os
 import subprocess
 from pathlib import Path
 
+import pytest
+
+pytestmark = pytest.mark.skipif(
+    os.name == "nt",
+    reason="Shell-runner integration tests require a POSIX shell.",
+)
+
 
 def _write_fake_python(path: Path) -> None:
     path.write_text(

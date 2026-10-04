@@ -267,6 +267,22 @@ PY
 # neue erfolgreich konvertierte Bild-IDs in artifacts/converted_images/reports/successful_conversions.txt eintragen; Qualitätswerte werden danach automatisch an diese Einträge ergänzt
 ```
 
+Unter Windows kann derselbe lokale Einstiegspunkt mit automatischem `.venv`-
+Setup verwendet werden:
+
+```bat
+run_tests.bat
+run_tests.bat core-green
+run_tests.bat extended
+run_tests.bat all
+```
+
+`run_tests.bat` installiert die lokalen Test-Abhängigkeiten aus
+`requirements-dev.txt` in `.venv`. Mit `--no-install` wird eine bereits
+vorbereitete Umgebung unverändert verwendet. Das Profil `all` aktiviert auch die
+schweren Conversion-Tests; für kurze Entwicklungszyklen ist `core-green`
+gedacht.
+
 ## VS Code / Windows troubleshooting
 
 Wenn VS Code beim Starten mit `debugpy` einen Fehler wie `Couldn't spawn debuggee: [WinError 5] Zugriff verweigert` meldet und in der geloggten `Command line` nur der Ordner `...\.venv\Scripts` statt `...\.venv\Scripts\python.exe` auftaucht, ist meist der Python-Interpreter falsch ausgewählt.

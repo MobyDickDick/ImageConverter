@@ -143,7 +143,7 @@ def build_plan(source_file: Path, output_dir: Path, module_prefix: str) -> dict[
                 "depends_on_functions": sorted(dict.fromkeys(internal_calls + internal_reads)),
                 "depends_on_external_names": external_reads,
                 "suggested_module": target_module,
-                "suggested_file": str(target_file),
+                "suggested_file": target_file.as_posix(),
             }
         )
 

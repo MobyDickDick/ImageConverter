@@ -71,7 +71,7 @@ def _first_existing(root: Path, directories: Sequence[Path], filename: str) -> P
 
 
 def _relative(path: Path | None, root: Path) -> str | None:
-    return str(path.relative_to(root)) if path is not None else None
+    return path.relative_to(root).as_posix() if path is not None else None
 
 
 def review_variant(

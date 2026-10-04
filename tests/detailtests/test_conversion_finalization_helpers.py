@@ -330,7 +330,7 @@ def test_canonicalize_failed_attempt_svg_names_from_lowercase_prefix(tmp_path):
     finalization_helpers._canonicalizeFailedAttemptSvgNames(svg_out_dir=str(svg_dir))
 
     assert (svg_dir / "Failed_AC0302_2_M.svg").exists()
-    assert not (svg_dir / "failed_AC0302_2_M.svg").exists()
+    assert "failed_AC0302_2_M.svg" not in {path.name for path in svg_dir.iterdir()}
 
 def test_archive_successful_conversion_artifacts_moves_image_and_copies_svg(tmp_path):
     reports_dir = tmp_path / "src" / "artifacts" / "converted_images" / "reports"

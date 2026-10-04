@@ -151,7 +151,7 @@ def _reconverted_svg_path(family_out: Path, variant: str) -> Path | None:
 
 def _available_reconverted_svgs(family_out: Path) -> list[str]:
     return sorted(
-        str(path.relative_to(family_out))
+        path.relative_to(family_out).as_posix()
         for root in (
             family_out / "converted_svgs",
             family_out / "reports" / "conversion_bestlist_snapshots",
