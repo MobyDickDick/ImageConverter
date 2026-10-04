@@ -1,0 +1,292 @@
+{
+  "baseline": {
+    "baseline_sha256": "87f03ab201bc356e4e8fac524b981ff1a84ee9d4245388deabe8c29f28efadfa",
+    "cases": {
+      "pilot_panel": {
+        "dimensions": {
+          "height": 25,
+          "width": 90
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4938013255596161,
+          "error_per_pixel": 0.14606050957964886,
+          "object_mask_iou": 0.24180790960451978,
+          "semantic_score": 0.0
+        }
+      },
+      "renamed_holdout": {
+        "dimensions": {
+          "height": 25,
+          "width": 90
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.24656790494918823,
+          "error_per_pixel": 0.004504006872356786,
+          "object_mask_iou": 0.2431818181818182,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "CLI ablation with nested-panel detector disabled; all other runtime paths unchanged",
+      "commit": "3b95721f2",
+      "description_note": "Catalog-free observed two-region contract; original XML's grey square wording contradicts the colored raster. This gate does not certify that inaccurate wording.",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "pilot_panel": "bc23e7d717994a84ca7ab9969503257915a2a3f72ec3dbbd598799c6e3dcea97",
+        "renamed_holdout": "d5685743426f5506250de75d4a38217c1973bc3d178407c766a510827e71af67"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.12.14, numpy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 468.7008972167969,
+      "after_svg": "after/pilot_panel.svg",
+      "after_svg_sha256": "569513d71cc1fc5947fd323ad087fac4e851f03fa1cc1b6ae26a0ca6ee758f4e",
+      "before_mean_delta2": 28492.75390625,
+      "before_svg": "before/pilot_panel.svg",
+      "before_svg_sha256": "a1cbf4e1b15f658333e1277eca6bdef1796bbd8670a0a839cb6fded01a059917",
+      "case_id": "pilot_panel",
+      "image": "../../images_to_convert/DLG0010_1.JPG",
+      "input_sha256": "bc23e7d717994a84ca7ab9969503257915a2a3f72ec3dbbd598799c6e3dcea97",
+      "mask_luminance_split": 176.33333333333331,
+      "role": "target"
+    },
+    {
+      "after_mean_delta2": 48.55466842651367,
+      "after_svg": "after/renamed_holdout.svg",
+      "after_svg_sha256": "6161302accf990518e552b335c524dfb7761a5fec6f95c4d42c186b10aed0a88",
+      "before_mean_delta2": 878.619140625,
+      "before_svg": "before/renamed_holdout.svg",
+      "before_svg_sha256": "3573d251c1c0f858889000aa0388beac054f87d6e6fd17cfeee48fa7ab78978b",
+      "case_id": "renamed_holdout",
+      "image": "../../images_to_convert/DLG0010.JPG",
+      "input_sha256": "d5685743426f5506250de75d4a38217c1973bc3d178407c766a510827e71af67",
+      "mask_luminance_split": 237.15,
+      "role": "holdout"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "mask": "input luminance percentile midpoint",
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "87f03ab201bc356e4e8fac524b981ff1a84ee9d4245388deabe8c29f28efadfa",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9036124348640442,
+          "error_per_pixel": 0.0024026702407627673,
+          "object_mask_iou": 1.0,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4938013255596161,
+          "error_per_pixel": 0.14606050957964886,
+          "object_mask_iou": 0.24180790960451978,
+          "semantic_score": 0.0
+        },
+        "case_id": "pilot_panel",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0024026702407627673,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9753,
+            "edge_alignment": 0.9036,
+            "pixel_similarity": 0.9976,
+            "semantic_score": 1.0,
+            "structure_score": 1.0
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.7319118976593018,
+          "error_per_pixel": 0.0002489025678662754,
+          "object_mask_iou": 0.9897377423033067,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.24656790494918823,
+          "error_per_pixel": 0.004504006872356786,
+          "object_mask_iou": 0.2431818181818182,
+          "semantic_score": 0.0
+        },
+        "case_id": "renamed_holdout",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0002489025678662754,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9304,
+            "edge_alignment": 0.7319,
+            "pixel_similarity": 0.9998,
+            "semantic_score": 1.0,
+            "structure_score": 0.9897
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "CLI ablation with nested-panel detector disabled; all other runtime paths unchanged",
+      "commit": "3b95721f2",
+      "description_note": "Catalog-free observed two-region contract; original XML's grey square wording contradicts the colored raster. This gate does not certify that inaccurate wording.",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "pilot_panel": "bc23e7d717994a84ca7ab9969503257915a2a3f72ec3dbbd598799c6e3dcea97",
+        "renamed_holdout": "d5685743426f5506250de75d4a38217c1973bc3d178407c766a510827e71af67"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.12.14, numpy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 2,
+      "improved": 2,
+      "satisfactory": 2,
+      "technically_completed": 2
+    }
+  },
+  "schema_version": "nested_panel_recheck_v1",
+  "semantic_contract": "two nested rectangular color regions; light inset fully enclosed"
+}

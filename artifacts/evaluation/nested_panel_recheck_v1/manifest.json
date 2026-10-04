@@ -1,0 +1,28 @@
+{
+  "schema_version": "nested_panel_recheck_manifest_v1",
+  "description": "RechteckflÃ¤che mit heller rechteckiger InnenflÃ¤che.",
+  "provenance": {
+    "commit": "3b95721f2",
+    "baseline_mode": "CLI ablation with nested-panel detector disabled; all other runtime paths unchanged",
+    "seed": 0,
+    "toolchain": "CPython 3.12.14, numpy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0",
+    "execution_mode": "semantic-only",
+    "description_note": "Catalog-free observed two-region contract; original XML's grey square wording contradicts the colored raster. This gate does not certify that inaccurate wording."
+  },
+  "cases": [
+    {
+      "case_id": "pilot_panel",
+      "role": "target",
+      "image": "../../images_to_convert/DLG0010_1.JPG",
+      "before_svg": "before/pilot_panel.svg",
+      "after_svg": "after/pilot_panel.svg"
+    },
+    {
+      "case_id": "renamed_holdout",
+      "role": "holdout",
+      "image": "../../images_to_convert/DLG0010.JPG",
+      "before_svg": "before/renamed_holdout.svg",
+      "after_svg": "after/renamed_holdout.svg"
+    }
+  ]
+}

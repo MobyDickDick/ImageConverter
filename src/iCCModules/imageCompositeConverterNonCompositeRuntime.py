@@ -12,6 +12,7 @@ import numpy as np
 from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
 from src.iCCModules import imageCompositeConverterGeometryIrOptimizer as geometry_ir_optimizer
 from tools.perception_detection_contract import build_perception_seeded_geometry_ir
+from src.iCCModules.imageCompositeConverterNestedPanel import fit_nested_panel
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1525,8 +1526,14 @@ def runNonCompositeIterationImpl(
     selected_panel_trigger = ""
     selected_panel_print = ""
     selected_panel_locks_output_variation = False
-    if symmetric_valve_panel_svg is not None or plain_panel_svg is not None:
+    nested_panel = fit_nested_panel(
+        width, height, description=description, image=perc_img,
+        render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
+    )
+    if symmetric_valve_panel_svg is not None or plain_panel_svg is not None or nested_panel is not None:
         panel_candidates: list[dict[str, object]] = []
+        if nested_panel is not None:
+            panel_candidates.append(nested_panel)
         if plain_panel_svg is not None:
             plain_rendered = render_svg_to_numpy_fn(plain_panel_svg, width, height)
             if plain_rendered is None:
@@ -1567,7 +1574,9 @@ def runNonCompositeIterationImpl(
         symmetric_candidate = next((candidate for candidate in panel_candidates if candidate["kind"] == "symmetric"), None)
         resolved_signal = f"{resolved_variant_name} {description}".upper()
         force_ac0vr2_symmetric = "AC0VR2" in resolved_signal and "_ZL" not in resolved_signal
-        if force_ac0vr2_symmetric and symmetric_candidate is not None:
+        if nested_panel is not None and float(nested_panel['error']) <= min(float(candidate['error']) for candidate in panel_candidates):
+            selected_panel = nested_panel
+        elif force_ac0vr2_symmetric and symmetric_candidate is not None:
             # AC0VR2 panel variants (including AM/AB) are documented valve panels:
             # the plain panel can score slightly better numerically because it
             # suppresses thin foreground strokes, but that drops the semantic
@@ -1588,7 +1597,18 @@ def runNonCompositeIterationImpl(
         svg_content = str(selected_panel["svg"])
         svg_rendered = selected_panel["rendered"]
         svg_err = float(selected_panel["error"])
-        if selected_panel["kind"] == "symmetric":
+        if selected_panel["kind"] == "nested":
+            selected_panel_status = "non_composite_raster_nested_rectangles"
+            selected_panel_trigger = "trigger=raster_nested_rectangles_v1"
+            selected_panel_print = "  -> Zwei verschachtelte Rechteckflächen aus Rasterbefund registriert."
+            selected_panel_locks_output_variation = True
+            description_driven_algorithm_available = True
+            params['nested_panel_registration'] = {
+                'initial_error': nested_panel['initial_error'],
+                'final_error': nested_panel['error'],
+                'parameters': nested_panel['parameters'],
+            }
+        elif selected_panel["kind"] == "symmetric":
             selected_panel_status = "non_composite_symmetric_valve_panel"
             selected_panel_trigger = "trigger=ac0vr2_raster_symmetric_valve_panel"
             selected_panel_print = "  -> Fallback aktiv: verwende symmetrisches AC0VR2-Ventilpanel aus Rasterfarben."
