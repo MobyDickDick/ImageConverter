@@ -667,6 +667,42 @@ def test_render_geometry_ir_models_ac0701_body_and_lower_connector() -> None:
     assert "<image" not in svg
 
 
+def test_build_geometry_ir_models_180_rotated_square_kelle_without_catalog_id() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: 180° gedreht."
+    )
+
+    assert len(ir) == 1
+    assert ir[0]["kind"] == "Rotated180SquareKelleGlyph"
+    assert ir[0]["body_bbox"] == [0.020, 0.400, 0.960, 0.560]
+    assert ir[0]["connector"] == [[0.500, 0.000], [0.500, 0.400]]
+    assert "label" not in ir[0]
+    assert ir[0]["transform"] == {
+        "schema_version": "generic_geometry_transform_v1",
+        "rotation_deg": 180,
+    }
+    assert ir[0]["primitive_decomposition"]["primitives"] == [
+        {"role": "square_body", "kind": "RectBorder"},
+        {"role": "handle_connector", "kind": "LineSegment"},
+    ]
+
+
+def test_render_geometry_ir_models_180_rotated_square_kelle_without_text() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: 180° gedreht."
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(15, 25, ir)
+
+    assert 'id="rotated_180_square_kelle_connector"' in svg
+    assert 'id="rotated_180_square_kelle_body"' in svg
+    assert svg.count("<rect") == 1
+    assert svg.count("<path") == 1
+    assert "<text" not in svg
+    assert "rotate(" not in svg
+    assert "<image" not in svg
+
+
 def test_build_geometry_ir_models_ac0722_left_rotated_square_kelle_with_t() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. "

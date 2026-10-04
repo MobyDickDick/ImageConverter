@@ -189,6 +189,26 @@ def test_apply_semantic_badge_description_rules_extracts_generic_quoted_label() 
     assert "SEMANTIC: waagrechter Strich links vom Kreis" in params["elements"]
 
 
+def test_apply_semantic_badge_description_rules_keeps_explicit_square_kelle_geometry_ir() -> None:
+    params: dict[str, object] = {
+        "elements": [],
+        "geometry_ir": [{"kind": "Rotated180SquareKelleGlyph"}],
+    }
+
+    applied = helpers.apply_semantic_badge_description_rules(
+        desc=(
+            "Kelle mit Quadrat anstelle von Kreis oben. "
+            "Geometrische Variante: 180° gedreht. "
+            "Der Griff liegt auf einer Symmetrieachse des Kreises."
+        ),
+        params=params,
+    )
+
+    assert applied is False
+    assert "mode" not in params
+    assert params["elements"] == []
+
+
 def test_apply_semantic_badge_description_rules_derives_left_handle_co2_superscript_badge() -> None:
     """Free-form CO²-kelle text should set left handle and raised index constraints."""
     params: dict[str, object] = {"elements": []}

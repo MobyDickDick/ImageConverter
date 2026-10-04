@@ -434,6 +434,12 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
             "RightRotatedTopKelleThreeWayValveGlyph",
             "Rotated180TopKelleThreeWayValveGlyph",
             "MainDiagonalMirroredTopKelleThreeWayValveGlyph",
+            "UprightSquareKelleGlyph",
+            "Rotated180SquareKelleGlyph",
+            "VerticallyMirroredSquareKelleTGlyph",
+            "LeftRotatedSquareKelleTGlyph",
+            "RightFacingSquareKellePGlyph",
+            "RightRotatedSquareKellePGlyph",
         }
         for element in geometry_ir
         if isinstance(element, dict)
