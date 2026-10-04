@@ -1,0 +1,54 @@
+<frozen runpy>:128: RuntimeWarning: 'src.iCCModules.imageCompositeConverterCli' found in sys.modules after import of package 'src.iCCModules', but prior to execution of 'src.iCCModules.imageCompositeConverterCli'; this may result in unpredictable behaviour
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Kein interaktives Terminal erkannt; verwende Bereich von '(Anfang)' bis '(Ende)'.
+[INFO] Konvertiere pilot_panel.JPG | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite pilot_panel.JPG ---
+Bildbeschreibung: Rechteckfläche mit heller rechteckiger Innenfläche.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] pilot_panel.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.870504, localized_error_fraction=0.752394).
+[INFO] Konvertiert pilot_panel.JPG | Parameter: mode=auto, label=M, variant_name=PILOT_PANEL | Qualität: Optimierungsfehler/Pixel=0.021450, Mean-Delta²=28492.753906, RGB-RMSE/Kanal=97.455552, Raumscore=83071.377056, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.0s
+[INFO] Konvertiere renamed_holdout.JPG | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout.JPG ---
+Bildbeschreibung: Rechteckfläche mit heller rechteckiger Innenfläche.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] renamed_holdout.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.766017, localized_error_fraction=0.721304).
+[INFO] Konvertiert renamed_holdout.JPG | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT | Qualität: Optimierungsfehler/Pixel=0.004541, Mean-Delta²=878.619141, RGB-RMSE/Kanal=17.113534, Raumscore=2513.644361, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.0s
+[INFO] Konvertiere pilot_panel.JPG | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite pilot_panel.JPG ---
+Bildbeschreibung: Rechteckfläche mit heller rechteckiger Innenfläche.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] pilot_panel.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.870504, localized_error_fraction=0.752394).
+[INFO] Konvertiert pilot_panel.JPG | Parameter: mode=auto, label=M, variant_name=PILOT_PANEL | Qualität: Optimierungsfehler/Pixel=0.021450, Mean-Delta²=28492.753906, RGB-RMSE/Kanal=97.455552, Raumscore=83071.377056, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Konvertiere renamed_holdout.JPG | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout.JPG ---
+Bildbeschreibung: Rechteckfläche mit heller rechteckiger Innenfläche.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] renamed_holdout.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.766017, localized_error_fraction=0.721304).
+[INFO] Konvertiert renamed_holdout.JPG | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT | Qualität: Optimierungsfehler/Pixel=0.004541, Mean-Delta²=878.619141, RGB-RMSE/Kanal=17.113534, Raumscore=2513.644361, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Konvertiere pilot_panel.JPG | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite pilot_panel.JPG ---
+Bildbeschreibung: Rechteckfläche mit heller rechteckiger Innenfläche.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] pilot_panel.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.870504, localized_error_fraction=0.752394).
+[INFO] Konvertiert pilot_panel.JPG | Parameter: mode=auto, label=M, variant_name=PILOT_PANEL | Qualität: Optimierungsfehler/Pixel=0.021450, Mean-Delta²=28492.753906, RGB-RMSE/Kanal=97.455552, Raumscore=83071.377056, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.0s
+[INFO] Konvertiere renamed_holdout.JPG | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout.JPG ---
+Bildbeschreibung: Rechteckfläche mit heller rechteckiger Innenfläche.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] renamed_holdout.JPG: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.766017, localized_error_fraction=0.721304).
+[INFO] Konvertiert renamed_holdout.JPG | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT | Qualität: Optimierungsfehler/Pixel=0.004541, Mean-Delta²=878.619141, RGB-RMSE/Kanal=17.113534, Raumscore=2513.644361, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.0s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\dlg-reproduction3\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\dlg-reproduction3\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\dlg-reproduction3\before

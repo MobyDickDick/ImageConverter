@@ -14,13 +14,23 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-04)
 
+Das Rechteckflächen-Paket für `DLG0010_1` ist abgeschlossen: Der katalogfreie
+Rasterregistrierer erhält die helle Innenfläche und das breite Außenfeld.
+Ziel (`mean_delta2=468.700897`) und grauer Holdout (`48.554668`) bestehen beide
+harten Gates ohne Regression. Die Abnahme verwendet eine zutreffende neutrale
+Rechteckbeschreibung; die falsche XML-Farbangabe für das rote Raster bleibt als
+Datenqualitätsfolge dokumentiert. `222` Regressionstests sind grün, und ein
+erneuter CLI-Lauf reproduziert alle vier SVG-Hashes. Der Review über `688`
+Paare führt die Rotation jetzt mit `AC0724_1_S` fort. Details und Repro stehen
+in `docs/next_arbeitspaket_2026-10-04_dlg0010_1.md`.
+
 Das Runtime-Registrierungspaket für die 180°-Quadrat-Kelle ist abgeschlossen:
 `Rotated180SquareKelleGlyph` wird jetzt in beiden Runtime-Kind-Sets geführt.
 Das gespeicherte S-CLI-SVG erreicht `mean_delta2=2194.829346` und besteht beide
 harten Gates; M-/L-Holdouts bestehen ebenfalls ohne Metrikregression.
 Vier neue Regressionstests sichern Größenübertragung, Umbenennungsinvarianz
 und den Verzicht auf Sample-SVGs. Der vollständige Review über `688` Paare
-führt die Rotation jetzt mit `DLG0010_1` fort. Die nicht beschriebene helle
+führte die Rotation anschließend mit `DLG0010_1` fort. Die nicht beschriebene helle
 Innenmarkierung bleibt als visueller Folgepunkt dokumentiert; die bestehende
 CLI-Restfehlerwarnung bleibt sichtbar. Details und Repro stehen in
 `docs/next_arbeitspaket_2026-10-04_ac0713_1_s.md`.

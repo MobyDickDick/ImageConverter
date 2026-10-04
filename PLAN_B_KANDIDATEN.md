@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-04, nach Quadrat-Kellen-Recheck)
+## Aktuelle Kandidaten (Stand: 2026-10-04, nach Rechteckflächen-Recheck)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -17,18 +17,25 @@ der maschinenlesbare Beleg steht in
 `artifacts/evaluation/semantic_only_plan_b_pilot_v1/report_2026-10-04.json`.
 Die nächste Rotation beginnt deshalb mit dem nächsten weiterhin offenen Fall.
 
-1. `DLG0010_1` – `mean_delta2=23882.488281`, `normalized_mse=0.122427`.
-2. `AC0724_1_S` – `mean_delta2=22276.960938`, `normalized_mse=0.114197`.
-3. `AC0252_1` – `mean_delta2=20853.748047`, `normalized_mse=0.106901`.
-4. `AC0731_1_L` – `mean_delta2=18881.216797`, `normalized_mse=0.096790`.
-5. `GE1003_M` – `mean_delta2=17817.699219`, `normalized_mse=0.091338`.
+`DLG0010_1` besteht nach katalogfreier Rasterregistrierung zweier verschachtelter
+Rechteckflächen beide Gates (`mean_delta2=468.700897`, `edge_alignment=0.903612`).
+Der graue, fremd benannte Holdout besteht ebenfalls ohne Regression. Die Abnahme
+verwendet eine zutreffende Beschreibung der sichtbaren Rechteckstruktur; die
+alte XML-Farbangabe „hellgraues Quadrat“ für das rote Raster bleibt als
+Datenqualitätsfolge dokumentiert. Details: `docs/next_arbeitspaket_2026-10-04_dlg0010_1.md`.
 
-Die nächste Rotation beginnt mit `DLG0010_1` und muss den Wert des tatsächlich
+1. `AC0724_1_S` – `mean_delta2=22276.960938`, `normalized_mse=0.114197`.
+2. `AC0252_1` – `mean_delta2=20853.748047`, `normalized_mse=0.106901`.
+3. `AC0731_1_L` – `mean_delta2=18881.216797`, `normalized_mse=0.096790`.
+4. `GE1003_M` – `mean_delta2=17817.699219`, `normalized_mse=0.091338`.
+5. `AC0404_1_L` – `mean_delta2=17112.675781`, `normalized_mse=0.087724`.
+
+Die nächste Rotation beginnt mit `AC0724_1_S` und muss den Wert des tatsächlich
 akzeptierten SVGs vor und nach der Änderung sowie den Gate-Status ausweisen.
 Der vollständige Review über `688` renderbare Paare steht unter
-`artifacts/evaluation/rotated_square_kelle_recheck_v1/full_review/`.
-Er schließt die beiden separat belegten Gate-Passes `AC0554_2_L` und
-`AC0713_1_S` explizit aus: Die historische Sammelausgabe enthält für beide noch
+`artifacts/evaluation/nested_panel_recheck_v1/full_review/`.
+Er schließt die drei separat belegten Gate-Passes `AC0554_2_L`,
+`AC0713_1_S` und `DLG0010_1` explizit aus: Die historische Sammelausgabe enthält noch
 alte SVGs; die akzeptierten Ergebnisse liegen in den jeweiligen Evaluationen.
 
 Abschluss des Runtime-Registrierungspakets `AC0713_1_S` (2026-10-04):
@@ -54,6 +61,12 @@ das CLI meldet dafür weiterhin konzentrierten Restfehler. Details stehen in
 - `AC0538_1L_sia` – sample-basierte Plan-B-Aufgabe für die verwandte Diagrammvariante mit grauer Rahmenkontur und weisser Stufenkurve; Roundtrip-Baseline `delta2=1629.625242` und derzeit `manual_review`. Der Klassifikations-/Perception-Contract steht in `docs/next_arbeitspaket_2026-07-31_runABH.md`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
+
+Aktueller Recheck: Die Erkennung verschachtelter Rechteckflächen ist
+`generalisiert`; sie überträgt Lage, Farben und Größen aus dem Raster auf zwei
+SVG-Primitive und besteht Ziel-/Holdout-Gates sowie Farb-/Größenvariationen.
+Der Beleg steht in `docs/next_arbeitspaket_2026-10-04_dlg0010_1.md`.
+Die folgenden Run-SR-/PF8-Notizen dokumentieren den historischen Verlauf.
 
 Die Run-SR-Triage ersetzt die erledigte `GE1001_M`/`GE9021_7M`-Rotation durch fünf kleinere Diff-Fälle. Vor der konkreten Nachzeichnung ist für `DLG0021` zu prüfen, ob die dominanten grafischen Primitive bereits als katalogfreie Perception-Kandidaten (`color_patch`, `polygon_path`, `line`, `rectangle` oder `text_glyph`) auftauchen. Der Lerneffekt wird pro Kandidat im nächsten Arbeitspaket als `generalisiert`, `nur Sonderfall` oder `noch nicht erkannt` dokumentiert.
 
