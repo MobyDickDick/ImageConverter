@@ -1,0 +1,69 @@
+{
+  "baseline": {
+    "baseline_sha256": "438b2a75bd162e0f679384d7bb7617a28fb9a6f9c8715fe657662fb0a5a66ee1",
+    "cases": {
+      "pilot_target": {
+        "dimensions": {
+          "height": 40,
+          "width": 80
+        },
+        "metrics": {
+          "connector_continuity": 1.0,
+          "dimension_match": 1.0,
+          "edge_alignment": 0.1,
+          "error_per_pixel": 0.183361,
+          "object_mask_iou": 0.2,
+          "semantic_score": 0.0
+        }
+      },
+      "renamed_holdout": {
+        "dimensions": {
+          "height": 30,
+          "width": 60
+        },
+        "metrics": {
+          "connector_continuity": 1.0,
+          "dimension_match": 1.0,
+          "edge_alignment": 0.1,
+          "error_per_pixel": 0.044142777617583,
+          "object_mask_iou": 0.2,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "commit": "3437c97",
+      "input_hashes": {
+        "pilot_target": {
+          "description_sha256": "dcaa7230289dda852d9b9088a7a9446006ab037ea0382ddccdc0eb3cfb29c0f6",
+          "image_sha256": "89a52c8d5f1f06c6528584e27e5ded340f0244b818a0d5e6701f242ab161ee9e"
+        },
+        "renamed_holdout": {
+          "description_sha256": "dcaa7230289dda852d9b9088a7a9446006ab037ea0382ddccdc0eb3cfb29c0f6",
+          "image_sha256": "00fc6b54f04801adc14a686472cbfeb38a24e0e7cdb7e3725e990f0892f10a99"
+        }
+      },
+      "seed": 0,
+      "toolchain": {
+        "pilot_track": "envelope_polyline_over_vertical_color_field_v1",
+        "python": "3.10.20"
+      }
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "cases": [
+    {
+      "case_id": "pilot_target",
+      "description": "Gr\u00fcnes rechteckiges Farbfeld mit grauem Rand und einer hellgrauen, dachf\u00f6rmigen Polyline.",
+      "image_path": "../artifacts/images_to_convert/AC0554_2_L.jpg",
+      "role": "target"
+    },
+    {
+      "case_id": "renamed_holdout",
+      "description": "Gr\u00fcnes rechteckiges Farbfeld mit grauem Rand und einer hellgrauen, dachf\u00f6rmigen Polyline.",
+      "image_path": "../artifacts/images_to_convert/AC0554_2_M.jpg",
+      "role": "holdout"
+    }
+  ],
+  "schema_version": "semantic_only_plan_b_pilot_manifest_v1"
+}

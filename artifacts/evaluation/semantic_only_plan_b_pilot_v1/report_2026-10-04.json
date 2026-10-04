@@ -1,0 +1,250 @@
+{
+  "algorithm_track": "envelope_polyline_over_vertical_color_field_v1",
+  "dominant_error_component": "edge_alignment",
+  "evidence": [
+    {
+      "case_id": "pilot_target",
+      "input_sha256": "89a52c8d5f1f06c6528584e27e5ded340f0244b818a0d5e6701f242ab161ee9e",
+      "output_svg": "artifacts/evaluation/semantic_only_plan_b_pilot_v1/svgs/pilot_target.svg",
+      "role": "target",
+      "track": "envelope_polyline_over_vertical_color_field_v1"
+    },
+    {
+      "case_id": "renamed_holdout",
+      "input_sha256": "00fc6b54f04801adc14a686472cbfeb38a24e0e7cdb7e3725e990f0892f10a99",
+      "output_svg": "artifacts/evaluation/semantic_only_plan_b_pilot_v1/svgs/renamed_holdout.svg",
+      "role": "holdout",
+      "track": "envelope_polyline_over_vertical_color_field_v1"
+    }
+  ],
+  "positive_result": false,
+  "satisfaction_gate": {
+    "baseline_sha256": "438b2a75bd162e0f679384d7bb7617a28fb9a6f9c8715fe657662fb0a5a66ee1",
+    "cases": [
+      {
+        "after": {
+          "connector_continuity": 1.0,
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6055474281311035,
+          "error_per_pixel": 0.020388882881584008,
+          "object_mask_iou": 1.0,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "connector_continuity": 1.0,
+          "dimension_match": 1.0,
+          "edge_alignment": 0.1,
+          "error_per_pixel": 0.183361,
+          "object_mask_iou": 0.2,
+          "semantic_score": 0.0
+        },
+        "case_id": "pilot_target",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.020388882881584008,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [
+          "edge_alignment_below_min"
+        ],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "connector_continuity": "unchanged",
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [
+            "edge_alignment_below_min"
+          ],
+          "metrics": {
+            "combined_score": 0.8963,
+            "edge_alignment": 0.6055,
+            "pixel_similarity": 0.9796,
+            "semantic_score": 1.0,
+            "structure_score": 1.0
+          },
+          "passed": false,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": false,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "connector_continuity": 1.0,
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6751750707626343,
+          "error_per_pixel": 0.021071783914239715,
+          "object_mask_iou": 1.0,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "connector_continuity": 1.0,
+          "dimension_match": 1.0,
+          "edge_alignment": 0.1,
+          "error_per_pixel": 0.044142777617583,
+          "object_mask_iou": 0.2,
+          "semantic_score": 0.0
+        },
+        "case_id": "renamed_holdout",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.021071783914239715,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [
+          "edge_alignment_below_min"
+        ],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "connector_continuity": "unchanged",
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [
+            "edge_alignment_below_min"
+          ],
+          "metrics": {
+            "combined_score": 0.9135,
+            "edge_alignment": 0.6752,
+            "pixel_similarity": 0.9789,
+            "semantic_score": 1.0,
+            "structure_score": 1.0
+          },
+          "passed": false,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": false,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "commit": "3437c97",
+      "input_hashes": {
+        "pilot_target": {
+          "description_sha256": "dcaa7230289dda852d9b9088a7a9446006ab037ea0382ddccdc0eb3cfb29c0f6",
+          "image_sha256": "89a52c8d5f1f06c6528584e27e5ded340f0244b818a0d5e6701f242ab161ee9e"
+        },
+        "renamed_holdout": {
+          "description_sha256": "dcaa7230289dda852d9b9088a7a9446006ab037ea0382ddccdc0eb3cfb29c0f6",
+          "image_sha256": "00fc6b54f04801adc14a686472cbfeb38a24e0e7cdb7e3725e990f0892f10a99"
+        }
+      },
+      "seed": 0,
+      "toolchain": {
+        "pilot_track": "envelope_polyline_over_vertical_color_field_v1",
+        "python": "3.10.20"
+      }
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 2,
+      "improved": 2,
+      "satisfactory": 0,
+      "technically_completed": 2
+    }
+  },
+  "schema_version": "semantic_only_plan_b_pilot_v1"
+}
