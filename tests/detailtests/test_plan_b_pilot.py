@@ -7,8 +7,10 @@ from tools.run_plan_b_pilot import build_envelope_svg, run_pilot
 def test_envelope_primitive_scales_without_a_catalog_name():
     large = build_envelope_svg(80, 40)
     renamed_holdout = build_envelope_svg(60, 30)
-    assert 'points="0,20.8 36.8,2 80,20.8"' in large
-    assert 'points="0,15.6 27.6,1.5 60,15.6"' in renamed_holdout
+    assert 'points="0,21.28 37.44,2.65 80,21.28"' in large
+    assert 'points="0,15.96 28.08,2 60,15.96"' in renamed_holdout
+    assert 'stroke="#e8e8e8"' in large
+    assert 'stroke-width="2.45"' in large
     assert "<image" not in large
 
 

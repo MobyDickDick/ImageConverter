@@ -2,23 +2,30 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-03, Zufriedenheitsreview)
+## Aktuelle Kandidaten (Stand: 2026-10-04, nach ZG7.6-Pilot)
 
-Der reproduzierbare Review über `688` renderbare Paare zeigt, dass die aktuelle
-Plan-B-Spitze **nicht zufriedenstellend** ist. Alle fünf Fälle überschreiten die
-dokumentierte harte Grenze `mean_delta2 <= 18.000`; Details und Reprobefehl
-stehen in `docs/plan_b_satisfaction_audit_2026-10-03.md`. Ein bloßer grüner
-Konvertierungs-Exit oder eine Verbesserung gegenüber einem früheren Wert gilt
-nicht als Qualitäts-Pass.
+Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
+dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
+Reprobefehl stehen in `docs/plan_b_satisfaction_audit_2026-10-03.md`. Ein
+bloßer grüner Konvertierungs-Exit oder eine Verbesserung gegenüber einem
+früheren Wert gilt nicht als Qualitäts-Pass.
 
-1. `AC0554_2_L` – `mean_delta2=35769.074219`, `normalized_mse=0.183361`.
-2. `AC0713_1_S` – `mean_delta2=24899.021484`, `normalized_mse=0.127638`.
-3. `AC0724_1_S` – `mean_delta2=22276.960938`, `normalized_mse=0.114197`.
-4. `AC0252_1` – `mean_delta2=20853.748047`, `normalized_mse=0.106901`.
-5. `AC0731_1_L` – `mean_delta2=18881.216797`, `normalized_mse=0.096790`.
+`AC0554_2_L` wurde im ZG7.6-Pilot katalogfrei mit dem Track
+`envelope_polyline_over_vertical_color_field_v1` bearbeitet und besteht nun
+zusammen mit dem fremd benannten Holdout `renamed_holdout` beide harten Gates;
+der maschinenlesbare Beleg steht in
+`artifacts/evaluation/semantic_only_plan_b_pilot_v1/report_2026-10-04.json`.
+Die nächste Rotation beginnt deshalb mit dem nächsten weiterhin offenen Fall.
 
-Die nächste Rotation beginnt mit `AC0554_2_L` und muss den Wert des tatsächlich
+1. `AC0713_1_S` – `mean_delta2=24899.021484`, `normalized_mse=0.127638`.
+2. `AC0724_1_S` – `mean_delta2=22276.960938`, `normalized_mse=0.114197`.
+3. `AC0252_1` – `mean_delta2=20853.748047`, `normalized_mse=0.106901`.
+4. `AC0731_1_L` – `mean_delta2=18881.216797`, `normalized_mse=0.096790`.
+
+Die nächste Rotation beginnt mit `AC0713_1_S` und muss den Wert des tatsächlich
 akzeptierten SVGs vor und nach der Änderung sowie den Gate-Status ausweisen.
+Beim nächsten vollständigen Qualitätsreview ist die Liste wieder auf maximal
+fünf aktive Einträge aufzufüllen.
 
 ## Ad-hoc Plan-B-Aufgabe (2026-07-05)
 

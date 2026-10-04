@@ -1,23 +1,23 @@
 {
   "algorithm_track": "envelope_polyline_over_vertical_color_field_v1",
-  "dominant_error_component": "edge_alignment",
+  "dominant_error_component": null,
   "evidence": [
     {
       "case_id": "pilot_target",
       "input_sha256": "89a52c8d5f1f06c6528584e27e5ded340f0244b818a0d5e6701f242ab161ee9e",
-      "output_svg": "artifacts/evaluation/semantic_only_plan_b_pilot_v1/svgs/pilot_target.svg",
+      "output_svg": "artifacts\\evaluation\\semantic_only_plan_b_pilot_v1\\svgs\\pilot_target.svg",
       "role": "target",
       "track": "envelope_polyline_over_vertical_color_field_v1"
     },
     {
       "case_id": "renamed_holdout",
       "input_sha256": "00fc6b54f04801adc14a686472cbfeb38a24e0e7cdb7e3725e990f0892f10a99",
-      "output_svg": "artifacts/evaluation/semantic_only_plan_b_pilot_v1/svgs/renamed_holdout.svg",
+      "output_svg": "artifacts\\evaluation\\semantic_only_plan_b_pilot_v1\\svgs\\renamed_holdout.svg",
       "role": "holdout",
       "track": "envelope_polyline_over_vertical_color_field_v1"
     }
   ],
-  "positive_result": false,
+  "positive_result": true,
   "satisfaction_gate": {
     "baseline_sha256": "438b2a75bd162e0f679384d7bb7617a28fb9a6f9c8715fe657662fb0a5a66ee1",
     "cases": [
@@ -25,8 +25,8 @@
         "after": {
           "connector_continuity": 1.0,
           "dimension_match": 1.0,
-          "edge_alignment": 0.6055474281311035,
-          "error_per_pixel": 0.020388882881584008,
+          "edge_alignment": 0.7228003740310669,
+          "error_per_pixel": 0.019817967398356402,
           "object_mask_iou": 1.0,
           "semantic_score": 1.0
         },
@@ -52,7 +52,7 @@
           },
           "metrics": {
             "dimension_match": 1.0,
-            "error_per_pixel": 0.020388882881584008,
+            "error_per_pixel": 0.019817967398356402,
             "semantic_score": 1.0
           },
           "reachability": null,
@@ -67,9 +67,7 @@
             "min_semantic_score": 0.85
           }
         },
-        "hard_rejections": [
-          "edge_alignment_below_min"
-        ],
+        "hard_rejections": [],
         "improved": true,
         "improved_metrics": [
           "edge_alignment",
@@ -94,17 +92,15 @@
             "path_count": 0,
             "vector_element_count": 2
           },
-          "failures": [
-            "edge_alignment_below_min"
-          ],
+          "failures": [],
           "metrics": {
-            "combined_score": 0.8963,
-            "edge_alignment": 0.6055,
-            "pixel_similarity": 0.9796,
+            "combined_score": 0.9257,
+            "edge_alignment": 0.7228,
+            "pixel_similarity": 0.9802,
             "semantic_score": 1.0,
             "structure_score": 1.0
           },
-          "passed": false,
+          "passed": true,
           "thresholds": {
             "max_path_command_count": 160,
             "max_path_complexity_ratio": 4.0,
@@ -117,15 +113,15 @@
           }
         },
         "regressed_metrics": [],
-        "satisfactory": false,
+        "satisfactory": true,
         "technically_completed": true
       },
       {
         "after": {
           "connector_continuity": 1.0,
           "dimension_match": 1.0,
-          "edge_alignment": 0.6751750707626343,
-          "error_per_pixel": 0.021071783914239715,
+          "edge_alignment": 0.7509827017784119,
+          "error_per_pixel": 0.02254044793468858,
           "object_mask_iou": 1.0,
           "semantic_score": 1.0
         },
@@ -151,7 +147,7 @@
           },
           "metrics": {
             "dimension_match": 1.0,
-            "error_per_pixel": 0.021071783914239715,
+            "error_per_pixel": 0.02254044793468858,
             "semantic_score": 1.0
           },
           "reachability": null,
@@ -166,9 +162,7 @@
             "min_semantic_score": 0.85
           }
         },
-        "hard_rejections": [
-          "edge_alignment_below_min"
-        ],
+        "hard_rejections": [],
         "improved": true,
         "improved_metrics": [
           "edge_alignment",
@@ -193,17 +187,15 @@
             "path_count": 0,
             "vector_element_count": 2
           },
-          "failures": [
-            "edge_alignment_below_min"
-          ],
+          "failures": [],
           "metrics": {
-            "combined_score": 0.9135,
-            "edge_alignment": 0.6752,
-            "pixel_similarity": 0.9789,
+            "combined_score": 0.9321,
+            "edge_alignment": 0.751,
+            "pixel_similarity": 0.9775,
             "semantic_score": 1.0,
             "structure_score": 1.0
           },
-          "passed": false,
+          "passed": true,
           "thresholds": {
             "max_path_command_count": 160,
             "max_path_complexity_ratio": 4.0,
@@ -216,7 +208,7 @@
           }
         },
         "regressed_metrics": [],
-        "satisfactory": false,
+        "satisfactory": true,
         "technically_completed": true
       }
     ],
@@ -242,7 +234,7 @@
     "summary": {
       "case_count": 2,
       "improved": 2,
-      "satisfactory": 0,
+      "satisfactory": 2,
       "technically_completed": 2
     }
   },

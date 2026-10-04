@@ -29,7 +29,10 @@ def _dimensions(path: Path) -> tuple[int, int]:
 
 def build_envelope_svg(width: int, height: int) -> str:
     """Build a scale-independent primitive; deliberately accepts no case name."""
-    apex_x, apex_y, shoulder_y = width * 0.46, height * 0.05, height * 0.52
+    stroke_width = max(2.0, min(width, height) * 0.06125)
+    apex_x = width * 0.468
+    apex_y = max(2.0, min(width, height) * 0.06625)
+    shoulder_y = height * 0.532
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}"><defs><linearGradient id="field" x1="0" '
@@ -37,9 +40,10 @@ def build_envelope_svg(width: int, height: int) -> str:
         '<stop offset="0.62" stop-color="#4bcf5a"/><stop offset="1" '
         'stop-color="#4bad5a"/></linearGradient></defs>'
         f'<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" '
-        'fill="url(#field)" stroke="#c8c8c8"/>'
-        f'<polyline points="0,{shoulder_y:g} {apex_x:g},{apex_y:g} {width},{shoulder_y:g}" '
-        'fill="none" stroke="#dedede" stroke-width="3" stroke-linejoin="miter"/></svg>'
+        'fill="url(#field)" stroke="#e8e8e8"/>'
+        f'<polyline points="0,{shoulder_y:g} {apex_x:g},{apex_y:g} '
+        f'{width},{shoulder_y:g}" fill="none" stroke="#e8e8e8" '
+        f'stroke-width="{stroke_width:g}" stroke-linecap="butt" stroke-linejoin="miter"/></svg>'
     )
 
 

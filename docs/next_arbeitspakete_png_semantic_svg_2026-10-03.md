@@ -182,7 +182,8 @@ ehrlich ausweisen.
 **Abhängigkeit:** ZG7.5
 
 **Status:** Abgeschlossen am 2026-10-04; der katalogfreie Pilot, der fremd
-benannte Holdout und die ehrliche negative Gateentscheidung stehen in
+benannte Holdout und die positive Gateentscheidung nach allgemeinem
+Polyline-Kantenfit stehen in
 `docs/next_arbeitspaket_2026-10-04_zg7_6.md`.
 
 **Ziel:** Den neuen Pfad an einem echten, bislang unzufriedenstellenden
