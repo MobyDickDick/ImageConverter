@@ -16,6 +16,7 @@ from src.iCCModules.imageCompositeConverterNestedPanel import fit_nested_panel
 from src.iCCModules.imageCompositeConverterInteriorMark import fit_rectilinear_interior_mark
 from src.iCCModules.imageCompositeConverterPump import fit_pump_geometry
 from src.iCCModules.imageCompositeConverterLabeledSquare import fit_labeled_square
+from src.iCCModules.imageCompositeConverterCheckmark import fit_checkmark_disk
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1725,6 +1726,21 @@ def runNonCompositeIterationImpl(
                             if key not in {"geometry_ir", "rendered"}
                         }
                     description_status = "non_composite_description_geometry_ir"
+                    checkmark_disk = fit_checkmark_disk(
+                        description_geometry_ir, image=perc_img,
+                        render_fn=lambda candidate_ir: render_svg_to_numpy_fn(
+                            geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, candidate_ir), width, height),
+                        error_fn=lambda rendered: calculate_error_fn(perc_img, rendered),
+                    )
+                    if checkmark_disk is not None and checkmark_disk['final_error'] < description_error:
+                        description_geometry_ir = checkmark_disk['geometry_ir']
+                        description_rendered = checkmark_disk['rendered']
+                        description_error = checkmark_disk['final_error']
+                        geometry_ir_svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, description_geometry_ir)
+                        params['optimized_geometry_ir'] = description_geometry_ir
+                        params['checkmark_disk_registration'] = {
+                            key: value for key, value in checkmark_disk.items() if key not in {'geometry_ir', 'rendered'}
+                        }
                     labeled_square = fit_labeled_square(
                         description_geometry_ir, image=perc_img,
                         render_fn=lambda candidate_ir: render_svg_to_numpy_fn(
