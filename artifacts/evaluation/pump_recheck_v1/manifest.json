@@ -1,0 +1,34 @@
+{
+  "schema_version": "pump_recheck_manifest_v1",
+  "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
+  "provenance": {
+    "commit": "a83baff7d7e4bfacc980c985c360087bb609cd3b",
+    "baseline_mode": "CLI ablation with raster pump registration and semantic pump preference disabled; identical corrected description, input and seed",
+    "seed": 0,
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0",
+    "execution_mode": "semantic-only"
+  },
+  "cases": [
+    {
+      "case_id": "pilot_pump",
+      "role": "target",
+      "image": "../../images_to_convert/AC0252_1.jpg",
+      "before_svg": "before/pilot_pump.svg",
+      "after_svg": "after/pilot_pump.svg"
+    },
+    {
+      "case_id": "renamed_holdout_green",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0252_2.jpg",
+      "before_svg": "before/renamed_holdout_green.svg",
+      "after_svg": "after/renamed_holdout_green.svg"
+    },
+    {
+      "case_id": "renamed_holdout_gray",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0252.jpg",
+      "before_svg": "before/renamed_holdout_gray.svg",
+      "after_svg": "after/renamed_holdout_gray.svg"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Kein interaktives Terminal erkannt; verwende Bereich von '(Anfang)' bis '(Ende)'.
+[INFO] Konvertiere pilot_pump.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite pilot_pump.jpg ---
+Bildbeschreibung: Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach rechts zeigt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert pilot_pump.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_PUMP | Qualität: Optimierungsfehler/Pixel=0.009773, Mean-Delta²=458.776276, RGB-RMSE/Kanal=12.366302, Raumscore=798.988152, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.5s
+[INFO] Konvertiere renamed_holdout_gray.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_gray.jpg ---
+Bildbeschreibung: Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach rechts zeigt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_gray.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_GRAY | Qualität: Optimierungsfehler/Pixel=0.007478, Mean-Delta²=328.445374, RGB-RMSE/Kanal=10.463355, Raumscore=727.475065, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.7s
+[INFO] Konvertiere renamed_holdout_green.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_green.jpg ---
+Bildbeschreibung: Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach rechts zeigt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_green.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_GREEN | Qualität: Optimierungsfehler/Pixel=0.009314, Mean-Delta²=394.592102, RGB-RMSE/Kanal=11.468683, Raumscore=654.995993, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere renamed_holdout_green.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_green.jpg ---
+Bildbeschreibung: Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach rechts zeigt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_green.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_GREEN | Qualität: Optimierungsfehler/Pixel=0.009314, Mean-Delta²=394.592102, RGB-RMSE/Kanal=11.468683, Raumscore=654.995993, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.6s
+[INFO] Konvertiere pilot_pump.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite pilot_pump.jpg ---
+Bildbeschreibung: Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach rechts zeigt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert pilot_pump.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_PUMP | Qualität: Optimierungsfehler/Pixel=0.009773, Mean-Delta²=458.776276, RGB-RMSE/Kanal=12.366302, Raumscore=798.988152, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.6s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\pump-cli-first\after\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\pump-cli-first\after\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\pump-cli-first\after
