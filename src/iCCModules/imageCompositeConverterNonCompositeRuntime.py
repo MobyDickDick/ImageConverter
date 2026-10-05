@@ -14,6 +14,7 @@ from src.iCCModules import imageCompositeConverterGeometryIrOptimizer as geometr
 from tools.perception_detection_contract import build_perception_seeded_geometry_ir
 from src.iCCModules.imageCompositeConverterNestedPanel import fit_nested_panel
 from src.iCCModules.imageCompositeConverterInteriorMark import fit_rectilinear_interior_mark
+from src.iCCModules.imageCompositeConverterPump import fit_pump_geometry
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1053,6 +1054,7 @@ def _fit_symbol_element_by_element(
 
 
 DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS = {
+    "PumpTriangleGlyph",
     "HorizontalRule",
     "HorizontalRuleSet",
     "OrthogonalPolyline",
@@ -1090,6 +1092,7 @@ DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS = {
 
 
 SEMANTIC_GEOMETRY_IR_KINDS = {
+    "PumpTriangleGlyph",
     "VerticalTwoWayValveMotorGlyph",
     "LeftRotatedTwoWayValveMotorGlyph",
     "Rotated180TwoWayValveMotorGlyph",
@@ -1138,6 +1141,12 @@ def _is_description_heat_exchanger_geometry(geometry_ir: list[dict[str, object]]
 
 def _prefer_semantic_description_geometry(geometry_ir: list[dict[str, object]]) -> bool:
     kinds = {str(element.get("kind", "")) for element in geometry_ir}
+    # The historical pump seed does not model every described orientation or
+    # color. Prefer it only after this raster confirms the two-object topology;
+    # unsupported descriptions retain their existing candidate selection.
+    if not any(element.get("kind") == "PumpTriangleGlyph" and
+               element.get("source") == "raster_circle_triangle_v1" for element in geometry_ir):
+        kinds.discard("PumpTriangleGlyph")
     roles = {str(element.get("role", "")) for element in geometry_ir}
     return bool(SEMANTIC_GEOMETRY_IR_KINDS & kinds) or bool({"checkmark", "reference_light_grey_square"} & roles)
 
@@ -1709,6 +1718,21 @@ def runNonCompositeIterationImpl(
                             if key not in {"geometry_ir", "rendered"}
                         }
                     description_status = "non_composite_description_geometry_ir"
+                    pump = fit_pump_geometry(
+                        description_geometry_ir, image=perc_img, description=description,
+                        render_fn=lambda candidate_ir: render_svg_to_numpy_fn(
+                            geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, candidate_ir), width, height),
+                        error_fn=lambda rendered: calculate_error_fn(perc_img, rendered),
+                    )
+                    if pump is not None and pump['final_error'] < description_error:
+                        description_geometry_ir = pump['geometry_ir']
+                        description_rendered = pump['rendered']
+                        description_error = pump['final_error']
+                        geometry_ir_svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, description_geometry_ir)
+                        params['optimized_geometry_ir'] = description_geometry_ir
+                        params['pump_registration'] = {
+                            key: value for key, value in pump.items() if key not in {'geometry_ir', 'rendered'}
+                        }
                     interior_mark = fit_rectilinear_interior_mark(
                         description_geometry_ir, image=perc_img, description=description,
                         render_fn=lambda candidate_ir: render_svg_to_numpy_fn(

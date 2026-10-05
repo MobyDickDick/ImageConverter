@@ -1,0 +1,60 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Kein interaktives Terminal erkannt; verwende Bereich von '(Anfang)' bis '(Ende)'.
+[INFO] Konvertiere pilot_pump.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite pilot_pump.jpg ---
+Bildbeschreibung: Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach rechts zeigt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_pump.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.395833, localized_error_fraction=0.836007).
+[INFO] Konvertiert pilot_pump.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_PUMP | Qualität: Optimierungsfehler/Pixel=0.026598, Mean-Delta²=7316.579590, RGB-RMSE/Kanal=49.384814, Raumscore=22066.799087, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_gray.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_gray.jpg ---
+Bildbeschreibung: Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach rechts zeigt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_gray.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.788546, localized_error_fraction=0.548691).
+[INFO] Konvertiert renamed_holdout_gray.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_GRAY | Qualität: Optimierungsfehler/Pixel=0.033053, Mean-Delta²=7285.255859, RGB-RMSE/Kanal=49.278988, Raumscore=17364.821409, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.7s
+[INFO] Konvertiere renamed_holdout_green.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_green.jpg ---
+Bildbeschreibung: Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach rechts zeigt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_green.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_GREEN | Qualität: Optimierungsfehler/Pixel=0.039993, Mean-Delta²=7455.887695, RGB-RMSE/Kanal=49.852742, Raumscore=13298.347589, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.5s
+[INFO] Konvertiere renamed_holdout_gray.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_gray.jpg ---
+Bildbeschreibung: Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach rechts zeigt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_gray.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.788546, localized_error_fraction=0.548691).
+[INFO] Konvertiert renamed_holdout_gray.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_GRAY | Qualität: Optimierungsfehler/Pixel=0.033053, Mean-Delta²=7285.255859, RGB-RMSE/Kanal=49.278988, Raumscore=17364.821409, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.5s
+[INFO] Konvertiere pilot_pump.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite pilot_pump.jpg ---
+Bildbeschreibung: Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach rechts zeigt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_pump.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.395833, localized_error_fraction=0.836007).
+[INFO] Konvertiert pilot_pump.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_PUMP | Qualität: Optimierungsfehler/Pixel=0.026598, Mean-Delta²=7316.579590, RGB-RMSE/Kanal=49.384814, Raumscore=22066.799087, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_gray.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_gray.jpg ---
+Bildbeschreibung: Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach rechts zeigt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_gray.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.788546, localized_error_fraction=0.548691).
+[INFO] Konvertiert renamed_holdout_gray.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_GRAY | Qualität: Optimierungsfehler/Pixel=0.033053, Mean-Delta²=7285.255859, RGB-RMSE/Kanal=49.278988, Raumscore=17364.821409, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.3s
+[INFO] Konvertiere pilot_pump.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite pilot_pump.jpg ---
+Bildbeschreibung: Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach rechts zeigt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_pump.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.395833, localized_error_fraction=0.836007).
+[INFO] Konvertiert pilot_pump.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_PUMP | Qualität: Optimierungsfehler/Pixel=0.026598, Mean-Delta²=7316.579590, RGB-RMSE/Kanal=49.384814, Raumscore=22066.799087, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.9s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\pump-cli-first\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\pump-cli-first\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\pump-cli-first\before

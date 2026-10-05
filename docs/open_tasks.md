@@ -12,7 +12,18 @@ focused on the actual project scope.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-04)
+### Aktueller Plan-B-Stand (2026-10-05)
+
+Das Paket für `AC0252_1` ist abgeschlossen: Die katalogfreie Registrierung
+ermittelt Kreis, Dreieck und Farben aus dem Raster. Die widersprüchliche XML
+ist auf die sichtbare, nach rechts zeigende Kreis-Dreieck-Struktur korrigiert.
+Das gespeicherte Ziel-CLI-SVG erreicht `mean_delta2=458.776276`; rote, grüne und
+graue Variante bestehen beide harten Gates ohne Regression. Drei unabhängige
+CLI-Läufe reproduzieren alle sechs SVG-Bytes und Gate-Records exakt.
+`267` fokussierte Tests sind ohne Skips/Warnungen grün; das vollständige
+Defaultprofil meldet `1466 passed, 29 skipped`. Die Runtime-ID-Nullprüfung ist
+grün. Der erneuerte Review über `688` Paare führt die Rotation mit `AC0731_1_L`
+fort. Details: `docs/next_arbeitspaket_2026-10-05_ac0252_1.md`.
 
 Das Paket für `AC0724_1_S` ist abgeschlossen: Der Beschreibungspfad spiegelt
 die bestehende Quadrat-/Griff-Topologie an der Hauptdiagonale. Die helle
