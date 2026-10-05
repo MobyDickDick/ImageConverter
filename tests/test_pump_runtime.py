@@ -20,7 +20,7 @@ def render(svg, width, height):
     return render_svg_to_numpy_inprocess(svg, width, height, fitz_module=fitz, np_module=np, cv2_module=cv2)
 
 
-def convert(image, name, monkeypatch):
+def convert(image, name, monkeypatch, description=DESCRIPTION):
     artifacts, logs = [], []
     height, width = image.shape[:2]
     monkeypatch.setattr(runtime, '_try_load_sample_svg', lambda **kwargs: pytest.fail('must not read sample SVGs'))
@@ -28,7 +28,7 @@ def convert(image, name, monkeypatch):
     result = runtime.runNonCompositeIterationImpl(
         mode='non_composite', params=params, stripe_strategy=None,
         semantic_mode_visual_override=False, width=width, height=height, base_name=name,
-        description=DESCRIPTION, perc_img=image, img_path=f'{name}.jpg', print_fn=lambda *args: None,
+        description=description, perc_img=image, img_path=f'{name}.jpg', print_fn=lambda *args: None,
         render_embedded_raster_svg_fn=lambda path: pytest.fail('must not embed raster'),
         build_gradient_stripe_svg_fn=lambda *args, **kwargs: None,
         build_gradient_stripe_validation_log_lines_fn=lambda **kwargs: [],
@@ -147,3 +147,51 @@ def test_recheck_runner_rejects_stale_cli_outputs(tmp_path, monkeypatch):
     monkeypatch.setattr(sys, 'argv', ['recheck', str(manifest), '--output-dir', str(output)])
     with pytest.raises(ValueError, match='fresh output directory'):
         main()
+
+
+@pytest.mark.parametrize('direction', ['rechts', 'links', 'oben', 'unten'])
+def test_absolute_triangle_direction_survives_geometry_seed_and_rotation_prose(direction):
+    description = DESCRIPTION.replace('rechts', direction) + ' Geometrische Variante: um 180° gedreht.'
+    ir = geometry.buildGeometryIrFromDescriptionImpl(description)
+    svg = geometry.renderGeometryIrToSvgImpl(40, 40, ir)
+    assert circle_triangle_semantics(svg, direction) == 1.
+    for wrong in {'rechts', 'links', 'oben', 'unten'} - {direction}:
+        assert circle_triangle_semantics(svg, wrong) == 0.
+
+
+@pytest.mark.parametrize('name', ['AC0404_1_L', 'AC0404_1_M', 'AC0404_1_S',
+                                 'AC0404_2_L', 'AC0404_2_M', 'AC0404_2_S',
+                                 'AC0404_L', 'AC0404_M', 'AC0404_S',
+                                 'AC0404_1L_sia', 'AC0404_1M_sia', 'AC0404_1S_sia',
+                                 'AC0404_2L_sia', 'AC0404_2M_sia', 'AC0404_2S_sia',
+                                 'AC0404_L_sia', 'AC0404_M_sia', 'AC0404_S_sia'])
+def test_runtime_left_triangle_generalizes_color_and_size_without_catalog_dispatch(name, monkeypatch):
+    image = cv2.imread(str(ROOT/f'artifacts/images_to_convert/{name}.jpg'))
+    svg, raster = convert(image, 'anonymous_left_pump', monkeypatch, DESCRIPTION.replace('rechts', 'links'))
+    assert circle_triangle_semantics(svg, 'links') == 1.
+    assert circle_triangle_semantics(svg) == 0.
+    assert normalized_mse(image, raster)[1] < .003
+
+
+def test_left_pump_filename_invariance_and_perfect_metric_calibration(tmp_path, monkeypatch):
+    image = cv2.imread(str(ROOT/'artifacts/images_to_convert/AC0404_1_L.jpg'))
+    description = DESCRIPTION.replace('rechts', 'links')
+    original, raster = convert(image, 'AC0404_1_L', monkeypatch, description)
+    renamed, renamed_raster = convert(image, 'unknown_scene', monkeypatch, description)
+    assert original == renamed
+    np.testing.assert_array_equal(raster, renamed_raster)
+    svg, image = synthetic(direction='links')
+    svg_path, image_path = tmp_path/'perfect.svg', tmp_path/'perfect.png'
+    svg_path.write_text(svg, encoding='utf-8')
+    assert cv2.imwrite(str(image_path), image)
+    record = measure(image_path, svg_path, 'links')
+    assert record['mean_delta2'] == 0.
+    assert record['metrics'] == {'error_per_pixel': 0., 'edge_alignment': 1., 'object_mask_iou': 1.,
+                                 'semantic_score': 1., 'dimension_match': 1.}
+    assert circle_triangle_semantics(synthetic(shape='rectangle')[0], 'links') == 0.
+    assert circle_triangle_semantics(svg.replace('</svg>', '<text>T</text></svg>'), 'links') == 0.
+
+
+def test_unknown_semantic_direction_is_rejected():
+    with pytest.raises(ValueError, match='unsupported triangle direction'):
+        circle_triangle_semantics(synthetic()[0], 'diagonal')

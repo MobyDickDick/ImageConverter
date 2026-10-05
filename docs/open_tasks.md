@@ -14,6 +14,19 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-05)
 
+Das Paket für `AC0404_1_L` ist abgeschlossen: Der aktuelle CLI-Vorlauf besteht
+bereits beide Gates (`mean_delta2=89.825623`); die Kandidatenliste enthielt eine
+alte Sammelausgabe. Die eigenständige XML beschreibt jetzt ein Links-Dreieck im
+Kreis, und absolute Richtungen werden auch im Geometry-IR-Seed erhalten.
+Eine katalogfreie Flächenprüfung verwirft gekrümmte Kreissegmente als falsche
+Dreieckskandidaten. Vier SIA-Varianten verbessern sich dadurch deutlich;
+alle 18 Varianten bestehen beide Gates ohne Metrikregression. Zwei unabhängige
+CLI-Läufe reproduzieren alle 36 SVGs und Gateentscheidungen. `471` fokussierte
+Regressionstests sowie `1556` Tests im vollständigen Defaultprofil sind grün;
+die `29` bestehenden Windows-Skips bleiben dokumentiert. Der Review über `688` Einträge (`684` renderbare
+Paare) setzt die Rotation mit `GE9011_6M` fort.
+Details: `docs/next_arbeitspaket_2026-10-05_ac0404_1_l.md`.
+
 Das Paket für `GE1003_M` ist abgeschlossen: Die eigenständige XML beschreibt
 jetzt einen grünen Haken vor einer grauen Kreisscheibe. Die katalogfreie
 Rasterregistrierung bestimmt die zwei Schenkel sowie Scheibenlage, Durchmesser

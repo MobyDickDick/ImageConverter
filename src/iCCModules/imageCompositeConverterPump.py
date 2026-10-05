@@ -74,7 +74,10 @@ def fit_pump_geometry(geometry_ir, *, image, description, render_fn, error_fn):
             area = cv2.contourArea(polygon)
             if len(polygon) != 3 or not .12 < area/(np.pi*radius**2) < .55:
                 continue
-            if cv2.contourArea(region)/area < .8:
+            # A curved disk segment can simplify to three hull vertices too.
+            # Its area exceeds that triangle; reject both underfilled regions
+            # and the curved complement rather than treating it as a glyph.
+            if not .8 <= cv2.contourArea(region)/area <= 1.25:
                 continue
             triangles.append((area, label, polygon[:, 0, :].astype(float)))
     if len(triangles) != 1:

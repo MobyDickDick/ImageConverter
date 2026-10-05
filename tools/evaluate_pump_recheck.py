@@ -13,7 +13,9 @@ from tools.evaluate_diagonal_square_kelle_recheck import measure as measure_rast
 from tools.evaluate_satisfaction_gate import evaluate_satisfaction, seal_baseline_manifest
 
 
-def circle_triangle_semantics(svg: str) -> float:
+def circle_triangle_semantics(svg: str, direction: str = 'rechts') -> float:
+    if direction not in {'rechts', 'links', 'oben', 'unten'}:
+        raise ValueError('unsupported triangle direction')
     root = ET.fromstring(svg)
     shapes = [e for e in root.iter() if e.tag.rsplit('}', 1)[-1] in
               {'ellipse', 'circle', 'polygon', 'rect', 'path', 'line', 'text', 'image', 'polyline'}]
@@ -31,6 +33,9 @@ def circle_triangle_semantics(svg: str) -> float:
         if not np.all(np.isfinite(vertices)):
             return 0.
         normalized = (vertices-[cx,cy])/[rx,ry]
+        # Normalize the declared direction to right for the independent check.
+        for _ in range({'rechts': 0, 'oben': 1, 'links': 2, 'unten': 3}[direction]):
+            normalized = np.column_stack((-normalized[:, 1], normalized[:, 0]))
         tip = np.argmax(normalized[:, 0])
         base = np.delete(normalized, tip, axis=0)
         a, b, c = vertices
@@ -47,10 +52,10 @@ def circle_triangle_semantics(svg: str) -> float:
         return 0.
 
 
-def measure(image_path: Path, svg_path: Path) -> dict:
+def measure(image_path: Path, svg_path: Path, direction: str = 'rechts') -> dict:
     record = measure_raster(image_path, svg_path)
     metrics = record['metrics']
-    metrics['semantic_score'] = circle_triangle_semantics(record['svg'])
+    metrics['semantic_score'] = circle_triangle_semantics(record['svg'], direction)
     record['combined_score'] = (1-metrics['error_per_pixel']+metrics['edge_alignment']+
                                 metrics['object_mask_iou']+metrics['semantic_score'])/4
     return record
@@ -58,9 +63,10 @@ def measure(image_path: Path, svg_path: Path) -> dict:
 
 def evaluate(manifest: dict, root: Path) -> dict:
     before, after, evidence = {}, {}, []
+    direction = manifest.get('direction', 'rechts')
     for case in manifest['cases']:
         image = root/case['image']
-        old, new = measure(image, root/case['before_svg']), measure(image, root/case['after_svg'])
+        old, new = measure(image, root/case['before_svg'], direction), measure(image, root/case['after_svg'], direction)
         before[case['case_id']] = {'metrics': old['metrics'], 'dimensions': old['dimensions']}
         after[case['case_id']] = new
         evidence.append({**case, 'input_sha256': hashlib.sha256(image.read_bytes()).hexdigest(),
@@ -71,7 +77,9 @@ def evaluate(manifest: dict, root: Path) -> dict:
                                       'provenance': provenance, 'cases': before})
     return {'schema_version': 'pump_recheck_v1', 'baseline': baseline, 'evidence': evidence,
             'satisfaction_gate': evaluate_satisfaction(baseline, after),
-            'semantic_contract': 'one filled circular body and one contrasting contained triangle pointing right; colors observed from raster',
+            'semantic_contract': 'one filled circular body and one contrasting contained triangle pointing '
+                                 + {'rechts': 'right', 'links': 'left', 'oben': 'up', 'unten': 'down'}[direction]
+                                 + '; colors observed from raster',
             'measurement': {'foreground_threshold': 210, 'canny_thresholds': [50, 140],
                             'output': 'saved CLI SVG re-rendered with production renderer'}}
 

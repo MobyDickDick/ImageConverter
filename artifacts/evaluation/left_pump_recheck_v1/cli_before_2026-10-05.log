@@ -1,0 +1,250 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Kein interaktives Terminal erkannt; verwende Bereich von '(Anfang)' bis '(Ende)'.
+[INFO] Konvertiere pilot_left_pump.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite pilot_left_pump.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert pilot_left_pump.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_LEFT_PUMP | Qualität: Optimierungsfehler/Pixel=0.002161, Mean-Delta²=89.825623, RGB-RMSE/Kanal=5.471917, Raumscore=190.295742, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_01.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_01.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_01.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_01 | Qualität: Optimierungsfehler/Pixel=0.004588, Mean-Delta²=126.494446, RGB-RMSE/Kanal=6.493444, Raumscore=299.593899, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.5s
+[INFO] Konvertiere renamed_holdout_02.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_02.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_02.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.515152, localized_error_fraction=0.658666).
+[INFO] Konvertiert renamed_holdout_02.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_02 | Qualität: Optimierungsfehler/Pixel=0.015525, Mean-Delta²=302.570007, RGB-RMSE/Kanal=10.042742, Raumscore=763.881876, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_03.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_03.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_03.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.930000, localized_error_fraction=0.853559).
+[INFO] Konvertiert renamed_holdout_03.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_03 | Qualität: Optimierungsfehler/Pixel=0.017114, Mean-Delta²=12225.253906, RGB-RMSE/Kanal=63.836390, Raumscore=40335.126491, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_04.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_04.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_04.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.162304, localized_error_fraction=0.755464).
+[INFO] Konvertiert renamed_holdout_04.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_04 | Qualität: Optimierungsfehler/Pixel=0.004911, Mean-Delta²=224.402222, RGB-RMSE/Kanal=8.648742, Raumscore=701.908183, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.5s
+[INFO] Konvertiere renamed_holdout_05.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_05.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_05.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_05 | Qualität: Optimierungsfehler/Pixel=0.014360, Mean-Delta²=269.442505, RGB-RMSE/Kanal=9.477034, Raumscore=683.195144, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_06.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_06.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_06.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.883289, localized_error_fraction=0.683316).
+[INFO] Konvertiert renamed_holdout_06.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_06 | Qualität: Optimierungsfehler/Pixel=0.003168, Mean-Delta²=306.088135, RGB-RMSE/Kanal=10.100959, Raumscore=881.725612, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_07.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_07.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_07.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_07 | Qualität: Optimierungsfehler/Pixel=0.004242, Mean-Delta²=103.885559, RGB-RMSE/Kanal=5.884600, Raumscore=242.768460, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_08.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_08.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_08.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_08 | Qualität: Optimierungsfehler/Pixel=0.012250, Mean-Delta²=154.315002, RGB-RMSE/Kanal=7.172052, Raumscore=368.216046, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_09.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_09.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_09.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_09 | Qualität: Optimierungsfehler/Pixel=0.026251, Mean-Delta²=10594.894531, RGB-RMSE/Kanal=59.427532, Raumscore=23358.331078, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_10.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_10.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_10.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.208333, localized_error_fraction=0.778332).
+[INFO] Konvertiert renamed_holdout_10.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_10 | Qualität: Optimierungsfehler/Pixel=0.004353, Mean-Delta²=169.858887, RGB-RMSE/Kanal=7.524602, Raumscore=556.260556, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_11.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_11.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_11.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_11 | Qualität: Optimierungsfehler/Pixel=0.010346, Mean-Delta²=116.849998, RGB-RMSE/Kanal=6.240993, Raumscore=279.856452, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere renamed_holdout_12.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_12.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_12.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_12 | Qualität: Optimierungsfehler/Pixel=0.002195, Mean-Delta²=122.660622, RGB-RMSE/Kanal=6.394284, Raumscore=315.533806, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.5s
+[INFO] Konvertiere renamed_holdout_13.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_13.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_13.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.863510, localized_error_fraction=0.558356).
+[INFO] Konvertiert renamed_holdout_13.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_13 | Qualität: Optimierungsfehler/Pixel=0.022000, Mean-Delta²=7995.996094, RGB-RMSE/Kanal=51.626854, Raumscore=19259.112996, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.5s
+[INFO] Konvertiere renamed_holdout_14.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_14.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_14.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_14 | Qualität: Optimierungsfehler/Pixel=0.003994, Mean-Delta²=117.456665, RGB-RMSE/Kanal=6.257174, Raumscore=292.100624, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_15.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_15.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_15.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_15 | Qualität: Optimierungsfehler/Pixel=0.004590, Mean-Delta²=176.626663, RGB-RMSE/Kanal=7.673041, Raumscore=470.640244, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.5s
+[INFO] Konvertiere renamed_holdout_16.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_16.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_16.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.223529, localized_error_fraction=0.704380).
+[INFO] Konvertiert renamed_holdout_16.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_16 | Qualität: Optimierungsfehler/Pixel=0.010931, Mean-Delta²=157.702499, RGB-RMSE/Kanal=7.250345, Raumscore=414.704263, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_17.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_17.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert renamed_holdout_17.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_17 | Qualität: Optimierungsfehler/Pixel=0.084829, Mean-Delta²=6756.424805, RGB-RMSE/Kanal=47.456734, Raumscore=15570.959340, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_13.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_13.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_13.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.863510, localized_error_fraction=0.558356).
+[INFO] Konvertiert renamed_holdout_13.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_13 | Qualität: Optimierungsfehler/Pixel=0.022000, Mean-Delta²=7995.996094, RGB-RMSE/Kanal=51.626854, Raumscore=19259.112996, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.5s
+[INFO] Konvertiere renamed_holdout_03.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_03.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_03.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.930000, localized_error_fraction=0.853559).
+[INFO] Konvertiert renamed_holdout_03.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_03 | Qualität: Optimierungsfehler/Pixel=0.017114, Mean-Delta²=12225.253906, RGB-RMSE/Kanal=63.836390, Raumscore=40335.126491, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_02.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_02.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_02.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.515152, localized_error_fraction=0.658666).
+[INFO] Konvertiert renamed_holdout_02.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_02 | Qualität: Optimierungsfehler/Pixel=0.015525, Mean-Delta²=302.570007, RGB-RMSE/Kanal=10.042742, Raumscore=763.881876, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_16.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_16.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_16.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.223529, localized_error_fraction=0.704380).
+[INFO] Konvertiert renamed_holdout_16.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_16 | Qualität: Optimierungsfehler/Pixel=0.010931, Mean-Delta²=157.702499, RGB-RMSE/Kanal=7.250345, Raumscore=414.704263, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_04.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_04.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_04.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.162304, localized_error_fraction=0.755464).
+[INFO] Konvertiert renamed_holdout_04.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_04 | Qualität: Optimierungsfehler/Pixel=0.004911, Mean-Delta²=224.402222, RGB-RMSE/Kanal=8.648742, Raumscore=701.908183, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.6s
+[INFO] Konvertiere renamed_holdout_10.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_10.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_10.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.208333, localized_error_fraction=0.778332).
+[INFO] Konvertiert renamed_holdout_10.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_10 | Qualität: Optimierungsfehler/Pixel=0.004353, Mean-Delta²=169.858887, RGB-RMSE/Kanal=7.524602, Raumscore=556.260556, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_06.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_06.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_06.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.883289, localized_error_fraction=0.683316).
+[INFO] Konvertiert renamed_holdout_06.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_06 | Qualität: Optimierungsfehler/Pixel=0.003168, Mean-Delta²=306.088135, RGB-RMSE/Kanal=10.100959, Raumscore=881.725612, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.6s
+[INFO] Konvertiere renamed_holdout_13.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_13.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_13.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.863510, localized_error_fraction=0.558356).
+[INFO] Konvertiert renamed_holdout_13.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_13 | Qualität: Optimierungsfehler/Pixel=0.022000, Mean-Delta²=7995.996094, RGB-RMSE/Kanal=51.626854, Raumscore=19259.112996, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.7s
+[INFO] Konvertiere renamed_holdout_03.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_03.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_03.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.930000, localized_error_fraction=0.853559).
+[INFO] Konvertiert renamed_holdout_03.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_03 | Qualität: Optimierungsfehler/Pixel=0.017114, Mean-Delta²=12225.253906, RGB-RMSE/Kanal=63.836390, Raumscore=40335.126491, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_02.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_02.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_02.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.515152, localized_error_fraction=0.658666).
+[INFO] Konvertiert renamed_holdout_02.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_02 | Qualität: Optimierungsfehler/Pixel=0.015525, Mean-Delta²=302.570007, RGB-RMSE/Kanal=10.042742, Raumscore=763.881876, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_16.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_16.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_16.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.223529, localized_error_fraction=0.704380).
+[INFO] Konvertiert renamed_holdout_16.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_16 | Qualität: Optimierungsfehler/Pixel=0.010931, Mean-Delta²=157.702499, RGB-RMSE/Kanal=7.250345, Raumscore=414.704263, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_04.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_04.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_04.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.162304, localized_error_fraction=0.755464).
+[INFO] Konvertiert renamed_holdout_04.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_04 | Qualität: Optimierungsfehler/Pixel=0.004911, Mean-Delta²=224.402222, RGB-RMSE/Kanal=8.648742, Raumscore=701.908183, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.6s
+[INFO] Konvertiere renamed_holdout_10.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_10.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_10.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.208333, localized_error_fraction=0.778332).
+[INFO] Konvertiert renamed_holdout_10.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_10 | Qualität: Optimierungsfehler/Pixel=0.004353, Mean-Delta²=169.858887, RGB-RMSE/Kanal=7.524602, Raumscore=556.260556, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_06.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_06.jpg ---
+Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_06.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.883289, localized_error_fraction=0.683316).
+[INFO] Konvertiert renamed_holdout_06.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_06 | Qualität: Optimierungsfehler/Pixel=0.003168, Mean-Delta²=306.088135, RGB-RMSE/Kanal=10.100959, Raumscore=881.725612, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.5s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\left-pump-cli-accepted\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\left-pump-cli-accepted\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\left-pump-cli-accepted\before

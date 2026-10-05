@@ -1,0 +1,152 @@
+{
+  "schema_version": "pump_recheck_manifest_v1",
+  "direction": "links",
+  "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+  "baseline_description": "Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90\u00b0 nach rechts gedreht.",
+  "provenance": {
+    "commit": "085411a8e15388823133f3ab999faa2960b7c1f0",
+    "baseline_mode": "Original XML description and circle/triangle fitter frozen at baseline_fitter_revision versus corrected description and curved-complement rejection; same remaining runtime, inputs, seed and production renderer",
+    "seed": 0,
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0",
+    "execution_mode": "semantic-only",
+    "source_sha256": {
+      "src/iCCModules/imageCompositeConverterPump.py": "e786fb0c003100a810ad2072f6f4ba8b10bdf2cd41b58be35e7b9074d8b28a83",
+      "src/iCCModules/imageCompositeConverterGeometryIr/runtime.py": "6524f77461020e79e6fa811f033b67fb02bb59cbde9e231ced1b1004eb3a5ffd",
+      "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "45edafeb91a65196f448ad34ba6e62cccf3275e1bf55d90f45c962e9b88a8d73",
+      "tools/evaluate_pump_recheck.py": "d5fb6be317fbce6494e691665747cb5fecd33bf1a92d298092dfea00624f5613",
+      "tools/run_pump_recheck.py": "8f3b9cf71ef0f57abf15b7e58529b056baa69c5f334159c233b5b91026f3a4e0",
+      "tests/test_pump_runtime.py": "4174f7032026837d5fe3fb921f8c6b46b8c16215d2037bff0c96d19e7808d7a8",
+      "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml": "f583def5478acbb171ac20c5fdc4ea5794c3a9b888af41a85131d2f4ee6334a4"
+    },
+    "baseline_fitter_sha256": "de25f4b1f20c5386c335962a4b3e6064bab1ca4e814a1cf84f88451f5d7b6be9"
+  },
+  "cases": [
+    {
+      "case_id": "pilot_left_pump",
+      "role": "target",
+      "image": "../../images_to_convert/AC0404_1_L.jpg",
+      "before_svg": "before/pilot_left_pump.svg",
+      "after_svg": "after/pilot_left_pump.svg"
+    },
+    {
+      "case_id": "renamed_holdout_01",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_1_M.jpg",
+      "before_svg": "before/renamed_holdout_01.svg",
+      "after_svg": "after/renamed_holdout_01.svg"
+    },
+    {
+      "case_id": "renamed_holdout_02",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_1_S.jpg",
+      "before_svg": "before/renamed_holdout_02.svg",
+      "after_svg": "after/renamed_holdout_02.svg"
+    },
+    {
+      "case_id": "renamed_holdout_03",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_1L_sia.jpg",
+      "before_svg": "before/renamed_holdout_03.svg",
+      "after_svg": "after/renamed_holdout_03.svg"
+    },
+    {
+      "case_id": "renamed_holdout_04",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_1M_sia.jpg",
+      "before_svg": "before/renamed_holdout_04.svg",
+      "after_svg": "after/renamed_holdout_04.svg"
+    },
+    {
+      "case_id": "renamed_holdout_05",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_1S_sia.jpg",
+      "before_svg": "before/renamed_holdout_05.svg",
+      "after_svg": "after/renamed_holdout_05.svg"
+    },
+    {
+      "case_id": "renamed_holdout_06",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_2_L.jpg",
+      "before_svg": "before/renamed_holdout_06.svg",
+      "after_svg": "after/renamed_holdout_06.svg"
+    },
+    {
+      "case_id": "renamed_holdout_07",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_2_M.jpg",
+      "before_svg": "before/renamed_holdout_07.svg",
+      "after_svg": "after/renamed_holdout_07.svg"
+    },
+    {
+      "case_id": "renamed_holdout_08",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_2_S.jpg",
+      "before_svg": "before/renamed_holdout_08.svg",
+      "after_svg": "after/renamed_holdout_08.svg"
+    },
+    {
+      "case_id": "renamed_holdout_09",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_2L_sia.jpg",
+      "before_svg": "before/renamed_holdout_09.svg",
+      "after_svg": "after/renamed_holdout_09.svg"
+    },
+    {
+      "case_id": "renamed_holdout_10",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_2M_sia.jpg",
+      "before_svg": "before/renamed_holdout_10.svg",
+      "after_svg": "after/renamed_holdout_10.svg"
+    },
+    {
+      "case_id": "renamed_holdout_11",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_2S_sia.jpg",
+      "before_svg": "before/renamed_holdout_11.svg",
+      "after_svg": "after/renamed_holdout_11.svg"
+    },
+    {
+      "case_id": "renamed_holdout_12",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_L.jpg",
+      "before_svg": "before/renamed_holdout_12.svg",
+      "after_svg": "after/renamed_holdout_12.svg"
+    },
+    {
+      "case_id": "renamed_holdout_13",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_L_sia.jpg",
+      "before_svg": "before/renamed_holdout_13.svg",
+      "after_svg": "after/renamed_holdout_13.svg"
+    },
+    {
+      "case_id": "renamed_holdout_14",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_M.jpg",
+      "before_svg": "before/renamed_holdout_14.svg",
+      "after_svg": "after/renamed_holdout_14.svg"
+    },
+    {
+      "case_id": "renamed_holdout_15",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_M_sia.jpg",
+      "before_svg": "before/renamed_holdout_15.svg",
+      "after_svg": "after/renamed_holdout_15.svg"
+    },
+    {
+      "case_id": "renamed_holdout_16",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_S.jpg",
+      "before_svg": "before/renamed_holdout_16.svg",
+      "after_svg": "after/renamed_holdout_16.svg"
+    },
+    {
+      "case_id": "renamed_holdout_17",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0404_S_sia.jpg",
+      "before_svg": "before/renamed_holdout_17.svg",
+      "after_svg": "after/renamed_holdout_17.svg"
+    }
+  ],
+  "baseline_fitter_revision": "085411a8e15388823133f3ab999faa2960b7c1f0"
+}
