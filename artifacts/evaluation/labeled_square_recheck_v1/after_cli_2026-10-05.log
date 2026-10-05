@@ -1,0 +1,149 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Kein interaktives Terminal erkannt; verwende Bereich von '(Anfang)' bis '(Ende)'.
+[INFO] Konvertiere pilot_labeled_square.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite pilot_labeled_square.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_labeled_square.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.745098, localized_error_fraction=0.731805).
+[INFO] Konvertiert pilot_labeled_square.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_LABELED_SQUARE | Qualität: Optimierungsfehler/Pixel=0.006889, Mean-Delta²=920.249756, RGB-RMSE/Kanal=17.514278, Raumscore=2675.108628, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere renamed_gray_large.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_gray_large.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_gray_large.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.795918, localized_error_fraction=0.834524).
+[INFO] Konvertiert renamed_gray_large.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_GRAY_LARGE | Qualität: Optimierungsfehler/Pixel=0.006392, Mean-Delta²=884.010681, RGB-RMSE/Kanal=17.165961, Raumscore=2883.592304, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere renamed_gray_medium.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_gray_medium.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_gray_medium.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.390805, localized_error_fraction=0.836355).
+[INFO] Konvertiert renamed_gray_medium.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_GRAY_MEDIUM | Qualität: Optimierungsfehler/Pixel=0.007743, Mean-Delta²=441.522858, RGB-RMSE/Kanal=12.131541, Raumscore=1368.868057, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere renamed_gray_small.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_gray_small.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_gray_small.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.896552, localized_error_fraction=0.658425).
+[INFO] Konvertiert renamed_gray_small.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_GRAY_SMALL | Qualität: Optimierungsfehler/Pixel=0.018133, Mean-Delta²=548.752014, RGB-RMSE/Kanal=13.524694, Raumscore=1601.021771, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere renamed_red_medium.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_red_medium.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_red_medium.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.593220, localized_error_fraction=0.802219).
+[INFO] Konvertiert renamed_red_medium.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_RED_MEDIUM | Qualität: Optimierungsfehler/Pixel=0.011739, Mean-Delta²=1074.288574, RGB-RMSE/Kanal=18.923430, Raumscore=3336.052545, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere renamed_red_small.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_red_small.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_red_small.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.791045, localized_error_fraction=0.732485).
+[INFO] Konvertiert renamed_red_small.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_RED_SMALL | Qualität: Optimierungsfehler/Pixel=0.017406, Mean-Delta²=490.600006, RGB-RMSE/Kanal=12.788015, Raumscore=1474.936581, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere renamed_gray_small.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_gray_small.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_gray_small.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.896552, localized_error_fraction=0.658425).
+[INFO] Konvertiert renamed_gray_small.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_GRAY_SMALL | Qualität: Optimierungsfehler/Pixel=0.018133, Mean-Delta²=548.752014, RGB-RMSE/Kanal=13.524694, Raumscore=1601.021771, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.2s
+[INFO] Konvertiere renamed_red_small.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_red_small.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_red_small.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.791045, localized_error_fraction=0.732485).
+[INFO] Konvertiert renamed_red_small.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_RED_SMALL | Qualität: Optimierungsfehler/Pixel=0.017406, Mean-Delta²=490.600006, RGB-RMSE/Kanal=12.788015, Raumscore=1474.936581, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Konvertiere renamed_red_medium.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_red_medium.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_red_medium.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.593220, localized_error_fraction=0.802219).
+[INFO] Konvertiert renamed_red_medium.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_RED_MEDIUM | Qualität: Optimierungsfehler/Pixel=0.011739, Mean-Delta²=1074.288574, RGB-RMSE/Kanal=18.923430, Raumscore=3336.052545, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.2s
+[INFO] Konvertiere renamed_gray_medium.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_gray_medium.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_gray_medium.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.390805, localized_error_fraction=0.836355).
+[INFO] Konvertiert renamed_gray_medium.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_GRAY_MEDIUM | Qualität: Optimierungsfehler/Pixel=0.007743, Mean-Delta²=441.522858, RGB-RMSE/Kanal=12.131541, Raumscore=1368.868057, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.2s
+[INFO] Konvertiere pilot_labeled_square.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite pilot_labeled_square.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_labeled_square.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.745098, localized_error_fraction=0.731805).
+[INFO] Konvertiert pilot_labeled_square.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_LABELED_SQUARE | Qualität: Optimierungsfehler/Pixel=0.006889, Mean-Delta²=920.249756, RGB-RMSE/Kanal=17.514278, Raumscore=2675.108628, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.2s
+[INFO] Konvertiere renamed_gray_large.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_gray_large.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_gray_large.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.795918, localized_error_fraction=0.834524).
+[INFO] Konvertiert renamed_gray_large.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_GRAY_LARGE | Qualität: Optimierungsfehler/Pixel=0.006392, Mean-Delta²=884.010681, RGB-RMSE/Kanal=17.165961, Raumscore=2883.592304, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.2s
+[INFO] Konvertiere renamed_gray_small.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_gray_small.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_gray_small.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.896552, localized_error_fraction=0.658425).
+[INFO] Konvertiert renamed_gray_small.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_GRAY_SMALL | Qualität: Optimierungsfehler/Pixel=0.018133, Mean-Delta²=548.752014, RGB-RMSE/Kanal=13.524694, Raumscore=1601.021771, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Konvertiere renamed_red_small.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_red_small.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_red_small.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.791045, localized_error_fraction=0.732485).
+[INFO] Konvertiert renamed_red_small.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_RED_SMALL | Qualität: Optimierungsfehler/Pixel=0.017406, Mean-Delta²=490.600006, RGB-RMSE/Kanal=12.788015, Raumscore=1474.936581, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.5s
+[INFO] Konvertiere renamed_red_medium.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_red_medium.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_red_medium.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.593220, localized_error_fraction=0.802219).
+[INFO] Konvertiert renamed_red_medium.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_RED_MEDIUM | Qualität: Optimierungsfehler/Pixel=0.011739, Mean-Delta²=1074.288574, RGB-RMSE/Kanal=18.923430, Raumscore=3336.052545, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.6s
+[INFO] Konvertiere renamed_gray_medium.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_gray_medium.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_gray_medium.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.390805, localized_error_fraction=0.836355).
+[INFO] Konvertiert renamed_gray_medium.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_GRAY_MEDIUM | Qualität: Optimierungsfehler/Pixel=0.007743, Mean-Delta²=441.522858, RGB-RMSE/Kanal=12.131541, Raumscore=1368.868057, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.5s
+[INFO] Konvertiere pilot_labeled_square.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite pilot_labeled_square.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_labeled_square.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.745098, localized_error_fraction=0.731805).
+[INFO] Konvertiert pilot_labeled_square.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_LABELED_SQUARE | Qualität: Optimierungsfehler/Pixel=0.006889, Mean-Delta²=920.249756, RGB-RMSE/Kanal=17.514278, Raumscore=2675.108628, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.6s
+[INFO] Konvertiere renamed_gray_large.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_gray_large.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben, mittigem Griff nach unten und Text "P" im Quadrat.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_gray_large.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.795918, localized_error_fraction=0.834524).
+[INFO] Konvertiert renamed_gray_large.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_GRAY_LARGE | Qualität: Optimierungsfehler/Pixel=0.006392, Mean-Delta²=884.010681, RGB-RMSE/Kanal=17.165961, Raumscore=2883.592304, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.7s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\labeled-square-cli-final\after\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\labeled-square-cli-final\after\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\labeled-square-cli-final\after

@@ -6,6 +6,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
   geprüfte Merge-Folgen, beibehaltene Verträge und gezielt verworfene
   Altartefakt-/Klassifikationspfade.
 - [Forms Model (Circle + Handle)](Forms.md)
+- [Quadrat mit P: Raster- und Textregistrierung, Farb-/Größen-Holdouts und Gate-Abnahme (2026-10-05)](next_arbeitspaket_2026-10-05_ac0731_1_l.md)
 - [Kreis-Dreieck-Pumpe: Rasterregistrierung, Farb-Holdouts und Gate-Abnahme (2026-10-05)](next_arbeitspaket_2026-10-05_ac0252_1.md)
 - [Diagonal gespiegelte Quadrat-Kelle: Raster-Innenmarkierung und Gate-Abnahme (2026-10-04)](next_arbeitspaket_2026-10-04_ac0724_1_s.md)
 - [Quadrat-Kelle: Runtime-Registrierung, Größen-Holdouts und Gate-Abnahme (2026-10-04)](next_arbeitspaket_2026-10-04_ac0713_1_s.md)

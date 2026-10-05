@@ -15,6 +15,7 @@ from tools.perception_detection_contract import build_perception_seeded_geometry
 from src.iCCModules.imageCompositeConverterNestedPanel import fit_nested_panel
 from src.iCCModules.imageCompositeConverterInteriorMark import fit_rectilinear_interior_mark
 from src.iCCModules.imageCompositeConverterPump import fit_pump_geometry
+from src.iCCModules.imageCompositeConverterLabeledSquare import fit_labeled_square
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1644,7 +1645,13 @@ def runNonCompositeIterationImpl(
         perception_seeded = _try_build_perception_seeded_geometry_ir_svg(
             width, height, description=description, perc_img=perc_img
         )
-        description_geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+        # Reflection normalizes matching prose, but text glyphs must retain case.
+        glyph_description = " ".join(
+            str(fragment.get("text", ""))
+            for fragment in params.get("description_fragments", [])
+            if isinstance(fragment, dict)
+        ) or description
+        description_geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(glyph_description)
         description_geometry_ir = _apply_image_variant_geometry(
             description_geometry_ir, base_name=resolved_variant_name
         )
@@ -1718,6 +1725,21 @@ def runNonCompositeIterationImpl(
                             if key not in {"geometry_ir", "rendered"}
                         }
                     description_status = "non_composite_description_geometry_ir"
+                    labeled_square = fit_labeled_square(
+                        description_geometry_ir, image=perc_img,
+                        render_fn=lambda candidate_ir: render_svg_to_numpy_fn(
+                            geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, candidate_ir), width, height),
+                        error_fn=lambda rendered: calculate_error_fn(perc_img, rendered),
+                    )
+                    if labeled_square is not None and labeled_square['final_error'] < description_error:
+                        description_geometry_ir = labeled_square['geometry_ir']
+                        description_rendered = labeled_square['rendered']
+                        description_error = labeled_square['final_error']
+                        geometry_ir_svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, description_geometry_ir)
+                        params['optimized_geometry_ir'] = description_geometry_ir
+                        params['labeled_square_registration'] = {
+                            key: value for key, value in labeled_square.items() if key not in {'geometry_ir', 'rendered'}
+                        }
                     pump = fit_pump_geometry(
                         description_geometry_ir, image=perc_img, description=description,
                         render_fn=lambda candidate_ir: render_svg_to_numpy_fn(

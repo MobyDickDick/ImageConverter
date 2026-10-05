@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-05, nach Kreis-Dreieck-Pumpen-Recheck)
+## Aktuelle Kandidaten (Stand: 2026-10-05, nach Quadrat-P-Recheck)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -39,18 +39,26 @@ jetzt zutreffend ein nach rechts zeigendes Dreieck und enthält keine falschen
 Farbangaben oder Griffreferenz. Details:
 `docs/next_arbeitspaket_2026-10-05_ac0252_1.md`.
 
-1. `AC0731_1_L` – `mean_delta2=18881.216797`, `normalized_mse=0.096790`.
-2. `GE1003_M` – `mean_delta2=17817.699219`, `normalized_mse=0.091338`.
-3. `AC0404_1_L` – `mean_delta2=17112.675781`, `normalized_mse=0.087724`.
-4. `GE9011_6M` – `mean_delta2=15528.650391`, `normalized_mse=0.079603`.
-5. `AC0404_1_S` – `mean_delta2=15498.474609`, `normalized_mse=0.079449`.
+`AC0731_1_L` besteht nach katalogfreier Quadrat-/Griff-/Textregistrierung
+beide Gates (`mean_delta2=920.249756`, `edge_alignment=0.964218`). Alle fünf
+Farb-/Größen-Holdouts bestehen ebenfalls ohne Regression. Der explizite Text
+bleibt einschließlich Groß-/Kleinschreibung erhalten; die gemeinsame XML
+beschreibt jetzt eigenständig Quadrat, unteren Griff und `P`. Details:
+`docs/next_arbeitspaket_2026-10-05_ac0731_1_l.md`.
 
-Die nächste Rotation beginnt mit `AC0731_1_L` und muss den Wert des tatsächlich
+1. `GE1003_M` – `mean_delta2=17817.699219`, `normalized_mse=0.091338`.
+2. `AC0404_1_L` – `mean_delta2=17112.675781`, `normalized_mse=0.087724`.
+3. `GE9011_6M` – `mean_delta2=15528.650391`, `normalized_mse=0.079603`.
+4. `AC0404_1_S` – `mean_delta2=15498.474609`, `normalized_mse=0.079449`.
+5. `GE0281` – `mean_delta2=15287.335938`, `normalized_mse=0.078366`.
+
+Die nächste Rotation beginnt mit `GE1003_M` und muss den Wert des tatsächlich
 akzeptierten SVGs vor und nach der Änderung sowie den Gate-Status ausweisen.
 Der vollständige Review über `688` renderbare Paare steht unter
-`artifacts/evaluation/pump_recheck_v1/full_review/`.
+`artifacts/evaluation/labeled_square_recheck_v1/full_review/`.
 Er schließt die separat belegten Gate-Passes `AC0554_2_L`,
-`AC0713_1_S`, `DLG0010_1`, `AC0724_1_S`, `AC0252_1`, `AC0252` und `AC0252_2`
+`AC0713_1_S`, `DLG0010_1`, `AC0724_1_S`, `AC0252_1`, `AC0252`, `AC0252_2`,
+`AC0731_1_L`, `AC0731_1_M`, `AC0731_1_S`, `AC0731_L`, `AC0731_M` und `AC0731_S`
 explizit aus: Die historische Sammelausgabe enthält noch
 alte SVGs; die akzeptierten Ergebnisse liegen in den jeweiligen Evaluationen.
 
@@ -78,7 +86,13 @@ das CLI meldet dafür weiterhin konzentrierten Restfehler. Details stehen in
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
-Aktueller Recheck: Kreis-/Dreieck-/Farbregistrierung sind `generalisiert`;
+Aktueller Recheck: Quadrat-/Griff-/Textregistrierung sind `generalisiert`;
+Ziel und fünf Farb-/Größen-Holdouts bestehen beide Gates. Umbenennung, exaktes
+beschriebenes `P`, andere Farben, verschobene Lage, doppelte Größe und die
+Einzelbuchstaben `P`, `M`, `T` sind abgesichert. Details stehen in
+`docs/next_arbeitspaket_2026-10-05_ac0731_1_l.md`.
+
+Vorheriger Recheck: Kreis-/Dreieck-/Farbregistrierung sind `generalisiert`;
 Ziel sowie zwei Farb-Holdouts bestehen beide Gates. Umbenennung, andere Farben,
 verschobene Lage, doppelte Größe und vier Richtungen sind abgesichert.
 Details stehen in `docs/next_arbeitspaket_2026-10-05_ac0252_1.md`.

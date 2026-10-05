@@ -1,0 +1,42 @@
+{
+  "cli_help": {
+    "exit_code": 0
+  },
+  "compileall": {
+    "exit_code": 0,
+    "paths": [
+      "src",
+      "tests",
+      "tools"
+    ]
+  },
+  "default_profile": {
+    "passed": 1509,
+    "skip_reason": "existing Windows exclusions for POSIX shell integration",
+    "skipped": 29
+  },
+  "focused_tests": {
+    "passed": 283,
+    "skipped": 0
+  },
+  "log_sha256": {
+    "after_cli_2026-10-05.log": "372120f4966b7b2bb33251d163060ee8305c7c3912b5688ae977612c1e7feafb",
+    "before_cli_2026-10-05.log": "a9319f6505c5f62d52238e70e48eb475cb0fd2f6881bed30fc9c5d19ffd5815e",
+    "cli_help_2026-10-05.log": "2f16d1d704ba36a0f4c72969fd75782bc1ff00ddc7d8e5dd3828c280219bab86",
+    "focused_tests_2026-10-05.log": "f9a12003a37d57d2ecd0a2b5288b1c0ea9089116799cd74f29a4662fa6e27874",
+    "runtime_id_check_2026-10-05.log": "ee73564b07d1984684ebd9b481466b3b4192b45cce25c632ad85239fd7bd116a",
+    "tests_2026-10-05.log": "94f83457bbef2b98345b11685f4252bd5e82e1a234b5182ceef0a32117eadac3"
+  },
+  "runtime_image_id_check": {
+    "exit_code": 0,
+    "occurrences": 0
+  },
+  "saved_svg_gate_summary": {
+    "case_count": 6,
+    "improved": 6,
+    "satisfactory": 6,
+    "technically_completed": 6
+  },
+  "schema_version": "labeled_square_completion_checks_v1",
+  "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+}

@@ -722,6 +722,12 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "connector_width": 0.080,
             }
         )
+        # A quoted label is a description constraint, independent of catalog IDs.
+        label_match = re.search(r'(?:text|beschriftung|buchstabe|label)\s*[:=]?\s*["\'„]([^"\'“]{1,8})["\'“]', description, re.IGNORECASE)
+        if label_match and not _has_any(desc, ("ohne text", "ohne beschriftung", "ohne label", "ohne buchstabe")):
+            elements[-1].update(label=label_match.group(1),
+                                label_center=[0.500, 0.320], label_fill="#dedede",
+                                font_size=0.440, font_weight="600")
         return elements
 
     if vertically_mirrored_square_kelle_t_hint:
@@ -1947,14 +1953,15 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 f'width="{_fmt(body_w)}" height="{_fmt(body_h)}" fill="{body_fill}" '
                 f'stroke="{body_stroke}" stroke-width="{_fmt(body_sw)}"/>'
             )
-            if kind in {"UprightSquareKelleGlyph", "Rotated180SquareKelleGlyph", "MainDiagonalMirroredSquareKelleGlyph"}:
+            if kind in {"UprightSquareKelleGlyph", "Rotated180SquareKelleGlyph", "MainDiagonalMirroredSquareKelleGlyph"} and not element.get("label"):
                 continue
             default_label_center = {
                 "VerticallyMirroredSquareKelleTGlyph": [0.500, 0.660],
                 "LeftRotatedSquareKelleTGlyph": [0.611, 0.520],
                 "RightFacingSquareKellePGlyph": [0.640, 0.520],
                 "RightRotatedSquareKellePGlyph": [0.460, 0.656],
-            }[kind]
+            }.get(kind, [float(raw_body_bbox[0])+float(raw_body_bbox[2])/2,
+                         float(raw_body_bbox[1])+float(raw_body_bbox[3])/2])
             raw_label_center = element.get("label_center", default_label_center)
             if not isinstance(raw_label_center, list) or len(raw_label_center) != 2:
                 raw_label_center = default_label_center

@@ -1,0 +1,106 @@
+{
+  "baseline_sha256": "6c98a526b579435ec8205351e9c6251a7e846ed88d9337a0705d2fea83578190",
+  "cases": {
+    "pilot_labeled_square": {
+      "dimensions": {
+        "height": 45,
+        "width": 25
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8350239992141724,
+        "error_per_pixel": 0.021188655404972445,
+        "object_mask_iou": 0.8317901234567902,
+        "semantic_score": 1.0
+      }
+    },
+    "renamed_gray_large": {
+      "dimensions": {
+        "height": 45,
+        "width": 25
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.44240352511405945,
+        "error_per_pixel": 0.040001289067506086,
+        "object_mask_iou": 0.3125,
+        "semantic_score": 1.0
+      }
+    },
+    "renamed_gray_medium": {
+      "dimensions": {
+        "height": 35,
+        "width": 20
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.39892759919166565,
+        "error_per_pixel": 0.04459942289824426,
+        "object_mask_iou": 0.29957805907172996,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_gray_small": {
+      "dimensions": {
+        "height": 25,
+        "width": 15
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.49560606479644775,
+        "error_per_pixel": 0.0981065775983596,
+        "object_mask_iou": 0.40106951871657753,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_red_medium": {
+      "dimensions": {
+        "height": 35,
+        "width": 20
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7969286441802979,
+        "error_per_pixel": 0.02163246257449058,
+        "object_mask_iou": 0.905940594059406,
+        "semantic_score": 1.0
+      }
+    },
+    "renamed_red_small": {
+      "dimensions": {
+        "height": 25,
+        "width": 15
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7449730634689331,
+        "error_per_pixel": 0.019023685301326414,
+        "object_mask_iou": 0.9279279279279279,
+        "semantic_score": 1.0
+      }
+    }
+  },
+  "provenance": {
+    "baseline_mode": "CLI ablation disabling explicit upright-square text and raster labeled-square registration; same corrected description, inputs and seed",
+    "commit": "f1d3c220f6fce190b0c4c0c8cf05917a99e1b1ed",
+    "execution_mode": "semantic-only",
+    "input_hashes": {
+      "pilot_labeled_square": "134a29e123cad290b76e710b5a6dfe020c3450ce35c159f17a1943cb57c22cd6",
+      "renamed_gray_large": "f115118060c6dc05b3e3e2c892388063e3859241cc42ae6e37583d4a96ba35c0",
+      "renamed_gray_medium": "724f295c1202325ced7cd585890842be26ee9ca389d25ad0ae91aa088e6086f1",
+      "renamed_gray_small": "c48f97cbea31894f9abc749acda97eb04c230b4ebd789cb48d94ff1440053f96",
+      "renamed_red_medium": "cbdc8e15414808573217535ec0ecc666379a83afc94ba063f3942c706141dd9e",
+      "renamed_red_small": "485311d15070b9c1827b98960b5b4aa7fdb3c1eb31d76b8c381d0aa1e6897d61"
+    },
+    "seed": 0,
+    "source_sha256": {
+      "src/iCCModules/imageCompositeConverterGeometryIr/runtime.py": "54fcc6477fd1fba568d4112feb4649eab18bf2b050223fc3ae87dd383b72bcee",
+      "src/iCCModules/imageCompositeConverterLabeledSquare.py": "cfcdea747f11bddbe6e152cd892b1dc4262b19220a86c87065a3384e6145a44a",
+      "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "2eed5cebe227ff032d1d7ae439f358921b820c024d5da508604db04ec02221a7",
+      "tools/evaluate_labeled_square_recheck.py": "e406ca034c4cfeb8d58f60ae172b2b35f68e5645661555552ba3eb81a1062f01",
+      "tools/run_labeled_square_recheck.py": "78e8f82c5204d7a12cdd8fab7df3b26601408e9cd0cec2dc30f26f3cad3f0d03"
+    },
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+  },
+  "schema_version": "semantic_only_baseline_manifest_v1"
+}

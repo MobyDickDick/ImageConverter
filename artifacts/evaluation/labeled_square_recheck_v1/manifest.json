@@ -1,0 +1,63 @@
+{
+  "schema_version": "labeled_square_recheck_manifest_v1",
+  "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"P\" im Quadrat.",
+  "label": "P",
+  "provenance": {
+    "commit": "f1d3c220f6fce190b0c4c0c8cf05917a99e1b1ed",
+    "baseline_mode": "CLI ablation disabling explicit upright-square text and raster labeled-square registration; same corrected description, inputs and seed",
+    "seed": 0,
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0",
+    "execution_mode": "semantic-only",
+    "source_sha256": {
+      "src/iCCModules/imageCompositeConverterLabeledSquare.py": "cfcdea747f11bddbe6e152cd892b1dc4262b19220a86c87065a3384e6145a44a",
+      "src/iCCModules/imageCompositeConverterGeometryIr/runtime.py": "54fcc6477fd1fba568d4112feb4649eab18bf2b050223fc3ae87dd383b72bcee",
+      "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "2eed5cebe227ff032d1d7ae439f358921b820c024d5da508604db04ec02221a7",
+      "tools/run_labeled_square_recheck.py": "78e8f82c5204d7a12cdd8fab7df3b26601408e9cd0cec2dc30f26f3cad3f0d03",
+      "tools/evaluate_labeled_square_recheck.py": "e406ca034c4cfeb8d58f60ae172b2b35f68e5645661555552ba3eb81a1062f01"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "pilot_labeled_square",
+      "role": "target",
+      "image": "../../images_to_convert/AC0731_1_L.jpg",
+      "before_svg": "before/pilot_labeled_square.svg",
+      "after_svg": "after/pilot_labeled_square.svg"
+    },
+    {
+      "case_id": "renamed_red_medium",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0731_1_M.jpg",
+      "before_svg": "before/renamed_red_medium.svg",
+      "after_svg": "after/renamed_red_medium.svg"
+    },
+    {
+      "case_id": "renamed_red_small",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0731_1_S.jpg",
+      "before_svg": "before/renamed_red_small.svg",
+      "after_svg": "after/renamed_red_small.svg"
+    },
+    {
+      "case_id": "renamed_gray_large",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0731_L.jpg",
+      "before_svg": "before/renamed_gray_large.svg",
+      "after_svg": "after/renamed_gray_large.svg"
+    },
+    {
+      "case_id": "renamed_gray_medium",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0731_M.jpg",
+      "before_svg": "before/renamed_gray_medium.svg",
+      "after_svg": "after/renamed_gray_medium.svg"
+    },
+    {
+      "case_id": "renamed_gray_small",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0731_S.jpg",
+      "before_svg": "before/renamed_gray_small.svg",
+      "after_svg": "after/renamed_gray_small.svg"
+    }
+  ]
+}

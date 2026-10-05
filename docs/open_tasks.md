@@ -14,6 +14,18 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-05)
 
+Das Paket für `AC0731_1_L` ist abgeschlossen: Der aufrechte Quadratpfad
+rendert ausdrücklich beschriebenen Text und erhält dessen Groß-/Kleinschreibung.
+Die katalogfreie Rasterregistrierung bestimmt Körper, unteren Griff, Farben
+und Schriftlage. Die gemeinsame XML ist jetzt eine eigenständige Beschreibung
+mit `P`. Das gespeicherte Ziel-CLI-SVG erreicht `mean_delta2=920.249756`;
+Ziel und fünf Farb-/Größen-Holdouts bestehen beide harten Gates ohne Regression.
+Zwei unabhängige CLI-Läufe reproduzieren alle zwölf SVG-Bytes und Gateentscheidungen.
+`283` fokussierte Tests sowie `1509` Tests im vollständigen Defaultprofil sind
+grün; dessen `29` bestehende Windows-Skips bleiben dokumentiert. Der erneuerte
+Review über `688` Paare führt die Rotation mit `GE1003_M` fort.
+Details: `docs/next_arbeitspaket_2026-10-05_ac0731_1_l.md`.
+
 Das Paket für `AC0252_1` ist abgeschlossen: Die katalogfreie Registrierung
 ermittelt Kreis, Dreieck und Farben aus dem Raster. Die widersprüchliche XML
 ist auf die sichtbare, nach rechts zeigende Kreis-Dreieck-Struktur korrigiert.
