@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-05, nach Quadrat-P-Recheck)
+## Aktuelle Kandidaten (Stand: 2026-10-05, nach Haken-/Kreisscheiben-Recheck)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -46,21 +46,30 @@ bleibt einschließlich Groß-/Kleinschreibung erhalten; die gemeinsame XML
 beschreibt jetzt eigenständig Quadrat, unteren Griff und `P`. Details:
 `docs/next_arbeitspaket_2026-10-05_ac0731_1_l.md`.
 
-1. `GE1003_M` – `mean_delta2=17817.699219`, `normalized_mse=0.091338`.
-2. `AC0404_1_L` – `mean_delta2=17112.675781`, `normalized_mse=0.087724`.
-3. `GE9011_6M` – `mean_delta2=15528.650391`, `normalized_mse=0.079603`.
-4. `AC0404_1_S` – `mean_delta2=15498.474609`, `normalized_mse=0.079449`.
-5. `GE0281` – `mean_delta2=15287.335938`, `normalized_mse=0.078366`.
+`GE1003_M` besteht nach katalogfreier Haken-/Scheibenregistrierung beide
+Gates (`mean_delta2=401.955200`, `edge_alignment=0.922646`). L-/S-Holdouts
+bestehen ebenfalls ohne Regression; zwei unabhängige CLI-Läufe reproduzieren
+alle SVG-Bytes und Gateentscheidungen. Die XML beschreibt die Topologie jetzt
+eigenständig. Native Radialverläufe bleiben im SVG erhalten; ein privater
+Renderadapter verhindert die schwarzen PyMuPDF-Artefakte. Details:
+`docs/next_arbeitspaket_2026-10-05_ge1003_m.md`.
 
-Die nächste Rotation beginnt mit `GE1003_M` und muss den Wert des tatsächlich
+1. `AC0404_1_L` – `mean_delta2=17112.675781`, `normalized_mse=0.087724`.
+2. `GE9011_6M` – `mean_delta2=15528.650391`, `normalized_mse=0.079603`.
+3. `AC0404_1_S` – `mean_delta2=15498.474609`, `normalized_mse=0.079449`.
+4. `GE0281` – `mean_delta2=15287.335938`, `normalized_mse=0.078366`.
+5. `GE0300` – `mean_delta2=14731.457031`, `normalized_mse=0.075517`.
+
+Die nächste Rotation beginnt mit `AC0404_1_L` und muss den Wert des tatsächlich
 akzeptierten SVGs vor und nach der Änderung sowie den Gate-Status ausweisen.
 Der vollständige Review über `688` renderbare Paare steht unter
-`artifacts/evaluation/labeled_square_recheck_v1/full_review/`.
+`artifacts/evaluation/checkmark_disk_recheck_v1/full_review/`.
 Er schließt die separat belegten Gate-Passes `AC0554_2_L`,
 `AC0713_1_S`, `DLG0010_1`, `AC0724_1_S`, `AC0252_1`, `AC0252`, `AC0252_2`,
-`AC0731_1_L`, `AC0731_1_M`, `AC0731_1_S`, `AC0731_L`, `AC0731_M` und `AC0731_S`
-explizit aus: Die historische Sammelausgabe enthält noch
-alte SVGs; die akzeptierten Ergebnisse liegen in den jeweiligen Evaluationen.
+`AC0731_1_L`, `AC0731_1_M`, `AC0731_1_S`, `AC0731_L`, `AC0731_M`, `AC0731_S`,
+`GE1003_M`, `GE1003_L` und `GE1003_S` explizit aus: Die historische Sammelausgabe
+enthält noch alte SVGs; die akzeptierten Ergebnisse liegen in den jeweiligen
+Evaluationen.
 
 Abschluss des Runtime-Registrierungspakets `AC0713_1_S` (2026-10-04):
 `Rotated180SquareKelleGlyph` gehört nun auch zu den beiden Runtime-Kind-Sets.
@@ -86,7 +95,13 @@ das CLI meldet dafür weiterhin konzentrierten Restfehler. Details stehen in
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
-Aktueller Recheck: Quadrat-/Griff-/Textregistrierung sind `generalisiert`;
+Aktueller Recheck: Haken-/Scheibenregistrierung sind `generalisiert`;
+Ziel und zwei Größen-Holdouts bestehen beide Gates. Umbenennung, verschobene
+Lage, doppelte Größe, zwei Grüntöne und Negativfälle sind abgesichert. Der
+Renderadapter erhält native Radialverläufe in den gespeicherten SVGs.
+Details: `docs/next_arbeitspaket_2026-10-05_ge1003_m.md`.
+
+Vorheriger Recheck: Quadrat-/Griff-/Textregistrierung sind `generalisiert`;
 Ziel und fünf Farb-/Größen-Holdouts bestehen beide Gates. Umbenennung, exaktes
 beschriebenes `P`, andere Farben, verschobene Lage, doppelte Größe und die
 Einzelbuchstaben `P`, `M`, `T` sind abgesichert. Details stehen in

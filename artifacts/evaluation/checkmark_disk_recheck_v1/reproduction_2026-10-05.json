@@ -1,0 +1,13 @@
+{
+  "independent_cli_runs": 2,
+  "all_svg_bytes_identical": true,
+  "all_gate_records_identical": true,
+  "svg_sha256": {
+    "before/pilot_checkmark_disk": "c4fc136d8ef79cb084a8bcc20bd5cf4ee33d566d2cfa4dc7a52b7fc999fbaf03",
+    "after/pilot_checkmark_disk": "86afc003adfa0acadd83b37e22a1649cf04523edab4a9c5e7fc8489261db83c9",
+    "before/renamed_large": "b6474365f3ab28418041b58fb17a84d77954b7cdc48b6081c9fc7effae1acdb9",
+    "after/renamed_large": "c03965225730ddeff8b51e3be46bf5c59c5a284032343b23b3310c87a3eab2b7",
+    "before/renamed_small": "36de400cd712c2d22340ae7887d2df31a04b5377be93fe1d519e2e3e5ff3bfa3",
+    "after/renamed_small": "b11f93eab4db9450ec09cb964709e24d8894bf717f88a8cb8cfeb2055f4dd793"
+  }
+}

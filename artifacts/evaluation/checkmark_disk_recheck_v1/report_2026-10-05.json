@@ -1,0 +1,423 @@
+{
+  "baseline": {
+    "baseline_sha256": "50384efad717dc7ef12f58f05622eb81e7205d7e9db8828a8c57de8c282af8bb",
+    "cases": {
+      "pilot_checkmark_disk": {
+        "dimensions": {
+          "height": 25,
+          "width": 25
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5713750123977661,
+          "error_per_pixel": 0.07534726727700884,
+          "object_mask_iou": 0.7034482758620689,
+          "semantic_score": 0.0
+        }
+      },
+      "renamed_large": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.539094865322113,
+          "error_per_pixel": 0.07818328587562476,
+          "object_mask_iou": 0.7156626506024096,
+          "semantic_score": 0.0
+        }
+      },
+      "renamed_small": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.586641788482666,
+          "error_per_pixel": 0.06843760012174804,
+          "object_mask_iou": 0.7120418848167539,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "CLI ablation disabling raster checkmark-disk registration; same corrected description, radial renderer adapter, constrained optimizer routing, inputs and seed",
+      "commit": "2322ad6a6ddf0480e50f9a8aae028bd1e19fb9d3",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "pilot_checkmark_disk": "12bb609eb681ed60484ffdb0d988bf99b2f9cf8ebbc43fcf74e5c22cf6d38dd7",
+        "renamed_large": "9545d10e3992e009e92c10a57218659573c63403099c29cef14f6f8d9eeb15b4",
+        "renamed_small": "ada043393d506630006ac00fa1478e2be5bb242352ffa6218c53c3a3dea86f8b"
+      },
+      "seed": 0,
+      "source_sha256": {
+        "src/iCCModules/imageCompositeConverterCheckmark.py": "1e48db04d77efdea5bd9b28530972e5fcf924cfe76feea7349b02ec54cd644b6",
+        "src/iCCModules/imageCompositeConverterGeometryIr/runtime.py": "7c06bccff5f1815603b873096641077d8bac0e575ae27cc4f06e038fa7aa12eb",
+        "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "45edafeb91a65196f448ad34ba6e62cccf3275e1bf55d90f45c962e9b88a8d73",
+        "src/iCCModules/imageCompositeConverterRendering.py": "7d9a7a7e1b3c6568cc9ae670e8a02d78a0b24a7ab07a0efcc733360f284d6edc",
+        "tools/evaluate_checkmark_disk_recheck.py": "158bbec92b56185b735aaf5b8f59db8768d1f5f568cfe7aa34a9314de14eecdf",
+        "tools/run_checkmark_disk_recheck.py": "7e6bf899a4e445443e755b644c378e2f59c0373ad6b3e904ae1223ccbe39d859"
+      },
+      "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 401.9552001953125,
+      "after_svg": "after/pilot_checkmark_disk.svg",
+      "after_svg_sha256": "86afc003adfa0acadd83b37e22a1649cf04523edab4a9c5e7fc8489261db83c9",
+      "before_mean_delta2": 14698.3681640625,
+      "before_svg": "before/pilot_checkmark_disk.svg",
+      "before_svg_sha256": "c4fc136d8ef79cb084a8bcc20bd5cf4ee33d566d2cfa4dc7a52b7fc999fbaf03",
+      "case_id": "pilot_checkmark_disk",
+      "image": "../../images_to_convert/GE1003_M.jpg",
+      "input_sha256": "12bb609eb681ed60484ffdb0d988bf99b2f9cf8ebbc43fcf74e5c22cf6d38dd7",
+      "role": "target"
+    },
+    {
+      "after_mean_delta2": 435.63555908203125,
+      "after_svg": "after/renamed_large.svg",
+      "after_svg_sha256": "c03965225730ddeff8b51e3be46bf5c59c5a284032343b23b3310c87a3eab2b7",
+      "before_mean_delta2": 15251.6044921875,
+      "before_svg": "before/renamed_large.svg",
+      "before_svg_sha256": "b6474365f3ab28418041b58fb17a84d77954b7cdc48b6081c9fc7effae1acdb9",
+      "case_id": "renamed_large",
+      "image": "../../images_to_convert/GE1003_L.jpg",
+      "input_sha256": "9545d10e3992e009e92c10a57218659573c63403099c29cef14f6f8d9eeb15b4",
+      "role": "holdout"
+    },
+    {
+      "after_mean_delta2": 742.3524780273438,
+      "after_svg": "after/renamed_small.svg",
+      "after_svg_sha256": "b11f93eab4db9450ec09cb964709e24d8894bf717f88a8cb8cfeb2055f4dd793",
+      "before_mean_delta2": 13350.46484375,
+      "before_svg": "before/renamed_small.svg",
+      "before_svg_sha256": "36de400cd712c2d22340ae7887d2df31a04b5377be93fe1d519e2e3e5ff3bfa3",
+      "case_id": "renamed_small",
+      "image": "../../images_to_convert/GE1003_S.jpg",
+      "input_sha256": "ada043393d506630006ac00fa1478e2be5bb242352ffa6218c53c3a3dea86f8b",
+      "role": "holdout"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "50384efad717dc7ef12f58f05622eb81e7205d7e9db8828a8c57de8c282af8bb",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9226460456848145,
+          "error_per_pixel": 0.002060516212714661,
+          "object_mask_iou": 0.9509433962264151,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5713750123977661,
+          "error_per_pixel": 0.07534726727700884,
+          "object_mask_iou": 0.7034482758620689,
+          "semantic_score": 0.0
+        },
+        "case_id": "pilot_checkmark_disk",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.002060516212714661,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 6,
+            "path_complexity_ratio": 1.5,
+            "path_count": 2,
+            "vector_element_count": 4
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9679,
+            "edge_alignment": 0.9226,
+            "pixel_similarity": 0.9979,
+            "semantic_score": 1.0,
+            "structure_score": 0.9509
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8545995950698853,
+          "error_per_pixel": 0.0022331695967296233,
+          "object_mask_iou": 0.9585492227979274,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.539094865322113,
+          "error_per_pixel": 0.07818328587562476,
+          "object_mask_iou": 0.7156626506024096,
+          "semantic_score": 0.0
+        },
+        "case_id": "renamed_large",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0022331695967296233,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 6,
+            "path_complexity_ratio": 1.5,
+            "path_count": 2,
+            "vector_element_count": 4
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9527,
+            "edge_alignment": 0.8546,
+            "pixel_similarity": 0.9978,
+            "semantic_score": 1.0,
+            "structure_score": 0.9585
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8991633653640747,
+          "error_per_pixel": 0.0038054721416242152,
+          "object_mask_iou": 0.9382022471910112,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.586641788482666,
+          "error_per_pixel": 0.06843760012174804,
+          "object_mask_iou": 0.7120418848167539,
+          "semantic_score": 0.0
+        },
+        "case_id": "renamed_small",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0038054721416242152,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 6,
+            "path_complexity_ratio": 1.5,
+            "path_count": 2,
+            "vector_element_count": 4
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9584,
+            "edge_alignment": 0.8992,
+            "pixel_similarity": 0.9962,
+            "semantic_score": 1.0,
+            "structure_score": 0.9382
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "CLI ablation disabling raster checkmark-disk registration; same corrected description, radial renderer adapter, constrained optimizer routing, inputs and seed",
+      "commit": "2322ad6a6ddf0480e50f9a8aae028bd1e19fb9d3",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "pilot_checkmark_disk": "12bb609eb681ed60484ffdb0d988bf99b2f9cf8ebbc43fcf74e5c22cf6d38dd7",
+        "renamed_large": "9545d10e3992e009e92c10a57218659573c63403099c29cef14f6f8d9eeb15b4",
+        "renamed_small": "ada043393d506630006ac00fa1478e2be5bb242352ffa6218c53c3a3dea86f8b"
+      },
+      "seed": 0,
+      "source_sha256": {
+        "src/iCCModules/imageCompositeConverterCheckmark.py": "1e48db04d77efdea5bd9b28530972e5fcf924cfe76feea7349b02ec54cd644b6",
+        "src/iCCModules/imageCompositeConverterGeometryIr/runtime.py": "7c06bccff5f1815603b873096641077d8bac0e575ae27cc4f06e038fa7aa12eb",
+        "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "45edafeb91a65196f448ad34ba6e62cccf3275e1bf55d90f45c962e9b88a8d73",
+        "src/iCCModules/imageCompositeConverterRendering.py": "7d9a7a7e1b3c6568cc9ae670e8a02d78a0b24a7ab07a0efcc733360f284d6edc",
+        "tools/evaluate_checkmark_disk_recheck.py": "158bbec92b56185b735aaf5b8f59db8768d1f5f568cfe7aa34a9314de14eecdf",
+        "tools/run_checkmark_disk_recheck.py": "7e6bf899a4e445443e755b644c378e2f59c0373ad6b3e904ae1223ccbe39d859"
+      },
+      "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 3,
+      "improved": 3,
+      "satisfactory": 3,
+      "technically_completed": 3
+    }
+  },
+  "schema_version": "checkmark_disk_recheck_v1",
+  "semantic_contract": "one neutral radial disk behind a green two-leg checkmark with short left and long upper-right leg; current raster determines geometry and colors"
+}

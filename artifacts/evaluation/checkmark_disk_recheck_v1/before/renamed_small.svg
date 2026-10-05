@@ -1,0 +1,18 @@
+<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <radialGradient id="checkmark-disk-gradient">
+      <stop offset="0%" stop-color="#eeeeee"/>
+      <stop offset="70%" stop-color="#bcbcbc"/>
+      <stop offset="100%" stop-color="#969696"/>
+    </radialGradient>
+    <linearGradient id="checkmark-green-vertical-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#176f28"/>
+      <stop offset="55%" stop-color="#43ad49"/>
+      <stop offset="100%" stop-color="#c8d0c3"/>
+    </linearGradient>
+  </defs>
+  <rect id="checkmark_background" x="0" y="0" width="20" height="20" fill="#ffffff" stroke="none"/>
+  <ellipse id="checkmark_disk" cx="9.2" cy="14" rx="6" ry="6" fill="url(#checkmark-disk-gradient)" stroke="#808080" stroke-width="0.5"/>
+  <path id="checkmark_shadow_outline" d="M 5.1 11.2 L 9.8 15.6 L 17.2 0.1" stroke="#969696" stroke-width="2.4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <path id="checkmark_green_stroke" d="M 5.7 10.5 L 10.2 14.2 L 16.7 0" stroke="url(#checkmark-green-vertical-gradient)" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>
