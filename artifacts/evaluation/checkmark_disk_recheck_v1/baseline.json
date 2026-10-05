@@ -1,0 +1,65 @@
+{
+  "baseline_sha256": "50384efad717dc7ef12f58f05622eb81e7205d7e9db8828a8c57de8c282af8bb",
+  "cases": {
+    "pilot_checkmark_disk": {
+      "dimensions": {
+        "height": 25,
+        "width": 25
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5713750123977661,
+        "error_per_pixel": 0.07534726727700884,
+        "object_mask_iou": 0.7034482758620689,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_large": {
+      "dimensions": {
+        "height": 30,
+        "width": 30
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.539094865322113,
+        "error_per_pixel": 0.07818328587562476,
+        "object_mask_iou": 0.7156626506024096,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_small": {
+      "dimensions": {
+        "height": 20,
+        "width": 20
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.586641788482666,
+        "error_per_pixel": 0.06843760012174804,
+        "object_mask_iou": 0.7120418848167539,
+        "semantic_score": 0.0
+      }
+    }
+  },
+  "provenance": {
+    "baseline_mode": "CLI ablation disabling raster checkmark-disk registration; same corrected description, radial renderer adapter, constrained optimizer routing, inputs and seed",
+    "commit": "2322ad6a6ddf0480e50f9a8aae028bd1e19fb9d3",
+    "execution_mode": "semantic-only",
+    "input_hashes": {
+      "pilot_checkmark_disk": "12bb609eb681ed60484ffdb0d988bf99b2f9cf8ebbc43fcf74e5c22cf6d38dd7",
+      "renamed_large": "9545d10e3992e009e92c10a57218659573c63403099c29cef14f6f8d9eeb15b4",
+      "renamed_small": "ada043393d506630006ac00fa1478e2be5bb242352ffa6218c53c3a3dea86f8b"
+    },
+    "seed": 0,
+    "source_sha256": {
+      "src/iCCModules/imageCompositeConverterCheckmark.py": "1e48db04d77efdea5bd9b28530972e5fcf924cfe76feea7349b02ec54cd644b6",
+      "src/iCCModules/imageCompositeConverterGeometryIr/runtime.py": "7c06bccff5f1815603b873096641077d8bac0e575ae27cc4f06e038fa7aa12eb",
+      "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "45edafeb91a65196f448ad34ba6e62cccf3275e1bf55d90f45c962e9b88a8d73",
+      "src/iCCModules/imageCompositeConverterRendering.py": "7d9a7a7e1b3c6568cc9ae670e8a02d78a0b24a7ab07a0efcc733360f284d6edc",
+      "tools/evaluate_checkmark_disk_recheck.py": "158bbec92b56185b735aaf5b8f59db8768d1f5f568cfe7aa34a9314de14eecdf",
+      "tools/run_checkmark_disk_recheck.py": "7e6bf899a4e445443e755b644c378e2f59c0373ad6b3e904ae1223ccbe39d859"
+    },
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+  },
+  "schema_version": "semantic_only_baseline_manifest_v1"
+}

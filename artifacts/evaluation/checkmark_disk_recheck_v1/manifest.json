@@ -2,11 +2,19 @@
   "schema_version": "checkmark_disk_recheck_manifest_v1",
   "description": "Gr\u00fcner Haken aus zwei dicken schr\u00e4gen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und au\u00dfen dunkler. Wei\u00dfer Hintergrund.",
   "provenance": {
-    "commit": "f3d6d61c2f0c43afb27edb67127794bc994f95ac",
-    "baseline_mode": "CLI ablation disabling raster checkmark-disk registration; same corrected description, radial renderer adapter, inputs and seed",
+    "commit": "2322ad6a6ddf0480e50f9a8aae028bd1e19fb9d3",
+    "baseline_mode": "CLI ablation disabling raster checkmark-disk registration; same corrected description, radial renderer adapter, constrained optimizer routing, inputs and seed",
     "seed": 0,
     "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0",
-    "execution_mode": "semantic-only"
+    "execution_mode": "semantic-only",
+    "source_sha256": {
+      "src/iCCModules/imageCompositeConverterCheckmark.py": "1e48db04d77efdea5bd9b28530972e5fcf924cfe76feea7349b02ec54cd644b6",
+      "src/iCCModules/imageCompositeConverterGeometryIr/runtime.py": "7c06bccff5f1815603b873096641077d8bac0e575ae27cc4f06e038fa7aa12eb",
+      "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "45edafeb91a65196f448ad34ba6e62cccf3275e1bf55d90f45c962e9b88a8d73",
+      "src/iCCModules/imageCompositeConverterRendering.py": "7d9a7a7e1b3c6568cc9ae670e8a02d78a0b24a7ab07a0efcc733360f284d6edc",
+      "tools/run_checkmark_disk_recheck.py": "7e6bf899a4e445443e755b644c378e2f59c0373ad6b3e904ae1223ccbe39d859",
+      "tools/evaluate_checkmark_disk_recheck.py": "158bbec92b56185b735aaf5b8f59db8768d1f5f568cfe7aa34a9314de14eecdf"
+    }
   },
   "cases": [
     {

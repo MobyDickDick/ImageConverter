@@ -1,0 +1,77 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Kein interaktives Terminal erkannt; verwende Bereich von '(Anfang)' bis '(Ende)'.
+[INFO] Konvertiere pilot_checkmark_disk.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite pilot_checkmark_disk.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_checkmark_disk.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.369748, localized_error_fraction=0.791069).
+[INFO] Konvertiert pilot_checkmark_disk.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_CHECKMARK_DISK | Qualität: Optimierungsfehler/Pixel=0.009383, Mean-Delta²=401.955200, RGB-RMSE/Kanal=11.575192, Raumscore=1195.012501, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere renamed_large.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_large.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_large.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.472050, localized_error_fraction=0.717083).
+[INFO] Konvertiert renamed_large.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_LARGE | Qualität: Optimierungsfehler/Pixel=0.006905, Mean-Delta²=435.635559, RGB-RMSE/Kanal=12.050388, Raumscore=1209.935404, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere renamed_small.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_small.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_small.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.189873, localized_error_fraction=0.833947).
+[INFO] Konvertiert renamed_small.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_SMALL | Qualität: Optimierungsfehler/Pixel=0.019140, Mean-Delta²=742.352478, RGB-RMSE/Kanal=15.730570, Raumscore=2565.311673, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere renamed_small.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_small.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_small.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.189873, localized_error_fraction=0.833947).
+[INFO] Konvertiert renamed_small.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_SMALL | Qualität: Optimierungsfehler/Pixel=0.019140, Mean-Delta²=742.352478, RGB-RMSE/Kanal=15.730570, Raumscore=2565.311673, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere pilot_checkmark_disk.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite pilot_checkmark_disk.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_checkmark_disk.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.369748, localized_error_fraction=0.791069).
+[INFO] Konvertiert pilot_checkmark_disk.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_CHECKMARK_DISK | Qualität: Optimierungsfehler/Pixel=0.009383, Mean-Delta²=401.955200, RGB-RMSE/Kanal=11.575192, Raumscore=1195.012501, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere renamed_large.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_large.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_large.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.472050, localized_error_fraction=0.717083).
+[INFO] Konvertiert renamed_large.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_LARGE | Qualität: Optimierungsfehler/Pixel=0.006905, Mean-Delta²=435.635559, RGB-RMSE/Kanal=12.050388, Raumscore=1209.935404, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere renamed_small.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_small.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_small.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.189873, localized_error_fraction=0.833947).
+[INFO] Konvertiert renamed_small.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_SMALL | Qualität: Optimierungsfehler/Pixel=0.019140, Mean-Delta²=742.352478, RGB-RMSE/Kanal=15.730570, Raumscore=2565.311673, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Konvertiere pilot_checkmark_disk.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite pilot_checkmark_disk.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_checkmark_disk.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.369748, localized_error_fraction=0.791069).
+[INFO] Konvertiert pilot_checkmark_disk.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_CHECKMARK_DISK | Qualität: Optimierungsfehler/Pixel=0.009383, Mean-Delta²=401.955200, RGB-RMSE/Kanal=11.575192, Raumscore=1195.012501, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Konvertiere renamed_large.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_large.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_large.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.472050, localized_error_fraction=0.717083).
+[INFO] Konvertiert renamed_large.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_LARGE | Qualität: Optimierungsfehler/Pixel=0.006905, Mean-Delta²=435.635559, RGB-RMSE/Kanal=12.050388, Raumscore=1209.935404, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\checkmark-cli-final\after\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\checkmark-cli-final\after\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\checkmark-cli-final\after

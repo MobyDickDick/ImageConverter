@@ -25,3 +25,48 @@ def test_fitz_adapter_leaves_non_gradient_svg_byte_for_byte_unchanged() -> None:
     svg = '<svg xmlns="http://www.w3.org/2000/svg"><rect fill="#abcdef"/></svg>'
 
     assert rendering._expand_axis_aligned_linear_gradients_for_fitz(svg) == svg
+
+
+def radial_svg(extra=''):
+    return ('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">'
+            f'<defs><radialGradient id="arbitrary" {extra}>'
+            '<stop offset="0%" stop-color="#eeeeee"/>'
+            '<stop offset="100%" stop-color="#888888"/>'
+            '</radialGradient></defs>'
+            '<ellipse cx="20" cy="20" rx="16" ry="12" fill="url(#arbitrary)" stroke="#777777" stroke-width="1"/>'
+            '</svg>')
+
+
+def test_radial_adapter_keeps_native_saved_vector_and_draws_light_center():
+    import cv2
+    import fitz
+    import numpy as np
+    from xml.etree import ElementTree as ET
+    svg = radial_svg()
+    expanded = rendering._expand_centered_radial_gradients_for_fitz(svg)
+    assert svg.count('<ellipse') == 1 and 'fill="url(#arbitrary)"' in svg
+    assert 'url(#arbitrary)' not in expanded
+    raster = rendering.render_svg_to_numpy_inprocess(svg,40,40,fitz_module=fitz,np_module=np,cv2_module=cv2)
+    assert raster is not None
+    assert np.min(raster[20,20]) > 220
+    assert 115 < np.mean(raster[20,33]) < 170
+    assert np.mean(raster[2,2]) == 255
+    shapes = [e for e in ET.fromstring(expanded).iter() if e.tag.endswith('ellipse')]
+    assert shapes[-1].get('fill') == 'none' and shapes[-1].get('stroke') == '#777777'
+
+
+def test_radial_adapter_leaves_unsupported_gradients_and_solid_vectors_unchanged():
+    for extra in ('cx="20%"', 'fx="10%"', 'gradientTransform="scale(2)"',
+                  'gradientUnits="userSpaceOnUse"', 'spreadMethod="repeat"'):
+        svg = radial_svg(extra)
+        assert rendering._expand_centered_radial_gradients_for_fitz(svg) == svg
+    svg = '<svg xmlns="http://www.w3.org/2000/svg"><ellipse fill="#abcdef"/></svg>'
+    assert rendering._expand_centered_radial_gradients_for_fitz(svg) == svg
+
+
+def test_radial_adapter_supports_circle_geometry_and_rejects_alpha_stops():
+    svg = radial_svg().replace('ellipse', 'circle').replace('rx="16" ry="12"', 'r="16"')
+    expanded = rendering._expand_centered_radial_gradients_for_fitz(svg)
+    assert 'url(#arbitrary)' not in expanded and '<circle' in expanded
+    alpha = svg.replace('offset="0%"', 'offset="0%" stop-opacity="0.4"')
+    assert rendering._expand_centered_radial_gradients_for_fitz(alpha) == alpha

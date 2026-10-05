@@ -146,7 +146,9 @@ def test_semantics_rejects_wrong_color_geometry_layers_and_extra_primitives():
 
 
 def test_measurement_is_calibrated_on_identical_raster_and_svg(tmp_path):
-    svg, image = synthetic()
+    _, image = synthetic()
+    svg = geometry.renderGeometryIrToSvgImpl(60,60,fit(image)['geometry_ir'])
+    image = render(svg,60,60)
     image_path, svg_path = tmp_path/'source.png', tmp_path/'vector.svg'
     cv2.imwrite(str(image_path), image)
     svg_path.write_text(svg,encoding='utf-8')
@@ -154,5 +156,6 @@ def test_measurement_is_calibrated_on_identical_raster_and_svg(tmp_path):
     assert record['mean_delta2'] == 0 and record['metrics']['error_per_pixel'] == 0
     assert record['metrics']['edge_alignment'] == 1 and record['metrics']['object_mask_iou'] == 1
     assert record['metrics']['dimension_match'] == 1
+    assert record['metrics']['semantic_score'] == 1 and record['combined_score'] == 1
 
 

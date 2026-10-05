@@ -14,6 +14,19 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-05)
 
+Das Paket für `GE1003_M` ist abgeschlossen: Die eigenständige XML beschreibt
+jetzt einen grünen Haken vor einer grauen Kreisscheibe. Die katalogfreie
+Rasterregistrierung bestimmt die zwei Schenkel sowie Scheibenlage, Durchmesser
+und radiale Farben. Ein privater Renderadapter behebt schwarze Radialverläufe
+in PyMuPDF; die gespeicherten SVGs behalten ihre nativen Verläufe.
+Das gespeicherte Ziel-CLI-SVG erreicht `mean_delta2=401.955200`; L-/S-Holdouts
+bestehen beide harten Gates ohne Regression. Zwei unabhängige CLI-Läufe
+reproduzieren sämtliche SVG-Bytes und Gateentscheidungen. `268` fokussierte
+Tests und `1532` Tests im vollständigen Defaultprofil sind grün; die `29`
+bestehenden Windows-Skips bleiben dokumentiert. Die erneuerte Rotation über
+`688` Paare beginnt mit `AC0404_1_L`.
+Details: `docs/next_arbeitspaket_2026-10-05_ge1003_m.md`.
+
 Das Paket für `AC0731_1_L` ist abgeschlossen: Der aufrechte Quadratpfad
 rendert ausdrücklich beschriebenen Text und erhält dessen Groß-/Kleinschreibung.
 Die katalogfreie Rasterregistrierung bestimmt Körper, unteren Griff, Farben
