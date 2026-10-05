@@ -1,0 +1,51 @@
+{
+  "cli_help": {
+    "exit_code": 0
+  },
+  "compileall": {
+    "exit_code": 0,
+    "paths": [
+      "src",
+      "tests",
+      "tools"
+    ]
+  },
+  "default_profile": {
+    "passed": 1556,
+    "skip_reason": "existing Windows exclusions for POSIX shell integration",
+    "skipped": 29
+  },
+  "environment_workaround": {
+    "bootstrap_source": "\"\"\"Preload compatible temporary binaries before repo-local discovery.\"\"\"\nfrom pathlib import Path\nimport sys\nsys.path[:0] = [str(Path(__file__).resolve().parents[1]/'task-deps'),\n                str(Path(sys.executable).parent/'Lib/site-packages')]\nimport numpy, cv2, fitz\nfrom PIL import Image\n",
+    "child_pythonpath": [
+      "unused",
+      ".tmp/pump-test-bootstrap",
+      ".tmp/task-deps",
+      "."
+    ],
+    "python_mode": "isolated CPython with temporary compatible dependencies preloaded"
+  },
+  "focused_tests": {
+    "passed": 471,
+    "skipped": 0
+  },
+  "log_sha256": {
+    "cli_after_2026-10-05.log": "df570cee9106adaa79bfdc218bb0edf61a86df92f6341168a623340b3ed0bc65",
+    "cli_before_2026-10-05.log": "b28ebe3dbf28f9eac5157f772915a7e5036f8caa7730d6b71d9a3909d44161d9",
+    "cli_help_2026-10-05.log": "2f16d1d704ba36a0f4c72969fd75782bc1ff00ddc7d8e5dd3828c280219bab86",
+    "focused_tests_2026-10-05.log": "0fd61bb5a4c20991b6c7728f8832ed4794c6827de6a0913f12cdc80cc9f65723",
+    "tests_2026-10-05.log": "69e92c8feef839eb118612c2b11be7abb5722f23fc1a61ef0710edd31972edf9"
+  },
+  "runtime_image_id_check": {
+    "exit_code": 0,
+    "occurrences": 0
+  },
+  "saved_svg_gate_summary": {
+    "case_count": 18,
+    "improved": 4,
+    "satisfactory": 18,
+    "technically_completed": 18
+  },
+  "schema_version": "left_pump_completion_checks_v1",
+  "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+}

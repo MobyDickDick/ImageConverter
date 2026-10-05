@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import random
+import re
 import shutil
 import subprocess
 import sys
@@ -25,6 +26,17 @@ def main() -> int:
             from src.iCCModules import imageCompositeConverterNonCompositeRuntime as runtime
             runtime.fit_pump_geometry = lambda *args, **kwargs: None
             runtime.SEMANTIC_GEOMETRY_IR_KINDS.discard('PumpTriangleGlyph')
+        elif sys.argv[2].startswith('baseline:'):
+            revision = sys.argv[2].split(':', 1)[1]
+            if not re.fullmatch(r'[0-9a-f]{40}', revision):
+                raise ValueError('baseline fitter revision must be a full commit hash')
+            source = subprocess.check_output([
+                'git', 'show', revision + ':src/iCCModules/imageCompositeConverterPump.py'
+            ], text=True, encoding='utf-8')
+            namespace = {'__name__': 'frozen_pump_baseline'}
+            exec(compile(source, '<frozen pump baseline>', 'exec'), namespace)
+            from src.iCCModules import imageCompositeConverterNonCompositeRuntime as runtime
+            runtime.fit_pump_geometry = namespace['fit_pump_geometry']
         random.seed(0)
         np.random.seed(0)
         return cli.main(sys.argv[3:])
@@ -52,6 +64,12 @@ def main() -> int:
         ET.SubElement(ET.SubElement(entry, 'bilder'), 'bild').text = target.name
     description_file = inputs / 'descriptions.xml'
     ET.ElementTree(description_root).write(description_file, encoding='utf-8', xml_declaration=True)
+    baseline_description_file = description_file
+    if 'baseline_description' in manifest:
+        for entry in description_root:
+            entry.find('beschreibung').text = manifest['baseline_description']
+        baseline_description_file = inputs / 'baseline_descriptions.xml'
+        ET.ElementTree(description_root).write(baseline_description_file, encoding='utf-8', xml_declaration=True)
     environment = dict(os.environ, TINY_ICC_OUTPUT_VARIATION='0', PYTHONHASHSEED='0')
     environment['PYTHONPATH'] = os.pathsep.join(sys.path)
     project = Path(__file__).resolve().parents[1]
@@ -60,13 +78,18 @@ def main() -> int:
     worker_paths = [str(Path(np.__file__).resolve().parents[1]), str(project), *sys.path]
     for mode in ('before', 'after'):
         run_dir = output / mode
+        worker_mode = mode
+        if mode == 'before' and 'baseline_description' in manifest:
+            worker_mode = 'baseline'
+            if 'baseline_fitter_revision' in manifest:
+                worker_mode += ':' + manifest['baseline_fitter_revision']
         with (output / f'{mode}.log').open('w', encoding='utf-8') as log:
             subprocess.run(
                 [sys.executable, '-I', '-c',
                  'import sys, runpy; sys.path[:0] = ' + repr(worker_paths)
                  + "; runpy.run_module('tools.run_pump_recheck', run_name='__main__')",
-                 '--_worker', mode,
-                 str(inputs), '--descriptions-path', str(description_file),
+                 '--_worker', worker_mode,
+                 str(inputs), '--descriptions-path', str(baseline_description_file if mode == 'before' else description_file),
                  '--output-dir', str(run_dir), '--execution-mode', 'semantic-only', '--deterministic-order'],
                 cwd=project, env=environment, stdout=log, stderr=subprocess.STDOUT,
                 timeout=180, check=True,

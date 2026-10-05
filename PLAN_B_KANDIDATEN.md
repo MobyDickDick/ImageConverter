@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-05, nach Haken-/Kreisscheiben-Recheck)
+## Aktuelle Kandidaten (Stand: 2026-10-05, nach Links-Dreieck-Recheck)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -54,20 +54,30 @@ eigenständig. Native Radialverläufe bleiben im SVG erhalten; ein privater
 Renderadapter verhindert die schwarzen PyMuPDF-Artefakte. Details:
 `docs/next_arbeitspaket_2026-10-05_ge1003_m.md`.
 
-1. `AC0404_1_L` – `mean_delta2=17112.675781`, `normalized_mse=0.087724`.
-2. `GE9011_6M` – `mean_delta2=15528.650391`, `normalized_mse=0.079603`.
-3. `AC0404_1_S` – `mean_delta2=15498.474609`, `normalized_mse=0.079449`.
-4. `GE0281` – `mean_delta2=15287.335938`, `normalized_mse=0.078366`.
-5. `GE0300` – `mean_delta2=14731.457031`, `normalized_mse=0.075517`.
+`AC0404_1_L` besteht im aktuellen CLI bereits vor der Änderung beide Gates
+(`mean_delta2=89.825623`); der bisherige hohe Kandidatenwert stammt aus einer
+alten Sammelausgabe. Alle 18 Farb-/Größen-/SIA-Varianten bestehen jetzt beide
+Gates ohne Metrikregression. Eine katalogfreie Flächenprüfung verwirft die
+fälschlich als Dreieck vereinfachten Kreissegmente und verbessert vier SIA-Fälle.
+Die XML beschreibt das Links-Dreieck eigenständig. Details:
+`docs/next_arbeitspaket_2026-10-05_ac0404_1_l.md`.
 
-Die nächste Rotation beginnt mit `AC0404_1_L` und muss den Wert des tatsächlich
+1. `GE9011_6M` – `mean_delta2=15528.650391`, `normalized_mse=0.079603`.
+2. `GE0281` – `mean_delta2=15287.335938`, `normalized_mse=0.078366`.
+3. `GE0300` – `mean_delta2=14731.457031`, `normalized_mse=0.075517`.
+4. `GE1420_S` – `mean_delta2=14628.742188`, `normalized_mse=0.074990`.
+5. `AC0403_1_L` – `mean_delta2=13989.019531`, `normalized_mse=0.071711`.
+
+Die nächste Rotation beginnt mit `GE9011_6M` und muss den Wert des tatsächlich
 akzeptierten SVGs vor und nach der Änderung sowie den Gate-Status ausweisen.
-Der vollständige Review über `688` renderbare Paare steht unter
-`artifacts/evaluation/checkmark_disk_recheck_v1/full_review/`.
+Der vollständige Review über `688` Einträge (`684` renderbare Paare und vier
+bereits zuvor fehlende SVG-Paare) steht unter
+`artifacts/evaluation/left_pump_recheck_v1/full_review/`.
 Er schließt die separat belegten Gate-Passes `AC0554_2_L`,
 `AC0713_1_S`, `DLG0010_1`, `AC0724_1_S`, `AC0252_1`, `AC0252`, `AC0252_2`,
 `AC0731_1_L`, `AC0731_1_M`, `AC0731_1_S`, `AC0731_L`, `AC0731_M`, `AC0731_S`,
-`GE1003_M`, `GE1003_L` und `GE1003_S` explizit aus: Die historische Sammelausgabe
+`GE1003_M`, `GE1003_L`, `GE1003_S` und alle 18 im neuen Manifest genannten
+`AC0404`-Varianten explizit aus: Die historische Sammelausgabe
 enthält noch alte SVGs; die akzeptierten Ergebnisse liegen in den jeweiligen
 Evaluationen.
 
@@ -95,7 +105,14 @@ das CLI meldet dafür weiterhin konzentrierten Restfehler. Details stehen in
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
-Aktueller Recheck: Haken-/Scheibenregistrierung sind `generalisiert`;
+Aktueller Recheck: Die Unterscheidung zwischen einem Dreieck und dem gekrümmten
+Kreissegment ist `generalisiert`. Sie verwendet das Verhältnis der beobachteten
+Fläche zur vereinfachten Dreiecksfläche ohne Katalogkennung. Alle 18 Varianten
+bestehen beide Gates; explizite Richtungen, Größen-/Farbvariation, Umbenennung
+und falsche Topologien sind abgesichert. Details:
+`docs/next_arbeitspaket_2026-10-05_ac0404_1_l.md`.
+
+Vorheriger Recheck: Haken-/Scheibenregistrierung sind `generalisiert`;
 Ziel und zwei Größen-Holdouts bestehen beide Gates. Umbenennung, verschobene
 Lage, doppelte Größe, zwei Grüntöne und Negativfälle sind abgesichert. Der
 Renderadapter erhält native Radialverläufe in den gespeicherten SVGs.

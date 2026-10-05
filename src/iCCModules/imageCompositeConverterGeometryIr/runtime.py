@@ -1365,6 +1365,13 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
             if pump_rotated_180_hint
             else [[0.18, 0.76], [0.82, 0.76], [0.50, 0.10]]
         )
+        direction = re.search(r'(?:spitze|zeigt|weisend)[^.;]*?nach\s+(rechts|links|oben|unten)', desc)
+        if direction:
+            # Absolute scene constraints take precedence over relative rotations.
+            # Start from the upward seed and rotate around the circle center.
+            triangle_points = [[0.18, 0.76], [0.82, 0.76], [0.50, 0.10]]
+            for _ in range({'oben': 0, 'rechts': 1, 'unten': 2, 'links': 3}[direction[1]]):
+                triangle_points = [[1-y, x] for x, y in triangle_points]
         elements.extend(
             [
                 {
