@@ -22,8 +22,6 @@ def fit_checkmark_disk(geometry_ir, *, image, render_fn, error_fn):
     if ([e.get('role') for e in geometry_ir] != [None, 'checkmark_disk', 'checkmark_shadow', 'checkmark']
             or [e.get('kind') for e in geometry_ir] != ['ColorPatch', 'CircleBackground', 'PolygonPath', 'PolygonPath']):
         return None
-    if not isinstance(geometry_ir[1].get('radial_gradient'), dict) or len(geometry_ir[1]['radial_gradient'].get('stops', [])) != 3:
-        return None
     arr = np.asarray(image)
     if arr.ndim != 3 or arr.shape[2] != 3 or min(arr.shape[:2]) < 12:
         return None
@@ -127,7 +125,7 @@ def fit_checkmark_disk(geometry_ir, *, image, render_fn, error_fn):
     best = measure(candidate)
     if best is None:
         return None
-    # Bounded coordinate descent in pixel units. Colors remain raster estimates.
+    # Bounded coordinate descent in pixel units, including three gradient stops.
     for step in (1., .5, .25):
         for _ in range(2):
             changed = False

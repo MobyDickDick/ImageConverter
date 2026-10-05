@@ -1699,7 +1699,11 @@ def runNonCompositeIterationImpl(
                 else:
                     description_error = calculate_error_fn(perc_img, description_rendered)
                     optimizer_result = None
-                    if hasattr(perc_img, "shape") and (
+                    # The disk/checkmark fitter registers a constrained topology
+                    # from raw evidence. Independent generic element probes can
+                    # distort its background and layering before that fit.
+                    if (hasattr(perc_img, "shape")
+                            and not any(e.get('role') == 'checkmark_disk' for e in description_geometry_ir)) and (
                         not _is_description_heat_exchanger_geometry(description_geometry_ir)
                         or _description_reuses_reference_family(description)
                     ):

@@ -1,0 +1,34 @@
+{
+  "schema_version": "checkmark_disk_recheck_manifest_v1",
+  "description": "Gr\u00fcner Haken aus zwei dicken schr\u00e4gen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und au\u00dfen dunkler. Wei\u00dfer Hintergrund.",
+  "provenance": {
+    "commit": "f3d6d61c2f0c43afb27edb67127794bc994f95ac",
+    "baseline_mode": "CLI ablation disabling raster checkmark-disk registration; same corrected description, radial renderer adapter, inputs and seed",
+    "seed": 0,
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0",
+    "execution_mode": "semantic-only"
+  },
+  "cases": [
+    {
+      "case_id": "pilot_checkmark_disk",
+      "role": "target",
+      "image": "../../images_to_convert/GE1003_M.jpg",
+      "before_svg": "before/pilot_checkmark_disk.svg",
+      "after_svg": "after/pilot_checkmark_disk.svg"
+    },
+    {
+      "case_id": "renamed_large",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE1003_L.jpg",
+      "before_svg": "before/renamed_large.svg",
+      "after_svg": "after/renamed_large.svg"
+    },
+    {
+      "case_id": "renamed_small",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE1003_S.jpg",
+      "before_svg": "before/renamed_small.svg",
+      "after_svg": "after/renamed_small.svg"
+    }
+  ]
+}
