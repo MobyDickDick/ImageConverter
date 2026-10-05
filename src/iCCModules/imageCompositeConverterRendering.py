@@ -141,6 +141,74 @@ def _expand_axis_aligned_linear_gradients_for_fitz(svg_string: str) -> str:
     return ET.tostring(root, encoding="unicode") if changed else svg_string
 
 
+def _expand_centered_radial_gradients_for_fitz(svg_string: str) -> str:
+    """Approximate centered radial ellipse fills in private renderer input.
+
+    PyMuPDF's SVG reader does not reliably render radial paint servers. Native
+    gradients stay in saved SVGs; concentric vector fills are only a rendering
+    compatibility adapter. Unsupported off-center/transformed gradients stay
+    untouched rather than silently changing their meaning.
+    """
+    if 'radialGradient' not in svg_string or 'url(#' not in svg_string:
+        return svg_string
+    try:
+        root = ET.fromstring(svg_string)
+    except ET.ParseError:
+        return svg_string
+    gradients = {e.get('id'): e for e in root.iter() if e.tag.rsplit('}', 1)[-1] == 'radialGradient'}
+    changed = False
+    namespace = '{http://www.w3.org/2000/svg}'
+    for parent in list(root.iter()):
+        for index, ellipse in reversed(list(enumerate(list(parent)))):
+            if ellipse.tag.rsplit('}', 1)[-1] not in ('circle', 'ellipse'):
+                continue
+            match = re.fullmatch(r'url\(#([^)]+)\)', ellipse.get('fill', ''))
+            gradient = gradients.get(match.group(1)) if match else None
+            if gradient is None or any(k not in {'id', 'cx', 'cy', 'r', 'gradientUnits', 'fx', 'fy'} for k in gradient.attrib):
+                continue
+            if (gradient.get('gradientUnits', 'objectBoundingBox') != 'objectBoundingBox'
+                    or any(gradient.get(k, '50%') not in ('50%', '0.5') for k in ('cx', 'cy', 'r', 'fx', 'fy'))):
+                continue
+            try:
+                cx, cy = float(ellipse.get('cx', '0')), float(ellipse.get('cy', '0'))
+                rx = float(ellipse.get('rx', ellipse.get('r', '0')))
+                ry = float(ellipse.get('ry', ellipse.get('r', '0')))
+                stops = []
+                for stop in gradient:
+                    offset, color = stop.get('offset', '0'), stop.get('stop-color', '')
+                    if stop.get('stop-opacity', '1') != '1' or not re.fullmatch(r'#[0-9a-fA-F]{6}', color):
+                        raise ValueError('unsupported stop')
+                    position = float(offset[:-1])/100 if offset.endswith('%') else float(offset)
+                    stops.append((position, tuple(int(color[i:i+2], 16) for i in (1, 3, 5))))
+                stops.sort()
+                if rx <= 0 or ry <= 0 or len(stops) < 2 or any(not 0 <= p <= 1 for p, _ in stops):
+                    continue
+            except (ValueError, TypeError):
+                continue
+            group = ET.Element(namespace+'g', {k: v for k, v in ellipse.attrib.items()
+                                               if k not in {'cx', 'cy', 'rx', 'ry', 'r', 'fill', 'stroke', 'stroke-width'}})
+            rings = max(16, min(128, int(max(rx, ry)*4)))
+            for ring in range(rings, 0, -1):
+                position = (ring-.5)/rings
+                left, right = stops[0], stops[-1]
+                for i in range(1, len(stops)):
+                    if position <= stops[i][0]:
+                        left, right = stops[i-1], stops[i]
+                        break
+                ratio = max(0., min(1., (position-left[0])/max(1e-9, right[0]-left[0])))
+                rgb = [round(a+(b-a)*ratio) for a, b in zip(left[1], right[1])]
+                ET.SubElement(group, namespace+'ellipse', cx=f'{cx:g}', cy=f'{cy:g}',
+                              rx=f'{rx*ring/rings:g}', ry=f'{ry*ring/rings:g}',
+                              fill='#'+''.join(f'{v:02x}' for v in rgb), stroke='none')
+            outline = ET.SubElement(group, ellipse.tag, {k: v for k, v in ellipse.attrib.items()
+                                                        if k in {'cx', 'cy', 'rx', 'ry', 'r', 'stroke', 'stroke-width'}})
+            outline.set('fill', 'none')
+            parent.remove(ellipse)
+            parent.insert(index, group)
+            changed = True
+    return ET.tostring(root, encoding='unicode') if changed else svg_string
+
+
 def render_svg_to_numpy_inprocess(
     svg_string: str,
     size_w: int,
@@ -158,6 +226,7 @@ def render_svg_to_numpy_inprocess(
         return None
 
     renderer_svg = _expand_axis_aligned_linear_gradients_for_fitz(svg_string)
+    renderer_svg = _expand_centered_radial_gradients_for_fitz(renderer_svg)
     attempts = [renderer_svg]
     normalized_svg = re.sub(r">\s+<", "><", renderer_svg.strip())
     if normalized_svg and normalized_svg != renderer_svg:

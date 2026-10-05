@@ -223,6 +223,9 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         or checkbox_token_hint
     )
     checkbox_hint = checkmark_hint and checkbox_token_hint
+    checkmark_disk_hint = checkmark_hint and not checkbox_hint and _has_any(
+        desc, ("kreisscheibe", "kreisfläche", "kreisflaeche", "circular disk")
+    )
     chart_triangle_hint = (
         _has_any(desc, ("diagrammlinie", "diagramm", "x-/y-achse", "x-achse", "y-achse"))
         and _has_any(desc, ("dreieck", "dreiecke"))
@@ -511,6 +514,16 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                     "fill": "#ffffff",
                     "stroke": "none",
                 },
+                *([
+                    {"kind": "CircleBackground", "id": "checkmark_disk",
+                     "bbox": [0.16, 0.40, 0.60, 0.60], "fill": "#bcbcbc",
+                     "stroke": "#808080", "stroke_width": 0.025,
+                     "role": "checkmark_disk",
+                     "radial_gradient": {"id": "checkmark-disk-gradient", "stops": [
+                         {"offset": "0%", "color": "#eeeeee"},
+                         {"offset": "70%", "color": "#bcbcbc"},
+                         {"offset": "100%", "color": "#969696"}]}}
+                ] if checkmark_disk_hint else []),
                 *(
                     [
                         {
@@ -1807,6 +1820,9 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
         element for element in geometry_ir
         if isinstance(element.get("stroke_gradient"), dict)
     ]
+    radial_gradient_elements = [element for element in geometry_ir
+                                if element.get("kind") == "CircleBackground"
+                                and isinstance(element.get("radial_gradient"), dict)]
     valve_gradient_kinds = {
         "VerticalTwoWayValveMotorGlyph",
         "LeftRotatedTwoWayValveMotorGlyph",
@@ -1819,8 +1835,17 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
         "MainDiagonalMirroredTopKelleThreeWayValveGlyph",
     }
     needs_vertical_valve_defs = any(element.get("kind") in valve_gradient_kinds for element in geometry_ir)
-    if needs_gradient or needs_vertical_valve_defs or stroke_gradient_elements:
+    if needs_gradient or needs_vertical_valve_defs or stroke_gradient_elements or radial_gradient_elements:
         svg.append("  <defs>")
+        for element in radial_gradient_elements:
+            gradient = element['radial_gradient']
+            gradient_id = html.escape(str(gradient.get('id', f"{element.get('id', 'circle')}-radial")))
+            svg.append(f'    <radialGradient id="{gradient_id}">')
+            for stop in gradient.get('stops', []):
+                offset = html.escape(str(stop.get('offset', '0%')))
+                color = html.escape(str(stop.get('color', element.get('fill', '#bcbcbc'))))
+                svg.append(f'      <stop offset="{offset}" stop-color="{color}"/>')
+            svg.append('    </radialGradient>')
         if needs_gradient:
             svg.append('    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">')
             svg.append('      <stop offset="0%" stop-color="#8f8f8f"/>')
@@ -2059,6 +2084,9 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
         elif kind == "CircleBackground":
             x, y, bw, bh = _scaled_bbox(element, w, h)
             fill = html.escape(str(element.get("fill", "#45aa5e")))
+            if isinstance(element.get('radial_gradient'), dict):
+                gradient_id = html.escape(str(element['radial_gradient'].get('id', f"{element.get('id', 'circle')}-radial")))
+                fill = f'url(#{gradient_id})'
             stroke = html.escape(str(element.get("stroke", "#8d8d8d")))
             sw = float(element.get("stroke_width", 0.020)) * min(w, h)
             svg.append(
