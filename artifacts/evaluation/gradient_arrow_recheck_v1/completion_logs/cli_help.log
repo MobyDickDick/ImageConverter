@@ -1,0 +1,139 @@
+usage: launch.py [-h] [--mode {annotate,convert}] [--input-dir INPUT_DIR]
+                 [--csv-path CSV_PATH] [--output-dir OUTPUT_DIR]
+                 [--execution-mode {standard,semantic-only}]
+                 [--iterations ITERATIONS_OVERRIDE] [--start START]
+                 [--end END] [--interactive-range]
+                 [--debug-semantic-focus-dir DEBUG_AC0811_DIR]
+                 [--debug-element-diff-dir DEBUG_ELEMENT_DIFF_DIR]
+                 [--debug-jpeg-load] [--debug-trace [PATH]] [--bootstrap-deps]
+                 [--ac08-regression-set]
+                 [--ac08-regression-variant {AC0800_L,AC0800_M,AC0800_S,AC0811_L,AC0811_M,AC0811_S,AC0882_S,AC0837_L,AC0839_S,AC0820_L,AC0831_L,AC0834_S,AC0835_S,AC0812_M}]
+                 [--log-file LOG_FILE] [--print-linux-vendor-command]
+                 [--vendor-dir VENDOR_DIR] [--vendor-platform VENDOR_PLATFORM]
+                 [--vendor-python-version VENDOR_PYTHON_VERSION]
+                 [--isolate-svg-render]
+                 [--isolate-svg-render-timeout-sec ISOLATE_SVG_RENDER_TIMEOUT_SEC]
+                 [--deterministic-order] [--repair-valve-head-bestlist]
+                 [--fail-on-batch-failures]
+                 [--fail-on-optimization-render-regression]
+                 [folder_path] [csv_or_output] [iterations]
+
+Verarbeite einen Bildordner entweder im Analysemodus (Bounding-Boxes/JSON) oder im Konvertierungsmodus (SVG-/Diff-/Report-Ausgaben).
+
+positional arguments:
+  folder_path           Pfad zum Ordner mit den Bildern (Default:
+                        artifacts/images_to_convert)
+  csv_or_output         Optional: Pfad zur CSV/TSV/XML-Export-Tabelle ODER
+                        Ausgabeverzeichnis f�r konvertierte Dateien.
+                        (Kompatibilit�t: bisheriger 2. Positionsparameter)
+  iterations            Anzahl der Iterationen (optional, default: 64; f�r
+                        Tiefensuche explizit erh�hen)
+
+options:
+  -h, --help            show this help message and exit
+  --mode {annotate,convert}
+                        annotate=markiere Kreis/Kellenstiel/Schrift und
+                        schreibe Koordinaten; convert=SVG-Konvertierung mit
+                        Reports
+  --input-dir INPUT_DIR
+                        Alias f�r folder_path (Kompatibilit�t mit �lteren
+                        Skriptaufrufen).
+  --csv-path CSV_PATH, --descriptions-path CSV_PATH
+                        Expliziter Pfad zur CSV/TSV/XML-Export-Tabelle mit den
+                        Beschreibungen
+  --output-dir OUTPUT_DIR
+                        Explizites Ausgabeverzeichnis
+  --execution-mode {standard,semantic-only}
+                        semantic-only (Default)=erzeugt jede Ausgabe
+                        ausschlie�lich aus dem jeweiligen Bild und seiner
+                        sprachlichen Beschreibung (keine Wiederverwendung,
+                        Checkpoints oder Template-Donoren);
+                        standard=expliziter Kompatibilit�tsmodus mit
+                        vorhandenen Ergebnisartefakten.
+  --iterations ITERATIONS_OVERRIDE
+                        Benannter Alias f�r die Iterationszahl; �berschreibt
+                        den optionalen Positionswert
+  --start START         Start-Referenz (inkl.); wenn nicht gesetzt, erfolgt
+                        eine Konsolenabfrage
+  --end END             End-Referenz (inkl.); wenn nicht gesetzt, erfolgt eine
+                        Konsolenabfrage
+  --interactive-range   Fragt auf der Konsole 'Namen von' und 'Namen bis' ab
+                        und verarbeitet nur diesen Bereich. Wenn beide
+                        Eingaben keine volle Referenz sind, wird nach ihrem
+                        gemeinsamen Teilstring gefiltert (z. B. gemeinsames
+                        Pr�fix und gek�rztes Pr�fix => alle passenden
+                        Dateien).
+  --debug-semantic-focus-dir DEBUG_AC0811_DIR
+                        Optional: Ordner f�r fokussierte Element-Diff-Dumps
+                        pro Runde/Element
+  --debug-element-diff-dir DEBUG_ELEMENT_DIFF_DIR
+                        Optional: Ordner f�r Element-Diff-Dumps pro
+                        Runde/Element f�r alle Semantic-Badges
+  --debug-jpeg-load     Schreibt bei fehlgeschlagenen JPG-Konvertierungen
+                        automatisch JPEG-Lade-Diagnosen als JSON in den
+                        Report-Ordner.
+  --debug-trace [PATH]  Schreibt eine strukturierte JSONL-Ablaufspur mit
+                        Auswahl, Strategie, Qualitaetswerten und Template-
+                        Transfer-Entscheidungen. Ohne PATH wird
+                        reports/conversion_debug_trace.jsonl verwendet.
+  --bootstrap-deps      Installiert fehlende Bild-Abh�ngigkeiten (numpy,
+                        opencv-python-headless) automatisch via pip vor der
+                        Konvertierung.
+  --ac08-regression-set
+                        Verarbeitet genau das feste AC08-Regression-Set
+                        (ac08_core_14: AC0800_L, AC0800_M, AC0800_S, AC0811_L,
+                        AC0811_M, AC0811_S, AC0882_S, AC0837_L, AC0839_S,
+                        AC0820_L, AC0831_L, AC0834_S, AC0835_S, AC0812_M)
+  --ac08-regression-variant {AC0800_L,AC0800_M,AC0800_S,AC0811_L,AC0811_M,AC0811_S,AC0882_S,AC0837_L,AC0839_S,AC0820_L,AC0831_L,AC0834_S,AC0835_S,AC0812_M}
+                        Begrenzt --ac08-regression-set auf eine feste
+                        Variante; kann mehrfach angegeben werden und dient
+                        timeout-isolierten Gate-Segmenten.
+  --log-file LOG_FILE   Optional: Schreibt den kompletten Konsolen-Output
+                        zus�tzlich in diese Datei (z. B. --log-file
+                        logs/konverter.log). Wenn nicht gesetzt, wird bei
+                        lokalen CLI-L�ufen automatisch
+                        imageCompositeConverter.local.log verwendet. Kann
+                        alternativ �ber IMAGE_COMPOSITE_CONVERTER_LOG_FILE
+                        gesetzt werden.
+  --print-linux-vendor-command
+                        Gibt einen pip-Aufruf aus, der Linux-kompatible Wheels
+                        f�r numpy/opencv/Pillow/PyMuPDF in das Vendor-
+                        Verzeichnis installiert.
+  --vendor-dir VENDOR_DIR
+                        Zielordner f�r vendorte Python-Pakete
+  --vendor-platform VENDOR_PLATFORM
+                        pip --platform Wert f�r Linux-Wheels, z. B.
+                        manylinux2014_x86_64
+  --vendor-python-version VENDOR_PYTHON_VERSION
+                        pip --python-version Wert ohne Punkt, z. B. 311 oder
+                        312
+  --isolate-svg-render  Rendert SVGs in einem isolierten Subprozess, damit
+                        native PyMuPDF-Abst�rze den Hauptlauf nicht beenden.
+  --isolate-svg-render-timeout-sec ISOLATE_SVG_RENDER_TIMEOUT_SEC
+                        Timeout pro isoliertem SVG-Render-Aufruf in Sekunden
+                        (Default: 20).
+  --deterministic-order
+                        Deaktiviert Shuffle-Schritte bei
+                        Dateireihenfolge/Template-Donor-Auswahl f�r
+                        reproduzierbare Diagnosel�ufe.
+  --repair-valve-head-bestlist
+                        Bereinigt einmalig veraltete Valve-Head-
+                        Bestlist/Snapshot-Artefakte (L/M/S ohne Ventilkopf-
+                        Metadaten) im Ausgabeverzeichnis und beendet danach.
+  --fail-on-batch-failures
+                        Beendet den CLI-Lauf mit Exitcode 1, wenn einzelne
+                        Bilder in batch_failure_summary.csv protokolliert
+                        wurden. Ohne diese Option gilt ein durchgelaufener
+                        Batch als erfolgreich und meldet solche Einzelfehler
+                        nur als Warnung.
+  --fail-on-optimization-render-regression
+                        Aktiviert das Optimierungs-Telemetrie-Gate und beendet
+                        den CLI-Lauf mit Exitcode 1, wenn eine Variante mehr
+                        Render-Timeouts oder Renderfehler als die �ber
+                        ICC_OPTIMIZATION_RENDER_TELEMETRY_BASELINE gew�hlte
+                        Baseline hat.
+
+Beispiele:
+  python -m src.imageCompositeConverter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir artifacts/converted_images --start FIRST --end LAST
+  python -m src.imageCompositeConverter artifacts/images_to_convert --mode annotate --output-dir artifacts/annotated --start SAMPLE_A --end SAMPLE_B
+  python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir vendor

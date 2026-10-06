@@ -1,0 +1,134 @@
+{
+  "schema_version": "gradient_arrow_recheck_manifest_v1",
+  "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+  "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+  "provenance": {
+    "commit": "a6eb50d6f5b804999269b01887808db265941b41",
+    "seed": 0,
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0",
+    "execution_mode": "semantic-only",
+    "baseline_mode": "original XML versus standalone corrected description plus raster arrow registration; same remaining runtime",
+    "source_sha256": {
+      "src/iCCModules/imageCompositeConverterGradientArrow.py": "f52bc1fc6aacbbf8c29335fa99cdaa5f514a2a8829edfe88a0a318c7e4450c39",
+      "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "a69ea9e26969764fdc046cc87ca05f209d431daccb9cc3e048b533076b8cdff0",
+      "tools/run_gradient_arrow_recheck.py": "b43c56b087b3496de49e49f00ac74062e9a9d18709e22750db53082728d24b9c",
+      "tools/evaluate_gradient_arrow_recheck.py": "068d1061ff38f7134187ad7ccdf8f9712f7b9a200392ed42ea4eae671ce68dea",
+      "tests/test_gradient_arrow_runtime.py": "d6f8f32655d3256bd53c3551d32d7b27c28d5fd768b8104f6fe2965f8d6a3552",
+      "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml": "d25d8cba0b3e67ffd0e485500d269d557e3637627a5fb53302f5a96c20f2f218"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "renamed_holdout_00",
+      "variant": "GE9011_1M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9011_1M.jpg",
+      "before_svg": "before/renamed_holdout_00.svg",
+      "after_svg": "after/renamed_holdout_00.svg"
+    },
+    {
+      "case_id": "renamed_holdout_01",
+      "variant": "GE9011_1S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9011_1S.jpg",
+      "before_svg": "before/renamed_holdout_01.svg",
+      "after_svg": "after/renamed_holdout_01.svg"
+    },
+    {
+      "case_id": "renamed_holdout_02",
+      "variant": "GE9011_2M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9011_2M.jpg",
+      "before_svg": "before/renamed_holdout_02.svg",
+      "after_svg": "after/renamed_holdout_02.svg"
+    },
+    {
+      "case_id": "renamed_holdout_03",
+      "variant": "GE9011_2S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9011_2S.jpg",
+      "before_svg": "before/renamed_holdout_03.svg",
+      "after_svg": "after/renamed_holdout_03.svg"
+    },
+    {
+      "case_id": "renamed_holdout_04",
+      "variant": "GE9011_3M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9011_3M.jpg",
+      "before_svg": "before/renamed_holdout_04.svg",
+      "after_svg": "after/renamed_holdout_04.svg"
+    },
+    {
+      "case_id": "renamed_holdout_05",
+      "variant": "GE9011_3S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9011_3S.jpg",
+      "before_svg": "before/renamed_holdout_05.svg",
+      "after_svg": "after/renamed_holdout_05.svg"
+    },
+    {
+      "case_id": "renamed_holdout_06",
+      "variant": "GE9011_4M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9011_4M.jpg",
+      "before_svg": "before/renamed_holdout_06.svg",
+      "after_svg": "after/renamed_holdout_06.svg"
+    },
+    {
+      "case_id": "renamed_holdout_07",
+      "variant": "GE9011_4S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9011_4S.jpg",
+      "before_svg": "before/renamed_holdout_07.svg",
+      "after_svg": "after/renamed_holdout_07.svg"
+    },
+    {
+      "case_id": "renamed_holdout_08",
+      "variant": "GE9011_5M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9011_5M.jpg",
+      "before_svg": "before/renamed_holdout_08.svg",
+      "after_svg": "after/renamed_holdout_08.svg"
+    },
+    {
+      "case_id": "renamed_holdout_09",
+      "variant": "GE9011_5S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9011_5S.jpg",
+      "before_svg": "before/renamed_holdout_09.svg",
+      "after_svg": "after/renamed_holdout_09.svg"
+    },
+    {
+      "case_id": "pilot_arrow",
+      "variant": "GE9011_6M",
+      "role": "target",
+      "image": "../../images_to_convert/GE9011_6M.jpg",
+      "before_svg": "before/pilot_arrow.svg",
+      "after_svg": "after/pilot_arrow.svg"
+    },
+    {
+      "case_id": "renamed_holdout_11",
+      "variant": "GE9011_6S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9011_6S.jpg",
+      "before_svg": "before/renamed_holdout_11.svg",
+      "after_svg": "after/renamed_holdout_11.svg"
+    },
+    {
+      "case_id": "renamed_holdout_12",
+      "variant": "GE9011_7M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9011_7M.jpg",
+      "before_svg": "before/renamed_holdout_12.svg",
+      "after_svg": "after/renamed_holdout_12.svg"
+    },
+    {
+      "case_id": "renamed_holdout_13",
+      "variant": "GE9011_7S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9011_7S.jpg",
+      "before_svg": "before/renamed_holdout_13.svg",
+      "after_svg": "after/renamed_holdout_13.svg"
+    }
+  ]
+}

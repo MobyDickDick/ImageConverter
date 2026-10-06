@@ -12,7 +12,20 @@ focused on the actual project scope.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-05)
+### Aktueller Plan-B-Stand (2026-10-06)
+
+Das Paket für `GE9011_6M` ist abgeschlossen: Die XML beschreibt eigenständig
+Dreieckspitze, weißen Abstand und den schmaleren Schaft mit horizontalem Verlauf.
+Die katalogfreie Rasterregistrierung bestimmt Geometrie und Farben; eine begrenzte
+Render-/Fehlersuche erhält die Topologie. Das gespeicherte Ziel-CLI-SVG verbessert
+sich von `15406.099609` auf `500.660004`. Alle 14 Farb-/Größenvarianten bestehen
+beide harten Gates ohne Metrikregression. Zwei unabhängige CLI-Läufe reproduzieren
+alle 28 SVG-Bytes und Gateentscheidungen. 37 fokussierte Tests sind grün;
+das vollständige Defaultprofil meldet `1593 passed, 29 skipped` mit bestehenden
+Windows-Skips. Der Review über 688 Einträge (684 renderbare Paare)
+setzt die Rotation mit `GE0281` fort.
+Details: `docs/next_arbeitspaket_2026-10-06_ge9011_6m.md`.
+
 
 Das Paket für `AC0404_1_L` ist abgeschlossen: Der aktuelle CLI-Vorlauf besteht
 bereits beide Gates (`mean_delta2=89.825623`); die Kandidatenliste enthielt eine

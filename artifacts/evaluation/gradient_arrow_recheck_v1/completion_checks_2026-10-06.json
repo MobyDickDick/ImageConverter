@@ -1,0 +1,31 @@
+{
+  "compileall": {
+    "exit_code": 0,
+    "log": "completion_logs\\compileall.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "pytest_full": {
+    "exit_code": 0,
+    "log": "completion_logs\\pytest_full.log",
+    "log_sha256": "97c9ab21ab805d2188821d2d50aac1b50c706c7a0a77f3174682d38341f5fdf1",
+    "passed": 1593,
+    "skipped": 29
+  },
+  "pytest_focused": {
+    "exit_code": 0,
+    "log": "completion_logs\\pytest_focused.log",
+    "log_sha256": "12136dba504f75e768072dc70da5a5e0eecbf858ebdaf01eabbf3a7f0cf362df",
+    "passed": 37,
+    "skipped": 0
+  },
+  "cli_help": {
+    "exit_code": 0,
+    "log": "completion_logs\\cli_help.log",
+    "log_sha256": "2f16d1d704ba36a0f4c72969fd75782bc1ff00ddc7d8e5dd3828c280219bab86"
+  },
+  "runtime_id_null": {
+    "exit_code": 0,
+    "log": "completion_logs\\runtime_id_null.log",
+    "log_sha256": "ee73564b07d1984684ebd9b481466b3b4192b45cce25c632ad85239fd7bd116a"
+  }
+}
