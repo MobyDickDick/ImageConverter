@@ -1,0 +1,21 @@
+{
+  "schema_version": "radial_disk_recheck_manifest_v1",
+  "description": "Blaue Kugelform (blauer Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)",
+  "provenance": {
+    "commit": "e4e35c4e6",
+    "seed": 0,
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7",
+    "execution_mode": "semantic-only",
+    "baseline_mode": "existing catalog SVG with falsely detected B versus fresh CLI using original XML"
+  },
+  "cases": [
+    {
+      "case_id": "GE0280",
+      "variant": "GE0280",
+      "role": "catalog_refresh",
+      "image": "../../images_to_convert/GE0280.jpg",
+      "before_svg": "before/GE0280.svg",
+      "after_svg": "after/GE0280.svg"
+    }
+  ]
+}

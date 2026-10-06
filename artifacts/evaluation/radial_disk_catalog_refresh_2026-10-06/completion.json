@@ -1,0 +1,34 @@
+{
+  "schema_version": "radial_disk_catalog_refresh_completion_v1",
+  "pytest": {
+    "passed": 1627,
+    "skipped": 29,
+    "failed": 1,
+    "seconds": 183.36
+  },
+  "unrelated_failure": {
+    "test": "test_ac0732_1_s_committed_svg_preserves_right_facing_p_kelle_quality",
+    "observed_mean_delta2": 3652.298583984375,
+    "historical_expected_mean_delta2": 11705.263671875,
+    "cause": "untracked mutable catalog SVG shadows the historical bestlist reference; neither this variant nor its test was changed by the GE0280 correction"
+  },
+  "focused_pytest": {
+    "passed": 34,
+    "failed": 0
+  },
+  "checks": {
+    "compileall": "pass",
+    "cli_help": "pass",
+    "runtime_image_ids": 0,
+    "hard_quality_gates": "both pass",
+    "original_description": "verified",
+    "renamed_holdout_svg_bytes": "identical",
+    "text_elements": 0
+  },
+  "source_sha256": {
+    "src/iCCModules/imageCompositeConverterRadialDisk.py": "76c8a25955d855308fe2c6be261f2ea8093e230bb8de4d27c97b3a4627dbb0ae",
+    "tests/test_radial_disk_runtime.py": "9ab1aad4ef05bbb28349222ff448d3a121b2527fcaaeebda843dc93eeac776c5",
+    "artifacts/images_to_convert/GE0280.jpg": "70e1c67451a3d0e8edc69b574128c2c0e7b425803dfac280fc2ee8df96840219",
+    "artifacts/converted_images/converted_svgs/GE0280.svg": "ea5ecbd1ce9399e00ceb4b73402cfae43a6fa9206604d9a08c48547a4339b88e"
+  }
+}

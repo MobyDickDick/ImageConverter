@@ -3,6 +3,12 @@
 Die nächste dokumentierte Plan-B-Aufgabe ist auf
 `codex/ge0281-quality-2026-10-06` abgeschlossen.
 
+Nachtrag: Die reguläre Katalogausgabe von GE0280 enthielt noch einen vom
+alten Wahrnehmungspfad fälschlich erkannten Buchstaben. Sie und ihr
+Bestenlisten-Snapshot sind mit der originalen XML-Beschreibung neu erzeugt
+und aktualisiert; Details stehen in
+[GE0280-Katalogkorrektur](ge0280_catalog_refresh_2026-10-06.md).
+
 ## Ursache und Datenkorrektur
 
 Die XML beschrieb `GE0281` und `GE0282` als hellgraues Quadrat mit einer

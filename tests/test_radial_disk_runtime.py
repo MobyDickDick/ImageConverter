@@ -1,4 +1,5 @@
 from pathlib import Path
+from xml.etree import ElementTree as ET
 
 import cv2
 import fitz
@@ -60,18 +61,21 @@ def test_svg_raster_svg_generalizes_size_location_and_color(scale, color):
     assert abs(result['parameters'][1]-23*scale) < 1
 
 
-def test_runtime_bypasses_samples_and_embedding_and_is_rename_invariant(monkeypatch):
-    image = cv2.imread(str(ROOT/'artifacts/images_to_convert/GE0281.jpg'))
+@pytest.mark.parametrize('variant', ['GE0280', 'GE0281'])
+def test_runtime_bypasses_samples_and_embedding_and_is_rename_invariant(monkeypatch, variant):
+    image = cv2.imread(str(ROOT/f'artifacts/images_to_convert/{variant}.jpg'))
+    catalog = ET.parse(ROOT/'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml')
+    description = next(e.findtext('beschreibung') for e in catalog.iter('entry') if e.get('key') == variant)
     h, w = image.shape[:2]
     def forbidden(*args, **kwargs):
         pytest.fail('Disk registration must bypass sample SVGs and raster embedding')
     monkeypatch.setattr(runtime, '_try_load_sample_svg', forbidden)
     outputs = []
-    for name in ('foreign_disk', 'renamed_color_patch'):
+    for name in (variant, 'renamed_color_patch'):
         logs = []
         result = runtime.runNonCompositeIterationImpl(
             mode='non_composite', params={}, stripe_strategy=None, semantic_mode_visual_override=False,
-            width=w, height=h, base_name=name, description=DESCRIPTION, perc_img=image, img_path=name+'.jpg',
+            width=w, height=h, base_name=name, description=description, perc_img=image, img_path=name+'.jpg',
             print_fn=lambda *args: None, render_embedded_raster_svg_fn=forbidden,
             build_gradient_stripe_svg_fn=forbidden, build_gradient_stripe_validation_log_lines_fn=forbidden,
             write_validation_log_fn=logs.append, render_svg_to_numpy_fn=render,
@@ -81,6 +85,8 @@ def test_runtime_bypasses_samples_and_embedding_and_is_rename_invariant(monkeypa
         assert logs == [['status=non_composite_raster_radial_disk']]
     assert outputs[0] == outputs[1]
     assert '<image' not in outputs[0]
+    assert '<text' not in outputs[0]
+    assert radial_disk_semantics(outputs[0]) == 1
 
 
 @pytest.mark.parametrize('description', ['Hellgraues Quadrat.', DESCRIPTION+' mit Text',
