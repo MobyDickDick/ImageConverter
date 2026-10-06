@@ -1,0 +1,76 @@
+{
+  "schema_version": "radial_disk_recheck_manifest_v1",
+  "description": "Kugelform: ein gef\u00fcllter Kreis mit radialem Farbverlauf, innen hell und au\u00dfen dunkler, auf wei\u00dfem Hintergrund.",
+  "provenance": {
+    "commit": "69957568c507399dcbde691018a6b5d721a7f578",
+    "seed": 0,
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0",
+    "execution_mode": "semantic-only",
+    "baseline_mode": "original descriptions with radial disk registration disabled",
+    "source_sha256": {
+      "src/iCCModules/imageCompositeConverterRadialDisk.py": "76c8a25955d855308fe2c6be261f2ea8093e230bb8de4d27c97b3a4627dbb0ae",
+      "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "d4288d99dab6c2fc8a074f86154e40a527fab03b18621905fbbe5bd9fdc86c10",
+      "src/iCCModules/imageCompositeConverterRendering.py": "c9a14ae0cd84829c7b592dbd548304af064c2dfbbb6bc5f10e1aa1b346057d66",
+      "tools/run_radial_disk_recheck.py": "b10b9da2d3aa49e6f84b35332e2b24c0b731b1a838b16444f66c97c1d7e1c37d",
+      "tools/evaluate_radial_disk_recheck.py": "7219127a251b874725b94bec6f16cc8dd6d021b075fd4e60cc719cfe84e2ceaf",
+      "tests/test_radial_disk_runtime.py": "a6397985c76ca1caab2a27390c209946925aa5c0825497bcc3ac5febb35439ad",
+      "artifacts\\images_to_convert\\Finale_Wurzelformen_V3.xml": "07b93d3ea7f9934375d3382dd2015bb06c528132bed9997887134fc23c4ae068"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "foreign_disk_00",
+      "variant": "GE0280",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE0280.jpg",
+      "baseline_description": "Blaue Kugelform (blauer Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)",
+      "before_svg": "before/foreign_disk_00.svg",
+      "after_svg": "after/foreign_disk_00.svg"
+    },
+    {
+      "case_id": "foreign_disk_01",
+      "variant": "GE0281",
+      "role": "development",
+      "image": "../../images_to_convert/GE0281.jpg",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "before_svg": "before/foreign_disk_01.svg",
+      "after_svg": "after/foreign_disk_01.svg"
+    },
+    {
+      "case_id": "foreign_disk_02",
+      "variant": "GE0282",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE0282.jpg",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "before_svg": "before/foreign_disk_02.svg",
+      "after_svg": "after/foreign_disk_02.svg"
+    },
+    {
+      "case_id": "foreign_disk_03",
+      "variant": "GE0283",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE0283.jpg",
+      "baseline_description": "gr\u00fcner Kugelform (gr\u00fcner Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)",
+      "before_svg": "before/foreign_disk_03.svg",
+      "after_svg": "after/foreign_disk_03.svg"
+    },
+    {
+      "case_id": "foreign_disk_04",
+      "variant": "GE0284",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE0284.jpg",
+      "baseline_description": "roter Kugelform (roter Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)",
+      "before_svg": "before/foreign_disk_04.svg",
+      "after_svg": "after/foreign_disk_04.svg"
+    },
+    {
+      "case_id": "foreign_disk_05",
+      "variant": "GE0285",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE0285.jpg",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie GE0285. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (\u2014). Bitte einer finalen Wurzelform-Kategorie zuordnen.",
+      "before_svg": "before/foreign_disk_05.svg",
+      "after_svg": "after/foreign_disk_05.svg"
+    }
+  ]
+}

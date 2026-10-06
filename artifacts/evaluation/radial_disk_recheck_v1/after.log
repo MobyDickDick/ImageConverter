@@ -1,0 +1,64 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Kein interaktives Terminal erkannt; verwende Bereich von '(Anfang)' bis '(Ende)'.
+[INFO] Konvertiere foreign_disk_00.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite foreign_disk_00.jpg ---
+Bildbeschreibung: Kugelform: ein gefüllter Kreis mit radialem Farbverlauf, innen hell und außen dunkler, auf weißem Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Kreis und radialer Farbverlauf aus Rasterbefund registriert.
+[INFO] Konvertiert foreign_disk_00.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_00 | Qualität: Optimierungsfehler/Pixel=0.019945, Mean-Delta²=459.058960, RGB-RMSE/Kanal=12.370111, Raumscore=1032.390359, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere foreign_disk_01.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite foreign_disk_01.jpg ---
+Bildbeschreibung: Kugelform: ein gefüllter Kreis mit radialem Farbverlauf, innen hell und außen dunkler, auf weißem Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Kreis und radialer Farbverlauf aus Rasterbefund registriert.
+[INFO] Konvertiert foreign_disk_01.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_01 | Qualität: Optimierungsfehler/Pixel=0.016260, Mean-Delta²=308.333344, RGB-RMSE/Kanal=10.137938, Raumscore=620.620471, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere foreign_disk_02.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite foreign_disk_02.jpg ---
+Bildbeschreibung: Kugelform: ein gefüllter Kreis mit radialem Farbverlauf, innen hell und außen dunkler, auf weißem Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Kreis und radialer Farbverlauf aus Rasterbefund registriert.
+[INFO] Konvertiert foreign_disk_02.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_02 | Qualität: Optimierungsfehler/Pixel=0.011297, Mean-Delta²=149.666672, RGB-RMSE/Kanal=7.063207, Raumscore=352.760433, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere foreign_disk_03.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite foreign_disk_03.jpg ---
+Bildbeschreibung: Kugelform: ein gefüllter Kreis mit radialem Farbverlauf, innen hell und außen dunkler, auf weißem Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Kreis und radialer Farbverlauf aus Rasterbefund registriert.
+[INFO] Konvertiert foreign_disk_03.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_03 | Qualität: Optimierungsfehler/Pixel=0.021630, Mean-Delta²=527.800476, RGB-RMSE/Kanal=13.263992, Raumscore=1225.685740, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere foreign_disk_04.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite foreign_disk_04.jpg ---
+Bildbeschreibung: Kugelform: ein gefüllter Kreis mit radialem Farbverlauf, innen hell und außen dunkler, auf weißem Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Kreis und radialer Farbverlauf aus Rasterbefund registriert.
+[INFO] Konvertiert foreign_disk_04.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_04 | Qualität: Optimierungsfehler/Pixel=0.021747, Mean-Delta²=587.102051, RGB-RMSE/Kanal=13.989306, Raumscore=1369.457781, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere foreign_disk_05.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite foreign_disk_05.jpg ---
+Bildbeschreibung: Kugelform: ein gefüllter Kreis mit radialem Farbverlauf, innen hell und außen dunkler, auf weißem Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Kreis und radialer Farbverlauf aus Rasterbefund registriert.
+[WARN] foreign_disk_05.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.989796, localized_error_fraction=0.727186).
+[INFO] Konvertiert foreign_disk_05.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_05 | Qualität: Optimierungsfehler/Pixel=0.018212, Mean-Delta²=516.340027, RGB-RMSE/Kanal=13.119197, Raumscore=1541.897335, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere foreign_disk_05.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite foreign_disk_05.jpg ---
+Bildbeschreibung: Kugelform: ein gefüllter Kreis mit radialem Farbverlauf, innen hell und außen dunkler, auf weißem Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Kreis und radialer Farbverlauf aus Rasterbefund registriert.
+[WARN] foreign_disk_05.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.989796, localized_error_fraction=0.727186).
+[INFO] Konvertiert foreign_disk_05.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_05 | Qualität: Optimierungsfehler/Pixel=0.018212, Mean-Delta²=516.340027, RGB-RMSE/Kanal=13.119197, Raumscore=1541.897335, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Konvertiere foreign_disk_05.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite foreign_disk_05.jpg ---
+Bildbeschreibung: Kugelform: ein gefüllter Kreis mit radialem Farbverlauf, innen hell und außen dunkler, auf weißem Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Kreis und radialer Farbverlauf aus Rasterbefund registriert.
+[WARN] foreign_disk_05.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.989796, localized_error_fraction=0.727186).
+[INFO] Konvertiert foreign_disk_05.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_05 | Qualität: Optimierungsfehler/Pixel=0.018212, Mean-Delta²=516.340027, RGB-RMSE/Kanal=13.119197, Raumscore=1541.897335, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.0s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\ge0281\recheck2\after\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\ge0281\recheck2\after\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\ge0281\recheck2\after

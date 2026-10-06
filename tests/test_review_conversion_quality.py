@@ -334,7 +334,7 @@ def test_ac0253_1_committed_svg_preserves_rotated_pump_quality() -> None:
 
 
 def test_ac0150_2_committed_svg_preserves_saturated_chevron_quality() -> None:
-    record = review_variant("AC0150_2", source="diff_inventory")
+    record = _review_committed_snapshot("AC0150_2", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 40
@@ -535,7 +535,7 @@ def test_ac0732_1_m_committed_svg_preserves_right_facing_p_kelle_quality() -> No
 
 
 def test_ac0733_1_l_committed_svg_preserves_horizontal_p_kelle_quality() -> None:
-    record = review_variant("AC0733_1_L", source="diff_inventory")
+    record = _review_committed_snapshot("AC0733_1_L", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 25
@@ -625,7 +625,7 @@ def test_ac0723_1_s_committed_svg_preserves_vertical_square_t_kelle_quality() ->
 
 
 def test_ac0701_1_s_committed_svg_preserves_upright_square_kelle_quality() -> None:
-    record = review_variant("AC0701_1_S", source="diff_inventory")
+    record = _review_committed_snapshot("AC0701_1_S", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 15

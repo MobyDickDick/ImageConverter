@@ -151,6 +151,7 @@ def _expand_centered_radial_gradients_for_fitz(svg_string: str) -> str:
     """
     if 'radialGradient' not in svg_string or 'url(#' not in svg_string:
         return svg_string
+    ET.register_namespace('', 'http://www.w3.org/2000/svg')
     try:
         root = ET.fromstring(svg_string)
     except ET.ParseError:
