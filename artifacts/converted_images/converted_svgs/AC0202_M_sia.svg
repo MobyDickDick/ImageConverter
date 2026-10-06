@@ -1,15 +1,9 @@
 <svg width="40" height="30" viewBox="0 0 40 30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(20.000 15.000) rotate(270) scale(1.1000) translate(-20.000 -15.000)">
-<g transform="translate(10.000 12.500) rotate(180) scale(1.0000) translate(-10.000 -12.500)">
-<g transform="translate(10.000 12.500) rotate(180) scale(1.1000) translate(-10.000 -12.500)">
-<g transform="translate(14.000 5.500) rotate(180) scale(1.0000) translate(-14.000 -5.500)">
-<g transform="translate(17.000 6.000) rotate(0) scale(1.0825) translate(-17.000 -6.000)">
-<g data-output-variation="1" transform="translate(0.0261 0.0712) rotate(-0.1543 15.0000 5.0000)">
-  <rect id="backbottom_light_grey_square" x="0" y="1.972" width="29.954" height="6.087" fill="#c8dcc2" stroke="none" stroke-width="0.012"/>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
+  <g data-output-variation="1" transform="translate(0.0961 -0.0481) rotate(-0.0444 20.0000 15.0000)">
+  <ellipse id="compressor_circle" cx="15.924" cy="11.011" rx="10.989" ry="10.976" fill="#D8D8D8" stroke="#DFDFDF" stroke-width="1.042"/>
+  <path id="rightward_compressor_upper_line" d="M 9.818 2.004 L 26.913 8.558" stroke="#f4f4f4" stroke-width="0.974" fill="none" stroke-linecap="round"/>
+  <path id="rightward_compressor_lower_line" d="M 9.805 19.999 L 26.913 13.485" stroke="#f4f4f4" stroke-width="0.974" fill="none" stroke-linecap="round"/>
+  <path id="perception_horizontal_rule" d="M 19.904 20.509 L 32.953 20.509" stroke="#D0D0D0" stroke-width="2.991" fill="none" stroke-linecap="square"/>
+  <path id="perception_line" d="M 28 11.68 L 28 19.52" stroke="#4f4f4f" stroke-width="0.958" fill="none" stroke-linejoin="round" stroke-linecap="butt"/>
   </g>
 </svg>

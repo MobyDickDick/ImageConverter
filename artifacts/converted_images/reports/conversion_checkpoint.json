@@ -1,18 +1,20 @@
 {
-  "batch_failure_count": 4,
-  "bestlist_count": 561,
-  "filename": "AC0212_S.jpg",
+  "batch_failure_count": 3,
+  "bestlist_count": 420,
+  "filename": "AC1003_S.jpg",
   "last_event": {
-    "filename": "AC0212_S.jpg",
+    "filename": "AC1003_S.jpg",
     "stage": "initial_pass",
-    "variant": "AC0212_S",
-    "variant_index": 87
+    "variant": "AC1003_S",
+    "variant_index": 423
   },
-  "pass_seed_offset": 87,
-  "processed_result_count": 84,
+  "pass_seed_offset": 423,
+  "processed_result_count": 420,
   "result_map_path": "conversion_result_map.json",
-  "run_seed": 529189183,
+  "run_id": "catalog-20261006T175703Z-9190f845",
+  "run_seed": 330102219,
   "schema_version": "conversion_checkpoint_v1",
   "stage": "initial_pass",
-  "variant": "AC0212_S"
+  "started_at": "2026-10-06T17:57:03.945996Z",
+  "variant": "AC1003_S"
 }

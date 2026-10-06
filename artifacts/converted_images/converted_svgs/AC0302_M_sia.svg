@@ -1,11 +1,16 @@
-<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(30.000 30.000) rotate(180) scale(1.0000) translate(-30.000 -30.000)">
-<g transform="translate(30.000 30.000) rotate(90) scale(0.9200) translate(-30.000 -30.000)">
-<g data-output-variation="1" transform="translate(0.0541 -0.1471) rotate(-0.0944 30.0000 30.0000)">
-  <ellipse id="compressor_circle" cx="29.129" cy="29.878" rx="27.049" ry="27.001" fill="#EAECEB" stroke="#EAEBEA" stroke-width="11.253"/>
-  <path id="upward_compressor_left_line" d="M 17.381 45.086 L 24.727 11.506" stroke="#d7d7d7" stroke-width="2.32" fill="none" stroke-linecap="round"/>
-  <path id="upward_compressor_right_line" d="M 41.091 45.053 L 33.497 11.644" stroke="#d7d7d7" stroke-width="2.32" fill="none" stroke-linecap="round"/>
-  </g>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="2.860" y1="2.860" x2="57.140" y2="2.860">
+      <stop offset="0%" stop-color="#e7e7e7"/>
+      <stop offset="40%" stop-color="#dcdcdc"/>
+      <stop offset="100%" stop-color="#e7e7e7"/>
+    </linearGradient>
+  <clipPath id="innerRect"><rect x="2.86" y="2.86" width="54.28" height="54.28"/></clipPath>
+  </defs>
+  <g data-output-variation="1" transform="translate(0.0155 0.1115) rotate(0.1161 30.0000 30.0000)">
+
+  <rect x="0" y="0" width="60" height="60" fill="#ffffff" stroke="none"/>
+  <rect x="2.860" y="2.860" width="54.280" height="54.280" fill="url(#panelGradient)" stroke="none"/>
+  <rect x="2.86" y="2.86" width="54.28" height="54.28" fill="none" stroke="#bebebe" stroke-width="0.80"/>
   </g>
 </svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="335" height="25" viewBox="0 0 335 25">
+  <defs>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="13.860" y1="0.500" x2="13.860" y2="24.500">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#f5f5f5"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  <clipPath id="innerRect"><rect x="13.86" y="0.5" width="307.28000000000003" height="24.0"/></clipPath>
+  </defs>
+  <g data-output-variation="1" transform="translate(0.5626 -0.0418) rotate(0.0654 167.5000 12.5000)">
+
+  <rect x="0" y="0" width="335" height="25" fill="#ffffff" stroke="none"/>
+  <rect x="13.860" y="0.500" width="307.280" height="24.000" fill="url(#panelGradient)" stroke="none"/>
+  <rect x="13.86" y="0.5" width="307.28000000000003" height="24.0" fill="none" stroke="#bebebe" stroke-width="0.80"/>
+  <line x1="295.636" y1="2.492" x2="39.3642" y2="22.508" stroke="#f1f1f1" stroke-width="0.80" clip-path="url(#innerRect)"/>
+  <line x1="65.00" y1="1.25" x2="69.00" y2="1.25" stroke="#f1f1f1" stroke-width="0.80" stroke-linecap="round"/>
+  <line x1="67.00" y1="-0.75" x2="67.00" y2="3.25" stroke="#f1f1f1" stroke-width="0.80" stroke-linecap="round"/>
+  <line x1="70.00" y1="1.25" x2="73.60" y2="1.25" stroke="#f1f1f1" stroke-width="0.80" stroke-linecap="round"/>
+  </g>
+</svg>

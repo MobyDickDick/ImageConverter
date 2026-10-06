@@ -1,5 +1,4 @@
-<svg width="90" height="25" viewBox="0 0 90 25" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g data-output-variation="1" transform="translate(-0.0013 0.0608) rotate(-0.0774 45.0000 12.5000)">
-  <rect id="backbottom_light_grey_square" x="65.454" y="0.014" width="36.055" height="24.96" fill="#f2b8b4" stroke="none" stroke-width="0.025"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="90" height="25" viewBox="0 0 90 25">
+  <rect id="panel_exterior" width="90" height="25" rx="3.5" fill="#ec1c24"/>
+  <rect id="panel_interior" x="2.5" y="2" width="64.5" height="21" rx="0" fill="#fffeff"/>
 </svg>

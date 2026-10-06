@@ -1,15 +1,16 @@
-<svg width="40" height="80" viewBox="0 0 40 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(20.000 40.000) rotate(0) scale(0.8000) translate(-20.000 -40.000)">
-<defs>
-    <linearGradient id="checkmark-green-vertical-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#176f28"/>
-      <stop offset="55%" stop-color="#43ad49"/>
-      <stop offset="100%" stop-color="#c8d0c3"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="80" viewBox="0 0 40 80">
+  <defs>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="2.060" y1="4.647" x2="2.060" y2="75.352">
+      <stop offset="0%" stop-color="#e6e6e6"/>
+      <stop offset="60%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e6e6e6"/>
     </linearGradient>
+  <clipPath id="innerRect"><rect x="2.06" y="4.6475" width="35.88" height="70.705"/></clipPath>
   </defs>
-  <rect id="checkmark_background" x="1.56" y="0" width="18.96" height="24" fill="#ffffff" stroke="none"/>
-  <rect id="checkbox_border" x="6.78" y="6" width="10.997" height="14.4" fill="#bfd4ba" stroke="#7f7f7f" stroke-width="1.328"/>
-  <path id="checkmark_shadow_outline" d="M 7.835 13.44 L 12.29 18.72 L 19.306 0.12" stroke="#969696" stroke-width="3.542" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
-  <path id="checkmark_green_stroke" d="M 7.444 12.6 L 11.71 17.04 L 17.872 0" stroke="url(#checkmark-green-vertical-gradient)" stroke-width="2.214" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.65"/>
+  <g data-output-variation="1" transform="translate(0.0839 -0.0347) rotate(0.1709 20.0000 40.0000)">
+
+  <rect x="0" y="0" width="40" height="80" fill="#ffffff" stroke="none"/>
+  <rect x="2.060" y="4.647" width="35.880" height="70.705" fill="url(#panelGradient)" stroke="none"/>
+  <rect x="2.06" y="4.6475" width="35.88" height="70.705" fill="none" stroke="#bebebe" stroke-width="0.80"/>
   </g>
 </svg>
