@@ -1,0 +1,219 @@
+{
+  "baseline_sha256": "cca0839f9d1d0a94d92c8f1d20f22f443ee856636440e711dbc37d2786dcf4ba",
+  "cases": {
+    "pilot_arrow": {
+      "dimensions": {
+        "height": 60,
+        "width": 20
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5060985088348389,
+        "error_per_pixel": 0.07897526392092785,
+        "object_mask_iou": 0.54524627720504,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_holdout_00": {
+      "dimensions": {
+        "height": 60,
+        "width": 20
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.2608534097671509,
+        "error_per_pixel": 0.06766965630206331,
+        "object_mask_iou": 0.5666666666666667,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_holdout_01": {
+      "dimensions": {
+        "height": 30,
+        "width": 10
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5723549127578735,
+        "error_per_pixel": 0.05429822664359862,
+        "object_mask_iou": 0.6956521739130435,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_holdout_02": {
+      "dimensions": {
+        "height": 60,
+        "width": 20
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.2874683141708374,
+        "error_per_pixel": 0.06414999639561707,
+        "object_mask_iou": 0.5704845814977973,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_holdout_03": {
+      "dimensions": {
+        "height": 30,
+        "width": 10
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5922554731369019,
+        "error_per_pixel": 0.04227310910066641,
+        "object_mask_iou": 0.8586956521739131,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_holdout_04": {
+      "dimensions": {
+        "height": 60,
+        "width": 20
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.26109713315963745,
+        "error_per_pixel": 0.041247028887126745,
+        "object_mask_iou": 0.5266666666666666,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_holdout_05": {
+      "dimensions": {
+        "height": 30,
+        "width": 10
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.6059420108795166,
+        "error_per_pixel": 0.025049870642701526,
+        "object_mask_iou": 0.8586956521739131,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_holdout_06": {
+      "dimensions": {
+        "height": 60,
+        "width": 20
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.4888593256473541,
+        "error_per_pixel": 0.021990537994200948,
+        "object_mask_iou": 0.0,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_holdout_07": {
+      "dimensions": {
+        "height": 30,
+        "width": 10
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5851557850837708,
+        "error_per_pixel": 0.010774608173539023,
+        "object_mask_iou": 0.6611111111111111,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_holdout_08": {
+      "dimensions": {
+        "height": 60,
+        "width": 20
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5136618614196777,
+        "error_per_pixel": 0.04189988526047674,
+        "object_mask_iou": 0.5341176470588235,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_holdout_09": {
+      "dimensions": {
+        "height": 30,
+        "width": 10
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5931397080421448,
+        "error_per_pixel": 0.032298347290305014,
+        "object_mask_iou": 0.6902654867256637,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_holdout_11": {
+      "dimensions": {
+        "height": 30,
+        "width": 10
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5934244394302368,
+        "error_per_pixel": 0.05490601070902217,
+        "object_mask_iou": 0.8586956521739131,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_holdout_12": {
+      "dimensions": {
+        "height": 60,
+        "width": 20
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.0,
+        "error_per_pixel": 0.06311647463315391,
+        "object_mask_iou": 0.0,
+        "semantic_score": 0.0
+      }
+    },
+    "renamed_holdout_13": {
+      "dimensions": {
+        "height": 30,
+        "width": 10
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.0,
+        "error_per_pixel": 0.05714706082596437,
+        "object_mask_iou": 0.0,
+        "semantic_score": 0.0
+      }
+    }
+  },
+  "provenance": {
+    "baseline_mode": "original XML versus standalone corrected description plus raster arrow registration; same remaining runtime",
+    "commit": "a6eb50d6f5b804999269b01887808db265941b41",
+    "execution_mode": "semantic-only",
+    "input_hashes": {
+      "pilot_arrow": "1789bdb7d657c55b69b34c61a9406bc2ba475ed6450c3d2723ec372c2a7688fe",
+      "renamed_holdout_00": "1c3ef7c1b8242bd0cedd623a6abb6a4c88e1126c2d03cb7d0f0a2e6062da2b9b",
+      "renamed_holdout_01": "90c89cfbcf40984740a0f34a243b11acaff7463f0ac7199392084ce0bad9d597",
+      "renamed_holdout_02": "2d286353acf7fc4d161b749c47e819c53f4054ac5cc511f0f3c921f517c8c4ce",
+      "renamed_holdout_03": "317aecc075d0a3af12c747b81dafe8a65d1f3f4e2090693f57d1107fbaad2d2c",
+      "renamed_holdout_04": "d4e861669dbac3c0c6f1e8dc0486d7dcfed8dc28cca409ca84c4963926e97217",
+      "renamed_holdout_05": "b2c9d84755413a2b2be3bdf94caf4cde4e1d8e5918dc17eee078e44c0dd68f53",
+      "renamed_holdout_06": "065c5ddf67ebedfd5285267bc43f87245b2c40850d5ff521c26639c2b646ed3f",
+      "renamed_holdout_07": "0c3c6d8e9a49f7c4fa4ca70744e48bfa03eed0da8eca9758fa91143b7122d712",
+      "renamed_holdout_08": "233c94ca0f2720188fb93c438f0b46d7ae4d79a5ec57791a5fa9ffa2fdd6d287",
+      "renamed_holdout_09": "3e09e4b83bbf283fb11f5c72ad3b6bc00aa43d84135097587cf5313ff267a34c",
+      "renamed_holdout_11": "435892c1cdca87367308c6b2fa16906f5bbe8cd246a42b7b070121fe86af388f",
+      "renamed_holdout_12": "1a4333373c702bfa58ca4c22982460d614703e74a5005ed242ddca5628e32a85",
+      "renamed_holdout_13": "ba22204af822e1c655eed6aeffc3365b7e6e3788bb783aee87585f198c4355be"
+    },
+    "seed": 0,
+    "source_sha256": {
+      "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml": "d25d8cba0b3e67ffd0e485500d269d557e3637627a5fb53302f5a96c20f2f218",
+      "src/iCCModules/imageCompositeConverterGradientArrow.py": "f52bc1fc6aacbbf8c29335fa99cdaa5f514a2a8829edfe88a0a318c7e4450c39",
+      "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "a69ea9e26969764fdc046cc87ca05f209d431daccb9cc3e048b533076b8cdff0",
+      "tests/test_gradient_arrow_runtime.py": "d6f8f32655d3256bd53c3551d32d7b27c28d5fd768b8104f6fe2965f8d6a3552",
+      "tools/evaluate_gradient_arrow_recheck.py": "068d1061ff38f7134187ad7ccdf8f9712f7b9a200392ed42ea4eae671ce68dea",
+      "tools/run_gradient_arrow_recheck.py": "b43c56b087b3496de49e49f00ac74062e9a9d18709e22750db53082728d24b9c"
+    },
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+  },
+  "schema_version": "semantic_only_baseline_manifest_v1"
+}

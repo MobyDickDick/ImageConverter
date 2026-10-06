@@ -1,0 +1,341 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\.codex\worktrees\3cce\imageConverter\imageCompositeConverter.local.log
+[INFO] Kein interaktives Terminal erkannt; verwende Bereich von '(Anfang)' bis '(Ende)'.
+[INFO] Konvertiere pilot_arrow.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite pilot_arrow.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_arrow.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.720755, localized_error_fraction=0.598591).
+[INFO] Konvertiert pilot_arrow.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_ARROW | Qualität: Optimierungsfehler/Pixel=0.044194, Mean-Delta²=15406.099609, RGB-RMSE/Kanal=71.661472, Raumscore=36882.099554, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_00.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_00.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_00.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.724528, localized_error_fraction=0.624520).
+[INFO] Konvertiert renamed_holdout_00.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_00 | Qualität: Optimierungsfehler/Pixel=0.036149, Mean-Delta²=13200.658203, RGB-RMSE/Kanal=66.334150, Raumscore=32630.574758, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_01.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_01.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_01.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.785714, localized_error_fraction=0.699804).
+[INFO] Konvertiert renamed_holdout_01.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_01 | Qualität: Optimierungsfehler/Pixel=0.123519, Mean-Delta²=10592.226562, RGB-RMSE/Kanal=59.420049, Raumscore=29265.416966, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_02.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_02.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_02.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.720755, localized_error_fraction=0.609792).
+[INFO] Konvertiert renamed_holdout_02.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_02 | Qualität: Optimierungsfehler/Pixel=0.037476, Mean-Delta²=12514.060547, RGB-RMSE/Kanal=64.586016, Raumscore=30287.112457, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_03.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_03.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_03.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.970588, localized_error_fraction=0.803702).
+[INFO] Konvertiert renamed_holdout_03.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_03 | Qualität: Optimierungsfehler/Pixel=0.099156, Mean-Delta²=8246.426758, RGB-RMSE/Kanal=52.429085, Raumscore=25920.596357, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_04.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_04.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_04.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.723485, localized_error_fraction=0.594945).
+[INFO] Konvertiert renamed_holdout_04.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_04 | Qualität: Optimierungsfehler/Pixel=0.030207, Mean-Delta²=8046.264160, RGB-RMSE/Kanal=51.788880, Raumscore=19193.863207, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_05.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_05.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_05.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.985075, localized_error_fraction=0.799537).
+[INFO] Konvertiert renamed_holdout_05.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_05 | Qualität: Optimierungsfehler/Pixel=0.074996, Mean-Delta²=4886.603516, RGB-RMSE/Kanal=40.359235, Raumscore=15406.928181, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_06.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_06.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_06.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.688797, localized_error_fraction=0.578684).
+[INFO] Konvertiert renamed_holdout_06.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_06 | Qualität: Optimierungsfehler/Pixel=0.023561, Mean-Delta²=4289.804199, RGB-RMSE/Kanal=37.814478, Raumscore=9922.438612, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.9s
+[INFO] Konvertiere renamed_holdout_07.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_07.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_07.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.932203, localized_error_fraction=0.837096).
+[INFO] Konvertiert renamed_holdout_07.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_07 | Qualität: Optimierungsfehler/Pixel=0.052878, Mean-Delta²=2101.856689, RGB-RMSE/Kanal=26.469207, Raumscore=6945.742298, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.0s
+[INFO] Konvertiere renamed_holdout_08.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_08.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_08.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.703125, localized_error_fraction=0.554060).
+[INFO] Konvertiert renamed_holdout_08.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_08 | Qualität: Optimierungsfehler/Pixel=0.025928, Mean-Delta²=8173.620117, RGB-RMSE/Kanal=52.197127, Raumscore=18432.640890, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.0s
+[INFO] Konvertiere renamed_holdout_09.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_09.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_09.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.779412, localized_error_fraction=0.647495).
+[INFO] Konvertiert renamed_holdout_09.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_09 | Qualität: Optimierungsfehler/Pixel=0.089044, Mean-Delta²=6300.600098, RGB-RMSE/Kanal=45.827939, Raumscore=16308.139876, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.9s
+[INFO] Konvertiere renamed_holdout_11.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_11.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_11.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.723684, localized_error_fraction=0.768143).
+[INFO] Konvertiert renamed_holdout_11.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_11 | Qualität: Optimierungsfehler/Pixel=0.122241, Mean-Delta²=10710.790039, RGB-RMSE/Kanal=59.751681, Raumscore=31124.773469, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.8s
+[INFO] Konvertiere renamed_holdout_12.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_12.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_12.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.725275, localized_error_fraction=0.669534).
+[INFO] Konvertiert renamed_holdout_12.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_12 | Qualität: Optimierungsfehler/Pixel=0.024474, Mean-Delta²=12312.446289, RGB-RMSE/Kanal=64.063631, Raumscore=32015.850848, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.0s
+[INFO] Konvertiere renamed_holdout_13.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_13.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_13.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.764706, localized_error_fraction=0.703793).
+[INFO] Konvertiert renamed_holdout_13.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_13 | Qualität: Optimierungsfehler/Pixel=0.098841, Mean-Delta²=11147.962891, RGB-RMSE/Kanal=60.958901, Raumscore=30665.686451, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.9s
+[INFO] Konvertiere renamed_holdout_01.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_01.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_01.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.785714, localized_error_fraction=0.699804).
+[INFO] Konvertiert renamed_holdout_01.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_01 | Qualität: Optimierungsfehler/Pixel=0.123519, Mean-Delta²=10592.226562, RGB-RMSE/Kanal=59.420049, Raumscore=29265.416966, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere renamed_holdout_11.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_11.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_11.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.723684, localized_error_fraction=0.768143).
+[INFO] Konvertiert renamed_holdout_11.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_11 | Qualität: Optimierungsfehler/Pixel=0.122241, Mean-Delta²=10710.790039, RGB-RMSE/Kanal=59.751681, Raumscore=31124.773469, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere renamed_holdout_03.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_03.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_03.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.970588, localized_error_fraction=0.803702).
+[INFO] Konvertiert renamed_holdout_03.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_03 | Qualität: Optimierungsfehler/Pixel=0.099156, Mean-Delta²=8246.426758, RGB-RMSE/Kanal=52.429085, Raumscore=25920.596357, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.5s
+[INFO] Konvertiere renamed_holdout_13.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_13.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_13.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.764706, localized_error_fraction=0.703793).
+[INFO] Konvertiert renamed_holdout_13.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_13 | Qualität: Optimierungsfehler/Pixel=0.098841, Mean-Delta²=11147.962891, RGB-RMSE/Kanal=60.958901, Raumscore=30665.686451, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.7s
+[INFO] Konvertiere renamed_holdout_09.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_09.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_09.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.779412, localized_error_fraction=0.647495).
+[INFO] Konvertiert renamed_holdout_09.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_09 | Qualität: Optimierungsfehler/Pixel=0.089044, Mean-Delta²=6300.600098, RGB-RMSE/Kanal=45.827939, Raumscore=16308.139876, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere renamed_holdout_05.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_05.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_05.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.985075, localized_error_fraction=0.799537).
+[INFO] Konvertiert renamed_holdout_05.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_05 | Qualität: Optimierungsfehler/Pixel=0.074996, Mean-Delta²=4886.603516, RGB-RMSE/Kanal=40.359235, Raumscore=15406.928181, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere renamed_holdout_07.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_07.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_07.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.932203, localized_error_fraction=0.837096).
+[INFO] Konvertiert renamed_holdout_07.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_07 | Qualität: Optimierungsfehler/Pixel=0.052878, Mean-Delta²=2101.856689, RGB-RMSE/Kanal=26.469207, Raumscore=6945.742298, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere pilot_arrow.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite pilot_arrow.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_arrow.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.720755, localized_error_fraction=0.598591).
+[INFO] Konvertiert pilot_arrow.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_ARROW | Qualität: Optimierungsfehler/Pixel=0.044194, Mean-Delta²=15406.099609, RGB-RMSE/Kanal=71.661472, Raumscore=36882.099554, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere renamed_holdout_02.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_02.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_02.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.720755, localized_error_fraction=0.609792).
+[INFO] Konvertiert renamed_holdout_02.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_02 | Qualität: Optimierungsfehler/Pixel=0.037476, Mean-Delta²=12514.060547, RGB-RMSE/Kanal=64.586016, Raumscore=30287.112457, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.9s
+[INFO] Konvertiere renamed_holdout_00.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_00.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_00.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.724528, localized_error_fraction=0.624520).
+[INFO] Konvertiert renamed_holdout_00.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_00 | Qualität: Optimierungsfehler/Pixel=0.036149, Mean-Delta²=13200.658203, RGB-RMSE/Kanal=66.334150, Raumscore=32630.574758, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere renamed_holdout_04.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_04.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_04.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.723485, localized_error_fraction=0.594945).
+[INFO] Konvertiert renamed_holdout_04.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_04 | Qualität: Optimierungsfehler/Pixel=0.030207, Mean-Delta²=8046.264160, RGB-RMSE/Kanal=51.788880, Raumscore=19193.863207, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere renamed_holdout_08.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_08.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_08.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.703125, localized_error_fraction=0.554060).
+[INFO] Konvertiert renamed_holdout_08.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_08 | Qualität: Optimierungsfehler/Pixel=0.025928, Mean-Delta²=8173.620117, RGB-RMSE/Kanal=52.197127, Raumscore=18432.640890, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.9s
+[INFO] Konvertiere renamed_holdout_12.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_12.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_12.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.725275, localized_error_fraction=0.669534).
+[INFO] Konvertiert renamed_holdout_12.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_12 | Qualität: Optimierungsfehler/Pixel=0.024474, Mean-Delta²=12312.446289, RGB-RMSE/Kanal=64.063631, Raumscore=32015.850848, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere renamed_holdout_06.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_06.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_06.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.688797, localized_error_fraction=0.578684).
+[INFO] Konvertiert renamed_holdout_06.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_06 | Qualität: Optimierungsfehler/Pixel=0.023561, Mean-Delta²=4289.804199, RGB-RMSE/Kanal=37.814478, Raumscore=9922.438612, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.9s
+[INFO] Konvertiere renamed_holdout_01.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_01.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_01.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.785714, localized_error_fraction=0.699804).
+[INFO] Konvertiert renamed_holdout_01.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_01 | Qualität: Optimierungsfehler/Pixel=0.123519, Mean-Delta²=10592.226562, RGB-RMSE/Kanal=59.420049, Raumscore=29265.416966, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.9s
+[INFO] Konvertiere renamed_holdout_11.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_11.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_11.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.723684, localized_error_fraction=0.768143).
+[INFO] Konvertiert renamed_holdout_11.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_11 | Qualität: Optimierungsfehler/Pixel=0.122241, Mean-Delta²=10710.790039, RGB-RMSE/Kanal=59.751681, Raumscore=31124.773469, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.0s
+[INFO] Konvertiere renamed_holdout_03.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_03.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_03.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.970588, localized_error_fraction=0.803702).
+[INFO] Konvertiert renamed_holdout_03.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_03 | Qualität: Optimierungsfehler/Pixel=0.099156, Mean-Delta²=8246.426758, RGB-RMSE/Kanal=52.429085, Raumscore=25920.596357, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.5s
+[INFO] Konvertiere renamed_holdout_13.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_13.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_13.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.764706, localized_error_fraction=0.703793).
+[INFO] Konvertiert renamed_holdout_13.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_13 | Qualität: Optimierungsfehler/Pixel=0.098841, Mean-Delta²=11147.962891, RGB-RMSE/Kanal=60.958901, Raumscore=30665.686451, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.7s
+[INFO] Konvertiere renamed_holdout_09.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_09.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_09.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.779412, localized_error_fraction=0.647495).
+[INFO] Konvertiert renamed_holdout_09.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_09 | Qualität: Optimierungsfehler/Pixel=0.089044, Mean-Delta²=6300.600098, RGB-RMSE/Kanal=45.827939, Raumscore=16308.139876, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.8s
+[INFO] Konvertiere renamed_holdout_05.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_05.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_05.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.985075, localized_error_fraction=0.799537).
+[INFO] Konvertiert renamed_holdout_05.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_05 | Qualität: Optimierungsfehler/Pixel=0.074996, Mean-Delta²=4886.603516, RGB-RMSE/Kanal=40.359235, Raumscore=15406.928181, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.8s
+[INFO] Konvertiere renamed_holdout_07.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_07.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_07.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.932203, localized_error_fraction=0.837096).
+[INFO] Konvertiert renamed_holdout_07.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_07 | Qualität: Optimierungsfehler/Pixel=0.052878, Mean-Delta²=2101.856689, RGB-RMSE/Kanal=26.469207, Raumscore=6945.742298, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.9s
+[INFO] Konvertiere pilot_arrow.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite pilot_arrow.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] pilot_arrow.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.720755, localized_error_fraction=0.598591).
+[INFO] Konvertiert pilot_arrow.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_ARROW | Qualität: Optimierungsfehler/Pixel=0.044194, Mean-Delta²=15406.099609, RGB-RMSE/Kanal=71.661472, Raumscore=36882.099554, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.0s
+[INFO] Konvertiere renamed_holdout_02.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_02.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_02.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.720755, localized_error_fraction=0.609792).
+[INFO] Konvertiert renamed_holdout_02.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_02 | Qualität: Optimierungsfehler/Pixel=0.037476, Mean-Delta²=12514.060547, RGB-RMSE/Kanal=64.586016, Raumscore=30287.112457, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.9s
+[INFO] Konvertiere renamed_holdout_00.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_00.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_00.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.724528, localized_error_fraction=0.624520).
+[INFO] Konvertiert renamed_holdout_00.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_00 | Qualität: Optimierungsfehler/Pixel=0.036149, Mean-Delta²=13200.658203, RGB-RMSE/Kanal=66.334150, Raumscore=32630.574758, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.7s
+[INFO] Konvertiere renamed_holdout_04.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_04.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_04.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.723485, localized_error_fraction=0.594945).
+[INFO] Konvertiert renamed_holdout_04.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_04 | Qualität: Optimierungsfehler/Pixel=0.030207, Mean-Delta²=8046.264160, RGB-RMSE/Kanal=51.788880, Raumscore=19193.863207, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.5s
+[INFO] Konvertiere renamed_holdout_08.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_08.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_08.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.703125, localized_error_fraction=0.554060).
+[INFO] Konvertiert renamed_holdout_08.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_08 | Qualität: Optimierungsfehler/Pixel=0.025928, Mean-Delta²=8173.620117, RGB-RMSE/Kanal=52.197127, Raumscore=18432.640890, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.0s
+[INFO] Konvertiere renamed_holdout_12.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_12.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_12.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.725275, localized_error_fraction=0.669534).
+[INFO] Konvertiert renamed_holdout_12.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_12 | Qualität: Optimierungsfehler/Pixel=0.024474, Mean-Delta²=12312.446289, RGB-RMSE/Kanal=64.063631, Raumscore=32015.850848, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.9s
+[INFO] Konvertiere renamed_holdout_06.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_06.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] renamed_holdout_06.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.688797, localized_error_fraction=0.578684).
+[INFO] Konvertiert renamed_holdout_06.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_06 | Qualität: Optimierungsfehler/Pixel=0.023561, Mean-Delta²=4289.804199, RGB-RMSE/Kanal=37.814478, Raumscore=9922.438612, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.9s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\.codex\worktrees\3cce\imageConverter\.tmp\arrow-final-first\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\.codex\worktrees\3cce\imageConverter\.tmp\arrow-final-first\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\.codex\worktrees\3cce\imageConverter\.tmp\arrow-final-first\before

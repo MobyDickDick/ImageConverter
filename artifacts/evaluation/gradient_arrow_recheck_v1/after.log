@@ -1,0 +1,341 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\.codex\worktrees\3cce\imageConverter\imageCompositeConverter.local.log
+[INFO] Kein interaktives Terminal erkannt; verwende Bereich von '(Anfang)' bis '(Ende)'.
+[INFO] Konvertiere pilot_arrow.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite pilot_arrow.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] pilot_arrow.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.493464, localized_error_fraction=0.722586).
+[INFO] Konvertiert pilot_arrow.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_ARROW | Qualität: Optimierungsfehler/Pixel=0.005933, Mean-Delta²=500.660004, RGB-RMSE/Kanal=12.918462, Raumscore=1348.207871, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_00.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_00.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_00.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.476793, localized_error_fraction=0.798040).
+[INFO] Konvertiert renamed_holdout_00.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_00 | Qualität: Optimierungsfehler/Pixel=0.005102, Mean-Delta²=491.186676, RGB-RMSE/Kanal=12.795659, Raumscore=1552.359439, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_01.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_01.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_01.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.538462, localized_error_fraction=0.906148).
+[INFO] Konvertiert renamed_holdout_01.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_01 | Qualität: Optimierungsfehler/Pixel=0.018789, Mean-Delta²=374.383331, RGB-RMSE/Kanal=11.171143, Raumscore=1249.436366, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_02.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_02.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_02.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.546099, localized_error_fraction=0.813309).
+[INFO] Konvertiert renamed_holdout_02.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_02 | Qualität: Optimierungsfehler/Pixel=0.005105, Mean-Delta²=458.077515, RGB-RMSE/Kanal=12.356881, Raumscore=1457.999234, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_03.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_03.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_03.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.468354, localized_error_fraction=0.871366).
+[INFO] Konvertiert renamed_holdout_03.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_03 | Qualität: Optimierungsfehler/Pixel=0.018385, Mean-Delta²=304.739990, RGB-RMSE/Kanal=10.078690, Raumscore=948.584447, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_04.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_04.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_04.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.471311, localized_error_fraction=0.815355).
+[INFO] Konvertiert renamed_holdout_04.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_04 | Qualität: Optimierungsfehler/Pixel=0.004007, Mean-Delta²=280.999176, RGB-RMSE/Kanal=9.678140, Raumscore=899.598666, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_05.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_05.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_05.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.522388, localized_error_fraction=0.861824).
+[INFO] Konvertiert renamed_holdout_05.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_05 | Qualität: Optimierungsfehler/Pixel=0.014419, Mean-Delta²=180.856674, RGB-RMSE/Kanal=7.764378, Raumscore=594.495964, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_06.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_06.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_06.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.391753, localized_error_fraction=0.782094).
+[INFO] Konvertiert renamed_holdout_06.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_06 | Qualität: Optimierungsfehler/Pixel=0.002991, Mean-Delta²=127.860832, RGB-RMSE/Kanal=6.528421, Raumscore=369.206439, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_07.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_07.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_07.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.903226, localized_error_fraction=0.818363).
+[INFO] Konvertiert renamed_holdout_07.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_07 | Qualität: Optimierungsfehler/Pixel=0.008456, Mean-Delta²=56.889999, RGB-RMSE/Kanal=4.354691, Raumscore=190.926738, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_08.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_08.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_08.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.483193, localized_error_fraction=0.708334).
+[INFO] Konvertiert renamed_holdout_08.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_08 | Qualität: Optimierungsfehler/Pixel=0.004008, Mean-Delta²=314.489166, RGB-RMSE/Kanal=10.238639, Raumscore=841.031414, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_09.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_09.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_09.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.542857, localized_error_fraction=0.885069).
+[INFO] Konvertiert renamed_holdout_09.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_09 | Qualität: Optimierungsfehler/Pixel=0.015711, Mean-Delta²=279.906677, RGB-RMSE/Kanal=9.659308, Raumscore=905.067630, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_11.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_11.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_11.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.544118, localized_error_fraction=0.918841).
+[INFO] Konvertiert renamed_holdout_11.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_11 | Qualität: Optimierungsfehler/Pixel=0.022196, Mean-Delta²=463.696655, RGB-RMSE/Kanal=12.432439, Raumscore=1564.484561, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_12.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_12.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_12.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.478814, localized_error_fraction=0.731101).
+[INFO] Konvertiert renamed_holdout_12.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_12 | Qualität: Optimierungsfehler/Pixel=0.002997, Mean-Delta²=233.709167, RGB-RMSE/Kanal=8.826271, Raumscore=648.244590, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_13.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite renamed_holdout_13.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_13.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.553846, localized_error_fraction=0.828233).
+[INFO] Konvertiert renamed_holdout_13.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_13 | Qualität: Optimierungsfehler/Pixel=0.012348, Mean-Delta²=174.713333, RGB-RMSE/Kanal=7.631368, Raumscore=543.008266, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_11.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_11.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_11.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.544118, localized_error_fraction=0.918841).
+[INFO] Konvertiert renamed_holdout_11.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_11 | Qualität: Optimierungsfehler/Pixel=0.022196, Mean-Delta²=463.696655, RGB-RMSE/Kanal=12.432439, Raumscore=1564.484561, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Konvertiere renamed_holdout_01.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_01.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_01.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.538462, localized_error_fraction=0.906148).
+[INFO] Konvertiert renamed_holdout_01.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_01 | Qualität: Optimierungsfehler/Pixel=0.018789, Mean-Delta²=374.383331, RGB-RMSE/Kanal=11.171143, Raumscore=1249.436366, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_03.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_03.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_03.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.468354, localized_error_fraction=0.871366).
+[INFO] Konvertiert renamed_holdout_03.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_03 | Qualität: Optimierungsfehler/Pixel=0.018385, Mean-Delta²=304.739990, RGB-RMSE/Kanal=10.078690, Raumscore=948.584447, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_09.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_09.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_09.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.542857, localized_error_fraction=0.885069).
+[INFO] Konvertiert renamed_holdout_09.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_09 | Qualität: Optimierungsfehler/Pixel=0.015711, Mean-Delta²=279.906677, RGB-RMSE/Kanal=9.659308, Raumscore=905.067630, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Konvertiere renamed_holdout_05.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_05.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_05.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.522388, localized_error_fraction=0.861824).
+[INFO] Konvertiert renamed_holdout_05.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_05 | Qualität: Optimierungsfehler/Pixel=0.014419, Mean-Delta²=180.856674, RGB-RMSE/Kanal=7.764378, Raumscore=594.495964, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Konvertiere renamed_holdout_13.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_13.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_13.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.553846, localized_error_fraction=0.828233).
+[INFO] Konvertiert renamed_holdout_13.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_13 | Qualität: Optimierungsfehler/Pixel=0.012348, Mean-Delta²=174.713333, RGB-RMSE/Kanal=7.631368, Raumscore=543.008266, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Konvertiere renamed_holdout_07.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_07.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_07.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.903226, localized_error_fraction=0.818363).
+[INFO] Konvertiert renamed_holdout_07.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_07 | Qualität: Optimierungsfehler/Pixel=0.008456, Mean-Delta²=56.889999, RGB-RMSE/Kanal=4.354691, Raumscore=190.926738, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Konvertiere pilot_arrow.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite pilot_arrow.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] pilot_arrow.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.493464, localized_error_fraction=0.722586).
+[INFO] Konvertiert pilot_arrow.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_ARROW | Qualität: Optimierungsfehler/Pixel=0.005933, Mean-Delta²=500.660004, RGB-RMSE/Kanal=12.918462, Raumscore=1348.207871, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_02.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_02.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_02.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.546099, localized_error_fraction=0.813309).
+[INFO] Konvertiert renamed_holdout_02.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_02 | Qualität: Optimierungsfehler/Pixel=0.005105, Mean-Delta²=458.077515, RGB-RMSE/Kanal=12.356881, Raumscore=1457.999234, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_00.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_00.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_00.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.476793, localized_error_fraction=0.798040).
+[INFO] Konvertiert renamed_holdout_00.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_00 | Qualität: Optimierungsfehler/Pixel=0.005102, Mean-Delta²=491.186676, RGB-RMSE/Kanal=12.795659, Raumscore=1552.359439, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_08.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_08.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_08.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.483193, localized_error_fraction=0.708334).
+[INFO] Konvertiert renamed_holdout_08.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_08 | Qualität: Optimierungsfehler/Pixel=0.004008, Mean-Delta²=314.489166, RGB-RMSE/Kanal=10.238639, Raumscore=841.031414, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_04.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_04.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_04.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.471311, localized_error_fraction=0.815355).
+[INFO] Konvertiert renamed_holdout_04.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_04 | Qualität: Optimierungsfehler/Pixel=0.004007, Mean-Delta²=280.999176, RGB-RMSE/Kanal=9.678140, Raumscore=899.598666, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_12.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_12.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_12.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.478814, localized_error_fraction=0.731101).
+[INFO] Konvertiert renamed_holdout_12.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_12 | Qualität: Optimierungsfehler/Pixel=0.002997, Mean-Delta²=233.709167, RGB-RMSE/Kanal=8.826271, Raumscore=648.244590, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere renamed_holdout_06.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite renamed_holdout_06.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_06.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.391753, localized_error_fraction=0.782094).
+[INFO] Konvertiert renamed_holdout_06.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_06 | Qualität: Optimierungsfehler/Pixel=0.002991, Mean-Delta²=127.860832, RGB-RMSE/Kanal=6.528421, Raumscore=369.206439, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_11.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_11.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_11.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.544118, localized_error_fraction=0.918841).
+[INFO] Konvertiert renamed_holdout_11.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_11 | Qualität: Optimierungsfehler/Pixel=0.022196, Mean-Delta²=463.696655, RGB-RMSE/Kanal=12.432439, Raumscore=1564.484561, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_01.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_01.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_01.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.538462, localized_error_fraction=0.906148).
+[INFO] Konvertiert renamed_holdout_01.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_01 | Qualität: Optimierungsfehler/Pixel=0.018789, Mean-Delta²=374.383331, RGB-RMSE/Kanal=11.171143, Raumscore=1249.436366, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_03.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_03.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_03.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.468354, localized_error_fraction=0.871366).
+[INFO] Konvertiert renamed_holdout_03.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_03 | Qualität: Optimierungsfehler/Pixel=0.018385, Mean-Delta²=304.739990, RGB-RMSE/Kanal=10.078690, Raumscore=948.584447, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_09.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_09.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_09.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.542857, localized_error_fraction=0.885069).
+[INFO] Konvertiert renamed_holdout_09.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_09 | Qualität: Optimierungsfehler/Pixel=0.015711, Mean-Delta²=279.906677, RGB-RMSE/Kanal=9.659308, Raumscore=905.067630, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_05.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_05.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_05.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.522388, localized_error_fraction=0.861824).
+[INFO] Konvertiert renamed_holdout_05.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_05 | Qualität: Optimierungsfehler/Pixel=0.014419, Mean-Delta²=180.856674, RGB-RMSE/Kanal=7.764378, Raumscore=594.495964, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_13.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_13.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_13.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.553846, localized_error_fraction=0.828233).
+[INFO] Konvertiert renamed_holdout_13.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_13 | Qualität: Optimierungsfehler/Pixel=0.012348, Mean-Delta²=174.713333, RGB-RMSE/Kanal=7.631368, Raumscore=543.008266, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_07.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_07.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_07.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.903226, localized_error_fraction=0.818363).
+[INFO] Konvertiert renamed_holdout_07.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_07 | Qualität: Optimierungsfehler/Pixel=0.008456, Mean-Delta²=56.889999, RGB-RMSE/Kanal=4.354691, Raumscore=190.926738, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.2s
+[INFO] Konvertiere pilot_arrow.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite pilot_arrow.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] pilot_arrow.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.493464, localized_error_fraction=0.722586).
+[INFO] Konvertiert pilot_arrow.jpg | Parameter: mode=auto, label=M, variant_name=PILOT_ARROW | Qualität: Optimierungsfehler/Pixel=0.005933, Mean-Delta²=500.660004, RGB-RMSE/Kanal=12.918462, Raumscore=1348.207871, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_02.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_02.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_02.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.546099, localized_error_fraction=0.813309).
+[INFO] Konvertiert renamed_holdout_02.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_02 | Qualität: Optimierungsfehler/Pixel=0.005105, Mean-Delta²=458.077515, RGB-RMSE/Kanal=12.356881, Raumscore=1457.999234, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_00.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_00.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_00.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.476793, localized_error_fraction=0.798040).
+[INFO] Konvertiert renamed_holdout_00.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_00 | Qualität: Optimierungsfehler/Pixel=0.005102, Mean-Delta²=491.186676, RGB-RMSE/Kanal=12.795659, Raumscore=1552.359439, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_08.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_08.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_08.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.483193, localized_error_fraction=0.708334).
+[INFO] Konvertiert renamed_holdout_08.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_08 | Qualität: Optimierungsfehler/Pixel=0.004008, Mean-Delta²=314.489166, RGB-RMSE/Kanal=10.238639, Raumscore=841.031414, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Konvertiere renamed_holdout_04.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_04.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_04.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.471311, localized_error_fraction=0.815355).
+[INFO] Konvertiert renamed_holdout_04.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_04 | Qualität: Optimierungsfehler/Pixel=0.004007, Mean-Delta²=280.999176, RGB-RMSE/Kanal=9.678140, Raumscore=899.598666, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_12.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_12.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_12.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.478814, localized_error_fraction=0.731101).
+[INFO] Konvertiert renamed_holdout_12.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_12 | Qualität: Optimierungsfehler/Pixel=0.002997, Mean-Delta²=233.709167, RGB-RMSE/Kanal=8.826271, Raumscore=648.244590, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.2s
+[INFO] Konvertiere renamed_holdout_06.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite renamed_holdout_06.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Dreieck und Verlaufsschaft aus Rasterbefund registriert.
+[WARN] renamed_holdout_06.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.391753, localized_error_fraction=0.782094).
+[INFO] Konvertiert renamed_holdout_06.jpg | Parameter: mode=auto, label=M, variant_name=RENAMED_HOLDOUT_06 | Qualität: Optimierungsfehler/Pixel=0.002991, Mean-Delta²=127.860832, RGB-RMSE/Kanal=6.528421, Raumscore=369.206439, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.2s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\.codex\worktrees\3cce\imageConverter\.tmp\arrow-final-first\after\reports\overview_diff_tiles.png, svg=C:\Users\marku\.codex\worktrees\3cce\imageConverter\.tmp\arrow-final-first\after\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\.codex\worktrees\3cce\imageConverter\.tmp\arrow-final-first\after

@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-05, nach Links-Dreieck-Recheck)
+## Aktuelle Kandidaten (Stand: 2026-10-06, nach Verlaufspfeil-Recheck)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -62,24 +62,26 @@ fälschlich als Dreieck vereinfachten Kreissegmente und verbessert vier SIA-Fäl
 Die XML beschreibt das Links-Dreieck eigenständig. Details:
 `docs/next_arbeitspaket_2026-10-05_ac0404_1_l.md`.
 
-1. `GE9011_6M` – `mean_delta2=15528.650391`, `normalized_mse=0.079603`.
-2. `GE0281` – `mean_delta2=15287.335938`, `normalized_mse=0.078366`.
-3. `GE0300` – `mean_delta2=14731.457031`, `normalized_mse=0.075517`.
-4. `GE1420_S` – `mean_delta2=14628.742188`, `normalized_mse=0.074990`.
-5. `AC0403_1_L` – `mean_delta2=13989.019531`, `normalized_mse=0.071711`.
+`GE9011_6M` besteht nach katalogfreier Dreieck-/Verlaufsschaft-Registrierung
+beide Gates (`mean_delta2=500.660004`, frische CLI-Baseline `15406.099609`).
+Alle 14 Farb-/Größenvarianten bestehen ohne Metrikregression; zwei unabhängige
+CLI-Läufe reproduzieren sämtliche 28 SVG-Bytes und Gateentscheidungen.
+Die gemeinsame XML beschreibt die Pfeiltopologie jetzt eigenständig. Details:
+`docs/next_arbeitspaket_2026-10-06_ge9011_6m.md`.
 
-Die nächste Rotation beginnt mit `GE9011_6M` und muss den Wert des tatsächlich
-akzeptierten SVGs vor und nach der Änderung sowie den Gate-Status ausweisen.
-Der vollständige Review über `688` Einträge (`684` renderbare Paare und vier
-bereits zuvor fehlende SVG-Paare) steht unter
-`artifacts/evaluation/left_pump_recheck_v1/full_review/`.
-Er schließt die separat belegten Gate-Passes `AC0554_2_L`,
-`AC0713_1_S`, `DLG0010_1`, `AC0724_1_S`, `AC0252_1`, `AC0252`, `AC0252_2`,
-`AC0731_1_L`, `AC0731_1_M`, `AC0731_1_S`, `AC0731_L`, `AC0731_M`, `AC0731_S`,
-`GE1003_M`, `GE1003_L`, `GE1003_S` und alle 18 im neuen Manifest genannten
-`AC0404`-Varianten explizit aus: Die historische Sammelausgabe
-enthält noch alte SVGs; die akzeptierten Ergebnisse liegen in den jeweiligen
-Evaluationen.
+1. `GE0281` – `mean_delta2=15287.335938`, `normalized_mse=0.078366`.
+2. `GE0300` – `mean_delta2=14731.457031`, `normalized_mse=0.075517`.
+3. `GE1420_S` – `mean_delta2=14628.742188`, `normalized_mse=0.074990`.
+4. `AC0403_1_L` – `mean_delta2=13989.019531`, `normalized_mse=0.071711`.
+5. `AC0130_S` – `mean_delta2=13920.945312`, `normalized_mse=0.071362`.
+
+Die nächste Rotation beginnt mit `GE0281` und muss zunächst eine frische
+CLI-Baseline statt des historischen Sammelwerts prüfen. Der erneuerte Review
+über 688 Einträge (684 renderbare Paare und vier bereits fehlende SVG-Paare)
+steht unter `artifacts/evaluation/gradient_arrow_recheck_v1/full_review/`.
+Alle zuvor separat belegten Gate-Passes und die 14 Pfeilvarianten sind von der
+Kandidatenauswahl ausgeschlossen; der genaue Aufruf mit sämtlichen Ausschlüssen
+steht in `review_reproduction_2026-10-06.json`.
 
 Abschluss des Runtime-Registrierungspakets `AC0713_1_S` (2026-10-04):
 `Rotated180SquareKelleGlyph` gehört nun auch zu den beiden Runtime-Kind-Sets.
