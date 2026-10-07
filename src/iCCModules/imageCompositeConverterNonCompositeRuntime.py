@@ -19,6 +19,7 @@ from src.iCCModules.imageCompositeConverterLabeledSquare import fit_labeled_squa
 from src.iCCModules.imageCompositeConverterCheckmark import fit_checkmark_disk
 from src.iCCModules.imageCompositeConverterGradientArrow import fit_gradient_arrow
 from src.iCCModules.imageCompositeConverterRadialDisk import fit_radial_disk
+from src.iCCModules.imageCompositeConverterStepDiagram import fit_step_diagram
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1386,6 +1387,18 @@ def runNonCompositeIterationImpl(
     calculate_error_fn,
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
+    diagram = fit_step_diagram(
+        width, height, description=description, image=perc_img,
+        render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
+    )
+    if diagram is not None:
+        params['step_diagram_registration'] = {
+            key: value for key, value in diagram.items() if key not in {'svg', 'rendered'}
+        }
+        print_fn('  -> Kreis, Verbindungen und Stufendiagramm aus Rasterbefund registriert.')
+        write_validation_log_fn(['status=non_composite_raster_step_diagram'])
+        write_attempt_artifacts_fn(diagram['svg'], diagram['rendered'])
+        return base_name, description, params, 1, diagram['error']
     disk = fit_radial_disk(
         width, height, description=description, image=perc_img,
         render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
