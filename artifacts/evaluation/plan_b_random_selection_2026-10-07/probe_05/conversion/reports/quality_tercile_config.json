@@ -1,0 +1,16 @@
+{
+  "allowed_error_per_pixel": 1.0,
+  "skip_variants": [],
+  "early_abort": {
+    "enabled": true,
+    "probe_iterations": 3,
+    "threshold_multiplier": 8.0
+  },
+  "pixel_error_acceptance": {
+    "max_mean_delta2": 300.0,
+    "max_std_delta2": 3000.0,
+    "basis": "strict-rgb-rmse-10"
+  },
+  "notes": "Varianten in skip_variants werden in Folge-Pässen nicht erneut konvertiert. early_abort prueft einen kurzen Probelauf gegen die gespeicherte Erfolgsgrenze; threshold_multiplier ist bewusst konservativ, um aufholbare Starts nicht abzubrechen. max_mean_delta2 und max_std_delta2 definieren optional die maximal erlaubte mittlere quadratische Pixelabweichung und deren Standardabweichung; null deaktiviert das Kriterium. Die konservativen Vorgaben 300/3000 bedeuten beim Mittelwert hoechstens RMSE 10 je Farbkanal (Skala 0..255); die Std-Grenze verhindert stark konzentrierte Restfehler. Loeschen der Datei setzt den Ablauf zurueck, dann werden wieder alle Bitmaps bearbeitet.",
+  "source": "successful-conversions-mean-plus-2std"
+}

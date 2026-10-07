@@ -1,0 +1,117 @@
+{
+  "probe_11.png": {
+    "actual_iterations": 64,
+    "base": "PROBE_11",
+    "best_error": 15.520833333333334,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+    "diff_error_distribution_status": "structured",
+    "elapsed_seconds": 0.125,
+    "error_per_pixel": 0.016167534722222224,
+    "error_pixel_cluster_count": 9.0,
+    "error_pixel_cluster_excess": 0.40737179487179487,
+    "error_pixel_count": 52.0,
+    "filename": "probe_11.png",
+    "h": 15,
+    "largest_error_pixel_cluster_fraction": 0.46153846153846156,
+    "localized_error_fraction": 0.9492243291767261,
+    "mean_delta2": 7150.2626953125,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "fill": "#d8d8d8",
+            "id": "description_element_1",
+            "kind": "RectBorder",
+            "source": "description",
+            "stroke": "#666666",
+            "stroke_width": 0.035
+          }
+        ],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.75,
+          "reasons": [],
+          "status": "ok"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": false,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "probe_11",
+          "source": "base_name",
+          "text": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Das gesamte Motiv ist geringfügig kleiner dargestellt und geringfügig nach rechts und oben verschoben."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [],
+      "geometry_ir": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "fill": "#d8d8d8",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "label": "M",
+      "mode": "auto",
+      "nested_panel_registration": {
+        "final_error": 15.520833333333334,
+        "initial_error": 24.127083333333335,
+        "parameters": [
+          3.0,
+          1.0,
+          38.0,
+          13.5,
+          1.0,
+          3.5
+        ]
+      },
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "PROBE_11"
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 48.82029187169511,
+    "spatial_quality_score": 26449.136510524742,
+    "std_delta2": 29589.27734375,
+    "tile_std_delta2": 13955.037524873114,
+    "variant": "PROBE_11",
+    "w": 64
+  }
+}

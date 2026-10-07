@@ -1,0 +1,29 @@
+name: Plan B random task acceptance
+
+on:
+  pull_request:
+  push:
+    branches: [main, master, work]
+  workflow_dispatch:
+
+jobs:
+  sixteen-variations:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Install test dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Select a new SVG and description and require 16 of 16 satisfactory conversions
+        run: python -m tools.run_plan_b_variations --output-dir artifacts/plan-b-acceptance
+      - name: Save selection, inputs, outputs, diffs and per-case failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: plan-b-acceptance
+          path: artifacts/plan-b-acceptance
+          if-no-files-found: error
+          retention-days: 14

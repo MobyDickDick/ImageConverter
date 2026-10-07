@@ -1,0 +1,105 @@
+{
+  "probe_07.png": {
+    "actual_iterations": 64,
+    "base": "PROBE_07",
+    "best_error": 92.91666666666667,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+    "diff_error_distribution_status": "structured",
+    "elapsed_seconds": 0.09399999992456287,
+    "error_per_pixel": 0.09678819444444445,
+    "error_pixel_cluster_count": 1.0,
+    "error_pixel_cluster_excess": 0.7364583333333333,
+    "error_pixel_count": 253.0,
+    "filename": "probe_07.png",
+    "h": 15,
+    "largest_error_pixel_cluster_fraction": 1.0,
+    "localized_error_fraction": 0.7412505065433482,
+    "mean_delta2": 68170.375,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "fill": "#d8d8d8",
+            "id": "description_element_1",
+            "kind": "RectBorder",
+            "source": "description",
+            "stroke": "#666666",
+            "stroke_width": 0.035
+          }
+        ],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.75,
+          "reasons": [],
+          "status": "ok"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": false,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "probe_07",
+          "source": "base_name",
+          "text": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Die gesamte Darstellung ist ein wenig kleiner dargestellt und etwas nach links und unten versetzt."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [],
+      "geometry_ir": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "fill": "#d8d8d8",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "label": "M",
+      "mode": "auto",
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "PROBE_07"
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 150.74302084452643,
+    "spatial_quality_score": 197524.73157764506,
+    "std_delta2": 90892.109375,
+    "tile_std_delta2": 80529.60789297402,
+    "variant": "PROBE_07",
+    "w": 64
+  }
+}

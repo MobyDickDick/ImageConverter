@@ -1,0 +1,79 @@
+{
+  "probe_11.png": {
+    "actual_iterations": 64,
+    "base": "PROBE_11",
+    "best_error": 3.352435769102436,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+    "diff_error_distribution_status": "structured",
+    "elapsed_seconds": 0.03200000000651926,
+    "error_per_pixel": 0.0008389478901657747,
+    "error_pixel_cluster_count": 5.0,
+    "error_pixel_cluster_excess": 0.34663234663234666,
+    "error_pixel_count": 42.0,
+    "filename": "probe_11.png",
+    "h": 111,
+    "largest_error_pixel_cluster_fraction": 0.35714285714285715,
+    "localized_error_fraction": 1.0,
+    "mean_delta2": 1560.1038818359375,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.0,
+          "reasons": [
+            "no_supported_geometry_constraint"
+          ],
+          "status": "needs_review"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": false,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "probe_11",
+          "source": "base_name",
+          "text": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Das gesamte Motiv ist leicht größer dargestellt und geringfügig nach rechts und oben versetzt."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [
+        "SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)"
+      ],
+      "geometry_ir": [],
+      "label": "",
+      "mode": "dual_arrow_badge",
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "PROBE_11"
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 22.804267742653916,
+    "spatial_quality_score": 7506.052054841586,
+    "std_delta2": 11397.7451171875,
+    "tile_std_delta2": 6273.218867878516,
+    "variant": "PROBE_11",
+    "w": 36
+  }
+}

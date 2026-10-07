@@ -1,0 +1,1203 @@
+{
+  "schema_version": "plan_b_variations_v1",
+  "seed": 4721212901798197132,
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "iterations": 64,
+  "timeout_seconds": 60,
+  "source_svg_sha256": "43bd897bafe39a183d9cd6f65eb73687fae4ff53658ca25dbde3a1e149932f96",
+  "source_description_sha256": "5225d376783b0cdc75804c251c3cdc0eae5bf725a2bc58517dbd7c340432cbad",
+  "selection": {
+    "mode": "random_pool",
+    "selected_index": 4,
+    "pool_size": 61,
+    "source_svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0021.svg",
+    "descriptions_path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\Finale_Wurzelformen_V3.xml",
+    "pool": [
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0010.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0011.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0020_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0020_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0021.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0025.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0030.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0040_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0040_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0060_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0080_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0100_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0110_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0120_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0130_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0151_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0153_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0202_2.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0212_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0213_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0223_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0223_L_sia.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0234_S.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0302_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0402_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0502_1L_sia.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0502_1M_sia.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0511_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0511_zu.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0512_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0538_1L_sia.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0552_2_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0554_1_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0554_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0554_L_PlanB.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0800.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0814_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0814_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0831_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0837_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0838_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0882_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_AB_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_M4.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_ZL_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0030.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0030_1.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0030_zu.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0140.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0140_zu.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DLG0010.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DLG0011.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DLG0014.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DLG0016.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DLG0071.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\GE9034_2M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\GE9041_6M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\z_111.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\z_201.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\z_207.svg"
+    ],
+    "excluded": [
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0511_laeuft.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0511_offen.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_M2.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_M3.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0030_offen.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0140_laeuft.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0140_offen.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcAnGener22_S1.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_Cooler.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_FlapH.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_FlapV.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_Heat_Recovery.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_Heater.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_HeatRecover_air.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_HeatRecover_rotation.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_Humidfyer.svg",
+        "reason": "missing_description"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "probe_01",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 0.94805999,
+        "relative_x": 0.01630416,
+        "relative_y": -0.00364576
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Die gesamte Darstellung ist geringfügig kleiner dargestellt und leicht nach rechts und oben verschoben.",
+      "reference_svg": "references\\probe_01.svg",
+      "input_sha256": "c7adb4209ea850174b09dfeb8c7af917caa8ac77fe00f1c1306c2dc79e48d0fd",
+      "reference_svg_sha256": "05af87791eaf4c18842b3b69ae0bb689db3f64f265a4fc31f4fe76d960552b1c",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_01\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_01\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_01\\conversion",
+        "--start",
+        "probe_01",
+        "--end",
+        "probe_01",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.010709354653954506,
+        "foreground_mse": 0.2950010597705841,
+        "edge_alignment": 0.430297315120697,
+        "foreground_iou": 0.2482758620689655
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_01\\conversion\\converted_svgs\\probe_01.svg",
+      "output_sha256": "97a52f362e396cc933e98e70c89388a3349d6ac34ffe770ff40acc7c59225ccf",
+      "elapsed_seconds": 1.078
+    },
+    {
+      "case_id": "probe_02",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 1.01988108,
+        "relative_x": 0.00041561,
+        "relative_y": -0.00837501
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Die gesamte Darstellung ist ein wenig größer dargestellt und leicht nach rechts und oben verschoben.",
+      "reference_svg": "references\\probe_02.svg",
+      "input_sha256": "d5e6751e6e14b4b8010f7936803064525a9ccb862d0d9923ae33f1cd49ee7397",
+      "reference_svg_sha256": "16c3d60f68d7d0717c8fd1aa6954a3f84f376ed531b16bd497df2b7f1e5aec7b",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_02\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_02\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_02\\conversion",
+        "--start",
+        "probe_02",
+        "--end",
+        "probe_02",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.008751966990530491,
+        "foreground_mse": 0.2270153909921646,
+        "edge_alignment": 0.42466676235198975,
+        "foreground_iou": 0.44155844155844154
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_02\\conversion\\converted_svgs\\probe_02.svg",
+      "output_sha256": "1cf2fd0e5f5c8dd7dd1e6a3f16b5ac7339f44f4ce94710b8bf1e947a08aa977e",
+      "elapsed_seconds": 1.016
+    },
+    {
+      "case_id": "probe_03",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 0.96624719,
+        "relative_x": -0.00552279,
+        "relative_y": -0.02036551
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Das gesamte Motiv ist ein wenig kleiner dargestellt und leicht nach links und oben versetzt.",
+      "reference_svg": "references\\probe_03.svg",
+      "input_sha256": "7d94eab90b647543f6a0b5f6756025ab6f1b4f6339f445713c57726796414d47",
+      "reference_svg_sha256": "ded9180d02b48055efbb49de0f67d0c70da78ad6e1dd64dad46c354d86cae80e",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_03\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_03\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_03\\conversion",
+        "--start",
+        "probe_03",
+        "--end",
+        "probe_03",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.009621051140129566,
+        "foreground_mse": 0.26324304938316345,
+        "edge_alignment": 0.45544612407684326,
+        "foreground_iou": 0.363013698630137
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_03\\conversion\\converted_svgs\\probe_03.svg",
+      "output_sha256": "515b50ac925cd8f1a566bd7146d48cc90fde133c9a217119ca7e96445575318f",
+      "elapsed_seconds": 0.953
+    },
+    {
+      "case_id": "probe_04",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 1.0225237,
+        "relative_x": 0.00853423,
+        "relative_y": -0.01787851
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Die gesamte Darstellung ist geringfügig größer dargestellt und etwas nach rechts und oben verschoben.",
+      "reference_svg": "references\\probe_04.svg",
+      "input_sha256": "5fe0cf44ff14ba043e3acee3b96a1a844b847e2675ffd82a59088b8eca7715d9",
+      "reference_svg_sha256": "bd2f878db177edf14e3999c6d6f3d20104db3d4c269a0097565f54168cf8af7b",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_04\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_04\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_04\\conversion",
+        "--start",
+        "probe_04",
+        "--end",
+        "probe_04",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.007790580857545137,
+        "foreground_mse": 0.17988762259483337,
+        "edge_alignment": 0.48514029383659363,
+        "foreground_iou": 0.4624277456647399
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_04\\conversion\\converted_svgs\\probe_04.svg",
+      "output_sha256": "7709900fe4c3891320a91f2bb427fa68518ef465fa82dfd701e0b08fb1ebc4a0",
+      "elapsed_seconds": 1.031
+    },
+    {
+      "case_id": "probe_05",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 1.0373434,
+        "relative_x": 0.0097489,
+        "relative_y": 0.0032452
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Das Motiv ist ein wenig größer dargestellt und ein wenig nach rechts und unten verschoben.",
+      "reference_svg": "references\\probe_05.svg",
+      "input_sha256": "9bfee91a8a29c2515be47b49f5631438e9cb9a5d3508ac8be1acb77a35f130c8",
+      "reference_svg_sha256": "e3ba37b4319c2eff03b656d21af842b8803718dc495dee0c669332fcb21347a3",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_05\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_05\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_05\\conversion",
+        "--start",
+        "probe_05",
+        "--end",
+        "probe_05",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.009451974183321,
+        "foreground_mse": 0.299612820148468,
+        "edge_alignment": 0.47018367052078247,
+        "foreground_iou": 0.2857142857142857
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_05\\conversion\\converted_svgs\\probe_05.svg",
+      "output_sha256": "fcd6924ffadffafaa0b2ccbdc4d394176641db6c9153990e482da911a9ec7dfa",
+      "elapsed_seconds": 1.109
+    },
+    {
+      "case_id": "probe_06",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 0.96061707,
+        "relative_x": 0.01403318,
+        "relative_y": 0.02379919
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Das gesamte Motiv ist geringfügig kleiner dargestellt und etwas nach rechts und unten versetzt.",
+      "reference_svg": "references\\probe_06.svg",
+      "input_sha256": "e46cba089ba679bd33507cc15c43f1d2a92fc7334f2106ecccd5ae4f77f0823a",
+      "reference_svg_sha256": "1ac4182eda65e00e4e29275eca4091b9d1ee49272d13666f983aafbf0ae882e7",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_06\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_06\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_06\\conversion",
+        "--start",
+        "probe_06",
+        "--end",
+        "probe_06",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.008032859303057194,
+        "foreground_mse": 0.23425966501235962,
+        "edge_alignment": 0.5202873945236206,
+        "foreground_iou": 0.4233576642335766
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_06\\conversion\\converted_svgs\\probe_06.svg",
+      "output_sha256": "beb57a3f368d163a3310df42ebb0629f2af3bab0508ab1f68f03063744033736",
+      "elapsed_seconds": 0.969
+    },
+    {
+      "case_id": "probe_07",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 1.03374001,
+        "relative_x": -0.00137532,
+        "relative_y": -4.25e-05
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Das Motiv ist etwas größer dargestellt und ein wenig nach links und oben verschoben.",
+      "reference_svg": "references\\probe_07.svg",
+      "input_sha256": "5f29ac09d56001ada1c508da4a7cc35c833f2cd44bf6f1dfa9dd0f6eab3cba98",
+      "reference_svg_sha256": "d196dae693a8543719d0bf841e188d979f1d1bdbf3234ab975999a37e9170a00",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_07\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_07\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_07\\conversion",
+        "--start",
+        "probe_07",
+        "--end",
+        "probe_07",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.010023851878941059,
+        "foreground_mse": 0.2922382354736328,
+        "edge_alignment": 0.408719003200531,
+        "foreground_iou": 0.2846715328467153
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_07\\conversion\\converted_svgs\\probe_07.svg",
+      "output_sha256": "2ba0d01890c12e57bb72f016e2d5013aa1be15c109288f2de951e9af96201ad0",
+      "elapsed_seconds": 0.969
+    },
+    {
+      "case_id": "probe_08",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 0.96662626,
+        "relative_x": 0.01678553,
+        "relative_y": 0.0009133
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Das Motiv ist leicht kleiner dargestellt und ein wenig nach rechts und unten verschoben.",
+      "reference_svg": "references\\probe_08.svg",
+      "input_sha256": "5b7f777d17a09866b838259803108521a6dda0fe9823303ece6232d4ab33de94",
+      "reference_svg_sha256": "5c62aa5d21ce68220ff9743b1778dd5ea3e098875a2ab44bc4481caa63087817",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_08\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_08\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_08\\conversion",
+        "--start",
+        "probe_08",
+        "--end",
+        "probe_08",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.00765209412202239,
+        "foreground_mse": 0.20230117440223694,
+        "edge_alignment": 0.5190156698226929,
+        "foreground_iou": 0.44370860927152317
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_08\\conversion\\converted_svgs\\probe_08.svg",
+      "output_sha256": "aa111ee007896d33dcc5a21919628bdc151abf77a9aafc6fb567af8fdd2674f9",
+      "elapsed_seconds": 0.953
+    },
+    {
+      "case_id": "probe_09",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 0.99929798,
+        "relative_x": 0.01519226,
+        "relative_y": -0.02218239
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Die Darstellung ist ein wenig kleiner dargestellt und etwas nach rechts und oben versetzt.",
+      "reference_svg": "references\\probe_09.svg",
+      "input_sha256": "68bde10513d7e7fb96ac1a9b84f6da63bf417f629a1925dd387ae5a5397e0803",
+      "reference_svg_sha256": "b331db3745d3d7fcc3eb39ef8e7e1fba49c4038c4d1436f61e66d9c5bade8168",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_09\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_09\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_09\\conversion",
+        "--start",
+        "probe_09",
+        "--end",
+        "probe_09",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.008241320960223675,
+        "foreground_mse": 0.1994010955095291,
+        "edge_alignment": 0.43246686458587646,
+        "foreground_iou": 0.44242424242424244
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_09\\conversion\\converted_svgs\\probe_09.svg",
+      "output_sha256": "8101bccc6ca254c5fd5557707e0bf141287ac1ab365afcb11c3ef5342d7c8d57",
+      "elapsed_seconds": 0.984
+    },
+    {
+      "case_id": "probe_10",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 1.03560295,
+        "relative_x": -0.0199352,
+        "relative_y": 0.01372832
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Das gesamte Motiv ist geringfügig größer dargestellt und leicht nach links und unten versetzt.",
+      "reference_svg": "references\\probe_10.svg",
+      "input_sha256": "649b750aea1fee12153f290b3f67e3339d8b019cfec732587300966dcbefb92c",
+      "reference_svg_sha256": "cc1a1d7c2a9a449bf3fe7c6f729d3c08bf7371f8e07ac827fbeb60cb17d2053d",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_10\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_10\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_10\\conversion",
+        "--start",
+        "probe_10",
+        "--end",
+        "probe_10",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.009696737863123417,
+        "foreground_mse": 0.352107971906662,
+        "edge_alignment": 0.43453219532966614,
+        "foreground_iou": 0.13636363636363635
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_10\\conversion\\converted_svgs\\probe_10.svg",
+      "output_sha256": "a1a80043d50732618f78215573e2c9990bdbc34b5a9318b3bbbebc813cd86d58",
+      "elapsed_seconds": 1.046
+    },
+    {
+      "case_id": "probe_11",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 1.0104941,
+        "relative_x": 0.01287163,
+        "relative_y": -0.00115852
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Das gesamte Motiv ist leicht größer dargestellt und geringfügig nach rechts und oben versetzt.",
+      "reference_svg": "references\\probe_11.svg",
+      "input_sha256": "7240fcfa93b029855b3dd1d11465138b0ee01ae14eb3a04f9277f81d30fe4cc7",
+      "reference_svg_sha256": "f7e998d6bdb7553c2657e1a580f9e954a4b1cd77dd3fe4162350c07c631d33f5",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_11\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_11\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_11\\conversion",
+        "--start",
+        "probe_11",
+        "--end",
+        "probe_11",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.007997456938028336,
+        "foreground_mse": 0.1984070986509323,
+        "edge_alignment": 0.45231959223747253,
+        "foreground_iou": 0.42857142857142855
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_11\\conversion\\converted_svgs\\probe_11.svg",
+      "output_sha256": "561ac7181af8115ee0d87a10ae621db530586dc8d7c69a455323daa69c9f2fa4",
+      "elapsed_seconds": 0.968
+    },
+    {
+      "case_id": "probe_12",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 1.05643098,
+        "relative_x": -0.02232728,
+        "relative_y": -0.02011784
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Die gesamte Darstellung ist geringfügig größer dargestellt und etwas nach links und oben versetzt.",
+      "reference_svg": "references\\probe_12.svg",
+      "input_sha256": "6dd3c7cc01c55dcf30e667207ceb62f76a9aa6bb37ba04527555cf464bf9235b",
+      "reference_svg_sha256": "12248e8c9a573cd3bf22356f240b5894c8ed7e6f09e62a5c94ec42e724c18bbe",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_12\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_12\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_12\\conversion",
+        "--start",
+        "probe_12",
+        "--end",
+        "probe_12",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.008664029650390148,
+        "foreground_mse": 0.2370641827583313,
+        "edge_alignment": 0.3806859850883484,
+        "foreground_iou": 0.4520547945205479
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_12\\conversion\\converted_svgs\\probe_12.svg",
+      "output_sha256": "2c665f23e6d1c8900ddf971f9a08db3b7caef928cbd5cc2e4fb2561f01726f33",
+      "elapsed_seconds": 0.906
+    },
+    {
+      "case_id": "probe_13",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 1.02847874,
+        "relative_x": 0.02358746,
+        "relative_y": 0.01746851
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Das gesamte Motiv ist ein wenig größer dargestellt und ein wenig nach rechts und unten versetzt.",
+      "reference_svg": "references\\probe_13.svg",
+      "input_sha256": "7990dc548416cbbbb6fe89a17937f85d46281380e434c10ce4b9c54f819db43e",
+      "reference_svg_sha256": "1d1e520f4236c8f7ac753c06813c35e52fd04f60a2ef347d58e0aa7000262dd6",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_13\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_13\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_13\\conversion",
+        "--start",
+        "probe_13",
+        "--end",
+        "probe_13",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.009493879973888397,
+        "foreground_mse": 0.33273977041244507,
+        "edge_alignment": 0.46569618582725525,
+        "foreground_iou": 0.14035087719298245
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_13\\conversion\\converted_svgs\\probe_13.svg",
+      "output_sha256": "841d7fa18f8969dd006983d0380c3c10289f89495352f00a6aba60df475ffb25",
+      "elapsed_seconds": 0.922
+    },
+    {
+      "case_id": "probe_14",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 1.0182151,
+        "relative_x": -0.01091352,
+        "relative_y": 0.00436422
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Die gesamte Darstellung ist leicht größer dargestellt und leicht nach links und unten versetzt.",
+      "reference_svg": "references\\probe_14.svg",
+      "input_sha256": "5908a65eb1b315a8ceaa88426304737da0fa1448d91f41835cf8e2f53dfefad8",
+      "reference_svg_sha256": "952d637f8ee0e1ec154612d005b8f262b4002da4f4ac205cebd4dd35a89fa4a1",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_14\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_14\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_14\\conversion",
+        "--start",
+        "probe_14",
+        "--end",
+        "probe_14",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.007967094890773296,
+        "foreground_mse": 0.22730861604213715,
+        "edge_alignment": 0.4773675799369812,
+        "foreground_iou": 0.40714285714285714
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_14\\conversion\\converted_svgs\\probe_14.svg",
+      "output_sha256": "ee94fe0dc664714ea7043c90a6c730783e85accb35f1a4bf499f3e4f8641004f",
+      "elapsed_seconds": 0.938
+    },
+    {
+      "case_id": "probe_15",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 1.00345979,
+        "relative_x": 0.00036039,
+        "relative_y": 0.00473105
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Das Motiv ist etwas größer dargestellt und leicht nach rechts und unten verschoben.",
+      "reference_svg": "references\\probe_15.svg",
+      "input_sha256": "a5580502858dfa017ff2528f7f4782107648f1d00020519ed456cc6fe3566a4f",
+      "reference_svg_sha256": "c74d08306d69323bba5f204fe727345e0e666b3e7303bbd07f8e299989ab1ef6",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_15\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_15\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_15\\conversion",
+        "--start",
+        "probe_15",
+        "--end",
+        "probe_15",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.009726538322865963,
+        "foreground_mse": 0.2877733111381531,
+        "edge_alignment": 0.4868365526199341,
+        "foreground_iou": 0.37037037037037035
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_15\\conversion\\converted_svgs\\probe_15.svg",
+      "output_sha256": "d9145e035c33419830282383e936c27748ee5f36f0696309210034fed5d8b347",
+      "elapsed_seconds": 1.031
+    },
+    {
+      "case_id": "probe_16",
+      "width": 36,
+      "height": 111,
+      "variation": {
+        "scale": 0.97396066,
+        "relative_x": 0.0050189,
+        "relative_y": -0.00313164
+      },
+      "description": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Das Motiv ist leicht kleiner dargestellt und geringfügig nach rechts und oben versetzt.",
+      "reference_svg": "references\\probe_16.svg",
+      "input_sha256": "b092b5f12493d0144f9d03c8766d8f991c3f7bbbe4966008c85117e870a205ce",
+      "reference_svg_sha256": "09221eb8c485d51af1095b8308cfe0d6fd44c547136d52c3ae0c22e83da37a76",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_16\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_16\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_selection_2026-10-07\\probe_16\\conversion",
+        "--start",
+        "probe_16",
+        "--end",
+        "probe_16",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "metrics": {
+        "normalized_mse": 0.007675592787563801,
+        "foreground_mse": 0.19513081014156342,
+        "edge_alignment": 0.4044654369354248,
+        "foreground_iou": 0.43312101910828027
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_16\\conversion\\converted_svgs\\probe_16.svg",
+      "output_sha256": "956c7ad7624c4956917f5e2e810927f1e6c59998ec0b81826f231f8372cf339b",
+      "elapsed_seconds": 1.016
+    }
+  ],
+  "summary": {
+    "required": 16,
+    "completed": 16,
+    "passed": 0,
+    "failed": 16,
+    "satisfactory": false
+  }
+}

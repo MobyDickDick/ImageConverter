@@ -1,0 +1,79 @@
+{
+  "probe_01.png": {
+    "actual_iterations": 64,
+    "base": "PROBE_01",
+    "best_error": 3.8254087420754086,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+    "diff_error_distribution_status": "structured",
+    "elapsed_seconds": 0.0470000000204891,
+    "error_per_pixel": 0.000957309495013866,
+    "error_pixel_cluster_count": 3.0,
+    "error_pixel_cluster_excess": 0.7037752037752038,
+    "error_pixel_count": 42.0,
+    "filename": "probe_01.png",
+    "h": 111,
+    "largest_error_pixel_cluster_fraction": 0.7142857142857143,
+    "localized_error_fraction": 1.0,
+    "mean_delta2": 2089.12744140625,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.0,
+          "reasons": [
+            "no_supported_geometry_constraint"
+          ],
+          "status": "needs_review"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": false,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "probe_01",
+          "source": "base_name",
+          "text": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie Die gesamte Darstellung ist geringfügig kleiner dargestellt und leicht nach rechts und oben verschoben."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [
+        "SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)"
+      ],
+      "geometry_ir": [],
+      "label": "",
+      "mode": "dual_arrow_badge",
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "PROBE_01"
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 26.388933548025076,
+    "spatial_quality_score": 10512.33113819351,
+    "std_delta2": 14032.1005859375,
+    "tile_std_delta2": 9003.326944828876,
+    "variant": "PROBE_01",
+    "w": 36
+  }
+}

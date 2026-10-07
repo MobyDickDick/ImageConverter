@@ -1,0 +1,1227 @@
+{
+  "schema_version": "plan_b_variations_v1",
+  "seed": 1974780455089146483,
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "iterations": 64,
+  "timeout_seconds": 60,
+  "source_svg_sha256": "0a5d8a65a5d153a78ff08ee337db15e9725e7d7e4aa0e7e0e074c6b64931a868",
+  "source_description_sha256": "9836087c0b020611cd23a51661e3621a57c1563048cca8abe88fceff3bba1978",
+  "selection": {
+    "mode": "random_pool",
+    "selected_index": 52,
+    "pool_size": 61,
+    "source_svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DLG0011.svg",
+    "descriptions_path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\Finale_Wurzelformen_V3.xml",
+    "pool": [
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0010.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0011.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0020_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0020_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0021.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0025.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0030.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0040_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0040_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0060_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0080_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0100_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0110_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0120_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0130_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0151_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0153_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0202_2.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0212_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0213_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0223_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0223_L_sia.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0234_S.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0302_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0402_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0502_1L_sia.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0502_1M_sia.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0511_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0511_zu.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0512_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0538_1L_sia.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0552_2_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0554_1_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0554_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0554_L_PlanB.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0800.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0814_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0814_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0831_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0837_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0838_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0882_L.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_AB_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_M4.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_ZL_M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0030.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0030_1.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0030_zu.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0140.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0140_zu.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DLG0010.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DLG0011.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DLG0014.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DLG0016.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DLG0071.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\GE9034_2M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\GE9041_6M.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\z_111.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\z_201.svg",
+      "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\z_207.svg"
+    ],
+    "excluded": [
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0511_laeuft.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0511_offen.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_M2.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_M3.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0030_offen.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0140_laeuft.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0140_offen.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcAnGener22_S1.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_Cooler.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_FlapH.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_FlapV.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_Heat_Recovery.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_Heater.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_HeatRecover_air.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_HeatRecover_rotation.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_Humidfyer.svg",
+        "reason": "missing_description"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "probe_01",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 1.03893868,
+        "relative_x": 0.01724824,
+        "relative_y": 0.00989034
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Die gesamte Darstellung ist leicht größer dargestellt und etwas nach rechts und unten verschoben.",
+      "reference_svg": "references\\probe_01.svg",
+      "input_sha256": "2854373c7f65fe5558e9e31ba1b3b3632de797890fcb2998ae8f02e798e6abd4",
+      "reference_svg_sha256": "034384e36c7a5c25f92c775cb4c1da3620d1686210829180f3e0e1b87fba8a38",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_01\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_01\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_01\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_01\\conversion",
+        "--start",
+        "probe_01",
+        "--end",
+        "probe_01",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0023610468488186598,
+        "foreground_mse": 0.004007214680314064,
+        "edge_alignment": 0.7503280639648438,
+        "foreground_iou": 0.9946808510638298
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_01\\conversion\\converted_svgs\\probe_01.svg",
+      "output_sha256": "067af4de80a569a18bb263c6d0bc56cd31d43e7f56344d4baecb06bbdf34c879",
+      "elapsed_seconds": 2.14
+    },
+    {
+      "case_id": "probe_02",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 1.02932365,
+        "relative_x": -0.0012882,
+        "relative_y": 0.01628553
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Die Darstellung ist leicht größer dargestellt und ein wenig nach links und unten verschoben.",
+      "reference_svg": "references\\probe_02.svg",
+      "input_sha256": "74a93577f798196bb9939d20be93a6ecd623343df35f23ea11360f54ceda2ddb",
+      "reference_svg_sha256": "e2e7a7e82fa47035d90720714945eaa381bab116796415a1c2fe6f4b3072361d",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_02\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_02\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_02\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_02\\conversion",
+        "--start",
+        "probe_02",
+        "--end",
+        "probe_02",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.328424870967865,
+        "foreground_mse": 0.3666122555732727,
+        "edge_alignment": 0.6985307931900024,
+        "foreground_iou": 0.5895348837209302
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 1,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_02\\conversion\\converted_svgs\\probe_02.svg",
+      "output_sha256": "c792592ff99d52b49d1d75d940a556d866107d5501c3e50a5b83f3b25a1c6383",
+      "elapsed_seconds": 2.11
+    },
+    {
+      "case_id": "probe_03",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 0.98028049,
+        "relative_x": 0.01984357,
+        "relative_y": 0.00998726
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Die gesamte Darstellung ist leicht kleiner dargestellt und ein wenig nach rechts und unten verschoben.",
+      "reference_svg": "references\\probe_03.svg",
+      "input_sha256": "d7fbbd05cbf1a52f8d8b642b7e43d608f36ec05f5d23eb8e420a40fa1ac8c2f0",
+      "reference_svg_sha256": "0fb3c948cee59a480f2453736df29b517ad1877fdab3f09cbe897b736e9b64ef",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_03\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_03\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_03\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_03\\conversion",
+        "--start",
+        "probe_03",
+        "--end",
+        "probe_03",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.03316301479935646,
+        "foreground_mse": 0.03319701924920082,
+        "edge_alignment": 0.8169792890548706,
+        "foreground_iou": 0.9301355578727841
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_03\\conversion\\converted_svgs\\probe_03.svg",
+      "output_sha256": "578be514db1cc3a2cda4abdd46855dd89f39753eb4fbf4443809b3cf33ea2822",
+      "elapsed_seconds": 2.187
+    },
+    {
+      "case_id": "probe_04",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 1.05736493,
+        "relative_x": -0.02438493,
+        "relative_y": 0.01977015
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Die gesamte Darstellung ist ein wenig größer dargestellt und etwas nach links und unten verschoben.",
+      "reference_svg": "references\\probe_04.svg",
+      "input_sha256": "2c4707517131fd86bbccf0133b28f821f92e85506c83a80eb397bb4d6b0f7cec",
+      "reference_svg_sha256": "75df3de7404d167d107053099a9ae16781572c71b030f53d47923b78eb950847",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_04\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_04\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_04\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_04\\conversion",
+        "--start",
+        "probe_04",
+        "--end",
+        "probe_04",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.35603219270706177,
+        "foreground_mse": 0.39789384603500366,
+        "edge_alignment": 0.4918862581253052,
+        "foreground_iou": 0.5750873108265425
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 1,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_04\\conversion\\converted_svgs\\probe_04.svg",
+      "output_sha256": "da64aeabece14d30254e11fe4f2b41f969cba9945f90c71f7f01c0d306ad0efc",
+      "elapsed_seconds": 2.469
+    },
+    {
+      "case_id": "probe_05",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 0.95004586,
+        "relative_x": -0.00409635,
+        "relative_y": 0.02296255
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Das Motiv ist geringfügig kleiner dargestellt und etwas nach links und unten versetzt.",
+      "reference_svg": "references\\probe_05.svg",
+      "input_sha256": "398b0ceaaae7192299acc89a0501cd367441ea7ef06baf13f72367d71cb74cfa",
+      "reference_svg_sha256": "373e3f853292b65de6a357f06ff7692345aacc0831f38de761b720cf4b53a7dd",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_05\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_05\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_05\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_05\\conversion",
+        "--start",
+        "probe_05",
+        "--end",
+        "probe_05",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.07510260492563248,
+        "foreground_mse": 0.07510260492563248,
+        "edge_alignment": 0.6295828819274902,
+        "foreground_iou": 0.9395833333333333
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_05\\conversion\\converted_svgs\\probe_05.svg",
+      "output_sha256": "29b06ffa180c7d5bfd0ed3556a3216d3c08d7f669bbd7589136c1d74c01e6db7",
+      "elapsed_seconds": 2.11
+    },
+    {
+      "case_id": "probe_06",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 1.04335341,
+        "relative_x": 0.0144595,
+        "relative_y": -0.02465801
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Die Darstellung ist leicht größer dargestellt und etwas nach rechts und oben verschoben.",
+      "reference_svg": "references\\probe_06.svg",
+      "input_sha256": "fd05d7e4ccc5347292c3708889c8b55a9b737ff793ea3e1350a9b92b5decbcf5",
+      "reference_svg_sha256": "04437e25205deb79bf7e10da71ae7ca973f64dbb4300cb90c42edcd443b3997b",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_06\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_06\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_06\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_06\\conversion",
+        "--start",
+        "probe_06",
+        "--end",
+        "probe_06",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.004962946753948927,
+        "foreground_mse": 0.007862353697419167,
+        "edge_alignment": 0.9883368611335754,
+        "foreground_iou": 0.9773123909249564
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_06\\conversion\\converted_svgs\\probe_06.svg",
+      "output_sha256": "1dec9c5c0d6491eb99f2cc3f7f436894e45282e6231e544289a298aa5f51aa3f",
+      "elapsed_seconds": 2.032
+    },
+    {
+      "case_id": "probe_07",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 0.99874721,
+        "relative_x": -0.0227212,
+        "relative_y": 0.00563041
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Die gesamte Darstellung ist ein wenig kleiner dargestellt und etwas nach links und unten versetzt.",
+      "reference_svg": "references\\probe_07.svg",
+      "input_sha256": "87086a52255f912e0e13a882fccfc746ee62f1b5631e27f73ca1472c737d1ffa",
+      "reference_svg_sha256": "773d3932b53bfbc775fe7806d0160158eb9b6f944dee6789a6fc50a8fce88bad",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_07\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_07\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_07\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_07\\conversion",
+        "--start",
+        "probe_07",
+        "--end",
+        "probe_07",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.3494572341442108,
+        "foreground_mse": 0.39957064390182495,
+        "edge_alignment": 0.7431048154830933,
+        "foreground_iou": 0.6042908224076281
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 1,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_07\\conversion\\converted_svgs\\probe_07.svg",
+      "output_sha256": "07e19c1f84a95ee410efa50ab8ab94adc1552eda6b6d41230dad9cdcaeefe359",
+      "elapsed_seconds": 1.578
+    },
+    {
+      "case_id": "probe_08",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 1.00066344,
+        "relative_x": 0.00408812,
+        "relative_y": 0.0016269
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Das Motiv ist geringfügig größer dargestellt und etwas nach rechts und unten versetzt.",
+      "reference_svg": "references\\probe_08.svg",
+      "input_sha256": "4250e869fa356ede9b6af99fe5932599c23b4540113b9ece9302e9ba681f64ca",
+      "reference_svg_sha256": "b00b5262d64a373fcc85f1ffb840e6446f705de90d2b231c112affd8792edc3c",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_08\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_08\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_08\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_08\\conversion",
+        "--start",
+        "probe_08",
+        "--end",
+        "probe_08",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0029463665559887886,
+        "foreground_mse": 0.00537064578384161,
+        "edge_alignment": 0.7730741500854492,
+        "foreground_iou": 0.9714828897338403
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_08\\conversion\\converted_svgs\\probe_08.svg",
+      "output_sha256": "f357676c9812d91b99758c3fbca61d07e84a9434fdcf576cd8bf445fef0072f5",
+      "elapsed_seconds": 1.609
+    },
+    {
+      "case_id": "probe_09",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 0.94581448,
+        "relative_x": -0.00862554,
+        "relative_y": -0.01048968
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Das Motiv ist etwas kleiner dargestellt und etwas nach links und oben versetzt.",
+      "reference_svg": "references\\probe_09.svg",
+      "input_sha256": "827e3456f6cf63a4299e1cf0376199fd1ff502105afac20aeeffcbb20c7b2f82",
+      "reference_svg_sha256": "258cba0737d655858eebc6cf51218452f21e1fc22974373f26c2266de9789e7a",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_09\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_09\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_09\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_09\\conversion",
+        "--start",
+        "probe_09",
+        "--end",
+        "probe_09",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.33235862851142883,
+        "foreground_mse": 0.35410431027412415,
+        "edge_alignment": 0.6379721164703369,
+        "foreground_iou": 0.8912319644839067
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 1,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_09\\conversion\\converted_svgs\\probe_09.svg",
+      "output_sha256": "d8623f26005e760fa81a25211a7414c4cfa73f259e97d5efef3aa64f31db8c19",
+      "elapsed_seconds": 1.844
+    },
+    {
+      "case_id": "probe_10",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 0.96503524,
+        "relative_x": 0.01742285,
+        "relative_y": 0.0044679
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Das gesamte Motiv ist etwas kleiner dargestellt und etwas nach rechts und unten verschoben.",
+      "reference_svg": "references\\probe_10.svg",
+      "input_sha256": "ef1760493ad5e9c800bff7348e790dc3d2e89c365b79a3e36f0e582c7b648422",
+      "reference_svg_sha256": "4571a6e4526486beb8bebb4f49bcb93c974d709fe5f262aac562ba2703fe34c5",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_10\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_10\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_10\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_10\\conversion",
+        "--start",
+        "probe_10",
+        "--end",
+        "probe_10",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.32161474227905273,
+        "foreground_mse": 0.3663701117038727,
+        "edge_alignment": 0.7833017110824585,
+        "foreground_iou": 0.9418052256532067
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 1,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_10\\conversion\\converted_svgs\\probe_10.svg",
+      "output_sha256": "d296484361323199ddb8551f4a22459c03bd8ecd1790aeb7dfc683b4f4468a2b",
+      "elapsed_seconds": 1.672
+    },
+    {
+      "case_id": "probe_11",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 0.97390436,
+        "relative_x": 0.01747076,
+        "relative_y": -0.01284618
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Das gesamte Motiv ist geringfügig kleiner dargestellt und geringfügig nach rechts und oben verschoben.",
+      "reference_svg": "references\\probe_11.svg",
+      "input_sha256": "3fc3ac94173f6e03300d1f52d58369ebd08d7e630cce333b0ab758a78fb3b098",
+      "reference_svg_sha256": "c39ee3af4091ea395f0ead2e4687167c2776bf04f6ed3faa41a7a0415e4e7241",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "edge_alignment_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_11\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_11\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_11\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_11\\conversion",
+        "--start",
+        "probe_11",
+        "--end",
+        "probe_11",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.03665391355752945,
+        "foreground_mse": 0.037908829748630524,
+        "edge_alignment": 0.6260868906974792,
+        "foreground_iou": 0.9707792207792207
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_11\\conversion\\converted_svgs\\probe_11.svg",
+      "output_sha256": "9a64d4cb9ea56483a19a87522abcfb73d9d3b9d80cc02dd00c288eb30ad8d61a",
+      "elapsed_seconds": 2.109
+    },
+    {
+      "case_id": "probe_12",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 0.96280012,
+        "relative_x": 0.01707345,
+        "relative_y": 0.01842335
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Die Darstellung ist ein wenig kleiner dargestellt und leicht nach rechts und unten versetzt.",
+      "reference_svg": "references\\probe_12.svg",
+      "input_sha256": "8b1498c16668c4dba5f21affe10bdc6dc5507326724dd7d76ba1cda7d00a7a7a",
+      "reference_svg_sha256": "4179beae5e0ffde25cc8473ce819beb876cc526d274e7735c30a5b7ea5ef5a85",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_12\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_12\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_12\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_12\\conversion",
+        "--start",
+        "probe_12",
+        "--end",
+        "probe_12",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.048339009284973145,
+        "foreground_mse": 0.05020352080464363,
+        "edge_alignment": 0.8226838111877441,
+        "foreground_iou": 0.9112554112554112
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_12\\conversion\\converted_svgs\\probe_12.svg",
+      "output_sha256": "64dc3cb39b6f3ec0a1d73727f09b2d8fcaf9e36869f722f2689c59df4b295ec5",
+      "elapsed_seconds": 1442.157
+    },
+    {
+      "case_id": "probe_13",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 0.95062432,
+        "relative_x": 0.01161609,
+        "relative_y": -0.02194221
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Die gesamte Darstellung ist ein wenig kleiner dargestellt und geringfügig nach rechts und oben verschoben.",
+      "reference_svg": "references\\probe_13.svg",
+      "input_sha256": "66e4202f8b837996ccedfdd5c116a28fcdd515d8f747e06acfdc30890479b3c6",
+      "reference_svg_sha256": "1de33b7e8f80e87ee5e4f96a7c0318982f7a9bda332014f56594eb513c6caad6",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_13\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_13\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_13\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_13\\conversion",
+        "--start",
+        "probe_13",
+        "--end",
+        "probe_13",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.07842469215393066,
+        "foreground_mse": 0.07842469215393066,
+        "edge_alignment": 0.4913989305496216,
+        "foreground_iou": 0.9229166666666667
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_13\\conversion\\converted_svgs\\probe_13.svg",
+      "output_sha256": "ead690e248755a10e264a7bf7a181a9c4c0c6bff797c998fe7faa3dd77303201",
+      "elapsed_seconds": 7627.0
+    },
+    {
+      "case_id": "probe_14",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 0.99767097,
+        "relative_x": 0.02163378,
+        "relative_y": 0.01928422
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Das gesamte Motiv ist leicht kleiner dargestellt und leicht nach rechts und unten verschoben.",
+      "reference_svg": "references\\probe_14.svg",
+      "input_sha256": "49ddd065829b6ae4ac93845b5afb2ea3f87b6f14366903590acdfd121a07a17e",
+      "reference_svg_sha256": "643241cc882131c90419d75fab41af9be0b900020abf96acdbd3230e33987c6d",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_14\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_14\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_14\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_14\\conversion",
+        "--start",
+        "probe_14",
+        "--end",
+        "probe_14",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.05167478695511818,
+        "foreground_mse": 0.0517813116312027,
+        "edge_alignment": 0.8576191663742065,
+        "foreground_iou": 0.930062630480167
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_14\\conversion\\converted_svgs\\probe_14.svg",
+      "output_sha256": "a0c6da89c6a73654370e62c607f80c0f150e8b8019afb91719413ff9f2e07194",
+      "elapsed_seconds": 4.344
+    },
+    {
+      "case_id": "probe_15",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 0.98983769,
+        "relative_x": -0.00911333,
+        "relative_y": 0.01030283
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Die Darstellung ist etwas kleiner dargestellt und leicht nach links und unten versetzt.",
+      "reference_svg": "references\\probe_15.svg",
+      "input_sha256": "9c42d1b206900dd5746e255a38553a644f071feaf8003e03b842f23829bed692",
+      "reference_svg_sha256": "4af90fd7b0b3eb4f9286bd43688807b94af61805ef41c217a7563af3f17a025d",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_15\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_15\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_15\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_15\\conversion",
+        "--start",
+        "probe_15",
+        "--end",
+        "probe_15",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.01781327649950981,
+        "foreground_mse": 0.017857423052191734,
+        "edge_alignment": 0.856615424156189,
+        "foreground_iou": 0.9246861924686193
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_15\\conversion\\converted_svgs\\probe_15.svg",
+      "output_sha256": "761937f65982883024272e2b6344260d8e15d813087c2ee1bd9fa67d9b58929c",
+      "elapsed_seconds": 3.531
+    },
+    {
+      "case_id": "probe_16",
+      "width": 64,
+      "height": 15,
+      "variation": {
+        "scale": 1.02998139,
+        "relative_x": 0.01006966,
+        "relative_y": 0.00873998
+      },
+      "description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund Die gesamte Darstellung ist leicht größer dargestellt und leicht nach rechts und unten verschoben.",
+      "reference_svg": "references\\probe_16.svg",
+      "input_sha256": "1e8c376d3d2a7ed1f0b2029a5c31a5249cbc07459d5755778583d68eb39993bd",
+      "reference_svg_sha256": "ee95ee9e6066317b14a27c0c8c548e0c0c7c43657096d8499b850804b956bb83",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.run_plan_b_variations",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_16\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_16\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_16\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\plan_b_random_guarded_2026-10-07\\probe_16\\conversion",
+        "--start",
+        "probe_16",
+        "--end",
+        "probe_16",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0024497469421476126,
+        "foreground_mse": 0.004091995768249035,
+        "edge_alignment": 0.757427453994751,
+        "foreground_iou": 0.9109947643979057
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_16\\conversion\\converted_svgs\\probe_16.svg",
+      "output_sha256": "c1d67f59bec25b520fbb00f73cc87db95f9a8b9c105287097a0cff1d668bdbd5",
+      "elapsed_seconds": 3.172
+    }
+  ],
+  "summary": {
+    "required": 16,
+    "completed": 16,
+    "passed": 4,
+    "failed": 12,
+    "satisfactory": false
+  }
+}
