@@ -1,0 +1,28 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere AC0732_1_S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0732_1_S.jpg ---
+Bildbeschreibung: wie AC072, aber nach rechts gredreht, Text immer noch horizontal "P"
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Ann�herung aus Rasterbild.
+[WARN] AC0732_1_S.jpg: Differenzbild-Fehlerpixel sind nicht zuf�llig verteilt; Variante bleibt f�r einen Qualit�ts-Nachbesserungslauf ge�ffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.571429, localized_error_fraction=0.937929).
+[INFO] Konvertiert AC0732_1_S.jpg | Parameter: mode=auto, label=M, variant_name=AC0732_1_S | Qualit�t: Optimierungsfehler/Pixel=0.038345, Mean-Delta�=3584.535889, RGB-RMSE/Kanal=34.566534, Raumscore=13186.363828, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef�hrt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AC0732_1_S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0732_1_S.jpg ---
+Bildbeschreibung: wie AC072, aber nach rechts gredreht, Text immer noch horizontal "P"
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Ann�herung aus Rasterbild.
+[WARN] AC0732_1_S.jpg: Differenzbild-Fehlerpixel sind nicht zuf�llig verteilt; Variante bleibt f�r einen Qualit�ts-Nachbesserungslauf ge�ffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.571429, localized_error_fraction=0.937929).
+[INFO] Konvertiert AC0732_1_S.jpg | Parameter: mode=auto, label=M, variant_name=AC0732_1_S | Qualit�t: Optimierungsfehler/Pixel=0.038345, Mean-Delta�=3584.535889, RGB-RMSE/Kanal=34.566534, Raumscore=13186.363828, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef�hrt=65/65 | Dauer=0.1s
+[INFO] Konvertiere AC0732_1_S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0732_1_S.jpg ---
+Bildbeschreibung: wie AC072, aber nach rechts gredreht, Text immer noch horizontal "P"
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Ann�herung aus Rasterbild.
+[WARN] AC0732_1_S.jpg: Differenzbild-Fehlerpixel sind nicht zuf�llig verteilt; Variante bleibt f�r einen Qualit�ts-Nachbesserungslauf ge�ffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.571429, localized_error_fraction=0.937929).
+[INFO] Konvertiert AC0732_1_S.jpg | Parameter: mode=auto, label=M, variant_name=AC0732_1_S | Qualit�t: Optimierungsfehler/Pixel=0.038345, Mean-Delta�=3584.535889, RGB-RMSE/Kanal=34.566534, Raumscore=13186.363828, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef�hrt=92/92 | Dauer=0.1s
+[INFO] �bersichts-Kacheln erzeugt: diff=.tmp\ac0732-s-recheck\after\reports\overview_diff_tiles.png, svg=.tmp\ac0732-s-recheck\after\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: .tmp\ac0732-s-recheck\after

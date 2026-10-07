@@ -1,0 +1,27 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.14, pytest-8.4.2, pluggy-1.6.0
+rootdir: C:\Users\marku\myCloud\imageConverter
+configfile: pytest.ini
+testpaths: tests
+collected 1657 items
+
+tests\detailtests\test_ac0223_runtime_helpers.py ..                      [  0%]
+tests\detailtests\test_ac0223_semantic_helpers.py ....                   [  0%]
+tests\detailtests\test_ac08_segment_contract.py EE                       [  0%]
+tests\detailtests\test_automate_function_extraction_tool.py EEE          [  0%]
+tests\detailtests\test_batch_reporting_helpers.py EEEEEEEEEEEEEEEEEEEE.. [  1%]
+                                                                         [  1%]
+tests\detailtests\test_batch_run_state_helpers.py EE.                    [  2%]
+tests\detailtests\test_blocker_inventory_tool.py .E                      [  2%]
+tests\detailtests\test_chain_telemetry_helpers.py ..E                    [  2%]
+tests\detailtests\test_check_optimization_telemetry_alias_verification.py . [  2%]
+.........EEEE                                                            [  3%]
+tests\detailtests\test_circle_geometry_optimization_helpers.py ..        [  3%]
+tests\detailtests\test_circle_radius_optimization_helpers.py ..          [  3%]
+tests\detailtests\test_cli_helpers.py .......EE..E...........EEE....     [  5%]
+tests\detailtests\test_color_utils_helpers.py .....                      [  5%]
+tests\detailtests\test_compact_image_subset.py ....                      [  5%]
+tests\detailtests\test_composite_svg_helpers.py .E                       [  6%]
+tests\detailtests\test_constraint_fusion_beam.py .....                   [  6%]
+tests\detailtests\test_conversion_bestlist_helpers.py ........EEE.EE     [  7%]
+tests\detailtests\test_conversion_composite_helpers.py ..                [  7%]

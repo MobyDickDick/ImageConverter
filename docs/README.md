@@ -7,6 +7,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
   Altartefakt-/Klassifikationspfade.
 - [Forms Model (Circle + Handle)](Forms.md)
 - [GE0280: fälschlichen Buchstaben aus der regulären Katalogausgabe entfernt (2026-10-06)](ge0280_catalog_refresh_2026-10-06.md)
+- [AC0732_1_S: SVG-Snapshot und Qualitätsprüfung korrigiert (2026-10-07)](ac0732_snapshot_refresh_2026-10-07.md)
 - [Radiale Kugel: Rasterregistrierung, Farb-/Größen-Holdouts und Gate-Abnahme (2026-10-06)](next_arbeitspaket_2026-10-06_ge0281.md)
 - [Pfeil mit Verlaufsschaft: Rasterregistrierung, 14 Farb-/Größenvarianten und Gate-Abnahme (2026-10-06)](next_arbeitspaket_2026-10-06_ge9011_6m.md)
 - [Links-Dreieck: Kreissegment-Abgrenzung, 18 Farb-/Größenvarianten und Gate-Abnahme (2026-10-05)](next_arbeitspaket_2026-10-05_ac0404_1_l.md)

@@ -1,0 +1,26 @@
+{
+  "variant": "AC0732_1_S",
+  "seed": 0,
+  "execution_mode": "semantic-only",
+  "output_variation": 0,
+  "before_mean_delta2": 11705.263671875,
+  "after_mean_delta2": 3584.535888671875,
+  "original_quality_bound": 3659.34130859375,
+  "remaining_diff_distribution_status": "structured",
+  "snapshot_svg_sha256": "2c3f108a0e667d506cd23eb85662459590778c3fb0daa089ecddc50ad29edde2",
+  "source_image_sha256": "8c5afbcc30fa73e24c0957fa88e51fd9bab6de5e0a40a954e54f9fb1cf525e86",
+  "toolchain": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "opencv": "4.14.0",
+    "pymupdf": "1.26.7"
+  },
+  "reproduction_identical_svg": true,
+  "other_result_map_rows_unchanged": true,
+  "production_bestlist_preservation_guard": "pass",
+  "parent_commit": "b13b876e0aa57cfa7d045845f9540f924adbc3cd",
+  "spatial_quality_score_before_current_batch": 13346.329681651669,
+  "spatial_quality_score_after": 13186.363828176092,
+  "optimization_error_before_current_batch": 14.267555555555555,
+  "optimization_error_after": 14.379555555555555
+}

@@ -486,21 +486,27 @@ def test_ac0254_2_committed_svg_preserves_left_rotated_circular_damper_quality()
 
 
 def test_ac0732_1_s_committed_svg_preserves_right_facing_p_kelle_quality() -> None:
-    record = review_variant("AC0732_1_S", source="diff_inventory")
+    record = _review_committed_snapshot("AC0732_1_S", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 25
     assert record.height == 15
     assert record.mean_delta2 == pytest.approx(_committed_mean_delta2("AC0732_1_S", 3659.34130859375))
+    # Keep the original accepted quality bound independent of snapshot updates.
+    assert record.mean_delta2 <= 3659.34130859375
     _assert_normalized_mse_matches_mean_delta2(record)
 
     svg = Path(record.svg_path).read_text(encoding="utf-8")
-    assert "background" in svg
+    assert 'id="right_facing_square_kelle_p_connector"' in svg
+    assert 'id="right_facing_square_kelle_p_body"' in svg
+    assert 'id="right_facing_square_kelle_p_label"' in svg
+    assert ">P</text>" in svg
+    assert "<ellipse" not in svg and "<circle" not in svg
     assert "<image" not in svg
 
 
 def test_ac0732_1_l_committed_svg_preserves_right_facing_p_kelle_quality() -> None:
-    record = review_variant("AC0732_1_L", source="diff_inventory")
+    record = _review_committed_snapshot("AC0732_1_L", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 45
@@ -516,7 +522,7 @@ def test_ac0732_1_l_committed_svg_preserves_right_facing_p_kelle_quality() -> No
 
 
 def test_ac0732_1_m_committed_svg_preserves_right_facing_p_kelle_quality() -> None:
-    record = review_variant("AC0732_1_M", source="diff_inventory")
+    record = _review_committed_snapshot("AC0732_1_M", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 35
