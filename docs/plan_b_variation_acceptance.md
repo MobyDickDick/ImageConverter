@@ -62,7 +62,10 @@ Erfolgsmarkierung ersetzt die Abnahme nicht.
 ## Ergebnisse und Wiederholung
 
 Jeder Start legt einen neuen Lauf unter `artifacts/evaluation/plan_b_variations`
-an. `manifest.json` enthält Auswahlpool, ausgewähltes SVG, Seed, Quell-Hashes,
+an. Diese erzeugten Laufverzeichnisse sind in `.gitignore` ausgeschlossen und
+bleiben lokal; CI lädt sie als Workflow-Artefakte hoch. Sie werden nicht als
+Quelldateien ins Repository aufgenommen.
+`manifest.json` enthält Auswahlpool, ausgewähltes SVG, Seed, Quell-Hashes,
 16 Varianten und feste Qualitätsgrenzen. Die Ausgangsaufgabe liegt als
 `source.svg` und `source_description.txt` bei. `report.json` wird nach jedem
 Fall fortgeschrieben und enthält Einzelmetriken, Gründe und das Gesamtergebnis.
