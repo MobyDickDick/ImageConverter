@@ -62,20 +62,23 @@ Erfolgsmarkierung ersetzt die Abnahme nicht.
 ## Ergebnisse und Wiederholung
 
 Jeder Start legt einen neuen Lauf unter `artifacts/evaluation/plan_b_variations`
-an. Diese erzeugten Laufverzeichnisse sind in `.gitignore` ausgeschlossen und
-bleiben lokal; CI lädt sie als Workflow-Artefakte hoch. Sie werden nicht als
-Quelldateien ins Repository aufgenommen.
-`manifest.json` enthält Auswahlpool, ausgewähltes SVG, Seed, Quell-Hashes,
-16 Varianten und feste Qualitätsgrenzen. Die Ausgangsaufgabe liegt als
-`source.svg` und `source_description.txt` bei. `report.json` wird nach jedem
-Fall fortgeschrieben und enthält Einzelmetriken, Gründe und das Gesamtergebnis.
-Pro Fall bleiben Konverterlog, Rastereingabe, Ergebnis-SVG und Vergleichsbilder
-erhalten (`comparison.png`: Eingabe, Ergebnis, absolute Differenz).
+an und behält standardmäßig **nur `report.json`**. Der Bericht enthält Quelle,
+Beschreibung, Seed, Quell-Hashes, Varianten, feste Grenzen, Einzelmetriken und
+Fehlergründe. Er wird nach jedem Fall fortgeschrieben. Referenzen, Raster,
+Konverterausgaben und Logs sind Arbeitsdateien und werden anschließend auch bei
+Fehlschlägen oder einem abgefangenen Abbruch entfernt. Diese Laufverzeichnisse
+sind in `.gitignore` ausgeschlossen; CI lädt den Ergebnisbericht hoch.
 
-Gezielt denselben Lauf wiederholen, auch wenn sich der ursprüngliche Pool ändert:
+Nur bei ausdrücklichem Diagnosebedarf behält `--keep-debug-artifacts` außerdem
+`manifest.json`, `source.svg`, `source_description.txt`, sämtliche Eingaben,
+Konverterlogs, Ergebnis-SVGs und Vergleichsbilder (`comparison.png`).
+
+Gezielt denselben Lauf wiederholen: Beschreibung aus dem Bericht lesen und das
+dort ausgewählte ursprüngliche SVG verwenden. Sein Hash muss weiterhin stimmen.
 
 ```powershell
-python -m tools.run_plan_b_variations --svg PFAD/ZUM/LAUF/source.svg --description-file PFAD/ZUM/LAUF/source_description.txt --seed SEED_AUS_MANIFEST
+python -c "import json; from pathlib import Path; r=json.loads(Path('PFAD/ZUM/LAUF/report.json').read_text(encoding='utf-8')); Path('.tmp/description.txt').write_text(r['source_description'],encoding='utf-8')"
+python -m tools.run_plan_b_variations --svg URSPRUENGLICHES_SVG --description-file .tmp/description.txt --seed SEED_AUS_BERICHT
 ```
 
 Eine feste Auswahl per `--svg` ist nur eine ausdrückliche Wiederholung bzw.
@@ -100,3 +103,20 @@ Auch in CI wird bei jedem Start neu ausgewählt. Er bleibt bei Qualitätsfehlern
 rot und lädt die Belege auch bei Fehlschlägen hoch. Die schnellen Tests in
 `tests/detailtests/test_plan_b_variations.py` sichern Auswahl, Varianten,
 Qualitätsmessung und Fehlerpfade ab; sie ersetzen den echten Abnahmelauf nicht.
+
+## Stufendiagramm-Abnahme vom 2026-10-07
+
+`AC0538_1L_sia`: vorher 0/16, nach geometrischer Beschreibung und katalogfreier
+Rasterregistrierung 16/16 mit dem eingefrorenen Seed `3948009396310964094` sowie
+16/16 mit Seed `20261007`. Alle ursprünglichen Raster-/Referenzhashes stimmen;
+32 wiederholte SVG-Ausgaben sind bytegleich, verbotene SVG-Zugriffe: null.
+Schlechteste Werte: RGB-Fehler `0.000751`, Vordergrundfehler `0.003972`,
+Konturübereinstimmung `0.885294`, IoU `0.938086`; sechs Vektorprimitive pro Ausgabe.
+Die Registrierung bestimmt Geometrie, Linienbreiten und Farben aus dem Raster
+und verbindet beide sichtbaren Diagonalabschnitte über den verdeckenden Kreis.
+Die korrigierte Beschreibung allein verfehlt im isolierten Vergleichsfall alle
+vier Qualitätsgrenzen. Unabhängige Farb-/Lage-/Größentests bestehen ebenfalls.
+Vollständige damalige Prüfung: `1702 passed, 29 skipped`; der sehr kleine
+S-JPEG-Fall bleibt wegen unterabgetasteter Stufenkurve offen. Die ausführlichen
+Einzelartefakte wurden auf Nutzerwunsch entfernt. Eine Wiederholung verwendet
+das Sample-SVG und die geometrische Beschreibung aus seiner aktuellen XML-Zeile.

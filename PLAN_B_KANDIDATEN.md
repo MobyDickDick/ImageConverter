@@ -100,11 +100,12 @@ steht dort unter `review.reproduction_arguments`. Vollständige Tabellen
 bleiben lokal und werden nicht versioniert.
 
 Die gekoppelte randomisierte Plan-B-Auswahl `AC0538_1L_sia` mit Seed
-`3948009396310964094` bleibt mit **0/16 Qualitäts-Pässen** offen. Die korrigierte
-Worker-Toolchain beendet alle 16 CLI-Läufe ohne Vorlagenzugriff; die Geometrie
-und Beschreibung reichen für diese Topologie noch nicht aus. Die Aufgabe
-`PB-RANDOM-2026-10-07` in `docs/open_tasks.md` hält die identische Wiederholung
-und unveränderte Qualitätsgrenzen fest. Dieser zufällige Fall ersetzt keinen
+`3948009396310964094` besteht nach eigenständiger Beschreibung und katalogfreier
+Rasterregistrierung **16/16 Qualitäts-Pässe**. Ein weiterer Seed besteht ebenfalls
+16/16. Eingabe-/Referenzhashes des eingefrorenen Laufs bleiben identisch;
+die Qualitätsgrenzen wurden nicht verändert. Beschreibung allein besteht den
+isolierten Vergleichsfall noch nicht. Details und Generalisierungsgrenzen:
+`docs/plan_b_variation_acceptance.md`. Dieser zufällige Fall ersetzt keinen
 der fünf regulären Kandidaten.
 
 Abschluss des Runtime-Registrierungspakets `AC0713_1_S` (2026-10-04):
@@ -127,7 +128,7 @@ das CLI meldet dafür weiterhin konzentrierten Restfehler. Details stehen in
 - `AC0552_2_L` – aus dem neu hinzugefügten Sample `artifacts/images_to_convert/samples/AC0552_2_L.svg` abgeleitete Generalisierungsaufgabe für ein flaches grünes Chevron-/Pfeilsegment mit mehrstufigem Vertikalgradienten und beschnittener Innenkontur. Die Aufgabe ist als sample-basierter Roundtrip-Contract dokumentiert in `docs/next_arbeitspaket_2026-07-11_runXJ.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
 - `AC0502_1L_sia` – sample-basierte Plan-B-Aufgabe für die 80×40-Variante aus grauer Diagonalverbindung, Kreis und rotem Diagrammfeld mit weissem Kreuz; Roundtrip-Baseline `delta2=497.845640`. Der Contract und die Abgrenzung zur fachlich anders beschriebenen AC0502-Familie stehen in `docs/next_arbeitspaket_2026-07-31_runABH.md`.
 - `AC0502_1M_sia` – Skalierungs-/Generalisierungsaufgabe derselben Primitive auf 60×30 statt eine zweite ID-spezifische Nachzeichnung; Roundtrip-Baseline `delta2=465.142682`. Der gemeinsame Familien-Contract steht in `docs/next_arbeitspaket_2026-07-31_runABH.md`.
-- `AC0538_1L_sia` – sample-basierte Plan-B-Aufgabe für die verwandte Diagrammvariante mit grauer Rahmenkontur und weisser Stufenkurve; Roundtrip-Baseline `delta2=1629.625242` und derzeit `manual_review`. Der Klassifikations-/Perception-Contract steht in `docs/next_arbeitspaket_2026-07-31_runABH.md`.
+- `AC0538_1L_sia` – sample-basierte Plan-B-Aufgabe für die verwandte Diagrammvariante mit grauer Rahmenkontur und weisser Stufenkurve; Historische Roundtrip-Baseline `delta2=1629.625242`; die aktuelle Parametervariation besteht 32/32 Qualitätsgates, siehe `docs/plan_b_variation_acceptance.md`. Der Klassifikations-/Perception-Contract steht in `docs/next_arbeitspaket_2026-07-31_runABH.md`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -135,7 +136,7 @@ Aktueller Recheck: Vertikale Pfeile mit Dreieck und getrenntem Verlaufsschaft
 sind für beide Richtungen `generalisiert`. Alle 14 nach unten gerichteten
 Farb-/Größenvarianten sowie zusätzliche Lage-, Größen- und Farbtests bestehen;
 Umbenennung, Negativfälle und verbotener Sample-Zugriff sind abgesichert.
-Die zufällige Diagramm-/Stufenkurvenaufgabe bleibt `noch nicht erkannt`.
+Die zufällige Diagramm-/Stufenkurvenaufgabe ist für die geprüften Varianten `generalisiert`.
 Details: `docs/next_arbeitspaket_2026-10-07_ge9013_6m.md`.
 
 Aktueller Recheck: Die Unterscheidung zwischen einem Dreieck und dem gekrümmten

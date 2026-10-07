@@ -19,6 +19,7 @@ from src.iCCModules.imageCompositeConverterLabeledSquare import fit_labeled_squa
 from src.iCCModules.imageCompositeConverterCheckmark import fit_checkmark_disk
 from src.iCCModules.imageCompositeConverterGradientArrow import fit_gradient_arrow
 from src.iCCModules.imageCompositeConverterRadialDisk import fit_radial_disk
+from src.iCCModules.imageCompositeConverterStepDiagram import fit_step_diagram
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -510,20 +511,31 @@ def _smooth_gradient_svg_rect(
     mid_hex: str,
     center_percent: float,
     vertical: bool = False,
+    middle_end_percent: float | None = None,
+    end_hex: str | None = None,
+    profile_stops: tuple[tuple[float, str], ...] | None = None,
 ) -> str:
     """Return one continuous SVG gradient, never a stack of raster-fit bands."""
     center = max(1.0, min(99.0, float(center_percent)))
+    middle_end = center if middle_end_percent is None else max(center, min(99.0, float(middle_end_percent)))
     x1 = x
     y1 = y
     x2 = x if vertical else x + width
     y2 = y + height if vertical else y
+    stops = (
+        f'      <stop offset="0%" stop-color="{edge_hex}"/>\n'
+        f'      <stop offset="{center:g}%" stop-color="{mid_hex}"/>\n'
+        + (f'      <stop offset="{middle_end:g}%" stop-color="{mid_hex}"/>\n' if middle_end > center else '')
+        + f'      <stop offset="100%" stop-color="{end_hex or edge_hex}"/>\n'
+    )
+    if profile_stops is not None:
+        stops = ''.join(f'      <stop offset="{offset:g}%" stop-color="{color}"/>\n'
+                        for offset, color in profile_stops)
     return (
         '  <defs>\n'
         f'    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" '
         f'x1="{x1:.3f}" y1="{y1:.3f}" x2="{x2:.3f}" y2="{y2:.3f}">\n'
-        f'      <stop offset="0%" stop-color="{edge_hex}"/>\n'
-        f'      <stop offset="{center:g}%" stop-color="{mid_hex}"/>\n'
-        f'      <stop offset="100%" stop-color="{edge_hex}"/>\n'
+        f'{stops}'
         '    </linearGradient>\n'
         '  </defs>\n'
         f'  <rect x="{x:.3f}" y="{y:.3f}" width="{width:.3f}" height="{height:.3f}" '
@@ -574,6 +586,18 @@ def _build_structured_symbol_svg(
     chevron_peak_x_ratio: float = 1.0,
     chevron_peak_y_ratio: float = 0.5,
     gradient_vertical: bool = False,
+    center_dot_x_ratio: float = 0.5,
+    center_dot_y_ratio: float = 0.5,
+    gradient_middle_end: float | None = None,
+    gradient_end: str | None = None,
+    diagonal_top_x_ratio: float | None = None,
+    diagonal_bottom_x_ratio: float | None = None,
+    diagonal_clip: bool = True,
+    frame_left: float | None = None,
+    frame_top: float | None = None,
+    frame_right: float | None = None,
+    frame_bottom: float | None = None,
+    gradient_profile_stops: tuple[tuple[float, str], ...] | None = None,
 ) -> str:
     safe_w = max(1, int(width or 1))
     safe_h = max(1, int(height or 1))
@@ -584,6 +608,10 @@ def _build_structured_symbol_svg(
     content_y = inset + (safe_h - 1) * rect_y_inset
     content_w = max(1.0, (safe_w - 1) * (1.0 - 2.0 * rect_x_inset))
     content_h = max(1.0, (safe_h - 1) * (1.0 - 2.0 * rect_y_inset))
+    if all(value is not None for value in (frame_left, frame_top, frame_right, frame_bottom)):
+        content_x, content_y = float(frame_left), float(frame_top)
+        content_w = max(1.0, float(frame_right) - content_x)
+        content_h = max(1.0, float(frame_bottom) - content_y)
     plus_cx = safe_w * float(plus_x_ratio)
     plus_cy = safe_h * float(glyph_y_ratio)
     plus_half = max(2.0, min(safe_w, safe_h) * float(plus_half_ratio))
@@ -595,6 +623,11 @@ def _build_structured_symbol_svg(
     diag_x1 = content_x + content_w * (1.0 - diagonal_inset)
     diag_y0 = content_y + content_h * diagonal_inset
     diag_y1 = content_y + content_h * (1.0 - diagonal_inset)
+    diag1_top = diag_x1 if diagonal_top_x_ratio is None else safe_w * diagonal_top_x_ratio
+    diag1_bottom = diag_x0 if diagonal_bottom_x_ratio is None else safe_w * diagonal_bottom_x_ratio
+    diag2_top = diag_x0 if diagonal_top_x_ratio is None else safe_w * diagonal_top_x_ratio
+    diag2_bottom = diag_x1 if diagonal_bottom_x_ratio is None else safe_w * diagonal_bottom_x_ratio
+    diagonal_clip_attribute = ' clip-path="url(#innerRect)"' if diagonal_clip else ''
     chevron_inset = max(0.0, min(0.40, float(chevron_inset_ratio)))
     chevron_x0 = safe_w * max(0.0, min(1.0, float(chevron_center_x_ratio)))
     chevron_x1 = inset + (safe_w - 1 - inset) * max(0.5, min(1.0, float(chevron_peak_x_ratio)))
@@ -610,6 +643,9 @@ def _build_structured_symbol_svg(
         mid_hex=gradient_mid,
         center_percent=gradient_center,
         vertical=gradient_vertical,
+        middle_end_percent=gradient_middle_end,
+        end_hex=gradient_end,
+        profile_stops=gradient_profile_stops,
     )
     clip_def = f'  <clipPath id="innerRect"><rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}"/></clipPath>\n'
     if "<defs>" in gradient_rects:
@@ -628,13 +664,13 @@ def _build_structured_symbol_svg(
         f'  <rect x="0" y="0" width="{safe_w}" height="{safe_h}" fill="#ffffff" stroke="none"/>\n'
         f'{gradient_panel}'
         f'  <rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}" fill="none" stroke="{_color_hex(border_gray)}" stroke-width="{border_thickness:.2f}"/>\n'
-        + (f'  <line x1="{diag_x1:g}" y1="{diag_y0:g}" x2="{diag_x0:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag1_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag1_width > 0 else '')
-        + (f'  <line x1="{diag_x0:g}" y1="{diag_y0:g}" x2="{diag_x1:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag2_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag2_width > 0 else '')
+        + (f'  <line x1="{diag1_top:g}" y1="{diag_y0:g}" x2="{diag1_bottom:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag1_width:.2f}"{diagonal_clip_attribute}/>\n' if diag1_width > 0 else '')
+        + (f'  <line x1="{diag2_top:g}" y1="{diag_y0:g}" x2="{diag2_bottom:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag2_width:.2f}"{diagonal_clip_attribute}/>\n' if diag2_width > 0 else '')
         + (f'  <path d="M {chevron_x0:g} {chevron_y0:g} L {chevron_x1:g} {chevron_peak_y:g} L {chevron_x0:g} {chevron_y1:g}" fill="none" stroke="{_color_hex(diag_gray)}" stroke-width="{chevron_width:.2f}" stroke-linejoin="round" stroke-linecap="butt" clip-path="url(#innerRect)"/>\n' if chevron_width > 0 else '')
         + (f'  <line x1="{plus_cx-plus_half:.2f}" y1="{plus_cy:.2f}" x2="{plus_cx+plus_half:.2f}" y2="{plus_cy:.2f}" stroke="{_color_hex(glyph_gray)}" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n' if plus_width > 0 else '')
         + (f'  <line x1="{plus_cx:.2f}" y1="{plus_cy-plus_half:.2f}" x2="{plus_cx:.2f}" y2="{plus_cy+plus_half:.2f}" stroke="{_color_hex(glyph_gray)}" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n' if plus_width > 0 else '')
         + (f'  <line x1="{minus_start_x:.2f}" y1="{minus_y:.2f}" x2="{minus_start_x+minus_half*1.8:.2f}" y2="{minus_y:.2f}" stroke="{_color_hex(glyph_gray)}" stroke-width="{minus_width:.2f}" stroke-linecap="round"/>\n' if minus_width > 0 else '')
-        + (f'  <circle cx="{safe_w * 0.5:.2f}" cy="{safe_h * 0.5:.2f}" r="{center_dot_radius:.2f}" fill="{_color_hex(center_dot_gray)}"/>\n' if center_dot_radius > 0 else '')
+        + (f'  <circle cx="{safe_w * center_dot_x_ratio:.2f}" cy="{safe_h * center_dot_y_ratio:.2f}" r="{center_dot_radius:.2f}" fill="{_color_hex(center_dot_gray)}"/>\n' if center_dot_radius > 0 else '')
         + '</svg>\n'
     )
 
@@ -1054,7 +1090,169 @@ def _fit_symbol_element_by_element(
     step_logs = iteration_logs + step_logs
     if best is None:
         return None
+    if (has_center_dot and "farbverlauf" in description_text and min(width, height) >= 5
+            and bool(current['diag1_width']) != bool(current['diag2_width'])):
+        registered, registered_params, registration_logs = _refine_center_dot_symbol(
+            width, height, perc_img, current,
+            render_svg_to_numpy_fn, calculate_error_fn,
+        )
+        if np.isfinite(registered[0]) and registered[0] <= best[0]:
+            best, current = registered, registered_params
+        step_logs.extend(registration_logs)
     return best[0], best[1], best[2], current, step_logs
+
+
+def _refine_center_dot_symbol(width, height, image, params, render_fn, error_fn):
+    """Register a framed gradient and its dot at the raster's scale and pose.
+
+    The initial generic fit used a fixed canvas center and a 3.2-pixel radius
+    ceiling. Neither describes a translated or enlarged motif. Estimate the
+    dot from the thick core of the dark foreground, then jointly refine the
+    frame, diagonal, circle and continuous gradient against rendered pixels.
+    """
+    import cv2
+
+    current = dict(params)
+    arr = np.asarray(image)
+    lum = arr[..., :3].mean(axis=2) if arr.ndim == 3 else arr.astype(float)
+    vertical = bool(current["gradient_vertical"])
+    profile = np.median(lum[1:-1, 1:-1], axis=1 if vertical else 0)
+    peak = np.flatnonzero(profile >= profile.max() - 3)
+    current.update(
+        gradient_center=100 * (float(peak.min()) + 1) / (len(profile) + 1),
+        gradient_middle_end=100 * (float(peak.max()) + 1) / (len(profile) + 1),
+        gradient_edge=_gray_hex(float(profile[0])),
+        gradient_end=_gray_hex(float(profile[-1])),
+        gradient_mid=_gray_hex(float(profile.max())),
+        center_dot_x_ratio=0.5, center_dot_y_ratio=0.5,
+        frame_left=.5 + (width - 1) * float(current['rect_x_inset_ratio']),
+        frame_top=.5 + (height - 1) * float(current['rect_y_inset_ratio']),
+        frame_right=width - .5 - (width - 1) * float(current['rect_x_inset_ratio']),
+        frame_bottom=height - .5 - (height - 1) * float(current['rect_y_inset_ratio']),
+        diagonal_inset_ratio=0.0,
+    )
+    axis_profile = np.median(lum, axis=1 if vertical else 0)
+    background = axis_profile[:, None] if vertical else axis_profile[None, :]
+    dark = (lum < background - 25).astype(np.uint8)
+    distance = cv2.distanceTransform(dark, cv2.DIST_L2, cv2.DIST_MASK_PRECISE)
+    distance[:int(height * .2)] = 0
+    distance[int(height * .8):] = 0
+    distance[:, :int(width * .2)] = 0
+    distance[:, int(width * .8):] = 0
+    radius = float(distance.max())
+    if radius >= 1:
+        ys, xs = np.nonzero(distance >= radius * .65)
+        current.update(center_dot_x_ratio=float(np.mean(xs) + .5) / width,
+                       center_dot_y_ratio=float(np.mean(ys) + .5) / height,
+                       center_dot_radius=radius,
+                       center_dot_gray=float(np.median(lum[ys, xs])))
+    # Join the two exposed sections through the occluding dot. The line need
+    # not coincide exactly with opposite frame corners or remain inside it.
+    ys, xs = np.nonzero(dark)
+    cx = current["center_dot_x_ratio"] * width
+    cy = current["center_dot_y_ratio"] * height
+    exposed = ((np.abs(ys + .5 - cy) > current["center_dot_radius"] + 2)
+               & (xs > 1) & (xs < width - 2) & (ys > 1) & (ys < height - 2))
+    if exposed.sum() >= 6:
+        slope, intercept = np.polyfit(ys[exposed] + .5, xs[exposed] + .5, 1)
+        expected_sign = -1 if current["diag1_width"] else 1
+        if slope * expected_sign > 0:
+            current.update(diagonal_top_x_ratio=(intercept + slope * .5) / width,
+                           diagonal_bottom_x_ratio=(intercept + slope * (height - .5)) / width,
+                           diagonal_clip=False,
+                           diag_gray=current["center_dot_gray"])
+            for key in ("diag1_width", "diag2_width"):
+                if current[key]:
+                    rows = np.unique(ys[exposed])
+                    current[key] = max(.5, float(exposed.sum() / len(rows)) / np.hypot(1, slope))
+
+    def evaluate(candidate):
+        svg = _build_structured_symbol_svg(width, height, **candidate)
+        raster = render_fn(svg, width, height)
+        if raster is None:
+            return float("inf"), svg, raster
+        return float(error_fn(image, raster)), svg, raster
+
+    best = evaluate(current)
+    initial_error = best[0]
+    evaluations = 1
+    # Pixel-valued windows scale with the raster; the later passes resolve
+    # subpixel antialiasing rather than snapping coordinates to whole pixels.
+    for step in (1.0, 1.0, .5, .5, .25, .25, .125, .125):
+        search = {
+            "center_dot_radius": (step, .5, min(width, height) * .35),
+            "center_dot_x_ratio": (step / width, .2, .8),
+            "center_dot_y_ratio": (step / height, .2, .8),
+            "frame_left": (step, -width * .15, width * .3),
+            "frame_top": (step, -height * .15, height * .3),
+            "frame_right": (step, width * .7, width * 1.15),
+            "frame_bottom": (step, height * .7, height * 1.15),
+            "border_thickness": (step * .5, .1, min(width, height) * .15),
+            "diag1_width": (step * .5, .1, min(width, height) * .2),
+            "diag2_width": (step * .5, .1, min(width, height) * .2),
+            "diagonal_inset_ratio": (step / max(width, height), 0, .4),
+            "gradient_center": (step * 5, 1, 98),
+            "gradient_middle_end": (step * 5, 1, 99),
+            "center_dot_gray": (step * 12, 0, 255),
+            "diag_gray": (step * 12, 0, 255),
+            "border_gray": (step * 12, 0, 255),
+            "gradient_edge": (step * 12, 0, 255),
+            "gradient_end": (step * 12, 0, 255),
+            "gradient_mid": (step * 12, 0, 255),
+        }
+        if "diagonal_top_x_ratio" in current:
+            search.update(diagonal_top_x_ratio=(step / width, -.3, 1.3),
+                          diagonal_bottom_x_ratio=(step / width, -.3, 1.3))
+        for key, (delta, lower, upper) in search.items():
+            if key in {"diag1_width", "diag2_width"} and not current[key]:
+                continue
+            is_color = isinstance(current[key], str)
+            value = float(int(current[key][1:3], 16)) if is_color else float(current[key])
+            for direction in (-1, 1):
+                candidate = dict(current)
+                trial = max(lower, min(upper, value + direction * delta))
+                candidate[key] = _gray_hex(trial) if is_color else trial
+                scored = evaluate(candidate)
+                evaluations += 1
+                if np.isfinite(scored[0]) and scored[0] < best[0]:
+                    best, current = scored, candidate
+    # A real raster may have a broad or non-linear highlight. Fit a small,
+    # fixed-size continuous stop profile instead of forcing a triangular
+    # three-stop gradient. Robust axis medians suppress the dot and diagonal.
+    start = current['frame_top'] if vertical else current['frame_left']
+    end = current['frame_bottom'] if vertical else current['frame_right']
+    positions = np.linspace(0, 100, 17)
+    axis = np.arange(len(axis_profile)) + .5
+    # Exclude frame pixels before extrapolating to the gradient's endpoints.
+    interior = (axis > start + current['border_thickness']) & (axis < end - current['border_thickness'])
+    profile_error = None
+    if interior.sum() >= 3:
+        values = np.interp(start + positions / 100 * (end - start), axis[interior], axis_profile[interior])
+        candidate = dict(current, gradient_profile_stops=tuple(zip(positions.tolist(), map(_gray_hex, values))))
+        scored = evaluate(candidate)
+        evaluations += 1
+        # Refine the profile even if its interpolation starts above the current
+        # error; commit it only when the final rendered candidate improves.
+        profile_best = scored
+        for delta in (8, 4, 4, 2, 2, 1, 1, 1, 1):
+            for index in range(len(positions)):
+                value = int(candidate['gradient_profile_stops'][index][1][1:3], 16)
+                for direction in (-1, 1):
+                    trial = dict(candidate)
+                    stops = list(candidate['gradient_profile_stops'])
+                    stops[index] = (float(positions[index]), _gray_hex(value + delta * direction))
+                    trial['gradient_profile_stops'] = tuple(stops)
+                    scored = evaluate(trial)
+                    evaluations += 1
+                    if np.isfinite(scored[0]) and scored[0] < profile_best[0]:
+                        profile_best, candidate = scored, trial
+        profile_error = profile_best[0]
+        if np.isfinite(profile_best[0]) and profile_best[0] < best[0]:
+            best, current = profile_best, candidate
+    return best, current, [f"dot_registration_initial_error={initial_error}",
+                           f"dot_registration_profile_error={profile_error}",
+                           f"dot_registration_evaluations={evaluations}",
+                           *[f"registered_{key}={value}" for key, value in sorted(current.items())]]
 
 
 DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS = {
@@ -1386,6 +1584,18 @@ def runNonCompositeIterationImpl(
     calculate_error_fn,
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
+    diagram = fit_step_diagram(
+        width, height, description=description, image=perc_img,
+        render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
+    )
+    if diagram is not None:
+        params['step_diagram_registration'] = {
+            key: value for key, value in diagram.items() if key not in {'svg', 'rendered'}
+        }
+        print_fn('  -> Kreis, Verbindungen und Stufendiagramm aus Rasterbefund registriert.')
+        write_validation_log_fn(['status=non_composite_raster_step_diagram'])
+        write_attempt_artifacts_fn(diagram['svg'], diagram['rendered'])
+        return base_name, description, params, 1, diagram['error']
     disk = fit_radial_disk(
         width, height, description=description, image=perc_img,
         render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
