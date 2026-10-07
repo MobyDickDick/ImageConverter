@@ -188,3 +188,21 @@ def test_worker_blocks_external_svg_reads_even_when_catalog_references_are_in_de
     assert not battery.forbidden_vector_read(generated / "converted_svgs/result.svg", "r", 0, generated)
     assert not battery.forbidden_vector_read(tmp_path / "new.svg", "w", 0, generated)
     assert not battery.forbidden_vector_read(tmp_path / "input.png", "rb", 0, generated)
+
+
+def test_real_worker_preserves_parent_toolchain_with_incompatible_pythonpath(tmp_path, monkeypatch):
+    broken = tmp_path / 'broken-environment'
+    broken.mkdir()
+    (broken / 'sitecustomize.py').write_text("raise RuntimeError('Wrong startup environment')", encoding='utf-8')
+    (broken / 'numpy.py').write_text("raise ImportError('Wrong binary ABI')", encoding='utf-8')
+    monkeypatch.setenv('PYTHONPATH', str(broken))
+    # This integration check exercises the production worker startup. Pytest's
+    # inherited marker would enable a separate renderer subprocess per probe.
+    monkeypatch.delenv('PYTEST_CURRENT_TEST', raising=False)
+    output = tmp_path / 'isolated-run'
+    case = battery.prepare_cases(SVG, DESCRIPTION, output, 123)[0]
+    result = battery.run_case(case, output, timeout=30, iterations=1)
+    assert result['returncode'] == 0
+    assert result['blocked_svg_reads'] == []
+    assert 'metrics' in result
+    assert (output / result['output_svg']).is_file()

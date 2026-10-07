@@ -4,15 +4,43 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-10-03)
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-07)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `407` · Erledigt `387` · Offen `20`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `410` · Erledigt `389` · Offen `21`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-06)
+### Aktueller Plan-B-Stand (2026-10-07)
+
+Das Pfeilpaket für `GE9013_6M` besteht die deterministische Abnahme auf
+`codex/ge9013-quality-2026-10-07`: Die XML beschreibt den Pfeil nach unten
+eigenständig; die katalogfreie Registrierung überträgt Geometrie und Verlauf
+aus dem Raster. Das gespeicherte Ziel-CLI-SVG verbessert sich von
+`15279.816406` auf `488.706665`. Alle 14 Farb-/Größenvarianten bestehen beide
+harten Gates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe
+reproduzieren sämtliche 28 SVG-Bytes und Gateentscheidungen. 90 fokussierte
+Tests sind grün; das vollständige Defaultprofil meldet `1681 passed, 29 skipped`
+mit bestehenden Windows-Skips. Details: `docs/next_arbeitspaket_2026-10-07_ge9013_6m.md`.
+
+Die gekoppelte zufällige Plan-B-Auswahl (`AC0538_1L_sia`, Seed
+`3948009396310964094`) bleibt rot: Nach Korrektur des Worker-ABI-Konflikts
+laufen 16/16 CLI-Konvertierungen ohne verbotenen SVG-Zugriff, aber 0/16
+bestehen die unveränderten Qualitätsgrenzen. Die bisherige Beschreibung nennt
+keine konkrete Symbolgeometrie. Der maschinenlesbare Einzelbefund steht in
+`artifacts/evaluation/downward_gradient_arrow_recheck_v1/summary_2026-10-07.json`.
+
+- [ ] **PB-RANDOM-2026-10-07:** Eigenständige Beschreibung und katalogfreie
+  Rekonstruktion für Kreis, Verbindung, gerahmtes Diagramm und helle Stufenkurve
+  der eingefrorenen Zufallsauswahl erarbeiten; exakt denselben Seed und alle
+  16 Varianten erneut gegen die unveränderten Grenzen prüfen. Ein technischer
+  Exit 0 zählt nicht als Abnahme. Repro steht im verlinkten Arbeitspaket.
+
+Der Review über 956 Einträge (950 renderbare Paare) setzt die reguläre Rotation
+mit `AC0554_1_L` fort. Die randomisierte Folgeaufgabe bleibt unabhängig offen.
+
+### Vorheriger Plan-B-Stand (2026-10-06)
 
 Das Paket für `GE0281` ist umgesetzt: Die XML beschreibt Kreis und radialen
 Verlauf eigenständig. Die katalogfreie Rasterregistrierung bestimmt Lage,
