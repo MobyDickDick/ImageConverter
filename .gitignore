@@ -32,3 +32,9 @@ artifacts/converted_images/reports/reports/overview_svg_tiles.png
 
 # Reproducibly generated semantic-only benchmark rasters
 /artifacts/semantic_only_png_benchmark/
+
+# Disposable local test data and Plan-B acceptance runs (CI uploads artifacts)
+/.tmp/
+/artifacts/evaluation/plan_b_variations/
+/artifacts/evaluation/plan_b_random_*/
+/artifacts/plan-b-acceptance/

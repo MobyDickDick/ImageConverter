@@ -22,6 +22,10 @@ The detailed CLI reference lives in [docs/image_converter_cli.md](docs/image_con
 The recommended local verification workflow lives in
 [docs/image_converter_workflow.md](docs/image_converter_workflow.md).
 
+Der [Plan-B-Abnahmetest](docs/plan_b_variation_acceptance.md) wählt bei jedem Start
+ein SVG mit Beschreibung neu aus und verlangt 16/16 zufriedenstellende
+Konvertierungen seiner Zufallsvarianten: `python -m tools.run_plan_b_variations`.
+
 ## Repository layout
 
 - `src/imageCompositeConverter.py` — converter implementation and CLI.
