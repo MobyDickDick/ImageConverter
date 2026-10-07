@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-06, nach radialem Kugel-Recheck)
+## Aktuelle Kandidaten (Stand: 2026-10-07, nach Verlaufspfeil-Abnahme)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -76,19 +76,35 @@ CLI-Läufe reproduzieren alle zwölf SVG-Bytes und Gateentscheidungen.
 Die XML für das Ziel und den grauen Holdout beschreibt die Kreisstruktur
 jetzt eigenständig. Details: `docs/next_arbeitspaket_2026-10-06_ge0281.md`.
 
-1. `GE9013_6M` – `mean_delta2=15368.653320`, `normalized_mse=0.078783`.
-2. `GE0300` – `mean_delta2=14731.457031`, `normalized_mse=0.075517`.
-3. `GE1420_S` – `mean_delta2=14628.742188`, `normalized_mse=0.074990`.
-4. `AC0403_1_L` – `mean_delta2=13989.019531`, `normalized_mse=0.071711`.
-5. `AC0130_S` – `mean_delta2=13920.945312`, `normalized_mse=0.071362`.
+`GE9013_6M` besteht nach katalogfreier Richtungsnormalisierung der
+Dreieck-/Verlaufsschaft-Registrierung beide Gates (`mean_delta2=488.706665`,
+frische CLI-Baseline `15279.816406`). Alle 14 Farb-/Größenvarianten bestehen
+ohne Pflichtmetrikregression; zwei unabhängige CLI-Läufe reproduzieren
+sämtliche 28 SVG-Bytes und Gateentscheidungen. Die gemeinsame XML beschreibt
+die Pfeilstruktur jetzt eigenständig. Details:
+`docs/next_arbeitspaket_2026-10-07_ge9013_6m.md`.
 
-Die nächste Rotation beginnt mit `GE9013_6M` und muss zunächst eine frische
-CLI-Baseline statt des historischen Sammelwerts prüfen. Der erneuerte Review
-über 806 Einträge (802 renderbare Paare und vier bereits fehlende SVG-Paare)
-steht unter `artifacts/evaluation/radial_disk_recheck_v1/full_review/`.
-Alle zuvor separat belegten Gate-Passes, die 14 Pfeilvarianten und sechs Kugelvarianten sind von der
-Kandidatenauswahl ausgeschlossen; der genaue Aufruf mit sämtlichen Ausschlüssen
-steht in `review_reproduction_2026-10-06.json`.
+1. `AC0554_1_L` – `mean_delta2=46170.398438`, `normalized_mse=0.236680`.
+2. `DLG0031` – `mean_delta2=16567.326172`, `normalized_mse=0.084928`.
+3. `DLG0021` – `mean_delta2=16539.406250`, `normalized_mse=0.084785`.
+4. `GE1420_S` – `mean_delta2=14628.742188`, `normalized_mse=0.074990`.
+5. `AC0704_1_L` – `mean_delta2=14064.746094`, `normalized_mse=0.072099`.
+
+Die nächste reguläre Rotation beginnt mit `AC0554_1_L` und muss zunächst eine
+frische CLI-Baseline statt des historischen Sammelwerts prüfen. Der erneuerte
+Review über 956 Einträge (950 renderbare Paare, sechs fehlende Paare) steht unter
+`artifacts/evaluation/downward_gradient_arrow_recheck_v1/full_review/`.
+Alle zuvor separat belegten Gate-Passes und sämtliche 14 aktuellen
+Pfeilvarianten sind ausgeschlossen; der genaue Aufruf steht in
+`review_reproduction_2026-10-07.json`.
+
+Die gekoppelte randomisierte Plan-B-Auswahl `AC0538_1L_sia` mit Seed
+`3948009396310964094` bleibt mit **0/16 Qualitäts-Pässen** offen. Die korrigierte
+Worker-Toolchain beendet alle 16 CLI-Läufe ohne Vorlagenzugriff; die Geometrie
+und Beschreibung reichen für diese Topologie noch nicht aus. Die Aufgabe
+`PB-RANDOM-2026-10-07` in `docs/open_tasks.md` hält die identische Wiederholung
+und unveränderte Qualitätsgrenzen fest. Dieser zufällige Fall ersetzt keinen
+der fünf regulären Kandidaten.
 
 Abschluss des Runtime-Registrierungspakets `AC0713_1_S` (2026-10-04):
 `Rotated180SquareKelleGlyph` gehört nun auch zu den beiden Runtime-Kind-Sets.
@@ -113,6 +129,13 @@ das CLI meldet dafür weiterhin konzentrierten Restfehler. Details stehen in
 - `AC0538_1L_sia` – sample-basierte Plan-B-Aufgabe für die verwandte Diagrammvariante mit grauer Rahmenkontur und weisser Stufenkurve; Roundtrip-Baseline `delta2=1629.625242` und derzeit `manual_review`. Der Klassifikations-/Perception-Contract steht in `docs/next_arbeitspaket_2026-07-31_runABH.md`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
+
+Aktueller Recheck: Vertikale Pfeile mit Dreieck und getrenntem Verlaufsschaft
+sind für beide Richtungen `generalisiert`. Alle 14 nach unten gerichteten
+Farb-/Größenvarianten sowie zusätzliche Lage-, Größen- und Farbtests bestehen;
+Umbenennung, Negativfälle und verbotener Sample-Zugriff sind abgesichert.
+Die zufällige Diagramm-/Stufenkurvenaufgabe bleibt `noch nicht erkannt`.
+Details: `docs/next_arbeitspaket_2026-10-07_ge9013_6m.md`.
 
 Aktueller Recheck: Die Unterscheidung zwischen einem Dreieck und dem gekrümmten
 Kreissegment ist `generalisiert`. Sie verwendet das Verhältnis der beobachteten

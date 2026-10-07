@@ -1,0 +1,20 @@
+{
+  "schema_version": "downward_gradient_arrow_reproduction_v1",
+  "runs": [
+    ".tmp\\ge9013\\recheck-first",
+    ".tmp\\ge9013\\recheck-repeat"
+  ],
+  "all_28_svg_bytes_identical": true,
+  "all_gate_records_identical": true,
+  "source_sha256": {
+    "src/iCCModules/imageCompositeConverterGradientArrow.py": "063bdb6fe82ca35c7b6d93758279d35c821c4d9985ddbf5c7c1ab04b0df843c3",
+    "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "d4288d99dab6c2fc8a074f86154e40a527fab03b18621905fbbe5bd9fdc86c10",
+    "tools/run_downward_gradient_arrow_recheck.py": "4513b76ef728b0915ce1a7a1348e5de8ec7a8be1b1b55c4c03d7377ac3bf6aea",
+    "tools/evaluate_downward_gradient_arrow_recheck.py": "1df1d28c8947fafab21b9d9d61b2f1c0413700605ca875ec33dea9206eb1b0b3",
+    "tools/evaluate_gradient_arrow_recheck.py": "068d1061ff38f7134187ad7ccdf8f9712f7b9a200392ed42ea4eae671ce68dea",
+    "tools/run_plan_b_variations.py": "63b416c9bbf9600198aa8bef8484c229a2fe000a9d6c0bfe1b803b597f3bb648",
+    "tests/test_downward_gradient_arrow_runtime.py": "18e15017f241341862c015e4f4337093bcfa06bde5c54a073f58bbbdf98ac0ec",
+    "tests/detailtests/test_plan_b_variations.py": "90341457301e87594283cd14331d1cbce0eaecbb7252fa6dc9f683d42d8e39f8",
+    "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml": "0b65e670a5251ca5cddac0ef2ebd8b8be44b13333b7f3535720e8883c60a422e"
+  }
+}

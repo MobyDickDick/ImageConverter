@@ -1,0 +1,464 @@
+{
+  "schema_version": "random_plan_b_package_evidence_v1",
+  "date": "2026-10-07",
+  "source_svg": "artifacts/images_to_convert/samples/AC0538_1L_sia.svg",
+  "random_selection": {
+    "mode": "random_pool",
+    "selected_index": 30,
+    "pool_size": 61,
+    "source_svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0538_1L_sia.svg",
+    "descriptions_path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\Finale_Wurzelformen_V3.xml",
+    "excluded": [
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0511_laeuft.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0511_offen.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_M2.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AC0VR2_M3.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0030_offen.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0140_laeuft.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\AR0140_offen.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcAnGener22_S1.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_Cooler.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_FlapH.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_FlapV.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_Heat_Recovery.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_Heater.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_HeatRecover_air.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_HeatRecover_rotation.svg",
+        "reason": "missing_description"
+      },
+      {
+        "svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\images_to_convert\\samples\\DdcCoValvd21_Humidfyer.svg",
+        "reason": "missing_description"
+      }
+    ]
+  },
+  "seed": 3948009396310964094,
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "iterations": 64,
+  "source_svg_sha256": "eb20a6f71fb96fba5b351a6074c0a385abac20e80f99263c58ea7beab42c413a",
+  "source_description_sha256": "c061b6686ac442ebddefa51ecba415e91c23c7e57d1a8fff9d953ca33d475069",
+  "source_description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.",
+  "initial_summary": {
+    "required": 16,
+    "completed": 16,
+    "passed": 0,
+    "failed": 16,
+    "satisfactory": false
+  },
+  "initial_failure": "converter_error: incompatible virtualenv NumPy in child process",
+  "replay_summary": {
+    "required": 16,
+    "completed": 16,
+    "passed": 0,
+    "failed": 16,
+    "satisfactory": false
+  },
+  "replay_case_results": [
+    {
+      "case_id": "probe_01",
+      "input_sha256": "14eba896a9995846117a1c10490b69a510f4f45b8f16396508cec8495c9eb043",
+      "reference_svg_sha256": "3eb9f2b4733253a65f65a6617a2579e7afd6d403924f2175eb9db612574becb3",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die Darstellung ist ein wenig kleiner dargestellt und geringfÃ¼gig nach rechts und unten versetzt.",
+      "metrics": {
+        "normalized_mse": 0.050784166902303696,
+        "foreground_mse": 0.21608716249465942,
+        "edge_alignment": 0.15119847655296326,
+        "foreground_iou": 0.03346720214190094
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "cb957243b5ca60d38bf5411eda71481c61391414b13723f6b1e35d975c62707a",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_02",
+      "input_sha256": "eea26e097934c839e1ff985cfb2bf333d84fcc3836fea1d8ed6199c380c26f28",
+      "reference_svg_sha256": "2894c143276d7bbc574abf196a53ac828d628747ecb056a947986ac1e3c70e7b",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die gesamte Darstellung ist geringfÃ¼gig grÃ¶ÃŸer dargestellt und ein wenig nach rechts und unten versetzt.",
+      "metrics": {
+        "normalized_mse": 0.05723600089550018,
+        "foreground_mse": 0.20981155335903168,
+        "edge_alignment": 0.20247262716293335,
+        "foreground_iou": 0.034482758620689655
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "56ca39471fae7cc941f920509ad019975d69c4ce74f89e34625283438a29ad14",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_03",
+      "input_sha256": "03b59dc1c3d0b53df7bf959768599475d4e21a6b43dc7d4c2c8f48f5b4d98677",
+      "reference_svg_sha256": "040588f7c0a8c0d919808ca909354613cbe41cb2a75af652389a549bb41817cf",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die Darstellung ist ein wenig grÃ¶ÃŸer dargestellt und leicht nach links und unten verschoben.",
+      "metrics": {
+        "normalized_mse": 0.05483964458107948,
+        "foreground_mse": 0.20303454995155334,
+        "edge_alignment": 0.1819477379322052,
+        "foreground_iou": 0.03484320557491289
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "7a3ec9f20d615c4dc375f058227ebcb6977690f289f019b4fe6a52840bca02fa",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_04",
+      "input_sha256": "9379277fb57cb2e5cdf6fede2e2b0c9bbe20dc005e9762a98d22cc976e996c40",
+      "reference_svg_sha256": "6871bd78303d66552d24b711661b5ae212fb37d85199d6c746eb41d95affb0e8",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die gesamte Darstellung ist geringfÃ¼gig kleiner dargestellt und leicht nach rechts und oben versetzt.",
+      "metrics": {
+        "normalized_mse": 0.04802461713552475,
+        "foreground_mse": 0.22377698123455048,
+        "edge_alignment": 0.20987902581691742,
+        "foreground_iou": 0.03795620437956204
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "2e504008a685f3fbb8334a11f5829b70c0f49f5078dd4a4b2d1994e822d55cf2",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_05",
+      "input_sha256": "cb781d37c83a8d4cef412bf94ccba49706d55417d6a7d586116f1d9641f20170",
+      "reference_svg_sha256": "744adc73109b7171a69c4a693d2b0362d5d07bf1f6f226a044246ca6a41804df",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die gesamte Darstellung ist etwas kleiner dargestellt und etwas nach links und oben versetzt.",
+      "metrics": {
+        "normalized_mse": 0.04543270543217659,
+        "foreground_mse": 0.21761801838874817,
+        "edge_alignment": 0.20286735892295837,
+        "foreground_iou": 0.038980509745127435
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "e882dbbcd51a04995b7bd7e72d430e8b1e03031521ddfa6b32b82689873a322c",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_06",
+      "input_sha256": "d9437945d50336fd94e7bc9c0bf7728179e07ff7fa8038fc465c084cbf451a95",
+      "reference_svg_sha256": "413340fa579460648b7e03de9547158d168d47fc385350960f45a841eb27ef4e",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die gesamte Darstellung ist leicht grÃ¶ÃŸer dargestellt und geringfÃ¼gig nach rechts und unten versetzt.",
+      "metrics": {
+        "normalized_mse": 0.054271016269922256,
+        "foreground_mse": 0.22317957878112793,
+        "edge_alignment": 0.18493011593818665,
+        "foreground_iou": 0.037467700258397935
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "ba3b55ef17dfc80c380d7bc756971d0b070054fb5b661a970ad189db0310ee3f",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_07",
+      "input_sha256": "e81379021813180c215c7af0cde780bda7293f186aa8bb057be3dc3878779be7",
+      "reference_svg_sha256": "594d9466c903795cd4c2a5a377868db07097a8ea76e8fa334b10e1f6766b7404",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die gesamte Darstellung ist geringfÃ¼gig kleiner dargestellt und geringfÃ¼gig nach rechts und unten versetzt.",
+      "metrics": {
+        "normalized_mse": 0.048510026186704636,
+        "foreground_mse": 0.2162034809589386,
+        "edge_alignment": 0.21483834087848663,
+        "foreground_iou": 0.03905160390516039
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "f30c9b78d00fc22c086ce9e0b7da74236a33c2d20c3023c949704ad92180cd39",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_08",
+      "input_sha256": "4b213e057cc8876b307ecaee19a381a564b712493b7248835762629db541a5f3",
+      "reference_svg_sha256": "76155ecda2c08101c3b8e9678a2249a7af7cacb5b0067a0681554b16ba3429c9",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die gesamte Darstellung ist geringfÃ¼gig grÃ¶ÃŸer dargestellt und ein wenig nach links und oben versetzt.",
+      "metrics": {
+        "normalized_mse": 0.05595214292407036,
+        "foreground_mse": 0.20251227915287018,
+        "edge_alignment": 0.15800628066062927,
+        "foreground_iou": 0.03064699205448354
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "4c6d7957c0e2ba152f480fb1a2fa021f67e4a0bc193c7c794d5c814d86d14aee",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_09",
+      "input_sha256": "ef5c32cfabc9e8a5f1404f3a85dbf3aca8a97a90b1f6bdf7fe0cfeb3c2f70810",
+      "reference_svg_sha256": "629dbb81be9e4bf2e6c753b375d3269f781bb3f0dbecaa5cc1e43441cfeebfdd",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die gesamte Darstellung ist etwas kleiner dargestellt und etwas nach links und unten versetzt.",
+      "metrics": {
+        "normalized_mse": 0.04866009205579758,
+        "foreground_mse": 0.224068284034729,
+        "edge_alignment": 0.19790849089622498,
+        "foreground_iou": 0.03890489913544669
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "bc6bc273e3619f36f0c8fc5d26899afa1e0b83c721f4a835db5455a90c29865d",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_10",
+      "input_sha256": "c429c7ff8ca928eaf4e527cae679a23e03a0a67c290bcdc9507a8f38ee0bf433",
+      "reference_svg_sha256": "438f7ab50364e4a243db4c5d3712a86d46363ad5fbd55599234ada6a4e4361e0",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Das gesamte Motiv ist geringfÃ¼gig grÃ¶ÃŸer dargestellt und leicht nach rechts und oben verschoben.",
+      "metrics": {
+        "normalized_mse": 0.05249178037047386,
+        "foreground_mse": 0.22081239521503448,
+        "edge_alignment": 0.1798599660396576,
+        "foreground_iou": 0.03302509907529723
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "ba3b55ef17dfc80c380d7bc756971d0b070054fb5b661a970ad189db0310ee3f",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_11",
+      "input_sha256": "1434bce534ecbe6e86383ec17846686dff0ab8298e7277fc41d4ff8e24d2d8bb",
+      "reference_svg_sha256": "c796d76486b2b0b2da33365f0461b25490341561820a520452e9743c944bb566",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Das Motiv ist leicht kleiner dargestellt und leicht nach links und oben versetzt.",
+      "metrics": {
+        "normalized_mse": 0.0502372644841671,
+        "foreground_mse": 0.227179616689682,
+        "edge_alignment": 0.16721895337104797,
+        "foreground_iou": 0.03409090909090909
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "fe7a5b5bdaad60fdc4905fef1326fc60c94e2a3e67fef3fab22aee705ca1ffba",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_12",
+      "input_sha256": "d4bd01fd68af25d60b2f2f2184d0503c02fcd114d8f975f81d7c4a90aa9ed9c6",
+      "reference_svg_sha256": "876a73fef235ee4b53b69dfb37ae1077e6f836d566e107e21206e3cbd58b3f60",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die gesamte Darstellung ist geringfÃ¼gig kleiner dargestellt und geringfÃ¼gig nach rechts und unten verschoben.",
+      "metrics": {
+        "normalized_mse": 0.04954511672258377,
+        "foreground_mse": 0.21722948551177979,
+        "edge_alignment": 0.188207745552063,
+        "foreground_iou": 0.038408779149519894
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "2e504008a685f3fbb8334a11f5829b70c0f49f5078dd4a4b2d1994e822d55cf2",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_13",
+      "input_sha256": "dd3d67f45954e56b6d790fa682c37cb941877afa91ba8d85acf251be28826ea4",
+      "reference_svg_sha256": "08740e668cecf94c16fd60a20f8358271d1e674179d2ea978ff9ce3a40d3fcb8",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die Darstellung ist etwas grÃ¶ÃŸer dargestellt und etwas nach rechts und unten versetzt.",
+      "metrics": {
+        "normalized_mse": 0.051686979830265045,
+        "foreground_mse": 0.21788451075553894,
+        "edge_alignment": 0.15083201229572296,
+        "foreground_iou": 0.03576158940397351
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "ba3b55ef17dfc80c380d7bc756971d0b070054fb5b661a970ad189db0310ee3f",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_14",
+      "input_sha256": "9a02e4f3d5fa8e487aa2f7f9117c92eaa3865ebf94b1e9f2a24a48953500da35",
+      "reference_svg_sha256": "bb4fdee32479871df6d3e70ba49074af9f06ba1495025f9003cfa4416f34eefc",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die Darstellung ist ein wenig grÃ¶ÃŸer dargestellt und geringfÃ¼gig nach links und oben verschoben.",
+      "metrics": {
+        "normalized_mse": 0.051539402455091476,
+        "foreground_mse": 0.20810964703559875,
+        "edge_alignment": 0.1437019258737564,
+        "foreground_iou": 0.03164556962025317
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "18ed5543538dca40f64142c858f3f0d29172dc441d22f8782d0665780be09f77",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_15",
+      "input_sha256": "301f9f1292185bbba28198304f462445057bb38d286648cc26930989a5c491c0",
+      "reference_svg_sha256": "cc6c6c8b32de61d05bbf058b5d7eb4b69b325e986641940b231648184a7221f8",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die gesamte Darstellung ist geringfÃ¼gig grÃ¶ÃŸer dargestellt und geringfÃ¼gig nach links und unten verschoben.",
+      "metrics": {
+        "normalized_mse": 0.051746100187301636,
+        "foreground_mse": 0.22799915075302124,
+        "edge_alignment": 0.16250862181186676,
+        "foreground_iou": 0.037396121883656507
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "a7f8a11c58cfcb2925af134ab13a8c4f59edf6678f4a5ff81a99cc017e84a28d",
+      "satisfactory": false
+    },
+    {
+      "case_id": "probe_16",
+      "input_sha256": "a537b9578e9ed1d079066753d1bcd646da5fce45e18da2beff3304d90579f70b",
+      "reference_svg_sha256": "ce1f4e65a335dd201382f3f657ff4da69e4cbd3ec082bc3637a68f039064c762",
+      "description": "Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Die gesamte Darstellung ist etwas kleiner dargestellt und etwas nach rechts und unten versetzt.",
+      "metrics": {
+        "normalized_mse": 0.04624449834227562,
+        "foreground_mse": 0.21868778765201569,
+        "edge_alignment": 0.1488596498966217,
+        "foreground_iou": 0.038461538461538464
+      },
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "output_sha256": "f30c9b78d00fc22c086ce9e0b7da74236a33c2d20c3023c949704ad92180cd39",
+      "satisfactory": false
+    }
+  ],
+  "initial_artifacts": "artifacts\\evaluation\\plan_b_variations\\ge9013-package-2026-10-07",
+  "replay_artifacts": "artifacts\\evaluation\\plan_b_variations\\ge9013-package-2026-10-07-replay",
+  "followup": "PB-RANDOM-2026-10-07: standalone geometric description and catalog-free reconstruction of circle, connector, framed diagram, and step curve",
+  "generated_runs_tracked": false
+}

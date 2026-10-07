@@ -555,3 +555,5 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – Telemetrie-Alias-Verifikationsbeleg Run ACF (2026-08-03)](next_arbeitspaket_2026-08-03_runACF.md)
 - [Nächstes Arbeitspaket – Telemetrie-Alias-Verifikationsgate Run ACG (2026-08-03)](next_arbeitspaket_2026-08-03_runACG.md)
 - [Arbeitspaket – GE1003_M Haken vor grauer Kreisscheibe (2026-10-05)](next_arbeitspaket_2026-10-05_ge1003_m.md)
+
+- [Arbeitspaket – GE9013_6M Pfeil nach unten und randomisierte Plan-B-Folge (2026-10-07)](next_arbeitspaket_2026-10-07_ge9013_6m.md)

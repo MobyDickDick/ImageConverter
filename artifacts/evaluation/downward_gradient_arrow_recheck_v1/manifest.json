@@ -1,0 +1,137 @@
+{
+  "schema_version": "downward_gradient_arrow_recheck_manifest_v1",
+  "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+  "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+  "cases": [
+    {
+      "case_id": "foreign_down_arrow_00",
+      "variant": "GE9013_1M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9013_1M.jpg",
+      "before_svg": "before/foreign_down_arrow_00.svg",
+      "after_svg": "after/foreign_down_arrow_00.svg"
+    },
+    {
+      "case_id": "foreign_down_arrow_01",
+      "variant": "GE9013_1S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9013_1S.jpg",
+      "before_svg": "before/foreign_down_arrow_01.svg",
+      "after_svg": "after/foreign_down_arrow_01.svg"
+    },
+    {
+      "case_id": "foreign_down_arrow_02",
+      "variant": "GE9013_2M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9013_2M.jpg",
+      "before_svg": "before/foreign_down_arrow_02.svg",
+      "after_svg": "after/foreign_down_arrow_02.svg"
+    },
+    {
+      "case_id": "foreign_down_arrow_03",
+      "variant": "GE9013_2S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9013_2S.jpg",
+      "before_svg": "before/foreign_down_arrow_03.svg",
+      "after_svg": "after/foreign_down_arrow_03.svg"
+    },
+    {
+      "case_id": "foreign_down_arrow_04",
+      "variant": "GE9013_3M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9013_3M.jpg",
+      "before_svg": "before/foreign_down_arrow_04.svg",
+      "after_svg": "after/foreign_down_arrow_04.svg"
+    },
+    {
+      "case_id": "foreign_down_arrow_05",
+      "variant": "GE9013_3S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9013_3S.jpg",
+      "before_svg": "before/foreign_down_arrow_05.svg",
+      "after_svg": "after/foreign_down_arrow_05.svg"
+    },
+    {
+      "case_id": "foreign_down_arrow_06",
+      "variant": "GE9013_4M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9013_4M.jpg",
+      "before_svg": "before/foreign_down_arrow_06.svg",
+      "after_svg": "after/foreign_down_arrow_06.svg"
+    },
+    {
+      "case_id": "foreign_down_arrow_07",
+      "variant": "GE9013_4S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9013_4S.jpg",
+      "before_svg": "before/foreign_down_arrow_07.svg",
+      "after_svg": "after/foreign_down_arrow_07.svg"
+    },
+    {
+      "case_id": "foreign_down_arrow_08",
+      "variant": "GE9013_5M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9013_5M.jpg",
+      "before_svg": "before/foreign_down_arrow_08.svg",
+      "after_svg": "after/foreign_down_arrow_08.svg"
+    },
+    {
+      "case_id": "foreign_down_arrow_09",
+      "variant": "GE9013_5S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9013_5S.jpg",
+      "before_svg": "before/foreign_down_arrow_09.svg",
+      "after_svg": "after/foreign_down_arrow_09.svg"
+    },
+    {
+      "case_id": "foreign_down_arrow_10",
+      "variant": "GE9013_6M",
+      "role": "development",
+      "image": "../../images_to_convert/GE9013_6M.jpg",
+      "before_svg": "before/foreign_down_arrow_10.svg",
+      "after_svg": "after/foreign_down_arrow_10.svg"
+    },
+    {
+      "case_id": "foreign_down_arrow_11",
+      "variant": "GE9013_6S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9013_6S.jpg",
+      "before_svg": "before/foreign_down_arrow_11.svg",
+      "after_svg": "after/foreign_down_arrow_11.svg"
+    },
+    {
+      "case_id": "foreign_down_arrow_12",
+      "variant": "GE9013_7M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9013_7M.jpg",
+      "before_svg": "before/foreign_down_arrow_12.svg",
+      "after_svg": "after/foreign_down_arrow_12.svg"
+    },
+    {
+      "case_id": "foreign_down_arrow_13",
+      "variant": "GE9013_7S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9013_7S.jpg",
+      "before_svg": "before/foreign_down_arrow_13.svg",
+      "after_svg": "after/foreign_down_arrow_13.svg"
+    }
+  ],
+  "provenance": {
+    "commit": "073d8eea2af0c9498aa407b10bb30f3977f4b9a8",
+    "seed": 0,
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0",
+    "execution_mode": "semantic-only",
+    "baseline_mode": "original description versus standalone downward arrow description and raster registration",
+    "source_sha256": {
+      "src/iCCModules/imageCompositeConverterGradientArrow.py": "063bdb6fe82ca35c7b6d93758279d35c821c4d9985ddbf5c7c1ab04b0df843c3",
+      "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "d4288d99dab6c2fc8a074f86154e40a527fab03b18621905fbbe5bd9fdc86c10",
+      "tools/run_downward_gradient_arrow_recheck.py": "4513b76ef728b0915ce1a7a1348e5de8ec7a8be1b1b55c4c03d7377ac3bf6aea",
+      "tools/evaluate_downward_gradient_arrow_recheck.py": "1df1d28c8947fafab21b9d9d61b2f1c0413700605ca875ec33dea9206eb1b0b3",
+      "tools/evaluate_gradient_arrow_recheck.py": "068d1061ff38f7134187ad7ccdf8f9712f7b9a200392ed42ea4eae671ce68dea",
+      "tools/run_plan_b_variations.py": "63b416c9bbf9600198aa8bef8484c229a2fe000a9d6c0bfe1b803b597f3bb648",
+      "tests/test_downward_gradient_arrow_runtime.py": "18e15017f241341862c015e4f4337093bcfa06bde5c54a073f58bbbdf98ac0ec",
+      "tests/detailtests/test_plan_b_variations.py": "90341457301e87594283cd14331d1cbce0eaecbb7252fa6dc9f683d42d8e39f8",
+      "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml": "0b65e670a5251ca5cddac0ef2ebd8b8be44b13333b7f3535720e8883c60a422e"
+    }
+  }
+}
