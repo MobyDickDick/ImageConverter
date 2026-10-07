@@ -506,7 +506,11 @@ def runMainImpl(
     if bool(getattr(args, "_render_svg_subprocess", False)):
         return run_svg_render_subprocess_entrypoint_fn()
 
-    auto_enable_isolated_render = bool(getattr(args, "ac08_regression_set", False) or _isFullAc08Range(args))
+    render_setting = os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "").strip().lower()
+    auto_enable_isolated_render = (
+        render_setting not in {"0", "false", "no", "off"}
+        and bool(getattr(args, "ac08_regression_set", False) or _isFullAc08Range(args))
+    )
     if bool(args.isolate_svg_render) or auto_enable_isolated_render:
         set_svg_render_subprocess_enabled_fn(True)
         if auto_enable_isolated_render and not bool(args.isolate_svg_render):

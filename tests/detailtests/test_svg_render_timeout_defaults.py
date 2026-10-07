@@ -67,6 +67,19 @@ def test_svg_render_subprocess_defaults_activate_when_pytest_env_is_inherited() 
     assert completed.stdout.strip() == "1 5.0"
 
 
+def test_svg_render_subprocess_explicit_disable_is_honored_under_pytest() -> None:
+    root = Path(__file__).resolve().parents[2]
+    env = os.environ.copy()
+    env['IMAGE_CONVERTER_ISOLATE_SVG_RENDER'] = '0'
+    env['PYTEST_CURRENT_TEST'] = 'render-config::explicit-disable'
+    completed = subprocess.run(
+        [sys.executable, '-c',
+         'import src.imageCompositeConverter as m; print(int(m.SVG_RENDER_SUBPROCESS_ENABLED))'],
+        cwd=root, env=env, check=True, capture_output=True, text=True,
+    )
+    assert completed.stdout.strip() == '0'
+
+
 def test_svg_render_subprocess_inherits_runtime_pythonpath(monkeypatch) -> None:
     from src.iCCModules import imageCompositeConverterRendering as rendering
 

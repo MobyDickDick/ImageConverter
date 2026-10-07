@@ -8,6 +8,8 @@ import sys
 from pathlib import Path
 from unittest import mock
 
+import pytest
+
 from src.iCCModules import imageCompositeConverterCli as cli_helpers
 
 
@@ -420,7 +422,12 @@ def test_run_main_impl_convert_mode_invokes_convert_with_selected_variants() -> 
     assert convert_args[12] is True
 
 
-def test_run_main_impl_auto_enables_isolated_render_for_ac08_regression_set() -> None:
+@pytest.mark.parametrize('disable_isolation', [False, True])
+def test_run_main_impl_auto_enables_isolated_render_for_ac08_regression_set(monkeypatch, disable_isolation) -> None:
+    if disable_isolation:
+        monkeypatch.setenv('IMAGE_CONVERTER_ISOLATE_SVG_RENDER', '0')
+    else:
+        monkeypatch.delenv('IMAGE_CONVERTER_ISOLATE_SVG_RENDER', raising=False)
     args = argparse.Namespace(
         _render_svg_subprocess=False,
         isolate_svg_render=False,
@@ -466,12 +473,13 @@ def test_run_main_impl_auto_enables_isolated_render_for_ac08_regression_set() ->
         )
 
     assert rc == 0
-    assert calls["enabled"] is True
+    assert calls.get("enabled", False) is (not disable_isolation)
     assert calls["timeout"] == 5.0
-    assert "aktiviert isoliertes SVG-Rendering automatisch" in stdout.getvalue()
+    assert ("aktiviert isoliertes SVG-Rendering automatisch" in stdout.getvalue()) is (not disable_isolation)
 
 
-def test_run_main_impl_auto_enables_isolated_render_for_full_ac08_range() -> None:
+def test_run_main_impl_auto_enables_isolated_render_for_full_ac08_range(monkeypatch) -> None:
+    monkeypatch.delenv('IMAGE_CONVERTER_ISOLATE_SVG_RENDER', raising=False)
     args = argparse.Namespace(
         _render_svg_subprocess=False,
         isolate_svg_render=False,

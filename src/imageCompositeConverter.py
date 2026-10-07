@@ -163,7 +163,7 @@ SVG_RENDER_SUBPROCESS_ENABLED = os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_REND
     "yes",
     "on",
 }
-if not SVG_RENDER_SUBPROCESS_ENABLED and _UNDER_PYTEST_RUNTIME:
+if not SVG_RENDER_SUBPROCESS_ENABLED and _UNDER_PYTEST_RUNTIME and not SVG_RENDER_SUBPROCESS_EXPLICIT:
     # PyMuPDF can intermittently segfault in long in-process render loops during
     # the full test suite. Use the existing isolated renderer by default for
     # pytest-driven runs (including subprocess children inheriting pytest env)

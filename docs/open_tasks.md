@@ -4388,3 +4388,7 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Qualität:** Die isolierte SE0041_1-Metrik bleibt gegenüber Run TS/VZ stabil bei `Mean-Delta²=2436.707764` (`Fehler/Pixel=0.015932`), weil keine neue Konturstärkenprobe den bisherigen Stand weiter verbessert.
 - **Perception-Lerneffekt:** `SE0041_1` bleibt `nur Sonderfall`; die Änderung verallgemeinert die nachgelagerte Rechteck-/Rule-Konturregistrierung, nicht die reine Bilddetektion.
 - **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste zu `GE9012_6M` rotieren oder weiteres allgemeines Rechteck-/BackBottom-Antialiasing-Feintuning untersuchen.
+
+## Automatisch erzeugte Folgeaufgaben (Konvertierungsfehler)
+- [ ] AUFGABE: Fehleranalyse `AC0833_L` (status=poor_conversion_placeholder_svg, reason=trivial_placeholder_svg) und Gegenmaßnahme ableiten.
+

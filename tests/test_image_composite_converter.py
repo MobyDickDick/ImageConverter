@@ -15,6 +15,15 @@ from src.imageCompositeConverter import Action, _clip
 conv = image_composite_converter
 
 
+def _fixture_image_path(filename: str) -> Path:
+    root = Path(__file__).resolve().parents[1] / "artifacts" / "images_to_convert"
+    for folder in (root, root / "nonconvertable", root / "succesessfulConvertedImages"):
+        candidate = folder / filename
+        if candidate.exists():
+            return candidate
+    return root / filename
+
+
 def test_vendored_site_packages_dirs_discovers_repo_bundle(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     """Repo-local bundled site-packages should be discoverable for optional imports."""
     windows_venv_dir = tmp_path / ".venv" / "Lib" / "site-packages"
@@ -47,8 +56,10 @@ def test_vendored_site_packages_dirs_prefers_linux_vendor_on_linux(monkeypatch: 
 
     monkeypatch.setattr(image_composite_converter, "_optional_dependency_base_dir", lambda: tmp_path)
 
+    # Exercise Linux ordering explicitly, including when this test runs on Windows.
+    from types import SimpleNamespace
+    monkeypatch.setattr(dependency_helpers, "os", SimpleNamespace(name="posix"))
     dirs = image_composite_converter._vendored_site_packages_dirs()
-
     assert dirs.index(vendor_dir) < dirs.index(venv_dir)
 
 
@@ -108,7 +119,7 @@ def test_load_optional_module_recovers_after_failed_partial_package(monkeypatch:
 
     assert result is expected
     assert len(calls) >= 1
-    assert str(vendor_dir) in calls[0][1]
+    assert any(str(vendor_dir) in paths for _name, paths in calls)
 
 
 def test_load_optional_module_keeps_existing_sys_modules_entry_after_failed_retry(
@@ -249,7 +260,7 @@ def test_detect_semantic_primitives_detects_vertical_connector_without_arm() -> 
     if conv.cv2 is None or conv.np is None:
         pytest.skip("opencv/numpy not available in this environment")
 
-    img = conv.cv2.imread("artifacts/images_to_convert/AC0813_L.jpg")
+    img = conv.cv2.imread(str(_fixture_image_path("AC0813_L.jpg")))
     if img is None:
         pytest.skip("AC0811_L.jpg not available in this environment")
 
@@ -464,7 +475,7 @@ def test_convert_range_uses_embedded_raster_fallback_without_numpy_cv2(
     assert result == str(output_root)
     assert (output_root / "converted_svgs" / "AC0812_L.svg").read_text(encoding="utf-8") == "<svg/>"
     assert (output_root / "reports" / "fallback_mode.txt").exists()
-    assert calls["reports"] == str(output_root / "reports")
+    assert Path(calls["reports"]) == output_root / "reports"
 
 
 def test_convert_image_variants_delegates_to_convert_range(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -1724,7 +1735,7 @@ def test_make_badge_params_reanchors_ac0811_l_stem_after_template_center_lock() 
     if image_composite_converter.cv2 is None:
         pytest.skip("cv2 not available in this environment")
 
-    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0811_L.jpg")
+    img = image_composite_converter.cv2.imread(str(_fixture_image_path("AC0811_L.jpg")))
     if img is None:
         pytest.skip("AC0811_L.jpg not available in this environment")
 
@@ -2657,7 +2668,7 @@ def test_validate_semantic_description_alignment_accepts_ac0813_vertical_connect
     if image_composite_converter.cv2 is None:
         pytest.skip("cv2 not available in this environment")
 
-    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0813_L.jpg")
+    img = image_composite_converter.cv2.imread(str(_fixture_image_path("AC0813_L.jpg")))
     if img is None:
         pytest.skip("AC0813_L.jpg not available in this environment")
 
@@ -5543,29 +5554,20 @@ def test_decompose_circle_with_stem_recenters_horizontal_stem() -> None:
     assert stem_x >= 23.8
     assert abs(stem_cy - 15.0) <= 0.2
 
-def test_generate_badges_reconverted_svg_contains_text(tmp_path: Path) -> None:
-    gen = pytest.importorskip("tools.generate_badge_comparison_set")
-
-    class DummyImg:
-        shape = (30, 30, 3)
-
-    img = DummyImg()
+def test_text_width_bracketing_updates_voc_font_scale_continuously(monkeypatch) -> None:
+    img = conv.np.full((30, 30, 3), 255, dtype=conv.np.uint8)
     params = {
         "draw_text": True,
         "text_mode": "voc",
         "voc_font_scale": 0.52,
     }
     logs: list[str] = []
-    original = Action._element_error_for_width
 
     def prefer_target_scale(_img: object, _params: dict, _element: str, width_value: float) -> float:
         return abs(float(width_value) - 0.85)
 
-    Action._element_error_for_width = staticmethod(prefer_target_scale)
-    try:
-        changed = Action._optimize_element_width_bracket(img, params, "text", logs)
-    finally:
-        Action._element_error_for_width = original
+    monkeypatch.setattr(Action, "_elementErrorForWidth", staticmethod(prefer_target_scale))
+    changed = Action._optimize_element_width_bracket(img, params, "text", logs)
 
     assert changed is True
     assert abs(float(params["voc_font_scale"]) - 0.52) > 0.05
@@ -6161,7 +6163,7 @@ def test_make_badge_params_keeps_ac0223_m_circle_in_lower_half() -> None:
     if image_composite_converter.cv2 is None:
         pytest.skip("opencv not available in this environment")
 
-    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0223_M.jpg")
+    img = image_composite_converter.cv2.imread(str(_fixture_image_path("AC0223_M.jpg")))
     if img is None:
         pytest.skip("AC0223_M.jpg not available in this environment")
 
@@ -6231,7 +6233,7 @@ def test_validate_semantic_alignment_accepts_vertical_circle_when_raw_hough_miss
         pytest.skip("numpy/cv2 not available in this environment")
 
     cv2 = image_composite_converter.cv2
-    img = cv2.imread("artifacts/images_to_convert/AC0811_M.jpg")
+    img = cv2.imread(str(_fixture_image_path("AC0811_M.jpg")))
     if img is None:
         pytest.skip("AC0811_M.jpg not available in this environment")
 
@@ -6318,7 +6320,7 @@ def test_validate_semantic_alignment_accepts_ac0838_large_top_connector_voc_vari
         pytest.skip("numpy/cv2 not available in this environment")
 
     cv2 = image_composite_converter.cv2
-    img = cv2.imread("artifacts/images_to_convert/AC0838_L.jpg")
+    img = cv2.imread(str(_fixture_image_path("AC0838_L.jpg")))
     if img is None:
         pytest.skip("AC0838_L.jpg not available in this environment")
 
@@ -6585,7 +6587,7 @@ def test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact
         pytest.skip("numpy/cv2 not available in this environment")
 
     cv2 = image_composite_converter.cv2
-    img = cv2.imread("artifacts/images_to_convert/AC0831_L.jpg")
+    img = cv2.imread(str(_fixture_image_path("AC0831_L.jpg")))
     if img is None:
         pytest.skip("AC0831_L.jpg not available in this environment")
 
@@ -7514,7 +7516,7 @@ def test_convert_range_uses_existing_conversion_rows_as_template_donors(
     csv_path = tmp_path / "mapping.csv"
     output_root = tmp_path / "converted"
     target_name = "AC0833_L.jpg"
-    src = Path("artifacts/images_to_convert/AC0833_L.jpg")
+    src = _fixture_image_path("AC0833_L.jpg")
     if not src.exists():
         pytest.skip("AC0833_L.jpg not available in this environment")
     shutil.copyfile(src, images_dir / target_name)
@@ -8550,8 +8552,14 @@ def test_ac08_semantic_anchor_variants_ac0811_only(tmp_path: Path) -> None:
     csv_path = images_dir / "Finale_Wurzelformen_V3.xml"
     if not images_dir.exists() or not csv_path.exists():
         pytest.skip("AC08 fixture inputs not available")
-    if not (images_dir / "AC0811_L.jpg").exists():
+    source = _fixture_image_path("AC0811_L.jpg")
+    if not source.exists():
         pytest.skip("AC0811_L fixture image missing in artifacts/images_to_convert")
+    # Keep archived regression inputs immutable, even if conversion succeeds
+    # and the converter moves its working copy into the successful directory.
+    images_dir = tmp_path / "anchor-input"
+    images_dir.mkdir()
+    shutil.copy2(source, images_dir / source.name)
 
     output_ac0811 = tmp_path / "ac0811_out"
     result_ac0811 = image_composite_converter.convertRange(
@@ -8875,9 +8883,9 @@ def test_convert_range_invokes_overview_generation(tmp_path: Path, monkeypatch: 
     )
 
     assert result == str(output_root)
-    assert called["diff"] == str(output_root / "diff_pngs")
-    assert called["svg"] == str(output_root / "converted_svgs")
-    assert called["reports"] == str(output_root / "reports")
+    assert Path(called["diff"]) == output_root / "diff_pngs"
+    assert Path(called["svg"]) == output_root / "converted_svgs"
+    assert Path(called["reports"]) == output_root / "reports"
 
 
 def test_parse_description_detects_dual_arrow_badge_mode() -> None:

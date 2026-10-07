@@ -18,6 +18,10 @@ from src.iCCModules.imageCompositeConverterPump import fit_pump_geometry
 from src.iCCModules.imageCompositeConverterLabeledSquare import fit_labeled_square
 from src.iCCModules.imageCompositeConverterCheckmark import fit_checkmark_disk
 from src.iCCModules.imageCompositeConverterTriangleStem import fit_triangle_stem
+from src.iCCModules.imageCompositeConverterDotPanel import fit_dot_panel
+from src.iCCModules.imageCompositeConverterGradientArrow import fit_gradient_arrow
+from src.iCCModules.imageCompositeConverterStepDiagram import fit_step_diagram
+from src.iCCModules.imageCompositeConverterRadialDisk import fit_radial_disk
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -884,6 +888,13 @@ def _fit_symbol_element_by_element(
         # variant afterwards, so the rendered direction must follow the
         # transformed image rather than the unrotated wording.
         diagonal_tl_br, diagonal_tr_bl = diagonal_tr_bl, diagonal_tl_br
+    if has_center_dot and not (has_plus or has_minus or has_both_diagonals) and (diagonal_tl_br or diagonal_tr_bl):
+        registered = fit_dot_panel(
+            width=width, height=height, image=perc_img, descending=diagonal_tl_br,
+            render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
+        )
+        if registered is not None:
+            return registered
     if "diagon" in description_text:
         current["diag1_width"] = float(current["diag1_width"]) if (diagonal_tr_bl or not diagonal_tl_br) else 0.0
         current["diag2_width"] = float(current["diag1_width"] or 1.4) if (diagonal_tl_br or has_both_diagonals) else 0.0
@@ -1388,6 +1399,20 @@ def runNonCompositeIterationImpl(
     calculate_error_fn,
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
+    if mode == "non_composite":
+        for fit_fn, status in (
+            (fit_gradient_arrow, "non_composite_raster_gradient_arrow"),
+            (fit_step_diagram, "non_composite_raster_step_diagram"),
+            (fit_radial_disk, "non_composite_raster_radial_disk"),
+        ):
+            fitted = fit_fn(
+                width, height, description=description, image=perc_img,
+                render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
+            )
+            if fitted is not None:
+                write_validation_log_fn([f"status={status}"])
+                write_attempt_artifacts_fn(fitted['svg'], fitted['rendered'])
+                return base_name, description, params, 1, fitted['error']
     algorithmic_description_available = mode != "manual_review" and _has_description_driven_symbol_algorithm(description)
     sample_svg = (
         None
@@ -1703,11 +1728,16 @@ def runNonCompositeIterationImpl(
                 else:
                     description_error = calculate_error_fn(perc_img, description_rendered)
                     optimizer_result = None
-                    # The disk/checkmark fitter registers a constrained topology
+                    # The specialized fitters register a constrained topology
                     # from raw evidence. Independent generic element probes can
                     # distort its background and layering before that fit.
                     if (hasattr(perc_img, "shape")
-                            and not any(e.get('role') == 'checkmark_disk' or e.get('kind') == 'TriangleStemGlyph' for e in description_geometry_ir)) and (
+                            and not any(
+                                e.get('role') == 'checkmark_disk'
+                                or e.get('kind') == 'TriangleStemGlyph'
+                                or (e.get('kind') == 'UprightSquareKelleGlyph' and len(str(e.get('label', ''))) == 1)
+                                for e in description_geometry_ir
+                            )) and (
                         not _is_description_heat_exchanger_geometry(description_geometry_ir)
                         or _description_reuses_reference_family(description)
                     ):
