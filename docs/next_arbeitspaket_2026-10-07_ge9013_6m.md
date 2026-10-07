@@ -89,7 +89,8 @@ Topologie erarbeiten, dann denselben eingefrorenen Lauf erneut prüfen. Dieser
 Befund ist kein Pass und wird durch die grüne Pfeilabnahme nicht verdeckt.
 
 Der kompakte versionierte Beleg steht in
-`artifacts/evaluation/downward_gradient_arrow_recheck_v1/random_plan_b_2026-10-07.json`.
+`artifacts/evaluation/downward_gradient_arrow_recheck_v1/summary_2026-10-07.json`
+unter `random_plan_b`.
 Die vollständigen generierten Läufe bleiben gemäß `.gitignore` lokal unter
 `artifacts/evaluation/plan_b_variations/ge9013-package-2026-10-07[-replay]/`.
 
@@ -97,8 +98,9 @@ Die vollständigen generierten Läufe bleiben gemäß `.gitignore` lokal unter
 
 ```powershell
 python -m tools.run_downward_gradient_arrow_recheck artifacts/evaluation/downward_gradient_arrow_recheck_v1/manifest.json --output-dir .tmp/downward-arrow-reproduction
-python -m tools.evaluate_downward_gradient_arrow_recheck artifacts/evaluation/downward_gradient_arrow_recheck_v1/manifest.json --output .tmp/downward-arrow-gates.json
-python -m tools.run_plan_b_variations --svg artifacts/evaluation/plan_b_variations/ge9013-package-2026-10-07/source.svg --description-file artifacts/evaluation/plan_b_variations/ge9013-package-2026-10-07/source_description.txt --seed 3948009396310964094 --output-dir .tmp/random-plan-b-reproduction
+python -m tools.evaluate_downward_gradient_arrow_recheck .tmp/downward-arrow-reproduction/manifest.json --output .tmp/downward-arrow-gates.json
+python -c "import json; from pathlib import Path; d=json.loads(Path('artifacts/evaluation/downward_gradient_arrow_recheck_v1/summary_2026-10-07.json').read_text(encoding='utf-8')); Path('.tmp/random-description.txt').write_text(d['random_plan_b']['source_description'], encoding='utf-8')"
+python -m tools.run_plan_b_variations --svg artifacts/images_to_convert/samples/AC0538_1L_sia.svg --description-file .tmp/random-description.txt --seed 3948009396310964094 --output-dir .tmp/random-plan-b-reproduction
 python -m pytest -q tests/test_downward_gradient_arrow_runtime.py tests/test_gradient_arrow_runtime.py tests/detailtests/test_plan_b_variations.py
 python -m compileall -q src tests tools
 python -m pytest -q
@@ -108,9 +110,16 @@ python -m tools.check_no_new_image_id_hardcoding
 
 Die lokale Toolchain ist CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0 und
 PyMuPDF 1.26.7. Ein temporärer Bootstrap lädt diese Bibliotheken vor der alten
-Virtualenv. Manifest, Quellhashes, versiegelte Baseline, 28 CLI-SVGs, CLI-Logs,
-Gates und Reproduktionsbeleg liegen unter
-`artifacts/evaluation/downward_gradient_arrow_recheck_v1/`.
+Virtualenv. Versioniert werden nur `manifest.json` und
+`summary_2026-10-07.json` unter
+`artifacts/evaluation/downward_gradient_arrow_recheck_v1/`. Das Manifest enthält
+Eingaben und Quellhashes; die Zusammenfassung bewahrt Metriken, Gateentscheidungen,
+SVG-/Eingabehashes, Testsignale, Zufallsbefund und den vollständigen Review-Aufruf.
+Die 28 CLI-SVGs, Logs, versiegelte Baseline und vollständigen Review-Tabellen
+bleiben lokal und sind von Git ausgeschlossen. Der erste Reprobefehl erzeugt
+die SVGs, Baseline und vollständigen Gates in einem frischen Verzeichnis;
+die folgenden Befehle benötigen keine unversionierten Originalausgaben.
+Vor dem Zufalls-Replay sind die Quellhashes mit der Zusammenfassung abzugleichen.
 
 ## Testabschluss
 
@@ -118,7 +127,8 @@ Gates und Reproduktionsbeleg liegen unter
 vollständige Defaultprofil meldet `1681 passed, 29 skipped`
 ohne Warnungen; die bestehenden Windows-Skips betreffen POSIX-Shell-Integration.
 Syntaxprüfung, CLI-Help und Runtime-ID-Nullprüfung sind grün (`0 occurrences`).
-Die genaue Toolchain und Testsignale stehen in `completion_2026-10-07.json`.
+Die genaue Toolchain und Testsignale stehen unter `completion` in
+`summary_2026-10-07.json`.
 
 Der erste Gesamtlauf hatte drei Fehler: Der neue echte Worker-Test erbte den
 Pytest-Marker und aktivierte damit die separate Renderer-Probe pro Versuch;
@@ -142,7 +152,8 @@ Startbefehl: Wiederholungsbefehl für Seed `3948009396310964094` aus diesem Doku
 Der erneuerte Review enthält 956 Einträge, davon 950 renderbare Paare; sechs
 fehlende Paare bleiben sichtbar. Alle zuvor separat belegten Pässe und die
 14 aktuellen Pfeilvarianten sind aus der Kandidatenauswahl ausgeschlossen.
-Der reproduzierbare Aufruf steht in `review_reproduction_2026-10-07.json`.
+Der reproduzierbare Aufruf steht unter `review.reproduction_arguments` in
+`summary_2026-10-07.json`; die vollständigen Review-Ausgaben bleiben lokal.
 Die nächste reguläre Rotation beginnt mit `AC0554_1_L`, gefolgt von `DLG0031`,
 `DLG0021`, `GE1420_S` und `AC0704_1_L`. Vor weiteren Änderungen ist eine frische
 CLI-Baseline zu prüfen. Die randomisierte Folgeaufgabe bleibt unabhängig offen.

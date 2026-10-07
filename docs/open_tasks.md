@@ -29,7 +29,7 @@ Die gekoppelte zufällige Plan-B-Auswahl (`AC0538_1L_sia`, Seed
 laufen 16/16 CLI-Konvertierungen ohne verbotenen SVG-Zugriff, aber 0/16
 bestehen die unveränderten Qualitätsgrenzen. Die bisherige Beschreibung nennt
 keine konkrete Symbolgeometrie. Der maschinenlesbare Einzelbefund steht in
-`artifacts/evaluation/downward_gradient_arrow_recheck_v1/random_plan_b_2026-10-07.json`.
+`artifacts/evaluation/downward_gradient_arrow_recheck_v1/summary_2026-10-07.json`.
 
 - [ ] **PB-RANDOM-2026-10-07:** Eigenständige Beschreibung und katalogfreie
   Rekonstruktion für Kreis, Verbindung, gerahmtes Diagramm und helle Stufenkurve

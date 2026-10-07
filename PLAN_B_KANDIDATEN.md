@@ -92,11 +92,12 @@ die Pfeilstruktur jetzt eigenständig. Details:
 
 Die nächste reguläre Rotation beginnt mit `AC0554_1_L` und muss zunächst eine
 frische CLI-Baseline statt des historischen Sammelwerts prüfen. Der erneuerte
-Review über 956 Einträge (950 renderbare Paare, sechs fehlende Paare) steht unter
-`artifacts/evaluation/downward_gradient_arrow_recheck_v1/full_review/`.
-Alle zuvor separat belegten Gate-Passes und sämtliche 14 aktuellen
-Pfeilvarianten sind ausgeschlossen; der genaue Aufruf steht in
-`review_reproduction_2026-10-07.json`.
+Review über 956 Einträge (950 renderbare Paare, sechs fehlende Paare) ist in
+`artifacts/evaluation/downward_gradient_arrow_recheck_v1/summary_2026-10-07.json`
+zusammengefasst. Alle zuvor separat belegten Gate-Passes und sämtliche 14
+aktuellen Pfeilvarianten sind ausgeschlossen; der genaue Review-Aufruf
+steht dort unter `review.reproduction_arguments`. Vollständige Tabellen
+bleiben lokal und werden nicht versioniert.
 
 Die gekoppelte randomisierte Plan-B-Auswahl `AC0538_1L_sia` mit Seed
 `3948009396310964094` bleibt mit **0/16 Qualitäts-Pässen** offen. Die korrigierte
