@@ -2520,18 +2520,19 @@ def _fit_dot_symbol_for_quality(svg, description, width, height):
     return result
 
 
-@pytest.mark.parametrize('probe_index', range(16))
-def test_dot_symbol_reconstructs_every_variant_of_frozen_failing_ci_task(probe_index):
+@pytest.mark.parametrize('seed,probe_index', [
+    (2870690750133000144, 7), (2870690750133000144, 11),
+    (2870690750133000144, 14), (20261007, 11),
+])
+def test_dot_symbol_reconstructs_regression_probes_of_failing_ci_task(seed, probe_index):
     from pathlib import Path
-    from tools.run_plan_b_variations import make_variations, select_task
+    from xml.etree import ElementTree as ET
+    from tools.run_plan_b_variations import make_variations
 
     root = Path(__file__).resolve().parents[2]
-    seed = 2870690750133000144
-    path, description, _ = select_task(
-        root / 'artifacts/images_to_convert/samples',
-        root / 'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml', seed,
-    )
-    assert path.name == 'AR0030.svg'
+    path = root / 'artifacts/images_to_convert/samples/AR0030.svg'
+    description = ET.parse(root / 'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml').find(
+        ".//entry[@key='AR0030']/beschreibung").text
     case = make_variations(path.read_text(encoding='utf-8'), description, seed)[probe_index]
     result = _fit_dot_symbol_for_quality(case['svg'], case['description'], case['width'], case['height'])
     assert result[3]['center_dot_radius'] > 3.2

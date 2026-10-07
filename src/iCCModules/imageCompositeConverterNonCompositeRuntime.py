@@ -1092,17 +1092,23 @@ def _fit_symbol_element_by_element(
         return None
     if (has_center_dot and "farbverlauf" in description_text and min(width, height) >= 5
             and bool(current['diag1_width']) != bool(current['diag2_width'])):
-        registered, registered_params, registration_logs = _refine_center_dot_symbol(
-            width, height, perc_img, current,
-            render_svg_to_numpy_fn, calculate_error_fn,
-        )
+        # Clipped frames and white margins make different initial estimates
+        # preferable. Search both raster-derived starts; retain the smaller
+        # rendered pixel error instead of selecting by acceptance metrics.
+        starts = [
+            _refine_center_dot_symbol(
+                width, height, perc_img, current,
+                render_svg_to_numpy_fn, calculate_error_fn, frame_from_raster=frame_from_raster,
+            ) for frame_from_raster in (True, False)
+        ]
+        registered, registered_params, registration_logs = min(starts, key=lambda result: result[0][0])
         if np.isfinite(registered[0]) and registered[0] <= best[0]:
             best, current = registered, registered_params
         step_logs.extend(registration_logs)
     return best[0], best[1], best[2], current, step_logs
 
 
-def _refine_center_dot_symbol(width, height, image, params, render_fn, error_fn):
+def _refine_center_dot_symbol(width, height, image, params, render_fn, error_fn, *, frame_from_raster=True):
     """Register a framed gradient and its dot at the raster's scale and pose.
 
     The initial generic fit used a fixed canvas center and a 3.2-pixel radius
@@ -1116,7 +1122,11 @@ def _refine_center_dot_symbol(width, height, image, params, render_fn, error_fn)
     arr = np.asarray(image)
     lum = arr[..., :3].mean(axis=2) if arr.ndim == 3 else arr.astype(float)
     vertical = bool(current["gradient_vertical"])
-    profile = np.median(lum[1:-1, 1:-1], axis=1 if vertical else 0)
+    ys, xs = np.nonzero(lum < 251)
+    x0, x1 = (int(xs.min()), int(xs.max()) + 1) if xs.size else (0, width)
+    y0, y1 = (int(ys.min()), int(ys.max()) + 1) if ys.size else (0, height)
+    crop = lum[y0+1:max(y0+2, y1-1), x0+1:max(x0+2, x1-1)]
+    profile = np.median(crop if frame_from_raster else lum[1:-1, 1:-1], axis=1 if vertical else 0)
     peak = np.flatnonzero(profile >= profile.max() - 3)
     current.update(
         gradient_center=100 * (float(peak.min()) + 1) / (len(profile) + 1),
@@ -1125,12 +1135,17 @@ def _refine_center_dot_symbol(width, height, image, params, render_fn, error_fn)
         gradient_end=_gray_hex(float(profile[-1])),
         gradient_mid=_gray_hex(float(profile.max())),
         center_dot_x_ratio=0.5, center_dot_y_ratio=0.5,
-        frame_left=.5 + (width - 1) * float(current['rect_x_inset_ratio']),
-        frame_top=.5 + (height - 1) * float(current['rect_y_inset_ratio']),
-        frame_right=width - .5 - (width - 1) * float(current['rect_x_inset_ratio']),
-        frame_bottom=height - .5 - (height - 1) * float(current['rect_y_inset_ratio']),
+        frame_left=x0+.5, frame_top=y0+.5,
+        frame_right=x1-.5, frame_bottom=y1-.5,
         diagonal_inset_ratio=0.0,
     )
+    if not frame_from_raster:
+        current.update(
+            frame_left=.5 + (width - 1) * float(current['rect_x_inset_ratio']),
+            frame_top=.5 + (height - 1) * float(current['rect_y_inset_ratio']),
+            frame_right=width - .5 - (width - 1) * float(current['rect_x_inset_ratio']),
+            frame_bottom=height - .5 - (height - 1) * float(current['rect_y_inset_ratio']),
+        )
     axis_profile = np.median(lum, axis=1 if vertical else 0)
     background = axis_profile[:, None] if vertical else axis_profile[None, :]
     dark = (lum < background - 25).astype(np.uint8)
@@ -1153,9 +1168,11 @@ def _refine_center_dot_symbol(width, height, image, params, render_fn, error_fn)
     cy = current["center_dot_y_ratio"] * height
     exposed = ((np.abs(ys + .5 - cy) > current["center_dot_radius"] + 2)
                & (xs > 1) & (xs < width - 2) & (ys > 1) & (ys < height - 2))
+    expected_sign = -1 if current["diag1_width"] else 1
+    expected_slope = expected_sign * (x1-x0) / max(1, y1-y0)
+    exposed &= np.abs(xs + .5 - cx - expected_slope * (ys + .5 - cy)) < max(2, width * .1)
     if exposed.sum() >= 6:
         slope, intercept = np.polyfit(ys[exposed] + .5, xs[exposed] + .5, 1)
-        expected_sign = -1 if current["diag1_width"] else 1
         if slope * expected_sign > 0:
             current.update(diagonal_top_x_ratio=(intercept + slope * .5) / width,
                            diagonal_bottom_x_ratio=(intercept + slope * (height - .5)) / width,
@@ -1166,12 +1183,20 @@ def _refine_center_dot_symbol(width, height, image, params, render_fn, error_fn)
                     rows = np.unique(ys[exposed])
                     current[key] = max(.5, float(exposed.sum() / len(rows)) / np.hypot(1, slope))
 
+    render_cache = {}
+
     def evaluate(candidate):
         svg = _build_structured_symbol_svg(width, height, **candidate)
+        if svg in render_cache:
+            return render_cache[svg]
         raster = render_fn(svg, width, height)
         if raster is None:
             return float("inf"), svg, raster
-        return float(error_fn(image, raster)), svg, raster
+        result = float(error_fn(image, raster)), svg, raster
+        if len(render_cache) >= 128:
+            del render_cache[next(iter(render_cache))]
+        render_cache[svg] = result
+        return result
 
     best = evaluate(current)
     initial_error = best[0]
@@ -1179,6 +1204,7 @@ def _refine_center_dot_symbol(width, height, image, params, render_fn, error_fn)
     # Pixel-valued windows scale with the raster; the later passes resolve
     # subpixel antialiasing rather than snapping coordinates to whole pixels.
     for step in (1.0, 1.0, .5, .5, .25, .25, .125, .125):
+        step *= max(1.0, min(width, height) / 32)
         search = {
             "center_dot_radius": (step, .5, min(width, height) * .35),
             "center_dot_x_ratio": (step / width, .2, .8),
@@ -1249,7 +1275,36 @@ def _refine_center_dot_symbol(width, height, image, params, render_fn, error_fn)
         profile_error = profile_best[0]
         if np.isfinite(profile_best[0]) and profile_best[0] < best[0]:
             best, current = profile_best, candidate
+    if 'gradient_profile_stops' in current:
+        # The gradient's antialiasing depends on the frame's subpixel pose.
+        # Re-register geometry and stops together after the profile fit.
+        for factor in (1.0, .5, .5, .25, .25, .125):
+            moves = [(key, None, delta * factor, lower, upper)
+                     for key, (delta, lower, upper) in search.items()
+                     if not key.startswith('gradient_')
+                     and not (key in {'diag1_width', 'diag2_width'} and not current[key])]
+            moves += [('gradient_profile_stops', index, 1, 0, 255)
+                      for index in range(len(current['gradient_profile_stops']))]
+            for key, index, delta, lower, upper in moves:
+                old = current[key] if index is None else current[key][index][1]
+                is_color = isinstance(old, str)
+                value = float(int(old[1:3], 16)) if is_color else float(old)
+                for direction in (-1, 1):
+                    candidate = dict(current)
+                    trial = max(lower, min(upper, value + direction * delta))
+                    trial = _gray_hex(trial) if is_color else trial
+                    if index is None:
+                        candidate[key] = trial
+                    else:
+                        stops = list(current[key])
+                        stops[index] = (stops[index][0], trial)
+                        candidate[key] = tuple(stops)
+                    scored = evaluate(candidate)
+                    evaluations += 1
+                    if np.isfinite(scored[0]) and scored[0] < best[0]:
+                        best, current = scored, candidate
     return best, current, [f"dot_registration_initial_error={initial_error}",
+                           f"dot_registration_frame_from_raster={frame_from_raster}",
                            f"dot_registration_profile_error={profile_error}",
                            f"dot_registration_evaluations={evaluations}",
                            *[f"registered_{key}={value}" for key, value in sorted(current.items())]]
