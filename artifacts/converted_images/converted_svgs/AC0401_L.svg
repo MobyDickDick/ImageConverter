@@ -1,4 +1,6 @@
-<svg width="40px" height="40px" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="20.0000" cy="20.0000" r="19.0000" fill="#a1a1a1" stroke="#989898" stroke-width="2.0000"/>
-  <path d="M188 1493H678L1018 694L1360 1493H1849V0H1485V1092L1141 287H897L553 1092V0H188Z" fill="#808080" transform="translate(14.5000,12.0000) scale(0.013333,-0.013333) translate(-188,-1493)"/>
+<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <g data-output-variation="1" transform="translate(0.0351 0.0016) rotate(-0.0474 20.0000 20.0000)">
+  <ellipse id="pump_circle" cx="20.096" cy="19.936" rx="19.061" ry="18.997" fill="#e6e6e6" stroke="#909090" stroke-width="1.9"/>
+  <polygon id="pump_triangle" points="5.32,30.933 20.346,1.232 34.872,30.933" fill="#808080"/>
+  </g>
 </svg>

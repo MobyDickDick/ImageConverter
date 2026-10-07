@@ -1,0 +1,116 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Kein interaktives Terminal erkannt; verwende Bereich von '(Anfang)' bis '(Ende)'.
+[INFO] Konvertiere foreign_disk_00.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite foreign_disk_00.jpg ---
+Bildbeschreibung: Blaue Kugelform (blauer Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] foreign_disk_00.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.387387, localized_error_fraction=0.741233).
+[INFO] Konvertiert foreign_disk_00.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_00 | Qualität: Optimierungsfehler/Pixel=0.062063, Mean-Delta²=5009.374023, RGB-RMSE/Kanal=40.863080, Raumscore=13695.620534, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere foreign_disk_01.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite foreign_disk_01.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] foreign_disk_01.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=1.000000, localized_error_fraction=0.626534).
+[INFO] Konvertiert foreign_disk_01.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_01 | Qualität: Optimierungsfehler/Pixel=0.101194, Mean-Delta²=14981.222656, RGB-RMSE/Kanal=70.666406, Raumscore=37177.978311, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere foreign_disk_02.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite foreign_disk_02.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert foreign_disk_02.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_02 | Qualität: Optimierungsfehler/Pixel=0.049162, Mean-Delta²=2103.857178, RGB-RMSE/Kanal=26.481800, Raumscore=4093.905893, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere foreign_disk_03.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite foreign_disk_03.jpg ---
+Bildbeschreibung: grüner Kugelform (grüner Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] foreign_disk_03.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.504505, localized_error_fraction=0.755338).
+[INFO] Konvertiert foreign_disk_03.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_03 | Qualität: Optimierungsfehler/Pixel=0.078630, Mean-Delta²=7999.696289, RGB-RMSE/Kanal=51.638798, Raumscore=22965.357615, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere foreign_disk_04.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite foreign_disk_04.jpg ---
+Bildbeschreibung: roter Kugelform (roter Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] foreign_disk_04.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.378378, localized_error_fraction=0.715221).
+[INFO] Konvertiert foreign_disk_04.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_04 | Qualität: Optimierungsfehler/Pixel=0.066428, Mean-Delta²=5833.063477, RGB-RMSE/Kanal=44.094835, Raumscore=15367.251510, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere foreign_disk_05.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite foreign_disk_05.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie GE0285. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (—). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
+  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=27.622).
+[INFO] Konvertiert foreign_disk_05.jpg | Parameter: mode=manual_review, label=, variant_name=FOREIGN_DISK_05 | Qualität: Optimierungsfehler/Pixel=0.069056, Mean-Delta²=4717.562500, RGB-RMSE/Kanal=39.655023, Raumscore=7693.875462, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere foreign_disk_01.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite foreign_disk_01.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] foreign_disk_01.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=1.000000, localized_error_fraction=0.626534).
+[INFO] Konvertiert foreign_disk_01.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_01 | Qualität: Optimierungsfehler/Pixel=0.101194, Mean-Delta²=14981.222656, RGB-RMSE/Kanal=70.666406, Raumscore=37177.978311, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere foreign_disk_03.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite foreign_disk_03.jpg ---
+Bildbeschreibung: grüner Kugelform (grüner Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] foreign_disk_03.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.504505, localized_error_fraction=0.755338).
+[INFO] Konvertiert foreign_disk_03.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_03 | Qualität: Optimierungsfehler/Pixel=0.078630, Mean-Delta²=7999.696289, RGB-RMSE/Kanal=51.638798, Raumscore=22965.357615, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere foreign_disk_04.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite foreign_disk_04.jpg ---
+Bildbeschreibung: roter Kugelform (roter Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] foreign_disk_04.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.378378, localized_error_fraction=0.715221).
+[INFO] Konvertiert foreign_disk_04.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_04 | Qualität: Optimierungsfehler/Pixel=0.066428, Mean-Delta²=5833.063477, RGB-RMSE/Kanal=44.094835, Raumscore=15367.251510, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere foreign_disk_00.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite foreign_disk_00.jpg ---
+Bildbeschreibung: Blaue Kugelform (blauer Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] foreign_disk_00.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.387387, localized_error_fraction=0.741233).
+[INFO] Konvertiert foreign_disk_00.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_00 | Qualität: Optimierungsfehler/Pixel=0.062063, Mean-Delta²=5009.374023, RGB-RMSE/Kanal=40.863080, Raumscore=13695.620534, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere foreign_disk_01.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite foreign_disk_01.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] foreign_disk_01.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=1.000000, localized_error_fraction=0.626534).
+[INFO] Konvertiert foreign_disk_01.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_01 | Qualität: Optimierungsfehler/Pixel=0.101194, Mean-Delta²=14981.222656, RGB-RMSE/Kanal=70.666406, Raumscore=37177.978311, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Konvertiere foreign_disk_03.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite foreign_disk_03.jpg ---
+Bildbeschreibung: grüner Kugelform (grüner Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] foreign_disk_03.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.504505, localized_error_fraction=0.755338).
+[INFO] Konvertiert foreign_disk_03.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_03 | Qualität: Optimierungsfehler/Pixel=0.078630, Mean-Delta²=7999.696289, RGB-RMSE/Kanal=51.638798, Raumscore=22965.357615, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Konvertiere foreign_disk_04.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite foreign_disk_04.jpg ---
+Bildbeschreibung: roter Kugelform (roter Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] foreign_disk_04.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.378378, localized_error_fraction=0.715221).
+[INFO] Konvertiert foreign_disk_04.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_04 | Qualität: Optimierungsfehler/Pixel=0.066428, Mean-Delta²=5833.063477, RGB-RMSE/Kanal=44.094835, Raumscore=15367.251510, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Konvertiere foreign_disk_00.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite foreign_disk_00.jpg ---
+Bildbeschreibung: Blaue Kugelform (blauer Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] foreign_disk_00.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.387387, localized_error_fraction=0.741233).
+[INFO] Konvertiert foreign_disk_00.jpg | Parameter: mode=auto, label=M, variant_name=FOREIGN_DISK_00 | Qualität: Optimierungsfehler/Pixel=0.062063, Mean-Delta²=5009.374023, RGB-RMSE/Kanal=40.863080, Raumscore=13695.620534, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\ge0281\recheck2\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\ge0281\recheck2\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\ge0281\recheck2\before

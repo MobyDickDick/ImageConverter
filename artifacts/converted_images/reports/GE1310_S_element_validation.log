@@ -1,0 +1,7 @@
+run-meta: run_seed=330102219 pass_seed_offset=391 trace_id=333073178462
+status=semantic_mismatch
+best_attempt_svg=GE1310_S_failed.svg
+semantic_connector_classification=horizontal;circle_source=none;horizontal_candidates=2;vertical_candidates=1;circle_confidence=0.0000;circle_geometry=none;circle_rejection_reason=no_candidate
+issue=Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar
+issue=Im Bild ist senkrechter Strich erkennbar, aber nicht in der Beschreibung enthalten
+issue=Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt

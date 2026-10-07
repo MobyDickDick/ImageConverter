@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-06, nach Verlaufspfeil-Recheck)
+## Aktuelle Kandidaten (Stand: 2026-10-06, nach radialem Kugel-Recheck)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -69,17 +69,24 @@ CLI-Läufe reproduzieren sämtliche 28 SVG-Bytes und Gateentscheidungen.
 Die gemeinsame XML beschreibt die Pfeiltopologie jetzt eigenständig. Details:
 `docs/next_arbeitspaket_2026-10-06_ge9011_6m.md`.
 
-1. `GE0281` – `mean_delta2=15287.335938`, `normalized_mse=0.078366`.
+`GE0281` besteht nach katalogfreier Kreis-/Radialverlauf-Registrierung beide
+Gates (`mean_delta2=308.333344`, frische CLI-Baseline `14981.222656`).
+Alle sechs Farbvarianten bestehen ohne Metrikregression; zwei unabhängige
+CLI-Läufe reproduzieren alle zwölf SVG-Bytes und Gateentscheidungen.
+Die XML für das Ziel und den grauen Holdout beschreibt die Kreisstruktur
+jetzt eigenständig. Details: `docs/next_arbeitspaket_2026-10-06_ge0281.md`.
+
+1. `GE9013_6M` – `mean_delta2=15368.653320`, `normalized_mse=0.078783`.
 2. `GE0300` – `mean_delta2=14731.457031`, `normalized_mse=0.075517`.
 3. `GE1420_S` – `mean_delta2=14628.742188`, `normalized_mse=0.074990`.
 4. `AC0403_1_L` – `mean_delta2=13989.019531`, `normalized_mse=0.071711`.
 5. `AC0130_S` – `mean_delta2=13920.945312`, `normalized_mse=0.071362`.
 
-Die nächste Rotation beginnt mit `GE0281` und muss zunächst eine frische
+Die nächste Rotation beginnt mit `GE9013_6M` und muss zunächst eine frische
 CLI-Baseline statt des historischen Sammelwerts prüfen. Der erneuerte Review
-über 688 Einträge (684 renderbare Paare und vier bereits fehlende SVG-Paare)
-steht unter `artifacts/evaluation/gradient_arrow_recheck_v1/full_review/`.
-Alle zuvor separat belegten Gate-Passes und die 14 Pfeilvarianten sind von der
+über 806 Einträge (802 renderbare Paare und vier bereits fehlende SVG-Paare)
+steht unter `artifacts/evaluation/radial_disk_recheck_v1/full_review/`.
+Alle zuvor separat belegten Gate-Passes, die 14 Pfeilvarianten und sechs Kugelvarianten sind von der
 Kandidatenauswahl ausgeschlossen; der genaue Aufruf mit sämtlichen Ausschlüssen
 steht in `review_reproduction_2026-10-06.json`.
 

@@ -1,21 +1,25 @@
 {
   "actual_iterations": 64,
   "base": "GE0280",
-  "best_error": 27.401360544217688,
+  "best_error": 8.795918367346939,
   "best_iter": 1,
   "convergence": "",
-  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
-  "diff_error_distribution_status": "structured",
-  "elapsed_seconds": 1.1099999999860302,
-  "error_per_pixel": 0.06213460440865689,
-  "error_pixel_cluster_count": 11.0,
-  "error_pixel_cluster_excess": 0.13568670711527853,
-  "error_pixel_count": 111.0,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.375,
+  "error_per_pixel": 0.019945393123235688,
+  "error_pixel_cluster_count": 22.0,
+  "error_pixel_cluster_excess": 0.014203257060399904,
+  "error_pixel_count": 110.0,
   "filename": "GE0280.jpg",
   "h": 21,
-  "largest_error_pixel_cluster_fraction": 0.38738738738738737,
-  "localized_error_fraction": 0.7438977512973285,
-  "mean_delta2": 5049.62353515625,
+  "largest_error_pixel_cluster_fraction": 0.2636363636363636,
+  "localized_error_fraction": 0.6227765565956186,
+  "mean_delta2": 459.0589599609375,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -51,55 +55,38 @@
     "geometry_ir": [],
     "label": "M",
     "mode": "auto",
-    "optimized_geometry_ir": [
-      {
-        "bbox": [
-          0.04613283902320378,
-          0.0005304762191182372,
-          0.8562936318112033,
-          0.856395743546636
-        ],
-        "fill": "#366DA2",
-        "id": "perception_circle_background",
-        "kind": "CircleBackground",
-        "perception_seed": {
-          "candidate_schema_version": "perception_primitive_candidate_v1",
-          "confidence": 0.99,
-          "detection_source": "hough",
-          "detector": "detect_circle_rings",
-          "kind": "circle",
-          "source": "non_composite_perception_seed"
-        },
-        "stroke": "#4F7392",
-        "stroke_width": 0.04743728861630353
-      },
-      {
-        "bbox": [
-          0.18812828621766403,
-          0.00058207648803721,
-          0.7126689373001329,
-          0.9510192545460551
-        ],
-        "fill": "#5F8CB6",
-        "font_size": 0.85714,
-        "id": "perception_text_glyph",
-        "kind": "TextGlyph",
-        "perception_seed": {
-          "candidate_schema_version": "perception_primitive_candidate_v1",
-          "confidence": 0.748,
-          "detector": "template_match_text_glyph",
-          "evidence": {
-            "dependency_policy": "uses_existing_cv2_only_no_required_ocr_dependency",
-            "description_hint": "full_image",
-            "detector": "template_match_text_glyph",
-            "threshold_model": "binary_inverse_threshold_210"
-          },
-          "kind": "text_glyph",
-          "source": "non_composite_perception_seed"
-        },
-        "text": "B"
-      }
-    ],
+    "radial_disk_registration": {
+      "error": 8.795918367346939,
+      "evaluations": 140,
+      "initial_error": 17.49206349206349,
+      "parameters": [
+        10.698085291557872,
+        9.999999999999996,
+        9.444635607891236,
+        204.5,
+        144.5,
+        91.0,
+        195.0,
+        133.0,
+        73.0,
+        186.0,
+        122.0,
+        57.0,
+        167.0,
+        108.5,
+        43.0,
+        129.5,
+        90.0,
+        43.0,
+        146.5,
+        114.5,
+        82.5,
+        180.0,
+        152.0,
+        121.5
+      ],
+      "source": "raster_radial_disk_v1"
+    },
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -111,9 +98,10 @@
     "variant_name": "GE0280"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 13880.577032319316,
-  "std_delta2": 10186.4306640625,
-  "tile_std_delta2": 7090.661766013595,
+  "rgb_rmse_per_channel": 12.370111289730279,
+  "spatial_quality_score": 1032.39035898418,
+  "std_delta2": 723.8995971679688,
+  "tile_std_delta2": 444.0815324632418,
   "variant": "GE0280",
   "w": 21
 }

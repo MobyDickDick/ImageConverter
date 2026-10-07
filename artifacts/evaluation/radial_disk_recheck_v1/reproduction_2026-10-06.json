@@ -1,0 +1,23 @@
+{
+  "checks": [
+    {
+      "run": ".tmp/ge0281/recheck4",
+      "all_12_svg_bytes_identical": true,
+      "all_gate_records_identical": true
+    },
+    {
+      "run": ".tmp/ge0281/recheck5",
+      "all_12_svg_bytes_identical": true,
+      "all_gate_records_identical": true
+    }
+  ],
+  "source_sha256": {
+    "src/iCCModules/imageCompositeConverterRadialDisk.py": "76c8a25955d855308fe2c6be261f2ea8093e230bb8de4d27c97b3a4627dbb0ae",
+    "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "d4288d99dab6c2fc8a074f86154e40a527fab03b18621905fbbe5bd9fdc86c10",
+    "src/iCCModules/imageCompositeConverterRendering.py": "c9a14ae0cd84829c7b592dbd548304af064c2dfbbb6bc5f10e1aa1b346057d66",
+    "tools/run_radial_disk_recheck.py": "b10b9da2d3aa49e6f84b35332e2b24c0b731b1a838b16444f66c97c1d7e1c37d",
+    "tools/evaluate_radial_disk_recheck.py": "7219127a251b874725b94bec6f16cc8dd6d021b075fd4e60cc719cfe84e2ceaf",
+    "tests/test_radial_disk_runtime.py": "a6397985c76ca1caab2a27390c209946925aa5c0825497bcc3ac5febb35439ad",
+    "artifacts\\images_to_convert\\Finale_Wurzelformen_V3.xml": "07b93d3ea7f9934375d3382dd2015bb06c528132bed9997887134fc23c4ae068"
+  }
+}

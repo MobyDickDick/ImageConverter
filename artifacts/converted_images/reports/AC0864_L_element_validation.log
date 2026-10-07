@@ -1,15 +1,15 @@
-run-meta: run_seed=221693115 pass_seed_offset=33 trace_id=223688356368
+run-meta: run_seed=330102219 pass_seed_offset=160 trace_id=333073155131
 status=semantic_ok
 quality=borderline
-quality_reason=semantic_ok_trotz_hohem_elementfehler:text=116.197
+quality_reason=semantic_ok_trotz_hohem_elementfehler:text=115.885
 quality_elevated_elements=arm,circle,text
-redraw_variation: seed=223688356368 changed_params=cx:16.500->16.892 | cy:12.500->12.370 | r:11.000->10.892 | stroke_circle:1.000->1.016 | arm_stroke:1.000->1.043
+redraw_variation: seed=333073155131 changed_params=cx:16.500->16.461 | cy:12.500->12.499 | r:11.000->10.979 | stroke_circle:1.000->1.102 | arm_stroke:1.000->1.024
 semantic-guard: Textmodus aktiv (rf).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=85.657
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing cx 16.000->16.500, cy 12.500->12.500 (best_err=74.143)
-perf_probe: circle_center_elapsed round=1 elapsed=0.06s
+perf_probe: circle_center_elapsed round=1 elapsed=0.02s
 circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=74.143, full_err=15.772); Kandidaten=10.695->99.351, 11.000->74.143, 12.000->107.267
 perf_probe: circle_radius_elapsed round=1 elapsed=0.00s
 arm: Fehler=47.127
@@ -26,7 +26,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=15.048,
 global-search: Runde 2 best_err=15.048, akzeptierte_kandidaten=0, sigma_mittel=3.041
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.301, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=15.048, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=221697247, schritte=2, start_err=15.048)
+global-search: deterministischer track gestartet (modus=voll, seed=330106478, schritte=2, start_err=15.048)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=1.000, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
@@ -46,55 +46,55 @@ global-search: deterministischer track (pass=2, verbesserungen=0, best_err=15.04
 global-search: track-vergleich (stochastic_err=15.048, deterministic_err=15.048, gewählt=stochastic)
 global-search: keine relevante Verbesserung
 global-search: evaluate-telemetrie (requests=89, cache_hits=46, hit_rate=0.517, render_aufrufe=43, render_timeouts=0, render_fehler=0)
-perf_probe: global_search_elapsed round=1 elapsed=0.23s
+perf_probe: global_search_elapsed round=1 elapsed=0.05s
 Runde 1: Gesamtfehler=14.965; Qualität (MAE-basiert, höher=besser): 92.98% -> 94.13% | mittlere Pixelabweichung (MAE, kleiner=besser): 17.896 -> 14.965 | Mean-Delta² (kleiner=besser): 4775.374 -> 3634.907 | Qualitätsgewinn=+2.931 (+16.38%) | Wirkung=verbessert
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=74.143
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=16.500, cy=12.500, best_err=74.143)
-perf_probe: circle_center_elapsed round=2 elapsed=0.02s
+perf_probe: circle_center_elapsed round=2 elapsed=0.00s
 circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=74.143, full_err=14.965); Kandidaten=10.695->99.351, 11.000->74.143, 12.000->107.267
 perf_probe: circle_radius_elapsed round=2 elapsed=0.00s
 arm: Fehler=47.127
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing keine relevante Änderung (arm_len: 17.000); Kandidaten=13.000->56.042, 17.000->48.437, 21.000->48.437, 29.000->48.437, 37.000->48.437, 45.000->48.437
 text: Fehler=103.663
-text: Breiten-Stochastic-Survivor aktiviert (rf_font_scale=0.970, err=112.859)
-text: Breiten-Bracketing rf_font_scale 0.804->0.970; Kandidaten=0.938->114.250, 1.068->115.509, 1.199->118.399, 1.373->122.693, 1.547->125.962, 1.678->127.689, 1.809->125.357
+text: Breiten-Stochastic-Survivor aktiviert (rf_font_scale=0.975, err=112.528)
+text: Breiten-Bracketing rf_font_scale 0.804->0.975; Kandidaten=0.938->114.250, 1.068->115.509, 1.199->118.399, 1.373->122.693, 1.547->125.962, 1.678->127.689, 1.809->125.357
 global-search: übersprungen (grund=unveränderte_no-improvement_signatur, vorheriger_lauf=keine_relevante_verbesserung)
 perf_probe: global_search_elapsed round=2 elapsed=0.00s
-Runde 2: Gesamtfehler=15.235; Qualität (MAE-basiert, höher=besser): 94.13% -> 94.03% | mittlere Pixelabweichung (MAE, kleiner=besser): 14.965 -> 15.235 | Mean-Delta² (kleiner=besser): 3634.907 -> 3607.997 | Qualitätsgewinn=-0.269 (-1.80%) | Wirkung=verschlechtert
+Runde 2: Gesamtfehler=15.212; Qualität (MAE-basiert, höher=besser): 94.13% -> 94.03% | mittlere Pixelabweichung (MAE, kleiner=besser): 14.965 -> 15.212 | Mean-Delta² (kleiner=besser): 3634.907 -> 3599.141 | Qualitätsgewinn=-0.247 (-1.65%) | Wirkung=verschlechtert
 Runde 3: elementweise Validierung gestartet
 circle: Fehler=74.143
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=16.500, cy=12.500, best_err=74.143)
 perf_probe: circle_center_elapsed round=3 elapsed=0.02s
-circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=74.143, full_err=15.235); Kandidaten=10.695->99.351, 11.000->74.143, 12.000->107.267
+circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=74.143, full_err=15.212); Kandidaten=10.695->99.351, 11.000->74.143, 12.000->107.267
 perf_probe: circle_radius_elapsed round=3 elapsed=0.00s
 arm: Fehler=47.127
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing keine relevante Änderung (arm_len: 17.000); Kandidaten=13.000->56.042, 17.000->48.437, 21.000->48.437, 29.000->48.437, 37.000->48.437, 45.000->48.437
-text: Fehler=112.859
-text: Breiten-Stochastic-Survivor aktiviert (rf_font_scale=1.082, err=116.197)
-text: Breiten-Bracketing rf_font_scale 0.970->1.082; Kandidaten=1.050->116.833, 1.115->117.111, 1.203->117.602, 1.355->123.405, 1.558->126.152, 1.762->128.006, 1.914->124.585, 2.067->126.087
+text: Fehler=112.528
+text: Breiten-Stochastic-Survivor aktiviert (rf_font_scale=1.087, err=115.885)
+text: Breiten-Bracketing rf_font_scale 0.975->1.087; Kandidaten=1.050->116.833, 1.121->116.962, 1.203->117.602, 1.355->123.405, 1.558->126.152, 1.762->128.006, 1.914->124.585, 2.067->126.087
 global-search: übersprungen (grund=unveränderte_no-improvement_signatur, vorheriger_lauf=keine_relevante_verbesserung)
 perf_probe: global_search_elapsed round=3 elapsed=0.00s
-Runde 3: Gesamtfehler=15.464; Qualität (MAE-basiert, höher=besser): 94.03% -> 93.94% | mittlere Pixelabweichung (MAE, kleiner=besser): 15.235 -> 15.464 | Mean-Delta² (kleiner=besser): 3607.997 -> 3807.485 | Qualitätsgewinn=-0.229 (-1.51%) | Wirkung=verschlechtert
+Runde 3: Gesamtfehler=15.491; Qualität (MAE-basiert, höher=besser): 94.03% -> 93.93% | mittlere Pixelabweichung (MAE, kleiner=besser): 15.212 -> 15.491 | Mean-Delta² (kleiner=besser): 3599.141 -> 3817.688 | Qualitätsgewinn=-0.278 (-1.83%) | Wirkung=verschlechtert
 Runde 4: elementweise Validierung gestartet
 circle: Fehler=74.143
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=16.500, cy=12.500, best_err=74.143)
 perf_probe: circle_center_elapsed round=4 elapsed=0.02s
-circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=74.143, full_err=15.464); Kandidaten=10.695->99.351, 11.000->74.143, 12.000->107.267
+circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=74.143, full_err=15.491); Kandidaten=10.695->99.351, 11.000->74.143, 12.000->107.267
 perf_probe: circle_radius_elapsed round=4 elapsed=0.00s
 arm: Fehler=47.127
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing keine relevante Änderung (arm_len: 17.000); Kandidaten=13.000->56.042, 17.000->48.437, 21.000->48.437, 29.000->48.437, 37.000->48.437, 45.000->48.437
-text: Fehler=116.197
-text: Breiten-Bracketing keine relevante Änderung (rf_font_scale: 1.082); Kandidaten=1.050->116.833, 1.082->116.197, 1.222->119.444, 1.244->118.817, 1.394->121.463, 1.623->127.778, 1.852->124.667, 2.024->126.171, 2.196->128.383
+text: Fehler=115.885
+text: Breiten-Bracketing keine relevante Änderung (rf_font_scale: 1.087); Kandidaten=1.050->116.833, 1.087->115.885, 1.222->119.444, 1.250->118.520, 1.394->121.463, 1.623->127.778, 1.852->124.667, 2.024->126.171, 2.196->128.383
 global-search: übersprungen (grund=unveränderte_no-improvement_signatur, vorheriger_lauf=keine_relevante_verbesserung)
 perf_probe: global_search_elapsed round=4 elapsed=0.00s
-Runde 4: Gesamtfehler=15.464; Qualität (MAE-basiert, höher=besser): 93.94% -> 93.94% | mittlere Pixelabweichung (MAE, kleiner=besser): 15.464 -> 15.464 | Mean-Delta² (kleiner=besser): 3807.485 -> 3807.485 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert
+Runde 4: Gesamtfehler=15.491; Qualität (MAE-basiert, höher=besser): 93.93% -> 93.93% | mittlere Pixelabweichung (MAE, kleiner=besser): 15.491 -> 15.491 | Mean-Delta² (kleiner=besser): 3817.688 -> 3817.688 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
 Runde 5: elementweise Validierung gestartet
@@ -103,15 +103,15 @@ circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.
 arm: Fehler=47.127
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing keine relevante Änderung (arm_len: 17.000); Kandidaten=13.000->56.042, 17.000->48.437, 21.000->48.437, 29.000->48.437, 37.000->48.437, 45.000->48.437
-text: Fehler=116.197
-text: Breiten-Bracketing keine relevante Änderung (rf_font_scale: 1.082); Kandidaten=1.050->116.833, 1.082->116.197, 1.222->119.444, 1.244->118.817, 1.394->121.463, 1.623->127.778, 1.852->124.667, 2.024->126.171, 2.196->128.383
+text: Fehler=115.885
+text: Breiten-Bracketing keine relevante Änderung (rf_font_scale: 1.087); Kandidaten=1.050->116.833, 1.087->115.885, 1.222->119.444, 1.250->118.520, 1.394->121.463, 1.623->127.778, 1.852->124.667, 2.024->126.171, 2.196->128.383
 global-search: übersprungen (grund=unveränderte_no-improvement_signatur, vorheriger_lauf=keine_relevante_verbesserung)
 perf_probe: global_search_elapsed round=5 elapsed=0.00s
-Runde 5: Gesamtfehler=15.464; Qualität (MAE-basiert, höher=besser): 93.94% -> 93.94% | mittlere Pixelabweichung (MAE, kleiner=besser): 15.464 -> 15.464 | Mean-Delta² (kleiner=besser): 3807.485 -> 3807.485 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert
+Runde 5: Gesamtfehler=15.491; Qualität (MAE-basiert, höher=besser): 93.93% -> 93.93% | mittlere Pixelabweichung (MAE, kleiner=besser): 15.491 -> 15.491 | Mean-Delta² (kleiner=besser): 3817.688 -> 3817.688 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert
 stable_improvement_probe: round=5, improved=false, count=1/2, eps=0.0200
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 stopped_due_to_stagnation: Validierung vorzeitig beendet
-validation_abort_decision: stage=round_loop, reason=stagnation_identical_fingerprint, error=15.464, round=5
+validation_abort_decision: stage=round_loop, reason=stagnation_identical_fingerprint, error=15.491, round=5
 best_validation_round=1
 executed_validation_rounds=5
 best_validation_error=14.965333

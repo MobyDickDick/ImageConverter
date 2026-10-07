@@ -14,6 +14,17 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-06)
 
+Das Paket für `GE0281` ist umgesetzt: Die XML beschreibt Kreis und radialen
+Verlauf eigenständig. Die katalogfreie Rasterregistrierung bestimmt Lage,
+Radius und sieben Verlaufstopps mit begrenzter Render-/Fehlersuche.
+Das gespeicherte Ziel-CLI-SVG verbessert sich von `14981.222656` auf `308.333344`;
+alle sechs Farbvarianten bestehen beide harten Gates ohne Metrikregression.
+Zwei unabhängige CLI-Läufe reproduzieren alle zwölf SVG-Bytes und Gateentscheidungen.
+76 fokussierte Tests und vier Unterprozess-Umgebungstests sind grün.
+Der Review-Snapshot über 806 Einträge (802 renderbare Paare) setzt die Rotation
+mit `GE9013_6M` fort. Details und Abschlussprofil:
+`docs/next_arbeitspaket_2026-10-06_ge0281.md`.
+
 Das Paket für `GE9011_6M` ist abgeschlossen: Die XML beschreibt eigenständig
 Dreieckspitze, weißen Abstand und den schmaleren Schaft mit horizontalem Verlauf.
 Die katalogfreie Rasterregistrierung bestimmt Geometrie und Farben; eine begrenzte

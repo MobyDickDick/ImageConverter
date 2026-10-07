@@ -70,3 +70,15 @@ def test_radial_adapter_supports_circle_geometry_and_rejects_alpha_stops():
     assert 'url(#arbitrary)' not in expanded and '<circle' in expanded
     alpha = svg.replace('offset="0%"', 'offset="0%" stop-opacity="0.4"')
     assert rendering._expand_centered_radial_gradients_for_fitz(alpha) == alpha
+
+
+def test_radial_render_does_not_depend_on_previous_linear_render(monkeypatch):
+    import xml.etree.ElementTree as ET
+    import cv2
+    import fitz
+    import numpy as np
+    monkeypatch.delitem(ET._namespace_map, 'http://www.w3.org/2000/svg', raising=False)
+    svg = radial_svg()
+    raster = rendering.render_svg_to_numpy_inprocess(svg, 40, 40, fitz_module=fitz, np_module=np, cv2_module=cv2)
+    assert raster is not None
+    assert np.min(raster[20, 20]) > 220

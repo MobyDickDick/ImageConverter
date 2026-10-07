@@ -1,0 +1,40 @@
+{
+  "schema_version": "radial_disk_completion_v1",
+  "date": "2026-10-06",
+  "branch": "codex/ge0281-quality-2026-10-06",
+  "default_pytest": {
+    "passed": 1626,
+    "skipped": 29,
+    "duration_seconds": 5377.68,
+    "failed": 1
+  },
+  "focused_pytest": {
+    "passed": 80,
+    "skipped": 0
+  },
+  "checks": {
+    "compileall": "pass",
+    "cli_help": "pass",
+    "runtime_image_id_occurrences": 0,
+    "saved_svg_gates": "6/6 pass",
+    "independent_reproductions": "2/2 identical"
+  },
+  "windows_skips": "29 existing POSIX shell integrations",
+  "environment": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7",
+  "initial_environment_failures": 2,
+  "initial_mutable_batch_reference_failures": 3,
+  "reference_remedy": "three committed-reference tests read immutable bestlist SVGs; expectations unchanged",
+  "environment_remedy": "temporary bootstrap retained as its own Windows PYTHONPATH entry despite the test helper colon separator",
+  "review_recheck": {
+    "passed": 32,
+    "failed": 0,
+    "skipped": 0,
+    "source_sha256": "f10cfa981ddcd35c9de8123cb4916881f8aa3fadb33298e100f754efd2a0fdde",
+    "explanation": "The full run collected the chevron test before its snapshot correction; all review tests pass after the correction."
+  },
+  "overall": {
+    "status": "pass_after_targeted_rerun",
+    "verified_tests": 1627,
+    "existing_skips": 29
+  }
+}

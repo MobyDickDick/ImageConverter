@@ -1,0 +1,794 @@
+{
+  "baseline": {
+    "baseline_sha256": "2ea6b3c1728b6e88c95fcc65a15dc5edccd3d24c5b7a46102e779b16a401b816",
+    "cases": {
+      "foreign_disk_00": {
+        "dimensions": {
+          "height": 21,
+          "width": 21
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5688356161117554,
+          "error_per_pixel": 0.025679220932654106,
+          "object_mask_iou": 0.8468468468468469,
+          "semantic_score": 0.0
+        }
+      },
+      "foreign_disk_01": {
+        "dimensions": {
+          "height": 21,
+          "width": 21
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.3714931309223175,
+          "error_per_pixel": 0.07679724545046777,
+          "object_mask_iou": 0.8104738154613467,
+          "semantic_score": 0.0
+        }
+      },
+      "foreign_disk_02": {
+        "dimensions": {
+          "height": 21,
+          "width": 21
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.2475382685661316,
+          "error_per_pixel": 0.010784863143582596,
+          "object_mask_iou": 0.6275,
+          "semantic_score": 0.0
+        }
+      },
+      "foreign_disk_03": {
+        "dimensions": {
+          "height": 21,
+          "width": 21
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.48677414655685425,
+          "error_per_pixel": 0.04100831110630527,
+          "object_mask_iou": 0.8238805970149253,
+          "semantic_score": 0.0
+        }
+      },
+      "foreign_disk_04": {
+        "dimensions": {
+          "height": 21,
+          "width": 21
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5552833080291748,
+          "error_per_pixel": 0.02990164540080738,
+          "object_mask_iou": 0.8666666666666667,
+          "semantic_score": 0.0
+        }
+      },
+      "foreign_disk_05": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5740653276443481,
+          "error_per_pixel": 0.024183326925541457,
+          "object_mask_iou": 0.8255813953488372,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "original descriptions with radial disk registration disabled",
+      "commit": "69957568c507399dcbde691018a6b5d721a7f578",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "foreign_disk_00": "70e1c67451a3d0e8edc69b574128c2c0e7b425803dfac280fc2ee8df96840219",
+        "foreign_disk_01": "d5074a3efc66849601fd053bd6204b77d15711a6671aab635a962003c08f29b1",
+        "foreign_disk_02": "6d771c2cc38824a68bba16202bb7b029fc8059a54722f103e75be79fe974c2a9",
+        "foreign_disk_03": "738123e0dfcfda2b1df500c68ca5a152d9732888385ae11d2e6deed4bd4e4c9b",
+        "foreign_disk_04": "54750569b5cd7e0519d61fb2d3078daebe8f726c5c5c7fb4ce91422b4f893856",
+        "foreign_disk_05": "e9ea18fbb45255196fe6629c48dd24184cf9f323cc2de8ad1f12ae7f8fb0411d"
+      },
+      "seed": 0,
+      "source_sha256": {
+        "artifacts\\images_to_convert\\Finale_Wurzelformen_V3.xml": "07b93d3ea7f9934375d3382dd2015bb06c528132bed9997887134fc23c4ae068",
+        "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "d4288d99dab6c2fc8a074f86154e40a527fab03b18621905fbbe5bd9fdc86c10",
+        "src/iCCModules/imageCompositeConverterRadialDisk.py": "76c8a25955d855308fe2c6be261f2ea8093e230bb8de4d27c97b3a4627dbb0ae",
+        "src/iCCModules/imageCompositeConverterRendering.py": "c9a14ae0cd84829c7b592dbd548304af064c2dfbbb6bc5f10e1aa1b346057d66",
+        "tests/test_radial_disk_runtime.py": "a6397985c76ca1caab2a27390c209946925aa5c0825497bcc3ac5febb35439ad",
+        "tools/evaluate_radial_disk_recheck.py": "7219127a251b874725b94bec6f16cc8dd6d021b075fd4e60cc719cfe84e2ceaf",
+        "tools/run_radial_disk_recheck.py": "b10b9da2d3aa49e6f84b35332e2b24c0b731b1a838b16444f66c97c1d7e1c37d"
+      },
+      "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 459.0589599609375,
+      "after_svg": "after/foreign_disk_00.svg",
+      "after_svg_sha256": "ea5ecbd1ce9399e00ceb4b73402cfae43a6fa9206604d9a08c48547a4339b88e",
+      "baseline_description": "Blaue Kugelform (blauer Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)",
+      "before_mean_delta2": 5009.3740234375,
+      "before_svg": "before/foreign_disk_00.svg",
+      "before_svg_sha256": "91986edc93526a7ce0869cc9fd4b4dd303d4b1101170c91f09d3512316209268",
+      "case_id": "foreign_disk_00",
+      "image": "../../images_to_convert/GE0280.jpg",
+      "input_sha256": "70e1c67451a3d0e8edc69b574128c2c0e7b425803dfac280fc2ee8df96840219",
+      "role": "holdout",
+      "variant": "GE0280"
+    },
+    {
+      "after_mean_delta2": 308.3333435058594,
+      "after_svg": "after/foreign_disk_01.svg",
+      "after_svg_sha256": "6a2dba28069d43d1948a24dca3cc592aceff16caf244f38d573ef13d3b032b85",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "before_mean_delta2": 14981.22265625,
+      "before_svg": "before/foreign_disk_01.svg",
+      "before_svg_sha256": "3736a7b4a102ed399956e514d54d377dd6873d21a7cedda93586ff54f4807df4",
+      "case_id": "foreign_disk_01",
+      "image": "../../images_to_convert/GE0281.jpg",
+      "input_sha256": "d5074a3efc66849601fd053bd6204b77d15711a6671aab635a962003c08f29b1",
+      "role": "development",
+      "variant": "GE0281"
+    },
+    {
+      "after_mean_delta2": 149.6666717529297,
+      "after_svg": "after/foreign_disk_02.svg",
+      "after_svg_sha256": "53710db9c1e92914b9f25e9a1542fa64feac22290d0b2b1337023e63e78f6ec4",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "before_mean_delta2": 2103.857177734375,
+      "before_svg": "before/foreign_disk_02.svg",
+      "before_svg_sha256": "94fb9b0872182dbd697ee0cfcd39daf6f9fb2ca07c0a7a3c81a067eb5ea82f62",
+      "case_id": "foreign_disk_02",
+      "image": "../../images_to_convert/GE0282.jpg",
+      "input_sha256": "6d771c2cc38824a68bba16202bb7b029fc8059a54722f103e75be79fe974c2a9",
+      "role": "holdout",
+      "variant": "GE0282"
+    },
+    {
+      "after_mean_delta2": 527.8004760742188,
+      "after_svg": "after/foreign_disk_03.svg",
+      "after_svg_sha256": "1c222f7c7add81e0abc02994a1a75258d8a153c6fd1dcee99ffb55e81e624087",
+      "baseline_description": "gr\u00fcner Kugelform (gr\u00fcner Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)",
+      "before_mean_delta2": 7999.6962890625,
+      "before_svg": "before/foreign_disk_03.svg",
+      "before_svg_sha256": "127fc1953a1bfad4b70394ff9a635b74c13e4fb06904b09a06a551ba0a972633",
+      "case_id": "foreign_disk_03",
+      "image": "../../images_to_convert/GE0283.jpg",
+      "input_sha256": "738123e0dfcfda2b1df500c68ca5a152d9732888385ae11d2e6deed4bd4e4c9b",
+      "role": "holdout",
+      "variant": "GE0283"
+    },
+    {
+      "after_mean_delta2": 587.10205078125,
+      "after_svg": "after/foreign_disk_04.svg",
+      "after_svg_sha256": "57c7ad1accf4cc3707738195d689595ea7398c340ddf4c8cf6409fd9adc1f5cf",
+      "baseline_description": "roter Kugelform (roter Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)",
+      "before_mean_delta2": 5833.0634765625,
+      "before_svg": "before/foreign_disk_04.svg",
+      "before_svg_sha256": "e96ad4b604ffbe6a2037b85c1d175aafe6ccff415e57401e6b0f442595ac1028",
+      "case_id": "foreign_disk_04",
+      "image": "../../images_to_convert/GE0284.jpg",
+      "input_sha256": "54750569b5cd7e0519d61fb2d3078daebe8f726c5c5c7fb4ce91422b4f893856",
+      "role": "holdout",
+      "variant": "GE0284"
+    },
+    {
+      "after_mean_delta2": 516.3400268554688,
+      "after_svg": "after/foreign_disk_05.svg",
+      "after_svg_sha256": "a995692140e5d6378000345a96a3246c29847458f4237665ba8cf23824afcfbc",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie GE0285. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (\u2014). Bitte einer finalen Wurzelform-Kategorie zuordnen.",
+      "before_mean_delta2": 4717.5625,
+      "before_svg": "before/foreign_disk_05.svg",
+      "before_svg_sha256": "d15d68e5c98fbb7d11f8b805fbb33a5b5b7dbd8d7296db6a2e6e84ad110838cc",
+      "case_id": "foreign_disk_05",
+      "image": "../../images_to_convert/GE0285.jpg",
+      "input_sha256": "e9ea18fbb45255196fe6629c48dd24184cf9f323cc2de8ad1f12ae7f8fb0411d",
+      "role": "holdout",
+      "variant": "GE0285"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "2ea6b3c1728b6e88c95fcc65a15dc5edccd3d24c5b7a46102e779b16a401b816",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8466458320617676,
+          "error_per_pixel": 0.002353243418997501,
+          "object_mask_iou": 0.9240506329113924,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5688356161117554,
+          "error_per_pixel": 0.025679220932654106,
+          "object_mask_iou": 0.8468468468468469,
+          "semantic_score": 0.0
+        },
+        "case_id": "foreign_disk_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.002353243418997501,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9421,
+            "edge_alignment": 0.8466,
+            "pixel_similarity": 0.9976,
+            "semantic_score": 1.0,
+            "structure_score": 0.9241
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8565438389778137,
+          "error_per_pixel": 0.0015805887146269865,
+          "object_mask_iou": 0.9723926380368099,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.3714931309223175,
+          "error_per_pixel": 0.07679724545046777,
+          "object_mask_iou": 0.8104738154613467,
+          "semantic_score": 0.0
+        },
+        "case_id": "foreign_disk_01",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0015805887146269865,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9568,
+            "edge_alignment": 0.8565,
+            "pixel_similarity": 0.9984,
+            "semantic_score": 1.0,
+            "structure_score": 0.9724
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8962764739990234,
+          "error_per_pixel": 0.0007672263065637816,
+          "object_mask_iou": 0.9609375,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.2475382685661316,
+          "error_per_pixel": 0.010784863143582596,
+          "object_mask_iou": 0.6275,
+          "semantic_score": 0.0
+        },
+        "case_id": "foreign_disk_02",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007672263065637816,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9641,
+            "edge_alignment": 0.8963,
+            "pixel_similarity": 0.9992,
+            "semantic_score": 1.0,
+            "structure_score": 0.9609
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.7917768955230713,
+          "error_per_pixel": 0.002705628481733788,
+          "object_mask_iou": 0.9367088607594937,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.48677414655685425,
+          "error_per_pixel": 0.04100831110630527,
+          "object_mask_iou": 0.8238805970149253,
+          "semantic_score": 0.0
+        },
+        "case_id": "foreign_disk_03",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.002705628481733788,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9314,
+            "edge_alignment": 0.7918,
+            "pixel_similarity": 0.9973,
+            "semantic_score": 1.0,
+            "structure_score": 0.9367
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8264647722244263,
+          "error_per_pixel": 0.003009622200595925,
+          "object_mask_iou": 0.9211356466876972,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5552833080291748,
+          "error_per_pixel": 0.02990164540080738,
+          "object_mask_iou": 0.8666666666666667,
+          "semantic_score": 0.0
+        },
+        "case_id": "foreign_disk_04",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.003009622200595925,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9361,
+            "edge_alignment": 0.8265,
+            "pixel_similarity": 0.997,
+            "semantic_score": 1.0,
+            "structure_score": 0.9211
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8772702217102051,
+          "error_per_pixel": 0.0026468795430243178,
+          "object_mask_iou": 0.9868421052631579,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5740653276443481,
+          "error_per_pixel": 0.024183326925541457,
+          "object_mask_iou": 0.8255813953488372,
+          "semantic_score": 0.0
+        },
+        "case_id": "foreign_disk_05",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0026468795430243178,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9654,
+            "edge_alignment": 0.8773,
+            "pixel_similarity": 0.9974,
+            "semantic_score": 1.0,
+            "structure_score": 0.9868
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "original descriptions with radial disk registration disabled",
+      "commit": "69957568c507399dcbde691018a6b5d721a7f578",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "foreign_disk_00": "70e1c67451a3d0e8edc69b574128c2c0e7b425803dfac280fc2ee8df96840219",
+        "foreign_disk_01": "d5074a3efc66849601fd053bd6204b77d15711a6671aab635a962003c08f29b1",
+        "foreign_disk_02": "6d771c2cc38824a68bba16202bb7b029fc8059a54722f103e75be79fe974c2a9",
+        "foreign_disk_03": "738123e0dfcfda2b1df500c68ca5a152d9732888385ae11d2e6deed4bd4e4c9b",
+        "foreign_disk_04": "54750569b5cd7e0519d61fb2d3078daebe8f726c5c5c7fb4ce91422b4f893856",
+        "foreign_disk_05": "e9ea18fbb45255196fe6629c48dd24184cf9f323cc2de8ad1f12ae7f8fb0411d"
+      },
+      "seed": 0,
+      "source_sha256": {
+        "artifacts\\images_to_convert\\Finale_Wurzelformen_V3.xml": "07b93d3ea7f9934375d3382dd2015bb06c528132bed9997887134fc23c4ae068",
+        "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "d4288d99dab6c2fc8a074f86154e40a527fab03b18621905fbbe5bd9fdc86c10",
+        "src/iCCModules/imageCompositeConverterRadialDisk.py": "76c8a25955d855308fe2c6be261f2ea8093e230bb8de4d27c97b3a4627dbb0ae",
+        "src/iCCModules/imageCompositeConverterRendering.py": "c9a14ae0cd84829c7b592dbd548304af064c2dfbbb6bc5f10e1aa1b346057d66",
+        "tests/test_radial_disk_runtime.py": "a6397985c76ca1caab2a27390c209946925aa5c0825497bcc3ac5febb35439ad",
+        "tools/evaluate_radial_disk_recheck.py": "7219127a251b874725b94bec6f16cc8dd6d021b075fd4e60cc719cfe84e2ceaf",
+        "tools/run_radial_disk_recheck.py": "b10b9da2d3aa49e6f84b35332e2b24c0b731b1a838b16444f66c97c1d7e1c37d"
+      },
+      "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 6,
+      "improved": 6,
+      "satisfactory": 6,
+      "technically_completed": 6
+    }
+  },
+  "schema_version": "radial_disk_recheck_v1",
+  "semantic_contract": "one filled circle on white background; centered native radial gradient, light interior and darker outer region"
+}

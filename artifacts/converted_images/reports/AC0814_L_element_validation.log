@@ -1,7 +1,7 @@
-run-meta: run_seed=616105023 pass_seed_offset=359 trace_id=621650004466
+run-meta: run_seed=330102219 pass_seed_offset=41 trace_id=333073143112
 status=semantic_ok
 semantic_audit_status=semantic_ok
-semantic_audit_lookup_keys=AC0814
+semantic_audit_lookup_keys=AC0814_L
 semantic_audit_recognized_description_elements=Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
 semantic_audit_derived_elements=SEMANTIC: Kreis ohne Buchstabe | SEMANTIC: waagrechter Strich rechts vom Kreis
 semantic_audit_priority_order=family_rule > layout_override > description_heuristic
@@ -9,7 +9,7 @@ semantic_audit_conflicts=
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:arm=57.446
 quality_elevated_elements=arm,circle
-redraw_variation: seed=621650004466 changed_params=cx:16.000->16.094 | cy:12.500->12.627 | r:11.000->11.031 | stroke_circle:1.000->0.903 | arm_stroke:1.000->1.032
+redraw_variation: seed=333073143112 changed_params=cx:16.000->15.996 | cy:12.500->12.364 | r:11.000->11.114 | stroke_circle:1.000->1.100 | arm_stroke:1.000->1.065
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=26.835
@@ -30,7 +30,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=6.306, 
 global-search: Runde 2 best_err=6.306, akzeptierte_kandidaten=0, sigma_mittel=3.041
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.126, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=6.306, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=616109481, schritte=2, start_err=6.306)
+global-search: deterministischer track gestartet (modus=voll, seed=330106359, schritte=2, start_err=6.306)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=1.000, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
@@ -49,15 +49,15 @@ global-search: intervallhalbierung (pass=2, key=arm_y2, final_step=0.100, iters=
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=6.306)
 global-search: track-vergleich (stochastic_err=6.306, deterministic_err=6.306, gewählt=stochastic)
 global-search: keine relevante Verbesserung
-global-search: evaluate-telemetrie (requests=89, cache_hits=46, hit_rate=0.517, render_aufrufe=43)
-perf_probe: global_search_elapsed round=1 elapsed=0.11s
+global-search: evaluate-telemetrie (requests=89, cache_hits=46, hit_rate=0.517, render_aufrufe=43, render_timeouts=0, render_fehler=0)
+perf_probe: global_search_elapsed round=1 elapsed=0.03s
 Runde 1: Gesamtfehler=6.223; Qualität (MAE-basiert, höher=besser): 97.55% -> 97.56% | mittlere Pixelabweichung (MAE, kleiner=besser): 6.238 -> 6.223 | Mean-Delta² (kleiner=besser): 856.528 -> 855.667 | Qualitätsgewinn=+0.015 (+0.24%) | Wirkung=verbessert
 Gesamtfehler unter Schwellwert, Suche nach besserem Optimum wird fortgesetzt
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=26.835
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=16.000, cy=12.500, best_err=26.835)
-perf_probe: circle_center_elapsed round=2 elapsed=0.02s
+perf_probe: circle_center_elapsed round=2 elapsed=0.01s
 circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=26.835, full_err=6.223); Kandidaten=10.695->69.657, 11.000->26.835, 11.500->65.825, 12.000->65.825
 perf_probe: circle_radius_elapsed round=2 elapsed=0.00s
 arm: Fehler=57.446

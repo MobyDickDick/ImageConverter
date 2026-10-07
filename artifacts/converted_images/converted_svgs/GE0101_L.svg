@@ -1,5 +1,14 @@
-<svg width="215" height="50" viewBox="0 0 215 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g data-output-variation="1" transform="translate(-0.2704 -0.1029) rotate(0.1266 107.5000 25.0000)">
-  <rect id="main_rect" x="0.38" y="16.225" width="214.925" height="36.421" fill="#d8d8d8" stroke="#969696" stroke-width="0.374"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="215" height="50" viewBox="0 0 215 50">
+  <defs>
+    <linearGradient id="ac0vr2PanelGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8f8f8"/>
+      <stop offset="0%" stop-color="#dfe0e8"/>
+      <stop offset="2.12766%" stop-color="#dfe0e8"/>
+      <stop offset="100%" stop-color="#cacfd2"/>
+    </linearGradient>
+  </defs>
+  <g data-output-variation="1" transform="translate(-0.2121 0.0928) rotate(-0.1794 107.5000 25.0000)">
+
+  <rect x="0.500" y="0.500" width="214.000" height="49.000" fill="url(#ac0vr2PanelGradient)" stroke="#b2b2b2" stroke-width="1.000"/>
   </g>
 </svg>

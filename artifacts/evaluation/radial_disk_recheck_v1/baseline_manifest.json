@@ -1,0 +1,108 @@
+{
+  "baseline_sha256": "2ea6b3c1728b6e88c95fcc65a15dc5edccd3d24c5b7a46102e779b16a401b816",
+  "cases": {
+    "foreign_disk_00": {
+      "dimensions": {
+        "height": 21,
+        "width": 21
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5688356161117554,
+        "error_per_pixel": 0.025679220932654106,
+        "object_mask_iou": 0.8468468468468469,
+        "semantic_score": 0.0
+      }
+    },
+    "foreign_disk_01": {
+      "dimensions": {
+        "height": 21,
+        "width": 21
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.3714931309223175,
+        "error_per_pixel": 0.07679724545046777,
+        "object_mask_iou": 0.8104738154613467,
+        "semantic_score": 0.0
+      }
+    },
+    "foreign_disk_02": {
+      "dimensions": {
+        "height": 21,
+        "width": 21
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.2475382685661316,
+        "error_per_pixel": 0.010784863143582596,
+        "object_mask_iou": 0.6275,
+        "semantic_score": 0.0
+      }
+    },
+    "foreign_disk_03": {
+      "dimensions": {
+        "height": 21,
+        "width": 21
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.48677414655685425,
+        "error_per_pixel": 0.04100831110630527,
+        "object_mask_iou": 0.8238805970149253,
+        "semantic_score": 0.0
+      }
+    },
+    "foreign_disk_04": {
+      "dimensions": {
+        "height": 21,
+        "width": 21
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5552833080291748,
+        "error_per_pixel": 0.02990164540080738,
+        "object_mask_iou": 0.8666666666666667,
+        "semantic_score": 0.0
+      }
+    },
+    "foreign_disk_05": {
+      "dimensions": {
+        "height": 20,
+        "width": 20
+      },
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5740653276443481,
+        "error_per_pixel": 0.024183326925541457,
+        "object_mask_iou": 0.8255813953488372,
+        "semantic_score": 0.0
+      }
+    }
+  },
+  "provenance": {
+    "baseline_mode": "original descriptions with radial disk registration disabled",
+    "commit": "69957568c507399dcbde691018a6b5d721a7f578",
+    "execution_mode": "semantic-only",
+    "input_hashes": {
+      "foreign_disk_00": "70e1c67451a3d0e8edc69b574128c2c0e7b425803dfac280fc2ee8df96840219",
+      "foreign_disk_01": "d5074a3efc66849601fd053bd6204b77d15711a6671aab635a962003c08f29b1",
+      "foreign_disk_02": "6d771c2cc38824a68bba16202bb7b029fc8059a54722f103e75be79fe974c2a9",
+      "foreign_disk_03": "738123e0dfcfda2b1df500c68ca5a152d9732888385ae11d2e6deed4bd4e4c9b",
+      "foreign_disk_04": "54750569b5cd7e0519d61fb2d3078daebe8f726c5c5c7fb4ce91422b4f893856",
+      "foreign_disk_05": "e9ea18fbb45255196fe6629c48dd24184cf9f323cc2de8ad1f12ae7f8fb0411d"
+    },
+    "seed": 0,
+    "source_sha256": {
+      "artifacts\\images_to_convert\\Finale_Wurzelformen_V3.xml": "07b93d3ea7f9934375d3382dd2015bb06c528132bed9997887134fc23c4ae068",
+      "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "d4288d99dab6c2fc8a074f86154e40a527fab03b18621905fbbe5bd9fdc86c10",
+      "src/iCCModules/imageCompositeConverterRadialDisk.py": "76c8a25955d855308fe2c6be261f2ea8093e230bb8de4d27c97b3a4627dbb0ae",
+      "src/iCCModules/imageCompositeConverterRendering.py": "c9a14ae0cd84829c7b592dbd548304af064c2dfbbb6bc5f10e1aa1b346057d66",
+      "tests/test_radial_disk_runtime.py": "a6397985c76ca1caab2a27390c209946925aa5c0825497bcc3ac5febb35439ad",
+      "tools/evaluate_radial_disk_recheck.py": "7219127a251b874725b94bec6f16cc8dd6d021b075fd4e60cc719cfe84e2ceaf",
+      "tools/run_radial_disk_recheck.py": "b10b9da2d3aa49e6f84b35332e2b24c0b731b1a838b16444f66c97c1d7e1c37d"
+    },
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7; TINY_ICC_OUTPUT_VARIATION=0"
+  },
+  "schema_version": "semantic_only_baseline_manifest_v1"
+}

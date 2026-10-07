@@ -1,74 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="215" height="50" viewBox="0 0 215 50">
   <defs>
-    <clipPath id="innerRect"><rect x="0.5" y="0.5" width="214.0" height="49.0"/></clipPath>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="0.500" y1="0.500" x2="0.500" y2="49.500">
+      <stop offset="0%" stop-color="#c8c8c8"/>
+      <stop offset="40%" stop-color="#ebebeb"/>
+      <stop offset="100%" stop-color="#c8c8c8"/>
+    </linearGradient>
+  <clipPath id="innerRect"><rect x="0.5" y="0.5" width="214.0" height="49.0"/></clipPath>
   </defs>
-  <g data-output-variation="1" transform="translate(0.0570 -0.1138) rotate(-0.0860 107.5000 25.0000)">
+  <g data-output-variation="1" transform="translate(-0.0067 -0.0220) rotate(0.0509 107.5000 25.0000)">
 
   <rect x="0" y="0" width="215" height="50" fill="#ffffff" stroke="none"/>
-  <rect x="0.500" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="3.844" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="7.188" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="10.531" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="13.875" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="17.219" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="20.562" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="23.906" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="27.250" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="30.594" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="33.938" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="37.281" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="40.625" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="43.969" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="47.312" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="50.656" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="54.000" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="57.344" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="60.688" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="64.031" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="67.375" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="70.719" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="74.062" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="77.406" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="80.750" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="84.094" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="87.438" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="90.781" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="94.125" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="97.469" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="100.812" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="104.156" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="107.500" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="110.844" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="114.188" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="117.531" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="120.875" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="124.219" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="127.562" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="130.906" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="134.250" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="137.594" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="140.938" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="144.281" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="147.625" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="150.969" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="154.312" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="157.656" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="161.000" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="164.344" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="167.688" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="171.031" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="174.375" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="177.719" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="181.062" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="184.406" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="187.750" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="191.094" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="194.438" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="197.781" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="201.125" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="204.469" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="207.812" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
-  <rect x="211.156" y="0.500" width="3.558" height="49.000" fill="#e2e4e8" stroke="none"/>
+  <rect x="0.500" y="0.500" width="214.000" height="49.000" fill="url(#panelGradient)" stroke="none"/>
   <rect x="0.5" y="0.5" width="214.0" height="49.0" fill="none" stroke="#aaaaaa" stroke-width="1.20"/>
   </g>
 </svg>

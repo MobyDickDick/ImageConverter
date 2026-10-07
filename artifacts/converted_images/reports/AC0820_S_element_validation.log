@@ -1,18 +1,18 @@
-run-meta: run_seed=221693115 pass_seed_offset=37 trace_id=223688356772
+run-meta: run_seed=330102219 pass_seed_offset=59 trace_id=333073144930
 status=semantic_ok
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:text=68.889
 quality_elevated_elements=circle,text
-redraw_variation: seed=223688356772 changed_params=cx:7.500->7.393 | cy:8.000->8.032 | r:7.000->6.915 | stroke_circle:1.000->0.947 | co2_dx:0.000->0.078 | co2_dy:0.000->-0.015
+redraw_variation: seed=333073144930 changed_params=cx:7.500->7.541 | cy:8.000->7.877 | r:7.000->7.055 | stroke_circle:1.000->0.888 | co2_dx:0.000->-0.018 | co2_dy:0.000->-0.012
 semantic-guard: Textmodus aktiv (co2).
 small_variant_mode_active: reason=min_dim, min_dim=11.400, mask_dilate_px=1, text_mode=co2, arm_min_ratio=0.000, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=74.046
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing cx 7.500->8.500, cy 7.500->8.000 (best_err=63.064)
-perf_probe: circle_center_elapsed round=1 elapsed=0.02s
+perf_probe: circle_center_elapsed round=1 elapsed=0.01s
 circle: Radius-Bracketing r 5.700->6.000 (best_err=64.107, full_err=35.036); Kandidaten=5.400->69.614, 5.500->64.462, 6.000->64.107, 6.500->64.107, 6.700->64.107
-perf_probe: circle_radius_elapsed round=1 elapsed=0.02s
+perf_probe: circle_radius_elapsed round=1 elapsed=0.00s
 text: Fehler=54.586
 text: Breiten-Bracketing co2_font_scale 0.860->0.619; Kandidaten=0.619->54.586, 0.713->54.586, 0.731->54.586, 0.808->54.586, 0.860->54.586, 0.933->54.586, 0.989->54.586, 1.059->54.586, 1.153->54.586, 1.247->54.586
 perf_probe: global_search_elapsed round=1 elapsed=0.00s
@@ -21,9 +21,9 @@ Runde 2: elementweise Validierung gestartet
 circle: Fehler=64.107
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing cx 8.500->7.500, cy 8.000->8.000 (best_err=58.423)
-perf_probe: circle_center_elapsed round=2 elapsed=0.05s
+perf_probe: circle_center_elapsed round=2 elapsed=0.00s
 circle: Radius-Bracketing r 6.000->7.000 (best_err=56.607, full_err=29.511); Kandidaten=5.400->79.318, 6.000->58.423, 6.500->56.607, 7.000->56.607
-perf_probe: circle_radius_elapsed round=2 elapsed=0.00s
+perf_probe: circle_radius_elapsed round=2 elapsed=0.02s
 text: Fehler=61.589
 text: Breiten-Bracketing co2_font_scale 0.619->0.450; Kandidaten=0.450->61.589, 0.517->61.589, 0.526->61.589, 0.584->61.589, 0.619->61.589, 0.674->61.589, 0.712->61.589, 0.763->61.589, 0.830->61.589, 0.898->61.589
 perf_probe: global_search_elapsed round=2 elapsed=0.00s
@@ -32,9 +32,9 @@ Runde 3: elementweise Validierung gestartet
 circle: Fehler=56.308
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing cx 7.500->7.500, cy 8.000->7.000 (best_err=53.736)
-perf_probe: circle_center_elapsed round=3 elapsed=0.02s
+perf_probe: circle_center_elapsed round=3 elapsed=0.00s
 circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=53.736, full_err=30.267); Kandidaten=6.300->55.392, 7.000->53.736, 7.200->53.736
-perf_probe: circle_radius_elapsed round=3 elapsed=0.00s
+perf_probe: circle_radius_elapsed round=3 elapsed=0.02s
 text: Fehler=68.889
 text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.450); Kandidaten=0.450->68.889, 0.480->68.889, 0.511->68.889, 0.517->68.889, 0.551->68.889, 0.592->68.889, 0.622->68.889, 0.652->68.889
 perf_probe: global_search_elapsed round=3 elapsed=0.00s
