@@ -380,12 +380,20 @@ def _archiveSuccessfulConversionArtifacts(*,
 
 
 def _findOpenTasksPathForReportsDir(reports_out_dir: str) -> Path | None:
-    """Return the nearest repository ``docs/open_tasks.md`` for a reports directory."""
+    """Associate task updates only with a repository's canonical reports folder."""
     reports_path = Path(reports_out_dir).resolve()
     for candidate in (reports_path, *reports_path.parents):
         open_tasks_path = candidate / "docs" / "open_tasks.md"
         if open_tasks_path.exists():
-            return open_tasks_path
+            relative_parts = reports_path.relative_to(candidate).parts
+            if relative_parts in {
+                ("artifacts", "converted_images", "reports"),
+                ("src", "artifacts", "converted_images", "reports"),
+            }:
+                return open_tasks_path
+            # Temporary/custom outputs can live beneath the real checkout.
+            # Finding an ancestor task list does not authorize changing it.
+            return None
     return None
 
 

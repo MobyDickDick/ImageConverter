@@ -389,6 +389,27 @@ def test_remove_successful_variants_from_open_tasks_ignores_external_reports_dir
     assert not (tmp_path / "docs" / "open_tasks.md").exists()
 
 
+def test_external_reports_preserve_ancestor_repository_tasks(tmp_path):
+    docs = tmp_path / "docs"
+    docs.mkdir()
+    tasks = docs / "open_tasks.md"
+    original = b"# Tasks\r\n- [ ] Check AC0831_L\r\n"
+    tasks.write_bytes(original)
+    reports = tmp_path / ".tmp" / "conversion" / "reports"
+    reports.mkdir(parents=True)
+
+    finalization_helpers._removeSuccessfulVariantsFromOpenTasks(
+        reports_out_dir=str(reports),
+        result_map={"AC0831_L.jpg": {"variant": "AC0831_L", "status": "semantic_ok"}},
+    )
+    finalization_helpers._appendFailureFollowUpTasks(
+        reports_out_dir=str(reports),
+        batch_failures=[{"filename": "AC0833_L.jpg", "status": "conversion_failed", "reason": "no_result"}],
+    )
+
+    assert tasks.read_bytes() == original
+
+
 def test_append_failure_followup_tasks_adds_missing_failure_variants(tmp_path):
     reports_dir = tmp_path / "src" / "artifacts" / "converted_images" / "reports"
     reports_dir.mkdir(parents=True)
