@@ -209,6 +209,26 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         return []
 
     elements: list[dict[str, object]] = []
+
+    # A separate narrow topology: triangle above a vertical gradient stem.
+    # Explicit directions and the absence of additional objects are constraints.
+    triangle_stem_hint = (
+        'dreieck' in desc and 'gefüllt' in desc and 'stiel' in desc
+        and 'unterhalb' in desc and 'senkrecht' in desc
+        and re.search(r'(?:spitze|zeigt)[^.;]*?nach\s+oben', desc)
+        and 'horizontal' in desc and 'dunkel-hell-dunkel' in desc
+        and not _has_any(desc, ('kreis', 'quadrat', 'text', 'beschrift', 'buchstab', 'anschluss', 'diagonal'))
+    )
+    if triangle_stem_hint:
+        return [{
+            'kind': 'TriangleStemGlyph', 'id': 'triangle_stem',
+            'points': [[.5, .02], [.04, .32], [.96, .32]],
+            'fill': '#808080', 'stroke': '#b0b0b0', 'stroke_width': .015,
+            'stem_bbox': [.25, .37, .5, .62],
+            'stem_stops': [{'offset': '0%', 'color': '#808080'},
+                           {'offset': '50%', 'color': '#eeeeee'},
+                           {'offset': '100%', 'color': '#808080'}],
+        }]
     rect_hint = _has_any(desc, ("rechteck", "viereck", "quadrat", "kühlelement", "heizelement", "rechteck-plus-minus-bildbeschreibung"))
     gradient_transition_hint = _has_any(desc, ("farbübergang", "farbuebergang", "farbverlauf", "gradient"))
     gradient_hint = gradient_transition_hint and (
@@ -1822,6 +1842,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
 
     svg: list[str] = []
     rect_x, rect_y, rect_w, rect_h = _find_rect(geometry_ir, w, h)
+    triangle_stem_elements = [e for e in geometry_ir if e.get('kind') == 'TriangleStemGlyph']
     needs_gradient = any(element.get("kind") == "HorizontalGradient" for element in geometry_ir)
     stroke_gradient_elements = [
         element for element in geometry_ir
@@ -1842,7 +1863,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
         "MainDiagonalMirroredTopKelleThreeWayValveGlyph",
     }
     needs_vertical_valve_defs = any(element.get("kind") in valve_gradient_kinds for element in geometry_ir)
-    if needs_gradient or needs_vertical_valve_defs or stroke_gradient_elements or radial_gradient_elements:
+    if needs_gradient or needs_vertical_valve_defs or stroke_gradient_elements or radial_gradient_elements or triangle_stem_elements:
         svg.append("  <defs>")
         for element in radial_gradient_elements:
             gradient = element['radial_gradient']
@@ -1853,6 +1874,15 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 color = html.escape(str(stop.get('color', element.get('fill', '#bcbcbc'))))
                 svg.append(f'      <stop offset="{offset}" stop-color="{color}"/>')
             svg.append('    </radialGradient>')
+
+        for element in triangle_stem_elements:
+            gradient_id = html.escape(str(element.get('id', 'triangle_stem'))+'-stem-gradient')
+            svg.append(f'    <linearGradient id="{gradient_id}" x1="0%" y1="0%" x2="100%" y2="0%">')
+            for stop in element['stem_stops']:
+                offset = html.escape(str(stop['offset']))
+                color = html.escape(str(stop['color']))
+                svg.append(f'      <stop offset="{offset}" stop-color="{color}"/>')
+            svg.append('    </linearGradient>')
         if needs_gradient:
             svg.append('    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">')
             svg.append('      <stop offset="0%" stop-color="#8f8f8f"/>')
@@ -2159,6 +2189,19 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                         f'  <path id="{stable_id}" d="M {_fmt(x0)} {_fmt(y0)} L {_fmt(x1)} {_fmt(y1)}" '
                         f'stroke="{stroke}" stroke-width="{_fmt(sw)}" fill="none" stroke-linecap="round"/>'
                     )
+
+        elif kind == "TriangleStemGlyph":
+            points = ' '.join(f'{_fmt(float(px)*w)},{_fmt(float(py)*h)}'
+                              for px, py in element['points'])
+            fill = html.escape(str(element.get('fill', '#808080')))
+            stroke = html.escape(str(element.get('stroke', 'none')))
+            sw = float(element.get('stroke_width', 0))*min(w, h)
+            svg.append(f'  <polygon id="{element_id}_triangle" points="{points}" fill="{fill}" '
+                       f'stroke="{stroke}" stroke-width="{_fmt(sw)}" stroke-linejoin="miter"/>')
+            x, y, bw, bh = element['stem_bbox']
+            svg.append(f'  <rect id="{element_id}_stem" x="{_fmt(float(x)*w)}" y="{_fmt(float(y)*h)}" '
+                       f'width="{_fmt(float(bw)*w)}" height="{_fmt(float(bh)*h)}" '
+                       f'fill="url(#{element_id}-stem-gradient)" stroke="none"/>')
         elif kind == "HorizontalGradient":
             x, y, bw, bh = _scaled_bbox(element, w, h)
             svg.append(

@@ -1,0 +1,96 @@
+{
+  "schema_version": "triangle_stem_recheck_manifest_v1",
+  "description": "Gefülltes Dreieck, dessen Spitze nach oben zeigt. Unterhalb liegt mit kleinem Abstand ein schmaler senkrechter rechteckiger Stiel mit horizontalem Dunkel-Hell-Dunkel-Farbverlauf und heller Mitte. Weißer Hintergrund.",
+  "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+  "provenance": {
+    "commit": "a6eb50d6f",
+    "seed": 0,
+    "toolchain": "CPython 3.12.14, NumPy 2.5.3, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "probe_00",
+      "catalog_variant": "GE9011_1M",
+      "image": "../../images_to_convert/GE9011_1M.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "probe_01",
+      "catalog_variant": "GE9011_1S",
+      "image": "../../images_to_convert/GE9011_1S.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "probe_02",
+      "catalog_variant": "GE9011_2M",
+      "image": "../../images_to_convert/GE9011_2M.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "probe_03",
+      "catalog_variant": "GE9011_2S",
+      "image": "../../images_to_convert/GE9011_2S.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "probe_04",
+      "catalog_variant": "GE9011_3M",
+      "image": "../../images_to_convert/GE9011_3M.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "probe_05",
+      "catalog_variant": "GE9011_3S",
+      "image": "../../images_to_convert/GE9011_3S.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "probe_06",
+      "catalog_variant": "GE9011_4M",
+      "image": "../../images_to_convert/GE9011_4M.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "probe_07",
+      "catalog_variant": "GE9011_4S",
+      "image": "../../images_to_convert/GE9011_4S.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "probe_08",
+      "catalog_variant": "GE9011_5M",
+      "image": "../../images_to_convert/GE9011_5M.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "probe_09",
+      "catalog_variant": "GE9011_5S",
+      "image": "../../images_to_convert/GE9011_5S.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "probe_10",
+      "catalog_variant": "GE9011_6M",
+      "image": "../../images_to_convert/GE9011_6M.jpg",
+      "role": "target"
+    },
+    {
+      "case_id": "probe_11",
+      "catalog_variant": "GE9011_6S",
+      "image": "../../images_to_convert/GE9011_6S.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "probe_12",
+      "catalog_variant": "GE9011_7M",
+      "image": "../../images_to_convert/GE9011_7M.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "probe_13",
+      "catalog_variant": "GE9011_7S",
+      "image": "../../images_to_convert/GE9011_7S.jpg",
+      "role": "holdout"
+    }
+  ]
+}
