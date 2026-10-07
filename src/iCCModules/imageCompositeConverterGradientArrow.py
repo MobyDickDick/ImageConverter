@@ -1,11 +1,12 @@
-"""Register an upward triangle and a detached rectangular gradient shaft."""
+"""Register a vertical triangle and a detached rectangular gradient shaft."""
 from __future__ import annotations
 
 import cv2
 import numpy as np
+from xml.etree import ElementTree as ET
 
 
-def fit_gradient_arrow(width, height, *, description, image, render_fn, error_fn):
+def _fit_upward_gradient_arrow(width, height, *, description, image, render_fn, error_fn):
     text = str(description or '').casefold()
     if not all(token in text for token in ('pfeil', 'dreieck', 'schaft', 'verlauf', 'oben')):
         return None
@@ -121,3 +122,46 @@ def fit_gradient_arrow(width, height, *, description, image, render_fn, error_fn
     return {'svg': best[1], 'rendered': best[2], 'error': best[0],
             'initial_error': initial_error, 'parameters': parameters,
             'evaluations': evaluations, 'source': 'raster_gradient_arrow_v1'}
+
+
+def fit_gradient_arrow(width, height, *, description, image, render_fn, error_fn):
+    """Normalize a declared downward direction without adding catalog knowledge."""
+    text = str(description or '').casefold()
+    downward = 'nach unten' in text or 'unten gerichtet' in text
+    if not downward:
+        return _fit_upward_gradient_arrow(width, height, description=description,
+                                         image=image, render_fn=render_fn, error_fn=error_fn)
+    if 'nach oben' in text or 'oben gerichtet' in text:
+        return None
+    arr = np.asarray(image)
+    if arr.shape != (height, width, 3):
+        return None
+
+    def reverse_svg(svg):
+        root = ET.fromstring(svg)
+        for shape in root:
+            kind = shape.tag.rsplit('}', 1)[-1]
+            if kind == 'polygon':
+                points = [[float(v) for v in point.split(',')] for point in shape.get('points').split()]
+                shape.set('points', ' '.join(f'{x:g},{height-y:g}' for x, y in points))
+            elif kind == 'rect':
+                shape.set('y', f"{height-float(shape.get('y', 0))-float(shape.get('height')):g}")
+        return ET.tostring(root, encoding='unicode') + '\n'
+
+    def normalized_render(svg, w, h):
+        rendered = render_fn(reverse_svg(svg), w, h)
+        return None if rendered is None else np.flipud(rendered)
+
+    normalized_description = text.replace('nach unten', 'nach oben').replace('unten gerichtet', 'oben gerichtet')
+    result = _fit_upward_gradient_arrow(width, height, description=normalized_description,
+                                       image=np.flipud(arr), render_fn=normalized_render, error_fn=error_fn)
+    if result is None:
+        return None
+    result['svg'] = reverse_svg(result['svg'])
+    result['rendered'] = np.flipud(result['rendered']).copy()
+    parameters = result['parameters'].copy()
+    parameters[1] = height - parameters[1]
+    parameters[4] = height - parameters[4]
+    parameters[6] = height - parameters[6] - parameters[8]
+    result.update(parameters=parameters, direction='down')
+    return result

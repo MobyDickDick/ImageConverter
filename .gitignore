@@ -38,3 +38,8 @@ artifacts/converted_images/reports/reports/overview_svg_tiles.png
 /artifacts/evaluation/plan_b_variations/
 /artifacts/evaluation/plan_b_random_*/
 /artifacts/plan-b-acceptance/
+
+# Keep recheck inputs and compact evidence; generated vectors/reports stay local.
+/artifacts/evaluation/downward_gradient_arrow_recheck_v1/*
+!/artifacts/evaluation/downward_gradient_arrow_recheck_v1/manifest.json
+!/artifacts/evaluation/downward_gradient_arrow_recheck_v1/summary_2026-10-07.json

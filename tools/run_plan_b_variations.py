@@ -257,11 +257,22 @@ def prepare_cases(svg: str, description: str, output: Path, seed: int) -> list[d
 
 def run_case(case: dict, output: Path, *, timeout: float, iterations: int) -> dict:
     cv2 = import_with_vendored_fallback("cv2")
+    np = import_with_vendored_fallback("numpy")
+    fitz = import_with_vendored_fallback("fitz")
+    from PIL import Image
     name = case["case_id"]
     case_dir = output / name
     inputs = case_dir / "input"
     reference = cv2.imread(str(inputs / (name + ".png")))
-    command = [sys.executable, "-m", "tools.run_plan_b_variations", "--_worker",
+    # Keep the parent's imported binary toolchain even when repository startup
+    # discovers an old virtualenv built for a different Python ABI.
+    dependency_paths = list(dict.fromkeys(str(Path(module.__file__).resolve().parents[1])
+                                         for module in (np, cv2, fitz, Image)))
+    worker_paths = [*dependency_paths, str(ROOT), *sys.path]
+    bootstrap = ('import sys, runpy; sys.path[:0] = ' + repr(worker_paths)
+                 + "; import numpy, cv2, fitz; from PIL import Image; "
+                 + "runpy.run_module('tools.run_plan_b_variations', run_name='__main__')")
+    command = [sys.executable, "-I", "-c", bootstrap, "--_worker",
                str(case_dir / "conversion"), str(inputs),
                "--descriptions-path", str(inputs / "descriptions.xml"),
                "--output-dir", str(case_dir / "conversion"), "--start", name, "--end", name,
