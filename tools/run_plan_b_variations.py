@@ -9,6 +9,7 @@ import math
 import os
 from pathlib import Path
 import random
+import shutil
 import subprocess
 import sys
 import time
@@ -255,7 +256,8 @@ def prepare_cases(svg: str, description: str, output: Path, seed: int) -> list[d
     return cases
 
 
-def run_case(case: dict, output: Path, *, timeout: float, iterations: int) -> dict:
+def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
+             keep_debug_artifacts: bool = True) -> dict:
     cv2 = import_with_vendored_fallback("cv2")
     np = import_with_vendored_fallback("numpy")
     fitz = import_with_vendored_fallback("fitz")
@@ -309,10 +311,11 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int) -> di
         result.update(output_svg=str(svg_path.relative_to(output)), output_sha256=sha256(svg_path.read_bytes()))
         # Batch acceptance is based on independently measured saved vectors, not
         # the converter's historical success/failed labels or checkpoints.
-        raster = render(svg, case["width"], case["height"])
-        cv2.imwrite(str(case_dir / "output.png"), raster)
-        cv2.imwrite(str(case_dir / "difference.png"), cv2.absdiff(reference, raster))
-        cv2.imwrite(str(case_dir / "comparison.png"), cv2.hconcat([reference, raster, cv2.absdiff(reference, raster)]))
+        if keep_debug_artifacts:
+            raster = render(svg, case["width"], case["height"])
+            cv2.imwrite(str(case_dir / "output.png"), raster)
+            cv2.imwrite(str(case_dir / "difference.png"), cv2.absdiff(reference, raster))
+            cv2.imwrite(str(case_dir / "comparison.png"), cv2.hconcat([reference, raster, cv2.absdiff(reference, raster)]))
     except subprocess.TimeoutExpired:
         result["failures"] = ["conversion_timeout"]
     except Exception as exc:
@@ -330,30 +333,52 @@ def summarize(results: list[dict]) -> dict:
 
 
 def run_battery(svg_path: Path, description: str, output: Path, *, seed: int,
-                timeout: float = 60, iterations: int = 64, selection: dict | None = None) -> dict:
+                timeout: float = 60, iterations: int = 64, selection: dict | None = None,
+                keep_debug_artifacts: bool = False) -> dict:
     if not math.isfinite(timeout) or timeout <= 0 or iterations < 1:
         raise ValueError("Timeout and iterations must be positive")
     output = output.resolve()
     svg = svg_path.read_text(encoding="utf-8")
     cases = prepare_cases(svg, description, output, seed)
-    (output / "source.svg").write_text(svg, encoding="utf-8")
-    (output / "source_description.txt").write_text(description, encoding="utf-8")
+    if keep_debug_artifacts:
+        (output / "source.svg").write_text(svg, encoding="utf-8")
+        (output / "source_description.txt").write_text(description, encoding="utf-8")
     manifest = {"schema_version": "plan_b_variations_v1", "seed": seed, "limits": LIMITS,
                 "iterations": iterations, "timeout_seconds": timeout,
                 "source_svg_sha256": sha256(svg.encode("utf-8")),
                 "source_description_sha256": sha256(description.encode("utf-8")),
+                "source_description": description,
+                "artifact_retention": "debug" if keep_debug_artifacts else "summary_only",
                 "selection": selection or {"mode": "explicit", "source_svg": str(svg_path.resolve())},
                 "cases": cases}
-    (output / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if keep_debug_artifacts:
+        (output / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    else:
+        manifest["selection"] = {key: value for key, value in manifest["selection"].items()
+                                 if key not in {"pool", "excluded"}}
     report = {**manifest, "cases": []}
-    for case in cases:
-        print(f"[Plan B] {len(report['cases'])+1}/{CASE_COUNT} {case['case_id']} started", flush=True)
-        result = run_case(case, output, timeout=timeout, iterations=iterations)
-        report["cases"].append(result)
-        report["summary"] = summarize(report["cases"])
-        (output / "report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
-        print(f"[Plan B] {case['case_id']}: {'PASS' if result['satisfactory'] else 'FAIL'} "
-              f"{','.join(result['failures'])} ({result['elapsed_seconds']}s)", flush=True)
+    try:
+        for case in cases:
+            print(f"[Plan B] {len(report['cases'])+1}/{CASE_COUNT} {case['case_id']} started", flush=True)
+            result = run_case(case, output, timeout=timeout, iterations=iterations,
+                              keep_debug_artifacts=keep_debug_artifacts)
+            if not keep_debug_artifacts:
+                result = {key: value for key, value in result.items()
+                          if key not in {"command", "output_svg", "reference_svg", "description", "limits"}}
+            report["cases"].append(result)
+            report["summary"] = summarize(report["cases"])
+            (output / "report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+            print(f"[Plan B] {case['case_id']}: {'PASS' if result['satisfactory'] else 'FAIL'} "
+                  f"{','.join(result['failures'])} ({result['elapsed_seconds']}s)", flush=True)
+    finally:
+        if not keep_debug_artifacts:
+            # prepare_cases created this fresh directory exclusively. Delete
+            # only its generated children, including after an interrupted run.
+            for directory in [output / "references", *[output / case["case_id"] for case in cases]]:
+                if directory.resolve().parent != output:
+                    raise ValueError("Generated work directory escapes the run output")
+                if directory.exists():
+                    shutil.rmtree(directory)
     return report
 
 
@@ -370,6 +395,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--seed", type=int, help="Optional replay seed; default is fresh system randomness")
     parser.add_argument("--timeout-seconds", type=float, default=60)
     parser.add_argument("--iterations", type=int, default=64)
+    parser.add_argument("--keep-debug-artifacts", action="store_true",
+                        help="Keep reference SVGs, rasters, converter outputs and logs; default keeps only report.json")
     args = parser.parse_args(argv)
     if bool(args.svg) != bool(args.description_file):
         parser.error("--svg and --description-file must be supplied together")
@@ -381,7 +408,8 @@ def main(argv: list[str] | None = None) -> int:
     output = args.output_dir or ROOT / "artifacts/evaluation/plan_b_variations" / f"run_{time.time_ns()}_{seed}"
     print(f"[Plan B] selected={svg_path} seed={seed} output={output}", flush=True)
     report = run_battery(svg_path, description, output, seed=seed, selection=selection,
-                         timeout=args.timeout_seconds, iterations=args.iterations)
+                         timeout=args.timeout_seconds, iterations=args.iterations,
+                         keep_debug_artifacts=args.keep_debug_artifacts)
     print(json.dumps(report["summary"], sort_keys=True))
     return 0 if report["summary"]["satisfactory"] else 1
 

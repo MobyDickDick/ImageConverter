@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-07)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `410` · Erledigt `389` · Offen `21`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `410` · Erledigt `390` · Offen `20`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -25,20 +25,21 @@ Tests sind grün; das vollständige Defaultprofil meldet `1681 passed, 29 skippe
 mit bestehenden Windows-Skips. Details: `docs/next_arbeitspaket_2026-10-07_ge9013_6m.md`.
 
 Die gekoppelte zufällige Plan-B-Auswahl (`AC0538_1L_sia`, Seed
-`3948009396310964094`) bleibt rot: Nach Korrektur des Worker-ABI-Konflikts
-laufen 16/16 CLI-Konvertierungen ohne verbotenen SVG-Zugriff, aber 0/16
-bestehen die unveränderten Qualitätsgrenzen. Die bisherige Beschreibung nennt
-keine konkrete Symbolgeometrie. Der maschinenlesbare Einzelbefund steht in
-`artifacts/evaluation/downward_gradient_arrow_recheck_v1/summary_2026-10-07.json`.
+`3948009396310964094`) besteht nach eigenständiger Beschreibung und katalogfreier
+Rasterregistrierung alle 16 unveränderten Qualitätsgates. Ein zusätzlicher Seed
+besteht ebenfalls 16/16. Geometrie, Linienbreiten und Farben werden aus dem
+Raster geschätzt und durch Render-/Fehlersuche verfeinert. Die Diagonale wird
+über den verdeckenden Kreis hinweg aus beiden sichtbaren Abschnitten geschätzt.
+Die Beschreibung allein reicht im isolierten Vergleichsfall noch nicht aus.
 
-- [ ] **PB-RANDOM-2026-10-07:** Eigenständige Beschreibung und katalogfreie
+- [x] **PB-RANDOM-2026-10-07:** Eigenständige Beschreibung und katalogfreie
   Rekonstruktion für Kreis, Verbindung, gerahmtes Diagramm und helle Stufenkurve
-  der eingefrorenen Zufallsauswahl erarbeiten; exakt denselben Seed und alle
-  16 Varianten erneut gegen die unveränderten Grenzen prüfen. Ein technischer
-  Exit 0 zählt nicht als Abnahme. Repro steht im verlinkten Arbeitspaket.
+  umgesetzt; gleicher Seed und alle 16 identischen Rastervarianten bestehen
+  die unveränderten Grenzen. Zweiter Seed: weitere 16/16. Details und Repro:
+  `docs/plan_b_variation_acceptance.md`.
 
 Der Review über 956 Einträge (950 renderbare Paare) setzt die reguläre Rotation
-mit `AC0554_1_L` fort. Die randomisierte Folgeaufgabe bleibt unabhängig offen.
+mit `AC0554_1_L` fort. Diese Diagrammabnahme ersetzt keinen regulären Kandidaten.
 
 ### Vorheriger Plan-B-Stand (2026-10-06)
 

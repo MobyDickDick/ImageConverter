@@ -173,12 +173,47 @@ def test_all_sixteen_run_even_after_failure_and_overall_exit_is_red(tmp_path, mo
     assert len(calls) == 16
     assert report["summary"] == {"required": 16, "completed": 16, "passed": 15, "failed": 1, "satisfactory": False}
     assert json.loads((output / "report.json").read_text(encoding="utf-8")) == report
+    assert list(output.iterdir()) == [output / "report.json"]
+    assert report['source_description'] == DESCRIPTION
+    assert 'reference_svg' not in report['cases'][0]
     monkeypatch.setattr(battery, "run_battery", lambda *args, **kwargs: report)
     description = tmp_path / "description.txt"
     description.write_text(DESCRIPTION, encoding="utf-8")
     assert battery.main(["--svg", str(source), "--description-file", str(description)]) == 1
     assert not battery.summarize([{"satisfactory": True}] * 15)["satisfactory"]
     assert battery.summarize([{"satisfactory": True}] * 16)["satisfactory"]
+
+
+def test_debug_files_are_kept_only_when_requested(tmp_path, monkeypatch):
+    source = tmp_path / 'source.svg'
+    source.write_text(SVG, encoding='utf-8')
+    monkeypatch.setattr(battery, 'run_case', lambda case, output, **kwargs:
+                        {**case, 'satisfactory': True, 'failures': [], 'elapsed_seconds': 0})
+    output = tmp_path / 'debug'
+    report = battery.run_battery(source, DESCRIPTION, output, seed=12, keep_debug_artifacts=True)
+    assert report['summary']['passed'] == 16
+    assert (output / 'source.svg').exists()
+    assert (output / 'manifest.json').exists()
+    assert (output / 'references').is_dir()
+    assert (output / 'probe_01/input/probe_01.png').exists()
+
+
+def test_interruption_removes_only_the_fresh_run_work_files(tmp_path, monkeypatch):
+    source = tmp_path / 'source.svg'
+    source.write_text(SVG, encoding='utf-8')
+    def interrupted(*args, **kwargs):
+        raise KeyboardInterrupt
+    monkeypatch.setattr(battery, 'run_case', interrupted)
+    output = tmp_path / 'run'
+    with pytest.raises(KeyboardInterrupt):
+        battery.run_battery(source, DESCRIPTION, output, seed=12)
+    assert not list(output.iterdir())
+    assert source.read_text(encoding='utf-8') == SVG
+    sentinel = output / 'untouched.txt'
+    sentinel.write_text('keep', encoding='utf-8')
+    with pytest.raises(FileExistsError):
+        battery.run_battery(source, DESCRIPTION, output, seed=12)
+    assert sentinel.read_text(encoding='utf-8') == 'keep'
 
 
 def test_worker_blocks_external_svg_reads_even_when_catalog_references_are_in_description(tmp_path):

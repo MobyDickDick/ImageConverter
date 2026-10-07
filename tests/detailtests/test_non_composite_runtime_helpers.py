@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import numpy as np
+import pytest
 
 from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime_helpers
 
@@ -2498,3 +2499,63 @@ def test_heat_exchanger_element_fit_scales_width_candidates_from_raster_size() -
     assert float(params["diag1_width"]) <= 2.8
     assert float(params["plus_width"]) <= 1.6
     assert not any('stroke-width="4.00"' in svg for svg in captured_svgs)
+
+
+def _fit_dot_symbol_for_quality(svg, description, width, height):
+    from tools.run_plan_b_variations import render, measure_quality
+
+    raster = render(svg, width, height)
+    original = raster.copy()
+    result = non_composite_runtime_helpers._fit_symbol_element_by_element(
+        width=width, height=height, description=description, perc_img=raster,
+        render_svg_to_numpy_fn=render,
+        calculate_error_fn=lambda a, b: float(np.abs(a.astype(float) - b).mean()),
+    )
+    assert result is not None
+    quality = measure_quality(raster, result[1])
+    assert quality['satisfactory'], quality
+    assert quality['complexity']['vector_element_count'] <= 6
+    assert '<image' not in result[1]
+    np.testing.assert_array_equal(raster, original)
+    return result
+
+
+@pytest.mark.parametrize('probe_index', range(16))
+def test_dot_symbol_reconstructs_every_variant_of_frozen_failing_ci_task(probe_index):
+    from pathlib import Path
+    from tools.run_plan_b_variations import make_variations, select_task
+
+    root = Path(__file__).resolve().parents[2]
+    seed = 2870690750133000144
+    path, description, _ = select_task(
+        root / 'artifacts/images_to_convert/samples',
+        root / 'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml', seed,
+    )
+    assert path.name == 'AR0030.svg'
+    case = make_variations(path.read_text(encoding='utf-8'), description, seed)[probe_index]
+    result = _fit_dot_symbol_for_quality(case['svg'], case['description'], case['width'], case['height'])
+    assert result[3]['center_dot_radius'] > 3.2
+    assert any(line.startswith('dot_registration_evaluations=') for line in result[4])
+
+
+@pytest.mark.parametrize('scale,shift,radius', [(1, 0, 4.8), (2, -1.2, 5.5), (1, 1.3, 3.8)])
+def test_dot_symbol_measures_independent_circle_size_frame_pose_and_diagonal(scale, shift, radius):
+    width, height = 32 * scale, 62 * scale
+    svg = (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">'
+        '<defs><linearGradient id="shade"><stop offset="0" stop-color="#bdbdbd"/>'
+        '<stop offset=".27" stop-color="#f1f1f1"/><stop offset=".52" stop-color="#f1f1f1"/>'
+        '<stop offset="1" stop-color="#c6c6c6"/></linearGradient></defs>'
+        f'<g transform="scale({scale}) translate({shift} 0)">'
+        '<rect x=".8" y="1.2" width="29.2" height="59.4" fill="url(#shade)" stroke="#9f9f9f" stroke-width="1.1"/>'
+        '<path d="M 29.9 1 L 1.2 60.5" stroke="#808080" stroke-width="1.7"/>'
+        f'<circle cx="15" cy="32" r="{radius}" fill="#737373"/></g></svg>'
+    )
+    result = _fit_dot_symbol_for_quality(
+        svg, 'Rechteck mit grauer Diagonale von unten links nach oben rechts, '
+        'in der Mitte ein dunkelgrauer Punkt und Farbverlauf dunkel-hell-dunkel.', width, height,
+    )
+    params = result[3]
+    assert abs(params['center_dot_radius'] - radius * scale) < .75
+    assert abs(params['center_dot_x_ratio'] * width - (15 + shift) * scale) < .75
+    assert abs(params['center_dot_y_ratio'] * height - 32 * scale) < .75
