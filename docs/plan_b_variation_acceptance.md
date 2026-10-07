@@ -104,6 +104,49 @@ rot und lädt die Belege auch bei Fehlschlägen hoch. Die schnellen Tests in
 `tests/detailtests/test_plan_b_variations.py` sichern Auswahl, Varianten,
 Qualitätsmessung und Fehlerpfade ab; sie ersetzen den echten Abnahmelauf nicht.
 
+Der Anspruch gilt für jede ausgewählte Aufgabe: Alle 16 Varianten müssen die
+gleichen Grenzen bestehen. Eine erfolgreiche Symbolfamilie belegt noch keine
+vollständige Abdeckung des Auswahlpools. Scheitert eine andere Familie, bleibt
+der Lauf korrekt rot; sie wird mit eingefrorenem Seed und unveränderten Eingaben
+zum nächsten Lernfall. Grenzen zu lockern oder ein leichteres Motiv zu wählen
+erfüllt diese Aufgabe nicht. Der Runner organisiert und bewertet die Abnahme;
+die Rekonstruktionsalgorithmen liegen unter `src/iCCModules`.
+
+## Klappensymbol-Abnahme vom 2026-10-07
+
+Der [CI-Ausfall von AR0030](https://github.com/MobyDickDick/ImageConverter/actions/runs/37648964984/job/112886962317)
+wurde lokal mit Seed `2870690750133000144` reproduziert: **0/16**.
+Nach Verbesserung der allgemeinen elementweisen Rasterregistrierung bestehen
+dieselben 16 Eingaben **16/16**; Seed `20261007` besteht weitere **16/16**.
+Beschreibung, Quell-SVG, Qualitätsgrenzen sowie alle 16 eingefrorenen
+Referenz-/Eingabehashes bleiben identisch. Verbotene SVG-Zugriffe: null;
+sechs Vektorelemente je Ausgabe, keine eingebetteten Rasterbilder.
+
+| Seed | Max. RGB-Fehler | Max. Vordergrundfehler | Min. Konturübereinstimmung | Min. IoU |
+| --- | --- | --- | --- | --- |
+| `2870690750133000144` | `0.000546` | `0.000602` | `0.848184` | `0.868062` |
+| `20261007` | `0.001107` | `0.001855` | `0.765197` | `0.851330` |
+
+Die bisherige Suche begrenzte den Kreisradius auf 3,2 Pixel und setzte seinen
+Mittelpunkt auf die Bildmitte. Rahmen und Diagonale konnten sich nicht unabhängig
+verschieben; der einfache Verlauf bildete das breite Highlight unzureichend ab.
+Jetzt werden Kreis, Rahmen, Diagonale und ein kontinuierlicher Verlauf mit
+höchstens 17 Stopps aus Rastermessungen registriert und gemeinsam verfeinert.
+Zwei rasterbasierte Startschätzungen vermeiden lokale Fehlanpassungen bei
+Beschnitt und weißen Rändern; allein der gerenderte Pixelfehler entscheidet.
+Die Runtime verwendet keine Katalogkennung und liest keine Referenzvektoren.
+Vier schwierige Regressionsproben und drei frei konstruierte Motive mit anderer
+Kreisgröße, Lage und Auflösung sichern die Änderung in der bestehenden Testdatei
+ab. Alle Diagnoseartefakte werden nach der Prüfung entfernt; es entsteht keine
+neue dauerhafte Datei. Diese Abnahme belegt die Klappenfamilie, nicht den gesamten
+zufälligen Aufgabenpool.
+
+Prüfung der Testsuite in zwei Gruppen: **1704 vorhandene + 7 neue Tests
+bestanden**, 29 bestehende Windows-Skips. Syntaxprüfung, CLI-Hilfe und die
+Runtime-ID-Nullprüfung bestehen ebenfalls. Die neuen Prüfungen sichern
+pixelbasierte Rekonstruktion und unabhängige Geometrie ab; die vollständigen
+16 Varianten je Seed wurden zusätzlich über echte CLI-Unterprozesse abgenommen.
+
 ## Stufendiagramm-Abnahme vom 2026-10-07
 
 `AC0538_1L_sia`: vorher 0/16, nach geometrischer Beschreibung und katalogfreier

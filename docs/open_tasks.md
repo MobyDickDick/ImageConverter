@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-07)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `410` · Erledigt `390` · Offen `20`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `411` · Erledigt `390` · Offen `21`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -37,6 +37,19 @@ Die Beschreibung allein reicht im isolierten Vergleichsfall noch nicht aus.
   umgesetzt; gleicher Seed und alle 16 identischen Rastervarianten bestehen
   die unveränderten Grenzen. Zweiter Seed: weitere 16/16. Details und Repro:
   `docs/plan_b_variation_acceptance.md`.
+
+- [ ] **PB-POOL-2026-10-07:** Vollständige Abdeckung des zufälligen
+  Aufgabenpools nachweisen. Die Diagrammabnahme oben gilt nur für diese Familie;
+  der CI-Ausfall von `AR0030` zeigt eine weitere Rekonstruktionslücke.
+  Jede neue Fehlaufgabe mit ihrem ursprünglichen Seed und unveränderten
+  Qualitätsgrenzen bearbeiten; erfolgreiche Einzelfälle ersetzen diesen
+  übergreifenden Nachweis nicht.
+
+Der CI-Fall `AR0030` (Seed `2870690750133000144`) verbessert sich inzwischen
+von 0/16 auf 16/16 bei identischen Eingaben und unveränderten Grenzen; Seed
+`20261007` besteht weitere 16/16. Die allgemeine elementweise Registrierung
+passt Kreisradius/-lage, Rahmen, Diagonale und Verlauf aus dem Raster an.
+Details und Repro stehen in `docs/plan_b_variation_acceptance.md`.
 
 Der Review über 956 Einträge (950 renderbare Paare) setzt die reguläre Rotation
 mit `AC0554_1_L` fort. Diese Diagrammabnahme ersetzt keinen regulären Kandidaten.
