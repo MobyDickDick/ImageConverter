@@ -58,6 +58,72 @@ def test_linear_gradient_tracks_the_analytic_color_profile():
     assert np.max(abs(raster[10].astype(float)-expected)) < 8
 
 
+def curved_gradient_svg(paint='#184888', end='#184888', data=None, extra=''):
+    data = data or 'M 6 32 C 6 2 34 2 34 32 Q 20 38 6 32 Z'
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">'
+            f'<defs><linearGradient id="curve" x1="0" x2="0" y1="0" y2="1">'
+            f'<stop offset="0" stop-color="{paint}"/><stop offset="1" stop-color="{end}"/>'
+            f'</linearGradient></defs><path d="{data}" fill="url(#curve)" {extra}/></svg>')
+
+
+@pytest.mark.parametrize('resolution',[40,80])
+def test_bezier_gradient_preserves_native_curves_and_matches_solid_boundary(resolution):
+    import cv2
+    import fitz
+    import numpy as np
+    svg = curved_gradient_svg()
+    expanded = rendering._expand_bezier_linear_gradients_for_fitz(svg)
+    assert 'fill="url(#curve)"' in svg and ' C ' in svg and ' Q ' in svg
+    assert 'url(#curve)' not in expanded and ' C ' in expanded and ' Q ' in expanded
+    def render(content):
+        return rendering.render_svg_to_numpy_inprocess(content,resolution,resolution,fitz_module=fitz,np_module=np,cv2_module=cv2)
+    actual = render(svg)
+    expected = render(svg.replace('fill="url(#curve)"','fill="#184888"'))
+    assert np.max(abs(actual.astype(float)-expected))<=5
+    scale = resolution//40
+    np.testing.assert_array_equal(actual[15*scale:28*scale,15*scale:25*scale],np.broadcast_to([136,72,24],(13*scale,10*scale,3)))
+    assert np.all(actual[:9*scale]==255)
+
+
+def test_bezier_gradient_follows_analytic_vertical_profile_without_black_fill():
+    import cv2
+    import fitz
+    import numpy as np
+    svg = curved_gradient_svg('#0000ff','#ff0000')
+    actual = rendering.render_svg_to_numpy_inprocess(svg,40,40,fitz_module=fitz,np_module=np,cv2_module=cv2)
+    # The exact cubic extremum is y=9.5 and the closing quadratic peaks at 35.
+    t = (np.arange(13,30)+.5-9.5)/(35-9.5)
+    expected = np.column_stack((255*(1-t),np.zeros(len(t)),255*t))
+    assert np.max(abs(actual[13:30,20].astype(float)-expected))<14
+
+
+@pytest.mark.parametrize('data,extra',[
+    ('M 0 0 L 20 0 L 10 20',''),
+    ('M 0 0 L 20 0 L 10 20 Z M 2 2 L 3 2 L 3 3 Z',''),
+    ('M 0 0 A 20 10 0 1 0 20 20 Z',''),
+    ('M 0 0 L 20 0 L 10 20 Z','transform="translate(2 2)"'),
+    ('M 0 0 L 20 0 L 10 20 Z','opacity="0.5"'),
+])
+def test_bezier_adapter_preserves_unsupported_paths(data,extra):
+    svg = curved_gradient_svg(data=data,extra=extra)
+    assert rendering._expand_bezier_linear_gradients_for_fitz(svg)==svg
+
+
+@pytest.mark.parametrize('extra',['gradientTransform="scale(2)"','spreadMethod="repeat"','stop-opacity="0.5"'])
+def test_bezier_adapter_preserves_unsupported_gradients(extra):
+    svg = curved_gradient_svg()
+    if extra.startswith('stop-opacity'):
+        svg = svg.replace('<stop offset="0"',f'<stop {extra} offset="0"')
+    else:
+        svg = svg.replace('id="curve"',f'id="curve" {extra}')
+    assert rendering._expand_bezier_linear_gradients_for_fitz(svg)==svg
+
+
+def test_bezier_adapter_does_not_expand_an_unsupported_viewport_mapping():
+    svg = curved_gradient_svg().replace('width="40"','preserveAspectRatio="none" width="40"')
+    assert rendering._expand_bezier_linear_gradients_for_fitz(svg)==svg
+
+
 def radial_svg(extra=''):
     return ('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">'
             f'<defs><radialGradient id="arbitrary" {extra}>'

@@ -1,0 +1,886 @@
+{
+  "schema_version": "alarm_bell_recheck_summary_v1",
+  "date": "2026-10-08",
+  "provenance": {
+    "commit": "7ddd60b21",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "Frozen fresh CLI with original description, followed by standalone descriptions and raster registration; same renderer",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "description": "Alarmglocke: Eine aufrechte Glocke mit gewölbtem Kopf, geschwungenen Seiten und breitem ovalem unteren Rand. Der Glockenkörper hat einen vertikalen Farbverlauf, oben heller und unten dunkler. Ein heller Klöppel ist links im unteren Innenbereich sichtbar. Oberhalb stehen auf jeder Seite zwei voneinander getrennte gebogene Schallwellen. Weißer Hintergrund, keine Schriftzeichen. Lage, Größen, Konturen und Farben ergeben sich aus dem Bild.",
+  "neutral_description": "Alarmglocke: Eine aufrechte ungefüllte Glocke mit gewölbtem Kopf, geschwungenen Seiten und breitem ovalem unteren Rand. Ein heller Klöppel ist links im unteren Innenbereich sichtbar. Oberhalb stehen auf jeder Seite zwei voneinander getrennte gebogene Schallwellen. Weißer Hintergrund, keine Schriftzeichen. Lage, Größen, Konturen und Farben ergeben sich aus dem Bild.",
+  "baseline_description": "Vorlage der Alarmglocke (komplexe Form, oben hellrot, unten Dunkelrot, Klöppel ist weiss. Oben Versinnbildlichung der Schallwellen. Je 3 Stück links une rechts.",
+  "baseline_sha256": "a06f68128a65d9a0c59e1968cd1c9f6f419821f455c29d7cbe5f75ce85349036",
+  "satisfaction_summary": {
+    "case_count": 4,
+    "improved": 4,
+    "satisfactory": 4,
+    "technically_completed": 4
+  },
+  "semantic_contract": "upright curved bell, oval rim, bright lower-left clapper and two separated quadratic sound arcs per side; vertical gradient or unfilled body",
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "original_cli_baseline_bytes_preserved": true,
+  "all_8_cli_svg_bytes_reproduced": true,
+  "all_gate_decisions_reproduced": true,
+  "cases": [
+    {
+      "after_mean_delta2": 559.5399780273438,
+      "after_svg": "after\\converted_svgs\\anonymous_bell_00.svg",
+      "after_svg_sha256": "13dae1e9f05eb00092011f9d4a3b3ab496b00af5d34b4e42113129a0ef7fb99c",
+      "before_mean_delta2": 10032.7822265625,
+      "before_svg": "before\\converted_svgs\\anonymous_bell_00.svg",
+      "before_svg_sha256": "58a7dd3677183111e9dd6b26f653e442fcba8090e9c2701453798d82253956bd",
+      "case_id": "anonymous_bell_00",
+      "description": "Alarmglocke: Eine aufrechte Glocke mit gewölbtem Kopf, geschwungenen Seiten und breitem ovalem unteren Rand. Der Glockenkörper hat einen vertikalen Farbverlauf, oben heller und unten dunkler. Ein heller Klöppel ist links im unteren Innenbereich sichtbar. Oberhalb stehen auf jeder Seite zwei voneinander getrennte gebogene Schallwellen. Weißer Hintergrund, keine Schriftzeichen. Lage, Größen, Konturen und Farben ergeben sich aus dem Bild.",
+      "image": "inputs\\anonymous_bell_00.jpg",
+      "input_sha256": "a27a65facd8b1a3095f43b1f556dd84eaa6e813faff4686684ddf945fb988be1",
+      "role": "target",
+      "source": "GE1420_S.jpg",
+      "source_sha256": "a27a65facd8b1a3095f43b1f556dd84eaa6e813faff4686684ddf945fb988be1"
+    },
+    {
+      "after_mean_delta2": 743.713623046875,
+      "after_svg": "after\\converted_svgs\\anonymous_bell_01.svg",
+      "after_svg_sha256": "22f9e8a2e94bf85647b441970e35455a44bd7c9ac74e2fa2a7b76b2a2c27ed3e",
+      "before_mean_delta2": 11103.8896484375,
+      "before_svg": "before\\converted_svgs\\anonymous_bell_01.svg",
+      "before_svg_sha256": "0115bb36994279a6a9b370bdd91f1e6a8e4f922243ada2f3b678043c53d6a8ea",
+      "case_id": "anonymous_bell_01",
+      "description": "Alarmglocke: Eine aufrechte Glocke mit gewölbtem Kopf, geschwungenen Seiten und breitem ovalem unteren Rand. Der Glockenkörper hat einen vertikalen Farbverlauf, oben heller und unten dunkler. Ein heller Klöppel ist links im unteren Innenbereich sichtbar. Oberhalb stehen auf jeder Seite zwei voneinander getrennte gebogene Schallwellen. Weißer Hintergrund, keine Schriftzeichen. Lage, Größen, Konturen und Farben ergeben sich aus dem Bild.",
+      "image": "inputs\\anonymous_bell_01.jpg",
+      "input_sha256": "874bc16d0e69118101b220c1a56b9bfb9f15d1e643a5d405c65556d8118b501b",
+      "role": "holdout",
+      "source": "GE1420_M.jpg",
+      "source_sha256": "874bc16d0e69118101b220c1a56b9bfb9f15d1e643a5d405c65556d8118b501b"
+    },
+    {
+      "after_mean_delta2": 1274.2066650390625,
+      "after_svg": "after\\converted_svgs\\anonymous_bell_02.svg",
+      "after_svg_sha256": "08976e62b79b64fda4a8c47f812ea75c3300ea74bd4b5a38cf874329f6f62e29",
+      "before_mean_delta2": 11656.10546875,
+      "before_svg": "before\\converted_svgs\\anonymous_bell_02.svg",
+      "before_svg_sha256": "8e62908007437c85c3279c748561469c0e6287f92545903f013ee36576c9a053",
+      "case_id": "anonymous_bell_02",
+      "description": "Alarmglocke: Eine aufrechte Glocke mit gewölbtem Kopf, geschwungenen Seiten und breitem ovalem unteren Rand. Der Glockenkörper hat einen vertikalen Farbverlauf, oben heller und unten dunkler. Ein heller Klöppel ist links im unteren Innenbereich sichtbar. Oberhalb stehen auf jeder Seite zwei voneinander getrennte gebogene Schallwellen. Weißer Hintergrund, keine Schriftzeichen. Lage, Größen, Konturen und Farben ergeben sich aus dem Bild.",
+      "image": "inputs\\anonymous_bell_02.jpg",
+      "input_sha256": "7ad2e8af47e7ebf7adb353d16ff384496013a1c96a5e93c322d7a11fcaee741a",
+      "role": "holdout",
+      "source": "GE1420_L.jpg",
+      "source_sha256": "7ad2e8af47e7ebf7adb353d16ff384496013a1c96a5e93c322d7a11fcaee741a"
+    },
+    {
+      "after_mean_delta2": 1709.5504150390625,
+      "after_svg": "after\\converted_svgs\\anonymous_bell_03.svg",
+      "after_svg_sha256": "c34819f60067ac388e064ae62f68fc01eb377dfecb17fe71fe9076ceee1d4178",
+      "before_mean_delta2": 5600.4111328125,
+      "before_svg": "before\\converted_svgs\\anonymous_bell_03.svg",
+      "before_svg_sha256": "6a38e3a0f33906cd90d21b9df4e8660ec3f725487c5b83131ebb77328906b418",
+      "case_id": "anonymous_bell_03",
+      "description": "Alarmglocke: Eine aufrechte ungefüllte Glocke mit gewölbtem Kopf, geschwungenen Seiten und breitem ovalem unteren Rand. Ein heller Klöppel ist links im unteren Innenbereich sichtbar. Oberhalb stehen auf jeder Seite zwei voneinander getrennte gebogene Schallwellen. Weißer Hintergrund, keine Schriftzeichen. Lage, Größen, Konturen und Farben ergeben sich aus dem Bild.",
+      "image": "inputs\\anonymous_bell_03.jpg",
+      "input_sha256": "443f13cb0c6c2757f498def4b6085b6c1f9738d624b18ab1ef14bbb34d01b716",
+      "role": "holdout",
+      "source": "GE1420_M_neutral.jpg",
+      "source_sha256": "443f13cb0c6c2757f498def4b6085b6c1f9738d624b18ab1ef14bbb34d01b716"
+    }
+  ],
+  "gate_cases": [
+    {
+      "after": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9397767782211304,
+        "error_per_pixel": 0.0028683325799171793,
+        "object_mask_iou": 0.9527272727272728,
+        "semantic_score": 1.0
+      },
+      "before": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.533690869808197,
+        "error_per_pixel": 0.051430384347366395,
+        "object_mask_iou": 0.7354651162790697,
+        "semantic_score": 0.0
+      },
+      "case_id": "anonymous_bell_00",
+      "good_solution_gate": {
+        "decision_tier": "all",
+        "metric_hierarchy": {
+          "primary": [
+            "semantic_score",
+            "dimension_match"
+          ],
+          "secondary": [
+            "error_per_pixel"
+          ]
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "error_per_pixel": 0.0028683325799171793,
+          "semantic_score": 1.0
+        },
+        "reachability": null,
+        "reasons": [
+          "all_thresholds_satisfied"
+        ],
+        "schema_version": "good_solution_gate_v1",
+        "status": "good",
+        "thresholds": {
+          "max_error_per_pixel": 0.05,
+          "min_dimension_match": 0.99,
+          "min_semantic_score": 0.85
+        }
+      },
+      "hard_rejections": [],
+      "improved": true,
+      "improved_metrics": [
+        "edge_alignment",
+        "error_per_pixel",
+        "object_mask_iou",
+        "semantic_score"
+      ],
+      "metric_classification": {
+        "dimension_match": "unchanged",
+        "edge_alignment": "improved",
+        "error_per_pixel": "improved",
+        "object_mask_iou": "improved",
+        "semantic_score": "improved"
+      },
+      "quality_complexity_gate": {
+        "complexity": {
+          "embedded_raster_count": 0,
+          "parse_error": null,
+          "path_command_count": 15,
+          "path_complexity_ratio": 2.1429,
+          "path_count": 5,
+          "vector_element_count": 7
+        },
+        "failures": [],
+        "metrics": {
+          "combined_score": 0.9724,
+          "edge_alignment": 0.9398,
+          "pixel_similarity": 0.9971,
+          "semantic_score": 1.0,
+          "structure_score": 0.9527
+        },
+        "passed": true,
+        "thresholds": {
+          "max_path_command_count": 160,
+          "max_path_complexity_ratio": 4.0,
+          "max_svg_element_count": 80,
+          "min_combined_score": 0.78,
+          "min_edge_alignment": 0.72,
+          "min_pixel_similarity": 0.78,
+          "min_semantic_score": 0.85,
+          "min_structure_score": 0.72
+        }
+      },
+      "regressed_metrics": [],
+      "satisfactory": true,
+      "technically_completed": true
+    },
+    {
+      "after": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9234763979911804,
+        "error_per_pixel": 0.0038124496888216073,
+        "object_mask_iou": 0.970873786407767,
+        "semantic_score": 1.0
+      },
+      "before": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.43719208240509033,
+        "error_per_pixel": 0.05692113109541202,
+        "object_mask_iou": 0.708029197080292,
+        "semantic_score": 0.0
+      },
+      "case_id": "anonymous_bell_01",
+      "good_solution_gate": {
+        "decision_tier": "all",
+        "metric_hierarchy": {
+          "primary": [
+            "semantic_score",
+            "dimension_match"
+          ],
+          "secondary": [
+            "error_per_pixel"
+          ]
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "error_per_pixel": 0.0038124496888216073,
+          "semantic_score": 1.0
+        },
+        "reachability": null,
+        "reasons": [
+          "all_thresholds_satisfied"
+        ],
+        "schema_version": "good_solution_gate_v1",
+        "status": "good",
+        "thresholds": {
+          "max_error_per_pixel": 0.05,
+          "min_dimension_match": 0.99,
+          "min_semantic_score": 0.85
+        }
+      },
+      "hard_rejections": [],
+      "improved": true,
+      "improved_metrics": [
+        "edge_alignment",
+        "error_per_pixel",
+        "object_mask_iou",
+        "semantic_score"
+      ],
+      "metric_classification": {
+        "dimension_match": "unchanged",
+        "edge_alignment": "improved",
+        "error_per_pixel": "improved",
+        "object_mask_iou": "improved",
+        "semantic_score": "improved"
+      },
+      "quality_complexity_gate": {
+        "complexity": {
+          "embedded_raster_count": 0,
+          "parse_error": null,
+          "path_command_count": 15,
+          "path_complexity_ratio": 2.1429,
+          "path_count": 5,
+          "vector_element_count": 7
+        },
+        "failures": [],
+        "metrics": {
+          "combined_score": 0.9726,
+          "edge_alignment": 0.9235,
+          "pixel_similarity": 0.9962,
+          "semantic_score": 1.0,
+          "structure_score": 0.9709
+        },
+        "passed": true,
+        "thresholds": {
+          "max_path_command_count": 160,
+          "max_path_complexity_ratio": 4.0,
+          "max_svg_element_count": 80,
+          "min_combined_score": 0.78,
+          "min_edge_alignment": 0.72,
+          "min_pixel_similarity": 0.78,
+          "min_semantic_score": 0.85,
+          "min_structure_score": 0.72
+        }
+      },
+      "regressed_metrics": [],
+      "satisfactory": true,
+      "technically_completed": true
+    },
+    {
+      "after": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8342558145523071,
+        "error_per_pixel": 0.006531880892164873,
+        "object_mask_iou": 0.952054794520548,
+        "semantic_score": 1.0
+      },
+      "before": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.3852592706680298,
+        "error_per_pixel": 0.059751918332692555,
+        "object_mask_iou": 0.695273631840796,
+        "semantic_score": 0.0
+      },
+      "case_id": "anonymous_bell_02",
+      "good_solution_gate": {
+        "decision_tier": "all",
+        "metric_hierarchy": {
+          "primary": [
+            "semantic_score",
+            "dimension_match"
+          ],
+          "secondary": [
+            "error_per_pixel"
+          ]
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "error_per_pixel": 0.006531880892164873,
+          "semantic_score": 1.0
+        },
+        "reachability": null,
+        "reasons": [
+          "all_thresholds_satisfied"
+        ],
+        "schema_version": "good_solution_gate_v1",
+        "status": "good",
+        "thresholds": {
+          "max_error_per_pixel": 0.05,
+          "min_dimension_match": 0.99,
+          "min_semantic_score": 0.85
+        }
+      },
+      "hard_rejections": [],
+      "improved": true,
+      "improved_metrics": [
+        "edge_alignment",
+        "error_per_pixel",
+        "object_mask_iou",
+        "semantic_score"
+      ],
+      "metric_classification": {
+        "dimension_match": "unchanged",
+        "edge_alignment": "improved",
+        "error_per_pixel": "improved",
+        "object_mask_iou": "improved",
+        "semantic_score": "improved"
+      },
+      "quality_complexity_gate": {
+        "complexity": {
+          "embedded_raster_count": 0,
+          "parse_error": null,
+          "path_command_count": 15,
+          "path_complexity_ratio": 2.1429,
+          "path_count": 5,
+          "vector_element_count": 7
+        },
+        "failures": [],
+        "metrics": {
+          "combined_score": 0.9449,
+          "edge_alignment": 0.8343,
+          "pixel_similarity": 0.9935,
+          "semantic_score": 1.0,
+          "structure_score": 0.9521
+        },
+        "passed": true,
+        "thresholds": {
+          "max_path_command_count": 160,
+          "max_path_complexity_ratio": 4.0,
+          "max_svg_element_count": 80,
+          "min_combined_score": 0.78,
+          "min_edge_alignment": 0.72,
+          "min_pixel_similarity": 0.78,
+          "min_semantic_score": 0.85,
+          "min_structure_score": 0.72
+        }
+      },
+      "regressed_metrics": [],
+      "satisfactory": true,
+      "technically_completed": true
+    },
+    {
+      "after": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8107465505599976,
+        "error_per_pixel": 0.008763554607402602,
+        "object_mask_iou": 0.7925925925925926,
+        "semantic_score": 1.0
+      },
+      "before": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.4207553267478943,
+        "error_per_pixel": 0.028709015162437523,
+        "object_mask_iou": 0.11979166666666667,
+        "semantic_score": 0.0
+      },
+      "case_id": "anonymous_bell_03",
+      "good_solution_gate": {
+        "decision_tier": "all",
+        "metric_hierarchy": {
+          "primary": [
+            "semantic_score",
+            "dimension_match"
+          ],
+          "secondary": [
+            "error_per_pixel"
+          ]
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "error_per_pixel": 0.008763554607402602,
+          "semantic_score": 1.0
+        },
+        "reachability": null,
+        "reasons": [
+          "all_thresholds_satisfied"
+        ],
+        "schema_version": "good_solution_gate_v1",
+        "status": "good",
+        "thresholds": {
+          "max_error_per_pixel": 0.05,
+          "min_dimension_match": 0.99,
+          "min_semantic_score": 0.85
+        }
+      },
+      "hard_rejections": [],
+      "improved": true,
+      "improved_metrics": [
+        "edge_alignment",
+        "error_per_pixel",
+        "object_mask_iou",
+        "semantic_score"
+      ],
+      "metric_classification": {
+        "dimension_match": "unchanged",
+        "edge_alignment": "improved",
+        "error_per_pixel": "improved",
+        "object_mask_iou": "improved",
+        "semantic_score": "improved"
+      },
+      "quality_complexity_gate": {
+        "complexity": {
+          "embedded_raster_count": 0,
+          "parse_error": null,
+          "path_command_count": 15,
+          "path_complexity_ratio": 2.1429,
+          "path_count": 5,
+          "vector_element_count": 7
+        },
+        "failures": [],
+        "metrics": {
+          "combined_score": 0.8986,
+          "edge_alignment": 0.8107,
+          "pixel_similarity": 0.9912,
+          "semantic_score": 1.0,
+          "structure_score": 0.7926
+        },
+        "passed": true,
+        "thresholds": {
+          "max_path_command_count": 160,
+          "max_path_complexity_ratio": 4.0,
+          "max_svg_element_count": 80,
+          "min_combined_score": 0.78,
+          "min_edge_alignment": 0.72,
+          "min_pixel_similarity": 0.78,
+          "min_semantic_score": 0.85,
+          "min_structure_score": 0.72
+        }
+      },
+      "regressed_metrics": [],
+      "satisfactory": true,
+      "technically_completed": true
+    }
+  ],
+  "reference_access": {
+    "blocked_svg_reads": []
+  },
+  "review": {
+    "metrics": {
+      "successful_variants": 48,
+      "successful_renderable_pairs": 48,
+      "successful_above_threshold": 0,
+      "successful_missing_or_failed": 0,
+      "diff_variants": 908,
+      "diff_renderable_pairs": 902,
+      "selected_candidates": 5,
+      "top_error_cases": 5,
+      "ranked_records": 956,
+      "boundary_triple_records": 3
+    },
+    "selected_candidates": [
+      {
+        "variant": "AC0704_1_L",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/AC0704_1_L.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0704_1_L.svg",
+        "width": 45,
+        "height": 25,
+        "mean_delta2": 14064.74609375,
+        "normalized_mse": 0.07209917259387415,
+        "status": "ok",
+        "image_area": 1125
+      },
+      {
+        "variant": "AC0402_1_S",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/AC0402_1_S.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0402_1_S.svg",
+        "width": 20,
+        "height": 20,
+        "mean_delta2": 14033.0,
+        "normalized_mse": 0.07193643470460079,
+        "status": "ok",
+        "image_area": 400
+      },
+      {
+        "variant": "AC0403_1_L",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/AC0403_1_L.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0403_1_L.svg",
+        "width": 40,
+        "height": 40,
+        "mean_delta2": 13989.01953125,
+        "normalized_mse": 0.07171098055235166,
+        "status": "ok",
+        "image_area": 1600
+      },
+      {
+        "variant": "GE0032",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/GE0032.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/GE0032.svg",
+        "width": 45,
+        "height": 44,
+        "mean_delta2": 13826.3896484375,
+        "normalized_mse": 0.07087730179898757,
+        "status": "ok",
+        "image_area": 1980
+      },
+      {
+        "variant": "AC0413_1_M",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/AC0413_1_M.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0413_1_M.svg",
+        "width": 30,
+        "height": 30,
+        "mean_delta2": 13465.6943359375,
+        "normalized_mse": 0.06902829340478021,
+        "status": "ok",
+        "image_area": 900
+      }
+    ],
+    "reproduction_arguments": [
+      ".venv\\Scripts\\python.exe",
+      "-m",
+      "tools.review_conversion_quality",
+      "--output-dir",
+      ".tmp/ge1420/review",
+      "--exclude",
+      "AC0554_2_L",
+      "--exclude",
+      "AC0713_1_S",
+      "--exclude",
+      "DLG0010_1",
+      "--exclude",
+      "AC0724_1_S",
+      "--exclude",
+      "AC0252_1",
+      "--exclude",
+      "AC0252",
+      "--exclude",
+      "AC0252_2",
+      "--exclude",
+      "AC0731_1_L",
+      "--exclude",
+      "AC0731_1_M",
+      "--exclude",
+      "AC0731_1_S",
+      "--exclude",
+      "AC0731_L",
+      "--exclude",
+      "AC0731_M",
+      "--exclude",
+      "AC0731_S",
+      "--exclude",
+      "GE1003_M",
+      "--exclude",
+      "GE1003_L",
+      "--exclude",
+      "GE1003_S",
+      "--exclude",
+      "AC0404_1_L",
+      "--exclude",
+      "AC0404_1_M",
+      "--exclude",
+      "AC0404_1_S",
+      "--exclude",
+      "AC0404_1L_sia",
+      "--exclude",
+      "AC0404_1M_sia",
+      "--exclude",
+      "AC0404_1S_sia",
+      "--exclude",
+      "AC0404_2_L",
+      "--exclude",
+      "AC0404_2_M",
+      "--exclude",
+      "AC0404_2_S",
+      "--exclude",
+      "AC0404_2L_sia",
+      "--exclude",
+      "AC0404_2M_sia",
+      "--exclude",
+      "AC0404_2S_sia",
+      "--exclude",
+      "AC0404_L",
+      "--exclude",
+      "AC0404_L_sia",
+      "--exclude",
+      "AC0404_M",
+      "--exclude",
+      "AC0404_M_sia",
+      "--exclude",
+      "AC0404_S",
+      "--exclude",
+      "AC0404_S_sia",
+      "--exclude",
+      "GE9011_1M",
+      "--exclude",
+      "GE9011_1S",
+      "--exclude",
+      "GE9011_2M",
+      "--exclude",
+      "GE9011_2S",
+      "--exclude",
+      "GE9011_3M",
+      "--exclude",
+      "GE9011_3S",
+      "--exclude",
+      "GE9011_4M",
+      "--exclude",
+      "GE9011_4S",
+      "--exclude",
+      "GE9011_5M",
+      "--exclude",
+      "GE9011_5S",
+      "--exclude",
+      "GE9011_6M",
+      "--exclude",
+      "GE9011_6S",
+      "--exclude",
+      "GE9011_7M",
+      "--exclude",
+      "GE9011_7S",
+      "--exclude",
+      "GE0280",
+      "--exclude",
+      "GE0281",
+      "--exclude",
+      "GE0282",
+      "--exclude",
+      "GE0283",
+      "--exclude",
+      "GE0284",
+      "--exclude",
+      "GE0285",
+      "--exclude",
+      "GE9013_1M",
+      "--exclude",
+      "GE9013_1S",
+      "--exclude",
+      "GE9013_2M",
+      "--exclude",
+      "GE9013_2S",
+      "--exclude",
+      "GE9013_3M",
+      "--exclude",
+      "GE9013_3S",
+      "--exclude",
+      "GE9013_4M",
+      "--exclude",
+      "GE9013_4S",
+      "--exclude",
+      "GE9013_5M",
+      "--exclude",
+      "GE9013_5S",
+      "--exclude",
+      "GE9013_6M",
+      "--exclude",
+      "GE9013_6S",
+      "--exclude",
+      "GE9013_7M",
+      "--exclude",
+      "GE9013_7S",
+      "--exclude",
+      "AC0554_1_L",
+      "--exclude",
+      "AC0554_1_M",
+      "--exclude",
+      "AC0554_1_S",
+      "--exclude",
+      "AC0554_2_M",
+      "--exclude",
+      "AC0554_2_S",
+      "--exclude",
+      "AC0554_L",
+      "--exclude",
+      "AC0554_M",
+      "--exclude",
+      "AC0554_S",
+      "--exclude",
+      "DLG0031",
+      "--exclude",
+      "DLG0021",
+      "--exclude",
+      "AC0130_S",
+      "--exclude",
+      "AC0130_M",
+      "--exclude",
+      "AC0130_L",
+      "--exclude",
+      "GE1420_S",
+      "--exclude",
+      "GE1420_M",
+      "--exclude",
+      "GE1420_L",
+      "--exclude",
+      "GE1420_M_neutral"
+    ]
+  },
+  "local_runs": [
+    ".tmp/ge1420/acceptance03",
+    ".tmp/ge1420/acceptance04"
+  ],
+  "additional_plan_b_metric_checks": {
+    "GE1420_S.jpg": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.002868332900106907,
+        "foreground_mse": 0.0037728033494204283,
+        "edge_alignment": 0.9397767782211304,
+        "foreground_iou": 0.95578231292517
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 5,
+        "path_command_count": 15,
+        "path_complexity_ratio": 2.1429
+      }
+    },
+    "GE1420_M.jpg": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.003812449751421809,
+        "foreground_mse": 0.0051975189708173275,
+        "edge_alignment": 0.9234763979911804,
+        "foreground_iou": 0.9507829977628636
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 5,
+        "path_command_count": 15,
+        "path_complexity_ratio": 2.1429
+      }
+    },
+    "GE1420_L.jpg": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0065318807028234005,
+        "foreground_mse": 0.009463739581406116,
+        "edge_alignment": 0.8342558145523071,
+        "foreground_iou": 0.9552980132450332
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 5,
+        "path_command_count": 15,
+        "path_complexity_ratio": 2.1429
+      }
+    },
+    "GE1420_M_neutral.jpg": {
+      "satisfactory": false,
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.008763554506003857,
+        "foreground_mse": 0.02688615396618843,
+        "edge_alignment": 0.8107465505599976,
+        "foreground_iou": 0.6836734693877551
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 5,
+        "path_command_count": 15,
+        "path_complexity_ratio": 2.1429
+      }
+    }
+  },
+  "limitations": [
+    "The four real raster cases pass the unchanged Good-Solution and Quality-Complexity gates; the neutral outline fails the separate, stricter Plan-B foreground IoU bound.",
+    "No SVG reference was supplied for this work package; no 16-variation SVG roundtrip is claimed.",
+    "PB-POOL-2026-10-07 remains open.",
+    "The renderer adapter supports one closed absolute M/L/C/Q/Z contour, axis-aligned opaque linear paint, and default centered aspect-ratio mapping; unsupported paths are preserved.",
+    "Direct SVG rendering is used for this completion; a full process-isolation profile is not additionally claimed."
+  ],
+  "completion": {
+    "command": ".venv/Scripts/python.exe -m pytest -q -ra --basetemp=.tmp/ge1420/full-pytest --junitxml=.tmp/ge1420/completion.xml",
+    "environment": {
+      "RUN_HEAVY_CONVERSION_TESTS": "1",
+      "IMAGE_CONVERTER_ISOLATE_SVG_RENDER": "0",
+      "TEMP": ".tmp/ge1420/test-temp",
+      "TMP": ".tmp/ge1420/test-temp"
+    },
+    "exit_code": 0,
+    "tests": 2266,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 29,
+    "passed": 2237,
+    "seconds": 748.42,
+    "focused_test_counts": {
+      "test_alarm_bell_runtime": 25,
+      "test_rendering_gradient_compatibility": 25
+    },
+    "skip_reasons": [
+      "Shell-runner integration tests require a POSIX shell."
+    ],
+    "log": ".tmp/ge1420/completion.log",
+    "junit": ".tmp/ge1420/completion.xml",
+    "log_sha256": "8a5e9e5c291cbd6e28b6a64007b26f7a110a04b7a1f55315bd42a7dcdd000205",
+    "junit_sha256": "1799d3f5d4bbcadde3ff90207f77496c854a00edca62a5de3e8936b9beb554c8",
+    "checks": {
+      "compileall": "passed",
+      "cli_help": "passed",
+      "runtime_image_ids": 0,
+      "diff_whitespace": "passed",
+      "evaluator_cli": "passed"
+    },
+    "junit_seconds": 748.248,
+    "heavy_module_test_counts": {
+      "test_conversion_regression_smoke.py": 2,
+      "test_image_composite_converter.py": 401,
+      "test_satisfactory_regression_battery.py": 6
+    }
+  },
+  "runtime_source_hashes": {
+    "src/iCCModules/imageCompositeConverterAlarmBell.py": "c5e8ffeaa7abbd3561473f0fffd4ba04b7fa7147ec0bbb8c3713677c3325df17",
+    "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "722b95b48f5d725a750af2a52c9a75c8cc166fcc96691d9ab44197b01d6ae57e",
+    "src/iCCModules/imageCompositeConverterPerceptionReflection.py": "8ef222bf12738dd5a5c1b568cfd21ddf8536c599d0abed5fc3009a88bc061bb2",
+    "src/iCCModules/imageCompositeConverterRendering.py": "eaf0a4e9cdf44c6205723026bc7ffba71220e14b75a02f41a1bb5fb7df4a7bfb"
+  }
+}

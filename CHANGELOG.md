@@ -1,3 +1,4 @@
+- Reconstruct upright alarm bells, oval rims, clappers and four sound arcs from pixels and standalone descriptions; preserve native Bezier gradients with an antialiasing-aware private render adapter and validate all four real raster variants against unchanged quality gates (2026-10-08).
 - Register circular pump bodies and contrasting triangles from raster evidence, preserve their semantic topology, correct the shared right-pointing description, and validate three color variants with reproducible saved-SVG quality gates (2026-10-05).
 - Run ACN requires the expected telemetry-alias workflow run ID and attempt as one complete, positive-integer context so a verification cannot be accidentally bound along only one workflow dimension.
 - Run ACM restores strict comparison of telemetry-alias receipts with the expected workflow run and attempt after the Run ACL merge and adds a direct regression test for both mismatches.

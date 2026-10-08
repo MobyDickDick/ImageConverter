@@ -1,0 +1,47 @@
+{
+  "schema_version": "alarm_bell_recheck_manifest_v1",
+  "description": "Alarmglocke: Eine aufrechte Glocke mit gewölbtem Kopf, geschwungenen Seiten und breitem ovalem unteren Rand. Der Glockenkörper hat einen vertikalen Farbverlauf, oben heller und unten dunkler. Ein heller Klöppel ist links im unteren Innenbereich sichtbar. Oberhalb stehen auf jeder Seite zwei voneinander getrennte gebogene Schallwellen. Weißer Hintergrund, keine Schriftzeichen. Lage, Größen, Konturen und Farben ergeben sich aus dem Bild.",
+  "neutral_description": "Alarmglocke: Eine aufrechte ungefüllte Glocke mit gewölbtem Kopf, geschwungenen Seiten und breitem ovalem unteren Rand. Ein heller Klöppel ist links im unteren Innenbereich sichtbar. Oberhalb stehen auf jeder Seite zwei voneinander getrennte gebogene Schallwellen. Weißer Hintergrund, keine Schriftzeichen. Lage, Größen, Konturen und Farben ergeben sich aus dem Bild.",
+  "baseline_description": "Vorlage der Alarmglocke (komplexe Form, oben hellrot, unten Dunkelrot, Klöppel ist weiss. Oben Versinnbildlichung der Schallwellen. Je 3 Stück links une rechts.",
+  "provenance": {
+    "commit": "7ddd60b21",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "Frozen fresh CLI with original description, followed by standalone descriptions and raster registration; same renderer",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_bell_00",
+      "source": "GE1420_S.jpg",
+      "image": "../../images_to_convert/GE1420_S.jpg",
+      "role": "target",
+      "source_sha256": "a27a65facd8b1a3095f43b1f556dd84eaa6e813faff4686684ddf945fb988be1",
+      "description": "Alarmglocke: Eine aufrechte Glocke mit gewölbtem Kopf, geschwungenen Seiten und breitem ovalem unteren Rand. Der Glockenkörper hat einen vertikalen Farbverlauf, oben heller und unten dunkler. Ein heller Klöppel ist links im unteren Innenbereich sichtbar. Oberhalb stehen auf jeder Seite zwei voneinander getrennte gebogene Schallwellen. Weißer Hintergrund, keine Schriftzeichen. Lage, Größen, Konturen und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_bell_01",
+      "source": "GE1420_M.jpg",
+      "image": "../../images_to_convert/GE1420_M.jpg",
+      "role": "holdout",
+      "source_sha256": "874bc16d0e69118101b220c1a56b9bfb9f15d1e643a5d405c65556d8118b501b",
+      "description": "Alarmglocke: Eine aufrechte Glocke mit gewölbtem Kopf, geschwungenen Seiten und breitem ovalem unteren Rand. Der Glockenkörper hat einen vertikalen Farbverlauf, oben heller und unten dunkler. Ein heller Klöppel ist links im unteren Innenbereich sichtbar. Oberhalb stehen auf jeder Seite zwei voneinander getrennte gebogene Schallwellen. Weißer Hintergrund, keine Schriftzeichen. Lage, Größen, Konturen und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_bell_02",
+      "source": "GE1420_L.jpg",
+      "image": "../../images_to_convert/GE1420_L.jpg",
+      "role": "holdout",
+      "source_sha256": "7ad2e8af47e7ebf7adb353d16ff384496013a1c96a5e93c322d7a11fcaee741a",
+      "description": "Alarmglocke: Eine aufrechte Glocke mit gewölbtem Kopf, geschwungenen Seiten und breitem ovalem unteren Rand. Der Glockenkörper hat einen vertikalen Farbverlauf, oben heller und unten dunkler. Ein heller Klöppel ist links im unteren Innenbereich sichtbar. Oberhalb stehen auf jeder Seite zwei voneinander getrennte gebogene Schallwellen. Weißer Hintergrund, keine Schriftzeichen. Lage, Größen, Konturen und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_bell_03",
+      "source": "GE1420_M_neutral.jpg",
+      "image": "../../images_to_convert/GE1420_M_neutral.jpg",
+      "role": "holdout",
+      "source_sha256": "443f13cb0c6c2757f498def4b6085b6c1f9738d624b18ab1ef14bbb34d01b716",
+      "description": "Alarmglocke: Eine aufrechte ungefüllte Glocke mit gewölbtem Kopf, geschwungenen Seiten und breitem ovalem unteren Rand. Ein heller Klöppel ist links im unteren Innenbereich sichtbar. Oberhalb stehen auf jeder Seite zwei voneinander getrennte gebogene Schallwellen. Weißer Hintergrund, keine Schriftzeichen. Lage, Größen, Konturen und Farben ergeben sich aus dem Bild."
+    }
+  ]
+}
