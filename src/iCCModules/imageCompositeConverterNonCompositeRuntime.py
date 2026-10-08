@@ -16,6 +16,7 @@ from src.iCCModules.imageCompositeConverterNestedPanel import fit_nested_panel
 from src.iCCModules.imageCompositeConverterInteriorMark import fit_rectilinear_interior_mark
 from src.iCCModules.imageCompositeConverterPump import fit_pump_geometry
 from src.iCCModules.imageCompositeConverterLabeledSquare import fit_labeled_square
+from src.iCCModules.imageCompositeConverterSquareStem import fit_square_stem
 from src.iCCModules.imageCompositeConverterCheckmark import fit_checkmark_disk
 from src.iCCModules.imageCompositeConverterCheckboxCheckmark import fit_checkbox_checkmark
 from src.iCCModules.imageCompositeConverterZigzagPanel import fit_zigzag_panel
@@ -1104,6 +1105,7 @@ DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS = {
     "UprightSquareKelleGlyph",
     "Rotated180SquareKelleGlyph",
     "MainDiagonalMirroredSquareKelleGlyph",
+    "RightStemSquareKelleGlyph",
     "RightRotatedSquareKellePGlyph",
     "RightFacingSquareKellePGlyph",
     "LeftRotatedSquareKelleTGlyph",
@@ -1126,6 +1128,7 @@ SEMANTIC_GEOMETRY_IR_KINDS = {
     "UprightSquareKelleGlyph",
     "Rotated180SquareKelleGlyph",
     "MainDiagonalMirroredSquareKelleGlyph",
+    "RightStemSquareKelleGlyph",
     "RightRotatedSquareKellePGlyph",
     "RightFacingSquareKellePGlyph",
     "LeftRotatedSquareKelleTGlyph",
@@ -1405,6 +1408,22 @@ def runNonCompositeIterationImpl(
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
     if mode in {"non_composite", "auto"}:
+        square_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+        square_stem = fit_square_stem(
+            square_ir, image=perc_img,
+            render_fn=lambda candidate_ir: render_svg_to_numpy_fn(
+                geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, candidate_ir), width, height),
+            error_fn=lambda rendered: calculate_error_fn(perc_img, rendered),
+        )
+        if square_stem is not None:
+            params['optimized_geometry_ir'] = square_stem['geometry_ir']
+            params['square_stem_registration'] = {
+                key: value for key, value in square_stem.items() if key not in {'geometry_ir', 'rendered'}
+            }
+            svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, square_stem['geometry_ir'])
+            write_validation_log_fn(['status=non_composite_raster_square_stem'])
+            write_attempt_artifacts_fn(svg, square_stem['rendered'])
+            return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in (
             (fit_alarm_bell, "non_composite_raster_alarm_bell"),
             (fit_zigzag_panel, "non_composite_raster_zigzag_panel"),
@@ -1750,6 +1769,7 @@ def runNonCompositeIterationImpl(
                             and not any(
                                 e.get('role') == 'checkmark_disk'
                                 or e.get('kind') == 'TriangleStemGlyph'
+                                or e.get('kind') == 'RightStemSquareKelleGlyph'
                                 or (e.get('kind') == 'UprightSquareKelleGlyph' and len(str(e.get('label', ''))) == 1)
                                 for e in description_geometry_ir
                             )) and (
