@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-07, nach Verlaufspfeil-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-08, nach Luftbefeuchter-Abnahme)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -84,20 +84,26 @@ sämtliche 28 SVG-Bytes und Gateentscheidungen. Die gemeinsame XML beschreibt
 die Pfeilstruktur jetzt eigenständig. Details:
 `docs/next_arbeitspaket_2026-10-07_ge9013_6m.md`.
 
-1. `AC0554_1_L` – `mean_delta2=46170.398438`, `normalized_mse=0.236680`.
-2. `DLG0031` – `mean_delta2=16567.326172`, `normalized_mse=0.084928`.
-3. `DLG0021` – `mean_delta2=16539.406250`, `normalized_mse=0.084785`.
-4. `GE1420_S` – `mean_delta2=14628.742188`, `normalized_mse=0.074990`.
-5. `AC0704_1_L` – `mean_delta2=14064.746094`, `normalized_mse=0.072099`.
+Das Checkboxpaket `DLG0031` / `DLG0021` und das Dachlinienpaket `AC0554`
+sind inzwischen abgeschlossen. Das folgende Luftbefeuchterpaket `AC0130_S`
+besteht mit M-/L-Holdouts beide Gates ohne Regression. Die vorhandene
+SVG-Vorlage hat eine abweichende Liniengruppen-/Balkenstruktur und besteht
+mit zwei Seeds jeweils 16/16 unveränderte Roundtrip-Gates. Alle CLI-SVG-Bytes
+und Gateentscheidungen sind reproduzierbar. Details:
+`docs/next_arbeitspaket_2026-10-08_ac0130_s.md`.
 
-Die nächste reguläre Rotation beginnt mit `AC0554_1_L` und muss zunächst eine
-frische CLI-Baseline statt des historischen Sammelwerts prüfen. Der erneuerte
-Review über 956 Einträge (950 renderbare Paare, sechs fehlende Paare) ist in
-`artifacts/evaluation/downward_gradient_arrow_recheck_v1/summary_2026-10-07.json`
-zusammengefasst. Alle zuvor separat belegten Gate-Passes und sämtliche 14
-aktuellen Pfeilvarianten sind ausgeschlossen; der genaue Review-Aufruf
-steht dort unter `review.reproduction_arguments`. Vollständige Tabellen
-bleiben lokal und werden nicht versioniert.
+1. `GE1420_S` – `mean_delta2=14628.742188`, `normalized_mse=0.074990`.
+2. `AC0704_1_L` – `mean_delta2=14064.746094`, `normalized_mse=0.072099`.
+3. `AC0402_1_S` – `mean_delta2=14033.000000`, `normalized_mse=0.071936`.
+4. `AC0403_1_L` – `mean_delta2=13989.019531`, `normalized_mse=0.071711`.
+5. `GE0032` – `mean_delta2=13826.389648`, `normalized_mse=0.070877`.
+
+Die nächste reguläre Rotation beginnt mit `GE1420_S`; vor Änderungen ist eine
+frische CLI-Baseline erforderlich. Der Review über 956 Einträge (950 renderbare
+Paare) und sein exakter Aufruf stehen im kompakten Nachweis
+`artifacts/evaluation/zigzag_panel_recheck_v1/summary_2026-10-08.json`.
+Alle 48 gespeicherten Erfolgsvarianten bleiben unter der Reviewgrenze.
+Vollständige Tabellen liegen lokal unter `.tmp/ac0130/review/`.
 
 Die gekoppelte randomisierte Plan-B-Auswahl `AC0538_1L_sia` mit Seed
 `3948009396310964094` besteht nach eigenständiger Beschreibung und katalogfreier
@@ -131,6 +137,16 @@ das CLI meldet dafür weiterhin konzentrierten Restfehler. Details stehen in
 - `AC0538_1L_sia` – sample-basierte Plan-B-Aufgabe für die verwandte Diagrammvariante mit grauer Rahmenkontur und weisser Stufenkurve; Historische Roundtrip-Baseline `delta2=1629.625242`; die aktuelle Parametervariation besteht 32/32 Qualitätsgates, siehe `docs/plan_b_variation_acceptance.md`. Der Klassifikations-/Perception-Contract steht in `docs/next_arbeitspaket_2026-07-31_runABH.md`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
+
+Aktueller Recheck: Zickzack-/Innenrahmen- und Liniengruppen-/Balkenregistrierung
+sind für die geprüften Luftbefeuchterstrukturen `generalisiert`. Die drei
+JPG-Größen bestehen beide Gates; die vorhandene SVG-Vorlage besteht nach
+Rasterisierung und Parametervariation mit zwei Seeds jeweils 16/16.
+Wiederholungsperiode, Lage, Strichbreiten und Verlauf stammen aus den Pixeln.
+Synthetische Farb-/Lage-/Auflösungstests, neutrale Namen und verbotener
+Sample-Zugriff sind abgesichert. Die Andreaskreuz-Variante ist separat und
+gehört nicht zu diesem Generalisierungsnachweis. Details:
+`docs/next_arbeitspaket_2026-10-08_ac0130_s.md`.
 
 Aktueller Recheck: Vertikale Pfeile mit Dreieck und getrenntem Verlaufsschaft
 sind für beide Richtungen `generalisiert`. Alle 14 nach unten gerichteten

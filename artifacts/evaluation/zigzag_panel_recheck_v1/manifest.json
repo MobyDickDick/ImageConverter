@@ -1,0 +1,35 @@
+{
+  "schema_version": "zigzag_panel_recheck_manifest_v1",
+  "description": "Luftbefeuchter: Hochkantiges Rechteck mit grauem Rahmen und horizontalem Farbverlauf dunkel-hell-dunkel. Im linken Innenbereich verläuft eine dünne regelmäßige Zickzacklinie von oben nach unten. Rechts daneben steht ein schmales hohes ungefülltes Rechteck mit grauer Kontur. Lage, Anzahl der Zacken, Farben und Abmessungen ergeben sich aus dem Bild. Keine Schriftzeichen.",
+  "baseline_description": " Wie AC0030: Kühlelement, graues Rechteck, Minus-Minus-Zeichen oben Mitte, Farbverlauf horizontal dunkel-hell-dunkel, graue Linien in beiden Diagonalen. Das Andreaskreuz besteht aus zwei Geraden, welche jedoch in Pfade konvertiert werden. Die Enden der Geraden werden derart abgeschnitten, dass sie nicht über das Rechteck hinaus reichen. Geometrische Variante: identisch zur Referenz.",
+  "provenance": {
+    "commit": "2cec67269",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "Original description versus standalone description and raster registration; same renderer",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_panel_00",
+      "source": "AC0130_S.jpg",
+      "image": "../../images_to_convert/AC0130_S.jpg",
+      "role": "target",
+      "source_sha256": "e96ce809141f185220ca407953a77b07b31196a89c62ca0a1ff845b2d4c883aa"
+    },
+    {
+      "case_id": "anonymous_panel_01",
+      "source": "AC0130_M.jpg",
+      "image": "../../images_to_convert/AC0130_M.jpg",
+      "role": "holdout",
+      "source_sha256": "264be6232b06139490f1b30df4a13ae24b12af535ea1bf60fa894228083292f2"
+    },
+    {
+      "case_id": "anonymous_panel_02",
+      "source": "AC0130_L.jpg",
+      "image": "../../images_to_convert/AC0130_L.jpg",
+      "role": "holdout",
+      "source_sha256": "8315259c9c0367478e58f63550ae2c8d248c1e0b1bdb7b282077377e50384917"
+    }
+  ]
+}

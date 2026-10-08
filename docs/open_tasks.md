@@ -12,9 +12,25 @@ focused on the actual project scope.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-07)
+### Aktueller Plan-B-Stand (2026-10-08)
 
-**Aktueller Abschluss 2026-10-08: `DLG0031`.** Das reguläre Checkboxpaket auf
+**Aktueller Abschluss 2026-10-08: `AC0130_S` (Luftbefeuchter).** Das Paket auf
+`codex/ac0130-quality-2026-10-08` besteht mit M-/L-Holdouts beide unveränderten
+Qualitätsgates ohne Pflichtmetrikregression. Der frische Ziel-CLI-Vorlauf sinkt
+von `mean_delta2=15686.570312` auf `325.073761`. Eigenständige XML-Beschreibungen
+trennen die Zickzackvarianten vom Andreaskreuz-Raster. Die vorhandene SVG-Vorlage
+hat eine eigene Liniengruppen-/Balkenstruktur; ihre separate Beschreibung wird
+auch im zufälligen Pool berücksichtigt. Zwei Seeds bestehen jeweils 16/16
+unveränderte Roundtrip-Gates. Die katalogfreie Registrierung bestimmt Geometrie,
+Wiederholung und Verlauf aus den Pixeln. Zwei unabhängige CLI-Läufe reproduzieren
+alle sechs JPG-Abnahme-SVGs; der wiederholte Vorlagen-Seed reproduziert alle 16
+SVGs und Qualitätsmetriken. 21 fokussierte Tests bestehen. Der Review über 956
+Einträge führt die reguläre Rotation mit `GE1420_S` fort, gefolgt von
+`AC0704_1_L`, `AC0402_1_S`, `AC0403_1_L` und `GE0032`. Der Gesamtpool-Nachweis
+`PB-POOL-2026-10-07` bleibt offen. Details und vollständiger Testabschluss:
+`docs/next_arbeitspaket_2026-10-08_ac0130_s.md`.
+
+**Vorheriger Abschluss 2026-10-08: `DLG0031`.** Das reguläre Checkboxpaket auf
 `codex/dlg0031-quality-2026-10-08` besteht beide unveränderten Qualitätsgates.
 Der frische echte CLI-Vorlauf sinkt von `mean_delta2=16540.876953` auf
 `1557.055542`, ohne Pflichtmetrikregression. Auch `DLG0021` besteht; dessen
