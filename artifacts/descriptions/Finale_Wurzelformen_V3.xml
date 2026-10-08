@@ -2514,11 +2514,18 @@
       </bilder>
     </entry>
     <entry kind="wurzelform" key="AC0130">
-      <source_rows>45,46,47,48</source_rows>
+      <source_rows>45</source_rows>
       <wurzelform>AC0130</wurzelform>
-      <beschreibung> Wie AC0030: Kühlelement, graues Rechteck, Minus-Minus-Zeichen oben Mitte, Farbverlauf horizontal dunkel-hell-dunkel, graue Linien in beiden Diagonalen. Das Andreaskreuz besteht aus zwei Geraden, welche jedoch in Pfade konvertiert werden. Die Enden der Geraden werden derart abgeschnitten, dass sie nicht über das Rechteck hinaus reichen. Geometrische Variante: identisch zur Referenz.</beschreibung>
+      <beschreibung>Luftbefeuchter: Graues Rechteck mit horizontalem Farbverlauf dunkel-hell-dunkel und grauem Rahmen. Zwei diagonale Geraden bilden ein an den Rechteckgrenzen beschnittenes Andreaskreuz. Oben mittig stehen ein Pluszeichen und darunter ein Minuszeichen.</beschreibung>
       <bilder>
         <bild>AC0130.jpg</bild>
+      </bilder>
+    </entry>
+    <entry kind="wurzelform" key="AC0130_sizes">
+      <source_rows>46,47,48</source_rows>
+      <wurzelform>AC0130</wurzelform>
+      <beschreibung>Luftbefeuchter: Hochkantiges Rechteck mit grauem Rahmen und horizontalem Farbverlauf dunkel-hell-dunkel. Im linken Innenbereich verläuft eine dünne regelmäßige Zickzacklinie von oben nach unten. Rechts daneben steht ein schmales hohes ungefülltes Rechteck mit grauer Kontur. Lage, Anzahl der Zacken, Farben und Abmessungen ergeben sich aus dem Bild. Keine Schriftzeichen.</beschreibung>
+      <bilder>
         <bild>AC0130_L.jpg</bild>
         <bild>AC0130_M.jpg</bild>
         <bild>AC0130_S.jpg</bild>
