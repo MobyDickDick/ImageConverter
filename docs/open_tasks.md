@@ -14,6 +14,22 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-07)
 
+**Fortschreibung 2026-10-08:** Das nächste reguläre Paket `AC0554_1_L`
+auf `codex/ac0554-quality-2026-10-08` besteht mit allen neun Farb-/Größenvarianten
+beide unabhängigen Qualitätsgates ohne Metrikregression. Die XML beschreibt
+Rechteck, vertikalen Verlauf und offene Dachlinie eigenständig; die Runtime
+registriert deren Geometrie und Farben aus dem Raster. Zwei CLI-Läufe
+reproduzieren alle 18 SVGs und Gateentscheidungen. Der vom Nutzer benannte
+CI-Fall `AC0223_L_sia` (Seed `5321758631963497707`) verbessert sich bei
+identischen 16 CI-Rastern und Referenzen von 0/16 auf 16/16. Derselbe Seed
+reproduziert alle 16 SVG-Bytes; Seed `20261008` besteht weitere 16/16.
+Qualitätsgrenzen, Beschreibung und Budget des CI-Falls sind unverändert.
+Die allgemeine Registrierung erkennt drei Ventilflügel, Verbindung und den
+quadratischen Antrieb mit Diagonalen. Dieser Nachweis schließt den gesamten
+zufälligen Aufgabenpool ausdrücklich nicht. Der erneuerte Review über 956
+Einträge setzt die reguläre Rotation mit `DLG0031` fort. Details und Repro:
+`docs/next_arbeitspaket_2026-10-08_ac0554_1_l.md`.
+
 Das Pfeilpaket für `GE9013_6M` besteht die deterministische Abnahme auf
 `codex/ge9013-quality-2026-10-07`: Die XML beschreibt den Pfeil nach unten
 eigenständig; die katalogfreie Registrierung überträgt Geometrie und Verlauf
@@ -51,8 +67,9 @@ von 0/16 auf 16/16 bei identischen Eingaben und unveränderten Grenzen; Seed
 passt Kreisradius/-lage, Rahmen, Diagonale und Verlauf aus dem Raster an.
 Details und Repro stehen in `docs/plan_b_variation_acceptance.md`.
 
-Der Review über 956 Einträge (950 renderbare Paare) setzt die reguläre Rotation
-mit `AC0554_1_L` fort. Diese Diagrammabnahme ersetzt keinen regulären Kandidaten.
+Der Review über 956 Einträge (950 renderbare Paare) setzte die reguläre Rotation
+mit `AC0554_1_L` fort; das Paket ist nun abgeschlossen und `DLG0031` folgt.
+Die Diagrammabnahme ersetzt keinen regulären Kandidaten.
 
 ### Vorheriger Plan-B-Stand (2026-10-06)
 

@@ -1,0 +1,1024 @@
+{
+  "schema_version": "three_way_valve_compact_evidence_v1",
+  "date": "2026-10-08",
+  "branch": "codex/ac0554-quality-2026-10-08",
+  "ci_job": "https://github.com/MobyDickDick/ImageConverter/actions/runs/37680964416/job/112996576222",
+  "ci_commit": "6751c2e7e488f2795e22f9e89c43c18bb91b3119",
+  "source_svg": "artifacts/images_to_convert/samples/AC0223_L_sia.svg",
+  "seed": 5321758631963497707,
+  "source_description": "3-Wege-Ventilkopf oben (drei spitze Ventilflügel mit gemeinsamem Verlauf von dunkelgrau nach hellgrau), darunter ein dunkelgrauer senkrechter Griff (vom Ventilzentrum nach unten) auf hellgrauem Hintergrund. Kein \"M\"-Text im Badge. Der Griff liegt auf einer Symmetrieachse des Kreises. Unterteil: statt der Kelle ein hellgraues Quadrat mit grauem Rand; beide Diagonalen sind als graue Linien eingezeichnet. Der Griff ist schmal und zentriert; das Symbol ist horizontal symmetrisch.",
+  "source_svg_sha256": "e5d3ecf1fbdd09c9688618add1b060408890a7468dd586be524ec419fc3b3d86",
+  "source_description_sha256": "832879cb5f1a365a1a1f27d86be87b23dc91853f4cc832fd48d59e518d6c9458",
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "iterations": 64,
+  "ci_summary": {
+    "required": 16,
+    "completed": 16,
+    "passed": 0,
+    "failed": 16,
+    "satisfactory": false
+  },
+  "local_before_summary": {
+    "required": 16,
+    "completed": 16,
+    "passed": 0,
+    "failed": 16,
+    "satisfactory": false
+  },
+  "after_summary": {
+    "required": 16,
+    "completed": 16,
+    "passed": 16,
+    "failed": 0,
+    "satisfactory": true
+  },
+  "replay_summary": {
+    "required": 16,
+    "completed": 16,
+    "passed": 16,
+    "failed": 0,
+    "satisfactory": true
+  },
+  "all_16_ci_input_and_reference_hashes_identical": true,
+  "all_16_replay_svg_bytes_identical": true,
+  "after_extremes": {
+    "max_normalized_mse": 0.0037215971387922764,
+    "max_foreground_mse": 0.008507911115884781,
+    "min_edge_alignment": 0.9228484630584717,
+    "min_foreground_iou": 0.9253731343283582
+  },
+  "cases": [
+    {
+      "case_id": "probe_01",
+      "variation": {
+        "scale": 0.98038145,
+        "relative_x": 0.01836116,
+        "relative_y": -5.455e-05
+      },
+      "input_sha256": "2424651371c7b34832944014cd7063518c7e0bf4a3d3b1a2bbf5d56509935109",
+      "reference_svg_sha256": "cd62cc366ff1e79d3c97f23107bea76a6da6ba79ae6a7979528d5d21e634026a",
+      "output_sha256": "f3798568b665b615dd2c0802fafd843a797f626b083df4dfa54f730d68d3d538",
+      "metrics": {
+        "normalized_mse": 0.002971527399495244,
+        "foreground_mse": 0.00697822542861104,
+        "edge_alignment": 0.9779516458511353,
+        "foreground_iou": 0.9701986754966887
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.14713573455810547,
+        "foreground_mse": 0.3090311586856842,
+        "edge_alignment": 0.3392471671104431,
+        "foreground_iou": 0.47430249632892807
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_02",
+      "variation": {
+        "scale": 1.04520087,
+        "relative_x": 0.00543617,
+        "relative_y": 0.009028
+      },
+      "input_sha256": "2ab257c57caa5451d5e17f4017ab841d95440b6ee622913483cc7923be275412",
+      "reference_svg_sha256": "66b4172ae15df9d058e57d25995697c24f771b48b3ae1ceff549f872667b9e0d",
+      "output_sha256": "3f7fe4d7976dd36c0ba20d815f9be48ccff5b1516d8c58cc6cbef8dfb37fac92",
+      "metrics": {
+        "normalized_mse": 0.003525332547724247,
+        "foreground_mse": 0.008242692798376083,
+        "edge_alignment": 0.9745995998382568,
+        "foreground_iou": 0.9639048400328137
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.1652212291955948,
+        "foreground_mse": 0.3417911231517792,
+        "edge_alignment": 0.31068748235702515,
+        "foreground_iou": 0.5133767172812725
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_03",
+      "variation": {
+        "scale": 0.95835572,
+        "relative_x": 0.00755824,
+        "relative_y": -0.00507648
+      },
+      "input_sha256": "06a5b94ab2fd93d6ccea15230d7b48da417f38776b80b60ba2ff437da0c15a3f",
+      "reference_svg_sha256": "f5d7137350b236205ecfd8cd5b76f74502c478456260c9994298fc1c8c4d1765",
+      "output_sha256": "8f6194c91b3c7150540058fe0e9bbe3747cf7101117a3c0a1ea7258a1be7ef6c",
+      "metrics": {
+        "normalized_mse": 0.003126312280073762,
+        "foreground_mse": 0.007510744966566563,
+        "edge_alignment": 0.9518805742263794,
+        "foreground_iou": 0.9468802698145026
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.14106564223766327,
+        "foreground_mse": 0.30189403891563416,
+        "edge_alignment": 0.34155455231666565,
+        "foreground_iou": 0.49364248317127896
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_04",
+      "variation": {
+        "scale": 0.9409175,
+        "relative_x": 0.00456595,
+        "relative_y": 0.01024812
+      },
+      "input_sha256": "6e28817a739d4d999db78f66503aeceff6d0d282ff88accc81f7c6b4acdc89ee",
+      "reference_svg_sha256": "cccf1180c0fd65297eb082fbcd69e6e316493a53b663ea44b56153349b0a0d4e",
+      "output_sha256": "6280754a36f090f7cf67e79991cf83bdbd2d3e9cce65e021928a9453e4819573",
+      "metrics": {
+        "normalized_mse": 0.0027946000918745995,
+        "foreground_mse": 0.007203425280749798,
+        "edge_alignment": 0.9671198129653931,
+        "foreground_iou": 0.9581818181818181
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.13746914267539978,
+        "foreground_mse": 0.31930673122406006,
+        "edge_alignment": 0.32870376110076904,
+        "foreground_iou": 0.49065800162469536
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_05",
+      "variation": {
+        "scale": 0.97181865,
+        "relative_x": 0.002769,
+        "relative_y": -0.0054896
+      },
+      "input_sha256": "ad483de4146e93fddece66e827b15a7d80f0fbee3ce971abf33a4f0b40b2935a",
+      "reference_svg_sha256": "5f042b6ac1e1a4b4f071987d00801e2c26e5caf8cd99463f9f547a55ef9a1f51",
+      "output_sha256": "4799f2d9666090c6ccf012ce376961a0870f046ac0000e83849c789f1fd16301",
+      "metrics": {
+        "normalized_mse": 0.00307865790091455,
+        "foreground_mse": 0.007202947046607733,
+        "edge_alignment": 0.9566618204116821,
+        "foreground_iou": 0.9372419488026424
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.14514468610286713,
+        "foreground_mse": 0.3082225024700165,
+        "edge_alignment": 0.36604195833206177,
+        "foreground_iou": 0.4825538233110616
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_06",
+      "variation": {
+        "scale": 1.04759991,
+        "relative_x": 0.01746725,
+        "relative_y": 0.00802921
+      },
+      "input_sha256": "43906e0a26ca369e906234200ef1b225d2373e7ecc57c24115b7d536a3c13bbc",
+      "reference_svg_sha256": "b7bb05b2b66aa828f316f90f2e32350ec453e62e3dcba9889f83d6e709231150",
+      "output_sha256": "b9906e1898cf4dd17b81df5c952b5b8a81bff021773f6a1ec258ebc0995634d6",
+      "metrics": {
+        "normalized_mse": 0.0037215971387922764,
+        "foreground_mse": 0.008507911115884781,
+        "edge_alignment": 0.957388162612915,
+        "foreground_iou": 0.9314285714285714
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.16350474953651428,
+        "foreground_mse": 0.3350761830806732,
+        "edge_alignment": 0.3483138084411621,
+        "foreground_iou": 0.5050143266475645
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_07",
+      "variation": {
+        "scale": 1.03150542,
+        "relative_x": 0.01417504,
+        "relative_y": 0.02190052
+      },
+      "input_sha256": "9482c0a1c786b0b4e553410db013c4f5902890fe0959778694a3e40ce215e78a",
+      "reference_svg_sha256": "55509c308c6c09ec8e1b755fa76daf851093bf46b072bd9969761afe7dd2381b",
+      "output_sha256": "2b62976d93ce2b6537cf1f559a5aac4f76ebd54f3a11ca271cccb96a498d5693",
+      "metrics": {
+        "normalized_mse": 0.0034056820441037416,
+        "foreground_mse": 0.00785994715988636,
+        "edge_alignment": 0.9228484630584717,
+        "foreground_iou": 0.9611650485436893
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.16093553602695465,
+        "foreground_mse": 0.3285805284976959,
+        "edge_alignment": 0.3204471468925476,
+        "foreground_iou": 0.5089221984296931
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_08",
+      "variation": {
+        "scale": 1.02273518,
+        "relative_x": -0.00623316,
+        "relative_y": 0.00190243
+      },
+      "input_sha256": "2bf44fedc5955fa165b7aa444a5fa083fb5990f198cea6ad8a73932111ba7819",
+      "reference_svg_sha256": "e032ad2583282b44ab967af3ce5c49477bd805377151bdb1a3b738483af1b4ff",
+      "output_sha256": "c25a0b8a044ec0aff186e59950901a6e99d59d38f070a69d92dd7078850e9e66",
+      "metrics": {
+        "normalized_mse": 0.003389933379366994,
+        "foreground_mse": 0.007788944989442825,
+        "edge_alignment": 0.9661169052124023,
+        "foreground_iou": 0.9490703314470493
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.16074340045452118,
+        "foreground_mse": 0.33524152636528015,
+        "edge_alignment": 0.3406308591365814,
+        "foreground_iou": 0.49489795918367346
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_09",
+      "variation": {
+        "scale": 1.05871435,
+        "relative_x": -0.01204632,
+        "relative_y": -0.00471346
+      },
+      "input_sha256": "77ed078e89fb59b2a81d4bb7b9be7413cf76f28ea1b900a2bd67eb63ac557ca0",
+      "reference_svg_sha256": "15169f912b441d32cff591ae47f516484e16911d6436a68fc4a2839c923549ef",
+      "output_sha256": "6b6234ddabc9cece2eeb82cfec76bccec7430828bc91d5d023b25cdba59625df",
+      "metrics": {
+        "normalized_mse": 0.0034299115650355816,
+        "foreground_mse": 0.007945007644593716,
+        "edge_alignment": 0.9734308123588562,
+        "foreground_iou": 0.9633848657445078
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.16778817772865295,
+        "foreground_mse": 0.2784273624420166,
+        "edge_alignment": 0.306456983089447,
+        "foreground_iou": 0.5379710144927536
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_10",
+      "variation": {
+        "scale": 0.96348351,
+        "relative_x": -0.02495506,
+        "relative_y": -0.00020622
+      },
+      "input_sha256": "775e3a77fda75d426d6426b0f8795e539a6d1f548af689e4f47d84bbd8787e04",
+      "reference_svg_sha256": "5e3b4b1129aa617534515feb1a931a2d7470b7bac4c4a37000547e2693dbfe41",
+      "output_sha256": "67ad10abe34287e8b9279656fb5c8116bd4f7c36b208cb4670f84e35c94673d2",
+      "metrics": {
+        "normalized_mse": 0.0027885010931640863,
+        "foreground_mse": 0.006955539807677269,
+        "edge_alignment": 0.9595580101013184,
+        "foreground_iou": 0.9710780017528484
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.14447878301143646,
+        "foreground_mse": 0.3182355761528015,
+        "edge_alignment": 0.30415189266204834,
+        "foreground_iou": 0.4819091608929946
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_11",
+      "variation": {
+        "scale": 0.98032537,
+        "relative_x": 0.00509858,
+        "relative_y": 0.00227518
+      },
+      "input_sha256": "71520ebbd375c68ac5ab94b8cf5becf8a7099e3d54241d506749184ee22fdd12",
+      "reference_svg_sha256": "dd06d7457449ce5cddcddfdebef8f417def8adec56cd9fd96203f8cb926c36c7",
+      "output_sha256": "3904dbfbb7ffacb84b09c812b87fe491b6c636b226b3a6be2e09ed35191a7d27",
+      "metrics": {
+        "normalized_mse": 0.0029118258971720934,
+        "foreground_mse": 0.006719497032463551,
+        "edge_alignment": 0.970061182975769,
+        "foreground_iou": 0.95004095004095
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.14709268510341644,
+        "foreground_mse": 0.3077041506767273,
+        "edge_alignment": 0.3765317499637604,
+        "foreground_iou": 0.5142648134601316
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_12",
+      "variation": {
+        "scale": 0.97903905,
+        "relative_x": -0.02492702,
+        "relative_y": -0.01526752
+      },
+      "input_sha256": "bb5f910dbe7f40e1861a914a53df3ef41a2fe7a856544031fedea195932eb164",
+      "reference_svg_sha256": "c4f06a9ca10b8af4ef3e7212fe18cbe231b66c656762a572c8c264d1ffff9deb",
+      "output_sha256": "e90ebd1b279dcd9709773558bf1794efc69cd1d00517c24c827baddb540dfea3",
+      "metrics": {
+        "normalized_mse": 0.002844802103936672,
+        "foreground_mse": 0.006897379644215107,
+        "edge_alignment": 0.9622983932495117,
+        "foreground_iou": 0.9538855678906917
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.15511652827262878,
+        "foreground_mse": 0.27417710423469543,
+        "edge_alignment": 0.2897721827030182,
+        "foreground_iou": 0.5185414091470952
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_13",
+      "variation": {
+        "scale": 0.96521884,
+        "relative_x": -0.01892798,
+        "relative_y": 0.00863583
+      },
+      "input_sha256": "caf2d27daf2e1e616b6855d30bac162dcebf5512493ad228b0e7bcd7a09e0206",
+      "reference_svg_sha256": "e0981b02039d260cda17091d56697dc168053b2dba830018d51800cc9c9fbcbc",
+      "output_sha256": "9345819bbcacc6c30ae7ed2f8147732471947166a119f43ab4c04e270bf5fd1b",
+      "metrics": {
+        "normalized_mse": 0.0027014052029699087,
+        "foreground_mse": 0.006506180856376886,
+        "edge_alignment": 0.9710160493850708,
+        "foreground_iou": 0.9677966101694915
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.14343316853046417,
+        "foreground_mse": 0.3074572682380676,
+        "edge_alignment": 0.3162098824977875,
+        "foreground_iou": 0.48314606741573035
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_14",
+      "variation": {
+        "scale": 0.95883568,
+        "relative_x": 0.01054262,
+        "relative_y": 0.00386362
+      },
+      "input_sha256": "a374ddd701aeef325f29dea6fcac534afe9e7221c4c3ba602d5af45bb06dc3d1",
+      "reference_svg_sha256": "5cda1c3f9d39ba3d9ff5decdfce2b63b131e79776c06ab3b060a99eebc509bbc",
+      "output_sha256": "be7bf4bac3a1c1a1b8e3c3bbe611da199ae7e01bc954bf900b1c070e69619c10",
+      "metrics": {
+        "normalized_mse": 0.0028064444195479155,
+        "foreground_mse": 0.006794896442443132,
+        "edge_alignment": 0.9390041828155518,
+        "foreground_iou": 0.9420783645655877
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.14160406589508057,
+        "foreground_mse": 0.3079480528831482,
+        "edge_alignment": 0.34994077682495117,
+        "foreground_iou": 0.49961977186311785
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_15",
+      "variation": {
+        "scale": 0.99566064,
+        "relative_x": -0.00979133,
+        "relative_y": -0.00739056
+      },
+      "input_sha256": "d9b8deb23552323a55a40fc64c0974d4efe5207fb0eb57da41a4c4301c419e5f",
+      "reference_svg_sha256": "bbfd48250ee749676b0ce6246cf5e428bb729de895a345ac35232a702e59c7cc",
+      "output_sha256": "32701b892d0557cb6798bf410c1adf1840cd58e5f520431d593dc1a49a10dddf",
+      "metrics": {
+        "normalized_mse": 0.0029810972046107054,
+        "foreground_mse": 0.007107359357178211,
+        "edge_alignment": 0.9558557271957397,
+        "foreground_iou": 0.9731543624161074
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.1522204428911209,
+        "foreground_mse": 0.32462939620018005,
+        "edge_alignment": 0.37793752551078796,
+        "foreground_iou": 0.5085756897837435
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    },
+    {
+      "case_id": "probe_16",
+      "variation": {
+        "scale": 0.96968032,
+        "relative_x": -0.00020211,
+        "relative_y": 0.00691301
+      },
+      "input_sha256": "c2f9b3bddcdb5b6253c44f6e0830ac0b5237d7bc6f01041e766b9a1ce2edc31b",
+      "reference_svg_sha256": "b15707d3b634527e127283e3dc9e93bf248341360fdc64be689323995cd24b61",
+      "output_sha256": "9ba329f4a032ad6e185bc2c152aee06715d17d458d6987ae2c4ea4f4ec49b063",
+      "metrics": {
+        "normalized_mse": 0.002795764012262225,
+        "foreground_mse": 0.0066166166216135025,
+        "edge_alignment": 0.9639753699302673,
+        "foreground_iou": 0.9253731343283582
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 4,
+        "path_complexity_ratio": 0.5714
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": [],
+      "before_metrics": {
+        "normalized_mse": 0.1438157856464386,
+        "foreground_mse": 0.30905306339263916,
+        "edge_alignment": 0.3159520924091339,
+        "foreground_iou": 0.5180451127819549
+      },
+      "before_failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ]
+    }
+  ],
+  "holdout_seed": 20261008,
+  "holdout_summary": {
+    "required": 16,
+    "completed": 16,
+    "passed": 16,
+    "failed": 0,
+    "satisfactory": true
+  },
+  "holdout_extremes": {
+    "max_normalized_mse": 0.003613437060266733,
+    "max_foreground_mse": 0.008585890755057335,
+    "min_edge_alignment": 0.9072452783584595,
+    "min_foreground_iou": 0.9178445229681979
+  },
+  "holdout_cases": [
+    {
+      "case_id": "probe_01",
+      "variation": {
+        "scale": 0.97506258,
+        "relative_x": -0.00307066,
+        "relative_y": 0.0235073
+      },
+      "input_sha256": "1a8793e43833c0986a4dbc77abf73faa517e86f3f3effa94f00c85b75cf456d0",
+      "reference_svg_sha256": "967c7d00bef63a24cefff733b8483af3167effa0ced252e2d5b9d0fc336a5458",
+      "output_sha256": "27d7c5da72ecc1467fd1a90c1032ec16ab913a389de9815545bff94ae167db12",
+      "metrics": {
+        "normalized_mse": 0.0027157701551914215,
+        "foreground_mse": 0.006613223813474178,
+        "edge_alignment": 0.9656376838684082,
+        "foreground_iou": 0.9527896995708155
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_02",
+      "variation": {
+        "scale": 1.03387269,
+        "relative_x": 0.01046907,
+        "relative_y": -0.0045173
+      },
+      "input_sha256": "5be7eda5fbfd9e5bac0f9e5f3d3e17330c420978e253b67bb83efb0360e6ec67",
+      "reference_svg_sha256": "e5cc96c9ddd54963146df9f3f3fb73b57b5ca79e6f1ed431f246476b588002c1",
+      "output_sha256": "e689357c1ea65286be44364bd5cfd2e626c33d1acc5a3ab152d9a23dbe9a6e84",
+      "metrics": {
+        "normalized_mse": 0.0034814972896128893,
+        "foreground_mse": 0.008258272893726826,
+        "edge_alignment": 0.9542528390884399,
+        "foreground_iou": 0.9558333333333333
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_03",
+      "variation": {
+        "scale": 0.96694676,
+        "relative_x": -0.01066827,
+        "relative_y": -0.00247795
+      },
+      "input_sha256": "ca3c2c90895008a84ab45646f645d6e751a95125fbdb77dda57e33b7c2e9afc2",
+      "reference_svg_sha256": "adb40f1187849010f5f8fbdc95fa2ca5a649ac5e7892d25bc20c835dd8d29bbb",
+      "output_sha256": "a5ae3e202fec82b177479e47d10dd98baa64a5990a8b34759a68cd49b99c6e75",
+      "metrics": {
+        "normalized_mse": 0.0030955655965954065,
+        "foreground_mse": 0.007141551934182644,
+        "edge_alignment": 0.9449206590652466,
+        "foreground_iou": 0.9488220958570268
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_04",
+      "variation": {
+        "scale": 0.99926343,
+        "relative_x": 0.02439984,
+        "relative_y": -0.02209196
+      },
+      "input_sha256": "9b3a2a8245b1f0d7175941907d670b901d6980f2f158a6bb1969f2f30db731d3",
+      "reference_svg_sha256": "33f2f2d46cb51d6977564f70575eef31d75b59a9c4cdb7ec37a3ab81174abece",
+      "output_sha256": "cda3d657a45496b59feef293b6c4724ad7df1b0210524f242a48dded2aacc9a8",
+      "metrics": {
+        "normalized_mse": 0.0030606775544583797,
+        "foreground_mse": 0.007236223667860031,
+        "edge_alignment": 0.9072452783584595,
+        "foreground_iou": 0.951706910907577
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_05",
+      "variation": {
+        "scale": 0.9794882,
+        "relative_x": 0.00392388,
+        "relative_y": 0.00541534
+      },
+      "input_sha256": "ca8a261e04a1b4d2ffba3ae6810a6936de1e8ce8b742177f1c4d944934e622fb",
+      "reference_svg_sha256": "6316394750ca8168d88f269ff0651730ed66b1368382f0b8bcc542c98b257951",
+      "output_sha256": "e081f49c8e3b9b4ab95f950e56b2d6f9e7101b7a8a824bdb2b7ebfa740b24a20",
+      "metrics": {
+        "normalized_mse": 0.0028143501840531826,
+        "foreground_mse": 0.006742639932781458,
+        "edge_alignment": 0.9691607356071472,
+        "foreground_iou": 0.9645868465430016
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_06",
+      "variation": {
+        "scale": 0.94983874,
+        "relative_x": -0.01901643,
+        "relative_y": 0.01494156
+      },
+      "input_sha256": "4eafd21c50379bb4fcde4d0b6d796895a19eced26bca7fd2e8a9769ca19e2e4e",
+      "reference_svg_sha256": "909715bbe494101003f4a96e5da67e34adbb1f8efff77992502b1579d02fdff6",
+      "output_sha256": "a59bedc3021248d958d6b7bca6d81df5dca92335341dcfa4bbe93aaf767d0319",
+      "metrics": {
+        "normalized_mse": 0.0026452275924384594,
+        "foreground_mse": 0.006682968232780695,
+        "edge_alignment": 0.9697834253311157,
+        "foreground_iou": 0.9688888888888889
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_07",
+      "variation": {
+        "scale": 0.97271011,
+        "relative_x": -0.02472845,
+        "relative_y": 0.01391122
+      },
+      "input_sha256": "d3cb31349e062b47d4deeb046db2e49f18f2b220d7038d102b2fae4eec0b353a",
+      "reference_svg_sha256": "632cdce40d39dad426667c11ee7850beff95bfd8b62423b3e1a8f770ad1d2272",
+      "output_sha256": "f897c5175ab5875cebe7c64fcdf5b8b7aa3442d1e2f042ec47c4d430b945efa3",
+      "metrics": {
+        "normalized_mse": 0.003037757473066449,
+        "foreground_mse": 0.007484243251383305,
+        "edge_alignment": 0.9397786855697632,
+        "foreground_iou": 0.9677700348432056
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_08",
+      "variation": {
+        "scale": 1.00252421,
+        "relative_x": 0.01331146,
+        "relative_y": -0.02084942
+      },
+      "input_sha256": "8706f364ae9d07e51ae6b911f9fb3394ef43f0eca732e9e5236cc6f890682527",
+      "reference_svg_sha256": "3b7161b9f5c3343baf14cb8858fcb18f1af21b6755c3b750c4012fa8964038b8",
+      "output_sha256": "4844c7281b6d8d1adc51ae6513c9ad65ba05d349a8b9ce80f2061de30393f00d",
+      "metrics": {
+        "normalized_mse": 0.0031053496059030294,
+        "foreground_mse": 0.007354553788900375,
+        "edge_alignment": 0.9667910933494568,
+        "foreground_iou": 0.9600333055786844
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_09",
+      "variation": {
+        "scale": 1.02989981,
+        "relative_x": 0.00978591,
+        "relative_y": -0.00316523
+      },
+      "input_sha256": "5ff8c13587aa704310f39767590e2cf4117fd5eef43f53ebf7079611eedc4899",
+      "reference_svg_sha256": "3c72c71abd55b9ecf0a56da165855420f5a0a27aadd24fb1d195065fb606a25d",
+      "output_sha256": "60398f89295b408e36246bf0d9f2c799d81ef551ce0ced1c2565c192330cd152",
+      "metrics": {
+        "normalized_mse": 0.0033152499236166477,
+        "foreground_mse": 0.007852224633097649,
+        "edge_alignment": 0.9521776437759399,
+        "foreground_iou": 0.966804979253112
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_10",
+      "variation": {
+        "scale": 0.95389062,
+        "relative_x": 0.0133829,
+        "relative_y": -0.00685524
+      },
+      "input_sha256": "cecbabaad4dc7b8b97804e410294fa12a4cffd2fa4fa2b9ebcecdaf6d8be2466",
+      "reference_svg_sha256": "37561360f47e737e0a46c146901cc33ed05a2c12c580957aa124a53a7dd5c5a8",
+      "output_sha256": "e79cccc6bb563dabf8da0e11ed67370d873945e013e194214177a419b52fef4b",
+      "metrics": {
+        "normalized_mse": 0.0029009960126131773,
+        "foreground_mse": 0.007157900836318731,
+        "edge_alignment": 0.973787248134613,
+        "foreground_iou": 0.9721254355400697
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_11",
+      "variation": {
+        "scale": 0.97212101,
+        "relative_x": -0.01824001,
+        "relative_y": 0.02267123
+      },
+      "input_sha256": "b4675fbbceb974dc5d1d9750d06ec8a3acefa16adb1a08f61de959bf6ef4f52b",
+      "reference_svg_sha256": "6798c5e763af76caddf06bccea91c4f0fc60a82ce2a7e45e729a90364c901eea",
+      "output_sha256": "6b3becd9bbb941c46da53c52ebfe94ae2c8109cf4152d816d6e3919f530c3597",
+      "metrics": {
+        "normalized_mse": 0.0027376713696867228,
+        "foreground_mse": 0.00680452911183238,
+        "edge_alignment": 0.961737871170044,
+        "foreground_iou": 0.9588080631025416
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_12",
+      "variation": {
+        "scale": 0.99602694,
+        "relative_x": 0.01176723,
+        "relative_y": -0.01336322
+      },
+      "input_sha256": "7baea98103516cbbc17da124696e27ead384fda6869fc61c4b2912d6cffb70bf",
+      "reference_svg_sha256": "f8760b2f38ee6d3c9ecdd073d0bf3f3e230872d71d12b21a92dc44668d2d7ee7",
+      "output_sha256": "355d106f9aca78ea827147e44444a6ed93fb6e934fb9a5fa48a8473766fa74e3",
+      "metrics": {
+        "normalized_mse": 0.003613437060266733,
+        "foreground_mse": 0.008585890755057335,
+        "edge_alignment": 0.9475070238113403,
+        "foreground_iou": 0.9664710813076278
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_13",
+      "variation": {
+        "scale": 1.01177145,
+        "relative_x": 0.01119298,
+        "relative_y": -0.0219101
+      },
+      "input_sha256": "1ce8fbd03e976d4326269c236ee7b88000346a502c547daaed2d418daa7f45c0",
+      "reference_svg_sha256": "0bd8022dbd07c5cf9cfd75df030989c011683be5006a01aacdcca09851df28bb",
+      "output_sha256": "1539327c5daf8f04d9ba04c4ac6040e6c5e7f3fd6f9bad052db26219cf3e4eff",
+      "metrics": {
+        "normalized_mse": 0.00321196555159986,
+        "foreground_mse": 0.007541829254478216,
+        "edge_alignment": 0.9641315937042236,
+        "foreground_iou": 0.9404958677685951
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_14",
+      "variation": {
+        "scale": 0.94151611,
+        "relative_x": -0.0217918,
+        "relative_y": -0.00104609
+      },
+      "input_sha256": "8083bc2e21f4c4c3a9e1a910f4cb9350c1ddf9ec9fcbda27ec5faa47e365ef88",
+      "reference_svg_sha256": "fb25229dd0756706bc39325d53d570daa11d3cbc9a3592dfaf7b81dfad1caf38",
+      "output_sha256": "2f1c025e119e64a503bdb796d4ecbfa8c5eee223e6d1480886dc514711492b20",
+      "metrics": {
+        "normalized_mse": 0.002633485710248351,
+        "foreground_mse": 0.00657288683578372,
+        "edge_alignment": 0.9612991809844971,
+        "foreground_iou": 0.9178445229681979
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_15",
+      "variation": {
+        "scale": 0.95768294,
+        "relative_x": 0.0149346,
+        "relative_y": 0.0151629
+      },
+      "input_sha256": "627db3b8e043e4d0ab709c7fbcd29c05b94340a436950a83f27d2bd4fc45f934",
+      "reference_svg_sha256": "ec3dbd72213d7223f6889ff372b6aff5b43a1f62ad14af986e32759c8b96beda",
+      "output_sha256": "9290d69618f7a1805ac2af5a561f79c36ce3994ca233d4cfa0a6dbf5edc3d385",
+      "metrics": {
+        "normalized_mse": 0.002968153450638056,
+        "foreground_mse": 0.006962887942790985,
+        "edge_alignment": 0.9287930130958557,
+        "foreground_iou": 0.9620774938169827
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_16",
+      "variation": {
+        "scale": 1.02189123,
+        "relative_x": 0.00041871,
+        "relative_y": -0.02240271
+      },
+      "input_sha256": "31e908bd6ddd77100431c7e157803cfdb2a420521b9a8e52fb25bed72ab68f45",
+      "reference_svg_sha256": "9c7a24c29563bd8cb7358354554eb1676ecf8bf18ff016b83d4ba49f3bd4a6a9",
+      "output_sha256": "39cd5908229bace1541acc6c85ce4ad28ffff973e34086c95ee047ea9eb852b9",
+      "metrics": {
+        "normalized_mse": 0.0033596050925552845,
+        "foreground_mse": 0.007874655537307262,
+        "edge_alignment": 0.9120243787765503,
+        "foreground_iou": 0.9471947194719472
+      },
+      "satisfactory": true,
+      "blocked_svg_reads": []
+    }
+  ],
+  "limitations": [
+    "This proves the three-way valve with crossed square actuator, not the entire random pool.",
+    "The existing PyMuPDF reference renderer paints polygon gradients black. The frozen CI rasters are retained without changing them; wing fills reproduce observed pixels rather than claiming a recovered gradient."
+  ],
+  "reproduction": [
+    "Read source_description from this file into .tmp/valve-description.txt.",
+    "python -m tools.run_plan_b_variations --svg artifacts/images_to_convert/samples/AC0223_L_sia.svg --description-file .tmp/valve-description.txt --seed 5321758631963497707 --output-dir .tmp/valve-reproduction",
+    "python -m pytest -q tests/test_three_way_valve_runtime.py"
+  ],
+  "completion": {
+    "profile": "full suite including all heavy modules; direct SVG rendering",
+    "tests": 2185,
+    "passed": 2156,
+    "skipped": 29,
+    "failures": 0,
+    "seconds": 638.438,
+    "skip_reason": "POSIX shell integration is unavailable on Windows",
+    "compileall": "passed",
+    "cli_help": "passed",
+    "runtime_image_id_occurrences": 0
+  }
+}

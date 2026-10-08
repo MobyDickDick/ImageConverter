@@ -114,7 +114,13 @@ def fit_dot_panel(*, width, height, image, descending, render_fn, error_fn):
         error += float(np.square(arr.astype(float)-raster).mean())/32
         candidate_contrast = np.max(np.abs(raster.astype(float)-background), axis=2)
         for threshold in (15, 25, 40):
-            error += 12*float(np.mean((target_contrast > threshold) != (candidate_contrast > threshold)))
+            target_mask = target_contrast > threshold
+            candidate_mask = candidate_contrast > threshold
+            union = np.count_nonzero(target_mask | candidate_mask)
+            # Normalize to the occupied region, so sparse faint structures
+            # retain influence even on a mostly empty or highlighted panel.
+            overlap = np.count_nonzero(target_mask & candidate_mask)/union if union else 1.
+            error += 12*(1-overlap)
         if not math.isfinite(error):
             return None
         result = (error, content, raster, p)

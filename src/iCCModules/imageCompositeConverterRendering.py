@@ -108,6 +108,15 @@ def _expand_axis_aligned_linear_gradients_for_fitz(svg_string: str) -> str:
                 key: value for key, value in rectangle.attrib.items()
                 if key not in {"x", "y", "width", "height", "fill", "stroke", "stroke-width"}
             }
+            # Antialiased adjacent bands leave partially transparent seams.
+            # Back them with an opaque fill and overlap by half a source unit;
+            # clamp each band to the rectangle so its outer edge stays intact.
+            backing = ET.Element(rectangle.tag, inherited)
+            for key in ("x", "y", "width", "height"):
+                backing.set(key, f"{dict(x=x, y=y, width=width, height=height)[key]:g}")
+            backing.set("fill", "#" + "".join(f"{channel:02x}" for channel in stops[0][1]))
+            backing.set("stroke", "none")
+            parent.insert(index, backing)
             for band_index in range(band_count):
                 position = (band_index + 0.5) / band_count
                 if reversed_axis:
@@ -122,21 +131,25 @@ def _expand_axis_aligned_linear_gradients_for_fitz(svg_string: str) -> str:
                 rgb = tuple(round(a * (1.0 - ratio) + b * ratio) for a, b in zip(left[1], right[1]))
                 band = ET.Element(rectangle.tag, inherited)
                 if vertical:
+                    start = max(y, y + height * band_index / band_count - 0.5)
+                    end = min(y + height, y + height * (band_index + 1) / band_count + 0.5)
                     band.set("x", f"{x:g}")
-                    band.set("y", f"{y + height * band_index / band_count:g}")
+                    band.set("y", f"{start:g}")
                     band.set("width", f"{width:g}")
-                    band.set("height", f"{height / band_count + 0.02:g}")
+                    band.set("height", f"{end - start:g}")
                 else:
-                    band.set("x", f"{x + width * band_index / band_count:g}")
+                    start = max(x, x + width * band_index / band_count - 0.5)
+                    end = min(x + width, x + width * (band_index + 1) / band_count + 0.5)
+                    band.set("x", f"{start:g}")
                     band.set("y", f"{y:g}")
-                    band.set("width", f"{width / band_count + 0.02:g}")
+                    band.set("width", f"{end - start:g}")
                     band.set("height", f"{height:g}")
                 band.set("fill", "#" + "".join(f"{channel:02x}" for channel in rgb))
                 band.set("stroke", "none")
-                parent.insert(index + band_index, band)
+                parent.insert(index + 1 + band_index, band)
             rectangle.set("fill", "none")
             parent.remove(rectangle)
-            parent.insert(index + band_count, rectangle)
+            parent.insert(index + 1 + band_count, rectangle)
             changed = True
     return ET.tostring(root, encoding="unicode") if changed else svg_string
 
