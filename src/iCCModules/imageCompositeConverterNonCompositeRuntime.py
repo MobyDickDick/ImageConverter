@@ -17,6 +17,7 @@ from src.iCCModules.imageCompositeConverterInteriorMark import fit_rectilinear_i
 from src.iCCModules.imageCompositeConverterPump import fit_pump_geometry
 from src.iCCModules.imageCompositeConverterLabeledSquare import fit_labeled_square
 from src.iCCModules.imageCompositeConverterCheckmark import fit_checkmark_disk
+from src.iCCModules.imageCompositeConverterCheckboxCheckmark import fit_checkbox_checkmark
 from src.iCCModules.imageCompositeConverterTriangleStem import fit_triangle_stem
 from src.iCCModules.imageCompositeConverterDotPanel import fit_dot_panel
 from src.iCCModules.imageCompositeConverterGradientArrow import fit_gradient_arrow
@@ -1403,6 +1404,7 @@ def runNonCompositeIterationImpl(
 ) -> tuple[str, str, dict[str, object], int, float] | None:
     if mode in {"non_composite", "auto"}:
         for fit_fn, status in (
+            (fit_checkbox_checkmark, "non_composite_raster_checkbox_checkmark"),
             (fit_three_way_valve, "non_composite_raster_three_way_valve"),
             (fit_chevron_panel, "non_composite_raster_chevron_panel"),
             (fit_gradient_arrow, "non_composite_raster_gradient_arrow"),
@@ -1414,7 +1416,7 @@ def runNonCompositeIterationImpl(
                 render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
             )
             if fitted is not None:
-                if status in {"non_composite_raster_chevron_panel", "non_composite_raster_three_way_valve"}:
+                if status in {"non_composite_raster_checkbox_checkmark", "non_composite_raster_chevron_panel", "non_composite_raster_three_way_valve"}:
                     params[fitted['source']] = {
                         'initial_error': fitted['initial_error'], 'final_error': fitted['error'],
                         'parameters': fitted['parameters'], 'evaluations': fitted['evaluations'],

@@ -1,0 +1,525 @@
+{
+  "schema_version": "checkbox_checkmark_recheck_summary_v1",
+  "date": "2026-10-08",
+  "provenance": {
+    "commit": "9c21f00bf920e580304eb70638335affdffa1489",
+    "seed": 0,
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7",
+    "execution_mode": "semantic-only",
+    "baseline_mode": "Original XML description and runtime versus standalone description and raster registration; same renderer"
+  },
+  "baseline_sha256": "75a5974601b2a7b2801dfbb83e218eb6394ad826ff1baa218baf2b08f826656c",
+  "description": "Haken vor einer Checkbox mit grauem Rand und weißer Innenfläche. Der Haken hat einen kurzen linken und einen längeren nach rechts oben gerichteten Schenkel, eine dunkelgraue Umrandung und einen vertikalen grünen Farbverlauf, oben dunkel und unten hellgrau. Lage, Farben und Abmessungen ergeben sich aus dem Bild. Weißer Hintergrund.",
+  "baseline_description": "Wie DLG0021: Haken vor Checkbox (grauer Rand, weiss gefüllt). Haken: Füllung grüner Farbverlauf oben dunkel, unten hellgrau. Dunkelgraue Umrandung. Geometrische Variante: identisch zur Referenz.",
+  "satisfaction_summary": {
+    "case_count": 2,
+    "improved": 2,
+    "satisfactory": 2,
+    "technically_completed": 2
+  },
+  "all_4_cli_svg_bytes_reproduced": true,
+  "all_gate_decisions_reproduced": true,
+  "original_cli_baseline_bytes_preserved": true,
+  "blocked_svg_reads": [],
+  "semantic_contract": "white framed checkbox behind a six-vertex two-leg checkmark with native vertical green gradient and dark outline",
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "cases": [
+    {
+      "after_mean_delta2": 1557.0555419921875,
+      "after_svg": "after\\converted_svgs\\anonymous_checkbox_00.svg",
+      "after_svg_sha256": "c75230cc6f8c7baa8dcf914d2a84c828eb9c3ddfb732c4cc3f77354fcdf4b494",
+      "before_mean_delta2": 16540.876953125,
+      "before_svg": "before\\converted_svgs\\anonymous_checkbox_00.svg",
+      "before_svg_sha256": "b5b1d3d7288c99bd4a8b17e3de8129415ddf4bbedd9a3ed4afd59c66bb01d535",
+      "case_id": "anonymous_checkbox_00",
+      "image": "inputs\\anonymous_checkbox_00.jpg",
+      "input_sha256": "6da4cc5d0fcb40dc280e73fa820ea8a0e08bed49a538204b2a7ce74344102fd9",
+      "role": "target",
+      "source": "DLG0031.jpg",
+      "source_sha256": "6da4cc5d0fcb40dc280e73fa820ea8a0e08bed49a538204b2a7ce74344102fd9",
+      "gate": {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8717284202575684,
+          "error_per_pixel": 0.007981830280621235,
+          "object_mask_iou": 0.9305555555555556,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6093975901603699,
+          "error_per_pixel": 0.0847923975554274,
+          "object_mask_iou": 0.6356877323420075,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_checkbox_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.007981830280621235,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9486,
+            "edge_alignment": 0.8717,
+            "pixel_similarity": 0.992,
+            "semantic_score": 1.0,
+            "structure_score": 0.9306
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    },
+    {
+      "after_mean_delta2": 1557.0555419921875,
+      "after_svg": "after\\converted_svgs\\anonymous_checkbox_01.svg",
+      "after_svg_sha256": "c75230cc6f8c7baa8dcf914d2a84c828eb9c3ddfb732c4cc3f77354fcdf4b494",
+      "before_mean_delta2": 16540.876953125,
+      "before_svg": "before\\converted_svgs\\anonymous_checkbox_01.svg",
+      "before_svg_sha256": "b5b1d3d7288c99bd4a8b17e3de8129415ddf4bbedd9a3ed4afd59c66bb01d535",
+      "case_id": "anonymous_checkbox_01",
+      "image": "inputs\\anonymous_checkbox_01.jpg",
+      "input_sha256": "6da4cc5d0fcb40dc280e73fa820ea8a0e08bed49a538204b2a7ce74344102fd9",
+      "role": "holdout",
+      "source": "DLG0021.jpg",
+      "source_sha256": "6da4cc5d0fcb40dc280e73fa820ea8a0e08bed49a538204b2a7ce74344102fd9",
+      "gate": {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8717284202575684,
+          "error_per_pixel": 0.007981830280621235,
+          "object_mask_iou": 0.9305555555555556,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6093975901603699,
+          "error_per_pixel": 0.0847923975554274,
+          "object_mask_iou": 0.6356877323420075,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_checkbox_01",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.007981830280621235,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9486,
+            "edge_alignment": 0.8717,
+            "pixel_similarity": 0.992,
+            "semantic_score": 1.0,
+            "structure_score": 0.9306
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    }
+  ],
+  "holdout_limitation": "The two catalog rasters are byte-identical; independent geometry, color and resolution coverage is synthetic.",
+  "description_xml_sha256": "09a497f38ca3156413b8517cef1bdc84b0e77d9a3838fcf809966914a8b5011c",
+  "review": {
+    "metrics": {
+      "successful_variants": 48,
+      "successful_renderable_pairs": 48,
+      "successful_above_threshold": 0,
+      "successful_missing_or_failed": 0,
+      "diff_variants": 908,
+      "diff_renderable_pairs": 902,
+      "selected_candidates": 5,
+      "top_error_cases": 5,
+      "ranked_records": 956,
+      "boundary_triple_records": 3
+    },
+    "selected_candidates": [
+      {
+        "variant": "AC0130_S",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/AC0130_S.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0130_S.svg",
+        "width": 20,
+        "height": 40,
+        "mean_delta2": 15686.5703125,
+        "normalized_mse": 0.08041302223503781,
+        "status": "ok",
+        "image_area": 800
+      },
+      {
+        "variant": "GE1420_S",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/GE1420_S.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/GE1420_S.svg",
+        "width": 20,
+        "height": 20,
+        "mean_delta2": 14628.7421875,
+        "normalized_mse": 0.0749903482634884,
+        "status": "ok",
+        "image_area": 400
+      },
+      {
+        "variant": "AC0704_1_L",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/AC0704_1_L.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0704_1_L.svg",
+        "width": 45,
+        "height": 25,
+        "mean_delta2": 14064.74609375,
+        "normalized_mse": 0.07209917259387415,
+        "status": "ok",
+        "image_area": 1125
+      },
+      {
+        "variant": "AC0402_1_S",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/AC0402_1_S.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0402_1_S.svg",
+        "width": 20,
+        "height": 20,
+        "mean_delta2": 14033.0,
+        "normalized_mse": 0.07193643470460079,
+        "status": "ok",
+        "image_area": 400
+      },
+      {
+        "variant": "AC0403_1_L",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/AC0403_1_L.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0403_1_L.svg",
+        "width": 40,
+        "height": 40,
+        "mean_delta2": 13989.01953125,
+        "normalized_mse": 0.07171098055235166,
+        "status": "ok",
+        "image_area": 1600
+      }
+    ],
+    "reproduction_arguments": [
+      "python",
+      "-m",
+      "tools.review_conversion_quality",
+      "--output-dir",
+      ".tmp/dlg0031/review",
+      "--exclude",
+      "AC0554_2_L",
+      "--exclude",
+      "AC0713_1_S",
+      "--exclude",
+      "DLG0010_1",
+      "--exclude",
+      "AC0724_1_S",
+      "--exclude",
+      "AC0252_1",
+      "--exclude",
+      "AC0252",
+      "--exclude",
+      "AC0252_2",
+      "--exclude",
+      "AC0731_1_L",
+      "--exclude",
+      "AC0731_1_M",
+      "--exclude",
+      "AC0731_1_S",
+      "--exclude",
+      "AC0731_L",
+      "--exclude",
+      "AC0731_M",
+      "--exclude",
+      "AC0731_S",
+      "--exclude",
+      "GE1003_M",
+      "--exclude",
+      "GE1003_L",
+      "--exclude",
+      "GE1003_S",
+      "--exclude",
+      "AC0404_1_L",
+      "--exclude",
+      "AC0404_1_M",
+      "--exclude",
+      "AC0404_1_S",
+      "--exclude",
+      "AC0404_1L_sia",
+      "--exclude",
+      "AC0404_1M_sia",
+      "--exclude",
+      "AC0404_1S_sia",
+      "--exclude",
+      "AC0404_2_L",
+      "--exclude",
+      "AC0404_2_M",
+      "--exclude",
+      "AC0404_2_S",
+      "--exclude",
+      "AC0404_2L_sia",
+      "--exclude",
+      "AC0404_2M_sia",
+      "--exclude",
+      "AC0404_2S_sia",
+      "--exclude",
+      "AC0404_L",
+      "--exclude",
+      "AC0404_L_sia",
+      "--exclude",
+      "AC0404_M",
+      "--exclude",
+      "AC0404_M_sia",
+      "--exclude",
+      "AC0404_S",
+      "--exclude",
+      "AC0404_S_sia",
+      "--exclude",
+      "GE9011_1M",
+      "--exclude",
+      "GE9011_1S",
+      "--exclude",
+      "GE9011_2M",
+      "--exclude",
+      "GE9011_2S",
+      "--exclude",
+      "GE9011_3M",
+      "--exclude",
+      "GE9011_3S",
+      "--exclude",
+      "GE9011_4M",
+      "--exclude",
+      "GE9011_4S",
+      "--exclude",
+      "GE9011_5M",
+      "--exclude",
+      "GE9011_5S",
+      "--exclude",
+      "GE9011_6M",
+      "--exclude",
+      "GE9011_6S",
+      "--exclude",
+      "GE9011_7M",
+      "--exclude",
+      "GE9011_7S",
+      "--exclude",
+      "GE0280",
+      "--exclude",
+      "GE0281",
+      "--exclude",
+      "GE0282",
+      "--exclude",
+      "GE0283",
+      "--exclude",
+      "GE0284",
+      "--exclude",
+      "GE0285",
+      "--exclude",
+      "GE9013_1M",
+      "--exclude",
+      "GE9013_1S",
+      "--exclude",
+      "GE9013_2M",
+      "--exclude",
+      "GE9013_2S",
+      "--exclude",
+      "GE9013_3M",
+      "--exclude",
+      "GE9013_3S",
+      "--exclude",
+      "GE9013_4M",
+      "--exclude",
+      "GE9013_4S",
+      "--exclude",
+      "GE9013_5M",
+      "--exclude",
+      "GE9013_5S",
+      "--exclude",
+      "GE9013_6M",
+      "--exclude",
+      "GE9013_6S",
+      "--exclude",
+      "GE9013_7M",
+      "--exclude",
+      "GE9013_7S",
+      "--exclude",
+      "AC0554_1_L",
+      "--exclude",
+      "AC0554_1_M",
+      "--exclude",
+      "AC0554_1_S",
+      "--exclude",
+      "AC0554_2_M",
+      "--exclude",
+      "AC0554_2_S",
+      "--exclude",
+      "AC0554_L",
+      "--exclude",
+      "AC0554_M",
+      "--exclude",
+      "AC0554_S",
+      "--exclude",
+      "DLG0031",
+      "--exclude",
+      "DLG0021"
+    ]
+  },
+  "completion": {
+    "focused_tests": 82,
+    "syntax": "passed",
+    "cli_help": "passed",
+    "runtime_image_id_occurrences": 0,
+    "full_suite": "passed",
+    "collected": 2207,
+    "passed": 2178,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 29,
+    "elapsed_seconds": 677.93,
+    "heavy_conversion_tests_enabled": true,
+    "svg_render_isolation": false,
+    "test_temp_directory": "workspace",
+    "junit_xml_sha256": "bf26021a4b9796bc7612214f2fc2b96ebee3f4ace90a461e0cc3760510edb8d1",
+    "post_collection_production_objective_tests": 18,
+    "initial_restricted_temp_run": {
+      "passed": 2134,
+      "failed": 44,
+      "skipped": 29,
+      "elapsed_seconds": 714.26,
+      "primary_failure": "Windows sandbox denies rename/replace in automatically selected temporary directories; final workspace-temp suite passed"
+    },
+    "native_windows_diagnostic": {
+      "code": "0xc0000008",
+      "test": "test_try_template_transfer_does_not_shuffle_when_deterministic_order_is_enabled",
+      "full_suite_test_status": "passed",
+      "isolated_test_status": "passed",
+      "isolated_exit_code": 0,
+      "reproduced_in_isolation": true,
+      "origin": "existing template transfer path; cause not changed or diagnosed in this package"
+    },
+    "post_encoding_tests": 32,
+    "post_encoding_saved_svg_bytes_unchanged": true,
+    "full_suite_scope": "Full heavy suite before final UTF-8 token and line-ending cleanup; cleanup covered by 32 final focused tests, including one added umlaut guard test."
+  }
+}
