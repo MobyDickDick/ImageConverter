@@ -14,7 +14,22 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-08)
 
-**Aktueller Abschluss 2026-10-08: `GE1420_S` (Alarmglocke).** Das Paket auf
+**Aktueller Abschluss 2026-10-08: `AC0704_1_L` (Quadrat mit rechtem Griff).**
+Das Paket auf `codex/ac0704-quality-2026-10-08` besteht mit allen sechs roten
+und hellgrauen Größenvarianten beide unveränderten regulären Qualitätsgates
+ohne Pflichtmetrikregression. Der frische Ziel-CLI-Vorlauf sinkt von
+`mean_delta2=14490.255859` auf `79.031998`. Eigenständige XML-Beschreibungen
+ersetzen den Katalogverweis. Die allgemeine Registrierung ermittelt Quadrat,
+Griff, Kontur und Füllfarben aus dem Raster; die Ausgabe enthält zwei native
+Vektorelemente. Der kleinste hellgraue Fall umgeht den bisherigen Panel-Ersatzpfad.
+Zwei unabhängige CLI-Läufe reproduzieren alle zwölf SVGs und Gateentscheidungen;
+alle sechs Varianten bestehen zusätzlich die strengeren Plan-B-Pixelgrenzen.
+44 fokussierte Tests bestehen. `PB-POOL-2026-10-07` bleibt offen.
+Der Review über 956 Einträge setzt die Rotation mit `AC0402_1_S` fort,
+gefolgt von `AC0403_1_L`, `GE0032`, `AC0413_1_M` und `AC0713_1_L`.
+Details und Testabschluss: `docs/next_arbeitspaket_2026-10-08_ac0704_1_l.md`.
+
+**Vorheriger Abschluss 2026-10-08: `GE1420_S` (Alarmglocke).** Das Paket auf
 `codex/ge1420-quality-2026-10-08` besteht mit M-/L-Holdouts und neutraler
 Konturvariante beide unveränderten regulären Qualitätsgates ohne
 Pflichtmetrikregression. Der frische Ziel-CLI-Vorlauf sinkt von

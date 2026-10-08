@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-08, nach Luftbefeuchter-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-08, nach Quadrat-/Griff-Abnahme)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -92,18 +92,26 @@ mit zwei Seeds jeweils 16/16 unveränderte Roundtrip-Gates. Alle CLI-SVG-Bytes
 und Gateentscheidungen sind reproduzierbar. Details:
 `docs/next_arbeitspaket_2026-10-08_ac0130_s.md`.
 
-1. `GE1420_S` – `mean_delta2=14628.742188`, `normalized_mse=0.074990`.
-2. `AC0704_1_L` – `mean_delta2=14064.746094`, `normalized_mse=0.072099`.
-3. `AC0402_1_S` – `mean_delta2=14033.000000`, `normalized_mse=0.071936`.
-4. `AC0403_1_L` – `mean_delta2=13989.019531`, `normalized_mse=0.071711`.
-5. `GE0032` – `mean_delta2=13826.389648`, `normalized_mse=0.070877`.
+Die Alarmglocke `GE1420_S` ist mit M-/L- und neutraler Variante abgeschlossen;
+alle vier bestehen die regulären Gates. Details:
+`docs/next_arbeitspaket_2026-10-08_ge1420_s.md`.
+Das folgende Quadrat-/Griffpaket `AC0704_1_L` besteht mit allen sechs roten
+und hellgrauen Größenvarianten beide regulären Gates und die strengeren
+Plan-B-Pixelgrenzen. Zwei CLI-Läufe reproduzieren alle zwölf SVGs und
+Gateentscheidungen. Details: `docs/next_arbeitspaket_2026-10-08_ac0704_1_l.md`.
 
-Die nächste reguläre Rotation beginnt mit `GE1420_S`; vor Änderungen ist eine
+1. `AC0402_1_S` – `mean_delta2=14033.000000`, `normalized_mse=0.071936`.
+2. `AC0403_1_L` – `mean_delta2=13989.019531`, `normalized_mse=0.071711`.
+3. `GE0032` – `mean_delta2=13826.389648`, `normalized_mse=0.070877`.
+4. `AC0413_1_M` – `mean_delta2=13465.694336`, `normalized_mse=0.069028`.
+5. `AC0713_1_L` – `mean_delta2=13458.083984`, `normalized_mse=0.068989`.
+
+Die nächste reguläre Rotation beginnt mit `AC0402_1_S`; vor Änderungen ist eine
 frische CLI-Baseline erforderlich. Der Review über 956 Einträge (950 renderbare
 Paare) und sein exakter Aufruf stehen im kompakten Nachweis
-`artifacts/evaluation/zigzag_panel_recheck_v1/summary_2026-10-08.json`.
+`artifacts/evaluation/right_stem_square_recheck_v1/summary_2026-10-08.json`.
 Alle 48 gespeicherten Erfolgsvarianten bleiben unter der Reviewgrenze.
-Vollständige Tabellen liegen lokal unter `.tmp/ac0130/review/`.
+Vollständige Tabellen liegen lokal unter `.tmp/ac0704/review/`.
 
 Die gekoppelte randomisierte Plan-B-Auswahl `AC0538_1L_sia` mit Seed
 `3948009396310964094` besteht nach eigenständiger Beschreibung und katalogfreier
@@ -138,7 +146,15 @@ das CLI meldet dafür weiterhin konzentrierten Restfehler. Details stehen in
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
-Aktueller Recheck: Zickzack-/Innenrahmen- und Liniengruppen-/Balkenregistrierung
+Aktueller Recheck: Die unbeschriftete Quadrat-/Griff-Topologie ist für die
+geprüften Raster `generalisiert`. Lage, Größe, Rand-/Griffbreite und Farben
+stammen aus den Pixeln; alle sechs echten Fälle bestehen beide regulären und
+die strengeren Plan-B-Gates. Unabhängige Farb-/Lage-/Auflösungstests und
+Umbenennung sind abgesichert. Fehlender Griff, zusätzliche Objekte und
+kontrastreiche Innenmarkierungen werden verworfen. Details:
+`docs/next_arbeitspaket_2026-10-08_ac0704_1_l.md`.
+
+Vorheriger Recheck: Zickzack-/Innenrahmen- und Liniengruppen-/Balkenregistrierung
 sind für die geprüften Luftbefeuchterstrukturen `generalisiert`. Die drei
 JPG-Größen bestehen beide Gates; die vorhandene SVG-Vorlage besteht nach
 Rasterisierung und Parametervariation mit zwei Seeds jeweils 16/16.

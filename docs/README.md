@@ -559,3 +559,4 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Arbeitspaket – GE1003_M Haken vor grauer Kreisscheibe (2026-10-05)](next_arbeitspaket_2026-10-05_ge1003_m.md)
 
 - [Arbeitspaket – GE9013_6M Pfeil nach unten und randomisierte Plan-B-Folge (2026-10-07)](next_arbeitspaket_2026-10-07_ge9013_6m.md)
+- [Arbeitspaket – AC0704_1_L Quadrat mit rechtem Griff (2026-10-08)](next_arbeitspaket_2026-10-08_ac0704_1_l.md)

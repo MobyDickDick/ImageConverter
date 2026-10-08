@@ -1,0 +1,62 @@
+{
+  "schema_version": "right_stem_square_recheck_manifest_v1",
+  "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Weißer Hintergrund, ohne Text oder Innenmarkierung. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild.",
+  "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+  "provenance": {
+    "commit": "75fd9dfeb",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "Frozen fresh CLI with original description; same renderer",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_square_00",
+      "source": "AC0704_1_L.jpg",
+      "image": "../../images_to_convert/AC0704_1_L.jpg",
+      "role": "target",
+      "source_sha256": "a438b642a80f94191db4ae0e0c5932ec2c8228a95eae9f65874efa79c6226a0a",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Weißer Hintergrund, ohne Text oder Innenmarkierung. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_square_01",
+      "source": "AC0704_1_M.jpg",
+      "image": "../../images_to_convert/AC0704_1_M.jpg",
+      "role": "holdout",
+      "source_sha256": "caabe888b056393db57c7989240c284721dcab4976c800fbb4963cd7d38f2fcf",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Weißer Hintergrund, ohne Text oder Innenmarkierung. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_square_02",
+      "source": "AC0704_1_S.jpg",
+      "image": "../../images_to_convert/AC0704_1_S.jpg",
+      "role": "holdout",
+      "source_sha256": "6a8bc5c63a2ce0569d4e2bf12973508d1b2c75d2e6a72a62c48b766f6a25ca85",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Weißer Hintergrund, ohne Text oder Innenmarkierung. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_square_03",
+      "source": "AC0704_L.jpg",
+      "image": "../../images_to_convert/AC0704_L.jpg",
+      "role": "holdout",
+      "source_sha256": "0be6b1ebdad2ce24cdba8f664fc92cec9a3da1f3587ae62e4cbc7c28aaf5e2f5",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Weißer Hintergrund, ohne Text oder Innenmarkierung. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_square_04",
+      "source": "AC0704_M.jpg",
+      "image": "../../images_to_convert/AC0704_M.jpg",
+      "role": "holdout",
+      "source_sha256": "836e50685b4896985e96526ac19c6d47110ed981b19d7e48c0a0000c9b0c5a70",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Weißer Hintergrund, ohne Text oder Innenmarkierung. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_square_05",
+      "source": "AC0704_S.jpg",
+      "image": "../../images_to_convert/AC0704_S.jpg",
+      "role": "holdout",
+      "source_sha256": "3561d0b573cf4b6b597a71ffc38d63f32228e97aadd27a19e143cb092c8f9bd3",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Weißer Hintergrund, ohne Text oder Innenmarkierung. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild."
+    }
+  ]
+}
