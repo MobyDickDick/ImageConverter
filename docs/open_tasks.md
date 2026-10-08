@@ -14,6 +14,23 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-07)
 
+**Aktueller Abschluss 2026-10-08: `DLG0031`.** Das reguläre Checkboxpaket auf
+`codex/dlg0031-quality-2026-10-08` besteht beide unveränderten Qualitätsgates.
+Der frische echte CLI-Vorlauf sinkt von `mean_delta2=16540.876953` auf
+`1557.055542`, ohne Pflichtmetrikregression. Auch `DLG0021` besteht; dessen
+Raster ist identisch und zählt ausdrücklich nicht als unabhängiger Bild-Holdout.
+Eigenständige XML-Beschreibungen ersetzen den Katalogverweis. Die katalogfreie
+Registrierung bestimmt Checkboxrahmen und gefüllte Hakenform mit nativem
+vertikalem Verlauf aus den Pixeln. Ein privater Polygon-Verlaufsadapter schließt
+die entsprechende PyMuPDF-Renderlücke. Zwei unabhängige CLI-Läufe reproduzieren
+alle vier SVG-Bytes und Gateentscheidungen. Die synthetische Abnahme variiert
+Lage, Farben und Auflösung und prüft fehlende/zusätzliche Evidenz. 82 fokussierte
+Tests sind grün. Der Review über 956 Einträge setzt die reguläre Rotation mit
+`AC0130_S` fort, gefolgt von `GE1420_S`, `AC0704_1_L`, `AC0402_1_S` und
+`AC0403_1_L`. Der Gesamtpool-Nachweis `PB-POOL-2026-10-07` bleibt offen.
+Details und vollständiger Testabschluss:
+`docs/next_arbeitspaket_2026-10-08_dlg0031.md`.
+
 **Fortschreibung 2026-10-08:** Das nächste reguläre Paket `AC0554_1_L`
 auf `codex/ac0554-quality-2026-10-08` besteht mit allen neun Farb-/Größenvarianten
 beide unabhängigen Qualitätsgates ohne Metrikregression. Die XML beschreibt

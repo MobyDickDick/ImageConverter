@@ -1,0 +1,28 @@
+{
+  "schema_version": "checkbox_checkmark_recheck_manifest_v1",
+  "description": "Haken vor einer Checkbox mit grauem Rand und weißer Innenfläche. Der Haken hat einen kurzen linken und einen längeren nach rechts oben gerichteten Schenkel, eine dunkelgraue Umrandung und einen vertikalen grünen Farbverlauf, oben dunkel und unten hellgrau. Lage, Farben und Abmessungen ergeben sich aus dem Bild. Weißer Hintergrund.",
+  "baseline_description": "Wie DLG0021: Haken vor Checkbox (grauer Rand, weiss gefüllt). Haken: Füllung grüner Farbverlauf oben dunkel, unten hellgrau. Dunkelgraue Umrandung. Geometrische Variante: identisch zur Referenz.",
+  "provenance": {
+    "commit": "9c21f00bf920e580304eb70638335affdffa1489",
+    "seed": 0,
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7",
+    "execution_mode": "semantic-only",
+    "baseline_mode": "Original XML description and runtime versus standalone description and raster registration; same renderer"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_checkbox_00",
+      "source": "DLG0031.jpg",
+      "image": "../../images_to_convert/DLG0031.jpg",
+      "role": "target",
+      "source_sha256": "6da4cc5d0fcb40dc280e73fa820ea8a0e08bed49a538204b2a7ce74344102fd9"
+    },
+    {
+      "case_id": "anonymous_checkbox_01",
+      "source": "DLG0021.jpg",
+      "image": "../../images_to_convert/DLG0021.jpg",
+      "role": "holdout",
+      "source_sha256": "6da4cc5d0fcb40dc280e73fa820ea8a0e08bed49a538204b2a7ce74344102fd9"
+    }
+  ]
+}

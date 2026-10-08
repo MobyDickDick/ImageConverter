@@ -68,6 +68,36 @@ def radial_svg(extra=''):
             '</svg>')
 
 
+@pytest.mark.parametrize('reverse',[False,True])
+def test_polygon_gradient_respects_user_coordinates_and_concave_boundary(reverse):
+    import cv2
+    import fitz
+    import numpy as np
+    a,b = ('30','10') if reverse else ('10','30')
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">'
+           f'<defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1="{a}" y2="{b}">'
+           '<stop offset="0" stop-color="#0000ff"/><stop offset="1" stop-color="#ff0000"/>'
+           '</linearGradient></defs><polygon points="2,2 38,2 38,38 22,38 22,20 2,20" fill="url(#g)"/></svg>')
+    raster = rendering.render_svg_to_numpy_inprocess(svg,40,40,fitz_module=fitz,np_module=np,cv2_module=cv2)
+    y = np.arange(5,35)+.5
+    t = np.clip((y-10)/20,0,1)
+    if reverse:
+        t = 1-t
+    expected = np.column_stack((255*(1-t),np.zeros(len(t)),255*t))
+    assert np.max(abs(raster[5:35,30].astype(float)-expected)) < 14
+    assert np.all(raster[22:38,2:20] == 255)
+    assert np.all(raster[:2] == 255) and np.all(raster[:,38:] == 255)
+    assert svg.count('<polygon') == 1 and 'fill="url(#g)"' in svg
+
+
+@pytest.mark.parametrize('extra',['gradientTransform="scale(2)"','spreadMethod="reflect"'])
+def test_polygon_adapter_leaves_unsupported_paint_servers_unchanged(extra):
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" {extra}>'
+           '<stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#000000"/>'
+           '</linearGradient></defs><polygon points="0,0 20,0 10,20" fill="url(#g)"/></svg>')
+    assert rendering._expand_polygon_linear_gradients_for_fitz(svg) == svg
+
+
 def test_radial_adapter_keeps_native_saved_vector_and_draws_light_center():
     import cv2
     import fitz

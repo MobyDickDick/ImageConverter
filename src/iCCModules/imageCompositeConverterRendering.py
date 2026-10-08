@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import base64
+import copy
 import gc
 import json
+import math
 import os
 import re
 import subprocess
@@ -154,6 +156,115 @@ def _expand_axis_aligned_linear_gradients_for_fitz(svg_string: str) -> str:
     return ET.tostring(root, encoding="unicode") if changed else svg_string
 
 
+def _expand_polygon_linear_gradients_for_fitz(svg_string: str) -> str:
+    """Render simple native polygon gradients through privately clipped bands.
+
+    PyMuPDF does not implement these paint servers. Clip each band geometrically
+    so concave polygons remain vectors without relying on SVG clipPath support.
+    Transforms, transparency and non-axis-aligned gradients are left untouched.
+    """
+    if 'linearGradient' not in svg_string or '<polygon' not in svg_string:
+        return svg_string
+    try:
+        root = ET.fromstring(svg_string)
+    except ET.ParseError:
+        return svg_string
+    namespace = '{http://www.w3.org/2000/svg}'
+    gradients = {e.get('id'): e for e in root.iter() if e.tag.rsplit('}',1)[-1] == 'linearGradient'}
+    changed = False
+
+    def clip(points, axis, bound, greater):
+        output = []
+        for a, b in zip(points[-1:]+points[:-1], points):
+            inside_a = a[axis] >= bound if greater else a[axis] <= bound
+            inside_b = b[axis] >= bound if greater else b[axis] <= bound
+            if inside_a != inside_b:
+                t = (bound-a[axis])/(b[axis]-a[axis])
+                output.append(tuple(a[i]+t*(b[i]-a[i]) for i in (0,1)))
+            if inside_b:
+                output.append(b)
+        return output
+
+    for parent in list(root.iter()):
+        for index, polygon in reversed(list(enumerate(list(parent)))):
+            if polygon.tag.rsplit('}',1)[-1] != 'polygon':
+                continue
+            match = re.fullmatch(r'url\(#([^)]+)\)', polygon.get('fill',''))
+            gradient = gradients.get(match.group(1)) if match else None
+            if gradient is None or any(k not in {'id','x1','y1','x2','y2','gradientUnits'} for k in gradient.attrib):
+                continue
+            if any(k not in {'id','points','fill','stroke','stroke-width','stroke-linejoin'} for k in polygon.attrib):
+                continue
+            try:
+                numbers = [float(v) for v in re.split(r'[\s,]+',polygon.get('points','').strip())]
+                points = list(zip(numbers[::2],numbers[1::2]))
+                if len(numbers)%2 or len(points) < 3 or len(points) > 32 or not all(math.isfinite(v) for v in numbers):
+                    continue
+                xs, ys = zip(*points)
+                x,y,w,h = min(xs),min(ys),max(xs)-min(xs),max(ys)-min(ys)
+                if min(w,h) <= 0:
+                    continue
+                # The rectangle adapter implements coordinates, reversal and stops.
+                # Restrict to a genuine axis-aligned, opaque paint server.
+                if not (gradient.get('x1','0%') == gradient.get('x2','100%')
+                        or gradient.get('y1','0%') == gradient.get('y2','0%')):
+                    continue
+                if any(s.get('stop-opacity','1') != '1' or set(s.attrib)-{'offset','stop-color'}
+                       for s in gradient):
+                    continue
+                proxy = ET.Element(namespace+'svg')
+                defs = ET.SubElement(proxy,namespace+'defs')
+                paint = copy.deepcopy(gradient)
+                vertical = gradient.get('x1','0%') == gradient.get('x2','100%')
+                axis = 'y' if vertical else 'x'
+                start,extent = (y,h) if vertical else (x,w)
+                user_space = gradient.get('gradientUnits') == 'userSpaceOnUse'
+                def coord(value):
+                    if user_space:
+                        reference = float(root.get('height' if vertical else 'width',extent))
+                        return reference*float(value[:-1])/100 if value.endswith('%') else float(value)
+                    return start+extent*(float(value[:-1])/100 if value.endswith('%') else float(value))
+                low = coord(gradient.get(axis+'1','0%'))
+                high = coord(gradient.get(axis+'2','100%' if not vertical else '0%'))
+                if low == high:
+                    continue
+                for stop in paint:
+                    offset = stop.get('offset','0')
+                    fraction = float(offset[:-1])/100 if offset.endswith('%') else float(offset)
+                    stop.set('offset',str((low+fraction*(high-low)-start)/extent))
+                paint.set('gradientUnits','objectBoundingBox')
+                paint.set('x1','0%'); paint.set('y1','0%')
+                paint.set('x2','0%' if vertical else '100%')
+                paint.set('y2','100%' if vertical else '0%')
+                defs.append(paint)
+                ET.SubElement(proxy,namespace+'rect',x=str(x),y=str(y),width=str(w),height=str(h),
+                              fill=polygon.get('fill'))
+                expanded = ET.fromstring(_expand_axis_aligned_linear_gradients_for_fitz(ET.tostring(proxy,encoding='unicode')))
+                bands = [e for e in expanded if e.tag.rsplit('}',1)[-1] == 'rect']
+                if not bands or bands[0].get('fill','').startswith('url('):
+                    continue
+            except (ValueError,TypeError):
+                continue
+            group = ET.Element(namespace+'g')
+            if polygon.get('id'):
+                group.set('id',polygon.get('id'))
+            for band in bands:
+                bx,by,bw,bh = (float(band.get(k,0)) for k in ('x','y','width','height'))
+                piece = points
+                for axis,bound,greater in ((0,bx,True),(0,bx+bw,False),(1,by,True),(1,by+bh,False)):
+                    if piece:
+                        piece = clip(piece,axis,bound,greater)
+                if len(piece) >= 3:
+                    ET.SubElement(group,namespace+'polygon',points=' '.join(f'{a:.6f},{b:.6f}' for a,b in piece),
+                                  fill=band.get('fill'),stroke='none')
+            outline = ET.SubElement(group,polygon.tag,{k:v for k,v in polygon.attrib.items() if k not in {'id','fill'}})
+            outline.set('fill','none')
+            parent.remove(polygon)
+            parent.insert(index,group)
+            changed = True
+    return ET.tostring(root,encoding='unicode') if changed else svg_string
+
+
 def _expand_centered_radial_gradients_for_fitz(svg_string: str) -> str:
     """Approximate centered radial ellipse fills in private renderer input.
 
@@ -240,6 +351,7 @@ def render_svg_to_numpy_inprocess(
         return None
 
     renderer_svg = _expand_axis_aligned_linear_gradients_for_fitz(svg_string)
+    renderer_svg = _expand_polygon_linear_gradients_for_fitz(renderer_svg)
     renderer_svg = _expand_centered_radial_gradients_for_fitz(renderer_svg)
     attempts = [renderer_svg]
     normalized_svg = re.sub(r">\s+<", "><", renderer_svg.strip())
