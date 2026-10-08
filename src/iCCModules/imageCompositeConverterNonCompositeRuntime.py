@@ -21,6 +21,8 @@ from src.iCCModules.imageCompositeConverterTriangleStem import fit_triangle_stem
 from src.iCCModules.imageCompositeConverterDotPanel import fit_dot_panel
 from src.iCCModules.imageCompositeConverterGradientArrow import fit_gradient_arrow
 from src.iCCModules.imageCompositeConverterStepDiagram import fit_step_diagram
+from src.iCCModules.imageCompositeConverterChevronPanel import fit_chevron_panel
+from src.iCCModules.imageCompositeConverterThreeWayValve import fit_three_way_valve
 from src.iCCModules.imageCompositeConverterRadialDisk import fit_radial_disk
 
 
@@ -1399,8 +1401,10 @@ def runNonCompositeIterationImpl(
     calculate_error_fn,
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
-    if mode == "non_composite":
+    if mode in {"non_composite", "auto"}:
         for fit_fn, status in (
+            (fit_three_way_valve, "non_composite_raster_three_way_valve"),
+            (fit_chevron_panel, "non_composite_raster_chevron_panel"),
             (fit_gradient_arrow, "non_composite_raster_gradient_arrow"),
             (fit_step_diagram, "non_composite_raster_step_diagram"),
             (fit_radial_disk, "non_composite_raster_radial_disk"),
@@ -1410,6 +1414,11 @@ def runNonCompositeIterationImpl(
                 render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
             )
             if fitted is not None:
+                if status in {"non_composite_raster_chevron_panel", "non_composite_raster_three_way_valve"}:
+                    params[fitted['source']] = {
+                        'initial_error': fitted['initial_error'], 'final_error': fitted['error'],
+                        'parameters': fitted['parameters'], 'evaluations': fitted['evaluations'],
+                    }
                 write_validation_log_fn([f"status={status}"])
                 write_attempt_artifacts_fn(fitted['svg'], fitted['rendered'])
                 return base_name, description, params, 1, fitted['error']

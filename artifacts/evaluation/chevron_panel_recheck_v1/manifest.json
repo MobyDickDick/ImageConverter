@@ -1,0 +1,68 @@
+{
+  "schema_version": "chevron_panel_recheck_manifest_v1",
+  "description": "Rechteckiges Feld mit d\u00fcnnem Rahmen und vertikalem Farbverlauf. Eine kontrastierende offene Dachlinie besteht aus zwei geraden Schenkeln, die sich oben in einer Spitze treffen; die \u00e4u\u00dferen Enden liegen an den seitlichen Feldr\u00e4ndern. Farben und Abmessungen ergeben sich aus dem Bild.",
+  "baseline_description": "Wie AC0551: Wie AC0150. Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+  "provenance": {
+    "commit": "6751c2e7e488f2795e22f9e89c43c18bb91b3119",
+    "seed": 0,
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7",
+    "execution_mode": "semantic-only",
+    "baseline_mode": "Original XML description versus standalone chevron description and raster registration; same remaining runtime and corrected renderer"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_panel_00",
+      "source": "AC0554_1_L.jpg",
+      "image": "../../images_to_convert/AC0554_1_L.jpg",
+      "role": "target"
+    },
+    {
+      "case_id": "anonymous_panel_01",
+      "source": "AC0554_1_M.jpg",
+      "image": "../../images_to_convert/AC0554_1_M.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "anonymous_panel_02",
+      "source": "AC0554_1_S.jpg",
+      "image": "../../images_to_convert/AC0554_1_S.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "anonymous_panel_03",
+      "source": "AC0554_2_L.jpg",
+      "image": "../../images_to_convert/AC0554_2_L.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "anonymous_panel_04",
+      "source": "AC0554_2_M.jpg",
+      "image": "../../images_to_convert/AC0554_2_M.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "anonymous_panel_05",
+      "source": "AC0554_2_S.jpg",
+      "image": "../../images_to_convert/AC0554_2_S.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "anonymous_panel_06",
+      "source": "AC0554_L.jpg",
+      "image": "../../images_to_convert/AC0554_L.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "anonymous_panel_07",
+      "source": "AC0554_M.jpg",
+      "image": "../../images_to_convert/AC0554_M.jpg",
+      "role": "holdout"
+    },
+    {
+      "case_id": "anonymous_panel_08",
+      "source": "AC0554_S.jpg",
+      "image": "../../images_to_convert/AC0554_S.jpg",
+      "role": "holdout"
+    }
+  ]
+}
