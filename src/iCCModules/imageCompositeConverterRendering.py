@@ -156,6 +156,162 @@ def _expand_axis_aligned_linear_gradients_for_fitz(svg_string: str) -> str:
     return ET.tostring(root, encoding="unicode") if changed else svg_string
 
 
+def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=None, size_w=None, size_h=None) -> str:
+    """Paint a closed Bezier fill through its exact native antialiasing mask.
+
+    Only the private render document gets a temporary image paint layer. Saved
+    SVGs retain curves and gradients. The mask is rendered from the native path
+    at the requested output resolution, avoiding repeated edge compositing by
+    overlapping gradient bands. Flattening is used only for paint bounds.
+    Unsupported commands, compound paths, transforms and alpha are untouched.
+    """
+    if 'linearGradient' not in svg_string or '<path' not in svg_string:
+        return svg_string
+    try:
+        root = ET.fromstring(svg_string)
+    except ET.ParseError:
+        return svg_string
+    if any(e.get('transform') for e in root.iter()):
+        return svg_string
+    if root.get('preserveAspectRatio', 'xMidYMid meet') not in {'xMidYMid', 'xMidYMid meet'}:
+        return svg_string
+    namespace = '{http://www.w3.org/2000/svg}'
+    gradients = {e.get('id'):e for e in root.iter() if e.tag.rsplit('}', 1)[-1] == 'linearGradient'}
+    changed = False
+
+    def flatten(control, output, depth=0):
+        a, b = control[0], control[-1]
+        dx, dy = b[0]-a[0], b[1]-a[1]
+        length = math.hypot(dx, dy)
+        error = max((abs(dx*(v[1]-a[1])-dy*(v[0]-a[0]))/length if length else math.dist(a,v))
+                    for v in control[1:-1])
+        if error <= .02 or depth >= 12:
+            output.append(b)
+            return
+        levels = [control]
+        while len(levels[-1])>1:
+            levels.append([((a[0]+b[0])/2, (a[1]+b[1])/2) for a,b in zip(levels[-1],levels[-1][1:])])
+        flatten([v[0] for v in levels],output,depth+1)
+        flatten([v[-1] for v in levels[::-1]],output,depth+1)
+
+    for parent in list(root.iter()):
+        for index, path in reversed(list(enumerate(list(parent)))):
+            if path.tag.rsplit('}',1)[-1] != 'path':
+                continue
+            match = re.fullmatch(r'url\(#([^)]+)\)',path.get('fill',''))
+            if not match or match.group(1) not in gradients:
+                continue
+            if set(path.attrib)-{'id','d','fill','stroke','stroke-width','stroke-linejoin','data-role'}:
+                continue
+            data = path.get('d','')
+            tokens = re.findall(r'[A-Za-z]|[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:[eE][-+]?\d+)?',data)
+            if re.sub(r'[\s,]+','',data) != ''.join(tokens):
+                continue
+            points, cursor, command = [], 0, None
+            try:
+                while cursor<len(tokens):
+                    command = tokens[cursor]
+                    cursor += 1
+                    if command == 'Z':
+                        if cursor != len(tokens) or len(points)<3:
+                            raise ValueError('not one closed contour')
+                        break
+                    count = {'M':2,'L':2,'Q':4,'C':6}.get(command)
+                    if count is None or (command=='M' and points) or (command!='M' and not points):
+                        raise ValueError('unsupported path')
+                    values = [float(v) for v in tokens[cursor:cursor+count]]
+                    cursor += count
+                    if len(values)!=count or not all(math.isfinite(v) for v in values):
+                        raise ValueError('invalid coordinates')
+                    controls = list(zip(values[::2],values[1::2]))
+                    if command in {'M','L'}:
+                        points.extend(controls)
+                    else:
+                        flatten([points[-1],*controls],points)
+                    if len(points)>512:
+                        raise ValueError('too many subdivisions')
+                if command != 'Z':
+                    continue
+            except (ValueError,IndexError):
+                continue
+            gradient = gradients[match.group(1)]
+            if set(gradient.attrib)-{'id','x1','y1','x2','y2','gradientUnits'}:
+                continue
+            if any(e.get('opacity') or e.get('style') or e.get('clip-path') or e.get('mask') for e in root.iter()):
+                continue
+            try:
+                import numpy as np
+                if fitz_module is None:
+                    from src.iCCModules.imageCompositeConverterDependencies import import_with_vendored_fallback
+                    fitz_module = import_with_vendored_fallback('fitz')
+                xs,ys = zip(*points)
+                bx,by,bw,bh = min(xs),min(ys),max(xs)-min(xs),max(ys)-min(ys)
+                if min(bw,bh)<=0:
+                    continue
+                viewport = [float(v) for v in root.get('viewBox','').replace(',',' ').split()]
+                if not viewport:
+                    viewport = [0.,0.,float(root.get('width','0').removesuffix('px')),float(root.get('height','0').removesuffix('px'))]
+                if len(viewport)!=4 or min(viewport[2:])<=0 or not all(math.isfinite(v) for v in viewport):
+                    continue
+                user = gradient.get('gradientUnits')=='userSpaceOnUse'
+                def coordinate(value,axis):
+                    origin,extent = (bx,bw) if axis==0 else (by,bh)
+                    if user:
+                        return float(value[:-1])*viewport[axis+2]/100 if value.endswith('%') else float(value)
+                    return origin+extent*(float(value[:-1])/100 if value.endswith('%') else float(value))
+                x1,x2 = coordinate(gradient.get('x1','0%'),0),coordinate(gradient.get('x2','100%'),0)
+                y1,y2 = coordinate(gradient.get('y1','0%'),1),coordinate(gradient.get('y2','0%'),1)
+                if x1!=x2 and y1!=y2 or x1==x2 and y1==y2:
+                    continue
+                stops = []
+                for stop in gradient:
+                    if set(stop.attrib)-{'offset','stop-color'} or stop.tag.rsplit('}',1)[-1]!='stop':
+                        raise ValueError('unsupported stop')
+                    offset = stop.get('offset','0')
+                    fraction = float(offset[:-1])/100 if offset.endswith('%') else float(offset)
+                    color = stop.get('stop-color','')
+                    if not re.fullmatch(r'#[0-9a-fA-F]{6}',color):
+                        raise ValueError('unsupported color')
+                    stops.append((fraction,[int(color[i:i+2],16) for i in (1,3,5)]))
+                stops.sort(key=lambda v:v[0])
+                if len(stops)<2 or not all(math.isfinite(v[0]) for v in stops):
+                    continue
+                mask_root = ET.Element(namespace+'svg',root.attrib)
+                ET.SubElement(mask_root,namespace+'path',d=data,fill='#ffffff',stroke='none')
+                with fitz_module.open(stream=ET.tostring(mask_root),filetype='svg') as doc:
+                    page = doc[0]
+                    w,h = int(size_w or math.ceil(page.rect.width)),int(size_h or math.ceil(page.rect.height))
+                    if not 0<w<=2048 or not 0<h<=2048:
+                        continue
+                    pix = page.get_pixmap(matrix=fitz_module.Matrix(w/page.rect.width,h/page.rect.height),alpha=True)
+                alpha = np.frombuffer(pix.samples,dtype=np.uint8).reshape(pix.height,pix.width,4)[:,:,3]
+                # Preserve the root's default centered aspect-ratio mapping.
+                zoom = min(w/viewport[2],h/viewport[3])
+                padding = [(w-viewport[2]*zoom)/2,(h-viewport[3]*zoom)/2]
+                axis,low,high = (1,y1,y2) if x1==x2 else (0,x1,x2)
+                coordinates = viewport[axis]+(np.arange((h,w)[1-axis])+.5-padding[axis])/zoom
+                position = (coordinates-low)/(high-low)
+                colors = np.stack([np.interp(position,[v[0] for v in stops],[v[1][c] for v in stops]) for c in range(3)],axis=-1)
+                colors = np.broadcast_to(colors[:,None,:] if axis==1 else colors[None,:,:],(h,w,3))
+                rgba = np.concatenate((np.rint(colors*alpha[:,:,None]/255).astype(np.uint8),alpha[:,:,None]),axis=2)
+                paint = fitz_module.Pixmap(fitz_module.csRGB,w,h,rgba.tobytes(),True)
+                encoded = base64.b64encode(paint.tobytes('png')).decode('ascii')
+            except (ValueError,TypeError,IndexError,RuntimeError):
+                continue
+            group = ET.Element(namespace+'g')
+            # Full-canvas pixel alignment also preserves antialiasing at curves.
+            image = ET.SubElement(group,namespace+'image',x=str(viewport[0]-padding[0]/zoom),
+                                  y=str(viewport[1]-padding[1]/zoom),width=str(w/zoom),height=str(h/zoom))
+            image.set('href','data:image/png;base64,'+encoded)
+            outline = copy.deepcopy(path)
+            outline.set('fill','none')
+            group.append(outline)
+            parent.remove(path)
+            parent.insert(index,group)
+            changed = True
+    return ET.tostring(root,encoding='unicode') if changed else svg_string
+
+
 def _expand_polygon_linear_gradients_for_fitz(svg_string: str) -> str:
     """Render simple native polygon gradients through privately clipped bands.
 
@@ -351,6 +507,7 @@ def render_svg_to_numpy_inprocess(
         return None
 
     renderer_svg = _expand_axis_aligned_linear_gradients_for_fitz(svg_string)
+    renderer_svg = _expand_bezier_linear_gradients_for_fitz(renderer_svg,fitz_module=fitz_module,size_w=size_w,size_h=size_h)
     renderer_svg = _expand_polygon_linear_gradients_for_fitz(renderer_svg)
     renderer_svg = _expand_centered_radial_gradients_for_fitz(renderer_svg)
     attempts = [renderer_svg]

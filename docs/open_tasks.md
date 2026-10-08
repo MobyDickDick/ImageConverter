@@ -14,7 +14,24 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-08)
 
-**Aktueller Abschluss 2026-10-08: `AC0130_S` (Luftbefeuchter).** Das Paket auf
+**Aktueller Abschluss 2026-10-08: `GE1420_S` (Alarmglocke).** Das Paket auf
+`codex/ge1420-quality-2026-10-08` besteht mit M-/L-Holdouts und neutraler
+Konturvariante beide unveränderten regulären Qualitätsgates ohne
+Pflichtmetrikregression. Der frische Ziel-CLI-Vorlauf sinkt von
+`mean_delta2=10032.782227` auf `559.539978`. Eigenständige XML-Beschreibungen
+korrigieren die Anzahl der Schallbögen und trennen die ungefüllte Variante.
+Die katalogfreie Registrierung bestimmt Körper, unteren Rand, Klöppel und
+vier Bögen aus dem Raster; gespeicherte SVGs enthalten native Kurven und Verlauf.
+Der private Bézier-Verlaufsadapter erhält die native Antialiasingmaske.
+Zwei unabhängige CLI-Läufe reproduzieren alle acht SVGs und Gateentscheidungen;
+die ursprünglichen Baseline-SVGs bleiben bytegleich. Die neutrale Variante
+verfehlt weiterhin die separate, strengere Plan-B-Vordergrund-IoU-Grenze;
+die drei farbigen Größen bestehen sie. `PB-POOL-2026-10-07` bleibt offen.
+Der Review über 956 Einträge führt die reguläre Rotation mit `AC0704_1_L`
+fort, gefolgt von `AC0402_1_S`, `AC0403_1_L`, `GE0032` und `AC0413_1_M`.
+Details und Testabschluss: `docs/next_arbeitspaket_2026-10-08_ge1420_s.md`.
+
+**Vorheriger Abschluss 2026-10-08: `AC0130_S` (Luftbefeuchter).** Das Paket auf
 `codex/ac0130-quality-2026-10-08` besteht mit M-/L-Holdouts beide unveränderten
 Qualitätsgates ohne Pflichtmetrikregression. Der frische Ziel-CLI-Vorlauf sinkt
 von `mean_delta2=15686.570312` auf `325.073761`. Eigenständige XML-Beschreibungen
