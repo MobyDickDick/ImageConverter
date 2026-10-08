@@ -1,0 +1,149 @@
+{
+  "schema_version": "pump_recheck_manifest_v1",
+  "direction": "rechts",
+  "description": "Pumpensymbol: Ein gefüllter Kreis mit Randkontur enthält ein kontrastierendes gefülltes Dreieck, dessen Spitze nach rechts zeigt. Weißer Hintergrund. Lage, Größe, Konturbreite und Farben ergeben sich aus dem Rasterbild.",
+  "baseline_description": "Wie AC0211: Kopressor grau nach oben. Geometrische Variante: identisch zur Referenz.",
+  "provenance": {
+    "commit": "fee9f9d4d656f075925146456f13acae652f1ab4",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "Original description versus independent corrected description; unchanged circle/triangle fitter and renderer",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_pump_00",
+      "source": "AC0402_1_S.jpg",
+      "role": "target",
+      "image": "../../images_to_convert/AC0402_1_S.jpg",
+      "source_sha256": "c2f88bef161718cc59ee954de2b9217333d43a793318e3acb183ebaff3e4177e"
+    },
+    {
+      "case_id": "anonymous_pump_03",
+      "source": "AC0402_1L_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_1L_sia.jpg",
+      "source_sha256": "bb5418c4da5741f75b7ab2290e22d7c653ff04118a7e0953e306473d01066d17"
+    },
+    {
+      "case_id": "anonymous_pump_04",
+      "source": "AC0402_1M_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_1M_sia.jpg",
+      "source_sha256": "96473290094a023dc6cbe0a5db1e020373880e1734ecbc300ae0d4e569c15b6b"
+    },
+    {
+      "case_id": "anonymous_pump_05",
+      "source": "AC0402_1S_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_1S_sia.jpg",
+      "source_sha256": "330022b3a2b7b29add2305e2184d7db53fed4acf93eb5be9b69360808a15bd52"
+    },
+    {
+      "case_id": "anonymous_pump_06",
+      "source": "AC0402_1_L.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_1_L.jpg",
+      "source_sha256": "84118c6b658e59c838f89dd91fe536b42c23155ecdcb383e6424870cc24302d3"
+    },
+    {
+      "case_id": "anonymous_pump_07",
+      "source": "AC0402_1_M.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_1_M.jpg",
+      "source_sha256": "c74858ae1a4647f398fb171872d7131e659b42dc6b8e0f5d3f0ff82aa69c85cb"
+    },
+    {
+      "case_id": "anonymous_pump_09",
+      "source": "AC0402_2L_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_2L_sia.jpg",
+      "source_sha256": "7484e08fd8ce4d242bef4b963e0e9fb58f2608903152a939523f94f1217a1718"
+    },
+    {
+      "case_id": "anonymous_pump_10",
+      "source": "AC0402_2M_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_2M_sia.jpg",
+      "source_sha256": "d8e511da2a9da7f2332848d890d128a923117a3e5e24f8952696bc411b984f64"
+    },
+    {
+      "case_id": "anonymous_pump_11",
+      "source": "AC0402_2S_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_2S_sia.jpg",
+      "source_sha256": "86cfb9bd1421605d7f3f6e4fba99ffe7dc03ac4276ff6deb8d8cba97128f9c9d"
+    },
+    {
+      "case_id": "anonymous_pump_12",
+      "source": "AC0402_2_L.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_2_L.jpg",
+      "source_sha256": "86928cb819926c20c529cb838d966822bf2a500fd96a0e7f8e3b4d8ae52e15dd"
+    },
+    {
+      "case_id": "anonymous_pump_13",
+      "source": "AC0402_2_M.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_2_M.jpg",
+      "source_sha256": "18b9ed37ddeed3589c1a3b08f0c924f9c6f6f8f6d664bff8f1a9b50e72c649bd"
+    },
+    {
+      "case_id": "anonymous_pump_14",
+      "source": "AC0402_2_S.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/nonconvertable/AC0402_2_S.jpg",
+      "source_sha256": "f4571aebfec9bca6254fb6dbe867b896b423fbf567dac2fc3a15f6b770d5cb9b"
+    },
+    {
+      "case_id": "anonymous_pump_15",
+      "source": "AC0402_L.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_L.jpg",
+      "source_sha256": "63865f013d84eaf9dec1bc177c383062dc4c857fe990392b656494f2a2361f96"
+    },
+    {
+      "case_id": "anonymous_pump_16",
+      "source": "AC0402_L_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_L_sia.jpg",
+      "source_sha256": "af3200c3b3d90a6b7f8a49ca692314c3514c2e2e76915d103c1035b7a2a3d5ce"
+    },
+    {
+      "case_id": "anonymous_pump_17",
+      "source": "AC0402_M.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_M.jpg",
+      "source_sha256": "4dd2843555bfc89a3c889b573b4456e79952af756373449e14d7de3d3ee7f423"
+    },
+    {
+      "case_id": "anonymous_pump_18",
+      "source": "AC0402_M_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_M_sia.jpg",
+      "source_sha256": "53adedd686f6eef1b973171ed36c3effd2421adb85508421bcdb8fec7b31f180"
+    },
+    {
+      "case_id": "anonymous_pump_19",
+      "source": "AC0402_S.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_S.jpg",
+      "source_sha256": "4b8bce7c5edda4d66341b60175f8b57df6ab5d8e05ff55c00bb18cf361082486"
+    },
+    {
+      "case_id": "anonymous_pump_20",
+      "source": "AC0402_S_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0402_S_sia.jpg",
+      "source_sha256": "4ed23b333bc61d0885a7e93543fafb857fb2603f171c0c29c6c56a4c01e98ad8"
+    }
+  ],
+  "excluded_topologies": {
+    "images": [
+      "AC0402.jpg",
+      "AC0402_1.jpg",
+      "AC0402_2.jpg"
+    ],
+    "reason": "Outlined inscribed triangle with uniform interior, independently described; not a contrasting filled triangle"
+  }
+}

@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-08, nach Quadrat-/Griff-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-08, nach Rechts-Dreieck-Abnahme)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -100,18 +100,27 @@ und hellgrauen Größenvarianten beide regulären Gates und die strengeren
 Plan-B-Pixelgrenzen. Zwei CLI-Läufe reproduzieren alle zwölf SVGs und
 Gateentscheidungen. Details: `docs/next_arbeitspaket_2026-10-08_ac0704_1_l.md`.
 
-1. `AC0402_1_S` – `mean_delta2=14033.000000`, `normalized_mse=0.071936`.
-2. `AC0403_1_L` – `mean_delta2=13989.019531`, `normalized_mse=0.071711`.
-3. `GE0032` – `mean_delta2=13826.389648`, `normalized_mse=0.070877`.
-4. `AC0413_1_M` – `mean_delta2=13465.694336`, `normalized_mse=0.069028`.
-5. `AC0713_1_L` – `mean_delta2=13458.083984`, `normalized_mse=0.068989`.
+`AC0402_1_S` besteht mit allen 18 gefüllten Farb-/Größen-/SIA-Varianten beide
+regulären Gates ohne Pflichtmetrikregression. Die frische Ziel-CLI-Baseline
+sinkt von `14019.147461` auf `262.637512`; eine eigenständige XML aktiviert die
+vorhandene Kreis-/Dreieckregistrierung ohne Runtime-Algorithmusänderung.
+Die SVG-Vorlage besteht mit zwei Seeds jeweils 16/16 strengere Plan-B-Gates.
+Fünf JPG-Varianten verfehlen die separate strengere IoU-Grenze; drei ungefüllte
+Konturdreieck-Raster sind separat beschrieben und nicht Teil dieser Abnahme.
+Details: `docs/next_arbeitspaket_2026-10-08_ac0402_1_s.md`.
 
-Die nächste reguläre Rotation beginnt mit `AC0402_1_S`; vor Änderungen ist eine
+1. `AC0403_1_L` – `mean_delta2=13989.019531`, `normalized_mse=0.071711`.
+2. `GE0032` – `mean_delta2=13826.389648`, `normalized_mse=0.070877`.
+3. `AC0413_1_M` – `mean_delta2=13465.694336`, `normalized_mse=0.069028`.
+4. `AC0713_1_L` – `mean_delta2=13458.083984`, `normalized_mse=0.068989`.
+5. `AC0721_1_S` – `mean_delta2=13368.759766`, `normalized_mse=0.068531`.
+
+Die nächste reguläre Rotation beginnt mit `AC0403_1_L`; vor Änderungen ist eine
 frische CLI-Baseline erforderlich. Der Review über 956 Einträge (950 renderbare
 Paare) und sein exakter Aufruf stehen im kompakten Nachweis
-`artifacts/evaluation/right_stem_square_recheck_v1/summary_2026-10-08.json`.
+`artifacts/evaluation/right_pump_recheck_v1/summary_2026-10-08.json`.
 Alle 48 gespeicherten Erfolgsvarianten bleiben unter der Reviewgrenze.
-Vollständige Tabellen liegen lokal unter `.tmp/ac0704/review/`.
+Vollständige Tabellen liegen lokal unter `.tmp/ac0402/review/`.
 
 Die gekoppelte randomisierte Plan-B-Auswahl `AC0538_1L_sia` mit Seed
 `3948009396310964094` besteht nach eigenständiger Beschreibung und katalogfreier
@@ -146,7 +155,15 @@ das CLI meldet dafür weiterhin konzentrierten Restfehler. Details stehen in
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
-Aktueller Recheck: Die unbeschriftete Quadrat-/Griff-Topologie ist für die
+Aktueller Recheck: Die vorhandene Kreis-/Dreieckregistrierung ist für 18
+gefüllte Rechts-Dreieck-Raster `generalisiert`. Eine eigenständige Beschreibung
+aktiviert den bestehenden Algorithmus; es gibt keine neue Runtime-Regel.
+Alle 18 bestehen die regulären Gates, die SVG-Vorlage mit zwei Seeds jeweils
+16/16 strengere Plan-B-Gates. Die fünf strengeren JPG-IoU-Folgen und drei
+Konturdreieck-Raster bleiben außerhalb dieses engeren Nachweises.
+Details: `docs/next_arbeitspaket_2026-10-08_ac0402_1_s.md`.
+
+Vorheriger Recheck: Die unbeschriftete Quadrat-/Griff-Topologie ist für die
 geprüften Raster `generalisiert`. Lage, Größe, Rand-/Griffbreite und Farben
 stammen aus den Pixeln; alle sechs echten Fälle bestehen beide regulären und
 die strengeren Plan-B-Gates. Unabhängige Farb-/Lage-/Auflösungstests und

@@ -14,7 +14,25 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-08)
 
-**Aktueller Abschluss 2026-10-08: `AC0704_1_L` (Quadrat mit rechtem Griff).**
+**Aktueller Abschluss 2026-10-08: `AC0402_1_S` (gefülltes Rechts-Dreieck im Kreis).**
+Das Paket auf `codex/ac0402-quality-2026-10-08` besteht mit allen 18 gefüllten
+Farb-/Größen-/SIA-Varianten beide unveränderten regulären Qualitätsgates ohne
+Pflichtmetrikregression. Die frische Ziel-CLI-Baseline sinkt von
+`mean_delta2=14019.147461` auf `262.637512`. Die eigenständige XML aktiviert
+die vorhandene katalogfreie Kreis-/Dreieckregistrierung; der Runtime-Algorithmus
+bleibt unverändert. Drei Konturdreieck-Raster haben eine separate Beschreibung
+und gehören nicht zur gefüllten Abnahme. Zwei CLI-Läufe reproduzieren alle 36
+SVGs und Gateentscheidungen. Die SVG-Vorlage besteht mit zwei Seeds jeweils
+16/16 strengere Plan-B-Gates; der erste Seed reproduziert alle 16 SVGs und
+Metriken. Fünf JPG-Varianten verfehlen weiterhin die separate strengere
+Vordergrund-IoU-Grenze. `PB-POOL-2026-10-07` bleibt offen. Der Review über
+956 Einträge setzt die Rotation mit `AC0403_1_L` fort, gefolgt von `GE0032`,
+`AC0413_1_M`, `AC0713_1_L` und `AC0721_1_S`.
+Die vollständige Suite einschließlich Heavy-Modulen und Bestandsschutz
+besteht mit 2.285 Tests und 29 bestehenden Windows-Skips; 92 fokussierte
+Tests bestehen ebenfalls. Details: `docs/next_arbeitspaket_2026-10-08_ac0402_1_s.md`.
+
+**Vorheriger Abschluss 2026-10-08: `AC0704_1_L` (Quadrat mit rechtem Griff).**
 Das Paket auf `codex/ac0704-quality-2026-10-08` besteht mit allen sechs roten
 und hellgrauen Größenvarianten beide unveränderten regulären Qualitätsgates
 ohne Pflichtmetrikregression. Der frische Ziel-CLI-Vorlauf sinkt von

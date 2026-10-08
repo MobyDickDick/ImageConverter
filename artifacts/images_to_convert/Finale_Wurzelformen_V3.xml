@@ -2978,17 +2978,14 @@
     <entry kind="wurzelform" key="AC0402">
       <source_rows>274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294</source_rows>
       <wurzelform>AC0402</wurzelform>
-      <beschreibung>Wie AC0211: Kopressor grau nach oben. Geometrische Variante: identisch zur Referenz.</beschreibung>
+      <beschreibung>Pumpensymbol: Ein gefüllter Kreis mit Randkontur enthält ein kontrastierendes gefülltes Dreieck, dessen Spitze nach rechts zeigt. Weißer Hintergrund. Lage, Größe, Konturbreite und Farben ergeben sich aus dem Rasterbild.</beschreibung>
       <bilder>
-        <bild>AC0402.jpg</bild>
-        <bild>AC0402_1.jpg</bild>
         <bild>AC0402_1L_sia.jpg</bild>
         <bild>AC0402_1M_sia.jpg</bild>
         <bild>AC0402_1S_sia.jpg</bild>
         <bild>AC0402_1_L.jpg</bild>
         <bild>AC0402_1_M.jpg</bild>
         <bild>AC0402_1_S.jpg</bild>
-        <bild>AC0402_2.jpg</bild>
         <bild>AC0402_2L_sia.jpg</bild>
         <bild>AC0402_2M_sia.jpg</bild>
         <bild>AC0402_2S_sia.jpg</bild>
@@ -3001,6 +2998,15 @@
         <bild>AC0402_M_sia.jpg</bild>
         <bild>AC0402_S.jpg</bild>
         <bild>AC0402_S_sia.jpg</bild>
+      </bilder>
+    </entry>
+    <entry kind="wurzelform" key="AC0402_contour">
+      <wurzelform>AC0402</wurzelform>
+      <beschreibung>Ein Kreis mit Randkontur enthält die Kontur eines nach rechts gerichteten einbeschriebenen Dreiecks. Die Dreiecksspitze rechts und die beiden Eckpunkte links liegen am Kreisrand. Kreis und Dreiecksinneres haben dieselbe gleichmäßige Füllfarbe; das Dreieck besitzt keine kontrastierende Füllfläche. Weißer Hintergrund. Geometrie und Farben ergeben sich aus dem Rasterbild.</beschreibung>
+      <bilder>
+        <bild>AC0402.jpg</bild>
+        <bild>AC0402_1.jpg</bild>
+        <bild>AC0402_2.jpg</bild>
       </bilder>
     </entry>
     <entry kind="wurzelform" key="AC0403">

@@ -1,0 +1,3532 @@
+{
+  "baseline": {
+    "baseline_sha256": "fea71bfd7fc65733e0d1809bc0cff6ef229e2440e3192dd6e2ada31b4f6fe5aa",
+    "cases": {
+      "anonymous_pump_00": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6193424463272095,
+          "error_per_pixel": 0.07186542335479944,
+          "object_mask_iou": 0.6864406779661016,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_03": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4849877953529358,
+          "error_per_pixel": 0.10417979262783544,
+          "object_mask_iou": 0.5912621359223301,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_04": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5241733193397522,
+          "error_per_pixel": 0.09911329176278355,
+          "object_mask_iou": 0.6013400335008375,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_05": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6115926504135132,
+          "error_per_pixel": 0.09348054233948482,
+          "object_mask_iou": 0.631578947368421,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_06": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4788089990615845,
+          "error_per_pixel": 0.08464646009547609,
+          "object_mask_iou": 0.6784188034188035,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_07": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5271390676498413,
+          "error_per_pixel": 0.0792406966871716,
+          "object_mask_iou": 0.6834264432029795,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_09": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.632057249546051,
+          "error_per_pixel": 0.051210356793861336,
+          "object_mask_iou": 0.7027250206440958,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_10": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6265753507614136,
+          "error_per_pixel": 0.048864959791105986,
+          "object_mask_iou": 0.7460087082728593,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_11": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6756243705749512,
+          "error_per_pixel": 0.04582125865051903,
+          "object_mask_iou": 0.7581699346405228,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_12": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5361595153808594,
+          "error_per_pixel": 0.040195845648308345,
+          "object_mask_iou": 0.6765913757700205,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_13": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5854277014732361,
+          "error_per_pixel": 0.03701400903498654,
+          "object_mask_iou": 0.7168458781362007,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_14": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.706824004650116,
+          "error_per_pixel": 0.03390590708301294,
+          "object_mask_iou": 0.7338709677419355,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_15": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.29500871896743774,
+          "error_per_pixel": 0.03420117362713059,
+          "object_mask_iou": 0.42821985233798193,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_16": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.28427258133888245,
+          "error_per_pixel": 0.04587666101980008,
+          "object_mask_iou": 0.032915360501567396,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_17": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.3323318362236023,
+          "error_per_pixel": 0.0324032298274702,
+          "object_mask_iou": 0.5013477088948787,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_18": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.3274702727794647,
+          "error_per_pixel": 0.03155963902104959,
+          "object_mask_iou": 0.4112676056338028,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_19": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4898768663406372,
+          "error_per_pixel": 0.031198192001473793,
+          "object_mask_iou": 0.4881656804733728,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_pump_20": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.44820481538772583,
+          "error_per_pixel": 0.028849288234493144,
+          "object_mask_iou": 0.4268292682926829,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "Original description versus independent corrected description; unchanged circle/triangle fitter and renderer",
+      "commit": "fee9f9d4d656f075925146456f13acae652f1ab4",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_pump_00": "c2f88bef161718cc59ee954de2b9217333d43a793318e3acb183ebaff3e4177e",
+        "anonymous_pump_03": "bb5418c4da5741f75b7ab2290e22d7c653ff04118a7e0953e306473d01066d17",
+        "anonymous_pump_04": "96473290094a023dc6cbe0a5db1e020373880e1734ecbc300ae0d4e569c15b6b",
+        "anonymous_pump_05": "330022b3a2b7b29add2305e2184d7db53fed4acf93eb5be9b69360808a15bd52",
+        "anonymous_pump_06": "84118c6b658e59c838f89dd91fe536b42c23155ecdcb383e6424870cc24302d3",
+        "anonymous_pump_07": "c74858ae1a4647f398fb171872d7131e659b42dc6b8e0f5d3f0ff82aa69c85cb",
+        "anonymous_pump_09": "7484e08fd8ce4d242bef4b963e0e9fb58f2608903152a939523f94f1217a1718",
+        "anonymous_pump_10": "d8e511da2a9da7f2332848d890d128a923117a3e5e24f8952696bc411b984f64",
+        "anonymous_pump_11": "86cfb9bd1421605d7f3f6e4fba99ffe7dc03ac4276ff6deb8d8cba97128f9c9d",
+        "anonymous_pump_12": "86928cb819926c20c529cb838d966822bf2a500fd96a0e7f8e3b4d8ae52e15dd",
+        "anonymous_pump_13": "18b9ed37ddeed3589c1a3b08f0c924f9c6f6f8f6d664bff8f1a9b50e72c649bd",
+        "anonymous_pump_14": "f4571aebfec9bca6254fb6dbe867b896b423fbf567dac2fc3a15f6b770d5cb9b",
+        "anonymous_pump_15": "63865f013d84eaf9dec1bc177c383062dc4c857fe990392b656494f2a2361f96",
+        "anonymous_pump_16": "af3200c3b3d90a6b7f8a49ca692314c3514c2e2e76915d103c1035b7a2a3d5ce",
+        "anonymous_pump_17": "4dd2843555bfc89a3c889b573b4456e79952af756373449e14d7de3d3ee7f423",
+        "anonymous_pump_18": "53adedd686f6eef1b973171ed36c3effd2421adb85508421bcdb8fec7b31f180",
+        "anonymous_pump_19": "4b8bce7c5edda4d66341b60175f8b57df6ab5d8e05ff55c00bb18cf361082486",
+        "anonymous_pump_20": "4ed23b333bc61d0885a7e93543fafb857fb2603f171c0c29c6c56a4c01e98ad8"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "completion": {
+    "command": ".venv/Scripts/python.exe -m pytest -q -ra --basetemp=.tmp/ac0402/full-pytest --junitxml=.tmp/ac0402/completion.xml",
+    "errors": 0,
+    "exit_code": 0,
+    "failures": 0,
+    "heavy_modules_enabled": true,
+    "junit_sha256": "5f969a55db1b940b8d5d0911de681f6d4d2ed758ebe6cfb042b6f4d08ed9fd5d",
+    "log_sha256": "296285dbe259ce74d1a17f64d03e6ba5c4984835df78ca14135b6aaecf70f5c7",
+    "passed": 2285,
+    "pytest_reported_seconds": 851.8,
+    "renderer": "direct; IMAGE_CONVERTER_ISOLATE_SVG_RENDER=0",
+    "seconds": 851.666,
+    "skipped": 29,
+    "temp_location": "workspace .tmp/ac0402",
+    "tests": 2314
+  },
+  "determinism": {
+    "all_gates_identical": true,
+    "all_svg_bytes_identical": true,
+    "frozen_baseline_reproduced": true,
+    "repeated_svg_count": 36,
+    "runs": [
+      ".tmp/ac0402/acceptance01",
+      ".tmp/ac0402/acceptance02"
+    ]
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 262.63751220703125,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_00.svg",
+      "after_svg_sha256": "9ef31a02427df471c1154f1121d9073ff45968a070f3223a8559cd809186e84b",
+      "before_mean_delta2": 14019.1474609375,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_00.svg",
+      "before_svg_sha256": "1e59dae2bf2e37b8e2e697e0ed40a15be68fd0b4c4a368c3548202848eb8f303",
+      "case_id": "anonymous_pump_00",
+      "image": "inputs\\anonymous_pump_00.jpg",
+      "input_sha256": "c2f88bef161718cc59ee954de2b9217333d43a793318e3acb183ebaff3e4177e",
+      "role": "target",
+      "source": "AC0402_1_S.jpg",
+      "source_sha256": "c2f88bef161718cc59ee954de2b9217333d43a793318e3acb183ebaff3e4177e"
+    },
+    {
+      "after_mean_delta2": 104.10562133789062,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_03.svg",
+      "after_svg_sha256": "0d39af1651b5cc16ed174bf704d0551b87f0e1c52071c47e80d0d33bbd1c1324",
+      "before_mean_delta2": 20322.873046875,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_03.svg",
+      "before_svg_sha256": "c9970048568e7bf6adc3ada162431d11a2b3b2faf2aa35b266884a7d7baf7bad",
+      "case_id": "anonymous_pump_03",
+      "image": "inputs\\anonymous_pump_03.jpg",
+      "input_sha256": "bb5418c4da5741f75b7ab2290e22d7c653ff04118a7e0953e306473d01066d17",
+      "role": "holdout",
+      "source": "AC0402_1L_sia.jpg",
+      "source_sha256": "bb5418c4da5741f75b7ab2290e22d7c653ff04118a7e0953e306473d01066d17"
+    },
+    {
+      "after_mean_delta2": 107.06444549560547,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_04.svg",
+      "after_svg_sha256": "05786810f5cfa0031cdd4e3a828363b3da5574c492ea43dd20288c093b0f1df5",
+      "before_mean_delta2": 19334.525390625,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_04.svg",
+      "before_svg_sha256": "e7857f8ad24932a51f847362b983f5e184dedf76e796ab912dc5ba4362291a1d",
+      "case_id": "anonymous_pump_04",
+      "image": "inputs\\anonymous_pump_04.jpg",
+      "input_sha256": "96473290094a023dc6cbe0a5db1e020373880e1734ecbc300ae0d4e569c15b6b",
+      "role": "holdout",
+      "source": "AC0402_1M_sia.jpg",
+      "source_sha256": "96473290094a023dc6cbe0a5db1e020373880e1734ecbc300ae0d4e569c15b6b"
+    },
+    {
+      "after_mean_delta2": 297.5224914550781,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_05.svg",
+      "after_svg_sha256": "429d62ffca5f32c5048fe7a3fdb613cc7e6b4379b74fdd4f151f82dc19dc8f69",
+      "before_mean_delta2": 18235.716796875,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_05.svg",
+      "before_svg_sha256": "3e3ba15639333c52520b2552a07c3814003d99e2b867d44ba38dc12c237bd0f3",
+      "case_id": "anonymous_pump_05",
+      "image": "inputs\\anonymous_pump_05.jpg",
+      "input_sha256": "330022b3a2b7b29add2305e2184d7db53fed4acf93eb5be9b69360808a15bd52",
+      "role": "holdout",
+      "source": "AC0402_1S_sia.jpg",
+      "source_sha256": "330022b3a2b7b29add2305e2184d7db53fed4acf93eb5be9b69360808a15bd52"
+    },
+    {
+      "after_mean_delta2": 120.33499908447266,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_06.svg",
+      "after_svg_sha256": "08bc4ff55f042750d1d31615c09190302bef0d6884d08dd7ccf1f6f6758e22f4",
+      "before_mean_delta2": 16512.408203125,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_06.svg",
+      "before_svg_sha256": "e0b6a6fa2f46048d8b3b3f46bd9a4288263ed02535c32f14346f844dcfe814b7",
+      "case_id": "anonymous_pump_06",
+      "image": "inputs\\anonymous_pump_06.jpg",
+      "input_sha256": "84118c6b658e59c838f89dd91fe536b42c23155ecdcb383e6424870cc24302d3",
+      "role": "holdout",
+      "source": "AC0402_1_L.jpg",
+      "source_sha256": "84118c6b658e59c838f89dd91fe536b42c23155ecdcb383e6424870cc24302d3"
+    },
+    {
+      "after_mean_delta2": 154.27000427246094,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_07.svg",
+      "after_svg_sha256": "4838ceca63bde514deba10eadd92b1aedf41317020374cad4a06718b7df7edb7",
+      "before_mean_delta2": 15457.87890625,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_07.svg",
+      "before_svg_sha256": "e7857f8ad24932a51f847362b983f5e184dedf76e796ab912dc5ba4362291a1d",
+      "case_id": "anonymous_pump_07",
+      "image": "inputs\\anonymous_pump_07.jpg",
+      "input_sha256": "c74858ae1a4647f398fb171872d7131e659b42dc6b8e0f5d3f0ff82aa69c85cb",
+      "role": "holdout",
+      "source": "AC0402_1_M.jpg",
+      "source_sha256": "c74858ae1a4647f398fb171872d7131e659b42dc6b8e0f5d3f0ff82aa69c85cb"
+    },
+    {
+      "after_mean_delta2": 331.1412353515625,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_09.svg",
+      "after_svg_sha256": "45cfbf377e3f19c235de171d63b84b8935665c00f121a60bbf9c12e782b24c25",
+      "before_mean_delta2": 9989.8603515625,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_09.svg",
+      "before_svg_sha256": "fe1e864d511b575674221a274ea23ca4984e08580789c5451715e767d9b192a0",
+      "case_id": "anonymous_pump_09",
+      "image": "inputs\\anonymous_pump_09.jpg",
+      "input_sha256": "7484e08fd8ce4d242bef4b963e0e9fb58f2608903152a939523f94f1217a1718",
+      "role": "holdout",
+      "source": "AC0402_2L_sia.jpg",
+      "source_sha256": "7484e08fd8ce4d242bef4b963e0e9fb58f2608903152a939523f94f1217a1718"
+    },
+    {
+      "after_mean_delta2": 299.7311096191406,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_10.svg",
+      "after_svg_sha256": "4fcfcf9ac5d9c0b28f310d7177122d167d780209941c7a6ad21d411e1c58f437",
+      "before_mean_delta2": 9532.33203125,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_10.svg",
+      "before_svg_sha256": "f3952633ff04380da2ef6230f81957bd68889b94cbff25ab4b0355ea76a90ce3",
+      "case_id": "anonymous_pump_10",
+      "image": "inputs\\anonymous_pump_10.jpg",
+      "input_sha256": "d8e511da2a9da7f2332848d890d128a923117a3e5e24f8952696bc411b984f64",
+      "role": "holdout",
+      "source": "AC0402_2M_sia.jpg",
+      "source_sha256": "d8e511da2a9da7f2332848d890d128a923117a3e5e24f8952696bc411b984f64"
+    },
+    {
+      "after_mean_delta2": 145.33749389648438,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_11.svg",
+      "after_svg_sha256": "31fbc4371e585a79723c15fc7410188d5b03998c2e67f611a91b2e6fff20bff7",
+      "before_mean_delta2": 8938.58203125,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_11.svg",
+      "before_svg_sha256": "3d7a0347e82ccdbaccc21e9bbf650e44a9f073f461cbc6c07398994337021a13",
+      "case_id": "anonymous_pump_11",
+      "image": "inputs\\anonymous_pump_11.jpg",
+      "input_sha256": "86cfb9bd1421605d7f3f6e4fba99ffe7dc03ac4276ff6deb8d8cba97128f9c9d",
+      "role": "holdout",
+      "source": "AC0402_2S_sia.jpg",
+      "source_sha256": "86cfb9bd1421605d7f3f6e4fba99ffe7dc03ac4276ff6deb8d8cba97128f9c9d"
+    },
+    {
+      "after_mean_delta2": 323.28375244140625,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_12.svg",
+      "after_svg_sha256": "136af2c6254294f2ead82880a72c0dd97427b34c17dcee620f191b24bd1f60b2",
+      "before_mean_delta2": 7841.20458984375,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_12.svg",
+      "before_svg_sha256": "0c40fa3b45cb87ed091e113c942fb7e5a63caf348722cfa0ee62504b56f24fcf",
+      "case_id": "anonymous_pump_12",
+      "image": "inputs\\anonymous_pump_12.jpg",
+      "input_sha256": "86928cb819926c20c529cb838d966822bf2a500fd96a0e7f8e3b4d8ae52e15dd",
+      "role": "holdout",
+      "source": "AC0402_2_L.jpg",
+      "source_sha256": "86928cb819926c20c529cb838d966822bf2a500fd96a0e7f8e3b4d8ae52e15dd"
+    },
+    {
+      "after_mean_delta2": 291.2411193847656,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_13.svg",
+      "after_svg_sha256": "84cb6ac77b9d15613c16cbd40bd0e1730fe6a92dde303e7849414135773fb6a2",
+      "before_mean_delta2": 7220.5078125,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_13.svg",
+      "before_svg_sha256": "ac8042d179d8794b4c69bf3bdcb8bd0b282988ecadac4509a90e779101d230b2",
+      "case_id": "anonymous_pump_13",
+      "image": "inputs\\anonymous_pump_13.jpg",
+      "input_sha256": "18b9ed37ddeed3589c1a3b08f0c924f9c6f6f8f6d664bff8f1a9b50e72c649bd",
+      "role": "holdout",
+      "source": "AC0402_2_M.jpg",
+      "source_sha256": "18b9ed37ddeed3589c1a3b08f0c924f9c6f6f8f6d664bff8f1a9b50e72c649bd"
+    },
+    {
+      "after_mean_delta2": 107.87249755859375,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_14.svg",
+      "after_svg_sha256": "50ee16ceff5fca812f9bef1745872e92ed5349e804bcf9d5fa744ebefdafa6ef",
+      "before_mean_delta2": 6614.19482421875,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_14.svg",
+      "before_svg_sha256": "4b7eb3061b4bbbe80b6d5925520f12796ddf49f715ad44ef78e5469252e61f51",
+      "case_id": "anonymous_pump_14",
+      "image": "inputs\\anonymous_pump_14.jpg",
+      "input_sha256": "f4571aebfec9bca6254fb6dbe867b896b423fbf567dac2fc3a15f6b770d5cb9b",
+      "role": "holdout",
+      "source": "AC0402_2_S.jpg",
+      "source_sha256": "f4571aebfec9bca6254fb6dbe867b896b423fbf567dac2fc3a15f6b770d5cb9b"
+    },
+    {
+      "after_mean_delta2": 135.4875030517578,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_15.svg",
+      "after_svg_sha256": "5d716c5838d0b8f6c82dd82510b467b69432ec583b73f56b2600e2f64a0c0099",
+      "before_mean_delta2": 6671.7939453125,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_15.svg",
+      "before_svg_sha256": "daa4909bd6ca30f46664b077188fe999cf293eced09edbb729e1cf3ff5a73eeb",
+      "case_id": "anonymous_pump_15",
+      "image": "inputs\\anonymous_pump_15.jpg",
+      "input_sha256": "63865f013d84eaf9dec1bc177c383062dc4c857fe990392b656494f2a2361f96",
+      "role": "holdout",
+      "source": "AC0402_L.jpg",
+      "source_sha256": "63865f013d84eaf9dec1bc177c383062dc4c857fe990392b656494f2a2361f96"
+    },
+    {
+      "after_mean_delta2": 120.85874938964844,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_16.svg",
+      "after_svg_sha256": "d325280e519a0b3fb0f5153beaa811b6c1e05da177d7b7031a890389bafbf8d0",
+      "before_mean_delta2": 8949.3896484375,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_16.svg",
+      "before_svg_sha256": "c03e28b4e3d947598116ba41e36396f0ca7485ca9643838582ae05e1ea0e981b",
+      "case_id": "anonymous_pump_16",
+      "image": "inputs\\anonymous_pump_16.jpg",
+      "input_sha256": "af3200c3b3d90a6b7f8a49ca692314c3514c2e2e76915d103c1035b7a2a3d5ce",
+      "role": "holdout",
+      "source": "AC0402_L_sia.jpg",
+      "source_sha256": "af3200c3b3d90a6b7f8a49ca692314c3514c2e2e76915d103c1035b7a2a3d5ce"
+    },
+    {
+      "after_mean_delta2": 143.0366668701172,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_17.svg",
+      "after_svg_sha256": "a048389c63a7f8ddac35c9d02e7ea78122fa1bd2c41f686fbcb4a78d274335db",
+      "before_mean_delta2": 6321.06005859375,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_17.svg",
+      "before_svg_sha256": "b0389d435ce168889b57c13c1d1c56494f128a9befc86903f371d97c4934a076",
+      "case_id": "anonymous_pump_17",
+      "image": "inputs\\anonymous_pump_17.jpg",
+      "input_sha256": "4dd2843555bfc89a3c889b573b4456e79952af756373449e14d7de3d3ee7f423",
+      "role": "holdout",
+      "source": "AC0402_M.jpg",
+      "source_sha256": "4dd2843555bfc89a3c889b573b4456e79952af756373449e14d7de3d3ee7f423"
+    },
+    {
+      "after_mean_delta2": 137.336669921875,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_18.svg",
+      "after_svg_sha256": "436bef88637f4315ceb59ec48ad294675f37b73ee1197335f8d9c6b05e9b573f",
+      "before_mean_delta2": 6156.49658203125,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_18.svg",
+      "before_svg_sha256": "5e8c95047a46b8059598db540a49f09c4ed3f037e8ad05c7f3e2bf7d0cf07010",
+      "case_id": "anonymous_pump_18",
+      "image": "inputs\\anonymous_pump_18.jpg",
+      "input_sha256": "53adedd686f6eef1b973171ed36c3effd2421adb85508421bcdb8fec7b31f180",
+      "role": "holdout",
+      "source": "AC0402_M_sia.jpg",
+      "source_sha256": "53adedd686f6eef1b973171ed36c3effd2421adb85508421bcdb8fec7b31f180"
+    },
+    {
+      "after_mean_delta2": 145.81500244140625,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_19.svg",
+      "after_svg_sha256": "29918403a81db105e181ee5008298dabfa7d69b16fe30ae3130ac0b094ef38d3",
+      "before_mean_delta2": 6085.9873046875,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_19.svg",
+      "before_svg_sha256": "cc4ed8b32884b21224232bd63bf0a545e0ada62983c085032d387a3088230b29",
+      "case_id": "anonymous_pump_19",
+      "image": "inputs\\anonymous_pump_19.jpg",
+      "input_sha256": "4b8bce7c5edda4d66341b60175f8b57df6ab5d8e05ff55c00bb18cf361082486",
+      "role": "holdout",
+      "source": "AC0402_S.jpg",
+      "source_sha256": "4b8bce7c5edda4d66341b60175f8b57df6ab5d8e05ff55c00bb18cf361082486"
+    },
+    {
+      "after_mean_delta2": 145.90499877929688,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_20.svg",
+      "after_svg_sha256": "a6e685b0132dce78c446cd3a61bf5914562d8af95458c640d233b3d7feeef439",
+      "before_mean_delta2": 5627.77490234375,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_20.svg",
+      "before_svg_sha256": "cbffe5aaca47558aafa383699ef9aa374971ce74ba552d5721d97cabf9f141be",
+      "case_id": "anonymous_pump_20",
+      "image": "inputs\\anonymous_pump_20.jpg",
+      "input_sha256": "4ed23b333bc61d0885a7e93543fafb857fb2603f171c0c29c6c56a4c01e98ad8",
+      "role": "holdout",
+      "source": "AC0402_S_sia.jpg",
+      "source_sha256": "4ed23b333bc61d0885a7e93543fafb857fb2603f171c0c29c6c56a4c01e98ad8"
+    }
+  ],
+  "focused_tests": {
+    "failed": 0,
+    "files": [
+      "tests/test_right_pump_recheck.py",
+      "tests/test_pump_runtime.py",
+      "tests/detailtests/test_plan_b_variations.py"
+    ],
+    "log_sha256": "26ada4a9c5f12847cb4e389c81ef6b7e9011fc4e69f5dea0eb98e70f02307fbf",
+    "passed": 92,
+    "seconds": 117.58,
+    "temp_location": "workspace .tmp/ac0402"
+  },
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "native_windows_diagnostic": {
+    "code": "0xc0000008",
+    "control_log_sha256": "8b53929f8244720023434685ffe265e5d72904b2075a0193030d219a8ff02dd9",
+    "isolated_control_exit_code": 0,
+    "isolated_control_passed": true,
+    "reproduced_in_control": true,
+    "status": "pre-existing; not fixed by this description package",
+    "test": "test_try_template_transfer_does_not_shuffle_when_deterministic_order_is_enabled"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "review": {
+    "metrics": {
+      "boundary_triple_records": 3,
+      "diff_renderable_pairs": 902,
+      "diff_variants": 908,
+      "ranked_records": 956,
+      "selected_candidates": 5,
+      "successful_above_threshold": 0,
+      "successful_missing_or_failed": 0,
+      "successful_renderable_pairs": 48,
+      "successful_variants": 48,
+      "top_error_cases": 5
+    },
+    "report_sha256": "b1e1cd18beba08bbed04d2d903df5e378811fe2e38d336037e0a310302de2363",
+    "reproduction_arguments": [
+      "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+      "-m",
+      "tools.review_conversion_quality",
+      "--output-dir",
+      ".tmp/ac0402/review",
+      "--exclude",
+      "AC0554_2_L",
+      "--exclude",
+      "AC0713_1_S",
+      "--exclude",
+      "DLG0010_1",
+      "--exclude",
+      "AC0724_1_S",
+      "--exclude",
+      "AC0252_1",
+      "--exclude",
+      "AC0252",
+      "--exclude",
+      "AC0252_2",
+      "--exclude",
+      "AC0731_1_L",
+      "--exclude",
+      "AC0731_1_M",
+      "--exclude",
+      "AC0731_1_S",
+      "--exclude",
+      "AC0731_L",
+      "--exclude",
+      "AC0731_M",
+      "--exclude",
+      "AC0731_S",
+      "--exclude",
+      "GE1003_M",
+      "--exclude",
+      "GE1003_L",
+      "--exclude",
+      "GE1003_S",
+      "--exclude",
+      "AC0404_1_L",
+      "--exclude",
+      "AC0404_1_M",
+      "--exclude",
+      "AC0404_1_S",
+      "--exclude",
+      "AC0404_1L_sia",
+      "--exclude",
+      "AC0404_1M_sia",
+      "--exclude",
+      "AC0404_1S_sia",
+      "--exclude",
+      "AC0404_2_L",
+      "--exclude",
+      "AC0404_2_M",
+      "--exclude",
+      "AC0404_2_S",
+      "--exclude",
+      "AC0404_2L_sia",
+      "--exclude",
+      "AC0404_2M_sia",
+      "--exclude",
+      "AC0404_2S_sia",
+      "--exclude",
+      "AC0404_L",
+      "--exclude",
+      "AC0404_L_sia",
+      "--exclude",
+      "AC0404_M",
+      "--exclude",
+      "AC0404_M_sia",
+      "--exclude",
+      "AC0404_S",
+      "--exclude",
+      "AC0404_S_sia",
+      "--exclude",
+      "GE9011_1M",
+      "--exclude",
+      "GE9011_1S",
+      "--exclude",
+      "GE9011_2M",
+      "--exclude",
+      "GE9011_2S",
+      "--exclude",
+      "GE9011_3M",
+      "--exclude",
+      "GE9011_3S",
+      "--exclude",
+      "GE9011_4M",
+      "--exclude",
+      "GE9011_4S",
+      "--exclude",
+      "GE9011_5M",
+      "--exclude",
+      "GE9011_5S",
+      "--exclude",
+      "GE9011_6M",
+      "--exclude",
+      "GE9011_6S",
+      "--exclude",
+      "GE9011_7M",
+      "--exclude",
+      "GE9011_7S",
+      "--exclude",
+      "GE0280",
+      "--exclude",
+      "GE0281",
+      "--exclude",
+      "GE0282",
+      "--exclude",
+      "GE0283",
+      "--exclude",
+      "GE0284",
+      "--exclude",
+      "GE0285",
+      "--exclude",
+      "GE9013_1M",
+      "--exclude",
+      "GE9013_1S",
+      "--exclude",
+      "GE9013_2M",
+      "--exclude",
+      "GE9013_2S",
+      "--exclude",
+      "GE9013_3M",
+      "--exclude",
+      "GE9013_3S",
+      "--exclude",
+      "GE9013_4M",
+      "--exclude",
+      "GE9013_4S",
+      "--exclude",
+      "GE9013_5M",
+      "--exclude",
+      "GE9013_5S",
+      "--exclude",
+      "GE9013_6M",
+      "--exclude",
+      "GE9013_6S",
+      "--exclude",
+      "GE9013_7M",
+      "--exclude",
+      "GE9013_7S",
+      "--exclude",
+      "AC0554_1_L",
+      "--exclude",
+      "AC0554_1_M",
+      "--exclude",
+      "AC0554_1_S",
+      "--exclude",
+      "AC0554_2_M",
+      "--exclude",
+      "AC0554_2_S",
+      "--exclude",
+      "AC0554_L",
+      "--exclude",
+      "AC0554_M",
+      "--exclude",
+      "AC0554_S",
+      "--exclude",
+      "DLG0031",
+      "--exclude",
+      "DLG0021",
+      "--exclude",
+      "AC0130_S",
+      "--exclude",
+      "AC0130_M",
+      "--exclude",
+      "AC0130_L",
+      "--exclude",
+      "GE1420_S",
+      "--exclude",
+      "GE1420_M",
+      "--exclude",
+      "GE1420_L",
+      "--exclude",
+      "GE1420_M_neutral",
+      "--exclude",
+      "AC0704_1_L",
+      "--exclude",
+      "AC0704_1_M",
+      "--exclude",
+      "AC0704_1_S",
+      "--exclude",
+      "AC0704_L",
+      "--exclude",
+      "AC0704_M",
+      "--exclude",
+      "AC0704_S",
+      "--exclude",
+      "AC0402_1_S",
+      "--exclude",
+      "AC0402_1L_sia",
+      "--exclude",
+      "AC0402_1M_sia",
+      "--exclude",
+      "AC0402_1S_sia",
+      "--exclude",
+      "AC0402_1_L",
+      "--exclude",
+      "AC0402_1_M",
+      "--exclude",
+      "AC0402_2L_sia",
+      "--exclude",
+      "AC0402_2M_sia",
+      "--exclude",
+      "AC0402_2S_sia",
+      "--exclude",
+      "AC0402_2_L",
+      "--exclude",
+      "AC0402_2_M",
+      "--exclude",
+      "AC0402_2_S",
+      "--exclude",
+      "AC0402_L",
+      "--exclude",
+      "AC0402_L_sia",
+      "--exclude",
+      "AC0402_M",
+      "--exclude",
+      "AC0402_M_sia",
+      "--exclude",
+      "AC0402_S",
+      "--exclude",
+      "AC0402_S_sia"
+    ],
+    "selected_candidates": [
+      {
+        "height": 40,
+        "image_area": 1600,
+        "image_path": "artifacts/images_to_convert/AC0403_1_L.jpg",
+        "mean_delta2": 13989.01953125,
+        "normalized_mse": 0.07171098055235166,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0403_1_L.svg",
+        "variant": "AC0403_1_L",
+        "width": 40
+      },
+      {
+        "height": 44,
+        "image_area": 1980,
+        "image_path": "artifacts/images_to_convert/GE0032.jpg",
+        "mean_delta2": 13826.3896484375,
+        "normalized_mse": 0.07087730179898757,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/GE0032.svg",
+        "variant": "GE0032",
+        "width": 45
+      },
+      {
+        "height": 30,
+        "image_area": 900,
+        "image_path": "artifacts/images_to_convert/AC0413_1_M.jpg",
+        "mean_delta2": 13465.6943359375,
+        "normalized_mse": 0.06902829340478021,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0413_1_M.svg",
+        "variant": "AC0413_1_M",
+        "width": 30
+      },
+      {
+        "height": 45,
+        "image_area": 1125,
+        "image_path": "artifacts/images_to_convert/AC0713_1_L.jpg",
+        "mean_delta2": 13458.083984375,
+        "normalized_mse": 0.06898928096565424,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0713_1_L.svg",
+        "variant": "AC0713_1_L",
+        "width": 25
+      },
+      {
+        "height": 25,
+        "image_area": 375,
+        "image_path": "artifacts/images_to_convert/AC0721_1_S.jpg",
+        "mean_delta2": 13368.759765625,
+        "normalized_mse": 0.06853138416314238,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0721_1_S.svg",
+        "variant": "AC0721_1_S",
+        "width": 15
+      }
+    ]
+  },
+  "runtime_change": "none; independent description activates existing general circle/triangle registration",
+  "satisfaction_gate": {
+    "baseline_sha256": "fea71bfd7fc65733e0d1809bc0cff6ef229e2440e3192dd6e2ada31b4f6fe5aa",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9201171398162842,
+          "error_per_pixel": 0.0013463412134155132,
+          "object_mask_iou": 0.9692982456140351,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6193424463272095,
+          "error_per_pixel": 0.07186542335479944,
+          "object_mask_iou": 0.6864406779661016,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0013463412134155132,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.972,
+            "edge_alignment": 0.9201,
+            "pixel_similarity": 0.9987,
+            "semantic_score": 1.0,
+            "structure_score": 0.9693
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9648237228393555,
+          "error_per_pixel": 0.0005336697236339389,
+          "object_mask_iou": 0.9773706896551724,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4849877953529358,
+          "error_per_pixel": 0.10417979262783544,
+          "object_mask_iou": 0.5912621359223301,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_03",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0005336697236339389,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9854,
+            "edge_alignment": 0.9648,
+            "pixel_similarity": 0.9995,
+            "semantic_score": 1.0,
+            "structure_score": 0.9774
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9613416194915771,
+          "error_per_pixel": 0.0005488373471516364,
+          "object_mask_iou": 0.9926873857404022,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5241733193397522,
+          "error_per_pixel": 0.09911329176278355,
+          "object_mask_iou": 0.6013400335008375,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_04",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0005488373471516364,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9884,
+            "edge_alignment": 0.9613,
+            "pixel_similarity": 0.9995,
+            "semantic_score": 1.0,
+            "structure_score": 0.9927
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.950610339641571,
+          "error_per_pixel": 0.0015251697626814207,
+          "object_mask_iou": 0.9959016393442623,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6115926504135132,
+          "error_per_pixel": 0.09348054233948482,
+          "object_mask_iou": 0.631578947368421,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_05",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0015251697626814207,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9862,
+            "edge_alignment": 0.9506,
+            "pixel_similarity": 0.9985,
+            "semantic_score": 1.0,
+            "structure_score": 0.9959
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9272645711898804,
+          "error_per_pixel": 0.0006168653035215823,
+          "object_mask_iou": 0.9522727272727273,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4788089990615845,
+          "error_per_pixel": 0.08464646009547609,
+          "object_mask_iou": 0.6784188034188035,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_06",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0006168653035215823,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9697,
+            "edge_alignment": 0.9273,
+            "pixel_similarity": 0.9994,
+            "semantic_score": 1.0,
+            "structure_score": 0.9523
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.941298246383667,
+          "error_per_pixel": 0.000790824063936747,
+          "object_mask_iou": 0.9939393939393939,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5271390676498413,
+          "error_per_pixel": 0.0792406966871716,
+          "object_mask_iou": 0.6834264432029795,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_07",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.000790824063936747,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9836,
+            "edge_alignment": 0.9413,
+            "pixel_similarity": 0.9992,
+            "semantic_score": 1.0,
+            "structure_score": 0.9939
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9042850732803345,
+          "error_per_pixel": 0.001697507293869345,
+          "object_mask_iou": 0.9837662337662337,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.632057249546051,
+          "error_per_pixel": 0.051210356793861336,
+          "object_mask_iou": 0.7027250206440958,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_09",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.001697507293869345,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9716,
+            "edge_alignment": 0.9043,
+            "pixel_similarity": 0.9983,
+            "semantic_score": 1.0,
+            "structure_score": 0.9838
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9404878616333008,
+          "error_per_pixel": 0.0015364916551026048,
+          "object_mask_iou": 0.9799635701275046,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6265753507614136,
+          "error_per_pixel": 0.048864959791105986,
+          "object_mask_iou": 0.7460087082728593,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_10",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0015364916551026048,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9797,
+            "edge_alignment": 0.9405,
+            "pixel_similarity": 0.9985,
+            "semantic_score": 1.0,
+            "structure_score": 0.98
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9756207466125488,
+          "error_per_pixel": 0.0007450339300088908,
+          "object_mask_iou": 0.9878048780487805,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6756243705749512,
+          "error_per_pixel": 0.04582125865051903,
+          "object_mask_iou": 0.7581699346405228,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_11",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007450339300088908,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9907,
+            "edge_alignment": 0.9756,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9878
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8857455253601074,
+          "error_per_pixel": 0.0016572280017501282,
+          "object_mask_iou": 0.9707259953161592,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5361595153808594,
+          "error_per_pixel": 0.040195845648308345,
+          "object_mask_iou": 0.6765913757700205,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_12",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0016572280017501282,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9637,
+            "edge_alignment": 0.8857,
+            "pixel_similarity": 0.9983,
+            "semantic_score": 1.0,
+            "structure_score": 0.9707
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8917937278747559,
+          "error_per_pixel": 0.0014929699827490228,
+          "object_mask_iou": 0.9878787878787879,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5854277014732361,
+          "error_per_pixel": 0.03701400903498654,
+          "object_mask_iou": 0.7168458781362007,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_13",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0014929699827490228,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9695,
+            "edge_alignment": 0.8918,
+            "pixel_similarity": 0.9985,
+            "semantic_score": 1.0,
+            "structure_score": 0.9879
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9455727338790894,
+          "error_per_pixel": 0.0005529796107066193,
+          "object_mask_iou": 1.0,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.706824004650116,
+          "error_per_pixel": 0.03390590708301294,
+          "object_mask_iou": 0.7338709677419355,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_14",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0005529796107066193,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9863,
+            "edge_alignment": 0.9456,
+            "pixel_similarity": 0.9994,
+            "semantic_score": 1.0,
+            "structure_score": 1.0
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9349839687347412,
+          "error_per_pixel": 0.0006945405769665914,
+          "object_mask_iou": 0.9513212795549374,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.29500871896743774,
+          "error_per_pixel": 0.03420117362713059,
+          "object_mask_iou": 0.42821985233798193,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_15",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0006945405769665914,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9714,
+            "edge_alignment": 0.935,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9513
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9116296172142029,
+          "error_per_pixel": 0.000619550169881576,
+          "object_mask_iou": 0.9473684210526315,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.28427258133888245,
+          "error_per_pixel": 0.04587666101980008,
+          "object_mask_iou": 0.032915360501567396,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_16",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.000619550169881576,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9646,
+            "edge_alignment": 0.9116,
+            "pixel_similarity": 0.9994,
+            "semantic_score": 1.0,
+            "structure_score": 0.9474
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9183776378631592,
+          "error_per_pixel": 0.0007332393534287694,
+          "object_mask_iou": 0.9273127753303965,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.3323318362236023,
+          "error_per_pixel": 0.0324032298274702,
+          "object_mask_iou": 0.5013477088948787,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_17",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007332393534287694,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9612,
+            "edge_alignment": 0.9184,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9273
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9609172940254211,
+          "error_per_pixel": 0.0007040198381231577,
+          "object_mask_iou": 0.949238578680203,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.3274702727794647,
+          "error_per_pixel": 0.03155963902104959,
+          "object_mask_iou": 0.4112676056338028,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_18",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007040198381231577,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9774,
+            "edge_alignment": 0.9609,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9492
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9412668347358704,
+          "error_per_pixel": 0.000747481750308375,
+          "object_mask_iou": 0.9241706161137441,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4898768663406372,
+          "error_per_pixel": 0.031198192001473793,
+          "object_mask_iou": 0.4881656804733728,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_19",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.000747481750308375,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9662,
+            "edge_alignment": 0.9413,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9242
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9593284726142883,
+          "error_per_pixel": 0.0007479430925505415,
+          "object_mask_iou": 0.9166666666666666,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.44820481538772583,
+          "error_per_pixel": 0.028849288234493144,
+          "object_mask_iou": 0.4268292682926829,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_pump_20",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007479430925505415,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9688,
+            "edge_alignment": 0.9593,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9167
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "Original description versus independent corrected description; unchanged circle/triangle fitter and renderer",
+      "commit": "fee9f9d4d656f075925146456f13acae652f1ab4",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_pump_00": "c2f88bef161718cc59ee954de2b9217333d43a793318e3acb183ebaff3e4177e",
+        "anonymous_pump_03": "bb5418c4da5741f75b7ab2290e22d7c653ff04118a7e0953e306473d01066d17",
+        "anonymous_pump_04": "96473290094a023dc6cbe0a5db1e020373880e1734ecbc300ae0d4e569c15b6b",
+        "anonymous_pump_05": "330022b3a2b7b29add2305e2184d7db53fed4acf93eb5be9b69360808a15bd52",
+        "anonymous_pump_06": "84118c6b658e59c838f89dd91fe536b42c23155ecdcb383e6424870cc24302d3",
+        "anonymous_pump_07": "c74858ae1a4647f398fb171872d7131e659b42dc6b8e0f5d3f0ff82aa69c85cb",
+        "anonymous_pump_09": "7484e08fd8ce4d242bef4b963e0e9fb58f2608903152a939523f94f1217a1718",
+        "anonymous_pump_10": "d8e511da2a9da7f2332848d890d128a923117a3e5e24f8952696bc411b984f64",
+        "anonymous_pump_11": "86cfb9bd1421605d7f3f6e4fba99ffe7dc03ac4276ff6deb8d8cba97128f9c9d",
+        "anonymous_pump_12": "86928cb819926c20c529cb838d966822bf2a500fd96a0e7f8e3b4d8ae52e15dd",
+        "anonymous_pump_13": "18b9ed37ddeed3589c1a3b08f0c924f9c6f6f8f6d664bff8f1a9b50e72c649bd",
+        "anonymous_pump_14": "f4571aebfec9bca6254fb6dbe867b896b423fbf567dac2fc3a15f6b770d5cb9b",
+        "anonymous_pump_15": "63865f013d84eaf9dec1bc177c383062dc4c857fe990392b656494f2a2361f96",
+        "anonymous_pump_16": "af3200c3b3d90a6b7f8a49ca692314c3514c2e2e76915d103c1035b7a2a3d5ce",
+        "anonymous_pump_17": "4dd2843555bfc89a3c889b573b4456e79952af756373449e14d7de3d3ee7f423",
+        "anonymous_pump_18": "53adedd686f6eef1b973171ed36c3effd2421adb85508421bcdb8fec7b31f180",
+        "anonymous_pump_19": "4b8bce7c5edda4d66341b60175f8b57df6ab5d8e05ff55c00bb18cf361082486",
+        "anonymous_pump_20": "4ed23b333bc61d0885a7e93543fafb857fb2603f171c0c29c6c56a4c01e98ad8"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 18,
+      "improved": 18,
+      "satisfactory": 18,
+      "technically_completed": 18
+    }
+  },
+  "schema_version": "pump_recheck_v1",
+  "semantic_contract": "one filled circular body and one contrasting contained triangle pointing right; colors observed from raster",
+  "smoke_checks": {
+    "cli_help": "pass",
+    "compileall": "pass",
+    "runtime_image_id_occurrences": 0
+  },
+  "stricter_plan_b_jpeg_gates": {
+    "cases": [
+      {
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.9201171398162842,
+          "foreground_iou": 0.8868613138686131,
+          "foreground_mse": 0.0018845644081011415,
+          "normalized_mse": 0.00134634121786803
+        },
+        "satisfactory": true,
+        "source": "AC0402_1_S.jpg"
+      },
+      {
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.9648237228393555,
+          "foreground_iou": 0.8593607305936073,
+          "foreground_mse": 0.0007265580934472382,
+          "normalized_mse": 0.0005336697795428336
+        },
+        "satisfactory": true,
+        "source": "AC0402_1L_sia.jpg"
+      },
+      {
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.9613416194915771,
+          "foreground_iou": 0.9040650406504065,
+          "foreground_mse": 0.0007381776231341064,
+          "normalized_mse": 0.0005488372989930212
+        },
+        "satisfactory": true,
+        "source": "AC0402_1M_sia.jpg"
+      },
+      {
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.950610339641571,
+          "foreground_iou": 0.9094076655052264,
+          "foreground_mse": 0.0020672830287367105,
+          "normalized_mse": 0.001525169936940074
+        },
+        "satisfactory": true,
+        "source": "AC0402_1S_sia.jpg"
+      },
+      {
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "edge_alignment": 0.9272645711898804,
+          "foreground_iou": 0.8074477747502271,
+          "foreground_mse": 0.0008461125544272363,
+          "normalized_mse": 0.0006168652907945216
+        },
+        "satisfactory": false,
+        "source": "AC0402_1_L.jpg"
+      },
+      {
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "edge_alignment": 0.941298246383667,
+          "foreground_iou": 0.8488964346349746,
+          "foreground_mse": 0.0011488941963762045,
+          "normalized_mse": 0.0007908241241239011
+        },
+        "satisfactory": false,
+        "source": "AC0402_1_M.jpg"
+      },
+      {
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.9042850732803345,
+          "foreground_iou": 0.865137614678899,
+          "foreground_mse": 0.002456660382449627,
+          "normalized_mse": 0.0016975074540823698
+        },
+        "satisfactory": true,
+        "source": "AC0402_2L_sia.jpg"
+      },
+      {
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.9404878616333008,
+          "foreground_iou": 0.8678071539657853,
+          "foreground_mse": 0.0020877323113381863,
+          "normalized_mse": 0.0015364916762337089
+        },
+        "satisfactory": true,
+        "source": "AC0402_2M_sia.jpg"
+      },
+      {
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.9756207466125488,
+          "foreground_iou": 0.8831615120274914,
+          "foreground_mse": 0.000969844579230994,
+          "normalized_mse": 0.0007450340199284256
+        },
+        "satisfactory": true,
+        "source": "AC0402_2S_sia.jpg"
+      },
+      {
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.8857455253601074,
+          "foreground_iou": 0.8537284894837476,
+          "foreground_mse": 0.0024921188596636057,
+          "normalized_mse": 0.001657227985560894
+        },
+        "satisfactory": true,
+        "source": "AC0402_2_L.jpg"
+      },
+      {
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "edge_alignment": 0.8917937278747559,
+          "foreground_iou": 0.8499156829679595,
+          "foreground_mse": 0.0022077036555856466,
+          "normalized_mse": 0.0014929698081687093
+        },
+        "satisfactory": false,
+        "source": "AC0402_2_M.jpg"
+      },
+      {
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.9455727338790894,
+          "foreground_iou": 0.8633093525179856,
+          "foreground_mse": 0.0007329407380893826,
+          "normalized_mse": 0.0005529796471819282
+        },
+        "satisfactory": true,
+        "source": "AC0402_2_S.jpg"
+      },
+      {
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "edge_alignment": 0.9349839687347412,
+          "foreground_iou": 0.8016528925619835,
+          "foreground_mse": 0.0010355203412473202,
+          "normalized_mse": 0.0006945405621081591
+        },
+        "satisfactory": false,
+        "source": "AC0402_L.jpg"
+      },
+      {
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.9116296172142029,
+          "foreground_iou": 0.891644908616188,
+          "foreground_mse": 0.001195704098790884,
+          "normalized_mse": 0.0006195501773618162
+        },
+        "satisfactory": true,
+        "source": "AC0402_L_sia.jpg"
+      },
+      {
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.9183776378631592,
+          "foreground_iou": 0.8688524590163934,
+          "foreground_mse": 0.001165083609521389,
+          "normalized_mse": 0.0007332394015975296
+        },
+        "satisfactory": true,
+        "source": "AC0402_M.jpg"
+      },
+      {
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.9609172940254211,
+          "foreground_iou": 0.8767967145790554,
+          "foreground_mse": 0.001269958564080298,
+          "normalized_mse": 0.0007040198543109
+        },
+        "satisfactory": true,
+        "source": "AC0402_M_sia.jpg"
+      },
+      {
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.9412668347358704,
+          "foreground_iou": 0.8773946360153256,
+          "foreground_mse": 0.0010810460662469268,
+          "normalized_mse": 0.0007474817102774978
+        },
+        "satisfactory": true,
+        "source": "AC0402_S.jpg"
+      },
+      {
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "edge_alignment": 0.9593284726142883,
+          "foreground_iou": 0.8117647058823529,
+          "foreground_mse": 0.001120413769967854,
+          "normalized_mse": 0.0007479430641978979
+        },
+        "satisfactory": false,
+        "source": "AC0402_S_sia.jpg"
+      }
+    ],
+    "passed": 13,
+    "total": 18
+  },
+  "template_roundtrip": {
+    "blocked_svg_reads": 0,
+    "description": "Pumpensymbol: Ein gefüllter Kreis mit Randkontur enthält ein kontrastierendes gefülltes Dreieck, dessen Spitze nach rechts zeigt. Weißer Hintergrund. Lage, Größe, Konturbreite und Farben ergeben sich aus dem Rasterbild.",
+    "limits": {
+      "max_foreground_mse": 0.04,
+      "max_normalized_mse": 0.01,
+      "max_path_commands": 160,
+      "max_svg_elements": 80,
+      "min_edge_alignment": 0.72,
+      "min_foreground_iou": 0.85
+    },
+    "repeated_svg_bytes_and_metrics_identical": true,
+    "repeated_svg_count": 16,
+    "reports": [
+      {
+        "cases": [
+          {
+            "case_id": "probe_01",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "e92e7b2af52fceb783797c3ec2ba12a1ca3ade7586c8b5f04cf9526ffce23fa2",
+            "metrics": {
+              "edge_alignment": 0.968131422996521,
+              "foreground_iou": 0.9779005524861878,
+              "foreground_mse": 0.0007308280910365283,
+              "normalized_mse": 0.0003432237426750362
+            },
+            "output_sha256": "c2198046caa3a2edaf02eac3947bb24e48ab869c998c3a9bd94834e0004366cf",
+            "reference_svg_sha256": "40ba548b31f0f9a5b84b34c6e134fba8ef5f653c964e35351e5ddead69c49c16",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_02",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "fec81611a17a1e2b26b3649f2211aee1db701f2eeccccc54401b41eb1ae091f4",
+            "metrics": {
+              "edge_alignment": 0.9292442798614502,
+              "foreground_iou": 0.9577114427860697,
+              "foreground_mse": 0.001290127751417458,
+              "normalized_mse": 0.0006766051519662142
+            },
+            "output_sha256": "b24cb2bcfad309652638d16642b061e887ffa74e1afb5b07bd17bbb7f8dfe091",
+            "reference_svg_sha256": "53c196d9d0fe0e9f46f8903e2d9b0bc2713d4fcc74e42bb7a050d86903a26c31",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_03",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "1138efff259ee9c13300ea7fb3ab50c0e812e5256ecbfc338ae0825bbf530e38",
+            "metrics": {
+              "edge_alignment": 0.9448347091674805,
+              "foreground_iou": 0.9265687583444593,
+              "foreground_mse": 0.0019195452332496643,
+              "normalized_mse": 0.000928450608626008
+            },
+            "output_sha256": "2b47b6fc72ab43a9b2a33ead89b29db3be0e7c8c2b36d8eb75b2c603860d846a",
+            "reference_svg_sha256": "77b28ed68e992bc98872e28400f40a3762f48cf2ba71c457ac9f1551e22ad812",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_04",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "7bb721ade02e26e76bcae60f53945cc5cd7fb4b4f9e82e83de21d46f3e5328b1",
+            "metrics": {
+              "edge_alignment": 0.9270505905151367,
+              "foreground_iou": 0.9529411764705882,
+              "foreground_mse": 0.0020126597955822945,
+              "normalized_mse": 0.0009722606628201902
+            },
+            "output_sha256": "cf2aea62992e7df177e8f54d4536faa7d528a6fb4798da4413469044e4fbace4",
+            "reference_svg_sha256": "e9a8ec340f2958ca0ea30e9c7edf70ae9fa4d6a302029f9d966ad14dbcdf1ded",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_05",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "ebf738f6b3d59a0226c282685fd08b5e2cc23f9ff0b2e500c6973b0cda7743d5",
+            "metrics": {
+              "edge_alignment": 0.9563252329826355,
+              "foreground_iou": 0.9282970550576184,
+              "foreground_mse": 0.0021964760962873697,
+              "normalized_mse": 0.0011026239953935146
+            },
+            "output_sha256": "4a783ccdb45fe10c694b7e66dba1da19917a3c2c57a769b991ab732c9b4a2bef",
+            "reference_svg_sha256": "e5edc8de15bbf53fe5392b7ea1addf5554dd1aa6fe081146561f1f87724fa6a0",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_06",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "acc471b8c4367df76cf5c0d71de64eb25a774dc37d51a70038716307c877b6de",
+            "metrics": {
+              "edge_alignment": 0.9123157262802124,
+              "foreground_iou": 0.9297297297297298,
+              "foreground_mse": 0.0013337904820218682,
+              "normalized_mse": 0.0006565071525983512
+            },
+            "output_sha256": "5d6c81ddc9abdaab06768d814519c3d8ff0eee62e6e13f57e9da06f7c2ec4c48",
+            "reference_svg_sha256": "ef115a8851ddcf55958a372d1feb2bc042f074271587217f9099a0389ec3714e",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_07",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "e792d1aa9b16d9bc2c49423fa4bbebd898d928352021b450e7ccd42ef559d931",
+            "metrics": {
+              "edge_alignment": 0.9456300735473633,
+              "foreground_iou": 0.9592391304347826,
+              "foreground_mse": 0.001053796149790287,
+              "normalized_mse": 0.00048602462629787624
+            },
+            "output_sha256": "a4114c0c2e6b71025721ed6bfbe1e886c94d122d32e7a2a63f2d15d789dd775d",
+            "reference_svg_sha256": "cce2a4278a307da461bcbe6bf926de2d0690aa8429977d299a56f01c244ad530",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_08",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "3439b0de4d99fe85c59d500ca19a0021a907a823f64a0a8d4488fd2da0bc3c36",
+            "metrics": {
+              "edge_alignment": 0.9430243372917175,
+              "foreground_iou": 0.9565217391304348,
+              "foreground_mse": 0.0010526740225031972,
+              "normalized_mse": 0.000553815858438611
+            },
+            "output_sha256": "54dc6ed28fd519c6cd3573ef3b74addcda03e0b1ad0d77a1b91e9129d08ebea2",
+            "reference_svg_sha256": "1519ecb27673dfe90e6e385f9571d7f0ba6194c466f06d6063fc43b406a9b7d1",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_09",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "5b5599c5419524f62a525420d11290c52875597052c37bee3bc9298c8373f5c0",
+            "metrics": {
+              "edge_alignment": 0.9286043643951416,
+              "foreground_iou": 0.9638403990024937,
+              "foreground_mse": 0.0015449266647920012,
+              "normalized_mse": 0.0008119472768157721
+            },
+            "output_sha256": "246a2980af60b773687179c734fe48c643251a1a3629dfaa054a68d7a4d17e21",
+            "reference_svg_sha256": "abce729e9198cbf46aea99a0280786166543653f49ee7bcb3d2212c3790f63e1",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_10",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "3e0d9e281391c6cf6c75ec94d02a23b3585f436abc7bad5ab1c57157bf27af66",
+            "metrics": {
+              "edge_alignment": 0.9750137329101562,
+              "foreground_iou": 0.9742489270386266,
+              "foreground_mse": 0.0003600244235713035,
+              "normalized_mse": 0.00016485006199218333
+            },
+            "output_sha256": "83a27a5064047cad5c56c5c0bd03d425abfbcfaec255394959a6cb49a4b9d962",
+            "reference_svg_sha256": "5b393ab754c583c442b7fd9bf93d1417b000d0099b7143fae9b3e167c7d0f090",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_11",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "55538286b36371524e5f7e5268ef8198f16a85c1a105c8850168ca5734ae4222",
+            "metrics": {
+              "edge_alignment": 0.9396742582321167,
+              "foreground_iou": 0.9627659574468085,
+              "foreground_mse": 0.0014294012216851115,
+              "normalized_mse": 0.0007141484529711306
+            },
+            "output_sha256": "d101b439a8bc8809529423f87383ba412f08d66f90dc540e46fdde859b86ff26",
+            "reference_svg_sha256": "161c3080f3278cd1ee639aa147080d599026df7a4da385522642d6c8f0718a1f",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_12",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "15608b6e2e9f1889125127d4e38ee1d9c5a7da87501e6056d7a9bedd7a74f928",
+            "metrics": {
+              "edge_alignment": 0.9354016780853271,
+              "foreground_iou": 0.963963963963964,
+              "foreground_mse": 0.0013213212369009852,
+              "normalized_mse": 0.0006424644379876554
+            },
+            "output_sha256": "9067ad8e863ae74c2af17f3679a5aaa659f5f7e225aab763e1ebd4d1280757ad",
+            "reference_svg_sha256": "9be2179169601ccb881bd5de150bb02a3b9cc550d7a2bfc3f7dbb46db396b5e5",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_13",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "ebd74dc45e80531172b8295114736e43aafcd291b13a8fd9dd85c47bcdc5924d",
+            "metrics": {
+              "edge_alignment": 0.9383273124694824,
+              "foreground_iou": 0.9593392630241423,
+              "foreground_mse": 0.0013024996733292937,
+              "normalized_mse": 0.0006750000175088644
+            },
+            "output_sha256": "dd68f08a5d783d1caca297fb26afe81101ed85ff628f7deead1d9e6c7445aed3",
+            "reference_svg_sha256": "3249c135dd928316385a78ee5a5563eba0d7420dada6bdd496f92f8aa83643e7",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_14",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "3ec3334a3cd8ca980bd29819e252b4357b5734a9e72a5f46e7baa1daad4962a2",
+            "metrics": {
+              "edge_alignment": 0.9750858545303345,
+              "foreground_iou": 0.9121171770972037,
+              "foreground_mse": 0.0017974853981286287,
+              "normalized_mse": 0.000871530151925981
+            },
+            "output_sha256": "7509419b0ed4afdabaaaf904553618b525db92ee90647f6e33776e623c8269d6",
+            "reference_svg_sha256": "a1f46d7eb27a7152340d0b33081f73b5078398931716be0ea9afd13e3bff5501",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_15",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "82485cd7ceacdc076e59e12be53e154db93276cc54267848a36c07178e94dc85",
+            "metrics": {
+              "edge_alignment": 0.964380145072937,
+              "foreground_iou": 0.9746121297602257,
+              "foreground_mse": 0.00038596417289227247,
+              "normalized_mse": 0.00018164169159717858
+            },
+            "output_sha256": "b2b5a4361a5d1eb6bc06f38c9f69f3ca25444abd0939e32aded74da2eb77a9ab",
+            "reference_svg_sha256": "2f79acbdef354dd8e50cc2e9579ef2e95704fe801495ccd6f5f9f8b9a3f7a600",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_16",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "95c0966f7ca6e4959e0aedf5019622973d70b67ffa5a18f03fa5f6288a21b16e",
+            "metrics": {
+              "edge_alignment": 0.9578115940093994,
+              "foreground_iou": 0.9638709677419355,
+              "foreground_mse": 0.0008257469744421542,
+              "normalized_mse": 0.0004274413804523647
+            },
+            "output_sha256": "2bc88f38e1cfa813229a3281e468db730900043d27358a312df02bcd90b19809",
+            "reference_svg_sha256": "8854cb2d1bb22016bea265f4ad8a21971b9e530387d90a64e9419064d3810f7b",
+            "satisfactory": true
+          }
+        ],
+        "report_sha256": "92542d26f8d4d77b5f85f9902cc0ff996584a1176a4cafcfd8dde65856f19bd4",
+        "seed": 20261008
+      },
+      {
+        "cases": [
+          {
+            "case_id": "probe_01",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "614c9ba5269768d9ee6407fba1e810e22136ebbcce6cb58d8f5eef96ae1ce3d5",
+            "metrics": {
+              "edge_alignment": 0.9229491949081421,
+              "foreground_iou": 0.9507575757575758,
+              "foreground_mse": 0.0016183751868084073,
+              "normalized_mse": 0.0008514225482940674
+            },
+            "output_sha256": "2831d1e9493a488457de819c019cc7e26f9846a299b5e179c98893db3d40b746",
+            "reference_svg_sha256": "05892e1914869a1bf7aca4658bd8191a1dd4f29436605b4e900fd61c35985f21",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_02",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "e70d29a2ba39d761280102dfa7fec7d7fc528a6e596e15b152d61db23f78c676",
+            "metrics": {
+              "edge_alignment": 0.8875718116760254,
+              "foreground_iou": 0.9559193954659949,
+              "foreground_mse": 0.001436649588868022,
+              "normalized_mse": 0.0007326220511458814
+            },
+            "output_sha256": "51f23e0967e3705b480d3d03c67db51607a87c3d9cd8ca8dae9a678d62436a57",
+            "reference_svg_sha256": "018932cdfe0f32b85ba6b12fa4fe8fe65efe0f3b0fcf125a83d40cfe2305ed98",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_03",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "8074dcc176d3c6336b6a42e6c73f2bf82fc3ddab2b2e72c96c6c36a14a31fb13",
+            "metrics": {
+              "edge_alignment": 0.9413895606994629,
+              "foreground_iou": 0.9561643835616438,
+              "foreground_mse": 0.0012293269392102957,
+              "normalized_mse": 0.000564427173230797
+            },
+            "output_sha256": "16024e370801aa04188f21a739b1fe77057f9d130eeb0483632ef63e8c333c94",
+            "reference_svg_sha256": "812b59baaa4169e39acc21605bcd1fa5a2b1e7c5f4c1c6f4ae64513f16700d27",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_04",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "e98ac830c228f11faeaf11ebf7fd6d897aeac0e792a0bed793bd809a02924ae0",
+            "metrics": {
+              "edge_alignment": 0.977266788482666,
+              "foreground_iou": 0.9669117647058824,
+              "foreground_mse": 0.0005104937008582056,
+              "normalized_mse": 0.0002709246473386884
+            },
+            "output_sha256": "500b87bf6808ac10a9b6af85335a7f1d4a931a9bb5ee3252455713e936f7dd29",
+            "reference_svg_sha256": "373dd3c04253c4183e8cd54dfb41fa8128ed4b6033982070e63f9988431fb588",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_05",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "8bdaf0160085bb7da613b4837ba6b34482fdc03c83bc1889c36a770bdb3c8fbf",
+            "metrics": {
+              "edge_alignment": 0.9565043449401855,
+              "foreground_iou": 0.9622411693057247,
+              "foreground_mse": 0.0005701358313672245,
+              "normalized_mse": 0.00031042867340147495
+            },
+            "output_sha256": "8b79ea9e6ec04e94a926af4ed91db2901f1b5d8a9a630ddd10cdd696283404ff",
+            "reference_svg_sha256": "326fc39e5a7d15c2cd1ab9af55bd8824023b3a38d109810b2d603ef1ea6149b3",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_06",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "c37867eb96b91f132824f424382ddcba0c35da53d746bec7bd6da3ac913d9a82",
+            "metrics": {
+              "edge_alignment": 0.9384869933128357,
+              "foreground_iou": 0.9613059250302297,
+              "foreground_mse": 0.000984701793640852,
+              "normalized_mse": 0.0005274990107864141
+            },
+            "output_sha256": "5b9188977959715a1941b26ed436a556806a470cb9f6d6dd03f219529e8f9722",
+            "reference_svg_sha256": "83c7dc42a1fa9e87422e306780e43863239aaad081d5dfd1c8441144f9d61b04",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_07",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "b68b9c8316fd323f77dbb7c9341a278ae3d71a0f6d7f23f10becff55a0dd272f",
+            "metrics": {
+              "edge_alignment": 0.9405698776245117,
+              "foreground_iou": 0.9389416553595658,
+              "foreground_mse": 0.0016367360949516296,
+              "normalized_mse": 0.0007755094557069242
+            },
+            "output_sha256": "594caec58a2fd14b178ad508e810e953fb42dc1b61ef7fa12d0355c42a3ecf83",
+            "reference_svg_sha256": "c5828d6731b7ece55bdf42609569c5bd6f6d6e4df3179e932754021e90eacd9e",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_08",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "3bf3f76a3b0446f8b5c49505862c701f42c477a01d87e98fd82656876958101a",
+            "metrics": {
+              "edge_alignment": 0.9325829744338989,
+              "foreground_iou": 0.951530612244898,
+              "foreground_mse": 0.0013395161367952824,
+              "normalized_mse": 0.0006971165421418846
+            },
+            "output_sha256": "b91b54a2fcc9a0e1837015a51118f66911cef6e19319c6a43e222367cd33cf91",
+            "reference_svg_sha256": "9556a88064415fc3e4a80e7ad786d2f2c6fc2431ecf9d92937c2a3b6d8dedd79",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_09",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "86490f9db5cec6d1169b98a947813bcfa3dca4d171bd4104d25ad42dc19876cd",
+            "metrics": {
+              "edge_alignment": 0.9419468641281128,
+              "foreground_iou": 0.9647218453188603,
+              "foreground_mse": 0.0009338230593129992,
+              "normalized_mse": 0.000435130757978186
+            },
+            "output_sha256": "4f396936478de5c45a89820348802b914a5d26fe9b6d992225578176d85f2ab5",
+            "reference_svg_sha256": "af705fe2dd73c39670b076e1bc5c4a154a87d85c2a8ac3983bb285b07a213faf",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_10",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "73268fdfa70c5373910396fa1f8d076d73bc2757d5944334e41035761fe9b19c",
+            "metrics": {
+              "edge_alignment": 0.9502195119857788,
+              "foreground_iou": 0.9492574257425742,
+              "foreground_mse": 0.0016382313333451748,
+              "normalized_mse": 0.0008571991929784417
+            },
+            "output_sha256": "bc24d5f19396fee68e45f360681b2dc2268f9ea282763b4ecaedec02e5db502b",
+            "reference_svg_sha256": "3ff15026cb7375c356b2dc7aaaac73f4687ad5991a0904c21eb093d52b9d1bc4",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_11",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "9ebaa34657d49804b392164d0439d41b362c7fc78a914fac95af3124c2ece89f",
+            "metrics": {
+              "edge_alignment": 0.9268307685852051,
+              "foreground_iou": 0.9396135265700483,
+              "foreground_mse": 0.0021116368006914854,
+              "normalized_mse": 0.0011204633628949523
+            },
+            "output_sha256": "69d835efae2c7fef6aa8f76c0811b6eaa5f85588393caef93c4432a3f08f75d5",
+            "reference_svg_sha256": "3df987444f16e8889106bff881a59729360c4030914bca549a2fc1a7428de78b",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_12",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "519ec0baea37bb6b07798f787e938041a895eb030ee8970dffd2d04c3bb5e654",
+            "metrics": {
+              "edge_alignment": 0.9573072195053101,
+              "foreground_iou": 0.9438775510204082,
+              "foreground_mse": 0.0017756905872374773,
+              "normalized_mse": 0.0008840060909278691
+            },
+            "output_sha256": "4b11d1e7eeba719ecab165eba4144c4efcfd1ee896148cfd4f8680ce2e042f7f",
+            "reference_svg_sha256": "2f85b7b72b479549be34ecf399bfc75bdd3b902ab7e764ebf81336c40cf8c2de",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_13",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "e8a088bdf7841233246193694ae27c4a5b9a6edb2397e0ae5eed9f9401af528b",
+            "metrics": {
+              "edge_alignment": 0.8831551671028137,
+              "foreground_iou": 0.9632446134347274,
+              "foreground_mse": 0.0014837816124781966,
+              "normalized_mse": 0.0007573722396045923
+            },
+            "output_sha256": "4c94f0dc0fbb72fab51df2110c121290f61d9b5e2837ae725f1d91dadfb943da",
+            "reference_svg_sha256": "9ae8b59eb9b860c21cc0553a00cb48aeedbdcb8b435e469d08b8d279719ff542",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_14",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "a7eb0eaeee978f05e4939ba77521ee352613024820370ffaa0309f55b55473fe",
+            "metrics": {
+              "edge_alignment": 0.936037540435791,
+              "foreground_iou": 0.9604743083003953,
+              "foreground_mse": 0.001533493516035378,
+              "normalized_mse": 0.0007789215305820107
+            },
+            "output_sha256": "2f6ad814d03b938f5136d04aded448b089b75f79f4bb3e637f475bb9fc0a57cc",
+            "reference_svg_sha256": "0724f8bdc18df881b8ed60b684558c71b490712cedbcd7aea6b5e9c247af078b",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_15",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "56253544fb1888df1229e70f85d4cbc26bb2aa3c062d3eb3bd94d0b61ade651d",
+            "metrics": {
+              "edge_alignment": 0.9184783101081848,
+              "foreground_iou": 0.9322268326417704,
+              "foreground_mse": 0.001909915474243462,
+              "normalized_mse": 0.0008920414838939905
+            },
+            "output_sha256": "d9f74e468f44129489d3f0f8334d1b22f0882ad1574e540cda7bcdf9a08bc221",
+            "reference_svg_sha256": "1e9dcf05a3c896b3ee633ce06f3496448f5416bae6a1ffd0e7f11b80bc8e48cf",
+            "satisfactory": true
+          },
+          {
+            "case_id": "probe_16",
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 2
+            },
+            "input_sha256": "aca10922abe9fcacb0f9fd5ebeaef6cdfb1d70a19c8fdf0784539346a6e639f0",
+            "metrics": {
+              "edge_alignment": 0.9331765174865723,
+              "foreground_iou": 0.9544270833333334,
+              "foreground_mse": 0.0019217169610783458,
+              "normalized_mse": 0.000964551989454776
+            },
+            "output_sha256": "39e70c8b38ca01546ebe396bfa5d1ece93a16aaa0e849e7657bb37ba64411f7e",
+            "reference_svg_sha256": "d3cebcd67985d10ed0018373784ed3463b7e67d5c649f7947a24593ccb44704a",
+            "satisfactory": true
+          }
+        ],
+        "report_sha256": "c748a9b21ea9cc36266b3288fa3e6e0898a240841e2534ce68e5c81f54d464d9",
+        "seed": 20261009
+      }
+    ],
+    "seeds": [
+      20261008,
+      20261009
+    ],
+    "source": "artifacts/images_to_convert/samples/AC0402_L.svg",
+    "source_svg_sha256": "62a5206bc0a54d0c63a29d02294f40834cc91b3225988af824f0cf8271b2c299",
+    "summaries": [
+      {
+        "completed": 16,
+        "failed": 0,
+        "passed": 16,
+        "required": 16,
+        "satisfactory": true
+      },
+      {
+        "completed": 16,
+        "failed": 0,
+        "passed": 16,
+        "required": 16,
+        "satisfactory": true
+      }
+    ]
+  },
+  "unchanged_runtime_sources": {
+    "src/iCCModules/imageCompositeConverterGeometryIr/runtime.py": "7d97c55152a9360848eb87e6a1db3022082b7fde9fbc9c6f1511fe645623fc6e",
+    "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "b12a09563da93c121c7bc738717704879afa98a68911d93102c21bdc91600b36",
+    "src/iCCModules/imageCompositeConverterPump.py": "e786fb0c003100a810ad2072f6f4ba8b10bdf2cd41b58be35e7b9074d8b28a83"
+  }
+}

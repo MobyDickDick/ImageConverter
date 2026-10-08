@@ -2,6 +2,8 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [Gefülltes Rechts-Dreieck im Kreis: eigenständige Beschreibung und 18 CLI-Gate-Abnahmen (2026-10-08)](next_arbeitspaket_2026-10-08_ac0402_1_s.md)
+
 - [Alarmglocke: Rasterregistrierung, Bézier-Verlauf und vier CLI-Gate-Abnahmen (2026-10-08)](next_arbeitspaket_2026-10-08_ge1420_s.md)
 - [Checkbox mit gefülltem Verlaufshaken: Rasterregistrierung und Gate-Abnahme (2026-10-08)](next_arbeitspaket_2026-10-08_dlg0031.md)
 - [Plan-B-Abnahmetest: neue Zufallsauswahl bei jedem Start, 16/16 erforderlich](plan_b_variation_acceptance.md)
