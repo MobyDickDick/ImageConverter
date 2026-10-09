@@ -18,11 +18,11 @@ weiter verbesserbare und wegen ihrer Komplexität zurückgestellte Bilder
 ausweisen. Vollständige Abdeckung aller Bilder ist kein Abschlusskriterium.
 Der offene zufällige Plan-B-Pool bleibt eine eigene, weiter sichtbare Aufgabe.
 
-Das aktuelle Paket `GE0032` trennt das Abwärtspfeil-Grundbild von den drei
-Kreisscheiben mit Rundbalken und sichert beide Rastertopologien durch
-allgemeine Registrierung und native Verlaufsdarstellung. Alle vier Fälle
-bestehen die regulären und strengeren Plan-B-Gates. Der nächste reguläre
-Kandidat ist nach dem erneuerten Review `GE9023_6M`.
+Das aktuelle Paket `GE9023` sichert alle 14 U-Bogen-/Verlaufsschaftvarianten
+mit eigenständiger Beschreibung, allgemeiner Rasterregistrierung und nativer
+Verlaufsmaske durch die regulären und strengeren Plan-B-JPG-Gates. Die zusätzliche
+synthetische Stressprüfung bleibt mit 12/17 Fällen als Folgeaufgabe offen.
+Der nächste reguläre Kandidat ist nach dem erneuerten Review `AC0413_1_M`.
 
 ## 2. Verständliches, kleineres Produkt
 

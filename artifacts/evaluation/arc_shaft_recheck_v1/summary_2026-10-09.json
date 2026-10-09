@@ -1,0 +1,3283 @@
+{
+  "baseline": {
+    "baseline_sha256": "d2e3ad32ea4ae7add5b47a5810f38016318cb64c83576baedea83cc0440b987b",
+    "cases": {
+      "anonymous_symbol_00": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5523585677146912,
+          "error_per_pixel": 0.0572386321767269,
+          "object_mask_iou": 0.49252013808975836,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_01": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6003568172454834,
+          "error_per_pixel": 0.04276611359413046,
+          "object_mask_iou": 0.679324894514768,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_02": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5694236755371094,
+          "error_per_pixel": 0.05541529499871844,
+          "object_mask_iou": 0.49714937286202965,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_03": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5887858271598816,
+          "error_per_pixel": 0.03303112584903242,
+          "object_mask_iou": 0.8461538461538461,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_04": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5773759484291077,
+          "error_per_pixel": 0.03696734228822248,
+          "object_mask_iou": 0.49191685912240185,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_05": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5851350426673889,
+          "error_per_pixel": 0.022217881944444445,
+          "object_mask_iou": 0.8461538461538461,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_06": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5347580313682556,
+          "error_per_pixel": 0.020658105255991287,
+          "object_mask_iou": 0.0,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_07": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5855816006660461,
+          "error_per_pixel": 0.010181127125584711,
+          "object_mask_iou": 0.5842696629213483,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_08": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.2994576096534729,
+          "error_per_pixel": 0.038909110978950404,
+          "object_mask_iou": 0.4942263279445728,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_09": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6259346008300781,
+          "error_per_pixel": 0.02789518554562348,
+          "object_mask_iou": 0.6738197424892703,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_10": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5393231511116028,
+          "error_per_pixel": 0.06718987288542869,
+          "object_mask_iou": 0.5,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_11": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5851350426673889,
+          "error_per_pixel": 0.04352742935409458,
+          "object_mask_iou": 0.8461538461538461,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_12": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.0,
+          "error_per_pixel": 0.049597255262399075,
+          "object_mask_iou": 0.0,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_13": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.0,
+          "error_per_pixel": 0.04135229939606561,
+          "object_mask_iou": 0.0,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI frozen before runtime changes; byte-identical ablation replay",
+      "commit": "dc10a763c9666a919eecb5b6cc29d518e139b28e",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_symbol_00": "c640ba2c31b68209554927f63e5d7ebdd253730de38f2d960b0f4bf0578c98d5",
+        "anonymous_symbol_01": "5f435f1a604d5e30cec60bf860accbdee34308f44a447fc4d0a14b9f4017a5af",
+        "anonymous_symbol_02": "0dc76ae41bc6f01dc8c42eaf606f133f2add1d56184043860ba5bd2f8298526c",
+        "anonymous_symbol_03": "8bb015a6d96665d5f7795b6077049dffa0f43871fc33c9ffb293ca443ed10ec8",
+        "anonymous_symbol_04": "af2b35e6b4bff73b80de6d5312aecd70035b7ab9efaae3fca55ca5db7fb01ca2",
+        "anonymous_symbol_05": "197f957c5f6eb2f87d65acd5dee90b1d1952fda5e90cc298a13d944c98424850",
+        "anonymous_symbol_06": "b4150c4504c49c2e1be0e0374d34b5814b134a4763660075aa0ec65a05ad84e5",
+        "anonymous_symbol_07": "43ab1035298c9c5f6a55642ba4aa99f002332b4b9b31cba94ed1bdc4f2f419fd",
+        "anonymous_symbol_08": "7e31bbb14d333ca9420e294d2bba8da88ff0c403699f299a190da611bdd8a8db",
+        "anonymous_symbol_09": "b27af5159ce419c7e3cd47848dee3f31d24fea10d2e33f3fc30a85e51a5fc36c",
+        "anonymous_symbol_10": "8aff7f2b15ddf033492d589cd3e0d64826abb2021224a2ce20d30b679636d4ea",
+        "anonymous_symbol_11": "e5f741af25c3a0f997455afac0c18000a20ade0e48c569160fd762a34ea367c1",
+        "anonymous_symbol_12": "12c0e7fcbf16287a2aedcd18014bff8078a2daa2e3d5ef4777e265cae22366b6",
+        "anonymous_symbol_13": "9c4be99faad7dda08cf40e71a518cd144b12937e7cfd94a9a57e8738e716cd1f"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 231.92083740234375,
+      "after_svg": "after\\anonymous_symbol_00.svg",
+      "after_svg_sha256": "37088f5579476b843f84558af84e686e132bd8b01e9ac282ff5d04a6d3223973",
+      "before_mean_delta2": 11165.826171875,
+      "before_svg": "before\\anonymous_symbol_00.svg",
+      "before_svg_sha256": "58f6b74ba74ce9ec30b11fb7e037e0ccb811ba8b12de496db31080d69673821d",
+      "case_id": "anonymous_symbol_00",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_1M.jpg",
+      "input_sha256": "c640ba2c31b68209554927f63e5d7ebdd253730de38f2d960b0f4bf0578c98d5",
+      "role": "holdout",
+      "source": "GE9023_1M.jpg",
+      "source_sha256": "c640ba2c31b68209554927f63e5d7ebdd253730de38f2d960b0f4bf0578c98d5"
+    },
+    {
+      "after_mean_delta2": 145.9633331298828,
+      "after_svg": "after\\anonymous_symbol_01.svg",
+      "after_svg_sha256": "36fabcb815d82bdab9429a407450914b69b3988fe2589224ccfaabc3645a4b5c",
+      "before_mean_delta2": 8342.599609375,
+      "before_svg": "before\\anonymous_symbol_01.svg",
+      "before_svg_sha256": "f62c261f68146266db170b840b5d15dc0a734111fc24a47338a00e278dd9a78d",
+      "case_id": "anonymous_symbol_01",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_1S.jpg",
+      "input_sha256": "5f435f1a604d5e30cec60bf860accbdee34308f44a447fc4d0a14b9f4017a5af",
+      "role": "holdout",
+      "source": "GE9023_1S.jpg",
+      "source_sha256": "5f435f1a604d5e30cec60bf860accbdee34308f44a447fc4d0a14b9f4017a5af"
+    },
+    {
+      "after_mean_delta2": 202.83749389648438,
+      "after_svg": "after\\anonymous_symbol_02.svg",
+      "after_svg_sha256": "e48ef468c96592f8844e705853b41e7d38b0d7fe18575b27f77b31624c40fff0",
+      "before_mean_delta2": 10810.138671875,
+      "before_svg": "before\\anonymous_symbol_02.svg",
+      "before_svg_sha256": "a424ec6a4f723bd0840e35c18b98850f5422d5398cdb6f3a3b09e1e210f70d31",
+      "case_id": "anonymous_symbol_02",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_2M.jpg",
+      "input_sha256": "0dc76ae41bc6f01dc8c42eaf606f133f2add1d56184043860ba5bd2f8298526c",
+      "role": "holdout",
+      "source": "GE9023_2M.jpg",
+      "source_sha256": "0dc76ae41bc6f01dc8c42eaf606f133f2add1d56184043860ba5bd2f8298526c"
+    },
+    {
+      "after_mean_delta2": 135.9066619873047,
+      "after_svg": "after\\anonymous_symbol_03.svg",
+      "after_svg_sha256": "9abaa2b5738d04d34604cb57ed64a48cec8e127a7a73c01c30eabd609c903196",
+      "before_mean_delta2": 6443.546875,
+      "before_svg": "before\\anonymous_symbol_03.svg",
+      "before_svg_sha256": "f3d9cd819db0526f4293c72735314828f48656e241955d5426c9b2cddc162938",
+      "case_id": "anonymous_symbol_03",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_2S.jpg",
+      "input_sha256": "8bb015a6d96665d5f7795b6077049dffa0f43871fc33c9ffb293ca443ed10ec8",
+      "role": "holdout",
+      "source": "GE9023_2S.jpg",
+      "source_sha256": "8bb015a6d96665d5f7795b6077049dffa0f43871fc33c9ffb293ca443ed10ec8"
+    },
+    {
+      "after_mean_delta2": 91.80083465576172,
+      "after_svg": "after\\anonymous_symbol_04.svg",
+      "after_svg_sha256": "61ba6bd7e1be2b7159d01e0d2a36367ed1be8ca5d4fa3f5cf3139c1bdee2ceca",
+      "before_mean_delta2": 7211.404296875,
+      "before_svg": "before\\anonymous_symbol_04.svg",
+      "before_svg_sha256": "2329c861eff686f2d3dbe5d63b85e3d27802c9900c7348195f505fa5487f93e6",
+      "case_id": "anonymous_symbol_04",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_3M.jpg",
+      "input_sha256": "af2b35e6b4bff73b80de6d5312aecd70035b7ab9efaae3fca55ca5db7fb01ca2",
+      "role": "holdout",
+      "source": "GE9023_3M.jpg",
+      "source_sha256": "af2b35e6b4bff73b80de6d5312aecd70035b7ab9efaae3fca55ca5db7fb01ca2"
+    },
+    {
+      "after_mean_delta2": 88.57666778564453,
+      "after_svg": "after\\anonymous_symbol_05.svg",
+      "after_svg_sha256": "48df255f59a282f98d9f93358886021b8a14d4ea63d71fab5c0c1485615f9686",
+      "before_mean_delta2": 4334.1533203125,
+      "before_svg": "before\\anonymous_symbol_05.svg",
+      "before_svg_sha256": "428cf1e2ace37e9bfb366d41c5795eb62a9d827e070bcedffe062f6021fa9afe",
+      "case_id": "anonymous_symbol_05",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_3S.jpg",
+      "input_sha256": "197f957c5f6eb2f87d65acd5dee90b1d1952fda5e90cc298a13d944c98424850",
+      "role": "holdout",
+      "source": "GE9023_3S.jpg",
+      "source_sha256": "197f957c5f6eb2f87d65acd5dee90b1d1952fda5e90cc298a13d944c98424850"
+    },
+    {
+      "after_mean_delta2": 46.059165954589844,
+      "after_svg": "after\\anonymous_symbol_06.svg",
+      "after_svg_sha256": "6a7a31e29a9d34a12ba9c5fcc00636e956f7aa15851de1e479db29512c595f6d",
+      "before_mean_delta2": 4029.8798828125,
+      "before_svg": "before\\anonymous_symbol_06.svg",
+      "before_svg_sha256": "a3926fb4113dabbadc6c78af32dd87f0355fe13e536f421200ecbc702e772339",
+      "case_id": "anonymous_symbol_06",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_4M.jpg",
+      "input_sha256": "b4150c4504c49c2e1be0e0374d34b5814b134a4763660075aa0ec65a05ad84e5",
+      "role": "holdout",
+      "source": "GE9023_4M.jpg",
+      "source_sha256": "b4150c4504c49c2e1be0e0374d34b5814b134a4763660075aa0ec65a05ad84e5"
+    },
+    {
+      "after_mean_delta2": 41.83333206176758,
+      "after_svg": "after\\anonymous_symbol_07.svg",
+      "after_svg_sha256": "f9d9e93a2d4cbc52f0f129c2dfd29635d5765f622a1d430bfb67d52d39c7e79b",
+      "before_mean_delta2": 1986.0833740234375,
+      "before_svg": "before\\anonymous_symbol_07.svg",
+      "before_svg_sha256": "d4b28664002c6e82bfaa5c15dd66c8ccdd822c3255fcc1ce0b327b1d728ce5f6",
+      "case_id": "anonymous_symbol_07",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_4S.jpg",
+      "input_sha256": "43ab1035298c9c5f6a55642ba4aa99f002332b4b9b31cba94ed1bdc4f2f419fd",
+      "role": "holdout",
+      "source": "GE9023_4S.jpg",
+      "source_sha256": "43ab1035298c9c5f6a55642ba4aa99f002332b4b9b31cba94ed1bdc4f2f419fd"
+    },
+    {
+      "after_mean_delta2": 135.13417053222656,
+      "after_svg": "after\\anonymous_symbol_08.svg",
+      "after_svg_sha256": "dedfde1335214db6d493774a46ed25040a767ea95aad6c192c4f49a73601d2da",
+      "before_mean_delta2": 7590.19482421875,
+      "before_svg": "before\\anonymous_symbol_08.svg",
+      "before_svg_sha256": "179f037d83699341c96b0425fe592ad4a3acf372472e4ee5514b2dee2676079e",
+      "case_id": "anonymous_symbol_08",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_5M.jpg",
+      "input_sha256": "7e31bbb14d333ca9420e294d2bba8da88ff0c403699f299a190da611bdd8a8db",
+      "role": "holdout",
+      "source": "GE9023_5M.jpg",
+      "source_sha256": "7e31bbb14d333ca9420e294d2bba8da88ff0c403699f299a190da611bdd8a8db"
+    },
+    {
+      "after_mean_delta2": 57.33000183105469,
+      "after_svg": "after\\anonymous_symbol_09.svg",
+      "after_svg_sha256": "9e5ec84cd91219544fc37fc4aee8975651c1a4d6f8c50ba224b62976f68b57d3",
+      "before_mean_delta2": 5441.6533203125,
+      "before_svg": "before\\anonymous_symbol_09.svg",
+      "before_svg_sha256": "c0ae3fa736342940af588348d59ca4d63d9bc26e6f3d05b6c1112bd47bdce3e9",
+      "case_id": "anonymous_symbol_09",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_5S.jpg",
+      "input_sha256": "b27af5159ce419c7e3cd47848dee3f31d24fea10d2e33f3fc30a85e51a5fc36c",
+      "role": "holdout",
+      "source": "GE9023_5S.jpg",
+      "source_sha256": "b27af5159ce419c7e3cd47848dee3f31d24fea10d2e33f3fc30a85e51a5fc36c"
+    },
+    {
+      "after_mean_delta2": 253.67750549316406,
+      "after_svg": "after\\anonymous_symbol_10.svg",
+      "after_svg_sha256": "59c1ef60db83ed8a29f89ae097bb42bf40b9e28d151638bf56f7299b430ebb88",
+      "before_mean_delta2": 13107.064453125,
+      "before_svg": "before\\anonymous_symbol_10.svg",
+      "before_svg_sha256": "06a8276b485d06ac57e1ec30c01fa944a885bc6483200ca3f2d9afa72c9e2633",
+      "case_id": "anonymous_symbol_10",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_6M.jpg",
+      "input_sha256": "8aff7f2b15ddf033492d589cd3e0d64826abb2021224a2ce20d30b679636d4ea",
+      "role": "target",
+      "source": "GE9023_6M.jpg",
+      "source_sha256": "8aff7f2b15ddf033492d589cd3e0d64826abb2021224a2ce20d30b679636d4ea"
+    },
+    {
+      "after_mean_delta2": 156.24667358398438,
+      "after_svg": "after\\anonymous_symbol_11.svg",
+      "after_svg_sha256": "9b7c4ea185e724b405c51bf7031ae41a8db994977108d3c5518fac560c9414ac",
+      "before_mean_delta2": 8491.11328125,
+      "before_svg": "before\\anonymous_symbol_11.svg",
+      "before_svg_sha256": "f3d9cd819db0526f4293c72735314828f48656e241955d5426c9b2cddc162938",
+      "case_id": "anonymous_symbol_11",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_6S.jpg",
+      "input_sha256": "e5f741af25c3a0f997455afac0c18000a20ade0e48c569160fd762a34ea367c1",
+      "role": "holdout",
+      "source": "GE9023_6S.jpg",
+      "source_sha256": "e5f741af25c3a0f997455afac0c18000a20ade0e48c569160fd762a34ea367c1"
+    },
+    {
+      "after_mean_delta2": 137.02333068847656,
+      "after_svg": "after\\anonymous_symbol_12.svg",
+      "after_svg_sha256": "7f7d6fcfd0ddf04c66dd697e1669c7280ce39eb0dd7da141cdf1cecf2b24b65f",
+      "before_mean_delta2": 9675.1845703125,
+      "before_svg": "before\\anonymous_symbol_12.svg",
+      "before_svg_sha256": "98e970250f627e07bec439672869bb3de8a8c21f3dc54c0745f43b40968f7fda",
+      "case_id": "anonymous_symbol_12",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_7M.jpg",
+      "input_sha256": "12c0e7fcbf16287a2aedcd18014bff8078a2daa2e3d5ef4777e265cae22366b6",
+      "role": "holdout",
+      "source": "GE9023_7M.jpg",
+      "source_sha256": "12c0e7fcbf16287a2aedcd18014bff8078a2daa2e3d5ef4777e265cae22366b6"
+    },
+    {
+      "after_mean_delta2": 74.24333190917969,
+      "after_svg": "after\\anonymous_symbol_13.svg",
+      "after_svg_sha256": "da2058b7f9b553d70c429f48bb93ebcdabdccb1607056ba24952c3882f0a07f3",
+      "before_mean_delta2": 8066.7998046875,
+      "before_svg": "before\\anonymous_symbol_13.svg",
+      "before_svg_sha256": "dd862ae2ba85d53adf9e87862e9c757d9a90c19f66c6f6b57905dd76e0abee5c",
+      "case_id": "anonymous_symbol_13",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9023_7S.jpg",
+      "input_sha256": "9c4be99faad7dda08cf40e71a518cd144b12937e7cfd94a9a57e8738e716cd1f",
+      "role": "holdout",
+      "source": "GE9023_7S.jpg",
+      "source_sha256": "9c4be99faad7dda08cf40e71a518cd144b12937e7cfd94a9a57e8738e716cd1f"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "reproduction": {
+    "frozen_baseline_bytes_identical": true,
+    "gate_case_records_identical": true,
+    "provenance_note": "Baseline-mode wording was clarified between runs; the provenance seal changes, cases and measurements do not.",
+    "reference_access": {
+      "after": {
+        "blocked_svg_reads": []
+      },
+      "before": {
+        "blocked_svg_reads": []
+      }
+    },
+    "svg_hashes_identical": true
+  },
+  "review": {
+    "boundary_conversion_command": "for variant in AC0301_1M_sia AC0232_M GE9024_6S; do ICC_FORCE_RECONVERT=1 python -m src.imageCompositeConverter artifacts\\images_to_convert --descriptions-path artifacts\\images_to_convert\\Finale_Wurzelformen_V3.xml --output-dir artifacts\\converted_images --iterations 64 --start $variant --end $variant --deterministic-order || exit $?; done",
+    "boundary_conversion_command_path": ".tmp/ge9023/review/plan_b_boundary_conversion_command.sh",
+    "boundary_triple": [
+      {
+        "height": 60,
+        "image_area": 3600,
+        "image_path": "artifacts/images_to_convert/AC0301_1M_sia.jpg",
+        "mean_delta2": 8920.044921875,
+        "normalized_mse": 0.04572623309944893,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0301_1M_sia.svg",
+        "variant": "AC0301_1M_sia",
+        "width": 60
+      },
+      {
+        "height": 30,
+        "image_area": 1350,
+        "image_path": "artifacts/images_to_convert/AC0232_M.jpg",
+        "mean_delta2": 8975.4150390625,
+        "normalized_mse": 0.046010073249070874,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0232_M.svg",
+        "variant": "AC0232_M",
+        "width": 45
+      },
+      {
+        "height": 10,
+        "image_area": 300,
+        "image_path": "artifacts/images_to_convert/GE9024_6S.jpg",
+        "mean_delta2": 8981.6767578125,
+        "normalized_mse": 0.0460421722814943,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/GE9024_6S.svg",
+        "variant": "GE9024_6S",
+        "width": 30
+      }
+    ],
+    "boundary_triple_csv": ".tmp/ge9023/review/plan_b_boundary_triple_v1.csv",
+    "candidate_triage_csv": ".tmp/ge9023/review/plan_b_candidate_triage_v1.csv",
+    "max_candidate_image_area": 6400,
+    "max_plan_b_candidates": 5,
+    "max_top_error_cases": 5,
+    "metrics": {
+      "boundary_triple_records": 3,
+      "diff_renderable_pairs": 945,
+      "diff_variants": 952,
+      "ranked_records": 1000,
+      "selected_candidates": 5,
+      "successful_above_threshold": 0,
+      "successful_missing_or_failed": 0,
+      "successful_renderable_pairs": 48,
+      "successful_variants": 48,
+      "top_error_cases": 5
+    },
+    "ranking_csv": ".tmp/ge9023/review/conversion_quality_ranking_v1.csv",
+    "records_csv": ".tmp/ge9023/review/conversion_quality_records_v2.csv",
+    "reproduction_arguments": [
+      "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+      "-m",
+      "tools.review_conversion_quality",
+      "--output-dir",
+      ".tmp/ge9023/review",
+      "--exclude",
+      "AC0554_2_L",
+      "--exclude",
+      "AC0713_1_S",
+      "--exclude",
+      "DLG0010_1",
+      "--exclude",
+      "AC0724_1_S",
+      "--exclude",
+      "AC0252_1",
+      "--exclude",
+      "AC0252",
+      "--exclude",
+      "AC0252_2",
+      "--exclude",
+      "AC0731_1_L",
+      "--exclude",
+      "AC0731_1_M",
+      "--exclude",
+      "AC0731_1_S",
+      "--exclude",
+      "AC0731_L",
+      "--exclude",
+      "AC0731_M",
+      "--exclude",
+      "AC0731_S",
+      "--exclude",
+      "GE1003_M",
+      "--exclude",
+      "GE1003_L",
+      "--exclude",
+      "GE1003_S",
+      "--exclude",
+      "AC0404_1_L",
+      "--exclude",
+      "AC0404_1_M",
+      "--exclude",
+      "AC0404_1_S",
+      "--exclude",
+      "AC0404_1L_sia",
+      "--exclude",
+      "AC0404_1M_sia",
+      "--exclude",
+      "AC0404_1S_sia",
+      "--exclude",
+      "AC0404_2_L",
+      "--exclude",
+      "AC0404_2_M",
+      "--exclude",
+      "AC0404_2_S",
+      "--exclude",
+      "AC0404_2L_sia",
+      "--exclude",
+      "AC0404_2M_sia",
+      "--exclude",
+      "AC0404_2S_sia",
+      "--exclude",
+      "AC0404_L",
+      "--exclude",
+      "AC0404_L_sia",
+      "--exclude",
+      "AC0404_M",
+      "--exclude",
+      "AC0404_M_sia",
+      "--exclude",
+      "AC0404_S",
+      "--exclude",
+      "AC0404_S_sia",
+      "--exclude",
+      "GE9011_1M",
+      "--exclude",
+      "GE9011_1S",
+      "--exclude",
+      "GE9011_2M",
+      "--exclude",
+      "GE9011_2S",
+      "--exclude",
+      "GE9011_3M",
+      "--exclude",
+      "GE9011_3S",
+      "--exclude",
+      "GE9011_4M",
+      "--exclude",
+      "GE9011_4S",
+      "--exclude",
+      "GE9011_5M",
+      "--exclude",
+      "GE9011_5S",
+      "--exclude",
+      "GE9011_6M",
+      "--exclude",
+      "GE9011_6S",
+      "--exclude",
+      "GE9011_7M",
+      "--exclude",
+      "GE9011_7S",
+      "--exclude",
+      "GE0280",
+      "--exclude",
+      "GE0281",
+      "--exclude",
+      "GE0282",
+      "--exclude",
+      "GE0283",
+      "--exclude",
+      "GE0284",
+      "--exclude",
+      "GE0285",
+      "--exclude",
+      "GE9013_1M",
+      "--exclude",
+      "GE9013_1S",
+      "--exclude",
+      "GE9013_2M",
+      "--exclude",
+      "GE9013_2S",
+      "--exclude",
+      "GE9013_3M",
+      "--exclude",
+      "GE9013_3S",
+      "--exclude",
+      "GE9013_4M",
+      "--exclude",
+      "GE9013_4S",
+      "--exclude",
+      "GE9013_5M",
+      "--exclude",
+      "GE9013_5S",
+      "--exclude",
+      "GE9013_6M",
+      "--exclude",
+      "GE9013_6S",
+      "--exclude",
+      "GE9013_7M",
+      "--exclude",
+      "GE9013_7S",
+      "--exclude",
+      "AC0554_1_L",
+      "--exclude",
+      "AC0554_1_M",
+      "--exclude",
+      "AC0554_1_S",
+      "--exclude",
+      "AC0554_2_M",
+      "--exclude",
+      "AC0554_2_S",
+      "--exclude",
+      "AC0554_L",
+      "--exclude",
+      "AC0554_M",
+      "--exclude",
+      "AC0554_S",
+      "--exclude",
+      "DLG0031",
+      "--exclude",
+      "DLG0021",
+      "--exclude",
+      "AC0130_S",
+      "--exclude",
+      "AC0130_M",
+      "--exclude",
+      "AC0130_L",
+      "--exclude",
+      "GE1420_S",
+      "--exclude",
+      "GE1420_M",
+      "--exclude",
+      "GE1420_L",
+      "--exclude",
+      "GE1420_M_neutral",
+      "--exclude",
+      "AC0704_1_L",
+      "--exclude",
+      "AC0704_1_M",
+      "--exclude",
+      "AC0704_1_S",
+      "--exclude",
+      "AC0704_L",
+      "--exclude",
+      "AC0704_M",
+      "--exclude",
+      "AC0704_S",
+      "--exclude",
+      "AC0402_1_S",
+      "--exclude",
+      "AC0402_1L_sia",
+      "--exclude",
+      "AC0402_1M_sia",
+      "--exclude",
+      "AC0402_1S_sia",
+      "--exclude",
+      "AC0402_1_L",
+      "--exclude",
+      "AC0402_1_M",
+      "--exclude",
+      "AC0402_2L_sia",
+      "--exclude",
+      "AC0402_2M_sia",
+      "--exclude",
+      "AC0402_2S_sia",
+      "--exclude",
+      "AC0402_2_L",
+      "--exclude",
+      "AC0402_2_M",
+      "--exclude",
+      "AC0402_2_S",
+      "--exclude",
+      "AC0402_L",
+      "--exclude",
+      "AC0402_L_sia",
+      "--exclude",
+      "AC0402_M",
+      "--exclude",
+      "AC0402_M_sia",
+      "--exclude",
+      "AC0402_S",
+      "--exclude",
+      "AC0402_S_sia",
+      "--exclude",
+      "AC0403_1_L",
+      "--exclude",
+      "AC0403_1L_sia",
+      "--exclude",
+      "AC0403_1M_sia",
+      "--exclude",
+      "AC0403_1S_sia",
+      "--exclude",
+      "AC0403_1_M",
+      "--exclude",
+      "AC0403_1_S",
+      "--exclude",
+      "AC0403_2L_sia",
+      "--exclude",
+      "AC0403_2M_sia",
+      "--exclude",
+      "AC0403_2S_sia",
+      "--exclude",
+      "AC0403_2_L",
+      "--exclude",
+      "AC0403_2_M",
+      "--exclude",
+      "AC0403_2_S",
+      "--exclude",
+      "AC0403_L",
+      "--exclude",
+      "AC0403_L_sia",
+      "--exclude",
+      "AC0403_M",
+      "--exclude",
+      "AC0403_M_sia",
+      "--exclude",
+      "AC0403_S",
+      "--exclude",
+      "AC0403_S_sia",
+      "--exclude",
+      "AC0714_1_L",
+      "--exclude",
+      "AC0714_1_M",
+      "--exclude",
+      "AC0714_1_S",
+      "--exclude",
+      "AC0714_L",
+      "--exclude",
+      "AC0714_M",
+      "--exclude",
+      "AC0714_S",
+      "--exclude",
+      "GE0032",
+      "--exclude",
+      "GE0032_L",
+      "--exclude",
+      "GE0032_M",
+      "--exclude",
+      "GE0032_S",
+      "--exclude",
+      "GE9023_1M",
+      "--exclude",
+      "GE9023_1S",
+      "--exclude",
+      "GE9023_2M",
+      "--exclude",
+      "GE9023_2S",
+      "--exclude",
+      "GE9023_3M",
+      "--exclude",
+      "GE9023_3S",
+      "--exclude",
+      "GE9023_4M",
+      "--exclude",
+      "GE9023_4S",
+      "--exclude",
+      "GE9023_5M",
+      "--exclude",
+      "GE9023_5S",
+      "--exclude",
+      "GE9023_6M",
+      "--exclude",
+      "GE9023_6S",
+      "--exclude",
+      "GE9023_7M",
+      "--exclude",
+      "GE9023_7S"
+    ],
+    "schema_version": "conversion_quality_review_v2",
+    "selected_candidates": [
+      {
+        "height": 30,
+        "image_area": 900,
+        "image_path": "artifacts/images_to_convert/AC0413_1_M.jpg",
+        "mean_delta2": 13465.6943359375,
+        "normalized_mse": 0.06902829340478021,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0413_1_M.svg",
+        "variant": "AC0413_1_M",
+        "width": 30
+      },
+      {
+        "height": 45,
+        "image_area": 1125,
+        "image_path": "artifacts/images_to_convert/AC0713_1_L.jpg",
+        "mean_delta2": 13458.083984375,
+        "normalized_mse": 0.06898928096565424,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0713_1_L.svg",
+        "variant": "AC0713_1_L",
+        "width": 25
+      },
+      {
+        "height": 25,
+        "image_area": 375,
+        "image_path": "artifacts/images_to_convert/AC0721_1_S.jpg",
+        "mean_delta2": 13368.759765625,
+        "normalized_mse": 0.06853138416314238,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0721_1_S.svg",
+        "variant": "AC0721_1_S",
+        "width": 15
+      },
+      {
+        "height": 35,
+        "image_area": 700,
+        "image_path": "artifacts/images_to_convert/AC0711_1_M.jpg",
+        "mean_delta2": 13113.830078125,
+        "normalized_mse": 0.06722455505895168,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0711_1_M.svg",
+        "variant": "AC0711_1_M",
+        "width": 20
+      },
+      {
+        "height": 20,
+        "image_area": 1200,
+        "image_path": "artifacts/images_to_convert/GE9014_1M.jpg",
+        "mean_delta2": 13099.9892578125,
+        "normalized_mse": 0.06715360378219916,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/GE9014_1M.svg",
+        "variant": "GE9014_1M",
+        "width": 60
+      }
+    ],
+    "threshold_normalized_mse": 0.045945679012345676,
+    "top_error_cases_csv": ".tmp/ge9023/review/top_reproducible_error_cases_v1.csv",
+    "top_reproducible_error_cases": [
+      {
+        "height": 40,
+        "image_area": 3200,
+        "image_path": "artifacts/images_to_convert/AC0554_1_L.jpg",
+        "mean_delta2": 46170.3984375,
+        "normalized_mse": 0.23668024317570166,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0554_1_L.svg",
+        "variant": "AC0554_1_L",
+        "width": 80
+      },
+      {
+        "height": 40,
+        "image_area": 3200,
+        "image_path": "artifacts/images_to_convert/AC0554_2_L.jpg",
+        "mean_delta2": 35769.07421875,
+        "normalized_mse": 0.18336062652185056,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0554_2_L.svg",
+        "variant": "AC0554_2_L",
+        "width": 80
+      },
+      {
+        "height": 25,
+        "image_area": 1125,
+        "image_path": "artifacts/images_to_convert/AC0714_L.jpg",
+        "mean_delta2": 32695.380859375,
+        "normalized_mse": 0.16760415665449185,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0714_L.svg",
+        "variant": "AC0714_L",
+        "width": 45
+      },
+      {
+        "height": 25,
+        "image_area": 375,
+        "image_path": "artifacts/images_to_convert/AC0713_1_S.jpg",
+        "mean_delta2": 24899.021484375,
+        "normalized_mse": 0.12763819804882737,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0713_1_S.svg",
+        "variant": "AC0713_1_S",
+        "width": 15
+      },
+      {
+        "height": 15,
+        "image_area": 375,
+        "image_path": "artifacts/images_to_convert/AC0724_1_S.jpg",
+        "mean_delta2": 22276.9609375,
+        "normalized_mse": 0.11419690343457645,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0724_1_S.svg",
+        "variant": "AC0724_1_S",
+        "width": 25
+      }
+    ]
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "d2e3ad32ea4ae7add5b47a5810f38016318cb64c83576baedea83cc0440b987b",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8921769857406616,
+          "error_per_pixel": 0.0011888803660250866,
+          "object_mask_iou": 0.8947368421052632,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5523585677146912,
+          "error_per_pixel": 0.0572386321767269,
+          "object_mask_iou": 0.49252013808975836,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0011888803660250866,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9464,
+            "edge_alignment": 0.8922,
+            "pixel_similarity": 0.9988,
+            "semantic_score": 1.0,
+            "structure_score": 0.8947
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9758749604225159,
+          "error_per_pixel": 0.0007482421280527121,
+          "object_mask_iou": 0.9942528735632183,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6003568172454834,
+          "error_per_pixel": 0.04276611359413046,
+          "object_mask_iou": 0.679324894514768,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_01",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007482421280527121,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9923,
+            "edge_alignment": 0.9759,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9943
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9721070528030396,
+          "error_per_pixel": 0.0010397923562552064,
+          "object_mask_iou": 0.8933092224231465,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5694236755371094,
+          "error_per_pixel": 0.05541529499871844,
+          "object_mask_iou": 0.49714937286202965,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_02",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0010397923562552064,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9661,
+            "edge_alignment": 0.9721,
+            "pixel_similarity": 0.999,
+            "semantic_score": 1.0,
+            "structure_score": 0.8933
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9785902500152588,
+          "error_per_pixel": 0.0006966892835437893,
+          "object_mask_iou": 1.0,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5887858271598816,
+          "error_per_pixel": 0.03303112584903242,
+          "object_mask_iou": 0.8461538461538461,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_03",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0006966892835437893,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9945,
+            "edge_alignment": 0.9786,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 1.0
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8373295664787292,
+          "error_per_pixel": 0.0004705925139344443,
+          "object_mask_iou": 0.986,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5773759484291077,
+          "error_per_pixel": 0.03696734228822248,
+          "object_mask_iou": 0.49191685912240185,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_04",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0004705925139344443,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9557,
+            "edge_alignment": 0.8373,
+            "pixel_similarity": 0.9995,
+            "semantic_score": 1.0,
+            "structure_score": 0.986
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9821381568908691,
+          "error_per_pixel": 0.000454064681715466,
+          "object_mask_iou": 0.9942528735632183,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5851350426673889,
+          "error_per_pixel": 0.022217881944444445,
+          "object_mask_iou": 0.8461538461538461,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_05",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.000454064681715466,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.994,
+            "edge_alignment": 0.9821,
+            "pixel_similarity": 0.9995,
+            "semantic_score": 1.0,
+            "structure_score": 0.9943
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8684298396110535,
+          "error_per_pixel": 0.00023611003949552655,
+          "object_mask_iou": 0.982051282051282,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5347580313682556,
+          "error_per_pixel": 0.020658105255991287,
+          "object_mask_iou": 0.0,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_06",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.00023611003949552655,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9626,
+            "edge_alignment": 0.8684,
+            "pixel_similarity": 0.9998,
+            "semantic_score": 1.0,
+            "structure_score": 0.9821
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9793213605880737,
+          "error_per_pixel": 0.00021444742822897644,
+          "object_mask_iou": 0.9836065573770492,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5855816006660461,
+          "error_per_pixel": 0.010181127125584711,
+          "object_mask_iou": 0.5842696629213483,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_07",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.00021444742822897644,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9907,
+            "edge_alignment": 0.9793,
+            "pixel_similarity": 0.9998,
+            "semantic_score": 1.0,
+            "structure_score": 0.9836
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.864086389541626,
+          "error_per_pixel": 0.0006927293119683535,
+          "object_mask_iou": 0.8909090909090909,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.2994576096534729,
+          "error_per_pixel": 0.038909110978950404,
+          "object_mask_iou": 0.4942263279445728,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_08",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0006927293119683535,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9386,
+            "edge_alignment": 0.8641,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.8909
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9761649370193481,
+          "error_per_pixel": 0.0002938869759377403,
+          "object_mask_iou": 0.9885057471264368,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6259346008300781,
+          "error_per_pixel": 0.02789518554562348,
+          "object_mask_iou": 0.6738197424892703,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_09",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0002938869759377403,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9911,
+            "edge_alignment": 0.9762,
+            "pixel_similarity": 0.9997,
+            "semantic_score": 1.0,
+            "structure_score": 0.9885
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8632449507713318,
+          "error_per_pixel": 0.0013004101268392365,
+          "object_mask_iou": 0.895117540687161,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5393231511116028,
+          "error_per_pixel": 0.06718987288542869,
+          "object_mask_iou": 0.5,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_10",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0013004101268392365,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9393,
+            "edge_alignment": 0.8632,
+            "pixel_similarity": 0.9987,
+            "semantic_score": 1.0,
+            "structure_score": 0.8951
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9790077209472656,
+          "error_per_pixel": 0.0008009569323797738,
+          "object_mask_iou": 1.0,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5851350426673889,
+          "error_per_pixel": 0.04352742935409458,
+          "object_mask_iou": 0.8461538461538461,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_11",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0008009569323797738,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9946,
+            "edge_alignment": 0.979,
+            "pixel_similarity": 0.9992,
+            "semantic_score": 1.0,
+            "structure_score": 1.0
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9653916954994202,
+          "error_per_pixel": 0.0007024135880480664,
+          "object_mask_iou": 0.9801980198019802,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.0,
+          "error_per_pixel": 0.049597255262399075,
+          "object_mask_iou": 0.0,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_12",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007024135880480664,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9862,
+            "edge_alignment": 0.9654,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9802
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9721922278404236,
+          "error_per_pixel": 0.00038058865517969854,
+          "object_mask_iou": 0.9942528735632183,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.0,
+          "error_per_pixel": 0.04135229939606561,
+          "object_mask_iou": 0.0,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_13",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.00038058865517969854,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9915,
+            "edge_alignment": 0.9722,
+            "pixel_similarity": 0.9996,
+            "semantic_score": 1.0,
+            "structure_score": 0.9943
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI frozen before runtime changes; byte-identical ablation replay",
+      "commit": "dc10a763c9666a919eecb5b6cc29d518e139b28e",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_symbol_00": "c640ba2c31b68209554927f63e5d7ebdd253730de38f2d960b0f4bf0578c98d5",
+        "anonymous_symbol_01": "5f435f1a604d5e30cec60bf860accbdee34308f44a447fc4d0a14b9f4017a5af",
+        "anonymous_symbol_02": "0dc76ae41bc6f01dc8c42eaf606f133f2add1d56184043860ba5bd2f8298526c",
+        "anonymous_symbol_03": "8bb015a6d96665d5f7795b6077049dffa0f43871fc33c9ffb293ca443ed10ec8",
+        "anonymous_symbol_04": "af2b35e6b4bff73b80de6d5312aecd70035b7ab9efaae3fca55ca5db7fb01ca2",
+        "anonymous_symbol_05": "197f957c5f6eb2f87d65acd5dee90b1d1952fda5e90cc298a13d944c98424850",
+        "anonymous_symbol_06": "b4150c4504c49c2e1be0e0374d34b5814b134a4763660075aa0ec65a05ad84e5",
+        "anonymous_symbol_07": "43ab1035298c9c5f6a55642ba4aa99f002332b4b9b31cba94ed1bdc4f2f419fd",
+        "anonymous_symbol_08": "7e31bbb14d333ca9420e294d2bba8da88ff0c403699f299a190da611bdd8a8db",
+        "anonymous_symbol_09": "b27af5159ce419c7e3cd47848dee3f31d24fea10d2e33f3fc30a85e51a5fc36c",
+        "anonymous_symbol_10": "8aff7f2b15ddf033492d589cd3e0d64826abb2021224a2ce20d30b679636d4ea",
+        "anonymous_symbol_11": "e5f741af25c3a0f997455afac0c18000a20ade0e48c569160fd762a34ea367c1",
+        "anonymous_symbol_12": "12c0e7fcbf16287a2aedcd18014bff8078a2daa2e3d5ef4777e265cae22366b6",
+        "anonymous_symbol_13": "9c4be99faad7dda08cf40e71a518cd144b12937e7cfd94a9a57e8738e716cd1f"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 14,
+      "improved": 14,
+      "satisfactory": 14,
+      "technically_completed": 14
+    }
+  },
+  "schema_version": "arc_shaft_recheck_v1",
+  "strict_plan_b_jpg": {
+    "anonymous_symbol_00": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8921769857406616,
+        "foreground_iou": 0.913477537437604,
+        "foreground_mse": 0.002296100603416562,
+        "normalized_mse": 0.0011888804147019982
+      },
+      "satisfactory": true
+    },
+    "anonymous_symbol_01": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9758749604225159,
+        "foreground_iou": 0.9942857142857143,
+        "foreground_mse": 0.0012027901830151677,
+        "normalized_mse": 0.0007482421351596713
+      },
+      "satisfactory": true
+    },
+    "anonymous_symbol_02": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9721070528030396,
+        "foreground_iou": 0.9883527454242929,
+        "foreground_mse": 0.0020104048307985067,
+        "normalized_mse": 0.001039792550727725
+      },
+      "satisfactory": true
+    },
+    "anonymous_symbol_03": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9785902500152588,
+        "foreground_iou": 0.9886363636363636,
+        "foreground_mse": 0.0011297810124233365,
+        "normalized_mse": 0.0006966893561184406
+      },
+      "satisfactory": true
+    },
+    "anonymous_symbol_04": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8373295664787292,
+        "foreground_iou": 0.9820143884892086,
+        "foreground_mse": 0.0009437248227186501,
+        "normalized_mse": 0.0004705924657173455
+      },
+      "satisfactory": true
+    },
+    "anonymous_symbol_05": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9821381568908691,
+        "foreground_iou": 0.9942857142857143,
+        "foreground_mse": 0.0007383240736089647,
+        "normalized_mse": 0.00045406472054310143
+      },
+      "satisfactory": true
+    },
+    "anonymous_symbol_06": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8684298396110535,
+        "foreground_iou": 0.8994515539305301,
+        "foreground_mse": 0.0004867766401730478,
+        "normalized_mse": 0.00023611004871781915
+      },
+      "satisfactory": true
+    },
+    "anonymous_symbol_07": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9793213605880737,
+        "foreground_iou": 0.9942528735632183,
+        "foreground_mse": 0.00034543153014965355,
+        "normalized_mse": 0.0002144474274246022
+      },
+      "satisfactory": true
+    },
+    "anonymous_symbol_08": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.864086389541626,
+        "foreground_iou": 0.9061371841155235,
+        "foreground_mse": 0.0014176997356116772,
+        "normalized_mse": 0.0006927293725311756
+      },
+      "satisfactory": true
+    },
+    "anonymous_symbol_09": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9761649370193481,
+        "foreground_iou": 0.9886363636363636,
+        "foreground_mse": 0.00043672017636708915,
+        "normalized_mse": 0.00029388698749244213
+      },
+      "satisfactory": true
+    },
+    "anonymous_symbol_10": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8632449507713318,
+        "foreground_iou": 0.9802867383512545,
+        "foreground_mse": 0.0027092238888144493,
+        "normalized_mse": 0.001300410251133144
+      },
+      "satisfactory": true
+    },
+    "anonymous_symbol_11": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9790077209472656,
+        "foreground_iou": 0.9942857142857143,
+        "foreground_mse": 0.001317559159360826,
+        "normalized_mse": 0.0008009569137357175
+      },
+      "satisfactory": true
+    },
+    "anonymous_symbol_12": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9653916954994202,
+        "foreground_iou": 0.9802158273381295,
+        "foreground_mse": 0.0014454872580245137,
+        "normalized_mse": 0.0007024135557003319
+      },
+      "satisfactory": true
+    },
+    "anonymous_symbol_13": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9721922278404236,
+        "foreground_iou": 0.9886363636363636,
+        "foreground_mse": 0.0005911770858801901,
+        "normalized_mse": 0.0003805886663030833
+      },
+      "satisfactory": true
+    }
+  },
+  "synthetic_plan_b_stress": {
+    "artifact_retention": "debug",
+    "cases": [
+      {
+        "blocked_svg_reads": [],
+        "case_id": "original",
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.7311504483222961,
+          "foreground_iou": 0.9989417989417989,
+          "foreground_mse": 0.0005970380734652281,
+          "normalized_mse": 0.00010888069664360955
+        },
+        "output_sha256": "b47b86f360fe7950cb3113da7b1e0b80be39b3dbe535c01c95a13bcd5fabb5a3",
+        "satisfactory": true,
+        "variation": {
+          "relative_x": 0.0,
+          "relative_y": 0.0,
+          "scale": 1.0
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_01",
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "edge_alignment": 0.2812731862068176,
+          "foreground_iou": 0.38285714285714284,
+          "foreground_mse": 0.12717893719673157,
+          "normalized_mse": 0.03004767745733261
+        },
+        "output_sha256": "27a4a229cf1ea0d27c13db124f20833cd15c29a7615f3509bc04389e6acc12d2",
+        "satisfactory": false,
+        "variation": {
+          "relative_x": 0.01408502,
+          "relative_y": 0.01688095,
+          "scale": 1.02005596
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_02",
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.8395223617553711,
+          "foreground_iou": 0.9962335216572504,
+          "foreground_mse": 0.00441927183419466,
+          "normalized_mse": 0.0009181947098113596
+        },
+        "output_sha256": "69a413eebbbb9dcbc968d0b07a2b6b4b0b9f3a15fa026c676e7ca0676a8e38eb",
+        "satisfactory": true,
+        "variation": {
+          "relative_x": 0.00179885,
+          "relative_y": 0.016211,
+          "scale": 1.01977891
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_03",
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.7262259125709534,
+          "foreground_iou": 0.9958549222797928,
+          "foreground_mse": 0.002263306640088558,
+          "normalized_mse": 0.0004445317026693374
+        },
+        "output_sha256": "1c5ad6a591ab8b16d9103e8a3776b9c611efed0896fc9f9c284c0567014fdca2",
+        "satisfactory": true,
+        "variation": {
+          "relative_x": -0.00995467,
+          "relative_y": 0.02363054,
+          "scale": 0.97127522
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_04",
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.7256796360015869,
+          "foreground_iou": 0.9573333333333334,
+          "foreground_mse": 0.004788181744515896,
+          "normalized_mse": 0.0010380810126662254
+        },
+        "output_sha256": "a66129825515e588f89dad0ac3ef6097f2017eabcce5113889e94138d5933799",
+        "satisfactory": true,
+        "variation": {
+          "relative_x": -0.00166703,
+          "relative_y": -0.01492096,
+          "scale": 1.04487685
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_05",
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.7920466661453247,
+          "foreground_iou": 0.9564260563380281,
+          "foreground_mse": 0.004730387590825558,
+          "normalized_mse": 0.0010361996246501803
+        },
+        "output_sha256": "eda56899897fb6a4e3a6a4ecb39f98d9e254404ca4b2d22449c3659ef9cbecc0",
+        "satisfactory": true,
+        "variation": {
+          "relative_x": -0.0018648,
+          "relative_y": -0.00788273,
+          "scale": 1.04290603
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_06",
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.7249161005020142,
+          "foreground_iou": 0.9958810068649886,
+          "foreground_mse": 0.0008158922428265214,
+          "normalized_mse": 0.0001725554175209254
+        },
+        "output_sha256": "c173a91c9ed490ba60678903cdaa4b725cbd0b7e85d0c3d8c5f71a20a836a4bd",
+        "satisfactory": true,
+        "variation": {
+          "relative_x": 0.0022068,
+          "relative_y": 0.00805869,
+          "scale": 1.04795709
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_07",
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.8164708018302917,
+          "foreground_iou": 0.9977997799779978,
+          "foreground_mse": 0.0012419610284268856,
+          "normalized_mse": 0.0002179127186536789
+        },
+        "output_sha256": "4d8fff41673c487855a4c83b840dd7e5ac6ae3d09c985bd12ed328119072da39",
+        "satisfactory": true,
+        "variation": {
+          "relative_x": -0.00453184,
+          "relative_y": -0.02426551,
+          "scale": 0.95462221
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_08",
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.9768995046615601,
+          "foreground_iou": 0.9965753424657534,
+          "foreground_mse": 0.000674684124533087,
+          "normalized_mse": 0.0001343625335721299
+        },
+        "output_sha256": "c589794cdc806e68ddb2e2891a4eeaa9fb6b9148a72e460adc538bdc25b344b6",
+        "satisfactory": true,
+        "variation": {
+          "relative_x": 0.00342698,
+          "relative_y": -0.02085039,
+          "scale": 1.01810919
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_09",
+        "failures": [
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "edge_alignment": 0.6197513341903687,
+          "foreground_iou": 0.9979476654694716,
+          "foreground_mse": 0.0011931052431464195,
+          "normalized_mse": 0.00024054358073044568
+        },
+        "output_sha256": "b6772f943bc7babc092f08c7c934112d30cd3b37abd574301afa88963bd343ca",
+        "satisfactory": false,
+        "variation": {
+          "relative_x": -0.00834543,
+          "relative_y": 0.00892934,
+          "scale": 0.98527084
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_10",
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.8404604196548462,
+          "foreground_iou": 0.9943316013226263,
+          "foreground_mse": 0.0056483023799955845,
+          "normalized_mse": 0.001195548684336245
+        },
+        "output_sha256": "66ad5c02e7dd723ab49d83c35affde27986bcd212b6b720dd42531bb9c87ffd8",
+        "satisfactory": true,
+        "variation": {
+          "relative_x": 0.01552892,
+          "relative_y": -0.00507961,
+          "scale": 1.01628574
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_11",
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.7736467123031616,
+          "foreground_iou": 0.9628975265017667,
+          "foreground_mse": 0.004044793080538511,
+          "normalized_mse": 0.0008820990333333611
+        },
+        "output_sha256": "7c5b133d1bb72895d9a6129bfa3dca65d78461107b9ef472b3dfac83480306fb",
+        "satisfactory": true,
+        "variation": {
+          "relative_x": 0.0115776,
+          "relative_y": -0.01000832,
+          "scale": 1.04882668
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_12",
+        "failures": [
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "edge_alignment": 0.714843213558197,
+          "foreground_iou": 0.9964139344262295,
+          "foreground_mse": 0.002154549118131399,
+          "normalized_mse": 0.00042957396362908185
+        },
+        "output_sha256": "b1dd390b1398db2f046270f3b9ba74cd94aebd2fa33e2e06ec9dc55d11bcc716",
+        "satisfactory": false,
+        "variation": {
+          "relative_x": 0.00183358,
+          "relative_y": -0.01376495,
+          "scale": 0.98668061
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_13",
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.7410206198692322,
+          "foreground_iou": 0.9953095684803002,
+          "foreground_mse": 0.0032142854761332273,
+          "normalized_mse": 0.0006602893699891865
+        },
+        "output_sha256": "444258bc7ea2c9cf6cff351ccc341d8f48cf1d2c148b10d4326a7682d14ecafb",
+        "satisfactory": true,
+        "variation": {
+          "relative_x": 0.00373004,
+          "relative_y": -0.01627146,
+          "scale": 1.02801773
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_14",
+        "failures": [],
+        "metrics": {
+          "edge_alignment": 0.7619238495826721,
+          "foreground_iou": 0.9899257688229056,
+          "foreground_mse": 0.0009556456352584064,
+          "normalized_mse": 0.0001758529688231647
+        },
+        "output_sha256": "f73f469a7beba46f0abfcce7024fc67599dbddfe97c185efa900c51b99b5cb09",
+        "satisfactory": true,
+        "variation": {
+          "relative_x": -0.0028394,
+          "relative_y": 0.01539397,
+          "scale": 0.98398329
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_15",
+        "failures": [
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "edge_alignment": 0.6644623279571533,
+          "foreground_iou": 0.998324958123953,
+          "foreground_mse": 0.0029062540270388126,
+          "normalized_mse": 0.0005040157120674849
+        },
+        "output_sha256": "c35691039abb5a24980039313c47de6d71378d98a766ddf5e4777f8b474a842b",
+        "satisfactory": false,
+        "variation": {
+          "relative_x": 0.00062437,
+          "relative_y": -0.01950291,
+          "scale": 0.94020394
+        }
+      },
+      {
+        "blocked_svg_reads": [],
+        "case_id": "probe_16",
+        "failures": [
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "edge_alignment": 0.667608916759491,
+          "foreground_iou": 0.9959141981613892,
+          "foreground_mse": 0.002604608191177249,
+          "normalized_mse": 0.0004943828680552542
+        },
+        "output_sha256": "9782cc5cf3402cf8337f06d90d00bce3c66c4cab2bd9d9b7545347b293f3b2f4",
+        "satisfactory": false,
+        "variation": {
+          "relative_x": -0.00273622,
+          "relative_y": -0.00059084,
+          "scale": 0.98579987
+        }
+      }
+    ],
+    "iterations": 64,
+    "limits": {
+      "max_foreground_mse": 0.04,
+      "max_normalized_mse": 0.01,
+      "max_path_commands": 160,
+      "max_svg_elements": 80,
+      "min_edge_alignment": 0.72,
+      "min_foreground_iou": 0.85
+    },
+    "original_satisfactory": true,
+    "schema_version": "plan_b_variations_v2",
+    "seed": 20261009,
+    "selection": {
+      "mode": "explicit",
+      "source_svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\arc_shaft_recheck_v1\\synthetic_holdout.svg"
+    },
+    "source_description_sha256": "42a6ecca4d6612165ff303f9b69d46cf265bbd7776333d702765a71cd9ec9b1e",
+    "source_image": "source.png",
+    "source_image_sha256": "cafc822cfac4e835775b42a7a03908991dbb899ad702da6dc57ee6ab711b452d",
+    "source_svg_sha256": "a0f7275379fe7b2b6e694451aa58cebe89ed1cac85f5656f73493499d53e7e99",
+    "status": "completed",
+    "summary": {
+      "completed": 17,
+      "failed": 5,
+      "passed": 12,
+      "required": 17,
+      "satisfactory": false
+    },
+    "timeout_seconds": 60,
+    "variations_started": true
+  },
+  "validation": {
+    "cli_help": "passed",
+    "compileall": "passed",
+    "evidence_hashes": {
+      "focused-final.log": "f2da2e8bcb8114289fabdc44de29d8e6bc2e65d1800d93ccddbfa45f0a142c6c",
+      "focused.xml": "a75794a0eaa5c36d8727e1d7fcecefdd148ee578d89225634009abd463e20f97",
+      "full.log": "78ad3a53388f4edfe5d7a9f407803b0db86166bc52c3023ecbaa2b8fa1254a13",
+      "full.xml": "d62f366c68374cfcdb955183a3aa7257910b9dfeee683ab47c10a5ec2cae82b4",
+      "regression-retry.log": "9baa5dffed50f0987b6106a11151d3cf9b2e03a675071b31fa205c4da780d94d",
+      "regression-retry.xml": "08b77a451b6244ff61d666f12ec3f22a1403734584a3442a1d5e2bcc8c43fd34",
+      "temp-retry.log": "13425048410233af1edf0915291ede02fbeda6500c940f48ea2dd520e0bf66e4",
+      "temp-retry.xml": "3b88c470fb9b356d753e73bd83e25c40600b3595bba935d5a00ab66beae665da",
+      "temp-retry2.log": "ffda4b9721f55cd67a1e0d152efaf8a53349b2e07cb39a53bdd9eb472fe23cf0",
+      "temp-retry2.xml": "aa2d8f1924686953cd7038b04cdff4890f11364c7c3281b74881d97a8361edf1"
+    },
+    "focused_tests": {
+      "failed": 0,
+      "log": ".tmp/ge9023/focused-final.log",
+      "new_tests": 40,
+      "passed": 178
+    },
+    "full_suite": {
+      "aggregate": {
+        "passed": 2426,
+        "skipped": 29,
+        "source_changes_between_suite_and_retries": false,
+        "unique_tests": 2455,
+        "unresolved_failures": 0
+      },
+      "failures": [
+        {
+          "category": "file_permission",
+          "message": "AssertionError: Extraction rolled back because verification failed.",
+          "test": "tests.detailtests.test_automate_function_extraction_tool.test_inserts_import_after_multiline_import_block"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_atomic_json_write_replace0\\\\.state.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_atomic_json_write_replace0\\\\state.json'",
+          "test": "tests.detailtests.test_batch_run_state_helpers.test_atomic_json_write_replaces_complete_document"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_one_impl_non_comp0\\\\svg\\\\AC0704_S.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_one_impl_non_comp0\\\\svg\\\\Failed_AC0704_S.svg'",
+          "test": "tests.detailtests.test_conversion_execution_helpers.test_convert_one_impl_non_composite_success_renames_svg_to_failed_prefix"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_one_impl_embedded0\\\\svg\\\\AC0805_M.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_one_impl_embedded0\\\\svg\\\\Failed_AC0805_M.svg'",
+          "test": "tests.detailtests.test_conversion_execution_helpers.test_convert_one_impl_embedded_svg_uses_failed_prefix_independent_of_status"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_one_impl_skipped_1\\\\svg\\\\AC0503_1M_sia.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_one_impl_skipped_1\\\\svg\\\\Failed_AC0503_1M_sia.svg'",
+          "test": "tests.detailtests.test_conversion_execution_helpers.test_convert_one_impl_skipped_status_with_result_marks_embedded_svg_as_failed"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_one_impl_trivial_0\\\\svg\\\\AC0535_1S_sia.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_one_impl_trivial_0\\\\svg\\\\Failed_AC0535_1S_sia.svg'",
+          "test": "tests.detailtests.test_conversion_execution_helpers.test_convert_one_impl_trivial_placeholder_svg_is_marked_failed"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_one_impl_marks_im0\\\\svg\\\\AC0414_2_M.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_one_impl_marks_im0\\\\svg\\\\Failed_AC0414_2_M.svg'",
+          "test": "tests.detailtests.test_conversion_execution_helpers.test_convert_one_impl_marks_image_only_svg_without_raster_extension_as_failed"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_record_early_quality_abor0\\\\svg\\\\AC0999.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_record_early_quality_abor0\\\\svg\\\\Failed_AC0999.svg'",
+          "test": "tests.detailtests.test_conversion_execution_helpers.test_record_early_quality_abort_preserves_probe_as_failed_artifact"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_ren0\\\\svg\\\\AC0800_L.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_ren0\\\\svg\\\\Failed_AC0800_L.svg'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_mark_poor_conversions_renames_svg_when_embedded_png_detected"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_ren1\\\\svg\\\\AC0801_L.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_ren1\\\\svg\\\\Failed_AC0801_L.svg'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_mark_poor_conversions_renames_svg_when_embedded_jpeg_detected"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_det0\\\\svg\\\\GE9024_7S.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_det0\\\\svg\\\\Failed_GE9024_7S.svg'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_mark_poor_conversions_detects_embedded_raster_even_without_result_row"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_det1\\\\svg\\\\B_INFO.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_det1\\\\svg\\\\Failed_B_INFO.svg'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_mark_poor_conversions_detects_embedded_raster_for_lowercase_variant_names"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_mar0\\\\svg\\\\AC0503_1M_SIA.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_mar0\\\\svg\\\\Failed_AC0503_1M_SIA.svg'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_mark_poor_conversions_marks_skipped_manual_review_embedded_svg_as_failed"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_ren2\\\\svg\\\\GE0111_S.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_ren2\\\\svg\\\\Failed_GE0111_S.svg'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_mark_poor_conversions_renames_trivial_white_fallback_svg"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_ren3\\\\svg\\\\AC0414_2_M.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_ren3\\\\svg\\\\Failed_AC0414_2_M.svg'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_mark_poor_conversions_renames_image_only_svg_without_detectable_raster_href"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_ren4\\\\svg\\\\AC0731_L.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_ren4\\\\svg\\\\Failed_AC0731_L.svg'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_mark_poor_conversions_renames_low_information_blank_frame_svg"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_canonicalize_failed_attem0\\\\svg\\\\AC0302_2_M_failed.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_canonicalize_failed_attem0\\\\svg\\\\Failed_AC0302_2_M.svg'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_canonicalize_failed_attempt_svg_names_from_suffix_format"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_canonicalize_failed_attem1\\\\svg\\\\failed_AC0302_2_M.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_canonicalize_failed_attem1\\\\svg\\\\.failed_AC0302_2_M.svg.renaming'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_canonicalize_failed_attempt_svg_names_from_lowercase_prefix"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_archive_successful_conver0\\\\input\\\\AC0831_L.jpg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_archive_successful_conver0\\\\input\\\\succesessfulConvertedImages\\\\AC0831_L.jpg'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_archive_successful_conversion_artifacts_moves_image_and_copies_svg"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_move_failed_conversion_ar0\\\\converted_images\\\\converted_svgs\\\\Failed_AC0800_L.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_move_failed_conversion_ar0\\\\converted_images\\\\converted_svg_failed\\\\AC0800_L.svg'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_move_failed_conversion_artifacts_to_failed_dirs_moves_svg_and_png"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_run_conversion_finalizati2\\\\converted_images\\\\converted_svgs\\\\AC0801_L.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_run_conversion_finalizati2\\\\converted_images\\\\converted_svgs\\\\Failed_AC0801_L.svg'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_run_conversion_finalization_quarantines_unsatisfactory_artifacts_before_archive"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_ren5\\\\svg\\\\AC0999_L.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_mark_poor_conversions_ren5\\\\svg\\\\Failed_AC0999_L.svg'",
+          "test": "tests.detailtests.test_conversion_finalization_helpers.test_mark_poor_conversions_renames_svg_when_error_per_pixel_exceeds_fallback_gate"
+        },
+        {
+          "category": "subprocess_or_heuristic_assertion",
+          "message": "AssertionError: Processed 1/1 functions. Success=0, failed=1",
+          "test": "tests.detailtests.test_extract_remaining_functions_batch_tool.test_extracts_only_non_delegating_functions_and_writes_logs"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_move_nonconvertable_sourc0\\\\AC0800_L.jpg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_move_nonconvertable_sourc0\\\\nonconvertable\\\\AC0800_L.jpg'",
+          "test": "tests.detailtests.test_nonconvertable_move_helpers.test_move_nonconvertable_sources_moves_failed_files"
+        },
+        {
+          "category": "subprocess_or_heuristic_assertion",
+          "message": "assert 1 == 0",
+          "test": "tests.detailtests.test_plan_b_variations.test_real_worker_preserves_parent_toolchain_with_incompatible_pythonpath"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_ac08_regression_smoke_run0\\\\converted\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_ac08_regression_smoke_run0\\\\converted\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_conversion_regression_smoke.test_ac08_regression_smoke_run_creates_expected_outputs"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_ac0100_quality_uses_algor0\\\\ac0100\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_ac0100_quality_uses_algor0\\\\ac0100\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_conversion_regression_smoke.test_ac0100_quality_uses_algorithmic_elementwise_fit"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_uses_embedd0\\\\out\\\\converted_svgs\\\\Failed_AC0812_L.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_uses_embedd0\\\\out\\\\converted_svgs\\\\AC0812_L.svg'",
+          "test": "tests.test_image_composite_converter.test_convert_range_uses_embedded_raster_fallback_without_numpy_cv2"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_does_not_sk0\\\\out\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_does_not_sk0\\\\out\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_image_composite_converter.test_convert_range_does_not_skip_variants_in_quality_passes"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_accepts_qua0\\\\out\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_accepts_qua0\\\\out\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_image_composite_converter.test_convert_range_accepts_quality_pass_when_mean_delta2_improves"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_rejects_qua0\\\\out\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_rejects_qua0\\\\out\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_image_composite_converter.test_convert_range_rejects_quality_pass_regression_and_keeps_previous_output"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_writes_svgs0\\\\out\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_writes_svgs0\\\\out\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_image_composite_converter.test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_filters_to_0\\\\out\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_filters_to_0\\\\out\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_image_composite_converter.test_convert_range_filters_to_explicit_selected_variants_and_writes_regression_manifest"
+        },
+        {
+          "category": "subprocess_or_heuristic_assertion",
+          "message": "assert 2.5 <= 2.0",
+          "test": "tests.test_image_composite_converter.test_optimize_circle_pose_adaptive_domain_improves_and_logs"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_uses_existi0\\\\converted\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_uses_existi0\\\\converted\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_image_composite_converter.test_convert_range_uses_existing_conversion_rows_as_template_donors"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_fallback_wr0\\\\out\\\\converted_svgs\\\\Failed_AC0010.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_fallback_wr0\\\\out\\\\converted_svgs\\\\AC0010.svg'",
+          "test": "tests.test_image_composite_converter.test_convert_range_fallback_writes_diff_pngs_when_cv2_missing"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_stops_after0\\\\out\\\\converted_svgs\\\\Failed_AC0820_L.svg' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_stops_after0\\\\out\\\\converted_svg_failed\\\\AC0820_L.svg'",
+          "test": "tests.test_image_composite_converter.test_convert_range_stops_after_render_failure_and_writes_batch_summary"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_ac0811_l_conversion_prese0\\\\ac0811_l_out\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_ac0811_l_conversion_prese0\\\\ac0811_l_out\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_image_composite_converter.test_ac0811_l_conversion_preserves_long_bottom_stem"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_ac08_semantic_anchor_vari0\\\\ac08_anchor_smoke\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_ac08_semantic_anchor_vari0\\\\ac08_anchor_smoke\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_image_composite_converter.test_ac08_semantic_anchor_variants_convert_without_failed_svg"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_ac08_semantic_anchor_vari1\\\\ac0811_out\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_ac08_semantic_anchor_vari1\\\\ac0811_out\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_image_composite_converter.test_ac08_semantic_anchor_variants_ac0811_only"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_ac08_semantic_anchor_vari2\\\\ac0812_out\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_ac08_semantic_anchor_vari2\\\\ac0812_out\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_image_composite_converter.test_ac08_semantic_anchor_variants_ac0812_only"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_invokes_ove0\\\\out\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_convert_range_invokes_ove0\\\\out\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_image_composite_converter.test_convert_range_invokes_overview_generation"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_satisfactory_baseline_rec0\\\\out\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_satisfactory_baseline_rec0\\\\out\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_satisfactory_regression_battery.test_satisfactory_baseline_reconversion_smoke"
+        },
+        {
+          "category": "file_permission",
+          "message": "PermissionError: [WinError 5] Zugriff verweigert: 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_all_satisfactory_successf0\\\\all_successful_reconversion\\\\ac0800\\\\reports\\\\.conversion_result_map.json.32568.tmp' -> 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{fd0ee35f-30af-4f27-a0b6-5856e470f995}\\\\AC\\\\Temp\\\\pytest-of-marku\\\\pytest-0\\\\test_all_satisfactory_successf0\\\\all_successful_reconversion\\\\ac0800\\\\reports\\\\conversion_result_map.json'",
+          "test": "tests.test_satisfactory_regression_battery.test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_quality"
+        }
+      ],
+      "first_run": {
+        "errors": "0",
+        "failures": "44",
+        "hostname": "MarkusLaptop",
+        "name": "pytest",
+        "skipped": "29",
+        "tests": "2455",
+        "time": "7155.336",
+        "timestamp": "2026-10-09T19:55:37.301421+02:00"
+      },
+      "optimization_tolerance_note": "The existing adaptive-circle pose assertion also failed once (2.5 versus allowed 2.0); it passes in the unchanged-code targeted retry.",
+      "remaining_retry": "completed: 2 passed",
+      "retries": [
+        {
+          "log": ".tmp/ge9023/temp-retry.log",
+          "passed": 27
+        },
+        {
+          "log": ".tmp/ge9023/temp-retry2.log",
+          "passed": 15
+        },
+        {
+          "log": ".tmp/ge9023/regression-retry.log",
+          "passed": 2
+        }
+      ],
+      "temporary_directory_issue": "Default Windows sandbox temp rejects replacement/move operations; retries use fresh --basetemp under .tmp/ge9023."
+    },
+    "runtime_image_id_occurrences": 0,
+    "satisfactory_regression": {
+      "checked_variants": 31,
+      "log": ".tmp/ge9023/regression-debug/test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_quality.jsonl",
+      "mode": "standard compatibility mode",
+      "regression_count": 0
+    }
+  }
+}

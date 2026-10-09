@@ -29,6 +29,7 @@ from src.iCCModules.imageCompositeConverterChevronPanel import fit_chevron_panel
 from src.iCCModules.imageCompositeConverterThreeWayValve import fit_three_way_valve
 from src.iCCModules.imageCompositeConverterRadialDisk import fit_radial_disk
 from src.iCCModules.imageCompositeConverterFilledSymbols import fit_disk_bar, fit_solid_arrow
+from src.iCCModules.imageCompositeConverterArcShaft import fit_arc_shaft
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1426,6 +1427,7 @@ def runNonCompositeIterationImpl(
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in (
+            (fit_arc_shaft, "non_composite_raster_arc_shaft"),
             (fit_disk_bar, "non_composite_raster_disk_bar"),
             (fit_solid_arrow, "non_composite_raster_solid_arrow"),
             (fit_alarm_bell, "non_composite_raster_alarm_bell"),

@@ -1,0 +1,153 @@
+{
+  "schema_version": "arc_shaft_recheck_manifest_v1",
+  "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+  "provenance": {
+    "commit": "dc10a763c9666a919eecb5b6cc29d518e139b28e",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "fresh original-description CLI frozen before runtime changes; byte-identical ablation replay",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_symbol_00",
+      "source": "GE9023_1M.jpg",
+      "image": "../../images_to_convert/GE9023_1M.jpg",
+      "source_sha256": "c640ba2c31b68209554927f63e5d7ebdd253730de38f2d960b0f4bf0578c98d5",
+      "role": "holdout",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_00.svg",
+      "after_svg": "after/anonymous_symbol_00.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_01",
+      "source": "GE9023_1S.jpg",
+      "image": "../../images_to_convert/GE9023_1S.jpg",
+      "source_sha256": "5f435f1a604d5e30cec60bf860accbdee34308f44a447fc4d0a14b9f4017a5af",
+      "role": "holdout",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_01.svg",
+      "after_svg": "after/anonymous_symbol_01.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_02",
+      "source": "GE9023_2M.jpg",
+      "image": "../../images_to_convert/GE9023_2M.jpg",
+      "source_sha256": "0dc76ae41bc6f01dc8c42eaf606f133f2add1d56184043860ba5bd2f8298526c",
+      "role": "holdout",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_02.svg",
+      "after_svg": "after/anonymous_symbol_02.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_03",
+      "source": "GE9023_2S.jpg",
+      "image": "../../images_to_convert/GE9023_2S.jpg",
+      "source_sha256": "8bb015a6d96665d5f7795b6077049dffa0f43871fc33c9ffb293ca443ed10ec8",
+      "role": "holdout",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_03.svg",
+      "after_svg": "after/anonymous_symbol_03.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_04",
+      "source": "GE9023_3M.jpg",
+      "image": "../../images_to_convert/GE9023_3M.jpg",
+      "source_sha256": "af2b35e6b4bff73b80de6d5312aecd70035b7ab9efaae3fca55ca5db7fb01ca2",
+      "role": "holdout",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_04.svg",
+      "after_svg": "after/anonymous_symbol_04.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_05",
+      "source": "GE9023_3S.jpg",
+      "image": "../../images_to_convert/GE9023_3S.jpg",
+      "source_sha256": "197f957c5f6eb2f87d65acd5dee90b1d1952fda5e90cc298a13d944c98424850",
+      "role": "holdout",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_05.svg",
+      "after_svg": "after/anonymous_symbol_05.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_06",
+      "source": "GE9023_4M.jpg",
+      "image": "../../images_to_convert/GE9023_4M.jpg",
+      "source_sha256": "b4150c4504c49c2e1be0e0374d34b5814b134a4763660075aa0ec65a05ad84e5",
+      "role": "holdout",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_06.svg",
+      "after_svg": "after/anonymous_symbol_06.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_07",
+      "source": "GE9023_4S.jpg",
+      "image": "../../images_to_convert/GE9023_4S.jpg",
+      "source_sha256": "43ab1035298c9c5f6a55642ba4aa99f002332b4b9b31cba94ed1bdc4f2f419fd",
+      "role": "holdout",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_07.svg",
+      "after_svg": "after/anonymous_symbol_07.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_08",
+      "source": "GE9023_5M.jpg",
+      "image": "../../images_to_convert/GE9023_5M.jpg",
+      "source_sha256": "7e31bbb14d333ca9420e294d2bba8da88ff0c403699f299a190da611bdd8a8db",
+      "role": "holdout",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_08.svg",
+      "after_svg": "after/anonymous_symbol_08.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_09",
+      "source": "GE9023_5S.jpg",
+      "image": "../../images_to_convert/GE9023_5S.jpg",
+      "source_sha256": "b27af5159ce419c7e3cd47848dee3f31d24fea10d2e33f3fc30a85e51a5fc36c",
+      "role": "holdout",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_09.svg",
+      "after_svg": "after/anonymous_symbol_09.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_10",
+      "source": "GE9023_6M.jpg",
+      "image": "../../images_to_convert/GE9023_6M.jpg",
+      "source_sha256": "8aff7f2b15ddf033492d589cd3e0d64826abb2021224a2ce20d30b679636d4ea",
+      "role": "target",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_10.svg",
+      "after_svg": "after/anonymous_symbol_10.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_11",
+      "source": "GE9023_6S.jpg",
+      "image": "../../images_to_convert/GE9023_6S.jpg",
+      "source_sha256": "e5f741af25c3a0f997455afac0c18000a20ade0e48c569160fd762a34ea367c1",
+      "role": "holdout",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_11.svg",
+      "after_svg": "after/anonymous_symbol_11.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_12",
+      "source": "GE9023_7M.jpg",
+      "image": "../../images_to_convert/GE9023_7M.jpg",
+      "source_sha256": "12c0e7fcbf16287a2aedcd18014bff8078a2daa2e3d5ef4777e265cae22366b6",
+      "role": "holdout",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_12.svg",
+      "after_svg": "after/anonymous_symbol_12.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_13",
+      "source": "GE9023_7S.jpg",
+      "image": "../../images_to_convert/GE9023_7S.jpg",
+      "source_sha256": "9c4be99faad7dda08cf40e71a518cd144b12937e7cfd94a9a57e8738e716cd1f",
+      "role": "holdout",
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_13.svg",
+      "after_svg": "after/anonymous_symbol_13.svg"
+    }
+  ]
+}

@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-10-07)
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-09)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `411` · Erledigt `390` · Offen `21`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `414` · Erledigt `392` · Offen `22`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,7 +20,28 @@ zurückstellen; anschließend den Code vereinfachen und als verständliches Prod
 aufbereiten. Ausgangszählung: 43.376 Python-Zeilen unter `src/`, ohne Tests,
 Werkzeuge und externe Bibliotheken. Details: `docs/product_roadmap.md`.
 
-**Aktueller Abschluss 2026-10-09: `GE0032` und drei Größenvarianten.**
+- [x] **GE9023 – U-Bogen mit Verlaufsschaft:** frischen CLI-Vorlauf einfrieren, eigenständige Beschreibung und allgemeine Rasterregistrierung umsetzen, 14 Farb-/Größenvarianten durch beide Gates abnehmen.
+- [x] **GE9023-PB:** unabhängige synthetische Geometrien und Negativfälle derselben Topologie prüfen; fehlende Sample-Vorlage und offenen Gesamtpool getrennt ausweisen.
+
+- [ ] **GE9023-PB-STRESS:** zusätzliche CLI-Syntheseprobe mit Seed `20261009` von 12/17 auf vollständige strenge Abnahme bringen. Vier Varianten verfehlen die Kantenprüfung, eine verwirft die Runtime-Registrierung. Pixeloptimierung und Runtime-Annahmevertrag untersuchen, Qualitätsgrenzen beibehalten.
+
+**Aktueller Abschluss 2026-10-09: `GE9023_6M` und 13 Farb-/Größenvarianten.**
+Eigenständige XML-Beschreibungen ersetzen das falsche Quadratmotiv. Allgemeine
+U-Bogen-/Verlaufsschaftregistrierung und native Rechteck-Verlaufsmaske sichern
+alle 14 Fälle durch beide regulären und strengeren Plan-B-Pixelgates ohne
+Pflichtmetrikregression. Die Ziel-CLI-Baseline sinkt von `13107.064453` auf
+`253.677505`. Zwei unabhängige CLI-Abnahmen reproduzieren alle 28 SVG-Bytes und
+Gate-Fallrecords; der echte Vorlauf bleibt bytegleich. 178 fokussierte Tests
+bestehen; der Gesamtnachweis mit gezielten Temp-Nachläufen umfasst 2.426 bestandene
+Tests und 29 Windows-Skips. 31 Bestandsschutzvarianten haben null Regressionen.
+Alle 48 bisherigen Erfolgsvarianten bleiben im Review unter der Grenze.
+Die zusätzliche synthetische Stressprüfung bleibt mit 12/17 offen; die vier
+unabhängigen synthetischen Geometrieprüfungen und Negativfälle bestehen.
+`PB-POOL-2026-10-07` bleibt ebenfalls offen. Nächste reguläre Rotation:
+`AC0413_1_M`, `AC0713_1_L`, `AC0721_1_S`, `AC0711_1_M`, `GE9014_1M`.
+Details: `docs/next_arbeitspaket_2026-10-09_ge9023_6m.md`.
+
+**Vorheriger Abschluss 2026-10-09: `GE0032` und drei Größenvarianten.**
 Das Grundbild zeigt einen Abwärtspfeil; die Größenvarianten zeigen dagegen
 Kreisscheiben mit mittigem Rundbalken. Beide XML-Kataloge trennen die Motive
 jetzt mit eigenständigen Beschreibungen. Allgemeine Rasterregistrierung und
