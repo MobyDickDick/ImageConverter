@@ -2,6 +2,7 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [Abwärtspfeil und Kreisscheiben mit Rundbalken: vier CLI-Abnahmen (2026-10-09)](next_arbeitspaket_2026-10-09_ge0032.md)
 - [Roadmap: Konvertierungsqualität, danach verständliches Produkt](product_roadmap.md)
 - [Quadrat mit rechtem Griff, schrägem Strich und Punkt: sechs CLI-Abnahmen (2026-10-09)](next_arbeitspaket_2026-10-09_ac0714_l.md)
 

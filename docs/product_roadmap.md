@@ -18,9 +18,11 @@ weiter verbesserbare und wegen ihrer Komplexität zurückgestellte Bilder
 ausweisen. Vollständige Abdeckung aller Bilder ist kein Abschlusskriterium.
 Der offene zufällige Plan-B-Pool bleibt eine eigene, weiter sichtbare Aufgabe.
 
-Das aktuelle Paket `AC0714_L` erweitert die vorhandene Quadrat-/Griff-Erkennung
-um zwei beschriebene Innenmarkierungen und sichert sechs echte Rastervarianten.
-Der nächste reguläre Kandidat ist nach dem erneuerten Review `GE0032`.
+Das aktuelle Paket `GE0032` trennt das Abwärtspfeil-Grundbild von den drei
+Kreisscheiben mit Rundbalken und sichert beide Rastertopologien durch
+allgemeine Registrierung und native Verlaufsdarstellung. Alle vier Fälle
+bestehen die regulären und strengeren Plan-B-Gates. Der nächste reguläre
+Kandidat ist nach dem erneuerten Review `GE9023_6M`.
 
 ## 2. Verständliches, kleineres Produkt
 

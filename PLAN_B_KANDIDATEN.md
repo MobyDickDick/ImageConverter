@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-09, nach Strich-/Punkt-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-09, nach Pfeil-/Rundbalken-Abnahme)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -118,11 +118,11 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `GE0032` – `mean_delta2=13826.389648`, `normalized_mse=0.070877`.
-2. `GE9023_6M` – `mean_delta2=13675.259766`, `normalized_mse=0.070103`.
-3. `AC0413_1_M` – `mean_delta2=13465.694336`, `normalized_mse=0.069028`.
-4. `AC0713_1_L` – `mean_delta2=13458.083984`, `normalized_mse=0.068989`.
-5. `AC0721_1_S` – `mean_delta2=13368.759766`, `normalized_mse=0.068531`.
+1. `GE9023_6M` – `mean_delta2=13675.259766`, `normalized_mse=0.070103`.
+2. `AC0413_1_M` – `mean_delta2=13465.694336`, `normalized_mse=0.069028`.
+3. `AC0713_1_L` – `mean_delta2=13458.083984`, `normalized_mse=0.068989`.
+4. `AC0721_1_S` – `mean_delta2=13368.759766`, `normalized_mse=0.068531`.
+5. `AC0711_1_M` – `mean_delta2=13113.830078`, `normalized_mse=0.067225`.
 
 `AC0714_L` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und rastergestützter Strich-/Punktregistrierung beide regulären
@@ -131,14 +131,19 @@ Die frische Ziel-CLI-Baseline verbessert sich von `33066.082031` auf `24.314667`
 Zwei unabhängige Läufe reproduzieren sämtliche SVGs und Gateentscheidungen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0714_l.md`.
 
-Die nächste reguläre Rotation beginnt mit `GE0032`; vor Änderungen ist eine
+`GE0032` (Abwärtspfeil) und die drei Kreisscheiben-Größenvarianten bestehen
+nach eigenständigen Beschreibungen, allgemeiner Rasterregistrierung und
+nativer Verlaufsdarstellung beide regulären und die strengeren Plan-B-Gates.
+Alle acht CLI-SVGs und Gateentscheidungen sind reproduzierbar; die originalen
+Vorher-Ausgaben bleiben bytegleich. Details:
+`docs/next_arbeitspaket_2026-10-09_ge0032.md`.
+Die nächste reguläre Rotation beginnt mit `GE9023_6M`; vor Änderungen ist eine
 frische CLI-Baseline erforderlich. Der Review über 1.000 Einträge (993 renderbare
 Paare) und sein exakter Aufruf stehen im kompakten Nachweis
-`artifacts/evaluation/marked_square_recheck_v1/summary_2026-10-09.json`.
+`artifacts/evaluation/disk_bar_recheck_v1/summary_2026-10-09.json`.
 Alle 48 gespeicherten Erfolgsvarianten bleiben unter der Reviewgrenze.
-104 renderbare Einträge überschreiten die Reviewgrenze. Die neue Reihenfolge
-schließt die sechs geprüften Varianten aus der historischen Diff-Auswahl aus.
-Vollständige Tabellen liegen lokal unter `.tmp/ac0714/review/`.
+Die vier neu geprüften Varianten sind aus der historischen Diff-Auswahl ausgeschlossen.
+Vollständige Tabellen liegen lokal unter `.tmp/ge0032/review/`.
 
 Die gekoppelte randomisierte Plan-B-Auswahl `AC0538_1L_sia` mit Seed
 `3948009396310964094` besteht nach eigenständiger Beschreibung und katalogfreier

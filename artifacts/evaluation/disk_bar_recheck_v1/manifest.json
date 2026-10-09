@@ -1,0 +1,49 @@
+{
+  "schema_version": "disk_bar_recheck_manifest_v1",
+  "baseline_description": "Wie GE0031: Wie GE0030, nach rechts gedreht. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+  "provenance": {
+    "commit": "532d4d581d421d1473265d8bb312fac604bc39e2",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "fresh original-description CLI frozen before runtime changes",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_symbol_00",
+      "source": "GE0032.jpg",
+      "image": "../../images_to_convert/GE0032.jpg",
+      "source_sha256": "4aa47868884987d9f064c8fca30b26f020eb78fb2e903552f9547c86f2cf83e5",
+      "family": "solid_down_arrow",
+      "role": "target",
+      "description": "Ein gefüllter Pfeil nach unten: ein senkrechter rechteckiger Schaft geht ohne Lücke in eine breitere dreieckige Spitze über. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_symbol_01",
+      "source": "GE0032_L.jpg",
+      "image": "../../images_to_convert/GE0032_L.jpg",
+      "source_sha256": "6754dd5585595f0ddbbfdeea728b937da781a6b86bc6b9c802c5e3f35ba279f3",
+      "family": "disk_bar",
+      "role": "holdout",
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Mittig liegt ein waagerechter dunkler Balken mit abgerundeten Enden und heller Randkontur vollständig innerhalb des Kreises. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_symbol_02",
+      "source": "GE0032_M.jpg",
+      "image": "../../images_to_convert/GE0032_M.jpg",
+      "source_sha256": "4cbcdf99b3751e02da17b82de2dc14629d17be79f663dad3442508d396022406",
+      "family": "disk_bar",
+      "role": "holdout",
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Mittig liegt ein waagerechter dunkler Balken mit abgerundeten Enden und heller Randkontur vollständig innerhalb des Kreises. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_symbol_03",
+      "source": "GE0032_S.jpg",
+      "image": "../../images_to_convert/GE0032_S.jpg",
+      "source_sha256": "3c9334d0ae532d0ceb9c2467606f82558ec68ed1df42a870d101a54ee4ba5a26",
+      "family": "disk_bar",
+      "role": "holdout",
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Mittig liegt ein waagerechter dunkler Balken mit abgerundeten Enden und heller Randkontur vollständig innerhalb des Kreises. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild."
+    }
+  ]
+}
