@@ -1,0 +1,1513 @@
+{
+  "baseline": {
+    "baseline_sha256": "1813d56c516a6435e9972f43ed978c306d29b15fc570e7d7d0c558f2cbcc96fa",
+    "cases": {
+      "anonymous_square_00": {
+        "dimensions": {
+          "height": 25,
+          "width": 45
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5458102822303772,
+          "error_per_pixel": 0.039147350678424966,
+          "object_mask_iou": 0.8082758620689655,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_square_01": {
+        "dimensions": {
+          "height": 20,
+          "width": 35
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5184199810028076,
+          "error_per_pixel": 0.02601119711569268,
+          "object_mask_iou": 0.8430493273542601,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_square_02": {
+        "dimensions": {
+          "height": 15,
+          "width": 25
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.7258425951004028,
+          "error_per_pixel": 0.011050573747677175,
+          "object_mask_iou": 0.9818181818181818,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_square_03": {
+        "dimensions": {
+          "height": 25,
+          "width": 45
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5647088885307312,
+          "error_per_pixel": 0.169504457420223,
+          "object_mask_iou": 0.2868965517241379,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_square_04": {
+        "dimensions": {
+          "height": 20,
+          "width": 35
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.46418166160583496,
+          "error_per_pixel": 0.1593947540208894,
+          "object_mask_iou": 0.33183856502242154,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_square_05": {
+        "dimensions": {
+          "height": 15,
+          "width": 25
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5290417671203613,
+          "error_per_pixel": 0.14976721693579392,
+          "object_mask_iou": 0.38181818181818183,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "commit": "5726e87b8336fb76df094eabc58e81476c304bd7",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_square_00": "c0fc8418d64bbce770c4e817097d935dd47f84085a25c89721ad6cbec9cf3c81",
+        "anonymous_square_01": "14fffeea401471fb0936e4f97c82710ab5da73226af4fe118020123e444614a4",
+        "anonymous_square_02": "982b57a2727636c42d4f71980a4fc9f3f3b9d060e13357693535e1e3eb61f259",
+        "anonymous_square_03": "e1d52cefbddea5f5bb0d652f99b352a584af418d1d99495fab26424867622192",
+        "anonymous_square_04": "bb6c24ae6bf09d9246b99a4894bab5e3aa57d63d4c5968ca669767503a2591db",
+        "anonymous_square_05": "2664bb1bcbf4578caa2e552a426324e46736b12b2054477cc9690a4727007f77"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "code_size": {
+    "after": {
+      "src_files": 171,
+      "src_lines": 43448,
+      "test_files": 212,
+      "test_lines": 50835,
+      "tool_files": 87,
+      "tool_lines": 15292
+    },
+    "baseline": {
+      "commit": "5726e87b8336fb76df094eabc58e81476c304bd7",
+      "src_files": 171,
+      "src_lines": 43376,
+      "test_files": 211,
+      "test_lines": 50710,
+      "tool_files": 87,
+      "tool_lines": 15224
+    },
+    "measurement": "physical Python lines including comments and blank lines; vendor excluded"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 107.85066986083984,
+      "after_svg": "after\\converted_svgs\\anonymous_square_00.svg",
+      "after_svg_sha256": "bf815bc921db349fc9fd6c504603a4ba2c0345d8c2d1981f0b8800c06553f7b5",
+      "before_mean_delta2": 7636.66943359375,
+      "before_svg": "before\\converted_svgs\\anonymous_square_00.svg",
+      "before_svg_sha256": "b0462e88bee0db79fdd6df1b4fab96678d2279a50ab3755be4766b82d6a7a73b",
+      "case_id": "anonymous_square_00",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Im Quadrat liegen ein schräger Strich von unten links nach oben rechts und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Die beiden Innenmarkierungen kontrastieren mit der Füllung. Weißer Hintergrund. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild.",
+      "image": "inputs\\anonymous_square_00.jpg",
+      "input_sha256": "c0fc8418d64bbce770c4e817097d935dd47f84085a25c89721ad6cbec9cf3c81",
+      "role": "holdout",
+      "source": "AC0714_1_L.jpg",
+      "source_sha256": "c0fc8418d64bbce770c4e817097d935dd47f84085a25c89721ad6cbec9cf3c81"
+    },
+    {
+      "after_mean_delta2": 42.948570251464844,
+      "after_svg": "after\\converted_svgs\\anonymous_square_01.svg",
+      "after_svg_sha256": "76f505b1bc1c7da153925e09bf0b7bc49f04a4fb37ef9ccaa044c053f2986d42",
+      "before_mean_delta2": 5074.13427734375,
+      "before_svg": "before\\converted_svgs\\anonymous_square_01.svg",
+      "before_svg_sha256": "fbcf8811096c13205eac3592495fac534adf1e167be8232cf93bf4ee675fc511",
+      "case_id": "anonymous_square_01",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Im Quadrat liegen ein schräger Strich von unten links nach oben rechts und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Die beiden Innenmarkierungen kontrastieren mit der Füllung. Weißer Hintergrund. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild.",
+      "image": "inputs\\anonymous_square_01.jpg",
+      "input_sha256": "14fffeea401471fb0936e4f97c82710ab5da73226af4fe118020123e444614a4",
+      "role": "holdout",
+      "source": "AC0714_1_M.jpg",
+      "source_sha256": "14fffeea401471fb0936e4f97c82710ab5da73226af4fe118020123e444614a4"
+    },
+    {
+      "after_mean_delta2": 88.96533203125,
+      "after_svg": "after\\converted_svgs\\anonymous_square_02.svg",
+      "after_svg_sha256": "f03023cb8d026ff4e70c86c335c310731d0c6a77e4a38f698741b21849b20658",
+      "before_mean_delta2": 2155.690673828125,
+      "before_svg": "before\\converted_svgs\\anonymous_square_02.svg",
+      "before_svg_sha256": "120566436b071ae5b9b31c222dc52c9fd429a81fc956dd36497cd4378db8c41a",
+      "case_id": "anonymous_square_02",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Im Quadrat liegen ein schräger Strich von unten links nach oben rechts und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Die beiden Innenmarkierungen kontrastieren mit der Füllung. Weißer Hintergrund. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild.",
+      "image": "inputs\\anonymous_square_02.jpg",
+      "input_sha256": "982b57a2727636c42d4f71980a4fc9f3f3b9d060e13357693535e1e3eb61f259",
+      "role": "holdout",
+      "source": "AC0714_1_S.jpg",
+      "source_sha256": "982b57a2727636c42d4f71980a4fc9f3f3b9d060e13357693535e1e3eb61f259"
+    },
+    {
+      "after_mean_delta2": 24.314666748046875,
+      "after_svg": "after\\converted_svgs\\anonymous_square_03.svg",
+      "after_svg_sha256": "7bc92e2d34c0f9d8ef52f1874e103c9d6122e799dac5878a92fec3922e827484",
+      "before_mean_delta2": 33066.08203125,
+      "before_svg": "before\\converted_svgs\\anonymous_square_03.svg",
+      "before_svg_sha256": "b0462e88bee0db79fdd6df1b4fab96678d2279a50ab3755be4766b82d6a7a73b",
+      "case_id": "anonymous_square_03",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Im Quadrat liegen ein schräger Strich von unten links nach oben rechts und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Die beiden Innenmarkierungen kontrastieren mit der Füllung. Weißer Hintergrund. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild.",
+      "image": "inputs\\anonymous_square_03.jpg",
+      "input_sha256": "e1d52cefbddea5f5bb0d652f99b352a584af418d1d99495fab26424867622192",
+      "role": "target",
+      "source": "AC0714_L.jpg",
+      "source_sha256": "e1d52cefbddea5f5bb0d652f99b352a584af418d1d99495fab26424867622192"
+    },
+    {
+      "after_mean_delta2": 23.459999084472656,
+      "after_svg": "after\\converted_svgs\\anonymous_square_04.svg",
+      "after_svg_sha256": "0ea273b4398c6f403e32cd8c3333bbe9bfdda91a8c951e3b6649a47a8d817f25",
+      "before_mean_delta2": 31093.931640625,
+      "before_svg": "before\\converted_svgs\\anonymous_square_04.svg",
+      "before_svg_sha256": "fbcf8811096c13205eac3592495fac534adf1e167be8232cf93bf4ee675fc511",
+      "case_id": "anonymous_square_04",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Im Quadrat liegen ein schräger Strich von unten links nach oben rechts und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Die beiden Innenmarkierungen kontrastieren mit der Füllung. Weißer Hintergrund. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild.",
+      "image": "inputs\\anonymous_square_04.jpg",
+      "input_sha256": "bb6c24ae6bf09d9246b99a4894bab5e3aa57d63d4c5968ca669767503a2591db",
+      "role": "holdout",
+      "source": "AC0714_M.jpg",
+      "source_sha256": "bb6c24ae6bf09d9246b99a4894bab5e3aa57d63d4c5968ca669767503a2591db"
+    },
+    {
+      "after_mean_delta2": 21.70400047302246,
+      "after_svg": "after\\converted_svgs\\anonymous_square_05.svg",
+      "after_svg_sha256": "649975283a87476a087b04e9dcc27a65aef3a3abd5c262cf0250c0f559275406",
+      "before_mean_delta2": 29215.83984375,
+      "before_svg": "before\\converted_svgs\\anonymous_square_05.svg",
+      "before_svg_sha256": "120566436b071ae5b9b31c222dc52c9fd429a81fc956dd36497cd4378db8c41a",
+      "case_id": "anonymous_square_05",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Im Quadrat liegen ein schräger Strich von unten links nach oben rechts und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Die beiden Innenmarkierungen kontrastieren mit der Füllung. Weißer Hintergrund. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild.",
+      "image": "inputs\\anonymous_square_05.jpg",
+      "input_sha256": "2664bb1bcbf4578caa2e552a426324e46736b12b2054477cc9690a4727007f77",
+      "role": "holdout",
+      "source": "AC0714_S.jpg",
+      "source_sha256": "2664bb1bcbf4578caa2e552a426324e46736b12b2054477cc9690a4727007f77"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "reproducibility": {
+    "all_before_and_after_svg_bytes_equal": true,
+    "all_gate_records_equal": true,
+    "frozen_fresh_baseline_preserved": true,
+    "hashes": {
+      "AC0714_1_L": {
+        "after_svg_sha256": "bf815bc921db349fc9fd6c504603a4ba2c0345d8c2d1981f0b8800c06553f7b5",
+        "before_svg_sha256": "b0462e88bee0db79fdd6df1b4fab96678d2279a50ab3755be4766b82d6a7a73b",
+        "source_sha256": "c0fc8418d64bbce770c4e817097d935dd47f84085a25c89721ad6cbec9cf3c81"
+      },
+      "AC0714_1_M": {
+        "after_svg_sha256": "76f505b1bc1c7da153925e09bf0b7bc49f04a4fb37ef9ccaa044c053f2986d42",
+        "before_svg_sha256": "fbcf8811096c13205eac3592495fac534adf1e167be8232cf93bf4ee675fc511",
+        "source_sha256": "14fffeea401471fb0936e4f97c82710ab5da73226af4fe118020123e444614a4"
+      },
+      "AC0714_1_S": {
+        "after_svg_sha256": "f03023cb8d026ff4e70c86c335c310731d0c6a77e4a38f698741b21849b20658",
+        "before_svg_sha256": "120566436b071ae5b9b31c222dc52c9fd429a81fc956dd36497cd4378db8c41a",
+        "source_sha256": "982b57a2727636c42d4f71980a4fc9f3f3b9d060e13357693535e1e3eb61f259"
+      },
+      "AC0714_L": {
+        "after_svg_sha256": "7bc92e2d34c0f9d8ef52f1874e103c9d6122e799dac5878a92fec3922e827484",
+        "before_svg_sha256": "b0462e88bee0db79fdd6df1b4fab96678d2279a50ab3755be4766b82d6a7a73b",
+        "source_sha256": "e1d52cefbddea5f5bb0d652f99b352a584af418d1d99495fab26424867622192"
+      },
+      "AC0714_M": {
+        "after_svg_sha256": "0ea273b4398c6f403e32cd8c3333bbe9bfdda91a8c951e3b6649a47a8d817f25",
+        "before_svg_sha256": "fbcf8811096c13205eac3592495fac534adf1e167be8232cf93bf4ee675fc511",
+        "source_sha256": "bb6c24ae6bf09d9246b99a4894bab5e3aa57d63d4c5968ca669767503a2591db"
+      },
+      "AC0714_S": {
+        "after_svg_sha256": "649975283a87476a087b04e9dcc27a65aef3a3abd5c262cf0250c0f559275406",
+        "before_svg_sha256": "120566436b071ae5b9b31c222dc52c9fd429a81fc956dd36497cd4378db8c41a",
+        "source_sha256": "2664bb1bcbf4578caa2e552a426324e46736b12b2054477cc9690a4727007f77"
+      }
+    },
+    "runs": [
+      ".tmp/ac0714/acceptance05",
+      ".tmp/ac0714/acceptance06"
+    ]
+  },
+  "review": {
+    "boundary_conversion_command": "for variant in AC0301_1M_sia AC0232_M GE9024_6S; do ICC_FORCE_RECONVERT=1 python -m src.imageCompositeConverter artifacts\\images_to_convert --descriptions-path artifacts\\images_to_convert\\Finale_Wurzelformen_V3.xml --output-dir artifacts\\converted_images --iterations 64 --start $variant --end $variant --deterministic-order || exit $?; done",
+    "boundary_conversion_command_path": ".tmp/ac0714/review/plan_b_boundary_conversion_command.sh",
+    "boundary_triple": [
+      {
+        "height": 60,
+        "image_area": 3600,
+        "image_path": "artifacts/images_to_convert/AC0301_1M_sia.jpg",
+        "mean_delta2": 8920.044921875,
+        "normalized_mse": 0.04572623309944893,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0301_1M_sia.svg",
+        "variant": "AC0301_1M_sia",
+        "width": 60
+      },
+      {
+        "height": 30,
+        "image_area": 1350,
+        "image_path": "artifacts/images_to_convert/AC0232_M.jpg",
+        "mean_delta2": 8975.4150390625,
+        "normalized_mse": 0.046010073249070874,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0232_M.svg",
+        "variant": "AC0232_M",
+        "width": 45
+      },
+      {
+        "height": 10,
+        "image_area": 300,
+        "image_path": "artifacts/images_to_convert/GE9024_6S.jpg",
+        "mean_delta2": 8981.6767578125,
+        "normalized_mse": 0.0460421722814943,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/GE9024_6S.svg",
+        "variant": "GE9024_6S",
+        "width": 30
+      }
+    ],
+    "boundary_triple_csv": ".tmp/ac0714/review/plan_b_boundary_triple_v1.csv",
+    "candidate_triage_csv": ".tmp/ac0714/review/plan_b_candidate_triage_v1.csv",
+    "max_candidate_image_area": 6400,
+    "max_plan_b_candidates": 5,
+    "max_top_error_cases": 5,
+    "metrics": {
+      "boundary_triple_records": 3,
+      "diff_renderable_pairs": 945,
+      "diff_variants": 952,
+      "ranked_records": 1000,
+      "selected_candidates": 5,
+      "successful_above_threshold": 0,
+      "successful_missing_or_failed": 0,
+      "successful_renderable_pairs": 48,
+      "successful_variants": 48,
+      "top_error_cases": 5
+    },
+    "ranking_csv": ".tmp/ac0714/review/conversion_quality_ranking_v1.csv",
+    "records_csv": ".tmp/ac0714/review/conversion_quality_records_v2.csv",
+    "report_sha256": "18db6f6b4782297f65659a6f4dac2dbd6fa462029b9fb872d3c57ffb21a45a6b",
+    "reproduction_arguments": [
+      "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+      "-m",
+      "tools.review_conversion_quality",
+      "--output-dir",
+      ".tmp/ac0714/review",
+      "--exclude",
+      "AC0554_2_L",
+      "--exclude",
+      "AC0713_1_S",
+      "--exclude",
+      "DLG0010_1",
+      "--exclude",
+      "AC0724_1_S",
+      "--exclude",
+      "AC0252_1",
+      "--exclude",
+      "AC0252",
+      "--exclude",
+      "AC0252_2",
+      "--exclude",
+      "AC0731_1_L",
+      "--exclude",
+      "AC0731_1_M",
+      "--exclude",
+      "AC0731_1_S",
+      "--exclude",
+      "AC0731_L",
+      "--exclude",
+      "AC0731_M",
+      "--exclude",
+      "AC0731_S",
+      "--exclude",
+      "GE1003_M",
+      "--exclude",
+      "GE1003_L",
+      "--exclude",
+      "GE1003_S",
+      "--exclude",
+      "AC0404_1_L",
+      "--exclude",
+      "AC0404_1_M",
+      "--exclude",
+      "AC0404_1_S",
+      "--exclude",
+      "AC0404_1L_sia",
+      "--exclude",
+      "AC0404_1M_sia",
+      "--exclude",
+      "AC0404_1S_sia",
+      "--exclude",
+      "AC0404_2_L",
+      "--exclude",
+      "AC0404_2_M",
+      "--exclude",
+      "AC0404_2_S",
+      "--exclude",
+      "AC0404_2L_sia",
+      "--exclude",
+      "AC0404_2M_sia",
+      "--exclude",
+      "AC0404_2S_sia",
+      "--exclude",
+      "AC0404_L",
+      "--exclude",
+      "AC0404_L_sia",
+      "--exclude",
+      "AC0404_M",
+      "--exclude",
+      "AC0404_M_sia",
+      "--exclude",
+      "AC0404_S",
+      "--exclude",
+      "AC0404_S_sia",
+      "--exclude",
+      "GE9011_1M",
+      "--exclude",
+      "GE9011_1S",
+      "--exclude",
+      "GE9011_2M",
+      "--exclude",
+      "GE9011_2S",
+      "--exclude",
+      "GE9011_3M",
+      "--exclude",
+      "GE9011_3S",
+      "--exclude",
+      "GE9011_4M",
+      "--exclude",
+      "GE9011_4S",
+      "--exclude",
+      "GE9011_5M",
+      "--exclude",
+      "GE9011_5S",
+      "--exclude",
+      "GE9011_6M",
+      "--exclude",
+      "GE9011_6S",
+      "--exclude",
+      "GE9011_7M",
+      "--exclude",
+      "GE9011_7S",
+      "--exclude",
+      "GE0280",
+      "--exclude",
+      "GE0281",
+      "--exclude",
+      "GE0282",
+      "--exclude",
+      "GE0283",
+      "--exclude",
+      "GE0284",
+      "--exclude",
+      "GE0285",
+      "--exclude",
+      "GE9013_1M",
+      "--exclude",
+      "GE9013_1S",
+      "--exclude",
+      "GE9013_2M",
+      "--exclude",
+      "GE9013_2S",
+      "--exclude",
+      "GE9013_3M",
+      "--exclude",
+      "GE9013_3S",
+      "--exclude",
+      "GE9013_4M",
+      "--exclude",
+      "GE9013_4S",
+      "--exclude",
+      "GE9013_5M",
+      "--exclude",
+      "GE9013_5S",
+      "--exclude",
+      "GE9013_6M",
+      "--exclude",
+      "GE9013_6S",
+      "--exclude",
+      "GE9013_7M",
+      "--exclude",
+      "GE9013_7S",
+      "--exclude",
+      "AC0554_1_L",
+      "--exclude",
+      "AC0554_1_M",
+      "--exclude",
+      "AC0554_1_S",
+      "--exclude",
+      "AC0554_2_M",
+      "--exclude",
+      "AC0554_2_S",
+      "--exclude",
+      "AC0554_L",
+      "--exclude",
+      "AC0554_M",
+      "--exclude",
+      "AC0554_S",
+      "--exclude",
+      "DLG0031",
+      "--exclude",
+      "DLG0021",
+      "--exclude",
+      "AC0130_S",
+      "--exclude",
+      "AC0130_M",
+      "--exclude",
+      "AC0130_L",
+      "--exclude",
+      "GE1420_S",
+      "--exclude",
+      "GE1420_M",
+      "--exclude",
+      "GE1420_L",
+      "--exclude",
+      "GE1420_M_neutral",
+      "--exclude",
+      "AC0704_1_L",
+      "--exclude",
+      "AC0704_1_M",
+      "--exclude",
+      "AC0704_1_S",
+      "--exclude",
+      "AC0704_L",
+      "--exclude",
+      "AC0704_M",
+      "--exclude",
+      "AC0704_S",
+      "--exclude",
+      "AC0402_1_S",
+      "--exclude",
+      "AC0402_1L_sia",
+      "--exclude",
+      "AC0402_1M_sia",
+      "--exclude",
+      "AC0402_1S_sia",
+      "--exclude",
+      "AC0402_1_L",
+      "--exclude",
+      "AC0402_1_M",
+      "--exclude",
+      "AC0402_2L_sia",
+      "--exclude",
+      "AC0402_2M_sia",
+      "--exclude",
+      "AC0402_2S_sia",
+      "--exclude",
+      "AC0402_2_L",
+      "--exclude",
+      "AC0402_2_M",
+      "--exclude",
+      "AC0402_2_S",
+      "--exclude",
+      "AC0402_L",
+      "--exclude",
+      "AC0402_L_sia",
+      "--exclude",
+      "AC0402_M",
+      "--exclude",
+      "AC0402_M_sia",
+      "--exclude",
+      "AC0402_S",
+      "--exclude",
+      "AC0402_S_sia",
+      "--exclude",
+      "AC0403_1_L",
+      "--exclude",
+      "AC0403_1L_sia",
+      "--exclude",
+      "AC0403_1M_sia",
+      "--exclude",
+      "AC0403_1S_sia",
+      "--exclude",
+      "AC0403_1_M",
+      "--exclude",
+      "AC0403_1_S",
+      "--exclude",
+      "AC0403_2L_sia",
+      "--exclude",
+      "AC0403_2M_sia",
+      "--exclude",
+      "AC0403_2S_sia",
+      "--exclude",
+      "AC0403_2_L",
+      "--exclude",
+      "AC0403_2_M",
+      "--exclude",
+      "AC0403_2_S",
+      "--exclude",
+      "AC0403_L",
+      "--exclude",
+      "AC0403_L_sia",
+      "--exclude",
+      "AC0403_M",
+      "--exclude",
+      "AC0403_M_sia",
+      "--exclude",
+      "AC0403_S",
+      "--exclude",
+      "AC0403_S_sia",
+      "--exclude",
+      "AC0714_1_L",
+      "--exclude",
+      "AC0714_1_M",
+      "--exclude",
+      "AC0714_1_S",
+      "--exclude",
+      "AC0714_L",
+      "--exclude",
+      "AC0714_M",
+      "--exclude",
+      "AC0714_S"
+    ],
+    "schema_version": "conversion_quality_review_v2",
+    "selected_candidates": [
+      {
+        "height": 44,
+        "image_area": 1980,
+        "image_path": "artifacts/images_to_convert/GE0032.jpg",
+        "mean_delta2": 13826.3896484375,
+        "normalized_mse": 0.07087730179898757,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/GE0032.svg",
+        "variant": "GE0032",
+        "width": 45
+      },
+      {
+        "height": 60,
+        "image_area": 1200,
+        "image_path": "artifacts/images_to_convert/GE9023_6M.jpg",
+        "mean_delta2": 13675.259765625,
+        "normalized_mse": 0.07010257473087274,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/GE9023_6M.svg",
+        "variant": "GE9023_6M",
+        "width": 20
+      },
+      {
+        "height": 30,
+        "image_area": 900,
+        "image_path": "artifacts/images_to_convert/AC0413_1_M.jpg",
+        "mean_delta2": 13465.6943359375,
+        "normalized_mse": 0.06902829340478021,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0413_1_M.svg",
+        "variant": "AC0413_1_M",
+        "width": 30
+      },
+      {
+        "height": 45,
+        "image_area": 1125,
+        "image_path": "artifacts/images_to_convert/AC0713_1_L.jpg",
+        "mean_delta2": 13458.083984375,
+        "normalized_mse": 0.06898928096565424,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0713_1_L.svg",
+        "variant": "AC0713_1_L",
+        "width": 25
+      },
+      {
+        "height": 25,
+        "image_area": 375,
+        "image_path": "artifacts/images_to_convert/AC0721_1_S.jpg",
+        "mean_delta2": 13368.759765625,
+        "normalized_mse": 0.06853138416314238,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0721_1_S.svg",
+        "variant": "AC0721_1_S",
+        "width": 15
+      }
+    ],
+    "threshold_normalized_mse": 0.045945679012345676,
+    "top_error_cases_csv": ".tmp/ac0714/review/top_reproducible_error_cases_v1.csv",
+    "top_reproducible_error_cases": [
+      {
+        "height": 40,
+        "image_area": 3200,
+        "image_path": "artifacts/images_to_convert/AC0554_1_L.jpg",
+        "mean_delta2": 46170.3984375,
+        "normalized_mse": 0.23668024317570166,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0554_1_L.svg",
+        "variant": "AC0554_1_L",
+        "width": 80
+      },
+      {
+        "height": 40,
+        "image_area": 3200,
+        "image_path": "artifacts/images_to_convert/AC0554_2_L.jpg",
+        "mean_delta2": 35769.07421875,
+        "normalized_mse": 0.18336062652185056,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0554_2_L.svg",
+        "variant": "AC0554_2_L",
+        "width": 80
+      },
+      {
+        "height": 25,
+        "image_area": 1125,
+        "image_path": "artifacts/images_to_convert/AC0714_L.jpg",
+        "mean_delta2": 32695.380859375,
+        "normalized_mse": 0.16760415665449185,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0714_L.svg",
+        "variant": "AC0714_L",
+        "width": 45
+      },
+      {
+        "height": 25,
+        "image_area": 375,
+        "image_path": "artifacts/images_to_convert/AC0713_1_S.jpg",
+        "mean_delta2": 24899.021484375,
+        "normalized_mse": 0.12763819804882737,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0713_1_S.svg",
+        "variant": "AC0713_1_S",
+        "width": 15
+      },
+      {
+        "height": 15,
+        "image_area": 375,
+        "image_path": "artifacts/images_to_convert/AC0724_1_S.jpg",
+        "mean_delta2": 22276.9609375,
+        "normalized_mse": 0.11419690343457645,
+        "source": "diff_inventory",
+        "status": "ok",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0724_1_S.svg",
+        "variant": "AC0724_1_S",
+        "width": 25
+      }
+    ]
+  },
+  "runtime_sha256": {
+    "src\\iCCModules\\imageCompositeConverterNonCompositeRuntime.py": "bfc7e0375e0a3d755b4c2103f44ccfaae5f00995d0bb6d1b0730f6103d313d4b",
+    "src\\iCCModules\\imageCompositeConverterSquareStem.py": "a51da88308e452727c633c8ae3d381be986b87e03fd125fd03653a5755c8977c"
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "1813d56c516a6435e9972f43ed978c306d29b15fc570e7d7d0c558f2cbcc96fa",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9900518655776978,
+          "error_per_pixel": 0.0005528677168311667,
+          "object_mask_iou": 1.0,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5458102822303772,
+          "error_per_pixel": 0.039147350678424966,
+          "object_mask_iou": 0.8082758620689655,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_square_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0005528677168311667,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 12,
+            "path_complexity_ratio": 3.0,
+            "path_count": 3,
+            "vector_element_count": 4
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9974,
+            "edge_alignment": 0.9901,
+            "pixel_similarity": 0.9994,
+            "semantic_score": 1.0,
+            "structure_score": 1.0
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9810355305671692,
+          "error_per_pixel": 0.00022016439959741046,
+          "object_mask_iou": 0.9974619289340102,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5184199810028076,
+          "error_per_pixel": 0.02601119711569268,
+          "object_mask_iou": 0.8430493273542601,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_square_01",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.00022016439959741046,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 12,
+            "path_complexity_ratio": 3.0,
+            "path_count": 3,
+            "vector_element_count": 4
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9946,
+            "edge_alignment": 0.981,
+            "pixel_similarity": 0.9998,
+            "semantic_score": 1.0,
+            "structure_score": 0.9975
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9446812868118286,
+          "error_per_pixel": 0.0004560570653915161,
+          "object_mask_iou": 1.0,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.7258425951004028,
+          "error_per_pixel": 0.011050573747677175,
+          "object_mask_iou": 0.9818181818181818,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_square_02",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0004560570653915161,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 12,
+            "path_complexity_ratio": 3.0,
+            "path_count": 3,
+            "vector_element_count": 4
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9861,
+            "edge_alignment": 0.9447,
+            "pixel_similarity": 0.9995,
+            "semantic_score": 1.0,
+            "structure_score": 1.0
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9957605600357056,
+          "error_per_pixel": 0.0001246426592236159,
+          "object_mask_iou": 0.9912663755458515,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5647088885307312,
+          "error_per_pixel": 0.169504457420223,
+          "object_mask_iou": 0.2868965517241379,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_square_03",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0001246426592236159,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 12,
+            "path_complexity_ratio": 3.0,
+            "path_count": 3,
+            "vector_element_count": 4
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9967,
+            "edge_alignment": 0.9958,
+            "pixel_similarity": 0.9999,
+            "semantic_score": 1.0,
+            "structure_score": 0.9913
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9095488786697388,
+          "error_per_pixel": 0.00012026143321528979,
+          "object_mask_iou": 0.9820359281437125,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.46418166160583496,
+          "error_per_pixel": 0.1593947540208894,
+          "object_mask_iou": 0.33183856502242154,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_square_04",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.00012026143321528979,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 12,
+            "path_complexity_ratio": 3.0,
+            "path_count": 3,
+            "vector_element_count": 4
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9729,
+            "edge_alignment": 0.9095,
+            "pixel_similarity": 0.9999,
+            "semantic_score": 1.0,
+            "structure_score": 0.982
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9474197626113892,
+          "error_per_pixel": 0.00011125977430743284,
+          "object_mask_iou": 0.9647058823529412,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5290417671203613,
+          "error_per_pixel": 0.14976721693579392,
+          "object_mask_iou": 0.38181818181818183,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_square_05",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.00011125977430743284,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 12,
+            "path_complexity_ratio": 3.0,
+            "path_count": 3,
+            "vector_element_count": 4
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.978,
+            "edge_alignment": 0.9474,
+            "pixel_similarity": 0.9999,
+            "semantic_score": 1.0,
+            "structure_score": 0.9647
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "commit": "5726e87b8336fb76df094eabc58e81476c304bd7",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_square_00": "c0fc8418d64bbce770c4e817097d935dd47f84085a25c89721ad6cbec9cf3c81",
+        "anonymous_square_01": "14fffeea401471fb0936e4f97c82710ab5da73226af4fe118020123e444614a4",
+        "anonymous_square_02": "982b57a2727636c42d4f71980a4fc9f3f3b9d060e13357693535e1e3eb61f259",
+        "anonymous_square_03": "e1d52cefbddea5f5bb0d652f99b352a584af418d1d99495fab26424867622192",
+        "anonymous_square_04": "bb6c24ae6bf09d9246b99a4894bab5e3aa57d63d4c5968ca669767503a2591db",
+        "anonymous_square_05": "2664bb1bcbf4578caa2e552a426324e46736b12b2054477cc9690a4727007f77"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 6,
+      "improved": 6,
+      "satisfactory": 6,
+      "technically_completed": 6
+    }
+  },
+  "schema_version": "right_stem_square_recheck_v1",
+  "semantic_contract": "filled square with centered rightward stem, rising slash and square dot inside",
+  "strict_plan_b_jpg_quality": {
+    "AC0714_1_L": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0,
+        "path_count": 3,
+        "vector_element_count": 4
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9900518655776978,
+        "foreground_iou": 0.9461077844311377,
+        "foreground_mse": 0.0009047033963724971,
+        "normalized_mse": 0.0005528676556423306
+      },
+      "satisfactory": true
+    },
+    "AC0714_1_M": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0,
+        "path_count": 3,
+        "vector_element_count": 4
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9810355305671692,
+        "foreground_iou": 1.0,
+        "foreground_mse": 0.0003467220230959356,
+        "normalized_mse": 0.000220164394704625
+      },
+      "satisfactory": true
+    },
+    "AC0714_1_S": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0,
+        "path_count": 3,
+        "vector_element_count": 4
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9446812868118286,
+        "foreground_iou": 0.9553571428571429,
+        "foreground_mse": 0.0004558533546514809,
+        "normalized_mse": 0.00045605708146467805
+      },
+      "satisfactory": true
+    },
+    "AC0714_L": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0,
+        "path_count": 3,
+        "vector_element_count": 4
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9957605600357056,
+        "foreground_iou": 0.996415770609319,
+        "foreground_mse": 0.0004307138442527503,
+        "normalized_mse": 0.0001246426545549184
+      },
+      "satisfactory": true
+    },
+    "AC0714_M": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0,
+        "path_count": 3,
+        "vector_element_count": 4
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9095488786697388,
+        "foreground_iou": 1.0,
+        "foreground_mse": 0.000367099535651505,
+        "normalized_mse": 0.00012026143667753786
+      },
+      "satisfactory": true
+    },
+    "AC0714_S": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0,
+        "path_count": 3,
+        "vector_element_count": 4
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9474197626113892,
+        "foreground_iou": 1.0,
+        "foreground_mse": 7.360353629337624e-05,
+        "normalized_mse": 0.00011125976743642241
+      },
+      "satisfactory": true
+    }
+  },
+  "verification": {
+    "cli_help": "passed",
+    "completion": {
+      "duration_seconds": 12370.969,
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "heavy_modules_enabled": true,
+      "junit_sha256": "6ec0131cf0ea7c63443df749bd07e6135b1c29f96f944fb48e73e37ea9dae340",
+      "log_sha256": "1c51492b245aeb5106c17544777d8018209e9ceca5061798853a0eac25315e60",
+      "passed": 2324,
+      "skipped": 29
+    },
+    "diff_whitespace": {
+      "command": "git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol diff --cached --check",
+      "note": "Accept Windows CRLF line endings; retain saved CLI SVG bytes exactly.",
+      "status": "passed"
+    },
+    "focused_tests": {
+      "failed": 0,
+      "junit_sha256": "93369a69c92aa3038f45d98882df5d384606643cc17920471b1bb4f73abbe1a4",
+      "log_sha256": "32dfb1532893414c694123d8a1ee8eaf607871fd3345cd5e7a6f0c44315682c2",
+      "passed": 63
+    },
+    "native_windows_diagnostic": {
+      "code": "0xc0000008",
+      "control_log_sha256": "da5459dd17fd74e21ec3ebcea631c47b07ffd7504c7d8c355d8def0737f42cfb",
+      "isolated_control": "1 passed, exit 0",
+      "previously_documented": "docs/next_arbeitspaket_2026-10-08_ac0704_1_l.md",
+      "test": "tests/test_image_composite_converter.py::test_try_template_transfer_does_not_shuffle_when_deterministic_order_is_enabled"
+    },
+    "runtime_image_id_check": "0 occurrences",
+    "satisfactory_baseline_preservation": {
+      "checked": 31,
+      "execution_mode": "standard compatibility mode",
+      "log_sha256": "49e060866323bf4bbc6ce49ee9c5f324d9c57b4b39d8c8035e6d501240e5f8e1",
+      "regression_count": 0
+    },
+    "syntax_check": "passed"
+  }
+}

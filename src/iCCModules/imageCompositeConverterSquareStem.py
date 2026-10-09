@@ -8,7 +8,40 @@ import cv2
 import numpy as np
 
 
-def fit_square_stem(geometry_ir, *, image, render_fn, error_fn):
+def _observe_slash_and_dot(interior, x0, y0):
+    """Resolve two contrast cores: a slender rising slash and a nearby square.
+
+    The raster supplies their positions, widths and shared color. This is a
+    constrained geometric observation, without a font or stored glyph outline.
+    """
+    fill = np.median(interior, axis=(0, 1))
+    contrast = np.linalg.norm(interior.astype(float)-fill, axis=2)
+    core = contrast > max(40., float(contrast.max())*.6)
+    count, labels, stats, _ = cv2.connectedComponentsWithStats(core.astype(np.uint8))
+    if count != 3:
+        return None
+    slash, dot = sorted((1, 2), key=lambda i: stats[i, cv2.CC_STAT_HEIGHT], reverse=True)
+    sx, sy, sw, sh, area = stats[slash]
+    dx, dy, dw, dh, _ = stats[dot]
+    if sh < 3 or sh < dh*2 or not .5 <= dw/dh <= 2 or dw > sh*.5:
+        return None
+    ys, xs = np.nonzero(labels == slash)
+    slope, intercept = np.polyfit(ys, xs, 1)
+    if not -.8 < slope < -.08 or np.std(xs-(slope*ys+intercept)) > max(1., sw*.25):
+        return None
+    top_x, bottom_x = slope*sy+intercept+.5, slope*(sy+sh)+intercept+.5
+    if not (dx+dw <= bottom_x and sy+sh*.55 <= dy < sy+sh+dh):
+        return None
+    # Exclude contrast fringes as well as cores from the flat-fill check.
+    background = interior[contrast < 25]
+    if not len(background) or np.std(background.astype(float), axis=0).max() > 18:
+        return None
+    mark_color = np.median(interior[core], axis=0)
+    return [x0+top_x, y0+sy, x0+bottom_x, y0+sy+sh, area/sh,
+            x0+dx, y0+dy, float(dw), float(dh), *mark_color]
+
+
+def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description=''):
     if len(geometry_ir) != 1 or geometry_ir[0].get('kind') != 'RightStemSquareKelleGlyph':
         return None
     arr = np.asarray(image)
@@ -39,7 +72,15 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn):
         return None
     margin = max(2, int((bottom-top)*.15))
     interior = arr[top+margin:bottom-margin+1, left+margin:right-margin+1]
-    if not interior.size or float(np.std(interior.astype(float),axis=(0,1)).max()) > 18:
+    if not interior.size:
+        return None
+    desc = description.casefold()
+    marked = ('punkt' in desc and any(word in desc for word in ('schräg', 'schraeg', 'diagonal'))
+              and not any(word in desc for word in ('ohne markierung', 'ohne innenmarkierung', 'ohne punkt')))
+    marks = _observe_slash_and_dot(interior, left+margin, top+margin) if marked else None
+    if marked and marks is None:
+        return None
+    if not marked and float(np.std(interior.astype(float),axis=(0,1)).max()) > 18:
         return None
     allowed = np.zeros_like(mask)
     allowed[top:bottom+1, left:right+1] = True
@@ -54,6 +95,8 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn):
     line = np.percentile(arr[:,right+2:][outside],10,axis=0)
     p = np.array([left+.5,top+.5,right-left,bottom-top,cy,
                   right+2+xs.max()+1.,1.,1.,*fill,*border,*line],dtype=float)
+    if marks is not None:
+        p = np.concatenate((p, marks))
     evaluations = 0
 
     def color(values):
@@ -71,11 +114,34 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn):
                      body_stroke=color(values[11:14]),body_stroke_width=bs/min(w,h),
                      connector=[[ (x+bw)/w,hy/h],[end/w,hy/h]],
                      connector_width=ls/min(w,h),connector_stroke=color(values[14:17]))
+        if marks is not None:
+            tx,ty,bx,by,thickness,dx,dy,dw,dh = values[17:26]
+            if not (ty < by and tx > bx and .2 <= thickness < (by-ty)*.4
+                    and .2 <= dw <= (by-ty)*.5 and .2 <= dh <= (by-ty)*.5
+                    and .5 <= dw/dh <= 2 and dx+dw <= bx and dy >= ty+(by-ty)*.55):
+                return None
+            shapes = (
+                ('slash', [(tx-thickness/2,ty),(tx+thickness/2,ty),
+                           (bx+thickness/2,by),(bx-thickness/2,by)]),
+                ('dot', [(dx,dy),(dx+dw,dy),(dx+dw,dy+dh),(dx,dy+dh)]),
+            )
+            for name, points in shapes:
+                if not all(x+bs/2 < px < x+bw-bs/2 and y+bs/2 < py < y+bh-bs/2 for px,py in points):
+                    return None
+                ir.append({'kind':'PolygonPath','id':'raster_interior_'+name,
+                           'role':'observed_interior_mark','closed':True,
+                           'points':[[px/w,py/h] for px,py in points],
+                           'fill':color(values[26:29]),'stroke':'none','stroke_width':0.})
         rendered = render_fn(ir)
         evaluations += 1
         if rendered is None:
             return None
         score = float(error_fn(rendered))
+        if math.isfinite(score) and marks is not None:
+            # Small antialiased marks and borders need squared color residuals:
+            # the CLI's mean absolute error can hide a wrong contour behind a
+            # large flat interior. Keep the caller's error for final acceptance.
+            score = float(np.mean(np.sum((arr.astype(float)-rendered.astype(float))**2, axis=2)))
         return (score,ir,rendered) if math.isfinite(score) else None
 
     base = render_fn(geometry_ir)
@@ -88,7 +154,10 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn):
     if best is None:
         return None
     for step,shade in ((1.,24.),(.5,12.),(.25,6.),(.125,3.)):
-        for _ in range(3):
+        # The marked topology adds two contours and a contrast color. Allow
+        # them to settle jointly with the border, with a fixed upper bound.
+        for _ in range(6 if marks is not None else 3):
+            previous_score = best[0]
             # A thicker centered border moves both inner edges. Register its
             # width together with the rectangle, preserving the outer bounds.
             # Independent probes can otherwise stall one pixel off at 2x scale.
@@ -103,11 +172,14 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn):
             for i in range(len(p)):
                 for sign in (-1,1):
                     probe = p.copy()
-                    probe[i] += sign*(step if i<8 else shade)
+                    probe[i] += sign*(step if i<8 or 17<=i<26 else shade)
                     result = evaluate(probe)
                     if result is not None and result[0] < best[0]-1e-9:
                         p,best = probe,result
-    if best[0] >= initial-1e-9:
+            if marks is not None and best[0] == previous_score:
+                break
+    final = float(error_fn(best[2]))
+    if not math.isfinite(final) or final >= initial-1e-9:
         return None
     return {'geometry_ir':best[1],'rendered':best[2],'initial_error':initial,
-            'final_error':best[0],'evaluations':evaluations,'source':'square_and_handle_raster_profiles_v1'}
+            'final_error':final,'evaluations':evaluations,'source':'square_and_handle_raster_profiles_v1'}
