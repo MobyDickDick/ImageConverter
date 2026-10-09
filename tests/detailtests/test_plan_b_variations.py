@@ -165,23 +165,57 @@ def test_all_sixteen_run_even_after_failure_and_overall_exit_is_red(tmp_path, mo
     calls = []
     def run(case, output, **kwargs):
         calls.append(case["case_id"])
-        passed = len(calls) != 1
+        passed = case["case_id"] != "probe_01"
         return {**case, "satisfactory": passed, "failures": [] if passed else ["conversion_timeout"], "elapsed_seconds": 0}
     monkeypatch.setattr(battery, "run_case", run)
     output = tmp_path / "run"
     report = battery.run_battery(source, DESCRIPTION, output, seed=12)
-    assert len(calls) == 16
-    assert report["summary"] == {"required": 16, "completed": 16, "passed": 15, "failed": 1, "satisfactory": False}
+    assert calls == ["original", *[f"probe_{i:02d}" for i in range(1, 17)]]
+    assert report["summary"] == {"required": 17, "completed": 17, "passed": 16, "failed": 1, "satisfactory": False}
+    assert report["original_satisfactory"] and report["variations_started"]
+    assert report["status"] == "completed"
     assert json.loads((output / "report.json").read_text(encoding="utf-8")) == report
-    assert list(output.iterdir()) == [output / "report.json"]
+    assert {p.name for p in output.iterdir()} == {"report.json", "source.png"}
+    assert battery.sha256((output / "source.png").read_bytes()) == report["source_image_sha256"]
     assert report['source_description'] == DESCRIPTION
     assert 'reference_svg' not in report['cases'][0]
     monkeypatch.setattr(battery, "run_battery", lambda *args, **kwargs: report)
     description = tmp_path / "description.txt"
     description.write_text(DESCRIPTION, encoding="utf-8")
     assert battery.main(["--svg", str(source), "--description-file", str(description)]) == 1
-    assert not battery.summarize([{"satisfactory": True}] * 15)["satisfactory"]
-    assert battery.summarize([{"satisfactory": True}] * 16)["satisfactory"]
+    assert not battery.summarize([{"satisfactory": True}] * 16)["satisfactory"]
+    assert battery.summarize([{"satisfactory": True}] * 17)["satisfactory"]
+
+
+@pytest.mark.parametrize("failure", ["foreground_iou_outside_limit", "conversion_timeout", "converter_error",
+                                    "missing_or_ambiguous_output", "reference_svg_access"])
+def test_original_failure_prevents_generation_and_execution_of_variations(tmp_path, monkeypatch, failure):
+    source = tmp_path / "source.svg"
+    source.write_text(SVG, encoding="utf-8")
+    calls = []
+    def run(case, output, **kwargs):
+        calls.append(case["case_id"])
+        assert case["description"] == DESCRIPTION
+        assert (output / case["reference_svg"]).read_text(encoding="utf-8") == SVG
+        assert case["variation"] == {"scale": 1.0, "relative_x": 0.0, "relative_y": 0.0}
+        return {**case, "satisfactory": False, "failures": [failure], "elapsed_seconds": 0}
+    def forbidden_variations(*args, **kwargs):
+        pytest.fail("Variations must not be generated before the original quality check passes")
+    monkeypatch.setattr(battery, "run_case", run)
+    monkeypatch.setattr(battery, "make_variations", forbidden_variations)
+    output = tmp_path / "run"
+    report = battery.run_battery(source, DESCRIPTION, output, seed=12)
+    assert calls == ["original"]
+    assert report["status"] == "original_not_convertible"
+    assert report["original_satisfactory"] is False and report["variations_started"] is False
+    assert report["summary"] == {"required": 17, "completed": 1, "passed": 0, "failed": 1, "satisfactory": False}
+    assert report["cases"][0]["failures"] == [failure]
+    assert json.loads((output / "report.json").read_text(encoding="utf-8")) == report
+    assert {p.name for p in output.iterdir()} == {"report.json", "source.png"}
+    monkeypatch.setattr(battery, "run_battery", lambda *args, **kwargs: report)
+    description = tmp_path / "description.txt"
+    description.write_text(DESCRIPTION, encoding="utf-8")
+    assert battery.main(["--svg", str(source), "--description-file", str(description)]) == 1
 
 
 def test_debug_files_are_kept_only_when_requested(tmp_path, monkeypatch):
@@ -191,29 +225,93 @@ def test_debug_files_are_kept_only_when_requested(tmp_path, monkeypatch):
                         {**case, 'satisfactory': True, 'failures': [], 'elapsed_seconds': 0})
     output = tmp_path / 'debug'
     report = battery.run_battery(source, DESCRIPTION, output, seed=12, keep_debug_artifacts=True)
-    assert report['summary']['passed'] == 16
+    assert report['summary']['passed'] == 17
+    assert report['summary']['satisfactory']
+    assert report['cases'][0]['case_id'] == 'original'
     assert (output / 'source.svg').exists()
     assert (output / 'manifest.json').exists()
     assert (output / 'references').is_dir()
     assert (output / 'probe_01/input/probe_01.png').exists()
+    assert (output / 'original/input/original.png').read_bytes() == (output / 'source.png').read_bytes()
+    assert [c['case_id'] for c in json.loads((output / 'manifest.json').read_text())['cases']] == [
+        c['case_id'] for c in report['cases']]
 
 
-def test_interruption_removes_only_the_fresh_run_work_files(tmp_path, monkeypatch):
+@pytest.mark.parametrize('interrupt_case', ['original', 'probe_02'])
+def test_interruption_removes_only_the_fresh_run_work_files(tmp_path, monkeypatch, interrupt_case):
     source = tmp_path / 'source.svg'
     source.write_text(SVG, encoding='utf-8')
-    def interrupted(*args, **kwargs):
-        raise KeyboardInterrupt
+    def interrupted(case, output, **kwargs):
+        if case['case_id'] == interrupt_case:
+            raise KeyboardInterrupt
+        return {**case, 'satisfactory': True, 'failures': [], 'elapsed_seconds': 0}
     monkeypatch.setattr(battery, 'run_case', interrupted)
     output = tmp_path / 'run'
     with pytest.raises(KeyboardInterrupt):
         battery.run_battery(source, DESCRIPTION, output, seed=12)
-    assert not list(output.iterdir())
+    assert {p.name for p in output.iterdir()} == {'report.json', 'source.png'}
+    report = json.loads((output / 'report.json').read_text(encoding='utf-8'))
+    assert report['status'] == 'interrupted'
+    assert report['summary']['completed'] == (0 if interrupt_case == 'original' else 2)
+    assert not report['summary']['satisfactory']
     assert source.read_text(encoding='utf-8') == SVG
     sentinel = output / 'untouched.txt'
     sentinel.write_text('keep', encoding='utf-8')
     with pytest.raises(FileExistsError):
         battery.run_battery(source, DESCRIPTION, output, seed=12)
     assert sentinel.read_text(encoding='utf-8') == 'keep'
+
+
+@pytest.mark.parametrize('original_passes', [False, True])
+def test_original_uses_real_independent_quality_gate_before_variants(tmp_path, monkeypatch, original_passes):
+    source = tmp_path / 'source.svg'
+    source.write_text(SVG, encoding='utf-8')
+    output = tmp_path / 'run'
+    calls = []
+    def invoke(command, **kwargs):
+        conversion = Path(command[command.index('--output-dir') + 1])
+        name = conversion.parent.name
+        calls.append(name)
+        inputs = conversion.parent / 'input'
+        description = ET.parse(inputs / 'descriptions.xml').findtext('entry/beschreibung')
+        reference = (output / 'references' / (name + '.svg')).read_text(encoding='utf-8')
+        if name == 'original':
+            assert reference == SVG
+            assert description == DESCRIPTION
+        else:
+            assert description.startswith(DESCRIPTION)
+        result_dir = conversion / 'converted_svgs'
+        result_dir.mkdir(parents=True)
+        result_svg = reference.replace('fill="green"', 'fill="red"') if name == 'original' and not original_passes else reference
+        (result_dir / (name.upper() + '.svg')).write_text(result_svg, encoding='utf-8')
+        return subprocess.CompletedProcess(command, 0)
+    monkeypatch.setattr(battery.subprocess, 'run', invoke)
+    report = battery.run_battery(source, DESCRIPTION, output, seed=123)
+    assert report['original_satisfactory'] == original_passes
+    assert report['summary']['satisfactory'] == original_passes
+    assert len(calls) == (17 if original_passes else 1) and calls[0] == 'original'
+    original_error = report['cases'][0]['metrics']['foreground_mse']
+    assert original_error == 0 if original_passes else original_error > battery.LIMITS['max_foreground_mse']
+    assert report['limits'] == battery.LIMITS
+    if not original_passes:
+        assert 'foreground_mse_outside_limit' in report['cases'][0]['failures']
+
+
+def test_variant_preparation_error_retains_original_result_and_cleans_work_files(tmp_path, monkeypatch):
+    source = tmp_path / 'source.svg'
+    source.write_text(SVG, encoding='utf-8')
+    monkeypatch.setattr(battery, 'run_case', lambda case, output, **kwargs:
+                        {**case, 'satisfactory': True, 'failures': [], 'elapsed_seconds': 0})
+    def broken_variants(*args):
+        raise ValueError('Duplicate raster variation')
+    monkeypatch.setattr(battery, 'make_variations', broken_variants)
+    output = tmp_path / 'run'
+    with pytest.raises(ValueError, match='Duplicate raster'):
+        battery.run_battery(source, DESCRIPTION, output, seed=12)
+    report = json.loads((output / 'report.json').read_text(encoding='utf-8'))
+    assert report['status'] == 'preparation_error' and report['original_satisfactory']
+    assert report['summary']['completed'] == 1 and not report['summary']['satisfactory']
+    assert {p.name for p in output.iterdir()} == {'report.json', 'source.png'}
 
 
 def test_worker_blocks_external_svg_reads_even_when_catalog_references_are_in_description(tmp_path):
@@ -235,7 +333,9 @@ def test_real_worker_preserves_parent_toolchain_with_incompatible_pythonpath(tmp
     # inherited marker would enable a separate renderer subprocess per probe.
     monkeypatch.delenv('PYTEST_CURRENT_TEST', raising=False)
     output = tmp_path / 'isolated-run'
-    case = battery.prepare_cases(SVG, DESCRIPTION, output, 123)[0]
+    case = battery.make_original_case(SVG, DESCRIPTION)
+    output.mkdir()
+    battery.write_cases([case], output)
     result = battery.run_case(case, output, timeout=30, iterations=1)
     assert result['returncode'] == 0
     assert result['blocked_svg_reads'] == []
