@@ -20,7 +20,23 @@ zurückstellen; anschließend den Code vereinfachen und als verständliches Prod
 aufbereiten. Ausgangszählung: 43.376 Python-Zeilen unter `src/`, ohne Tests,
 Werkzeuge und externe Bibliotheken. Details: `docs/product_roadmap.md`.
 
-**Aktueller Abschluss 2026-10-09: `AC0714_L` (Quadrat, rechter Griff, Strich und Punkt).**
+**Aktueller Abschluss 2026-10-09: `GE0032` und drei Größenvarianten.**
+Das Grundbild zeigt einen Abwärtspfeil; die Größenvarianten zeigen dagegen
+Kreisscheiben mit mittigem Rundbalken. Beide XML-Kataloge trennen die Motive
+jetzt mit eigenständigen Beschreibungen. Allgemeine Rasterregistrierung und
+native Kreis-/Ellipsen-Verlaufsdarstellung sichern alle vier Fälle ohne
+Pflichtmetrikregression durch beide regulären Gates und die strengeren
+Plan-B-Pixelgrenzen. Die frische Ziel-CLI-Baseline sinkt von `13607.773438`
+auf `367.705048`. Zwei unabhängige CLI-Läufe reproduzieren alle SVGs und
+Gateentscheidungen; die ursprünglichen Vorher-SVGs bleiben bytegleich.
+134 fokussierte Tests und die Gesamtsuite mit 2.380 Tests bestehen; 29 bestehende
+Windows-Skips bleiben sichtbar. Die 31 Bestandsschutzvarianten haben null
+Regressionen. Vier Ergebnis-SVGs und kompakter Nachweis sind gespeichert; `PB-POOL-2026-10-07` bleibt offen. Alle 48 bisherigen
+Erfolgsvarianten bleiben im Review unter der Grenze. Nächste Rotation:
+`GE9023_6M`, `AC0413_1_M`, `AC0713_1_L`, `AC0721_1_S`, `AC0711_1_M`.
+Details: `docs/next_arbeitspaket_2026-10-09_ge0032.md`.
+
+**Vorheriger Abschluss 2026-10-09: `AC0714_L` (Quadrat, rechter Griff, Strich und Punkt).**
 Alle sechs Farb-/Größenvarianten bestehen beide regulären Qualitätsgates ohne
 Pflichtmetrikregression und zusätzlich die strengeren Plan-B-Pixelgrenzen.
 Die frische Ziel-CLI-Baseline sinkt von `mean_delta2=33066.082031` auf `24.314667`.

@@ -157,7 +157,7 @@ def _expand_axis_aligned_linear_gradients_for_fitz(svg_string: str) -> str:
 
 
 def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=None, size_w=None, size_h=None) -> str:
-    """Paint a closed Bezier fill through its exact native antialiasing mask.
+    """Paint a closed curve or ellipse through its native antialiasing mask.
 
     Only the private render document gets a temporary image paint layer. Saved
     SVGs retain curves and gradients. The mask is rendered from the native path
@@ -165,7 +165,7 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
     overlapping gradient bands. Flattening is used only for paint bounds.
     Unsupported commands, compound paths, transforms and alpha are untouched.
     """
-    if 'linearGradient' not in svg_string or '<path' not in svg_string:
+    if 'linearGradient' not in svg_string or not re.search(r'<(?:\w+:)?(?:path|circle|ellipse)\b', svg_string):
         return svg_string
     try:
         root = ET.fromstring(svg_string)
@@ -196,14 +196,28 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
 
     for parent in list(root.iter()):
         for index, path in reversed(list(enumerate(list(parent)))):
-            if path.tag.rsplit('}',1)[-1] != 'path':
+            kind = path.tag.rsplit('}',1)[-1]
+            if kind not in {'path', 'circle', 'ellipse'}:
                 continue
             match = re.fullmatch(r'url\(#([^)]+)\)',path.get('fill',''))
             if not match or match.group(1) not in gradients:
                 continue
-            if set(path.attrib)-{'id','d','fill','stroke','stroke-width','stroke-linejoin','data-role'}:
+            geometry_attributes = {'path': {'d'}, 'circle': {'cx', 'cy', 'r'}, 'ellipse': {'cx', 'cy', 'rx', 'ry'}}[kind]
+            if set(path.attrib)-({'id','fill','stroke','stroke-width','stroke-linejoin','data-role'} | geometry_attributes):
                 continue
             data = path.get('d','')
+            if kind in {'circle', 'ellipse'}:
+                try:
+                    cx, cy = float(path.get('cx', '0')), float(path.get('cy', '0'))
+                    rx = float(path.get('r' if kind == 'circle' else 'rx', '0'))
+                    ry = rx if kind == 'circle' else float(path.get('ry', '0'))
+                    if min(rx, ry) <= 0 or not all(math.isfinite(v) for v in (cx, cy, rx, ry)):
+                        continue
+                    # Only paint bounds use this rectangle; the alpha mask below
+                    # is rendered from the original native circle/ellipse.
+                    data = f'M {cx-rx} {cy-ry} L {cx+rx} {cy-ry} L {cx+rx} {cy+ry} L {cx-rx} {cy+ry} Z'
+                except (ValueError, TypeError):
+                    continue
             tokens = re.findall(r'[A-Za-z]|[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:[eE][-+]?\d+)?',data)
             if re.sub(r'[\s,]+','',data) != ''.join(tokens):
                 continue
@@ -277,7 +291,10 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                 if len(stops)<2 or not all(math.isfinite(v[0]) for v in stops):
                     continue
                 mask_root = ET.Element(namespace+'svg',root.attrib)
-                ET.SubElement(mask_root,namespace+'path',d=data,fill='#ffffff',stroke='none')
+                native_mask = copy.deepcopy(path)
+                native_mask.set('fill', '#ffffff')
+                native_mask.set('stroke', 'none')
+                mask_root.append(native_mask)
                 with fitz_module.open(stream=ET.tostring(mask_root),filetype='svg') as doc:
                     page = doc[0]
                     w,h = int(size_w or math.ceil(page.rect.width)),int(size_h or math.ceil(page.rect.height))
