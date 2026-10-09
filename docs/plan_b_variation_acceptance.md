@@ -12,7 +12,21 @@ wählbar, unabhängig von ihrer bisherigen Konvertierungsqualität.
 SVGs ohne zugeordnete Beschreibung werden im Auswahlprotokoll ausgewiesen.
 Bildspezifische Beschreibungen aus der Tabelle werden berücksichtigt.
 
-Aus dieser Aufgabe entstehen genau 16 verschiedene SVGs und 16 veränderte
+Zuerst wird das **unveränderte Ursprungsbild mit seiner Originalbeschreibung**
+als Fall `original` durch den echten CLI-Konverter verarbeitet. Diese Vorprüfung
+verwendet dasselbe Suchbudget, denselben Timeout, denselben Schutz vor fremden
+SVG-Zugriffen und dieselben festen Qualitätsgrenzen wie die späteren Varianten.
+Historische Erfolgsmarkierungen ersetzen diesen aktuellen Konvertierungsversuch
+nicht. Das Original ist zugleich der erste Fall der erweiterten Plan-B-Aufgabe.
+
+Besteht die Vorprüfung nicht, werden keine Varianten erzeugt oder konvertiert.
+Der Bericht enthält `status: original_not_convertible`,
+`original_satisfactory: false`, `variations_started: false` und die konkreten
+Fehlergründe bzw. Messwerte des Originals. Der Lauf endet mit Exitcode **1**:
+Die erweiterte Abnahme wurde nicht durchgeführt. Es wird kein anderes Motiv
+nachgezogen und keine unvollständige Abnahme als bestanden gewertet.
+
+Nur nach bestandener Vorprüfung entstehen genau 16 verschiedene SVGs und 16 veränderte
 Beschreibungen: Skalierung ±6 %, Verschiebung horizontal/vertikal ±2,5 % der
 Zeichenfläche und unterschiedliche Formulierungen. Die Beschreibung behält
 ihre bisherigen Aussagen und ergänzt die passende relative Änderung;
@@ -32,7 +46,8 @@ als Fehler, auch wenn der Konverter ihn intern abfängt. Das Protokoll steht in
 
 ## Verbindliche Abnahme
 
-Alle 16 Fälle müssen die vorab festgelegten Grenzen bestehen:
+Das Original und alle 16 Varianten (insgesamt **17 Fälle**) müssen die vorab
+festgelegten Grenzen bestehen:
 
 | Messung | Grenze |
 | --- | --- |
@@ -53,21 +68,34 @@ fehlende Motive verstecken. Diese generische Prüfung bewertet sichtbare
 Rekonstruktionsqualität, keine vollständige sprachliche Semantik/OCR.
 
 Ein fehlendes/unlesbares Ergebnis, Prozessfehler oder Timeout zählt als Fehler.
-Die übrigen Fälle werden trotzdem abgearbeitet. Ein gutes Mittel über mehrere
+Nach bestandener Original-Vorprüfung werden alle 16 Varianten auch bei einem
+Variantenfehler abgearbeitet. Ein gutes Mittel über mehrere
 Fälle kann einen schlechten Einzelfall nicht ausgleichen. Exitcode **0 bedeutet
-16/16**, andernfalls endet der Test mit **1**. Ergebnisse im Fehlgeschlagen-Ordner
+17/17**, andernfalls endet der Test mit **1**. Ergebnisse im Fehlgeschlagen-Ordner
 des Konverters werden ebenfalls unabhängig vermessen; dessen historische
 Erfolgsmarkierung ersetzt die Abnahme nicht.
 
 ## Ergebnisse und Wiederholung
 
 Jeder Start legt einen neuen Lauf unter `artifacts/evaluation/plan_b_variations`
-an und behält standardmäßig **nur `report.json`**. Der Bericht enthält Quelle,
+an und behält standardmäßig **`report.json` und das Ursprungsbild `source.png`**.
+Das PNG ist die unveränderte, verlustfrei rasterisierte Quelle, die der
+Original-Vorprüfung übergeben wurde. Sein SHA-256 steht in `source_image_sha256`;
+`source_image` verweist auf die Datei relativ zum Bericht.
+Der Bericht (Schema `plan_b_variations_v2`) enthält Quelle,
 Beschreibung, Seed, Quell-Hashes, Varianten, feste Grenzen, Einzelmetriken und
-Fehlergründe. Er wird nach jedem Fall fortgeschrieben. Referenzen, Raster,
+Fehlergründe sowie den Status der Vorprüfung. `cases` beginnt mit `original`,
+gefolgt von den 16 Varianten nach bestandener Vorprüfung. Die Zusammenfassung
+verlangt stets 17 Fälle; bei fehlgeschlagenem Original stehen dort ein
+abgeschlossener und ein fehlgeschlagener Fall. Sie zählt die nicht gestarteten
+Varianten nicht als Konvertierungsfehler.
+Der Bericht wird vor der ersten Konvertierung und nach jedem Fall fortgeschrieben.
+Referenzen, Variantenraster,
 Konverterausgaben und Logs sind Arbeitsdateien und werden anschließend auch bei
 Fehlschlägen oder einem abgefangenen Abbruch entfernt. Diese Laufverzeichnisse
-sind in `.gitignore` ausgeschlossen; CI lädt den Ergebnisbericht hoch.
+sind in `.gitignore` ausgeschlossen; CI lädt den Ergebnisbericht und das
+Ursprungsbild hoch. Bei einem abgefangenen Abbruch steht `status: interrupted`
+im Bericht; das Ursprungsbild bleibt ebenfalls erhalten.
 
 Nur bei ausdrücklichem Diagnosebedarf behält `--keep-debug-artifacts` außerdem
 `manifest.json`, `source.svg`, `source_description.txt`, sämtliche Eingaben,
@@ -104,13 +132,29 @@ rot und lädt die Belege auch bei Fehlschlägen hoch. Die schnellen Tests in
 `tests/detailtests/test_plan_b_variations.py` sichern Auswahl, Varianten,
 Qualitätsmessung und Fehlerpfade ab; sie ersetzen den echten Abnahmelauf nicht.
 
-Der Anspruch gilt für jede ausgewählte Aufgabe: Alle 16 Varianten müssen die
+Der Anspruch gilt für jede ausgewählte Aufgabe: Erst muss das Original, dann
+müssen alle 16 Varianten die
 gleichen Grenzen bestehen. Eine erfolgreiche Symbolfamilie belegt noch keine
 vollständige Abdeckung des Auswahlpools. Scheitert eine andere Familie, bleibt
 der Lauf korrekt rot; sie wird mit eingefrorenem Seed und unveränderten Eingaben
 zum nächsten Lernfall. Grenzen zu lockern oder ein leichteres Motiv zu wählen
 erfüllt diese Aufgabe nicht. Der Runner organisiert und bewertet die Abnahme;
 die Rekonstruktionsalgorithmen liegen unter `src/iCCModules`.
+
+## Original-Vorprüfung vom 2026-10-09
+
+Der echte CLI-Lauf mit `AR0030.svg`, Originalbeschreibung und dem eingefrorenen
+Seed `2870690750133000144` besteht **17/17**: zuerst das unveränderte Original,
+danach dieselben 16 Varianten wie zuvor. Es gab keine verbotenen SVG-Zugriffe.
+`source.png` bleibt beim Bericht erhalten; sein Hash entspricht exakt dem
+Rastereingang des Originalfalls.
+
+Eine zusätzliche Probe mit einem grünen Kreis und einem Suchbudget von einer
+Iteration verfehlt die Vordergrundfehler- und Konturgrenze bereits beim Original.
+Der Runner beendet diesen Lauf nach einem Fall mit `original_not_convertible`,
+ohne die 16 Varianten zu starten, und behält Bericht und Ursprungsbild.
+Die 26 gezielten Tests sichern beide Abläufe, Prozessfehler, Timeout,
+Unterbrechungen, Artefaktaufbewahrung und den echten Original-Unterprozess ab.
 
 ## Klappensymbol-Abnahme vom 2026-10-07
 

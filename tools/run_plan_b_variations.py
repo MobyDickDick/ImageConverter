@@ -1,4 +1,4 @@
-"""Hard acceptance test: 16 seeded SVG/description -> raster -> CLI -> SVG tasks."""
+"""Check the original conversion before accepting 16 seeded Plan-B variations."""
 from __future__ import annotations
 
 import argparse
@@ -26,6 +26,7 @@ from src.iCCModules.imageCompositeConverterDescriptions import loadDescriptionMa
 from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
 
 CASE_COUNT = 16
+REQUIRED_COUNT = CASE_COUNT + 1  # Original plus all variations.
 DEFAULT_SVG_DIR = ROOT / "artifacts/images_to_convert/samples"
 DEFAULT_DESCRIPTIONS = ROOT / "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml"
 # Frozen before conversion. No historical scores or batch success labels are used.
@@ -118,15 +119,24 @@ def viewport(svg: str) -> tuple[float, float, float, float, int, int]:
     return x, y, w, h, width, height
 
 
-def make_variations(svg: str, description: str, seed: int) -> list[dict]:
-    """Change geometry and wording together; never expose numeric geometry in text."""
+def make_original_case(svg: str, description: str) -> dict:
+    """The unchanged source is both the prerequisite and the first acceptance case."""
     if not description.strip():
         raise ValueError("A nonempty description is required")
-    x, y, w, h, width, height = viewport(svg)
-    original = ET.fromstring(svg)
+    _, _, _, _, width, height = viewport(svg)
     complexity = analyze_svg_complexity(svg)
     if complexity["embedded_raster_count"] or not complexity["vector_element_count"]:
         raise ValueError("Reference must contain vectors and no embedded raster")
+    return {"case_id": "original", "width": width, "height": height,
+            "variation": {"scale": 1.0, "relative_x": 0.0, "relative_y": 0.0},
+            "svg": svg, "description": description}
+
+
+def make_variations(svg: str, description: str, seed: int) -> list[dict]:
+    """Change geometry and wording together; never expose numeric geometry in text."""
+    make_original_case(svg, description)
+    x, y, w, h, width, height = viewport(svg)
+    original = ET.fromstring(svg)
     rng = random.Random(seed)
     namespace = original.tag[:-3]  # preserve both namespaced and plain SVGs
     if namespace:
@@ -224,12 +234,18 @@ def measure_quality(reference, svg: str, limits: dict | None = None) -> dict:
 
 
 def prepare_cases(svg: str, description: str, output: Path, seed: int) -> list[dict]:
-    cv2 = import_with_vendored_fallback("cv2")
     # Validate/generate before creating the directory, and never reuse stale output.
     cases = make_variations(svg, description, seed)
     output.mkdir(parents=True, exist_ok=False)
+    write_cases(cases, output)
+    return cases
+
+
+def write_cases(cases: list[dict], output: Path) -> None:
+    """Write cases inside a fresh run directory already owned by this runner."""
+    cv2 = import_with_vendored_fallback("cv2")
     references = output / "references"
-    references.mkdir()
+    references.mkdir(exist_ok=True)
     raster_hashes = set()
     for case in cases:
         name = case["case_id"]
@@ -253,7 +269,6 @@ def prepare_cases(svg: str, description: str, output: Path, seed: int) -> list[d
         ET.ElementTree(description_root).write(inputs / "descriptions.xml", encoding="utf-8", xml_declaration=True)
         case.update(reference_svg=str(source.relative_to(output)), input_sha256=sha256(image_path.read_bytes()),
                     reference_svg_sha256=sha256(source.read_bytes()))
-    return cases
 
 
 def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
@@ -319,7 +334,7 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
     except subprocess.TimeoutExpired:
         result["failures"] = ["conversion_timeout"]
     except Exception as exc:
-        # A broken renderer/metric must fail this case and leave the other 15 runnable.
+        # A broken renderer/metric must fail this case independently.
         result.update(failures=["conversion_or_measurement_error"], error=str(exc), satisfactory=False)
     finally:
         result["elapsed_seconds"] = round(time.monotonic() - started, 3)
@@ -328,8 +343,9 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
 
 def summarize(results: list[dict]) -> dict:
     passed = sum(case["satisfactory"] for case in results)
-    return {"required": CASE_COUNT, "completed": len(results), "passed": passed,
-            "failed": len(results) - passed, "satisfactory": len(results) == CASE_COUNT and passed == CASE_COUNT}
+    return {"required": REQUIRED_COUNT, "completed": len(results), "passed": passed,
+            "failed": len(results) - passed,
+            "satisfactory": len(results) == REQUIRED_COUNT and passed == REQUIRED_COUNT}
 
 
 def run_battery(svg_path: Path, description: str, output: Path, *, seed: int,
@@ -339,27 +355,41 @@ def run_battery(svg_path: Path, description: str, output: Path, *, seed: int,
         raise ValueError("Timeout and iterations must be positive")
     output = output.resolve()
     svg = svg_path.read_text(encoding="utf-8")
-    cases = prepare_cases(svg, description, output, seed)
+    cases = [make_original_case(svg, description)]
+    output.mkdir(parents=True, exist_ok=False)
     if keep_debug_artifacts:
         (output / "source.svg").write_text(svg, encoding="utf-8")
         (output / "source_description.txt").write_text(description, encoding="utf-8")
-    manifest = {"schema_version": "plan_b_variations_v1", "seed": seed, "limits": LIMITS,
+    manifest = {"schema_version": "plan_b_variations_v2", "seed": seed, "limits": LIMITS,
                 "iterations": iterations, "timeout_seconds": timeout,
                 "source_svg_sha256": sha256(svg.encode("utf-8")),
                 "source_description_sha256": sha256(description.encode("utf-8")),
                 "source_description": description,
-                "artifact_retention": "debug" if keep_debug_artifacts else "summary_only",
+                "source_image": "source.png",
+                "artifact_retention": "debug" if keep_debug_artifacts else "summary_and_source_image",
                 "selection": selection or {"mode": "explicit", "source_svg": str(svg_path.resolve())},
                 "cases": cases}
-    if keep_debug_artifacts:
-        (output / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    else:
+    if not keep_debug_artifacts:
         manifest["selection"] = {key: value for key, value in manifest["selection"].items()
                                  if key not in {"pool", "excluded"}}
-    report = {**manifest, "cases": []}
+    report = {**manifest, "cases": [], "status": "checking_original", "original_satisfactory": None,
+              "variations_started": False, "summary": summarize([])}
+
+    def save_report():
+        (output / "report.json").write_text(
+            json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+        if keep_debug_artifacts:
+            (output / "manifest.json").write_text(
+                json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
     try:
+        write_cases(cases, output)
+        # Keep the original pixels even if the CLI moves its input after success.
+        shutil.copyfile(output / "original/input/original.png", output / "source.png")
+        report["source_image_sha256"] = cases[0]["input_sha256"]
+        save_report()
         for case in cases:
-            print(f"[Plan B] {len(report['cases'])+1}/{CASE_COUNT} {case['case_id']} started", flush=True)
+            print(f"[Plan B] {len(report['cases'])+1}/{REQUIRED_COUNT} {case['case_id']} started", flush=True)
             result = run_case(case, output, timeout=timeout, iterations=iterations,
                               keep_debug_artifacts=keep_debug_artifacts)
             if not keep_debug_artifacts:
@@ -367,12 +397,35 @@ def run_battery(svg_path: Path, description: str, output: Path, *, seed: int,
                           if key not in {"command", "output_svg", "reference_svg", "description", "limits"}}
             report["cases"].append(result)
             report["summary"] = summarize(report["cases"])
-            (output / "report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+            if case["case_id"] == "original":
+                report["original_satisfactory"] = result["satisfactory"]
+                report["status"] = "running_variations" if result["satisfactory"] else "original_not_convertible"
+            elif len(report["cases"]) == REQUIRED_COUNT:
+                report["status"] = "completed"
+            save_report()
             print(f"[Plan B] {case['case_id']}: {'PASS' if result['satisfactory'] else 'FAIL'} "
                   f"{','.join(result['failures'])} ({result['elapsed_seconds']}s)", flush=True)
+            if case["case_id"] == "original":
+                if not result["satisfactory"]:
+                    print("[Plan B] Original quality check failed; 16 variations were not started", flush=True)
+                    break
+                # Only generate the extended task once its prerequisite passes.
+                variations = make_variations(svg, description, seed)
+                cases.extend(variations)
+                write_cases(variations, output)
+                report["variations_started"] = True
+                save_report()
+    except KeyboardInterrupt:
+        report["status"] = "interrupted"
+        save_report()
+        raise
+    except Exception as exc:
+        report.update(status="preparation_error", error=str(exc))
+        save_report()
+        raise
     finally:
         if not keep_debug_artifacts:
-            # prepare_cases created this fresh directory exclusively. Delete
+            # This run created the fresh directory exclusively. Delete
             # only its generated children, including after an interrupted run.
             for directory in [output / "references", *[output / case["case_id"] for case in cases]]:
                 if directory.resolve().parent != output:
@@ -396,7 +449,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--timeout-seconds", type=float, default=60)
     parser.add_argument("--iterations", type=int, default=64)
     parser.add_argument("--keep-debug-artifacts", action="store_true",
-                        help="Keep reference SVGs, rasters, converter outputs and logs; default keeps only report.json")
+                        help="Keep reference SVGs, rasters, converter outputs and logs; default keeps report.json and source.png")
     args = parser.parse_args(argv)
     if bool(args.svg) != bool(args.description_file):
         parser.error("--svg and --description-file must be supplied together")
