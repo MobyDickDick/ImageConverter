@@ -12,9 +12,24 @@ focused on the actual project scope.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-08)
+### Aktueller Plan-B-Stand (2026-10-09)
 
-**Aktueller Abschluss 2026-10-08: `AC0402_1_S` (gefülltes Rechts-Dreieck im Kreis).**
+**Aktueller Abschluss 2026-10-09: `AC0403_1_L` (Abwärts-Dreieck im Kreis).**
+Alle 18 Farb-/Größen-/SIA-Varianten bestehen bereits mit der frischen
+CLI-Baseline beide regulären Gates. Das alte Ziel-SVG ohne Dreieck erreicht
+`mean_delta2=13989.019531`, das frische Ergebnis `93.733124`. Beide XML-Kataloge
+beschreiben das Motiv jetzt eigenständig mit absoluter Richtung. Diese
+Datenpräzisierung verändert keine SVG-Bytes oder Metriken; die Runtime bleibt
+unverändert. Zwei unabhängige Abnahmen reproduzieren alle SVGs und Gates.
+Die 18 Ergebnis-SVGs und der kompakte Nachweis sind versioniert. Die strengere
+Plan-B-JPG-Prüfung besteht 11/18 Fälle; der volle strenge Nachweis und
+`PB-POOL-2026-10-07` bleiben offen. Der frische Review enthält 1.000 Einträge,
+993 renderbare Paare und 104 Einträge über der Reviewgrenze. Alle 48 bisherigen
+Erfolgsvarianten bleiben darunter. Nächste Rotation: `AC0714_L`, `GE0032`,
+`GE9023_6M`, `AC0413_1_M`, `AC0713_1_L`.
+Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
+
+**Vorheriger Abschluss 2026-10-08: `AC0402_1_S` (gefülltes Rechts-Dreieck im Kreis).**
 Das Paket auf `codex/ac0402-quality-2026-10-08` besteht mit allen 18 gefüllten
 Farb-/Größen-/SIA-Varianten beide unveränderten regulären Qualitätsgates ohne
 Pflichtmetrikregression. Die frische Ziel-CLI-Baseline sinkt von

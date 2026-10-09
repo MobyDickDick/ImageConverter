@@ -1,0 +1,3159 @@
+{
+  "baseline": {
+    "baseline_sha256": "f2f1350284d5b60d8b7880ad52f135eb38d4bb3540145da1dc1111804e4136f6",
+    "cases": {
+      "anonymous_pump_00": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9489903450012207,
+          "error_per_pixel": 0.000480497879171072,
+          "object_mask_iou": 0.9790697674418605,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_01": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9285560846328735,
+          "error_per_pixel": 0.0005283512641997669,
+          "object_mask_iou": 0.9712460063897763,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_02": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9488362669944763,
+          "error_per_pixel": 0.0016064476591034697,
+          "object_mask_iou": 0.9747292418772563,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_03": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9594492316246033,
+          "error_per_pixel": 0.00121403306107727,
+          "object_mask_iou": 0.9959183673469387,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_04": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9598789811134338,
+          "error_per_pixel": 0.0007776211341741558,
+          "object_mask_iou": 0.9858870967741935,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_05": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9114730358123779,
+          "error_per_pixel": 0.0013030757119407198,
+          "object_mask_iou": 0.9777777777777777,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_06": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8758977651596069,
+          "error_per_pixel": 0.0017875688399593907,
+          "object_mask_iou": 0.9795479009687836,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_07": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9326401948928833,
+          "error_per_pixel": 0.002132148630234365,
+          "object_mask_iou": 0.9657657657657658,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_08": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9702131748199463,
+          "error_per_pixel": 0.0007214533028412549,
+          "object_mask_iou": 0.9959349593495935,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_09": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8640175461769104,
+          "error_per_pixel": 0.001540263429079761,
+          "object_mask_iou": 0.9904761904761905,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_10": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9052431583404541,
+          "error_per_pixel": 0.0008798097705559961,
+          "object_mask_iou": 0.9818548387096774,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_11": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9262062907218933,
+          "error_per_pixel": 0.0006640522531648485,
+          "object_mask_iou": 0.9864253393665159,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_12": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9314447641372681,
+          "error_per_pixel": 0.0007814974884459503,
+          "object_mask_iou": 0.9473684210526315,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_13": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9237745404243469,
+          "error_per_pixel": 0.0007306900816392733,
+          "object_mask_iou": 0.9399075500770416,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_14": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9278774261474609,
+          "error_per_pixel": 0.0007464138110692602,
+          "object_mask_iou": 0.9362637362637363,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_15": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9417462348937988,
+          "error_per_pixel": 0.0012184373229096582,
+          "object_mask_iou": 0.9223057644110275,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_16": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9548607468605042,
+          "error_per_pixel": 0.0007875816837023821,
+          "object_mask_iou": 0.9198113207547169,
+          "semantic_score": 1.0
+        }
+      },
+      "anonymous_pump_17": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.950648307800293,
+          "error_per_pixel": 0.0007831987759615692,
+          "object_mask_iou": 0.9166666666666666,
+          "semantic_score": 1.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "Original description versus independent corrected description; unchanged circle/triangle fitter and renderer",
+      "commit": "2f9bd54cc661b2379355b67100a5ffa8796099a6",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_pump_00": "8082a6e7e6b4c29b04e3f3b81380a9dff6b5d058d160bb6f23c81fb4909d9b8d",
+        "anonymous_pump_01": "63a518e0dff23b1fb31d1c70b1fb7defadd22c028337539b689ec07a6b1568ac",
+        "anonymous_pump_02": "08f919529d8e97d5875ff2bd51dbb9268a6ee411273a66f6d06673c783088c15",
+        "anonymous_pump_03": "0b929123035f803f4700e9480aee5987d52e153c260206ba283f90de5fca9b18",
+        "anonymous_pump_04": "dc20c2d690859ccaf24b27c3a4ff0b7619560f198c79d707667bcccc55b054a2",
+        "anonymous_pump_05": "ba275a00508bb568a2eb0ca9f3c74b0b14e741b5f0e23c8ece23ebfc024bcde2",
+        "anonymous_pump_06": "6630e6694ba3136f30fb68c954ceb08ccda53a8bbe29458f50d6383e1f39f6fc",
+        "anonymous_pump_07": "a6ed2ff0c7f6e24a428001bfe93469cd16d3ae2071047ea84ed83137144ea758",
+        "anonymous_pump_08": "e490bb32d0fba761bd6c90aebaa42f74d62b49a3ca4483405a96eb5f36a076ca",
+        "anonymous_pump_09": "4628faec692c866cc99eeda3458809ed779b4c666253d710e5e2d30623e7ebc3",
+        "anonymous_pump_10": "d152ebda486516bb04e9d7cd48e2e97f64d8bc1d1b7a51c228732dcac6213a99",
+        "anonymous_pump_11": "81ae0b85c39e53096a7423c9645a9344d2b885c7f69a295aa91d189e3bcfb535",
+        "anonymous_pump_12": "608b91c0d16d640e47987d12863662cc88b700e2c97dc1717232c1ed76596b0c",
+        "anonymous_pump_13": "f30f933879dab593378c997e1c305a4cef0d3f7cf59970e05d228aa327ef7c27",
+        "anonymous_pump_14": "683f90d88c7c7813f1193fd2a92ba351adc2468247995632cd4088d275421555",
+        "anonymous_pump_15": "7ff30856303bd36dd66aead3017a7216d6fec79971a1cc2f15d3b362653ee3ad",
+        "anonymous_pump_16": "6a5f201a40ead3e8266bd662a43dba7b99837ca1d30c451752590011ffd77b2c",
+        "anonymous_pump_17": "05c2cc878b391947004968b4b26bd386bfd46d4c1defe2daaf91090a469ae5c4"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 93.73312377929688,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_00.svg",
+      "after_svg_sha256": "f559faf5d2b110b1f4bc0df9f9b950b5e8875943dd545cf92bb5040e7b3d50f4",
+      "before_mean_delta2": 93.73312377929688,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_00.svg",
+      "before_svg_sha256": "f559faf5d2b110b1f4bc0df9f9b950b5e8875943dd545cf92bb5040e7b3d50f4",
+      "case_id": "anonymous_pump_00",
+      "image": "inputs\\anonymous_pump_00.jpg",
+      "input_sha256": "8082a6e7e6b4c29b04e3f3b81380a9dff6b5d058d160bb6f23c81fb4909d9b8d",
+      "role": "target",
+      "source": "AC0403_1_L.jpg",
+      "source_sha256": "8082a6e7e6b4c29b04e3f3b81380a9dff6b5d058d160bb6f23c81fb4909d9b8d"
+    },
+    {
+      "after_mean_delta2": 103.06812286376953,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_01.svg",
+      "after_svg_sha256": "2c2dac6a062744ca19a4f4de147f2d3874c35a5635fc7e8cd99ad7e1ec281784",
+      "before_mean_delta2": 103.06812286376953,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_01.svg",
+      "before_svg_sha256": "2c2dac6a062744ca19a4f4de147f2d3874c35a5635fc7e8cd99ad7e1ec281784",
+      "case_id": "anonymous_pump_01",
+      "image": "inputs\\anonymous_pump_01.jpg",
+      "input_sha256": "63a518e0dff23b1fb31d1c70b1fb7defadd22c028337539b689ec07a6b1568ac",
+      "role": "holdout",
+      "source": "AC0403_1L_sia.jpg",
+      "source_sha256": "63a518e0dff23b1fb31d1c70b1fb7defadd22c028337539b689ec07a6b1568ac"
+    },
+    {
+      "after_mean_delta2": 313.3777770996094,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_02.svg",
+      "after_svg_sha256": "4806e9b916895a596c54c626b0e45d13433e8c5c2b17dcbbcb19a2e56b7b2696",
+      "before_mean_delta2": 313.3777770996094,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_02.svg",
+      "before_svg_sha256": "4806e9b916895a596c54c626b0e45d13433e8c5c2b17dcbbcb19a2e56b7b2696",
+      "case_id": "anonymous_pump_02",
+      "image": "inputs\\anonymous_pump_02.jpg",
+      "input_sha256": "08f919529d8e97d5875ff2bd51dbb9268a6ee411273a66f6d06673c783088c15",
+      "role": "holdout",
+      "source": "AC0403_1M_sia.jpg",
+      "source_sha256": "08f919529d8e97d5875ff2bd51dbb9268a6ee411273a66f6d06673c783088c15"
+    },
+    {
+      "after_mean_delta2": 236.82749938964844,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_03.svg",
+      "after_svg_sha256": "df00cb3d098574fc65ae1e95f37da3bff9b64d90688fc685ca5751fbb9e13f17",
+      "before_mean_delta2": 236.82749938964844,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_03.svg",
+      "before_svg_sha256": "df00cb3d098574fc65ae1e95f37da3bff9b64d90688fc685ca5751fbb9e13f17",
+      "case_id": "anonymous_pump_03",
+      "image": "inputs\\anonymous_pump_03.jpg",
+      "input_sha256": "0b929123035f803f4700e9480aee5987d52e153c260206ba283f90de5fca9b18",
+      "role": "holdout",
+      "source": "AC0403_1S_sia.jpg",
+      "source_sha256": "0b929123035f803f4700e9480aee5987d52e153c260206ba283f90de5fca9b18"
+    },
+    {
+      "after_mean_delta2": 151.69444274902344,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_04.svg",
+      "after_svg_sha256": "0cd85eb7c08e2ae7e5844ddf07219b553fe516d0d2746f8e8a12f621e0e464a1",
+      "before_mean_delta2": 151.69444274902344,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_04.svg",
+      "before_svg_sha256": "0cd85eb7c08e2ae7e5844ddf07219b553fe516d0d2746f8e8a12f621e0e464a1",
+      "case_id": "anonymous_pump_04",
+      "image": "inputs\\anonymous_pump_04.jpg",
+      "input_sha256": "dc20c2d690859ccaf24b27c3a4ff0b7619560f198c79d707667bcccc55b054a2",
+      "role": "holdout",
+      "source": "AC0403_1_M.jpg",
+      "source_sha256": "dc20c2d690859ccaf24b27c3a4ff0b7619560f198c79d707667bcccc55b054a2"
+    },
+    {
+      "after_mean_delta2": 254.19749450683594,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_05.svg",
+      "after_svg_sha256": "dcb7b1599dde632d10762947433dbcac1eefdce747bc030258dfb20e098bbabe",
+      "before_mean_delta2": 254.19749450683594,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_05.svg",
+      "before_svg_sha256": "dcb7b1599dde632d10762947433dbcac1eefdce747bc030258dfb20e098bbabe",
+      "case_id": "anonymous_pump_05",
+      "image": "inputs\\anonymous_pump_05.jpg",
+      "input_sha256": "ba275a00508bb568a2eb0ca9f3c74b0b14e741b5f0e23c8ece23ebfc024bcde2",
+      "role": "holdout",
+      "source": "AC0403_1_S.jpg",
+      "source_sha256": "ba275a00508bb568a2eb0ca9f3c74b0b14e741b5f0e23c8ece23ebfc024bcde2"
+    },
+    {
+      "after_mean_delta2": 348.7099914550781,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_06.svg",
+      "after_svg_sha256": "1633c0d31ef10faafd33e580a4e4e06c4f91fcbc4462b21235d81c43edbffe0b",
+      "before_mean_delta2": 348.7099914550781,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_06.svg",
+      "before_svg_sha256": "1633c0d31ef10faafd33e580a4e4e06c4f91fcbc4462b21235d81c43edbffe0b",
+      "case_id": "anonymous_pump_06",
+      "image": "inputs\\anonymous_pump_06.jpg",
+      "input_sha256": "6630e6694ba3136f30fb68c954ceb08ccda53a8bbe29458f50d6383e1f39f6fc",
+      "role": "holdout",
+      "source": "AC0403_2L_sia.jpg",
+      "source_sha256": "6630e6694ba3136f30fb68c954ceb08ccda53a8bbe29458f50d6383e1f39f6fc"
+    },
+    {
+      "after_mean_delta2": 415.92889404296875,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_07.svg",
+      "after_svg_sha256": "797bffbaed6559d1bf40a66040cb1be24cbcb4a4a9ab1127fdff7d719c15dc7b",
+      "before_mean_delta2": 415.92889404296875,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_07.svg",
+      "before_svg_sha256": "797bffbaed6559d1bf40a66040cb1be24cbcb4a4a9ab1127fdff7d719c15dc7b",
+      "case_id": "anonymous_pump_07",
+      "image": "inputs\\anonymous_pump_07.jpg",
+      "input_sha256": "a6ed2ff0c7f6e24a428001bfe93469cd16d3ae2071047ea84ed83137144ea758",
+      "role": "holdout",
+      "source": "AC0403_2M_sia.jpg",
+      "source_sha256": "a6ed2ff0c7f6e24a428001bfe93469cd16d3ae2071047ea84ed83137144ea758"
+    },
+    {
+      "after_mean_delta2": 140.7375030517578,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_08.svg",
+      "after_svg_sha256": "f80463752843f7994751c1aaf9b85b0399a9e094c24ccc608f0eefca2f154469",
+      "before_mean_delta2": 140.7375030517578,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_08.svg",
+      "before_svg_sha256": "f80463752843f7994751c1aaf9b85b0399a9e094c24ccc608f0eefca2f154469",
+      "case_id": "anonymous_pump_08",
+      "image": "inputs\\anonymous_pump_08.jpg",
+      "input_sha256": "e490bb32d0fba761bd6c90aebaa42f74d62b49a3ca4483405a96eb5f36a076ca",
+      "role": "holdout",
+      "source": "AC0403_2S_sia.jpg",
+      "source_sha256": "e490bb32d0fba761bd6c90aebaa42f74d62b49a3ca4483405a96eb5f36a076ca"
+    },
+    {
+      "after_mean_delta2": 300.4668884277344,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_09.svg",
+      "after_svg_sha256": "f8e42ebe7642f52fe1f62ede8ce6cc0b87b7cd340b105412b6e324a27feef982",
+      "before_mean_delta2": 300.4668884277344,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_09.svg",
+      "before_svg_sha256": "f8e42ebe7642f52fe1f62ede8ce6cc0b87b7cd340b105412b6e324a27feef982",
+      "case_id": "anonymous_pump_09",
+      "image": "inputs\\anonymous_pump_09.jpg",
+      "input_sha256": "4628faec692c866cc99eeda3458809ed779b4c666253d710e5e2d30623e7ebc3",
+      "role": "holdout",
+      "source": "AC0403_2_L.jpg",
+      "source_sha256": "4628faec692c866cc99eeda3458809ed779b4c666253d710e5e2d30623e7ebc3"
+    },
+    {
+      "after_mean_delta2": 171.62889099121094,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_10.svg",
+      "after_svg_sha256": "c94f7c33aa0895e0237626380eca8e38f1540cfaf5a0370317e8a609048d045b",
+      "before_mean_delta2": 171.62889099121094,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_10.svg",
+      "before_svg_sha256": "c94f7c33aa0895e0237626380eca8e38f1540cfaf5a0370317e8a609048d045b",
+      "case_id": "anonymous_pump_10",
+      "image": "inputs\\anonymous_pump_10.jpg",
+      "input_sha256": "d152ebda486516bb04e9d7cd48e2e97f64d8bc1d1b7a51c228732dcac6213a99",
+      "role": "holdout",
+      "source": "AC0403_2_M.jpg",
+      "source_sha256": "d152ebda486516bb04e9d7cd48e2e97f64d8bc1d1b7a51c228732dcac6213a99"
+    },
+    {
+      "after_mean_delta2": 129.5399932861328,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_11.svg",
+      "after_svg_sha256": "c28ea010919cea4af504696e4332b25e3dbf667cc05b13a9666fdb936304fecc",
+      "before_mean_delta2": 129.5399932861328,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_11.svg",
+      "before_svg_sha256": "c28ea010919cea4af504696e4332b25e3dbf667cc05b13a9666fdb936304fecc",
+      "case_id": "anonymous_pump_11",
+      "image": "inputs\\anonymous_pump_11.jpg",
+      "input_sha256": "81ae0b85c39e53096a7423c9645a9344d2b885c7f69a295aa91d189e3bcfb535",
+      "role": "holdout",
+      "source": "AC0403_2_S.jpg",
+      "source_sha256": "81ae0b85c39e53096a7423c9645a9344d2b885c7f69a295aa91d189e3bcfb535"
+    },
+    {
+      "after_mean_delta2": 152.45062255859375,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_12.svg",
+      "after_svg_sha256": "9a081341f60f82f080bbed2fa1ff540e328007c0bc442765f59ab92bed422c9c",
+      "before_mean_delta2": 152.45062255859375,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_12.svg",
+      "before_svg_sha256": "9a081341f60f82f080bbed2fa1ff540e328007c0bc442765f59ab92bed422c9c",
+      "case_id": "anonymous_pump_12",
+      "image": "inputs\\anonymous_pump_12.jpg",
+      "input_sha256": "608b91c0d16d640e47987d12863662cc88b700e2c97dc1717232c1ed76596b0c",
+      "role": "holdout",
+      "source": "AC0403_L.jpg",
+      "source_sha256": "608b91c0d16d640e47987d12863662cc88b700e2c97dc1717232c1ed76596b0c"
+    },
+    {
+      "after_mean_delta2": 142.53936767578125,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_13.svg",
+      "after_svg_sha256": "e64d7fe78e80414f45539ef66b8207c8462c185dded7bd047aee430f87cea969",
+      "before_mean_delta2": 142.53936767578125,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_13.svg",
+      "before_svg_sha256": "e64d7fe78e80414f45539ef66b8207c8462c185dded7bd047aee430f87cea969",
+      "case_id": "anonymous_pump_13",
+      "image": "inputs\\anonymous_pump_13.jpg",
+      "input_sha256": "f30f933879dab593378c997e1c305a4cef0d3f7cf59970e05d228aa327ef7c27",
+      "role": "holdout",
+      "source": "AC0403_L_sia.jpg",
+      "source_sha256": "f30f933879dab593378c997e1c305a4cef0d3f7cf59970e05d228aa327ef7c27"
+    },
+    {
+      "after_mean_delta2": 145.60667419433594,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_14.svg",
+      "after_svg_sha256": "4c989b8c5df55f58b82402c8b183645109a56519d0a5bff38e1e46640fec08df",
+      "before_mean_delta2": 145.60667419433594,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_14.svg",
+      "before_svg_sha256": "4c989b8c5df55f58b82402c8b183645109a56519d0a5bff38e1e46640fec08df",
+      "case_id": "anonymous_pump_14",
+      "image": "inputs\\anonymous_pump_14.jpg",
+      "input_sha256": "683f90d88c7c7813f1193fd2a92ba351adc2468247995632cd4088d275421555",
+      "role": "holdout",
+      "source": "AC0403_M.jpg",
+      "source_sha256": "683f90d88c7c7813f1193fd2a92ba351adc2468247995632cd4088d275421555"
+    },
+    {
+      "after_mean_delta2": 237.68666076660156,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_15.svg",
+      "after_svg_sha256": "35e925699b391f1a379c63c1020234200d8ba611f1ab952ef9ae9616e16b486d",
+      "before_mean_delta2": 237.68666076660156,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_15.svg",
+      "before_svg_sha256": "35e925699b391f1a379c63c1020234200d8ba611f1ab952ef9ae9616e16b486d",
+      "case_id": "anonymous_pump_15",
+      "image": "inputs\\anonymous_pump_15.jpg",
+      "input_sha256": "7ff30856303bd36dd66aead3017a7216d6fec79971a1cc2f15d3b362653ee3ad",
+      "role": "holdout",
+      "source": "AC0403_M_sia.jpg",
+      "source_sha256": "7ff30856303bd36dd66aead3017a7216d6fec79971a1cc2f15d3b362653ee3ad"
+    },
+    {
+      "after_mean_delta2": 153.6374969482422,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_16.svg",
+      "after_svg_sha256": "97870db7152fa9fb6a0eeb4a54962930f1028f2a3f69f859f2343b5b1f47c965",
+      "before_mean_delta2": 153.6374969482422,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_16.svg",
+      "before_svg_sha256": "97870db7152fa9fb6a0eeb4a54962930f1028f2a3f69f859f2343b5b1f47c965",
+      "case_id": "anonymous_pump_16",
+      "image": "inputs\\anonymous_pump_16.jpg",
+      "input_sha256": "6a5f201a40ead3e8266bd662a43dba7b99837ca1d30c451752590011ffd77b2c",
+      "role": "holdout",
+      "source": "AC0403_S.jpg",
+      "source_sha256": "6a5f201a40ead3e8266bd662a43dba7b99837ca1d30c451752590011ffd77b2c"
+    },
+    {
+      "after_mean_delta2": 152.78250122070312,
+      "after_svg": "after\\converted_svgs\\anonymous_pump_17.svg",
+      "after_svg_sha256": "7983bda4a74e42a53e5f969d6aa452f69fc5151b54acbb3968880974ce2508c9",
+      "before_mean_delta2": 152.78250122070312,
+      "before_svg": "before\\converted_svgs\\anonymous_pump_17.svg",
+      "before_svg_sha256": "7983bda4a74e42a53e5f969d6aa452f69fc5151b54acbb3968880974ce2508c9",
+      "case_id": "anonymous_pump_17",
+      "image": "inputs\\anonymous_pump_17.jpg",
+      "input_sha256": "05c2cc878b391947004968b4b26bd386bfd46d4c1defe2daaf91090a469ae5c4",
+      "role": "holdout",
+      "source": "AC0403_S_sia.jpg",
+      "source_sha256": "05c2cc878b391947004968b4b26bd386bfd46d4c1defe2daaf91090a469ae5c4"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "f2f1350284d5b60d8b7880ad52f135eb38d4bb3540145da1dc1111804e4136f6",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9489903450012207,
+          "error_per_pixel": 0.000480497879171072,
+          "object_mask_iou": 0.9790697674418605,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9489903450012207,
+          "error_per_pixel": 0.000480497879171072,
+          "object_mask_iou": 0.9790697674418605,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.000480497879171072,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9819,
+            "edge_alignment": 0.949,
+            "pixel_similarity": 0.9995,
+            "semantic_score": 1.0,
+            "structure_score": 0.9791
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9285560846328735,
+          "error_per_pixel": 0.0005283512641997669,
+          "object_mask_iou": 0.9712460063897763,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9285560846328735,
+          "error_per_pixel": 0.0005283512641997669,
+          "object_mask_iou": 0.9712460063897763,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_01",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0005283512641997669,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9748,
+            "edge_alignment": 0.9286,
+            "pixel_similarity": 0.9995,
+            "semantic_score": 1.0,
+            "structure_score": 0.9712
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9488362669944763,
+          "error_per_pixel": 0.0016064476591034697,
+          "object_mask_iou": 0.9747292418772563,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9488362669944763,
+          "error_per_pixel": 0.0016064476591034697,
+          "object_mask_iou": 0.9747292418772563,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_02",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0016064476591034697,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9805,
+            "edge_alignment": 0.9488,
+            "pixel_similarity": 0.9984,
+            "semantic_score": 1.0,
+            "structure_score": 0.9747
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9594492316246033,
+          "error_per_pixel": 0.00121403306107727,
+          "object_mask_iou": 0.9959183673469387,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9594492316246033,
+          "error_per_pixel": 0.00121403306107727,
+          "object_mask_iou": 0.9959183673469387,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_03",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.00121403306107727,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9885,
+            "edge_alignment": 0.9594,
+            "pixel_similarity": 0.9988,
+            "semantic_score": 1.0,
+            "structure_score": 0.9959
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9598789811134338,
+          "error_per_pixel": 0.0007776211341741558,
+          "object_mask_iou": 0.9858870967741935,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9598789811134338,
+          "error_per_pixel": 0.0007776211341741558,
+          "object_mask_iou": 0.9858870967741935,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_04",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007776211341741558,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9862,
+            "edge_alignment": 0.9599,
+            "pixel_similarity": 0.9992,
+            "semantic_score": 1.0,
+            "structure_score": 0.9859
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9114730358123779,
+          "error_per_pixel": 0.0013030757119407198,
+          "object_mask_iou": 0.9777777777777777,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9114730358123779,
+          "error_per_pixel": 0.0013030757119407198,
+          "object_mask_iou": 0.9777777777777777,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_05",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0013030757119407198,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.972,
+            "edge_alignment": 0.9115,
+            "pixel_similarity": 0.9987,
+            "semantic_score": 1.0,
+            "structure_score": 0.9778
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8758977651596069,
+          "error_per_pixel": 0.0017875688399593907,
+          "object_mask_iou": 0.9795479009687836,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8758977651596069,
+          "error_per_pixel": 0.0017875688399593907,
+          "object_mask_iou": 0.9795479009687836,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_06",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0017875688399593907,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9634,
+            "edge_alignment": 0.8759,
+            "pixel_similarity": 0.9982,
+            "semantic_score": 1.0,
+            "structure_score": 0.9795
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9326401948928833,
+          "error_per_pixel": 0.002132148630234365,
+          "object_mask_iou": 0.9657657657657658,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9326401948928833,
+          "error_per_pixel": 0.002132148630234365,
+          "object_mask_iou": 0.9657657657657658,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_07",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.002132148630234365,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9741,
+            "edge_alignment": 0.9326,
+            "pixel_similarity": 0.9979,
+            "semantic_score": 1.0,
+            "structure_score": 0.9658
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9702131748199463,
+          "error_per_pixel": 0.0007214533028412549,
+          "object_mask_iou": 0.9959349593495935,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9702131748199463,
+          "error_per_pixel": 0.0007214533028412549,
+          "object_mask_iou": 0.9959349593495935,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_08",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007214533028412549,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9914,
+            "edge_alignment": 0.9702,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9959
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8640175461769104,
+          "error_per_pixel": 0.001540263429079761,
+          "object_mask_iou": 0.9904761904761905,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8640175461769104,
+          "error_per_pixel": 0.001540263429079761,
+          "object_mask_iou": 0.9904761904761905,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_09",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.001540263429079761,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9632,
+            "edge_alignment": 0.864,
+            "pixel_similarity": 0.9985,
+            "semantic_score": 1.0,
+            "structure_score": 0.9905
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9052431583404541,
+          "error_per_pixel": 0.0008798097705559961,
+          "object_mask_iou": 0.9818548387096774,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9052431583404541,
+          "error_per_pixel": 0.0008798097705559961,
+          "object_mask_iou": 0.9818548387096774,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_10",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0008798097705559961,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9716,
+            "edge_alignment": 0.9052,
+            "pixel_similarity": 0.9991,
+            "semantic_score": 1.0,
+            "structure_score": 0.9819
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9262062907218933,
+          "error_per_pixel": 0.0006640522531648485,
+          "object_mask_iou": 0.9864253393665159,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9262062907218933,
+          "error_per_pixel": 0.0006640522531648485,
+          "object_mask_iou": 0.9864253393665159,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_11",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0006640522531648485,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.978,
+            "edge_alignment": 0.9262,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9864
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9314447641372681,
+          "error_per_pixel": 0.0007814974884459503,
+          "object_mask_iou": 0.9473684210526315,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9314447641372681,
+          "error_per_pixel": 0.0007814974884459503,
+          "object_mask_iou": 0.9473684210526315,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_12",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007814974884459503,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9695,
+            "edge_alignment": 0.9314,
+            "pixel_similarity": 0.9992,
+            "semantic_score": 1.0,
+            "structure_score": 0.9474
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9237745404243469,
+          "error_per_pixel": 0.0007306900816392733,
+          "object_mask_iou": 0.9399075500770416,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9237745404243469,
+          "error_per_pixel": 0.0007306900816392733,
+          "object_mask_iou": 0.9399075500770416,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_13",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007306900816392733,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9657,
+            "edge_alignment": 0.9238,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9399
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9278774261474609,
+          "error_per_pixel": 0.0007464138110692602,
+          "object_mask_iou": 0.9362637362637363,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9278774261474609,
+          "error_per_pixel": 0.0007464138110692602,
+          "object_mask_iou": 0.9362637362637363,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_14",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007464138110692602,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9658,
+            "edge_alignment": 0.9279,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9363
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9417462348937988,
+          "error_per_pixel": 0.0012184373229096582,
+          "object_mask_iou": 0.9223057644110275,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9417462348937988,
+          "error_per_pixel": 0.0012184373229096582,
+          "object_mask_iou": 0.9223057644110275,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_15",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0012184373229096582,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9657,
+            "edge_alignment": 0.9417,
+            "pixel_similarity": 0.9988,
+            "semantic_score": 1.0,
+            "structure_score": 0.9223
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9548607468605042,
+          "error_per_pixel": 0.0007875816837023821,
+          "object_mask_iou": 0.9198113207547169,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9548607468605042,
+          "error_per_pixel": 0.0007875816837023821,
+          "object_mask_iou": 0.9198113207547169,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_16",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007875816837023821,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9685,
+            "edge_alignment": 0.9549,
+            "pixel_similarity": 0.9992,
+            "semantic_score": 1.0,
+            "structure_score": 0.9198
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.950648307800293,
+          "error_per_pixel": 0.0007831987759615692,
+          "object_mask_iou": 0.9166666666666666,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.950648307800293,
+          "error_per_pixel": 0.0007831987759615692,
+          "object_mask_iou": 0.9166666666666666,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_pump_17",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007831987759615692,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 2
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9666,
+            "edge_alignment": 0.9506,
+            "pixel_similarity": 0.9992,
+            "semantic_score": 1.0,
+            "structure_score": 0.9167
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "Original description versus independent corrected description; unchanged circle/triangle fitter and renderer",
+      "commit": "2f9bd54cc661b2379355b67100a5ffa8796099a6",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_pump_00": "8082a6e7e6b4c29b04e3f3b81380a9dff6b5d058d160bb6f23c81fb4909d9b8d",
+        "anonymous_pump_01": "63a518e0dff23b1fb31d1c70b1fb7defadd22c028337539b689ec07a6b1568ac",
+        "anonymous_pump_02": "08f919529d8e97d5875ff2bd51dbb9268a6ee411273a66f6d06673c783088c15",
+        "anonymous_pump_03": "0b929123035f803f4700e9480aee5987d52e153c260206ba283f90de5fca9b18",
+        "anonymous_pump_04": "dc20c2d690859ccaf24b27c3a4ff0b7619560f198c79d707667bcccc55b054a2",
+        "anonymous_pump_05": "ba275a00508bb568a2eb0ca9f3c74b0b14e741b5f0e23c8ece23ebfc024bcde2",
+        "anonymous_pump_06": "6630e6694ba3136f30fb68c954ceb08ccda53a8bbe29458f50d6383e1f39f6fc",
+        "anonymous_pump_07": "a6ed2ff0c7f6e24a428001bfe93469cd16d3ae2071047ea84ed83137144ea758",
+        "anonymous_pump_08": "e490bb32d0fba761bd6c90aebaa42f74d62b49a3ca4483405a96eb5f36a076ca",
+        "anonymous_pump_09": "4628faec692c866cc99eeda3458809ed779b4c666253d710e5e2d30623e7ebc3",
+        "anonymous_pump_10": "d152ebda486516bb04e9d7cd48e2e97f64d8bc1d1b7a51c228732dcac6213a99",
+        "anonymous_pump_11": "81ae0b85c39e53096a7423c9645a9344d2b885c7f69a295aa91d189e3bcfb535",
+        "anonymous_pump_12": "608b91c0d16d640e47987d12863662cc88b700e2c97dc1717232c1ed76596b0c",
+        "anonymous_pump_13": "f30f933879dab593378c997e1c305a4cef0d3f7cf59970e05d228aa327ef7c27",
+        "anonymous_pump_14": "683f90d88c7c7813f1193fd2a92ba351adc2468247995632cd4088d275421555",
+        "anonymous_pump_15": "7ff30856303bd36dd66aead3017a7216d6fec79971a1cc2f15d3b362653ee3ad",
+        "anonymous_pump_16": "6a5f201a40ead3e8266bd662a43dba7b99837ca1d30c451752590011ffd77b2c",
+        "anonymous_pump_17": "05c2cc878b391947004968b4b26bd386bfd46d4c1defe2daaf91090a469ae5c4"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 18,
+      "improved": 0,
+      "satisfactory": 18,
+      "technically_completed": 18
+    }
+  },
+  "schema_version": "down_pump_acceptance_v1",
+  "semantic_contract": "one filled circular body and one contrasting contained triangle pointing down; colors observed from raster",
+  "historical_outputs": [
+    {
+      "source": "AC0403_1_L.jpg",
+      "svg_sha256": "ea61b4f1d7511a307e96673df24878ba021afb52ae292af535ea41646d603c73",
+      "mean_delta2": 13989.01953125,
+      "metrics": {
+        "error_per_pixel": 0.07171098055235166,
+        "edge_alignment": 0.5470336079597473,
+        "object_mask_iou": 0.67853170189099,
+        "semantic_score": 0.0,
+        "dimension_match": 1.0
+      }
+    },
+    {
+      "source": "AC0403_1S_sia.jpg",
+      "svg_sha256": "bf2f0014b6b87fb78c104ed966ab0725fd7783354651e4429200c77ff6c1e621",
+      "mean_delta2": 13293.6728515625,
+      "metrics": {
+        "error_per_pixel": 0.06814647110886839,
+        "edge_alignment": 0.6003876328468323,
+        "object_mask_iou": 0.7601246105919003,
+        "semantic_score": 0.0,
+        "dimension_match": 1.0
+      }
+    },
+    {
+      "source": "AC0403_1_M.jpg",
+      "svg_sha256": "84563304920814672f9f96f9f3e87e973732159e2c1dc58208199beccbc86303",
+      "mean_delta2": 10889.138671875,
+      "metrics": {
+        "error_per_pixel": 0.05582026744521338,
+        "edge_alignment": 0.5606415271759033,
+        "object_mask_iou": 0.8228782287822878,
+        "semantic_score": 0.0,
+        "dimension_match": 1.0
+      }
+    },
+    {
+      "source": "AC0403_1_S.jpg",
+      "svg_sha256": "fc49257e6aa7ecbab4a7d0ca74ae18403c3f54665f71f585a49771a743510f78",
+      "mean_delta2": 10048.2275390625,
+      "metrics": {
+        "error_per_pixel": 0.051509560625720874,
+        "edge_alignment": 0.681059718132019,
+        "object_mask_iou": 0.8429752066115702,
+        "semantic_score": 0.0,
+        "dimension_match": 1.0
+      }
+    },
+    {
+      "source": "AC0403_2_M.jpg",
+      "svg_sha256": "b8d00ea8a20ce0899c4574c5e43edc1e4d07ee461077aff6bd9828fd05bc5a8f",
+      "mean_delta2": 6447.451171875,
+      "metrics": {
+        "error_per_pixel": 0.033051140186466745,
+        "edge_alignment": 0.5814305543899536,
+        "object_mask_iou": 0.6889818688981869,
+        "semantic_score": 0.0,
+        "dimension_match": 1.0
+      }
+    },
+    {
+      "source": "AC0403_2_S.jpg",
+      "svg_sha256": "f2f41cf28207e04aec672fa06efbe8f916416b54875fd2beefcd9e93aea87c11",
+      "mean_delta2": 177.7624969482422,
+      "metrics": {
+        "error_per_pixel": 0.0009112520668883362,
+        "edge_alignment": 0.9210988283157349,
+        "object_mask_iou": 0.9776785714285714,
+        "semantic_score": 0.0,
+        "dimension_match": 1.0
+      }
+    },
+    {
+      "source": "AC0403_M_sia.jpg",
+      "svg_sha256": "95fc818c7e564d140bcff5d36369f43241abeae2d6400b8fcedf84a9c6be60fb",
+      "mean_delta2": 237.48333740234375,
+      "metrics": {
+        "error_per_pixel": 0.00121739503986848,
+        "edge_alignment": 0.9293869733810425,
+        "object_mask_iou": 0.9104477611940298,
+        "semantic_score": 0.0,
+        "dimension_match": 1.0
+      }
+    },
+    {
+      "source": "AC0403_S.jpg",
+      "svg_sha256": "fe047d0cf02ac99824ff6b2d70e4df21c3881a03e66cc52f7fbb665de2992b4a",
+      "mean_delta2": 9310.2373046875,
+      "metrics": {
+        "error_per_pixel": 0.04772645036364219,
+        "edge_alignment": 0.491476833820343,
+        "object_mask_iou": 0.44485294117647056,
+        "semantic_score": 0.0,
+        "dimension_match": 1.0
+      }
+    },
+    {
+      "source": "AC0403_S_sia.jpg",
+      "svg_sha256": "4a98eb8db67e9b2d591b2c67da0c78663257744e1269988ed6c2a064a5967fd8",
+      "mean_delta2": 189.0449981689453,
+      "metrics": {
+        "error_per_pixel": 0.0009690888026089726,
+        "edge_alignment": 0.9142876863479614,
+        "object_mask_iou": 0.9251336898395722,
+        "semantic_score": 0.0,
+        "dimension_match": 1.0
+      }
+    }
+  ],
+  "interpretation": "Historical saved SVGs are poor; fresh baseline already passes. Description clarification changes no SVG bytes or quality metrics. No algorithm improvement is claimed.",
+  "reproducibility": {
+    "independent_acceptance_runs": 2,
+    "acceptance_svg_bytes_and_gate_records_identical": true,
+    "original_description_baseline_svg_bytes_identical": true,
+    "original_baseline_report_sha256": "d2ef34f8324b682bfa495f8c6ec52be4b0a5fdba17ef31ce41d8d295ce7e50c6",
+    "original_baseline_declared_commit": "568d4e626251220e62cda8c7f04b4e6bcfab87b7",
+    "original_baseline_execution_commit": "2f9bd54cc661b2379355b67100a5ffa8796099a6",
+    "original_baseline_provenance_note": "The prepared original manifest declared an older commit; all three runs actually executed the unchanged runtime at the current branch base. The original report is retained unchanged.",
+    "acceptance_report_sha256": [
+      "0a761f2c92b2feecf8e576814f1c81854ed546a01d789a2c146360de481ad0d0",
+      "0a761f2c92b2feecf8e576814f1c81854ed546a01d789a2c146360de481ad0d0"
+    ],
+    "svg_outputs_verified_against_report": 18
+  },
+  "unchanged_runtime_sources": {
+    "src/iCCModules/imageCompositeConverterPump.py": "e786fb0c003100a810ad2072f6f4ba8b10bdf2cd41b58be35e7b9074d8b28a83",
+    "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "b12a09563da93c121c7bc738717704879afa98a68911d93102c21bdc91600b36",
+    "src/iCCModules/imageCompositeConverterGeometryIr/runtime.py": "7d97c55152a9360848eb87e6a1db3022082b7fde9fbc9c6f1511fe645623fc6e"
+  },
+  "generalization": {
+    "neutral_runtime_filenames": true,
+    "real_color_size_and_sia_variants": 18,
+    "new_algorithm_learning_claimed": false,
+    "svg_template_roundtrip": "No AC0403 source SVG exists in the sample pool; no source-template roundtrip claimed."
+  },
+  "strict_plan_b_raster_gate": {
+    "passed": 11,
+    "required": 18,
+    "satisfactory": false,
+    "cases": [
+      {
+        "source": "AC0403_1_L.jpg",
+        "satisfactory": false,
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.0004804978962056339,
+          "foreground_mse": 0.0006518376176245511,
+          "edge_alignment": 0.9489903450012207,
+          "foreground_iou": 0.8043875685557587
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_1L_sia.jpg",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0005283512873575091,
+          "foreground_mse": 0.0007299263379536569,
+          "edge_alignment": 0.9285560846328735,
+          "foreground_iou": 0.8788159111933395
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_1M_sia.jpg",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0016064477385953069,
+          "foreground_mse": 0.002246295800432563,
+          "edge_alignment": 0.9488362669944763,
+          "foreground_iou": 0.8835725677830941
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_1S_sia.jpg",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0012140331091359258,
+          "foreground_mse": 0.0016400194726884365,
+          "edge_alignment": 0.9594492316246033,
+          "foreground_iou": 0.8954703832752613
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_1_M.jpg",
+        "satisfactory": false,
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.000777621113229543,
+          "foreground_mse": 0.001134740188717842,
+          "edge_alignment": 0.9598789811134338,
+          "foreground_iou": 0.848381601362862
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_1_S.jpg",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0013030758127570152,
+          "foreground_mse": 0.001790904556401074,
+          "edge_alignment": 0.9114730358123779,
+          "foreground_iou": 0.8714285714285714
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_2L_sia.jpg",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0017875689081847668,
+          "foreground_mse": 0.002562823472544551,
+          "edge_alignment": 0.8758977651596069,
+          "foreground_iou": 0.8673932788374206
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_2M_sia.jpg",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.002132148714736104,
+          "foreground_mse": 0.0029482832178473473,
+          "edge_alignment": 0.9326401948928833,
+          "foreground_iou": 0.8761755485893417
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_2S_sia.jpg",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0007214532815851271,
+          "foreground_mse": 0.0009456133120693266,
+          "edge_alignment": 0.9702131748199463,
+          "foreground_iou": 0.8827586206896552
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_2_L.jpg",
+        "satisfactory": false,
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.001540263299830258,
+          "foreground_mse": 0.002325816312804818,
+          "edge_alignment": 0.8640175461769104,
+          "foreground_iou": 0.8365384615384616
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_2_M.jpg",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0008798097842372954,
+          "foreground_mse": 0.0013210108736529946,
+          "edge_alignment": 0.9052431583404541,
+          "foreground_iou": 0.8819444444444444
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_2_S.jpg",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0006640523206442595,
+          "foreground_mse": 0.0009004154708236456,
+          "edge_alignment": 0.9262062907218933,
+          "foreground_iou": 0.8659420289855072
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_L.jpg",
+        "satisfactory": false,
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.0007814975106157362,
+          "foreground_mse": 0.0011844589607790112,
+          "edge_alignment": 0.9314447641372681,
+          "foreground_iou": 0.7942681678607983
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_L_sia.jpg",
+        "satisfactory": false,
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.0007306901388801634,
+          "foreground_mse": 0.001303367898799479,
+          "edge_alignment": 0.9237745404243469,
+          "foreground_iou": 0.8207885304659498
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_M.jpg",
+        "satisfactory": false,
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.0007464137743227184,
+          "foreground_mse": 0.0011478499509394169,
+          "edge_alignment": 0.9278774261474609,
+          "foreground_iou": 0.8495575221238938
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_M_sia.jpg",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0012184373335912824,
+          "foreground_mse": 0.002194184111431241,
+          "edge_alignment": 0.9417462348937988,
+          "foreground_iou": 0.8638211382113821
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_S.jpg",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0007875817245803773,
+          "foreground_mse": 0.001141310902312398,
+          "edge_alignment": 0.9548607468605042,
+          "foreground_iou": 0.8816793893129771
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      {
+        "source": "AC0403_S_sia.jpg",
+        "satisfactory": false,
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.0007831987459212542,
+          "foreground_mse": 0.0011887188302353024,
+          "edge_alignment": 0.950648307800293,
+          "foreground_iou": 0.8181818181818182
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    ]
+  },
+  "review": {
+    "metrics": {
+      "successful_variants": 48,
+      "successful_renderable_pairs": 48,
+      "successful_above_threshold": 0,
+      "successful_missing_or_failed": 0,
+      "diff_variants": 952,
+      "diff_renderable_pairs": 945,
+      "selected_candidates": 5,
+      "top_error_cases": 5,
+      "ranked_records": 1000,
+      "boundary_triple_records": 3
+    },
+    "threshold_normalized_mse": 0.045945679012345676,
+    "renderable_pairs_above_review_threshold": 104,
+    "selected_candidates": [
+      {
+        "variant": "AC0714_L",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/AC0714_L.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0714_L.svg",
+        "width": 45,
+        "height": 25,
+        "mean_delta2": 32695.380859375,
+        "normalized_mse": 0.16760415665449185,
+        "status": "ok",
+        "image_area": 1125
+      },
+      {
+        "variant": "GE0032",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/GE0032.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/GE0032.svg",
+        "width": 45,
+        "height": 44,
+        "mean_delta2": 13826.3896484375,
+        "normalized_mse": 0.07087730179898757,
+        "status": "ok",
+        "image_area": 1980
+      },
+      {
+        "variant": "GE9023_6M",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/GE9023_6M.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/GE9023_6M.svg",
+        "width": 20,
+        "height": 60,
+        "mean_delta2": 13675.259765625,
+        "normalized_mse": 0.07010257473087274,
+        "status": "ok",
+        "image_area": 1200
+      },
+      {
+        "variant": "AC0413_1_M",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/AC0413_1_M.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0413_1_M.svg",
+        "width": 30,
+        "height": 30,
+        "mean_delta2": 13465.6943359375,
+        "normalized_mse": 0.06902829340478021,
+        "status": "ok",
+        "image_area": 900
+      },
+      {
+        "variant": "AC0713_1_L",
+        "source": "diff_inventory",
+        "image_path": "artifacts/images_to_convert/AC0713_1_L.jpg",
+        "svg_path": "artifacts/converted_images/converted_svgs/AC0713_1_L.svg",
+        "width": 25,
+        "height": 45,
+        "mean_delta2": 13458.083984375,
+        "normalized_mse": 0.06898928096565424,
+        "status": "ok",
+        "image_area": 1125
+      }
+    ],
+    "reproduction_arguments": [
+      "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+      "-m",
+      "tools.review_conversion_quality",
+      "--output-dir",
+      ".tmp/ac0403-20261009/review",
+      "--exclude",
+      "AC0554_2_L",
+      "--exclude",
+      "AC0713_1_S",
+      "--exclude",
+      "DLG0010_1",
+      "--exclude",
+      "AC0724_1_S",
+      "--exclude",
+      "AC0252_1",
+      "--exclude",
+      "AC0252",
+      "--exclude",
+      "AC0252_2",
+      "--exclude",
+      "AC0731_1_L",
+      "--exclude",
+      "AC0731_1_M",
+      "--exclude",
+      "AC0731_1_S",
+      "--exclude",
+      "AC0731_L",
+      "--exclude",
+      "AC0731_M",
+      "--exclude",
+      "AC0731_S",
+      "--exclude",
+      "GE1003_M",
+      "--exclude",
+      "GE1003_L",
+      "--exclude",
+      "GE1003_S",
+      "--exclude",
+      "AC0404_1_L",
+      "--exclude",
+      "AC0404_1_M",
+      "--exclude",
+      "AC0404_1_S",
+      "--exclude",
+      "AC0404_1L_sia",
+      "--exclude",
+      "AC0404_1M_sia",
+      "--exclude",
+      "AC0404_1S_sia",
+      "--exclude",
+      "AC0404_2_L",
+      "--exclude",
+      "AC0404_2_M",
+      "--exclude",
+      "AC0404_2_S",
+      "--exclude",
+      "AC0404_2L_sia",
+      "--exclude",
+      "AC0404_2M_sia",
+      "--exclude",
+      "AC0404_2S_sia",
+      "--exclude",
+      "AC0404_L",
+      "--exclude",
+      "AC0404_L_sia",
+      "--exclude",
+      "AC0404_M",
+      "--exclude",
+      "AC0404_M_sia",
+      "--exclude",
+      "AC0404_S",
+      "--exclude",
+      "AC0404_S_sia",
+      "--exclude",
+      "GE9011_1M",
+      "--exclude",
+      "GE9011_1S",
+      "--exclude",
+      "GE9011_2M",
+      "--exclude",
+      "GE9011_2S",
+      "--exclude",
+      "GE9011_3M",
+      "--exclude",
+      "GE9011_3S",
+      "--exclude",
+      "GE9011_4M",
+      "--exclude",
+      "GE9011_4S",
+      "--exclude",
+      "GE9011_5M",
+      "--exclude",
+      "GE9011_5S",
+      "--exclude",
+      "GE9011_6M",
+      "--exclude",
+      "GE9011_6S",
+      "--exclude",
+      "GE9011_7M",
+      "--exclude",
+      "GE9011_7S",
+      "--exclude",
+      "GE0280",
+      "--exclude",
+      "GE0281",
+      "--exclude",
+      "GE0282",
+      "--exclude",
+      "GE0283",
+      "--exclude",
+      "GE0284",
+      "--exclude",
+      "GE0285",
+      "--exclude",
+      "GE9013_1M",
+      "--exclude",
+      "GE9013_1S",
+      "--exclude",
+      "GE9013_2M",
+      "--exclude",
+      "GE9013_2S",
+      "--exclude",
+      "GE9013_3M",
+      "--exclude",
+      "GE9013_3S",
+      "--exclude",
+      "GE9013_4M",
+      "--exclude",
+      "GE9013_4S",
+      "--exclude",
+      "GE9013_5M",
+      "--exclude",
+      "GE9013_5S",
+      "--exclude",
+      "GE9013_6M",
+      "--exclude",
+      "GE9013_6S",
+      "--exclude",
+      "GE9013_7M",
+      "--exclude",
+      "GE9013_7S",
+      "--exclude",
+      "AC0554_1_L",
+      "--exclude",
+      "AC0554_1_M",
+      "--exclude",
+      "AC0554_1_S",
+      "--exclude",
+      "AC0554_2_M",
+      "--exclude",
+      "AC0554_2_S",
+      "--exclude",
+      "AC0554_L",
+      "--exclude",
+      "AC0554_M",
+      "--exclude",
+      "AC0554_S",
+      "--exclude",
+      "DLG0031",
+      "--exclude",
+      "DLG0021",
+      "--exclude",
+      "AC0130_S",
+      "--exclude",
+      "AC0130_M",
+      "--exclude",
+      "AC0130_L",
+      "--exclude",
+      "GE1420_S",
+      "--exclude",
+      "GE1420_M",
+      "--exclude",
+      "GE1420_L",
+      "--exclude",
+      "GE1420_M_neutral",
+      "--exclude",
+      "AC0704_1_L",
+      "--exclude",
+      "AC0704_1_M",
+      "--exclude",
+      "AC0704_1_S",
+      "--exclude",
+      "AC0704_L",
+      "--exclude",
+      "AC0704_M",
+      "--exclude",
+      "AC0704_S",
+      "--exclude",
+      "AC0402_1_S",
+      "--exclude",
+      "AC0402_1L_sia",
+      "--exclude",
+      "AC0402_1M_sia",
+      "--exclude",
+      "AC0402_1S_sia",
+      "--exclude",
+      "AC0402_1_L",
+      "--exclude",
+      "AC0402_1_M",
+      "--exclude",
+      "AC0402_2L_sia",
+      "--exclude",
+      "AC0402_2M_sia",
+      "--exclude",
+      "AC0402_2S_sia",
+      "--exclude",
+      "AC0402_2_L",
+      "--exclude",
+      "AC0402_2_M",
+      "--exclude",
+      "AC0402_2_S",
+      "--exclude",
+      "AC0402_L",
+      "--exclude",
+      "AC0402_L_sia",
+      "--exclude",
+      "AC0402_M",
+      "--exclude",
+      "AC0402_M_sia",
+      "--exclude",
+      "AC0402_S",
+      "--exclude",
+      "AC0402_S_sia",
+      "--exclude",
+      "AC0403_1_L",
+      "--exclude",
+      "AC0403_1L_sia",
+      "--exclude",
+      "AC0403_1M_sia",
+      "--exclude",
+      "AC0403_1S_sia",
+      "--exclude",
+      "AC0403_1_M",
+      "--exclude",
+      "AC0403_1_S",
+      "--exclude",
+      "AC0403_2L_sia",
+      "--exclude",
+      "AC0403_2M_sia",
+      "--exclude",
+      "AC0403_2S_sia",
+      "--exclude",
+      "AC0403_2_L",
+      "--exclude",
+      "AC0403_2_M",
+      "--exclude",
+      "AC0403_2_S",
+      "--exclude",
+      "AC0403_L",
+      "--exclude",
+      "AC0403_L_sia",
+      "--exclude",
+      "AC0403_M",
+      "--exclude",
+      "AC0403_M_sia",
+      "--exclude",
+      "AC0403_S",
+      "--exclude",
+      "AC0403_S_sia"
+    ],
+    "report_sha256": "3c7c0e9f2ff1095bcff87754a6224d5c1778b67f7dc553ac43520f7966132d6f"
+  },
+  "verification": {
+    "focused_existing_tests": {
+      "passed": 75,
+      "log_sha256": "a0c23909097875d44b5861535703ab9376f2ab0f7111ca6611aba0d5912c0cf2"
+    },
+    "focused_new_tests": {
+      "passed": 20,
+      "log_sha256": "e1919e8db0bf46bd1db61d3b855428bdb90f36f984dff9c571cae9e7900964e6"
+    },
+    "syntax_compileall": "pass",
+    "cli_help": "pass",
+    "cli_help_log_sha256": "f346cb602b567a2716a4144e0587c4c5b89258f818246194b853dddf9d5fdde0",
+    "runtime_image_id_hardcoding": {
+      "passed": true,
+      "occurrences": 0
+    },
+    "whitespace": "git -c core.whitespace=cr-at-eol diff --check; preserves existing CRLF files"
+  },
+  "tests": {
+    "profile": "complete default pytest suite; heavy conversion modules not enabled",
+    "tests": 1925,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 29,
+    "seconds": 676.65,
+    "junit_sha256": "1203f10918eaa83bd60810ebffa0192132ed09a7353e3eb767d4037a83d07fd7",
+    "log_sha256": "6b89597dc77b11a816f73b9e12d6fc034bf738ef8060b5be644d4d602f0d9f0a",
+    "passed": 1896,
+    "exit_code": 0
+  }
+}

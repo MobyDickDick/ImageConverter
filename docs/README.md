@@ -2,6 +2,8 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [Abwärts-Dreieck im Kreis: Altbestandvergleich und 18 reproduzierbare CLI-Gate-Abnahmen (2026-10-09)](next_arbeitspaket_2026-10-09_ac0403_1_l.md)
+
 - [Gefülltes Rechts-Dreieck im Kreis: eigenständige Beschreibung und 18 CLI-Gate-Abnahmen (2026-10-08)](next_arbeitspaket_2026-10-08_ac0402_1_s.md)
 
 - [Alarmglocke: Rasterregistrierung, Bézier-Verlauf und vier CLI-Gate-Abnahmen (2026-10-08)](next_arbeitspaket_2026-10-08_ge1420_s.md)

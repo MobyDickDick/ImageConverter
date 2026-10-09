@@ -1,10 +1,10 @@
 {
   "schema_version": "pump_recheck_manifest_v1",
   "direction": "unten",
-  "description": "Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 180° gedreht.",
+  "description": "Pumpensymbol: Ein gefüllter Kreis mit Randkontur enthält ein kontrastierendes gefülltes Dreieck, dessen Spitze nach unten zeigt. Weißer Hintergrund. Lage, Größe, Konturbreite und Farben ergeben sich aus dem Rasterbild.",
   "baseline_description": "Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 180° gedreht.",
   "provenance": {
-    "commit": "568d4e626251220e62cda8c7f04b4e6bcfab87b7",
+    "commit": "2f9bd54cc661b2379355b67100a5ffa8796099a6",
     "seed": 0,
     "execution_mode": "semantic-only",
     "baseline_mode": "Original description versus independent corrected description; unchanged circle/triangle fitter and renderer",

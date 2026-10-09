@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-08, nach Rechts-Dreieck-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-09, nach Abwärts-Dreieck-Abnahme)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -109,18 +109,29 @@ Fünf JPG-Varianten verfehlen die separate strengere IoU-Grenze; drei ungefüllt
 Konturdreieck-Raster sind separat beschrieben und nicht Teil dieser Abnahme.
 Details: `docs/next_arbeitspaket_2026-10-08_ac0402_1_s.md`.
 
-1. `AC0403_1_L` – `mean_delta2=13989.019531`, `normalized_mse=0.071711`.
-2. `GE0032` – `mean_delta2=13826.389648`, `normalized_mse=0.070877`.
-3. `AC0413_1_M` – `mean_delta2=13465.694336`, `normalized_mse=0.069028`.
-4. `AC0713_1_L` – `mean_delta2=13458.083984`, `normalized_mse=0.068989`.
-5. `AC0721_1_S` – `mean_delta2=13368.759766`, `normalized_mse=0.068531`.
+`AC0403_1_L` und alle 18 Farb-/Größen-/SIA-Varianten bestehen bereits mit
+der frischen CLI-Baseline beide regulären Gates. Das historische Ziel-SVG
+ohne Dreieck erreicht `13989.019531`, das frische SVG `93.733124`.
+Die XML-Präzisierung mit absoluter Richtung nach unten verändert keine
+SVG-Bytes; die Runtime bleibt unverändert. Zwei unabhängige Abnahmen
+reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
+die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
+Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-Die nächste reguläre Rotation beginnt mit `AC0403_1_L`; vor Änderungen ist eine
-frische CLI-Baseline erforderlich. Der Review über 956 Einträge (950 renderbare
+1. `AC0714_L` – `mean_delta2=32695.380859`, `normalized_mse=0.167604`.
+2. `GE0032` – `mean_delta2=13826.389648`, `normalized_mse=0.070877`.
+3. `GE9023_6M` – `mean_delta2=13675.259766`, `normalized_mse=0.070103`.
+4. `AC0413_1_M` – `mean_delta2=13465.694336`, `normalized_mse=0.069028`.
+5. `AC0713_1_L` – `mean_delta2=13458.083984`, `normalized_mse=0.068989`.
+
+Die nächste reguläre Rotation beginnt mit `AC0714_L`; vor Änderungen ist eine
+frische CLI-Baseline erforderlich. Der Review über 1.000 Einträge (993 renderbare
 Paare) und sein exakter Aufruf stehen im kompakten Nachweis
-`artifacts/evaluation/right_pump_recheck_v1/summary_2026-10-08.json`.
+`artifacts/evaluation/down_pump_recheck_v1/summary_2026-10-09.json`.
 Alle 48 gespeicherten Erfolgsvarianten bleiben unter der Reviewgrenze.
-Vollständige Tabellen liegen lokal unter `.tmp/ac0402/review/`.
+104 renderbare Einträge überschreiten die Reviewgrenze. Die neue Reihenfolge
+folgt dem erweiterten Diff-Inventar; abgeschlossene Pakete sind ausgeschlossen.
+Vollständige Tabellen liegen lokal unter `.tmp/ac0403-20261009/review/`.
 
 Die gekoppelte randomisierte Plan-B-Auswahl `AC0538_1L_sia` mit Seed
 `3948009396310964094` besteht nach eigenständiger Beschreibung und katalogfreier
