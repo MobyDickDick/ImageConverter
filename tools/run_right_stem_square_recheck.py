@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 import random
+import re
 import shutil
 import subprocess
 import sys
@@ -23,6 +24,20 @@ def main() -> int:
         from src.iCCModules.imageCompositeConverterGeometryIr import runtime
         if sys.argv[2] == 'before':
             runtime._build_right_stem_square_kelle = lambda: None
+        elif sys.argv[2].startswith('baseline:'):
+            revision = sys.argv[2].split(':', 1)[1]
+            if not re.fullmatch(r'[0-9a-f]{40}', revision):
+                raise ValueError('baseline fitter revision must be a full commit hash')
+            source = subprocess.check_output([
+                'git', 'show', revision+':src/iCCModules/imageCompositeConverterSquareStem.py'
+            ], text=True, encoding='utf-8')
+            namespace = {'__name__': 'frozen_square_baseline'}
+            exec(compile(source, '<frozen square baseline>', 'exec'), namespace)
+            from src.iCCModules import imageCompositeConverterNonCompositeRuntime as noncomposite
+            def baseline_fit(geometry_ir, **kwargs):
+                kwargs.pop('description', None)
+                return namespace['fit_square_stem'](geometry_ir, **kwargs)
+            noncomposite.fit_square_stem = baseline_fit
         random.seed(0)
         np.random.seed(0)
         sys.stdout.reconfigure(encoding='utf-8')
@@ -51,6 +66,7 @@ def main() -> int:
         case['image'] = str(target.relative_to(output))
     paths = [str(Path(np.__file__).resolve().parents[1]), str(Path(__file__).resolve().parents[1]), *sys.path]
     env = dict(os.environ, TINY_ICC_OUTPUT_VARIATION='0', PYTHONHASHSEED='0', IMAGE_CONVERTER_ISOLATE_SVG_RENDER='0')
+    reference_access = {}
     for mode in (('before',) if args.baseline_only else ('before', 'after')):
         # A failed CLI case can archive its input under nonconvertable. Each
         # side receives its own fresh copy; neither can change the other's set.
@@ -69,12 +85,15 @@ def main() -> int:
         with (output/(mode+'.log')).open('w', encoding='utf-8') as log:
             subprocess.run([sys.executable, '-I', '-c', 'import sys,runpy; sys.path[:0]='+repr(paths)+
                             "; runpy.run_module('tools.run_right_stem_square_recheck',run_name='__main__')",
-                            '--_worker', mode, str(run_dir), str(mode_inputs), '--descriptions-path', str(description_file),
+                            '--_worker', ('baseline:'+manifest['baseline_fitter_revision']
+                                         if mode == 'before' and 'baseline_fitter_revision' in manifest else mode),
+                            str(run_dir), str(mode_inputs), '--descriptions-path', str(description_file),
                             '--output-dir', str(run_dir), '--start', names[0], '--end', names[-1],
                             '--execution-mode', 'semantic-only', '--deterministic-order'],
                            cwd=Path(__file__).resolve().parents[1], env=env, stdout=log, stderr=subprocess.STDOUT,
                            timeout=180, check=True)
         blocked = json.loads((output/'reference_access.json').read_text(encoding='utf-8'))['blocked_svg_reads']
+        reference_access[mode] = {'blocked_svg_reads': blocked}
         if blocked:
             raise ValueError('The converter attempted a forbidden reference SVG read')
         for case in manifest['cases']:
@@ -88,6 +107,7 @@ def main() -> int:
         print('Fresh CLI baseline saved')
         return 0
     report = evaluate(manifest, output)
+    report['reference_access'] = reference_access
     (output/'manifest.json').write_text(json.dumps(manifest, indent=2)+'\n', encoding='utf-8')
     (output/'report.json').write_text(json.dumps(report, indent=2, sort_keys=True)+'\n', encoding='utf-8')
     print(json.dumps(report['satisfaction_gate']['summary'], sort_keys=True))

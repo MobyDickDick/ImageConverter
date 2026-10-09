@@ -14,7 +14,27 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-09)
 
-**Aktueller Abschluss 2026-10-09: `AC0403_1_L` (Abwärts-Dreieck im Kreis).**
+**Roadmap-Priorität des Nutzers:** Zuerst möglichst viele der ungefähr 1.700
+Bilder in guter Qualität konvertieren und komplexe Restfälle nachvollziehbar
+zurückstellen; anschließend den Code vereinfachen und als verständliches Produkt
+aufbereiten. Ausgangszählung: 43.376 Python-Zeilen unter `src/`, ohne Tests,
+Werkzeuge und externe Bibliotheken. Details: `docs/product_roadmap.md`.
+
+**Aktueller Abschluss 2026-10-09: `AC0714_L` (Quadrat, rechter Griff, Strich und Punkt).**
+Alle sechs Farb-/Größenvarianten bestehen beide regulären Qualitätsgates ohne
+Pflichtmetrikregression und zusätzlich die strengeren Plan-B-Pixelgrenzen.
+Die frische Ziel-CLI-Baseline sinkt von `mean_delta2=33066.082031` auf `24.314667`.
+Eigenständige Beschreibungen in beiden XML-Katalogen nennen die Innenmarkierungen.
+Die bestehende Rasterregistrierung bestimmt deren Geometrie und Kontrastfarbe
+aus dem Eingabebild. Zwei unabhängige CLI-Läufe reproduzieren alle zwölf
+Vorher-/Nachher-SVGs und Gateentscheidungen; der originale Vorlauf bleibt bytegleich.
+Die sechs Abnahme-SVGs sind gespeichert. `PB-POOL-2026-10-07` bleibt offen.
+Der Review über 1.000 Einträge erhält alle 48 bisherigen Erfolgsvarianten unter
+der Reviewgrenze. Nächste Rotation: `GE0032`, `GE9023_6M`, `AC0413_1_M`,
+`AC0713_1_L`, `AC0721_1_S`. Details und Testabschluss:
+`docs/next_arbeitspaket_2026-10-09_ac0714_l.md`.
+
+**Vorheriger Abschluss 2026-10-09: `AC0403_1_L` (Abwärts-Dreieck im Kreis).**
 Alle 18 Farb-/Größen-/SIA-Varianten bestehen bereits mit der frischen
 CLI-Baseline beide regulären Gates. Das alte Ziel-SVG ohne Dreieck erreicht
 `mean_delta2=13989.019531`, das frische Ergebnis `93.733124`. Beide XML-Kataloge

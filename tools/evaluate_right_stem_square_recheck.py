@@ -46,7 +46,50 @@ def square_and_right_stem_semantics(svg: str) -> float:
                  and rect.get('fill', 'none') != 'none')
 
 
-def measure(image_path: Path, svg_path: Path) -> dict:
+def square_slash_and_dot_semantics(svg: str) -> float:
+    """Require the connected body and both contrasting interior primitives."""
+    root = ET.fromstring(svg)
+    if any(e.get('transform') for e in root.iter()):
+        return 0.
+    marks = [e for e in root if e.tag.rsplit('}', 1)[-1] == 'path' and e.get('d', '').endswith(' Z')]
+    if len(marks) != 2:
+        return 0.
+    points = []
+    for mark in marks:
+        if not re.fullmatch(r'M [-\d.]+ [-\d.]+(?: L [-\d.]+ [-\d.]+){3} Z', mark.get('d', '')):
+            return 0.
+        values = list(map(float, re.findall(r'[-\d.]+', mark.get('d', ''))))
+        points.append(np.array(values).reshape(4, 2))
+        root.remove(mark)
+    if square_and_right_stem_semantics(ET.tostring(root, encoding='unicode')) != 1:
+        return 0.
+    rect = next(e for e in root if e.tag.rsplit('}', 1)[-1] == 'rect')
+    x,y,w,h = (float(rect.get(k, 0)) for k in ('x','y','width','height'))
+    if any(not np.isfinite(p).all() or not ((p[:,0]>x)&(p[:,0]<x+w)&(p[:,1]>y)&(p[:,1]<y+h)).all() for p in points):
+        return 0.
+    if marks[0].get('fill', 'none') != marks[1].get('fill', 'none') or marks[0].get('fill', 'none') in {'none', rect.get('fill')}:
+        return 0.
+    slash,dot = sorted(points, key=lambda p: np.ptp(p[:,1]), reverse=True)
+    top,bottom = slash[:2].mean(axis=0),slash[2:].mean(axis=0)
+    dot_width,dot_height = np.ptp(dot,axis=0)
+    return float(bottom[1]>top[1] and top[0]>bottom[0]
+                 and -.8<(bottom[0]-top[0])/max(bottom[1]-top[1],1e-9)<-.08
+                 and abs(slash[0,1]-slash[1,1])<1e-4 and abs(slash[2,1]-slash[3,1])<1e-4
+                 # Four independently rounded coordinates (three decimals)
+                 # can differ by two SVG serialization units in their widths.
+                 and abs((slash[1,0]-slash[0,0])-(slash[2,0]-slash[3,0]))<=.002001
+                 and 0<slash[1,0]-slash[0,0]<(bottom[1]-top[1])*.4
+                 and .5<=dot_width/max(dot_height,1e-9)<=2
+                 and 0<dot_height<=(bottom[1]-top[1])*.5
+                 and dot[:,0].max()<=bottom[0]
+                 and dot[:,1].min()>=top[1]+(bottom[1]-top[1])*.55
+                 and dot[:,1].max()<=bottom[1]+dot_height
+                 and len(set(map(tuple,dot)))==4
+                 and all(abs(a[0]-b[0])<1e-4 or abs(a[1]-b[1])<1e-4
+                         for a,b in zip(dot,np.roll(dot,-1,axis=0))))
+
+
+def measure(image_path: Path, svg_path: Path, *, interior_mark_contract=None) -> dict:
     image = cv2.imread(str(image_path))
     if image is None:
         raise ValueError(f'Unreadable input: {image_path}')
@@ -64,7 +107,8 @@ def measure(image_path: Path, svg_path: Path) -> dict:
     union = (ref_mask | out_mask).sum()
     iou = float((ref_mask & out_mask).sum()/union) if union else 1.
     mean_delta2, mse = normalized_mse(image, rendered)
-    semantic = square_and_right_stem_semantics(svg)
+    semantic = (square_slash_and_dot_semantics(svg) if interior_mark_contract == 'slash_and_dot'
+                else square_and_right_stem_semantics(svg))
     dimension = float(float(root.get('width', '0').removesuffix('px')) == width
                       and float(root.get('height', '0').removesuffix('px')) == height)
     metrics = {'error_per_pixel': mse, 'edge_alignment': edge, 'object_mask_iou': iou,
@@ -78,7 +122,9 @@ def evaluate(manifest: dict, root: Path) -> dict:
     before, after, evidence = {}, {}, []
     for case in manifest['cases']:
         image = root/case['image']
-        old, new = measure(image, root/case['before_svg']), measure(image, root/case['after_svg'])
+        contract = manifest.get('interior_mark_contract')
+        old = measure(image, root/case['before_svg'], interior_mark_contract=contract)
+        new = measure(image, root/case['after_svg'], interior_mark_contract=contract)
         before[case['case_id']] = {'metrics': old['metrics'], 'dimensions': old['dimensions']}
         after[case['case_id']] = new
         evidence.append({**case, 'input_sha256': hashlib.sha256(image.read_bytes()).hexdigest(),
@@ -89,7 +135,9 @@ def evaluate(manifest: dict, root: Path) -> dict:
                                       'provenance': provenance, 'cases': before})
     return {'schema_version': 'right_stem_square_recheck_v1', 'baseline': baseline, 'evidence': evidence,
             'satisfaction_gate': evaluate_satisfaction(baseline, after),
-            'semantic_contract': 'plain filled square at left with a centered connected rightward stem; no interior marks or labels',
+            'semantic_contract': ('filled square with centered rightward stem, rising slash and square dot inside'
+                                  if manifest.get('interior_mark_contract') == 'slash_and_dot' else
+                                  'plain filled square at left with a centered connected rightward stem; no interior marks or labels'),
             'measurement': {'foreground_threshold': 210, 'canny_thresholds': [50, 140],
                             'output': 'saved CLI SVG re-rendered with production renderer'}}
 

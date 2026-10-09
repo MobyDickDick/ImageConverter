@@ -1410,7 +1410,7 @@ def runNonCompositeIterationImpl(
     if mode in {"non_composite", "auto"}:
         square_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
         square_stem = fit_square_stem(
-            square_ir, image=perc_img,
+            square_ir, image=perc_img, description=description,
             render_fn=lambda candidate_ir: render_svg_to_numpy_fn(
                 geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, candidate_ir), width, height),
             error_fn=lambda rendered: calculate_error_fn(perc_img, rendered),

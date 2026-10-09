@@ -1,0 +1,63 @@
+{
+  "schema_version": "right_stem_square_recheck_manifest_v1",
+  "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Im Quadrat liegen ein schräger Strich von unten links nach oben rechts und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Die beiden Innenmarkierungen kontrastieren mit der Füllung. Weißer Hintergrund. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild.",
+  "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+  "baseline_fitter_revision": "5726e87b8336fb76df094eabc58e81476c304bd7",
+  "interior_mark_contract": "slash_and_dot",
+  "provenance": {
+    "commit": "5726e87b8336fb76df094eabc58e81476c304bd7",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_square_00",
+      "source": "AC0714_1_L.jpg",
+      "image": "../../images_to_convert/AC0714_1_L.jpg",
+      "role": "holdout",
+      "source_sha256": "c0fc8418d64bbce770c4e817097d935dd47f84085a25c89721ad6cbec9cf3c81",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Im Quadrat liegen ein schräger Strich von unten links nach oben rechts und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Die beiden Innenmarkierungen kontrastieren mit der Füllung. Weißer Hintergrund. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_square_01",
+      "source": "AC0714_1_M.jpg",
+      "image": "../../images_to_convert/AC0714_1_M.jpg",
+      "role": "holdout",
+      "source_sha256": "14fffeea401471fb0936e4f97c82710ab5da73226af4fe118020123e444614a4",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Im Quadrat liegen ein schräger Strich von unten links nach oben rechts und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Die beiden Innenmarkierungen kontrastieren mit der Füllung. Weißer Hintergrund. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_square_02",
+      "source": "AC0714_1_S.jpg",
+      "image": "../../images_to_convert/AC0714_1_S.jpg",
+      "role": "holdout",
+      "source_sha256": "982b57a2727636c42d4f71980a4fc9f3f3b9d060e13357693535e1e3eb61f259",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Im Quadrat liegen ein schräger Strich von unten links nach oben rechts und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Die beiden Innenmarkierungen kontrastieren mit der Füllung. Weißer Hintergrund. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_square_03",
+      "source": "AC0714_L.jpg",
+      "image": "../../images_to_convert/AC0714_L.jpg",
+      "role": "target",
+      "source_sha256": "e1d52cefbddea5f5bb0d652f99b352a584af418d1d99495fab26424867622192",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Im Quadrat liegen ein schräger Strich von unten links nach oben rechts und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Die beiden Innenmarkierungen kontrastieren mit der Füllung. Weißer Hintergrund. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_square_04",
+      "source": "AC0714_M.jpg",
+      "image": "../../images_to_convert/AC0714_M.jpg",
+      "role": "holdout",
+      "source_sha256": "bb6c24ae6bf09d9246b99a4894bab5e3aa57d63d4c5968ca669767503a2591db",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Im Quadrat liegen ein schräger Strich von unten links nach oben rechts und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Die beiden Innenmarkierungen kontrastieren mit der Füllung. Weißer Hintergrund. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild."
+    },
+    {
+      "case_id": "anonymous_square_05",
+      "source": "AC0714_S.jpg",
+      "image": "../../images_to_convert/AC0714_S.jpg",
+      "role": "holdout",
+      "source_sha256": "2664bb1bcbf4578caa2e552a426324e46736b12b2054477cc9690a4727007f77",
+      "description": "Kelle: Ein gefülltes Quadrat links mit grauer Randkontur. Ein gerader waagerechter Griff schließt mittig an der rechten Quadratseite an und verläuft nach rechts. Im Quadrat liegen ein schräger Strich von unten links nach oben rechts und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Die beiden Innenmarkierungen kontrastieren mit der Füllung. Weißer Hintergrund. Lage, Größe, Linienbreite und Farben ergeben sich aus dem Bild."
+    }
+  ]
+}
