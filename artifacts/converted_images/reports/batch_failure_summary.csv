@@ -1,4 +1,2 @@
 filename;status;reason;details;log_file;reachability_reason;report_code;exit_code
-GE1301_S.jpg;raster_embedded_svg;embedded_raster_detected;Detected embedded raster payload in SVG output.;GE1301_S_element_validation.log;stagnation;NR001;20
-AR0102.jpg;semantic_mismatch;semantic_mismatch;Im Bild ist Buchstabe/Text erkennbar, aber nicht in der Beschreibung enthalten;AR0102_element_validation.log;semantic_conflict;NR004;23
-GE1310_S.jpg;semantic_mismatch;semantic_mismatch;Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt;GE1310_S_element_validation.log;semantic_conflict;NR004;23
+SE0103.jpg;semantic_mismatch;semantic_mismatch;Strukturprüfung: Erwartete CO₂-Glyphenstruktur nicht ausreichend belegt;SE0103_element_validation.log;semantic_conflict;NR004;23

@@ -1,5 +1,14 @@
 <svg width="20" height="60" viewBox="0 0 20 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g data-output-variation="1" transform="translate(0.0138 0.0409) rotate(0.0409 10.0000 30.0000)">
-  <rect id="backbottom_light_grey_square" x="5.126" y="8.767" width="17.006" height="51.071" fill="#e8e8e8" stroke="none" stroke-width="0.02" fill-opacity="0.75"/>
+  <defs>
+    <linearGradient id="triangle_stem-stem-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fbd923"/>
+      <stop offset="50%" stop-color="#edeef1"/>
+      <stop offset="100%" stop-color="#f8dd50"/>
+    </linearGradient>
+  </defs>
+  <g data-output-variation="1" transform="translate(-0.0437 0.0208) rotate(0.1441 10.0000 30.0000)">
+
+  <polygon id="triangle_stem_triangle" points="10.25,-0.158 0.18,20 20.32,20" fill="#fcdc19" stroke="#f5d911" stroke-width="0.275" stroke-linejoin="miter"/>
+  <rect id="triangle_stem_stem" x="5.5" y="22.25" width="9.5" height="37.75" fill="url(#triangle_stem-stem-gradient)" stroke="none"/>
   </g>
 </svg>

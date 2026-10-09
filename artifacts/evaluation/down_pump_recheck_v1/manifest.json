@@ -1,0 +1,141 @@
+{
+  "schema_version": "pump_recheck_manifest_v1",
+  "direction": "unten",
+  "description": "Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 180° gedreht.",
+  "baseline_description": "Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 180° gedreht.",
+  "provenance": {
+    "commit": "568d4e626251220e62cda8c7f04b4e6bcfab87b7",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "Original description versus independent corrected description; unchanged circle/triangle fitter and renderer",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_pump_00",
+      "source": "AC0403_1_L.jpg",
+      "role": "target",
+      "image": "../../images_to_convert/AC0403_1_L.jpg",
+      "source_sha256": "8082a6e7e6b4c29b04e3f3b81380a9dff6b5d058d160bb6f23c81fb4909d9b8d"
+    },
+    {
+      "case_id": "anonymous_pump_01",
+      "source": "AC0403_1L_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_1L_sia.jpg",
+      "source_sha256": "63a518e0dff23b1fb31d1c70b1fb7defadd22c028337539b689ec07a6b1568ac"
+    },
+    {
+      "case_id": "anonymous_pump_02",
+      "source": "AC0403_1M_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_1M_sia.jpg",
+      "source_sha256": "08f919529d8e97d5875ff2bd51dbb9268a6ee411273a66f6d06673c783088c15"
+    },
+    {
+      "case_id": "anonymous_pump_03",
+      "source": "AC0403_1S_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_1S_sia.jpg",
+      "source_sha256": "0b929123035f803f4700e9480aee5987d52e153c260206ba283f90de5fca9b18"
+    },
+    {
+      "case_id": "anonymous_pump_04",
+      "source": "AC0403_1_M.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_1_M.jpg",
+      "source_sha256": "dc20c2d690859ccaf24b27c3a4ff0b7619560f198c79d707667bcccc55b054a2"
+    },
+    {
+      "case_id": "anonymous_pump_05",
+      "source": "AC0403_1_S.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_1_S.jpg",
+      "source_sha256": "ba275a00508bb568a2eb0ca9f3c74b0b14e741b5f0e23c8ece23ebfc024bcde2"
+    },
+    {
+      "case_id": "anonymous_pump_06",
+      "source": "AC0403_2L_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_2L_sia.jpg",
+      "source_sha256": "6630e6694ba3136f30fb68c954ceb08ccda53a8bbe29458f50d6383e1f39f6fc"
+    },
+    {
+      "case_id": "anonymous_pump_07",
+      "source": "AC0403_2M_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_2M_sia.jpg",
+      "source_sha256": "a6ed2ff0c7f6e24a428001bfe93469cd16d3ae2071047ea84ed83137144ea758"
+    },
+    {
+      "case_id": "anonymous_pump_08",
+      "source": "AC0403_2S_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_2S_sia.jpg",
+      "source_sha256": "e490bb32d0fba761bd6c90aebaa42f74d62b49a3ca4483405a96eb5f36a076ca"
+    },
+    {
+      "case_id": "anonymous_pump_09",
+      "source": "AC0403_2_L.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_2_L.jpg",
+      "source_sha256": "4628faec692c866cc99eeda3458809ed779b4c666253d710e5e2d30623e7ebc3"
+    },
+    {
+      "case_id": "anonymous_pump_10",
+      "source": "AC0403_2_M.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_2_M.jpg",
+      "source_sha256": "d152ebda486516bb04e9d7cd48e2e97f64d8bc1d1b7a51c228732dcac6213a99"
+    },
+    {
+      "case_id": "anonymous_pump_11",
+      "source": "AC0403_2_S.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_2_S.jpg",
+      "source_sha256": "81ae0b85c39e53096a7423c9645a9344d2b885c7f69a295aa91d189e3bcfb535"
+    },
+    {
+      "case_id": "anonymous_pump_12",
+      "source": "AC0403_L.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_L.jpg",
+      "source_sha256": "608b91c0d16d640e47987d12863662cc88b700e2c97dc1717232c1ed76596b0c"
+    },
+    {
+      "case_id": "anonymous_pump_13",
+      "source": "AC0403_L_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_L_sia.jpg",
+      "source_sha256": "f30f933879dab593378c997e1c305a4cef0d3f7cf59970e05d228aa327ef7c27"
+    },
+    {
+      "case_id": "anonymous_pump_14",
+      "source": "AC0403_M.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_M.jpg",
+      "source_sha256": "683f90d88c7c7813f1193fd2a92ba351adc2468247995632cd4088d275421555"
+    },
+    {
+      "case_id": "anonymous_pump_15",
+      "source": "AC0403_M_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_M_sia.jpg",
+      "source_sha256": "7ff30856303bd36dd66aead3017a7216d6fec79971a1cc2f15d3b362653ee3ad"
+    },
+    {
+      "case_id": "anonymous_pump_16",
+      "source": "AC0403_S.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_S.jpg",
+      "source_sha256": "6a5f201a40ead3e8266bd662a43dba7b99837ca1d30c451752590011ffd77b2c"
+    },
+    {
+      "case_id": "anonymous_pump_17",
+      "source": "AC0403_S_sia.jpg",
+      "role": "holdout",
+      "image": "../../images_to_convert/AC0403_S_sia.jpg",
+      "source_sha256": "05c2cc878b391947004968b4b26bd386bfd46d4c1defe2daaf91090a469ae5c4"
+    }
+  ]
+}
