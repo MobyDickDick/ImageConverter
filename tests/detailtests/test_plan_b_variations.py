@@ -60,14 +60,131 @@ def test_default_start_selects_new_task_and_seed_every_time(monkeypatch, tmp_pat
         return tmp_path / "source.svg", DESCRIPTION, {"seed": seed}
     def run(svg, description, output, **kwargs):
         runs.append((svg, description, output, kwargs))
-        return {"summary": {"satisfactory": True}}
+        return {"status": "completed", "original_satisfactory": True,
+                "variations_started": True, "summary": {"satisfactory": True}}
     monkeypatch.setattr(battery, "select_task", select)
     monkeypatch.setattr(battery, "run_battery", run)
-    assert battery.main([]) == 0
-    assert battery.main([]) == 0
+    assert battery.main(["--output-dir", str(tmp_path / "first")]) == 0
+    assert battery.main(["--output-dir", str(tmp_path / "second")]) == 0
     assert selections == [11, 22]
     assert runs[0][2] != runs[1][2]
     assert all(r[3]["selection"] == {"seed": r[3]["seed"]} for r in runs)
+
+
+def task_pool(tmp_path, count):
+    pool = tmp_path / "pool"
+    pool.mkdir()
+    catalog = tmp_path / "descriptions.xml"
+    description_catalog(catalog, [])
+    for index in range(count):
+        svg = pool / f"scene_{index:02d}.svg"
+        svg.write_text(SVG, encoding="utf-8")
+        svg.with_suffix(".txt").write_text(f"{DESCRIPTION} Motiv {index}.", encoding="utf-8")
+    return pool, catalog
+
+
+@pytest.mark.parametrize("failure", ["foreground_iou_outside_limit", "conversion_timeout",
+                                    "converter_error", "missing_or_ambiguous_output", "reference_svg_access"])
+def test_failed_original_retries_another_svg_and_runs_its_full_task(tmp_path, monkeypatch, failure):
+    pool, catalog = task_pool(tmp_path, 4)
+    calls = []
+    def run(case, output, **kwargs):
+        calls.append((output.name, case["case_id"]))
+        satisfactory = output.name != "attempt_01"
+        return {**case, "satisfactory": satisfactory,
+                "failures": [] if satisfactory else [failure], "elapsed_seconds": 0}
+    monkeypatch.setattr(battery, "run_case", run)
+    output = tmp_path / "run"
+    assert battery.main(["--svg-dir", str(pool), "--descriptions-path", str(catalog),
+                         "--output-dir", str(output), "--seed", "12"]) == 0
+    report = json.loads((output / "report.json").read_text(encoding="utf-8"))
+    assert report["status"] == "completed" and report["summary"]["satisfactory"]
+    assert calls == [("attempt_01", "original"), ("attempt_02", "original"),
+                     *[("attempt_02", f"probe_{i:02d}") for i in range(1, 17)]]
+    assert len({a["source_svg"] for a in report["attempts"]}) == 2
+    for index, attempt in enumerate(report["attempts"]):
+        directory = (output / attempt["report"]).parent
+        assert {p.name for p in directory.iterdir()} == {"report.json", "source.png"}
+        detail = json.loads((output / attempt["report"]).read_text(encoding="utf-8"))
+        assert detail["selection"]["source_svg"] == attempt["source_svg"]
+        assert detail["source_description"] == Path(attempt["source_svg"]).with_suffix(".txt").read_text(encoding="utf-8")
+        assert detail["summary"] == attempt["summary"]
+        assert detail["limits"] == battery.LIMITS
+        if index == 0:
+            assert detail["cases"][0]["failures"] == [failure]
+
+
+@pytest.mark.parametrize("pool_size,budget,expected,status", [
+    (12, 8, 9, "retry_limit_reached"), (12, 0, 1, "retry_limit_reached"),
+    (12, 2, 3, "retry_limit_reached"), (2, 8, 2, "pool_exhausted"), (1, 8, 1, "pool_exhausted")])
+def test_failed_search_is_bounded_distinct_and_reproducible(tmp_path, monkeypatch, pool_size, budget, expected, status):
+    pool, catalog = task_pool(tmp_path, pool_size)
+    calls = []
+    def run(case, output, **kwargs):
+        calls.append(case["case_id"])
+        return {**case, "satisfactory": False, "failures": ["converter_error"], "elapsed_seconds": 0}
+    monkeypatch.setattr(battery, "run_case", run)
+    def search(directory):
+        assert battery.main(["--svg-dir", str(pool), "--descriptions-path", str(catalog),
+                             "--output-dir", str(directory), "--seed", "42",
+                             "--max-additional-svgs", str(budget)]) == 1
+        return json.loads((directory / "report.json").read_text(encoding="utf-8"))
+    first = search(tmp_path / "first")
+    second = search(tmp_path / "second")
+    assert first == second
+    assert first["status"] == status and not first["summary"]["satisfactory"]
+    assert len(first["attempts"]) == len({a["source_svg"] for a in first["attempts"]}) == expected
+    assert calls == ["original"] * (expected * 2)
+    assert all(not a["variations_started"] for a in first["attempts"])
+
+
+def test_ninth_svg_can_pass_but_failed_variants_do_not_trigger_more_selection(tmp_path, monkeypatch):
+    pool, catalog = task_pool(tmp_path, 12)
+    def run(case, output, **kwargs):
+        satisfactory = output.name == "attempt_09"
+        return {**case, "satisfactory": satisfactory, "failures": [] if satisfactory else ["converter_error"],
+                "elapsed_seconds": 0}
+    monkeypatch.setattr(battery, "run_case", run)
+    report = battery.run_pool_batteries(pool, catalog, tmp_path / "ninth", seed=12)
+    assert len(report["attempts"]) == 9 and report["summary"]["satisfactory"]
+    monkeypatch.setattr(battery, "run_case", lambda case, output, **kwargs:
+                        {**case, "satisfactory": case["case_id"] != "probe_01",
+                         "failures": [] if case["case_id"] != "probe_01" else ["foreground_iou_outside_limit"],
+                         "elapsed_seconds": 0})
+    report = battery.run_pool_batteries(pool, catalog, tmp_path / "variant_failure", seed=12)
+    assert len(report["attempts"]) == 1 and report["status"] == "completed"
+    assert report["summary"]["completed"] == 17 and not report["summary"]["satisfactory"]
+
+
+@pytest.mark.parametrize("error", [KeyboardInterrupt, ValueError])
+def test_search_stops_on_interruption_or_preparation_error_and_preserves_reports(tmp_path, monkeypatch, error):
+    pool, catalog = task_pool(tmp_path, 4)
+    def run(case, output, **kwargs):
+        if output.name == "attempt_02":
+            raise error("Stop")
+        return {**case, "satisfactory": False, "failures": ["converter_error"], "elapsed_seconds": 0}
+    monkeypatch.setattr(battery, "run_case", run)
+    output = tmp_path / "run"
+    with pytest.raises(error):
+        battery.run_pool_batteries(pool, catalog, output, seed=12)
+    report = json.loads((output / "report.json").read_text(encoding="utf-8"))
+    assert report["status"] == ("interrupted" if error is KeyboardInterrupt else "preparation_error")
+    assert len(report["attempts"]) == 2 and not report["summary"]["satisfactory"]
+    for attempt in report["attempts"]:
+        directory = (output / attempt["report"]).parent
+        assert {p.name for p in directory.iterdir()} == {"report.json", "source.png"}
+        assert json.loads((output / attempt["report"]).read_text(encoding="utf-8"))["status"] == attempt["status"]
+    before = (output / "report.json").read_bytes()
+    with pytest.raises(FileExistsError):
+        battery.run_pool_batteries(pool, catalog, output, seed=12)
+    assert (output / "report.json").read_bytes() == before
+
+
+@pytest.mark.parametrize("budget", [-1, 9])
+def test_cli_rejects_retry_budgets_outside_zero_to_eight(budget):
+    with pytest.raises(SystemExit) as exc:
+        battery.main(["--max-additional-svgs", str(budget)])
+    assert exc.value.code == 2
 
 
 def test_sixteen_new_rasters_and_consistent_descriptions_can_be_replayed(tmp_path):

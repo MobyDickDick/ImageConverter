@@ -26,6 +26,7 @@ from src.iCCModules.imageCompositeConverterDescriptions import loadDescriptionMa
 from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
 
 CASE_COUNT = 16
+MAX_ADDITIONAL_SVGS = 8
 REQUIRED_COUNT = CASE_COUNT + 1  # Original plus all variations.
 DEFAULT_SVG_DIR = ROOT / "artifacts/images_to_convert/samples"
 DEFAULT_DESCRIPTIONS = ROOT / "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml"
@@ -68,7 +69,12 @@ def converter_worker(argv: list[str]) -> int:
             json.dumps({"blocked_svg_reads": blocked}, indent=2) + "\n", encoding="utf-8")
 
 
-def select_task(svg_dir: Path, descriptions_path: Path, seed: int) -> tuple[Path, str, dict]:
+class TaskPoolExhausted(ValueError):
+    """Every SVG/description pair in the pool has already been attempted."""
+
+
+def select_task(svg_dir: Path, descriptions_path: Path, seed: int, *,
+                excluded_svg_paths: set[Path] | None = None) -> tuple[Path, str, dict]:
     """Select anew on every invocation from all SVGs with an associated description."""
     mapping = loadDescriptionMappingImpl(str(descriptions_path), get_base_name_from_file_fn=getBaseNameFromFileImpl)
     pairs, excluded = [], []
@@ -84,10 +90,15 @@ def select_task(svg_dir: Path, descriptions_path: Path, seed: int) -> tuple[Path
         pairs.append((path.resolve(), description))
     if not pairs:
         raise ValueError("No SVG/description pairs found in the selected pool")
-    index = random.Random(seed).randrange(len(pairs))
+    attempted = {path.resolve() for path in (excluded_svg_paths or set())}
+    remaining = [index for index, pair in enumerate(pairs) if pair[0] not in attempted]
+    if not remaining:
+        raise TaskPoolExhausted("No untried SVG/description pairs remain in the selected pool")
+    index = remaining[random.Random(seed).randrange(len(remaining))]
     svg_path, description = pairs[index]
     return svg_path, description, {"mode": "random_pool", "selected_index": index,
-                                   "pool_size": len(pairs), "source_svg": str(svg_path),
+                                   "pool_size": len(pairs), "remaining_pool_size": len(remaining),
+                                   "source_svg": str(svg_path),
                                    "descriptions_path": str(descriptions_path.resolve()),
                                    "pool": [str(p[0]) for p in pairs], "excluded": excluded}
 
@@ -435,6 +446,80 @@ def run_battery(svg_path: Path, description: str, output: Path, *, seed: int,
     return report
 
 
+def run_pool_batteries(svg_dir: Path, descriptions_path: Path, output: Path, *, seed: int,
+                       max_additional_svgs: int = MAX_ADDITIONAL_SVGS,
+                       timeout: float = 60, iterations: int = 64,
+                       keep_debug_artifacts: bool = False) -> dict:
+    """Try distinct originals until one can run its full extended Plan-B task."""
+    if not 0 <= max_additional_svgs <= MAX_ADDITIONAL_SVGS:
+        raise ValueError("At most eight additional SVGs may be attempted")
+    if not math.isfinite(timeout) or timeout <= 0 or iterations < 1:
+        raise ValueError("Timeout and iterations must be positive")
+    task = select_task(svg_dir, descriptions_path, seed)
+    output = output.resolve()
+    output.mkdir(parents=True, exist_ok=False)
+    report = {"schema_version": "plan_b_search_v1", "seed": seed, "limits": LIMITS,
+              "max_additional_svgs": max_additional_svgs, "status": "searching",
+              "attempts": [], "summary": summarize([])}
+    attempted: set[Path] = set()
+    retry_random = random.Random(seed)
+    attempt_seed = seed
+
+    def save_report():
+        (output / "report.json").write_text(
+            json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+
+    save_report()
+    try:
+        for index in range(max_additional_svgs + 1):
+            svg_path, description, selection = task
+            attempted.add(svg_path.resolve())
+            attempt_dir = output / f"attempt_{index+1:02d}"
+            attempt = {"source_svg": str(svg_path.resolve()), "seed": attempt_seed,
+                       "report": str((attempt_dir / "report.json").relative_to(output)),
+                       "status": "running"}
+            report["attempts"].append(attempt)
+            save_report()
+            print(f"[Plan B] SVG {index+1}/{max_additional_svgs+1}: selected={svg_path} "
+                  f"seed={attempt_seed} output={attempt_dir}", flush=True)
+            result = run_battery(svg_path, description, attempt_dir, seed=attempt_seed, selection=selection,
+                                 timeout=timeout, iterations=iterations,
+                                 keep_debug_artifacts=keep_debug_artifacts)
+            attempt.update(status=result["status"], summary=result["summary"],
+                           original_satisfactory=result["original_satisfactory"],
+                           variations_started=result["variations_started"])
+            report["summary"] = result["summary"]
+            # A failed variant remains a failed extended task. Only the original
+            # prerequisite triggers selection of another SVG.
+            if result["status"] != "original_not_convertible":
+                report["status"] = "completed"
+                break
+            if index == max_additional_svgs:
+                report["status"] = "retry_limit_reached"
+                break
+            save_report()
+            try:
+                attempt_seed = retry_random.randrange(2**63)
+                task = select_task(svg_dir, descriptions_path, attempt_seed, excluded_svg_paths=attempted)
+            except TaskPoolExhausted:
+                report["status"] = "pool_exhausted"
+                break
+            print("[Plan B] Original failed; trying another SVG", flush=True)
+    except KeyboardInterrupt:
+        report["status"] = "interrupted"
+        if report["attempts"] and report["attempts"][-1]["status"] == "running":
+            report["attempts"][-1]["status"] = "interrupted"
+        raise
+    except Exception as exc:
+        report.update(status="preparation_error", error=str(exc))
+        if report["attempts"] and report["attempts"][-1]["status"] == "running":
+            report["attempts"][-1].update(status="preparation_error", error=str(exc))
+        raise
+    finally:
+        save_report()
+    return report
+
+
 def main(argv: list[str] | None = None) -> int:
     argv = sys.argv[1:] if argv is None else argv
     if argv and argv[0] == "--_worker":
@@ -448,6 +533,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--seed", type=int, help="Optional replay seed; default is fresh system randomness")
     parser.add_argument("--timeout-seconds", type=float, default=60)
     parser.add_argument("--iterations", type=int, default=64)
+    parser.add_argument("--max-additional-svgs", type=int, choices=range(MAX_ADDITIONAL_SVGS + 1),
+                        default=MAX_ADDITIONAL_SVGS,
+                        help="Try up to this many other SVGs after original failure (default 8; pool mode only)")
     parser.add_argument("--keep-debug-artifacts", action="store_true",
                         help="Keep reference SVGs, rasters, converter outputs and logs; default keeps report.json and source.png")
     args = parser.parse_args(argv)
@@ -456,13 +544,19 @@ def main(argv: list[str] | None = None) -> int:
     seed = args.seed if args.seed is not None else random.SystemRandom().randrange(2**63)
     if args.svg:
         svg_path, description, selection = args.svg, args.description_file.read_text(encoding="utf-8"), None
-    else:
-        svg_path, description, selection = select_task(args.svg_dir, args.descriptions_path, seed)
     output = args.output_dir or ROOT / "artifacts/evaluation/plan_b_variations" / f"run_{time.time_ns()}_{seed}"
-    print(f"[Plan B] selected={svg_path} seed={seed} output={output}", flush=True)
-    report = run_battery(svg_path, description, output, seed=seed, selection=selection,
-                         timeout=args.timeout_seconds, iterations=args.iterations,
-                         keep_debug_artifacts=args.keep_debug_artifacts)
+    if args.svg:
+        print(f"[Plan B] selected={svg_path} seed={seed} output={output}", flush=True)
+        report = run_battery(svg_path, description, output, seed=seed, selection=selection,
+                             timeout=args.timeout_seconds, iterations=args.iterations,
+                             keep_debug_artifacts=args.keep_debug_artifacts)
+    else:
+        report = run_pool_batteries(args.svg_dir, args.descriptions_path, output, seed=seed,
+                                    max_additional_svgs=args.max_additional_svgs,
+                                    timeout=args.timeout_seconds, iterations=args.iterations,
+                                    keep_debug_artifacts=args.keep_debug_artifacts)
+        print(f"[Plan B] search={report['status']} attempted_svgs={len(report['attempts'])} "
+              f"report={output / 'report.json'}", flush=True)
     print(json.dumps(report["summary"], sort_keys=True))
     return 0 if report["summary"]["satisfactory"] else 1
 

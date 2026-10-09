@@ -1,4 +1,4 @@
-# Plan-B-Abnahmetest mit neuer Auswahl bei jedem Start
+# Plan-B-Abnahmetest mit neuer Auswahl und bis zu acht weiteren SVGs
 
 ```powershell
 python -m tools.run_plan_b_variations
@@ -22,9 +22,15 @@ nicht. Das Original ist zugleich der erste Fall der erweiterten Plan-B-Aufgabe.
 Besteht die Vorprüfung nicht, werden keine Varianten erzeugt oder konvertiert.
 Der Bericht enthält `status: original_not_convertible`,
 `original_satisfactory: false`, `variations_started: false` und die konkreten
-Fehlergründe bzw. Messwerte des Originals. Der Lauf endet mit Exitcode **1**:
-Die erweiterte Abnahme wurde nicht durchgeführt. Es wird kein anderes Motiv
-nachgezogen und keine unvollständige Abnahme als bestanden gewertet.
+Fehlergründe bzw. Messwerte des Originals. Im Poolmodus versucht der Lauf dann
+bis zu **acht weitere verschiedene SVGs** mit ihren Beschreibungen, insgesamt
+also höchstens neun. Die Auswahl erfolgt ohne Wiederholung und ohne historische
+Qualitätsfilter. Ein kleinerer Pool wird nur einmal durchlaufen. Ein gleicher
+Seed und ein unveränderter Pool ergeben dieselbe Auswahlfolge.
+
+Sobald ein Original besteht, wird seine erweiterte Aufgabe ausgeführt. Besteht
+keines der höchstens neun Originale, endet der Lauf mit Exitcode **1**.
+Bei einer expliziten Wiederholung mit `--svg` bleibt es bei diesem einen SVG.
 
 Nur nach bestandener Vorprüfung entstehen genau 16 verschiedene SVGs und 16 veränderte
 Beschreibungen: Skalierung ±6 %, Verschiebung horizontal/vertikal ±2,5 % der
@@ -69,20 +75,34 @@ Rekonstruktionsqualität, keine vollständige sprachliche Semantik/OCR.
 
 Ein fehlendes/unlesbares Ergebnis, Prozessfehler oder Timeout zählt als Fehler.
 Nach bestandener Original-Vorprüfung werden alle 16 Varianten auch bei einem
-Variantenfehler abgearbeitet. Ein gutes Mittel über mehrere
+Variantenfehler abgearbeitet. Ein Variantenfehler führt nicht zur Auswahl eines
+anderen SVGs. Ein gutes Mittel über mehrere
 Fälle kann einen schlechten Einzelfall nicht ausgleichen. Exitcode **0 bedeutet
-17/17**, andernfalls endet der Test mit **1**. Ergebnisse im Fehlgeschlagen-Ordner
+17/17** für die erste Aufgabe mit bestandenem Original. Fehler zuvor geprüfter
+Originale bleiben dokumentiert. Andernfalls endet der Test mit **1**. Ergebnisse im Fehlgeschlagen-Ordner
 des Konverters werden ebenfalls unabhängig vermessen; dessen historische
 Erfolgsmarkierung ersetzt die Abnahme nicht.
 
 ## Ergebnisse und Wiederholung
 
 Jeder Start legt einen neuen Lauf unter `artifacts/evaluation/plan_b_variations`
-an und behält standardmäßig **`report.json` und das Ursprungsbild `source.png`**.
+an. Im Poolmodus enthält es einen **Gesamtbericht `report.json`** und pro
+versuchtem SVG ein Verzeichnis `attempt_01`, `attempt_02` usw., jeweils mit
+**`report.json` und dem Ursprungsbild `source.png`**. Bei einer expliziten
+Wiederholung mit `--svg` stehen diese beiden Dateien direkt im Laufverzeichnis.
+
+Der Gesamtbericht (Schema `plan_b_search_v1`) verlinkt unter `attempts` jeden
+Versuch mit Quelle, Seed, Status und Abnahmeergebnis. Seine `summary` beschreibt
+den zuletzt abgeschlossenen Versuch; Fehler früherer Originale stehen in ihren Einzelberichten.
+`status` unterscheidet abgeschlossene Aufgaben (`completed`), ausgeschöpfte
+Versuche (`retry_limit_reached`) und einen vollständig versuchten kleineren Pool
+(`pool_exhausted`). Abbruch und Vorbereitungsfehler beenden die Suche und werden
+ebenfalls protokolliert.
+
 Das PNG ist die unveränderte, verlustfrei rasterisierte Quelle, die der
 Original-Vorprüfung übergeben wurde. Sein SHA-256 steht in `source_image_sha256`;
 `source_image` verweist auf die Datei relativ zum Bericht.
-Der Bericht (Schema `plan_b_variations_v2`) enthält Quelle,
+Jeder Einzelbericht (Schema `plan_b_variations_v2`) enthält Quelle,
 Beschreibung, Seed, Quell-Hashes, Varianten, feste Grenzen, Einzelmetriken und
 Fehlergründe sowie den Status der Vorprüfung. `cases` beginnt mit `original`,
 gefolgt von den 16 Varianten nach bestandener Vorprüfung. Die Zusammenfassung
@@ -97,11 +117,11 @@ sind in `.gitignore` ausgeschlossen; CI lädt den Ergebnisbericht und das
 Ursprungsbild hoch. Bei einem abgefangenen Abbruch steht `status: interrupted`
 im Bericht; das Ursprungsbild bleibt ebenfalls erhalten.
 
-Nur bei ausdrücklichem Diagnosebedarf behält `--keep-debug-artifacts` außerdem
+Nur bei ausdrücklichem Diagnosebedarf behält `--keep-debug-artifacts` pro Versuch außerdem
 `manifest.json`, `source.svg`, `source_description.txt`, sämtliche Eingaben,
 Konverterlogs, Ergebnis-SVGs und Vergleichsbilder (`comparison.png`).
 
-Gezielt denselben Lauf wiederholen: Beschreibung aus dem Bericht lesen und das
+Gezielt einen Versuch wiederholen: Beschreibung aus seinem Einzelbericht lesen und das
 dort ausgewählte ursprüngliche SVG verwenden. Sein Hash muss weiterhin stimmen.
 
 ```powershell
@@ -110,7 +130,7 @@ python -m tools.run_plan_b_variations --svg URSPRUENGLICHES_SVG --description-fi
 ```
 
 Eine feste Auswahl per `--svg` ist nur eine ausdrückliche Wiederholung bzw.
-gezielte Diagnose. Der Standardstart wählt immer neu. Gleiche zufällige
+gezielte Diagnose und versucht ausschließlich dieses SVG. Der Standardstart wählt immer neu. Gleiche zufällige
 Auswahlen in aufeinanderfolgenden Starts sind möglich.
 
 Eigene Aufgabenpools:
@@ -124,21 +144,24 @@ haben; diese hat Vorrang vor der Tabelle. Die Tabelle unterstützt wie der
 Konverter XML/CSV/TSV. `--timeout-seconds` (Standard 60) begrenzt jeden
 Unterprozess, `--iterations` (Standard 64) steuert das Suchbudget.
 `--output-dir` muss ein noch nicht vorhandenes Verzeichnis bezeichnen.
+`--max-additional-svgs` begrenzt die zusätzlichen Poolversuche auf **0 bis 8**
+(Standard 8). Mit `0` bleibt es bei einer zufälligen Aufgabe. Bei explizitem
+`--svg` werden unabhängig von dieser Einstellung keine weiteren SVGs gewählt.
 
 Der GitHub-Workflow **Plan B random task acceptance** startet diesen echten
 Abnahmetest für Pull Requests, Pushes auf main/master/work und manuelle Starts.
-Auch in CI wird bei jedem Start neu ausgewählt. Er bleibt bei Qualitätsfehlern
-rot und lädt die Belege auch bei Fehlschlägen hoch. Die schnellen Tests in
+Auch in CI wird bei jedem Start neu ausgewählt. Der Lauf bleibt rot, wenn kein
+Original besteht oder die ausgeführte erweiterte Aufgabe scheitert. Er lädt die
+Belege aller Versuche auch bei Fehlschlägen hoch. Die schnellen Tests in
 `tests/detailtests/test_plan_b_variations.py` sichern Auswahl, Varianten,
 Qualitätsmessung und Fehlerpfade ab; sie ersetzen den echten Abnahmelauf nicht.
 
-Der Anspruch gilt für jede ausgewählte Aufgabe: Erst muss das Original, dann
-müssen alle 16 Varianten die
-gleichen Grenzen bestehen. Eine erfolgreiche Symbolfamilie belegt noch keine
-vollständige Abdeckung des Auswahlpools. Scheitert eine andere Familie, bleibt
-der Lauf korrekt rot; sie wird mit eingefrorenem Seed und unveränderten Eingaben
-zum nächsten Lernfall. Grenzen zu lockern oder ein leichteres Motiv zu wählen
-erfüllt diese Aufgabe nicht. Der Runner organisiert und bewertet die Abnahme;
+Der Anspruch gilt für die ausgeführte erweiterte Aufgabe: Das Original und alle
+16 Varianten müssen die gleichen Grenzen bestehen. Eine erfolgreiche Aufgabe
+belegt noch keine vollständige Abdeckung des Auswahlpools. Zuvor gescheiterte
+Originale bleiben mit Seed, Quell-Hashes und Fehlergründen als Lernfälle erhalten.
+Die begrenzte Zufallssuche verändert keine Qualitätsgrenze und repariert selbst
+keine Rekonstruktionsalgorithmen. Der Runner organisiert und bewertet die Abnahme;
 die Rekonstruktionsalgorithmen liegen unter `src/iCCModules`.
 
 ## Original-Vorprüfung vom 2026-10-09

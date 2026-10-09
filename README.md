@@ -25,9 +25,11 @@ The recommended local verification workflow lives in
 Der [Plan-B-Abnahmetest](docs/plan_b_variation_acceptance.md) wählt bei jedem Start
 ein SVG mit Beschreibung neu aus und prüft zuerst die Konvertierungsqualität
 des unveränderten Originals. Nur bei bestandener Vorprüfung folgen die 16
-Zufallsvarianten; die Abnahme verlangt Original plus Varianten (17/17):
-`python -m tools.run_plan_b_variations`. Das Ursprungsbild bleibt als `source.png`
-beim Ergebnisbericht erhalten.
+Zufallsvarianten. Scheitert ein Original, versucht der Lauf bis zu acht weitere
+verschiedene SVGs aus dem Pool. Die Abnahme verlangt Original plus Varianten
+(17/17) für die erste Aufgabe mit bestandener Vorprüfung:
+`python -m tools.run_plan_b_variations`. Jeder Versuch behält seinen Bericht
+und das Ursprungsbild als `source.png`; der Gesamtbericht verlinkt alle Versuche.
 
 ## Repository layout
 
