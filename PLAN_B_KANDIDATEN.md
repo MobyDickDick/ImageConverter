@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-09, nach U-Bogen-/Verlaufsschaft-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-10, nach Kreis-/Linien-Abnahme)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -118,11 +118,11 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `AC0413_1_M` – `mean_delta2=13465.694336`, `normalized_mse=0.069028`.
-2. `AC0713_1_L` – `mean_delta2=13458.083984`, `normalized_mse=0.068989`.
-3. `AC0721_1_S` – `mean_delta2=13368.759766`, `normalized_mse=0.068531`.
-4. `AC0711_1_M` – `mean_delta2=13113.830078`, `normalized_mse=0.067225`.
-5. `GE9014_1M` – `mean_delta2=13099.989258`, `normalized_mse=0.067154`.
+1. `AC0713_1_L` – `mean_delta2=13458.083984`, `normalized_mse=0.068989`.
+2. `AC0721_1_S` – `mean_delta2=13368.759766`, `normalized_mse=0.068531`.
+3. `AC0711_1_M` – `mean_delta2=13113.830078`, `normalized_mse=0.067225`.
+4. `GE9014_1M` – `mean_delta2=13099.989258`, `normalized_mse=0.067154`.
+5. `GE9012_1M` – `mean_delta2=13013.489258`, `normalized_mse=0.066710`.
 
 `AC0714_L` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und rastergestützter Strich-/Punktregistrierung beide regulären
@@ -144,13 +144,20 @@ strengeren Plan-B-Pixelgrenzen. Zwei CLI-Abnahmen reproduzieren alle 28 SVGs
 und Gate-Fallrecords. 178 fokussierte Tests bestehen. Die zusätzliche synthetische
 Stressprüfung bleibt mit 12/17 Fällen offen; vier unabhängige Geometrieprüfungen
 und Negativfälle bestehen. Details: `docs/next_arbeitspaket_2026-10-09_ge9023_6m.md`.
-Die nächste reguläre Rotation beginnt mit `AC0413_1_M`; vor Änderungen ist eine
+`AC0413_1_M` und alle acht Farb-/Größenvarianten bestehen nach eigenständiger
+Beschreibung und rastergestützter Kreis-/Linienregistrierung beide regulären
+Gates ohne Pflichtmetrikregression. Die frische CLI-Baseline sinkt von
+`9107.812500` auf `257.785553`. Drei CLI-Abnahmen reproduzieren alle 18 SVG-Bytes;
+ein unabhängiges synthetisches SVG besteht mit zwei Seeds jeweils 17/17 strenge
+Plan-B-Prüfungen. Die drei grauen JPG-IoU-Fälle bleiben separat offen.
+Details: `docs/next_arbeitspaket_2026-10-10_ac0413_1_m.md`.
+Die nächste reguläre Rotation beginnt mit `AC0713_1_L`; vor Änderungen ist eine
 frische CLI-Baseline erforderlich. Der Review über 1.000 Einträge (993 renderbare
 Paare) und sein exakter Aufruf stehen im kompakten Nachweis
-`artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json`.
+`artifacts/evaluation/circle_linework_recheck_v1/summary_2026-10-10.json`.
 Alle 48 gespeicherten Erfolgsvarianten bleiben unter der Reviewgrenze.
-Die 14 neu geprüften Varianten sind aus der historischen Diff-Auswahl ausgeschlossen.
-Vollständige Tabellen liegen lokal unter `.tmp/ge9023/review/`.
+Die neun zusätzlich geprüften Varianten sind aus der historischen Diff-Auswahl ausgeschlossen.
+Vollständige Tabellen liegen lokal unter `.tmp/ac0413/review/`.
 
 Die gekoppelte randomisierte Plan-B-Auswahl `AC0538_1L_sia` mit Seed
 `3948009396310964094` besteht nach eigenständiger Beschreibung und katalogfreier

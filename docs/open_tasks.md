@@ -4,15 +4,39 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-10-09)
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-10)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `414` · Erledigt `392` · Offen `22`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `420` · Erledigt `396` · Offen `24`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-09)
+### Aktueller Plan-B-Stand (2026-10-10)
+
+- [x] **AC0413 – Kreis mit schrägen Linien und T:** Originalbeschreibung-CLI einfrieren, eigenständige Beschreibungen und rastergestützte Kreis-/Linienregistrierung umsetzen; neun Farb-/Größenvarianten durch beide regulären Gates ohne Pflichtmetrikregression abnehmen.
+- [x] **AC0413-PB:** unabhängige Geometrie-, Farb-, Lage- und Auflösungsfälle, neutrale Namen, fehlende/zusätzliche Linien und zwei echte CLI-Seeds mit jeweils Original plus 16 Zufallsvarianten prüfen (17/17 je Seed).
+- [ ] **AC0413-PB-GREY:** drei graue JPGs durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen; beide regulären Gates und alle sechs farbigen JPGs bestehen bereits. Grenzen unverändert beibehalten.
+
+**Aktueller Abschluss 2026-10-10: `AC0413_1_M` und acht Farb-/Größenvarianten.**
+Die Katalogbeschreibungen sind eigenständig; der Parser verwechselt die explizit
+beschriebenen Innenlinien nicht mehr mit einem Buchstaben-Badge. Die neue
+Registrierung bestimmt Kreis, schräge Linien und T aus dem Raster. Alle neun
+bestehen beide regulären Gates ohne Pflichtmetrikregression; die frische
+Ziel-CLI-Baseline sinkt von `9107.812500` auf `257.785553`. Drei CLI-Abnahmen
+reproduzieren sämtliche 18 SVG-Bytes und melden null Referenz-SVG-Zugriffe.
+Ein unabhängiges synthetisches SVG besteht mit zwei Seeds jeweils 17/17 strenge
+Plan-B-Prüfungen. Die drei grauen JPG-IoU-Fälle bleiben separat offen.
+35 finale fokussierte Tests und die sechs Bestandsschutztests bestehen;
+31 Bestandsschutzvarianten haben null Regressionen. Der Standard-Gesamtlauf
+besteht mit 2.050 Tests und 29 bestehenden Windows-Skips; 149 Tests prüfen die
+finale Fassung nach der Linienannahmekorrektur. Alle 48 bisherigen Erfolgsvarianten
+bleiben im erneuerten Review unter der Grenze. Nächste reguläre Rotation:
+`AC0713_1_L`, `AC0721_1_S`, `AC0711_1_M`, `GE9014_1M`, `GE9012_1M`.
+Details: `docs/next_arbeitspaket_2026-10-10_ac0413_1_m.md`.
+Der ehrliche Gesamtstand mit Katalog- und Beschreibungsinventar steht in
+`docs/project_status_2026-10-10.md`; eine frische Gesamtquote der autonomen
+Konvertierung ist weiterhin nicht belegt.
 
 **Roadmap-Priorität des Nutzers:** Zuerst möglichst viele der ungefähr 1.700
 Bilder in guter Qualität konvertieren und komplexe Restfälle nachvollziehbar
@@ -25,7 +49,7 @@ Werkzeuge und externe Bibliotheken. Details: `docs/product_roadmap.md`.
 
 - [ ] **GE9023-PB-STRESS:** zusätzliche CLI-Syntheseprobe mit Seed `20261009` von 12/17 auf vollständige strenge Abnahme bringen. Vier Varianten verfehlen die Kantenprüfung, eine verwirft die Runtime-Registrierung. Pixeloptimierung und Runtime-Annahmevertrag untersuchen, Qualitätsgrenzen beibehalten.
 
-**Aktueller Abschluss 2026-10-09: `GE9023_6M` und 13 Farb-/Größenvarianten.**
+**Vorheriger Abschluss 2026-10-09: `GE9023_6M` und 13 Farb-/Größenvarianten.**
 Eigenständige XML-Beschreibungen ersetzen das falsche Quadratmotiv. Allgemeine
 U-Bogen-/Verlaufsschaftregistrierung und native Rechteck-Verlaufsmaske sichern
 alle 14 Fälle durch beide regulären und strengeren Plan-B-Pixelgates ohne
