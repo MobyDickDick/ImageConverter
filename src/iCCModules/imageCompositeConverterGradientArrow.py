@@ -1,12 +1,14 @@
-"""Register a vertical triangle and a detached rectangular gradient shaft."""
+"""Register an axis-aligned triangle and a detached rectangular gradient shaft."""
 from __future__ import annotations
 
 import cv2
 import numpy as np
+import re
 from xml.etree import ElementTree as ET
 
 
-def _fit_upward_gradient_arrow(width, height, *, description, image, render_fn, error_fn):
+def _fit_upward_gradient_arrow(width, height, *, description, image, render_fn, error_fn,
+                              refinement_steps=(1., .5, .25), quality_fn=None):
     text = str(description or '').casefold()
     if not all(token in text for token in ('pfeil', 'dreieck', 'schaft', 'verlauf', 'oben')):
         return None
@@ -53,6 +55,8 @@ def _fit_upward_gradient_arrow(width, height, *, description, image, render_fn, 
     sx, ex = int(columns[0]), int(columns[-1])+1
     if not (lx <= sx < ex <= rx and start > base and ex-sx < rx-lx):
         return None
+    if shaft_mask[:, :max(0, sx-1)].any() or shaft_mask[:, ex+1:].any():
+        return None
     # A cylinder-like shaft has the same horizontal color profile along its
     # length. Reject holes, writing, or additional objects instead of erasing
     # them into this hypothesis.
@@ -69,7 +73,15 @@ def _fit_upward_gradient_arrow(width, height, *, description, image, render_fn, 
         return None
     head_color = np.median(pixels[top:base][core], axis=0)
     if np.percentile(np.max(np.abs(pixels[top:base][core]-head_color), axis=1), 95) > 25:
-        return None
+        # A crop boundary can admit a partially covered base row into the
+        # solid-color core. Only retry inconsistent observations using the
+        # full neighborhood; preserve already consistent color measurements.
+        core = cv2.erode(foreground.astype(np.uint8), np.ones((3, 3), np.uint8))[top:base] > 0
+        if not core.any():
+            return None
+        head_color = np.median(pixels[top:base][core], axis=0)
+        if np.percentile(np.max(np.abs(pixels[top:base][core]-head_color), axis=1), 95) > 25:
+            return None
     # Stops sample the observed one-dimensional profile; their count scales
     # with input resolution but is capped independently of the symbol.
     stop_indices = np.unique(np.rint(np.linspace(0, ex-sx-1, min(9, ex-sx))).astype(int))
@@ -96,14 +108,17 @@ def _fit_upward_gradient_arrow(width, height, *, description, image, render_fn, 
         if raster is None:
             return None
         error = float(error_fn(image, raster))
-        return (error, content, raster) if np.isfinite(error) else None
+        if not np.isfinite(error):
+            return None
+        score = float(quality_fn(raster)) if quality_fn is not None else error
+        return (error, content, raster, score) if np.isfinite(score) else None
 
     best = measure(parameters)
     if best is None:
         return None
     initial_error = best[0]
     evaluations = 1
-    for step in (1., .5, .25):
+    for step in refinement_steps:
         for index in range(len(parameters)):
             for sign in (-1., 1.):
                 candidate = parameters.copy()
@@ -115,7 +130,7 @@ def _fit_upward_gradient_arrow(width, height, *, description, image, render_fn, 
                     continue
                 measured = measure(candidate)
                 evaluations += 1
-                if measured is not None and measured[0] < best[0]-1e-9:
+                if measured is not None and measured[0] < initial_error-1e-9 and measured[3] < best[3]-1e-9:
                     parameters, best = candidate, measured
     if best[0] >= initial_error-1e-9:
         return None
@@ -124,12 +139,97 @@ def _fit_upward_gradient_arrow(width, height, *, description, image, render_fn, 
             'evaluations': evaluations, 'source': 'raster_gradient_arrow_v1'}
 
 
-def fit_gradient_arrow(width, height, *, description, image, render_fn, error_fn):
-    """Normalize a declared downward direction without adding catalog knowledge."""
+def _fit_horizontal_gradient_arrow(width, height, *, description, image, render_fn, error_fn, direction):
+    """Fit in upward coordinates, but render and score native output coordinates."""
     text = str(description or '').casefold()
+    if 'horizontal' not in text or 'vertikal' not in text:
+        return None
+    arr = np.asarray(image)
+    if arr.shape != (height, width, 3):
+        return None
+    rotation = -1 if direction == 'left' else 1
+
+    def restore_svg(svg):
+        root = ET.fromstring(svg)
+        root.set('width', str(width))
+        root.set('height', str(height))
+        root.set('viewBox', f'0 0 {width} {height}')
+        for shape in root.iter():
+            kind = shape.tag.rsplit('}', 1)[-1]
+            if kind == 'polygon':
+                points = [[float(v) for v in p.split(',')] for p in shape.get('points').split()]
+                points = [(v, height-u) if direction == 'left' else (width-v, u) for u, v in points]
+                shape.set('points', ' '.join(f'{x:g},{y:g}' for x, y in points))
+            elif kind == 'rect':
+                u, v, w, h = (float(shape.get(k, 0)) for k in ('x', 'y', 'width', 'height'))
+                x, y = (v, height-u-w) if direction == 'left' else (width-v-h, u)
+                for key, value in zip(('x', 'y', 'width', 'height'), (x, y, h, w)):
+                    shape.set(key, f'{value:g}')
+            elif kind == 'linearGradient':
+                # The profile is transverse to the shaft. Reversing its axis
+                # preserves asymmetric upper/lower colors as well as geometry.
+                shape.set('x1', '0')
+                shape.set('x2', '0')
+                shape.set('y1', '1' if direction == 'left' else '0')
+                shape.set('y2', '0' if direction == 'left' else '1')
+        return ET.tostring(root, encoding='unicode') + '\n'
+
+    def normalized_render(svg, w, h):
+        raster = render_fn(restore_svg(svg), h, w)
+        return None if raster is None else np.rot90(raster, rotation)
+
+    reference_edges = cv2.Canny(arr, 50, 140) > 0
+    reference_mask = np.min(arr, axis=2) < 225
+    reference_distance = cv2.distanceTransform((~reference_edges).astype(np.uint8), cv2.DIST_L2, 3)
+
+    def quality(normalized_raster):
+        # Subpixel refinements must account for the observed contour, because
+        # a lower color error alone can move Canny edges by an entire pixel.
+        raster = np.rot90(normalized_raster, -rotation)
+        mse = np.square(arr.astype(float)-raster.astype(float)).mean()/255**2
+        edges = cv2.Canny(raster, 50, 140) > 0
+        if not edges.any() or not reference_edges.any():
+            return float('inf')
+        distance = cv2.distanceTransform((~edges).astype(np.uint8), cv2.DIST_L2, 3)
+        alignment = (np.exp(-distance[reference_edges]).mean()+np.exp(-reference_distance[edges]).mean())/2
+        mask = np.min(raster, axis=2) < 225
+        union = np.count_nonzero(mask | reference_mask)
+        iou = np.count_nonzero(mask & reference_mask)/union if union else 1.
+        return mse + .005*(1-alignment) + .001*(1-iou)
+
+    canonical_description = text.replace(f'nach {"links" if direction == "left" else "rechts"}', 'nach oben')
+    canonical_description = canonical_description.replace(
+        f'{"links" if direction == "left" else "rechts"} gerichtet', 'oben gerichtet')
+    result = _fit_upward_gradient_arrow(height, width, description=canonical_description,
+        image=np.rot90(arr, rotation), render_fn=normalized_render, error_fn=error_fn,
+        refinement_steps=(1., .5, .25, .125, .0625), quality_fn=quality)
+    if result is None:
+        return None
+    result['svg'] = restore_svg(result['svg'])
+    result['rendered'] = np.rot90(result['rendered'], -rotation).copy()
+    # Horizontal fits keep the existing nine geometry parameters in their
+    # documented upward frame; the SVG itself contains no transformations.
+    result.update(direction=direction, parameter_frame='upward')
+    return result
+
+
+def fit_gradient_arrow(width, height, *, description, image, render_fn, error_fn):
+    """Normalize explicitly declared directions without adding catalog knowledge."""
+    text = str(description or '').casefold()
+    # Whole-drawing placement instructions do not change the arrow's direction.
+    # Geometry and translation are measured from pixels in the normalized frame.
+    text = re.sub(r'\bnach (?:links|rechts|oben|unten)(?: und (?:links|rechts|oben|unten))?\s+'
+                  r'(?:verschoben|versetzt)\b', 'verschoben', text)
+    directions = [direction for direction, word in (('left', 'links'), ('right', 'rechts'), ('up', 'oben'), ('down', 'unten'))
+                  if f'nach {word}' in text or f'{word} gerichtet' in text]
+    if len(directions) > 1:
+        return None
+    if directions and directions[0] in {'left', 'right'}:
+        return _fit_horizontal_gradient_arrow(width, height, description=text, image=image,
+            render_fn=render_fn, error_fn=error_fn, direction=directions[0])
     downward = 'nach unten' in text or 'unten gerichtet' in text
     if not downward:
-        return _fit_upward_gradient_arrow(width, height, description=description,
+        return _fit_upward_gradient_arrow(width, height, description=text,
                                          image=image, render_fn=render_fn, error_fn=error_fn)
     if 'nach oben' in text or 'oben gerichtet' in text:
         return None

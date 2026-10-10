@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-10)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `422` · Erledigt `397` · Offen `25`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `424` · Erledigt `399` · Offen `25`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -14,13 +14,23 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-10)
 
+- [x] **GE9014 – Links-Pfeil mit Verlaufsschaft:** eigenständige XML-Beschreibungen und allgemeine horizontale Rasterregistrierung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression, unabhängige CLI-Vorlage 17/17. Die 28 bisherigen vertikalen Pfeile behalten ihre SVGs. Details: `docs/next_arbeitspaket_2026-10-10_ge9014_1m.md`.
+- [x] **AC0711 – unterer Griff mit Strich und Punkt:** sechs Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; unabhängige CLI-Vorlage 17/17. Details: `docs/next_arbeitspaket_2026-10-10_ac0711_1_m.md`.
+
+**Neuester Abschluss:** `GE9014_1M` und 13 Holdouts auf
+`codex/ge9014-quality-2026-10-10`. Zielmetrik `13053.991211 → 19.939167`;
+135 fokussierte Tests, 17/17 strenge CLI-Fälle und zehn Bestandsschutz-/Smoke-Tests.
+Erfolgsübersicht: 172/172 Review-Pässe. Standardtestlauf: 2.207 bestanden,
+30 bestehende Skips, null Fehler. Nächste reguläre Rotation: `GE9012_1M`,
+`AC0712_1_S`, `AC0734_1_S`, `GE9012_2M`, `GE9012_7M`.
+
 - [x] **AC0721 – Quadrat mit unterem Griff und T:** eigenständige Beschreibungen und allgemeine Konturregistrierung; sechs Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression, unabhängige Plan-B-Vorlage mit zwei Seeds jeweils 17/17. Alle sechs sind in der Erfolgsübersicht abgelegt.
 - [ ] **AC0721-PB-GREY:** große graue JPG-Variante `AC0721_L` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.799373 < 0.85`); beide regulären Gates und die übrigen fünf JPGs bestehen. Grenzen unverändert beibehalten.
 - [x] **AC0713 – oberer Griff mit Strich und Punkt:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; sechs Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression, unabhängige Plan-B-Vorlage 17/17.
-- [x] **Erfolgsübersicht mit erneuter Prüfung:** inzwischen 152 nachgewiesene Bild-/SVG-Paare separat abgelegt; das erweiterte Profil konvertiert sämtliche archivierten Eingaben neu. Quellenauflösung und Regressionsauswahl berücksichtigen auch die ursprüngliche Erfolgsablage.
+- [x] **Erfolgsübersicht mit erneuter Prüfung:** inzwischen 172 nachgewiesene Bild-/SVG-Paare separat abgelegt; das erweiterte Profil konvertiert sämtliche archivierten Eingaben neu. Quellenauflösung und Regressionsauswahl berücksichtigen auch die ursprüngliche Erfolgsablage.
 - [ ] **ARCHIVE-DRIFT-2026-10-10:** 22 ältere Bestenlisteneinträge erzeugen bei erneuter Konvertierung höhere Mean-Delta²-Werte als ihre archivierten Vektoren. Die Reviewgrenze besteht weiterhin; Ursachen und Budgets je Fall anhand von `artifacts/satisfactory_conversions/recheck_2026-10-10.json` prüfen, akzeptierte SVGs erhalten und Qualitätsgrenzen unverändert lassen.
 
-**Neuester Abschluss:** `AC0721_1_S` und alle fünf Holdouts auf
+**Vorheriger Abschluss:** `AC0721_1_S` und alle fünf Holdouts auf
 `codex/ac0721-quality-2026-10-10`. Native Textausgabe `T` und rastergestützte
 Konturparameter bringen alle sechs durch beide regulären Gates ohne
 Pflichtmetrikregression. Die frische Zielmetrik sinkt von `3282.783936` auf

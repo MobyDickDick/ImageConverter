@@ -1,0 +1,78 @@
+{
+  "schema_version": "conversion_quality_review_v2",
+  "threshold_normalized_mse": 0.045945679012345676,
+  "metrics": {
+    "successful_variants": 48,
+    "successful_renderable_pairs": 48,
+    "successful_above_threshold": 0,
+    "successful_missing_or_failed": 0,
+    "diff_variants": 952,
+    "diff_renderable_pairs": 945,
+    "selected_candidates": 5,
+    "top_error_cases": 5,
+    "ranked_records": 1000,
+    "boundary_triple_records": 3
+  },
+  "selected_candidates": [
+    {
+      "variant": "GE9012_1M",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/GE9012_1M.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/GE9012_1M.svg",
+      "width": 60,
+      "height": 20,
+      "mean_delta2": 13013.4892578125,
+      "normalized_mse": 0.0667101845844547,
+      "status": "ok",
+      "image_area": 1200
+    },
+    {
+      "variant": "AC0712_1_S",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0712_1_S.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0712_1_S.svg",
+      "width": 25,
+      "height": 15,
+      "mean_delta2": 12600.7998046875,
+      "normalized_mse": 0.06459464208477508,
+      "status": "ok",
+      "image_area": 375
+    },
+    {
+      "variant": "AC0734_1_S",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0734_1_S.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0734_1_S.svg",
+      "width": 25,
+      "height": 15,
+      "mean_delta2": 12591.8935546875,
+      "normalized_mse": 0.06454898656766628,
+      "status": "ok",
+      "image_area": 375
+    },
+    {
+      "variant": "GE9012_2M",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/GE9012_2M.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/GE9012_2M.svg",
+      "width": 60,
+      "height": 20,
+      "mean_delta2": 12534.7529296875,
+      "normalized_mse": 0.06425607038158401,
+      "status": "ok",
+      "image_area": 1200
+    },
+    {
+      "variant": "GE9012_7M",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/GE9012_7M.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/GE9012_7M.svg",
+      "width": 60,
+      "height": 20,
+      "mean_delta2": 12271.90625,
+      "normalized_mse": 0.06290865692682301,
+      "status": "ok",
+      "image_area": 1200
+    }
+  ]
+}

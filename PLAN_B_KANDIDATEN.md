@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-10, nach AC0711-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-10, nach GE9014-Abnahme)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -118,11 +118,18 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `GE9014_1M` – `mean_delta2=13099.989258`, `normalized_mse=0.067154`.
-2. `GE9012_1M` – `mean_delta2=13013.489258`, `normalized_mse=0.066710`.
-3. `AC0712_1_S` – `mean_delta2=12600.799805`, `normalized_mse=0.064595`.
-4. `AC0734_1_S` – `mean_delta2=12591.893555`, `normalized_mse=0.064549`.
-5. `GE9012_2M` – `mean_delta2=12534.752930`, `normalized_mse=0.064256`.
+1. `GE9012_1M` – `mean_delta2=13013.489258`, `normalized_mse=0.066710`.
+2. `AC0712_1_S` – `mean_delta2=12600.799805`, `normalized_mse=0.064595`.
+3. `AC0734_1_S` – `mean_delta2=12591.893555`, `normalized_mse=0.064549`.
+4. `GE9012_2M` – `mean_delta2=12534.752930`, `normalized_mse=0.064256`.
+5. `GE9012_7M` – `mean_delta2=12271.906250`, `normalized_mse=0.062909`.
+
+`GE9014_1M` und alle 13 Farb-/Größen-Holdouts bestehen nach eigenständiger
+Beschreibung und allgemeiner horizontaler Pfeilregistrierung beide regulären
+Gates ohne Pflichtmetrikregression sowie die strengeren Plan-B-Pixelgrenzen.
+Die frische Zielmetrik sinkt von `13053.991211` auf `19.939167`; eine unabhängige
+Vorlage besteht 17/17 strenge CLI-Fälle. Die 28 bisherigen vertikalen Pfeile
+behalten exakt ihre SVGs. Details: `docs/next_arbeitspaket_2026-10-10_ge9014_1m.md`.
 
 `AC0711_1_M` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und allgemeiner Registrierung des unteren Griffs mit Strich und
