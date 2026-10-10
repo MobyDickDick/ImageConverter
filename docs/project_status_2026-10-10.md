@@ -31,7 +31,24 @@ Topologien mit Farb-, Größen- und Geometrievarianten.
   weiterhin nicht belegt. Erledigte Aufgaben und bestandene Unit-Tests sind
   kein Ersatz für diese Quote.
 
-## Konkreter Fortschritt dieses Arbeitspakets
+## Neuester Fortschritt: AC0713 und Erfolgsübersicht
+
+`AC0713_1_L` und alle fünf Farb-/Größen-Holdouts enthalten jetzt auch Strich
+und Punkt im Quadrat. Eigenständige Beschreibungen und die allgemeine
+Rasterregistrierung für den oberen Griff bringen alle sechs durch beide
+regulären Gates ohne Pflichtmetrikregression. Die Zielmetrik sinkt von
+`1972.475586` auf `120.847115`; eine unabhängige Plan-B-Vorlage besteht
+Original plus 16 Zufallsvarianten (17/17). 90 fokussierte Tests bestehen.
+
+146 nachgewiesene Bild-/SVG-Paare sind mit ihren Beschreibungen und
+Qualitätswerten separat unter `artifacts/satisfactory_conversions/` abgelegt.
+Das erweiterte Profil konvertiert alle Einträge erneut aus Wegwerfkopien und
+prüft die bestehende Reviewgrenze. Der strengere 31-Fälle-Bestandsschutz
+bleibt separat. Der Review über 1.000 Einträge erhält alle 48 bisherigen
+Erfolgsvarianten unter der Grenze. Details:
+[AC0713 und Erfolgsübersicht](next_arbeitspaket_2026-10-10_ac0713_1_l.md).
+
+## Vorheriger Fortschritt: AC0413
 
 Das nächste dokumentierte Ziel war `AC0413_1_M`. Die Platzhalterbeschreibungen
 verschwiegen Kreis, zwei schräge Linien und das aus Strichen aufgebaute T.
@@ -55,7 +72,7 @@ Details und Reproduktion: [Arbeitspaket](next_arbeitspaket_2026-10-10_ac0413_1_m
 
 Die bestehende Priorität bleibt: möglichst viele Motive in guter Qualität
 erschließen, danach das Produkt vereinfachen. Als nächstes reguläres Paket folgt
-`AC0713_1_L`. Für einen nachprüfbaren Stand zur Autonomie ist außerdem ein
+`AC0721_1_S`. Für einen nachprüfbaren Stand zur Autonomie ist außerdem ein
 frischer Kataloglauf mit zutreffenden Beschreibungen, unveränderten Gates und
 getrennten Ergebnissen für erfolgreiche, verbesserbare und zurückgestellte
 Bilder nötig. Solange dieser fehlt, wäre die Aussage „der ganze Katalog läuft

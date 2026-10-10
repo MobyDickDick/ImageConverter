@@ -341,7 +341,7 @@ def test_archive_successful_conversion_artifacts_moves_image_and_copies_svg(tmp_
     svg_dir.mkdir()
 
     (source_dir / "AC0831_L.jpg").write_text("img", encoding="utf-8")
-    (svg_dir / "AC0831_L.svg").write_text("<svg/>", encoding="utf-8")
+    (svg_dir / "AC0831_L.svg").write_text('<svg><circle r="3"/></svg>', encoding="utf-8")
 
     finalization_helpers._archiveSuccessfulConversionArtifacts(
         folder_path=str(source_dir),

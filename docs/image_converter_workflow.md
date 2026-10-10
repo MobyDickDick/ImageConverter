@@ -124,12 +124,14 @@ Workflow `.github/workflows/local-completion-checks.yml` startet auf Pull
 Requests, Pushes auf die Hauptarbeitszweige und manuell per `workflow_dispatch`
 denselben Sammelbefehl. Der eigenständige Job `image-id-hardcoding-ratchet`
 führt die Nullprüfung außerdem als direkt sichtbares Pflichtsignal aus. Vor dem
-Sammelprofil installiert der Workflow `pytest`,
-damit ein frischer `actions/setup-python`-Runner die Pytest-Suite überhaupt als
-Modul starten kann:
+Sammelprofil und allen weiteren Test- und Konvertierungsjobs installiert der
+Workflow die Abhängigkeiten aus `requirements-dev.txt`: `pytest`, NumPy,
+OpenCV (`opencv-python-headless`, Import `cv2`), Pillow und PyMuPDF (Import
+`fitz`). Damit stehen auch bei der Testsammlung und den erweiterten Archivprüfungen
+auf einem frischen `actions/setup-python`-Runner alle benötigten Module bereit:
 
 ```bash
-python -m pip install pytest
+python -m pip install -r requirements-dev.txt
 ./tools/run_test_evidence.sh \
   --name completion-profile \
   --log artifacts/test-evidence/completion-profile.log \
@@ -154,7 +156,7 @@ Schablone für echte Korrekturaufgaben stehen in
 `docs/test_evidence_task_derivation.md`.
 
 Der Workflow enthält zusätzlich den Job `batch-artifact-drift-gate`. Dieser
-installiert ebenfalls die Testabhängigkeit `pytest`, legt ein repräsentatives
+installiert ebenfalls die Abhängigkeiten aus `requirements-dev.txt`, legt ein repräsentatives
 `chain_phase_telemetry_summary.txt` mit `drift_status=pass` an und startet
 dasselbe Abschlussprofil mit verpflichtender Drift-Artefaktprüfung:
 
@@ -214,6 +216,31 @@ blockieren:
 ```bash
 RUN_HEAVY_CONVERSION_TESTS=1 python -m pytest -q -rs tests/test_image_composite_converter.py
 ```
+
+## Separate Erfolgsübersicht erneut prüfen
+
+`python -m tools.refresh_satisfactory_archive` aktualisiert die separate
+Sammlung unter `artifacts/satisfactory_conversions/` aus nachgewiesenen
+Abnahmen. Das Profil `python -m tools.run_pytest_profile extended` setzt
+`RECHECK_SATISFACTORY_ARCHIVE=1`, aktualisiert die Sammlung einschließlich
+späterer erfolgreicher Batches und konvertiert alle archivierten Bilder auf
+Wegwerfkopien erneut, einschließlich ihrer gespeicherten Beschreibungen.
+Die vollständige Archivprüfung hat ein eigenes Testlimit von 35 Minuten:
+Beide Konvertierungsmodi haben jeweils bis zu 15 Minuten, gefolgt von den
+Qualitätsmessungen. Ein überschrittenes Archivlimit führt zu einem echten
+Testfehler. Für das erweiterte Profil stehen in GitHub Actions 60 Minuten zur
+Verfügung; `core-green` behält sein Joblimit von 15 Minuten und reguläre Tests
+behalten ihr allgemeines 30-Sekunden-Limit.
+Der Einzelaufruf lautet:
+
+```bash
+python -m tools.recheck_satisfactory_archive --output-dir .tmp/satisfactory-recheck
+```
+
+Die unveränderte Reviewgrenze und der Ausschluss von Raster-SVGs sind
+verbindlich; erhöhte Fehler gegenüber den gespeicherten Vektoren erscheinen
+zusätzlich im Bericht. Die bisherigen strengeren Paketgates und die
+31-Fälle-Bestandsschutzbatterie bleiben separate Prüfungen.
 
 ## 8. Linux-Vendor-Kommando ausgeben
 

@@ -38,7 +38,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install -r requirements-dev.txt
 
       - name: Run documented local completion profile with test evidence
         run: >-
@@ -71,7 +71,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install -r requirements-dev.txt
 
       - name: Create representative passing drift summary
         run: |
@@ -87,13 +87,15 @@ jobs:
 
   pytest-profile-matrix:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: ${{ matrix.timeout_minutes }}
     strategy:
       fail-fast: false
       matrix:
-        profile:
-          - core-green
-          - extended
+        include:
+          - profile: core-green
+            timeout_minutes: 15
+          - profile: extended
+            timeout_minutes: 60
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -104,7 +106,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install -r requirements-dev.txt
 
       - name: Run pytest profile
         run: python tools/run_pytest_profile.py ${{ matrix.profile }}
@@ -122,7 +124,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install -r requirements-dev.txt
 
       - name: Run safe baseline
         env:
@@ -142,7 +144,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install -r requirements-dev.txt
 
       - name: Run documented regression checks
         env:
@@ -163,7 +165,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install -r requirements-dev.txt
 
       - name: Reconvert satisfactory baseline and compare quality
         env:
@@ -195,7 +197,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install test dependencies
-        run: python -m pip install pytest
+        run: python -m pip install -r requirements-dev.txt
 
       - name: Run full heavy image composite suite
         env:
@@ -218,6 +220,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+
+      - name: Install test dependencies
+        run: python -m pip install -r requirements-dev.txt
 
       - name: Convert catalog shard
         run: >-

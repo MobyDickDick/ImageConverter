@@ -3,6 +3,7 @@
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
 - [Projektstand: Batchfähigkeit, Grenzen und Beschreibungsqualität (2026-10-10)](project_status_2026-10-10.md)
+- [AC0713: oberer Griff, Innenmarkierung und separate Erfolgsübersicht (2026-10-10)](next_arbeitspaket_2026-10-10_ac0713_1_l.md)
 - [Kreis mit schrägen Linien und T: neun CLI-Abnahmen und unabhängige Zufallsvarianten (2026-10-10)](next_arbeitspaket_2026-10-10_ac0413_1_m.md)
 
 - [U-Bogen mit Verlaufsschaft: 14 CLI-Abnahmen und offener synthetischer Stresstest (2026-10-09)](next_arbeitspaket_2026-10-09_ge9023_6m.md)

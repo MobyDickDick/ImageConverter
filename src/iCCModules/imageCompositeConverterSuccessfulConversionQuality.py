@@ -25,10 +25,15 @@ def loadIterationLogRowsImpl(reports_out_dir: str) -> dict[str, dict[str, str]]:
 
 def findImagePathByVariantImpl(folder_path: str, variant: str) -> str | None:
     """Return the raster image path for ``variant`` if present."""
-    for ext in (".jpg", ".png", ".bmp", ".gif"):
-        candidate = os.path.join(folder_path, f"{variant}{ext}")
-        if os.path.exists(candidate):
-            return candidate
+    for directory in (folder_path, os.path.join(folder_path, "succesessfulConvertedImages")):
+        if not os.path.isdir(directory):
+            continue
+        filenames = sorted(os.listdir(directory))
+        for preferred_ext in (".jpg", ".jpeg", ".png", ".bmp", ".gif", ".tif", ".tiff", ".webp"):
+            for filename in filenames:
+                stem, ext = os.path.splitext(filename)
+                if stem.casefold() == variant.casefold() and ext.lower() == preferred_ext:
+                    return os.path.join(directory, filename)
     return None
 
 

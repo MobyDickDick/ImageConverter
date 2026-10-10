@@ -33,24 +33,30 @@ def _timeout_handler(_signum: int, _frame) -> None:
     raise _PerTestTimeout()
 
 
-@pytest.hookimpl(hookwrapper=True)
+@pytest.hookimpl(wrapper=True)
 def pytest_runtest_call(item: pytest.Item):
-    """Apply a hard per-test runtime limit and convert overruns into task-style xfails."""
+    """Apply per-test limits, preserving strict failures for acceptance checks."""
+    marker = item.get_closest_marker("per_test_timeout")
+    timeout_seconds = int(marker.args[0]) if marker else _PER_TEST_TIMEOUT_SECONDS
+    fail_on_timeout = bool(marker and marker.kwargs.get("fail_on_timeout", False))
     # SIGALRM and signal.alarm() are Unix-only.  On Windows, let the test run
     # without this optional hard limit instead of failing every test up front.
-    if _PER_TEST_TIMEOUT_SECONDS <= 0 or _SIGALRM is None:
-        yield
-        return
+    if timeout_seconds <= 0 or _SIGALRM is None:
+        return (yield)
 
     previous_handler = signal.getsignal(_SIGALRM)
     signal.signal(_SIGALRM, _timeout_handler)
-    signal.alarm(_PER_TEST_TIMEOUT_SECONDS)
+    signal.alarm(timeout_seconds)
     try:
-        yield
+        return (yield)
     except _PerTestTimeout:
+        if fail_on_timeout:
+            pytest.fail(
+                f"Testlauf > {timeout_seconds}s: {item.nodeid}", pytrace=False
+            )
         pytest.xfail(
             f"AUFGABE A5 (docs/test_followup_tasks_2026-05-20.md): "
-            f"Testlauf > {_PER_TEST_TIMEOUT_SECONDS}s, bitte optimieren/isolieren: {item.nodeid}"
+            f"Testlauf > {timeout_seconds}s, bitte optimieren/isolieren: {item.nodeid}"
         )
     finally:
         signal.alarm(0)

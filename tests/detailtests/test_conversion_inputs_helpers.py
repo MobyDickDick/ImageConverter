@@ -62,3 +62,16 @@ def test_input_selection_summary_contains_hints() -> None:
     assert "Range: AC0800..AC0899" in summary
     assert "Ausgewählte Varianten: AC0801_L" in summary
     assert ".jpeg" in summary
+
+
+def test_regression_selection_includes_archived_sources_without_duplicates(tmp_path):
+    archive=tmp_path/'succesessfulConvertedImages'
+    archive.mkdir()
+    for path in (tmp_path/'one.jpg',archive/'one.jpg',archive/'two.jpg'):
+        path.write_bytes(b'image')
+    _,ordinary=conversion_input_helpers.listRequestedImageFilesImpl(str(tmp_path),'A','Z',
+        selected_variants=None,in_requested_range_fn=lambda *args:True)
+    _,regression=conversion_input_helpers.listRequestedImageFilesImpl(str(tmp_path),'A','Z',
+        selected_variants={'ONE','TWO'},in_requested_range_fn=lambda *args:True)
+    assert ordinary==['one.jpg']
+    assert regression==['one.jpg',str(__import__('pathlib').Path('succesessfulConvertedImages')/'two.jpg')]

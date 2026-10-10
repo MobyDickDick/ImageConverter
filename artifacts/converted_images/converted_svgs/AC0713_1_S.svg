@@ -1,4 +1,6 @@
-<svg width="15px" height="25px" viewBox="0 0 15 25" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="9.0000" cy="14.5000" r="4.5000" fill="#727272" stroke="#5f5f5f" stroke-width="3.0000"/>
-  <path d="M188 1493H678L1018 694L1360 1493H1849V0H1485V1092L1141 287H897L553 1092V0H188Z" fill="#4f4f4f" transform="translate(5.5000,9.5000) scale(0.005000,-0.005000) translate(-188,-1493)"/>
+<svg width="15" height="25" viewBox="0 0 15 25" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <path id="rotated_180_square_kelle_connector" d="M 7.538 10.375 L 7.538 0" stroke="#7d8080" stroke-width="1.5" fill="none" stroke-linecap="butt"/>
+  <rect id="rotated_180_square_kelle_body" x="1" y="10.375" width="13.25" height="13.5" fill="#e11c46" stroke="#7b6b6c" stroke-width="0.75"/>
+  <path id="raster_interior_slash" d="M 8.967 13.25 L 10.342 13.25 L 8.471 20.875 L 7.096 20.875 Z" stroke="none" stroke-width="0" fill="#e8e0e1" stroke-linejoin="round" stroke-linecap="butt"/>
+  <path id="raster_interior_dot" d="M 5 19.375 L 7.25 19.375 L 7.25 20.875 L 5 20.875 Z" stroke="none" stroke-width="0" fill="#e8e0e1" stroke-linejoin="round" stroke-linecap="butt"/>
 </svg>

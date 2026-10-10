@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import contextlib
+import re
 import sys
 import shutil
 from pathlib import Path
@@ -7222,9 +7223,8 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "--summary" in workflow_doc
     assert "--require-drift-summary" in workflow_doc
     assert ".github/workflows/local-completion-checks.yml" in workflow_doc
-    assert "python -m pip install pytest" in workflow_doc
-    assert "python -m pip install pytest" in ci_workflow
-    assert ci_workflow.count("python -m pip install pytest") >= 3
+    assert "python -m pip install -r requirements-dev.txt" in workflow_doc
+    assert "python -m pip install -r requirements-dev.txt" in ci_workflow
     assert "./tools/run_test_evidence.sh" in workflow_doc
     assert "./tools/run_test_evidence.sh" in ci_workflow
     assert "artifacts/test-evidence/completion-profile.log" in workflow_doc
@@ -7273,6 +7273,31 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "satisfactory-regression-debug" in workflow_doc
     assert "full-heavy-conversion-suite" in workflow_doc
     assert "RUN_HEAVY_CONVERSION_TESTS=1 python -m pytest -q -rs tests/test_image_composite_converter.py" in workflow_doc
+
+
+@pytest.mark.parametrize(
+    "job",
+    [
+        "completion-profile",
+        "batch-artifact-drift-gate",
+        "pytest-profile-matrix",
+        "safe-baseline",
+        "regression-checks",
+        "satisfactory-regression-battery",
+        "full-heavy-conversion-suite",
+        "full-catalog-conversion",
+    ],
+)
+def test_ci_installs_declared_dependencies_before_tests_and_conversion(job: str) -> None:
+    workflow = Path(".github/workflows/local-completion-checks.yml").read_text(
+        encoding="utf-8"
+    )
+    block = re.search(rf"^  {re.escape(job)}:\n(.*?)(?=^  \S|\Z)", workflow, re.M | re.S)
+    assert block is not None, f"Missing CI job: {job}"
+    commands = re.findall(r"^        run: (.+)$", block.group(1), re.M)
+    assert commands[0] == "python -m pip install -r requirements-dev.txt", (
+        f"{job} must install the shared dependencies before running Python tools"
+    )
 
 
 def test_evidence_task_derivation_doc_defines_required_decisions_and_template() -> None:
