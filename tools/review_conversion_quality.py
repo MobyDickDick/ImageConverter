@@ -23,6 +23,7 @@ DEFAULT_MAX_IMAGE_AREA = 6_400
 
 IMAGE_DIRS = (
     Path("artifacts/images_to_convert"),
+    Path("artifacts/images_to_convert/succesessfulConvertedImages"),
     Path("artifacts/images_to_convert/nonconvertable"),
     Path("artifacts/regression_baseline/satisfactory/images"),
 )

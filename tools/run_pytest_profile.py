@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import subprocess
 import sys
 
@@ -34,7 +35,13 @@ def main() -> int:
 
     cmd = [sys.executable, "-m", "pytest", "-q", *PROFILES[args.profile], *args.pytest_args]
     print("+", " ".join(cmd))
-    return subprocess.call(cmd)
+    env = dict(os.environ)
+    if args.profile == 'extended':
+        env['RECHECK_SATISFACTORY_ARCHIVE'] = '1'
+        refreshed = subprocess.call([sys.executable, '-m', 'tools.refresh_satisfactory_archive'], env=env)
+        if refreshed:
+            return refreshed
+    return subprocess.call(cmd, env=env)
 
 
 if __name__ == "__main__":

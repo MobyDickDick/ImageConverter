@@ -18,6 +18,37 @@ def _observe_slash_and_dot(interior, x0, y0):
     contrast = np.linalg.norm(interior.astype(float)-fill, axis=2)
     core = contrast > max(40., float(contrast.max())*.6)
     count, labels, stats, _ = cv2.connectedComponentsWithStats(core.astype(np.uint8))
+    if count == 2:
+        # At small resolutions JPEG fringes can bridge two separate marks.
+        # Resolve their stronger cores, then enforce the same two-object
+        # topology and register the boundaries against the full raster.
+        stronger = contrast > max(40., float(contrast.max())*.75)
+        new_count, new_labels, new_stats, _ = cv2.connectedComponentsWithStats(stronger.astype(np.uint8))
+        if new_count == 3:
+            core,count,labels,stats = stronger,new_count,new_labels,new_stats
+        else:
+            # A very small slash can itself have a broken high-contrast core.
+            # Fit its upper rows and separate a lower-left compact component
+            # from the merged core. The ordinary slope/size/dot tests below
+            # still apply to both observed parts.
+            ys,xs = np.nonzero(core)
+            upper = ys < ys.min()+.65*(ys.max()-ys.min()+1)
+            if len(np.unique(ys[upper])) < 3:
+                return None
+            slope,intercept = np.polyfit(ys[upper],xs[upper],1)
+            slash_pixels = xs >= slope*ys+intercept-.75
+            if slash_pixels.all() or not slash_pixels.any():
+                return None
+            labels = np.zeros(core.shape,np.int32)
+            labels[ys[slash_pixels],xs[slash_pixels]] = 1
+            labels[ys[~slash_pixels],xs[~slash_pixels]] = 2
+            if cv2.connectedComponents((labels==2).astype(np.uint8))[0] != 2:
+                return None
+            stats = np.zeros((3,5),np.int32)
+            for component in (1,2):
+                yy,xx = np.nonzero(labels==component)
+                stats[component] = [xx.min(),yy.min(),np.ptp(xx)+1,np.ptp(yy)+1,len(xx)]
+            count = 3
     if count != 3:
         return None
     slash, dot = sorted((1, 2), key=lambda i: stats[i, cv2.CC_STAT_HEIGHT], reverse=True)
@@ -41,7 +72,48 @@ def _observe_slash_and_dot(interior, x0, y0):
             x0+dx, y0+dy, float(dw), float(dh), *mark_color]
 
 
-def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description=''):
+def _fit_top_stem_square(geometry_ir, *, image, render_fn, error_fn, description):
+    """Rotate the observed body/handle contract while retaining mark direction."""
+    original = geometry_ir[0]
+    canonical = copy.deepcopy(geometry_ir)
+    bx, by, bw, bh = original['body_bbox']
+    canonical[0].update(kind='RightStemSquareKelleGlyph', body_bbox=[1-by-bh,bx,bh,bw],
+                        connector=[[1-y,x] for x,y in original['connector']])
+
+    def restore(ir):
+        result = copy.deepcopy(ir)
+        x,y,w,h = result[0]['body_bbox']
+        result[0].update(kind=original['kind'], body_bbox=[y,1-x-w,h,w],
+                         connector=[[v,1-u] for u,v in result[0]['connector']])
+        for mark in result[1:]:
+            mark['points'] = [[v,1-u] for u,v in mark['points']]
+        return result
+
+    def render(candidate):
+        raster = render_fn(restore(candidate))
+        return None if raster is None else cv2.rotate(raster,cv2.ROTATE_90_CLOCKWISE)
+
+    fitted = fit_square_stem(canonical, image=cv2.rotate(image,cv2.ROTATE_90_CLOCKWISE),
+        description=description, render_fn=render,
+        error_fn=lambda raster:error_fn(cv2.rotate(raster,cv2.ROTATE_90_COUNTERCLOCKWISE)),
+        _marks_in_original=True)
+    if fitted is None:
+        return None
+    fitted['geometry_ir'] = restore(fitted['geometry_ir'])
+    fitted['rendered'] = cv2.rotate(fitted['rendered'],cv2.ROTATE_90_COUNTERCLOCKWISE)
+    return fitted
+
+
+def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', _marks_in_original=False):
+    desc = description.casefold()
+    marked = ('punkt' in desc and any(word in desc for word in ('schräg', 'schraeg', 'diagonal'))
+              and not any(word in desc for word in ('ohne markierung', 'ohne innenmarkierung', 'ohne punkt')))
+    if (len(geometry_ir) == 1 and geometry_ir[0].get('kind') == 'Rotated180SquareKelleGlyph'
+            and marked):
+        arr = np.asarray(image)
+        if arr.ndim != 3 or arr.shape[2] != 3 or not arr.size or not np.isfinite(arr).all():
+            return None
+        return _fit_top_stem_square(geometry_ir,image=arr,render_fn=render_fn,error_fn=error_fn,description=description)
     if len(geometry_ir) != 1 or geometry_ir[0].get('kind') != 'RightStemSquareKelleGlyph':
         return None
     arr = np.asarray(image)
@@ -74,10 +146,13 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description=''):
     interior = arr[top+margin:bottom-margin+1, left+margin:right-margin+1]
     if not interior.size:
         return None
-    desc = description.casefold()
-    marked = ('punkt' in desc and any(word in desc for word in ('schräg', 'schraeg', 'diagonal'))
-              and not any(word in desc for word in ('ohne markierung', 'ohne innenmarkierung', 'ohne punkt')))
-    marks = _observe_slash_and_dot(interior, left+margin, top+margin) if marked else None
+    if marked and _marks_in_original:
+        # Observe the slash and dot in the requested orientation. Only the
+        # square/handle fit uses canonical axes; the marking is not rotated
+        # into a different semantic topology.
+        marks = _observe_slash_and_dot(np.rot90(interior), top+margin, w-(right-margin+1))
+    else:
+        marks = _observe_slash_and_dot(interior, left+margin, top+margin) if marked else None
     if marked and marks is None:
         return None
     if not marked and float(np.std(interior.astype(float),axis=(0,1)).max()) > 18:
@@ -126,6 +201,8 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description=''):
                 ('dot', [(dx,dy),(dx+dw,dy),(dx+dw,dy+dh),(dx,dy+dh)]),
             )
             for name, points in shapes:
+                if _marks_in_original:
+                    points = [(w-py,px) for px,py in points]
                 if not all(x+bs/2 < px < x+bw-bs/2 and y+bs/2 < py < y+bh-bs/2 for px,py in points):
                     return None
                 ir.append({'kind':'PolygonPath','id':'raster_interior_'+name,

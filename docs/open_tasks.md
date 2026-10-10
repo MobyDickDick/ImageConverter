@@ -14,11 +14,21 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-10)
 
+- [x] **AC0713 – oberer Griff mit Strich und Punkt:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; sechs Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression, unabhängige Plan-B-Vorlage 17/17.
+- [x] **Erfolgsübersicht mit erneuter Prüfung:** 146 nachgewiesene Bild-/SVG-Paare separat ablegen; das erweiterte Profil konvertiert sämtliche archivierten Eingaben neu. Quellenauflösung und Regressionsauswahl berücksichtigen auch die ursprüngliche Erfolgsablage.
+- [ ] **ARCHIVE-DRIFT-2026-10-10:** 22 ältere Bestenlisteneinträge erzeugen bei erneuter Konvertierung höhere Mean-Delta²-Werte als ihre archivierten Vektoren. Die Reviewgrenze besteht weiterhin; Ursachen und Budgets je Fall anhand von `artifacts/satisfactory_conversions/recheck_2026-10-10.json` prüfen, akzeptierte SVGs erhalten und Qualitätsgrenzen unverändert lassen.
+
+**Neuester Abschluss:** `AC0713_1_L` und alle fünf Holdouts auf
+`codex/successful-images-ac0713-2026-10-10`. Die fehlende Innenmarkierung ist
+enthalten. Die Zielmetrik sinkt von `1972.475586` auf `120.847115`.
+Nächste Rotation: `AC0721_1_S`, `AC0711_1_M`, `GE9014_1M`, `GE9012_1M`,
+`AC0712_1_S`. Details: `docs/next_arbeitspaket_2026-10-10_ac0713_1_l.md`.
+
 - [x] **AC0413 – Kreis mit schrägen Linien und T:** Originalbeschreibung-CLI einfrieren, eigenständige Beschreibungen und rastergestützte Kreis-/Linienregistrierung umsetzen; neun Farb-/Größenvarianten durch beide regulären Gates ohne Pflichtmetrikregression abnehmen.
 - [x] **AC0413-PB:** unabhängige Geometrie-, Farb-, Lage- und Auflösungsfälle, neutrale Namen, fehlende/zusätzliche Linien und zwei echte CLI-Seeds mit jeweils Original plus 16 Zufallsvarianten prüfen (17/17 je Seed).
 - [ ] **AC0413-PB-GREY:** drei graue JPGs durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen; beide regulären Gates und alle sechs farbigen JPGs bestehen bereits. Grenzen unverändert beibehalten.
 
-**Aktueller Abschluss 2026-10-10: `AC0413_1_M` und acht Farb-/Größenvarianten.**
+**Vorheriger Abschluss 2026-10-10: `AC0413_1_M` und acht Farb-/Größenvarianten.**
 Die Katalogbeschreibungen sind eigenständig; der Parser verwechselt die explizit
 beschriebenen Innenlinien nicht mehr mit einem Buchstaben-Badge. Die neue
 Registrierung bestimmt Kreis, schräge Linien und T aus dem Raster. Alle neun

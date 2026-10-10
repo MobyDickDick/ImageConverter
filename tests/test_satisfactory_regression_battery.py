@@ -54,7 +54,8 @@ def _source_image_path(variant: str) -> Path:
     baseline_image = BASE / "images" / f"{variant}.jpg"
     if baseline_image.exists():
         return baseline_image
-    return SOURCE_IMAGES / f"{variant}.jpg"
+    found = converter._findImagePathByVariant(str(SOURCE_IMAGES), variant)
+    return Path(found) if found else SOURCE_IMAGES / f"{variant}.jpg"
 
 
 def _prepare_mini_baseline(base_dir: Path, limit: int = 3) -> list[str]:
@@ -65,7 +66,7 @@ def _prepare_mini_baseline(base_dir: Path, limit: int = 3) -> list[str]:
     copied: list[str] = []
     requested_variants = _variants() or list(FALLBACK_VARIANTS)
     for variant in requested_variants:
-        jpg_src = SOURCE_IMAGES / f"{variant}.jpg"
+        jpg_src = _source_image_path(variant)
         svg_src = SOURCE_SVGS / f"{variant}.svg"
         if not jpg_src.exists() or not svg_src.exists():
             continue
@@ -76,7 +77,7 @@ def _prepare_mini_baseline(base_dir: Path, limit: int = 3) -> list[str]:
             break
     if not copied:
         for variant in FALLBACK_VARIANTS:
-            jpg_src = SOURCE_IMAGES / f"{variant}.jpg"
+            jpg_src = _source_image_path(variant)
             svg_src = SOURCE_SVGS / f"{variant}.svg"
             if not jpg_src.exists() or not svg_src.exists():
                 continue

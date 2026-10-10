@@ -1,0 +1,2488 @@
+{
+  "case_count": 146,
+  "cases": [
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
+      "evidence": "artifacts/evaluation/pump_recheck_v1/report_2026-10-04.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0252.jpg",
+      "image_sha256": "2b2ba3005aa9f54f991e629a9647fc20be8dc40d702e79609e430b9791c43d03",
+      "mean_delta2": 328.44537353515625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9502636194229126,
+        "error_per_pixel": 0.0016836876767148852,
+        "object_mask_iou": 0.9069212410501193
+      },
+      "svg": "svgs/AC0252.svg",
+      "svg_sha256": "8d1b1be77f1c78f96e4f1fd29b3cf8abfd535e66c5e0c1cbaf37ee743cf4887a",
+      "variant": "AC0252"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
+      "evidence": "artifacts/evaluation/pump_recheck_v1/report_2026-10-04.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0252_1.jpg",
+      "image_sha256": "042180c54661f675b9ba8ab31f1f10bc2e8538225ec45971c14c8d0b3b1ae7bb",
+      "mean_delta2": 458.7762756347656,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9398248195648193,
+        "error_per_pixel": 0.002351794313134772,
+        "object_mask_iou": 0.9437148217636022
+      },
+      "svg": "svgs/AC0252_1.svg",
+      "svg_sha256": "9279a7d9066e2270df1737685311864fd0686c1feff9e45749fe8cea25598909",
+      "variant": "AC0252_1"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
+      "evidence": "artifacts/evaluation/pump_recheck_v1/report_2026-10-04.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0252_2.jpg",
+      "image_sha256": "32a04a9836ab0717ab448de622fd0e011106a427dd0a806f29749b47920fcdf3",
+      "mean_delta2": 394.59210205078125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9066200256347656,
+        "error_per_pixel": 0.002022771252342849,
+        "object_mask_iou": 0.9305816135084428
+      },
+      "svg": "svgs/AC0252_2.svg",
+      "svg_sha256": "c625df96dd11d8b22721ba8355eff245718f8a500949f2a7d43ea7efb8545091",
+      "variant": "AC0252_2"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_1L_sia.jpg",
+      "image_sha256": "348036093f3f2a4e0c773ee00e057297d5b0a3227bf6779b9dd0fb20748721ee",
+      "mean_delta2": 82.05687713623047,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8839064836502075,
+        "error_per_pixel": 0.00042064271247587066,
+        "object_mask_iou": 0.9795698924731183
+      },
+      "svg": "svgs/AC0404_1L_sia.svg",
+      "svg_sha256": "1c1afcc9b7df36d659a8f0d1802ece8845b1a57bbc4f4eeec0cfa27c19f7d0b0",
+      "variant": "AC0404_1L_sia"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_1M_sia.jpg",
+      "image_sha256": "a0bd1d334495546bf935642b0df5fed1ed9959478be3ee97f4e6014108ac8f3b",
+      "mean_delta2": 224.4022216796875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9536918997764587,
+        "error_per_pixel": 0.0011503381862344611,
+        "object_mask_iou": 0.9711191335740073
+      },
+      "svg": "svgs/AC0404_1M_sia.svg",
+      "svg_sha256": "235ec0cd3bb5ec998dc756d89eaf95b090c1de2cfa074ab24fac499ecd4dbc5a",
+      "variant": "AC0404_1M_sia"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_1S_sia.jpg",
+      "image_sha256": "6e3865395329f1f8af31988e1327d05125b3bacec48083a907b7331c76afdb63",
+      "mean_delta2": 269.4425048828125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9647802114486694,
+        "error_per_pixel": 0.0013812251948369218,
+        "object_mask_iou": 0.9918032786885246
+      },
+      "svg": "svgs/AC0404_1S_sia.svg",
+      "svg_sha256": "2a5a93358118e14098af180eec6d7ae4e0e46da94213b233c0a31d9110de73f3",
+      "variant": "AC0404_1S_sia"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_1_L.jpg",
+      "image_sha256": "bc2749ef51048c09cbe576af7d5a879b1d8bfbfe7028ac60cb1520216413ff8c",
+      "mean_delta2": 89.82562255859375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9377320408821106,
+        "error_per_pixel": 0.00046046711551246314,
+        "object_mask_iou": 0.9732246798603027
+      },
+      "svg": "svgs/AC0404_1_L.svg",
+      "svg_sha256": "5f3a0a68a6d83291f7c9d20777dc277ff644e5063cb6c66069a2cb3f5137679c",
+      "variant": "AC0404_1_L"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_1_M.jpg",
+      "image_sha256": "53a7be784d7f5499b37cdb88bc5fcbc49ba7c5afb38d5fe7e60b53b7ec408aa5",
+      "mean_delta2": 126.49444580078125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9419998526573181,
+        "error_per_pixel": 0.0006484400656197937,
+        "object_mask_iou": 0.9919517102615694
+      },
+      "svg": "svgs/AC0404_1_M.svg",
+      "svg_sha256": "74962bca02e826b100ec13559f8b0c8ff69fc362236c47aa7ee6ecaca16fd37f",
+      "variant": "AC0404_1_M"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_1_S.jpg",
+      "image_sha256": "1b94a11af2a95bd2140e41c0cf833c63ef009eaebb8ed926547d5fb2f9f6d10e",
+      "mean_delta2": 302.57000732421875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9487344026565552,
+        "error_per_pixel": 0.0015510445076212674,
+        "object_mask_iou": 0.9734513274336283
+      },
+      "svg": "svgs/AC0404_1_S.svg",
+      "svg_sha256": "d7008aeeb6250efb8e285d0c53dc68097dae9767d3f2d39ba618ca2bef6cc7c8",
+      "variant": "AC0404_1_S"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_2L_sia.jpg",
+      "image_sha256": "62039c3e6f427ceabbe63f7ab444f5b89117069575ffa74669aed77a736ce4c5",
+      "mean_delta2": 331.40374755859375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8229434490203857,
+        "error_per_pixel": 0.0016988529927391709,
+        "object_mask_iou": 0.9837310195227765
+      },
+      "svg": "svgs/AC0404_2L_sia.svg",
+      "svg_sha256": "7054c543a8c8ee0752ba2e93973aa02b4cf515624c608158006c5bf0af5d85e0",
+      "variant": "AC0404_2L_sia"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_2M_sia.jpg",
+      "image_sha256": "eacca5057a55fea059eff63d2fb606dbc3c3d86711e64349a27b6efe90d02b96",
+      "mean_delta2": 169.85888671875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9747438430786133,
+        "error_per_pixel": 0.0008707363153594771,
+        "object_mask_iou": 0.9670932358318098
+      },
+      "svg": "svgs/AC0404_2M_sia.svg",
+      "svg_sha256": "7bc126fac6b5a082f6f18323ee6be21154c0065573d1b19415a7d5df9e221a83",
+      "variant": "AC0404_2M_sia"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_2S_sia.jpg",
+      "image_sha256": "3bc8d7149a53ed3d22b52ca053b225f0a00468bf337a24a9b84906f2361d5ae8",
+      "mean_delta2": 116.8499984741211,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9641486406326294,
+        "error_per_pixel": 0.000599000376645501,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/AC0404_2S_sia.svg",
+      "svg_sha256": "c97f5ba30dcb5091a4379c8c8f6a4c9c24fb423998dc2ce47f1052199d22c2a7",
+      "variant": "AC0404_2S_sia"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_2_L.jpg",
+      "image_sha256": "4a6b268dd39524b11266dc6f900ffa79aa704a2de694f671c47d4a296b06e0be",
+      "mean_delta2": 306.088134765625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8948253393173218,
+        "error_per_pixel": 0.0015690792503684481,
+        "object_mask_iou": 0.9893238434163701
+      },
+      "svg": "svgs/AC0404_2_L.svg",
+      "svg_sha256": "6cfc70206569b86af3144b16b0dde98b699ea1c5320649dbef6de7ff5fc6adc6",
+      "variant": "AC0404_2_L"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_2_M.jpg",
+      "image_sha256": "f2e98e94ea8d35288898f89d00ff9ae229cccefbc8ca2fa68f66dbefd7c4a9be",
+      "mean_delta2": 103.88555908203125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9426430463790894,
+        "error_per_pixel": 0.000532541633125881,
+        "object_mask_iou": 0.9798387096774194
+      },
+      "svg": "svgs/AC0404_2_M.svg",
+      "svg_sha256": "3c0a898bac6e33f9236be34efe2711b4e4546562a7d36109800a28db1f994ee3",
+      "variant": "AC0404_2_M"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_2_S.jpg",
+      "image_sha256": "a5bac5f72aeeea8ea310b6febab2eefc740b608eac2df7ae0ba1a5ad82cd3ca1",
+      "mean_delta2": 154.31500244140625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9800332188606262,
+        "error_per_pixel": 0.0007910547350578303,
+        "object_mask_iou": 0.9866071428571429
+      },
+      "svg": "svgs/AC0404_2_S.svg",
+      "svg_sha256": "9717aac313e08fc5c9d5ecd188ad50c7e43baee80dc7af1c9b562329f8401ff9",
+      "variant": "AC0404_2_S"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_L.jpg",
+      "image_sha256": "f661665858345365ea676085bee25189d109222d09f0b028350cced37aabf2ea",
+      "mean_delta2": 122.6606216430664,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9488530158996582,
+        "error_per_pixel": 0.0006287869877896523,
+        "object_mask_iou": 0.9512534818941504
+      },
+      "svg": "svgs/AC0404_L.svg",
+      "svg_sha256": "51322a70081fad2bb1c26b7d2a7bcc5e30bbd1173545070c0bed57fd8adbd577",
+      "variant": "AC0404_L"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_L_sia.jpg",
+      "image_sha256": "39fbbcdb0b47007f4a18ac8eea20b5cc7cb1fd54a845b52129757e52c3194f16",
+      "mean_delta2": 132.24374389648438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9494144916534424,
+        "error_per_pixel": 0.0006779123101191048,
+        "object_mask_iou": 0.9429012345679012
+      },
+      "svg": "svgs/AC0404_L_sia.svg",
+      "svg_sha256": "5ae442ef72ae846171e55c99afa116fbc8f479f27016b21dbfcaf8f07c10a891",
+      "variant": "AC0404_L_sia"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_M.jpg",
+      "image_sha256": "205ee39ec322d803c236fb01a6b3b2fc66f760fd8bda9cbd8770d0335c40e1cd",
+      "mean_delta2": 117.4566650390625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9689583778381348,
+        "error_per_pixel": 0.0006021102911139947,
+        "object_mask_iou": 0.9625550660792952
+      },
+      "svg": "svgs/AC0404_M.svg",
+      "svg_sha256": "65eec8a9797994fe31031c42eecc807d55eebae614388634e6258291b9ccb008",
+      "variant": "AC0404_M"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_M_sia.jpg",
+      "image_sha256": "571e8a97703512e8d8565ad69055dca127da447d59ca804f684afcff0a9728bd",
+      "mean_delta2": 176.6266632080078,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9695360660552979,
+        "error_per_pixel": 0.0009054295179187893,
+        "object_mask_iou": 0.9546599496221663
+      },
+      "svg": "svgs/AC0404_M_sia.svg",
+      "svg_sha256": "55237c905cc07aeb50ec899834988ea777a334993f6dc1bca558b95531b7ddd3",
+      "variant": "AC0404_M_sia"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_S.jpg",
+      "image_sha256": "834ac4c8e17bfedae886b43f6c67c29c59eae31926799042ac669dffb77a2590",
+      "mean_delta2": 157.70249938964844,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9507107734680176,
+        "error_per_pixel": 0.0008084198353948401,
+        "object_mask_iou": 0.9333333333333333
+      },
+      "svg": "svgs/AC0404_S.svg",
+      "svg_sha256": "da67191361b21f383ac3be1a65d113bd7d5e9ba5b5079408ab9eacccb565c106",
+      "variant": "AC0404_S"
+    },
+    {
+      "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach links zeigt. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/left_pump_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0404_S_sia.jpg",
+      "image_sha256": "841fa2a4bf672701586c37a9426dea2d9d52e7f7e4c5b52d6853262410aaf3e8",
+      "mean_delta2": 136.0050048828125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9452172517776489,
+        "error_per_pixel": 0.0006971934121892221,
+        "object_mask_iou": 0.9166666666666666
+      },
+      "svg": "svgs/AC0404_S_sia.svg",
+      "svg_sha256": "1d5e5735d1ecf2a2aa5b2f7629588b285e5c06970a4b0b3ccca44bfed0eb70f5",
+      "variant": "AC0404_S_sia"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien: links von oben aussen nach unten innen und rechts spiegelbildlich. Beide Linien reichen bis an den Kreisrand. Dazwischen liegt ein T aus einem waagerechten oberen Querstrich und einem mittigen senkrechten Strich nach unten; der senkrechte Strich endet vor dem unteren Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/circle_linework_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0413_1_L.jpg",
+      "image_sha256": "22714a3f6677927fd9f6659ff84a68093507f51d904e0689328ebd67a4b6ac54",
+      "mean_delta2": 155.96063232421875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9512441754341125,
+        "error_per_pixel": 0.0007994906180915994,
+        "object_mask_iou": 0.9883527454242929
+      },
+      "svg": "svgs/AC0413_1_L.svg",
+      "svg_sha256": "b8eff111a2d390c4dddc0f136f9e525b3e8c184b36984fb8c5388faf4d9b0167",
+      "variant": "AC0413_1_L"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien: links von oben aussen nach unten innen und rechts spiegelbildlich. Beide Linien reichen bis an den Kreisrand. Dazwischen liegt ein T aus einem waagerechten oberen Querstrich und einem mittigen senkrechten Strich nach unten; der senkrechte Strich endet vor dem unteren Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/circle_linework_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0413_1_M.jpg",
+      "image_sha256": "cc916b1660307e6d797f2e68bebc761d3119ac64fc5b7c2348cba0e7e962f11e",
+      "mean_delta2": 257.7855529785156,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8790311813354492,
+        "error_per_pixel": 0.0013214689374779732,
+        "object_mask_iou": 0.9941520467836257
+      },
+      "svg": "svgs/AC0413_1_M.svg",
+      "svg_sha256": "391a3105284dd59ebc7de5372689f26afa8bf9d5a3d05ecfadce6baab51c7fab",
+      "variant": "AC0413_1_M"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien: links von oben aussen nach unten innen und rechts spiegelbildlich. Beide Linien reichen bis an den Kreisrand. Dazwischen liegt ein T aus einem waagerechten oberen Querstrich und einem mittigen senkrechten Strich nach unten; der senkrechte Strich endet vor dem unteren Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/circle_linework_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0413_1_S.jpg",
+      "image_sha256": "8e2f4adbeda350ec6051465c6cf97d1d9a0b088c835586c9f6bf60463eb9efb8",
+      "mean_delta2": 207.66000366210938,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9368157386779785,
+        "error_per_pixel": 0.0010645136673695214,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/AC0413_1_S.svg",
+      "svg_sha256": "072a14a61578a4832105c412916bf9fabf30d99fb6189014c1b6f9382eb11dae",
+      "variant": "AC0413_1_S"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien: links von oben aussen nach unten innen und rechts spiegelbildlich. Beide Linien reichen bis an den Kreisrand. Dazwischen liegt ein T aus einem waagerechten oberen Querstrich und einem mittigen senkrechten Strich nach unten; der senkrechte Strich endet vor dem unteren Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/circle_linework_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0413_2_L.jpg",
+      "image_sha256": "909dccc7d655a77d9f48167ca443fda6ac79e5a93f0fb9cbebc67657953c224b",
+      "mean_delta2": 73.1675033569336,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9747954607009888,
+        "error_per_pixel": 0.00037507370681498704,
+        "object_mask_iou": 0.992462311557789
+      },
+      "svg": "svgs/AC0413_2_L.svg",
+      "svg_sha256": "6899f731403eed973ef9f64e539035673f9a1ea4426a04b7f0bdf7a1df42547a",
+      "variant": "AC0413_2_L"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien: links von oben aussen nach unten innen und rechts spiegelbildlich. Beide Linien reichen bis an den Kreisrand. Dazwischen liegt ein T aus einem waagerechten oberen Querstrich und einem mittigen senkrechten Strich nach unten; der senkrechte Strich endet vor dem unteren Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/circle_linework_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0413_2_M.jpg",
+      "image_sha256": "ca7b28248078c9300cf6efbd67d96e845b144bad02f031c4cf57aa21cb208e9e",
+      "mean_delta2": 82.72000122070312,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9084222316741943,
+        "error_per_pixel": 0.00042404204137230875,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/AC0413_2_M.svg",
+      "svg_sha256": "dffcb6da6974c75bd7df51f4400091f605f23e1a3062f095241171ee38f9f9ab",
+      "variant": "AC0413_2_M"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien: links von oben aussen nach unten innen und rechts spiegelbildlich. Beide Linien reichen bis an den Kreisrand. Dazwischen liegt ein T aus einem waagerechten oberen Querstrich und einem mittigen senkrechten Strich nach unten; der senkrechte Strich endet vor dem unteren Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/circle_linework_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0413_2_S.jpg",
+      "image_sha256": "00c084faf710a9264046daef310d883e9958f1137e83547e62fe6c0c3ce8aa03",
+      "mean_delta2": 152.80499267578125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9280898571014404,
+        "error_per_pixel": 0.000783314072412053,
+        "object_mask_iou": 0.9968354430379747
+      },
+      "svg": "svgs/AC0413_2_S.svg",
+      "svg_sha256": "8f2f68276ad280943d220e5843f176a3c269a927b9143e2ded5322983b5c2573",
+      "variant": "AC0413_2_S"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien: links von oben aussen nach unten innen und rechts spiegelbildlich. Beide Linien reichen bis an den Kreisrand. Dazwischen liegt ein T aus einem waagerechten oberen Querstrich und einem mittigen senkrechten Strich nach unten; der senkrechte Strich endet vor dem unteren Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/circle_linework_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0413_L.jpg",
+      "image_sha256": "629b9193f1075d7008b425c63f5dcd01c5254c7e68cfb5f0eb0eb028920aa0c6",
+      "mean_delta2": 103.12875366210938,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.963180661201477,
+        "error_per_pixel": 0.0005286620718293445,
+        "object_mask_iou": 0.9665653495440729
+      },
+      "svg": "svgs/AC0413_L.svg",
+      "svg_sha256": "0c4c2e6ae8f3ab98c5c3a2b143e59926c0422f95598d976c8b25bfff23dc8b37",
+      "variant": "AC0413_L"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien: links von oben aussen nach unten innen und rechts spiegelbildlich. Beide Linien reichen bis an den Kreisrand. Dazwischen liegt ein T aus einem waagerechten oberen Querstrich und einem mittigen senkrechten Strich nach unten; der senkrechte Strich endet vor dem unteren Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/circle_linework_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0413_M.jpg",
+      "image_sha256": "df26f42d3c01c68007e84a55d5de17e372b021b0f7ee77a7c21276917ef47d71",
+      "mean_delta2": 165.63999938964844,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8970178365707397,
+        "error_per_pixel": 0.0008491093138005815,
+        "object_mask_iou": 0.9695431472081218
+      },
+      "svg": "svgs/AC0413_M.svg",
+      "svg_sha256": "6a19344d5bb520260fdecd93b9710910a3121e728dedef5cf2e58496cf230082",
+      "variant": "AC0413_M"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien: links von oben aussen nach unten innen und rechts spiegelbildlich. Beide Linien reichen bis an den Kreisrand. Dazwischen liegt ein T aus einem waagerechten oberen Querstrich und einem mittigen senkrechten Strich nach unten; der senkrechte Strich endet vor dem unteren Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/circle_linework_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0413_S.jpg",
+      "image_sha256": "2c14d4ad5a300dbf22f85bed587739ca4f0f9acc36598282b7a528ea308e614b",
+      "mean_delta2": 106.67250061035156,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8482447862625122,
+        "error_per_pixel": 0.0005468281461507193,
+        "object_mask_iou": 0.88
+      },
+      "svg": "svgs/AC0413_S.svg",
+      "svg_sha256": "56e8b1f639fc408d33c557c5f4572eefcb9b60e4f83cb44ab973934c4bbbee78",
+      "variant": "AC0413_S"
+    },
+    {
+      "description": "Kelle mit Quadrat, 180\u00b0 gedreht. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der oberen Quadratseite nach oben f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/top_stem_marked_square_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0713_1_L.jpg",
+      "image_sha256": "98403ed0b3fb0d885e8c4375934b774fe4968d4d9f4f7cb9f5b1e40487dd4d36",
+      "mean_delta2": 120.84711456298828,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9940720200538635,
+        "error_per_pixel": 0.0006194905270433847,
+        "object_mask_iou": 0.9967105263157895
+      },
+      "svg": "svgs/AC0713_1_L.svg",
+      "svg_sha256": "b2cd3c82c24fad23e1c8524ff1d3800cc3cc28937d87f29fa9f934813580a4b3",
+      "variant": "AC0713_1_L"
+    },
+    {
+      "description": "Kelle mit Quadrat, 180\u00b0 gedreht. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der oberen Quadratseite nach oben f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/top_stem_marked_square_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0713_1_M.jpg",
+      "image_sha256": "829804774d00eedb6dafaa61ebcf403e4572df6f34b8144f8b75b4531f30186f",
+      "mean_delta2": 97.67713928222656,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9583562016487122,
+        "error_per_pixel": 0.0005007158235664568,
+        "object_mask_iou": 0.9951807228915662
+      },
+      "svg": "svgs/AC0713_1_M.svg",
+      "svg_sha256": "17633c427a94a73a78754240e184f49de97e066b3d9eb17ddb5406fd6c7d1495",
+      "variant": "AC0713_1_M"
+    },
+    {
+      "description": "Kelle mit Quadrat, 180\u00b0 gedreht. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der oberen Quadratseite nach oben f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/top_stem_marked_square_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0713_1_S.jpg",
+      "image_sha256": "e0395983c2533881c0fcc850d1ffa51e74802528196b6f8b63b81207d2a5ffb3",
+      "mean_delta2": 90.65599822998047,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9428681135177612,
+        "error_per_pixel": 0.00046472381509665754,
+        "object_mask_iou": 0.9953917050691244
+      },
+      "svg": "svgs/AC0713_1_S.svg",
+      "svg_sha256": "99b8381c4899793c5d1fcd440aa079b115853ae80adb9a9ce242ec3f9af78a23",
+      "variant": "AC0713_1_S"
+    },
+    {
+      "description": "Kelle mit Quadrat, 180\u00b0 gedreht. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der oberen Quadratseite nach oben f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/top_stem_marked_square_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0713_L.jpg",
+      "image_sha256": "6a4fcf26bf26f7936fc2bb57cf789ea8166e702b0fe7fe39ac78fb3f2bad49bd",
+      "mean_delta2": 15.842666625976562,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9929643869400024,
+        "error_per_pixel": 8.121320838639786e-05,
+        "object_mask_iou": 0.9912663755458515
+      },
+      "svg": "svgs/AC0713_L.svg",
+      "svg_sha256": "452b44136d52c1b098f95a656540e49a4e6a30c3a231e05792550a0141c67961",
+      "variant": "AC0713_L"
+    },
+    {
+      "description": "Kelle mit Quadrat, 180\u00b0 gedreht. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der oberen Quadratseite nach oben f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/top_stem_marked_square_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0713_M.jpg",
+      "image_sha256": "d253bf6eb13df6468c399e5e8443d9f46897d0cfd6ac864a6bbd801d1eeeed66",
+      "mean_delta2": 46.255714416503906,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.894823431968689,
+        "error_per_pixel": 0.00023711759280535132,
+        "object_mask_iou": 0.9753694581280788
+      },
+      "svg": "svgs/AC0713_M.svg",
+      "svg_sha256": "5062e7ee5ccf12357c7639f6e850e55ccfd192f990451572cf1a6bf3e29df7da",
+      "variant": "AC0713_M"
+    },
+    {
+      "description": "Kelle mit Quadrat, 180\u00b0 gedreht. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der oberen Quadratseite nach oben f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/top_stem_marked_square_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0713_S.jpg",
+      "image_sha256": "f1bbde86c05ff12b05164ae6725152c41b4f7e41996a982efdab6b4b76268ee8",
+      "mean_delta2": 19.520000457763672,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9631577134132385,
+        "error_per_pixel": 0.00010006408026535267,
+        "object_mask_iou": 0.9880952380952381
+      },
+      "svg": "svgs/AC0713_S.svg",
+      "svg_sha256": "fe9fa3fa0b3822888f18ce6ccd40e8e6390a830e6774558359be7d9c4d9b6f3e",
+      "variant": "AC0713_S"
+    },
+    {
+      "description": "Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "artifacts/evaluation/diagonal_square_kelle_recheck_v1/report_2026-10-04.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0724_1_L.jpg",
+      "image_sha256": "291c9425fd368af1f541780f76aaae0a49590252e9d24312e5a2ce6e84564d93",
+      "mean_delta2": 514.8728637695312,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8940659761428833,
+        "error_per_pixel": 0.0026393585224633153,
+        "object_mask_iou": 0.9192751235584844
+      },
+      "svg": "svgs/AC0724_1_L.svg",
+      "svg_sha256": "fd4fe38ca13475276108a6b1af155f5563483694e090cb91b3d267292f7b97ad",
+      "variant": "AC0724_1_L"
+    },
+    {
+      "description": "Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "artifacts/evaluation/diagonal_square_kelle_recheck_v1/report_2026-10-04.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0724_1_M.jpg",
+      "image_sha256": "1823b779463eda88efa7e809862c58fa4557e54601f57e61196ad611496b857c",
+      "mean_delta2": 424.8228454589844,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9170145988464355,
+        "error_per_pixel": 0.0021777411019299467,
+        "object_mask_iou": 0.9315789473684211
+      },
+      "svg": "svgs/AC0724_1_M.svg",
+      "svg_sha256": "2a3cbe47cef78ca7383717ba519e82ff8eeb38cc8b88943951219f4613b5c8a1",
+      "variant": "AC0724_1_M"
+    },
+    {
+      "description": "Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "artifacts/evaluation/diagonal_square_kelle_recheck_v1/report_2026-10-04.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0724_1_S.jpg",
+      "image_sha256": "5aa59da3798ebde025ab259473401da08c4188e5921e513ef22155ab8115a2c1",
+      "mean_delta2": 569.9146728515625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8421894311904907,
+        "error_per_pixel": 0.0029215156880767015,
+        "object_mask_iou": 0.985781990521327
+      },
+      "svg": "svgs/AC0724_1_S.svg",
+      "svg_sha256": "507284ad80a02256df21a98765e278df47d207d834b2c972d043ee15ffcab009",
+      "variant": "AC0724_1_S"
+    },
+    {
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"P\" im Quadrat.",
+      "evidence": "artifacts/evaluation/labeled_square_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0731_1_L.jpg",
+      "image_sha256": "134a29e123cad290b76e710b5a6dfe020c3450ce35c159f17a1943cb57c22cd6",
+      "mean_delta2": 920.249755859375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9642179012298584,
+        "error_per_pixel": 0.004717415126794182,
+        "object_mask_iou": 0.9435215946843853
+      },
+      "svg": "svgs/AC0731_1_L.svg",
+      "svg_sha256": "602d3f946c50d8d55ec3345116c63394f11b7912c29369ca305a4f95f0fa5068",
+      "variant": "AC0731_1_L"
+    },
+    {
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"P\" im Quadrat.",
+      "evidence": "artifacts/evaluation/labeled_square_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0731_1_M.jpg",
+      "image_sha256": "cbdc8e15414808573217535ec0ecc666379a83afc94ba063f3942c706141dd9e",
+      "mean_delta2": 1074.28857421875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9179969429969788,
+        "error_per_pixel": 0.005507054077758555,
+        "object_mask_iou": 0.9276807980049875
+      },
+      "svg": "svgs/AC0731_1_M.svg",
+      "svg_sha256": "bdaedad1d8069fcc5ecee02c0831a41a663e3cce1d895d7e3031498d506f8bcd",
+      "variant": "AC0731_1_M"
+    },
+    {
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"P\" im Quadrat.",
+      "evidence": "artifacts/evaluation/labeled_square_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0731_1_S.jpg",
+      "image_sha256": "485311d15070b9c1827b98960b5b4aa7fdb3c1eb31d76b8c381d0aa1e6897d61",
+      "mean_delta2": 490.6000061035156,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9484955072402954,
+        "error_per_pixel": 0.0025149301863566097,
+        "object_mask_iou": 0.9903846153846154
+      },
+      "svg": "svgs/AC0731_1_S.svg",
+      "svg_sha256": "35f1c00f71c7c357b7007e7ebf2d7a281627f573685e2d63dbe4025bc566dcea",
+      "variant": "AC0731_1_S"
+    },
+    {
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"P\" im Quadrat.",
+      "evidence": "artifacts/evaluation/labeled_square_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0731_L.jpg",
+      "image_sha256": "f115118060c6dc05b3e3e2c892388063e3859241cc42ae6e37583d4a96ba35c0",
+      "mean_delta2": 884.0106811523438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7553200721740723,
+        "error_per_pixel": 0.0045316451680243175,
+        "object_mask_iou": 0.8429003021148036
+      },
+      "svg": "svgs/AC0731_L.svg",
+      "svg_sha256": "d85a254c814943ac7b4b68150c67079a421d3e618ae7eb4257ffaaef071a3524",
+      "variant": "AC0731_L"
+    },
+    {
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"P\" im Quadrat.",
+      "evidence": "artifacts/evaluation/labeled_square_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0731_M.jpg",
+      "image_sha256": "724f295c1202325ced7cd585890842be26ee9ca389d25ad0ae91aa088e6086f1",
+      "mean_delta2": 441.5228576660156,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8102572560310364,
+        "error_per_pixel": 0.0022633492639549694,
+        "object_mask_iou": 0.9112149532710281
+      },
+      "svg": "svgs/AC0731_M.svg",
+      "svg_sha256": "31c1ad2f4a7d197dd91dd142dfcf08f0383ac2fe790a67bb43f64eed2b9a2379",
+      "variant": "AC0731_M"
+    },
+    {
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"P\" im Quadrat.",
+      "evidence": "artifacts/evaluation/labeled_square_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0731_S.jpg",
+      "image_sha256": "c48f97cbea31894f9abc749acda97eb04c230b4ebd789cb48d94ff1440053f96",
+      "mean_delta2": 548.7520141601562,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.798931360244751,
+        "error_per_pixel": 0.0028130309581451043,
+        "object_mask_iou": 0.8207547169811321
+      },
+      "svg": "svgs/AC0731_S.svg",
+      "svg_sha256": "cdff717bb3f8c27f2a120df3e5043d4687e5cee5fdf4f3a98d28e6a106b5a8e7",
+      "variant": "AC0731_S"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0800_L.jpg",
+      "image_sha256": "a8bd677ee9d38c7c6f09fabb192487f366791b24d804ae8edeb6d172b46eb530",
+      "mean_delta2": 626.5999755859375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9599215984344482,
+        "error_per_pixel": 0.0032120977859076637,
+        "object_mask_iou": 0.6493506493506493
+      },
+      "svg": "svgs/AC0800_L.svg",
+      "svg_sha256": "6ecb1052cf683bd0a0a7b543d5c7f9e4372a1a61914f102fefa6959192fac796",
+      "variant": "AC0800_L"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0800_M.jpg",
+      "image_sha256": "87e678f9eba18756dccfb9e992990fd8335b43f729f323a1d960ba5f47dcb735",
+      "mean_delta2": 53.90999984741211,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9857594966888428,
+        "error_per_pixel": 0.00027635524719934443,
+        "object_mask_iou": 0.9101123595505618
+      },
+      "svg": "svgs/AC0800_M.svg",
+      "svg_sha256": "d4811bde79b9d680f346e6c2fa55e875142c9e1c46967ff970aef7b9b1a4e0b4",
+      "variant": "AC0800_M"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0800_S.jpg",
+      "image_sha256": "440062acb856fb9b0e4162fe7efcb032570d308c530fd12a006777d938260142",
+      "mean_delta2": 893.7999877929688,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.6723880171775818,
+        "error_per_pixel": 0.004581827439666635,
+        "object_mask_iou": 0.5405405405405406
+      },
+      "svg": "svgs/AC0800_S.svg",
+      "svg_sha256": "03ef94878f5dd9e93bab34e6a0185976b44b36c72c9deac2998b9133715771d6",
+      "variant": "AC0800_S"
+    },
+    {
+      "description": "Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0811_L.jpg",
+      "image_sha256": "21c24c5222318989942e222eadf1f60dd91aa8f9397db552d09fcae7cf356e02",
+      "mean_delta2": 541.8319702148438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8956874012947083,
+        "error_per_pixel": 0.0027775571970516146,
+        "object_mask_iou": 0.7288135593220338
+      },
+      "svg": "svgs/AC0811_L.svg",
+      "svg_sha256": "eeae2524154dbaf4fc814335f6170a0eb0826baa37fd26684cc1edd7c22f4808",
+      "variant": "AC0811_L"
+    },
+    {
+      "description": "Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0811_M.jpg",
+      "image_sha256": "970e919d373d49c7dbfa7a729b215ed347a854b781006d1049b711ff2714ed0e",
+      "mean_delta2": 1168.22998046875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8247063755989075,
+        "error_per_pixel": 0.005988619661508394,
+        "object_mask_iou": 0.6370967741935484
+      },
+      "svg": "svgs/AC0811_M.svg",
+      "svg_sha256": "5bb57adc966b2a9ed5cdc63976882e35ad32ee41e8f5cddd5cc44c8ab48b1b99",
+      "variant": "AC0811_M"
+    },
+    {
+      "description": "Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0811_S.jpg",
+      "image_sha256": "eb283193845c8b064085aee79cac9f813e6e854ab2fc7bdab2855bd8d3ffdaec",
+      "mean_delta2": 1066.4560546875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8945163488388062,
+        "error_per_pixel": 0.005466902753748558,
+        "object_mask_iou": 0.8285714285714286
+      },
+      "svg": "svgs/AC0811_S.svg",
+      "svg_sha256": "b7b99d598533d71039ba0db3e11e29843df80106c40ef879c160daef14b2914e",
+      "variant": "AC0811_S"
+    },
+    {
+      "description": "Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0812_L.jpg",
+      "image_sha256": "a42abd8d3484ca06c1b7910e71457c006df4529301031a5a4b99797b2598e5fa",
+      "mean_delta2": 819.7333374023438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8715229630470276,
+        "error_per_pixel": 0.004202144495206171,
+        "object_mask_iou": 0.5965909090909091
+      },
+      "svg": "svgs/AC0812_L.svg",
+      "svg_sha256": "30d31f317a6947321c0792734e0e13fe06963bbb5e81dfe3ef22cefa69148cd5",
+      "variant": "AC0812_L"
+    },
+    {
+      "description": "Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0812_M.jpg",
+      "image_sha256": "b2431de56a3921e09148140a95ef29dd9d888e14d023f83dbe92105518a6449f",
+      "mean_delta2": 1687.8685302734375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7605940699577332,
+        "error_per_pixel": 0.008652408203375305,
+        "object_mask_iou": 0.6065573770491803
+      },
+      "svg": "svgs/AC0812_M.svg",
+      "svg_sha256": "25a66d92b5570e1371dc43c6097cbeef7e8945a55f8d387eb2da17117d8dd8be",
+      "variant": "AC0812_M"
+    },
+    {
+      "description": "Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0812_S.jpg",
+      "image_sha256": "c62fd731e1444dd586e73d990108163cd134823d24c4c3aa2375bdd94cfd8be3",
+      "mean_delta2": 697.1680297851562,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8892000913619995,
+        "error_per_pixel": 0.003573846109368993,
+        "object_mask_iou": 0.6805555555555556
+      },
+      "svg": "svgs/AC0812_S.svg",
+      "svg_sha256": "1ba1c8ae6fa1f82f13157bc15d5b85bbcb05a14f96e4fcf56c6f5bac371fcd92",
+      "variant": "AC0812_S"
+    },
+    {
+      "description": "Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 180\u00b0 gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0813_L.jpg",
+      "image_sha256": "a47adfe769d534d92e547933600ec7dc55ecd032b588fb07884c10ae869f32e4",
+      "mean_delta2": 899.5973510742188,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8641512393951416,
+        "error_per_pixel": 0.004611546077530277,
+        "object_mask_iou": 0.5337078651685393
+      },
+      "svg": "svgs/AC0813_L.svg",
+      "svg_sha256": "1493284ae4fa299c312aeecb07fe22f50e247f4bbca9a6668b7edf9c11354975",
+      "variant": "AC0813_L"
+    },
+    {
+      "description": "Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 180\u00b0 gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0813_M.jpg",
+      "image_sha256": "103906e3c00ad75190d7c703f4096f8948a4541df409e6c60f4f9c9d67bac709",
+      "mean_delta2": 2135.357177734375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.702858567237854,
+        "error_per_pixel": 0.010946339498830579,
+        "object_mask_iou": 0.5555555555555556
+      },
+      "svg": "svgs/AC0813_M.svg",
+      "svg_sha256": "ae60d707ee61db8d65ddb441e0727620e76317bf5852fe230dbeb9e3ed46401c",
+      "variant": "AC0813_M"
+    },
+    {
+      "description": "Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 180\u00b0 gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0813_S.jpg",
+      "image_sha256": "a2e3d6820bc6b3b5964d04383f5e4cf8f29135b4389f16a0c546236079c8ebf7",
+      "mean_delta2": 740.7520141601562,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8810561895370483,
+        "error_per_pixel": 0.0037972677901328016,
+        "object_mask_iou": 0.6527777777777778
+      },
+      "svg": "svgs/AC0813_S.svg",
+      "svg_sha256": "119c057e2f5fc5bd052357fb030142c97b85fd41e8447380fd36b79e1c3e3709",
+      "variant": "AC0813_S"
+    },
+    {
+      "description": "Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90\u00b0 nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0814_L.jpg",
+      "image_sha256": "0a063bd8ff494f6559a9fecbb2db2307640814d6c062dec0e8f74f183c7b6aa6",
+      "mean_delta2": 483.64801025390625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8647319078445435,
+        "error_per_pixel": 0.0024792926323409267,
+        "object_mask_iou": 0.7344632768361582
+      },
+      "svg": "svgs/AC0814_L.svg",
+      "svg_sha256": "4821af38910c11170fc565315ecdddbe17a29ebc6b2cf1a7f34da22fbdd3b33b",
+      "variant": "AC0814_L"
+    },
+    {
+      "description": "Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90\u00b0 nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0814_M.jpg",
+      "image_sha256": "f447bc301f5158e53c54edb2c07db80e52d2cd3b1a3a2d3db18200367f507262",
+      "mean_delta2": 1168.48291015625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7379320859909058,
+        "error_per_pixel": 0.005989916238145585,
+        "object_mask_iou": 0.6423357664233577
+      },
+      "svg": "svgs/AC0814_M.svg",
+      "svg_sha256": "f71f4d53826c0e10892091eb7a206b62c09101951dea0560b2f49aa877f5471d",
+      "variant": "AC0814_M"
+    },
+    {
+      "description": "Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90\u00b0 nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0814_S.jpg",
+      "image_sha256": "f45e472c9c9725c03b2ef27baa06043ac9739c960f4aab76f9f6d4e84fae0379",
+      "mean_delta2": 748.719970703125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8946519494056702,
+        "error_per_pixel": 0.0038381133958894013,
+        "object_mask_iou": 0.6527777777777778
+      },
+      "svg": "svgs/AC0814_S.svg",
+      "svg_sha256": "aa7b3993ddbfcb6f52edf175a9cdf18674db209cbbf78526fb96f131cbcf3259",
+      "variant": "AC0814_S"
+    },
+    {
+      "description": "Wie AC0800, Text \"CO^2\" (Die 2 ist hochgestellt)",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0820_L.jpg",
+      "image_sha256": "7094ca88857bfc7622d7ddbf66f8f0b6b0d3169a8c4cacd19135b38fbe239658",
+      "mean_delta2": 7868.20654296875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5096412897109985,
+        "error_per_pixel": 0.040334263964981416,
+        "object_mask_iou": 0.29859154929577464
+      },
+      "svg": "svgs/AC0820_L.svg",
+      "svg_sha256": "aff70ae26737f90759502ae806812f3a4b1f62e6030caa99ceea0d6316243a7e",
+      "variant": "AC0820_L"
+    },
+    {
+      "description": "Wie AC0800, Text \"CO^2\" (Die 2 ist hochgestellt)",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0820_M.jpg",
+      "image_sha256": "29936bf8f6482303d10fb0ff37d1d5b769fb2fc06efe6e22febd6d2f658b6a58",
+      "mean_delta2": 6335.06982421875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.6852086782455444,
+        "error_per_pixel": 0.03247504715734333,
+        "object_mask_iou": 0.3870967741935484
+      },
+      "svg": "svgs/AC0820_M.svg",
+      "svg_sha256": "e663d708e20053542158196f6359323359ce94d9430c3eeff344754761d66a6e",
+      "variant": "AC0820_M"
+    },
+    {
+      "description": "Wie AC080, jedoch Griff unten (als Kelle ausfef\u00fchrt). Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0831_L.jpg",
+      "image_sha256": "275698429c8ed49fa4f1d362d56010de027aad15839679654b908aaa14cc09c0",
+      "mean_delta2": 4602.1572265625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5508603453636169,
+        "error_per_pixel": 0.02359173254677688,
+        "object_mask_iou": 0.38311688311688313
+      },
+      "svg": "svgs/AC0831_L.svg",
+      "svg_sha256": "cf45b0d75c51eccdbf01b2753d427b58c649f7fa08b06992030265bcd297d4dc",
+      "variant": "AC0831_L"
+    },
+    {
+      "description": "Wie AC080, jedoch Griff unten (als Kelle ausfef\u00fchrt). Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0831_M.jpg",
+      "image_sha256": "9f84ba73a01e13134219904e1280315d5f660f98569aa5f1da4b32cdf626f6cf",
+      "mean_delta2": 5450.80712890625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.531222939491272,
+        "error_per_pixel": 0.027942110105888762,
+        "object_mask_iou": 0.32019704433497537
+      },
+      "svg": "svgs/AC0831_M.svg",
+      "svg_sha256": "6a8f56c03a957561a56a65165c040a41dc5dfbbff9d3d0984185091b3cbc175f",
+      "variant": "AC0831_M"
+    },
+    {
+      "description": "Wie AC080, jedoch Griff unten (als Kelle ausfef\u00fchrt). Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0831_S.jpg",
+      "image_sha256": "95c3d122fa45068b6e81cd6b712396dbac591b6970033813371609c22e036091",
+      "mean_delta2": 3908.719970703125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7527501583099365,
+        "error_per_pixel": 0.020037011255686916,
+        "object_mask_iou": 0.46616541353383456
+      },
+      "svg": "svgs/AC0831_S.svg",
+      "svg_sha256": "fda925209e19569edcefdf01cabba0d261eba98b349fe48faf3cce4bf76bac94",
+      "variant": "AC0831_S"
+    },
+    {
+      "description": "Wie AC0832, jedoch nach rechts gedreht, Text immer noch horizontal",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0832_L.jpg",
+      "image_sha256": "0bd130a8fcb27f6060bec3c4f1d5d8111976b2fba2d730481c36b2344fd66eef",
+      "mean_delta2": 5384.21875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.6096283197402954,
+        "error_per_pixel": 0.027600762527233116,
+        "object_mask_iou": 0.30158730158730157
+      },
+      "svg": "svgs/AC0832_L.svg",
+      "svg_sha256": "d0c698efb1718539babb7993c2f7c688484662ebad8a99fe316fcdfe63ea1357",
+      "variant": "AC0832_L"
+    },
+    {
+      "description": "Wie AC0832, jedoch nach rechts gedreht, Text immer noch horizontal",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0832_M.jpg",
+      "image_sha256": "9a3d3f1f6fca80013eabfaff08abce9166da9da06a0b1dc230589c89d0a72a72",
+      "mean_delta2": 5257.18701171875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5493642687797546,
+        "error_per_pixel": 0.02694956817490068,
+        "object_mask_iou": 0.39896373056994816
+      },
+      "svg": "svgs/AC0832_M.svg",
+      "svg_sha256": "16a8c7bca67f8fdf0b0e079edb0deefce7355df852c1c56099367d1a41b8746c",
+      "variant": "AC0832_M"
+    },
+    {
+      "description": "Wie AC0832, jedoch nach rechts gedreht, Text immer noch horizontal",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0832_S.jpg",
+      "image_sha256": "14bed2405b0a69e966e5ce45e4b8c1f45ec2c8724398f5b68d72abaa8626e1f3",
+      "mean_delta2": 2578.0400390625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7638372778892517,
+        "error_per_pixel": 0.0132156352124183,
+        "object_mask_iou": 0.5535714285714286
+      },
+      "svg": "svgs/AC0832_S.svg",
+      "svg_sha256": "75ff40b970e76e947128389007edf6b451f43229761043b8843cb74d1968fe55",
+      "variant": "AC0832_S"
+    },
+    {
+      "description": "Wie AC080, jedoch Griff unten (als Kelle ausfef\u00fchrt) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0834_L.jpg",
+      "image_sha256": "fa72ba7181311c1ef974df81bd2e0c71d095e3e43de787bf2561c51a1065ace9",
+      "mean_delta2": 3420.221435546875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7812297940254211,
+        "error_per_pixel": 0.01753285370009932,
+        "object_mask_iou": 0.38022813688212925
+      },
+      "svg": "svgs/AC0834_L.svg",
+      "svg_sha256": "6c248c87355e432744f02176e92e873904e587bb94590af8a0fe74b9b48dee77",
+      "variant": "AC0834_L"
+    },
+    {
+      "description": "Wie AC080, jedoch Griff unten (als Kelle ausfef\u00fchrt) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0834_M.jpg",
+      "image_sha256": "a61b025eaa0cd2c5e69b26c3e85af7fbe1b6e6510d71174c0840b8e60d6f2833",
+      "mean_delta2": 3353.935791015625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7681938409805298,
+        "error_per_pixel": 0.017193058008538382,
+        "object_mask_iou": 0.5340909090909091
+      },
+      "svg": "svgs/AC0834_M.svg",
+      "svg_sha256": "4f492cbe9aecca45c8065aa5bb07ba5f883508bead311d6c2132b3708efc1089",
+      "variant": "AC0834_M"
+    },
+    {
+      "description": "Wie AC080, jedoch Griff unten (als Kelle ausfef\u00fchrt) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0834_S.jpg",
+      "image_sha256": "53a34a33cc2832151d12ab17b3c5cb28eac700f2c19f252d1cd2822aee16da0e",
+      "mean_delta2": 2949.199951171875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7758655548095703,
+        "error_per_pixel": 0.015118287587706652,
+        "object_mask_iou": 0.5221238938053098
+      },
+      "svg": "svgs/AC0834_S.svg",
+      "svg_sha256": "ff11552f61f45b84949244b6ae761e6806337fa0ea511a6d7d3e2acf5288785d",
+      "variant": "AC0834_S"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0835_L.jpg",
+      "image_sha256": "c8c7deaa3e56d3e17de1a864b5cd6fda7bf49824faf29d66bda58f75d700928b",
+      "mean_delta2": 7044.01416015625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5578801035881042,
+        "error_per_pixel": 0.03610926136181597,
+        "object_mask_iou": 0.3877551020408163
+      },
+      "svg": "svgs/AC0835_L.svg",
+      "svg_sha256": "790ce63a8b02383fd14982757a9b2bbcd0c6b9163c1694852c3cac7e783aa889",
+      "variant": "AC0835_L"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0835_M.jpg",
+      "image_sha256": "59bed43a01f7477b0cd3bba57136bd1e84d14e7d5164ad7cf654498b47e7dc53",
+      "mean_delta2": 7424.03271484375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.6411895751953125,
+        "error_per_pixel": 0.03805732520745226,
+        "object_mask_iou": 0.35353535353535354
+      },
+      "svg": "svgs/AC0835_M.svg",
+      "svg_sha256": "a0e3cbf27c3e2aa86fbb6890bdc26b2aeabab893303abe9365295785208667f2",
+      "variant": "AC0835_M"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0835_S.jpg",
+      "image_sha256": "f4a3aed05e5d5b1a3dc51bbebf112a7400f2dc2ca876c9f57ead14bcd117e147",
+      "mean_delta2": 5818.533203125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.6385955810546875,
+        "error_per_pixel": 0.02982715982634884,
+        "object_mask_iou": 0.42735042735042733
+      },
+      "svg": "svgs/AC0835_S.svg",
+      "svg_sha256": "9606f8376cbd603651ae8158c6830c738c885032d1085c2f0d3a2c79a27e3eaa",
+      "variant": "AC0835_S"
+    },
+    {
+      "description": "Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: \"VOC\". Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0836_L.jpg",
+      "image_sha256": "9bd8b3c3cdff0eccf78352b370fb709305e18128029713db9b50bca1ea1de474",
+      "mean_delta2": 5102.861328125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.541184663772583,
+        "error_per_pixel": 0.026158458685761887,
+        "object_mask_iou": 0.343042071197411
+      },
+      "svg": "svgs/AC0836_L.svg",
+      "svg_sha256": "d83aba275f9f862b9170630cb445cad1f9acf52a989a0e0505370de695589e58",
+      "variant": "AC0836_L"
+    },
+    {
+      "description": "Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: \"VOC\". Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0836_M.jpg",
+      "image_sha256": "ecda4a3c7dba24a38ccd8c4637c098d2f2f47e78090eaa044b0af4fb7a70df02",
+      "mean_delta2": 5446.5986328125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5457701683044434,
+        "error_per_pixel": 0.02792053637222863,
+        "object_mask_iou": 0.3702127659574468
+      },
+      "svg": "svgs/AC0836_M.svg",
+      "svg_sha256": "4a06064eb2fd66ad580da51d9b5e0a2cba3332e006e8cfb46d4ab714131d04dc",
+      "variant": "AC0836_M"
+    },
+    {
+      "description": "Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: \"VOC\". Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0836_S.jpg",
+      "image_sha256": "0e1928b51e133eda8e3e221580618c6d6155c867ccae4610ad2e5013f5952e65",
+      "mean_delta2": 3724.35205078125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8005273342132568,
+        "error_per_pixel": 0.019091898248269897,
+        "object_mask_iou": 0.4013605442176871
+      },
+      "svg": "svgs/AC0836_S.svg",
+      "svg_sha256": "d67ec5773337dcbcedae57aa3bb49594231f7c27a6615d291d3953eb6d3bae7f",
+      "variant": "AC0836_S"
+    },
+    {
+      "description": "Wie AC0836, jedoch 90\u00b0 nach links gedreht. Der Griff verl\u00e4uft waagrecht nach links, der Text \"VOC\" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0837_L.jpg",
+      "image_sha256": "8f42c0259d0125cdf7909a3877045b04ee8a45c04011b1b71eb94f33d50c7e41",
+      "mean_delta2": 5889.50146484375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5675220489501953,
+        "error_per_pixel": 0.030190959707003716,
+        "object_mask_iou": 0.3249211356466877
+      },
+      "svg": "svgs/AC0837_L.svg",
+      "svg_sha256": "b477d241c779876e5a40d572f90e45706b008a860d6bc80855469040ebed1236",
+      "variant": "AC0837_L"
+    },
+    {
+      "description": "Wie AC0836, jedoch 90\u00b0 nach links gedreht. Der Griff verl\u00e4uft waagrecht nach links, der Text \"VOC\" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0837_M.jpg",
+      "image_sha256": "5361e92fab4f4f71fe03a6d99bae6de8492ac6d0605e046f872908b33c93f41d",
+      "mean_delta2": 6737.27587890625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.5636787414550781,
+        "error_per_pixel": 0.03453684930875945,
+        "object_mask_iou": 0.2869198312236287
+      },
+      "svg": "svgs/AC0837_M.svg",
+      "svg_sha256": "7f1135e7b4c71c63aec620147521ad824118ca81ef3c7720cfbb6efea6790c4b",
+      "variant": "AC0837_M"
+    },
+    {
+      "description": "Wie AC0836, jedoch 90\u00b0 nach links gedreht. Der Griff verl\u00e4uft waagrecht nach links, der Text \"VOC\" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0837_S.jpg",
+      "image_sha256": "cc5fd61dba23d6813488d8ff184c272bdd5175599b3efa5d6276fff3192e100e",
+      "mean_delta2": 5215.50390625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.6515949964523315,
+        "error_per_pixel": 0.02673589084326541,
+        "object_mask_iou": 0.36619718309859156
+      },
+      "svg": "svgs/AC0837_S.svg",
+      "svg_sha256": "496aaa92c075e3ea15fbf3d8c9327617223e5b6aa50b032d5ffa8518f4bd78d7",
+      "variant": "AC0837_S"
+    },
+    {
+      "description": "Wie AC0836, jedoch in der gegen\u00fcberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text \"VOC\" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0838_M.jpg",
+      "image_sha256": "e4b830dc45ff9663ca3557f13521acd6d61927c6c930c4ce340bab2198a2a9de",
+      "mean_delta2": 7789.17431640625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.529773473739624,
+        "error_per_pixel": 0.039929126317602204,
+        "object_mask_iou": 0.27125506072874495
+      },
+      "svg": "svgs/AC0838_M.svg",
+      "svg_sha256": "41c56b981d4cb89e1a75d3f15ac470f206ae0aa5315b0862c0df6a7f13461edc",
+      "variant": "AC0838_M"
+    },
+    {
+      "description": "Wie AC0836, jedoch 90\u00b0 nach rechts gedreht. Der Griff verl\u00e4uft waagrecht nach rechts, der Text \"VOC\" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0839_L.jpg",
+      "image_sha256": "8a5577d0da09a5e266d98c7a12a1e417f4d29dfbf1c8519dc3eebeb485d235d8",
+      "mean_delta2": 5666.4560546875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.6200289130210876,
+        "error_per_pixel": 0.0290475768534538,
+        "object_mask_iou": 0.30434782608695654
+      },
+      "svg": "svgs/AC0839_L.svg",
+      "svg_sha256": "3b76dbf2ec7334db1ed20f3370164c91a5f488ecc834b1fa7e6ab0669620c014",
+      "variant": "AC0839_L"
+    },
+    {
+      "description": "Wie AC0836, jedoch 90\u00b0 nach rechts gedreht. Der Griff verl\u00e4uft waagrecht nach rechts, der Text \"VOC\" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0839_M.jpg",
+      "image_sha256": "9250fd1f42b8617a5eac2e2b43315d6ca0d8d35d2ef7fc0958a6e74421ff082f",
+      "mean_delta2": 3988.645751953125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7691971063613892,
+        "error_per_pixel": 0.020446729473039216,
+        "object_mask_iou": 0.5248618784530387
+      },
+      "svg": "svgs/AC0839_M.svg",
+      "svg_sha256": "4f492cbe9aecca45c8065aa5bb07ba5f883508bead311d6c2132b3708efc1089",
+      "variant": "AC0839_M"
+    },
+    {
+      "description": "Wie AC0836, jedoch 90\u00b0 nach rechts gedreht. Der Griff verl\u00e4uft waagrecht nach rechts, der Text \"VOC\" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0839_S.jpg",
+      "image_sha256": "351dd8fa938fa7517afbc5050276f44dd19568b85b0139cc5eac085d0cb300a8",
+      "mean_delta2": 3389.488037109375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7524115443229675,
+        "error_per_pixel": 0.01737530712346213,
+        "object_mask_iou": 0.5348837209302325
+      },
+      "svg": "svgs/AC0839_S.svg",
+      "svg_sha256": "8469ac3a903a7dea744c96104d8fa3d52a132bd80fac6abfca8050a14353b14b",
+      "variant": "AC0839_S"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"T\" (Temperatur)",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0870_L.jpg",
+      "image_sha256": "183f830b0bc84e3ff62d0ae6f55a7e8b831b579e2fff92cf0779ec2aeeafe9e8",
+      "mean_delta2": 5565.47998046875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8371426463127136,
+        "error_per_pixel": 0.028529949919101627,
+        "object_mask_iou": 0.3952569169960474
+      },
+      "svg": "svgs/AC0870_L.svg",
+      "svg_sha256": "991f6bc8a6a41341b71c458b71af543f38869f772a4eea10e30f92b83727ad41",
+      "variant": "AC0870_L"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"T\" (Temperatur)",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0870_M.jpg",
+      "image_sha256": "a72956a66b18296dcb203505f0bd999c0d62f2dfa7798c4613a8c4f458bda086",
+      "mean_delta2": 5953.5224609375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.6216881275177002,
+        "error_per_pixel": 0.030519146281878764,
+        "object_mask_iou": 0.3764705882352941
+      },
+      "svg": "svgs/AC0870_M.svg",
+      "svg_sha256": "197a243d1a383dc28a593f325ccdd3ef98d8695234a7b9596e785a23b37f5ae9",
+      "variant": "AC0870_M"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"T\" (Temperatur)",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0870_S.jpg",
+      "image_sha256": "897ddae0002aff4f4e22b4ddbe4054c12e086e73dbc05d9c097cbfc49e3c54bc",
+      "mean_delta2": 4968.8798828125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.6795965433120728,
+        "error_per_pixel": 0.025471638512431116,
+        "object_mask_iou": 0.39669421487603307
+      },
+      "svg": "svgs/AC0870_S.svg",
+      "svg_sha256": "c3be4fca3c4d4200b13cdefa874508f37645859f9feb8ed10c816909b717383f",
+      "variant": "AC0870_S"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"T\" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0881_L.jpg",
+      "image_sha256": "9c9d253ef4e9a7d039caa3168b4e6cb9d98c2d5ea8a2d472ef56611720c5f10d",
+      "mean_delta2": 5340.39208984375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.498773455619812,
+        "error_per_pixel": 0.02737609683374984,
+        "object_mask_iou": 0.3305439330543933
+      },
+      "svg": "svgs/AC0881_L.svg",
+      "svg_sha256": "0a66e3ff6e5007a15ffed678b003c9905886e3861a77ac05680630c211092c1f",
+      "variant": "AC0881_L"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"T\" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0881_M.jpg",
+      "image_sha256": "daea7371dc5e38aa7d16400d930896ef111ccb96d995731c67fc0f8e167989ac",
+      "mean_delta2": 2780.935791015625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.6157205104827881,
+        "error_per_pixel": 0.014255726213075099,
+        "object_mask_iou": 0.5094339622641509
+      },
+      "svg": "svgs/AC0881_M.svg",
+      "svg_sha256": "766e8cdb91fcdb783a8467a03bdf924292d5c09a306432195927e6cc6cf1ffd8",
+      "variant": "AC0881_M"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"T\" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0881_S.jpg",
+      "image_sha256": "72cfe4dc4eb8994b737b780be0e9348b33915b73a491ffe773c04213fa5a2fc3",
+      "mean_delta2": 1082.7440185546875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8690675497055054,
+        "error_per_pixel": 0.005550398659770281,
+        "object_mask_iou": 0.7358490566037735
+      },
+      "svg": "svgs/AC0881_S.svg",
+      "svg_sha256": "3729af99506cd0860b9df3ecd1402eb4c49cde7e7c5b6026c7021ae759099c01",
+      "variant": "AC0881_S"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"T\" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0882_L.jpg",
+      "image_sha256": "25cab6f85a797ff76e4ad7a47f31c4bd84076dd6bdde77c7a3b6ea688ccade2d",
+      "mean_delta2": 2166.453369140625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8101197481155396,
+        "error_per_pixel": 0.011105745836937716,
+        "object_mask_iou": 0.6008230452674898
+      },
+      "svg": "svgs/AC0882_L.svg",
+      "svg_sha256": "09046245ddaeaef66cdf4abc73bc97a18243c0d3dad87ad688c34b75d87e256c",
+      "variant": "AC0882_L"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"T\" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0882_M.jpg",
+      "image_sha256": "eb13f480c4b9775e34493f0287177922cb788c7c7f77fbc1610c7b6cdcbc1f8b",
+      "mean_delta2": 5050.28564453125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.6310794353485107,
+        "error_per_pixel": 0.025888943455241575,
+        "object_mask_iou": 0.4519774011299435
+      },
+      "svg": "svgs/AC0882_M.svg",
+      "svg_sha256": "a51984ecea8d483b190a7d8a6ba0753c9b54b3962286897309d514a8eca522cb",
+      "variant": "AC0882_M"
+    },
+    {
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"T\" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "evidence": "successed_conversions.txt",
+      "execution_mode": "standard",
+      "image": "images/AC0882_S.jpg",
+      "image_sha256": "bab02adf2ac3124c5ee35888099d346e5dd7981dcb5012ba660cdc1a77502ae4",
+      "mean_delta2": 4982.7919921875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.63979172706604,
+        "error_per_pixel": 0.025542955233564014,
+        "object_mask_iou": 0.2818181818181818
+      },
+      "svg": "svgs/AC0882_S.svg",
+      "svg_sha256": "e060983297e11dfa41ddab56f00154523ecec82748e307606a2d12494b54b189",
+      "variant": "AC0882_S"
+    },
+    {
+      "description": "Rechteckfl\u00c3\u00a4che mit heller rechteckiger Innenfl\u00c3\u00a4che.",
+      "evidence": "artifacts/evaluation/nested_panel_recheck_v1/report_2026-10-04.json",
+      "execution_mode": "semantic-only",
+      "image": "images/DLG0010.jpg",
+      "image_sha256": "d5685743426f5506250de75d4a38217c1973bc3d178407c766a510827e71af67",
+      "mean_delta2": 48.55466842651367,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7319118976593018,
+        "error_per_pixel": 0.0002489025678662754,
+        "object_mask_iou": 0.0
+      },
+      "svg": "svgs/DLG0010.svg",
+      "svg_sha256": "6161302accf990518e552b335c524dfb7761a5fec6f95c4d42c186b10aed0a88",
+      "variant": "DLG0010"
+    },
+    {
+      "description": "Rechteckfl\u00c3\u00a4che mit heller rechteckiger Innenfl\u00c3\u00a4che.",
+      "evidence": "artifacts/evaluation/nested_panel_recheck_v1/report_2026-10-04.json",
+      "execution_mode": "semantic-only",
+      "image": "images/DLG0010_1.jpg",
+      "image_sha256": "bc23e7d717994a84ca7ab9969503257915a2a3f72ec3dbbd598799c6e3dcea97",
+      "mean_delta2": 468.7008972167969,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9036124348640442,
+        "error_per_pixel": 0.0024026702407627673,
+        "object_mask_iou": 0.976536312849162
+      },
+      "svg": "svgs/DLG0010_1.svg",
+      "svg_sha256": "569513d71cc1fc5947fd323ad087fac4e851f03fa1cc1b6ae26a0ca6ee758f4e",
+      "variant": "DLG0010_1"
+    },
+    {
+      "description": "Blaue Kugelform (blauer Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)",
+      "evidence": "artifacts/evaluation/radial_disk_catalog_refresh_2026-10-06/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0280.jpg",
+      "image_sha256": "70e1c67451a3d0e8edc69b574128c2c0e7b425803dfac280fc2ee8df96840219",
+      "mean_delta2": 459.0589599609375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8466458320617676,
+        "error_per_pixel": 0.002353243418997501,
+        "object_mask_iou": 0.9240506329113924
+      },
+      "svg": "svgs/GE0280.svg",
+      "svg_sha256": "ea5ecbd1ce9399e00ceb4b73402cfae43a6fa9206604d9a08c48547a4339b88e",
+      "variant": "GE0280"
+    },
+    {
+      "description": "Kugelform: ein gef\u00fcllter Kreis mit radialem Farbverlauf, innen hell und au\u00dfen dunkler, auf wei\u00dfem Hintergrund.",
+      "evidence": "artifacts/evaluation/radial_disk_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0281.jpg",
+      "image_sha256": "d5074a3efc66849601fd053bd6204b77d15711a6671aab635a962003c08f29b1",
+      "mean_delta2": 308.3333435058594,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8565438389778137,
+        "error_per_pixel": 0.0015805887146269865,
+        "object_mask_iou": 0.9723926380368099
+      },
+      "svg": "svgs/GE0281.svg",
+      "svg_sha256": "6a2dba28069d43d1948a24dca3cc592aceff16caf244f38d573ef13d3b032b85",
+      "variant": "GE0281"
+    },
+    {
+      "description": "Kugelform: ein gef\u00fcllter Kreis mit radialem Farbverlauf, innen hell und au\u00dfen dunkler, auf wei\u00dfem Hintergrund.",
+      "evidence": "artifacts/evaluation/radial_disk_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0282.jpg",
+      "image_sha256": "6d771c2cc38824a68bba16202bb7b029fc8059a54722f103e75be79fe974c2a9",
+      "mean_delta2": 149.6666717529297,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8962764739990234,
+        "error_per_pixel": 0.0007672263065637816,
+        "object_mask_iou": 0.9609375
+      },
+      "svg": "svgs/GE0282.svg",
+      "svg_sha256": "53710db9c1e92914b9f25e9a1542fa64feac22290d0b2b1337023e63e78f6ec4",
+      "variant": "GE0282"
+    },
+    {
+      "description": "Kugelform: ein gef\u00fcllter Kreis mit radialem Farbverlauf, innen hell und au\u00dfen dunkler, auf wei\u00dfem Hintergrund.",
+      "evidence": "artifacts/evaluation/radial_disk_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0283.jpg",
+      "image_sha256": "738123e0dfcfda2b1df500c68ca5a152d9732888385ae11d2e6deed4bd4e4c9b",
+      "mean_delta2": 527.8004760742188,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7917768955230713,
+        "error_per_pixel": 0.002705628481733788,
+        "object_mask_iou": 0.9367088607594937
+      },
+      "svg": "svgs/GE0283.svg",
+      "svg_sha256": "1c222f7c7add81e0abc02994a1a75258d8a153c6fd1dcee99ffb55e81e624087",
+      "variant": "GE0283"
+    },
+    {
+      "description": "Kugelform: ein gef\u00fcllter Kreis mit radialem Farbverlauf, innen hell und au\u00dfen dunkler, auf wei\u00dfem Hintergrund.",
+      "evidence": "artifacts/evaluation/radial_disk_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0284.jpg",
+      "image_sha256": "54750569b5cd7e0519d61fb2d3078daebe8f726c5c5c7fb4ce91422b4f893856",
+      "mean_delta2": 587.10205078125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8264647722244263,
+        "error_per_pixel": 0.003009622200595925,
+        "object_mask_iou": 0.9211356466876972
+      },
+      "svg": "svgs/GE0284.svg",
+      "svg_sha256": "57c7ad1accf4cc3707738195d689595ea7398c340ddf4c8cf6409fd9adc1f5cf",
+      "variant": "GE0284"
+    },
+    {
+      "description": "Kugelform: ein gef\u00fcllter Kreis mit radialem Farbverlauf, innen hell und au\u00dfen dunkler, auf wei\u00dfem Hintergrund.",
+      "evidence": "artifacts/evaluation/radial_disk_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0285.jpg",
+      "image_sha256": "e9ea18fbb45255196fe6629c48dd24184cf9f323cc2de8ad1f12ae7f8fb0411d",
+      "mean_delta2": 516.3400268554688,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8772702217102051,
+        "error_per_pixel": 0.0026468795430243178,
+        "object_mask_iou": 0.9868421052631579
+      },
+      "svg": "svgs/GE0285.svg",
+      "svg_sha256": "a995692140e5d6378000345a96a3246c29847458f4237665ba8cf23824afcfbc",
+      "variant": "GE0285"
+    },
+    {
+      "description": "Gr\u00fcner Haken aus zwei dicken schr\u00e4gen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und au\u00dfen dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/checkmark_disk_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE1003_L.jpg",
+      "image_sha256": "9545d10e3992e009e92c10a57218659573c63403099c29cef14f6f8d9eeb15b4",
+      "mean_delta2": 435.63555908203125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8545995950698853,
+        "error_per_pixel": 0.0022331695967296233,
+        "object_mask_iou": 0.9585492227979274
+      },
+      "svg": "svgs/GE1003_L.svg",
+      "svg_sha256": "c03965225730ddeff8b51e3be46bf5c59c5a284032343b23b3310c87a3eab2b7",
+      "variant": "GE1003_L"
+    },
+    {
+      "description": "Gr\u00fcner Haken aus zwei dicken schr\u00e4gen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und au\u00dfen dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/checkmark_disk_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE1003_M.jpg",
+      "image_sha256": "12bb609eb681ed60484ffdb0d988bf99b2f9cf8ebbc43fcf74e5c22cf6d38dd7",
+      "mean_delta2": 401.9552001953125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9226460456848145,
+        "error_per_pixel": 0.002060516212714661,
+        "object_mask_iou": 0.9509433962264151
+      },
+      "svg": "svgs/GE1003_M.svg",
+      "svg_sha256": "86afc003adfa0acadd83b37e22a1649cf04523edab4a9c5e7fc8489261db83c9",
+      "variant": "GE1003_M"
+    },
+    {
+      "description": "Gr\u00fcner Haken aus zwei dicken schr\u00e4gen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und au\u00dfen dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/checkmark_disk_recheck_v1/report_2026-10-05.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE1003_S.jpg",
+      "image_sha256": "ada043393d506630006ac00fa1478e2be5bb242352ffa6218c53c3a3dea86f8b",
+      "mean_delta2": 742.3524780273438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8991633653640747,
+        "error_per_pixel": 0.0038054721416242152,
+        "object_mask_iou": 0.9382022471910112
+      },
+      "svg": "svgs/GE1003_S.svg",
+      "svg_sha256": "b11f93eab4db9450ec09cb964709e24d8894bf717f88a8cb8cfeb2055f4dd793",
+      "variant": "GE1003_S"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_1M.jpg",
+      "image_sha256": "1c3ef7c1b8242bd0cedd623a6abb6a4c88e1126c2d03cb7d0f0a2e6062da2b9b",
+      "mean_delta2": 177.53334045410156,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9721000790596008,
+        "error_per_pixel": 0.0009100773571913447,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9011_1M.svg",
+      "svg_sha256": "6e272a57cd389cb7fc2f8998fb0d4415f2b90883d54d6624ca7364a8b660ef88",
+      "variant": "GE9011_1M"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_1S.jpg",
+      "image_sha256": "90c89cfbcf40984740a0f34a243b11acaff7463f0ac7199392084ce0bad9d597",
+      "mean_delta2": 206.3633270263672,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9635734558105469,
+        "error_per_pixel": 0.0010578666001607956,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9011_1S.svg",
+      "svg_sha256": "9c2b06c3745040f5f0d32310aed0249cb5b01fa0ee7e5afe2136b1824423a994",
+      "variant": "GE9011_1S"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_2M.jpg",
+      "image_sha256": "2d286353acf7fc4d161b749c47e819c53f4054ac5cc511f0f3c921f517c8c4ce",
+      "mean_delta2": 219.62416076660156,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9683048129081726,
+        "error_per_pixel": 0.0011258447303170655,
+        "object_mask_iou": 0.9366666666666666
+      },
+      "svg": "svgs/GE9011_2M.svg",
+      "svg_sha256": "dc4c6a8903b097959f1e58449a9845ce9c9ae9c3879c2dfb6922eceb4d171f3b",
+      "variant": "GE9011_2M"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_2S.jpg",
+      "image_sha256": "317aecc075d0a3af12c747b81dafe8a65d1f3f4e2090693f57d1107fbaad2d2c",
+      "mean_delta2": 241.9933319091797,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9830241203308105,
+        "error_per_pixel": 0.0012405143247939494,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9011_2S.svg",
+      "svg_sha256": "7e99113701e5edf5c0a6ce5c1e5fc1d4afedc9df90826969d459eab842c41d3f",
+      "variant": "GE9011_2S"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_3M.jpg",
+      "image_sha256": "d4e861669dbac3c0c6f1e8dc0486d7dcfed8dc28cca409ca84c4963926e97217",
+      "mean_delta2": 226.92416381835938,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9107600450515747,
+        "error_per_pixel": 0.001163266250510621,
+        "object_mask_iou": 0.9359430604982206
+      },
+      "svg": "svgs/GE9011_3M.svg",
+      "svg_sha256": "608fa53dbc2e97a03d77e1fd4e6f37cdfdb42d406bd13277d33011e90200cb43",
+      "variant": "GE9011_3M"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_3S.jpg",
+      "image_sha256": "b2c9d84755413a2b2be3bdf94caf4cde4e1d8e5918dc17eee078e44c0dd68f53",
+      "mean_delta2": 207.03334045410156,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9900776147842407,
+        "error_per_pixel": 0.0010613012454394543,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9011_3S.svg",
+      "svg_sha256": "fd6cda713d82c7380f2a5f11ec5caaa4485d9ae60d9cd345db13f13481ec930c",
+      "variant": "GE9011_3S"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_4M.jpg",
+      "image_sha256": "065c5ddf67ebedfd5285267bc43f87245b2c40850d5ff521c26639c2b646ed3f",
+      "mean_delta2": 232.44583129882812,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7878737449645996,
+        "error_per_pixel": 0.0011915716073245067,
+        "object_mask_iou": 0.8365758754863813
+      },
+      "svg": "svgs/GE9011_4M.svg",
+      "svg_sha256": "c7cf0177e181556d35a022fd54e88753b69bcb9b2b3272c27f80be02f97ef4ad",
+      "variant": "GE9011_4M"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_4S.jpg",
+      "image_sha256": "0c3c6d8e9a49f7c4fa4ca70744e48bfa03eed0da8eca9758fa91143b7122d712",
+      "mean_delta2": 233.86666870117188,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9934554100036621,
+        "error_per_pixel": 0.001198855151614363,
+        "object_mask_iou": 0.7738095238095238
+      },
+      "svg": "svgs/GE9011_4S.svg",
+      "svg_sha256": "5f6ba39a2f4d722b3243d939ad0e1cb03fe34c130b9763db669ec2fb9986b226",
+      "variant": "GE9011_4S"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_5M.jpg",
+      "image_sha256": "233c94ca0f2720188fb93c438f0b46d7ae4d79a5ec57791a5fa9ffa2fdd6d287",
+      "mean_delta2": 221.09584045410156,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9835472702980042,
+        "error_per_pixel": 0.0011333889040323034,
+        "object_mask_iou": 0.8733333333333333
+      },
+      "svg": "svgs/GE9011_5M.svg",
+      "svg_sha256": "3822fa26c416dddfec95853b6553198330eabf427e183c9a7892cf9f93de376d",
+      "variant": "GE9011_5M"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_5S.jpg",
+      "image_sha256": "3e09e4b83bbf283fb11f5c72ad3b6bc00aa43d84135097587cf5313ff267a34c",
+      "mean_delta2": 169.663330078125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9892665147781372,
+        "error_per_pixel": 0.0008697338463571704,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9011_5S.svg",
+      "svg_sha256": "dc6392198225da8de1f42367027e29e2b0edad4d827abdbb72af0138cacab02f",
+      "variant": "GE9011_5S"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_6M.jpg",
+      "image_sha256": "1789bdb7d657c55b69b34c61a9406bc2ba475ed6450c3d2723ec372c2a7688fe",
+      "mean_delta2": 317.8616638183594,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9794449806213379,
+        "error_per_pixel": 0.0016294331094110438,
+        "object_mask_iou": 0.9323843416370107
+      },
+      "svg": "svgs/GE9011_6M.svg",
+      "svg_sha256": "05989acca691ff90a571af7794d160c268f9e732c9194c0220546de366651809",
+      "variant": "GE9011_6M"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_6S.jpg",
+      "image_sha256": "435892c1cdca87367308c6b2fa16906f5bbe8cd246a42b7b070121fe86af388f",
+      "mean_delta2": 268.6499938964844,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.960150957107544,
+        "error_per_pixel": 0.0013771625984697392,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9011_6S.svg",
+      "svg_sha256": "2c51896c10763949695ef8c501ff6f861c85beca8637318caa1e726a65562216",
+      "variant": "GE9011_6S"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_7M.jpg",
+      "image_sha256": "1a4333373c702bfa58ca4c22982460d614703e74a5005ed242ddca5628e32a85",
+      "mean_delta2": 148.13082885742188,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9322490692138672,
+        "error_per_pixel": 0.0007593532172621908,
+        "object_mask_iou": 0.8733333333333333
+      },
+      "svg": "svgs/GE9011_7M.svg",
+      "svg_sha256": "a411e400470294cd9978fa467b5a0e939129068e763f90c8374ad1f952c5488a",
+      "variant": "GE9011_7M"
+    },
+    {
+      "description": "Nach oben gerichteter Pfeil: gef\u00fcllte dreieckige Spitze \u00fcber einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/gradient_arrow_recheck_v1/report_2026-10-06.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9011_7S.jpg",
+      "image_sha256": "ba22204af822e1c655eed6aeffc3365b7e6e3788bb783aee87585f198c4355be",
+      "mean_delta2": 132.92999267578125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9924394488334656,
+        "error_per_pixel": 0.0006814301816008266,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9011_7S.svg",
+      "svg_sha256": "5b6e13ccc9a5e11598904154547b096195f9a97d3846d9810ef97977380d4af6",
+      "variant": "GE9011_7S"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_1M.jpg",
+      "image_sha256": "6c96c20f21811512fd3006309f5b0b8f6e02df18b07de4b543c54cd4fc03644c",
+      "mean_delta2": 183.1558380126953,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9721000790596008,
+        "error_per_pixel": 0.0009388995925295159,
+        "object_mask_iou": 0.9366666666666666
+      },
+      "svg": "svgs/GE9013_1M.svg",
+      "svg_sha256": "61031769e1a95b2e118bcfaad6feea891ed85bc84c39804118187be6aaf52a32",
+      "variant": "GE9013_1M"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_1S.jpg",
+      "image_sha256": "3c699e84afd8711632c0304fbb2097ebfde47acf89a064d296e56a91a197eca9",
+      "mean_delta2": 215.98333740234375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9800097942352295,
+        "error_per_pixel": 0.0011071810196198577,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9013_1S.svg",
+      "svg_sha256": "cf594d0f02499be19f31e027b32406f376e5ee2ab3adcabfec03006c3cf8bbae",
+      "variant": "GE9013_1S"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_2M.jpg",
+      "image_sha256": "4cbf63008fcae9e08f5ab04e38f693f8bd4f206e708021297781b648dc382936",
+      "mean_delta2": 232.21249389648438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8988739848136902,
+        "error_per_pixel": 0.001190375465315824,
+        "object_mask_iou": 0.9366666666666666
+      },
+      "svg": "svgs/GE9013_2M.svg",
+      "svg_sha256": "2656e80403ceef0a7f7f3e6f9f6f2114a0f36637e90d58c52e028ecb7ea66277",
+      "variant": "GE9013_2M"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_2S.jpg",
+      "image_sha256": "54fad14d88855d5e6b5547a11ac317cf71e60861f7cd10d9bb3ca82fbd1b2cc6",
+      "mean_delta2": 238.01666259765625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9920265674591064,
+        "error_per_pixel": 0.001220128989351051,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9013_2S.svg",
+      "svg_sha256": "b814f77b917d83d3b3181daa2d6a46ef64b058b58b661a234e25c786d2a7f618",
+      "variant": "GE9013_2S"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_3M.jpg",
+      "image_sha256": "23fe853d5aeddb199c72d5d25ebcc76468e7bb98bac5c655d2bd227b653e524e",
+      "mean_delta2": 210.7375030517578,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9748736619949341,
+        "error_per_pixel": 0.0010802896478367696,
+        "object_mask_iou": 0.9333333333333333
+      },
+      "svg": "svgs/GE9013_3M.svg",
+      "svg_sha256": "d19a525a7e04188ca61813e0bee35ecea25ad7c9b356a100e558b36dc46c45e4",
+      "variant": "GE9013_3M"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_3S.jpg",
+      "image_sha256": "5c5c4a9394bd340bb9000c1d5c26c53f1eb732f719c7bcd9c32473dc9715a443",
+      "mean_delta2": 191.0433349609375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9836386442184448,
+        "error_per_pixel": 0.0009793327436162372,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9013_3S.svg",
+      "svg_sha256": "cef6695aa12bcc9972b7ef0bd7a137f996f81aa4685dae2ff3fa633bc5ce6e99",
+      "variant": "GE9013_3S"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_4M.jpg",
+      "image_sha256": "ecb5f3a8c345b34022576f3f58ac3af78fa7aeb25d2fb819978a4531e83be635",
+      "mean_delta2": 230.84249877929688,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7919917106628418,
+        "error_per_pixel": 0.001183352550451349,
+        "object_mask_iou": 0.8388349514563107
+      },
+      "svg": "svgs/GE9013_4M.svg",
+      "svg_sha256": "0818b5f5bc51962798ebba6bbd7e3fd5fe66c2a45b2ef20059ee29d565539cbe",
+      "variant": "GE9013_4M"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_4S.jpg",
+      "image_sha256": "d6f5d0fd47c7b766e4a62edce21ecb6c2f2c2111d59bae68e8274328f6e39e6c",
+      "mean_delta2": 143.15333557128906,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.986839771270752,
+        "error_per_pixel": 0.0007338374244331107,
+        "object_mask_iou": 0.7440476190476191
+      },
+      "svg": "svgs/GE9013_4S.svg",
+      "svg_sha256": "5fba9099e7a7285291ed142f8e127299020cde87bddab11e2e1187dad8c09cdf",
+      "variant": "GE9013_4S"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_5M.jpg",
+      "image_sha256": "6a77bde1223298eabc0e05db2588e379502953aa31b46c7724c78f719bde40e2",
+      "mean_delta2": 210.8541717529297,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8763633370399475,
+        "error_per_pixel": 0.0010808877188411108,
+        "object_mask_iou": 0.9323843416370107
+      },
+      "svg": "svgs/GE9013_5M.svg",
+      "svg_sha256": "7ff7b9ad179031192dee8cd0ef0e74086d4e528424795fc50178ec0a448dc045",
+      "variant": "GE9013_5M"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_5S.jpg",
+      "image_sha256": "b752fea0a2918078dca79c1a497661199b37da056818f2b0a61a1cc9901d205a",
+      "mean_delta2": 182.4499969482422,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9901831746101379,
+        "error_per_pixel": 0.0009352812864192859,
+        "object_mask_iou": 0.9942528735632183
+      },
+      "svg": "svgs/GE9013_5S.svg",
+      "svg_sha256": "0e57899427f99820376f496447d8267c6c5d79689ec41c6904e875b12708c0d8",
+      "variant": "GE9013_5S"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_6M.jpg",
+      "image_sha256": "8fa6e1cf13fbed86d2ed98d542cc8a952eb06833a2754e942cc45652ecbf8bb7",
+      "mean_delta2": 295.35333251953125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8683567047119141,
+        "error_per_pixel": 0.0015140501474793348,
+        "object_mask_iou": 0.9323843416370107
+      },
+      "svg": "svgs/GE9013_6M.svg",
+      "svg_sha256": "c80bf945cbc9bc9aa264ac2d3e2773662288caff70d6642c5211000d52588a5d",
+      "variant": "GE9013_6M"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_6S.jpg",
+      "image_sha256": "fb60a717a5778fa1bdd3e062af4a43e08b6fe3ce51127a8eed1f139263203b7f",
+      "mean_delta2": 275.27667236328125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9762262105941772,
+        "error_per_pixel": 0.0014111324996195374,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9013_6S.svg",
+      "svg_sha256": "e53ba41c329396cf5a8f3314621e1762968dc79739b21269d43680df909130d0",
+      "variant": "GE9013_6S"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_7M.jpg",
+      "image_sha256": "828ac6438a84660edbb341e7352dbbf86700e80eb0b90f42740d1285c2328883",
+      "mean_delta2": 135.42083740234375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9510911107063293,
+        "error_per_pixel": 0.00069419883328127,
+        "object_mask_iou": 0.9323843416370107
+      },
+      "svg": "svgs/GE9013_7M.svg",
+      "svg_sha256": "ab7a5516450085308d40d363d120087e6108b5738c288fbc69a586df30f52261",
+      "variant": "GE9013_7M"
+    },
+    {
+      "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9013_7S.jpg",
+      "image_sha256": "0deeaf254ddd2abef861353bf3ee715d12d07130b2bef14f028715ab79fae77c",
+      "mean_delta2": 139.3699951171875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.986175537109375,
+        "error_per_pixel": 0.0007144431378556324,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9013_7S.svg",
+      "svg_sha256": "1fd9aa9a9918f456ee2ff4b09d9ef105c2dc85ade4a1f01bc3e62b530c1b8319",
+      "variant": "GE9013_7S"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_1M.jpg",
+      "image_sha256": "c640ba2c31b68209554927f63e5d7ebdd253730de38f2d960b0f4bf0578c98d5",
+      "mean_delta2": 231.92083740234375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8921769857406616,
+        "error_per_pixel": 0.0011888803660250866,
+        "object_mask_iou": 0.8947368421052632
+      },
+      "svg": "svgs/GE9023_1M.svg",
+      "svg_sha256": "37088f5579476b843f84558af84e686e132bd8b01e9ac282ff5d04a6d3223973",
+      "variant": "GE9023_1M"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_1S.jpg",
+      "image_sha256": "5f435f1a604d5e30cec60bf860accbdee34308f44a447fc4d0a14b9f4017a5af",
+      "mean_delta2": 145.9633331298828,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9758749604225159,
+        "error_per_pixel": 0.0007482421280527121,
+        "object_mask_iou": 0.9942528735632183
+      },
+      "svg": "svgs/GE9023_1S.svg",
+      "svg_sha256": "36fabcb815d82bdab9429a407450914b69b3988fe2589224ccfaabc3645a4b5c",
+      "variant": "GE9023_1S"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_2M.jpg",
+      "image_sha256": "0dc76ae41bc6f01dc8c42eaf606f133f2add1d56184043860ba5bd2f8298526c",
+      "mean_delta2": 202.83749389648438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9721070528030396,
+        "error_per_pixel": 0.0010397923562552064,
+        "object_mask_iou": 0.8933092224231465
+      },
+      "svg": "svgs/GE9023_2M.svg",
+      "svg_sha256": "e48ef468c96592f8844e705853b41e7d38b0d7fe18575b27f77b31624c40fff0",
+      "variant": "GE9023_2M"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_2S.jpg",
+      "image_sha256": "8bb015a6d96665d5f7795b6077049dffa0f43871fc33c9ffb293ca443ed10ec8",
+      "mean_delta2": 135.9066619873047,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9785902500152588,
+        "error_per_pixel": 0.0006966892835437893,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9023_2S.svg",
+      "svg_sha256": "9abaa2b5738d04d34604cb57ed64a48cec8e127a7a73c01c30eabd609c903196",
+      "variant": "GE9023_2S"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_3M.jpg",
+      "image_sha256": "af2b35e6b4bff73b80de6d5312aecd70035b7ab9efaae3fca55ca5db7fb01ca2",
+      "mean_delta2": 91.80083465576172,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8373295664787292,
+        "error_per_pixel": 0.0004705925139344443,
+        "object_mask_iou": 0.986
+      },
+      "svg": "svgs/GE9023_3M.svg",
+      "svg_sha256": "61ba6bd7e1be2b7159d01e0d2a36367ed1be8ca5d4fa3f5cf3139c1bdee2ceca",
+      "variant": "GE9023_3M"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_3S.jpg",
+      "image_sha256": "197f957c5f6eb2f87d65acd5dee90b1d1952fda5e90cc298a13d944c98424850",
+      "mean_delta2": 88.57666778564453,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9821381568908691,
+        "error_per_pixel": 0.000454064681715466,
+        "object_mask_iou": 0.9942528735632183
+      },
+      "svg": "svgs/GE9023_3S.svg",
+      "svg_sha256": "48df255f59a282f98d9f93358886021b8a14d4ea63d71fab5c0c1485615f9686",
+      "variant": "GE9023_3S"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_4M.jpg",
+      "image_sha256": "b4150c4504c49c2e1be0e0374d34b5814b134a4763660075aa0ec65a05ad84e5",
+      "mean_delta2": 46.059165954589844,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8684298396110535,
+        "error_per_pixel": 0.00023611003949552655,
+        "object_mask_iou": 0.982051282051282
+      },
+      "svg": "svgs/GE9023_4M.svg",
+      "svg_sha256": "6a7a31e29a9d34a12ba9c5fcc00636e956f7aa15851de1e479db29512c595f6d",
+      "variant": "GE9023_4M"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_4S.jpg",
+      "image_sha256": "43ab1035298c9c5f6a55642ba4aa99f002332b4b9b31cba94ed1bdc4f2f419fd",
+      "mean_delta2": 41.83333206176758,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9793213605880737,
+        "error_per_pixel": 0.00021444742822897644,
+        "object_mask_iou": 0.9836065573770492
+      },
+      "svg": "svgs/GE9023_4S.svg",
+      "svg_sha256": "f9d9e93a2d4cbc52f0f129c2dfd29635d5765f622a1d430bfb67d52d39c7e79b",
+      "variant": "GE9023_4S"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_5M.jpg",
+      "image_sha256": "7e31bbb14d333ca9420e294d2bba8da88ff0c403699f299a190da611bdd8a8db",
+      "mean_delta2": 135.13417053222656,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.864086389541626,
+        "error_per_pixel": 0.0006927293119683535,
+        "object_mask_iou": 0.8909090909090909
+      },
+      "svg": "svgs/GE9023_5M.svg",
+      "svg_sha256": "dedfde1335214db6d493774a46ed25040a767ea95aad6c192c4f49a73601d2da",
+      "variant": "GE9023_5M"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_5S.jpg",
+      "image_sha256": "b27af5159ce419c7e3cd47848dee3f31d24fea10d2e33f3fc30a85e51a5fc36c",
+      "mean_delta2": 57.33000183105469,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9761649370193481,
+        "error_per_pixel": 0.0002938869759377403,
+        "object_mask_iou": 0.9885057471264368
+      },
+      "svg": "svgs/GE9023_5S.svg",
+      "svg_sha256": "9e5ec84cd91219544fc37fc4aee8975651c1a4d6f8c50ba224b62976f68b57d3",
+      "variant": "GE9023_5S"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_6M.jpg",
+      "image_sha256": "8aff7f2b15ddf033492d589cd3e0d64826abb2021224a2ce20d30b679636d4ea",
+      "mean_delta2": 253.67750549316406,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8632449507713318,
+        "error_per_pixel": 0.0013004101268392365,
+        "object_mask_iou": 0.895117540687161
+      },
+      "svg": "svgs/GE9023_6M.svg",
+      "svg_sha256": "59c1ef60db83ed8a29f89ae097bb42bf40b9e28d151638bf56f7299b430ebb88",
+      "variant": "GE9023_6M"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_6S.jpg",
+      "image_sha256": "e5f741af25c3a0f997455afac0c18000a20ade0e48c569160fd762a34ea367c1",
+      "mean_delta2": 156.24667358398438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9790077209472656,
+        "error_per_pixel": 0.0008009569323797738,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9023_6S.svg",
+      "svg_sha256": "9b7c4ea185e724b405c51bf7031ae41a8db994977108d3c5518fac560c9414ac",
+      "variant": "GE9023_6S"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_7M.jpg",
+      "image_sha256": "12c0e7fcbf16287a2aedcd18014bff8078a2daa2e3d5ef4777e265cae22366b6",
+      "mean_delta2": 137.02333068847656,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9653916954994202,
+        "error_per_pixel": 0.0007024135880480664,
+        "object_mask_iou": 0.9801980198019802
+      },
+      "svg": "svgs/GE9023_7M.svg",
+      "svg_sha256": "7f7d6fcfd0ddf04c66dd697e1669c7280ce39eb0dd7da141cdf1cecf2b24b65f",
+      "variant": "GE9023_7M"
+    },
+    {
+      "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/arc_shaft_recheck_v1/summary_2026-10-09.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9023_7S.jpg",
+      "image_sha256": "9c4be99faad7dda08cf40e71a518cd144b12937e7cfd94a9a57e8738e716cd1f",
+      "mean_delta2": 74.24333190917969,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9721922278404236,
+        "error_per_pixel": 0.00038058865517969854,
+        "object_mask_iou": 0.9942528735632183
+      },
+      "svg": "svgs/GE9023_7S.svg",
+      "svg_sha256": "da2058b7f9b553d70c429f48bb93ebcdabdccb1607056ba24952c3882f0a07f3",
+      "variant": "GE9023_7S"
+    }
+  ],
+  "schema_version": "satisfactory_archive_v1"
+}

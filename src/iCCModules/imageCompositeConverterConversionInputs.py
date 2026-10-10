@@ -29,6 +29,19 @@ def listRequestedImageFilesImpl(
             or os.path.splitext(filename)[0].upper() in normalized_selected_variants
         )
     )
+    # Explicit regression selections must keep archived successes in scope.
+    # Ordinary batches process only the remaining intake files.
+    archive_name = "succesessfulConvertedImages"
+    archive_path = os.path.join(folder_path, archive_name)
+    if normalized_selected_variants and os.path.isdir(archive_path):
+        present = {os.path.splitext(os.path.basename(name))[0].upper() for name in files}
+        for filename in sorted(os.listdir(archive_path)):
+            variant = os.path.splitext(filename)[0].upper()
+            if (filename.lower().endswith(_VALID_IMAGE_EXTENSIONS)
+                    and variant in normalized_selected_variants and variant not in present
+                    and in_requested_range_fn(filename, start_ref, end_ref)):
+                files.append(os.path.join(archive_name,filename))
+                present.add(variant)
     return normalized_selected_variants, files
 
 

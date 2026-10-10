@@ -215,6 +215,25 @@ blockieren:
 RUN_HEAVY_CONVERSION_TESTS=1 python -m pytest -q -rs tests/test_image_composite_converter.py
 ```
 
+## Separate Erfolgsübersicht erneut prüfen
+
+`python -m tools.refresh_satisfactory_archive` aktualisiert die separate
+Sammlung unter `artifacts/satisfactory_conversions/` aus nachgewiesenen
+Abnahmen. Das Profil `python -m tools.run_pytest_profile extended` setzt
+`RECHECK_SATISFACTORY_ARCHIVE=1`, aktualisiert die Sammlung einschließlich
+späterer erfolgreicher Batches und konvertiert alle archivierten Bilder auf
+Wegwerfkopien erneut, einschließlich ihrer gespeicherten Beschreibungen.
+Der Einzelaufruf lautet:
+
+```bash
+python -m tools.recheck_satisfactory_archive --output-dir .tmp/satisfactory-recheck
+```
+
+Die unveränderte Reviewgrenze und der Ausschluss von Raster-SVGs sind
+verbindlich; erhöhte Fehler gegenüber den gespeicherten Vektoren erscheinen
+zusätzlich im Bericht. Die bisherigen strengeren Paketgates und die
+31-Fälle-Bestandsschutzbatterie bleiben separate Prüfungen.
+
 ## 8. Linux-Vendor-Kommando ausgeben
 
 ```bash

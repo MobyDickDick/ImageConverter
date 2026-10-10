@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import re
 import statistics
+from xml.etree import ElementTree as ET
 
 
 _FALLBACK_MAX_ERROR_PER_PIXEL = 18.0
@@ -351,7 +352,8 @@ def _archiveSuccessfulConversionArtifacts(*,
     bestlist_dir = reports_dir / "successful_conversions_bestlist"
     # Keep accepted inputs beside the intake directory so the next batch cannot
     # reconvert them, while leaving rejected inputs in place for another pass.
-    archive_dir = Path(folder_path) / "succesessfulConvertedImages"
+    source_dir = Path(folder_path)
+    archive_dir = source_dir if source_dir.name == "succesessfulConvertedImages" else source_dir / "succesessfulConvertedImages"
     bestlist_dir.mkdir(parents=True, exist_ok=True)
     archive_dir.mkdir(parents=True, exist_ok=True)
 
@@ -365,17 +367,33 @@ def _archiveSuccessfulConversionArtifacts(*,
 
         svg_path = Path(svg_out_dir) / f"{variant}.svg"
         failed_svg_path = Path(svg_out_dir) / f"Failed_{variant}.svg"
+        if failed_svg_path.exists() or not svg_path.exists():
+            continue
+        if _svgContainsEmbeddedRaster(svg_path) or _svgIsTrivialFallback(svg_path) or _svgIsLowInformationBlank(svg_path):
+            continue
+        try:
+            vector = ET.fromstring(svg_path.read_text(encoding="utf-8"))
+        except (OSError, ET.ParseError):
+            continue
+        if vector.tag.rsplit("}", 1)[-1] != "svg" or not any(
+            e.tag.rsplit("}", 1)[-1] in {"rect", "circle", "ellipse", "line", "polygon", "polyline", "path", "text"}
+            for e in vector.iter()
+        ):
+            continue
+        source_path = Path(folder_path) / filename
+        target_path = archive_dir / source_path.name
+        if (source_path.exists() and target_path.exists()
+                and source_path.resolve() != target_path.resolve()
+                and source_path.read_bytes() != target_path.read_bytes()):
+            raise ValueError(f"Different source already archived: {target_path}")
         if svg_path.exists():
             (bestlist_dir / svg_path.name).write_text(svg_path.read_text(encoding="utf-8"), encoding="utf-8")
-        elif failed_svg_path.exists():
-            # Failed SVGs are never bestlist candidates.
-            continue
-
-        source_path = Path(folder_path) / filename
         if source_path.exists():
-            target_path = archive_dir / source_path.name
+            if source_path.resolve() == target_path.resolve():
+                continue
             if target_path.exists():
-                target_path.unlink()
+                source_path.unlink()
+                continue
             source_path.replace(target_path)
 
 
