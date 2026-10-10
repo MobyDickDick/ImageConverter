@@ -18,6 +18,8 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Alarmglocke: Rasterregistrierung, Bézier-Verlauf und vier CLI-Gate-Abnahmen (2026-10-08)](next_arbeitspaket_2026-10-08_ge1420_s.md)
 - [Checkbox mit gefülltem Verlaufshaken: Rasterregistrierung und Gate-Abnahme (2026-10-08)](next_arbeitspaket_2026-10-08_dlg0031.md)
 - [Plan-B-Abnahmetest: bis zu neun SVGs versuchen, Original und 16 Varianten bestehen](plan_b_variation_acceptance.md)
+- [Plan-B-Fehler als dokumentierte GitHub-Aufgaben (2026-10-10)](plan_b_failure_tasks_2026-10-10.md)
+- [Arbeitspaket – AC0711: unterer Griff, Strich und Punkt (2026-10-10)](next_arbeitspaket_2026-10-10_ac0711_1_m.md)
 - [Merge-Recovery-Audit vom 2026-10-03](merge_recovery_audit_2026-10-03.md) –
   geprüfte Merge-Folgen, beibehaltene Verträge und gezielt verworfene
   Altartefakt-/Klassifikationspfade.

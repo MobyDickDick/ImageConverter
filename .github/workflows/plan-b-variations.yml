@@ -6,6 +6,9 @@ on:
     branches: [main, master, work]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   sixteen-variations:
     runs-on: ubuntu-latest
@@ -18,7 +21,18 @@ jobs:
       - name: Install test dependencies
         run: python -m pip install -r requirements-dev.txt
       - name: Try up to nine originals, then require original plus 16 satisfactory variations
+        id: acceptance
         run: python -m tools.run_plan_b_variations --output-dir artifacts/plan-b-acceptance
+      - name: Document every failure as a reproducible task
+        if: always()
+        env:
+          PLAN_B_CONCLUSION: ${{ steps.acceptance.outcome }}
+          PLAN_B_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: >-
+          python -m tools.report_plan_b_failures
+          --artifact-dir artifacts/plan-b-acceptance
+          --conclusion "$PLAN_B_CONCLUSION"
+          --run-url "$PLAN_B_RUN_URL"
       - name: Save original image, selection, quality check and per-case failures
         if: always()
         uses: actions/upload-artifact@v4

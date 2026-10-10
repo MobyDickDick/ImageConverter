@@ -247,6 +247,8 @@ def test_real_cli_boundary_failure_paths_and_metrics(tmp_path, monkeypatch, fail
     output = tmp_path / "run"
     case = battery.prepare_cases(SVG, DESCRIPTION, output, 123)[0]
     def invoke(command, **kwargs):
+        kwargs['stdout'].write('A' * 5000 + '\nCLI diagnostic: rendering unavailable\n')
+        kwargs['stdout'].flush()
         assert command[0] == battery.sys.executable
         assert command[command.index("--execution-mode") + 1] == "semantic-only"
         assert "references" not in str(command)
@@ -274,6 +276,10 @@ def test_real_cli_boundary_failure_paths_and_metrics(tmp_path, monkeypatch, fail
         assert result["failures"] == ["conversion_or_measurement_error"] and result["error"] == "Renderer failed"
     if failure in ("good", "bad"):
         assert "metrics" in result and (output / case["case_id"] / "comparison.png").exists()
+        assert 'converter_log_tail' not in result
+    else:
+        assert result['converter_log_tail'].endswith('CLI diagnostic: rendering unavailable\n')
+        assert 3000 < len(result['converter_log_tail']) <= 4000
 
 
 def test_all_sixteen_run_even_after_failure_and_overall_exit_is_red(tmp_path, monkeypatch):

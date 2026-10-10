@@ -1,5 +1,5 @@
 {
-  "case_count": 152,
+  "case_count": 158,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -510,6 +510,108 @@
       "svg": "svgs/AC0413_S.svg",
       "svg_sha256": "56e8b1f639fc408d33c557c5f4572eefcb9b60e4f83cb44ab973934c4bbbee78",
       "variant": "AC0413_S"
+    },
+    {
+      "description": "Kelle mit Quadrat oben. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/bottom_stem_marked_square_recheck_v1/report_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0711_1_L.jpg",
+      "image_sha256": "d79fc42c0175b152c08915ec98c5ceb3351de4895dd74de5b0f489518c087829",
+      "mean_delta2": 53.97600173950195,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9132644534111023,
+        "error_per_pixel": 0.0002766935883096345,
+        "object_mask_iou": 0.9983552631578947
+      },
+      "svg": "svgs/AC0711_1_L.svg",
+      "svg_sha256": "3e04cbb149f9f30be98de2c6f5fd887607aa26e93056c424b683d55e640fab80",
+      "variant": "AC0711_1_L"
+    },
+    {
+      "description": "Kelle mit Quadrat oben. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/bottom_stem_marked_square_recheck_v1/report_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0711_1_M.jpg",
+      "image_sha256": "72e7e8b8baa2c2a25326162f9f1ca72d41686a282a60ab4cf612e9179242b819",
+      "mean_delta2": 45.30714416503906,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9929928779602051,
+        "error_per_pixel": 0.00023225500020524959,
+        "object_mask_iou": 0.9974683544303797
+      },
+      "svg": "svgs/AC0711_1_M.svg",
+      "svg_sha256": "870cbe3b3d577893daa1b4cf0116bb17e33cefc4db423a2f238b5427e45094d0",
+      "variant": "AC0711_1_M"
+    },
+    {
+      "description": "Kelle mit Quadrat oben. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/bottom_stem_marked_square_recheck_v1/report_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0711_1_S.jpg",
+      "image_sha256": "455f548663444931f8d3d6937c46958af2ce395fcb49af68e739bfb315bdc18e",
+      "mean_delta2": 143.13600158691406,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9531922340393066,
+        "error_per_pixel": 0.0007337485663817202,
+        "object_mask_iou": 0.9954128440366973
+      },
+      "svg": "svgs/AC0711_1_S.svg",
+      "svg_sha256": "63b8e6ed5b304536940d0cef75bcc369e1dd3b6b4c859afbf0658367684b2444",
+      "variant": "AC0711_1_S"
+    },
+    {
+      "description": "Kelle mit Quadrat oben. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/bottom_stem_marked_square_recheck_v1/report_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0711_L.jpg",
+      "image_sha256": "44806c1b9c48a26983cf1b100e391d7a375f37bba154fc53ff789974d4cf86e9",
+      "mean_delta2": 26.610666275024414,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9903069734573364,
+        "error_per_pixel": 0.00013641248891464521,
+        "object_mask_iou": 0.9956331877729258
+      },
+      "svg": "svgs/AC0711_L.svg",
+      "svg_sha256": "047d5f34ce1226487ff9a6c551576dc36f60e76b54f43ad9c7844e1b495bcf54",
+      "variant": "AC0711_L"
+    },
+    {
+      "description": "Kelle mit Quadrat oben. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/bottom_stem_marked_square_recheck_v1/report_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0711_M.jpg",
+      "image_sha256": "432b245387928d6f61f6e46733b0038d6d0a5eac0cf9b6110166f3f4dd29caa7",
+      "mean_delta2": 29.412857055664062,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9308855533599854,
+        "error_per_pixel": 0.00015077717316757178,
+        "object_mask_iou": 0.9016393442622951
+      },
+      "svg": "svgs/AC0711_M.svg",
+      "svg_sha256": "2439f4ae454139e2f15a1f86765778ab1d554428669d50151147b02467ee3f68",
+      "variant": "AC0711_M"
+    },
+    {
+      "description": "Kelle mit Quadrat oben. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/bottom_stem_marked_square_recheck_v1/report_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0711_S.jpg",
+      "image_sha256": "a83915c0086a3fd8f713484ca758099edc238ecf9ad65634ba9e4c980e7631eb",
+      "mean_delta2": 38.80799865722656,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9569050073623657,
+        "error_per_pixel": 0.00019893886278214308,
+        "object_mask_iou": 0.8736842105263158
+      },
+      "svg": "svgs/AC0711_S.svg",
+      "svg_sha256": "e463139429cb7d2c23c912b649cdfefdcc57391b001d1a9201e90de5fc423a48",
+      "variant": "AC0711_S"
     },
     {
       "description": "Kelle mit Quadrat, 180\u00b0 gedreht. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der oberen Quadratseite nach oben f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",

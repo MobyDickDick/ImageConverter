@@ -1,0 +1,77 @@
+{
+  "schema_version": "plan_b_variations_v2",
+  "seed": 5431263462732241740,
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "iterations": 64,
+  "timeout_seconds": 60,
+  "source_svg_sha256": "42aee85d16c5662ce8c563ec91335a8b7399bafb44e28e965e78ed4ae76a2281",
+  "source_description_sha256": "1daa4350e1c61f59ed40cada655dab982eba1da94206ccdd115df95df1330735",
+  "source_description": "z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke. Geometrie: halb offene Hand. Kontur dunkelgrau, Innenfläche hautfarben und weitgehend einfarbig. Konverter-Hinweis: Freiform-Handkontur liegt außerhalb der robust unterstützten Standard-Geometrien (Kreis/Ellipse/Rechteck/Badge-Bestandteile) und sollte als \"nicht automatisch nachzeichnbar\" markiert werden.",
+  "source_image": "source.png",
+  "artifact_retention": "summary_and_source_image",
+  "selection": {
+    "mode": "random_pool",
+    "selected_index": 58,
+    "pool_size": 61,
+    "remaining_pool_size": 61,
+    "source_svg": "/home/runner/work/ImageConverter/ImageConverter/artifacts/images_to_convert/samples/z_111.svg",
+    "descriptions_path": "/home/runner/work/ImageConverter/ImageConverter/artifacts/images_to_convert/Finale_Wurzelformen_V3.xml"
+  },
+  "cases": [
+    {
+      "case_id": "original",
+      "width": 21,
+      "height": 17,
+      "variation": {
+        "scale": 1.0,
+        "relative_x": 0.0,
+        "relative_y": 0.0
+      },
+      "input_sha256": "2ad5c717d3d6b5357c8c88273fa4a23dfc4da4787d33eee8b8588debc0e6a3d6",
+      "reference_svg_sha256": "42aee85d16c5662ce8c563ec91335a8b7399bafb44e28e965e78ed4ae76a2281",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.043667737394571304,
+        "foreground_mse": 0.055104125291109085,
+        "edge_alignment": 0.46454429626464844,
+        "foreground_iou": 0.6845878136200717
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "3e9b98b2526624f94ae3edc7f3dc4557cb861a0ecbd017dbfbe4c00c96ddf9d6",
+      "elapsed_seconds": 1.026
+    }
+  ],
+  "status": "original_not_convertible",
+  "original_satisfactory": false,
+  "variations_started": false,
+  "summary": {
+    "required": 17,
+    "completed": 1,
+    "passed": 0,
+    "failed": 1,
+    "satisfactory": false
+  },
+  "source_image_sha256": "2ad5c717d3d6b5357c8c88273fa4a23dfc4da4787d33eee8b8588debc0e6a3d6"
+}

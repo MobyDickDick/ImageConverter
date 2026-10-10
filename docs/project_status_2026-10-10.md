@@ -31,7 +31,26 @@ Topologien mit Farb-, Größen- und Geometrievarianten.
   weiterhin nicht belegt. Erledigte Aufgaben und bestandene Unit-Tests sind
   kein Ersatz für diese Quote.
 
-## Neuester Fortschritt: AC0721
+## Neuester Fortschritt: AC0711 und CI-Fehleraufgaben
+
+`AC0711_1_M` und seine fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
+Beschreibung und allgemeiner Registrierung von unterem Griff, Strich und Punkt
+beide regulären Gates ohne Pflichtmetrikregression sowie die strengeren
+Plan-B-Pixelgrenzen. Die frische Zielmetrik sinkt von `1859.969971` auf
+`45.307144`; eine unabhängige Vorlage besteht 17/17 CLI-Fälle. Zwei CLI-Läufe
+reproduzieren alle sechs SVGs. Die Erfolgsübersicht enthält jetzt 158 Paare;
+die erneute Konvertierung besteht mit 158/158 Review-Pässen. Details:
+[AC0711](next_arbeitspaket_2026-10-10_ac0711_1_m.md).
+
+Plan-B-Läufe erhalten zusätzlich lesbare Fehlerübersichten und reproduzierbare
+Aufgaben. Ein separater Workflow führt wiederholte Fälle in GitHub-Issues
+zusammen. Die aktuellen CI-Fehler von `z_111.svg` und `AC0552_2_L.svg` stehen in
+[#1908](https://github.com/MobyDickDick/ImageConverter/issues/1908) und
+[#1909](https://github.com/MobyDickDick/ImageConverter/issues/1909). Sie bleiben
+offen. Der neue Folgeworkflow wird nach Übernahme in den Default-Branch aktiv.
+Details: [Fehlererfassung](plan_b_failure_tasks_2026-10-10.md).
+
+## Vorheriger Fortschritt: AC0721
 
 `AC0721_1_S` und alle fünf Farb-/Größen-Holdouts enthalten den ausdrücklich
 beschriebenen Text `T`. Eigenständige XML-Beschreibungen und allgemeine
@@ -92,7 +111,7 @@ Details und Reproduktion: [Arbeitspaket](next_arbeitspaket_2026-10-10_ac0413_1_m
 
 Die bestehende Priorität bleibt: möglichst viele Motive in guter Qualität
 erschließen, danach das Produkt vereinfachen. Als nächstes reguläres Paket folgt
-`AC0711_1_M`. Für einen nachprüfbaren Stand zur Autonomie ist außerdem ein
+`GE9014_1M`. Für einen nachprüfbaren Stand zur Autonomie ist außerdem ein
 frischer Kataloglauf mit zutreffenden Beschreibungen, unveränderten Gates und
 getrennten Ergebnissen für erfolgreiche, verbesserbare und zurückgestellte
 Bilder nötig. Solange dieser fehlt, wäre die Aussage „der ganze Katalog läuft

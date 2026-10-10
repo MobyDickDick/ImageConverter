@@ -1,4 +1,4 @@
-"""Measure saved square/top-handle/slash/dot vectors with unchanged gates."""
+"""Measure saved square/vertical-handle/slash/dot vectors with unchanged gates."""
 from __future__ import annotations
 
 import argparse
@@ -14,8 +14,10 @@ from tools.evaluate_diagonal_square_kelle_recheck import measure as measure_rast
 from tools.evaluate_satisfaction_gate import evaluate_satisfaction, seal_baseline_manifest
 
 
-def symbol_semantics(svg: str) -> float:
-    """Require the connected upper handle and both interior geometric marks."""
+def symbol_semantics(svg: str, stem_direction: str = 'top') -> float:
+    """Require the described handle direction and both interior geometric marks."""
+    if stem_direction not in {'top','bottom'}:
+        return 0.
     try:
         root = ET.fromstring(svg)
         if any(e.get('transform') for e in root.iter()):
@@ -34,8 +36,10 @@ def symbol_semantics(svg: str) -> float:
             return 0.
         stem = stems[0]
         sx, sy, ex, ey = map(float, re.findall(r'[-\d.]+', stem.get('d')))
-        if not (abs(sx-ex) < .002 and abs(sx-x-w/2) < w*.1 and
-                min(sy,ey) < y and abs(max(sy,ey)-y) <= float(body.get('stroke-width',0))/2+.002):
+        connected = (max(sy,ey) > y+h and abs(min(sy,ey)-y-h) <= float(body.get('stroke-width',0))/2+.002
+                     if stem_direction == 'bottom' else
+                     min(sy,ey) < y and abs(max(sy,ey)-y) <= float(body.get('stroke-width',0))/2+.002)
+        if not (abs(sx-ex) < .002 and abs(sx-x-w/2) < w*.1 and connected):
             return 0.
         marks = []
         for e in paths:
@@ -57,10 +61,10 @@ def symbol_semantics(svg: str) -> float:
         return 0.
 
 
-def measure(image: Path, svg: Path) -> dict:
+def measure(image: Path, svg: Path, stem_direction: str = 'top') -> dict:
     record = measure_raster(image, svg)
     m = record['metrics']
-    m['semantic_score'] = symbol_semantics(record['svg'])
+    m['semantic_score'] = symbol_semantics(record['svg'], stem_direction)
     record['combined_score'] = (1-m['error_per_pixel']+m['edge_alignment']+m['object_mask_iou']+m['semantic_score'])/4
     return record
 
@@ -69,7 +73,7 @@ def evaluate(manifest: dict, root: Path) -> dict:
     before, after, evidence = {}, {}, []
     for case in manifest['cases']:
         image = root/case['image']
-        old, new = (measure(image, root/case[mode+'_svg']) for mode in ('before','after'))
+        old, new = (measure(image, root/case[mode+'_svg'], manifest.get('stem_direction','top')) for mode in ('before','after'))
         before[case['case_id']] = {'metrics':old['metrics'], 'dimensions':old['dimensions']}
         after[case['case_id']] = new
         evidence.append({**case,'input_sha256':hashlib.sha256(image.read_bytes()).hexdigest(),
@@ -77,7 +81,8 @@ def evaluate(manifest: dict, root: Path) -> dict:
             'before_svg_sha256':old['svg_sha256'],'after_svg_sha256':new['svg_sha256']})
     baseline = seal_baseline_manifest({'schema_version':'semantic_only_baseline_manifest_v1',
         'provenance':{**manifest['provenance'],'input_hashes':{e['case_id']:e['input_sha256'] for e in evidence}},'cases':before})
-    return {'schema_version':'top_stem_marked_square_recheck_v1','baseline':baseline,'evidence':evidence,
+    schema = 'bottom_stem_marked_square_recheck_v1' if manifest.get('stem_direction') == 'bottom' else 'top_stem_marked_square_recheck_v1'
+    return {'schema_version':schema,'baseline':baseline,'evidence':evidence,
             'satisfaction_gate':evaluate_satisfaction(baseline,after)}
 
 

@@ -1,0 +1,84 @@
+{
+  "stem_direction": "bottom",
+  "provenance": {
+    "execution_mode": "semantic-only",
+    "baseline_revision": "5a9181acccdda475111e073136bc22f6a6d06971",
+    "seed": 0,
+    "baseline_kind": "fresh_original_description_cli",
+    "commit": "5a9181acccdda475111e073136bc22f6a6d06971",
+    "toolchain": {
+      "python": "3.10.11",
+      "numpy": "2.2.6",
+      "opencv": "4.14.0",
+      "pymupdf": "1.26.7"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_symbol_00",
+      "source": "AC0711_1_L.jpg",
+      "image": "../../images_to_convert/AC0711_1_L.jpg",
+      "source_sha256": "d79fc42c0175b152c08915ec98c5ceb3351de4895dd74de5b0f489518c087829",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Kelle mit Quadrat oben. Ein gefülltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten führt. Im Quadrat liegt ein kontrastierender schräger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_00.svg",
+      "after_svg": "after/anonymous_symbol_00.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_01",
+      "source": "AC0711_1_M.jpg",
+      "image": "../../images_to_convert/AC0711_1_M.jpg",
+      "source_sha256": "72e7e8b8baa2c2a25326162f9f1ca72d41686a282a60ab4cf612e9179242b819",
+      "role": "development",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Kelle mit Quadrat oben. Ein gefülltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten führt. Im Quadrat liegt ein kontrastierender schräger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_01.svg",
+      "after_svg": "after/anonymous_symbol_01.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_02",
+      "source": "AC0711_1_S.jpg",
+      "image": "../../images_to_convert/AC0711_1_S.jpg",
+      "source_sha256": "455f548663444931f8d3d6937c46958af2ce395fcb49af68e739bfb315bdc18e",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Kelle mit Quadrat oben. Ein gefülltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten führt. Im Quadrat liegt ein kontrastierender schräger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_02.svg",
+      "after_svg": "after/anonymous_symbol_02.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_03",
+      "source": "AC0711_L.jpg",
+      "image": "../../images_to_convert/AC0711_L.jpg",
+      "source_sha256": "44806c1b9c48a26983cf1b100e391d7a375f37bba154fc53ff789974d4cf86e9",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Kelle mit Quadrat oben. Ein gefülltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten führt. Im Quadrat liegt ein kontrastierender schräger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_03.svg",
+      "after_svg": "after/anonymous_symbol_03.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_04",
+      "source": "AC0711_M.jpg",
+      "image": "../../images_to_convert/AC0711_M.jpg",
+      "source_sha256": "432b245387928d6f61f6e46733b0038d6d0a5eac0cf9b6110166f3f4dd29caa7",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Kelle mit Quadrat oben. Ein gefülltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten führt. Im Quadrat liegt ein kontrastierender schräger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_04.svg",
+      "after_svg": "after/anonymous_symbol_04.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_05",
+      "source": "AC0711_S.jpg",
+      "image": "../../images_to_convert/AC0711_S.jpg",
+      "source_sha256": "a83915c0086a3fd8f713484ca758099edc238ecf9ad65634ba9e4c980e7631eb",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Kelle mit Quadrat oben. Ein gefülltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten führt. Im Quadrat liegt ein kontrastierender schräger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_05.svg",
+      "after_svg": "after/anonymous_symbol_05.svg"
+    }
+  ]
+}

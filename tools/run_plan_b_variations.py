@@ -349,6 +349,15 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
         result.update(failures=["conversion_or_measurement_error"], error=str(exc), satisfactory=False)
     finally:
         result["elapsed_seconds"] = round(time.monotonic() - started, 3)
+        if any(reason in result.get('failures', []) for reason in
+               ('converter_error', 'conversion_timeout', 'missing_or_ambiguous_output',
+                'conversion_or_measurement_error', 'reference_svg_access')):
+            log_path = case_dir / 'converter.log'
+            if log_path.exists():
+                # Retain actionable CLI errors before deleting temporary logs.
+                with log_path.open('rb') as log:
+                    log.seek(max(0, log_path.stat().st_size-4000))
+                    result['converter_log_tail'] = log.read().decode('utf-8', errors='replace').replace('\r\n', '\n')
     return result
 
 

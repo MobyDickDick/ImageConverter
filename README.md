@@ -16,13 +16,13 @@ SVGs, Checkpoints oder andere Bilder werden im voreingestellten
 ## Main entry point
 
 Die [Erfolgsübersicht](artifacts/satisfactory_conversions/README.md) enthält
-146 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
+158 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
 `python -m tools.refresh_satisfactory_archive` wird sie aus den dokumentierten
 Abnahmen aktualisiert. `python -m tools.run_pytest_profile extended`
 aktualisiert die Sammlung einschließlich späterer erfolgreicher Batches,
 konvertiert alle Einträge erneut und prüft deren Qualität; Quellen und
 gespeicherte gute SVGs bleiben dabei erhalten. Details zur Sammlung und zur
-[neuen AC0713-Abnahme](docs/next_arbeitspaket_2026-10-10_ac0713_1_l.md).
+[neuen AC0711-Abnahme](docs/next_arbeitspaket_2026-10-10_ac0711_1_m.md).
 
 Run the converter via:
 
@@ -42,6 +42,11 @@ verschiedene SVGs aus dem Pool. Die Abnahme verlangt Original plus Varianten
 (17/17) für die erste Aufgabe mit bestandener Vorprüfung:
 `python -m tools.run_plan_b_variations`. Jeder Versuch behält seinen Bericht
 und das Ursprungsbild als `source.png`; der Gesamtbericht verlinkt alle Versuche.
+Die [Fehlererfassung](docs/plan_b_failure_tasks_2026-10-10.md) zeigt die
+fehlgeschlagenen Fälle in der GitHub-Laufübersicht und führt wiederholte
+Fehlschläge in GitHub-Aufgaben zusammen. Das reguläre Plan-B-Paket
+`AC0711_1_M` ist mit fünf Holdouts und einer unabhängigen 17-Fälle-Prüfung
+[abgenommen](docs/next_arbeitspaket_2026-10-10_ac0711_1_m.md).
 
 ## Repository layout
 
