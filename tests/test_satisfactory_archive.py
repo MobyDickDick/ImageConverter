@@ -59,6 +59,7 @@ def test_archive_admits_only_explicit_acceptances_and_checks_source_integrity(tm
 
 
 @pytest.mark.skipif(os.environ.get('RECHECK_SATISFACTORY_ARCHIVE')!='1',reason='Fresh archive reconversion runs in the extended profile')
+@pytest.mark.per_test_timeout(2100, fail_on_timeout=True)
 def test_every_archived_satisfactory_image_is_reconverted_and_checked(tmp_path):
     report=recheck(ROOT/ARCHIVE,tmp_path/'reconversion')
     failures=[c for c in report['cases'] if not c['passed']]

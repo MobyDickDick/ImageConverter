@@ -225,6 +225,12 @@ Abnahmen. Das Profil `python -m tools.run_pytest_profile extended` setzt
 `RECHECK_SATISFACTORY_ARCHIVE=1`, aktualisiert die Sammlung einschließlich
 späterer erfolgreicher Batches und konvertiert alle archivierten Bilder auf
 Wegwerfkopien erneut, einschließlich ihrer gespeicherten Beschreibungen.
+Die vollständige Archivprüfung hat ein eigenes Testlimit von 35 Minuten:
+Beide Konvertierungsmodi haben jeweils bis zu 15 Minuten, gefolgt von den
+Qualitätsmessungen. Ein überschrittenes Archivlimit führt zu einem echten
+Testfehler. Für das erweiterte Profil stehen in GitHub Actions 60 Minuten zur
+Verfügung; `core-green` behält sein Joblimit von 15 Minuten und reguläre Tests
+behalten ihr allgemeines 30-Sekunden-Limit.
 Der Einzelaufruf lautet:
 
 ```bash
