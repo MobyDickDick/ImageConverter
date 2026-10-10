@@ -1,5 +1,5 @@
 {
-  "case_count": 146,
+  "case_count": 152,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -612,6 +612,108 @@
       "svg": "svgs/AC0713_S.svg",
       "svg_sha256": "fe9fa3fa0b3822888f18ce6ccd40e8e6390a830e6774558359be7d9c4d9b6f3e",
       "variant": "AC0713_S"
+    },
+    {
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"T\" im Quadrat. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff von der unteren Quadratseite nach unten. Der Buchstabe T kontrastiert mit der Quadratf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/labeled_t_square_recheck_v1/report_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0721_1_L.jpg",
+      "image_sha256": "303322d79a15df0a62ff69448dd967ad147ffd57a9e105b6821b9633a5d9ce8e",
+      "mean_delta2": 856.5101928710938,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.988836944103241,
+        "error_per_pixel": 0.0043906712437323785,
+        "object_mask_iou": 0.8939393939393939
+      },
+      "svg": "svgs/AC0721_1_L.svg",
+      "svg_sha256": "2317410ef4ad0ed00147055bd7964da45542d886af9fe0e09e3669c1f44ca25c",
+      "variant": "AC0721_1_L"
+    },
+    {
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"T\" im Quadrat. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff von der unteren Quadratseite nach unten. Der Buchstabe T kontrastiert mit der Quadratf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/labeled_t_square_recheck_v1/report_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0721_1_M.jpg",
+      "image_sha256": "bb4c6836db304a40c042c10e0c4438d1c1e92a3924ba528482d1f52f83d92271",
+      "mean_delta2": 535.3786010742188,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9540108442306519,
+        "error_per_pixel": 0.0027444757199754904,
+        "object_mask_iou": 0.9947643979057592
+      },
+      "svg": "svgs/AC0721_1_M.svg",
+      "svg_sha256": "949f4928a748debb32006a4c7e4601913f142701113d3eb82e8582b0bb1a071e",
+      "variant": "AC0721_1_M"
+    },
+    {
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"T\" im Quadrat. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff von der unteren Quadratseite nach unten. Der Buchstabe T kontrastiert mit der Quadratf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/labeled_t_square_recheck_v1/report_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0721_1_S.jpg",
+      "image_sha256": "07afeeb295ecce0596745dcd4d0de5b51e5528f175b92ef74b552cd8a070a4ce",
+      "mean_delta2": 481.4106750488281,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9140672087669373,
+        "error_per_pixel": 0.002467823529662069,
+        "object_mask_iou": 0.9953271028037384
+      },
+      "svg": "svgs/AC0721_1_S.svg",
+      "svg_sha256": "554c54dd701f38cf0ea50d69f5309aff5ad59a482c97274c6bdf1b3c71cf8ef6",
+      "variant": "AC0721_1_S"
+    },
+    {
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"T\" im Quadrat. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff von der unteren Quadratseite nach unten. Der Buchstabe T kontrastiert mit der Quadratf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/labeled_t_square_recheck_v1/report_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0721_L.jpg",
+      "image_sha256": "63ed5447dd54aba7d66aa341bedbd5a32f48a91420237a94b3ab4d05296ade44",
+      "mean_delta2": 1306.61328125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7650896906852722,
+        "error_per_pixel": 0.006698004773804947,
+        "object_mask_iou": 0.8984375
+      },
+      "svg": "svgs/AC0721_L.svg",
+      "svg_sha256": "26ac4638a0f42d3b39627cf95d1b17cbabbc18885b934edb4eb04cf5b3e642a1",
+      "variant": "AC0721_L"
+    },
+    {
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"T\" im Quadrat. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff von der unteren Quadratseite nach unten. Der Buchstabe T kontrastiert mit der Quadratf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/labeled_t_square_recheck_v1/report_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0721_M.jpg",
+      "image_sha256": "fc5d948de62597e8c7eb5f3105397a88898991e785841a17ad8232213cd9fb0e",
+      "mean_delta2": 389.58428955078125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.791628360748291,
+        "error_per_pixel": 0.001997100036143951,
+        "object_mask_iou": 0.8431372549019608
+      },
+      "svg": "svgs/AC0721_M.svg",
+      "svg_sha256": "e41b780a5d229b5c57769483ca63aa09cf7dcb81488e00d5d0a734bf6c0a25bf",
+      "variant": "AC0721_M"
+    },
+    {
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"T\" im Quadrat. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff von der unteren Quadratseite nach unten. Der Buchstabe T kontrastiert mit der Quadratf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/labeled_t_square_recheck_v1/report_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0721_S.jpg",
+      "image_sha256": "476d33250c0cb371734a844d18251d32497a02c762d16cb431638a6362fca936",
+      "mean_delta2": 541.6400146484375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7605592608451843,
+        "error_per_pixel": 0.002776573187996604,
+        "object_mask_iou": 0.8556701030927835
+      },
+      "svg": "svgs/AC0721_S.svg",
+      "svg_sha256": "b302b101a29852990e9cb0f6955d7f0db961c31e94f251eed47563a8a5fe7bf9",
+      "variant": "AC0721_S"
     },
     {
       "description": "Kelle mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.",

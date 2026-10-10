@@ -25,7 +25,13 @@ synthetische Stressprüfung bleibt mit 12/17 Fällen als Folgeaufgabe offen.
 Das anschließende Paket `AC0413` sichert neun Kreis-/Linienvarianten durch beide
 regulären Gates und ein unabhängiges SVG mit zwei Seeds durch jeweils 17/17
 strenge CLI-Prüfungen. Die drei grauen JPG-IoU-Fälle bleiben separat offen.
-Der nächste reguläre Kandidat ist nach dem erneuerten Review `AC0713_1_L`.
+Das folgende Paket `AC0713` sichert alle sechs Varianten mit oberem Griff,
+Strich und Punkt. `AC0721` sichert jetzt sechs Quadrat-/Untergriff-/T-Varianten
+durch beide regulären Gates und ein unabhängiges SVG mit zwei Seeds durch
+jeweils 17/17 strenge CLI-Prüfungen. Ein großer grauer JPG-IoU-Fall bleibt offen.
+Die separate Erfolgsübersicht enthält inzwischen 152 Bild-/SVG-Paare und wird
+im erweiterten Profil vollständig erneut konvertiert.
+Der nächste reguläre Kandidat ist nach dem erneuerten Review `AC0711_1_M`.
 Die geprüfte Batchfähigkeit und die weiterhin begrenzte Motivabdeckung sind in
 `project_status_2026-10-10.md` beschrieben. Eine frische Gesamtquote des
 autonomen Kataloglaufs ist noch nicht belegt.

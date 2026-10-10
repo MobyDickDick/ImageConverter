@@ -13,7 +13,7 @@ from src.iCCModules.imageCompositeConverterLabeledSquare import fit_labeled_squa
 from src.iCCModules.imageCompositeConverterDiffing import calculateErrorImpl
 from src.iCCModules.imageCompositeConverterRendering import render_svg_to_numpy_inprocess
 from tools.evaluate_labeled_square_recheck import evaluate, labeled_square_semantics
-from tools.run_plan_b_variations import measure_quality
+from tools.run_plan_b_variations import make_variations, measure_quality
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE = ROOT / 'artifacts/evaluation/labeled_t_square_recheck_v1'
@@ -59,6 +59,23 @@ def test_independent_geometry_color_polarity_resolution_and_pixel_phase(phase, s
     assert svg is not None
     assert labeled_square_semantics(svg, 'T') == 1
     assert measure_quality(image, svg)['satisfactory']
+
+
+def test_fractional_rescale_and_translation_preserve_contour_evidence():
+    source, _ = synthetic()
+    variation = make_variations(source, DESCRIPTION, 20261010)[8]
+    image = render(variation['svg'], variation['width'], variation['height'])
+    assert measure_quality(image, fit(image))['satisfactory']
+
+
+P_PACKAGE = ROOT / 'artifacts/evaluation/labeled_square_recheck_v1'
+P_MANIFEST = json.loads((P_PACKAGE / 'manifest.json').read_text(encoding='utf-8'))
+
+
+@pytest.mark.parametrize('case', P_MANIFEST['cases'], ids=lambda c: Path(c['image']).stem)
+def test_previously_accepted_labels_keep_their_exact_vector(case):
+    image = cv2.imread(str(P_PACKAGE / case['image']))
+    assert fit(image, P_MANIFEST['description']) == (P_PACKAGE / case['after_svg']).read_text(encoding='utf-8')
 
 
 @pytest.mark.parametrize('label, offset', [('', 0), ('T', 12)])
