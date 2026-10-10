@@ -1,0 +1,65 @@
+{
+  "baseline_revision": "5ff7d675e96ba9679bc0a6a0ab346ebeae3aa101",
+  "checks": {
+    "cli_help": true,
+    "compileall": true,
+    "diff_check_with_cr_at_eol": true,
+    "no_runtime_image_ids": true
+  },
+  "cli_reproducibility": {
+    "frozen_baseline_unchanged": true,
+    "identical_svg_outputs": 28
+  },
+  "final_focused_tests": {
+    "log": ".tmp/ge9014-last-focused.log",
+    "passed": 135,
+    "seconds": 44.47
+  },
+  "independent_plan_b": {
+    "passed": 17,
+    "report": "plan_b/report.json",
+    "required": 17,
+    "seed": 20261010
+  },
+  "next_rotation": [
+    "GE9012_1M",
+    "AC0712_1_S",
+    "AC0734_1_S",
+    "GE9012_2M",
+    "GE9012_7M"
+  ],
+  "preservation_and_regression_tests": {
+    "passed": 10,
+    "protected_variants": 31,
+    "seconds": 61.07
+  },
+  "regular_gates": {
+    "mandatory_metric_regressions": 0,
+    "passed": 14,
+    "required": 14
+  },
+  "runtime_sha256": "0640931104c0f8be2bcb96efa87afdce65a60dc466ed20e2bafa47c4dcfbbd09",
+  "satisfactory_archive": {
+    "final_runtime_arrow_followup": 42,
+    "known_legacy_higher_errors": 22,
+    "passed": 172,
+    "previous_index_entries_unchanged": 158,
+    "required": 172
+  },
+  "schema_version": "plan_b_completion_evidence_v1",
+  "standard_suite": {
+    "command": ".venv/Scripts/python.exe -m pytest -q --basetemp .tmp/ge9014-full",
+    "passed": 2207,
+    "scope": "Full standard suite; final arrow changes made during that run were additionally covered by the final 135 focused tests, byte-preservation of 28 vertical arrows and 42 final-runtime archive reconversions.",
+    "seconds": 1313.37,
+    "skipped": 30
+  },
+  "strict_originals": {
+    "passed": 14,
+    "required": 14
+  },
+  "vertical_preservation": {
+    "regressions": 0,
+    "svg_bytes_unchanged": 28
+  }
+}

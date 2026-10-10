@@ -31,7 +31,19 @@ Topologien mit Farb-, Größen- und Geometrievarianten.
   weiterhin nicht belegt. Erledigte Aufgaben und bestandene Unit-Tests sind
   kein Ersatz für diese Quote.
 
-## Neuester Fortschritt: AC0711 und CI-Fehleraufgaben
+## Neuester Fortschritt: GE9014
+
+`GE9014_1M` und alle 13 Farb-/Größen-Holdouts bestehen nach eigenständiger
+Beschreibung und allgemeiner horizontaler Pfeilregistrierung beide regulären
+Gates ohne Pflichtmetrikregression sowie die strengeren Plan-B-Pixelgrenzen.
+Die frische Zielmetrik sinkt von `13053.991211` auf `19.939167`. Eine unabhängige
+Vorlage besteht 17/17 echte CLI-Fälle; 135 fokussierte Tests und zehn schwere
+Bestandsschutz-/Smoke-Tests bestehen. Die 28 vorhandenen vertikalen Pfeile
+behalten exakt ihre SVGs. Die Erfolgsübersicht besteht mit 172/172 Review-Pässen. Der Standardtestlauf
+besteht mit 2.207 Tests und 30 bestehenden Skips ohne Fehler.
+Details: [GE9014](next_arbeitspaket_2026-10-10_ge9014_1m.md).
+
+## Vorheriger Fortschritt: AC0711 und CI-Fehleraufgaben
 
 `AC0711_1_M` und seine fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und allgemeiner Registrierung von unterem Griff, Strich und Punkt
@@ -111,7 +123,7 @@ Details und Reproduktion: [Arbeitspaket](next_arbeitspaket_2026-10-10_ac0413_1_m
 
 Die bestehende Priorität bleibt: möglichst viele Motive in guter Qualität
 erschließen, danach das Produkt vereinfachen. Als nächstes reguläres Paket folgt
-`GE9014_1M`. Für einen nachprüfbaren Stand zur Autonomie ist außerdem ein
+`GE9012_1M`. Für einen nachprüfbaren Stand zur Autonomie ist außerdem ein
 frischer Kataloglauf mit zutreffenden Beschreibungen, unveränderten Gates und
 getrennten Ergebnissen für erfolgreiche, verbesserbare und zurückgestellte
 Bilder nötig. Solange dieser fehlt, wäre die Aussage „der ganze Katalog läuft
