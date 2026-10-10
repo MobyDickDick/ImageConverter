@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-10)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `420` · Erledigt `396` · Offen `24`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `422` · Erledigt `397` · Offen `25`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -14,11 +14,26 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-10)
 
+- [x] **AC0721 – Quadrat mit unterem Griff und T:** eigenständige Beschreibungen und allgemeine Konturregistrierung; sechs Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression, unabhängige Plan-B-Vorlage mit zwei Seeds jeweils 17/17. Alle sechs sind in der Erfolgsübersicht abgelegt.
+- [ ] **AC0721-PB-GREY:** große graue JPG-Variante `AC0721_L` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.799373 < 0.85`); beide regulären Gates und die übrigen fünf JPGs bestehen. Grenzen unverändert beibehalten.
 - [x] **AC0713 – oberer Griff mit Strich und Punkt:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; sechs Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression, unabhängige Plan-B-Vorlage 17/17.
-- [x] **Erfolgsübersicht mit erneuter Prüfung:** 146 nachgewiesene Bild-/SVG-Paare separat ablegen; das erweiterte Profil konvertiert sämtliche archivierten Eingaben neu. Quellenauflösung und Regressionsauswahl berücksichtigen auch die ursprüngliche Erfolgsablage.
+- [x] **Erfolgsübersicht mit erneuter Prüfung:** inzwischen 152 nachgewiesene Bild-/SVG-Paare separat abgelegt; das erweiterte Profil konvertiert sämtliche archivierten Eingaben neu. Quellenauflösung und Regressionsauswahl berücksichtigen auch die ursprüngliche Erfolgsablage.
 - [ ] **ARCHIVE-DRIFT-2026-10-10:** 22 ältere Bestenlisteneinträge erzeugen bei erneuter Konvertierung höhere Mean-Delta²-Werte als ihre archivierten Vektoren. Die Reviewgrenze besteht weiterhin; Ursachen und Budgets je Fall anhand von `artifacts/satisfactory_conversions/recheck_2026-10-10.json` prüfen, akzeptierte SVGs erhalten und Qualitätsgrenzen unverändert lassen.
 
-**Neuester Abschluss:** `AC0713_1_L` und alle fünf Holdouts auf
+**Neuester Abschluss:** `AC0721_1_S` und alle fünf Holdouts auf
+`codex/ac0721-quality-2026-10-10`. Native Textausgabe `T` und rastergestützte
+Konturparameter bringen alle sechs durch beide regulären Gates ohne
+Pflichtmetrikregression. Die frische Zielmetrik sinkt von `3282.783936` auf
+`481.410675`. 67 fokussierte Tests und zwei unabhängige CLI-Seeds mit jeweils
+17/17 strengen Plan-B-Prüfungen bestehen. Der große graue JPG-IoU-Fall bleibt
+separat offen. Nächste Rotation: `AC0711_1_M`, `GE9014_1M`, `GE9012_1M`,
+`AC0712_1_S`, `AC0734_1_S`.
+Details: `docs/next_arbeitspaket_2026-10-10_ac0721_1_s.md`.
+Der Standard-Gesamtlauf besteht mit 2.116 Tests und 30 bestehenden Profil-/
+Windows-Skips. Alle 152 archivierten Bilder bestehen die erneute Reviewprüfung;
+31 Bestandsschutzvarianten haben null Regressionen.
+
+**Vorheriger Abschluss:** `AC0713_1_L` und alle fünf Holdouts auf
 `codex/successful-images-ac0713-2026-10-10`. Die fehlende Innenmarkierung ist
 enthalten. Die Zielmetrik sinkt von `1972.475586` auf `120.847115`.
 Nächste Rotation: `AC0721_1_S`, `AC0711_1_M`, `GE9014_1M`, `GE9012_1M`,

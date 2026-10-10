@@ -20,7 +20,7 @@ Topologien mit Farb-, Größen- und Geometrievarianten.
   `artifacts/images_to_convert/`, rekursiv, ohne `samples`.
 - XML: **707 Einträge**, davon **237** mit einem der Hinweise
   `platzhalter`, `unzugeordnete wurzelform`, `manuell prüfen` oder
-  `manuell zu prüfen`. **180** enthalten einen der Verweistexte
+  `manuell zu prüfen`. **178** enthalten einen der Verweistexte
   `wie ac`, `wie ge`, `wie dlg`, `analog ac`. Die Gruppen können sich
   überschneiden; die Zahlen bezeichnen Einträge, nicht Bilder oder nachgewiesene
   Konvertierungsfehler.
@@ -31,7 +31,27 @@ Topologien mit Farb-, Größen- und Geometrievarianten.
   weiterhin nicht belegt. Erledigte Aufgaben und bestandene Unit-Tests sind
   kein Ersatz für diese Quote.
 
-## Neuester Fortschritt: AC0713 und Erfolgsübersicht
+## Neuester Fortschritt: AC0721
+
+`AC0721_1_S` und alle fünf Farb-/Größen-Holdouts enthalten den ausdrücklich
+beschriebenen Text `T`. Eigenständige XML-Beschreibungen und allgemeine
+Konturregistrierung bringen alle sechs durch beide regulären Gates ohne
+Pflichtmetrikregression. Die frische Zielmetrik sinkt von `3282.783936` auf
+`481.410675`. Die sechs bereits akzeptierten P-Varianten behalten ihre SVGs.
+
+67 fokussierte Tests bestehen; eine unabhängig entworfene SVG-Vorlage besteht
+mit zwei Seeds jeweils 17/17 strenge Plan-B-CLI-Prüfungen. Die sechs
+Bestandsschutztests sichern alle 31 Varianten ohne Regression. Fünf der sechs
+Original-JPGs bestehen auch die strengere Plan-B-Prüfung; der große graue
+Vordergrund-IoU-Fall bleibt als separate Aufgabe offen. Die Erfolgsübersicht
+enthält jetzt 152 Bild-/SVG-Paare und bleibt vollständig im erweiterten
+Rekonvertierungsprofil enthalten. Die erneute Archivkonvertierung besteht mit
+152/152 Review-Pässen; die bekannte Drift bei 22 älteren Kompatibilitätsfällen
+bleibt separat offen. Der vollständige Standardtestlauf besteht mit 2.116
+Tests und 30 Profil-/Windows-Skips. Details und Abschlussnachweis:
+[AC0721](next_arbeitspaket_2026-10-10_ac0721_1_s.md).
+
+## Vorheriger Fortschritt: AC0713 und Erfolgsübersicht
 
 `AC0713_1_L` und alle fünf Farb-/Größen-Holdouts enthalten jetzt auch Strich
 und Punkt im Quadrat. Eigenständige Beschreibungen und die allgemeine
@@ -72,7 +92,7 @@ Details und Reproduktion: [Arbeitspaket](next_arbeitspaket_2026-10-10_ac0413_1_m
 
 Die bestehende Priorität bleibt: möglichst viele Motive in guter Qualität
 erschließen, danach das Produkt vereinfachen. Als nächstes reguläres Paket folgt
-`AC0721_1_S`. Für einen nachprüfbaren Stand zur Autonomie ist außerdem ein
+`AC0711_1_M`. Für einen nachprüfbaren Stand zur Autonomie ist außerdem ein
 frischer Kataloglauf mit zutreffenden Beschreibungen, unveränderten Gates und
 getrennten Ergebnissen für erfolgreiche, verbesserbare und zurückgestellte
 Bilder nötig. Solange dieser fehlt, wäre die Aussage „der ganze Katalog läuft

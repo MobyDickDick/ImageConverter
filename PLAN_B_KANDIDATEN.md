@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-10, nach Kreis-/Linien-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-10, nach Quadrat-/T-Abnahme)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -118,11 +118,20 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `AC0713_1_L` – `mean_delta2=13458.083984`, `normalized_mse=0.068989`.
-2. `AC0721_1_S` – `mean_delta2=13368.759766`, `normalized_mse=0.068531`.
-3. `AC0711_1_M` – `mean_delta2=13113.830078`, `normalized_mse=0.067225`.
-4. `GE9014_1M` – `mean_delta2=13099.989258`, `normalized_mse=0.067154`.
-5. `GE9012_1M` – `mean_delta2=13013.489258`, `normalized_mse=0.066710`.
+1. `AC0711_1_M` – `mean_delta2=13113.830078`, `normalized_mse=0.067225`.
+2. `GE9014_1M` – `mean_delta2=13099.989258`, `normalized_mse=0.067154`.
+3. `GE9012_1M` – `mean_delta2=13013.489258`, `normalized_mse=0.066710`.
+4. `AC0712_1_S` – `mean_delta2=12600.799805`, `normalized_mse=0.064595`.
+5. `AC0734_1_S` – `mean_delta2=12591.893555`, `normalized_mse=0.064549`.
+
+`AC0721_1_S` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
+Beschreibung und allgemeiner Konturregistrierung beide regulären Gates ohne
+Pflichtmetrikregression. Der native Text `T` bleibt erhalten; die frische
+Ziel-CLI-Baseline sinkt von `3282.783936` auf `481.410675`. Eine unabhängige
+SVG-Vorlage besteht mit zwei Seeds jeweils 17/17 strenge Plan-B-Prüfungen.
+Die sechs Paare sind zusätzlich in der Erfolgsübersicht abgelegt; der große
+graue JPG-IoU-Fall bleibt separat offen. Details und erneuerter Review-Aufruf:
+`docs/next_arbeitspaket_2026-10-10_ac0721_1_s.md`.
 
 `AC0714_L` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und rastergestützter Strich-/Punktregistrierung beide regulären

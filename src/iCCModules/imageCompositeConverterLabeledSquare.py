@@ -22,7 +22,13 @@ def _contour_metrics(reference, rendered):
         da = cv2.distanceTransform((~a).astype(np.uint8), cv2.DIST_L2, 3)
         db = cv2.distanceTransform((~b).astype(np.uint8), cv2.DIST_L2, 3)
         edge = float((np.exp(-db[a]).mean()+np.exp(-da[b]).mean())/2)
-    ma, mb = np.min(reference, axis=2) < 210, np.min(rendered, axis=2) < 210
+    # Use background-relative foreground evidence for colored antialiasing:
+    # a fixed brightness cutoff can mistake changed contour coverage for a
+    # lost object, even when its contrast silhouette is unchanged.
+    border = np.concatenate((reference[0], reference[-1], reference[:, 0], reference[:, -1]))
+    background = np.median(border.astype(float), axis=0)
+    ma = np.max(np.abs(reference.astype(float)-background), axis=2) > 25
+    mb = np.max(np.abs(rendered.astype(float)-background), axis=2) > 25
     union = (ma | mb).sum()
     iou = float((ma & mb).sum()/union) if union else 1.
     residual = float(np.mean(np.sum((reference.astype(float)-rendered.astype(float))**2, axis=2)))
@@ -200,6 +206,11 @@ def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn):
             buckets = contrast_pixels // 8
             colors, counts = np.unique(buckets, axis=0, return_counts=True)
             core = np.median(contrast_pixels[np.all(buckets == colors[counts.argmax()], axis=1)], axis=0)
+            candidate = copy.deepcopy(best[1])
+            candidate['body_stroke'] = _hex(core)
+            measured = measure(candidate)
+            evaluations += 1
+            probes = [measured] if measured is not None else []
             limit = min(6., min(bw, bh)*.2)
             for stroke in np.arange(.5, limit+.01, .5):
                 candidate = copy.deepcopy(best[1])
@@ -208,12 +219,39 @@ def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn):
                                  body_stroke=_hex(core), body_stroke_width=stroke/scale)
                 measured = measure(candidate)
                 evaluations += 1
-                if measured is None or measured[0] >= best[0]-1e-9:
-                    continue
-                metrics = _contour_metrics(arr, measured[2])
-                if (metrics[0] <= old_metrics[0]+1e-9 and metrics[1] >= old_metrics[1]-1e-9
-                        and metrics[2] >= old_metrics[2]-1e-9):
-                    best = measured
+                if measured is not None:
+                    probes.append(measured)
+            def residual(measured):
+                return float(np.mean(np.sum((arr.astype(float)-measured[2].astype(float))**2, axis=2)))
+            if probes:
+                refined = min(probes, key=residual)
+                refined_score = residual(refined)
+                # Pixel-center bounds are only a seed: antialiasing can move
+                # the thresholded outer row by a fraction of a pixel.
+                for step in (1., .5, .25, .125):
+                    for _ in range(2):
+                        changed = False
+                        for field, index, divisor in (
+                            ('body_bbox', 0, width), ('body_bbox', 1, height),
+                            ('body_bbox', 2, width), ('body_bbox', 3, height),
+                            ('body_stroke_width', None, scale),
+                        ):
+                            for sign in (-1, 1):
+                                candidate = copy.deepcopy(refined[1])
+                                if index is None:
+                                    candidate[field] += sign*step/divisor
+                                else:
+                                    candidate[field][index] += sign*step/divisor
+                                measured = measure(candidate)
+                                evaluations += 1
+                                if measured is not None and residual(measured) < refined_score-1e-9:
+                                    refined, refined_score, changed = measured, residual(measured), True
+                        if not changed:
+                            break
+                metrics = _contour_metrics(arr, refined[2])
+                if (refined[0] < best[0]-1e-9 and metrics[0] <= old_metrics[0]+1e-9
+                        and metrics[1] >= old_metrics[1]-1e-9 and metrics[2] >= old_metrics[2]-1e-9):
+                    best = refined
     if best[0] >= initial_error-1e-9:
         return None
     return {'geometry_ir': [best[1]], 'rendered': best[2], 'initial_error': initial_error,
