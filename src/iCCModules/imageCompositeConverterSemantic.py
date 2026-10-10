@@ -421,6 +421,12 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
     if not normalized:
         return False
 
+    # An explicitly decomposed interior line scene is not a connector badge.
+    # In particular, an interior T made from strokes must not acquire the
+    # default font glyph merely because its lines have directional prose.
+    if all(token in normalized for token in ("kreis", "zwei schräge linien", "waagerecht", "senkrecht")):
+        return False
+
     geometry_ir = params.get("geometry_ir")
     if isinstance(geometry_ir, list) and any(
         str(element.get("kind", ""))

@@ -156,7 +156,7 @@ def _expand_axis_aligned_linear_gradients_for_fitz(svg_string: str) -> str:
     return ET.tostring(root, encoding="unicode") if changed else svg_string
 
 
-def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=None, size_w=None, size_h=None) -> str:
+def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=None, size_w=None, size_h=None, shape_kinds=None) -> str:
     """Paint a closed curve or ellipse through its native antialiasing mask.
 
     Only the private render document gets a temporary image paint layer. Saved
@@ -165,7 +165,8 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
     overlapping gradient bands. Flattening is used only for paint bounds.
     Unsupported commands, compound paths, transforms and alpha are untouched.
     """
-    if 'linearGradient' not in svg_string or not re.search(r'<(?:\w+:)?(?:path|circle|ellipse)\b', svg_string):
+    shape_kinds = {'path', 'circle', 'ellipse'} if shape_kinds is None else shape_kinds
+    if 'linearGradient' not in svg_string:
         return svg_string
     try:
         root = ET.fromstring(svg_string)
@@ -176,6 +177,7 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
     if root.get('preserveAspectRatio', 'xMidYMid meet') not in {'xMidYMid', 'xMidYMid meet'}:
         return svg_string
     namespace = '{http://www.w3.org/2000/svg}'
+    ET.register_namespace('', 'http://www.w3.org/2000/svg')
     gradients = {e.get('id'):e for e in root.iter() if e.tag.rsplit('}', 1)[-1] == 'linearGradient'}
     changed = False
 
@@ -197,15 +199,25 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
     for parent in list(root.iter()):
         for index, path in reversed(list(enumerate(list(parent)))):
             kind = path.tag.rsplit('}',1)[-1]
-            if kind not in {'path', 'circle', 'ellipse'}:
+            if kind not in shape_kinds:
                 continue
             match = re.fullmatch(r'url\(#([^)]+)\)',path.get('fill',''))
             if not match or match.group(1) not in gradients:
                 continue
-            geometry_attributes = {'path': {'d'}, 'circle': {'cx', 'cy', 'r'}, 'ellipse': {'cx', 'cy', 'rx', 'ry'}}[kind]
+            geometry_attributes = {'path': {'d'}, 'circle': {'cx', 'cy', 'r'}, 'ellipse': {'cx', 'cy', 'rx', 'ry'},
+                                   'rect': {'x', 'y', 'width', 'height', 'rx', 'ry'}}[kind]
             if set(path.attrib)-({'id','fill','stroke','stroke-width','stroke-linejoin','data-role'} | geometry_attributes):
                 continue
             data = path.get('d','')
+            if kind == 'rect':
+                try:
+                    x, y = float(path.get('x', '0')), float(path.get('y', '0'))
+                    w, h = float(path.get('width', '0')), float(path.get('height', '0'))
+                    if min(w, h) <= 0 or not all(math.isfinite(v) for v in (x, y, w, h)):
+                        continue
+                    data = f'M {x} {y} L {x+w} {y} L {x+w} {y+h} L {x} {y+h} Z'
+                except (ValueError, TypeError):
+                    continue
             if kind in {'circle', 'ellipse'}:
                 try:
                     cx, cy = float(path.get('cx', '0')), float(path.get('cy', '0'))
@@ -327,6 +339,12 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
             parent.insert(index,group)
             changed = True
     return ET.tostring(root,encoding='unicode') if changed else svg_string
+
+
+def _expand_rect_linear_gradients_for_fitz(svg_string: str, *, fitz_module=None, size_w=None, size_h=None) -> str:
+    """Interpolate at pixel centers through the native rectangle alpha mask."""
+    return _expand_bezier_linear_gradients_for_fitz(svg_string, fitz_module=fitz_module,
+                                                   size_w=size_w, size_h=size_h, shape_kinds={'rect'})
 
 
 def _expand_polygon_linear_gradients_for_fitz(svg_string: str) -> str:
@@ -523,7 +541,8 @@ def render_svg_to_numpy_inprocess(
     if re.search(r"(?<![A-Za-z])(nan|inf)(?![A-Za-z])", svg_string, flags=re.IGNORECASE):
         return None
 
-    renderer_svg = _expand_axis_aligned_linear_gradients_for_fitz(svg_string)
+    renderer_svg = _expand_rect_linear_gradients_for_fitz(svg_string,fitz_module=fitz_module,size_w=size_w,size_h=size_h)
+    renderer_svg = _expand_axis_aligned_linear_gradients_for_fitz(renderer_svg)
     renderer_svg = _expand_bezier_linear_gradients_for_fitz(renderer_svg,fitz_module=fitz_module,size_w=size_w,size_h=size_h)
     renderer_svg = _expand_polygon_linear_gradients_for_fitz(renderer_svg)
     renderer_svg = _expand_centered_radial_gradients_for_fitz(renderer_svg)

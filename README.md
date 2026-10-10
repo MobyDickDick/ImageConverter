@@ -3,6 +3,9 @@
 ImageConverter converts badge/source images into composite SVG outputs and also
 provides annotation/debugging helpers for the source raster files.
 
+Der [Projektstand vom 2026-10-10](docs/project_status_2026-10-10.md) beschreibt
+die vorhandene Batchfähigkeit und die weiterhin begrenzte Motivabdeckung.
+
 Für eine Konvertierung verwendet der Standardmodus genau zwei fachliche
 Quellen: **das zu konvertierende Rasterbild** und **seine sprachliche
 Beschreibung**. Bildbreite und -höhe werden direkt aus diesem Rasterbild

@@ -29,6 +29,8 @@ from src.iCCModules.imageCompositeConverterChevronPanel import fit_chevron_panel
 from src.iCCModules.imageCompositeConverterThreeWayValve import fit_three_way_valve
 from src.iCCModules.imageCompositeConverterRadialDisk import fit_radial_disk
 from src.iCCModules.imageCompositeConverterFilledSymbols import fit_disk_bar, fit_solid_arrow
+from src.iCCModules.imageCompositeConverterArcShaft import fit_arc_shaft
+from src.iCCModules.imageCompositeConverterCircleLinework import fit_circle_linework
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1426,6 +1428,8 @@ def runNonCompositeIterationImpl(
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in (
+            (fit_circle_linework, "non_composite_raster_circle_linework"),
+            (fit_arc_shaft, "non_composite_raster_arc_shaft"),
             (fit_disk_bar, "non_composite_raster_disk_bar"),
             (fit_solid_arrow, "non_composite_raster_solid_arrow"),
             (fit_alarm_bell, "non_composite_raster_alarm_bell"),
@@ -1442,7 +1446,7 @@ def runNonCompositeIterationImpl(
                 render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
             )
             if fitted is not None:
-                if status in {"non_composite_raster_alarm_bell", "non_composite_raster_zigzag_panel", "non_composite_raster_checkbox_checkmark", "non_composite_raster_chevron_panel", "non_composite_raster_three_way_valve"}:
+                if status in {"non_composite_raster_circle_linework", "non_composite_raster_alarm_bell", "non_composite_raster_zigzag_panel", "non_composite_raster_checkbox_checkmark", "non_composite_raster_chevron_panel", "non_composite_raster_three_way_valve"}:
                     params[fitted['source']] = {
                         'initial_error': fitted['initial_error'], 'final_error': fitted['error'],
                         'parameters': fitted['parameters'], 'evaluations': fitted['evaluations'],
