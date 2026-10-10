@@ -1,0 +1,63 @@
+name: Plan B failure tasks
+
+on:
+  workflow_run:
+    workflows: [Plan B random task acceptance]
+    types: [completed]
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+
+# Serial publication prevents two runs creating the same issue concurrently.
+concurrency:
+  group: plan-b-failure-issues
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  record-tasks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # Always execute trusted default-branch code, never the triggering PR.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Download failure evidence as data
+        id: evidence
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: plan-b-acceptance
+          path: artifacts/plan-b-issue-evidence
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
+      - name: Create or update reproducible failure tasks
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PLAN_B_RUN_ID: ${{ github.event.workflow_run.id }}-${{ github.event.workflow_run.run_attempt }}
+          PLAN_B_RUN_URL: ${{ github.event.workflow_run.html_url }}
+          PLAN_B_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+        run: >-
+          python -m tools.report_plan_b_failures
+          --artifact-dir artifacts/plan-b-issue-evidence
+          --run-url "$PLAN_B_RUN_URL" --run-id "$PLAN_B_RUN_ID"
+          --conclusion "$PLAN_B_CONCLUSION" --publish
+      - name: Preserve tasks even if issue permissions are unavailable
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: plan-b-failure-tasks-${{ github.event.workflow_run.id }}
+          path: |
+            artifacts/plan-b-issue-evidence/failure_summary.md
+            artifacts/plan-b-issue-evidence/failure_tasks.json
+            artifacts/plan-b-issue-evidence/issue_sync.json
+          if-no-files-found: error
+          retention-days: 90

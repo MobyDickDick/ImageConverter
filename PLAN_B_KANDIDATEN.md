@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-10, nach Quadrat-/T-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-10, nach AC0711-Abnahme)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -118,11 +118,21 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `AC0711_1_M` – `mean_delta2=13113.830078`, `normalized_mse=0.067225`.
-2. `GE9014_1M` – `mean_delta2=13099.989258`, `normalized_mse=0.067154`.
-3. `GE9012_1M` – `mean_delta2=13013.489258`, `normalized_mse=0.066710`.
-4. `AC0712_1_S` – `mean_delta2=12600.799805`, `normalized_mse=0.064595`.
-5. `AC0734_1_S` – `mean_delta2=12591.893555`, `normalized_mse=0.064549`.
+1. `GE9014_1M` – `mean_delta2=13099.989258`, `normalized_mse=0.067154`.
+2. `GE9012_1M` – `mean_delta2=13013.489258`, `normalized_mse=0.066710`.
+3. `AC0712_1_S` – `mean_delta2=12600.799805`, `normalized_mse=0.064595`.
+4. `AC0734_1_S` – `mean_delta2=12591.893555`, `normalized_mse=0.064549`.
+5. `GE9012_2M` – `mean_delta2=12534.752930`, `normalized_mse=0.064256`.
+
+`AC0711_1_M` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
+Beschreibung und allgemeiner Registrierung des unteren Griffs mit Strich und
+Punkt beide regulären Gates ohne Pflichtmetrikregression sowie die strengeren
+Plan-B-Pixelgrenzen. Die frische Zielmetrik sinkt von `1859.969971` auf
+`45.307144`; eine unabhängige SVG-Vorlage besteht **17/17** strenge CLI-Fälle.
+Details: `docs/next_arbeitspaket_2026-10-10_ac0711_1_m.md`.
+Der jüngste gekoppelte CI-Lauf ist mit zwei offenen Aufgaben dokumentiert:
+[#1908](https://github.com/MobyDickDick/ImageConverter/issues/1908) und
+[#1909](https://github.com/MobyDickDick/ImageConverter/issues/1909).
 
 `AC0721_1_S` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und allgemeiner Konturregistrierung beide regulären Gates ohne
@@ -160,7 +170,7 @@ Gates ohne Pflichtmetrikregression. Die frische CLI-Baseline sinkt von
 ein unabhängiges synthetisches SVG besteht mit zwei Seeds jeweils 17/17 strenge
 Plan-B-Prüfungen. Die drei grauen JPG-IoU-Fälle bleiben separat offen.
 Details: `docs/next_arbeitspaket_2026-10-10_ac0413_1_m.md`.
-Die nächste reguläre Rotation beginnt mit `AC0713_1_L`; vor Änderungen ist eine
+Die nächste reguläre Rotation beginnt mit `GE9014_1M`; vor Änderungen ist eine
 frische CLI-Baseline erforderlich. Der Review über 1.000 Einträge (993 renderbare
 Paare) und sein exakter Aufruf stehen im kompakten Nachweis
 `artifacts/evaluation/circle_linework_recheck_v1/summary_2026-10-10.json`.

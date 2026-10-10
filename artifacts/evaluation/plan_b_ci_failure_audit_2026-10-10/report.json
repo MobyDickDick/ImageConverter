@@ -1,0 +1,53 @@
+{
+  "schema_version": "plan_b_search_v1",
+  "seed": 5431263462732241740,
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "max_additional_svgs": 8,
+  "status": "completed",
+  "attempts": [
+    {
+      "source_svg": "/home/runner/work/ImageConverter/ImageConverter/artifacts/images_to_convert/samples/z_111.svg",
+      "seed": 5431263462732241740,
+      "report": "attempt_01/report.json",
+      "status": "original_not_convertible",
+      "summary": {
+        "required": 17,
+        "completed": 1,
+        "passed": 0,
+        "failed": 1,
+        "satisfactory": false
+      },
+      "original_satisfactory": false,
+      "variations_started": false
+    },
+    {
+      "source_svg": "/home/runner/work/ImageConverter/ImageConverter/artifacts/images_to_convert/samples/AC0552_2_L.svg",
+      "seed": 8436928135728419439,
+      "report": "attempt_02/report.json",
+      "status": "completed",
+      "summary": {
+        "required": 17,
+        "completed": 17,
+        "passed": 9,
+        "failed": 8,
+        "satisfactory": false
+      },
+      "original_satisfactory": true,
+      "variations_started": true
+    }
+  ],
+  "summary": {
+    "required": 17,
+    "completed": 17,
+    "passed": 9,
+    "failed": 8,
+    "satisfactory": false
+  }
+}

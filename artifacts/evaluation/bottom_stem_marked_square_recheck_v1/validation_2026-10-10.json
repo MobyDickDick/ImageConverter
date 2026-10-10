@@ -1,0 +1,47 @@
+{
+  "schema_version": "plan_b_completion_evidence_v1",
+  "baseline_revision": "5a9181acccdda475111e073136bc22f6a6d06971",
+  "runtime_sha256": "3527ba871f52a4e7b68405449a780068c54999a99dada25287dd06a0533eaaec",
+  "standard_suite": {
+    "passed": 2144,
+    "skipped": 30,
+    "seconds": 1084.55,
+    "command": ".venv/Scripts/python.exe -m pytest -q --basetemp .tmp/ac0711/pytest-full"
+  },
+  "final_failure_task_tests": {
+    "passed": 14,
+    "command": ".venv/Scripts/python.exe -m pytest -q tests/detailtests/test_plan_b_failure_tasks.py"
+  },
+  "preservation_and_regression_tests": {
+    "passed": 10,
+    "command": "RUN_HEAVY_CONVERSION_TESTS=1 python -m pytest -q tests/test_satisfactory_regression_battery.py tests/test_conversion_regression_smoke.py tests/test_weak_family_pipeline.py"
+  },
+  "regular_gates": {
+    "passed": 6,
+    "required": 6
+  },
+  "strict_originals": {
+    "passed": 6,
+    "required": 6
+  },
+  "independent_plan_b": {
+    "passed": 17,
+    "required": 17,
+    "seed": 20261010
+  },
+  "satisfactory_archive": {
+    "passed": 158,
+    "required": 158,
+    "known_legacy_higher_errors": 22
+  },
+  "checks": {
+    "compileall": true,
+    "cli_help": true,
+    "no_runtime_image_ids": true,
+    "diff_check_with_cr_at_eol": true
+  },
+  "issues": [
+    "https://github.com/MobyDickDick/ImageConverter/issues/1908",
+    "https://github.com/MobyDickDick/ImageConverter/issues/1909"
+  ]
+}

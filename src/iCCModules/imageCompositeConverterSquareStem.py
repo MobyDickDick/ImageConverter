@@ -1,4 +1,4 @@
-"""Register a plain square and its centered rightward handle from pixels."""
+"""Register a square, centered handle and optional slash/dot from pixels."""
 from __future__ import annotations
 
 import copy
@@ -72,35 +72,40 @@ def _observe_slash_and_dot(interior, x0, y0):
             x0+dx, y0+dy, float(dw), float(dh), *mark_color]
 
 
-def _fit_top_stem_square(geometry_ir, *, image, render_fn, error_fn, description):
+def _fit_vertical_stem_square(geometry_ir, *, image, render_fn, error_fn, description):
     """Rotate the observed body/handle contract while retaining mark direction."""
     original = geometry_ir[0]
+    bottom = original['kind'] == 'UprightSquareKelleGlyph'
+    to_canonical = cv2.ROTATE_90_COUNTERCLOCKWISE if bottom else cv2.ROTATE_90_CLOCKWISE
+    to_original = cv2.ROTATE_90_CLOCKWISE if bottom else cv2.ROTATE_90_COUNTERCLOCKWISE
     canonical = copy.deepcopy(geometry_ir)
     bx, by, bw, bh = original['body_bbox']
-    canonical[0].update(kind='RightStemSquareKelleGlyph', body_bbox=[1-by-bh,bx,bh,bw],
-                        connector=[[1-y,x] for x,y in original['connector']])
+    canonical[0].update(kind='RightStemSquareKelleGlyph',
+        body_bbox=[by,1-bx-bw,bh,bw] if bottom else [1-by-bh,bx,bh,bw],
+        connector=[[y,1-x] if bottom else [1-y,x] for x,y in original['connector']])
 
     def restore(ir):
         result = copy.deepcopy(ir)
         x,y,w,h = result[0]['body_bbox']
-        result[0].update(kind=original['kind'], body_bbox=[y,1-x-w,h,w],
-                         connector=[[v,1-u] for u,v in result[0]['connector']])
+        result[0].update(kind=original['kind'],
+            body_bbox=[1-y-h,x,h,w] if bottom else [y,1-x-w,h,w],
+            connector=[[1-v,u] if bottom else [v,1-u] for u,v in result[0]['connector']])
         for mark in result[1:]:
-            mark['points'] = [[v,1-u] for u,v in mark['points']]
+            mark['points'] = [[1-v,u] if bottom else [v,1-u] for u,v in mark['points']]
         return result
 
     def render(candidate):
         raster = render_fn(restore(candidate))
-        return None if raster is None else cv2.rotate(raster,cv2.ROTATE_90_CLOCKWISE)
+        return None if raster is None else cv2.rotate(raster,to_canonical)
 
-    fitted = fit_square_stem(canonical, image=cv2.rotate(image,cv2.ROTATE_90_CLOCKWISE),
+    fitted = fit_square_stem(canonical, image=cv2.rotate(image,to_canonical),
         description=description, render_fn=render,
-        error_fn=lambda raster:error_fn(cv2.rotate(raster,cv2.ROTATE_90_COUNTERCLOCKWISE)),
-        _marks_in_original=True)
+        error_fn=lambda raster:error_fn(cv2.rotate(raster,to_original)),
+        _marks_in_original='bottom' if bottom else 'top')
     if fitted is None:
         return None
     fitted['geometry_ir'] = restore(fitted['geometry_ir'])
-    fitted['rendered'] = cv2.rotate(fitted['rendered'],cv2.ROTATE_90_COUNTERCLOCKWISE)
+    fitted['rendered'] = cv2.rotate(fitted['rendered'],to_original)
     return fitted
 
 
@@ -108,12 +113,13 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', 
     desc = description.casefold()
     marked = ('punkt' in desc and any(word in desc for word in ('schräg', 'schraeg', 'diagonal'))
               and not any(word in desc for word in ('ohne markierung', 'ohne innenmarkierung', 'ohne punkt')))
-    if (len(geometry_ir) == 1 and geometry_ir[0].get('kind') == 'Rotated180SquareKelleGlyph'
+    if (len(geometry_ir) == 1 and geometry_ir[0].get('kind') in {'Rotated180SquareKelleGlyph', 'UprightSquareKelleGlyph'}
+            and not geometry_ir[0].get('label')
             and marked):
         arr = np.asarray(image)
         if arr.ndim != 3 or arr.shape[2] != 3 or not arr.size or not np.isfinite(arr).all():
             return None
-        return _fit_top_stem_square(geometry_ir,image=arr,render_fn=render_fn,error_fn=error_fn,description=description)
+        return _fit_vertical_stem_square(geometry_ir,image=arr,render_fn=render_fn,error_fn=error_fn,description=description)
     if len(geometry_ir) != 1 or geometry_ir[0].get('kind') != 'RightStemSquareKelleGlyph':
         return None
     arr = np.asarray(image)
@@ -150,7 +156,10 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', 
         # Observe the slash and dot in the requested orientation. Only the
         # square/handle fit uses canonical axes; the marking is not rotated
         # into a different semantic topology.
-        marks = _observe_slash_and_dot(np.rot90(interior), top+margin, w-(right-margin+1))
+        if _marks_in_original == 'bottom':
+            marks = _observe_slash_and_dot(np.rot90(interior,-1), h-(bottom-margin+1), left+margin)
+        else:
+            marks = _observe_slash_and_dot(np.rot90(interior), top+margin, w-(right-margin+1))
     else:
         marks = _observe_slash_and_dot(interior, left+margin, top+margin) if marked else None
     if marked and marks is None:
@@ -158,7 +167,10 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', 
     if not marked and float(np.std(interior.astype(float),axis=(0,1)).max()) > 18:
         return None
     allowed = np.zeros_like(mask)
-    allowed[top:bottom+1, left:right+1] = True
+    # The dense row/column estimate excludes antialiased outer fringes at
+    # fractional pixel phases. Permit one adjacent boundary pixel; disconnected
+    # objects and the handle's topology are still checked independently.
+    allowed[max(0,top-1):bottom+2, max(0,left-1):right+2] = True
     allowed[max(0,int(ys.min())):int(ys.max())+1, right+1:] = True
     if np.any(mask & ~allowed):
         return None
@@ -202,7 +214,8 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', 
             )
             for name, points in shapes:
                 if _marks_in_original:
-                    points = [(w-py,px) for px,py in points]
+                    points = ([(py,h-px) for px,py in points] if _marks_in_original == 'bottom'
+                              else [(w-py,px) for px,py in points])
                 if not all(x+bs/2 < px < x+bw-bs/2 and y+bs/2 < py < y+bh-bs/2 for px,py in points):
                     return None
                 ir.append({'kind':'PolygonPath','id':'raster_interior_'+name,

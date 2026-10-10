@@ -1,0 +1,580 @@
+{
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261010,
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "iterations": 64,
+  "timeout_seconds": 60,
+  "source_svg_sha256": "043f4d7f38b88da21b3242f9928c60a58797d4c3338b1061162bfb90f8b1eec1",
+  "source_description_sha256": "416d8b7b92235a63a6dc53d76a168b39ab08d080d6350a850bc3d117880ded67",
+  "source_description": "Kelle mit Quadrat oben. Ein gefülltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten führt. Im Quadrat liegt ein kontrastierender schräger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+  "source_image": "source.png",
+  "artifact_retention": "summary_and_source_image",
+  "selection": {
+    "mode": "explicit",
+    "source_svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\bottom_stem_marked_square_recheck_v1\\independent.svg"
+  },
+  "cases": [
+    {
+      "case_id": "original",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 1.0,
+        "relative_x": 0.0,
+        "relative_y": 0.0
+      },
+      "input_sha256": "76b4a66c8dcf6aa37224b2cf452735bdbd0e2b6f7f9b222e2a8a028d3dbc6971",
+      "reference_svg_sha256": "043f4d7f38b88da21b3242f9928c60a58797d4c3338b1061162bfb90f8b1eec1",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 4.485454610403394e-06,
+        "foreground_mse": 1.5956162314978428e-05,
+        "edge_alignment": 1.0,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "2e09b095021aec861dc0fd169904bf7a60ae20042dd5673cb4e31350c6c9a001",
+      "elapsed_seconds": 5.844
+    },
+    {
+      "case_id": "probe_01",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 0.98202297,
+        "relative_x": 0.00810461,
+        "relative_y": -0.02289099
+      },
+      "input_sha256": "5cd0f2f5dcd8c0001799b396a87b0ac5d0c1dbb2b7004769b9787605b684d53b",
+      "reference_svg_sha256": "a2ac9513fc57838bd93668d4bae19619fd1b9bc7c3f3b8a88d980cabacc820e0",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 2.800727088470012e-05,
+        "foreground_mse": 0.00010136970377061516,
+        "edge_alignment": 0.9901438355445862,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "6cb8e9d60bcb52d13e7659596266b2306718a5389d2f38a219eae7a53e17d26e",
+      "elapsed_seconds": 3.422
+    },
+    {
+      "case_id": "probe_02",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 0.98280131,
+        "relative_x": 0.00634935,
+        "relative_y": -0.0163187
+      },
+      "input_sha256": "76c8ff0b251c9cd7369ac87497f1f132f0117bef6fbb5d2bc1b8b68626a6aba0",
+      "reference_svg_sha256": "7b161976fd27b4067d11f86a86196d9368b0dd27b5ddf33ec915f312a7bcff1d",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00010746294719865546,
+        "foreground_mse": 0.000383045437047258,
+        "edge_alignment": 0.9829614162445068,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "8214a00a349953d0b9467554dc44e31395350a129fb3331b89a9fac0e03d9604",
+      "elapsed_seconds": 3.844
+    },
+    {
+      "case_id": "probe_03",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 0.97931065,
+        "relative_x": 0.00524478,
+        "relative_y": -0.01648033
+      },
+      "input_sha256": "bafa5bf4c2b29ca9c54b6d20c830d49c88070c4e79ef7d60dfe081bca6d28720",
+      "reference_svg_sha256": "566c5e70b8e5cac7c66b53b69c5d9a94fb7b8321c3c4d003f6ad362ecf99f554",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 4.315244223107584e-05,
+        "foreground_mse": 0.00013037698226980865,
+        "edge_alignment": 0.993198037147522,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "d39abf4393ee1e17df583044b4590ac92863b8d1d1bd5992a529d702bf5c06e8",
+      "elapsed_seconds": 3.797
+    },
+    {
+      "case_id": "probe_04",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 1.03091238,
+        "relative_x": 0.00898283,
+        "relative_y": -0.02074313
+      },
+      "input_sha256": "9dc34591fe839102975383afcdd0d7f117c5420cfcb11c1033a78b90cdd3c54e",
+      "reference_svg_sha256": "8fe91b8f82e6dbf9801fe5653c9ebc757353e5496e7eb875975a34f53243ec27",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00010491026478121057,
+        "foreground_mse": 0.0003458578430581838,
+        "edge_alignment": 1.0,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "1c3c8113ea8d4666cf1b6f71b5f34539bf68f8cf581e761129131a83c4d1042c",
+      "elapsed_seconds": 4.391
+    },
+    {
+      "case_id": "probe_05",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 0.99452614,
+        "relative_x": -0.01820547,
+        "relative_y": 0.01189658
+      },
+      "input_sha256": "ce82d2302b80bf3ebb6bcbaa6e2da08a920a3eea8a431d70f588ed75c36c4355",
+      "reference_svg_sha256": "4f8669bd5543b0183864fd1ae3bea74df03ff7e91d23417b56d6a19af274fa6c",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 3.059222217416391e-05,
+        "foreground_mse": 8.498809620505199e-05,
+        "edge_alignment": 0.9171366691589355,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "681e80f5f999ffde01aba346e08da150b17d1e004bd35a430638e4d9e9b6e2e1",
+      "elapsed_seconds": 5.609
+    },
+    {
+      "case_id": "probe_06",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 1.03471323,
+        "relative_x": 0.01517706,
+        "relative_y": -0.00822071
+      },
+      "input_sha256": "82c5099a83980bb77c43879be0905c940e73dbd18370508cb6d074cdf6e707af",
+      "reference_svg_sha256": "710f64cfa7eebe7a446a99cc24a19ff1a6f33527570273b8a05c23a0217f9a8b",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 2.1919395294389687e-05,
+        "foreground_mse": 7.058664778014645e-05,
+        "edge_alignment": 0.9921764135360718,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "7d685e719b6168832c0eabf27d775c191d69eeef6e2825564cb4ec7ae2909456",
+      "elapsed_seconds": 6.047
+    },
+    {
+      "case_id": "probe_07",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 0.99158848,
+        "relative_x": -0.00925183,
+        "relative_y": -0.00060057
+      },
+      "input_sha256": "33449fba142f9f57336ed851f984bacf8e875126b7438804ccb2fcb30ee89e9f",
+      "reference_svg_sha256": "cbe80ff1a6a1e6ec0ced3194586c6779182f217482892cfb8a5e6570ec52cf09",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 4.4659933337243274e-05,
+        "foreground_mse": 0.00013174056948628277,
+        "edge_alignment": 0.9228177666664124,
+        "foreground_iou": 0.9768190598840953
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "c37877e364bf481755e4217f1873fbdce2008dc26efa6584c9059b08e9fea814",
+      "elapsed_seconds": 5.766
+    },
+    {
+      "case_id": "probe_08",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 0.98953819,
+        "relative_x": 0.01408946,
+        "relative_y": -0.00387055
+      },
+      "input_sha256": "7cdc8df47f10e17d7cb40a9d7a05fb4e5917a0dbe4fb0c14b64935cf619e0a3d",
+      "reference_svg_sha256": "52232114649f0143117d6ced19664ad0ad0bf303d5cb7efd2ec0f59ebf5bb6d2",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 5.054940629634075e-05,
+        "foreground_mse": 0.00018016934336628765,
+        "edge_alignment": 0.9942953586578369,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "f559c35afd368b81188ac0914391e8df7399c6bcf8fb9bd43d03a4e71938dd14",
+      "elapsed_seconds": 6.234
+    },
+    {
+      "case_id": "probe_09",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 0.98923194,
+        "relative_x": -0.01002539,
+        "relative_y": -0.01287474
+      },
+      "input_sha256": "9b8ced44542be8a0852bc805ead70411e7380cc077641e66a14a5ba2e60cd606",
+      "reference_svg_sha256": "91ae01a51f51bdad0ecdf400ac07436bef19459a1304a7aae47f434eca6057f9",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 2.800632137223147e-05,
+        "foreground_mse": 9.929203224601224e-05,
+        "edge_alignment": 0.9141605496406555,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "ea151f40faa44be3c029e7166b9489c2c66cb57cb32eaff6a79fb6703e2126da",
+      "elapsed_seconds": 5.344
+    },
+    {
+      "case_id": "probe_10",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 1.05580196,
+        "relative_x": 0.00135329,
+        "relative_y": -0.01742701
+      },
+      "input_sha256": "fd6bb4dadc557624f5e1bcc5b6217ebed4b97de85b1feb732156452fb727d605",
+      "reference_svg_sha256": "8997f423975f11d22b799a2f288171221c97d9781fc7c9f5a2143e66885e252c",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 4.654904842027463e-05,
+        "foreground_mse": 0.00012866668112110347,
+        "edge_alignment": 0.9204127192497253,
+        "foreground_iou": 0.9796037296037297
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "2dd55c145ef25e064f0ecaea0776291a2982a657395a075bda9b01210fe9f3e6",
+      "elapsed_seconds": 5.219
+    },
+    {
+      "case_id": "probe_11",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 0.95742828,
+        "relative_x": 0.00955635,
+        "relative_y": 0.00356696
+      },
+      "input_sha256": "202e75a222f9ee874acc2ecd0b981c3db4d9a123a3679193f766a01d495edec4",
+      "reference_svg_sha256": "699c1dec79daf6ae6fb8be2bcba21fc6ecbb7a4ea34fb36dc4a7c3914c5a9ac5",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 3.925365308532491e-05,
+        "foreground_mse": 0.00014720122271683067,
+        "edge_alignment": 0.9917861223220825,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "f0f4fea498c0077dc4b275409bddcb448ff23f77ee0d4693ea4e2325365d1114",
+      "elapsed_seconds": 4.891
+    },
+    {
+      "case_id": "probe_12",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 1.05577182,
+        "relative_x": -0.018374,
+        "relative_y": 0.00241826
+      },
+      "input_sha256": "098d9ddbc21cacaedcb48b4c635a80e1cf845e94082d9c158c51dbf5964a94d1",
+      "reference_svg_sha256": "e4b3b33a10025866578f3959bfc880cf3bc02d6cb485b40a1f8da4c49cd6abdb",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.113128620199859e-05,
+        "foreground_mse": 0.00016947285621427,
+        "edge_alignment": 0.9916887283325195,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "0e4141635e1d61acbdf4fba987eadc929058e8ac3836ab1e9e5ea180cc682510",
+      "elapsed_seconds": 5.375
+    },
+    {
+      "case_id": "probe_13",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 1.05896874,
+        "relative_x": -0.0241012,
+        "relative_y": -0.00138238
+      },
+      "input_sha256": "782838e9e9a619497e9a753403c9d26da9a958bd8975781d2acd3ec43e9e8470",
+      "reference_svg_sha256": "12dbcba690f8e9213286d2eb21f704d01c05763941fc9878fe2004a2d1a0518d",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00012761662947013974,
+        "foreground_mse": 0.000268391624558717,
+        "edge_alignment": 0.9099999070167542,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "bd8f47b62a01e43047fefdca57445dea0f69de6b67db31d8fb93abdd0041760b",
+      "elapsed_seconds": 5.812
+    },
+    {
+      "case_id": "probe_14",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 0.9567562,
+        "relative_x": -0.02484468,
+        "relative_y": 0.01318203
+      },
+      "input_sha256": "bf783f7ec2073a9de2cbc1d1d1e5d1ceb162f9a6285d4e9f0fd56ed5da1cc287",
+      "reference_svg_sha256": "bc299f965f45c179e4dc9886faf5926ab39e6415af1b703ccdc6350db528b2cf",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 2.8735385058098473e-05,
+        "foreground_mse": 0.0001077576816896908,
+        "edge_alignment": 0.9178184270858765,
+        "foreground_iou": 0.9993055555555556
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "81e0d32a5afca320e52ad671a2a4d3b7a5afc42f29fa07db1af2ae1f8ea9e2c7",
+      "elapsed_seconds": 6.547
+    },
+    {
+      "case_id": "probe_15",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 0.99449297,
+        "relative_x": -0.00258372,
+        "relative_y": -0.00779375
+      },
+      "input_sha256": "761f50c09aa41500d7ab3c358b791cc5e1f9b1b9fddcc6de118f0f56e38ab161",
+      "reference_svg_sha256": "4ab0cbd147b6dc44436730da03ea71d6fc4582e06264ea3b4a593b87d7316639",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 1.6125801266753115e-05,
+        "foreground_mse": 5.739556945627555e-05,
+        "edge_alignment": 0.9963499307632446,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "e5eea32f5e35a59c00a3172d20df19b5baad4208e57dbce9499efa6f8ae42ca2",
+      "elapsed_seconds": 7.296
+    },
+    {
+      "case_id": "probe_16",
+      "width": 60,
+      "height": 90,
+      "variation": {
+        "scale": 1.02947168,
+        "relative_x": 0.0239935,
+        "relative_y": 0.02155719
+      },
+      "input_sha256": "8d6ff6f413d3c1ff6d7a7ea12fa88c4c2e0e59f3e1dae37c290ca4a70b8697f8",
+      "reference_svg_sha256": "810a3a2dfc9f9143c5cf53f4b75eac81ca8b0896edc6ba0f01eb14d79f9aa82b",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 3.7839196011191234e-05,
+        "foreground_mse": 0.00012497349234763533,
+        "edge_alignment": 0.9956446886062622,
+        "foreground_iou": 1.0
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      },
+      "output_sha256": "33b1405bb2c09034f27b3ca1ca5b839fdec7a108806a7f591dde31878d940a05",
+      "elapsed_seconds": 7.922
+    }
+  ],
+  "status": "completed",
+  "original_satisfactory": true,
+  "variations_started": true,
+  "summary": {
+    "required": 17,
+    "completed": 17,
+    "passed": 17,
+    "failed": 0,
+    "satisfactory": true
+  },
+  "source_image_sha256": "76b4a66c8dcf6aa37224b2cf452735bdbd0e2b6f7f9b222e2a8a028d3dbc6971"
+}

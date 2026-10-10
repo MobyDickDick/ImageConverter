@@ -1,5 +1,10 @@
 # Plan-B-Abnahmetest mit neuer Auswahl und bis zu acht weiteren SVGs
 
+Fehlschläge werden zusätzlich als lesbare Laufübersicht und reproduzierbare
+Aufgaben dokumentiert. Der Folgeworkflow erstellt oder aktualisiert dazu
+GitHub-Issues; fehlen Schreibrechte, bleiben Aufgabenentwürfe als Artefakt
+erhalten. Details und konkrete Belege: [Plan-B-Fehler als Aufgaben](plan_b_failure_tasks_2026-10-10.md).
+
 ```powershell
 python -m tools.run_plan_b_variations
 ```
