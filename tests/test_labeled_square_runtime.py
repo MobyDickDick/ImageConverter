@@ -103,7 +103,7 @@ def test_registration_generalizes_position_scale_color_and_described_glyph(scale
     assert result is not None
     assert result['final_error'] < result['initial_error']
     assert result['geometry_ir'][0]['label'] == label
-    assert result['evaluations'] <= 111
+    assert result['evaluations'] <= 123
     assert normalized_mse(image, result['rendered'])[1] < .006
 
 

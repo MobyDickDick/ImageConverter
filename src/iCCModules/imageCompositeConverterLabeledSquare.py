@@ -12,6 +12,23 @@ def _hex(bgr):
     return '#' + ''.join(f'{int(round(v)):02x}' for v in bgr[::-1])
 
 
+def _contour_metrics(reference, rendered):
+    """Compare residual, contour and foreground evidence for local refinement."""
+    a = cv2.Canny(reference.astype(np.uint8), 50, 140) > 0
+    b = cv2.Canny(rendered.astype(np.uint8), 50, 140) > 0
+    if not a.any() or not b.any():
+        edge = 0.
+    else:
+        da = cv2.distanceTransform((~a).astype(np.uint8), cv2.DIST_L2, 3)
+        db = cv2.distanceTransform((~b).astype(np.uint8), cv2.DIST_L2, 3)
+        edge = float((np.exp(-db[a]).mean()+np.exp(-da[b]).mean())/2)
+    ma, mb = np.min(reference, axis=2) < 210, np.min(rendered, axis=2) < 210
+    union = (ma | mb).sum()
+    iou = float((ma & mb).sum()/union) if union else 1.
+    residual = float(np.mean(np.sum((reference.astype(float)-rendered.astype(float))**2, axis=2)))
+    return residual, edge, iou
+
+
 def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn):
     """Fit observed geometry/colors while preserving the described text and topology.
 
@@ -74,8 +91,16 @@ def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn):
     label_pixels = crop[labels == index]
     distances = np.linalg.norm(label_pixels.astype(float)-body_color, axis=1)
     label_color = np.median(label_pixels[distances >= np.percentile(distances, 75)], axis=0)
-    border_color = np.median(np.concatenate((arr[top, left:right], arr[bottom-1, left:right],
-                                            arr[top:bottom, left], arr[top:bottom, right-1])), axis=0)
+    border_pixels = np.concatenate((arr[top, left:right], arr[bottom-1, left:right],
+                                    arr[top:bottom, left], arr[top:bottom, right-1]))
+    border_color = np.median(border_pixels, axis=0)
+    border_core = np.percentile(border_pixels, 15, axis=0)
+    # At fractional pixel phases, pale fill/white fringes can dominate the
+    # outer row. Use the observed dark contour cores only when the median
+    # has lost contrast; well-separated contour estimates stay unchanged.
+    if (np.linalg.norm(border_color-body_color) < 50
+            and np.linalg.norm(border_core-body_color) > 65):
+        border_color = border_core
     stem_color = np.median(arr[bottom:stem_end, int(stem_center)], axis=0)
     original = render_fn(geometry_ir)
     if original is None:
@@ -159,6 +184,36 @@ def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn):
                             best, changed = measured, True
             if not changed:
                 break
+    old_metrics = _contour_metrics(arr, best[2])
+    if old_metrics[1] < .72:
+        # An outer fringe can hide a thicker contour in a color/absolute-error
+        # fit. Observe interior edge-band colors and jointly move the rectangle
+        # and its stroke, preserving the observed outer pixel-center bounds.
+        band = min(4, max(2, int(min(bw, bh)*.12)))
+        pixels = np.concatenate((arr[top:top+band, left:right].reshape(-1, 3),
+                                 arr[bottom-band:bottom, left:right].reshape(-1, 3),
+                                 arr[top:bottom, left:left+band].reshape(-1, 3),
+                                 arr[top:bottom, right-band:right].reshape(-1, 3)))
+        contrast_pixels = pixels[(np.linalg.norm(pixels.astype(float)-body_color, axis=1) > 35)
+                                 & (np.linalg.norm(pixels.astype(float)-255, axis=1) > 35)]
+        if len(contrast_pixels):
+            buckets = contrast_pixels // 8
+            colors, counts = np.unique(buckets, axis=0, return_counts=True)
+            core = np.median(contrast_pixels[np.all(buckets == colors[counts.argmax()], axis=1)], axis=0)
+            limit = min(6., min(bw, bh)*.2)
+            for stroke in np.arange(.5, limit+.01, .5):
+                candidate = copy.deepcopy(best[1])
+                candidate.update(body_bbox=[(left+.5+stroke/2)/width, (top+.5+stroke/2)/height,
+                                            (bw-1-stroke)/width, (bh-1-stroke)/height],
+                                 body_stroke=_hex(core), body_stroke_width=stroke/scale)
+                measured = measure(candidate)
+                evaluations += 1
+                if measured is None or measured[0] >= best[0]-1e-9:
+                    continue
+                metrics = _contour_metrics(arr, measured[2])
+                if (metrics[0] <= old_metrics[0]+1e-9 and metrics[1] >= old_metrics[1]-1e-9
+                        and metrics[2] >= old_metrics[2]-1e-9):
+                    best = measured
     if best[0] >= initial_error-1e-9:
         return None
     return {'geometry_ir': [best[1]], 'rendered': best[2], 'initial_error': initial_error,

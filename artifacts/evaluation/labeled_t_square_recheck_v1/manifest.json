@@ -1,0 +1,78 @@
+{
+  "label": "T",
+  "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"T\" im Quadrat. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff von der unteren Quadratseite nach unten. Der Buchstabe T kontrastiert mit der Quadratf\u00fcllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+  "provenance": {
+    "commit": "531a28ac998fc6c2dbebac639c19650862f3561d",
+    "baseline_kind": "fresh_original_description_cli",
+    "execution_mode": "semantic-only",
+    "seed": 0,
+    "toolchain": {
+      "python": "3.10.11",
+      "numpy": "2.2.6",
+      "opencv": "4.14.0",
+      "pymupdf": "1.26.7"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_square_00",
+      "source": "AC0721_1_S.jpg",
+      "image": "../../images_to_convert/AC0721_1_S.jpg",
+      "source_sha256": "07afeeb295ecce0596745dcd4d0de5b51e5528f175b92ef74b552cd8a070a4ce",
+      "role": "development",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/anonymous_square_00.svg",
+      "after_svg": "after/anonymous_square_00.svg"
+    },
+    {
+      "case_id": "anonymous_square_01",
+      "source": "AC0721_1_L.jpg",
+      "image": "../../images_to_convert/AC0721_1_L.jpg",
+      "source_sha256": "303322d79a15df0a62ff69448dd967ad147ffd57a9e105b6821b9633a5d9ce8e",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/anonymous_square_01.svg",
+      "after_svg": "after/anonymous_square_01.svg"
+    },
+    {
+      "case_id": "anonymous_square_02",
+      "source": "AC0721_1_M.jpg",
+      "image": "../../images_to_convert/AC0721_1_M.jpg",
+      "source_sha256": "bb4c6836db304a40c042c10e0c4438d1c1e92a3924ba528482d1f52f83d92271",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/anonymous_square_02.svg",
+      "after_svg": "after/anonymous_square_02.svg"
+    },
+    {
+      "case_id": "anonymous_square_03",
+      "source": "AC0721_L.jpg",
+      "image": "../../images_to_convert/AC0721_L.jpg",
+      "source_sha256": "63ed5447dd54aba7d66aa341bedbd5a32f48a91420237a94b3ab4d05296ade44",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/anonymous_square_03.svg",
+      "after_svg": "after/anonymous_square_03.svg"
+    },
+    {
+      "case_id": "anonymous_square_04",
+      "source": "AC0721_M.jpg",
+      "image": "../../images_to_convert/AC0721_M.jpg",
+      "source_sha256": "fc5d948de62597e8c7eb5f3105397a88898991e785841a17ad8232213cd9fb0e",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/anonymous_square_04.svg",
+      "after_svg": "after/anonymous_square_04.svg"
+    },
+    {
+      "case_id": "anonymous_square_05",
+      "source": "AC0721_S.jpg",
+      "image": "../../images_to_convert/AC0721_S.jpg",
+      "source_sha256": "476d33250c0cb371734a844d18251d32497a02c762d16cb431638a6362fca936",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/anonymous_square_05.svg",
+      "after_svg": "after/anonymous_square_05.svg"
+    }
+  ]
+}

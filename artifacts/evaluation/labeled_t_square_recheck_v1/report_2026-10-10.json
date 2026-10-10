@@ -1,0 +1,801 @@
+{
+  "baseline": {
+    "baseline_sha256": "7ef108aeb8bdb8036c1539a134ca3a5c1644d0f471749a7e2f617ca7de89192a",
+    "cases": {
+      "anonymous_square_00": {
+        "dimensions": {
+          "height": 25,
+          "width": 15
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.718242883682251,
+          "error_per_pixel": 0.01682831698345188,
+          "object_mask_iou": 0.9594594594594594,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_square_01": {
+        "dimensions": {
+          "height": 45,
+          "width": 25
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.7719466090202332,
+          "error_per_pixel": 0.017804561596901834,
+          "object_mask_iou": 0.8613251155624037,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_square_02": {
+        "dimensions": {
+          "height": 35,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8314294219017029,
+          "error_per_pixel": 0.015961128732538767,
+          "object_mask_iou": 0.9408866995073891,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_square_03": {
+        "dimensions": {
+          "height": 45,
+          "width": 25
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4602658152580261,
+          "error_per_pixel": 0.03445293727172241,
+          "object_mask_iou": 0.21453287197231835,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_square_04": {
+        "dimensions": {
+          "height": 35,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.43265366554260254,
+          "error_per_pixel": 0.03343145765250544,
+          "object_mask_iou": 0.18134715025906736,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_square_05": {
+        "dimensions": {
+          "height": 25,
+          "width": 15
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5480256080627441,
+          "error_per_pixel": 0.031101459374599513,
+          "object_mask_iou": 0.33653846153846156,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_kind": "fresh_original_description_cli",
+      "commit": "531a28ac998fc6c2dbebac639c19650862f3561d",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_square_00": "07afeeb295ecce0596745dcd4d0de5b51e5528f175b92ef74b552cd8a070a4ce",
+        "anonymous_square_01": "303322d79a15df0a62ff69448dd967ad147ffd57a9e105b6821b9633a5d9ce8e",
+        "anonymous_square_02": "bb4c6836db304a40c042c10e0c4438d1c1e92a3924ba528482d1f52f83d92271",
+        "anonymous_square_03": "63ed5447dd54aba7d66aa341bedbd5a32f48a91420237a94b3ab4d05296ade44",
+        "anonymous_square_04": "fc5d948de62597e8c7eb5f3105397a88898991e785841a17ad8232213cd9fb0e",
+        "anonymous_square_05": "476d33250c0cb371734a844d18251d32497a02c762d16cb431638a6362fca936"
+      },
+      "seed": 0,
+      "toolchain": {
+        "numpy": "2.2.6",
+        "opencv": "4.14.0",
+        "pymupdf": "1.26.7",
+        "python": "3.10.11"
+      }
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 481.4106750488281,
+      "after_svg": "after/anonymous_square_00.svg",
+      "after_svg_sha256": "554c54dd701f38cf0ea50d69f5309aff5ad59a482c97274c6bdf1b3c71cf8ef6",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 3282.783935546875,
+      "before_svg": "before/anonymous_square_00.svg",
+      "before_svg_sha256": "5839af50aeb67002eb0a8f03867fb20575073bde173b4a80ecc9cf01d561aa31",
+      "case_id": "anonymous_square_00",
+      "image": "../../images_to_convert/AC0721_1_S.jpg",
+      "input_sha256": "07afeeb295ecce0596745dcd4d0de5b51e5528f175b92ef74b552cd8a070a4ce",
+      "role": "development",
+      "source": "AC0721_1_S.jpg",
+      "source_sha256": "07afeeb295ecce0596745dcd4d0de5b51e5528f175b92ef74b552cd8a070a4ce"
+    },
+    {
+      "after_mean_delta2": 856.5101928710938,
+      "after_svg": "after/anonymous_square_01.svg",
+      "after_svg_sha256": "2317410ef4ad0ed00147055bd7964da45542d886af9fe0e09e3669c1f44ca25c",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 3473.224853515625,
+      "before_svg": "before/anonymous_square_01.svg",
+      "before_svg_sha256": "0d5ac584489e2ed44543ba719a2bd98cdf91d49a01685c89bfc4d8fbb7966b62",
+      "case_id": "anonymous_square_01",
+      "image": "../../images_to_convert/AC0721_1_L.jpg",
+      "input_sha256": "303322d79a15df0a62ff69448dd967ad147ffd57a9e105b6821b9633a5d9ce8e",
+      "role": "holdout",
+      "source": "AC0721_1_L.jpg",
+      "source_sha256": "303322d79a15df0a62ff69448dd967ad147ffd57a9e105b6821b9633a5d9ce8e"
+    },
+    {
+      "after_mean_delta2": 535.3786010742188,
+      "after_svg": "after/anonymous_square_02.svg",
+      "after_svg_sha256": "949f4928a748debb32006a4c7e4601913f142701113d3eb82e8582b0bb1a071e",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 3113.6171875,
+      "before_svg": "before/anonymous_square_02.svg",
+      "before_svg_sha256": "c9842b6329015243dabc324694ca8115246670cad04bdf4a4f156c1bb6700e4c",
+      "case_id": "anonymous_square_02",
+      "image": "../../images_to_convert/AC0721_1_M.jpg",
+      "input_sha256": "bb4c6836db304a40c042c10e0c4438d1c1e92a3924ba528482d1f52f83d92271",
+      "role": "holdout",
+      "source": "AC0721_1_M.jpg",
+      "source_sha256": "bb4c6836db304a40c042c10e0c4438d1c1e92a3924ba528482d1f52f83d92271"
+    },
+    {
+      "after_mean_delta2": 1306.61328125,
+      "after_svg": "after/anonymous_square_03.svg",
+      "after_svg_sha256": "26ac4638a0f42d3b39627cf95d1b17cbabbc18885b934edb4eb04cf5b3e642a1",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 6720.90673828125,
+      "before_svg": "before/anonymous_square_03.svg",
+      "before_svg_sha256": "edb4f40d9cbcdc0f2d2e8319a7049c4e8a09465749705f4b58dc67ed18a00b99",
+      "case_id": "anonymous_square_03",
+      "image": "../../images_to_convert/AC0721_L.jpg",
+      "input_sha256": "63ed5447dd54aba7d66aa341bedbd5a32f48a91420237a94b3ab4d05296ade44",
+      "role": "holdout",
+      "source": "AC0721_L.jpg",
+      "source_sha256": "63ed5447dd54aba7d66aa341bedbd5a32f48a91420237a94b3ab4d05296ade44"
+    },
+    {
+      "after_mean_delta2": 389.58428955078125,
+      "after_svg": "after/anonymous_square_04.svg",
+      "after_svg_sha256": "e41b780a5d229b5c57769483ca63aa09cf7dcb81488e00d5d0a734bf6c0a25bf",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 6521.6416015625,
+      "before_svg": "before/anonymous_square_04.svg",
+      "before_svg_sha256": "390b6f10f2962d55d0042d116709d1bacfcd0d037653d56233e194a635a07ac3",
+      "case_id": "anonymous_square_04",
+      "image": "../../images_to_convert/AC0721_M.jpg",
+      "input_sha256": "fc5d948de62597e8c7eb5f3105397a88898991e785841a17ad8232213cd9fb0e",
+      "role": "holdout",
+      "source": "AC0721_M.jpg",
+      "source_sha256": "fc5d948de62597e8c7eb5f3105397a88898991e785841a17ad8232213cd9fb0e"
+    },
+    {
+      "after_mean_delta2": 541.6400146484375,
+      "after_svg": "after/anonymous_square_05.svg",
+      "after_svg_sha256": "b302b101a29852990e9cb0f6955d7f0db961c31e94f251eed47563a8a5fe7bf9",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 6067.1171875,
+      "before_svg": "before/anonymous_square_05.svg",
+      "before_svg_sha256": "48bf724b15364af1e83872f6bcd5c1c68aadb8d1f4b285f1f0da28e64ba34df9",
+      "case_id": "anonymous_square_05",
+      "image": "../../images_to_convert/AC0721_S.jpg",
+      "input_sha256": "476d33250c0cb371734a844d18251d32497a02c762d16cb431638a6362fca936",
+      "role": "holdout",
+      "source": "AC0721_S.jpg",
+      "source_sha256": "476d33250c0cb371734a844d18251d32497a02c762d16cb431638a6362fca936"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "original_baseline_reproduced": true,
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "7ef108aeb8bdb8036c1539a134ca3a5c1644d0f471749a7e2f617ca7de89192a",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9140672087669373,
+          "error_per_pixel": 0.002467823529662069,
+          "object_mask_iou": 0.9953271028037384,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.718242883682251,
+          "error_per_pixel": 0.01682831698345188,
+          "object_mask_iou": 0.9594594594594594,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_square_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.002467823529662069,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9767,
+            "edge_alignment": 0.9141,
+            "pixel_similarity": 0.9975,
+            "semantic_score": 1.0,
+            "structure_score": 0.9953
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.988836944103241,
+          "error_per_pixel": 0.0043906712437323785,
+          "object_mask_iou": 0.8939393939393939,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.7719466090202332,
+          "error_per_pixel": 0.017804561596901834,
+          "object_mask_iou": 0.8613251155624037,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_square_01",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0043906712437323785,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9696,
+            "edge_alignment": 0.9888,
+            "pixel_similarity": 0.9956,
+            "semantic_score": 1.0,
+            "structure_score": 0.8939
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9540108442306519,
+          "error_per_pixel": 0.0027444757199754904,
+          "object_mask_iou": 0.9947643979057592,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8314294219017029,
+          "error_per_pixel": 0.015961128732538767,
+          "object_mask_iou": 0.9408866995073891,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_square_02",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0027444757199754904,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9865,
+            "edge_alignment": 0.954,
+            "pixel_similarity": 0.9973,
+            "semantic_score": 1.0,
+            "structure_score": 0.9948
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.7650896906852722,
+          "error_per_pixel": 0.006698004773804947,
+          "object_mask_iou": 0.8984375,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4602658152580261,
+          "error_per_pixel": 0.03445293727172241,
+          "object_mask_iou": 0.21453287197231835,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_square_03",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.006698004773804947,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9142,
+            "edge_alignment": 0.7651,
+            "pixel_similarity": 0.9933,
+            "semantic_score": 1.0,
+            "structure_score": 0.8984
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.791628360748291,
+          "error_per_pixel": 0.001997100036143951,
+          "object_mask_iou": 0.8431372549019608,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.43265366554260254,
+          "error_per_pixel": 0.03343145765250544,
+          "object_mask_iou": 0.18134715025906736,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_square_04",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.001997100036143951,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9082,
+            "edge_alignment": 0.7916,
+            "pixel_similarity": 0.998,
+            "semantic_score": 1.0,
+            "structure_score": 0.8431
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.7605592608451843,
+          "error_per_pixel": 0.002776573187996604,
+          "object_mask_iou": 0.8556701030927835,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5480256080627441,
+          "error_per_pixel": 0.031101459374599513,
+          "object_mask_iou": 0.33653846153846156,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_square_05",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.002776573187996604,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9034,
+            "edge_alignment": 0.7606,
+            "pixel_similarity": 0.9972,
+            "semantic_score": 1.0,
+            "structure_score": 0.8557
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_kind": "fresh_original_description_cli",
+      "commit": "531a28ac998fc6c2dbebac639c19650862f3561d",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_square_00": "07afeeb295ecce0596745dcd4d0de5b51e5528f175b92ef74b552cd8a070a4ce",
+        "anonymous_square_01": "303322d79a15df0a62ff69448dd967ad147ffd57a9e105b6821b9633a5d9ce8e",
+        "anonymous_square_02": "bb4c6836db304a40c042c10e0c4438d1c1e92a3924ba528482d1f52f83d92271",
+        "anonymous_square_03": "63ed5447dd54aba7d66aa341bedbd5a32f48a91420237a94b3ab4d05296ade44",
+        "anonymous_square_04": "fc5d948de62597e8c7eb5f3105397a88898991e785841a17ad8232213cd9fb0e",
+        "anonymous_square_05": "476d33250c0cb371734a844d18251d32497a02c762d16cb431638a6362fca936"
+      },
+      "seed": 0,
+      "toolchain": {
+        "numpy": "2.2.6",
+        "opencv": "4.14.0",
+        "pymupdf": "1.26.7",
+        "python": "3.10.11"
+      }
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 6,
+      "improved": 6,
+      "satisfactory": 6,
+      "technically_completed": 6
+    }
+  },
+  "schema_version": "labeled_square_recheck_v1",
+  "semantic_contract": "one filled square, centered connected lower stem and exact described contrast text; geometry and colors from raster"
+}
