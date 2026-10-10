@@ -124,12 +124,14 @@ Workflow `.github/workflows/local-completion-checks.yml` startet auf Pull
 Requests, Pushes auf die Hauptarbeitszweige und manuell per `workflow_dispatch`
 denselben Sammelbefehl. Der eigenständige Job `image-id-hardcoding-ratchet`
 führt die Nullprüfung außerdem als direkt sichtbares Pflichtsignal aus. Vor dem
-Sammelprofil installiert der Workflow `pytest`,
-damit ein frischer `actions/setup-python`-Runner die Pytest-Suite überhaupt als
-Modul starten kann:
+Sammelprofil und allen weiteren Test- und Konvertierungsjobs installiert der
+Workflow die Abhängigkeiten aus `requirements-dev.txt`: `pytest`, NumPy,
+OpenCV (`opencv-python-headless`, Import `cv2`), Pillow und PyMuPDF (Import
+`fitz`). Damit stehen auch bei der Testsammlung und den erweiterten Archivprüfungen
+auf einem frischen `actions/setup-python`-Runner alle benötigten Module bereit:
 
 ```bash
-python -m pip install pytest
+python -m pip install -r requirements-dev.txt
 ./tools/run_test_evidence.sh \
   --name completion-profile \
   --log artifacts/test-evidence/completion-profile.log \
@@ -154,7 +156,7 @@ Schablone für echte Korrekturaufgaben stehen in
 `docs/test_evidence_task_derivation.md`.
 
 Der Workflow enthält zusätzlich den Job `batch-artifact-drift-gate`. Dieser
-installiert ebenfalls die Testabhängigkeit `pytest`, legt ein repräsentatives
+installiert ebenfalls die Abhängigkeiten aus `requirements-dev.txt`, legt ein repräsentatives
 `chain_phase_telemetry_summary.txt` mit `drift_status=pass` an und startet
 dasselbe Abschlussprofil mit verpflichtender Drift-Artefaktprüfung:
 
