@@ -1,0 +1,83 @@
+{
+  "baseline_revision": "3363c2060c3df59bd3c0312adf566320fda74226",
+  "checks": {
+    "cli_help": true,
+    "compileall": true,
+    "diff_check_with_cr_at_eol": true,
+    "no_runtime_image_ids": true
+  },
+  "cli_reproducibility": {
+    "frozen_baselines_unchanged": 14,
+    "identical_gate_reports": true,
+    "identical_saved_svgs": 28,
+    "previous_archive_entries_unchanged": 172,
+    "reference_access": {
+      "after": {
+        "blocked_svg_reads": []
+      },
+      "before": {
+        "blocked_svg_reads": []
+      }
+    },
+    "runtime_changes": false,
+    "schema_version": "horizontal_arrow_reproducibility_v1",
+    "source_catalogs_verified": 2,
+    "source_hashes_verified": 14
+  },
+  "final_focused_tests": {
+    "log": ".tmp/ge9012-focused.log",
+    "passed": 149,
+    "seconds": 49.27,
+    "skipped": 0
+  },
+  "final_source_sha256": {
+    "artifacts/descriptions/Finale_Wurzelformen_V3.xml": "63d84b5c48a7b050fa5574fb6f6942093d8aff05a1f010f3a86725ce543b7886",
+    "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml": "eb3ae8c249ba80c2b416fef97743f8d3519669a828c9e0dfe9a15f5010045e36",
+    "src/iCCModules/imageCompositeConverterGradientArrow.py": "0640931104c0f8be2bcb96efa87afdce65a60dc466ed20e2bafa47c4dcfbbd09",
+    "tests/test_horizontal_gradient_arrow_runtime.py": "b679d814b8e5a5f80f8e90761903a586c6cad30e2da7255f39d6074c944fc287"
+  },
+  "independent_plan_b": {
+    "passed": 17,
+    "report": "plan_b/report.json",
+    "required": 17,
+    "seed": 20261010
+  },
+  "next_rotation": [
+    "AC0712_1_S",
+    "AC0734_1_S",
+    "GE9021_1M",
+    "SE0081",
+    "GE0039_M"
+  ],
+  "preservation_and_regression_tests": {
+    "log": ".tmp/ge9012-preservation.log",
+    "passed": 10,
+    "protected_variants": 31,
+    "seconds": 56.33,
+    "skipped": 0
+  },
+  "regular_gates": {
+    "mandatory_metric_regressions": 0,
+    "passed": 14,
+    "required": 14
+  },
+  "runtime_changes": false,
+  "satisfactory_archive": {
+    "known_legacy_higher_errors": 22,
+    "passed": 186,
+    "previous_index_entries_unchanged": 172,
+    "report": "../../satisfactory_conversions/recheck_ge9012_2026-10-10.json",
+    "required": 186
+  },
+  "schema_version": "plan_b_completion_evidence_v1",
+  "standard_suite": {
+    "log": ".tmp/ge9012-full.log",
+    "passed": 2222,
+    "seconds": 1177.91,
+    "skipped": 30
+  },
+  "strict_originals": {
+    "passed": 14,
+    "required": 14
+  }
+}

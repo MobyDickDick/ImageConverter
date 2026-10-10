@@ -1,5 +1,5 @@
 {
-  "case_count": 172,
+  "case_count": 186,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -2210,6 +2210,244 @@
       "svg": "svgs/GE9011_7S.svg",
       "svg_sha256": "5b6e13ccc9a5e11598904154547b096195f9a97d3846d9810ef97977380d4af6",
       "variant": "GE9011_7S"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_1M.jpg",
+      "image_sha256": "ee81c2475730f0abf739d5f66a9107f5ca0057777044a92eaaa5825f360a99d7",
+      "mean_delta2": 18.59583282470703,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9840210676193237,
+        "error_per_pixel": 9.532658118522123e-05,
+        "object_mask_iou": 0.998220640569395
+      },
+      "svg": "svgs/GE9012_1M.svg",
+      "svg_sha256": "7dd0df439feaab4412fa3d38add8fa392723fa86d4babb7d03ecb71c6814b6a1",
+      "variant": "GE9012_1M"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_1S.jpg",
+      "image_sha256": "44f7b95a21d2881402c788fb86ec0d71a6817783111ac0be786d510c30cd9333",
+      "mean_delta2": 28.016666412353516,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9965822696685791,
+        "error_per_pixel": 0.00014361997391953616,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9012_1S.svg",
+      "svg_sha256": "5dd3b34db643af8281e68f24023008c42f841cc790e762fadeeb6c3eea5b281d",
+      "variant": "GE9012_1S"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_2M.jpg",
+      "image_sha256": "b1344f3e4aeb8d2c9cf66fdb4ec74e0cd901897a5040c7c76d67c34d9a23ad5d",
+      "mean_delta2": 24.358333587646484,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9754574298858643,
+        "error_per_pixel": 0.00012486650563960777,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9012_2M.svg",
+      "svg_sha256": "8e4c067ecbee238632a4258f84acd3c5e982e3e9eb99c04a05e7a8633ec87a70",
+      "variant": "GE9012_2M"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_2S.jpg",
+      "image_sha256": "a9acbfad5eecbf1fde77d72b0143c66b3efefa1d93dad7466d966792b5590010",
+      "mean_delta2": 27.75666618347168,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 1.0,
+        "error_per_pixel": 0.00014228715203625108,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9012_2S.svg",
+      "svg_sha256": "11aa62209b6de22c815a674b586c45eae2ccaf342ee10a5799b2a96084f511ab",
+      "variant": "GE9012_2S"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_3M.jpg",
+      "image_sha256": "17295273c98522f1fb8dc18f3936bb1d6e1e8b65c6767b94fc5c1ffea10fa7bd",
+      "mean_delta2": 15.338333129882812,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9140074253082275,
+        "error_per_pixel": 7.862787712358228e-05,
+        "object_mask_iou": 0.9886792452830189
+      },
+      "svg": "svgs/GE9012_3M.svg",
+      "svg_sha256": "883965e0fc01be0b96af7d4448b9f3bafeee3ac9ed938d635a11f8f276ae0a79",
+      "variant": "GE9012_3M"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_3S.jpg",
+      "image_sha256": "a90249d159e9e752e6f4b92af3e497c2968721417dee034c614b6e0c0ee137b0",
+      "mean_delta2": 26.023332595825195,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9965822696685791,
+        "error_per_pixel": 0.00013340167933269357,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9012_3S.svg",
+      "svg_sha256": "1467dced5a0ec2de228d49460db4a54aa8acddabb22fc7a2698b9ee8c2128e6f",
+      "variant": "GE9012_3S"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_4M.jpg",
+      "image_sha256": "7a9fbd12d7ae110df2b022aedc72605b9640f43129dae44d1836c5299df93583",
+      "mean_delta2": 18.195833206176758,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8791090846061707,
+        "error_per_pixel": 9.327608974074975e-05,
+        "object_mask_iou": 0.9954337899543378
+      },
+      "svg": "svgs/GE9012_4M.svg",
+      "svg_sha256": "eeb36c71f7d0f06aa8cbbea0e2a1f34a1e2dc92d719cbd5230e9003f922b08e1",
+      "variant": "GE9012_4M"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_4S.jpg",
+      "image_sha256": "d63cabd27a252b6c39113f94d6a3c16a2a09d5c3641873b8e8e8def22e744290",
+      "mean_delta2": 6.769999980926514,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9866263270378113,
+        "error_per_pixel": 3.470460069679105e-05,
+        "object_mask_iou": 0.9847328244274809
+      },
+      "svg": "svgs/GE9012_4S.svg",
+      "svg_sha256": "713cf93a6506da3d0632bb2083776fbbf5d2f37ccacf12a8763722ffed618179",
+      "variant": "GE9012_4S"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_5M.jpg",
+      "image_sha256": "035b0bd511ad1eb2db10afbf034de5d0337bf2e6b2a6c418f035c854af294aca",
+      "mean_delta2": 43.205833435058594,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9515843391418457,
+        "error_per_pixel": 0.0002214831907474489,
+        "object_mask_iou": 0.9323843416370107
+      },
+      "svg": "svgs/GE9012_5M.svg",
+      "svg_sha256": "129d178cec18050f1aedd72839b7a30efe1cf1e6b88281b4a4d566dd910aa83f",
+      "variant": "GE9012_5M"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_5S.jpg",
+      "image_sha256": "da74c3741b77a065478afbd29217f532d8be34fa83d7d55bf9a93089a6f6ca64",
+      "mean_delta2": 29.356666564941406,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.986910879611969,
+        "error_per_pixel": 0.00015048912759165145,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9012_5S.svg",
+      "svg_sha256": "dd739373037ae8d4e20e9071f250cc6b50f43c809f7c13552049f592f293670b",
+      "variant": "GE9012_5S"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_6M.jpg",
+      "image_sha256": "0b323d01d200e87c004b9bce229f18ac178abc62f664e669dc9b774be1d8e3b2",
+      "mean_delta2": 60.4808349609375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9835344552993774,
+        "error_per_pixel": 0.0003100388822808535,
+        "object_mask_iou": 0.9323843416370107
+      },
+      "svg": "svgs/GE9012_6M.svg",
+      "svg_sha256": "1a92762c8b7d0e014b074c8288995b9939ca581a1516f4df14664dcb02268c2e",
+      "variant": "GE9012_6M"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_6S.jpg",
+      "image_sha256": "d53807498d0f51e20fbefcc52adaff48e99da4d8f710339df26e441f641afef5",
+      "mean_delta2": 25.469999313354492,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 1.0,
+        "error_per_pixel": 0.00013056516372346273,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9012_6S.svg",
+      "svg_sha256": "8b6fd83d4cbf90399b5507e7b398a44a22948e5704b6cf9f2a1f96ed3f19e80c",
+      "variant": "GE9012_6S"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_7M.jpg",
+      "image_sha256": "cc0ecc20e746ea4a70ce8308e60955b5e8c8c5861bf99d0a7cb569321235b80d",
+      "mean_delta2": 30.16583251953125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9611012935638428,
+        "error_per_pixel": 0.00015463710121507753,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9012_7M.svg",
+      "svg_sha256": "d2854b97316a4797e8fbf7b86eaf463307734bb257f20ac02287fbe3d457a2e9",
+      "variant": "GE9012_7M"
+    },
+    {
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "evidence": "artifacts/evaluation/rightward_gradient_arrow_recheck_v1/summary_2026-10-10.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9012_7S.jpg",
+      "image_sha256": "8693f2dc8729149c049181fa0ab02570415de81cab546c0ab8f55f34c38aacbe",
+      "mean_delta2": 28.523332595825195,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.971700131893158,
+        "error_per_pixel": 0.00014621726308253335,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9012_7S.svg",
+      "svg_sha256": "d0da8371b0422b80cbe5bcab3d7770e2abc3cddf2b80f61bb6c58f6bf6f70fd0",
+      "variant": "GE9012_7S"
     },
     {
       "description": "Nach unten gerichteter Pfeil: gef\u00fcllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",

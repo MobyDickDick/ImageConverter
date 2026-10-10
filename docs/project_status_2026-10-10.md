@@ -31,7 +31,24 @@ Topologien mit Farb-, Größen- und Geometrievarianten.
   weiterhin nicht belegt. Erledigte Aufgaben und bestandene Unit-Tests sind
   kein Ersatz für diese Quote.
 
-## Neuester Fortschritt: GE9014
+## Neuester Fortschritt: GE9012
+
+`GE9012_1M` und alle 13 Farb-/Größen-Holdouts bestehen mit eigenständigen
+Rechtspfeilbeschreibungen beide regulären Gates ohne Pflichtmetrikregression
+sowie die strengeren Plan-B-Pixelgrenzen. Die vorhandene Rasterregistrierung
+unterstützt diese Richtung bereits; das Paket verändert keinen Runtime-Code.
+Die frische Zielmetrik sinkt von `13193.511719` auf `18.595833`. Eine unabhängig
+entworfene Vorlage besteht 17/17 echte CLI-Fälle; 149 fokussierte Tests und zehn
+schwere Bestandsschutz-/Smoke-Tests bestehen. Zwei CLI-Abnahmen reproduzieren
+alle SVGs und Gateberichte. Die Erfolgsübersicht enthält jetzt 186 Paare,
+einschließlich aller unveränderten 172 älteren Indexeinträge.
+Alle 186 archivierten Eingaben bestehen auch die erneute Konvertierungsprüfung;
+die 22 bekannten älteren Kompatibilitätsdrifts bleiben unverändert offen.
+Der vollständige Standardtestlauf besteht mit 2.222 Tests und 30 bestehenden
+Profil-/Windows-Skips ohne Fehler.
+Details: [GE9012](next_arbeitspaket_2026-10-10_ge9012_1m.md).
+
+## Vorheriger Fortschritt: GE9014
 
 `GE9014_1M` und alle 13 Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und allgemeiner horizontaler Pfeilregistrierung beide regulären
@@ -123,7 +140,7 @@ Details und Reproduktion: [Arbeitspaket](next_arbeitspaket_2026-10-10_ac0413_1_m
 
 Die bestehende Priorität bleibt: möglichst viele Motive in guter Qualität
 erschließen, danach das Produkt vereinfachen. Als nächstes reguläres Paket folgt
-`GE9012_1M`. Für einen nachprüfbaren Stand zur Autonomie ist außerdem ein
+`AC0712_1_S`. Für einen nachprüfbaren Stand zur Autonomie ist außerdem ein
 frischer Kataloglauf mit zutreffenden Beschreibungen, unveränderten Gates und
 getrennten Ergebnissen für erfolgreiche, verbesserbare und zurückgestellte
 Bilder nötig. Solange dieser fehlt, wäre die Aussage „der ganze Katalog läuft

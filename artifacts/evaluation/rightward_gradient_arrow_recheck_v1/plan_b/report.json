@@ -1,0 +1,733 @@
+{
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261010,
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "iterations": 64,
+  "timeout_seconds": 60,
+  "source_svg_sha256": "ae132d5f33e6a9ec5e3e1dbd9d782182ebd5cbe679e7e0529417773b701e6f02",
+  "source_description_sha256": "1abd2de421cf5fef5a72e5823f4392baa4c459c1a27514fdc161893f1965e99e",
+  "source_description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.\n",
+  "source_image": "source.png",
+  "artifact_retention": "report_and_source; full CLI artifacts retained locally under .tmp/ge9012-plan-b",
+  "selection": {
+    "mode": "explicit",
+    "source_svg": "../independent.svg"
+  },
+  "cases": [
+    {
+      "case_id": "original",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 1.0,
+        "relative_x": 0.0,
+        "relative_y": 0.0
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.\n",
+      "input_sha256": "313bb28f2c4fc7374626111a7c63cf82af9e0758a82e10069d63a0dce0747b0a",
+      "reference_svg_sha256": "650f3cb186ee5ec6134324d2fe691dfbb9ead3c4558b45685fa99100a3d998c1",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.001854762784205377,
+        "foreground_mse": 0.0049028717912733555,
+        "edge_alignment": 0.9652838706970215,
+        "foreground_iou": 0.9919393077287814
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "3d3ed0cc57a43b9098470b7b9c4f44ee430612df7400fd698cd25f5623202ab0",
+      "elapsed_seconds": 2.812
+    },
+    {
+      "case_id": "probe_01",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 0.98202297,
+        "relative_x": 0.00810461,
+        "relative_y": -0.02289099
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Die gesamte Darstellung ist ein wenig kleiner dargestellt und etwas nach rechts und oben verschoben.",
+      "input_sha256": "ac8304722766ee0cb1a0f9dee3bc3f6ee4cfc5a4914b7eac8811cc00b09f4d84",
+      "reference_svg_sha256": "716f54f397208114605f8d5088a080e0e761d90cb6cf0bbb213f15973a3a9321",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0008130867499858141,
+        "foreground_mse": 0.00216536782681942,
+        "edge_alignment": 0.827896237373352,
+        "foreground_iou": 0.9942168674698795
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "ac5b1ec08dcc6f249f19be44f320840584d394ee5c516f3615ffb369ed7978c0",
+      "elapsed_seconds": 2.312
+    },
+    {
+      "case_id": "probe_02",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 0.98280131,
+        "relative_x": 0.00634935,
+        "relative_y": -0.0163187
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Die Darstellung ist leicht kleiner dargestellt und leicht nach rechts und oben verschoben.",
+      "input_sha256": "12cf32fb8232c3717158184cfec03433b2a52f0be78aad24d7e4a941f99fc7e0",
+      "reference_svg_sha256": "0704d487b5bc2279687d8029b0ae1ce840df6afb0d95597f00755a537be3d436",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.777837552363053e-05,
+        "foreground_mse": 0.00016206431610044092,
+        "edge_alignment": 0.8467943668365479,
+        "foreground_iou": 0.9995034756703078
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "6099156eba5105c2d0a6ea70777c0d2f3c8ffd942ff8d65bbb4721f29f6f206d",
+      "elapsed_seconds": 2.453
+    },
+    {
+      "case_id": "probe_03",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 0.97931065,
+        "relative_x": 0.00524478,
+        "relative_y": -0.01648033
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Die gesamte Darstellung ist ein wenig kleiner dargestellt und ein wenig nach rechts und oben versetzt.",
+      "input_sha256": "fab45f107ea1e9ddc02306934a49aed79b4540b641710f811101df27e0a5433e",
+      "reference_svg_sha256": "17bdb4faa9b715d866ff84a65a1eb1ee1b95a10b8dc6dafb1f65234f39b50986",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0002825690316967666,
+        "foreground_mse": 0.0007789969677105546,
+        "edge_alignment": 0.9547981023788452,
+        "foreground_iou": 0.9886025768087215
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "40bcdde9d468477133abf11737a77eb791e22d039f5ed5f21affdc36489315eb",
+      "elapsed_seconds": 2.735
+    },
+    {
+      "case_id": "probe_04",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 1.03091238,
+        "relative_x": 0.00898283,
+        "relative_y": -0.02074313
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Die gesamte Darstellung ist leicht gr\u00f6\u00dfer dargestellt und ein wenig nach rechts und oben versetzt.",
+      "input_sha256": "ee1c03473edd577456f547957641032c1618f6789e1f8fb21a8a615f9b10d88f",
+      "reference_svg_sha256": "a2f57f8636f9b5fbbd6e091296957aeed3aad93ad4ddc6b2da8d0e70894a213f",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 8.79839135450311e-05,
+        "foreground_mse": 0.00019889464601874352,
+        "edge_alignment": 0.9605643153190613,
+        "foreground_iou": 0.9959514170040485
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "e15007828324d448a00223bf30b77dcb856818be54006d375a8d785d3b343bed",
+      "elapsed_seconds": 2.39
+    },
+    {
+      "case_id": "probe_05",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 0.99452614,
+        "relative_x": -0.01820547,
+        "relative_y": 0.01189658
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Das gesamte Motiv ist leicht kleiner dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "input_sha256": "61563533de5618cd460bf8f69e9499edf5652ef8b5003ef8d0b2dad2b061cced",
+      "reference_svg_sha256": "9f96f9f74d412468ff01fa361d0a45cb032a9ac0d82e13c41797f28dc5ba5553",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0006408887566067278,
+        "foreground_mse": 0.0016742516309022903,
+        "edge_alignment": 0.9509865045547485,
+        "foreground_iou": 0.9877184695323571
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "54f94d772c82cbb7aef0eab3f3851f7a2435d8fabd8dc3aa1ffb76edbeeac1d3",
+      "elapsed_seconds": 2.109
+    },
+    {
+      "case_id": "probe_06",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 1.03471323,
+        "relative_x": 0.01517706,
+        "relative_y": -0.00822071
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Die gesamte Darstellung ist leicht gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach rechts und oben verschoben.",
+      "input_sha256": "d1e3063301aab070bac19f26a9a1e0657f1293c417c2151c2ab28f9dac9b28b2",
+      "reference_svg_sha256": "91d3aafcfb52f0cd630e8b49bed0e0919ce2b9a2c7a414e1ba185a17016f9192",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0016430108807981014,
+        "foreground_mse": 0.004011998418718576,
+        "edge_alignment": 0.8534530997276306,
+        "foreground_iou": 0.9934181658622203
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "0c3c9c4d7eaf2df2c4ba5ef73c03c7dc0358864c01c1f5c566471462da7eb36f",
+      "elapsed_seconds": 2.422
+    },
+    {
+      "case_id": "probe_07",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 0.99158848,
+        "relative_x": -0.00925183,
+        "relative_y": -0.00060057
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Die gesamte Darstellung ist etwas kleiner dargestellt und leicht nach links und oben versetzt.",
+      "input_sha256": "5d131d089c901ca8e37be7604e518821202b7f66f940abc4c82034dba12a4a28",
+      "reference_svg_sha256": "d50066de9e590c2112dc7db7e9d43e3c2f9f7c950e85c0c24fb6cf78779d015b",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0009548914385959506,
+        "foreground_mse": 0.0025273715145885944,
+        "edge_alignment": 0.9484833478927612,
+        "foreground_iou": 0.9881404174573055
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "e6fd7a857c64a5aabae5e3584ea3513319e775f1ced7655b103d596ecf532f85",
+      "elapsed_seconds": 2.531
+    },
+    {
+      "case_id": "probe_08",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 0.98953819,
+        "relative_x": 0.01408946,
+        "relative_y": -0.00387055
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Die Darstellung ist ein wenig kleiner dargestellt und geringf\u00fcgig nach rechts und oben versetzt.",
+      "input_sha256": "8cf89373cabbfd54bc6d621a00f2840f1e5d276d653be081d9958b401c0ca698",
+      "reference_svg_sha256": "d7118856ea256e59ca14c9844bec7d563e92ccfd373e7adc0165808128f5c971",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0003910478262696415,
+        "foreground_mse": 0.0010560682276263833,
+        "edge_alignment": 0.8486402630805969,
+        "foreground_iou": 0.9985563041385948
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "6c1305ea713a78d324acfb697b0830cbe9c3f0acb5d5fa3ff304705ee6948372",
+      "elapsed_seconds": 2.563
+    },
+    {
+      "case_id": "probe_09",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 0.98923194,
+        "relative_x": -0.01002539,
+        "relative_y": -0.01287474
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Die gesamte Darstellung ist ein wenig kleiner dargestellt und ein wenig nach links und oben versetzt.",
+      "input_sha256": "41eb0f9c93cfb1e94fd790aac552b0aefaa344d7c9030a45e0499dd5967bdf74",
+      "reference_svg_sha256": "096ef82e19218f1a35211420582e97b56c1560af0e4ff9d0b52018eaf0d3d039",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0004430933331605047,
+        "foreground_mse": 0.0011676875874400139,
+        "edge_alignment": 0.9101123809814453,
+        "foreground_iou": 0.9930864197530864
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "9ed466d1380fc4a136d3595d7cdbf8a1758be63942459781aab836e6102cce29",
+      "elapsed_seconds": 2.172
+    },
+    {
+      "case_id": "probe_10",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 1.05580196,
+        "relative_x": 0.00135329,
+        "relative_y": -0.01742701
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Die gesamte Darstellung ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und leicht nach rechts und oben versetzt.",
+      "input_sha256": "1b8f630455e1725774cb44d396dee3ee0af35f14532bfb64e308727766f8fa4b",
+      "reference_svg_sha256": "00b0e00cd84f1ffd3b2d620086eb3a63ba7855869a570d8ffcf8165e9f173acc",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00044920723303221166,
+        "foreground_mse": 0.0010489891283214092,
+        "edge_alignment": 0.9511071443557739,
+        "foreground_iou": 0.9911167512690355
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "18c734a1012d56726a5ec65b629ffaeb041629249e3aa6e69745349cebc6ddae",
+      "elapsed_seconds": 2.515
+    },
+    {
+      "case_id": "probe_11",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 0.95742828,
+        "relative_x": 0.00955635,
+        "relative_y": 0.00356696
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Das gesamte Motiv ist geringf\u00fcgig kleiner dargestellt und geringf\u00fcgig nach rechts und unten versetzt.",
+      "input_sha256": "0d7768da6f08cf620b352a83e96f163293c4f265cac7bfc42c21f108e4200481",
+      "reference_svg_sha256": "582cbd32091cd1a4045911735c7f033dd14b256492668e6d3e1bed3fea8f58a5",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00014710353570990264,
+        "foreground_mse": 0.00042696253512986004,
+        "edge_alignment": 0.9001349210739136,
+        "foreground_iou": 0.9994807892004154
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "ef91e0d8f0a4ad24ef137f6253dbad995ea706cfc0030d4f1e45211e77e8e5fb",
+      "elapsed_seconds": 2.266
+    },
+    {
+      "case_id": "probe_12",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 1.05577182,
+        "relative_x": -0.018374,
+        "relative_y": 0.00241826
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Das Motiv ist etwas gr\u00f6\u00dfer dargestellt und leicht nach links und unten versetzt.",
+      "input_sha256": "ad45219941e1d5fffbea4c8ce5fee0422cc0b913491f010ef5194b5735c3ad56",
+      "reference_svg_sha256": "9e4a289ccb4c99fc878c7bccfd41c505981bec55dba078e32a002861d625a61c",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0005734316655434668,
+        "foreground_mse": 0.0013453362043946981,
+        "edge_alignment": 0.949027419090271,
+        "foreground_iou": 0.9894381073088298
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "1bf66d30a8a14a01e978baf0ff6dc399e2a71689f9ca0a5a4614b4479e8fa986",
+      "elapsed_seconds": 2.422
+    },
+    {
+      "case_id": "probe_13",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 1.05896874,
+        "relative_x": -0.0241012,
+        "relative_y": -0.00138238
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Die Darstellung ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und leicht nach links und oben versetzt.",
+      "input_sha256": "cbe07b2dadb3fcd739de8f2ee9fa2d8025f1f365892b529b98356a9b856da0cf",
+      "reference_svg_sha256": "60a1243d5eafe2651bb05f94c66de8cb30c49fe255a5d92551215fd08b8d8c72",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0003884810721501708,
+        "foreground_mse": 0.0009057843126356602,
+        "edge_alignment": 0.9443954229354858,
+        "foreground_iou": 0.9982985963419821
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "2d2e1318d466fe094ea598f51408169ba321b91e85d0c31c6feb32d90fe22c55",
+      "elapsed_seconds": 3.031
+    },
+    {
+      "case_id": "probe_14",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 0.9567562,
+        "relative_x": -0.02484468,
+        "relative_y": 0.01318203
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Die Darstellung ist geringf\u00fcgig kleiner dargestellt und etwas nach links und unten versetzt.",
+      "input_sha256": "14cf35a16dbc30ae844ce87cdcf9a19c405d9fca459c77946fae7b071610de1b",
+      "reference_svg_sha256": "aaf26a39b64ae92ce222a1ed6b6b82feb320a059aa0ea99be43854ee527c1335",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0017832665471360087,
+        "foreground_mse": 0.005021301563829184,
+        "edge_alignment": 0.8718491196632385,
+        "foreground_iou": 0.9864389753892516
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "166fcae88622cd0af84a1afea8735aa2fa3ffd909807d4be991c57955ef97a5c",
+      "elapsed_seconds": 2.36
+    },
+    {
+      "case_id": "probe_15",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 0.99449297,
+        "relative_x": -0.00258372,
+        "relative_y": -0.00779375
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Das Motiv ist etwas kleiner dargestellt und etwas nach links und oben verschoben.",
+      "input_sha256": "858f40b53ab67947a87dc1767797104a85364e8a8111fa1f5481d375030890a1",
+      "reference_svg_sha256": "edaca5f7d0621efc785dbf2554fc1712e1abccf06d3df764eea915885dc51fab",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0006920040468685329,
+        "foreground_mse": 0.0017592000076547265,
+        "edge_alignment": 0.895109236240387,
+        "foreground_iou": 0.9938183547313362
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "4d71a8fd4d7dc48a653e4996a86b06612f346a09dbafc477b3c808cb9ff775a9",
+      "elapsed_seconds": 2.203
+    },
+    {
+      "case_id": "probe_16",
+      "width": 104,
+      "height": 54,
+      "variation": {
+        "scale": 1.02947168,
+        "relative_x": 0.0239935,
+        "relative_y": 0.02155719
+      },
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund. Das gesamte Motiv ist ein wenig gr\u00f6\u00dfer dargestellt und ein wenig nach rechts und unten verschoben.",
+      "input_sha256": "d23a5c17ea3ab886b6315c80c81081361f8b17ca8b9de6b10519c4d7a3cf6fc2",
+      "reference_svg_sha256": "1aed46b0dbaf4875af71e7b706d11f14f0b2b48ccdb67983de13306601c48210",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0008207367500290275,
+        "foreground_mse": 0.001988399075344205,
+        "edge_alignment": 0.7322407364845276,
+        "foreground_iou": 0.9898812142542894
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_sha256": "b651027ccae33eb68af74a4f7d89ef22284243456fb730379b9621250dfdade4",
+      "elapsed_seconds": 2.532
+    }
+  ],
+  "status": "completed",
+  "original_satisfactory": true,
+  "variations_started": true,
+  "summary": {
+    "required": 17,
+    "completed": 17,
+    "passed": 17,
+    "failed": 0,
+    "satisfactory": true
+  },
+  "source_image_sha256": "313bb28f2c4fc7374626111a7c63cf82af9e0758a82e10069d63a0dce0747b0a"
+}
