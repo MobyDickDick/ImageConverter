@@ -1,0 +1,52 @@
+{
+  "archive": {
+    "count": 213,
+    "new_entry_recheck": "1/1",
+    "new_full_archive_run": false,
+    "previous_records": 212,
+    "previous_records_unchanged": true
+  },
+  "baseline_commit": "9c4964b2ab8c42fa9b2c4d9918108e43fe67618e",
+  "branch": "codex/se0081-quality-2026-10-11",
+  "catalog_acceptance": {
+    "after_mean_delta2": 702.7815551757812,
+    "forbidden_svg_reads": 0,
+    "neutral_cases": 2,
+    "real_name_before_mean_delta2": 11891.46484375,
+    "real_name_cases": 1,
+    "regressed_metrics": 0
+  },
+  "checks": {
+    "cli_help": "pass",
+    "compileall": "pass",
+    "diff_whitespace": "pass",
+    "runtime_id_zero": "pass"
+  },
+  "date": "2026-10-11",
+  "focused": {
+    "failed": 0,
+    "log": "focused.log",
+    "passed": 134,
+    "seconds": 38.14
+  },
+  "independent_plan_b": {
+    "hashes_and_metrics_reproduced": true,
+    "passed": 17,
+    "required": 17,
+    "runs": 2,
+    "seed": 20261011
+  },
+  "runtime_tests_and_tools_unchanged": true,
+  "standard_profile": {
+    "command": ".venv/Scripts/python.exe -m pytest -q --basetemp .tmp/motor-square-full",
+    "environment": {
+      "IMAGE_CONVERTER_ISOLATE_SVG_RENDER": "0",
+      "RUN_HEAVY_CONVERSION_TESTS": "0"
+    },
+    "failed": 0,
+    "log": "standard_profile.log",
+    "passed": 2356,
+    "seconds": 2117.94,
+    "skipped": 30
+  }
+}

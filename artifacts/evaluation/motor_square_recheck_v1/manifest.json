@@ -1,0 +1,34 @@
+{
+  "schema_version": "labeled_description_recheck_manifest_v1",
+  "description": "Kelle mit gef\u00fclltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Wei\u00dfer Hintergrund. Lage, Abmessungen, Kontur, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+  "label": "M",
+  "provenance": {
+    "commit": "9c4964b2ab8c42fa9b2c4d9918108e43fe67618e",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "fresh original-description CLI frozen before catalog changes; runtime unchanged",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_symbol_00",
+      "source": "SE0081.jpg",
+      "image": "../../images_to_convert/SE0081.jpg",
+      "baseline_description": "Wie SE0041, aber anstelle von \"T\" \"M\" geschrieben.",
+      "source_sha256": "9f182529b849e93d4cef4abf41dfe8f14471d8d37cb54a76d983050b29ec1fb9",
+      "role": "target",
+      "before_svg": "before/anonymous_symbol_00.svg",
+      "after_svg": "after/anonymous_symbol_00.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_01",
+      "source": "independent.png",
+      "image": "independent.png",
+      "baseline_description": "Kelle mit gef\u00fclltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Wei\u00dfer Hintergrund. Lage, Abmessungen, Kontur, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "source_sha256": "bc9583f7e2c13ab30552d6911dfd6a7047c14ecd79baef6da3980859193fbeba",
+      "role": "independent holdout",
+      "before_svg": "before/anonymous_symbol_01.svg",
+      "after_svg": "after/anonymous_symbol_01.svg"
+    }
+  ]
+}

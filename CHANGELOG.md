@@ -1,3 +1,4 @@
+- Replace the SE0081 cross-reference with a standalone square/lower-stem/M description in both catalogs; the unchanged raster registrator passes both gates, an independent holdout and a reproducible 17-case CLI battery (2026-10-11).
 - Register leftward square handles with raster-observed slash/dot marks, correct both standalone descriptions, and validate six real variants plus an independent 17-case CLI battery (2026-10-11).
 - Increase the catalog CI budget to 180 seconds, retry failed CSV entries on resume, and flush converter output before process timeouts (2026-10-11).
 - Correct both standalone rightward-arrow catalog descriptions, activate existing raster registration without runtime changes, and validate 14 real variants plus an independent 17-case CLI battery (2026-10-10).

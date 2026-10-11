@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-11)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `431` · Erledigt `404` · Offen `27`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `432` · Erledigt `405` · Offen `27`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -19,9 +19,19 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-11)
 
+- [x] **SE0081 – Quadrat mit unterem Stiel und M:** eigenständige Beschreibungen aktivieren die vorhandene Raster-/Textregistrierung ohne Runtime-Änderung. Ziel und unabhängiger Holdout bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; zwei unabhängige CLI-Batterien bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-11_se0081.md`.
+
+**Neuester Abschluss:** `SE0081` auf `codex/se0081-quality-2026-10-11`.
+Frische Zielmetrik mit vollständigem Originalkatalog `11891.464844 → 702.781555`;
+neutraler Vorlauf `8904.907227`. Originale Vorlauf-SVGs und
+sämtliche Gateentscheidungen reproduziert. Erfolgsübersicht: 213 Paare;
+alle 212 bisherigen Indexeinträge bleiben unverändert. Der neue Eintrag besteht
+die erneute Archivkonvertierung; es wird kein neuer Vollarchivlauf behauptet.
+Nächste reguläre Rotation: `GE0039_M`, `GE9022_2M`, `AC0920_L`, `AC1000_S`, `GE0022`.
+
 - [x] **GE9021 – unten offener Bogen unter Verlaufsschaft:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; 14 Varianten bestehen beide regulären Gates und die strengeren Pixelgrenzen ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage 17/17, alle 28 Katalog-SVGs und sämtliche Plan-B-Hashes/Metriken reproduziert. Details: `docs/next_arbeitspaket_2026-10-11_ge9021_1m.md`.
 
-**Neuester Abschluss:** `GE9021_1M` und 13 Holdouts auf
+**Vorheriger Abschluss:** `GE9021_1M` und 13 Holdouts auf
 `codex/ge9021-quality-2026-10-11`. Frische Zielmetrik `12463.036133 → 194.409164`.
 Erfolgsübersicht: 212/212 erneute Review-Pässe in fünf getrennten Prozessen;
 alle 198 bisherigen Indexeinträge und die 22 älteren Kompatibilitätsdrifts unverändert.

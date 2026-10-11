@@ -29,11 +29,14 @@ Das folgende Paket `AC0713` sichert alle sechs Varianten mit oberem Griff,
 Strich und Punkt. `AC0721` sichert jetzt sechs Quadrat-/Untergriff-/T-Varianten
 durch beide regulären Gates und ein unabhängiges SVG mit zwei Seeds durch
 jeweils 17/17 strenge CLI-Prüfungen. Ein großer grauer JPG-IoU-Fall bleibt offen.
-Die separate Erfolgsübersicht enthält inzwischen 212 Bild-/SVG-Paare und wird
+Die separate Erfolgsübersicht enthält inzwischen 213 Bild-/SVG-Paare und wird
 im erweiterten Profil vollständig erneut konvertiert.
-Das neueste Paket `GE9021` sichert alle 14 Bogen-/Verlaufsschaftvarianten
+Das Paket `GE9021` sichert alle 14 Bogen-/Verlaufsschaftvarianten
 und ein unabhängiges SVG mit 17/17 strengen CLI-Prüfungen.
-Der nächste reguläre Kandidat ist nach dem erneuerten Review `SE0081`.
+Das neueste Paket `SE0081` aktiviert die vorhandene Quadrat-/Textregistrierung
+mit einer eigenständigen Beschreibung. Ziel und unabhängiger Holdout bestehen
+beide regulären Gates; die unabhängige CLI-Vorlage besteht reproduzierbar 17/17.
+Der nächste reguläre Kandidat ist nach dem erneuerten Review `GE0039_M`.
 Die geprüfte Batchfähigkeit und die weiterhin begrenzte Motivabdeckung sind in
 `project_status_2026-10-10.md` beschrieben. Eine frische Gesamtquote des
 autonomen Kataloglaufs ist noch nicht belegt.

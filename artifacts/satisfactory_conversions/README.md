@@ -1,6 +1,6 @@
 # Zufriedenstellende Konvertierungen
 
-212 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
+213 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
 
 Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bild und Beschreibung.
 
@@ -218,3 +218,4 @@ Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bi
 | [GE9023_6S](images/GE9023_6S.jpg) | [SVG](svgs/GE9023_6S.svg) | 156.246674 | semantic-only |
 | [GE9023_7M](images/GE9023_7M.jpg) | [SVG](svgs/GE9023_7M.svg) | 137.023331 | semantic-only |
 | [GE9023_7S](images/GE9023_7S.jpg) | [SVG](svgs/GE9023_7S.svg) | 74.243332 | semantic-only |
+| [SE0081](images/SE0081.jpg) | [SVG](svgs/SE0081.svg) | 702.781555 | semantic-only |

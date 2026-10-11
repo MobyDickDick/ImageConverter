@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-11, nach GE9021-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-11, nach SE0081-Abnahme)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -118,11 +118,20 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `SE0081` – `mean_delta2=11975.778320`, `normalized_mse=0.061391`.
-2. `GE0039_M` – `mean_delta2=11544.757812`, `normalized_mse=0.059181`.
-3. `GE9022_2M` – `mean_delta2=11451.323242`, `normalized_mse=0.058702`.
-4. `AC0920_L` – `mean_delta2=11265.105469`, `normalized_mse=0.057748`.
-5. `AC1000_S` – `mean_delta2=11111.639648`, `normalized_mse=0.056961`.
+1. `GE0039_M` – `mean_delta2=11544.757812`, `normalized_mse=0.059181`.
+2. `GE9022_2M` – `mean_delta2=11451.323242`, `normalized_mse=0.058702`.
+3. `AC0920_L` – `mean_delta2=11265.105469`, `normalized_mse=0.057748`.
+4. `AC1000_S` – `mean_delta2=11111.639648`, `normalized_mse=0.056961`.
+5. `GE0022` – `mean_delta2=10990.863281`, `normalized_mse=0.056342`.
+
+`SE0081` besteht nach eigenständiger Beschreibung beide regulären und strengeren
+Pixelgates ohne Pflichtmetrikregression. Die vorhandene Runtime bleibt unverändert.
+Die frische Zielmetrik mit vollständigem Originalkatalog sinkt von
+`11891.464844` auf `702.781555` (neutraler Vorlauf `8904.907227`); ein unabhängig
+konstruiertes M-Quadrat und zwei identische 17/17-CLI-Batterien sichern den
+vorhandenen allgemeinen Registrierer ab. Alle Vorher-/Nachher-SVGs und
+Gateentscheidungen sind reproduziert. Details:
+`docs/next_arbeitspaket_2026-10-11_se0081.md`.
 
 `GE9021_1M` und alle 13 Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und allgemeiner Richtungsnormalisierung beide regulären Gates
