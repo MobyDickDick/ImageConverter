@@ -27,7 +27,7 @@ def test_compact_image_subset_is_small_and_complete() -> None:
         "GE9013_1M.jpg",
         "AC0840_L.jpg",
         "AC0538_1L_sia.jpg",
-        "nonconvertable/AC0881_M.jpg",
+        "AC0881_M.jpg",
     ]
     assert len(entries) <= 10
     assert all((PROJECT_ROOT / "artifacts" / "images_to_convert" / entry).is_file() for entry in entries)

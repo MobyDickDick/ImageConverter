@@ -1,0 +1,694 @@
+{
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261011,
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "iterations": 64,
+  "timeout_seconds": 60,
+  "source_svg_sha256": "8fca8ad1a9496521e8cd546f9d5a43f78da69883cf7dab325a7490ee2bf490b4",
+  "source_description_sha256": "1cec669226a98030632db01408ef99485e0dfa47e43cb476f07b9c3c54d608c0",
+  "source_description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.\n",
+  "status": "completed",
+  "original_satisfactory": true,
+  "variations_started": true,
+  "summary": {
+    "required": 17,
+    "completed": 17,
+    "passed": 17,
+    "failed": 0,
+    "satisfactory": true
+  },
+  "source_image_sha256": "2418ba0cd072a61ab938b5788b4b07f7029d36c82aaf8076cfb7fceffe5c50a9",
+  "cases": [
+    {
+      "case_id": "original",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 1.0,
+        "relative_x": 0.0,
+        "relative_y": 0.0
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.\n",
+      "input_sha256": "2418ba0cd072a61ab938b5788b4b07f7029d36c82aaf8076cfb7fceffe5c50a9",
+      "reference_svg_sha256": "477337ff2c66d59356842d63edb61b32d5ecc6a9f61c2723dfefd962ae839bff",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00026298887678422034,
+        "foreground_mse": 0.0006947248475626111,
+        "edge_alignment": 1.0,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "a833faf3a1facadaa11ac767e35416a40088f5c65729a5482117d02cd63bb724"
+    },
+    {
+      "case_id": "probe_01",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 0.99902219,
+        "relative_x": -0.00021231,
+        "relative_y": -0.01105334
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig kleiner dargestellt und etwas nach links und oben versetzt.",
+      "input_sha256": "bc214c51d4cf2a4ce39d1709cc6230b2add894ddbb48cd36ad591517e1a357a9",
+      "reference_svg_sha256": "b7177cf5f469122e1d394ee55464c40f4834654138e4204fc5b8ca98aa46c640",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0006728945882059634,
+        "foreground_mse": 0.0014484176645055413,
+        "edge_alignment": 0.994381844997406,
+        "foreground_iou": 0.998211091234347
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "44f5fcd838df140be0408f58af0b4ae5bc9b3bcf2f81a8a4d69b629cc334129f"
+    },
+    {
+      "case_id": "probe_02",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 1.02273091,
+        "relative_x": 0.01026981,
+        "relative_y": 0.01308813
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas gr\u00c3\u00b6\u00c3\u0178er dargestellt und geringf\u00c3\u00bcgig nach rechts und unten verschoben.",
+      "input_sha256": "2a8893e26631298ce0b628fc19fb41f476e93ab0615c0d6b9ea913d0578cb49c",
+      "reference_svg_sha256": "00feb881c06c767a40d1b15881330e61566c24811abdb08cfc187332614f29e6",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.854152888990939e-05,
+        "foreground_mse": 0.00016214548668358475,
+        "edge_alignment": 0.8455718755722046,
+        "foreground_iou": 0.9991326973113617
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "2fde715cbeefe1fcb6bc18fd5b208793189822d90233ac43acd1968b36227701"
+    },
+    {
+      "case_id": "probe_03",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 1.04960849,
+        "relative_x": -0.02481828,
+        "relative_y": 0.02371981
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist etwas gr\u00c3\u00b6\u00c3\u0178er dargestellt und geringf\u00c3\u00bcgig nach links und unten verschoben.",
+      "input_sha256": "c7ea027d0e503f803081f24cc07e01e8f104b21d30b41cc29ff04ae7c2a1735a",
+      "reference_svg_sha256": "6c9d11e1e767d2e100c9af6927c59a5b078f3c7f9aebdfc74473467657e5a0b4",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0008877048385329545,
+        "foreground_mse": 0.0020645903423428535,
+        "edge_alignment": 0.8841824531555176,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "e78e81f539f5b30629107d54f7a0f738525daa7bbdebe6191ae020f35e21d397"
+    },
+    {
+      "case_id": "probe_04",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 1.04759334,
+        "relative_x": 0.01060849,
+        "relative_y": 0.00549911
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist etwas gr\u00c3\u00b6\u00c3\u0178er dargestellt und ein wenig nach rechts und unten verschoben.",
+      "input_sha256": "c00a263ad2eed5303f947c806ffa4d2b624f9346c53d94f12fcd9e5f2a4e03db",
+      "reference_svg_sha256": "9be6e8f46789a120ca760eef1d8d8807656f27f703e86184357cd23c89fba9b7",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00028010603273287416,
+        "foreground_mse": 0.0006460103904828429,
+        "edge_alignment": 0.9907419085502625,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "dbd4e22e4bc0355e59f4161cfd8a16b747c84a61c7111406c67138e39d4ab999"
+    },
+    {
+      "case_id": "probe_05",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 1.02312726,
+        "relative_x": 0.01360589,
+        "relative_y": -0.01491027
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig gr\u00c3\u00b6\u00c3\u0178er dargestellt und leicht nach rechts und oben versetzt.",
+      "input_sha256": "f0ae273ecd0ef380bed0699d47707c2543d9306f1c27ed358adde94be7f26200",
+      "reference_svg_sha256": "7d6014ca112f10c323f0b48ce94531050d357e0272083fb14eae1b853634092d",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0032217158004641533,
+        "foreground_mse": 0.00785485003143549,
+        "edge_alignment": 0.7648928165435791,
+        "foreground_iou": 0.9991341991341991
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "a37d645d64bd7924e67a74bf79c1d21faecba84e4ec5e434742017eb3670f28c"
+    },
+    {
+      "case_id": "probe_06",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 1.02270736,
+        "relative_x": -0.02157012,
+        "relative_y": 0.01851427
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist ein wenig gr\u00c3\u00b6\u00c3\u0178er dargestellt und ein wenig nach links und unten verschoben.",
+      "input_sha256": "20da866c631e9f91887901463e5b9fe2184043973909da239739dc1da8f56a15",
+      "reference_svg_sha256": "2e083339ea6432d069b6846c5d02cf3234b021abe766faea470b2deefd675d06",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.001534098293632269,
+        "foreground_mse": 0.003739656414836645,
+        "edge_alignment": 0.9112398028373718,
+        "foreground_iou": 0.9982653946227233
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "a4e307a1028c133a025b5e83246bf3c4776f919b90175e73073c9c23a6a9edaa"
+    },
+    {
+      "case_id": "probe_07",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 0.97843326,
+        "relative_x": 0.01872709,
+        "relative_y": 0.01540555
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00c3\u00bcgig kleiner dargestellt und leicht nach rechts und unten versetzt.",
+      "input_sha256": "1268879a96d5b64b57b7de772492e90775b8d8fbe5d0ea4aa335d947a405f74c",
+      "reference_svg_sha256": "bdbf41408f5ca9ea501eb2fdac0207de06c02708b6a0f9022ff7d78aed03f05c",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0006225606775842607,
+        "foreground_mse": 0.0016431680414825678,
+        "edge_alignment": 0.9873910546302795,
+        "foreground_iou": 0.9990234375
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "a4f6c831654131d1386531d6ae5c934a0bcb6128bdcc8aef5771bc0dfa50b269"
+    },
+    {
+      "case_id": "probe_08",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 0.94373658,
+        "relative_x": 5.696e-05,
+        "relative_y": -0.00487985
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und ein wenig nach rechts und oben verschoben.",
+      "input_sha256": "55a1d1c877dbc97712270df49583a0738bde1f669acbfe2c6072fe1a871dae55",
+      "reference_svg_sha256": "18414bb681d11a7ce01a72ceca43402c8cee3a0ac9939ab91b1a4203ead0507c",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0003364127187523991,
+        "foreground_mse": 0.0007593536865897477,
+        "edge_alignment": 0.932632327079773,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "d5c7b524d1c018e32884f1444699a153d9aaf3a7c5cf4e9127abcab0163ffe20"
+    },
+    {
+      "case_id": "probe_09",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 0.97179237,
+        "relative_x": -0.00882165,
+        "relative_y": 0.02442217
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist ein wenig kleiner dargestellt und etwas nach links und unten verschoben.",
+      "input_sha256": "b063f38fe7967d0efdaacd474971dfde50c11931eeaa6006bde44210a9ce2187",
+      "reference_svg_sha256": "b1c17054828db6accdc66573ab5a792f448f002658e4bf52ccb65babf837a2ad",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00018805050058290362,
+        "foreground_mse": 0.0005121375434100628,
+        "edge_alignment": 0.9000425338745117,
+        "foreground_iou": 0.9990328820116054
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "a82b3b12c9087fa9fe194a35e4df00b89da1887b3345a57bab7f142c31da7b5d"
+    },
+    {
+      "case_id": "probe_10",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 0.95217827,
+        "relative_x": 0.00598912,
+        "relative_y": -0.00110556
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und ein wenig nach rechts und oben versetzt.",
+      "input_sha256": "7b2ca06ed78d51342162d5aa90a8717eeb56272e618f44154917b5ff60e9dee8",
+      "reference_svg_sha256": "4dde9ecdd34bd278d26674daa1e1b2c96d66569a25d5b24f197a69ef4a36af36",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00022406521020457149,
+        "foreground_mse": 0.0006301726098172367,
+        "edge_alignment": 0.933625340461731,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "4f64aa3e7fe34e13dbe49c32f045473f91240eb59e72234fcc24adba9c21331b"
+    },
+    {
+      "case_id": "probe_11",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 1.012383,
+        "relative_x": -0.02025912,
+        "relative_y": 0.01202643
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist ein wenig gr\u00c3\u00b6\u00c3\u0178er dargestellt und geringf\u00c3\u00bcgig nach links und unten versetzt.",
+      "input_sha256": "98f277815be354e934e1064313b5b243c3b18bd3b83e7bcf49d6a697575e19cd",
+      "reference_svg_sha256": "f5cae6658b9c0e5308428a1176e95a3212815bf22131e44e65535e132f297a37",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0013613153714686632,
+        "foreground_mse": 0.003327659796923399,
+        "edge_alignment": 0.9390466809272766,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "5adc636e9b66da6cc6eaf3e27e99acd616cf5909a9795c6e108f46c25357f234"
+    },
+    {
+      "case_id": "probe_12",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 0.98611741,
+        "relative_x": -0.0004267,
+        "relative_y": -0.00822311
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und etwas nach links und oben verschoben.",
+      "input_sha256": "d236fbd0f649c5451b50a2c255ffd5a298f3a39cb45c27e78b21fdab2a763382",
+      "reference_svg_sha256": "4357a6b4c22b9cfa1f7f2cdcbcd481eef0ae8d694109f766f3ebe4cc4a0bbe12",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0016596964560449123,
+        "foreground_mse": 0.004393959417939186,
+        "edge_alignment": 0.8874387741088867,
+        "foreground_iou": 0.9990521327014218
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "3dcea139b50e8e8b9d258192b9c0e9660bd4e16e712dfd4213d8bde53a610aa8"
+    },
+    {
+      "case_id": "probe_13",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 0.94132628,
+        "relative_x": -0.00492319,
+        "relative_y": -0.01528392
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist ein wenig kleiner dargestellt und leicht nach links und oben versetzt.",
+      "input_sha256": "573c00ae70a45566c78ca5431a74502bebb2be7c3b816714f5f95a3bd3cd860e",
+      "reference_svg_sha256": "8cdf09f07da52839f650652eeacd552bfdb5063720bf3e523f69f5d85a593a5e",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0004232710343785584,
+        "foreground_mse": 0.0012415149249136448,
+        "edge_alignment": 0.9062570333480835,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "dc9df776454322c5e840560faf5f8fb8042e62affa0635e8d228cbf96dd7ac88"
+    },
+    {
+      "case_id": "probe_14",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 0.99457761,
+        "relative_x": 0.01678132,
+        "relative_y": 0.00418702
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas kleiner dargestellt und leicht nach rechts und unten verschoben.",
+      "input_sha256": "552a7fdb1917eb0c450960cbbcb052f54b6cc7dbb97aec224f0357667486cf89",
+      "reference_svg_sha256": "5f2394f9e39c65badcaa248fa4a75e7c005863499d844dccda23aea5661f0bae",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0012525430647656322,
+        "foreground_mse": 0.0032320900354534388,
+        "edge_alignment": 0.8490234017372131,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "258ce1e1ec338fa21824e22715ad1d941284f7a336dfb0136ef6bf1f8bac4275"
+    },
+    {
+      "case_id": "probe_15",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 1.02713853,
+        "relative_x": 0.00464134,
+        "relative_y": -0.0226218
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig gr\u00c3\u00b6\u00c3\u0178er dargestellt und ein wenig nach rechts und oben verschoben.",
+      "input_sha256": "a8b4efd731cda20b6a8a4d6ba8bd01bfc6833d0d6bd15b711462852abe3ba1c0",
+      "reference_svg_sha256": "4498d2e22e40a537aad36bf847df5a526a85d6390456ad4bc4daba60a8e69446",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0015370234614238143,
+        "foreground_mse": 0.0037505903746932745,
+        "edge_alignment": 0.936833381652832,
+        "foreground_iou": 0.9540727902946274
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "477ab53675d794588e3ddbbb15f78285af768487bcc0feac32fc4dafe504c525"
+    },
+    {
+      "case_id": "probe_16",
+      "width": 64,
+      "height": 44,
+      "variation": {
+        "scale": 0.94347468,
+        "relative_x": -0.01471538,
+        "relative_y": -0.02446471
+      },
+      "description": "Kelle mit einem gef\u00c3\u00bcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringf\u00c3\u00bcgig kleiner dargestellt und ein wenig nach links und oben verschoben.",
+      "input_sha256": "5cd7f7371c036bd2d249539461dadc0b33b84485e1a0ff00c415bc293aa408c2",
+      "reference_svg_sha256": "975da97914e4bfc2df7102625d49451defffee6af6ae8d017356c9d313203d5c",
+      "satisfactory": true,
+      "failures": [],
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00012227050319779664,
+        "foreground_mse": 0.00033554102992638946,
+        "edge_alignment": 0.9507963061332703,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_sha256": "fbabdf2ec2436b4dc457b381b11c06d0e2e3e5e6a3bab356dbf8cd9da89a6448"
+    }
+  ],
+  "same_seed_all_17_output_hashes_and_metrics_reproduced": true
+}

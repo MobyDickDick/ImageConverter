@@ -13,7 +13,9 @@ from tools.evaluate_diagonal_square_kelle_recheck import measure as measure_rast
 from tools.evaluate_satisfaction_gate import evaluate_satisfaction, seal_baseline_manifest
 
 
-def labeled_square_semantics(svg: str, label: str = 'P') -> float:
+def labeled_square_semantics(svg: str, label: str = 'P', stem_direction: str = 'bottom') -> float:
+    if stem_direction not in {'bottom', 'right'}:
+        return 0.
     root = ET.fromstring(svg)
     shapes = [e for e in root.iter() if e.tag.rsplit('}', 1)[-1] in
               {'ellipse', 'circle', 'polygon', 'rect', 'path', 'line', 'text', 'image', 'polyline'}]
@@ -35,10 +37,14 @@ def labeled_square_semantics(svg: str, label: str = 'P') -> float:
         cw = float(stem.get('stroke-width', 0))
         if not all(math.isfinite(v) for v in (x,y,w,h,sx,sy,ex,ey,tx,ty,size,sw,cw)):
             return 0.
+        connected = (abs(sx-ex) < 1e-4 and abs(sx-(x+w/2)) < w*.1
+                     and abs(sy-(y+h)) <= sw/2+1e-4 and ey > y+h
+                     if stem_direction == 'bottom' else
+                     abs(sy-ey) < 1e-4 and abs(sy-(y+h/2)) < h*.1
+                     and abs(sx-(x+w)) <= sw/2+1e-4 and ex > x+w)
         return float(w > 0 and h > 0 and .7 <= w/h <= 1.3
                      and 0 < sw < min(w,h)*.2 and 0 < cw < w*.3
-                     and abs(sx-ex) < 1e-4 and abs(sx-(x+w/2)) < w*.1
-                     and abs(sy-(y+h)) <= sw/2+1e-4 and ey > y+h
+                     and connected
                      and x < tx < x+w and y < ty < y+h and 0 < size < h
                      and square.get('fill', 'none') != 'none'
                      and text.get('fill', 'none') not in ('none', square.get('fill')))
@@ -46,10 +52,10 @@ def labeled_square_semantics(svg: str, label: str = 'P') -> float:
         return 0.
 
 
-def measure(image_path: Path, svg_path: Path, label: str = 'P') -> dict:
+def measure(image_path: Path, svg_path: Path, label: str = 'P', stem_direction: str = 'bottom') -> dict:
     record = measure_raster(image_path, svg_path)
     metrics = record['metrics']
-    metrics['semantic_score'] = labeled_square_semantics(record['svg'], label)
+    metrics['semantic_score'] = labeled_square_semantics(record['svg'], label, stem_direction)
     record['combined_score'] = (1-metrics['error_per_pixel']+metrics['edge_alignment']+
                                 metrics['object_mask_iou']+metrics['semantic_score'])/4
     return record
@@ -59,8 +65,8 @@ def evaluate(manifest: dict, root: Path) -> dict:
     before, after, evidence = {}, {}, []
     for case in manifest['cases']:
         image = root/case['image']
-        old = measure(image, root/case['before_svg'], manifest['label'])
-        new = measure(image, root/case['after_svg'], manifest['label'])
+        old = measure(image, root/case['before_svg'], manifest['label'], manifest.get('stem_direction', 'bottom'))
+        new = measure(image, root/case['after_svg'], manifest['label'], manifest.get('stem_direction', 'bottom'))
         before[case['case_id']] = {'metrics': old['metrics'], 'dimensions': old['dimensions']}
         after[case['case_id']] = new
         evidence.append({**case, 'input_sha256': hashlib.sha256(image.read_bytes()).hexdigest(),
@@ -71,7 +77,7 @@ def evaluate(manifest: dict, root: Path) -> dict:
                                       'provenance': provenance, 'cases': before})
     return {'schema_version': 'labeled_square_recheck_v1', 'baseline': baseline, 'evidence': evidence,
             'satisfaction_gate': evaluate_satisfaction(baseline, after),
-            'semantic_contract': 'one filled square, centered connected lower stem and exact described contrast text; geometry and colors from raster',
+            'semantic_contract': 'one filled square, centered connected '+manifest.get('stem_direction', 'bottom')+' stem and exact described horizontal contrast text; geometry and colors from raster',
             'measurement': {'foreground_threshold': 210, 'canny_thresholds': [50, 140],
                             'output': 'saved CLI SVG re-rendered with production renderer'}}
 

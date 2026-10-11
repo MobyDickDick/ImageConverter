@@ -1,0 +1,85 @@
+{
+  "stem_direction": "right",
+  "label": "P",
+  "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+  "provenance": {
+    "execution_mode": "semantic-only",
+    "commit": "3056319047f6eafca0515c320df10ca14f033c39",
+    "baseline_kind": "fresh_original_description_cli",
+    "seed": 0,
+    "toolchain": {
+      "python": "3.10.11",
+      "numpy": "2.2.6",
+      "opencv": "4.14.0",
+      "pymupdf": "1.26.7"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_symbol_00",
+      "source": "AC0734_1_L.jpg",
+      "image": "../../images_to_convert/AC0734_1_L.jpg",
+      "source_sha256": "6e200c89faac1ed0f05f4584629fd26ecda618595fe6386c724b9f7c363b865e",
+      "role": "holdout",
+      "baseline_description": "Wie AC0734, aber nach rechts gedreht, Text immer noch horizontal \"P\"",
+      "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_00.svg",
+      "after_svg": "after/anonymous_symbol_00.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_01",
+      "source": "AC0734_1_M.jpg",
+      "image": "../../images_to_convert/AC0734_1_M.jpg",
+      "source_sha256": "97e050858a17ebfa4e311b6656b6750e9bdf1eaaa4ac4fbdd8b67c9c286ec137",
+      "role": "holdout",
+      "baseline_description": "Wie AC0734, aber nach rechts gedreht, Text immer noch horizontal \"P\"",
+      "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_01.svg",
+      "after_svg": "after/anonymous_symbol_01.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_02",
+      "source": "AC0734_1_S.jpg",
+      "image": "../../images_to_convert/AC0734_1_S.jpg",
+      "source_sha256": "777d49057a9f7e979ffa5bdd837a935477db6c4fab4ede98e17ea8a3c2065250",
+      "role": "development",
+      "baseline_description": "Wie AC0734, aber nach rechts gedreht, Text immer noch horizontal \"P\"",
+      "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_02.svg",
+      "after_svg": "after/anonymous_symbol_02.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_03",
+      "source": "AC0734_L.jpg",
+      "image": "../../images_to_convert/AC0734_L.jpg",
+      "source_sha256": "3ab6ec31d99e21ee8d4b13bc3755205def3ad45527fbd5f77e4bdfb152e457a5",
+      "role": "holdout",
+      "baseline_description": "Wie AC0734, aber nach rechts gedreht, Text immer noch horizontal \"P\"",
+      "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_03.svg",
+      "after_svg": "after/anonymous_symbol_03.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_04",
+      "source": "AC0734_M.jpg",
+      "image": "../../images_to_convert/AC0734_M.jpg",
+      "source_sha256": "89748d3e771bc752eb1cb13e24d9d2b7180b5a5f67a56203d2f2d595b5cc7533",
+      "role": "holdout",
+      "baseline_description": "Wie AC0734, aber nach rechts gedreht, Text immer noch horizontal \"P\"",
+      "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_04.svg",
+      "after_svg": "after/anonymous_symbol_04.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_05",
+      "source": "AC0734_S.jpg",
+      "image": "../../images_to_convert/AC0734_S.jpg",
+      "source_sha256": "7339d2b5679fdfff0ecede3e62b6c782cc46eed4ba7ec85b23930f235612b6bc",
+      "role": "holdout",
+      "baseline_description": "Wie AC0734, aber nach rechts gedreht, Text immer noch horizontal \"P\"",
+      "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_05.svg",
+      "after_svg": "after/anonymous_symbol_05.svg"
+    }
+  ]
+}

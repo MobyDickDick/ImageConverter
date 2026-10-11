@@ -28,7 +28,7 @@ def fit(image, description=DESCRIPTION, render_fn=render, error_fn=None):
 
 @pytest.mark.parametrize('index', [0,3,8,15])
 def test_frozen_ci_seed_with_crop_scale_and_translation_passes_unchanged_gates(index):
-    source = ROOT/'artifacts/images_to_convert/samples/AC0223_L_sia.svg'
+    source = ROOT/'tests/fixtures/plan_b_templates/AC0223_L_sia.svg'
     case = make_variations(source.read_text(encoding='utf-8'),DESCRIPTION,5321758631963497707)[index]
     image = render(case['svg'],case['width'],case['height'])
     result = fit(image)

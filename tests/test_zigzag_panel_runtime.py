@@ -16,7 +16,7 @@ from tools.review_conversion_quality import normalized_mse
 
 ROOT = Path(__file__).resolve().parents[1]
 DESCRIPTION = json.loads((ROOT/'artifacts/evaluation/zigzag_panel_recheck_v1/manifest.json').read_text(encoding='utf-8'))['description']
-TEMPLATE_DESCRIPTION = (ROOT/'artifacts/images_to_convert/samples/AC0130_L.txt').read_text(encoding='utf-8')
+TEMPLATE_DESCRIPTION = (ROOT/'tests/fixtures/plan_b_templates/AC0130_L.txt').read_text(encoding='utf-8')
 
 
 def render(svg, width, height):
@@ -102,7 +102,7 @@ def test_runtime_uses_pixels_with_neutral_names_and_no_template_read(monkeypatch
 
 @pytest.mark.parametrize('index',[0,3,5,14])
 def test_supplied_template_is_rasterized_and_varied_before_reconstruction(index):
-    svg = (ROOT/'artifacts/images_to_convert/samples/AC0130_L.svg').read_text(encoding='utf-8')
+    svg = (ROOT/'tests/fixtures/plan_b_templates/AC0130_L.svg').read_text(encoding='utf-8')
     case = make_variations(svg,TEMPLATE_DESCRIPTION,20261008)[index]
     image = render(case['svg'],case['width'],case['height'])
     result = fit(image,case['description'])

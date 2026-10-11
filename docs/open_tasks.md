@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-11)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `428` · Erledigt `402` · Offen `26`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `429` · Erledigt `403` · Offen `26`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -19,9 +19,22 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-11)
 
+- [x] **AC0734 – rechter Griff mit horizontalem P:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung der Textregistrierung; sechs Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage 17/17, zwölf SVGs und sämtliche Gates reproduziert. Details: `docs/next_arbeitspaket_2026-10-11_ac0734_1_s.md`.
+
+**Neuester Abschluss:** `AC0734_1_S` und fünf Holdouts auf
+`codex/ac0734-quality-2026-10-11`. Frische Zielmetrik `18331.007812 → 601.298645`.
+Erfolgsübersicht: 198/198 erneute Review-Pässe; alle 192 bisherigen Indexeinträge
+und die 22 bekannten älteren Kompatibilitätsdrifts bleiben unverändert.
+117 fokussierte und zehn Bestandsschutz-/Smoke-Tests bestehen.
+Gesamtnachweis einschließlich der Pfadkorrektur-Nachläufe: 2.295 bestanden,
+30 bestehende Skips, keine ungelösten Fehler. Erstlauf und Nachläufe sind getrennt dokumentiert.
+Historische Testvorlagen sind von der handbearbeiteten Sammlung getrennt.
+Nächste reguläre Rotation: `GE9021_1M`, `SE0081`, `GE0039_M`, `GE9022_2M`, `AC0920_L`.
+Die sechs erledigten Varianten sind ausgeschlossen.
+
 - [x] **AC0712 – linker Griff mit Strich und Punkt:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; sechs Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage 17/17, zwei Abnahmen reproduzieren sämtliche SVGs und Gates. Details: `docs/next_arbeitspaket_2026-10-11_ac0712_1_s.md`.
 
-**Neuester Abschluss:** `AC0712_1_S` und fünf Holdouts auf
+**Vorheriger Abschluss:** `AC0712_1_S` und fünf Holdouts auf
 `codex/ac0712-quality-2026-10-11`. Frische Zielmetrik `3822.055908 → 261.666656`.
 Erfolgsübersicht: 192/192 erneute Review-Pässe; alle 186 bisherigen Indexeinträge
 und die 22 bekannten älteren Kompatibilitätsdrifts sind unverändert.

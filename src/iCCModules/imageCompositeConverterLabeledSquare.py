@@ -1,4 +1,4 @@
-"""Register an explicitly labeled square and its lower stem from raster evidence."""
+"""Register an explicitly labeled square and its stem from raster evidence."""
 from __future__ import annotations
 
 import copy
@@ -35,19 +35,50 @@ def _contour_metrics(reference, rendered):
     return residual, edge, iou
 
 
-def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn):
+def _fit_right_stem_labeled_square(geometry_ir, *, image, render_fn, error_fn):
+    """Transpose the body/handle fit while rendering text in its original axes."""
+    original = geometry_ir[0]
+
+    def transpose(element, kind):
+        result = copy.deepcopy(element)
+        x, y, w, h = result['body_bbox']
+        result.update(kind=kind, body_bbox=[y, x, h, w],
+                      connector=[[v, u] for u, v in result['connector']])
+        if 'label_center' in result:
+            result['label_center'] = result['label_center'][::-1]
+        return result
+
+    def restore(ir):
+        return [transpose(ir[0], original['kind'])]
+
+    def render(ir):
+        raster = render_fn(restore(ir))
+        return None if raster is None else np.swapaxes(raster, 0, 1)
+
+    fitted = fit_labeled_square([transpose(original, 'UprightSquareKelleGlyph')],
+        image=np.swapaxes(image, 0, 1), render_fn=render,
+        error_fn=lambda raster: error_fn(np.swapaxes(raster, 0, 1)), _refine_contour=True)
+    if fitted is not None:
+        fitted['geometry_ir'] = restore(fitted['geometry_ir'])
+        fitted['rendered'] = np.swapaxes(fitted['rendered'], 0, 1)
+    return fitted
+
+
+def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn, _refine_contour=False):
     """Fit observed geometry/colors while preserving the described text and topology.
 
-    This deliberately handles one upright, filled square with a connected lower
-    stem and a single contrast label. It does not identify text from image IDs,
+    This handles one filled square with a connected lower or right stem and a
+    single horizontal contrast label. It does not identify text from image IDs,
     access reference vectors, or turn arbitrary raster contours into paths.
     """
-    if (len(geometry_ir) != 1 or geometry_ir[0].get('kind') != 'UprightSquareKelleGlyph'
+    if (len(geometry_ir) != 1 or geometry_ir[0].get('kind') not in {'UprightSquareKelleGlyph', 'RightStemSquareKelleGlyph'}
             or len(str(geometry_ir[0].get('label', ''))) != 1):
         return None
     arr = np.asarray(image)
-    if arr.ndim != 3 or arr.shape[2] != 3 or min(arr.shape[:2]) < 8:
+    if arr.ndim != 3 or arr.shape[2] != 3 or min(arr.shape[:2]) < 8 or not np.isfinite(arr).all():
         return None
+    if geometry_ir[0]['kind'] == 'RightStemSquareKelleGlyph':
+        return _fit_right_stem_labeled_square(geometry_ir, image=arr, render_fn=render_fn, error_fn=error_fn)
     height, width = arr.shape[:2]
     scale = min(width, height)
     mask = np.min(arr, axis=2) < 225
@@ -71,6 +102,12 @@ def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn):
     if (stem_right-stem_left > bw*.3 or abs(stem_center-(left+right)/2) > bw*.1
             or stem_y.min() > 1 or not np.array_equal(np.unique(stem_y), np.arange(stem_y.max()+1))):
         return None
+    if _refine_contour:
+        allowed = np.zeros_like(mask)
+        allowed[max(0, top-1):bottom+1, max(0, left-1):right+1] = True
+        allowed[bottom:stem_end, stem_left:stem_right] = True
+        if np.any(mask & ~allowed):
+            return None
     crop = arr[top+2:bottom-2, left+2:right-2]
     if not crop.size:
         return None
@@ -112,6 +149,8 @@ def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn):
     if original is None:
         return None
     initial_error = float(error_fn(original))
+    if not math.isfinite(initial_error):
+        return None
     element = copy.deepcopy(geometry_ir[0])
     element.update(body_bbox=[(left+.5)/width, (top+.5)/height, (bw-1)/width, (bh-1)/height],
                    body_fill=_hex(body_color), body_stroke=_hex(border_color), body_stroke_width=1/scale,
@@ -191,7 +230,7 @@ def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn):
             if not changed:
                 break
     old_metrics = _contour_metrics(arr, best[2])
-    if old_metrics[1] < .72:
+    if old_metrics[1] < .72 or _refine_contour:
         # An outer fringe can hide a thicker contour in a color/absolute-error
         # fit. Observe interior edge-band colors and jointly move the rectangle
         # and its stroke, preserving the observed outer pixel-center bounds.

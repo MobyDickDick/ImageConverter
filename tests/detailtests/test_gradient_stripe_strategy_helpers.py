@@ -80,7 +80,7 @@ def test_detect_gradient_strategy_ignores_full_height_vertical_panel() -> None:
 
 
 def test_ac0vr2_ab_m_sample_uses_smooth_gradients_not_stripe_columns() -> None:
-    sample_path = Path("artifacts/images_to_convert/samples/AC0VR2_AB_M.svg")
+    sample_path = Path("tests/fixtures/plan_b_templates/AC0VR2_AB_M.svg")
     snapshot_path = Path("artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0VR2_AB_M.svg")
     svg = sample_path.read_text(encoding="utf-8")
 
@@ -94,7 +94,7 @@ def test_ac0vr2_ab_m_sample_uses_smooth_gradients_not_stripe_columns() -> None:
 
 
 def test_ac0vr2_zl_m_result_is_a_vertical_gradient_not_columns() -> None:
-    sample_path = Path("artifacts/images_to_convert/samples/AC0VR2_ZL_M.svg")
+    sample_path = Path("tests/fixtures/plan_b_templates/AC0VR2_ZL_M.svg")
     result_path = Path("artifacts/converted_images/converted_svgs/AC0VR2_ZL_M.svg")
     snapshot_path = Path("artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0VR2_ZL_M.svg")
     svg = result_path.read_text(encoding="utf-8")
