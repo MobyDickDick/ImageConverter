@@ -1,0 +1,78 @@
+{
+  "metrics": {
+    "boundary_triple_records": 3,
+    "diff_renderable_pairs": 945,
+    "diff_variants": 952,
+    "ranked_records": 1000,
+    "selected_candidates": 5,
+    "successful_above_threshold": 0,
+    "successful_missing_or_failed": 0,
+    "successful_renderable_pairs": 48,
+    "successful_variants": 48,
+    "top_error_cases": 5
+  },
+  "schema_version": "conversion_quality_review_v2",
+  "selected_candidates": [
+    {
+      "height": 39,
+      "image_area": 975,
+      "image_path": "artifacts/images_to_convert/SE0081.jpg",
+      "mean_delta2": 11975.7783203125,
+      "normalized_mse": 0.061390636013392286,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/SE0081.svg",
+      "variant": "SE0081",
+      "width": 25
+    },
+    {
+      "height": 60,
+      "image_area": 3600,
+      "image_path": "artifacts/images_to_convert/GE0039_M.jpg",
+      "mean_delta2": 11544.7578125,
+      "normalized_mse": 0.05918112424708445,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/GE0039_M.svg",
+      "variant": "GE0039_M",
+      "width": 60
+    },
+    {
+      "height": 20,
+      "image_area": 1200,
+      "image_path": "artifacts/images_to_convert/GE9022_2M.jpg",
+      "mean_delta2": 11451.3232421875,
+      "normalized_mse": 0.058702156822696396,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/GE9022_2M.svg",
+      "variant": "GE9022_2M",
+      "width": 60
+    },
+    {
+      "height": 25,
+      "image_area": 625,
+      "image_path": "artifacts/images_to_convert/AC0920_L.jpg",
+      "mean_delta2": 11265.10546875,
+      "normalized_mse": 0.05774756103421761,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0920_L.svg",
+      "variant": "AC0920_L",
+      "width": 25
+    },
+    {
+      "height": 15,
+      "image_area": 225,
+      "image_path": "artifacts/images_to_convert/AC1000_S.jpg",
+      "mean_delta2": 11111.6396484375,
+      "normalized_mse": 0.05696085940503653,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC1000_S.svg",
+      "variant": "AC1000_S",
+      "width": 15
+    }
+  ],
+  "threshold_normalized_mse": 0.045945679012345676
+}

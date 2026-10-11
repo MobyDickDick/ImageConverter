@@ -1,0 +1,141 @@
+{
+  "archive": {
+    "failed_single_batch_attempts": [
+      {
+        "log": ".tmp/ge9021-archive/semantic-only.log",
+        "reason": "Windows CSV write OSError 22"
+      },
+      {
+        "log": ".tmp/ge9021-archive-retry/semantic-only.log",
+        "reason": "Windows CSV write OSError 22"
+      },
+      {
+        "log": ".tmp/ge9021-archive-native/semantic-only.log",
+        "reason": "Windows CSV write OSError 22 in normal process"
+      }
+    ],
+    "log": ".tmp/ge9021-archive-final.log",
+    "max_cases_per_worker": 48,
+    "passed": 212,
+    "previous_198_records_unchanged": true,
+    "previous_22_compatibility_drifts_unchanged": true,
+    "required": 212,
+    "status": "pass",
+    "workers": [
+      {
+        "case_count": 48,
+        "passed": 48,
+        "worker": 1
+      },
+      {
+        "case_count": 46,
+        "passed": 46,
+        "worker": 2
+      },
+      {
+        "case_count": 42,
+        "passed": 42,
+        "worker": 3
+      },
+      {
+        "case_count": 28,
+        "passed": 28,
+        "worker": 4
+      },
+      {
+        "case_count": 48,
+        "passed": 48,
+        "worker": 5
+      }
+    ]
+  },
+  "archive_runner_tests": {
+    "failed": 0,
+    "log": ".tmp/ge9021-archive-tool-final.log",
+    "new_cases": 4,
+    "passed": 8,
+    "seconds": 0.77,
+    "skipped": 1
+  },
+  "branch": "codex/ge9021-quality-2026-10-11",
+  "checks": {
+    "cli_help": "pass",
+    "compileall": "pass",
+    "diff_whitespace": "pass",
+    "runtime_id_ratchet": "pass"
+  },
+  "cli_acceptance": {
+    "all_28_vectors_and_gates_reproduced": true,
+    "cases": 14,
+    "forbidden_svg_reads": 0,
+    "frozen_original_baseline_identical": true,
+    "regressed_metrics": 0,
+    "satisfactory": 14
+  },
+  "current_standard_profile_evidence": {
+    "basis": "first full run plus final focused/targeted repairs and four new partition runner tests; overlapping cases counted once",
+    "cases": 2386,
+    "existing_skips": 30,
+    "passed": 2356,
+    "unresolved_failures": 0
+  },
+  "date": "2026-10-11",
+  "focused": {
+    "failed": 0,
+    "log": ".tmp/ge9021-focused-final-verified.log",
+    "passed": 246,
+    "seconds": 317.26
+  },
+  "plan_b": {
+    "all_hashes_and_metrics_reproduced": true,
+    "passed": 17,
+    "required": 17,
+    "seed": 20261011
+  },
+  "preservation": {
+    "failed": 0,
+    "log": ".tmp/ge9021-preservation.log",
+    "passed": 10,
+    "protected_variants": 31,
+    "seconds": 52.76
+  },
+  "schema_version": "work_package_validation_v1",
+  "source_sha256": {
+    "src/iCCModules/imageCompositeConverterArcShaft.py": "44045b27b2ea504b190b78b6f651de3eb9661414c1565ff4e3b8800a2f84d5e3",
+    "src/iCCModules/imageCompositeConverterFilledSymbols.py": "fdf9e87d61684604a1260793cb894b0b16795f02c99f49f6a4c31f4460a1d42e",
+    "tests/test_inverted_arc_shaft_runtime.py": "b0022c897ec51fb7681bbc45ba2cee6ab55182295d47b400453bd629ee6b5ccc",
+    "tests/test_partitioned_archive_recheck.py": "84af73fce81ae32cfc48919da2f31a0944d1137887a76e8bce2b02954c3dd143",
+    "tools/evaluate_inverted_arc_shaft_recheck.py": "7328f10362d900ed3652490bf3f9cacfb24c1ded5b039483c4947aa662ead32a",
+    "tools/recheck_satisfactory_archive.py": "57e143322df9ae0ca342f2b9be37ffea9a9da42f2bd07830b302d2dbf9bea4cf",
+    "tools/run_inverted_arc_shaft_recheck.py": "d471364020a6e5ab57b30bead7c776f38a8666a3b91d65f861fde0c986762f4f"
+  },
+  "standard_suite": {
+    "collected": 2382,
+    "failed_in_first_full_run": 2,
+    "first_full_log": ".tmp/ge9021-full.log",
+    "full_green_monolithic_rerun_claimed": false,
+    "initial_exit_code": 1,
+    "initial_failure_reason": "UTF-8 description rejection literals were accidentally recoded while the first full process was already running. Source restored; both failures verified in final focused suite and targeted post-run checks.",
+    "no_unresolved_failures": true,
+    "passed_in_first_full_run": 2350,
+    "repaired_failures": 2,
+    "seconds": 1728.54,
+    "skipped": 30,
+    "targeted_post_run": {
+      "failed": 0,
+      "log": ".tmp/ge9021-full-repairs.log",
+      "passed": 10,
+      "seconds": 0.4
+    }
+  },
+  "strict_jpg_pixels": {
+    "passed": 14,
+    "required": 14
+  },
+  "toolchain": {
+    "numpy": "2.2.6",
+    "opencv": "4.14.0",
+    "pymupdf": "1.26.7",
+    "python": "3.10.11"
+  }
+}

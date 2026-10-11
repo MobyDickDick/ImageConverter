@@ -1,5 +1,5 @@
 {
-  "case_count": 198,
+  "case_count": 212,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -3128,6 +3128,244 @@
       "svg": "svgs/GE9014_7S.svg",
       "svg_sha256": "373f21bafab38313108cc95a57de53ce27db47d32aaf7b6e414e89888d89fc01",
       "variant": "GE9014_7S"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_1M.jpg",
+      "image_sha256": "9df7b0891d9fe2e24bcdaf2718401f727561f818371b1b20f93a8ffd84078907",
+      "mean_delta2": 194.40916442871094,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9630364179611206,
+        "error_per_pixel": 0.0009965867713890091,
+        "object_mask_iou": 0.9721115537848606
+      },
+      "svg": "svgs/GE9021_1M.svg",
+      "svg_sha256": "2a1aa4faedd0d01c19981e1b744e99f1e639c9c18758c11694e09dcef7f99a13",
+      "variant": "GE9021_1M"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_1S.jpg",
+      "image_sha256": "4a8c6e826e85c3017bb4ab6620948ebf2ec2106fdaa601616837bec15361c0b1",
+      "mean_delta2": 139.28334045410156,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9352058172225952,
+        "error_per_pixel": 0.0007139989258187956,
+        "object_mask_iou": 0.9942528735632183
+      },
+      "svg": "svgs/GE9021_1S.svg",
+      "svg_sha256": "8070ab8b6092e14087fb9efad31a1df6b6356d5c2835775820f47aed9c282362",
+      "variant": "GE9021_1S"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_2M.jpg",
+      "image_sha256": "67a12af7cd49e5bf2164380492360fa21ff597cd93bda58da4c46cdb1ef752f7",
+      "mean_delta2": 197.19833374023438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9590085744857788,
+        "error_per_pixel": 0.0010108847045507336,
+        "object_mask_iou": 0.9781312127236581
+      },
+      "svg": "svgs/GE9021_2M.svg",
+      "svg_sha256": "b6452638c76dfab312444a72f1ccca751f8eaf9b200e7435326fc3f6baca5f94",
+      "variant": "GE9021_2M"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_2S.jpg",
+      "image_sha256": "41bfe57d149c0320098e1ce596c916f846600c2e4f5be99d51aa131a7bfe1011",
+      "mean_delta2": 133.97332763671875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9469272494316101,
+        "error_per_pixel": 0.0006867785602292387,
+        "object_mask_iou": 0.9942528735632183
+      },
+      "svg": "svgs/GE9021_2S.svg",
+      "svg_sha256": "a51af72e94c49da7326d182198ad4b6cd3847263660e8f7520800d4074853fa5",
+      "variant": "GE9021_2S"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_3M.jpg",
+      "image_sha256": "7665f42ad4402a2fc041bf3594accf5db0842ad7ca881409d3fdb8037bfc779a",
+      "mean_delta2": 110.46416473388672,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9626903533935547,
+        "error_per_pixel": 0.0005662651018012904,
+        "object_mask_iou": 0.9800399201596807
+      },
+      "svg": "svgs/GE9021_3M.svg",
+      "svg_sha256": "5eb24389156af6066f2660de75974d3e1c616ee3180efa75677dbe7f7d4ab62d",
+      "variant": "GE9021_3M"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_3S.jpg",
+      "image_sha256": "da986a66d43e3c965f4406cadef7f5a1d0aa74c260a6bc1258859833f48edfc1",
+      "mean_delta2": 93.35333251953125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9451812505722046,
+        "error_per_pixel": 0.0004785509804922786,
+        "object_mask_iou": 0.9885057471264368
+      },
+      "svg": "svgs/GE9021_3S.svg",
+      "svg_sha256": "43b19ca23b5295a60b8c05ee9a9ab7864ccf82d34544497a0bf8502369f705b0",
+      "variant": "GE9021_3S"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_4M.jpg",
+      "image_sha256": "2df5d2e1838528adc6fa7f62f92eaea5dd708e331d86a89336712d9b28acae3c",
+      "mean_delta2": 53.5091667175293,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9726340770721436,
+        "error_per_pixel": 0.00027430048298105494,
+        "object_mask_iou": 0.8899082568807339
+      },
+      "svg": "svgs/GE9021_4M.svg",
+      "svg_sha256": "7a127fbd09e82822d3cbe6353d53b9feaecd87b9999a75a2807feec3f3468e76",
+      "variant": "GE9021_4M"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_4S.jpg",
+      "image_sha256": "997a19ccbdd87cfb3b81251ac203bf91a65eede56595ac132bab53539816161a",
+      "mean_delta2": 41.060001373291016,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9574193358421326,
+        "error_per_pixel": 0.00021048315454717936,
+        "object_mask_iou": 0.9836065573770492
+      },
+      "svg": "svgs/GE9021_4S.svg",
+      "svg_sha256": "ab016796b2772b14efbdc6ee7a2b657cfdc72d18489d2e4bd86c354fae5f33d4",
+      "variant": "GE9021_4S"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_5M.jpg",
+      "image_sha256": "70cc94edaf0c94618b3d4c5b00463dc3250bd5889b39af1eddc65c788ed7ed99",
+      "mean_delta2": 107.16666412353516,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8889331817626953,
+        "error_per_pixel": 0.000549361343706447,
+        "object_mask_iou": 0.9680638722554891
+      },
+      "svg": "svgs/GE9021_5M.svg",
+      "svg_sha256": "995f37a9195878682e015269c761e6c488f63cdeca2631aab63acc4dfd098adc",
+      "variant": "GE9021_5M"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_5S.jpg",
+      "image_sha256": "13ea4d4797c98471871edc55a9b790fde66e1d01fa15db56b691cfd823066bee",
+      "mean_delta2": 96.66000366210938,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9543662071228027,
+        "error_per_pixel": 0.000495501748876634,
+        "object_mask_iou": 0.9885057471264368
+      },
+      "svg": "svgs/GE9021_5S.svg",
+      "svg_sha256": "1a48a4cac3ddbedb13de57ba5366d0fe2f26d965a7fa1b6b778eb5cf7bbd5bfb",
+      "variant": "GE9021_5S"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_6M.jpg",
+      "image_sha256": "35a4e09e3b03d4188f10d0a4c8716e2f2b4720ad0731b027ce8d8459d45323cf",
+      "mean_delta2": 217.1925048828125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8970751762390137,
+        "error_per_pixel": 0.0011133794944652698,
+        "object_mask_iou": 0.9820717131474104
+      },
+      "svg": "svgs/GE9021_6M.svg",
+      "svg_sha256": "daf34bc0d577dd43fbf422b8a5d19684dff05a8ff017144e8c13322c05c2db3d",
+      "variant": "GE9021_6M"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_6S.jpg",
+      "image_sha256": "775b6dfe3a9bd90d4fe6318e95bc59d3aa7226fdbc9a53ea2a4b5ac1a1c1285d",
+      "mean_delta2": 149.76333618164062,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9571657776832581,
+        "error_per_pixel": 0.0007677218309964917,
+        "object_mask_iou": 0.9942528735632183
+      },
+      "svg": "svgs/GE9021_6S.svg",
+      "svg_sha256": "b4de1dfec887261a86ff4265979b9d2b4fc305b6bf2acb8c1bdf6578c9bdc87f",
+      "variant": "GE9021_6S"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_7M.jpg",
+      "image_sha256": "819e33b37806f3c198aa701a4981b5ba2528e614a62c795cb4cacbd6e1133096",
+      "mean_delta2": 134.2949981689453,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9624885320663452,
+        "error_per_pixel": 0.0006884275184874807,
+        "object_mask_iou": 0.9820717131474104
+      },
+      "svg": "svgs/GE9021_7M.svg",
+      "svg_sha256": "985fe899dbc6df98d54b37ff1eeb0b360d50400fa5301974ca6beb009309216f",
+      "variant": "GE9021_7M"
+    },
+    {
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/inverted_arc_shaft_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9021_7S.jpg",
+      "image_sha256": "58dac5afbe6ebb908093a3afdf31b4cbe4868732bd9f191cb8d58ac574827bc9",
+      "mean_delta2": 92.66000366210938,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9372258186340332,
+        "error_per_pixel": 0.0004749968148768903,
+        "object_mask_iou": 0.9942528735632183
+      },
+      "svg": "svgs/GE9021_7S.svg",
+      "svg_sha256": "a559fe3767d4c230a913b71a306474498ce625087443f03c5d01d0f502748eff",
+      "variant": "GE9021_7S"
     },
     {
       "description": "Ein oben offener U-Bogen in Form eines unteren Halbkreises liegt \u00fcber einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",

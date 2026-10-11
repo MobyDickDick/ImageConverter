@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-11)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `429` · Erledigt `403` · Offen `26`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `431` · Erledigt `404` · Offen `27`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -19,9 +19,20 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-11)
 
+- [x] **GE9021 – unten offener Bogen unter Verlaufsschaft:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; 14 Varianten bestehen beide regulären Gates und die strengeren Pixelgrenzen ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage 17/17, alle 28 Katalog-SVGs und sämtliche Plan-B-Hashes/Metriken reproduziert. Details: `docs/next_arbeitspaket_2026-10-11_ge9021_1m.md`.
+
+**Neuester Abschluss:** `GE9021_1M` und 13 Holdouts auf
+`codex/ge9021-quality-2026-10-11`. Frische Zielmetrik `12463.036133 → 194.409164`.
+Erfolgsübersicht: 212/212 erneute Review-Pässe in fünf getrennten Prozessen;
+alle 198 bisherigen Indexeinträge und die 22 älteren Kompatibilitätsdrifts unverändert.
+Zehn Bestandsschutz-/Smoke-Tests bestehen; die Abschlussprüfungen stehen im
+maschinenlesbaren Nachweis des Pakets. Nächste reguläre Rotation: `SE0081`,
+`GE0039_M`, `GE9022_2M`, `AC0920_L`, `AC1000_S`.
+Die 14 erledigten Varianten sind ausgeschlossen.
+
 - [x] **AC0734 – rechter Griff mit horizontalem P:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung der Textregistrierung; sechs Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage 17/17, zwölf SVGs und sämtliche Gates reproduziert. Details: `docs/next_arbeitspaket_2026-10-11_ac0734_1_s.md`.
 
-**Neuester Abschluss:** `AC0734_1_S` und fünf Holdouts auf
+**Vorheriger Abschluss:** `AC0734_1_S` und fünf Holdouts auf
 `codex/ac0734-quality-2026-10-11`. Frische Zielmetrik `18331.007812 → 601.298645`.
 Erfolgsübersicht: 198/198 erneute Review-Pässe; alle 192 bisherigen Indexeinträge
 und die 22 bekannten älteren Kompatibilitätsdrifts bleiben unverändert.
@@ -69,6 +80,7 @@ Erfolgsübersicht: 172/172 Review-Pässe. Standardtestlauf: 2.207 bestanden,
 - [ ] **AC0721-PB-GREY:** große graue JPG-Variante `AC0721_L` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.799373 < 0.85`); beide regulären Gates und die übrigen fünf JPGs bestehen. Grenzen unverändert beibehalten.
 - [x] **AC0713 – oberer Griff mit Strich und Punkt:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; sechs Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression, unabhängige Plan-B-Vorlage 17/17.
 - [x] **Erfolgsübersicht mit erneuter Prüfung:** inzwischen 186 nachgewiesene Bild-/SVG-Paare separat abgelegt; das erweiterte Profil konvertiert sämtliche archivierten Eingaben neu. Quellenauflösung und Regressionsauswahl berücksichtigen auch die ursprüngliche Erfolgsablage.
+- [ ] **ARCHIVE-WINDOWS-IO:** Drei große Archivreprüfungen scheitern unter Windows beim Schreiben von CSV-Berichten mit `OSError: [Errno 22]`, auch im normalen Prozess. Ursache im Langlauf untersuchen; für die vollständige Qualitätsabnahme Familien mit `tools.recheck_satisfactory_archive --max-cases-per-worker 48` in getrennten Prozessen prüfen. Quellen, angenommene SVGs und Grenzen erhalten. Belege: `docs/next_arbeitspaket_2026-10-11_ge9021_1m.md`.
 - [ ] **ARCHIVE-DRIFT-2026-10-10:** 22 ältere Bestenlisteneinträge erzeugen bei erneuter Konvertierung höhere Mean-Delta²-Werte als ihre archivierten Vektoren. Die Reviewgrenze besteht weiterhin; Ursachen und Budgets je Fall anhand von `artifacts/satisfactory_conversions/recheck_2026-10-10.json` prüfen, akzeptierte SVGs erhalten und Qualitätsgrenzen unverändert lassen.
 
 **Vorheriger Abschluss:** `AC0721_1_S` und alle fünf Holdouts auf
