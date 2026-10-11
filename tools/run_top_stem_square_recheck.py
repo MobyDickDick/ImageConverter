@@ -22,7 +22,8 @@ def main() -> int:
         from tools.run_plan_b_variations import converter_worker
         from src.iCCModules import imageCompositeConverterNonCompositeRuntime as runtime
         if sys.argv[2].startswith('before'):
-            kind = 'UprightSquareKelleGlyph' if sys.argv[2] == 'before:bottom' else 'Rotated180SquareKelleGlyph'
+            kind = {'before:bottom':'UprightSquareKelleGlyph',
+                    'before:left':'LeftRotatedSquareKelleTGlyph'}.get(sys.argv[2], 'Rotated180SquareKelleGlyph')
             original_fit = runtime.fit_square_stem
             runtime.fit_square_stem = lambda ir, **kwargs: (None if ir and ir[0].get('kind') == kind else original_fit(ir, **kwargs))
         random.seed(0)
@@ -72,7 +73,7 @@ def main() -> int:
         with (output/(mode+'.log')).open('w', encoding='utf-8') as log:
             subprocess.run([sys.executable, '-I', '-c', 'import sys,runpy; sys.path[:0]='+repr(paths)+
                             "; runpy.run_module('tools.run_top_stem_square_recheck',run_name='__main__')",
-                            '--_worker', mode+(':bottom' if mode=='before' and manifest.get('stem_direction')=='bottom' else ''), str(run_dir), str(mode_inputs), '--descriptions-path', str(description_file),
+                            '--_worker', mode+(':'+manifest['stem_direction'] if mode=='before' and manifest.get('stem_direction') in {'bottom','left'} else ''), str(run_dir), str(mode_inputs), '--descriptions-path', str(description_file),
                             '--output-dir', str(run_dir), '--start', names[0], '--end', names[-1],
                             '--execution-mode', 'semantic-only', '--deterministic-order'],
                            cwd=Path(__file__).resolve().parents[1], env=env, stdout=log, stderr=subprocess.STDOUT,

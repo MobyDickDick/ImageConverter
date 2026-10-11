@@ -16,7 +16,7 @@ from tools.evaluate_satisfaction_gate import evaluate_satisfaction, seal_baselin
 
 def symbol_semantics(svg: str, stem_direction: str = 'top') -> float:
     """Require the described handle direction and both interior geometric marks."""
-    if stem_direction not in {'top','bottom'}:
+    if stem_direction not in {'top','bottom','left'}:
         return 0.
     try:
         root = ET.fromstring(svg)
@@ -36,10 +36,15 @@ def symbol_semantics(svg: str, stem_direction: str = 'top') -> float:
             return 0.
         stem = stems[0]
         sx, sy, ex, ey = map(float, re.findall(r'[-\d.]+', stem.get('d')))
-        connected = (max(sy,ey) > y+h and abs(min(sy,ey)-y-h) <= float(body.get('stroke-width',0))/2+.002
+        tolerance = float(body.get('stroke-width',0))/2+.002
+        connected = (min(sx,ex) < x and abs(max(sx,ex)-x) <= tolerance
+                     if stem_direction == 'left' else
+                     max(sy,ey) > y+h and abs(min(sy,ey)-y-h) <= tolerance
                      if stem_direction == 'bottom' else
                      min(sy,ey) < y and abs(max(sy,ey)-y) <= float(body.get('stroke-width',0))/2+.002)
-        if not (abs(sx-ex) < .002 and abs(sx-x-w/2) < w*.1 and connected):
+        centered = (abs(sy-ey) < .002 and abs(sy-y-h/2) < h*.1 if stem_direction == 'left'
+                    else abs(sx-ex) < .002 and abs(sx-x-w/2) < w*.1)
+        if not (centered and connected):
             return 0.
         marks = []
         for e in paths:
@@ -81,7 +86,7 @@ def evaluate(manifest: dict, root: Path) -> dict:
             'before_svg_sha256':old['svg_sha256'],'after_svg_sha256':new['svg_sha256']})
     baseline = seal_baseline_manifest({'schema_version':'semantic_only_baseline_manifest_v1',
         'provenance':{**manifest['provenance'],'input_hashes':{e['case_id']:e['input_sha256'] for e in evidence}},'cases':before})
-    schema = 'bottom_stem_marked_square_recheck_v1' if manifest.get('stem_direction') == 'bottom' else 'top_stem_marked_square_recheck_v1'
+    schema = manifest.get('stem_direction','top')+'_stem_marked_square_recheck_v1'
     return {'schema_version':schema,'baseline':baseline,'evidence':evidence,
             'satisfaction_gate':evaluate_satisfaction(baseline,after)}
 

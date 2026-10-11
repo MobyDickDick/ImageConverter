@@ -1,0 +1,188 @@
+[
+  {
+    "case_id": "anonymous_symbol_00",
+    "source": "AC0712_1_L.jpg",
+    "strict_quality": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.002023021224886179,
+        "foreground_mse": 0.003373510902747512,
+        "edge_alignment": 0.9799380302429199,
+        "foreground_iou": 0.9925705794947994
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      }
+    },
+    "frozen_baseline_unchanged": true
+  },
+  {
+    "case_id": "anonymous_symbol_01",
+    "source": "AC0712_1_M.jpg",
+    "strict_quality": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.001207916415296495,
+        "foreground_mse": 0.0018657564651221037,
+        "edge_alignment": 0.9275108575820923,
+        "foreground_iou": 0.9835680751173709
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      }
+    },
+    "frozen_baseline_unchanged": true
+  },
+  {
+    "case_id": "anonymous_symbol_02",
+    "source": "AC0712_1_S.jpg",
+    "strict_quality": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0013413643464446068,
+        "foreground_mse": 0.0012643939116969705,
+        "edge_alignment": 0.9471455812454224,
+        "foreground_iou": 0.963963963963964
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      }
+    },
+    "frozen_baseline_unchanged": true
+  },
+  {
+    "case_id": "anonymous_symbol_03",
+    "source": "AC0712_L.jpg",
+    "strict_quality": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 7.82878341851756e-05,
+        "foreground_mse": 0.00024290602596011013,
+        "edge_alignment": 0.9944073557853699,
+        "foreground_iou": 0.9964028776978417
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      }
+    },
+    "frozen_baseline_unchanged": true
+  },
+  {
+    "case_id": "anonymous_symbol_04",
+    "source": "AC0712_M.jpg",
+    "strict_quality": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0002240896428702399,
+        "foreground_mse": 0.000691145658493042,
+        "edge_alignment": 0.9477007389068604,
+        "foreground_iou": 0.9902912621359223
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      }
+    },
+    "frozen_baseline_unchanged": true
+  },
+  {
+    "case_id": "anonymous_symbol_05",
+    "source": "AC0712_S.jpg",
+    "strict_quality": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0004302755114622414,
+        "foreground_mse": 0.00032295272103510797,
+        "edge_alignment": 0.9090156555175781,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 3.0
+      }
+    },
+    "frozen_baseline_unchanged": true
+  }
+]
