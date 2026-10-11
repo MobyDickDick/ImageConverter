@@ -1,0 +1,28 @@
+2026-10-11T17:44:29.2944584Z [INFO] AC0836: Validierungsrunde 8/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 91.50% -> 91.72% | mittlere Pixelabweichung (MAE, kleiner=besser): 21.683 -> 21.108 | Mean-Delta² (kleiner=besser): 5513.416 -> 5256.640 | Qualitätsgewinn=+0.575 (+2.65%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=1.1s
+2026-10-11T17:44:29.4300720Z [INFO] Konvertiert AC0836_L.jpg | Parameter: mode=semantic_badge, label=VOC, variant_name=AC0836_L | Qualität: Optimierungsfehler/Pixel=0.023633, Mean-Delta²=7556.423828, RGB-RMSE/Kanal=50.187727, Raumscore=17925.671952, beste Validierungsrunde=2/8, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=1.3s
+2026-10-11T17:44:29.4326441Z [INFO] Konvertiere AC0836_L.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+2026-10-11T17:44:29.4965578Z
+2026-10-11T17:44:29.4966246Z --- Verarbeite AC0836_L.jpg ---
+2026-10-11T17:44:29.4967531Z Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC". Der Griff liegt auf einer Symmetrieachse des Kreises.
+2026-10-11T17:44:29.4970104Z Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC, SEMANTIC: waagrechter Strich rechts vom Kreis
+2026-10-11T17:44:29.5017832Z [INFO] AC0836: Elementvalidierung gestartet | Runden=7, Elemente=circle,stem,text | Laufzeit=0.0s
+2026-10-11T17:44:29.5018931Z [INFO] AC0836: Validierungsrunde 1/7 gestartet | Laufzeit=0.0s
+2026-10-11T17:44:29.5030263Z [INFO] AC0836: Runde 1/7: optimiere Element 'circle' | Laufzeit=0.0s
+2026-10-11T17:44:29.5218912Z [INFO] AC0836: Runde 1/7: optimiere Element 'stem' | Laufzeit=0.0s
+2026-10-11T17:44:29.5544585Z [INFO] AC0836: Runde 1/7: optimiere Element 'text' | Laufzeit=0.1s
+2026-10-11T17:44:29.6262107Z MuPDF error: exception stack overflow!
+2026-10-11T17:44:29.6262444Z
+2026-10-11T17:44:30.6985838Z [CATALOG] ERROR: AC0836_L: converter_error (return code -11)
+2026-10-11T17:44:30.6986612Z [CATALOG] 96/223 AC0836_L: converter_error rc=-11 elapsed=4.3s
+2026-10-11T17:44:30.7012542Z ##[error]AC0836_L: converter_error (return code -11)
+2026-10-11T17:44:31.0699573Z [INFO] Schreibe Konsolen-Output nach: /home/runner/work/ImageConverter/ImageConverter/imageCompositeConverter.local.log
+2026-10-11T17:44:31.2588181Z [INFO] AC0838_S.jpg: Frühe Qualitätsprobe mit 3 Iterationen (Erfolgsbasis=1.000000, Abbruchgrenze=8.000000).
+2026-10-11T17:41:14.9961602Z [WARN] AC0201_L.jpg: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.
+2026-10-11T17:41:19.1624798Z [WARN] AC0204.jpg: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.
+2026-10-11T17:41:19.2354291Z [WARN] AC0204_1.jpg: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.
+2026-10-11T17:41:19.3077685Z [WARN] AC0204_2.jpg: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.
+2026-10-11T17:45:47.2375454Z [WARN] AR0103.jpg: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.
+2026-10-11T17:45:54.4916260Z [ERROR] DLG0016.JPG: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+2026-10-11T17:50:35.7189971Z [ERROR] GE1302_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+2026-10-11T17:54:21.8276759Z [ERROR] GE9910_W.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+2026-10-11T17:56:20.8543897Z [CATALOG] finished=223 failed=1 succeeded=222

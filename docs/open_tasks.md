@@ -6,14 +6,15 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-11)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `432` · Erledigt `405` · Offen `27`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `433` · Erledigt `406` · Offen `27`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
 ## Katalog-CI (2026-10-11)
 
 - [x] **CATALOG-TIMEOUT:** Budget im Workflow von 60 auf 180 Sekunden erhöhen, Fehler bei Wiederaufnahme erneut versuchen und gepufferte Abbruchdiagnostik erhalten. Details und Abnahme: `docs/catalog_timeout_fix_2026-10-11.md`.
-- [ ] **CATALOG-SOURCE-REVIEW:** Nahezu leere Rasterquellen `DLG0001.JPG` und `GE0000.JPG` gegen ihre Heizelement-Beschreibungen prüfen; außerdem die CI-Semantikmeldungen für `AC0201_2.jpg`, `AR0101.jpg`, `GE1310_S.jpg` und `SE0113.jpg` anhand der jeweiligen Bild-/Textpaare aufarbeiten. Prozessabschluss nicht als Qualitätsabnahme zählen; Grenzen unverändert lassen.
+- [x] **CATALOG-RENDER-CRASH:** MuPDF-Stacküberlauf von `AC0836_L` reproduziert und den Katalogrenderer in regelmäßig erneuerten Kindprozessen isoliert; kein unsicherer CLI-Fallback nach Renderfehlern. Zwei Zielläufe und vier Bestandsschutzfälle bestehen lokal. Details und CI-Status: `docs/catalog_render_crash_fix_2026-10-11.md`.
+- [ ] **CATALOG-SOURCE-REVIEW:** Nahezu leere Rasterquellen `DLG0001.JPG` und `GE0000.JPG` gegen ihre Heizelement-Beschreibungen prüfen; außerdem die CI-Semantikmeldungen für `AC0201_2.jpg`, `AR0101.jpg`, `GE1310_S.jpg`, `SE0113.jpg`, `AC0201_L`, `AC0204`, `AC0204_1`, `AC0204_2` und `AR0103` anhand der jeweiligen Bild-/Textpaare aufarbeiten. Raster-SVG-Fehler von `DLG0016.JPG`, `GE1302_M.jpg` und `GE9910_W.jpg` sowie Beschreibung und Pixelqualität von `AC0836_L` separat prüfen. Prozessabschluss nicht als Qualitätsabnahme zählen; Grenzen und Raster-SVG-Sperre unverändert lassen.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 

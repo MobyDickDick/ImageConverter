@@ -1,0 +1,161 @@
+{
+  "platform": "Windows-10-10.0.26300-SP0",
+  "python": "3.10.11",
+  "input_sha256": "9bd8b3c3cdff0eccf78352b370fb709305e18128029713db9b50bca1ea1de474",
+  "descriptions_sha256": "63e26f160acd761db6b8d8a81f2243fda9d403d6de089f919c118665e966aa50",
+  "runs": [
+    {
+      "name": "native-baseline",
+      "isolated": false,
+      "returncode": 1,
+      "csv": "variant,filename,status,returncode,elapsed_seconds\nAC0836_L,AC0836_L.jpg,converter_error,3221225512,7.890\n",
+      "svgs": {
+        "shard-00-of-01\\converted_svgs\\AC0836_L.svg": "b7c0ccce2e7c284fc8dd155f51e4cbfba911ce71bfd91d95381b8000e932e525"
+      }
+    },
+    {
+      "name": "isolated-first",
+      "isolated": true,
+      "returncode": 0,
+      "csv": "variant,filename,status,returncode,elapsed_seconds\nAC0836_L,AC0836_L.jpg,completed,0,17.312\n",
+      "svgs": {
+        "shard-00-of-01\\converted_svgs\\AC0836_L.svg": "2ad4cb321fc1089cc825e7060f866ce4f7db9efc84f69b4d2ef5e8753dcde0ca"
+      },
+      "telemetry": {
+        "affected_variant_count": 0,
+        "affected_variants": [],
+        "conversion_count": 1,
+        "render_errors": 0,
+        "render_timeouts": 0,
+        "schema_version": "optimization_render_telemetry_summary_v1"
+      }
+    },
+    {
+      "name": "isolated-repeat",
+      "isolated": true,
+      "returncode": 0,
+      "csv": "variant,filename,status,returncode,elapsed_seconds\nAC0836_L,AC0836_L.jpg,completed,0,18.063\n",
+      "svgs": {
+        "shard-00-of-01\\converted_svgs\\AC0836_L.svg": "2ad4cb321fc1089cc825e7060f866ce4f7db9efc84f69b4d2ef5e8753dcde0ca"
+      },
+      "telemetry": {
+        "affected_variant_count": 0,
+        "affected_variants": [],
+        "conversion_count": 1,
+        "render_errors": 0,
+        "render_timeouts": 0,
+        "schema_version": "optimization_render_telemetry_summary_v1"
+      }
+    }
+  ],
+  "branch": "codex/se0081-quality-2026-10-11",
+  "baseline_commit": "2eb3dbd114cf3bc5b06230d6aa3b4e4a6df855c0",
+  "ci": {
+    "run_id": 38160644259,
+    "job_id": 114532641027,
+    "pr": 1928,
+    "tested_merge_commit": "28eb37d93d9417cbc94a03e8cc3e45681a56a9d1",
+    "fixed_commit_ci": "pending"
+  },
+  "dependencies": {
+    "PyMuPDF": "1.26.7",
+    "NumPy": "2.2.6",
+    "OpenCV": "4.14.0"
+  },
+  "preservation": {
+    "environment": {
+      "TINY_ICC_OUTPUT_VARIATION": "0",
+      "PYTHONHASHSEED": "0"
+    },
+    "compared_cases": [
+      {
+        "variant": "AC0800_M",
+        "before_and_after_sha256": "d4811bde79b9d680f346e6c2fa55e875142c9e1c46967ff970aef7b9b1a4e0b4",
+        "source_sha256": "87e678f9eba18756dccfb9e992990fd8335b43f729f323a1d960ba5f47dcb735",
+        "metrics": {
+          "variant": "AC0800_M",
+          "filename": "AC0800_M.jpg",
+          "status": "",
+          "best_iter": "1",
+          "best_error": "2.405000",
+          "error_per_pixel": "0.00601250",
+          "mean_delta2": "53.910000",
+          "std_delta2": "149.655472"
+        }
+      },
+      {
+        "variant": "AC0836_M",
+        "before_and_after_sha256": "58a11046cb57b78dd5c373504d64b0b9ec828b4337c4aa2316ba69e496f8271d",
+        "source_sha256": "ecda4a3c7dba24a38ccd8c4637c098d2f2f47e78090eaa044b0af4fb7a70df02",
+        "metrics": {
+          "variant": "AC0836_M",
+          "filename": "AC0836_M.jpg",
+          "status": "",
+          "best_iter": "1",
+          "best_error": "31.478571",
+          "error_per_pixel": "0.04496939",
+          "mean_delta2": "8757.346680",
+          "std_delta2": "15475.425781"
+        }
+      },
+      {
+        "variant": "AC0836_S",
+        "before_and_after_sha256": "a9fe35c0297db894cf15d7cc4df3fc6d8fd7dc335b59c3a75cec1ddf61af24be",
+        "source_sha256": "0e1928b51e133eda8e3e221580618c6d6155c867ccae4610ad2e5013f5952e65",
+        "metrics": {
+          "variant": "AC0836_S",
+          "filename": "AC0836_S.jpg",
+          "status": "",
+          "best_iter": "1",
+          "best_error": "27.274667",
+          "error_per_pixel": "0.07273244",
+          "mean_delta2": "6125.695801",
+          "std_delta2": "11383.687500"
+        }
+      },
+      {
+        "variant": "SE0081",
+        "before_and_after_sha256": "6defedfd39fdc268c8f4325e69fe94ab83b33a0711fe226498e589a61e8e1b19",
+        "source_sha256": "9f182529b849e93d4cef4abf41dfe8f14471d8d37cb54a76d983050b29ec1fb9",
+        "metrics": {
+          "variant": "SE0081",
+          "filename": "SE0081.jpg",
+          "status": "",
+          "best_iter": "1",
+          "best_error": "9.589744",
+          "error_per_pixel": "0.00983563",
+          "mean_delta2": "702.781555",
+          "std_delta2": "1862.518799"
+        }
+      }
+    ],
+    "svg_bytes_and_bestlist_metrics_identical": true
+  },
+  "checks": {
+    "focused_tests": "54 passed in 7.37s",
+    "regression_smoke": "1 passed in 1.58s",
+    "first_smoke_attempt": "WinError 5 in sandbox temp; passed with workspace --basetemp",
+    "compileall": "pass",
+    "cli_help": "pass",
+    "runtime_id_zero": "pass",
+    "whitespace": "pass",
+    "full_suite": {
+      "passed": 2365,
+      "skipped": 30,
+      "failed": 0,
+      "seconds": 3900.52,
+      "command": ".venv/Scripts/python.exe -m pytest -q --basetemp .tmp/mupdf-full",
+      "environment": {
+        "IMAGE_CONVERTER_ISOLATE_SVG_RENDER": "0",
+        "RUN_HEAVY_CONVERSION_TESTS": "0"
+      },
+      "log": "standard_profile.log"
+    }
+  },
+  "runtime_source_sha256": {
+    "src/iCCModules/imageCompositeConverterRenderWorker.py": "5d2b7901fc7bc995a5795892d1e62c5e58dd8587f8d0090e684dc3cf7976f33c",
+    "src/iCCModules/imageCompositeConverterRenderDispatch.py": "808a5aaa8fe824d50a895573bed1e508840c765818187cc1b6326be328be127d",
+    "src/iCCModules/imageCompositeConverterRendering.py": "8dd838a89809ee0a11eea7df4aec4320a9f45d7f9b5d7acac761428da8c4435f",
+    "tools/run_catalog_conversion.py": "005a6b592978e2c68fb443b30d57687ce11810c87973abd3ff7f1ef80cf8e283"
+  }
+}

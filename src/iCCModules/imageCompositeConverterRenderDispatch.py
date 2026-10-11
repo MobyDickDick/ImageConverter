@@ -80,10 +80,9 @@ def renderSvgToNumpyImpl(
             if len(_RENDER_CACHE) > _RENDER_CACHE_MAX_ENTRIES:
                 _RENDER_CACHE.popitem(last=False)
             return rendered.copy() if hasattr(rendered, "copy") else rendered
-        if under_pytest_runtime and not is_inprocess_renderer_monkeypatched_fn():
-            # Avoid unstable in-process PyMuPDF fallback in long pytest
-            # sessions; dedicated tests can still exercise fallback by
-            # monkeypatching the in-process renderer helper.
+        if not is_inprocess_renderer_monkeypatched_fn():
+            # A failed or crashed isolated renderer must never retry MuPDF in
+            # the converter process. Tests may inject a safe fallback double.
             return None
     rendered = render_svg_to_numpy_inprocess_fn(svg_string, size_w, size_h)
     if rendered is not None:

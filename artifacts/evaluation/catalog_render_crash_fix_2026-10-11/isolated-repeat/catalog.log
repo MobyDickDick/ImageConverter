@@ -1,0 +1,148 @@
+[CATALOG] shard=0/1 selected=1 completed=0 pending=1
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere AC0836_L.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0836_L.jpg ---
+Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC". Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC, SEMANTIC: waagrechter Strich rechts vom Kreis
+[INFO] AC0836: Elementvalidierung gestartet | Runden=8, Elemente=circle,stem,text | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/8 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/8: optimiere Element 'circle' | Laufzeit=0.5s
+[INFO] AC0836: Runde 1/8: optimiere Element 'stem' | Laufzeit=0.6s
+[INFO] AC0836: Runde 1/8: optimiere Element 'text' | Laufzeit=0.6s
+[INFO] AC0836: Validierungsrunde 1/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 88.38% -> 89.14% | mittlere Pixelabweichung (MAE, kleiner=besser): 29.621 -> 27.682 | Mean-Delta² (kleiner=besser): 7994.928 -> 8094.341 | Qualitätsgewinn=+1.940 (+6.55%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=1.2s
+[INFO] AC0836: Validierungsrunde 2/8 gestartet | Laufzeit=1.2s
+[INFO] AC0836: Runde 2/8: optimiere Element 'circle' | Laufzeit=1.2s
+[INFO] AC0836: Runde 2/8: optimiere Element 'stem' | Laufzeit=1.2s
+[INFO] AC0836: Runde 2/8: optimiere Element 'text' | Laufzeit=1.2s
+[INFO] AC0836: Validierungsrunde 2/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.14% -> 91.83% | mittlere Pixelabweichung (MAE, kleiner=besser): 27.682 -> 20.834 | Mean-Delta² (kleiner=besser): 8094.341 -> 5197.275 | Qualitätsgewinn=+6.848 (+24.74%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=1.8s
+[INFO] AC0836: Validierungsrunde 3/8 gestartet | Laufzeit=1.8s
+[INFO] AC0836: Runde 3/8: optimiere Element 'circle' | Laufzeit=1.8s
+[INFO] AC0836: Runde 3/8: optimiere Element 'stem' | Laufzeit=1.8s
+[INFO] AC0836: Runde 3/8: optimiere Element 'text' | Laufzeit=1.9s
+[INFO] AC0836: Validierungsrunde 3/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 91.83% -> 89.14% | mittlere Pixelabweichung (MAE, kleiner=besser): 20.834 -> 27.682 | Mean-Delta² (kleiner=besser): 5197.275 -> 8094.341 | Qualitätsgewinn=-6.848 (-32.87%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=2.4s
+[INFO] AC0836: Validierungsrunde 4/8 gestartet | Laufzeit=2.4s
+[INFO] AC0836: Runde 4/8: optimiere Element 'circle' | Laufzeit=2.4s
+[INFO] AC0836: Runde 4/8: optimiere Element 'stem' | Laufzeit=2.4s
+[INFO] AC0836: Runde 4/8: optimiere Element 'text' | Laufzeit=2.4s
+[INFO] AC0836: Validierungsrunde 4/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.14% -> 89.61% | mittlere Pixelabweichung (MAE, kleiner=besser): 27.682 -> 26.501 | Mean-Delta² (kleiner=besser): 8094.341 -> 7152.155 | Qualitätsgewinn=+1.180 (+4.26%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=3.0s
+[INFO] AC0836: Validierungsrunde 5/8 gestartet | Laufzeit=3.0s
+[INFO] AC0836: Runde 5/8: optimiere Element 'circle' | Laufzeit=3.0s
+[INFO] AC0836: Runde 5/8: optimiere Element 'stem' | Laufzeit=3.0s
+[INFO] AC0836: Runde 5/8: optimiere Element 'text' | Laufzeit=3.0s
+[INFO] AC0836: Validierungsrunde 5/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.61% -> 89.74% | mittlere Pixelabweichung (MAE, kleiner=besser): 26.501 -> 26.172 | Mean-Delta² (kleiner=besser): 7152.155 -> 6593.517 | Qualitätsgewinn=+0.330 (+1.24%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=3.6s
+[INFO] AC0836: Validierungsrunde 6/8 gestartet | Laufzeit=3.6s
+[INFO] AC0836: Runde 6/8: optimiere Element 'circle' | Laufzeit=3.6s
+[INFO] AC0836: Runde 6/8: optimiere Element 'stem' | Laufzeit=3.6s
+[INFO] AC0836: Runde 6/8: optimiere Element 'text' | Laufzeit=3.7s
+[INFO] AC0836: Validierungsrunde 6/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.74% -> 89.74% | mittlere Pixelabweichung (MAE, kleiner=besser): 26.172 -> 26.172 | Mean-Delta² (kleiner=besser): 6593.517 -> 6593.517 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=ja | Laufzeit=4.3s
+[INFO] AC0836: Validierungsrunde 7/8 gestartet | Laufzeit=4.3s
+[INFO] AC0836: Runde 7/8: optimiere Element 'circle' | Laufzeit=4.3s
+[INFO] AC0836: Runde 7/8: optimiere Element 'stem' | Laufzeit=4.3s
+[INFO] AC0836: Runde 7/8: optimiere Element 'text' | Laufzeit=4.3s
+[INFO] AC0836: Validierungsrunde 7/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.74% -> 91.50% | mittlere Pixelabweichung (MAE, kleiner=besser): 26.172 -> 21.683 | Mean-Delta² (kleiner=besser): 6593.517 -> 5513.416 | Qualitätsgewinn=+4.489 (+17.15%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=4.9s
+[INFO] AC0836: Validierungsrunde 8/8 gestartet | Laufzeit=4.9s
+[INFO] AC0836: Runde 8/8: optimiere Element 'circle' | Laufzeit=4.9s
+[INFO] AC0836: Runde 8/8: optimiere Element 'stem' | Laufzeit=4.9s
+[INFO] AC0836: Runde 8/8: optimiere Element 'text' | Laufzeit=4.9s
+[INFO] AC0836: Validierungsrunde 8/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 91.50% -> 91.72% | mittlere Pixelabweichung (MAE, kleiner=besser): 21.683 -> 21.108 | Mean-Delta² (kleiner=besser): 5513.416 -> 5256.640 | Qualitätsgewinn=+0.575 (+2.65%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=5.5s
+[INFO] Konvertiert AC0836_L.jpg | Parameter: mode=semantic_badge, label=VOC, variant_name=AC0836_L | Qualität: Optimierungsfehler/Pixel=0.023633, Mean-Delta²=7556.423828, RGB-RMSE/Kanal=50.187727, Raumscore=17925.671952, beste Validierungsrunde=2/8, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=6.2s
+[INFO] Konvertiere AC0836_L.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0836_L.jpg ---
+Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC". Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC, SEMANTIC: waagrechter Strich rechts vom Kreis
+[INFO] AC0836: Elementvalidierung gestartet | Runden=7, Elemente=circle,stem,text | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/7 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/7: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/7: optimiere Element 'stem' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/7: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 1/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 88.38% -> 89.22% | mittlere Pixelabweichung (MAE, kleiner=besser): 29.621 -> 27.490 | Mean-Delta² (kleiner=besser): 7994.928 -> 8043.504 | Qualitätsgewinn=+2.132 (+7.20%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.6s
+[INFO] AC0836: Validierungsrunde 2/7 gestartet | Laufzeit=0.6s
+[INFO] AC0836: Runde 2/7: optimiere Element 'circle' | Laufzeit=0.6s
+[INFO] AC0836: Runde 2/7: optimiere Element 'stem' | Laufzeit=0.6s
+[INFO] AC0836: Runde 2/7: optimiere Element 'text' | Laufzeit=0.6s
+[INFO] AC0836: Validierungsrunde 2/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.22% -> 89.58% | mittlere Pixelabweichung (MAE, kleiner=besser): 27.490 -> 26.580 | Mean-Delta² (kleiner=besser): 8043.504 -> 7418.750 | Qualitätsgewinn=+0.909 (+3.31%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=1.2s
+[INFO] AC0836: Validierungsrunde 3/7 gestartet | Laufzeit=1.2s
+[INFO] AC0836: Runde 3/7: optimiere Element 'circle' | Laufzeit=1.2s
+[INFO] AC0836: Runde 3/7: optimiere Element 'stem' | Laufzeit=1.2s
+[INFO] AC0836: Runde 3/7: optimiere Element 'text' | Laufzeit=1.2s
+[INFO] AC0836: Validierungsrunde 3/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.58% -> 89.73% | mittlere Pixelabweichung (MAE, kleiner=besser): 26.580 -> 26.196 | Mean-Delta² (kleiner=besser): 7418.750 -> 7214.851 | Qualitätsgewinn=+0.384 (+1.44%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=1.8s
+[INFO] AC0836: Validierungsrunde 4/7 gestartet | Laufzeit=1.8s
+[INFO] AC0836: Runde 4/7: optimiere Element 'circle' | Laufzeit=1.8s
+[INFO] AC0836: Runde 4/7: optimiere Element 'stem' | Laufzeit=1.8s
+[INFO] AC0836: Runde 4/7: optimiere Element 'text' | Laufzeit=1.8s
+[INFO] AC0836: Validierungsrunde 4/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.73% -> 89.81% | mittlere Pixelabweichung (MAE, kleiner=besser): 26.196 -> 25.989 | Mean-Delta² (kleiner=besser): 7214.851 -> 6946.496 | Qualitätsgewinn=+0.207 (+0.79%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=2.4s
+[INFO] AC0836: Validierungsrunde 5/7 gestartet | Laufzeit=2.4s
+[INFO] AC0836: Runde 5/7: optimiere Element 'circle' | Laufzeit=2.4s
+[INFO] AC0836: Runde 5/7: optimiere Element 'stem' | Laufzeit=2.4s
+[INFO] AC0836: Runde 5/7: optimiere Element 'text' | Laufzeit=2.4s
+[INFO] AC0836: Validierungsrunde 5/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.81% -> 91.17% | mittlere Pixelabweichung (MAE, kleiner=besser): 25.989 -> 22.518 | Mean-Delta² (kleiner=besser): 6946.496 -> 5616.248 | Qualitätsgewinn=+3.471 (+13.36%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=3.1s
+[INFO] AC0836: Validierungsrunde 6/7 gestartet | Laufzeit=3.1s
+[INFO] AC0836: Runde 6/7: optimiere Element 'circle' | Laufzeit=3.1s
+[INFO] AC0836: Runde 6/7: optimiere Element 'stem' | Laufzeit=3.1s
+[INFO] AC0836: Runde 6/7: optimiere Element 'text' | Laufzeit=3.1s
+[INFO] AC0836: Validierungsrunde 6/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 91.17% -> 91.17% | mittlere Pixelabweichung (MAE, kleiner=besser): 22.518 -> 22.518 | Mean-Delta² (kleiner=besser): 5616.248 -> 5616.248 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=3.1s
+[INFO] AC0836: Validierungsrunde 7/7 gestartet | Laufzeit=3.1s
+[INFO] AC0836: Runde 7/7: optimiere Element 'circle' | Laufzeit=3.1s
+[INFO] AC0836: Runde 7/7: optimiere Element 'stem' | Laufzeit=3.1s
+[INFO] AC0836: Runde 7/7: optimiere Element 'text' | Laufzeit=3.1s
+[INFO] AC0836: Validierungsrunde 7/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 91.17% -> 91.17% | mittlere Pixelabweichung (MAE, kleiner=besser): 22.518 -> 22.518 | Mean-Delta² (kleiner=besser): 5616.248 -> 5616.248 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=3.1s
+[INFO] Konvertiert AC0836_L.jpg | Parameter: mode=semantic_badge, label=VOC, variant_name=AC0836_L | Qualität: Optimierungsfehler/Pixel=0.024029, Mean-Delta²=7198.080078, RGB-RMSE/Kanal=48.983263, Raumscore=16544.302606, beste Validierungsrunde=5/7, beste Composite-Iteration=n/a, ausgeführt=65/65 | Dauer=4.0s
+[INFO] Konvertiere AC0836_L.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0836_L.jpg ---
+Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC". Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC, SEMANTIC: waagrechter Strich rechts vom Kreis
+[INFO] AC0836: Elementvalidierung gestartet | Runden=9, Elemente=circle,stem,text | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/9 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/9: optimiere Element 'stem' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 88.38% -> 89.56% | mittlere Pixelabweichung (MAE, kleiner=besser): 29.621 -> 26.618 | Mean-Delta² (kleiner=besser): 7994.928 -> 7416.840 | Qualitätsgewinn=+3.004 (+10.14%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 2/9 gestartet | Laufzeit=0.1s
+[INFO] AC0836: Runde 2/9: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] AC0836: Runde 2/9: optimiere Element 'stem' | Laufzeit=0.1s
+[INFO] AC0836: Runde 2/9: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 2/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.56% -> 89.59% | mittlere Pixelabweichung (MAE, kleiner=besser): 26.618 -> 26.548 | Mean-Delta² (kleiner=besser): 7416.840 -> 7255.834 | Qualitätsgewinn=+0.070 (+0.26%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=1.3s
+[INFO] AC0836: Validierungsrunde 3/9 gestartet | Laufzeit=1.3s
+[INFO] AC0836: Runde 3/9: optimiere Element 'circle' | Laufzeit=1.3s
+[INFO] AC0836: Runde 3/9: optimiere Element 'stem' | Laufzeit=1.3s
+[INFO] AC0836: Runde 3/9: optimiere Element 'text' | Laufzeit=1.3s
+[INFO] AC0836: Validierungsrunde 3/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.59% -> 89.84% | mittlere Pixelabweichung (MAE, kleiner=besser): 26.548 -> 25.912 | Mean-Delta² (kleiner=besser): 7255.834 -> 6518.579 | Qualitätsgewinn=+0.636 (+2.39%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=1.9s
+[INFO] AC0836: Validierungsrunde 4/9 gestartet | Laufzeit=1.9s
+[INFO] AC0836: Runde 4/9: optimiere Element 'circle' | Laufzeit=1.9s
+[INFO] AC0836: Runde 4/9: optimiere Element 'stem' | Laufzeit=1.9s
+[INFO] AC0836: Runde 4/9: optimiere Element 'text' | Laufzeit=1.9s
+[INFO] AC0836: Validierungsrunde 4/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.84% -> 91.65% | mittlere Pixelabweichung (MAE, kleiner=besser): 25.912 -> 21.304 | Mean-Delta² (kleiner=besser): 6518.579 -> 5357.613 | Qualitätsgewinn=+4.608 (+17.78%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=2.5s
+[INFO] AC0836: Validierungsrunde 5/9 gestartet | Laufzeit=2.5s
+[INFO] AC0836: Runde 5/9: optimiere Element 'circle' | Laufzeit=2.5s
+[INFO] AC0836: Runde 5/9: optimiere Element 'stem' | Laufzeit=2.5s
+[INFO] AC0836: Runde 5/9: optimiere Element 'text' | Laufzeit=2.5s
+[INFO] AC0836: Validierungsrunde 5/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 91.65% -> 91.78% | mittlere Pixelabweichung (MAE, kleiner=besser): 21.304 -> 20.953 | Mean-Delta² (kleiner=besser): 5357.613 -> 5255.381 | Qualitätsgewinn=+0.351 (+1.65%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=3.1s
+[INFO] AC0836: Validierungsrunde 6/9 gestartet | Laufzeit=3.1s
+[INFO] AC0836: Runde 6/9: optimiere Element 'circle' | Laufzeit=3.1s
+[INFO] AC0836: Runde 6/9: optimiere Element 'stem' | Laufzeit=3.2s
+[INFO] AC0836: Runde 6/9: optimiere Element 'text' | Laufzeit=3.2s
+[INFO] AC0836: Validierungsrunde 6/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 91.78% -> 89.17% | mittlere Pixelabweichung (MAE, kleiner=besser): 20.953 -> 27.612 | Mean-Delta² (kleiner=besser): 5255.381 -> 7476.843 | Qualitätsgewinn=-6.660 (-31.78%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=3.9s
+[INFO] AC0836: Validierungsrunde 7/9 gestartet | Laufzeit=3.9s
+[INFO] AC0836: Runde 7/9: optimiere Element 'circle' | Laufzeit=3.9s
+[INFO] AC0836: Runde 7/9: optimiere Element 'stem' | Laufzeit=3.9s
+[INFO] AC0836: Runde 7/9: optimiere Element 'text' | Laufzeit=3.9s
+[INFO] AC0836: Validierungsrunde 7/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.17% -> 90.00% | mittlere Pixelabweichung (MAE, kleiner=besser): 27.612 -> 25.508 | Mean-Delta² (kleiner=besser): 7476.843 -> 6223.848 | Qualitätsgewinn=+2.104 (+7.62%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=4.6s
+[INFO] AC0836: Validierungsrunde 8/9 gestartet | Laufzeit=4.6s
+[INFO] AC0836: Runde 8/9: optimiere Element 'circle' | Laufzeit=4.6s
+[INFO] AC0836: Runde 8/9: optimiere Element 'stem' | Laufzeit=4.6s
+[INFO] AC0836: Runde 8/9: optimiere Element 'text' | Laufzeit=4.6s
+[INFO] AC0836: Validierungsrunde 8/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 90.00% -> 91.45% | mittlere Pixelabweichung (MAE, kleiner=besser): 25.508 -> 21.797 | Mean-Delta² (kleiner=besser): 6223.848 -> 5516.709 | Qualitätsgewinn=+3.711 (+14.55%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=5.3s
+[INFO] AC0836: Validierungsrunde 9/9 gestartet | Laufzeit=5.3s
+[INFO] AC0836: Runde 9/9: optimiere Element 'circle' | Laufzeit=5.3s
+[INFO] AC0836: Runde 9/9: optimiere Element 'stem' | Laufzeit=5.3s
+[INFO] AC0836: Runde 9/9: optimiere Element 'text' | Laufzeit=5.3s
+[INFO] AC0836: Validierungsrunde 9/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 91.45% -> 89.34% | mittlere Pixelabweichung (MAE, kleiner=besser): 21.797 -> 27.174 | Mean-Delta² (kleiner=besser): 5516.709 -> 7558.206 | Qualitätsgewinn=-5.377 (-24.67%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=6.1s
+[INFO] Konvertiert AC0836_L.jpg | Parameter: mode=semantic_badge, label=VOC, variant_name=AC0836_L | Qualität: Optimierungsfehler/Pixel=0.025681, Mean-Delta²=7198.080078, RGB-RMSE/Kanal=48.983263, Raumscore=16544.302606, beste Validierungsrunde=5/9, beste Composite-Iteration=n/a, ausgeführt=92/92 | Dauer=7.2s
+[INFO] Übersichts-Kacheln erzeugt: diff=.tmp\mupdf-catalog\isolated-repeat\shard-00-of-01\reports\overview_diff_tiles.png, svg=.tmp\mupdf-catalog\isolated-repeat\shard-00-of-01\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: .tmp\mupdf-catalog\isolated-repeat\shard-00-of-01
+[CATALOG] 1/1 AC0836_L: completed rc=0 elapsed=18.1s
+[CATALOG] finished=1 failed=0 succeeded=1

@@ -106,6 +106,12 @@ starten. Jeder Shard schreibt eine fortlaufend aktualisierte `catalog_results.cs
 und wird als Workflow-Artefakt hochgeladen. Bei Wiederaufnahme werden ausschließlich
 Einträge mit `status=completed` und Rückgabecode `0` übersprungen; Fehler laufen
 erneut. Details: [CI-Timeout-Abnahme](docs/catalog_timeout_fix_2026-10-11.md).
+Der Runner isoliert zusätzlich SVG-Renderaufrufe in Kindprozessen, erneuert sie
+nach höchstens 64 Anfragen und wiederholt abgestürzte Renderer einmal innerhalb
+des Renderbudgets. `IMAGE_CONVERTER_ISOLATE_SVG_RENDER` und
+`IMAGE_CONVERTER_REUSE_RENDER_WORKER` sind dabei standardmäßig `1`; explizite
+Umgebungswerte werden beachtet. Details und verbleibende Qualitätsbefunde:
+[MuPDF-Absturzkorrektur](docs/catalog_render_crash_fix_2026-10-11.md).
 
 ### Qualitätsparameter für als gut markierte Konvertierungen
 

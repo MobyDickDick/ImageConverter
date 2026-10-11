@@ -1,0 +1,71 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+___________ test_ac08_regression_smoke_run_creates_expected_outputs ___________
+
+tmp_path = WindowsPath('C:/Users/marku/AppData/Local/Packages/sandbox.{28010fd2-98df-4407-ac82-ea59050defce}/AC/Temp/pytest-of-marku/pytest-0/test_ac08_regression_smoke_run0')
+
+    def test_ac08_regression_smoke_run_creates_expected_outputs(tmp_path: Path) -> None:
+        """Run a tiny conversion slice to detect regressions in the conversion pipeline early."""
+        output_dir = tmp_path / "converted"
+
+>       exit_code = converter.main(
+            [
+                str(INPUT_DIR),
+                "--descriptions-path",
+                str(DESCRIPTIONS),
+                "--output-dir",
+                str(output_dir),
+                "--start",
+                "AC0800",
+                "--end",
+                "AC0800",
+            ]
+        )
+
+tests\test_conversion_regression_smoke.py:17:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\imageCompositeConverter.py:2788: in main
+    return cli_helpers.runMainImpl(
+src\iCCModules\imageCompositeConverterCli.py:656: in runMainImpl
+    out_dir = convert_range_fn(
+src\imageCompositeConverter.py:2526: in convertRange
+    return imageCompositeConverterRemaining_helpers.convertRange(folder_path, csv_path, iterations, start_ref, end_ref, debug_ac0811_dir, debug_element_diff_dir, output_root, selected_variants, deterministic_order, debug_jpeg_load, debug_trace_path, semantic_only)
+src\iCCModules\imageCompositeConverterRemaining.py:1466: in convertRange
+    stop_after_failure = conversion_initial_pass_helpers.runInitialConversionPassImpl(
+src\iCCModules\imageCompositeConverterConversionInitialPass.py:139: in runInitialConversionPassImpl
+    checkpoint_fn(
+src\iCCModules\imageCompositeConverterRemaining.py:1386: in _writeIncrementalCheckpoint
+    batch_run_state_helpers.atomicWriteJsonImpl(result_map_path, result_map)
+src\iCCModules\imageCompositeConverterBatchRunState.py:38: in atomicWriteJsonImpl
+    atomicWriteTextImpl(path, json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/marku/AppData/Local/Packages/sandbox.{28010fd2-98df-4407-ac82-ea59050defce}/AC/Temp/pytest-of-marku/pytest-0/test_ac08_regression_smoke_run0/converted/reports/conversion_result_map.json')
+content = '{\n  "AC0800_M.jpg": {\n    "actual_iterations": 64,\n    "base": "AC0800",\n    "best_error": 2.405,\n    "best_iter...ta2": 149.6554718017578,\n    "tile_std_delta2": 67.62700980500155,\n    "variant": "AC0800_M",\n    "w": 20\n  }\n}\n'
+
+    def atomicWriteTextImpl(path: str | Path, content: str) -> None:
+        """Replace *path* atomically after flushing the sibling temporary file."""
+        target = Path(path)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        temporary = target.with_name(f".{target.name}.{os.getpid()}.tmp")
+        try:
+            with temporary.open("w", encoding="utf-8") as stream:
+                stream.write(content)
+                stream.flush()
+                os.fsync(stream.fileno())
+>           os.replace(temporary, target)
+E           PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{28010fd2-98df-4407-ac82-ea59050defce}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_ac08_regression_smoke_run0\\converted\\reports\\.conversion_result_map.json.2272.tmp' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{28010fd2-98df-4407-ac82-ea59050defce}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_ac08_regression_smoke_run0\\converted\\reports\\conversion_result_map.json'
+
+src\iCCModules\imageCompositeConverterBatchRunState.py:32: PermissionError
+---------------------------- Captured stdout call -----------------------------
+[INFO] Konvertiere AC0800_M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0800_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
+[INFO] AC0800: Elementvalidierung gestartet | Runden=8, Elemente=circle | Laufzeit=0.0s
+[WARN] AC0800_M.jpg: Differenzbild-Fehlerpixel sind nicht zufï¿½llig verteilt; Variante bleibt fï¿½r einen Qualitï¿½ts-Nachbesserungslauf geï¿½ffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.337209, localized_error_fraction=0.770033).
+[INFO] Konvertiert AC0800_M.jpg | Parameter: mode=semantic_badge, label=, variant_name=AC0800_M | Qualitï¿½t: Optimierungsfehler/Pixel=0.006012, Mean-Deltaï¿½=53.910000, RGB-RMSE/Kanal=4.239104, Raumscore=151.909152, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgefï¿½hrt=64/64 | Dauer=0.4s
+=========================== short test summary info ===========================
+FAILED tests/test_conversion_regression_smoke.py::test_ac08_regression_smoke_run_creates_expected_outputs
+1 failed in 2.00s
