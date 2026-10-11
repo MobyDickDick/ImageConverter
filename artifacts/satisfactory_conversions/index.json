@@ -1,5 +1,5 @@
 {
-  "case_count": 192,
+  "case_count": 198,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -1071,6 +1071,108 @@
       "svg": "svgs/AC0731_S.svg",
       "svg_sha256": "cdff717bb3f8c27f2a120df3e5043d4687e5cee5fdf4f3a98d28e6a106b5a8e7",
       "variant": "AC0731_S"
+    },
+    {
+      "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_stem_labeled_square_recheck_v1/report_2026-10-11.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0734_1_L.jpg",
+      "image_sha256": "6e200c89faac1ed0f05f4584629fd26ecda618595fe6386c724b9f7c363b865e",
+      "mean_delta2": 622.839111328125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.984408438205719,
+        "error_per_pixel": 0.0031928187175605536,
+        "object_mask_iou": 0.9473684210526315
+      },
+      "svg": "svgs/AC0734_1_L.svg",
+      "svg_sha256": "cb4c5251700a1b1b5514d4dc67b58bbeb7985bf7eee0e7f573714e071833c36e",
+      "variant": "AC0734_1_L"
+    },
+    {
+      "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_stem_labeled_square_recheck_v1/report_2026-10-11.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0734_1_M.jpg",
+      "image_sha256": "97e050858a17ebfa4e311b6656b6750e9bdf1eaaa4ac4fbdd8b67c9c286ec137",
+      "mean_delta2": 587.5742797851562,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9638848304748535,
+        "error_per_pixel": 0.00301204295673539,
+        "object_mask_iou": 0.9973544973544973
+      },
+      "svg": "svgs/AC0734_1_M.svg",
+      "svg_sha256": "8070a6bd1e39c1a7f47d44206acf28a7c7e60cd490d133259570f921efa1e67e",
+      "variant": "AC0734_1_M"
+    },
+    {
+      "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_stem_labeled_square_recheck_v1/report_2026-10-11.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0734_1_S.jpg",
+      "image_sha256": "777d49057a9f7e979ffa5bdd837a935477db6c4fab4ede98e17ea8a3c2065250",
+      "mean_delta2": 601.2986450195312,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.898895263671875,
+        "error_per_pixel": 0.0030823972575651994,
+        "object_mask_iou": 0.9617224880382775
+      },
+      "svg": "svgs/AC0734_1_S.svg",
+      "svg_sha256": "568b29ab50609ecf816bd6cd47f767861e4f1cb1a8063cfa4317719f4d638bc8",
+      "variant": "AC0734_1_S"
+    },
+    {
+      "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_stem_labeled_square_recheck_v1/report_2026-10-11.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0734_L.jpg",
+      "image_sha256": "3ab6ec31d99e21ee8d4b13bc3755205def3ad45527fbd5f77e4bdfb152e457a5",
+      "mean_delta2": 276.0053405761719,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9898419380187988,
+        "error_per_pixel": 0.0014148678230227957,
+        "object_mask_iou": 0.8935483870967742
+      },
+      "svg": "svgs/AC0734_L.svg",
+      "svg_sha256": "394e7b25e3950f48ca731c28aea40f8053419a4b2b5ca780156151b2f29b4a89",
+      "variant": "AC0734_L"
+    },
+    {
+      "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_stem_labeled_square_recheck_v1/report_2026-10-11.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0734_M.jpg",
+      "image_sha256": "89748d3e771bc752eb1cb13e24d9d2b7180b5a5f67a56203d2f2d595b5cc7533",
+      "mean_delta2": 392.9356994628906,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9195202589035034,
+        "error_per_pixel": 0.0020142801459074235,
+        "object_mask_iou": 0.8940092165898618
+      },
+      "svg": "svgs/AC0734_M.svg",
+      "svg_sha256": "950632f0005164e3826aaf9c54dbfe590cac8d9cc0e342274597ea9118e3e7a8",
+      "variant": "AC0734_M"
+    },
+    {
+      "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach rechts. Im Quadrat steht der horizontale Text \"P\". Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_stem_labeled_square_recheck_v1/report_2026-10-11.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0734_S.jpg",
+      "image_sha256": "7339d2b5679fdfff0ecede3e62b6c782cc46eed4ba7ec85b23930f235612b6bc",
+      "mean_delta2": 250.08799743652344,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9310879707336426,
+        "error_per_pixel": 0.0012820094703909954,
+        "object_mask_iou": 0.9320388349514563
+      },
+      "svg": "svgs/AC0734_S.svg",
+      "svg_sha256": "caa7460f0041955b6ef36e690dfc4a6d213550c49a8449374c712a86bc5306f1",
+      "variant": "AC0734_S"
     },
     {
       "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund",

@@ -1,0 +1,100 @@
+{
+  "schema_version": "work_package_validation_v1",
+  "date": "2026-10-11",
+  "branch": "codex/ac0734-quality-2026-10-11",
+  "focused": {
+    "passed": 117,
+    "failed": 0,
+    "seconds": 52.62,
+    "log": ".tmp/ac0734-focused-final.log"
+  },
+  "preservation": {
+    "passed": 10,
+    "failed": 0,
+    "seconds": 58.75,
+    "protected_variants": 31,
+    "log": ".tmp/ac0734-preservation.log"
+  },
+  "repaired_legacy_fixture_cases": {
+    "passed": 4,
+    "failed": 0,
+    "deselected": 80,
+    "seconds": 2283.72,
+    "log": ".tmp/ac0734-fixture-repair.log"
+  },
+  "cli_acceptance": {
+    "cases": 6,
+    "satisfactory": 6,
+    "regressed_metrics": 0,
+    "all_12_vectors_and_gates_reproduced": true,
+    "forbidden_svg_reads": 0
+  },
+  "plan_b": {
+    "passed": 17,
+    "required": 17,
+    "seed": 20261011,
+    "all_hashes_and_metrics_reproduced": true
+  },
+  "archive": {
+    "passed": 198,
+    "required": 198,
+    "previous_192_records_unchanged": true,
+    "previous_22_compatibility_drifts_unchanged": true
+  },
+  "checks": {
+    "compileall": "pass",
+    "cli_help": "pass",
+    "runtime_id_ratchet": "pass",
+    "diff_whitespace": "pass"
+  },
+  "source_sha256": {
+    "src/iCCModules/imageCompositeConverterLabeledSquare.py": "fe4986a19d46b3d66450ac33673dd7fcba5838a92b7dab90912fe70b2413cef7",
+    "src/iCCModules/imageCompositeConverterGeometryIr/runtime.py": "ba2b75a20fb146acfaefe169e4fdc99ed76c6e22aa9d54717c2574159014f4a3",
+    "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "2e4ea427d7ff72fc479248aa904ff7359e8cfe54c6799af0e25477dd403f51eb",
+    "tools/evaluate_labeled_square_recheck.py": "147d7cc0bf4cddeacffe95bb6b6c81789a9e62c0a5dbd62217a82df5ad2a470a",
+    "tools/run_top_stem_square_recheck.py": "c83da89e79769aeb5526107e95ee423c3f91c29973da4cec2fcc0f89aa418015",
+    "config/compact_image_subset.txt": "751a30c0b294f8e0d060d52b6234a93807bfa4442d495a564c2b7d988f1f7779",
+    "artifacts/evaluation/right_pump_recheck_v1/manifest.json": "030364430ff27800231b0373c2987cb9a3a7a1d5a15529b032910ddf3f7745c3"
+  },
+  "standard_suite": {
+    "collected": 2325,
+    "passed_in_first_full_run": 2289,
+    "failed_in_first_full_run": 6,
+    "skipped": 30,
+    "seconds": 12781.31,
+    "initial_exit_code": 1,
+    "log": ".tmp/ac0734-full-final.log",
+    "failed_cases": [
+      "tests/detailtests/test_compact_image_subset.py::test_compact_image_subset_is_small_and_complete",
+      "tests/detailtests/test_non_composite_runtime_helpers.py::test_dot_symbol_reconstructs_regression_probes_of_failing_ci_task[2870690750133000144-7]",
+      "tests/detailtests/test_non_composite_runtime_helpers.py::test_dot_symbol_reconstructs_regression_probes_of_failing_ci_task[2870690750133000144-11]",
+      "tests/detailtests/test_non_composite_runtime_helpers.py::test_dot_symbol_reconstructs_regression_probes_of_failing_ci_task[2870690750133000144-14]",
+      "tests/detailtests/test_non_composite_runtime_helpers.py::test_dot_symbol_reconstructs_regression_probes_of_failing_ci_task[20261007-11]",
+      "tests/test_right_pump_recheck.py::test_filled_right_triangle_variants_pass_with_anonymous_runtime_input[AC0402_2_S.jpg]"
+    ],
+    "all_six_failed_cases_pass_after_path_repairs": true,
+    "final_unique_passed": 2295,
+    "final_unresolved_failures": 0,
+    "reruns": [
+      {
+        "log": ".tmp/ac0734-fixture-repair.log",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "log": ".tmp/ac0734-last-path-repair.log",
+        "passed": 5,
+        "failed": 0,
+        "seconds": 1.76
+      }
+    ],
+    "native_windows_message": "0xc0000008 during OpenCV read of a stale missing source path; image bytes unchanged and corrected-path case passes",
+    "verification": "Full first run plus focused reruns of all failed cases; no claim of a second all-green monolithic run"
+  },
+  "relocation_repairs": {
+    "frozen_template_files": 7,
+    "compact_subset_image": "AC0881_M.jpg",
+    "right_pump_source": "../../images_to_convert/AC0402_2_S.jpg",
+    "manual_sample_collection_unchanged": true
+  }
+}

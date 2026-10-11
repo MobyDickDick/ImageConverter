@@ -26,6 +26,9 @@ def main() -> int:
                     'before:left':'LeftRotatedSquareKelleTGlyph'}.get(sys.argv[2], 'Rotated180SquareKelleGlyph')
             original_fit = runtime.fit_square_stem
             runtime.fit_square_stem = lambda ir, **kwargs: (None if ir and ir[0].get('kind') == kind else original_fit(ir, **kwargs))
+            if sys.argv[2] == 'before:right':
+                original_label_fit = runtime.fit_labeled_square
+                runtime.fit_labeled_square = lambda ir, **kwargs: (None if ir and ir[0].get('kind') == 'RightStemSquareKelleGlyph' else original_label_fit(ir, **kwargs))
         random.seed(0)
         np.random.seed(0)
         sys.stdout.reconfigure(encoding='utf-8')
@@ -73,7 +76,7 @@ def main() -> int:
         with (output/(mode+'.log')).open('w', encoding='utf-8') as log:
             subprocess.run([sys.executable, '-I', '-c', 'import sys,runpy; sys.path[:0]='+repr(paths)+
                             "; runpy.run_module('tools.run_top_stem_square_recheck',run_name='__main__')",
-                            '--_worker', mode+(':'+manifest['stem_direction'] if mode=='before' and manifest.get('stem_direction') in {'bottom','left'} else ''), str(run_dir), str(mode_inputs), '--descriptions-path', str(description_file),
+                            '--_worker', mode+(':'+manifest['stem_direction'] if mode=='before' and manifest.get('stem_direction') in {'bottom','left','right'} else ''), str(run_dir), str(mode_inputs), '--descriptions-path', str(description_file),
                             '--output-dir', str(run_dir), '--start', names[0], '--end', names[-1],
                             '--execution-mode', 'semantic-only', '--deterministic-order'],
                            cwd=Path(__file__).resolve().parents[1], env=env, stdout=log, stderr=subprocess.STDOUT,
@@ -92,7 +95,11 @@ def main() -> int:
         (output/'manifest.json').write_text(json.dumps(manifest, indent=2)+'\n', encoding='utf-8')
         print('Fresh CLI baseline saved')
         return 0
-    report = evaluate(manifest, output)
+    if 'label' in manifest:
+        from tools.evaluate_labeled_square_recheck import evaluate as evaluate_labeled
+        report = evaluate_labeled(manifest, output)
+    else:
+        report = evaluate(manifest, output)
     report['reference_access'] = reference_access
     (output/'manifest.json').write_text(json.dumps(manifest, indent=2)+'\n', encoding='utf-8')
     (output/'report.json').write_text(json.dumps(report, indent=2, sort_keys=True)+'\n', encoding='utf-8')

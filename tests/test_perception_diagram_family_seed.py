@@ -244,7 +244,7 @@ def test_raster_geometry_generalizes_independent_parts_size_pose_and_color(scale
 def test_diagonal_is_joined_across_occluding_circle(case):
     # Recreate the seeded raster, without depending on untracked run artifacts.
     from tools.run_plan_b_variations import make_variations
-    svg = (ROOT/'artifacts/images_to_convert/samples/AC0538_1L_sia.svg').read_text(encoding='utf-8')
+    svg = (ROOT/'tests/fixtures/plan_b_templates/AC0538_1L_sia.svg').read_text(encoding='utf-8')
     cases = make_variations(svg, DESCRIPTION, 3948009396310964094)
     item = next(c for c in cases if c['case_id'] == case)
     image = render(item['svg'], item['width'], item['height'])

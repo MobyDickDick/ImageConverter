@@ -1,6 +1,6 @@
 # Zufriedenstellende Konvertierungen
 
-192 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
+198 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
 
 Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bild und Beschreibung.
 
@@ -69,6 +69,12 @@ Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bi
 | [AC0731_L](images/AC0731_L.jpg) | [SVG](svgs/AC0731_L.svg) | 884.010681 | semantic-only |
 | [AC0731_M](images/AC0731_M.jpg) | [SVG](svgs/AC0731_M.svg) | 441.522858 | semantic-only |
 | [AC0731_S](images/AC0731_S.jpg) | [SVG](svgs/AC0731_S.svg) | 548.752014 | semantic-only |
+| [AC0734_1_L](images/AC0734_1_L.jpg) | [SVG](svgs/AC0734_1_L.svg) | 622.839111 | semantic-only |
+| [AC0734_1_M](images/AC0734_1_M.jpg) | [SVG](svgs/AC0734_1_M.svg) | 587.574280 | semantic-only |
+| [AC0734_1_S](images/AC0734_1_S.jpg) | [SVG](svgs/AC0734_1_S.svg) | 601.298645 | semantic-only |
+| [AC0734_L](images/AC0734_L.jpg) | [SVG](svgs/AC0734_L.svg) | 276.005341 | semantic-only |
+| [AC0734_M](images/AC0734_M.jpg) | [SVG](svgs/AC0734_M.svg) | 392.935699 | semantic-only |
+| [AC0734_S](images/AC0734_S.jpg) | [SVG](svgs/AC0734_S.svg) | 250.087997 | semantic-only |
 | [AC0800_L](images/AC0800_L.jpg) | [SVG](svgs/AC0800_L.svg) | 626.599976 | standard |
 | [AC0800_M](images/AC0800_M.jpg) | [SVG](svgs/AC0800_M.svg) | 53.910000 | standard |
 | [AC0800_S](images/AC0800_S.jpg) | [SVG](svgs/AC0800_S.svg) | 893.799988 | standard |

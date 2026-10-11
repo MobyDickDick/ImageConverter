@@ -2530,7 +2530,7 @@ def test_dot_symbol_reconstructs_regression_probes_of_failing_ci_task(seed, prob
     from tools.run_plan_b_variations import make_variations
 
     root = Path(__file__).resolve().parents[2]
-    path = root / 'artifacts/images_to_convert/samples/AR0030.svg'
+    path = root / 'tests/fixtures/plan_b_templates/AR0030.svg'
     description = ET.parse(root / 'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml').find(
         ".//entry[@key='AR0030']/beschreibung").text
     case = make_variations(path.read_text(encoding='utf-8'), description, seed)[probe_index]

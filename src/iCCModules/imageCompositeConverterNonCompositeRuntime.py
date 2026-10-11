@@ -1412,6 +1412,25 @@ def runNonCompositeIterationImpl(
 ) -> tuple[str, str, dict[str, object], int, float] | None:
     if mode in {"non_composite", "auto"}:
         square_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+        # Preserve quoted text case and register explicit right-handle symbols
+        # before the pale framed-panel fallback can discard their foreground.
+        if len(square_ir) == 1 and square_ir[0].get('kind') == 'RightStemSquareKelleGlyph' and square_ir[0].get('label'):
+            fragments = params.get('description_fragments') or []
+            original_description = ' '.join(str(part.get('text', '')) for part in fragments if isinstance(part, dict)) or description
+            labeled_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(original_description)
+            fitted = fit_labeled_square(labeled_ir, image=perc_img,
+                render_fn=lambda candidate_ir: render_svg_to_numpy_fn(
+                    geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, candidate_ir), width, height),
+                error_fn=lambda rendered: calculate_error_fn(perc_img, rendered))
+            if fitted is not None:
+                params['optimized_geometry_ir'] = fitted['geometry_ir']
+                params['labeled_square_registration'] = {
+                    key: value for key, value in fitted.items() if key not in {'geometry_ir', 'rendered'}
+                }
+                svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, fitted['geometry_ir'])
+                write_validation_log_fn(['status=non_composite_raster_labeled_square'])
+                write_attempt_artifacts_fn(svg, fitted['rendered'])
+                return base_name, description, params, 1, fitted['final_error']
         square_stem = fit_square_stem(
             square_ir, image=perc_img, description=description,
             render_fn=lambda candidate_ir: render_svg_to_numpy_fn(

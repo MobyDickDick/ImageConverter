@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-11, nach AC0712-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-11, nach AC0734-Abnahme)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -118,11 +118,19 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `AC0734_1_S` – `mean_delta2=12591.893555`, `normalized_mse=0.064549`.
-2. `GE9021_1M` – `mean_delta2=12270.718750`, `normalized_mse=0.062903`.
-3. `SE0081` – `mean_delta2=11975.778320`, `normalized_mse=0.061391`.
-4. `GE0039_M` – `mean_delta2=11544.757812`, `normalized_mse=0.059181`.
-5. `GE9022_2M` – `mean_delta2=11451.323242`, `normalized_mse=0.058702`.
+1. `GE9021_1M` – `mean_delta2=12270.718750`, `normalized_mse=0.062903`.
+2. `SE0081` – `mean_delta2=11975.778320`, `normalized_mse=0.061391`.
+3. `GE0039_M` – `mean_delta2=11544.757812`, `normalized_mse=0.059181`.
+4. `GE9022_2M` – `mean_delta2=11451.323242`, `normalized_mse=0.058702`.
+5. `AC0920_L` – `mean_delta2=11265.105469`, `normalized_mse=0.057748`.
+
+`AC0734_1_S` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
+Beschreibung und allgemeiner Rechtsgriff-/Textregistrierung beide regulären
+Gates ohne Pflichtmetrikregression und sämtliche strengeren Pixelgrenzen.
+Die frische Zielmetrik sinkt von `18331.007812` auf `601.298645`; eine unabhängige
+Vorlage besteht 17/17 echte CLI-Fälle. Alle zwölf Katalog-SVGs und die
+17 Plan-B-Ausgaben samt Metriken sind reproduziert. Details:
+`docs/next_arbeitspaket_2026-10-11_ac0734_1_s.md`.
 
 `AC0712_1_S` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und allgemeiner Linksgriff-/Strich-/Punktregistrierung beide
