@@ -1,0 +1,172 @@
+{
+  "date": "2026-10-11",
+  "scope": "catalog CI process deadline, failed-row resume, unbuffered converter logs",
+  "pull_request": "https://github.com/MobyDickDick/ImageConverter/pull/1916",
+  "original_job": "https://github.com/MobyDickDick/ImageConverter/actions/runs/38119789330/job/114411968197?pr=1916",
+  "original_pr_head": "e458af3b333bf21f3bd815459ce04fa69e205655",
+  "original_merge": "0ffc89717a6a1fe9f709e6627b7180ed3bd91522",
+  "original_ci": {
+    "selected": 218,
+    "succeeded": 216,
+    "failed": 2,
+    "failures": [
+      {
+        "variant": "DLG0001",
+        "status": "process_timeout",
+        "returncode": 124,
+        "elapsed_seconds": 75.0
+      },
+      {
+        "variant": "GE0000",
+        "status": "process_timeout",
+        "returncode": 124,
+        "elapsed_seconds": 75.0
+      }
+    ]
+  },
+  "ci_budget_seconds": 180,
+  "process_deadline_seconds": 195,
+  "ci_retest_at_evidence_creation": "pending; see PR #1916 checks for Ubuntu acceptance",
+  "local_cli_default_seconds": 60,
+  "copied_inputs_and_description_entries_match_catalog": true,
+  "old_runner_explicit_90_seconds": [
+    {
+      "variant": "DLG0001",
+      "filename": "DLG0001.JPG",
+      "status": "completed",
+      "returncode": "0",
+      "elapsed_seconds": "83.828"
+    },
+    {
+      "variant": "GE0000",
+      "filename": "GE0000.JPG",
+      "status": "completed",
+      "returncode": "0",
+      "elapsed_seconds": "84.719"
+    }
+  ],
+  "final_runner_concurrent_with_full_pytest": [
+    {
+      "variant": "DLG0001",
+      "filename": "DLG0001.JPG",
+      "status": "process_timeout",
+      "returncode": "124",
+      "elapsed_seconds": "105.031"
+    },
+    {
+      "variant": "GE0000",
+      "filename": "GE0000.JPG",
+      "status": "completed",
+      "returncode": "0",
+      "elapsed_seconds": "96.578"
+    }
+  ],
+  "final_runner_second_concurrent_attempt": [
+    {
+      "variant": "DLG0001",
+      "filename": "DLG0001.JPG",
+      "status": "process_timeout",
+      "returncode": "124",
+      "elapsed_seconds": "105.031"
+    },
+    {
+      "variant": "GE0000",
+      "filename": "GE0000.JPG",
+      "status": "process_timeout",
+      "returncode": "124",
+      "elapsed_seconds": "1030.969"
+    }
+  ],
+  "final_runner_isolated_90_seconds": [
+    {
+      "variant": "DLG0001",
+      "filename": "DLG0001.JPG",
+      "status": "process_timeout",
+      "returncode": "124",
+      "elapsed_seconds": "105.015"
+    },
+    {
+      "variant": "GE0000",
+      "filename": "GE0000.JPG",
+      "status": "process_timeout",
+      "returncode": "124",
+      "elapsed_seconds": "105.032"
+    }
+  ],
+  "final_runner_isolated_120_seconds": [
+    {
+      "variant": "DLG0001",
+      "filename": "DLG0001.JPG",
+      "status": "process_timeout",
+      "returncode": "124",
+      "elapsed_seconds": "135.015"
+    },
+    {
+      "variant": "GE0000",
+      "filename": "GE0000.JPG",
+      "status": "process_timeout",
+      "returncode": "124",
+      "elapsed_seconds": "135.032"
+    }
+  ],
+  "final_runner_isolated_180_seconds_with_stack_sampling": [
+    {
+      "variant": "DLG0001",
+      "filename": "DLG0001.JPG",
+      "status": "process_timeout",
+      "returncode": "124",
+      "elapsed_seconds": "195.031"
+    },
+    {
+      "variant": "GE0000",
+      "filename": "GE0000.JPG",
+      "status": "process_timeout",
+      "returncode": "124",
+      "elapsed_seconds": "232.735"
+    }
+  ],
+  "stack_sampling": {
+    "interval_seconds": 30,
+    "method": "temporary sitecustomize faulthandler hook, no tracked runtime changes",
+    "observed_functions": [
+      "optimizeGeometryIrRegistrationImpl",
+      "render_svg_to_numpy_inprocess",
+      "_expand_bezier_linear_gradients_for_fitz",
+      "fz_write_pixmap_as_png"
+    ]
+  },
+  "focused_pytest": {
+    "passed": 14,
+    "seconds": 0.27
+  },
+  "standard_pytest": {
+    "passed": 2227,
+    "skipped": 30,
+    "seconds": 3983.61
+  },
+  "compileall_src_tests_tools": "passed",
+  "cli_help": "passed",
+  "runtime_image_id_check": {
+    "result": "passed",
+    "occurrences": 0
+  },
+  "git_diff_check_cr_at_eol": "passed",
+  "sha256": {
+    ".github/workflows/local-completion-checks.yml": "21cba81bae54fda04ea9f4da6293d06b646a2112cc0868e9a6c0ea2b29667f79",
+    "tools/run_catalog_conversion.py": "880751abf296a53c6b6ae3a2ef800d16e0e29bc606ac1ed6f69da114e13898be",
+    "tests/test_run_catalog_conversion.py": "46c9ed0826ba4ef9a9a58c77ca1329b3ec1b2bcb2e425df590cf94f2b02454f4",
+    "artifacts/images_to_convert/DLG0001.JPG": "ee5c3ebccdc2c9a4424528975412efae7230966460536ab61a941aeb1ec0f6d0",
+    "artifacts/images_to_convert/GE0000.JPG": "ee5c3ebccdc2c9a4424528975412efae7230966460536ab61a941aeb1ec0f6d0",
+    "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml": "eb3ae8c249ba80c2b416fef97743f8d3519669a828c9e0dfe9a15f5010045e36",
+    ".tmp/catalog-timeout-fixed-inputs/descriptions.xml": "c862965f28e087244f30f180fc8f97bdec455aebcad75f6e9fece4d9e6a4aa8f"
+  },
+  "limitations": [
+    "Local Windows timeouts at 90, 120 and 180 seconds do not establish a successful GitHub Ubuntu rerun.",
+    "Process completion is not semantic or pixel quality acceptance.",
+    "Concurrent local load exceeded the 105-second limit for DLG0001.",
+    "An isolated 90-second-budget attempt also exceeded the 105-second limit for DLG0001.",
+    "The second concurrent attempt registered the GE0000 timeout only after 1031 seconds; it is not a comparable compute-time measurement.",
+    "Blank DLG0001/GE0000 raster inputs conflict with their heater descriptions.",
+    "CI semantic findings for AC0201_2, AR0101, GE1310_S and SE0113 remain separate quality work."
+  ]
+}

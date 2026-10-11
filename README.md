@@ -97,11 +97,15 @@ Eingangsordner.
 
 Für einen vollständigen, kostenkontrollierten Kataloglauf steht
 `tools/run_catalog_conversion.py` zur Verfügung. Das Skript verarbeitet eine
-stabile Teilmenge des Katalogs, startet jedes Bild isoliert und setzt standardmäßig
-nach 60 Sekunden mit dem nächsten Bild fort. Der manuelle GitHub-Workflow
+stabile Teilmenge des Katalogs und startet jedes Bild isoliert. Das lokale
+Konvertierungsbudget beträgt standardmäßig 60 Sekunden; der Prozess erhält
+zusätzlich 15 Sekunden für Start und Abschluss. Der manuelle GitHub-Workflow
 `Local completion checks` kann diesen Lauf über `run_full_catalog` in acht
-parallelen Shards starten; jeder Shard schreibt eine fortlaufend aktualisierte
-`catalog_results.csv` und wird als Workflow-Artefakt hochgeladen.
+parallelen Shards mit 180 Sekunden Budget und einer Prozessgrenze von 195 Sekunden
+starten. Jeder Shard schreibt eine fortlaufend aktualisierte `catalog_results.csv`
+und wird als Workflow-Artefakt hochgeladen. Bei Wiederaufnahme werden ausschließlich
+Einträge mit `status=completed` und Rückgabecode `0` übersprungen; Fehler laufen
+erneut. Details: [CI-Timeout-Abnahme](docs/catalog_timeout_fix_2026-10-11.md).
 
 ### Qualitätsparameter für als gut markierte Konvertierungen
 

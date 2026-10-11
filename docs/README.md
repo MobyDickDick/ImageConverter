@@ -2,6 +2,7 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [Katalog-CI: Timeout-Budget, Wiederaufnahme und Abbruchdiagnostik (2026-10-11)](catalog_timeout_fix_2026-10-11.md)
 - [GE9012: Rechtspfeil, 14 CLI-Abnahmen und 17 unabhängige Zufallsfälle (2026-10-10)](next_arbeitspaket_2026-10-10_ge9012_1m.md)
 - [GE9014: Links-Pfeil, 14 CLI-Abnahmen und 17 unabhängige Zufallsfälle (2026-10-10)](next_arbeitspaket_2026-10-10_ge9014_1m.md)
 - [Projektstand: Batchfähigkeit, Grenzen und Beschreibungsqualität (2026-10-10)](project_status_2026-10-10.md)

@@ -4,11 +4,16 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-10-10)
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-11)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `425` · Erledigt `400` · Offen `25`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `427` · Erledigt `401` · Offen `26`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
+
+## Katalog-CI (2026-10-11)
+
+- [x] **CATALOG-TIMEOUT:** Budget im Workflow von 60 auf 180 Sekunden erhöhen, Fehler bei Wiederaufnahme erneut versuchen und gepufferte Abbruchdiagnostik erhalten. Details und Abnahme: `docs/catalog_timeout_fix_2026-10-11.md`.
+- [ ] **CATALOG-SOURCE-REVIEW:** Nahezu leere Rasterquellen `DLG0001.JPG` und `GE0000.JPG` gegen ihre Heizelement-Beschreibungen prüfen; außerdem die CI-Semantikmeldungen für `AC0201_2.jpg`, `AR0101.jpg`, `GE1310_S.jpg` und `SE0113.jpg` anhand der jeweiligen Bild-/Textpaare aufarbeiten. Prozessabschluss nicht als Qualitätsabnahme zählen; Grenzen unverändert lassen.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
