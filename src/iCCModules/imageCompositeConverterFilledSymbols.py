@@ -9,8 +9,13 @@ def _hex(bgr):
     return '#' + ''.join(f'{int(v):02x}' for v in np.clip(np.rint(bgr[::-1]), 0, 255))
 
 
-def _register(parameters, geometry_count, build, valid, image, render_fn, error_fn, source):
-    """Bounded coordinate descent; contours and reference vectors are never emitted."""
+def _register(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
+              *, preserve_initial_error=False, loss_fn=None):
+    """Bounded coordinate descent; optionally retain the best admissible iterate.
+
+    A custom search loss does not override the caller's initial error bound.
+    Contours and reference vectors are never emitted.
+    """
     height, width = image.shape[:2]
     evaluations = 0
 
@@ -24,7 +29,8 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
         if raster is None:
             return None
         error = float(error_fn(image, raster))
-        loss = float(np.mean((image.astype(float)-np.asarray(raster, dtype=float))**2))
+        loss = float(loss_fn(image, raster) if loss_fn else
+                     np.mean((image.astype(float)-np.asarray(raster, dtype=float))**2))
         return (loss, error, svg, raster) if np.isfinite(error) and np.isfinite(loss) else None
 
     parameters = np.asarray(parameters, dtype=float)
@@ -32,6 +38,7 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
     if best is None:
         return None
     initial_error = best[1]
+    accepted = (parameters.copy(), best)
     for step in (1., .5, .25, .125):
         for _ in range(2):
             improved = False
@@ -42,8 +49,12 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
                     measured = measure(candidate)
                     if measured is not None and measured[0] < best[0]-1e-9:
                         parameters, best, improved = candidate, measured, True
+                        if best[1] <= initial_error+1e-9:
+                            accepted = (parameters.copy(), best)
             if not improved:
                 break
+    if preserve_initial_error:
+        parameters, best = accepted
     if best[1] > initial_error+1e-9:
         return None
     return {'svg': best[2], 'rendered': best[3], 'error': best[1],

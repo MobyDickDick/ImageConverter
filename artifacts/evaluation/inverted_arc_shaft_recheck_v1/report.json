@@ -1,0 +1,1765 @@
+{
+  "baseline": {
+    "baseline_sha256": "ae82a0ebfafa704c4262b52d579fa29a45cbaa052b064affb0cf532af4f70f15",
+    "cases": {
+      "anonymous_symbol_00": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.1849333941936493,
+          "error_per_pixel": 0.06388843333493528,
+          "object_mask_iou": 0.4481751824817518,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_01": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.503840982913971,
+          "error_per_pixel": 0.03656298058439062,
+          "object_mask_iou": 0.8461538461538461,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_02": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4789804220199585,
+          "error_per_pixel": 0.0484574843009099,
+          "object_mask_iou": 0.391304347826087,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_03": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.48448503017425537,
+          "error_per_pixel": 0.03235529904363706,
+          "object_mask_iou": 0.6810344827586207,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_04": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.34851083159446716,
+          "error_per_pixel": 0.02299076426935153,
+          "object_mask_iou": 0.6031434184675835,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_05": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.47574883699417114,
+          "error_per_pixel": 0.019643606625656798,
+          "object_mask_iou": 0.8461538461538461,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_06": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.49225109815597534,
+          "error_per_pixel": 0.013656298559047802,
+          "object_mask_iou": 0.45,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_07": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4609338045120239,
+          "error_per_pixel": 0.01047848245967096,
+          "object_mask_iou": 0.7886178861788617,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_08": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4841609001159668,
+          "error_per_pixel": 0.02245871980328079,
+          "object_mask_iou": 0.6027397260273972,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_09": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5022221803665161,
+          "error_per_pixel": 0.016716868962658595,
+          "object_mask_iou": 0.8461538461538461,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_10": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.528413712978363,
+          "error_per_pixel": 0.048027306204344485,
+          "object_mask_iou": 0.40551181102362205,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_11": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4603993594646454,
+          "error_per_pixel": 0.0368598565856081,
+          "object_mask_iou": 0.6810344827586207,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_12": {
+        "dimensions": {
+          "height": 60,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.283331960439682,
+          "error_per_pixel": 0.021204472138119955,
+          "object_mask_iou": 0.6007827788649707,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_13": {
+        "dimensions": {
+          "height": 30,
+          "width": 10
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8269037008285522,
+          "error_per_pixel": 0.021440181260412663,
+          "object_mask_iou": 0.5444444444444444,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI before changes",
+      "commit": "609776c2358a1cce14847cb261e18923d44300ae",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_symbol_00": "9df7b0891d9fe2e24bcdaf2718401f727561f818371b1b20f93a8ffd84078907",
+        "anonymous_symbol_01": "4a8c6e826e85c3017bb4ab6620948ebf2ec2106fdaa601616837bec15361c0b1",
+        "anonymous_symbol_02": "67a12af7cd49e5bf2164380492360fa21ff597cd93bda58da4c46cdb1ef752f7",
+        "anonymous_symbol_03": "41bfe57d149c0320098e1ce596c916f846600c2e4f5be99d51aa131a7bfe1011",
+        "anonymous_symbol_04": "7665f42ad4402a2fc041bf3594accf5db0842ad7ca881409d3fdb8037bfc779a",
+        "anonymous_symbol_05": "da986a66d43e3c965f4406cadef7f5a1d0aa74c260a6bc1258859833f48edfc1",
+        "anonymous_symbol_06": "2df5d2e1838528adc6fa7f62f92eaea5dd708e331d86a89336712d9b28acae3c",
+        "anonymous_symbol_07": "997a19ccbdd87cfb3b81251ac203bf91a65eede56595ac132bab53539816161a",
+        "anonymous_symbol_08": "70cc94edaf0c94618b3d4c5b00463dc3250bd5889b39af1eddc65c788ed7ed99",
+        "anonymous_symbol_09": "13ea4d4797c98471871edc55a9b790fde66e1d01fa15db56b691cfd823066bee",
+        "anonymous_symbol_10": "35a4e09e3b03d4188f10d0a4c8716e2f2b4720ad0731b027ce8d8459d45323cf",
+        "anonymous_symbol_11": "775b6dfe3a9bd90d4fe6318e95bc59d3aa7226fdbc9a53ea2a4b5ac1a1c1285d",
+        "anonymous_symbol_12": "819e33b37806f3c198aa701a4981b5ba2528e614a62c795cb4cacbd6e1133096",
+        "anonymous_symbol_13": "58dac5afbe6ebb908093a3afdf31b4cbe4868732bd9f191cb8d58ac574827bc9"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10; NumPy; OpenCV; PyMuPDF"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 194.40916442871094,
+      "after_svg": "after/anonymous_symbol_00.svg",
+      "after_svg_sha256": "2a1aa4faedd0d01c19981e1b744e99f1e639c9c18758c11694e09dcef7f99a13",
+      "before_mean_delta2": 12463.0361328125,
+      "before_svg": "before/anonymous_symbol_00.svg",
+      "before_svg_sha256": "a846be62a65d6c9e76b95b8c174a716899d0568e44a801f5edfbaacb36c83243",
+      "case_id": "anonymous_symbol_00",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_1M.jpg",
+      "input_sha256": "9df7b0891d9fe2e24bcdaf2718401f727561f818371b1b20f93a8ffd84078907",
+      "role": "target",
+      "source": "GE9021_1M.jpg",
+      "source_sha256": "9df7b0891d9fe2e24bcdaf2718401f727561f818371b1b20f93a8ffd84078907"
+    },
+    {
+      "after_mean_delta2": 139.28334045410156,
+      "after_svg": "after/anonymous_symbol_01.svg",
+      "after_svg_sha256": "8070ab8b6092e14087fb9efad31a1df6b6356d5c2835775820f47aed9c282362",
+      "before_mean_delta2": 7132.5234375,
+      "before_svg": "before/anonymous_symbol_01.svg",
+      "before_svg_sha256": "f8091ce030d516790c32d71913c84d7d2b08110373137267a2d8b3455a1e5848",
+      "case_id": "anonymous_symbol_01",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_1S.jpg",
+      "input_sha256": "4a8c6e826e85c3017bb4ab6620948ebf2ec2106fdaa601616837bec15361c0b1",
+      "role": "holdout",
+      "source": "GE9021_1S.jpg",
+      "source_sha256": "4a8c6e826e85c3017bb4ab6620948ebf2ec2106fdaa601616837bec15361c0b1"
+    },
+    {
+      "after_mean_delta2": 197.19833374023438,
+      "after_svg": "after/anonymous_symbol_02.svg",
+      "after_svg_sha256": "b6452638c76dfab312444a72f1ccca751f8eaf9b200e7435326fc3f6baca5f94",
+      "before_mean_delta2": 9452.84375,
+      "before_svg": "before/anonymous_symbol_02.svg",
+      "before_svg_sha256": "57f6e4d5d4a84efe05d18f4535dd30cdd65e4d474233c94d8ec11c2b128e39f4",
+      "case_id": "anonymous_symbol_02",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_2M.jpg",
+      "input_sha256": "67a12af7cd49e5bf2164380492360fa21ff597cd93bda58da4c46cdb1ef752f7",
+      "role": "holdout",
+      "source": "GE9021_2M.jpg",
+      "source_sha256": "67a12af7cd49e5bf2164380492360fa21ff597cd93bda58da4c46cdb1ef752f7"
+    },
+    {
+      "after_mean_delta2": 133.97332763671875,
+      "after_svg": "after/anonymous_symbol_03.svg",
+      "after_svg_sha256": "a51af72e94c49da7326d182198ad4b6cd3847263660e8f7520800d4074853fa5",
+      "before_mean_delta2": 6311.7099609375,
+      "before_svg": "before/anonymous_symbol_03.svg",
+      "before_svg_sha256": "209057f4bc66bb07cac4719481df4c76ec3a1f8d713ada048b3f12384bc64524",
+      "case_id": "anonymous_symbol_03",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_2S.jpg",
+      "input_sha256": "41bfe57d149c0320098e1ce596c916f846600c2e4f5be99d51aa131a7bfe1011",
+      "role": "holdout",
+      "source": "GE9021_2S.jpg",
+      "source_sha256": "41bfe57d149c0320098e1ce596c916f846600c2e4f5be99d51aa131a7bfe1011"
+    },
+    {
+      "after_mean_delta2": 110.46416473388672,
+      "after_svg": "after/anonymous_symbol_04.svg",
+      "after_svg_sha256": "5eb24389156af6066f2660de75974d3e1c616ee3180efa75677dbe7f7d4ab62d",
+      "before_mean_delta2": 4484.92333984375,
+      "before_svg": "before/anonymous_symbol_04.svg",
+      "before_svg_sha256": "79d9813b485a310e1a41df3307c0b571aa745b6e93c0088f188cb55d9148113b",
+      "case_id": "anonymous_symbol_04",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_3M.jpg",
+      "input_sha256": "7665f42ad4402a2fc041bf3594accf5db0842ad7ca881409d3fdb8037bfc779a",
+      "role": "holdout",
+      "source": "GE9021_3M.jpg",
+      "source_sha256": "7665f42ad4402a2fc041bf3594accf5db0842ad7ca881409d3fdb8037bfc779a"
+    },
+    {
+      "after_mean_delta2": 93.35333251953125,
+      "after_svg": "after/anonymous_symbol_05.svg",
+      "after_svg_sha256": "43b19ca23b5295a60b8c05ee9a9ab7864ccf82d34544497a0bf8502369f705b0",
+      "before_mean_delta2": 3831.9765625,
+      "before_svg": "before/anonymous_symbol_05.svg",
+      "before_svg_sha256": "fad4c142bb94509d954e03a8044650e20c84fac77848b443dd5f37c944bd9434",
+      "case_id": "anonymous_symbol_05",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_3S.jpg",
+      "input_sha256": "da986a66d43e3c965f4406cadef7f5a1d0aa74c260a6bc1258859833f48edfc1",
+      "role": "holdout",
+      "source": "GE9021_3S.jpg",
+      "source_sha256": "da986a66d43e3c965f4406cadef7f5a1d0aa74c260a6bc1258859833f48edfc1"
+    },
+    {
+      "after_mean_delta2": 53.5091667175293,
+      "after_svg": "after/anonymous_symbol_06.svg",
+      "after_svg_sha256": "7a127fbd09e82822d3cbe6353d53b9feaecd87b9999a75a2807feec3f3468e76",
+      "before_mean_delta2": 2664.00244140625,
+      "before_svg": "before/anonymous_symbol_06.svg",
+      "before_svg_sha256": "7b78c70f207f1ecfab6ad7a923504cefab9363d28898aa1579f717dc4f78a8df",
+      "case_id": "anonymous_symbol_06",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_4M.jpg",
+      "input_sha256": "2df5d2e1838528adc6fa7f62f92eaea5dd708e331d86a89336712d9b28acae3c",
+      "role": "holdout",
+      "source": "GE9021_4M.jpg",
+      "source_sha256": "2df5d2e1838528adc6fa7f62f92eaea5dd708e331d86a89336712d9b28acae3c"
+    },
+    {
+      "after_mean_delta2": 41.060001373291016,
+      "after_svg": "after/anonymous_symbol_07.svg",
+      "after_svg_sha256": "ab016796b2772b14efbdc6ee7a2b657cfdc72d18489d2e4bd86c354fae5f33d4",
+      "before_mean_delta2": 2044.0899658203125,
+      "before_svg": "before/anonymous_symbol_07.svg",
+      "before_svg_sha256": "c95ed0318b06ec038bca5c0c5ec6204ee18c94712eb6a967f89150b5d311c801",
+      "case_id": "anonymous_symbol_07",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_4S.jpg",
+      "input_sha256": "997a19ccbdd87cfb3b81251ac203bf91a65eede56595ac132bab53539816161a",
+      "role": "holdout",
+      "source": "GE9021_4S.jpg",
+      "source_sha256": "997a19ccbdd87cfb3b81251ac203bf91a65eede56595ac132bab53539816161a"
+    },
+    {
+      "after_mean_delta2": 107.16666412353516,
+      "after_svg": "after/anonymous_symbol_08.svg",
+      "after_svg_sha256": "995f37a9195878682e015269c761e6c488f63cdeca2631aab63acc4dfd098adc",
+      "before_mean_delta2": 4381.134765625,
+      "before_svg": "before/anonymous_symbol_08.svg",
+      "before_svg_sha256": "70feab96b67e0528f72ecb11212c2f6f3c2ca2baf8d9e5b31f1984161e9855d9",
+      "case_id": "anonymous_symbol_08",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_5M.jpg",
+      "input_sha256": "70cc94edaf0c94618b3d4c5b00463dc3250bd5889b39af1eddc65c788ed7ed99",
+      "role": "holdout",
+      "source": "GE9021_5M.jpg",
+      "source_sha256": "70cc94edaf0c94618b3d4c5b00463dc3250bd5889b39af1eddc65c788ed7ed99"
+    },
+    {
+      "after_mean_delta2": 96.66000366210938,
+      "after_svg": "after/anonymous_symbol_09.svg",
+      "after_svg_sha256": "1a48a4cac3ddbedb13de57ba5366d0fe2f26d965a7fa1b6b778eb5cf7bbd5bfb",
+      "before_mean_delta2": 3261.043212890625,
+      "before_svg": "before/anonymous_symbol_09.svg",
+      "before_svg_sha256": "dff40c8311e0a3295d1f902adc66cb94c18f861b60a22072b5b5c9686766f58c",
+      "case_id": "anonymous_symbol_09",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_5S.jpg",
+      "input_sha256": "13ea4d4797c98471871edc55a9b790fde66e1d01fa15db56b691cfd823066bee",
+      "role": "holdout",
+      "source": "GE9021_5S.jpg",
+      "source_sha256": "13ea4d4797c98471871edc55a9b790fde66e1d01fa15db56b691cfd823066bee"
+    },
+    {
+      "after_mean_delta2": 217.1925048828125,
+      "after_svg": "after/anonymous_symbol_10.svg",
+      "after_svg_sha256": "daf34bc0d577dd43fbf422b8a5d19684dff05a8ff017144e8c13322c05c2db3d",
+      "before_mean_delta2": 9368.9267578125,
+      "before_svg": "before/anonymous_symbol_10.svg",
+      "before_svg_sha256": "dedd117b182a2f477656d483b9e4143272e00ecb0d03c8faf4e947d26220cfee",
+      "case_id": "anonymous_symbol_10",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_6M.jpg",
+      "input_sha256": "35a4e09e3b03d4188f10d0a4c8716e2f2b4720ad0731b027ce8d8459d45323cf",
+      "role": "holdout",
+      "source": "GE9021_6M.jpg",
+      "source_sha256": "35a4e09e3b03d4188f10d0a4c8716e2f2b4720ad0731b027ce8d8459d45323cf"
+    },
+    {
+      "after_mean_delta2": 149.76333618164062,
+      "after_svg": "after/anonymous_symbol_11.svg",
+      "after_svg_sha256": "b4de1dfec887261a86ff4265979b9d2b4fc305b6bf2acb8c1bdf6578c9bdc87f",
+      "before_mean_delta2": 7190.4365234375,
+      "before_svg": "before/anonymous_symbol_11.svg",
+      "before_svg_sha256": "70eef86d13488e5fc810160388ec5d46a3945dcbcd98f3c58178ecc64076aa1a",
+      "case_id": "anonymous_symbol_11",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_6S.jpg",
+      "input_sha256": "775b6dfe3a9bd90d4fe6318e95bc59d3aa7226fdbc9a53ea2a4b5ac1a1c1285d",
+      "role": "holdout",
+      "source": "GE9021_6S.jpg",
+      "source_sha256": "775b6dfe3a9bd90d4fe6318e95bc59d3aa7226fdbc9a53ea2a4b5ac1a1c1285d"
+    },
+    {
+      "after_mean_delta2": 134.2949981689453,
+      "after_svg": "after/anonymous_symbol_12.svg",
+      "after_svg_sha256": "985fe899dbc6df98d54b37ff1eeb0b360d50400fa5301974ca6beb009309216f",
+      "before_mean_delta2": 4136.46240234375,
+      "before_svg": "before/anonymous_symbol_12.svg",
+      "before_svg_sha256": "5c99cc3dc68bebc4978fea9e1ea82ca658831edfa4167792d2add8604a3095ac",
+      "case_id": "anonymous_symbol_12",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_7M.jpg",
+      "input_sha256": "819e33b37806f3c198aa701a4981b5ba2528e614a62c795cb4cacbd6e1133096",
+      "role": "holdout",
+      "source": "GE9021_7M.jpg",
+      "source_sha256": "819e33b37806f3c198aa701a4981b5ba2528e614a62c795cb4cacbd6e1133096"
+    },
+    {
+      "after_mean_delta2": 92.66000366210938,
+      "after_svg": "after/anonymous_symbol_13.svg",
+      "after_svg_sha256": "a559fe3767d4c230a913b71a306474498ce625087443f03c5d01d0f502748eff",
+      "before_mean_delta2": 4182.443359375,
+      "before_svg": "before/anonymous_symbol_13.svg",
+      "before_svg_sha256": "8533609d2f2a38ed48f98c6e22fd6a3c1e45a4edd530095d87cd9c839524395e",
+      "case_id": "anonymous_symbol_13",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE9021_7S.jpg",
+      "input_sha256": "58dac5afbe6ebb908093a3afdf31b4cbe4868732bd9f191cb8d58ac574827bc9",
+      "role": "holdout",
+      "source": "GE9021_7S.jpg",
+      "source_sha256": "58dac5afbe6ebb908093a3afdf31b4cbe4868732bd9f191cb8d58ac574827bc9"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "ae82a0ebfafa704c4262b52d579fa29a45cbaa052b064affb0cf532af4f70f15",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9630364179611206,
+          "error_per_pixel": 0.0009965867713890091,
+          "object_mask_iou": 0.9721115537848606,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.1849333941936493,
+          "error_per_pixel": 0.06388843333493528,
+          "object_mask_iou": 0.4481751824817518,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0009965867713890091,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9835,
+            "edge_alignment": 0.963,
+            "pixel_similarity": 0.999,
+            "semantic_score": 1.0,
+            "structure_score": 0.9721
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9352058172225952,
+          "error_per_pixel": 0.0007139989258187956,
+          "object_mask_iou": 0.9942528735632183,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.503840982913971,
+          "error_per_pixel": 0.03656298058439062,
+          "object_mask_iou": 0.8461538461538461,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_01",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007139989258187956,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9822,
+            "edge_alignment": 0.9352,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9943
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9590085744857788,
+          "error_per_pixel": 0.0010108847045507336,
+          "object_mask_iou": 0.9781312127236581,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4789804220199585,
+          "error_per_pixel": 0.0484574843009099,
+          "object_mask_iou": 0.391304347826087,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_02",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0010108847045507336,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.984,
+            "edge_alignment": 0.959,
+            "pixel_similarity": 0.999,
+            "semantic_score": 1.0,
+            "structure_score": 0.9781
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9469272494316101,
+          "error_per_pixel": 0.0006867785602292387,
+          "object_mask_iou": 0.9942528735632183,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.48448503017425537,
+          "error_per_pixel": 0.03235529904363706,
+          "object_mask_iou": 0.6810344827586207,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_03",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0006867785602292387,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9851,
+            "edge_alignment": 0.9469,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9943
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9626903533935547,
+          "error_per_pixel": 0.0005662651018012904,
+          "object_mask_iou": 0.9800399201596807,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.34851083159446716,
+          "error_per_pixel": 0.02299076426935153,
+          "object_mask_iou": 0.6031434184675835,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_04",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0005662651018012904,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9855,
+            "edge_alignment": 0.9627,
+            "pixel_similarity": 0.9994,
+            "semantic_score": 1.0,
+            "structure_score": 0.98
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9451812505722046,
+          "error_per_pixel": 0.0004785509804922786,
+          "object_mask_iou": 0.9885057471264368,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.47574883699417114,
+          "error_per_pixel": 0.019643606625656798,
+          "object_mask_iou": 0.8461538461538461,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_05",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0004785509804922786,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9833,
+            "edge_alignment": 0.9452,
+            "pixel_similarity": 0.9995,
+            "semantic_score": 1.0,
+            "structure_score": 0.9885
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9726340770721436,
+          "error_per_pixel": 0.00027430048298105494,
+          "object_mask_iou": 0.8899082568807339,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.49225109815597534,
+          "error_per_pixel": 0.013656298559047802,
+          "object_mask_iou": 0.45,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_06",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.00027430048298105494,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9656,
+            "edge_alignment": 0.9726,
+            "pixel_similarity": 0.9997,
+            "semantic_score": 1.0,
+            "structure_score": 0.8899
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9574193358421326,
+          "error_per_pixel": 0.00021048315454717936,
+          "object_mask_iou": 0.9836065573770492,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4609338045120239,
+          "error_per_pixel": 0.01047848245967096,
+          "object_mask_iou": 0.7886178861788617,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_07",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.00021048315454717936,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9852,
+            "edge_alignment": 0.9574,
+            "pixel_similarity": 0.9998,
+            "semantic_score": 1.0,
+            "structure_score": 0.9836
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8889331817626953,
+          "error_per_pixel": 0.000549361343706447,
+          "object_mask_iou": 0.9680638722554891,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4841609001159668,
+          "error_per_pixel": 0.02245871980328079,
+          "object_mask_iou": 0.6027397260273972,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_08",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.000549361343706447,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9641,
+            "edge_alignment": 0.8889,
+            "pixel_similarity": 0.9995,
+            "semantic_score": 1.0,
+            "structure_score": 0.9681
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9543662071228027,
+          "error_per_pixel": 0.000495501748876634,
+          "object_mask_iou": 0.9885057471264368,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5022221803665161,
+          "error_per_pixel": 0.016716868962658595,
+          "object_mask_iou": 0.8461538461538461,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_09",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.000495501748876634,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9856,
+            "edge_alignment": 0.9544,
+            "pixel_similarity": 0.9995,
+            "semantic_score": 1.0,
+            "structure_score": 0.9885
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8970751762390137,
+          "error_per_pixel": 0.0011133794944652698,
+          "object_mask_iou": 0.9820717131474104,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.528413712978363,
+          "error_per_pixel": 0.048027306204344485,
+          "object_mask_iou": 0.40551181102362205,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_10",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0011133794944652698,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9695,
+            "edge_alignment": 0.8971,
+            "pixel_similarity": 0.9989,
+            "semantic_score": 1.0,
+            "structure_score": 0.9821
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9571657776832581,
+          "error_per_pixel": 0.0007677218309964917,
+          "object_mask_iou": 0.9942528735632183,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4603993594646454,
+          "error_per_pixel": 0.0368598565856081,
+          "object_mask_iou": 0.6810344827586207,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_11",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007677218309964917,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9877,
+            "edge_alignment": 0.9572,
+            "pixel_similarity": 0.9992,
+            "semantic_score": 1.0,
+            "structure_score": 0.9943
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9624885320663452,
+          "error_per_pixel": 0.0006884275184874807,
+          "object_mask_iou": 0.9820717131474104,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.283331960439682,
+          "error_per_pixel": 0.021204472138119955,
+          "object_mask_iou": 0.6007827788649707,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_12",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0006884275184874807,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.986,
+            "edge_alignment": 0.9625,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9821
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9372258186340332,
+          "error_per_pixel": 0.0004749968148768903,
+          "object_mask_iou": 0.9942528735632183,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8269037008285522,
+          "error_per_pixel": 0.021440181260412663,
+          "object_mask_iou": 0.5444444444444444,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_13",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0004749968148768903,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9828,
+            "edge_alignment": 0.9372,
+            "pixel_similarity": 0.9995,
+            "semantic_score": 1.0,
+            "structure_score": 0.9943
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI before changes",
+      "commit": "609776c2358a1cce14847cb261e18923d44300ae",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_symbol_00": "9df7b0891d9fe2e24bcdaf2718401f727561f818371b1b20f93a8ffd84078907",
+        "anonymous_symbol_01": "4a8c6e826e85c3017bb4ab6620948ebf2ec2106fdaa601616837bec15361c0b1",
+        "anonymous_symbol_02": "67a12af7cd49e5bf2164380492360fa21ff597cd93bda58da4c46cdb1ef752f7",
+        "anonymous_symbol_03": "41bfe57d149c0320098e1ce596c916f846600c2e4f5be99d51aa131a7bfe1011",
+        "anonymous_symbol_04": "7665f42ad4402a2fc041bf3594accf5db0842ad7ca881409d3fdb8037bfc779a",
+        "anonymous_symbol_05": "da986a66d43e3c965f4406cadef7f5a1d0aa74c260a6bc1258859833f48edfc1",
+        "anonymous_symbol_06": "2df5d2e1838528adc6fa7f62f92eaea5dd708e331d86a89336712d9b28acae3c",
+        "anonymous_symbol_07": "997a19ccbdd87cfb3b81251ac203bf91a65eede56595ac132bab53539816161a",
+        "anonymous_symbol_08": "70cc94edaf0c94618b3d4c5b00463dc3250bd5889b39af1eddc65c788ed7ed99",
+        "anonymous_symbol_09": "13ea4d4797c98471871edc55a9b790fde66e1d01fa15db56b691cfd823066bee",
+        "anonymous_symbol_10": "35a4e09e3b03d4188f10d0a4c8716e2f2b4720ad0731b027ce8d8459d45323cf",
+        "anonymous_symbol_11": "775b6dfe3a9bd90d4fe6318e95bc59d3aa7226fdbc9a53ea2a4b5ac1a1c1285d",
+        "anonymous_symbol_12": "819e33b37806f3c198aa701a4981b5ba2528e614a62c795cb4cacbd6e1133096",
+        "anonymous_symbol_13": "58dac5afbe6ebb908093a3afdf31b4cbe4868732bd9f191cb8d58ac574827bc9"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10; NumPy; OpenCV; PyMuPDF"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 14,
+      "improved": 14,
+      "satisfactory": 14,
+      "technically_completed": 14
+    }
+  },
+  "schema_version": "inverted_arc_shaft_recheck_v1"
+}

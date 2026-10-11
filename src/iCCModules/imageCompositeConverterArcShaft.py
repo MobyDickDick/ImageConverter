@@ -3,11 +3,63 @@ from __future__ import annotations
 
 import cv2
 import numpy as np
+import re
+from xml.etree import ElementTree as ET
 
 from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _register
 
 
+def reverse_arc_shaft_svg(svg):
+    """Reflect analytic coordinates vertically, including the arc sweep."""
+    root = ET.fromstring(svg)
+    height = float(root.get('height'))
+    for shape in root:
+        kind = shape.tag.rsplit('}', 1)[-1]
+        if kind == 'rect':
+            shape.set('y', f"{height-float(shape.get('y', 0))-float(shape.get('height')):g}")
+        elif kind == 'path':
+            match = re.fullmatch(r'M ([\d.e+-]+) ([\d.e+-]+) A ([\d.e+-]+) ([\d.e+-]+) 0 0 ([01]) ([\d.e+-]+) ([\d.e+-]+)', shape.get('d', ''))
+            if match is None:
+                raise ValueError('Expected one analytic half-ellipse')
+            lx, cy, rx, ry, sweep, ex, ey = map(float, match.groups())
+            shape.set('d', f'M {lx:g} {height-cy:g} A {rx:g} {ry:g} 0 0 {1-int(sweep)} {ex:g} {height-ey:g}')
+    return ET.tostring(root, encoding='unicode') + '\n'
+
+
 def fit_arc_shaft(width, height, *, description, image, render_fn, error_fn):
+    """Normalize a declared lower opening to the existing upper-opening fit."""
+    text = str(description or '').casefold()
+    lower = 'unten offen' in text
+    if not lower:
+        return _fit_upper_open_arc_shaft(width, height, description=text,
+                                       image=image, render_fn=render_fn, error_fn=error_fn)
+    if 'oben offen' in text or 'unter' not in text or 'oberen halbkreis' not in text:
+        return None
+    arr = np.asarray(image)
+    if arr.shape != (height, width, 3):
+        return None
+
+    def normalized_render(svg, w, h):
+        raster = render_fn(reverse_arc_shaft_svg(svg), w, h)
+        return None if raster is None else np.flipud(raster)
+
+    normalized = text.replace('unten offen', 'oben offen').replace('oberen halbkreis', 'unteren halbkreis')
+    result = _fit_upper_open_arc_shaft(width, height, description=normalized,
+                                     image=np.flipud(arr), render_fn=normalized_render, error_fn=error_fn,
+                                     preserve_initial_error=True)
+    if result is None:
+        return None
+    result['svg'] = reverse_arc_shaft_svg(result['svg'])
+    result['rendered'] = np.flipud(result['rendered']).copy()
+    parameters = result['parameters'].copy()
+    parameters[1] = height - parameters[1]
+    parameters[6] = height - parameters[6] - parameters[8]
+    result.update(parameters=parameters, opening='down')
+    return result
+
+
+def _fit_upper_open_arc_shaft(width, height, *, description, image, render_fn, error_fn,
+                            preserve_initial_error=False):
     text = str(description or '').casefold()
     if not all(token in text for token in ('u-bogen', 'oben offen', 'schaft', 'horizontal', 'verlauf')):
         return None
@@ -83,7 +135,58 @@ def fit_arc_shaft(width, height, *, description, image, render_fn, error_fn):
                 and cx-rx < x < x+w < cx+rx and abs(x+w/2-cx) < rx*.24)
 
     parameters = [cx, cy, rx, ry, stroke, float(sx), float(start), float(ex-sx), float(bottom-start), *color, 0., 0., 0.]
-    result = _register(parameters, 9, build, valid, arr, render_fn, error_fn, 'raster_arc_shaft_v1')
+    loss_fn = None
+    if preserve_initial_error:
+        reference_edges = cv2.Canny(arr, 50, 140) > 0
+        reference_distance = cv2.distanceTransform((~reference_edges).astype(np.uint8), cv2.DIST_L2, 3)
+
+        def loss_fn(original, raster):
+            edges = cv2.Canny(raster, 50, 140) > 0
+            if edges.any() and reference_edges.any():
+                distance = cv2.distanceTransform((~edges).astype(np.uint8), cv2.DIST_L2, 3)
+                edge = (np.exp(-distance[reference_edges]).mean()+np.exp(-reference_distance[edges]).mean())/2
+            else:
+                edge = float(not edges.any() and not reference_edges.any())
+            return np.mean((original.astype(float)-raster.astype(float))**2)+64*(1-edge)
+
+    result = _register(parameters, 9, build, valid, arr, render_fn, error_fn, 'raster_arc_shaft_v1',
+                       preserve_initial_error=preserve_initial_error, loss_fn=loss_fn)
+    if preserve_initial_error and len(profile) >= 7:
+        # Boundary pixels blend the shaft with white. Infer a piecewise linear
+        # light-centred field from interior columns instead of copying that
+        # antialiasing into the native gradient. Keep the sampled-field candidate
+        # for profiles that are not explained by this simpler model.
+        positions = (np.arange(1, len(profile)-1)+.5)/len(profile)
+        models = []
+        for center in np.linspace(.3, .7, 41):
+            left_weight = np.maximum(0., 1.-positions/center)
+            right_weight = np.maximum(0., (positions-center)/(1.-center))
+            weights = np.c_[left_weight, 1.-left_weight-right_weight, right_weight]
+            colors = np.linalg.lstsq(weights, profile[1:-1], rcond=None)[0]
+            residual = float(np.mean((weights@colors-profile[1:-1])**2))
+            models.append((residual, center, colors))
+        residual, center, colors = min(models, key=lambda item: item[0])
+        if residual < 36 and colors[1].mean() > max(colors[0].mean(), colors[2].mean())+8:
+            def linear_build(p):
+                svg = build(p[:12].tolist()+[0., 0., 0.])
+                root = ET.fromstring(svg)
+                gradient = next(e for e in root.iter() if e.tag.endswith('linearGradient'))
+                gradient.clear()
+                gradient.attrib.update(id='shaft_color', x1='0', y1='0', x2='1', y2='0')
+                for offset, shade in zip((0., center, 1.), (p[12:15], p[15:18], p[18:21])):
+                    ET.SubElement(gradient, '{http://www.w3.org/2000/svg}stop',
+                                  offset=f'{offset:g}', **{'stop-color': _hex(shade)})
+                return ET.tostring(root, encoding='unicode')+'\n'
+
+            linear = _register(parameters[:12]+colors.reshape(-1).tolist(), 9, linear_build,
+                               valid, arr, render_fn, error_fn, 'raster_arc_shaft_v1',
+                               preserve_initial_error=True, loss_fn=loss_fn)
+            evaluations = (result['evaluations'] if result else 0)+(linear['evaluations'] if linear else 0)
+            if linear is not None and (result is None or
+                    loss_fn(arr, linear['rendered']) < loss_fn(arr, result['rendered'])):
+                result = linear
+            if result is not None:
+                result['evaluations'] = evaluations
     if result is None:
         return None
     # The fitted analytic arc must explain its input; refinement may not erase

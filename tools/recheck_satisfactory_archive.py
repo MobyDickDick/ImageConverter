@@ -73,6 +73,61 @@ def recheck(archive: Path, output: Path) -> dict:
     return report
 
 
+def recheck_partitioned(archive: Path, output: Path, max_cases: int) -> dict:
+    """Bound lifetimes; retain semantic families and the compatibility cohort."""
+    if max_cases < 1:
+        raise ValueError('max_cases must be positive')
+    if output.exists():
+        raise ValueError('Use a fresh recheck output directory')
+    index = json.loads((archive/'index.json').read_text(encoding='utf-8'))
+    families = {}
+    for case in index['cases']:
+        mode = case['execution_mode']
+        # Compatibility transfer can use donors from another family in the
+        # same batch. Its entire cohort must retain that shared context.
+        key = (mode, '' if mode == 'standard' else case['variant'].split('_', 1)[0])
+        families.setdefault(key, []).append(case)
+    partitions, pending = [], []
+    for key in sorted(families):
+        cases = families[key]
+        if len(cases) > max_cases:
+            raise ValueError('A family or compatibility cohort exceeds --max-cases-per-worker; increase the limit')
+        if len(pending)+len(cases) > max_cases:
+            partitions.append(pending)
+            pending = []
+        pending.extend(cases)
+    if pending:
+        partitions.append(pending)
+    if not partitions:
+        raise ValueError('The satisfactory archive is empty')
+    output.mkdir(parents=True)
+    results, drifts, workers = [], [], []
+    for number, cases in enumerate(partitions, 1):
+        snapshot = output/f'archive_{number:02}'
+        snapshot.mkdir()
+        subset = {**index, 'case_count': len(cases), 'cases': [
+            {**case, 'image': str((archive/case['image']).resolve()),
+             'svg': str((archive/case['svg']).resolve())} for case in cases]}
+        (snapshot/'index.json').write_text(json.dumps(subset, indent=2)+'\n', encoding='utf-8')
+        shutil.copyfile(archive/'descriptions.xml', snapshot/'descriptions.xml')
+        worker = recheck(snapshot, output/f'worker_{number:02}')
+        results.extend(worker['cases'])
+        drifts.extend(worker['higher_mean_delta2'])
+        workers.append({'worker': number, 'case_count': worker['case_count'],
+                        'passed': worker['passed']})
+        print(f"Archive worker {number}/{len(partitions)}: {worker['passed']}/{worker['case_count']}", flush=True)
+    expected = sorted(case['variant'] for case in index['cases'])
+    if sorted(case['variant'] for case in results) != expected:
+        raise ValueError('Partitioned recheck lost or duplicated archive cases')
+    report = dict(schema_version='satisfactory_archive_recheck_v1', case_count=len(results),
+                  passed=sum(case['passed'] for case in results), cases=results,
+                  threshold=DEFAULT_THRESHOLD, higher_mean_delta2=drifts,
+                  workers=workers, max_cases_per_worker=max_cases,
+                  reference_access={'blocked_svg_reads': []})
+    (output/'report.json').write_text(json.dumps(report, indent=2, sort_keys=True)+'\n', encoding='utf-8')
+    return report
+
+
 def main() -> int:
     if len(sys.argv)>1 and sys.argv[1]=='--_worker':
         random.seed(0)
@@ -87,8 +142,13 @@ def main() -> int:
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--archive',type=Path,default=ROOT/ARCHIVE)
     parser.add_argument('--output-dir',type=Path,required=True)
+    parser.add_argument('--max-cases-per-worker',type=int,default=0,
+                        help='Bound each process while retaining complete families; 0 uses one batch')
     args=parser.parse_args()
-    report=recheck(args.archive.resolve(),args.output_dir.resolve())
+    if args.max_cases_per_worker < 0:
+        parser.error('--max-cases-per-worker must be nonnegative')
+    report=(recheck_partitioned(args.archive.resolve(),args.output_dir.resolve(),args.max_cases_per_worker)
+            if args.max_cases_per_worker else recheck(args.archive.resolve(),args.output_dir.resolve()))
     print(f"Satisfactory archive recheck: {report['passed']}/{report['case_count']}")
     return 0 if report['passed']==report['case_count'] else 2
 

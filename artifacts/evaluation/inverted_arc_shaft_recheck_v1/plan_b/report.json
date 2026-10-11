@@ -1,0 +1,727 @@
+{
+  "cases": [
+    {
+      "blocked_svg_reads": [],
+      "case_id": "original",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.\n",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "0b31d8b839264718601cd520d0b6043b99cba9dece227ade7fc7d40280920716",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9868798851966858,
+        "foreground_iou": 1.0,
+        "foreground_mse": 5.565896208281629e-05,
+        "normalized_mse": 1.0225849109701812e-05
+      },
+      "output_sha256": "7046817afd73b58cdda35e64fbea150b2e4ca75e77e2ef8d6b8959a13461890d",
+      "output_svg": "original.svg",
+      "reference_svg_sha256": "09bb8e7266f260be2df1d092bf7fb8f55010f96749482c250c789f6937c8e47b",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.0,
+        "relative_y": 0.0,
+        "scale": 1.0
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_01",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig kleiner dargestellt und etwas nach links und oben versetzt.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "f9a9d2f8189ba84db20e07b3b477e542c80359189b2e6f01d8c53ee720d3d906",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9893028140068054,
+        "foreground_iou": 0.9954841946813848,
+        "foreground_mse": 0.00059307407354936,
+        "normalized_mse": 0.00011545116285560653
+      },
+      "output_sha256": "2d5e11800ba9f74b53d0496645c09fd54476095b967dd1574bacf9d3ebf83a70",
+      "output_svg": "probe_01.svg",
+      "reference_svg_sha256": "4d4abe06caa09b0206373482c0bed6191577fe3340e908eab9ce0b7c622bd2bf",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.00021231,
+        "relative_y": -0.01105334,
+        "scale": 0.99902219
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_02",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach rechts und unten verschoben.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "d753ac3349e1adc8533eabb9a27c40a2fa5a53c2fc3ba072b6408bc95f758059",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.922399640083313,
+        "foreground_iou": 0.9970674486803519,
+        "foreground_mse": 0.0009004406747408211,
+        "normalized_mse": 0.00022710446501150727
+      },
+      "output_sha256": "7cdadc63ce8cd1cdb3fe822725f71945838d00726a559548cf9631b466c65bfc",
+      "output_svg": "probe_02.svg",
+      "reference_svg_sha256": "e8cf07157ffacb07fec6ac5c27a2f085725aeae1541a787e0afaff5db4009ab0",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01026981,
+        "relative_y": 0.01308813,
+        "scale": 1.02273091
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_03",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist etwas gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten verschoben.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "417fdf3394f4b2b6462350d5a53aeed58699cf632ae6422a6a826f29a11ff49c",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9086096882820129,
+        "foreground_iou": 0.9945429740791268,
+        "foreground_mse": 0.000522836169693619,
+        "normalized_mse": 0.00011534863733686507
+      },
+      "output_sha256": "d98f01ee911af40fd0fdf7c9a28ddef426b7c6a864c0a25e3f8e60b9d7f914a2",
+      "output_svg": "probe_03.svg",
+      "reference_svg_sha256": "f13155b9b83c2714007af0d17c3c5417d1547ff894a831ad2de6aa5e31fbd7ff",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02481828,
+        "relative_y": 0.02371981,
+        "scale": 1.04960849
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_04",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist etwas gr\u00f6\u00dfer dargestellt und ein wenig nach rechts und unten verschoben.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "dc4e12ee473af0f8ceaf37f52150d42dcb0651c5004163eb632e3f16a3935987",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8719783425331116,
+        "foreground_iou": 0.9944903581267218,
+        "foreground_mse": 0.0008930355543270707,
+        "normalized_mse": 0.00018812782946042717
+      },
+      "output_sha256": "fedef43848c65a11e51f0e85eec5d198085e30fd6bd6ac8ef503ebfc2da6b672",
+      "output_svg": "probe_04.svg",
+      "reference_svg_sha256": "748143a0a1e12e012428d115484926e4ccd45661217ffba757e80cd88c803d9d",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01060849,
+        "relative_y": 0.00549911,
+        "scale": 1.04759334
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_05",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig gr\u00f6\u00dfer dargestellt und leicht nach rechts und oben versetzt.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "e7c5de9e8397da58d5d132b45d5e4f4c0bd978775b0169e3f309bfe8a2618364",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8977681398391724,
+        "foreground_iou": 0.9962494139709329,
+        "foreground_mse": 0.0004857328603975475,
+        "normalized_mse": 0.00010063929948955774
+      },
+      "output_sha256": "0ba669665e8d2898be6bfdf41c260c03897fd24a4614c6d4d2d6f7301624bfda",
+      "output_svg": "probe_05.svg",
+      "reference_svg_sha256": "fae0cd3ca1fd193ef13c03173d30462d78a3987b3baf9a348aa0ead04a1e4e0e",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01360589,
+        "relative_y": -0.01491027,
+        "scale": 1.02312726
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_06",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist ein wenig gr\u00f6\u00dfer dargestellt und ein wenig nach links und unten verschoben.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "58f01b56057eb82b0e0dac3383fae4aac0eaa072831a67a3d4401c47d25806c3",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.7573705911636353,
+        "foreground_iou": 0.9980970504281637,
+        "foreground_mse": 0.0003279862576164305,
+        "normalized_mse": 6.745679274899885e-05
+      },
+      "output_sha256": "59884ce85dff1a893a778f27c8bc55c809157e35b443806f7f1c176cc75b3613",
+      "output_svg": "probe_06.svg",
+      "reference_svg_sha256": "bf1e825358e2a2d3ac8b7d5db8abc61368cc27ef81f58d26d6a7c85323847f30",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02157012,
+        "relative_y": 0.01851427,
+        "scale": 1.02270736
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_07",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig kleiner dargestellt und leicht nach rechts und unten versetzt.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "3492b3c123ef069bd0cc7da5b0581cf02d945e772a47f42f5f8b97c14ef6f9b9",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9310621023178101,
+        "foreground_iou": 0.9984480082772892,
+        "foreground_mse": 0.0002008592418860644,
+        "normalized_mse": 3.778231257456355e-05
+      },
+      "output_sha256": "ba67982ba7961b1dde85bb4c0fc5197feda2ae5c599bf6990768ba6547c4597a",
+      "output_svg": "probe_07.svg",
+      "reference_svg_sha256": "fc70ecb65ac4d2c5339ed57d93e36b3890eddc5580adc031a8bee5a1fe2a5aaf",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01872709,
+        "relative_y": 0.01540555,
+        "scale": 0.97843326
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_08",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und ein wenig nach rechts und oben verschoben.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "b190e0440e0a267804ea3dd6885c576b4ee684dd6354da31b80135a602339833",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9236481189727783,
+        "foreground_iou": 0.9960959286112661,
+        "foreground_mse": 0.0007103135576471686,
+        "normalized_mse": 0.00012347075971774757
+      },
+      "output_sha256": "2f88d852f14d0a23c43e80c145452c81a0241435791465130117729452f21397",
+      "output_svg": "probe_08.svg",
+      "reference_svg_sha256": "3a5d0240e48b9068c96a1f741ac9a736bcff0af70a14f8793d6ebb36ca5113c5",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 5.696e-05,
+        "relative_y": -0.00487985,
+        "scale": 0.94373658
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_09",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die Darstellung ist ein wenig kleiner dargestellt und etwas nach links und unten verschoben.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "96d00c74104dfa4780ecf1256d53d24f830eff09c62303e7cf17a96d8046df7f",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9630329608917236,
+        "foreground_iou": 0.9932920536635707,
+        "foreground_mse": 0.0008548589539714158,
+        "normalized_mse": 0.00016432534903287888
+      },
+      "output_sha256": "4a884d032fd1815301de8d292b6b0ca2d260ec1a5189f0f7cb5be0512d65933f",
+      "output_svg": "probe_09.svg",
+      "reference_svg_sha256": "4e26c3a9aeaab84586f217af5c1cabb79e6c35f771dc3b16025185614ddc0e2a",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.00882165,
+        "relative_y": 0.02442217,
+        "scale": 0.97179237
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_10",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und ein wenig nach rechts und oben versetzt.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "85b5c5ae1cca12ce4412904c1dc68d65d00f9e2a1a11829a8d90da2c1eb32242",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.934390664100647,
+        "foreground_iou": 0.9988876529477196,
+        "foreground_mse": 0.00017562623543199152,
+        "normalized_mse": 3.080077294725925e-05
+      },
+      "output_sha256": "5dcfd2c6f5b96a8011358a7a5cf4ed13972c8f952a3a7605c20eefbbf746e8d5",
+      "output_svg": "probe_10.svg",
+      "reference_svg_sha256": "f5e57d2bc000ac3c5c35012586a94ac5a310f3edb97b324249861a7ed4cdcbc7",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00598912,
+        "relative_y": -0.00110556,
+        "scale": 0.95217827
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_11",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die Darstellung ist ein wenig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "076f5f388f3c2b12a55b5a2d1441ea2fe6a6fa73327b103bddd0bfe2e7efe611",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9631327390670776,
+        "foreground_iou": 0.9892262487757101,
+        "foreground_mse": 0.0006677534547634423,
+        "normalized_mse": 0.00013517780462279916
+      },
+      "output_sha256": "a6118de277a432b77064b0c501eee3f0af491bcab1e652470c201fd19700b4cd",
+      "output_svg": "probe_11.svg",
+      "reference_svg_sha256": "5165cba2403893d8d0626f2db094c26a7d62113b42d4e00c418d456da146ec28",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02025912,
+        "relative_y": 0.01202643,
+        "scale": 1.012383
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_12",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und etwas nach links und oben verschoben.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "ee246950cac1378428513ff82d2314c21384cc69865ca3dcec68a350639b3235",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9907536506652832,
+        "foreground_iou": 0.9962825278810409,
+        "foreground_mse": 0.000514499144628644,
+        "normalized_mse": 9.538293670630082e-05
+      },
+      "output_sha256": "8a7ed3097b7a0b4457d1ba69725ba72e5dc31c117f781b9a985144ffef40b9f1",
+      "output_svg": "probe_12.svg",
+      "reference_svg_sha256": "f4c8576553484a4d7980430402350153d7029fd8bf8e8331dfeb8d5f6070b82e",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0004267,
+        "relative_y": -0.00822311,
+        "scale": 0.98611741
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_13",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist ein wenig kleiner dargestellt und leicht nach links und oben versetzt.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "ff42393084812a33ad6f967a45036cde6f9f807486f1b29a9a650bf333dbd043",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.850982666015625,
+        "foreground_iou": 0.9977426636568849,
+        "foreground_mse": 0.0007821150356903672,
+        "normalized_mse": 0.00013427971862256527
+      },
+      "output_sha256": "5fd398e057c9833388d490751b5c83a4422090cdf85e8407df1c4feb771ce21b",
+      "output_svg": "probe_13.svg",
+      "reference_svg_sha256": "a1df2aa09ec0131b0d01013bf24eb6e2e12f9d56c19ef750c5039ad3ab7ccfa2",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.00492319,
+        "relative_y": -0.01528392,
+        "scale": 0.94132628
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_14",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas kleiner dargestellt und leicht nach rechts und unten verschoben.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "17bbecabdb6e9f6420542f9bbf0f156859c47e1429f36b5824a75be920608b9b",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8288644552230835,
+        "foreground_iou": 0.9934869739478958,
+        "foreground_mse": 0.0005356837064027786,
+        "normalized_mse": 0.00010734087118180469
+      },
+      "output_sha256": "b1d44df2051402c333b5fff286bd96e4c4a28f4576bb89a6744db9a3c2b5aa3f",
+      "output_svg": "probe_14.svg",
+      "reference_svg_sha256": "3a4a8b8b3a5d60cde038deda6f5302e8b2946ed276bb7769ea2c0421acce612f",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01678132,
+        "relative_y": 0.00418702,
+        "scale": 0.99457761
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_15",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig gr\u00f6\u00dfer dargestellt und ein wenig nach rechts und oben verschoben.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "8be92f4d6213af6a1fb6913554933cf4661e56c8d0ebaf63555f78325e5e09e6",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9307540655136108,
+        "foreground_iou": 0.9971883786316776,
+        "foreground_mse": 0.0006044391193427145,
+        "normalized_mse": 0.00012426433386281133
+      },
+      "output_sha256": "149c715fce00f88ea4658356081e0018e685386e698d58780245bdf5446e03bc",
+      "output_svg": "probe_15.svg",
+      "reference_svg_sha256": "1a298b121989a156affd672a1789cfc17d18425ef2c986790db7c48ed8de0b6c",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00464134,
+        "relative_y": -0.0226218,
+        "scale": 1.02713853
+      },
+      "width": 80
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_16",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringf\u00fcgig kleiner dargestellt und ein wenig nach links und oben verschoben.",
+      "failures": [],
+      "height": 130,
+      "input_sha256": "32d624a470121d5de6ced15177cf17224eae68891c3c9ad6b7d8f842fcb4cc2e",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9680259823799133,
+        "foreground_iou": 0.993322203672788,
+        "foreground_mse": 0.0007202686392702162,
+        "normalized_mse": 0.00012844863522332162
+      },
+      "output_sha256": "a68243d629500c685d775d5a1b73383be1965d48490d5c4e4dd95efcfd32cde3",
+      "output_svg": "probe_16.svg",
+      "reference_svg_sha256": "b26952af654432959fb994ae34e2910157a74486d464b8584f69cd51af5c9f46",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01471538,
+        "relative_y": -0.02446471,
+        "scale": 0.94347468
+      },
+      "width": 80
+    }
+  ],
+  "iterations": 64,
+  "limits": {
+    "max_foreground_mse": 0.04,
+    "max_normalized_mse": 0.01,
+    "max_path_commands": 160,
+    "max_svg_elements": 80,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85
+  },
+  "original_satisfactory": true,
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261011,
+  "source_description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.\n",
+  "source_description_sha256": "53c5765b754f6ca4529eeacd4f9249046c127e7bd9012bcec31f1afa26a936ad",
+  "source_image_sha256": "0b31d8b839264718601cd520d0b6043b99cba9dece227ade7fc7d40280920716",
+  "source_svg_sha256": "09bb8e7266f260be2df1d092bf7fb8f55010f96749482c250c789f6937c8e47b",
+  "status": "completed",
+  "summary": {
+    "completed": 17,
+    "failed": 0,
+    "passed": 17,
+    "required": 17,
+    "satisfactory": true
+  },
+  "timeout_seconds": 60,
+  "variations_started": true
+}

@@ -1,0 +1,384 @@
+{
+  "cases": [
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9630364179611206,
+        "foreground_iou": 0.9850249584026622,
+        "foreground_mse": 0.00191969342995435,
+        "normalized_mse": 0.0009965866338461637
+      },
+      "satisfactory": true,
+      "source": "GE9021_1M.jpg"
+    },
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9352058172225952,
+        "foreground_iou": 0.9830508474576272,
+        "foreground_mse": 0.0010976799530908465,
+        "normalized_mse": 0.000713998859282583
+      },
+      "satisfactory": true,
+      "source": "GE9021_1S.jpg"
+    },
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9590085744857788,
+        "foreground_iou": 0.9201331114808652,
+        "foreground_mse": 0.0019524977542459965,
+        "normalized_mse": 0.0010108847636729479
+      },
+      "satisfactory": true,
+      "source": "GE9021_2M.jpg"
+    },
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9469272494316101,
+        "foreground_iou": 0.9775280898876404,
+        "foreground_mse": 0.0010655077639967203,
+        "normalized_mse": 0.0006867785123176873
+      },
+      "satisfactory": true,
+      "source": "GE9021_2S.jpg"
+    },
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9626903533935547,
+        "foreground_iou": 0.9799666110183639,
+        "foreground_mse": 0.0010608392767608166,
+        "normalized_mse": 0.0005662651383318007
+      },
+      "satisfactory": true,
+      "source": "GE9021_3M.jpg"
+    },
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9451812505722046,
+        "foreground_iou": 0.9942857142857143,
+        "foreground_mse": 0.0007087677367962897,
+        "normalized_mse": 0.0004785509954672307
+      },
+      "satisfactory": true,
+      "source": "GE9021_3S.jpg"
+    },
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9726340770721436,
+        "foreground_iou": 0.9760479041916168,
+        "foreground_mse": 0.0005990428617224097,
+        "normalized_mse": 0.0002743004879448563
+      },
+      "satisfactory": true,
+      "source": "GE9021_4M.jpg"
+    },
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9574193358421326,
+        "foreground_iou": 0.9885057471264368,
+        "foreground_mse": 0.0003058947331737727,
+        "normalized_mse": 0.00021048315102234483
+      },
+      "satisfactory": true,
+      "source": "GE9021_4S.jpg"
+    },
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8889331817626953,
+        "foreground_iou": 0.978494623655914,
+        "foreground_mse": 0.0010848966194316745,
+        "normalized_mse": 0.0005493613425642252
+      },
+      "satisfactory": true,
+      "source": "GE9021_5M.jpg"
+    },
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9543662071228027,
+        "foreground_iou": 0.9942857142857143,
+        "foreground_mse": 0.0007083576056174934,
+        "normalized_mse": 0.0004955017357133329
+      },
+      "satisfactory": true,
+      "source": "GE9021_5S.jpg"
+    },
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8970751762390137,
+        "foreground_iou": 0.9866888519134775,
+        "foreground_mse": 0.002156037138774991,
+        "normalized_mse": 0.0011133793741464615
+      },
+      "satisfactory": true,
+      "source": "GE9021_6M.jpg"
+    },
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9571657776832581,
+        "foreground_iou": 0.9830508474576272,
+        "foreground_mse": 0.0011954840738326311,
+        "normalized_mse": 0.0007677217945456505
+      },
+      "satisfactory": true,
+      "source": "GE9021_6S.jpg"
+    },
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9624885320663452,
+        "foreground_iou": 0.9136212624584718,
+        "foreground_mse": 0.0013144444674253464,
+        "normalized_mse": 0.0006884275935590267
+      },
+      "satisfactory": true,
+      "source": "GE9021_7M.jpg"
+    },
+    {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9372258186340332,
+        "foreground_iou": 0.9830508474576272,
+        "foreground_mse": 0.0007207135786302388,
+        "normalized_mse": 0.00047499671927653253
+      },
+      "satisfactory": true,
+      "source": "GE9021_7S.jpg"
+    }
+  ],
+  "passed": 14,
+  "required": 14
+}
