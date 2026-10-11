@@ -2,6 +2,7 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [AC0712: linker Griff mit Strich und Punkt, sechs CLI-Abnahmen (2026-10-11)](next_arbeitspaket_2026-10-11_ac0712_1_s.md)
 - [Katalog-CI: Timeout-Budget, Wiederaufnahme und Abbruchdiagnostik (2026-10-11)](catalog_timeout_fix_2026-10-11.md)
 - [GE9012: Rechtspfeil, 14 CLI-Abnahmen und 17 unabhängige Zufallsfälle (2026-10-10)](next_arbeitspaket_2026-10-10_ge9012_1m.md)
 - [GE9014: Links-Pfeil, 14 CLI-Abnahmen und 17 unabhängige Zufallsfälle (2026-10-10)](next_arbeitspaket_2026-10-10_ge9014_1m.md)

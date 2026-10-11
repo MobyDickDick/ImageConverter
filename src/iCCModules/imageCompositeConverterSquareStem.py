@@ -109,10 +109,49 @@ def _fit_vertical_stem_square(geometry_ir, *, image, render_fn, error_fn, descri
     return fitted
 
 
+def _fit_left_stem_square(geometry_ir, *, image, render_fn, error_fn, description):
+    """Normalize the handle by a half-turn, observing marks in original axes."""
+    original = geometry_ir[0]
+    canonical = copy.deepcopy(geometry_ir)
+    x, y, w, h = original['body_bbox']
+    canonical[0].update(kind='RightStemSquareKelleGlyph',
+        body_bbox=[1-x-w, 1-y-h, w, h],
+        connector=[[1-u, 1-v] for u, v in original['connector']])
+
+    def restore(ir):
+        result = copy.deepcopy(ir)
+        x, y, w, h = result[0]['body_bbox']
+        result[0].update(kind=original['kind'], body_bbox=[1-x-w, 1-y-h, w, h],
+            connector=[[1-u, 1-v] for u, v in result[0]['connector']])
+        for mark in result[1:]:
+            mark['points'] = [[1-u, 1-v] for u, v in mark['points']]
+        return result
+
+    def render(candidate):
+        raster = render_fn(restore(candidate))
+        return None if raster is None else cv2.rotate(raster, cv2.ROTATE_180)
+
+    fitted = fit_square_stem(canonical, image=cv2.rotate(image, cv2.ROTATE_180),
+        description=description, render_fn=render,
+        error_fn=lambda raster: error_fn(cv2.rotate(raster, cv2.ROTATE_180)),
+        _marks_in_original='left')
+    if fitted is not None:
+        fitted['geometry_ir'] = restore(fitted['geometry_ir'])
+        fitted['rendered'] = cv2.rotate(fitted['rendered'], cv2.ROTATE_180)
+    return fitted
+
+
 def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', _marks_in_original=False):
     desc = description.casefold()
     marked = ('punkt' in desc and any(word in desc for word in ('schräg', 'schraeg', 'diagonal'))
               and not any(word in desc for word in ('ohne markierung', 'ohne innenmarkierung', 'ohne punkt')))
+    if (len(geometry_ir) == 1 and geometry_ir[0].get('kind') == 'LeftRotatedSquareKelleTGlyph'
+            and not geometry_ir[0].get('label') and marked):
+        arr = np.asarray(image)
+        if arr.ndim != 3 or arr.shape[2] != 3 or not arr.size or not np.isfinite(arr).all():
+            return None
+        return _fit_left_stem_square(geometry_ir, image=arr, render_fn=render_fn,
+            error_fn=error_fn, description=description)
     if (len(geometry_ir) == 1 and geometry_ir[0].get('kind') in {'Rotated180SquareKelleGlyph', 'UprightSquareKelleGlyph'}
             and not geometry_ir[0].get('label')
             and marked):
@@ -156,7 +195,9 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', 
         # Observe the slash and dot in the requested orientation. Only the
         # square/handle fit uses canonical axes; the marking is not rotated
         # into a different semantic topology.
-        if _marks_in_original == 'bottom':
+        if _marks_in_original == 'left':
+            marks = _observe_slash_and_dot(np.rot90(interior, 2), w-(right-margin+1), h-(bottom-margin+1))
+        elif _marks_in_original == 'bottom':
             marks = _observe_slash_and_dot(np.rot90(interior,-1), h-(bottom-margin+1), left+margin)
         else:
             marks = _observe_slash_and_dot(np.rot90(interior), top+margin, w-(right-margin+1))
@@ -214,7 +255,8 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', 
             )
             for name, points in shapes:
                 if _marks_in_original:
-                    points = ([(py,h-px) for px,py in points] if _marks_in_original == 'bottom'
+                    points = ([(w-px,h-py) for px,py in points] if _marks_in_original == 'left'
+                              else [(py,h-px) for px,py in points] if _marks_in_original == 'bottom'
                               else [(w-py,px) for px,py in points])
                 if not all(x+bs/2 < px < x+bw-bs/2 and y+bs/2 < py < y+bh-bs/2 for px,py in points):
                     return None
@@ -243,6 +285,17 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', 
     best = evaluate(p)
     if best is None:
         return None
+    if _marks_in_original == 'left':
+        # A body touching the canvas can put its fill into the two-pixel
+        # contour sample. Compare the actual outer rim as a second measured
+        # seed; the rendered pixel objective decides which seed to retain.
+        rim = np.concatenate((arr[top,left:right+1], arr[bottom,left:right+1],
+                              arr[top:bottom+1,left], arr[top:bottom+1,right]))
+        probe = p.copy()
+        probe[11:14] = np.median(rim, axis=0)
+        result = evaluate(probe)
+        if result is not None and result[0] < best[0]-1e-9:
+            p, best = probe, result
     for step,shade in ((1.,24.),(.5,12.),(.25,6.),(.125,3.)):
         # The marked topology adds two contours and a contrast color. Allow
         # them to settle jointly with the border, with a fixed upper bound.

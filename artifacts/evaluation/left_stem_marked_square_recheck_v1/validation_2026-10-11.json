@@ -1,0 +1,81 @@
+{
+  "schema_version": "left_stem_marked_square_completion_v1",
+  "date": "2026-10-11",
+  "branch": "codex/ac0712-quality-2026-10-11",
+  "baseline_revision": "0c793f8727107aa14ddf8fdf4669444a5d506b18",
+  "toolchain": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "opencv": "4.14.0",
+    "pymupdf": "1.26.7"
+  },
+  "catalogs": [
+    {
+      "path": "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
+      "description_matches": 6,
+      "sha256": "3fa105c843d782fee7720889a1c7f70dbce15d7a72e8b08bb3970c64a36bcf44"
+    },
+    {
+      "path": "artifacts/descriptions/Finale_Wurzelformen_V3.xml",
+      "description_matches": 6,
+      "sha256": "c969a9dd29edb67e0fd8e5de449f02e53c1dcb0e37866bd442b916f8b60284d9"
+    }
+  ],
+  "tests": [
+    {
+      "profile": "full_standard",
+      "passed": 2245,
+      "skipped": 30,
+      "seconds": 2656.8,
+      "local_log": ".tmp/ac0712-full-1.log"
+    },
+    {
+      "profile": "focused",
+      "passed": 100,
+      "skipped": 0,
+      "seconds": 346.97,
+      "local_log": ".tmp/ac0712-focused-final.log"
+    },
+    {
+      "profile": "preservation",
+      "passed": 10,
+      "skipped": 0,
+      "seconds": 58.21,
+      "local_log": ".tmp/ac0712-preservation.log"
+    }
+  ],
+  "regular_gates": {
+    "case_count": 6,
+    "improved": 6,
+    "satisfactory": 6,
+    "technically_completed": 6
+  },
+  "strict_jpg_cases": 6,
+  "plan_b": {
+    "required": 17,
+    "completed": 17,
+    "passed": 17,
+    "failed": 0,
+    "satisfactory": true
+  },
+  "reproducible_vectors": 12,
+  "frozen_baselines_unchanged": 6,
+  "blocked_svg_reads": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "archive": {
+    "passed": 192,
+    "case_count": 192,
+    "older_index_entries_unchanged": 186,
+    "known_higher_mean_delta2": 22
+  },
+  "syntax_check": "pass",
+  "cli_help": "pass",
+  "runtime_id_ratchet": "pass (0 occurrences)",
+  "diff_check": "pass (cr-at-eol)"
+}

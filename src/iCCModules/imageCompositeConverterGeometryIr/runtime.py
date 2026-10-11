@@ -847,6 +847,8 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         return elements
 
     if left_rotated_square_kelle_t_hint:
+        observed_marks = ('punkt' in desc and _has_any(desc, ('schräg', 'schraeg', 'diagonal'))
+                          and not _has_any(desc, ('buchstab', 'mit text', 'mit beschrift', 'label')))
         elements.append(
             {
                 "kind": "LeftRotatedSquareKelleTGlyph",
@@ -858,7 +860,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "connector": [[0.000, 0.500], [0.378, 0.500]],
                 "connector_stroke": "#808080",
                 "connector_width": 0.080,
-                "label": "T",
+                "label": "" if observed_marks else "T",
                 "label_center": [0.611, 0.520],
                 "label_fill": "#dedede",
                 "font_size": 0.440,
@@ -2076,12 +2078,13 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             label_fill = html.escape(str(element.get("label_fill", "#dedede")))
             font_size = float(element.get("font_size", 0.440)) * min(w, h)
             font_weight = html.escape(str(element.get("font_weight", "600")))
-            svg.append(
-                f'  <text id="{element_id}_label" x="{_fmt(float(raw_label_center[0]) * w)}" '
-                f'y="{_fmt(float(raw_label_center[1]) * h)}" fill="{label_fill}" '
-                f'font-family="Arial, Helvetica, sans-serif" font-size="{_fmt(font_size)}" '
-                f'font-weight="{font_weight}" text-anchor="middle" dominant-baseline="middle">{label}</text>'
-            )
+            if label:
+                svg.append(
+                    f'  <text id="{element_id}_label" x="{_fmt(float(raw_label_center[0]) * w)}" '
+                    f'y="{_fmt(float(raw_label_center[1]) * h)}" fill="{label_fill}" '
+                    f'font-family="Arial, Helvetica, sans-serif" font-size="{_fmt(font_size)}" '
+                    f'font-weight="{font_weight}" text-anchor="middle" dominant-baseline="middle">{label}</text>'
+                )
         elif kind in valve_gradient_kinds:
             stroke = html.escape(str(element.get("stroke", "#969696")))
             connector_stroke = html.escape(str(element.get("connector_stroke", "#8f8f8f")))

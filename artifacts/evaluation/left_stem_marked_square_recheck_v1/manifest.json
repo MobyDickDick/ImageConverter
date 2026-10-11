@@ -1,0 +1,83 @@
+{
+  "stem_direction": "left",
+  "provenance": {
+    "execution_mode": "semantic-only",
+    "baseline_revision": "0c793f8727107aa14ddf8fdf4669444a5d506b18",
+    "commit": "0c793f8727107aa14ddf8fdf4669444a5d506b18",
+    "seed": 0,
+    "baseline_kind": "fresh_original_description_cli",
+    "toolchain": {
+      "numpy": "2.2.6",
+      "opencv": "4.14.0",
+      "pymupdf": "1.26.7"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_symbol_00",
+      "source": "AC0712_1_L.jpg",
+      "image": "../../images_to_convert/AC0712_1_L.jpg",
+      "source_sha256": "7e0c93bd6e04ea21137785fbaadd167f0cc2ca11d3d31f2f5ed90ff671428ef4",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Kelle mit Quadrat, 90\u00b0 nach links gedreht. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen waagerechten Griff, der von der linken Quadratseite nach links f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_00.svg",
+      "after_svg": "after/anonymous_symbol_00.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_01",
+      "source": "AC0712_1_M.jpg",
+      "image": "../../images_to_convert/AC0712_1_M.jpg",
+      "source_sha256": "73a40d5fb6ba22cd13ce324f76b63d5624af824d0896e817f04fb0c0b89cf369",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Kelle mit Quadrat, 90\u00b0 nach links gedreht. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen waagerechten Griff, der von der linken Quadratseite nach links f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_01.svg",
+      "after_svg": "after/anonymous_symbol_01.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_02",
+      "source": "AC0712_1_S.jpg",
+      "image": "../../images_to_convert/AC0712_1_S.jpg",
+      "source_sha256": "b535c54e43b6e5102c572f5f936343960b50d9d8f3b57358f5f570f890de3531",
+      "role": "development",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Kelle mit Quadrat, 90\u00b0 nach links gedreht. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen waagerechten Griff, der von der linken Quadratseite nach links f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_02.svg",
+      "after_svg": "after/anonymous_symbol_02.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_03",
+      "source": "AC0712_L.jpg",
+      "image": "../../images_to_convert/AC0712_L.jpg",
+      "source_sha256": "9f0244779627b4a7805a1a6768aa122fbc27aecb78a405b0643c1ed928ad00fa",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Kelle mit Quadrat, 90\u00b0 nach links gedreht. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen waagerechten Griff, der von der linken Quadratseite nach links f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_03.svg",
+      "after_svg": "after/anonymous_symbol_03.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_04",
+      "source": "AC0712_M.jpg",
+      "image": "../../images_to_convert/AC0712_M.jpg",
+      "source_sha256": "0a4a422c451fec2671fb30d07ae639fcf4688eff93852699c1d67823f537b260",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Kelle mit Quadrat, 90\u00b0 nach links gedreht. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen waagerechten Griff, der von der linken Quadratseite nach links f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_04.svg",
+      "after_svg": "after/anonymous_symbol_04.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_05",
+      "source": "AC0712_S.jpg",
+      "image": "../../images_to_convert/AC0712_S.jpg",
+      "source_sha256": "e24aa279bdd32995bcf8137393330f14958e3f6d84576e6b9baac5e1dfe400f9",
+      "role": "holdout",
+      "baseline_description": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Kelle mit Quadrat, 90\u00b0 nach links gedreht. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen waagerechten Griff, der von der linken Quadratseite nach links f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_05.svg",
+      "after_svg": "after/anonymous_symbol_05.svg"
+    }
+  ]
+}

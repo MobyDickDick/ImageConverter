@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-10, nach GE9014-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-11, nach AC0712-Abnahme)
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -118,11 +118,18 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `GE9012_1M` – `mean_delta2=13013.489258`, `normalized_mse=0.066710`.
-2. `AC0712_1_S` – `mean_delta2=12600.799805`, `normalized_mse=0.064595`.
-3. `AC0734_1_S` – `mean_delta2=12591.893555`, `normalized_mse=0.064549`.
-4. `GE9012_2M` – `mean_delta2=12534.752930`, `normalized_mse=0.064256`.
-5. `GE9012_7M` – `mean_delta2=12271.906250`, `normalized_mse=0.062909`.
+1. `AC0734_1_S` – `mean_delta2=12591.893555`, `normalized_mse=0.064549`.
+2. `GE9021_1M` – `mean_delta2=12270.718750`, `normalized_mse=0.062903`.
+3. `SE0081` – `mean_delta2=11975.778320`, `normalized_mse=0.061391`.
+4. `GE0039_M` – `mean_delta2=11544.757812`, `normalized_mse=0.059181`.
+5. `GE9022_2M` – `mean_delta2=11451.323242`, `normalized_mse=0.058702`.
+
+`AC0712_1_S` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
+Beschreibung und allgemeiner Linksgriff-/Strich-/Punktregistrierung beide
+regulären Gates ohne Pflichtmetrikregression und die strengeren Pixelgrenzen.
+Die frische Zielmetrik sinkt von `3822.055908` auf `261.666656`; eine unabhängige
+Vorlage besteht 17/17 echte CLI-Fälle. Details:
+`docs/next_arbeitspaket_2026-10-11_ac0712_1_s.md`.
 
 `GE9014_1M` und alle 13 Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und allgemeiner horizontaler Pfeilregistrierung beide regulären

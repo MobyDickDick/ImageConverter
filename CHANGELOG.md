@@ -1,3 +1,4 @@
+- Register leftward square handles with raster-observed slash/dot marks, correct both standalone descriptions, and validate six real variants plus an independent 17-case CLI battery (2026-10-11).
 - Increase the catalog CI budget to 180 seconds, retry failed CSV entries on resume, and flush converter output before process timeouts (2026-10-11).
 - Correct both standalone rightward-arrow catalog descriptions, activate existing raster registration without runtime changes, and validate 14 real variants plus an independent 17-case CLI battery (2026-10-10).
 - Register horizontal triangle/gradient-shaft arrows from pixels and standalone descriptions, preserve all 28 existing vertical arrows, and validate 14 catalog variants plus an independent 17-case CLI battery (2026-10-10).

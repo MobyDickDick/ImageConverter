@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-11)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `427` · Erledigt `401` · Offen `26`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `428` · Erledigt `402` · Offen `26`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -17,11 +17,22 @@ focused on the actual project scope.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-10)
+### Aktueller Plan-B-Stand (2026-10-11)
+
+- [x] **AC0712 – linker Griff mit Strich und Punkt:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; sechs Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage 17/17, zwei Abnahmen reproduzieren sämtliche SVGs und Gates. Details: `docs/next_arbeitspaket_2026-10-11_ac0712_1_s.md`.
+
+**Neuester Abschluss:** `AC0712_1_S` und fünf Holdouts auf
+`codex/ac0712-quality-2026-10-11`. Frische Zielmetrik `3822.055908 → 261.666656`.
+Erfolgsübersicht: 192/192 erneute Review-Pässe; alle 186 bisherigen Indexeinträge
+und die 22 bekannten älteren Kompatibilitätsdrifts sind unverändert.
+Standardtestlauf: 2.245 bestanden, 30 bestehende Skips, null Fehler;
+100 fokussierte und zehn Bestandsschutz-/Smoke-Tests bestehen ebenfalls.
+Nächste reguläre Rotation: `AC0734_1_S`, `GE9021_1M`, `SE0081`, `GE0039_M`,
+`GE9022_2M`. Die sechs erledigten Varianten sind ausgeschlossen.
 
 - [x] **GE9012 – Rechtspfeil mit Verlaufsschaft:** eigenständige Beschreibungen aktivieren die vorhandene allgemeine Rasterregistrierung ohne Runtime-Änderung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression, unabhängige CLI-Vorlage 17/17. Details: `docs/next_arbeitspaket_2026-10-10_ge9012_1m.md`.
 
-**Neuester Abschluss:** `GE9012_1M` und 13 Holdouts auf
+**Vorheriger Abschluss:** `GE9012_1M` und 13 Holdouts auf
 `codex/ge9012-quality-2026-10-10`. Zielmetrik `13193.511719 → 18.595833`;
 149 fokussierte Tests, 17/17 strenge CLI-Fälle und zehn Bestandsschutz-/Smoke-Tests.
 Zwei CLI-Abnahmen reproduzieren alle 28 Vorher-/Nachher-SVGs und Gateberichte.
