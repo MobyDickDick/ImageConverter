@@ -61,6 +61,11 @@ def report_failure(variant: str, status: str, returncode: int) -> None:
 
 def conversion_environment() -> dict[str, str]:
     env = os.environ.copy()
+    # Each image is already supervised, but a native render crash must not
+    # destroy its converter. Reuse bounded child processes to keep optimization
+    # probes affordable; honor explicitly configured renderer modes.
+    env.setdefault('IMAGE_CONVERTER_ISOLATE_SVG_RENDER', '1')
+    env.setdefault('IMAGE_CONVERTER_REUSE_RENDER_WORKER', '1')
     py_tag = f"py{sys.version_info.major}{sys.version_info.minor}"
     vendor_site_packages = PROJECT_ROOT / "vendor" / f"linux-{py_tag}" / "site-packages"
     if vendor_site_packages.is_dir():

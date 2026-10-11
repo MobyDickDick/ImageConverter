@@ -1,0 +1,235 @@
+[CATALOG] shard=0/1 selected=4 completed=0 pending=4
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere AC0800_M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0800_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
+[INFO] AC0800: Elementvalidierung gestartet | Runden=8, Elemente=circle | Laufzeit=0.0s
+[WARN] AC0800_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.337209, localized_error_fraction=0.770033).
+[INFO] Konvertiert AC0800_M.jpg | Parameter: mode=semantic_badge, label=, variant_name=AC0800_M | Qualität: Optimierungsfehler/Pixel=0.006012, Mean-Delta²=53.910000, RGB-RMSE/Kanal=4.239104, Raumscore=151.909152, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere AC0800_M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0800_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
+[INFO] AC0800: Elementvalidierung gestartet | Runden=7, Elemente=circle | Laufzeit=0.0s
+[WARN] AC0800_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.337209, localized_error_fraction=0.770033).
+[INFO] Konvertiert AC0800_M.jpg | Parameter: mode=semantic_badge, label=, variant_name=AC0800_M | Qualität: Optimierungsfehler/Pixel=0.006012, Mean-Delta²=53.910000, RGB-RMSE/Kanal=4.239104, Raumscore=151.909152, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere AC0800_M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0800_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
+[INFO] AC0800: Elementvalidierung gestartet | Runden=9, Elemente=circle | Laufzeit=0.0s
+[WARN] AC0800_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.337209, localized_error_fraction=0.770033).
+[INFO] Konvertiert AC0800_M.jpg | Parameter: mode=semantic_badge, label=, variant_name=AC0800_M | Qualität: Optimierungsfehler/Pixel=0.006012, Mean-Delta²=53.910000, RGB-RMSE/Kanal=4.239104, Raumscore=151.909152, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=.tmp\mupdf-preservation-seeded\native-output\shard-00-of-01\reports\overview_diff_tiles.png, svg=.tmp\mupdf-preservation-seeded\native-output\shard-00-of-01\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: .tmp\mupdf-preservation-seeded\native-output\shard-00-of-01
+[CATALOG] 1/4 AC0800_M: completed rc=0 elapsed=1.0s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] AC0836_M.jpg: Frühe Qualitätsprobe mit 3 Iterationen (Erfolgsbasis=1.000000, Abbruchgrenze=8.000000).
+[INFO] Konvertiere AC0836_M.jpg | Parameter: Iterationen=3, max. Validierungsrunden=8
+
+--- Verarbeite AC0836_M.jpg ---
+Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC". Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC, SEMANTIC: waagrechter Strich rechts vom Kreis
+[INFO] AC0836: Elementvalidierung gestartet | Runden=3, Elemente=circle,stem,text | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'stem' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.77% -> 85.98% | mittlere Pixelabweichung (MAE, kleiner=besser): 26.083 -> 35.750 | Mean-Delta² (kleiner=besser): 6468.463 -> 10481.027 | Qualitätsgewinn=-9.667 (-37.06%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 2/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'stem' | Laufzeit=0.1s
+[INFO] AC0836: Runde 2/3: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 2/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.98% -> 88.78% | mittlere Pixelabweichung (MAE, kleiner=besser): 35.750 -> 28.603 | Mean-Delta² (kleiner=besser): 10481.027 -> 7780.809 | Qualitätsgewinn=+7.147 (+19.99%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 3/3 gestartet | Laufzeit=0.1s
+[INFO] AC0836: Runde 3/3: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] AC0836: Runde 3/3: optimiere Element 'stem' | Laufzeit=0.1s
+[INFO] AC0836: Runde 3/3: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 3/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 88.78% -> 88.78% | mittlere Pixelabweichung (MAE, kleiner=besser): 28.603 -> 28.603 | Mean-Delta² (kleiner=besser): 7780.809 -> 7780.809 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=ja | Laufzeit=0.2s
+[INFO] Konvertiert AC0836_M.jpg | Parameter: mode=semantic_badge, label=VOC, variant_name=AC0836_M | Qualität: Optimierungsfehler/Pixel=0.046682, Mean-Delta²=9199.671875, RGB-RMSE/Kanal=55.376505, Raumscore=20070.703929, beste Validierungsrunde=2/3, beste Composite-Iteration=n/a, ausgeführt=3/3 | Dauer=0.2s
+[INFO] Konvertiere AC0836_M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0836_M.jpg ---
+Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC". Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC, SEMANTIC: waagrechter Strich rechts vom Kreis
+[INFO] AC0836: Elementvalidierung gestartet | Runden=3, Elemente=circle,stem,text | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'stem' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.77% -> 85.98% | mittlere Pixelabweichung (MAE, kleiner=besser): 26.083 -> 35.750 | Mean-Delta² (kleiner=besser): 6468.463 -> 10481.027 | Qualitätsgewinn=-9.667 (-37.06%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 2/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'stem' | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 2/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.98% -> 88.78% | mittlere Pixelabweichung (MAE, kleiner=besser): 35.750 -> 28.603 | Mean-Delta² (kleiner=besser): 10481.027 -> 7780.809 | Qualitätsgewinn=+7.147 (+19.99%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 3/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 3/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 3/3: optimiere Element 'stem' | Laufzeit=0.1s
+[INFO] AC0836: Runde 3/3: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 3/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 88.78% -> 88.78% | mittlere Pixelabweichung (MAE, kleiner=besser): 28.603 -> 28.603 | Mean-Delta² (kleiner=besser): 7780.809 -> 7780.809 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] Konvertiert AC0836_M.jpg | Parameter: mode=semantic_badge, label=VOC, variant_name=AC0836_M | Qualität: Optimierungsfehler/Pixel=0.046682, Mean-Delta²=9199.671875, RGB-RMSE/Kanal=55.376505, Raumscore=20070.703929, beste Validierungsrunde=2/3, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere AC0836_M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0836_M.jpg ---
+Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC". Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC, SEMANTIC: waagrechter Strich rechts vom Kreis
+[INFO] AC0836: Elementvalidierung gestartet | Runden=3, Elemente=circle,stem,text | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'stem' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.77% -> 85.98% | mittlere Pixelabweichung (MAE, kleiner=besser): 26.083 -> 35.750 | Mean-Delta² (kleiner=besser): 6468.463 -> 10481.027 | Qualitätsgewinn=-9.667 (-37.06%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 2/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'stem' | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 2/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.98% -> 88.78% | mittlere Pixelabweichung (MAE, kleiner=besser): 35.750 -> 28.603 | Mean-Delta² (kleiner=besser): 10481.027 -> 7780.809 | Qualitätsgewinn=+7.147 (+19.99%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 3/3 gestartet | Laufzeit=0.1s
+[INFO] AC0836: Runde 3/3: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] AC0836: Runde 3/3: optimiere Element 'stem' | Laufzeit=0.1s
+[INFO] AC0836: Runde 3/3: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 3/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 88.78% -> 88.78% | mittlere Pixelabweichung (MAE, kleiner=besser): 28.603 -> 28.603 | Mean-Delta² (kleiner=besser): 7780.809 -> 7780.809 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] Konvertiert AC0836_M.jpg | Parameter: mode=semantic_badge, label=VOC, variant_name=AC0836_M | Qualität: Optimierungsfehler/Pixel=0.044969, Mean-Delta²=8757.346680, RGB-RMSE/Kanal=54.028840, Raumscore=19581.285330, beste Validierungsrunde=2/3, beste Composite-Iteration=n/a, ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere AC0836_M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0836_M.jpg ---
+Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC". Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC, SEMANTIC: waagrechter Strich rechts vom Kreis
+[INFO] AC0836: Elementvalidierung gestartet | Runden=3, Elemente=circle,stem,text | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'stem' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.77% -> 85.98% | mittlere Pixelabweichung (MAE, kleiner=besser): 26.083 -> 35.750 | Mean-Delta² (kleiner=besser): 6468.463 -> 10481.027 | Qualitätsgewinn=-9.667 (-37.06%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 2/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'stem' | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 2/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.98% -> 88.78% | mittlere Pixelabweichung (MAE, kleiner=besser): 35.750 -> 28.603 | Mean-Delta² (kleiner=besser): 10481.027 -> 7780.809 | Qualitätsgewinn=+7.147 (+19.99%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 3/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 3/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 3/3: optimiere Element 'stem' | Laufzeit=0.1s
+[INFO] AC0836: Runde 3/3: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 3/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 88.78% -> 88.78% | mittlere Pixelabweichung (MAE, kleiner=besser): 28.603 -> 28.603 | Mean-Delta² (kleiner=besser): 7780.809 -> 7780.809 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] Konvertiert AC0836_M.jpg | Parameter: mode=semantic_badge, label=VOC, variant_name=AC0836_M | Qualität: Optimierungsfehler/Pixel=0.046684, Mean-Delta²=8757.346680, RGB-RMSE/Kanal=54.028840, Raumscore=19581.285330, beste Validierungsrunde=2/3, beste Composite-Iteration=n/a, ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=.tmp\mupdf-preservation-seeded\native-output\shard-00-of-01\reports\overview_diff_tiles.png, svg=.tmp\mupdf-preservation-seeded\native-output\shard-00-of-01\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: .tmp\mupdf-preservation-seeded\native-output\shard-00-of-01
+[CATALOG] 2/4 AC0836_M: completed rc=0 elapsed=1.5s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] AC0836_S.jpg: Frühe Qualitätsprobe mit 3 Iterationen (Erfolgsbasis=1.000000, Abbruchgrenze=8.000000).
+[INFO] Konvertiere AC0836_S.jpg | Parameter: Iterationen=3, max. Validierungsrunden=8
+
+--- Verarbeite AC0836_S.jpg ---
+Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC". Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC, SEMANTIC: waagrechter Strich rechts vom Kreis
+[INFO] AC0836: Elementvalidierung gestartet | Runden=3, Elemente=circle,stem,text | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'stem' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 88.78% -> 86.15% | mittlere Pixelabweichung (MAE, kleiner=besser): 28.611 -> 35.315 | Mean-Delta² (kleiner=besser): 6533.528 -> 9015.608 | Qualitätsgewinn=-6.704 (-23.43%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 2/3 gestartet | Laufzeit=0.1s
+[INFO] AC0836: Runde 2/3: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] AC0836: Runde 2/3: optimiere Element 'stem' | Laufzeit=0.1s
+[INFO] AC0836: Runde 2/3: optimiere Element 'text' | Laufzeit=0.2s
+[INFO] AC0836: Validierungsrunde 2/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 86.15% -> 89.30% | mittlere Pixelabweichung (MAE, kleiner=besser): 35.315 -> 27.275 | Mean-Delta² (kleiner=besser): 9015.608 -> 6068.704 | Qualitätsgewinn=+8.040 (+22.77%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.2s
+[INFO] AC0836: Validierungsrunde 3/3 gestartet | Laufzeit=0.2s
+[INFO] AC0836: Runde 3/3: optimiere Element 'circle' | Laufzeit=0.2s
+[INFO] AC0836: Runde 3/3: optimiere Element 'stem' | Laufzeit=0.2s
+[INFO] AC0836: Runde 3/3: optimiere Element 'text' | Laufzeit=0.2s
+[INFO] AC0836: Validierungsrunde 3/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.30% -> 89.94% | mittlere Pixelabweichung (MAE, kleiner=besser): 27.275 -> 25.648 | Mean-Delta² (kleiner=besser): 6068.704 -> 5828.768 | Qualitätsgewinn=+1.627 (+5.96%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.2s
+[INFO] Konvertiert AC0836_S.jpg | Parameter: mode=semantic_badge, label=VOC, variant_name=AC0836_S | Qualität: Optimierungsfehler/Pixel=0.072732, Mean-Delta²=6125.695801, RGB-RMSE/Kanal=45.187372, Raumscore=14986.179196, beste Validierungsrunde=3/3, beste Composite-Iteration=n/a, ausgeführt=3/3 | Dauer=0.3s
+[INFO] Konvertiere AC0836_S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0836_S.jpg ---
+Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC". Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC, SEMANTIC: waagrechter Strich rechts vom Kreis
+[INFO] AC0836: Elementvalidierung gestartet | Runden=3, Elemente=circle,stem,text | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'stem' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 88.78% -> 86.15% | mittlere Pixelabweichung (MAE, kleiner=besser): 28.611 -> 35.315 | Mean-Delta² (kleiner=besser): 6533.528 -> 9015.608 | Qualitätsgewinn=-6.704 (-23.43%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 2/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'stem' | Laufzeit=0.1s
+[INFO] AC0836: Runde 2/3: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 2/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 86.15% -> 89.30% | mittlere Pixelabweichung (MAE, kleiner=besser): 35.315 -> 27.275 | Mean-Delta² (kleiner=besser): 9015.608 -> 6068.704 | Qualitätsgewinn=+8.040 (+22.77%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 3/3 gestartet | Laufzeit=0.1s
+[INFO] AC0836: Runde 3/3: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] AC0836: Runde 3/3: optimiere Element 'stem' | Laufzeit=0.1s
+[INFO] AC0836: Runde 3/3: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 3/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 89.30% -> 89.94% | mittlere Pixelabweichung (MAE, kleiner=besser): 27.275 -> 25.648 | Mean-Delta² (kleiner=besser): 6068.704 -> 5828.768 | Qualitätsgewinn=+1.627 (+5.96%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] Konvertiert AC0836_S.jpg | Parameter: mode=semantic_badge, label=VOC, variant_name=AC0836_S | Qualität: Optimierungsfehler/Pixel=0.072732, Mean-Delta²=6125.695801, RGB-RMSE/Kanal=45.187372, Raumscore=14986.179196, beste Validierungsrunde=3/3, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere AC0836_S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0836_S.jpg ---
+Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC". Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC, SEMANTIC: waagrechter Strich rechts vom Kreis
+[INFO] AC0836: Elementvalidierung gestartet | Runden=3, Elemente=circle,stem,text | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'stem' | Laufzeit=0.0s
+[INFO] AC0836: Runde 1/3: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 1/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 88.78% -> 88.76% | mittlere Pixelabweichung (MAE, kleiner=besser): 28.611 -> 28.656 | Mean-Delta² (kleiner=besser): 6533.528 -> 6208.560 | Qualitätsgewinn=-0.045 (-0.16%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] AC0836: Validierungsrunde 2/3 gestartet | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] AC0836: Runde 2/3: optimiere Element 'stem' | Laufzeit=0.1s
+[INFO] AC0836: Runde 2/3: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] AC0836: Validierungsrunde 2/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 88.76% -> 90.28% | mittlere Pixelabweichung (MAE, kleiner=besser): 28.656 -> 24.773 | Mean-Delta² (kleiner=besser): 6208.560 -> 5171.424 | Qualitätsgewinn=+3.883 (+13.55%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.2s
+[INFO] AC0836: Validierungsrunde 3/3 gestartet | Laufzeit=0.2s
+[INFO] AC0836: Runde 3/3: optimiere Element 'circle' | Laufzeit=0.2s
+[INFO] AC0836: Runde 3/3: optimiere Element 'stem' | Laufzeit=0.2s
+[INFO] AC0836: Runde 3/3: optimiere Element 'text' | Laufzeit=0.2s
+[INFO] AC0836: Validierungsrunde 3/3 abgeschlossen | Qualität (MAE-basiert, höher=besser): 90.28% -> 91.15% | mittlere Pixelabweichung (MAE, kleiner=besser): 24.773 -> 22.557 | Mean-Delta² (kleiner=besser): 5171.424 -> 4602.312 | Qualitätsgewinn=+2.216 (+8.95%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.2s
+[INFO] Konvertiert AC0836_S.jpg | Parameter: mode=semantic_badge, label=VOC, variant_name=AC0836_S | Qualität: Optimierungsfehler/Pixel=0.081173, Mean-Delta²=6125.695801, RGB-RMSE/Kanal=45.187372, Raumscore=14986.179196, beste Validierungsrunde=3/3, beste Composite-Iteration=n/a, ausgeführt=65/65 | Dauer=0.2s
+[INFO] Übersichts-Kacheln erzeugt: diff=.tmp\mupdf-preservation-seeded\native-output\shard-00-of-01\reports\overview_diff_tiles.png, svg=.tmp\mupdf-preservation-seeded\native-output\shard-00-of-01\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: .tmp\mupdf-preservation-seeded\native-output\shard-00-of-01
+[CATALOG] 3/4 AC0836_S: completed rc=0 elapsed=1.4s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] SE0081.jpg: Frühe Qualitätsprobe mit 3 Iterationen (Erfolgsbasis=1.000000, Abbruchgrenze=8.000000).
+[INFO] Konvertiere SE0081.jpg | Parameter: Iterationen=3, max. Validierungsrunden=8
+
+--- Verarbeite SE0081.jpg ---
+Bildbeschreibung: Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text "M" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] SE0081.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.217213, localized_error_fraction=0.744694).
+[INFO] Konvertiert SE0081.jpg | Parameter: mode=auto, label=M, variant_name=SE0081 | Qualität: Optimierungsfehler/Pixel=0.009836, Mean-Delta²=702.781555, RGB-RMSE/Kanal=15.305571, Raumscore=1918.778365, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=3/3 | Dauer=0.2s
+[INFO] Konvertiere SE0081.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite SE0081.jpg ---
+Bildbeschreibung: Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text "M" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] SE0081.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.217213, localized_error_fraction=0.744694).
+[INFO] Konvertiert SE0081.jpg | Parameter: mode=auto, label=M, variant_name=SE0081 | Qualität: Optimierungsfehler/Pixel=0.009836, Mean-Delta²=702.781555, RGB-RMSE/Kanal=15.305571, Raumscore=1918.778365, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere SE0081.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite SE0081.jpg ---
+Bildbeschreibung: Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text "M" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] SE0081.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.217213, localized_error_fraction=0.744694).
+[INFO] Konvertiert SE0081.jpg | Parameter: mode=auto, label=M, variant_name=SE0081 | Qualität: Optimierungsfehler/Pixel=0.009836, Mean-Delta²=702.781555, RGB-RMSE/Kanal=15.305571, Raumscore=1918.778365, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere SE0081.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite SE0081.jpg ---
+Bildbeschreibung: Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text "M" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] SE0081.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.217213, localized_error_fraction=0.744694).
+[INFO] Konvertiert SE0081.jpg | Parameter: mode=auto, label=M, variant_name=SE0081 | Qualität: Optimierungsfehler/Pixel=0.009836, Mean-Delta²=702.781555, RGB-RMSE/Kanal=15.305571, Raumscore=1918.778365, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=.tmp\mupdf-preservation-seeded\native-output\shard-00-of-01\reports\overview_diff_tiles.png, svg=.tmp\mupdf-preservation-seeded\native-output\shard-00-of-01\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: .tmp\mupdf-preservation-seeded\native-output\shard-00-of-01
+[CATALOG] 4/4 SE0081: completed rc=0 elapsed=1.3s
+[CATALOG] finished=4 failed=0 succeeded=4

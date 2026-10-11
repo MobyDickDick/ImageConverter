@@ -6,22 +6,33 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-11)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `431` · Erledigt `404` · Offen `27`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `433` · Erledigt `406` · Offen `27`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
 ## Katalog-CI (2026-10-11)
 
 - [x] **CATALOG-TIMEOUT:** Budget im Workflow von 60 auf 180 Sekunden erhöhen, Fehler bei Wiederaufnahme erneut versuchen und gepufferte Abbruchdiagnostik erhalten. Details und Abnahme: `docs/catalog_timeout_fix_2026-10-11.md`.
-- [ ] **CATALOG-SOURCE-REVIEW:** Nahezu leere Rasterquellen `DLG0001.JPG` und `GE0000.JPG` gegen ihre Heizelement-Beschreibungen prüfen; außerdem die CI-Semantikmeldungen für `AC0201_2.jpg`, `AR0101.jpg`, `GE1310_S.jpg` und `SE0113.jpg` anhand der jeweiligen Bild-/Textpaare aufarbeiten. Prozessabschluss nicht als Qualitätsabnahme zählen; Grenzen unverändert lassen.
+- [x] **CATALOG-RENDER-CRASH:** MuPDF-Stacküberlauf von `AC0836_L` reproduziert und den Katalogrenderer in regelmäßig erneuerten Kindprozessen isoliert; kein unsicherer CLI-Fallback nach Renderfehlern. Zwei Zielläufe und vier Bestandsschutzfälle bestehen lokal. Details und CI-Status: `docs/catalog_render_crash_fix_2026-10-11.md`.
+- [ ] **CATALOG-SOURCE-REVIEW:** Nahezu leere Rasterquellen `DLG0001.JPG` und `GE0000.JPG` gegen ihre Heizelement-Beschreibungen prüfen; außerdem die CI-Semantikmeldungen für `AC0201_2.jpg`, `AR0101.jpg`, `GE1310_S.jpg`, `SE0113.jpg`, `AC0201_L`, `AC0204`, `AC0204_1`, `AC0204_2` und `AR0103` anhand der jeweiligen Bild-/Textpaare aufarbeiten. Raster-SVG-Fehler von `DLG0016.JPG`, `GE1302_M.jpg` und `GE9910_W.jpg` sowie Beschreibung und Pixelqualität von `AC0836_L` separat prüfen. Prozessabschluss nicht als Qualitätsabnahme zählen; Grenzen und Raster-SVG-Sperre unverändert lassen.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
 ### Aktueller Plan-B-Stand (2026-10-11)
 
+- [x] **SE0081 – Quadrat mit unterem Stiel und M:** eigenständige Beschreibungen aktivieren die vorhandene Raster-/Textregistrierung ohne Runtime-Änderung. Ziel und unabhängiger Holdout bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; zwei unabhängige CLI-Batterien bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-11_se0081.md`.
+
+**Neuester Abschluss:** `SE0081` auf `codex/se0081-quality-2026-10-11`.
+Frische Zielmetrik mit vollständigem Originalkatalog `11891.464844 → 702.781555`;
+neutraler Vorlauf `8904.907227`. Originale Vorlauf-SVGs und
+sämtliche Gateentscheidungen reproduziert. Erfolgsübersicht: 213 Paare;
+alle 212 bisherigen Indexeinträge bleiben unverändert. Der neue Eintrag besteht
+die erneute Archivkonvertierung; es wird kein neuer Vollarchivlauf behauptet.
+Nächste reguläre Rotation: `GE0039_M`, `GE9022_2M`, `AC0920_L`, `AC1000_S`, `GE0022`.
+
 - [x] **GE9021 – unten offener Bogen unter Verlaufsschaft:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; 14 Varianten bestehen beide regulären Gates und die strengeren Pixelgrenzen ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage 17/17, alle 28 Katalog-SVGs und sämtliche Plan-B-Hashes/Metriken reproduziert. Details: `docs/next_arbeitspaket_2026-10-11_ge9021_1m.md`.
 
-**Neuester Abschluss:** `GE9021_1M` und 13 Holdouts auf
+**Vorheriger Abschluss:** `GE9021_1M` und 13 Holdouts auf
 `codex/ge9021-quality-2026-10-11`. Frische Zielmetrik `12463.036133 → 194.409164`.
 Erfolgsübersicht: 212/212 erneute Review-Pässe in fünf getrennten Prozessen;
 alle 198 bisherigen Indexeinträge und die 22 älteren Kompatibilitätsdrifts unverändert.

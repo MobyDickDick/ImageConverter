@@ -1,0 +1,297 @@
+{
+  "baseline": {
+    "baseline_sha256": "037dbb648637102b4b833a2cf39dc604310d6494b60dc9e9996a1f7dc2d18028",
+    "cases": {
+      "anonymous_symbol_00": {
+        "dimensions": {
+          "height": 39,
+          "width": 25
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.41270068287849426,
+          "error_per_pixel": 0.04564863373862617,
+          "object_mask_iou": 0.3118556701030928,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_symbol_01": {
+        "dimensions": {
+          "height": 72,
+          "width": 58
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9892386794090271,
+          "error_per_pixel": 0.00020353699317119617,
+          "object_mask_iou": 1.0,
+          "semantic_score": 1.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI frozen before catalog changes; runtime unchanged",
+      "commit": "9c4964b2ab8c42fa9b2c4d9918108e43fe67618e",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_symbol_00": "9f182529b849e93d4cef4abf41dfe8f14471d8d37cb54a76d983050b29ec1fb9",
+        "anonymous_symbol_01": "bc9583f7e2c13ab30552d6911dfd6a7047c14ecd79baef6da3980859193fbeba"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 702.7815551757812,
+      "after_svg": "after/anonymous_symbol_00.svg",
+      "after_svg_sha256": "6defedfd39fdc268c8f4325e69fe94ab83b33a0711fe226498e589a61e8e1b19",
+      "baseline_description": "Wie SE0041, aber anstelle von \"T\" \"M\" geschrieben.",
+      "before_mean_delta2": 8904.9072265625,
+      "before_svg": "before/anonymous_symbol_00.svg",
+      "before_svg_sha256": "cb503242adf5e21bf6b8f639fb6336ace1e60d2c742ffd77fa05e7de310f2fd9",
+      "case_id": "anonymous_symbol_00",
+      "image": "../../images_to_convert/SE0081.jpg",
+      "input_sha256": "9f182529b849e93d4cef4abf41dfe8f14471d8d37cb54a76d983050b29ec1fb9",
+      "role": "target",
+      "source": "SE0081.jpg",
+      "source_sha256": "9f182529b849e93d4cef4abf41dfe8f14471d8d37cb54a76d983050b29ec1fb9"
+    },
+    {
+      "after_mean_delta2": 39.704978942871094,
+      "after_svg": "after/anonymous_symbol_01.svg",
+      "after_svg_sha256": "cd30301088b2a90430bdcfee70cfcb3cac2e444be51e4a1ce82bfba2a3aa9110",
+      "baseline_description": "Kelle mit gef\u00fclltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Wei\u00dfer Hintergrund. Lage, Abmessungen, Kontur, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "before_mean_delta2": 39.704978942871094,
+      "before_svg": "before/anonymous_symbol_01.svg",
+      "before_svg_sha256": "cd30301088b2a90430bdcfee70cfcb3cac2e444be51e4a1ce82bfba2a3aa9110",
+      "case_id": "anonymous_symbol_01",
+      "image": "independent.png",
+      "input_sha256": "bc9583f7e2c13ab30552d6911dfd6a7047c14ecd79baef6da3980859193fbeba",
+      "role": "independent holdout",
+      "source": "independent.png",
+      "source_sha256": "bc9583f7e2c13ab30552d6911dfd6a7047c14ecd79baef6da3980859193fbeba"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "037dbb648637102b4b833a2cf39dc604310d6494b60dc9e9996a1f7dc2d18028",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8766473531723022,
+          "error_per_pixel": 0.0036026223512791553,
+          "object_mask_iou": 0.8765060240963856,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.41270068287849426,
+          "error_per_pixel": 0.04564863373862617,
+          "object_mask_iou": 0.3118556701030928,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0036026223512791553,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9374,
+            "edge_alignment": 0.8766,
+            "pixel_similarity": 0.9964,
+            "semantic_score": 1.0,
+            "structure_score": 0.8765
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9892386794090271,
+          "error_per_pixel": 0.00020353699317119617,
+          "object_mask_iou": 1.0,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9892386794090271,
+          "error_per_pixel": 0.00020353699317119617,
+          "object_mask_iou": 1.0,
+          "semantic_score": 1.0
+        },
+        "case_id": "anonymous_symbol_01",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.00020353699317119617,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": false,
+        "improved_metrics": [],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "unchanged",
+          "error_per_pixel": "unchanged",
+          "object_mask_iou": "unchanged",
+          "semantic_score": "unchanged"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667,
+            "path_count": 1,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9973,
+            "edge_alignment": 0.9892,
+            "pixel_similarity": 0.9998,
+            "semantic_score": 1.0,
+            "structure_score": 1.0
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI frozen before catalog changes; runtime unchanged",
+      "commit": "9c4964b2ab8c42fa9b2c4d9918108e43fe67618e",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_symbol_00": "9f182529b849e93d4cef4abf41dfe8f14471d8d37cb54a76d983050b29ec1fb9",
+        "anonymous_symbol_01": "bc9583f7e2c13ab30552d6911dfd6a7047c14ecd79baef6da3980859193fbeba"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 2,
+      "improved": 1,
+      "satisfactory": 2,
+      "technically_completed": 2
+    }
+  },
+  "schema_version": "labeled_square_recheck_v1",
+  "semantic_contract": "one filled square, centered connected bottom stem and exact described horizontal contrast text; geometry and colors from raster"
+}

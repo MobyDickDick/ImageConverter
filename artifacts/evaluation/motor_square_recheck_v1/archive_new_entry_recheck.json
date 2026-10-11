@@ -1,0 +1,27 @@
+{
+  "case_count": 1,
+  "cases": [
+    {
+      "baseline_mean_delta2": 702.7815551757812,
+      "execution_mode": "semantic-only",
+      "mean_delta2": 702.7815551757812,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8766473531723022,
+        "error_per_pixel": 0.0036026223512791553,
+        "object_mask_iou": 0.8765060240963856,
+        "semantic_score": 0.0
+      },
+      "passed": true,
+      "reason": "quality_pass",
+      "variant": "SE0081"
+    }
+  ],
+  "higher_mean_delta2": [],
+  "passed": 1,
+  "reference_access": {
+    "blocked_svg_reads": []
+  },
+  "schema_version": "satisfactory_archive_recheck_v1",
+  "threshold": 0.045945679012345676
+}

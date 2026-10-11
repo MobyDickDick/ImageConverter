@@ -593,6 +593,10 @@ def render_svg_to_numpy_via_subprocess(
 ):
     if np_module is None:
         return None
+    if os.environ.get('IMAGE_CONVERTER_REUSE_RENDER_WORKER', '').strip().lower() in {'1', 'true', 'yes', 'on'}:
+        from src.iCCModules.imageCompositeConverterRenderWorker import render_svg_to_numpy_via_worker
+        return render_svg_to_numpy_via_worker(svg_string, size_w, size_h,
+            np_module=np_module, timeout_sec=timeout_sec, status_callback=status_callback)
     payload = json.dumps(
         {"svg": str(svg_string or ""), "w": int(size_w), "h": int(size_h)},
         ensure_ascii=False,

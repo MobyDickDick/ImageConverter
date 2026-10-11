@@ -69,6 +69,22 @@ def test_conversion_environment_prepends_matching_vendor_bundle(tmp_path: Path, 
     ]
 
 
+def test_catalog_isolates_renderer_by_default(monkeypatch):
+    monkeypatch.delenv('IMAGE_CONVERTER_ISOLATE_SVG_RENDER', raising=False)
+    monkeypatch.delenv('IMAGE_CONVERTER_REUSE_RENDER_WORKER', raising=False)
+    env = conversion_environment()
+    assert env['IMAGE_CONVERTER_ISOLATE_SVG_RENDER'] == '1'
+    assert env['IMAGE_CONVERTER_REUSE_RENDER_WORKER'] == '1'
+
+
+def test_catalog_preserves_explicit_renderer_configuration(monkeypatch):
+    monkeypatch.setenv('IMAGE_CONVERTER_ISOLATE_SVG_RENDER', '0')
+    monkeypatch.setenv('IMAGE_CONVERTER_REUSE_RENDER_WORKER', '0')
+    env = conversion_environment()
+    assert env['IMAGE_CONVERTER_ISOLATE_SVG_RENDER'] == '0'
+    assert env['IMAGE_CONVERTER_REUSE_RENDER_WORKER'] == '0'
+
+
 def test_main_returns_failure_when_a_converter_fails(tmp_path: Path, monkeypatch, capsys) -> None:
     input_dir = tmp_path / "input"
     input_dir.mkdir()

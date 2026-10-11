@@ -1,0 +1,750 @@
+{
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261011,
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "iterations": 64,
+  "timeout_seconds": 60,
+  "source_svg_sha256": "b9b1e686c4f992382021c96dba163c1bcda98ba1c5a517ebc6b697a6976d78e7",
+  "source_description_sha256": "786640d6c7ed0486c396895c076bb33cb3ebeb132ad701ac8942c788c2cc5454",
+  "source_description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild.\n",
+  "source_image": "source.png",
+  "artifact_retention": "saved outputs, source raster, measurements and hashes; generated variants reproducible from independent.svg and seed",
+  "selection": {
+    "mode": "explicit",
+    "source_svg": "../independent.svg"
+  },
+  "cases": [
+    {
+      "case_id": "original",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 1.0,
+        "relative_x": 0.0,
+        "relative_y": 0.0
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild.\n",
+      "reference_svg": "references/original.svg",
+      "input_sha256": "bc9583f7e2c13ab30552d6911dfd6a7047c14ecd79baef6da3980859193fbeba",
+      "reference_svg_sha256": "54887f452136fa91e00602a31d5766e38fb2e93ea9bb81f1c2f33e0037105c7c",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00020353698346298188,
+        "foreground_mse": 0.0007106776465661824,
+        "edge_alignment": 0.9892386794090271,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "original.svg",
+      "output_sha256": "cd30301088b2a90430bdcfee70cfcb3cac2e444be51e4a1ce82bfba2a3aa9110"
+    },
+    {
+      "case_id": "probe_01",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 0.99902219,
+        "relative_x": -0.00021231,
+        "relative_y": -0.01105334
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig kleiner dargestellt und etwas nach links und oben versetzt.",
+      "reference_svg": "references/probe_01.svg",
+      "input_sha256": "1e56ea0a49522cf84106b98e5429f603509f5379f5f8ffb37d549e648fcff1b5",
+      "reference_svg_sha256": "7973a2008e5bef7419acd48b3135bfede9c4977d6203fe85a40e5be67d291664",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00021305662812665105,
+        "foreground_mse": 0.0007207844173535705,
+        "edge_alignment": 0.8949429988861084,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_01.svg",
+      "output_sha256": "7bbec3b0f2e243e0a4812c0bcc5cbc40444013f844f653adb5c8beba6c4fafd3"
+    },
+    {
+      "case_id": "probe_02",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 1.02273091,
+        "relative_x": 0.01026981,
+        "relative_y": 0.01308813
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas größer dargestellt und geringfügig nach rechts und unten verschoben.",
+      "reference_svg": "references/probe_02.svg",
+      "input_sha256": "0fa51c854d27ca7bd0818fe1c25c183e54a4425fea4cdb96a585e7ba45c3c54e",
+      "reference_svg_sha256": "dc90320164574cd7ef1455d3acdb18462cc518a77ba6400b0158ed0c2149b626",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0004020018095616251,
+        "foreground_mse": 0.001303384662605822,
+        "edge_alignment": 0.9890488386154175,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_02.svg",
+      "output_sha256": "9d79687233199fa0734b8b8b4f15e369660201711ac086bf4bd7b56e4c58433b"
+    },
+    {
+      "case_id": "probe_03",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 1.04960849,
+        "relative_x": -0.02481828,
+        "relative_y": 0.02371981
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Das Motiv ist etwas größer dargestellt und geringfügig nach links und unten verschoben.",
+      "reference_svg": "references/probe_03.svg",
+      "input_sha256": "e9216f30d57c82950f9ad0cd247911eef9ba063dea854a8ef1919bcfde0ed83c",
+      "reference_svg_sha256": "e592201e6e8f79b43c71b2f8601bc1aaa45b317d3c7722a33e56d0a703eb0fd6",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0002205888304160908,
+        "foreground_mse": 0.0006762060220353305,
+        "edge_alignment": 0.9243230223655701,
+        "foreground_iou": 0.9742268041237113
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_03.svg",
+      "output_sha256": "d77c58d390a8d24c20bb0705319ba69fbde4c77000b7f53e631e66b8f78e4553"
+    },
+    {
+      "case_id": "probe_04",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 1.04759334,
+        "relative_x": 0.01060849,
+        "relative_y": 0.00549911
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist etwas größer dargestellt und ein wenig nach rechts und unten verschoben.",
+      "reference_svg": "references/probe_04.svg",
+      "input_sha256": "31677a4039c64c442f79732c75b6a442a9292e8ae7b8ad26dbe87aae0e99e118",
+      "reference_svg_sha256": "d8c85277106f7714cb4163905045df649b62e385a24db65df520630df5214bb4",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00032977049704641104,
+        "foreground_mse": 0.001017907983623445,
+        "edge_alignment": 0.8607218265533447,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_04.svg",
+      "output_sha256": "a32e175e56e3669038453c3c064b52281a2fca5bc24a0646119df41bccd81fa3"
+    },
+    {
+      "case_id": "probe_05",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 1.02312726,
+        "relative_x": 0.01360589,
+        "relative_y": -0.01491027
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig größer dargestellt und leicht nach rechts und oben versetzt.",
+      "reference_svg": "references/probe_05.svg",
+      "input_sha256": "ff3657b9034e85c8aa81545030fdab3045e97d420967f2fd0185c3623b46d0e7",
+      "reference_svg_sha256": "d072b54da83a73c141aa147c113b3fcfb7385071d33a2cb1867112368b7a2680",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0010162475518882275,
+        "foreground_mse": 0.0030551874078810215,
+        "edge_alignment": 0.9835730195045471,
+        "foreground_iou": 0.9984472049689441
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_05.svg",
+      "output_sha256": "d51438b442fd3f41adfe01acd1209672897f897c4f41024cfb5de63e444466d0"
+    },
+    {
+      "case_id": "probe_06",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 1.02270736,
+        "relative_x": -0.02157012,
+        "relative_y": 0.01851427
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist ein wenig größer dargestellt und ein wenig nach links und unten verschoben.",
+      "reference_svg": "references/probe_06.svg",
+      "input_sha256": "14742e31e3df602f5340ace233d80b62f7d976472d93f53a05d8a814d9e72040",
+      "reference_svg_sha256": "05e2b42936e4621375fa17b86d46ca6d84f4bdc0398e4678ca66d23743be9f39",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0004501510411500931,
+        "foreground_mse": 0.001381219131872058,
+        "edge_alignment": 0.9866805672645569,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_06.svg",
+      "output_sha256": "64620ea9e06c3d90363874b37caad44a800ae4dd242dacec1ac5005ff39eb4f4"
+    },
+    {
+      "case_id": "probe_07",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 0.97843326,
+        "relative_x": 0.01872709,
+        "relative_y": 0.01540555
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Das Motiv ist geringfügig kleiner dargestellt und leicht nach rechts und unten versetzt.",
+      "reference_svg": "references/probe_07.svg",
+      "input_sha256": "6b8388ab9da947d00d94bebc6b1fbbdfced9ecf685f994d125c78323de02cd49",
+      "reference_svg_sha256": "ae4429d331409bb17a220301c9587abab3a456f1cc02a2067e3bb74eeb675ab6",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0007724912138655782,
+        "foreground_mse": 0.002759488532319665,
+        "edge_alignment": 0.8270388841629028,
+        "foreground_iou": 0.9991394148020654
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_07.svg",
+      "output_sha256": "6b9adfe8a828688e03cce534c47c6ea314f284720a0874ca2222540d46f56112"
+    },
+    {
+      "case_id": "probe_08",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 0.94373658,
+        "relative_x": 5.696e-05,
+        "relative_y": -0.00487985
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und ein wenig nach rechts und oben verschoben.",
+      "reference_svg": "references/probe_08.svg",
+      "input_sha256": "ef12fbcdf0fe49163e22e73be8fda1ea078f85ec359acdd1c7aec609a368aa69",
+      "reference_svg_sha256": "a99ec398c5155833bb1f417be5e09aaff2d7391a81e0a067ff22395365b447e5",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00028525228844955564,
+        "foreground_mse": 0.0011033999035134912,
+        "edge_alignment": 0.7831422090530396,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_08.svg",
+      "output_sha256": "0d8e5be046f4de9c71ac14d67530d59c257a5dd43674688c0df968603b77faeb"
+    },
+    {
+      "case_id": "probe_09",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 0.97179237,
+        "relative_x": -0.00882165,
+        "relative_y": 0.02442217
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Die Darstellung ist ein wenig kleiner dargestellt und etwas nach links und unten verschoben.",
+      "reference_svg": "references/probe_09.svg",
+      "input_sha256": "789f51c2b011fa49f4ea276ea540a710629d3ecaabdd0c24dfd0344a5de01e28",
+      "reference_svg_sha256": "02afe1442b2e3db743d2ffce2172396124cf513421ce6b3e36a0a3fec71f3923",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00022170344891492277,
+        "foreground_mse": 0.0007873414433561265,
+        "edge_alignment": 0.9799028038978577,
+        "foreground_iou": 0.9497872340425532
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_09.svg",
+      "output_sha256": "adcbbd6f7c4758116d42c69c3bc8ef11fbeed0842e224a1f0b678fd9182429c7"
+    },
+    {
+      "case_id": "probe_10",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 0.95217827,
+        "relative_x": 0.00598912,
+        "relative_y": -0.00110556
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und ein wenig nach rechts und oben versetzt.",
+      "reference_svg": "references/probe_10.svg",
+      "input_sha256": "7d83de22b08f60834c971f0157b3e0ed6fabdd7effdd8ceb2a44fb5b7cdaeed7",
+      "reference_svg_sha256": "f3eec71375376665fad35ac8f8ec77a177a99de4113f39199bfba820ff1a8c24",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0024896960239857435,
+        "foreground_mse": 0.009072400629520416,
+        "edge_alignment": 0.890845537185669,
+        "foreground_iou": 0.9973821989528796
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_10.svg",
+      "output_sha256": "5130bb5476e2ce0b10c6d0797a6e8c510b9f1d7d6274c3d62a7544ac102a61a6"
+    },
+    {
+      "case_id": "probe_11",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 1.012383,
+        "relative_x": -0.02025912,
+        "relative_y": 0.01202643
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Die Darstellung ist ein wenig größer dargestellt und geringfügig nach links und unten versetzt.",
+      "reference_svg": "references/probe_11.svg",
+      "input_sha256": "394f27793402de3c5ff40433c68c7092f83228e7cc0ab3f056975457a38efc90",
+      "reference_svg_sha256": "f5e69d831ae2a630a83529e78885801bdd24cdc650bb776d6df76129e28f34e6",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0005203605978749692,
+        "foreground_mse": 0.0016872819978743792,
+        "edge_alignment": 0.9821021556854248,
+        "foreground_iou": 0.9734996102883866
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_11.svg",
+      "output_sha256": "815290c7c7ad01a121a427876f974e127e9089c4f5fcbbf06a1efd82c75f691e"
+    },
+    {
+      "case_id": "probe_12",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 0.98611741,
+        "relative_x": -0.0004267,
+        "relative_y": -0.00822311
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und etwas nach links und oben verschoben.",
+      "reference_svg": "references/probe_12.svg",
+      "input_sha256": "b815d0c4de6780022d1b1908954bd16b7e4781ef672a407705b6dbd518f7f5ce",
+      "reference_svg_sha256": "cc846499613d7755fb2ac3692e14e42cd16fb2c51659252c7d0f478674afa877",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.000821029650978744,
+        "foreground_mse": 0.0028170812875032425,
+        "edge_alignment": 0.8142358064651489,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_12.svg",
+      "output_sha256": "3481bf37d2994a39c40641c65bfa67feb51198140065dc3fda6694e5ce3b4c76"
+    },
+    {
+      "case_id": "probe_13",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 0.94132628,
+        "relative_x": -0.00492319,
+        "relative_y": -0.01528392
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist ein wenig kleiner dargestellt und leicht nach links und oben versetzt.",
+      "reference_svg": "references/probe_13.svg",
+      "input_sha256": "a7062ca4a067d65926b8a819d1da1a8807a6555d8fe7193a267283fbffe73f68",
+      "reference_svg_sha256": "fc1aa061bd795743577180613b04d1bf8ab0f8069bc6d47191dbcf4ba9fcca07",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0007400680333375931,
+        "foreground_mse": 0.002856733277440071,
+        "edge_alignment": 0.8036473989486694,
+        "foreground_iou": 0.9990601503759399
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_13.svg",
+      "output_sha256": "1fb6ad638e2e9ef37e3e6db3a02e537e5151b01751204a1d80388f6efdfa9c0c"
+    },
+    {
+      "case_id": "probe_14",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 0.99457761,
+        "relative_x": 0.01678132,
+        "relative_y": 0.00418702
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas kleiner dargestellt und leicht nach rechts und unten verschoben.",
+      "reference_svg": "references/probe_14.svg",
+      "input_sha256": "6668a04da86212cc3b15ec98ff68a8a206e537c24610399010bc2fdc8ca7a183",
+      "reference_svg_sha256": "b3c1d544fd8be9b26d44043fc35ceb64b1726ed45d2e37f58bc6be03a1503e2d",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0004975724150426686,
+        "foreground_mse": 0.0017142108408734202,
+        "edge_alignment": 0.8850809335708618,
+        "foreground_iou": 0.9991638795986622
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_14.svg",
+      "output_sha256": "5589bedfd850f220c7efb940daa4fbd50606b5fe1f61f93d7f882391b0cf5cd7"
+    },
+    {
+      "case_id": "probe_15",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 1.02713853,
+        "relative_x": 0.00464134,
+        "relative_y": -0.0226218
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig größer dargestellt und ein wenig nach rechts und oben verschoben.",
+      "reference_svg": "references/probe_15.svg",
+      "input_sha256": "0f712cb97ce8825d677881adec22e8dbbd901b1b974273dbc09ba7df0cc59ee0",
+      "reference_svg_sha256": "a735ed35c611ea7a60d0fbb0e3894a5b2d9b354828bc924da8db283c2419664a",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0005487635498866439,
+        "foreground_mse": 0.0017366496613249183,
+        "edge_alignment": 0.9829511642456055,
+        "foreground_iou": 0.9506828528072838
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_15.svg",
+      "output_sha256": "1e543cb01c2301b383c4fcc5da0f3c9b783301c6fb369642754e21ae980c68d4"
+    },
+    {
+      "case_id": "probe_16",
+      "width": 58,
+      "height": 72,
+      "variation": {
+        "scale": 0.94347468,
+        "relative_x": -0.01471538,
+        "relative_y": -0.02446471
+      },
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringfügig kleiner dargestellt und ein wenig nach links und oben verschoben.",
+      "reference_svg": "references/probe_16.svg",
+      "input_sha256": "a1ccc7e1122387f9cc3a0ab4e8ee3dd7506b7ac34b7fc8e398b063ece198aa40",
+      "reference_svg_sha256": "9cf57a469f87a12c36719d891089ed3b6e5dab6ac127ca19e5fffac10755078e",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.0004896314349025488,
+        "foreground_mse": 0.0017964362632483244,
+        "edge_alignment": 0.8803499341011047,
+        "foreground_iou": 0.9833333333333333
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "probe_16.svg",
+      "output_sha256": "af797309d971b85fb985fac6c1eb769b2692dde016b5052fe017c30eb33bdd75"
+    }
+  ],
+  "status": "completed",
+  "original_satisfactory": true,
+  "variations_started": true,
+  "summary": {
+    "required": 17,
+    "completed": 17,
+    "passed": 17,
+    "failed": 0,
+    "satisfactory": true
+  },
+  "source_image_sha256": "bc9583f7e2c13ab30552d6911dfd6a7047c14ecd79baef6da3980859193fbeba"
+}

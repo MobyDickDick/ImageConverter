@@ -2,6 +2,9 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [Katalog-CI: MuPDF-Absturz, Renderisolation und Worker-Erneuerung (2026-10-11)](catalog_render_crash_fix_2026-10-11.md)
+
+- [SE0081: eigenständige M-Quadrat-Beschreibung und 17 unabhängige Zufallsfälle (2026-10-11)](next_arbeitspaket_2026-10-11_se0081.md)
 - [GE9021: unten offener Bogen, 14 CLI-Abnahmen und 17 unabhängige Zufallsfälle (2026-10-11)](next_arbeitspaket_2026-10-11_ge9021_1m.md)
 - [AC0734: rechter Griff mit horizontalem P, sechs CLI-Abnahmen (2026-10-11)](next_arbeitspaket_2026-10-11_ac0734_1_s.md)
 - [AC0712: linker Griff mit Strich und Punkt, sechs CLI-Abnahmen (2026-10-11)](next_arbeitspaket_2026-10-11_ac0712_1_s.md)

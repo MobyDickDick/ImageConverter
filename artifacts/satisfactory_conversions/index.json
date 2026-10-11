@@ -1,5 +1,5 @@
 {
-  "case_count": 212,
+  "case_count": 213,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -3604,6 +3604,23 @@
       "svg": "svgs/GE9023_7S.svg",
       "svg_sha256": "da2058b7f9b553d70c429f48bb93ebcdabdccb1607056ba24952c3882f0a07f3",
       "variant": "GE9023_7S"
+    },
+    {
+      "description": "Kelle mit gef\u00fclltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Wei\u00dfer Hintergrund. Lage, Abmessungen, Kontur, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/motor_square_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/SE0081.jpg",
+      "image_sha256": "9f182529b849e93d4cef4abf41dfe8f14471d8d37cb54a76d983050b29ec1fb9",
+      "mean_delta2": 702.7815551757812,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8766473531723022,
+        "error_per_pixel": 0.0036026223512791553,
+        "object_mask_iou": 0.8765060240963856
+      },
+      "svg": "svgs/SE0081.svg",
+      "svg_sha256": "6defedfd39fdc268c8f4325e69fe94ab83b33a0711fe226498e589a61e8e1b19",
+      "variant": "SE0081"
     }
   ],
   "schema_version": "satisfactory_archive_v1"
