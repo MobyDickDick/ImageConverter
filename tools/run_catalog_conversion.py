@@ -45,7 +45,11 @@ def completed_variants(report_path: Path) -> set[str]:
     if not report_path.exists():
         return set()
     with report_path.open(encoding="utf-8", newline="") as handle:
-        return {row["variant"] for row in csv.DictReader(handle) if row.get("variant")}
+        return {
+            row["variant"]
+            for row in csv.DictReader(handle)
+            if row.get("variant") and row.get("status") == "completed" and row.get("returncode") == "0"
+        }
 
 
 def report_failure(variant: str, status: str, returncode: int) -> None:
@@ -120,6 +124,9 @@ def main() -> int:
             ]
             env = conversion_environment()
             env["ICC_CONVERSION_TIMEOUT_SEC"] = str(args.timeout_seconds)
+            # Preserve diagnostics even when the supervisor kills a timed-out
+            # process before Python can flush its redirected stdout.
+            env["PYTHONUNBUFFERED"] = "1"
             started = time.monotonic()
             status = "completed"
             returncode = 0

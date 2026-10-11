@@ -1,0 +1,12 @@
+2026-10-11T06:58:40.0449075Z [CATALOG] shard=1/8 selected=218 completed=0 pending=218
+2026-10-11T06:58:55.6631269Z [WARN] AC0201_2.jpg: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.
+2026-10-11T07:03:56.7504500Z [WARN] AR0101.jpg: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.
+2026-10-11T07:05:27.1208498Z [CATALOG] ERROR: DLG0001: process_timeout (return code 124)
+2026-10-11T07:05:27.1209635Z [CATALOG] 118/218 DLG0001: process_timeout rc=124 elapsed=75.0s
+2026-10-11T07:05:27.1235136Z ##[error]DLG0001: process_timeout (return code 124)
+2026-10-11T07:06:54.5779561Z [CATALOG] ERROR: GE0000: process_timeout (return code 124)
+2026-10-11T07:06:54.5780365Z [CATALOG] 121/218 GE0000: process_timeout rc=124 elapsed=75.0s
+2026-10-11T07:06:54.5785471Z ##[error]GE0000: process_timeout (return code 124)
+2026-10-11T07:10:16.2785482Z [WARN] GE1310_S.jpg: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.
+2026-10-11T07:14:29.7985429Z [WARN] SE0113.jpg: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.
+2026-10-11T07:15:32.5275843Z [CATALOG] finished=218 failed=2 succeeded=216

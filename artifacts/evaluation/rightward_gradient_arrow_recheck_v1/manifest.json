@@ -1,0 +1,188 @@
+{
+  "schema_version": "horizontal_gradient_arrow_recheck_manifest_v1",
+  "direction": "right",
+  "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+  "provenance": {
+    "commit": "3363c2060c3df59bd3c0312adf566320fda74226",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "fresh CLI with original description; no runtime change",
+    "source_sha256": {
+      "src/iCCModules/imageCompositeConverterGradientArrow.py": "0640931104c0f8be2bcb96efa87afdce65a60dc466ed20e2bafa47c4dcfbbd09",
+      "tools/run_horizontal_gradient_arrow_recheck.py": "0912412151298d73a92f3a2096916699f720ff67285b413884c2771ce603231b",
+      "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml": "d5c9eb00f0984b7475ad1afe81c4ca596e9cc8b97d5fbc1d8abaab56cb031f0e",
+      "artifacts/descriptions/Finale_Wurzelformen_V3.xml": "c7deeb08d23a73b82eb78f316e37268b8936211f50baf4966f6dcbc6acacebc6"
+    },
+    "toolchain": "CPython 3.10.11; NumPy 2.2.6; OpenCV 4.14.0; PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "neutral_right_arrow_00",
+      "variant": "GE9012_1M",
+      "role": "target",
+      "image": "../../images_to_convert/GE9012_1M.jpg",
+      "source_sha256": "ee81c2475730f0abf739d5f66a9107f5ca0057777044a92eaaa5825f360a99d7",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_00.svg",
+      "after_svg": "after/neutral_right_arrow_00.svg",
+      "frozen_before_svg_sha256": "e1aab5d936e2fde6f71261f73de8f2e56bdacb8958e1593da60f9d235c4d21d6"
+    },
+    {
+      "case_id": "neutral_right_arrow_01",
+      "variant": "GE9012_1S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9012_1S.jpg",
+      "source_sha256": "44f7b95a21d2881402c788fb86ec0d71a6817783111ac0be786d510c30cd9333",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_01.svg",
+      "after_svg": "after/neutral_right_arrow_01.svg",
+      "frozen_before_svg_sha256": "0f4c712faa14a1d4460d0837282053c1415cad89ebab2b08bcce66d60945c285"
+    },
+    {
+      "case_id": "neutral_right_arrow_02",
+      "variant": "GE9012_2M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9012_2M.jpg",
+      "source_sha256": "b1344f3e4aeb8d2c9cf66fdb4ec74e0cd901897a5040c7c76d67c34d9a23ad5d",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_02.svg",
+      "after_svg": "after/neutral_right_arrow_02.svg",
+      "frozen_before_svg_sha256": "871c00234314fabb4010ee8e907b912923957dfe3103c00ddaa3bfd36a996d84"
+    },
+    {
+      "case_id": "neutral_right_arrow_03",
+      "variant": "GE9012_2S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9012_2S.jpg",
+      "source_sha256": "a9acbfad5eecbf1fde77d72b0143c66b3efefa1d93dad7466d966792b5590010",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_03.svg",
+      "after_svg": "after/neutral_right_arrow_03.svg",
+      "frozen_before_svg_sha256": "4a94d7d8b7f6c9533879f07a39b3eafe26462be87b46987cf0670186c7b1bb7a"
+    },
+    {
+      "case_id": "neutral_right_arrow_04",
+      "variant": "GE9012_3M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9012_3M.jpg",
+      "source_sha256": "17295273c98522f1fb8dc18f3936bb1d6e1e8b65c6767b94fc5c1ffea10fa7bd",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_04.svg",
+      "after_svg": "after/neutral_right_arrow_04.svg",
+      "frozen_before_svg_sha256": "daf3e8a55fa1c5cdbda516ddc1ecc72f07a2f1513752a762b42bcaa3faf655c9"
+    },
+    {
+      "case_id": "neutral_right_arrow_05",
+      "variant": "GE9012_3S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9012_3S.jpg",
+      "source_sha256": "a90249d159e9e752e6f4b92af3e497c2968721417dee034c614b6e0c0ee137b0",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_05.svg",
+      "after_svg": "after/neutral_right_arrow_05.svg",
+      "frozen_before_svg_sha256": "5b87495dadd052e18ec63253649deceecc490ad5ace0796db18add9426598fba"
+    },
+    {
+      "case_id": "neutral_right_arrow_06",
+      "variant": "GE9012_4M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9012_4M.jpg",
+      "source_sha256": "7a9fbd12d7ae110df2b022aedc72605b9640f43129dae44d1836c5299df93583",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_06.svg",
+      "after_svg": "after/neutral_right_arrow_06.svg",
+      "frozen_before_svg_sha256": "f122672db6c45ae3e5405aff0ad123d6ac73dac680adc89badeede25a688936c"
+    },
+    {
+      "case_id": "neutral_right_arrow_07",
+      "variant": "GE9012_4S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9012_4S.jpg",
+      "source_sha256": "d63cabd27a252b6c39113f94d6a3c16a2a09d5c3641873b8e8e8def22e744290",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_07.svg",
+      "after_svg": "after/neutral_right_arrow_07.svg",
+      "frozen_before_svg_sha256": "106348d4ba1756515b89bbfbac2e8d21c495e09278b1874a94ef94134b1812d3"
+    },
+    {
+      "case_id": "neutral_right_arrow_08",
+      "variant": "GE9012_5M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9012_5M.jpg",
+      "source_sha256": "035b0bd511ad1eb2db10afbf034de5d0337bf2e6b2a6c418f035c854af294aca",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_08.svg",
+      "after_svg": "after/neutral_right_arrow_08.svg",
+      "frozen_before_svg_sha256": "2f615f9ac567ee6238a068e3b6603d1199297a0fd2587bb2b9cc7f57f7373827"
+    },
+    {
+      "case_id": "neutral_right_arrow_09",
+      "variant": "GE9012_5S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9012_5S.jpg",
+      "source_sha256": "da74c3741b77a065478afbd29217f532d8be34fa83d7d55bf9a93089a6f6ca64",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_09.svg",
+      "after_svg": "after/neutral_right_arrow_09.svg",
+      "frozen_before_svg_sha256": "de9d2e80222bfa689106028c530873c865facbab1dc672d5391358a9cd08cb94"
+    },
+    {
+      "case_id": "neutral_right_arrow_10",
+      "variant": "GE9012_6M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9012_6M.jpg",
+      "source_sha256": "0b323d01d200e87c004b9bce229f18ac178abc62f664e669dc9b774be1d8e3b2",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_10.svg",
+      "after_svg": "after/neutral_right_arrow_10.svg",
+      "frozen_before_svg_sha256": "8706f483df354f0ecaad3ff522e0253c56e772121536a5d3a8fe53135a35ab27"
+    },
+    {
+      "case_id": "neutral_right_arrow_11",
+      "variant": "GE9012_6S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9012_6S.jpg",
+      "source_sha256": "d53807498d0f51e20fbefcc52adaff48e99da4d8f710339df26e441f641afef5",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_11.svg",
+      "after_svg": "after/neutral_right_arrow_11.svg",
+      "frozen_before_svg_sha256": "4a94d7d8b7f6c9533879f07a39b3eafe26462be87b46987cf0670186c7b1bb7a"
+    },
+    {
+      "case_id": "neutral_right_arrow_12",
+      "variant": "GE9012_7M",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9012_7M.jpg",
+      "source_sha256": "cc0ecc20e746ea4a70ce8308e60955b5e8c8c5861bf99d0a7cb569321235b80d",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_12.svg",
+      "after_svg": "after/neutral_right_arrow_12.svg",
+      "frozen_before_svg_sha256": "3e11eb3e6bbd29a202e9e951eae22804d2c82f6569dee9e4726837eadf40eccd"
+    },
+    {
+      "case_id": "neutral_right_arrow_13",
+      "variant": "GE9012_7S",
+      "role": "holdout",
+      "image": "../../images_to_convert/GE9012_7S.jpg",
+      "source_sha256": "8693f2dc8729149c049181fa0ab02570415de81cab546c0ab8f55f34c38aacbe",
+      "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+      "description": "Nach rechts gerichteter Pfeil: gef\u00fcllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein wei\u00dfer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Wei\u00dfer Hintergrund.",
+      "before_svg": "before/neutral_right_arrow_13.svg",
+      "after_svg": "after/neutral_right_arrow_13.svg",
+      "frozen_before_svg_sha256": "9c782417d2c3cebe12c67cb08c18bedb58c183e1ca314125f15be94f2040ceed"
+    }
+  ]
+}

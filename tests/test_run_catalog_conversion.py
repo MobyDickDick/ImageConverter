@@ -3,6 +3,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 from tools import run_catalog_conversion
 from tools.run_catalog_conversion import (
     completed_variants,
@@ -32,7 +34,7 @@ def test_completed_variants_reads_resumable_result_csv(tmp_path: Path) -> None:
         encoding="utf-8",
     )
 
-    assert completed_variants(report) == {"AC0010", "AC0020"}
+    assert completed_variants(report) == {"AC0010"}
 
 
 def test_report_failure_emits_github_error_annotation(monkeypatch, capsys) -> None:
@@ -102,3 +104,79 @@ def test_main_returns_failure_when_a_converter_fails(tmp_path: Path, monkeypatch
     captured = capsys.readouterr()
     assert "[CATALOG] ERROR: AC0010: converter_error (return code 1)" in captured.err
     assert "[CATALOG] finished=1 failed=1 succeeded=0" in captured.out
+
+
+@pytest.fixture
+def catalog_run(tmp_path: Path, monkeypatch):
+    inputs = tmp_path / "input"
+    inputs.mkdir()
+    output = tmp_path / "output"
+    descriptions = inputs / "descriptions.xml"
+    descriptions.write_text("<forms/>", encoding="utf-8")
+    monkeypatch.setattr(sys, "argv", ["catalog", "--input-dir", str(inputs),
+        "--descriptions-path", str(descriptions), "--output-dir", str(output),
+        "--timeout-seconds", "90"])
+    return inputs, output / "shard-00-of-01" / "catalog_results.csv"
+
+
+def test_configured_budget_reaches_converter_and_supervisor(catalog_run, monkeypatch):
+    inputs, report = catalog_run
+    (inputs / "neutral.JPG").write_bytes(b"image")
+    calls = []
+
+    def convert(command, **kwargs):
+        calls.append((command, kwargs))
+        return subprocess.CompletedProcess(command, 0)
+
+    monkeypatch.setattr(subprocess, "run", convert)
+    assert run_catalog_conversion.main() == 0
+    command, options = calls[0]
+    assert command[command.index("--start") + 1] == "neutral"
+    assert command[command.index("--end") + 1] == "neutral"
+    assert options["env"]["ICC_CONVERSION_TIMEOUT_SEC"] == "90.0"
+    assert options["env"]["PYTHONUNBUFFERED"] == "1"
+    assert options["timeout"] == 105.0
+    assert completed_variants(report) == {"neutral"}
+
+
+def test_timeout_remains_failure_and_does_not_stop_next_image(catalog_run, monkeypatch, capsys):
+    inputs, report = catalog_run
+    for name in ("first.jpg", "second.jpg"):
+        (inputs / name).write_bytes(b"image")
+
+    def convert(command, **kwargs):
+        if command[command.index("--start") + 1] == "first":
+            raise subprocess.TimeoutExpired(command, kwargs["timeout"])
+        return subprocess.CompletedProcess(command, 0)
+
+    monkeypatch.setattr(subprocess, "run", convert)
+    assert run_catalog_conversion.main() == 1
+    with report.open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    assert [(r["variant"], r["status"], r["returncode"]) for r in rows] == [
+        ("first", "process_timeout", "124"), ("second", "completed", "0")]
+    assert "finished=2 failed=1 succeeded=1" in capsys.readouterr().out
+    assert completed_variants(report) == {"second"}
+
+
+@pytest.mark.parametrize("status,returncode", [("process_timeout", 124), ("converter_error", 1), ("completed", 1)])
+def test_resume_retries_failures_and_keeps_successes(catalog_run, monkeypatch, status, returncode):
+    inputs, report = catalog_run
+    for name in ("accepted.jpg", "retry.JPG"):
+        (inputs / name).write_bytes(b"image")
+    report.parent.mkdir(parents=True)
+    report.write_text("variant,filename,status,returncode,elapsed_seconds\n"
+        "accepted,accepted.jpg,completed,0,1\n"
+        f"retry,retry.JPG,{status},{returncode},75\n", encoding="utf-8")
+    called = []
+
+    def convert(command, **kwargs):
+        called.append(command[command.index("--start") + 1])
+        return subprocess.CompletedProcess(command, 0)
+
+    monkeypatch.setattr(subprocess, "run", convert)
+    assert run_catalog_conversion.main() == 0
+    assert called == ["retry"]
+    assert completed_variants(report) == {"accepted", "retry"}
+    assert run_catalog_conversion.main() == 0
+    assert called == ["retry"]

@@ -16,13 +16,13 @@ SVGs, Checkpoints oder andere Bilder werden im voreingestellten
 ## Main entry point
 
 Die [Erfolgsübersicht](artifacts/satisfactory_conversions/README.md) enthält
-172 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
+186 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
 `python -m tools.refresh_satisfactory_archive` wird sie aus den dokumentierten
 Abnahmen aktualisiert. `python -m tools.run_pytest_profile extended`
 aktualisiert die Sammlung einschließlich späterer erfolgreicher Batches,
 konvertiert alle Einträge erneut und prüft deren Qualität; Quellen und
 gespeicherte gute SVGs bleiben dabei erhalten. Details zur Sammlung und zur
-[neuen GE9014-Abnahme](docs/next_arbeitspaket_2026-10-10_ge9014_1m.md).
+[neuen GE9012-Abnahme](docs/next_arbeitspaket_2026-10-10_ge9012_1m.md).
 
 Run the converter via:
 
@@ -97,11 +97,15 @@ Eingangsordner.
 
 Für einen vollständigen, kostenkontrollierten Kataloglauf steht
 `tools/run_catalog_conversion.py` zur Verfügung. Das Skript verarbeitet eine
-stabile Teilmenge des Katalogs, startet jedes Bild isoliert und setzt standardmäßig
-nach 60 Sekunden mit dem nächsten Bild fort. Der manuelle GitHub-Workflow
+stabile Teilmenge des Katalogs und startet jedes Bild isoliert. Das lokale
+Konvertierungsbudget beträgt standardmäßig 60 Sekunden; der Prozess erhält
+zusätzlich 15 Sekunden für Start und Abschluss. Der manuelle GitHub-Workflow
 `Local completion checks` kann diesen Lauf über `run_full_catalog` in acht
-parallelen Shards starten; jeder Shard schreibt eine fortlaufend aktualisierte
-`catalog_results.csv` und wird als Workflow-Artefakt hochgeladen.
+parallelen Shards mit 180 Sekunden Budget und einer Prozessgrenze von 195 Sekunden
+starten. Jeder Shard schreibt eine fortlaufend aktualisierte `catalog_results.csv`
+und wird als Workflow-Artefakt hochgeladen. Bei Wiederaufnahme werden ausschließlich
+Einträge mit `status=completed` und Rückgabecode `0` übersprungen; Fehler laufen
+erneut. Details: [CI-Timeout-Abnahme](docs/catalog_timeout_fix_2026-10-11.md).
 
 ### Qualitätsparameter für als gut markierte Konvertierungen
 

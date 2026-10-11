@@ -36,17 +36,19 @@ def fit(image, description=DESCRIPTION, error_fn=None, render_fn=render):
                               error_fn=error_fn or (lambda a, b: normalized_mse(a, b)[0]))
 
 
-@pytest.mark.parametrize('variant', [f'GE9014_{i}{size}' for i in range(1, 8) for size in ('M', 'S')])
-def test_all_catalog_colors_and_sizes(variant):
+@pytest.mark.parametrize('family,direction', [('GE9014', 'left'), ('GE9012', 'right')])
+@pytest.mark.parametrize('suffix', [f'{i}{size}' for i in range(1, 8) for size in ('M', 'S')])
+def test_all_catalog_colors_and_sizes(family, direction, suffix):
+    variant = f'{family}_{suffix}'
     image = cv2.imread(str(ROOT/f'artifacts/images_to_convert/{variant}.jpg'))
     snapshot = image.copy()
-    result = fit(image)
+    result = fit(image, DESCRIPTION.replace('links', 'rechts') if direction == 'right' else DESCRIPTION)
     assert result is not None
-    assert result['direction'] == 'left'
+    assert result['direction'] == direction
     assert result['error'] < result['initial_error']
     assert result['evaluations'] <= 121
     assert normalized_mse(image, result['rendered'])[1] < .005
-    assert horizontal_arrow_semantics(result['svg']) == 1
+    assert horizontal_arrow_semantics(result['svg'], direction) == 1
     np.testing.assert_array_equal(image, snapshot)
     np.testing.assert_array_equal(result['rendered'], render(result['svg'], image.shape[1], image.shape[0]))
 
