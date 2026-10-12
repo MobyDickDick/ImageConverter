@@ -1,0 +1,188 @@
+{
+  "schema_version": "conversion_quality_review_v2",
+  "threshold_normalized_mse": 0.045945679012345676,
+  "max_plan_b_candidates": 5,
+  "max_top_error_cases": 5,
+  "max_candidate_image_area": 6400,
+  "metrics": {
+    "successful_variants": 48,
+    "successful_renderable_pairs": 48,
+    "successful_above_threshold": 0,
+    "successful_missing_or_failed": 0,
+    "diff_variants": 952,
+    "diff_renderable_pairs": 945,
+    "selected_candidates": 5,
+    "top_error_cases": 5,
+    "ranked_records": 1000,
+    "boundary_triple_records": 3
+  },
+  "selected_candidates": [
+    {
+      "variant": "AC0920_L",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0920_L.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0920_L.svg",
+      "width": 25,
+      "height": 25,
+      "mean_delta2": 11265.10546875,
+      "normalized_mse": 0.05774756103421761,
+      "status": "ok",
+      "image_area": 625
+    },
+    {
+      "variant": "AC1000_S",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC1000_S.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC1000_S.svg",
+      "width": 15,
+      "height": 15,
+      "mean_delta2": 11111.6396484375,
+      "normalized_mse": 0.05696085940503653,
+      "status": "ok",
+      "image_area": 225
+    },
+    {
+      "variant": "GE0022",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/GE0022.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/GE0022.svg",
+      "width": 73,
+      "height": 73,
+      "mean_delta2": 10990.86328125,
+      "normalized_mse": 0.0563417315455594,
+      "status": "ok",
+      "image_area": 5329
+    },
+    {
+      "variant": "GE9024_1M",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/GE9024_1M.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/GE9024_1M.svg",
+      "width": 60,
+      "height": 20,
+      "mean_delta2": 10928.251953125,
+      "normalized_mse": 0.056020771257849544,
+      "status": "ok",
+      "image_area": 1200
+    },
+    {
+      "variant": "GE0300",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/GE0300.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/GE0300.svg",
+      "width": 75,
+      "height": 75,
+      "mean_delta2": 10822.984375,
+      "normalized_mse": 0.05548114507240805,
+      "status": "ok",
+      "image_area": 5625
+    }
+  ],
+  "top_reproducible_error_cases": [
+    {
+      "variant": "AC0554_1_L",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0554_1_L.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0554_1_L.svg",
+      "width": 80,
+      "height": 40,
+      "mean_delta2": 46170.3984375,
+      "normalized_mse": 0.23668024317570166,
+      "status": "ok",
+      "image_area": 3200
+    },
+    {
+      "variant": "AC0554_2_L",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0554_2_L.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0554_2_L.svg",
+      "width": 80,
+      "height": 40,
+      "mean_delta2": 35769.07421875,
+      "normalized_mse": 0.18336062652185056,
+      "status": "ok",
+      "image_area": 3200
+    },
+    {
+      "variant": "AC0714_L",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0714_L.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0714_L.svg",
+      "width": 45,
+      "height": 25,
+      "mean_delta2": 32695.380859375,
+      "normalized_mse": 0.16760415665449185,
+      "status": "ok",
+      "image_area": 1125
+    },
+    {
+      "variant": "AC0724_1_S",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0724_1_S.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0724_1_S.svg",
+      "width": 25,
+      "height": 15,
+      "mean_delta2": 22276.9609375,
+      "normalized_mse": 0.11419690343457645,
+      "status": "ok",
+      "image_area": 375
+    },
+    {
+      "variant": "AC0252_1",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0252_1.jpg",
+      "svg_path": "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0252_1.svg",
+      "width": 31,
+      "height": 31,
+      "mean_delta2": 20853.748046875,
+      "normalized_mse": 0.10690118183711393,
+      "status": "ok",
+      "image_area": 961
+    }
+  ],
+  "boundary_triple": [
+    {
+      "variant": "AC0301_1M_sia",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0301_1M_sia.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0301_1M_sia.svg",
+      "width": 60,
+      "height": 60,
+      "mean_delta2": 8920.044921875,
+      "normalized_mse": 0.04572623309944893,
+      "status": "ok",
+      "image_area": 3600
+    },
+    {
+      "variant": "AC0232_M",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0232_M.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0232_M.svg",
+      "width": 45,
+      "height": 30,
+      "mean_delta2": 8975.4150390625,
+      "normalized_mse": 0.046010073249070874,
+      "status": "ok",
+      "image_area": 1350
+    },
+    {
+      "variant": "GE9024_6S",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/GE9024_6S.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/GE9024_6S.svg",
+      "width": 30,
+      "height": 10,
+      "mean_delta2": 8981.6767578125,
+      "normalized_mse": 0.0460421722814943,
+      "status": "ok",
+      "image_area": 300
+    }
+  ],
+  "boundary_conversion_command": "for variant in AC0301_1M_sia AC0232_M GE9024_6S; do ICC_FORCE_RECONVERT=1 python -m src.imageCompositeConverter artifacts\\images_to_convert --descriptions-path artifacts\\images_to_convert\\Finale_Wurzelformen_V3.xml --output-dir artifacts\\converted_images --iterations 64 --start $variant --end $variant --deterministic-order || exit $?; done",
+  "records_csv": ".tmp/side-arc-review-final/conversion_quality_records_v2.csv",
+  "ranking_csv": ".tmp/side-arc-review-final/conversion_quality_ranking_v1.csv",
+  "candidate_triage_csv": ".tmp/side-arc-review-final/plan_b_candidate_triage_v1.csv",
+  "boundary_triple_csv": ".tmp/side-arc-review-final/plan_b_boundary_triple_v1.csv",
+  "boundary_conversion_command_path": ".tmp/side-arc-review-final/plan_b_boundary_conversion_command.sh",
+  "top_error_cases_csv": ".tmp/side-arc-review-final/top_reproducible_error_cases_v1.csv"
+}

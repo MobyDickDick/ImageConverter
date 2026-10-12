@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-12)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `434` · Erledigt `407` · Offen `27`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `435` · Erledigt `408` · Offen `27`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,9 +20,21 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-12)
 
+- [x] **GE9022 – links offener Bogen neben Verlaufsschaft:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17, beide neutralen Abnahmen reproduzieren alle 28 SVGs und Gates. Details: `docs/next_arbeitspaket_2026-10-12_ge9022_2m.md`.
+
+**Neuester Abschluss:** `GE9022_2M` und 13 Farb-/Größen-Holdouts auf
+`codex/ge9022-quality-2026-10-12`. Frische neutrale Zielmetrik
+`10904.975586 → 186.701660`; Originalkatalog-Kontext `11431.225586 → 186.701660`.
+230 Paare in der Erfolgsübersicht; alle 216 bisherigen Indexeinträge unverändert.
+Die getrennte Archivprüfung besteht mit 230/230; alle 216 bisherigen erneuten
+Pixelfehlerwerte und die 22 bekannten Kompatibilitätsdrifts sind unverändert.
+Nächste reguläre Rotation: `AC0920_L`, `AC1000_S`, `GE0022`, `GE9024_1M`, `GE0300`.
+Die 14 erledigten GE9022-Varianten sind ausgeschlossen.
+
+
 - [x] **GE0039 – Linkspfeil auf Verlaufsscheibe:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; alle drei Größen bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage zweimal 17/17, acht neutrale SVGs und sämtliche Gates reproduziert. Details: `docs/next_arbeitspaket_2026-10-12_ge0039_m.md`.
 
-**Neuester Abschluss:** `GE0039_M` und zwei Größen-Holdouts auf
+**Vorheriger Abschluss:** `GE0039_M` und zwei Größen-Holdouts auf
 `codex/ge0039-quality-2026-10-11`. Frische Zielmetrik `10712.346680 → 148.783890`;
 216 Paare in der Erfolgsübersicht, alle 213 bisherigen Indexeinträge unverändert.
 Der Gradientrenderer erhält jetzt Farben bei Verschiebung und gleichmäßiger

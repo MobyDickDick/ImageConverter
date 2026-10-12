@@ -1,0 +1,29 @@
+{
+  "purpose": "Check that direction normalization preserves unequal end colors and an off-center bright stop",
+  "quality": {
+    "complexity": {
+      "embedded_raster_count": 0,
+      "parse_error": null,
+      "path_command_count": 2,
+      "path_complexity_ratio": 0.6667,
+      "path_count": 1,
+      "vector_element_count": 3
+    },
+    "failures": [],
+    "limits": {
+      "max_foreground_mse": 0.04,
+      "max_normalized_mse": 0.01,
+      "max_path_commands": 160,
+      "max_svg_elements": 80,
+      "min_edge_alignment": 0.72,
+      "min_foreground_iou": 0.85
+    },
+    "metrics": {
+      "edge_alignment": 0.9913638830184937,
+      "foreground_iou": 0.9989417989417989,
+      "foreground_mse": 0.00029898149659857154,
+      "normalized_mse": 5.4490876209456474e-05
+    },
+    "satisfactory": true
+  }
+}
