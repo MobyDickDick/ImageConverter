@@ -1,0 +1,63 @@
+{
+  "archive": {
+    "count": 216,
+    "earlier_152_errors_identical": true,
+    "family_recheck": "archive_recheck.json",
+    "grouped_execution_failure": "archive_grouped_failure.json",
+    "known_drift_count": 22,
+    "known_drift_list_unchanged": true,
+    "previous_records": 213,
+    "previous_records_unchanged": true,
+    "recheck_passed": 216
+  },
+  "baseline_commit": "8f6a199829a1662d95d2995c0b524b0b158ce55b",
+  "branch": "codex/ge0039-quality-2026-10-11",
+  "catalog_acceptance": {
+    "forbidden_svg_reads": 0,
+    "frozen_original_baselines_reproduced": true,
+    "neutral_cases": 4,
+    "real_name_cases": 3,
+    "regressed_metrics": 0,
+    "target_after_mean_delta2": 148.7838897705078,
+    "target_before_mean_delta2": 10712.3466796875
+  },
+  "checks": {
+    "cli_help": "pass",
+    "compileall": "pass",
+    "diff_whitespace": "pass",
+    "runtime_id_zero": "pass"
+  },
+  "date": "2026-10-12",
+  "focused": {
+    "failed": 0,
+    "log": "focused.log",
+    "passed": 104,
+    "seconds": 188.12
+  },
+  "independent_plan_b": {
+    "hashes_and_metrics_reproduced": true,
+    "passed": 17,
+    "required": 17,
+    "runs": 2,
+    "seed": 20261011
+  },
+  "smoke": {
+    "failed": 0,
+    "log": "smoke.log",
+    "passed": 2,
+    "seconds": 12.44
+  },
+  "standard_profile": {
+    "command": ".venv/Scripts/python.exe -m pytest -q --basetemp .tmp/disk-arrow-standard-tests",
+    "environment": {
+      "IMAGE_CONVERTER_ISOLATE_SVG_RENDER": "0",
+      "RUN_HEAVY_CONVERSION_TESTS": "0"
+    },
+    "failed": 0,
+    "log": "standard_profile.log",
+    "passed": 2406,
+    "seconds": 74025.72,
+    "skipped": 30,
+    "wall_time_note": "Elapsed pytest wall time includes long execution interruptions; this is not a conversion runtime measurement."
+  }
+}

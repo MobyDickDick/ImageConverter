@@ -1,0 +1,671 @@
+{
+  "cases": [
+    {
+      "blocked_svg_reads": [],
+      "case_id": "original",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.\n",
+      "failures": [],
+      "input_sha256": "1b11c6c57cc30c994fe6bacaf312a17b5d958b5419dd677561374ace666e264c",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9585058689117432,
+        "foreground_iou": 0.9920969441517387,
+        "foreground_mse": 0.00010398314771009609,
+        "normalized_mse": 4.9773538194131106e-05
+      },
+      "output_sha256": "162bbff7ecfbfc4778f2b6e5828bf0874fe061b9caa1a19a4a58732557bb549d",
+      "reference_svg_sha256": "373aaff5e07dd2fedb61824f6edfe427eb21f3b77ef2ed4ab1fc798e96926c53",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.0,
+        "relative_y": 0.0,
+        "scale": 1.0
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_01",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig kleiner dargestellt und etwas nach links und oben versetzt.",
+      "failures": [],
+      "input_sha256": "9c06196afc9be1d191644095a74ea6462f875f68e3abefb5ae48c41b94d2c9d1",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9444310665130615,
+        "foreground_iou": 0.9941752713794016,
+        "foreground_mse": 0.00012410317140165716,
+        "normalized_mse": 5.911124389967881e-05
+      },
+      "output_sha256": "56408f38a471ceaf58c6206aaee502cf56f93da9eed4134c46e3374f69ddc3a5",
+      "reference_svg_sha256": "cf5ee2ec327fcf771a181fdf148b94fff40ec42643ef3cb89ca778c6593cd4fb",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.00021231,
+        "relative_y": -0.01105334,
+        "scale": 0.99902219
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_02",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach rechts und unten verschoben.",
+      "failures": [],
+      "input_sha256": "1f13dd598e16e5f27f2dcc168bb4d3f9b091c470860d0452603984d46f62bf9f",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.955109715461731,
+        "foreground_iou": 0.9949341438703141,
+        "foreground_mse": 0.0002816207997966558,
+        "normalized_mse": 0.00013996384222991765
+      },
+      "output_sha256": "5524661cd8a219173e539155f5999c3f1acc1f04ae19deadf07c3b541238cf2e",
+      "reference_svg_sha256": "7654c146524a478e8037c2dad165866a88d5140abf8dafe69d4e7b538732f654",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01026981,
+        "relative_y": 0.01308813,
+        "scale": 1.02273091
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_03",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist etwas gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten verschoben.",
+      "failures": [],
+      "input_sha256": "272fd9a6bfbb91fc4a41e2faf2cac54b70602b6f2d5346e3917b49d9dd46b7f5",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9828084707260132,
+        "foreground_iou": 0.9939990398463754,
+        "foreground_mse": 7.494563760701567e-05,
+        "normalized_mse": 4.191445987089537e-05
+      },
+      "output_sha256": "7dfaf00372555ebc4c5108e33c4a3e4426b738754be1054f812b22144cfee3b4",
+      "reference_svg_sha256": "c4f03caf8aae839f2ee63da38d1b51c6b82732d2edcf11650173a83765e94583",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02481828,
+        "relative_y": 0.02371981,
+        "scale": 1.04960849
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_04",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist etwas gr\u00f6\u00dfer dargestellt und ein wenig nach rechts und unten verschoben.",
+      "failures": [],
+      "input_sha256": "4727ed2e402abc95bc761ac594acc8651c61658f74d0de6c35c290a6d60cd298",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9662677049636841,
+        "foreground_iou": 0.9949348769898697,
+        "foreground_mse": 0.00010529179417062551,
+        "normalized_mse": 5.6264612794620916e-05
+      },
+      "output_sha256": "b0f9efd843ba1b8a6b558253e793e99931150863c195bf618d0aa5ef012baf75",
+      "reference_svg_sha256": "02c55b80282b795fdfe6ae0ed257e6402767abd934626a44842addee3d5bd1dd",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01060849,
+        "relative_y": 0.00549911,
+        "scale": 1.04759334
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_05",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig gr\u00f6\u00dfer dargestellt und leicht nach rechts und oben versetzt.",
+      "failures": [],
+      "input_sha256": "92948c5dfb9c264f3278ef499d9cb11cbed3c56ba801786807e196fd3317deee",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9854084849357605,
+        "foreground_iou": 0.9954522486104093,
+        "foreground_mse": 7.055241439957172e-05,
+        "normalized_mse": 3.684099283418618e-05
+      },
+      "output_sha256": "d54abd30755f0e131f696dca75022883e66afd4b6feefcf8b1f5ffb4d785959e",
+      "reference_svg_sha256": "0dc6e9cce8a2d98ebf56566b39a8132584deab41c4fce09e162135c774a0b477",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01360589,
+        "relative_y": -0.01491027,
+        "scale": 1.02312726
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_06",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist ein wenig gr\u00f6\u00dfer dargestellt und ein wenig nach links und unten verschoben.",
+      "failures": [],
+      "input_sha256": "c90d03fb44a9e82c12c624f8d9c7db64b051e20d6cbd0b3cd5de5d1fe4c50e2f",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9931739568710327,
+        "foreground_iou": 0.9956994687579054,
+        "foreground_mse": 6.594335718546063e-05,
+        "normalized_mse": 3.439293504925445e-05
+      },
+      "output_sha256": "bfb2e9acbf6c4ba48f25b7412d89221d8f3d13d25292dba4d78f0d63c8ed6bf0",
+      "reference_svg_sha256": "a5fa8850b6258cdafec6b69ad0df24c0d2dee294e21380c17582db39341c533b",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02157012,
+        "relative_y": 0.01851427,
+        "scale": 1.02270736
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_07",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig kleiner dargestellt und leicht nach rechts und unten versetzt.",
+      "failures": [],
+      "input_sha256": "fbc749884b43da12b0855501d9672220e3784402777354b6591ea0c4bb7da85b",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.952315092086792,
+        "foreground_iou": 0.99642267473858,
+        "foreground_mse": 0.0001144727211794816,
+        "normalized_mse": 5.3256510000210255e-05
+      },
+      "output_sha256": "d65f2db642a143edbef1cdb68122db2ef6361a6dd51331b67207daf6ea57555c",
+      "reference_svg_sha256": "8ca7e395bc2fa90683592a3dffaa71071712879f76691365d3eba028a7bf37ba",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01872709,
+        "relative_y": 0.01540555,
+        "scale": 0.97843326
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_08",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und ein wenig nach rechts und oben verschoben.",
+      "failures": [],
+      "input_sha256": "ed547aa175795a585ffc3af26bc39529bb32e673e66613c57541ff9e05b964a7",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.944509744644165,
+        "foreground_iou": 0.9979216152019003,
+        "foreground_mse": 0.00010081389336846769,
+        "normalized_mse": 4.235817687003873e-05
+      },
+      "output_sha256": "03a5faa1e6880fe6a7890ff31d1424e011cbb8202f98fe4b1b9695264bf1ec83",
+      "reference_svg_sha256": "0caba590352583a045ca55a5fd3426e466b59ba76ba53de82ae3476c44737a62",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 5.696e-05,
+        "relative_y": -0.00487985,
+        "scale": 0.94373658
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_09",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die Darstellung ist ein wenig kleiner dargestellt und etwas nach links und unten verschoben.",
+      "failures": [],
+      "input_sha256": "f45e9396d7806e151b863c7a500f0555522460c2c15f3f4a99186843c1f84fbd",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9796913266181946,
+        "foreground_iou": 0.9977678571428571,
+        "foreground_mse": 7.148836448322982e-05,
+        "normalized_mse": 3.285328421043232e-05
+      },
+      "output_sha256": "14b59aa699ec188aa10a47b4e0ea89aa940975d26fefdb06677417c12c54e8ef",
+      "reference_svg_sha256": "3c4b23107740a5ca4e2af2bd0f863e47c96b81ead01b02ec9589a7ff3af0a4ca",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.00882165,
+        "relative_y": 0.02442217,
+        "scale": 0.97179237
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_10",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und ein wenig nach rechts und oben versetzt.",
+      "failures": [],
+      "input_sha256": "10a93da6a203e57864632e98693d1920a091738c55c256d0a1310da38a19cac2",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9687513113021851,
+        "foreground_iou": 0.9962231260894828,
+        "foreground_mse": 5.2711442549480125e-05,
+        "normalized_mse": 2.4544768166379072e-05
+      },
+      "output_sha256": "bdd821024303998700a0fd7d5f1d36aacc185927f176d2f17c7b2abddb8d5f8e",
+      "reference_svg_sha256": "28774f7f5f2465618836f1c71aa1dbf4e116dbc048e68d352f094b072eda3e03",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00598912,
+        "relative_y": -0.00110556,
+        "scale": 0.95217827
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_11",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die Darstellung ist ein wenig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "failures": [],
+      "input_sha256": "0520fd76e87d9dfdebdf7b3f0e3010dc83b68deb457d2df1b0889ad3599c1a1d",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9527707099914551,
+        "foreground_iou": 0.9969127862104451,
+        "foreground_mse": 0.00012371010961942375,
+        "normalized_mse": 6.0498961829580367e-05
+      },
+      "output_sha256": "1505db511b3e695132d66888676ecb6b154744b1fa58be044124478ddb51cb26",
+      "reference_svg_sha256": "ca72965aa1a5b19d8e0e1d0639f379b556c1e834c4e7cd240da64e0f2291273d",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02025912,
+        "relative_y": 0.01202643,
+        "scale": 1.012383
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_12",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und etwas nach links und oben verschoben.",
+      "failures": [],
+      "input_sha256": "5840ae25ff126beab94f949cec6229bc4bfecd156b8d325b9807dff5529f3345",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9670782089233398,
+        "foreground_iou": 0.99728555917481,
+        "foreground_mse": 8.957688987720758e-05,
+        "normalized_mse": 4.1730108932824805e-05
+      },
+      "output_sha256": "96623fe5821dd3b6fd80a998526807e82a63ad8e9e71fb90e75d12d307e640ae",
+      "reference_svg_sha256": "cd00dbcbb9a95bf8ba3650f564fa427f914efb9db991f29f6e66338e9427230b",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0004267,
+        "relative_y": -0.00822311,
+        "scale": 0.98611741
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_13",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist ein wenig kleiner dargestellt und leicht nach links und oben versetzt.",
+      "failures": [],
+      "input_sha256": "20855faf1dcb676af4e9c28a6e6e9e8226e7d08be938eadc24b0d9f1c1397bf5",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9774459600448608,
+        "foreground_iou": 0.9979141835518475,
+        "foreground_mse": 0.00010860863403650001,
+        "normalized_mse": 4.6198401832953095e-05
+      },
+      "output_sha256": "6ccab118fc47c9ff77e506ddbabb7255fcf71b8b630400047377e3f8945e8b15",
+      "reference_svg_sha256": "8d5ede159462d1ed2dbd926cd86ef138939a0ffdeec1ca518155c370b4d3c1b1",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.00492319,
+        "relative_y": -0.01528392,
+        "scale": 0.94132628
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_14",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas kleiner dargestellt und leicht nach rechts und unten verschoben.",
+      "failures": [],
+      "input_sha256": "82387ca6e11b1d31f749859a31bfef18db4b66abcf6248b87170e69c0049c831",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9545947313308716,
+        "foreground_iou": 0.9986659551760939,
+        "foreground_mse": 0.00010527379345148802,
+        "normalized_mse": 4.9864444008562714e-05
+      },
+      "output_sha256": "517cf388e33ea8f0f5ecef53c09c6c5c1928cdb320cde33fb12f524691ba34f5",
+      "reference_svg_sha256": "d0c317926976d28ac2a47e41afc430018e809f3630179ef035d08f979fe2c427",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01678132,
+        "relative_y": 0.00418702,
+        "scale": 0.99457761
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_15",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig gr\u00f6\u00dfer dargestellt und ein wenig nach rechts und oben verschoben.",
+      "failures": [],
+      "input_sha256": "3645c50a880ff551f4c8c1dc83e24c30ae2915ec5486e69d478a3e5c2e95e61c",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9869450926780701,
+        "foreground_iou": 0.9960059910134798,
+        "foreground_mse": 4.723787060356699e-05,
+        "normalized_mse": 2.5567600459908135e-05
+      },
+      "output_sha256": "2335a2dd931621a740577ee212dd5816b4cf44029467ca855b9341aa58a817ff",
+      "reference_svg_sha256": "fb09e4cb71c1b1b1f886d2c73e97d1b542b8b446dbb9d723cc850570856d8fe4",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00464134,
+        "relative_y": -0.0226218,
+        "scale": 1.02713853
+      }
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_16",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringf\u00fcgig kleiner dargestellt und ein wenig nach links und oben verschoben.",
+      "failures": [],
+      "input_sha256": "f9388b32cd14f9145737d70acd27b21996f33324c6a182e33fd2576ed0bad180",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9666922688484192,
+        "foreground_iou": 0.998220112726194,
+        "foreground_mse": 5.236635115579702e-05,
+        "normalized_mse": 2.3607753973919898e-05
+      },
+      "output_sha256": "cd95d6a56fa29fbaf2cc79cfd8557fc88e74067d5ca1799c4983f33da014dd04",
+      "reference_svg_sha256": "8ce33fad8cfe0fb6fac528e40f0942129f44aedc2507869ef0e220f8f3a8a6d6",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01471538,
+        "relative_y": -0.02446471,
+        "scale": 0.94347468
+      }
+    }
+  ],
+  "iterations": 64,
+  "limits": {
+    "max_foreground_mse": 0.04,
+    "max_normalized_mse": 0.01,
+    "max_path_commands": 160,
+    "max_svg_elements": 80,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85
+  },
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261011,
+  "source_description_sha256": "02bfde594f8483b97acd9a242324399dc81a443cdfb5cb9dd66fb7a67d62019a",
+  "source_svg_sha256": "201f21061747c876636b09266cb2c0d8bf1b9cfcb5923f2109090f03c50a909c",
+  "summary": {
+    "completed": 17,
+    "failed": 0,
+    "passed": 17,
+    "required": 17,
+    "satisfactory": true
+  },
+  "timeout_seconds": 60
+}

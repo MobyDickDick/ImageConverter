@@ -4,6 +4,56 @@ from src.iCCModules import imageCompositeConverterRendering as rendering
 import pytest
 
 
+@pytest.mark.parametrize('transform', ['translate(3.25 -1.5)', 'scale(1.2)',
+    'translate(1 -2) translate(20 20) scale(.94) translate(-20 -20)'])
+@pytest.mark.parametrize('resolution', [40, 80])
+def test_grouped_circle_gradient_preserves_native_mask_and_constant_color(transform, resolution):
+    import cv2
+    import fitz
+    import numpy as np
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">'
+           '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0">'
+           '<stop offset="0" stop-color="#184888"/><stop offset="1" stop-color="#184888"/>'
+           '</linearGradient></defs><rect width="40" height="40" fill="#ffffff"/>'
+           f'<g transform="{transform}"><circle cx="20" cy="20" r="12" fill="url(#g)"/></g></svg>')
+    original = svg
+    def render(content):
+        return rendering.render_svg_to_numpy_inprocess(content, resolution, resolution,
+                   fitz_module=fitz, np_module=np, cv2_module=cv2)
+    actual = render(svg)
+    expected = render(svg.replace('fill="url(#g)"', 'fill="#184888"'))
+    assert np.max(abs(actual.astype(float)-expected)) <= 5
+    assert svg == original
+    assert 'url(#g)' not in rendering._expand_bezier_linear_gradients_for_fitz(svg)
+
+
+def test_nested_group_gradient_tracks_transformed_user_coordinates():
+    import cv2
+    import fitz
+    import numpy as np
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="60">'
+           '<defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="30" y2="0">'
+           '<stop offset="0" stop-color="#0000ff"/><stop offset="1" stop-color="#ff0000"/>'
+           '</linearGradient></defs><rect width="80" height="60" fill="#ffffff"/>'
+           '<g transform="translate(4 5)"><g transform="scale(1.5)">'
+           '<circle cx="20" cy="16" r="12" fill="url(#g)"/></g></g></svg>')
+    actual = rendering.render_svg_to_numpy_inprocess(svg, 80, 60, fitz_module=fitz, np_module=np, cv2_module=cv2)
+    t = ((np.arange(23,45)+.5-4)/1.5-10)/20
+    expected = np.column_stack((255*(1-t), np.zeros(len(t)), 255*t))
+    assert np.max(abs(actual[29,23:45].astype(float)-expected)) < 5
+
+
+@pytest.mark.parametrize('transform', ['rotate(5)', 'scale(1 2)', 'scale(-1)',
+    'translate(nan 0)', 'translate(1 2) unknown(3)', 'scale(0)'])
+def test_group_gradient_leaves_unsupported_transforms_unchanged(transform):
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">'
+           '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0">'
+           '<stop offset="0" stop-color="#112233"/><stop offset="1" stop-color="#334455"/>'
+           f'</linearGradient></defs><g transform="{transform}">'
+           '<circle cx="20" cy="20" r="12" fill="url(#g)"/></g></svg>')
+    assert rendering._expand_bezier_linear_gradients_for_fitz(svg) == svg
+
+
 def test_fitz_adapter_expands_gradient_without_changing_conversion_svg() -> None:
     svg = """<svg xmlns="http://www.w3.org/2000/svg" width="20" height="10">
       <defs><linearGradient id="g" x1="0%" y1="0%" x2="0%" y2="100%">

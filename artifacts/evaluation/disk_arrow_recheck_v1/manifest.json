@@ -1,0 +1,54 @@
+{
+  "schema_version": "disk_arrow_recheck_manifest_v1",
+  "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+  "baseline_description": "Wie GE0038: Hintergrund: GE0999. Pfeil GE0030 jedoch vertikal gespiegelt. . Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+  "provenance": {
+    "commit": "8f6a199829a1662d95d2995c0b524b0b158ce55b",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "fresh original-description CLI frozen before runtime changes",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_symbol_00",
+      "source": "GE0039_M.jpg",
+      "image": "../../images_to_convert/GE0039_M.jpg",
+      "source_sha256": "4920835127f819b5784f75fee1d6f3607326fc7c8444b3cb21e505d2086958ac",
+      "role": "target",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_00.svg",
+      "after_svg": "after/anonymous_symbol_00.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_01",
+      "source": "GE0039_L.jpg",
+      "image": "../../images_to_convert/GE0039_L.jpg",
+      "source_sha256": "e8a21e05cf1ba218fcd8ed53fd2d5e495e881853157a2b0a9ff9aa17ba563022",
+      "role": "size holdout",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_01.svg",
+      "after_svg": "after/anonymous_symbol_01.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_02",
+      "source": "GE0039_S.jpg",
+      "image": "../../images_to_convert/GE0039_S.jpg",
+      "source_sha256": "df6b3897046d591af6a6301b0fa398c7693986e586e9cc1cfd9acee530f18a96",
+      "role": "size holdout",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_02.svg",
+      "after_svg": "after/anonymous_symbol_02.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_03",
+      "source": "independent.png",
+      "image": "independent.png",
+      "source_sha256": "1b11c6c57cc30c994fe6bacaf312a17b5d958b5419dd677561374ace666e264c",
+      "role": "independent holdout",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_03.svg",
+      "after_svg": "after/anonymous_symbol_03.svg"
+    }
+  ]
+}

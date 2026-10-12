@@ -156,6 +156,29 @@ def _expand_axis_aligned_linear_gradients_for_fitz(svg_string: str) -> str:
     return ET.tostring(root, encoding="unicode") if changed else svg_string
 
 
+def _uniform_svg_transform(value):
+    """Return positive uniform scale and translation, or reject unsupported syntax."""
+    scale, tx, ty = 1., 0., 0.
+    cursor = 0
+    for match in re.finditer(r'(translate|scale)\s*\(([^)]*)\)', value):
+        if value[cursor:match.start()].strip(' \t\r\n,'):
+            raise ValueError('unsupported transform')
+        numbers = [float(v) for v in re.split(r'[\s,]+', match[2].strip())]
+        if not 1 <= len(numbers) <= 2 or not all(math.isfinite(v) for v in numbers):
+            raise ValueError('invalid transform')
+        if match[1] == 'translate':
+            tx += scale*numbers[0]
+            ty += scale*(numbers[1] if len(numbers) == 2 else 0.)
+        else:
+            if numbers[0] <= 0 or len(numbers) == 2 and numbers[0] != numbers[1]:
+                raise ValueError('nonuniform or reflected transform')
+            scale *= numbers[0]
+        cursor = match.end()
+    if value[cursor:].strip(' \t\r\n,') or not all(math.isfinite(v) for v in (scale, tx, ty)):
+        raise ValueError('unsupported transform')
+    return scale, tx, ty
+
+
 def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=None, size_w=None, size_h=None, shape_kinds=None) -> str:
     """Paint a closed curve or ellipse through its native antialiasing mask.
 
@@ -163,7 +186,8 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
     SVGs retain curves and gradients. The mask is rendered from the native path
     at the requested output resolution, avoiding repeated edge compositing by
     overlapping gradient bands. Flattening is used only for paint bounds.
-    Unsupported commands, compound paths, transforms and alpha are untouched.
+    Ancestor translation and positive uniform scale preserve the native mask.
+    Unsupported commands, compound paths, other transforms and alpha are untouched.
     """
     shape_kinds = {'path', 'circle', 'ellipse'} if shape_kinds is None else shape_kinds
     if 'linearGradient' not in svg_string:
@@ -172,13 +196,14 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
         root = ET.fromstring(svg_string)
     except ET.ParseError:
         return svg_string
-    if any(e.get('transform') for e in root.iter()):
+    if root.get('transform'):
         return svg_string
     if root.get('preserveAspectRatio', 'xMidYMid meet') not in {'xMidYMid', 'xMidYMid meet'}:
         return svg_string
     namespace = '{http://www.w3.org/2000/svg}'
     ET.register_namespace('', 'http://www.w3.org/2000/svg')
     gradients = {e.get('id'):e for e in root.iter() if e.tag.rsplit('}', 1)[-1] == 'linearGradient'}
+    parents = {child: parent for parent in root.iter() for child in parent}
     changed = False
 
     def flatten(control, output, depth=0):
@@ -207,6 +232,23 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
             geometry_attributes = {'path': {'d'}, 'circle': {'cx', 'cy', 'r'}, 'ellipse': {'cx', 'cy', 'rx', 'ry'},
                                    'rect': {'x', 'y', 'width', 'height', 'rx', 'ry'}}[kind]
             if set(path.attrib)-({'id','fill','stroke','stroke-width','stroke-linejoin','data-role'} | geometry_attributes):
+                continue
+            chain, ancestor = [], parent
+            while ancestor is not root:
+                chain.append(ancestor)
+                ancestor = parents[ancestor]
+            scale, tx, ty = 1., 0., 0.
+            try:
+                for ancestor in reversed(chain):
+                    if ancestor.get('transform'):
+                        if ancestor.tag.rsplit('}', 1)[-1] != 'g':
+                            raise ValueError('unsupported transform container')
+                        local_scale, local_x, local_y = _uniform_svg_transform(ancestor.get('transform'))
+                        tx, ty = tx+scale*local_x, ty+scale*local_y
+                        scale *= local_scale
+                if not scale > 0 or not all(math.isfinite(v) for v in (scale, tx, ty)):
+                    raise ValueError('invalid combined transform')
+            except ValueError:
                 continue
             data = path.get('d','')
             if kind == 'rect':
@@ -306,7 +348,12 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                 native_mask = copy.deepcopy(path)
                 native_mask.set('fill', '#ffffff')
                 native_mask.set('stroke', 'none')
-                mask_root.append(native_mask)
+                if (scale, tx, ty) == (1., 0., 0.):
+                    mask_root.append(native_mask)
+                else:
+                    mask_group = ET.SubElement(mask_root, namespace+'g',
+                                               transform=f'translate({tx:.12g} {ty:.12g}) scale({scale:.12g})')
+                    mask_group.append(native_mask)
                 with fitz_module.open(stream=ET.tostring(mask_root),filetype='svg') as doc:
                     page = doc[0]
                     w,h = int(size_w or math.ceil(page.rect.width)),int(size_h or math.ceil(page.rect.height))
@@ -319,6 +366,7 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                 padding = [(w-viewport[2]*zoom)/2,(h-viewport[3]*zoom)/2]
                 axis,low,high = (1,y1,y2) if x1==x2 else (0,x1,x2)
                 coordinates = viewport[axis]+(np.arange((h,w)[1-axis])+.5-padding[axis])/zoom
+                coordinates = (coordinates-(tx, ty)[axis])/scale
                 position = (coordinates-low)/(high-low)
                 colors = np.stack([np.interp(position,[v[0] for v in stops],[v[1][c] for v in stops]) for c in range(3)],axis=-1)
                 colors = np.broadcast_to(colors[:,None,:] if axis==1 else colors[None,:,:],(h,w,3))
@@ -329,8 +377,9 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                 continue
             group = ET.Element(namespace+'g')
             # Full-canvas pixel alignment also preserves antialiasing at curves.
-            image = ET.SubElement(group,namespace+'image',x=str(viewport[0]-padding[0]/zoom),
-                                  y=str(viewport[1]-padding[1]/zoom),width=str(w/zoom),height=str(h/zoom))
+            image = ET.SubElement(group,namespace+'image',x=str((viewport[0]-padding[0]/zoom-tx)/scale),
+                                  y=str((viewport[1]-padding[1]/zoom-ty)/scale),
+                                  width=str(w/zoom/scale),height=str(h/zoom/scale))
             image.set('href','data:image/png;base64,'+encoded)
             outline = copy.deepcopy(path)
             outline.set('fill','none')

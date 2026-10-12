@@ -1,0 +1,46 @@
+{
+  "frozen_before_equal": true,
+  "svg_checks": [
+    {
+      "case_id": "anonymous_symbol_00",
+      "hashes": {
+        "before": "51ff819727929005315f887d7ca9492371ab4d0d380b9fafbed0d7b83c6c4c05",
+        "after": "85578c839134de8ebba505411c67cc055f271e6f2725235c47a4a44a119d49ca"
+      },
+      "both_runs_equal": true,
+      "frozen_before_equal": true
+    },
+    {
+      "case_id": "anonymous_symbol_01",
+      "hashes": {
+        "before": "dc3297538f25cb45893271c5fab6d4abd35b8e95ac68448a411e3ea45ceea26e",
+        "after": "392e9189200f1d275d167df6fd7aedf27e1bdb2080955c78184a405e865e2f12"
+      },
+      "both_runs_equal": true,
+      "frozen_before_equal": true
+    },
+    {
+      "case_id": "anonymous_symbol_02",
+      "hashes": {
+        "before": "99e263ba163a4796c712de49b4581a4888704f8424da9b189fd8c3d53ad72305",
+        "after": "bb8527e45f879383ec34cdc8d5d156592178cc6cfbbced1f6909fb7789b63c8e"
+      },
+      "both_runs_equal": true,
+      "frozen_before_equal": true
+    },
+    {
+      "case_id": "anonymous_symbol_03",
+      "hashes": {
+        "before": "17934e754fd0f2930b2ef5dd10bba23c0196fd8f80e03dd7b3217cc30903a7cc",
+        "after": "162bbff7ecfbfc4778f2b6e5828bf0874fe061b9caa1a19a4a58732557bb549d"
+      },
+      "both_runs_equal": true,
+      "frozen_before_equal": true
+    }
+  ],
+  "gates_and_metrics_equal": true,
+  "runs": [
+    ".tmp/disk-arrow-check-04",
+    ".tmp/disk-arrow-check-05"
+  ]
+}
