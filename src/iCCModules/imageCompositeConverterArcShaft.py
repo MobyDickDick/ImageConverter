@@ -26,9 +26,57 @@ def reverse_arc_shaft_svg(svg):
     return ET.tostring(root, encoding='unicode') + '\n'
 
 
+def turn_arc_shaft_svg(svg):
+    """Turn the analytic upper-opening motif counterclockwise into native axes."""
+    root = ET.fromstring(svg)
+    width, height = float(root.get('width')), float(root.get('height'))
+    root.set('width', f'{height:g}')
+    root.set('height', f'{width:g}')
+    root.set('viewBox', f'0 0 {height:g} {width:g}')
+    for shape in root.iter():
+        kind = shape.tag.rsplit('}', 1)[-1]
+        if kind == 'rect':
+            x, y, w, h = (float(shape.get(k, 0)) for k in ('x', 'y', 'width', 'height'))
+            shape.attrib.update(x=f'{y:g}', y=f'{width-x-w:g}', width=f'{h:g}', height=f'{w:g}')
+        elif kind == 'path':
+            match = re.fullmatch(r'M ([\d.e+-]+) ([\d.e+-]+) A ([\d.e+-]+) ([\d.e+-]+) 0 0 0 ([\d.e+-]+) ([\d.e+-]+)', shape.get('d', ''))
+            if match is None:
+                raise ValueError('Expected one analytic upper-opening half-ellipse')
+            lx, cy, rx, ry, ex, ey = map(float, match.groups())
+            shape.set('d', f'M {cy:g} {width-lx:g} A {ry:g} {rx:g} 0 0 0 {ey:g} {width-ex:g}')
+        elif kind == 'linearGradient':
+            shape.attrib.update(x1='0', y1='1', x2='0', y2='0')
+    return ET.tostring(root, encoding='unicode')+'\n'
+
+
 def fit_arc_shaft(width, height, *, description, image, render_fn, error_fn):
-    """Normalize a declared lower opening to the existing upper-opening fit."""
+    """Normalize explicitly described directions to the upper-opening fit."""
     text = str(description or '').casefold()
+    if 'links offen' in text:
+        if ('rechter halbkreis' not in text or 'links neben' not in text
+                or 'waagerecht' not in text or 'vertikal' not in text
+                or any(token in text for token in ('oben offen', 'unten offen', 'rechts offen', 'horizontal'))):
+            return None
+        arr = np.asarray(image)
+        if arr.shape != (height, width, 3):
+            return None
+
+        def normalized_render(svg, w, h):
+            raster = render_fn(turn_arc_shaft_svg(svg), h, w)
+            return None if raster is None else np.rot90(raster, -1)
+
+        normalized = text.replace('links offen', 'oben offen').replace('vertikal', 'horizontal')
+        result = _fit_upper_open_arc_shaft(height, width, description=normalized,
+                                         image=np.rot90(arr, -1), render_fn=normalized_render,
+                                         error_fn=error_fn, preserve_initial_error=True)
+        if result is None:
+            return None
+        result['svg'] = turn_arc_shaft_svg(result['svg'])
+        result['rendered'] = np.rot90(result['rendered']).copy()
+        p = result['parameters'].copy()
+        p[:9] = [p[1], height-p[0], p[3], p[2], p[4], p[6], height-p[5]-p[7], p[8], p[7]]
+        result.update(parameters=p, opening='left')
+        return result
     lower = 'unten offen' in text
     if not lower:
         return _fit_upper_open_arc_shaft(width, height, description=text,

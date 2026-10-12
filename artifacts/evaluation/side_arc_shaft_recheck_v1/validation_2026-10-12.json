@@ -1,0 +1,65 @@
+{
+  "archive": {
+    "all_previous_recheck_mean_delta2_unchanged": true,
+    "case_count": 230,
+    "known_drift_count": 22,
+    "known_drift_list_unchanged": true,
+    "previous_records": 216,
+    "previous_records_unchanged": true,
+    "recheck_passed": 230
+  },
+  "baseline_commit": "478c6f0471685f4c7405e9673d50005e2166d327",
+  "branch": "codex/ge9022-quality-2026-10-12",
+  "catalog_acceptance": {
+    "all_28_neutral_svgs_byte_identical": true,
+    "all_real_name_after_svgs_byte_identical": true,
+    "forbidden_svg_reads": 0,
+    "frozen_original_baselines_reproduced": true,
+    "neutral_cases": 14,
+    "real_name_cases": 14,
+    "regressed_metrics": 0,
+    "target_after_mean_delta2": 186.70166015625,
+    "target_before_mean_delta2_neutral": 10904.9755859375,
+    "target_before_mean_delta2_original_catalog": 11431.2255859375
+  },
+  "checks": {
+    "cli_help": "pass",
+    "compileall": "pass",
+    "diff_whitespace": "pass",
+    "runtime_id_zero": "pass",
+    "saved_artifact_integrity": "pass"
+  },
+  "date": "2026-10-12",
+  "focused": {
+    "failed": 0,
+    "log": "side-arc-focused-1.log",
+    "passed": 59,
+    "seconds": 129.04
+  },
+  "independent_plan_b": {
+    "asymmetric_gradient_check": "pass",
+    "hashes_metrics_and_gates_reproduced": true,
+    "passed": 17,
+    "required": 17,
+    "runs": 2,
+    "seed": 20261012
+  },
+  "smoke": {
+    "failed": 0,
+    "log": "side-arc-smoke.log",
+    "passed": 2,
+    "seconds": 11.33
+  },
+  "standard_profile": {
+    "command": ".venv/Scripts/python.exe -m pytest -q --basetemp .tmp/side-arc-standard-tests",
+    "environment": {
+      "IMAGE_CONVERTER_ISOLATE_SVG_RENDER": "0",
+      "RUN_HEAVY_CONVERSION_TESTS": "0"
+    },
+    "failed": 0,
+    "log": "standard_profile.log",
+    "passed": 2465,
+    "seconds": 1940.87,
+    "skipped": 30
+  }
+}

@@ -1,0 +1,221 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere GE9022_1M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_1M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert GE9022_1M.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_1M | Qualität: Optimierungsfehler/Pixel=0.035195, Mean-Delta²=11634.069336, RGB-RMSE/Kanal=62.273775, Raumscore=26522.343757, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere GE9022_1S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_1S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.616438, localized_error_fraction=0.755468).
+[INFO] Konvertiert GE9022_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_1S | Qualität: Optimierungsfehler/Pixel=0.112889, Mean-Delta²=8273.033203, RGB-RMSE/Kanal=52.513596, Raumscore=23862.775266, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9022_2M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_2M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert GE9022_2M.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_2M | Qualität: Optimierungsfehler/Pixel=0.037453, Mean-Delta²=11431.225586, RGB-RMSE/Kanal=61.728507, Raumscore=25758.788755, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere GE9022_2S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_2S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.741176, localized_error_fraction=0.848954).
+[INFO] Konvertiert GE9022_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_2S | Qualität: Optimierungsfehler/Pixel=0.085722, Mean-Delta²=6459.456543, RGB-RMSE/Kanal=46.402071, Raumscore=21916.705807, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere GE9022_3M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_3M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert GE9022_3M.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_3M | Qualität: Optimierungsfehler/Pixel=0.029883, Mean-Delta²=7466.933105, RGB-RMSE/Kanal=49.889655, Raumscore=16700.579380, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9022_3S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_3S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.469880, localized_error_fraction=0.842371).
+[INFO] Konvertiert GE9022_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_3S | Qualität: Optimierungsfehler/Pixel=0.065581, Mean-Delta²=4331.116699, RGB-RMSE/Kanal=37.996126, Raumscore=13908.145853, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere GE9022_4M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_4M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert GE9022_4M.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_4M | Qualität: Optimierungsfehler/Pixel=0.025390, Mean-Delta²=4303.463379, RGB-RMSE/Kanal=37.874633, Raumscore=8942.902750, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.7s
+[INFO] Konvertiere GE9022_4S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_4S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.645161, localized_error_fraction=0.892292).
+[INFO] Konvertiert GE9022_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_4S | Qualität: Optimierungsfehler/Pixel=0.044863, Mean-Delta²=2000.563354, RGB-RMSE/Kanal=25.823525, Raumscore=7164.821361, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.7s
+[INFO] Konvertiere GE9022_5M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_5M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert GE9022_5M.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_5M | Qualität: Optimierungsfehler/Pixel=0.027685, Mean-Delta²=7892.710938, RGB-RMSE/Kanal=51.292335, Raumscore=16276.733900, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.7s
+[INFO] Konvertiere GE9022_5S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_5S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=1.000000, localized_error_fraction=0.695238).
+[INFO] Konvertiert GE9022_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_5S | Qualität: Optimierungsfehler/Pixel=0.089919, Mean-Delta²=5480.713379, RGB-RMSE/Kanal=42.742303, Raumscore=15410.728929, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.7s
+[INFO] Konvertiere GE9022_6M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_6M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert GE9022_6M.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_6M | Qualität: Optimierungsfehler/Pixel=0.044237, Mean-Delta²=13729.364258, RGB-RMSE/Kanal=67.649499, Raumscore=29556.658121, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.7s
+[INFO] Konvertiere GE9022_6S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_6S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.415584, localized_error_fraction=0.837100).
+[INFO] Konvertiert GE9022_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_6S | Qualität: Optimierungsfehler/Pixel=0.101267, Mean-Delta²=8595.046875, RGB-RMSE/Kanal=53.525841, Raumscore=27044.952592, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.8s
+[INFO] Konvertiere GE9022_7M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_7M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert GE9022_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_7M | Qualität: Optimierungsfehler/Pixel=0.022144, Mean-Delta²=9541.827148, RGB-RMSE/Kanal=56.396889, Raumscore=22317.280548, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.8s
+[INFO] Konvertiere GE9022_7S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9022_7S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.391892, localized_error_fraction=0.727675).
+[INFO] Konvertiert GE9022_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_7S | Qualität: Optimierungsfehler/Pixel=0.089100, Mean-Delta²=8012.629883, RGB-RMSE/Kanal=51.680525, Raumscore=20995.483243, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.7s
+[INFO] Konvertiere GE9022_1S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9022_1S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.616438, localized_error_fraction=0.754545).
+[INFO] Konvertiert GE9022_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_1S | Qualität: Optimierungsfehler/Pixel=0.112941, Mean-Delta²=8250.413086, RGB-RMSE/Kanal=52.441755, Raumscore=23762.546197, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere GE9022_6S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9022_6S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.415584, localized_error_fraction=0.836376).
+[INFO] Konvertiert GE9022_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_6S | Qualität: Optimierungsfehler/Pixel=0.102185, Mean-Delta²=8570.873047, RGB-RMSE/Kanal=53.450516, Raumscore=26955.078193, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere GE9022_5S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9022_5S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=1.000000, localized_error_fraction=0.695238).
+[INFO] Konvertiert GE9022_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_5S | Qualität: Optimierungsfehler/Pixel=0.090263, Mean-Delta²=5480.713379, RGB-RMSE/Kanal=42.742303, Raumscore=15410.728929, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.7s
+[INFO] Konvertiere GE9022_7S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9022_7S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.391892, localized_error_fraction=0.726926).
+[INFO] Konvertiert GE9022_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_7S | Qualität: Optimierungsfehler/Pixel=0.089633, Mean-Delta²=8021.756836, RGB-RMSE/Kanal=51.709950, Raumscore=20994.679479, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.7s
+[INFO] Konvertiere GE9022_2S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9022_2S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.741176, localized_error_fraction=0.848954).
+[INFO] Konvertiert GE9022_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_2S | Qualität: Optimierungsfehler/Pixel=0.082878, Mean-Delta²=6459.456543, RGB-RMSE/Kanal=46.402071, Raumscore=21916.705807, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere GE9022_3S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9022_3S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.469880, localized_error_fraction=0.842371).
+[INFO] Konvertiert GE9022_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_3S | Qualität: Optimierungsfehler/Pixel=0.065941, Mean-Delta²=4331.116699, RGB-RMSE/Kanal=37.996126, Raumscore=13908.145853, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.5s
+[INFO] Konvertiere GE9022_4S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9022_4S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.645161, localized_error_fraction=0.892292).
+[INFO] Konvertiert GE9022_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_4S | Qualität: Optimierungsfehler/Pixel=0.046178, Mean-Delta²=2000.563354, RGB-RMSE/Kanal=25.823525, Raumscore=7164.821361, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.7s
+[INFO] Konvertiere GE9022_1S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9022_1S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.616438, localized_error_fraction=0.750519).
+[INFO] Konvertiert GE9022_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_1S | Qualität: Optimierungsfehler/Pixel=0.113585, Mean-Delta²=8266.053711, RGB-RMSE/Kanal=52.491440, Raumscore=23668.990948, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.8s
+[INFO] Konvertiere GE9022_6S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9022_6S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.415584, localized_error_fraction=0.835814).
+[INFO] Konvertiert GE9022_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_6S | Qualität: Optimierungsfehler/Pixel=0.102559, Mean-Delta²=8558.870117, RGB-RMSE/Kanal=53.413076, Raumscore=26875.784533, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.5s
+[INFO] Konvertiere GE9022_5S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9022_5S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=1.000000, localized_error_fraction=0.695238).
+[INFO] Konvertiert GE9022_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_5S | Qualität: Optimierungsfehler/Pixel=0.090659, Mean-Delta²=5480.713379, RGB-RMSE/Kanal=42.742303, Raumscore=15410.728929, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.7s
+[INFO] Konvertiere GE9022_7S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9022_7S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.391892, localized_error_fraction=0.726926).
+[INFO] Konvertiert GE9022_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_7S | Qualität: Optimierungsfehler/Pixel=0.089363, Mean-Delta²=8021.756836, RGB-RMSE/Kanal=51.709950, Raumscore=20994.679479, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.8s
+[INFO] Konvertiere GE9022_2S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9022_2S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.741176, localized_error_fraction=0.848954).
+[INFO] Konvertiert GE9022_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_2S | Qualität: Optimierungsfehler/Pixel=0.083122, Mean-Delta²=6459.456543, RGB-RMSE/Kanal=46.402071, Raumscore=21916.705807, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.8s
+[INFO] Konvertiere GE9022_3S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9022_3S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.469880, localized_error_fraction=0.842371).
+[INFO] Konvertiert GE9022_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_3S | Qualität: Optimierungsfehler/Pixel=0.065844, Mean-Delta²=4331.116699, RGB-RMSE/Kanal=37.996126, Raumscore=13908.145853, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.5s
+[INFO] Konvertiere GE9022_4S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9022_4S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE9022_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.645161, localized_error_fraction=0.892292).
+[INFO] Konvertiert GE9022_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9022_4S | Qualität: Optimierungsfehler/Pixel=0.044807, Mean-Delta²=2000.563354, RGB-RMSE/Kanal=25.823525, Raumscore=7164.821361, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.7s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\side-arc-catalog-names-2\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\side-arc-catalog-names-2\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\side-arc-catalog-names-2\before

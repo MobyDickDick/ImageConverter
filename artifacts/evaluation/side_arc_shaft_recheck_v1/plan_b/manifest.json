@@ -1,0 +1,731 @@
+{
+  "cases": [
+    {
+      "blocked_svg_reads": [],
+      "case_id": "original",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.\n",
+      "failures": [],
+      "height": 80,
+      "input": "original/input.png",
+      "input_sha256": "f24ce3b7ec6cc47890606c956d275a36356edd76b6561cb65d9aefb7d0f2689b",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.986883282661438,
+        "foreground_iou": 0.9989417989417989,
+        "foreground_mse": 0.00029898149659857154,
+        "normalized_mse": 5.4490876209456474e-05
+      },
+      "output_sha256": "f82880e3e0a7945fd478c36197d9fb3e368b4046edff656e0d62c648aafc5cae",
+      "output_svg": "original/output.svg",
+      "reference_svg": "original/reference.svg",
+      "reference_svg_sha256": "50a17d0151875bb263c366f3b5abdb24f16387b6942ea9ac6e1ca9e40dc5a730",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.0,
+        "relative_y": 0.0,
+        "scale": 1.0
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_01",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringf\u00fcgig kleiner dargestellt und geringf\u00fcgig nach rechts und oben verschoben.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_01/input.png",
+      "input_sha256": "d44534d53abe648541038f89a7a717e0faa04d3e95713cacc9d4ffcbe8dd2fee",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9188121557235718,
+        "foreground_iou": 0.9904458598726115,
+        "foreground_mse": 0.0010781470919027925,
+        "normalized_mse": 0.00019846508803311735
+      },
+      "output_sha256": "da3b65920e24c79580b109f5d957c1ef8c616c1a443380bfe97af024c51e1442",
+      "output_svg": "probe_01/output.svg",
+      "reference_svg": "probe_01/reference.svg",
+      "reference_svg_sha256": "e3e907a1aad470275b872cbf5249adfdad4d67289320715296254420f29aa7fb",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01445316,
+        "relative_y": -0.02492886,
+        "scale": 0.98879567
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_02",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig kleiner dargestellt und ein wenig nach links und unten verschoben.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_02/input.png",
+      "input_sha256": "f5352b1036cd60a9cff9501541eaece8b2c1d766120f104e3ac0db00e943b98c",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8155254125595093,
+        "foreground_iou": 0.988359201773836,
+        "foreground_mse": 0.001375981722958386,
+        "normalized_mse": 0.00024046076578088105
+      },
+      "output_sha256": "c6a50a282d19b78ca1a9fa4ef7dc00fab3c10ddf900efcbcdf3d7c73f9c50066",
+      "output_svg": "probe_02/output.svg",
+      "reference_svg": "probe_02/reference.svg",
+      "reference_svg_sha256": "08e1ced85b353364bbd9cebaeb68ea814ace263dee93f9ffe49c2da4de5ac84e",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01350358,
+        "relative_y": 0.01943166,
+        "scale": 0.94602705
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_03",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist ein wenig kleiner dargestellt und etwas nach rechts und oben versetzt.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_03/input.png",
+      "input_sha256": "ddc617a3ecc729b04b8383585cb8a5ffeaa053316650ae7455e5decd9b8b9b41",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9087543487548828,
+        "foreground_iou": 0.9953810623556582,
+        "foreground_mse": 0.0010162699036300182,
+        "normalized_mse": 0.00017035558994393796
+      },
+      "output_sha256": "1423c8e8b7f2bb21a20bf772e738fb0d049d8ddc5e8dbaab7a95e7c1897ea935",
+      "output_svg": "probe_03/output.svg",
+      "reference_svg": "probe_03/reference.svg",
+      "reference_svg_sha256": "cfebe80bebf93bca6763ba8009d9a4bf28fbf3b8c31602e1f100099ce3a22ca3",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00198084,
+        "relative_y": -0.02084085,
+        "scale": 0.95375349
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_04",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Die Darstellung ist ein wenig kleiner dargestellt und leicht nach rechts und oben verschoben.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_04/input.png",
+      "input_sha256": "1d2772fa20e95e1e365e7be9f1a5d1ad09392cb8c806b0f12316d9049d96d867",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9940017461776733,
+        "foreground_iou": 0.9530516431924883,
+        "foreground_mse": 0.001200455822981894,
+        "normalized_mse": 0.0002219141460955143
+      },
+      "output_sha256": "a38318280cc5a10ac02f9c7596e3486efa687b60c4a17841311d734f51c28276",
+      "output_svg": "probe_04/output.svg",
+      "reference_svg": "probe_04/reference.svg",
+      "reference_svg_sha256": "277a73a43515883b3fc9329526f4a4310cf4d7bf962e00b0455cf27529df7e95",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01163019,
+        "relative_y": -0.02060392,
+        "scale": 0.97493301
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_05",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Die Darstellung ist ein wenig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten verschoben.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_05/input.png",
+      "input_sha256": "767185ea65db84967f3c2dcd35f9e34501652036788168c6c79e1d47a459cb0d",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9219837188720703,
+        "foreground_iou": 0.9613180515759312,
+        "foreground_mse": 0.0013762442395091057,
+        "normalized_mse": 0.0002787409466691315
+      },
+      "output_sha256": "60e1f589a0243df0260795436c040cb511e82523f762da4f4e5c4adec8bf1d09",
+      "output_svg": "probe_05/output.svg",
+      "reference_svg": "probe_05/reference.svg",
+      "reference_svg_sha256": "d73bea31a15c83e77b341199f014640e2d5f47adb81a00a675f51862b47a9e50",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02471762,
+        "relative_y": 0.01192783,
+        "scale": 1.01351307
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_06",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht kleiner dargestellt und ein wenig nach rechts und oben versetzt.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_06/input.png",
+      "input_sha256": "92d9c5bf7c1d75831d75690351d8e802a32845eae46b351ff14c72fb509fb245",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9800633192062378,
+        "foreground_iou": 0.9934541792547835,
+        "foreground_mse": 0.0007727887132205069,
+        "normalized_mse": 0.0001482260413467884
+      },
+      "output_sha256": "8395b422537418afb5b070ee124b72ed0b4eeab3e73e2e2c762ee62a67961ad1",
+      "output_svg": "probe_06/output.svg",
+      "reference_svg": "probe_06/reference.svg",
+      "reference_svg_sha256": "14eead1ef2a3455767875e84d27fa8171187233d399cdb276482d193e3cd08ba",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02004818,
+        "relative_y": -0.01030608,
+        "scale": 0.99608622
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_07",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig kleiner dargestellt und etwas nach links und unten versetzt.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_07/input.png",
+      "input_sha256": "cd27c2dd9452d1d8f5b23ece2e5718cfd050bd69b7f2ebeeb4ea4c7bfe274ad8",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8245638608932495,
+        "foreground_iou": 0.9951113525258012,
+        "foreground_mse": 0.0007610242464579642,
+        "normalized_mse": 0.00013533997116610408
+      },
+      "output_sha256": "6378e0f4e265abd2ba96d1ddd4ee232c093b521861eb8f9f2b5ce55896e7217a",
+      "output_svg": "probe_07/output.svg",
+      "reference_svg": "probe_07/reference.svg",
+      "reference_svg_sha256": "94d13ba0826873e00adc5241b794029b75fbae9699770079d663b196a0af523f",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01532999,
+        "relative_y": 0.01448317,
+        "scale": 0.96703543
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_08",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas gr\u00f6\u00dfer dargestellt und etwas nach links und unten verschoben.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_08/input.png",
+      "input_sha256": "4011ee4eaea7ffdd18589ebd96d9611b6f753faa399e1cdddfdc6b243677cb5f",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8625038266181946,
+        "foreground_iou": 0.9946025515210991,
+        "foreground_mse": 0.00018831992929335684,
+        "normalized_mse": 4.1418486944166943e-05
+      },
+      "output_sha256": "fd8c31d72721c727dd7e3641d4f9d2c7c6568f268a7f8a7b2b18ecdfad1d86d1",
+      "output_svg": "probe_08/output.svg",
+      "reference_svg": "probe_08/reference.svg",
+      "reference_svg_sha256": "98f47c95b56ae97b1b260cc09b42721e992c9fd45837fc1b34e8909618ada581",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01574826,
+        "relative_y": 0.01842313,
+        "scale": 1.02447474
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_09",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und ein wenig nach rechts und oben versetzt.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_09/input.png",
+      "input_sha256": "20b35ceb6b6bbf65d9459c29c716792b667400a4cf131532905b0c9fc8d952bd",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8824922442436218,
+        "foreground_iou": 0.9966313763233878,
+        "foreground_mse": 0.00020573020447045565,
+        "normalized_mse": 5.664734999299981e-05
+      },
+      "output_sha256": "4f66c22f5fa1df3f6bba2e1a3827981a738086a9f42e60fe1021ec30cb2ad355",
+      "output_svg": "probe_09/output.svg",
+      "reference_svg": "probe_09/reference.svg",
+      "reference_svg_sha256": "1f4bbb09b049982494a086c6c87009521d3c53fe1ed92e81d705d5251625dcc9",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00521871,
+        "relative_y": -0.00578378,
+        "scale": 1.03970856
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_10",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und oben versetzt.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_10/input.png",
+      "input_sha256": "bafc3703565c943d035ad8ef56b53188d55353ead2034f91ead67b97f94a8b0a",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9087879657745361,
+        "foreground_iou": 0.9622212107419208,
+        "foreground_mse": 0.00015461065049748868,
+        "normalized_mse": 3.385138188605197e-05
+      },
+      "output_sha256": "662e3dad9ef15f98fcb7769c69cc56ebd5fbb4eef0c12da2aeefdc837e077e71",
+      "output_svg": "probe_10/output.svg",
+      "reference_svg": "probe_10/reference.svg",
+      "reference_svg_sha256": "e143bedf79b85cd683e557835f2ae39102ca256fe5a779677b2202f396ccc2de",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01793675,
+        "relative_y": -0.00144758,
+        "scale": 1.05774465
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_11",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und leicht nach links und unten versetzt.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_11/input.png",
+      "input_sha256": "f06ddbddb8a376ad58abae2be71a3735591d9f6d1633d48138c27c3c8940345e",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.7877634763717651,
+        "foreground_iou": 0.9948574100046751,
+        "foreground_mse": 0.0001418353640474379,
+        "normalized_mse": 3.646131881396286e-05
+      },
+      "output_sha256": "453ff023e7736d4b5e41fa24c39358d9257a0dc0e79798939823b6fb63679b25",
+      "output_svg": "probe_11/output.svg",
+      "reference_svg": "probe_11/reference.svg",
+      "reference_svg_sha256": "99e20be4ca66f7c5c169cae47097e1a8f2ec4652453a2c57a28a4febcf4b76d7",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02343779,
+        "relative_y": 0.00396574,
+        "scale": 1.0378795
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_12",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas kleiner dargestellt und etwas nach rechts und unten versetzt.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_12/input.png",
+      "input_sha256": "8fa531c4ada6fdada89cc68fb9fcb278838aa5690250fdf4051f272916f4e53c",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.7750581502914429,
+        "foreground_iou": 0.9937853107344633,
+        "foreground_mse": 0.0005508065223693848,
+        "normalized_mse": 9.486389899393544e-05
+      },
+      "output_sha256": "e338646bf34f14a15522a789a559c1ab8deedc77e87261e745b4515652f93155",
+      "output_svg": "probe_12/output.svg",
+      "reference_svg": "probe_12/reference.svg",
+      "reference_svg_sha256": "10e47baf89e662b814ac8b7b6bcbcf7bf63da320a48226ec01228f867528977e",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02288781,
+        "relative_y": 0.01270859,
+        "scale": 0.94193545
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_13",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Das Motiv ist etwas gr\u00f6\u00dfer dargestellt und etwas nach rechts und unten verschoben.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_13/input.png",
+      "input_sha256": "353b1770daffa8fff08afcb9f9665d4c8e1fb22ab55ec1a30d69bf9c7d737da4",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8585126996040344,
+        "foreground_iou": 0.9977095739807604,
+        "foreground_mse": 0.0004885561647824943,
+        "normalized_mse": 0.00010289582860423252
+      },
+      "output_sha256": "adc7e693a78cb1d1fe50500c89ec66949a8c90e5b9e5b2853a9f9b025495b2b7",
+      "output_svg": "probe_13/output.svg",
+      "reference_svg": "probe_13/reference.svg",
+      "reference_svg_sha256": "2d33f58d8a9716d7420205d797e2bd9530dd41dc9e2f17d1917e4b58f1893b30",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.0058311,
+        "relative_y": 0.00462636,
+        "scale": 1.04990376
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_14",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringf\u00fcgig kleiner dargestellt und leicht nach rechts und oben versetzt.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_14/input.png",
+      "input_sha256": "aae59c39ecf4fc61b139b667fd1c6d10fce677ff9e58f03392184c133f2fe804",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8571255803108215,
+        "foreground_iou": 0.9953512396694215,
+        "foreground_mse": 0.0005698672030121088,
+        "normalized_mse": 0.00011324392107781023
+      },
+      "output_sha256": "0b9d4c28eb632aeb686ea75de0c2d986d9ea7191033f8170895db5b47fd77d71",
+      "output_svg": "probe_14/output.svg",
+      "reference_svg": "probe_14/reference.svg",
+      "reference_svg_sha256": "444f71c01550f715adc9a7b167789e80326183656a31f4d327892984a614688c",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02323856,
+        "relative_y": -0.01757914,
+        "scale": 0.98406626
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_15",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas gr\u00f6\u00dfer dargestellt und ein wenig nach rechts und unten verschoben.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_15/input.png",
+      "input_sha256": "e70fc3826d42c5037e5a2d71c7be7c4964055a068eb3833e7a1bc6224895e77f",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.986298680305481,
+        "foreground_iou": 0.9953445065176909,
+        "foreground_mse": 0.0005100292037241161,
+        "normalized_mse": 0.00010610415483824909
+      },
+      "output_sha256": "55b3bfbbbab943558272266ebb85823a49d96b1720104978efc84a504a616032",
+      "output_svg": "probe_15/output.svg",
+      "reference_svg": "probe_15/reference.svg",
+      "reference_svg_sha256": "9df08196f3ceebf6d969d23e321fa1728f7b3a0ca59abb2b642b4125630345aa",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.0039167,
+        "relative_y": 0.01492992,
+        "scale": 1.0350226
+      },
+      "width": 130
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_16",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667,
+        "path_count": 1,
+        "vector_element_count": 3
+      },
+      "description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist leicht gr\u00f6\u00dfer dargestellt und leicht nach rechts und unten verschoben.",
+      "failures": [],
+      "height": 80,
+      "input": "probe_16/input.png",
+      "input_sha256": "63a83708e99e52943a74bce045f8682042709c02ed0c0de5c97b0d6ea370abe2",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.7930452823638916,
+        "foreground_iou": 0.9966362325804902,
+        "foreground_mse": 0.000285561487544328,
+        "normalized_mse": 7.965476106619462e-05
+      },
+      "output_sha256": "ce2d6a95364187147ea97306b342ad71c4019b6580e3f1a7aeed4eb5360ed75e",
+      "output_svg": "probe_16/output.svg",
+      "reference_svg": "probe_16/reference.svg",
+      "reference_svg_sha256": "17bf8b52b7fa85527d520a0b5bd34fb9bd73be732d1722842ce37c3588eff8b4",
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01995797,
+        "relative_y": 0.00861929,
+        "scale": 1.04849942
+      },
+      "width": 130
+    }
+  ],
+  "limits": {
+    "max_foreground_mse": 0.04,
+    "max_normalized_mse": 0.01,
+    "max_path_commands": 160,
+    "max_svg_elements": 80,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85
+  },
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261012,
+  "source_description": "Ein nach links offener U-Bogen als rechter Halbkreis liegt links neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.\n",
+  "source_description_sha256": "fce10421969036edd69813bc39fbc93c3483eb499db1d1a847ccf4faba9b2cda",
+  "source_svg_sha256": "7a409d96d6ff19b591dfbc12e30766a9bba67c8cd44385b8d9c6e1be2c903ac0"
+}
