@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-10-11)
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-12)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `433` · Erledigt `406` · Offen `27`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `434` · Erledigt `407` · Offen `27`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -18,11 +18,24 @@ focused on the actual project scope.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-11)
+### Aktueller Plan-B-Stand (2026-10-12)
+
+- [x] **GE0039 – Linkspfeil auf Verlaufsscheibe:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; alle drei Größen bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage zweimal 17/17, acht neutrale SVGs und sämtliche Gates reproduziert. Details: `docs/next_arbeitspaket_2026-10-12_ge0039_m.md`.
+
+**Neuester Abschluss:** `GE0039_M` und zwei Größen-Holdouts auf
+`codex/ge0039-quality-2026-10-11`. Frische Zielmetrik `10712.346680 → 148.783890`;
+216 Paare in der Erfolgsübersicht, alle 213 bisherigen Indexeinträge unverändert.
+Der Gradientrenderer erhält jetzt Farben bei Verschiebung und gleichmäßiger
+Skalierung übergeordneter Gruppen; native SVG-Verläufe bleiben erhalten.
+Die getrennte Archivprüfung besteht mit **216/216** erneuten Review-Pässen;
+alle 22 bekannten älteren Kompatibilitätsdrifts bleiben unverändert. Der
+Windows-I/O-Fehler des größeren Laufes bleibt separat offen.
+Nächste reguläre Rotation: `GE9022_2M`, `AC0920_L`, `AC1000_S`, `GE0022`,
+`GE9024_1M`. Die drei erledigten GE0039-Varianten sind ausgeschlossen.
 
 - [x] **SE0081 – Quadrat mit unterem Stiel und M:** eigenständige Beschreibungen aktivieren die vorhandene Raster-/Textregistrierung ohne Runtime-Änderung. Ziel und unabhängiger Holdout bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; zwei unabhängige CLI-Batterien bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-11_se0081.md`.
 
-**Neuester Abschluss:** `SE0081` auf `codex/se0081-quality-2026-10-11`.
+**Vorheriger Abschluss:** `SE0081` auf `codex/se0081-quality-2026-10-11`.
 Frische Zielmetrik mit vollständigem Originalkatalog `11891.464844 → 702.781555`;
 neutraler Vorlauf `8904.907227`. Originale Vorlauf-SVGs und
 sämtliche Gateentscheidungen reproduziert. Erfolgsübersicht: 213 Paare;

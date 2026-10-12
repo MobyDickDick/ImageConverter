@@ -1,5 +1,5 @@
 {
-  "case_count": 213,
+  "case_count": 216,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -2023,6 +2023,57 @@
       "svg": "svgs/DLG0010_1.svg",
       "svg_sha256": "569513d71cc1fc5947fd323ad087fac4e851f03fa1cc1b6ae26a0ca6ee758f4e",
       "variant": "DLG0010_1"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/disk_arrow_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0039_L.jpg",
+      "image_sha256": "e8a21e05cf1ba218fcd8ed53fd2d5e495e881853157a2b0a9ff9aa17ba563022",
+      "mean_delta2": 132.41429138183594,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8107675313949585,
+        "error_per_pixel": 0.0006787865763518439,
+        "object_mask_iou": 0.9963381141287763
+      },
+      "svg": "svgs/GE0039_L.svg",
+      "svg_sha256": "392e9189200f1d275d167df6fd7aedf27e1bdb2080955c78184a405e865e2f12",
+      "variant": "GE0039_L"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/disk_arrow_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0039_M.jpg",
+      "image_sha256": "4920835127f819b5784f75fee1d6f3607326fc7c8444b3cb21e505d2086958ac",
+      "mean_delta2": 148.7838897705078,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8813003301620483,
+        "error_per_pixel": 0.0007627009599923507,
+        "object_mask_iou": 0.9962484368486869
+      },
+      "svg": "svgs/GE0039_M.svg",
+      "svg_sha256": "85578c839134de8ebba505411c67cc055f271e6f2725235c47a4a44a119d49ca",
+      "variant": "GE0039_M"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links heller und rechts dunkler. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach links: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/disk_arrow_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0039_S.jpg",
+      "image_sha256": "df6b3897046d591af6a6301b0fa398c7693986e586e9cc1cfd9acee530f18a96",
+      "mean_delta2": 155.76800537109375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8603259325027466,
+        "error_per_pixel": 0.0007985031673514994,
+        "object_mask_iou": 0.9836065573770492
+      },
+      "svg": "svgs/GE0039_S.svg",
+      "svg_sha256": "bb8527e45f879383ec34cdc8d5d156592178cc6cfbbced1f6909fb7789b63c8e",
+      "variant": "GE0039_S"
     },
     {
       "description": "Blaue Kugelform (blauer Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)",

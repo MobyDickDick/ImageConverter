@@ -1,0 +1,45 @@
+
+--- Verarbeite AC0711_L.jpg ---
+Bildbeschreibung: Kelle mit Quadrat oben. Ein gefülltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten führt. Im Quadrat liegt ein kontrastierender schräger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] AC0711_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.296703, localized_error_fraction=0.808698).
+[INFO] Konvertiert AC0711_L.jpg | Parameter: mode=auto, label=M, variant_name=AC0711_L | Qualität: Optimierungsfehler/Pixel=0.001333, Mean-Delta²=26.610666, RGB-RMSE/Kanal=2.978292, Raumscore=84.067029, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=2.0s
+[INFO] Konvertiere AC0404_1_S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0404_1_S.jpg ---
+Bildbeschreibung: Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach links zeigt. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AC0404_1_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.515152, localized_error_fraction=0.658666).
+[INFO] Konvertiert AC0404_1_S.jpg | Parameter: mode=auto, label=M, variant_name=AC0404_1_S | Qualität: Optimierungsfehler/Pixel=0.015525, Mean-Delta²=302.570007, RGB-RMSE/Kanal=10.042742, Raumscore=763.881876, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.9s
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\marku\AppData\Local\Python\pythoncore-3.10-64\lib\runpy.py", line 227, in run_module
+    return _run_code(code, {}, init_globals, run_name, mod_spec)
+  File "C:\Users\marku\AppData\Local\Python\pythoncore-3.10-64\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\marku\myCloud\imageConverter\tools\recheck_satisfactory_archive.py", line 157, in <module>
+    raise SystemExit(main())
+  File "C:\Users\marku\myCloud\imageConverter\tools\recheck_satisfactory_archive.py", line 139, in main
+    return converter_worker(sys.argv[3:])
+  File "C:\Users\marku\myCloud\imageConverter\tools\run_plan_b_variations.py", line 66, in converter_worker
+    return convert(cli_args)
+  File "C:\Users\marku\myCloud\imageConverter\src\iCCModules\imageCompositeConverterCli.py", line 696, in main
+    return int(app.main(argv))
+  File "C:\Users\marku\myCloud\imageConverter\src\imageCompositeConverter.py", line 2788, in main
+    return cli_helpers.runMainImpl(
+  File "C:\Users\marku\myCloud\imageConverter\src\iCCModules\imageCompositeConverterCli.py", line 656, in runMainImpl
+    out_dir = convert_range_fn(
+  File "C:\Users\marku\myCloud\imageConverter\src\imageCompositeConverter.py", line 2526, in convertRange
+    return imageCompositeConverterRemaining_helpers.convertRange(folder_path, csv_path, iterations, start_ref, end_ref, debug_ac0811_dir, debug_element_diff_dir, output_root, selected_variants, deterministic_order, debug_jpeg_load, debug_trace_path, semantic_only)
+  File "C:\Users\marku\myCloud\imageConverter\src\iCCModules\imageCompositeConverterRemaining.py", line 1534, in convertRange
+    stop_after_failure = conversion_quality_pass_helpers.runQualityPassesImpl(
+  File "C:\Users\marku\myCloud\imageConverter\src\iCCModules\imageCompositeConverterConversionQualityPass.py", line 123, in runQualityPassesImpl
+    checkpoint_fn(
+  File "C:\Users\marku\myCloud\imageConverter\src\iCCModules\imageCompositeConverterRemaining.py", line 1384, in _writeIncrementalCheckpoint
+    _writeBatchFailureSummary(reports_out_dir, batch_failures)
+  File "C:\Users\marku\myCloud\imageConverter\src\iCCModules\imageCompositeConverterRemaining.py", line 593, in _writeBatchFailureSummary
+    return batch_reporting_helpers.writeBatchFailureSummaryImpl(reports_out_dir, failures)
+  File "C:\Users\marku\myCloud\imageConverter\src\iCCModules\imageCompositeConverterBatchReporting.py", line 35, in writeBatchFailureSummaryImpl
+    with open(summary_path, "w", encoding="utf-8", newline="") as f:
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\disk-arrow-archive-recheck\\worker_01\\semantic-only/reports\\batch_failure_summary.csv'

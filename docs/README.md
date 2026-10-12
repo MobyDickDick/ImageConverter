@@ -2,6 +2,8 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [GE0039: Linkspfeil auf Verlaufsscheibe, drei Größen und 17 unabhängige Zufallsfälle (2026-10-12)](next_arbeitspaket_2026-10-12_ge0039_m.md)
+
 - [Katalog-CI: MuPDF-Absturz, Renderisolation und Worker-Erneuerung (2026-10-11)](catalog_render_crash_fix_2026-10-11.md)
 
 - [SE0081: eigenständige M-Quadrat-Beschreibung und 17 unabhängige Zufallsfälle (2026-10-11)](next_arbeitspaket_2026-10-11_se0081.md)
