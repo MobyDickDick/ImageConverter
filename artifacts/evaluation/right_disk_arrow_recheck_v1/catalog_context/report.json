@@ -1,0 +1,207 @@
+{
+  "baseline": {
+    "baseline_sha256": "7e6e56bc50eb44fa32f01211601f918a11bc094c2cadc1ef7c7c28e1777502d6",
+    "cases": {
+      "GE0022": {
+        "dimensions": {
+          "height": 73,
+          "width": 73
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.2564661204814911,
+          "error_per_pixel": 0.05615413843233372,
+          "object_mask_iou": 0.6528089887640449,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "full original catalog and original disk-arrow runtime from baseline commit; PYTHONHASHSEED=0 and TINY_ICC_OUTPUT_VARIATION=0",
+      "commit": "d265e2062de70f906748b6dcc0b3f10b0bb702c6",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "GE0022": "c7bc67075e52b305b157aba28d4730d9696f03d9ff77f153b2f3abd17fc05280"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 198.20755004882812,
+      "after_svg": "after/converted_svgs/GE0022.svg",
+      "after_svg_sha256": "c9ae4a81c06b3aa51446a930a9f7ed3057fac0532e1bac54fedbf7d566d6709e",
+      "before_mean_delta2": 10954.2685546875,
+      "before_svg": "before/converted_svgs/GE0022.svg",
+      "before_svg_sha256": "717610b2466181bc6bb09711bfdf5620701422690466668fca5c2f96b0fc6540",
+      "case_id": "GE0022",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links dunkler und rechts heller. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach rechts: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "inputs/GE0022.jpg",
+      "input_sha256": "c7bc67075e52b305b157aba28d4730d9696f03d9ff77f153b2f3abd17fc05280",
+      "role": "target",
+      "source": "GE0022.jpg",
+      "source_sha256": "c7bc67075e52b305b157aba28d4730d9696f03d9ff77f153b2f3abd17fc05280"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "7e6e56bc50eb44fa32f01211601f918a11bc094c2cadc1ef7c7c28e1777502d6",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8021017909049988,
+          "error_per_pixel": 0.0010160581830005286,
+          "object_mask_iou": 0.9898609501738123,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.2564661204814911,
+          "error_per_pixel": 0.05615413843233372,
+          "object_mask_iou": 0.6528089887640449,
+          "semantic_score": 0.0
+        },
+        "case_id": "GE0022",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0010160581830005286,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9477,
+            "edge_alignment": 0.8021,
+            "pixel_similarity": 0.999,
+            "semantic_score": 1.0,
+            "structure_score": 0.9899
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "full original catalog and original disk-arrow runtime from baseline commit; PYTHONHASHSEED=0 and TINY_ICC_OUTPUT_VARIATION=0",
+      "commit": "d265e2062de70f906748b6dcc0b3f10b0bb702c6",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "GE0022": "c7bc67075e52b305b157aba28d4730d9696f03d9ff77f153b2f3abd17fc05280"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 1,
+      "improved": 1,
+      "satisfactory": 1,
+      "technically_completed": 1
+    }
+  },
+  "schema_version": "disk_arrow_recheck_v1",
+  "strict_pixel_gates": {
+    "GE0022": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8021017909049988,
+        "foreground_iou": 0.9869762174405436,
+        "foreground_mse": 0.0010912056313827634,
+        "normalized_mse": 0.001016058144159615
+      },
+      "satisfactory": true
+    }
+  }
+}

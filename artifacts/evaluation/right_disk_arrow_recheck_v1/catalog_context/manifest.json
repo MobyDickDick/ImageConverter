@@ -1,0 +1,25 @@
+{
+  "schema_version": "disk_arrow_recheck_manifest_v1",
+  "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links dunkler und rechts heller. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach rechts: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+  "direction": "right",
+  "baseline_description": "Wie GE0021: Dicker Pfeil nach oben vor blaugrauem Hintergrund. Hintergrund GE0999. Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+  "provenance": {
+    "commit": "d265e2062de70f906748b6dcc0b3f10b0bb702c6",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "full original catalog and original disk-arrow runtime from baseline commit; PYTHONHASHSEED=0 and TINY_ICC_OUTPUT_VARIATION=0",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "GE0022",
+      "source": "GE0022.jpg",
+      "image": "inputs/GE0022.jpg",
+      "source_sha256": "c7bc67075e52b305b157aba28d4730d9696f03d9ff77f153b2f3abd17fc05280",
+      "role": "target",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links dunkler und rechts heller. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach rechts: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/converted_svgs/GE0022.svg",
+      "after_svg": "after/converted_svgs/GE0022.svg"
+    }
+  ]
+}

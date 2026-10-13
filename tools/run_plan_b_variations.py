@@ -104,9 +104,12 @@ def select_task(svg_dir: Path, descriptions_path: Path, seed: int, *,
 
 
 def render(svg: str, width: int, height: int):
-    np = import_with_vendored_fallback("numpy")
-    cv2 = import_with_vendored_fallback("cv2")
-    fitz = import_with_vendored_fallback("fitz")
+    # Parameter searches render hundreds of candidates. An already imported
+    # module is exactly what import_module would return; avoid repeating the
+    # filesystem scan for optional dependency directories on every candidate.
+    np = sys.modules.get("numpy") or import_with_vendored_fallback("numpy")
+    cv2 = sys.modules.get("cv2") or import_with_vendored_fallback("cv2")
+    fitz = sys.modules.get("fitz") or import_with_vendored_fallback("fitz")
     raster = render_svg_to_numpy_inprocess(
         svg, width, height, fitz_module=fitz, np_module=np, cv2_module=cv2)
     if raster is None:

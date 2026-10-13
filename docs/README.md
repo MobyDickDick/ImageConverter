@@ -2,6 +2,8 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [GE0022: Rechtspfeil auf Verlaufsscheibe und getrenntes Glocken-Quelleninventar (2026-10-13)](next_arbeitspaket_2026-10-13_ge0022.md)
+
 - [AC1000: Kreisscheibe mit M, Kontur beim Beschnitt und drei Größen (2026-10-13)](next_arbeitspaket_2026-10-13_ac1000_s.md)
 
 - [AC0920: Kreisscheibe mit Q, drei Größen und unabhängige Zufallsfälle (2026-10-13)](next_arbeitspaket_2026-10-13_ac0920_l.md)

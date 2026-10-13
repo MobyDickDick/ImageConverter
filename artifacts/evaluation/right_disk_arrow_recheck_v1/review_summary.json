@@ -1,0 +1,188 @@
+{
+  "boundary_conversion_command": "for variant in AC0301_1M_sia AC0232_M GE9024_6S; do ICC_FORCE_RECONVERT=1 python -m src.imageCompositeConverter artifacts\\images_to_convert --descriptions-path artifacts\\images_to_convert\\Finale_Wurzelformen_V3.xml --output-dir artifacts\\converted_images --iterations 64 --start $variant --end $variant --deterministic-order || exit $?; done",
+  "boundary_conversion_command_path": ".tmp/right-arrow-review/plan_b_boundary_conversion_command.sh",
+  "boundary_triple": [
+    {
+      "height": 60,
+      "image_area": 3600,
+      "image_path": "artifacts/images_to_convert/AC0301_1M_sia.jpg",
+      "mean_delta2": 8920.044921875,
+      "normalized_mse": 0.04572623309944893,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0301_1M_sia.svg",
+      "variant": "AC0301_1M_sia",
+      "width": 60
+    },
+    {
+      "height": 30,
+      "image_area": 1350,
+      "image_path": "artifacts/images_to_convert/AC0232_M.jpg",
+      "mean_delta2": 8975.4150390625,
+      "normalized_mse": 0.046010073249070874,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0232_M.svg",
+      "variant": "AC0232_M",
+      "width": 45
+    },
+    {
+      "height": 10,
+      "image_area": 300,
+      "image_path": "artifacts/images_to_convert/GE9024_6S.jpg",
+      "mean_delta2": 8981.6767578125,
+      "normalized_mse": 0.0460421722814943,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/GE9024_6S.svg",
+      "variant": "GE9024_6S",
+      "width": 30
+    }
+  ],
+  "boundary_triple_csv": ".tmp/right-arrow-review/plan_b_boundary_triple_v1.csv",
+  "candidate_triage_csv": ".tmp/right-arrow-review/plan_b_candidate_triage_v1.csv",
+  "max_candidate_image_area": 6400,
+  "max_plan_b_candidates": 5,
+  "max_top_error_cases": 5,
+  "metrics": {
+    "boundary_triple_records": 3,
+    "diff_renderable_pairs": 945,
+    "diff_variants": 952,
+    "ranked_records": 1000,
+    "selected_candidates": 5,
+    "successful_above_threshold": 0,
+    "successful_missing_or_failed": 0,
+    "successful_renderable_pairs": 48,
+    "successful_variants": 48,
+    "top_error_cases": 5
+  },
+  "ranking_csv": ".tmp/right-arrow-review/conversion_quality_ranking_v1.csv",
+  "records_csv": ".tmp/right-arrow-review/conversion_quality_records_v2.csv",
+  "schema_version": "conversion_quality_review_v2",
+  "selected_candidates": [
+    {
+      "height": 20,
+      "image_area": 1200,
+      "image_path": "artifacts/images_to_convert/GE9024_1M.jpg",
+      "mean_delta2": 10928.251953125,
+      "normalized_mse": 0.056020771257849544,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/GE9024_1M.svg",
+      "variant": "GE9024_1M",
+      "width": 60
+    },
+    {
+      "height": 75,
+      "image_area": 5625,
+      "image_path": "artifacts/images_to_convert/GE0300.jpg",
+      "mean_delta2": 10822.984375,
+      "normalized_mse": 0.05548114507240805,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/GE0300.svg",
+      "variant": "GE0300",
+      "width": 75
+    },
+    {
+      "height": 51,
+      "image_area": 2601,
+      "image_path": "artifacts/images_to_convert/b_heating1.jpg",
+      "mean_delta2": 10660.001953125,
+      "normalized_mse": 0.05464565912149173,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/b_heating1.svg",
+      "variant": "b_heating1",
+      "width": 51
+    },
+    {
+      "height": 20,
+      "image_area": 400,
+      "image_path": "artifacts/images_to_convert/AC0421_1_S.jpg",
+      "mean_delta2": 10641.2001953125,
+      "normalized_mse": 0.05454927692073561,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0421_1_S.svg",
+      "variant": "AC0421_1_S",
+      "width": 20
+    },
+    {
+      "height": 75,
+      "image_area": 5625,
+      "image_path": "artifacts/images_to_convert/GE0306.jpg",
+      "mean_delta2": 10400.3779296875,
+      "normalized_mse": 0.05331476575515827,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/GE0306.svg",
+      "variant": "GE0306",
+      "width": 75
+    }
+  ],
+  "threshold_normalized_mse": 0.045945679012345676,
+  "top_error_cases_csv": ".tmp/right-arrow-review/top_reproducible_error_cases_v1.csv",
+  "top_reproducible_error_cases": [
+    {
+      "height": 40,
+      "image_area": 3200,
+      "image_path": "artifacts/images_to_convert/AC0554_1_L.jpg",
+      "mean_delta2": 46170.3984375,
+      "normalized_mse": 0.23668024317570166,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0554_1_L.svg",
+      "variant": "AC0554_1_L",
+      "width": 80
+    },
+    {
+      "height": 40,
+      "image_area": 3200,
+      "image_path": "artifacts/images_to_convert/AC0554_2_L.jpg",
+      "mean_delta2": 35769.07421875,
+      "normalized_mse": 0.18336062652185056,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0554_2_L.svg",
+      "variant": "AC0554_2_L",
+      "width": 80
+    },
+    {
+      "height": 25,
+      "image_area": 1125,
+      "image_path": "artifacts/images_to_convert/AC0714_L.jpg",
+      "mean_delta2": 32695.380859375,
+      "normalized_mse": 0.16760415665449185,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0714_L.svg",
+      "variant": "AC0714_L",
+      "width": 45
+    },
+    {
+      "height": 15,
+      "image_area": 375,
+      "image_path": "artifacts/images_to_convert/AC0724_1_S.jpg",
+      "mean_delta2": 22276.9609375,
+      "normalized_mse": 0.11419690343457645,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0724_1_S.svg",
+      "variant": "AC0724_1_S",
+      "width": 25
+    },
+    {
+      "height": 31,
+      "image_area": 961,
+      "image_path": "artifacts/images_to_convert/AC0252_1.jpg",
+      "mean_delta2": 20853.748046875,
+      "normalized_mse": 0.10690118183711393,
+      "source": "diff_inventory",
+      "status": "ok",
+      "svg_path": "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0252_1.svg",
+      "variant": "AC0252_1",
+      "width": 31
+    }
+  ]
+}

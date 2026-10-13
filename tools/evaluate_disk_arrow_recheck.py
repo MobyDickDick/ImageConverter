@@ -1,4 +1,4 @@
-"""Check a saved vector's disk, gradient, and connected left-arrow topology."""
+"""Check a saved vector's disk, gradient, and connected horizontal-arrow topology."""
 from __future__ import annotations
 
 import argparse
@@ -13,7 +13,9 @@ from tools.evaluate_satisfaction_gate import evaluate_satisfaction, seal_baselin
 from tools.run_plan_b_variations import measure_quality
 
 
-def symbol_semantics(svg: str) -> float:
+def symbol_semantics(svg: str, direction: str = 'left') -> float:
+    if direction not in ('left', 'right'):
+        return 0.
     try:
         root = ET.fromstring(svg)
         shapes = [e for e in root.iter() if e.tag.rsplit('}', 1)[-1] in
@@ -31,6 +33,8 @@ def symbol_semantics(svg: str) -> float:
         points = [tuple(map(float, p.split(','))) for p in arrow.get('points', '').split()]
         if len(points) != 7:
             return 0.
+        if direction == 'right':
+            points = [(2*cx-x, y) for x, y in points]
         tip, a, b, c, d, e, f = points
         gradient = next(e for e in root.iter() if e.tag.endswith('linearGradient')
                         and disk.get('fill') == f"url(#{e.get('id')})")
@@ -48,10 +52,10 @@ def symbol_semantics(svg: str) -> float:
         return 0.
 
 
-def measure(image: Path, svg: Path) -> dict:
+def measure(image: Path, svg: Path, direction: str = 'left') -> dict:
     record = measure_raster(image, svg)
     m = record['metrics']
-    m['semantic_score'] = symbol_semantics(record['svg'])
+    m['semantic_score'] = symbol_semantics(record['svg'], direction)
     record['combined_score'] = (1-m['error_per_pixel']+m['edge_alignment']+m['object_mask_iou']+m['semantic_score'])/4
     return record
 
@@ -60,7 +64,7 @@ def evaluate(manifest: dict, root: Path) -> dict:
     before, after, evidence = {}, {}, []
     for case in manifest['cases']:
         image = root/case['image']
-        old, new = (measure(image, root/case[mode+'_svg']) for mode in ('before', 'after'))
+        old, new = (measure(image, root/case[mode+'_svg'], manifest.get('direction', 'left')) for mode in ('before', 'after'))
         before[case['case_id']] = {'metrics': old['metrics'], 'dimensions': old['dimensions']}
         after[case['case_id']] = new
         evidence.append({**case, 'input_sha256': hashlib.sha256(image.read_bytes()).hexdigest(),
