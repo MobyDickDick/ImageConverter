@@ -1,0 +1,104 @@
+{
+  "archive": {
+    "all_previous_recheck_mean_delta2_unchanged": true,
+    "all_previous_records_identical": true,
+    "expected": 236,
+    "known_drift_count": 22,
+    "known_drift_list_unchanged": true,
+    "new_count": 236,
+    "passed": 236,
+    "previous_count": 233,
+    "previous_recheck_count": 233
+  },
+  "baseline_commit": "65ae083eaf4516a30e468233e29916134e7946ab",
+  "branch": "codex/ac1000-quality-2026-10-13",
+  "catalog_acceptance": {
+    "all_after_catalog_svgs_identical_to_neutral": true,
+    "baseline_contexts_separate": true,
+    "catalog_frozen_baselines_reproduced": true,
+    "forbidden_svg_reads": 0,
+    "neutral_cases": 3,
+    "neutral_frozen_baselines_reproduced": true,
+    "real_name_cases": 3,
+    "regressed_metrics": 0,
+    "target_after_mean_delta2": 496.1199951171875,
+    "target_before_mean_delta2": 11123.1064453125
+  },
+  "checks": {
+    "cli_help": "pass",
+    "compileall": "pass",
+    "diff_whitespace": "pass",
+    "runtime_id_zero": "pass",
+    "saved_artifact_integrity": "pass"
+  },
+  "completion_verdict": "PASS",
+  "date": "2026-10-13",
+  "diagnostics": {
+    "initial_archive": "diagnostic_archive_recheck.json",
+    "initial_archive_reason": "The earlier frozen archive index retained the previous L-vector digest while the final accepted vector was being replaced; the entire stable archive was rerun successfully.",
+    "initial_focused": {
+      "failed": 1,
+      "log": "focused_tests.log",
+      "passed": 41,
+      "seconds": 162.37,
+      "skipped": 0
+    }
+  },
+  "final_coverage": {
+    "existing_skips": 30,
+    "method": "Full 2506-pass standard snapshot plus complete final 42-case labeled-disk suite and post-standard single-case recheck; all affected runtime cases tested after the last fix.",
+    "unique_default_profile_tests": 2507,
+    "unresolved_failures": 0
+  },
+  "focused": {
+    "failed": 0,
+    "log": "final_focused_tests.log",
+    "passed": 42,
+    "seconds": 176.27,
+    "skipped": 0
+  },
+  "independent_plan_b": {
+    "hashes_metrics_complexity_and_gates_reproduced": true,
+    "passed": 17,
+    "required": 17,
+    "runs": 2,
+    "seed": 20261013
+  },
+  "smoke": {
+    "failed": 0,
+    "log": "smoke_tests.log",
+    "passed": 2,
+    "seconds": 11.59,
+    "skipped": 0
+  },
+  "standard_failure_recheck": {
+    "failed": 0,
+    "log": "standard_failure_recheck.log",
+    "passed": 1,
+    "seconds": 2.75,
+    "skipped": 0
+  },
+  "standard_profile": {
+    "failed": 1,
+    "failed_node": "tests/test_labeled_disk_runtime.py::test_independent_tightly_cropped_letter_disks[60]",
+    "log": "standard_profile.log",
+    "passed": 2506,
+    "resolved_by": [
+      "final_focused_tests.log",
+      "standard_failure_recheck.log"
+    ],
+    "seconds": 2851.91,
+    "skipped": 30,
+    "snapshot": "Started before the final boundary-rounding fix; the worker retained the earlier imported labeled-disk function.",
+    "verdict": "FAIL"
+  },
+  "validated_source_hashes": {
+    "artifacts/descriptions/Finale_Wurzelformen_V3.xml": "a4019a49c23b3078efd0678f4cdfea0df76b043a0eb7dd2dd8a55b65ee747dc9",
+    "artifacts/evaluation/motor_disk_recheck_v1/recheck_catalog_context.py": "f6a9836bc5bedc017ffeb1877975b6bcb74ccab51e0930fe69461dac199e766d",
+    "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml": "25adeac261d2bb151d707bab98b48796acdb9e4e3390008ec0f485c1829d6f72",
+    "src/iCCModules/imageCompositeConverterLabeledDisk.py": "00b58e905a44bea7e31c577a2d1dde9496028b96033593524d03c4de5c889d9b",
+    "tests/test_labeled_disk_runtime.py": "6b12979ebd55fe70fda5454daff6f5ced9c1d3e4d8f0a9f0669322486feb1634",
+    "tools/evaluate_labeled_disk_recheck.py": "d65792df7aefb1ac984b0b1f31f801a64111db6f05bb8b4c52832efbf48e4667",
+    "tools/run_labeled_disk_recheck.py": "0d1b14581f99453885cdff81877a05138ab9bbbc8cd1691961a352d7d1e31e14"
+  }
+}

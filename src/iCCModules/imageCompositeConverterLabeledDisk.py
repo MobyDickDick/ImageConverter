@@ -73,6 +73,12 @@ def fit_labeled_disk(width, height, *, description, image, render_fn, error_fn):
                 + ('' if blank else f'<text x="{tx:.4f}" y="{ty:.4f}" font-family="Arial" font-weight="700" font-size="{size:.4f}" text-anchor="middle" fill="{_hex(color)}">{label}</text>')+'</svg>\n')
 
     p = np.r_[cx, cy, radius-.15, max(.5, radius*.09), gx+gw/2, gy+gh, gh*1.35, fill, dark, color]
+    # The observed outer contour includes the stroke. Seed a circle whose
+    # complete stroke fits the canvas, also for tightly cropped disks.
+    inset_radius = min(cx, width-cx, cy, height-cy)-p[3]/2
+    # Keep one SVG rounding unit inside the boundary to avoid floating-point
+    # cancellation rejecting an otherwise valid initial candidate.
+    p[2] = min(p[2], inset_radius-1e-4)
     # Use the production font's observed bounds to seed size and baseline.
     for _ in range(3):
         drawn, blank = render_fn(build(p), width, height), render_fn(build(p, blank=True), width, height)

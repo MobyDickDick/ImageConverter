@@ -1,0 +1,506 @@
+{
+  "baseline": {
+    "baseline_sha256": "e40d365f00dd1aaa38b00cf5b09ecba1521e3d8b057a08af532f268694291a9d",
+    "cases": {
+      "AC1000_L": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.633442759513855,
+          "error_per_pixel": 0.0353230303048507,
+          "object_mask_iou": 0.5237430167597765,
+          "semantic_score": 0.0
+        }
+      },
+      "AC1000_M": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6571385860443115,
+          "error_per_pixel": 0.035320261938517235,
+          "object_mask_iou": 0.5266457680250783,
+          "semantic_score": 0.0
+        }
+      },
+      "AC1000_S": {
+        "dimensions": {
+          "height": 15,
+          "width": 15
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6135292053222656,
+          "error_per_pixel": 0.02909041894944252,
+          "object_mask_iou": 0.6166666666666667,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "full original catalog and original labeled-disk runtime from baseline commit; PYTHONHASHSEED=0 and TINY_ICC_OUTPUT_VARIATION=0",
+      "commit": "65ae083ea",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "AC1000_L": "6e0ea8481bde22fc9dac0781588180cbc4d4933c11cd4d03ae081c9020704850",
+        "AC1000_M": "dcd4593327fb1890092dc5b244ff9274b53a9513eabde2bf312e28ad79b2a140",
+        "AC1000_S": "8d302a113aa9c7915e222bf45d7796645045d8ec12a4e0b3e595e705faeade07"
+      },
+      "seed": 0,
+      "toolchain": "Python 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 496.1199951171875,
+      "after_svg": "after/converted_svgs/AC1000_S.svg",
+      "after_svg_sha256": "22f99b4ab799138fe940da0e187bc56d078c17e6e63abe3bae5166c6eac36dbb",
+      "baseline_description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"M\" (Motor)",
+      "before_mean_delta2": 5674.8134765625,
+      "before_svg": "before/converted_svgs/AC1000_S.svg",
+      "before_svg_sha256": "4d8401965aa9aea6104ae39cf9067ee532294f08db577029daea31f23817ca1e",
+      "case_id": "AC1000_S",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "image": "../../../images_to_convert/AC1000_S.jpg",
+      "input_sha256": "8d302a113aa9c7915e222bf45d7796645045d8ec12a4e0b3e595e705faeade07",
+      "role": "target",
+      "source": "AC1000_S.jpg",
+      "source_sha256": "8d302a113aa9c7915e222bf45d7796645045d8ec12a4e0b3e595e705faeade07"
+    },
+    {
+      "after_mean_delta2": 591.427490234375,
+      "after_svg": "after/converted_svgs/AC1000_M.svg",
+      "after_svg_sha256": "01866e04ea401c5dd8b35ff4b501b102fad6b3f27b392efdae7ff558fa121125",
+      "baseline_description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"M\" (Motor)",
+      "before_mean_delta2": 6890.10009765625,
+      "before_svg": "before/converted_svgs/AC1000_M.svg",
+      "before_svg_sha256": "eab7589628b12cc6fef766dc8cd8b266f6ba1ec4d99a193b7d8c656c2e29cc05",
+      "case_id": "AC1000_M",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "image": "../../../images_to_convert/AC1000_M.jpg",
+      "input_sha256": "dcd4593327fb1890092dc5b244ff9274b53a9513eabde2bf312e28ad79b2a140",
+      "role": "size holdout",
+      "source": "AC1000_M.jpg",
+      "source_sha256": "dcd4593327fb1890092dc5b244ff9274b53a9513eabde2bf312e28ad79b2a140"
+    },
+    {
+      "after_mean_delta2": 685.4166870117188,
+      "after_svg": "after/converted_svgs/AC1000_L.svg",
+      "after_svg_sha256": "78936d590331a7863c43ae699e672c272380e94abc88f21660350c2b7ed4ecd5",
+      "baseline_description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"M\" (Motor)",
+      "before_mean_delta2": 6890.64013671875,
+      "before_svg": "before/converted_svgs/AC1000_L.svg",
+      "before_svg_sha256": "a3d3db15b93028898c7be4497d8c78c4f4d59c47dbc8db2591028932161639e4",
+      "case_id": "AC1000_L",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "image": "../../../images_to_convert/AC1000_L.jpg",
+      "input_sha256": "6e0ea8481bde22fc9dac0781588180cbc4d4933c11cd4d03ae081c9020704850",
+      "role": "size holdout",
+      "source": "AC1000_L.jpg",
+      "source_sha256": "6e0ea8481bde22fc9dac0781588180cbc4d4933c11cd4d03ae081c9020704850"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "e40d365f00dd1aaa38b00cf5b09ecba1521e3d8b057a08af532f268694291a9d",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8687435388565063,
+          "error_per_pixel": 0.0035136059823745675,
+          "object_mask_iou": 0.883419689119171,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.633442759513855,
+          "error_per_pixel": 0.0353230303048507,
+          "object_mask_iou": 0.5237430167597765,
+          "semantic_score": 0.0
+        },
+        "case_id": "AC1000_L",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0035136059823745675,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9372,
+            "edge_alignment": 0.8687,
+            "pixel_similarity": 0.9965,
+            "semantic_score": 1.0,
+            "structure_score": 0.8834
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8505549430847168,
+          "error_per_pixel": 0.0030317954132224787,
+          "object_mask_iou": 0.8378378378378378,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6571385860443115,
+          "error_per_pixel": 0.035320261938517235,
+          "object_mask_iou": 0.5266457680250783,
+          "semantic_score": 0.0
+        },
+        "case_id": "AC1000_M",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0030317954132224787,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9213,
+            "edge_alignment": 0.8506,
+            "pixel_similarity": 0.997,
+            "semantic_score": 1.0,
+            "structure_score": 0.8378
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8202790021896362,
+          "error_per_pixel": 0.0025432269389577726,
+          "object_mask_iou": 0.7868852459016393,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.6135292053222656,
+          "error_per_pixel": 0.02909041894944252,
+          "object_mask_iou": 0.6166666666666667,
+          "semantic_score": 0.0
+        },
+        "case_id": "AC1000_S",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0025432269389577726,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9012,
+            "edge_alignment": 0.8203,
+            "pixel_similarity": 0.9975,
+            "semantic_score": 1.0,
+            "structure_score": 0.7869
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "full original catalog and original labeled-disk runtime from baseline commit; PYTHONHASHSEED=0 and TINY_ICC_OUTPUT_VARIATION=0",
+      "commit": "65ae083ea",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "AC1000_L": "6e0ea8481bde22fc9dac0781588180cbc4d4933c11cd4d03ae081c9020704850",
+        "AC1000_M": "dcd4593327fb1890092dc5b244ff9274b53a9513eabde2bf312e28ad79b2a140",
+        "AC1000_S": "8d302a113aa9c7915e222bf45d7796645045d8ec12a4e0b3e595e705faeade07"
+      },
+      "seed": 0,
+      "toolchain": "Python 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 3,
+      "improved": 3,
+      "satisfactory": 3,
+      "technically_completed": 3
+    }
+  },
+  "schema_version": "labeled_disk_recheck_v1",
+  "strict_pixel_gates": {
+    "AC1000_L": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8687435388565063,
+        "foreground_iou": 0.8845265588914549,
+        "foreground_mse": 0.006514388602226973,
+        "normalized_mse": 0.003513605799525976
+      },
+      "satisfactory": true
+    },
+    "AC1000_M": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8505549430847168,
+        "foreground_iou": 0.8669724770642202,
+        "foreground_mse": 0.005300572607666254,
+        "normalized_mse": 0.0030317953787744045
+      },
+      "satisfactory": true
+    },
+    "AC1000_S": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8202790021896362,
+        "foreground_iou": 0.8865248226950354,
+        "foreground_mse": 0.003465442918241024,
+        "normalized_mse": 0.0025432268157601357
+      },
+      "satisfactory": true
+    }
+  }
+}

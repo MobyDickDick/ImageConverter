@@ -1,3 +1,4 @@
+- Fit initial letter-disk circles inside the canvas including their full stroke, correct the standalone M-disk description, and validate three catalog sizes plus a reproducible independent 17-case CLI battery (2026-10-13).
 - Normalize left-opening arc/gradient-shaft motifs into the existing raster fitter, correct both standalone descriptions, and validate 14 real variants plus a reproducible independent 17-case CLI battery (2026-10-12).
 - Isolate catalog SVG rendering in bounded reusable processes, retire native state after 64 requests, retry crashed workers once and prevent unsafe CLI in-process fallback (2026-10-11).
 - Replace the SE0081 cross-reference with a standalone square/lower-stem/M description in both catalogs; the unchanged raster registrator passes both gates, an independent holdout and a reproducible 17-case CLI battery (2026-10-11).

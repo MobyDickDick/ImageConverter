@@ -1,5 +1,5 @@
 {
-  "case_count": 233,
+  "case_count": 236,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -2040,6 +2040,57 @@
       "svg": "svgs/AC0920_S.svg",
       "svg_sha256": "7a3a9b8415890ab78a3b6c9f5af4e8266be325ff5f440cffd2c3d9de0bf3047f",
       "variant": "AC0920_S"
+    },
+    {
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/motor_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC1000_L.jpg",
+      "image_sha256": "6e0ea8481bde22fc9dac0781588180cbc4d4933c11cd4d03ae081c9020704850",
+      "mean_delta2": 685.4166870117188,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8687435388565063,
+        "error_per_pixel": 0.0035136059823745675,
+        "object_mask_iou": 0.883419689119171
+      },
+      "svg": "svgs/AC1000_L.svg",
+      "svg_sha256": "78936d590331a7863c43ae699e672c272380e94abc88f21660350c2b7ed4ecd5",
+      "variant": "AC1000_L"
+    },
+    {
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/motor_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC1000_M.jpg",
+      "image_sha256": "dcd4593327fb1890092dc5b244ff9274b53a9513eabde2bf312e28ad79b2a140",
+      "mean_delta2": 591.427490234375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8505549430847168,
+        "error_per_pixel": 0.0030317954132224787,
+        "object_mask_iou": 0.8378378378378378
+      },
+      "svg": "svgs/AC1000_M.svg",
+      "svg_sha256": "01866e04ea401c5dd8b35ff4b501b102fad6b3f27b392efdae7ff558fa121125",
+      "variant": "AC1000_M"
+    },
+    {
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/motor_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC1000_S.jpg",
+      "image_sha256": "8d302a113aa9c7915e222bf45d7796645045d8ec12a4e0b3e595e705faeade07",
+      "mean_delta2": 496.1199951171875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8202790021896362,
+        "error_per_pixel": 0.0025432269389577726,
+        "object_mask_iou": 0.7868852459016393
+      },
+      "svg": "svgs/AC1000_S.svg",
+      "svg_sha256": "22f99b4ab799138fe940da0e187bc56d078c17e6e63abe3bae5166c6eac36dbb",
+      "variant": "AC1000_S"
     },
     {
       "description": "Rechteckfl\u00c3\u00a4che mit heller rechteckiger Innenfl\u00c3\u00a4che.",

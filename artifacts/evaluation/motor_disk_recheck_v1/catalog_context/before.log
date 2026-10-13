@@ -1,0 +1,135 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere AC1000_L.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC1000_L.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "M" (Motor)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[INFO] unknown: Elementvalidierung gestartet | Runden=8, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 83.31% -> 85.54% | mittlere Pixelabweichung (MAE, kleiner=besser): 42.563 -> 36.876 | Mean-Delta² (kleiner=besser): 13436.757 -> 11698.993 | Qualitätsgewinn=+5.688 (+13.36%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.54% -> 85.54% | mittlere Pixelabweichung (MAE, kleiner=besser): 36.876 -> 36.876 | Mean-Delta² (kleiner=besser): 11698.993 -> 11698.993 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 3/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 3/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.54% -> 85.54% | mittlere Pixelabweichung (MAE, kleiner=besser): 36.876 -> 36.876 | Mean-Delta² (kleiner=besser): 11698.993 -> 11698.993 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[WARN] AC1000_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.820833, localized_error_fraction=0.453379).
+[INFO] Konvertiert AC1000_L.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC1000_L | Qualität: Optimierungsfehler/Pixel=0.049259, Mean-Delta²=9350.172852, RGB-RMSE/Kanal=55.827630, Raumscore=18790.068606, beste Validierungsrunde=1/3, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AC1000_M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC1000_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "M" (Motor)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[INFO] unknown: Elementvalidierung gestartet | Runden=8, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 79.50% -> 82.65% | mittlere Pixelabweichung (MAE, kleiner=besser): 52.265 -> 44.255 | Mean-Delta² (kleiner=besser): 16000.965 -> 13431.975 | Qualitätsgewinn=+8.010 (+15.33%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 2/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 82.65% -> 85.46% | mittlere Pixelabweichung (MAE, kleiner=besser): 44.255 -> 37.083 | Mean-Delta² (kleiner=besser): 13431.975 -> 11419.657 | Qualitätsgewinn=+7.172 (+16.21%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 3/8: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 3/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.46% -> 85.46% | mittlere Pixelabweichung (MAE, kleiner=besser): 37.083 -> 37.083 | Mean-Delta² (kleiner=besser): 11419.657 -> 11419.657 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/8 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 4/8: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 4/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.46% -> 85.46% | mittlere Pixelabweichung (MAE, kleiner=besser): 37.083 -> 37.083 | Mean-Delta² (kleiner=besser): 11419.657 -> 11419.657 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[INFO] Konvertiert AC1000_M.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC1000_M | Qualität: Optimierungsfehler/Pixel=0.102744, Mean-Delta²=7667.182617, RGB-RMSE/Kanal=50.554204, Raumscore=14863.615509, beste Validierungsrunde=2/4, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AC1000_S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC1000_S.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "M" (Motor)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[INFO] unknown: Elementvalidierung gestartet | Runden=8, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 78.13% -> 79.70% | mittlere Pixelabweichung (MAE, kleiner=besser): 55.764 -> 51.764 | Mean-Delta² (kleiner=besser): 15564.573 -> 14103.320 | Qualitätsgewinn=+4.000 (+7.17%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 2/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 79.70% -> 79.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 51.764 -> 51.627 | Mean-Delta² (kleiner=besser): 14103.320 -> 13990.026 | Qualitätsgewinn=+0.138 (+0.27%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 3/8: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 3/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 79.75% -> 79.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 51.627 -> 51.627 | Mean-Delta² (kleiner=besser): 13990.026 -> 13990.026 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/8 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 4/8: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 4/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 79.75% -> 79.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 51.627 -> 51.627 | Mean-Delta² (kleiner=besser): 13990.026 -> 13990.026 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[INFO] Konvertiert AC1000_S.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC1000_S | Qualität: Optimierungsfehler/Pixel=0.212760, Mean-Delta²=11201.080078, RGB-RMSE/Kanal=61.103955, Raumscore=21789.976427, beste Validierungsrunde=2/4, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere AC1000_L.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC1000_L.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "M" (Motor)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[INFO] unknown: Elementvalidierung gestartet | Runden=7, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/7 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/7: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/7: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 83.31% -> 85.54% | mittlere Pixelabweichung (MAE, kleiner=besser): 42.563 -> 36.876 | Mean-Delta² (kleiner=besser): 13436.757 -> 11698.993 | Qualitätsgewinn=+5.688 (+13.36%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/7 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/7: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/7: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.54% -> 85.54% | mittlere Pixelabweichung (MAE, kleiner=besser): 36.876 -> 36.876 | Mean-Delta² (kleiner=besser): 11698.993 -> 11698.993 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/7 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 3/7: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 3/7: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.54% -> 85.54% | mittlere Pixelabweichung (MAE, kleiner=besser): 36.876 -> 36.876 | Mean-Delta² (kleiner=besser): 11698.993 -> 11698.993 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.0s
+[INFO] Konvertiert AC1000_L.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC1000_L | Qualität: Optimierungsfehler/Pixel=0.049641, Mean-Delta²=9104.690430, RGB-RMSE/Kanal=55.089898, Raumscore=15878.809545, beste Validierungsrunde=1/3, beste Composite-Iteration=n/a, ausgeführt=65/65 | Dauer=0.2s
+[INFO] Konvertiere AC1000_M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC1000_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "M" (Motor)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[INFO] unknown: Elementvalidierung gestartet | Runden=9, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 79.50% -> 82.65% | mittlere Pixelabweichung (MAE, kleiner=besser): 52.265 -> 44.255 | Mean-Delta² (kleiner=besser): 16000.965 -> 13431.975 | Qualitätsgewinn=+8.010 (+15.33%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 82.65% -> 85.46% | mittlere Pixelabweichung (MAE, kleiner=besser): 44.255 -> 37.083 | Mean-Delta² (kleiner=besser): 13431.975 -> 11419.657 | Qualitätsgewinn=+7.172 (+16.21%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 3/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 3/9: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.46% -> 85.46% | mittlere Pixelabweichung (MAE, kleiner=besser): 37.083 -> 37.083 | Mean-Delta² (kleiner=besser): 11419.657 -> 11419.657 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/9 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 4/9: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 4/9: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.46% -> 85.46% | mittlere Pixelabweichung (MAE, kleiner=besser): 37.083 -> 37.083 | Mean-Delta² (kleiner=besser): 11419.657 -> 11419.657 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[INFO] Konvertiert AC1000_M.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC1000_M | Qualität: Optimierungsfehler/Pixel=0.102744, Mean-Delta²=7667.182617, RGB-RMSE/Kanal=50.554204, Raumscore=14863.615509, beste Validierungsrunde=2/4, beste Composite-Iteration=n/a, ausgeführt=92/92 | Dauer=0.2s
+[INFO] Konvertiere AC1000_S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC1000_S.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "M" (Motor)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[INFO] unknown: Elementvalidierung gestartet | Runden=9, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 78.13% -> 79.70% | mittlere Pixelabweichung (MAE, kleiner=besser): 55.764 -> 51.764 | Mean-Delta² (kleiner=besser): 15564.573 -> 14103.320 | Qualitätsgewinn=+4.000 (+7.17%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 79.70% -> 79.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 51.764 -> 51.627 | Mean-Delta² (kleiner=besser): 14103.320 -> 13990.026 | Qualitätsgewinn=+0.138 (+0.27%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 3/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 3/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 79.75% -> 79.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 51.627 -> 51.627 | Mean-Delta² (kleiner=besser): 13990.026 -> 13990.026 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 4/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 4/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 4/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 4/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 79.75% -> 79.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 51.627 -> 51.627 | Mean-Delta² (kleiner=besser): 13990.026 -> 13990.026 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.0s
+[INFO] Konvertiert AC1000_S.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC1000_S | Qualität: Optimierungsfehler/Pixel=0.212760, Mean-Delta²=11190.093750, RGB-RMSE/Kanal=61.073982, Raumscore=21775.325536, beste Validierungsrunde=2/4, beste Composite-Iteration=n/a, ausgeführt=92/92 | Dauer=0.2s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\motor-disk-catalog-final\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\motor-disk-catalog-final\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\motor-disk-catalog-final\before

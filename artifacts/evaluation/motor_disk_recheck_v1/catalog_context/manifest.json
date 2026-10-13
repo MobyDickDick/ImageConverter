@@ -1,0 +1,47 @@
+{
+  "schema_version": "labeled_disk_recheck_manifest_v1",
+  "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+  "label": "M",
+  "provenance": {
+    "commit": "65ae083ea",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "toolchain": "Python 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7",
+    "baseline_mode": "full original catalog and original labeled-disk runtime from baseline commit; PYTHONHASHSEED=0 and TINY_ICC_OUTPUT_VARIATION=0"
+  },
+  "cases": [
+    {
+      "case_id": "AC1000_S",
+      "source": "AC1000_S.jpg",
+      "image": "../../../images_to_convert/AC1000_S.jpg",
+      "source_sha256": "8d302a113aa9c7915e222bf45d7796645045d8ec12a4e0b3e595e705faeade07",
+      "baseline_description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"M\" (Motor)",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "role": "target",
+      "before_svg": "before/converted_svgs/AC1000_S.svg",
+      "after_svg": "after/converted_svgs/AC1000_S.svg"
+    },
+    {
+      "case_id": "AC1000_M",
+      "source": "AC1000_M.jpg",
+      "image": "../../../images_to_convert/AC1000_M.jpg",
+      "source_sha256": "dcd4593327fb1890092dc5b244ff9274b53a9513eabde2bf312e28ad79b2a140",
+      "baseline_description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"M\" (Motor)",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "role": "size holdout",
+      "before_svg": "before/converted_svgs/AC1000_M.svg",
+      "after_svg": "after/converted_svgs/AC1000_M.svg"
+    },
+    {
+      "case_id": "AC1000_L",
+      "source": "AC1000_L.jpg",
+      "image": "../../../images_to_convert/AC1000_L.jpg",
+      "source_sha256": "6e0ea8481bde22fc9dac0781588180cbc4d4933c11cd4d03ae081c9020704850",
+      "baseline_description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"M\" (Motor)",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "role": "size holdout",
+      "before_svg": "before/converted_svgs/AC1000_L.svg",
+      "after_svg": "after/converted_svgs/AC1000_L.svg"
+    }
+  ]
+}

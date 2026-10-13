@@ -92,3 +92,39 @@ def test_semantic_gate_rejects_wrong_text_and_extra_shapes():
     for bad in [svg.replace('>Q<','>R<'),svg.replace('font-size="','font-size="nan'),
                 svg.replace('</svg>','<path d="M 1 1 L 2 2"/></svg>'),svg.replace('stroke-width="','stroke-width="nan')]:
         assert symbol_semantics(bad)==0
+
+
+@pytest.mark.parametrize('size', ['S', 'M', 'L'])
+def test_motor_disk_catalog_sizes_with_described_m(size):
+    """Include the large tightly cropped disk that rejected its initial fit."""
+    image = cv2.imread(str(ROOT/f'artifacts/images_to_convert/AC1000_{size}.jpg'))
+    result = fit(image, DESCRIPTION.replace('"Q"', '"M"'))
+    assert result is not None
+    assert symbol_semantics(result['svg'], 'M') == 1
+    assert measure_quality(image, result['svg'])['satisfactory']
+
+
+@pytest.mark.parametrize('size', [30, 60, 90])
+def test_independent_tightly_cropped_letter_disks(size):
+    # The visible outer contour nearly fills the viewport. Its radius cannot
+    # be reused as a stroke centre radius when constructing the first fit.
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{size}" height="{size}">'
+           f'<rect width="{size}" height="{size}" fill="#ffffff"/>'
+           f'<circle cx="{size/2}" cy="{size/2}" r="{size/2-size*.04}" '
+           f'fill="#dae8d2" stroke="#54703d" stroke-width="{size*.06}"/>'
+           f'<text x="{size/2}" y="{size*.72}" font-family="Arial" '
+           f'font-weight="700" font-size="{size*.6}" text-anchor="middle" fill="#3b5429">M</text></svg>')
+    image = render(svg, size, size)
+    result = fit(image, DESCRIPTION.replace('"Q"', '"M"'))
+    assert result is not None
+    assert symbol_semantics(result['svg'], 'M') == 1
+    assert measure_quality(image, result['svg'])['satisfactory']
+
+
+def test_motor_semantics_requires_m_instead_of_default_q():
+    from tools.evaluate_labeled_disk_recheck import measure
+    evidence = ROOT/'artifacts/evaluation/motor_disk_recheck_v1'
+    manifest = json.loads((evidence/'manifest.json').read_text(encoding='utf-8'))
+    case = manifest['cases'][0]
+    assert measure(evidence/case['image'], evidence/case['after_svg'], 'M')['metrics']['semantic_score'] == 1
+    assert measure(evidence/case['image'], evidence/case['after_svg'])['metrics']['semantic_score'] == 0

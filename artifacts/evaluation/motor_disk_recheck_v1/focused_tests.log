@@ -1,0 +1,25 @@
+.......................................F..                               [100%]
+================================== FAILURES ===================================
+______________ test_independent_tightly_cropped_letter_disks[60] ______________
+
+size = 60
+
+    @pytest.mark.parametrize('size', [30, 60, 90])
+    def test_independent_tightly_cropped_letter_disks(size):
+        # The visible outer contour nearly fills the viewport. Its radius cannot
+        # be reused as a stroke centre radius when constructing the first fit.
+        svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{size}" height="{size}">'
+               f'<rect width="{size}" height="{size}" fill="#ffffff"/>'
+               f'<circle cx="{size/2}" cy="{size/2}" r="{size/2-size*.04}" '
+               f'fill="#dae8d2" stroke="#54703d" stroke-width="{size*.06}"/>'
+               f'<text x="{size/2}" y="{size*.72}" font-family="Arial" '
+               f'font-weight="700" font-size="{size*.6}" text-anchor="middle" fill="#3b5429">M</text></svg>')
+        image = render(svg, size, size)
+        result = fit(image, DESCRIPTION.replace('"Q"', '"M"'))
+>       assert result is not None
+E       assert None is not None
+
+tests\test_labeled_disk_runtime.py:119: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_labeled_disk_runtime.py::test_independent_tightly_cropped_letter_disks[60]
+1 failed, 41 passed in 162.37s (0:02:42)
