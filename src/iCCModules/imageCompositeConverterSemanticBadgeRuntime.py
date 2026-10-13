@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from src.iCCModules.imageCompositeConverterLabeledDisk import fit_labeled_disk
+
 
 def _generic_description_badge_params(width: int, height: int, params: dict) -> dict | None:
     """Build catalog-free circle/text badge params from semantic description elements."""
@@ -144,6 +146,14 @@ def runSemanticBadgeIterationImpl(
     apply_redraw_variation_fn,
     print_fn,
 ):
+    original_description = ' '.join(str(f.get('text', '')) for f in params.get('description_fragments', []) if isinstance(f, dict)) or description
+    fitted_disk = fit_labeled_disk(width, height, description=original_description, image=perc_img,
+        render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn)
+    if fitted_disk is not None:
+        params['labeled_disk_registration'] = {k: v for k, v in fitted_disk.items() if k not in {'svg', 'rendered'}}
+        write_attempt_artifacts_fn(fitted_disk['svg'], fitted_disk['rendered'])
+        write_validation_log_fn(['status=semantic_raster_labeled_disk'])
+        return base, description, params, 1, fitted_disk['error']
     badge_params = make_badge_params_fn(width, height, perc_base_name, perc_img)
     variant_name = str(params.get("variant_name", perc_base_name) or perc_base_name)
     if badge_params is None and "_" in variant_name:

@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-10-12)
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-13)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `435` · Erledigt `408` · Offen `27`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `436` · Erledigt `409` · Offen `27`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -18,11 +18,20 @@ focused on the actual project scope.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-12)
+### Aktueller Plan-B-Stand (2026-10-13)
+
+- [x] **AC0920 – Kreisscheibe mit Q:** eigenständige Beschreibungen und allgemeine Kreis-/Textregistrierung; alle drei Größen bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17; alle sechs neutralen und Katalog-SVGs sowie die Gates sind reproduziert. Details: `docs/next_arbeitspaket_2026-10-13_ac0920_l.md`.
+
+**Neuester Abschluss:** `AC0920_L` und beide Größen-Holdouts auf
+`codex/ac0920-quality-2026-10-13`. Frische neutrale Zielmetrik
+`10145.160156 → 506.664001`; identische Werte im Originalkatalog-Kontext.
+233 Paare in der Erfolgsübersicht; alle 230 bisherigen Indexeinträge unverändert.
+Nächste reguläre Rotation: `AC1000_S`, `GE0022`, `GE9024_1M`, `GE0300`, `b_heating1`.
+Die drei erledigten AC0920-Größen sind ausgeschlossen.
 
 - [x] **GE9022 – links offener Bogen neben Verlaufsschaft:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17, beide neutralen Abnahmen reproduzieren alle 28 SVGs und Gates. Details: `docs/next_arbeitspaket_2026-10-12_ge9022_2m.md`.
 
-**Neuester Abschluss:** `GE9022_2M` und 13 Farb-/Größen-Holdouts auf
+**Vorheriger Abschluss:** `GE9022_2M` und 13 Farb-/Größen-Holdouts auf
 `codex/ge9022-quality-2026-10-12`. Frische neutrale Zielmetrik
 `10904.975586 → 186.701660`; Originalkatalog-Kontext `11431.225586 → 186.701660`.
 230 Paare in der Erfolgsübersicht; alle 216 bisherigen Indexeinträge unverändert.
