@@ -1,5 +1,5 @@
 {
-  "case_count": 230,
+  "case_count": 233,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -1989,6 +1989,57 @@
       "svg": "svgs/AC0882_S.svg",
       "svg_sha256": "e060983297e11dfa41ddab56f00154523ecec82748e307606a2d12494b54b189",
       "variant": "AC0882_S"
+    },
+    {
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"Q\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/labeled_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0920_L.jpg",
+      "image_sha256": "4635656d9ca50c214e71db68582d6a3b52feffcf8c4a00fdd7aa4e10ff2270b2",
+      "mean_delta2": 506.66400146484375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.929746150970459,
+        "error_per_pixel": 0.002597277977520665,
+        "object_mask_iou": 0.8826086956521739
+      },
+      "svg": "svgs/AC0920_L.svg",
+      "svg_sha256": "d1f2a4c9a1b47dbae70fac8d5586c806bc29e0629d771a3bd0c5510ec6368d47",
+      "variant": "AC0920_L"
+    },
+    {
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"Q\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/labeled_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0920_M.jpg",
+      "image_sha256": "5f48a13643a1685b3030f2de7fbba3f98e98b7b55e27e90eed9539b7f42f75ae",
+      "mean_delta2": 438.4200134277344,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9481141567230225,
+        "error_per_pixel": 0.002247443359875609,
+        "object_mask_iou": 0.8908045977011494
+      },
+      "svg": "svgs/AC0920_M.svg",
+      "svg_sha256": "0f1b5e354fbf9f1430ae9414b12ca271af1f2c5f38265886344ba59be344cc00",
+      "variant": "AC0920_M"
+    },
+    {
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"Q\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/labeled_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0920_S.jpg",
+      "image_sha256": "ec8ca63e94533825bc10def8c704a3d57bbbe6762fa0bc24f60e3ed828e3403a",
+      "mean_delta2": 1418.199951171875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8767898082733154,
+        "error_per_pixel": 0.0072700240993047545,
+        "object_mask_iou": 0.8260869565217391
+      },
+      "svg": "svgs/AC0920_S.svg",
+      "svg_sha256": "7a3a9b8415890ab78a3b6c9f5af4e8266be325ff5f440cffd2c3d9de0bf3047f",
+      "variant": "AC0920_S"
     },
     {
       "description": "Rechteckfl\u00c3\u00a4che mit heller rechteckiger Innenfl\u00c3\u00a4che.",

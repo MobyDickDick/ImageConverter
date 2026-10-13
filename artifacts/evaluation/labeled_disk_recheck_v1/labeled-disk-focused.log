@@ -1,0 +1,38 @@
+..........................F.......                                       [100%]
+================================== FAILURES ===================================
+______________ test_conflicting_raster_rejected[missing_letter] _______________
+
+kind = 'missing_letter'
+
+    @pytest.mark.parametrize('kind', ['missing_letter','wrong_letter','extra_mark','square','missing_rim','background'])
+    def test_conflicting_raster_rejected(kind):
+        svg=synthetic()
+        if kind=='missing_letter':
+            root=ET.fromstring(svg); root.remove(next(e for e in root if e.tag.endswith('text'))); svg=ET.tostring(root,encoding='unicode')
+        elif kind=='wrong_letter': svg=svg.replace('>Q<','>R<')
+        elif kind=='extra_mark': svg=svg.replace('</svg>','<rect x="5" y="5" width="5" height="5" fill="#111111"/></svg>')
+        elif kind=='square': svg=svg.replace('<circle cx="48.0" cy="44.0" r="30.799999999999997"','<rect x="17" y="13" width="62" height="62"')
+        elif kind=='missing_rim': svg=svg.replace('stroke="#497361"','stroke="#d5e9df"')
+        elif kind=='background': svg=svg.replace('#ffffff','#bbbbbb')
+>       assert fit(render(svg,96,88)) is None
+
+tests\test_labeled_disk_runtime.py:76:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+svg = '<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" width="96" height="88"><ns0:rect width="96" height="88" fill="#ffffff...s0:circle cx="48.0" cy="44.0" r="30.799999999999997" fill="#d5e9df" stroke="#497361" stroke-width="2.024" /></ns0:svg>'
+width = 96, height = 88
+
+    def render(svg: str, width: int, height: int):
+        np = import_with_vendored_fallback("numpy")
+        cv2 = import_with_vendored_fallback("cv2")
+        fitz = import_with_vendored_fallback("fitz")
+        raster = render_svg_to_numpy_inprocess(
+            svg, width, height, fitz_module=fitz, np_module=np, cv2_module=cv2)
+        if raster is None:
+>           raise ValueError("SVG could not be rendered")
+E           ValueError: SVG could not be rendered
+
+tools\run_plan_b_variations.py:113: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_labeled_disk_runtime.py::test_conflicting_raster_rejected[missing_letter]
+1 failed, 33 passed in 142.72s (0:02:22)
