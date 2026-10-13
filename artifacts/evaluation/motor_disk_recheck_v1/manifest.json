@@ -1,0 +1,47 @@
+{
+  "schema_version": "labeled_disk_recheck_manifest_v1",
+  "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+  "label": "M",
+  "provenance": {
+    "commit": "65ae083ea",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "toolchain": "Python 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7",
+    "baseline_mode": "actual original-description CLI frozen before description changes"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_motor_00",
+      "source": "AC1000_S.jpg",
+      "image": "../../images_to_convert/AC1000_S.jpg",
+      "source_sha256": "8d302a113aa9c7915e222bf45d7796645045d8ec12a4e0b3e595e705faeade07",
+      "baseline_description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"M\" (Motor)",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "role": "target",
+      "before_svg": "before/anonymous_motor_00.svg",
+      "after_svg": "after/anonymous_motor_00.svg"
+    },
+    {
+      "case_id": "anonymous_motor_01",
+      "source": "AC1000_M.jpg",
+      "image": "../../images_to_convert/AC1000_M.jpg",
+      "source_sha256": "dcd4593327fb1890092dc5b244ff9274b53a9513eabde2bf312e28ad79b2a140",
+      "baseline_description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"M\" (Motor)",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "role": "size holdout",
+      "before_svg": "before/anonymous_motor_01.svg",
+      "after_svg": "after/anonymous_motor_01.svg"
+    },
+    {
+      "case_id": "anonymous_motor_02",
+      "source": "AC1000_L.jpg",
+      "image": "../../images_to_convert/AC1000_L.jpg",
+      "source_sha256": "6e0ea8481bde22fc9dac0781588180cbc4d4933c11cd4d03ae081c9020704850",
+      "baseline_description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"M\" (Motor)",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "role": "size holdout",
+      "before_svg": "before/anonymous_motor_02.svg",
+      "after_svg": "after/anonymous_motor_02.svg"
+    }
+  ]
+}

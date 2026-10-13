@@ -45,10 +45,10 @@ def symbol_semantics(svg: str, label='Q') -> float:
         return 0.
 
 
-def measure(image: Path, svg: Path) -> dict:
+def measure(image: Path, svg: Path, label='Q') -> dict:
     record = measure_raster(image, svg)
     m = record['metrics']
-    m['semantic_score'] = symbol_semantics(record['svg'])
+    m['semantic_score'] = symbol_semantics(record['svg'], label)
     record['combined_score'] = (1-m['error_per_pixel']+m['edge_alignment']+m['object_mask_iou']+m['semantic_score'])/4
     return record
 
@@ -57,7 +57,7 @@ def evaluate(manifest: dict, root: Path) -> dict:
     before, after, evidence = {}, {}, []
     for case in manifest['cases']:
         image = root/case['image']
-        old, new = (measure(image, root/case[mode+'_svg']) for mode in ('before', 'after'))
+        old, new = (measure(image, root/case[mode+'_svg'], manifest.get('label', 'Q')) for mode in ('before', 'after'))
         before[case['case_id']] = {'metrics': old['metrics'], 'dimensions': old['dimensions']}
         after[case['case_id']] = new
         evidence.append({**case, 'input_sha256': hashlib.sha256(image.read_bytes()).hexdigest(),

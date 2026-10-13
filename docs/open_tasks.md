@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-13)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `436` · Erledigt `409` · Offen `27`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `437` · Erledigt `410` · Offen `27`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,9 +20,18 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-13)
 
+- [x] **AC1000 – Kreisscheibe mit M:** eigenständige Beschreibungen und allgemeine Konturberücksichtigung beim Startkandidaten; alle drei Größen bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Prüfungen bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-13_ac1000_s.md`.
+
+**Neuester Abschluss:** `AC1000_S` und beide Größen-Holdouts auf
+`codex/ac1000-quality-2026-10-13`. Frische neutrale Zielmetrik
+`11123.106445 → 496.119995`; identische finale SVGs im vollständigen Katalog.
+236 Paare in der Erfolgsübersicht; alle 233 bisherigen Indexeinträge unverändert.
+Nächste reguläre Rotation: `GE0022`, `GE9024_1M`, `GE0300`, `b_heating1`, `AC0421_1_S`.
+Die drei erledigten AC1000-Größen sind ausgeschlossen.
+
 - [x] **AC0920 – Kreisscheibe mit Q:** eigenständige Beschreibungen und allgemeine Kreis-/Textregistrierung; alle drei Größen bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17; alle sechs neutralen und Katalog-SVGs sowie die Gates sind reproduziert. Details: `docs/next_arbeitspaket_2026-10-13_ac0920_l.md`.
 
-**Neuester Abschluss:** `AC0920_L` und beide Größen-Holdouts auf
+**Vorheriger Abschluss:** `AC0920_L` und beide Größen-Holdouts auf
 `codex/ac0920-quality-2026-10-13`. Frische neutrale Zielmetrik
 `10145.160156 → 506.664001`; identische Werte im Originalkatalog-Kontext.
 233 Paare in der Erfolgsübersicht; alle 230 bisherigen Indexeinträge unverändert.

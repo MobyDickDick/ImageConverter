@@ -2,6 +2,8 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [AC1000: Kreisscheibe mit M, Kontur beim Beschnitt und drei Größen (2026-10-13)](next_arbeitspaket_2026-10-13_ac1000_s.md)
+
 - [AC0920: Kreisscheibe mit Q, drei Größen und unabhängige Zufallsfälle (2026-10-13)](next_arbeitspaket_2026-10-13_ac0920_l.md)
 
 - [GE9022: links offener Bogen, 14 Katalogvarianten und 17 unabhängige Zufallsfälle (2026-10-12)](next_arbeitspaket_2026-10-12_ge9022_2m.md)
