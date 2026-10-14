@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `440` · Erledigt `412` · Offen `28`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `441` · Erledigt `413` · Offen `28`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,9 +20,18 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-14)
 
+- [x] **GE0300 – Kreuz auf Rechteckfläche vor Verlaufsscheibe:** eigenständige Beschreibung und allgemeine Rasterregistrierung; Ziel besteht beide regulären und strengeren Gates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage zweimal 17/17. Details: `docs/next_arbeitspaket_2026-10-14_ge0300.md`.
+
+**Neuester Abschluss:** `GE0300` auf `codex/ge0300-quality-2026-10-14`.
+Frische neutrale Zielmetrik `10814.927734 → 284.043915`; identischer finaler
+Vektor im vollständigen Katalogkontext. 252 Paare in der Erfolgsübersicht;
+alle 251 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
+`b_heating1`, `AC0421_1_S`, `GE0306`, `GE0346`, `AC0850_L`.
+Nur das tatsächliche GE0300-Bild ist zusätzlich ausgeschlossen.
+
 - [x] **GE9024 – rechts offener Bogen neben Verlaufsschaft:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Details und Wiederholungsnachweise: `docs/next_arbeitspaket_2026-10-14_ge9024_1m.md`.
 
-**Neuester Abschluss:** `GE9024_1M` und 13 Farb-/Größen-Holdouts auf
+**Vorheriger Abschluss:** `GE9024_1M` und 13 Farb-/Größen-Holdouts auf
 `codex/ge9024-quality-2026-10-14`. Frische neutrale Zielmetrik
 `11122.661133 → 177.697495`; alle finalen SVGs sind im vollständigen
 Katalogkontext bytegleich. 251 Paare in der Erfolgsübersicht;

@@ -1,5 +1,5 @@
 {
-  "case_count": 251,
+  "case_count": 252,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -2295,6 +2295,23 @@
       "svg": "svgs/GE0285.svg",
       "svg_sha256": "a995692140e5d6378000345a96a3246c29847458f4237665ba8cf23824afcfbc",
       "variant": "GE0285"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte gef\u00fcllte Rechteckfl\u00e4che mit feiner Randkontur. Mittig in dieser Fl\u00e4che steht ein helles gef\u00fclltes rechtwinkliges Kreuz aus einem senkrechten und einem waagerechten Balken mit vier freien Armen. Das Kreuz bleibt vollst\u00e4ndig innerhalb des Rechtecks, das Rechteck vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/cross_panel_disk_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0300.jpg",
+      "image_sha256": "bd5c85e1449dd1e18d62a381b11508105b5908fc8de3252936c277e51f223bff",
+      "mean_delta2": 284.0439147949219,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8804849982261658,
+        "error_per_pixel": 0.0014560754314746733,
+        "object_mask_iou": 0.9903127594796568
+      },
+      "svg": "svgs/GE0300.svg",
+      "svg_sha256": "bd3fad35681983499755b9cd9be4e8c3f173f5b92a96da4727a60d909905d771",
+      "variant": "GE0300"
     },
     {
       "description": "Gr\u00fcner Haken aus zwei dicken schr\u00e4gen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und au\u00dfen dunkler. Wei\u00dfer Hintergrund.",

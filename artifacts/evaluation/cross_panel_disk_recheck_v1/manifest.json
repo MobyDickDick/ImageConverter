@@ -1,0 +1,24 @@
+{
+  "schema_version": "cross_panel_disk_recheck_manifest_v1",
+  "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte gef\u00fcllte Rechteckfl\u00e4che mit feiner Randkontur. Mittig in dieser Fl\u00e4che steht ein helles gef\u00fclltes rechtwinkliges Kreuz aus einem senkrechten und einem waagerechten Balken mit vier freien Armen. Das Kreuz bleibt vollst\u00e4ndig innerhalb des Rechtecks, das Rechteck vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+  "baseline_description": "Hintergrund: GE0999. Vordergrund (falsch gezeichnete) Schweizerfahne (Proportionen des Fahnenfl\u00e4che ist m. E. falsch)",
+  "provenance": {
+    "commit": "74c5c21f7",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "fresh original-description CLI frozen before runtime and description changes",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_cross_00",
+      "source": "GE0300.jpg",
+      "image": "../../images_to_convert/GE0300.jpg",
+      "source_sha256": "bd5c85e1449dd1e18d62a381b11508105b5908fc8de3252936c277e51f223bff",
+      "role": "target",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte gef\u00fcllte Rechteckfl\u00e4che mit feiner Randkontur. Mittig in dieser Fl\u00e4che steht ein helles gef\u00fclltes rechtwinkliges Kreuz aus einem senkrechten und einem waagerechten Balken mit vier freien Armen. Das Kreuz bleibt vollst\u00e4ndig innerhalb des Rechtecks, das Rechteck vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_cross_00.svg",
+      "after_svg": "after/anonymous_cross_00.svg"
+    }
+  ]
+}

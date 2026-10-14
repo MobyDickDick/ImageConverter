@@ -1,0 +1,87 @@
+{
+  "archive": {
+    "added": [
+      "GE0300"
+    ],
+    "all_previous_recheck_mean_delta2_unchanged": true,
+    "all_previous_records_identical": true,
+    "known_drift_count": 22,
+    "known_drift_list_unchanged": true,
+    "new_count": 252,
+    "passed": 252,
+    "previous_count": 251
+  },
+  "baseline_commit": "74c5c21f719ec3daabd8feb7f2f85f08a43a3e7a",
+  "branch": "codex/ge0300-quality-2026-10-14",
+  "catalog_acceptance": {
+    "all_frozen_vectors_and_gates_reproduced": true,
+    "catalog_runs": 2,
+    "catalog_vectors_identical_to_neutral": true,
+    "forbidden_reference_reads": 0,
+    "neutral_cases": 1,
+    "neutral_runs": 2,
+    "real_name_cases": 1,
+    "regressed_metrics": 0,
+    "target_after_mean_delta2": 284.0439147949219,
+    "target_before_mean_delta2": 10814.927734375
+  },
+  "checks": {
+    "cli_help": "pass",
+    "compileall": "pass",
+    "diff_whitespace": "pass",
+    "runtime_id_zero": "pass",
+    "saved_artifact_integrity": "pass"
+  },
+  "completion_verdict": "PASS",
+  "date": "2026-10-14",
+  "diagnostics": {
+    "diagnostic_runs_counted_as_final_acceptance": false,
+    "final_archive_method": "one semantic family per fresh process; full compatibility cohort retained",
+    "first_independent_plan_b_failed": 5,
+    "first_independent_plan_b_passed": 12,
+    "initial_cli_float_input_error_corrected": true
+  },
+  "focused": {
+    "failed": 0,
+    "log": "cross-panel-focused1.log",
+    "passed": 43
+  },
+  "independent_plan_b": {
+    "case_count": 17,
+    "hashes_metrics_complexity_and_gates_identical": true,
+    "passed_per_run": 17,
+    "runs": 2,
+    "seed": 20261014
+  },
+  "next_candidates": [
+    "b_heating1",
+    "AC0421_1_S",
+    "GE0306",
+    "GE0346",
+    "AC0850_L"
+  ],
+  "smoke": {
+    "failed": 0,
+    "log": "cross-panel-smoke.log",
+    "passed": 2
+  },
+  "source_hashes": {
+    "artifacts/descriptions/Finale_Wurzelformen_V3.xml": "aeb2cc1e7ef59c7f5afaefd0feb0eae1c9222b702c8543281dc469d3aa11b442",
+    "artifacts/evaluation/cross_panel_disk_recheck_v1/independent.svg": "bf9b806107231fe530a7a14ebb71f0479499ac67bcc55029c51dccec4d805116",
+    "artifacts/evaluation/cross_panel_disk_recheck_v1/independent.txt": "c9800f80af7b9fa7b7a4fdfea79115774464599d96a31516e0176c5a85540c54",
+    "artifacts/evaluation/cross_panel_disk_recheck_v1/manifest.json": "a1deb708f3f52b41b209c433af200aae04dda0cfdcd84f0880423a5713dfe4e4",
+    "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml": "f2d0e92c385db8fafb3db8d7a69e1c5e75d73c109f56f196915ead73fe94931b",
+    "src/iCCModules/imageCompositeConverterCrossPanelDisk.py": "dba5f1257fe39d6a8879e4b1a98050096bd28c05e9be92b2f1db0a7c35489bb4",
+    "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "617d1be1a93578bdd3574e1008ddb02ee0661bca5843dac44c71bd4183cccf02",
+    "tests/test_cross_panel_disk_runtime.py": "e825ea6bb9a171678c0ac476e7c5984f0813982a7a456396f563cb398dd4d516",
+    "tools/evaluate_cross_panel_disk_recheck.py": "4fa69f4551fae67802a968850833e714778706969077f8948fd3629c69c1072b",
+    "tools/run_cross_panel_disk_recheck.py": "5e9b476cfd69e1ed69a24db88d81d7fd90abc2161477af5b2a66f9ff41fecabb"
+  },
+  "standard": {
+    "failed": 0,
+    "junit": "standard_profile.xml",
+    "log": "standard_profile.log",
+    "passed": 2630,
+    "skipped": 30
+  }
+}
