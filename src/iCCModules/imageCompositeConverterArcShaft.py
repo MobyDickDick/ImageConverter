@@ -49,9 +49,32 @@ def turn_arc_shaft_svg(svg):
     return ET.tostring(root, encoding='unicode')+'\n'
 
 
+def mirror_side_arc_shaft_svg(svg):
+    """Reflect native horizontal coordinates and the half-ellipse sweep."""
+    root = ET.fromstring(svg)
+    width = float(root.get('width'))
+    for shape in root.iter():
+        kind = shape.tag.rsplit('}', 1)[-1]
+        if kind == 'rect':
+            shape.set('x', f"{width-float(shape.get('x', 0))-float(shape.get('width')):g}")
+        elif kind == 'path':
+            match = re.fullmatch(r'M ([\d.e+-]+) ([\d.e+-]+) A ([\d.e+-]+) ([\d.e+-]+) 0 0 ([01]) ([\d.e+-]+) ([\d.e+-]+)', shape.get('d', ''))
+            if match is None:
+                raise ValueError('Expected one analytic half-ellipse')
+            x, y, rx, ry, sweep, ex, ey = map(float, match.groups())
+            shape.set('d', f'M {width-x:g} {y:g} A {rx:g} {ry:g} 0 0 {1-int(sweep)} {width-ex:g} {ey:g}')
+    return ET.tostring(root, encoding='unicode')+'\n'
+
+
 def fit_arc_shaft(width, height, *, description, image, render_fn, error_fn):
     """Normalize explicitly described directions to the upper-opening fit."""
     text = str(description or '').casefold()
+    right = 'rechts offen' in text
+    if right:
+        if ('linker halbkreis' not in text or 'rechts neben' not in text
+                or any(token in text for token in ('links offen', 'rechter halbkreis', 'links neben'))):
+            return None
+        text = text.replace('rechts offen', 'links offen').replace('linker halbkreis', 'rechter halbkreis').replace('rechts neben', 'links neben')
     if 'links offen' in text:
         if ('rechter halbkreis' not in text or 'links neben' not in text
                 or 'waagerecht' not in text or 'vertikal' not in text
@@ -61,21 +84,31 @@ def fit_arc_shaft(width, height, *, description, image, render_fn, error_fn):
         if arr.shape != (height, width, 3):
             return None
 
+        def original_svg(svg):
+            turned = turn_arc_shaft_svg(svg)
+            return mirror_side_arc_shaft_svg(turned) if right else turned
+
         def normalized_render(svg, w, h):
-            raster = render_fn(turn_arc_shaft_svg(svg), h, w)
-            return None if raster is None else np.rot90(raster, -1)
+            raster = render_fn(original_svg(svg), h, w)
+            if raster is None:
+                return None
+            return np.rot90(np.fliplr(raster) if right else raster, -1)
 
         normalized = text.replace('links offen', 'oben offen').replace('vertikal', 'horizontal')
         result = _fit_upper_open_arc_shaft(height, width, description=normalized,
-                                         image=np.rot90(arr, -1), render_fn=normalized_render,
-                                         error_fn=error_fn, preserve_initial_error=True)
+                                         image=np.rot90(np.fliplr(arr) if right else arr, -1), render_fn=normalized_render,
+                                         error_fn=error_fn, preserve_initial_error=True,
+                                         preserve_foreground=right)
         if result is None:
             return None
-        result['svg'] = turn_arc_shaft_svg(result['svg'])
-        result['rendered'] = np.rot90(result['rendered']).copy()
+        result['svg'] = original_svg(result['svg'])
+        raster = np.rot90(result['rendered'])
+        result['rendered'] = (np.fliplr(raster) if right else raster).copy()
         p = result['parameters'].copy()
         p[:9] = [p[1], height-p[0], p[3], p[2], p[4], p[6], height-p[5]-p[7], p[8], p[7]]
-        result.update(parameters=p, opening='left')
+        if right:
+            p[0], p[5] = width-p[0], width-p[5]-p[7]
+        result.update(parameters=p, opening='right' if right else 'left')
         return result
     lower = 'unten offen' in text
     if not lower:
@@ -107,7 +140,7 @@ def fit_arc_shaft(width, height, *, description, image, render_fn, error_fn):
 
 
 def _fit_upper_open_arc_shaft(width, height, *, description, image, render_fn, error_fn,
-                            preserve_initial_error=False):
+                            preserve_initial_error=False, preserve_foreground=False):
     text = str(description or '').casefold()
     if not all(token in text for token in ('u-bogen', 'oben offen', 'schaft', 'horizontal', 'verlauf')):
         return None
@@ -187,6 +220,9 @@ def _fit_upper_open_arc_shaft(width, height, *, description, image, render_fn, e
     if preserve_initial_error:
         reference_edges = cv2.Canny(arr, 50, 140) > 0
         reference_distance = cv2.distanceTransform((~reference_edges).astype(np.uint8), cv2.DIST_L2, 3)
+        border = np.concatenate((arr[0], arr[-1], arr[:, 0], arr[:, -1]))
+        background = np.median(border.astype(float), axis=0)
+        reference_foreground = np.max(np.abs(arr.astype(float)-background), axis=2) > 25
 
         def loss_fn(original, raster):
             edges = cv2.Canny(raster, 50, 140) > 0
@@ -195,7 +231,13 @@ def _fit_upper_open_arc_shaft(width, height, *, description, image, render_fn, e
                 edge = (np.exp(-distance[reference_edges]).mean()+np.exp(-reference_distance[edges]).mean())/2
             else:
                 edge = float(not edges.any() and not reference_edges.any())
-            return np.mean((original.astype(float)-raster.astype(float))**2)+64*(1-edge)
+            foreground_loss = 0.
+            if preserve_foreground:
+                foreground = np.max(np.abs(raster.astype(float)-background), axis=2) > 25
+                union = (foreground | reference_foreground).sum()
+                iou = (foreground & reference_foreground).sum()/union if union else 1.
+                foreground_loss = 256*(1-iou)
+            return np.mean((original.astype(float)-raster.astype(float))**2)+64*(1-edge)+foreground_loss
 
     result = _register(parameters, 9, build, valid, arr, render_fn, error_fn, 'raster_arc_shaft_v1',
                        preserve_initial_error=preserve_initial_error, loss_fn=loss_fn)
