@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-10-13)
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `439` · Erledigt `411` · Offen `28`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `440` · Erledigt `412` · Offen `28`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -18,12 +18,22 @@ focused on the actual project scope.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-13)
+### Aktueller Plan-B-Stand (2026-10-14)
+
+- [x] **GE9024 – rechts offener Bogen neben Verlaufsschaft:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Details und Wiederholungsnachweise: `docs/next_arbeitspaket_2026-10-14_ge9024_1m.md`.
+
+**Neuester Abschluss:** `GE9024_1M` und 13 Farb-/Größen-Holdouts auf
+`codex/ge9024-quality-2026-10-14`. Frische neutrale Zielmetrik
+`11122.661133 → 177.697495`; alle finalen SVGs sind im vollständigen
+Katalogkontext bytegleich. 251 Paare in der Erfolgsübersicht;
+alle 237 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
+`GE0300`, `b_heating1`, `AC0421_1_S`, `GE0306`, `GE0346`.
+Alle 14 erledigten GE9024-Varianten sind zusätzlich ausgeschlossen.
 
 - [x] **GE0022 – Rechtspfeil auf Verlaufsscheibe:** eigenständige Beschreibung ausschließlich für das tatsächliche Pfeilbild und allgemeine horizontale Richtungsnormalisierung; Ziel besteht beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Prüfungen bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-13_ge0022.md`.
 - [ ] **GE0022-BELL-SOURCE:** Die neun im selben XML-Eintrag verzeichneten Bilder `GE0022_{L,M,S}`, `GE0022_1_{L,M,S}` und `GE0022_2_{L,M,S}` zeigen Glocken mit Schallbögen auf Verlaufsscheiben. Quellen-/Beschreibungszuordnung eigenständig prüfen und diese Topologie separat abnehmen; sie sind keine Pfeil-Holdouts. Quellhashes und Abmessungen: `artifacts/evaluation/right_disk_arrow_recheck_v1/source_inventory.json`. Bisherige Raster und Beschreibungen erhalten; Gates unverändert lassen.
 
-**Neuester Abschluss:** `GE0022.jpg` auf `codex/ge0022-quality-2026-10-13`.
+**Vorheriger Abschluss:** `GE0022.jpg` auf `codex/ge0022-quality-2026-10-13`.
 Frische neutrale Zielmetrik `10954.268555 → 198.207550`; identischer finaler
 Vektor im vollständigen Katalogkontext. 237 Paare in der Erfolgsübersicht;
 alle 236 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:

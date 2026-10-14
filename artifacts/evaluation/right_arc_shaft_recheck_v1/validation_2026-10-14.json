@@ -1,0 +1,116 @@
+{
+  "archive": {
+    "added": [
+      "GE9024_1M",
+      "GE9024_1S",
+      "GE9024_2M",
+      "GE9024_2S",
+      "GE9024_3M",
+      "GE9024_3S",
+      "GE9024_4M",
+      "GE9024_4S",
+      "GE9024_5M",
+      "GE9024_5S",
+      "GE9024_6M",
+      "GE9024_6S",
+      "GE9024_7M",
+      "GE9024_7S"
+    ],
+    "all_previous_recheck_mean_delta2_unchanged": true,
+    "all_previous_records_identical": true,
+    "forbidden_reference_reads": 0,
+    "known_drift_count": 22,
+    "known_drift_list_unchanged": true,
+    "new_count": 251,
+    "passed": 251,
+    "previous_count": 237
+  },
+  "baseline_commit": "f5447bb081041aa904fde7ed460423b34f17739c",
+  "branch": "codex/ge9024-quality-2026-10-14",
+  "catalog_acceptance": {
+    "all_frozen_vectors_and_gates_reproduced": true,
+    "catalog_after_identical_to_neutral": true,
+    "catalog_runs": 2,
+    "forbidden_reference_reads": 0,
+    "neutral_cases": 14,
+    "neutral_runs": 2,
+    "real_name_cases": 14,
+    "regressed_metrics": 0,
+    "target_after_mean_delta2": 177.69749450683594,
+    "target_before_mean_delta2": 11122.6611328125
+  },
+  "checks": {
+    "cli_help": "pass",
+    "compileall": "pass",
+    "diff_whitespace": "pass",
+    "runtime_id_zero": "pass",
+    "saved_artifact_integrity": "pass"
+  },
+  "completion_verdict": "PASS",
+  "date": "2026-10-14",
+  "diagnostics": {
+    "archive_first_run_io_failure": "OSError [Errno 22] conversion_bestlist.csv after 90/90 completed cases",
+    "catalog_output_variation_disabled_in_final_runs": true,
+    "catalog_variable_baseline_rejected": true,
+    "diagnostic_runs_counted_as_final_acceptance": false,
+    "final_archive_method": "one semantic family per fresh process; full 48-case compatibility cohort retained",
+    "first_foreground_loss_diagnosis_failed": 3,
+    "initial_catalog_pixel_gate_failures": 3,
+    "initial_focused_failures": 4,
+    "initial_focused_passed": 209,
+    "rejected_smaller_global_worker_limits": [
+      32,
+      40
+    ],
+    "standard_before_reflection_test_fix": {
+      "failed": 1,
+      "failed_case": "test_right_arc_shaft_runtime.py::test_direction_checker_and_reflection",
+      "log": "diagnostics/standard_before_reflection_test_fix.log",
+      "passed": 2586,
+      "reason": "Direction-dependent MuPDF antialiasing; test replaced with an exact geometric round trip and covered by final focused suite",
+      "skipped": 30
+    }
+  },
+  "focused": {
+    "failed": 0,
+    "log": "focused_tests.log",
+    "passed": 213,
+    "skipped": 0
+  },
+  "independent_plan_b": {
+    "case_count": 17,
+    "hashes_metrics_complexity_and_gates_identical": true,
+    "passed_per_run": 17,
+    "runs": 2,
+    "seed": 20261014
+  },
+  "smoke": {
+    "failed": 0,
+    "log": "smoke_tests.log",
+    "passed": 2
+  },
+  "source_sha256": {
+    "artifacts/descriptions/Finale_Wurzelformen_V3.xml": "41ecb6111c4a07dbb838ae25ae8e455fd8a2d8721a91bf06dfc3c339629f16b2",
+    "artifacts/evaluation/right_arc_shaft_recheck_v1/manifest.json": "2aaf7dd84e11914892348bef2653314ed29f4869088ed4787a857396eb03c871",
+    "artifacts/evaluation/right_arc_shaft_recheck_v1/recheck_catalog_context.py": "e7546f6b6bbe60f19968d820e3b64ed584b65ea49a2da4c4ea5da102e874f70b",
+    "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml": "6c5b7c2cd6f40cea7f9a5ab0d28c25a543f1025cacb31dc3d13c8d4473e98fdc",
+    "artifacts/satisfactory_conversions/index.json": "d8387178e1d446e5d14075ec419b67a772c6107cb6bf1d3086eb1a9e33c11ffc",
+    "src/iCCModules/imageCompositeConverterArcShaft.py": "77006fe036ceaddcd6f96e64035b697acfb62bbec44a529ae284b2cb6afc4fd1",
+    "tests/test_right_arc_shaft_runtime.py": "51bcf3cf3aa3f9fd697ea17e32d21dda47075bf230ed9341e6fef427848c3f7a",
+    "tools/evaluate_side_arc_shaft_recheck.py": "4e8be296037113689ad86ca33bd351ad79f6299c64007d4fb5652d1c26de3030",
+    "tools/run_side_arc_shaft_recheck.py": "4557718bc715db15bd9558b9a7e37df7d8b4c2f9e7feb7457eec7176a7e32502"
+  },
+  "standard_profile": {
+    "failed": 0,
+    "log": "standard_profile.log",
+    "passed": 2587,
+    "seconds": 2284.96,
+    "skipped": 30
+  },
+  "toolchain": {
+    "numpy": "2.2.6",
+    "opencv": "4.14.0",
+    "pymupdf": "1.26.7",
+    "python": "3.10.11"
+  }
+}

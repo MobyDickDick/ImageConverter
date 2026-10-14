@@ -1,6 +1,6 @@
 # Zufriedenstellende Konvertierungen
 
-237 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
+251 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
 
 Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bild und Beschreibung.
 
@@ -242,4 +242,18 @@ Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bi
 | [GE9023_6S](images/GE9023_6S.jpg) | [SVG](svgs/GE9023_6S.svg) | 156.246674 | semantic-only |
 | [GE9023_7M](images/GE9023_7M.jpg) | [SVG](svgs/GE9023_7M.svg) | 137.023331 | semantic-only |
 | [GE9023_7S](images/GE9023_7S.jpg) | [SVG](svgs/GE9023_7S.svg) | 74.243332 | semantic-only |
+| [GE9024_1M](images/GE9024_1M.jpg) | [SVG](svgs/GE9024_1M.svg) | 177.697495 | semantic-only |
+| [GE9024_1S](images/GE9024_1S.jpg) | [SVG](svgs/GE9024_1S.svg) | 197.896667 | semantic-only |
+| [GE9024_2M](images/GE9024_2M.jpg) | [SVG](svgs/GE9024_2M.svg) | 167.628326 | semantic-only |
+| [GE9024_2S](images/GE9024_2S.jpg) | [SVG](svgs/GE9024_2S.svg) | 189.899994 | semantic-only |
+| [GE9024_3M](images/GE9024_3M.jpg) | [SVG](svgs/GE9024_3M.svg) | 104.134163 | semantic-only |
+| [GE9024_3S](images/GE9024_3S.jpg) | [SVG](svgs/GE9024_3S.svg) | 181.649994 | semantic-only |
+| [GE9024_4M](images/GE9024_4M.jpg) | [SVG](svgs/GE9024_4M.svg) | 52.441666 | semantic-only |
+| [GE9024_4S](images/GE9024_4S.jpg) | [SVG](svgs/GE9024_4S.svg) | 87.976669 | semantic-only |
+| [GE9024_5M](images/GE9024_5M.jpg) | [SVG](svgs/GE9024_5M.svg) | 101.333336 | semantic-only |
+| [GE9024_5S](images/GE9024_5S.jpg) | [SVG](svgs/GE9024_5S.svg) | 119.676666 | semantic-only |
+| [GE9024_6M](images/GE9024_6M.jpg) | [SVG](svgs/GE9024_6M.svg) | 173.170837 | semantic-only |
+| [GE9024_6S](images/GE9024_6S.jpg) | [SVG](svgs/GE9024_6S.svg) | 220.669998 | semantic-only |
+| [GE9024_7M](images/GE9024_7M.jpg) | [SVG](svgs/GE9024_7M.svg) | 137.990829 | semantic-only |
+| [GE9024_7S](images/GE9024_7S.jpg) | [SVG](svgs/GE9024_7S.svg) | 104.816666 | semantic-only |
 | [SE0081](images/SE0081.jpg) | [SVG](svgs/SE0081.svg) | 702.781555 | semantic-only |

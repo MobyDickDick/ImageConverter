@@ -1,5 +1,5 @@
 {
-  "case_count": 237,
+  "case_count": 251,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -4012,6 +4012,244 @@
       "svg": "svgs/GE9023_7S.svg",
       "svg_sha256": "da2058b7f9b553d70c429f48bb93ebcdabdccb1607056ba24952c3882f0a07f3",
       "variant": "GE9023_7S"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_1M.jpg",
+      "image_sha256": "8d7b5119b5dd444fc8cf9c28f5c8e936921894de3f7bca7f0bc116a35cb978dc",
+      "mean_delta2": 177.69749450683594,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8900970816612244,
+        "error_per_pixel": 0.0009109188491956218,
+        "object_mask_iou": 0.9761904761904762
+      },
+      "svg": "svgs/GE9024_1M.svg",
+      "svg_sha256": "7c4f75843fcd521c636d7ce7a80c1abd29cda9c6c436877c6abd4b0a223262f1",
+      "variant": "GE9024_1M"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_1S.jpg",
+      "image_sha256": "1217952b574d2a5d07a5d50fa4529c62d3d748b4502d2a94db86a4e247cb6635",
+      "mean_delta2": 197.89666748046875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9396874308586121,
+        "error_per_pixel": 0.0010144645263640588,
+        "object_mask_iou": 0.9885057471264368
+      },
+      "svg": "svgs/GE9024_1S.svg",
+      "svg_sha256": "f1d8de092532b6dfcf461f3fdf64e6b8cd1798030e1fc0f0e1aadd7829ac2aeb",
+      "variant": "GE9024_1S"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_2M.jpg",
+      "image_sha256": "f5443b98b9fc572c682a8d2e3fac4221038e079a64b4e64beb94e959b1ae7460",
+      "mean_delta2": 167.62832641601562,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8589720726013184,
+        "error_per_pixel": 0.0008593019424119729,
+        "object_mask_iou": 0.9821073558648111
+      },
+      "svg": "svgs/GE9024_2M.svg",
+      "svg_sha256": "4023074c25927971f520224be43b0b9a9cb16ec67e5c74f947a53c2b712449a4",
+      "variant": "GE9024_2M"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_2S.jpg",
+      "image_sha256": "f01bf4a3aa73b17d4f2e34349e90466f1c028211711e0077c567bcb968c61d9f",
+      "mean_delta2": 189.89999389648438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.933372974395752,
+        "error_per_pixel": 0.0009734717103497853,
+        "object_mask_iou": 0.9942528735632183
+      },
+      "svg": "svgs/GE9024_2S.svg",
+      "svg_sha256": "04aba4cab75e56e315f875bcd6ad2e4bd4d59c7b98ce9fb70a9d4ecee08f3228",
+      "variant": "GE9024_2S"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_3M.jpg",
+      "image_sha256": "d15d37af8269d8056224c6f8658afbd112a1a7c841503f52b0f9978dd08f3cf8",
+      "mean_delta2": 104.13416290283203,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8967047333717346,
+        "error_per_pixel": 0.0005338160343602821,
+        "object_mask_iou": 0.9778225806451613
+      },
+      "svg": "svgs/GE9024_3M.svg",
+      "svg_sha256": "fb2bd4f7f0e73013e1674305cfcb704da00cdec503fc027c0ec5e16838be955c",
+      "variant": "GE9024_3M"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_3S.jpg",
+      "image_sha256": "420b847995cd701286d5bde4ab68514492b4212b5c9e84269ab489ab7c72dfb2",
+      "mean_delta2": 181.64999389648438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9406898021697998,
+        "error_per_pixel": 0.000931180283975314,
+        "object_mask_iou": 0.9885057471264368
+      },
+      "svg": "svgs/GE9024_3S.svg",
+      "svg_sha256": "17a7186d9c8d97fc5943adb5365ca1bc43e3b574d7039806b6a038284da9e7dd",
+      "variant": "GE9024_3S"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_4M.jpg",
+      "image_sha256": "96586f6773debff6f023b12f43699ce62ae5cfcc233404939e3c4e2d2f1d7450",
+      "mean_delta2": 52.44166564941406,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9773059487342834,
+        "error_per_pixel": 0.00026882822324446527,
+        "object_mask_iou": 0.8924485125858124
+      },
+      "svg": "svgs/GE9024_4M.svg",
+      "svg_sha256": "474f1b06dafa1cb01d5ec83dfd12e11f0568d28f3e295d78f760d7509ae70b25",
+      "variant": "GE9024_4M"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_4S.jpg",
+      "image_sha256": "b38e46fe3f0a33e64fe13fd587dcff58eff87e99d983835a5a6c882db0128767",
+      "mean_delta2": 87.97666931152344,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9561913013458252,
+        "error_per_pixel": 0.000450988949437516,
+        "object_mask_iou": 0.967741935483871
+      },
+      "svg": "svgs/GE9024_4S.svg",
+      "svg_sha256": "93c8d420720fa53587b5d28cfba544c7e36a0cc07d95285f70924f647c77d4a7",
+      "variant": "GE9024_4S"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_5M.jpg",
+      "image_sha256": "7f4b15d8ff4c30733effbd8760b35ee39526e6a78f58dc374b864011f794db3d",
+      "mean_delta2": 101.33333587646484,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8858439922332764,
+        "error_per_pixel": 0.0005194583410301927,
+        "object_mask_iou": 0.9799599198396793
+      },
+      "svg": "svgs/GE9024_5M.svg",
+      "svg_sha256": "2c9d05de3ab1326d0dfd04c4e2a546484b18490230e34cc28b154f37037eb5d8",
+      "variant": "GE9024_5M"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_5S.jpg",
+      "image_sha256": "0dea11b6a64262e914bcee33d0c505c1e5fe0bd6754ae8db37ec29f06fece8ff",
+      "mean_delta2": 119.67666625976562,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9461746215820312,
+        "error_per_pixel": 0.0006134905357414616,
+        "object_mask_iou": 0.9885057471264368
+      },
+      "svg": "svgs/GE9024_5S.svg",
+      "svg_sha256": "51b1b650914e28107a8cdf9b98c12e2d82cca60eabf6e208bb9a2b7d14bfee66",
+      "variant": "GE9024_5S"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_6M.jpg",
+      "image_sha256": "797b7467d3249dfed191d2cbf9851e4e6852e19df2fe0659e78d1351a13811d3",
+      "mean_delta2": 173.17083740234375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8930070400238037,
+        "error_per_pixel": 0.0008877141479038511,
+        "object_mask_iou": 0.9782178217821782
+      },
+      "svg": "svgs/GE9024_6M.svg",
+      "svg_sha256": "edc9c2f3fce566be73dfcbcb2e0010ea8d3cca1ef787915d6d42dde02f701b7c",
+      "variant": "GE9024_6M"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_6S.jpg",
+      "image_sha256": "33ee4e5f2041f7fce07f5527ddc4850289ce7714fcb82975547c7f6c67e7afed",
+      "mean_delta2": 220.6699981689453,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9517499208450317,
+        "error_per_pixel": 0.001131205937044446,
+        "object_mask_iou": 0.9942528735632183
+      },
+      "svg": "svgs/GE9024_6S.svg",
+      "svg_sha256": "4ff94e631c0760485b8abb1377d1bd4fac16176b63854da825b6652e97f091ae",
+      "variant": "GE9024_6S"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_7M.jpg",
+      "image_sha256": "9301ef1b456b3b417475bb8ee1e3adaccf29585be0b9259c173ede8474efa73f",
+      "mean_delta2": 137.99082946777344,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8684229850769043,
+        "error_per_pixel": 0.0007073732127016452,
+        "object_mask_iou": 0.9881188118811881
+      },
+      "svg": "svgs/GE9024_7M.svg",
+      "svg_sha256": "27f841e8b6faf35654c876ed73d8963accf6cc4348edee4aae191a18e732c3f4",
+      "variant": "GE9024_7M"
+    },
+    {
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren R\u00e4ndern. Ein wei\u00dfer Abstand trennt Bogen und Schaft. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/right_arc_shaft_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9024_7S.jpg",
+      "image_sha256": "598fb324d2ea6e6c1c42654703b050ed83163fad0082682d001441ebfe9dda6b",
+      "mean_delta2": 104.81666564941406,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9325432181358337,
+        "error_per_pixel": 0.0005373147028036091,
+        "object_mask_iou": 0.9828571428571429
+      },
+      "svg": "svgs/GE9024_7S.svg",
+      "svg_sha256": "ebd1703d941a254d4415e74e218f4db7ed96098b1b26f40ca9d8a9a7d4682296",
+      "variant": "GE9024_7S"
     },
     {
       "description": "Kelle mit gef\u00fclltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Wei\u00dfer Hintergrund. Lage, Abmessungen, Kontur, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",

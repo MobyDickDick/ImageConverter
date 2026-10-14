@@ -26,13 +26,16 @@ def symbol_semantics(svg: str, family=None) -> float:
         arc = next(e for e in shapes if e.tag.rsplit('}', 1)[-1] == 'path')
         bg = next(e for e in shapes if e.tag.rsplit('}', 1)[-1] == 'rect' and e.get('fill') == '#ffffff')
         shaft = next(e for e in shapes if e.tag.rsplit('}', 1)[-1] == 'rect' and e is not bg)
-        match = re.fullmatch(r'M ([\d.e+-]+) ([\d.e+-]+) A ([\d.e+-]+) ([\d.e+-]+) 0 0 0 ([\d.e+-]+) ([\d.e+-]+)', arc.get('d', ''))
+        sweep = '1' if family == 'right' else '0'
+        match = re.fullmatch(r'M ([\d.e+-]+) ([\d.e+-]+) A ([\d.e+-]+) ([\d.e+-]+) 0 0 '+sweep+r' ([\d.e+-]+) ([\d.e+-]+)', arc.get('d', ''))
         if not match:
             return 0.
         cx, by, rx, ry, ex, ty = map(float, match.groups())
         sw = float(arc.get('stroke-width', 0))
         x, y, w, h = (float(shaft.get(k, 0)) for k in ('x', 'y', 'width', 'height'))
         width, height = float(root.get('width')), float(root.get('height'))
+        horizontal_order = (0 <= x < x+w < cx-rx-sw/2 and cx <= width+.5
+                            if family == 'right' else cx >= -.5 and cx+rx+sw/2 < x < x+w <= width)
         gradients = [e for e in root.iter() if e.tag.endswith('linearGradient')]
         if len(gradients) != 1:
             return 0.
@@ -49,8 +52,7 @@ def symbol_semantics(svg: str, family=None) -> float:
                      and all(math.isfinite(v) for v in (cx,by,rx,ry,ex,ty,sw,x,y,w,h,width,height))
                      and min(rx,ry,sw,w,h) > 0 and sw < min(rx,ry)
                      and abs(cx-ex) < .002 and abs(by-ty-2*ry) < .002
-                     and 0 <= ty-sw/2 < by+sw/2 <= height and cx >= -.5
-                     and cx+rx+sw/2 < x < x+w <= width
+                     and 0 <= ty-sw/2 < by+sw/2 <= height and horizontal_order
                      and ty < y < y+h < by and abs(y+h/2-(ty+by)/2) < ry*.24
                      and arc.get('fill') == 'none' and arc.get('stroke', 'none') != 'none'
                      and shaft.get('fill') == f"url(#{gradient.get('id')})"
@@ -63,10 +65,10 @@ def symbol_semantics(svg: str, family=None) -> float:
         return 0.
 
 
-def measure(image: Path, svg: Path) -> dict:
+def measure(image: Path, svg: Path, direction=None) -> dict:
     record = measure_raster(image, svg)
     m = record['metrics']
-    m['semantic_score'] = symbol_semantics(record['svg'])
+    m['semantic_score'] = symbol_semantics(record['svg'], direction)
     record['combined_score'] = (1-m['error_per_pixel']+m['edge_alignment']+m['object_mask_iou']+m['semantic_score'])/4
     return record
 
@@ -75,7 +77,7 @@ def evaluate(manifest: dict, root: Path) -> dict:
     before, after, evidence = {}, {}, []
     for case in manifest['cases']:
         image = root/case['image']
-        old, new = (measure(image, root/case[mode+'_svg']) for mode in ('before', 'after'))
+        old, new = (measure(image, root/case[mode+'_svg'], manifest.get('direction')) for mode in ('before', 'after'))
         before[case['case_id']] = {'metrics': old['metrics'], 'dimensions': old['dimensions']}
         after[case['case_id']] = new
         evidence.append({**case, 'input_sha256': hashlib.sha256(image.read_bytes()).hexdigest(),

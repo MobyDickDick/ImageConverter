@@ -83,6 +83,9 @@ def main() -> int:
                        for p in (run_dir/directory).glob('*.svg') if p.stem.casefold() == case['case_id'].casefold()]
             if len(matches) != 1:
                 raise ValueError(f"Expected one saved CLI SVG: {case['case_id']}/{mode}")
+            frozen = args.manifest.parent/case.get(mode+'_svg', 'missing.svg')
+            if frozen.exists() and frozen.read_bytes() != matches[0].read_bytes():
+                raise ValueError(f"Frozen {mode} SVG changed: {case['case_id']}")
             case[mode+'_svg'] = str(matches[0].relative_to(output))
     if args.baseline_only:
         (output/'manifest.json').write_text(json.dumps(manifest, indent=2)+'\n', encoding='utf-8')

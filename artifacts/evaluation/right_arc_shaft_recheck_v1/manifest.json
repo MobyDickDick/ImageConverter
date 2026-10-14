@@ -1,0 +1,155 @@
+{
+  "schema_version": "side_arc_shaft_recheck_manifest_v1",
+  "direction": "right",
+  "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+  "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+  "provenance": {
+    "commit": "f5447bb081041aa904fde7ed460423b34f17739c",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "fresh original-description CLI frozen before runtime and description changes",
+    "toolchain": "NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_symbol_00",
+      "source": "GE9024_1M.jpg",
+      "image": "../../images_to_convert/GE9024_1M.jpg",
+      "source_sha256": "8d7b5119b5dd444fc8cf9c28f5c8e936921894de3f7bca7f0bc116a35cb978dc",
+      "role": "target",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_00.svg",
+      "after_svg": "after/anonymous_symbol_00.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_01",
+      "source": "GE9024_1S.jpg",
+      "image": "../../images_to_convert/GE9024_1S.jpg",
+      "source_sha256": "1217952b574d2a5d07a5d50fa4529c62d3d748b4502d2a94db86a4e247cb6635",
+      "role": "color/size holdout",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_01.svg",
+      "after_svg": "after/anonymous_symbol_01.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_02",
+      "source": "GE9024_2M.jpg",
+      "image": "../../images_to_convert/GE9024_2M.jpg",
+      "source_sha256": "f5443b98b9fc572c682a8d2e3fac4221038e079a64b4e64beb94e959b1ae7460",
+      "role": "color/size holdout",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_02.svg",
+      "after_svg": "after/anonymous_symbol_02.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_03",
+      "source": "GE9024_2S.jpg",
+      "image": "../../images_to_convert/GE9024_2S.jpg",
+      "source_sha256": "f01bf4a3aa73b17d4f2e34349e90466f1c028211711e0077c567bcb968c61d9f",
+      "role": "color/size holdout",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_03.svg",
+      "after_svg": "after/anonymous_symbol_03.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_04",
+      "source": "GE9024_3M.jpg",
+      "image": "../../images_to_convert/GE9024_3M.jpg",
+      "source_sha256": "d15d37af8269d8056224c6f8658afbd112a1a7c841503f52b0f9978dd08f3cf8",
+      "role": "color/size holdout",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_04.svg",
+      "after_svg": "after/anonymous_symbol_04.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_05",
+      "source": "GE9024_3S.jpg",
+      "image": "../../images_to_convert/GE9024_3S.jpg",
+      "source_sha256": "420b847995cd701286d5bde4ab68514492b4212b5c9e84269ab489ab7c72dfb2",
+      "role": "color/size holdout",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_05.svg",
+      "after_svg": "after/anonymous_symbol_05.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_06",
+      "source": "GE9024_4M.jpg",
+      "image": "../../images_to_convert/GE9024_4M.jpg",
+      "source_sha256": "96586f6773debff6f023b12f43699ce62ae5cfcc233404939e3c4e2d2f1d7450",
+      "role": "color/size holdout",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_06.svg",
+      "after_svg": "after/anonymous_symbol_06.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_07",
+      "source": "GE9024_4S.jpg",
+      "image": "../../images_to_convert/GE9024_4S.jpg",
+      "source_sha256": "b38e46fe3f0a33e64fe13fd587dcff58eff87e99d983835a5a6c882db0128767",
+      "role": "color/size holdout",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_07.svg",
+      "after_svg": "after/anonymous_symbol_07.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_08",
+      "source": "GE9024_5M.jpg",
+      "image": "../../images_to_convert/GE9024_5M.jpg",
+      "source_sha256": "7f4b15d8ff4c30733effbd8760b35ee39526e6a78f58dc374b864011f794db3d",
+      "role": "color/size holdout",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_08.svg",
+      "after_svg": "after/anonymous_symbol_08.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_09",
+      "source": "GE9024_5S.jpg",
+      "image": "../../images_to_convert/GE9024_5S.jpg",
+      "source_sha256": "0dea11b6a64262e914bcee33d0c505c1e5fe0bd6754ae8db37ec29f06fece8ff",
+      "role": "color/size holdout",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_09.svg",
+      "after_svg": "after/anonymous_symbol_09.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_10",
+      "source": "GE9024_6M.jpg",
+      "image": "../../images_to_convert/GE9024_6M.jpg",
+      "source_sha256": "797b7467d3249dfed191d2cbf9851e4e6852e19df2fe0659e78d1351a13811d3",
+      "role": "color/size holdout",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_10.svg",
+      "after_svg": "after/anonymous_symbol_10.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_11",
+      "source": "GE9024_6S.jpg",
+      "image": "../../images_to_convert/GE9024_6S.jpg",
+      "source_sha256": "33ee4e5f2041f7fce07f5527ddc4850289ce7714fcb82975547c7f6c67e7afed",
+      "role": "color/size holdout",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_11.svg",
+      "after_svg": "after/anonymous_symbol_11.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_12",
+      "source": "GE9024_7M.jpg",
+      "image": "../../images_to_convert/GE9024_7M.jpg",
+      "source_sha256": "9301ef1b456b3b417475bb8ee1e3adaccf29585be0b9259c173ede8474efa73f",
+      "role": "color/size holdout",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_12.svg",
+      "after_svg": "after/anonymous_symbol_12.svg"
+    },
+    {
+      "case_id": "anonymous_symbol_13",
+      "source": "GE9024_7S.jpg",
+      "image": "../../images_to_convert/GE9024_7S.jpg",
+      "source_sha256": "598fb324d2ea6e6c1c42654703b050ed83163fad0082682d001441ebfe9dda6b",
+      "role": "color/size holdout",
+      "description": "Ein nach rechts offener U-Bogen als linker Halbkreis liegt rechts neben einem getrennten waagerechten rechteckigen Schaft. Der Bogen ist einfarbig. Der Schaft hat einen vertikalen Farbverlauf mit hellerer Mitte und dunkleren Rändern. Ein weißer Abstand trennt Bogen und Schaft. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Strichbreite und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_symbol_13.svg",
+      "after_svg": "after/anonymous_symbol_13.svg"
+    }
+  ]
+}
