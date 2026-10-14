@@ -1,0 +1,114 @@
+"""Check a saved vector's gradient disk and two nested pointed flames."""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+from pathlib import Path
+from xml.etree import ElementTree as ET
+import cv2
+
+from tools.evaluate_diagonal_square_kelle_recheck import measure as measure_raster
+from tools.evaluate_satisfaction_gate import evaluate_satisfaction, seal_baseline_manifest
+from tools.run_plan_b_variations import measure_quality
+
+
+def _outline(crown, bowl):
+    import re
+    import numpy as np
+    points = np.array([tuple(map(float, p.split(','))) for p in crown.get('points', '').split()])
+    commands = re.findall(r'[A-Za-z]', bowl.get('d', ''))
+    values = list(map(float, re.findall(r'[-+]?(?:\d*\.)?\d+(?:[eE][-+]?\d+)?', bowl.get('d', ''))))
+    if commands != ['M', 'L', 'C', 'C', 'L', 'Z'] or len(values) != 18 or not 5 <= len(points) <= 15:
+        raise ValueError('unsupported flame model')
+    left, right = np.array(values[2:4]), np.array(values[14:16])
+    if not (np.allclose(left, points[0], atol=.001) and np.allclose(right, points[-1], atol=.001)
+            and left[0] < values[8] < right[0] and values[9] > max(left[1], right[1])):
+        raise ValueError('invalid bowl junctions')
+    edges = np.diff(points, axis=0)
+    turns = edges[:-1, 0]*edges[1:, 1]-edges[:-1, 1]*edges[1:, 0]
+    if not ((turns > .5).sum() >= 1 and (turns < -.5).sum() >= 2):
+        raise ValueError('missing pointed tongues or concavities')
+    def cubic(start, controls):
+        a,b,c = np.array(controls).reshape(3,2)
+        t = np.linspace(0,1,24)[:,None]
+        return (1-t)**3*start+3*(1-t)**2*t*a+3*(1-t)*t*t*b+t**3*c
+    lower_left = cubic(left, values[4:10])
+    lower_right = cubic(lower_left[-1], values[10:16])
+    return np.concatenate([points, lower_right[::-1], lower_left[::-1]]).astype(np.float32)
+
+
+def symbol_semantics(svg: str) -> float:
+    import numpy as np
+    try:
+        root = ET.fromstring(svg)
+        shapes = [e for e in root.iter() if e.tag.rsplit('}',1)[-1] in
+                  {'rect','circle','ellipse','path','polygon','line','polyline','text','image'}]
+        if [e.tag.rsplit('}',1)[-1] for e in shapes] != ['rect','circle','polygon','path','polygon','path']:
+            return 0.
+        if any(e.get('transform') for e in root.iter()):
+            return 0.
+        background, disk, outer, outer_bowl, inner, inner_bowl = shapes
+        if any(e.get('fill','none') == 'none' for e in shapes):
+            return 0.
+        if outer.get('fill') != outer_bowl.get('fill') or inner.get('fill') != inner_bowl.get('fill') or inner.get('fill') == outer.get('fill'):
+            return 0.
+        cx, cy, radius = (float(disk.get(k,0)) for k in ('cx','cy','r'))
+        gradient = next(e for e in root.iter() if e.tag.endswith('linearGradient')
+                        and disk.get('fill') == f"url(#{e.get('id')})")
+        outside, inside = _outline(outer, outer_bowl), _outline(inner, inner_bowl)
+        return float(radius > 0 and np.all(np.linalg.norm(outside-[cx,cy],axis=1) < radius)
+                     and all(cv2.pointPolygonTest(outside, tuple(map(float,p)),False) > 0 for p in inside)
+                     and inside[:,1].min() > outside[:,1].min()
+                     and inside[:,1].max() < outside[:,1].max()
+                     and gradient.get('x1') == gradient.get('x2')
+                     and gradient.get('y1') != gradient.get('y2') and len(list(gradient)) >= 2)
+    except (ET.ParseError, ValueError, TypeError, StopIteration, IndexError):
+        return 0.
+
+
+def measure(image: Path, svg: Path) -> dict:
+    record = measure_raster(image, svg)
+    m = record['metrics']
+    m['semantic_score'] = symbol_semantics(record['svg'])
+    record['combined_score'] = (1-m['error_per_pixel']+m['edge_alignment']+m['object_mask_iou']+m['semantic_score'])/4
+    return record
+
+
+def evaluate(manifest: dict, root: Path) -> dict:
+    before, after, evidence = {}, {}, []
+    for case in manifest['cases']:
+        image = root/case['image']
+        old, new = (measure(image, root/case[mode+'_svg']) for mode in ('before', 'after'))
+        before[case['case_id']] = {'metrics': old['metrics'], 'dimensions': old['dimensions']}
+        after[case['case_id']] = new
+        evidence.append({**case, 'input_sha256': hashlib.sha256(image.read_bytes()).hexdigest(),
+                         'before_mean_delta2': old['mean_delta2'], 'after_mean_delta2': new['mean_delta2'],
+                         'before_svg_sha256': old['svg_sha256'], 'after_svg_sha256': new['svg_sha256']})
+    baseline = seal_baseline_manifest({'schema_version': 'semantic_only_baseline_manifest_v1',
+        'provenance': {**manifest['provenance'], 'input_hashes': {e['case_id']: e['input_sha256'] for e in evidence}},
+        'cases': before})
+    strict = {case['case_id']: measure_quality(cv2.imread(str(root/case['image'])),
+                  (root/case['after_svg']).read_text(encoding='utf-8')) for case in manifest['cases']}
+    return {'schema_version': 'flame_disk_recheck_v1', 'baseline': baseline, 'evidence': evidence,
+            'satisfaction_gate': evaluate_satisfaction(baseline, after),
+            'strict_pixel_gates': strict,
+            'measurement': {'foreground_threshold': 210, 'canny_thresholds': [50, 140],
+                            'output': 'saved CLI SVG re-rendered with production renderer'}}
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('manifest', type=Path)
+    parser.add_argument('--output', type=Path, required=True)
+    args = parser.parse_args()
+    report = evaluate(json.loads(args.manifest.read_text(encoding='utf-8')), args.manifest.parent)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(report, indent=2, sort_keys=True)+'\n', encoding='utf-8')
+    print(json.dumps(report['satisfaction_gate']['summary'], sort_keys=True))
+    return 0 if (all(c['satisfactory'] for c in report['satisfaction_gate']['cases'])
+                 and all(c['satisfactory'] for c in report['strict_pixel_gates'].values())) else 2
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

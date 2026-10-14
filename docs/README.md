@@ -2,6 +2,8 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [b_heating1: verschachtelte Flammen, Rasterregistrierung und unabhängige CLI-Abnahme (2026-10-14)](next_arbeitspaket_2026-10-14_b_heating1.md)
+
 - [GE0300: Kreuz auf Rechteckfläche vor Verlaufsscheibe und unabhängige CLI-Abnahme (2026-10-14)](next_arbeitspaket_2026-10-14_ge0300.md)
 
 - [GE9024: rechts offener Bogen, 14 Farb-/Größenvarianten und unabhängige CLI-Abnahme (2026-10-14)](next_arbeitspaket_2026-10-14_ge9024_1m.md)

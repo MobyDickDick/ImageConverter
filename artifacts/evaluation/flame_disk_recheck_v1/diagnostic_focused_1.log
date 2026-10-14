@@ -1,0 +1,252 @@
+...FF.F..FF..............FF...............                               [100%]
+================================== FAILURES ===================================
+________ test_independent_resolution_position_and_palette[1-4-#27457b] ________
+
+scale = 1, shift = 4, color = '#27457b'
+
+    @pytest.mark.parametrize('scale,shift,color', [(.5, 0, '#6e3c63'), (1, -4, '#a13449'),
+                                                 (1, 4, '#27457b'), (2, 2, '#705028')])
+    def test_independent_resolution_position_and_palette(scale, shift, color):
+        root = ET.fromstring(INDEPENDENT)
+        root.set('width', str(104*scale)); root.set('height', str(100*scale))
+        for element in list(root)[-4:]:
+            if element.get('fill') == '#713e9d':
+                element.set('fill', color)
+        group = ET.Element('{http://www.w3.org/2000/svg}g', transform=f'translate({shift} 0)')
+        for element in list(root)[1:]:
+            root.remove(element); group.append(element)
+        root.append(group)
+>       accepted(render(ET.tostring(root, encoding='unicode'), round(104*scale), round(100*scale)))
+
+tests\test_flame_disk_runtime.py:57:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+image = array([[[255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255],
+        ...,
+        [255, 255, 255],
+     ...    ...,
+        [255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255]]], shape=(100, 104, 3), dtype=uint8)
+description = 'Eine gef�llte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef... der �u�eren Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.'
+
+    def accepted(image, description=DESCRIPTION):
+        result = fit(image, description)
+>       assert result is not None
+E       assert None is not None
+
+tests\test_flame_disk_runtime.py:30: AssertionError
+________ test_independent_resolution_position_and_palette[2-2-#705028] ________
+
+scale = 2, shift = 2, color = '#705028'
+
+    @pytest.mark.parametrize('scale,shift,color', [(.5, 0, '#6e3c63'), (1, -4, '#a13449'),
+                                                 (1, 4, '#27457b'), (2, 2, '#705028')])
+    def test_independent_resolution_position_and_palette(scale, shift, color):
+        root = ET.fromstring(INDEPENDENT)
+        root.set('width', str(104*scale)); root.set('height', str(100*scale))
+        for element in list(root)[-4:]:
+            if element.get('fill') == '#713e9d':
+                element.set('fill', color)
+        group = ET.Element('{http://www.w3.org/2000/svg}g', transform=f'translate({shift} 0)')
+        for element in list(root)[1:]:
+            root.remove(element); group.append(element)
+        root.append(group)
+>       accepted(render(ET.tostring(root, encoding='unicode'), round(104*scale), round(100*scale)))
+
+tests\test_flame_disk_runtime.py:57:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+image = array([[[255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255],
+        ...,
+        [255, 255, 255],
+     ...    ...,
+        [255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255]]], shape=(200, 208, 3), dtype=uint8)
+description = 'Eine gef�llte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef... der �u�eren Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.'
+
+    def accepted(image, description=DESCRIPTION):
+        result = fit(image, description)
+>       assert result is not None
+E       assert None is not None
+
+tests\test_flame_disk_runtime.py:30: AssertionError
+_______________ test_independent_subpixel_variations[probe_02] ________________
+
+case = {'case_id': 'probe_02', 'description': 'Eine gef�llte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerha...85 L 38 66 C 38 71.523 43.149 76 49.5 76 C 55.851 76 61 71.523 61 66 L 61 65.85 Z" fill="#f8ddb2" />\n</g></svg>', ...}
+
+    @pytest.mark.parametrize('case', make_variations(INDEPENDENT, DESCRIPTION, 20261014),
+                             ids=lambda c: c['case_id'])
+    def test_independent_subpixel_variations(case):
+>       accepted(render(case['svg'], case['width'], case['height']), case['description'])
+
+tests\test_flame_disk_runtime.py:63:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+image = array([[[255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255],
+        ...,
+        [255, 255, 255],
+     ...    ...,
+        [255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255]]], shape=(100, 104, 3), dtype=uint8)
+description = 'Eine gef�llte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef...rgeben sich aus dem Bild. Die Darstellung ist ein wenig gr��er dargestellt und etwas nach rechts und unten verschoben.'
+
+    def accepted(image, description=DESCRIPTION):
+        result = fit(image, description)
+>       assert result is not None
+E       assert None is not None
+
+tests\test_flame_disk_runtime.py:30: AssertionError
+_______________ test_independent_subpixel_variations[probe_05] ________________
+
+case = {'case_id': 'probe_05', 'description': 'Eine gef�llte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerha...85 L 38 66 C 38 71.523 43.149 76 49.5 76 C 55.851 76 61 71.523 61 66 L 61 65.85 Z" fill="#f8ddb2" />\n</g></svg>', ...}
+
+    @pytest.mark.parametrize('case', make_variations(INDEPENDENT, DESCRIPTION, 20261014),
+                             ids=lambda c: c['case_id'])
+    def test_independent_subpixel_variations(case):
+>       accepted(render(case['svg'], case['width'], case['height']), case['description'])
+
+tests\test_flame_disk_runtime.py:63:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+image = array([[[255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255],
+        ...,
+        [255, 255, 255],
+     ...    ...,
+        [255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255]]], shape=(100, 104, 3), dtype=uint8)
+description = 'Eine gef�llte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef... sich aus dem Bild. Die gesamte Darstellung ist leicht kleiner dargestellt und leicht nach rechts und oben verschoben.'
+
+    def accepted(image, description=DESCRIPTION):
+        result = fit(image, description)
+>       assert result is not None
+E       assert None is not None
+
+tests\test_flame_disk_runtime.py:30: AssertionError
+_______________ test_independent_subpixel_variations[probe_06] ________________
+
+case = {'case_id': 'probe_06', 'description': 'Eine gef�llte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerha...85 L 38 66 C 38 71.523 43.149 76 49.5 76 C 55.851 76 61 71.523 61 66 L 61 65.85 Z" fill="#f8ddb2" />\n</g></svg>', ...}
+
+    @pytest.mark.parametrize('case', make_variations(INDEPENDENT, DESCRIPTION, 20261014),
+                             ids=lambda c: c['case_id'])
+    def test_independent_subpixel_variations(case):
+>       accepted(render(case['svg'], case['width'], case['height']), case['description'])
+
+tests\test_flame_disk_runtime.py:63:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+image = array([[[255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255],
+        ...,
+        [255, 255, 255],
+     ...    ...,
+        [255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255]]], shape=(100, 104, 3), dtype=uint8)
+description = 'Eine gef�llte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef...ben ergeben sich aus dem Bild. Das Motiv ist ein wenig gr��er dargestellt und ein wenig nach links und unten versetzt.'
+
+    def accepted(image, description=DESCRIPTION):
+        result = fit(image, description)
+>       assert result is not None
+E       assert None is not None
+
+tests\test_flame_disk_runtime.py:30: AssertionError
+_________ test_incompatible_raster_evidence_is_rejected[upside_down] __________
+
+mutation = 'upside_down'
+
+    @pytest.mark.parametrize('mutation', ['no_inner', 'no_outer', 'no_disk', 'smooth',
+                                        'upside_down', 'detached', 'extra_mark', 'gap'])
+    def test_incompatible_raster_evidence_is_rejected(mutation):
+        root = ET.fromstring(INDEPENDENT)
+        disk, outer, bowl, inner, inner_bowl = list(root)[-5:]
+        if mutation == 'no_inner':
+            root.remove(inner); root.remove(inner_bowl)
+        elif mutation == 'no_outer':
+            root.remove(outer); root.remove(bowl)
+        elif mutation == 'no_disk':
+            root.remove(disk)
+        elif mutation == 'smooth':
+            outer.set('points', '29,61 49,15 71,61')
+        elif mutation == 'upside_down':
+            for element in (outer, bowl, inner, inner_bowl):
+                element.set('transform', 'rotate(180 50 48)')
+        elif mutation == 'detached':
+            ET.SubElement(root, 'rect', x='1', y='1', width='5', height='5', fill='#000000')
+        elif mutation == 'extra_mark':
+            ET.SubElement(root, 'rect', x='33', y='58', width='4', height='5', fill='#000000')
+        else:
+            ET.SubElement(root, 'rect', x='20', y='45', width='60', height='4', fill='#ffffff')
+>       assert fit(render(ET.tostring(root, encoding='unicode'), 104, 100)) is None
+E       assert {'error': 313.1866455078125, 'evaluations': 1276, 'initial_error': 824.8372192382812, 'parameters': [50.993116753181525, 49.923807910284665, 42.51258699850022, 0.125, 40.125, 54.875, ...], ...} is None
+E        +  where {'error': 313.1866455078125, 'evaluations': 1276, 'initial_error': 824.8372192382812, 'parameters': [50.993116753181525, 49.923807910284665, 42.51258699850022, 0.125, 40.125, 54.875, ...], ...} = fit(array([[[255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255],\n        ...,\n        [255, 255, 255],\n     ...    ...,\n        [255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255]]], shape=(100, 104, 3), dtype=uint8))
+E        +    where array([[[255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255],\n        ...,\n        [255, 255, 255],\n     ...    ...,\n        [255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255]]], shape=(100, 104, 3), dtype=uint8) = render('<svg xmlns="http://www.w3.org/2000/svg" width="104" height="100" viewBox="0 0 104 100">\n<defs><linearGradient id="in...23 43.149 76 49.5 76 C 55.851 76 61 71.523 61 66 L 61 65.85 Z" fill="#f8ddb2" transform="rotate(180 50 48)" />\n</svg>', 104, 100)
+E        +      where '<svg xmlns="http://www.w3.org/2000/svg" width="104" height="100" viewBox="0 0 104 100">\n<defs><linearGradient id="in...23 43.149 76 49.5 76 C 55.851 76 61 71.523 61 66 L 61 65.85 Z" fill="#f8ddb2" transform="rotate(180 50 48)" />\n</svg>' = <function tostring at 0x0000016633C21090>(<Element '{http://www.w3.org/2000/svg}svg' at 0x000001665358E520>, encoding='unicode')
+E        +        where <function tostring at 0x0000016633C21090> = ET.tostring
+
+tests\test_flame_disk_runtime.py:88: AssertionError
+___________ test_incompatible_raster_evidence_is_rejected[detached] ___________
+
+mutation = 'detached'
+
+    @pytest.mark.parametrize('mutation', ['no_inner', 'no_outer', 'no_disk', 'smooth',
+                                        'upside_down', 'detached', 'extra_mark', 'gap'])
+    def test_incompatible_raster_evidence_is_rejected(mutation):
+        root = ET.fromstring(INDEPENDENT)
+        disk, outer, bowl, inner, inner_bowl = list(root)[-5:]
+        if mutation == 'no_inner':
+            root.remove(inner); root.remove(inner_bowl)
+        elif mutation == 'no_outer':
+            root.remove(outer); root.remove(bowl)
+        elif mutation == 'no_disk':
+            root.remove(disk)
+        elif mutation == 'smooth':
+            outer.set('points', '29,61 49,15 71,61')
+        elif mutation == 'upside_down':
+            for element in (outer, bowl, inner, inner_bowl):
+                element.set('transform', 'rotate(180 50 48)')
+        elif mutation == 'detached':
+            ET.SubElement(root, 'rect', x='1', y='1', width='5', height='5', fill='#000000')
+        elif mutation == 'extra_mark':
+            ET.SubElement(root, 'rect', x='33', y='58', width='4', height='5', fill='#000000')
+        else:
+            ET.SubElement(root, 'rect', x='20', y='45', width='60', height='4', fill='#ffffff')
+>       assert fit(render(ET.tostring(root, encoding='unicode'), 104, 100)) is None
+E       assert {'error': 516.3551635742188, 'evaluations': 1276, 'initial_error': 981.3114624023438, 'parameters': [50.993116753181525, 49.923807910284665, 42.51258699850022, 0.125, 29.5, 63.0, ...], ...} is None
+E        +  where {'error': 516.3551635742188, 'evaluations': 1276, 'initial_error': 981.3114624023438, 'parameters': [50.993116753181525, 49.923807910284665, 42.51258699850022, 0.125, 29.5, 63.0, ...], ...} = fit(array([[[255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255],\n        ...,\n        [255, 255, 255],\n     ...    ...,\n        [255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255]]], shape=(100, 104, 3), dtype=uint8))
+E        +    where array([[[255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255],\n        ...,\n        [255, 255, 255],\n     ...    ...,\n        [255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255]]], shape=(100, 104, 3), dtype=uint8) = render('<svg xmlns="http://www.w3.org/2000/svg" width="104" height="100" viewBox="0 0 104 100">\n<defs><linearGradient id="in...851 76 61 71.523 61 66 L 61 65.85 Z" fill="#f8ddb2" />\n<rect x="1" y="1" width="5" height="5" fill="#000000" /></svg>', 104, 100)
+E        +      where '<svg xmlns="http://www.w3.org/2000/svg" width="104" height="100" viewBox="0 0 104 100">\n<defs><linearGradient id="in...851 76 61 71.523 61 66 L 61 65.85 Z" fill="#f8ddb2" />\n<rect x="1" y="1" width="5" height="5" fill="#000000" /></svg>' = <function tostring at 0x0000016633C21090>(<Element '{http://www.w3.org/2000/svg}svg' at 0x000001665358C4A0>, encoding='unicode')
+E        +        where <function tostring at 0x0000016633C21090> = ET.tostring
+
+tests\test_flame_disk_runtime.py:88: AssertionError
+============================== warnings summary ===============================
+tests/test_flame_disk_runtime.py: 51 warnings
+  C:\Users\marku\myCloud\imageConverter\src\iCCModules\imageCompositeConverterFlameDisk.py:61: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+    turns = np.cross(np.diff(crown, axis=0)[:-1], np.diff(crown, axis=0)[1:])
+
+tests/test_flame_disk_runtime.py: 35 warnings
+  C:\Users\marku\myCloud\imageConverter\tools\evaluate_flame_disk_recheck.py:28: DeprecationWarning: Arrays of 2-dimensional vectors are deprecated. Use arrays of 3-dimensional vectors instead. (deprecated in NumPy 2.0)
+    turns = np.cross(np.diff(points, axis=0)[:-1], np.diff(points, axis=0)[1:])
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_flame_disk_runtime.py::test_independent_resolution_position_and_palette[1-4-#27457b]
+FAILED tests/test_flame_disk_runtime.py::test_independent_resolution_position_and_palette[2-2-#705028]
+FAILED tests/test_flame_disk_runtime.py::test_independent_subpixel_variations[probe_02]
+FAILED tests/test_flame_disk_runtime.py::test_independent_subpixel_variations[probe_05]
+FAILED tests/test_flame_disk_runtime.py::test_independent_subpixel_variations[probe_06]
+FAILED tests/test_flame_disk_runtime.py::test_incompatible_raster_evidence_is_rejected[upside_down]
+FAILED tests/test_flame_disk_runtime.py::test_incompatible_raster_evidence_is_rejected[detached]
+7 failed, 35 passed, 1 deselected, 86 warnings in 175.85s (0:02:55)

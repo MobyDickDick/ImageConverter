@@ -1,0 +1,24 @@
+{
+  "schema_version": "flame_disk_recheck_manifest_v1",
+  "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+  "baseline_description": "Hintergrund: GE0999, Flammensybol wie in Abbildung GE0204",
+  "provenance": {
+    "commit": "fea318a81",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "fresh original-description CLI frozen before runtime and description changes",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_flame_00",
+      "source": "b_heating1.JPG",
+      "image": "../../images_to_convert/b_heating1.JPG",
+      "source_sha256": "b9383db5768b961942a038e6ad8fa04a08d2b6f26efdfdb17f3271b4b0e54a52",
+      "role": "target",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_flame_00.svg",
+      "after_svg": "after/anonymous_flame_00.svg"
+    }
+  ]
+}
