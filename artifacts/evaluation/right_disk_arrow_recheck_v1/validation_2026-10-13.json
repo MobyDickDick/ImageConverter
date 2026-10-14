@@ -1,0 +1,121 @@
+{
+  "archive": {
+    "added": [
+      "GE0022"
+    ],
+    "all_previous_recheck_mean_delta2_unchanged": true,
+    "all_previous_records_identical": true,
+    "known_drift_count": 22,
+    "known_drift_list_unchanged": true,
+    "new_count": 237,
+    "passed": 237,
+    "previous_count": 236
+  },
+  "baseline_commit": "d265e2062de70f906748b6dcc0b3f10b0bb702c6",
+  "branch": "codex/ge0022-quality-2026-10-13",
+  "catalog_acceptance": {
+    "catalog_after_identical_to_neutral": true,
+    "catalog_after_mean_delta2": 198.20755004882812,
+    "catalog_before_mean_delta2": 10954.2685546875,
+    "catalog_frozen_svgs_and_gates_identical": true,
+    "catalog_runs": 2,
+    "forbidden_reference_reads": 0,
+    "neutral_cases": 1,
+    "neutral_frozen_svgs_and_gates_identical": true,
+    "neutral_runs": 2,
+    "real_name_cases": 1,
+    "regressed_metrics": 0,
+    "target_after_mean_delta2": 198.20755004882812,
+    "target_before_mean_delta2": 10954.2685546875
+  },
+  "checks": {
+    "cli_help": "pass",
+    "compileall": "pass",
+    "diff_whitespace": "pass",
+    "runtime_id_zero": "pass",
+    "saved_artifact_integrity": "pass"
+  },
+  "completion_verdict": "PASS",
+  "date": "2026-10-13",
+  "diagnostics": {
+    "interrupted_initial_redirected_test_launches": 2,
+    "interrupted_launches_counted_as_acceptance": false,
+    "reason": "Repeated optional dependency discovery before every test-render candidate; final 92-case suite passed after reusing already imported modules.",
+    "slow_but_successful_existing_left_tests": {
+      "passed": 28,
+      "seconds": 747.49
+    },
+    "slow_but_successful_new_tests": {
+      "passed": 23,
+      "seconds": 777.72
+    }
+  },
+  "existing_left_arrow_cli": {
+    "cases": 4,
+    "frozen_before_and_after_svgs_reproduced": true,
+    "reference_svg_reads": 0,
+    "satisfactory": 4,
+    "strict_pixel_gates_passed": 4
+  },
+  "focused": {
+    "failed": 0,
+    "log": "focused_tests.log",
+    "passed": 92,
+    "seconds": 94.9,
+    "skipped": 0
+  },
+  "independent_plan_b": {
+    "all_records_identical": true,
+    "compared_fields": [
+      "case_id",
+      "input_sha256",
+      "reference_svg_sha256",
+      "output_sha256",
+      "metrics",
+      "complexity",
+      "satisfactory",
+      "failures",
+      "blocked_svg_reads"
+    ],
+    "runs": 2,
+    "seed": 20261013,
+    "summary": {
+      "completed": 17,
+      "failed": 0,
+      "passed": 17,
+      "required": 17,
+      "satisfactory": true
+    }
+  },
+  "smoke": {
+    "failed": 0,
+    "log": "smoke_tests.log",
+    "passed": 2,
+    "seconds": 11.89,
+    "skipped": 0
+  },
+  "source_inventory": {
+    "accepted_arrow_images": 1,
+    "catalog_images": 10,
+    "production_lookup_preserves_all_nine_bell_descriptions": true,
+    "separate_bell_followup_images": 9
+  },
+  "source_sha256": {
+    "artifacts/descriptions/Finale_Wurzelformen_V3.xml": "8c7ed735f8b9732cc52755365438cb936892703b048617f4a0c3a7a8963dc553",
+    "artifacts/evaluation/right_disk_arrow_recheck_v1/manifest.json": "3be587884d60d3bf79bd317911805203420dbb63fdeba57c9b4443d411bb4179",
+    "artifacts/evaluation/right_disk_arrow_recheck_v1/recheck_catalog_context.py": "b3126b6aa413c353dc76199d2a507c4a1dc13ca7e141712cb085f88207bacdc4",
+    "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml": "b50100882195f7c7648304699d915839b1cdc92f7c71da1e6ed4e4f8b11a9827",
+    "src/iCCModules/imageCompositeConverterDiskArrow.py": "c211040554f2bed826c073ee7b0d1b465c5afce6068ae9614488823b2a0bc84f",
+    "tests/test_right_disk_arrow_runtime.py": "512d87df41765df1941e141ceefa7f654b93f5ff0017de5175e3baf8d4a43dbf",
+    "tools/evaluate_disk_arrow_recheck.py": "d4a664f453084b77aff7b159fdaf5b097daf692a0085cce7d9d6333e37248ed8",
+    "tools/run_disk_arrow_recheck.py": "7853eedba486f3a43ea840a78258b3236153474c14b888dad450f8d88c6ced18",
+    "tools/run_plan_b_variations.py": "f3c6511ec183133dba6dbf0ea0a2643b6140e41d20fbc068296a46447f626f96"
+  },
+  "standard": {
+    "failed": 0,
+    "log": "standard_profile.log",
+    "passed": 2530,
+    "seconds": 2028.32,
+    "skipped": 30
+  }
+}

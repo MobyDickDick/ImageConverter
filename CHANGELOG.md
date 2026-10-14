@@ -1,3 +1,4 @@
+- Register both horizontal arrow directions inside gradient disks from pixels, give the actual right-arrow image its own description while preserving the nine unrelated bell sources, and validate GE0022 plus repeated independent 17-case CLI variations with unchanged quality limits (2026-10-13).
 - Fit initial letter-disk circles inside the canvas including their full stroke, correct the standalone M-disk description, and validate three catalog sizes plus a reproducible independent 17-case CLI battery (2026-10-13).
 - Normalize left-opening arc/gradient-shaft motifs into the existing raster fitter, correct both standalone descriptions, and validate 14 real variants plus a reproducible independent 17-case CLI battery (2026-10-12).
 - Isolate catalog SVG rendering in bounded reusable processes, retire native state after 64 requests, retry crashed workers once and prevent unsafe CLI in-process fallback (2026-10-11).

@@ -2,7 +2,13 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-11, nach SE0081-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-13, nach GE0022-Abnahme)
+
+`GE0022.jpg` besteht nach allgemeiner horizontaler Pfeilregistrierung beide
+regulären und strengeren Gates (`mean_delta2=198.207550`), mit wiederholten
+17/17 unabhängigen CLI-Fällen. Die neun gleichnamigen Größen-/Farbvarianten
+zeigen Glocken und bleiben als eigener Quellenfolgepunkt offen. Details:
+`docs/next_arbeitspaket_2026-10-13_ge0022.md`.
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -118,11 +124,11 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `GE0039_M` – `mean_delta2=11544.757812`, `normalized_mse=0.059181`.
-2. `GE9022_2M` – `mean_delta2=11451.323242`, `normalized_mse=0.058702`.
-3. `AC0920_L` – `mean_delta2=11265.105469`, `normalized_mse=0.057748`.
-4. `AC1000_S` – `mean_delta2=11111.639648`, `normalized_mse=0.056961`.
-5. `GE0022` – `mean_delta2=10990.863281`, `normalized_mse=0.056342`.
+1. `GE9024_1M` – `mean_delta2=10928.251953`, `normalized_mse=0.056021`.
+2. `GE0300` – `mean_delta2=10822.984375`, `normalized_mse=0.055481`.
+3. `b_heating1` – `mean_delta2=10660.001953`, `normalized_mse=0.054646`.
+4. `AC0421_1_S` – `mean_delta2=10641.200195`, `normalized_mse=0.054549`.
+5. `GE0306` – `mean_delta2=10400.377930`, `normalized_mse=0.053315`.
 
 `SE0081` besteht nach eigenständiger Beschreibung beide regulären und strengeren
 Pixelgates ohne Pflichtmetrikregression. Die vorhandene Runtime bleibt unverändert.

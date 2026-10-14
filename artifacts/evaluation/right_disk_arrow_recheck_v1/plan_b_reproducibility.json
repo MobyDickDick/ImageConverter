@@ -1,0 +1,23 @@
+{
+  "seed": 20261013,
+  "runs": 2,
+  "summary": {
+    "required": 17,
+    "completed": 17,
+    "passed": 17,
+    "failed": 0,
+    "satisfactory": true
+  },
+  "compared_fields": [
+    "case_id",
+    "input_sha256",
+    "reference_svg_sha256",
+    "output_sha256",
+    "metrics",
+    "complexity",
+    "satisfactory",
+    "failures",
+    "blocked_svg_reads"
+  ],
+  "all_records_identical": true
+}

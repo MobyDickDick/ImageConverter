@@ -1,4 +1,4 @@
-"""Fit a left arrow inside a gradient disk from description and raster evidence."""
+"""Fit a horizontal arrow inside a gradient disk from description and raster evidence."""
 from __future__ import annotations
 
 import cv2
@@ -12,15 +12,28 @@ def fit_disk_arrow(width, height, *, description, image, render_fn, error_fn):
     text = str(description or '').casefold()
     text = re.sub(r'\bnach (?:links|rechts|oben|unten)(?: und (?:links|rechts|oben|unten))?\s+'
                   r'(?:verschoben|versetzt)\b', 'verschoben', text)
-    if not all(word in text for word in ('kreis', 'verlauf', 'waagerecht', 'pfeil',
-                                         'nach links', 'schaft', 'dreieck', 'ohne lücke')):
+    directions = re.findall(r'pfeil\s+nach\s+(links|rechts|oben|unten)\b', text)
+    if len(directions) != 1 or directions[0] not in ('links', 'rechts'):
         return None
-    if any(word in text for word in ('nach rechts', 'nach oben', 'nach unten', 'zwei',
+    rightward = directions[0] == 'rechts'
+    if not all(word in text for word in ('kreis', 'verlauf', 'waagerecht', 'pfeil',
+                                         'schaft', 'dreieck', 'ohne lücke')):
+        return None
+    if any(word in text for word in ('nach oben', 'nach unten', 'zwei',
                                      'zusätzlich', 'ohne pfeil', 'beschriftung')):
+        return None
+    # Reject conflicting directions while allowing the disk's color gradient
+    # and the whole motif's placement to have their own spatial description.
+    if ('nach links' if rightward else 'nach rechts') in text:
         return None
     pixels = _image(width, height, image)
     if pixels is None:
         return None
+    # Work in a left-facing coordinate system. Render candidates directly in
+    # the input's coordinates so the production renderer and error contract
+    # still measure the actual output, including its original color field.
+    if rightward:
+        pixels = np.ascontiguousarray(pixels[:, ::-1])
     mask = (np.min(pixels, axis=2) < 235).astype(np.uint8)
     count, labels, stats, _ = cv2.connectedComponentsWithStats(mask)
     if count < 2:
@@ -46,7 +59,7 @@ def fit_disk_arrow(width, height, *, description, image, render_fn, error_fn):
     if exposed.sum() < 12:
         return None
     colors = np.linalg.lstsq(np.c_[1-t[exposed], t[exposed]], pixels[exposed], rcond=None)[0]
-    if colors[0].mean() <= colors[1].mean()+5:
+    if abs(colors[0].mean()-colors[1].mean()) <= 5:
         return None
     field = (1-t[..., None])*colors[0]+t[..., None]*colors[1]
     arrow_mask = ((np.mean(field-pixels, axis=2) > 35) & (distance < radius*.9)).astype(np.uint8)
@@ -113,13 +126,18 @@ def fit_disk_arrow(width, height, *, description, image, render_fn, error_fn):
     def build(p):
         cx, cy, r, sw = p[:4]
         light, dark, rim, fill, outline = p[11:].reshape(-1, 3)
+        arrow_points = points(p)
+        if rightward:
+            cx = width-cx
+            arrow_points = [(width-x, y) for x, y in arrow_points]
+        start, end = ('1', '0') if rightward else ('0', '1')
         return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
-                '<defs><linearGradient id="disk_color" x1="0" y1="0" x2="1" y2="0">'
+                f'<defs><linearGradient id="disk_color" x1="{start}" y1="0" x2="{end}" y2="0">'
                 f'<stop offset="0" stop-color="{_hex(light)}"/><stop offset="1" stop-color="{_hex(dark)}"/>'
                 '</linearGradient></defs>'
                 f'<rect width="{width}" height="{height}" fill="#ffffff"/>'
                 f'<circle cx="{cx:.4f}" cy="{cy:.4f}" r="{r:.4f}" fill="url(#disk_color)" stroke="{_hex(rim)}" stroke-width="{sw:.4f}"/>'
-                '<polygon points="'+' '.join(f'{x:.4f},{y:.4f}' for x, y in points(p))+
+                '<polygon points="'+' '.join(f'{x:.4f},{y:.4f}' for x, y in arrow_points)+
                 f'" fill="{_hex(fill)}" stroke="{_hex(outline)}" stroke-width="{p[10]:.4f}"/></svg>\n')
 
     def valid(p):

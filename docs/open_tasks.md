@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-13)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `437` · Erledigt `410` · Offen `27`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `439` · Erledigt `411` · Offen `28`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,9 +20,19 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-13)
 
+- [x] **GE0022 – Rechtspfeil auf Verlaufsscheibe:** eigenständige Beschreibung ausschließlich für das tatsächliche Pfeilbild und allgemeine horizontale Richtungsnormalisierung; Ziel besteht beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Prüfungen bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-13_ge0022.md`.
+- [ ] **GE0022-BELL-SOURCE:** Die neun im selben XML-Eintrag verzeichneten Bilder `GE0022_{L,M,S}`, `GE0022_1_{L,M,S}` und `GE0022_2_{L,M,S}` zeigen Glocken mit Schallbögen auf Verlaufsscheiben. Quellen-/Beschreibungszuordnung eigenständig prüfen und diese Topologie separat abnehmen; sie sind keine Pfeil-Holdouts. Quellhashes und Abmessungen: `artifacts/evaluation/right_disk_arrow_recheck_v1/source_inventory.json`. Bisherige Raster und Beschreibungen erhalten; Gates unverändert lassen.
+
+**Neuester Abschluss:** `GE0022.jpg` auf `codex/ge0022-quality-2026-10-13`.
+Frische neutrale Zielmetrik `10954.268555 → 198.207550`; identischer finaler
+Vektor im vollständigen Katalogkontext. 237 Paare in der Erfolgsübersicht;
+alle 236 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
+`GE9024_1M`, `GE0300`, `b_heating1`, `AC0421_1_S`, `GE0306`.
+Nur das tatsächliche Pfeilbild ist zusätzlich ausgeschlossen.
+
 - [x] **AC1000 – Kreisscheibe mit M:** eigenständige Beschreibungen und allgemeine Konturberücksichtigung beim Startkandidaten; alle drei Größen bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Prüfungen bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-13_ac1000_s.md`.
 
-**Neuester Abschluss:** `AC1000_S` und beide Größen-Holdouts auf
+**Vorheriger Abschluss:** `AC1000_S` und beide Größen-Holdouts auf
 `codex/ac1000-quality-2026-10-13`. Frische neutrale Zielmetrik
 `11123.106445 → 496.119995`; identische finale SVGs im vollständigen Katalog.
 236 Paare in der Erfolgsübersicht; alle 233 bisherigen Indexeinträge unverändert.
