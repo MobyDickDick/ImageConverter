@@ -1,0 +1,24 @@
+{
+  "schema_version": "diagonal_cross_disk_recheck_manifest_v1",
+  "description": "Eine einfarbig gefüllte Kreisscheibe. Darin liegt ein diagonales Kreuz aus zwei geraden Strichen mit abgerundeten Enden. Die beiden Striche schneiden sich mittig und liegen vollständig innerhalb des Kreises. Gleichmäßiger heller Hintergrund. Keine Schriftzeichen und keine weiteren Objekte. Position, Radius, Strichbreiten und Farben ergeben sich aus dem Bild.",
+  "baseline_description": "Weisses Abbrechen/ Fehler-Zeichen (Kreux) vor rfotem Hintergrund",
+  "provenance": {
+    "commit": "795df08826a5d61e0cdcfecd1f22c82703b4c250",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "actual original-description CLI frozen before runtime and catalog changes",
+    "toolchain": "Python 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_symbol_00",
+      "source": "GE0017.jpg",
+      "image": "../../images_to_convert/GE0017.jpg",
+      "source_sha256": "56c478e7f9a2ed0d4d8f8e781092c88053619b7a604aecc7174f1d9940c01c9d",
+      "description": "Eine einfarbig gefüllte Kreisscheibe. Darin liegt ein diagonales Kreuz aus zwei geraden Strichen mit abgerundeten Enden. Die beiden Striche schneiden sich mittig und liegen vollständig innerhalb des Kreises. Gleichmäßiger heller Hintergrund. Keine Schriftzeichen und keine weiteren Objekte. Position, Radius, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "role": "target",
+      "before_svg": "before/anonymous_symbol_00.svg",
+      "after_svg": "after/anonymous_symbol_00.svg"
+    }
+  ]
+}

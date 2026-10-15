@@ -2,7 +2,15 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-15, nach AC0850-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-15, nach GE0017-Abnahme)
+
+GE0017 besteht nach eigenständiger Beschreibung und allgemeiner Registrierung
+von Kreisscheibe und zwei gerundeten diagonalen Kreuzstrichen beide regulären
+und strengeren Pixelgates ohne Regression (`mean_delta2=490.495758`). Zwei
+unabhängige CLI-Läufe bestehen jeweils 17/17. Sämtliche Ausschlüsse bleiben
+erhalten; ausschließlich GE0017 kommt hinzu. Details:
+`docs/next_arbeitspaket_2026-10-15_ge0017.md`.
+Reproduzierbarer Review: `artifacts/evaluation/diagonal_cross_disk_recheck_v1/review_args.json`.
 
 AC0850 zeigt in allen drei Größen einen P-Kreis. Die Korrektur beider
 Katalogbeschreibungen aktiviert den unveränderten allgemeinen Registrierer;
@@ -150,11 +158,11 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `GE0017` – `mean_delta2=10074.741211`, `normalized_mse=0.051645`.
-2. `GE0001_L` – `mean_delta2=10014.325195`, `normalized_mse=0.051336`.
-3. `GE9031_6M` – `mean_delta2=9680.807617`, `normalized_mse=0.049626`.
-4. `GE9034_6M` – `mean_delta2=9680.297852`, `normalized_mse=0.049623`.
-5. `GE1411_L` – `mean_delta2=9671.516602`, `normalized_mse=0.049578`.
+1. `GE0001_L` – `mean_delta2=10014.325195`, `normalized_mse=0.051336`.
+2. `GE9031_6M` – `mean_delta2=9680.807617`, `normalized_mse=0.049626`.
+3. `GE9034_6M` – `mean_delta2=9680.297852`, `normalized_mse=0.049623`.
+4. `GE1411_L` – `mean_delta2=9671.516602`, `normalized_mse=0.049578`.
+5. `GE0305` – `mean_delta2=9653.836914`, `normalized_mse=0.049488`.
 
 `SE0081` besteht nach eigenständiger Beschreibung beide regulären und strengeren
 Pixelgates ohne Pflichtmetrikregression. Die vorhandene Runtime bleibt unverändert.
