@@ -1,0 +1,236 @@
+{
+  "archive": {
+    "all_previous_recheck_results_identical": true,
+    "all_previous_records_identical": true,
+    "known_drift_count": 22,
+    "known_drift_list_unchanged": true,
+    "new_count": 264,
+    "passed": 264,
+    "previous_count": 263
+  },
+  "artifact_hashes": {
+    "artifacts/evaluation/house_disk_recheck_v1/.gitattributes": "87883c9fd2e229176548d81f6e6887f848f97d0b4628cccaffd9f14c8ab2e847",
+    "artifacts/evaluation/house_disk_recheck_v1/after/anonymous_house_00.svg": "6315de735c85d6adc87fbfe80499d958a5ba81d637a6890e4f35d71b9dea316a",
+    "artifacts/evaluation/house_disk_recheck_v1/archive_recheck.json": "87dbda5e471522ea3e75534ae75456265b02d26d07386b0d2c81b2ec9014ee19",
+    "artifacts/evaluation/house_disk_recheck_v1/baseline.log": "7a646a154be336e3629de0435be73cd8e7c1b7123e3392ad17e180816e874ff4",
+    "artifacts/evaluation/house_disk_recheck_v1/before/anonymous_house_00.svg": "39d3746e14d5be50124b12d0b071f457132c7cfa0716e4ba9bcbee7968abb3b2",
+    "artifacts/evaluation/house_disk_recheck_v1/catalog_context/after/converted_svgs/GE0346.svg": "6315de735c85d6adc87fbfe80499d958a5ba81d637a6890e4f35d71b9dea316a",
+    "artifacts/evaluation/house_disk_recheck_v1/catalog_context/before/converted_svgs/GE0346.svg": "39d3746e14d5be50124b12d0b071f457132c7cfa0716e4ba9bcbee7968abb3b2",
+    "artifacts/evaluation/house_disk_recheck_v1/catalog_context/inputs/GE0346.jpg": "541cd57453aa19afaa63af3bdb4fb8049fdce7dddd98b15046db2246779363fe",
+    "artifacts/evaluation/house_disk_recheck_v1/catalog_context/manifest.json": "cbf2c13673d13384d209610a510653cdbffe021dd18778fda5c97bb48d3c8c0d",
+    "artifacts/evaluation/house_disk_recheck_v1/catalog_context/report.json": "1ff796d3e9ec4bee402af831882b9cca24537a9d5ddfd87d9797223cb598ad72",
+    "artifacts/evaluation/house_disk_recheck_v1/comparison.png": "2951d801361799ac4bbfd26ad422f8a48d43e505e1eae88c518c3fab093fe42e",
+    "artifacts/evaluation/house_disk_recheck_v1/conversion_quality_ranking_v1.csv": "6d961ea978c71f2663c95ea668cfc38b083190f4c68e5fb5d7d1e9ed50890432",
+    "artifacts/evaluation/house_disk_recheck_v1/conversion_quality_records_v2.csv": "035c2ed38847f30915f158408a8a05db81584e95060db58942017501c4bef397",
+    "artifacts/evaluation/house_disk_recheck_v1/conversion_quality_review_v2.json": "5edb3ad4cd046dc0a417c876be19a2ed136f113f2ec1d3eb39fab2b0998bc92d",
+    "artifacts/evaluation/house_disk_recheck_v1/focused_tests.log": "4c526d93996a718d5d01487b01301f88fba18a5fd1ca813c94ae078a7117c12f",
+    "artifacts/evaluation/house_disk_recheck_v1/focused_tests.xml": "24a389e22c6c60e2f46731e705a0d73385a6ad5bd4f42fdce4d02f0b9722e8bb",
+    "artifacts/evaluation/house_disk_recheck_v1/independent.svg": "ae4d228d6555f61dcd311866336b941b069a9f73ccb4b4704b588f49e9032d3b",
+    "artifacts/evaluation/house_disk_recheck_v1/independent.txt": "12496f991d55ac44ce6d762ccd9603d870cb67c80de6298540ae10afc3c5ec0c",
+    "artifacts/evaluation/house_disk_recheck_v1/manifest.json": "c41ed94c728980fa5b6af0e178e369c2eb121759fc83e7695e49050d3777cc18",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/original.svg": "422f20d5de919576101acb43da2c9add97a50e6a99c4a07df5a764b23e12a166",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_01.svg": "4125fa7e821380511623a745d5101f23bd69e4967b07c5dd0e71ad083a1ad997",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_02.svg": "57b2026e736e4517b023cee4e351bd1d6e2c4daf59daea5255f2794df6181ac2",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_03.svg": "8ed737e0b26b46673cd04e51bc4ca6167ac522c1af0eec321410fb3333adc3b9",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_04.svg": "4e4ff476b4e323fdfed70e2b16740be05ad83e63c0595987577ba6db5994b733",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_05.svg": "ac5578ed2640794084e0ae6c7a8274a970e46d3765abe9dce6d2afd37085eb5f",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_06.svg": "e5379fcc2277b707d9fb566c668c76f5368d9f80b2094a4a09d796a5761a9d0f",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_07.svg": "3c0396b38d34342bcab511a8c3cc91120029e42d06bfc61616b3089993c758c2",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_08.svg": "af43eb2353107724451009e060533228da05d887a97fc0899637b7c618d233f9",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_09.svg": "ee838aed748cfcb05352c64e657d3742b8434f71605de4c2d9501651d2403580",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_10.svg": "db531b08421463efac4f8b7876df3bd8703c51fe5f182f23f75ea295651368eb",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_11.svg": "6a2aaa40137e0fa03daddd6cd6c97877d1d4a5493d2f6638e7a063ed73dcaf4b",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_12.svg": "ae1748b93c28ee989f0b27b7daee831e8ea8cf3631db6e0a9d047468bb5f1ba7",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_13.svg": "7aabc23277037f31e569930d4739a2b0d945001479d3b96f632cd5c149e5083a",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_14.svg": "a31dde022ee843da072d0d9f92d7e9738740ae32239e91dc3cce8df9ebfb5b97",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_15.svg": "bf191b921f5f71c9853b9641a3fbf9666d23e209bf2a52dc92a0dd3e944ea11e",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/outputs/probe_16.svg": "a86080ae2f88490267c8cb2354e6d9e364d881e68788dc49a661f8ad03d9d1e0",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/original.svg": "ae4d228d6555f61dcd311866336b941b069a9f73ccb4b4704b588f49e9032d3b",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_01.svg": "30435e9e7c61d93be9be0b1e36a8117c9efb24a3124ea26b7c7d06163136715b",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_02.svg": "d5936618fb8ea52d2af5aafc3715963e52793f0600ba4f2f16805e255870caf5",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_03.svg": "0401a1d9cb24f7140acb3b40ad2ff766904d3e6f845ce393b3d8e0e33c95801f",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_04.svg": "b5e130ed4468a93c5768a0d42e7a8b7d28bed2f3a91c0a1f355a5e57bc66e713",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_05.svg": "2f08594745b6a074c4277170597a5121c139d5f2530b181ec0a8e6bb36c9ecb6",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_06.svg": "285d39ac545f2e4c7f9776ee76ab9260144015ff2e36639faec2281fec8fa71d",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_07.svg": "2705f054e5cd303c21ef8cae343e1f77ff5d03110d3e0f830093e55da40b9d23",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_08.svg": "ddb7fcc8b988501a5ebd89a67c4bf1e43270ca193839330d8dc833ae128a3cdc",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_09.svg": "b1c6331f5f6532c1b46ed375bed5f4cdbf813302eac3a47e584fb405e9be71c5",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_10.svg": "65c7fda1b4e20d259ea28029740dd75383bfdfe7ab5bfbb5dace37ef63d840a6",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_11.svg": "08ba51a3324b3a0b7e1158a6d284065541eb2ff6edfd08a0a6b4e645c33799ea",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_12.svg": "173ceb9a0eae29a96f37b863ac18e763f1110548453955c0d1a50ee78f152340",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_13.svg": "9b23ce1291ea34cc034a7182efcc6ba77e6110d9ee06fa21979635769a3fe25c",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_14.svg": "19f77736eeff6612bb1a5e6fc63346d8cda122b6a8c0727707f86e326d996d8d",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_15.svg": "014925009355209ebd48057f7012e0e030e333e2da658816173224397c6a6f6d",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/references/probe_16.svg": "3e70579c180459c902f47c25f29c0329516af6828588d9f202d8179e2f89837d",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/report.json": "6281db7b8b4fb45c33ec0232e56f888a58fbfa3cf18cb6b6f513fea256a2069f",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_1/source.png": "827ecc37289b707360963d051bfdd237def4454ebf88d5ad9c8c0e4767879704",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/original.svg": "422f20d5de919576101acb43da2c9add97a50e6a99c4a07df5a764b23e12a166",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_01.svg": "4125fa7e821380511623a745d5101f23bd69e4967b07c5dd0e71ad083a1ad997",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_02.svg": "57b2026e736e4517b023cee4e351bd1d6e2c4daf59daea5255f2794df6181ac2",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_03.svg": "8ed737e0b26b46673cd04e51bc4ca6167ac522c1af0eec321410fb3333adc3b9",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_04.svg": "4e4ff476b4e323fdfed70e2b16740be05ad83e63c0595987577ba6db5994b733",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_05.svg": "ac5578ed2640794084e0ae6c7a8274a970e46d3765abe9dce6d2afd37085eb5f",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_06.svg": "e5379fcc2277b707d9fb566c668c76f5368d9f80b2094a4a09d796a5761a9d0f",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_07.svg": "3c0396b38d34342bcab511a8c3cc91120029e42d06bfc61616b3089993c758c2",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_08.svg": "af43eb2353107724451009e060533228da05d887a97fc0899637b7c618d233f9",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_09.svg": "ee838aed748cfcb05352c64e657d3742b8434f71605de4c2d9501651d2403580",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_10.svg": "db531b08421463efac4f8b7876df3bd8703c51fe5f182f23f75ea295651368eb",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_11.svg": "6a2aaa40137e0fa03daddd6cd6c97877d1d4a5493d2f6638e7a063ed73dcaf4b",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_12.svg": "ae1748b93c28ee989f0b27b7daee831e8ea8cf3631db6e0a9d047468bb5f1ba7",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_13.svg": "7aabc23277037f31e569930d4739a2b0d945001479d3b96f632cd5c149e5083a",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_14.svg": "a31dde022ee843da072d0d9f92d7e9738740ae32239e91dc3cce8df9ebfb5b97",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_15.svg": "bf191b921f5f71c9853b9641a3fbf9666d23e209bf2a52dc92a0dd3e944ea11e",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/outputs/probe_16.svg": "a86080ae2f88490267c8cb2354e6d9e364d881e68788dc49a661f8ad03d9d1e0",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/original.svg": "ae4d228d6555f61dcd311866336b941b069a9f73ccb4b4704b588f49e9032d3b",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_01.svg": "30435e9e7c61d93be9be0b1e36a8117c9efb24a3124ea26b7c7d06163136715b",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_02.svg": "d5936618fb8ea52d2af5aafc3715963e52793f0600ba4f2f16805e255870caf5",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_03.svg": "0401a1d9cb24f7140acb3b40ad2ff766904d3e6f845ce393b3d8e0e33c95801f",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_04.svg": "b5e130ed4468a93c5768a0d42e7a8b7d28bed2f3a91c0a1f355a5e57bc66e713",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_05.svg": "2f08594745b6a074c4277170597a5121c139d5f2530b181ec0a8e6bb36c9ecb6",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_06.svg": "285d39ac545f2e4c7f9776ee76ab9260144015ff2e36639faec2281fec8fa71d",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_07.svg": "2705f054e5cd303c21ef8cae343e1f77ff5d03110d3e0f830093e55da40b9d23",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_08.svg": "ddb7fcc8b988501a5ebd89a67c4bf1e43270ca193839330d8dc833ae128a3cdc",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_09.svg": "b1c6331f5f6532c1b46ed375bed5f4cdbf813302eac3a47e584fb405e9be71c5",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_10.svg": "65c7fda1b4e20d259ea28029740dd75383bfdfe7ab5bfbb5dace37ef63d840a6",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_11.svg": "08ba51a3324b3a0b7e1158a6d284065541eb2ff6edfd08a0a6b4e645c33799ea",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_12.svg": "173ceb9a0eae29a96f37b863ac18e763f1110548453955c0d1a50ee78f152340",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_13.svg": "9b23ce1291ea34cc034a7182efcc6ba77e6110d9ee06fa21979635769a3fe25c",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_14.svg": "19f77736eeff6612bb1a5e6fc63346d8cda122b6a8c0727707f86e326d996d8d",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_15.svg": "014925009355209ebd48057f7012e0e030e333e2da658816173224397c6a6f6d",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/references/probe_16.svg": "3e70579c180459c902f47c25f29c0329516af6828588d9f202d8179e2f89837d",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/report.json": "7c8e0278c38efb9fb3d0e951a56aebd00916755f55865f801c14c18a9a4932f8",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b/run_2/source.png": "827ecc37289b707360963d051bfdd237def4454ebf88d5ad9c8c0e4767879704",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b_boundary_conversion_command.sh": "e2951b95f055e50588f0383c17a0244b5f42e7cee3f5e67d77cced66bd86a3ff",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b_boundary_triple_v1.csv": "4d53b7c60449c5f651f36e6bd34ff2cf151a930b09a96d328eb520242c03d34c",
+    "artifacts/evaluation/house_disk_recheck_v1/plan_b_candidate_triage_v1.csv": "76dc15b96c3e3c802bb114895616cbb938f66f588fda1141781c2452b68d20a2",
+    "artifacts/evaluation/house_disk_recheck_v1/recheck_catalog_context.py": "97d4d079ff45e16007e9c677955eeff313c75c89ff8c2b3ebc66814de183b619",
+    "artifacts/evaluation/house_disk_recheck_v1/refresh_review.py": "b89cc377057fbc20c997c568213c7c0a7ca1e28f257a5b1cbed846c18cd2398e",
+    "artifacts/evaluation/house_disk_recheck_v1/report.json": "d8aafac47b0de9ad47eb8d934a7bcce79b53b4585f896229241d21ae32b7e451",
+    "artifacts/evaluation/house_disk_recheck_v1/review_args.json": "0432c6eb6834c16455341b821183186a36a362ea0c37fe36aa0530b9621209a0",
+    "artifacts/evaluation/house_disk_recheck_v1/smoke_tests.log": "bc2ff7dc0d2a272d1e12c7e4725f9ea719c760ac337d2feff0bdb0c8b1ecad24",
+    "artifacts/evaluation/house_disk_recheck_v1/smoke_tests.xml": "b0e3d0099f5b0e450fab296d60de663e46e1709022caa673bc7a118caba0cb96",
+    "artifacts/evaluation/house_disk_recheck_v1/source_inventory.json": "c103ff9b184ccd5e9db23e7256cb4358f797da44d3073811ae08e25ae7c3e180",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/plan.json": "8fca997e38b09bb7f3144c9e839f60b067bfd88f894525dbbc60f11ef6e74f6d",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/results.json": "9f5f2c7fda0aaa560d76c0dd3352d5b72ed274e721b2cdb004412525c47b7b1c",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/shard_0.json": "ec9e0cfeed0bb7e665ff2d561ffce2693fe2beec3c2d2c25ea439b17509ef44a",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/shard_0.log": "3ed9fdfbacafde777f1e84270f39316dabf28e1c5826e518adf83870a8de91b1",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/shard_0.xml": "4dddfa31d533573628987f49efa25b2adbb3c0fa04ba7b68f4e09eb38acfaeed",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/shard_1.json": "4cef9002ec4a00826d3fc6e20f50a755ea3bffb1850a2db6155d1796d0b30e54",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/shard_1.log": "3929781fcefc4149f422fabe108ed9b758ee7f608056567b6d15ddf8e25b6184",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/shard_1.xml": "f2752e872ec8e3af3ddcef32c2575e64f22e6e8801e1240a839fafe745551581",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/shard_2.json": "c6bc978d2143c35a78e64ec42548e6d8967dc163a35fffcc270dcb60f6764530",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/shard_2.log": "701fae28af646cd74e76a9339c2eca43bf3e1c86f4a58b908f1f45f97c78f5cb",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/shard_2.xml": "b78cb3127240a66ff48b5ebe3dcd80176d91a025a171898cb753ffc1f9bf4a3e",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/shard_3.json": "616353591743947c173a75a2c07e92c75230393abbd4df08e13fd46c85cc963f",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/shard_3.log": "d1d6f605c3272bf9e78158a27acd9dfb9e162b9a9e2d821b8f5dcad4c68a94a7",
+    "artifacts/evaluation/house_disk_recheck_v1/standard_profile/shard_3.xml": "808bd2315ebe142a9ccc8155847ae6841d5f19a3245c60bde192defc9ca565de",
+    "artifacts/evaluation/house_disk_recheck_v1/top_reproducible_error_cases_v1.csv": "1431182e4effe4b8e980ce32218c6bb0aa4eab78b54d8a6dceed1948673b0c83",
+    "artifacts/evaluation/house_disk_recheck_v1/verify_evidence.py": "b58f21b7956a6207b46cdcfb73358341de5da07edd1d3cf0c41deea6404c95b2"
+  },
+  "base_commit": "74c3c83f4",
+  "branch": "codex/ge0346-quality-2026-10-15",
+  "checks": {
+    "cli_help": {
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    "diff": {
+      "command": [
+        "git",
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    "frozen_evidence": {
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\house_disk_recheck_v1\\verify_evidence.py"
+      ],
+      "exit_code": 0
+    },
+    "no_runtime_ids": {
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.check_no_new_image_id_hardcoding"
+      ],
+      "exit_code": 0
+    },
+    "staged_artifact_hashes": {
+      "all_identical": true,
+      "files": 117
+    },
+    "staged_diff": {
+      "command": [
+        "git",
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    "syntax": {
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "tests",
+        "tools"
+      ],
+      "exit_code": 0
+    }
+  },
+  "cli": {
+    "catalog_svg_replay": true,
+    "neutral_svg_replay": true,
+    "no_required_metric_regressions": true,
+    "reference_svg_reads": 0,
+    "regular_passed": 1,
+    "strict_pixel_passed": 1
+  },
+  "diagnostics": {
+    "initial_cli": "15/17 before correcting independent canvas margin; cropped disks separately rejected",
+    "initial_focused": "43 passed, 5 failures: two cropped-disk variants and three overly permissive topology checks; corrected, final 49/49"
+  },
+  "focused_tests": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 49,
+    "skipped": 0,
+    "tests": 49
+  },
+  "plan_b": {
+    "identical_input_output_hashes_metrics_complexity_and_decisions": true,
+    "passed_per_run": 17,
+    "runs": 2,
+    "seed": 20261015
+  },
+  "smoke_tests": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 2,
+    "skipped": 0,
+    "tests": 2
+  },
+  "standard_profile": {
+    "all_collected_nodes_covered_exactly_once": true,
+    "errors": 0,
+    "failures": 0,
+    "passed": 2805,
+    "processes": 4,
+    "skipped": 30,
+    "tests": 2835
+  }
+}

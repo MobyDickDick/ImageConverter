@@ -1,0 +1,24 @@
+{
+  "schema_version": "house_disk_recheck_manifest_v1",
+  "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gef\u00fclltes Haus mit dreieckigem Satteldach, seitlichen Dach\u00fcberst\u00e4nden und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige T\u00fcr, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die T\u00fcr liegt vollst\u00e4ndig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild.",
+  "baseline_description": "Hintergrund: GE0999 Vordergrund stillisiertes Haus (Dach ist Dreieck, unten Rechteck. Links T\u00fcre (wei\u00dfes Recheck hochkant, rechts Fenster/ wei\u00dfes Rechteck breitkant mit blauem Kreuz",
+  "provenance": {
+    "commit": "74c3c83f4",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "fresh original-description CLI frozen before runtime and catalog changes",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_house_00",
+      "source": "GE0346.jpg",
+      "image": "../../images_to_convert/GE0346.jpg",
+      "source_sha256": "541cd57453aa19afaa63af3bdb4fb8049fdce7dddd98b15046db2246779363fe",
+      "role": "target",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gef\u00fclltes Haus mit dreieckigem Satteldach, seitlichen Dach\u00fcberst\u00e4nden und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige T\u00fcr, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die T\u00fcr liegt vollst\u00e4ndig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_house_00.svg",
+      "after_svg": "after/anonymous_house_00.svg"
+    }
+  ]
+}
