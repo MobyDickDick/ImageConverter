@@ -1,0 +1,207 @@
+{
+  "baseline": {
+    "baseline_sha256": "9cc8574e1778607b4e77f9a3cbbb5a96f0fe4f90609cf490766dcc7aa9a7f700",
+    "cases": {
+      "anonymous_symbol_00": {
+        "dimensions": {
+          "height": 72,
+          "width": 72
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.26866814494132996,
+          "error_per_pixel": 0.051666596581443035,
+          "object_mask_iou": 0.8008680112330866,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "actual original-description CLI frozen before runtime and catalog changes",
+      "commit": "795df08826a5d61e0cdcfecd1f22c82703b4c250",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_symbol_00": "56c478e7f9a2ed0d4d8f8e781092c88053619b7a604aecc7174f1d9940c01c9d"
+      },
+      "seed": 0,
+      "toolchain": "Python 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 490.4957580566406,
+      "after_svg": "after/anonymous_symbol_00.svg",
+      "after_svg_sha256": "5176bbd6ba2ea8c2b52b560821d5447e3e7b5c89610cbcf7e1979979f9f4fdd8",
+      "before_mean_delta2": 10078.861328125,
+      "before_svg": "before/anonymous_symbol_00.svg",
+      "before_svg_sha256": "578ff06f2f18845a68c747d984bc8339cd7a51675c54151bbde06df19cb7d32e",
+      "case_id": "anonymous_symbol_00",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe. Darin liegt ein diagonales Kreuz aus zwei geraden Strichen mit abgerundeten Enden. Die beiden Striche schneiden sich mittig und liegen vollst\u00e4ndig innerhalb des Kreises. Gleichm\u00e4\u00dfiger heller Hintergrund. Keine Schriftzeichen und keine weiteren Objekte. Position, Radius, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE0017.jpg",
+      "input_sha256": "56c478e7f9a2ed0d4d8f8e781092c88053619b7a604aecc7174f1d9940c01c9d",
+      "role": "target",
+      "source": "GE0017.jpg",
+      "source_sha256": "56c478e7f9a2ed0d4d8f8e781092c88053619b7a604aecc7174f1d9940c01c9d"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "9cc8574e1778607b4e77f9a3cbbb5a96f0fe4f90609cf490766dcc7aa9a7f700",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9568222761154175,
+          "error_per_pixel": 0.002514395786526416,
+          "object_mask_iou": 0.9665391969407265,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.26866814494132996,
+          "error_per_pixel": 0.051666596581443035,
+          "object_mask_iou": 0.8008680112330866,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_symbol_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.002514395786526416,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 4
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9802,
+            "edge_alignment": 0.9568,
+            "pixel_similarity": 0.9975,
+            "semantic_score": 1.0,
+            "structure_score": 0.9665
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "actual original-description CLI frozen before runtime and catalog changes",
+      "commit": "795df08826a5d61e0cdcfecd1f22c82703b4c250",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_symbol_00": "56c478e7f9a2ed0d4d8f8e781092c88053619b7a604aecc7174f1d9940c01c9d"
+      },
+      "seed": 0,
+      "toolchain": "Python 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 1,
+      "improved": 1,
+      "satisfactory": 1,
+      "technically_completed": 1
+    }
+  },
+  "schema_version": "diagonal_cross_disk_recheck_v1",
+  "strict_pixel_gates": {
+    "anonymous_symbol_00": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9568222761154175,
+        "foreground_iou": 0.9461704091048908,
+        "foreground_mse": 0.0035432586446404457,
+        "normalized_mse": 0.0025143958628177643
+      },
+      "satisfactory": true
+    }
+  }
+}

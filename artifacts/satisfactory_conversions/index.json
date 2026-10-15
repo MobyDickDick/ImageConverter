@@ -1,5 +1,5 @@
 {
-  "case_count": 267,
+  "case_count": 268,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -2329,6 +2329,23 @@
       "svg": "svgs/DLG0010_1.svg",
       "svg_sha256": "569513d71cc1fc5947fd323ad087fac4e851f03fa1cc1b6ae26a0ca6ee758f4e",
       "variant": "DLG0010_1"
+    },
+    {
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe. Darin liegt ein diagonales Kreuz aus zwei geraden Strichen mit abgerundeten Enden. Die beiden Striche schneiden sich mittig und liegen vollst\u00e4ndig innerhalb des Kreises. Gleichm\u00e4\u00dfiger heller Hintergrund. Keine Schriftzeichen und keine weiteren Objekte. Position, Radius, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/diagonal_cross_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0017.jpg",
+      "image_sha256": "56c478e7f9a2ed0d4d8f8e781092c88053619b7a604aecc7174f1d9940c01c9d",
+      "mean_delta2": 490.4957580566406,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9568222761154175,
+        "error_per_pixel": 0.002514395786526416,
+        "object_mask_iou": 0.9665391969407265
+      },
+      "svg": "svgs/GE0017.svg",
+      "svg_sha256": "5176bbd6ba2ea8c2b52b560821d5447e3e7b5c89610cbcf7e1979979f9f4fdd8",
+      "variant": "GE0017"
     },
     {
       "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links dunkler und rechts heller. Mittig liegt ein dunkler gef\u00fcllter Pfeil nach rechts: ein waagerechter rechteckiger Schaft geht ohne L\u00fccke in eine breitere dreieckige Spitze \u00fcber. Der Pfeil hat eine helle Randkontur und liegt vollst\u00e4ndig innerhalb des Kreises. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",

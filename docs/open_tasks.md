@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-15)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `451` · Erledigt `420` · Offen `31`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `452` · Erledigt `421` · Offen `31`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,9 +20,18 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-15)
 
+- [x] **GE0017 – diagonales Kreuz auf Kreisscheibe:** eigenständige Beschreibungen und allgemeine Rasterregistrierung für Kreis und zwei gerundete Kreuzstriche. Beide regulären und strengeren Pixelgates bestehen ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-15_ge0017.md`.
+
+**Neuester Abschluss:** `GE0017.jpg` auf `codex/ge0017-quality-2026-10-15`.
+Frische neutrale Zielmetrik `10078.861328 → 490.495758`; finale Ausgabe im
+vollständigen Katalogkontext bytegleich. 268 Paare in der Erfolgsübersicht;
+alle 267 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
+`GE0001_L`, `GE9031_6M`, `GE9034_6M`, `GE1411_L`, `GE0305`.
+Ausschließlich das abgenommene Kreuzbild ist zusätzlich ausgeschlossen.
+
 - [x] **AC0850 – Kreisscheibe mit P:** Die drei Raster zeigen P statt des ursprünglich beschriebenen rF. Beide Kataloge eigenständig korrigiert; die unveränderte allgemeine Kreis-/Textregistrierung besteht mit L/M/S beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-15_ac0850_l.md`.
 
-**Neuester Abschluss:** `AC0850_L` und beide Größen-Holdouts auf
+**Vorheriger Abschluss:** `AC0850_L` und beide Größen-Holdouts auf
 `codex/ac0850-quality-2026-10-15`. Frische neutrale Zielmetrik
 `7792.040039 → 347.363342`; finale Ausgaben im vollständigen Katalogkontext
 bytegleich. 267 Paare in der Erfolgsübersicht; alle 264 bisherigen Indexeinträge
