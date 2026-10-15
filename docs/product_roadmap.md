@@ -61,3 +61,19 @@ in 171 Dateien, ohne externe Bibliotheken; zusätzlich 50.710 Zeilen Tests und
 15.224 Zeilen Werkzeuge. Gezählt sind auch Leerzeilen und Kommentare; externe Bibliotheken sind ausgeschlossen.
 Eine kleinere Zeilenzahl ist ein Fortschrittsmaß; Verständlichkeit, Wartbarkeit
 und erhaltene Qualität entscheiden über den Produktabschluss.
+
+## Möglicher Entwicklungszweig: ImageDetector
+
+Als mittel- bis langfristige Option ist ein vorgeschalteter
+[ImageDetector](image_detector_development_branch.md) vorgesehen. Er soll
+Grundformen erkennen, ihre Masse und Stilmerkmale aus dem Raster schätzen und
+dem Konverter über die gemeinsame Geometry-IR bessere Ausgangsdaten liefern.
+Erste Kandidaten sind Kreise/Ringe, Linien, Rechtecke und einfache Vielecke;
+Beziehungen und Überdeckungen, Bézierkurven sowie Text bilden spätere
+Ausbaustufen. Exakte Schriftarterkennung bleibt eine zusätzliche Option.
+
+Der Zweig knüpft an vorhandene Perception-First-Bausteine an. Sein Nutzen ist
+an unabhängigen Bildern durch Vergleiche mit und ohne Detector nachzuweisen.
+Er ist als mögliche Weiterentwicklung dokumentiert und ändert weder die
+bisherige Prioritätenfolge noch die nächste reguläre Aufgabe. Eine Umsetzung
+oder ein Termin ist damit noch nicht festgelegt.
