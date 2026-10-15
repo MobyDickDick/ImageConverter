@@ -1,0 +1,18 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere anonymous_house_00.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_house_00.jpg ---
+Bildbeschreibung: Hintergrund: GE0999 Vordergrund stillisiertes Haus (Dach ist Dreieck, unten Rechteck. Links Türe (weißes Recheck hochkant, rechts Fenster/ weißes Rechteck breitkant mit blauem Kreuz
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert anonymous_house_00.jpg | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_HOUSE_00 | Qualität: Optimierungsfehler/Pixel=0.007051, Mean-Delta²=10410.204102, RGB-RMSE/Kanal=58.907283, Raumscore=26171.266650, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.5s
+[INFO] Konvertiere anonymous_house_00.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite anonymous_house_00.jpg ---
+Bildbeschreibung: Hintergrund: GE0999 Vordergrund stillisiertes Haus (Dach ist Dreieck, unten Rechteck. Links Türe (weißes Recheck hochkant, rechts Fenster/ weißes Rechteck breitkant mit blauem Kreuz
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert anonymous_house_00.jpg | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_HOUSE_00 | Qualität: Optimierungsfehler/Pixel=0.007051, Mean-Delta²=10410.204102, RGB-RMSE/Kanal=58.907283, Raumscore=26171.266650, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\house-baseline\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\house-baseline\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\house-baseline\before

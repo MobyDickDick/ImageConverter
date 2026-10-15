@@ -1,0 +1,1 @@
+for variant in AC0301_1M_sia AC0232_M GE9024_6S; do ICC_FORCE_RECONVERT=1 python -m src.imageCompositeConverter artifacts\images_to_convert --descriptions-path artifacts\images_to_convert\Finale_Wurzelformen_V3.xml --output-dir artifacts\converted_images --iterations 64 --start $variant --end $variant --deterministic-order || exit $?; done

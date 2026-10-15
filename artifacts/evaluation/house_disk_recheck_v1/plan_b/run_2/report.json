@@ -1,0 +1,767 @@
+{
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261015,
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "iterations": 64,
+  "timeout_seconds": 60,
+  "source_svg_sha256": "1822234707b5702ff381c1d9fa18e356fa5cbcda6bb7a899effd2064a5dfb5db",
+  "source_description_sha256": "12496f991d55ac44ce6d762ccd9603d870cb67c80de6298540ae10afc3c5ec0c",
+  "source_description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild.",
+  "source_image": "source.png",
+  "artifact_retention": "debug",
+  "selection": {
+    "mode": "explicit",
+    "source_svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\house_disk_recheck_v1\\independent.svg"
+  },
+  "cases": [
+    {
+      "case_id": "original",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 1.0,
+        "relative_x": 0.0,
+        "relative_y": 0.0
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild.",
+      "reference_svg": "references/original.svg",
+      "input_sha256": "827ecc37289b707360963d051bfdd237def4454ebf88d5ad9c8c0e4767879704",
+      "reference_svg_sha256": "ae4d228d6555f61dcd311866336b941b069a9f73ccb4b4704b588f49e9032d3b",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 3.386623575352132e-05,
+        "foreground_mse": 6.695315823890269e-05,
+        "edge_alignment": 0.9821851253509521,
+        "foreground_iou": 0.9974630021141649
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/original.svg",
+      "output_sha256": "422f20d5de919576101acb43da2c9add97a50e6a99c4a07df5a764b23e12a166",
+      "elapsed_seconds": 12.25
+    },
+    {
+      "case_id": "probe_01",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 1.04972112,
+        "relative_x": -0.01507809,
+        "relative_y": -0.000951
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringfügig größer dargestellt und geringfügig nach links und oben verschoben.",
+      "reference_svg": "references/probe_01.svg",
+      "input_sha256": "5b93c0b01eede9af9c0f9198b55ad44ac55b61cbcd5df6c9ecb76f5c8a9ba3fb",
+      "reference_svg_sha256": "30435e9e7c61d93be9be0b1e36a8117c9efb24a3124ea26b7c7d06163136715b",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.367403693730012e-05,
+        "foreground_mse": 9.527523798169568e-05,
+        "edge_alignment": 0.9816963076591492,
+        "foreground_iou": 0.998491135420596
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_01.svg",
+      "output_sha256": "4125fa7e821380511623a745d5101f23bd69e4967b07c5dd0e71ad083a1ad997",
+      "elapsed_seconds": 13.453
+    },
+    {
+      "case_id": "probe_02",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 1.04652307,
+        "relative_x": 0.00362252,
+        "relative_y": 0.00945878
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas größer dargestellt und etwas nach rechts und unten versetzt.",
+      "reference_svg": "references/probe_02.svg",
+      "input_sha256": "97954ee88377fd60e81410f4465abc15d7118c5ad8d4f3262d1234fdb76e8641",
+      "reference_svg_sha256": "d5936618fb8ea52d2af5aafc3715963e52793f0600ba4f2f16805e255870caf5",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 5.867857544217259e-05,
+        "foreground_mse": 9.32914117584005e-05,
+        "edge_alignment": 0.9769959449768066,
+        "foreground_iou": 0.9986694544763353
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_02.svg",
+      "output_sha256": "57b2026e736e4517b023cee4e351bd1d6e2c4daf59daea5255f2794df6181ac2",
+      "elapsed_seconds": 14.875
+    },
+    {
+      "case_id": "probe_03",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 1.05865944,
+        "relative_x": 0.00258878,
+        "relative_y": -0.02193022
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringfügig größer dargestellt und ein wenig nach rechts und oben versetzt.",
+      "reference_svg": "references/probe_03.svg",
+      "input_sha256": "e5c8d41459f133d371475983f83297772a8205cd9f138f73925fc44fb8ed119d",
+      "reference_svg_sha256": "0401a1d9cb24f7140acb3b40ad2ff766904d3e6f845ce393b3d8e0e33c95801f",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 5.662395778927021e-05,
+        "foreground_mse": 0.00010179208038607612,
+        "edge_alignment": 0.9624166488647461,
+        "foreground_iou": 0.9977843426883308
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_03.svg",
+      "output_sha256": "8ed737e0b26b46673cd04e51bc4ca6167ac522c1af0eec321410fb3333adc3b9",
+      "elapsed_seconds": 13.078
+    },
+    {
+      "case_id": "probe_04",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 0.97240435,
+        "relative_x": -0.00545771,
+        "relative_y": 0.01738478
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringfügig kleiner dargestellt und etwas nach links und unten verschoben.",
+      "reference_svg": "references/probe_04.svg",
+      "input_sha256": "d33025251d373cc06b44d8467bb71ce125df4e2a4ba63bcf28676877e401cf87",
+      "reference_svg_sha256": "b5e130ed4468a93c5768a0d42e7a8b7d28bed2f3a91c0a1f355a5e57bc66e713",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00018867728067561984,
+        "foreground_mse": 0.0003629873099271208,
+        "edge_alignment": 0.9728134274482727,
+        "foreground_iou": 0.9962653778558875
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_04.svg",
+      "output_sha256": "4e4ff476b4e323fdfed70e2b16740be05ad83e63c0595987577ba6db5994b733",
+      "elapsed_seconds": 12.828
+    },
+    {
+      "case_id": "probe_05",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 0.95999902,
+        "relative_x": -0.02436128,
+        "relative_y": 0.00550481
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht kleiner dargestellt und leicht nach links und unten versetzt.",
+      "reference_svg": "references/probe_05.svg",
+      "input_sha256": "bfaba9debab2f6a0e00381293fd8f7ec8364b6a9241e9886f04e1f06fc1b431b",
+      "reference_svg_sha256": "2f08594745b6a074c4277170597a5121c139d5f2530b181ec0a8e6bb36c9ecb6",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 9.254128963220865e-05,
+        "foreground_mse": 0.00012175292067695409,
+        "edge_alignment": 0.9523861408233643,
+        "foreground_iou": 0.9910414333706606
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_05.svg",
+      "output_sha256": "ac5578ed2640794084e0ae6c7a8274a970e46d3765abe9dce6d2afd37085eb5f",
+      "elapsed_seconds": 13.078
+    },
+    {
+      "case_id": "probe_06",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 1.02657141,
+        "relative_x": 0.01793636,
+        "relative_y": 0.00167548
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas größer dargestellt und ein wenig nach rechts und unten versetzt.",
+      "reference_svg": "references/probe_06.svg",
+      "input_sha256": "51d1d9af3ab7353aae72b3b69486f8d75267df38f19b5657f5df9f1bd1be534c",
+      "reference_svg_sha256": "285d39ac545f2e4c7f9776ee76ab9260144015ff2e36639faec2281fec8fa71d",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 7.546256529167295e-05,
+        "foreground_mse": 0.00012006730685243383,
+        "edge_alignment": 0.9681481122970581,
+        "foreground_iou": 0.9952746603662138
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_06.svg",
+      "output_sha256": "e5379fcc2277b707d9fb566c668c76f5368d9f80b2094a4a09d796a5761a9d0f",
+      "elapsed_seconds": 9.297
+    },
+    {
+      "case_id": "probe_07",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 0.9855716,
+        "relative_x": 0.0213857,
+        "relative_y": 0.01079252
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Das Motiv ist geringfügig kleiner dargestellt und ein wenig nach rechts und unten versetzt.",
+      "reference_svg": "references/probe_07.svg",
+      "input_sha256": "7c92257fcf6efd7421bcdacfed36db50f3e0e54477d0e3016bc9f8a4ff9d162e",
+      "reference_svg_sha256": "2705f054e5cd303c21ef8cae343e1f77ff5d03110d3e0f830093e55da40b9d23",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.669837603112683e-05,
+        "foreground_mse": 0.00012577111192513257,
+        "edge_alignment": 0.976329505443573,
+        "foreground_iou": 0.9944491887275833
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_07.svg",
+      "output_sha256": "3c0396b38d34342bcab511a8c3cc91120029e42d06bfc61616b3089993c758c2",
+      "elapsed_seconds": 13.36
+    },
+    {
+      "case_id": "probe_08",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 0.94394591,
+        "relative_x": 0.00070657,
+        "relative_y": -0.00738136
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Das Motiv ist leicht kleiner dargestellt und etwas nach rechts und oben verschoben.",
+      "reference_svg": "references/probe_08.svg",
+      "input_sha256": "3eedb250da5f2b3d8821ac70b7aac48566639f9531f70dbef03544de51f08318",
+      "reference_svg_sha256": "ddb7fcc8b988501a5ebd89a67c4bf1e43270ca193839330d8dc833ae128a3cdc",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 4.89200210722629e-05,
+        "foreground_mse": 0.00010319474677089602,
+        "edge_alignment": 0.9509785771369934,
+        "foreground_iou": 0.9900692840646651
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_08.svg",
+      "output_sha256": "af43eb2353107724451009e060533228da05d887a97fc0899637b7c618d233f9",
+      "elapsed_seconds": 11.656
+    },
+    {
+      "case_id": "probe_09",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 1.02697847,
+        "relative_x": -0.01023869,
+        "relative_y": -0.02304052
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas größer dargestellt und geringfügig nach links und oben verschoben.",
+      "reference_svg": "references/probe_09.svg",
+      "input_sha256": "6b948ebed71d4fdfdeac0e898a83f7203d252b67e912ef81523112f52186e148",
+      "reference_svg_sha256": "b1c6331f5f6532c1b46ed375bed5f4cdbf813302eac3a47e584fb405e9be71c5",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.381385901477188e-05,
+        "foreground_mse": 0.000121035409392789,
+        "edge_alignment": 0.9663460850715637,
+        "foreground_iou": 0.9968516332152696
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_09.svg",
+      "output_sha256": "ee838aed748cfcb05352c64e657d3742b8434f71605de4c2d9501651d2403580",
+      "elapsed_seconds": 7.344
+    },
+    {
+      "case_id": "probe_10",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 1.01526784,
+        "relative_x": -0.00285732,
+        "relative_y": 0.01711601
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas größer dargestellt und geringfügig nach links und unten verschoben.",
+      "reference_svg": "references/probe_10.svg",
+      "input_sha256": "500568e8babaf98419255e8d4b122219a471084323f869aa08c982b62a385959",
+      "reference_svg_sha256": "65c7fda1b4e20d259ea28029740dd75383bfdfe7ab5bfbb5dace37ef63d840a6",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 5.853924812981859e-05,
+        "foreground_mse": 7.513531454605982e-05,
+        "edge_alignment": 0.9779040217399597,
+        "foreground_iou": 0.993771348201728
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_10.svg",
+      "output_sha256": "db531b08421463efac4f8b7876df3bd8703c51fe5f182f23f75ea295651368eb",
+      "elapsed_seconds": 11.297
+    },
+    {
+      "case_id": "probe_11",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 1.04964316,
+        "relative_x": 0.02406451,
+        "relative_y": -0.02434303
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Die Darstellung ist geringfügig größer dargestellt und etwas nach rechts und oben verschoben.",
+      "reference_svg": "references/probe_11.svg",
+      "input_sha256": "dfb8909229399c3bbc5819ecf8e4a09e06a41547185f97ba5b01efe3eaf6412e",
+      "reference_svg_sha256": "08ba51a3324b3a0b7e1158a6d284065541eb2ff6edfd08a0a6b4e645c33799ea",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 8.555609383620322e-05,
+        "foreground_mse": 0.00015038273704703897,
+        "edge_alignment": 0.9745410084724426,
+        "foreground_iou": 0.9943353474320241
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_11.svg",
+      "output_sha256": "6a2aaa40137e0fa03daddd6cd6c97877d1d4a5493d2f6638e7a063ed73dcaf4b",
+      "elapsed_seconds": 12.328
+    },
+    {
+      "case_id": "probe_12",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 1.00677302,
+        "relative_x": 0.021687,
+        "relative_y": -0.0193618
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist ein wenig größer dargestellt und leicht nach rechts und oben versetzt.",
+      "reference_svg": "references/probe_12.svg",
+      "input_sha256": "de329e807758ab5c0d1836bab485852f5862bb5831638c581b2d1b1482cb3d2d",
+      "reference_svg_sha256": "173ceb9a0eae29a96f37b863ac18e763f1110548453955c0d1a50ee78f152340",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 7.504459790652618e-05,
+        "foreground_mse": 0.00014196778647601604,
+        "edge_alignment": 0.97646164894104,
+        "foreground_iou": 0.9938750510412413
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_12.svg",
+      "output_sha256": "ae1748b93c28ee989f0b27b7daee831e8ea8cf3631db6e0a9d047468bb5f1ba7",
+      "elapsed_seconds": 13.344
+    },
+    {
+      "case_id": "probe_13",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 0.95033969,
+        "relative_x": 0.02401478,
+        "relative_y": -0.02032168
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist etwas kleiner dargestellt und geringfügig nach rechts und oben verschoben.",
+      "reference_svg": "references/probe_13.svg",
+      "input_sha256": "bd2858a5fc8654751cd307d3477bc82958c1357c124566d2c258cdb8095dfefd",
+      "reference_svg_sha256": "9b23ce1291ea34cc034a7182efcc6ba77e6110d9ee06fa21979635769a3fe25c",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 3.927010766346939e-05,
+        "foreground_mse": 7.033989095361903e-05,
+        "edge_alignment": 0.9770939350128174,
+        "foreground_iou": 0.9972247918593895
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_13.svg",
+      "output_sha256": "7aabc23277037f31e569930d4739a2b0d945001479d3b96f632cd5c149e5083a",
+      "elapsed_seconds": 11.688
+    },
+    {
+      "case_id": "probe_14",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 0.98471941,
+        "relative_x": -0.01917929,
+        "relative_y": -0.0209018
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringfügig kleiner dargestellt und ein wenig nach links und oben verschoben.",
+      "reference_svg": "references/probe_14.svg",
+      "input_sha256": "43d62bd308e4d4a13c07a02c6ca78b92fb849580891ee3123f6702e1e3e52fd8",
+      "reference_svg_sha256": "19f77736eeff6612bb1a5e6fc63346d8cda122b6a8c0727707f86e326d996d8d",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 7.052394357742742e-05,
+        "foreground_mse": 0.00013879116158932447,
+        "edge_alignment": 0.9608244895935059,
+        "foreground_iou": 0.9950781082816178
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_14.svg",
+      "output_sha256": "a31dde022ee843da072d0d9f92d7e9738740ae32239e91dc3cce8df9ebfb5b97",
+      "elapsed_seconds": 11.75
+    },
+    {
+      "case_id": "probe_15",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 1.04502319,
+        "relative_x": 0.00525708,
+        "relative_y": -0.00884798
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Die Darstellung ist geringfügig größer dargestellt und geringfügig nach rechts und oben verschoben.",
+      "reference_svg": "references/probe_15.svg",
+      "input_sha256": "0dfbadff85dec3bdb7efab01031f10b74edf811f61b06aac205c797cefd50c75",
+      "reference_svg_sha256": "014925009355209ebd48057f7012e0e030e333e2da658816173224397c6a6f6d",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 4.0257935324916616e-05,
+        "foreground_mse": 7.224159344332293e-05,
+        "edge_alignment": 0.967914342880249,
+        "foreground_iou": 0.9950701554797118
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_15.svg",
+      "output_sha256": "bf191b921f5f71c9853b9641a3fbf9666d23e209bf2a52dc92a0dd3e944ea11e",
+      "elapsed_seconds": 11.75
+    },
+    {
+      "case_id": "probe_16",
+      "width": 104,
+      "height": 98,
+      "variation": {
+        "scale": 1.059177,
+        "relative_x": -0.0082423,
+        "relative_y": 0.00848975
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild. Das Motiv ist geringfügig größer dargestellt und geringfügig nach links und unten versetzt.",
+      "reference_svg": "references/probe_16.svg",
+      "input_sha256": "90df0b142a2da6a1de8ac23b6ff67116048b41d0f4fd77719091543757fd189b",
+      "reference_svg_sha256": "3e70579c180459c902f47c25f29c0329516af6828588d9f202d8179e2f89837d",
+      "satisfactory": true,
+      "failures": [],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.8773610109929e-05,
+        "foreground_mse": 0.00011749038094421849,
+        "edge_alignment": 0.9812034368515015,
+        "foreground_iou": 0.9979580471505476
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 1,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.1429
+      },
+      "output_svg": "outputs/probe_16.svg",
+      "output_sha256": "a86080ae2f88490267c8cb2354e6d9e364d881e68788dc49a661f8ad03d9d1e0",
+      "elapsed_seconds": 8.516
+    }
+  ],
+  "status": "completed",
+  "original_satisfactory": true,
+  "variations_started": true,
+  "summary": {
+    "required": 17,
+    "completed": 17,
+    "passed": 17,
+    "failed": 0,
+    "satisfactory": true
+  },
+  "source_image_sha256": "827ecc37289b707360963d051bfdd237def4454ebf88d5ad9c8c0e4767879704"
+}

@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-15)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `449` · Erledigt `418` · Offen `31`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `450` · Erledigt `419` · Offen `31`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,10 +20,19 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-15)
 
+- [x] **GE0346 – Haus auf Verlaufsscheibe:** eigenständige Beschreibung und allgemeine Rasterregistrierung für Satteldach, Fassade, linke Tür und rechtes Kreuzfenster. Beide unveränderten regulären Gates und strengeren Pixelgrenzen bestehen ohne Pflichtmetrikregression. Details und Abschlussbelege: `docs/next_arbeitspaket_2026-10-15_ge0346.md`.
+
+**Neuester Abschluss:** `GE0346.jpg` auf `codex/ge0346-quality-2026-10-15`.
+Frische neutrale Zielmetrik `10410.204102 → 316.769409`; finale Ausgabe
+im vollständigen Katalogkontext bytegleich. 264 Paare in der Erfolgsübersicht;
+alle 263 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
+`AC0850_L`, `GE0017`, `GE0001_L`, `GE9031_6M`, `GE9034_6M`.
+Ausschließlich das abgenommene Hausbild ist zusätzlich ausgeschlossen.
+
 - [x] **GE0306 – drei waagerechte Streifen auf Verlaufsscheibe:** eigenständige Beschreibung für das tatsächliche Flaggenbild und allgemeine Rasterregistrierung; beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-15_ge0306.md`.
 - [ ] **GE0306-TOOLS-SOURCE:** Die im ursprünglichen Eintrag zugeordneten Bilder `GE0306_{L,M,S}` zeigen gekreuzte Werkzeuge und Tropfen auf Verlaufsscheiben. Quellen-/Beschreibungszuordnung eigenständig aufarbeiten und diese Topologie separat abnehmen; sie sind keine Flaggen-Holdouts. Ursprüngliche Beschreibungen, Rasterhashes und Abmessungen: `artifacts/evaluation/striped_panel_disk_recheck_v1/source_inventory.json`. Quellen und Grenzen erhalten.
 
-**Neuester Abschluss:** `GE0306.jpg` auf `codex/ge0306-quality-2026-10-15`.
+**Vorheriger Abschluss:** `GE0306.jpg` auf `codex/ge0306-quality-2026-10-15`.
 Frische neutrale Zielmetrik `10398.578125 → 776.863281`; finale Ausgabe
 im vollständigen Katalogkontext bytegleich. 263 Paare in der Erfolgsübersicht;
 alle 262 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
