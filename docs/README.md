@@ -2,6 +2,8 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [GE0001: Warndreieck mit Ausrufezeichen auf Verlaufsscheibe, sechs Varianten und unabhängige CLI-Abnahme (2026-10-15)](next_arbeitspaket_2026-10-15_ge0001_l.md)
+
 - [GE0017: diagonales Kreuz auf Kreisscheibe und unabhängige CLI-Abnahme (2026-10-15)](next_arbeitspaket_2026-10-15_ge0017.md)
 
 - [AC0850: P statt rF, drei Größen und unabhängige CLI-Abnahme (2026-10-15)](next_arbeitspaket_2026-10-15_ac0850_l.md)

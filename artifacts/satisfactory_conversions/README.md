@@ -1,6 +1,6 @@
 # Zufriedenstellende Konvertierungen
 
-268 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
+274 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
 
 Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bild und Beschreibung.
 
@@ -143,6 +143,12 @@ Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bi
 | [AC1000_S](images/AC1000_S.jpg) | [SVG](svgs/AC1000_S.svg) | 496.119995 | semantic-only |
 | [DLG0010](images/DLG0010.jpg) | [SVG](svgs/DLG0010.svg) | 48.554668 | semantic-only |
 | [DLG0010_1](images/DLG0010_1.jpg) | [SVG](svgs/DLG0010_1.svg) | 468.700897 | semantic-only |
+| [GE0001_1_L](images/GE0001_1_L.jpg) | [SVG](svgs/GE0001_1_L.svg) | 356.290802 | semantic-only |
+| [GE0001_1_M](images/GE0001_1_M.jpg) | [SVG](svgs/GE0001_1_M.svg) | 284.183899 | semantic-only |
+| [GE0001_1_S](images/GE0001_1_S.jpg) | [SVG](svgs/GE0001_1_S.svg) | 251.509598 | semantic-only |
+| [GE0001_L](images/GE0001_L.jpg) | [SVG](svgs/GE0001_L.svg) | 278.354492 | semantic-only |
+| [GE0001_M](images/GE0001_M.jpg) | [SVG](svgs/GE0001_M.svg) | 252.756393 | semantic-only |
+| [GE0001_S](images/GE0001_S.jpg) | [SVG](svgs/GE0001_S.svg) | 267.593597 | semantic-only |
 | [GE0017](images/GE0017.jpg) | [SVG](svgs/GE0017.svg) | 490.495758 | semantic-only |
 | [GE0022](images/GE0022.jpg) | [SVG](svgs/GE0022.svg) | 198.207550 | semantic-only |
 | [GE0039_L](images/GE0039_L.jpg) | [SVG](svgs/GE0039_L.svg) | 132.414291 | semantic-only |

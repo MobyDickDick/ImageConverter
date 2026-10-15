@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-15)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `452` · Erledigt `421` · Offen `31`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `453` · Erledigt `422` · Offen `31`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,9 +20,19 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-15)
 
+- [x] **GE0001 – Warndreieck mit Ausrufezeichen auf Verlaufsscheibe:** eigenständige Beschreibungen und allgemeine Rasterregistrierung für Verlaufskreis, gerundeten Dreiecksrand, Innenfläche sowie getrennten Strich und Punkt. Alle sechs Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Details: `docs/next_arbeitspaket_2026-10-15_ge0001_l.md`.
+
+**Neuester Abschluss:** `GE0001_L` und fünf Farb-/Größen-Holdouts auf
+`codex/ge0001-quality-2026-10-15`. Frische neutrale Zielmetrik
+`10026.326172 → 278.354492`; finale Ausgaben im vollständigen Katalogkontext
+bytegleich. 274 Paare in der Erfolgsübersicht; alle 268 bisherigen Indexeinträge
+unverändert. Nächste reguläre Rotation: `GE9031_6M`, `GE9034_6M`, `GE1411_L`,
+`GE0305`, `GE9032_6M`. Nur die sechs abgenommenen GE0001-Varianten sind zusätzlich
+ausgeschlossen. Bestehende offene Aufgaben bleiben erhalten.
+
 - [x] **GE0017 – diagonales Kreuz auf Kreisscheibe:** eigenständige Beschreibungen und allgemeine Rasterregistrierung für Kreis und zwei gerundete Kreuzstriche. Beide regulären und strengeren Pixelgates bestehen ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-15_ge0017.md`.
 
-**Neuester Abschluss:** `GE0017.jpg` auf `codex/ge0017-quality-2026-10-15`.
+**Vorheriger Abschluss:** `GE0017.jpg` auf `codex/ge0017-quality-2026-10-15`.
 Frische neutrale Zielmetrik `10078.861328 → 490.495758`; finale Ausgabe im
 vollständigen Katalogkontext bytegleich. 268 Paare in der Erfolgsübersicht;
 alle 267 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:

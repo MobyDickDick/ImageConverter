@@ -457,6 +457,11 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
     ):
         return False
 
+    # The exclamation's interior stroke is not a connector on a letter badge.
+    # Keep the explicitly described triangle available to raster registration.
+    if re.search(r"\b(?:warn)?dreieck\b", normalized) and "ausrufezeichen" in normalized:
+        return False
+
     has_badge_shape = any(token in normalized for token in ("kelle", "kreis", "badge"))
     has_orientation_hint = bool(
         re.search(r"\b(?:griff|anschluss|linie|strich)\b", normalized)

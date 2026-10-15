@@ -1,5 +1,5 @@
 {
-  "case_count": 268,
+  "case_count": 274,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -2329,6 +2329,108 @@
       "svg": "svgs/DLG0010_1.svg",
       "svg_sha256": "569513d71cc1fc5947fd323ad087fac4e851f03fa1cc1b6ae26a0ca6ee758f4e",
       "variant": "DLG0010_1"
+    },
+    {
+      "description": "Eine Kreisscheibe mit vertikalem Farbverlauf und hellem Rand. Innerhalb des Kreises liegt ein aufrechtes Warndreieck mit abgerundeten Ecken, dunklem breitem Rand und heller Innenfl\u00e4che. Im Dreieck steht ein dunkles Ausrufezeichen aus einem senkrechten gerundeten Strich und einem getrennten runden Punkt darunter. Gleichm\u00e4\u00dfiger heller Hintergrund. Keine weiteren Objekte. Positionen, Gr\u00f6\u00dfen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/warning_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0001_1_L.jpg",
+      "image_sha256": "33feb1f205f66dbeae5837db0d139b47d94e481790d7503f1cbc01b5cd0de1d7",
+      "mean_delta2": 356.2908020019531,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8702081441879272,
+        "error_per_pixel": 0.0018264298449414487,
+        "object_mask_iou": 0.9863060595686409
+      },
+      "svg": "svgs/GE0001_1_L.svg",
+      "svg_sha256": "854d08914451165fed53ebc86da74e772b8653080ffe61e9c2535da4cbd0e9a9",
+      "variant": "GE0001_1_L"
+    },
+    {
+      "description": "Eine Kreisscheibe mit vertikalem Farbverlauf und hellem Rand. Innerhalb des Kreises liegt ein aufrechtes Warndreieck mit abgerundeten Ecken, dunklem breitem Rand und heller Innenfl\u00e4che. Im Dreieck steht ein dunkles Ausrufezeichen aus einem senkrechten gerundeten Strich und einem getrennten runden Punkt darunter. Gleichm\u00e4\u00dfiger heller Hintergrund. Keine weiteren Objekte. Positionen, Gr\u00f6\u00dfen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/warning_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0001_1_M.jpg",
+      "image_sha256": "365e6008b1b2ed9d8929dadde940eceb36d13819df3845b9967d7bc0b453e0b6",
+      "mean_delta2": 284.18389892578125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9462556838989258,
+        "error_per_pixel": 0.001456793022815744,
+        "object_mask_iou": 0.9859616284510997
+      },
+      "svg": "svgs/GE0001_1_M.svg",
+      "svg_sha256": "b11703a8111a8d6c5867f11a5f67cf4ef2fa0c1245967cfad5636006d506ad49",
+      "variant": "GE0001_1_M"
+    },
+    {
+      "description": "Eine Kreisscheibe mit vertikalem Farbverlauf und hellem Rand. Innerhalb des Kreises liegt ein aufrechtes Warndreieck mit abgerundeten Ecken, dunklem breitem Rand und heller Innenfl\u00e4che. Im Dreieck steht ein dunkles Ausrufezeichen aus einem senkrechten gerundeten Strich und einem getrennten runden Punkt darunter. Gleichm\u00e4\u00dfiger heller Hintergrund. Keine weiteren Objekte. Positionen, Gr\u00f6\u00dfen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/warning_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0001_1_S.jpg",
+      "image_sha256": "7b1622fbdd52f28b5189272bfa115be619ef0c087465e20d63eae5541c10fd4b",
+      "mean_delta2": 251.5095977783203,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9581944942474365,
+        "error_per_pixel": 0.0012892969256866349,
+        "object_mask_iou": 0.9893546240851631
+      },
+      "svg": "svgs/GE0001_1_S.svg",
+      "svg_sha256": "4681eda60c94da8357bc8a61416fc4734d2f47322b63ab96f5702307a221fe80",
+      "variant": "GE0001_1_S"
+    },
+    {
+      "description": "Eine Kreisscheibe mit vertikalem Farbverlauf und hellem Rand. Innerhalb des Kreises liegt ein aufrechtes Warndreieck mit abgerundeten Ecken, dunklem breitem Rand und heller Innenfl\u00e4che. Im Dreieck steht ein dunkles Ausrufezeichen aus einem senkrechten gerundeten Strich und einem getrennten runden Punkt darunter. Gleichm\u00e4\u00dfiger heller Hintergrund. Keine weiteren Objekte. Positionen, Gr\u00f6\u00dfen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/warning_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0001_L.jpg",
+      "image_sha256": "46d7d91205784361e82749bb72ab719543c96aa52e94f31745130895be74c9a8",
+      "mean_delta2": 278.3544921875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8815468549728394,
+        "error_per_pixel": 0.0014269101227092143,
+        "object_mask_iou": 0.9756267409470752
+      },
+      "svg": "svgs/GE0001_L.svg",
+      "svg_sha256": "94575488db4e7e3d7356b2036b5fb895e4e2904a5499106bb65cf0af51cc57cf",
+      "variant": "GE0001_L"
+    },
+    {
+      "description": "Eine Kreisscheibe mit vertikalem Farbverlauf und hellem Rand. Innerhalb des Kreises liegt ein aufrechtes Warndreieck mit abgerundeten Ecken, dunklem breitem Rand und heller Innenfl\u00e4che. Im Dreieck steht ein dunkles Ausrufezeichen aus einem senkrechten gerundeten Strich und einem getrennten runden Punkt darunter. Gleichm\u00e4\u00dfiger heller Hintergrund. Keine weiteren Objekte. Positionen, Gr\u00f6\u00dfen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/warning_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0001_M.jpg",
+      "image_sha256": "f882bf09f4e41f1684b6ef192fb5e2d4e7e5a58a3d206083473f4c8b73cd1756",
+      "mean_delta2": 252.7563934326172,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9358228445053101,
+        "error_per_pixel": 0.001295688291337266,
+        "object_mask_iou": 0.9828162291169451
+      },
+      "svg": "svgs/GE0001_M.svg",
+      "svg_sha256": "7298dbfa6f89d5d0eea87e5e519559a3f019fbb12143935646e06f794bfda364",
+      "variant": "GE0001_M"
+    },
+    {
+      "description": "Eine Kreisscheibe mit vertikalem Farbverlauf und hellem Rand. Innerhalb des Kreises liegt ein aufrechtes Warndreieck mit abgerundeten Ecken, dunklem breitem Rand und heller Innenfl\u00e4che. Im Dreieck steht ein dunkles Ausrufezeichen aus einem senkrechten gerundeten Strich und einem getrennten runden Punkt darunter. Gleichm\u00e4\u00dfiger heller Hintergrund. Keine weiteren Objekte. Positionen, Gr\u00f6\u00dfen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/warning_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0001_S.jpg",
+      "image_sha256": "eae756d8b014d7358c37dc37a0c95cc80fe0d6526b8b80b3fa79e754ac4e305b",
+      "mean_delta2": 267.5935974121094,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8943776488304138,
+        "error_per_pixel": 0.0013717472634223215,
+        "object_mask_iou": 0.9823848238482384
+      },
+      "svg": "svgs/GE0001_S.svg",
+      "svg_sha256": "30945bfef0d4edce10e29501987e89ca76832293fd185443fc787494355be931",
+      "variant": "GE0001_S"
     },
     {
       "description": "Eine einfarbig gef\u00fcllte Kreisscheibe. Darin liegt ein diagonales Kreuz aus zwei geraden Strichen mit abgerundeten Enden. Die beiden Striche schneiden sich mittig und liegen vollst\u00e4ndig innerhalb des Kreises. Gleichm\u00e4\u00dfiger heller Hintergrund. Keine Schriftzeichen und keine weiteren Objekte. Position, Radius, Strichbreiten und Farben ergeben sich aus dem Bild.",
