@@ -1,5 +1,5 @@
 {
-  "case_count": 264,
+  "case_count": 267,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -1989,6 +1989,57 @@
       "svg": "svgs/AC0839_S.svg",
       "svg_sha256": "8469ac3a903a7dea744c96104d8fa3d52a132bd80fac6abfca8050a14353b14b",
       "variant": "AC0839_S"
+    },
+    {
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"P\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/p_letter_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0850_L.jpg",
+      "image_sha256": "6b78ab3be03efff71cea248825e0913ab9db3c1efc0129c8ec8860844fd0356b",
+      "mean_delta2": 347.36334228515625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9559705257415771,
+        "error_per_pixel": 0.0017806656018718762,
+        "object_mask_iou": 0.935374149659864
+      },
+      "svg": "svgs/AC0850_L.svg",
+      "svg_sha256": "47253dd0179d06d557ef81bc6778b1fdd2d46b19e7257589eb28b5526b62225f",
+      "variant": "AC0850_L"
+    },
+    {
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"P\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/p_letter_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0850_M.jpg",
+      "image_sha256": "9781bc4b187ea8dfe1aeb3a6e821c1a530bb448118201ee35ce0f0dbf9316bfb",
+      "mean_delta2": 248.46749877929688,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9099395275115967,
+        "error_per_pixel": 0.0012737024158877195,
+        "object_mask_iou": 0.8625
+      },
+      "svg": "svgs/AC0850_M.svg",
+      "svg_sha256": "28d258ad5f3422a2634dcb187a05cbae475860007800449544cabfe13af234e2",
+      "variant": "AC0850_M"
+    },
+    {
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"P\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/p_letter_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0850_S.jpg",
+      "image_sha256": "524c83a87f39734d5ab63142c0eae9deaa49c3c5d1f492c571f3f99e7f5986be",
+      "mean_delta2": 450.8133239746094,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8848464488983154,
+        "error_per_pixel": 0.0023109743635761084,
+        "object_mask_iou": 0.82
+      },
+      "svg": "svgs/AC0850_S.svg",
+      "svg_sha256": "c40b0ab69532ed0c81cc917bed07c727c9aa231e00b4e3b9a881a4bb19dccdf5",
+      "variant": "AC0850_S"
     },
     {
       "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"T\" (Temperatur)",

@@ -128,3 +128,23 @@ def test_motor_semantics_requires_m_instead_of_default_q():
     case = manifest['cases'][0]
     assert measure(evidence/case['image'], evidence/case['after_svg'], 'M')['metrics']['semantic_score'] == 1
     assert measure(evidence/case['image'], evidence/case['after_svg'])['metrics']['semantic_score'] == 0
+
+
+@pytest.mark.parametrize('size', ['L', 'M', 'S'])
+def test_p_disk_catalog_description_matches_the_raster(size):
+    """The catalog used to describe rF although all three sources show P."""
+    from src.iCCModules.imageCompositeConverterDescriptions import loadDescriptionMappingImpl
+    from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
+
+    descriptions = []
+    for directory in ('images_to_convert', 'descriptions'):
+        mapping = loadDescriptionMappingImpl(
+            str(ROOT/f'artifacts/{directory}/Finale_Wurzelformen_V3.xml'),
+            get_base_name_from_file_fn=getBaseNameFromFileImpl)
+        descriptions.append(mapping[f'AC0850_{size}'])
+    assert descriptions[0] == descriptions[1]
+    image = cv2.imread(str(ROOT/f'artifacts/images_to_convert/AC0850_{size}.jpg'))
+    result = fit(image, descriptions[0])
+    assert result is not None
+    assert symbol_semantics(result['svg'], 'P') == 1
+    assert measure_quality(image, result['svg'])['satisfactory']

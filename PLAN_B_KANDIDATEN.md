@@ -2,7 +2,15 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-14, nach b_heating1-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-15, nach AC0850-Abnahme)
+
+AC0850 zeigt in allen drei Größen einen P-Kreis. Die Korrektur beider
+Katalogbeschreibungen aktiviert den unveränderten allgemeinen Registrierer;
+L/M/S bestehen beide regulären und alle strengeren Pixelgates ohne Regression.
+Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Die Rotation erhält sämtliche
+bisherigen Ausschlüsse und ergänzt nur diese drei Größen. Details:
+`docs/next_arbeitspaket_2026-10-15_ac0850_l.md`.
+Reproduzierbarer Review: `artifacts/evaluation/p_letter_disk_recheck_v1/review_args.json`.
 
 `b_heating1` besteht nach eigenständiger Beschreibung und allgemeiner
 Rasterregistrierung verschachtelter Flammen vor einer Verlaufsscheibe beide
@@ -142,11 +150,11 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `AC0421_1_S` – `mean_delta2=10641.200195`, `normalized_mse=0.054549`.
-2. `GE0306` – `mean_delta2=10400.377930`, `normalized_mse=0.053315`.
-3. `GE0346` – `mean_delta2=10372.923828`, `normalized_mse=0.053174`.
-4. `AC0850_L` – `mean_delta2=10141.756836`, `normalized_mse=0.051989`.
-5. `GE0017` – `mean_delta2=10074.741211`, `normalized_mse=0.051645`.
+1. `GE0017` – `mean_delta2=10074.741211`, `normalized_mse=0.051645`.
+2. `GE0001_L` – `mean_delta2=10014.325195`, `normalized_mse=0.051336`.
+3. `GE9031_6M` – `mean_delta2=9680.807617`, `normalized_mse=0.049626`.
+4. `GE9034_6M` – `mean_delta2=9680.297852`, `normalized_mse=0.049623`.
+5. `GE1411_L` – `mean_delta2=9671.516602`, `normalized_mse=0.049578`.
 
 `SE0081` besteht nach eigenständiger Beschreibung beide regulären und strengeren
 Pixelgates ohne Pflichtmetrikregression. Die vorhandene Runtime bleibt unverändert.
