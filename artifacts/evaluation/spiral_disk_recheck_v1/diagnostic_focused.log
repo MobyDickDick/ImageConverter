@@ -1,0 +1,46 @@
+........................F.....F.........                                 [100%]
+================================== FAILURES ===================================
+___________ test_incompatible_raster_evidence_is_rejected[detached] ___________
+
+mutation = 'detached'
+
+    @pytest.mark.parametrize('mutation', ['no_spiral', 'no_disk', 'no_line', 'extra_mark', 'detached', 'reversed', 'gap'])
+    def test_incompatible_raster_evidence_is_rejected(mutation):
+        root = ET.fromstring(INDEPENDENT)
+        if mutation.startswith('no_'):
+            root.remove({'no_spiral': list(root)[-1], 'no_disk': list(root)[1], 'no_line': list(root)[2]}[mutation])
+        elif mutation == 'detached':
+            ET.SubElement(root, 'rect', x='1', y='1', width='5', height='5', fill='#000000')
+        elif mutation == 'extra_mark':
+            ET.SubElement(root, 'rect', x='41', y='18', width='6', height='5', fill='#000000')
+        elif mutation == 'reversed':
+            root[-1].set('transform', 'translate(100 0) scale(-1 1)')
+        else:
+            ET.SubElement(root, 'rect', x='18', y='38', width='9', height='8', fill='#6c9bcc')
+>       assert fit(render(ET.tostring(root, encoding='unicode'), 98, 92)) is None
+E       assert {'error': 712.0659790039062, 'evaluations': 464, 'initial_error': 935.6100463867188, 'parameters': [47.000000000001116, 42.99999999999875, 35.69262393566966, 2.025, -0.30963827802451943, -21.990497892551904, ...], ...} is None
+E        +  where {'error': 712.0659790039062, 'evaluations': 464, 'initial_error': 935.6100463867188, 'parameters': [47.000000000001116, 42.99999999999875, 35.69262393566966, 2.025, -0.30963827802451943, -21.990497892551904, ...], ...} = fit(array([[[255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255],\n        ...,\n        [255, 255, 255],\n     ...      ...,\n        [255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255]]], shape=(92, 98, 3), dtype=uint8))
+E        +    where array([[[255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255],\n        ...,\n        [255, 255, 255],\n     ...      ...,\n        [255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255]]], shape=(92, 98, 3), dtype=uint8) = render('<svg xmlns="http://www.w3.org/2000/svg" width="98" height="92" viewBox="0 0 98 92"><rect width="98" height="92" fill=...e="#35294f" stroke-width="1.7" stroke-linecap="round" /><rect x="1" y="1" width="5" height="5" fill="#000000" /></svg>', 98, 92)
+E        +      where '<svg xmlns="http://www.w3.org/2000/svg" width="98" height="92" viewBox="0 0 98 92"><rect width="98" height="92" fill=...e="#35294f" stroke-width="1.7" stroke-linecap="round" /><rect x="1" y="1" width="5" height="5" fill="#000000" /></svg>' = <function tostring at 0x0000018A83C21090>(<Element '{http://www.w3.org/2000/svg}svg' at 0x0000018AA34244A0>, encoding='unicode')
+E        +        where <function tostring at 0x0000018A83C21090> = ET.tostring
+
+tests\test_spiral_disk_runtime.py:80: AssertionError
+_ test_conflicting_descriptions_do_not_register[Eine gef\xfcllte Kreisscheibe mit d\xfcnnem Rand auf hellem Hintergrund. Zwei schr\xe4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\xe4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\xe4rken und Farben ergeben sich aus dem Bild.] _
+
+description = 'Eine gef�llte Kreisscheibe mit d�nnem Rand auf hellem Hintergrund. Zwei schr�ge Linien durchqueren den Kreis von nahe...nen l�uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst�rken und Farben ergeben sich aus dem Bild.'
+
+    @pytest.mark.parametrize('description', ['Ein Kreis.', DESCRIPTION+' Zus�tzlich eine Linie.',
+                                           DESCRIPTION+' ohne Spirale.',
+                                           DESCRIPTION.replace('zwei schr�ge Linien', 'eine schr�ge Linie'),
+                                           DESCRIPTION.replace('gegen den Uhrzeigersinn', 'im Uhrzeigersinn')])
+    def test_conflicting_descriptions_do_not_register(description):
+>       assert fit(render(INDEPENDENT, 98, 92), description) is None
+E       assert {'error': 173.6116943359375, 'evaluations': 464, 'initial_error': 394.6966552734375, 'parameters': [47.000000000001116, 42.99999999999875, 35.69262393566966, 2.025, -0.30963827802451943, -21.990497892551904, ...], ...} is None
+E        +  where {'error': 173.6116943359375, 'evaluations': 464, 'initial_error': 394.6966552734375, 'parameters': [47.000000000001116, 42.99999999999875, 35.69262393566966, 2.025, -0.30963827802451943, -21.990497892551904, ...], ...} = fit(array([[[255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255],\n        ...,\n        [255, 255, 255],\n     ...      ...,\n        [255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255]]], shape=(92, 98, 3), dtype=uint8), 'Eine gef�llte Kreisscheibe mit d�nnem Rand auf hellem Hintergrund. Zwei schr�ge Linien durchqueren den Kreis von nahe...nen l�uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst�rken und Farben ergeben sich aus dem Bild.')
+E        +    where array([[[255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255],\n        ...,\n        [255, 255, 255],\n     ...      ...,\n        [255, 255, 255],\n        [255, 255, 255],\n        [255, 255, 255]]], shape=(92, 98, 3), dtype=uint8) = render('<svg xmlns="http://www.w3.org/2000/svg" width="98" height="92" viewBox="0 0 98 92"><rect width="98" height="92" fill=...7601 53.1706 57.1718 54.2538 54.8259" fill="none" stroke="#35294f" stroke-width="1.7" stroke-linecap="round"/></svg>\n', 98, 92)
+
+tests\test_spiral_disk_runtime.py:88: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_spiral_disk_runtime.py::test_incompatible_raster_evidence_is_rejected[detached]
+FAILED tests/test_spiral_disk_runtime.py::test_conflicting_descriptions_do_not_register[Eine gef\xfcllte Kreisscheibe mit d\xfcnnem Rand auf hellem Hintergrund. Zwei schr\xe4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\xe4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\xe4rken und Farben ergeben sich aus dem Bild.]
+2 failed, 38 passed, 1 deselected in 62.78s (0:01:02)

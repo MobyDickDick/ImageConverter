@@ -1,0 +1,113 @@
+{
+  "schema_version": "spiral_disk_recheck_manifest_v1",
+  "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+  "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0421_1. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+  "provenance": {
+    "commit": "d8c4ba0e658c0b299997dc2e21752ae80fc50d76",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "full original catalog and disabled spiral registration from baseline commit; PYTHONHASHSEED=0 and TINY_ICC_OUTPUT_VARIATION=0",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "AC0421_1_S",
+      "source": "AC0421_1_S.jpg",
+      "image": "../../../images_to_convert/AC0421_1_S.jpg",
+      "source_sha256": "84e6434286a6fca34d8e4b840f08a9c90e44e2d3891b8618f87686d88d78615c",
+      "role": "target",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0421_1. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/converted_svgs/AC0421_1_S.svg",
+      "after_svg": "after/converted_svgs/AC0421_1_S.svg"
+    },
+    {
+      "case_id": "AC0421_1_M",
+      "source": "AC0421_1_M.jpg",
+      "image": "../../../images_to_convert/AC0421_1_M.jpg",
+      "source_sha256": "1a451bbae4de467756b7848ff5297b9634b9564ea706d32c909566e42fdcad32",
+      "role": "holdout",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0421_1. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/converted_svgs/AC0421_1_M.svg",
+      "after_svg": "after/converted_svgs/AC0421_1_M.svg"
+    },
+    {
+      "case_id": "AC0421_1_L",
+      "source": "AC0421_1_L.jpg",
+      "image": "../../../images_to_convert/AC0421_1_L.jpg",
+      "source_sha256": "27fa73d50594f5b30cf443f5aabc990336d6749ded4ea2d6fe11db006f06ca0c",
+      "role": "holdout",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0421_1. Dokumentiert ist die gro\u00dfe Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/converted_svgs/AC0421_1_L.svg",
+      "after_svg": "after/converted_svgs/AC0421_1_L.svg"
+    },
+    {
+      "case_id": "AC0421_S",
+      "source": "AC0421_S.jpg",
+      "image": "../../../images_to_convert/AC0421_S.jpg",
+      "source_sha256": "7dabec14b7af00dbf8cdb79c517576097541abe7ea0e14105e82cac6b43874a4",
+      "role": "holdout",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0421. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/converted_svgs/AC0421_S.svg",
+      "after_svg": "after/converted_svgs/AC0421_S.svg"
+    },
+    {
+      "case_id": "AC0421_M",
+      "source": "AC0421_M.jpg",
+      "image": "../../../images_to_convert/AC0421_M.jpg",
+      "source_sha256": "444a0affd8db8d88819c8ffc674b4454ad7aff0c6b542ec87bdb0a81e4dd9289",
+      "role": "holdout",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0421. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/converted_svgs/AC0421_M.svg",
+      "after_svg": "after/converted_svgs/AC0421_M.svg"
+    },
+    {
+      "case_id": "AC0421_L",
+      "source": "AC0421_L.jpg",
+      "image": "../../../images_to_convert/AC0421_L.jpg",
+      "source_sha256": "416a369669faa7d0a396e0bdb76311f429ef3309de20f211aedd924199164fa0",
+      "role": "holdout",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0421. Dokumentiert ist die gro\u00dfe Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/converted_svgs/AC0421_L.svg",
+      "after_svg": "after/converted_svgs/AC0421_L.svg"
+    },
+    {
+      "case_id": "AC0421_2_S",
+      "source": "AC0421_2_S.jpg",
+      "image": "../../../images_to_convert/AC0421_2_S.jpg",
+      "source_sha256": "4ee34adbd604d57e56b66ae83838df810195ed56f246b944394b96677295ba5d",
+      "role": "holdout",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0421_2. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/converted_svgs/AC0421_2_S.svg",
+      "after_svg": "after/converted_svgs/AC0421_2_S.svg"
+    },
+    {
+      "case_id": "AC0421_2_M",
+      "source": "AC0421_2_M.jpg",
+      "image": "../../../images_to_convert/AC0421_2_M.jpg",
+      "source_sha256": "3ef2755a41152b8cdf55f0173c497d45bde953bf6ad2736860bd850e6e59e308",
+      "role": "holdout",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0421_2. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/converted_svgs/AC0421_2_M.svg",
+      "after_svg": "after/converted_svgs/AC0421_2_M.svg"
+    },
+    {
+      "case_id": "AC0421_2_L",
+      "source": "AC0421_2_L.jpg",
+      "image": "../../../images_to_convert/AC0421_2_L.jpg",
+      "source_sha256": "45c8603700500ea772c6557248480b4942e12b007d9089d440a9956e779264ae",
+      "role": "holdout",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0421_2. Dokumentiert ist die gro\u00dfe Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/converted_svgs/AC0421_2_L.svg",
+      "after_svg": "after/converted_svgs/AC0421_2_L.svg"
+    }
+  ]
+}
