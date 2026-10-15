@@ -1,5 +1,5 @@
 {
-  "case_count": 253,
+  "case_count": 262,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -510,6 +510,159 @@
       "svg": "svgs/AC0413_S.svg",
       "svg_sha256": "56e8b1f639fc408d33c557c5f4572eefcb9b60e4f83cb44ab973934c4bbbee78",
       "variant": "AC0413_S"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/spiral_disk_recheck_v1/report_2026-10-15.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0421_1_L.jpg",
+      "image_sha256": "27fa73d50594f5b30cf443f5aabc990336d6749ded4ea2d6fe11db006f06ca0c",
+      "mean_delta2": 154.9668731689453,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9597082138061523,
+        "error_per_pixel": 0.0007943963766189687,
+        "object_mask_iou": 0.9842192691029901
+      },
+      "svg": "svgs/AC0421_1_L.svg",
+      "svg_sha256": "2426dcf63edbce9755efc326b5f7160f98cca6fe97256e01c83d049f391dd483",
+      "variant": "AC0421_1_L"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/spiral_disk_recheck_v1/report_2026-10-15.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0421_1_M.jpg",
+      "image_sha256": "1a451bbae4de467756b7848ff5297b9634b9564ea706d32c909566e42fdcad32",
+      "mean_delta2": 209.8733367919922,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9546335339546204,
+        "error_per_pixel": 0.0010758597298064446,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/AC0421_1_M.svg",
+      "svg_sha256": "cad19c1c4a10216ccf5db1761d9103e13f2948589647b2d47253a18a8eb740c4",
+      "variant": "AC0421_1_M"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/spiral_disk_recheck_v1/report_2026-10-15.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0421_1_S.jpg",
+      "image_sha256": "84e6434286a6fca34d8e4b840f08a9c90e44e2d3891b8618f87686d88d78615c",
+      "mean_delta2": 281.0675048828125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9631612300872803,
+        "error_per_pixel": 0.0014408176592736767,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/AC0421_1_S.svg",
+      "svg_sha256": "82da449461027345808c5f524204db50fd1347f2bb5824151ff811827e256101",
+      "variant": "AC0421_1_S"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/spiral_disk_recheck_v1/report_2026-10-15.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0421_2_L.jpg",
+      "image_sha256": "45c8603700500ea772c6557248480b4942e12b007d9089d440a9956e779264ae",
+      "mean_delta2": 108.14812469482422,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9613518118858337,
+        "error_per_pixel": 0.0005543925397658553,
+        "object_mask_iou": 0.9866555462885738
+      },
+      "svg": "svgs/AC0421_2_L.svg",
+      "svg_sha256": "46a732f7e61d15dbea830418e7b25f9177c108fe4c590bdce7d8809dce94f37d",
+      "variant": "AC0421_2_L"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/spiral_disk_recheck_v1/report_2026-10-15.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0421_2_M.jpg",
+      "image_sha256": "3ef2755a41152b8cdf55f0173c497d45bde953bf6ad2736860bd850e6e59e308",
+      "mean_delta2": 121.46221923828125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9553012847900391,
+        "error_per_pixel": 0.0006226436972358388,
+        "object_mask_iou": 0.9985294117647059
+      },
+      "svg": "svgs/AC0421_2_M.svg",
+      "svg_sha256": "84ea7549bd857d9c0246ef67c46a65aa1a7735d2c40b2c587af5a7c790feb0d3",
+      "variant": "AC0421_2_M"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/spiral_disk_recheck_v1/report_2026-10-15.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0421_2_S.jpg",
+      "image_sha256": "4ee34adbd604d57e56b66ae83838df810195ed56f246b944394b96677295ba5d",
+      "mean_delta2": 220.96249389648438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9327112436294556,
+        "error_per_pixel": 0.0011327053384415449,
+        "object_mask_iou": 0.9746835443037974
+      },
+      "svg": "svgs/AC0421_2_S.svg",
+      "svg_sha256": "e048ee981d49c749ff848aeb7ac61558da2f5f83ef125f0da8a919bf1e836a90",
+      "variant": "AC0421_2_S"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/spiral_disk_recheck_v1/report_2026-10-15.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0421_L.jpg",
+      "image_sha256": "416a369669faa7d0a396e0bdb76311f429ef3309de20f211aedd924199164fa0",
+      "mean_delta2": 96.58499908447266,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9673384428024292,
+        "error_per_pixel": 0.0004951172578981041,
+        "object_mask_iou": 0.8862433862433863
+      },
+      "svg": "svgs/AC0421_L.svg",
+      "svg_sha256": "42b49a12b7a65676ed128c28b78332df6915c2c799a5f5fc75ab9eb26930dda2",
+      "variant": "AC0421_L"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/spiral_disk_recheck_v1/report_2026-10-15.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0421_M.jpg",
+      "image_sha256": "444a0affd8db8d88819c8ffc674b4454ad7aff0c6b542ec87bdb0a81e4dd9289",
+      "mean_delta2": 185.64332580566406,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9126856923103333,
+        "error_per_pixel": 0.000951651035784514,
+        "object_mask_iou": 0.8658536585365854
+      },
+      "svg": "svgs/AC0421_M.svg",
+      "svg_sha256": "89cccd20dedfdaa49111d52b5bc4c3c6cf4a7d375ef05771ea1d9d7f9a68a848",
+      "variant": "AC0421_M"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/spiral_disk_recheck_v1/report_2026-10-15.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0421_S.jpg",
+      "image_sha256": "7dabec14b7af00dbf8cdb79c517576097541abe7ea0e14105e82cac6b43874a4",
+      "mean_delta2": 117.91500091552734,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9403465986251831,
+        "error_per_pixel": 0.0006044598278381512,
+        "object_mask_iou": 0.9251700680272109
+      },
+      "svg": "svgs/AC0421_S.svg",
+      "svg_sha256": "fae0cd528ccaa7247e2c6d2c50e2c00c83cc30df12515b325fc3683a0901b541",
+      "variant": "AC0421_S"
     },
     {
       "description": "Kelle mit Quadrat oben. Ein gef\u00fclltes Quadrat mit Kontur und einem mittigen senkrechten Griff, der von der unteren Quadratseite nach unten f\u00fchrt. Im Quadrat liegt ein kontrastierender schr\u00e4ger Strich von rechts oben nach links unten und ein kleiner quadratischer Punkt links neben seinem unteren Ende. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",

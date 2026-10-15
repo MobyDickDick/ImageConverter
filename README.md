@@ -22,13 +22,13 @@ SVGs, Checkpoints oder andere Bilder werden im voreingestellten
 ## Main entry point
 
 Die [Erfolgsübersicht](artifacts/satisfactory_conversions/README.md) enthält
-253 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
+262 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
 `python -m tools.refresh_satisfactory_archive` wird sie aus den dokumentierten
 Abnahmen aktualisiert. `python -m tools.run_pytest_profile extended`
 aktualisiert die Sammlung einschließlich späterer erfolgreicher Batches,
 konvertiert alle Einträge erneut und prüft deren Qualität; Quellen und
 gespeicherte gute SVGs bleiben dabei erhalten. Details zur Sammlung und zur
-[neuen Flammen-Abnahme](docs/next_arbeitspaket_2026-10-14_b_heating1.md).
+[neuen Spiral-Abnahme](docs/next_arbeitspaket_2026-10-15_ac0421_1_s.md).
 
 Run the converter via:
 

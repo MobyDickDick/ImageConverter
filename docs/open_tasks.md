@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-10-14)
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-15)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `442` · Erledigt `414` · Offen `28`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `447` · Erledigt `417` · Offen `30`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -18,11 +18,22 @@ focused on the actual project scope.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-14)
+### Aktueller Plan-B-Stand (2026-10-15)
+
+- [x] **AC0421 – Kreis mit zwei schrägen Linien und Spirale:** eigenständige Beschreibungen und allgemeine logarithmische Spiralregistrierung; alle neun Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression. Die sechs farbigen JPGs bestehen zusätzlich die strengeren Pixelgrenzen; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-15_ac0421_1_s.md`.
+- [ ] **AC0421-PB-GREY:** die drei grauen JPGs `AC0421_{L,M,S}` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.649231..0.721198 < 0.85`). Beide regulären Gates bestehen bereits. Die annähernd einfarbige Fläche liegt an der unveränderten Vordergrundschwelle; JPEG-Abweichungen und Vektorregistrierung eigenständig untersuchen. Quellen, akzeptierte SVGs und Grenzen erhalten.
+
+**Neuester Abschluss:** `AC0421_1_S` und acht Farb-/Größen-Holdouts auf
+`codex/ac0421-quality-2026-10-15`. Frische neutrale Zielmetrik
+`6915.564941 → 281.067505`; alle neun finalen SVGs sind im vollständigen
+Katalogkontext bytegleich. 262 Paare in der Erfolgsübersicht; alle 253 bisherigen
+Indexeinträge unverändert. Nächste reguläre Rotation: `GE0306`, `GE0346`,
+`AC0850_L`, `GE0017`, `GE0001_L`. Die neun regulär abgenommenen AC0421-Varianten
+sind zusätzlich ausgeschlossen; der strengere graue IoU-Folgepunkt bleibt offen.
 
 - [x] **b_heating1 – verschachtelte Flammen auf Verlaufsscheibe:** eigenständige Beschreibung und allgemeine Rasterregistrierung mit Geradenregression, spitzen Kronen und kubischen Bäuchen; Ziel besteht beide regulären und strengeren Gates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage zweimal 17/17. Details: `docs/next_arbeitspaket_2026-10-14_b_heating1.md`.
 
-**Neuester Abschluss:** `b_heating1` auf `codex/b-heating1-quality-2026-10-14`.
+**Vorheriger Abschluss:** `b_heating1` auf `codex/b-heating1-quality-2026-10-14`.
 Frische neutrale Zielmetrik `10226.132812 → 726.417908`; bytegleiche finale
 Ausgabe im vollständigen Katalogkontext. 253 Paare in der Erfolgsübersicht;
 alle 252 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
