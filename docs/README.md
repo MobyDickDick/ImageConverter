@@ -2,6 +2,8 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [AC0850: P statt rF, drei Größen und unabhängige CLI-Abnahme (2026-10-15)](next_arbeitspaket_2026-10-15_ac0850_l.md)
+
 - [GE0346: Haus auf Verlaufsscheibe, Rasterregistrierung und unabhängige CLI-Abnahme (2026-10-15)](next_arbeitspaket_2026-10-15_ge0346.md)
 
 - [GE0306: drei waagerechte Streifen auf Verlaufsscheibe und getrenntes Werkzeug-Quelleninventar (2026-10-15)](next_arbeitspaket_2026-10-15_ge0306.md)

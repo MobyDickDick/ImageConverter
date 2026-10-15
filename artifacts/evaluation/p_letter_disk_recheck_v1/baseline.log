@@ -1,0 +1,106 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere anonymous_symbol_00.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_symbol_00.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe rF
+[INFO] unknown: Elementvalidierung gestartet | Runden=8, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 90.57% -> 90.57% | mittlere Pixelabweichung (MAE, kleiner=besser): 24.039 -> 24.039 | Mean-Delta² (kleiner=besser): 6715.450 -> 6715.450 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 90.57% -> 90.57% | mittlere Pixelabweichung (MAE, kleiner=besser): 24.039 -> 24.039 | Mean-Delta² (kleiner=besser): 6715.450 -> 6715.450 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 3/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 3/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 90.57% -> 90.57% | mittlere Pixelabweichung (MAE, kleiner=besser): 24.039 -> 24.039 | Mean-Delta² (kleiner=besser): 6715.450 -> 6715.450 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[INFO] Konvertiert anonymous_symbol_00.jpg | Parameter: mode=semantic_badge, label=rF, variant_name=ANONYMOUS_SYMBOL_00 | Qualität: Optimierungsfehler/Pixel=0.045378, Mean-Delta²=7792.040039, RGB-RMSE/Kanal=50.964171, Raumscore=14493.062605, beste Validierungsrunde=1/3, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere anonymous_symbol_01.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_symbol_01.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe rF
+[INFO] unknown: Elementvalidierung gestartet | Runden=8, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 87.29% -> 86.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 32.400 -> 33.800 | Mean-Delta² (kleiner=besser): 8337.975 -> 8319.165 | Qualitätsgewinn=-1.400 (-4.32%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 86.75% -> 86.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 33.800 -> 33.800 | Mean-Delta² (kleiner=besser): 8319.165 -> 8319.165 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 3/8: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 3/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 86.75% -> 86.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 33.800 -> 33.800 | Mean-Delta² (kleiner=besser): 8319.165 -> 8319.165 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[WARN] anonymous_symbol_01.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.522222, localized_error_fraction=0.732516).
+[INFO] Konvertiert anonymous_symbol_01.jpg | Parameter: mode=semantic_badge, label=rF, variant_name=ANONYMOUS_SYMBOL_01 | Qualität: Optimierungsfehler/Pixel=0.075344, Mean-Delta²=5271.097656, RGB-RMSE/Kanal=41.916972, Raumscore=14152.028573, beste Validierungsrunde=1/3, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere anonymous_symbol_02.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_symbol_02.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe rF
+[INFO] unknown: Elementvalidierung gestartet | Runden=8, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 83.30% -> 83.94% | mittlere Pixelabweichung (MAE, kleiner=besser): 42.587 -> 40.942 | Mean-Delta² (kleiner=besser): 10978.293 -> 9165.253 | Qualitätsgewinn=+1.644 (+3.86%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 2/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 83.94% -> 85.59% | mittlere Pixelabweichung (MAE, kleiner=besser): 40.942 -> 36.756 | Mean-Delta² (kleiner=besser): 9165.253 -> 8143.520 | Qualitätsgewinn=+4.187 (+10.23%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 3/8: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 3/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.59% -> 85.59% | mittlere Pixelabweichung (MAE, kleiner=besser): 36.756 -> 36.756 | Mean-Delta² (kleiner=besser): 8143.520 -> 8143.520 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/8 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 4/8: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 4/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 85.59% -> 85.59% | mittlere Pixelabweichung (MAE, kleiner=besser): 36.756 -> 36.756 | Mean-Delta² (kleiner=besser): 8143.520 -> 8143.520 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[INFO] Konvertiert anonymous_symbol_02.jpg | Parameter: mode=semantic_badge, label=rF, variant_name=ANONYMOUS_SYMBOL_02 | Qualität: Optimierungsfehler/Pixel=0.180721, Mean-Delta²=8481.933594, RGB-RMSE/Kanal=53.172467, Raumscore=17124.739363, beste Validierungsrunde=2/4, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere anonymous_symbol_01.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite anonymous_symbol_01.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe rF
+[INFO] unknown: Elementvalidierung gestartet | Runden=7, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/7 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/7: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/7: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 87.29% -> 86.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 32.400 -> 33.800 | Mean-Delta² (kleiner=besser): 8337.975 -> 8319.165 | Qualitätsgewinn=-1.400 (-4.32%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/7 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/7: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/7: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 86.75% -> 86.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 33.800 -> 33.800 | Mean-Delta² (kleiner=besser): 8319.165 -> 8319.165 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/7 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 3/7: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 3/7: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 86.75% -> 86.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 33.800 -> 33.800 | Mean-Delta² (kleiner=besser): 8319.165 -> 8319.165 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.0s
+[WARN] anonymous_symbol_01.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.522222, localized_error_fraction=0.732516).
+[INFO] Konvertiert anonymous_symbol_01.jpg | Parameter: mode=semantic_badge, label=rF, variant_name=ANONYMOUS_SYMBOL_01 | Qualität: Optimierungsfehler/Pixel=0.079750, Mean-Delta²=5271.097656, RGB-RMSE/Kanal=41.916972, Raumscore=14152.028573, beste Validierungsrunde=1/3, beste Composite-Iteration=n/a, ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere anonymous_symbol_01.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite anonymous_symbol_01.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe rF
+[INFO] unknown: Elementvalidierung gestartet | Runden=9, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 87.29% -> 86.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 32.400 -> 33.800 | Mean-Delta² (kleiner=besser): 8337.975 -> 8319.165 | Qualitätsgewinn=-1.400 (-4.32%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 86.75% -> 86.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 33.800 -> 33.800 | Mean-Delta² (kleiner=besser): 8319.165 -> 8319.165 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/9 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 3/9: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 3/9: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 3/9 abgeschlossen | Qualität (MAE-basiert, höher=besser): 86.75% -> 86.75% | mittlere Pixelabweichung (MAE, kleiner=besser): 33.800 -> 33.800 | Mean-Delta² (kleiner=besser): 8319.165 -> 8319.165 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.0s
+[WARN] anonymous_symbol_01.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.522222, localized_error_fraction=0.732516).
+[INFO] Konvertiert anonymous_symbol_01.jpg | Parameter: mode=semantic_badge, label=rF, variant_name=ANONYMOUS_SYMBOL_01 | Qualität: Optimierungsfehler/Pixel=0.075344, Mean-Delta²=5271.097656, RGB-RMSE/Kanal=41.916972, Raumscore=14152.028573, beste Validierungsrunde=1/3, beste Composite-Iteration=n/a, ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\p-letter-baseline\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\p-letter-baseline\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\p-letter-baseline\before

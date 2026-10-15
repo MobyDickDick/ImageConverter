@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-15)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `450` · Erledigt `419` · Offen `31`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `451` · Erledigt `420` · Offen `31`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,9 +20,19 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-15)
 
+- [x] **AC0850 – Kreisscheibe mit P:** Die drei Raster zeigen P statt des ursprünglich beschriebenen rF. Beide Kataloge eigenständig korrigiert; die unveränderte allgemeine Kreis-/Textregistrierung besteht mit L/M/S beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-15_ac0850_l.md`.
+
+**Neuester Abschluss:** `AC0850_L` und beide Größen-Holdouts auf
+`codex/ac0850-quality-2026-10-15`. Frische neutrale Zielmetrik
+`7792.040039 → 347.363342`; finale Ausgaben im vollständigen Katalogkontext
+bytegleich. 267 Paare in der Erfolgsübersicht; alle 264 bisherigen Indexeinträge
+unverändert. Nächste reguläre Rotation: `GE0017`, `GE0001_L`, `GE9031_6M`,
+`GE9034_6M`, `GE1411_L`. Nur die drei abgenommenen AC0850-Größen sind zusätzlich
+ausgeschlossen. Runtime und Qualitätsgrenzen bleiben unverändert.
+
 - [x] **GE0346 – Haus auf Verlaufsscheibe:** eigenständige Beschreibung und allgemeine Rasterregistrierung für Satteldach, Fassade, linke Tür und rechtes Kreuzfenster. Beide unveränderten regulären Gates und strengeren Pixelgrenzen bestehen ohne Pflichtmetrikregression. Details und Abschlussbelege: `docs/next_arbeitspaket_2026-10-15_ge0346.md`.
 
-**Neuester Abschluss:** `GE0346.jpg` auf `codex/ge0346-quality-2026-10-15`.
+**Vorheriger Abschluss:** `GE0346.jpg` auf `codex/ge0346-quality-2026-10-15`.
 Frische neutrale Zielmetrik `10410.204102 → 316.769409`; finale Ausgabe
 im vollständigen Katalogkontext bytegleich. 264 Paare in der Erfolgsübersicht;
 alle 263 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
