@@ -1,5 +1,5 @@
 {
-  "case_count": 252,
+  "case_count": 253,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -4284,6 +4284,23 @@
       "svg": "svgs/SE0081.svg",
       "svg_sha256": "6defedfd39fdc268c8f4325e69fe94ab83b33a0711fe226498e589a61e8e1b19",
       "variant": "SE0081"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/flame_disk_recheck_v1/report_2026-10-14.json",
+      "execution_mode": "semantic-only",
+      "image": "images/b_heating1.jpg",
+      "image_sha256": "b9383db5768b961942a038e6ad8fa04a08d2b6f26efdfdb17f3271b4b0e54a52",
+      "mean_delta2": 726.4179077148438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7896820306777954,
+        "error_per_pixel": 0.003723787813481193,
+        "object_mask_iou": 0.9511059371362048
+      },
+      "svg": "svgs/b_heating1.svg",
+      "svg_sha256": "de08df376b29440f4f29c496fc44603416448f1cb9076e836e75dd0131fe0d18",
+      "variant": "b_heating1"
     }
   ],
   "schema_version": "satisfactory_archive_v1"

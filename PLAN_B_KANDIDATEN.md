@@ -2,19 +2,25 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-14, nach GE0300-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-14, nach b_heating1-Abnahme)
 
-`GE0300` besteht nach eigenständiger Beschreibung und allgemeiner Rasterregistrierung
-von Verlaufsscheibe, Rechteckfläche und rechtwinkligem Kreuz beide regulären
-und strengeren Gates (`mean_delta2=284.043915`). Eine unabhängig konstruierte
-Vorlage mit anderer Palette und Geometrie besteht 17/17 echte CLI-Fälle.
-Details: `docs/next_arbeitspaket_2026-10-14_ge0300.md`.
+`b_heating1` besteht nach eigenständiger Beschreibung und allgemeiner
+Rasterregistrierung verschachtelter Flammen vor einer Verlaufsscheibe beide
+regulären und strengeren Gates (`mean_delta2=726.417908`). Eine unabhängig
+konstruierte Vorlage mit anderer Palette, Geometrie und Zungenanordnung
+besteht zweimal 17/17 echte CLI-Fälle.
+Details: `docs/next_arbeitspaket_2026-10-14_b_heating1.md`.
 
 Der erneuerte Review enthält 1.000 Einträge und 993 renderbare Paare. Alle 48
 Bestenlisteneinträge bleiben unter der unveränderten Reviewgrenze. Frühere
-Ausschlüsse werden beibehalten; `GE0300` wird zusätzlich ausgeschlossen.
-Aufruf und Tabellen: `artifacts/evaluation/cross_panel_disk_recheck_v1/review_args.json`
-und `review_summary.json`.
+Ausschlüsse werden beibehalten; ausschließlich `b_heating1` wird zusätzlich
+ausgeschlossen. Aufruf und Tabellen:
+`artifacts/evaluation/flame_disk_recheck_v1/review_args.json` und `review_summary.json`.
+
+`GE0300` besteht nach eigenständiger Beschreibung und allgemeiner Rasterregistrierung
+von Verlaufsscheibe, Rechteckfläche und rechtwinkligem Kreuz beide regulären
+und strengeren Gates (`mean_delta2=284.043915`). Eine unabhängige Vorlage besteht
+17/17 echte CLI-Fälle. Details: `docs/next_arbeitspaket_2026-10-14_ge0300.md`.
 
 `GE0022.jpg` besteht nach allgemeiner horizontaler Pfeilregistrierung beide
 regulären und strengeren Gates (`mean_delta2=198.207550`), mit wiederholten
@@ -136,11 +142,11 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `b_heating1` – `mean_delta2=10660.001953`, `normalized_mse=0.054646`.
-2. `AC0421_1_S` – `mean_delta2=10641.200195`, `normalized_mse=0.054549`.
-3. `GE0306` – `mean_delta2=10400.377930`, `normalized_mse=0.053315`.
-4. `GE0346` – `mean_delta2=10372.923828`, `normalized_mse=0.053174`.
-5. `AC0850_L` – `mean_delta2=10141.756836`, `normalized_mse=0.051989`.
+1. `AC0421_1_S` – `mean_delta2=10641.200195`, `normalized_mse=0.054549`.
+2. `GE0306` – `mean_delta2=10400.377930`, `normalized_mse=0.053315`.
+3. `GE0346` – `mean_delta2=10372.923828`, `normalized_mse=0.053174`.
+4. `AC0850_L` – `mean_delta2=10141.756836`, `normalized_mse=0.051989`.
+5. `GE0017` – `mean_delta2=10074.741211`, `normalized_mse=0.051645`.
 
 `SE0081` besteht nach eigenständiger Beschreibung beide regulären und strengeren
 Pixelgates ohne Pflichtmetrikregression. Die vorhandene Runtime bleibt unverändert.

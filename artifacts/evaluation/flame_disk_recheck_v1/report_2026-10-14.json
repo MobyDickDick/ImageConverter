@@ -1,0 +1,207 @@
+{
+  "baseline": {
+    "baseline_sha256": "9e8109b31f1a206a1ea60616008a0d8220db4ce06e6dce884f8ee603f80f57e3",
+    "cases": {
+      "anonymous_flame_00": {
+        "dimensions": {
+          "height": 51,
+          "width": 51
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.1784486621618271,
+          "error_per_pixel": 0.05242154459823145,
+          "object_mask_iou": 0.7660054102795311,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI frozen before runtime and description changes",
+      "commit": "fea318a81",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_flame_00": "b9383db5768b961942a038e6ad8fa04a08d2b6f26efdfdb17f3271b4b0e54a52"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 726.4179077148438,
+      "after_svg": "after/anonymous_flame_00.svg",
+      "after_svg_sha256": "de08df376b29440f4f29c496fc44603416448f1cb9076e836e75dd0131fe0d18",
+      "before_mean_delta2": 10226.1328125,
+      "before_svg": "before/anonymous_flame_00.svg",
+      "before_svg_sha256": "d9946323d1d6d2f41d26dbbf96e33e37087d70debddfbbb4ab1b4ac1adce2df5",
+      "case_id": "anonymous_flame_00",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/b_heating1.JPG",
+      "input_sha256": "b9383db5768b961942a038e6ad8fa04a08d2b6f26efdfdb17f3271b4b0e54a52",
+      "role": "target",
+      "source": "b_heating1.JPG",
+      "source_sha256": "b9383db5768b961942a038e6ad8fa04a08d2b6f26efdfdb17f3271b4b0e54a52"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "9e8109b31f1a206a1ea60616008a0d8220db4ce06e6dce884f8ee603f80f57e3",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.7896820306777954,
+          "error_per_pixel": 0.003723787813481193,
+          "object_mask_iou": 0.9511059371362048,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.1784486621618271,
+          "error_per_pixel": 0.05242154459823145,
+          "object_mask_iou": 0.7660054102795311,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_flame_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.003723787813481193,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 12,
+            "path_complexity_ratio": 2.0,
+            "path_count": 2,
+            "vector_element_count": 6
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9343,
+            "edge_alignment": 0.7897,
+            "pixel_similarity": 0.9963,
+            "semantic_score": 1.0,
+            "structure_score": 0.9511
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI frozen before runtime and description changes",
+      "commit": "fea318a81",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_flame_00": "b9383db5768b961942a038e6ad8fa04a08d2b6f26efdfdb17f3271b4b0e54a52"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 1,
+      "improved": 1,
+      "satisfactory": 1,
+      "technically_completed": 1
+    }
+  },
+  "schema_version": "flame_disk_recheck_v1",
+  "strict_pixel_gates": {
+    "anonymous_flame_00": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.7896820306777954,
+        "foreground_iou": 0.9636255217650567,
+        "foreground_mse": 0.005387891549617052,
+        "normalized_mse": 0.0037237880751490593
+      },
+      "satisfactory": true
+    }
+  }
+}

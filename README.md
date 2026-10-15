@@ -6,6 +6,12 @@ provides annotation/debugging helpers for the source raster files.
 Der [Projektstand vom 2026-10-10](docs/project_status_2026-10-10.md) beschreibt
 die vorhandene Batchfähigkeit und die weiterhin begrenzte Motivabdeckung.
 
+Als möglicher mittel- bis langfristiger Entwicklungszweig ist ein
+[vorgeschalteter ImageDetector](docs/image_detector_development_branch.md)
+dokumentiert: Grundformen und Masse erkennen und daraus bessere Ausgangsdaten
+für die SVG-Konvertierung ableiten. Umfang, Grenzen und Qualitätsnachweis sind
+beschrieben; Umsetzung und Termin sind noch offen.
+
 Für eine Konvertierung verwendet der Standardmodus genau zwei fachliche
 Quellen: **das zu konvertierende Rasterbild** und **seine sprachliche
 Beschreibung**. Bildbreite und -höhe werden direkt aus diesem Rasterbild
@@ -16,13 +22,13 @@ SVGs, Checkpoints oder andere Bilder werden im voreingestellten
 ## Main entry point
 
 Die [Erfolgsübersicht](artifacts/satisfactory_conversions/README.md) enthält
-252 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
+253 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
 `python -m tools.refresh_satisfactory_archive` wird sie aus den dokumentierten
 Abnahmen aktualisiert. `python -m tools.run_pytest_profile extended`
 aktualisiert die Sammlung einschließlich späterer erfolgreicher Batches,
 konvertiert alle Einträge erneut und prüft deren Qualität; Quellen und
 gespeicherte gute SVGs bleiben dabei erhalten. Details zur Sammlung und zur
-[neuen GE0300-Abnahme](docs/next_arbeitspaket_2026-10-14_ge0300.md).
+[neuen Flammen-Abnahme](docs/next_arbeitspaket_2026-10-14_b_heating1.md).
 
 Run the converter via:
 

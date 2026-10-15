@@ -29,17 +29,20 @@ Das folgende Paket `AC0713` sichert alle sechs Varianten mit oberem Griff,
 Strich und Punkt. `AC0721` sichert jetzt sechs Quadrat-/Untergriff-/T-Varianten
 durch beide regulären Gates und ein unabhängiges SVG mit zwei Seeds durch
 jeweils 17/17 strenge CLI-Prüfungen. Ein großer grauer JPG-IoU-Fall bleibt offen.
-Die separate Erfolgsübersicht enthält inzwischen 252 Bild-/SVG-Paare und wird
+Die separate Erfolgsübersicht enthält inzwischen 253 Bild-/SVG-Paare und wird
 im erweiterten Profil vollständig erneut konvertiert.
 Das Paket `GE9021` sichert alle 14 Bogen-/Verlaufsschaftvarianten
 und ein unabhängiges SVG mit 17/17 strengen CLI-Prüfungen.
 Das Paket `SE0081` aktiviert die vorhandene Quadrat-/Textregistrierung
 mit einer eigenständigen Beschreibung. Ziel und unabhängiger Holdout bestehen
 beide regulären Gates; die unabhängige CLI-Vorlage besteht reproduzierbar 17/17.
-Das neueste Paket `GE0300` ergänzt eine allgemeine Registrierung für Kreuz,
+Das Paket `GE0300` ergänzt eine allgemeine Registrierung für Kreuz,
 Rechteckfläche und Verlaufsscheibe. Ziel und zwei unabhängige CLI-Läufe mit
-jeweils 17/17 Fällen bestehen die unveränderten Gates. Der nächste reguläre
-Kandidat ist nach dem erneuerten Review `b_heating1`.
+jeweils 17/17 Fällen bestehen die unveränderten Gates. Das neueste Paket
+`b_heating1` registriert
+verschachtelte aufrechte Flammen auf einer Verlaufsscheibe. Ziel und zwei
+unabhängige CLI-Läufe mit jeweils 17/17 Fällen bestehen die unveränderten
+Gates. Der nächste reguläre Kandidat ist jetzt `AC0421_1_S`.
 Die geprüfte Batchfähigkeit und die weiterhin begrenzte Motivabdeckung sind in
 `project_status_2026-10-10.md` beschrieben. Eine frische Gesamtquote des
 autonomen Kataloglaufs ist noch nicht belegt.
@@ -58,3 +61,19 @@ in 171 Dateien, ohne externe Bibliotheken; zusätzlich 50.710 Zeilen Tests und
 15.224 Zeilen Werkzeuge. Gezählt sind auch Leerzeilen und Kommentare; externe Bibliotheken sind ausgeschlossen.
 Eine kleinere Zeilenzahl ist ein Fortschrittsmaß; Verständlichkeit, Wartbarkeit
 und erhaltene Qualität entscheiden über den Produktabschluss.
+
+## Möglicher Entwicklungszweig: ImageDetector
+
+Als mittel- bis langfristige Option ist ein vorgeschalteter
+[ImageDetector](image_detector_development_branch.md) vorgesehen. Er soll
+Grundformen erkennen, ihre Masse und Stilmerkmale aus dem Raster schätzen und
+dem Konverter über die gemeinsame Geometry-IR bessere Ausgangsdaten liefern.
+Erste Kandidaten sind Kreise/Ringe, Linien, Rechtecke und einfache Vielecke;
+Beziehungen und Überdeckungen, Bézierkurven sowie Text bilden spätere
+Ausbaustufen. Exakte Schriftarterkennung bleibt eine zusätzliche Option.
+
+Der Zweig knüpft an vorhandene Perception-First-Bausteine an. Sein Nutzen ist
+an unabhängigen Bildern durch Vergleiche mit und ohne Detector nachzuweisen.
+Er ist als mögliche Weiterentwicklung dokumentiert und ändert weder die
+bisherige Prioritätenfolge noch die nächste reguläre Aufgabe. Eine Umsetzung
+oder ein Termin ist damit noch nicht festgelegt.

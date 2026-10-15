@@ -31,6 +31,7 @@ from src.iCCModules.imageCompositeConverterRadialDisk import fit_radial_disk
 from src.iCCModules.imageCompositeConverterFilledSymbols import fit_disk_bar, fit_solid_arrow
 from src.iCCModules.imageCompositeConverterDiskArrow import fit_disk_arrow
 from src.iCCModules.imageCompositeConverterCrossPanelDisk import fit_cross_panel_disk
+from src.iCCModules.imageCompositeConverterFlameDisk import fit_flame_disk
 from src.iCCModules.imageCompositeConverterArcShaft import fit_arc_shaft
 from src.iCCModules.imageCompositeConverterCircleLinework import fit_circle_linework
 
@@ -1454,6 +1455,7 @@ def runNonCompositeIterationImpl(
             (fit_disk_bar, "non_composite_raster_disk_bar"),
             (fit_disk_arrow, "non_composite_raster_disk_arrow"),
             (fit_cross_panel_disk, "non_composite_raster_cross_panel_disk"),
+            (fit_flame_disk, "non_composite_raster_flame_disk"),
             (fit_solid_arrow, "non_composite_raster_solid_arrow"),
             (fit_alarm_bell, "non_composite_raster_alarm_bell"),
             (fit_zigzag_panel, "non_composite_raster_zigzag_panel"),
