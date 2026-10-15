@@ -2,6 +2,8 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [GE0306: drei waagerechte Streifen auf Verlaufsscheibe und getrenntes Werkzeug-Quelleninventar (2026-10-15)](next_arbeitspaket_2026-10-15_ge0306.md)
+
 - [AC0421: Kreis mit schrägen Linien und Spirale, neun CLI-Abnahmen und grauer IoU-Folgepunkt (2026-10-15)](next_arbeitspaket_2026-10-15_ac0421_1_s.md)
 
 - [ImageDetector als möglicher Entwicklungszweig: Grundformen, Masse, Ausbaustufen und Qualitätsnachweis (2026-10-14)](image_detector_development_branch.md)

@@ -1,0 +1,750 @@
+{
+  "artifact_retention": "debug",
+  "cases": [
+    {
+      "blocked_svg_reads": [],
+      "case_id": "original",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild.\n",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "36d8c2f8c57514c03b5aca93f02267e6e771fc32d992153866a6b7911a3f50fe",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9728333353996277,
+        "foreground_iou": 0.9965561773568661,
+        "foreground_mse": 0.00011339502816554159,
+        "normalized_mse": 7.453923899447545e-05
+      },
+      "output_sha256": "15384521d6716a11d851b312212c7e7fea8eff7936800e78a390445b0171636a",
+      "output_svg": "outputs/original.svg",
+      "reference_svg": "references/original.svg",
+      "reference_svg_sha256": "b667041f96b6311f6fb4e888062952b8a8a1264569924dc069bc7c7254d0145b",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.0,
+        "relative_y": 0.0,
+        "scale": 1.0
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_01",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und oben verschoben.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "bb3280756b4cfae45b0afc169d38e5f8801f79c897dbf2d8e67fbd5d0f572103",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.937159538269043,
+        "foreground_iou": 0.9982439024390244,
+        "foreground_mse": 0.0001397896558046341,
+        "normalized_mse": 9.112770931096748e-05
+      },
+      "output_sha256": "facf5353c4bac2c840764ee609d020e86176a2303d8140f4ea2a03e8fe4fd7ee",
+      "output_svg": "outputs/probe_01.svg",
+      "reference_svg": "references/probe_01.svg",
+      "reference_svg_sha256": "4a952dca436d574fdface19caf551a86dd929d949acfb2e53fddc910ab896589",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01507809,
+        "relative_y": -0.000951,
+        "scale": 1.04972112
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_02",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas gr\u00f6\u00dfer dargestellt und etwas nach rechts und unten versetzt.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "f986ca537e46ef0667d99f960e22b0cedbc8b386cee0e1983d3b6f5b69cd5d1c",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9398003220558167,
+        "foreground_iou": 0.9982332155477032,
+        "foreground_mse": 0.00012491142842918634,
+        "normalized_mse": 8.047118899412453e-05
+      },
+      "output_sha256": "633759266782b1bc3f918594a6c689c277000091a74d3486a80f89808c7eeebb",
+      "output_svg": "outputs/probe_02.svg",
+      "reference_svg": "references/probe_02.svg",
+      "reference_svg_sha256": "1b1f2f00c0b577be30e14f4130dbcd92d661ef798ae0564ec6ad993439968f45",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00362252,
+        "relative_y": 0.00945878,
+        "scale": 1.04652307
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_03",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und ein wenig nach rechts und oben versetzt.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "e6357b87ea94792ec5d4b83f301d5464883c1232856c53f82811fe920166b553",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8931114673614502,
+        "foreground_iou": 0.9990421455938697,
+        "foreground_mse": 0.00013267321628518403,
+        "normalized_mse": 8.606554911239073e-05
+      },
+      "output_sha256": "2b3f5ef7f452404da8fab98be60ca52ea9b967e0c49227ef09aef3659fb75bde",
+      "output_svg": "outputs/probe_03.svg",
+      "reference_svg": "references/probe_03.svg",
+      "reference_svg_sha256": "771af63b341a6f934e0c0fdb1ea36d5e2b6f666b8ddfdac03e296d1c6b4f5cea",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00258878,
+        "relative_y": -0.02193022,
+        "scale": 1.05865944
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_04",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringf\u00fcgig kleiner dargestellt und etwas nach links und unten verschoben.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "b446c388eb628501eb6d235ed8a64237c18cd187dfbe5f1349cd631d51c855e9",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9377702474594116,
+        "foreground_iou": 0.9954555782776642,
+        "foreground_mse": 0.00012200225319247693,
+        "normalized_mse": 7.418086897814646e-05
+      },
+      "output_sha256": "e87d8bd9cb5b3006a4791de8d86fcc16c63c733bdbf438371001f8bf7dbf5348",
+      "output_svg": "outputs/probe_04.svg",
+      "reference_svg": "references/probe_04.svg",
+      "reference_svg_sha256": "a859ca5aec2991fbdad48dd321680b031095611abcf83cb53f221ea9faf8e1d4",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.00545771,
+        "relative_y": 0.01738478,
+        "scale": 0.97240435
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_05",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht kleiner dargestellt und leicht nach links und unten versetzt.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "b75217666bc108a201923d5fdfe178c8cd41cb6da3ae6ee48bc4076e1c8b55d9",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9760994911193848,
+        "foreground_iou": 0.9953358208955224,
+        "foreground_mse": 0.00013401967589743435,
+        "normalized_mse": 7.790629024384543e-05
+      },
+      "output_sha256": "f2ca5603700f01bad28c6050a6bfcd8b9d761ef86214258d7209205edc5b835a",
+      "output_svg": "outputs/probe_05.svg",
+      "reference_svg": "references/probe_05.svg",
+      "reference_svg_sha256": "c0867298647753232ada83455a4868a417fd5e52841d50448e5b8ece4c4012ed",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02436128,
+        "relative_y": 0.00550481,
+        "scale": 0.95999902
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_06",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas gr\u00f6\u00dfer dargestellt und ein wenig nach rechts und unten versetzt.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "7d1a3b37d87678bf37d841228fe5b6c2a370266d20e17f08bef892f743e92ed3",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9241540431976318,
+        "foreground_iou": 0.9977564756271671,
+        "foreground_mse": 0.0001977222564164549,
+        "normalized_mse": 0.00012081949535058811
+      },
+      "output_sha256": "52206feee270983021ccb35655631d78271bb0bfc81307cc56be774d477efd69",
+      "output_svg": "outputs/probe_06.svg",
+      "reference_svg": "references/probe_06.svg",
+      "reference_svg_sha256": "2002efcf7a46df4489d1598042b7c540ad0967b9e6405b57d0f688877268ec96",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01793636,
+        "relative_y": 0.00167548,
+        "scale": 1.02657141
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_07",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig kleiner dargestellt und ein wenig nach rechts und unten versetzt.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "3a38d4240928b839340931de193ea107a4d5d1b9351f6e829d323f0a4e29cedb",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9547679424285889,
+        "foreground_iou": 0.9971296091852506,
+        "foreground_mse": 0.00011674320558086038,
+        "normalized_mse": 6.950199895072728e-05
+      },
+      "output_sha256": "dec9074859078487a5f4325cc353d23348e76d9315c4b0c3575b2e9aac9774cb",
+      "output_svg": "outputs/probe_07.svg",
+      "reference_svg": "references/probe_07.svg",
+      "reference_svg_sha256": "fe772003cd5b445862f071f8b0e5e90c203ff97f87e41ec56c8a133577cafb93",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.0213857,
+        "relative_y": 0.01079252,
+        "scale": 0.9855716
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_08",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Das Motiv ist leicht kleiner dargestellt und etwas nach rechts und oben verschoben.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "4fcd6831b9ac7adb0cb1ade67c5f2c591fb665c583fc3f7fc97235e7a1f3e11b",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.924646258354187,
+        "foreground_iou": 0.9939671814671814,
+        "foreground_mse": 0.00021767195721622556,
+        "normalized_mse": 0.0001210633636219427
+      },
+      "output_sha256": "7cdc3f1e17653afa4b92a3cc5df4da2eafa5cd1dc57e6afa4be1b4e751ffc31b",
+      "output_svg": "outputs/probe_08.svg",
+      "reference_svg": "references/probe_08.svg",
+      "reference_svg_sha256": "ad6a673bbeda165ad782dc629f3ee7207a25f1490fb438469506cfa6839fccad",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00070657,
+        "relative_y": -0.00738136,
+        "scale": 0.94394591
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_09",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und oben verschoben.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "320acb4a077377e56d18403574bca4e443e4dcaa5e6e8b44f158ce2802496ce9",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9582829475402832,
+        "foreground_iou": 0.9975470155355682,
+        "foreground_mse": 0.00017180951545014977,
+        "normalized_mse": 0.00010730679059633985
+      },
+      "output_sha256": "98db1a8bcc08548fad03e1a2cc066869d4231fca52cb07736366ee57d4fce5f7",
+      "output_svg": "outputs/probe_09.svg",
+      "reference_svg": "references/probe_09.svg",
+      "reference_svg_sha256": "5048d2e6aa81015d90ee6e61510f019feab396fc483885ff038036c5f460df24",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01023869,
+        "relative_y": -0.02304052,
+        "scale": 1.02697847
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_10",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten verschoben.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "bbea5df6aa599dbe142cfdcf1dd20bcf044888255173664f954bd006c7673b06",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9594837427139282,
+        "foreground_iou": 0.9939520333680918,
+        "foreground_mse": 0.0001533444010419771,
+        "normalized_mse": 9.732011676533148e-05
+      },
+      "output_sha256": "a58fdba688ccc3a1ea7851e5b58d68826b20cbc0bd825e913190f9a4be9281d3",
+      "output_svg": "outputs/probe_10.svg",
+      "reference_svg": "references/probe_10.svg",
+      "reference_svg_sha256": "9768e61cc209ee08a6a41fd09315178305cced550e178d824c157feca7e421d3",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.00285732,
+        "relative_y": 0.01711601,
+        "scale": 1.01526784
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_11",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Die Darstellung ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und etwas nach rechts und oben verschoben.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "e6f469b90fa52fab26007d82ffa05aa682c2a5d59a622af6779847559757a1bd",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9568395614624023,
+        "foreground_iou": 0.9984402417625268,
+        "foreground_mse": 0.00011633423127932474,
+        "normalized_mse": 7.701037975493819e-05
+      },
+      "output_sha256": "dc4efbe1519dbdf5f0ecd4289e8659a465ff2c58087105a9484d3fcfa2514491",
+      "output_svg": "outputs/probe_11.svg",
+      "reference_svg": "references/probe_11.svg",
+      "reference_svg_sha256": "078e47154b1797d24f5c1692666feefe5f0c0938ff43a6b2365e54d682f59c19",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02406451,
+        "relative_y": -0.02434303,
+        "scale": 1.04964316
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_12",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist ein wenig gr\u00f6\u00dfer dargestellt und leicht nach rechts und oben versetzt.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "fef7b42c61bcbdb1937b7b1f659e1ab5f62b1e51ea64084b388f97d6695ba8ff",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9513159990310669,
+        "foreground_iou": 0.9991518235793045,
+        "foreground_mse": 0.00013082439545542002,
+        "normalized_mse": 7.752242527203634e-05
+      },
+      "output_sha256": "85af7b10607d809f6cd61872dd42c8488d1ec94113f6fa59e5cc363f903ebd82",
+      "output_svg": "outputs/probe_12.svg",
+      "reference_svg": "references/probe_12.svg",
+      "reference_svg_sha256": "47a76e6b10b7a49f66058ac321edd359a5c2de7753b2da09ac2aaa8ef1774adc",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.021687,
+        "relative_y": -0.0193618,
+        "scale": 1.00677302
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_13",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist etwas kleiner dargestellt und geringf\u00fcgig nach rechts und oben verschoben.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "78950c678396b7b8178208248329836d169756a60a59ed924e8f9f75b4cc8d9d",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9195383191108704,
+        "foreground_iou": 0.9950059453032105,
+        "foreground_mse": 0.0001214728326885961,
+        "normalized_mse": 7.291710790013894e-05
+      },
+      "output_sha256": "ae7471392479ce85f284a1debd9b3e432bb8adaee988911861a7b2c45840b06f",
+      "output_svg": "outputs/probe_13.svg",
+      "reference_svg": "references/probe_13.svg",
+      "reference_svg_sha256": "88be2195e2acc93a458b14c68802c2698b6e33eb79bf68a510fcab16edbd0fe9",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02401478,
+        "relative_y": -0.02032168,
+        "scale": 0.95033969
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_14",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringf\u00fcgig kleiner dargestellt und ein wenig nach links und oben verschoben.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "4a5e5742ad28233c642a72df19b217fa9c7ec29b44de388734b0132396a64d7e",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9136948585510254,
+        "foreground_iou": 0.9971213463241807,
+        "foreground_mse": 0.00021101896709296852,
+        "normalized_mse": 0.00012048549251630902
+      },
+      "output_sha256": "e64191cf8d375480328044cdcee2add4529fc3936a789f2eaf68919239f4e205",
+      "output_svg": "outputs/probe_14.svg",
+      "reference_svg": "references/probe_14.svg",
+      "reference_svg_sha256": "9b6b31182c8561f109c6c0f064ffe0b4777bb581cb7fb1a522e9dd4ab3973c1b",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01917929,
+        "relative_y": -0.0209018,
+        "scale": 0.98471941
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_15",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Die Darstellung ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach rechts und oben verschoben.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "fb4769c3a022c17404696a3c27e02397e6d77390004310c39ebcae6779d21704",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.954537570476532,
+        "foreground_iou": 0.9982307843522705,
+        "foreground_mse": 0.00013969615974929184,
+        "normalized_mse": 8.900067768990993e-05
+      },
+      "output_sha256": "fde86512b0747ac38316251f68efb227982ce792bcb6bb692d945a2fbbe437bd",
+      "output_svg": "outputs/probe_15.svg",
+      "reference_svg": "references/probe_15.svg",
+      "reference_svg_sha256": "ec069cfabd96f3182703e92a689ce99016a46d090c13c6c779d2fc263197166b",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00525708,
+        "relative_y": -0.00884798,
+        "scale": 1.04502319
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_16",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "failures": [],
+      "height": 90,
+      "input_sha256": "cb6ff21ccd55413dce9ff389ff160083573595e1e0eda933c5681aa62b6aa7b5",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9512910842895508,
+        "foreground_iou": 0.9982758620689656,
+        "foreground_mse": 0.00015109818195924163,
+        "normalized_mse": 9.935281559592113e-05
+      },
+      "output_sha256": "b4d924721a2e316f08aaab80022a31048b771820525b0e75ce97e79bc6d88b6c",
+      "output_svg": "outputs/probe_16.svg",
+      "reference_svg": "references/probe_16.svg",
+      "reference_svg_sha256": "f820476e09a573ae1f70ba4fcf4aadf95d4ebd4c3aa688aba9027e02f64e5a63",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0082423,
+        "relative_y": 0.00848975,
+        "scale": 1.059177
+      },
+      "width": 96
+    }
+  ],
+  "iterations": 64,
+  "limits": {
+    "max_foreground_mse": 0.04,
+    "max_normalized_mse": 0.01,
+    "max_path_commands": 160,
+    "max_svg_elements": 80,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85
+  },
+  "original_satisfactory": true,
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261015,
+  "selection": {
+    "mode": "explicit",
+    "source_svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\striped_panel_disk_recheck_v1\\independent.svg"
+  },
+  "source_description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben violett, mittig cremefarben, unten gr\u00fcn. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild.\n",
+  "source_description_sha256": "1f07f515d02d7bf96d8c39006fc058386ed1b7233ddff4641563b4f077f4dfcf",
+  "source_image": "source.png",
+  "source_image_sha256": "36d8c2f8c57514c03b5aca93f02267e6e771fc32d992153866a6b7911a3f50fe",
+  "source_svg_sha256": "0bca0da6f5d47b9124afe3f8e20e7bff4a5347c409dc35238c64c9bbe0d0e9c1",
+  "status": "completed",
+  "summary": {
+    "completed": 17,
+    "failed": 0,
+    "passed": 17,
+    "required": 17,
+    "satisfactory": true
+  },
+  "timeout_seconds": 60,
+  "variations_started": true
+}
