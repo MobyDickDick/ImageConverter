@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-15)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `447` · Erledigt `417` · Offen `30`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `449` · Erledigt `418` · Offen `31`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,10 +20,20 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-15)
 
+- [x] **GE0306 – drei waagerechte Streifen auf Verlaufsscheibe:** eigenständige Beschreibung für das tatsächliche Flaggenbild und allgemeine Rasterregistrierung; beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-15_ge0306.md`.
+- [ ] **GE0306-TOOLS-SOURCE:** Die im ursprünglichen Eintrag zugeordneten Bilder `GE0306_{L,M,S}` zeigen gekreuzte Werkzeuge und Tropfen auf Verlaufsscheiben. Quellen-/Beschreibungszuordnung eigenständig aufarbeiten und diese Topologie separat abnehmen; sie sind keine Flaggen-Holdouts. Ursprüngliche Beschreibungen, Rasterhashes und Abmessungen: `artifacts/evaluation/striped_panel_disk_recheck_v1/source_inventory.json`. Quellen und Grenzen erhalten.
+
+**Neuester Abschluss:** `GE0306.jpg` auf `codex/ge0306-quality-2026-10-15`.
+Frische neutrale Zielmetrik `10398.578125 → 776.863281`; finale Ausgabe
+im vollständigen Katalogkontext bytegleich. 263 Paare in der Erfolgsübersicht;
+alle 262 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
+`GE0346`, `AC0850_L`, `GE0017`, `GE0001_L`, `GE9031_6M`.
+Ausschließlich das tatsächliche Flaggenbild ist zusätzlich ausgeschlossen.
+
 - [x] **AC0421 – Kreis mit zwei schrägen Linien und Spirale:** eigenständige Beschreibungen und allgemeine logarithmische Spiralregistrierung; alle neun Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression. Die sechs farbigen JPGs bestehen zusätzlich die strengeren Pixelgrenzen; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-15_ac0421_1_s.md`.
 - [ ] **AC0421-PB-GREY:** die drei grauen JPGs `AC0421_{L,M,S}` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.649231..0.721198 < 0.85`). Beide regulären Gates bestehen bereits. Die annähernd einfarbige Fläche liegt an der unveränderten Vordergrundschwelle; JPEG-Abweichungen und Vektorregistrierung eigenständig untersuchen. Quellen, akzeptierte SVGs und Grenzen erhalten.
 
-**Neuester Abschluss:** `AC0421_1_S` und acht Farb-/Größen-Holdouts auf
+**Vorheriger Abschluss:** `AC0421_1_S` und acht Farb-/Größen-Holdouts auf
 `codex/ac0421-quality-2026-10-15`. Frische neutrale Zielmetrik
 `6915.564941 → 281.067505`; alle neun finalen SVGs sind im vollständigen
 Katalogkontext bytegleich. 262 Paare in der Erfolgsübersicht; alle 253 bisherigen

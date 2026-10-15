@@ -1,0 +1,24 @@
+{
+  "schema_version": "striped_panel_disk_recheck_manifest_v1",
+  "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben rot, mittig hell, unten blau. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild.",
+  "baseline_description": "Hintergrund: GE0999: Niederl\u00e4ndische Flagge",
+  "provenance": {
+    "commit": "0f71005f2",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "fresh original-description CLI frozen before runtime and description changes",
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_stripes_00",
+      "source": "GE0306.jpg",
+      "image": "../../images_to_convert/GE0306.jpg",
+      "source_sha256": "4e82ee60c6f11620f5e91a5170019f17ce5ddbfb42d7af6e217d3a7c6dbb7f84",
+      "role": "target",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben rot, mittig hell, unten blau. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_stripes_00.svg",
+      "after_svg": "after/anonymous_stripes_00.svg"
+    }
+  ]
+}

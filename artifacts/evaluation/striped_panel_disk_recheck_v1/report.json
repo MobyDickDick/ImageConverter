@@ -1,0 +1,207 @@
+{
+  "baseline": {
+    "baseline_sha256": "8166e9a4cbca9cacbffae783c8ca77bace668e5f4c80aea2d379ac33afecd6cd",
+    "cases": {
+      "anonymous_stripes_00": {
+        "dimensions": {
+          "height": 75,
+          "width": 75
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.35402143001556396,
+          "error_per_pixel": 0.05330553953607587,
+          "object_mask_iou": 0.8425971470732907,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI frozen before runtime and description changes",
+      "commit": "0f71005f2",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_stripes_00": "4e82ee60c6f11620f5e91a5170019f17ce5ddbfb42d7af6e217d3a7c6dbb7f84"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 776.86328125,
+      "after_svg": "after/anonymous_stripes_00.svg",
+      "after_svg_sha256": "89d372990933c967d588578c2447f58e44f0d98a5951768516104b3d66110584",
+      "before_mean_delta2": 10398.578125,
+      "before_svg": "before/anonymous_stripes_00.svg",
+      "before_svg_sha256": "7075179030a64e457bf15871b849650de5d7d9085789017bc1201ef0aa2177f1",
+      "case_id": "anonymous_stripes_00",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben rot, mittig hell, unten blau. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE0306.jpg",
+      "input_sha256": "4e82ee60c6f11620f5e91a5170019f17ce5ddbfb42d7af6e217d3a7c6dbb7f84",
+      "role": "target",
+      "source": "GE0306.jpg",
+      "source_sha256": "4e82ee60c6f11620f5e91a5170019f17ce5ddbfb42d7af6e217d3a7c6dbb7f84"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "8166e9a4cbca9cacbffae783c8ca77bace668e5f4c80aea2d379ac33afecd6cd",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.829512894153595,
+          "error_per_pixel": 0.003982382577213892,
+          "object_mask_iou": 0.988388969521045,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.35402143001556396,
+          "error_per_pixel": 0.05330553953607587,
+          "object_mask_iou": 0.8425971470732907,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_stripes_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.003982382577213892,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 5
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9535,
+            "edge_alignment": 0.8295,
+            "pixel_similarity": 0.996,
+            "semantic_score": 1.0,
+            "structure_score": 0.9884
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI frozen before runtime and description changes",
+      "commit": "0f71005f2",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_stripes_00": "4e82ee60c6f11620f5e91a5170019f17ce5ddbfb42d7af6e217d3a7c6dbb7f84"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 1,
+      "improved": 1,
+      "satisfactory": 1,
+      "technically_completed": 1
+    }
+  },
+  "schema_version": "striped_panel_disk_recheck_v1",
+  "strict_pixel_gates": {
+    "anonymous_stripes_00": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.829512894153595,
+        "foreground_iou": 0.9729431253451132,
+        "foreground_mse": 0.0058301957324147224,
+        "normalized_mse": 0.003982382360845804
+      },
+      "satisfactory": true
+    }
+  }
+}
