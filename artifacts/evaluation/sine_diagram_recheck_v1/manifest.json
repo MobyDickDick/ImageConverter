@@ -1,0 +1,43 @@
+{
+  "description": "Ein Achsendiagramm auf wei\u00dfem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Dar\u00fcber verl\u00e4uft eine d\u00fcnne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenl\u00e4nge, Strichbreiten und Farben ergeben sich aus dem Bild.",
+  "baseline_description": "Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben",
+  "provenance": {
+    "commit": "8a82f90e430cf859b602f25385eaeaa72e88dead",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "fresh original-description CLI frozen before runtime changes",
+    "toolchain": "repository virtualenv: NumPy, OpenCV, PyMuPDF"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_wave_00",
+      "source": "GE1411_L.jpg",
+      "image": "../../images_to_convert/GE1411_L.jpg",
+      "source_sha256": "4e32964707e8efbd8ad5a7204fdcfdd37bd9e2d2e84ae738d0d57c7001f34ffa",
+      "role": "target",
+      "description": "Ein Achsendiagramm auf wei\u00dfem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Dar\u00fcber verl\u00e4uft eine d\u00fcnne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenl\u00e4nge, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_wave_00.svg",
+      "after_svg": "after/anonymous_wave_00.svg"
+    },
+    {
+      "case_id": "anonymous_wave_01",
+      "source": "GE1411_M.jpg",
+      "image": "../../images_to_convert/GE1411_M.jpg",
+      "source_sha256": "dfc8ca625b15549f8943ffcaf849944a12a0383f44a5cf00d909eae186ce445c",
+      "role": "size holdout",
+      "description": "Ein Achsendiagramm auf wei\u00dfem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Dar\u00fcber verl\u00e4uft eine d\u00fcnne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenl\u00e4nge, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_wave_01.svg",
+      "after_svg": "after/anonymous_wave_01.svg"
+    },
+    {
+      "case_id": "anonymous_wave_02",
+      "source": "GE1411_S.jpg",
+      "image": "../../images_to_convert/GE1411_S.jpg",
+      "source_sha256": "420ae5a1de75d5112698f9ed00a334ad3c825b4669efb2e62ea0caa0e9149072",
+      "role": "size holdout",
+      "description": "Ein Achsendiagramm auf wei\u00dfem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Dar\u00fcber verl\u00e4uft eine d\u00fcnne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenl\u00e4nge, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_wave_02.svg",
+      "after_svg": "after/anonymous_wave_02.svg"
+    }
+  ]
+}

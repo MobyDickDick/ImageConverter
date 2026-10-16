@@ -2,7 +2,15 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-16, nach GE9034-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-16, nach GE1411-Abnahme)
+
+GE1411 besteht nach eigenständiger Beschreibung und allgemeiner Registrierung
+rechtwinkliger Achsen und einer analytischen Sinuskurve beide regulären und
+strengeren Pixelgates ohne Pflichtmetrikregression. Alle drei Größen sind
+abgenommen; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Die Rotation
+erhält alle bisherigen Ausschlüsse und ergänzt nur diese drei Varianten.
+Details: `docs/next_arbeitspaket_2026-10-16_ge1411_l.md`.
+Reproduzierbarer Review: `artifacts/evaluation/sine_diagram_recheck_v1/review_args.json`.
 
 GE9034 besteht nach eigenständiger Beschreibung und allgemeiner
 Richtungsnormalisierung der T-Registrierung beide regulären und strengeren
@@ -185,11 +193,11 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `GE1411_L` – `mean_delta2=9671.516602`, `normalized_mse=0.049578`.
-2. `GE0305` – `mean_delta2=9653.836914`, `normalized_mse=0.049488`.
-3. `GE9032_6M` – `mean_delta2=9524.675781`, `normalized_mse=0.048826`.
-4. `AC0414_2_L` – `mean_delta2=9496.175781`, `normalized_mse=0.048680`.
-5. `GE9033_6M` – `mean_delta2=9439.891602`, `normalized_mse=0.048391`.
+1. `GE0305` – `mean_delta2=9653.836914`, `normalized_mse=0.049488`.
+2. `GE9032_6M` – `mean_delta2=9524.675781`, `normalized_mse=0.048826`.
+3. `AC0414_2_L` – `mean_delta2=9496.175781`, `normalized_mse=0.048680`.
+4. `GE9033_6M` – `mean_delta2=9439.891602`, `normalized_mse=0.048391`.
+5. `AC0424_2_M` – `mean_delta2=9402.916992`, `normalized_mse=0.048202`.
 
 `SE0081` besteht nach eigenständiger Beschreibung beide regulären und strengeren
 Pixelgates ohne Pflichtmetrikregression. Die vorhandene Runtime bleibt unverändert.
