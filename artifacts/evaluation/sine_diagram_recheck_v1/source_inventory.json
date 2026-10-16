@@ -1,0 +1,61 @@
+{
+  "original_description": "Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben",
+  "images": [
+    {
+      "source": "GE1411_L.jpg",
+      "sha256": "4e32964707e8efbd8ad5a7204fdcfdd37bd9e2d2e84ae738d0d57c7001f34ffa",
+      "dimensions": [
+        25,
+        25
+      ]
+    },
+    {
+      "source": "GE1411_M.jpg",
+      "sha256": "dfc8ca625b15549f8943ffcaf849944a12a0383f44a5cf00d909eae186ce445c",
+      "dimensions": [
+        20,
+        20
+      ]
+    },
+    {
+      "source": "GE1411_S.jpg",
+      "sha256": "420ae5a1de75d5112698f9ed00a334ad3c825b4669efb2e62ea0caa0e9149072",
+      "dimensions": [
+        15,
+        15
+      ]
+    }
+  ],
+  "related_sources_not_holdouts": [
+    {
+      "source": "GE1410_L.jpg",
+      "sha256": "15ea8d6a5ee227c9da49218cb64a24ba28e836f943fce94d14a95b290431d6ee",
+      "dimensions": [
+        25,
+        25
+      ],
+      "reason": "Two opposing filled triangles on axes; not a sinusoid.",
+      "original_description": "Diagrammlinie (x-/y-Achse schwarz), graue horizontale Linie, zwei Dreiecke, welche sich in einer Spitze zusammen mit der grauen treffen. Oberes Dreieck ist rot, unteres Dreieck ist blau."
+    },
+    {
+      "source": "GE1410_M.jpg",
+      "sha256": "cde188b88b0352b0019cc9332089eed5e9c3db06a931d2de43d3ce7e77e9e765",
+      "dimensions": [
+        20,
+        20
+      ],
+      "reason": "Two opposing filled triangles on axes; not a sinusoid.",
+      "original_description": "Diagrammlinie (x-/y-Achse schwarz), graue horizontale Linie, zwei Dreiecke, welche sich in einer Spitze zusammen mit der grauen treffen. Oberes Dreieck ist rot, unteres Dreieck ist blau."
+    },
+    {
+      "source": "GE1410_S.jpg",
+      "sha256": "3de6d5da463f9a071295f7c1512f0770622edd4a0469feec0e46315c852818b5",
+      "dimensions": [
+        15,
+        15
+      ],
+      "reason": "Two opposing filled triangles on axes; not a sinusoid.",
+      "original_description": "Diagrammlinie (x-/y-Achse schwarz), graue horizontale Linie, zwei Dreiecke, welche sich in einer Spitze zusammen mit der grauen treffen. Oberes Dreieck ist rot, unteres Dreieck ist blau."
+    }
+  ]
+}

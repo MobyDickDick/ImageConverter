@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-16)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `455` · Erledigt `424` · Offen `31`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `456` · Erledigt `425` · Offen `31`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,9 +20,19 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-16)
 
+- [x] **GE1411 – Achsendiagramm mit Sinuskurve:** eigenständige Beschreibungen und allgemeine Rasterregistrierung für rechtwinklige Achsen und analytische Sinuskurve. L/M/S bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-16_ge1411_l.md`.
+
+**Neuester Abschluss:** `GE1411_L` und beide Größen-Holdouts auf
+`codex/ge1411-quality-2026-10-16`. Frische neutrale Zielmetrik
+`8597.085938 → 61.729599`; finale SVGs im vollständigen Katalogkontext
+bytegleich. 305 Paare in der Erfolgsübersicht; alle 302 bisherigen
+Indexeinträge unverändert. Nächste reguläre Rotation: `GE0305`, `GE9032_6M`,
+`AC0414_2_L`, `GE9033_6M`, `AC0424_2_M`. Ausschließlich die drei abgenommenen
+GE1411-Größen sind zusätzlich ausgeschlossen. Bestehende offene Aufgaben bleiben erhalten.
+
 - [x] **GE9034 – seitliche T-Verzweigung mit Farbverlauf:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; alle 14 Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-16_ge9034_6m.md`.
 
-**Neuester Abschluss:** `GE9034_6M` und 13 Farb-/Größen-Holdouts auf
+**Vorheriger Abschluss:** `GE9034_6M` und 13 Farb-/Größen-Holdouts auf
 `codex/ge9034-quality-2026-10-16`. Frische neutrale Zielmetrik
 `9454.780273 → 83.588753`; finale SVGs im vollständigen Katalogkontext
 bytegleich. 302 Paare in der Erfolgsübersicht; alle 288 bisherigen

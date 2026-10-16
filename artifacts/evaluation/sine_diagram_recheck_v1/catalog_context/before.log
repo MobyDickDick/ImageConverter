@@ -1,0 +1,76 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere GE1411_L.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE1411_L.jpg ---
+Bildbeschreibung: Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE1411_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.615385, localized_error_fraction=0.765792).
+[INFO] Konvertiert GE1411_L.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_L | Qualität: Optimierungsfehler/Pixel=0.035709, Mean-Delta²=8597.085938, RGB-RMSE/Kanal=53.532189, Raumscore=25294.448379, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere GE1411_M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE1411_M.jpg ---
+Bildbeschreibung: Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] GE1411_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.740000, localized_error_fraction=0.941120).
+[INFO] Konvertiert GE1411_M.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_M | Qualität: Optimierungsfehler/Pixel=0.050092, Mean-Delta²=8340.669922, RGB-RMSE/Kanal=52.727823, Raumscore=29615.323153, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere GE1411_S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE1411_S.jpg ---
+Bildbeschreibung: Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] GE1411_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.854545, localized_error_fraction=0.945564).
+[INFO] Konvertiert GE1411_S.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_S | Qualität: Optimierungsfehler/Pixel=0.076201, Mean-Delta²=4610.351074, RGB-RMSE/Kanal=39.201833, Raumscore=17607.766232, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere GE1411_S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE1411_S.jpg ---
+Bildbeschreibung: Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] GE1411_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.854545, localized_error_fraction=0.945564).
+[INFO] Konvertiert GE1411_S.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_S | Qualität: Optimierungsfehler/Pixel=0.076201, Mean-Delta²=4610.351074, RGB-RMSE/Kanal=39.201833, Raumscore=17607.766232, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere GE1411_M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE1411_M.jpg ---
+Bildbeschreibung: Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] GE1411_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.740000, localized_error_fraction=0.941120).
+[INFO] Konvertiert GE1411_M.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_M | Qualität: Optimierungsfehler/Pixel=0.050092, Mean-Delta²=8340.669922, RGB-RMSE/Kanal=52.727823, Raumscore=29615.323153, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere GE1411_L.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE1411_L.jpg ---
+Bildbeschreibung: Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE1411_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.615385, localized_error_fraction=0.765792).
+[INFO] Konvertiert GE1411_L.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_L | Qualität: Optimierungsfehler/Pixel=0.035709, Mean-Delta²=8597.085938, RGB-RMSE/Kanal=53.532189, Raumscore=25294.448379, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere GE1411_S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE1411_S.jpg ---
+Bildbeschreibung: Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] GE1411_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.854545, localized_error_fraction=0.945564).
+[INFO] Konvertiert GE1411_S.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_S | Qualität: Optimierungsfehler/Pixel=0.076201, Mean-Delta²=4610.351074, RGB-RMSE/Kanal=39.201833, Raumscore=17607.766232, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.0s
+[INFO] Konvertiere GE1411_M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE1411_M.jpg ---
+Bildbeschreibung: Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende gerahmtes Farbuebergang-Panel aus Rasterfarben.
+[WARN] GE1411_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.740000, localized_error_fraction=0.941120).
+[INFO] Konvertiert GE1411_M.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_M | Qualität: Optimierungsfehler/Pixel=0.050092, Mean-Delta²=8340.669922, RGB-RMSE/Kanal=52.727823, Raumscore=29615.323153, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Konvertiere GE1411_L.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE1411_L.jpg ---
+Bildbeschreibung: Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE1411_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.615385, localized_error_fraction=0.765792).
+[INFO] Konvertiert GE1411_L.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_L | Qualität: Optimierungsfehler/Pixel=0.035709, Mean-Delta²=8597.085938, RGB-RMSE/Kanal=53.532189, Raumscore=25294.448379, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\wc2\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\wc2\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\wc2\before

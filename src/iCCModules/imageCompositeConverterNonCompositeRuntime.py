@@ -25,6 +25,7 @@ from src.iCCModules.imageCompositeConverterTriangleStem import fit_triangle_stem
 from src.iCCModules.imageCompositeConverterDotPanel import fit_dot_panel
 from src.iCCModules.imageCompositeConverterGradientArrow import fit_gradient_arrow
 from src.iCCModules.imageCompositeConverterStepDiagram import fit_step_diagram
+from src.iCCModules.imageCompositeConverterSineDiagram import fit_sine_diagram
 from src.iCCModules.imageCompositeConverterChevronPanel import fit_chevron_panel
 from src.iCCModules.imageCompositeConverterThreeWayValve import fit_three_way_valve
 from src.iCCModules.imageCompositeConverterRadialDisk import fit_radial_disk
@@ -1476,6 +1477,7 @@ def runNonCompositeIterationImpl(
             (fit_chevron_panel, "non_composite_raster_chevron_panel"),
             (fit_gradient_arrow, "non_composite_raster_gradient_arrow"),
             (fit_step_diagram, "non_composite_raster_step_diagram"),
+            (fit_sine_diagram, "non_composite_raster_sine_diagram"),
             (fit_radial_disk, "non_composite_raster_radial_disk"),
         ):
             fitted = fit_fn(
