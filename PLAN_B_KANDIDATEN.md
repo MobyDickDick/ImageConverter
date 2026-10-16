@@ -2,7 +2,25 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-15, nach GE0017-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-16, nach GE9031-Abnahme)
+
+GE9031 besteht nach eigenständiger Beschreibung und allgemeiner Registrierung
+der T-Verzweigung mit zwei nativen Farbverläufen beide regulären und strengeren
+Pixelgates ohne Pflichtmetrikregression (`GE9031_6M: mean_delta2=95.981873`).
+Alle 14 Farb-/Größenvarianten sind abgenommen. Bisherige Ausschlüsse bleiben
+erhalten; ausschließlich diese 14 Varianten kommen hinzu. Details:
+`docs/next_arbeitspaket_2026-10-16_ge9031_6m.md`.
+Reproduzierbarer Review: `artifacts/evaluation/gradient_junction_recheck_v1/review_args.json`.
+
+GE0001 besteht nach eigenständiger Beschreibung und allgemeiner Registrierung
+von Verlaufsscheibe, gerundetem Warndreieck und Ausrufezeichen beide regulären
+und strengeren Pixelgates ohne Regression (`GE0001_L: mean_delta2=278.354492`).
+Alle sechs roten und blauen Größenvarianten sind abgenommen. Zwei unabhängige
+CLI-Läufe bestehen jeweils 17/17; die Archivprüfung besteht mit 274/274.
+Die Rotation
+erhält sämtliche Ausschlüsse und ergänzt nur diese sechs Varianten. Details:
+`docs/next_arbeitspaket_2026-10-15_ge0001_l.md`.
+Reproduzierbarer Review: `artifacts/evaluation/warning_disk_recheck_v1/review_args.json`.
 
 GE0017 besteht nach eigenständiger Beschreibung und allgemeiner Registrierung
 von Kreisscheibe und zwei gerundeten diagonalen Kreuzstrichen beide regulären
@@ -158,11 +176,11 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `GE0001_L` – `mean_delta2=10014.325195`, `normalized_mse=0.051336`.
-2. `GE9031_6M` – `mean_delta2=9680.807617`, `normalized_mse=0.049626`.
-3. `GE9034_6M` – `mean_delta2=9680.297852`, `normalized_mse=0.049623`.
-4. `GE1411_L` – `mean_delta2=9671.516602`, `normalized_mse=0.049578`.
-5. `GE0305` – `mean_delta2=9653.836914`, `normalized_mse=0.049488`.
+1. `GE9034_6M` – `mean_delta2=9680.297852`, `normalized_mse=0.049623`.
+2. `GE1411_L` – `mean_delta2=9671.516602`, `normalized_mse=0.049578`.
+3. `GE0305` – `mean_delta2=9653.836914`, `normalized_mse=0.049488`.
+4. `GE9032_6M` – `mean_delta2=9524.675781`, `normalized_mse=0.048826`.
+5. `AC0414_2_L` – `mean_delta2=9496.175781`, `normalized_mse=0.048680`.
 
 `SE0081` besteht nach eigenständiger Beschreibung beide regulären und strengeren
 Pixelgates ohne Pflichtmetrikregression. Die vorhandene Runtime bleibt unverändert.

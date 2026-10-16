@@ -10,10 +10,12 @@ def _hex(bgr):
 
 
 def _register(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
-              *, preserve_initial_error=False, loss_fn=None):
+              *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None):
     """Bounded coordinate descent; optionally retain the best admissible iterate.
 
     A custom search loss does not override the caller's initial error bound.
+    A caller that refines the seed before search may supply the measured error
+    of its original rendered seed as ``initial_error_bound``.
     Contours and reference vectors are never emitted.
     """
     height, width = image.shape[:2]
@@ -37,7 +39,9 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
     best = measure(parameters)
     if best is None:
         return None
-    initial_error = best[1]
+    initial_error = best[1] if initial_error_bound is None else float(initial_error_bound)
+    if not np.isfinite(initial_error) or initial_error < 0:
+        return None
     accepted = (parameters.copy(), best)
     for step in (1., .5, .25, .125):
         for _ in range(2):

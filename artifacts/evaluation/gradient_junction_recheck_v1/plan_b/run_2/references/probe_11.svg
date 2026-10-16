@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="96" viewBox="0 0 128 96">
+<defs>
+<linearGradient id="h" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1="48" y2="64"><stop offset="0" stop-color="#694080" /><stop offset="0.5" stop-color="#eee5f1" /><stop offset="1" stop-color="#694080" /></linearGradient>
+<linearGradient id="v" gradientUnits="userSpaceOnUse" x1="47" x2="61" y1="0" y2="0"><stop offset="0" stop-color="#694080" /><stop offset="0.5" stop-color="#eee5f1" /><stop offset="1" stop-color="#694080" /></linearGradient>
+</defs>
+<g transform="translate(-1.21738112 -1.20729792) translate(64.00000000 48.00000000) scale(1.02520344) translate(-64.00000000 -48.00000000)"><rect width="128" height="96" fill="#ffffff" />
+<rect x="12" y="48" width="104" height="16" fill="url(#h)" />
+<polygon points="47,12 61,12 61,48 54,56 47,48" fill="url(#v)" />
+</g></svg>

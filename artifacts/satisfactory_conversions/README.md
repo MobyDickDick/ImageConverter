@@ -1,6 +1,6 @@
 # Zufriedenstellende Konvertierungen
 
-268 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
+288 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
 
 Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bild und Beschreibung.
 
@@ -143,6 +143,12 @@ Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bi
 | [AC1000_S](images/AC1000_S.jpg) | [SVG](svgs/AC1000_S.svg) | 496.119995 | semantic-only |
 | [DLG0010](images/DLG0010.jpg) | [SVG](svgs/DLG0010.svg) | 48.554668 | semantic-only |
 | [DLG0010_1](images/DLG0010_1.jpg) | [SVG](svgs/DLG0010_1.svg) | 468.700897 | semantic-only |
+| [GE0001_1_L](images/GE0001_1_L.jpg) | [SVG](svgs/GE0001_1_L.svg) | 356.290802 | semantic-only |
+| [GE0001_1_M](images/GE0001_1_M.jpg) | [SVG](svgs/GE0001_1_M.svg) | 284.183899 | semantic-only |
+| [GE0001_1_S](images/GE0001_1_S.jpg) | [SVG](svgs/GE0001_1_S.svg) | 251.509598 | semantic-only |
+| [GE0001_L](images/GE0001_L.jpg) | [SVG](svgs/GE0001_L.svg) | 278.354492 | semantic-only |
+| [GE0001_M](images/GE0001_M.jpg) | [SVG](svgs/GE0001_M.svg) | 252.756393 | semantic-only |
+| [GE0001_S](images/GE0001_S.jpg) | [SVG](svgs/GE0001_S.svg) | 267.593597 | semantic-only |
 | [GE0017](images/GE0017.jpg) | [SVG](svgs/GE0017.svg) | 490.495758 | semantic-only |
 | [GE0022](images/GE0022.jpg) | [SVG](svgs/GE0022.svg) | 198.207550 | semantic-only |
 | [GE0039_L](images/GE0039_L.jpg) | [SVG](svgs/GE0039_L.svg) | 132.414291 | semantic-only |
@@ -272,5 +278,19 @@ Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bi
 | [GE9024_6S](images/GE9024_6S.jpg) | [SVG](svgs/GE9024_6S.svg) | 220.669998 | semantic-only |
 | [GE9024_7M](images/GE9024_7M.jpg) | [SVG](svgs/GE9024_7M.svg) | 137.990829 | semantic-only |
 | [GE9024_7S](images/GE9024_7S.jpg) | [SVG](svgs/GE9024_7S.svg) | 104.816666 | semantic-only |
+| [GE9031_1M](images/GE9031_1M.jpg) | [SVG](svgs/GE9031_1M.svg) | 203.117493 | semantic-only |
+| [GE9031_1S](images/GE9031_1S.jpg) | [SVG](svgs/GE9031_1S.svg) | 94.805000 | semantic-only |
+| [GE9031_2M](images/GE9031_2M.jpg) | [SVG](svgs/GE9031_2M.svg) | 181.582504 | semantic-only |
+| [GE9031_2S](images/GE9031_2S.jpg) | [SVG](svgs/GE9031_2S.svg) | 83.360001 | semantic-only |
+| [GE9031_3M](images/GE9031_3M.jpg) | [SVG](svgs/GE9031_3M.svg) | 147.888123 | semantic-only |
+| [GE9031_3S](images/GE9031_3S.jpg) | [SVG](svgs/GE9031_3S.svg) | 60.247501 | semantic-only |
+| [GE9031_4M](images/GE9031_4M.jpg) | [SVG](svgs/GE9031_4M.svg) | 70.435623 | semantic-only |
+| [GE9031_4S](images/GE9031_4S.jpg) | [SVG](svgs/GE9031_4S.svg) | 33.157501 | semantic-only |
+| [GE9031_5M](images/GE9031_5M.jpg) | [SVG](svgs/GE9031_5M.svg) | 59.883125 | semantic-only |
+| [GE9031_5S](images/GE9031_5S.jpg) | [SVG](svgs/GE9031_5S.svg) | 94.055000 | semantic-only |
+| [GE9031_6M](images/GE9031_6M.jpg) | [SVG](svgs/GE9031_6M.svg) | 95.981873 | semantic-only |
+| [GE9031_6S](images/GE9031_6S.jpg) | [SVG](svgs/GE9031_6S.svg) | 105.157501 | semantic-only |
+| [GE9031_7M](images/GE9031_7M.jpg) | [SVG](svgs/GE9031_7M.svg) | 47.983124 | semantic-only |
+| [GE9031_7S](images/GE9031_7S.jpg) | [SVG](svgs/GE9031_7S.svg) | 64.129997 | semantic-only |
 | [SE0081](images/SE0081.jpg) | [SVG](svgs/SE0081.svg) | 702.781555 | semantic-only |
 | [b_heating1](images/b_heating1.jpg) | [SVG](svgs/b_heating1.svg) | 726.417908 | semantic-only |

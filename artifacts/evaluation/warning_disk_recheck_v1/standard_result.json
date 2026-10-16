@@ -1,0 +1,14 @@
+{
+  "all_collected_nodes_verified_once": true,
+  "collected": 2926,
+  "failed": 0,
+  "final_warning_module_recheck": "focused_tests.xml",
+  "initial_failures": [
+    "tests/test_warning_disk_runtime.py::test_independent_resolution_position_palette[0.5--3-#245f7b]",
+    "tests/test_warning_disk_runtime.py::test_independent_resolution_position_palette[1-5-#347b4f]",
+    "tests/test_warning_disk_runtime.py::test_independent_resolution_position_palette[2-2-#a13b4c]"
+  ],
+  "note": "Four complete default-profile shards; the changed warning module is replaced by its complete final 48-test recheck. Initial diagnostic results are retained separately.",
+  "passed": 2896,
+  "skipped": 30
+}
