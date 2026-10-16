@@ -10,6 +10,11 @@ from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _image, _r
 
 def fit_striped_panel_disk(width, height, *, description, image, render_fn, error_fn):
     text = str(description or '').casefold()
+    # The disk gradient and panel orientation are independent of the bands.
+    vertical = bool(re.search(r'senkrecht\w* (?:gefüllt\w* )?streifen', text))
+    horizontal = bool(re.search(r'waagerecht\w* (?:gefüllt\w* )?streifen', text))
+    if vertical == horizontal:
+        return None
     if not all(word in text for word in ('kreis', 'verlauf', 'vertikal', 'rechteck',
                                          'drei', 'waagerecht', 'streifen', 'gefüllt', 'innerhalb')):
         return None
@@ -65,7 +70,13 @@ def fit_striped_panel_disk(width, height, *, description, image, render_fn, erro
     # Robust row colors locate the two transitions without assuming equal
     # stripe heights or a national palette. No measured contour is emitted.
     inset = max(1, round(bw*.1))
-    region = pixels[by:by+bh, bx+inset:bx+bw-inset]
+    # Transpose only the panel measurements; the disk's gradient remains
+    # vertical in the original raster and in the emitted SVG.
+    panel_pixels = pixels.swapaxes(0, 1) if vertical else pixels
+    if vertical:
+        bx, by, bw, bh = by, bx, bh, bw
+        inset = max(1, round(bw*.1))
+    region = panel_pixels[by:by+bh, bx+inset:bx+bw-inset]
     rows = np.median(region, axis=1)
     best = None
     for first in range(3, bh-5):
@@ -84,13 +95,19 @@ def fit_striped_panel_disk(width, height, *, description, image, render_fn, erro
     # slanted stripes instead of fitting away an incompatible scene.
     for a,b,color in zip((0, first, second), (first, second, bh), bands):
         edge_inset = 2 if b-a >= 6 else 1
-        core = pixels[by+a+edge_inset:by+b-edge_inset, bx+2:bx+bw-2]
+        # JPEG chroma ringing extends farther across vertical color edges.
+        # Sample the solid interior, while keeping the same residual limit.
+        if vertical and b-a >= 8:
+            edge_inset = 3
+        side_inset = 3 if vertical and bw >= 12 else 2
+        core = panel_pixels[by+a+edge_inset:by+b-edge_inset, bx+side_inset:bx+bw-side_inset]
         if core.size == 0:
             return None
         if np.mean(np.max(np.abs(core-color), axis=2) > 32) > .02:
             return None
-    outside = (distance < radius*.88) & ~((xx >= bx-2) & (xx <= bx+bw+1)
-                                                 & (yy >= by-2) & (yy <= by+bh+1))
+    panel_x, panel_y = (yy, xx) if vertical else (xx, yy)
+    outside = (distance < radius*.88) & ~((panel_x >= bx-2) & (panel_x <= bx+bw+1)
+                                                 & (panel_y >= by-2) & (panel_y <= by+bh+1))
     if not outside.any() or np.mean(np.max(np.abs(pixels[outside]-field[outside]), axis=1) > 30) > .02:
         return None
     rim = np.median(pixels[(distance > radius*.94) & (distance < radius*1.01)], axis=0)
@@ -100,8 +117,10 @@ def fit_striped_panel_disk(width, height, *, description, image, render_fn, erro
     def build(p):
         cx,cy,r,sw,x,y,w,h,first,second = p[:10]
         top,bottom,rim,*bands = p[10:].reshape(-1,3)
-        stripes = ''.join(f'<rect x="{x:.4f}" y="{y+a:.4f}" width="{w:.4f}" height="{b-a:.4f}" fill="{_hex(color)}"/>'
-                          for a,b,color in zip((0,first,second),(first,second,h),bands))
+        rectangles = [(y+a,x,b-a,w) if vertical else (x,y+a,w,b-a)
+                      for a,b in zip((0,first,second),(first,second,h))]
+        stripes = ''.join(f'<rect x="{sx:.4f}" y="{sy:.4f}" width="{sw:.4f}" height="{sh:.4f}" fill="{_hex(color)}"/>'
+                          for (sx,sy,sw,sh),color in zip(rectangles,bands))
         return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
                 '<defs><linearGradient id="disk_color" x1="0" y1="0" x2="0" y2="1">'
                 f'<stop offset="0" stop-color="{_hex(top)}"/><stop offset="1" stop-color="{_hex(bottom)}"/>'
@@ -112,11 +131,13 @@ def fit_striped_panel_disk(width, height, *, description, image, render_fn, erro
 
     def valid(p):
         cx,cy,r,sw,x,y,w,h,first,second = p[:10]
-        return (np.isfinite(p).all() and r > 5 and .1 <= sw <= 3 and w > h > 5
+        panel_cx, panel_cy = (cy,cx) if vertical else (cx,cy)
+        aspect_ok = h > w > 5 if vertical else w > h > 5
+        return (np.isfinite(p).all() and r > 5 and .1 <= sw <= 3 and aspect_ok
                 and 1 < first < second-1 < h-2
                 and 0 <= cx-r-sw/2 and cx+r+sw/2 <= width
                 and 0 <= cy-r-sw/2 and cy+r+sw/2 <= height
-                and all((px-cx)**2+(py-cy)**2 < (r-sw)**2 for px in (x,x+w) for py in (y,y+h)))
+                and all((px-panel_cx)**2+(py-panel_cy)**2 < (r-sw)**2 for px in (x,x+w) for py in (y,y+h)))
 
     return _register(p, 10, build, valid, pixels.astype(np.uint8), render_fn, error_fn,
                      'raster_striped_panel_disk_registration')

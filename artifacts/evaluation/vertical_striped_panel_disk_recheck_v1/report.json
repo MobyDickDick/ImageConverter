@@ -1,0 +1,207 @@
+{
+  "baseline": {
+    "baseline_sha256": "a4597a4e7592a91bef4859e10a34d74f7a1eac2078ae42b8147d54f18466b201",
+    "cases": {
+      "anonymous_vertical_stripes_00": {
+        "dimensions": {
+          "height": 75,
+          "width": 75
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.29956331849098206,
+          "error_per_pixel": 0.049663050269127255,
+          "object_mask_iou": 0.8234718826405868,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI frozen before runtime changes",
+      "commit": "69befdc5a9ec1567a778f820186bc1fec3509d83",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_vertical_stripes_00": "bb22ce94c64ce6031fa18c76a941b5e8dd156ee0df52f810eb6b810d4eb9c0cc"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 246.6787567138672,
+      "after_svg": "after/anonymous_vertical_stripes_00.svg",
+      "after_svg_sha256": "f400b5ee9b5f33a48ea1c39458a6af28ebc62e6a893804a59b49a275ed0f42a5",
+      "before_mean_delta2": 9688.01953125,
+      "before_svg": "before/anonymous_vertical_stripes_00.svg",
+      "before_svg_sha256": "1d68a10901c27e06fdae9e6bd94437b1f6986db7abed4ccca14b8eb60ca92f07",
+      "case_id": "anonymous_vertical_stripes_00",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden senkrechten gef\u00fcllten Streifen. Die Streifen haben dieselbe H\u00f6he und unterschiedliche einfarbige F\u00fcllungen; links gr\u00fcn, mittig hell, rechts rot. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE0305.jpg",
+      "input_sha256": "bb22ce94c64ce6031fa18c76a941b5e8dd156ee0df52f810eb6b810d4eb9c0cc",
+      "role": "target",
+      "source": "GE0305.jpg",
+      "source_sha256": "bb22ce94c64ce6031fa18c76a941b5e8dd156ee0df52f810eb6b810d4eb9c0cc"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "a4597a4e7592a91bef4859e10a34d74f7a1eac2078ae42b8147d54f18466b201",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8297051787376404,
+          "error_per_pixel": 0.0012645329063891693,
+          "object_mask_iou": 0.9844209288653734,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.29956331849098206,
+          "error_per_pixel": 0.049663050269127255,
+          "object_mask_iou": 0.8234718826405868,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_vertical_stripes_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0012645329063891693,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 5
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9532,
+            "edge_alignment": 0.8297,
+            "pixel_similarity": 0.9987,
+            "semantic_score": 1.0,
+            "structure_score": 0.9844
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI frozen before runtime changes",
+      "commit": "69befdc5a9ec1567a778f820186bc1fec3509d83",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_vertical_stripes_00": "bb22ce94c64ce6031fa18c76a941b5e8dd156ee0df52f810eb6b810d4eb9c0cc"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 1,
+      "improved": 1,
+      "satisfactory": 1,
+      "technically_completed": 1
+    }
+  },
+  "schema_version": "striped_panel_disk_recheck_v1",
+  "strict_pixel_gates": {
+    "anonymous_vertical_stripes_00": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 5
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8297051787376404,
+        "foreground_iou": 0.9720670391061452,
+        "foreground_mse": 0.001601995201781392,
+        "normalized_mse": 0.0012645329115912318
+      },
+      "satisfactory": true
+    }
+  }
+}

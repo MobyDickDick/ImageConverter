@@ -13,7 +13,7 @@ from tools.evaluate_satisfaction_gate import evaluate_satisfaction, seal_baselin
 from tools.run_plan_b_variations import measure_quality
 
 
-def symbol_semantics(svg: str) -> float:
+def symbol_semantics(svg: str, orientation: str = 'horizontal') -> float:
     try:
         root = ET.fromstring(svg)
         shapes = [e for e in root.iter() if e.tag.rsplit('}', 1)[-1] in
@@ -25,11 +25,17 @@ def symbol_semantics(svg: str) -> float:
         background, disk, *bands = shapes
         cx, cy, radius = (float(disk.get(k, 0)) for k in ('cx', 'cy', 'r'))
         rectangles = [tuple(float(band.get(k, 0)) for k in ('x','y','width','height')) for band in bands]
+        if orientation == 'vertical':
+            rectangles = [(y,x,h,w) for x,y,w,h in rectangles]
+            cx, cy = cy, cx
+        elif orientation != 'horizontal':
+            return 0.
         x, y, w, _ = rectangles[0]
         h = sum(rect[3] for rect in rectangles)
         gradient = next(e for e in root.iter() if e.tag.endswith('linearGradient')
                         and disk.get('fill') == f"url(#{e.get('id')})")
-        return float(radius > 0 and w > h > 0
+        aspect_ok = h > w > 0 if orientation == 'vertical' else w > h > 0
+        return float(radius > 0 and aspect_ok
                      and all(abs(bx-x) < .002 and abs(bw-w) < .002 and bh > 0 for bx,by,bw,bh in rectangles)
                      and all(abs(a[1]+a[3]-b[1]) < .002 for a,b in zip(rectangles, rectangles[1:]))
                      and len({band.get('fill') for band in bands}) == 3
@@ -43,10 +49,10 @@ def symbol_semantics(svg: str) -> float:
         return 0.
 
 
-def measure(image: Path, svg: Path) -> dict:
+def measure(image: Path, svg: Path, orientation: str = 'horizontal') -> dict:
     record = measure_raster(image, svg)
     m = record['metrics']
-    m['semantic_score'] = symbol_semantics(record['svg'])
+    m['semantic_score'] = symbol_semantics(record['svg'], orientation)
     record['combined_score'] = (1-m['error_per_pixel']+m['edge_alignment']+m['object_mask_iou']+m['semantic_score'])/4
     return record
 
@@ -55,7 +61,8 @@ def evaluate(manifest: dict, root: Path) -> dict:
     before, after, evidence = {}, {}, []
     for case in manifest['cases']:
         image = root/case['image']
-        old, new = (measure(image, root/case[mode+'_svg']) for mode in ('before', 'after'))
+        old, new = (measure(image, root/case[mode+'_svg'], manifest.get('stripe_orientation', 'horizontal'))
+                    for mode in ('before', 'after'))
         before[case['case_id']] = {'metrics': old['metrics'], 'dimensions': old['dimensions']}
         after[case['case_id']] = new
         evidence.append({**case, 'input_sha256': hashlib.sha256(image.read_bytes()).hexdigest(),

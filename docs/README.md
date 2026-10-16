@@ -4,6 +4,8 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 
 - [Formenfamilien gemeinsam bearbeiten: mehrere Vorlagen, Farben, Größen und Farbverläufe](form_families_workflow.md)
 
+- [GE0305: senkrechte Flaggenstreifen, Quellenprüfung und unabhängige CLI-Abnahme (2026-10-16)](next_arbeitspaket_2026-10-16_ge0305.md)
+
 - [GE1411: Achsendiagramm mit Sinuskurve, drei Größen und unabhängige CLI-Abnahme (2026-10-16)](next_arbeitspaket_2026-10-16_ge1411_l.md)
 
 - [GE9034: seitliche T-Verzweigung, vier Richtungen und 14 CLI-Abnahmen (2026-10-16)](next_arbeitspaket_2026-10-16_ge9034_6m.md)

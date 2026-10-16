@@ -1,0 +1,41 @@
+{
+  "original_description": "Hintergrund: GE0999: Italienische Flagge.",
+  "sources": [
+    {
+      "source": "GE0305.jpg",
+      "sha256": "bb22ce94c64ce6031fa18c76a941b5e8dd156ee0df52f810eb6b810d4eb9c0cc",
+      "dimensions": [
+        75,
+        75
+      ],
+      "role": "target"
+    },
+    {
+      "source": "GE0305_L.jpg",
+      "sha256": "fe8e4cf8382430bd208d5d8cf9ad21a9c1e3e7a6b63d115467200066349f9292",
+      "dimensions": [
+        70,
+        70
+      ],
+      "role": "separate_tool_topology_not_accepted"
+    },
+    {
+      "source": "GE0305_M.jpg",
+      "sha256": "5e45be65ee6d2e2b268cae6257018333f124e0d493b055aa7fdf98d274c5f104",
+      "dimensions": [
+        60,
+        60
+      ],
+      "role": "separate_tool_topology_not_accepted"
+    },
+    {
+      "source": "GE0305_S.jpg",
+      "sha256": "6e96defe79cc37683507b970404d488a609a82330151e74401acf1f81d42690b",
+      "dimensions": [
+        50,
+        50
+      ],
+      "role": "separate_tool_topology_not_accepted"
+    }
+  ]
+}
