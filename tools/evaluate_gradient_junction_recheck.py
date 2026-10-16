@@ -14,9 +14,38 @@ from tools.evaluate_satisfaction_gate import evaluate_satisfaction, seal_baselin
 from tools.run_plan_b_variations import measure_quality
 
 
-def symbol_semantics(svg: str) -> float:
+def symbol_semantics(svg: str, direction: str = 'up') -> float:
     try:
         root = ET.fromstring(svg)
+        if direction != 'up':
+            # Independently project explicit source-space coordinates into the
+            # upright frame. Reject transformed or extra shapes as before.
+            width, height = float(root.get('width')), float(root.get('height'))
+            frames = {'left': ([[0,-1],[1,0]], [height,0]),
+                      'right': ([[0,1],[-1,0]], [0,width]),
+                      'down': ([[-1,0],[0,-1]], [width,height])}
+            matrix, offset = frames[direction]
+            def project(x, y):
+                return np.asarray(matrix) @ [x,y] + offset
+            for element in root.iter():
+                tag = element.tag.rsplit('}',1)[-1]
+                if tag == 'rect':
+                    x,y,w,h = (float(element.get(k,0)) for k in ('x','y','width','height'))
+                    corners = np.array([project(a,b) for a,b in ((x,y),(x+w,y),(x,y+h),(x+w,y+h))])
+                    lo,hi = corners.min(axis=0),corners.max(axis=0)
+                    for key,value in zip(('x','y','width','height'),(*lo,*(hi-lo))):
+                        element.set(key, f'{value:g}')
+                elif tag == 'polygon':
+                    points = [project(*(float(v) for v in p.split(','))) for p in element.get('points','').split()]
+                    element.set('points',' '.join(f'{x:g},{y:g}' for x,y in points))
+                elif tag == 'linearGradient':
+                    for suffix in ('1','2'):
+                        x,y = project(float(element.get('x'+suffix,0)),float(element.get('y'+suffix,0)))
+                        element.set('x'+suffix,f'{x:g}')
+                        element.set('y'+suffix,f'{y:g}')
+            if direction in ('left','right'):
+                root.set('width',str(height))
+                root.set('height',str(width))
         shapes = [e for e in root.iter() if e.tag.rsplit('}',1)[-1] in
                   {'rect','polygon','path','line','circle','ellipse','text','image','polyline'}]
         if [e.tag.rsplit('}',1)[-1] for e in shapes] != ['rect','rect','polygon']:
@@ -52,10 +81,10 @@ def symbol_semantics(svg: str) -> float:
         return 0.
 
 
-def measure(image: Path, svg: Path) -> dict:
+def measure(image: Path, svg: Path, direction: str = 'up') -> dict:
     record = measure_raster(image, svg)
     m = record['metrics']
-    m['semantic_score'] = symbol_semantics(record['svg'])
+    m['semantic_score'] = symbol_semantics(record['svg'], direction)
     record['combined_score'] = (1-m['error_per_pixel']+m['edge_alignment']+m['object_mask_iou']+m['semantic_score'])/4
     return record
 
@@ -64,7 +93,7 @@ def evaluate(manifest: dict, root: Path) -> dict:
     before, after, evidence = {}, {}, []
     for case in manifest['cases']:
         image = root/case['image']
-        old, new = (measure(image, root/case[mode+'_svg']) for mode in ('before', 'after'))
+        old, new = (measure(image, root/case[mode+'_svg'], manifest.get('direction','up')) for mode in ('before', 'after'))
         before[case['case_id']] = {'metrics': old['metrics'], 'dimensions': old['dimensions']}
         after[case['case_id']] = new
         evidence.append({**case, 'input_sha256': hashlib.sha256(image.read_bytes()).hexdigest(),
