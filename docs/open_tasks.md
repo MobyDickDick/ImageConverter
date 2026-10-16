@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-16)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `458` · Erledigt `426` · Offen `32`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `459` · Erledigt `427` · Offen `32`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,10 +20,21 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-16)
 
+- [x] **GE9032 – T-Verzweigung mit Schaft nach rechts:** eigenständige Beschreibungen, robuste Messung der JPEG-Übergangszeile und zusätzliche Kantenverfeinerung im ursprünglichen Bildrahmen. Alle 14 Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-16_ge9032_6m.md`.
+
+**Neuester Abschluss:** `GE9032_6M` und 13 Farb-/Größen-Holdouts auf
+`codex/ge9032-quality-2026-10-16`. Frische neutrale Zielmetrik
+`9501.930664 → 97.358749`; finale SVGs im vollständigen Katalogkontext
+bytegleich. 320 Paare in der Erfolgsübersicht; alle 306 bisherigen Indexeinträge
+unverändert. Nächste reguläre Rotation: `AC0414_2_L`, `GE9033_6M`,
+`AC0424_2_M`, `AC0840_S`, `AC0840_M`. Ausschließlich die 14 abgenommenen
+GE9032-Varianten sind zusätzlich ausgeschlossen. Bestehende offene Aufgaben
+bleiben erhalten.
+
 - [x] **GE0305 – senkrechte Flaggenstreifen auf Verlaufsscheibe:** eigenständige Beschreibung ausschließlich für das tatsächliche Flaggenbild und allgemeine Erweiterung der Streifenregistrierung. Beide regulären und strengeren Pixelgates bestehen ohne Pflichtmetrikregression; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-16_ge0305.md`.
 - [ ] **GE0305-TOOLS-SOURCE:** Die drei Raster `GE0305_{L,M,S}` zeigen gekreuzte Werkzeuge und Tropfen statt der im gemeinsamen XML-Eintrag genannten italienischen Flagge. Quellen-/Beschreibungszuordnung eigenständig prüfen und die Werkzeugtopologie separat abnehmen. Sie sind keine Flaggen-Holdouts; bisherige Beschreibungen und Raster erhalten, Gates unverändert lassen. Hashes und Abmessungen: `artifacts/evaluation/vertical_striped_panel_disk_recheck_v1/source_inventory.json`.
 
-**Neuester Abschluss:** `GE0305.jpg` auf `codex/ge0305-quality-2026-10-16`.
+**Vorheriger Abschluss:** `GE0305.jpg` auf `codex/ge0305-quality-2026-10-16`.
 Frische neutrale Zielmetrik `9688.019531 → 246.678757`; finales SVG im
 vollständigen Katalogkontext bytegleich. 306 Paare in der Erfolgsübersicht;
 alle 305 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:

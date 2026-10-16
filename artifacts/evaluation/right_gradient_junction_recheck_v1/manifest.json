@@ -1,0 +1,154 @@
+{
+  "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+  "direction": "right",
+  "baseline_description": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.",
+  "provenance": {
+    "commit": "3818f05cd35a5e4b95bcf0071f4def6e4a31410d",
+    "seed": 0,
+    "execution_mode": "semantic-only",
+    "baseline_mode": "fresh original-description CLI frozen before runtime changes",
+    "toolchain": "repository virtualenv: NumPy, OpenCV, PyMuPDF"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_right_junction_00",
+      "source": "GE9032_6M.jpg",
+      "image": "../../images_to_convert/GE9032_6M.jpg",
+      "source_sha256": "efe607dafa4e4384341014c80bac5b3e37a1521a04980a460f974148905a74cf",
+      "role": "target",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_00.svg",
+      "after_svg": "after/anonymous_right_junction_00.svg"
+    },
+    {
+      "case_id": "anonymous_right_junction_01",
+      "source": "GE9032_1M.jpg",
+      "image": "../../images_to_convert/GE9032_1M.jpg",
+      "source_sha256": "83cb11932ccb68b5f6022d84a7b61ac1b0013871c5a8bea92648df41fc675bfa",
+      "role": "color/size holdout",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_01.svg",
+      "after_svg": "after/anonymous_right_junction_01.svg"
+    },
+    {
+      "case_id": "anonymous_right_junction_02",
+      "source": "GE9032_1S.jpg",
+      "image": "../../images_to_convert/GE9032_1S.jpg",
+      "source_sha256": "d9204389da4ece8348fd97f40fdf8a8a3d6fd7a0a5d90488bf5c88acfac5e1ad",
+      "role": "color/size holdout",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_02.svg",
+      "after_svg": "after/anonymous_right_junction_02.svg"
+    },
+    {
+      "case_id": "anonymous_right_junction_03",
+      "source": "GE9032_2M.jpg",
+      "image": "../../images_to_convert/GE9032_2M.jpg",
+      "source_sha256": "e03ba4814d3df9529d168cf9bb36f8cec29b5573285f7742bb84421e61527724",
+      "role": "color/size holdout",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_03.svg",
+      "after_svg": "after/anonymous_right_junction_03.svg"
+    },
+    {
+      "case_id": "anonymous_right_junction_04",
+      "source": "GE9032_2S.jpg",
+      "image": "../../images_to_convert/GE9032_2S.jpg",
+      "source_sha256": "65fe27691e16699faa9943bffba0b948202c42d46003780c1bfa0b125b918a2c",
+      "role": "color/size holdout",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_04.svg",
+      "after_svg": "after/anonymous_right_junction_04.svg"
+    },
+    {
+      "case_id": "anonymous_right_junction_05",
+      "source": "GE9032_3M.jpg",
+      "image": "../../images_to_convert/GE9032_3M.jpg",
+      "source_sha256": "3103cafcbc43df64e3371e63f45027b1c3a67aec8eb482885cc21e2edead3359",
+      "role": "color/size holdout",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_05.svg",
+      "after_svg": "after/anonymous_right_junction_05.svg"
+    },
+    {
+      "case_id": "anonymous_right_junction_06",
+      "source": "GE9032_3S.jpg",
+      "image": "../../images_to_convert/GE9032_3S.jpg",
+      "source_sha256": "576cf87f68c36c87fa5b18290141429a947f109c2ddc6fd4d79c6db4cd637f42",
+      "role": "color/size holdout",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_06.svg",
+      "after_svg": "after/anonymous_right_junction_06.svg"
+    },
+    {
+      "case_id": "anonymous_right_junction_07",
+      "source": "GE9032_4M.jpg",
+      "image": "../../images_to_convert/GE9032_4M.jpg",
+      "source_sha256": "dc03428e8ecc6fc1d25bf6d436c6d1ddee637db0bea8a7bef8e7f81f6f234d2f",
+      "role": "color/size holdout",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_07.svg",
+      "after_svg": "after/anonymous_right_junction_07.svg"
+    },
+    {
+      "case_id": "anonymous_right_junction_08",
+      "source": "GE9032_4S.jpg",
+      "image": "../../images_to_convert/GE9032_4S.jpg",
+      "source_sha256": "8c432921abfa5d954379825748fd2f5d6dfc560c59dd8b5f4045f82818c148d5",
+      "role": "color/size holdout",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_08.svg",
+      "after_svg": "after/anonymous_right_junction_08.svg"
+    },
+    {
+      "case_id": "anonymous_right_junction_09",
+      "source": "GE9032_5M.jpg",
+      "image": "../../images_to_convert/GE9032_5M.jpg",
+      "source_sha256": "c08e5b7c5edc3f91f9c2023654a5e30b7492f047b160b6e1f59503fe8f808845",
+      "role": "color/size holdout",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_09.svg",
+      "after_svg": "after/anonymous_right_junction_09.svg"
+    },
+    {
+      "case_id": "anonymous_right_junction_10",
+      "source": "GE9032_5S.jpg",
+      "image": "../../images_to_convert/GE9032_5S.jpg",
+      "source_sha256": "ba29af8535ccd9892e6ae3c83feca4a36a8a034e2d44fa4a7048be618ccc77b4",
+      "role": "color/size holdout",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_10.svg",
+      "after_svg": "after/anonymous_right_junction_10.svg"
+    },
+    {
+      "case_id": "anonymous_right_junction_11",
+      "source": "GE9032_6S.jpg",
+      "image": "../../images_to_convert/GE9032_6S.jpg",
+      "source_sha256": "1ce4281d3aabb5a05c1d826c6c25e5fa89dd2399a11b39b5cfac42474baa6f7f",
+      "role": "color/size holdout",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_11.svg",
+      "after_svg": "after/anonymous_right_junction_11.svg"
+    },
+    {
+      "case_id": "anonymous_right_junction_12",
+      "source": "GE9032_7M.jpg",
+      "image": "../../images_to_convert/GE9032_7M.jpg",
+      "source_sha256": "06069c4bb69e277519a4a4fca742371def6e26ea9df8c34414c9cc244b6d204a",
+      "role": "color/size holdout",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_12.svg",
+      "after_svg": "after/anonymous_right_junction_12.svg"
+    },
+    {
+      "case_id": "anonymous_right_junction_13",
+      "source": "GE9032_7S.jpg",
+      "image": "../../images_to_convert/GE9032_7S.jpg",
+      "source_sha256": "b6fb955898bf7d916488495438a4f57e7ae38e890a9696e53bf291725218aadc",
+      "role": "color/size holdout",
+      "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach rechts anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before/anonymous_right_junction_13.svg",
+      "after_svg": "after/anonymous_right_junction_13.svg"
+    }
+  ]
+}
