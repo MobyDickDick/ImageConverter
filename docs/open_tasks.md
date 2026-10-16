@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-10-15)
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-16)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `453` · Erledigt `422` · Offen `31`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `454` · Erledigt `423` · Offen `31`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -18,11 +18,21 @@ focused on the actual project scope.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-15)
+### Aktueller Plan-B-Stand (2026-10-16)
+
+- [x] **GE9031 – T-Verzweigung mit querliegenden Farbverläufen:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; alle 14 Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Details und Abnahme: `docs/next_arbeitspaket_2026-10-16_ge9031_6m.md`.
+
+**Neuester Abschluss:** `GE9031_6M` und 13 Farb-/Größen-Holdouts auf
+`codex/ge9031-quality-2026-10-16`. Frische neutrale Zielmetrik
+`9455.181641 → 95.981873`; finale Ausgaben im vollständigen Katalogkontext
+bytegleich. 288 Paare in der Erfolgsübersicht; alle 274 bisherigen Indexeinträge
+unverändert. Nächste reguläre Rotation: `GE9034_6M`, `GE1411_L`, `GE0305`,
+`GE9032_6M`, `AC0414_2_L`. Ausschließlich die 14 abgenommenen GE9031-Varianten
+sind zusätzlich ausgeschlossen. Bestehende offene Aufgaben bleiben erhalten.
 
 - [x] **GE0001 – Warndreieck mit Ausrufezeichen auf Verlaufsscheibe:** eigenständige Beschreibungen und allgemeine Rasterregistrierung für Verlaufskreis, gerundeten Dreiecksrand, Innenfläche sowie getrennten Strich und Punkt. Alle sechs Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Details: `docs/next_arbeitspaket_2026-10-15_ge0001_l.md`.
 
-**Neuester Abschluss:** `GE0001_L` und fünf Farb-/Größen-Holdouts auf
+**Vorheriger Abschluss:** `GE0001_L` und fünf Farb-/Größen-Holdouts auf
 `codex/ge0001-quality-2026-10-15`. Frische neutrale Zielmetrik
 `10026.326172 → 278.354492`; finale Ausgaben im vollständigen Katalogkontext
 bytegleich. 274 Paare in der Erfolgsübersicht; alle 268 bisherigen Indexeinträge

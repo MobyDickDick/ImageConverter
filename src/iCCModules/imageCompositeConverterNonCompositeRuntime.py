@@ -38,6 +38,7 @@ from src.iCCModules.imageCompositeConverterHouseDisk import fit_house_disk
 from src.iCCModules.imageCompositeConverterDiagonalCrossDisk import fit_diagonal_cross_disk
 from src.iCCModules.imageCompositeConverterWarningDisk import fit_warning_disk
 from src.iCCModules.imageCompositeConverterArcShaft import fit_arc_shaft
+from src.iCCModules.imageCompositeConverterGradientJunction import fit_gradient_junction
 from src.iCCModules.imageCompositeConverterCircleLinework import fit_circle_linework
 
 
@@ -1457,6 +1458,7 @@ def runNonCompositeIterationImpl(
         for fit_fn, status in (
             (fit_circle_linework, "non_composite_raster_circle_linework"),
             (fit_arc_shaft, "non_composite_raster_arc_shaft"),
+            (fit_gradient_junction, "non_composite_raster_gradient_junction"),
             (fit_disk_bar, "non_composite_raster_disk_bar"),
             (fit_disk_arrow, "non_composite_raster_disk_arrow"),
             (fit_cross_panel_disk, "non_composite_raster_cross_panel_disk"),
