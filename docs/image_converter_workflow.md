@@ -3,6 +3,20 @@
 Diese Kurzanleitung bündelt die aktuell empfohlenen lokalen Befehle für den
 ImageConverter.
 
+## Mehrere verwandte Vorlagen in einer Aufgabe
+
+Bei ähnlicher Formstruktur und ähnlichem Aufbau der Farbverläufe sollen
+passende Vorlagen möglichst als Familie bearbeitet werden. Unterschiedliche
+Farben und Größen sind dabei vorgesehen. Ein gemeinsamer Algorithmus wird
+verbessert; jedes Familienmitglied erhält seine eigene Konvertierung und
+Qualitätsprüfung. Dafür genügt eine gemeinsame Aufgabe auf einem Branch.
+Der Converter unterstützt Batches für vorhandene Formstrukturen, erkennt
+und lernt neue Familien aber noch nicht automatisch aus mehreren Vorlagen.
+
+Auswahl, eigenständige Beschreibungen, unabhängige Varianten und
+Abschlussnachweise beschreibt
+[Formenfamilien gemeinsam bearbeiten](form_families_workflow.md).
+
 ## Verbindlicher Abschluss je Aufgabe
 
 Um zu vermeiden, dass bei Neuerungen einzelne Aspekte verschlechtert werden,

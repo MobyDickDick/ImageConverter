@@ -1,3 +1,4 @@
+- Normalize all four gradient T-junction directions from raster geometry, correct both GE9034 descriptions, and validate 14 catalog variants plus two independent 17-case CLI batteries with unchanged quality gates (2026-10-16).
 - Correct both AC0850 catalog descriptions from rF to P; the unchanged general letter-disk fitter passes all three sizes and two independent 17-case CLI batteries (2026-10-15).
 - Register gabled houses with a left door and right cross-window inside gradient disks from raster geometry, replace GE0346's catalog reference with a standalone description, and verify saved CLI vectors against unchanged quality gates (2026-10-15).
 - Register three horizontal bands inside gradient disks from raster evidence, give GE0306 its own flag description while preserving the three unrelated tool sources, and validate both unchanged gates plus two independent 17-case CLI runs (2026-10-15).

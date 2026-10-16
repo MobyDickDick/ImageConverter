@@ -3,21 +3,89 @@ from __future__ import annotations
 
 import cv2
 import numpy as np
+import re
+from xml.etree import ElementTree as ET
 
 from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _register
 
 
 def fit_gradient_junction(width, height, *, description, image, render_fn, error_fn):
+    """Normalize the described stem direction, measuring every SVG in source space."""
     text = str(description or '').casefold()
     if not all(token in text for token in ('t-verzweigung', 'waagerecht', 'senkrecht',
-                                           'nach oben', 'verbunden', 'verlauf', 'heller mitte')):
+                                           'verbunden', 'verlauf', 'heller mitte')):
         return None
     if any(token in text for token in ('zusätzlich', 'kreis', 'dreieck', 'getrennt',
-                                       'nach unten', 'beschrift', 'zwei schäfte')):
+                                       'beschrift', 'zwei schäfte')):
+        return None
+    # A translation of the whole drawing does not change the stem direction.
+    # Retain structural directions and conflicting statements about the stem.
+    direction_text = re.sub(r'nach (?:oben|rechts|unten|links)(?: und (?:oben|rechts|unten|links))?\s+'
+                            r'(?:versetzt|verschoben)', '', text)
+    directions = [(token, turns) for token, turns in
+                  (('nach oben', 0), ('nach rechts', 1), ('nach unten', 2), ('nach links', 3))
+                  if token in direction_text]
+    if len(directions) != 1:
         return None
     arr = np.asarray(image)
     if arr.shape != (height, width, 3) or min(width, height) < 12:
         return None
+    turns = directions[0][1]
+    if not turns:
+        return _fit_upright(width, height, image=arr, render_fn=render_fn, error_fn=error_fn)
+    canonical = np.ascontiguousarray(np.rot90(arr, turns))
+    canonical_height, canonical_width = canonical.shape[:2]
+
+    def render_canonical(svg, w, h):
+        raster = render_fn(_orient_svg(svg, turns, width, height), width, height)
+        return None if raster is None else np.ascontiguousarray(np.rot90(raster, turns))
+
+    def source_error(reference, raster):
+        return error_fn(np.ascontiguousarray(np.rot90(reference, -turns)),
+                        np.ascontiguousarray(np.rot90(raster, -turns)))
+
+    result = _fit_upright(canonical_width, canonical_height, image=canonical,
+                          render_fn=render_canonical, error_fn=source_error)
+    if result is not None:
+        for key in ('svg', 'initial_svg'):
+            result[key] = _orient_svg(result[key], turns, width, height)
+        result['rendered'] = np.ascontiguousarray(np.rot90(result['rendered'], -turns))
+    return result
+
+
+def _orient_svg(svg, turns, width, height):
+    """Rotate analytic coordinates and native gradient axes without rasterization."""
+    root = ET.fromstring(svg)
+
+    def point(x, y):
+        return ((width-y, x) if turns == 1 else
+                (width-x, height-y) if turns == 2 else (y, height-x))
+
+    for element in root.iter():
+        element.tag = element.tag.rsplit('}', 1)[-1]
+        if element.tag == 'rect':
+            x, y, w, h = (float(element.get(k, 0)) for k in ('x', 'y', 'width', 'height'))
+            corners = np.array([point(a, b) for a, b in ((x,y),(x+w,y),(x,y+h),(x+w,y+h))])
+            lo, hi = corners.min(axis=0), corners.max(axis=0)
+            for key, value in zip(('x','y','width','height'), (*lo, *(hi-lo))):
+                element.set(key, f'{value:g}')
+        elif element.tag == 'polygon':
+            points = [point(*(float(v) for v in p.split(','))) for p in element.get('points').split()]
+            element.set('points', ' '.join(f'{x:g},{y:g}' for x,y in points))
+        elif element.tag == 'linearGradient':
+            for suffix in ('1','2'):
+                x, y = point(float(element.get('x'+suffix, 0)), float(element.get('y'+suffix, 0)))
+                element.set('x'+suffix, f'{x:g}')
+                element.set('y'+suffix, f'{y:g}')
+    root.set('xmlns', 'http://www.w3.org/2000/svg')
+    root.set('width', str(width))
+    root.set('height', str(height))
+    root.set('viewBox', f'0 0 {width} {height}')
+    return ET.tostring(root, encoding='unicode')+'\n'
+
+
+def _fit_upright(width, height, *, image, render_fn, error_fn):
+    arr = np.asarray(image)
     pixels = arr.astype(float)
     if not np.isfinite(pixels).all():
         return None

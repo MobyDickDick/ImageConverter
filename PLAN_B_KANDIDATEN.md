@@ -2,7 +2,16 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-16, nach GE9031-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-16, nach GE9034-Abnahme)
+
+GE9034 besteht nach eigenständiger Beschreibung und allgemeiner
+Richtungsnormalisierung der T-Registrierung beide regulären und strengeren
+Pixelgates ohne Pflichtmetrikregression (`GE9034_6M: mean_delta2=83.588753`).
+Alle 14 Farb-/Größenvarianten sind abgenommen. Zwei unabhängige CLI-Läufe
+bestehen jeweils 17/17. Bisherige Ausschlüsse bleiben erhalten;
+ausschließlich diese 14 Varianten kommen hinzu. Details:
+`docs/next_arbeitspaket_2026-10-16_ge9034_6m.md`.
+Reproduzierbarer Review: `artifacts/evaluation/side_gradient_junction_recheck_v1/review_args.json`.
 
 GE9031 besteht nach eigenständiger Beschreibung und allgemeiner Registrierung
 der T-Verzweigung mit zwei nativen Farbverläufen beide regulären und strengeren
@@ -176,11 +185,11 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `GE9034_6M` – `mean_delta2=9680.297852`, `normalized_mse=0.049623`.
-2. `GE1411_L` – `mean_delta2=9671.516602`, `normalized_mse=0.049578`.
-3. `GE0305` – `mean_delta2=9653.836914`, `normalized_mse=0.049488`.
-4. `GE9032_6M` – `mean_delta2=9524.675781`, `normalized_mse=0.048826`.
-5. `AC0414_2_L` – `mean_delta2=9496.175781`, `normalized_mse=0.048680`.
+1. `GE1411_L` – `mean_delta2=9671.516602`, `normalized_mse=0.049578`.
+2. `GE0305` – `mean_delta2=9653.836914`, `normalized_mse=0.049488`.
+3. `GE9032_6M` – `mean_delta2=9524.675781`, `normalized_mse=0.048826`.
+4. `AC0414_2_L` – `mean_delta2=9496.175781`, `normalized_mse=0.048680`.
+5. `GE9033_6M` – `mean_delta2=9439.891602`, `normalized_mse=0.048391`.
 
 `SE0081` besteht nach eigenständiger Beschreibung beide regulären und strengeren
 Pixelgates ohne Pflichtmetrikregression. Die vorhandene Runtime bleibt unverändert.

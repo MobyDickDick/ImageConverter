@@ -6,6 +6,14 @@ provides annotation/debugging helpers for the source raster files.
 Der [Projektstand vom 2026-10-10](docs/project_status_2026-10-10.md) beschreibt
 die vorhandene Batchfähigkeit und die weiterhin begrenzte Motivabdeckung.
 
+Mehrere verwandte Vorlagen können als **Formenfamilie in einer Aufgabe**
+bearbeitet werden, auch mit unterschiedlichen Farben, Größen und ähnlichen
+Farbverläufen. Der Converter verarbeitet sie als Batch und ermittelt die
+Parameter für jedes unterstützte Motiv einzeln aus Raster und Beschreibung.
+Er lernt dabei nicht automatisch aus den anderen Bildern des Batches.
+Vorgehen, Grenzen und ein nachgewiesenes Beispiel stehen unter
+[Formenfamilien gemeinsam bearbeiten](docs/form_families_workflow.md).
+
 Als möglicher mittel- bis langfristiger Entwicklungszweig ist ein
 [vorgeschalteter ImageDetector](docs/image_detector_development_branch.md)
 dokumentiert: Grundformen und Masse erkennen und daraus bessere Ausgangsdaten
@@ -22,13 +30,13 @@ SVGs, Checkpoints oder andere Bilder werden im voreingestellten
 ## Main entry point
 
 Die [Erfolgsübersicht](artifacts/satisfactory_conversions/README.md) enthält
-288 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
+302 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
 `python -m tools.refresh_satisfactory_archive` wird sie aus den dokumentierten
 Abnahmen aktualisiert. `python -m tools.run_pytest_profile extended`
 aktualisiert die Sammlung einschließlich späterer erfolgreicher Batches,
 konvertiert alle Einträge erneut und prüft deren Qualität; Quellen und
 gespeicherte gute SVGs bleiben dabei erhalten. Details zur Sammlung und zur
-[neuen T-Verzweigungs-Abnahme](docs/next_arbeitspaket_2026-10-16_ge9031_6m.md).
+[seitlichen T-Verzweigungs-Abnahme](docs/next_arbeitspaket_2026-10-16_ge9034_6m.md).
 
 Run the converter via:
 

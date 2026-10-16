@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-16)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `454` · Erledigt `423` · Offen `31`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `455` · Erledigt `424` · Offen `31`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,9 +20,20 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-16)
 
+- [x] **GE9034 – seitliche T-Verzweigung mit Farbverlauf:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; alle 14 Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-16_ge9034_6m.md`.
+
+**Neuester Abschluss:** `GE9034_6M` und 13 Farb-/Größen-Holdouts auf
+`codex/ge9034-quality-2026-10-16`. Frische neutrale Zielmetrik
+`9454.780273 → 83.588753`; finale SVGs im vollständigen Katalogkontext
+bytegleich. 302 Paare in der Erfolgsübersicht; alle 288 bisherigen
+Indexeinträge unverändert. Nächste reguläre Rotation: `GE1411_L`, `GE0305`,
+`GE9032_6M`, `AC0414_2_L`, `GE9033_6M`. Ausschließlich die 14 abgenommenen
+GE9034-Varianten sind zusätzlich ausgeschlossen. Bestehende offene Aufgaben
+bleiben erhalten.
+
 - [x] **GE9031 – T-Verzweigung mit querliegenden Farbverläufen:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; alle 14 Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Details und Abnahme: `docs/next_arbeitspaket_2026-10-16_ge9031_6m.md`.
 
-**Neuester Abschluss:** `GE9031_6M` und 13 Farb-/Größen-Holdouts auf
+**Vorheriger Abschluss:** `GE9031_6M` und 13 Farb-/Größen-Holdouts auf
 `codex/ge9031-quality-2026-10-16`. Frische neutrale Zielmetrik
 `9455.181641 → 95.981873`; finale Ausgaben im vollständigen Katalogkontext
 bytegleich. 288 Paare in der Erfolgsübersicht; alle 274 bisherigen Indexeinträge
