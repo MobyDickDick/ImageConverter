@@ -1,5 +1,5 @@
 {
-  "case_count": 305,
+  "case_count": 306,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -2635,6 +2635,23 @@
       "svg": "svgs/GE0300.svg",
       "svg_sha256": "bd3fad35681983499755b9cd9be4e8c3f173f5b92a96da4727a60d909905d771",
       "variant": "GE0300"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden senkrechten gef\u00fcllten Streifen. Die Streifen haben dieselbe H\u00f6he und unterschiedliche einfarbige F\u00fcllungen; links gr\u00fcn, mittig hell, rechts rot. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/vertical_striped_panel_disk_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0305.jpg",
+      "image_sha256": "bb22ce94c64ce6031fa18c76a941b5e8dd156ee0df52f810eb6b810d4eb9c0cc",
+      "mean_delta2": 246.6787567138672,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8297051787376404,
+        "error_per_pixel": 0.0012645329063891693,
+        "object_mask_iou": 0.9844209288653734
+      },
+      "svg": "svgs/GE0305.svg",
+      "svg_sha256": "f400b5ee9b5f33a48ea1c39458a6af28ebc62e6a893804a59b49a275ed0f42a5",
+      "variant": "GE0305"
     },
     {
       "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfl\u00e4che aus genau drei l\u00fcckenlos aneinanderliegenden waagerechten gef\u00fcllten Streifen. Die Streifen haben dieselbe Breite und unterschiedliche einfarbige F\u00fcllungen; oben rot, mittig hell, unten blau. Die gesamte Rechteckfl\u00e4che bleibt vollst\u00e4ndig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenh\u00f6hen und Farben ergeben sich aus dem Bild.",

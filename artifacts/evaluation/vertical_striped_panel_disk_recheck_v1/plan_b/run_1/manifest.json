@@ -1,0 +1,263 @@
+{
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261016,
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "iterations": 64,
+  "timeout_seconds": 60,
+  "source_svg_sha256": "cd55da767c69b0e6c7e093cd0d7207fa2b43c556c570e7c2d7be758b77a20c3c",
+  "source_description_sha256": "bc2a0d771a0abca4d65420f070201cb9d051a0f79a9a7bd5aa465a903bf21f93",
+  "source_description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild.",
+  "source_image": "source.png",
+  "artifact_retention": "debug",
+  "selection": {
+    "mode": "explicit",
+    "source_svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\vertical_striped_panel_disk_recheck_v1\\independent.svg"
+  },
+  "cases": [
+    {
+      "case_id": "original",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 1.0,
+        "relative_x": 0.0,
+        "relative_y": 0.0
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild.",
+      "reference_svg": "references\\original.svg",
+      "input_sha256": "32d91bc9c389122f93bf16a9df272eee791da7ab017f3cddb4771ef032075801",
+      "reference_svg_sha256": "405672eaa196a218a6305d48637de6925b3db676b681b08863aec40135fc492f"
+    },
+    {
+      "case_id": "probe_01",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 0.95600784,
+        "relative_x": 0.00303452,
+        "relative_y": 0.00819693
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist ein wenig kleiner dargestellt und etwas nach rechts und unten versetzt.",
+      "reference_svg": "references\\probe_01.svg",
+      "input_sha256": "bc6aa821420d8b5caa74c433f991371ada622d5c13afea054c3b5bba2d382d08",
+      "reference_svg_sha256": "ab9bcf2756d887c729e2cdd96901fd7a6ebf7e123fe3ff8aa15553a1b91d6b34"
+    },
+    {
+      "case_id": "probe_02",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 0.95182438,
+        "relative_x": 0.00432542,
+        "relative_y": 0.01744194
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und leicht nach rechts und unten versetzt.",
+      "reference_svg": "references\\probe_02.svg",
+      "input_sha256": "3ce23075a70ff74a5d468db1e46389afc3124b7e294902587a21877e8d6d6134",
+      "reference_svg_sha256": "d7ee8cf46a3d83ae282383e18ea5b32d78027dc4b8be5d2997282758e1818dd8"
+    },
+    {
+      "case_id": "probe_03",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 1.02721637,
+        "relative_x": 0.01558096,
+        "relative_y": 0.00638058
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringfügig größer dargestellt und etwas nach rechts und unten verschoben.",
+      "reference_svg": "references\\probe_03.svg",
+      "input_sha256": "d27fd4c0836a65f7a8ed9681b721641c11ec3504903cb4cf7b8fb68fa16bcf8e",
+      "reference_svg_sha256": "86ada3ee7f7491c4ae911e340573839bf4043aa22f88c4032dc427b1758fba3e"
+    },
+    {
+      "case_id": "probe_04",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 1.00760683,
+        "relative_x": 0.00821767,
+        "relative_y": 0.02262506
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist leicht größer dargestellt und etwas nach rechts und unten versetzt.",
+      "reference_svg": "references\\probe_04.svg",
+      "input_sha256": "156c5fd0083b6679262d53e46a40a2c591de30245190501e5e11a4ef0ad94cb6",
+      "reference_svg_sha256": "6c32f334e88d559d5d930a9e031e3439143df63ae09103edbec8afd4a7c251ec"
+    },
+    {
+      "case_id": "probe_05",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 0.99172949,
+        "relative_x": -0.00396792,
+        "relative_y": -0.02198131
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist geringfügig kleiner dargestellt und etwas nach links und oben versetzt.",
+      "reference_svg": "references\\probe_05.svg",
+      "input_sha256": "b03766136c9b2f69b53f04342df4a3f51b7aefef8395dd735530b811eab21616",
+      "reference_svg_sha256": "4341b272458e9f9e32b1785c4bb27bc96a83d6650031c3485dd2668e13b0b7d3"
+    },
+    {
+      "case_id": "probe_06",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 1.00671638,
+        "relative_x": -0.00931595,
+        "relative_y": 0.01295402
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig größer dargestellt und geringfügig nach links und unten versetzt.",
+      "reference_svg": "references\\probe_06.svg",
+      "input_sha256": "ec64b67c15362488ae9e655eba8615b29d6a486499d17b96f3b94f9d8a23af00",
+      "reference_svg_sha256": "76813e333c0e22d33bd95d787fd58ce104a0c1346d07ee3bd6c4a77334d9b73b"
+    },
+    {
+      "case_id": "probe_07",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 1.04656957,
+        "relative_x": 0.01303058,
+        "relative_y": -0.00486523
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist geringfügig größer dargestellt und ein wenig nach rechts und oben versetzt.",
+      "reference_svg": "references\\probe_07.svg",
+      "input_sha256": "639323dd758297bb3d22949ce765d06f72706db6469aa47b31ca5786f47c1ecb",
+      "reference_svg_sha256": "d2dbeaf35af347a5a6746ee043d30312dcfb923624bc03a1e19f4af3246c9b81"
+    },
+    {
+      "case_id": "probe_08",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 1.0434315,
+        "relative_x": -0.0170451,
+        "relative_y": -0.00972961
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringfügig größer dargestellt und etwas nach links und oben verschoben.",
+      "reference_svg": "references\\probe_08.svg",
+      "input_sha256": "0c82f53cc3d58036ce195281d0231a5eb7702bbb6f02f578d46ea101f3e76142",
+      "reference_svg_sha256": "e79de4b7b9282bab836d25a00b41ed873d2a6e3c9e31c30cf21591bd2a1c2130"
+    },
+    {
+      "case_id": "probe_09",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 1.01174221,
+        "relative_x": 0.00636873,
+        "relative_y": 0.0191564
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringfügig größer dargestellt und ein wenig nach rechts und unten versetzt.",
+      "reference_svg": "references\\probe_09.svg",
+      "input_sha256": "14df3f4f257265b474f3e4dbfcda3623fa537fa828d9089bc3feb06049fb3309",
+      "reference_svg_sha256": "72bfece0d4d71739a06167a44dda8c7501ea4f0c5a27cc3a5a49de56eeff9823"
+    },
+    {
+      "case_id": "probe_10",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 1.00592587,
+        "relative_x": 0.01793166,
+        "relative_y": -0.00570542
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist etwas größer dargestellt und etwas nach rechts und oben versetzt.",
+      "reference_svg": "references\\probe_10.svg",
+      "input_sha256": "d4ec37e56b1536a5a2c757a62cecb4f709a3284ff9f441a311970c16a1a9a6b1",
+      "reference_svg_sha256": "d8fac3972f12d5d50d938e396b71d9c15fe3be00b7fec159bfd330b3c9951f73"
+    },
+    {
+      "case_id": "probe_11",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 1.02520344,
+        "relative_x": -0.00951079,
+        "relative_y": -0.01257602
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist leicht größer dargestellt und leicht nach links und oben versetzt.",
+      "reference_svg": "references\\probe_11.svg",
+      "input_sha256": "706eaca0a0cf236eb860c8b79c90d12815523bbca19cbbff46f1f6745c782f7c",
+      "reference_svg_sha256": "11dfa9b6b498508be9e85c11007e3d024b96da63ec2d7c0f8ba94451865d8283"
+    },
+    {
+      "case_id": "probe_12",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 1.00133965,
+        "relative_x": 0.01616738,
+        "relative_y": -0.0029553
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas größer dargestellt und etwas nach rechts und oben versetzt.",
+      "reference_svg": "references\\probe_12.svg",
+      "input_sha256": "462e6a11e9e5b0e7e768332d56c05dda5ba2ac3b1833841449e09a0ec8c1444d",
+      "reference_svg_sha256": "87fb3e7ec5377f97e5bda8deb0a6a8e41caefc352c687ceca6380b0c9722f16e"
+    },
+    {
+      "case_id": "probe_13",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 0.99405781,
+        "relative_x": 0.01926636,
+        "relative_y": -0.00528645
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist geringfügig kleiner dargestellt und ein wenig nach rechts und oben verschoben.",
+      "reference_svg": "references\\probe_13.svg",
+      "input_sha256": "02cf04fe2b31fbd7ca5006d5e1d9fbc4bc6e0bb4fc33eb2e2e0c2df5f6333d3f",
+      "reference_svg_sha256": "8cde647510475b4fb48a41aa7496c38ea86c9dad6bf191e468aa1b52c387a5bb"
+    },
+    {
+      "case_id": "probe_14",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 1.04987247,
+        "relative_x": -0.00109926,
+        "relative_y": 0.02154378
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht größer dargestellt und ein wenig nach links und unten versetzt.",
+      "reference_svg": "references\\probe_14.svg",
+      "input_sha256": "b9eb82cacdee8d3f79e0871d091330239054e60288f1e3e9df134362674bad0e",
+      "reference_svg_sha256": "24ab4d621bc3c3cd607247bb6d59837950dee9d08cf956c5fb22bf88d5a97359"
+    },
+    {
+      "case_id": "probe_15",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 1.04176572,
+        "relative_x": -0.01280892,
+        "relative_y": 0.01709807
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringfügig größer dargestellt und leicht nach links und unten verschoben.",
+      "reference_svg": "references\\probe_15.svg",
+      "input_sha256": "c0130c6c02ad752cd54ef7397cf726d53b23765054906ba723d653a7defb3a8f",
+      "reference_svg_sha256": "c14ab93ad16ed94048a15be0c6dd0a94464e8c0fc64c6fb3d77bdb0a8c1f00c3"
+    },
+    {
+      "case_id": "probe_16",
+      "width": 108,
+      "height": 98,
+      "variation": {
+        "scale": 0.94743929,
+        "relative_x": 0.01816324,
+        "relative_y": 0.00135168
+      },
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist geringfügig kleiner dargestellt und geringfügig nach rechts und unten versetzt.",
+      "reference_svg": "references\\probe_16.svg",
+      "input_sha256": "9a3ae731333c1e435f7c82810ae3bc7542311114b60bdf132950978c0407c9f1",
+      "reference_svg_sha256": "e58661f038f2f5732d0a4145dea050c39a77337358e5a493c2cf92004bc38d95"
+    }
+  ]
+}

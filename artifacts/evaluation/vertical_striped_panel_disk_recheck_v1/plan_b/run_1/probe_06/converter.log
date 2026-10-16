@@ -1,0 +1,25 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere probe_06.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite probe_06.png ---
+Bildbeschreibung: Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig größer dargestellt und geringfügig nach links und unten versetzt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] probe_06.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.540566, localized_error_fraction=0.599374).
+[INFO] Konvertiert probe_06.png | Parameter: mode=auto, label=M, variant_name=PROBE_06 | Qualität: Optimierungsfehler/Pixel=0.000063, Mean-Delta²=23.015306, RGB-RMSE/Kanal=2.769796, Raumscore=64.166475, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.1s
+[INFO] Konvertiere probe_06.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite probe_06.png ---
+Bildbeschreibung: Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig größer dargestellt und geringfügig nach links und unten versetzt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] probe_06.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.540566, localized_error_fraction=0.599374).
+[INFO] Konvertiert probe_06.png | Parameter: mode=auto, label=M, variant_name=PROBE_06 | Qualität: Optimierungsfehler/Pixel=0.000063, Mean-Delta²=23.015306, RGB-RMSE/Kanal=2.769796, Raumscore=64.166475, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere probe_06.png | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite probe_06.png ---
+Bildbeschreibung: Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links violett, mittig cremefarben, rechts dunkelgrün. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig größer dargestellt und geringfügig nach links und unten versetzt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] probe_06.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.540566, localized_error_fraction=0.599374).
+[INFO] Konvertiert probe_06.png | Parameter: mode=auto, label=M, variant_name=PROBE_06 | Qualität: Optimierungsfehler/Pixel=0.000063, Mean-Delta²=23.015306, RGB-RMSE/Kanal=2.769796, Raumscore=64.166475, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\vsp1\probe_06\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\vsp1\probe_06\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\vsp1\probe_06\conversion
