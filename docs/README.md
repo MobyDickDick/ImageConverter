@@ -2,6 +2,8 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [Formenfamilien gemeinsam bearbeiten: mehrere Vorlagen, Farben, Größen und Farbverläufe](form_families_workflow.md)
+
 - [GE9034: seitliche T-Verzweigung, vier Richtungen und 14 CLI-Abnahmen (2026-10-16)](next_arbeitspaket_2026-10-16_ge9034_6m.md)
 
 - [GE9031: T-Verzweigung, 14 Farb-/Größenvarianten und unabhängige CLI-Abnahme (2026-10-16)](next_arbeitspaket_2026-10-16_ge9031_6m.md)
