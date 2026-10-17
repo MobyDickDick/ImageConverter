@@ -467,6 +467,15 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                                "ohne text", "ohne beschriftung", "ohne label", "ohne buchstabe"))
         and re.search(r'(?:text|beschriftung|buchstabe|label)\s*[:=]?\s*["\'„]', desc) is not None
     )
+    left_labeled_square_hint = (
+        "kelle" in desc and _has_any(desc, ("quadrat", "viereck"))
+        and "griff" in desc and "nach links" in desc
+        and _has_any(desc, ("waagerecht", "horizontal"))
+        and not _has_any(desc, ("gespiegelt", "180", "dreieck", "griff nach rechts", "nach rechts gedreht",
+                               "90° nach rechts", "90 grad nach rechts", "griff nach oben", "griff nach unten",
+                               "ohne text", "ohne beschriftung", "ohne label", "ohne buchstabe"))
+        and re.search(r'(?:text|beschriftung|buchstabe|label)\s*[:=]?\s*["\'„]', desc) is not None
+    )
     right_facing_square_kelle_p_hint = (
         _has_any(desc, _profile_tokens("right_facing_square_kelle_p"))
         and _has_any(
@@ -777,13 +786,19 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         )
         return elements
 
-    if right_stem_square_kelle_hint or right_labeled_square_hint:
+    if right_stem_square_kelle_hint or right_labeled_square_hint or left_labeled_square_hint:
         rotated = _build_right_stem_square_kelle()
         if rotated is not None:
             label_match = re.search(r'(?:text|beschriftung|buchstabe|label)\s*[:=]?\s*["\'„]([^"\'“]{1,8})["\'“]', description, re.IGNORECASE)
             if label_match and not _has_any(desc, ("ohne text", "ohne beschriftung", "ohne label", "ohne buchstabe")):
                 rotated.update(label=label_match.group(1), label_center=[0.320, 0.500],
                                label_fill="#dedede", font_size=0.440, font_weight="600")
+            if left_labeled_square_hint:
+                x, y, w, h = rotated['body_bbox']
+                rotated.update(kind='LeftRotatedSquareKelleTGlyph', id='left_stem_labeled_square',
+                               body_bbox=[1-x-w, y, w, h],
+                               connector=[[1-u, v] for u, v in rotated['connector']],
+                               label_center=[1-rotated['label_center'][0], rotated['label_center'][1]])
             return [rotated]
 
     if main_diagonal_square_kelle_hint:

@@ -14,7 +14,7 @@ from tools.evaluate_satisfaction_gate import evaluate_satisfaction, seal_baselin
 
 
 def labeled_square_semantics(svg: str, label: str = 'P', stem_direction: str = 'bottom') -> float:
-    if stem_direction not in {'bottom', 'right'}:
+    if stem_direction not in {'bottom', 'right', 'left'}:
         return 0.
     root = ET.fromstring(svg)
     shapes = [e for e in root.iter() if e.tag.rsplit('}', 1)[-1] in
@@ -41,7 +41,9 @@ def labeled_square_semantics(svg: str, label: str = 'P', stem_direction: str = '
                      and abs(sy-(y+h)) <= sw/2+1e-4 and ey > y+h
                      if stem_direction == 'bottom' else
                      abs(sy-ey) < 1e-4 and abs(sy-(y+h/2)) < h*.1
-                     and abs(sx-(x+w)) <= sw/2+1e-4 and ex > x+w)
+                     and (abs(sx-(x+w)) <= sw/2+1e-4 and ex > x+w
+                          if stem_direction == 'right' else
+                          abs(sx-x) <= sw/2+1e-4 and ex < x))
         return float(w > 0 and h > 0 and .7 <= w/h <= 1.3
                      and 0 < sw < min(w,h)*.2 and 0 < cw < w*.3
                      and connected

@@ -1,6 +1,6 @@
 # Zufriedenstellende Konvertierungen
 
-343 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
+356 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
 
 Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bild und Beschreibung.
 
@@ -54,6 +54,15 @@ Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bi
 | [AC0421_L](images/AC0421_L.jpg) | [SVG](svgs/AC0421_L.svg) | 96.584999 | semantic-only |
 | [AC0421_M](images/AC0421_M.jpg) | [SVG](svgs/AC0421_M.svg) | 185.643326 | semantic-only |
 | [AC0421_S](images/AC0421_S.jpg) | [SVG](svgs/AC0421_S.svg) | 117.915001 | semantic-only |
+| [AC0424_1_L](images/AC0424_1_L.jpg) | [SVG](svgs/AC0424_1_L.svg) | 150.581253 | semantic-only |
+| [AC0424_1_M](images/AC0424_1_M.jpg) | [SVG](svgs/AC0424_1_M.svg) | 204.273331 | semantic-only |
+| [AC0424_1_S](images/AC0424_1_S.jpg) | [SVG](svgs/AC0424_1_S.svg) | 285.829987 | semantic-only |
+| [AC0424_2_L](images/AC0424_2_L.jpg) | [SVG](svgs/AC0424_2_L.svg) | 106.055626 | semantic-only |
+| [AC0424_2_M](images/AC0424_2_M.jpg) | [SVG](svgs/AC0424_2_M.svg) | 128.702225 | semantic-only |
+| [AC0424_2_S](images/AC0424_2_S.jpg) | [SVG](svgs/AC0424_2_S.svg) | 196.582504 | semantic-only |
+| [AC0424_L](images/AC0424_L.jpg) | [SVG](svgs/AC0424_L.svg) | 100.260002 | semantic-only |
+| [AC0424_M](images/AC0424_M.jpg) | [SVG](svgs/AC0424_M.svg) | 167.300003 | semantic-only |
+| [AC0424_S](images/AC0424_S.jpg) | [SVG](svgs/AC0424_S.svg) | 172.717499 | semantic-only |
 | [AC0711_1_L](images/AC0711_1_L.jpg) | [SVG](svgs/AC0711_1_L.svg) | 53.976002 | semantic-only |
 | [AC0711_1_M](images/AC0711_1_M.jpg) | [SVG](svgs/AC0711_1_M.svg) | 45.307144 | semantic-only |
 | [AC0711_1_S](images/AC0711_1_S.jpg) | [SVG](svgs/AC0711_1_S.svg) | 143.136002 | semantic-only |
@@ -132,6 +141,9 @@ Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bi
 | [AC0839_L](images/AC0839_L.jpg) | [SVG](svgs/AC0839_L.svg) | 5666.456055 | standard |
 | [AC0839_M](images/AC0839_M.jpg) | [SVG](svgs/AC0839_M.svg) | 3988.645752 | standard |
 | [AC0839_S](images/AC0839_S.jpg) | [SVG](svgs/AC0839_S.svg) | 3389.488037 | standard |
+| [AC0840_L](images/AC0840_L.jpg) | [SVG](svgs/AC0840_L.svg) | 464.736664 | semantic-only |
+| [AC0840_M](images/AC0840_M.jpg) | [SVG](svgs/AC0840_M.svg) | 228.524994 | semantic-only |
+| [AC0840_S](images/AC0840_S.jpg) | [SVG](svgs/AC0840_S.svg) | 447.333344 | semantic-only |
 | [AC0850_L](images/AC0850_L.jpg) | [SVG](svgs/AC0850_L.svg) | 347.363342 | semantic-only |
 | [AC0850_M](images/AC0850_M.jpg) | [SVG](svgs/AC0850_M.svg) | 248.467499 | semantic-only |
 | [AC0850_S](images/AC0850_S.jpg) | [SVG](svgs/AC0850_S.svg) | 450.813324 | semantic-only |
@@ -348,4 +360,5 @@ Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bi
 | [GE9034_7M](images/GE9034_7M.jpg) | [SVG](svgs/GE9034_7M.svg) | 41.880001 | semantic-only |
 | [GE9034_7S](images/GE9034_7S.jpg) | [SVG](svgs/GE9034_7S.svg) | 67.489998 | semantic-only |
 | [SE0081](images/SE0081.jpg) | [SVG](svgs/SE0081.svg) | 702.781555 | semantic-only |
+| [SE0082](images/SE0082.jpg) | [SVG](svgs/SE0082.svg) | 700.750000 | semantic-only |
 | [b_heating1](images/b_heating1.jpg) | [SVG](svgs/b_heating1.svg) | 726.417908 | semantic-only |

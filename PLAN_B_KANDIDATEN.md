@@ -2,7 +2,33 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-17, nach AC0414-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-17, nach SE0082-Abnahme)
+
+SE0082 besteht beide regulären und die strengeren Pixelgates. Der linke
+Quadrat-/Griff-/Textfit ist verallgemeinert; zwei unabhängige CLI-Batterien
+bestehen jeweils 17/17. 356 Paare sind archiviert, alle 355 bisherigen
+Einträge unverändert. Aktive Rotation:
+`AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`, `AC0232_M`.
+Details: `docs/next_arbeitspaket_2026-10-17_se0082.md`.
+Review: `artifacts/evaluation/left_stem_labeled_square_recheck_v1/review_args.json`.
+
+## Vorheriger Abschluss: AC0840
+
+AC0840 besteht mit S/M/L beide regulären und die strengeren Pixelgates.
+Eine unabhängige Kurztextvorlage besteht 17/17. 355 Paare sind archiviert;
+alle 352 bisherigen Einträge bleiben unverändert. Aktive Rotation:
+`SE0082`, `AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`.
+Details: `docs/next_arbeitspaket_2026-10-17_ac0840_search.md`.
+Review: `artifacts/evaluation/conversion_search_2026-10-17/review_args.json`.
+Die folgenden Abschnitte halten frühere Abnahmen und Rotationen fest.
+
+AC0424 besteht mit allen neun Farb-/Größenvarianten beide regulären Gates
+ohne Pflichtmetrikregression (`AC0424_2_M: mean_delta2=128.702225`). Die sechs
+farbigen JPGs bestehen zusätzlich das strengere Pixelgate; die drei grauen
+IoU-Fälle bleiben separat offen. 352 Paare sind archiviert, alle 343 bisherigen
+Einträge unverändert. GE9033 ist bereits abgenommen und bleibt ausgeschlossen.
+Details: `docs/next_arbeitspaket_2026-10-17_ac0424_2_m.md`.
+Reproduzierbarer Review: `artifacts/evaluation/oriented_spiral_disk_recheck_v1/review_args.json`.
 
 AC0414 besteht nach eigenständigen Beschreibungen und allgemeiner
 Richtungsnormalisierung der Kreis-/Sehnen-/T-Registrierung mit allen neun
@@ -212,11 +238,11 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `GE9033_6M` – `mean_delta2=9439.891602`, `normalized_mse=0.048391`.
-2. `AC0424_2_M` – `mean_delta2=9402.916992`, `normalized_mse=0.048202`.
-3. `AC0840_S` – `mean_delta2=9352.613281`, `normalized_mse=0.047944`.
-4. `AC0840_M` – `mean_delta2=9330.667969`, `normalized_mse=0.047831`.
-5. `SE0082` – `mean_delta2=9194.764648`, `normalized_mse=0.047135`.
+1. `SE0082` – `mean_delta2=9194.764648`, `normalized_mse=0.047135`.
+2. `AC0411_1_M` – `mean_delta2=9132.411133`, `normalized_mse=0.046815`.
+3. `AC0910_L` – `mean_delta2=9119.409180`, `normalized_mse=0.046748`.
+4. `GE0204_M` – `mean_delta2=9102.777344`, `normalized_mse=0.046663`.
+5. `AC0921_M` – `mean_delta2=9095.863281`, `normalized_mse=0.046628`.
 
 `SE0081` besteht nach eigenständiger Beschreibung beide regulären und strengeren
 Pixelgates ohne Pflichtmetrikregression. Die vorhandene Runtime bleibt unverändert.
