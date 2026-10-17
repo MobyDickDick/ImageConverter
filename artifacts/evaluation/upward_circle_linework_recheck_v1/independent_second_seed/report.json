@@ -1,0 +1,797 @@
+{
+  "artifact_retention": "debug",
+  "cases": [
+    {
+      "blocked_svg_reads": [],
+      "case_id": "original",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "original/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.\n",
+      "elapsed_seconds": 2.438,
+      "failures": [],
+      "height": 98,
+      "input_png": "original/input.png",
+      "input_sha256": "9f2d98297b32ef064b3e20cdf9a9a2e63eec21459e2059c8b201058295f4b5ed",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9727932810783386,
+        "foreground_iou": 0.9970282317979198,
+        "foreground_mse": 0.0006986150401644409,
+        "normalized_mse": 0.00022519480262417346
+      },
+      "output_sha256": "57b7af913f8e0cce08f303f29d59fbe45dc2667effe17d4df18dfbafce3b6077",
+      "output_svg": "original/output.svg",
+      "reference_svg": "original/reference.svg",
+      "reference_svg_sha256": "cb682167a36bd69180ca389152af25dfffdfd24d14bac2334e4b698697ebe288",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.0,
+        "relative_y": 0.0,
+        "scale": 1.0
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_01",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_01/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "elapsed_seconds": 2.922,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_01/input.png",
+      "input_sha256": "5efd0a10c003ba5f32b9a1156ff2028877f5eddf9de76b3264359b45954f8396",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9720738530158997,
+        "foreground_iou": 0.9982864976010967,
+        "foreground_mse": 0.0003210027061868459,
+        "normalized_mse": 0.00011208312207600102
+      },
+      "output_sha256": "821cf7a22afa91966ae6812d3442b7938ad501435737453c43b4662bdd0aa9bc",
+      "output_svg": "probe_01/output.svg",
+      "reference_svg": "probe_01/reference.svg",
+      "reference_svg_sha256": "b6f8d96c06313184da25fdf8278866e57d225c5f6117cae6c83092d598cad817",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0149554,
+        "relative_y": 0.01404737,
+        "scale": 1.04281285
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_02",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_02/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "elapsed_seconds": 2.343,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_02/input.png",
+      "input_sha256": "3aa68023b7d40187ed6bc1739a5b815eb022ea89c772164c7d3015974616a99f",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9638941287994385,
+        "foreground_iou": 0.9971098265895953,
+        "foreground_mse": 0.0004923424567095935,
+        "normalized_mse": 0.00016253955254796892
+      },
+      "output_sha256": "673823c4151cab06ca1d2acad113d22322e4c0b9af9eca35625d1dd0b60c0689",
+      "output_svg": "probe_02/output.svg",
+      "reference_svg": "probe_02/reference.svg",
+      "reference_svg_sha256": "6522d0d5a74f0fb00f97ffdd7594cf5f93f1c3e1b87593619c68d0f9db0cf718",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01219469,
+        "relative_y": 0.02409658,
+        "scale": 1.01409436
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_03",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_03/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist etwas gr\u00f6\u00dfer dargestellt und leicht nach links und unten versetzt.",
+      "elapsed_seconds": 2.453,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_03/input.png",
+      "input_sha256": "7e86f96127523b624ee87178244ac3b47d51daacda290f5188694261bbcfbbf2",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9696344137191772,
+        "foreground_iou": 0.9996609020006781,
+        "foreground_mse": 0.0005211566458456218,
+        "normalized_mse": 0.00018336564244236797
+      },
+      "output_sha256": "1ff11b107ab0d4ee403f2c8439015c2ad39264d1f5c68d0e4b418b7bce83cbc0",
+      "output_svg": "probe_03/output.svg",
+      "reference_svg": "probe_03/reference.svg",
+      "reference_svg_sha256": "cf7337ff5152e4dc73abe6207079f8c212bc3f40798cda6126092401a7148b65",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01945393,
+        "relative_y": 0.004432,
+        "scale": 1.04771352
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_04",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_04/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach rechts und oben versetzt.",
+      "elapsed_seconds": 2.375,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_04/input.png",
+      "input_sha256": "0d5a35acccfade79e970598cdb34f8b7b8167fec7dd0f2f0dee5517c87c1188c",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.885962188243866,
+        "foreground_iou": 0.9964526427811281,
+        "foreground_mse": 0.0007546546985395253,
+        "normalized_mse": 0.0002532230573706329
+      },
+      "output_sha256": "cfb07a044f0d1fd3b3330112157d3b129c8b0c0dfaeaf1a63c592b6d50260d94",
+      "output_svg": "probe_04/output.svg",
+      "reference_svg": "probe_04/reference.svg",
+      "reference_svg_sha256": "c2c1b68186d8735948775f939fb66be2f7fc379e943adfd90ed806c60953106a",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00934637,
+        "relative_y": -0.02498267,
+        "scale": 1.0217956
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_05",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_05/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig gr\u00f6\u00dfer dargestellt und leicht nach rechts und unten verschoben.",
+      "elapsed_seconds": 2.532,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_05/input.png",
+      "input_sha256": "6c20faaefcc03a0ac7536fcb586d4ad4a4935279a29de5dcd0f32d7604b0d782",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9760140180587769,
+        "foreground_iou": 0.99639379733141,
+        "foreground_mse": 0.0002846362767741084,
+        "normalized_mse": 9.420518472325057e-05
+      },
+      "output_sha256": "9d4eb3394a639b84479985325e8d8a92571d71241833dd3cfda265306a59e5ad",
+      "output_svg": "probe_05/output.svg",
+      "reference_svg": "probe_05/reference.svg",
+      "reference_svg_sha256": "552f41f7d41528584035285a394fddfe89e2f290e56b939e01041765743969c2",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02113508,
+        "relative_y": 0.00340482,
+        "scale": 1.01506327
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_06",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_06/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas kleiner dargestellt und etwas nach links und unten verschoben.",
+      "elapsed_seconds": 2.734,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_06/input.png",
+      "input_sha256": "b1ac5bd8fc7795945378d85ee043ae4533d5b3cacffc4697b1e8e3a422f49f95",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9531136155128479,
+        "foreground_iou": 0.9963144963144963,
+        "foreground_mse": 0.0005993179511278868,
+        "normalized_mse": 0.00017655763076618314
+      },
+      "output_sha256": "cb5ef7e203ff9f0261bf5586d04e51e82b5bfbecbf97e4a06ee0dd4899a5f3a3",
+      "output_svg": "probe_06/output.svg",
+      "reference_svg": "probe_06/reference.svg",
+      "reference_svg_sha256": "42289cadb2ed4a6d2323116e7de0e3ef352cb27d0dd939a074ddb4845fc9f149",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02210458,
+        "relative_y": 0.01042227,
+        "scale": 0.95167741
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_07",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_07/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und etwas nach rechts und oben versetzt.",
+      "elapsed_seconds": 2.5,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_07/input.png",
+      "input_sha256": "a819b3cd867b9f4e3b2abf00dfd513b38951834cc4ff0bf159a5517dc08ac50a",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9601956605911255,
+        "foreground_iou": 0.9985185185185185,
+        "foreground_mse": 0.0005566178588196635,
+        "normalized_mse": 0.00017941390979103744
+      },
+      "output_sha256": "7389771033ad6808e720f3c78ce714533b7bc451803902592dddabd68c40f553",
+      "output_svg": "probe_07/output.svg",
+      "reference_svg": "probe_07/reference.svg",
+      "reference_svg_sha256": "7a8e52b3518fd794fa034010d5a49532799a56343f51b3b2f4adc7f743473f68",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01843312,
+        "relative_y": -0.00346665,
+        "scale": 1.00149991
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_08",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_08/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig kleiner dargestellt und etwas nach rechts und oben versetzt.",
+      "elapsed_seconds": 2.891,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_08/input.png",
+      "input_sha256": "6d62b657946762552aac7e0be79554e85b94b28dd687b84059019bc8eff14809",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8973261713981628,
+        "foreground_iou": 0.9968051118210862,
+        "foreground_mse": 0.0005023872945457697,
+        "normalized_mse": 0.00015132971748244017
+      },
+      "output_sha256": "0fb04fa613c663455f9dd5f58a0d06f740acef0076f852fbf738baf202f1261e",
+      "output_svg": "probe_08/output.svg",
+      "reference_svg": "probe_08/reference.svg",
+      "reference_svg_sha256": "9d7ed793d94cd8419391c93160af59b2720f4a2c952bf32abae467e4569bbc8a",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02424477,
+        "relative_y": -0.01831125,
+        "scale": 0.96370277
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_09",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_09/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas kleiner dargestellt und leicht nach links und oben versetzt.",
+      "elapsed_seconds": 2.36,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_09/input.png",
+      "input_sha256": "2aa3394fcb9a5bea2cddae06eaa3a03ac9ea744d38f27597db3f4b0860a4e475",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9098056554794312,
+        "foreground_iou": 0.997093023255814,
+        "foreground_mse": 0.0006504696211777627,
+        "normalized_mse": 0.0001872164139058441
+      },
+      "output_sha256": "7478e59354132d0ede1816ef08998646524026a35726f92e5d306798038d268c",
+      "output_svg": "probe_09/output.svg",
+      "reference_svg": "probe_09/reference.svg",
+      "reference_svg_sha256": "ee49da09f187e269b0f445ab0ee4eadcf9dfa2d32605b5814adbe83c4cebe57c",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02460557,
+        "relative_y": -0.0063062,
+        "scale": 0.94452461
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_10",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_10/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und oben verschoben.",
+      "elapsed_seconds": 2.734,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_10/input.png",
+      "input_sha256": "637e1b2a7853fe30fa727b57b098a86d7db9fe0eff1663628d8f6375313f2cc0",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.972134530544281,
+        "foreground_iou": 0.9956850053937433,
+        "foreground_mse": 0.0004204396391287446,
+        "normalized_mse": 0.0001406776427756995
+      },
+      "output_sha256": "c10e6d0022863ef245ee58de50265810522255b238d1555c393345d7552fc150",
+      "output_svg": "probe_10/output.svg",
+      "reference_svg": "probe_10/reference.svg",
+      "reference_svg_sha256": "16a36293c16da0e982a1342343ced650cd64c37047ed608ac5024f686b9fb48a",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01341343,
+        "relative_y": -0.01747129,
+        "scale": 1.01463589
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_11",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_11/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten verschoben.",
+      "elapsed_seconds": 2.954,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_11/input.png",
+      "input_sha256": "dd0ba5c76600d4e602b85aeed6bbb5cdd44a43b0aa55e5cc9d0d0cb7482174c1",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9692517518997192,
+        "foreground_iou": 0.9981419546636938,
+        "foreground_mse": 0.0003073073166888207,
+        "normalized_mse": 9.886185580398887e-05
+      },
+      "output_sha256": "fc76c14a4dbf6064ec87d6377b835596e9aeed7179dfa4f561083f6d56df0a5d",
+      "output_svg": "probe_11/output.svg",
+      "reference_svg": "probe_11/reference.svg",
+      "reference_svg_sha256": "73ff7bb57f43ab62bad1135bb98f4ff08aef2f12df0ab8ab54b29ad81028e28a",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01618893,
+        "relative_y": 0.02334897,
+        "scale": 1.00114343
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_12",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_12/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "elapsed_seconds": 2.781,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_12/input.png",
+      "input_sha256": "10a733cdb6702bbaa1026c4a5612eecbc14d391098a36b1ec0c6fce35cdf64ed",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9717153310775757,
+        "foreground_iou": 0.9982098102398854,
+        "foreground_mse": 0.0004414746072143316,
+        "normalized_mse": 0.00014676671708002687
+      },
+      "output_sha256": "6b0f84f38a3a70b2b5850aa0dc47b1ee84c31868629aa04fc121fe13bd80f8e3",
+      "output_svg": "probe_12/output.svg",
+      "reference_svg": "probe_12/reference.svg",
+      "reference_svg_sha256": "43faaed2d045991321304df2cb3ae2de2934b01a449f5e70d52eb5d2cd40b279",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0015255,
+        "relative_y": 0.01511785,
+        "scale": 1.01824388
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_13",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_13/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und etwas nach rechts und unten versetzt.",
+      "elapsed_seconds": 3.094,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_13/input.png",
+      "input_sha256": "1529cfc6a729e03e75ea131f96751dca498180fdae8eeceb3e1252375f1680e7",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9723405241966248,
+        "foreground_iou": 0.9954413593037712,
+        "foreground_mse": 0.0003113873244728893,
+        "normalized_mse": 9.027170017361641e-05
+      },
+      "output_sha256": "2a657b3258314b68e15718c0a7004756d5a648392c9f9256700065bba9af00a0",
+      "output_svg": "probe_13/output.svg",
+      "reference_svg": "probe_13/reference.svg",
+      "reference_svg_sha256": "2257189bf2f5b4caddab3a8425b556e47ed229543cb0f5f5e8b769cb955224c9",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02024787,
+        "relative_y": 0.00270128,
+        "scale": 0.94506484
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_14",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_14/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht kleiner dargestellt und geringf\u00fcgig nach rechts und unten verschoben.",
+      "elapsed_seconds": 3.016,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_14/input.png",
+      "input_sha256": "7900ca566e59c10db8ee92cd6524616ad54b1d962dbcf8b2f7bb270a5bd9ed32",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9634729623794556,
+        "foreground_iou": 0.996292176492399,
+        "foreground_mse": 0.0006127721862867475,
+        "normalized_mse": 0.00019715439702849835
+      },
+      "output_sha256": "f2309d505002ee263ef1f776253254f302fd49009282a3c69beced04e51e868c",
+      "output_svg": "probe_14/output.svg",
+      "reference_svg": "probe_14/reference.svg",
+      "reference_svg_sha256": "e1becf4bcba58e6152f3e761657d5bea887d21a2abe2a50332ae21563b959e7b",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00180461,
+        "relative_y": 0.00170246,
+        "scale": 0.99997072
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_15",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_15/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht kleiner dargestellt und geringf\u00fcgig nach links und oben versetzt.",
+      "elapsed_seconds": 3.594,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_15/input.png",
+      "input_sha256": "dc709085c7629b760e75648f187d4644ae00bce1266f3152a616858353d1f580",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9021298885345459,
+        "foreground_iou": 0.9975579975579976,
+        "foreground_mse": 0.00031590493745170534,
+        "normalized_mse": 9.390228660777211e-05
+      },
+      "output_sha256": "5b214f14183c77e54cb8532e4db85ebe0db9b062b23e304181a6ce3701bd8229",
+      "output_svg": "probe_15/output.svg",
+      "reference_svg": "probe_15/reference.svg",
+      "reference_svg_sha256": "ba739b190fa39e0ac8ac429c86891f7eed3fbba20b5ff7bedc494d2730f26866",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0026847,
+        "relative_y": -0.01725626,
+        "scale": 0.95282094
+      },
+      "width": 86
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_16",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_16/converter.log",
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht kleiner dargestellt und geringf\u00fcgig nach rechts und unten verschoben.",
+      "elapsed_seconds": 3.125,
+      "failures": [],
+      "height": 98,
+      "input_png": "probe_16/input.png",
+      "input_sha256": "aad85cb9e8336c2daa7a85f5cea656ffbfc4c78ecf27c40f5d6cabb532cb9739",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9590532779693604,
+        "foreground_iou": 0.993574297188755,
+        "foreground_mse": 0.0006053608376532793,
+        "normalized_mse": 0.0001809782988857478
+      },
+      "output_sha256": "29abd4c7254ed0d906291da5a0a2ce12cf5fffeb8393fd4741b4a5645578be52",
+      "output_svg": "probe_16/output.svg",
+      "reference_svg": "probe_16/reference.svg",
+      "reference_svg_sha256": "ef0bd91a537a6009a6ca21b593873e35f545e493b8c3827182de9be7d74243c1",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02374944,
+        "relative_y": 0.01921438,
+        "scale": 0.96012384
+      },
+      "width": 86
+    }
+  ],
+  "iterations": 64,
+  "limits": {
+    "max_foreground_mse": 0.04,
+    "max_normalized_mse": 0.01,
+    "max_path_commands": 160,
+    "max_svg_elements": 80,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85
+  },
+  "original_satisfactory": true,
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261018,
+  "source_description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach oben ann\u00e4hern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.\n",
+  "source_description_sha256": "6a08c5da4fcdc982b70b13d228afee4c38f082baa14725a04e06f127771fe2fb",
+  "source_image": "source.png",
+  "source_image_sha256": "9f2d98297b32ef064b3e20cdf9a9a2e63eec21459e2059c8b201058295f4b5ed",
+  "source_svg_sha256": "b219bdb9a99ea0f5ec27c0ff8bb834ee90e4402d6b100e40cc98bd57f96d6a76",
+  "status": "completed",
+  "summary": {
+    "completed": 17,
+    "failed": 0,
+    "passed": 17,
+    "required": 17,
+    "satisfactory": true
+  },
+  "timeout_seconds": 60,
+  "variations_started": true
+}

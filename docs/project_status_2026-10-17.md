@@ -80,8 +80,7 @@ Verschieben nach `samples` würde die noch ausstehende persönliche Prüfung nic
 
 ## Nächstes Paket
 
-GE9033 und anschließend AC0424 sind umgesetzt; Details zur jüngsten Abnahme,
-Grenzen und Reproduktion stehen im
-[Arbeitspaket](next_arbeitspaket_2026-10-17_ac0424_2_m.md).
-Danach folgen regulär `AC0840_S`, `AC0840_M`, `SE0082`, `AC0411_1_M`
-und `AC0910_L`. Die übrigen offenen Aufgaben bleiben erhalten.
+AC0411 ist nach SE0082 abgeschlossen; Nachweise, Grenzen und Reproduktion
+stehen im [Arbeitspaket](next_arbeitspaket_2026-10-17_ac0411_1_m.md).
+Danach folgen regulär `AC0910_L`, `GE0204_M`, `AC0921_M` und `AC0232_M`.
+Die übrigen offenen Aufgaben bleiben erhalten.

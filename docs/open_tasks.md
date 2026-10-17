@@ -43,6 +43,13 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 **Vorheriger Abschluss:** AC0840 S/M/L. Der folgende AC0424-Stand ist die
 vorherige Abnahme; ihre offenen grauen Folgepunkte bleiben erhalten.
 
+**Neuester Abschluss:** `AC0411_1_M` und acht Farb-/Größen-Holdouts.
+Frische neutrale Zielmetrik `9047.102539 → 200.141113`; mit festem Suchseed
+sind alle finalen SVGs im vollständigen Katalogkontext bytegleich.
+365 Archivpaare: alle 355 tatsächlich vorhandenen bisherigen Indexeinträge
+unverändert, neun neue AC0411-Paare und der wiederhergestellte SE0082-Eintrag.
+Nächste reguläre Rotation: `AC0910_L`, `GE0204_M`, `AC0921_M`, `AC0232_M`.
+Die übrigen offenen Aufgaben bleiben erhalten.
 
 - [x] **AC0424 – gerichtete Sehnen und Spirale auf Kreisscheibe:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung des vorhandenen Rasterfits; alle neun Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression. Die sechs farbigen JPGs bestehen zusätzlich die strengeren Pixelgrenzen. Details: `docs/next_arbeitspaket_2026-10-17_ac0424_2_m.md`.
 - [ ] **AC0424-PB-GREY:** Die drei grauen JPGs `AC0424_{L,M,S}` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.711278`, `0.734266`, `0.696203 < 0.85`). Beide regulären Gates bestehen. JPEG-Abweichungen an der unveränderten Vordergrundschwelle getrennt untersuchen; Quellen, akzeptierte SVGs und Grenzen erhalten.

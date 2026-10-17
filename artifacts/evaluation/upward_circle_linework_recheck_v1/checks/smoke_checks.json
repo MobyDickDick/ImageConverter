@@ -1,0 +1,31 @@
+{
+  "compileall": {
+    "command": [
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "tests",
+      "tools"
+    ],
+    "exit_code": 0
+  },
+  "cli_help": {
+    "command": [
+      "-m",
+      "src.imageCompositeConverter",
+      "--help"
+    ],
+    "exit_code": 0
+  },
+  "image_id_check": {
+    "command": [
+      "-m",
+      "tools.check_no_new_image_id_hardcoding"
+    ],
+    "exit_code": 0
+  },
+  "runtime_unchanged": {
+    "exit_code": 0
+  }
+}

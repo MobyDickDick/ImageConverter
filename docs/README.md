@@ -12,7 +12,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Warum die allgemeine Rekonstruktion stockt: echte Gegenproben, Szenenauswahl und Grenzen alter Testgerüste (2026-10-17)](reconstruction_bottleneck_audit_2026-10-17.md)
 
 - [AC0424: gerichtete Sehnen und Spirale, neun Varianten und unabhängige CLI-Abnahme (2026-10-17)](next_arbeitspaket_2026-10-17_ac0424_2_m.md)
-- [Aktueller Projektstand: 355 abgenommene Paare, offene Nachweise und persönliche Prüfliste (2026-10-17)](project_status_2026-10-17.md)
+- [Aktueller Projektstand: 365 abgenommene Paare, offene Nachweise und persönliche Prüfliste (2026-10-17)](project_status_2026-10-17.md)
 - [GE9033: T-Verzweigung nach unten, 14 reguläre Abnahmen und grauer IoU-Folgepunkt (2026-10-17)](next_arbeitspaket_2026-10-17_ge9033_6m.md)
 
 - [Formenfamilien gemeinsam bearbeiten: mehrere Vorlagen, Farben, Größen und Farbverläufe](form_families_workflow.md)

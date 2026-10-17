@@ -4,7 +4,7 @@ ImageConverter converts badge/source images into composite SVG outputs and also
 provides annotation/debugging helpers for the source raster files.
 
 Der [Projektstand vom 2026-10-17](docs/project_status_2026-10-17.md) zählt
-352 ausdrücklich abgenommene Paare bei 1.785 Katalogbildern und trennt
+365 ausdrücklich abgenommene Paare bei 1.785 Katalogbildern und trennt
 ältere Pixelprüfungen von noch fehlenden Nachweisen. Eine sortierte
 Prüfliste unterstützt die persönliche Sichtprüfung für Samples.
 
@@ -38,7 +38,7 @@ Abnahmen aktualisiert. `python -m tools.run_pytest_profile extended`
 aktualisiert die Sammlung einschließlich späterer erfolgreicher Batches,
 konvertiert alle Einträge erneut und prüft deren Qualität; Quellen und
 gespeicherte gute SVGs bleiben dabei erhalten. Details zur Sammlung und zur
-[jüngsten Spiral-Abnahme](docs/next_arbeitspaket_2026-10-17_ac0424_2_m.md).
+[jüngsten Sehnen-/T-Abnahme](docs/next_arbeitspaket_2026-10-17_ac0411_1_m.md).
 
 Run the converter via:
 

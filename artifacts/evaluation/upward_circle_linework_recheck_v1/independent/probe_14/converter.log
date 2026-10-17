@@ -1,0 +1,46 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere probe_14.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite probe_14.png ---
+Bildbeschreibung: Ein gefüllter Kreis mit Kontur enthält zwei schräge Linien, die bis an den Kreisrand reichen und sich nach oben annähern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisfüllung. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht größer dargestellt und etwas nach links und unten verschoben.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_circle_linework_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 64, "current_error": 1.7433554817275747}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 128, "current_error": 1.2224727100142383}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 192, "current_error": 1.5384037335864578}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 256, "current_error": 1.0258266097136528}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 320, "current_error": 0.9630991931656383}
+[Search] {"source": "raster_circle_linework_v1", "event": "registration_finished", "evaluations": 345, "best_error": 0.8634314190792596}
+[WARN] probe_14.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.840170, localized_error_fraction=0.880286).
+[INFO] Konvertiert probe_14.png | Parameter: mode=auto, label=M, variant_name=PROBE_14 | Qualität: Optimierungsfehler/Pixel=0.000102, Mean-Delta²=27.933910, RGB-RMSE/Kanal=3.051443, Raumscore=106.906733, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.8s
+[INFO] Konvertiere probe_14.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite probe_14.png ---
+Bildbeschreibung: Ein gefüllter Kreis mit Kontur enthält zwei schräge Linien, die bis an den Kreisrand reichen und sich nach oben annähern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisfüllung. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht größer dargestellt und etwas nach links und unten verschoben.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_circle_linework_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 64, "current_error": 1.7433554817275747}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 128, "current_error": 1.2224727100142383}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 192, "current_error": 1.5384037335864578}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 256, "current_error": 1.0258266097136528}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 320, "current_error": 0.9630991931656383}
+[Search] {"source": "raster_circle_linework_v1", "event": "registration_finished", "evaluations": 345, "best_error": 0.8634314190792596}
+[WARN] probe_14.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.840170, localized_error_fraction=0.880286).
+[INFO] Konvertiert probe_14.png | Parameter: mode=auto, label=M, variant_name=PROBE_14 | Qualität: Optimierungsfehler/Pixel=0.000102, Mean-Delta²=27.933910, RGB-RMSE/Kanal=3.051443, Raumscore=106.906733, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere probe_14.png | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite probe_14.png ---
+Bildbeschreibung: Ein gefüllter Kreis mit Kontur enthält zwei schräge Linien, die bis an den Kreisrand reichen und sich nach oben annähern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisfüllung. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht größer dargestellt und etwas nach links und unten verschoben.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_circle_linework_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 64, "current_error": 1.7433554817275747}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 128, "current_error": 1.2224727100142383}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 192, "current_error": 1.5384037335864578}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 256, "current_error": 1.0258266097136528}
+[Search] {"source": "raster_circle_linework_v1", "event": "registering", "evaluations": 320, "current_error": 0.9630991931656383}
+[Search] {"source": "raster_circle_linework_v1", "event": "registration_finished", "evaluations": 345, "best_error": 0.8634314190792596}
+[WARN] probe_14.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.840170, localized_error_fraction=0.880286).
+[INFO] Konvertiert probe_14.png | Parameter: mode=auto, label=M, variant_name=PROBE_14 | Qualität: Optimierungsfehler/Pixel=0.000102, Mean-Delta²=27.933910, RGB-RMSE/Kanal=3.051443, Raumscore=106.906733, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\up-independent\probe_14\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\up-independent\probe_14\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\up-independent\probe_14\conversion
