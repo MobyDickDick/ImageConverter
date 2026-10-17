@@ -6,11 +6,17 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-17)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `466` · Erledigt `429` · Offen `37`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `471` · Erledigt `433` · Offen `38`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
 ## Übergreifende Rekonstruktion (Audit 2026-10-17)
+
+- [x] **PB-LEARN-PROCESS:** Ursachenanalyse, Gruppierung gemeinsamer Fehler, mindestens zwei Lösungshypothesen, begrenzter Vergleich, unveränderte Gates und dauerhafte Regressionen nach jedem erweiterten Plan-B-Fehlschlag dokumentiert und in die erzeugten Fehleraufgaben aufgenommen. `docs/plan_b_learning_workflow.md`.
+- [x] **SEARCH-PORTFOLIO-01:** Vier alternative Kurztextmodelle, drei zusätzliche Parametersuchwege, Seeds, Rendercache, Budget, Fortschrittsbelege und gespeicherte geprüfte Varianten. Standardmodus kann erfolgreiche Modellarten priorisieren; semantic-only bleibt unabhängig. Keine allgemeine neue Topologiesuche. `docs/next_arbeitspaket_2026-10-17_ac0840_search.md`.
+- [x] **UML-CONVERSION:** Sequenz-, Klassen- und Zustandsdiagramm für Konvertierung, Suchportfolio und Fehlernachbearbeitung ergänzt. `docs/conversion_search_uml.md`.
+- [ ] **PB-LEARN-INVENTORY:** Historische gescheiterte erweiterte Plan-B-Aufgaben vollständig inventarisieren, Belege sichern und nach reproduzierten gemeinsamen Ursachen priorisieren. Die vermutete Zahl von etwa 20 Fällen ist noch nicht verifiziert. Verfahren: `docs/plan_b_learning_workflow.md`.
+
 
 Die [Ursachenprüfung](reconstruction_bottleneck_audit_2026-10-17.md) weist
 sprachabhängigen Topologie-Dispatch, Verlust mehrerer erkannter Instanzen und
@@ -30,10 +36,16 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 ### Aktueller Plan-B-Stand (2026-10-17)
 
+- [x] **AC0840 – Kurztext auf Kreisscheibe und alternative Suchmodelle:** S/M/L bestehen beide regulären und die strengen Pixelgates. Unabhängige Vorlage mit anderer Beschriftung, Palette und Lage besteht 17/17 echte CLI-Fälle. 355 archivierte Paare; alle 352 bisherigen Einträge unverändert. Nächste Rotation: `SE0082`, `AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`. Details: `docs/next_arbeitspaket_2026-10-17_ac0840_search.md`.
+
+**Neuester Abschluss:** AC0840 S/M/L. Der folgende AC0424-Stand ist die
+vorherige Abnahme; ihre offenen grauen Folgepunkte bleiben erhalten.
+
+
 - [x] **AC0424 – gerichtete Sehnen und Spirale auf Kreisscheibe:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung des vorhandenen Rasterfits; alle neun Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression. Die sechs farbigen JPGs bestehen zusätzlich die strengeren Pixelgrenzen. Details: `docs/next_arbeitspaket_2026-10-17_ac0424_2_m.md`.
 - [ ] **AC0424-PB-GREY:** Die drei grauen JPGs `AC0424_{L,M,S}` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.711278`, `0.734266`, `0.696203 < 0.85`). Beide regulären Gates bestehen. JPEG-Abweichungen an der unveränderten Vordergrundschwelle getrennt untersuchen; Quellen, akzeptierte SVGs und Grenzen erhalten.
 
-**Neuester Abschluss:** `AC0424_2_M` und acht Farb-/Größen-Holdouts.
+**Vorheriger Abschluss:** `AC0424_2_M` und acht Farb-/Größen-Holdouts.
 Frische neutrale Zielmetrik `6342.274414 → 128.702225`; finale SVGs im
 vollständigen Katalogkontext bytegleich. 352 Paare in der Erfolgsübersicht;
 alle 343 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:

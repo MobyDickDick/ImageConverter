@@ -76,6 +76,13 @@ def parseArgsImpl(
         help="Expliziter Pfad zur CSV/TSV/XML-Export-Tabelle mit den Beschreibungen",
     )
     parser.add_argument("--output-dir", default=None, help="Explizites Ausgabeverzeichnis")
+    parser.add_argument('--search-mode', choices=('legacy', 'portfolio'),
+                        default=os.environ.get('ICC_SEARCH_MODE', 'portfolio'),
+                        help='portfolio: bei schlechtem Fit verschiedene Suchwege mit Zwischenständen prüfen')
+    parser.add_argument('--search-seed', type=int, default=int(os.environ['ICC_SEARCH_SEED']) if 'ICC_SEARCH_SEED' in os.environ else None,
+                        help='Seed für wiederholbare alternative Suchwege')
+    parser.add_argument('--search-budget', type=int, default=384,
+                        help='Zusätzliche Prüfungen je analytischem Modell, geteilt auf drei Suchwege (32..10000)')
     parser.add_argument(
         "--execution-mode",
         choices=("standard", "semantic-only"),
@@ -240,6 +247,11 @@ def parseArgsImpl(
     )
     parser.add_argument("--_render-svg-subprocess", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
+    if not 32 <= args.search_budget <= 10000:
+        parser.error('--search-budget muss zwischen 32 und 10000 liegen')
+    if args.search_seed is None:
+        import secrets
+        args.search_seed = secrets.randbits(32)
     if args.input_dir:
         args.folder_path = str(args.input_dir)
     delattr(args, "input_dir")
@@ -539,7 +551,13 @@ def runMainImpl(
             # Temporary fallback diagnostics for local CLI runs: mirror complete
             # console output into a stable log file in the project root.
             log_path = str(Path.cwd() / "imageCompositeConverter.local.log")
-    with optional_log_capture_fn(log_path):
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import search_configuration, settings
+    with optional_log_capture_fn(log_path), search_configuration(
+        mode=getattr(args, 'search_mode', 'legacy'),
+        seed=getattr(args, 'search_seed', 0), budget=getattr(args, 'search_budget', 384),
+        directory=Path(getattr(args, 'output_dir', None) or 'artifacts/converted_images')/'search',
+        allow_memory=getattr(args, 'execution_mode', 'semantic-only') == 'standard',
+    ):
         try:
             if args.ac08_regression_set:
                 args.start = "AC" "0000"
@@ -576,6 +594,7 @@ def runMainImpl(
                 args.end = str(args.end or "ZZZZZZ").strip() or args.start
 
             csv_path, output_dir = resolve_cli_csv_and_output_fn(args)
+            settings()['directory'] = Path(output_dir or 'artifacts/converted_images')/'search'
 
             if bool(getattr(args, "repair_ac0223_bestlist", False)):
                 if repair_ac0223_bestlist_fn is None:

@@ -309,6 +309,7 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
                "--output-dir", str(case_dir / "conversion"), "--start", name, "--end", name,
                "--execution-mode", "semantic-only", "--deterministic-order", "--iterations", str(iterations)]
     environment = dict(os.environ, TINY_ICC_OUTPUT_VARIATION="0", PYTHONHASHSEED="0",
+                       ICC_SEARCH_SEED=os.environ.get('ICC_SEARCH_SEED', '0'),
                        ICC_FORCE_RECONVERT="1", PYTHONIOENCODING="utf-8")
     environment["PYTHONPATH"] = os.pathsep.join([str(ROOT), *sys.path])
     result = {**case, "satisfactory": False, "failures": [], "command": command}

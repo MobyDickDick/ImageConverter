@@ -1,5 +1,13 @@
 # Projektstand und Sichtprüfung am 2026-10-17
 
+**Nachtrag AC0840:** S/M/L ergänzen drei unabhängig geprüfte Bild-/SVG-Paare.
+Der aktuelle Archivstand beträgt **355 von 1.785 Bildern (19,9 %)**; alle 352
+bisherigen Indexeinträge sind unverändert. 1.430 Bilder haben weiterhin keine
+ausdrückliche Archivabnahme. Das ist keine Zahl nachgewiesen gescheiterter Bilder.
+Details: [AC0840 und Suchportfolio](next_arbeitspaket_2026-10-17_ac0840_search.md).
+Die folgenden Tabellen und CSV-Verweise dokumentieren den vorherigen Snapshot
+mit 352 Paaren und wurden als historischer Beleg erhalten.
+
 Vor den Paketen GE9033 und AC0424 waren **329 Bild-/SVG-Paare ausdrücklich abgenommen**.
 Die dokumentierten Pakete GE9033 und AC0424 ergänzen 14 beziehungsweise neun
 Farb-/Größenvarianten: damit sind es **352 von 1.785 Katalogbildern

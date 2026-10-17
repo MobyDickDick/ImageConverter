@@ -3,6 +3,16 @@
 Diese Kurzanleitung bündelt die aktuell empfohlenen lokalen Befehle für den
 ImageConverter.
 
+## Gescheiterte erweiterte Plan-B-Aufgaben
+
+Jeder Fehlschlag erhält eine reproduzierbare Ursachenanalyse, mehrere begründete
+Lösungshypothesen und einen Vorher-/Nachher-Vergleich bei unveränderten Gates.
+Gemeinsame Ursachen werden gebündelt; erfolgreiche Varianten und sinnvolle
+Regressionstests bleiben erhalten. Der verbindliche Ablauf und die bereits
+umgesetzte begrenzte Suche stehen in
+[Aus gescheiterten Plan-B-Aufgaben lernen](plan_b_learning_workflow.md).
+Den Zusammenhang zeigen die [UML-Diagramme](conversion_search_uml.md).
+
 ## Mehrere verwandte Vorlagen in einer Aufgabe
 
 Bei ähnlicher Formstruktur und ähnlichem Aufbau der Farbverläufe sollen

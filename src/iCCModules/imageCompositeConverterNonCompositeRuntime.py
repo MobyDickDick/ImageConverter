@@ -42,17 +42,18 @@ from src.iCCModules.imageCompositeConverterArcShaft import fit_arc_shaft
 from src.iCCModules.imageCompositeConverterGradientJunction import fit_gradient_junction
 from src.iCCModules.imageCompositeConverterCircleLinework import fit_circle_linework
 from src.iCCModules.imageCompositeConverterPrimitiveScene import fit_primitive_scene
+from src.iCCModules.imageCompositeConverterShortLabelDisk import fit_short_label_disk
 
 
 def _output_variation_rng() -> random.Random | None:
     """Return a per-conversion RNG for small output variations.
 
-    Set ``TINY_ICC_OUTPUT_VARIATION=0`` to disable this behaviour for strict
-    reproducibility diagnostics.
+    Set ``TINY_ICC_OUTPUT_VARIATION=1`` only for explicit visual experiments.
+    Search diversity is measured before acceptance; post-fit jitter is off.
     """
     if "PYTEST_CURRENT_TEST" in os.environ:
         return None
-    flag = os.environ.get("TINY_ICC_OUTPUT_VARIATION", "1").strip().lower()
+    flag = os.environ.get("TINY_ICC_OUTPUT_VARIATION", "0").strip().lower()
     if flag in {"0", "false", "no", "off"}:
         return None
     return random.Random(time.time_ns() ^ os.getpid())
@@ -1458,6 +1459,7 @@ def runNonCompositeIterationImpl(
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in (
+            (fit_short_label_disk, "non_composite_raster_short_label_disk"),
             (fit_primitive_scene, "non_composite_raster_primitive_scene"),
             (fit_circle_linework, "non_composite_raster_circle_linework"),
             (fit_arc_shaft, "non_composite_raster_arc_shaft"),

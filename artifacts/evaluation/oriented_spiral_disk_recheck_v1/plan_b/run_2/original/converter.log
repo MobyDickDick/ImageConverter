@@ -1,0 +1,25 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere original.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite original.png ---
+Bildbeschreibung: Eine gefüllte Kreisscheibe mit dünnem Rand auf hellem Hintergrund. Zwei schräge Linien durchqueren den Kreis von nahe dem linken Rand zu den rechten oberen und unteren Randbereichen und laufen nach links aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom linken Bereich gegen den Uhrzeigersinn nach innen läuft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichstärken und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] original.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.120235, localized_error_fraction=0.867900).
+[INFO] Konvertiert original.png | Parameter: mode=auto, label=M, variant_name=ORIGINAL | Qualität: Optimierungsfehler/Pixel=0.000102, Mean-Delta²=145.954315, RGB-RMSE/Kanal=6.975058, Raumscore=511.796480, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=2.2s
+[INFO] Konvertiere original.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite original.png ---
+Bildbeschreibung: Eine gefüllte Kreisscheibe mit dünnem Rand auf hellem Hintergrund. Zwei schräge Linien durchqueren den Kreis von nahe dem linken Rand zu den rechten oberen und unteren Randbereichen und laufen nach links aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom linken Bereich gegen den Uhrzeigersinn nach innen läuft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichstärken und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] original.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.120235, localized_error_fraction=0.867900).
+[INFO] Konvertiert original.png | Parameter: mode=auto, label=M, variant_name=ORIGINAL | Qualität: Optimierungsfehler/Pixel=0.000102, Mean-Delta²=145.954315, RGB-RMSE/Kanal=6.975058, Raumscore=511.796480, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.9s
+[INFO] Konvertiere original.png | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite original.png ---
+Bildbeschreibung: Eine gefüllte Kreisscheibe mit dünnem Rand auf hellem Hintergrund. Zwei schräge Linien durchqueren den Kreis von nahe dem linken Rand zu den rechten oberen und unteren Randbereichen und laufen nach links aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom linken Bereich gegen den Uhrzeigersinn nach innen läuft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichstärken und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] original.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.120235, localized_error_fraction=0.867900).
+[INFO] Konvertiert original.png | Parameter: mode=auto, label=M, variant_name=ORIGINAL | Qualität: Optimierungsfehler/Pixel=0.000102, Mean-Delta²=145.954315, RGB-RMSE/Kanal=6.975058, Raumscore=511.796480, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.9s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\os-pb-final2\original\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\os-pb-final2\original\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\os-pb-final2\original\conversion
