@@ -1,0 +1,45 @@
+[
+  {
+    "name": "compileall",
+    "command": [
+      "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "tests",
+      "tools"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "cli_help",
+    "command": [
+      "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+      "-m",
+      "src.imageCompositeConverter",
+      "--help"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "image_id_guard",
+    "command": [
+      "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+      "-m",
+      "tools.check_no_new_image_id_hardcoding"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "diff_check",
+    "command": [
+      "git",
+      "-c",
+      "core.whitespace=cr-at-eol",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0
+  }
+]

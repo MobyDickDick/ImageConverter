@@ -1,0 +1,5 @@
+{"boundary_triple_records": 3, "diff_renderable_pairs": 945, "diff_variants": 952, "ranked_records": 1000, "selected_candidates": 3, "successful_above_threshold": 0, "successful_missing_or_failed": 0, "successful_renderable_pairs": 48, "successful_variants": 48, "top_error_cases": 5}
+selected=GE0204_M,AC0921_M,AC0232_M
+top_errors=AC0554_1_L,AC0554_2_L,AC0714_L,AC0724_1_S,AC0252_1
+boundary_triple=AC0301_1M_sia,AC0232_M,GE9024_6S
+boundary_command=for variant in AC0301_1M_sia AC0232_M GE9024_6S; do ICC_FORCE_RECONVERT=1 python -m src.imageCompositeConverter artifacts\images_to_convert --descriptions-path artifacts\images_to_convert\Finale_Wurzelformen_V3.xml --output-dir artifacts\converted_images --iterations 64 --start $variant --end $variant --deterministic-order || exit $?; done

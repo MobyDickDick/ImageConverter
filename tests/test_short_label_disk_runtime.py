@@ -52,3 +52,23 @@ def test_catalog_disk_has_validated_saved_variants(size,tmp_path):
     assert result is not None
     assert measure_quality(image,result['svg'])['satisfactory']
     assert list((tmp_path/'validated').rglob('*.svg'))
+
+
+@pytest.mark.parametrize('size', ['L', 'M', 'S'])
+def test_three_character_catalog_label_preserves_case_and_strict_pixels(size):
+    image = cv2.imread(str(Path(__file__).resolve().parents[1]/f'artifacts/images_to_convert/AC0910_{size}.jpg'))
+    with search_configuration(mode='portfolio',seed=20261017):
+        result = fit(image, DESCRIPTION.replace('rF', 'Lux'))
+    assert result is not None
+    assert measure_quality(image,result['svg'])['satisfactory']
+    assert ''.join(e.text for e in ET.fromstring(result['svg']).iter() if e.tag.endswith('text')) == 'Lux'
+    if size == 'L':
+        assert any(attempt['model'].startswith('glyph_offsets_') and attempt['accepted']
+                   for attempt in result['model_attempts'])
+
+
+@pytest.mark.parametrize('label', ['LUX', 'Luz', 'XXX'])
+def test_glyph_refinement_rejects_wrong_three_character_label(label):
+    image = cv2.imread(str(Path(__file__).resolve().parents[1]/'artifacts/images_to_convert/AC0910_L.jpg'))
+    with search_configuration(mode='portfolio',seed=20261017):
+        assert fit(image, DESCRIPTION.replace('rF', label)) is None
