@@ -117,6 +117,30 @@ Nur `SE0082` wird zusätzlich ausgeschlossen. Nächste reguläre Rotation:
 Die anderen Richtungen `SE0083` und `SE0084` gehören nicht zu dieser Abnahme.
 Die übrigen offenen Aufgaben bleiben erhalten.
 
+Alle **355 bisherigen Archivbilder** wurden aus geschützten Kopien mit der
+echten CLI erneut konvertiert: 307 semantische Fälle und die gemeinsame
+48-Fälle-Kompatibilitätsgruppe. Alle bestehen die bisherige absolute
+Archiv-Pixelgrenze. Alle 355 neuen SVGs sind nach erneutem Rendern pixelgleich
+zum vorherigen CLI-Nachweis; es gibt keine neue Regression. Die bekannten
+22 historischen Kompatibilitätsabweichungen gegenüber gespeicherten
+Bestresultaten bleiben ausdrücklich sichtbar. Archivgrenze, historische
+Bestresultate und die strengeren Plan-B-Gates sind unterschiedliche Prüfungen.
+Die archivierten Bestresultate wurden nicht ersetzt.
+
+Die vier vollständigen Standardtestgruppen und die finale Wiederholung der
+betroffenen Module decken alle **3.389 aktuell gesammelten Testknoten genau
+einmal** ab: **3.359 bestanden, 30 regulär übersprungen, null Fehler**.
+Die beiden zuletzt ergänzten Negativ-/Renderzählertests sind durch die finale
+155-Test-Wiederholung abgedeckt. Die ursprünglichen vier XML-Berichte bleiben
+erhalten; `standard_profile.xml` enthält pro aktuellem Testknoten den letzten
+Nachweis. Zusätzlich bestehen `compileall`, CLI-Hilfe, die Runtime-
+Bild-ID-Nullprüfung und `git diff --check`.
+
+Einzelwerte, SVGs und XML-Nachweise stehen in `archive_recheck.json`,
+`archive_reconverted_svgs/`, `standard_profile_summary.json` und `checks/`
+im Nachweisordner. Der Verifikator misst auch alle gespeicherten
+Archiv-Neukonvertierungen und ihren Vergleich unabhängig erneut.
+
 ## Reproduktion
 
 Der Verifikator rendert gespeicherte Ergebnisse erneut, ohne eine Konvertierung
