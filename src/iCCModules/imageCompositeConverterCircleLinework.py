@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import cv2
 import numpy as np
+import re
+from xml.etree import ElementTree as ET
 
 from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _register
 
@@ -14,14 +16,73 @@ def _segment_distance(xx, yy, a, b):
 
 
 def fit_circle_linework(width, height, *, description, image, render_fn, error_fn):
+    """Normalize the declared T direction and score in the original raster frame."""
     text = str(description or '').casefold()
-    if not all(token in text for token in ('kreis', 'zwei schräge linien', 'waagerecht', 'senkrecht', 'nach unten')):
+    if not all(token in text for token in ('kreis', 'zwei schräge linien', 'waagerecht', 'senkrecht')):
         return None
-    if any(token in text for token in ('dreieck', 'verlauf', 'zusätzlich', 'griff', 'nach oben', 'ohne t')):
+    if any(token in text for token in ('dreieck', 'verlauf', 'zusätzlich', 'griff', 'ohne t')):
+        return None
+    direction_text = re.sub(r'nach (?:oben|rechts|unten|links)(?: und (?:oben|rechts|unten|links))?\s+'
+                            r'(?:versetzt|verschoben)', '', text)
+    directions = [turns for token, turns in (('nach unten', 0), ('nach links', 1),
+                                             ('nach oben', 2), ('nach rechts', 3))
+                  if token in direction_text]
+    if len(directions) != 1:
         return None
     arr = np.asarray(image)
     if arr.shape != (height, width, 3) or min(width, height) < 16 or not np.isfinite(arr).all():
         return None
+    turns = directions[0]
+    if not turns:
+        return _fit_down(width, height, image=arr, render_fn=render_fn, error_fn=error_fn)
+    canonical = np.ascontiguousarray(np.rot90(arr, turns))
+
+    def render_canonical(svg, w, h):
+        raster = render_fn(_orient_svg(svg, turns, width, height), width, height)
+        return None if raster is None else np.ascontiguousarray(np.rot90(raster, turns))
+
+    def source_error(reference, raster):
+        return error_fn(np.ascontiguousarray(np.rot90(reference, -turns)),
+                        np.ascontiguousarray(np.rot90(raster, -turns)))
+
+    result = _fit_down(canonical.shape[1], canonical.shape[0], image=canonical,
+                       render_fn=render_canonical, error_fn=source_error)
+    if result is not None:
+        result['svg'] = _orient_svg(result['svg'], turns, width, height)
+        result['rendered'] = np.ascontiguousarray(np.rot90(result['rendered'], -turns))
+    return result
+
+
+def _orient_svg(svg, turns, width, height):
+    """Rotate native circle/line coordinates; never emit a transformed raster."""
+    root = ET.fromstring(svg)
+
+    def point(x, y):
+        return ((width-y, x) if turns == 1 else
+                (width-x, height-y) if turns == 2 else (y, height-x))
+
+    for element in root.iter():
+        element.tag = element.tag.rsplit('}', 1)[-1]
+        if element.tag == 'rect':  # The only rectangle is the white canvas.
+            element.set('width', str(width))
+            element.set('height', str(height))
+        elif element.tag == 'circle':
+            x, y = point(float(element.get('cx')), float(element.get('cy')))
+            element.set('cx', f'{x:g}')
+            element.set('cy', f'{y:g}')
+        elif element.tag == 'line':
+            for suffix in ('1', '2'):
+                x, y = point(float(element.get('x'+suffix)), float(element.get('y'+suffix)))
+                element.set('x'+suffix, f'{x:g}')
+                element.set('y'+suffix, f'{y:g}')
+    root.set('xmlns', 'http://www.w3.org/2000/svg')
+    root.set('width', str(width))
+    root.set('height', str(height))
+    return ET.tostring(root, encoding='unicode')+'\n'
+
+
+def _fit_down(width, height, *, image, render_fn, error_fn):
+    arr = np.asarray(image)
     pixels = arr.astype(float)
     mask = (np.min(arr, axis=2) < 210).astype(np.uint8)
     contours = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[0]
@@ -130,6 +191,10 @@ def fit_circle_linework(width, height, *, description, image, render_fn, error_f
     distances = [_segment_distance(xx, yy, a, b) for a, b in segments(result['parameters'])]
     tolerance = max(.85, radius*.045)
     if np.mean(np.minimum.reduce(distances)[ink] < tolerance*1.7) < .9:
+        return None
+    unexplained = ink & (np.minimum.reduce(distances) >= tolerance*1.7)
+    count, _, stats, _ = cv2.connectedComponentsWithStats(unexplained.astype(np.uint8))
+    if count > 1 and stats[1:, cv2.CC_STAT_AREA].max() > max(3, radius*.14):
         return None
     nearest_ink = cv2.distanceTransform((~ink).astype(np.uint8), cv2.DIST_L2, 3)
     for a, b in segments(result['parameters']):

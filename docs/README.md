@@ -4,6 +4,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 
 - [Formenfamilien gemeinsam bearbeiten: mehrere Vorlagen, Farben, Größen und Farbverläufe](form_families_workflow.md)
 
+- [AC0414: Kreis mit gerichteten Sehnen und Innen-T, neun Varianten und unabhängige CLI-Abnahme (2026-10-17)](next_arbeitspaket_2026-10-17_ac0414_2_l.md)
 - [GE9032: T-Verzweigung nach rechts, JPEG-Übergang und Kantenbewertung im ursprünglichen Bildrahmen (2026-10-16)](next_arbeitspaket_2026-10-16_ge9032_6m.md)
 
 - [GE0305: senkrechte Flaggenstreifen, Quellenprüfung und unabhängige CLI-Abnahme (2026-10-16)](next_arbeitspaket_2026-10-16_ge0305.md)

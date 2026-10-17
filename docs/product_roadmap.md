@@ -29,7 +29,7 @@ Das folgende Paket `AC0713` sichert alle sechs Varianten mit oberem Griff,
 Strich und Punkt. `AC0721` sichert jetzt sechs Quadrat-/Untergriff-/T-Varianten
 durch beide regulären Gates und ein unabhängiges SVG mit zwei Seeds durch
 jeweils 17/17 strenge CLI-Prüfungen. Ein großer grauer JPG-IoU-Fall bleibt offen.
-Die separate Erfolgsübersicht enthält inzwischen 253 Bild-/SVG-Paare und wird
+Die separate Erfolgsübersicht enthält inzwischen 329 Bild-/SVG-Paare und wird
 im erweiterten Profil vollständig erneut konvertiert.
 Das Paket `GE9021` sichert alle 14 Bogen-/Verlaufsschaftvarianten
 und ein unabhängiges SVG mit 17/17 strengen CLI-Prüfungen.
@@ -42,7 +42,11 @@ jeweils 17/17 Fällen bestehen die unveränderten Gates. Das neueste Paket
 `b_heating1` registriert
 verschachtelte aufrechte Flammen auf einer Verlaufsscheibe. Ziel und zwei
 unabhängige CLI-Läufe mit jeweils 17/17 Fällen bestehen die unveränderten
-Gates. Der nächste reguläre Kandidat ist jetzt `AC0421_1_S`.
+Gates. Das folgende Paket `AC0414` sichert neun Kreis-/Sehnen-/T-Varianten
+mit allgemeiner Richtungsnormalisierung durch beide regulären Gates und eine
+unabhängige Vorlage durch zwei CLI-Läufe mit jeweils 17/17 Fällen. Die drei
+grauen JPG-IoU-Fälle bleiben als zusätzlicher strenger Folgepunkt offen.
+Der nächste reguläre Kandidat ist jetzt `GE9033_6M`.
 Die geprüfte Batchfähigkeit und die weiterhin begrenzte Motivabdeckung sind in
 `project_status_2026-10-10.md` beschrieben. Eine frische Gesamtquote des
 autonomen Kataloglaufs ist noch nicht belegt.

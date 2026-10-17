@@ -1,3 +1,4 @@
+- Normalize circle/chord/T registration across all four directions, reject connected unexplained interior marks, and validate nine AC0414 variants plus two independent 17-case CLI batteries; preserve the separate strict gray-IoU follow-up (2026-10-17).
 - Correct GE9032 descriptions, tolerate JPEG ringing at the T-junction seam, and refine insufficient rotated contours in the original pixel frame; validate 14 catalog variants and two independent 17-case CLI batteries (2026-10-16).
 - Register perpendicular axes and analytic sinusoidal curves from raster evidence, give GE1411 standalone descriptions, and validate all three sizes plus two independent 17-case CLI batteries with unchanged quality gates (2026-10-16).
 - Normalize all four gradient T-junction directions from raster geometry, correct both GE9034 descriptions, and validate 14 catalog variants plus two independent 17-case CLI batteries with unchanged quality gates (2026-10-16).

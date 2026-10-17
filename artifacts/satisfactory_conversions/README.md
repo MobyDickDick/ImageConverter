@@ -1,6 +1,6 @@
 # Zufriedenstellende Konvertierungen
 
-320 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
+329 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
 
 Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bild und Beschreibung.
 
@@ -36,6 +36,15 @@ Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bi
 | [AC0413_L](images/AC0413_L.jpg) | [SVG](svgs/AC0413_L.svg) | 103.128754 | semantic-only |
 | [AC0413_M](images/AC0413_M.jpg) | [SVG](svgs/AC0413_M.svg) | 165.639999 | semantic-only |
 | [AC0413_S](images/AC0413_S.jpg) | [SVG](svgs/AC0413_S.svg) | 106.672501 | semantic-only |
+| [AC0414_1_L](images/AC0414_1_L.jpg) | [SVG](svgs/AC0414_1_L.svg) | 155.960632 | semantic-only |
+| [AC0414_1_M](images/AC0414_1_M.jpg) | [SVG](svgs/AC0414_1_M.svg) | 257.785553 | semantic-only |
+| [AC0414_1_S](images/AC0414_1_S.jpg) | [SVG](svgs/AC0414_1_S.svg) | 207.660004 | semantic-only |
+| [AC0414_2_L](images/AC0414_2_L.jpg) | [SVG](svgs/AC0414_2_L.svg) | 75.907501 | semantic-only |
+| [AC0414_2_M](images/AC0414_2_M.jpg) | [SVG](svgs/AC0414_2_M.svg) | 112.024445 | semantic-only |
+| [AC0414_2_S](images/AC0414_2_S.jpg) | [SVG](svgs/AC0414_2_S.svg) | 145.822495 | semantic-only |
+| [AC0414_L](images/AC0414_L.jpg) | [SVG](svgs/AC0414_L.svg) | 98.585625 | semantic-only |
+| [AC0414_M](images/AC0414_M.jpg) | [SVG](svgs/AC0414_M.svg) | 138.699997 | semantic-only |
+| [AC0414_S](images/AC0414_S.jpg) | [SVG](svgs/AC0414_S.svg) | 122.220001 | semantic-only |
 | [AC0421_1_L](images/AC0421_1_L.jpg) | [SVG](svgs/AC0421_1_L.svg) | 154.966873 | semantic-only |
 | [AC0421_1_M](images/AC0421_1_M.jpg) | [SVG](svgs/AC0421_1_M.svg) | 209.873337 | semantic-only |
 | [AC0421_1_S](images/AC0421_1_S.jpg) | [SVG](svgs/AC0421_1_S.svg) | 281.067505 | semantic-only |
