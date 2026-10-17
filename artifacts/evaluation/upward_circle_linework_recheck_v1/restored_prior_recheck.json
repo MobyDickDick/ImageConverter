@@ -1,0 +1,29 @@
+{
+  "case_count": 1,
+  "cases": [
+    {
+      "baseline_mean_delta2": 700.75,
+      "execution_mode": "semantic-only",
+      "mean_delta2": 700.75,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8820000886917114,
+        "error_per_pixel": 0.0035922081250800973,
+        "object_mask_iou": 0.9318181818181818,
+        "semantic_score": 0.0
+      },
+      "output_sha256": "058a23f340a698d460b5e255d43e5e943819956e3beb084ca6113166a33dbba8",
+      "output_svg": "archive_reconverted_svgs/SE0082.svg",
+      "passed": true,
+      "reason": "quality_pass",
+      "variant": "SE0082"
+    }
+  ],
+  "higher_mean_delta2": [],
+  "passed": 1,
+  "reference_access": {
+    "blocked_svg_reads": []
+  },
+  "schema_version": "satisfactory_archive_recheck_v1",
+  "threshold": 0.045945679012345676
+}

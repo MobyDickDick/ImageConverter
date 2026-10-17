@@ -1,0 +1,69 @@
+{
+  "schema_version": "upward_circle_linework_validation_v1",
+  "basis_commit": "488b4fe82538cc3b869ea7932ef50f3af68d384d",
+  "runtime_unchanged": true,
+  "catalog_cases": 9,
+  "regular_acceptances": 9,
+  "strict_color_acceptances": 6,
+  "open_strict_grey_cases": [
+    "AC0411_L",
+    "AC0411_M",
+    "AC0411_S"
+  ],
+  "independent_cli_passes": [
+    17,
+    17
+  ],
+  "tests": {
+    "coverage": "every collected node exactly once",
+    "errors": 0,
+    "failures": 0,
+    "passed": 3368,
+    "skipped": 30,
+    "tests": 3398
+  },
+  "archive": {
+    "previous_count": 355,
+    "new_count": 365,
+    "new_acceptances": 9,
+    "restored_prior_acceptances": [
+      "SE0082"
+    ],
+    "reconverted_previous_passes": 355,
+    "pixel_identical_to_previous_cli": 355,
+    "historical_compatibility_differences": 22
+  },
+  "smoke_checks": {
+    "compileall": {
+      "command": [
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "tests",
+        "tools"
+      ],
+      "exit_code": 0
+    },
+    "cli_help": {
+      "command": [
+        "-m",
+        "src.imageCompositeConverter",
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    "image_id_check": {
+      "command": [
+        "-m",
+        "tools.check_no_new_image_id_hardcoding"
+      ],
+      "exit_code": 0
+    },
+    "runtime_unchanged": {
+      "exit_code": 0
+    }
+  },
+  "diff_check_exit_code": 0,
+  "independent_verifier": "verify_evidence.py passed; retained vectors rendered again without converter execution"
+}

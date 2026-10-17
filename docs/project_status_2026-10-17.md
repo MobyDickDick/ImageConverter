@@ -1,7 +1,17 @@
 # Projektstand und Sichtprüfung am 2026-10-17
 
-**Nachtrag AC0840:** S/M/L ergänzen drei unabhängig geprüfte Bild-/SVG-Paare.
-Der aktuelle Archivstand beträgt **355 von 1.785 Bildern (19,9 %)**; alle 352
+**Aktueller Nachtrag AC0411:** Neun neue regulär abgenommene Paare und der
+wiederhergestellte, zuvor bereits abgenommene SE0082-Archiveintrag ergeben
+**365 von 1.785 Bildern (20,4 %)**. Alle 355 tatsächlich im Basisindex
+vorhandenen Einträge bleiben unverändert. 1.420 Bilder haben noch keine
+ausdrückliche Archivabnahme. Die drei grauen AC0411-Bilder haben weiterhin
+einen offenen zusätzlichen strengen IoU-Nachweis.
+Details: [AC0411-Abnahme](next_arbeitspaket_2026-10-17_ac0411_1_m.md).
+Die folgenden älteren Nachträge, Tabellen und Prüflisten bleiben als historische
+Snapshots erhalten; sie enthalten die später ergänzten Paare noch nicht.
+
+**Vorheriger Nachtrag AC0840:** S/M/L ergänzen drei unabhängig geprüfte Bild-/SVG-Paare.
+Der damalige Archivstand beträgt **355 von 1.785 Bildern (19,9 %)**; alle 352
 bisherigen Indexeinträge sind unverändert. 1.430 Bilder haben weiterhin keine
 ausdrückliche Archivabnahme. Das ist keine Zahl nachgewiesen gescheiterter Bilder.
 Details: [AC0840 und Suchportfolio](next_arbeitspaket_2026-10-17_ac0840_search.md).
@@ -74,8 +84,7 @@ Verschieben nach `samples` würde die noch ausstehende persönliche Prüfung nic
 
 ## Nächstes Paket
 
-GE9033 und anschließend AC0424 sind umgesetzt; Details zur jüngsten Abnahme,
-Grenzen und Reproduktion stehen im
-[Arbeitspaket](next_arbeitspaket_2026-10-17_ac0424_2_m.md).
-Danach folgen regulär `AC0840_S`, `AC0840_M`, `SE0082`, `AC0411_1_M`
-und `AC0910_L`. Die übrigen offenen Aufgaben bleiben erhalten.
+AC0411 ist nach SE0082 abgeschlossen; Nachweise, Grenzen und Reproduktion
+stehen im [Arbeitspaket](next_arbeitspaket_2026-10-17_ac0411_1_m.md).
+Danach folgen regulär `AC0910_L`, `GE0204_M`, `AC0921_M` und `AC0232_M`.
+Die übrigen offenen Aufgaben bleiben erhalten.
