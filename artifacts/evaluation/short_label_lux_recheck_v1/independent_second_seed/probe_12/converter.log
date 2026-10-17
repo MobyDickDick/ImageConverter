@@ -1,0 +1,109 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere probe_12.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite probe_12.png ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung "mPa" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringfügig größer dargestellt und geringfügig nach links und unten versetzt.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe MPA
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 5.954933449074074}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 5.885127314814815}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 192, "current_error": 5.13744212962963}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 235, "best_error": 4.874059606481482}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 4.874059606481482, "glyph_iou": 0.6811594202898551, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 3.8447627314814814}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 3.5750144675925926}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 192, "current_error": 1.3111979166666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 214, "best_error": 1.2078269675925926}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 1.2078269675925926, "glyph_iou": 0.9956521739130435, "accepted": true}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_700"}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 64, "current_error": 5.100260416666667}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 128, "current_error": 5.593171296296297}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 192, "current_error": 4.453125}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_finished", "evaluations": 224, "best_error": 4.524305555555555}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_700", "error": 4.524305555555555, "glyph_iou": 0.715625, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 5.690538194444445}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 5.888237847222222}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 192, "current_error": 5.225549768518518}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 238, "best_error": 5.097511574074074}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 5.097511574074074, "glyph_iou": 0.6850152905198776, "accepted": false}
+[WARN] probe_12.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.758389, localized_error_fraction=0.834080).
+[INFO] Konvertiert probe_12.png | Parameter: mode=semantic_badge, label=MPA, variant_name=PROBE_12 | Qualität: Optimierungsfehler/Pixel=0.000262, Mean-Delta²=30.000217, RGB-RMSE/Kanal=3.162289, Raumscore=103.879996, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.7s
+[INFO] Konvertiere probe_12.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite probe_12.png ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung "mPa" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringfügig größer dargestellt und geringfügig nach links und unten versetzt.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe MPA
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 5.954933449074074}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 5.885127314814815}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 192, "current_error": 5.13744212962963}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 235, "best_error": 4.874059606481482}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 4.874059606481482, "glyph_iou": 0.6811594202898551, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 3.8447627314814814}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 3.5750144675925926}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 192, "current_error": 1.3111979166666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 214, "best_error": 1.2078269675925926}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 1.2078269675925926, "glyph_iou": 0.9956521739130435, "accepted": true}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_700"}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 64, "current_error": 5.100260416666667}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 128, "current_error": 5.593171296296297}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 192, "current_error": 4.453125}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_finished", "evaluations": 224, "best_error": 4.524305555555555}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_700", "error": 4.524305555555555, "glyph_iou": 0.715625, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 5.690538194444445}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 5.888237847222222}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 192, "current_error": 5.225549768518518}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 238, "best_error": 5.097511574074074}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 5.097511574074074, "glyph_iou": 0.6850152905198776, "accepted": false}
+[WARN] probe_12.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.758389, localized_error_fraction=0.834080).
+[INFO] Konvertiert probe_12.png | Parameter: mode=semantic_badge, label=MPA, variant_name=PROBE_12 | Qualität: Optimierungsfehler/Pixel=0.000262, Mean-Delta²=30.000217, RGB-RMSE/Kanal=3.162289, Raumscore=103.879996, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=2.6s
+[INFO] Konvertiere probe_12.png | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite probe_12.png ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung "mPa" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringfügig größer dargestellt und geringfügig nach links und unten versetzt.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe MPA
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 5.954933449074074}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 5.885127314814815}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 192, "current_error": 5.13744212962963}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 235, "best_error": 4.874059606481482}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 4.874059606481482, "glyph_iou": 0.6811594202898551, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 3.8447627314814814}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 3.5750144675925926}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 192, "current_error": 1.3111979166666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 214, "best_error": 1.2078269675925926}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 1.2078269675925926, "glyph_iou": 0.9956521739130435, "accepted": true}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_700"}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 64, "current_error": 5.100260416666667}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 128, "current_error": 5.593171296296297}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 192, "current_error": 4.453125}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_finished", "evaluations": 224, "best_error": 4.524305555555555}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_700", "error": 4.524305555555555, "glyph_iou": 0.715625, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 5.690538194444445}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 5.888237847222222}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 192, "current_error": 5.225549768518518}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 238, "best_error": 5.097511574074074}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 5.097511574074074, "glyph_iou": 0.6850152905198776, "accepted": false}
+[WARN] probe_12.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.758389, localized_error_fraction=0.834080).
+[INFO] Konvertiert probe_12.png | Parameter: mode=semantic_badge, label=MPA, variant_name=PROBE_12 | Qualität: Optimierungsfehler/Pixel=0.000262, Mean-Delta²=30.000217, RGB-RMSE/Kanal=3.162289, Raumscore=103.879996, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=4.0s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\lux-v2\probe_12\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\lux-v2\probe_12\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\lux-v2\probe_12\conversion

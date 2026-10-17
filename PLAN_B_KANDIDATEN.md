@@ -2,7 +2,20 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-17, nach SE0082-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-17, nach AC0910-Abnahme)
+
+AC0910 L/M/S bestehen beide regulären und die strengen Pixelgates; zwei unabhängige CLI-Batterien mit mPa bestehen jeweils 17/17. 368 Paare sind archiviert, alle 365 bisherigen Datensätze bleiben unverändert.
+Aktive Rotation: `GE0204_M`, `AC0921_M`, `AC0232_M`.
+Details: `docs/next_arbeitspaket_2026-10-17_ac0910_l.md`.
+Review: `artifacts/evaluation/short_label_lux_recheck_v1/review_args.json`.
+
+## Vorheriger Abschluss: AC0411
+
+AC0411 ist mit neun Varianten regulär abgenommen; sechs bestehen auch das strenge Pixelgate. Der graue IoU-Folgepunkt bleibt offen. 365 Paare sind archiviert.
+Aktive Rotation: `AC0910_L`, `GE0204_M`, `AC0921_M`, `AC0232_M`.
+Details: `docs/next_arbeitspaket_2026-10-17_ac0411_1_m.md`.
+
+## Vorheriger Abschluss: SE0082
 
 SE0082 besteht beide regulären und die strengeren Pixelgates. Der linke
 Quadrat-/Griff-/Textfit ist verallgemeinert; zwei unabhängige CLI-Batterien

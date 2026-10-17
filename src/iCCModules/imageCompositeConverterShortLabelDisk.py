@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from html import escape
 import re
+from xml.etree import ElementTree as ET
 
 import cv2
 import numpy as np
@@ -62,6 +63,39 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
     color = np.percentile(pixels[observed],15,axis=0)
     best = None
     attempts = []
+    rejected_glyph_models = []
+
+    def prefer(candidate, incumbent):
+        if incumbent is None:
+            return True
+        # Absolute color error can favor a pale fill across the foreground
+        # threshold. Prefer an already valid pixel fit before comparing error.
+        quality = [_local_quality(np.asarray(image), result['rendered']) for result in (candidate,incumbent)]
+        passed = [bool(q and q['passed']) for q in quality]
+        return passed[0] if passed[0] != passed[1] else candidate['error'] < incumbent['error']
+
+    def validate_glyphs(fitted, blank, positions=None):
+        predicted = (np.mean(blank.astype(float)-fitted['rendered'].astype(float),axis=2)>45)&(radial<radius*.8)
+        union = np.count_nonzero(predicted|observed)
+        overlap = np.count_nonzero(predicted&observed)/max(1,union)
+        distance = cv2.distanceTransform((~observed).astype(np.uint8),cv2.DIST_L2,3)
+        exposed = (radial<radius*.85)&~cv2.dilate(observed.astype(np.uint8),np.ones((3,3),np.uint8)).astype(bool)
+        accepted = (predicted.any() and overlap>=max(.65,1-3/radius)
+                    and distance[predicted].max()<=max(1.5,radius*.035) and exposed.any()
+                    and np.percentile(np.max(np.abs(pixels[exposed]-fitted['rendered'][exposed]),axis=1),95)<=25)
+        if accepted and positions is not None:
+            # Global overlap can hide a capital replacing a lowercase letter.
+            # Preserve the observed vertical extent of each individual glyph.
+            boundaries = [-np.inf, *((positions[:-1]+positions[1:])/2), np.inf]
+            for left,right in zip(boundaries,boundaries[1:]):
+                region = (xx>=left)&(xx<right)
+                rows = [np.where(mask&region)[0] for mask in (observed,predicted)]
+                if (any(not len(row) for row in rows) or
+                        max(abs(rows[0].min()-rows[1].min()),abs(rows[0].max()-rows[1].max()))>max(1,radius*.035)):
+                    accepted = False
+                    break
+        return overlap, bool(accepted)
+
     for separate,weight in ranked_models(((False,400),(False,700),(True,400),(True,700))):
         model = f'{"separate" if separate else "native"}_{weight}'
         progress('short_label_disk',event='model_started',model=model)
@@ -111,21 +145,80 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
         blank = render_fn(build(fitted['parameters'],True),width,height)
         if blank is None:
             continue
-        predicted = (np.mean(blank.astype(float)-fitted['rendered'].astype(float),axis=2)>45)&(radial<radius*.8)
-        union = np.count_nonzero(predicted|observed)
-        overlap = np.count_nonzero(predicted&observed)/max(1,union)
-        distance = cv2.distanceTransform((~observed).astype(np.uint8),cv2.DIST_L2,3)
-        exposed = (radial<radius*.85)&~cv2.dilate(observed.astype(np.uint8),np.ones((3,3),np.uint8)).astype(bool)
-        accepted = (predicted.any() and overlap>=max(.65,1-3/radius)
-                    and distance[predicted].max()<=max(1.5,radius*.035) and exposed.any()
-                    and np.percentile(np.max(np.abs(pixels[exposed]-fitted['rendered'][exposed]),axis=1),95)<=25)
+        overlap, accepted = validate_glyphs(fitted, blank)
         attempts.append(dict(model=model,error=fitted['error'],glyph_iou=overlap,accepted=bool(accepted)))
         progress('short_label_disk',event='model_finished',**attempts[-1])
         if accepted:
             store_validated_variant(fitted, image=image, description=text, model=(separate,weight),
                                     quality=_local_quality(np.asarray(image),fitted['rendered']))
-        if accepted and (best is None or fitted['error']<best['error']):
+        if accepted and prefer(fitted, best):
             best = fitted
+        elif separate and not accepted:
+            rejected_glyph_models.append((weight, fitted))
+    # Keep established successful fits unchanged. Unequal glyph advances and
+    # intermediate stroke weights matter at small sizes; explore them only
+    # when none of the original four models passes the same silhouette test.
+    if best is None:
+        for weight, candidate in rejected_glyph_models:
+            refined = _refine_glyphs(candidate, width, height, labels[0], weight,
+                                     np.asarray(image), render_fn, error_fn)
+            if refined is None:
+                continue
+            fitted, blank = refined
+            overlap, accepted = validate_glyphs(fitted, blank,np.asarray(fitted['parameters'][4:4+len(labels[0])]))
+            model = f'glyph_offsets_{weight}'
+            attempts.append(dict(model=model,error=fitted['error'],glyph_iou=overlap,accepted=accepted))
+            progress('short_label_disk',event='model_finished',**attempts[-1])
+            if accepted:
+                store_validated_variant(fitted, image=image, description=text, model=('glyph_offsets',weight),
+                                        quality=_local_quality(np.asarray(image),fitted['rendered']))
+                if prefer(fitted, best):
+                    best = fitted
     if best:
         best['model_attempts'] = attempts
     return best
+
+
+def _refine_glyphs(candidate, width, height, label, weight, image, render_fn, error_fn):
+    """Refine bounded native glyph positions and stroke weight from a rejected fit."""
+    root = ET.fromstring(candidate['svg'])
+    texts = [e for e in root.iter() if e.tag.endswith('text')]
+    n = len(label)
+    if len(texts) != n:
+        return None
+    base = np.asarray(candidate['parameters'])
+    positions = np.array([float(t.get('x')) for t in texts])
+    geometry_count = 7+n
+    seed = np.r_[base[:4], positions, base[5:7], .2, base[8:]]
+
+    def build(p, blank=False):
+        p = np.asarray(p)
+        cx,cy,r,sw = p[:4]
+        ty,size,stroke = p[4+n:7+n]
+        fill,rim,color = p[geometry_count:].reshape(-1,3)
+        glyphs = ''.join(f'<text x="{p[4+i]:.4f}" y="{ty:.4f}" font-family="Arial" '
+                         f'font-weight="{weight}" font-size="{size:.4f}" text-anchor="middle" '
+                         f'fill="{_hex(color)}" stroke="{_hex(color)}" stroke-width="{stroke:.4f}" '
+                         f'stroke-linejoin="round">{char}</text>' for i,char in enumerate(label))
+        return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">'
+                f'<rect width="{width}" height="{height}" fill="#ffffff"/>'
+                f'<circle cx="{cx:.4f}" cy="{cy:.4f}" r="{r:.4f}" fill="{_hex(fill)}" '
+                f'stroke="{_hex(rim)}" stroke-width="{sw:.4f}"/>'
+                +('' if blank else glyphs)+'</svg>')
+
+    def valid(p):
+        cx,cy,r,sw = p[:4]
+        ty,size,stroke = p[4+n:7+n]
+        xs = p[4:4+n]
+        return (np.isfinite(p).all() and r>4 and .15<=sw<=r*.25
+                and 0<=cx-r-sw/2 and cx+r+sw/2<=width and 0<=cy-r-sw/2 and cy+r+sw/2<=height
+                and cy<ty<cy+r*.9 and 3<=size<r*1.9 and 0<=stroke<=size*.08
+                and np.all(np.diff(xs)>.5) and np.all(np.abs(xs-positions)<=base[7]*.25)
+                and np.all((p[geometry_count:]>=0)&(p[geometry_count:]<=255)))
+
+    fitted = _register(seed,geometry_count,build,valid,image,render_fn,error_fn,
+                       f'short_label_disk_glyph_offsets_{weight}',initial_error_bound=candidate['error'])
+    if fitted is None:
+        return None
+    blank = render_fn(build(fitted['parameters'], True),width,height)
+    return None if blank is None else (fitted,blank)
