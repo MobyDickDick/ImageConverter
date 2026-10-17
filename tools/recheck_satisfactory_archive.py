@@ -26,7 +26,7 @@ def recheck(archive: Path, output: Path) -> dict:
         raise ValueError('The satisfactory archive is empty')
     output.mkdir(parents=True)
     paths=[str(Path(np.__file__).resolve().parents[1]),str(ROOT),*sys.path]
-    env=dict(os.environ,TINY_ICC_OUTPUT_VARIATION='0',PYTHONHASHSEED='0',IMAGE_CONVERTER_ISOLATE_SVG_RENDER='0',ICC_FORCE_RECONVERT='1')
+    env=dict(os.environ,TINY_ICC_OUTPUT_VARIATION='0',PYTHONHASHSEED='0',IMAGE_CONVERTER_ISOLATE_SVG_RENDER='0',ICC_FORCE_RECONVERT='1',ICC_SEARCH_SEED='0')
     results=[]
     for mode in ('semantic-only','standard'):
         cases=[c for c in index['cases'] if c['execution_mode']==mode]

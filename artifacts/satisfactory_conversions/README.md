@@ -1,6 +1,6 @@
 # Zufriedenstellende Konvertierungen
 
-352 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
+355 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
 
 Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bild und Beschreibung.
 
@@ -141,6 +141,9 @@ Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bi
 | [AC0839_L](images/AC0839_L.jpg) | [SVG](svgs/AC0839_L.svg) | 5666.456055 | standard |
 | [AC0839_M](images/AC0839_M.jpg) | [SVG](svgs/AC0839_M.svg) | 3988.645752 | standard |
 | [AC0839_S](images/AC0839_S.jpg) | [SVG](svgs/AC0839_S.svg) | 3389.488037 | standard |
+| [AC0840_L](images/AC0840_L.jpg) | [SVG](svgs/AC0840_L.svg) | 464.736664 | semantic-only |
+| [AC0840_M](images/AC0840_M.jpg) | [SVG](svgs/AC0840_M.svg) | 228.524994 | semantic-only |
+| [AC0840_S](images/AC0840_S.jpg) | [SVG](svgs/AC0840_S.svg) | 447.333344 | semantic-only |
 | [AC0850_L](images/AC0850_L.jpg) | [SVG](svgs/AC0850_L.svg) | 347.363342 | semantic-only |
 | [AC0850_M](images/AC0850_M.jpg) | [SVG](svgs/AC0850_M.svg) | 248.467499 | semantic-only |
 | [AC0850_S](images/AC0850_S.jpg) | [SVG](svgs/AC0850_S.svg) | 450.813324 | semantic-only |

@@ -1,5 +1,5 @@
 {
-  "case_count": 352,
+  "case_count": 355,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -2295,6 +2295,57 @@
       "svg": "svgs/AC0839_S.svg",
       "svg_sha256": "8469ac3a903a7dea744c96104d8fa3d52a132bd80fac6abfca8050a14353b14b",
       "variant": "AC0839_S"
+    },
+    {
+      "description": "Eine einfarbige hellgraue Kreisscheibe mit dunkler Randkontur auf wei\u00dfem Hintergrund. In der Mitte steht die dunkle serifenlose Beschriftung \"rF\". Keine Anschl\u00fcsse.",
+      "evidence": "artifacts/evaluation/conversion_search_2026-10-17/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0840_L.jpg",
+      "image_sha256": "e87a4c61e5e2146fce76150e0883bddcd3039df2ae39e7846c81e5411bf1e114",
+      "mean_delta2": 464.7366638183594,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9467121958732605,
+        "error_per_pixel": 0.0023823486547141326,
+        "object_mask_iou": 0.9144542772861357
+      },
+      "svg": "svgs/AC0840_L.svg",
+      "svg_sha256": "8eff6d863567fd900f6eaf27a377553055dd6e4cee23b7a70212126d339ed98c",
+      "variant": "AC0840_L"
+    },
+    {
+      "description": "Eine einfarbige hellgraue Kreisscheibe mit dunkler Randkontur auf wei\u00dfem Hintergrund. In der Mitte steht die dunkle serifenlose Beschriftung \"rF\". Keine Anschl\u00fcsse.",
+      "evidence": "artifacts/evaluation/conversion_search_2026-10-17/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0840_M.jpg",
+      "image_sha256": "3919d16fb5fc08eaf63afbc4db3c71a79de4055c35b4d5908fdebfe1437164ec",
+      "mean_delta2": 228.52499389648438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9304534792900085,
+        "error_per_pixel": 0.0011714724792848104,
+        "object_mask_iou": 0.8786127167630058
+      },
+      "svg": "svgs/AC0840_M.svg",
+      "svg_sha256": "6580858d60dff6cd5e353b3b63e5b23e4ab1ed47fc6a2dcce6e0478806254e3a",
+      "variant": "AC0840_M"
+    },
+    {
+      "description": "Eine einfarbige hellgraue Kreisscheibe mit dunkler Randkontur auf wei\u00dfem Hintergrund. In der Mitte steht die dunkle serifenlose Beschriftung \"rF\". Keine Anschl\u00fcsse.",
+      "evidence": "artifacts/evaluation/conversion_search_2026-10-17/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0840_S.jpg",
+      "image_sha256": "51471398c37bca4db03cb3c9207851f0070a11c3592c535992db9b0cf4c5b2fd",
+      "mean_delta2": 447.3333435058594,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9050271511077881,
+        "error_per_pixel": 0.0022931351711180797,
+        "object_mask_iou": 0.7982456140350878
+      },
+      "svg": "svgs/AC0840_S.svg",
+      "svg_sha256": "5fc740b5519ce06cd6a1111666e9c3f0b03d240ea0ac289284f7ed33f7f85517",
+      "variant": "AC0840_S"
     },
     {
       "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"P\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",

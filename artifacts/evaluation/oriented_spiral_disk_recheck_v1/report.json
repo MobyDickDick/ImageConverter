@@ -1,0 +1,1415 @@
+{
+  "baseline": {
+    "baseline_sha256": "0906656f71cd45f19565126307e232c069facc277a7af62ca6debef9c2e5c971",
+    "cases": {
+      "anonymous_spiral_00": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.3408792018890381,
+          "error_per_pixel": 0.03251197956715366,
+          "object_mask_iou": 0.8306148055207027,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_spiral_01": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.27872347831726074,
+          "error_per_pixel": 0.04201935553633218,
+          "object_mask_iou": 0.8489583333333334,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_spiral_02": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.36590370535850525,
+          "error_per_pixel": 0.04207187439926951,
+          "object_mask_iou": 0.8320802005012531,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_spiral_03": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.46549808979034424,
+          "error_per_pixel": 0.036302140903338456,
+          "object_mask_iou": 0.8390804597701149,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_spiral_04": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.26758691668510437,
+          "error_per_pixel": 0.03266487048250673,
+          "object_mask_iou": 0.8431226765799257,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_spiral_05": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4253537058830261,
+          "error_per_pixel": 0.028264782475490195,
+          "object_mask_iou": 0.8390804597701149,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_spiral_06": {
+        "dimensions": {
+          "height": 40,
+          "width": 40
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.24557536840438843,
+          "error_per_pixel": 0.014378690737937332,
+          "object_mask_iou": 0.0,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_spiral_07": {
+        "dimensions": {
+          "height": 30,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.3952409625053406,
+          "error_per_pixel": 0.013715152625592721,
+          "object_mask_iou": 0.0,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_spiral_08": {
+        "dimensions": {
+          "height": 20,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4339333176612854,
+          "error_per_pixel": 0.014963937397875817,
+          "object_mask_iou": 0.09947643979057591,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI frozen before runtime and description changes",
+      "commit": "4a72a18a97239aa4307546866e041f543d06c70a",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_spiral_00": "7520405f12e92fd81064038d358fb163089ea295b16e854b04672994c60773e5",
+        "anonymous_spiral_01": "73fdf632e2b2ec4a6bbdba7166c6b26a2aeee0e76fe9bf08ccc5ba46666fc004",
+        "anonymous_spiral_02": "363610488e5df5c44fab14cfa6c8d1a8877798b9e55ce5e3ec3a095d932384fd",
+        "anonymous_spiral_03": "6f4012d42dbf9da4f0081a48d15a98f8076a2d5061dee152e0124e42531a12e7",
+        "anonymous_spiral_04": "d403152c06dc9d402e33ad47a7cee8413e1b79f41539b9cc6d1fc64919b3dcf2",
+        "anonymous_spiral_05": "697911b96ec11dcfa7c5ae131ead85719a1cb7c8bab3c4483b5b52641bede3ca",
+        "anonymous_spiral_06": "bd9d110d312b122c4946ad377041e2f8aa06053475d198d2b6c46902f4a147bf",
+        "anonymous_spiral_07": "8bfc972badc24e32ca3eec782e3e7da3cd34dc45f59b390073d4d80c001791a1",
+        "anonymous_spiral_08": "c9aaeb8f33d773ca06a003cba156b79db579f55c3cee0b14cc4d851e3e554608"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 128.7022247314453,
+      "after_svg": "after/anonymous_spiral_00.svg",
+      "after_svg_sha256": "1e9981f53cd1605ff1dd031bc3f1d313db7c81ffeb13f0600f31e0b9fa926180",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0424_2. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 6342.2744140625,
+      "before_svg": "before/anonymous_spiral_00.svg",
+      "before_svg_sha256": "7a50b870e7e1330c6795252ae60bb41b0b34f34c26e04e043917cb7fdd03ebab",
+      "case_id": "anonymous_spiral_00",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem linken Rand zu den rechten oberen und unteren Randbereichen und laufen nach links aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom linken Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "direction": "left",
+      "image": "../../images_to_convert/AC0424_2_M.jpg",
+      "input_sha256": "7520405f12e92fd81064038d358fb163089ea295b16e854b04672994c60773e5",
+      "role": "target",
+      "source": "AC0424_2_M.jpg",
+      "source_sha256": "7520405f12e92fd81064038d358fb163089ea295b16e854b04672994c60773e5"
+    },
+    {
+      "after_mean_delta2": 150.5812530517578,
+      "after_svg": "after/anonymous_spiral_01.svg",
+      "after_svg_sha256": "4c21662b850786ced06da5d101cb0f5095c4b325981d17207ad9722953489c57",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0424_1. Dokumentiert ist die gro\u00dfe Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 8196.92578125,
+      "before_svg": "before/anonymous_spiral_01.svg",
+      "before_svg_sha256": "93cbea63aef80131d371d69fb50d3baff465782bf233f80e1c8557e7fac2358e",
+      "case_id": "anonymous_spiral_01",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem linken Rand zu den rechten oberen und unteren Randbereichen und laufen nach links aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom linken Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "direction": "left",
+      "image": "../../images_to_convert/AC0424_1_L.jpg",
+      "input_sha256": "73fdf632e2b2ec4a6bbdba7166c6b26a2aeee0e76fe9bf08ccc5ba46666fc004",
+      "role": "holdout",
+      "source": "AC0424_1_L.jpg",
+      "source_sha256": "73fdf632e2b2ec4a6bbdba7166c6b26a2aeee0e76fe9bf08ccc5ba46666fc004"
+    },
+    {
+      "after_mean_delta2": 204.27333068847656,
+      "after_svg": "after/anonymous_spiral_02.svg",
+      "after_svg_sha256": "875ca13e8afd70e84d6cf53f374bf90d2bf0a093af6e02a88d68b257526f2edb",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0424_1. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 8207.1708984375,
+      "before_svg": "before/anonymous_spiral_02.svg",
+      "before_svg_sha256": "f95ea7ce057d3c80b027c842d6fec7c71c7cca85177be4450b09036abdac85fb",
+      "case_id": "anonymous_spiral_02",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem linken Rand zu den rechten oberen und unteren Randbereichen und laufen nach links aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom linken Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "direction": "left",
+      "image": "../../images_to_convert/AC0424_1_M.jpg",
+      "input_sha256": "363610488e5df5c44fab14cfa6c8d1a8877798b9e55ce5e3ec3a095d932384fd",
+      "role": "holdout",
+      "source": "AC0424_1_M.jpg",
+      "source_sha256": "363610488e5df5c44fab14cfa6c8d1a8877798b9e55ce5e3ec3a095d932384fd"
+    },
+    {
+      "after_mean_delta2": 285.8299865722656,
+      "after_svg": "after/anonymous_spiral_03.svg",
+      "after_svg_sha256": "307034ed3db6c183796c21193ec64753b55a842d9c5e56aa006f89856d280d23",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0424_1. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 7081.64013671875,
+      "before_svg": "before/anonymous_spiral_03.svg",
+      "before_svg_sha256": "8900869411848d8447baaeade9ed9dc045cf369843d74f6022e8ac9203819349",
+      "case_id": "anonymous_spiral_03",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem linken Rand zu den rechten oberen und unteren Randbereichen und laufen nach links aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom linken Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "direction": "left",
+      "image": "../../images_to_convert/AC0424_1_S.jpg",
+      "input_sha256": "6f4012d42dbf9da4f0081a48d15a98f8076a2d5061dee152e0124e42531a12e7",
+      "role": "holdout",
+      "source": "AC0424_1_S.jpg",
+      "source_sha256": "6f4012d42dbf9da4f0081a48d15a98f8076a2d5061dee152e0124e42531a12e7"
+    },
+    {
+      "after_mean_delta2": 106.05562591552734,
+      "after_svg": "after/anonymous_spiral_04.svg",
+      "after_svg_sha256": "0ca9203366406e45cd9116a75c0adc71557f3b9d9953171f4565a6b14e91d6c0",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0424_2. Dokumentiert ist die gro\u00dfe Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 6372.099609375,
+      "before_svg": "before/anonymous_spiral_04.svg",
+      "before_svg_sha256": "8c0e7841e19112f07c9d62fb205c8bee9605135276a572a048e24f7ee29bd238",
+      "case_id": "anonymous_spiral_04",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem linken Rand zu den rechten oberen und unteren Randbereichen und laufen nach links aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom linken Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "direction": "left",
+      "image": "../../images_to_convert/AC0424_2_L.jpg",
+      "input_sha256": "d403152c06dc9d402e33ad47a7cee8413e1b79f41539b9cc6d1fc64919b3dcf2",
+      "role": "holdout",
+      "source": "AC0424_2_L.jpg",
+      "source_sha256": "d403152c06dc9d402e33ad47a7cee8413e1b79f41539b9cc6d1fc64919b3dcf2"
+    },
+    {
+      "after_mean_delta2": 196.58250427246094,
+      "after_svg": "after/anonymous_spiral_05.svg",
+      "after_svg_sha256": "63764767c3ec7b11b9a38f716816c96bea953a893f918db218216e85438db70e",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0424_2. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 5513.75244140625,
+      "before_svg": "before/anonymous_spiral_05.svg",
+      "before_svg_sha256": "6950cdbeaad8d20d7a9f5c6dfdc20adce36de4bdeff5ebc9238d6584c2572191",
+      "case_id": "anonymous_spiral_05",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem linken Rand zu den rechten oberen und unteren Randbereichen und laufen nach links aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom linken Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "direction": "left",
+      "image": "../../images_to_convert/AC0424_2_S.jpg",
+      "input_sha256": "697911b96ec11dcfa7c5ae131ead85719a1cb7c8bab3c4483b5b52641bede3ca",
+      "role": "holdout",
+      "source": "AC0424_2_S.jpg",
+      "source_sha256": "697911b96ec11dcfa7c5ae131ead85719a1cb7c8bab3c4483b5b52641bede3ca"
+    },
+    {
+      "after_mean_delta2": 100.26000213623047,
+      "after_svg": "after/anonymous_spiral_06.svg",
+      "after_svg_sha256": "0704ad262c6ea8d647b14f27fcf0f3b371d24b1f9d5f5440805a14fed6bf4b5f",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0424. Dokumentiert ist die gro\u00dfe Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 2804.923095703125,
+      "before_svg": "before/anonymous_spiral_06.svg",
+      "before_svg_sha256": "9bda66df087fbf50f9190711ee680b4945ce8ea9f2486a68c5c47e88d68b3acf",
+      "case_id": "anonymous_spiral_06",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem linken Rand zu den rechten oberen und unteren Randbereichen und laufen nach links aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom linken Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "direction": "left",
+      "image": "../../images_to_convert/AC0424_L.jpg",
+      "input_sha256": "bd9d110d312b122c4946ad377041e2f8aa06053475d198d2b6c46902f4a147bf",
+      "role": "holdout",
+      "source": "AC0424_L.jpg",
+      "source_sha256": "bd9d110d312b122c4946ad377041e2f8aa06053475d198d2b6c46902f4a147bf"
+    },
+    {
+      "after_mean_delta2": 167.3000030517578,
+      "after_svg": "after/anonymous_spiral_07.svg",
+      "after_svg_sha256": "234a4b07e13576287ee414c2c947d25b5229d171555e1e411b1a5f2cac1ca8cf",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0424. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 2675.4833984375,
+      "before_svg": "before/anonymous_spiral_07.svg",
+      "before_svg_sha256": "9dc03d2cff2b33f4e00a709f7a9eaa1a0dae3eeb39f7ab8a198f13f1bec70e7c",
+      "case_id": "anonymous_spiral_07",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem linken Rand zu den rechten oberen und unteren Randbereichen und laufen nach links aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom linken Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "direction": "left",
+      "image": "../../images_to_convert/AC0424_M.jpg",
+      "input_sha256": "8bfc972badc24e32ca3eec782e3e7da3cd34dc45f59b390073d4d80c001791a1",
+      "role": "holdout",
+      "source": "AC0424_M.jpg",
+      "source_sha256": "8bfc972badc24e32ca3eec782e3e7da3cd34dc45f59b390073d4d80c001791a1"
+    },
+    {
+      "after_mean_delta2": 172.71749877929688,
+      "after_svg": "after/anonymous_spiral_08.svg",
+      "after_svg_sha256": "32ded539fb8dbdc0f1c8fb18039e131a12d38eb221958ff020131faa8a60e36c",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0424. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 2919.090087890625,
+      "before_svg": "before/anonymous_spiral_08.svg",
+      "before_svg_sha256": "339a093941710a7fe44051a5406cf0dee64bb1d57b929e83a3c36225e3e0ed9e",
+      "case_id": "anonymous_spiral_08",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem linken Rand zu den rechten oberen und unteren Randbereichen und laufen nach links aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom linken Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
+      "direction": "left",
+      "image": "../../images_to_convert/AC0424_S.jpg",
+      "input_sha256": "c9aaeb8f33d773ca06a003cba156b79db579f55c3cee0b14cc4d851e3e554608",
+      "role": "holdout",
+      "source": "AC0424_S.jpg",
+      "source_sha256": "c9aaeb8f33d773ca06a003cba156b79db579f55c3cee0b14cc4d851e3e554608"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "0906656f71cd45f19565126307e232c069facc277a7af62ca6debef9c2e5c971",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9327220320701599,
+          "error_per_pixel": 0.0006597576559346165,
+          "object_mask_iou": 0.9941348973607038,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.3408792018890381,
+          "error_per_pixel": 0.03251197956715366,
+          "object_mask_iou": 0.8306148055207027,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_spiral_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0006597576559346165,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 9,
+            "path_complexity_ratio": 1.8,
+            "path_count": 1,
+            "vector_element_count": 5
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9815,
+            "edge_alignment": 0.9327,
+            "pixel_similarity": 0.9993,
+            "semantic_score": 1.0,
+            "structure_score": 0.9941
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9648874402046204,
+          "error_per_pixel": 0.0007719146638562492,
+          "object_mask_iou": 0.983402489626556,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.27872347831726074,
+          "error_per_pixel": 0.04201935553633218,
+          "object_mask_iou": 0.8489583333333334,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_spiral_01",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0007719146638562492,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 8,
+            "path_complexity_ratio": 1.6,
+            "path_count": 1,
+            "vector_element_count": 5
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9869,
+            "edge_alignment": 0.9649,
+            "pixel_similarity": 0.9992,
+            "semantic_score": 1.0,
+            "structure_score": 0.9834
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9488542079925537,
+          "error_per_pixel": 0.0010471527909187571,
+          "object_mask_iou": 1.0,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.36590370535850525,
+          "error_per_pixel": 0.04207187439926951,
+          "object_mask_iou": 0.8320802005012531,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_spiral_02",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0010471527909187571,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 8,
+            "path_complexity_ratio": 1.6,
+            "path_count": 1,
+            "vector_element_count": 5
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.987,
+            "edge_alignment": 0.9489,
+            "pixel_similarity": 0.999,
+            "semantic_score": 1.0,
+            "structure_score": 1.0
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9631612300872803,
+          "error_per_pixel": 0.0014652312524529828,
+          "object_mask_iou": 1.0,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.46549808979034424,
+          "error_per_pixel": 0.036302140903338456,
+          "object_mask_iou": 0.8390804597701149,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_spiral_03",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0014652312524529828,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 8,
+            "path_complexity_ratio": 1.6,
+            "path_count": 1,
+            "vector_element_count": 5
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9904,
+            "edge_alignment": 0.9632,
+            "pixel_similarity": 0.9985,
+            "semantic_score": 1.0,
+            "structure_score": 1.0
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.959132969379425,
+          "error_per_pixel": 0.0005436659024248486,
+          "object_mask_iou": 0.9858215179316097,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.26758691668510437,
+          "error_per_pixel": 0.03266487048250673,
+          "object_mask_iou": 0.8431226765799257,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_spiral_04",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0005436659024248486,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 9,
+            "path_complexity_ratio": 1.8,
+            "path_count": 1,
+            "vector_element_count": 5
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9861,
+            "edge_alignment": 0.9591,
+            "pixel_similarity": 0.9995,
+            "semantic_score": 1.0,
+            "structure_score": 0.9858
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9488940238952637,
+          "error_per_pixel": 0.0010077278189027858,
+          "object_mask_iou": 0.9746835443037974,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4253537058830261,
+          "error_per_pixel": 0.028264782475490195,
+          "object_mask_iou": 0.8390804597701149,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_spiral_05",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0010077278189027858,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 9,
+            "path_complexity_ratio": 1.8,
+            "path_count": 1,
+            "vector_element_count": 5
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9806,
+            "edge_alignment": 0.9489,
+            "pixel_similarity": 0.999,
+            "semantic_score": 1.0,
+            "structure_score": 0.9747
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9626718759536743,
+          "error_per_pixel": 0.0005139561816543917,
+          "object_mask_iou": 0.884514435695538,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.24557536840438843,
+          "error_per_pixel": 0.014378690737937332,
+          "object_mask_iou": 0.0,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_spiral_06",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0005139561816543917,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 8,
+            "path_complexity_ratio": 1.6,
+            "path_count": 1,
+            "vector_element_count": 5
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9617,
+            "edge_alignment": 0.9627,
+            "pixel_similarity": 0.9995,
+            "semantic_score": 1.0,
+            "structure_score": 0.8845
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.921951174736023,
+          "error_per_pixel": 0.0008576188801833029,
+          "object_mask_iou": 0.9180327868852459,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.3952409625053406,
+          "error_per_pixel": 0.013715152625592721,
+          "object_mask_iou": 0.0,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_spiral_07",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0008576188801833029,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 8,
+            "path_complexity_ratio": 1.6,
+            "path_count": 1,
+            "vector_element_count": 5
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9598,
+            "edge_alignment": 0.922,
+            "pixel_similarity": 0.9991,
+            "semantic_score": 1.0,
+            "structure_score": 0.918
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8904118537902832,
+          "error_per_pixel": 0.0008853902282675734,
+          "object_mask_iou": 0.808641975308642,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4339333176612854,
+          "error_per_pixel": 0.014963937397875817,
+          "object_mask_iou": 0.09947643979057591,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_spiral_08",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0008853902282675734,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 9,
+            "path_complexity_ratio": 1.8,
+            "path_count": 1,
+            "vector_element_count": 5
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9245,
+            "edge_alignment": 0.8904,
+            "pixel_similarity": 0.9991,
+            "semantic_score": 1.0,
+            "structure_score": 0.8086
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "fresh original-description CLI frozen before runtime and description changes",
+      "commit": "4a72a18a97239aa4307546866e041f543d06c70a",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_spiral_00": "7520405f12e92fd81064038d358fb163089ea295b16e854b04672994c60773e5",
+        "anonymous_spiral_01": "73fdf632e2b2ec4a6bbdba7166c6b26a2aeee0e76fe9bf08ccc5ba46666fc004",
+        "anonymous_spiral_02": "363610488e5df5c44fab14cfa6c8d1a8877798b9e55ce5e3ec3a095d932384fd",
+        "anonymous_spiral_03": "6f4012d42dbf9da4f0081a48d15a98f8076a2d5061dee152e0124e42531a12e7",
+        "anonymous_spiral_04": "d403152c06dc9d402e33ad47a7cee8413e1b79f41539b9cc6d1fc64919b3dcf2",
+        "anonymous_spiral_05": "697911b96ec11dcfa7c5ae131ead85719a1cb7c8bab3c4483b5b52641bede3ca",
+        "anonymous_spiral_06": "bd9d110d312b122c4946ad377041e2f8aa06053475d198d2b6c46902f4a147bf",
+        "anonymous_spiral_07": "8bfc972badc24e32ca3eec782e3e7da3cd34dc45f59b390073d4d80c001791a1",
+        "anonymous_spiral_08": "c9aaeb8f33d773ca06a003cba156b79db579f55c3cee0b14cc4d851e3e554608"
+      },
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 9,
+      "improved": 9,
+      "satisfactory": 9,
+      "technically_completed": 9
+    }
+  },
+  "schema_version": "oriented_spiral_disk_recheck_v1",
+  "strict_pixel_gates": {
+    "anonymous_spiral_00": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 9,
+        "path_complexity_ratio": 1.8,
+        "path_count": 1,
+        "vector_element_count": 5
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9327220320701599,
+        "foreground_iou": 0.9970972423802612,
+        "foreground_mse": 0.0008031149045564234,
+        "normalized_mse": 0.000659757643006742
+      },
+      "satisfactory": true
+    },
+    "anonymous_spiral_01": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.6,
+        "path_count": 1,
+        "vector_element_count": 5
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9648874402046204,
+        "foreground_iou": 0.9983660130718954,
+        "foreground_mse": 0.0009668687707744539,
+        "normalized_mse": 0.0007719147251918912
+      },
+      "satisfactory": true
+    },
+    "anonymous_spiral_02": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.6,
+        "path_count": 1,
+        "vector_element_count": 5
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9488542079925537,
+        "foreground_iou": 0.9985486211901307,
+        "foreground_mse": 0.0012897276319563389,
+        "normalized_mse": 0.0010471527930349112
+      },
+      "satisfactory": true
+    },
+    "anonymous_spiral_03": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.6,
+        "path_count": 1,
+        "vector_element_count": 5
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9631612300872803,
+        "foreground_iou": 1.0,
+        "foreground_mse": 0.001776483259163797,
+        "normalized_mse": 0.0014652312966063619
+      },
+      "satisfactory": true
+    },
+    "anonymous_spiral_04": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 9,
+        "path_complexity_ratio": 1.8,
+        "path_count": 1,
+        "vector_element_count": 5
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.959132969379425,
+        "foreground_iou": 0.9967320261437909,
+        "foreground_mse": 0.0006772784981876612,
+        "normalized_mse": 0.0005436658975668252
+      },
+      "satisfactory": true
+    },
+    "anonymous_spiral_05": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 9,
+        "path_complexity_ratio": 1.8,
+        "path_count": 1,
+        "vector_element_count": 5
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9488940238952637,
+        "foreground_iou": 1.0,
+        "foreground_mse": 0.001239769859239459,
+        "normalized_mse": 0.001007727812975645
+      },
+      "satisfactory": true
+    },
+    "anonymous_spiral_06": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.6,
+        "path_count": 1,
+        "vector_element_count": 5
+      },
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9626718759536743,
+        "foreground_iou": 0.7112781954887218,
+        "foreground_mse": 0.0011214888654649258,
+        "normalized_mse": 0.0005139561835676432
+      },
+      "satisfactory": false
+    },
+    "anonymous_spiral_07": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 8,
+        "path_complexity_ratio": 1.6,
+        "path_count": 1,
+        "vector_element_count": 5
+      },
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.921951174736023,
+        "foreground_iou": 0.7342657342657343,
+        "foreground_mse": 0.0016016431618481874,
+        "normalized_mse": 0.0008576189284212887
+      },
+      "satisfactory": false
+    },
+    "anonymous_spiral_08": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 9,
+        "path_complexity_ratio": 1.8,
+        "path_count": 1,
+        "vector_element_count": 5
+      },
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8904118537902832,
+        "foreground_iou": 0.6962025316455697,
+        "foreground_mse": 0.0010755356634035707,
+        "normalized_mse": 0.0008853902108967304
+      },
+      "satisfactory": false
+    }
+  }
+}
