@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-17)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `461` · Erledigt `428` · Offen `33`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `463` · Erledigt `429` · Offen `34`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -20,10 +20,23 @@ focused on the actual project scope.
 
 ### Aktueller Plan-B-Stand (2026-10-17)
 
+- [x] **GE9033 – T-Verzweigung mit Schaft nach unten:** eigenständige Beschreibungen; die unveränderte allgemeine Registrierung besteht mit allen 14 Farb-/Größenvarianten beide regulären Gates ohne Pflichtmetrikregression. 13 JPGs bestehen zusätzlich die strengeren Pixelgrenzen. Details: `docs/next_arbeitspaket_2026-10-17_ge9033_6m.md`.
+- [ ] **GE9033-PB-GREY:** `GE9033_4M.jpg` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.8490196078431372 < 0.85`). Beide regulären Gates bestehen. Sehr helle graue Fläche und JPEG-Abweichungen nahe der unveränderten Vordergrundschwelle untersuchen; Quellen, akzeptierte SVGs und Grenzen erhalten.
+
+**Neuester Abschluss:** `GE9033_6M` und 13 Farb-/Größen-Holdouts auf
+`codex/ge9033-quality-2026-10-17`. Frische neutrale Zielmetrik
+`9455.181641 → 102.153122`; finale SVGs im vollständigen Katalogkontext
+bytegleich. 343 Paare in der Erfolgsübersicht; alle 329 bisherigen Indexeinträge
+unverändert. Nächste reguläre Rotation: `AC0424_2_M`, `AC0840_S`,
+`AC0840_M`, `SE0082`, `AC0411_1_M`. Nur die 14 regulär abgenommenen
+GE9033-Varianten sind zusätzlich ausgeschlossen; der strengere graue
+IoU-Folgepunkt bleibt offen. Bestandszahlen und persönliche Prüfliste:
+`docs/project_status_2026-10-17.md`. Bestehende offene Aufgaben bleiben erhalten.
+
 - [x] **AC0414 – Kreis mit gerichteten Sehnen und Innen-T:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung der Kreis-/T-Registrierung. Alle neun Farb-/Größen-/Richtungsvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression; die sechs farbigen JPGs zusätzlich die strengeren Pixelgrenzen. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-17_ac0414_2_l.md`.
 - [ ] **AC0414-PB-GREY:** die drei grauen JPGs `AC0414_{L,M,S}` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.748614`, `0.718310`, `0.821256 < 0.85`). Beide regulären Gates bestehen. Füllfarbe um RGB 230 und JPEG-Abweichungen an der unveränderten Schwelle von mehr als 25 Abstand zum Hintergrund untersuchen. Quellen, akzeptierte SVGs und Grenzen erhalten.
 
-**Neuester Abschluss:** `AC0414_2_L` und acht Farb-/Größen-/Richtungs-Holdouts
+**Vorheriger Abschluss:** `AC0414_2_L` und acht Farb-/Größen-/Richtungs-Holdouts
 auf `codex/ac0414-quality-2026-10-17`. Frische neutrale Zielmetrik
 `6908.101074 → 75.907501`; finale SVGs im vollständigen Katalogkontext
 bytegleich. 329 Paare in der Erfolgsübersicht; alle 320 bisherigen Indexeinträge

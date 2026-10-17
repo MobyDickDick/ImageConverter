@@ -1,5 +1,5 @@
 {
-  "case_count": 329,
+  "case_count": 343,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -5321,6 +5321,244 @@
       "svg": "svgs/GE9032_7S.svg",
       "svg_sha256": "c4c6aed80610aed618dae16968ae4925194c56bf1c41903fc9b2a2a156363786",
       "variant": "GE9032_7S"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_1M.jpg",
+      "image_sha256": "cee4146faab7cb6497176b268df0605aac2d82e37bf523a4324b6ce1a4e517e2",
+      "mean_delta2": 114.3187484741211,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8962116241455078,
+        "error_per_pixel": 0.0005860245980987881,
+        "object_mask_iou": 0.9655172413793104
+      },
+      "svg": "svgs/GE9033_1M.svg",
+      "svg_sha256": "7c4f914f69412cec075e07d8f3ba6e569e4f8a0a98f8e3977f50aeabd59ee8af",
+      "variant": "GE9033_1M"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_1S.jpg",
+      "image_sha256": "560eaade54816db025797b5800d933f7ec6d738bf6bb61946b05593fc2e6eff9",
+      "mean_delta2": 86.2750015258789,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9237648248672485,
+        "error_per_pixel": 0.00044226580302898327,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9033_1S.svg",
+      "svg_sha256": "f3d3aed017962a1155f6d78901c64d0d5ee6d4ccc3a0a357b1ac2e2ab785f5f0",
+      "variant": "GE9033_1S"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_2M.jpg",
+      "image_sha256": "60e587a211fe7c23de1482399f806436e98632cc14a15d996ad708acdb3da38f",
+      "mean_delta2": 120.20124816894531,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9679268002510071,
+        "error_per_pixel": 0.0006161796650977589,
+        "object_mask_iou": 0.967479674796748
+      },
+      "svg": "svgs/GE9033_2M.svg",
+      "svg_sha256": "4355d85ff62c1a9c38517712a38f502a92459a58bb4ad3e3b066fd02c06d3af6",
+      "variant": "GE9033_2M"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_2S.jpg",
+      "image_sha256": "2ef0338ec0728714ee36ba5a41156d239b1c97a6e3f7384736a56486c1edcafe",
+      "mean_delta2": 77.23249816894531,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8851649761199951,
+        "error_per_pixel": 0.0003959118193973872,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9033_2S.svg",
+      "svg_sha256": "4f77762991a9caff58484d20ce634f670e632a7862ab1b6519aeba07e8fd0aa5",
+      "variant": "GE9033_2S"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_3M.jpg",
+      "image_sha256": "df604445deba883284c0ad646754775a663935bef2db5cb14f58b608190c1ab0",
+      "mean_delta2": 87.9331283569336,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9001191854476929,
+        "error_per_pixel": 0.00045076574833747835,
+        "object_mask_iou": 0.9613034623217923
+      },
+      "svg": "svgs/GE9033_3M.svg",
+      "svg_sha256": "457b0dd205260b0dc3b2740102b76679567555c95f898e7476c4343e05088826",
+      "variant": "GE9033_3M"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_3S.jpg",
+      "image_sha256": "792bd8ff3f49dcef24662c3bf4aa621afe84e6f748a51f6c398b43a3ff2481be",
+      "mean_delta2": 61.060001373291016,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9281800389289856,
+        "error_per_pixel": 0.00031300782454589783,
+        "object_mask_iou": 0.9938271604938271
+      },
+      "svg": "svgs/GE9033_3S.svg",
+      "svg_sha256": "919469849aa359f4e0cfff73ae537678b63b7fc3f305f1b865872be6b69c8e8f",
+      "variant": "GE9033_3S"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_4M.jpg",
+      "image_sha256": "503668270be16039b17397cf7c1e13c3fa26f71fd37e66cdb8d263c6efc8e059",
+      "mean_delta2": 32.67124938964844,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9382724761962891,
+        "error_per_pixel": 0.00016748045310597688,
+        "object_mask_iou": 0.9464285714285714
+      },
+      "svg": "svgs/GE9033_4M.svg",
+      "svg_sha256": "4fe7486b95fecb5e948cb070e108a6aab861e6dda3ae32199bc65c886d310bc9",
+      "variant": "GE9033_4M"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_4S.jpg",
+      "image_sha256": "777fe7600719f000b1bee378a27eb6ddb557b1834b4c8ba62ed8ab05b4680382",
+      "mean_delta2": 45.0625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8795544505119324,
+        "error_per_pixel": 0.00023100089709086248,
+        "object_mask_iou": 0.8771929824561403
+      },
+      "svg": "svgs/GE9033_4S.svg",
+      "svg_sha256": "7e82843aee9311f84553200b48b7f9791911c28aa3a55313c3c43c807437237b",
+      "variant": "GE9033_4S"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_5M.jpg",
+      "image_sha256": "7ada033da40a552a390bc18d87ad4472c6afae88ef3b6838a322c6177319e5cd",
+      "mean_delta2": 50.72062683105469,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.760604977607727,
+        "error_per_pixel": 0.0002600057763991013,
+        "object_mask_iou": 0.9536423841059603
+      },
+      "svg": "svgs/GE9033_5M.svg",
+      "svg_sha256": "e23f4fd5cbd56d1b0eab3eed2b0ecf0d40699e33e33790a6965e0056a83b8308",
+      "variant": "GE9033_5M"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_5S.jpg",
+      "image_sha256": "ea4fb201a8a0afe81e429e4c254e49501ea103af4a5e5bbfea7c3357a1390d39",
+      "mean_delta2": 66.6050033569336,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8697233200073242,
+        "error_per_pixel": 0.0003414327994716575,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9033_5S.svg",
+      "svg_sha256": "14518f73d6136e0da36b6fb0a35fd1d6d991bc211a9e55a7af8304e32c538fc4",
+      "variant": "GE9033_5S"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_6M.jpg",
+      "image_sha256": "7fed42aa875b00b0e52ee77c11456983afe61449fc72a676f388d8d913b66cac",
+      "mean_delta2": 102.15312194824219,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.7745428085327148,
+        "error_per_pixel": 0.0005236607558541186,
+        "object_mask_iou": 0.9536423841059603
+      },
+      "svg": "svgs/GE9033_6M.svg",
+      "svg_sha256": "decfb463067e6f5f257f4e8b37cfc926eae3ebb068ff1d122bd1315b748a0778",
+      "variant": "GE9033_6M"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_6S.jpg",
+      "image_sha256": "a1ab6a1c4770acf507d5d0558b55940a6a9a8ce85eeb920b718e4ffb9e0ddd1c",
+      "mean_delta2": 106.86250305175781,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8597833514213562,
+        "error_per_pixel": 0.0005478021430309257,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/GE9033_6S.svg",
+      "svg_sha256": "fdf324f3e195c2376c74ad165e6e89605e9939e72ffce38259011f3afd07f87d",
+      "variant": "GE9033_6S"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_7M.jpg",
+      "image_sha256": "713a2b94fa97a3656d1c3cd71be152ff0b12407c57f62bf2c6f7016c0e514887",
+      "mean_delta2": 40.880001068115234,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9116091728210449,
+        "error_per_pixel": 0.00020956043095278858,
+        "object_mask_iou": 0.9976905311778291
+      },
+      "svg": "svgs/GE9033_7M.svg",
+      "svg_sha256": "52c8d271df8cc669fd954f294601540f4a0fe9a454eee2766da9f01e21d8b6c5",
+      "variant": "GE9033_7M"
+    },
+    {
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschlie\u00dfenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/down_gradient_junction_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE9033_7S.jpg",
+      "image_sha256": "1753607b9a5d36b3d505bd0a451d495cdead00e50046bf5e3d10254ea0722b4b",
+      "mean_delta2": 65.83499908447266,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8914591073989868,
+        "error_per_pixel": 0.0003374855777750745,
+        "object_mask_iou": 0.9938271604938271
+      },
+      "svg": "svgs/GE9033_7S.svg",
+      "svg_sha256": "007f6f042ebfd213b4984e172d2605bb42cbe655a570fb52768215412bf15514",
+      "variant": "GE9033_7S"
     },
     {
       "description": "Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschlie\u00dfenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer L\u00e4ngsrichtung einen Farbverlauf mit heller Mitte und dunkleren R\u00e4ndern. Der \u00dcbergang ist auf Gehrung verbunden. Wei\u00dfer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",

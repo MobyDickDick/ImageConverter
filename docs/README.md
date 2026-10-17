@@ -2,6 +2,9 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [Aktueller Projektstand: 343 abgenommene Paare, offene Nachweise und persönliche Prüfliste (2026-10-17)](project_status_2026-10-17.md)
+- [GE9033: T-Verzweigung nach unten, 14 reguläre Abnahmen und grauer IoU-Folgepunkt (2026-10-17)](next_arbeitspaket_2026-10-17_ge9033_6m.md)
+
 - [Formenfamilien gemeinsam bearbeiten: mehrere Vorlagen, Farben, Größen und Farbverläufe](form_families_workflow.md)
 
 - [AC0414: Kreis mit gerichteten Sehnen und Innen-T, neun Varianten und unabhängige CLI-Abnahme (2026-10-17)](next_arbeitspaket_2026-10-17_ac0414_2_l.md)

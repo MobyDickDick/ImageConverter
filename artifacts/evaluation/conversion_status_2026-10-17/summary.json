@@ -1,0 +1,44 @@
+{
+  "schema_version": "conversion_status_snapshot_v1",
+  "date": "2026-10-17",
+  "base_commit": "a830dc53d2418af9d9b4269081488c5d28a02c96",
+  "catalog_distinct_jpg_names": 1785,
+  "accepted_before_package": 329,
+  "accepted_after_package": 343,
+  "not_explicitly_accepted": 1442,
+  "classifications": {
+    "not_in_review": 698,
+    "older_review_below_threshold": 696,
+    "older_review_above_threshold": 42,
+    "accepted": 343,
+    "older_review_missing_pair": 6
+  },
+  "older_review": {
+    "records": 1000,
+    "distinct_variants": 969,
+    "duplicate_records": 31,
+    "renderable": 993,
+    "above_threshold": 97,
+    "below_threshold": 896,
+    "above_threshold_already_accepted_before": 54,
+    "above_threshold_remaining_before": 43,
+    "above_threshold_remaining_after": 42,
+    "missing_pair": 7,
+    "threshold_normalized_mse": 0.045945679012345676
+  },
+  "samples": {
+    "svg_files": 93,
+    "accepted_with_same_name": 8,
+    "accepted_without_same_name": 335,
+    "manual_approval_tracked": false
+  },
+  "limitations": [
+    "No fresh full-catalog conversion: absence from archive is not a proven failure.",
+    "Older review contains stale outputs; pixel threshold alone is not package acceptance.",
+    "Sample filename presence does not establish manual approval or content equality."
+  ],
+  "input_sha256": {
+    "artifacts/evaluation/oriented_circle_linework_recheck_v1/conversion_quality_records_v2.csv": "035c2ed38847f30915f158408a8a05db81584e95060db58942017501c4bef397",
+    "artifacts/satisfactory_conversions/index.json": "3c48b92da8681491d147c3dffb9ab1606178aec12e63496e1d3efd4f34d01ab5"
+  }
+}
