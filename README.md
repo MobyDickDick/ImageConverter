@@ -3,8 +3,10 @@
 ImageConverter converts badge/source images into composite SVG outputs and also
 provides annotation/debugging helpers for the source raster files.
 
-Der [Projektstand vom 2026-10-10](docs/project_status_2026-10-10.md) beschreibt
-die vorhandene Batchfähigkeit und die weiterhin begrenzte Motivabdeckung.
+Der [Projektstand vom 2026-10-17](docs/project_status_2026-10-17.md) zählt
+343 ausdrücklich abgenommene Paare bei 1.785 Katalogbildern und trennt
+ältere Pixelprüfungen von noch fehlenden Nachweisen. Eine sortierte
+Prüfliste unterstützt die persönliche Sichtprüfung für Samples.
 
 Mehrere verwandte Vorlagen können als **Formenfamilie in einer Aufgabe**
 bearbeitet werden, auch mit unterschiedlichen Farben, Größen und ähnlichen
@@ -30,13 +32,13 @@ SVGs, Checkpoints oder andere Bilder werden im voreingestellten
 ## Main entry point
 
 Die [Erfolgsübersicht](artifacts/satisfactory_conversions/README.md) enthält
-329 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
+343 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
 `python -m tools.refresh_satisfactory_archive` wird sie aus den dokumentierten
 Abnahmen aktualisiert. `python -m tools.run_pytest_profile extended`
 aktualisiert die Sammlung einschließlich späterer erfolgreicher Batches,
 konvertiert alle Einträge erneut und prüft deren Qualität; Quellen und
 gespeicherte gute SVGs bleiben dabei erhalten. Details zur Sammlung und zur
-[Kreis-/Sehnen-/T-Abnahme](docs/next_arbeitspaket_2026-10-17_ac0414_2_l.md).
+[T-Verzweigung nach unten](docs/next_arbeitspaket_2026-10-17_ge9033_6m.md).
 
 Run the converter via:
 

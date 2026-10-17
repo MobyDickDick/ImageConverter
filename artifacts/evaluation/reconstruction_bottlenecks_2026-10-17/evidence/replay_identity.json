@@ -1,0 +1,97 @@
+{
+  "junction_control": {
+    "failures": [],
+    "input_sha256": "9e8bb9adf5535c5667043a5b4c6162d436bc0886588b5b5b82ee46f9b2d42ee0",
+    "metrics": {
+      "edge_alignment": 0.8758423924446106,
+      "foreground_iou": 1.0,
+      "foreground_mse": 0.0005442487308755517,
+      "normalized_mse": 9.520976891508326e-05
+    },
+    "output_sha256": "855c91cb9066e24044efc8509db874fa0c9576e6dc1f36cdaab01c11c4133f26",
+    "satisfactory": true
+  },
+  "junction_paraphrase": {
+    "failures": [
+      "normalized_mse_outside_limit",
+      "foreground_mse_outside_limit",
+      "edge_alignment_outside_limit",
+      "foreground_iou_outside_limit"
+    ],
+    "input_sha256": "9e8bb9adf5535c5667043a5b4c6162d436bc0886588b5b5b82ee46f9b2d42ee0",
+    "metrics": {
+      "edge_alignment": 0.2174406498670578,
+      "foreground_iou": 0.34718355108160204,
+      "foreground_mse": 0.08912765234708786,
+      "normalized_mse": 0.02151617407798767
+    },
+    "output_sha256": "bd36ba585dc98cb13f5e6049007a08c8fb75bd08608bc1a33d495ac854450240",
+    "satisfactory": false
+  },
+  "one_circle": {
+    "failures": [
+      "normalized_mse_outside_limit",
+      "foreground_mse_outside_limit",
+      "edge_alignment_outside_limit",
+      "foreground_iou_outside_limit"
+    ],
+    "input_sha256": "aaf4ca41ecd0cb82d76ef8fd88264ceba9af00b0d0e5b674f620611ce6bee6ae",
+    "metrics": {
+      "edge_alignment": 0.07604911923408508,
+      "foreground_iou": 0.026026026026026026,
+      "foreground_mse": 0.34318244457244873,
+      "normalized_mse": 0.020699648186564445
+    },
+    "output_sha256": "0bfdc2d7f03d9f9bd8d0e7adab1394b8d61bb2b86d3de8299174fae562093ae8",
+    "satisfactory": false
+  },
+  "one_rectangle": {
+    "failures": [
+      "foreground_mse_outside_limit",
+      "foreground_iou_outside_limit"
+    ],
+    "input_sha256": "5ebac8c5d8cd67f62f9572ba10c4451be78ab1f34fab28d0eaa9ff6d9dd210d5",
+    "metrics": {
+      "edge_alignment": 0.762398362159729,
+      "foreground_iou": 0.8084210526315789,
+      "foreground_mse": 0.07361976057291031,
+      "normalized_mse": 0.004591783974319696
+    },
+    "output_sha256": "e938d47af38d1d07b140f4967cc3ebf84cca15d8e4db0a248b029457dc2e37bb",
+    "satisfactory": false
+  },
+  "two_circles": {
+    "failures": [
+      "normalized_mse_outside_limit",
+      "foreground_mse_outside_limit",
+      "edge_alignment_outside_limit",
+      "foreground_iou_outside_limit"
+    ],
+    "input_sha256": "db0d0338fd5a89bfb0df1870af7c93bfde0bd0bd13014f4e53bada316a38ed5f",
+    "metrics": {
+      "edge_alignment": 0.10084119439125061,
+      "foreground_iou": 0.031591737545565005,
+      "foreground_mse": 0.4108702838420868,
+      "normalized_mse": 0.04074914753437042
+    },
+    "output_sha256": "0bfdc2d7f03d9f9bd8d0e7adab1394b8d61bb2b86d3de8299174fae562093ae8",
+    "satisfactory": false
+  },
+  "two_rectangles": {
+    "failures": [
+      "normalized_mse_outside_limit",
+      "foreground_mse_outside_limit",
+      "edge_alignment_outside_limit",
+      "foreground_iou_outside_limit"
+    ],
+    "input_sha256": "9244624f67e5cc1e9acc2209fc680351891f73245b84f8dc9da9134545861278",
+    "metrics": {
+      "edge_alignment": 0.18020974099636078,
+      "foreground_iou": 0.03335431088735054,
+      "foreground_mse": 0.5991876125335693,
+      "normalized_mse": 0.05727819353342056
+    },
+    "output_sha256": "71fbd42c1986b33b69f18e7479a1623478dc5a74818ffa45163ec96927fcea4d",
+    "satisfactory": false
+  }
+}

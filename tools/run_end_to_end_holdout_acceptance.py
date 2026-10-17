@@ -105,6 +105,9 @@ def build_end_to_end_holdout_acceptance(*, seed: str = DEFAULT_SEED) -> dict[str
 
     return {
         "schema_version": "end_to_end_holdout_acceptance_v1",
+        "evidence_kind": "contract_fixture",
+        "executes_converter": False,
+        "measures_raster_quality": False,
         "protocol_schema_version": protocol["schema_version"],
         "ablation_schema_version": matrix["schema_version"],
         "quality_gate_schema_version": "quality_complexity_gate_v1",
@@ -134,7 +137,9 @@ def main() -> int:
     parser.add_argument("--seed", default=DEFAULT_SEED)
     args = parser.parse_args()
     report = write_end_to_end_holdout_acceptance(args.output, seed=args.seed)
-    print(json.dumps({"output": str(args.output), "summary": report["summary"]}, indent=2))
+    print(json.dumps({"output": str(args.output), "evidence_kind": report["evidence_kind"],
+        "executes_converter": False, "measures_raster_quality": False,
+        "summary": report["summary"]}, indent=2))
     return 0 if report["summary"]["accepted"] else 1
 
 
