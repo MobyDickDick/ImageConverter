@@ -1,13 +1,17 @@
 # Projektstand und Sichtprüfung am 2026-10-17
 
-**Nachtrag SE0082:** Das unabhängig geprüfte Quadrat mit linkem Griff und M
-ergänzt das Archiv auf **356 von 1.785 Bildern (19,9 %)**. Alle 355 bisherigen
-Einträge bleiben unverändert; 1.429 Bilder haben keine ausdrückliche Archivabnahme.
-Details: [SE0082-Arbeitspaket](next_arbeitspaket_2026-10-17_se0082.md).
-Die folgenden Nachträge und Tabellen bleiben historische Snapshots.
+**Aktueller Nachtrag AC0411:** Neun neue regulär abgenommene Paare und der
+wiederhergestellte, zuvor bereits abgenommene SE0082-Archiveintrag ergeben
+**365 von 1.785 Bildern (20,4 %)**. Alle 355 tatsächlich im Basisindex
+vorhandenen Einträge bleiben unverändert. 1.420 Bilder haben noch keine
+ausdrückliche Archivabnahme. Die drei grauen AC0411-Bilder haben weiterhin
+einen offenen zusätzlichen strengen IoU-Nachweis.
+Details: [AC0411-Abnahme](next_arbeitspaket_2026-10-17_ac0411_1_m.md).
+Die folgenden älteren Nachträge, Tabellen und Prüflisten bleiben als historische
+Snapshots erhalten; sie enthalten die später ergänzten Paare noch nicht.
 
-**Nachtrag AC0840:** S/M/L ergänzen drei unabhängig geprüfte Bild-/SVG-Paare.
-Der aktuelle Archivstand beträgt **355 von 1.785 Bildern (19,9 %)**; alle 352
+**Vorheriger Nachtrag AC0840:** S/M/L ergänzen drei unabhängig geprüfte Bild-/SVG-Paare.
+Der damalige Archivstand beträgt **355 von 1.785 Bildern (19,9 %)**; alle 352
 bisherigen Indexeinträge sind unverändert. 1.430 Bilder haben weiterhin keine
 ausdrückliche Archivabnahme. Das ist keine Zahl nachgewiesen gescheiterter Bilder.
 Details: [AC0840 und Suchportfolio](next_arbeitspaket_2026-10-17_ac0840_search.md).

@@ -2,7 +2,13 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-17, nach SE0082-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-17, nach AC0411-Abnahme)
+
+AC0411 ist mit neun Varianten regulär abgenommen; sechs bestehen auch das strenge Pixelgate. Der graue IoU-Folgepunkt bleibt offen. 365 Paare sind archiviert.
+Aktive Rotation: `AC0910_L`, `GE0204_M`, `AC0921_M`, `AC0232_M`.
+Details: `docs/next_arbeitspaket_2026-10-17_ac0411_1_m.md`.
+
+## Vorheriger Abschluss: SE0082
 
 SE0082 besteht beide regulären und die strengeren Pixelgates. Der linke
 Quadrat-/Griff-/Textfit ist verallgemeinert; zwei unabhängige CLI-Batterien

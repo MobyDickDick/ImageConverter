@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-17)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `472` · Erledigt `434` · Offen `38`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `471` · Erledigt `433` · Offen `38`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -40,8 +40,8 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 - [x] **AC0840 – Kurztext auf Kreisscheibe und alternative Suchmodelle:** S/M/L bestehen beide regulären und die strengen Pixelgates. Unabhängige Vorlage mit anderer Beschriftung, Palette und Lage besteht 17/17 echte CLI-Fälle. 355 archivierte Paare; alle 352 bisherigen Einträge unverändert. Nächste Rotation: `SE0082`, `AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`. Details: `docs/next_arbeitspaket_2026-10-17_ac0840_search.md`.
 
-**Vorheriger Abschluss:** AC0840 S/M/L. Der folgende AC0424-Stand ist die
-vorherige Abnahme; ihre offenen grauen Folgepunkte bleiben erhalten.
+- [x] **AC0411 – aufwärts gerichtete Sehnen und Innen-T:** Eigenständige Beschreibungen in beiden XML-Katalogen aktivieren den unveränderten allgemeinen Rasterfit. Alle neun Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression; die sechs farbigen JPGs zusätzlich das strenge Pixelgate. Zwei unabhängige CLI-Batterien bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-17_ac0411_1_m.md`.
+- [ ] **AC0411-PB-GREY:** Die grauen JPGs `AC0411_{L,M,S}` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.750923`, `0.611628`, `0.809524 < 0.85`). Beide regulären Gates bestehen. Helle JPEG-Flächen an der unveränderten Vordergrundschwelle separat untersuchen; Quellen, akzeptierte SVGs und Grenzen erhalten.
 
 **Neuester Abschluss:** `AC0411_1_M` und acht Farb-/Größen-Holdouts.
 Frische neutrale Zielmetrik `9047.102539 → 200.141113`; mit festem Suchseed
@@ -2783,7 +2783,7 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 
 ## Neue Aufgaben: Formen-Erkennung (Kreis, Dreieck, Pfeil, Viereck) + Linien-/Farbmessung (angelegt 2026-05-14)
 
-**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `6` · Offen `0`
+**Aufgabenzähler (S1–S6):** Gesamt `471` · Erledigt `433` · Offen `38`
 
 > Hinweis: Beim Abhaken bitte den Zähler direkt mit aktualisieren, damit der Fortschritt sofort sichtbar bleibt.
 
