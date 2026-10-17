@@ -1,6 +1,6 @@
 # Zufriedenstellende Konvertierungen
 
-306 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
+320 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
 
 Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bild und Beschreibung.
 
@@ -296,6 +296,20 @@ Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bi
 | [GE9031_6S](images/GE9031_6S.jpg) | [SVG](svgs/GE9031_6S.svg) | 105.157501 | semantic-only |
 | [GE9031_7M](images/GE9031_7M.jpg) | [SVG](svgs/GE9031_7M.svg) | 47.983124 | semantic-only |
 | [GE9031_7S](images/GE9031_7S.jpg) | [SVG](svgs/GE9031_7S.svg) | 64.129997 | semantic-only |
+| [GE9032_1M](images/GE9032_1M.jpg) | [SVG](svgs/GE9032_1M.svg) | 109.613129 | semantic-only |
+| [GE9032_1S](images/GE9032_1S.jpg) | [SVG](svgs/GE9032_1S.svg) | 89.610001 | semantic-only |
+| [GE9032_2M](images/GE9032_2M.jpg) | [SVG](svgs/GE9032_2M.svg) | 133.306870 | semantic-only |
+| [GE9032_2S](images/GE9032_2S.jpg) | [SVG](svgs/GE9032_2S.svg) | 77.952499 | semantic-only |
+| [GE9032_3M](images/GE9032_3M.jpg) | [SVG](svgs/GE9032_3M.svg) | 75.356247 | semantic-only |
+| [GE9032_3S](images/GE9032_3S.jpg) | [SVG](svgs/GE9032_3S.svg) | 60.970001 | semantic-only |
+| [GE9032_4M](images/GE9032_4M.jpg) | [SVG](svgs/GE9032_4M.svg) | 52.542500 | semantic-only |
+| [GE9032_4S](images/GE9032_4S.jpg) | [SVG](svgs/GE9032_4S.svg) | 31.105000 | semantic-only |
+| [GE9032_5M](images/GE9032_5M.jpg) | [SVG](svgs/GE9032_5M.svg) | 59.326874 | semantic-only |
+| [GE9032_5S](images/GE9032_5S.jpg) | [SVG](svgs/GE9032_5S.svg) | 65.364998 | semantic-only |
+| [GE9032_6M](images/GE9032_6M.jpg) | [SVG](svgs/GE9032_6M.svg) | 97.358749 | semantic-only |
+| [GE9032_6S](images/GE9032_6S.jpg) | [SVG](svgs/GE9032_6S.svg) | 104.105003 | semantic-only |
+| [GE9032_7M](images/GE9032_7M.jpg) | [SVG](svgs/GE9032_7M.svg) | 47.025623 | semantic-only |
+| [GE9032_7S](images/GE9032_7S.jpg) | [SVG](svgs/GE9032_7S.svg) | 63.097500 | semantic-only |
 | [GE9034_1M](images/GE9034_1M.jpg) | [SVG](svgs/GE9034_1M.svg) | 196.654373 | semantic-only |
 | [GE9034_1S](images/GE9034_1S.jpg) | [SVG](svgs/GE9034_1S.svg) | 99.212502 | semantic-only |
 | [GE9034_2M](images/GE9034_2M.jpg) | [SVG](svgs/GE9034_2M.svg) | 165.306870 | semantic-only |

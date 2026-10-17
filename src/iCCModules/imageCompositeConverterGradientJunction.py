@@ -47,6 +47,27 @@ def fit_gradient_junction(width, height, *, description, image, render_fn, error
     result = _fit_upright(canonical_width, canonical_height, image=canonical,
                           render_fn=render_canonical, error_fn=source_error)
     if result is not None:
+        def source_alignment(candidate):
+            reference = cv2.Canny(arr.astype(np.uint8), 50, 140) > 0
+            raster = np.ascontiguousarray(np.rot90(candidate['rendered'], -turns))
+            edges = cv2.Canny(raster.astype(np.uint8), 50, 140) > 0
+            if not reference.any() or not edges.any():
+                return 0.
+            distance = cv2.distanceTransform((~edges).astype(np.uint8), cv2.DIST_L2, 3)
+            reference_distance = cv2.distanceTransform((~reference).astype(np.uint8), cv2.DIST_L2, 3)
+            return float((np.exp(-distance[reference]).mean() + np.exp(-reference_distance[edges]).mean())/2)
+
+        # Retain accepted fits. Only an insufficient source-space contour
+        # needs the additional search in the production edge frame.
+        alignment = source_alignment(result)
+        if alignment < .72:
+            refined = _fit_upright(canonical_width, canonical_height, image=canonical,
+                render_fn=render_canonical, error_fn=source_error,
+                edge_frame=lambda raster: np.ascontiguousarray(np.rot90(raster, -turns)))
+            if refined is not None and source_alignment(refined) > alignment:
+                refined['evaluations'] += result['evaluations']
+                result = refined
+    if result is not None:
         for key in ('svg', 'initial_svg'):
             result[key] = _orient_svg(result[key], turns, width, height)
         result['rendered'] = np.ascontiguousarray(np.rot90(result['rendered'], -turns))
@@ -84,7 +105,7 @@ def _orient_svg(svg, turns, width, height):
     return ET.tostring(root, encoding='unicode')+'\n'
 
 
-def _fit_upright(width, height, *, image, render_fn, error_fn):
+def _fit_upright(width, height, *, image, render_fn, error_fn, edge_frame=lambda raster: raster):
     arr = np.asarray(image)
     pixels = arr.astype(float)
     if not np.isfinite(pixels).all():
@@ -122,7 +143,11 @@ def _fit_upright(width, height, *, image, render_fn, error_fn):
     if not (left+2 < sl < sr < right-2 and sr-sl >= 3
             and y0-top >= max(3,(sr-sl)*.65)):
         return None
-    if np.max(np.abs(stem_spans-[sl,sr-1])) > 1.5:
+    # JPEG ringing can widen the single row immediately beside the bar.
+    # Measure shaft uniformity away from that seam, just like its color
+    # profile below. The exterior residual still checks the complete shape.
+    stem_core = spans[rows < y0-1]
+    if not len(stem_core) or np.max(np.abs(stem_core-[sl,sr-1])) > 1.5:
         return None
     expected=np.zeros_like(foreground)
     expected[y0:y1,int(left):int(right)]=True
@@ -210,7 +235,10 @@ def _fit_upright(width, height, *, image, render_fn, error_fn):
         return (np.isfinite(p).all() and 0<=x0<sx0<sx1<x1<=width
                 and 0<=sy<by0<by1<=height and min(sx1-sx0,by1-by0)>=2)
 
-    reference_edges=cv2.Canny(arr.astype(np.uint8),50,140)>0
+    # Canny's non-maximum suppression is not invariant under quarter turns
+    # at quantized gradient ties. Evaluate edges in the original pixel frame,
+    # as the production quality check does, while fitting canonical geometry.
+    reference_edges=cv2.Canny(edge_frame(arr.astype(np.uint8)),50,140)>0
     reference_distance=cv2.distanceTransform((~reference_edges).astype(np.uint8),cv2.DIST_L2,3)
     reference_mask=np.min(pixels,axis=2)<210
     border=np.concatenate((pixels[0],pixels[-1],pixels[:,0],pixels[:,-1]))
@@ -221,7 +249,7 @@ def _fit_upright(width, height, *, image, render_fn, error_fn):
     mask_weight=.003*max(0.,1-np.ptp(bar_profile.mean(axis=1))/100)
 
     def loss(reference,raster):
-        edges=cv2.Canny(np.asarray(raster,dtype=np.uint8),50,140)>0
+        edges=cv2.Canny(edge_frame(np.asarray(raster,dtype=np.uint8)),50,140)>0
         if not edges.any() or not reference_edges.any():
             return float('inf')
         distance=cv2.distanceTransform((~edges).astype(np.uint8),cv2.DIST_L2,3)
