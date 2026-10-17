@@ -4,13 +4,13 @@
   "base_commit": "a830dc53d2418af9d9b4269081488c5d28a02c96",
   "catalog_distinct_jpg_names": 1785,
   "accepted_before_package": 329,
-  "accepted_after_package": 343,
-  "not_explicitly_accepted": 1442,
+  "accepted_after_package": 352,
+  "not_explicitly_accepted": 1433,
   "classifications": {
-    "not_in_review": 698,
-    "older_review_below_threshold": 696,
-    "older_review_above_threshold": 42,
-    "accepted": 343,
+    "not_in_review": 694,
+    "older_review_below_threshold": 692,
+    "older_review_above_threshold": 41,
+    "accepted": 352,
     "older_review_missing_pair": 6
   },
   "older_review": {
@@ -22,14 +22,14 @@
     "below_threshold": 896,
     "above_threshold_already_accepted_before": 54,
     "above_threshold_remaining_before": 43,
-    "above_threshold_remaining_after": 42,
+    "above_threshold_remaining_after": 41,
     "missing_pair": 7,
     "threshold_normalized_mse": 0.045945679012345676
   },
   "samples": {
     "svg_files": 93,
     "accepted_with_same_name": 8,
-    "accepted_without_same_name": 335,
+    "accepted_without_same_name": 344,
     "manual_approval_tracked": false
   },
   "limitations": [
@@ -39,6 +39,6 @@
   ],
   "input_sha256": {
     "artifacts/evaluation/oriented_circle_linework_recheck_v1/conversion_quality_records_v2.csv": "035c2ed38847f30915f158408a8a05db81584e95060db58942017501c4bef397",
-    "artifacts/satisfactory_conversions/index.json": "3c48b92da8681491d147c3dffb9ab1606178aec12e63496e1d3efd4f34d01ab5"
+    "artifacts/satisfactory_conversions/index.json": "87f257fd85964d39c652c682b82dfefdb65fb3e0c760d63c2ee35ffdd01f3f6a"
   }
 }
