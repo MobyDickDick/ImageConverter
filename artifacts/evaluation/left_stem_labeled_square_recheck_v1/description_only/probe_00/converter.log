@@ -1,0 +1,18 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere probe_00.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite probe_00.png ---
+Bildbeschreibung: Kelle mit einem gefüllten Quadrat mit Kontur und mittigem waagerechtem Griff nach links. Im Quadrat steht der horizontale Text "M". Weißer Hintergrund. Lage, Abmessungen, Strichbreiten, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert probe_00.png | Parameter: mode=auto, label=M, variant_name=PROBE_00 | Qualität: Optimierungsfehler/Pixel=0.087988, Mean-Delta²=30421.142578, RGB-RMSE/Kanal=100.699458, Raumscore=59448.435807, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere probe_00.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite probe_00.png ---
+Bildbeschreibung: Kelle mit einem gefüllten Quadrat mit Kontur und mittigem waagerechtem Griff nach links. Im Quadrat steht der horizontale Text "M". Weißer Hintergrund. Lage, Abmessungen, Strichbreiten, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert probe_00.png | Parameter: mode=auto, label=M, variant_name=PROBE_00 | Qualität: Optimierungsfehler/Pixel=0.087988, Mean-Delta²=30421.142578, RGB-RMSE/Kanal=100.699458, Raumscore=59448.435807, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\left_stem_labeled_square_recheck_v1\description_only\probe_00\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\left_stem_labeled_square_recheck_v1\description_only\probe_00\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\left_stem_labeled_square_recheck_v1\description_only\probe_00\conversion

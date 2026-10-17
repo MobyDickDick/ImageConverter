@@ -8,6 +8,33 @@ python -m src.imageCompositeConverter --help
 
 ## Häufige Aufrufe
 
+### Alternative Suchwege und Fortschritt
+
+`--search-mode portfolio` ist voreingestellt. Unterstützte analytische Modelle
+probieren bei verfehlter lokaler Pixelprüfung zusätzliche Suchwege aus. Die
+Kurztextregistrierung vergleicht außerdem normale/fette Schrift und gemeinsame/
+einzeln positionierte Zeichen. `--search-mode legacy` deaktiviert die zusätzlichen
+Parametersuchen für eine Ablation.
+
+```powershell
+python -m src.imageCompositeConverter EINGABE --descriptions-path BESCHREIBUNGEN.xml --output-dir AUSGABE --start ERSTES --end LETZTES --search-seed 42 --search-budget 384
+```
+
+Ohne expliziten Seed wird pro Aufruf ein neuer erzeugt. `--deterministic-order`
+allein fixiert nur die Dateireihenfolge; für die neue Suche zusätzlich
+`--search-seed` angeben. Das Budget begrenzt zusätzliche Vorschläge je Modell,
+nicht die gesamte Laufzeit. Identische SVGs werden innerhalb eines Fits aus
+einem Rendercache bewertet. `[Search]` und `AUSGABE/search/progress.jsonl`
+zeigen Suchweg, Vorschläge, tatsächliche Renderprüfungen und Fehlerwerte.
+
+Geprüfte Kurztextvarianten liegen unter `AUSGABE/search/validated/` mit ihren
+Semantik- und Pixelstatus. Nur `--execution-mode standard` darf erfolgreiche
+Strategien anhand von `strategy_memory.json` für spätere Suchen priorisieren.
+`semantic-only` liest keine gespeicherte Erfahrung. Fertige SVGs werden durch
+die neue Suche nicht als Vorlagen geladen. Grenzen und Lernprozess:
+[Plan-B-Nachbearbeitung](plan_b_learning_workflow.md),
+[UML-Diagramme](conversion_search_uml.md).
+
 ### Katalogbereich konvertieren
 
 ```bash

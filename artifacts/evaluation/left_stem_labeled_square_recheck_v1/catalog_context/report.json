@@ -1,0 +1,28 @@
+{
+  "cases": [
+    {
+      "context": "baseline",
+      "runtime_commit": "d662a3e0fa8c9f2b3d8f3d44fec6ea13786787d4",
+      "catalog_sha256": "22361de490f2ee885a7dcd47b54e734afa324dfba4f59df6bcff8ed48083adaa",
+      "svg": "baseline.svg",
+      "output_sha256": "62b7343e09d075a2425e76dd972bf0ffa29ad5921a7902e85a20f71b30b8c345",
+      "blocked_svg_reads": []
+    },
+    {
+      "context": "old_catalog_current_runtime",
+      "runtime_commit": "working_tree",
+      "catalog_sha256": "22361de490f2ee885a7dcd47b54e734afa324dfba4f59df6bcff8ed48083adaa",
+      "svg": "old_catalog_current_runtime.svg",
+      "output_sha256": "62b7343e09d075a2425e76dd972bf0ffa29ad5921a7902e85a20f71b30b8c345",
+      "blocked_svg_reads": []
+    },
+    {
+      "context": "final",
+      "runtime_commit": "working_tree",
+      "catalog_sha256": "959212e0d487926821cad763dd93305016cff1922bff616221076c301ec874a3",
+      "svg": "final.svg",
+      "output_sha256": "058a23f340a698d460b5e255d43e5e943819956e3beb084ca6113166a33dbba8",
+      "blocked_svg_reads": []
+    }
+  ]
+}

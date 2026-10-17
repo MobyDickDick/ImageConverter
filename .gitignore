@@ -27,8 +27,8 @@ htmlcov/
 *.tmp
 *.local.log
 
-# Generated report tiles (binary)
-artifacts/converted_images/reports/reports/overview_svg_tiles.png
+# Generated conversion search runs (including long hashed filenames)
+/artifacts/evaluation/conversion_search_*/
 
 # Reproducibly generated semantic-only benchmark rasters
 /artifacts/semantic_only_png_benchmark/

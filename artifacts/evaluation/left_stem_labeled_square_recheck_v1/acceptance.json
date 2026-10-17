@@ -1,0 +1,213 @@
+{
+  "schema_version": "labeled_square_recheck_v1",
+  "baseline": {
+    "schema_version": "semantic_only_baseline_manifest_v1",
+    "provenance": {
+      "commit": "d662a3e0fa8c9f2b3d8f3d44fec6ea13786787d4",
+      "seed": 0,
+      "toolchain": "local Python 3.10 venv; real guarded CLI; deterministic order",
+      "baseline_kind": "frozen unmodified runtime and original description",
+      "input_hashes": {
+        "anonymous_symbol_00": "69da9a153084a869c14c7fa71fa2f7bb9ab25a7b0b7f10a11f2a9a983f0387ee"
+      }
+    },
+    "cases": {
+      "anonymous_symbol_00": {
+        "metrics": {
+          "error_per_pixel": 0.04140379952021658,
+          "edge_alignment": 0.2862638235092163,
+          "object_mask_iou": 0.08303249097472924,
+          "semantic_score": 0.0,
+          "dimension_match": 1.0
+        },
+        "dimensions": {
+          "width": 35,
+          "height": 24
+        }
+      }
+    },
+    "baseline_sha256": "c20e63e108c55a23fc7f2b9f46c1de0a7fae7124a58c84ee655ced67892dd0a4"
+  },
+  "evidence": [
+    {
+      "case_id": "anonymous_symbol_00",
+      "source": "SE0082.jpg",
+      "image": "../../images_to_convert/SE0082.jpg",
+      "source_sha256": "69da9a153084a869c14c7fa71fa2f7bb9ab25a7b0b7f10a11f2a9a983f0387ee",
+      "baseline_description": "Wie SE0041, aber nach rechts gekippt. \"M\" steht waagrecht geschrieben.",
+      "description": "Kelle mit einem gefüllten Quadrat mit Kontur und mittigem waagerechtem Griff nach links. Im Quadrat steht der horizontale Text \"M\". Weißer Hintergrund. Lage, Abmessungen, Strichbreiten, Schriftgröße und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before.svg",
+      "after_svg": "after.svg",
+      "input_sha256": "69da9a153084a869c14c7fa71fa2f7bb9ab25a7b0b7f10a11f2a9a983f0387ee",
+      "before_mean_delta2": 8076.84619140625,
+      "after_mean_delta2": 700.75,
+      "before_svg_sha256": "ba7a1728a781d9014a046a464a23824179a7ed62fc68f9f1aedca86fa4199e61",
+      "after_svg_sha256": "058a23f340a698d460b5e255d43e5e943819956e3beb084ca6113166a33dbba8"
+    }
+  ],
+  "satisfaction_gate": {
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "baseline_sha256": "c20e63e108c55a23fc7f2b9f46c1de0a7fae7124a58c84ee655ced67892dd0a4",
+    "provenance": {
+      "commit": "d662a3e0fa8c9f2b3d8f3d44fec6ea13786787d4",
+      "seed": 0,
+      "toolchain": "local Python 3.10 venv; real guarded CLI; deterministic order",
+      "baseline_kind": "frozen unmodified runtime and original description",
+      "input_hashes": {
+        "anonymous_symbol_00": "69da9a153084a869c14c7fa71fa2f7bb9ab25a7b0b7f10a11f2a9a983f0387ee"
+      }
+    },
+    "summary": {
+      "case_count": 1,
+      "technically_completed": 1,
+      "improved": 1,
+      "satisfactory": 1
+    },
+    "cases": [
+      {
+        "case_id": "anonymous_symbol_00",
+        "before": {
+          "error_per_pixel": 0.04140379952021658,
+          "edge_alignment": 0.2862638235092163,
+          "object_mask_iou": 0.08303249097472924,
+          "semantic_score": 0.0,
+          "dimension_match": 1.0
+        },
+        "after": {
+          "error_per_pixel": 0.0035922081250800973,
+          "edge_alignment": 0.8820000886917114,
+          "object_mask_iou": 0.9318181818181818,
+          "semantic_score": 1.0,
+          "dimension_match": 1.0
+        },
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "regressed_metrics": [],
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "technically_completed": true,
+        "improved": true,
+        "satisfactory": true,
+        "hard_rejections": [],
+        "good_solution_gate": {
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "metrics": {
+            "error_per_pixel": 0.0035922081250800973,
+            "semantic_score": 1.0,
+            "dimension_match": 1.0
+          },
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_semantic_score": 0.85,
+            "min_dimension_match": 0.99
+          },
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "decision_tier": "all",
+          "reachability": null
+        },
+        "quality_complexity_gate": {
+          "passed": true,
+          "failures": [],
+          "metrics": {
+            "pixel_similarity": 0.9964,
+            "edge_alignment": 0.882,
+            "structure_score": 0.9318,
+            "semantic_score": 1.0,
+            "combined_score": 0.9526
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667
+          },
+          "thresholds": {
+            "min_pixel_similarity": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_structure_score": 0.72,
+            "min_semantic_score": 0.85,
+            "min_combined_score": 0.78,
+            "max_svg_element_count": 80,
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0
+          }
+        }
+      }
+    ]
+  },
+  "semantic_contract": "one filled square, centered connected left stem and exact described horizontal contrast text; geometry and colors from raster",
+  "measurement": {
+    "foreground_threshold": 210,
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "strict_pixel_gate": {
+    "satisfactory": true,
+    "failures": [],
+    "metrics": {
+      "normalized_mse": 0.0035922082606703043,
+      "foreground_mse": 0.008585939183831215,
+      "edge_alignment": 0.8820000886917114,
+      "foreground_iou": 0.869281045751634
+    },
+    "limits": {
+      "max_normalized_mse": 0.01,
+      "max_foreground_mse": 0.04,
+      "min_edge_alignment": 0.72,
+      "min_foreground_iou": 0.85,
+      "max_svg_elements": 80,
+      "max_path_commands": 160
+    },
+    "complexity": {
+      "parse_error": null,
+      "embedded_raster_count": 0,
+      "vector_element_count": 3,
+      "path_count": 1,
+      "path_command_count": 2,
+      "path_complexity_ratio": 0.6667
+    }
+  },
+  "frozen_baseline_and_replay_match": true,
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "registration": {
+    "evaluations": 191,
+    "final_error": 9.842857142857143,
+    "initial_error": 33.8,
+    "label_iou": 0.8432835820895522,
+    "render_evaluations": 208,
+    "source": "raster_labeled_square_registration_v1"
+  }
+}

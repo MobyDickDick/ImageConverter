@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import cv2
 import numpy as np
+from src.iCCModules.imageCompositeConverterSearchPortfolio import explore_parameters, progress, settings
 
 
 def _hex(bgr):
@@ -20,20 +21,29 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
     """
     height, width = image.shape[:2]
     evaluations = 0
+    render_cache = {}
+    progress(source, event='registration_started', evaluations=0)
 
     def measure(p):
         nonlocal evaluations
         if not valid(p):
             return None
         svg = build(p)
+        if svg in render_cache:
+            return render_cache[svg]
         evaluations += 1
         raster = render_fn(svg, width, height)
         if raster is None:
+            render_cache[svg] = None
             return None
         error = float(error_fn(image, raster))
         loss = float(loss_fn(image, raster) if loss_fn else
                      np.mean((image.astype(float)-np.asarray(raster, dtype=float))**2))
-        return (loss, error, svg, raster) if np.isfinite(error) and np.isfinite(loss) else None
+        if evaluations % 64 == 0 and np.isfinite(error):
+            progress(source, event='registering', evaluations=evaluations, current_error=error)
+        measured = (loss, error, svg, raster) if np.isfinite(error) and np.isfinite(loss) else None
+        render_cache[svg] = measured
+        return measured
 
     parameters = np.asarray(parameters, dtype=float)
     best = measure(parameters)
@@ -59,11 +69,24 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
                 break
     if preserve_initial_error:
         parameters, best = accepted
+    search = None
+    # Keep already accurate incumbent fits byte-identical. Alternative searches
+    # address poor fits, rather than introducing random changes to good output.
+    mse = float(np.mean((image.astype(float)-np.asarray(best[3], dtype=float))**2))/255**2
+    if mse > .0001 and settings() and settings()['mode'] == 'portfolio':
+        from src.iCCModules.imageCompositeConverterPrimitiveScene import _local_quality
+        quality = _local_quality(np.asarray(image, dtype=np.uint8), np.asarray(best[3], dtype=np.uint8))
+        if quality is None or not quality['passed']:
+            rendered_before_search = evaluations
+            parameters, best, search = explore_parameters(parameters, geometry_count, measure, best,
+                                                         source=source, image=image)
+            search['additional_renderings'] = evaluations-rendered_before_search
     if best[1] > initial_error+1e-9:
         return None
+    progress(source, event='registration_finished', evaluations=evaluations, best_error=best[1])
     return {'svg': best[2], 'rendered': best[3], 'error': best[1],
             'initial_error': initial_error, 'parameters': parameters.tolist(),
-            'evaluations': evaluations, 'source': source}
+            'evaluations': evaluations, 'source': source, **({'search': search} if search else {})}
 
 
 def _image(width, height, image):
