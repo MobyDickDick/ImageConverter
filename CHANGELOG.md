@@ -230,3 +230,4 @@ All notable changes to ImageConverter will be documented in this file.
 - Run ACD adds copy-ready `gh variable set` commands to promoted telemetry aliases and quotes shard values in the no-override verification dispatch.
 - Run ACE adds the shell-safe no-override verification command to the promoted telemetry alias manifest and makes the workflow summary consume that command directly.
 - Run ACF adds a versioned, machine-readable receipt that binds an externally executed alias-verification workflow run and terminal gate status to the promoted telemetry baseline.
+- Normalize spiral/chord disk registration across all four directions, reject connected unexplained interior marks, and validate all nine AC0424 variants with unchanged quality gates; preserve the separate strict gray-IoU follow-up (2026-10-17).

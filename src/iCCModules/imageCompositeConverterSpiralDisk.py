@@ -1,4 +1,4 @@
-"""Register two converging chords and an inward spiral on a solid disk.
+"""Register directed converging chords and an inward spiral on a solid disk.
 
 The spiral is a low dimensional polar regression, rendered as bounded cubic
 Hermite segments. Neither pixel contours nor reference vectors are emitted.
@@ -8,6 +8,7 @@ from __future__ import annotations
 import re
 import cv2
 import numpy as np
+from xml.etree import ElementTree as ET
 
 from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _image, _register
 from src.iCCModules.imageCompositeConverterCircleLinework import _segment_distance
@@ -95,9 +96,72 @@ def fit_spiral_disk(width, height, *, description, image, render_fn, error_fn):
     neutral = text.replace('keine schriftzeichen', '').replace('kein griff', '')
     if re.search(r'\b(?:ohne|kein|keine|nicht|zusätzlich|verlauf|dreieck|gefüllte spirale|im uhrzeigersinn)\b', neutral):
         return None
+    directions = re.findall(r'laufen nach (oben|rechts|unten|links) aufeinander zu', text)
+    if len(directions) != 1:
+        return None
+    turns = ('oben', 'rechts', 'unten', 'links').index(directions[0])
     pixels = _image(width, height, image)
     if pixels is None:
         return None
+    if not turns:
+        return _fit_up(width, height, pixels=pixels, render_fn=render_fn, error_fn=error_fn)
+    canonical = np.ascontiguousarray(np.rot90(pixels, turns))
+
+    def render_canonical(svg, w, h):
+        raster = render_fn(_orient_svg(svg, turns, width, height), width, height)
+        return None if raster is None else np.ascontiguousarray(np.rot90(raster, turns))
+
+    def source_error(reference, raster):
+        return error_fn(np.ascontiguousarray(np.rot90(reference, -turns)),
+                        np.ascontiguousarray(np.rot90(raster, -turns)))
+
+    result = _fit_up(canonical.shape[1], canonical.shape[0], pixels=canonical,
+                     render_fn=render_canonical, error_fn=source_error)
+    if result is not None:
+        result['svg'] = _orient_svg(result['svg'], turns, width, height)
+        result['rendered'] = np.ascontiguousarray(np.rot90(result['rendered'], -turns))
+    return result
+
+
+def _orient_svg(svg, turns, width, height):
+    """Rotate native coordinates, including cubic controls, into the input frame."""
+    root = ET.fromstring(svg)
+
+    def point(x, y):
+        return ((width-y, x) if turns == 1 else
+                (width-x, height-y) if turns == 2 else (y, height-x))
+
+    for element in root.iter():
+        element.tag = element.tag.rsplit('}', 1)[-1]
+        if element.tag == 'rect':  # The white canvas only.
+            element.set('width', str(width))
+            element.set('height', str(height))
+        elif element.tag in ('circle', 'line'):
+            pairs = [('cx', 'cy')] if element.tag == 'circle' else [('x1', 'y1'), ('x2', 'y2')]
+            for xkey, ykey in pairs:
+                x, y = point(float(element.get(xkey)), float(element.get(ykey)))
+                element.set(xkey, f'{x:.4f}')
+                element.set(ykey, f'{y:.4f}')
+        elif element.tag == 'path':
+            tokens = re.findall(r'[MC]|[-+]?(?:\d*\.)?\d+(?:[eE][-+]?\d+)?', element.get('d', ''))
+            transformed = []
+            index = 0
+            while index < len(tokens):
+                if tokens[index] in ('M', 'C'):
+                    transformed.append(tokens[index])
+                    index += 1
+                else:
+                    x, y = point(float(tokens[index]), float(tokens[index+1]))
+                    transformed.extend([f'{x:.4f}', f'{y:.4f}'])
+                    index += 2
+            element.set('d', ' '.join(transformed))
+    root.set('xmlns', 'http://www.w3.org/2000/svg')
+    root.set('width', str(width))
+    root.set('height', str(height))
+    return ET.tostring(root, encoding='unicode')+'\n'
+
+
+def _fit_up(width, height, *, pixels, render_fn, error_fn):
     mask = (np.min(pixels, axis=2) < 220).astype(np.uint8)
     contours = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[0]
     if not contours:
@@ -219,6 +283,14 @@ def fit_spiral_disk(width, height, *, description, image, render_fn, error_fn):
             return None
     observed = np.c_[xx[ink],yy[ink]]
     residual = np.sqrt(np.min(np.sum((observed[:,None]-all_points[None])**2,axis=2),axis=1))
-    if np.mean(residual < max(1.4,radius*.06)) < .95:
+    explained = residual < max(1.4,radius*.06)
+    if np.mean(explained) < .95:
+        return None
+    # A small connected mark can fit inside the percentage allowance. Reject
+    # such an additional object instead of silently discarding its pixels.
+    unexplained = np.zeros(ink.shape, dtype=np.uint8)
+    unexplained[ink] = (~explained).astype(np.uint8)
+    count, _, stats, _ = cv2.connectedComponentsWithStats(unexplained)
+    if count > 1 and stats[1:, cv2.CC_STAT_AREA].max() > max(3, radius*.14):
         return None
     return result
