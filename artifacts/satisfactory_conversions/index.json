@@ -1,5 +1,5 @@
 {
-  "case_count": 355,
+  "case_count": 356,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -6018,6 +6018,23 @@
       "svg": "svgs/SE0081.svg",
       "svg_sha256": "6defedfd39fdc268c8f4325e69fe94ab83b33a0711fe226498e589a61e8e1b19",
       "variant": "SE0081"
+    },
+    {
+      "description": "Kelle mit einem gef\u00fcllten Quadrat mit Kontur und mittigem waagerechtem Griff nach links. Im Quadrat steht der horizontale Text \"M\". Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/left_stem_labeled_square_recheck_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/SE0082.jpg",
+      "image_sha256": "69da9a153084a869c14c7fa71fa2f7bb9ab25a7b0b7f10a11f2a9a983f0387ee",
+      "mean_delta2": 700.75,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8820000886917114,
+        "error_per_pixel": 0.0035922081250800973,
+        "object_mask_iou": 0.9318181818181818
+      },
+      "svg": "svgs/SE0082.svg",
+      "svg_sha256": "058a23f340a698d460b5e255d43e5e943819956e3beb084ca6113166a33dbba8",
+      "variant": "SE0082"
     },
     {
       "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",

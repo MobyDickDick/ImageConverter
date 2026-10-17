@@ -1,0 +1,27 @@
+{
+  "label": "M",
+  "stem_direction": "left",
+  "description": "Kelle mit einem gefüllten Quadrat mit Kontur und mittigem waagerechtem Griff nach links. Im Quadrat steht der horizontale Text \"M\". Weißer Hintergrund. Lage, Abmessungen, Strichbreiten, Schriftgröße und Farben ergeben sich aus dem Bild.",
+  "provenance": {
+    "commit": "d662a3e0fa8c9f2b3d8f3d44fec6ea13786787d4",
+    "seed": 0,
+    "toolchain": "local Python 3.10 venv; real guarded CLI; deterministic order",
+    "baseline_kind": "frozen unmodified runtime and original description"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_symbol_00",
+      "source": "SE0082.jpg",
+      "image": "../../images_to_convert/SE0082.jpg",
+      "source_sha256": "69da9a153084a869c14c7fa71fa2f7bb9ab25a7b0b7f10a11f2a9a983f0387ee",
+      "baseline_description": "Wie SE0041, aber nach rechts gekippt. \"M\" steht waagrecht geschrieben.",
+      "description": "Kelle mit einem gefüllten Quadrat mit Kontur und mittigem waagerechtem Griff nach links. Im Quadrat steht der horizontale Text \"M\". Weißer Hintergrund. Lage, Abmessungen, Strichbreiten, Schriftgröße und Farben ergeben sich aus dem Bild.",
+      "before_svg": "before.svg",
+      "after_svg": "after.svg"
+    }
+  ],
+  "original_descriptions": {
+    "artifacts/descriptions/Finale_Wurzelformen_V3.xml": "Wie SE0041, aber nach rechts gekippt. \"M\" steht waagrecht geschrieben.",
+    "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml": "Wie SE0041, aber nach rechts gekippt. \"M\" steht waagrecht geschrieben."
+  }
+}

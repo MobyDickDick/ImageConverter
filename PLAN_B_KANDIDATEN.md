@@ -2,7 +2,17 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-17, nach AC0840-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-17, nach SE0082-Abnahme)
+
+SE0082 besteht beide regulären und die strengeren Pixelgates. Der linke
+Quadrat-/Griff-/Textfit ist verallgemeinert; zwei unabhängige CLI-Batterien
+bestehen jeweils 17/17. 356 Paare sind archiviert, alle 355 bisherigen
+Einträge unverändert. Aktive Rotation:
+`AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`, `AC0232_M`.
+Details: `docs/next_arbeitspaket_2026-10-17_se0082.md`.
+Review: `artifacts/evaluation/left_stem_labeled_square_recheck_v1/review_args.json`.
+
+## Vorheriger Abschluss: AC0840
 
 AC0840 besteht mit S/M/L beide regulären und die strengeren Pixelgates.
 Eine unabhängige Kurztextvorlage besteht 17/17. 355 Paare sind archiviert;

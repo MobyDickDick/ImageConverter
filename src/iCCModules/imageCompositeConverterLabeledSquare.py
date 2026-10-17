@@ -35,7 +35,7 @@ def _contour_metrics(reference, rendered):
     return residual, edge, iou
 
 
-def _fit_right_stem_labeled_square(geometry_ir, *, image, render_fn, error_fn):
+def _fit_right_stem_labeled_square(geometry_ir, *, image, render_fn, error_fn, _squared_contour=False):
     """Transpose the body/handle fit while rendering text in its original axes."""
     original = geometry_ir[0]
 
@@ -57,28 +57,108 @@ def _fit_right_stem_labeled_square(geometry_ir, *, image, render_fn, error_fn):
 
     fitted = fit_labeled_square([transpose(original, 'UprightSquareKelleGlyph')],
         image=np.swapaxes(image, 0, 1), render_fn=render,
-        error_fn=lambda raster: error_fn(np.swapaxes(raster, 0, 1)), _refine_contour=True)
+        error_fn=lambda raster: error_fn(np.swapaxes(raster, 0, 1)), _refine_contour=True,
+        _squared_contour=_squared_contour)
     if fitted is not None:
         fitted['geometry_ir'] = restore(fitted['geometry_ir'])
         fitted['rendered'] = np.swapaxes(fitted['rendered'], 0, 1)
     return fitted
 
 
-def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn, _refine_contour=False):
+def _fit_left_stem_labeled_square(geometry_ir, *, image, render_fn, error_fn):
+    """Reflect geometric coordinates while leaving the rendered label upright.
+
+    Render in original axes before reflecting the raster: reflecting a finished
+    SVG instead would mirror asymmetric letters such as P and p.
+    """
+    original = geometry_ir[0]
+    render_evaluations = 0
+
+    def render_original(ir):
+        nonlocal render_evaluations
+        render_evaluations += 1
+        return render_fn(ir)
+
+    def reflect(element, kind):
+        result = copy.deepcopy(element)
+        x, y, w, h = result['body_bbox']
+        result.update(kind=kind, body_bbox=[1-x-w, y, w, h],
+                      connector=[[1-u, v] for u, v in result['connector']])
+        if 'label_center' in result:
+            u, v = result['label_center']
+            result['label_center'] = [1-u, v]
+        return result
+
+    def restore(ir):
+        return [reflect(ir[0], original['kind'])]
+
+    def render(ir):
+        raster = render_original(restore(ir))
+        return None if raster is None else raster[:, ::-1]
+
+    initial = render_original(geometry_ir)
+    if initial is None:
+        return None
+    initial_error = float(error_fn(initial))
+    if not math.isfinite(initial_error):
+        return None
+    # A pale antialiased rim can minimize absolute error while missing its
+    # darker core. Register the observed contour with squared color residuals.
+    fitted = fit_labeled_square([reflect(original, 'RightStemSquareKelleGlyph')],
+        image=image[:, ::-1], render_fn=render,
+        error_fn=lambda raster: float(np.mean(np.sum(
+            (image.astype(float)-raster[:, ::-1].astype(float))**2, axis=2))),
+        _squared_contour=True)
+    if fitted is not None:
+        fitted['geometry_ir'] = restore(fitted['geometry_ir'])
+        fitted['rendered'] = fitted['rendered'][:, ::-1]
+        # Whole-image similarity can hide a wrong small letter. Compare the
+        # observed interior contrast with the actual upright rendered glyph.
+        blank_ir = copy.deepcopy(fitted['geometry_ir'])
+        blank_ir[0]['label'] = ''
+        blank = render_original(blank_ir)
+        if blank is None:
+            return None
+        h, w = image.shape[:2]
+        x, y, bw, bh = fitted['geometry_ir'][0]['body_bbox']
+        margin = max(2., fitted['geometry_ir'][0]['body_stroke_width']*min(w, h)*1.5)
+        interior = np.zeros((h, w), dtype=bool)
+        interior[max(0, math.ceil(y*h+margin)):min(h, math.floor((y+bh)*h-margin)),
+                 max(0, math.ceil(x*w+margin)):min(w, math.floor((x+bw)*w-margin))] = True
+        observed = (np.max(np.abs(image.astype(float)-blank.astype(float)), axis=2) > 45) & interior
+        predicted = (np.max(np.abs(fitted['rendered'].astype(float)-blank.astype(float)), axis=2) > 45) & interior
+        gy, gx = np.where(predicted)
+        union = np.count_nonzero(observed | predicted)
+        label_iou = np.count_nonzero(observed & predicted)/max(1, union)
+        if not len(gx) or label_iou < max(.6, 1-4/min(np.ptp(gx)+1, np.ptp(gy)+1)):
+            return None
+        final_error = float(error_fn(fitted['rendered']))
+        if not math.isfinite(final_error) or final_error >= initial_error-1e-9:
+            return None
+        fitted.update(initial_error=initial_error, final_error=final_error,
+                      render_evaluations=render_evaluations, label_iou=label_iou)
+    return fitted
+
+
+def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn, _refine_contour=False, _squared_contour=False):
     """Fit observed geometry/colors while preserving the described text and topology.
 
-    This handles one filled square with a connected lower or right stem and a
+    This handles one filled square with a connected lower, left or right stem and a
     single horizontal contrast label. It does not identify text from image IDs,
     access reference vectors, or turn arbitrary raster contours into paths.
     """
-    if (len(geometry_ir) != 1 or geometry_ir[0].get('kind') not in {'UprightSquareKelleGlyph', 'RightStemSquareKelleGlyph'}
+    if (len(geometry_ir) != 1 or geometry_ir[0].get('kind') not in {
+            'UprightSquareKelleGlyph', 'RightStemSquareKelleGlyph', 'LeftRotatedSquareKelleTGlyph'}
             or len(str(geometry_ir[0].get('label', ''))) != 1):
         return None
     arr = np.asarray(image)
     if arr.ndim != 3 or arr.shape[2] != 3 or min(arr.shape[:2]) < 8 or not np.isfinite(arr).all():
         return None
     if geometry_ir[0]['kind'] == 'RightStemSquareKelleGlyph':
-        return _fit_right_stem_labeled_square(geometry_ir, image=arr, render_fn=render_fn, error_fn=error_fn)
+        return _fit_right_stem_labeled_square(geometry_ir, image=arr, render_fn=render_fn, error_fn=error_fn,
+                                              _squared_contour=_squared_contour)
+    if geometry_ir[0]['kind'] == 'LeftRotatedSquareKelleTGlyph':
+        return _fit_left_stem_labeled_square(geometry_ir, image=arr, render_fn=render_fn, error_fn=error_fn)
     height, width = arr.shape[:2]
     scale = min(width, height)
     mask = np.min(arr, axis=2) < 225
@@ -189,7 +269,9 @@ def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn, _refine_conto
         for _ in range(3):
             text = render_fn([candidate])
             blank = copy.deepcopy(candidate)
-            blank.pop('label')
+            # Some historical directional kinds default to T when absent.
+            # An explicit empty label is required for a truly blank body.
+            blank['label'] = ''
             background = render_fn([blank])
             if text is None or background is None:
                 break
@@ -289,7 +371,8 @@ def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn, _refine_conto
                             break
                 metrics = _contour_metrics(arr, refined[2])
                 if (refined[0] < best[0]-1e-9 and metrics[0] <= old_metrics[0]+1e-9
-                        and metrics[1] >= old_metrics[1]-1e-9 and metrics[2] >= old_metrics[2]-1e-9):
+                        and (_squared_contour or
+                             (metrics[1] >= old_metrics[1]-1e-9 and metrics[2] >= old_metrics[2]-1e-9))):
                     best = refined
     if best[0] >= initial_error-1e-9:
         return None

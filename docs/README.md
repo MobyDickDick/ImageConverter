@@ -2,6 +2,8 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [SE0082: Quadrat mit linkem Griff und horizontalem M (2026-10-17)](next_arbeitspaket_2026-10-17_se0082.md)
+
 - [Aus gescheiterten Plan-B-Aufgaben lernen: Nachbearbeitung, alternative Suche und gespeicherte Varianten](plan_b_learning_workflow.md)
 - [Bildkonvertierung und Suchportfolio als UML-Sequenz-, Klassen- und Zustandsdiagramme](conversion_search_uml.md)
 - [AC0840 und begrenztes Suchportfolio (2026-10-17)](next_arbeitspaket_2026-10-17_ac0840_search.md)

@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-17)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `471` · Erledigt `433` · Offen `38`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `472` · Erledigt `434` · Offen `38`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -36,9 +36,11 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 ### Aktueller Plan-B-Stand (2026-10-17)
 
+- [x] **SE0082 – Quadrat mit linkem Griff und horizontalem M:** eigenständige Beschreibung, allgemeine linke Quadrat-/Textregistrierung, lokale Zeichenprüfung und tatsächlicher Renderzähler. Beide regulären und die strengeren Pixelgates bestehen ohne Pflichtmetrikregression; zwei unabhängige CLI-Batterien bestehen jeweils 17/17. 356 archivierte Paare; alle 355 bisherigen Einträge unverändert. Nächste Rotation: `AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`, `AC0232_M`. Details: `docs/next_arbeitspaket_2026-10-17_se0082.md`.
+
 - [x] **AC0840 – Kurztext auf Kreisscheibe und alternative Suchmodelle:** S/M/L bestehen beide regulären und die strengen Pixelgates. Unabhängige Vorlage mit anderer Beschriftung, Palette und Lage besteht 17/17 echte CLI-Fälle. 355 archivierte Paare; alle 352 bisherigen Einträge unverändert. Nächste Rotation: `SE0082`, `AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`. Details: `docs/next_arbeitspaket_2026-10-17_ac0840_search.md`.
 
-**Neuester Abschluss:** AC0840 S/M/L. Der folgende AC0424-Stand ist die
+**Vorheriger Abschluss:** AC0840 S/M/L. Der folgende AC0424-Stand ist die
 vorherige Abnahme; ihre offenen grauen Folgepunkte bleiben erhalten.
 
 

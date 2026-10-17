@@ -1,0 +1,28 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere probe_08.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite probe_08.png ---
+Bildbeschreibung: Kelle mit einem gefüllten Quadrat mit Kontur und mittigem waagerechtem Griff nach links. Im Quadrat steht der horizontale Text "P". Weißer Hintergrund. Lage, Abmessungen, Strichbreiten, Schriftgröße und Farben ergeben sich aus dem Bild. Die Darstellung ist geringfügig größer dargestellt und ein wenig nach rechts und oben verschoben.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] probe_08.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.743913, localized_error_fraction=0.524309).
+[INFO] Konvertiert probe_08.png | Parameter: mode=auto, label=M, variant_name=PROBE_08 | Qualität: Optimierungsfehler/Pixel=0.013637, Mean-Delta²=33089.507812, RGB-RMSE/Kanal=105.023026, Raumscore=72085.790557, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere probe_08.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite probe_08.png ---
+Bildbeschreibung: Kelle mit einem gefüllten Quadrat mit Kontur und mittigem waagerechtem Griff nach links. Im Quadrat steht der horizontale Text "P". Weißer Hintergrund. Lage, Abmessungen, Strichbreiten, Schriftgröße und Farben ergeben sich aus dem Bild. Die Darstellung ist geringfügig größer dargestellt und ein wenig nach rechts und oben verschoben.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] probe_08.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.743913, localized_error_fraction=0.524309).
+[INFO] Konvertiert probe_08.png | Parameter: mode=auto, label=M, variant_name=PROBE_08 | Qualität: Optimierungsfehler/Pixel=0.013637, Mean-Delta²=33089.507812, RGB-RMSE/Kanal=105.023026, Raumscore=72085.790557, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere probe_08.png | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite probe_08.png ---
+Bildbeschreibung: Kelle mit einem gefüllten Quadrat mit Kontur und mittigem waagerechtem Griff nach links. Im Quadrat steht der horizontale Text "P". Weißer Hintergrund. Lage, Abmessungen, Strichbreiten, Schriftgröße und Farben ergeben sich aus dem Bild. Die Darstellung ist geringfügig größer dargestellt und ein wenig nach rechts und oben verschoben.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] probe_08.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.743913, localized_error_fraction=0.524309).
+[INFO] Konvertiert probe_08.png | Parameter: mode=auto, label=M, variant_name=PROBE_08 | Qualität: Optimierungsfehler/Pixel=0.013637, Mean-Delta²=33089.507812, RGB-RMSE/Kanal=105.023026, Raumscore=72085.790557, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\left_stem_labeled_square_recheck_v1\independent\probe_08\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\left_stem_labeled_square_recheck_v1\independent\probe_08\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\left_stem_labeled_square_recheck_v1\independent\probe_08\conversion

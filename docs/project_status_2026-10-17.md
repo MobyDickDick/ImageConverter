@@ -1,5 +1,11 @@
 # Projektstand und Sichtprüfung am 2026-10-17
 
+**Nachtrag SE0082:** Das unabhängig geprüfte Quadrat mit linkem Griff und M
+ergänzt das Archiv auf **356 von 1.785 Bildern (19,9 %)**. Alle 355 bisherigen
+Einträge bleiben unverändert; 1.429 Bilder haben keine ausdrückliche Archivabnahme.
+Details: [SE0082-Arbeitspaket](next_arbeitspaket_2026-10-17_se0082.md).
+Die folgenden Nachträge und Tabellen bleiben historische Snapshots.
+
 **Nachtrag AC0840:** S/M/L ergänzen drei unabhängig geprüfte Bild-/SVG-Paare.
 Der aktuelle Archivstand beträgt **355 von 1.785 Bildern (19,9 %)**; alle 352
 bisherigen Indexeinträge sind unverändert. 1.430 Bilder haben weiterhin keine

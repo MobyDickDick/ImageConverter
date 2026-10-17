@@ -1,0 +1,28 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere anonymous_symbol_00.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_symbol_00.jpg ---
+Bildbeschreibung: Wie SE0041, aber nach rechts gekippt. "M" steht waagrecht geschrieben.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] anonymous_symbol_00.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.545894, localized_error_fraction=0.649974).
+[INFO] Konvertiert anonymous_symbol_00.jpg | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_SYMBOL_00 | Qualität: Optimierungsfehler/Pixel=0.039310, Mean-Delta²=8076.846191, RGB-RMSE/Kanal=51.887205, Raumscore=20490.337215, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere anonymous_symbol_00.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite anonymous_symbol_00.jpg ---
+Bildbeschreibung: Wie SE0041, aber nach rechts gekippt. "M" steht waagrecht geschrieben.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] anonymous_symbol_00.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.545894, localized_error_fraction=0.649974).
+[INFO] Konvertiert anonymous_symbol_00.jpg | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_SYMBOL_00 | Qualität: Optimierungsfehler/Pixel=0.039310, Mean-Delta²=8076.846191, RGB-RMSE/Kanal=51.887205, Raumscore=20490.337215, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Konvertiere anonymous_symbol_00.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite anonymous_symbol_00.jpg ---
+Bildbeschreibung: Wie SE0041, aber nach rechts gekippt. "M" steht waagrecht geschrieben.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] anonymous_symbol_00.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.545894, localized_error_fraction=0.649974).
+[INFO] Konvertiert anonymous_symbol_00.jpg | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_SYMBOL_00 | Qualität: Optimierungsfehler/Pixel=0.039310, Mean-Delta²=8076.846191, RGB-RMSE/Kanal=51.887205, Raumscore=20490.337215, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.0s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\left_stem_labeled_square_recheck_v1\frozen\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\left_stem_labeled_square_recheck_v1\frozen\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\left_stem_labeled_square_recheck_v1\frozen\before

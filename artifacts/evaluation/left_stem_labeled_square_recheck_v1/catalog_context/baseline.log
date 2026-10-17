@@ -1,0 +1,50 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\.tmp\ls-catalog-sealed\baseline_source\imageCompositeConverter.local.log
+[INFO] Konvertiere SE0082.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite SE0082.jpg ---
+Bildbeschreibung: Wie SE0041, aber nach rechts gekippt. "M" steht waagrecht geschrieben.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus SE0041
+[INFO] unknown: Elementvalidierung gestartet | Runden=8, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/8 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/8: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 1/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 83.65% -> 83.71% | mittlere Pixelabweichung (MAE, kleiner=besser): 41.683 -> 41.529 | Mean-Delta² (kleiner=besser): 11659.643 -> 11727.722 | Qualitätsgewinn=+0.155 (+0.37%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 2/8 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 2/8: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 2/8: optimiere Element 'text' | Laufzeit=0.2s
+[INFO] unknown: Validierungsrunde 2/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 83.71% -> 83.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 41.529 -> 42.744 | Mean-Delta² (kleiner=besser): 11727.722 -> 12139.896 | Qualitätsgewinn=-1.215 (-2.93%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=0.2s
+[INFO] unknown: Validierungsrunde 3/8 gestartet | Laufzeit=0.2s
+[INFO] unknown: Runde 3/8: optimiere Element 'circle' | Laufzeit=0.2s
+[INFO] unknown: Runde 3/8: optimiere Element 'text' | Laufzeit=0.2s
+[INFO] unknown: Validierungsrunde 3/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 83.24% -> 83.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 42.744 -> 42.744 | Mean-Delta² (kleiner=besser): 12139.896 -> 12139.896 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.2s
+[INFO] unknown: Validierungsrunde 4/8 gestartet | Laufzeit=0.2s
+[INFO] unknown: Runde 4/8: optimiere Element 'circle' | Laufzeit=0.2s
+[INFO] unknown: Runde 4/8: optimiere Element 'text' | Laufzeit=0.2s
+[INFO] unknown: Validierungsrunde 4/8 abgeschlossen | Qualität (MAE-basiert, höher=besser): 83.24% -> 83.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 42.744 -> 42.744 | Mean-Delta² (kleiner=besser): 12139.896 -> 12139.896 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.2s
+[INFO] Konvertiert SE0082.jpg | Parameter: mode=semantic_badge, badge_param_source_ref=SE0041, label=M, variant_name=SE0082 | Qualität: Optimierungsfehler/Pixel=0.046009, Mean-Delta²=9116.978516, RGB-RMSE/Kanal=55.127061, Raumscore=18248.658122, beste Validierungsrunde=1/4, beste Composite-Iteration=n/a, ausgeführt=64/64 | Dauer=0.9s
+[INFO] Konvertiere SE0082.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite SE0082.jpg ---
+Bildbeschreibung: Wie SE0041, aber nach rechts gekippt. "M" steht waagrecht geschrieben.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus SE0041
+[INFO] unknown: Elementvalidierung gestartet | Runden=7, Elemente=circle,text | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/7 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 1/7: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 1/7: optimiere Element 'text' | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 1/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 83.65% -> 83.71% | mittlere Pixelabweichung (MAE, kleiner=besser): 41.683 -> 41.529 | Mean-Delta² (kleiner=besser): 11659.643 -> 11727.722 | Qualitätsgewinn=+0.155 (+0.37%) | Wirkung=verbessert | Parameter geändert=ja | Laufzeit=0.0s
+[INFO] unknown: Validierungsrunde 2/7 gestartet | Laufzeit=0.0s
+[INFO] unknown: Runde 2/7: optimiere Element 'circle' | Laufzeit=0.0s
+[INFO] unknown: Runde 2/7: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 2/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 83.71% -> 83.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 41.529 -> 42.744 | Mean-Delta² (kleiner=besser): 11727.722 -> 12139.896 | Qualitätsgewinn=-1.215 (-2.93%) | Wirkung=verschlechtert | Parameter geändert=ja | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/7 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 3/7: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 3/7: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 3/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 83.24% -> 83.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 42.744 -> 42.744 | Mean-Delta² (kleiner=besser): 12139.896 -> 12139.896 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/7 gestartet | Laufzeit=0.1s
+[INFO] unknown: Runde 4/7: optimiere Element 'circle' | Laufzeit=0.1s
+[INFO] unknown: Runde 4/7: optimiere Element 'text' | Laufzeit=0.1s
+[INFO] unknown: Validierungsrunde 4/7 abgeschlossen | Qualität (MAE-basiert, höher=besser): 83.24% -> 83.24% | mittlere Pixelabweichung (MAE, kleiner=besser): 42.744 -> 42.744 | Mean-Delta² (kleiner=besser): 12139.896 -> 12139.896 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert | Parameter geändert=nein | Laufzeit=0.1s
+[INFO] Konvertiert SE0082.jpg | Parameter: mode=semantic_badge, badge_param_source_ref=SE0041, label=M, variant_name=SE0082 | Qualität: Optimierungsfehler/Pixel=0.046363, Mean-Delta²=9116.978516, RGB-RMSE/Kanal=55.127061, Raumscore=18248.658122, beste Validierungsrunde=1/4, beste Composite-Iteration=n/a, ausgeführt=65/65 | Dauer=0.5s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\ls-catalog-sealed\baseline\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\ls-catalog-sealed\baseline\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\ls-catalog-sealed\baseline\conversion

@@ -1,0 +1,145 @@
+{
+  "probe_00.png": {
+    "actual_iterations": 64,
+    "base": "PROBE_00",
+    "best_error": 73.91031746031746,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+    "diff_error_distribution_status": "random_like",
+    "elapsed_seconds": 0.10899999999674037,
+    "error_per_pixel": 0.0879884731670446,
+    "error_pixel_cluster_count": 9.0,
+    "error_pixel_cluster_excess": 0.17702779676463887,
+    "error_pixel_count": 209.0,
+    "filename": "probe_00.png",
+    "h": 24,
+    "largest_error_pixel_cluster_fraction": 0.4258373205741627,
+    "localized_error_fraction": 0.5104591653048318,
+    "mean_delta2": 30421.142578125,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [
+          {
+            "body_bbox": [
+              0.02,
+              0.04,
+              0.96,
+              0.56
+            ],
+            "body_fill": "#e11e48",
+            "body_stroke": "#a0a0a0",
+            "body_stroke_width": 0.04,
+            "confidence": 0.75,
+            "connector": [
+              [
+                0.5,
+                0.6
+              ],
+              [
+                0.5,
+                1.0
+              ]
+            ],
+            "connector_stroke": "#808080",
+            "connector_width": 0.08,
+            "font_size": 0.44,
+            "font_weight": "600",
+            "id": "description_element_1",
+            "kind": "UprightSquareKelleGlyph",
+            "label": "M",
+            "label_center": [
+              0.5,
+              0.32
+            ],
+            "label_fill": "#dedede",
+            "source": "description"
+          }
+        ],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.75,
+          "reasons": [],
+          "status": "ok"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": true,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "probe_00",
+          "source": "base_name",
+          "text": "Kelle mit einem gefüllten Quadrat mit Kontur und mittigem waagerechtem Griff nach links. Im Quadrat steht der horizontale Text \"M\". Weißer Hintergrund. Lage, Abmessungen, Strichbreiten, Schriftgröße und Farben ergeben sich aus dem Bild."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [],
+      "geometry_ir": [
+        {
+          "body_bbox": [
+            0.02,
+            0.04,
+            0.96,
+            0.56
+          ],
+          "body_fill": "#e11e48",
+          "body_stroke": "#a0a0a0",
+          "body_stroke_width": 0.04,
+          "connector": [
+            [
+              0.5,
+              0.6
+            ],
+            [
+              0.5,
+              1.0
+            ]
+          ],
+          "connector_stroke": "#808080",
+          "connector_width": 0.08,
+          "font_size": 0.44,
+          "font_weight": "600",
+          "id": "upright_square_kelle",
+          "kind": "UprightSquareKelleGlyph",
+          "label": "M",
+          "label_center": [
+            0.5,
+            0.32
+          ],
+          "label_fill": "#dedede"
+        }
+      ],
+      "label": "M",
+      "mode": "auto",
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "PROBE_00"
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 100.69945808878516,
+    "spatial_quality_score": 59448.43580735313,
+    "std_delta2": 30081.263671875,
+    "tile_std_delta2": 21370.120377631403,
+    "variant": "PROBE_00",
+    "w": 35
+  }
+}
