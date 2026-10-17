@@ -1,0 +1,1021 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere GE1003_L.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE1003_L.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE1003_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.472050, localized_error_fraction=0.717083).
+[INFO] Konvertiert GE1003_L.jpg | Parameter: mode=auto, label=M, variant_name=GE1003_L | Qualität: Optimierungsfehler/Pixel=0.006905, Mean-Delta²=435.635559, RGB-RMSE/Kanal=12.050388, Raumscore=1209.935404, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.7s
+[INFO] Konvertiere GE1003_M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE1003_M.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE1003_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.369748, localized_error_fraction=0.791069).
+[INFO] Konvertiert GE1003_M.jpg | Parameter: mode=auto, label=M, variant_name=GE1003_M | Qualität: Optimierungsfehler/Pixel=0.009383, Mean-Delta²=401.955200, RGB-RMSE/Kanal=11.575192, Raumscore=1195.012501, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.0s
+[INFO] Konvertiere GE1003_S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE1003_S.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE1003_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.189873, localized_error_fraction=0.833947).
+[INFO] Konvertiert GE1003_S.jpg | Parameter: mode=auto, label=M, variant_name=GE1003_S | Qualität: Optimierungsfehler/Pixel=0.019140, Mean-Delta²=742.352478, RGB-RMSE/Kanal=15.730570, Raumscore=2565.311673, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.7s
+[INFO] Konvertiere GE1411_L.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE1411_L.jpg ---
+Bildbeschreibung: Ein Achsendiagramm auf weißem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Darüber verläuft eine dünne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenlänge, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE1411_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.344262, localized_error_fraction=0.948057).
+[INFO] Konvertiert GE1411_L.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_L | Qualität: Optimierungsfehler/Pixel=0.002462, Mean-Delta²=61.729599, RGB-RMSE/Kanal=4.536136, Raumscore=224.913330, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.7s
+[INFO] Konvertiere GE1411_M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE1411_M.jpg ---
+Bildbeschreibung: Ein Achsendiagramm auf weißem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Darüber verläuft eine dünne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenlänge, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE1411_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.263158, localized_error_fraction=0.784450).
+[INFO] Konvertiert GE1411_M.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_M | Qualität: Optimierungsfehler/Pixel=0.006073, Mean-Delta²=71.317497, RGB-RMSE/Kanal=4.875705, Raumscore=205.952844, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.8s
+[INFO] Konvertiere GE1411_S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE1411_S.jpg ---
+Bildbeschreibung: Ein Achsendiagramm auf weißem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Darüber verläuft eine dünne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenlänge, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE1411_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.304348, localized_error_fraction=0.876298).
+[INFO] Konvertiert GE1411_S.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_S | Qualität: Optimierungsfehler/Pixel=0.010653, Mean-Delta²=87.342224, RGB-RMSE/Kanal=5.395746, Raumscore=459.012671, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.9s
+[INFO] Konvertiere GE9011_1M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_1M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_1M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.314103, localized_error_fraction=0.814514).
+[INFO] Konvertiert GE9011_1M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_1M | Qualität: Optimierungsfehler/Pixel=0.001141, Mean-Delta²=24.930000, RGB-RMSE/Kanal=2.882707, Raumscore=73.065672, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9011_1S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_1S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.227273, localized_error_fraction=0.817580).
+[INFO] Konvertiert GE9011_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_1S | Qualität: Optimierungsfehler/Pixel=0.005900, Mean-Delta²=42.776669, RGB-RMSE/Kanal=3.776094, Raumscore=136.478671, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9011_2M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_2M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_2M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.290698, localized_error_fraction=0.783879).
+[INFO] Konvertiert GE9011_2M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_2M | Qualität: Optimierungsfehler/Pixel=0.001201, Mean-Delta²=27.334167, RGB-RMSE/Kanal=3.018508, Raumscore=78.140159, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9011_2S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_2S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.319149, localized_error_fraction=0.824721).
+[INFO] Konvertiert GE9011_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_2S | Qualität: Optimierungsfehler/Pixel=0.005644, Mean-Delta²=38.833332, RGB-RMSE/Kanal=3.597839, Raumscore=126.375041, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9011_3M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_3M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_3M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.117284, localized_error_fraction=0.825406).
+[INFO] Konvertiert GE9011_3M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_3M | Qualität: Optimierungsfehler/Pixel=0.001000, Mean-Delta²=21.707500, RGB-RMSE/Kanal=2.689950, Raumscore=64.681366, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9011_3S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_3S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.255319, localized_error_fraction=0.789667).
+[INFO] Konvertiert GE9011_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_3S | Qualität: Optimierungsfehler/Pixel=0.005304, Mean-Delta²=29.873333, RGB-RMSE/Kanal=3.155595, Raumscore=87.318573, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere GE9011_4M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_4M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_4M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.556122, localized_error_fraction=0.718609).
+[INFO] Konvertiert GE9011_4M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_4M | Qualität: Optimierungsfehler/Pixel=0.001251, Mean-Delta²=18.284166, RGB-RMSE/Kanal=2.468749, Raumscore=50.920553, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9011_4S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_4S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.233333, localized_error_fraction=0.861367).
+[INFO] Konvertiert GE9011_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_4S | Qualität: Optimierungsfehler/Pixel=0.002696, Mean-Delta²=10.146667, RGB-RMSE/Kanal=1.839082, Raumscore=37.292487, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9011_5M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_5M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_5M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.250000, localized_error_fraction=0.870421).
+[INFO] Konvertiert GE9011_5M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_5M | Qualität: Optimierungsfehler/Pixel=0.001369, Mean-Delta²=55.615833, RGB-RMSE/Kanal=4.305649, Raumscore=178.321807, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9011_5S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_5S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.318182, localized_error_fraction=0.767862).
+[INFO] Konvertiert GE9011_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_5S | Qualität: Optimierungsfehler/Pixel=0.005922, Mean-Delta²=36.343334, RGB-RMSE/Kanal=3.480581, Raumscore=100.097016, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9011_6M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_6M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_6M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.309091, localized_error_fraction=0.919819).
+[INFO] Konvertiert GE9011_6M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_6M | Qualität: Optimierungsfehler/Pixel=0.001536, Mean-Delta²=70.528336, RGB-RMSE/Kanal=4.848654, Raumscore=248.388295, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9011_6S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_6S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.234043, localized_error_fraction=0.852982).
+[INFO] Konvertiert GE9011_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_6S | Qualität: Optimierungsfehler/Pixel=0.006100, Mean-Delta²=45.209999, RGB-RMSE/Kanal=3.882010, Raumscore=153.110156, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9011_7M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_7M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_7M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.296774, localized_error_fraction=0.845296).
+[INFO] Konvertiert GE9011_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_7M | Qualität: Optimierungsfehler/Pixel=0.001163, Mean-Delta²=40.254166, RGB-RMSE/Kanal=3.663066, Raumscore=124.263527, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9011_7S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9011_7S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.127660, localized_error_fraction=0.826921).
+[INFO] Konvertiert GE9011_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_7S | Qualität: Optimierungsfehler/Pixel=0.005248, Mean-Delta²=34.916668, RGB-RMSE/Kanal=3.411582, Raumscore=103.089299, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9012_1M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_1M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_1M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.425287, localized_error_fraction=0.777011).
+[INFO] Konvertiert GE9012_1M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_1M | Qualität: Optimierungsfehler/Pixel=0.000980, Mean-Delta²=18.595833, RGB-RMSE/Kanal=2.489701, Raumscore=54.060401, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.7s
+[INFO] Konvertiere GE9012_1S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_1S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.304348, localized_error_fraction=0.840571).
+[INFO] Konvertiert GE9012_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_1S | Qualität: Optimierungsfehler/Pixel=0.004915, Mean-Delta²=28.016666, RGB-RMSE/Kanal=3.055960, Raumscore=85.673025, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere GE9012_2M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_2M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_2M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.466368, localized_error_fraction=0.706295).
+[INFO] Konvertiert GE9012_2M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_2M | Qualität: Optimierungsfehler/Pixel=0.001166, Mean-Delta²=24.358334, RGB-RMSE/Kanal=2.849464, Raumscore=65.784648, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere GE9012_2S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_2S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.186047, localized_error_fraction=0.839078).
+[INFO] Konvertiert GE9012_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_2S | Qualität: Optimierungsfehler/Pixel=0.004804, Mean-Delta²=27.756666, RGB-RMSE/Kanal=3.041747, Raumscore=82.258994, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere GE9012_3M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_3M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_3M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.279570, localized_error_fraction=0.772900).
+[INFO] Konvertiert GE9012_3M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_3M | Qualität: Optimierungsfehler/Pixel=0.000864, Mean-Delta²=15.338333, RGB-RMSE/Kanal=2.261145, Raumscore=45.171758, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere GE9012_3S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_3S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.311475, localized_error_fraction=0.848597).
+[INFO] Konvertiert GE9012_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_3S | Qualität: Optimierungsfehler/Pixel=0.004774, Mean-Delta²=26.023333, RGB-RMSE/Kanal=2.945241, Raumscore=79.483882, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere GE9012_4M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_4M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_4M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.620853, localized_error_fraction=0.810534).
+[INFO] Konvertiert GE9012_4M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_4M | Qualität: Optimierungsfehler/Pixel=0.001184, Mean-Delta²=18.195833, RGB-RMSE/Kanal=2.462778, Raumscore=55.472998, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere GE9012_4S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_4S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.206897, localized_error_fraction=0.889710).
+[INFO] Konvertiert GE9012_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_4S | Qualität: Optimierungsfehler/Pixel=0.002256, Mean-Delta²=6.770000, RGB-RMSE/Kanal=1.502221, Raumscore=23.066034, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere GE9012_5M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_5M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_5M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.537313, localized_error_fraction=0.852952).
+[INFO] Konvertiert GE9012_5M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_5M | Qualität: Optimierungsfehler/Pixel=0.001301, Mean-Delta²=43.205833, RGB-RMSE/Kanal=3.794989, Raumscore=142.226229, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere GE9012_5S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_5S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.157895, localized_error_fraction=0.772227).
+[INFO] Konvertiert GE9012_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_5S | Qualität: Optimierungsfehler/Pixel=0.005011, Mean-Delta²=29.356667, RGB-RMSE/Kanal=3.128187, Raumscore=81.440401, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.5s
+[INFO] Konvertiere GE9012_6M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_6M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_6M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.392694, localized_error_fraction=0.859859).
+[INFO] Konvertiert GE9012_6M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_6M | Qualität: Optimierungsfehler/Pixel=0.001784, Mean-Delta²=60.480835, RGB-RMSE/Kanal=4.490020, Raumscore=199.972284, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere GE9012_6S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_6S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.243902, localized_error_fraction=0.818610).
+[INFO] Konvertiert GE9012_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_6S | Qualität: Optimierungsfehler/Pixel=0.004715, Mean-Delta²=25.469999, RGB-RMSE/Kanal=2.913760, Raumscore=75.818450, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere GE9012_7M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_7M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_7M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.355450, localized_error_fraction=0.811984).
+[INFO] Konvertiert GE9012_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_7M | Qualität: Optimierungsfehler/Pixel=0.001115, Mean-Delta²=30.165833, RGB-RMSE/Kanal=3.171006, Raumscore=89.637711, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere GE9012_7S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9012_7S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.277778, localized_error_fraction=0.825406).
+[INFO] Konvertiert GE9012_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_7S | Qualität: Optimierungsfehler/Pixel=0.004900, Mean-Delta²=28.523333, RGB-RMSE/Kanal=3.083468, Raumscore=81.791836, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere GE9013_1M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_1M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_1M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.244898, localized_error_fraction=0.806668).
+[INFO] Konvertiert GE9013_1M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_1M | Qualität: Optimierungsfehler/Pixel=0.001030, Mean-Delta²=25.745832, RGB-RMSE/Kanal=2.929496, Raumscore=82.856076, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9013_1S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_1S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.333333, localized_error_fraction=0.867320).
+[INFO] Konvertiert GE9013_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_1S | Qualität: Optimierungsfehler/Pixel=0.005826, Mean-Delta²=52.356667, RGB-RMSE/Kanal=4.177586, Raumscore=183.006656, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9013_2M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_2M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_2M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.229730, localized_error_fraction=0.767467).
+[INFO] Konvertiert GE9013_2M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_2M | Qualität: Optimierungsfehler/Pixel=0.001062, Mean-Delta²=26.419167, RGB-RMSE/Kanal=2.967556, Raumscore=80.483318, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9013_2S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_2S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.536585, localized_error_fraction=0.892301).
+[INFO] Konvertiert GE9013_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_2S | Qualität: Optimierungsfehler/Pixel=0.005856, Mean-Delta²=50.696667, RGB-RMSE/Kanal=4.110826, Raumscore=181.340820, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9013_3M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_3M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_3M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.223776, localized_error_fraction=0.790940).
+[INFO] Konvertiert GE9013_3M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_3M | Qualität: Optimierungsfehler/Pixel=0.000914, Mean-Delta²=20.034166, RGB-RMSE/Kanal=2.584193, Raumscore=61.276405, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9013_3S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_3S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.368421, localized_error_fraction=0.859336).
+[INFO] Konvertiert GE9013_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_3S | Qualität: Optimierungsfehler/Pixel=0.005233, Mean-Delta²=36.470001, RGB-RMSE/Kanal=3.486641, Raumscore=117.793945, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9013_4M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_4M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_4M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.535912, localized_error_fraction=0.753281).
+[INFO] Konvertiert GE9013_4M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_4M | Qualität: Optimierungsfehler/Pixel=0.001181, Mean-Delta²=18.475834, RGB-RMSE/Kanal=2.481655, Raumscore=53.767833, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9013_4S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_4S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.257143, localized_error_fraction=0.928691).
+[INFO] Konvertiert GE9013_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_4S | Qualität: Optimierungsfehler/Pixel=0.002741, Mean-Delta²=11.966666, RGB-RMSE/Kanal=1.997220, Raumscore=43.005415, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9013_5M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_5M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_5M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.364964, localized_error_fraction=0.880912).
+[INFO] Konvertiert GE9013_5M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_5M | Qualität: Optimierungsfehler/Pixel=0.001222, Mean-Delta²=48.507500, RGB-RMSE/Kanal=4.021090, Raumscore=159.820974, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere GE9013_5S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_5S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.388889, localized_error_fraction=0.829238).
+[INFO] Konvertiert GE9013_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_5S | Qualität: Optimierungsfehler/Pixel=0.005707, Mean-Delta²=45.716667, RGB-RMSE/Kanal=3.903702, Raumscore=154.345946, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9013_6M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_6M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_6M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.363636, localized_error_fraction=0.890473).
+[INFO] Konvertiert GE9013_6M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_6M | Qualität: Optimierungsfehler/Pixel=0.001475, Mean-Delta²=58.730000, RGB-RMSE/Kanal=4.424553, Raumscore=199.486456, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9013_6S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_6S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.250000, localized_error_fraction=0.898409).
+[INFO] Konvertiert GE9013_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_6S | Qualität: Optimierungsfehler/Pixel=0.005833, Mean-Delta²=51.743332, RGB-RMSE/Kanal=4.153044, Raumscore=189.774521, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9013_7M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_7M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_7M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.389706, localized_error_fraction=0.817550).
+[INFO] Konvertiert GE9013_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_7M | Qualität: Optimierungsfehler/Pixel=0.001043, Mean-Delta²=34.310833, RGB-RMSE/Kanal=3.381855, Raumscore=104.649913, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere GE9013_7S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9013_7S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.341463, localized_error_fraction=0.860356).
+[INFO] Konvertiert GE9013_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_7S | Qualität: Optimierungsfehler/Pixel=0.005322, Mean-Delta²=41.343334, RGB-RMSE/Kanal=3.712292, Raumscore=137.796564, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE1003_S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE1003_S.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE1003_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.189873, localized_error_fraction=0.833947).
+[INFO] Konvertiert GE1003_S.jpg | Parameter: mode=auto, label=M, variant_name=GE1003_S | Qualität: Optimierungsfehler/Pixel=0.019140, Mean-Delta²=742.352478, RGB-RMSE/Kanal=15.730570, Raumscore=2565.311673, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere GE1411_S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE1411_S.jpg ---
+Bildbeschreibung: Ein Achsendiagramm auf weißem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Darüber verläuft eine dünne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenlänge, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE1411_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.304348, localized_error_fraction=0.876298).
+[INFO] Konvertiert GE1411_S.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_S | Qualität: Optimierungsfehler/Pixel=0.010653, Mean-Delta²=87.342224, RGB-RMSE/Kanal=5.395746, Raumscore=459.012671, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.9s
+[INFO] Konvertiere GE1003_M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE1003_M.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE1003_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.369748, localized_error_fraction=0.791069).
+[INFO] Konvertiert GE1003_M.jpg | Parameter: mode=auto, label=M, variant_name=GE1003_M | Qualität: Optimierungsfehler/Pixel=0.009383, Mean-Delta²=401.955200, RGB-RMSE/Kanal=11.575192, Raumscore=1195.012501, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.9s
+[INFO] Konvertiere GE1003_L.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE1003_L.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE1003_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.472050, localized_error_fraction=0.717083).
+[INFO] Konvertiert GE1003_L.jpg | Parameter: mode=auto, label=M, variant_name=GE1003_L | Qualität: Optimierungsfehler/Pixel=0.006905, Mean-Delta²=435.635559, RGB-RMSE/Kanal=12.050388, Raumscore=1209.935404, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.0s
+[INFO] Konvertiere GE9011_6S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_6S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.234043, localized_error_fraction=0.852982).
+[INFO] Konvertiert GE9011_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_6S | Qualität: Optimierungsfehler/Pixel=0.006100, Mean-Delta²=45.209999, RGB-RMSE/Kanal=3.882010, Raumscore=153.110156, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere GE1411_M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE1411_M.jpg ---
+Bildbeschreibung: Ein Achsendiagramm auf weißem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Darüber verläuft eine dünne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenlänge, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE1411_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.263158, localized_error_fraction=0.784450).
+[INFO] Konvertiert GE1411_M.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_M | Qualität: Optimierungsfehler/Pixel=0.006073, Mean-Delta²=71.317497, RGB-RMSE/Kanal=4.875705, Raumscore=205.952844, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.9s
+[INFO] Konvertiere GE9011_5S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_5S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.318182, localized_error_fraction=0.767862).
+[INFO] Konvertiert GE9011_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_5S | Qualität: Optimierungsfehler/Pixel=0.005922, Mean-Delta²=36.343334, RGB-RMSE/Kanal=3.480581, Raumscore=100.097016, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere GE9011_1S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_1S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.227273, localized_error_fraction=0.817580).
+[INFO] Konvertiert GE9011_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_1S | Qualität: Optimierungsfehler/Pixel=0.005900, Mean-Delta²=42.776669, RGB-RMSE/Kanal=3.776094, Raumscore=136.478671, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9013_2S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_2S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.536585, localized_error_fraction=0.892301).
+[INFO] Konvertiert GE9013_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_2S | Qualität: Optimierungsfehler/Pixel=0.005856, Mean-Delta²=50.696667, RGB-RMSE/Kanal=4.110826, Raumscore=181.340820, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9013_6S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_6S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.250000, localized_error_fraction=0.898409).
+[INFO] Konvertiert GE9013_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_6S | Qualität: Optimierungsfehler/Pixel=0.005833, Mean-Delta²=51.743332, RGB-RMSE/Kanal=4.153044, Raumscore=189.774521, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9013_1S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_1S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.333333, localized_error_fraction=0.867320).
+[INFO] Konvertiert GE9013_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_1S | Qualität: Optimierungsfehler/Pixel=0.005826, Mean-Delta²=52.356667, RGB-RMSE/Kanal=4.177586, Raumscore=183.006656, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere GE9013_5S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_5S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.388889, localized_error_fraction=0.829238).
+[INFO] Konvertiert GE9013_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_5S | Qualität: Optimierungsfehler/Pixel=0.005707, Mean-Delta²=45.716667, RGB-RMSE/Kanal=3.903702, Raumscore=154.345946, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere GE9011_2S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_2S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.319149, localized_error_fraction=0.824721).
+[INFO] Konvertiert GE9011_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_2S | Qualität: Optimierungsfehler/Pixel=0.005644, Mean-Delta²=38.833332, RGB-RMSE/Kanal=3.597839, Raumscore=126.375041, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9013_7S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_7S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.341463, localized_error_fraction=0.860356).
+[INFO] Konvertiert GE9013_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_7S | Qualität: Optimierungsfehler/Pixel=0.005322, Mean-Delta²=41.343334, RGB-RMSE/Kanal=3.712292, Raumscore=137.796564, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9011_3S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_3S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.255319, localized_error_fraction=0.789667).
+[INFO] Konvertiert GE9011_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_3S | Qualität: Optimierungsfehler/Pixel=0.005304, Mean-Delta²=29.873333, RGB-RMSE/Kanal=3.155595, Raumscore=87.318573, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere GE9011_7S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_7S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.127660, localized_error_fraction=0.826921).
+[INFO] Konvertiert GE9011_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_7S | Qualität: Optimierungsfehler/Pixel=0.005248, Mean-Delta²=34.916668, RGB-RMSE/Kanal=3.411582, Raumscore=103.089299, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere GE9013_3S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_3S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.368421, localized_error_fraction=0.859336).
+[INFO] Konvertiert GE9013_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_3S | Qualität: Optimierungsfehler/Pixel=0.005233, Mean-Delta²=36.470001, RGB-RMSE/Kanal=3.486641, Raumscore=117.793945, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere GE9012_5S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_5S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.157895, localized_error_fraction=0.772227).
+[INFO] Konvertiert GE9012_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_5S | Qualität: Optimierungsfehler/Pixel=0.005011, Mean-Delta²=29.356667, RGB-RMSE/Kanal=3.128187, Raumscore=81.440401, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.6s
+[INFO] Konvertiere GE9012_1S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_1S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.304348, localized_error_fraction=0.840571).
+[INFO] Konvertiert GE9012_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_1S | Qualität: Optimierungsfehler/Pixel=0.004915, Mean-Delta²=28.016666, RGB-RMSE/Kanal=3.055960, Raumscore=85.673025, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.6s
+[INFO] Konvertiere GE9012_7S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_7S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.277778, localized_error_fraction=0.825406).
+[INFO] Konvertiert GE9012_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_7S | Qualität: Optimierungsfehler/Pixel=0.004900, Mean-Delta²=28.523333, RGB-RMSE/Kanal=3.083468, Raumscore=81.791836, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.6s
+[INFO] Konvertiere GE9012_2S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_2S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.186047, localized_error_fraction=0.839078).
+[INFO] Konvertiert GE9012_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_2S | Qualität: Optimierungsfehler/Pixel=0.004804, Mean-Delta²=27.756666, RGB-RMSE/Kanal=3.041747, Raumscore=82.258994, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.6s
+[INFO] Konvertiere GE9012_3S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_3S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.311475, localized_error_fraction=0.848597).
+[INFO] Konvertiert GE9012_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_3S | Qualität: Optimierungsfehler/Pixel=0.004774, Mean-Delta²=26.023333, RGB-RMSE/Kanal=2.945241, Raumscore=79.483882, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.6s
+[INFO] Konvertiere GE9012_6S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_6S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.243902, localized_error_fraction=0.818610).
+[INFO] Konvertiert GE9012_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_6S | Qualität: Optimierungsfehler/Pixel=0.004715, Mean-Delta²=25.469999, RGB-RMSE/Kanal=2.913760, Raumscore=75.818450, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.6s
+[INFO] Konvertiere GE9013_4S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_4S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.257143, localized_error_fraction=0.928691).
+[INFO] Konvertiert GE9013_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_4S | Qualität: Optimierungsfehler/Pixel=0.002741, Mean-Delta²=11.966666, RGB-RMSE/Kanal=1.997220, Raumscore=43.005415, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere GE9011_4S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_4S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.233333, localized_error_fraction=0.861367).
+[INFO] Konvertiert GE9011_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_4S | Qualität: Optimierungsfehler/Pixel=0.002696, Mean-Delta²=10.146667, RGB-RMSE/Kanal=1.839082, Raumscore=37.292487, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE1411_L.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE1411_L.jpg ---
+Bildbeschreibung: Ein Achsendiagramm auf weißem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Darüber verläuft eine dünne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenlänge, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE1411_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.344262, localized_error_fraction=0.948057).
+[INFO] Konvertiert GE1411_L.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_L | Qualität: Optimierungsfehler/Pixel=0.002462, Mean-Delta²=61.729599, RGB-RMSE/Kanal=4.536136, Raumscore=224.913330, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere GE9012_4S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_4S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.206897, localized_error_fraction=0.889710).
+[INFO] Konvertiert GE9012_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_4S | Qualität: Optimierungsfehler/Pixel=0.002256, Mean-Delta²=6.770000, RGB-RMSE/Kanal=1.502221, Raumscore=23.066034, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.6s
+[INFO] Konvertiere GE9012_6M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_6M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_6M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.392694, localized_error_fraction=0.859859).
+[INFO] Konvertiert GE9012_6M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_6M | Qualität: Optimierungsfehler/Pixel=0.001784, Mean-Delta²=60.480835, RGB-RMSE/Kanal=4.490020, Raumscore=199.972284, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.6s
+[INFO] Konvertiere GE9011_6M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_6M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_6M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.309091, localized_error_fraction=0.919819).
+[INFO] Konvertiert GE9011_6M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_6M | Qualität: Optimierungsfehler/Pixel=0.001536, Mean-Delta²=70.528336, RGB-RMSE/Kanal=4.848654, Raumscore=248.388295, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9013_6M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_6M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_6M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.363636, localized_error_fraction=0.890473).
+[INFO] Konvertiert GE9013_6M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_6M | Qualität: Optimierungsfehler/Pixel=0.001475, Mean-Delta²=58.730000, RGB-RMSE/Kanal=4.424553, Raumscore=199.486456, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9011_5M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_5M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_5M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.250000, localized_error_fraction=0.870421).
+[INFO] Konvertiert GE9011_5M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_5M | Qualität: Optimierungsfehler/Pixel=0.001369, Mean-Delta²=55.615833, RGB-RMSE/Kanal=4.305649, Raumscore=178.321807, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9012_5M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_5M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_5M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.537313, localized_error_fraction=0.852952).
+[INFO] Konvertiert GE9012_5M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_5M | Qualität: Optimierungsfehler/Pixel=0.001301, Mean-Delta²=43.205833, RGB-RMSE/Kanal=3.794989, Raumscore=142.226229, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.7s
+[INFO] Konvertiere GE9011_4M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_4M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_4M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.556122, localized_error_fraction=0.718609).
+[INFO] Konvertiert GE9011_4M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_4M | Qualität: Optimierungsfehler/Pixel=0.001251, Mean-Delta²=18.284166, RGB-RMSE/Kanal=2.468749, Raumscore=50.920553, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9013_5M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_5M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_5M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.364964, localized_error_fraction=0.880912).
+[INFO] Konvertiert GE9013_5M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_5M | Qualität: Optimierungsfehler/Pixel=0.001222, Mean-Delta²=48.507500, RGB-RMSE/Kanal=4.021090, Raumscore=159.820974, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9011_2M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_2M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_2M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.290698, localized_error_fraction=0.783879).
+[INFO] Konvertiert GE9011_2M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_2M | Qualität: Optimierungsfehler/Pixel=0.001201, Mean-Delta²=27.334167, RGB-RMSE/Kanal=3.018508, Raumscore=78.140159, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9012_4M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_4M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_4M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.620853, localized_error_fraction=0.810534).
+[INFO] Konvertiert GE9012_4M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_4M | Qualität: Optimierungsfehler/Pixel=0.001184, Mean-Delta²=18.195833, RGB-RMSE/Kanal=2.462778, Raumscore=55.472998, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.7s
+[INFO] Konvertiere GE9013_4M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_4M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_4M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.535912, localized_error_fraction=0.753281).
+[INFO] Konvertiert GE9013_4M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_4M | Qualität: Optimierungsfehler/Pixel=0.001181, Mean-Delta²=18.475834, RGB-RMSE/Kanal=2.481655, Raumscore=53.767833, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9012_2M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_2M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_2M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.466368, localized_error_fraction=0.706295).
+[INFO] Konvertiert GE9012_2M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_2M | Qualität: Optimierungsfehler/Pixel=0.001166, Mean-Delta²=24.358334, RGB-RMSE/Kanal=2.849464, Raumscore=65.784648, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.7s
+[INFO] Konvertiere GE9011_7M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_7M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_7M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.296774, localized_error_fraction=0.845296).
+[INFO] Konvertiert GE9011_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_7M | Qualität: Optimierungsfehler/Pixel=0.001163, Mean-Delta²=40.254166, RGB-RMSE/Kanal=3.663066, Raumscore=124.263527, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9011_1M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_1M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_1M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.314103, localized_error_fraction=0.814514).
+[INFO] Konvertiert GE9011_1M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_1M | Qualität: Optimierungsfehler/Pixel=0.001141, Mean-Delta²=24.930000, RGB-RMSE/Kanal=2.882707, Raumscore=73.065672, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9012_7M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_7M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_7M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.355450, localized_error_fraction=0.811984).
+[INFO] Konvertiert GE9012_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_7M | Qualität: Optimierungsfehler/Pixel=0.001115, Mean-Delta²=30.165833, RGB-RMSE/Kanal=3.171006, Raumscore=89.637711, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.6s
+[INFO] Konvertiere GE9013_2M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_2M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_2M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.229730, localized_error_fraction=0.767467).
+[INFO] Konvertiert GE9013_2M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_2M | Qualität: Optimierungsfehler/Pixel=0.001062, Mean-Delta²=26.419167, RGB-RMSE/Kanal=2.967556, Raumscore=80.483318, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9013_7M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_7M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_7M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.389706, localized_error_fraction=0.817550).
+[INFO] Konvertiert GE9013_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_7M | Qualität: Optimierungsfehler/Pixel=0.001043, Mean-Delta²=34.310833, RGB-RMSE/Kanal=3.381855, Raumscore=104.649913, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9013_1M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_1M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_1M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.244898, localized_error_fraction=0.806668).
+[INFO] Konvertiert GE9013_1M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_1M | Qualität: Optimierungsfehler/Pixel=0.001030, Mean-Delta²=25.745832, RGB-RMSE/Kanal=2.929496, Raumscore=82.856076, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9011_3M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9011_3M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_3M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.117284, localized_error_fraction=0.825406).
+[INFO] Konvertiert GE9011_3M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_3M | Qualität: Optimierungsfehler/Pixel=0.001000, Mean-Delta²=21.707500, RGB-RMSE/Kanal=2.689950, Raumscore=64.681366, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9012_1M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_1M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_1M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.425287, localized_error_fraction=0.777011).
+[INFO] Konvertiert GE9012_1M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_1M | Qualität: Optimierungsfehler/Pixel=0.000980, Mean-Delta²=18.595833, RGB-RMSE/Kanal=2.489701, Raumscore=54.060401, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.7s
+[INFO] Konvertiere GE9013_3M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9013_3M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_3M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.223776, localized_error_fraction=0.790940).
+[INFO] Konvertiert GE9013_3M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_3M | Qualität: Optimierungsfehler/Pixel=0.000914, Mean-Delta²=20.034166, RGB-RMSE/Kanal=2.584193, Raumscore=61.276405, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere GE9012_3M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9012_3M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_3M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.279570, localized_error_fraction=0.772900).
+[INFO] Konvertiert GE9012_3M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_3M | Qualität: Optimierungsfehler/Pixel=0.000864, Mean-Delta²=15.338333, RGB-RMSE/Kanal=2.261145, Raumscore=45.171758, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.7s
+[INFO] Konvertiere GE1003_S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE1003_S.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE1003_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.189873, localized_error_fraction=0.833947).
+[INFO] Konvertiert GE1003_S.jpg | Parameter: mode=auto, label=M, variant_name=GE1003_S | Qualität: Optimierungsfehler/Pixel=0.019140, Mean-Delta²=742.352478, RGB-RMSE/Kanal=15.730570, Raumscore=2565.311673, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.9s
+[INFO] Konvertiere GE1411_S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE1411_S.jpg ---
+Bildbeschreibung: Ein Achsendiagramm auf weißem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Darüber verläuft eine dünne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenlänge, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE1411_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.304348, localized_error_fraction=0.876298).
+[INFO] Konvertiert GE1411_S.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_S | Qualität: Optimierungsfehler/Pixel=0.010653, Mean-Delta²=87.342224, RGB-RMSE/Kanal=5.395746, Raumscore=459.012671, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.0s
+[INFO] Konvertiere GE1003_M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE1003_M.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE1003_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.369748, localized_error_fraction=0.791069).
+[INFO] Konvertiert GE1003_M.jpg | Parameter: mode=auto, label=M, variant_name=GE1003_M | Qualität: Optimierungsfehler/Pixel=0.009383, Mean-Delta²=401.955200, RGB-RMSE/Kanal=11.575192, Raumscore=1195.012501, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.8s
+[INFO] Konvertiere GE1003_L.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE1003_L.jpg ---
+Bildbeschreibung: Grüner Haken aus zwei dicken schrägen Liniensegmenten mit kurzem linken und langem rechten Schenkel. Dahinter liegt unten eine graue Kreisscheibe mit grauem Rand und radialem Helligkeitsverlauf, innen hell und außen dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] GE1003_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.472050, localized_error_fraction=0.717083).
+[INFO] Konvertiert GE1003_L.jpg | Parameter: mode=auto, label=M, variant_name=GE1003_L | Qualität: Optimierungsfehler/Pixel=0.006905, Mean-Delta²=435.635559, RGB-RMSE/Kanal=12.050388, Raumscore=1209.935404, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.0s
+[INFO] Konvertiere GE9011_6S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_6S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.234043, localized_error_fraction=0.852982).
+[INFO] Konvertiert GE9011_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_6S | Qualität: Optimierungsfehler/Pixel=0.006100, Mean-Delta²=45.209999, RGB-RMSE/Kanal=3.882010, Raumscore=153.110156, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE1411_M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE1411_M.jpg ---
+Bildbeschreibung: Ein Achsendiagramm auf weißem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Darüber verläuft eine dünne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenlänge, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE1411_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.263158, localized_error_fraction=0.784450).
+[INFO] Konvertiert GE1411_M.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_M | Qualität: Optimierungsfehler/Pixel=0.006073, Mean-Delta²=71.317497, RGB-RMSE/Kanal=4.875705, Raumscore=205.952844, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.0s
+[INFO] Konvertiere GE9011_5S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_5S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.318182, localized_error_fraction=0.767862).
+[INFO] Konvertiert GE9011_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_5S | Qualität: Optimierungsfehler/Pixel=0.005922, Mean-Delta²=36.343334, RGB-RMSE/Kanal=3.480581, Raumscore=100.097016, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9011_1S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_1S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.227273, localized_error_fraction=0.817580).
+[INFO] Konvertiert GE9011_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_1S | Qualität: Optimierungsfehler/Pixel=0.005900, Mean-Delta²=42.776669, RGB-RMSE/Kanal=3.776094, Raumscore=136.478671, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9013_2S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_2S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.536585, localized_error_fraction=0.892301).
+[INFO] Konvertiert GE9013_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_2S | Qualität: Optimierungsfehler/Pixel=0.005856, Mean-Delta²=50.696667, RGB-RMSE/Kanal=4.110826, Raumscore=181.340820, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.5s
+[INFO] Konvertiere GE9013_6S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_6S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.250000, localized_error_fraction=0.898409).
+[INFO] Konvertiert GE9013_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_6S | Qualität: Optimierungsfehler/Pixel=0.005833, Mean-Delta²=51.743332, RGB-RMSE/Kanal=4.153044, Raumscore=189.774521, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9013_1S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_1S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.333333, localized_error_fraction=0.867320).
+[INFO] Konvertiert GE9013_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_1S | Qualität: Optimierungsfehler/Pixel=0.005826, Mean-Delta²=52.356667, RGB-RMSE/Kanal=4.177586, Raumscore=183.006656, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9013_5S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_5S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.388889, localized_error_fraction=0.829238).
+[INFO] Konvertiert GE9013_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_5S | Qualität: Optimierungsfehler/Pixel=0.005707, Mean-Delta²=45.716667, RGB-RMSE/Kanal=3.903702, Raumscore=154.345946, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9011_2S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_2S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.319149, localized_error_fraction=0.824721).
+[INFO] Konvertiert GE9011_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_2S | Qualität: Optimierungsfehler/Pixel=0.005644, Mean-Delta²=38.833332, RGB-RMSE/Kanal=3.597839, Raumscore=126.375041, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Konvertiere GE9013_7S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_7S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.341463, localized_error_fraction=0.860356).
+[INFO] Konvertiert GE9013_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_7S | Qualität: Optimierungsfehler/Pixel=0.005322, Mean-Delta²=41.343334, RGB-RMSE/Kanal=3.712292, Raumscore=137.796564, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9011_3S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_3S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.255319, localized_error_fraction=0.789667).
+[INFO] Konvertiert GE9011_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_3S | Qualität: Optimierungsfehler/Pixel=0.005304, Mean-Delta²=29.873333, RGB-RMSE/Kanal=3.155595, Raumscore=87.318573, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Konvertiere GE9011_7S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_7S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.127660, localized_error_fraction=0.826921).
+[INFO] Konvertiert GE9011_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_7S | Qualität: Optimierungsfehler/Pixel=0.005248, Mean-Delta²=34.916668, RGB-RMSE/Kanal=3.411582, Raumscore=103.089299, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Konvertiere GE9013_3S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_3S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.368421, localized_error_fraction=0.859336).
+[INFO] Konvertiert GE9013_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_3S | Qualität: Optimierungsfehler/Pixel=0.005233, Mean-Delta²=36.470001, RGB-RMSE/Kanal=3.486641, Raumscore=117.793945, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9012_5S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_5S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.157895, localized_error_fraction=0.772227).
+[INFO] Konvertiert GE9012_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_5S | Qualität: Optimierungsfehler/Pixel=0.005011, Mean-Delta²=29.356667, RGB-RMSE/Kanal=3.128187, Raumscore=81.440401, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.6s
+[INFO] Konvertiere GE9012_1S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_1S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.304348, localized_error_fraction=0.840571).
+[INFO] Konvertiert GE9012_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_1S | Qualität: Optimierungsfehler/Pixel=0.004915, Mean-Delta²=28.016666, RGB-RMSE/Kanal=3.055960, Raumscore=85.673025, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.6s
+[INFO] Konvertiere GE9012_7S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_7S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.277778, localized_error_fraction=0.825406).
+[INFO] Konvertiert GE9012_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_7S | Qualität: Optimierungsfehler/Pixel=0.004900, Mean-Delta²=28.523333, RGB-RMSE/Kanal=3.083468, Raumscore=81.791836, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.7s
+[INFO] Konvertiere GE9012_2S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_2S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.186047, localized_error_fraction=0.839078).
+[INFO] Konvertiert GE9012_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_2S | Qualität: Optimierungsfehler/Pixel=0.004804, Mean-Delta²=27.756666, RGB-RMSE/Kanal=3.041747, Raumscore=82.258994, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.6s
+[INFO] Konvertiere GE9012_3S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_3S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.311475, localized_error_fraction=0.848597).
+[INFO] Konvertiert GE9012_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_3S | Qualität: Optimierungsfehler/Pixel=0.004774, Mean-Delta²=26.023333, RGB-RMSE/Kanal=2.945241, Raumscore=79.483882, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.6s
+[INFO] Konvertiere GE9012_6S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_6S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.243902, localized_error_fraction=0.818610).
+[INFO] Konvertiert GE9012_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_6S | Qualität: Optimierungsfehler/Pixel=0.004715, Mean-Delta²=25.469999, RGB-RMSE/Kanal=2.913760, Raumscore=75.818450, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.6s
+[INFO] Konvertiere GE9013_4S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_4S.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.257143, localized_error_fraction=0.928691).
+[INFO] Konvertiert GE9013_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_4S | Qualität: Optimierungsfehler/Pixel=0.002741, Mean-Delta²=11.966666, RGB-RMSE/Kanal=1.997220, Raumscore=43.005415, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9011_4S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_4S.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.233333, localized_error_fraction=0.861367).
+[INFO] Konvertiert GE9011_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_4S | Qualität: Optimierungsfehler/Pixel=0.002696, Mean-Delta²=10.146667, RGB-RMSE/Kanal=1.839082, Raumscore=37.292487, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE1411_L.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE1411_L.jpg ---
+Bildbeschreibung: Ein Achsendiagramm auf weißem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Darüber verläuft eine dünne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenlänge, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE1411_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.344262, localized_error_fraction=0.948057).
+[INFO] Konvertiert GE1411_L.jpg | Parameter: mode=auto, label=M, variant_name=GE1411_L | Qualität: Optimierungsfehler/Pixel=0.002462, Mean-Delta²=61.729599, RGB-RMSE/Kanal=4.536136, Raumscore=224.913330, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.8s
+[INFO] Konvertiere GE9012_4S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_4S.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.206897, localized_error_fraction=0.889710).
+[INFO] Konvertiert GE9012_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_4S | Qualität: Optimierungsfehler/Pixel=0.002256, Mean-Delta²=6.770000, RGB-RMSE/Kanal=1.502221, Raumscore=23.066034, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.6s
+[INFO] Konvertiere GE9012_6M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_6M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_6M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.392694, localized_error_fraction=0.859859).
+[INFO] Konvertiert GE9012_6M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_6M | Qualität: Optimierungsfehler/Pixel=0.001784, Mean-Delta²=60.480835, RGB-RMSE/Kanal=4.490020, Raumscore=199.972284, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.7s
+[INFO] Konvertiere GE9011_6M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_6M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_6M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.309091, localized_error_fraction=0.919819).
+[INFO] Konvertiert GE9011_6M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_6M | Qualität: Optimierungsfehler/Pixel=0.001536, Mean-Delta²=70.528336, RGB-RMSE/Kanal=4.848654, Raumscore=248.388295, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9013_6M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_6M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_6M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.363636, localized_error_fraction=0.890473).
+[INFO] Konvertiert GE9013_6M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_6M | Qualität: Optimierungsfehler/Pixel=0.001475, Mean-Delta²=58.730000, RGB-RMSE/Kanal=4.424553, Raumscore=199.486456, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9011_5M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_5M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_5M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.250000, localized_error_fraction=0.870421).
+[INFO] Konvertiert GE9011_5M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_5M | Qualität: Optimierungsfehler/Pixel=0.001369, Mean-Delta²=55.615833, RGB-RMSE/Kanal=4.305649, Raumscore=178.321807, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9012_5M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_5M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_5M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.537313, localized_error_fraction=0.852952).
+[INFO] Konvertiert GE9012_5M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_5M | Qualität: Optimierungsfehler/Pixel=0.001301, Mean-Delta²=43.205833, RGB-RMSE/Kanal=3.794989, Raumscore=142.226229, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.6s
+[INFO] Konvertiere GE9011_4M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_4M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_4M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.556122, localized_error_fraction=0.718609).
+[INFO] Konvertiert GE9011_4M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_4M | Qualität: Optimierungsfehler/Pixel=0.001251, Mean-Delta²=18.284166, RGB-RMSE/Kanal=2.468749, Raumscore=50.920553, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9013_5M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_5M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_5M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.364964, localized_error_fraction=0.880912).
+[INFO] Konvertiert GE9013_5M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_5M | Qualität: Optimierungsfehler/Pixel=0.001222, Mean-Delta²=48.507500, RGB-RMSE/Kanal=4.021090, Raumscore=159.820974, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9011_2M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_2M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_2M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.290698, localized_error_fraction=0.783879).
+[INFO] Konvertiert GE9011_2M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_2M | Qualität: Optimierungsfehler/Pixel=0.001201, Mean-Delta²=27.334167, RGB-RMSE/Kanal=3.018508, Raumscore=78.140159, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Konvertiere GE9012_4M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_4M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_4M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.620853, localized_error_fraction=0.810534).
+[INFO] Konvertiert GE9012_4M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_4M | Qualität: Optimierungsfehler/Pixel=0.001184, Mean-Delta²=18.195833, RGB-RMSE/Kanal=2.462778, Raumscore=55.472998, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.7s
+[INFO] Konvertiere GE9013_4M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_4M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_4M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.535912, localized_error_fraction=0.753281).
+[INFO] Konvertiert GE9013_4M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_4M | Qualität: Optimierungsfehler/Pixel=0.001181, Mean-Delta²=18.475834, RGB-RMSE/Kanal=2.481655, Raumscore=53.767833, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.5s
+[INFO] Konvertiere GE9012_2M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_2M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_2M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.466368, localized_error_fraction=0.706295).
+[INFO] Konvertiert GE9012_2M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_2M | Qualität: Optimierungsfehler/Pixel=0.001166, Mean-Delta²=24.358334, RGB-RMSE/Kanal=2.849464, Raumscore=65.784648, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.7s
+[INFO] Konvertiere GE9011_7M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_7M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_7M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.296774, localized_error_fraction=0.845296).
+[INFO] Konvertiert GE9011_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_7M | Qualität: Optimierungsfehler/Pixel=0.001163, Mean-Delta²=40.254166, RGB-RMSE/Kanal=3.663066, Raumscore=124.263527, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9011_1M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_1M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_1M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.314103, localized_error_fraction=0.814514).
+[INFO] Konvertiert GE9011_1M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_1M | Qualität: Optimierungsfehler/Pixel=0.001141, Mean-Delta²=24.930000, RGB-RMSE/Kanal=2.882707, Raumscore=73.065672, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9012_7M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_7M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_7M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.355450, localized_error_fraction=0.811984).
+[INFO] Konvertiert GE9012_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_7M | Qualität: Optimierungsfehler/Pixel=0.001115, Mean-Delta²=30.165833, RGB-RMSE/Kanal=3.171006, Raumscore=89.637711, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.7s
+[INFO] Konvertiere GE9013_2M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_2M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_2M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.229730, localized_error_fraction=0.767467).
+[INFO] Konvertiert GE9013_2M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_2M | Qualität: Optimierungsfehler/Pixel=0.001062, Mean-Delta²=26.419167, RGB-RMSE/Kanal=2.967556, Raumscore=80.483318, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9013_7M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_7M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_7M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.389706, localized_error_fraction=0.817550).
+[INFO] Konvertiert GE9013_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_7M | Qualität: Optimierungsfehler/Pixel=0.001043, Mean-Delta²=34.310833, RGB-RMSE/Kanal=3.381855, Raumscore=104.649913, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9013_1M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_1M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_1M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.244898, localized_error_fraction=0.806668).
+[INFO] Konvertiert GE9013_1M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_1M | Qualität: Optimierungsfehler/Pixel=0.001030, Mean-Delta²=25.745832, RGB-RMSE/Kanal=2.929496, Raumscore=82.856076, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9011_3M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9011_3M.jpg ---
+Bildbeschreibung: Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9011_3M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.117284, localized_error_fraction=0.825406).
+[INFO] Konvertiert GE9011_3M.jpg | Parameter: mode=auto, label=M, variant_name=GE9011_3M | Qualität: Optimierungsfehler/Pixel=0.001000, Mean-Delta²=21.707500, RGB-RMSE/Kanal=2.689950, Raumscore=64.681366, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9012_1M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_1M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_1M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.425287, localized_error_fraction=0.777011).
+[INFO] Konvertiert GE9012_1M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_1M | Qualität: Optimierungsfehler/Pixel=0.000980, Mean-Delta²=18.595833, RGB-RMSE/Kanal=2.489701, Raumscore=54.060401, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.7s
+[INFO] Konvertiere GE9013_3M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9013_3M.jpg ---
+Bildbeschreibung: Nach unten gerichteter Pfeil: gefüllte dreieckige Spitze unter einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9013_3M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.223776, localized_error_fraction=0.790940).
+[INFO] Konvertiert GE9013_3M.jpg | Parameter: mode=auto, label=M, variant_name=GE9013_3M | Qualität: Optimierungsfehler/Pixel=0.000914, Mean-Delta²=20.034166, RGB-RMSE/Kanal=2.584193, Raumscore=61.276405, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere GE9012_3M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9012_3M.jpg ---
+Bildbeschreibung: Nach rechts gerichteter Pfeil: gefüllte dreieckige Spitze rechts von einem schmaleren rechteckigen horizontalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit vertikalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] GE9012_3M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.279570, localized_error_fraction=0.772900).
+[INFO] Konvertiert GE9012_3M.jpg | Parameter: mode=auto, label=M, variant_name=GE9012_3M | Qualität: Optimierungsfehler/Pixel=0.000864, Mean-Delta²=15.338333, RGB-RMSE/Kanal=2.261145, Raumscore=45.171758, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.7s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\la\worker_04\semantic-only\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\la\worker_04\semantic-only\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\la\worker_04\semantic-only

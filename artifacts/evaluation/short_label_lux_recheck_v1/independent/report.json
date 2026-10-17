@@ -1,0 +1,797 @@
+{
+  "artifact_retention": "debug",
+  "cases": [
+    {
+      "blocked_svg_reads": [],
+      "case_id": "original",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "original/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "elapsed_seconds": 7.266,
+      "failures": [],
+      "height": 64,
+      "input_png": "original/input.png",
+      "input_sha256": "50f5f9ae3b794789422f2f5fa00a93a66c89cf2d9ef7d028d1b8c8ff6cb6af50",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9853683114051819,
+        "foreground_iou": 1.0,
+        "foreground_mse": 0.00014870348968543112,
+        "normalized_mse": 7.0056295953691e-05
+      },
+      "output_sha256": "445098122025116a4a21f3a4352dba24c3a641a9ed2ec9d7102008aa9528bcf5",
+      "output_svg": "original/output.svg",
+      "reference_svg": "original/reference.svg",
+      "reference_svg_sha256": "cdaee0194d0e0c3e6d5f30a743719624407d416b388267e1478184916e04fa50",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.0,
+        "relative_y": 0.0,
+        "scale": 1.0
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_01",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_01/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist ein wenig kleiner dargestellt und geringf\u00fcgig nach links und unten verschoben.",
+      "elapsed_seconds": 6.859,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_01/input.png",
+      "input_sha256": "890648de833aa8b0e3273d7dbd153bd71fff51d9ddda4342ebe1798137e21722",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9838826656341553,
+        "foreground_iou": 0.9985387238188017,
+        "foreground_mse": 0.00020783094805665314,
+        "normalized_mse": 9.294190385844558e-05
+      },
+      "output_sha256": "e21204d612dbebe01aa05494df2a7019f1cdc60de908e868775c9612cdae4cc2",
+      "output_svg": "probe_01/output.svg",
+      "reference_svg": "probe_01/reference.svg",
+      "reference_svg_sha256": "5fc2998a229dc301ca00318aae7d5e357b6c91ae85adc998fe5d4d09e563f225",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0031074,
+        "relative_y": 0.00817386,
+        "scale": 0.97365908
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_02",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_02/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist etwas gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach rechts und unten versetzt.",
+      "elapsed_seconds": 6.172,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_02/input.png",
+      "input_sha256": "4aef8ed17ddb0c8fa67e6835a971bc0591007fa65b862cc51450c5f8f4bb0e5f",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9931897521018982,
+        "foreground_iou": 0.9979035639412998,
+        "foreground_mse": 0.00013658564421348274,
+        "normalized_mse": 7.091178849805146e-05
+      },
+      "output_sha256": "4eb21d430acb0f9c8aecdadc4481cf06bb92deae644dd05a526492f1fa5566d9",
+      "output_svg": "probe_02/output.svg",
+      "reference_svg": "probe_02/reference.svg",
+      "reference_svg_sha256": "c4284900bb7cb2fb9de4068c80cc632bd13afb07ee5074f4245b5e42bf30cbc4",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00064953,
+        "relative_y": 0.00249769,
+        "scale": 1.05102888
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_03",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_03/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig kleiner dargestellt und ein wenig nach rechts und unten versetzt.",
+      "elapsed_seconds": 6.047,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_03/input.png",
+      "input_sha256": "29431a2fcb58ea425ace9cfe5fa90e85ac0baf460f5a5ed5ae2a755c7dca2245",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9816756248474121,
+        "foreground_iou": 0.9995105237395986,
+        "foreground_mse": 0.00020260039309505373,
+        "normalized_mse": 9.095281711779535e-05
+      },
+      "output_sha256": "0e9ddfa9ef859777457cb75441e8bc5311274e79ffeabab14e5a63388245ca27",
+      "output_svg": "probe_03/output.svg",
+      "reference_svg": "probe_03/reference.svg",
+      "reference_svg_sha256": "72da96c092837be91e889f6e12c62cafe56826d8da1f00fdead2fd81b4ad5f4d",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02021836,
+        "relative_y": 0.01317696,
+        "scale": 0.97033703
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_04",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_04/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist leicht gr\u00f6\u00dfer dargestellt und ein wenig nach rechts und unten verschoben.",
+      "elapsed_seconds": 8.172,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_04/input.png",
+      "input_sha256": "4dc1d1d5060aba460173f5e3c472c2c206b574ae240bcf6a91a5d6f3d255c99e",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9751193523406982,
+        "foreground_iou": 0.9974248927038627,
+        "foreground_mse": 0.00031190383015200496,
+        "normalized_mse": 0.00016094125749077648
+      },
+      "output_sha256": "031bcc2b4ed5ed1b099c31220a5c8440f24dddc764faab7183721a56ac4bb3ce",
+      "output_svg": "probe_04/output.svg",
+      "reference_svg": "probe_04/reference.svg",
+      "reference_svg_sha256": "3d1ddd7452e926cd3b4eaa7b79187fe9e022bb78834d44db95d935a890f6fdbd",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00275361,
+        "relative_y": 0.01409028,
+        "scale": 1.0358607
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_05",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_05/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist ein wenig gr\u00f6\u00dfer dargestellt und ein wenig nach links und oben verschoben.",
+      "elapsed_seconds": 7.094,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_05/input.png",
+      "input_sha256": "302b06948e76d083211c045d17068ce9e4c3186d5101c5f0c916f50c7f4c42dd",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9728742837905884,
+        "foreground_iou": 0.9966386554621849,
+        "foreground_mse": 0.00034818114363588393,
+        "normalized_mse": 0.00018200353952124715
+      },
+      "output_sha256": "1484b3a1c23582c57e3fe8e89d4f167b140045a42c9e1691e3bc1237854f8f60",
+      "output_svg": "probe_05/output.svg",
+      "reference_svg": "probe_05/reference.svg",
+      "reference_svg_sha256": "587f5336d71cee1e9789adcacaa2d1430059381b0fa4c138b7a8b8618f8dde6c",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.00604121,
+        "relative_y": -0.01679327,
+        "scale": 1.04797976
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_06",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_06/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist etwas gr\u00f6\u00dfer dargestellt und ein wenig nach links und oben verschoben.",
+      "elapsed_seconds": 6.734,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_06/input.png",
+      "input_sha256": "1325d840f2c7d86773207e6e9e18ecb52b5ec22ee9ba6e3ea5ddf39e47eb8202",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9845616817474365,
+        "foreground_iou": 0.9969982847341338,
+        "foreground_mse": 0.00019817112479358912,
+        "normalized_mse": 0.00010233443754259497
+      },
+      "output_sha256": "8aca54b0bd9485538ffb98a4e508e417b7cef593687d873868a066811ad5d397",
+      "output_svg": "probe_06/output.svg",
+      "reference_svg": "probe_06/reference.svg",
+      "reference_svg_sha256": "8740b70dd037ac8c5e931499f55f10891e6ef014ce1e747cf9a8f805c7f0675c",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.00354064,
+        "relative_y": -0.00670118,
+        "scale": 1.03592009
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_07",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_07/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist etwas gr\u00f6\u00dfer dargestellt und ein wenig nach links und unten verschoben.",
+      "elapsed_seconds": 8.672,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_07/input.png",
+      "input_sha256": "f125f07abd23da5f33355a095f4d1393fc4ae7d4c794136e578cf157038bf9b4",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9737030267715454,
+        "foreground_iou": 0.9958643507030603,
+        "foreground_mse": 0.000312469172058627,
+        "normalized_mse": 0.00016790082736406475
+      },
+      "output_sha256": "5a0002dd646ea7f6e9120827c1e95c1b5a1bd19ecb850f373ce4ff76089f2894",
+      "output_svg": "probe_07/output.svg",
+      "reference_svg": "probe_07/reference.svg",
+      "reference_svg_sha256": "27307f8730ec92d951539ee4d0a07da0758bc42282ce59ed1268286956f5386d",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02306799,
+        "relative_y": 0.00631792,
+        "scale": 1.05640583
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_08",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_08/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und ein wenig nach rechts und oben verschoben.",
+      "elapsed_seconds": 9.313,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_08/input.png",
+      "input_sha256": "938691dc6e3313a9d3c94ccb496651224fb74e1eec14fd734d0672df80b751a6",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9815349578857422,
+        "foreground_iou": 0.9965337954939342,
+        "foreground_mse": 0.00023460958618670702,
+        "normalized_mse": 0.00012017168046440929
+      },
+      "output_sha256": "444fd8889134c1ad6207653bddb8b2b205f4df837dacd8b287959cd03c466f30",
+      "output_svg": "probe_08/output.svg",
+      "reference_svg": "probe_08/reference.svg",
+      "reference_svg_sha256": "ab0c8d23c804634ba9d05e4124e1f1f2da4f58f88fb5bd113455c012e13c3e27",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02352367,
+        "relative_y": -0.02090676,
+        "scale": 1.03190558
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_09",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_09/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und leicht nach rechts und unten verschoben.",
+      "elapsed_seconds": 7.75,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_09/input.png",
+      "input_sha256": "cce6e9565e24b19d8a59d13f661d4fb270cddec64ac2caa672d3029ac3fc7e85",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9809740781784058,
+        "foreground_iou": 0.9961089494163424,
+        "foreground_mse": 0.00021110640955157578,
+        "normalized_mse": 0.00010709356138249859
+      },
+      "output_sha256": "939abaf662a5163e2514b3f4298af1b096e949cb62daf4b3e04398ea5f1618e2",
+      "output_svg": "probe_09/output.svg",
+      "reference_svg": "probe_09/reference.svg",
+      "reference_svg_sha256": "160f76df60d8f14758f62e18bf5c9db60cb6ea6492e08bfe6f77ec27db669677",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02037192,
+        "relative_y": 0.02406793,
+        "scale": 1.03209382
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_10",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_10/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig kleiner dargestellt und geringf\u00fcgig nach links und oben verschoben.",
+      "elapsed_seconds": 7.031,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_10/input.png",
+      "input_sha256": "69ba5e610fa7029738a19c07839ae663ad8f680a316cfef43d7728334bcd2f6f",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9794197082519531,
+        "foreground_iou": 0.9975149105367793,
+        "foreground_mse": 0.00022786261979490519,
+        "normalized_mse": 0.00010044769442174584
+      },
+      "output_sha256": "874e729037e8d96e569eaf44b9f2096ca7487cdfe2e62997e49fbdb3552f2231",
+      "output_svg": "probe_10/output.svg",
+      "reference_svg": "probe_10/reference.svg",
+      "reference_svg_sha256": "771c734924a078ff8141d6de4215327d314206fc4c4e5956b73a624bb2f56ce6",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02032513,
+        "relative_y": -0.00062463,
+        "scale": 0.96111985
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_11",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_11/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach rechts und oben verschoben.",
+      "elapsed_seconds": 6.891,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_11/input.png",
+      "input_sha256": "d008f7726b387591c067f1468b68456a9b1792fe40bac7b8e14b7a6be97b2e28",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9839829206466675,
+        "foreground_iou": 0.9962358845671268,
+        "foreground_mse": 0.00031876983121037483,
+        "normalized_mse": 0.00016843370394781232
+      },
+      "output_sha256": "af473f9c4d9395dd977df34cb89474e9fefc373a3ce21d5103ecbbd7c122dbed",
+      "output_svg": "probe_11/output.svg",
+      "reference_svg": "probe_11/reference.svg",
+      "reference_svg_sha256": "4b1f3313f920a10c9e4eaa9b90ac95fdd246221d98646912263c400add33123e",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02355399,
+        "relative_y": -0.02261748,
+        "scale": 1.05054114
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_12",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_12/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und leicht nach rechts und oben versetzt.",
+      "elapsed_seconds": 6.766,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_12/input.png",
+      "input_sha256": "a90d8f273056f41bd20d0e4a2de98dd1f2ff1666b0a5efcf28ee90e80d9aea3c",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9849756956100464,
+        "foreground_iou": 0.9991189427312775,
+        "foreground_mse": 0.00030987063655629754,
+        "normalized_mse": 0.0001539716758998111
+      },
+      "output_sha256": "fba7fb800b45ad2839d225ba8ba384c87b288138f98842a7267271fed0440c35",
+      "output_svg": "probe_12/output.svg",
+      "reference_svg": "probe_12/reference.svg",
+      "reference_svg_sha256": "aff395a579ee928d3baf64049b76444d47687dfe32a1d6c76450e9891cad4541",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00049705,
+        "relative_y": -0.0194078,
+        "scale": 1.02266841
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_13",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_13/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht kleiner dargestellt und ein wenig nach links und unten versetzt.",
+      "elapsed_seconds": 7.047,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_13/input.png",
+      "input_sha256": "003333a31ec8fba6e5c423f2a8106af55459f0886b5fa14d405a73ec68c8abf6",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.972233772277832,
+        "foreground_iou": 0.9965466206216083,
+        "foreground_mse": 0.0004158647498115897,
+        "normalized_mse": 0.00018541213648859411
+      },
+      "output_sha256": "89dbe19b531c63e08a70850066cb24c6ac12194dc0e7d9309efd517da7f139ed",
+      "output_svg": "probe_13/output.svg",
+      "reference_svg": "probe_13/reference.svg",
+      "reference_svg_sha256": "d20176f276804ff394f812b9a8f9dc292f939b43aca6efd8e95506af5c0e2297",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02449501,
+        "relative_y": 0.01963429,
+        "scale": 0.96540709
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_14",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_14/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht gr\u00f6\u00dfer dargestellt und etwas nach links und unten verschoben.",
+      "elapsed_seconds": 7.828,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_14/input.png",
+      "input_sha256": "ea22764ff3dd9219717cbbdab921c950a425024b98f4c1d608c92b2e8543ed03",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9818350076675415,
+        "foreground_iou": 0.9990787655458314,
+        "foreground_mse": 0.00018127172370441258,
+        "normalized_mse": 8.592559606768191e-05
+      },
+      "output_sha256": "480769500cff57c35582b293267686035faedf65bfa05b317f4d93afd6e3ec2b",
+      "output_svg": "probe_14/output.svg",
+      "reference_svg": "probe_14/reference.svg",
+      "reference_svg_sha256": "ae7d8cd17627babe2ab9dbee0fae2c050b38961cf01be99ffe151fc9b31d5ce0",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.00010099,
+        "relative_y": 0.01475366,
+        "scale": 1.00119951
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_15",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_15/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht kleiner dargestellt und geringf\u00fcgig nach rechts und unten versetzt.",
+      "elapsed_seconds": 8.844,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_15/input.png",
+      "input_sha256": "a3cd084a0bdbac27670833218175ef82248bd7aeed4f1a1943b2d4578bc62751",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9864875078201294,
+        "foreground_iou": 0.9966949952785646,
+        "foreground_mse": 0.00026429869467392564,
+        "normalized_mse": 0.0001234723604284227
+      },
+      "output_sha256": "830d49d7d8c6412cc41d2b05d27d7758419bdf0d4a8266ab2b11c4745d3ad7a7",
+      "output_svg": "probe_15/output.svg",
+      "reference_svg": "probe_15/reference.svg",
+      "reference_svg_sha256": "5a1fab944ca120ae27922339f958eaf940a67f690840524d3db4075d94dbbc0a",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00462701,
+        "relative_y": 0.0081965,
+        "scale": 0.98936128
+      },
+      "width": 72
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_16",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 3
+      },
+      "converter_log": "probe_16/converter.log",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild. Die gesamte Darstellung ist geringf\u00fcgig kleiner dargestellt und leicht nach rechts und oben versetzt.",
+      "elapsed_seconds": 8.532,
+      "failures": [],
+      "height": 64,
+      "input_png": "probe_16/input.png",
+      "input_sha256": "6d0f8b10f02da3fcb5e98dc18189f4d2692033380df5b4951111018f02c61f30",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.976515531539917,
+        "foreground_iou": 0.9954819277108434,
+        "foreground_mse": 0.00032403357909061015,
+        "normalized_mse": 0.0001423019275534898
+      },
+      "output_sha256": "d00e50c9b86954f05cbf9ad4f7972b1fe210a15a361207c5e2c662bd9e0acfdc",
+      "output_svg": "probe_16/output.svg",
+      "reference_svg": "probe_16/reference.svg",
+      "reference_svg_sha256": "6c281825d98e09c95865661885bac0296e23f6c392f579d26cfbf5a6670957b8",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.0028279,
+        "relative_y": -0.00241516,
+        "scale": 0.95699923
+      },
+      "width": 72
+    }
+  ],
+  "iterations": 64,
+  "limits": {
+    "max_foreground_mse": 0.04,
+    "max_normalized_mse": 0.01,
+    "max_path_commands": 160,
+    "max_svg_elements": 80,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85
+  },
+  "original_satisfactory": true,
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261017,
+  "source_description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"mPa\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+  "source_description_sha256": "3f69cb67edb858d01f802efdc89548e5c68fe32877c4cc21bcdcf10524ce32a5",
+  "source_image": "source.png",
+  "source_image_sha256": "50f5f9ae3b794789422f2f5fa00a93a66c89cf2d9ef7d028d1b8c8ff6cb6af50",
+  "source_svg_sha256": "cdaee0194d0e0c3e6d5f30a743719624407d416b388267e1478184916e04fa50",
+  "status": "completed",
+  "summary": {
+    "completed": 17,
+    "failed": 0,
+    "passed": 17,
+    "required": 17,
+    "satisfactory": true
+  },
+  "timeout_seconds": 60,
+  "variations_started": true
+}

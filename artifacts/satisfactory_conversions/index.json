@@ -1,5 +1,5 @@
 {
-  "case_count": 365,
+  "case_count": 368,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -2703,6 +2703,57 @@
       "svg": "svgs/AC0882_S.svg",
       "svg_sha256": "e060983297e11dfa41ddab56f00154523ecec82748e307606a2d12494b54b189",
       "variant": "AC0882_S"
+    },
+    {
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"Lux\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/short_label_lux_recheck_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0910_L.jpg",
+      "image_sha256": "e49e4cfd64b3a525f64293da155b650c54d516886ea1386b7c206e9e36a209a6",
+      "mean_delta2": 405.57598876953125,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9494476318359375,
+        "error_per_pixel": 0.0020790772204000063,
+        "object_mask_iou": 0.8414096916299559
+      },
+      "svg": "svgs/AC0910_L.svg",
+      "svg_sha256": "f1345a018594fbc0cb3e9d53871bffa8926575f0c5ec80b7bf1b30c084814ed0",
+      "variant": "AC0910_L"
+    },
+    {
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"Lux\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/short_label_lux_recheck_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0910_M.jpg",
+      "image_sha256": "653758a8c37378359c11f892a10afcc7bb073cf49c5f498cdc112941e18d04d7",
+      "mean_delta2": 636.8250122070312,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9171116352081299,
+        "error_per_pixel": 0.003264513711172786,
+        "object_mask_iou": 0.8417721518987342
+      },
+      "svg": "svgs/AC0910_M.svg",
+      "svg_sha256": "201a9148572f9a1b015ab1196997abb5aaf29407a2b2dff12fca7cabc4b70b61",
+      "variant": "AC0910_M"
+    },
+    {
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"Lux\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/short_label_lux_recheck_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0910_S.jpg",
+      "image_sha256": "37bd87d1cb2d281f2642007f7445b0c7599b6b0c504b9380614cc8f506a06762",
+      "mean_delta2": 656.8622436523438,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9015920162200928,
+        "error_per_pixel": 0.0033672292382537165,
+        "object_mask_iou": 0.8796296296296297
+      },
+      "svg": "svgs/AC0910_S.svg",
+      "svg_sha256": "bc87445433e7b2f8dfcddc77284c5b80683f9db0e686a9fe7579ac28e8679309",
+      "variant": "AC0910_S"
     },
     {
       "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"Q\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",

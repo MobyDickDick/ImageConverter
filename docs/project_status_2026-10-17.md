@@ -1,6 +1,8 @@
 # Projektstand und Sichtprüfung am 2026-10-17
 
-**Aktueller Nachtrag AC0411:** Neun neue regulär abgenommene Paare und der
+**Aktueller Nachtrag AC0910:** Drei Lux-Kreisscheiben bestehen beide regulären und die strengen Pixelgates. **368 von 1.785 Bildern (20,6 %)** sind ausdrücklich archiviert; 1.417 Bilder haben noch keine ausdrückliche Archivabnahme. Alle 365 bisherigen Datensätze und Bestresultate bleiben unverändert. Details: [AC0910-Abnahme](next_arbeitspaket_2026-10-17_ac0910_l.md). Die [Merge-Prüfung](merge_audit_2026-10-17.md) erklärt die wiederhergestellten vorherigen Angaben.
+
+**Vorheriger Nachtrag AC0411:** Neun neue regulär abgenommene Paare und der
 wiederhergestellte, zuvor bereits abgenommene SE0082-Archiveintrag ergeben
 **365 von 1.785 Bildern (20,4 %)**. Alle 355 tatsächlich im Basisindex
 vorhandenen Einträge bleiben unverändert. 1.420 Bilder haben noch keine

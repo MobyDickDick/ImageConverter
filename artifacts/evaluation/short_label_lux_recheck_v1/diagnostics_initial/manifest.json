@@ -1,0 +1,53 @@
+{
+  "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0910. Dokumentiert ist die gro\u00dfe Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+  "cases": [
+    {
+      "after_svg": "after/anonymous_label_00.svg",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0910. Dokumentiert ist die gro\u00dfe Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/anonymous_label_00.svg",
+      "case_id": "anonymous_label_00",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"Lux\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "height": 25,
+      "image": "../../../images_to_convert/AC0910_L.jpg",
+      "role": "target",
+      "source": "AC0910_L.jpg",
+      "source_sha256": "e49e4cfd64b3a525f64293da155b650c54d516886ea1386b7c206e9e36a209a6",
+      "width": 25
+    },
+    {
+      "after_svg": "after/anonymous_label_01.svg",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0910. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/anonymous_label_01.svg",
+      "case_id": "anonymous_label_01",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"Lux\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "height": 20,
+      "image": "../../../images_to_convert/AC0910_M.jpg",
+      "role": "size holdout",
+      "source": "AC0910_M.jpg",
+      "source_sha256": "653758a8c37378359c11f892a10afcc7bb073cf49c5f498cdc112941e18d04d7",
+      "width": 20
+    },
+    {
+      "after_svg": "after/anonymous_label_02.svg",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0910. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_svg": "before/anonymous_label_02.svg",
+      "case_id": "anonymous_label_02",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"Lux\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "height": 15,
+      "image": "../../../images_to_convert/AC0910_S.jpg",
+      "role": "size holdout",
+      "source": "AC0910_S.jpg",
+      "source_sha256": "37bd87d1cb2d281f2642007f7445b0c7599b6b0c504b9380614cc8f506a06762",
+      "width": 15
+    }
+  ],
+  "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"Lux\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+  "label": "Lux",
+  "provenance": {
+    "commit": "0f443a67f02bbf569b2d92dc3e812febd6ffa673",
+    "execution_mode": "semantic-only",
+    "measurement": "fresh guarded CLI",
+    "seed": 20261017,
+    "toolchain": "repository virtualenv"
+  }
+}

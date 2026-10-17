@@ -1,0 +1,42 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere anonymous_label_00.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_label_00.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0910. Dokumentiert ist die große Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert anonymous_label_00.jpg | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_LABEL_00 | Qualität: Optimierungsfehler/Pixel=0.054006, Mean-Delta²=8030.265625, RGB-RMSE/Kanal=51.737368, Raumscore=16808.676417, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere anonymous_label_01.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_label_01.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0910. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert anonymous_label_01.jpg | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_LABEL_01 | Qualität: Optimierungsfehler/Pixel=0.084381, Mean-Delta²=6735.517578, RGB-RMSE/Kanal=47.383252, Raumscore=16697.586294, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere anonymous_label_02.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_label_02.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0910. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] anonymous_label_02.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.385965, localized_error_fraction=0.710170).
+[INFO] Konvertiert anonymous_label_02.jpg | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_LABEL_02 | Qualität: Optimierungsfehler/Pixel=0.147654, Mean-Delta²=6094.279785, RGB-RMSE/Kanal=45.071350, Raumscore=15695.901471, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere anonymous_label_02.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite anonymous_label_02.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0910. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] anonymous_label_02.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.385965, localized_error_fraction=0.710170).
+[INFO] Konvertiert anonymous_label_02.jpg | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_LABEL_02 | Qualität: Optimierungsfehler/Pixel=0.147654, Mean-Delta²=6094.279785, RGB-RMSE/Kanal=45.071350, Raumscore=15695.901471, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.0s
+[INFO] Konvertiere anonymous_label_02.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite anonymous_label_02.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0910. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] anonymous_label_02.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.385965, localized_error_fraction=0.710170).
+[INFO] Konvertiert anonymous_label_02.jpg | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_LABEL_02 | Qualität: Optimierungsfehler/Pixel=0.147654, Mean-Delta²=6094.279785, RGB-RMSE/Kanal=45.071350, Raumscore=15695.901471, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\lux-cli-final\neutral\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\lux-cli-final\neutral\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\lux-cli-final\neutral\before
