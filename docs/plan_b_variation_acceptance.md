@@ -10,12 +10,28 @@ python -m tools.run_plan_b_variations
 ```
 
 Jeder Start zieht zufällig **ein SVG zusammen mit seiner Beschreibung** aus
-`artifacts/images_to_convert/samples` und der Beschreibungstabelle
+`artifacts/samples` und der Beschreibungstabelle
 `artifacts/images_to_convert/Finale_Wurzelformen_V3.xml`. Es gibt kein festes
 Testmotiv und keinen festen Standard-Seed. Alle zugeordneten Aufgaben sind
 wählbar, unabhängig von ihrer bisherigen Konvertierungsqualität.
 SVGs ohne zugeordnete Beschreibung werden im Auswahlprotokoll ausgewiesen.
 Bildspezifische Beschreibungen aus der Tabelle werden berücksichtigt.
+
+Der Workflow setzt beide Pfade ausdrücklich; der Standardpool entspricht der
+versionierten, gepflegten Vorlagensammlung. Der frühere Pfad
+`artifacts/images_to_convert/samples` enthält im Git-Checkout keine Vorlagen.
+Ein leerer oder falsch konfigurierter Pool bleibt ein Fehler. Auch wenn noch
+keine Konvertierung gestartet wurde, sichert `report.json` den Status
+`preparation_error`, Seed und konfigurierte Poolpfade. Die Fehlermeldung enthält
+zusätzlich die Zahl gefundener SVGs und fehlender Beschreibungen. Die
+Fehleraufgabe ordnet dies der Ausführung/Vorbereitung zu; es ist kein
+nachgewiesener Konvertierungsfehler und keine bestandene Qualitätsabnahme.
+
+Die Pfadkorrektur wurde mit einem aus ausschließlich versionierten Dateien
+nachgebauten Checkout geprüft. Der aktuelle Standardpool liefert 77 Paare;
+16 Vorlagen ohne Beschreibung bleiben ausgeschlossen. Alle 59 Tests der
+Plan-B-Ausführung und Fehlererfassung bestehen einschließlich fehlendem
+Verzeichnis, leerem Pool und fehlenden Beschreibungen.
 
 Zuerst wird das **unveränderte Ursprungsbild mit seiner Originalbeschreibung**
 als Fall `original` durch den echten CLI-Konverter verarbeitet. Diese Vorprüfung

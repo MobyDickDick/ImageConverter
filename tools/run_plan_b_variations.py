@@ -28,7 +28,7 @@ from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
 CASE_COUNT = 16
 MAX_ADDITIONAL_SVGS = 8
 REQUIRED_COUNT = CASE_COUNT + 1  # Original plus all variations.
-DEFAULT_SVG_DIR = ROOT / "artifacts/images_to_convert/samples"
+DEFAULT_SVG_DIR = ROOT / "artifacts/samples"
 DEFAULT_DESCRIPTIONS = ROOT / "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml"
 # Frozen before conversion. No historical scores or batch success labels are used.
 LIMITS = {"max_normalized_mse": 0.01, "max_foreground_mse": 0.04,
@@ -78,7 +78,9 @@ def select_task(svg_dir: Path, descriptions_path: Path, seed: int, *,
     """Select anew on every invocation from all SVGs with an associated description."""
     mapping = loadDescriptionMappingImpl(str(descriptions_path), get_base_name_from_file_fn=getBaseNameFromFileImpl)
     pairs, excluded = [], []
+    svg_count = 0
     for path in sorted(svg_dir.rglob("*.svg")):
+        svg_count += 1
         # A sidecar is useful for arbitrary new Plan-B tasks outside the catalog.
         sidecar = path.with_suffix(".txt")
         key = path.stem.removesuffix("_PlanB")
@@ -89,7 +91,12 @@ def select_task(svg_dir: Path, descriptions_path: Path, seed: int, *,
             continue
         pairs.append((path.resolve(), description))
     if not pairs:
-        raise ValueError("No SVG/description pairs found in the selected pool")
+        raise ValueError(
+            "No SVG/description pairs found in the selected pool: "
+            f"svg_dir={svg_dir.resolve()}; directory_exists={svg_dir.is_dir()}; "
+            f"svg_files={svg_count}; missing_descriptions={len(excluded)}; "
+            f"descriptions_path={descriptions_path.resolve()}"
+        )
     attempted = {path.resolve() for path in (excluded_svg_paths or set())}
     remaining = [index for index, pair in enumerate(pairs) if pair[0] not in attempted]
     if not remaining:
@@ -468,12 +475,13 @@ def run_pool_batteries(svg_dir: Path, descriptions_path: Path, output: Path, *, 
         raise ValueError("At most eight additional SVGs may be attempted")
     if not math.isfinite(timeout) or timeout <= 0 or iterations < 1:
         raise ValueError("Timeout and iterations must be positive")
-    task = select_task(svg_dir, descriptions_path, seed)
     output = output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     report = {"schema_version": "plan_b_search_v1", "seed": seed, "limits": LIMITS,
               "max_additional_svgs": max_additional_svgs, "status": "searching",
-              "attempts": [], "summary": summarize([])}
+              "attempts": [], "summary": summarize([]),
+              "input_pool": {"svg_dir": str(svg_dir.resolve()),
+                             "descriptions_path": str(descriptions_path.resolve())}}
     attempted: set[Path] = set()
     retry_random = random.Random(seed)
     attempt_seed = seed
@@ -484,6 +492,7 @@ def run_pool_batteries(svg_dir: Path, descriptions_path: Path, output: Path, *, 
 
     save_report()
     try:
+        task = select_task(svg_dir, descriptions_path, seed)
         for index in range(max_additional_svgs + 1):
             svg_path, description, selection = task
             attempted.add(svg_path.resolve())

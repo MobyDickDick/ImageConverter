@@ -34,6 +34,8 @@ def collect_tasks(root: Path, *, conclusion: str = 'unknown', run_url: str = '')
         overall = read_json(root/'report.json')
         reports = []
         if overall.get('schema_version') == 'plan_b_search_v1':
+            if not overall.get('attempts') and overall.get('status') in {'preparation_error', 'interrupted'}:
+                reports.append(('report.json', overall))
             for attempt in overall.get('attempts', []):
                 path = (root/attempt['report']).resolve()
                 if not path.is_relative_to(root.resolve()):
@@ -66,6 +68,7 @@ def collect_tasks(root: Path, *, conclusion: str = 'unknown', run_url: str = '')
                 original_satisfactory=report.get('original_satisfactory'), variations_started=report.get('variations_started'),
                 iterations=report.get('iterations'), timeout_seconds=report.get('timeout_seconds'),
                 limits=report.get('limits', {}), summary=report.get('summary', {}),
+                input_pool=report.get('input_pool'),
                 failures=failures, error=report.get('error'), report=report_path, run_url=run_url))
         if overall.get('status') in {'preparation_error', 'interrupted'} and not tasks:
             raise ValueError(overall.get('error') or overall['status'])

@@ -48,6 +48,52 @@ def test_sidecar_pairs_work_for_arbitrary_svg_names(tmp_path):
     assert selected == svg.resolve() and description == DESCRIPTION and evidence["pool_size"] == 1
 
 
+def test_default_pool_has_usable_pairs_in_a_clean_tracked_checkout(tmp_path):
+    """Untracked local samples must not conceal a broken CI default."""
+    relative = battery.DEFAULT_SVG_DIR.relative_to(battery.ROOT)
+    tracked = subprocess.check_output(
+        ['git', 'ls-files', '--', relative.as_posix()], cwd=battery.ROOT, text=True).splitlines()
+    pool = tmp_path / relative
+    pool.mkdir(parents=True)
+    for name in tracked:
+        source = battery.ROOT / name
+        target = tmp_path / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(source.read_bytes())
+    selected, description, evidence = battery.select_task(pool, battery.DEFAULT_DESCRIPTIONS, 42)
+    assert selected.is_file() and description
+    assert evidence['pool_size'] > 0
+    workflow = (battery.ROOT / '.github/workflows/plan-b-variations.yml').read_text(encoding='utf-8')
+    assert f'--svg-dir {relative.as_posix()}' in workflow
+
+
+@pytest.mark.parametrize('kind', ['missing_directory', 'empty_directory', 'missing_descriptions'])
+def test_unusable_pool_is_reported_before_any_conversion(tmp_path, monkeypatch, kind):
+    from tools.report_plan_b_failures import collect_tasks
+    pool = tmp_path / 'pool'
+    catalog = tmp_path / 'descriptions.xml'
+    description_catalog(catalog, [])
+    if kind != 'missing_directory':
+        pool.mkdir()
+    if kind == 'missing_descriptions':
+        (pool / 'unpaired.svg').write_text(SVG, encoding='utf-8')
+    monkeypatch.setattr(battery, 'run_battery', lambda *a, **kw: pytest.fail('conversion started'))
+    output = tmp_path / 'run'
+    with pytest.raises(ValueError, match='No SVG/description pairs'):
+        battery.run_pool_batteries(pool, catalog, output, seed=42)
+    report = json.loads((output / 'report.json').read_text(encoding='utf-8'))
+    assert report['status'] == 'preparation_error' and report['attempts'] == []
+    assert not report['summary']['satisfactory']
+    assert report['input_pool']['svg_dir'] == str(pool.resolve())
+    expected_count = 1 if kind == 'missing_descriptions' else 0
+    assert f'svg_files={expected_count}' in report['error']
+    assert f'missing_descriptions={expected_count}' in report['error']
+    tasks = collect_tasks(output, conclusion='failure')
+    assert len(tasks) == 1
+    assert tasks[0]['phase'] == 'execution' and tasks[0]['status'] == 'preparation_error'
+    assert tasks[0]['input_pool'] == report['input_pool']
+
+
 def test_default_start_selects_new_task_and_seed_every_time(monkeypatch, tmp_path):
     seeds = iter((11, 22))
     class Entropy:
