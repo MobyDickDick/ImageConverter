@@ -1,0 +1,1785 @@
+{
+  "schema_version": "reconstruction_bottleneck_probe_v1",
+  "commit": "8a81d2c94914e1095f1573b1fe6d16dc3dd6f040",
+  "cases": [
+    {
+      "case_id": "junction_control",
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschließenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "width": 156,
+      "height": 124,
+      "reference_svg": "junction_control.svg",
+      "reference_svg_sha256": "d9333ad6574f4f90adad5092ca8581c1f1a250d4b83a15bfae25af96da5543b6",
+      "input_sha256": "9e8bb9adf5535c5667043a5b4c6162d436bc0886588b5b5b82ee46f9b2d42ee0",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\artifacts\\\\evaluation\\\\reconstruction_bottlenecks_2026-10-17', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\junction_control\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\junction_control\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\junction_control\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\junction_control\\conversion",
+        "--start",
+        "junction_control",
+        "--end",
+        "junction_control",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 9.520976891508326e-05,
+        "foreground_mse": 0.0005442487308755517,
+        "edge_alignment": 0.8758423924446106,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "junction_control\\conversion\\converted_svgs\\junction_control.svg",
+      "output_sha256": "855c91cb9066e24044efc8509db874fa0c9576e6dc1f36cdaab01c11c4133f26",
+      "elapsed_seconds": 3.266,
+      "description_ir_kinds": {
+        "HorizontalGradient": 1,
+        "RectBorder": 1
+      },
+      "detected_kinds": {
+        "line": 6,
+        "rectangle": 1,
+        "ring": 5,
+        "text_glyph": 3
+      },
+      "detected_circles": [
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 65.0,
+            "y": 21.0,
+            "width": 91.0,
+            "height": 103.0
+          },
+          "center": {
+            "x": 122.0,
+            "y": 78.0
+          },
+          "geometry": {
+            "radius_px": 57.0,
+            "inner_radius_px": 33.06,
+            "stroke_width_px": 23.94,
+            "circularity": 1.0,
+            "ring": true,
+            "fill_ratio": 0.1875,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.41667,
+              0.16935,
+              0.58333,
+              0.83065
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              222,
+              231,
+              233
+            ],
+            "stroke_rgb": [
+              218,
+              227,
+              230
+            ],
+            "fill_hex": "#DEE7E9",
+            "stroke_hex": "#DAE3E6",
+            "fill_confidence": 0.6754,
+            "stroke_confidence": 0.673
+          },
+          "confidence": 0.8574,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 156.0,
+              "height": 124.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 65.0,
+            "y": 21.0,
+            "width": 70.0,
+            "height": 70.0
+          },
+          "center": {
+            "x": 100.0,
+            "y": 56.0
+          },
+          "geometry": {
+            "radius_px": 35.0,
+            "inner_radius_px": 20.3,
+            "stroke_width_px": 14.7,
+            "circularity": 1.0,
+            "ring": true,
+            "fill_ratio": 0.3294,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.41667,
+              0.16935,
+              0.44872,
+              0.56452
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              208,
+              220,
+              224
+            ],
+            "stroke_rgb": [
+              218,
+              228,
+              231
+            ],
+            "fill_hex": "#D0DCE0",
+            "stroke_hex": "#DAE4E7",
+            "fill_confidence": 0.6583,
+            "stroke_confidence": 0.6702
+          },
+          "confidence": 0.8561,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 156.0,
+              "height": 124.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 0.0,
+            "y": 21.0,
+            "width": 92.0,
+            "height": 92.0
+          },
+          "center": {
+            "x": 32.0,
+            "y": 67.0
+          },
+          "geometry": {
+            "radius_px": 46.0,
+            "inner_radius_px": 26.68,
+            "stroke_width_px": 19.32,
+            "circularity": 1.0,
+            "ring": true,
+            "fill_ratio": 0.1761,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.0,
+              0.16935,
+              0.58974,
+              0.74194
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              225,
+              233,
+              235
+            ],
+            "stroke_rgb": [
+              219,
+              229,
+              231
+            ],
+            "fill_hex": "#E1E9EB",
+            "stroke_hex": "#DBE5E7",
+            "fill_confidence": 0.6847,
+            "stroke_confidence": 0.6744
+          },
+          "confidence": 0.8541,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 156.0,
+              "height": 124.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 18.0,
+            "y": 32.0,
+            "width": 56.0,
+            "height": 76.0
+          },
+          "center": {
+            "x": 45.5,
+            "y": 69.14
+          },
+          "geometry": {
+            "radius_px": 46.213,
+            "inner_radius_px": 26.804,
+            "stroke_width_px": 19.409,
+            "circularity": 0.1476,
+            "ring": true,
+            "fill_ratio": 0.2422,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.11538,
+              0.25806,
+              0.35897,
+              0.6129
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              221,
+              230,
+              233
+            ],
+            "stroke_rgb": [
+              230,
+              237,
+              239
+            ],
+            "fill_hex": "#DDE6E9",
+            "stroke_hex": "#E6EDEF",
+            "fill_confidence": 0.6826,
+            "stroke_confidence": 0.7074
+          },
+          "confidence": 0.5018,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 156.0,
+              "height": 124.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "foreground_mask",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 75.0,
+            "y": 31.0,
+            "width": 63.0,
+            "height": 77.0
+          },
+          "center": {
+            "x": 105.402,
+            "y": 68.607
+          },
+          "geometry": {
+            "radius_px": 48.358,
+            "inner_radius_px": 28.048,
+            "stroke_width_px": 20.31,
+            "circularity": 0.151,
+            "ring": true,
+            "fill_ratio": 0.2487,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.48077,
+              0.25,
+              0.40385,
+              0.62097
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              219,
+              229,
+              231
+            ],
+            "stroke_rgb": [
+              233,
+              239,
+              240
+            ],
+            "fill_hex": "#DBE5E7",
+            "stroke_hex": "#E9EFF0",
+            "fill_confidence": 0.6745,
+            "stroke_confidence": 0.7278
+          },
+          "confidence": 0.4985,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 156.0,
+              "height": 124.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "foreground_mask",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        }
+      ],
+      "seeded_ir_kinds": {
+        "CircleBackground": 1,
+        "HorizontalGradient": 1,
+        "RectBorder": 1,
+        "OrthogonalPolyline": 1,
+        "TextGlyph": 1
+      },
+      "validation_status": [
+        "status=non_composite_raster_gradient_junction"
+      ],
+      "rendering_source": "synthetic analytic SVG; actual saved CLI output independently re-rendered"
+    },
+    {
+      "case_id": "junction_paraphrase",
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach unten anschließenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller zentraler Zone und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "width": 156,
+      "height": 124,
+      "reference_svg": "junction_paraphrase.svg",
+      "reference_svg_sha256": "d9333ad6574f4f90adad5092ca8581c1f1a250d4b83a15bfae25af96da5543b6",
+      "input_sha256": "9e8bb9adf5535c5667043a5b4c6162d436bc0886588b5b5b82ee46f9b2d42ee0",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\artifacts\\\\evaluation\\\\reconstruction_bottlenecks_2026-10-17', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\junction_paraphrase\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\junction_paraphrase\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\junction_paraphrase\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\junction_paraphrase\\conversion",
+        "--start",
+        "junction_paraphrase",
+        "--end",
+        "junction_paraphrase",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.02151617407798767,
+        "foreground_mse": 0.08912765234708786,
+        "edge_alignment": 0.2174406498670578,
+        "foreground_iou": 0.34718355108160204
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "junction_paraphrase\\conversion\\converted_svgs\\junction_paraphrase.svg",
+      "output_sha256": "bd36ba585dc98cb13f5e6049007a08c8fb75bd08608bc1a33d495ac854450240",
+      "elapsed_seconds": 1.938,
+      "description_ir_kinds": {
+        "HorizontalGradient": 1,
+        "RectBorder": 1
+      },
+      "detected_kinds": {
+        "line": 6,
+        "rectangle": 1,
+        "ring": 5,
+        "text_glyph": 3
+      },
+      "detected_circles": [
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 65.0,
+            "y": 21.0,
+            "width": 91.0,
+            "height": 103.0
+          },
+          "center": {
+            "x": 122.0,
+            "y": 78.0
+          },
+          "geometry": {
+            "radius_px": 57.0,
+            "inner_radius_px": 33.06,
+            "stroke_width_px": 23.94,
+            "circularity": 1.0,
+            "ring": true,
+            "fill_ratio": 0.1875,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.41667,
+              0.16935,
+              0.58333,
+              0.83065
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              222,
+              231,
+              233
+            ],
+            "stroke_rgb": [
+              218,
+              227,
+              230
+            ],
+            "fill_hex": "#DEE7E9",
+            "stroke_hex": "#DAE3E6",
+            "fill_confidence": 0.6754,
+            "stroke_confidence": 0.673
+          },
+          "confidence": 0.8574,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 156.0,
+              "height": 124.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 65.0,
+            "y": 21.0,
+            "width": 70.0,
+            "height": 70.0
+          },
+          "center": {
+            "x": 100.0,
+            "y": 56.0
+          },
+          "geometry": {
+            "radius_px": 35.0,
+            "inner_radius_px": 20.3,
+            "stroke_width_px": 14.7,
+            "circularity": 1.0,
+            "ring": true,
+            "fill_ratio": 0.3294,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.41667,
+              0.16935,
+              0.44872,
+              0.56452
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              208,
+              220,
+              224
+            ],
+            "stroke_rgb": [
+              218,
+              228,
+              231
+            ],
+            "fill_hex": "#D0DCE0",
+            "stroke_hex": "#DAE4E7",
+            "fill_confidence": 0.6583,
+            "stroke_confidence": 0.6702
+          },
+          "confidence": 0.8561,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 156.0,
+              "height": 124.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 0.0,
+            "y": 21.0,
+            "width": 92.0,
+            "height": 92.0
+          },
+          "center": {
+            "x": 32.0,
+            "y": 67.0
+          },
+          "geometry": {
+            "radius_px": 46.0,
+            "inner_radius_px": 26.68,
+            "stroke_width_px": 19.32,
+            "circularity": 1.0,
+            "ring": true,
+            "fill_ratio": 0.1761,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.0,
+              0.16935,
+              0.58974,
+              0.74194
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              225,
+              233,
+              235
+            ],
+            "stroke_rgb": [
+              219,
+              229,
+              231
+            ],
+            "fill_hex": "#E1E9EB",
+            "stroke_hex": "#DBE5E7",
+            "fill_confidence": 0.6847,
+            "stroke_confidence": 0.6744
+          },
+          "confidence": 0.8541,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 156.0,
+              "height": 124.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 18.0,
+            "y": 32.0,
+            "width": 56.0,
+            "height": 76.0
+          },
+          "center": {
+            "x": 45.5,
+            "y": 69.14
+          },
+          "geometry": {
+            "radius_px": 46.213,
+            "inner_radius_px": 26.804,
+            "stroke_width_px": 19.409,
+            "circularity": 0.1476,
+            "ring": true,
+            "fill_ratio": 0.2422,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.11538,
+              0.25806,
+              0.35897,
+              0.6129
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              221,
+              230,
+              233
+            ],
+            "stroke_rgb": [
+              230,
+              237,
+              239
+            ],
+            "fill_hex": "#DDE6E9",
+            "stroke_hex": "#E6EDEF",
+            "fill_confidence": 0.6826,
+            "stroke_confidence": 0.7074
+          },
+          "confidence": 0.5018,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 156.0,
+              "height": 124.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "foreground_mask",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 75.0,
+            "y": 31.0,
+            "width": 63.0,
+            "height": 77.0
+          },
+          "center": {
+            "x": 105.402,
+            "y": 68.607
+          },
+          "geometry": {
+            "radius_px": 48.358,
+            "inner_radius_px": 28.048,
+            "stroke_width_px": 20.31,
+            "circularity": 0.151,
+            "ring": true,
+            "fill_ratio": 0.2487,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.48077,
+              0.25,
+              0.40385,
+              0.62097
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              219,
+              229,
+              231
+            ],
+            "stroke_rgb": [
+              233,
+              239,
+              240
+            ],
+            "fill_hex": "#DBE5E7",
+            "stroke_hex": "#E9EFF0",
+            "fill_confidence": 0.6745,
+            "stroke_confidence": 0.7278
+          },
+          "confidence": 0.4985,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 156.0,
+              "height": 124.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "foreground_mask",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        }
+      ],
+      "seeded_ir_kinds": {
+        "CircleBackground": 1,
+        "HorizontalGradient": 1,
+        "RectBorder": 1,
+        "OrthogonalPolyline": 1,
+        "TextGlyph": 1
+      },
+      "validation_status": [
+        "status=non_composite_description_geometry_ir"
+      ],
+      "rendering_source": "synthetic analytic SVG; actual saved CLI output independently re-rendered"
+    },
+    {
+      "case_id": "one_circle",
+      "description": "Ein Kreis mit dunkler Kontur und weißem Inneren auf weißem Hintergrund. Keine Beschriftung.",
+      "width": 160,
+      "height": 104,
+      "reference_svg": "one_circle.svg",
+      "reference_svg_sha256": "afd37393816af41790bf5979eb89ef8d28929475f9518616152f999eebdc3641",
+      "input_sha256": "aaf4ca41ecd0cb82d76ef8fd88264ceba9af00b0d0e5b674f620611ce6bee6ae",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\artifacts\\\\evaluation\\\\reconstruction_bottlenecks_2026-10-17', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\one_circle\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\one_circle\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\one_circle\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\one_circle\\conversion",
+        "--start",
+        "one_circle",
+        "--end",
+        "one_circle",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.020699648186564445,
+        "foreground_mse": 0.34318244457244873,
+        "edge_alignment": 0.07604911923408508,
+        "foreground_iou": 0.026026026026026026
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "one_circle\\conversion\\converted_svgs\\one_circle.svg",
+      "output_sha256": "0bfdc2d7f03d9f9bd8d0e7adab1394b8d61bb2b86d3de8299174fae562093ae8",
+      "elapsed_seconds": 1.328,
+      "description_ir_kinds": {},
+      "detected_kinds": {
+        "horizontal_rule": 2,
+        "ring": 1,
+        "text_glyph": 17
+      },
+      "detected_circles": [
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 18.0,
+            "y": 26.0,
+            "width": 50.0,
+            "height": 50.0
+          },
+          "center": {
+            "x": 43.0,
+            "y": 51.0
+          },
+          "geometry": {
+            "radius_px": 25.0,
+            "inner_radius_px": 14.5,
+            "stroke_width_px": 10.5,
+            "circularity": 1.0,
+            "ring": true,
+            "fill_ratio": 0.3034,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.1125,
+              0.25,
+              0.3125,
+              0.48077
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              173,
+              173,
+              173
+            ],
+            "stroke_rgb": [
+              197,
+              197,
+              197
+            ],
+            "fill_hex": "#ADADAD",
+            "stroke_hex": "#C5C5C5",
+            "fill_confidence": 0.2593,
+            "stroke_confidence": 0.3221
+          },
+          "confidence": 0.8765,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 160.0,
+              "height": 104.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        }
+      ],
+      "seeded_ir_kinds": {
+        "CircleBackground": 1,
+        "HorizontalRule": 1,
+        "TextGlyph": 1
+      },
+      "validation_status": [
+        "status=non_composite_elementwise_symbol_fit"
+      ],
+      "rendering_source": "synthetic analytic SVG; actual saved CLI output independently re-rendered"
+    },
+    {
+      "case_id": "two_circles",
+      "description": "Zwei voneinander getrennte Kreise mit dunkler Kontur und weißem Inneren nebeneinander auf weißem Hintergrund. Keine Beschriftung.",
+      "width": 160,
+      "height": 104,
+      "reference_svg": "two_circles.svg",
+      "reference_svg_sha256": "88dd0058ad0f69a94dae4b4de1fa1f9876a53065439a5d8056c1ebbc8aa4cb45",
+      "input_sha256": "db0d0338fd5a89bfb0df1870af7c93bfde0bd0bd13014f4e53bada316a38ed5f",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\artifacts\\\\evaluation\\\\reconstruction_bottlenecks_2026-10-17', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\two_circles\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\two_circles\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\two_circles\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\two_circles\\conversion",
+        "--start",
+        "two_circles",
+        "--end",
+        "two_circles",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.04074914753437042,
+        "foreground_mse": 0.4108702838420868,
+        "edge_alignment": 0.10084119439125061,
+        "foreground_iou": 0.031591737545565005
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "two_circles\\conversion\\converted_svgs\\two_circles.svg",
+      "output_sha256": "0bfdc2d7f03d9f9bd8d0e7adab1394b8d61bb2b86d3de8299174fae562093ae8",
+      "elapsed_seconds": 1.375,
+      "description_ir_kinds": {},
+      "detected_kinds": {
+        "horizontal_rule": 4,
+        "ring": 3,
+        "text_glyph": 19
+      },
+      "detected_circles": [
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 18.0,
+            "y": 26.0,
+            "width": 50.0,
+            "height": 50.0
+          },
+          "center": {
+            "x": 43.0,
+            "y": 51.0
+          },
+          "geometry": {
+            "radius_px": 25.0,
+            "inner_radius_px": 14.5,
+            "stroke_width_px": 10.5,
+            "circularity": 1.0,
+            "ring": true,
+            "fill_ratio": 0.3034,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.1125,
+              0.25,
+              0.3125,
+              0.48077
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              173,
+              173,
+              173
+            ],
+            "stroke_rgb": [
+              197,
+              197,
+              197
+            ],
+            "fill_hex": "#ADADAD",
+            "stroke_hex": "#C5C5C5",
+            "fill_confidence": 0.2593,
+            "stroke_confidence": 0.3221
+          },
+          "confidence": 0.8765,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 160.0,
+              "height": 104.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 96.0,
+            "y": 31.0,
+            "width": 40.0,
+            "height": 40.0
+          },
+          "center": {
+            "x": 116.0,
+            "y": 51.0
+          },
+          "geometry": {
+            "radius_px": 20.0,
+            "inner_radius_px": 11.6,
+            "stroke_width_px": 8.4,
+            "circularity": 1.0,
+            "ring": true,
+            "fill_ratio": 0.0016,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.6,
+              0.29808,
+              0.25,
+              0.38462
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              255,
+              255,
+              255
+            ],
+            "stroke_rgb": [
+              167,
+              167,
+              167
+            ],
+            "fill_hex": "#FFFFFF",
+            "stroke_hex": "#A7A7A7",
+            "fill_confidence": 1.0,
+            "stroke_confidence": 0.2472
+          },
+          "confidence": 0.8639,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 160.0,
+              "height": 104.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 91.0,
+            "y": 27.0,
+            "width": 50.0,
+            "height": 50.0
+          },
+          "center": {
+            "x": 115.5,
+            "y": 51.5
+          },
+          "geometry": {
+            "radius_px": 25.269,
+            "inner_radius_px": 14.656,
+            "stroke_width_px": 10.613,
+            "circularity": 0.9102,
+            "ring": true,
+            "fill_ratio": 0.326,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.56875,
+              0.25962,
+              0.3125,
+              0.48077
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              167,
+              167,
+              167
+            ],
+            "stroke_rgb": [
+              197,
+              197,
+              197
+            ],
+            "fill_hex": "#A7A7A7",
+            "stroke_hex": "#C5C5C5",
+            "fill_confidence": 0.2543,
+            "stroke_confidence": 0.3221
+          },
+          "confidence": 0.8363,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 160.0,
+              "height": 104.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "foreground_mask",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        }
+      ],
+      "seeded_ir_kinds": {
+        "CircleBackground": 1,
+        "HorizontalRule": 1,
+        "TextGlyph": 1
+      },
+      "validation_status": [
+        "status=non_composite_elementwise_symbol_fit"
+      ],
+      "rendering_source": "synthetic analytic SVG; actual saved CLI output independently re-rendered"
+    },
+    {
+      "case_id": "one_rectangle",
+      "description": "Ein Rechteck mit dunkler Kontur und weißem Inneren auf weißem Hintergrund. Keine Beschriftung.",
+      "width": 160,
+      "height": 104,
+      "reference_svg": "one_rectangle.svg",
+      "reference_svg_sha256": "1bfed7c4f062f99b577d5f2c44a7b02c081e9e1cf6d65082f4920700e1ae6aae",
+      "input_sha256": "5ebac8c5d8cd67f62f9572ba10c4451be78ab1f34fab28d0eaa9ff6d9dd210d5",
+      "satisfactory": false,
+      "failures": [
+        "foreground_mse_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\artifacts\\\\evaluation\\\\reconstruction_bottlenecks_2026-10-17', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\one_rectangle\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\one_rectangle\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\one_rectangle\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\one_rectangle\\conversion",
+        "--start",
+        "one_rectangle",
+        "--end",
+        "one_rectangle",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.004591783974319696,
+        "foreground_mse": 0.07361976057291031,
+        "edge_alignment": 0.762398362159729,
+        "foreground_iou": 0.8084210526315789
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 1,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "one_rectangle\\conversion\\converted_svgs\\one_rectangle.svg",
+      "output_sha256": "e938d47af38d1d07b140f4967cc3ebf84cca15d8e4db0a248b029457dc2e37bb",
+      "elapsed_seconds": 1.734,
+      "description_ir_kinds": {
+        "RectBorder": 1
+      },
+      "detected_kinds": {
+        "line": 4,
+        "horizontal_rule": 2,
+        "text_glyph": 17,
+        "rectangle": 1,
+        "ring": 1,
+        "circle": 1
+      },
+      "detected_circles": [
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 4.0,
+            "y": 26.0,
+            "width": 60.0,
+            "height": 60.0
+          },
+          "center": {
+            "x": 34.0,
+            "y": 56.0
+          },
+          "geometry": {
+            "radius_px": 30.0,
+            "inner_radius_px": 17.4,
+            "stroke_width_px": 12.6,
+            "circularity": 1.0,
+            "ring": true,
+            "fill_ratio": 0.1574,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.025,
+              0.25,
+              0.375,
+              0.57692
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              211,
+              211,
+              211
+            ],
+            "stroke_rgb": [
+              214,
+              214,
+              214
+            ],
+            "fill_hex": "#D3D3D3",
+            "stroke_hex": "#D6D6D6",
+            "fill_confidence": 0.344,
+            "stroke_confidence": 0.3604
+          },
+          "confidence": 0.8206,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 160.0,
+              "height": 104.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "circle",
+          "bbox": {
+            "x": 16.0,
+            "y": 24.0,
+            "width": 48.0,
+            "height": 56.0
+          },
+          "center": {
+            "x": 39.5,
+            "y": 51.5
+          },
+          "geometry": {
+            "radius_px": 36.173,
+            "inner_radius_px": 0.0,
+            "stroke_width_px": 2.894,
+            "circularity": 0.7806,
+            "ring": false,
+            "fill_ratio": 0.1864,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.1,
+              0.23077,
+              0.3,
+              0.53846
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              217,
+              217,
+              217
+            ],
+            "stroke_rgb": [
+              255,
+              255,
+              255
+            ],
+            "fill_hex": "#D9D9D9",
+            "stroke_hex": "#FFFFFF",
+            "fill_confidence": 0.377,
+            "stroke_confidence": 1.0
+          },
+          "confidence": 0.7276,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 160.0,
+              "height": 104.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "foreground_mask",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        }
+      ],
+      "seeded_ir_kinds": {
+        "CircleBackground": 1,
+        "RectBorder": 1,
+        "HorizontalRule": 1,
+        "OrthogonalPolyline": 1,
+        "TextGlyph": 1
+      },
+      "validation_status": [
+        "status=non_composite_description_geometry_ir"
+      ],
+      "rendering_source": "synthetic analytic SVG; actual saved CLI output independently re-rendered"
+    },
+    {
+      "case_id": "two_rectangles",
+      "description": "Zwei voneinander getrennte Rechtecke mit dunkler Kontur und weißem Inneren nebeneinander auf weißem Hintergrund. Keine Beschriftung.",
+      "width": 160,
+      "height": 104,
+      "reference_svg": "two_rectangles.svg",
+      "reference_svg_sha256": "dfc451429f50c14b0488ca7be540e4efd4ad5e4016685513281cdcac464d019f",
+      "input_sha256": "9244624f67e5cc1e9acc2209fc680351891f73245b84f8dc9da9134545861278",
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\artifacts\\\\evaluation\\\\reconstruction_bottlenecks_2026-10-17', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\two_rectangles\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\two_rectangles\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\two_rectangles\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\bna3\\two_rectangles\\conversion",
+        "--start",
+        "two_rectangles",
+        "--end",
+        "two_rectangles",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.05727819353342056,
+        "foreground_mse": 0.5991876125335693,
+        "edge_alignment": 0.18020974099636078,
+        "foreground_iou": 0.03335431088735054
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 1,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "two_rectangles\\conversion\\converted_svgs\\two_rectangles.svg",
+      "output_sha256": "71fbd42c1986b33b69f18e7479a1623478dc5a74818ffa45163ec96927fcea4d",
+      "elapsed_seconds": 1.781,
+      "description_ir_kinds": {
+        "RectBorder": 1
+      },
+      "detected_kinds": {
+        "line": 8,
+        "horizontal_rule": 4,
+        "text_glyph": 19,
+        "rectangle": 2,
+        "ring": 1,
+        "circle": 3
+      },
+      "detected_circles": [
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "ring",
+          "bbox": {
+            "x": 15.0,
+            "y": 22.0,
+            "width": 60.0,
+            "height": 60.0
+          },
+          "center": {
+            "x": 45.0,
+            "y": 52.0
+          },
+          "geometry": {
+            "radius_px": 30.0,
+            "inner_radius_px": 17.4,
+            "stroke_width_px": 12.6,
+            "circularity": 1.0,
+            "ring": true,
+            "fill_ratio": 0.1843,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.09375,
+              0.21154,
+              0.375,
+              0.57692
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              203,
+              203,
+              203
+            ],
+            "stroke_rgb": [
+              210,
+              210,
+              210
+            ],
+            "fill_hex": "#CBCBCB",
+            "stroke_hex": "#D2D2D2",
+            "fill_confidence": 0.3047,
+            "stroke_confidence": 0.3385
+          },
+          "confidence": 0.8328,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 160.0,
+              "height": 104.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "circle",
+          "bbox": {
+            "x": 78.0,
+            "y": 14.0,
+            "width": 66.0,
+            "height": 66.0
+          },
+          "center": {
+            "x": 111.0,
+            "y": 47.0
+          },
+          "geometry": {
+            "radius_px": 33.0,
+            "inner_radius_px": 0.0,
+            "stroke_width_px": 2.64,
+            "circularity": 1.0,
+            "ring": false,
+            "fill_ratio": 0.1613,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.4875,
+              0.13462,
+              0.4125,
+              0.63462
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              222,
+              222,
+              222
+            ],
+            "stroke_rgb": [
+              206,
+              206,
+              206
+            ],
+            "fill_hex": "#DEDEDE",
+            "stroke_hex": "#CECECE",
+            "fill_confidence": 0.4138,
+            "stroke_confidence": 0.3177
+          },
+          "confidence": 0.8055,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 160.0,
+              "height": 104.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "circle",
+          "bbox": {
+            "x": 96.0,
+            "y": 24.0,
+            "width": 48.0,
+            "height": 56.0
+          },
+          "center": {
+            "x": 119.5,
+            "y": 51.5
+          },
+          "geometry": {
+            "radius_px": 36.173,
+            "inner_radius_px": 0.0,
+            "stroke_width_px": 2.894,
+            "circularity": 0.7806,
+            "ring": false,
+            "fill_ratio": 0.1864,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.6,
+              0.23077,
+              0.3,
+              0.53846
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              217,
+              217,
+              217
+            ],
+            "stroke_rgb": [
+              255,
+              255,
+              255
+            ],
+            "fill_hex": "#D9D9D9",
+            "stroke_hex": "#FFFFFF",
+            "fill_confidence": 0.377,
+            "stroke_confidence": 1.0
+          },
+          "confidence": 0.7276,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 160.0,
+              "height": 104.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "foreground_mask",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        },
+        {
+          "schema_version": "perception_primitive_candidate_v1",
+          "kind": "circle",
+          "bbox": {
+            "x": 16.0,
+            "y": 24.0,
+            "width": 48.0,
+            "height": 56.0
+          },
+          "center": {
+            "x": 39.5,
+            "y": 51.5
+          },
+          "geometry": {
+            "radius_px": 36.173,
+            "inner_radius_px": 0.0,
+            "stroke_width_px": 2.894,
+            "circularity": 0.7806,
+            "ring": false,
+            "fill_ratio": 0.1864,
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": [
+              0.1,
+              0.23077,
+              0.3,
+              0.53846
+            ]
+          },
+          "color": {
+            "fill_rgb": [
+              217,
+              217,
+              217
+            ],
+            "stroke_rgb": [
+              255,
+              255,
+              255
+            ],
+            "fill_hex": "#D9D9D9",
+            "stroke_hex": "#FFFFFF",
+            "fill_confidence": 0.377,
+            "stroke_confidence": 1.0
+          },
+          "confidence": 0.7276,
+          "roi": {
+            "type": "image",
+            "hint": "full_image",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 160.0,
+              "height": 104.0
+            }
+          },
+          "evidence": {
+            "detector": "detect_circle_rings",
+            "detection_source": "foreground_mask",
+            "threshold_model": "hough_plus_foreground_mask"
+          },
+          "source": "perception_contract"
+        }
+      ],
+      "seeded_ir_kinds": {
+        "CircleBackground": 1,
+        "RectBorder": 1,
+        "HorizontalRule": 1,
+        "OrthogonalPolyline": 1,
+        "TextGlyph": 1
+      },
+      "validation_status": [
+        "status=non_composite_description_geometry_ir"
+      ],
+      "rendering_source": "synthetic analytic SVG; actual saved CLI output independently re-rendered"
+    }
+  ],
+  "oracle_merge_probes": [
+    {
+      "kind": "circle",
+      "input_candidates": 2,
+      "output_kinds": {
+        "CircleBackground": 1
+      },
+      "note": "Isolation probe with perfect distinct candidates; not a detector-quality claim"
+    },
+    {
+      "kind": "rectangle",
+      "input_candidates": 2,
+      "output_kinds": {
+        "RectBorder": 1
+      },
+      "note": "Isolation probe with perfect distinct candidates; not a detector-quality claim"
+    }
+  ],
+  "production_fusion_calls": [],
+  "limits": "Six targeted diagnostics, not a representative catalog benchmark. No runtime edits.",
+  "source_sha256": {
+    "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "1eb4b24243278fd35f84492420bb651cc960171e294981f98774c0de9595e58d",
+    "src/iCCModules/imageCompositeConverterGradientJunction.py": "f405d011afe400ac668e45a33cfddd1328eaf97e188fc96638e276fc26523a71",
+    "src/iCCModules/imageCompositeConverterGeometryIr/runtime.py": "ba2b75a20fb146acfaefe169e4fdc99ed76c6e22aa9d54717c2574159014f4a3",
+    "tools/perception_detection_contract.py": "d60ea73eddee5bfbdd5cacdb8519f1bf78f9c841964a309516b2c08dfd5ffaf9",
+    "tools/build_holdout_ablation_matrix.py": "340a67703bc5f2d3548d4bf30f81d24971e0ec670a9c8d19cda8c50b52ecaece",
+    "tools/run_end_to_end_holdout_acceptance.py": "2974de65a33e30d5d85563218122a2a6cda7597c517b5be037ef7bdea8697cb0"
+  }
+}

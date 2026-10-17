@@ -2,6 +2,8 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [Warum die allgemeine Rekonstruktion stockt: echte Gegenproben, Szenenauswahl und Grenzen alter Testgerüste (2026-10-17)](reconstruction_bottleneck_audit_2026-10-17.md)
+
 - [Aktueller Projektstand: 343 abgenommene Paare, offene Nachweise und persönliche Prüfliste (2026-10-17)](project_status_2026-10-17.md)
 - [GE9033: T-Verzweigung nach unten, 14 reguläre Abnahmen und grauer IoU-Folgepunkt (2026-10-17)](next_arbeitspaket_2026-10-17_ge9033_6m.md)
 

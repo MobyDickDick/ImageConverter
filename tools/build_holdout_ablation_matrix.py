@@ -117,6 +117,9 @@ def build_ablation_matrix(protocol: dict[str, Any]) -> dict[str, Any]:
 
     return {
         "schema_version": "holdout_ablation_matrix_v1",
+        "evidence_kind": "contract_fixture",
+        "executes_converter": False,
+        "measures_raster_quality": False,
         "protocol_schema_version": protocol["schema_version"],
         "modes": list(MODES),
         "metric_weights": {"pixel_similarity": 0.35, "edge_alignment": 0.2, "structure_score": 0.2, "semantic_score": 0.25},
@@ -140,7 +143,9 @@ def main() -> int:
     parser.add_argument("--seed", default=DEFAULT_SEED)
     args = parser.parse_args()
     report = write_ablation_matrix(args.output, seed=args.seed)
-    print(json.dumps({"output": str(args.output), "acceptance": report["acceptance"]}, indent=2))
+    print(json.dumps({"output": str(args.output), "evidence_kind": report["evidence_kind"],
+        "executes_converter": False, "measures_raster_quality": False,
+        "acceptance": report["acceptance"]}, indent=2))
     return 0
 
 

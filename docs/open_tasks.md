@@ -6,9 +6,19 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-17)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `463` · Erledigt `429` · Offen `34`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `464` · Erledigt `428` · Offen `36`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
+
+## Übergreifende Rekonstruktion (Audit 2026-10-17)
+
+Die [Ursachenprüfung](reconstruction_bottleneck_audit_2026-10-17.md) weist
+sprachabhängigen Topologie-Dispatch, Verlust mehrerer erkannter Instanzen und
+fehlende gemeinsame Szenenauswahl nach. IDO-19 und IDO-21 sind wieder offen:
+ihre bisherigen Werkzeuge prüfen Berichtsverträge mit Ersatzwerten und keine
+echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gültig.
+
+- [ ] **GENERAL-SCENE-01:** Allgemeinen Szenenweg für ein bis drei getrennte Kreise/Rechtecke einschließlich gemischter Anordnungen aufbauen. Instanzen erhalten und doppelte Erkennungen deduplizieren, Beschreibung einschließlich Anzahl/Negationen mit Rasterkandidaten abgleichen, alternative Szenen bei gleichem Budget vergleichen und gemeinsam verfeinern. Echte eingefrorene CLI-Baseline und unabhängige Objektzahl-/Positionsprüfung vor der Umsetzung; unbekannte Anordnungen und Formulierungen, unveränderte Gates und Bestandsschutz für alle 343 Archivpaare. Umfang und Schritte: `docs/reconstruction_bottleneck_audit_2026-10-17.md`.
 
 ## Katalog-CI (2026-10-11)
 
@@ -688,9 +698,14 @@ Akzeptanzkriterien steht in `docs/image_description_only_tasks.md`.
 - [x] **IDO-P3 – Runtime und Konfiguration bereinigen:** ausschließlich globale
   Konfiguration zulassen, Runtime-ID-Vorkommen auf null senken und die
   temporäre Legacy-Baseline danach löschen (IDO-16 bis IDO-18). (2026-06-23 Run SH: `config/legacy_image_id_baseline.json` gelöscht; `tools/check_no_new_image_id_hardcoding.py` ist jetzt eine absolute Nullprüfung ohne Allowlist und meldet `0` Runtime-ID-Vorkommen.)
-- [x] **IDO-P4 – Zielqualität am Holdout beweisen:** Ablation,
+- [ ] **IDO-P4 – Zielqualität am Holdout beweisen:** Ablation,
   Qualitäts-/Komplexitätsgate und End-to-End-Abnahme mit umbenannten,
   zurückgehaltenen Bildern durchführen (IDO-19 bis IDO-21). (2026-06-24 Run SI: IDO-19 automatisiert die Ablationsmatrix für `image_only`, `description_only` und `image_and_description` inklusive Source-Contributions und Development-/Holdout-Summary.) (2026-06-24 Run SJ: IDO-20 definiert `quality_complexity_gate_v1` und lehnt eingebettete Rasterkopien, unnötig komplexe Pfade sowie semantisch falsche pixelnahe Ergebnisse maschinenlesbar ab.) (2026-06-24 Run SK: IDO-21 führt die End-to-End-Holdout-Abnahme als `end_to_end_holdout_acceptance_v1` aus und bestätigt Rename-Invarianz, Qualitätsgate, Unsicherheitskalibrierung sowie Leckagefreiheit.)
+
+**Audit 2026-10-17 zu IDO-P4:** Wieder offen. Die historischen SI-/SK-Abschlüsse
+belegen das Berichtsgerüst mit Ersatzwerten, keine echte Ablation oder
+End-to-End-Abnahme an zurückgehaltenen Bildern. IDO-19 und IDO-21 sind entsprechend
+korrigiert; das Qualitäts-/Komplexitätsgate aus IDO-20 bleibt bestehen.
 
 ## Testhygiene – nur echte Grün-Tests in der Kernliste (neu 2026-05-20)
 

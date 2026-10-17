@@ -324,7 +324,13 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
 
 ## Priorität 4 – Zielqualität nachweisen
 
-- [x] **IDO-19 – Ablationsmatrix automatisieren**
+- [ ] **IDO-19 – Ablationsmatrix automatisieren**
+  - **Audit 2026-10-17:** Wieder offen. Das vorhandene Tool prüft einen
+    Berichtsvertrag mit aus Beschreibungstermen errechneten Ersatzwerten;
+    es liest keine Testbilder und führt den Konverter nicht aus. Damit ist
+    die geforderte Ablation am echten Konverter noch nicht nachgewiesen.
+    Neue Berichte tragen ausdrücklich `evidence_kind=contract_fixture`,
+    `executes_converter=false` und `measures_raster_quality=false`.
   - Aufgabe: Für denselben Holdout-Satz die Modi „nur Bild“, „nur
     Beschreibung“ und „Bild + Beschreibung“ auswerten.
   - Akzeptanz: Der kombinierte Modus verbessert die definierte Gesamtmetrik und
@@ -348,7 +354,13 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     eingebettete Rasterkopien, unnötig komplexe Pfade sowie semantisch falsche
     pixelnahe Ergebnisse durch neutrale Regressionstests ab.
 
-- [x] **IDO-21 – End-to-End-Holdout-Abnahme durchführen**
+- [ ] **IDO-21 – End-to-End-Holdout-Abnahme durchführen**
+  - **Audit 2026-10-17:** Wieder offen. Die vorhandene Abnahme verwendet die
+    Ersatzwerte aus IDO-19 und baut ein Vorschau-SVG selbst zusammen.
+    Sie misst weder eine Produktionskonvertierung noch Rename-Invarianz
+    oder Unsicherheitskalibrierung an zurückgehaltenen Rasterbildern.
+    Der bestehende Berichtsvertrag bleibt nutzbar, ersetzt diesen Nachweis
+    jedoch nicht. Details: `reconstruction_bottleneck_audit_2026-10-17.md`.
   - Voraussetzung: IDO-01 bis IDO-20 sind abgeschlossen.
   - Aufgabe: Einen nie zur Implementierung verwendeten Satz technischer Symbole
     ausschließlich aus Bild und Beschreibung konvertieren.
