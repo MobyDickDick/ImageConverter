@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-10-16)
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-17)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `459` · Erledigt `427` · Offen `32`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `461` · Erledigt `428` · Offen `33`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -18,11 +18,23 @@ focused on the actual project scope.
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-16)
+### Aktueller Plan-B-Stand (2026-10-17)
+
+- [x] **AC0414 – Kreis mit gerichteten Sehnen und Innen-T:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung der Kreis-/T-Registrierung. Alle neun Farb-/Größen-/Richtungsvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression; die sechs farbigen JPGs zusätzlich die strengeren Pixelgrenzen. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-17_ac0414_2_l.md`.
+- [ ] **AC0414-PB-GREY:** die drei grauen JPGs `AC0414_{L,M,S}` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.748614`, `0.718310`, `0.821256 < 0.85`). Beide regulären Gates bestehen. Füllfarbe um RGB 230 und JPEG-Abweichungen an der unveränderten Schwelle von mehr als 25 Abstand zum Hintergrund untersuchen. Quellen, akzeptierte SVGs und Grenzen erhalten.
+
+**Neuester Abschluss:** `AC0414_2_L` und acht Farb-/Größen-/Richtungs-Holdouts
+auf `codex/ac0414-quality-2026-10-17`. Frische neutrale Zielmetrik
+`6908.101074 → 75.907501`; finale SVGs im vollständigen Katalogkontext
+bytegleich. 329 Paare in der Erfolgsübersicht; alle 320 bisherigen Indexeinträge
+unverändert. Nächste reguläre Rotation: `GE9033_6M`, `AC0424_2_M`,
+`AC0840_S`, `AC0840_M`, `SE0082`. Nur die neun regulär abgenommenen
+AC0414-Varianten sind zusätzlich ausgeschlossen; der strengere graue
+IoU-Folgepunkt bleibt offen. Bestehende offene Aufgaben bleiben erhalten.
 
 - [x] **GE9032 – T-Verzweigung mit Schaft nach rechts:** eigenständige Beschreibungen, robuste Messung der JPEG-Übergangszeile und zusätzliche Kantenverfeinerung im ursprünglichen Bildrahmen. Alle 14 Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-16_ge9032_6m.md`.
 
-**Neuester Abschluss:** `GE9032_6M` und 13 Farb-/Größen-Holdouts auf
+**Vorheriger Abschluss:** `GE9032_6M` und 13 Farb-/Größen-Holdouts auf
 `codex/ge9032-quality-2026-10-16`. Frische neutrale Zielmetrik
 `9501.930664 → 97.358749`; finale SVGs im vollständigen Katalogkontext
 bytegleich. 320 Paare in der Erfolgsübersicht; alle 306 bisherigen Indexeinträge

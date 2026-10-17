@@ -2,7 +2,18 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-16, nach GE0305-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-17, nach AC0414-Abnahme)
+
+AC0414 besteht nach eigenständigen Beschreibungen und allgemeiner
+Richtungsnormalisierung der Kreis-/Sehnen-/T-Registrierung mit allen neun
+Varianten beide regulären Gates ohne Pflichtmetrikregression
+(`AC0414_2_L: mean_delta2=75.907501`). Die sechs farbigen JPGs bestehen
+zusätzlich die strengeren Pixelgrenzen; die drei grauen IoU-Fälle bleiben
+separat offen. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17.
+Nur diese neun Varianten werden zusätzlich ausgeschlossen. 329 Paare
+stehen in der Erfolgsübersicht; alle 320 bisherigen Einträge bleiben unverändert.
+Details: `docs/next_arbeitspaket_2026-10-17_ac0414_2_l.md`.
+Reproduzierbarer Review: `artifacts/evaluation/oriented_circle_linework_recheck_v1/review_args.json`.
 
 GE0305 besteht nach eigenständiger Beschreibung und allgemeiner Registrierung
 senkrechter Flaggenstreifen beide regulären und strengeren Pixelgates ohne
@@ -201,11 +212,11 @@ reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
 Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
-1. `GE9032_6M` – `mean_delta2=9524.675781`, `normalized_mse=0.048826`.
-2. `AC0414_2_L` – `mean_delta2=9496.175781`, `normalized_mse=0.048680`.
-3. `GE9033_6M` – `mean_delta2=9439.891602`, `normalized_mse=0.048391`.
-4. `AC0424_2_M` – `mean_delta2=9402.916992`, `normalized_mse=0.048202`.
-5. `AC0840_S` – `mean_delta2=9352.613281`, `normalized_mse=0.047944`.
+1. `GE9033_6M` – `mean_delta2=9439.891602`, `normalized_mse=0.048391`.
+2. `AC0424_2_M` – `mean_delta2=9402.916992`, `normalized_mse=0.048202`.
+3. `AC0840_S` – `mean_delta2=9352.613281`, `normalized_mse=0.047944`.
+4. `AC0840_M` – `mean_delta2=9330.667969`, `normalized_mse=0.047831`.
+5. `SE0082` – `mean_delta2=9194.764648`, `normalized_mse=0.047135`.
 
 `SE0081` besteht nach eigenständiger Beschreibung beide regulären und strengeren
 Pixelgates ohne Pflichtmetrikregression. Die vorhandene Runtime bleibt unverändert.

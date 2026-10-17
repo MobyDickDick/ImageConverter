@@ -1,5 +1,5 @@
 {
-  "case_count": 320,
+  "case_count": 329,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -510,6 +510,159 @@
       "svg": "svgs/AC0413_S.svg",
       "svg_sha256": "56e8b1f639fc408d33c557c5f4572eefcb9b60e4f83cb44ab973934c4bbbee78",
       "variant": "AC0413_S"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach unten ann\u00e4hern. Dazwischen liegt ein T aus einem waagerechten oberen Querstrich und einem mittigen senkrechten Strich nach unten; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/oriented_circle_linework_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0414_1_L.jpg",
+      "image_sha256": "22714a3f6677927fd9f6659ff84a68093507f51d904e0689328ebd67a4b6ac54",
+      "mean_delta2": 155.96063232421875,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9512441754341125,
+        "error_per_pixel": 0.0007994906180915994,
+        "object_mask_iou": 0.9883527454242929
+      },
+      "svg": "svgs/AC0414_1_L.svg",
+      "svg_sha256": "b8eff111a2d390c4dddc0f136f9e525b3e8c184b36984fb8c5388faf4d9b0167",
+      "variant": "AC0414_1_L"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach unten ann\u00e4hern. Dazwischen liegt ein T aus einem waagerechten oberen Querstrich und einem mittigen senkrechten Strich nach unten; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/oriented_circle_linework_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0414_1_M.jpg",
+      "image_sha256": "cc916b1660307e6d797f2e68bebc761d3119ac64fc5b7c2348cba0e7e962f11e",
+      "mean_delta2": 257.7855529785156,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8790311813354492,
+        "error_per_pixel": 0.0013214689374779732,
+        "object_mask_iou": 0.9941520467836257
+      },
+      "svg": "svgs/AC0414_1_M.svg",
+      "svg_sha256": "391a3105284dd59ebc7de5372689f26afa8bf9d5a3d05ecfadce6baab51c7fab",
+      "variant": "AC0414_1_M"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach unten ann\u00e4hern. Dazwischen liegt ein T aus einem waagerechten oberen Querstrich und einem mittigen senkrechten Strich nach unten; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/oriented_circle_linework_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0414_1_S.jpg",
+      "image_sha256": "8e2f4adbeda350ec6051465c6cf97d1d9a0b088c835586c9f6bf60463eb9efb8",
+      "mean_delta2": 207.66000366210938,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9368157386779785,
+        "error_per_pixel": 0.0010645136673695214,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/AC0414_1_S.svg",
+      "svg_sha256": "072a14a61578a4832105c412916bf9fabf30d99fb6189014c1b6f9382eb11dae",
+      "variant": "AC0414_1_S"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach links ann\u00e4hern. Dazwischen liegt ein T aus einem senkrechten rechten Querstrich und einem mittigen waagerechten Strich nach links; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/oriented_circle_linework_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0414_2_L.jpg",
+      "image_sha256": "647e95c4b001a0a0fb2dac387a41fa33f5fa93dc42689992bd776919a478b8d7",
+      "mean_delta2": 75.90750122070312,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9721553921699524,
+        "error_per_pixel": 0.0003891195756539953,
+        "object_mask_iou": 0.9966329966329966
+      },
+      "svg": "svgs/AC0414_2_L.svg",
+      "svg_sha256": "74878fd6991d01de9219acae739d2c3d7057e2cf78a07fa2c81020fdca1dd386",
+      "variant": "AC0414_2_L"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach links ann\u00e4hern. Dazwischen liegt ein T aus einem senkrechten rechten Querstrich und einem mittigen waagerechten Strich nach links; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/oriented_circle_linework_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0414_2_M.jpg",
+      "image_sha256": "165793da69494fe87d0999de070b4dcfb52f6969f3de9141b006c96bcc140bec",
+      "mean_delta2": 112.02444458007812,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9044902324676514,
+        "error_per_pixel": 0.0005742634606181117,
+        "object_mask_iou": 0.9941520467836257
+      },
+      "svg": "svgs/AC0414_2_M.svg",
+      "svg_sha256": "47a3f2ed505579955dc16e134e3faea57935a30f05a9ce01b3be30e604350935",
+      "variant": "AC0414_2_M"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach links ann\u00e4hern. Dazwischen liegt ein T aus einem senkrechten rechten Querstrich und einem mittigen waagerechten Strich nach links; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/oriented_circle_linework_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0414_2_S.jpg",
+      "image_sha256": "13b1de5f9ee2c1e350d9926fe22d6b84ebfce7339604311ebde4ba816e60b70f",
+      "mean_delta2": 145.82249450683594,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9199923276901245,
+        "error_per_pixel": 0.0007475201563851644,
+        "object_mask_iou": 1.0
+      },
+      "svg": "svgs/AC0414_2_S.svg",
+      "svg_sha256": "28328374388f115253785b6ea105b78b864c5accb1c19efb3622f9342b98fb46",
+      "variant": "AC0414_2_S"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach links ann\u00e4hern. Dazwischen liegt ein T aus einem senkrechten rechten Querstrich und einem mittigen waagerechten Strich nach links; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/oriented_circle_linework_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0414_L.jpg",
+      "image_sha256": "e3cd5129f135c1db215bad0d72160e339ad5c4809c8ac7b7a0f358e6fb5eb034",
+      "mean_delta2": 98.58562469482422,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9686211347579956,
+        "error_per_pixel": 0.0005053729319227181,
+        "object_mask_iou": 0.9604863221884499
+      },
+      "svg": "svgs/AC0414_L.svg",
+      "svg_sha256": "73aeb775130456772c618730d99a9182ccc088465b914c15649d21f6b091c964",
+      "variant": "AC0414_L"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach links ann\u00e4hern. Dazwischen liegt ein T aus einem senkrechten rechten Querstrich und einem mittigen waagerechten Strich nach links; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/oriented_circle_linework_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0414_M.jpg",
+      "image_sha256": "0364778fbd84a96fa10bd8b89d238d7d1f3abe5136cde39e850df10a34ce4773",
+      "mean_delta2": 138.6999969482422,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8898422718048096,
+        "error_per_pixel": 0.0007110085707970892,
+        "object_mask_iou": 0.9695431472081218
+      },
+      "svg": "svgs/AC0414_M.svg",
+      "svg_sha256": "bb338f2b3a5d0d7ec98d7c5c15e5348c77c6090103f8fa211d22125df0153d10",
+      "variant": "AC0414_M"
+    },
+    {
+      "description": "Ein gef\u00fcllter Kreis mit Kontur enth\u00e4lt zwei schr\u00e4ge Linien, die bis an den Kreisrand reichen und sich nach links ann\u00e4hern. Dazwischen liegt ein T aus einem senkrechten rechten Querstrich und einem mittigen waagerechten Strich nach links; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisf\u00fcllung. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/oriented_circle_linework_recheck_v1/report.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0414_S.jpg",
+      "image_sha256": "55402625cb2fbc1e89945d62d307f6dcac035096415e34608a44de5a055229b1",
+      "mean_delta2": 122.22000122070312,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8532876968383789,
+        "error_per_pixel": 0.0006265282646197777,
+        "object_mask_iou": 0.8851351351351351
+      },
+      "svg": "svgs/AC0414_S.svg",
+      "svg_sha256": "6ee75778ed3dc948f07f392d8a0db58a322e721f0bfb5b3dd2075db26976c3e7",
+      "variant": "AC0414_S"
     },
     {
       "description": "Eine gef\u00fcllte Kreisscheibe mit d\u00fcnnem Rand auf hellem Hintergrund. Zwei schr\u00e4ge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen l\u00e4uft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichst\u00e4rken und Farben ergeben sich aus dem Bild.",
