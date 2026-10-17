@@ -1,6 +1,6 @@
 # Zufriedenstellende Konvertierungen
 
-365 geprÃ¼fte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
+356 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
 
 Die erweiterten Tests konvertieren alle EintrÃ¤ge aus `index.json` erneut aus Bild und Beschreibung.
 

@@ -75,11 +75,8 @@ def main():
         recheck = read(FOLDER/'archive_recheck.json')
         assert recheck['passed'] == recheck['measured'] == 355 and not recheck['failures']
         images = {c['variant']:archive/c['image'] for c in index['cases']}
-        previous_folder = ROOT/'artifacts/evaluation/conversion_search_2026-10-17'
-        previous = {c['variant']:previous_folder/c['output_svg']
-                    for c in read(previous_folder/'archive_recheck.json')['cases']}
-        previous.update({Path(c['source']).stem:previous_folder/c['after_svg']
-                         for c in read(previous_folder/'manifest.json')['cases']})
+        previous = {p.stem:p for p in (FOLDER/'archive_previous_cli_svgs').glob('*.svg')}
+        assert len(previous) == 355
         for case in recheck['cases']:
             assert sha(FOLDER/case['output_svg']) == case['output_sha256']
             assert sha(previous[case['variant']]) == case['previous_cli_svg_sha256']

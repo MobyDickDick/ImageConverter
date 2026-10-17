@@ -2,7 +2,6 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
-- [AC0411: aufwärts gerichtete Sehnen und Innen-T, neun reguläre Abnahmen (2026-10-17)](next_arbeitspaket_2026-10-17_ac0411_1_m.md)
 - [SE0082: Quadrat mit linkem Griff und horizontalem M (2026-10-17)](next_arbeitspaket_2026-10-17_se0082.md)
 
 - [Aus gescheiterten Plan-B-Aufgaben lernen: Nachbearbeitung, alternative Suche und gespeicherte Varianten](plan_b_learning_workflow.md)
