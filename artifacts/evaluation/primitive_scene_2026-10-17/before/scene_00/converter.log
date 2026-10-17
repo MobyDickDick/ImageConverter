@@ -1,0 +1,28 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere scene_00.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite scene_00.png ---
+Bildbeschreibung: ein Kreis. Dunkle Konturen, weißes Inneres. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] scene_00.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=1.000000, localized_error_fraction=0.973590).
+[INFO] Konvertiert scene_00.png | Parameter: mode=auto, label=M, variant_name=SCENE_00 | Qualität: Optimierungsfehler/Pixel=0.000072, Mean-Delta²=1182.400635, RGB-RMSE/Kanal=19.852797, Raumscore=5778.607531, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere scene_00.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite scene_00.png ---
+Bildbeschreibung: ein Kreis. Dunkle Konturen, weißes Inneres. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] scene_00.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=1.000000, localized_error_fraction=0.973590).
+[INFO] Konvertiert scene_00.png | Parameter: mode=auto, label=M, variant_name=SCENE_00 | Qualität: Optimierungsfehler/Pixel=0.000072, Mean-Delta²=1182.400635, RGB-RMSE/Kanal=19.852797, Raumscore=5778.607531, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere scene_00.png | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite scene_00.png ---
+Bildbeschreibung: ein Kreis. Dunkle Konturen, weißes Inneres. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] scene_00.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=1.000000, localized_error_fraction=0.973590).
+[INFO] Konvertiert scene_00.png | Parameter: mode=auto, label=M, variant_name=SCENE_00 | Qualität: Optimierungsfehler/Pixel=0.000072, Mean-Delta²=1182.400635, RGB-RMSE/Kanal=19.852797, Raumscore=5778.607531, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\primitive_scene_2026-10-17\before\scene_00\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\primitive_scene_2026-10-17\before\scene_00\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\primitive_scene_2026-10-17\before\scene_00\conversion

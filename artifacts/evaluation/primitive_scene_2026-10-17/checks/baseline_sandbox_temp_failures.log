@@ -1,0 +1,232 @@
+FFFFFFFFFFFFFFFFFFFFFFFFF                                                [100%]
+================================== FAILURES ===================================
+______________ test_inserts_import_after_multiline_import_block _______________
+tests\detailtests\test_automate_function_extraction_tool.py:126: in test_inserts_import_after_multiline_import_block
+    assert proc.returncode == 0, proc.stdout + proc.stderr
+E   AssertionError: Extraction rolled back because verification failed.
+E     $ C:\Users\marku\myCloud\imageConverter\.venv\Scripts\python.exe -m py_compile source.py helpers.py
+E     [WinError 5] Zugriff verweigert: '__pycache__\\source.cpython-310.pyc.3263126202160' -> '__pycache__\\source.cpython-310.pyc'
+E     
+E   assert 1 == 0
+E    +  where 1 = CompletedProcess(args=['C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe', 'C:\\Users\\marku\\myC...eigert: '__pycache__\\\\source.cpython-310.pyc.3263126202160' -> '__pycache__\\\\source.cpython-310.pyc'\n", stderr='').returncode
+______________ test_atomic_json_write_replaces_complete_document ______________
+tests\detailtests\test_batch_run_state_helpers.py:11: in test_atomic_json_write_replaces_complete_document
+    helpers.atomicWriteJsonImpl(target, {"new": [1, 2]})
+src\iCCModules\imageCompositeConverterBatchRunState.py:38: in atomicWriteJsonImpl
+    atomicWriteTextImpl(path, json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+src\iCCModules\imageCompositeConverterBatchRunState.py:32: in atomicWriteTextImpl
+    os.replace(temporary, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_atomic_json_write_replace0\\.state.json.14600.tmp' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_atomic_json_write_replace0\\state.json'
+__ test_convert_one_impl_non_composite_success_renames_svg_to_failed_prefix ___
+tests\detailtests\test_conversion_execution_helpers.py:303: in test_convert_one_impl_non_composite_success_renames_svg_to_failed_prefix
+    row, failed = conversion_execution_helpers.convertOneImpl(
+src\iCCModules\imageCompositeConverterConversionExecution.py:788: in convertOneImpl
+    svg_path = _normalizeSvgToFailedPrefixIfRasterArtifact(
+src\iCCModules\imageCompositeConverterConversionExecution.py:244: in _normalizeSvgToFailedPrefixIfRasterArtifact
+    os.rename(svg_path, failed_svg_path)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_convert_one_impl_non_comp0\\svg\\AC0704_S.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_convert_one_impl_non_comp0\\svg\\Failed_AC0704_S.svg'
+_ test_convert_one_impl_embedded_svg_uses_failed_prefix_independent_of_status _
+tests\detailtests\test_conversion_execution_helpers.py:348: in test_convert_one_impl_embedded_svg_uses_failed_prefix_independent_of_status
+    row, failed = conversion_execution_helpers.convertOneImpl(
+src\iCCModules\imageCompositeConverterConversionExecution.py:788: in convertOneImpl
+    svg_path = _normalizeSvgToFailedPrefixIfRasterArtifact(
+src\iCCModules\imageCompositeConverterConversionExecution.py:244: in _normalizeSvgToFailedPrefixIfRasterArtifact
+    os.rename(svg_path, failed_svg_path)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_convert_one_impl_embedded0\\svg\\AC0805_M.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_convert_one_impl_embedded0\\svg\\Failed_AC0805_M.svg'
+_ test_convert_one_impl_skipped_status_with_result_marks_embedded_svg_as_failed _
+tests\detailtests\test_conversion_execution_helpers.py:470: in test_convert_one_impl_skipped_status_with_result_marks_embedded_svg_as_failed
+    row, failed = conversion_execution_helpers.convertOneImpl(
+src\iCCModules\imageCompositeConverterConversionExecution.py:780: in convertOneImpl
+    svg_path = _normalizeSvgToFailedPrefixIfRasterArtifact(
+src\iCCModules\imageCompositeConverterConversionExecution.py:244: in _normalizeSvgToFailedPrefixIfRasterArtifact
+    os.rename(svg_path, failed_svg_path)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_convert_one_impl_skipped_0\\svg\\AC0503_1M_sia.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_convert_one_impl_skipped_0\\svg\\Failed_AC0503_1M_sia.svg'
+_______ test_convert_one_impl_trivial_placeholder_svg_is_marked_failed ________
+tests\detailtests\test_conversion_execution_helpers.py:515: in test_convert_one_impl_trivial_placeholder_svg_is_marked_failed
+    row, failed = conversion_execution_helpers.convertOneImpl(
+src\iCCModules\imageCompositeConverterConversionExecution.py:788: in convertOneImpl
+    svg_path = _normalizeSvgToFailedPrefixIfRasterArtifact(
+src\iCCModules\imageCompositeConverterConversionExecution.py:244: in _normalizeSvgToFailedPrefixIfRasterArtifact
+    os.rename(svg_path, failed_svg_path)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_convert_one_impl_trivial_0\\svg\\AC0535_1S_sia.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_convert_one_impl_trivial_0\\svg\\Failed_AC0535_1S_sia.svg'
+_ test_convert_one_impl_marks_image_only_svg_without_raster_extension_as_failed _
+tests\detailtests\test_conversion_execution_helpers.py:558: in test_convert_one_impl_marks_image_only_svg_without_raster_extension_as_failed
+    row, failed = conversion_execution_helpers.convertOneImpl(
+src\iCCModules\imageCompositeConverterConversionExecution.py:788: in convertOneImpl
+    svg_path = _normalizeSvgToFailedPrefixIfRasterArtifact(
+src\iCCModules\imageCompositeConverterConversionExecution.py:244: in _normalizeSvgToFailedPrefixIfRasterArtifact
+    os.rename(svg_path, failed_svg_path)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_convert_one_impl_marks_im0\\svg\\AC0414_2_M.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_convert_one_impl_marks_im0\\svg\\Failed_AC0414_2_M.svg'
+_____ test_record_early_quality_abort_preserves_probe_as_failed_artifact ______
+tests\detailtests\test_conversion_execution_helpers.py:987: in test_record_early_quality_abort_preserves_probe_as_failed_artifact
+    conversion_execution_helpers.recordEarlyQualityAbortImpl(
+src\iCCModules\imageCompositeConverterConversionExecution.py:1041: in recordEarlyQualityAbortImpl
+    os.replace(svg_path, failed_svg_path)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_record_early_quality_abor0\\svg\\AC0999.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_record_early_quality_abor0\\svg\\Failed_AC0999.svg'
+______ test_mark_poor_conversions_renames_svg_when_embedded_png_detected ______
+tests\detailtests\test_conversion_finalization_helpers.py:121: in test_mark_poor_conversions_renames_svg_when_embedded_png_detected
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+src\iCCModules\imageCompositeConverterConversionFinalization.py:274: in _markPoorConversionsWithFailedPrefix
+    svg_path.rename(failed_svg)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1234: in rename
+    self._accessor.rename(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_ren0\\svg\\AC0800_L.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_ren0\\svg\\Failed_AC0800_L.svg'
+_____ test_mark_poor_conversions_renames_svg_when_embedded_jpeg_detected ______
+tests\detailtests\test_conversion_finalization_helpers.py:142: in test_mark_poor_conversions_renames_svg_when_embedded_jpeg_detected
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+src\iCCModules\imageCompositeConverterConversionFinalization.py:274: in _markPoorConversionsWithFailedPrefix
+    svg_path.rename(failed_svg)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1234: in rename
+    self._accessor.rename(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_ren1\\svg\\AC0801_L.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_ren1\\svg\\Failed_AC0801_L.svg'
+_ test_mark_poor_conversions_detects_embedded_raster_even_without_result_row __
+tests\detailtests\test_conversion_finalization_helpers.py:163: in test_mark_poor_conversions_detects_embedded_raster_even_without_result_row
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+src\iCCModules\imageCompositeConverterConversionFinalization.py:274: in _markPoorConversionsWithFailedPrefix
+    svg_path.rename(failed_svg)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1234: in rename
+    self._accessor.rename(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_det0\\svg\\GE9024_7S.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_det0\\svg\\Failed_GE9024_7S.svg'
+_ test_mark_poor_conversions_detects_embedded_raster_for_lowercase_variant_names _
+tests\detailtests\test_conversion_finalization_helpers.py:184: in test_mark_poor_conversions_detects_embedded_raster_for_lowercase_variant_names
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+src\iCCModules\imageCompositeConverterConversionFinalization.py:274: in _markPoorConversionsWithFailedPrefix
+    svg_path.rename(failed_svg)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1234: in rename
+    self._accessor.rename(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_det1\\svg\\B_INFO.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_det1\\svg\\Failed_B_INFO.svg'
+_ test_mark_poor_conversions_marks_skipped_manual_review_embedded_svg_as_failed _
+tests\detailtests\test_conversion_finalization_helpers.py:209: in test_mark_poor_conversions_marks_skipped_manual_review_embedded_svg_as_failed
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+src\iCCModules\imageCompositeConverterConversionFinalization.py:274: in _markPoorConversionsWithFailedPrefix
+    svg_path.rename(failed_svg)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1234: in rename
+    self._accessor.rename(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_mar0\\svg\\AC0503_1M_SIA.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_mar0\\svg\\Failed_AC0503_1M_SIA.svg'
+________ test_mark_poor_conversions_renames_trivial_white_fallback_svg ________
+tests\detailtests\test_conversion_finalization_helpers.py:250: in test_mark_poor_conversions_renames_trivial_white_fallback_svg
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+src\iCCModules\imageCompositeConverterConversionFinalization.py:274: in _markPoorConversionsWithFailedPrefix
+    svg_path.rename(failed_svg)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1234: in rename
+    self._accessor.rename(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_ren2\\svg\\GE0111_S.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_ren2\\svg\\Failed_GE0111_S.svg'
+_ test_mark_poor_conversions_renames_image_only_svg_without_detectable_raster_href _
+tests\detailtests\test_conversion_finalization_helpers.py:271: in test_mark_poor_conversions_renames_image_only_svg_without_detectable_raster_href
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+src\iCCModules\imageCompositeConverterConversionFinalization.py:274: in _markPoorConversionsWithFailedPrefix
+    svg_path.rename(failed_svg)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1234: in rename
+    self._accessor.rename(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_ren3\\svg\\AC0414_2_M.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_ren3\\svg\\Failed_AC0414_2_M.svg'
+_____ test_mark_poor_conversions_renames_low_information_blank_frame_svg ______
+tests\detailtests\test_conversion_finalization_helpers.py:295: in test_mark_poor_conversions_renames_low_information_blank_frame_svg
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+src\iCCModules\imageCompositeConverterConversionFinalization.py:274: in _markPoorConversionsWithFailedPrefix
+    svg_path.rename(failed_svg)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1234: in rename
+    self._accessor.rename(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_ren4\\svg\\AC0731_L.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_ren4\\svg\\Failed_AC0731_L.svg'
+________ test_canonicalize_failed_attempt_svg_names_from_suffix_format ________
+tests\detailtests\test_conversion_finalization_helpers.py:319: in test_canonicalize_failed_attempt_svg_names_from_suffix_format
+    finalization_helpers._canonicalizeFailedAttemptSvgNames(svg_out_dir=str(svg_dir))
+src\iCCModules\imageCompositeConverterConversionFinalization.py:529: in _canonicalizeFailedAttemptSvgNames
+    _rename_to_normalized(candidate, normalized)
+src\iCCModules\imageCompositeConverterConversionFinalization.py:522: in _rename_to_normalized
+    candidate.rename(normalized)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1234: in rename
+    self._accessor.rename(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_canonicalize_failed_attem0\\svg\\AC0302_2_M_failed.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_canonicalize_failed_attem0\\svg\\Failed_AC0302_2_M.svg'
+______ test_canonicalize_failed_attempt_svg_names_from_lowercase_prefix _______
+tests\detailtests\test_conversion_finalization_helpers.py:330: in test_canonicalize_failed_attempt_svg_names_from_lowercase_prefix
+    finalization_helpers._canonicalizeFailedAttemptSvgNames(svg_out_dir=str(svg_dir))
+src\iCCModules\imageCompositeConverterConversionFinalization.py:536: in _canonicalizeFailedAttemptSvgNames
+    _rename_to_normalized(candidate, normalized)
+src\iCCModules\imageCompositeConverterConversionFinalization.py:517: in _rename_to_normalized
+    candidate.rename(temp)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1234: in rename
+    self._accessor.rename(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_canonicalize_failed_attem1\\svg\\failed_AC0302_2_M.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_canonicalize_failed_attem1\\svg\\.failed_AC0302_2_M.svg.renaming'
+___ test_archive_successful_conversion_artifacts_moves_image_and_copies_svg ___
+tests\detailtests\test_conversion_finalization_helpers.py:346: in test_archive_successful_conversion_artifacts_moves_image_and_copies_svg
+    finalization_helpers._archiveSuccessfulConversionArtifacts(
+src\iCCModules\imageCompositeConverterConversionFinalization.py:397: in _archiveSuccessfulConversionArtifacts
+    source_path.replace(target_path)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1247: in replace
+    self._accessor.replace(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_archive_successful_conver0\\input\\AC0831_L.jpg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_archive_successful_conver0\\input\\succesessfulConvertedImages\\AC0831_L.jpg'
+___ test_move_failed_conversion_artifacts_to_failed_dirs_moves_svg_and_png ____
+tests\detailtests\test_conversion_finalization_helpers.py:485: in test_move_failed_conversion_artifacts_to_failed_dirs_moves_svg_and_png
+    failed_variants = finalization_helpers._moveFailedConversionArtifactsToFailedDirs(
+src\iCCModules\imageCompositeConverterConversionFinalization.py:321: in _moveFailedConversionArtifactsToFailedDirs
+    failed_svg.replace(target_svg)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1247: in replace
+    self._accessor.replace(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_move_failed_conversion_ar0\\converted_images\\converted_svgs\\Failed_AC0800_L.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_move_failed_conversion_ar0\\converted_images\\converted_svg_failed\\AC0800_L.svg'
+_ test_run_conversion_finalization_quarantines_unsatisfactory_artifacts_before_archive _
+tests\detailtests\test_conversion_finalization_helpers.py:518: in test_run_conversion_finalization_quarantines_unsatisfactory_artifacts_before_archive
+    finalization_helpers.runConversionFinalizationImpl(
+src\iCCModules\imageCompositeConverterConversionFinalization.py:593: in runConversionFinalizationImpl
+    _markPoorConversionsWithFailedPrefix(
+src\iCCModules\imageCompositeConverterConversionFinalization.py:274: in _markPoorConversionsWithFailedPrefix
+    svg_path.rename(failed_svg)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1234: in rename
+    self._accessor.rename(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_run_conversion_finalizati0\\converted_images\\converted_svgs\\AC0801_L.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_run_conversion_finalizati0\\converted_images\\converted_svgs\\Failed_AC0801_L.svg'
+_ test_mark_poor_conversions_renames_svg_when_error_per_pixel_exceeds_fallback_gate _
+tests\detailtests\test_conversion_finalization_helpers.py:559: in test_mark_poor_conversions_renames_svg_when_error_per_pixel_exceeds_fallback_gate
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+src\iCCModules\imageCompositeConverterConversionFinalization.py:274: in _markPoorConversionsWithFailedPrefix
+    svg_path.rename(failed_svg)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1234: in rename
+    self._accessor.rename(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_ren5\\svg\\AC0999_L.svg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_mark_poor_conversions_ren5\\svg\\Failed_AC0999_L.svg'
+_________ test_extracts_only_non_delegating_functions_and_writes_logs _________
+tests\detailtests\test_extract_remaining_functions_batch_tool.py:57: in test_extracts_only_non_delegating_functions_and_writes_logs
+    assert proc.returncode == 0, proc.stdout + proc.stderr
+E   AssertionError: Processed 1/1 functions. Success=0, failed=1
+E     JSON log: C:\Users\marku\AppData\Local\Packages\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\AC\Temp\pytest-of-marku\pytest-0\test_extracts_only_non_delegat0\log.json
+E     Text log: C:\Users\marku\AppData\Local\Packages\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\AC\Temp\pytest-of-marku\pytest-0\test_extracts_only_non_delegat0\log.log
+E     
+E   assert 1 == 0
+E    +  where 1 = CompletedProcess(args=['C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe', 'C:\\Users\\marku\\myC...1-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_extracts_only_non_delegat0\\log.log\n', stderr='').returncode
+_____________ test_move_nonconvertable_sources_moves_failed_files _____________
+tests\detailtests\test_nonconvertable_move_helpers.py:13: in test_move_nonconvertable_sources_moves_failed_files
+    moved = remaining_helpers._moveNonconvertableSources(
+src\iCCModules\imageCompositeConverterRemaining.py:1740: in _moveNonconvertableSources
+    source_path.rename(target_path)
+..\..\..\..\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py:1234: in rename
+    self._accessor.rename(self, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_move_nonconvertable_sourc0\\AC0800_L.jpg' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{b3d998e3-8e01-4438-90d4-b103ed149a61}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_move_nonconvertable_sourc0\\nonconvertable\\AC0800_L.jpg'
+__ test_real_worker_preserves_parent_toolchain_with_incompatible_pythonpath ___
+tests\detailtests\test_plan_b_variations.py:463: in test_real_worker_preserves_parent_toolchain_with_incompatible_pythonpath
+    assert result['returncode'] == 0
+E   assert 1 == 0
+- generated xml file: C:\Users\marku\myCloud\imageConverter\.tmp\primitive-scene-baseline-failures.xml -
+=========================== short test summary info ===========================
+FAILED tests/detailtests/test_automate_function_extraction_tool.py::test_inserts_import_after_multiline_import_block
+FAILED tests/detailtests/test_batch_run_state_helpers.py::test_atomic_json_write_replaces_complete_document
+FAILED tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_non_composite_success_renames_svg_to_failed_prefix
+FAILED tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_embedded_svg_uses_failed_prefix_independent_of_status
+FAILED tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_skipped_status_with_result_marks_embedded_svg_as_failed
+FAILED tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_trivial_placeholder_svg_is_marked_failed
+FAILED tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_marks_image_only_svg_without_raster_extension_as_failed
+FAILED tests/detailtests/test_conversion_execution_helpers.py::test_record_early_quality_abort_preserves_probe_as_failed_artifact
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_svg_when_embedded_png_detected
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_svg_when_embedded_jpeg_detected
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_detects_embedded_raster_even_without_result_row
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_detects_embedded_raster_for_lowercase_variant_names
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_marks_skipped_manual_review_embedded_svg_as_failed
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_trivial_white_fallback_svg
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_image_only_svg_without_detectable_raster_href
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_low_information_blank_frame_svg
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_canonicalize_failed_attempt_svg_names_from_suffix_format
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_canonicalize_failed_attempt_svg_names_from_lowercase_prefix
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_archive_successful_conversion_artifacts_moves_image_and_copies_svg
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_move_failed_conversion_artifacts_to_failed_dirs_moves_svg_and_png
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_run_conversion_finalization_quarantines_unsatisfactory_artifacts_before_archive
+FAILED tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_svg_when_error_per_pixel_exceeds_fallback_gate
+FAILED tests/detailtests/test_extract_remaining_functions_batch_tool.py::test_extracts_only_non_delegating_functions_and_writes_logs
+FAILED tests/detailtests/test_nonconvertable_move_helpers.py::test_move_nonconvertable_sources_moves_failed_files
+FAILED tests/detailtests/test_plan_b_variations.py::test_real_worker_preserves_parent_toolchain_with_incompatible_pythonpath
+25 failed in 3.21s

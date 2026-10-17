@@ -1,0 +1,491 @@
+{
+  "evidence_kind": "paired_real_cli_compatibility_comparison",
+  "baseline_commit": "daaa5c0a0",
+  "case_count": 48,
+  "pixel_identical": 48,
+  "new_code_regressions": 0,
+  "old_code_historical_regressions": 22,
+  "cases": [
+    {
+      "variant": "AC0800_L",
+      "old_mean_delta2": 626.5999755859375,
+      "new_mean_delta2": 626.5999755859375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0800_L.svg",
+      "old_svg_sha256": "6ecb1052cf683bd0a0a7b543d5c7f9e4372a1a61914f102fefa6959192fac796",
+      "new_svg": "svgs\\AC0800_L.svg"
+    },
+    {
+      "variant": "AC0800_M",
+      "old_mean_delta2": 53.90999984741211,
+      "new_mean_delta2": 53.90999984741211,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0800_M.svg",
+      "old_svg_sha256": "d4811bde79b9d680f346e6c2fa55e875142c9e1c46967ff970aef7b9b1a4e0b4",
+      "new_svg": "svgs\\AC0800_M.svg"
+    },
+    {
+      "variant": "AC0800_S",
+      "old_mean_delta2": 899.7733154296875,
+      "new_mean_delta2": 899.7733154296875,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0800_S.svg",
+      "old_svg_sha256": "35ae22798524f15cb943097c5a7c7f893ff825798e45b4cc371c7f1ef0f53208",
+      "new_svg": "svgs\\AC0800_S.svg"
+    },
+    {
+      "variant": "AC0811_L",
+      "old_mean_delta2": 3245.50927734375,
+      "new_mean_delta2": 3245.50927734375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0811_L.svg",
+      "old_svg_sha256": "9ef13bf0b56e2e993e153324ec767bcaf89545f4909d7c28b7c9250756edd159",
+      "new_svg": "svgs\\AC0811_L.svg"
+    },
+    {
+      "variant": "AC0811_M",
+      "old_mean_delta2": 4173.2314453125,
+      "new_mean_delta2": 4173.2314453125,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0811_M.svg",
+      "old_svg_sha256": "cb29d1d67b3441d9b403c8309f19bc44697b920f01cf2d11383e3dde5812e2a5",
+      "new_svg": "svgs\\AC0811_M.svg"
+    },
+    {
+      "variant": "AC0811_S",
+      "old_mean_delta2": 2136.77587890625,
+      "new_mean_delta2": 2136.77587890625,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0811_S.svg",
+      "old_svg_sha256": "b4ef53419fd5eca954c77ff5ce19a3ee37d982fbf8a1d49a1405ab50d0e5882a",
+      "new_svg": "svgs\\AC0811_S.svg"
+    },
+    {
+      "variant": "AC0812_L",
+      "old_mean_delta2": 819.7333374023438,
+      "new_mean_delta2": 819.7333374023438,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0812_L.svg",
+      "old_svg_sha256": "30d31f317a6947321c0792734e0e13fe06963bbb5e81dfe3ef22cefa69148cd5",
+      "new_svg": "svgs\\AC0812_L.svg"
+    },
+    {
+      "variant": "AC0812_M",
+      "old_mean_delta2": 1687.8685302734375,
+      "new_mean_delta2": 1687.8685302734375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0812_M.svg",
+      "old_svg_sha256": "25a66d92b5570e1371dc43c6097cbeef7e8945a55f8d387eb2da17117d8dd8be",
+      "new_svg": "svgs\\AC0812_M.svg"
+    },
+    {
+      "variant": "AC0812_S",
+      "old_mean_delta2": 697.1680297851562,
+      "new_mean_delta2": 697.1680297851562,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0812_S.svg",
+      "old_svg_sha256": "1ba1c8ae6fa1f82f13157bc15d5b85bbcb05a14f96e4fcf56c6f5bac371fcd92",
+      "new_svg": "svgs\\AC0812_S.svg"
+    },
+    {
+      "variant": "AC0813_L",
+      "old_mean_delta2": 3212.789306640625,
+      "new_mean_delta2": 3212.789306640625,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0813_L.svg",
+      "old_svg_sha256": "bfbef5cccfc0c601d4233efaccc87bcd25dc5630284e8eccf073ce8763a92770",
+      "new_svg": "svgs\\AC0813_L.svg"
+    },
+    {
+      "variant": "AC0813_M",
+      "old_mean_delta2": 4166.29736328125,
+      "new_mean_delta2": 4166.29736328125,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0813_M.svg",
+      "old_svg_sha256": "e1335d44b3ff092540ef67975f9a528884ce7f89f00ae866d31621b715c91a3b",
+      "new_svg": "svgs\\AC0813_M.svg"
+    },
+    {
+      "variant": "AC0813_S",
+      "old_mean_delta2": 2770.927978515625,
+      "new_mean_delta2": 2770.927978515625,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0813_S.svg",
+      "old_svg_sha256": "bd8363e246fd400c91f711b778521aecc6ce4c4079c930bbdeb22ba96d7bf6f3",
+      "new_svg": "svgs\\AC0813_S.svg"
+    },
+    {
+      "variant": "AC0814_L",
+      "old_mean_delta2": 1422.6319580078125,
+      "new_mean_delta2": 1422.6319580078125,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0814_L.svg",
+      "old_svg_sha256": "77736365b1fef21659140e0eeb7aff08129e00891a1cdf78711308d2d5d522db",
+      "new_svg": "svgs\\AC0814_L.svg"
+    },
+    {
+      "variant": "AC0814_M",
+      "old_mean_delta2": 1679.704345703125,
+      "new_mean_delta2": 1679.704345703125,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0814_M.svg",
+      "old_svg_sha256": "4240888bc29d38b57e9220b8e7e9c8bc150fcd98426a036f4dcf085ef52fe0b0",
+      "new_svg": "svgs\\AC0814_M.svg"
+    },
+    {
+      "variant": "AC0814_S",
+      "old_mean_delta2": 748.719970703125,
+      "new_mean_delta2": 748.719970703125,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0814_S.svg",
+      "old_svg_sha256": "aa7b3993ddbfcb6f52edf175a9cdf18674db209cbbf78526fb96f131cbcf3259",
+      "new_svg": "svgs\\AC0814_S.svg"
+    },
+    {
+      "variant": "AC0820_L",
+      "old_mean_delta2": 7458.4033203125,
+      "new_mean_delta2": 7458.4033203125,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0820_L.svg",
+      "old_svg_sha256": "c87b81944b642be000d09c305289a8bd2eab92d6b237dcd9dd9b6084627e5c0e",
+      "new_svg": "svgs\\AC0820_L.svg"
+    },
+    {
+      "variant": "AC0820_M",
+      "old_mean_delta2": 6302.9248046875,
+      "new_mean_delta2": 6302.9248046875,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0820_M.svg",
+      "old_svg_sha256": "b4d63ac18c3bcd3dedc2dbb9b02c7b65c5bde642497dce241fac1e29b2f12041",
+      "new_svg": "svgs\\AC0820_M.svg"
+    },
+    {
+      "variant": "AC0831_L",
+      "old_mean_delta2": 6159.4375,
+      "new_mean_delta2": 6159.4375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0831_L.svg",
+      "old_svg_sha256": "9ef13bf0b56e2e993e153324ec767bcaf89545f4909d7c28b7c9250756edd159",
+      "new_svg": "svgs\\AC0831_L.svg"
+    },
+    {
+      "variant": "AC0831_M",
+      "old_mean_delta2": 7415.72998046875,
+      "new_mean_delta2": 7415.72998046875,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0831_M.svg",
+      "old_svg_sha256": "88a846e3262d0e0febefff6b60e70361f06f4e8cec4e6d8c053d8a713faaf66b",
+      "new_svg": "svgs\\AC0831_M.svg"
+    },
+    {
+      "variant": "AC0831_S",
+      "old_mean_delta2": 4794.7998046875,
+      "new_mean_delta2": 4794.7998046875,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0831_S.svg",
+      "old_svg_sha256": "ae049daf383804a2a6f304a6743a19fea471690d85f434449d4ca5f0daeb2b49",
+      "new_svg": "svgs\\AC0831_S.svg"
+    },
+    {
+      "variant": "AC0832_L",
+      "old_mean_delta2": 5384.21875,
+      "new_mean_delta2": 5384.21875,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0832_L.svg",
+      "old_svg_sha256": "d0c698efb1718539babb7993c2f7c688484662ebad8a99fe316fcdfe63ea1357",
+      "new_svg": "svgs\\AC0832_L.svg"
+    },
+    {
+      "variant": "AC0832_M",
+      "old_mean_delta2": 5257.18701171875,
+      "new_mean_delta2": 5257.18701171875,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0832_M.svg",
+      "old_svg_sha256": "16a8c7bca67f8fdf0b0e079edb0deefce7355df852c1c56099367d1a41b8746c",
+      "new_svg": "svgs\\AC0832_M.svg"
+    },
+    {
+      "variant": "AC0832_S",
+      "old_mean_delta2": 3143.152099609375,
+      "new_mean_delta2": 3143.152099609375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0832_S.svg",
+      "old_svg_sha256": "501bdde80a599fb7fad960050627fc78f72c874f29403cc8315f62d99750d671",
+      "new_svg": "svgs\\AC0832_S.svg"
+    },
+    {
+      "variant": "AC0834_L",
+      "old_mean_delta2": 3420.221435546875,
+      "new_mean_delta2": 3420.221435546875,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0834_L.svg",
+      "old_svg_sha256": "6c248c87355e432744f02176e92e873904e587bb94590af8a0fe74b9b48dee77",
+      "new_svg": "svgs\\AC0834_L.svg"
+    },
+    {
+      "variant": "AC0834_M",
+      "old_mean_delta2": 4654.8427734375,
+      "new_mean_delta2": 4654.8427734375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0834_M.svg",
+      "old_svg_sha256": "ee01ea6a626a0ce0d391ed3e7de4ef5024c61f9037e46d1bd67b196126294daa",
+      "new_svg": "svgs\\AC0834_M.svg"
+    },
+    {
+      "variant": "AC0834_S",
+      "old_mean_delta2": 3501.8798828125,
+      "new_mean_delta2": 3501.8798828125,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0834_S.svg",
+      "old_svg_sha256": "8f8e8b3a607f7e77a48fe97a2e4fc7e398cc7cb727e59c0c040b14b8545ed87c",
+      "new_svg": "svgs\\AC0834_S.svg"
+    },
+    {
+      "variant": "AC0835_L",
+      "old_mean_delta2": 7751.13134765625,
+      "new_mean_delta2": 7751.13134765625,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0835_L.svg",
+      "old_svg_sha256": "cf136e3ce42742e8835e02c9a25fb6fc156733916f5cfa85bdd7f8e8701d4579",
+      "new_svg": "svgs\\AC0835_L.svg"
+    },
+    {
+      "variant": "AC0835_M",
+      "old_mean_delta2": 7424.03271484375,
+      "new_mean_delta2": 7424.03271484375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0835_M.svg",
+      "old_svg_sha256": "a0e3cbf27c3e2aa86fbb6890bdc26b2aeabab893303abe9365295785208667f2",
+      "new_svg": "svgs\\AC0835_M.svg"
+    },
+    {
+      "variant": "AC0835_S",
+      "old_mean_delta2": 6373.21337890625,
+      "new_mean_delta2": 6373.21337890625,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0835_S.svg",
+      "old_svg_sha256": "11ca4605503df5e3c16e727c845980f270d3b42950a3076a27386550246ecf81",
+      "new_svg": "svgs\\AC0835_S.svg"
+    },
+    {
+      "variant": "AC0836_L",
+      "old_mean_delta2": 5204.05322265625,
+      "new_mean_delta2": 5204.05322265625,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0836_L.svg",
+      "old_svg_sha256": "88a2e04484bf3df28a26020cee78b1b10c3694cca8f536017f92f31575836745",
+      "new_svg": "svgs\\AC0836_L.svg"
+    },
+    {
+      "variant": "AC0836_M",
+      "old_mean_delta2": 6418.4228515625,
+      "new_mean_delta2": 6418.4228515625,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0836_M.svg",
+      "old_svg_sha256": "697d2a5227a7d447dbc4ea5092055203f4c8d249534513b5c1951637ed4be5cb",
+      "new_svg": "svgs\\AC0836_M.svg"
+    },
+    {
+      "variant": "AC0836_S",
+      "old_mean_delta2": 3566.327880859375,
+      "new_mean_delta2": 3566.327880859375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0836_S.svg",
+      "old_svg_sha256": "6b327000764199e2aa7b5782306e0128483f8edafc0312dcb3810450ed6e2bdb",
+      "new_svg": "svgs\\AC0836_S.svg"
+    },
+    {
+      "variant": "AC0837_L",
+      "old_mean_delta2": 5889.50146484375,
+      "new_mean_delta2": 5889.50146484375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0837_L.svg",
+      "old_svg_sha256": "b477d241c779876e5a40d572f90e45706b008a860d6bc80855469040ebed1236",
+      "new_svg": "svgs\\AC0837_L.svg"
+    },
+    {
+      "variant": "AC0837_M",
+      "old_mean_delta2": 5521.9287109375,
+      "new_mean_delta2": 5521.9287109375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0837_M.svg",
+      "old_svg_sha256": "b676f7d7850f4d59375dac6c2b56455cdde0f8d4a4c326aee776b31701b51359",
+      "new_svg": "svgs\\AC0837_M.svg"
+    },
+    {
+      "variant": "AC0837_S",
+      "old_mean_delta2": 3344.303955078125,
+      "new_mean_delta2": 3344.303955078125,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0837_S.svg",
+      "old_svg_sha256": "501bdde80a599fb7fad960050627fc78f72c874f29403cc8315f62d99750d671",
+      "new_svg": "svgs\\AC0837_S.svg"
+    },
+    {
+      "variant": "AC0838_M",
+      "old_mean_delta2": 8000.2373046875,
+      "new_mean_delta2": 8000.2373046875,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0838_M.svg",
+      "old_svg_sha256": "6e3f9e6d1188cffa9e195bb01ccd0c6199f875de252c35b9d365e7f310cfc4a0",
+      "new_svg": "svgs\\AC0838_M.svg"
+    },
+    {
+      "variant": "AC0839_L",
+      "old_mean_delta2": 4069.53076171875,
+      "new_mean_delta2": 4069.53076171875,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0839_L.svg",
+      "old_svg_sha256": "9771684f85bdd2ee546825eda085ec1a1ac8129fdb32181d97279e0154559ec3",
+      "new_svg": "svgs\\AC0839_L.svg"
+    },
+    {
+      "variant": "AC0839_M",
+      "old_mean_delta2": 5271.8271484375,
+      "new_mean_delta2": 5271.8271484375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0839_M.svg",
+      "old_svg_sha256": "29c4fb3eb91bc930f2d4350bc846b6713d2ebb0c46d335016d07f564dc99ce48",
+      "new_svg": "svgs\\AC0839_M.svg"
+    },
+    {
+      "variant": "AC0839_S",
+      "old_mean_delta2": 3389.488037109375,
+      "new_mean_delta2": 3389.488037109375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0839_S.svg",
+      "old_svg_sha256": "8469ac3a903a7dea744c96104d8fa3d52a132bd80fac6abfca8050a14353b14b",
+      "new_svg": "svgs\\AC0839_S.svg"
+    },
+    {
+      "variant": "AC0870_L",
+      "old_mean_delta2": 5565.47998046875,
+      "new_mean_delta2": 5565.47998046875,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0870_L.svg",
+      "old_svg_sha256": "991f6bc8a6a41341b71c458b71af543f38869f772a4eea10e30f92b83727ad41",
+      "new_svg": "svgs\\AC0870_L.svg"
+    },
+    {
+      "variant": "AC0870_M",
+      "old_mean_delta2": 5953.5224609375,
+      "new_mean_delta2": 5953.5224609375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0870_M.svg",
+      "old_svg_sha256": "197a243d1a383dc28a593f325ccdd3ef98d8695234a7b9596e785a23b37f5ae9",
+      "new_svg": "svgs\\AC0870_M.svg"
+    },
+    {
+      "variant": "AC0870_S",
+      "old_mean_delta2": 2290.320068359375,
+      "new_mean_delta2": 2290.320068359375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0870_S.svg",
+      "old_svg_sha256": "29c795de88d76eba3ac2b96ccb035c0d0738c6bf0e76270bd031e4a19d46e33a",
+      "new_svg": "svgs\\AC0870_S.svg"
+    },
+    {
+      "variant": "AC0881_L",
+      "old_mean_delta2": 3187.27734375,
+      "new_mean_delta2": 3187.27734375,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0881_L.svg",
+      "old_svg_sha256": "1e6a3abc0cf9a71327f7dde790dc2bef6b76f6e36b55c22e12909ccb3a1216c1",
+      "new_svg": "svgs\\AC0881_L.svg"
+    },
+    {
+      "variant": "AC0881_M",
+      "old_mean_delta2": 4613.94873046875,
+      "new_mean_delta2": 4613.94873046875,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0881_M.svg",
+      "old_svg_sha256": "62c612262b19cd45edffc1c8e9d64d3c84789aa63f798602edeedd5a7a56fd0f",
+      "new_svg": "svgs\\AC0881_M.svg"
+    },
+    {
+      "variant": "AC0881_S",
+      "old_mean_delta2": 1082.7440185546875,
+      "new_mean_delta2": 1082.7440185546875,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0881_S.svg",
+      "old_svg_sha256": "c39839542fbf404c0f261e85f4c8873e798c88f87052b3fbce5266a0e8dd5ffd",
+      "new_svg": "svgs\\AC0881_S.svg"
+    },
+    {
+      "variant": "AC0882_L",
+      "old_mean_delta2": 2166.453369140625,
+      "new_mean_delta2": 2166.453369140625,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0882_L.svg",
+      "old_svg_sha256": "09046245ddaeaef66cdf4abc73bc97a18243c0d3dad87ad688c34b75d87e256c",
+      "new_svg": "svgs\\AC0882_L.svg"
+    },
+    {
+      "variant": "AC0882_M",
+      "old_mean_delta2": 5050.28564453125,
+      "new_mean_delta2": 5050.28564453125,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0882_M.svg",
+      "old_svg_sha256": "a51984ecea8d483b190a7d8a6ba0753c9b54b3962286897309d514a8eca522cb",
+      "new_svg": "svgs\\AC0882_M.svg"
+    },
+    {
+      "variant": "AC0882_S",
+      "old_mean_delta2": 4982.7919921875,
+      "new_mean_delta2": 4982.7919921875,
+      "mean_delta2_change": 0.0,
+      "render_identical": true,
+      "old_svg": "compatibility_baseline_svgs\\AC0882_S.svg",
+      "old_svg_sha256": "e060983297e11dfa41ddab56f00154523ecec82748e307606a2d12494b54b189",
+      "new_svg": "svgs\\AC0882_S.svg"
+    }
+  ],
+  "conditions": "Same original 48-case cohort, descriptions, original SVG/report donor resources, Python/binary dependencies, deterministic order, seed zero, 64 iterations and disabled output jitter. Baseline code is an isolated git-archive source snapshot."
+}

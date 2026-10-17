@@ -1,0 +1,8 @@
+{
+  "development_before": "before",
+  "development_after": "after_guarded",
+  "holdout_before": "holdout_baseline",
+  "holdout_after": "holdout_guarded",
+  "rename_after": "rename_guarded",
+  "previous_diagnostics_after": "original_six_guarded"
+}

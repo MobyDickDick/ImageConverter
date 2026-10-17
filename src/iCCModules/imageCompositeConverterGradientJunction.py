@@ -12,8 +12,11 @@ from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _register
 def fit_gradient_junction(width, height, *, description, image, render_fn, error_fn):
     """Normalize the described stem direction, measuring every SVG in source space."""
     text = str(description or '').casefold()
+    bright_center = re.search(r'\b(?:hell(?:e|er|es|en|em)\s+(?:(?:zentral\w*|aufgehellt\w*)\s+)?(?:mitte|zone|zentrum)|aufgehellt\w*\s+(?:mitte|zentrum))\b', text)
+    if not bright_center or re.search(r'(?:kein\w*|ohne|nicht)\s+$', text[:bright_center.start()]):
+        return None
     if not all(token in text for token in ('t-verzweigung', 'waagerecht', 'senkrecht',
-                                           'verbunden', 'verlauf', 'heller mitte')):
+                                           'verbunden', 'verlauf')):
         return None
     if any(token in text for token in ('zusätzlich', 'kreis', 'dreieck', 'getrennt',
                                        'beschrift', 'zwei schäfte')):

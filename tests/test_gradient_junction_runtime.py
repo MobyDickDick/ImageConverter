@@ -25,6 +25,22 @@ def fit(image, description=DESCRIPTION, **kwargs):
         error_fn=kwargs.get('error_fn',lambda a,b:calculateErrorImpl(a,b,cv2_module=cv2,np_module=np)))
 
 
+@pytest.mark.parametrize('phrase',['heller zentraler Zone','hellem Zentrum','aufgehellter Mitte'])
+def test_bright_center_paraphrases_preserve_geometry(phrase):
+    image=render(INDEPENDENT,128,96)
+    description=DESCRIPTION.replace('heller Mitte',phrase)
+    baseline=fit(image,DESCRIPTION)
+    result=fit(image,description)
+    assert baseline is not None and result is not None
+    assert result['svg']==baseline['svg']
+
+
+@pytest.mark.parametrize('phrase',['keine helle zentrale Zone','ohne helle Mitte','nicht aufgehellter Mitte'])
+def test_negated_bright_center_is_not_accepted(phrase):
+    image=render(INDEPENDENT,128,96)
+    assert fit(image,DESCRIPTION.replace('heller Mitte',phrase)) is None
+
+
 @pytest.mark.parametrize('case',MANIFEST['cases'],ids=lambda c:c['source'])
 def test_anonymous_color_and_size_holdouts(case):
     image=cv2.imread(str(EVIDENCE/case['image']))

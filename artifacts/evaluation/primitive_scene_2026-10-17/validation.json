@@ -1,0 +1,47 @@
+{
+  "full_suite_groups": [
+    {
+      "group": 0,
+      "tests": 703,
+      "failed": 0,
+      "skipped": 30
+    },
+    {
+      "group": 1,
+      "tests": 930,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "group": 2,
+      "tests": 735,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "group": 3,
+      "tests": 897,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "full_suite_passed": 3235,
+  "full_suite_skipped": 30,
+  "full_suite_failed": 0,
+  "final_guard_tests_passed": 31,
+  "current_collected_unique_tests": 3270,
+  "uncovered_tests": 0,
+  "environment": "Windows with temporary directories under the workspace. 25 default-sandbox-temp failures also reproduce on unchanged baseline code and pass with workspace temp directories.",
+  "archive_pixel_gate_passed": 343,
+  "archive_saved_bests_preserved": 321,
+  "archive_historical_regressions": 22,
+  "compatibility_old_new_pixel_identical": 48,
+  "final_guard_changes": "Full-suite groups were dispatched before the last guard-only edits; the affected module was then rechecked with 31 targeted tests, covering all five newly added negative cases.",
+  "unique_passed_tests": 3240,
+  "unique_skipped_tests": 30,
+  "compileall_passed": true,
+  "cli_help_passed": true,
+  "image_id_hardcoding_ratchet_passed": true,
+  "diff_check_passed": true,
+  "evidence_rerender_verified": true
+}

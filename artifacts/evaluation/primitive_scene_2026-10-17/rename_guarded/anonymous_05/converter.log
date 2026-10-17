@@ -1,0 +1,25 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere anonymous_05.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_05.png ---
+Bildbeschreibung: zwei Kreise und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt untereinander.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] anonymous_05.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.194986, localized_error_fraction=0.990866).
+[INFO] Konvertiert anonymous_05.png | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_05 | Qualität: Optimierungsfehler/Pixel=0.000008, Mean-Delta²=4.761045, RGB-RMSE/Kanal=1.259768, Raumscore=20.465563, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.1s
+[INFO] Konvertiere anonymous_05.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite anonymous_05.png ---
+Bildbeschreibung: zwei Kreise und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt untereinander.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] anonymous_05.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.194986, localized_error_fraction=0.990866).
+[INFO] Konvertiert anonymous_05.png | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_05 | Qualität: Optimierungsfehler/Pixel=0.000008, Mean-Delta²=4.761045, RGB-RMSE/Kanal=1.259768, Raumscore=20.465563, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.2s
+[INFO] Konvertiere anonymous_05.png | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite anonymous_05.png ---
+Bildbeschreibung: zwei Kreise und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt untereinander.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] anonymous_05.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.194986, localized_error_fraction=0.990866).
+[INFO] Konvertiert anonymous_05.png | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_05 | Qualität: Optimierungsfehler/Pixel=0.000008, Mean-Delta²=4.761045, RGB-RMSE/Kanal=1.259768, Raumscore=20.465563, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.2s
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\primitive_scene_2026-10-17\rename_guarded\anonymous_05\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\primitive_scene_2026-10-17\rename_guarded\anonymous_05\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\primitive_scene_2026-10-17\rename_guarded\anonymous_05\conversion

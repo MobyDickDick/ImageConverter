@@ -1,0 +1,2069 @@
+{
+  "evidence_kind": "description_gate_audit_not_conversion",
+  "case_count": 343,
+  "baseline_commit": "daaa5c0a0",
+  "archive_index_sha256": "3c48b92da8681491d147c3dffb9ab1606178aec12e63496e1d3efd4f34d01ab5",
+  "old_source_sha256": "f405d011afe400ac668e45a33cfddd1328eaf97e188fc96638e276fc26523a71",
+  "new_source_sha256": "32916b58f4b4bbb27c1b259f9f8724b7ab76be2eeae4b0b4dcf293aab95649b9",
+  "changed_routes": 0,
+  "cases": [
+    {
+      "variant": "AC0252",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0252_1",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0252_2",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_1L_sia",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_1M_sia",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_1S_sia",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_1_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_1_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_1_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_2L_sia",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_2M_sia",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_2S_sia",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_2_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_2_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_2_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_L_sia",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_M_sia",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0404_S_sia",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0413_1_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0413_1_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0413_1_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0413_2_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0413_2_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0413_2_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0413_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0413_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0413_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0414_1_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0414_1_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0414_1_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0414_2_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0414_2_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0414_2_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0414_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0414_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0414_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0421_1_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0421_1_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0421_1_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0421_2_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0421_2_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0421_2_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0421_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0421_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0421_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0711_1_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0711_1_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0711_1_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0711_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0711_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0711_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0712_1_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0712_1_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0712_1_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0712_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0712_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0712_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0713_1_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0713_1_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0713_1_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0713_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0713_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0713_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0721_1_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0721_1_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0721_1_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0721_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0721_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0721_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0724_1_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0724_1_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0724_1_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0731_1_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0731_1_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0731_1_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0731_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0731_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0731_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0734_1_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0734_1_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0734_1_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0734_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0734_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0734_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0800_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0800_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0800_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0811_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0811_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0811_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0812_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0812_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0812_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0813_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0813_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0813_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0814_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0814_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0814_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0820_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0820_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0831_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0831_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0831_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0832_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0832_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0832_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0834_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0834_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0834_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0835_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0835_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0835_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0836_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0836_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0836_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0837_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0837_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0837_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0838_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0839_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0839_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0839_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0850_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0850_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0850_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0870_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0870_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0870_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0881_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0881_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0881_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0882_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0882_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0882_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0920_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0920_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC0920_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC1000_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC1000_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "AC1000_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "DLG0010",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "DLG0010_1",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0001_1_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0001_1_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0001_1_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0001_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0001_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0001_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0017",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0022",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0039_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0039_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0039_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0280",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0281",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0282",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0283",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0284",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0285",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0300",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0305",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0306",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE0346",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE1003_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE1003_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE1003_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE1411_L",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE1411_M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE1411_S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_1M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_1S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_2M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_2S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_3M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_3S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_4M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_4S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_5M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_5S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_6M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_6S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_7M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9011_7S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_1M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_1S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_2M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_2S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_3M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_3S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_4M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_4S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_5M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_5S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_6M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_6S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_7M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9012_7S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_1M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_1S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_2M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_2S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_3M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_3S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_4M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_4S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_5M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_5S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_6M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_6S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_7M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9013_7S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_1M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_1S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_2M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_2S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_3M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_3S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_4M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_4S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_5M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_5S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_6M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_6S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_7M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9014_7S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_1M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_1S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_2M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_2S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_3M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_3S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_4M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_4S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_5M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_5S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_6M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_6S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_7M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9021_7S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_1M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_1S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_2M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_2S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_3M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_3S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_4M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_4S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_5M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_5S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_6M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_6S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_7M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9022_7S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_1M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_1S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_2M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_2S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_3M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_3S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_4M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_4S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_5M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_5S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_6M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_6S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_7M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9023_7S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_1M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_1S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_2M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_2S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_3M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_3S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_4M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_4S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_5M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_5S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_6M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_6S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_7M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9024_7S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "GE9031_1M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9031_1S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9031_2M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9031_2S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9031_3M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9031_3S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9031_4M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9031_4S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9031_5M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9031_5S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9031_6M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9031_6S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9031_7M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9031_7S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_1M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_1S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_2M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_2S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_3M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_3S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_4M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_4S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_5M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_5S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_6M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_6S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_7M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9032_7S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_1M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_1S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_2M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_2S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_3M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_3S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_4M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_4S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_5M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_5S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_6M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_6S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_7M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9033_7S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_1M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_1S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_2M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_2S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_3M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_3S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_4M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_4S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_5M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_5S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_6M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_6S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_7M",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "GE9034_7S",
+      "new_scene_eligible": false,
+      "old_junction_eligible": true,
+      "new_junction_eligible": true
+    },
+    {
+      "variant": "SE0081",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    },
+    {
+      "variant": "b_heating1",
+      "new_scene_eligible": false,
+      "old_junction_eligible": false,
+      "new_junction_eligible": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere one_rectangle.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite one_rectangle.png ---
+Bildbeschreibung: Ein Rechteck mit dunkler Kontur und weißem Inneren auf weißem Hintergrund. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[INFO] Konvertiert one_rectangle.png | Parameter: mode=auto, label=M, variant_name=ONE_RECTANGLE | Qualität: Optimierungsfehler/Pixel=0.000000, Mean-Delta²=0.000000, RGB-RMSE/Kanal=0.000000, Raumscore=0.000000, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere one_rectangle.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite one_rectangle.png ---
+Bildbeschreibung: Ein Rechteck mit dunkler Kontur und weißem Inneren auf weißem Hintergrund. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[INFO] Konvertiert one_rectangle.png | Parameter: mode=auto, label=M, variant_name=ONE_RECTANGLE | Qualität: Optimierungsfehler/Pixel=0.000000, Mean-Delta²=0.000000, RGB-RMSE/Kanal=0.000000, Raumscore=0.000000, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\primitive_scene_2026-10-17\original_six_guarded\one_rectangle\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\primitive_scene_2026-10-17\original_six_guarded\one_rectangle\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\primitive_scene_2026-10-17\original_six_guarded\one_rectangle\conversion

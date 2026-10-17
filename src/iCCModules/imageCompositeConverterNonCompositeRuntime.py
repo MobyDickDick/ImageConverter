@@ -41,6 +41,7 @@ from src.iCCModules.imageCompositeConverterWarningDisk import fit_warning_disk
 from src.iCCModules.imageCompositeConverterArcShaft import fit_arc_shaft
 from src.iCCModules.imageCompositeConverterGradientJunction import fit_gradient_junction
 from src.iCCModules.imageCompositeConverterCircleLinework import fit_circle_linework
+from src.iCCModules.imageCompositeConverterPrimitiveScene import fit_primitive_scene
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1457,6 +1458,7 @@ def runNonCompositeIterationImpl(
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in (
+            (fit_primitive_scene, "non_composite_raster_primitive_scene"),
             (fit_circle_linework, "non_composite_raster_circle_linework"),
             (fit_arc_shaft, "non_composite_raster_arc_shaft"),
             (fit_gradient_junction, "non_composite_raster_gradient_junction"),
@@ -1485,6 +1487,11 @@ def runNonCompositeIterationImpl(
                 render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
             )
             if fitted is not None:
+                if status == "non_composite_raster_primitive_scene":
+                    params['primitive_scene_registration'] = {
+                        key: fitted[key] for key in ('source', 'initial_error', 'error',
+                            'evaluations', 'object_kinds', 'object_quality')
+                    }
                 if status in {"non_composite_raster_circle_linework", "non_composite_raster_alarm_bell", "non_composite_raster_zigzag_panel", "non_composite_raster_checkbox_checkmark", "non_composite_raster_chevron_panel", "non_composite_raster_three_way_valve"}:
                     params[fitted['source']] = {
                         'initial_error': fitted['initial_error'], 'final_error': fitted['error'],

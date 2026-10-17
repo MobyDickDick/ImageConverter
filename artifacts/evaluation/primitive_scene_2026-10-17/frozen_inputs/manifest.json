@@ -1,0 +1,350 @@
+[
+  {
+    "case_id": "scene_00",
+    "width": 240,
+    "height": 170,
+    "description": "ein Kreis. Dunkle Konturen, weißes Inneres. Keine Beschriftung.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          98.40461497781514,
+          61.47555354320852,
+          45.152496959151485,
+          45.152496959151485
+        ]
+      }
+    ],
+    "reference_svg": "references\\scene_00.svg",
+    "input_sha256": "633540da29711e42b51b4941320cafbd41052e330079fb8d7690e0613b837b3a",
+    "reference_svg_sha256": "65e81b9e04d6d98f3744aa56fa0492c8ca08f9ab16c91e73b11ef88558d8ae6e"
+  },
+  {
+    "case_id": "scene_01",
+    "width": 240,
+    "height": 170,
+    "description": "zwei Rechtecke. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt nebeneinander.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          33.80433642394094,
+          76.95909211312554,
+          47.4280318871359,
+          41.66868323346144
+        ]
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          149.05583359692957,
+          73.81944036570646,
+          57.52677401497073,
+          65.1257093094122
+        ]
+      }
+    ],
+    "reference_svg": "references\\scene_01.svg",
+    "input_sha256": "21ecf71a2d89e4367f35f38c1225079ed9af7f0f93550a0ec2f73aac65dc1ce5",
+    "reference_svg_sha256": "ed02c4d270b44ec1344252b7efeeb1a2ba14f6a330a8c8316b5da64f12ecf0c5"
+  },
+  {
+    "case_id": "scene_02",
+    "width": 240,
+    "height": 170,
+    "description": "ein Kreis und zwei Rechtecke. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt nebeneinander.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          21.28905272446662,
+          94.43072397993836,
+          35.53203775018859,
+          30.077909818251314
+        ]
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          104.42731563593125,
+          66.8494629240225,
+          34.7373772581268,
+          27.6335905614685
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          177.21898476629696,
+          87.33437982446085,
+          48.217578316298415,
+          48.217578316298415
+        ]
+      }
+    ],
+    "reference_svg": "references\\scene_02.svg",
+    "input_sha256": "45da807ef3e1531bff635cdeed78cbb88ea4ba4c9fc9755cb27f5393f1e5e27b",
+    "reference_svg_sha256": "73604cea266c04808d7174dc8e2010a8cdea427db4d05f2bdcd983cc6b5424b1"
+  },
+  {
+    "case_id": "scene_03",
+    "width": 240,
+    "height": 170,
+    "description": "ein Rechteck. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          99.04309212649224,
+          99.39138013755031,
+          39.57055417114569,
+          30.628463603384542
+        ]
+      }
+    ],
+    "reference_svg": "references\\scene_03.svg",
+    "input_sha256": "39b63dc265c855c80b578a83768046f17f0010c3d7534cac0a780e5bbc6e8c71",
+    "reference_svg_sha256": "21ccb7ececf642a7b4da89ea336d9a177cba7e6015dd4bf8bd6ea117ac789d6e"
+  },
+  {
+    "case_id": "scene_04",
+    "width": 180,
+    "height": 120,
+    "description": "ein Kreis und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt nebeneinander.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          26.646786278402345,
+          58.70633094216893,
+          36.60283569478828,
+          28.149667848954746
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          117.5193254790023,
+          49.975990977760645,
+          33.05927009398915,
+          33.05927009398915
+        ]
+      }
+    ],
+    "reference_svg": "references\\scene_04.svg",
+    "input_sha256": "9b559898484248112358260a0894f8d4c467c65b26de7e9d94c5b35c73b0b406",
+    "reference_svg_sha256": "0efd3ead460a8e77f5cdb2e57e10d7b0e33072d5d75e157ad926222a535a0b93"
+  },
+  {
+    "case_id": "scene_05",
+    "width": 156,
+    "height": 148,
+    "description": "ein Kreis und zwei Rechtecke. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen. Die Objekte liegen voneinander getrennt nebeneinander.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          12.110057089922481,
+          30.20663906321808,
+          33.43284392899161,
+          39.384338136735614
+        ]
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          61.28246107185122,
+          34.41148845535127,
+          33.55437098668325,
+          37.81512421743484
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          114.25437887391801,
+          42.1400313197464,
+          33.001429291317415,
+          33.001429291317415
+        ]
+      }
+    ],
+    "reference_svg": "references\\scene_05.svg",
+    "input_sha256": "65539c36530542cb79cbb1a5fcedb6c1c735725d717313be96b917b0654a1a06",
+    "reference_svg_sha256": "dd423eb6fe0e1efb9ab74190011841b6bd6ecf1850ec0a2b483ef1492065b1bd"
+  },
+  {
+    "case_id": "scene_06",
+    "width": 240,
+    "height": 170,
+    "description": "ein Rechteck. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          101.66315852347738,
+          60.288142401245736,
+          34.86372263227273,
+          33.00330013964788
+        ]
+      }
+    ],
+    "reference_svg": "references\\scene_06.svg",
+    "input_sha256": "6fabd9ab007d7bde63c49611953c3b03fc513a7eda930d741ed19a33860a25c9",
+    "reference_svg_sha256": "3917fcbcdfb38f027d2801c7d9df73f1bf2f7ee6c90d5a8d1c877e2daafb6f1d"
+  },
+  {
+    "case_id": "scene_07",
+    "width": 240,
+    "height": 170,
+    "description": "ein Kreis und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt nebeneinander.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          24.484885170031134,
+          24.631302170076786,
+          68.61863520921926,
+          73.83392849440345
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          164.82198361720774,
+          66.52647435170799,
+          31.03472813456131,
+          31.03472813456131
+        ]
+      }
+    ],
+    "reference_svg": "references\\scene_07.svg",
+    "input_sha256": "560e7178ca35e7fd3b58b81b06281d70e6084891070cf415b0f5d2beb4fea729",
+    "reference_svg_sha256": "6267c6c6e90012f885074e034e50aeb1384f8d78542aaaa8db5fb230e9b05cb2"
+  },
+  {
+    "case_id": "scene_08",
+    "width": 180,
+    "height": 120,
+    "description": "drei Rechtecke. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen. Die Objekte liegen voneinander getrennt nebeneinander.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          19.238752040927217,
+          46.505201233295345,
+          24.41492900587873,
+          18.43604701792189
+        ]
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          71.53649846685795,
+          28.249351257534187,
+          33.716710241993354,
+          37.29035390170719
+        ]
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          130.24659073471514,
+          39.948139072051674,
+          37.84533116757833,
+          36.57382272556484
+        ]
+      }
+    ],
+    "reference_svg": "references\\scene_08.svg",
+    "input_sha256": "2738705ed41a86a1d983c9d1a95b2780ba1ba4ae589966c21553db461e964110",
+    "reference_svg_sha256": "467e17011be943f58454490226bc69341c37665e43f4ca01d98cd68ace8d6845"
+  },
+  {
+    "case_id": "scene_09",
+    "width": 240,
+    "height": 170,
+    "description": "ein Kreis. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          97.35733088146338,
+          59.19772119549929,
+          45.591335150659674,
+          45.591335150659674
+        ]
+      }
+    ],
+    "reference_svg": "references\\scene_09.svg",
+    "input_sha256": "337bfe54ca9d5ed519ed908ebc9c242c59d52d41274247f63ed796fdef66b15c",
+    "reference_svg_sha256": "185fa9c675d21162817cba7c3b15ae2f870c0cbcff64a464b5dac27d3b25e11e"
+  },
+  {
+    "case_id": "scene_10",
+    "width": 156,
+    "height": 148,
+    "description": "ein Kreis und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt nebeneinander.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          27.860985473332086,
+          60.9314656206201,
+          25.556928858868414,
+          25.556928858868414
+        ]
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          93.38241180887883,
+          55.98742696971023,
+          47.53602522897344,
+          43.39838320225791
+        ]
+      }
+    ],
+    "reference_svg": "references\\scene_10.svg",
+    "input_sha256": "0987e6251ffb2bb399871d9f2df89e56b96a730c12a49e40b5fade56aa2c01ca",
+    "reference_svg_sha256": "df029ad66122d094e553ead710e684709e51e08f85419902a915020263cc3c50"
+  },
+  {
+    "case_id": "scene_11",
+    "width": 180,
+    "height": 120,
+    "description": "ein Kreis und zwei Rechtecke. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen. Die Objekte liegen voneinander getrennt nebeneinander.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          12.846205359934382,
+          45.758717636003766,
+          29.657569764318804,
+          29.657569764318804
+        ]
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          73.8929276805942,
+          42.345129240070385,
+          29.366000412148146,
+          32.10075823783045
+        ]
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          129.58979353910922,
+          32.98301487536175,
+          39.53174370271839,
+          45.30325476456941
+        ]
+      }
+    ],
+    "reference_svg": "references\\scene_11.svg",
+    "input_sha256": "7eb377205ec9ebe90e0104843b153f4824df1d257198149f595d10d7f7007990",
+    "reference_svg_sha256": "7860471f4fb4ba38acf1f00412fc2b20efc7833246faf96b2cf4b7053e6f195d"
+  }
+]

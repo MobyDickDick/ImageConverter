@@ -1,0 +1,28 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\.tmp\primitive-scene-baseline\imageCompositeConverter.local.log
+[INFO] Konvertiere scene_05.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite scene_05.png ---
+Bildbeschreibung: zwei Kreise und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt untereinander.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] scene_05.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.786082, localized_error_fraction=0.974465).
+[INFO] Konvertiert scene_05.png | Parameter: mode=auto, label=M, variant_name=SCENE_05 | Qualität: Optimierungsfehler/Pixel=0.000230, Mean-Delta²=2197.939941, RGB-RMSE/Kanal=27.067446, Raumscore=9115.102724, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.8s
+[INFO] Konvertiere scene_05.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite scene_05.png ---
+Bildbeschreibung: zwei Kreise und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt untereinander.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] scene_05.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.786082, localized_error_fraction=0.974465).
+[INFO] Konvertiert scene_05.png | Parameter: mode=auto, label=M, variant_name=SCENE_05 | Qualität: Optimierungsfehler/Pixel=0.000230, Mean-Delta²=2197.939941, RGB-RMSE/Kanal=27.067446, Raumscore=9115.102724, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.1s
+[INFO] Konvertiere scene_05.png | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite scene_05.png ---
+Bildbeschreibung: zwei Kreise und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt untereinander.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] scene_05.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.786082, localized_error_fraction=0.974465).
+[INFO] Konvertiert scene_05.png | Parameter: mode=auto, label=M, variant_name=SCENE_05 | Qualität: Optimierungsfehler/Pixel=0.000230, Mean-Delta²=2197.939941, RGB-RMSE/Kanal=27.067446, Raumscore=9115.102724, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.0s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\primitive_scene_2026-10-17\holdout_baseline\scene_05\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\primitive_scene_2026-10-17\holdout_baseline\scene_05\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\primitive_scene_2026-10-17\holdout_baseline\scene_05\conversion

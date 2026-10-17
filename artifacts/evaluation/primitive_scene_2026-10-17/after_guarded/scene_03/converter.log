@@ -1,0 +1,25 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere scene_03.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite scene_03.png ---
+Bildbeschreibung: ein Rechteck. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] scene_03.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=1.000000, localized_error_fraction=1.000000).
+[INFO] Konvertiert scene_03.png | Parameter: mode=auto, label=M, variant_name=SCENE_03 | Qualität: Optimierungsfehler/Pixel=0.000001, Mean-Delta²=0.609853, RGB-RMSE/Kanal=0.450871, Raumscore=4.111681, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.5s
+[INFO] Konvertiere scene_03.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite scene_03.png ---
+Bildbeschreibung: ein Rechteck. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] scene_03.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=1.000000, localized_error_fraction=1.000000).
+[INFO] Konvertiert scene_03.png | Parameter: mode=auto, label=M, variant_name=SCENE_03 | Qualität: Optimierungsfehler/Pixel=0.000001, Mean-Delta²=0.609853, RGB-RMSE/Kanal=0.450871, Raumscore=4.111681, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere scene_03.png | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite scene_03.png ---
+Bildbeschreibung: ein Rechteck. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] scene_03.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=1.000000, localized_error_fraction=1.000000).
+[INFO] Konvertiert scene_03.png | Parameter: mode=auto, label=M, variant_name=SCENE_03 | Qualität: Optimierungsfehler/Pixel=0.000001, Mean-Delta²=0.609853, RGB-RMSE/Kanal=0.450871, Raumscore=4.111681, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\primitive_scene_2026-10-17\after_guarded\scene_03\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\primitive_scene_2026-10-17\after_guarded\scene_03\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\primitive_scene_2026-10-17\after_guarded\scene_03\conversion

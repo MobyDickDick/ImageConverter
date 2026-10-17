@@ -2,6 +2,7 @@
 
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.
 
+- [Konvertierungsverbesserung: gemessene Bildqualität und fehlende kleine Objekte (2026-10-17)](primitive_scene_improvement_2026-10-17.md)
 - [Warum die allgemeine Rekonstruktion stockt: echte Gegenproben, Szenenauswahl und Grenzen alter Testgerüste (2026-10-17)](reconstruction_bottleneck_audit_2026-10-17.md)
 
 - [Aktueller Projektstand: 343 abgenommene Paare, offene Nachweise und persönliche Prüfliste (2026-10-17)](project_status_2026-10-17.md)

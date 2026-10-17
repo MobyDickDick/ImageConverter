@@ -1,0 +1,1453 @@
+{
+  "evidence_kind": "real_cli",
+  "iterations": 64,
+  "generation": {
+    "seed": 261071,
+    "count": 12,
+    "rotate": true
+  },
+  "commit": "daaa5c0a07a38afc509fa4d053298fdd1ef75b89",
+  "source_sha256": {
+    "src\\imageCompositeConverter.py": "16a920f099279fe03703d95f3df2d5a0eb929b36a7532e3a4a89d5b3e12b894a",
+    "src\\imageCompositeConverterThresholding.py": "7fe1c180adbd61369639a18f70e202ecfbd5cbbd656658f371254e40b401f4ae",
+    "src\\overviewTiles.py": "25d1e77a0cc9a9d87452fd1bbf9abe71766bbac21d974d56d2ee3d1cc086998e",
+    "src\\successfulConversions.py": "f241c6ff9d98b6fd04d6a38a3a5a275ed005ddd327b6f5a1e9ff81c275be6052",
+    "src\\weak_family_pipeline.py": "61085fc1736a844bf267c3456641c4b00b4e85f8f2d73d48768923c6eae5c6d2",
+    "src\\iCCModules\\imageCompositeConverterAc08Gate.py": "09819b8427bbe332b9ca6d716d7794fee4a7eb0df32a1a7f49ad2b6402f1e133",
+    "src\\iCCModules\\imageCompositeConverterAc08Reporting.py": "fd7e81484237072e97650d525e57a5f3a4157a0861150be875c375352867fb29",
+    "src\\iCCModules\\imageCompositeConverterAlarmBell.py": "c5e8ffeaa7abbd3561473f0fffd4ba04b7fa7147ec0bbb8c3713677c3325df17",
+    "src\\iCCModules\\imageCompositeConverterArcShaft.py": "77006fe036ceaddcd6f96e64035b697acfb62bbec44a529ae284b2cb6afc4fd1",
+    "src\\iCCModules\\imageCompositeConverterAudit.py": "4bbc1c2f6ab82961b4064092049b3984bff3ff195363a864a3ca75c813a5deca",
+    "src\\iCCModules\\imageCompositeConverterBatchReporting.py": "af0f5722b715f4046d3edfd5782d5d98480a3b405010b045628031db19f6f8b1",
+    "src\\iCCModules\\imageCompositeConverterBatchRunState.py": "c85d13b5a572360af0d1e54819d8fdfd59313874eccda1db29e3c8a5de7b8e97",
+    "src\\iCCModules\\imageCompositeConverterBestlist.py": "2d3b4cdbb0f1dd00be794c01fa99dded736bd57d9ca2e54732e7393ea810cb9e",
+    "src\\iCCModules\\imageCompositeConverterChainTelemetry.py": "ef923d375a5817118b47e3bc281615e6a09dc536cbee27b4a51cda9f8f11c12d",
+    "src\\iCCModules\\imageCompositeConverterCheckboxCheckmark.py": "6dba3e57aca26f5f364b1813fcce874512f3c735ef430d073dbd8639272df414",
+    "src\\iCCModules\\imageCompositeConverterCheckmark.py": "1e48db04d77efdea5bd9b28530972e5fcf924cfe76feea7349b02ec54cd644b6",
+    "src\\iCCModules\\imageCompositeConverterChevronPanel.py": "0a333ad0a9b6aacea34bf12ee859967f66e811cdcc3683c3b34ce64019a1a6c9",
+    "src\\iCCModules\\imageCompositeConverterCircleLinework.py": "403bb55b27f8a3e6d0ac1ac82162665999341eea74e8756699b32b761fd1dc5c",
+    "src\\iCCModules\\imageCompositeConverterCli.py": "c44b1023b5df266566b5b07151f2c49548e1b2167ab433fc1e9f6d0972fb5fb2",
+    "src\\iCCModules\\imageCompositeConverterColorUtils.py": "ff69f8250d04c07f97cfa8c95666f305ec891d5e5c32f70a3d10f5df42a001fd",
+    "src\\iCCModules\\imageCompositeConverterCompositeSvg.py": "3c705b86489245b999db94f6bad3b5de2c13883af1573590e95335193a31e166",
+    "src\\iCCModules\\imageCompositeConverterConversionComposite.py": "d61cee446cf11532265691ac30ed0ad5b6a2dcdb6d73826ea2ce5d51cafaa665",
+    "src\\iCCModules\\imageCompositeConverterConversionExecution.py": "93f43fa000881d678b123802d3b33aba03b0d77fbb3954e0c5c4aebcb9665a8c",
+    "src\\iCCModules\\imageCompositeConverterConversionFinalization.py": "cce3b7c31c718a4c24f636204404968785ade253a6737fe3db0fd70a3b006be6",
+    "src\\iCCModules\\imageCompositeConverterConversionInitialPass.py": "1a8ec4dca7178f0871211b64c977f0f19c3268b4422408804e8574b1dc68115b",
+    "src\\iCCModules\\imageCompositeConverterConversionInputs.py": "27cd79f365648328f4db4adf1b2db8ae9fc6a3c23a9c291fb214e1e364886630",
+    "src\\iCCModules\\imageCompositeConverterConversionQualityPass.py": "de7e61c87aab042983bf83ada3c79f16c63050149d40f9315cb817ca7b08e5aa",
+    "src\\iCCModules\\imageCompositeConverterConversionReporting.py": "cf8e645153705626a442136f42c66be5f5c6030c00fca1612be6b89066d7f801",
+    "src\\iCCModules\\imageCompositeConverterConversionRows.py": "c42a57030e966584a9870bf85b63424c61fb38a7dd8fb20e212d3ba62415aeec",
+    "src\\iCCModules\\imageCompositeConverterCoreClasses.py": "1ecee60b8950bc04ce3d05daad678a76b8cc5bf541bc8b815e055aa961f558ef",
+    "src\\iCCModules\\imageCompositeConverterCrossPanelDisk.py": "dba5f1257fe39d6a8879e4b1a98050096bd28c05e9be92b2f1db0a7c35489bb4",
+    "src\\iCCModules\\imageCompositeConverterDebugTrace.py": "e51a0ca100fb9709faeff49d365f01f66a215e368dc3ff577533a0af9e0ee244",
+    "src\\iCCModules\\imageCompositeConverterDependencies.py": "c1339144c00dabefe5b659bc4257a18ac802b03340538868407cecc5e60264fe",
+    "src\\iCCModules\\imageCompositeConverterDependencyBootstrapRuntime.py": "f7b4f1384641ea9e68b25c931d096525acecd9306767e915e7ba2f0d10cef949",
+    "src\\iCCModules\\imageCompositeConverterDescriptions.py": "cd9eee93b44d0343e8dafb295cccbaf13cc3c30009a5b2f9c0df39996778c1cc",
+    "src\\iCCModules\\imageCompositeConverterDiagonalCrossDisk.py": "96aa998c535ae581b183175c3fcc56f2ecf8268fca2658fca231337872d69944",
+    "src\\iCCModules\\imageCompositeConverterDiffing.py": "249a0cb8747470dbd522fd134457bd8f741a95753d56f38e0d57f4ef7ee1fb01",
+    "src\\iCCModules\\imageCompositeConverterDiskArrow.py": "c211040554f2bed826c073ee7b0d1b465c5afce6068ae9614488823b2a0bc84f",
+    "src\\iCCModules\\imageCompositeConverterDotPanel.py": "dcec6ac361819f7d176da0e03165799ad50e913583f5fe6957731b0acb5d97e0",
+    "src\\iCCModules\\imageCompositeConverterDualArrowBadge.py": "d80d34880993112d86eb2041af2bb8c1fb22cd8d5d3085cf4c3780f607463460",
+    "src\\iCCModules\\imageCompositeConverterDualArrowRuntime.py": "84a68131d95967cd3c15c6dae56764b79cd03e46815f70968096ce43a61c8c3d",
+    "src\\iCCModules\\imageCompositeConverterEarlyQualityGate.py": "29c7b8034d14be747be798f8734558cf329c246b27d3c2d46a4c77cbd059ae30",
+    "src\\iCCModules\\imageCompositeConverterElementDecomposition.py": "758f56d645fcc60fd1436db308ac713997337537d4df7bd1e73636fe3e726102",
+    "src\\iCCModules\\imageCompositeConverterElementErrorMetrics.py": "d679cbcd7ecaa9b4f9bdb38b1c8f215fe291e7cfa0570477dbd323c243498fc3",
+    "src\\iCCModules\\imageCompositeConverterElementMasks.py": "51f298380224a3931043eb76744f84f79da453a9f5e9ed572492d553b8c65262",
+    "src\\iCCModules\\imageCompositeConverterElementValidation.py": "4f62e9c08a2f41c2b2af4a71735cf9d1d943f5c1b4daf0ccb9cd75c05efb265c",
+    "src\\iCCModules\\imageCompositeConverterFallback.py": "c9741d2b4062ce1b2c2e0385aeeedadff00fdc21848963669d20ea5a39c23df9",
+    "src\\iCCModules\\imageCompositeConverterFilledSymbols.py": "a226718f2a47bf18cd09a2ce77e1994340163bbed65a3c6dc266abe8fa1a29fd",
+    "src\\iCCModules\\imageCompositeConverterFlameDisk.py": "c72448eb2f91cbcf3b1fff2bb10daad3ba0006116702ed984134d100e3d49370",
+    "src\\iCCModules\\imageCompositeConverterForms.py": "ff9309dd4120aafa8bee74a661417928eaaa6c54c0527da7254a4bacd1dc135d",
+    "src\\iCCModules\\imageCompositeConverterFormsSymmetricChords.py": "9a05843e4a02ac95fe981ee56390dca455dfa8199e168653377293fee79f6596",
+    "src\\iCCModules\\imageCompositeConverterGeometryBrackets.py": "e7cde23b860a75aa711b0e16361eabee97632e51d56d542fbafba6805f8e6f61",
+    "src\\iCCModules\\imageCompositeConverterGeometryIrOptimizer.py": "c34de0e9bd669fbe0cba5aa121042802005a04135195bbbe03b2485629a25656",
+    "src\\iCCModules\\imageCompositeConverterGradientArrow.py": "0640931104c0f8be2bcb96efa87afdce65a60dc466ed20e2bafa47c4dcfbbd09",
+    "src\\iCCModules\\imageCompositeConverterGradientJunction.py": "32916b58f4b4bbb27c1b259f9f8724b7ab76be2eeae4b0b4dcf293aab95649b9",
+    "src\\iCCModules\\imageCompositeConverterGradientStripeStrategy.py": "92994da258bad41155f4e273b8132216357c838e154c7e38c4a516507930c034",
+    "src\\iCCModules\\imageCompositeConverterHouseDisk.py": "5b4039f97a46a4fde1801ce4cf7343f044d6adf6bf1dd8e8e9b736c69ce4c611",
+    "src\\iCCModules\\imageCompositeConverterImageBackend.py": "ceb4b3b0301015b01e72f454e3dbecd5de5f3fd45805e61f9df3d1f55e80d7f3",
+    "src\\iCCModules\\imageCompositeConverterImageLoading.py": "3c889b22848e478ad0d470c3a9489932f5e161d120b59f1dd614cf0b016b28af",
+    "src\\iCCModules\\imageCompositeConverterIncremental.py": "06ec9f2a2dfadb6a437118680be9ab643082cc92f566bbbaee45bb11c2a42bce",
+    "src\\iCCModules\\imageCompositeConverterInteriorMark.py": "07043143474e2229484fc35f97be58e1a69f155fd19e6ac98ce0a87ea35f9fb3",
+    "src\\iCCModules\\imageCompositeConverterIterationArtifacts.py": "22b4b0d1511faf84aeabddb648424f28783e1f98695edf3fc28d28671c9c93fd",
+    "src\\iCCModules\\imageCompositeConverterIterationBindings.py": "dcb70facf3ec02be6bb594592345c08cada595b4a46b47ce3e9ce5a9e74c22ff",
+    "src\\iCCModules\\imageCompositeConverterIterationContext.py": "0b4c0ef6eb166a7f2ae0a0d2a1b4a7af0fb17205316541e6d6bf7b816f5494e3",
+    "src\\iCCModules\\imageCompositeConverterIterationDispatch.py": "7f042fb2f651ebdf8f1b602dd41320be3e6584bb339a65f31438521da3445ac3",
+    "src\\iCCModules\\imageCompositeConverterIterationExecution.py": "d6df655686a6a027f6144eeda5917641e7fe1957e5a2f0649e02de8a8b678176",
+    "src\\iCCModules\\imageCompositeConverterIterationExecutionContext.py": "129ae73d516480386869d3d3526976f727178bc7eab4f8d31fd4f93b5437a577",
+    "src\\iCCModules\\imageCompositeConverterIterationFinalization.py": "a4c290022ea4f26a00fe641f646f4bd80973446f57f849d72548c597b4406a5c",
+    "src\\iCCModules\\imageCompositeConverterIterationInitialization.py": "ae11b3a6ed786f9f9a5a468d17fbc2936b7e0bfc09e9393b0c4554e9fd660b15",
+    "src\\iCCModules\\imageCompositeConverterIterationLog.py": "5889e5f650131da898c6c896bcceadefa43dbf132ca7362c473280061cf1e269",
+    "src\\iCCModules\\imageCompositeConverterIterationModeDependencies.py": "ddddafdb46ae03cc041d9724b853307e8f29a5b955af72c0f9115e3a94bea0d4",
+    "src\\iCCModules\\imageCompositeConverterIterationModeDependencySetup.py": "30ae0f45ed72b4cdaa94bda5334cfd2826853d0f29433c6def8e4e3edfeb521c",
+    "src\\iCCModules\\imageCompositeConverterIterationModePreparation.py": "2851e4df0258b0676a3d13e408aaec6cc5ed197cf6884e395b1961fa9fb63c12",
+    "src\\iCCModules\\imageCompositeConverterIterationModeRuntime.py": "778397958504ff370ef083f89aed7a075d515c156a378102f36fe129f69b22ba",
+    "src\\iCCModules\\imageCompositeConverterIterationModeRuntimePreparation.py": "da519c915906dfc62a44be8a14384302864b8d7660bbc453e9658570b2b962eb",
+    "src\\iCCModules\\imageCompositeConverterIterationModeSetup.py": "3be8ae0ce9db4af604dd7e0596f0309240492a3986a8964d1be7672f94445517",
+    "src\\iCCModules\\imageCompositeConverterIterationOrchestration.py": "293b07b633e470d2a5165b72d7791f1742f57ac47de70ac9d6cb6bdc4917954d",
+    "src\\iCCModules\\imageCompositeConverterIterationPipeline.py": "3aa693f761b538209b9a8909eed1c9f6bdc224d350d97c8a05164242393fe0ea",
+    "src\\iCCModules\\imageCompositeConverterIterationPreparation.py": "0c1747a59d13ec184db65c0748fe242fff017947f6ed30d585c37955f9e6b331",
+    "src\\iCCModules\\imageCompositeConverterIterationRunPreparation.py": "91f333f3b6fb5de0173aa47f568fc13b1e51dcf75ddb2ed5774abd58beaa8047",
+    "src\\iCCModules\\imageCompositeConverterIterationRuntime.py": "c53a37cec386a6fde18ecfa13830b67e6c77490adf5f582e1cb27842ff785a2d",
+    "src\\iCCModules\\imageCompositeConverterIterationSetup.py": "1c5f4c628c594378df34bf8fd064bae999df9e3ae48edd141971c7aa8a31f97c",
+    "src\\iCCModules\\imageCompositeConverterLabeledDisk.py": "00b58e905a44bea7e31c577a2d1dde9496028b96033593524d03c4de5c889d9b",
+    "src\\iCCModules\\imageCompositeConverterLabeledSquare.py": "fe4986a19d46b3d66450ac33673dd7fcba5838a92b7dab90912fe70b2413cef7",
+    "src\\iCCModules\\imageCompositeConverterLegacyApi.py": "4defc4a5c0d07f70bdecf8f45693b0642571b936692fdf085ab156c08d12d7d0",
+    "src\\iCCModules\\imageCompositeConverterMaskGeometry.py": "81355bf804e8a50da17898679b79fbcaea9a0a88cdde808dab1df6267c100fda",
+    "src\\iCCModules\\imageCompositeConverterMaskMetrics.py": "cd80b7f5d4f22a4a0dd0e79acb4159f5d592f8b4372f6138c52cdcef9199fea3",
+    "src\\iCCModules\\imageCompositeConverterNaming.py": "c9909706d2523e9e040421c174562eed744484086dfdd43bcb3de64280b7968c",
+    "src\\iCCModules\\imageCompositeConverterNestedPanel.py": "269567b9181867e88bbdb94cf6e7460d92b7e2e51db1869b1bd411d6c28fee8a",
+    "src\\iCCModules\\imageCompositeConverterNonCompositeRuntime.py": "8bd8f99d7a244847cc7bec4471049b973fdd1365f70a8149d720f9e848637ac4",
+    "src\\iCCModules\\imageCompositeConverterOptimizationCircleGeometry.py": "8aa0605201b063401e007f0821d95b7dcd2d4516f0e41c1ea081525476a46c05",
+    "src\\iCCModules\\imageCompositeConverterOptimizationCirclePose.py": "152017dcf431570f93887aa7484df14d74e37c74c389e0909083ff3e20e104d6",
+    "src\\iCCModules\\imageCompositeConverterOptimizationCircleRadius.py": "6ce88633f9412c2919fda78f278693dd1f8d1aea5c549a1b7822634e2417763d",
+    "src\\iCCModules\\imageCompositeConverterOptimizationCircleSearch.py": "0f7258278e5a6d7e7c0623266a1e1e4314385e73c5026434b1dd25ec0929efb5",
+    "src\\iCCModules\\imageCompositeConverterOptimizationColor.py": "440a857b0c0d88a9e339fabaaa114819f00d9b26fce0e3508115aa958c86e495",
+    "src\\iCCModules\\imageCompositeConverterOptimizationElementAlignment.py": "16913e862b790ec899d34855b4724940653ce3a00d330911bbb391ee3a17477d",
+    "src\\iCCModules\\imageCompositeConverterOptimizationElementSearch.py": "7a102230439b05738ba4d4924518d4ef43497452ce4ea8e33cd052551c36285e",
+    "src\\iCCModules\\imageCompositeConverterOptimizationFacade.py": "39fb7d9c8eb6047c9ae3d339bf390dd1c347c31eb2408be54c2e745d4193818d",
+    "src\\iCCModules\\imageCompositeConverterOptimizationGeometry.py": "a3fb88d6f1e74d58a446009415f32ffa07d4a2c4c8cc85a5c4bd4f7dbf880238",
+    "src\\iCCModules\\imageCompositeConverterOptimizationGlobalSearch.py": "4317b63bed92071297aa7b9640600cb0ed61678a5f3e05c13ad39a487205e74d",
+    "src\\iCCModules\\imageCompositeConverterOptimizationGlobalVector.py": "30281a93b128cd7c076f02efcb06316723886f44bd3926ac23b17216525d0e68",
+    "src\\iCCModules\\imageCompositeConverterOptimizationPasses.py": "4bf8a10c5e2215801f08c150db05e9e5efb50f7c3d9ab0899e371aac097d5d65",
+    "src\\iCCModules\\imageCompositeConverterOptimizationPassReporting.py": "4cb75102d264c6bf8a1c9bbe13fee085cb9c26d07b7f88dcc330e2bbcd691616",
+    "src\\iCCModules\\imageCompositeConverterOptimizationQuantization.py": "f1c9b34f03182258b76fc2f61b104690e6cfc93af128d9043141025df575fe04",
+    "src\\iCCModules\\imageCompositeConverterOptimizationScalars.py": "2f717c625f4704fb8d0201c9360ca91608cee9bec2bfacd4fc76cf463b5928ce",
+    "src\\iCCModules\\imageCompositeConverterOptimizationTool.py": "05527d3d45ad4ccda99a421e83a42745a7ebffd2d3a4c1ec36cc507d434f33be",
+    "src\\iCCModules\\imageCompositeConverterOptimizationWidth.py": "861da80e9e93c9e2233bb95295c28ed0603da85f944540ba4fa9ce83fce8189f",
+    "src\\iCCModules\\imageCompositeConverterOutputPaths.py": "b8cc76001b425456d4448c67c88649f1340f3681049ba4d695a3c1945d62a92c",
+    "src\\iCCModules\\imageCompositeConverterPerceptionGeometry.py": "6546d9d61b78f4334795bdf7862f1096cde688d1a488ed0f3769bfcec3959144",
+    "src\\iCCModules\\imageCompositeConverterPerceptionReflection.py": "8ef222bf12738dd5a5c1b568cfd21ddf8536c599d0abed5fc3009a88bc061bb2",
+    "src\\iCCModules\\imageCompositeConverterPolicyPhase.py": "4f0b48e12b6cf4d0e1760baf6d92a07b283b755b3f24b76bafefb45f46b494b9",
+    "src\\iCCModules\\imageCompositeConverterPrimitiveScene.py": "232adf66001d6502090a85fc64f33338fa60fdd9d95600a5e6864d04cb06db76",
+    "src\\iCCModules\\imageCompositeConverterPump.py": "e786fb0c003100a810ad2072f6f4ba8b10bdf2cd41b58be35e7b9074d8b28a83",
+    "src\\iCCModules\\imageCompositeConverterQuality.py": "055d4ec5acb8c9b4e8f2ab5b044fafd3924397bc07200e9502b5875886771af0",
+    "src\\iCCModules\\imageCompositeConverterQualityConfig.py": "7311b8f6b8afe4261d75b6fd2b271e8090ac5a9c3ac776c79b81cc0f6280ddf3",
+    "src\\iCCModules\\imageCompositeConverterQualityPassPolicy.py": "a6f2ba827e46ca0f4634f4d2ccf49f22fea09e97a8cbc2afeec849c97f0cb47e",
+    "src\\iCCModules\\imageCompositeConverterQualityThreshold.py": "a35d4374991c6de4bf039a3b758658993de0217d1a5db3d309f0b3984d7f7ddf",
+    "src\\iCCModules\\imageCompositeConverterRadialDisk.py": "76c8a25955d855308fe2c6be261f2ea8093e230bb8de4d27c97b3a4627dbb0ae",
+    "src\\iCCModules\\imageCompositeConverterRandom.py": "e63330235376477e78e6fdd2f23b6fb0dbb77c24a1015f7e3bd90026d5d20095",
+    "src\\iCCModules\\imageCompositeConverterRange.py": "8e3c98f08a198d54292d799ca7471388e68158164905588728f986ff4c3b4cee",
+    "src\\iCCModules\\imageCompositeConverterRanking.py": "f2e9455bb73efc03b8ab0f4e14972590815c43c5d24ca2014fe65f2cc4c2d6c5",
+    "src\\iCCModules\\imageCompositeConverterReachability.py": "9fe4972148c187f8c0d6a6a48de059fd0a7eae1f5aeac316051cddd4988bd492",
+    "src\\iCCModules\\imageCompositeConverterRegions.py": "1001f6425fa08db02d9694068b6ca97d5201bf63a3029337da808cd99815bee6",
+    "src\\iCCModules\\imageCompositeConverterRemaining.py": "2cc79bd6ae113075c5373bc1f45d8aeb33e71b64be35b53a27be7f435914b97d",
+    "src\\iCCModules\\imageCompositeConverterRenderDispatch.py": "808a5aaa8fe824d50a895573bed1e508840c765818187cc1b6326be328be127d",
+    "src\\iCCModules\\imageCompositeConverterRendering.py": "579df6d7160e948f093081083b7de3a208a73bccc59215e608bbefe6d8c19ec3",
+    "src\\iCCModules\\imageCompositeConverterRenderRuntime.py": "977a5eaae553b39f2dfc7b2af953e910a187160ded9fb0c323bf1a3ac32eafb0",
+    "src\\iCCModules\\imageCompositeConverterRenderWorker.py": "5d2b7901fc7bc995a5795892d1e62c5e58dd8587f8d0090e684dc3cf7976f33c",
+    "src\\iCCModules\\imageCompositeConverterSemantic.py": "858ef5001ba03e92e36c24fa45b8443bbb00306350c768bb8988253a94d3a01c",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc0050.py": "b5baf684440ccdf703e893912a158b4c6c3fbf59bab4478f44292e10d37e8d28",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc0223.py": "f44241bed8964e42751540fe9ba036219d1092cfd4291173ef95548e8944eabf",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc0223Runtime.py": "488b9eb74c60639f39289b20450b1dff519da6e7a5490d7df048613de1410d65",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc0811.py": "d80d2d6d059f3de4ae761590a03eb3652c8fd5c1e55ae5a74159a566e3e59819",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc0812.py": "90b7f91f704901c5d193fd8e17d4821e13f3148e8f87993a6cf426a7b2268b61",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc0813.py": "0cb6d300c132aa4c3b33e683adc9fe5286f420511f1dfa0af04a048ccc1580b5",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc08Families.py": "8e4e331a52aa5be409e5d8b68ec1e9814d604e97de9cc05ceb92ffe5bc9b663e",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc08Finalization.py": "d211c10901306ae6c87f041b2e01739c1cf828287bdff1f7305b3fb765034fe7",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc08Params.py": "ae40b053b29bc7c351cacb637a37f726f12fec15fff9fea600cdc809d1b6041a",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc08SmallVariants.py": "1ea878d31315c5706fa3bfa02bd9825de045440a4d005dcb39f58eaaf8ea21ec",
+    "src\\iCCModules\\imageCompositeConverterSemanticAdaptiveLocks.py": "4c0ff5385afe53265eb2d144a76dab89ee12bf6efe402d95648365f9eeb8a5df",
+    "src\\iCCModules\\imageCompositeConverterSemanticAr0100.py": "484022b8fae6dad39c05c7fec3fe71dfeaed4721e1b8efa31e7fc6d26bfe6a7c",
+    "src\\iCCModules\\imageCompositeConverterSemanticAuditBootstrap.py": "ece1ae8a92b88c5196875d5720afd8e161f90564ded71b8954426c0f9a17d7c3",
+    "src\\iCCModules\\imageCompositeConverterSemanticAuditLogging.py": "f982d89ab84211560781cf91e292b9a9ed85d724f6b75f168ed28e9465a5e941",
+    "src\\iCCModules\\imageCompositeConverterSemanticAuditRuntime.py": "262add2a8917e2e3d92a76e8e192a655434a1d9063ae248eb68a7703800bbce3",
+    "src\\iCCModules\\imageCompositeConverterSemanticBadgeGeometry.py": "561931b1201b4225f4a9d699f82b0e714a42c6b678671f825117439b362a611d",
+    "src\\iCCModules\\imageCompositeConverterSemanticBadgeRuntime.py": "fa7d6467f78d9d8f86cdf197fc4ae38a5a9f9fed7f16784c270d86297ef1d1a1",
+    "src\\iCCModules\\imageCompositeConverterSemanticBadgeSvg.py": "14a81229a61655db2543e94618eb7869ba0763b01cdf94695ca293f4ecb16dfe",
+    "src\\iCCModules\\imageCompositeConverterSemanticChecks.py": "e5ee5ed7a884b1dc54e8a43516cc4957cc61ed346d247aea97b1b5d537699ba7",
+    "src\\iCCModules\\imageCompositeConverterSemanticCircleStyle.py": "d34f36ae5bb002f52d3637103948fb4657dd58070d7859a8d05badb1b45ac1a6",
+    "src\\iCCModules\\imageCompositeConverterSemanticConnectors.py": "3680c36dca2d3b6f25d853451d1f6940d927ea6524e292bee506d386e1b51bd7",
+    "src\\iCCModules\\imageCompositeConverterSemanticDefaults.py": "ffe832c6638f4b5aca92a28108caf6b7c25726545c989e8ddea9defb048e0942",
+    "src\\iCCModules\\imageCompositeConverterSemanticFitting.py": "0eb7ae12b1d37d6a9478a97291e8daa0a59189cd2b2a54103f3a6f1829bb30ce",
+    "src\\iCCModules\\imageCompositeConverterSemanticGeometry.py": "21bbff4c2772ddf26196a9494c245f05d0492a103cbfa3d562974ec1f61a298b",
+    "src\\iCCModules\\imageCompositeConverterSemanticHarmonization.py": "8da26e6f9f4985753cc879ddf2ab83c69a1cb32a96ad6d5309c83e0f4095ae33",
+    "src\\iCCModules\\imageCompositeConverterSemanticIterationFinalization.py": "6e0a5d52422279a25a759ce629f257fd007dd47a33134dc08616502128b959f5",
+    "src\\iCCModules\\imageCompositeConverterSemanticLabels.py": "ff3f0cff3edbbd3c5012428ea06cdbd2fb544f09406d01c57914ee6204abac66",
+    "src\\iCCModules\\imageCompositeConverterSemanticMismatchReporting.py": "51364d1bab5561de03c15f30ad9bfb01d1dca17ce2eb12af7f660b12681b3244",
+    "src\\iCCModules\\imageCompositeConverterSemanticMismatchRuntime.py": "e8e8cb2c6284a84c842ef08116eed5b0093186829f30e2415e9bf4211f4743a5",
+    "src\\iCCModules\\imageCompositeConverterSemanticParams.py": "925d651596aa1fbb25895891c3c915fdeab082b95f45de546cd3c19ca7ba7f7a",
+    "src\\iCCModules\\imageCompositeConverterSemanticPostValidation.py": "036676d932b87118b5925b869f8348a08ed878e335af7e93537bf4c0f5a744f9",
+    "src\\iCCModules\\imageCompositeConverterSemanticRedrawVariation.py": "759833c9a89da556667c2a6cdc39977bde1ec0a9eab55f187b23d1a7dcde0b14",
+    "src\\iCCModules\\imageCompositeConverterSemanticValidation.py": "5032101f2001fc1fb13e3fc2c3ad8449f3295df8940463878841259ad5c39919",
+    "src\\iCCModules\\imageCompositeConverterSemanticValidationContext.py": "0150ad8444737f6f2ff0d8b851e315ee9897c0681737be680d44ae42a616c6f8",
+    "src\\iCCModules\\imageCompositeConverterSemanticValidationFinalization.py": "ea6fb9ceb2b9804a64fcd03ae0ab21671d6c8599351082b9564e53bd04750ae2",
+    "src\\iCCModules\\imageCompositeConverterSemanticValidationLogging.py": "3cbf9b46e6b6e83ffc7f7ffadd567a2244ff8fe691336b3c39a797ffce725de0",
+    "src\\iCCModules\\imageCompositeConverterSemanticValidationRuntime.py": "769bdbed652e81e7444225edb811f34fcd72780659641078c135a1d69bba55cc",
+    "src\\iCCModules\\imageCompositeConverterSemanticVisualOverride.py": "2a2f796b8b5aa38b83f940067ac5e243c22e61cade43e84a8be1185faf2a6f42",
+    "src\\iCCModules\\imageCompositeConverterSineDiagram.py": "6ed7e51af725e1d8feb5c1fc786d6340bb11be58f31f25801c1cc3cc0982759f",
+    "src\\iCCModules\\imageCompositeConverterSpiralDisk.py": "17dcdf11127d1337854ebc8a70c6085960bc37d4a87d8c26e2731bdf30131e92",
+    "src\\iCCModules\\imageCompositeConverterSquareStem.py": "a99b47ed63a9429a6183527412e35eb1285553e43bfd7048ff070247e5c66d92",
+    "src\\iCCModules\\imageCompositeConverterStepDiagram.py": "4379c408662c99ca737ddefecbda57d57f9f27a3d3e1523251b57ff8a013b440",
+    "src\\iCCModules\\imageCompositeConverterStripedPanelDisk.py": "7798a412a57bd08c63c5a5b338251ca8eabd1e38add6f33deedcb3485cc7bb5c",
+    "src\\iCCModules\\imageCompositeConverterSuccessfulConversionQuality.py": "abad6640c36ed360436fb2e09e0c86b3cd89ba264d5ffcd2abc1859122f884ca",
+    "src\\iCCModules\\imageCompositeConverterSuccessfulConversionReport.py": "727052a4a04970e77ee31fc9fe2abd25f6444d3fd1806363013d3560a40c7626",
+    "src\\iCCModules\\imageCompositeConverterSuccessfulConversions.py": "ea459327043f2a685e391765a840786731a1559357088baffa9c74767665e7a7",
+    "src\\iCCModules\\imageCompositeConverterTemplateTransfer.py": "1352210339a5eaf30afcf9e5844c050fb7acfebc8f24818f53c6af0388cd837e",
+    "src\\iCCModules\\imageCompositeConverterThreeWayValve.py": "336a00d130f23e33484b8b0bb80ca1749b9cd12869487e7316c5539024e49b20",
+    "src\\iCCModules\\imageCompositeConverterThresholding.py": "6244a62d00e4b17e629c36231138ac8ff5d79fd346dc5720aaf03f4097b7ac7d",
+    "src\\iCCModules\\imageCompositeConverterTransfer.py": "3ac5982905d6867a361ee5a9e9d6175d8e08563c1b7f81f712320e5b9bb9ace3",
+    "src\\iCCModules\\imageCompositeConverterTriangleStem.py": "69912f9d815fb6dbd4a658da5510fa249554cf57f7a070a13daaa743964790f4",
+    "src\\iCCModules\\imageCompositeConverterValidationRounds.py": "c813b8df9bb24d8b49b3bebeab7d9bbbc52624afbf77604d05e4de106e150712",
+    "src\\iCCModules\\imageCompositeConverterVendorInstall.py": "9cac63330c8e9a98300230b1103d96fa1e72bdc353a03572e1d8d04f88d94082",
+    "src\\iCCModules\\imageCompositeConverterWarningDisk.py": "330f9667a0712d2ae138412da2f2d2d1ee3caef078a32d7dd2961b249494019f",
+    "src\\iCCModules\\imageCompositeConverterZigzagPanel.py": "d8cf38fadeacfe151f25d0fbaae7d740183dcef37c9b7f3a26cc4e3de41814a8",
+    "src\\iCCModules\\__init__.py": "252b6d8fc8ec83dcb514f335d03e5e19f98e7b76fc59a28a25b102b4b943b4da",
+    "src\\iCCModules\\imageCompositeConverterGeometryIr\\runtime.py": "ba2b75a20fb146acfaefe169e4fdc99ed76c6e22aa9d54717c2574159014f4a3",
+    "src\\iCCModules\\imageCompositeConverterGeometryIr\\__init__.py": "adf4ac0439e11cacf3732647d6781ec1fc45b33c833628c46a038c0371ffdfce"
+  },
+  "cases": [
+    {
+      "case_id": "anonymous_00",
+      "width": 148,
+      "height": 156,
+      "description": "ein Kreis. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            64.06006965848965,
+            67.00750671418633,
+            26.329095294957966,
+            26.329095294957966
+          ]
+        }
+      ],
+      "reference_svg": "references\\scene_00.svg",
+      "input_sha256": "d8349db7b7046943c037f264e1249c3a43f08c262e14cfb85f786e1455475ada",
+      "reference_svg_sha256": "965a575ede97301db420a5d26f606ddbed9471b8bdbfa6169b7f3d949b7c1928",
+      "original_case_id": "scene_00",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_00\\conversion",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_00\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_00\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_00\\conversion",
+        "--start",
+        "anonymous_00",
+        "--end",
+        "anonymous_00",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 7.458882919308962e-06,
+        "foreground_mse": 0.000599401886574924,
+        "edge_alignment": 0.9762738943099976,
+        "foreground_iou": 0.982078853046595
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "anonymous_00\\conversion\\converted_svgs\\anonymous_00.svg",
+      "output_sha256": "e1090503b972ccd26543ac87bebb8f2c9a2547abc87333cfdd9bd734229a101c",
+      "elapsed_seconds": 2.531,
+      "object_check": {
+        "passed": true,
+        "detected_count": 1,
+        "expected_count": 1,
+        "max_bbox_error_px": 0.6709047050420338,
+        "boxes": [
+          [
+            64.0,
+            67.0,
+            27.0,
+            27.0
+          ]
+        ]
+      }
+    },
+    {
+      "case_id": "anonymous_01",
+      "width": 170,
+      "height": 240,
+      "description": "zwei Kreise. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen. Die Objekte liegen voneinander getrennt untereinander.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            49.084536818289784,
+            37.27590909543886,
+            42.93946816111072,
+            42.93946816111072
+          ]
+        },
+        {
+          "kind": "circle",
+          "bbox": [
+            38.38489089539346,
+            151.6844326854532,
+            52.4888801611578,
+            52.4888801611578
+          ]
+        }
+      ],
+      "reference_svg": "references\\scene_01.svg",
+      "input_sha256": "86cbb04aa13c0125931b71bfcaf67e420f316cf99b2687573c0ee8038e056953",
+      "reference_svg_sha256": "2018b84dee6fcb27c28d2dc09429c42c058a71e9e17049b04f6d3565e66fcd54",
+      "original_case_id": "scene_01",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_01\\conversion",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_01\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_01\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_01\\conversion",
+        "--start",
+        "anonymous_01",
+        "--end",
+        "anonymous_01",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 5.970679922029376e-06,
+        "foreground_mse": 0.000248511612880975,
+        "edge_alignment": 0.9874486923217773,
+        "foreground_iou": 0.991140642303433
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "anonymous_01\\conversion\\converted_svgs\\anonymous_01.svg",
+      "output_sha256": "e06ef11171dceb2f44c4aaf6c726f48c7df0e012233f21b8bad4be9cd4aeb924",
+      "elapsed_seconds": 3.031,
+      "object_check": {
+        "passed": true,
+        "detected_count": 2,
+        "expected_count": 2,
+        "max_bbox_error_px": 1.5111198388421982,
+        "boxes": [
+          [
+            49.0,
+            37.0,
+            43.0,
+            44.0
+          ],
+          [
+            38.0,
+            151.0,
+            53.0,
+            54.0
+          ]
+        ]
+      }
+    },
+    {
+      "case_id": "anonymous_02",
+      "width": 120,
+      "height": 180,
+      "description": "drei Rechtecke. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen. Die Objekte liegen voneinander getrennt untereinander.",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            27.770068751729028,
+            10.86714501646798,
+            47.66203969721303,
+            39.543641721723745
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            36.587728154397084,
+            75.95933579507701,
+            31.65654033518911,
+            27.386648583676436
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            41.99942167187694,
+            132.26942920229698,
+            42.18855240149433,
+            37.33833559542413
+          ]
+        }
+      ],
+      "reference_svg": "references\\scene_02.svg",
+      "input_sha256": "b59b52bf5195071d520ad9ed1e62ca8f30ac1a50e4e05d29cd2be30589b9e5e7",
+      "reference_svg_sha256": "f1979f1c22365da15ce0e141fda905674b2442307eb3b1741995002d964a8dde",
+      "original_case_id": "scene_02",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_02\\conversion",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_02\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_02\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_02\\conversion",
+        "--start",
+        "anonymous_02",
+        "--end",
+        "anonymous_02",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.51024529361166e-05,
+        "foreground_mse": 0.0005594507092610002,
+        "edge_alignment": 0.9577472805976868,
+        "foreground_iou": 0.9850169163847269
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "anonymous_02\\conversion\\converted_svgs\\anonymous_02.svg",
+      "output_sha256": "b557e7b4f17a28e5daec9a7a9717b7fcc1fd100746c0007ab690ddd16d49c784",
+      "elapsed_seconds": 3.078,
+      "object_check": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 1.4563582782762552,
+        "boxes": [
+          [
+            27.0,
+            10.0,
+            49.0,
+            41.0
+          ],
+          [
+            36.0,
+            76.0,
+            33.0,
+            28.0
+          ],
+          [
+            42.0,
+            132.0,
+            43.0,
+            38.0
+          ]
+        ]
+      }
+    },
+    {
+      "case_id": "anonymous_03",
+      "width": 170,
+      "height": 240,
+      "description": "ein Rechteck. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen.",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            23.526462720617218,
+            93.7594066432124,
+            69.98412010783306,
+            57.70484408552985
+          ]
+        }
+      ],
+      "reference_svg": "references\\scene_03.svg",
+      "input_sha256": "8c7406c9a8e35235a8318a4ded4326c1ab925af28d004225da48311d0b6a9b3a",
+      "reference_svg_sha256": "e10dc1467dcc9821a983a0ebabf2003858495a7462e19b95ed7a2e681469e481",
+      "original_case_id": "scene_03",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_03\\conversion",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_03\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_03\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_03\\conversion",
+        "--start",
+        "anonymous_03",
+        "--end",
+        "anonymous_03",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 3.091671896982007e-05,
+        "foreground_mse": 0.0012924199691042304,
+        "edge_alignment": 0.9943220019340515,
+        "foreground_iou": 0.9989754098360656
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "anonymous_03\\conversion\\converted_svgs\\anonymous_03.svg",
+      "output_sha256": "15d4e186d3fa95e2291c7ff8a467be9192db04c9eef84755be5b04c8789189ce",
+      "elapsed_seconds": 2.422,
+      "object_check": {
+        "passed": true,
+        "detected_count": 1,
+        "expected_count": 1,
+        "max_bbox_error_px": 1.2951559144701505,
+        "boxes": [
+          [
+            23.0,
+            93.0,
+            71.0,
+            59.0
+          ]
+        ]
+      }
+    },
+    {
+      "case_id": "anonymous_04",
+      "width": 148,
+      "height": 156,
+      "description": "ein Kreis und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt untereinander.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            82.76983649378684,
+            24.996071738329164,
+            28.695488632531795,
+            28.695488632531795
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            62.830033369912535,
+            98.96123606971884,
+            44.674108495963445,
+            40.195704008590866
+          ]
+        }
+      ],
+      "reference_svg": "references\\scene_04.svg",
+      "input_sha256": "eebf00ce3c3ca0428ee5d6c73010ca883f100f7737246765723f7e566fc0b042",
+      "reference_svg_sha256": "2526162ec0f7ba74c58e99cc16b31af0a4fb2428a49c55ad80c9406edef491fe",
+      "original_case_id": "scene_04",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_04\\conversion",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_04\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_04\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_04\\conversion",
+        "--start",
+        "anonymous_04",
+        "--end",
+        "anonymous_04",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 4.587876537698321e-05,
+        "foreground_mse": 0.001048856065608561,
+        "edge_alignment": 0.9962665438652039,
+        "foreground_iou": 0.9966480446927374
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "anonymous_04\\conversion\\converted_svgs\\anonymous_04.svg",
+      "output_sha256": "dacf6bef1a8b0d8cf886fac9864891defa85cd82f98ffeac074c406da3654cfb",
+      "elapsed_seconds": 2.797,
+      "object_check": {
+        "passed": true,
+        "detected_count": 2,
+        "expected_count": 2,
+        "max_bbox_error_px": 1.325891504036555,
+        "boxes": [
+          [
+            82.0,
+            25.0,
+            30.0,
+            29.0
+          ],
+          [
+            62.0,
+            99.0,
+            46.0,
+            41.0
+          ]
+        ]
+      }
+    },
+    {
+      "case_id": "anonymous_05",
+      "width": 148,
+      "height": 156,
+      "description": "zwei Kreise und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt untereinander.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            32.76421209010496,
+            10.663936111701494,
+            32.1999470858825,
+            32.1999470858825
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            76.88510342283718,
+            60.948992568917454,
+            23.30994106685303,
+            28.521519363214296
+          ]
+        },
+        {
+          "kind": "circle",
+          "bbox": [
+            36.454366240613616,
+            113.31415952187871,
+            30.882577100481008,
+            30.882577100481008
+          ]
+        }
+      ],
+      "reference_svg": "references\\scene_05.svg",
+      "input_sha256": "05a2a97553eaa9df794e8f8cf172a5aecaffed2f2969eb031746181268ea7884",
+      "reference_svg_sha256": "c5f0c66988ae5a87ac03af39e39e4b049bc9f6b2738aa7e5fe823bf27a94fd1e",
+      "original_case_id": "scene_05",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_05\\conversion",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_05\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_05\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_05\\conversion",
+        "--start",
+        "anonymous_05",
+        "--end",
+        "anonymous_05",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 2.440622847643681e-05,
+        "foreground_mse": 0.00040250038728117943,
+        "edge_alignment": 0.9877649545669556,
+        "foreground_iou": 0.9407783417935702
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "anonymous_05\\conversion\\converted_svgs\\anonymous_05.svg",
+      "output_sha256": "b76547a2add65e41344962e4dc7ad5535f714b7b8ae33252012bd2a9ef3c280f",
+      "elapsed_seconds": 3.266,
+      "object_check": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 1.117422899518992,
+        "boxes": [
+          [
+            32.0,
+            10.0,
+            33.0,
+            33.0
+          ],
+          [
+            76.0,
+            61.0,
+            24.0,
+            29.0
+          ],
+          [
+            36.0,
+            113.0,
+            32.0,
+            32.0
+          ]
+        ]
+      }
+    },
+    {
+      "case_id": "anonymous_06",
+      "width": 170,
+      "height": 240,
+      "description": "ein Kreis. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            55.15676839229782,
+            99.55038079366159,
+            40.83805546922032,
+            40.83805546922032
+          ]
+        }
+      ],
+      "reference_svg": "references\\scene_06.svg",
+      "input_sha256": "1e86a2b9e69242c23e3889be9fd43ef7456ec1d7fdcd7265595d200dc41f7ada",
+      "reference_svg_sha256": "247dafd2c3d5e143885210d86bb61ee2b22be3555544697152997ef286393b60",
+      "original_case_id": "scene_06",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_06\\conversion",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_06\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_06\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_06\\conversion",
+        "--start",
+        "anonymous_06",
+        "--end",
+        "anonymous_06",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 2.6366176371084293e-06,
+        "foreground_mse": 0.00022850011009722948,
+        "edge_alignment": 0.984225869178772,
+        "foreground_iou": 0.9819004524886877
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "anonymous_06\\conversion\\converted_svgs\\anonymous_06.svg",
+      "output_sha256": "3fce5dd4370eb7c82e3392de50e57601ac23fb3e971c6cdb58d1c840062c529b",
+      "elapsed_seconds": 2.422,
+      "object_check": {
+        "passed": true,
+        "detected_count": 1,
+        "expected_count": 1,
+        "max_bbox_error_px": 1.161944530779678,
+        "boxes": [
+          [
+            55.0,
+            99.0,
+            41.0,
+            42.0
+          ]
+        ]
+      }
+    },
+    {
+      "case_id": "anonymous_07",
+      "width": 148,
+      "height": 156,
+      "description": "zwei Kreise. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen. Die Objekte liegen voneinander getrennt untereinander.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            68.56770747522802,
+            18.74034422933704,
+            44.477538222017984,
+            44.477538222017984
+          ]
+        },
+        {
+          "kind": "circle",
+          "bbox": [
+            29.918395573328482,
+            95.40752396308953,
+            37.93094793900562,
+            37.93094793900562
+          ]
+        }
+      ],
+      "reference_svg": "references\\scene_07.svg",
+      "input_sha256": "590ef7c95001ebca72d65f23d75c258f9386ab69ea031d00f6ef896def331310",
+      "reference_svg_sha256": "99fd088f3c5d4d247408e81724285caf84ed2b2438ecc650d69f39652e853c88",
+      "original_case_id": "scene_07",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_07\\conversion",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_07\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_07\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_07\\conversion",
+        "--start",
+        "anonymous_07",
+        "--end",
+        "anonymous_07",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 2.0043775293743238e-05,
+        "foreground_mse": 0.0005360150244086981,
+        "edge_alignment": 0.9721423983573914,
+        "foreground_iou": 0.9911616161616161
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "anonymous_07\\conversion\\converted_svgs\\anonymous_07.svg",
+      "output_sha256": "2bf90201aa3c01713794d1ae455f85e62c0687d2a3591ecc4bbdfb2d54788f07",
+      "elapsed_seconds": 3.031,
+      "object_check": {
+        "passed": true,
+        "detected_count": 2,
+        "expected_count": 2,
+        "max_bbox_error_px": 1.5224617779820164,
+        "boxes": [
+          [
+            68.0,
+            18.0,
+            45.0,
+            46.0
+          ],
+          [
+            30.0,
+            95.0,
+            38.0,
+            39.0
+          ]
+        ]
+      }
+    },
+    {
+      "case_id": "anonymous_08",
+      "width": 170,
+      "height": 240,
+      "description": "drei Kreise. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen. Die Objekte liegen voneinander getrennt untereinander.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            61.358032816275745,
+            22.53553189334686,
+            34.77668303875034,
+            34.77668303875034
+          ]
+        },
+        {
+          "kind": "circle",
+          "bbox": [
+            55.53510764855023,
+            102.51125541886877,
+            33.00427281929213,
+            33.00427281929213
+          ]
+        },
+        {
+          "kind": "circle",
+          "bbox": [
+            68.98652064508393,
+            185.46350225805946,
+            33.66393265958578,
+            33.66393265958578
+          ]
+        }
+      ],
+      "reference_svg": "references\\scene_08.svg",
+      "input_sha256": "042ec0a3af514882982dea32736f7f00ba1e1c237fc4e32ede52bbcff1ac5535",
+      "reference_svg_sha256": "6da3f7dc8222c7e066fe321ca3d9fcd68b72ff502dd979a86e71e6bdf9431f90",
+      "original_case_id": "scene_08",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_08\\conversion",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_08\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_08\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_08\\conversion",
+        "--start",
+        "anonymous_08",
+        "--end",
+        "anonymous_08",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 1.507577508164104e-05,
+        "foreground_mse": 0.0004700772406067699,
+        "edge_alignment": 0.9824510812759399,
+        "foreground_iou": 0.9872813990461049
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "anonymous_08\\conversion\\converted_svgs\\anonymous_08.svg",
+      "output_sha256": "5855838058bbcd6ae6e21d1f1be1c2c989d3be3143aa065b71961ba1ff38f5f2",
+      "elapsed_seconds": 4.078,
+      "object_check": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 1.3360673404142176,
+        "boxes": [
+          [
+            61.0,
+            22.0,
+            35.0,
+            36.0
+          ],
+          [
+            55.0,
+            102.0,
+            34.0,
+            34.0
+          ],
+          [
+            69.0,
+            185.0,
+            34.0,
+            35.0
+          ]
+        ]
+      }
+    },
+    {
+      "case_id": "anonymous_09",
+      "width": 170,
+      "height": 240,
+      "description": "ein Kreis. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            58.85527262081591,
+            94.8295700505102,
+            49.378147029937466,
+            49.378147029937466
+          ]
+        }
+      ],
+      "reference_svg": "references\\scene_09.svg",
+      "input_sha256": "9495fc8d09018cf18be57364be757d4fdf208ce26f11d0c7e863efd184053342",
+      "reference_svg_sha256": "1f0ba616ec713840d30f1c21ea34ebe7b2894154b4545c760124bc8a8feb4f91",
+      "original_case_id": "scene_09",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_09\\conversion",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_09\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_09\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_09\\conversion",
+        "--start",
+        "anonymous_09",
+        "--end",
+        "anonymous_09",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 1.0052192010334693e-05,
+        "foreground_mse": 0.0007138915243558586,
+        "edge_alignment": 0.9758439064025879,
+        "foreground_iou": 0.9834862385321101
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "anonymous_09\\conversion\\converted_svgs\\anonymous_09.svg",
+      "output_sha256": "1dd7b0e5ab6a068f30d080a2165667f577f26479355a8434fb33ad05bd5a8cde",
+      "elapsed_seconds": 2.938,
+      "object_check": {
+        "passed": true,
+        "detected_count": 1,
+        "expected_count": 1,
+        "max_bbox_error_px": 1.621852970062534,
+        "boxes": [
+          [
+            58.0,
+            94.0,
+            51.0,
+            51.0
+          ]
+        ]
+      }
+    },
+    {
+      "case_id": "anonymous_10",
+      "width": 170,
+      "height": 240,
+      "description": "zwei Rechtecke. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt untereinander.",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            65.15293404759498,
+            39.93355431587638,
+            45.19027260561001,
+            44.994754276425034
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            30.651828296272008,
+            157.9290115672244,
+            54.904689929394074,
+            46.59256570625164
+          ]
+        }
+      ],
+      "reference_svg": "references\\scene_10.svg",
+      "input_sha256": "3e6204bd2da6e707d3f037cd65a4f96cc2d566817bb7fdd6eef51887c3fe4e57",
+      "reference_svg_sha256": "866f19adcd48a549cd59b412df2f91c230db7b6a92a0afa4330dd81335df26aa",
+      "original_case_id": "scene_10",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_10\\conversion",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_10\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_10\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_10\\conversion",
+        "--start",
+        "anonymous_10",
+        "--end",
+        "anonymous_10",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 3.438923886278644e-05,
+        "foreground_mse": 0.0011137333931401372,
+        "edge_alignment": 0.9961757063865662,
+        "foreground_iou": 0.9634340222575517
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "anonymous_10\\conversion\\converted_svgs\\anonymous_10.svg",
+      "output_sha256": "ddb715cdabe7cde0ab9f4c9d7232f2d0bf0ce5891f66c977159e41ceed67a86c",
+      "elapsed_seconds": 3.031,
+      "object_check": {
+        "passed": true,
+        "detected_count": 2,
+        "expected_count": 2,
+        "max_bbox_error_px": 1.4074342937483593,
+        "boxes": [
+          [
+            65.0,
+            39.0,
+            46.0,
+            46.0
+          ],
+          [
+            30.0,
+            157.0,
+            56.0,
+            48.0
+          ]
+        ]
+      }
+    },
+    {
+      "case_id": "anonymous_11",
+      "width": 120,
+      "height": 180,
+      "description": "ein Kreis und zwei Rechtecke. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen. Die Objekte liegen voneinander getrennt untereinander.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            33.754822277678116,
+            12.450775258484786,
+            29.762059087979992,
+            29.762059087979992
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            31.49404130695313,
+            74.15667068232635,
+            35.133343731283766,
+            36.1839102531849
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            49.46784048430432,
+            129.1001325296386,
+            29.642291353771395,
+            38.46401164253917
+          ]
+        }
+      ],
+      "reference_svg": "references\\scene_11.svg",
+      "input_sha256": "a714947ce03cf4548885230d721701180a8c20187c05ffc64fef8e224d875b9a",
+      "reference_svg_sha256": "54a7d1bc6bbec30c0fe4ae4340f1f42648e945894105823ed27adb8aacda243a",
+      "original_case_id": "scene_11",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_11\\conversion",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_11\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_11\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\primitive_scene_2026-10-17\\rename_guarded\\anonymous_11\\conversion",
+        "--start",
+        "anonymous_11",
+        "--end",
+        "anonymous_11",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 2.922855128417723e-05,
+        "foreground_mse": 0.00041271065128967166,
+        "edge_alignment": 0.993796169757843,
+        "foreground_iou": 0.9954233409610984
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "anonymous_11\\conversion\\converted_svgs\\anonymous_11.svg",
+      "output_sha256": "c9ac8e1cd72a0fb9d030b5750b4a9953f8f2fb01c8d7c0297450b628fe952cfb",
+      "elapsed_seconds": 3.235,
+      "object_check": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 1.237940912020008,
+        "boxes": [
+          [
+            33.0,
+            12.0,
+            31.0,
+            31.0
+          ],
+          [
+            31.0,
+            74.0,
+            36.0,
+            37.0
+          ],
+          [
+            49.0,
+            129.0,
+            30.0,
+            39.0
+          ]
+        ]
+      }
+    }
+  ],
+  "damage_probe": {
+    "satisfactory": true,
+    "failures": [],
+    "metrics": {
+      "normalized_mse": 0.0009071242529898882,
+      "foreground_mse": 0.018534990027546883,
+      "edge_alignment": 0.9665272235870361,
+      "foreground_iou": 0.9594882729211087
+    },
+    "limits": {
+      "max_normalized_mse": 0.01,
+      "max_foreground_mse": 0.04,
+      "min_edge_alignment": 0.72,
+      "min_foreground_iou": 0.85,
+      "max_svg_elements": 80,
+      "max_path_commands": 160
+    },
+    "complexity": {
+      "parse_error": null,
+      "embedded_raster_count": 0,
+      "vector_element_count": 2,
+      "path_count": 0,
+      "path_command_count": 0,
+      "path_complexity_ratio": 0.0
+    },
+    "object_check": {
+      "passed": false,
+      "detected_count": 1,
+      "expected_count": 2,
+      "boxes": [
+        [
+          18.0,
+          23.0,
+          124.0,
+          109.0
+        ]
+      ]
+    },
+    "evidence_kind": "deliberately_removed_object"
+  }
+}
