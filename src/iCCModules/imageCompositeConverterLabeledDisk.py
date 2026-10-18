@@ -130,7 +130,27 @@ def fit_labeled_disk(width, height, *, description, image, render_fn, error_fn):
                 and (not bottom_stem or (cy+r+.5 < p[7] <= height and .3 <= p[8] < r*.45))
                 and np.isfinite(p).all() and np.all((p[geometry_count:] >= 0) & (p[geometry_count:] <= 255)))
 
-    fitted = _register(p, geometry_count, build, valid, image, render_fn, error_fn, 'raster_bottom_stem_letter_disk_v1' if bottom_stem else 'raster_labeled_disk_v1')
+    semantic_evaluations = 0
+    def satisfactory(parameters, measured):
+        nonlocal semantic_evaluations
+        blank = render_fn(build(parameters,blank=True),width,height)
+        semantic_evaluations += 1
+        if blank is None:
+            return False
+        output = measured[3].astype(float)
+        predicted = (np.mean(blank.astype(float)-output,axis=2)>45)&(radial<radius*.8)
+        observed = glyph_mask.astype(bool)
+        union = (predicted|observed).sum()
+        if not union or (predicted&observed).sum()/union < max(.65,1-3/radius):
+            return False
+        distance = cv2.distanceTransform((~observed).astype(np.uint8),cv2.DIST_L2,3)
+        exposed = (radial<radius*.85)&~cv2.dilate(observed.astype(np.uint8),np.ones((3,3),np.uint8)).astype(bool)
+        return bool(distance[predicted].max()<=max(1.5,radius*.035) and exposed.any()
+            and np.percentile(np.max(abs(pixels[exposed]-output[exposed]),axis=1),95)<=25)
+
+    fitted = _register(p, geometry_count, build, valid, image, render_fn, error_fn,
+        'raster_bottom_stem_letter_disk_v1' if bottom_stem else 'raster_labeled_disk_v1',
+        satisfactory_fn=satisfactory)
     if fitted is None:
         return None
     # Joint font pose candidates escape subpixel coordinate-descent stalls.
@@ -168,7 +188,7 @@ def fit_labeled_disk(width, height, *, description, image, render_fn, error_fn):
                         seed, best_loss = candidate, loss
         fitted = _register(seed, geometry_count, build, valid, image,
                            render_fn, error_fn, 'raster_bottom_stem_letter_disk_v1',
-                           initial_error_bound=previous['initial_error'])
+                           initial_error_bound=previous['initial_error'],satisfactory_fn=satisfactory)
         if fitted is None:
             return None
         fitted['evaluations'] += previous['evaluations']+extra
@@ -178,4 +198,5 @@ def fit_labeled_disk(width, height, *, description, image, render_fn, error_fn):
     exposed = (radial < radius*.85) & ~cv2.dilate(observed.astype(np.uint8), np.ones((3, 3), np.uint8)).astype(bool)
     if not exposed.any() or np.percentile(np.max(np.abs(pixels[exposed]-output[exposed]), axis=1), 95) > 25:
         return None
+    fitted['evaluations'] += semantic_evaluations
     return fitted

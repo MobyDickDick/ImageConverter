@@ -40,7 +40,10 @@ def runQualityPassesImpl(
         if before_pass_fn is not None:
             before_pass_fn(pass_idx)
 
-        current_rows = [row for row in result_map.values() if _isFiniteNumber(row.get("error_per_pixel", float("inf")))]
+        current_rows = [row for row in result_map.values()
+                        if _isFiniteNumber(row.get("error_per_pixel", float("inf")))
+                        and (row.get('search_control') or {}).get('stop_reason') not in
+                        {'satisfactory','stagnation','time_limit'}]
         acceptance_limits_configured = max_mean_delta2 is not None or max_std_delta2 is not None
         acceptance_kwargs = {}
         if acceptance_limits_configured:
@@ -104,6 +107,11 @@ def runQualityPassesImpl(
                 variant = str(row.get("variant", "")).strip().upper()
                 if variant:
                     restore_conversion_bestlist_snapshot_fn(variant)
+                if new_row.get('search_control'):
+                    # Keep the old SVG/metrics and the latest retry decision.
+                    # A failed repeat must not be requeued just because its
+                    # residual is spatially structured.
+                    row['search_control'] = new_row['search_control']
 
             quality_logs.append(
                 {

@@ -1,0 +1,797 @@
+{
+  "artifact_retention": "debug",
+  "cases": [
+    {
+      "blocked_svg_reads": [],
+      "case_id": "original",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "original/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild.",
+      "elapsed_seconds": 24.484,
+      "failures": [],
+      "height": 86,
+      "input_png": "original/input.png",
+      "input_sha256": "8535ce2345984936ef72b434e59fe98b1ddb6ce358ba13f0ef655187638e3615",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9670360088348389,
+        "foreground_iou": 0.9909774436090225,
+        "foreground_mse": 0.0003392256039660424,
+        "normalized_mse": 7.162570545915514e-05
+      },
+      "output_sha256": "d12742a478bda8099befc1817e4120306e67c700eaf689c2ac1cdc6db6b03802",
+      "output_svg": "original/output.svg",
+      "reference_svg": "original/reference.svg",
+      "reference_svg_sha256": "04841998923a34aaeb509b101026f8ecc6f34c36bec8b292b4f5901a62b16c8f",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.0,
+        "relative_y": 0.0,
+        "scale": 1.0
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_01",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_01/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Die Darstellung ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "elapsed_seconds": 17.312,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_01/input.png",
+      "input_sha256": "e6e4550abb32e6cd8f245debfcefc7b04840a407ba5ce490375a406af63ef66c",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.958838701248169,
+        "foreground_iou": 0.9910080454330336,
+        "foreground_mse": 0.0002931002527475357,
+        "normalized_mse": 6.527304503833875e-05
+      },
+      "output_sha256": "31d66424b36467510b6a8b7f0bdf16fe0b210467eb4648466c6378816ad12b17",
+      "output_svg": "probe_01/output.svg",
+      "reference_svg": "probe_01/reference.svg",
+      "reference_svg_sha256": "2e2f600e66f0e56942806a8d0dd1c74691f3619aeff9d5938e021c2e53ad54f3",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0149554,
+        "relative_y": 0.01404737,
+        "scale": 1.04281285
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_02",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_02/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "elapsed_seconds": 26.219,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_02/input.png",
+      "input_sha256": "b3358b5252f22485bc6be65f911232a75b4bfa5ee876cdb98185b782d2f7131f",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9721149206161499,
+        "foreground_iou": 0.9919597989949749,
+        "foreground_mse": 0.0007525362307205796,
+        "normalized_mse": 0.00014859771181363612
+      },
+      "output_sha256": "23bb44213cd32f22a5324c10ff151b03a1a1f8aa038150acb51671fc52d29224",
+      "output_svg": "probe_02/output.svg",
+      "reference_svg": "probe_02/reference.svg",
+      "reference_svg_sha256": "8d0af5590dc58d8f02795864796931754afa14e1e1acf886f1564e01a2856ef4",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01219469,
+        "relative_y": 0.02409658,
+        "scale": 1.01409436
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_03",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_03/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Das Motiv ist etwas gr\u00f6\u00dfer dargestellt und leicht nach links und unten versetzt.",
+      "elapsed_seconds": 26.547,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_03/input.png",
+      "input_sha256": "a26ff77007d0cfb1173a4121180701728d8d4653b07980ebaeb1382571221282",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9617868065834045,
+        "foreground_iou": 0.9927765237020316,
+        "foreground_mse": 0.00024953068350441754,
+        "normalized_mse": 5.622316166409291e-05
+      },
+      "output_sha256": "5c2656c7f565a0ab0201572894cfda3997302d31cce1da8d0b3e9438abed24d1",
+      "output_svg": "probe_03/output.svg",
+      "reference_svg": "probe_03/reference.svg",
+      "reference_svg_sha256": "6746766aa8f47ccb456c1dc257edda4f9c713e8b4972c61e2c413dda6820d1ee",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01945393,
+        "relative_y": 0.004432,
+        "scale": 1.04771352
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_04",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_04/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach rechts und oben versetzt.",
+      "elapsed_seconds": 26.047,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_04/input.png",
+      "input_sha256": "028ae12dae6fb131a4d2a8752eea26cb4a20de489faebc464e12c07674f530c1",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9655791521072388,
+        "foreground_iou": 0.9875776397515528,
+        "foreground_mse": 0.0004568275180645287,
+        "normalized_mse": 9.618642798159271e-05
+      },
+      "output_sha256": "f94ce43c38e8f16d832545381807dfe105ca17a24f03df7d18f9f461c959cb1f",
+      "output_svg": "probe_04/output.svg",
+      "reference_svg": "probe_04/reference.svg",
+      "reference_svg_sha256": "ffb9a764526479087c2b06fbbbeaba729fd668bdaf953cd848b14d39cdb960a9",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00934637,
+        "relative_y": -0.02498267,
+        "scale": 1.0217956
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_05",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_05/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig gr\u00f6\u00dfer dargestellt und leicht nach rechts und unten verschoben.",
+      "elapsed_seconds": 26.563,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_05/input.png",
+      "input_sha256": "538caa3f78db80cf7e6de8f7a2c3cf07884077d99d6e29c0b0bf166d2c2393b5",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9570056796073914,
+        "foreground_iou": 0.9860375541646605,
+        "foreground_mse": 0.0007080225041136146,
+        "normalized_mse": 0.00014450564049184322
+      },
+      "output_sha256": "f3b82356800cb95167819caf53f4198aa833003116533c1877130a7438abd808",
+      "output_svg": "probe_05/output.svg",
+      "reference_svg": "probe_05/reference.svg",
+      "reference_svg_sha256": "1b48639839421f4e788fcfde52b766f1a67c9f6446e2c4f6a7d39a01572e9784",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02113508,
+        "relative_y": 0.00340482,
+        "scale": 1.01506327
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_06",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_06/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas kleiner dargestellt und etwas nach links und unten verschoben.",
+      "elapsed_seconds": 25.547,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_06/input.png",
+      "input_sha256": "95ce1e14e1df06601ecb5abf7cd95041c042f46eed161c85a76b221b42011264",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9485175609588623,
+        "foreground_iou": 0.9790748898678414,
+        "foreground_mse": 0.001501142280176282,
+        "normalized_mse": 0.00026963840355165303
+      },
+      "output_sha256": "e5948df4dfaa1f8dbaada0badd332ad24419c6ed63d130c8a809356e6a26ac03",
+      "output_svg": "probe_06/output.svg",
+      "reference_svg": "probe_06/reference.svg",
+      "reference_svg_sha256": "cf484024cdc3ef4c260bf7c5eb9bac3624b0d0a7c4b693f6a6172e4e4384a880",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02210458,
+        "relative_y": 0.01042227,
+        "scale": 0.95167741
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_07",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_07/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und etwas nach rechts und oben versetzt.",
+      "elapsed_seconds": 25.062,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_07/input.png",
+      "input_sha256": "bfc225be36a53a0180eafbf49db8743a4f2644215fffa666bc6aa5805adfe7b0",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9818285703659058,
+        "foreground_iou": 0.9900695134061569,
+        "foreground_mse": 0.00030248850816860795,
+        "normalized_mse": 6.138862954685465e-05
+      },
+      "output_sha256": "262a63b7b3bd2e448843ef881a716db15c736bef249250efd3eb1e6ff62eb66c",
+      "output_svg": "probe_07/output.svg",
+      "reference_svg": "probe_07/reference.svg",
+      "reference_svg_sha256": "46ab859a0dcb6fa94610484d515f908ebae6e4327dc3f06cbfeed6b3f1496ca5",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01843312,
+        "relative_y": -0.00346665,
+        "scale": 1.00149991
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_08",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_08/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig kleiner dargestellt und etwas nach rechts und oben versetzt.",
+      "elapsed_seconds": 24.922,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_08/input.png",
+      "input_sha256": "a39826039e567d489c6804c882109ec75670eefbee352cb10bc2546a330b94d8",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9713432192802429,
+        "foreground_iou": 0.9832974137931034,
+        "foreground_mse": 0.0005966537864878774,
+        "normalized_mse": 0.00011199428263353184
+      },
+      "output_sha256": "3e632e3b14c79b1637aeb6786348b91c8aebdf80e7e7dd8122f9df7d7cf8e4d8",
+      "output_svg": "probe_08/output.svg",
+      "reference_svg": "probe_08/reference.svg",
+      "reference_svg_sha256": "0598618cde2c196b65126fd66eba58059fb8d9d3fec150950bced4dab773de11",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02424477,
+        "relative_y": -0.01831125,
+        "scale": 0.96370277
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_09",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_09/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas kleiner dargestellt und leicht nach links und oben versetzt.",
+      "elapsed_seconds": 26.625,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_09/input.png",
+      "input_sha256": "5b67a0b954eb6fadf76636a6c5867a2defc9b5e2683a48242288d1aa2c5945f0",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9727176427841187,
+        "foreground_iou": 0.986870897155361,
+        "foreground_mse": 0.00035494964686222374,
+        "normalized_mse": 6.442215089919046e-05
+      },
+      "output_sha256": "f57d9fdcd153d311608fcf99e45765731381cc2bd7b4497d960ee0d86350172b",
+      "output_svg": "probe_09/output.svg",
+      "reference_svg": "probe_09/reference.svg",
+      "reference_svg_sha256": "db7c173a05bbb9b561232ef16c569479c9396e417c91af6bda1ffc59e46e51e7",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02460557,
+        "relative_y": -0.0063062,
+        "scale": 0.94452461
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_10",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_10/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und oben verschoben.",
+      "elapsed_seconds": 26.282,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_10/input.png",
+      "input_sha256": "2f7186b8bfed6f947fb180a45b95d79aa2c0cb5b25408dd6fb3bfaa40323e874",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9647969007492065,
+        "foreground_iou": 0.9875,
+        "foreground_mse": 0.000654533738270402,
+        "normalized_mse": 0.00013671396300196648
+      },
+      "output_sha256": "d47a913cfb2b9f597ad5fdb6ecaedffc794f2e728d02669a8b0b17ead3fff0e3",
+      "output_svg": "probe_10/output.svg",
+      "reference_svg": "probe_10/reference.svg",
+      "reference_svg_sha256": "9badb1307fcf1bd2992c60ef5057be7098f1b873ffcc15d4eccf618d122cfb70",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01341343,
+        "relative_y": -0.01747129,
+        "scale": 1.01463589
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_11",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_11/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten verschoben.",
+      "elapsed_seconds": 25.266,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_11/input.png",
+      "input_sha256": "8be26c4fa415fba07e264b1defa283238f77f58a2c296297573ecad56392350e",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9701313376426697,
+        "foreground_iou": 0.9934376577486118,
+        "foreground_mse": 0.0003323046548757702,
+        "normalized_mse": 6.599876360269263e-05
+      },
+      "output_sha256": "1568e55b17da97ba7815c5a8193843162b6a0445e5151afac2d42b6da4ed0391",
+      "output_svg": "probe_11/output.svg",
+      "reference_svg": "probe_11/reference.svg",
+      "reference_svg_sha256": "5dbd2a09465efda2b5f31072c9c0e944cab34ee016186037df32e0a3faa34b26",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01618893,
+        "relative_y": 0.02334897,
+        "scale": 1.00114343
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_12",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_12/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "elapsed_seconds": 26.047,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_12/input.png",
+      "input_sha256": "45efcbd1798ee4fa2047bc2cac265e5dcdcc38131a034ff296a1efe9336144cf",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9646278619766235,
+        "foreground_iou": 0.9893822393822393,
+        "foreground_mse": 0.000475868844659999,
+        "normalized_mse": 9.816289821173996e-05
+      },
+      "output_sha256": "f0c414c7595411f0409d4586dfde6e651053ceb9fd718e560b85145acb85e58c",
+      "output_svg": "probe_12/output.svg",
+      "reference_svg": "probe_12/reference.svg",
+      "reference_svg_sha256": "5a60810c7802b31cc82dcc83871431bcdbbbcdc007f1ba2b282b7faf10f62dbf",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0015255,
+        "relative_y": 0.01511785,
+        "scale": 1.01824388
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_13",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_13/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und etwas nach rechts und unten versetzt.",
+      "elapsed_seconds": 25.297,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_13/input.png",
+      "input_sha256": "f72d2242023399dd1cf2a892c7187238abbfb1ffd572554d2e9aa9009de5d846",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9648210406303406,
+        "foreground_iou": 0.9907205240174672,
+        "foreground_mse": 0.00024847403983585536,
+        "normalized_mse": 4.6357643441297114e-05
+      },
+      "output_sha256": "0de80e05d930fea9604b785f0fda52263a05310328f7823b864a87bc7ee651a8",
+      "output_svg": "probe_13/output.svg",
+      "reference_svg": "probe_13/reference.svg",
+      "reference_svg_sha256": "751b7e5f48e539ace63eb7cad4d939dc5f683f08797e7f9739fe2bcd1c20d2bd",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02024787,
+        "relative_y": 0.00270128,
+        "scale": 0.94506484
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_14",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_14/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht kleiner dargestellt und geringf\u00fcgig nach rechts und unten verschoben.",
+      "elapsed_seconds": 16.625,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_14/input.png",
+      "input_sha256": "5e00e085d1b82bb0a68ccadf6bbaa5db82d6199f4cc1d15bf00b6550f9da21d7",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9724199175834656,
+        "foreground_iou": 0.9904330312185297,
+        "foreground_mse": 0.0002804793184623122,
+        "normalized_mse": 5.949559999862686e-05
+      },
+      "output_sha256": "f2682926fa4d2628cdca5311fd561256d4c545b2d04989d7dd8ab46efe172438",
+      "output_svg": "probe_14/output.svg",
+      "reference_svg": "probe_14/reference.svg",
+      "reference_svg_sha256": "4b61c7876b6d6bba141101ca5d852f14bbec8b46b631314c525f0c33ef445dcf",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00180461,
+        "relative_y": 0.00170246,
+        "scale": 0.99997072
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_15",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_15/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht kleiner dargestellt und geringf\u00fcgig nach links und oben versetzt.",
+      "elapsed_seconds": 26.031,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_15/input.png",
+      "input_sha256": "28a2ae145425b73d8bda6c4eb800fa46feadc6f449ddee3bbd15f952cb1e9393",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9751383066177368,
+        "foreground_iou": 0.9924650161463939,
+        "foreground_mse": 0.00030978122958913445,
+        "normalized_mse": 5.796518235001713e-05
+      },
+      "output_sha256": "6705431d78b145331a82d47bf9b9ad21acc4d19d748a285023929500e6dccc4c",
+      "output_svg": "probe_15/output.svg",
+      "reference_svg": "probe_15/reference.svg",
+      "reference_svg_sha256": "2f37e03229652bed65df77856c833727bc8cda12ac87e8d1b9d404711c14913d",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0026847,
+        "relative_y": -0.01725626,
+        "scale": 0.95282094
+      },
+      "width": 120
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_16",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "converter_log": "probe_16/converter.log",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht kleiner dargestellt und geringf\u00fcgig nach rechts und unten verschoben.",
+      "elapsed_seconds": 24.641,
+      "failures": [],
+      "height": 86,
+      "input_png": "probe_16/input.png",
+      "input_sha256": "fb38cd7fa24d68c05aef7f75c25cf14c72b4287de1f4c48ed991ac800d707446",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9634798765182495,
+        "foreground_iou": 0.9672477548864237,
+        "foreground_mse": 0.0007696310058236122,
+        "normalized_mse": 0.00014396818005479872
+      },
+      "output_sha256": "7360969b545b7c4e93323999daa04bf0dd43c542f5dc61d99170f57747422a58",
+      "output_svg": "probe_16/output.svg",
+      "reference_svg": "probe_16/reference.svg",
+      "reference_svg_sha256": "3618d1488d4a226b3bca91b795bc9a099676c15684a646ad5a79268453500484",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02374944,
+        "relative_y": 0.01921438,
+        "scale": 0.96012384
+      },
+      "width": 120
+    }
+  ],
+  "iterations": 64,
+  "limits": {
+    "max_foreground_mse": 0.04,
+    "max_normalized_mse": 0.01,
+    "max_path_commands": 160,
+    "max_svg_elements": 80,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85
+  },
+  "original_satisfactory": true,
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261018,
+  "source_description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen gr\u00fcnen Farbverlauf von dunkel links unten nach hell rechts oben und eine gr\u00fcnlich graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"R\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild.",
+  "source_description_sha256": "fe522ce0f4e3c45d92e0bea6df9fc3900be31c7b3166081a0a7ef25abfbffadc",
+  "source_image": "source.png",
+  "source_image_sha256": "8535ce2345984936ef72b434e59fe98b1ddb6ce358ba13f0ef655187638e3615",
+  "source_svg_sha256": "556148d491516667e10c53214d96de0c3b3c01ab1f6c89ab41750eb5d3d241db",
+  "status": "completed",
+  "summary": {
+    "completed": 17,
+    "failed": 0,
+    "passed": 17,
+    "required": 17,
+    "satisfactory": true
+  },
+  "timeout_seconds": 60,
+  "variations_started": true
+}

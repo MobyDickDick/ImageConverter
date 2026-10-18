@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import math
 import os
 import subprocess
 import sys
@@ -25,6 +26,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--output-dir", type=Path, default=Path("artifacts/catalog-conversion"))
     parser.add_argument("--timeout-seconds", type=float, default=60.0)
+    parser.add_argument('--adaptive-max-seconds',type=float,
+        help='Optionales hartes Maximum für eine fortschrittsabhängige Verlängerung über --timeout-seconds hinaus')
     parser.add_argument("--iterations", type=int, default=64)
     parser.add_argument("--shard-index", type=int, default=0)
     parser.add_argument("--shard-count", type=int, default=1)
@@ -81,8 +84,11 @@ def main() -> int:
     args = parse_args()
     if args.shard_count < 1 or not 0 <= args.shard_index < args.shard_count:
         raise SystemExit("--shard-index must be between 0 and --shard-count - 1")
-    if args.timeout_seconds <= 0:
+    if not math.isfinite(args.timeout_seconds) or args.timeout_seconds <= 0:
         raise SystemExit("--timeout-seconds must be greater than zero")
+    maximum = args.timeout_seconds if args.adaptive_max_seconds is None else args.adaptive_max_seconds
+    if not math.isfinite(maximum) or maximum < args.timeout_seconds:
+        raise SystemExit('--adaptive-max-seconds must be finite and at least --timeout-seconds')
 
     shard_dir = args.output_dir / f"shard-{args.shard_index:02d}-of-{args.shard_count:02d}"
     report_path = shard_dir / "catalog_results.csv"
@@ -126,9 +132,10 @@ def main() -> int:
                 "--end",
                 variant,
                 "--deterministic-order",
+                '--search-seconds',str(args.timeout_seconds),'--search-max-seconds',str(maximum),
             ]
             env = conversion_environment()
-            env["ICC_CONVERSION_TIMEOUT_SEC"] = str(args.timeout_seconds)
+            env["ICC_CONVERSION_TIMEOUT_SEC"] = str(maximum)
             # Preserve diagnostics even when the supervisor kills a timed-out
             # process before Python can flush its redirected stdout.
             env["PYTHONUNBUFFERED"] = "1"
@@ -140,7 +147,7 @@ def main() -> int:
                     command,
                     env=env,
                     check=False,
-                    timeout=args.timeout_seconds + 15.0,
+                    timeout=maximum + 15.0,
                 )
                 returncode = result.returncode
                 if returncode != 0:

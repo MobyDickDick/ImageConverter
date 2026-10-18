@@ -1,0 +1,493 @@
+{
+  "baseline": {
+    "baseline_sha256": "ead98741b6b8aac8a4caa93dbabe89eb3d14fa1aa1091fd2f9eee15563e0111c",
+    "cases": {
+      "anonymous_motor_valve_00": {
+        "dimensions": {
+          "height": 30,
+          "width": 45
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.43617069721221924,
+          "error_per_pixel": 0.04604640242534922,
+          "object_mask_iou": 0.25677603423680456,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_motor_valve_01": {
+        "dimensions": {
+          "height": 50,
+          "width": 75
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4113638699054718,
+          "error_per_pixel": 0.04328731237184416,
+          "object_mask_iou": 0.4585152838427948,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_motor_valve_02": {
+        "dimensions": {
+          "height": 20,
+          "width": 30
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5908018350601196,
+          "error_per_pixel": 0.028839881796264257,
+          "object_mask_iou": 0.39365079365079364,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "commit": "05de58ff1998db39187361d2c0d4936387291da1",
+      "input_hashes": {
+        "anonymous_motor_valve_00": "d225bc585b03756f96a537a015cbee74d1ee71e37e0c5be2ffee9c067dcc4957",
+        "anonymous_motor_valve_01": "33bb73a6341bd15ceb64e6b3b1f2ba2860101ad3a386bc9b2b8a1a6d031a3677",
+        "anonymous_motor_valve_02": "206e6ff1081a032b8ed9a6125ffc212a3d7ce3241cf04393e4b29ace93fe4956"
+      },
+      "search_seed": 20261018,
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 419.30963134765625,
+      "after_svg": "after/anonymous_motor_valve_00.svg",
+      "after_svg_sha256": "7653681c7d26adc04fb426f96d6152e5d7e8b2f8f92b4ee849958ed80c2c8c4a",
+      "baseline_description": "Wie AC0231: 3-Weg Ventil \u00e4hnlich AC0211, um 90\u00b0 im Uhrzeigersinn gedreht, \"M\" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 8982.501953125,
+      "before_svg": "before/anonymous_motor_valve_00.svg",
+      "before_svg_sha256": "0171df95a21ce2a3f6da86ee15818523d791af8dc691eadaca20e70c773cbabe",
+      "case_id": "anonymous_motor_valve_00",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"M\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/AC0232_M.jpg",
+      "input_sha256": "d225bc585b03756f96a537a015cbee74d1ee71e37e0c5be2ffee9c067dcc4957",
+      "source": "AC0232_M.jpg",
+      "source_sha256": "d225bc585b03756f96a537a015cbee74d1ee71e37e0c5be2ffee9c067dcc4957"
+    },
+    {
+      "after_mean_delta2": 282.161865234375,
+      "after_svg": "after/anonymous_motor_valve_01.svg",
+      "after_svg_sha256": "09502577b2317220b44ff6f2264e360a3db0191bb2b75f94f94291ff7ab16edc",
+      "baseline_description": "Wie AC0231: 3-Weg Ventil \u00e4hnlich AC0211, um 90\u00b0 im Uhrzeigersinn gedreht, \"M\" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 8444.2724609375,
+      "before_svg": "before/anonymous_motor_valve_01.svg",
+      "before_svg_sha256": "cd1d5a04634705b3a923c4516ec0bef53e39e90d1119ff2443a22af17179ce77",
+      "case_id": "anonymous_motor_valve_01",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"M\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/AC0232_L.jpg",
+      "input_sha256": "33bb73a6341bd15ceb64e6b3b1f2ba2860101ad3a386bc9b2b8a1a6d031a3677",
+      "source": "AC0232_L.jpg",
+      "source_sha256": "33bb73a6341bd15ceb64e6b3b1f2ba2860101ad3a386bc9b2b8a1a6d031a3677"
+    },
+    {
+      "after_mean_delta2": 324.5816650390625,
+      "after_svg": "after/anonymous_motor_valve_02.svg",
+      "after_svg_sha256": "6137ba1014d18597c695804af35e008d2f6892c8eefd6a0375cb09ba7360dd0d",
+      "baseline_description": "Wie AC0231: 3-Weg Ventil \u00e4hnlich AC0211, um 90\u00b0 im Uhrzeigersinn gedreht, \"M\" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). Geometrische Variante: 90\u00b0 nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 5625.93994140625,
+      "before_svg": "before/anonymous_motor_valve_02.svg",
+      "before_svg_sha256": "c712a60ada9210f65491ac5471d510ed408dc4169665457faf3ed74ffb6a0855",
+      "case_id": "anonymous_motor_valve_02",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"M\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/AC0232_S.jpg",
+      "input_sha256": "206e6ff1081a032b8ed9a6125ffc212a3d7ce3241cf04393e4b29ace93fe4956",
+      "source": "AC0232_S.jpg",
+      "source_sha256": "206e6ff1081a032b8ed9a6125ffc212a3d7ce3241cf04393e4b29ace93fe4956"
+    }
+  ],
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "ead98741b6b8aac8a4caa93dbabe89eb3d14fa1aa1091fd2f9eee15563e0111c",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8598019480705261,
+          "error_per_pixel": 0.002149479079060137,
+          "object_mask_iou": 0.8957055214723927,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.43617069721221924,
+          "error_per_pixel": 0.04604640242534922,
+          "object_mask_iou": 0.25677603423680456,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_motor_valve_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.002149479079060137,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 12,
+            "path_complexity_ratio": 1.7143,
+            "path_count": 3,
+            "vector_element_count": 7
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9383,
+            "edge_alignment": 0.8598,
+            "pixel_similarity": 0.9979,
+            "semantic_score": 1.0,
+            "structure_score": 0.8957
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8732258081436157,
+          "error_per_pixel": 0.0014464276059688581,
+          "object_mask_iou": 0.9132256134051466,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4113638699054718,
+          "error_per_pixel": 0.04328731237184416,
+          "object_mask_iou": 0.4585152838427948,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_motor_valve_01",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0014464276059688581,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 12,
+            "path_complexity_ratio": 1.7143,
+            "path_count": 3,
+            "vector_element_count": 7
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9463,
+            "edge_alignment": 0.8732,
+            "pixel_similarity": 0.9986,
+            "semantic_score": 1.0,
+            "structure_score": 0.9132
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8885921239852905,
+          "error_per_pixel": 0.0016638814047882226,
+          "object_mask_iou": 0.9259259259259259,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5908018350601196,
+          "error_per_pixel": 0.028839881796264257,
+          "object_mask_iou": 0.39365079365079364,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_motor_valve_02",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0016638814047882226,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 12,
+            "path_complexity_ratio": 1.7143,
+            "path_count": 3,
+            "vector_element_count": 7
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9532,
+            "edge_alignment": 0.8886,
+            "pixel_similarity": 0.9983,
+            "semantic_score": 1.0,
+            "structure_score": 0.9259
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "commit": "05de58ff1998db39187361d2c0d4936387291da1",
+      "input_hashes": {
+        "anonymous_motor_valve_00": "d225bc585b03756f96a537a015cbee74d1ee71e37e0c5be2ffee9c067dcc4957",
+        "anonymous_motor_valve_01": "33bb73a6341bd15ceb64e6b3b1f2ba2860101ad3a386bc9b2b8a1a6d031a3677",
+        "anonymous_motor_valve_02": "206e6ff1081a032b8ed9a6125ffc212a3d7ce3241cf04393e4b29ace93fe4956"
+      },
+      "search_seed": 20261018,
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 3,
+      "improved": 3,
+      "satisfactory": 3,
+      "technically_completed": 3
+    }
+  },
+  "schema_version": "motor_valve_recheck_v1",
+  "strict_pixel_gates": {
+    "anonymous_motor_valve_00": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8598019480705261,
+        "foreground_iou": 0.9525862068965517,
+        "foreground_mse": 0.004081063438206911,
+        "normalized_mse": 0.002149479230865836
+      },
+      "satisfactory": true
+    },
+    "anonymous_motor_valve_01": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8732258081436157,
+        "foreground_iou": 0.95347533632287,
+        "foreground_mse": 0.002948179142549634,
+        "normalized_mse": 0.0014464276609942317
+      },
+      "satisfactory": true
+    },
+    "anonymous_motor_valve_02": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.7143,
+        "path_count": 3,
+        "vector_element_count": 7
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8885921239852905,
+        "foreground_iou": 0.9431137724550899,
+        "foreground_mse": 0.002790512517094612,
+        "normalized_mse": 0.001663881354033947
+      },
+      "satisfactory": true
+    }
+  }
+}

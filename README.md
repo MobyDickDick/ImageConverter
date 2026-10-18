@@ -3,10 +3,21 @@
 ImageConverter converts badge/source images into composite SVG outputs and also
 provides annotation/debugging helpers for the source raster files.
 
-Der [aktuelle Projektstand](docs/project_status_2026-10-17.md) zählt
-371 ausdrücklich abgenommene Paare bei 1.785 Katalogbildern und trennt
-ältere Pixelprüfungen von noch fehlenden Nachweisen. Eine sortierte
-Prüfliste unterstützt die persönliche Sichtprüfung für Samples.
+Die [Erfolgsübersicht](artifacts/satisfactory_conversions/README.md) enthält
+377 ausdrücklich abgenommene Paare. Der [Projektstand vom 17. Oktober](docs/project_status_2026-10-17.md)
+dokumentiert die Katalogbasis von 1.785 Bildern und die Grenzen älterer
+Pixelprüfungen. Eine sortierte Prüfliste unterstützt die persönliche Sichtprüfung.
+
+Die [adaptive Suche](docs/adaptive_conversion_search_2026-10-18.md) beendet
+angeschlossene Optimierungen früh bei geprüfter ausreichender Qualität, stoppt
+ergebnislose Wiederholungen und verlängert das normale Suchbudget von 60 Sekunden
+bei spätem Fortschritt begrenzt auf höchstens 120 Sekunden. Die
+[Verfahrensprüfung](docs/conversion_search_review_2026-10-18.md) beschreibt den
+weiteren Ausbau: allgemeine Szenensuche und durchgängige Prozessunterbrechung.
+Die zusätzliche adaptive Parametersuche verwendet nun
+[sechs kooperierende Bots](docs/bot_conversion_search_2026-10-18.md), die
+Verbesserungen austauschen, erfolglose Bots deaktivieren und deren Versuche
+für das laufende Bild im Gedächtnis behalten.
 
 Mehrere verwandte Vorlagen können als **Formenfamilie in einer Aufgabe**
 bearbeitet werden, auch mit unterschiedlichen Farben, Größen und ähnlichen
@@ -32,13 +43,13 @@ SVGs, Checkpoints oder andere Bilder werden im voreingestellten
 ## Main entry point
 
 Die [Erfolgsübersicht](artifacts/satisfactory_conversions/README.md) enthält
-371 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
+377 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
 `python -m tools.refresh_satisfactory_archive` wird sie aus den dokumentierten
 Abnahmen aktualisiert. `python -m tools.run_pytest_profile extended`
 aktualisiert die Sammlung einschließlich späterer erfolgreicher Batches,
 konvertiert alle Einträge erneut und prüft deren Qualität; Quellen und
 gespeicherte gute SVGs bleiben dabei erhalten. Details zur Sammlung und zur
-[jüngsten Flammen-Abnahme](docs/next_arbeitspaket_2026-10-18_ge0204_m.md).
+[jüngsten Ventil-Abnahme](docs/next_arbeitspaket_2026-10-18_ac0232_m.md).
 
 Run the converter via:
 

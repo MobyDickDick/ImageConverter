@@ -2,7 +2,17 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-18, nach AC0921-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-18, nach AC0232-Abnahme)
+
+AC0232 M/L/S bestehen beide regulären und die strengeren Pixelgates. Die
+Konvertierung rekonstruiert drei Ventildreiecke, Anschluss, Kreis und Text
+gemeinsam aus dem Raster. 377 Paare sind archiviert; alle 374 bisherigen
+Datensätze bleiben unverändert. Die bisherige gefilterte Rotation ist leer.
+Als nächstes Architekturpaket ist `SEARCH-DEADLINE-01` dokumentiert.
+Details: `docs/next_arbeitspaket_2026-10-18_ac0232_m.md`.
+Review: `artifacts/evaluation/motor_valve_recheck_v1/review_args.json`.
+
+## Vorheriger Abschluss: AC0921
 
 AC0921 M/L/S bestehen beide regulären und die strengen Pixelgates. Die allgemeine Kreis-/Buchstabenregistrierung unterstützt nun einen aus dem Raster bestimmten unteren Griff; eine unabhängige R-Vorlage besteht 17/17 echte CLI-Fälle. 374 Paare sind archiviert, alle 371 bisherigen Datensätze unverändert.
 Aktive Rotation: `AC0232_M`.

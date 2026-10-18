@@ -1,11 +1,20 @@
 # Bildkonvertierung und Lernschleife als UML
 
-Stand: 2026-10-17. Die Diagramme skizzieren Verantwortlichkeiten und Abläufe;
+Stand: 2026-10-18. Die Diagramme skizzieren Verantwortlichkeiten und Abläufe;
 sie behaupten keine automatische Unterstützung beliebiger Bildtopologien.
 Die Mermaid-Blöcke sind direkt renderbare Sequenz-, Klassen- und Zustandsdiagramme.
 Die Modellschleife zeigt Alternativen innerhalb angeschlossener Registrierungen.
 Der Runtime-Dispatcher beendet einige Spezialpfade weiterhin früh; ein gemeinsamer
 Vergleich aller unterstützten Formfamilien ist noch nicht umgesetzt.
+
+Die Parametersuchwege sind ein Teilbaustein. Die
+[adaptive Steuerung](adaptive_conversion_search_2026-10-18.md) führt sie nun in
+kurzen Abschnitten aus: früher geprüfter Erfolg, Stagnation und später
+Fortschritt steuern Ende und begrenzte Verlängerungen. Eine durchgängige harte
+Unterbrechung und erweiterbare Struktursuche bleiben offen. `mermaid-diagram.png`
+im Projektstamm zeigt den älteren festen Ablauf dieses Sequenzdiagramms.
+Im adaptiven Modus verwendet die zusätzliche Suche jetzt
+[sechs kooperierende Bots](bot_conversion_search_2026-10-18.md).
 
 ## Konvertierung und alternative Suche: Sequenzdiagramm
 
@@ -25,10 +34,12 @@ sequenceDiagram
     loop Unterstützte Modellhypothesen
         Model->>Search: Analytischer Start und bisherige Registrierung
         opt Restfehler und Portfolio aktiviert
-            loop Drei begrenzte Suchwege
+            loop Adaptive Abschnitte der Parametersuchwege bis Erfolg, Stagnation oder Budgetgrenze
                 Search->>Renderer: Neue gültige Parameter rendern
                 Renderer-->>Search: Raster
                 Search->>Search: Verlust und Fehler prüfen, Dubletten vermeiden
+                Search->>Search: Verbesserung an aktive Bots melden; stagnierende Bots deaktivieren
+                Note over Search: Versuche und inaktive Bots bleiben im Bild-/Modellkontext erhalten
                 Search-->>CLI: Fortschritt, Prüfzahl, bester Fehler
                 Search->>Store: Auch gescheiterte Versuche sichern
             end
@@ -45,6 +56,7 @@ sequenceDiagram
     Runtime-->>CLI: Beste zulässige Ausgabe
     CLI-->>User: SVG und Berichte
     Note over Store,CLI: semantic-only liest keine gespeicherten Vorlagen oder Strategiestatistik
+    Note over Search,Runtime: Kooperative Bildzeit: 60 s regulär, bei spätem Fortschritt bis 120 s; allgemeine Struktursuche offen
 ```
 
 ## Verantwortlichkeiten: vereinfachtes Klassendiagramm
@@ -68,6 +80,11 @@ classDiagram
     class AnalyticRegistration {
         _register()
     }
+    class SearchBots {
+        explore_bots()
+        Blackboard
+        Bot
+    }
     class ShortLabelDisk {
         fit_short_label_disk()
     }
@@ -86,6 +103,7 @@ classDiagram
     Runtime --> ShortLabelDisk : passendes Modell
     ShortLabelDisk --> AnalyticRegistration : vier Textmodelle
     AnalyticRegistration --> SearchPortfolio : alternative Suchwege
+    SearchPortfolio --> SearchBots : zusätzliche adaptive Parametersuche
     ShortLabelDisk --> SearchPortfolio : geprüfte Variante sichern
     SearchPortfolio --> Evidence : Belege und Statistik
 ```

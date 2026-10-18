@@ -6,11 +6,20 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-18)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `474` · Erledigt `436` · Offen `38`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `482` · Erledigt `439` · Offen `43`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
 ## Übergreifende Rekonstruktion (Audit 2026-10-17)
+
+- [x] **SEARCH-ADAPTIVE-01:** Frühe geprüfte Erfolge beenden angeschlossene Registrierungen und Wiederholungen. Stagnation führt zum Suchwegwechsel und anschließendem Abbruch; deutlicher später Fortschritt erlaubt begrenzte zusätzliche Zeit und Vorschläge. Gemeinsamer aktiver Bildkontext über Modelle und Wiederholungen, strenge unveränderte Pixel-/Semantikprüfungen, Source-/SVG-gebundene Freigabe und kontrollierte schlechte Vorprobe. Details und echte CLI-Nachweise: `docs/adaptive_conversion_search_2026-10-18.md`.
+
+- [ ] **SEARCH-DEADLINE-01:** Durchgängige per-Bild-Zeitsteuerung einschließlich Abschlussprüfung und plattformübergreifendem Abbruch durch isolierten Worker; gültigen besten Zwischenstand erhalten. Nutzerpräzisierung: 60 Sekunden normales Budget, begrenzte Verlängerung bei spätem Fortschritt. **Teil umgesetzt:** kooperative gemeinsame Uhr über angeschlossene Modelle und Wiederholungen sowie optionales hartes Maximum im Katalogrunner. Unverbundene Optimierer und sichere Zwischenstandübergabe beim Prozessabbruch bleiben offen. `docs/adaptive_conversion_search_2026-10-18.md`.
+- [ ] **SEARCH-SCHEDULER-02:** Suchzeit über Modellhypothesen und lokale/gekoppelte/globalere Verfahren verteilen, Stagnation als Wechselgrund nutzen und Dubletten vermeiden. **Teil umgesetzt:** sechs kooperative Parameter-Bots mit eigenem Zustand, Verbesserungsnachrichten, individueller Abschaltung und Bild-/Modellgedächtnis innerhalb der vorhandenen Grenzen. Allgemeiner Modell-/Strukturvergleich und Bewertung zusammen mit SEARCH-DEADLINE-01 bleiben offen. `docs/bot_conversion_search_2026-10-18.md`, `docs/conversion_search_review_2026-10-18.md`.
+- [ ] **BENCHMARK-ANYTIME-01:** Echte Qualitätskurven nach 1/5/15/60 Sekunden, unbekannte Familien, Umformulierungen, Objektfehler, Renderzahlen, mehrere Seeds und Median/p95-Laufzeit bei unveränderten Gates prüfen. `docs/conversion_search_review_2026-10-18.md`.
+- [ ] **COMPONENT-VALUE-01:** Komponentenbeitrag als integrierten Runtime-/CLI-/CI-Modus messen: echte Schaltpunkte und leichte Laufzeitbeobachtung, gepaarte Produktionskonvertierungen mit/ohne Komponenten bei gleichem Budget, isolierte Caches, Wechselwirkungen und seltene Fähigkeiten berücksichtigen. Nutzen, Schaden, nachgewiesene Gleichwertigkeit und unklare Evidenz unterscheiden; Qualitätsprüfungen bleiben der feste Maßstab. Abnahme verlangt tatsächliche Ausgaben statt Ersatzscores, nachweislich wirksame Schalter, Kontrollfälle und mindestens eine anhand unabhängiger Gegenproben begründete Vereinfachung oder Beibehaltung. Mit den sechs Such-Bots beginnen; keine automatische Codeentfernung aus schwacher Evidenz. IDO-19/IDO-21 und BENCHMARK-ANYTIME-01 einbeziehen. Konzept und Abnahmekriterien: [Komponentenbeitrag und neuronale Erkennung](component_value_and_neural_detection_plan_2026-10-18.md).
+- [ ] **NEURAL-ELEMENTS-01:** Kleines neuronales Netz als optionalen Erkennungs-Bot für Grundformen/Textbereiche und Positionen gegen die vorhandene analytische Erkennung prüfen. Synthetische und reale Daten, familienweise Trennung vor Augmentation, unbekannte Formen und Konfidenzfehler berücksichtigen; Bildklassifikation nicht mit Mehrinstanzdetektion verwechseln. Tatsächlicher Anschluss an die Szenenbildung und CLI-Vergleich mit/ohne Netz einschließlich Initialisierung, Inferenz und Speicher sind Pflicht. Erst bei belastbarem End-to-End-Nutzen auf unabhängigen realen Familien in den Standardpfad übernehmen; unabhängige Qualitätsprüfungen unverändert. COMPONENT-VALUE-01 als Nachweisrahmen nutzen. Konzept und Abnahmekriterien: [Neuronale Erkennung und Komponentenbeitrag](component_value_and_neural_detection_plan_2026-10-18.md).
+- [x] **SEARCH-RETRY-01:** Geprüfte zufriedenstellende SVGs werden im adaptiven Modus nicht erneut mit größeren Iterationszahlen gesucht. Ein vollständiger Wiederholungsversuch ohne relevante Verbesserung beendet weitere Wiederholungen auch bei strukturiertem Restfehler; bessere SVGs und Messwerte bleiben erhalten. `docs/adaptive_conversion_search_2026-10-18.md`.
 
 - [x] **PB-LEARN-PROCESS:** Ursachenanalyse, Gruppierung gemeinsamer Fehler, mindestens zwei Lösungshypothesen, begrenzter Vergleich, unveränderte Gates und dauerhafte Regressionen nach jedem erweiterten Plan-B-Fehlschlag dokumentiert und in die erzeugten Fehleraufgaben aufgenommen. `docs/plan_b_learning_workflow.md`.
 - [x] **SEARCH-PORTFOLIO-01:** Vier alternative Kurztextmodelle, drei zusätzliche Parametersuchwege, Seeds, Rendercache, Budget, Fortschrittsbelege und gespeicherte geprüfte Varianten. Standardmodus kann erfolgreiche Modellarten priorisieren; semantic-only bleibt unabhängig. Keine allgemeine neue Topologiesuche. `docs/next_arbeitspaket_2026-10-17_ac0840_search.md`.
@@ -36,9 +45,13 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 ### Aktueller Plan-B-Stand (2026-10-18)
 
+- [x] **AC0232 – Dreiwegeventil mit angeschlossener M-Scheibe:** eigenständige Beschreibungen, vollständiger Rasterfit und diagonale Pfadverläufe. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. 377 Archivpaare; alle 374 bisherigen Datensätze bleiben unverändert. Die gefilterte reguläre Rotation ist anschließend leer. Nächstes Architekturpaket: SEARCH-DEADLINE-01. Details: `docs/next_arbeitspaket_2026-10-18_ac0232_m.md`.
+
+**Neuester Abschluss:** AC0232 M/L/S. Keine weiteren Kandidaten in der bisherigen gefilterten Rotation; offene Architektur- und Bestandsaufgaben bleiben bestehen.
+
 - [x] **AC0921 – Kreisscheibe mit Q und unterem Griff:** eigenständige Beschreibungen und allgemeine Erweiterung der Rasterregistrierung um einen mittigen unteren Griff. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression; eine unabhängige R-Vorlage besteht 17/17 echte CLI-Fälle. 374 Archivpaare, alle 371 bisherigen Datensätze unverändert. Nächste Rotation: `AC0232_M`. Details: `docs/next_arbeitspaket_2026-10-18_ac0921_m.md`.
 
-**Neuester Abschluss:** AC0921 M/L/S. Nächste Rotation: `AC0232_M`.
+**Vorheriger Abschluss:** AC0921 M/L/S. Damalige nächste Rotation: `AC0232_M`.
 
 
 - [x] **GE0204 – zwei verschachtelte Flammen auf Verlaufsscheibe:** Eigenständige Beschreibung in beiden XML-Katalogen aktiviert den unveränderten allgemeinen Flammenfit. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. 371 Archivpaare, alle 368 bisherigen Datensätze unverändert. Nächste Rotation: `AC0921_M`, `AC0232_M`. Details: `docs/next_arbeitspaket_2026-10-18_ge0204_m.md`.

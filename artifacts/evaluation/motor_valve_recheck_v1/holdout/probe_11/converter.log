@@ -1,0 +1,55 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere probe_11.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite probe_11.png ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen grünen Farbverlauf von dunkel links unten nach hell rechts oben und eine grünlich graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "R" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht größer dargestellt und geringfügig nach links und unten verschoben.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 2.4611111111111112}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 2.4531007751937985}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 1.5584302325581396}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 256, "current_error": 2.0843992248062015}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 320, "current_error": 1.5416989664082688}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 384, "current_error": 1.1562338501291989}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 448, "current_error": 1.0894702842377262}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 512, "current_error": 0.7145025839793282}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 549, "best_error": 0.671608527131783}
+[WARN] probe_11.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.366412, localized_error_fraction=0.786591).
+[INFO] Konvertiert probe_11.png | Parameter: mode=semantic_badge, label=R, variant_name=PROBE_11 | Qualität: Optimierungsfehler/Pixel=0.000065, Mean-Delta²=12.874709, RGB-RMSE/Kanal=2.071610, Raumscore=41.637292, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=7.0s
+[INFO] Konvertiere probe_11.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite probe_11.png ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen grünen Farbverlauf von dunkel links unten nach hell rechts oben und eine grünlich graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "R" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht größer dargestellt und geringfügig nach links und unten verschoben.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 2.4611111111111112}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 2.4531007751937985}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 1.5584302325581396}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 256, "current_error": 2.0843992248062015}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 320, "current_error": 1.5416989664082688}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 384, "current_error": 1.1562338501291989}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 448, "current_error": 1.0894702842377262}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 512, "current_error": 0.7145025839793282}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 549, "best_error": 0.671608527131783}
+[WARN] probe_11.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.366412, localized_error_fraction=0.786591).
+[INFO] Konvertiert probe_11.png | Parameter: mode=semantic_badge, label=R, variant_name=PROBE_11 | Qualität: Optimierungsfehler/Pixel=0.000065, Mean-Delta²=12.874709, RGB-RMSE/Kanal=2.071610, Raumscore=41.637292, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=8.4s
+[INFO] Konvertiere probe_11.png | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite probe_11.png ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen grünen Farbverlauf von dunkel links unten nach hell rechts oben und eine grünlich graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "R" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht größer dargestellt und geringfügig nach links und unten verschoben.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 2.4611111111111112}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 2.4531007751937985}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 1.5584302325581396}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 256, "current_error": 2.0843992248062015}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 320, "current_error": 1.5416989664082688}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 384, "current_error": 1.1562338501291989}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 448, "current_error": 1.0894702842377262}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 512, "current_error": 0.7145025839793282}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 549, "best_error": 0.671608527131783}
+[WARN] probe_11.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.366412, localized_error_fraction=0.786591).
+[INFO] Konvertiert probe_11.png | Parameter: mode=semantic_badge, label=R, variant_name=PROBE_11 | Qualität: Optimierungsfehler/Pixel=0.000065, Mean-Delta²=12.874709, RGB-RMSE/Kanal=2.071610, Raumscore=41.637292, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=8.3s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\motor_valve_recheck_v1\independent_final\probe_11\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\motor_valve_recheck_v1\independent_final\probe_11\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\motor_valve_recheck_v1\independent_final\probe_11\conversion

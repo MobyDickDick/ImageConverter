@@ -46,6 +46,12 @@ Bestandsaufnahme.
 
 ## Umgesetzter erster Suchbaustein
 
+Seit der [adaptiven Suchsteuerung](adaptive_conversion_search_2026-10-18.md)
+ist im Portfolio `--search-policy adaptive` voreingestellt: geprüfter früher
+Erfolg, Suchwegwechsel bei Stagnation und begrenzte Verlängerung bei spätem
+Fortschritt. Der nachfolgend beschriebene erste feste Durchlauf bleibt mit
+`--search-policy fixed` als Vergleich verfügbar.
+
 Die CLI verwendet standardmäßig `--search-mode portfolio`. `--search-mode legacy`
 schaltet die zusätzlichen Parametersuchen ab. Die neue Kurztextregistrierung
 vergleicht in beiden Modi vier fachlich verschiedene Modellvarianten: einen
@@ -60,8 +66,10 @@ bleiben unverändert. Der bisherige Fit bleibt der Vergleichskandidat; eine
 Alternative muss die Suchverlustfunktion verbessern und darf den gemessenen
 Fehler des Aufrufers nicht erhöhen.
 
-`--search-budget` begrenzt die zusätzlichen Prüfungen **je Modell**, standardmäßig
-auf 384, aufgeteilt auf drei Suchwege. Die ursprüngliche Registrierung und die
+Im festen Modus begrenzt `--search-budget` die zusätzlichen Prüfungen **je Modell**,
+standardmäßig auf 384, aufgeteilt auf drei Suchwege. Im adaptiven Modus ist dies
+die Basis; später Fortschritt erlaubt höchstens das Vierfache, Stagnation
+beendet die Suche früher. Die ursprüngliche Registrierung und die
 Anzahl aktivierter Modelle zählen zusätzlich. Dies ist kein globales Zeitlimit;
 der vorhandene Renderer-/Prozess-Timeout bleibt notwendig. Die Suchstatistik
 unterscheidet zusätzliche Vorschläge von tatsächlich gerenderten Fits.

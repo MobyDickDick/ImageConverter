@@ -1,0 +1,157 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere AC0232_L.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0232_L.jpg ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "M" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 12.685866666666668}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 10.352355555555556}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 7.417333333333334}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 256, "current_error": 7.055022222222222}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 320, "current_error": 6.605333333333333}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 384, "current_error": 6.065955555555556}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 448, "current_error": 5.344}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 512, "current_error": 4.972533333333334}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 526, "best_error": 4.950666666666667}
+[WARN] AC0232_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.261981, localized_error_fraction=0.791160).
+[INFO] Konvertiert AC0232_L.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC0232_L | Qualität: Optimierungsfehler/Pixel=0.001320, Mean-Delta²=282.161865, RGB-RMSE/Kanal=9.698142, Raumscore=893.102773, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=3.4s
+[INFO] Konvertiere AC0232_M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0232_M.jpg ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "M" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 10.770617283950617}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 10.609382716049383}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 8.726913580246913}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 256, "current_error": 8.067901234567902}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 320, "current_error": 6.663950617283951}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 384, "current_error": 6.623950617283951}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 448, "current_error": 5.98}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 512, "current_error": 5.884691358024692}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 525, "best_error": 5.885432098765432}
+[WARN] AC0232_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.227092, localized_error_fraction=0.848266).
+[INFO] Konvertiert AC0232_M.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC0232_M | Qualität: Optimierungsfehler/Pixel=0.004360, Mean-Delta²=419.309631, RGB-RMSE/Kanal=11.822431, Raumscore=1330.911913, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=5.0s
+[INFO] Konvertiere AC0232_S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0232_S.jpg ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "M" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 12.153333333333334}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 9.850555555555555}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 9.054444444444444}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 256, "current_error": 9.005}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 320, "current_error": 6.900555555555556}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 384, "current_error": 6.801666666666667}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 448, "current_error": 7.063888888888889}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 512, "current_error": 6.37}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 533, "best_error": 6.3116666666666665}
+[WARN] AC0232_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.241379, localized_error_fraction=0.717847).
+[INFO] Konvertiert AC0232_S.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC0232_S | Qualität: Optimierungsfehler/Pixel=0.010519, Mean-Delta²=324.581665, RGB-RMSE/Kanal=10.401629, Raumscore=918.178290, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=4.8s
+[INFO] Konvertiere AC0232_S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0232_S.jpg ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "M" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 12.153333333333334}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 9.850555555555555}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 9.054444444444444}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 256, "current_error": 9.005}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 320, "current_error": 6.900555555555556}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 384, "current_error": 6.801666666666667}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 448, "current_error": 7.063888888888889}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 512, "current_error": 6.37}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 533, "best_error": 6.3116666666666665}
+[WARN] AC0232_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.241379, localized_error_fraction=0.717847).
+[INFO] Konvertiert AC0232_S.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC0232_S | Qualität: Optimierungsfehler/Pixel=0.010519, Mean-Delta²=324.581665, RGB-RMSE/Kanal=10.401629, Raumscore=918.178290, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=4.9s
+[INFO] Konvertiere AC0232_M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0232_M.jpg ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "M" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 10.770617283950617}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 10.609382716049383}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 8.726913580246913}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 256, "current_error": 8.067901234567902}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 320, "current_error": 6.663950617283951}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 384, "current_error": 6.623950617283951}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 448, "current_error": 5.98}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 512, "current_error": 5.884691358024692}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 525, "best_error": 5.885432098765432}
+[WARN] AC0232_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.227092, localized_error_fraction=0.848266).
+[INFO] Konvertiert AC0232_M.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC0232_M | Qualität: Optimierungsfehler/Pixel=0.004360, Mean-Delta²=419.309631, RGB-RMSE/Kanal=11.822431, Raumscore=1330.911913, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=4.9s
+[INFO] Konvertiere AC0232_L.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0232_L.jpg ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "M" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 12.685866666666668}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 10.352355555555556}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 7.417333333333334}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 256, "current_error": 7.055022222222222}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 320, "current_error": 6.605333333333333}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 384, "current_error": 6.065955555555556}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 448, "current_error": 5.344}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 512, "current_error": 4.972533333333334}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 526, "best_error": 4.950666666666667}
+[WARN] AC0232_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.261981, localized_error_fraction=0.791160).
+[INFO] Konvertiert AC0232_L.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC0232_L | Qualität: Optimierungsfehler/Pixel=0.001320, Mean-Delta²=282.161865, RGB-RMSE/Kanal=9.698142, Raumscore=893.102773, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=5.8s
+[INFO] Konvertiere AC0232_S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0232_S.jpg ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "M" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 12.153333333333334}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 9.850555555555555}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 9.054444444444444}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 256, "current_error": 9.005}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 320, "current_error": 6.900555555555556}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 384, "current_error": 6.801666666666667}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 448, "current_error": 7.063888888888889}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 512, "current_error": 6.37}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 533, "best_error": 6.3116666666666665}
+[WARN] AC0232_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.241379, localized_error_fraction=0.717847).
+[INFO] Konvertiert AC0232_S.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC0232_S | Qualität: Optimierungsfehler/Pixel=0.010519, Mean-Delta²=324.581665, RGB-RMSE/Kanal=10.401629, Raumscore=918.178290, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=4.6s
+[INFO] Konvertiere AC0232_M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0232_M.jpg ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "M" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 10.770617283950617}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 10.609382716049383}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 8.726913580246913}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 256, "current_error": 8.067901234567902}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 320, "current_error": 6.663950617283951}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 384, "current_error": 6.623950617283951}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 448, "current_error": 5.98}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 512, "current_error": 5.884691358024692}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 525, "best_error": 5.885432098765432}
+[WARN] AC0232_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.227092, localized_error_fraction=0.848266).
+[INFO] Konvertiert AC0232_M.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC0232_M | Qualität: Optimierungsfehler/Pixel=0.004360, Mean-Delta²=419.309631, RGB-RMSE/Kanal=11.822431, Raumscore=1330.911913, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=5.0s
+[INFO] Konvertiere AC0232_L.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0232_L.jpg ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "M" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 12.685866666666668}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 10.352355555555556}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 7.417333333333334}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 256, "current_error": 7.055022222222222}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 320, "current_error": 6.605333333333333}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 384, "current_error": 6.065955555555556}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 448, "current_error": 5.344}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 512, "current_error": 4.972533333333334}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 526, "best_error": 4.950666666666667}
+[WARN] AC0232_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.261981, localized_error_fraction=0.791160).
+[INFO] Konvertiert AC0232_L.jpg | Parameter: mode=semantic_badge, label=M, variant_name=AC0232_L | Qualität: Optimierungsfehler/Pixel=0.001320, Mean-Delta²=282.161865, RGB-RMSE/Kanal=9.698142, Raumscore=893.102773, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=5.8s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\motor_valve_recheck_v1\accepted\catalog\after\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\motor_valve_recheck_v1\accepted\catalog\after\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\motor_valve_recheck_v1\accepted\catalog\after

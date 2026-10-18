@@ -1,0 +1,807 @@
+{
+  "cases": [
+    {
+      "case_id": "anonymous_00",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe \"M\" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.",
+      "image": "sources/anonymous_00.jpg",
+      "kind": "motor",
+      "label": "M",
+      "source": "AC0232_L",
+      "source_sha256": "33bb73a6341bd15ceb64e6b3b1f2ba2860101ad3a386bc9b2b8a1a6d031a3677"
+    },
+    {
+      "case_id": "anonymous_01",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe \"M\" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.",
+      "image": "sources/anonymous_01.jpg",
+      "kind": "motor",
+      "label": "M",
+      "source": "AC0232_M",
+      "source_sha256": "d225bc585b03756f96a537a015cbee74d1ee71e37e0c5be2ffee9c067dcc4957"
+    },
+    {
+      "case_id": "anonymous_02",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe \"M\" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.",
+      "image": "sources/anonymous_02.jpg",
+      "kind": "motor",
+      "label": "M",
+      "source": "AC0232_S",
+      "source_sha256": "206e6ff1081a032b8ed9a6125ffc212a3d7ce3241cf04393e4b29ace93fe4956"
+    },
+    {
+      "case_id": "anonymous_03",
+      "description": "Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe \"Q\" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild.",
+      "image": "sources/anonymous_03.jpg",
+      "kind": "letter",
+      "label": "Q",
+      "source": "AC0921_M",
+      "source_sha256": "24fd5f050f48f3636a0e289128a1810fbd7d9e5b4a4585add7090c2cb3dc94f0"
+    },
+    {
+      "case_id": "anonymous_04",
+      "description": "Eine einfarbige hellgraue Kreisscheibe mit dunkler Randkontur auf weißem Hintergrund. In der Mitte steht die dunkle serifenlose Beschriftung \"rF\". Keine Anschlüsse.",
+      "image": "sources/anonymous_04.jpg",
+      "kind": "label",
+      "label": "rF",
+      "source": "AC0840_M",
+      "source_sha256": "3919d16fb5fc08eaf63afbc4db3c71a79de4055c35b4d5908fdebfe1437164ec"
+    },
+    {
+      "case_id": "anonymous_05",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"Lux\" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "image": "sources/anonymous_05.jpg",
+      "kind": "label",
+      "label": "Lux",
+      "source": "AC0910_S",
+      "source_sha256": "37bd87d1cb2d281f2642007f7445b0c7599b6b0c504b9380614cc8f506a06762"
+    },
+    {
+      "case_id": "anonymous_06",
+      "description": "zwei Rechtecke. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt nebeneinander.",
+      "expected_objects": [
+        {
+          "bbox": [
+            24.592512212254622,
+            31.95846256986566,
+            40.965497887273635,
+            41.876993446238544
+          ],
+          "kind": "rectangle"
+        },
+        {
+          "bbox": [
+            118.24182438845646,
+            30.5230583225609,
+            34.87223068287883,
+            40.178703353713324
+          ],
+          "kind": "rectangle"
+        }
+      ],
+      "image": "sources/anonymous_06.png",
+      "kind": "primitives",
+      "source": "independent_primitives",
+      "source_sha256": "8a1978a26e65d35e89de5b3a4634c21ba0cabc7463582fe1d0933ce788111bf3"
+    },
+    {
+      "case_id": "anonymous_07",
+      "description": "zwei Kreise und ein Rechteck. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen. Die Objekte liegen voneinander getrennt nebeneinander.",
+      "expected_objects": [
+        {
+          "bbox": [
+            26.060155229324856,
+            79.49616050673548,
+            28.99461909712674,
+            28.99461909712674
+          ],
+          "kind": "circle"
+        },
+        {
+          "bbox": [
+            94.09844379905533,
+            44.77152953721614,
+            50.70473456653293,
+            50.70473456653293
+          ],
+          "kind": "circle"
+        },
+        {
+          "bbox": [
+            176.24931117428727,
+            65.53522233782469,
+            48.89660543128042,
+            52.24902150521242
+          ],
+          "kind": "rectangle"
+        }
+      ],
+      "image": "sources/anonymous_07.png",
+      "kind": "primitives",
+      "source": "independent_primitives",
+      "source_sha256": "7da38494ecd79d1ddf906dc0c09a5d81dfaa5b2c92d42564d1c453388f8b5921"
+    }
+  ],
+  "policies": {
+    "adaptive": {
+      "cases": [
+        {
+          "case_id": "anonymous_00",
+          "elapsed_seconds": 0.875,
+          "fit_evaluations": 225,
+          "output_sha256": "b9350797b7de6e5846a43006612b6b20623ae531547faea94f7e9aa473b925aa",
+          "output_svg": "outputs/adaptive/anonymous_00.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 12,
+              "path_complexity_ratio": 1.7143,
+              "path_count": 3,
+              "vector_element_count": 7
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.7883577346801758,
+              "foreground_iou": 0.9301552106430155,
+              "foreground_mse": 0.005941798910498619,
+              "normalized_mse": 0.0029129202011972666
+            },
+            "satisfactory": true
+          },
+          "satisfactory": true,
+          "search_control": {
+            "candidate_evaluations": 216,
+            "elapsed_seconds": 0.859,
+            "limit_seconds": 60.0,
+            "max_seconds": 120.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          },
+          "semantic_score": 1.0,
+          "source": "AC0232_L"
+        },
+        {
+          "case_id": "anonymous_01",
+          "elapsed_seconds": 0.030999999988125637,
+          "fit_evaluations": 9,
+          "output_sha256": "da4cbde283b44467a1388821cf5cdc1ca7adc6cb0060f7ec3c11f0db05a4ebdd",
+          "output_svg": "outputs/adaptive/anonymous_01.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 12,
+              "path_complexity_ratio": 1.7143,
+              "path_count": 3,
+              "vector_element_count": 7
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.7713208794593811,
+              "foreground_iou": 0.8501440922190202,
+              "foreground_mse": 0.015911422669887543,
+              "normalized_mse": 0.008269006386399269
+            },
+            "satisfactory": true
+          },
+          "satisfactory": true,
+          "search_control": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 0.031,
+            "limit_seconds": 60.0,
+            "max_seconds": 120.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          },
+          "semantic_score": 1.0,
+          "source": "AC0232_M"
+        },
+        {
+          "case_id": "anonymous_02",
+          "elapsed_seconds": 0.046999999991385266,
+          "fit_evaluations": 9,
+          "output_sha256": "de76c07cc074bcce3a0fbf83b27ebce5f9b320eb89a52d6dceff48392fe74fe4",
+          "output_svg": "outputs/adaptive/anonymous_02.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 12,
+              "path_complexity_ratio": 1.7143,
+              "path_count": 3,
+              "vector_element_count": 7
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.803111732006073,
+              "foreground_iou": 0.8775510204081632,
+              "foreground_mse": 0.011630959808826447,
+              "normalized_mse": 0.006929172668606043
+            },
+            "satisfactory": true
+          },
+          "satisfactory": true,
+          "search_control": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 0.031,
+            "limit_seconds": 60.0,
+            "max_seconds": 120.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          },
+          "semantic_score": 1.0,
+          "source": "AC0232_S"
+        },
+        {
+          "case_id": "anonymous_03",
+          "elapsed_seconds": 0.07800000000861473,
+          "fit_evaluations": 26,
+          "output_sha256": "563c04886ce497a50e78adb39cd9b45b27aacfb5c9f3218989793aa464365715",
+          "output_svg": "outputs/adaptive/anonymous_03.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 4
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.8273592591285706,
+              "foreground_iou": 0.8617511520737328,
+              "foreground_mse": 0.012835757806897163,
+              "normalized_mse": 0.004080913960933685
+            },
+            "satisfactory": true
+          },
+          "satisfactory": true,
+          "search_control": {
+            "candidate_evaluations": 25,
+            "elapsed_seconds": 0.062,
+            "limit_seconds": 60.0,
+            "max_seconds": 120.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          },
+          "semantic_score": 1.0,
+          "source": "AC0921_M"
+        },
+        {
+          "case_id": "anonymous_04",
+          "elapsed_seconds": 0.75,
+          "fit_evaluations": 106,
+          "output_sha256": "0035ddb012967a52575975d714d634469e0dbdfa7155fcb5013527c94fed967a",
+          "output_svg": "outputs/adaptive/anonymous_04.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 3
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.8691970109939575,
+              "foreground_iou": 0.8763440860215054,
+              "foreground_mse": 0.012150164693593979,
+              "normalized_mse": 0.006333678960800171
+            },
+            "satisfactory": true
+          },
+          "satisfactory": true,
+          "search_control": {
+            "candidate_evaluations": 387,
+            "elapsed_seconds": 0.735,
+            "limit_seconds": 60.0,
+            "max_seconds": 120.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          },
+          "semantic_score": 1.0,
+          "source": "AC0840_M"
+        },
+        {
+          "case_id": "anonymous_05",
+          "elapsed_seconds": 0.8599999999860302,
+          "fit_evaluations": 250,
+          "output_sha256": "11b8368c2861ae548b4a8543ad3f98a3680ada85c75264cf1de6117492de1878",
+          "output_svg": "outputs/adaptive/anonymous_05.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 5
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.8757497072219849,
+              "foreground_iou": 0.8583333333333333,
+              "foreground_mse": 0.011675210669636726,
+              "normalized_mse": 0.006383049301803112
+            },
+            "satisfactory": true
+          },
+          "satisfactory": true,
+          "search_control": {
+            "candidate_evaluations": 585,
+            "elapsed_seconds": 0.829,
+            "limit_seconds": 60.0,
+            "max_seconds": 120.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          },
+          "semantic_score": 1.0,
+          "source": "AC0910_S"
+        },
+        {
+          "case_id": "anonymous_06",
+          "elapsed_seconds": 0.375,
+          "fit_evaluations": 83,
+          "output_sha256": "9941d23dcd78720c82da24d58616d3fec5e2fdbf81c539dd68d08a03d2237add",
+          "output_svg": "outputs/adaptive/anonymous_06.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 3
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.8814381957054138,
+              "foreground_iou": 0.9715475364330326,
+              "foreground_mse": 0.009737249463796616,
+              "normalized_mse": 0.0006577155436389148
+            },
+            "satisfactory": true
+          },
+          "satisfactory": true,
+          "search_control": {
+            "candidate_evaluations": 83,
+            "elapsed_seconds": 0.343,
+            "limit_seconds": 60.0,
+            "max_seconds": 120.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          },
+          "semantic_score": 1.0,
+          "source": "independent_primitives"
+        },
+        {
+          "case_id": "anonymous_07",
+          "elapsed_seconds": 0.45300000000861473,
+          "fit_evaluations": 40,
+          "output_sha256": "b532f7041fd5d57420b9efc85f98f464eeee5c69dce0a597d31789e57110ec81",
+          "output_svg": "outputs/adaptive/anonymous_07.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 4
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.945588231086731,
+              "foreground_iou": 0.9536500579374276,
+              "foreground_mse": 0.011640099808573723,
+              "normalized_mse": 0.0004958139033988118
+            },
+            "satisfactory": true
+          },
+          "satisfactory": true,
+          "search_control": {
+            "candidate_evaluations": 40,
+            "elapsed_seconds": 0.406,
+            "limit_seconds": 60.0,
+            "max_seconds": 120.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          },
+          "semantic_score": 1.0,
+          "source": "independent_primitives"
+        }
+      ],
+      "reference_access": {
+        "blocked_svg_reads": []
+      }
+    },
+    "fixed": {
+      "cases": [
+        {
+          "case_id": "anonymous_00",
+          "elapsed_seconds": 2.3440000000118744,
+          "fit_evaluations": 533,
+          "output_sha256": "09502577b2317220b44ff6f2264e360a3db0191bb2b75f94f94291ff7ab16edc",
+          "output_svg": "outputs/fixed/anonymous_00.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 12,
+              "path_complexity_ratio": 1.7143,
+              "path_count": 3,
+              "vector_element_count": 7
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.8732258081436157,
+              "foreground_iou": 0.95347533632287,
+              "foreground_mse": 0.002948179142549634,
+              "normalized_mse": 0.0014464276609942317
+            },
+            "satisfactory": true
+          },
+          "satisfactory": null,
+          "search_control": null,
+          "semantic_score": 1.0,
+          "source": "AC0232_L"
+        },
+        {
+          "case_id": "anonymous_01",
+          "elapsed_seconds": 5.187999999994645,
+          "fit_evaluations": 532,
+          "output_sha256": "7653681c7d26adc04fb426f96d6152e5d7e8b2f8f92b4ee849958ed80c2c8c4a",
+          "output_svg": "outputs/fixed/anonymous_01.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 12,
+              "path_complexity_ratio": 1.7143,
+              "path_count": 3,
+              "vector_element_count": 7
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.8598019480705261,
+              "foreground_iou": 0.9525862068965517,
+              "foreground_mse": 0.004081063438206911,
+              "normalized_mse": 0.002149479230865836
+            },
+            "satisfactory": true
+          },
+          "satisfactory": null,
+          "search_control": null,
+          "semantic_score": 1.0,
+          "source": "AC0232_M"
+        },
+        {
+          "case_id": "anonymous_02",
+          "elapsed_seconds": 5.26600000000326,
+          "fit_evaluations": 540,
+          "output_sha256": "6137ba1014d18597c695804af35e008d2f6892c8eefd6a0375cb09ba7360dd0d",
+          "output_svg": "outputs/fixed/anonymous_02.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 12,
+              "path_complexity_ratio": 1.7143,
+              "path_count": 3,
+              "vector_element_count": 7
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.8885921239852905,
+              "foreground_iou": 0.9431137724550899,
+              "foreground_mse": 0.002790512517094612,
+              "normalized_mse": 0.001663881354033947
+            },
+            "satisfactory": true
+          },
+          "satisfactory": null,
+          "search_control": null,
+          "semantic_score": 1.0,
+          "source": "AC0232_S"
+        },
+        {
+          "case_id": "anonymous_03",
+          "elapsed_seconds": 0.6089999999967404,
+          "fit_evaluations": 249,
+          "output_sha256": "47639ae791ebc292a9c8a0d97fcdd7eb66a4cb580a1c42987c96094f63e2d77f",
+          "output_svg": "outputs/fixed/anonymous_03.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 4
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.8475635647773743,
+              "foreground_iou": 0.8973214285714286,
+              "foreground_mse": 0.008752952329814434,
+              "normalized_mse": 0.0031776127871125937
+            },
+            "satisfactory": true
+          },
+          "satisfactory": null,
+          "search_control": null,
+          "semantic_score": 1.0,
+          "source": "AC0921_M"
+        },
+        {
+          "case_id": "anonymous_04",
+          "elapsed_seconds": 3.7190000000118744,
+          "fit_evaluations": 211,
+          "output_sha256": "6580858d60dff6cd5e353b3b63e5b23e4ab1ed47fc6a2dcce6e0478806254e3a",
+          "output_svg": "outputs/fixed/anonymous_04.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 4
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.9304534792900085,
+              "foreground_iou": 0.9326424870466321,
+              "foreground_mse": 0.002249832032248378,
+              "normalized_mse": 0.0011714724823832512
+            },
+            "satisfactory": true
+          },
+          "satisfactory": null,
+          "search_control": null,
+          "semantic_score": 1.0,
+          "source": "AC0840_M"
+        },
+        {
+          "case_id": "anonymous_05",
+          "elapsed_seconds": 2.687999999994645,
+          "fit_evaluations": 492,
+          "output_sha256": "c9d1fc25fc462e30644300e231d6be00def39e891e8e209061e0e101584fd34e",
+          "output_svg": "outputs/fixed/anonymous_05.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 5
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.9158039689064026,
+              "foreground_iou": 0.9478260869565217,
+              "foreground_mse": 0.005513598211109638,
+              "normalized_mse": 0.0031192104797810316
+            },
+            "satisfactory": true
+          },
+          "satisfactory": null,
+          "search_control": null,
+          "semantic_score": 1.0,
+          "source": "AC0910_S"
+        },
+        {
+          "case_id": "anonymous_06",
+          "elapsed_seconds": 0.8439999999827705,
+          "fit_evaluations": 226,
+          "output_sha256": "b2c3401674b722998dff9bd111b52d7b37feb61a842bf5bebb02ad5c747c8961",
+          "output_svg": "outputs/fixed/anonymous_06.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 3
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.9575732350349426,
+              "foreground_iou": 0.9776536312849162,
+              "foreground_mse": 0.0013220921391621232,
+              "normalized_mse": 9.743261034600437e-05
+            },
+            "satisfactory": true
+          },
+          "satisfactory": null,
+          "search_control": null,
+          "semantic_score": 1.0,
+          "source": "independent_primitives"
+        },
+        {
+          "case_id": "anonymous_07",
+          "elapsed_seconds": 2.1089999999967404,
+          "fit_evaluations": 330,
+          "output_sha256": "7113fc45946da1256bc2e5364789cd2b01c9839f4bfdef25aa67083f4b6417db",
+          "output_svg": "outputs/fixed/anonymous_07.svg",
+          "quality": {
+            "complexity": {
+              "embedded_raster_count": 0,
+              "parse_error": null,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0,
+              "path_count": 0,
+              "vector_element_count": 4
+            },
+            "failures": [],
+            "limits": {
+              "max_foreground_mse": 0.04,
+              "max_normalized_mse": 0.01,
+              "max_path_commands": 160,
+              "max_svg_elements": 80,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85
+            },
+            "metrics": {
+              "edge_alignment": 0.9938275218009949,
+              "foreground_iou": 0.9965277777777778,
+              "foreground_mse": 0.00033439177786931396,
+              "normalized_mse": 1.4332469618238974e-05
+            },
+            "satisfactory": true
+          },
+          "satisfactory": null,
+          "search_control": null,
+          "semantic_score": 1.0,
+          "source": "independent_primitives"
+        }
+      ],
+      "reference_access": {
+        "blocked_svg_reads": []
+      }
+    }
+  },
+  "bot_events": {
+    "registration_started": 11,
+    "registering": 16,
+    "registration_finished": 11,
+    "candidate_satisfactory": 8,
+    "image_search_finished": 8,
+    "model_started": 5,
+    "strategy_started": 25,
+    "strategy_finished": 25,
+    "bot_message": 20,
+    "bot_deactivated": 6,
+    "search_finished": 2,
+    "model_finished": 5
+  },
+  "source_sha256": {
+    "src\\iCCModules\\imageCompositeConverterSearchBots.py": "64bb492f0c0dfdc708383f5c57656cbd2218a589b37f624ea9181a4a131b55a1",
+    "src\\iCCModules\\imageCompositeConverterSearchPortfolio.py": "d52994dcb45884f40ecb88fd6637a2317e3b29656e2220a6fd6eb9969b527c57",
+    "src\\iCCModules\\imageCompositeConverterAdaptiveSearch.py": "e6a07164d851f4c2b85efc01f17e798ec6a9744668edea730f67eb41a01380f9"
+  },
+  "command": ".venv/Scripts/python.exe artifacts/evaluation/adaptive_search_v1/run_evidence.py --output-dir .tmp/bot-search-cli-v1"
+}

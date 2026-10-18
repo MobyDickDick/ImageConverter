@@ -16,17 +16,23 @@ import random
 import time
 
 import numpy as np
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import (
+    ImageSearch, SearchPolicy, current_search, image_search,pixel_quality,
+)
 
 _SETTINGS = ContextVar('conversion_search_settings', default=None)
 
 
 @contextmanager
-def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, allow_memory=False):
+def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, allow_memory=False,
+                         adaptive=False, seconds=60., max_seconds=120.):
     if mode not in {'legacy', 'portfolio'} or not 32 <= budget <= 10000:
         raise ValueError('Search mode or render budget is invalid')
+    policy = SearchPolicy(seconds=seconds,max_seconds=max_seconds)
     token = _SETTINGS.set(dict(mode=mode, seed=int(seed), budget=int(budget),
                                directory=Path(directory) if directory else None,
-                               allow_memory=allow_memory))
+                               allow_memory=allow_memory,adaptive=adaptive and mode=='portfolio',
+                               policy=policy,images={}))
     try:
         yield
     finally:
@@ -35,6 +41,30 @@ def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, a
 
 def settings():
     return _SETTINGS.get()
+
+
+def configured_image_search(identity):
+    config = settings()
+    if not config or not config['adaptive']:
+        return image_search(None)
+    session = config['images'].setdefault(str(identity),ImageSearch(config['policy'],
+        emit=lambda **values: progress(str(identity),**values)))
+    return image_search(session)
+
+
+def validated_result(result, image):
+    """Call only after the model's full semantic checks have accepted its SVG."""
+    session = current_search()
+    if session is None:
+        return False
+    quality = pixel_quality(image,result['rendered'])
+    if not quality or not quality['passed']:
+        return False
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import svg_identity,raster_identity
+    if (svg_identity(result['svg']),raster_identity(image)) not in session.validated:
+        session.validate(result,image)
+        progress(result.get('source','model'),event='candidate_satisfactory',**session.report())
+    return True
 
 
 def progress(source, **values):
@@ -96,7 +126,7 @@ def store_validated_variant(result, *, image, description, model, quality):
         (config['directory']/'strategy_memory.json').write_text(json.dumps(memory, indent=2)+'\n', encoding='utf-8')
 
 
-def explore_parameters(parameters, geometry_count, measure, incumbent, *, source, image):
+def explore_parameters(parameters, geometry_count, measure, incumbent, *, source, image, satisfactory_fn=None):
     """Explore different search trajectories under one additional render budget.
 
     ``measure`` also applies the model's validity rules and custom loss. A probe
@@ -106,6 +136,9 @@ def explore_parameters(parameters, geometry_count, measure, incumbent, *, source
     config = settings()
     if not config or config['mode'] != 'portfolio':
         return parameters, incumbent, None
+    if config['adaptive'] and current_search() is not None:
+        return _explore_adaptive(parameters,geometry_count,measure,incumbent,
+                                 source=source,image=image,satisfactory_fn=satisfactory_fn)
     identity = hashlib.sha256(source.encode()+np.asarray(image).tobytes()+incumbent[2].encode()).hexdigest()
     rng = random.Random(config['seed'] ^ int(identity[:16], 16))
     paths = ['reverse_coordinates', 'shuffled_coordinates', 'joint_restart']
@@ -189,3 +222,10 @@ def explore_parameters(parameters, geometry_count, measure, incumbent, *, source
                               winning_strategy=winning_strategy,
                               budget=config['budget'], attempts=records,
                               elapsed_seconds=round(time.monotonic()-started, 3))
+
+
+def _explore_adaptive(parameters, geometry_count, measure, incumbent, *, source, image, satisfactory_fn):
+    from src.iCCModules.imageCompositeConverterSearchBots import explore_bots
+    return explore_bots(parameters, geometry_count, measure, incumbent, source=source,
+                        image=image, satisfactory_fn=satisfactory_fn,
+                        session=current_search(), config=settings(), emit=progress)

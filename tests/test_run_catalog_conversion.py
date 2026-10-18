@@ -175,6 +175,23 @@ def test_timeout_remains_failure_and_does_not_stop_next_image(catalog_run, monke
     assert completed_variants(report) == {"second"}
 
 
+def test_adaptive_extension_has_separate_nominal_and_hard_process_budgets(catalog_run,monkeypatch):
+    inputs,_=catalog_run
+    (inputs/'neutral.png').write_bytes(b'image')
+    monkeypatch.setattr(sys,'argv',[*sys.argv,'--adaptive-max-seconds','150'])
+    calls=[]
+    def convert(command,**kwargs):
+        calls.append((command,kwargs))
+        return subprocess.CompletedProcess(command,0)
+    monkeypatch.setattr(subprocess,'run',convert)
+    assert run_catalog_conversion.main()==0
+    command,options=calls[0]
+    assert command[command.index('--search-seconds')+1]=='90.0'
+    assert command[command.index('--search-max-seconds')+1]=='150.0'
+    assert options['timeout']==165.0
+    assert options['env']['ICC_CONVERSION_TIMEOUT_SEC']=='150.0'
+
+
 @pytest.mark.parametrize("status,returncode", [("process_timeout", 124), ("converter_error", 1), ("completed", 1)])
 def test_resume_retries_failures_and_keeps_successes(catalog_run, monkeypatch, status, returncode):
     inputs, report = catalog_run

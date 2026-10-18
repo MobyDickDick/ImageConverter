@@ -1,0 +1,172 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere anonymous_00.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_00.jpg ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "M" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 12.685866666666668}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 10.352355555555556}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 7.417333333333334}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 216, "best_error": 7.333866666666666}
+[Search] {"source": "raster_motor_valve_v1", "event": "candidate_satisfactory", "elapsed_seconds": 1.562, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 216}
+[Search] {"source": "anonymous_00", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 1.609, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 216, "stop_reason": "satisfactory"}
+[INFO] Konvertiert anonymous_00.jpg | Parameter: mode=semantic_badge, label=M, variant_name=ANONYMOUS_00 | Qualität: Optimierungsfehler/Pixel=0.001956, Mean-Delta²=568.237854, RGB-RMSE/Kanal=13.762726, Raumscore=1493.941211, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.6s
+[INFO] Konvertiere anonymous_01.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_01.jpg ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "M" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 1, "best_error": 13.19432098765432}
+[Search] {"source": "raster_motor_valve_v1", "event": "candidate_satisfactory", "elapsed_seconds": 0.031, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 1}
+[Search] {"source": "anonymous_01", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 0.047, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 1, "stop_reason": "satisfactory"}
+[INFO] Konvertiert anonymous_01.jpg | Parameter: mode=semantic_badge, label=M, variant_name=ANONYMOUS_01 | Qualität: Optimierungsfehler/Pixel=0.009774, Mean-Delta²=1613.076294, RGB-RMSE/Kanal=23.188189, Raumscore=3840.388207, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere anonymous_02.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_02.jpg ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "M" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 1, "best_error": 13.515}
+[Search] {"source": "raster_motor_valve_v1", "event": "candidate_satisfactory", "elapsed_seconds": 0.047, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 1}
+[Search] {"source": "anonymous_02", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 0.062, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 1, "stop_reason": "satisfactory"}
+[INFO] Konvertiert anonymous_02.jpg | Parameter: mode=semantic_badge, label=M, variant_name=ANONYMOUS_02 | Qualität: Optimierungsfehler/Pixel=0.022525, Mean-Delta²=1351.708374, RGB-RMSE/Kanal=21.226621, Raumscore=3297.340732, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere anonymous_03.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_03.jpg ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "Q" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 25, "best_error": 7.352857142857143}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "candidate_satisfactory", "elapsed_seconds": 0.062, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 25}
+[Search] {"source": "anonymous_03", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 0.078, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 25, "stop_reason": "satisfactory"}
+[INFO] Konvertiert anonymous_03.jpg | Parameter: mode=semantic_badge, label=Q, variant_name=ANONYMOUS_03 | Qualität: Optimierungsfehler/Pixel=0.010504, Mean-Delta²=796.084290, RGB-RMSE/Kanal=16.289918, Raumscore=2714.955754, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Konvertiere anonymous_04.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_04.jpg ---
+Bildbeschreibung: Eine einfarbige hellgraue Kreisscheibe mit dunkler Randkontur auf weißem Hintergrund. In der Mitte steht die dunkle serifenlose Beschriftung "rF". Keine Anschlüsse.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe rF
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 17.855833333333333}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 12.535}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "joint_restart", "proposals": 0, "budget": 384, "seed": 20261018, "best_error": 12.6325}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 192, "current_error": 13.6575}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 32, "error": 12.6325, "improved": false, "best_error": 12.6325}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 32, "budget": 384, "seed": 20261018, "best_error": 12.6325}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 32, "error": 12.495, "improved": true, "best_error": 12.495}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 64, "budget": 384, "seed": 20261018, "best_error": 12.495}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 32, "error": 12.369166666666667, "improved": true, "best_error": 12.369166666666667}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "joint_restart", "proposals": 96, "budget": 384, "seed": 20261018, "best_error": 12.369166666666667}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 256, "current_error": 12.075}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 64, "error": 12.369166666666667, "improved": false, "best_error": 12.369166666666667}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 128, "budget": 384, "seed": 20261018, "best_error": 12.369166666666667}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 64, "error": 12.176666666666666, "improved": true, "best_error": 12.176666666666666}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 160, "budget": 384, "seed": 20261018, "best_error": 12.176666666666666}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 320, "current_error": 13.2025}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 64, "error": 11.879166666666666, "improved": true, "best_error": 11.879166666666666}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "joint_restart", "proposals": 192, "budget": 384, "seed": 20261018, "best_error": 11.879166666666666}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 96, "error": 11.879166666666666, "improved": false, "best_error": 11.879166666666666}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 224, "budget": 384, "seed": 20261018, "best_error": 11.879166666666666}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 96, "error": 11.854166666666666, "improved": true, "best_error": 11.854166666666666}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 256, "budget": 384, "seed": 20261018, "best_error": 11.854166666666666}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 384, "current_error": 11.833333333333334}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 96, "error": 11.8325, "improved": true, "best_error": 11.8325}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "joint_restart", "proposals": 288, "budget": 384, "seed": 20261018, "best_error": 11.8325}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 11.8325, "improved": false, "best_error": 11.8325}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 320, "budget": 384, "seed": 20261018, "best_error": 11.8325}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 128, "error": 11.2875, "improved": true, "best_error": 11.2875}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 352, "budget": 384, "seed": 20261018, "best_error": 11.2875}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 448, "current_error": 11.2975}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 128, "error": 11.2875, "improved": true, "best_error": 11.2875}
+[Search] {"source": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\adaptive_search_v1\\cli\\adaptive_release\\anonymous_04.jpg", "event": "proposal_budget_extended", "model": "short_label_disk_separate_400", "previous_budget": 384, "budget": 576, "proposals": 384}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "joint_restart", "proposals": 384, "budget": 576, "seed": 20261018, "best_error": 11.2875}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 160, "error": 11.2875, "improved": false, "best_error": 11.2875}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 416, "budget": 576, "seed": 20261018, "best_error": 11.2875}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 160, "error": 11.2875, "improved": true, "best_error": 11.2875}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 448, "budget": 576, "seed": 20261018, "best_error": 11.2875}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 512, "current_error": 11.3625}
+[Search] {"source": "short_label_disk_separate_400", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 158, "error": 11.2875, "improved": true, "best_error": 11.2875}
+[Search] {"source": "short_label_disk_separate_400", "event": "search_finished", "stop_reason": "stagnation", "proposals": 478, "budget": 576, "best_error": 11.2875}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 536, "best_error": 11.2875}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 11.2875, "glyph_iou": 0.7391304347826086, "accepted": true}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 19.255}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 105, "best_error": 13.4025}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 13.4025, "glyph_iou": 0.7246376811594203, "accepted": true}
+[Search] {"source": "short_label_disk_native_400", "event": "candidate_satisfactory", "elapsed_seconds": 2.375, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 641}
+[Search] {"source": "anonymous_04", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 2.484, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 641, "stop_reason": "satisfactory"}
+[INFO] Konvertiert anonymous_04.jpg | Parameter: mode=semantic_badge, label=rF, variant_name=ANONYMOUS_04 | Qualität: Optimierungsfehler/Pixel=0.033506, Mean-Delta²=1235.542480, RGB-RMSE/Kanal=20.294026, Raumscore=3825.202572, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=2.5s
+[INFO] Konvertiere anonymous_05.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_05.jpg ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung "Lux" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe LUX
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 14.352592592592593}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 13.72888888888889}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 181, "best_error": 10.973333333333333}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 10.973333333333333, "glyph_iou": 0.6216216216216216, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 15.746666666666666}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 14.435555555555556}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 155, "best_error": 12.87111111111111}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 12.87111111111111, "glyph_iou": 0.525, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 24.45777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 22.32888888888889}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 192, "current_error": 17.494814814814816}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "joint_restart", "proposals": 0, "budget": 384, "seed": 20261018, "best_error": 16.31111111111111}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 32, "error": 15.973333333333333, "improved": true, "best_error": 15.973333333333333}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 32, "budget": 384, "seed": 20261018, "best_error": 15.973333333333333}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 256, "current_error": 15.097777777777777}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 32, "error": 15.097777777777777, "improved": true, "best_error": 15.097777777777777}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 64, "budget": 384, "seed": 20261018, "best_error": 15.097777777777777}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 32, "error": 14.782222222222222, "improved": true, "best_error": 14.782222222222222}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "joint_restart", "proposals": 96, "budget": 384, "seed": 20261018, "best_error": 14.782222222222222}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 64, "error": 13.771851851851851, "improved": true, "best_error": 13.771851851851851}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 128, "budget": 384, "seed": 20261018, "best_error": 13.771851851851851}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 320, "current_error": 13.601481481481482}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 64, "error": 13.604444444444445, "improved": true, "best_error": 13.604444444444445}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 160, "budget": 384, "seed": 20261018, "best_error": 13.604444444444445}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 64, "error": 13.44, "improved": true, "best_error": 13.44}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "joint_restart", "proposals": 192, "budget": 384, "seed": 20261018, "best_error": 13.44}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 96, "error": 13.268148148148148, "improved": true, "best_error": 13.268148148148148}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 224, "budget": 384, "seed": 20261018, "best_error": 13.268148148148148}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 384, "current_error": 13.281481481481482}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 83, "error": 11.974814814814815, "improved": true, "best_error": 11.974814814814815}
+[Search] {"source": "short_label_disk_separate_700", "event": "search_finished", "stop_reason": "satisfactory", "proposals": 243, "budget": 384, "best_error": 11.974814814814815}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 398, "best_error": 11.974814814814815}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 11.974814814814815, "glyph_iou": 0.7619047619047619, "accepted": true}
+[Search] {"source": "short_label_disk_separate_700", "event": "candidate_satisfactory", "elapsed_seconds": 2.688, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 734}
+[Search] {"source": "anonymous_05", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 2.719, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 734, "stop_reason": "satisfactory"}
+[INFO] Konvertiert anonymous_05.jpg | Parameter: mode=semantic_badge, label=LUX, variant_name=ANONYMOUS_05 | Qualität: Optimierungsfehler/Pixel=0.053221, Mean-Delta²=1190.528931, RGB-RMSE/Kanal=19.920918, Raumscore=3819.069531, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=2.8s
+[INFO] Konvertiere anonymous_06.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_06.png ---
+Bildbeschreibung: zwei Rechtecke. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt nebeneinander.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_scene_v1", "event": "registering", "evaluations": 64, "current_error": 1.5278858024691357}
+[Search] {"source": "primitive_scene_v1", "event": "registration_finished", "evaluations": 83, "best_error": 1.1431327160493827}
+[Search] {"source": "primitive_scene_v1", "event": "candidate_satisfactory", "elapsed_seconds": 0.516, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 83}
+[Search] {"source": "anonymous_06", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 0.563, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 83, "stop_reason": "satisfactory"}
+[INFO] Konvertiert anonymous_06.png | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_06 | Qualität: Optimierungsfehler/Pixel=0.000053, Mean-Delta²=128.303848, RGB-RMSE/Kanal=6.539721, Raumscore=558.737879, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere anonymous_07.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_07.png ---
+Bildbeschreibung: zwei Kreise und ein Rechteck. Umrisse auf weißem Grund, innen weiß. Ohne Text oder Zeichen. Die Objekte liegen voneinander getrennt nebeneinander.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_scene_v1", "event": "registration_finished", "evaluations": 40, "best_error": 0.7931372549019607}
+[Search] {"source": "primitive_scene_v1", "event": "candidate_satisfactory", "elapsed_seconds": 0.391, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 40}
+[Search] {"source": "anonymous_07", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 0.453, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 40, "stop_reason": "satisfactory"}
+[INFO] Konvertiert anonymous_07.png | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_07 | Qualität: Optimierungsfehler/Pixel=0.000019, Mean-Delta²=96.720879, RGB-RMSE/Kanal=5.678054, Raumscore=408.811388, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.5s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\adaptive_search_v1\cli\adaptive_release\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\adaptive_search_v1\cli\adaptive_release\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\adaptive_search_v1\cli\adaptive_release\conversion

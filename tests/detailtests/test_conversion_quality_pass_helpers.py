@@ -1,6 +1,40 @@
 from __future__ import annotations
 
 from src.iCCModules import imageCompositeConverterConversionQualityPass as conversion_quality_pass_helpers
+import pytest
+
+
+@pytest.mark.parametrize('reason',['satisfactory','stagnation','time_limit'])
+def test_adaptive_terminal_rows_are_not_retried_even_with_structured_residual(reason):
+    row=dict(filename='neutral.png',variant='NEUTRAL',error_per_pixel=.5,mean_delta2=10.,
+             diff_error_distribution_status='structured',search_control={'stop_reason':reason})
+    conversion_quality_pass_helpers.runQualityPassesImpl(max_quality_passes=4,stop_after_failure=False,
+        deterministic_order=True,rng=object(),base_iterations=64,allowed_error_per_pixel=.1,
+        skip_variants=set(),result_map={'neutral.png':row},quality_logs=[],conversion_bestlist_rows={},
+        convert_one_fn=lambda *a,**k:pytest.fail('terminal image retried'),
+        select_open_quality_cases_fn=lambda rows,**kwargs:rows,select_middle_lower_tercile_fn=lambda rows:rows,
+        iteration_strategy_for_pass_fn=lambda *a:(64,8),adaptive_iteration_budget_for_quality_row_fn=lambda r,b:b,
+        evaluate_quality_pass_candidate_fn=lambda *a:pytest.fail('no candidate expected'),
+        store_conversion_bestlist_snapshot_fn=lambda *a:None,restore_conversion_bestlist_snapshot_fn=lambda *a:None)
+
+
+def test_stagnant_repeat_keeps_previous_svg_and_metrics_but_stops_further_retries():
+    row=dict(filename='neutral.png',variant='NEUTRAL',error_per_pixel=.5,mean_delta2=10.,
+             diff_error_distribution_status='structured',search_control={'stop_reason':'supported_models_exhausted'})
+    calls=[]
+    def convert(filename,**kwargs):
+        calls.append(filename)
+        return {**row,'mean_delta2':11.,'search_control':{'stop_reason':'stagnation'}},False
+    rows={'neutral.png':row}
+    conversion_quality_pass_helpers.runQualityPassesImpl(max_quality_passes=4,stop_after_failure=False,
+        deterministic_order=True,rng=object(),base_iterations=64,allowed_error_per_pixel=.1,
+        skip_variants=set(),result_map=rows,quality_logs=[],conversion_bestlist_rows={},convert_one_fn=convert,
+        select_open_quality_cases_fn=lambda rows,**kwargs:rows,select_middle_lower_tercile_fn=lambda rows:rows,
+        iteration_strategy_for_pass_fn=lambda *a:(64,8),adaptive_iteration_budget_for_quality_row_fn=lambda r,b:b,
+        evaluate_quality_pass_candidate_fn=lambda *a:(False,'kept',.5,.5,10.,11.),
+        store_conversion_bestlist_snapshot_fn=lambda *a:None,restore_conversion_bestlist_snapshot_fn=lambda *a:None)
+    assert calls==['neutral.png'] and rows['neutral.png']['mean_delta2']==10.
+    assert rows['neutral.png']['search_control']['stop_reason']=='stagnation'
 
 
 def test_run_quality_passes_updates_result_map_and_bestlist() -> None:

@@ -1342,11 +1342,13 @@ def convertRange(
             "Mit ICC_FORCE_RECONVERT=1 kann eine vollständige Neuberechnung erzwungen werden."
         )
     cfg = _loadQualityConfig(reports_out_dir)
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import settings as search_settings
     max_mean_delta2, max_std_delta2 = quality_threshold_helpers.resolvePixelErrorAcceptanceImpl(cfg)
     early_quality_gate = early_quality_gate_helpers.resolveEarlyQualityGateImpl(
         cfg,
         existing_donor_rows,
         successful_threshold_fn=_computeSuccessfulConversionsErrorThreshold,
+        adaptive_search=bool((search_settings() or {}).get('adaptive')),
     )
     debug_event(
         "policy_resolved",
@@ -1519,6 +1521,10 @@ def convertRange(
     # Reused rows are already fresh relative to their source and description;
     # retrying them in the same invocation would defeat incremental conversion.
     skip_variants: set[str] = set(reused_variants)
+    # A fully checked satisfactory result needs no larger-iteration repeat.
+    # Its proof belongs to the actual selected SVG, never just a pixel score.
+    skip_variants.update(str(row.get('variant','')).upper() for row in result_map.values()
+                         if row.get('search_satisfactory') is True)
 
     _writeQualityConfig(
         reports_out_dir,

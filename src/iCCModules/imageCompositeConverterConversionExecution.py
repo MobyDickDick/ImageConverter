@@ -538,7 +538,8 @@ def convertOneImpl(
         f"max. Validierungsrunden={effective_badge_rounds}"
     )
     try:
-        with _wallClockTimeout(run_timeout_sec):
+        from src.iCCModules.imageCompositeConverterSearchPortfolio import configured_image_search
+        with configured_image_search(os.path.abspath(image_path)) as search_session, _wallClockTimeout(run_timeout_sec):
             res = run_iteration_pipeline_fn(
                 image_path,
                 csv_path,
@@ -951,6 +952,17 @@ def convertOneImpl(
         "variant": os.path.splitext(filename)[0].upper(),
     }
     raw_render_telemetry = params.get("_optimization_render_telemetry", {})
+    if search_session is not None:
+        from src.iCCModules.imageCompositeConverterAdaptiveSearch import svg_identity,raster_identity
+        satisfactory = bool(search_session.validated and img is not None and
+            (svg_identity(_safeReadTextFile(svg_path)),raster_identity(img)) in search_session.validated)
+        row['search_satisfactory'] = satisfactory
+        reason = search_session.output_reason(float(mean_delta2),satisfactory=satisfactory)
+        row['search_control'] = search_session.report()
+        row['search_control']['stop_reason'] = reason
+        params['adaptive_search'] = row['search_control']
+        from src.iCCModules.imageCompositeConverterSearchPortfolio import progress
+        progress(base,event='image_search_finished',satisfactory=satisfactory,**row['search_control'])
     if not isinstance(raw_render_telemetry, dict):
         raw_render_telemetry = {}
     row["optimization_render_telemetry"] = {
@@ -988,7 +1000,7 @@ def convertOneImpl(
         if math.isfinite(float(row["spatial_quality_score"]))
         else ""
     )
-    if error_distribution_status == "structured":
+    if error_distribution_status == "structured" and not row.get('search_satisfactory'):
         print_fn(
             f"[WARN] {filename}: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; "
             f"Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet "

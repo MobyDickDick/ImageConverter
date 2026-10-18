@@ -4,6 +4,7 @@ from __future__ import annotations
 import cv2
 import numpy as np
 from src.iCCModules.imageCompositeConverterSearchPortfolio import explore_parameters, progress, settings
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search,pixel_quality
 
 
 def _hex(bgr):
@@ -11,7 +12,7 @@ def _hex(bgr):
 
 
 def _register(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
-              *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None):
+              *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None):
     """Bounded coordinate descent; optionally retain the best admissible iterate.
 
     A custom search loss does not override the caller's initial error bound.
@@ -22,6 +23,8 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
     height, width = image.shape[:2]
     evaluations = 0
     render_cache = {}
+    session = current_search()
+    stop_reason = None
     progress(source, event='registration_started', evaluations=0)
 
     def measure(p):
@@ -42,10 +45,17 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
         if evaluations % 64 == 0 and np.isfinite(error):
             progress(source, event='registering', evaluations=evaluations, current_error=error)
         measured = (loss, error, svg, raster) if np.isfinite(error) and np.isfinite(loss) else None
+        if session:
+            session.evaluations += 1
+        if session and len(render_cache) >= 256:
+            render_cache.clear()
         render_cache[svg] = measured
         return measured
 
     parameters = np.asarray(parameters, dtype=float)
+    if session and session.time_reason():
+        progress(source,event='registration_skipped',stop_reason='time_limit')
+        return None
     best = measure(parameters)
     if best is None:
         return None
@@ -53,11 +63,37 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
     if not np.isfinite(initial_error) or initial_error < 0:
         return None
     accepted = (parameters.copy(), best)
+    if session and best[1] <= initial_error+1e-9:
+        session.observe(best[1],evaluation=False)
+    satisfactory_cache = {}
+
+    def satisfactory(p, measured):
+        if not session or satisfactory_fn is None or measured[1] > initial_error+1e-9:
+            return False
+        if measured[2] in satisfactory_cache:
+            return satisfactory_cache[measured[2]]
+        quality = pixel_quality(image,measured[3])
+        passed = bool(quality and quality['passed'] and satisfactory_fn(p,measured))
+        satisfactory_cache[measured[2]] = passed
+        return passed
+
+    if satisfactory(parameters,best):
+        stop_reason = 'satisfactory'
     for step in (1., .5, .25, .125):
+        if stop_reason:
+            break
         for _ in range(2):
+            if stop_reason:
+                break
             improved = False
             for index in range(len(parameters)):
+                if stop_reason:
+                    break
                 for sign in (-1., 1.):
+                    if session:
+                        stop_reason = session.time_reason()
+                        if stop_reason:
+                            break
                     candidate = parameters.copy()
                     candidate[index] += sign*step*(4 if index >= geometry_count else 1)
                     measured = measure(candidate)
@@ -65,6 +101,10 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
                         parameters, best, improved = candidate, measured, True
                         if best[1] <= initial_error+1e-9:
                             accepted = (parameters.copy(), best)
+                            if session:
+                                session.observe(best[1],evaluation=False)
+            if satisfactory(parameters,best):
+                stop_reason = 'satisfactory'
             if not improved:
                 break
     if preserve_initial_error:
@@ -73,20 +113,24 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
     # Keep already accurate incumbent fits byte-identical. Alternative searches
     # address poor fits, rather than introducing random changes to good output.
     mse = float(np.mean((image.astype(float)-np.asarray(best[3], dtype=float))**2))/255**2
-    if mse > .0001 and settings() and settings()['mode'] == 'portfolio':
+    if not stop_reason and mse > .0001 and settings() and settings()['mode'] == 'portfolio':
         from src.iCCModules.imageCompositeConverterPrimitiveScene import _local_quality
-        quality = _local_quality(np.asarray(image, dtype=np.uint8), np.asarray(best[3], dtype=np.uint8))
+        quality = (pixel_quality(image,best[3]) if session else
+                   _local_quality(np.asarray(image, dtype=np.uint8), np.asarray(best[3], dtype=np.uint8)))
         if quality is None or not quality['passed']:
             rendered_before_search = evaluations
             parameters, best, search = explore_parameters(parameters, geometry_count, measure, best,
-                                                         source=source, image=image)
+                                                         source=source, image=image,satisfactory_fn=satisfactory)
             search['additional_renderings'] = evaluations-rendered_before_search
     if best[1] > initial_error+1e-9:
         return None
     progress(source, event='registration_finished', evaluations=evaluations, best_error=best[1])
+    control = dict(stop_reason=stop_reason or (search or {}).get('stop_reason','schedule_exhausted'),
+                   **session.report()) if session else None
     return {'svg': best[2], 'rendered': best[3], 'error': best[1],
             'initial_error': initial_error, 'parameters': parameters.tolist(),
-            'evaluations': evaluations, 'source': source, **({'search': search} if search else {})}
+            'evaluations': evaluations, 'source': source, **({'search': search} if search else {}),
+            **({'search_control':control} if control else {})}
 
 
 def _image(width, height, image):

@@ -1,6 +1,57 @@
 {
-  "case_count": 374,
+  "case_count": 377,
   "cases": [
+    {
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"M\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/motor_valve_recheck_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0232_L.jpg",
+      "image_sha256": "33bb73a6341bd15ceb64e6b3b1f2ba2860101ad3a386bc9b2b8a1a6d031a3677",
+      "mean_delta2": 282.161865234375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8732258081436157,
+        "error_per_pixel": 0.0014464276059688581,
+        "object_mask_iou": 0.9132256134051466
+      },
+      "svg": "svgs/AC0232_L.svg",
+      "svg_sha256": "09502577b2317220b44ff6f2264e360a3db0191bb2b75f94f94291ff7ab16edc",
+      "variant": "AC0232_L"
+    },
+    {
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"M\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/motor_valve_recheck_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0232_M.jpg",
+      "image_sha256": "d225bc585b03756f96a537a015cbee74d1ee71e37e0c5be2ffee9c067dcc4957",
+      "mean_delta2": 419.30963134765625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8598019480705261,
+        "error_per_pixel": 0.002149479079060137,
+        "object_mask_iou": 0.8957055214723927
+      },
+      "svg": "svgs/AC0232_M.svg",
+      "svg_sha256": "7653681c7d26adc04fb426f96d6152e5d7e8b2f8f92b4ee849958ed80c2c8c4a",
+      "variant": "AC0232_M"
+    },
+    {
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"M\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/motor_valve_recheck_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0232_S.jpg",
+      "image_sha256": "206e6ff1081a032b8ed9a6125ffc212a3d7ce3241cf04393e4b29ace93fe4956",
+      "mean_delta2": 324.5816650390625,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8885921239852905,
+        "error_per_pixel": 0.0016638814047882226,
+        "object_mask_iou": 0.9259259259259259
+      },
+      "svg": "svgs/AC0232_S.svg",
+      "svg_sha256": "6137ba1014d18597c695804af35e008d2f6892c8eefd6a0375cb09ba7360dd0d",
+      "variant": "AC0232_S"
+    },
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
       "evidence": "artifacts/evaluation/pump_recheck_v1/report_2026-10-04.json",

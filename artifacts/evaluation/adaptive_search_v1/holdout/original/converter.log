@@ -1,0 +1,14 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere original.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite original.png ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen grünen Farbverlauf von dunkel links unten nach hell rechts oben und eine grünlich graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "R" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 1, "best_error": 2.721608527131783}
+[Search] {"source": "raster_motor_valve_v1", "event": "candidate_satisfactory", "elapsed_seconds": 0.094, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 1}
+[Search] {"source": "original", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 0.11, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 1, "stop_reason": "satisfactory"}
+[INFO] Konvertiert original.png | Parameter: mode=semantic_badge, label=R, variant_name=ORIGINAL | Qualität: Optimierungsfehler/Pixel=0.000264, Mean-Delta²=345.906311, RGB-RMSE/Kanal=10.737882, Raumscore=1127.198488, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\adaptive-planb\original\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\adaptive-planb\original\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\adaptive-planb\original\conversion

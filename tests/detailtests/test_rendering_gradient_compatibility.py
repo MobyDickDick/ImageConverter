@@ -4,6 +4,25 @@ from src.iCCModules import imageCompositeConverterRendering as rendering
 import pytest
 
 
+@pytest.mark.parametrize('transform', ['', 'translate(4 5) scale(1.5)'])
+@pytest.mark.parametrize('reverse', [False, True])
+def test_diagonal_gradient_matches_independent_vector_projection(transform, reverse):
+    import cv2
+    import fitz
+    import numpy as np
+    start,end = (('30','10') if reverse else ('10','30'))
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">'
+        f'<defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="{start}" y1="{start}" x2="{end}" y2="{end}">'
+        '<stop offset="0" stop-color="#0000ff"/><stop offset="1" stop-color="#ff0000"/>'
+        f'</linearGradient></defs><g transform="{transform}"><path d="M 5 5 L 35 5 L 35 35 L 5 35 Z" fill="url(#g)"/></g></svg>')
+    actual=rendering.render_svg_to_numpy_inprocess(svg,80,80,fitz_module=fitz,np_module=np,cv2_module=cv2)
+    locations=np.array([[16,18],[20,24],[27,25]])
+    original=(locations+.5-([4,5] if transform else [0,0]))/(1.5 if transform else 1)
+    t=np.clip(((original-float(start)).sum(axis=1))/(2*(float(end)-float(start))),0,1)
+    expected=np.c_[255*(1-t),np.zeros(3),255*t]
+    assert np.max(abs(actual[locations[:,1],locations[:,0]].astype(float)-expected)) < 5
+
+
 @pytest.mark.parametrize('transform', ['translate(3.25 -1.5)', 'scale(1.2)',
     'translate(1 -2) translate(20 20) scale(.94) translate(-20 -20)'])
 @pytest.mark.parametrize('resolution', [40, 80])

@@ -329,7 +329,7 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                     return origin+extent*(float(value[:-1])/100 if value.endswith('%') else float(value))
                 x1,x2 = coordinate(gradient.get('x1','0%'),0),coordinate(gradient.get('x2','100%'),0)
                 y1,y2 = coordinate(gradient.get('y1','0%'),1),coordinate(gradient.get('y2','0%'),1)
-                if x1!=x2 and y1!=y2 or x1==x2 and y1==y2:
+                if x1==x2 and y1==y2:
                     continue
                 stops = []
                 for stop in gradient:
@@ -364,12 +364,20 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                 # Preserve the root's default centered aspect-ratio mapping.
                 zoom = min(w/viewport[2],h/viewport[3])
                 padding = [(w-viewport[2]*zoom)/2,(h-viewport[3]*zoom)/2]
-                axis,low,high = (1,y1,y2) if x1==x2 else (0,x1,x2)
-                coordinates = viewport[axis]+(np.arange((h,w)[1-axis])+.5-padding[axis])/zoom
-                coordinates = (coordinates-(tx, ty)[axis])/scale
-                position = (coordinates-low)/(high-low)
-                colors = np.stack([np.interp(position,[v[0] for v in stops],[v[1][c] for v in stops]) for c in range(3)],axis=-1)
-                colors = np.broadcast_to(colors[:,None,:] if axis==1 else colors[None,:,:],(h,w,3))
+                if x1 != x2 and y1 != y2:
+                    # SVG linear paint follows the projection onto its axis,
+                    # including diagonal axes and ancestor translation/scale.
+                    px = (viewport[0]+(np.arange(w)+.5-padding[0])/zoom-tx)/scale
+                    py = (viewport[1]+(np.arange(h)+.5-padding[1])/zoom-ty)/scale
+                    position = ((px[None,:]-x1)*(x2-x1)+(py[:,None]-y1)*(y2-y1))/((x2-x1)**2+(y2-y1)**2)
+                    colors = np.stack([np.interp(position,[v[0] for v in stops],[v[1][c] for v in stops]) for c in range(3)],axis=-1)
+                else:
+                    axis,low,high = (1,y1,y2) if x1==x2 else (0,x1,x2)
+                    coordinates = viewport[axis]+(np.arange((h,w)[1-axis])+.5-padding[axis])/zoom
+                    coordinates = (coordinates-(tx, ty)[axis])/scale
+                    position = (coordinates-low)/(high-low)
+                    colors = np.stack([np.interp(position,[v[0] for v in stops],[v[1][c] for v in stops]) for c in range(3)],axis=-1)
+                    colors = np.broadcast_to(colors[:,None,:] if axis==1 else colors[None,:,:],(h,w,3))
                 rgba = np.concatenate((np.rint(colors*alpha[:,:,None]/255).astype(np.uint8),alpha[:,:,None]),axis=2)
                 paint = fitz_module.Pixmap(fitz_module.csRGB,w,h,rgba.tobytes(),True)
                 encoded = base64.b64encode(paint.tobytes('png')).decode('ascii')
