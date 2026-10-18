@@ -1,0 +1,159 @@
+{
+  "generator_seed": [
+    918273,
+    581321
+  ],
+  "cases": [
+    {
+      "case_id": "case_00",
+      "image": "sources/case_00.jpg",
+      "kind": "motor",
+      "label": "M",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe \"M\" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.",
+      "split": "known",
+      "family": "motor",
+      "provenance": "scheduler_search_v1/neutral_01",
+      "input_sha256": "d225bc585b03756f96a537a015cbee74d1ee71e37e0c5be2ffee9c067dcc4957"
+    },
+    {
+      "case_id": "case_01",
+      "image": "sources/case_01.jpg",
+      "kind": "label",
+      "label": "rF",
+      "description": "Eine einfarbige hellgraue Kreisscheibe mit dunkler Randkontur auf weißem Hintergrund. In der Mitte steht die dunkle serifenlose Beschriftung \"rF\". Keine Anschlüsse.",
+      "split": "known",
+      "family": "label",
+      "provenance": "scheduler_search_v1/neutral_04",
+      "input_sha256": "3919d16fb5fc08eaf63afbc4db3c71a79de4055c35b4d5908fdebfe1437164ec"
+    },
+    {
+      "case_id": "case_02",
+      "image": "sources/case_02.png",
+      "kind": "label",
+      "label": "Hz",
+      "split": "holdout",
+      "family": "label",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Serifenlose Beschriftung \"Hz\". Keine Anschlüsse.",
+      "paraphrase_group": "hz",
+      "input_sha256": "a15691c7fbc895b309534e6dae04c812a95072ce67bae043d637cc98e720c122"
+    },
+    {
+      "case_id": "case_03",
+      "image": "sources/case_03.png",
+      "kind": "label",
+      "label": "Hz",
+      "split": "holdout",
+      "family": "label",
+      "description": "Auf weißem Grund liegt eine gefüllte runde Scheibe mit dunklem Umriss und der fetten serifenlosen Beschriftung \"Hz\". Ohne Griff oder weitere Objekte.",
+      "paraphrase_group": "hz",
+      "input_sha256": "a15691c7fbc895b309534e6dae04c812a95072ce67bae043d637cc98e720c122"
+    },
+    {
+      "case_id": "case_04",
+      "image": "sources/case_04.png",
+      "kind": "objects",
+      "split": "holdout",
+      "family": "primitives",
+      "description": "ein Kreis und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt nebeneinander.",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            22.350021336880236,
+            46.8449518484356,
+            27.811955332866894,
+            21.783230530000598
+          ]
+        },
+        {
+          "kind": "circle",
+          "bbox": [
+            93.0528541474808,
+            49.2255828426464,
+            47.20910981519518,
+            47.20910981519518
+          ]
+        }
+      ],
+      "input_sha256": "fc0e8e37d6c06ad12f72e6cc0d0d31d857c7be34726e723dd3dea8b72f78ae68"
+    },
+    {
+      "case_id": "case_05",
+      "image": "sources/case_05.png",
+      "kind": "objects",
+      "split": "holdout",
+      "family": "primitives",
+      "description": "zwei Kreise und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt untereinander.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            32.38051688674875,
+            12.817909733192472,
+            32.28806171922909,
+            32.28806171922909
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            21.972639166445624,
+            67.92801941037996,
+            47.1883687148193,
+            39.544447519399924
+          ]
+        },
+        {
+          "kind": "circle",
+          "bbox": [
+            61.920399878167686,
+            135.6745126495449,
+            29.944350936949885,
+            29.944350936949885
+          ]
+        }
+      ],
+      "input_sha256": "a9a4171d9d35338a81a86c00770dc2072eb184bf1288419e8b85d0eba3553a1c"
+    },
+    {
+      "case_id": "case_06",
+      "image": "sources/case_06.png",
+      "kind": "objects",
+      "split": "unseen_family",
+      "family": "ellipse",
+      "description": "Eine einzelne waagerecht längliche Ellipse mit violetter Kontur, weißem Inneren und weißem Hintergrund. Kein Kreis, keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "ellipse",
+          "bbox": [
+            33.5,
+            29.5,
+            113,
+            51
+          ]
+        }
+      ],
+      "input_sha256": "d199d65e066e0ca3962109c4d16d8651ef5a59ec5c42291759c5b91803136570"
+    },
+    {
+      "case_id": "case_07",
+      "image": "sources/case_07.png",
+      "kind": "objects",
+      "split": "unseen_family",
+      "family": "triangle",
+      "description": "Ein einzelnes nach oben gerichtetes gleichschenkliges Dreieck mit grüner Kontur und weißem Inneren auf weißem Grund. Keine Kreisscheibe und keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "triangle",
+          "bbox": [
+            33.5,
+            18.5,
+            113,
+            73
+          ]
+        }
+      ],
+      "input_sha256": "8bb44e9750b1f035c2279beba9ad8d193846eb9350a275d36da2c9cc1a1c390d"
+    }
+  ]
+}
