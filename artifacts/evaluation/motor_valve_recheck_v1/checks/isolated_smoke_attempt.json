@@ -1,0 +1,15 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "tests/test_conversion_regression_smoke.py",
+    "-q"
+  ],
+  "execution_mode": "pytest default isolated renderer without worker reuse",
+  "status": "interrupted_redundant_slow_diagnostic",
+  "exit_code": 1,
+  "quality_verdict": null,
+  "reason": "Repeated process startup per rendering; interrupted after the explicit direct-render replay passed both tests in 9.41 seconds.",
+  "replacement_log": "conversion_smokes.log"
+}

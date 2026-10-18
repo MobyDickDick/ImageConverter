@@ -1,5 +1,9 @@
 # Dokumentationsindex
 
+- [AC0232: Dreiwegeventil, M-Scheibe und diagonaler Verlauf (2026-10-18)](next_arbeitspaket_2026-10-18_ac0232_m.md)
+
+- [Verfahrensprüfung: Suchraum, Forschungsstand und gemeinsames 60-Sekunden-Ziel (2026-10-18)](conversion_search_review_2026-10-18.md)
+
 - [AC0921: Kreisscheibe mit Q und unterem Griff, drei CLI-Abnahmen (2026-10-18)](next_arbeitspaket_2026-10-18_ac0921_m.md)
 
 - [AC0910: Lux-Kreisscheibe und begrenzte Zeichenverfeinerung (2026-10-17)](next_arbeitspaket_2026-10-17_ac0910_l.md)

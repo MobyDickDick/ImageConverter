@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from src.iCCModules.imageCompositeConverterLabeledDisk import fit_labeled_disk
 from src.iCCModules.imageCompositeConverterShortLabelDisk import fit_short_label_disk
+from src.iCCModules.imageCompositeConverterMotorValve import fit_motor_valve
 
 
 def _generic_description_badge_params(width: int, height: int, params: dict) -> dict | None:
@@ -148,8 +149,11 @@ def runSemanticBadgeIterationImpl(
     print_fn,
 ):
     original_description = ' '.join(str(f.get('text', '')) for f in params.get('description_fragments', []) if isinstance(f, dict)) or description
-    fitted_disk = fit_labeled_disk(width, height, description=original_description, image=perc_img,
+    fitted_disk = fit_motor_valve(width, height, description=original_description, image=perc_img,
         render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn)
+    if fitted_disk is None:
+        fitted_disk = fit_labeled_disk(width, height, description=original_description, image=perc_img,
+            render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn)
     if fitted_disk is None:
         fitted_disk = fit_short_label_disk(width, height, description=original_description, image=perc_img,
             render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn)

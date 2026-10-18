@@ -28,6 +28,7 @@ from src.iCCModules.imageCompositeConverterStepDiagram import fit_step_diagram
 from src.iCCModules.imageCompositeConverterSineDiagram import fit_sine_diagram
 from src.iCCModules.imageCompositeConverterChevronPanel import fit_chevron_panel
 from src.iCCModules.imageCompositeConverterThreeWayValve import fit_three_way_valve
+from src.iCCModules.imageCompositeConverterMotorValve import fit_motor_valve
 from src.iCCModules.imageCompositeConverterRadialDisk import fit_radial_disk
 from src.iCCModules.imageCompositeConverterFilledSymbols import fit_disk_bar, fit_solid_arrow
 from src.iCCModules.imageCompositeConverterDiskArrow import fit_disk_arrow
@@ -1478,6 +1479,7 @@ def runNonCompositeIterationImpl(
             (fit_zigzag_panel, "non_composite_raster_zigzag_panel"),
             (fit_checkbox_checkmark, "non_composite_raster_checkbox_checkmark"),
             (fit_three_way_valve, "non_composite_raster_three_way_valve"),
+            (fit_motor_valve, "non_composite_raster_motor_valve"),
             (fit_chevron_panel, "non_composite_raster_chevron_panel"),
             (fit_gradient_arrow, "non_composite_raster_gradient_arrow"),
             (fit_step_diagram, "non_composite_raster_step_diagram"),

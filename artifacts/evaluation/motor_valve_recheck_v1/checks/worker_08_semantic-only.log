@@ -1,0 +1,674 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere GE9034_1M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_1M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.3233333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 117, "best_error": 3.1172916666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 5.534791666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 124, "best_error": 5.11}
+[WARN] GE9034_1M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.500000, localized_error_fraction=0.881289).
+[INFO] Konvertiert GE9034_1M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_1M | Qualität: Optimierungsfehler/Pixel=0.001948, Mean-Delta²=196.654373, RGB-RMSE/Kanal=8.096385, Raumscore=709.564164, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.0s
+[INFO] Konvertiere GE9034_1S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_1S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.255}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 98, "best_error": 2.589166666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 5.615}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 5.008333333333334}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 134, "best_error": 4.969166666666666}
+[WARN] GE9034_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.855072, localized_error_fraction=0.935971).
+[INFO] Konvertiert GE9034_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_1S | Qualität: Optimierungsfehler/Pixel=0.006473, Mean-Delta²=99.212502, RGB-RMSE/Kanal=5.750725, Raumscore=353.143582, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.8s
+[INFO] Konvertiere GE9034_2M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_2M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.995625}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 119, "best_error": 2.965625}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 5.428125}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 4.916041666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 132, "best_error": 4.916041666666667}
+[WARN] GE9034_2M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.436090, localized_error_fraction=0.872582).
+[INFO] Konvertiert GE9034_2M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_2M | Qualität: Optimierungsfehler/Pixel=0.001854, Mean-Delta²=165.306870, RGB-RMSE/Kanal=7.423092, Raumscore=608.865192, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.3s
+[INFO] Konvertiere GE9034_2S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_2S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.465}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 113, "best_error": 2.325833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 5.920833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 4.971666666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 136, "best_error": 4.8625}
+[WARN] GE9034_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.773333, localized_error_fraction=0.951290).
+[INFO] Konvertiert GE9034_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_2S | Qualität: Optimierungsfehler/Pixel=0.005815, Mean-Delta²=81.502502, RGB-RMSE/Kanal=5.212245, Raumscore=300.024499, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.3s
+[INFO] Konvertiere GE9034_3M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_3M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.950833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 104, "best_error": 2.8189583333333332}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.611666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 3.8410416666666665}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 132, "best_error": 3.82}
+[WARN] GE9034_3M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.607407, localized_error_fraction=0.864648).
+[INFO] Konvertiert GE9034_3M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_3M | Qualität: Optimierungsfehler/Pixel=0.001762, Mean-Delta²=146.765625, RGB-RMSE/Kanal=6.994417, Raumscore=525.083718, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.2s
+[INFO] Konvertiere GE9034_3S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_3S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.493333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 100, "best_error": 2.1266666666666665}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.520833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 3.9766666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 129, "best_error": 3.9725}
+[WARN] GE9034_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.876543, localized_error_fraction=0.944632).
+[INFO] Konvertiert GE9034_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_3S | Qualität: Optimierungsfehler/Pixel=0.005317, Mean-Delta²=63.619999, RGB-RMSE/Kanal=4.605070, Raumscore=228.809228, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.0s
+[INFO] Konvertiere GE9034_4M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_4M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 1.8241666666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 103, "best_error": 1.8341666666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.376875}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 109, "best_error": 1.806875}
+[WARN] GE9034_4M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.797170, localized_error_fraction=0.932449).
+[INFO] Konvertiert GE9034_4M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_4M | Qualität: Optimierungsfehler/Pixel=0.001129, Mean-Delta²=62.508125, RGB-RMSE/Kanal=4.564651, Raumscore=240.545201, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.3s
+[INFO] Konvertiere GE9034_4S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_4S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.5408333333333335}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 109, "best_error": 1.3191666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.4658333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 126, "best_error": 2.9}
+[WARN] GE9034_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.865385, localized_error_fraction=0.973851).
+[INFO] Konvertiert GE9034_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_4S | Qualität: Optimierungsfehler/Pixel=0.003298, Mean-Delta²=29.542500, RGB-RMSE/Kanal=3.138073, Raumscore=114.992749, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.0s
+[INFO] Konvertiere GE9034_5M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_5M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.3879166666666665}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 120, "best_error": 1.9229166666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.1945833333333336}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 107, "best_error": 1.830625}
+[WARN] GE9034_5M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.833922, localized_error_fraction=0.876794).
+[INFO] Konvertiert GE9034_5M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_5M | Qualität: Optimierungsfehler/Pixel=0.001144, Mean-Delta²=51.854374, RGB-RMSE/Kanal=4.157498, Raumscore=184.510222, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.3s
+[INFO] Konvertiere GE9034_5S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_5S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.4116666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 102, "best_error": 2.183333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.666666666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 4.2058333333333335}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 133, "best_error": 4.185}
+[WARN] GE9034_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.835616, localized_error_fraction=0.927997).
+[INFO] Konvertiert GE9034_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_5S | Qualität: Optimierungsfehler/Pixel=0.005458, Mean-Delta²=76.489998, RGB-RMSE/Kanal=5.049422, Raumscore=277.033032, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.0s
+[INFO] Konvertiere GE9034_6M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_6M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.340416666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 121, "best_error": 2.7225}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.1275}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 122, "best_error": 2.7220833333333334}
+[WARN] GE9034_6M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.745520, localized_error_fraction=0.880277).
+[INFO] Konvertiert GE9034_6M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_6M | Qualität: Optimierungsfehler/Pixel=0.001701, Mean-Delta²=83.588753, RGB-RMSE/Kanal=5.278534, Raumscore=290.922529, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.4s
+[INFO] Konvertiere GE9034_6S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_6S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.295}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 106, "best_error": 2.703333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 7.395833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 5.920833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 136, "best_error": 5.941666666666666}
+[WARN] GE9034_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.762500, localized_error_fraction=0.959327).
+[INFO] Konvertiert GE9034_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_6S | Qualität: Optimierungsfehler/Pixel=0.006758, Mean-Delta²=103.754997, RGB-RMSE/Kanal=5.880901, Raumscore=388.422469, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.0s
+[INFO] Konvertiere GE9034_7M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_7M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 1.48}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 101, "best_error": 1.4241666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 1.48}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 101, "best_error": 1.4241666666666666}
+[WARN] GE9034_7M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.892308, localized_error_fraction=0.857510).
+[INFO] Konvertiert GE9034_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_7M | Qualität: Optimierungsfehler/Pixel=0.000890, Mean-Delta²=41.880001, RGB-RMSE/Kanal=3.736308, Raumscore=146.712885, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.6s
+[INFO] Konvertiere GE9034_7S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite GE9034_7S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.743333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 102, "best_error": 2.1666666666666665}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.8825}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 3.3316666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 134, "best_error": 3.3316666666666666}
+[WARN] GE9034_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.736842, localized_error_fraction=0.840976).
+[INFO] Konvertiert GE9034_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_7S | Qualität: Optimierungsfehler/Pixel=0.005417, Mean-Delta²=67.489998, RGB-RMSE/Kanal=4.743065, Raumscore=213.910893, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.2s
+[INFO] Konvertiere SE0081.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite SE0081.jpg ---
+Bildbeschreibung: Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text "M" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] SE0081.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.217213, localized_error_fraction=0.744694).
+[INFO] Konvertiert SE0081.jpg | Parameter: mode=auto, label=M, variant_name=SE0081 | Qualität: Optimierungsfehler/Pixel=0.009836, Mean-Delta²=702.781555, RGB-RMSE/Kanal=15.305571, Raumscore=1918.778365, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Konvertiere SE0082.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite SE0082.jpg ---
+Bildbeschreibung: Kelle mit einem gefüllten Quadrat mit Kontur und mittigem waagerechtem Griff nach links. Im Quadrat steht der horizontale Text "M". Weißer Hintergrund. Lage, Abmessungen, Strichbreiten, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert SE0082.jpg | Parameter: mode=auto, label=M, variant_name=SE0082 | Qualität: Optimierungsfehler/Pixel=0.011718, Mean-Delta²=700.750000, RGB-RMSE/Kanal=15.283433, Raumscore=1863.000743, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere b_heating1.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite b_heating1.jpg ---
+Bildbeschreibung: Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gefüllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gefüllte Flamme mit mehreren spitzen Zungen liegt vollständig im unteren Inneren der äußeren Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_flame_disk_registration", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 64, "current_error": 11.481994104831475}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 128, "current_error": 11.17852108163527}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 192, "current_error": 10.905933615276176}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 256, "current_error": 10.836216839677046}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 320, "current_error": 10.61450724080482}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 384, "current_error": 10.649750096116879}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 448, "current_error": 10.618608227604767}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 512, "current_error": 10.406510316544919}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 576, "current_error": 10.297321542996283}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 640, "current_error": 10.18569780853518}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 704, "current_error": 10.155837498398052}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 768, "current_error": 10.056901191849288}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 832, "current_error": 10.036139946174549}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 896, "current_error": 9.960528002050493}
+[Search] {"source": "raster_flame_disk_registration", "event": "registration_finished", "evaluations": 948, "best_error": 9.978341663462771}
+[WARN] b_heating1.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.712750, localized_error_fraction=0.666338).
+[INFO] Konvertiert b_heating1.jpg | Parameter: mode=auto, label=M, variant_name=B_HEATING1 | Qualität: Optimierungsfehler/Pixel=0.003836, Mean-Delta²=726.417908, RGB-RMSE/Kanal=15.560826, Raumscore=1985.109457, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=3.5s
+[INFO] Konvertiere SE0081.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite SE0081.jpg ---
+Bildbeschreibung: Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text "M" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] SE0081.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.217213, localized_error_fraction=0.744694).
+[INFO] Konvertiert SE0081.jpg | Parameter: mode=auto, label=M, variant_name=SE0081 | Qualität: Optimierungsfehler/Pixel=0.009836, Mean-Delta²=702.781555, RGB-RMSE/Kanal=15.305571, Raumscore=1918.778365, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.2s
+[INFO] Konvertiere GE9034_6S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_6S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.295}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 106, "best_error": 2.703333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 7.395833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 5.920833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 136, "best_error": 5.941666666666666}
+[WARN] GE9034_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.762500, localized_error_fraction=0.959327).
+[INFO] Konvertiert GE9034_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_6S | Qualität: Optimierungsfehler/Pixel=0.006758, Mean-Delta²=103.754997, RGB-RMSE/Kanal=5.880901, Raumscore=388.422469, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.2s
+[INFO] Konvertiere GE9034_1S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_1S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.255}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 98, "best_error": 2.589166666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 5.615}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 5.008333333333334}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 134, "best_error": 4.969166666666666}
+[WARN] GE9034_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.855072, localized_error_fraction=0.935971).
+[INFO] Konvertiert GE9034_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_1S | Qualität: Optimierungsfehler/Pixel=0.006473, Mean-Delta²=99.212502, RGB-RMSE/Kanal=5.750725, Raumscore=353.143582, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.0s
+[INFO] Konvertiere GE9034_2S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_2S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.465}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 113, "best_error": 2.325833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 5.920833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 4.971666666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 136, "best_error": 4.8625}
+[WARN] GE9034_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.773333, localized_error_fraction=0.951290).
+[INFO] Konvertiert GE9034_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_2S | Qualität: Optimierungsfehler/Pixel=0.005815, Mean-Delta²=81.502502, RGB-RMSE/Kanal=5.212245, Raumscore=300.024499, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.2s
+[INFO] Konvertiere GE9034_5S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_5S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.4116666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 102, "best_error": 2.183333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.666666666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 4.2058333333333335}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 133, "best_error": 4.185}
+[WARN] GE9034_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.835616, localized_error_fraction=0.927997).
+[INFO] Konvertiert GE9034_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_5S | Qualität: Optimierungsfehler/Pixel=0.005458, Mean-Delta²=76.489998, RGB-RMSE/Kanal=5.049422, Raumscore=277.033032, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.1s
+[INFO] Konvertiere GE9034_7S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_7S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.743333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 102, "best_error": 2.1666666666666665}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.8825}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 3.3316666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 134, "best_error": 3.3316666666666666}
+[WARN] GE9034_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.736842, localized_error_fraction=0.840976).
+[INFO] Konvertiert GE9034_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_7S | Qualität: Optimierungsfehler/Pixel=0.005417, Mean-Delta²=67.489998, RGB-RMSE/Kanal=4.743065, Raumscore=213.910893, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.0s
+[INFO] Konvertiere GE9034_3S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_3S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.493333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 100, "best_error": 2.1266666666666665}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.520833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 3.9766666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 129, "best_error": 3.9725}
+[WARN] GE9034_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.876543, localized_error_fraction=0.944632).
+[INFO] Konvertiert GE9034_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_3S | Qualität: Optimierungsfehler/Pixel=0.005317, Mean-Delta²=63.619999, RGB-RMSE/Kanal=4.605070, Raumscore=228.809228, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.2s
+[INFO] Konvertiere b_heating1.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite b_heating1.jpg ---
+Bildbeschreibung: Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gefüllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gefüllte Flamme mit mehreren spitzen Zungen liegt vollständig im unteren Inneren der äußeren Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_flame_disk_registration", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 64, "current_error": 11.481994104831475}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 128, "current_error": 11.17852108163527}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 192, "current_error": 10.905933615276176}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 256, "current_error": 10.836216839677046}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 320, "current_error": 10.61450724080482}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 384, "current_error": 10.649750096116879}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 448, "current_error": 10.618608227604767}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 512, "current_error": 10.406510316544919}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 576, "current_error": 10.297321542996283}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 640, "current_error": 10.18569780853518}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 704, "current_error": 10.155837498398052}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 768, "current_error": 10.056901191849288}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 832, "current_error": 10.036139946174549}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 896, "current_error": 9.960528002050493}
+[Search] {"source": "raster_flame_disk_registration", "event": "registration_finished", "evaluations": 948, "best_error": 9.978341663462771}
+[WARN] b_heating1.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.712750, localized_error_fraction=0.666338).
+[INFO] Konvertiert b_heating1.jpg | Parameter: mode=auto, label=M, variant_name=B_HEATING1 | Qualität: Optimierungsfehler/Pixel=0.003836, Mean-Delta²=726.417908, RGB-RMSE/Kanal=15.560826, Raumscore=1985.109457, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=3.4s
+[INFO] Konvertiere GE9034_4S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_4S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.5408333333333335}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 109, "best_error": 1.3191666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.4658333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 126, "best_error": 2.9}
+[WARN] GE9034_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.865385, localized_error_fraction=0.973851).
+[INFO] Konvertiert GE9034_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_4S | Qualität: Optimierungsfehler/Pixel=0.003298, Mean-Delta²=29.542500, RGB-RMSE/Kanal=3.138073, Raumscore=114.992749, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.2s
+[INFO] Konvertiere GE9034_1M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_1M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.3233333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 117, "best_error": 3.1172916666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 5.534791666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 124, "best_error": 5.11}
+[WARN] GE9034_1M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.500000, localized_error_fraction=0.881289).
+[INFO] Konvertiert GE9034_1M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_1M | Qualität: Optimierungsfehler/Pixel=0.001948, Mean-Delta²=196.654373, RGB-RMSE/Kanal=8.096385, Raumscore=709.564164, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.4s
+[INFO] Konvertiere GE9034_2M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_2M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.995625}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 119, "best_error": 2.965625}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 5.428125}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 4.916041666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 132, "best_error": 4.916041666666667}
+[WARN] GE9034_2M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.436090, localized_error_fraction=0.872582).
+[INFO] Konvertiert GE9034_2M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_2M | Qualität: Optimierungsfehler/Pixel=0.001854, Mean-Delta²=165.306870, RGB-RMSE/Kanal=7.423092, Raumscore=608.865192, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.4s
+[INFO] Konvertiere GE9034_3M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_3M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.950833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 104, "best_error": 2.8189583333333332}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.611666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 3.8410416666666665}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 132, "best_error": 3.82}
+[WARN] GE9034_3M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.607407, localized_error_fraction=0.864648).
+[INFO] Konvertiert GE9034_3M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_3M | Qualität: Optimierungsfehler/Pixel=0.001762, Mean-Delta²=146.765625, RGB-RMSE/Kanal=6.994417, Raumscore=525.083718, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.2s
+[INFO] Konvertiere GE9034_6M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_6M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.340416666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 121, "best_error": 2.7225}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.1275}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 122, "best_error": 2.7220833333333334}
+[WARN] GE9034_6M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.745520, localized_error_fraction=0.880277).
+[INFO] Konvertiert GE9034_6M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_6M | Qualität: Optimierungsfehler/Pixel=0.001701, Mean-Delta²=83.588753, RGB-RMSE/Kanal=5.278534, Raumscore=290.922529, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.3s
+[INFO] Konvertiere GE9034_5M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_5M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.3879166666666665}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 120, "best_error": 1.9229166666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.1945833333333336}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 107, "best_error": 1.830625}
+[WARN] GE9034_5M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.833922, localized_error_fraction=0.876794).
+[INFO] Konvertiert GE9034_5M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_5M | Qualität: Optimierungsfehler/Pixel=0.001144, Mean-Delta²=51.854374, RGB-RMSE/Kanal=4.157498, Raumscore=184.510222, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.3s
+[INFO] Konvertiere GE9034_4M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_4M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 1.8241666666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 103, "best_error": 1.8341666666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.376875}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 109, "best_error": 1.806875}
+[WARN] GE9034_4M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.797170, localized_error_fraction=0.932449).
+[INFO] Konvertiert GE9034_4M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_4M | Qualität: Optimierungsfehler/Pixel=0.001129, Mean-Delta²=62.508125, RGB-RMSE/Kanal=4.564651, Raumscore=240.545201, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.2s
+[INFO] Konvertiere GE9034_7M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite GE9034_7M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 1.48}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 101, "best_error": 1.4241666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 1.48}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 101, "best_error": 1.4241666666666666}
+[WARN] GE9034_7M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.892308, localized_error_fraction=0.857510).
+[INFO] Konvertiert GE9034_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_7M | Qualität: Optimierungsfehler/Pixel=0.000890, Mean-Delta²=41.880001, RGB-RMSE/Kanal=3.736308, Raumscore=146.712885, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s
+[INFO] Konvertiere SE0081.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite SE0081.jpg ---
+Bildbeschreibung: Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text "M" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] SE0081.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.217213, localized_error_fraction=0.744694).
+[INFO] Konvertiert SE0081.jpg | Parameter: mode=auto, label=M, variant_name=SE0081 | Qualität: Optimierungsfehler/Pixel=0.009836, Mean-Delta²=702.781555, RGB-RMSE/Kanal=15.305571, Raumscore=1918.778365, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Konvertiere GE9034_6S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_6S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.295}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 106, "best_error": 2.703333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 7.395833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 5.920833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 136, "best_error": 5.941666666666666}
+[WARN] GE9034_6S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.762500, localized_error_fraction=0.959327).
+[INFO] Konvertiert GE9034_6S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_6S | Qualität: Optimierungsfehler/Pixel=0.006758, Mean-Delta²=103.754997, RGB-RMSE/Kanal=5.880901, Raumscore=388.422469, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.1s
+[INFO] Konvertiere GE9034_1S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_1S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.255}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 98, "best_error": 2.589166666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 5.615}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 5.008333333333334}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 134, "best_error": 4.969166666666666}
+[WARN] GE9034_1S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.855072, localized_error_fraction=0.935971).
+[INFO] Konvertiert GE9034_1S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_1S | Qualität: Optimierungsfehler/Pixel=0.006473, Mean-Delta²=99.212502, RGB-RMSE/Kanal=5.750725, Raumscore=353.143582, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.2s
+[INFO] Konvertiere GE9034_2S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_2S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.465}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 113, "best_error": 2.325833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 5.920833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 4.971666666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 136, "best_error": 4.8625}
+[WARN] GE9034_2S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.773333, localized_error_fraction=0.951290).
+[INFO] Konvertiert GE9034_2S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_2S | Qualität: Optimierungsfehler/Pixel=0.005815, Mean-Delta²=81.502502, RGB-RMSE/Kanal=5.212245, Raumscore=300.024499, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.4s
+[INFO] Konvertiere GE9034_5S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_5S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.4116666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 102, "best_error": 2.183333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.666666666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 4.2058333333333335}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 133, "best_error": 4.185}
+[WARN] GE9034_5S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.835616, localized_error_fraction=0.927997).
+[INFO] Konvertiert GE9034_5S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_5S | Qualität: Optimierungsfehler/Pixel=0.005458, Mean-Delta²=76.489998, RGB-RMSE/Kanal=5.049422, Raumscore=277.033032, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.4s
+[INFO] Konvertiere GE9034_7S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_7S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.743333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 102, "best_error": 2.1666666666666665}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.8825}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 3.3316666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 134, "best_error": 3.3316666666666666}
+[WARN] GE9034_7S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.736842, localized_error_fraction=0.840976).
+[INFO] Konvertiert GE9034_7S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_7S | Qualität: Optimierungsfehler/Pixel=0.005417, Mean-Delta²=67.489998, RGB-RMSE/Kanal=4.743065, Raumscore=213.910893, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.4s
+[INFO] Konvertiere GE9034_3S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_3S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.493333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 100, "best_error": 2.1266666666666665}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.520833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 3.9766666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 129, "best_error": 3.9725}
+[WARN] GE9034_3S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.876543, localized_error_fraction=0.944632).
+[INFO] Konvertiert GE9034_3S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_3S | Qualität: Optimierungsfehler/Pixel=0.005317, Mean-Delta²=63.619999, RGB-RMSE/Kanal=4.605070, Raumscore=228.809228, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.1s
+[INFO] Konvertiere b_heating1.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite b_heating1.jpg ---
+Bildbeschreibung: Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gefüllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gefüllte Flamme mit mehreren spitzen Zungen liegt vollständig im unteren Inneren der äußeren Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_flame_disk_registration", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 64, "current_error": 11.481994104831475}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 128, "current_error": 11.17852108163527}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 192, "current_error": 10.905933615276176}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 256, "current_error": 10.836216839677046}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 320, "current_error": 10.61450724080482}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 384, "current_error": 10.649750096116879}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 448, "current_error": 10.618608227604767}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 512, "current_error": 10.406510316544919}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 576, "current_error": 10.297321542996283}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 640, "current_error": 10.18569780853518}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 704, "current_error": 10.155837498398052}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 768, "current_error": 10.056901191849288}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 832, "current_error": 10.036139946174549}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 896, "current_error": 9.960528002050493}
+[Search] {"source": "raster_flame_disk_registration", "event": "registration_finished", "evaluations": 948, "best_error": 9.978341663462771}
+[WARN] b_heating1.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.712750, localized_error_fraction=0.666338).
+[INFO] Konvertiert b_heating1.jpg | Parameter: mode=auto, label=M, variant_name=B_HEATING1 | Qualität: Optimierungsfehler/Pixel=0.003836, Mean-Delta²=726.417908, RGB-RMSE/Kanal=15.560826, Raumscore=1985.109457, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=3.8s
+[INFO] Konvertiere GE9034_4S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_4S.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.5408333333333335}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 109, "best_error": 1.3191666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.4658333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 126, "best_error": 2.9}
+[WARN] GE9034_4S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.865385, localized_error_fraction=0.973851).
+[INFO] Konvertiert GE9034_4S.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_4S | Qualität: Optimierungsfehler/Pixel=0.003298, Mean-Delta²=29.542500, RGB-RMSE/Kanal=3.138073, Raumscore=114.992749, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.1s
+[INFO] Konvertiere GE9034_1M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_1M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.3233333333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 117, "best_error": 3.1172916666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 5.534791666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 124, "best_error": 5.11}
+[WARN] GE9034_1M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.500000, localized_error_fraction=0.881289).
+[INFO] Konvertiert GE9034_1M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_1M | Qualität: Optimierungsfehler/Pixel=0.001948, Mean-Delta²=196.654373, RGB-RMSE/Kanal=8.096385, Raumscore=709.564164, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.5s
+[INFO] Konvertiere GE9034_2M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_2M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.995625}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 119, "best_error": 2.965625}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 5.428125}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 4.916041666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 132, "best_error": 4.916041666666667}
+[WARN] GE9034_2M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.436090, localized_error_fraction=0.872582).
+[INFO] Konvertiert GE9034_2M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_2M | Qualität: Optimierungsfehler/Pixel=0.001854, Mean-Delta²=165.306870, RGB-RMSE/Kanal=7.423092, Raumscore=608.865192, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.3s
+[INFO] Konvertiere GE9034_3M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_3M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.950833333333333}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 104, "best_error": 2.8189583333333332}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.611666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 128, "current_error": 3.8410416666666665}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 132, "best_error": 3.82}
+[WARN] GE9034_3M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.607407, localized_error_fraction=0.864648).
+[INFO] Konvertiert GE9034_3M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_3M | Qualität: Optimierungsfehler/Pixel=0.001762, Mean-Delta²=146.765625, RGB-RMSE/Kanal=6.994417, Raumscore=525.083718, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.3s
+[INFO] Konvertiere GE9034_6M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_6M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 4.340416666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 121, "best_error": 2.7225}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 3.1275}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 122, "best_error": 2.7220833333333334}
+[WARN] GE9034_6M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.745520, localized_error_fraction=0.880277).
+[INFO] Konvertiert GE9034_6M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_6M | Qualität: Optimierungsfehler/Pixel=0.001701, Mean-Delta²=83.588753, RGB-RMSE/Kanal=5.278534, Raumscore=290.922529, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.0s
+[INFO] Konvertiere GE9034_5M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_5M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.3879166666666665}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 120, "best_error": 1.9229166666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.1945833333333336}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 107, "best_error": 1.830625}
+[WARN] GE9034_5M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.833922, localized_error_fraction=0.876794).
+[INFO] Konvertiert GE9034_5M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_5M | Qualität: Optimierungsfehler/Pixel=0.001144, Mean-Delta²=51.854374, RGB-RMSE/Kanal=4.157498, Raumscore=184.510222, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.0s
+[INFO] Konvertiere GE9034_4M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_4M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 1.8241666666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 103, "best_error": 1.8341666666666667}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 2.376875}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 109, "best_error": 1.806875}
+[WARN] GE9034_4M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.797170, localized_error_fraction=0.932449).
+[INFO] Konvertiert GE9034_4M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_4M | Qualität: Optimierungsfehler/Pixel=0.001129, Mean-Delta²=62.508125, RGB-RMSE/Kanal=4.564651, Raumscore=240.545201, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=1.0s
+[INFO] Konvertiere GE9034_7M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite GE9034_7M.jpg ---
+Bildbeschreibung: Eine T-Verzweigung aus einem senkrechten rechteckigen Balken und einem mittig nach links anschließenden waagerechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 1.48}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 101, "best_error": 1.4241666666666666}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registering", "evaluations": 64, "current_error": 1.48}
+[Search] {"source": "raster_gradient_junction_v1", "event": "registration_finished", "evaluations": 101, "best_error": 1.4241666666666666}
+[WARN] GE9034_7M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.892308, localized_error_fraction=0.857510).
+[INFO] Konvertiert GE9034_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9034_7M | Qualität: Optimierungsfehler/Pixel=0.000890, Mean-Delta²=41.880001, RGB-RMSE/Kanal=3.736308, Raumscore=146.712885, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.5s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\motor-valve-archive-final\worker_08\semantic-only\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\motor-valve-archive-final\worker_08\semantic-only\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\motor-valve-archive-final\worker_08\semantic-only

@@ -1,11 +1,14 @@
 # Zufriedenstellende Konvertierungen
 
-374 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
+377 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
 
 Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bild und Beschreibung.
 
 | Bild | SVG | Mean-Delta² | Prüfung |
 |---|---|---:|---|
+| [AC0232_L](images/AC0232_L.jpg) | [SVG](svgs/AC0232_L.svg) | 282.161865 | semantic-only |
+| [AC0232_M](images/AC0232_M.jpg) | [SVG](svgs/AC0232_M.svg) | 419.309631 | semantic-only |
+| [AC0232_S](images/AC0232_S.jpg) | [SVG](svgs/AC0232_S.svg) | 324.581665 | semantic-only |
 | [AC0252](images/AC0252.jpg) | [SVG](svgs/AC0252.svg) | 328.445374 | semantic-only |
 | [AC0252_1](images/AC0252_1.jpg) | [SVG](svgs/AC0252_1.svg) | 458.776276 | semantic-only |
 | [AC0252_2](images/AC0252_2.jpg) | [SVG](svgs/AC0252_2.svg) | 394.592102 | semantic-only |
