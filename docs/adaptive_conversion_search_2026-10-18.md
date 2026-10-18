@@ -1,5 +1,16 @@
 # Adaptive Konvertierungssuche (2026-10-18)
 
+**Suchscheduler:** Fortsetzbare Modellregistrierungen, gemeinsame Zeitscheiben,
+Fortschritt pro aktiver Sekunde und reservierte Erkundung sind jetzt als
+[SEARCH-SCHEDULER-02](next_arbeitspaket_2026-10-18_search_scheduler.md)
+angeschlossen. Die folgenden Zahlen beschreiben den damaligen Ausgangsstand.
+
+**Folgepaket:** Die reguläre `semantic-only`-CLI umfasst jetzt die kooperative
+Suche mit einer [durchgängigen Prozessaufsicht](next_arbeitspaket_2026-10-18_search_deadline.md)
+einschließlich Abschlussprüfung und gesicherter Zwischenstandübergabe. Die weiter
+unten beschriebene rein kooperative Grenze gilt für den ausdrücklich gewählten
+direkten Ablauf und historische Kompatibilitätspfade.
+
 Die Suche richtet ihren Aufwand jetzt nach Ergebnis und gemessenem Fortschritt.
 Der Standardaufruf verwendet `--search-mode portfolio --search-policy adaptive`.
 Der Branch `codex/adaptive-conversion-search-2026-10-18` baut auf `09ec51af9` auf.
@@ -108,7 +119,9 @@ Portfoliosuche und die Batchwiederholungen angeschlossen. Sie kann einen
 blockierten nativen Renderer nicht während seines Aufrufs unterbrechen.
 Unverbundene ältere Optimierer erhalten damit noch keine neue harte
 Unterbrechung. Der bestehende Renderer-Timeout und ein externer Prozesswächter
-bleiben für diese Fälle erforderlich. SEARCH-DEADLINE-01 bleibt deshalb offen.
+bleiben im direkten Ablauf für diese Fälle erforderlich. Im regulären
+`semantic-only`-CLI-Pfad übernimmt inzwischen SEARCH-DEADLINE-01 diese
+[Prozessaufsicht samt Zwischenstandübergabe](next_arbeitspaket_2026-10-18_search_deadline.md).
 
 Der Katalogrunner kann die adaptive Suche mit einer harten Prozessgrenze
 absichern:

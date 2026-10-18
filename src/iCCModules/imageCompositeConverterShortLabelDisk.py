@@ -8,7 +8,8 @@ from xml.etree import ElementTree as ET
 import cv2
 import numpy as np
 
-from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _image, _register
+from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _image, _register_steps
+from src.iCCModules.imageCompositeConverterSearchScheduler import drain, schedule_models
 from src.iCCModules.imageCompositeConverterSearchPortfolio import progress, ranked_models, store_validated_variant, validated_result
 from src.iCCModules.imageCompositeConverterPrimitiveScene import _local_quality
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search,pixel_quality
@@ -98,9 +99,9 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
                     break
         return overlap, bool(accepted)
 
-    for separate,weight in ranked_models(((False,400),(False,700),(True,400),(True,700))):
+    def model_steps(separate, weight):
         if current_search() and current_search().time_reason():
-            break
+            return None
         model = f'{"separate" if separate else "native"}_{weight}'
         progress('short_label_disk',event='model_started',model=model)
 
@@ -122,7 +123,10 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
         p = np.r_[cx,cy,radius-.6,max(.5,radius*.08),gx+gw/2,gy+gh,gh*1.35,gw/len(label),fill,rim,color]
         p[2] = min(p[2],cx,width-cx,cy,height-cy)-p[3]/2-1e-4
         for _ in range(3):
-            drawn,blank = render_fn(build(p),width,height),render_fn(build(p,True),width,height)
+            drawn = render_fn(build(p),width,height)
+            yield None
+            blank = render_fn(build(p,True),width,height)
+            yield None
             if drawn is None or blank is None:
                 break
             ty,tx = np.where(np.max(np.abs(drawn.astype(float)-blank.astype(float)),axis=2)>45)
@@ -149,58 +153,90 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
             semantic_evaluations += 1
             return blank is not None and validate_glyphs({'rendered':measured[3]},blank)[1]
 
-        fitted = _register(p,8,build,valid,np.asarray(image),render_fn,error_fn,'short_label_disk_'+model,
-                           satisfactory_fn=satisfactory)
+        fitted = yield from _register_steps(p,8,build,valid,np.asarray(image),render_fn,error_fn,'short_label_disk_'+model,
+                                           satisfactory_fn=satisfactory)
         if fitted is None:
-            attempts.append(dict(model=model,accepted=False,reason='invalid_fit'))
-            continue
+            return None
         fitted['evaluations'] += semantic_evaluations
         blank = render_fn(build(fitted['parameters'],True),width,height)
         if blank is None:
-            continue
-        overlap, accepted = validate_glyphs(fitted, blank)
-        attempts.append(dict(model=model,error=fitted['error'],glyph_iou=overlap,accepted=bool(accepted)))
-        progress('short_label_disk',event='model_finished',**attempts[-1])
-        if accepted:
-            store_validated_variant(fitted, image=image, description=text, model=(separate,weight),
-                                    quality=(pixel_quality if current_search() else _local_quality)(np.asarray(image),fitted['rendered']))
-        if accepted and prefer(fitted, best):
-            best = fitted
-        elif separate and not accepted:
-            rejected_glyph_models.append((weight, fitted))
-        if accepted and validated_result(fitted,np.asarray(image)):
-            break
-        if current_search() and separate and accepted:
-            rejected_glyph_models.append((weight,fitted))
+            return None
+        return fitted, blank
+
+    models = ranked_models(((False,400),(False,700),(True,400),(True,700)))
+    session = current_search()
+    schedule_start = len(session.scheduler_history) if session else 0
+    if session:
+        completed = schedule_models({model: model_steps(*model) for model in models}, session,
+                                    source='short_label_disk', emit=progress)
+    else:
+        completed = ((model, drain(model_steps(*model))) for model in models)
+    try:
+        for (separate,weight), result in completed:
+            model = f'{"separate" if separate else "native"}_{weight}'
+            if result is None:
+                attempts.append(dict(model=model,accepted=False,reason='invalid_fit'))
+                continue
+            fitted, blank = result
+            overlap, accepted = validate_glyphs(fitted, blank)
+            attempts.append(dict(model=model,error=fitted['error'],glyph_iou=overlap,accepted=bool(accepted)))
+            progress('short_label_disk',event='model_finished',**attempts[-1])
+            if accepted:
+                store_validated_variant(fitted, image=image, description=text, model=(separate,weight),
+                                        quality=(pixel_quality if current_search() else _local_quality)(np.asarray(image),fitted['rendered']))
+            if accepted and prefer(fitted, best):
+                best = fitted
+            elif separate and not accepted:
+                rejected_glyph_models.append((weight, fitted))
+            if accepted and validated_result(fitted,np.asarray(image)):
+                break
+            if current_search() and separate and accepted:
+                rejected_glyph_models.append((weight,fitted))
+    finally:
+        completed.close()
     # Keep established successful fits unchanged. Unequal glyph advances and
     # intermediate stroke weights matter at small sizes; explore them only
     # when none of the original four models passes the same silhouette test.
     if best is None or (current_search() and not pixel_quality(image,best['rendered'])['passed']):
-        for weight, candidate in rejected_glyph_models:
-            if current_search() and current_search().time_reason():
-                break
-            refined = _refine_glyphs(candidate, width, height, labels[0], weight,
-                                     np.asarray(image), render_fn, error_fn)
-            if refined is None:
-                continue
-            fitted, blank = refined
-            overlap, accepted = validate_glyphs(fitted, blank,np.asarray(fitted['parameters'][4:4+len(labels[0])]))
-            model = f'glyph_offsets_{weight}'
-            attempts.append(dict(model=model,error=fitted['error'],glyph_iou=overlap,accepted=accepted))
-            progress('short_label_disk',event='model_finished',**attempts[-1])
-            if accepted:
-                store_validated_variant(fitted, image=image, description=text, model=('glyph_offsets',weight),
-                                        quality=(pixel_quality if current_search() else _local_quality)(np.asarray(image),fitted['rendered']))
-                if prefer(fitted, best):
-                    best = fitted
-                if validated_result(fitted,np.asarray(image)):
-                    break
+        if session:
+            # Completion order is a timing artifact. Refine the strongest
+            # measured glyph hypothesis first, rather than the fastest loser.
+            rejected_glyph_models.sort(key=lambda item:item[1]['error'])
+        refinements = {weight:_refine_glyphs_steps(candidate, width, height, labels[0], weight,
+                                                 np.asarray(image), render_fn, error_fn)
+                       for weight,candidate in rejected_glyph_models}
+        refined_models = (schedule_models(refinements, session, source='short_label_glyphs',emit=progress)
+                          if session else ((weight,drain(job)) for weight,job in refinements.items()))
+        try:
+            for weight, refined in refined_models:
+                if refined is None:
+                    continue
+                fitted, blank = refined
+                overlap, accepted = validate_glyphs(fitted, blank,np.asarray(fitted['parameters'][4:4+len(labels[0])]))
+                model = f'glyph_offsets_{weight}'
+                attempts.append(dict(model=model,error=fitted['error'],glyph_iou=overlap,accepted=accepted))
+                progress('short_label_disk',event='model_finished',**attempts[-1])
+                if accepted:
+                    store_validated_variant(fitted, image=image, description=text, model=('glyph_offsets',weight),
+                                            quality=(pixel_quality if current_search() else _local_quality)(np.asarray(image),fitted['rendered']))
+                    if prefer(fitted, best):
+                        best = fitted
+                    if validated_result(fitted,np.asarray(image)):
+                        break
+        finally:
+            refined_models.close()
     if best:
         best['model_attempts'] = attempts
+        if session:
+            best['model_schedules'] = session.scheduler_history[schedule_start:]
     return best
 
 
 def _refine_glyphs(candidate, width, height, label, weight, image, render_fn, error_fn):
+    return drain(_refine_glyphs_steps(candidate,width,height,label,weight,image,render_fn,error_fn))
+
+
+def _refine_glyphs_steps(candidate, width, height, label, weight, image, render_fn, error_fn):
     """Refine bounded native glyph positions and stroke weight from a rejected fit."""
     root = ET.fromstring(candidate['svg'])
     texts = [e for e in root.iter() if e.tag.endswith('text')]
@@ -237,8 +273,8 @@ def _refine_glyphs(candidate, width, height, label, weight, image, render_fn, er
                 and np.all(np.diff(xs)>.5) and np.all(np.abs(xs-positions)<=base[7]*.25)
                 and np.all((p[geometry_count:]>=0)&(p[geometry_count:]<=255)))
 
-    fitted = _register(seed,geometry_count,build,valid,image,render_fn,error_fn,
-                       f'short_label_disk_glyph_offsets_{weight}',initial_error_bound=candidate['error'])
+    fitted = yield from _register_steps(seed,geometry_count,build,valid,image,render_fn,error_fn,
+                                       f'short_label_disk_glyph_offsets_{weight}',initial_error_bound=candidate['error'])
     if fitted is None:
         return None
     blank = render_fn(build(fitted['parameters'], True),width,height)

@@ -1,0 +1,11 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\.tmp\scheduler-evidence-release\after\reports\.image-worker-3ja8jix3\reports_out_dir\neutral_03_worker.log
+[INFO] Konvertiere neutral_03.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite neutral_03.jpg ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "Q" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 25, "best_error": 7.352857142857143}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "candidate_satisfactory", "elapsed_seconds": 0.563, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 25}
+[Search] {"source": "neutral_03", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 0.563, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 25, "stop_reason": "satisfactory"}
+[INFO] Konvertiert neutral_03.jpg | Parameter: mode=semantic_badge, label=Q, variant_name=NEUTRAL_03 | Qualität: Optimierungsfehler/Pixel=0.010504, Mean-Delta²=796.084290, RGB-RMSE/Kanal=16.289918, Raumscore=2714.955754, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.1s

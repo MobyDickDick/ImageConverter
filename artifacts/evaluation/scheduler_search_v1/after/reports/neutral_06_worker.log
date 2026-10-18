@@ -1,0 +1,12 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\.tmp\scheduler-evidence-release\after\reports\.image-worker-89mcauw2\reports_out_dir\neutral_06_worker.log
+[INFO] Konvertiere neutral_06.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite neutral_06.png ---
+Bildbeschreibung: zwei Rechtecke. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt nebeneinander.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_scene_v1", "event": "registering", "evaluations": 64, "current_error": 1.5278858024691357}
+[Search] {"source": "primitive_scene_v1", "event": "registration_finished", "evaluations": 83, "best_error": 1.1431327160493827}
+[Search] {"source": "primitive_scene_v1", "event": "candidate_satisfactory", "elapsed_seconds": 0.641, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 83}
+[Search] {"source": "neutral_06", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 0.672, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 83, "stop_reason": "satisfactory"}
+[INFO] Konvertiert neutral_06.png | Parameter: mode=auto, label=M, variant_name=NEUTRAL_06 | Qualität: Optimierungsfehler/Pixel=0.000053, Mean-Delta²=128.303848, RGB-RMSE/Kanal=6.539721, Raumscore=558.737879, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s

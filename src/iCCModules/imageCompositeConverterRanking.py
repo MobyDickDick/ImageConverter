@@ -17,9 +17,13 @@ def writePixelDelta2RankingImpl(
     render_svg_to_numpy_fn,
     calculate_delta2_stats_fn,
     calculate_spatial_delta2_quality_fn=None,
+    precomputed_rows=None,
 ) -> None:
     ranking: list[dict[str, float | str]] = []
-    for svg_name in sorted(f for f in os.listdir(svg_out_dir) if f.lower().endswith(".svg")):
+    if precomputed_rows is not None:
+        ranking = [dict(row, image=row['filename']) for row in precomputed_rows.values()]
+    for svg_name in ([] if precomputed_rows is not None else
+                     sorted(f for f in os.listdir(svg_out_dir) if f.lower().endswith(".svg"))):
         stem = os.path.splitext(svg_name)[0]
         orig_path = None
         for ext in (".jpg", ".png", ".bmp"):

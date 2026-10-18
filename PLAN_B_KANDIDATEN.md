@@ -8,7 +8,16 @@ AC0232 M/L/S bestehen beide regulären und die strengeren Pixelgates. Die
 Konvertierung rekonstruiert drei Ventildreiecke, Anschluss, Kreis und Text
 gemeinsam aus dem Raster. 377 Paare sind archiviert; alle 374 bisherigen
 Datensätze bleiben unverändert. Die bisherige gefilterte Rotation ist leer.
-Als nächstes Architekturpaket ist `SEARCH-DEADLINE-01` dokumentiert.
+`SEARCH-DEADLINE-01` ist für die reguläre `semantic-only`-CLI umgesetzt:
+überwachte Bildbudgets einschließlich Abschlussprüfung und gesicherter
+Zwischenstandübergabe. 377/377 Archivpaare bestehen weiter die bisherige
+Pixelgrenze; ihre Originale und gespeicherten Bestresultate bleiben erhalten.
+`SEARCH-SCHEDULER-02` ergänzt gemeinsame Zeitscheiben für Modellalternativen
+und fortschrittsabhängige Bot-Anteile mit reservierter Erkundung.
+Nächstes Architekturpaket: `BENCHMARK-ANYTIME-01`. Die vollständige Aufsicht
+über den historischen Kompatibilitätsmodus bleibt separat offen.
+Details: `docs/next_arbeitspaket_2026-10-18_search_deadline.md`.
+Scheduler: `docs/next_arbeitspaket_2026-10-18_search_scheduler.md`.
 Details: `docs/next_arbeitspaket_2026-10-18_ac0232_m.md`.
 Review: `artifacts/evaluation/motor_valve_recheck_v1/review_args.json`.
 

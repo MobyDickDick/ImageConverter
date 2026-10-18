@@ -1,0 +1,26 @@
+{
+  "test_runs": [
+    {
+      "name": "runtime",
+      "passed": 95,
+      "failed": 0
+    },
+    {
+      "name": "release",
+      "passed": 87,
+      "failed": 0
+    }
+  ],
+  "unique_passed": 165,
+  "failed": 0,
+  "archive_pairs_unchanged": 377,
+  "archive_index_sha256": "3cdfd0311b6acfe79df525aaeeac8bde79fb879daebac16e5f635a88892f053b",
+  "full_repository_suite": false,
+  "full_archive_reconversion": false,
+  "static_checks": [
+    "compileall",
+    "CLI help",
+    "no new image ID hardcoding",
+    "git diff --check"
+  ]
+}

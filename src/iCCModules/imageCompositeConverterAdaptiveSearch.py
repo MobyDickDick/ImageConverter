@@ -47,6 +47,21 @@ class ImageSearch:
         self.previous_output_error = None
         # Conversion-local blackboards. Never loaded as templates for other images.
         self.bot_searches = {}
+        self.scheduler_history = []
+        self.registration_rasters = {}
+        self.on_progress = None
+        self.on_validated = None
+
+    def __getstate__(self):
+        # Callbacks belong to the supervising process, never to saved history.
+        return {key: value for key, value in self.__dict__.items()
+                if key not in {'clock', 'emit', 'on_progress', 'on_validated'}}
+
+    def __setstate__(self, state):
+        self.__dict__.update(state)
+        self.clock = time.monotonic
+        self.emit = lambda **values: None
+        self.on_progress = self.on_validated = None
 
     @property
     def elapsed(self):
@@ -60,9 +75,13 @@ class ImageSearch:
         self.best_error = min(self.best_error,error)
         if not math.isfinite(self.progress_anchor):
             self.progress_anchor = error
+            if self.on_progress:
+                self.on_progress(error)
         elif self.progress_anchor-error >= max(1e-9,abs(self.progress_anchor)*self.policy.relative_gain):
             self.progress_anchor = error
             self.last_progress = self.elapsed
+            if self.on_progress:
+                self.on_progress(error)
 
     def time_reason(self):
         elapsed = self.elapsed

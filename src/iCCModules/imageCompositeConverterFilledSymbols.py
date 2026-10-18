@@ -5,6 +5,7 @@ import cv2
 import numpy as np
 from src.iCCModules.imageCompositeConverterSearchPortfolio import explore_parameters, progress, settings
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search,pixel_quality
+from src.iCCModules.imageCompositeConverterSearchScheduler import drain
 
 
 def _hex(bgr):
@@ -12,6 +13,13 @@ def _hex(bgr):
 
 
 def _register(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
+              *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None):
+    return drain(_register_steps(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
+        preserve_initial_error=preserve_initial_error, loss_fn=loss_fn,
+        initial_error_bound=initial_error_bound, satisfactory_fn=satisfactory_fn))
+
+
+def _register_steps(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
               *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None):
     """Bounded coordinate descent; optionally retain the best admissible iterate.
 
@@ -24,6 +32,9 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
     evaluations = 0
     render_cache = {}
     session = current_search()
+    if session:
+        from src.iCCModules.imageCompositeConverterAdaptiveSearch import raster_identity
+        raster_key = raster_identity(image)
     stop_reason = None
     progress(source, event='registration_started', evaluations=0)
 
@@ -34,19 +45,27 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
         svg = build(p)
         if svg in render_cache:
             return render_cache[svg]
-        evaluations += 1
-        raster = render_fn(svg, width, height)
+        shared_key = (raster_key, svg) if session else None
+        rendered_new = not session or shared_key not in session.registration_rasters
+        if not rendered_new:
+            raster = session.registration_rasters[shared_key]
+        else:
+            evaluations += 1
+            raster = render_fn(svg, width, height)
+            if session:
+                if len(session.registration_rasters) >= 256:
+                    session.registration_rasters.pop(next(iter(session.registration_rasters)))
+                session.registration_rasters[shared_key] = raster
+                session.evaluations += 1
         if raster is None:
             render_cache[svg] = None
             return None
         error = float(error_fn(image, raster))
         loss = float(loss_fn(image, raster) if loss_fn else
                      np.mean((image.astype(float)-np.asarray(raster, dtype=float))**2))
-        if evaluations % 64 == 0 and np.isfinite(error):
+        if rendered_new and evaluations % 64 == 0 and np.isfinite(error):
             progress(source, event='registering', evaluations=evaluations, current_error=error)
         measured = (loss, error, svg, raster) if np.isfinite(error) and np.isfinite(loss) else None
-        if session:
-            session.evaluations += 1
         if session and len(render_cache) >= 256:
             render_cache.clear()
         render_cache[svg] = measured
@@ -79,6 +98,7 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
 
     if satisfactory(parameters,best):
         stop_reason = 'satisfactory'
+    yield best[0] if best[1] <= initial_error+1e-9 else None
     for step in (1., .5, .25, .125):
         if stop_reason:
             break
@@ -103,6 +123,7 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
                             accepted = (parameters.copy(), best)
                             if session:
                                 session.observe(best[1],evaluation=False)
+                    yield best[0] if best[1] <= initial_error+1e-9 else None
             if satisfactory(parameters,best):
                 stop_reason = 'satisfactory'
             if not improved:
@@ -119,8 +140,14 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
                    _local_quality(np.asarray(image, dtype=np.uint8), np.asarray(best[3], dtype=np.uint8)))
         if quality is None or not quality['passed']:
             rendered_before_search = evaluations
-            parameters, best, search = explore_parameters(parameters, geometry_count, measure, best,
-                                                         source=source, image=image,satisfactory_fn=satisfactory)
+            if session:
+                from src.iCCModules.imageCompositeConverterSearchBots import explore_bots_steps
+                parameters, best, search = yield from explore_bots_steps(
+                    parameters, geometry_count, measure, best, source=source, image=image,
+                    satisfactory_fn=satisfactory, session=session, config=settings(), emit=progress)
+            else:
+                parameters, best, search = explore_parameters(parameters, geometry_count, measure, best,
+                                                             source=source, image=image,satisfactory_fn=satisfactory)
             search['additional_renderings'] = evaluations-rendered_before_search
     if best[1] > initial_error+1e-9:
         return None

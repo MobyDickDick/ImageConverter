@@ -1,0 +1,18 @@
+{
+  "compileall": {
+    "exit_code": 0,
+    "command": ".venv/Scripts/python.exe -m compileall -q src tests tools > artifacts/evaluation/deadline_search_v1/checks/compileall.log 2>&1"
+  },
+  "cli_help": {
+    "exit_code": 0,
+    "command": ".venv/Scripts/python.exe -m src.imageCompositeConverter --help > artifacts/evaluation/deadline_search_v1/checks/cli_help.txt"
+  },
+  "hardcoding": {
+    "exit_code": 0,
+    "command": ".venv/Scripts/python.exe -m tools.check_no_new_image_id_hardcoding > artifacts/evaluation/deadline_search_v1/checks/hardcoding.log 2>&1"
+  },
+  "diff_check": {
+    "exit_code": 0,
+    "command": "git -c core.whitespace=cr-at-eol diff --check > artifacts/evaluation/deadline_search_v1/checks/diff_check.log 2>&1"
+  }
+}

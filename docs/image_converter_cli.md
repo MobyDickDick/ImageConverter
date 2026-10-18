@@ -8,6 +8,21 @@ python -m src.imageCompositeConverter --help
 
 ## Häufige Aufrufe
 
+### Durchgängiges Bildbudget
+
+Die reguläre `semantic-only`-CLI führt Bildversuche einschließlich der finalen
+Qualitätsmessung in überwachten Prozessen aus. Prozessstart und Wiederholungen
+zählen zum Bildbudget: normalerweise 60 Sekunden, bei spätem gemessenem
+Fortschritt höchstens 120 Sekunden. Blockierte Renderkinder werden mit beendet;
+vollständig geprüfte Zwischenstände können erhalten bleiben. Rankings und
+Übersichten verwenden bereits gemessene Werte und PNGs.
+
+`--isolate-conversion` ist in diesem Pfad voreingestellt.
+`--no-isolate-conversion` aktiviert den bisherigen direkten Entwicklungsablauf.
+Der historische `standard`-Kompatibilitätsmodus hat weiterhin keine neue harte
+Prozessgarantie. Geltungsbereich, Bereinigungszeit und Nachweise:
+[Überwachte Bildbudgets](next_arbeitspaket_2026-10-18_search_deadline.md).
+
 ### Alternative Suchwege und Fortschritt
 
 `--search-mode portfolio --search-policy adaptive` ist voreingestellt. Unterstützte analytische Modelle

@@ -18,7 +18,7 @@ from tools.refresh_satisfactory_archive import ARCHIVE, ROOT, digest
 from tools.review_conversion_quality import DEFAULT_THRESHOLD
 
 
-def recheck(archive: Path, output: Path) -> dict:
+def recheck(archive: Path, output: Path, *, extra_cli_args: tuple[str, ...] = ()) -> dict:
     if output.exists():
         raise ValueError('Use a fresh recheck output directory')
     index=json.loads((archive/'index.json').read_text(encoding='utf-8'))
@@ -44,7 +44,7 @@ def recheck(archive: Path, output: Path) -> dict:
             completed=subprocess.run([sys.executable,'-I','-c','import sys,runpy; sys.path[:0]='+repr(paths)+
                 "; runpy.run_module('tools.recheck_satisfactory_archive',run_name='__main__')",'--_worker',mode,
                 str(conversion),str(inputs),'--descriptions-path',str(archive/'descriptions.xml'),
-                '--output-dir',str(conversion),'--execution-mode',mode,'--start','AC0000','--end','ZZ9999','--deterministic-order'],
+                '--output-dir',str(conversion),'--execution-mode',mode,'--start','AC0000','--end','ZZ9999','--deterministic-order',*extra_cli_args],
                 cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT,timeout=900,check=False)
         if completed.returncode:
             raise RuntimeError(f'Archive conversion failed: {mode}; see {output/(mode+".log")}')
@@ -52,6 +52,16 @@ def recheck(archive: Path, output: Path) -> dict:
             access=json.loads((output/'reference_access.json').read_text(encoding='utf-8'))
             if access['blocked_svg_reads']:
                 raise ValueError('Archive reconversion attempted to read reference SVGs')
+            # Spawned converters install their own guard; Python audit hooks
+            # in this launcher are not inherited by a spawn worker.
+            for path in (conversion/'reports').glob('*_reference_access.json'):
+                if json.loads(path.read_text(encoding='utf-8'))['blocked_svg_reads']:
+                    raise ValueError(f'Archive worker attempted a reference SVG read: {path.name}')
+            rows_path = conversion/'reports/conversion_result_map.json'
+            if rows_path.exists():
+                rows = json.loads(rows_path.read_text(encoding='utf-8'))
+                if any(row.get('reference_access', {}).get('blocked_svg_reads') for row in rows.values()):
+                    raise ValueError('Archive conversion row reports a blocked reference SVG read')
         for case in cases:
             variant=case['variant']
             matches=[p for directory in ('converted_svgs','converted_svg_failed') for p in (conversion/directory).glob('*.svg') if p.stem.casefold()==variant.casefold()]
@@ -73,7 +83,7 @@ def recheck(archive: Path, output: Path) -> dict:
     return report
 
 
-def recheck_partitioned(archive: Path, output: Path, max_cases: int) -> dict:
+def recheck_partitioned(archive: Path, output: Path, max_cases: int, *, extra_cli_args: tuple[str, ...] = ()) -> dict:
     """Bound lifetimes; retain semantic families and the compatibility cohort."""
     if max_cases < 1:
         raise ValueError('max_cases must be positive')
@@ -110,7 +120,8 @@ def recheck_partitioned(archive: Path, output: Path, max_cases: int) -> dict:
              'svg': str((archive/case['svg']).resolve())} for case in cases]}
         (snapshot/'index.json').write_text(json.dumps(subset, indent=2)+'\n', encoding='utf-8')
         shutil.copyfile(archive/'descriptions.xml', snapshot/'descriptions.xml')
-        worker = recheck(snapshot, output/f'worker_{number:02}')
+        worker = (recheck(snapshot, output/f'worker_{number:02}', extra_cli_args=extra_cli_args)
+                  if extra_cli_args else recheck(snapshot, output/f'worker_{number:02}'))
         results.extend(worker['cases'])
         drifts.extend(worker['higher_mean_delta2'])
         workers.append({'worker': number, 'case_count': worker['case_count'],
@@ -144,11 +155,14 @@ def main() -> int:
     parser.add_argument('--output-dir',type=Path,required=True)
     parser.add_argument('--max-cases-per-worker',type=int,default=0,
                         help='Bound each process while retaining complete families; 0 uses one batch')
+    parser.add_argument('--no-isolate-conversion', action='store_true',
+                        help='Run the direct CLI control for a paired supervision comparison')
     args=parser.parse_args()
     if args.max_cases_per_worker < 0:
         parser.error('--max-cases-per-worker must be nonnegative')
-    report=(recheck_partitioned(args.archive.resolve(),args.output_dir.resolve(),args.max_cases_per_worker)
-            if args.max_cases_per_worker else recheck(args.archive.resolve(),args.output_dir.resolve()))
+    extra = {'extra_cli_args': ('--no-isolate-conversion',)} if args.no_isolate_conversion else {}
+    report=(recheck_partitioned(args.archive.resolve(),args.output_dir.resolve(),args.max_cases_per_worker, **extra)
+            if args.max_cases_per_worker else recheck(args.archive.resolve(),args.output_dir.resolve(), **extra))
     print(f"Satisfactory archive recheck: {report['passed']}/{report['case_count']}")
     return 0 if report['passed']==report['case_count'] else 2
 
