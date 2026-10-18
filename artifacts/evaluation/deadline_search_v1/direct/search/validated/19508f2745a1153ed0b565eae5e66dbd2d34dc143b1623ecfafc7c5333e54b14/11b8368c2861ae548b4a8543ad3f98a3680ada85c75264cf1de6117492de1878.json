@@ -1,0 +1,39 @@
+{
+  "schema_version": "validated_search_variant_v1",
+  "model": "(True, 700)",
+  "seed": 20261018,
+  "svg_sha256": "11b8368c2861ae548b4a8543ad3f98a3680ada85c75264cf1de6117492de1878",
+  "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"Lux\" steht mittig. Keine Anschl\u00fcsse. Wei\u00dfer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+  "parameters": [
+    7.666522954195656,
+    7.429011184031984,
+    6.73958968731987,
+    0.8095574739433224,
+    7.625,
+    11.0,
+    8.850000000000001,
+    3.6666666666666665,
+    238.5,
+    238.5,
+    238.5,
+    144.0,
+    148.0,
+    144.0,
+    124.9,
+    120.9,
+    124.9
+  ],
+  "dimensions": [
+    15,
+    15
+  ],
+  "local_semantics_passed": true,
+  "strict_pixel_gate": {
+    "normalized_mse": 0.006383049301803112,
+    "foreground_mse": 0.011675210669636726,
+    "foreground_iou": 0.8583333333333333,
+    "edge_alignment": 0.8757497072219849,
+    "passed": true
+  },
+  "validation_scope": "described_short_label_disk_only"
+}

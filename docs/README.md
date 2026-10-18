@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [Überwachte Bildbudgets und geprüfte Zwischenstände (2026-10-18)](next_arbeitspaket_2026-10-18_search_deadline.md)
+
 - [Adaptive Suche: früher Erfolg, Stagnation und begrenzte Verlängerung bei spätem Fortschritt (2026-10-18)](adaptive_conversion_search_2026-10-18.md)
 
 - [AC0232: Dreiwegeventil, M-Scheibe und diagonaler Verlauf (2026-10-18)](next_arbeitspaket_2026-10-18_ac0232_m.md)

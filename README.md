@@ -8,6 +8,11 @@ Die [Erfolgsübersicht](artifacts/satisfactory_conversions/README.md) enthält
 dokumentiert die Katalogbasis von 1.785 Bildern und die Grenzen älterer
 Pixelprüfungen. Eine sortierte Prüfliste unterstützt die persönliche Sichtprüfung.
 
+Die reguläre `semantic-only`-CLI verwendet jetzt [überwachte Bildbudgets](docs/next_arbeitspaket_2026-10-18_search_deadline.md):
+60 Sekunden einschließlich Abschlussprüfung, bei spätem Fortschritt begrenzt
+verlängerbar bis 120 Sekunden. Blockierte Worker und Renderkinder werden beendet;
+bereits geprüfte Zwischenstände bleiben erhalten.
+
 Die [adaptive Suche](docs/adaptive_conversion_search_2026-10-18.md) beendet
 angeschlossene Optimierungen früh bei geprüfter ausreichender Qualität, stoppt
 ergebnislose Wiederholungen und verlängert das normale Suchbudget von 60 Sekunden

@@ -50,6 +50,7 @@ def collectSuccessfulConversionQualityMetricsImpl(
     render_svg_to_numpy_fn,
     cv2_module,
     np_module,
+    precomputed_rows=None,
 ) -> list[dict[str, object]]:
     """Collect quality metrics for variants listed as successful conversions."""
     if cv2_module is None or np_module is None:
@@ -105,6 +106,14 @@ def collectSuccessfulConversionQualityMetricsImpl(
             metrics.append(row)
             continue
 
+        if precomputed_rows is not None:
+            measured = next((r for r in precomputed_rows.values() if r.get('variant', '').upper() == variant), None)
+            if measured:
+                count = int(measured['w'])*int(measured['h'])
+                row.update(pixel_count=count, mean_delta2=measured['mean_delta2'],
+                           std_delta2=measured['std_delta2'], total_delta2=measured['mean_delta2']*count)
+            metrics.append(row)
+            continue
         img_orig = cv2_module.imread(image_path)
         if img_orig is None:
             metrics.append(row)

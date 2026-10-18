@@ -1,0 +1,39 @@
+{
+  "schema_version": "validated_search_variant_v1",
+  "model": "(False, 400)",
+  "seed": 20261018,
+  "svg_sha256": "0035ddb012967a52575975d714d634469e0dbdfa7155fcb5013527c94fed967a",
+  "description": "Eine einfarbige hellgraue Kreisscheibe mit dunkler Randkontur auf wei\u00dfem Hintergrund. In der Mitte steht die dunkle serifenlose Beschriftung \"rF\". Keine Anschl\u00fcsse.",
+  "parameters": [
+    10.035430639964941,
+    9.922602018299596,
+    9.064506655958917,
+    0.9928838879965765,
+    10.0,
+    15.0,
+    13.75,
+    6.0,
+    230.0,
+    230.0,
+    230.0,
+    137.0,
+    137.0,
+    137.0,
+    88.2,
+    88.2,
+    88.2
+  ],
+  "dimensions": [
+    20,
+    20
+  ],
+  "local_semantics_passed": true,
+  "strict_pixel_gate": {
+    "normalized_mse": 0.006333678960800171,
+    "foreground_mse": 0.012150164693593979,
+    "foreground_iou": 0.8763440860215054,
+    "edge_alignment": 0.8691970109939575,
+    "passed": true
+  },
+  "validation_scope": "described_short_label_disk_only"
+}

@@ -192,6 +192,7 @@ def generateConversionOverviews(
     diff_dir: str | Path,
     svg_dir: str | Path,
     reports_dir: str | Path,
+    *, png_dir: str | Path | None = None,
 ) -> dict[str, str]:
     """Generate standard converter overview tiles and return generated paths."""
     diff_root = Path(diff_dir)
@@ -206,7 +207,8 @@ def generateConversionOverviews(
     if diff_res is not None:
         generated["diff"] = str(diff_res)
 
-    svg_files = sorted(svg_root.glob("*.svg"))
+    svg_files = (sorted(Path(png_dir).glob('*.png')) if png_dir is not None
+                 else sorted(svg_root.glob("*.svg")))
     svg_out = reports_root / "overview_svg_tiles.png"
     svg_res = createTiledOverviewImage(svg_files, svg_out)
     if svg_res is not None:

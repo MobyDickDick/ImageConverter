@@ -25,14 +25,14 @@ _SETTINGS = ContextVar('conversion_search_settings', default=None)
 
 @contextmanager
 def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, allow_memory=False,
-                         adaptive=False, seconds=60., max_seconds=120.):
+                         adaptive=False, seconds=60., max_seconds=120., isolate=False):
     if mode not in {'legacy', 'portfolio'} or not 32 <= budget <= 10000:
         raise ValueError('Search mode or render budget is invalid')
     policy = SearchPolicy(seconds=seconds,max_seconds=max_seconds)
     token = _SETTINGS.set(dict(mode=mode, seed=int(seed), budget=int(budget),
                                directory=Path(directory) if directory else None,
                                allow_memory=allow_memory,adaptive=adaptive and mode=='portfolio',
-                               policy=policy,images={}))
+                               policy=policy,images={},isolate=isolate))
     try:
         yield
     finally:
@@ -63,6 +63,8 @@ def validated_result(result, image):
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import svg_identity,raster_identity
     if (svg_identity(result['svg']),raster_identity(image)) not in session.validated:
         session.validate(result,image)
+        if session.on_validated:
+            session.on_validated(result, image, quality)
         progress(result.get('source','model'),event='candidate_satisfactory',**session.report())
     return True
 

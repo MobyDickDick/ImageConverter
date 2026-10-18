@@ -559,6 +559,8 @@ def _runPostConversionReporting(
     normalized_selected_variants: set[str],
     result_map: dict[str, dict[str, object]],
 ) -> dict[str, str]:
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
+    isolated = bool((settings() or {}).get('isolate'))
     return conversion_reporting_helpers.runPostConversionReportingImpl(
         folder_path=folder_path,
         csv_path=csv_path,
@@ -576,7 +578,10 @@ def _runPostConversionReporting(
         emit_ac08_success_gate_status_fn=_emitAc08SuccessGateStatus,
         successful_conversions_manifest=SUCCESSFUL_CONVERSIONS_MANIFEST,
         update_successful_conversions_manifest_fn=updateSuccessfulConversionsManifestWithMetrics,
-        generate_conversion_overviews_fn=generateConversionOverviews,
+        generate_conversion_overviews_fn=(
+            (lambda diff, svg, reports: generateConversionOverviews(
+                diff, svg, reports, png_dir=_convertedPngOutputDir(str(Path(svg).parent))))
+            if isolated else generateConversionOverviews),
         print_fn=print,
     )
 
@@ -1362,6 +1367,7 @@ def convertRange(
     )
     early_gate_pending = set(process_files)
     conversion_timeout_sec = max(0.0, float(os.environ.get("ICC_CONVERSION_TIMEOUT_SEC", "0") or "0"))
+    image_deadlines = {}
 
     def _writeIncrementalCheckpoint(meta: dict[str, object]) -> None:
         """Persist resumable batch state after each completed conversion task."""
@@ -1389,6 +1395,25 @@ def convertRange(
         batch_run_state_helpers.atomicWriteJsonImpl(checkpoint_path, checkpoint_payload)
 
     def _runOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
+        search_config = search_settings()
+        if search_config and search_config.get('isolate'):
+            from src.iCCModules.imageCompositeConverterDeadline import ImageDeadline
+            from src.iCCModules.imageCompositeConverterSearchPortfolio import progress
+            deadline = image_deadlines.setdefault(filename, ImageDeadline(
+                search_config['policy'], hard_seconds=conversion_timeout_sec,
+                emit=lambda **values: progress(filename, **values)))
+            spec = dict(filename=filename, folder_path=folder_path, csv_path=csv_path,
+                        iteration_budget=iteration_budget, badge_rounds=badge_rounds,
+                        svg_out_dir=svg_out_dir, diff_out_dir=diff_out_dir, png_out_dir=png_out_dir,
+                        reports_out_dir=reports_out_dir, debug_ac0811_dir=debug_ac0811_dir,
+                        debug_element_diff_dir=debug_element_diff_dir)
+            result, failures = deadline.run(
+                spec, config=search_config,
+                action={name: getattr(Action, name) for name in ('STOCHASTIC_RUN_SEED', 'STOCHASTIC_SEED_OFFSET')},
+                render_isolated=SVG_RENDER_SUBPROCESS_ENABLED,
+                render_timeout=SVG_RENDER_SUBPROCESS_TIMEOUT_SEC)
+            batch_failures.extend(failures)
+            return result
         return conversion_execution_helpers.convertOneImpl(
             filename=filename,
             folder_path=folder_path,
@@ -1583,6 +1608,14 @@ def convertRange(
             conversion_bestlist_rows,
         )
 
+    if (search_settings() or {}).get('isolate'):
+        search_settings()['completed_rows'] = result_map
+        policy = search_settings()['policy']
+        batch_run_state_helpers.atomicWriteJsonImpl(Path(reports_out_dir)/'deadline_policy.json', dict(
+            schema_version='image_deadline_policy_v1', scope='semantic-only',
+            seconds=policy.seconds, max_seconds=policy.max_seconds,
+            external_max_seconds=conversion_timeout_sec or None,
+            cross_image_harmonization=False, reporting_uses_measured_rows_and_pngs=True))
     conversion_finalization_helpers.runConversionFinalizationImpl(
         reports_out_dir=reports_out_dir,
         quality_logs=quality_logs,
@@ -1606,7 +1639,9 @@ def convertRange(
         write_strategy_switch_template_transfers_report_fn=_writeStrategySwitchTemplateTransfersReport,
         write_iteration_log_and_collect_semantic_results_fn=_writeIterationLogAndCollectSemanticResults,
         write_chain_telemetry_batch_report_fn=_writeChainTelemetryBatchReport,
-        harmonize_semantic_size_variants_fn=_harmonizeSemanticSizeVariants,
+        harmonize_semantic_size_variants_fn=(
+            (lambda *_args: None) if (search_settings() or {}).get('isolate')
+            else _harmonizeSemanticSizeVariants),
         run_post_conversion_reporting_fn=_runPostConversionReporting,
     )
     if not semantic_only:
@@ -1877,6 +1912,7 @@ def _writeAc08WeakFamilyStatusReport(
     )
 
 def _writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
     ranking_helpers.writePixelDelta2RankingImpl(
         folder_path=folder_path,
         svg_out_dir=svg_out_dir,
@@ -1886,6 +1922,7 @@ def _writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir
         render_svg_to_numpy_fn=Action.render_svg_to_numpy,
         calculate_delta2_stats_fn=Action.calculateDelta2Stats,
         calculate_spatial_delta2_quality_fn=Action.calculateSpatialDelta2Quality,
+        precomputed_rows=(settings() or {}).get('completed_rows'),
     )
 
 def _loadIterationLogRows(reports_out_dir: str) -> dict[str, dict[str, str]]:
@@ -1900,6 +1937,7 @@ def collectSuccessfulConversionQualityMetrics(
     reports_out_dir: str,
     successful_variants: list[str] | tuple[str, ...] | None = None,
 ) -> list[dict[str, object]]:
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
     return successful_conversion_quality_helpers.collectSuccessfulConversionQualityMetricsImpl(
         folder_path=folder_path,
         svg_out_dir=svg_out_dir,
@@ -1912,6 +1950,7 @@ def collectSuccessfulConversionQualityMetrics(
         render_svg_to_numpy_fn=Action.render_svg_to_numpy,
         cv2_module=cv2,
         np_module=np,
+        precomputed_rows=(settings() or {}).get('completed_rows'),
     )
 
 def _successfulConversionMetricsAvailable(metrics: dict[str, object]) -> bool:
@@ -2025,6 +2064,7 @@ def updateSuccessfulConversionsManifestWithMetrics(
     manifest_path: Path | None = None,
     successful_variants: list[str] | tuple[str, ...] | None = None,
 ) -> tuple[Path, list[dict[str, object]]]:
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
     return successful_conversions_helpers.updateSuccessfulConversionsManifestWithMetricsImpl(
         folder_path=folder_path,
         svg_out_dir=svg_out_dir,
@@ -2035,7 +2075,8 @@ def updateSuccessfulConversionsManifestWithMetrics(
         is_candidate_better_fn=_isSuccessfulConversionCandidateBetter,
         store_snapshot_fn=_storeSuccessfulConversionSnapshot,
         merge_metrics_fn=_mergeSuccessfulConversionMetrics,
-        restore_snapshot_fn=_restoreSuccessfulConversionSnapshot,
+        restore_snapshot_fn=((lambda *_args: False) if (settings() or {}).get('isolate')
+                             else _restoreSuccessfulConversionSnapshot),
         format_manifest_line_fn=_formatSuccessfulConversionManifestLine,
         latest_failed_entry_fn=_latestFailedConversionManifestEntry,
         sorted_rows_fn=_sortedSuccessfulConversionMetricsRows,

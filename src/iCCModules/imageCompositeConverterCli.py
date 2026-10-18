@@ -89,6 +89,8 @@ def parseArgsImpl(
                         help='Reguläre aktive Suchzeit je Bild für angeschlossene Registrierer (Default 60)')
     parser.add_argument('--search-max-seconds',type=float,default=120.,
                         help='Äußerste aktive Suchzeit bei deutlichem spätem Fortschritt (Default 120)')
+    parser.add_argument('--isolate-conversion', action=argparse.BooleanOptionalAction, default=True,
+                        help='semantic-only: Bildversuche einschließlich Abschlussprüfung in überwachten Prozessen ausführen')
     parser.add_argument(
         "--execution-mode",
         choices=("standard", "semantic-only"),
@@ -569,6 +571,7 @@ def runMainImpl(
         allow_memory=getattr(args, 'execution_mode', 'semantic-only') == 'standard',
         adaptive=getattr(args,'search_policy','fixed')=='adaptive',
         seconds=getattr(args,'search_seconds',60.),max_seconds=getattr(args,'search_max_seconds',120.),
+        isolate=getattr(args,'isolate_conversion',True) and getattr(args,'execution_mode','semantic-only')=='semantic-only',
     ):
         try:
             if args.ac08_regression_set:
