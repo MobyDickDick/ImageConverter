@@ -2,7 +2,14 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-18, nach GE0204-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-18, nach AC0921-Abnahme)
+
+AC0921 M/L/S bestehen beide regulären und die strengen Pixelgates. Die allgemeine Kreis-/Buchstabenregistrierung unterstützt nun einen aus dem Raster bestimmten unteren Griff; eine unabhängige R-Vorlage besteht 17/17 echte CLI-Fälle. 374 Paare sind archiviert, alle 371 bisherigen Datensätze unverändert.
+Aktive Rotation: `AC0232_M`.
+Details: `docs/next_arbeitspaket_2026-10-18_ac0921_m.md`.
+Review: `artifacts/evaluation/bottom_stem_letter_disk_recheck_v1/review_args.json`.
+
+## Vorheriger Abschluss: GE0204
 
 GE0204 M/L/S bestehen beide regulären und die strengen Pixelgates. Der vorhandene allgemeine Flammenfit benötigt nur eine eigenständige Beschreibung. 371 Paare sind archiviert, alle 368 bisherigen Datensätze unverändert.
 Aktive Rotation: `AC0921_M`, `AC0232_M`.

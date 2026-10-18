@@ -1,5 +1,5 @@
 {
-  "case_count": 371,
+  "case_count": 374,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -2805,6 +2805,57 @@
       "svg": "svgs/AC0920_S.svg",
       "svg_sha256": "7a3a9b8415890ab78a3b6c9f5af4e8266be325ff5f440cffd2c3d9de0bf3047f",
       "variant": "AC0920_S"
+    },
+    {
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"Q\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/bottom_stem_letter_disk_recheck_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0921_L.jpg",
+      "image_sha256": "38eb6b31544ba80a8561839e3cd1438f601871dcfe713e61b14d9f03f340905c",
+      "mean_delta2": 271.0826721191406,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9535133838653564,
+        "error_per_pixel": 0.0013896330750692843,
+        "object_mask_iou": 0.9017543859649123
+      },
+      "svg": "svgs/AC0921_L.svg",
+      "svg_sha256": "9aa9fd91f5ddec41b8f7ee61863e74cea23cdd2a3b2db22f9293ab4eedd11965",
+      "variant": "AC0921_L"
+    },
+    {
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"Q\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/bottom_stem_letter_disk_recheck_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0921_M.jpg",
+      "image_sha256": "24fd5f050f48f3636a0e289128a1810fbd7d9e5b4a4585add7090c2cb3dc94f0",
+      "mean_delta2": 619.8728637695312,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8475635647773743,
+        "error_per_pixel": 0.0031776130399565872,
+        "object_mask_iou": 0.8737373737373737
+      },
+      "svg": "svgs/AC0921_M.svg",
+      "svg_sha256": "47639ae791ebc292a9c8a0d97fcdd7eb66a4cb580a1c42987c96094f63e2d77f",
+      "variant": "AC0921_M"
+    },
+    {
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"Q\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/bottom_stem_letter_disk_recheck_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/AC0921_S.jpg",
+      "image_sha256": "31953c855fe585f896fd8517ae0edc3732c9cb095d5dea77fbe75c05a46a348f",
+      "mean_delta2": 418.0159912109375,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9021561145782471,
+        "error_per_pixel": 0.0021428475776544276,
+        "object_mask_iou": 0.8706896551724138
+      },
+      "svg": "svgs/AC0921_S.svg",
+      "svg_sha256": "b80c1dbcf7e5c4a538f487f01f4be3902f8f2501ca5042c86874a6678ac34391",
+      "variant": "AC0921_S"
     },
     {
       "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"M\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine Anschl\u00fcsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",

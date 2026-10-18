@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-18)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `473` · Erledigt `435` · Offen `38`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `474` · Erledigt `436` · Offen `38`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -36,9 +36,14 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 ### Aktueller Plan-B-Stand (2026-10-18)
 
+- [x] **AC0921 – Kreisscheibe mit Q und unterem Griff:** eigenständige Beschreibungen und allgemeine Erweiterung der Rasterregistrierung um einen mittigen unteren Griff. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression; eine unabhängige R-Vorlage besteht 17/17 echte CLI-Fälle. 374 Archivpaare, alle 371 bisherigen Datensätze unverändert. Nächste Rotation: `AC0232_M`. Details: `docs/next_arbeitspaket_2026-10-18_ac0921_m.md`.
+
+**Neuester Abschluss:** AC0921 M/L/S. Nächste Rotation: `AC0232_M`.
+
+
 - [x] **GE0204 – zwei verschachtelte Flammen auf Verlaufsscheibe:** Eigenständige Beschreibung in beiden XML-Katalogen aktiviert den unveränderten allgemeinen Flammenfit. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. 371 Archivpaare, alle 368 bisherigen Datensätze unverändert. Nächste Rotation: `AC0921_M`, `AC0232_M`. Details: `docs/next_arbeitspaket_2026-10-18_ge0204_m.md`.
 
-**Neuester Abschluss:** GE0204 M/L/S. Nächste Rotation: `AC0921_M`, `AC0232_M`.
+**Vorheriger Abschluss:** GE0204 M/L/S. Nächste Rotation: `AC0921_M`, `AC0232_M`.
 
 ### Vorheriger Plan-B-Stand (2026-10-17)
 

@@ -1,0 +1,76 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere AC0921_L.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0921_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0921. Dokumentiert ist die große Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AC0921_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.529762, localized_error_fraction=0.710938).
+[INFO] Konvertiert AC0921_L.jpg | Parameter: mode=auto, label=M, variant_name=AC0921_L | Qualität: Optimierungsfehler/Pixel=0.023380, Mean-Delta²=6946.463867, RGB-RMSE/Kanal=48.119517, Raumscore=19173.295732, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AC0921_M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0921_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0921. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AC0921_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.504762, localized_error_fraction=0.778961).
+[INFO] Konvertiert AC0921_M.jpg | Parameter: mode=auto, label=M, variant_name=AC0921_M | Qualität: Optimierungsfehler/Pixel=0.039129, Mean-Delta²=6730.307129, RGB-RMSE/Kanal=47.364921, Raumscore=19464.479943, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AC0921_S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0921_S.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0921. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AC0921_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.523810, localized_error_fraction=0.723196).
+[INFO] Konvertiert AC0921_S.jpg | Parameter: mode=auto, label=M, variant_name=AC0921_S | Qualität: Optimierungsfehler/Pixel=0.077404, Mean-Delta²=6627.768066, RGB-RMSE/Kanal=47.002724, Raumscore=18193.718467, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AC0921_S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0921_S.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0921. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AC0921_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.523810, localized_error_fraction=0.723196).
+[INFO] Konvertiert AC0921_S.jpg | Parameter: mode=auto, label=M, variant_name=AC0921_S | Qualität: Optimierungsfehler/Pixel=0.077404, Mean-Delta²=6627.768066, RGB-RMSE/Kanal=47.002724, Raumscore=18193.718467, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere AC0921_M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0921_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0921. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AC0921_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.504762, localized_error_fraction=0.778961).
+[INFO] Konvertiert AC0921_M.jpg | Parameter: mode=auto, label=M, variant_name=AC0921_M | Qualität: Optimierungsfehler/Pixel=0.039129, Mean-Delta²=6730.307129, RGB-RMSE/Kanal=47.364921, Raumscore=19464.479943, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere AC0921_L.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0921_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0921. Dokumentiert ist die große Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AC0921_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.529762, localized_error_fraction=0.710938).
+[INFO] Konvertiert AC0921_L.jpg | Parameter: mode=auto, label=M, variant_name=AC0921_L | Qualität: Optimierungsfehler/Pixel=0.023380, Mean-Delta²=6946.463867, RGB-RMSE/Kanal=48.119517, Raumscore=19173.295732, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.4s
+[INFO] Konvertiere AC0921_S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0921_S.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0921. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AC0921_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.523810, localized_error_fraction=0.723196).
+[INFO] Konvertiert AC0921_S.jpg | Parameter: mode=auto, label=M, variant_name=AC0921_S | Qualität: Optimierungsfehler/Pixel=0.077404, Mean-Delta²=6627.768066, RGB-RMSE/Kanal=47.002724, Raumscore=18193.718467, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Konvertiere AC0921_M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0921_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0921. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AC0921_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.504762, localized_error_fraction=0.778961).
+[INFO] Konvertiert AC0921_M.jpg | Parameter: mode=auto, label=M, variant_name=AC0921_M | Qualität: Optimierungsfehler/Pixel=0.039129, Mean-Delta²=6730.307129, RGB-RMSE/Kanal=47.364921, Raumscore=19464.479943, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.6s
+[INFO] Konvertiere AC0921_L.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0921_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0921. Dokumentiert ist die große Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[WARN] AC0921_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.529762, localized_error_fraction=0.710938).
+[INFO] Konvertiert AC0921_L.jpg | Parameter: mode=auto, label=M, variant_name=AC0921_L | Qualität: Optimierungsfehler/Pixel=0.023380, Mean-Delta²=6946.463867, RGB-RMSE/Kanal=48.119517, Raumscore=19173.295732, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.8s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\ac0921-replay\catalog\before\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\ac0921-replay\catalog\before\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\ac0921-replay\catalog\before

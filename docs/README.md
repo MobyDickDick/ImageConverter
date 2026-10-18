@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [AC0921: Kreisscheibe mit Q und unterem Griff, drei CLI-Abnahmen (2026-10-18)](next_arbeitspaket_2026-10-18_ac0921_m.md)
+
 - [AC0910: Lux-Kreisscheibe und begrenzte Zeichenverfeinerung (2026-10-17)](next_arbeitspaket_2026-10-17_ac0910_l.md)
 - [Merge-Prüfung: erhaltene Runtime und wiederhergestellte Archiv-/Aufgabenangaben (2026-10-17)](merge_audit_2026-10-17.md)
 Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar sind.

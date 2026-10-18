@@ -1,0 +1,42 @@
+{
+  "byte_equal_variants": [
+    "AC0910_L",
+    "AC0910_M",
+    "AC0910_S"
+  ],
+  "cases": [
+    {
+      "after_svg": "after/AC0910_L.svg",
+      "before_svg": "before/AC0910_L.svg",
+      "input_sha256": "e49e4cfd64b3a525f64293da155b650c54d516886ea1386b7c206e9e36a209a6",
+      "output_sha256": "f1345a018594fbc0cb3e9d53871bffa8926575f0c5ec80b7bf1b30c084814ed0",
+      "variant": "AC0910_L"
+    },
+    {
+      "after_svg": "after/AC0910_M.svg",
+      "before_svg": "before/AC0910_M.svg",
+      "input_sha256": "653758a8c37378359c11f892a10afcc7bb073cf49c5f498cdc112941e18d04d7",
+      "output_sha256": "201a9148572f9a1b015ab1196997abb5aaf29407a2b2dff12fca7cabc4b70b61",
+      "variant": "AC0910_M"
+    },
+    {
+      "after_svg": "after/AC0910_S.svg",
+      "before_svg": "before/AC0910_S.svg",
+      "input_sha256": "37bd87d1cb2d281f2642007f7445b0c7599b6b0c504b9380614cc8f506a06762",
+      "output_sha256": "08875aac75e3afec6408a507817a0ca3c32dd84f8a33e4bf0f3736e3dbbbebe8",
+      "variant": "AC0910_S"
+    }
+  ],
+  "parent_commit": "8c0d2ab66",
+  "parent_module_sha256": "00b58e905a44bea7e31c577a2d1dde9496028b96033593524d03c4de5c889d9b",
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "runtime_module": "imageCompositeConverterLabeledDisk",
+  "search_seed": 0
+}
