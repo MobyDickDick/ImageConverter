@@ -144,28 +144,33 @@ def fit_motor_valve(width, height, *, description, image, render_fn, error_fn):
         p[15] += (gx.min()+gx.max()-sx.min()-sx.max())/2
         p[16] += (gy.min()+gy.max()-sy.min()-sy.max())/2
         p[17] *= (gy.max()-gy.min()+1)/(sy.max()-sy.min()+1)
-    result = _register(p,geometry_count,build,valid,image,render_fn,error_fn,'raster_motor_valve_v1')
-    if result is None:
+    semantic_evaluations = 0
+    def satisfactory(parameters, measured):
+        nonlocal semantic_evaluations
+        raster = measured[3]
+        blank = render_fn(build(parameters,True),width,height)
+        semantic_evaluations += 1
+        if blank is None:
+            return False
+        predicted = (np.mean(blank.astype(float)-raster.astype(float),axis=2)>35)&(distance<radius*.8)
+        union = (glyph|predicted).sum()
+        if not union or (glyph&predicted).sum()/union < max(.65,1-3/radius):
+            return False
+        missing_distance = cv2.distanceTransform((~predicted).astype(np.uint8),cv2.DIST_L2,3)
+        extra_distance = cv2.distanceTransform((~glyph).astype(np.uint8),cv2.DIST_L2,3)
+        if (missing_distance[glyph].max()>max(1.5,radius*.06)
+                or extra_distance[predicted].max()>max(1.5,radius*.06)):
+            return False
+        ref,out = np.min(image,axis=2)<215,np.min(raster,axis=2)<215
+        cover = cv2.dilate(out.astype(np.uint8),np.ones((3,3),np.uint8)).astype(bool)
+        reverse = cv2.dilate(ref.astype(np.uint8),np.ones((3,3),np.uint8)).astype(bool)
+        return bool((ref&~cover).sum()<=max(3,ref.sum()*.015)
+                    and (out&~reverse).sum()<=max(3,out.sum()*.015))
+
+    result = _register(p,geometry_count,build,valid,image,render_fn,error_fn,'raster_motor_valve_v1',
+                       satisfactory_fn=satisfactory)
+    if result is None or not satisfactory(np.asarray(result['parameters']),
+                                         (0.,result['error'],result['svg'],result['rendered'])):
         return None
-    v = np.asarray(result['parameters'])
-    blank = render_fn(build(v,True),width,height)
-    if blank is None:
-        return None
-    predicted = (np.mean(blank.astype(float)-result['rendered'].astype(float),axis=2) > 35) & (distance < radius*.8)
-    union = (glyph | predicted).sum()
-    if not union or (glyph & predicted).sum()/union < max(.65,1-3/radius):
-        return None
-    missing_distance = cv2.distanceTransform((~predicted).astype(np.uint8),cv2.DIST_L2,3)
-    extra_distance = cv2.distanceTransform((~glyph).astype(np.uint8),cv2.DIST_L2,3)
-    if (missing_distance[glyph].max() > max(1.5,radius*.06)
-            or extra_distance[predicted].max() > max(1.5,radius*.06)):
-        return None
-    ref = np.min(image,axis=2) < 215
-    out = np.min(result['rendered'],axis=2) < 215
-    cover = cv2.dilate(out.astype(np.uint8),np.ones((3,3),np.uint8)).astype(bool)
-    reverse = cv2.dilate(ref.astype(np.uint8),np.ones((3,3),np.uint8)).astype(bool)
-    if ((ref & ~cover).sum() > max(3,ref.sum()*.015)
-            or (out & ~reverse).sum() > max(3,out.sum()*.015)):
-        return None
-    result['evaluations'] += 7  # Three font probes plus final blank render.
+    result['evaluations'] += 6+semantic_evaluations
     return result

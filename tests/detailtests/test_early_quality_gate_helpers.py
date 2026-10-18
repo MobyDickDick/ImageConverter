@@ -1,5 +1,14 @@
 from __future__ import annotations
 
+
+def test_adaptive_search_does_not_reject_a_model_from_a_poor_initial_probe():
+    from src.iCCModules.imageCompositeConverterEarlyQualityGate import resolveEarlyQualityGateImpl,shouldAbortAfterProbeImpl
+    gate=resolveEarlyQualityGateImpl({'allowed_error_per_pixel':.01},[],
+        successful_threshold_fn=lambda rows:.01,environ={},adaptive_search=True)
+    assert not gate['enabled']
+    assert gate['source']=='adaptive-search-controls-progress'
+    assert not shouldAbortAfterProbeImpl({'error_per_pixel':10.},requested_iterations=64,gate=gate)
+
 from src.iCCModules import imageCompositeConverterEarlyQualityGate as gate_helpers
 
 

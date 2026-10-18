@@ -6,16 +6,18 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-18)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `479` · Erledigt `437` · Offen `42`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `480` · Erledigt `439` · Offen `41`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
 ## Übergreifende Rekonstruktion (Audit 2026-10-17)
 
-- [ ] **SEARCH-DEADLINE-01:** Gemeinsame Deadline von höchstens 60 Sekunden je Bild über Analyse, Modelle, Suche und Abschlussprüfung; gültigen besten Zwischenstand erhalten und unter Windows wie Unix durch isolierten Worker unterbrechen. Abnahmetests und Priorität: `docs/conversion_search_review_2026-10-18.md`.
+- [x] **SEARCH-ADAPTIVE-01:** Frühe geprüfte Erfolge beenden angeschlossene Registrierungen und Wiederholungen. Stagnation führt zum Suchwegwechsel und anschließendem Abbruch; deutlicher später Fortschritt erlaubt begrenzte zusätzliche Zeit und Vorschläge. Gemeinsamer aktiver Bildkontext über Modelle und Wiederholungen, strenge unveränderte Pixel-/Semantikprüfungen, Source-/SVG-gebundene Freigabe und kontrollierte schlechte Vorprobe. Details und echte CLI-Nachweise: `docs/adaptive_conversion_search_2026-10-18.md`.
+
+- [ ] **SEARCH-DEADLINE-01:** Durchgängige per-Bild-Zeitsteuerung einschließlich Abschlussprüfung und plattformübergreifendem Abbruch durch isolierten Worker; gültigen besten Zwischenstand erhalten. Nutzerpräzisierung: 60 Sekunden normales Budget, begrenzte Verlängerung bei spätem Fortschritt. **Teil umgesetzt:** kooperative gemeinsame Uhr über angeschlossene Modelle und Wiederholungen sowie optionales hartes Maximum im Katalogrunner. Unverbundene Optimierer und sichere Zwischenstandübergabe beim Prozessabbruch bleiben offen. `docs/adaptive_conversion_search_2026-10-18.md`.
 - [ ] **SEARCH-SCHEDULER-02:** Suchzeit über Modellhypothesen und lokale/gekoppelte/globalere Verfahren verteilen, Stagnation als Wechselgrund nutzen und Dubletten vermeiden. Erst nach SEARCH-DEADLINE-01 und angeschlossenen Strukturänderungen bewerten. `docs/conversion_search_review_2026-10-18.md`.
 - [ ] **BENCHMARK-ANYTIME-01:** Echte Qualitätskurven nach 1/5/15/60 Sekunden, unbekannte Familien, Umformulierungen, Objektfehler, Renderzahlen, mehrere Seeds und Median/p95-Laufzeit bei unveränderten Gates prüfen. `docs/conversion_search_review_2026-10-18.md`.
-- [ ] **SEARCH-RETRY-01:** Identische Wiederholungen deterministischer Spezialfits mit erhöhten, vom Fit nicht verwendeten Iterationszahlen vermeiden; fachliche Qualitätsprüfung und Fehlerdiagnosen erhalten. In der AC0232-CLI-Abnahme nachgewiesen. `docs/next_arbeitspaket_2026-10-18_ac0232_m.md`.
+- [x] **SEARCH-RETRY-01:** Geprüfte zufriedenstellende SVGs werden im adaptiven Modus nicht erneut mit größeren Iterationszahlen gesucht. Ein vollständiger Wiederholungsversuch ohne relevante Verbesserung beendet weitere Wiederholungen auch bei strukturiertem Restfehler; bessere SVGs und Messwerte bleiben erhalten. `docs/adaptive_conversion_search_2026-10-18.md`.
 
 - [x] **PB-LEARN-PROCESS:** Ursachenanalyse, Gruppierung gemeinsamer Fehler, mindestens zwei Lösungshypothesen, begrenzter Vergleich, unveränderte Gates und dauerhafte Regressionen nach jedem erweiterten Plan-B-Fehlschlag dokumentiert und in die erzeugten Fehleraufgaben aufgenommen. `docs/plan_b_learning_workflow.md`.
 - [x] **SEARCH-PORTFOLIO-01:** Vier alternative Kurztextmodelle, drei zusätzliche Parametersuchwege, Seeds, Rendercache, Budget, Fortschrittsbelege und gespeicherte geprüfte Varianten. Standardmodus kann erfolgreiche Modellarten priorisieren; semantic-only bleibt unabhängig. Keine allgemeine neue Topologiesuche. `docs/next_arbeitspaket_2026-10-17_ac0840_search.md`.

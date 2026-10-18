@@ -16,17 +16,23 @@ import random
 import time
 
 import numpy as np
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import (
+    ImageSearch, SearchPolicy, SearchRun, current_search, image_search,pixel_quality,
+)
 
 _SETTINGS = ContextVar('conversion_search_settings', default=None)
 
 
 @contextmanager
-def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, allow_memory=False):
+def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, allow_memory=False,
+                         adaptive=False, seconds=60., max_seconds=120.):
     if mode not in {'legacy', 'portfolio'} or not 32 <= budget <= 10000:
         raise ValueError('Search mode or render budget is invalid')
+    policy = SearchPolicy(seconds=seconds,max_seconds=max_seconds)
     token = _SETTINGS.set(dict(mode=mode, seed=int(seed), budget=int(budget),
                                directory=Path(directory) if directory else None,
-                               allow_memory=allow_memory))
+                               allow_memory=allow_memory,adaptive=adaptive and mode=='portfolio',
+                               policy=policy,images={}))
     try:
         yield
     finally:
@@ -35,6 +41,30 @@ def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, a
 
 def settings():
     return _SETTINGS.get()
+
+
+def configured_image_search(identity):
+    config = settings()
+    if not config or not config['adaptive']:
+        return image_search(None)
+    session = config['images'].setdefault(str(identity),ImageSearch(config['policy'],
+        emit=lambda **values: progress(str(identity),**values)))
+    return image_search(session)
+
+
+def validated_result(result, image):
+    """Call only after the model's full semantic checks have accepted its SVG."""
+    session = current_search()
+    if session is None:
+        return False
+    quality = pixel_quality(image,result['rendered'])
+    if not quality or not quality['passed']:
+        return False
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import svg_identity,raster_identity
+    if (svg_identity(result['svg']),raster_identity(image)) not in session.validated:
+        session.validate(result,image)
+        progress(result.get('source','model'),event='candidate_satisfactory',**session.report())
+    return True
 
 
 def progress(source, **values):
@@ -96,7 +126,7 @@ def store_validated_variant(result, *, image, description, model, quality):
         (config['directory']/'strategy_memory.json').write_text(json.dumps(memory, indent=2)+'\n', encoding='utf-8')
 
 
-def explore_parameters(parameters, geometry_count, measure, incumbent, *, source, image):
+def explore_parameters(parameters, geometry_count, measure, incumbent, *, source, image, satisfactory_fn=None):
     """Explore different search trajectories under one additional render budget.
 
     ``measure`` also applies the model's validity rules and custom loss. A probe
@@ -106,6 +136,9 @@ def explore_parameters(parameters, geometry_count, measure, incumbent, *, source
     config = settings()
     if not config or config['mode'] != 'portfolio':
         return parameters, incumbent, None
+    if config['adaptive'] and current_search() is not None:
+        return _explore_adaptive(parameters,geometry_count,measure,incumbent,
+                                 source=source,image=image,satisfactory_fn=satisfactory_fn)
     identity = hashlib.sha256(source.encode()+np.asarray(image).tobytes()+incumbent[2].encode()).hexdigest()
     rng = random.Random(config['seed'] ^ int(identity[:16], 16))
     paths = ['reverse_coordinates', 'shuffled_coordinates', 'joint_restart']
@@ -189,3 +222,100 @@ def explore_parameters(parameters, geometry_count, measure, incumbent, *, source
                               winning_strategy=winning_strategy,
                               budget=config['budget'], attempts=records,
                               elapsed_seconds=round(time.monotonic()-started, 3))
+
+
+def _explore_adaptive(parameters, geometry_count, measure, incumbent, *, source, image, satisfactory_fn):
+    config,session = settings(),current_search()
+    identity = hashlib.sha256(source.encode()+np.asarray(image).tobytes()+incumbent[2].encode()).hexdigest()
+    rng = random.Random(config['seed'] ^ int(identity[:16],16))
+    paths = ['reverse_coordinates','shuffled_coordinates','joint_restart']
+    rng.shuffle(paths)
+    best_p,best = parameters.copy(),incumbent
+    seen = {tuple(np.round(best_p,8))}
+    monitor = SearchRun(session,config['budget'],source=source)
+    monitor.anchor = incumbent[0]
+    records = {name:dict(strategy=name,proposals=0,error=incumbent[1],improved=False) for name in paths}
+    orders = {name:list(range(len(parameters))) for name in paths}
+    orders['reverse_coordinates'].reverse()
+    for name in paths:
+        if name != 'reverse_coordinates':
+            rng.shuffle(orders[name])
+    cursors = dict.fromkeys(paths,0)
+    batch = max(4,min(32,config['budget']//3))
+    tried = set()
+    winning = None
+    reason = 'satisfactory' if satisfactory_fn and satisfactory_fn(best_p,best) else None
+    generated = 0
+    started = session.elapsed
+    while reason is None and generated < monitor.maximum*8:
+        before_cycle = monitor.proposals
+        for strategy in paths:
+            reason = monitor.reason(alternatives_tried=len(tried)==len(paths))
+            if reason:
+                break
+            tried.add(strategy)
+            progress(source,event='strategy_started',strategy=strategy,proposals=monitor.proposals,
+                     budget=monitor.limit,seed=config['seed'],best_error=best[1])
+            used = 0
+            slice_generated = 0
+            while used < batch and slice_generated < batch*8 and generated < monitor.maximum*8:
+                reason = monitor.reason(alternatives_tried=len(tried)==len(paths))
+                if reason:
+                    break
+                cursor = cursors[strategy]
+                cursors[strategy] += 1
+                generated += 1
+                slice_generated += 1
+                probe = best_p.copy()
+                order = orders[strategy]
+                if strategy == 'joint_restart':
+                    # Continue proposing coupled changes, at several scales,
+                    # when one finite coordinate schedule has been exhausted.
+                    step = (.125,.25,.5,1.,2.,4.)[(cursor//8)%6]
+                    for index in rng.sample(order,min(3,len(order))):
+                        probe[index] += rng.choice((-1,1))*step*(4 if index>=geometry_count else 1)
+                else:
+                    index = order[(cursor//2)%len(order)]
+                    step = (1.,.5,.25,.125,.0625,2.)[(cursor//(2*len(order)))%6]
+                    probe[index] += (-1 if cursor%2==0 else 1)*step*(4 if index>=geometry_count else 1)
+                key = tuple(np.round(probe,8))
+                if key in seen:
+                    continue
+                seen.add(key)
+                used += 1
+                measured = measure(probe)
+                if measured is not None and measured[0] < best[0]-1e-9 and measured[1] <= best[1]+1e-9:
+                    best_p,best,winning = probe.copy(),measured,strategy
+                    session.observe(best[1],evaluation=False)
+                    records[strategy]['improved'] = True
+                # Only admissible improvements can buy additional work.
+                monitor.observe(best[0])
+                records[strategy]['proposals'] += 1
+                records[strategy]['error'] = best[1]
+                if satisfactory_fn and satisfactory_fn(best_p,best):
+                    reason = 'satisfactory'
+                    break
+            progress(source,event='strategy_finished',**records[strategy],best_error=best[1])
+            if reason:
+                break
+        if reason is None:
+            reason = monitor.reason(alternatives_tried=len(tried)==len(paths))
+        if reason is None and before_cycle == monitor.proposals:
+            reason = 'search_exhausted'
+    reason = reason or 'search_exhausted'
+    if config['directory']:
+        target = config['directory']/identity
+        target.mkdir(parents=True,exist_ok=True)
+        digest = hashlib.sha256(best[2].encode()).hexdigest()
+        (target/(digest+'.svg')).write_text(best[2],encoding='utf-8')
+        for record in records.values():
+            (target/(str(config['seed'])+'-'+record['strategy']+'.json')).write_text(json.dumps(
+                {**record,'stop_reason':reason,'parameters':best_p.tolist(),'svg':digest+'.svg',
+                 'validation':'search_loss_only_pending_semantic_and_pixel_gates'},indent=2,allow_nan=False)+'\n',encoding='utf-8')
+    report = dict(seed=config['seed'],additional_evaluations=monitor.proposals,
+        winning_strategy=winning,budget=config['budget'],effective_budget=monitor.limit,
+        max_budget=monitor.maximum,budget_extensions=monitor.extensions,stop_reason=reason,
+        attempts=list(records.values()),elapsed_seconds=round(session.elapsed-started,6))
+    progress(source,event='search_finished',stop_reason=reason,proposals=monitor.proposals,
+             budget=monitor.limit,best_error=best[1])
+    return best_p,best,report

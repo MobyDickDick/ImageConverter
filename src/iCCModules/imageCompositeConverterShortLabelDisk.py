@@ -9,8 +9,9 @@ import cv2
 import numpy as np
 
 from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _image, _register
-from src.iCCModules.imageCompositeConverterSearchPortfolio import progress, ranked_models, store_validated_variant
+from src.iCCModules.imageCompositeConverterSearchPortfolio import progress, ranked_models, store_validated_variant, validated_result
 from src.iCCModules.imageCompositeConverterPrimitiveScene import _local_quality
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search,pixel_quality
 
 
 def fit_short_label_disk(width, height, *, description, image, render_fn, error_fn):
@@ -70,7 +71,8 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
             return True
         # Absolute color error can favor a pale fill across the foreground
         # threshold. Prefer an already valid pixel fit before comparing error.
-        quality = [_local_quality(np.asarray(image), result['rendered']) for result in (candidate,incumbent)]
+        check_quality = pixel_quality if current_search() else _local_quality
+        quality = [check_quality(np.asarray(image), result['rendered']) for result in (candidate,incumbent)]
         passed = [bool(q and q['passed']) for q in quality]
         return passed[0] if passed[0] != passed[1] else candidate['error'] < incumbent['error']
 
@@ -97,6 +99,8 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
         return overlap, bool(accepted)
 
     for separate,weight in ranked_models(((False,400),(False,700),(True,400),(True,700))):
+        if current_search() and current_search().time_reason():
+            break
         model = f'{"separate" if separate else "native"}_{weight}'
         progress('short_label_disk',event='model_started',model=model)
 
@@ -138,10 +142,19 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
                     and abs(tx-cx)<r*.35 and cy<ty<cy+r*.9 and 3<=size<r*1.9
                     and .5<spacing<r and np.all((p[8:]>=0)&(p[8:]<=255)))
 
-        fitted = _register(p,8,build,valid,np.asarray(image),render_fn,error_fn,'short_label_disk_'+model)
+        semantic_evaluations = 0
+        def satisfactory(parameters, measured):
+            nonlocal semantic_evaluations
+            blank = render_fn(build(parameters,True),width,height)
+            semantic_evaluations += 1
+            return blank is not None and validate_glyphs({'rendered':measured[3]},blank)[1]
+
+        fitted = _register(p,8,build,valid,np.asarray(image),render_fn,error_fn,'short_label_disk_'+model,
+                           satisfactory_fn=satisfactory)
         if fitted is None:
             attempts.append(dict(model=model,accepted=False,reason='invalid_fit'))
             continue
+        fitted['evaluations'] += semantic_evaluations
         blank = render_fn(build(fitted['parameters'],True),width,height)
         if blank is None:
             continue
@@ -150,16 +163,22 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
         progress('short_label_disk',event='model_finished',**attempts[-1])
         if accepted:
             store_validated_variant(fitted, image=image, description=text, model=(separate,weight),
-                                    quality=_local_quality(np.asarray(image),fitted['rendered']))
+                                    quality=(pixel_quality if current_search() else _local_quality)(np.asarray(image),fitted['rendered']))
         if accepted and prefer(fitted, best):
             best = fitted
         elif separate and not accepted:
             rejected_glyph_models.append((weight, fitted))
+        if accepted and validated_result(fitted,np.asarray(image)):
+            break
+        if current_search() and separate and accepted:
+            rejected_glyph_models.append((weight,fitted))
     # Keep established successful fits unchanged. Unequal glyph advances and
     # intermediate stroke weights matter at small sizes; explore them only
     # when none of the original four models passes the same silhouette test.
-    if best is None:
+    if best is None or (current_search() and not pixel_quality(image,best['rendered'])['passed']):
         for weight, candidate in rejected_glyph_models:
+            if current_search() and current_search().time_reason():
+                break
             refined = _refine_glyphs(candidate, width, height, labels[0], weight,
                                      np.asarray(image), render_fn, error_fn)
             if refined is None:
@@ -171,9 +190,11 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
             progress('short_label_disk',event='model_finished',**attempts[-1])
             if accepted:
                 store_validated_variant(fitted, image=image, description=text, model=('glyph_offsets',weight),
-                                        quality=_local_quality(np.asarray(image),fitted['rendered']))
+                                        quality=(pixel_quality if current_search() else _local_quality)(np.asarray(image),fitted['rendered']))
                 if prefer(fitted, best):
                     best = fitted
+                if validated_result(fitted,np.asarray(image)):
+                    break
     if best:
         best['model_attempts'] = attempts
     return best

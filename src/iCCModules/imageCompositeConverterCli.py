@@ -82,7 +82,13 @@ def parseArgsImpl(
     parser.add_argument('--search-seed', type=int, default=int(os.environ['ICC_SEARCH_SEED']) if 'ICC_SEARCH_SEED' in os.environ else None,
                         help='Seed für wiederholbare alternative Suchwege')
     parser.add_argument('--search-budget', type=int, default=384,
-                        help='Zusätzliche Prüfungen je analytischem Modell, geteilt auf drei Suchwege (32..10000)')
+                        help='Basis zusätzlicher Prüfungen je Modell (32..10000); adaptiv bei spätem Fortschritt bis zum Vierfachen')
+    parser.add_argument('--search-policy',choices=('adaptive','fixed'),default='adaptive',
+                        help='adaptive: Erfolg/Stagnation/Fortschritt steuern die Suche; fixed: bisheriges Suchbudget')
+    parser.add_argument('--search-seconds',type=float,default=60.,
+                        help='Reguläre aktive Suchzeit je Bild für angeschlossene Registrierer (Default 60)')
+    parser.add_argument('--search-max-seconds',type=float,default=120.,
+                        help='Äußerste aktive Suchzeit bei deutlichem spätem Fortschritt (Default 120)')
     parser.add_argument(
         "--execution-mode",
         choices=("standard", "semantic-only"),
@@ -249,6 +255,10 @@ def parseArgsImpl(
     args = parser.parse_args(argv)
     if not 32 <= args.search_budget <= 10000:
         parser.error('--search-budget muss zwischen 32 und 10000 liegen')
+    import math
+    if (not math.isfinite(args.search_seconds) or not math.isfinite(args.search_max_seconds)
+            or not 0 < args.search_seconds <= args.search_max_seconds):
+        parser.error('--search-seconds und --search-max-seconds müssen endlich, positiv und aufsteigend sein')
     if args.search_seed is None:
         import secrets
         args.search_seed = secrets.randbits(32)
@@ -557,6 +567,8 @@ def runMainImpl(
         seed=getattr(args, 'search_seed', 0), budget=getattr(args, 'search_budget', 384),
         directory=Path(getattr(args, 'output_dir', None) or 'artifacts/converted_images')/'search',
         allow_memory=getattr(args, 'execution_mode', 'semantic-only') == 'standard',
+        adaptive=getattr(args,'search_policy','fixed')=='adaptive',
+        seconds=getattr(args,'search_seconds',60.),max_seconds=getattr(args,'search_max_seconds',120.),
     ):
         try:
             if args.ac08_regression_set:

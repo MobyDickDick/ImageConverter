@@ -10,11 +10,18 @@ python -m src.imageCompositeConverter --help
 
 ### Alternative Suchwege und Fortschritt
 
-`--search-mode portfolio` ist voreingestellt. Unterstützte analytische Modelle
+`--search-mode portfolio --search-policy adaptive` ist voreingestellt. Unterstützte analytische Modelle
 probieren bei verfehlter lokaler Pixelprüfung zusätzliche Suchwege aus. Die
 Kurztextregistrierung vergleicht außerdem normale/fette Schrift und gemeinsame/
 einzeln positionierte Zeichen. `--search-mode legacy` deaktiviert die zusätzlichen
 Parametersuchen für eine Ablation.
+
+Ein früh zufriedenstellender, semantisch geprüfter Fit beendet die angeschlossene
+Suche. Stagnation führt zum Suchwegwechsel und zum Ende weiterer ergebnisloser
+Arbeit. Deutlicher später Fortschritt erlaubt zusätzliche Zeit: standardmäßig
+60 Sekunden regulär, höchstens 120 Sekunden aktive Bildzeit über angeschlossene
+Modelle und Wiederholungen. `--search-seconds` und `--search-max-seconds` passen
+die Grenzen an. `--search-policy fixed` verwendet den bisherigen festen Ablauf.
 
 ```powershell
 python -m src.imageCompositeConverter EINGABE --descriptions-path BESCHREIBUNGEN.xml --output-dir AUSGABE --start ERSTES --end LETZTES --search-seed 42 --search-budget 384
@@ -22,8 +29,10 @@ python -m src.imageCompositeConverter EINGABE --descriptions-path BESCHREIBUNGEN
 
 Ohne expliziten Seed wird pro Aufruf ein neuer erzeugt. `--deterministic-order`
 allein fixiert nur die Dateireihenfolge; für die neue Suche zusätzlich
-`--search-seed` angeben. Das Budget begrenzt zusätzliche Vorschläge je Modell,
-nicht die gesamte Laufzeit. Identische SVGs werden innerhalb eines Fits aus
+`--search-seed` angeben. Zeitabhängige Abbrüche können je nach Rechner und Last
+an anderer Stelle eintreten. Das Vorschlagsbudget gilt je Modell: im festen
+Modus als Grenze, im adaptiven Modus als Basis mit höchstens vierfacher
+Verlängerung bei spätem Fortschritt. Identische SVGs werden innerhalb eines Fits aus
 einem Rendercache bewertet. `[Search]` und `AUSGABE/search/progress.jsonl`
 zeigen Suchweg, Vorschläge, tatsächliche Renderprüfungen und Fehlerwerte.
 
@@ -34,6 +43,8 @@ Strategien anhand von `strategy_memory.json` für spätere Suchen priorisieren.
 die neue Suche nicht als Vorlagen geladen. Grenzen und Lernprozess:
 [Plan-B-Nachbearbeitung](plan_b_learning_workflow.md),
 [UML-Diagramme](conversion_search_uml.md).
+Regeln, Zeit-/Prozessgrenzen und Nachweise:
+[Adaptive Suche](adaptive_conversion_search_2026-10-18.md).
 
 ### Katalogbereich konvertieren
 

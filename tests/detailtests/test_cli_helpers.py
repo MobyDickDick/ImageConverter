@@ -13,6 +13,16 @@ import pytest
 from src.iCCModules import imageCompositeConverterCli as cli_helpers
 
 
+@pytest.mark.parametrize('arguments',[
+    ['--search-seconds','0'],['--search-seconds','nan'],['--search-max-seconds','inf'],
+    ['--search-seconds','120','--search-max-seconds','60'],
+])
+def test_adaptive_search_time_limits_require_finite_positive_ordered_values(arguments):
+    with pytest.raises(SystemExit):
+        cli_helpers.parseArgsImpl(argv=['images',*arguments],ac08_regression_set_name='regression',
+            ac08_regression_variants=(),svg_render_subprocess_timeout_sec=5.)
+
+
 def test_parse_args_impl_applies_named_iterations_override() -> None:
     args = cli_helpers.parseArgsImpl(
         argv=["images", "--iterations", "17"],

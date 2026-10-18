@@ -6,6 +6,13 @@ ausreichende Zielarchitektur für allgemeine Rekonstruktion. Die Zahl drei ist
 nicht an sich schlecht. Problematisch sind der kleine Hypothesenraum, die frühe
 Festlegung auf eine Struktur und voneinander unabhängige Budgets.
 
+**Fortschreibung nach der Nutzerpräzisierung:** 60 Sekunden sind nun das
+normale Suchbudget. Später messbarer Fortschritt darf es begrenzt verlängern;
+früher Erfolg und echte Stagnation verkürzen es. Die inzwischen angeschlossene
+Steuerung, konkrete Grenzen und Nachweise stehen unter
+[Adaptive Konvertierungssuche](adaptive_conversion_search_2026-10-18.md).
+Die folgende Bestandsaufnahme beschreibt den Ausgangsstand.
+
 ## Was der Code tatsächlich tut
 
 - `SearchPortfolio.explore_parameters` versucht einmal rückwärts geordnete

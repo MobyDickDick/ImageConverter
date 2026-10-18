@@ -8,10 +8,12 @@ Die [Erfolgsübersicht](artifacts/satisfactory_conversions/README.md) enthält
 dokumentiert die Katalogbasis von 1.785 Bildern und die Grenzen älterer
 Pixelprüfungen. Eine sortierte Prüfliste unterstützt die persönliche Sichtprüfung.
 
-Die [Verfahrensprüfung](docs/conversion_search_review_2026-10-18.md) bewertet
-Suchraum und Forschungsstand. Ein gemeinsames 60-Sekunden-Budget je Bild und
-erweiterbare Szenenmodelle sind als nächste Architekturarbeiten dokumentiert;
-die heutigen drei Parametersuchwege decken dieses Ziel noch nicht vollständig ab.
+Die [adaptive Suche](docs/adaptive_conversion_search_2026-10-18.md) beendet
+angeschlossene Optimierungen früh bei geprüfter ausreichender Qualität, stoppt
+ergebnislose Wiederholungen und verlängert das normale Suchbudget von 60 Sekunden
+bei spätem Fortschritt begrenzt auf höchstens 120 Sekunden. Die
+[Verfahrensprüfung](docs/conversion_search_review_2026-10-18.md) beschreibt den
+weiteren Ausbau: allgemeine Szenensuche und durchgängige Prozessunterbrechung.
 
 Mehrere verwandte Vorlagen können als **Formenfamilie in einer Aufgabe**
 bearbeitet werden, auch mit unterschiedlichen Farben, Größen und ähnlichen

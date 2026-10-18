@@ -30,6 +30,7 @@ def resolveEarlyQualityGateImpl(
     *,
     successful_threshold_fn,
     environ: dict[str, str] | None = None,
+    adaptive_search: bool = False,
 ) -> dict[str, object]:
     """Resolve a conservative probe gate from persisted report data.
 
@@ -70,12 +71,12 @@ def resolveEarlyQualityGateImpl(
 
     abort_threshold = baseline * parsed_multiplier if baseline is not None else float("inf")
     return {
-        "enabled": bool(enabled and baseline is not None),
+        "enabled": bool(enabled and baseline is not None and not adaptive_search),
         "probe_iterations": probe_iterations,
         "baseline_error_per_pixel": baseline if baseline is not None else float("inf"),
         "threshold_multiplier": parsed_multiplier,
         "abort_error_per_pixel": abort_threshold,
-        "source": source if baseline is not None else "unavailable",
+        "source": 'adaptive-search-controls-progress' if adaptive_search else (source if baseline is not None else "unavailable"),
     }
 
 

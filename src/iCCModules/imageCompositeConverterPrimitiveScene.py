@@ -13,6 +13,7 @@ import cv2
 import numpy as np
 
 from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _register
+from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
 
 QUANTIFIED_SHAPE = re.compile(
     r'\b(ein(?:e|en|em)?|1|zwei|2|drei|3)\s+'
@@ -176,7 +177,10 @@ def fit_primitive_scene(width, height, *, description, image, render_fn, error_f
                                   for x,y,X,Y in regions]))
 
         fitted = _register(p,5*n,build,valid,pixels,render_fn,error_fn,
-                           'primitive_scene_v1',loss_fn=loss,preserve_initial_error=True)
+                           'primitive_scene_v1',loss_fn=loss,preserve_initial_error=True,
+                           satisfactory_fn=lambda p,measured: all(
+                               (q is not None and q['passed']) for q in
+                               (_local_quality(pixels[y:Y,x:X],measured[3][y:Y,x:X]) for x,y,X,Y in regions)))
         if fitted is None:
             continue
         qualities = [_local_quality(pixels[y:Y,x:X], fitted['rendered'][y:Y,x:X]) for x,y,X,Y in regions]
@@ -187,4 +191,6 @@ def fit_primitive_scene(width, height, *, description, image, render_fn, error_f
         fitted['object_quality'] = qualities
         if best is None or fitted['error'] < best['error']:
             best = fitted
+        if validated_result(fitted,pixels):
+            break
     return best

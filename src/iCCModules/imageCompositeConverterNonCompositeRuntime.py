@@ -29,6 +29,7 @@ from src.iCCModules.imageCompositeConverterSineDiagram import fit_sine_diagram
 from src.iCCModules.imageCompositeConverterChevronPanel import fit_chevron_panel
 from src.iCCModules.imageCompositeConverterThreeWayValve import fit_three_way_valve
 from src.iCCModules.imageCompositeConverterMotorValve import fit_motor_valve
+from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
 from src.iCCModules.imageCompositeConverterRadialDisk import fit_radial_disk
 from src.iCCModules.imageCompositeConverterFilledSymbols import fit_disk_bar, fit_solid_arrow
 from src.iCCModules.imageCompositeConverterDiskArrow import fit_disk_arrow
@@ -1491,6 +1492,7 @@ def runNonCompositeIterationImpl(
                 render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
             )
             if fitted is not None:
+                validated_result(fitted,perc_img)
                 if status == "non_composite_raster_primitive_scene":
                     params['primitive_scene_registration'] = {
                         key: fitted[key] for key in ('source', 'initial_error', 'error',
