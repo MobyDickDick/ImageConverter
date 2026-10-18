@@ -14,6 +14,7 @@ import random
 import numpy as np
 
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import SearchRun, raster_identity
+from src.iCCModules.imageCompositeConverterSearchScheduler import FairSelector, drain
 
 
 STRATEGIES = ('reverse_coordinates', 'shuffled_coordinates', 'joint_restart',
@@ -74,6 +75,7 @@ class Blackboard:
         self.rng = random.Random(config['seed'] ^ int(identity[:16], 16))
         self.bots = [Bot(name, parameters, incumbent, self.rng) for name in STRATEGIES]
         self.rng.shuffle(self.bots)
+        self.selector = FairSelector([bot.name for bot in self.bots])
         self.seen = {tuple(np.round(parameters, 8)): dict(valid=True, loss=incumbent[0], error=incumbent[1])}
         self.monitor = SearchRun(session, config['budget'], source=source)
         self.monitor.anchor = incumbent[0]
@@ -83,6 +85,13 @@ class Blackboard:
 
 
 def explore_bots(parameters, geometry_count, measure, incumbent, *, source, image,
+                 satisfactory_fn, session, config, emit):
+    return drain(explore_bots_steps(parameters, geometry_count, measure, incumbent,
+        source=source, image=image, satisfactory_fn=satisfactory_fn,
+        session=session, config=config, emit=emit))
+
+
+def explore_bots_steps(parameters, geometry_count, measure, incumbent, *, source, image,
                  satisfactory_fn, session, config, emit):
     # The initial SVG and objective values distinguish parameterizations and
     # differently weighted fits even when they have the same source label.
@@ -113,66 +122,77 @@ def explore_bots(parameters, geometry_count, measure, incumbent, *, source, imag
         if not active:
             board.reason = 'all_bots_inactive'
             break
-        for bot in active:
+        selected = board.selector.choose([bot.name for bot in active])
+        bot = next(bot for bot in active if bot.name == selected)
+        board.reason = monitor.reason(alternatives_tried=all(b.proposals or not b.active for b in board.bots))
+        if board.reason:
+            break
+        if board.best[0] < bot.best[0]-1e-9:
+            bot.parameters, bot.best = board.best_p.copy(), board.best
+            bot.anchor = min(bot.anchor, board.best[0])
+            bot.received += 1
+            emit(source, event='bot_message', sender=board.winning, recipient=bot.name,
+                 message='adopt_best', best_error=board.best[1])
+            board.messages += 1
+        emit(source, event='strategy_started', strategy=bot.name, proposals=monitor.proposals,
+             budget=monitor.limit, seed=config['seed'], best_error=board.best[1])
+        used = generated = 0
+        slice_elapsed, slice_loss = 0., board.best[0]
+        # A slice counts unique measurements; duplicate generation is bounded too.
+        while used < slice_size and generated < 64 and board.generated < monitor.maximum*8:
             board.reason = monitor.reason(alternatives_tried=all(b.proposals or not b.active for b in board.bots))
             if board.reason:
                 break
-            if board.best[0] < bot.best[0]-1e-9:
-                bot.parameters, bot.best = board.best_p.copy(), board.best
-                bot.anchor = min(bot.anchor, board.best[0])
-                bot.received += 1
-                emit(source, event='bot_message', sender=board.winning, recipient=bot.name,
-                     message='adopt_best', best_error=board.best[1])
-                board.messages += 1
-            emit(source, event='strategy_started', strategy=bot.name, proposals=monitor.proposals,
-                 budget=monitor.limit, seed=config['seed'], best_error=board.best[1])
-            used = generated = 0
-            # A slice counts unique measurements; duplicate generation is bounded too.
-            while used < slice_size and generated < 64 and board.generated < monitor.maximum*8:
-                board.reason = monitor.reason(alternatives_tried=all(b.proposals or not b.active for b in board.bots))
-                if board.reason:
-                    break
-                probe = bot.proposal(geometry_count, board.rng, board.seed)
-                board.generated += 1
-                generated += 1
-                if probe is None:
-                    retire(bot, 'no_parameters')
-                    break
-                key = tuple(np.round(probe, 8))
-                if key in board.seen:
-                    board.cache_hits += 1
-                    continue
-                measured = measure(probe)
-                admissible = bool(measured is not None and math.isfinite(measured[0])
-                                  and math.isfinite(measured[1]) and measured[1] <= incumbent[1]+1e-9)
-                board.seen[key] = dict(valid=admissible,
-                    loss=float(measured[0]) if measured is not None and math.isfinite(measured[0]) else None,
-                    error=float(measured[1]) if measured is not None and math.isfinite(measured[1]) else None,
-                    bot=bot.name)
-                used += 1
-                bot.proposals += 1
-                bot.stale += 1
-                if admissible and measured[0] < bot.best[0]-1e-9:
-                    bot.parameters, bot.best = probe.copy(), measured
-                if admissible and measured[0] < board.best[0]-1e-9 and measured[1] <= board.best[1]+1e-9:
-                    board.best_p, board.best, board.winning = probe.copy(), measured, bot.name
-                    session.observe(board.best[1], evaluation=False)
-                    bot.improved = True
-                # Peer messages alone never earn a worker more time.
-                if admissible and bot.anchor-measured[0] >= max(1e-9, abs(bot.anchor)*session.policy.relative_gain):
-                    bot.anchor, bot.stale = measured[0], 0
-                monitor.observe(board.best[0])
-                if satisfactory():
-                    board.reason = 'satisfactory'
-                    break
-                if bot.stale >= board.patience:
-                    retire(bot, 'stagnation')
-                    break
-            if bot.active and not used and not board.reason:
-                retire(bot, 'duplicate_exhaustion')
-            emit(source, event='strategy_finished', **bot.record(), best_error=board.best[1])
-            if board.reason:
+            probe = bot.proposal(geometry_count, board.rng, board.seed)
+            board.generated += 1
+            generated += 1
+            if probe is None:
+                retire(bot, 'no_parameters')
                 break
+            key = tuple(np.round(probe, 8))
+            if key in board.seen:
+                board.cache_hits += 1
+                continue
+            step_started = session.elapsed
+            measured = measure(probe)
+            admissible = bool(measured is not None and math.isfinite(measured[0])
+                              and math.isfinite(measured[1]) and measured[1] <= incumbent[1]+1e-9)
+            board.seen[key] = dict(valid=admissible,
+                loss=float(measured[0]) if measured is not None and math.isfinite(measured[0]) else None,
+                error=float(measured[1]) if measured is not None and math.isfinite(measured[1]) else None,
+                bot=bot.name)
+            used += 1
+            bot.proposals += 1
+            bot.stale += 1
+            if admissible and measured[0] < bot.best[0]-1e-9:
+                bot.parameters, bot.best = probe.copy(), measured
+            if admissible and measured[0] < board.best[0]-1e-9 and measured[1] <= board.best[1]+1e-9:
+                board.best_p, board.best, board.winning = probe.copy(), measured, bot.name
+                session.observe(board.best[1], evaluation=False)
+                bot.improved = True
+            # Peer messages alone never earn a worker more time.
+            if admissible and bot.anchor-measured[0] >= max(1e-9, abs(bot.anchor)*session.policy.relative_gain):
+                bot.anchor, bot.stale = measured[0], 0
+            monitor.observe(board.best[0])
+            passed = satisfactory()
+            slice_elapsed += max(0., session.elapsed-step_started)
+            if passed:
+                board.reason = 'satisfactory'
+                yield board.best[0]
+                break
+            if bot.stale >= board.patience:
+                retire(bot, 'stagnation')
+                yield board.best[0]
+                break
+            yield board.best[0]
+            if slice_elapsed >= .05:
+                break
+        if bot.active and not used and not board.reason:
+            retire(bot, 'duplicate_exhaustion')
+        emit(source, event='strategy_finished', **bot.record(), best_error=board.best[1])
+        board.selector.record(bot.name, slice_elapsed, slice_loss, board.best[0])
+        if board.reason:
+            break
     board.reason = board.reason or 'search_exhausted'
     records = [bot.record() for bot in board.bots]
     report = dict(seed=config['seed'], additional_evaluations=monitor.proposals-start_proposals,
@@ -181,7 +201,10 @@ def explore_bots(parameters, geometry_count, measure, incumbent, *, source, imag
         budget_extensions=monitor.extensions, stop_reason=board.reason, attempts=records,
         elapsed_seconds=round(session.elapsed-started, 6), reused_blackboard=reused,
         remembered_candidates=len(board.seen), duplicate_proposals=board.cache_hits,
-        messages=board.messages, bot_patience=board.patience)
+        messages=board.messages, bot_patience=board.patience,
+        scheduler={name: dict(turns=share.turns, seconds=round(share.seconds,6),
+                              progress_per_second=share.rate)
+                   for name,share in board.selector.shares.items()})
     if config['directory']:
         # Short paths also work in Windows checkouts without long-path support.
         target = config['directory']/'bots'

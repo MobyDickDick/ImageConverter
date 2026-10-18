@@ -1,0 +1,43 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\.tmp\scheduler-evidence-release\before\reports\.image-worker-0zsrh7jj\reports_out_dir\neutral_09_worker.log
+[INFO] Konvertiere neutral_09.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite neutral_09.png ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Serifenlose Beschriftung "mV". Keine Anschlüsse.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe MV
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 3.16390625}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 1.505625}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 192, "current_error": 2.108229166666667}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 237, "best_error": 1.6644270833333332}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 1.6644270833333332, "glyph_iou": 0.8537549407114624, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 4.570989583333334}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 3.7586979166666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 192, "current_error": 1.98625}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 219, "best_error": 1.9800520833333333}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 1.9800520833333333, "glyph_iou": 0.7963636363636364, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 4.594270833333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 2.8133854166666667}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 192, "current_error": 3.4509375}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 237, "best_error": 2.9433854166666666}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 2.9433854166666666, "glyph_iou": 0.70625, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_700"}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 64, "current_error": 7.255885416666667}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 128, "current_error": 4.1628645833333335}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 192, "current_error": 4.000052083333333}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_finished", "evaluations": 216, "best_error": 3.9809895833333333}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_700", "error": 3.9809895833333333, "glyph_iou": 0.6534090909090909, "accepted": false}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registering", "evaluations": 64, "current_error": 1.84078125}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registering", "evaluations": 128, "current_error": 1.0419791666666667}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registering", "evaluations": 192, "current_error": 1.1416145833333333}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registration_finished", "evaluations": 237, "best_error": 0.66484375}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "glyph_offsets_400", "error": 0.66484375, "glyph_iou": 0.9873949579831933, "accepted": true}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "candidate_satisfactory", "elapsed_seconds": 2.282, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 1146}
+[Search] {"source": "neutral_09", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 2.297, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 1146, "stop_reason": "satisfactory"}
+[INFO] Konvertiert neutral_09.png | Parameter: mode=semantic_badge, label=MV, variant_name=NEUTRAL_09 | Qualität: Optimierungsfehler/Pixel=0.000104, Mean-Delta²=11.635157, RGB-RMSE/Kanal=1.969362, Raumscore=36.368314, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.7s

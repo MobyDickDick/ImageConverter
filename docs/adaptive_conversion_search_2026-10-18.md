@@ -1,5 +1,10 @@
 # Adaptive Konvertierungssuche (2026-10-18)
 
+**Suchscheduler:** Fortsetzbare Modellregistrierungen, gemeinsame Zeitscheiben,
+Fortschritt pro aktiver Sekunde und reservierte Erkundung sind jetzt als
+[SEARCH-SCHEDULER-02](next_arbeitspaket_2026-10-18_search_scheduler.md)
+angeschlossen. Die folgenden Zahlen beschreiben den damaligen Ausgangsstand.
+
 **Folgepaket:** Die reguläre `semantic-only`-CLI umfasst jetzt die kooperative
 Suche mit einer [durchgängigen Prozessaufsicht](next_arbeitspaket_2026-10-18_search_deadline.md)
 einschließlich Abschlussprüfung und gesicherter Zwischenstandübergabe. Die weiter

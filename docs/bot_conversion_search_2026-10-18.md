@@ -1,7 +1,11 @@
 # Kooperatives Bot-Modell für die Konvertierung
 
 Die adaptive Parametersuche verwendet sechs Bots je angeschlossenem Modell.
-Sie laufen abwechselnd in Abschnitten mit höchstens acht neuen Vorschlägen.
+Sie laufen in Abschnitten mit höchstens acht neuen Vorschlägen beziehungsweise
+50 Millisekunden aktiver Rechenzeit. Der
+[Suchscheduler](next_arbeitspaket_2026-10-18_search_scheduler.md) verteilt weitere
+Abschnitte nach relativem Fortschritt pro aktiver Sekunde und reserviert
+regelmäßig Erkundung für alle noch aktiven Verfahren.
 Jeder besitzt einen eigenen Suchzustand. Das sind algorithmische Sucharbeiter
 im Konverter; sie benötigen keine Sprachmodell- oder Netzwerkaufrufe.
 
@@ -56,12 +60,15 @@ Bildzeit, bei spätem deutlichem Fortschritt höchstens 120 Sekunden.
 je Modell, bei Fortschritt höchstens vierfach. Sechs Bots erhalten zusammen
 dieses Budget; es wird nicht versechsfacht. Auch beim Mindestbudget 32 erhält
 jeder Bot einen ersten Abschnitt, sofern zuvor weder Erfolg noch Zeitende
-eintritt. Ein Seed reproduziert die Folge bei gleichem Ablauf.
+eintritt. Ein Seed reproduziert die Folge bei gleichen Messkosten und gleichem
+Ablauf. Gemessene Laufzeitunterschiede können die adaptive Reihenfolge ändern;
+der feste Vergleichsmodus bleibt für zeitunabhängige Wiederholungen verfügbar.
 
 `--search-policy fixed` behält den bisherigen Vergleichsablauf. Der neue
-Scheduler arbeitet kooperativ und unterbricht einen blockierten nativen
-Renderer weiterhin nicht. Die bestehende externe Prozessgrenze des
-Katalogrunners bleibt dafür notwendig. Einzelheiten:
+Scheduler arbeitet kooperativ. Die reguläre `semantic-only`-CLI unterbricht
+blockierte native Aufrufe über die durchgängige Prozessaufsicht aus
+SEARCH-DEADLINE-01; der ausdrücklich gewählte direkte Ablauf braucht weiterhin
+eine äußere Prozessgrenze. Einzelheiten:
 [adaptive Zeitsteuerung](adaptive_conversion_search_2026-10-18.md).
 
 ## Nächste algorithmische Verbesserung

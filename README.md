@@ -13,6 +13,12 @@ Die reguläre `semantic-only`-CLI verwendet jetzt [überwachte Bildbudgets](docs
 verlängerbar bis 120 Sekunden. Blockierte Worker und Renderkinder werden beendet;
 bereits geprüfte Zwischenstände bleiben erhalten.
 
+Der [Suchscheduler](docs/next_arbeitspaket_2026-10-18_search_scheduler.md)
+verteilt gemeinsame Zeitscheiben zwischen Kurztext-Modellalternativen und
+priorisiert die sechs Parameterverfahren nach Fortschritt pro aktiver Sekunde.
+Regelmäßige Erkundung, Stagnationsabschaltung und ein bildgebundener Rendercache
+ergänzen die bestehenden Zeit- und Qualitätsgrenzen.
+
 Die [adaptive Suche](docs/adaptive_conversion_search_2026-10-18.md) beendet
 angeschlossene Optimierungen früh bei geprüfter ausreichender Qualität, stoppt
 ergebnislose Wiederholungen und verlängert das normale Suchbudget von 60 Sekunden

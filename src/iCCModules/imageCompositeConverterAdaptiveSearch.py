@@ -47,6 +47,8 @@ class ImageSearch:
         self.previous_output_error = None
         # Conversion-local blackboards. Never loaded as templates for other images.
         self.bot_searches = {}
+        self.scheduler_history = []
+        self.registration_rasters = {}
         self.on_progress = None
         self.on_validated = None
 

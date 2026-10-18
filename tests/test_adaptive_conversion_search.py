@@ -116,7 +116,9 @@ def test_stagnation_waits_for_alternative_strategies():
 
 def explore(*, satisfactory=None, flat=False, penalty=False):
     visited=[]
+    clock=Clock()
     def measure(p):
+        clock.now += .001
         visited.append(tuple(p))
         loss=10. if flat else float(np.sum((p-2)**2))
         return loss,100. if penalty else loss,str(tuple(p)),np.zeros((1,1,3),dtype=np.uint8)
@@ -125,7 +127,11 @@ def explore(*, satisfactory=None, flat=False, penalty=False):
     if penalty:
         incumbent=(incumbent[0],incumbent[0],incumbent[2],incumbent[3])
     with search_configuration(mode='portfolio',adaptive=True,seed=3,budget=384):
-        with configured_image_search('source'):
+        with configured_image_search('source') as session:
+            # Scheduling uses measured durations. Reproducibility requires the
+            # same costs as well as the same seed, not OS scheduling jitter.
+            session.clock = clock
+            session.active_since = clock.now
             result=explore_parameters(seed,2,measure,incumbent,source='test',image=np.zeros((1,1,3)),
                                       satisfactory_fn=satisfactory)
     return result,visited
