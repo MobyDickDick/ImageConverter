@@ -1,0 +1,664 @@
+{
+  "reason": "Repeat the retained anomalous batch; excluded from the primary matrix",
+  "baseline_commit": "00d48fe5ce9d8ff08a3ef2fd28088fc734c025d8",
+  "records": [
+    {
+      "case_id": "case_00",
+      "split": "known",
+      "family": "motor",
+      "mode": "before",
+      "seed": 42,
+      "budget_seconds": 60.0,
+      "cli_returncode": 0,
+      "cli_batch_seconds": 11.187000000005355,
+      "image_seconds": 0.625,
+      "search_control": {
+        "candidate_evaluations": 1,
+        "elapsed_seconds": 0.625,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 60.0,
+        "max_seconds": 60.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      },
+      "runtime_satisfactory": true,
+      "telemetry": {
+        "render_started": 11,
+        "render_finished": 11,
+        "render_failed": 0,
+        "render_invalid": 0,
+        "render_active_seconds": 0.009781799948541448,
+        "workers_observed": 1,
+        "source_sha256": {
+          "src/imageCompositeConverter.py": "16a920f099279fe03703d95f3df2d5a0eb929b36a7532e3a4a89d5b3e12b894a",
+          "src/iCCModules/imageCompositeConverterAdaptiveSearch.py": "f81b7b6b19a62be4fcab06f585fb96832556eef4fb3a73c893ce59412225abd7",
+          "src/iCCModules/imageCompositeConverterFilledSymbols.py": "c79f3597b6998c06da531e3eb2eb177d70ee70930f3a3585e9a7fa2bdcba4a2a",
+          "src/iCCModules/imageCompositeConverterSearchBots.py": "64bb492f0c0dfdc708383f5c57656cbd2218a589b37f624ea9181a4a131b55a1",
+          "src/iCCModules/imageCompositeConverterShortLabelDisk.py": "f3f1e2edbd77577919dcd3ba399da62b0b23914db0b7e9738f0a6c8ba7ba3627"
+        },
+        "render_interrupted": 0
+      },
+      "satisfactory": true,
+      "status": "satisfactory",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.008269006386399269,
+          "foreground_mse": 0.015911422669887543,
+          "edge_alignment": 0.7713208794593811,
+          "foreground_iou": 0.8501440922190202
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 7,
+          "path_count": 3,
+          "path_command_count": 12,
+          "path_complexity_ratio": 1.7143
+        }
+      },
+      "structure": {
+        "passed": true,
+        "expected_topology": "three_way_valve_and_M_disk"
+      },
+      "svg": "outputs/before-60s-42-case_00.svg",
+      "svg_sha256": "da4cbde283b44467a1388821cf5cdc1ca7adc6cb0060f7ec3c11f0db05a4ebdd"
+    },
+    {
+      "case_id": "case_01",
+      "split": "known",
+      "family": "label",
+      "mode": "before",
+      "seed": 42,
+      "budget_seconds": 60.0,
+      "cli_returncode": 0,
+      "cli_batch_seconds": 11.187000000005355,
+      "image_seconds": 1.328,
+      "search_control": {
+        "candidate_evaluations": 411,
+        "elapsed_seconds": 1.328,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 60.0,
+        "max_seconds": 60.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      },
+      "runtime_satisfactory": true,
+      "telemetry": {
+        "render_started": 429,
+        "render_finished": 429,
+        "render_failed": 0,
+        "render_invalid": 0,
+        "render_active_seconds": 0.3107964000082575,
+        "workers_observed": 1,
+        "source_sha256": {
+          "src/imageCompositeConverter.py": "16a920f099279fe03703d95f3df2d5a0eb929b36a7532e3a4a89d5b3e12b894a",
+          "src/iCCModules/imageCompositeConverterAdaptiveSearch.py": "f81b7b6b19a62be4fcab06f585fb96832556eef4fb3a73c893ce59412225abd7",
+          "src/iCCModules/imageCompositeConverterFilledSymbols.py": "c79f3597b6998c06da531e3eb2eb177d70ee70930f3a3585e9a7fa2bdcba4a2a",
+          "src/iCCModules/imageCompositeConverterSearchBots.py": "64bb492f0c0dfdc708383f5c57656cbd2218a589b37f624ea9181a4a131b55a1",
+          "src/iCCModules/imageCompositeConverterShortLabelDisk.py": "f3f1e2edbd77577919dcd3ba399da62b0b23914db0b7e9738f0a6c8ba7ba3627"
+        },
+        "render_interrupted": 0
+      },
+      "satisfactory": true,
+      "status": "satisfactory",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.001406881958246231,
+          "foreground_mse": 0.002519624074921012,
+          "edge_alignment": 0.9215097427368164,
+          "foreground_iou": 0.9010416666666666
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "structure": {
+        "passed": true,
+        "expected_text": "rF"
+      },
+      "svg": "outputs/before-60s-42-case_01.svg",
+      "svg_sha256": "3dbe8b65ed95e6e7fdaa85c5751077035afed84d4310626fd3e7b3260029b393"
+    },
+    {
+      "case_id": "case_02",
+      "split": "holdout",
+      "family": "label",
+      "mode": "before",
+      "seed": 42,
+      "budget_seconds": 60.0,
+      "cli_returncode": 0,
+      "cli_batch_seconds": 11.187000000005355,
+      "image_seconds": 0.953,
+      "search_control": {
+        "candidate_evaluations": 238,
+        "elapsed_seconds": 0.953,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 60.0,
+        "max_seconds": 60.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      },
+      "runtime_satisfactory": true,
+      "telemetry": {
+        "render_started": 262,
+        "render_finished": 262,
+        "render_failed": 0,
+        "render_invalid": 0,
+        "render_active_seconds": 0.2220012000470888,
+        "workers_observed": 1,
+        "source_sha256": {
+          "src/imageCompositeConverter.py": "16a920f099279fe03703d95f3df2d5a0eb929b36a7532e3a4a89d5b3e12b894a",
+          "src/iCCModules/imageCompositeConverterAdaptiveSearch.py": "f81b7b6b19a62be4fcab06f585fb96832556eef4fb3a73c893ce59412225abd7",
+          "src/iCCModules/imageCompositeConverterFilledSymbols.py": "c79f3597b6998c06da531e3eb2eb177d70ee70930f3a3585e9a7fa2bdcba4a2a",
+          "src/iCCModules/imageCompositeConverterSearchBots.py": "64bb492f0c0dfdc708383f5c57656cbd2218a589b37f624ea9181a4a131b55a1",
+          "src/iCCModules/imageCompositeConverterShortLabelDisk.py": "f3f1e2edbd77577919dcd3ba399da62b0b23914db0b7e9738f0a6c8ba7ba3627"
+        },
+        "render_interrupted": 0
+      },
+      "satisfactory": true,
+      "status": "satisfactory",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0018532875692471862,
+          "foreground_mse": 0.003862170735374093,
+          "edge_alignment": 0.8619515299797058,
+          "foreground_iou": 0.9811422413793104
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "structure": {
+        "passed": true,
+        "expected_text": "Hz"
+      },
+      "svg": "outputs/before-60s-42-case_02.svg",
+      "svg_sha256": "ede55a87d9e291c0a19ae2831af5e57d9a4c09030ba819f475b2853c8034ba4e"
+    },
+    {
+      "case_id": "case_03",
+      "split": "holdout",
+      "family": "label",
+      "mode": "before",
+      "seed": 42,
+      "budget_seconds": 60.0,
+      "cli_returncode": 0,
+      "cli_batch_seconds": 11.187000000005355,
+      "image_seconds": 1.625,
+      "search_control": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 1.625,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 60.0,
+        "max_seconds": 60.0,
+        "stop_reason": "stagnation",
+        "time_extensions": 0
+      },
+      "runtime_satisfactory": false,
+      "telemetry": {
+        "render_started": 190,
+        "render_finished": 190,
+        "render_failed": 0,
+        "render_invalid": 0,
+        "render_active_seconds": 0.16972710005939007,
+        "workers_observed": 2,
+        "source_sha256": {
+          "src/imageCompositeConverter.py": "16a920f099279fe03703d95f3df2d5a0eb929b36a7532e3a4a89d5b3e12b894a",
+          "src/iCCModules/imageCompositeConverterAdaptiveSearch.py": "f81b7b6b19a62be4fcab06f585fb96832556eef4fb3a73c893ce59412225abd7",
+          "src/iCCModules/imageCompositeConverterFilledSymbols.py": "c79f3597b6998c06da531e3eb2eb177d70ee70930f3a3585e9a7fa2bdcba4a2a",
+          "src/iCCModules/imageCompositeConverterSearchBots.py": "64bb492f0c0dfdc708383f5c57656cbd2218a589b37f624ea9181a4a131b55a1",
+          "src/iCCModules/imageCompositeConverterShortLabelDisk.py": "f3f1e2edbd77577919dcd3ba399da62b0b23914db0b7e9738f0a6c8ba7ba3627"
+        },
+        "render_interrupted": 0
+      },
+      "satisfactory": false,
+      "status": "output_failed_independent_gate",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.03530009835958481,
+          "foreground_mse": 0.07020819187164307,
+          "edge_alignment": 0.26031631231307983,
+          "foreground_iou": 0.6339193381592554
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "structure": {
+        "passed": false,
+        "expected_text": "Hz"
+      },
+      "svg": "outputs/before-60s-42-case_03.svg",
+      "svg_sha256": "2be40ebe46b13422d820019901df06769fe81167d8ac8d3e21210dc3d868701b"
+    },
+    {
+      "case_id": "case_04",
+      "split": "holdout",
+      "family": "primitives",
+      "mode": "before",
+      "seed": 42,
+      "budget_seconds": 60.0,
+      "cli_returncode": 0,
+      "cli_batch_seconds": 11.187000000005355,
+      "image_seconds": 0.656,
+      "search_control": {
+        "candidate_evaluations": 25,
+        "elapsed_seconds": 0.656,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 60.0,
+        "max_seconds": 60.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      },
+      "runtime_satisfactory": true,
+      "telemetry": {
+        "render_started": 27,
+        "render_finished": 27,
+        "render_failed": 0,
+        "render_invalid": 0,
+        "render_active_seconds": 0.035028900048928335,
+        "workers_observed": 1,
+        "source_sha256": {
+          "src/imageCompositeConverter.py": "16a920f099279fe03703d95f3df2d5a0eb929b36a7532e3a4a89d5b3e12b894a",
+          "src/iCCModules/imageCompositeConverterAdaptiveSearch.py": "f81b7b6b19a62be4fcab06f585fb96832556eef4fb3a73c893ce59412225abd7",
+          "src/iCCModules/imageCompositeConverterFilledSymbols.py": "c79f3597b6998c06da531e3eb2eb177d70ee70930f3a3585e9a7fa2bdcba4a2a",
+          "src/iCCModules/imageCompositeConverterSearchBots.py": "64bb492f0c0dfdc708383f5c57656cbd2218a589b37f624ea9181a4a131b55a1",
+          "src/iCCModules/imageCompositeConverterShortLabelDisk.py": "f3f1e2edbd77577919dcd3ba399da62b0b23914db0b7e9738f0a6c8ba7ba3627"
+        },
+        "render_interrupted": 0
+      },
+      "satisfactory": true,
+      "status": "satisfactory",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0005632538232021034,
+          "foreground_mse": 0.013133854605257511,
+          "edge_alignment": 0.8928549885749817,
+          "foreground_iou": 0.9279093717816684
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "structure": {
+        "passed": true,
+        "detected_count": 2,
+        "expected_count": 2,
+        "max_bbox_error_px": 1.2167694699994023,
+        "boxes": [
+          [
+            22.0,
+            46.0,
+            28.0,
+            23.0
+          ],
+          [
+            93.0,
+            49.0,
+            47.0,
+            48.0
+          ]
+        ],
+        "shape_class_passed": true
+      },
+      "svg": "outputs/before-60s-42-case_04.svg",
+      "svg_sha256": "65875b034aff2d3c36aa3401b5cae91ce3f493f08b19f01c92adea75e9eb35e3"
+    },
+    {
+      "case_id": "case_05",
+      "split": "holdout",
+      "family": "primitives",
+      "mode": "before",
+      "seed": 42,
+      "budget_seconds": 60.0,
+      "cli_returncode": 0,
+      "cli_batch_seconds": 11.187000000005355,
+      "image_seconds": 0.765,
+      "search_control": {
+        "candidate_evaluations": 125,
+        "elapsed_seconds": 0.765,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 60.0,
+        "max_seconds": 60.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      },
+      "runtime_satisfactory": true,
+      "telemetry": {
+        "render_started": 127,
+        "render_finished": 127,
+        "render_failed": 0,
+        "render_invalid": 0,
+        "render_active_seconds": 0.14725440001348034,
+        "workers_observed": 1,
+        "source_sha256": {
+          "src/imageCompositeConverter.py": "16a920f099279fe03703d95f3df2d5a0eb929b36a7532e3a4a89d5b3e12b894a",
+          "src/iCCModules/imageCompositeConverterAdaptiveSearch.py": "f81b7b6b19a62be4fcab06f585fb96832556eef4fb3a73c893ce59412225abd7",
+          "src/iCCModules/imageCompositeConverterFilledSymbols.py": "c79f3597b6998c06da531e3eb2eb177d70ee70930f3a3585e9a7fa2bdcba4a2a",
+          "src/iCCModules/imageCompositeConverterSearchBots.py": "64bb492f0c0dfdc708383f5c57656cbd2218a589b37f624ea9181a4a131b55a1",
+          "src/iCCModules/imageCompositeConverterShortLabelDisk.py": "f3f1e2edbd77577919dcd3ba399da62b0b23914db0b7e9738f0a6c8ba7ba3627"
+        },
+        "render_interrupted": 0
+      },
+      "satisfactory": true,
+      "status": "satisfactory",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0006816172390244901,
+          "foreground_mse": 0.009982820600271225,
+          "edge_alignment": 0.8818790316581726,
+          "foreground_iou": 0.9611856033874383
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "structure": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 1.4555524806000761,
+        "boxes": [
+          [
+            32.0,
+            12.0,
+            33.0,
+            33.0
+          ],
+          [
+            22.0,
+            67.0,
+            47.0,
+            41.0
+          ],
+          [
+            61.0,
+            135.0,
+            31.0,
+            31.0
+          ]
+        ],
+        "shape_class_passed": true
+      },
+      "svg": "outputs/before-60s-42-case_05.svg",
+      "svg_sha256": "d416db758ef464050590bd477284cbff76451677b718451708e688437c3a1b38"
+    },
+    {
+      "case_id": "case_06",
+      "split": "unseen_family",
+      "family": "ellipse",
+      "mode": "before",
+      "seed": 42,
+      "budget_seconds": 60.0,
+      "cli_returncode": 0,
+      "cli_batch_seconds": 11.187000000005355,
+      "image_seconds": 1.578,
+      "search_control": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 1.578,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 60.0,
+        "max_seconds": 60.0,
+        "stop_reason": "stagnation",
+        "time_extensions": 0
+      },
+      "runtime_satisfactory": false,
+      "telemetry": {
+        "render_started": 180,
+        "render_finished": 180,
+        "render_failed": 0,
+        "render_invalid": 0,
+        "render_active_seconds": 0.2277418999292422,
+        "workers_observed": 2,
+        "source_sha256": {
+          "src/imageCompositeConverter.py": "16a920f099279fe03703d95f3df2d5a0eb929b36a7532e3a4a89d5b3e12b894a",
+          "src/iCCModules/imageCompositeConverterAdaptiveSearch.py": "f81b7b6b19a62be4fcab06f585fb96832556eef4fb3a73c893ce59412225abd7",
+          "src/iCCModules/imageCompositeConverterFilledSymbols.py": "c79f3597b6998c06da531e3eb2eb177d70ee70930f3a3585e9a7fa2bdcba4a2a",
+          "src/iCCModules/imageCompositeConverterSearchBots.py": "64bb492f0c0dfdc708383f5c57656cbd2218a589b37f624ea9181a4a131b55a1",
+          "src/iCCModules/imageCompositeConverterShortLabelDisk.py": "f3f1e2edbd77577919dcd3ba399da62b0b23914db0b7e9738f0a6c8ba7ba3627"
+        },
+        "render_interrupted": 0
+      },
+      "satisfactory": false,
+      "status": "output_failed_independent_gate",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.015205319970846176,
+          "foreground_mse": 0.23710887134075165,
+          "edge_alignment": 0.09634435176849365,
+          "foreground_iou": 0.028391167192429023
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "structure": {
+        "passed": false,
+        "detected_count": 1,
+        "expected_count": 1,
+        "max_bbox_error_px": 15.0,
+        "boxes": [
+          [
+            36.0,
+            22.0,
+            108.0,
+            66.0
+          ]
+        ],
+        "shape_class_passed": false
+      },
+      "svg": "outputs/before-60s-42-case_06.svg",
+      "svg_sha256": "1a3b1d580c68870dcc0da8b23064b94e8890d2167b277ab365e22490fc9dab08"
+    },
+    {
+      "case_id": "case_07",
+      "split": "unseen_family",
+      "family": "triangle",
+      "mode": "before",
+      "seed": 42,
+      "budget_seconds": 60.0,
+      "cli_returncode": 0,
+      "cli_batch_seconds": 11.187000000005355,
+      "image_seconds": 1.641,
+      "search_control": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 1.641,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 60.0,
+        "max_seconds": 60.0,
+        "stop_reason": "stagnation",
+        "time_extensions": 0
+      },
+      "runtime_satisfactory": false,
+      "telemetry": {
+        "render_started": 188,
+        "render_finished": 188,
+        "render_failed": 0,
+        "render_invalid": 0,
+        "render_active_seconds": 0.24459319989546202,
+        "workers_observed": 2,
+        "source_sha256": {
+          "src/imageCompositeConverter.py": "16a920f099279fe03703d95f3df2d5a0eb929b36a7532e3a4a89d5b3e12b894a",
+          "src/iCCModules/imageCompositeConverterAdaptiveSearch.py": "f81b7b6b19a62be4fcab06f585fb96832556eef4fb3a73c893ce59412225abd7",
+          "src/iCCModules/imageCompositeConverterFilledSymbols.py": "c79f3597b6998c06da531e3eb2eb177d70ee70930f3a3585e9a7fa2bdcba4a2a",
+          "src/iCCModules/imageCompositeConverterSearchBots.py": "64bb492f0c0dfdc708383f5c57656cbd2218a589b37f624ea9181a4a131b55a1",
+          "src/iCCModules/imageCompositeConverterShortLabelDisk.py": "f3f1e2edbd77577919dcd3ba399da62b0b23914db0b7e9738f0a6c8ba7ba3627"
+        },
+        "render_interrupted": 0
+      },
+      "satisfactory": false,
+      "status": "output_failed_independent_gate",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.014116707257926464,
+          "foreground_mse": 0.3449157774448395,
+          "edge_alignment": 0.07481414824724197,
+          "foreground_iou": 0.0012345679012345679
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 1,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "structure": {
+        "passed": false,
+        "detected_count": 1,
+        "expected_count": 1,
+        "max_bbox_error_px": 105.0,
+        "boxes": [
+          [
+            94.0,
+            12.0,
+            8.0,
+            12.0
+          ]
+        ],
+        "shape_class_passed": false
+      },
+      "svg": "outputs/before-60s-42-case_07.svg",
+      "svg_sha256": "767800be41c3ef7e03ede0976849b1eb4ab07d75e7e6f368dae39112c29b01e7"
+    }
+  ],
+  "checks": {
+    "same_acceptance": true,
+    "byte_identical": 8,
+    "cli_batch_seconds": 11.187000000005355
+  }
+}
