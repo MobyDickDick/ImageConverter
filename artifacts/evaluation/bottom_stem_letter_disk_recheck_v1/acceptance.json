@@ -1,0 +1,508 @@
+{
+  "baseline": {
+    "baseline_sha256": "84910229ea11ff62c3df741d47f5fbce11a1a831f9c7702e1b0771682fbc64cb",
+    "cases": {
+      "anonymous_stem_disk_00": {
+        "dimensions": {
+          "height": 35,
+          "width": 20
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4525322914123535,
+          "error_per_pixel": 0.03450112586905677,
+          "object_mask_iou": 0.18666666666666668,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_stem_disk_01": {
+        "dimensions": {
+          "height": 45,
+          "width": 25
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.3579100966453552,
+          "error_per_pixel": 0.035609195782071,
+          "object_mask_iou": 0.07216494845360824,
+          "semantic_score": 0.0
+        }
+      },
+      "anonymous_stem_disk_02": {
+        "dimensions": {
+          "height": 25,
+          "width": 15
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5274397730827332,
+          "error_per_pixel": 0.03397548669181725,
+          "object_mask_iou": 0.18699186991869918,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "baseline_mode": "fresh original-description production CLI before changes",
+      "commit": "8c0d2ab66",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_stem_disk_00": "24fd5f050f48f3636a0e289128a1810fbd7d9e5b4a4585add7090c2cb3dc94f0",
+        "anonymous_stem_disk_01": "38eb6b31544ba80a8561839e3cd1438f601871dcfe713e61b14d9f03f340905c",
+        "anonymous_stem_disk_02": "31953c855fe585f896fd8517ae0edc3732c9cb095d5dea77fbe75c05a46a348f"
+      },
+      "search_seed": 20261017,
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 619.8728637695312,
+      "after_svg": "after/anonymous_stem_disk_00.svg",
+      "after_svg_sha256": "47639ae791ebc292a9c8a0d97fcdd7eb66a4cb580a1c42987c96094f63e2d77f",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0921. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 6730.30712890625,
+      "before_svg": "before/anonymous_stem_disk_00.svg",
+      "before_svg_sha256": "516fce3f8b960a75f10f95ab7c80208c6693e0f855ccd9f7c5204b97e6eead97",
+      "case_id": "anonymous_stem_disk_00",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"Q\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/AC0921_M.jpg",
+      "input_sha256": "24fd5f050f48f3636a0e289128a1810fbd7d9e5b4a4585add7090c2cb3dc94f0",
+      "role": "target",
+      "source": "AC0921_M.jpg",
+      "source_sha256": "24fd5f050f48f3636a0e289128a1810fbd7d9e5b4a4585add7090c2cb3dc94f0"
+    },
+    {
+      "after_mean_delta2": 271.0826721191406,
+      "after_svg": "after/anonymous_stem_disk_01.svg",
+      "after_svg_sha256": "9aa9fd91f5ddec41b8f7ee61863e74cea23cdd2a3b2db22f9293ab4eedd11965",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0921. Dokumentiert ist die gro\u00dfe Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 6946.4638671875,
+      "before_svg": "before/anonymous_stem_disk_01.svg",
+      "before_svg_sha256": "3c85c31644a831cd5e858e93dd4866504eaa6e25e080a1892523a3d6fcd747d1",
+      "case_id": "anonymous_stem_disk_01",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"Q\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/AC0921_L.jpg",
+      "input_sha256": "38eb6b31544ba80a8561839e3cd1438f601871dcfe713e61b14d9f03f340905c",
+      "role": "size_holdout",
+      "source": "AC0921_L.jpg",
+      "source_sha256": "38eb6b31544ba80a8561839e3cd1438f601871dcfe713e61b14d9f03f340905c"
+    },
+    {
+      "after_mean_delta2": 418.0159912109375,
+      "after_svg": "after/anonymous_stem_disk_02.svg",
+      "after_svg_sha256": "b80c1dbcf7e5c4a538f487f01f4be3902f8f2501ca5042c86874a6678ac34391",
+      "baseline_description": "Unzugeordnete Wurzelform aus der Serie AC0921. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundk\u00f6rper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschlie\u00dfend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell pr\u00fcfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "before_mean_delta2": 6627.76806640625,
+      "before_svg": "before/anonymous_stem_disk_02.svg",
+      "before_svg_sha256": "736c3f75c2a5218bb6b0c748c37f49a10cd5bd64fe26a117cfb989d415f17a08",
+      "case_id": "anonymous_stem_disk_02",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"Q\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/AC0921_S.jpg",
+      "input_sha256": "31953c855fe585f896fd8517ae0edc3732c9cb095d5dea77fbe75c05a46a348f",
+      "role": "size_holdout",
+      "source": "AC0921_S.jpg",
+      "source_sha256": "31953c855fe585f896fd8517ae0edc3732c9cb095d5dea77fbe75c05a46a348f"
+    }
+  ],
+  "measurement": {
+    "canny_thresholds": [
+      50,
+      140
+    ],
+    "foreground_threshold": 210,
+    "output": "saved CLI SVG re-rendered with production renderer"
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "satisfaction_gate": {
+    "baseline_sha256": "84910229ea11ff62c3df741d47f5fbce11a1a831f9c7702e1b0771682fbc64cb",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8475635647773743,
+          "error_per_pixel": 0.0031776130399565872,
+          "object_mask_iou": 0.8737373737373737,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.4525322914123535,
+          "error_per_pixel": 0.03450112586905677,
+          "object_mask_iou": 0.18666666666666668,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_stem_disk_00",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0031776130399565872,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 4
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9295,
+            "edge_alignment": 0.8476,
+            "pixel_similarity": 0.9968,
+            "semantic_score": 1.0,
+            "structure_score": 0.8737
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9535133838653564,
+          "error_per_pixel": 0.0013896330750692843,
+          "object_mask_iou": 0.9017543859649123,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.3579100966453552,
+          "error_per_pixel": 0.035609195782071,
+          "object_mask_iou": 0.07216494845360824,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_stem_disk_01",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0013896330750692843,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 4
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9635,
+            "edge_alignment": 0.9535,
+            "pixel_similarity": 0.9986,
+            "semantic_score": 1.0,
+            "structure_score": 0.9018
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.9021561145782471,
+          "error_per_pixel": 0.0021428475776544276,
+          "object_mask_iou": 0.8706896551724138,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.5274397730827332,
+          "error_per_pixel": 0.03397548669181725,
+          "object_mask_iou": 0.18699186991869918,
+          "semantic_score": 0.0
+        },
+        "case_id": "anonymous_stem_disk_02",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0021428475776544276,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 4
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9427,
+            "edge_alignment": 0.9022,
+            "pixel_similarity": 0.9979,
+            "semantic_score": 1.0,
+            "structure_score": 0.8707
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "baseline_mode": "fresh original-description production CLI before changes",
+      "commit": "8c0d2ab66",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_stem_disk_00": "24fd5f050f48f3636a0e289128a1810fbd7d9e5b4a4585add7090c2cb3dc94f0",
+        "anonymous_stem_disk_01": "38eb6b31544ba80a8561839e3cd1438f601871dcfe713e61b14d9f03f340905c",
+        "anonymous_stem_disk_02": "31953c855fe585f896fd8517ae0edc3732c9cb095d5dea77fbe75c05a46a348f"
+      },
+      "search_seed": 20261017,
+      "seed": 0,
+      "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 3,
+      "improved": 3,
+      "satisfactory": 3,
+      "technically_completed": 3
+    }
+  },
+  "schema_version": "labeled_disk_recheck_v1",
+  "strict_pixel_gates": {
+    "anonymous_stem_disk_00": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.8475635647773743,
+        "foreground_iou": 0.8973214285714286,
+        "foreground_mse": 0.008752952329814434,
+        "normalized_mse": 0.0031776127871125937
+      },
+      "satisfactory": true
+    },
+    "anonymous_stem_disk_01": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9535133838653564,
+        "foreground_iou": 0.9388379204892966,
+        "foreground_mse": 0.004130145069211721,
+        "normalized_mse": 0.0013896330492570996
+      },
+      "satisfactory": true
+    },
+    "anonymous_stem_disk_02": {
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "failures": [],
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9021561145782471,
+        "foreground_iou": 0.9013157894736842,
+        "foreground_mse": 0.004899835679680109,
+        "normalized_mse": 0.002142847515642643
+      },
+      "satisfactory": true
+    }
+  }
+}

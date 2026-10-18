@@ -1,0 +1,12 @@
+============================= test session starts =============================
+platform win32 -- Python 3.10.11, pytest-8.4.2, pluggy-1.6.0 -- C:\Users\marku\myCloud\imageConverter\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\marku\myCloud\imageConverter
+configfile: pytest.ini
+collecting ... collected 2 items
+
+tests/test_conversion_regression_smoke.py::test_ac08_regression_smoke_run_creates_expected_outputs PASSED [ 50%]
+tests/test_conversion_regression_smoke.py::test_ac0100_quality_uses_algorithmic_elementwise_fit PASSED [100%]
+
+- generated xml file: C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\bottom_stem_letter_disk_recheck_v1\checks\conversion_smokes.xml -
+============================= 2 passed in 12.71s ==============================

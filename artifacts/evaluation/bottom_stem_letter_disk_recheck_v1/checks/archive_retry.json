@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+    "-m",
+    "tools.recheck_satisfactory_archive",
+    "--archive",
+    "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\a21i",
+    "--output-dir",
+    ".tmp/ar21",
+    "--max-cases-per-worker",
+    "50"
+  ],
+  "exit_code": 0,
+  "initial_failure": "OSError 22 while writing batch_failure_summary.csv after 95 saved outputs; failed worker not counted"
+}

@@ -1,0 +1,640 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere AC0910_L.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0910_L.jpg ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung "Lux" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe LUX
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 24.0256}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 11.4512}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 192, "current_error": 9.608}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 208, "best_error": 9.216}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 9.216, "glyph_iou": 0.7205882352941176, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 25.966933333333333}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 19.432}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 0, "budget": 384, "seed": 0, "best_error": 15.3984}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 192, "current_error": 15.432533333333334}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 32, "budget": 384, "best_error": 14.533333333333333}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 64, "budget": 384, "best_error": 12.0896}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 256, "current_error": 13.7584}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 96, "budget": 384, "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 113, "error": 11.4208, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 113, "budget": 384, "seed": 0, "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 320, "current_error": 12.7632}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 177, "budget": 384, "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 209, "budget": 384, "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 113, "error": 11.1536, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "joint_restart", "proposals": 226, "budget": 384, "seed": 0, "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 258, "budget": 384, "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 384, "current_error": 15.076266666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 290, "budget": 384, "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 322, "budget": 384, "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 448, "current_error": 11.299733333333334}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 354, "budget": 384, "best_error": 11.105066666666668}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 11.167466666666666, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.105066666666668}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 457, "best_error": 11.105066666666668}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 11.105066666666668, "glyph_iou": 0.6323529411764706, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_700"}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 64, "current_error": 25.72}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 128, "current_error": 13.254933333333334}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 0, "budget": 384, "seed": 0, "best_error": 9.9776}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 192, "current_error": 9.929066666666667}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 32, "budget": 384, "best_error": 9.365333333333334}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 64, "budget": 384, "best_error": 9.234133333333334}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 256, "current_error": 11.5984}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 96, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 118, "error": 9.1744, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "joint_restart", "proposals": 118, "budget": 384, "seed": 0, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 320, "current_error": 9.645333333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 182, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 214, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 246, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 9.251733333333334, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 246, "budget": 384, "seed": 0, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 384, "current_error": 9.7008}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 278, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 310, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 448, "current_error": 10.5808}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 342, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 118, "error": 9.253333333333334, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_finished", "evaluations": 465, "best_error": 9.1744}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_700", "error": 9.1744, "glyph_iou": 0.7105263157894737, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 24.152}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 12.24}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 192, "current_error": 7.6832}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 210, "best_error": 7.6832}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 7.6832, "glyph_iou": 0.6629213483146067, "accepted": false}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registering", "evaluations": 64, "current_error": 8.1232}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registering", "evaluations": 128, "current_error": 7.288}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registering", "evaluations": 192, "current_error": 6.5898666666666665}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registration_finished", "evaluations": 220, "best_error": 6.504}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "glyph_offsets_400", "error": 6.504, "glyph_iou": 0.8405797101449275, "accepted": true}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registering", "evaluations": 64, "current_error": 7.7776}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registering", "evaluations": 128, "current_error": 7.088}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registering", "evaluations": 192, "current_error": 7.376}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registration_finished", "evaluations": 207, "best_error": 6.9152}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "glyph_offsets_700", "error": 6.9152, "glyph_iou": 0.6666666666666666, "accepted": false}
+[WARN] AC0910_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.357143, localized_error_fraction=0.789171).
+[INFO] Konvertiert AC0910_L.jpg | Parameter: mode=semantic_badge, label=LUX, variant_name=AC0910_L | Qualität: Optimierungsfehler/Pixel=0.010406, Mean-Delta²=405.575989, RGB-RMSE/Kanal=11.627209, Raumscore=1433.074887, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=2.0s
+[INFO] Konvertiere AC0910_M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0910_M.jpg ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung "Lux" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe LUX
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 20.48}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 9.515}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 178, "best_error": 9.2075}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 9.2075, "glyph_iou": 0.8095238095238095, "accepted": true}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 28.0375}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 28.368333333333332}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "joint_restart", "proposals": 0, "budget": 384, "seed": 0, "best_error": 28.475}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 192, "current_error": 28.539166666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 32, "budget": 384, "best_error": 28.470833333333335}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 64, "budget": 384, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 96, "budget": 384, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 256, "current_error": 28.6875}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 128, "budget": 384, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 28.720833333333335, "improved": false, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 128, "budget": 384, "seed": 0, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 160, "budget": 384, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 320, "current_error": 28.311666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 192, "budget": 384, "best_error": 28.411666666666665}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 224, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 256, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 128, "error": 28.401666666666667, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 256, "budget": 384, "seed": 0, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 384, "current_error": 28.458333333333332}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 288, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 320, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 448, "current_error": 28.589166666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 352, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 384, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 128, "error": 28.62, "improved": false, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 466, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 28.401666666666667, "glyph_iou": 0.4716981132075472, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_700"}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 64, "current_error": 26.5075}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 128, "current_error": 11.53}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "joint_restart", "proposals": 0, "budget": 384, "seed": 0, "best_error": 9.7225}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 192, "current_error": 19.510833333333334}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 32, "budget": 384, "best_error": 9.46}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 64, "budget": 384, "best_error": 9.199166666666667}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 96, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 256, "current_error": 9.095}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 128, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 9.241666666666667, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 128, "budget": 384, "seed": 0, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 160, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 192, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 320, "current_error": 9.133333333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 224, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 120, "error": 9.1, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 248, "budget": 384, "seed": 0, "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 280, "budget": 384, "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 384, "current_error": 14.506666666666666}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 312, "budget": 384, "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 344, "budget": 384, "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 448, "current_error": 9.406666666666666}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 122, "error": 9.199166666666667, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_finished", "evaluations": 450, "best_error": 9.1}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_700", "error": 9.1, "glyph_iou": 0.7619047619047619, "accepted": true}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 15.523333333333333}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 11.585}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 191, "best_error": 9.0}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 9.0, "glyph_iou": 0.6792452830188679, "accepted": true}
+[WARN] AC0910_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.663043, localized_error_fraction=0.828783).
+[INFO] Konvertiert AC0910_M.jpg | Parameter: mode=semantic_badge, label=LUX, variant_name=AC0910_M | Qualität: Optimierungsfehler/Pixel=0.022500, Mean-Delta²=636.825012, RGB-RMSE/Kanal=14.569660, Raumscore=2138.436804, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=2.8s
+[INFO] Konvertiere AC0910_S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0910_S.jpg ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung "Lux" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe LUX
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 14.352592592592593}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 13.72888888888889}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 181, "best_error": 10.973333333333333}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 10.973333333333333, "glyph_iou": 0.6216216216216216, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 15.746666666666666}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 14.435555555555556}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 155, "best_error": 12.87111111111111}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 12.87111111111111, "glyph_iou": 0.525, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_700"}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 64, "current_error": 21.91111111111111}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 128, "current_error": 12.93037037037037}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_finished", "evaluations": 158, "best_error": 11.96}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_700", "error": 11.96, "glyph_iou": 0.6153846153846154, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 24.45777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 22.32888888888889}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 192, "current_error": 17.494814814814816}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 0, "budget": 384, "seed": 0, "best_error": 16.31111111111111}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 32, "budget": 384, "best_error": 16.133333333333333}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 256, "current_error": 16.586666666666666}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 64, "budget": 384, "best_error": 16.133333333333333}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 96, "budget": 384, "best_error": 14.875555555555556}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 115, "error": 13.573333333333334, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 115, "budget": 384, "seed": 0, "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 320, "current_error": 16.635555555555555}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 147, "budget": 384, "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 179, "budget": 384, "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 211, "budget": 384, "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 384, "current_error": 13.757037037037037}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 122, "error": 11.697777777777778, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "joint_restart", "proposals": 237, "budget": 384, "seed": 0, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "joint_restart", "proposals": 269, "budget": 384, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "joint_restart", "proposals": 301, "budget": 384, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 448, "current_error": 15.994074074074074}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "joint_restart", "proposals": 333, "budget": 384, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "joint_restart", "proposals": 365, "budget": 384, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 13.908148148148149, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 494, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 11.697777777777778, "glyph_iou": 0.7619047619047619, "accepted": true}
+[WARN] AC0910_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.843137, localized_error_fraction=0.902925).
+[INFO] Konvertiert AC0910_S.jpg | Parameter: mode=semantic_badge, label=LUX, variant_name=AC0910_S | Qualität: Optimierungsfehler/Pixel=0.051990, Mean-Delta²=1076.560059, RGB-RMSE/Kanal=18.943425, Raumscore=3627.618082, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=2.4s
+[INFO] Konvertiere AC0910_S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0910_S.jpg ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung "Lux" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe LUX
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 14.352592592592593}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 13.72888888888889}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 181, "best_error": 10.973333333333333}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 10.973333333333333, "glyph_iou": 0.6216216216216216, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 15.746666666666666}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 14.435555555555556}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 155, "best_error": 12.87111111111111}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 12.87111111111111, "glyph_iou": 0.525, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_700"}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 64, "current_error": 21.91111111111111}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 128, "current_error": 12.93037037037037}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_finished", "evaluations": 158, "best_error": 11.96}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_700", "error": 11.96, "glyph_iou": 0.6153846153846154, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 24.45777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 22.32888888888889}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 192, "current_error": 17.494814814814816}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 0, "budget": 384, "seed": 0, "best_error": 16.31111111111111}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 32, "budget": 384, "best_error": 16.133333333333333}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 256, "current_error": 16.586666666666666}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 64, "budget": 384, "best_error": 16.133333333333333}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 96, "budget": 384, "best_error": 14.875555555555556}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 115, "error": 13.573333333333334, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 115, "budget": 384, "seed": 0, "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 320, "current_error": 16.635555555555555}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 147, "budget": 384, "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 179, "budget": 384, "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 211, "budget": 384, "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 384, "current_error": 13.757037037037037}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 122, "error": 11.697777777777778, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "joint_restart", "proposals": 237, "budget": 384, "seed": 0, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "joint_restart", "proposals": 269, "budget": 384, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "joint_restart", "proposals": 301, "budget": 384, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 448, "current_error": 15.994074074074074}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "joint_restart", "proposals": 333, "budget": 384, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "joint_restart", "proposals": 365, "budget": 384, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 13.908148148148149, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 494, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 11.697777777777778, "glyph_iou": 0.7619047619047619, "accepted": true}
+[WARN] AC0910_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.843137, localized_error_fraction=0.902925).
+[INFO] Konvertiert AC0910_S.jpg | Parameter: mode=semantic_badge, label=LUX, variant_name=AC0910_S | Qualität: Optimierungsfehler/Pixel=0.051990, Mean-Delta²=1076.560059, RGB-RMSE/Kanal=18.943425, Raumscore=3627.618082, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=2.5s
+[INFO] Konvertiere AC0910_M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0910_M.jpg ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung "Lux" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe LUX
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 20.48}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 9.515}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 178, "best_error": 9.2075}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 9.2075, "glyph_iou": 0.8095238095238095, "accepted": true}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 28.0375}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 28.368333333333332}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "joint_restart", "proposals": 0, "budget": 384, "seed": 0, "best_error": 28.475}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 192, "current_error": 28.539166666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 32, "budget": 384, "best_error": 28.470833333333335}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 64, "budget": 384, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 96, "budget": 384, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 256, "current_error": 28.6875}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 128, "budget": 384, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 28.720833333333335, "improved": false, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 128, "budget": 384, "seed": 0, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 160, "budget": 384, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 320, "current_error": 28.311666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 192, "budget": 384, "best_error": 28.411666666666665}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 224, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 256, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 128, "error": 28.401666666666667, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 256, "budget": 384, "seed": 0, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 384, "current_error": 28.458333333333332}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 288, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 320, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 448, "current_error": 28.589166666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 352, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 384, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 128, "error": 28.62, "improved": false, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 466, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 28.401666666666667, "glyph_iou": 0.4716981132075472, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_700"}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 64, "current_error": 26.5075}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 128, "current_error": 11.53}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "joint_restart", "proposals": 0, "budget": 384, "seed": 0, "best_error": 9.7225}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 192, "current_error": 19.510833333333334}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 32, "budget": 384, "best_error": 9.46}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 64, "budget": 384, "best_error": 9.199166666666667}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 96, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 256, "current_error": 9.095}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 128, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 9.241666666666667, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 128, "budget": 384, "seed": 0, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 160, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 192, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 320, "current_error": 9.133333333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 224, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 120, "error": 9.1, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 248, "budget": 384, "seed": 0, "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 280, "budget": 384, "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 384, "current_error": 14.506666666666666}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 312, "budget": 384, "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 344, "budget": 384, "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 448, "current_error": 9.406666666666666}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 122, "error": 9.199166666666667, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_finished", "evaluations": 450, "best_error": 9.1}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_700", "error": 9.1, "glyph_iou": 0.7619047619047619, "accepted": true}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 15.523333333333333}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 11.585}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 191, "best_error": 9.0}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 9.0, "glyph_iou": 0.6792452830188679, "accepted": true}
+[WARN] AC0910_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.663043, localized_error_fraction=0.828783).
+[INFO] Konvertiert AC0910_M.jpg | Parameter: mode=semantic_badge, label=LUX, variant_name=AC0910_M | Qualität: Optimierungsfehler/Pixel=0.022500, Mean-Delta²=636.825012, RGB-RMSE/Kanal=14.569660, Raumscore=2138.436804, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=3.5s
+[INFO] Konvertiere AC0910_L.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0910_L.jpg ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung "Lux" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe LUX
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 24.0256}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 11.4512}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 192, "current_error": 9.608}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 208, "best_error": 9.216}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 9.216, "glyph_iou": 0.7205882352941176, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 25.966933333333333}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 19.432}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 0, "budget": 384, "seed": 0, "best_error": 15.3984}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 192, "current_error": 15.432533333333334}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 32, "budget": 384, "best_error": 14.533333333333333}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 64, "budget": 384, "best_error": 12.0896}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 256, "current_error": 13.7584}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 96, "budget": 384, "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 113, "error": 11.4208, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 113, "budget": 384, "seed": 0, "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 320, "current_error": 12.7632}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 177, "budget": 384, "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 209, "budget": 384, "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 113, "error": 11.1536, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "joint_restart", "proposals": 226, "budget": 384, "seed": 0, "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 258, "budget": 384, "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 384, "current_error": 15.076266666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 290, "budget": 384, "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 322, "budget": 384, "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 448, "current_error": 11.299733333333334}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 354, "budget": 384, "best_error": 11.105066666666668}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 11.167466666666666, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.105066666666668}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 457, "best_error": 11.105066666666668}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 11.105066666666668, "glyph_iou": 0.6323529411764706, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_700"}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 64, "current_error": 25.72}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 128, "current_error": 13.254933333333334}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 0, "budget": 384, "seed": 0, "best_error": 9.9776}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 192, "current_error": 9.929066666666667}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 32, "budget": 384, "best_error": 9.365333333333334}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 64, "budget": 384, "best_error": 9.234133333333334}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 256, "current_error": 11.5984}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 96, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 118, "error": 9.1744, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "joint_restart", "proposals": 118, "budget": 384, "seed": 0, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 320, "current_error": 9.645333333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 182, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 214, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 246, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 9.251733333333334, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 246, "budget": 384, "seed": 0, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 384, "current_error": 9.7008}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 278, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 310, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 448, "current_error": 10.5808}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 342, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 118, "error": 9.253333333333334, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_finished", "evaluations": 465, "best_error": 9.1744}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_700", "error": 9.1744, "glyph_iou": 0.7105263157894737, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 24.152}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 12.24}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 192, "current_error": 7.6832}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 210, "best_error": 7.6832}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 7.6832, "glyph_iou": 0.6629213483146067, "accepted": false}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registering", "evaluations": 64, "current_error": 8.1232}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registering", "evaluations": 128, "current_error": 7.288}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registering", "evaluations": 192, "current_error": 6.5898666666666665}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registration_finished", "evaluations": 220, "best_error": 6.504}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "glyph_offsets_400", "error": 6.504, "glyph_iou": 0.8405797101449275, "accepted": true}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registering", "evaluations": 64, "current_error": 7.7776}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registering", "evaluations": 128, "current_error": 7.088}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registering", "evaluations": 192, "current_error": 7.376}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registration_finished", "evaluations": 207, "best_error": 6.9152}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "glyph_offsets_700", "error": 6.9152, "glyph_iou": 0.6666666666666666, "accepted": false}
+[WARN] AC0910_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.357143, localized_error_fraction=0.789171).
+[INFO] Konvertiert AC0910_L.jpg | Parameter: mode=semantic_badge, label=LUX, variant_name=AC0910_L | Qualität: Optimierungsfehler/Pixel=0.010406, Mean-Delta²=405.575989, RGB-RMSE/Kanal=11.627209, Raumscore=1433.074887, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=4.9s
+[INFO] Konvertiere AC0910_S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0910_S.jpg ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung "Lux" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe LUX
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 14.352592592592593}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 13.72888888888889}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 181, "best_error": 10.973333333333333}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 10.973333333333333, "glyph_iou": 0.6216216216216216, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 15.746666666666666}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 14.435555555555556}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 155, "best_error": 12.87111111111111}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 12.87111111111111, "glyph_iou": 0.525, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_700"}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 64, "current_error": 21.91111111111111}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 128, "current_error": 12.93037037037037}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_finished", "evaluations": 158, "best_error": 11.96}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_700", "error": 11.96, "glyph_iou": 0.6153846153846154, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 24.45777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 22.32888888888889}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 192, "current_error": 17.494814814814816}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 0, "budget": 384, "seed": 0, "best_error": 16.31111111111111}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 32, "budget": 384, "best_error": 16.133333333333333}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 256, "current_error": 16.586666666666666}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 64, "budget": 384, "best_error": 16.133333333333333}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 96, "budget": 384, "best_error": 14.875555555555556}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 115, "error": 13.573333333333334, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 115, "budget": 384, "seed": 0, "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 320, "current_error": 16.635555555555555}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 147, "budget": 384, "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 179, "budget": 384, "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 211, "budget": 384, "best_error": 13.573333333333334}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 384, "current_error": 13.757037037037037}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 122, "error": 11.697777777777778, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_started", "strategy": "joint_restart", "proposals": 237, "budget": 384, "seed": 0, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "joint_restart", "proposals": 269, "budget": 384, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "joint_restart", "proposals": 301, "budget": 384, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 448, "current_error": 15.994074074074074}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "joint_restart", "proposals": 333, "budget": 384, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "searching", "strategy": "joint_restart", "proposals": 365, "budget": 384, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 13.908148148148149, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 494, "best_error": 11.697777777777778}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 11.697777777777778, "glyph_iou": 0.7619047619047619, "accepted": true}
+[WARN] AC0910_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.843137, localized_error_fraction=0.902925).
+[INFO] Konvertiert AC0910_S.jpg | Parameter: mode=semantic_badge, label=LUX, variant_name=AC0910_S | Qualität: Optimierungsfehler/Pixel=0.051990, Mean-Delta²=1076.560059, RGB-RMSE/Kanal=18.943425, Raumscore=3627.618082, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=2.8s
+[INFO] Konvertiere AC0910_M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0910_M.jpg ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung "Lux" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe LUX
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 20.48}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 9.515}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 178, "best_error": 9.2075}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 9.2075, "glyph_iou": 0.8095238095238095, "accepted": true}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 28.0375}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 28.368333333333332}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "joint_restart", "proposals": 0, "budget": 384, "seed": 0, "best_error": 28.475}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 192, "current_error": 28.539166666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 32, "budget": 384, "best_error": 28.470833333333335}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 64, "budget": 384, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 96, "budget": 384, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 256, "current_error": 28.6875}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 128, "budget": 384, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 28.720833333333335, "improved": false, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 128, "budget": 384, "seed": 0, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 160, "budget": 384, "best_error": 28.436666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 320, "current_error": 28.311666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 192, "budget": 384, "best_error": 28.411666666666665}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 224, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 256, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 128, "error": 28.401666666666667, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 256, "budget": 384, "seed": 0, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 384, "current_error": 28.458333333333332}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 288, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 320, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 448, "current_error": 28.589166666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 352, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 384, "budget": 384, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 128, "error": 28.62, "improved": false, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 466, "best_error": 28.401666666666667}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 28.401666666666667, "glyph_iou": 0.4716981132075472, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_700"}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 64, "current_error": 26.5075}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 128, "current_error": 11.53}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "joint_restart", "proposals": 0, "budget": 384, "seed": 0, "best_error": 9.7225}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 192, "current_error": 19.510833333333334}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 32, "budget": 384, "best_error": 9.46}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 64, "budget": 384, "best_error": 9.199166666666667}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 96, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 256, "current_error": 9.095}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 128, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 9.241666666666667, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 128, "budget": 384, "seed": 0, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 160, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 192, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 320, "current_error": 9.133333333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 224, "budget": 384, "best_error": 9.165833333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 120, "error": 9.1, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 248, "budget": 384, "seed": 0, "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 280, "budget": 384, "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 384, "current_error": 14.506666666666666}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 312, "budget": 384, "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 344, "budget": 384, "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 448, "current_error": 9.406666666666666}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 122, "error": 9.199166666666667, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_finished", "evaluations": 450, "best_error": 9.1}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_700", "error": 9.1, "glyph_iou": 0.7619047619047619, "accepted": true}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 15.523333333333333}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 11.585}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 191, "best_error": 9.0}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 9.0, "glyph_iou": 0.6792452830188679, "accepted": true}
+[WARN] AC0910_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.663043, localized_error_fraction=0.828783).
+[INFO] Konvertiert AC0910_M.jpg | Parameter: mode=semantic_badge, label=LUX, variant_name=AC0910_M | Qualität: Optimierungsfehler/Pixel=0.022500, Mean-Delta²=636.825012, RGB-RMSE/Kanal=14.569660, Raumscore=2138.436804, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=3.7s
+[INFO] Konvertiere AC0910_L.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0910_L.jpg ---
+Bildbeschreibung: Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung "Lux" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe LUX
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_400"}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 64, "current_error": 24.0256}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 128, "current_error": 11.4512}
+[Search] {"source": "short_label_disk_separate_400", "event": "registering", "evaluations": 192, "current_error": 9.608}
+[Search] {"source": "short_label_disk_separate_400", "event": "registration_finished", "evaluations": 208, "best_error": 9.216}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_400", "error": 9.216, "glyph_iou": 0.7205882352941176, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_400"}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 64, "current_error": 25.966933333333333}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 128, "current_error": 19.432}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 0, "budget": 384, "seed": 0, "best_error": 15.3984}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 192, "current_error": 15.432533333333334}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 32, "budget": 384, "best_error": 14.533333333333333}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 64, "budget": 384, "best_error": 12.0896}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 256, "current_error": 13.7584}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "reverse_coordinates", "proposals": 96, "budget": 384, "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 113, "error": 11.4208, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 113, "budget": 384, "seed": 0, "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 320, "current_error": 12.7632}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 177, "budget": 384, "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 209, "budget": 384, "best_error": 11.36}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 113, "error": 11.1536, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_started", "strategy": "joint_restart", "proposals": 226, "budget": 384, "seed": 0, "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 258, "budget": 384, "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 384, "current_error": 15.076266666666667}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 290, "budget": 384, "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 322, "budget": 384, "best_error": 11.1536}
+[Search] {"source": "short_label_disk_native_400", "event": "registering", "evaluations": 448, "current_error": 11.299733333333334}
+[Search] {"source": "short_label_disk_native_400", "event": "searching", "strategy": "joint_restart", "proposals": 354, "budget": 384, "best_error": 11.105066666666668}
+[Search] {"source": "short_label_disk_native_400", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 11.167466666666666, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 11.105066666666668}
+[Search] {"source": "short_label_disk_native_400", "event": "registration_finished", "evaluations": 457, "best_error": 11.105066666666668}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_400", "error": 11.105066666666668, "glyph_iou": 0.6323529411764706, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "native_700"}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 64, "current_error": 25.72}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 128, "current_error": 13.254933333333334}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 0, "budget": 384, "seed": 0, "best_error": 9.9776}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 192, "current_error": 9.929066666666667}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 32, "budget": 384, "best_error": 9.365333333333334}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 64, "budget": 384, "best_error": 9.234133333333334}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 256, "current_error": 11.5984}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "reverse_coordinates", "proposals": 96, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 118, "error": 9.1744, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "joint_restart", "proposals": 118, "budget": 384, "seed": 0, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 320, "current_error": 9.645333333333333}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 182, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 214, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "joint_restart", "proposals": 246, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 128, "error": 9.251733333333334, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 246, "budget": 384, "seed": 0, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 384, "current_error": 9.7008}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 278, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 310, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "registering", "evaluations": 448, "current_error": 10.5808}
+[Search] {"source": "short_label_disk_native_700", "event": "searching", "strategy": "shuffled_coordinates", "proposals": 342, "budget": 384, "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 118, "error": 9.253333333333334, "improved": true, "validation": "search_loss_only_pending_semantic_and_pixel_gates", "best_error": 9.1744}
+[Search] {"source": "short_label_disk_native_700", "event": "registration_finished", "evaluations": 465, "best_error": 9.1744}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "native_700", "error": 9.1744, "glyph_iou": 0.7105263157894737, "accepted": false}
+[Search] {"source": "short_label_disk", "event": "model_started", "model": "separate_700"}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 64, "current_error": 24.152}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 128, "current_error": 12.24}
+[Search] {"source": "short_label_disk_separate_700", "event": "registering", "evaluations": 192, "current_error": 7.6832}
+[Search] {"source": "short_label_disk_separate_700", "event": "registration_finished", "evaluations": 210, "best_error": 7.6832}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "separate_700", "error": 7.6832, "glyph_iou": 0.6629213483146067, "accepted": false}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registering", "evaluations": 64, "current_error": 8.1232}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registering", "evaluations": 128, "current_error": 7.288}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registering", "evaluations": 192, "current_error": 6.5898666666666665}
+[Search] {"source": "short_label_disk_glyph_offsets_400", "event": "registration_finished", "evaluations": 220, "best_error": 6.504}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "glyph_offsets_400", "error": 6.504, "glyph_iou": 0.8405797101449275, "accepted": true}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registering", "evaluations": 64, "current_error": 7.7776}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registering", "evaluations": 128, "current_error": 7.088}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registering", "evaluations": 192, "current_error": 7.376}
+[Search] {"source": "short_label_disk_glyph_offsets_700", "event": "registration_finished", "evaluations": 207, "best_error": 6.9152}
+[Search] {"source": "short_label_disk", "event": "model_finished", "model": "glyph_offsets_700", "error": 6.9152, "glyph_iou": 0.6666666666666666, "accepted": false}
+[WARN] AC0910_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.357143, localized_error_fraction=0.789171).
+[INFO] Konvertiert AC0910_L.jpg | Parameter: mode=semantic_badge, label=LUX, variant_name=AC0910_L | Qualität: Optimierungsfehler/Pixel=0.010406, Mean-Delta²=405.575989, RGB-RMSE/Kanal=11.627209, Raumscore=1433.074887, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=5.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\ac21control\after\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\ac21control\after\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\ac21control\after

@@ -1,6 +1,6 @@
 # Zufriedenstellende Konvertierungen
 
-371 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
+374 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
 
 Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bild und Beschreibung.
 
@@ -171,6 +171,9 @@ Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bi
 | [AC0920_L](images/AC0920_L.jpg) | [SVG](svgs/AC0920_L.svg) | 506.664001 | semantic-only |
 | [AC0920_M](images/AC0920_M.jpg) | [SVG](svgs/AC0920_M.svg) | 438.420013 | semantic-only |
 | [AC0920_S](images/AC0920_S.jpg) | [SVG](svgs/AC0920_S.svg) | 1418.199951 | semantic-only |
+| [AC0921_L](images/AC0921_L.jpg) | [SVG](svgs/AC0921_L.svg) | 271.082672 | semantic-only |
+| [AC0921_M](images/AC0921_M.jpg) | [SVG](svgs/AC0921_M.svg) | 619.872864 | semantic-only |
+| [AC0921_S](images/AC0921_S.jpg) | [SVG](svgs/AC0921_S.svg) | 418.015991 | semantic-only |
 | [AC1000_L](images/AC1000_L.jpg) | [SVG](svgs/AC1000_L.svg) | 685.416687 | semantic-only |
 | [AC1000_M](images/AC1000_M.jpg) | [SVG](svgs/AC1000_M.svg) | 591.427490 | semantic-only |
 | [AC1000_S](images/AC1000_S.jpg) | [SVG](svgs/AC1000_S.svg) | 496.119995 | semantic-only |

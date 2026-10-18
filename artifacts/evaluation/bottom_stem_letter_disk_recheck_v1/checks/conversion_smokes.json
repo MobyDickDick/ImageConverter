@@ -1,0 +1,14 @@
+{
+  "exit_code": 0,
+  "command": [
+    "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "-vv",
+    "tests/test_conversion_regression_smoke.py",
+    "--basetemp",
+    ".tmp/ac0921-smokes",
+    "--junitxml",
+    "artifacts\\evaluation\\bottom_stem_letter_disk_recheck_v1\\checks\\conversion_smokes.xml"
+  ]
+}

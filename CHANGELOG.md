@@ -1,3 +1,4 @@
+- Register centered lower handles on described letter disks from raster geometry, retain strict glyph checks with a bounded joint font-pose refinement, and validate AC0921 L/M/S plus 17 independent CLI cases with unchanged quality gates (2026-10-18).
 - Refine individually positioned short-label glyphs and stroke weight only after the original models fail, retain case-sensitive glyph extents, and validate AC0910 L/M/S with unchanged gates and two independent 17-case CLI batteries (2026-10-17).
 - Correct nine AC0411 catalog descriptions to upward chords and an inverted interior T; validate the unchanged raster registration with two independent 17-case CLI batteries and retain the separate strict gray-IoU follow-up (2026-10-17).
 - Register left-handle labeled squares without mirroring text, validate observed glyph silhouettes, and correct the standalone SE0082 description; both unchanged catalog gates and two independent 17-case CLI batteries pass (2026-10-17).

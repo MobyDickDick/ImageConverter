@@ -1,0 +1,115 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere AC0921_L.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0921_L.jpg ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "Q" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 64, "current_error": 10.721777777777778}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 128, "current_error": 5.040592592592593}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 192, "current_error": 4.695111111111111}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 256, "current_error": 4.453333333333333}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 259, "best_error": 4.444444444444445}
+[WARN] AC0921_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.153846, localized_error_fraction=0.854942).
+[INFO] Konvertiert AC0921_L.jpg | Parameter: mode=semantic_badge, label=Q, variant_name=AC0921_L | Qualität: Optimierungsfehler/Pixel=0.003951, Mean-Delta²=271.082672, RGB-RMSE/Kanal=9.505835, Raumscore=986.465834, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AC0921_M.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0921_M.jpg ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "Q" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 64, "current_error": 12.258571428571429}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 128, "current_error": 12.264285714285714}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 192, "current_error": 8.527142857142858}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 249, "best_error": 6.887142857142857}
+[WARN] AC0921_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.344538, localized_error_fraction=0.915112).
+[INFO] Konvertiert AC0921_M.jpg | Parameter: mode=semantic_badge, label=Q, variant_name=AC0921_M | Qualität: Optimierungsfehler/Pixel=0.009839, Mean-Delta²=619.872864, RGB-RMSE/Kanal=14.374432, Raumscore=2271.804983, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AC0921_S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0921_S.jpg ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "Q" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 64, "current_error": 9.293333333333333}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 128, "current_error": 6.4}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 192, "current_error": 5.8613333333333335}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 212, "best_error": 5.8613333333333335}
+[WARN] AC0921_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.197368, localized_error_fraction=0.868139).
+[INFO] Konvertiert AC0921_S.jpg | Parameter: mode=semantic_badge, label=Q, variant_name=AC0921_S | Qualität: Optimierungsfehler/Pixel=0.015630, Mean-Delta²=418.015991, RGB-RMSE/Kanal=11.804180, Raumscore=1474.629035, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere AC0921_S.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0921_S.jpg ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "Q" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 64, "current_error": 9.293333333333333}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 128, "current_error": 6.4}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 192, "current_error": 5.8613333333333335}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 212, "best_error": 5.8613333333333335}
+[WARN] AC0921_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.197368, localized_error_fraction=0.868139).
+[INFO] Konvertiert AC0921_S.jpg | Parameter: mode=semantic_badge, label=Q, variant_name=AC0921_S | Qualität: Optimierungsfehler/Pixel=0.015630, Mean-Delta²=418.015991, RGB-RMSE/Kanal=11.804180, Raumscore=1474.629035, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere AC0921_M.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0921_M.jpg ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "Q" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 64, "current_error": 12.258571428571429}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 128, "current_error": 12.264285714285714}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 192, "current_error": 8.527142857142858}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 249, "best_error": 6.887142857142857}
+[WARN] AC0921_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.344538, localized_error_fraction=0.915112).
+[INFO] Konvertiert AC0921_M.jpg | Parameter: mode=semantic_badge, label=Q, variant_name=AC0921_M | Qualität: Optimierungsfehler/Pixel=0.009839, Mean-Delta²=619.872864, RGB-RMSE/Kanal=14.374432, Raumscore=2271.804983, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere AC0921_L.jpg | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite AC0921_L.jpg ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "Q" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 64, "current_error": 10.721777777777778}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 128, "current_error": 5.040592592592593}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 192, "current_error": 4.695111111111111}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 256, "current_error": 4.453333333333333}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 259, "best_error": 4.444444444444445}
+[WARN] AC0921_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.153846, localized_error_fraction=0.854942).
+[INFO] Konvertiert AC0921_L.jpg | Parameter: mode=semantic_badge, label=Q, variant_name=AC0921_L | Qualität: Optimierungsfehler/Pixel=0.003951, Mean-Delta²=271.082672, RGB-RMSE/Kanal=9.505835, Raumscore=986.465834, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.3s
+[INFO] Konvertiere AC0921_S.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0921_S.jpg ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "Q" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 64, "current_error": 9.293333333333333}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 128, "current_error": 6.4}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 192, "current_error": 5.8613333333333335}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 212, "best_error": 5.8613333333333335}
+[WARN] AC0921_S.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.197368, localized_error_fraction=0.868139).
+[INFO] Konvertiert AC0921_S.jpg | Parameter: mode=semantic_badge, label=Q, variant_name=AC0921_S | Qualität: Optimierungsfehler/Pixel=0.015630, Mean-Delta²=418.015991, RGB-RMSE/Kanal=11.804180, Raumscore=1474.629035, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.3s
+[INFO] Konvertiere AC0921_M.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0921_M.jpg ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "Q" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 64, "current_error": 12.258571428571429}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 128, "current_error": 12.264285714285714}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 192, "current_error": 8.527142857142858}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 249, "best_error": 6.887142857142857}
+[WARN] AC0921_M.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.344538, localized_error_fraction=0.915112).
+[INFO] Konvertiert AC0921_M.jpg | Parameter: mode=semantic_badge, label=Q, variant_name=AC0921_M | Qualität: Optimierungsfehler/Pixel=0.009839, Mean-Delta²=619.872864, RGB-RMSE/Kanal=14.374432, Raumscore=2271.804983, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.4s
+[INFO] Konvertiere AC0921_L.jpg | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite AC0921_L.jpg ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "Q" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 64, "current_error": 10.721777777777778}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 128, "current_error": 5.040592592592593}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 192, "current_error": 4.695111111111111}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 256, "current_error": 4.453333333333333}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 259, "best_error": 4.444444444444445}
+[WARN] AC0921_L.jpg: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.153846, localized_error_fraction=0.854942).
+[INFO] Konvertiert AC0921_L.jpg | Parameter: mode=semantic_badge, label=Q, variant_name=AC0921_L | Qualität: Optimierungsfehler/Pixel=0.003951, Mean-Delta²=271.082672, RGB-RMSE/Kanal=9.505835, Raumscore=986.465834, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.6s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\ac0921-replay\catalog\after\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\ac0921-replay\catalog\after\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\ac0921-replay\catalog\after

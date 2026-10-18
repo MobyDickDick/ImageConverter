@@ -1,0 +1,797 @@
+{
+  "artifact_retention": "debug",
+  "cases": [
+    {
+      "blocked_svg_reads": [],
+      "case_id": "original",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "original/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+      "elapsed_seconds": 1.375,
+      "failures": [],
+      "height": 120,
+      "input_png": "original/input.png",
+      "input_sha256": "b6b4e0f50132b2dc93fe9c97331c3d544a736a7a77d18fe5f1aeb8742435306e",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9791691899299622,
+        "foreground_iou": 0.9979448032883147,
+        "foreground_mse": 4.940960934618488e-05,
+        "normalized_mse": 1.5157096640905365e-05
+      },
+      "output_sha256": "a10aef3f1d7f904331afe6a8d72b95339246dd7072a0207e23726dfb2b6563d4",
+      "output_svg": "original/output.svg",
+      "reference_svg": "original/reference.svg",
+      "reference_svg_sha256": "fc16b8f2f32eba63dc02fadbe34783eeb819ef2997fcd72c64f29d4dcd8a7cd3",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.0,
+        "relative_y": 0.0,
+        "scale": 1.0
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_01",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_01/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Die Darstellung ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "elapsed_seconds": 1.515,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_01/input.png",
+      "input_sha256": "bdb83320b950c41fd05053b21a6479a3963ff15333ea2d366be48c59adff1e39",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9765773415565491,
+        "foreground_iou": 0.9962345346960731,
+        "foreground_mse": 0.00011060145334340632,
+        "normalized_mse": 3.786204251809977e-05
+      },
+      "output_sha256": "bc33c17c37397d2169f28ff3dfe124785ba4d198d20490d2ccd41c74aa484d28",
+      "output_svg": "probe_01/output.svg",
+      "reference_svg": "probe_01/reference.svg",
+      "reference_svg_sha256": "54b0a798ba5ca3e32d3be72f796b54b1294986da2b1f928b441dc2c731d687c7",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0149554,
+        "relative_y": 0.01404737,
+        "scale": 1.04281285
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_02",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_02/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "elapsed_seconds": 1.468,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_02/input.png",
+      "input_sha256": "b5c0472175887c9b667b9f285e156d8804cbf398ee37cbc203eac4254a9d1634",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9806239604949951,
+        "foreground_iou": 0.996873223422399,
+        "foreground_mse": 0.00010915612074313685,
+        "normalized_mse": 3.4479260648367926e-05
+      },
+      "output_sha256": "738954838749d7ca53385eb3bdd42256d17117993124c25b66c9e24d476b6de5",
+      "output_svg": "probe_02/output.svg",
+      "reference_svg": "probe_02/reference.svg",
+      "reference_svg_sha256": "0ef0fd9edd37ca8761960e12ba6d59291f18b77376b96ca3b54fa5cc694739ee",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01219469,
+        "relative_y": 0.02409658,
+        "scale": 1.01409436
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_03",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_03/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Das Motiv ist etwas gr\u00f6\u00dfer dargestellt und leicht nach links und unten versetzt.",
+      "elapsed_seconds": 1.75,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_03/input.png",
+      "input_sha256": "332916c1c8607241541918d7a4de1cca9c59ebb5031089fbd013a29aa123e42e",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9780621528625488,
+        "foreground_iou": 0.996001066382298,
+        "foreground_mse": 0.00010183724953094497,
+        "normalized_mse": 3.437379564275034e-05
+      },
+      "output_sha256": "43ef0ef43d0104d127d51146d4ce0b4506700743ed20779f6e6d42998f8ea750",
+      "output_svg": "probe_03/output.svg",
+      "reference_svg": "probe_03/reference.svg",
+      "reference_svg_sha256": "60ea9186a691b2afb0887379f7d2a8b0b9f2fe3da6441b4e3cb63bb9e695fc56",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01945393,
+        "relative_y": 0.004432,
+        "scale": 1.04771352
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_04",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_04/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach rechts und oben versetzt.",
+      "elapsed_seconds": 1.531,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_04/input.png",
+      "input_sha256": "573f18b48645c6b35d87a46d7268d5eaa281e758c920668ff0b0802da306d985",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.973086953163147,
+        "foreground_iou": 0.9971949509116409,
+        "foreground_mse": 0.00016769614012446254,
+        "normalized_mse": 5.333729859557934e-05
+      },
+      "output_sha256": "7af40910794c9c61e4c8428ecbae6cfdf3f95fa9b61d90d8ca4802dd3fb80695",
+      "output_svg": "probe_04/output.svg",
+      "reference_svg": "probe_04/reference.svg",
+      "reference_svg_sha256": "1d9788a1ef1bb6ad461e68ed866ea2f6449b86082e3b0abcf1717f1b7a62a6aa",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00934637,
+        "relative_y": -0.02498267,
+        "scale": 1.0217956
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_05",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_05/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig gr\u00f6\u00dfer dargestellt und leicht nach rechts und unten verschoben.",
+      "elapsed_seconds": 1.5,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_05/input.png",
+      "input_sha256": "8a6eee2ecc32fa6224678464c855e6f8c94b1fb652f00c17540f5d964fb416c5",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9898198843002319,
+        "foreground_iou": 0.9991494187694925,
+        "foreground_mse": 5.502961721504107e-05,
+        "normalized_mse": 1.758137841534335e-05
+      },
+      "output_sha256": "c68363fc445b1336b515b8eac9614d4e16afa84d04c1d9e87e74a0f2d1a1b85c",
+      "output_svg": "probe_05/output.svg",
+      "reference_svg": "probe_05/reference.svg",
+      "reference_svg_sha256": "662572fee5077ed7bb61cb021d58f6041a6747c82f6c771d5e96c549cc203c3b",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02113508,
+        "relative_y": 0.00340482,
+        "scale": 1.01506327
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_06",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_06/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas kleiner dargestellt und etwas nach links und unten verschoben.",
+      "elapsed_seconds": 1.515,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_06/input.png",
+      "input_sha256": "77aa1118b9cf08fdf4b794c4a14cdb0e311fc6e49d13e6357984916b7e02bdf6",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9426165819168091,
+        "foreground_iou": 0.995441224356887,
+        "foreground_mse": 0.000247977179242298,
+        "normalized_mse": 7.172010373324156e-05
+      },
+      "output_sha256": "d9ebc0aa1af4f5b7be5dc2d1ea5b858805de375d26104f5c0227e35ffef73519",
+      "output_svg": "probe_06/output.svg",
+      "reference_svg": "probe_06/reference.svg",
+      "reference_svg_sha256": "8665709b0ac27c14281bdb1a5c47b35a6edcbc0ce69bd67e43c37bc9a50b5d5e",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02210458,
+        "relative_y": 0.01042227,
+        "scale": 0.95167741
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_07",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_07/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und etwas nach rechts und oben versetzt.",
+      "elapsed_seconds": 1.625,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_07/input.png",
+      "input_sha256": "ace03a0028ead3360d3b81020904f78b2350f8da3d95078f4be6a2f1974cf3ce",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.989666223526001,
+        "foreground_iou": 0.9979591836734694,
+        "foreground_mse": 4.459673436940648e-05,
+        "normalized_mse": 1.4184804967953824e-05
+      },
+      "output_sha256": "cc3591f703f54075ef75a41c54768c709a1cac9cc4fc2b16db0c0b25f7fb143b",
+      "output_svg": "probe_07/output.svg",
+      "reference_svg": "probe_07/reference.svg",
+      "reference_svg_sha256": "77f3e157e0dd3e1c028d664a641529dba1c3718b17ce2c9fa566f7b7db9990e0",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01843312,
+        "relative_y": -0.00346665,
+        "scale": 1.00149991
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_08",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_08/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig kleiner dargestellt und etwas nach rechts und oben versetzt.",
+      "elapsed_seconds": 1.5,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_08/input.png",
+      "input_sha256": "99ae7d07c2cb4122d33e467eb533244ad2f7539f9758797bb294896584d6a9ac",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9896501302719116,
+        "foreground_iou": 0.9984266834487099,
+        "foreground_mse": 7.517077756347135e-05,
+        "normalized_mse": 2.1175972506171092e-05
+      },
+      "output_sha256": "2668642be1d8eaedb15ffc50d9b42fa5846eaa70d28d7dfb6a2f9ffc48834cea",
+      "output_svg": "probe_08/output.svg",
+      "reference_svg": "probe_08/reference.svg",
+      "reference_svg_sha256": "23cdc1e77b5bf27d761fbcc1676d937f41455f2110ee141acc8947b16931b98f",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02424477,
+        "relative_y": -0.01831125,
+        "scale": 0.96370277
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_09",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_09/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas kleiner dargestellt und leicht nach links und oben versetzt.",
+      "elapsed_seconds": 1.485,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_09/input.png",
+      "input_sha256": "cc6734ea237a939d2e91884b41fe7313de070f52f5565a619f8cc324e4bb8855",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.979863166809082,
+        "foreground_iou": 0.9966963990749917,
+        "foreground_mse": 0.0001725154579617083,
+        "normalized_mse": 4.6992256102385e-05
+      },
+      "output_sha256": "1c366f8d21a858c2e21c89768188cf7d497d34bac570bc0cea6e5694c0faf972",
+      "output_svg": "probe_09/output.svg",
+      "reference_svg": "probe_09/reference.svg",
+      "reference_svg_sha256": "942a1a4120c9eddb5d626e46aca355b7ecdf1d37b473899832b755a880d598d0",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02460557,
+        "relative_y": -0.0063062,
+        "scale": 0.94452461
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_10",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_10/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und oben verschoben.",
+      "elapsed_seconds": 1.484,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_10/input.png",
+      "input_sha256": "a17e4f4b92e3100fa1b796f0160f56f8908fb25d24190f513a33859799dc5450",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9767135381698608,
+        "foreground_iou": 0.9977246871444824,
+        "foreground_mse": 0.00013798841973766685,
+        "normalized_mse": 4.3584106606431305e-05
+      },
+      "output_sha256": "efacc68ddeb303385ebecc5adb838d707195548a2689f1ce6f1c70ed978cecff",
+      "output_svg": "probe_10/output.svg",
+      "reference_svg": "probe_10/reference.svg",
+      "reference_svg_sha256": "aae5ccbad979b65c27ccd68252face4a4a3da7b1d1e246f82a6ae23c57f7facb",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01341343,
+        "relative_y": -0.01747129,
+        "scale": 1.01463589
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_11",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_11/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten verschoben.",
+      "elapsed_seconds": 1.578,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_11/input.png",
+      "input_sha256": "938533224a05e07c547f58caf8469981251de685ffdba2425428362c7c9c75e2",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.989656925201416,
+        "foreground_iou": 0.998526812021214,
+        "foreground_mse": 4.059753337060101e-05,
+        "normalized_mse": 1.2563721611513756e-05
+      },
+      "output_sha256": "c85dffb552eed2baa9d02de81b0d481f24c9dc972ef3152d839786faf5e9336e",
+      "output_svg": "probe_11/output.svg",
+      "reference_svg": "probe_11/reference.svg",
+      "reference_svg_sha256": "fba4a2a26027783dd4888136089ede43baf162f0e52ccb5f0f8dafdb2fa19bd5",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01618893,
+        "relative_y": 0.02334897,
+        "scale": 1.00114343
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_12",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_12/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "elapsed_seconds": 1.765,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_12/input.png",
+      "input_sha256": "745249d43feb9487665f90dfd6efe96929abb962f9307edb81cae2816f60749a",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9849957823753357,
+        "foreground_iou": 0.9977407512002259,
+        "foreground_mse": 8.193722169380635e-05,
+        "normalized_mse": 2.6192294171778485e-05
+      },
+      "output_sha256": "b486dba815632be06e6e1f60eb368d2d2c7a3446f36447370325b5b0b6ad5ecb",
+      "output_svg": "probe_12/output.svg",
+      "reference_svg": "probe_12/reference.svg",
+      "reference_svg_sha256": "deb4064169b7b4ea845f447f2ef1927a67cf01abb1ff04766affeb1dd598d728",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0015255,
+        "relative_y": 0.01511785,
+        "scale": 1.01824388
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_13",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_13/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und etwas nach rechts und unten versetzt.",
+      "elapsed_seconds": 1.625,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_13/input.png",
+      "input_sha256": "56464d6890148d5aa49faebb3550883cd04f7ffc936897da8bd1ad8f65252325",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9477952718734741,
+        "foreground_iou": 0.9973553719008265,
+        "foreground_mse": 0.00023517804220318794,
+        "normalized_mse": 6.904040492372587e-05
+      },
+      "output_sha256": "2d8db09d4a77d621ea1dde104e21b9b2d581cf2d289d0838dd685b07d67e48ae",
+      "output_svg": "probe_13/output.svg",
+      "reference_svg": "probe_13/reference.svg",
+      "reference_svg_sha256": "7ec707754aecbb52d5b41bab7a8743a594c823bb4b53227e4f4f350821ff904e",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02024787,
+        "relative_y": 0.00270128,
+        "scale": 0.94506484
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_14",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_14/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht kleiner dargestellt und geringf\u00fcgig nach rechts und unten verschoben.",
+      "elapsed_seconds": 1.593,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_14/input.png",
+      "input_sha256": "3cefa8c4454ec52e6e7e34a3524a5e9e731133a2829593c769082cc7e1f94dd1",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9880545735359192,
+        "foreground_iou": 0.9982404692082112,
+        "foreground_mse": 7.354566332651302e-05,
+        "normalized_mse": 2.2323589291772805e-05
+      },
+      "output_sha256": "19ae78c9341c76e8853078123dda21e1f90240202036b6ca3171dd5c30268254",
+      "output_svg": "probe_14/output.svg",
+      "reference_svg": "probe_14/reference.svg",
+      "reference_svg_sha256": "92b056007bc67c58c0cd039896d743659956ede00a8845e6e7d2ec1619e85803",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00180461,
+        "relative_y": 0.00170246,
+        "scale": 0.99997072
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_15",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_15/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht kleiner dargestellt und geringf\u00fcgig nach links und oben versetzt.",
+      "elapsed_seconds": 1.687,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_15/input.png",
+      "input_sha256": "f046e4ded30392632264d7bad8e27581153cd36e2754cc9b9016014c7a2d1a7e",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9366053342819214,
+        "foreground_iou": 0.9951219512195122,
+        "foreground_mse": 0.00024494229000993073,
+        "normalized_mse": 6.760087126167491e-05
+      },
+      "output_sha256": "37de60c874ccf4ee8bff207f999cb845715f2d34fb93972a44d97e249fb20f63",
+      "output_svg": "probe_15/output.svg",
+      "reference_svg": "probe_15/reference.svg",
+      "reference_svg_sha256": "7235fcda2841646e0b8cb4c1b74222c8072e9bac7c4c93f5149f698a7fc8117d",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0026847,
+        "relative_y": -0.01725626,
+        "scale": 0.95282094
+      },
+      "width": 96
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_16",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0,
+        "path_count": 0,
+        "vector_element_count": 4
+      },
+      "converter_log": "probe_16/converter.log",
+      "description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht kleiner dargestellt und geringf\u00fcgig nach rechts und unten verschoben.",
+      "elapsed_seconds": 1.422,
+      "failures": [],
+      "height": 120,
+      "input_png": "probe_16/input.png",
+      "input_sha256": "2356b98cfb4cd07ff82e5b52e5482e5bf3042f90b4415555a63e6b41c870505a",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9693524241447449,
+        "foreground_iou": 0.9971446700507615,
+        "foreground_mse": 9.027668420458212e-05,
+        "normalized_mse": 2.628396214277018e-05
+      },
+      "output_sha256": "418a51317b4abf15f6a04871ff534a84f77a543112292defd04dcbd8b6a64290",
+      "output_svg": "probe_16/output.svg",
+      "reference_svg": "probe_16/reference.svg",
+      "reference_svg_sha256": "8999d8d6205d5a04f1fb09a46f8469f25ee499521d996557d2ecfa2fafc7f60a",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02374944,
+        "relative_y": 0.01921438,
+        "scale": 0.96012384
+      },
+      "width": 96
+    }
+  ],
+  "iterations": 64,
+  "limits": {
+    "max_foreground_mse": 0.04,
+    "max_normalized_mse": 0.01,
+    "max_path_commands": 160,
+    "max_svg_elements": 80,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85
+  },
+  "original_satisfactory": true,
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261018,
+  "source_description": "Eine einfarbig gef\u00fcllte Kreisscheibe mit d\u00fcnner dunkler Randkontur. Am unteren Rand schlie\u00dft mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Gro\u00dfbuchstabe \"R\" in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Griffl\u00e4nge, Griffbreite, Schriftgr\u00f6\u00dfe und Farben ergeben sich aus dem Bild.",
+  "source_description_sha256": "8969f1c94f275a68650553c6ec67c9ab89d97544f6fbc85fc6e83ce20fb8ec56",
+  "source_image": "source.png",
+  "source_image_sha256": "b6b4e0f50132b2dc93fe9c97331c3d544a736a7a77d18fe5f1aeb8742435306e",
+  "source_svg_sha256": "fc16b8f2f32eba63dc02fadbe34783eeb819ef2997fcd72c64f29d4dcd8a7cd3",
+  "status": "completed",
+  "summary": {
+    "completed": 17,
+    "failed": 0,
+    "passed": 17,
+    "required": 17,
+    "satisfactory": true
+  },
+  "timeout_seconds": 60,
+  "variations_started": true
+}

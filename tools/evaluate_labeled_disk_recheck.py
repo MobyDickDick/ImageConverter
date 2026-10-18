@@ -13,15 +13,15 @@ from tools.evaluate_satisfaction_gate import evaluate_satisfaction, seal_baselin
 from tools.run_plan_b_variations import measure_quality
 
 
-def symbol_semantics(svg: str, label='Q') -> float:
+def symbol_semantics(svg: str, label='Q', *, bottom_stem=False) -> float:
     """Independently require one filled outlined circle and exact native text."""
     try:
         root = ET.fromstring(svg)
-        if any(e.tag.rsplit('}', 1)[-1] not in {'svg', 'rect', 'circle', 'text'} for e in root.iter()):
+        if any(e.tag.rsplit('}', 1)[-1] not in ({'svg', 'rect', 'circle', 'text', 'line'} if bottom_stem else {'svg', 'rect', 'circle', 'text'}) for e in root.iter()):
             return 0.
         shapes = [e for e in root.iter() if e.tag.rsplit('}', 1)[-1] in
                   {'rect', 'path', 'circle', 'ellipse', 'polygon', 'polyline', 'line', 'text', 'image'}]
-        if sorted(e.tag.rsplit('}', 1)[-1] for e in shapes) != ['circle', 'rect', 'text']:
+        if sorted(e.tag.rsplit('}', 1)[-1] for e in shapes) != (['circle', 'line', 'rect', 'text'] if bottom_stem else ['circle', 'rect', 'text']):
             return 0.
         if any(e.get('transform') or e.get('opacity', '1') != '1' for e in root.iter()):
             return 0.
@@ -29,6 +29,15 @@ def symbol_semantics(svg: str, label='Q') -> float:
         width, height = float(root.get('width')), float(root.get('height'))
         cx, cy, r, sw = (float(disk.get(k, 0)) for k in ('cx', 'cy', 'r', 'stroke-width'))
         tx, ty, size = (float(text.get(k, 0)) for k in ('x', 'y', 'font-size'))
+        if bottom_stem:
+            stem = next(e for e in shapes if e.tag.endswith('line'))
+            sx, sy, ex, ey, cw = (float(stem.get(k, 'nan')) for k in ('x1','y1','x2','y2','stroke-width'))
+            if (not all(math.isfinite(v) for v in (sx,sy,ex,ey,cw))
+                    or abs(sx-ex) > 1e-4 or abs(sx-cx) > 1e-4 or abs(sy-cy-r) > 2e-4
+                    or not cy+r+.5 < ey <= height or not .3 <= cw < r*.45
+                    or stem.get('stroke') in (None, 'none', '#ffffff')
+                    or stem.get('stroke-linecap', 'butt') != 'butt'):
+                return 0.
         colors = [tuple(int(e.get(k).removeprefix('#')[i:i+2], 16) for i in (0, 2, 4))
                   for e, k in ((disk, 'fill'), (disk, 'stroke'), (text, 'fill'))]
         return float(all(math.isfinite(v) for v in (width,height,cx,cy,r,sw,tx,ty,size))
@@ -45,10 +54,10 @@ def symbol_semantics(svg: str, label='Q') -> float:
         return 0.
 
 
-def measure(image: Path, svg: Path, label='Q') -> dict:
+def measure(image: Path, svg: Path, label='Q', *, bottom_stem=False) -> dict:
     record = measure_raster(image, svg)
     m = record['metrics']
-    m['semantic_score'] = symbol_semantics(record['svg'], label)
+    m['semantic_score'] = symbol_semantics(record['svg'], label, bottom_stem=bottom_stem)
     record['combined_score'] = (1-m['error_per_pixel']+m['edge_alignment']+m['object_mask_iou']+m['semantic_score'])/4
     return record
 
@@ -57,7 +66,7 @@ def evaluate(manifest: dict, root: Path) -> dict:
     before, after, evidence = {}, {}, []
     for case in manifest['cases']:
         image = root/case['image']
-        old, new = (measure(image, root/case[mode+'_svg'], manifest.get('label', 'Q')) for mode in ('before', 'after'))
+        old, new = (measure(image, root/case[mode+'_svg'], manifest.get('label', 'Q'), bottom_stem=manifest.get('bottom_stem', False)) for mode in ('before', 'after'))
         before[case['case_id']] = {'metrics': old['metrics'], 'dimensions': old['dimensions']}
         after[case['case_id']] = new
         evidence.append({**case, 'input_sha256': hashlib.sha256(image.read_bytes()).hexdigest(),

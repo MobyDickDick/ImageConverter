@@ -1,0 +1,40 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere probe_14.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite probe_14.png ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "R" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht kleiner dargestellt und geringfügig nach rechts und unten verschoben.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 64, "current_error": 1.6747106481481482}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 128, "current_error": 2.375}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 192, "current_error": 0.9441261574074075}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 248, "best_error": 0.4152488425925926}
+[WARN] probe_14.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.967022, localized_error_fraction=0.816991).
+[INFO] Konvertiert probe_14.png | Parameter: mode=semantic_badge, label=R, variant_name=PROBE_14 | Qualität: Optimierungsfehler/Pixel=0.000036, Mean-Delta²=4.354774, RGB-RMSE/Kanal=1.204820, Raumscore=16.320702, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Konvertiere probe_14.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite probe_14.png ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "R" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht kleiner dargestellt und geringfügig nach rechts und unten verschoben.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 64, "current_error": 1.6747106481481482}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 128, "current_error": 2.375}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 192, "current_error": 0.9441261574074075}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 248, "best_error": 0.4152488425925926}
+[WARN] probe_14.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.967022, localized_error_fraction=0.816991).
+[INFO] Konvertiert probe_14.png | Parameter: mode=semantic_badge, label=R, variant_name=PROBE_14 | Qualität: Optimierungsfehler/Pixel=0.000036, Mean-Delta²=4.354774, RGB-RMSE/Kanal=1.204820, Raumscore=16.320702, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.1s
+[INFO] Konvertiere probe_14.png | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite probe_14.png ---
+Bildbeschreibung: Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig der einzelne dunkle Großbuchstabe "R" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht kleiner dargestellt und geringfügig nach rechts und unten verschoben.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 64, "current_error": 1.6747106481481482}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 128, "current_error": 2.375}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registering", "evaluations": 192, "current_error": 0.9441261574074075}
+[Search] {"source": "raster_bottom_stem_letter_disk_v1", "event": "registration_finished", "evaluations": 248, "best_error": 0.4152488425925926}
+[WARN] probe_14.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.967022, localized_error_fraction=0.816991).
+[INFO] Konvertiert probe_14.png | Parameter: mode=semantic_badge, label=R, variant_name=PROBE_14 | Qualität: Optimierungsfehler/Pixel=0.000036, Mean-Delta²=4.354774, RGB-RMSE/Kanal=1.204820, Raumscore=16.320702, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=0.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\bottom_stem_letter_disk_recheck_v1\independent\probe_14\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\bottom_stem_letter_disk_recheck_v1\independent\probe_14\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\artifacts\evaluation\bottom_stem_letter_disk_recheck_v1\independent\probe_14\conversion
