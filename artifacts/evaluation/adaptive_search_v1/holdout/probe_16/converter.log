@@ -1,0 +1,17 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere probe_16.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite probe_16.png ---
+Bildbeschreibung: Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen grünen Farbverlauf von dunkel links unten nach hell rechts oben und eine grünlich graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe "R" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht kleiner dargestellt und geringfügig nach rechts und unten verschoben.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 64, "current_error": 2.1487403100775193}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 128, "current_error": 2.129392764857881}
+[Search] {"source": "raster_motor_valve_v1", "event": "registering", "evaluations": 192, "current_error": 1.6857558139534883}
+[Search] {"source": "raster_motor_valve_v1", "event": "registration_finished", "evaluations": 224, "best_error": 1.3713178294573642}
+[Search] {"source": "raster_motor_valve_v1", "event": "candidate_satisfactory", "elapsed_seconds": 1.984, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 224}
+[Search] {"source": "probe_16", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 2.047, "limit_seconds": 60.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 224, "stop_reason": "satisfactory"}
+[INFO] Konvertiert probe_16.png | Parameter: mode=semantic_badge, label=R, variant_name=PROBE_16 | Qualität: Optimierungsfehler/Pixel=0.000133, Mean-Delta²=64.634880, RGB-RMSE/Kanal=4.641655, Raumscore=210.060103, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=2.1s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\adaptive-planb\probe_16\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\adaptive-planb\probe_16\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\adaptive-planb\probe_16\conversion

@@ -14,6 +14,10 @@ ergebnislose Wiederholungen und verlängert das normale Suchbudget von 60 Sekund
 bei spätem Fortschritt begrenzt auf höchstens 120 Sekunden. Die
 [Verfahrensprüfung](docs/conversion_search_review_2026-10-18.md) beschreibt den
 weiteren Ausbau: allgemeine Szenensuche und durchgängige Prozessunterbrechung.
+Die zusätzliche adaptive Parametersuche verwendet nun
+[sechs kooperierende Bots](docs/bot_conversion_search_2026-10-18.md), die
+Verbesserungen austauschen, erfolglose Bots deaktivieren und deren Versuche
+für das laufende Bild im Gedächtnis behalten.
 
 Mehrere verwandte Vorlagen können als **Formenfamilie in einer Aufgabe**
 bearbeitet werden, auch mit unterschiedlichen Farben, Größen und ähnlichen

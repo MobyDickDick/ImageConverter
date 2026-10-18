@@ -22,6 +22,11 @@ Arbeit. Deutlicher später Fortschritt erlaubt zusätzliche Zeit: standardmäßi
 60 Sekunden regulär, höchstens 120 Sekunden aktive Bildzeit über angeschlossene
 Modelle und Wiederholungen. `--search-seconds` und `--search-max-seconds` passen
 die Grenzen an. `--search-policy fixed` verwendet den bisherigen festen Ablauf.
+Im adaptiven Modus teilen sechs Such-Bots ihre Verbesserungen und deaktivieren
+erfolglose Arbeiter. Bereits geprüfte Parameter und deaktivierte Bots bleiben
+für Wiederholungen desselben Bild-/Modellstarts erhalten. Das gemeinsame Budget
+wird dadurch nicht erhöht. Ablauf und Grenzen:
+[Kooperatives Bot-Modell](bot_conversion_search_2026-10-18.md).
 
 ```powershell
 python -m src.imageCompositeConverter EINGABE --descriptions-path BESCHREIBUNGEN.xml --output-dir AUSGABE --start ERSTES --end LETZTES --search-seed 42 --search-budget 384

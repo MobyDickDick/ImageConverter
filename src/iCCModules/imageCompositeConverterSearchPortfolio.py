@@ -17,7 +17,7 @@ import time
 
 import numpy as np
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import (
-    ImageSearch, SearchPolicy, SearchRun, current_search, image_search,pixel_quality,
+    ImageSearch, SearchPolicy, current_search, image_search,pixel_quality,
 )
 
 _SETTINGS = ContextVar('conversion_search_settings', default=None)
@@ -225,97 +225,7 @@ def explore_parameters(parameters, geometry_count, measure, incumbent, *, source
 
 
 def _explore_adaptive(parameters, geometry_count, measure, incumbent, *, source, image, satisfactory_fn):
-    config,session = settings(),current_search()
-    identity = hashlib.sha256(source.encode()+np.asarray(image).tobytes()+incumbent[2].encode()).hexdigest()
-    rng = random.Random(config['seed'] ^ int(identity[:16],16))
-    paths = ['reverse_coordinates','shuffled_coordinates','joint_restart']
-    rng.shuffle(paths)
-    best_p,best = parameters.copy(),incumbent
-    seen = {tuple(np.round(best_p,8))}
-    monitor = SearchRun(session,config['budget'],source=source)
-    monitor.anchor = incumbent[0]
-    records = {name:dict(strategy=name,proposals=0,error=incumbent[1],improved=False) for name in paths}
-    orders = {name:list(range(len(parameters))) for name in paths}
-    orders['reverse_coordinates'].reverse()
-    for name in paths:
-        if name != 'reverse_coordinates':
-            rng.shuffle(orders[name])
-    cursors = dict.fromkeys(paths,0)
-    batch = max(4,min(32,config['budget']//3))
-    tried = set()
-    winning = None
-    reason = 'satisfactory' if satisfactory_fn and satisfactory_fn(best_p,best) else None
-    generated = 0
-    started = session.elapsed
-    while reason is None and generated < monitor.maximum*8:
-        before_cycle = monitor.proposals
-        for strategy in paths:
-            reason = monitor.reason(alternatives_tried=len(tried)==len(paths))
-            if reason:
-                break
-            tried.add(strategy)
-            progress(source,event='strategy_started',strategy=strategy,proposals=monitor.proposals,
-                     budget=monitor.limit,seed=config['seed'],best_error=best[1])
-            used = 0
-            slice_generated = 0
-            while used < batch and slice_generated < batch*8 and generated < monitor.maximum*8:
-                reason = monitor.reason(alternatives_tried=len(tried)==len(paths))
-                if reason:
-                    break
-                cursor = cursors[strategy]
-                cursors[strategy] += 1
-                generated += 1
-                slice_generated += 1
-                probe = best_p.copy()
-                order = orders[strategy]
-                if strategy == 'joint_restart':
-                    # Continue proposing coupled changes, at several scales,
-                    # when one finite coordinate schedule has been exhausted.
-                    step = (.125,.25,.5,1.,2.,4.)[(cursor//8)%6]
-                    for index in rng.sample(order,min(3,len(order))):
-                        probe[index] += rng.choice((-1,1))*step*(4 if index>=geometry_count else 1)
-                else:
-                    index = order[(cursor//2)%len(order)]
-                    step = (1.,.5,.25,.125,.0625,2.)[(cursor//(2*len(order)))%6]
-                    probe[index] += (-1 if cursor%2==0 else 1)*step*(4 if index>=geometry_count else 1)
-                key = tuple(np.round(probe,8))
-                if key in seen:
-                    continue
-                seen.add(key)
-                used += 1
-                measured = measure(probe)
-                if measured is not None and measured[0] < best[0]-1e-9 and measured[1] <= best[1]+1e-9:
-                    best_p,best,winning = probe.copy(),measured,strategy
-                    session.observe(best[1],evaluation=False)
-                    records[strategy]['improved'] = True
-                # Only admissible improvements can buy additional work.
-                monitor.observe(best[0])
-                records[strategy]['proposals'] += 1
-                records[strategy]['error'] = best[1]
-                if satisfactory_fn and satisfactory_fn(best_p,best):
-                    reason = 'satisfactory'
-                    break
-            progress(source,event='strategy_finished',**records[strategy],best_error=best[1])
-            if reason:
-                break
-        if reason is None:
-            reason = monitor.reason(alternatives_tried=len(tried)==len(paths))
-        if reason is None and before_cycle == monitor.proposals:
-            reason = 'search_exhausted'
-    reason = reason or 'search_exhausted'
-    if config['directory']:
-        target = config['directory']/identity
-        target.mkdir(parents=True,exist_ok=True)
-        digest = hashlib.sha256(best[2].encode()).hexdigest()
-        (target/(digest+'.svg')).write_text(best[2],encoding='utf-8')
-        for record in records.values():
-            (target/(str(config['seed'])+'-'+record['strategy']+'.json')).write_text(json.dumps(
-                {**record,'stop_reason':reason,'parameters':best_p.tolist(),'svg':digest+'.svg',
-                 'validation':'search_loss_only_pending_semantic_and_pixel_gates'},indent=2,allow_nan=False)+'\n',encoding='utf-8')
-    report = dict(seed=config['seed'],additional_evaluations=monitor.proposals,
-        winning_strategy=winning,budget=config['budget'],effective_budget=monitor.limit,
-        max_budget=monitor.maximum,budget_extensions=monitor.extensions,stop_reason=reason,
-        attempts=list(records.values()),elapsed_seconds=round(session.elapsed-started,6))
-    progress(source,event='search_finished',stop_reason=reason,proposals=monitor.proposals,
-             budget=monitor.limit,best_error=best[1])
-    return best_p,best,report
+    from src.iCCModules.imageCompositeConverterSearchBots import explore_bots
+    return explore_bots(parameters, geometry_count, measure, incumbent, source=source,
+                        image=image, satisfactory_fn=satisfactory_fn,
+                        session=current_search(), config=settings(), emit=progress)
