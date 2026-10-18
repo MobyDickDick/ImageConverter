@@ -2,7 +2,14 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-10-17, nach AC0910-Abnahme)
+## Aktuelle Kandidaten (Stand: 2026-10-18, nach GE0204-Abnahme)
+
+GE0204 M/L/S bestehen beide regulären und die strengen Pixelgates. Der vorhandene allgemeine Flammenfit benötigt nur eine eigenständige Beschreibung. 371 Paare sind archiviert, alle 368 bisherigen Datensätze unverändert.
+Aktive Rotation: `AC0921_M`, `AC0232_M`.
+Details: `docs/next_arbeitspaket_2026-10-18_ge0204_m.md`.
+Review: `artifacts/evaluation/nested_flame_disk_recheck_v1/review_args.json`.
+
+## Vorheriger Abschluss: AC0910
 
 AC0910 L/M/S bestehen beide regulären und die strengen Pixelgates; zwei unabhängige CLI-Batterien mit mPa bestehen jeweils 17/17. 368 Paare sind archiviert, alle 365 bisherigen Datensätze bleiben unverändert.
 Aktive Rotation: `GE0204_M`, `AC0921_M`, `AC0232_M`.

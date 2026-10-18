@@ -643,3 +643,5 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 
 - [Arbeitspaket – GE9013_6M Pfeil nach unten und randomisierte Plan-B-Folge (2026-10-07)](next_arbeitspaket_2026-10-07_ge9013_6m.md)
 - [Arbeitspaket – AC0704_1_L Quadrat mit rechtem Griff (2026-10-08)](next_arbeitspaket_2026-10-08_ac0704_1_l.md)
+
+- [GE0204: Flammenfamilie und Restumfang (2026-10-18)](next_arbeitspaket_2026-10-18_ge0204_m.md)

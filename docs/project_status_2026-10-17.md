@@ -1,6 +1,8 @@
 # Projektstand und Sichtprüfung am 2026-10-17
 
-**Aktueller Nachtrag AC0910:** Drei Lux-Kreisscheiben bestehen beide regulären und die strengen Pixelgates. **368 von 1.785 Bildern (20,6 %)** sind ausdrücklich archiviert; 1.417 Bilder haben noch keine ausdrückliche Archivabnahme. Alle 365 bisherigen Datensätze und Bestresultate bleiben unverändert. Details: [AC0910-Abnahme](next_arbeitspaket_2026-10-17_ac0910_l.md). Die [Merge-Prüfung](merge_audit_2026-10-17.md) erklärt die wiederhergestellten vorherigen Angaben.
+**Nachtrag 2026-10-18, GE0204:** Drei Flammenvarianten bestehen beide regulären und die strengeren Pixelgates. **371 von 1.785 Bildern (20,8 %)** sind ausdrücklich archiviert; 1.414 haben noch keine ausdrückliche Archivabnahme. Alle 368 bisherigen Datensätze bleiben unverändert. Nächste Rotation: `AC0921_M`, `AC0232_M`. [Abnahme und Restumfang](next_arbeitspaket_2026-10-18_ge0204_m.md): 38 offene Checkboxen; für eine vollständige Katalogsichtung grob 590 Familienprüfungen, mit Überschneidungen und unterschiedlichem Aufwand.
+
+**Vorheriger Nachtrag AC0910:** Drei Lux-Kreisscheiben bestehen beide regulären und die strengen Pixelgates. **368 von 1.785 Bildern (20,6 %)** sind ausdrücklich archiviert; 1.417 Bilder haben noch keine ausdrückliche Archivabnahme. Alle 365 bisherigen Datensätze und Bestresultate bleiben unverändert. Details: [AC0910-Abnahme](next_arbeitspaket_2026-10-17_ac0910_l.md). Die [Merge-Prüfung](merge_audit_2026-10-17.md) erklärt die wiederhergestellten vorherigen Angaben.
 
 **Vorheriger Nachtrag AC0411:** Neun neue regulär abgenommene Paare und der
 wiederhergestellte, zuvor bereits abgenommene SE0082-Archiveintrag ergeben
@@ -86,7 +88,7 @@ Verschieben nach `samples` würde die noch ausstehende persönliche Prüfung nic
 
 ## Nächstes Paket
 
-AC0411 ist nach SE0082 abgeschlossen; Nachweise, Grenzen und Reproduktion
-stehen im [Arbeitspaket](next_arbeitspaket_2026-10-17_ac0411_1_m.md).
-Danach folgen regulär `AC0910_L`, `GE0204_M`, `AC0921_M` und `AC0232_M`.
+GE0204 ist nach AC0910 abgeschlossen; Nachweise und Reproduktion stehen im
+[Arbeitspaket](next_arbeitspaket_2026-10-18_ge0204_m.md).
+Danach folgen regulär `AC0921_M` und `AC0232_M`.
 Die übrigen offenen Aufgaben bleiben erhalten.

@@ -1,5 +1,5 @@
 {
-  "case_count": 368,
+  "case_count": 371,
   "cases": [
     {
       "description": "Pumpensymbol: Kreis mit einem gef\u00fcllten Dreieck, dessen Spitze nach rechts zeigt.",
@@ -3077,6 +3077,57 @@
       "svg": "svgs/GE0039_S.svg",
       "svg_sha256": "bb8527e45f879383ec34cdc8d5d156592178cc6cfbbced1f6909fb7789b63c8e",
       "variant": "GE0039_S"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/nested_flame_disk_recheck_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0204_L.jpg",
+      "image_sha256": "511752b42b7a826ccad8806a625313c8a382cb590a45c7b187296a4a149fad67",
+      "mean_delta2": 505.0910339355469,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8234420418739319,
+        "error_per_pixel": 0.002589214578677672,
+        "object_mask_iou": 0.9969040247678018
+      },
+      "svg": "svgs/GE0204_L.svg",
+      "svg_sha256": "ad4de030d64c4a85e247f6acc4992370cf348316db058fe5098f404a3dc4f37b",
+      "variant": "GE0204_L"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/nested_flame_disk_recheck_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0204_M.jpg",
+      "image_sha256": "b892ce794c35506ff792b322bb29dd24452235e370e7b86a943fc07e29d52416",
+      "mean_delta2": 358.1266784667969,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8910328149795532,
+        "error_per_pixel": 0.0018358409763772749,
+        "object_mask_iou": 0.989804587935429
+      },
+      "svg": "svgs/GE0204_M.svg",
+      "svg_sha256": "acf34c894ac94d3b34d5313f93b045265b09b374213fbfd7b5664c830c422bff",
+      "variant": "GE0204_M"
+    },
+    {
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "evidence": "artifacts/evaluation/nested_flame_disk_recheck_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/GE0204_S.jpg",
+      "image_sha256": "53387d7b01a29eb54cdadd90df644961dbfba2bc88c65a6c7c9242701994f3c4",
+      "mean_delta2": 372.6955871582031,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.9192265272140503,
+        "error_per_pixel": 0.0019105246041686691,
+        "object_mask_iou": 0.9951573849878934
+      },
+      "svg": "svgs/GE0204_S.svg",
+      "svg_sha256": "4a5a087dee0e24c9755df3cddd7d60e8535ed1442fd8e4ce78e2653f9275bccb",
+      "variant": "GE0204_S"
     },
     {
       "description": "Blaue Kugelform (blauer Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)",

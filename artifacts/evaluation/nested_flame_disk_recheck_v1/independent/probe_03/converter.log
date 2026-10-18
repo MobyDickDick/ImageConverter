@@ -1,0 +1,76 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Konvertiere probe_03.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite probe_03.png ---
+Bildbeschreibung: Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gefüllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gefüllte Flamme mit mehreren spitzen Zungen liegt vollständig im unteren Inneren der äußeren Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist etwas größer dargestellt und leicht nach links und unten versetzt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_flame_disk_registration", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 64, "current_error": 1.9181089743589743}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 128, "current_error": 2.97349358974359}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 192, "current_error": 1.6462179487179487}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 256, "current_error": 1.928653846153846}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 320, "current_error": 1.2801602564102563}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 384, "current_error": 1.598974358974359}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 448, "current_error": 1.3767628205128206}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 512, "current_error": 1.3301923076923077}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 576, "current_error": 1.2472435897435898}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 640, "current_error": 1.148621794871795}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 704, "current_error": 1.2908974358974359}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 768, "current_error": 1.2750320512820512}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 832, "current_error": 1.2166025641025642}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 896, "current_error": 1.2009615384615384}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 960, "current_error": 1.1753525641025642}
+[Search] {"source": "raster_flame_disk_registration", "event": "registration_finished", "evaluations": 1014, "best_error": 1.17125}
+[WARN] probe_03.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.933542, localized_error_fraction=0.657477).
+[INFO] Konvertiert probe_03.png | Parameter: mode=auto, label=M, variant_name=PROBE_03 | Qualität: Optimierungsfehler/Pixel=0.000113, Mean-Delta²=29.941828, RGB-RMSE/Kanal=3.159210, Raumscore=88.156253, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=6.2s
+[INFO] Konvertiere probe_03.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite probe_03.png ---
+Bildbeschreibung: Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gefüllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gefüllte Flamme mit mehreren spitzen Zungen liegt vollständig im unteren Inneren der äußeren Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist etwas größer dargestellt und leicht nach links und unten versetzt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_flame_disk_registration", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 64, "current_error": 1.9181089743589743}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 128, "current_error": 2.97349358974359}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 192, "current_error": 1.6462179487179487}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 256, "current_error": 1.928653846153846}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 320, "current_error": 1.2801602564102563}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 384, "current_error": 1.598974358974359}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 448, "current_error": 1.3767628205128206}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 512, "current_error": 1.3301923076923077}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 576, "current_error": 1.2472435897435898}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 640, "current_error": 1.148621794871795}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 704, "current_error": 1.2908974358974359}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 768, "current_error": 1.2750320512820512}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 832, "current_error": 1.2166025641025642}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 896, "current_error": 1.2009615384615384}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 960, "current_error": 1.1753525641025642}
+[Search] {"source": "raster_flame_disk_registration", "event": "registration_finished", "evaluations": 1014, "best_error": 1.17125}
+[WARN] probe_03.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.933542, localized_error_fraction=0.657477).
+[INFO] Konvertiert probe_03.png | Parameter: mode=auto, label=M, variant_name=PROBE_03 | Qualität: Optimierungsfehler/Pixel=0.000113, Mean-Delta²=29.941828, RGB-RMSE/Kanal=3.159210, Raumscore=88.156253, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=12.2s
+[INFO] Konvertiere probe_03.png | Parameter: Iterationen=92, max. Validierungsrunden=9
+
+--- Verarbeite probe_03.png ---
+Bildbeschreibung: Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gefüllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gefüllte Flamme mit mehreren spitzen Zungen liegt vollständig im unteren Inneren der äußeren Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist etwas größer dargestellt und leicht nach links und unten versetzt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "raster_flame_disk_registration", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 64, "current_error": 1.9181089743589743}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 128, "current_error": 2.97349358974359}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 192, "current_error": 1.6462179487179487}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 256, "current_error": 1.928653846153846}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 320, "current_error": 1.2801602564102563}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 384, "current_error": 1.598974358974359}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 448, "current_error": 1.3767628205128206}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 512, "current_error": 1.3301923076923077}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 576, "current_error": 1.2472435897435898}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 640, "current_error": 1.148621794871795}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 704, "current_error": 1.2908974358974359}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 768, "current_error": 1.2750320512820512}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 832, "current_error": 1.2166025641025642}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 896, "current_error": 1.2009615384615384}
+[Search] {"source": "raster_flame_disk_registration", "event": "registering", "evaluations": 960, "current_error": 1.1753525641025642}
+[Search] {"source": "raster_flame_disk_registration", "event": "registration_finished", "evaluations": 1014, "best_error": 1.17125}
+[WARN] probe_03.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.933542, localized_error_fraction=0.657477).
+[INFO] Konvertiert probe_03.png | Parameter: mode=auto, label=M, variant_name=PROBE_03 | Qualität: Optimierungsfehler/Pixel=0.000113, Mean-Delta²=29.941828, RGB-RMSE/Kanal=3.159210, Raumscore=88.156253, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=92/92 | Dauer=12.2s
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\.tmp\g204-independent\probe_03\conversion\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\.tmp\g204-independent\probe_03\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\.tmp\g204-independent\probe_03\conversion

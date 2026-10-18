@@ -1,0 +1,47 @@
+{
+  "baseline_description": "Hintergrund: GE0999. Komplexes zweifarbiges Flammensymbol. Unklar, ob dies automatisiert nachgezeichnet werden kann.",
+  "cases": [
+    {
+      "after_svg": "after/anonymous_nested_flame_00.svg",
+      "baseline_description": "Hintergrund: GE0999. Komplexes zweifarbiges Flammensymbol. Unklar, ob dies automatisiert nachgezeichnet werden kann.",
+      "before_svg": "before/anonymous_nested_flame_00.svg",
+      "case_id": "anonymous_nested_flame_00",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE0204_M.jpg",
+      "role": "target",
+      "source": "GE0204_M.jpg",
+      "source_sha256": "b892ce794c35506ff792b322bb29dd24452235e370e7b86a943fc07e29d52416"
+    },
+    {
+      "after_svg": "after/anonymous_nested_flame_01.svg",
+      "baseline_description": "Hintergrund: GE0999. Komplexes zweifarbiges Flammensymbol. Unklar, ob dies automatisiert nachgezeichnet werden kann.",
+      "before_svg": "before/anonymous_nested_flame_01.svg",
+      "case_id": "anonymous_nested_flame_01",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE0204_L.jpg",
+      "role": "size_holdout",
+      "source": "GE0204_L.jpg",
+      "source_sha256": "511752b42b7a826ccad8806a625313c8a382cb590a45c7b187296a4a149fad67"
+    },
+    {
+      "after_svg": "after/anonymous_nested_flame_02.svg",
+      "baseline_description": "Hintergrund: GE0999. Komplexes zweifarbiges Flammensymbol. Unklar, ob dies automatisiert nachgezeichnet werden kann.",
+      "before_svg": "before/anonymous_nested_flame_02.svg",
+      "case_id": "anonymous_nested_flame_02",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "image": "../../images_to_convert/GE0204_S.jpg",
+      "role": "size_holdout",
+      "source": "GE0204_S.jpg",
+      "source_sha256": "53387d7b01a29eb54cdadd90df644961dbfba2bc88c65a6c7c9242701994f3c4"
+    }
+  ],
+  "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+  "provenance": {
+    "baseline_mode": "fresh original-description production CLI, existing flame fitter enabled",
+    "commit": "9c155ba8e",
+    "execution_mode": "semantic-only",
+    "seed": 20261017,
+    "toolchain": "CPython 3.10.11, NumPy 2.2.6, OpenCV 4.14.0, PyMuPDF 1.26.7"
+  },
+  "schema_version": "flame_disk_recheck_manifest_v1"
+}

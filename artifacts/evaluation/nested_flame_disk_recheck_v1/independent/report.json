@@ -1,0 +1,797 @@
+{
+  "artifact_retention": "debug",
+  "cases": [
+    {
+      "blocked_svg_reads": [],
+      "case_id": "original",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "original/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.\n",
+      "elapsed_seconds": 35.203,
+      "failures": [],
+      "height": 100,
+      "input_png": "original/input.png",
+      "input_sha256": "73c957e4975236ef9fe17042125ba66a32c43298eab533ae1af06893128117c9",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9611763954162598,
+        "foreground_iou": 0.9834347532116294,
+        "foreground_mse": 0.00019672224880196154,
+        "normalized_mse": 0.0001458783372072503
+      },
+      "output_sha256": "2297a0866c2f417fa57b8b81ddbfd0f5717171b4780057fa9b4f16fd49929af1",
+      "output_svg": "original/output.svg",
+      "reference_svg": "original/reference.svg",
+      "reference_svg_sha256": "2437c83b10a088a244fa6a968578ed53d133e5f866c2a96c63fbd71046db8585",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.0,
+        "relative_y": 0.0,
+        "scale": 1.0
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_01",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_01/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die Darstellung ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "elapsed_seconds": 32.64,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_01/input.png",
+      "input_sha256": "c9c26c35a8b89cfb307bfec3b56bb052be7e0ff47e611cdf382d38c618a3564c",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9664824604988098,
+        "foreground_iou": 0.9763755051290022,
+        "foreground_mse": 0.0001927229604916647,
+        "normalized_mse": 0.00016085726383607835
+      },
+      "output_sha256": "637a7c2d47943f014169b9f17ed635f4a648768d3e4153de71760c7c0b442dc3",
+      "output_svg": "probe_01/output.svg",
+      "reference_svg": "probe_01/reference.svg",
+      "reference_svg_sha256": "8f8a9b82b787705a21e1eb3928d4e82946ef629914577ce90fe3613c020dc5b0",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0149554,
+        "relative_y": 0.01404737,
+        "scale": 1.04281285
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_02",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_02/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "elapsed_seconds": 30.421,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_02/input.png",
+      "input_sha256": "5de66aa0ce2e73dfb7c1b9aa9cbaa760942e8cc7400b0d9bcbbab0e67cebaaca",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9669451117515564,
+        "foreground_iou": 0.977627899325547,
+        "foreground_mse": 0.00017367721011396497,
+        "normalized_mse": 0.00014252852997742593
+      },
+      "output_sha256": "dbe88880dc46f829c43d6381e02724d4a4efb5f615c943c365d52864bca7c36c",
+      "output_svg": "probe_02/output.svg",
+      "reference_svg": "probe_02/reference.svg",
+      "reference_svg_sha256": "df29304aff0340bb26ca2d8dde780ca06ed70f66c9dfc259c4385ece365c822a",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01219469,
+        "relative_y": 0.02409658,
+        "scale": 1.01409436
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_03",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_03/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist etwas gr\u00f6\u00dfer dargestellt und leicht nach links und unten versetzt.",
+      "elapsed_seconds": 31.672,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_03/input.png",
+      "input_sha256": "4a141274e7b7391a8cf7312293a03a7aa20ac69361a3215302e21dc97d1ec274",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9719880819320679,
+        "foreground_iou": 0.9793337446020974,
+        "foreground_mse": 0.00017633089737500995,
+        "normalized_mse": 0.00015348881424870342
+      },
+      "output_sha256": "4d17338ee55e248e4be6d483e2b770b76640ca54f2a11269259bc493c84f4394",
+      "output_svg": "probe_03/output.svg",
+      "reference_svg": "probe_03/reference.svg",
+      "reference_svg_sha256": "4d97c83a1731557060b922d4d00cb920e09c31122cc10b377323132df9d1f394",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01945393,
+        "relative_y": 0.004432,
+        "scale": 1.04771352
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_04",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_04/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach rechts und oben versetzt.",
+      "elapsed_seconds": 32.187,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_04/input.png",
+      "input_sha256": "3efae5af99ea0c979198f4c80277627ccb095109da3515c606251e5f50b579c2",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9682692885398865,
+        "foreground_iou": 0.9783031088082902,
+        "foreground_mse": 0.00017932937771547586,
+        "normalized_mse": 0.0001453642180422321
+      },
+      "output_sha256": "fe9c809d2eadb44bf87654bc31fc29454490d9a8b6762a3bd76d0e22658abd74",
+      "output_svg": "probe_04/output.svg",
+      "reference_svg": "probe_04/reference.svg",
+      "reference_svg_sha256": "098e14e940a6ff6960aa254c580c425cbe0dd087005bec0efe130041c6615067",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00934637,
+        "relative_y": -0.02498267,
+        "scale": 1.0217956
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_05",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_05/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig gr\u00f6\u00dfer dargestellt und leicht nach rechts und unten verschoben.",
+      "elapsed_seconds": 34.203,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_05/input.png",
+      "input_sha256": "55b6fc549925967442cbb6452ffe95994400ecb8f352d4b7b282e2ef3f5ccccc",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9646350145339966,
+        "foreground_iou": 0.9776793041194813,
+        "foreground_mse": 0.00018068942881654948,
+        "normalized_mse": 0.00014408216520678252
+      },
+      "output_sha256": "6396efe5baed86d4f57cb9f1f00f0c7b7a6bf0b6ec63074ad92561d50ca12a5f",
+      "output_svg": "probe_05/output.svg",
+      "reference_svg": "probe_05/reference.svg",
+      "reference_svg_sha256": "37b607a177ddb28682093fc87e2294a39ffc40f304d98ed8e6e1aee14effe0b5",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02113508,
+        "relative_y": 0.00340482,
+        "scale": 1.01506327
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_06",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_06/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas kleiner dargestellt und etwas nach links und unten verschoben.",
+      "elapsed_seconds": 34.969,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_06/input.png",
+      "input_sha256": "da240809f4fb47ddf7918f5b2bd4551afc8cf5e84d108240798c0982ae4c4f67",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9546657204627991,
+        "foreground_iou": 0.9768483943241225,
+        "foreground_mse": 0.0002049718314083293,
+        "normalized_mse": 0.00014080088294576854
+      },
+      "output_sha256": "af796eaadd7040608ef90a7b49c21a72fc00cf5d01a6fb0cfafdde750dceb948",
+      "output_svg": "probe_06/output.svg",
+      "reference_svg": "probe_06/reference.svg",
+      "reference_svg_sha256": "15e4a51b3b982b6a7b74e9e1c32ae1c39d7ada405be3ad46f0f389363c63d567",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02210458,
+        "relative_y": 0.01042227,
+        "scale": 0.95167741
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_07",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_07/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und etwas nach rechts und oben versetzt.",
+      "elapsed_seconds": 29.75,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_07/input.png",
+      "input_sha256": "156875a622e538db1a3d74c05c4c928c5634ea12e5a9f91c149b3cc4ad68bc24",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.959753692150116,
+        "foreground_iou": 0.9770657672849916,
+        "foreground_mse": 0.0002283741341670975,
+        "normalized_mse": 0.00016993020835798234
+      },
+      "output_sha256": "1ae7670cda7b36e86825cb7769fe31effe1e3b3504208a1873bea24790a82776",
+      "output_svg": "probe_07/output.svg",
+      "reference_svg": "probe_07/reference.svg",
+      "reference_svg_sha256": "c3422b0db477995529ea33da714c8641c5e3606ea64a2624c33d12b56d4ee83c",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.01843312,
+        "relative_y": -0.00346665,
+        "scale": 1.00149991
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_08",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_08/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig kleiner dargestellt und etwas nach rechts und oben versetzt.",
+      "elapsed_seconds": 31.344,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_08/input.png",
+      "input_sha256": "4dc3452d4a1731228f2dec8b3f38cfb6665009c772502274c0c7aea2566e19cf",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9618828296661377,
+        "foreground_iou": 0.978688524590164,
+        "foreground_mse": 0.0001764012558851391,
+        "normalized_mse": 0.00013022164057474583
+      },
+      "output_sha256": "41a3e3d698f51210158eccf7ef15c6f5bc592b2ce56da441b1b6560d1d9d0893",
+      "output_svg": "probe_08/output.svg",
+      "reference_svg": "probe_08/reference.svg",
+      "reference_svg_sha256": "4c3c4904e846dbc1db1859477bd11d3d97de920accaf510ed1bd84b285c520a6",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02424477,
+        "relative_y": -0.01831125,
+        "scale": 0.96370277
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_09",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_09/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die Darstellung ist etwas kleiner dargestellt und leicht nach links und oben versetzt.",
+      "elapsed_seconds": 32.937,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_09/input.png",
+      "input_sha256": "f103c84be63a14a05c89709ed85b476fb145f47a1e83fe587b2ca294c9eb21b8",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9562494158744812,
+        "foreground_iou": 0.9830991264717053,
+        "foreground_mse": 0.00022561950027011335,
+        "normalized_mse": 0.00015202240319922566
+      },
+      "output_sha256": "ec58a5c5f5c8e17bb8b79480b959862db6e6242057a87e1ee40243dba1c9a646",
+      "output_svg": "probe_09/output.svg",
+      "reference_svg": "probe_09/reference.svg",
+      "reference_svg_sha256": "efd6806b404edb1c994e66f0f2cc858dc26a11bff1282dc1b9cf8fe498d29ad1",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.02460557,
+        "relative_y": -0.0063062,
+        "scale": 0.94452461
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_10",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_10/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist ein wenig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und oben verschoben.",
+      "elapsed_seconds": 31.25,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_10/input.png",
+      "input_sha256": "5eb01ce8c30d7ba78558b72ded3ba5f80fec399a90b1ecb80e978cfc73b4b7f8",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9676111936569214,
+        "foreground_iou": 0.9783001808318263,
+        "foreground_mse": 0.0001785788481356576,
+        "normalized_mse": 0.00014711158291902393
+      },
+      "output_sha256": "ed72e131ad52a247a93b89bca6940dd8181d23e298ae8712c3af709b1fcdd2c0",
+      "output_svg": "probe_10/output.svg",
+      "reference_svg": "probe_10/reference.svg",
+      "reference_svg_sha256": "0fa7764640ebaf6b5ffc9c6cdb83d92ead6bf0b135caebd33d61d67e07570da5",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01341343,
+        "relative_y": -0.01747129,
+        "scale": 1.01463589
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_11",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_11/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten verschoben.",
+      "elapsed_seconds": 33.812,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_11/input.png",
+      "input_sha256": "f380834e71a813e17237b57a1ba8085cf7daf5d3daea66cd72e41eb8bfb3ecb9",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9531848430633545,
+        "foreground_iou": 0.9784293899561847,
+        "foreground_mse": 0.00018064313917420805,
+        "normalized_mse": 0.00013686205784324557
+      },
+      "output_sha256": "002f5fa75374fc78ffb0fca26838c9389b164ae3a46ceca6b5d4dfd0cc8ae6ac",
+      "output_svg": "probe_11/output.svg",
+      "reference_svg": "probe_11/reference.svg",
+      "reference_svg_sha256": "59274fb374b435ddf4738ce2051404f190d58ef66dc7d7c982729f7cb206594d",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.01618893,
+        "relative_y": 0.02334897,
+        "scale": 1.00114343
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_12",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_12/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist geringf\u00fcgig gr\u00f6\u00dfer dargestellt und geringf\u00fcgig nach links und unten versetzt.",
+      "elapsed_seconds": 33.656,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_12/input.png",
+      "input_sha256": "d83ed1a89cc61f2ea4913d693df059f47f9b1bf2736d2d26c42a19083931263c",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9534661769866943,
+        "foreground_iou": 0.9757091620476035,
+        "foreground_mse": 0.00018586733494885266,
+        "normalized_mse": 0.00014842468954157084
+      },
+      "output_sha256": "7e14b284c44472c51180617655a5a3c87ccd52e12421ccaf18f7932b1fe48d30",
+      "output_svg": "probe_12/output.svg",
+      "reference_svg": "probe_12/reference.svg",
+      "reference_svg_sha256": "30000e1a2b556ebcbc9659f019caf2007d96b04aaed9ba421a906ed94b646c82",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0015255,
+        "relative_y": 0.01511785,
+        "scale": 1.01824388
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_13",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_13/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das Motiv ist ein wenig kleiner dargestellt und etwas nach rechts und unten versetzt.",
+      "elapsed_seconds": 30.266,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_13/input.png",
+      "input_sha256": "270c350d97f64102ac9772d296b7ee24735e23ab057317c2c9f32e6d759afb5c",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9722384810447693,
+        "foreground_iou": 0.9801324503311258,
+        "foreground_mse": 0.00016041085473261774,
+        "normalized_mse": 0.00011476059444248676
+      },
+      "output_sha256": "ac68ba1b4f7a389dec2f0effc16a0fb459bf8a5ea2bf647f65bbc4ba9d57d111",
+      "output_svg": "probe_13/output.svg",
+      "reference_svg": "probe_13/reference.svg",
+      "reference_svg_sha256": "3446aca40bdd93dd9ec51b39ae7fff5ee114a1ab15c7fdd84aca05e4a91b6651",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02024787,
+        "relative_y": 0.00270128,
+        "scale": 0.94506484
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_14",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_14/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Die Darstellung ist leicht kleiner dargestellt und geringf\u00fcgig nach rechts und unten verschoben.",
+      "elapsed_seconds": 27.468,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_14/input.png",
+      "input_sha256": "31549d4070df1dcdfb9827dc2d268d54a304b7251d4e412711d9d32eec808ea6",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9738726615905762,
+        "foreground_iou": 0.9780033840947546,
+        "foreground_mse": 0.00018737120262812823,
+        "normalized_mse": 0.000147692218888551
+      },
+      "output_sha256": "3618a59ed5311ca2fe07511d4542a862696cbc34d1d5ba78aed413ee7e54b656",
+      "output_svg": "probe_14/output.svg",
+      "reference_svg": "probe_14/reference.svg",
+      "reference_svg_sha256": "40249819ad92f4cb2a0f2f9b6c6b451e4404ddb144aa09a97ca171516f62b754",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.00180461,
+        "relative_y": 0.00170246,
+        "scale": 0.99997072
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_15",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_15/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht kleiner dargestellt und geringf\u00fcgig nach links und oben versetzt.",
+      "elapsed_seconds": 33.266,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_15/input.png",
+      "input_sha256": "814d90888a7e87283145a2e6d9a8445b47edb93db0a402575197cc0ac2a7a8f6",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.9589545130729675,
+        "foreground_iou": 0.9841772151898734,
+        "foreground_mse": 0.00020831670553889126,
+        "normalized_mse": 0.00014168415509629995
+      },
+      "output_sha256": "d59e9ac88ccef111bb0ce6f0401ff677932a0d3f7aa470e9f2c31dbf42c20f10",
+      "output_svg": "probe_15/output.svg",
+      "reference_svg": "probe_15/reference.svg",
+      "reference_svg_sha256": "7e3dff5e81eb7d7f470c381c356d81ec7ee45de641994fa950b0c54ac6c6d09f",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": -0.0026847,
+        "relative_y": -0.01725626,
+        "scale": 0.95282094
+      },
+      "width": 104
+    },
+    {
+      "blocked_svg_reads": [],
+      "case_id": "probe_16",
+      "complexity": {
+        "embedded_raster_count": 0,
+        "parse_error": null,
+        "path_command_count": 12,
+        "path_complexity_ratio": 2.0,
+        "path_count": 2,
+        "vector_element_count": 6
+      },
+      "converter_log": "probe_16/converter.log",
+      "description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild. Das gesamte Motiv ist leicht kleiner dargestellt und geringf\u00fcgig nach rechts und unten verschoben.",
+      "elapsed_seconds": 32.625,
+      "failures": [],
+      "height": 100,
+      "input_png": "probe_16/input.png",
+      "input_sha256": "ecf75b6b52fab10d1ff1de247683e2ed0fefe37c3865be0f2081a27ed7a06b6d",
+      "limits": {
+        "max_foreground_mse": 0.04,
+        "max_normalized_mse": 0.01,
+        "max_path_commands": 160,
+        "max_svg_elements": 80,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85
+      },
+      "metrics": {
+        "edge_alignment": 0.967287540435791,
+        "foreground_iou": 0.9803921568627451,
+        "foreground_mse": 0.00017671368550509214,
+        "normalized_mse": 0.00012535712448880076
+      },
+      "output_sha256": "e2401039f58ffaf55a5b98b582bc9b8f602eec1801611d2e3e3e0aa84e31b563",
+      "output_svg": "probe_16/output.svg",
+      "reference_svg": "probe_16/reference.svg",
+      "reference_svg_sha256": "cf4b20c1bc66be62b9982e6030c2c5d5bd094820d73d83935f8d27d7dc83c0d2",
+      "returncode": 0,
+      "satisfactory": true,
+      "variation": {
+        "relative_x": 0.02374944,
+        "relative_y": 0.01921438,
+        "scale": 0.96012384
+      },
+      "width": 104
+    }
+  ],
+  "iterations": 64,
+  "limits": {
+    "max_foreground_mse": 0.04,
+    "max_normalized_mse": 0.01,
+    "max_path_commands": 160,
+    "max_svg_elements": 80,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85
+  },
+  "original_satisfactory": true,
+  "schema_version": "plan_b_variations_v2",
+  "seed": 20261018,
+  "source_description": "Eine gef\u00fcllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gef\u00fcllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gef\u00fcllte Flamme mit mehreren spitzen Zungen liegt vollst\u00e4ndig im unteren Inneren der \u00e4u\u00dferen Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.\n",
+  "source_description_sha256": "b483984520b5d2c0fa954fecd45419ad85fc923116442c2684f4558c8dd979d4",
+  "source_image": "source.png",
+  "source_image_sha256": "73c957e4975236ef9fe17042125ba66a32c43298eab533ae1af06893128117c9",
+  "source_svg_sha256": "732b6f1a136ec5eacc8c9da1415f6b6786c629003b59622e7b90c2fe02703ad1",
+  "status": "completed",
+  "summary": {
+    "completed": 17,
+    "failed": 0,
+    "passed": 17,
+    "required": 17,
+    "satisfactory": true
+  },
+  "timeout_seconds": 60,
+  "variations_started": true
+}
