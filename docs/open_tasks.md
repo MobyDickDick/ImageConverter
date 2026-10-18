@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-10-17)
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-18)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `472` · Erledigt `434` · Offen `38`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `473` · Erledigt `435` · Offen `38`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -34,11 +34,17 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 ## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
 
-### Aktueller Plan-B-Stand (2026-10-17)
+### Aktueller Plan-B-Stand (2026-10-18)
+
+- [x] **GE0204 – zwei verschachtelte Flammen auf Verlaufsscheibe:** Eigenständige Beschreibung in beiden XML-Katalogen aktiviert den unveränderten allgemeinen Flammenfit. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. 371 Archivpaare, alle 368 bisherigen Datensätze unverändert. Nächste Rotation: `AC0921_M`, `AC0232_M`. Details: `docs/next_arbeitspaket_2026-10-18_ge0204_m.md`.
+
+**Neuester Abschluss:** GE0204 M/L/S. Nächste Rotation: `AC0921_M`, `AC0232_M`.
+
+### Vorheriger Plan-B-Stand (2026-10-17)
 
 - [x] **AC0910 – Kreisscheibe mit Lux:** eigenständige Beschreibungen und begrenzte Verfeinerung von Zeichenpositionen und Konturstärke. L/M/S bestehen beide regulären und die strengen Pixelgates; zwei unabhängige CLI-Batterien mit mPa bestehen jeweils 17/17. 368 Archivpaare, alle 365 bisherigen Datensätze unverändert. Nächste Rotation: `GE0204_M`, `AC0921_M`, `AC0232_M`. Details: `docs/next_arbeitspaket_2026-10-17_ac0910_l.md`.
 
-**Neuester Abschluss:** AC0910 L/M/S; beide regulären und die strengen Gates bestanden. Nächste Rotation: `GE0204_M`, `AC0921_M`, `AC0232_M`.
+**Vorheriger Abschluss:** AC0910 L/M/S; beide regulären und die strengen Gates bestanden. Nächste Rotation: `GE0204_M`, `AC0921_M`, `AC0232_M`.
 
 - [x] **SE0082 – Quadrat mit linkem Griff und horizontalem M:** eigenständige Beschreibung, allgemeine linke Quadrat-/Textregistrierung, lokale Zeichenprüfung und tatsächlicher Renderzähler. Beide regulären und die strengeren Pixelgates bestehen ohne Pflichtmetrikregression; zwei unabhängige CLI-Batterien bestehen jeweils 17/17. 356 archivierte Paare; alle 355 bisherigen Einträge unverändert. Nächste Rotation: `AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`, `AC0232_M`. Details: `docs/next_arbeitspaket_2026-10-17_se0082.md`.
 

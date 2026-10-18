@@ -1,0 +1,42 @@
+{
+  "compileall": {
+    "command": [
+      ".venv\\Scripts\\python.exe",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "tests",
+      "tools"
+    ],
+    "exit_code": 0
+  },
+  "cli_help": {
+    "command": [
+      ".venv\\Scripts\\python.exe",
+      "-m",
+      "src.imageCompositeConverter",
+      "--help"
+    ],
+    "exit_code": 0
+  },
+  "image_id_guard": {
+    "command": [
+      ".venv\\Scripts\\python.exe",
+      "-m",
+      "tools.check_no_new_image_id_hardcoding"
+    ],
+    "exit_code": 0
+  },
+  "diff_check": {
+    "command": [
+      "git",
+      "-c",
+      "core.whitespace=cr-at-eol",
+      "diff",
+      "HEAD",
+      "--check"
+    ],
+    "exit_code": 0
+  }
+}

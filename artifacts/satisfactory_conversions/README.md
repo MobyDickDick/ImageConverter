@@ -1,10 +1,10 @@
 # Zufriedenstellende Konvertierungen
 
-368 geprÃ¼fte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
+371 geprüfte Bild-/SVG-Paare. Originalbilder liegen in `images/`, Vektoren in `svgs/`.
 
-Die erweiterten Tests konvertieren alle EintrÃ¤ge aus `index.json` erneut aus Bild und Beschreibung.
+Die erweiterten Tests konvertieren alle Einträge aus `index.json` erneut aus Bild und Beschreibung.
 
-| Bild | SVG | Mean-DeltaÂ² | PrÃ¼fung |
+| Bild | SVG | Mean-Delta² | Prüfung |
 |---|---|---:|---|
 | [AC0252](images/AC0252.jpg) | [SVG](svgs/AC0252.svg) | 328.445374 | semantic-only |
 | [AC0252_1](images/AC0252_1.jpg) | [SVG](svgs/AC0252_1.svg) | 458.776276 | semantic-only |
@@ -187,6 +187,9 @@ Die erweiterten Tests konvertieren alle EintrÃ¤ge aus `index.json` erneut aus 
 | [GE0039_L](images/GE0039_L.jpg) | [SVG](svgs/GE0039_L.svg) | 132.414291 | semantic-only |
 | [GE0039_M](images/GE0039_M.jpg) | [SVG](svgs/GE0039_M.svg) | 148.783890 | semantic-only |
 | [GE0039_S](images/GE0039_S.jpg) | [SVG](svgs/GE0039_S.svg) | 155.768005 | semantic-only |
+| [GE0204_L](images/GE0204_L.jpg) | [SVG](svgs/GE0204_L.svg) | 505.091034 | semantic-only |
+| [GE0204_M](images/GE0204_M.jpg) | [SVG](svgs/GE0204_M.svg) | 358.126678 | semantic-only |
+| [GE0204_S](images/GE0204_S.jpg) | [SVG](svgs/GE0204_S.svg) | 372.695587 | semantic-only |
 | [GE0280](images/GE0280.jpg) | [SVG](svgs/GE0280.svg) | 459.058960 | semantic-only |
 | [GE0281](images/GE0281.jpg) | [SVG](svgs/GE0281.svg) | 308.333344 | semantic-only |
 | [GE0282](images/GE0282.jpg) | [SVG](svgs/GE0282.svg) | 149.666672 | semantic-only |
