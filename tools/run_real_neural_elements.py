@@ -243,11 +243,23 @@ def run_trial(output, work, parent, manifest, model_seed, smoke):
     return report
 
 
+def decision(records, cases):
+    result = first.decision(records, cases)
+    unobserved = sum(bool(r.get('observation_censored')) for r in records)
+    result['unobserved_startup_timeouts'] = unobserved
+    if unobserved:
+        result['promote_to_default'] = False
+        result['quality_benefit_demonstrated'] = False
+        result['outcome'] = ('Unobserved startup interruption retained as failure; '
+            'comparison cannot justify promotion. Retain analytic default.')
+    return result
+
+
 def aggregate(reports):
     rows = [dict(r, seed=(report['training_seed'], r['seed'])) for report in reports for r in report['records']]
     cases = {c['case_id']:c for report in reports for c in json.loads(
         (Path(report['_path'])/'manifest.json').read_text(encoding='utf-8'))['cases']}
-    result = dict(summary=first.summarize(rows), decision=first.decision(rows, list(cases.values())))
+    result = dict(summary=first.summarize(rows), decision=decision(rows, list(cases.values())))
     result['by_family'] = [dict(family=f, **{m:dict(attempts=sum(r['family']==f and r['mode']==m for r in rows),
         accepted=sum(r['family']==f and r['mode']==m and r['satisfactory'] for r in rows)) for m in ('analytic','neural')})
         for f in sorted({r['family'] for r in rows})]

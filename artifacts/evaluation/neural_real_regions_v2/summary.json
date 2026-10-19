@@ -10,7 +10,7 @@
     "training_protocol.json": "4a2564dfbd5b22399f7f1e80330da495e96bc040b52a13d754e2dadd22c585b7"
   },
   "harness_sha256": {
-    "tools/run_real_neural_elements.py": "d059e9a4d7509f5fdd52fdf2c8fee767e6b7682ffba0bc877320eaae10a46d26",
+    "tools/run_real_neural_elements.py": "4de8c1c42ce09a43518aaca4458020db4782e8535fb7cc85e8a89e7eae3133f9",
     "tools/run_neural_elements.py": "dc45fdc34a62fe0972203398f63a2629cd3e3961db6a56dac62d45fb07121ee6",
     "tools/train_neural_elements.py": "6ef2413e42d5cf770985beb64cada48bd1c9ecd446600738d5fe0a9b5e4a45f5",
     "tools/run_anytime_benchmark.py": "85b56e76ec4bcfb2d6889403fb017438dd0c1019b71cfe72ea52340541e91d01",
@@ -21,7 +21,7 @@
     "42": "3d67d83062648745461cb1749ead30e5bd24b4f8e7321306f99cfdc4a1320ed1",
     "101": "0515883f1ca7f406cfc064f21718148323ee9c236a97d0a4c13fcc590405581c"
   },
-  "detector_records_sha256": "7fd34a97fdee235dd1d64450a7ff27e91f63c25198323b503ddd175a87c61a7b",
+  "detector_records_sha256": "1f1e7f29be078722cae8a375e13f9f304dbf2293056a6f238ed274578d59bb9f",
   "detector_summary": {
     "train": {
       "expected": 72,
@@ -130,7 +130,8 @@
       "acceptance_95_half_width": 0.858938816693475,
       "quality_benefit_demonstrated": false,
       "time_equivalence_established": false,
-      "outcome": "No demonstrated independent real end-to-end benefit; retain analytic default."
+      "outcome": "Unobserved startup interruption retained as failure; comparison cannot justify promotion. Retain analytic default.",
+      "unobserved_startup_timeouts": 1
     },
     "by_family": [
       {

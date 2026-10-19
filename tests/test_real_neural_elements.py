@@ -122,6 +122,17 @@ def test_unobserved_startup_is_retained_only_as_an_explicit_failure():
     assert study.first.censored_startup(censored_row())
 
 
+def test_unobserved_baseline_cannot_manufacture_a_positive_promotion():
+    cases=[dict(case_id=f'case_{i}',family=f'family_{i}') for i in range(10)]
+    rows=[dict(case_id=c['case_id'], family=c['family'], split='real_holdout', mode=mode, seed=17,
+               satisfactory=mode=='neural') for c in cases for mode in ('analytic','neural')]
+    assert study.first.decision(rows,cases)['promote_to_default']
+    rows[0].update(censored_row())
+    result=study.decision(rows,cases)
+    assert not result['promote_to_default'] and not result['quality_benefit_demonstrated']
+    assert result['unobserved_startup_timeouts']==1
+
+
 @pytest.mark.parametrize('damage', ['svg','acceptance','quality','controls','not_isolated','early','missing_flag'])
 def test_unobserved_startup_cannot_hide_outputs_or_invent_model_execution(damage):
     row=censored_row()

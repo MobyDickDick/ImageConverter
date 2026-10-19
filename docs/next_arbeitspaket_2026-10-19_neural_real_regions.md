@@ -118,7 +118,9 @@ praktischen Nutzen des Kandidaten.
 Die drei Modelle treffen auf den neuen Originalrastern 25 von 72 erwarteten
 Klassen-/Positionszuordnungen (24 Regionen × drei Modelle), bei kleinen
 Regionen 3/24. Gleichzeitig entstehen 1.369 hochsichere, nicht passende
-Vorschläge und sieben zusätzliche Duplikate. Auf den sechs Entwicklungsfamilien
+Vorschläge und sieben zusätzliche Duplikate. 73 dieser nicht passenden
+Vorschläge sind als `unknown` klassifiziert, 1.296 behaupten eine bekannte
+Klasse; darunter fallen 1.106 Rechteckvorschläge. Auf den sechs Entwicklungsfamilien
 werden 17/45 Regionen getroffen, gegenüber keiner beim ersten, anders
 trainierten Kandidaten. Wegen der geänderten Annotation einer P-Scheibe ist
 das kein exakter gepaarter Modellvergleich. Der reine synthetische
@@ -150,7 +152,12 @@ weder SVG noch Schalter-/Inferenzbeleg. Der neue Verifikationsmodus erlaubt
 diesen fehlenden Start ausschließlich als ausdrücklich zensierten,
 unbeobachteten Fehlschlag ohne Ausgaben oder erfundene Nullkosten; bestehende
 Prüfungen bleiben standardmäßig strikt. Er zählt nicht als nachgewiesen
-ausgeführtes Netz. Die konfigurierten Fünfsekundenbudgets sind damit kein
+ausgeführtes Netz. Sobald ein solcher unbeobachteter Start enthalten ist,
+sperrt die Entscheidungsregel jede Standardübernahme, auch bei nominell
+positiven Erfolgszahlen; eine Regression prüft genau diesen Gegenfall.
+Diese konservative Wiederaufnahmesperre wurde nach der beobachteten
+Unterbrechung ergänzt; keine Messzelle wurde ersetzt und kein Gate gelockert.
+Die konfigurierten Fünfsekundenbudgets sind damit kein
 Beleg für eine durchgängig eingehaltene Wallclock-Grenze bei dieser
 Umgebungsunterbrechung. Der andere fehlende Output ist der oben genannte
 reguläre analytische Flammen-Timeout.
@@ -196,9 +203,20 @@ mit `--neural-elements-model artifacts/evaluation/neural_real_regions_v2/models/
 verwenden. Ohne diesen Schalter bleibt sie analytisch. Die kompakte Ablage
 enthält rund 200 KB für die drei Modelle einschließlich Trainingsprotokoll
 und Trainingsmessung. Syntax-, CLI-Help- und Hardcoding-Prüfung bestehen;
-die betroffene Regression besteht mit **125 Tests**. Der separat lokal
+die betroffene Regression besteht mit **126 Tests**. Der separat lokal
 ausgeführte und erneut verifizierte CI-Smoke besteht mit vier SVGs aus vier
 Versuchen. Ein entfernter CI-Lauf wurde hier nicht gestartet.
+
+Der zu Arbeitsbeginn gesammelte vollständige Standard-/Baseline-Lauf
+(`python -m pytest -q`) endet mit **3.546 bestandenen und 30 übersprungenen
+Tests**, ohne Fehler. Er umfasst den damaligen Testbestand; das neu angelegte
+Testmodul und der endgültige v2-/Entscheidungsstand sind durch die anschließend
+ausgeführte abschließende Regression mit 126 Tests abgedeckt. Die schweren
+optionalen Module bleiben gemäß dem vorhandenen Standardprofil ausgenommen.
+Die Gesamtdauer von rund 116 Minuten enthält lange Umgebungsunterbrechungen
+und ist keine Konvertierungs-Laufzeitmessung. Lokale Protokolle:
+`.tmp/real02-full-tests.log`, `.tmp/real02-target-final2.log` und
+`.tmp/real-neural-preserved-final.log`.
 
 Das begrenzte reale Detektorexperiment ist abgeschlossen; die produktive
 Abnahme von NEURAL-ELEMENTS-01 bleibt offen. Nächste Architekturarbeit ist
