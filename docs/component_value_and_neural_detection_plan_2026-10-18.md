@@ -11,6 +11,12 @@ ist optional umgesetzt und mit 84 echten CLI-Versuchen untersucht. Er zeigt
 keinen zusätzlichen Erfolg und bleibt außerhalb des Standardpfads.
 Die produktive Netzabnahme bleibt offen; vorhandene Erkenner werden erhalten.
 
+Auch das [reale Folgeexperiment NEURAL-ELEMENTS-REAL-02](next_arbeitspaket_2026-10-19_neural_real_regions.md)
+ist inzwischen abgeschlossen: neun reale Trainingsfamilien, sechs bisherige
+Entwicklungsfamilien, zehn neue Abnahmefamilien und 180 echte CLI-Versuche.
+Bessere Regionsabdeckung führt noch nicht zu belastbarem End-to-End-Nutzen;
+die analytische Standardkonvertierung bleibt erhalten.
+
 ## Kleines neuronales Netz als zusätzlicher Erkennungs-Bot
 
 Ein kleines Faltungsnetz (CNN) ist ein sinnvoller Versuch für die Erkennung

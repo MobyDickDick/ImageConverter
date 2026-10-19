@@ -75,3 +75,12 @@ htmlcov/
 !/artifacts/evaluation/neural_elements_v*/checks.json
 !/artifacts/evaluation/neural_elements_v*/manifest.json
 !/artifacts/evaluation/neural_elements_v*/models/
+
+# Real-region experiments retain annotations, inventory and compact evidence.
+/artifacts/evaluation/neural_real_regions_v*/*
+!/artifacts/evaluation/neural_real_regions_v*/README.md
+!/artifacts/evaluation/neural_real_regions_v*/manifest.json
+!/artifacts/evaluation/neural_real_regions_v*/summary.json
+!/artifacts/evaluation/neural_real_regions_v*/checks.json
+!/artifacts/evaluation/neural_real_regions_v*/region_audit.json
+!/artifacts/evaluation/neural_real_regions_v*/models/

@@ -187,3 +187,9 @@ vorsehen; die hier bereits betrachteten sechs Familien sind künftig nur
 Entwicklungsdaten. Danach eine geänderte Regionenerzeugung und einen zweiten
 kleinen Detektor bei gleichem Budget gegen diesen unveränderten analytischen
 Standard prüfen. Keine Standardaktivierung ohne positiven End-to-End-Nachweis.
+
+Fortschreibung: [NEURAL-ELEMENTS-REAL-02](next_arbeitspaket_2026-10-19_neural_real_regions.md)
+ist mit getrennten realen Trainingsfamilien, zehn neuen Abnahmefamilien und
+180 CLI-Versuchen inzwischen abgeschlossen. Auch der zweite Kandidat zeigt
+keinen belastbaren End-to-End-Nutzen. Die produktive Netzabnahme bleibt offen;
+die nächste Architekturarbeit ist GENERAL-SCENE-01.

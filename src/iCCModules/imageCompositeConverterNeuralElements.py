@@ -53,12 +53,14 @@ def load_model(path):
         raise ValueError('Neural model exceeds 200 KB')
     raw = path.read_bytes()
     data = json.loads(raw)
-    if not isinstance(data, dict) or data.get('schema') != 'tiny_elements_cnn_v1' or data.get('classes') != list(CLASSES):
+    if not isinstance(data, dict) or data.get('schema') not in ('tiny_elements_cnn_v1', 'tiny_elements_cnn_v2') or data.get('classes') != list(CLASSES):
         raise ValueError('Unsupported neural model schema/classes')
     weights = {key: np.asarray(data['weights'][key], dtype=np.float32) for key in SHAPES}
     if any(weights[k].shape != shape or not np.isfinite(weights[k]).all()
            or np.abs(weights[k]).max() > 100 for k, shape in SHAPES.items()):
         raise ValueError('Invalid neural weights')
+    if data['schema'] == 'tiny_elements_cnn_v2':
+        weights['_region_version'] = 2
     return weights, hashlib.sha256(raw).hexdigest()
 
 
@@ -91,8 +93,47 @@ def box_iou(a, b):
     return area/max(1, a[2]*a[3]+b[2]*b[3]-area)
 
 
+def region_boxes_v2(image):
+    """Bounded multilevel regions, including bright islands inside filled shapes.
+
+    This is a proposal generator, not instance segmentation. In particular an
+    arbitrary touching composite can still remain a single unknown region.
+    No source identity, description, annotation or reference vector is used.
+    """
+    h, w = image.shape[:2]
+    boxes = list(region_boxes(image))
+    # Per-channel levels also separate equal-luminance coloured interiors.
+    channels = [cv2.cvtColor(image, cv2.COLOR_BGR2GRAY), *cv2.split(image)]
+    for channel in channels:
+        for threshold in (45, 90, 140, 190, 225, 245):
+            mask = (channel < threshold).astype(np.uint8)
+            contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+            small = np.zeros((h, w), np.uint8)
+            for contour in contours:
+                x, y, bw, bh = cv2.boundingRect(contour)
+                if cv2.contourArea(contour) < 2 or min(bw, bh) < 2:
+                    continue
+                # findContours includes a one-pixel surround around hole
+                # contours; the loose box is intentional and independently
+                # measured with the same IoU rule as all other proposals.
+                boxes.append((x, y, bw, bh))
+                if bw < .7*w and bh < .7*h:
+                    cv2.drawContours(small, [contour], -1, 1, -1)
+            # Group nearby glyphs without filling in their enclosing disk.
+            grouped = cv2.morphologyEx(small, cv2.MORPH_CLOSE, np.ones((1, 3), np.uint8))
+            _, _, stats, _ = cv2.connectedComponentsWithStats(grouped)
+            boxes.extend(tuple(map(int, s[:4])) for s in stats[1:] if s[4] >= 3)
+    chosen = []
+    for box in sorted(set(boxes), key=lambda b: (-b[2]*b[3], b)):
+        if not any(box_iou(box, other) > .65 for other in chosen):
+            chosen.append(box)
+        if len(chosen) == 128:
+            break
+    return chosen
+
+
 def detect(image, weights):
-    boxes = region_boxes(image)
+    boxes = region_boxes_v2(image) if weights.get('_region_version') == 2 else region_boxes(image)
     if not boxes:
         return []
     batch = np.stack([chip(image[y:y+h, x:x+w]) for x, y, w, h in boxes])

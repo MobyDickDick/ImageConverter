@@ -1,0 +1,248 @@
+{
+  "schema": "real_neural_elements_v2",
+  "smoke": false,
+  "manifest_sha256": "27495d54ed775d041ad55e964db95a5538a1dee96e3b3ecb0ecafa146f947249",
+  "model_files": {
+    "model-101.json": "9f9470d52d2d89e5c3dc765dcb1c32997f11ed925627edc7aafa1504456eb833",
+    "model-17.json": "5c6c8f517715313522dc9358b18360341a6e92f5e783db1f22c37cf95a7ee71a",
+    "model-42.json": "b9578a7167c90091b2ffdb40f047827bdafe49607a1ead965c285d356484a023",
+    "training.json": "f92e71827cd4361c6896a92ab5ae47e9f030da437b6b6134d7be0b153db09d9d",
+    "training_protocol.json": "4a2564dfbd5b22399f7f1e80330da495e96bc040b52a13d754e2dadd22c585b7"
+  },
+  "harness_sha256": {
+    "tools/run_real_neural_elements.py": "d059e9a4d7509f5fdd52fdf2c8fee767e6b7682ffba0bc877320eaae10a46d26",
+    "tools/run_neural_elements.py": "dc45fdc34a62fe0972203398f63a2629cd3e3961db6a56dac62d45fb07121ee6",
+    "tools/train_neural_elements.py": "6ef2413e42d5cf770985beb64cada48bd1c9ecd446600738d5fe0a9b5e4a45f5",
+    "tools/run_anytime_benchmark.py": "85b56e76ec4bcfb2d6889403fb017438dd0c1019b71cfe72ea52340541e91d01",
+    "tools/anytime_observer.py": "46fa2d9e2ede2b1d11fe42e90d95bb292e31112ec136964df032abd594e58c83"
+  },
+  "trials": {
+    "17": "8f375441d23b8bb0b18db2059753bd91da619d6d7724bb87c5109665f4fec1c7",
+    "42": "3d67d83062648745461cb1749ead30e5bd24b4f8e7321306f99cfdc4a1320ed1",
+    "101": "0515883f1ca7f406cfc064f21718148323ee9c236a97d0a4c13fcc590405581c"
+  },
+  "detector_records_sha256": "7fd34a97fdee235dd1d64450a7ff27e91f63c25198323b503ddd175a87c61a7b",
+  "detector_summary": {
+    "train": {
+      "expected": 72,
+      "matched": 46,
+      "small_expected": 12,
+      "small_matched": 0,
+      "unmatched_high_confidence": 1090,
+      "duplicate_high_confidence": 13
+    },
+    "development": {
+      "expected": 45,
+      "matched": 17,
+      "small_expected": 15,
+      "small_matched": 3,
+      "unmatched_high_confidence": 172,
+      "duplicate_high_confidence": 0
+    },
+    "real_holdout": {
+      "expected": 72,
+      "matched": 25,
+      "small_expected": 24,
+      "small_matched": 3,
+      "unmatched_high_confidence": 1369,
+      "duplicate_high_confidence": 7
+    }
+  },
+  "partition_counts": {
+    "train": {
+      "sources": 11,
+      "families": 9
+    },
+    "development": {
+      "sources": 6,
+      "families": 6
+    },
+    "real_holdout": {
+      "sources": 10,
+      "families": 10
+    }
+  },
+  "proposal_summary": {
+    "train": {
+      "original": {
+        "expected": 24,
+        "covered": 13
+      },
+      "multilevel": {
+        "expected": 24,
+        "covered": 20
+      }
+    },
+    "development": {
+      "original": {
+        "expected": 15,
+        "covered": 6
+      },
+      "multilevel": {
+        "expected": 15,
+        "covered": 13
+      }
+    },
+    "real_holdout": {
+      "original": {
+        "expected": 24,
+        "covered": 15
+      },
+      "multilevel": {
+        "expected": 24,
+        "covered": 21
+      }
+    }
+  },
+  "results": {
+    "summary": [
+      {
+        "mode": "analytic",
+        "split": "real_holdout",
+        "attempts": 90,
+        "accepted": 71,
+        "missing_outputs": 1,
+        "median_image_seconds": 1.602,
+        "p95_image_seconds": 4.4887,
+        "renders": 48780,
+        "peak_worker_bytes": 88268800
+      },
+      {
+        "mode": "neural",
+        "split": "real_holdout",
+        "attempts": 90,
+        "accepted": 72,
+        "missing_outputs": 1,
+        "median_image_seconds": 1.6015000000000001,
+        "p95_image_seconds": 4.509849999999999,
+        "renders": 48506,
+        "peak_worker_bytes": 88686592
+      }
+    ],
+    "decision": {
+      "promote_to_default": false,
+      "real_families": 10,
+      "paired_real_trials": 90,
+      "gained": 1,
+      "lost": 0,
+      "byte_identical_outputs": 88,
+      "acceptance_difference": 0.01111111111111111,
+      "acceptance_95_half_width": 0.858938816693475,
+      "quality_benefit_demonstrated": false,
+      "time_equivalence_established": false,
+      "outcome": "No demonstrated independent real end-to-end benefit; retain analytic default."
+    },
+    "by_family": [
+      {
+        "family": "T_branch",
+        "analytic": {
+          "attempts": 9,
+          "accepted": 9
+        },
+        "neural": {
+          "attempts": 9,
+          "accepted": 9
+        }
+      },
+      {
+        "family": "arc_shaft",
+        "analytic": {
+          "attempts": 9,
+          "accepted": 9
+        },
+        "neural": {
+          "attempts": 9,
+          "accepted": 9
+        }
+      },
+      {
+        "family": "chord_T_disk",
+        "analytic": {
+          "attempts": 9,
+          "accepted": 9
+        },
+        "neural": {
+          "attempts": 9,
+          "accepted": 9
+        }
+      },
+      {
+        "family": "curve_chart",
+        "analytic": {
+          "attempts": 9,
+          "accepted": 0
+        },
+        "neural": {
+          "attempts": 9,
+          "accepted": 0
+        }
+      },
+      {
+        "family": "free_arrow",
+        "analytic": {
+          "attempts": 9,
+          "accepted": 9
+        },
+        "neural": {
+          "attempts": 9,
+          "accepted": 9
+        }
+      },
+      {
+        "family": "house_badge",
+        "analytic": {
+          "attempts": 9,
+          "accepted": 0
+        },
+        "neural": {
+          "attempts": 9,
+          "accepted": 0
+        }
+      },
+      {
+        "family": "nested_flame",
+        "analytic": {
+          "attempts": 9,
+          "accepted": 8
+        },
+        "neural": {
+          "attempts": 9,
+          "accepted": 9
+        }
+      },
+      {
+        "family": "pump",
+        "analytic": {
+          "attempts": 9,
+          "accepted": 9
+        },
+        "neural": {
+          "attempts": 9,
+          "accepted": 9
+        }
+      },
+      {
+        "family": "spiral_disk",
+        "analytic": {
+          "attempts": 9,
+          "accepted": 9
+        },
+        "neural": {
+          "attempts": 9,
+          "accepted": 9
+        }
+      },
+      {
+        "family": "warning_badge",
+        "analytic": {
+          "attempts": 9,
+          "accepted": 9
+        },
+        "neural": {
+          "attempts": 9,
+          "accepted": 9
+        }
+      }
+    ]
+  }
+}
