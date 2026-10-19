@@ -182,6 +182,8 @@ def conversion_worker(connection, payload):
     settings = {key: config[key] for key in
                 ('mode', 'seed', 'budget', 'directory', 'allow_memory', 'adaptive')}
     settings.update(seconds=config['policy'].seconds, max_seconds=config['policy'].max_seconds)
+    settings.update(disabled_bots=config.get('disabled_bots', ()),
+                    component_observation=config.get('component_observation', True))
     failures = []
     log_path = Path(spec['reports_out_dir'])/(Path(spec['filename']).stem+'_worker.log')
     with app._optionalLogCapture(str(log_path)), portfolio.search_configuration(**settings):
@@ -191,16 +193,26 @@ def conversion_worker(connection, payload):
         # Also supervise legacy/fixed searches; their optimizers need no hooks.
         if not portfolio.settings()['adaptive']:
             session.on_validated = None
-        result = convertOneImpl(
-            **spec, run_iteration_pipeline_fn=app.runIterationPipeline,
-            read_validation_log_details_fn=app._readValidationLogDetails,
-            render_svg_to_numpy_fn=app.Action.renderSvgToNumpy,
-            calculate_delta2_stats_fn=app.Action.calculateDelta2Stats,
-            calculate_spatial_delta2_quality_fn=app.Action.calculateSpatialDelta2Quality,
-            get_base_name_from_file_fn=app.getBaseNameFromFile, cv2_module=app.cv2,
-            render_embedded_raster_svg_fn=app._renderEmbeddedRasterSvg,
-            append_batch_failure_fn=failures.append,
-        )
+        from src.iCCModules.imageCompositeConverterComponents import snapshot
+        component_path = Path(spec['reports_out_dir'])/(Path(spec['filename']).stem+'_components.jsonl')
+        # Flush the observed switches before any search. An interrupted worker
+        # has an explicit incomplete observation, never invented zero activity.
+        with component_path.open('w', encoding='utf-8', buffering=1) as component_log:
+            component_log.write(json.dumps(dict(event='configured', **snapshot(session, config)))+'\n')
+            try:
+                result = convertOneImpl(
+                    **spec, run_iteration_pipeline_fn=app.runIterationPipeline,
+                    read_validation_log_details_fn=app._readValidationLogDetails,
+                    render_svg_to_numpy_fn=app.Action.renderSvgToNumpy,
+                    calculate_delta2_stats_fn=app.Action.calculateDelta2Stats,
+                    calculate_spatial_delta2_quality_fn=app.Action.calculateSpatialDelta2Quality,
+                    get_base_name_from_file_fn=app.getBaseNameFromFile, cv2_module=app.cv2,
+                    render_embedded_raster_svg_fn=app._renderEmbeddedRasterSvg,
+                    append_batch_failure_fn=failures.append,
+                )
+            finally:
+                component_log.write(json.dumps(dict(event='finished', **snapshot(session, config)),
+                                                allow_nan=False)+'\n')
     _atomic_pickle(stage/'completed.pickle', dict(result=result, failures=failures, session=session))
     connection.send(('done', 'completed.pickle'))
 
@@ -327,6 +339,12 @@ class ImageDeadline:
                 self.session.evaluations = completed['session'].evaluations
                 self.state = pickle.dumps(completed['session'])
                 row, failed = completed['result']
+                # Completed unsupported inputs may have no result row. Preserve
+                # real timing/supervision evidence for those failures as well.
+                control = dict(self.session.report(), isolated=True,
+                               stop_reason='completed' if row is not None else 'no_result')
+                (root/(Path(spec['filename']).stem+'_deadline.json')).write_text(
+                    json.dumps(control, indent=2)+'\n', encoding='utf-8')
                 if row is not None:
                     old_control = row.get('search_control', {})
                     row['search_control'] = dict(self.session.report(), isolated=True,

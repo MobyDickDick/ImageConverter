@@ -1,0 +1,226 @@
+{
+  "schema": "component_value_compact_evidence_v1",
+  "evidence_kind": "Summary of the preserved local measurement; not a substitute for raw-data verification.",
+  "raw_evidence": {
+    "location": "Local ignored files in this directory; CI runs upload their own evidence as workflow artifacts.",
+    "report_sha256": "e4e96bcf7f6d0d3fba1b608c1a2edcf2669987e26ee3464fd5e61cb25e842ab6",
+    "runtime_source_sha256_map_digest": "9df0481f82bbedb99755b686a26ba868c919a267dad3baba49f4ccd17e001b44",
+    "runtime_source_file_count": 195
+  },
+  "checks": {
+    "attempts": 27,
+    "outputs": 27,
+    "independent_passes": 27,
+    "disabled_bot_proposals_observed": 0,
+    "unobserved_configuration_attempts": 0,
+    "archive_pairs_unchanged": 377
+  },
+  "base_commit": "eefa5ea0047ef0809dc1cdfcc9407ad5d549ac60",
+  "suite": "retention",
+  "budget_seconds": 5.0,
+  "seeds": [
+    17,
+    42,
+    20261018
+  ],
+  "criteria": {
+    "min_families": 8,
+    "acceptance_equivalence_margin": 0.05,
+    "relative_time_margin": 0.1,
+    "relative_output_mse_margin": 0.01,
+    "confidence": 0.95
+  },
+  "variants": [
+    {
+      "id": "full",
+      "disabled": [],
+      "case_ids": [
+        "retention_00",
+        "retention_01",
+        "retention_02"
+      ]
+    },
+    {
+      "id": "without_fine_coordinates",
+      "disabled": [
+        "fine_coordinates"
+      ],
+      "case_ids": [
+        "retention_00",
+        "retention_01",
+        "retention_02"
+      ]
+    },
+    {
+      "id": "none",
+      "disabled": [
+        "reverse_coordinates",
+        "shuffled_coordinates",
+        "joint_restart",
+        "fine_coordinates",
+        "geometry_pair",
+        "color_pair"
+      ],
+      "case_ids": [
+        "retention_00",
+        "retention_01",
+        "retention_02"
+      ]
+    }
+  ],
+  "manifest_sha256": "5b688f9e925dd11c1e4b60562f4ce8527f95fe473ba29bbae1d2bc90ec70eaf3",
+  "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26300-SP0",
+  "protocol": "Serial cold CLI processes, fresh copies/caches per arm/seed. Rotating/reversing arm order. Fixed maximum equals image budget. No gate switches. Full output-conditioned metrics only; missing outputs stay failures. Families, not seeds, determine evidence coverage.",
+  "summary": [
+    {
+      "variant": "full",
+      "split": "holdout",
+      "attempts": 9,
+      "satisfactory": 9,
+      "missing_outputs": 0,
+      "status_counts": {
+        "satisfactory": 9
+      },
+      "median_image_seconds": 1.0,
+      "p95_image_seconds": 1.5124,
+      "render_calls": 1935,
+      "max_worker_peak_memory_bytes": 80121856,
+      "bot_proposals": 0,
+      "complete_observations": 9,
+      "incomplete_observations": 0,
+      "observation_seconds": 0
+    },
+    {
+      "variant": "none",
+      "split": "holdout",
+      "attempts": 9,
+      "satisfactory": 9,
+      "missing_outputs": 0,
+      "status_counts": {
+        "satisfactory": 9
+      },
+      "median_image_seconds": 0.953,
+      "p95_image_seconds": 1.4216,
+      "render_calls": 1757,
+      "max_worker_peak_memory_bytes": 79454208,
+      "bot_proposals": 0,
+      "complete_observations": 9,
+      "incomplete_observations": 0,
+      "observation_seconds": 0
+    },
+    {
+      "variant": "without_fine_coordinates",
+      "split": "holdout",
+      "attempts": 9,
+      "satisfactory": 9,
+      "missing_outputs": 0,
+      "status_counts": {
+        "satisfactory": 9
+      },
+      "median_image_seconds": 1.172,
+      "p95_image_seconds": 1.3532,
+      "render_calls": 1837,
+      "max_worker_peak_memory_bytes": 79601664,
+      "bot_proposals": 0,
+      "complete_observations": 9,
+      "incomplete_observations": 0,
+      "observation_seconds": 0
+    }
+  ],
+  "comparisons": [
+    {
+      "variant": "none",
+      "split": "development",
+      "pairs": 0,
+      "families": 0,
+      "acceptance_effect_of_removal": 0.0,
+      "family_interval_95": [
+        -1.0,
+        1.0
+      ],
+      "gained": 0,
+      "lost": 0,
+      "median_relative_seconds": null,
+      "p95_relative_seconds": null,
+      "output_quality_pairs": 0,
+      "max_relative_output_mse_change": null,
+      "classification": "unclear"
+    },
+    {
+      "variant": "none",
+      "split": "holdout",
+      "pairs": 9,
+      "families": 3,
+      "acceptance_effect_of_removal": 0.0,
+      "family_interval_95": [
+        -1.0,
+        1.0
+      ],
+      "gained": 0,
+      "lost": 0,
+      "median_relative_seconds": -0.04700000000000004,
+      "p95_relative_seconds": 0.21524357656731763,
+      "output_quality_pairs": 9,
+      "max_relative_output_mse_change": 0.27204136591607775,
+      "classification": "unclear"
+    },
+    {
+      "variant": "without_fine_coordinates",
+      "split": "development",
+      "pairs": 0,
+      "families": 0,
+      "acceptance_effect_of_removal": 0.0,
+      "family_interval_95": [
+        -1.0,
+        1.0
+      ],
+      "gained": 0,
+      "lost": 0,
+      "median_relative_seconds": null,
+      "p95_relative_seconds": null,
+      "output_quality_pairs": 0,
+      "max_relative_output_mse_change": null,
+      "classification": "unclear"
+    },
+    {
+      "variant": "without_fine_coordinates",
+      "split": "holdout",
+      "pairs": 9,
+      "families": 3,
+      "acceptance_effect_of_removal": 0.0,
+      "family_interval_95": [
+        -1.0,
+        1.0
+      ],
+      "gained": 0,
+      "lost": 0,
+      "median_relative_seconds": 0.03542857142857146,
+      "p95_relative_seconds": 0.19660000000000005,
+      "output_quality_pairs": 9,
+      "max_relative_output_mse_change": 0.0,
+      "classification": "unclear"
+    }
+  ],
+  "controls": {
+    "complete": false
+  },
+  "execution_notes": "Serial conversion arms; repository tests ran concurrently for part of this final measurement. Startup timeouts without observations remain failures. Recollected native artifacts have null CLI batch duration/return code when those were not recorded. Preliminary constructor/setup probes and failed controls are retained separately. No runtime algorithm or quality gate changed during this final matrix.",
+  "harness_sha256": {
+    "tools/run_component_value.py": "c8e6e8059647fa806384a771803d9e71411ccdb2527721ae71229370ebac6b8e",
+    "tools/run_anytime_benchmark.py": "82744e3b5ed218e1db23646bfa4886b0f3493a8c69aee2e65909fbfaa664b456",
+    "tools/anytime_observer.py": "ece9bc2f7a42e90ab8bb5111af53386c415a3ff5cac312ae7566027456f57b28",
+    "tools/component_controls.py": "c4ae8ca739f5fb3cf4cb4ce8211f5f1c6ad04cae362bfa9db62838910466b246"
+  },
+  "final_verification_harness_sha256": {
+    "tools/run_component_value.py": "c8e6e8059647fa806384a771803d9e71411ccdb2527721ae71229370ebac6b8e",
+    "tools/run_anytime_benchmark.py": "82744e3b5ed218e1db23646bfa4886b0f3493a8c69aee2e65909fbfaa664b456",
+    "tools/anytime_observer.py": "ece9bc2f7a42e90ab8bb5111af53386c415a3ff5cac312ae7566027456f57b28",
+    "tools/component_controls.py": "c4ae8ca739f5fb3cf4cb4ce8211f5f1c6ad04cae362bfa9db62838910466b246"
+  },
+  "archive": {
+    "pairs": 377,
+    "index_sha256": "3cdfd0311b6acfe79df525aaeeac8bde79fb879daebac16e5f635a88892f053b",
+    "unchanged": true
+  }
+}

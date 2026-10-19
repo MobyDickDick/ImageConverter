@@ -10,6 +10,7 @@ import hashlib
 import json
 import math
 import random
+import time
 
 import numpy as np
 
@@ -17,8 +18,9 @@ from src.iCCModules.imageCompositeConverterAdaptiveSearch import SearchRun, rast
 from src.iCCModules.imageCompositeConverterSearchScheduler import FairSelector, drain
 
 
-STRATEGIES = ('reverse_coordinates', 'shuffled_coordinates', 'joint_restart',
-              'fine_coordinates', 'geometry_pair', 'color_pair')
+from src.iCCModules.imageCompositeConverterComponents import BOT_NAMES
+
+STRATEGIES = BOT_NAMES
 
 
 class Bot:
@@ -36,6 +38,8 @@ class Bot:
         self.improved = False
         self.active = True
         self.stop_reason = None
+        self.observation = dict(generated=0, cache_hits=0, valid=0, rejected=0,
+                                improvements=0, active_seconds=0.)
 
     def proposal(self, geometry_count, rng, seed):
         cursor = self.cursor
@@ -73,15 +77,19 @@ class Blackboard:
         self.seed = parameters.copy()
         self.best_p, self.best = parameters.copy(), incumbent
         self.rng = random.Random(config['seed'] ^ int(identity[:16], 16))
-        self.bots = [Bot(name, parameters, incumbent, self.rng) for name in STRATEGIES]
+        self.bots = [Bot(name, parameters, incumbent, self.rng) for name in STRATEGIES
+                     if name not in config.get('disabled_bots', ())]
         self.rng.shuffle(self.bots)
         self.selector = FairSelector([bot.name for bot in self.bots])
         self.seen = {tuple(np.round(parameters, 8)): dict(valid=True, loss=incumbent[0], error=incumbent[1])}
         self.monitor = SearchRun(session, config['budget'], source=source)
         self.monitor.anchor = incumbent[0]
-        self.patience = max(8, session.policy.patience // len(self.bots))
+        # Keep each bot's patience fixed when removing peers. Redistribute only
+        # the common render/time allowance, not the stagnation threshold.
+        self.patience = max(8, session.policy.patience // len(STRATEGIES))
         self.winning = self.reason = None
         self.generated = self.cache_hits = self.messages = 0
+        self.observation_seconds = 0.
 
 
 def explore_bots(parameters, geometry_count, measure, incumbent, *, source, image,
@@ -98,14 +106,15 @@ def explore_bots_steps(parameters, geometry_count, measure, incumbent, *, source
     contract = [source, raster_identity(image), incumbent[2], parameters.tolist(),
                 geometry_count, float(incumbent[0]), float(incumbent[1]), config['seed'], config['budget']]
     identity = hashlib.sha256(json.dumps(contract, allow_nan=False).encode()).hexdigest()
-    board = session.bot_searches.get(identity)
+    key = identity+':'+','.join(config.get('disabled_bots', ()))
+    board = session.bot_searches.get(key)
     reused = board is not None
     if board is None:
         board = Blackboard(parameters, incumbent, session, config, source, identity)
-        session.bot_searches[identity] = board
+        session.bot_searches[key] = board
     monitor = board.monitor
     start_proposals, started = monitor.proposals, session.elapsed
-    slice_size = max(1, min(8, config['budget']//len(board.bots)))
+    slice_size = max(1, min(8, config['budget']//max(1, len(board.bots))))
     # A fresh caller must run its own semantics, even for a previously checked fit.
     satisfactory = lambda: bool(satisfactory_fn and satisfactory_fn(board.best_p, board.best))
     if satisfactory():
@@ -144,6 +153,11 @@ def explore_bots_steps(parameters, geometry_count, measure, incumbent, *, source
             if board.reason:
                 break
             probe = bot.proposal(geometry_count, board.rng, board.seed)
+            observed = config.get('component_observation', True)
+            observe_started = time.perf_counter() if observed else 0.
+            if observed:
+                bot.observation['generated'] += 1
+                board.observation_seconds += time.perf_counter()-observe_started
             board.generated += 1
             generated += 1
             if probe is None:
@@ -152,8 +166,11 @@ def explore_bots_steps(parameters, geometry_count, measure, incumbent, *, source
             key = tuple(np.round(probe, 8))
             if key in board.seen:
                 board.cache_hits += 1
+                if observed:
+                    bot.observation['cache_hits'] += 1
                 continue
             step_started = session.elapsed
+            measured_started = time.perf_counter() if observed else 0.
             measured = measure(probe)
             admissible = bool(measured is not None and math.isfinite(measured[0])
                               and math.isfinite(measured[1]) and measured[1] <= incumbent[1]+1e-9)
@@ -164,12 +181,19 @@ def explore_bots_steps(parameters, geometry_count, measure, incumbent, *, source
             used += 1
             bot.proposals += 1
             bot.stale += 1
+            if observed:
+                observe_started = time.perf_counter()
+                bot.observation['valid' if admissible else 'rejected'] += 1
+                bot.observation['active_seconds'] += time.perf_counter()-measured_started
+                board.observation_seconds += time.perf_counter()-observe_started
             if admissible and measured[0] < bot.best[0]-1e-9:
                 bot.parameters, bot.best = probe.copy(), measured
             if admissible and measured[0] < board.best[0]-1e-9 and measured[1] <= board.best[1]+1e-9:
                 board.best_p, board.best, board.winning = probe.copy(), measured, bot.name
                 session.observe(board.best[1], evaluation=False)
                 bot.improved = True
+                if observed:
+                    bot.observation['improvements'] += 1
             # Peer messages alone never earn a worker more time.
             if admissible and bot.anchor-measured[0] >= max(1e-9, abs(bot.anchor)*session.policy.relative_gain):
                 bot.anchor, bot.stale = measured[0], 0

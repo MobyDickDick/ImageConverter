@@ -10,6 +10,26 @@ on:
   workflow_dispatch:
 
 jobs:
+  component-value:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Paired production bot ablations and attribution controls
+        run: python -m tools.run_component_value --output-dir .tmp/component-value-ci --work-dir .tmp/component-value-ci-work --seeds 17
+      - name: Independently verify outputs and observed switches
+        run: python -m tools.run_component_value --verify-only --output-dir .tmp/component-value-ci
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: component-value-evidence
+          path: .tmp/component-value-ci
+          retention-days: 7
+
   image-id-hardcoding-ratchet:
     runs-on: ubuntu-latest
     timeout-minutes: 5
