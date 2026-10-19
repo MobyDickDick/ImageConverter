@@ -1,5 +1,11 @@
 # ImageConverter
 
+Der [optionale CNN-Versuch](docs/next_arbeitspaket_2026-10-19_neural_elements.md)
+ist mit drei Trainingsseeds und 84 echten CLI-Gegenproben untersucht.
+Es gibt keinen nachgewiesenen End-to-End-Gewinn; die analytische Erkennung
+bleibt Standard. Der [Recovery-Merge-Audit](docs/merge_audit_2026-10-19.md)
+bestätigt die wiedergefundenen Nachweise und erläutert deren Ablage.
+
 Die [Komponentenmessung](docs/next_arbeitspaket_2026-10-18_component_value.md)
 vergleicht die sechs Such-Bots einzeln und in ausgewählten Kombinationen
 über echte CLI-Konvertierungen. Runtime-Schalter und Arbeitszähler,

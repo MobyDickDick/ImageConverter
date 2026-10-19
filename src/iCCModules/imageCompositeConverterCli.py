@@ -88,6 +88,8 @@ def parseArgsImpl(
                         help='Komponentenvergleich: Bot in der adaptiven Parametersuche abschalten; wiederholbar')
     parser.add_argument('--component-observation', action=argparse.BooleanOptionalAction, default=True,
                         help='Leichte Bot-Arbeitszähler erfassen (Default: aktiv)')
+    parser.add_argument('--neural-elements-model', default=None,
+                        help='Optionales offline trainiertes Element-CNN (JSON); Standard: analytische Erkennung')
     parser.add_argument('--search-policy',choices=('adaptive','fixed'),default='adaptive',
                         help='adaptive: Erfolg/Stagnation/Fortschritt steuern die Suche; fixed: bisheriges Suchbudget')
     parser.add_argument('--search-seconds',type=float,default=60.,
@@ -264,6 +266,8 @@ def parseArgsImpl(
         parser.error('--search-budget muss zwischen 32 und 10000 liegen')
     if args.disable_search_bot and (args.search_mode != 'portfolio' or args.search_policy != 'adaptive'):
         parser.error('--disable-search-bot benötigt --search-mode portfolio --search-policy adaptive')
+    if args.neural_elements_model and not Path(args.neural_elements_model).is_file():
+        parser.error('--neural-elements-model muss eine vorhandene JSON-Modelldatei sein')
     import math
     if (not math.isfinite(args.search_seconds) or not math.isfinite(args.search_max_seconds)
             or not 0 < args.search_seconds <= args.search_max_seconds):
@@ -581,6 +585,7 @@ def runMainImpl(
         isolate=getattr(args,'isolate_conversion',True) and getattr(args,'execution_mode','semantic-only')=='semantic-only',
         disabled_bots=getattr(args,'disable_search_bot', ()),
         component_observation=getattr(args,'component_observation', True),
+        neural_model=getattr(args, 'neural_elements_model', None),
     ):
         try:
             if args.ac08_regression_set:

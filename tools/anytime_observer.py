@@ -44,6 +44,9 @@ def observed_worker(connection, payload):
         if os.environ.get('ICC_COMPONENT_EVALUATION'):
             names += tuple('iCCModules/imageCompositeConverter'+suffix+'.py' for suffix in
                            ('Cli','Components','Deadline','SearchPortfolio','SearchScheduler'))
+        if os.environ.get('ICC_NEURAL_EVALUATION'):
+            names += tuple('iCCModules/imageCompositeConverter'+suffix+'.py' for suffix in
+                           ('NeuralElements','PrimitiveScene','NonCompositeRuntime','ConversionExecution'))
         emit('worker_observed', source_sha256={
             'src/'+name: hashlib.sha256(Path(importlib.import_module('src.'+name[:-3].replace('/','.')).__file__).read_bytes()).hexdigest()
             for name in names}, applied_controls=getattr(render,'_component_controls',None))

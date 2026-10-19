@@ -26,7 +26,7 @@ _SETTINGS = ContextVar('conversion_search_settings', default=None)
 @contextmanager
 def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, allow_memory=False,
                          adaptive=False, seconds=60., max_seconds=120., isolate=False,
-                         disabled_bots=(), component_observation=True):
+                         disabled_bots=(), component_observation=True, neural_model=None):
     if mode not in {'legacy', 'portfolio'} or not 32 <= budget <= 10000:
         raise ValueError('Search mode or render budget is invalid')
     policy = SearchPolicy(seconds=seconds,max_seconds=max_seconds)
@@ -39,7 +39,9 @@ def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, a
                                allow_memory=allow_memory,adaptive=adaptive and mode=='portfolio',
                                policy=policy,images={},isolate=isolate,
                                disabled_bots=tuple(sorted(set(disabled_bots))),
-                               component_observation=bool(component_observation)))
+                               component_observation=bool(component_observation),
+                               neural_model=str(Path(neural_model).resolve()) if neural_model else None,
+                               neural_observations=[]))
     try:
         yield
     finally:

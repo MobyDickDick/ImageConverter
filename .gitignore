@@ -67,3 +67,11 @@ htmlcov/
 !/artifacts/evaluation/component_retention_v*/manifest.json
 /artifacts/evaluation/component_*probe_v*/
 /artifacts/evaluation/component_control_render_delay_v*/
+
+# Optional neural experiment: retain compact results/models, upload raw runs in CI.
+/artifacts/evaluation/neural_elements_v*/*
+!/artifacts/evaluation/neural_elements_v*/README.md
+!/artifacts/evaluation/neural_elements_v*/summary.json
+!/artifacts/evaluation/neural_elements_v*/checks.json
+!/artifacts/evaluation/neural_elements_v*/manifest.json
+!/artifacts/evaluation/neural_elements_v*/models/

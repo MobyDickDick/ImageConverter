@@ -131,6 +131,11 @@ def fit_primitive_scene(width, height, *, description, image, render_fn, error_f
             if any(left[1] >= right[0] for left,right in zip(intervals,intervals[1:])):
                 return None
     choices, regions = [], []
+    # Optional proposal source; the original analytic alternatives and all
+    # description, object-local and full-image quality gates remain mandatory.
+    from src.iCCModules.imageCompositeConverterNeuralElements import runtime_proposals, scene_alternatives
+    neural = runtime_proposals(pixels)
+    neural_ids = set()
     for index in range(1,number):
         x,y,w,h,area = stats[index]
         if area < 12 or x < 2 or y < 2 or x+w > width-2 or y+h > height-2:
@@ -138,6 +143,10 @@ def fit_primitive_scene(width, height, *, description, image, render_fn, error_f
         # White interiors are required, as are clear gaps between instances.
         component = (labels == index).astype(np.uint8)
         alternatives = _alternatives(component,pixels)
+        for candidate in scene_alternatives(component, pixels, neural):
+            if not any(candidate[0] == old[0] and np.allclose(candidate[1], old[1]) for old in alternatives):
+                alternatives.append(candidate)
+                neural_ids.add(id(candidate))
         if not alternatives:
             return None
         choices.append(alternatives)
@@ -188,9 +197,17 @@ def fit_primitive_scene(width, height, *, description, image, render_fn, error_f
         if not global_quality or not global_quality['passed'] or any(not q or not q['passed'] for q in qualities):
             continue
         fitted['object_kinds'] = kinds
+        fitted['neural_scene_selected'] = any(id(obj) in neural_ids for obj in scene)
         fitted['object_quality'] = qualities
         if best is None or fitted['error'] < best['error']:
             best = fitted
         if validated_result(fitted,pixels):
             break
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
+    config = settings()
+    if config and neural:
+        observations = config.get('neural_observations', [])
+        if observations:
+            observations[-1]['scene_candidates'] += len(neural_ids)
+            observations[-1]['scene_selected'] |= bool(best and best['neural_scene_selected'])
     return best

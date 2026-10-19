@@ -1,0 +1,583 @@
+{
+  "schema": "neural_elements_inputs_v1",
+  "cases": [
+    {
+      "case_id": "case_00",
+      "image": "sources/case_00.png",
+      "description": "ein Kreis. Dunkle Konturen, weißes Inneres. Keine Beschriftung.",
+      "kind": "objects",
+      "split": "synthetic",
+      "family": "outline_layout_0",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            68.05732676691827,
+            39.10984325188504,
+            45.35744719747633,
+            45.35744719747633
+          ]
+        }
+      ],
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            68.05732676691827,
+            39.10984325188504,
+            45.35744719747633,
+            45.35744719747633
+          ]
+        }
+      ],
+      "input_sha256": "a966fca216b014818369ad294432b5804b135c2030ec07129920258a8746516d"
+    },
+    {
+      "case_id": "case_01",
+      "image": "sources/case_01.png",
+      "description": "ein Kreis und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt nebeneinander.",
+      "kind": "objects",
+      "split": "synthetic",
+      "family": "outline_layout_1",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            23.506563375360454,
+            49.38285649691613,
+            27.053102836482118,
+            28.91385185759244
+          ]
+        },
+        {
+          "kind": "circle",
+          "bbox": [
+            92.3552777318349,
+            46.424659947462814,
+            51.29240067909757,
+            51.29240067909757
+          ]
+        }
+      ],
+      "elements": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            23.506563375360454,
+            49.38285649691613,
+            27.053102836482118,
+            28.91385185759244
+          ]
+        },
+        {
+          "kind": "circle",
+          "bbox": [
+            92.3552777318349,
+            46.424659947462814,
+            51.29240067909757,
+            51.29240067909757
+          ]
+        }
+      ],
+      "input_sha256": "0fc0ff5cc2d1673a468e49c870aa43eec59a30424b455618fc18f37b25900fea"
+    },
+    {
+      "case_id": "case_02",
+      "image": "sources/case_02.png",
+      "description": "drei Rechtecke. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt nebeneinander.",
+      "kind": "objects",
+      "split": "synthetic",
+      "family": "outline_layout_2",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            10.714161641521535,
+            44.00766292385929,
+            30.159438748404085,
+            23.65667781868714
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            60.67066587342247,
+            37.482485047000694,
+            32.05446050748516,
+            36.73119475403975
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            114.49368409017532,
+            48.28960677971168,
+            26.651684320668867,
+            24.308817332400608
+          ]
+        }
+      ],
+      "elements": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            10.714161641521535,
+            44.00766292385929,
+            30.159438748404085,
+            23.65667781868714
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            60.67066587342247,
+            37.482485047000694,
+            32.05446050748516,
+            36.73119475403975
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            114.49368409017532,
+            48.28960677971168,
+            26.651684320668867,
+            24.308817332400608
+          ]
+        }
+      ],
+      "input_sha256": "45bc53857bf90ada3ba8f54c5446763c2cdc1f3e40f9c3affaa4a74695d4f219"
+    },
+    {
+      "case_id": "case_03",
+      "image": "sources/case_03.png",
+      "description": "ein Kreis. Dunkle Konturen, weißes Inneres. Keine Beschriftung.",
+      "kind": "objects",
+      "split": "synthetic",
+      "family": "outline_layout_3",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            37.62326697204896,
+            55.746179591182624,
+            39.50502918388985,
+            39.50502918388985
+          ]
+        }
+      ],
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            37.62326697204896,
+            55.746179591182624,
+            39.50502918388985,
+            39.50502918388985
+          ]
+        }
+      ],
+      "input_sha256": "5d775338e11fedad1eeec303b1f0eee7bce52e84b620c26782bce3ce59398dbf"
+    },
+    {
+      "case_id": "case_04",
+      "image": "sources/case_04.png",
+      "description": "ein Kreis und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt untereinander.",
+      "kind": "objects",
+      "split": "synthetic",
+      "family": "outline_layout_4",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            63.087438558787525,
+            15.373014514170215,
+            52.78905907032133,
+            52.78905907032133
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            66.87953861992003,
+            93.06456027795741,
+            51.462182412504376,
+            46.7337233560078
+          ]
+        }
+      ],
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            63.087438558787525,
+            15.373014514170215,
+            52.78905907032133,
+            52.78905907032133
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            66.87953861992003,
+            93.06456027795741,
+            51.462182412504376,
+            46.7337233560078
+          ]
+        }
+      ],
+      "input_sha256": "501eed221ffbaec2c86f8be4ac033ce79a385298dd84c3180ddcbd3791899805"
+    },
+    {
+      "case_id": "case_05",
+      "image": "sources/case_05.png",
+      "description": "zwei Kreise und ein Rechteck. Dunkle Konturen, weißes Inneres. Keine Beschriftung. Die Objekte liegen voneinander getrennt untereinander.",
+      "kind": "objects",
+      "split": "synthetic",
+      "family": "outline_layout_5",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            61.379848251881214,
+            20.27923799057215,
+            25.05572852818257,
+            25.05572852818257
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            43.37255777050893,
+            72.70406684394335,
+            38.79578931191724,
+            35.03870862639503
+          ]
+        },
+        {
+          "kind": "circle",
+          "bbox": [
+            64.34100367745842,
+            130.38319042243396,
+            33.7540118456169,
+            33.7540118456169
+          ]
+        }
+      ],
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            61.379848251881214,
+            20.27923799057215,
+            25.05572852818257,
+            25.05572852818257
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            43.37255777050893,
+            72.70406684394335,
+            38.79578931191724,
+            35.03870862639503
+          ]
+        },
+        {
+          "kind": "circle",
+          "bbox": [
+            64.34100367745842,
+            130.38319042243396,
+            33.7540118456169,
+            33.7540118456169
+          ]
+        }
+      ],
+      "input_sha256": "9a01026227f0d4a996bcc796112c96a9f9b737d76b9bc6fea1d85c0a37508423"
+    },
+    {
+      "case_id": "case_06",
+      "image": "sources/case_06.jpg",
+      "description": "Eine einfarbige hellgraue Kreisscheibe mit dunkler Randkontur auf weißem Hintergrund. In der Mitte steht die dunkle serifenlose Beschriftung \"rF\". Keine Anschlüsse.",
+      "kind": "label",
+      "label": "rF",
+      "split": "real_holdout",
+      "family": "AC0840",
+      "provenance": "images/AC0840_M.jpg",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            3,
+            5,
+            14,
+            10
+          ]
+        }
+      ],
+      "input_sha256": "3919d16fb5fc08eaf63afbc4db3c71a79de4055c35b4d5908fdebfe1437164ec"
+    },
+    {
+      "case_id": "case_07",
+      "image": "sources/case_07.jpg",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"Lux\" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "kind": "label",
+      "label": "Lux",
+      "split": "real_holdout",
+      "family": "AC0910",
+      "provenance": "images/AC0910_L.jpg",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            25,
+            25
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            4,
+            10,
+            17,
+            9
+          ]
+        }
+      ],
+      "input_sha256": "e49e4cfd64b3a525f64293da155b650c54d516886ea1386b7c206e9e36a209a6"
+    },
+    {
+      "case_id": "case_08",
+      "image": "sources/case_08.jpg",
+      "description": "Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Großbuchstabe \"M\" in fetter serifenloser Schrift. Weißer Hintergrund. Keine Anschlüsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgröße und Farben ergeben sich aus dem Bild.",
+      "kind": "label",
+      "label": "M",
+      "split": "real_holdout",
+      "family": "AC1000",
+      "provenance": "images/AC1000_M.jpg",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            5,
+            4,
+            11,
+            12
+          ]
+        }
+      ],
+      "input_sha256": "dcd4593327fb1890092dc5b244ff9274b53a9513eabde2bf312e28ad79b2a140"
+    },
+    {
+      "case_id": "case_09",
+      "image": "sources/case_09.jpg",
+      "description": "Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Großbuchstabe \"Q\" in fetter serifenloser Schrift. Weißer Hintergrund. Keine Anschlüsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgröße und Farben ergeben sich aus dem Bild.",
+      "kind": "label",
+      "label": "Q",
+      "split": "real_holdout",
+      "family": "AC0920",
+      "provenance": "images/AC0920_M.jpg",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            5,
+            4,
+            11,
+            13
+          ]
+        }
+      ],
+      "input_sha256": "5f48a13643a1685b3030f2de7fbba3f98e98b7b55e27e90eed9539b7f42f75ae"
+    },
+    {
+      "case_id": "case_10",
+      "image": "sources/case_10.jpg",
+      "description": "Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Großbuchstabe \"P\" in fetter serifenloser Schrift. Weißer Hintergrund. Keine Anschlüsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgröße und Farben ergeben sich aus dem Bild.",
+      "kind": "label",
+      "label": "P",
+      "split": "real_holdout",
+      "family": "AC0850",
+      "provenance": "images/AC0850_L.jpg",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            25,
+            25
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            7,
+            6,
+            12,
+            14
+          ]
+        }
+      ],
+      "input_sha256": "6b78ab3be03efff71cea248825e0913ab9db3c1efc0129c8ec8860844fd0356b"
+    },
+    {
+      "case_id": "case_11",
+      "image": "sources/case_11.jpg",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe \"M\" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.",
+      "kind": "motor",
+      "label": "M",
+      "split": "real_holdout",
+      "family": "AC0232",
+      "provenance": "images/AC0232_M.jpg",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            24,
+            5,
+            20,
+            20
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            29,
+            10,
+            11,
+            12
+          ]
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            0,
+            9,
+            17,
+            20
+          ]
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            8,
+            0,
+            17,
+            15
+          ]
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            8,
+            15,
+            17,
+            15
+          ]
+        }
+      ],
+      "input_sha256": "d225bc585b03756f96a537a015cbee74d1ee71e37e0c5be2ffee9c067dcc4957"
+    },
+    {
+      "case_id": "case_12",
+      "image": "sources/case_12.png",
+      "description": "Eine einzelne waagerechte Ellipse mit dunkler Kontur, weißem Inneren und weißem Hintergrund. Kein Kreis, keine Beschriftung.",
+      "kind": "objects",
+      "split": "unsupported_scene",
+      "family": "ellipse",
+      "expected_objects": [
+        {
+          "kind": "ellipse",
+          "bbox": [
+            33.5,
+            29.5,
+            113,
+            51
+          ]
+        }
+      ],
+      "elements": [
+        {
+          "kind": "unknown",
+          "bbox": [
+            33.5,
+            29.5,
+            113,
+            51
+          ]
+        }
+      ],
+      "input_sha256": "8ace48df66369ef6dffa8445f730def3b49cbed324402f31b31bd0093ac7e5cc"
+    },
+    {
+      "case_id": "case_13",
+      "image": "sources/case_13.png",
+      "description": "Ein einzelnes nach oben gerichtetes Dreieck mit dunkler Kontur und weißem Inneren auf weißem Grund. Keine Kreisscheibe und keine Beschriftung.",
+      "kind": "objects",
+      "split": "unsupported_scene",
+      "family": "triangle",
+      "expected_objects": [
+        {
+          "kind": "triangle",
+          "bbox": [
+            33.5,
+            18.5,
+            113,
+            73
+          ]
+        }
+      ],
+      "elements": [
+        {
+          "kind": "triangle",
+          "bbox": [
+            33.5,
+            18.5,
+            113,
+            73
+          ]
+        }
+      ],
+      "input_sha256": "8016f08bbffc262bc64f29691c036433adbbfcbe90a582430bee02b3ece8efce"
+    }
+  ],
+  "criteria": {
+    "min_independent_real_families": 8,
+    "confidence": 0.95,
+    "quality_equivalence_margin": 0.05,
+    "relevant_time_saving": 0.1,
+    "detection_iou": 0.5,
+    "confidence_threshold": 0.8
+  },
+  "annotation": "Real boxes manually marked on original raster contact sheet before model evaluation; IoU >= .5. Synthetic boxes from the independent generator, no fitter calls."
+}

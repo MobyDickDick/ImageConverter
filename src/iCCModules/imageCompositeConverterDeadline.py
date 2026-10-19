@@ -183,7 +183,8 @@ def conversion_worker(connection, payload):
                 ('mode', 'seed', 'budget', 'directory', 'allow_memory', 'adaptive')}
     settings.update(seconds=config['policy'].seconds, max_seconds=config['policy'].max_seconds)
     settings.update(disabled_bots=config.get('disabled_bots', ()),
-                    component_observation=config.get('component_observation', True))
+                    component_observation=config.get('component_observation', True),
+                    neural_model=config.get('neural_model'))
     failures = []
     log_path = Path(spec['reports_out_dir'])/(Path(spec['filename']).stem+'_worker.log')
     with app._optionalLogCapture(str(log_path)), portfolio.search_configuration(**settings):
@@ -198,7 +199,7 @@ def conversion_worker(connection, payload):
         # Flush the observed switches before any search. An interrupted worker
         # has an explicit incomplete observation, never invented zero activity.
         with component_path.open('w', encoding='utf-8', buffering=1) as component_log:
-            component_log.write(json.dumps(dict(event='configured', **snapshot(session, config)))+'\n')
+            component_log.write(json.dumps(dict(event='configured', **snapshot(session, portfolio.settings())))+'\n')
             try:
                 result = convertOneImpl(
                     **spec, run_iteration_pipeline_fn=app.runIterationPipeline,
@@ -211,7 +212,7 @@ def conversion_worker(connection, payload):
                     append_batch_failure_fn=failures.append,
                 )
             finally:
-                component_log.write(json.dumps(dict(event='finished', **snapshot(session, config)),
+                component_log.write(json.dumps(dict(event='finished', **snapshot(session, portfolio.settings())),
                                                 allow_nan=False)+'\n')
     _atomic_pickle(stage/'completed.pickle', dict(result=result, failures=failures, session=session))
     connection.send(('done', 'completed.pickle'))

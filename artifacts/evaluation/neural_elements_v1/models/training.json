@@ -1,0 +1,770 @@
+{
+  "protocol_sha256": "87c85b847c34fc255a05711449a8075e690b920e8cd47cc30ae554a4a0db61f1",
+  "records": [
+    {
+      "seed": 17,
+      "model": "model-17.json",
+      "sha256": "b35da920e540a46bcef6f41e237c364098d25526e4a379fa019d5b13428b56b3",
+      "bytes": 61534,
+      "training_seconds": 0.713638399989577,
+      "classification": {
+        "train": {
+          "samples": 960,
+          "accuracy": 0.9989583333333333,
+          "high_confidence_errors": 0,
+          "confusion": [
+            [
+              160,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              159,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              160,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              160,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              160,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              160
+            ]
+          ],
+          "calibration_bins": [
+            {
+              "lower": 0.0,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.2,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.4,
+              "count": 3,
+              "correct": 2
+            },
+            {
+              "lower": 0.6,
+              "count": 7,
+              "correct": 7
+            },
+            {
+              "lower": 0.8,
+              "count": 891,
+              "correct": 891
+            }
+          ]
+        },
+        "development": {
+          "samples": 240,
+          "accuracy": 0.9916666666666667,
+          "high_confidence_errors": 0,
+          "confusion": [
+            [
+              40,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              39,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              40,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              39,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              40,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              40
+            ]
+          ],
+          "calibration_bins": [
+            {
+              "lower": 0.0,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.2,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.4,
+              "count": 1,
+              "correct": 0
+            },
+            {
+              "lower": 0.6,
+              "count": 4,
+              "correct": 3
+            },
+            {
+              "lower": 0.8,
+              "count": 220,
+              "correct": 220
+            }
+          ]
+        },
+        "holdout": {
+          "samples": 240,
+          "accuracy": 0.975,
+          "high_confidence_errors": 4,
+          "confusion": [
+            [
+              39,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              40,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              40,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              40,
+              0,
+              0
+            ],
+            [
+              0,
+              5,
+              0,
+              0,
+              35,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              40
+            ]
+          ],
+          "calibration_bins": [
+            {
+              "lower": 0.0,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.2,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.4,
+              "count": 2,
+              "correct": 1
+            },
+            {
+              "lower": 0.6,
+              "count": 5,
+              "correct": 4
+            },
+            {
+              "lower": 0.8,
+              "count": 215,
+              "correct": 211
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "model": "model-42.json",
+      "sha256": "5edfea92e836edc0b1110d3538e89999f3b80e52a851c890f6bbd01dbde86a0b",
+      "bytes": 61520,
+      "training_seconds": 0.6982984999776818,
+      "classification": {
+        "train": {
+          "samples": 960,
+          "accuracy": 0.9989583333333333,
+          "high_confidence_errors": 0,
+          "confusion": [
+            [
+              160,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              160,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              160,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              160,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              159,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              160
+            ]
+          ],
+          "calibration_bins": [
+            {
+              "lower": 0.0,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.2,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.4,
+              "count": 3,
+              "correct": 2
+            },
+            {
+              "lower": 0.6,
+              "count": 4,
+              "correct": 4
+            },
+            {
+              "lower": 0.8,
+              "count": 817,
+              "correct": 817
+            }
+          ]
+        },
+        "development": {
+          "samples": 240,
+          "accuracy": 0.9916666666666667,
+          "high_confidence_errors": 1,
+          "confusion": [
+            [
+              40,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              39,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              40,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              39,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              40,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              40
+            ]
+          ],
+          "calibration_bins": [
+            {
+              "lower": 0.0,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.2,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.4,
+              "count": 1,
+              "correct": 0
+            },
+            {
+              "lower": 0.6,
+              "count": 1,
+              "correct": 1
+            },
+            {
+              "lower": 0.8,
+              "count": 191,
+              "correct": 190
+            }
+          ]
+        },
+        "holdout": {
+          "samples": 240,
+          "accuracy": 0.9708333333333333,
+          "high_confidence_errors": 4,
+          "confusion": [
+            [
+              39,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              40,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              39,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              40,
+              0,
+              0
+            ],
+            [
+              0,
+              5,
+              0,
+              0,
+              35,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              40
+            ]
+          ],
+          "calibration_bins": [
+            {
+              "lower": 0.0,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.2,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.4,
+              "count": 2,
+              "correct": 1
+            },
+            {
+              "lower": 0.6,
+              "count": 3,
+              "correct": 1
+            },
+            {
+              "lower": 0.8,
+              "count": 204,
+              "correct": 200
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seed": 101,
+      "model": "model-101.json",
+      "sha256": "3b989fedf90b8f65282785b95e4bc158092ad30ada2bbacc43453175256a048f",
+      "bytes": 61535,
+      "training_seconds": 0.7545991000079084,
+      "classification": {
+        "train": {
+          "samples": 960,
+          "accuracy": 1.0,
+          "high_confidence_errors": 0,
+          "confusion": [
+            [
+              160,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              160,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              160,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              160,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              160,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              160
+            ]
+          ],
+          "calibration_bins": [
+            {
+              "lower": 0.0,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.2,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.4,
+              "count": 3,
+              "correct": 3
+            },
+            {
+              "lower": 0.6,
+              "count": 3,
+              "correct": 3
+            },
+            {
+              "lower": 0.8,
+              "count": 821,
+              "correct": 821
+            }
+          ]
+        },
+        "development": {
+          "samples": 240,
+          "accuracy": 0.9916666666666667,
+          "high_confidence_errors": 1,
+          "confusion": [
+            [
+              40,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              39,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              40,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              39,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              40,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              40
+            ]
+          ],
+          "calibration_bins": [
+            {
+              "lower": 0.0,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.2,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.4,
+              "count": 1,
+              "correct": 0
+            },
+            {
+              "lower": 0.6,
+              "count": 2,
+              "correct": 2
+            },
+            {
+              "lower": 0.8,
+              "count": 197,
+              "correct": 196
+            }
+          ]
+        },
+        "holdout": {
+          "samples": 240,
+          "accuracy": 0.9791666666666666,
+          "high_confidence_errors": 2,
+          "confusion": [
+            [
+              39,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              40,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              39,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              40,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0,
+              0,
+              37,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              40
+            ]
+          ],
+          "calibration_bins": [
+            {
+              "lower": 0.0,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.2,
+              "count": 0,
+              "correct": 0
+            },
+            {
+              "lower": 0.4,
+              "count": 1,
+              "correct": 0
+            },
+            {
+              "lower": 0.6,
+              "count": 6,
+              "correct": 4
+            },
+            {
+              "lower": 0.8,
+              "count": 204,
+              "correct": 202
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

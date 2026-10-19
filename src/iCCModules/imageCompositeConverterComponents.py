@@ -56,6 +56,8 @@ def snapshot(session, config):
                 total[key] += value
     return dict(schema='search_components_v1', registry=registry(config.get('disabled_bots', ())),
                 observation_enabled=config.get('component_observation', True), bots=bots,
+                neural_elements=dict(enabled=bool(config.get('neural_model')),
+                                     observations=config.get('neural_observations', [])),
                 worker_peak_memory_bytes=peak_memory_bytes(),
                 blackboards=len(session.bot_searches),
                 shared_cache_hits=sum(b.cache_hits for b in session.bot_searches.values()),

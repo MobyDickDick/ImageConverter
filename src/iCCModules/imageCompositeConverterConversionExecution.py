@@ -540,6 +540,13 @@ def convertOneImpl(
     try:
         from src.iCCModules.imageCompositeConverterSearchPortfolio import configured_image_search
         with configured_image_search(os.path.abspath(image_path)) as search_session, _wallClockTimeout(run_timeout_sec):
+            from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
+            config = settings()
+            if config and config.get('neural_model'):
+                from src.iCCModules.imageCompositeConverterNeuralElements import runtime_proposals
+                neural_image = cv2_module.imread(image_path)
+                if neural_image is not None:
+                    runtime_proposals(neural_image)
             res = run_iteration_pipeline_fn(
                 image_path,
                 csv_path,

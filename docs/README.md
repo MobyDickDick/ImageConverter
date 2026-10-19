@@ -1,5 +1,8 @@
 # Dokumentationsindex
 
+- [Recovery-Merge: Belege bestätigt, unnötige Rohdatenversionierung und Grenzen (2026-10-19)](merge_audit_2026-10-19.md)
+- [NEURAL-ELEMENTS-01: optionales CNN, 84 CLI-Gegenproben und negatives Ergebnis (2026-10-19)](next_arbeitspaket_2026-10-19_neural_elements.md)
+
 - [COMPONENT-VALUE-01: Runtime-Schalter, echte Bot-Gegenproben und unabhängige Abnahme (2026-10-18)](next_arbeitspaket_2026-10-18_component_value.md)
 
 - [BENCHMARK-ANYTIME-01: echte Qualitätskurven, drei Seeds und unabhängige Objektprüfungen (2026-10-18)](next_arbeitspaket_2026-10-18_benchmark_anytime.md)

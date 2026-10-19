@@ -6,8 +6,10 @@ Die konkrete Entscheidung ist die Beibehaltung des vollständigen Portfolios;
 eine allgemeine Gleichwertigkeit oder Entbehrlichkeit ist nicht nachgewiesen.
 Umfang, Kontrollen, Unsicherheit und Grenzen stehen unter
 [COMPONENT-VALUE-01](next_arbeitspaket_2026-10-18_component_value.md).
-Neuronale Erkennung bleibt geplant. Dieses Dokument aktiviert kein Netz und
-keine automatische Entfernung von Komponenten.
+Der erste [neuronale Versuch](next_arbeitspaket_2026-10-19_neural_elements.md)
+ist optional umgesetzt und mit 84 echten CLI-Versuchen untersucht. Er zeigt
+keinen zusätzlichen Erfolg und bleibt außerhalb des Standardpfads.
+Die produktive Netzabnahme bleibt offen; vorhandene Erkenner werden erhalten.
 
 ## Kleines neuronales Netz als zusätzlicher Erkennungs-Bot
 
