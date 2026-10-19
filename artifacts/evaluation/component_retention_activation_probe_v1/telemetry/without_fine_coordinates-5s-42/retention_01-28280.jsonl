@@ -1,0 +1,761 @@
+{"event": "worker_observed", "image_seconds": 0.6090000000258442, "source_sha256": {"src/imageCompositeConverter.py": "16a920f099279fe03703d95f3df2d5a0eb929b36a7532e3a4a89d5b3e12b894a", "src/iCCModules/imageCompositeConverterAdaptiveSearch.py": "c6158c6488dcc4b95bf7523acea98fb674fb14eb19aafdecec843de790054e87", "src/iCCModules/imageCompositeConverterFilledSymbols.py": "9e691db61527db67836c8167cdc3be81e9f9668e49a13e24079b57314e0e9f8b", "src/iCCModules/imageCompositeConverterSearchBots.py": "c97e50c03525982050d0d2f35a5c52d6972ee4c19dc527428800c9b06fe0f05d", "src/iCCModules/imageCompositeConverterShortLabelDisk.py": "5fc6cbd505a795b71dd9a34df514d4623e36ce27e4cf8ecb42cc2df5da7d93a3", "src/iCCModules/imageCompositeConverterCli.py": "af0fa42344eefd6fb81505c929d18dcc171316ad983655b34095880ff3f36756", "src/iCCModules/imageCompositeConverterComponents.py": "c12df98323de8b17d51eb6069b1cdbd44a595871369be523a7dd28dab314a4a6", "src/iCCModules/imageCompositeConverterDeadline.py": "a0b8f914592b422211f52e00b704ba8491f7af1d42f46c96e165eda51cfe0793", "src/iCCModules/imageCompositeConverterSearchPortfolio.py": "6a90d9662fd89f683d4375696388f90e37568057729ba5cbeacce05cc938c534", "src/iCCModules/imageCompositeConverterSearchScheduler.py": "17d537a2e8201779e8787efda32c15b342ca7d831d87dd429a508fd746ff8616"}, "applied_controls": null}
+{"event": "render_started", "image_seconds": 0.625}
+{"event": "render_finished", "image_seconds": 0.625, "active_seconds": 0.0019008000090252608, "valid": true}
+{"event": "render_started", "image_seconds": 0.625}
+{"event": "render_finished", "image_seconds": 0.625, "active_seconds": 0.0004870000120718032, "valid": true}
+{"event": "render_started", "image_seconds": 0.625}
+{"event": "render_finished", "image_seconds": 0.625, "active_seconds": 0.00047759999870322645, "valid": true}
+{"event": "render_started", "image_seconds": 0.625}
+{"event": "render_finished", "image_seconds": 0.625, "active_seconds": 3.5999983083456755e-06, "valid": true}
+{"event": "render_started", "image_seconds": 0.625}
+{"event": "render_finished", "image_seconds": 0.625, "active_seconds": 0.0004470999992918223, "valid": true}
+{"event": "render_started", "image_seconds": 0.625}
+{"event": "render_finished", "image_seconds": 0.625, "active_seconds": 3.6999990697950125e-06, "valid": true}
+{"event": "render_started", "image_seconds": 0.6400000000139698}
+{"event": "render_finished", "image_seconds": 0.6400000000139698, "active_seconds": 2.13000166695565e-05, "valid": true}
+{"event": "render_started", "image_seconds": 0.6400000000139698}
+{"event": "render_finished", "image_seconds": 0.6400000000139698, "active_seconds": 0.0009908000065479428, "valid": true}
+{"event": "render_started", "image_seconds": 0.6560000000172295}
+{"event": "render_finished", "image_seconds": 0.6560000000172295, "active_seconds": 0.0012971000105608255, "valid": true}
+{"event": "render_started", "image_seconds": 0.6560000000172295}
+{"event": "render_finished", "image_seconds": 0.6560000000172295, "active_seconds": 6.099988240748644e-06, "valid": true}
+{"event": "render_started", "image_seconds": 0.6560000000172295}
+{"event": "render_finished", "image_seconds": 0.6560000000172295, "active_seconds": 0.0005529999907594174, "valid": true}
+{"event": "render_started", "image_seconds": 0.6560000000172295}
+{"event": "render_finished", "image_seconds": 0.6560000000172295, "active_seconds": 4.2000028770416975e-06, "valid": true}
+{"event": "render_started", "image_seconds": 0.6560000000172295}
+{"event": "render_finished", "image_seconds": 0.6560000000172295, "active_seconds": 0.000453799992101267, "valid": true}
+{"event": "render_started", "image_seconds": 0.6560000000172295}
+{"event": "render_finished", "image_seconds": 0.6560000000172295, "active_seconds": 3.400025889277458e-06, "valid": true}
+{"event": "render_started", "image_seconds": 0.6720000000204891}
+{"event": "render_finished", "image_seconds": 0.6720000000204891, "active_seconds": 1.0899995686486363e-05, "valid": true}
+{"event": "render_started", "image_seconds": 0.6720000000204891}
+{"event": "render_finished", "image_seconds": 0.6720000000204891, "active_seconds": 0.0009359999967273325, "valid": true}
+{"event": "render_started", "image_seconds": 0.6720000000204891}
+{"event": "render_finished", "image_seconds": 0.6870000000053551, "active_seconds": 0.0009117999870795757, "valid": true}
+{"event": "render_started", "image_seconds": 0.6870000000053551}
+{"event": "render_finished", "image_seconds": 0.6870000000053551, "active_seconds": 7.099995855242014e-06, "valid": true}
+{"event": "render_started", "image_seconds": 0.6870000000053551}
+{"event": "render_finished", "image_seconds": 0.6870000000053551, "active_seconds": 0.0006990999972913414, "valid": true}
+{"event": "render_started", "image_seconds": 0.6870000000053551}
+{"event": "render_finished", "image_seconds": 0.6870000000053551, "active_seconds": 4.7000066842883825e-06, "valid": true}
+{"event": "render_started", "image_seconds": 0.6870000000053551}
+{"event": "render_finished", "image_seconds": 0.6870000000053551, "active_seconds": 0.0005613999965135008, "valid": true}
+{"event": "render_started", "image_seconds": 0.6870000000053551}
+{"event": "render_finished", "image_seconds": 0.6870000000053551, "active_seconds": 1.6700010746717453e-05, "valid": true}
+{"event": "render_started", "image_seconds": 0.6870000000053551}
+{"event": "render_finished", "image_seconds": 0.6870000000053551, "active_seconds": 1.4899997040629387e-05, "valid": true}
+{"event": "render_started", "image_seconds": 0.6870000000053551}
+{"event": "render_finished", "image_seconds": 0.6870000000053551, "active_seconds": 0.0008581999863963574, "valid": true}
+{"event": "render_started", "image_seconds": 0.7030000000086147}
+{"event": "render_finished", "image_seconds": 0.7030000000086147, "active_seconds": 0.001195799995912239, "valid": true}
+{"event": "render_started", "image_seconds": 0.7030000000086147}
+{"event": "render_finished", "image_seconds": 0.7030000000086147, "active_seconds": 1.0000017937272787e-05, "valid": true}
+{"event": "render_started", "image_seconds": 0.7030000000086147}
+{"event": "render_finished", "image_seconds": 0.7030000000086147, "active_seconds": 0.0013363999896682799, "valid": true}
+{"event": "render_started", "image_seconds": 0.7030000000086147}
+{"event": "render_finished", "image_seconds": 0.7030000000086147, "active_seconds": 1.2500007869675756e-05, "valid": true}
+{"event": "render_started", "image_seconds": 0.7030000000086147}
+{"event": "render_finished", "image_seconds": 0.7030000000086147, "active_seconds": 0.0010463999933563173, "valid": true}
+{"event": "render_started", "image_seconds": 0.7030000000086147}
+{"event": "render_finished", "image_seconds": 0.7030000000086147, "active_seconds": 1.170000177808106e-05, "valid": true}
+{"event": "render_started", "image_seconds": 0.7030000000086147}
+{"event": "render_finished", "image_seconds": 0.7190000000118744, "active_seconds": 0.0013467000098899007, "valid": true}
+{"event": "render_started", "image_seconds": 0.7190000000118744}
+{"event": "render_finished", "image_seconds": 0.7190000000118744, "active_seconds": 0.0011484000133350492, "valid": true}
+{"event": "render_started", "image_seconds": 0.7190000000118744}
+{"event": "render_finished", "image_seconds": 0.7190000000118744, "active_seconds": 0.000916499993763864, "valid": true}
+{"event": "render_started", "image_seconds": 0.7190000000118744}
+{"event": "render_finished", "image_seconds": 0.7190000000118744, "active_seconds": 0.0005393000028561801, "valid": true}
+{"event": "render_started", "image_seconds": 0.7190000000118744}
+{"event": "render_finished", "image_seconds": 0.7190000000118744, "active_seconds": 0.0004785000055562705, "valid": true}
+{"event": "render_started", "image_seconds": 0.7190000000118744}
+{"event": "render_finished", "image_seconds": 0.7190000000118744, "active_seconds": 0.00046179999480955303, "valid": true}
+{"event": "render_started", "image_seconds": 0.7190000000118744}
+{"event": "render_finished", "image_seconds": 0.7190000000118744, "active_seconds": 0.0004600000102072954, "valid": true}
+{"event": "render_started", "image_seconds": 0.7190000000118744}
+{"event": "render_finished", "image_seconds": 0.7190000000118744, "active_seconds": 0.0004406000080052763, "valid": true}
+{"event": "render_started", "image_seconds": 0.7190000000118744}
+{"event": "render_finished", "image_seconds": 0.7340000000258442, "active_seconds": 0.010267900011967868, "valid": true}
+{"event": "render_started", "image_seconds": 0.7340000000258442}
+{"event": "render_finished", "image_seconds": 0.7340000000258442, "active_seconds": 0.001052199979312718, "valid": true}
+{"event": "render_started", "image_seconds": 0.75}
+{"event": "render_finished", "image_seconds": 0.75, "active_seconds": 0.0006601999921258539, "valid": true}
+{"event": "render_started", "image_seconds": 0.75}
+{"event": "render_finished", "image_seconds": 0.75, "active_seconds": 0.0005241000035312027, "valid": true}
+{"event": "render_started", "image_seconds": 0.75}
+{"event": "render_finished", "image_seconds": 0.75, "active_seconds": 0.0005005999992135912, "valid": true}
+{"event": "render_started", "image_seconds": 0.75}
+{"event": "render_finished", "image_seconds": 0.75, "active_seconds": 0.00044639999396167696, "valid": true}
+{"event": "render_started", "image_seconds": 0.75}
+{"event": "render_finished", "image_seconds": 0.75, "active_seconds": 0.0004621999978553504, "valid": true}
+{"event": "render_started", "image_seconds": 0.75}
+{"event": "render_finished", "image_seconds": 0.75, "active_seconds": 0.00044040000648237765, "valid": true}
+{"event": "render_started", "image_seconds": 0.75}
+{"event": "render_finished", "image_seconds": 0.75, "active_seconds": 0.0004477999755181372, "valid": true}
+{"event": "render_started", "image_seconds": 0.75}
+{"event": "render_finished", "image_seconds": 0.75, "active_seconds": 0.0006590000120922923, "valid": true}
+{"event": "render_started", "image_seconds": 0.75}
+{"event": "render_finished", "image_seconds": 0.75, "active_seconds": 0.0004935999750159681, "valid": true}
+{"event": "render_started", "image_seconds": 0.75}
+{"event": "render_finished", "image_seconds": 0.75, "active_seconds": 0.0004566000134218484, "valid": true}
+{"event": "render_started", "image_seconds": 0.75}
+{"event": "render_finished", "image_seconds": 0.75, "active_seconds": 0.0004335999838076532, "valid": true}
+{"event": "render_started", "image_seconds": 0.75}
+{"event": "render_finished", "image_seconds": 0.75, "active_seconds": 0.0004251999780535698, "valid": true}
+{"event": "render_started", "image_seconds": 0.7650000000139698}
+{"event": "render_finished", "image_seconds": 0.7650000000139698, "active_seconds": 0.0038335999997798353, "valid": true}
+{"event": "render_started", "image_seconds": 0.7650000000139698}
+{"event": "render_finished", "image_seconds": 0.7650000000139698, "active_seconds": 0.0018297999922651798, "valid": true}
+{"event": "render_started", "image_seconds": 0.7650000000139698}
+{"event": "render_finished", "image_seconds": 0.7650000000139698, "active_seconds": 0.0009237999911420047, "valid": true}
+{"event": "render_started", "image_seconds": 0.7650000000139698}
+{"event": "render_finished", "image_seconds": 0.7650000000139698, "active_seconds": 0.0018813000060617924, "valid": true}
+{"event": "render_started", "image_seconds": 0.7650000000139698}
+{"event": "render_finished", "image_seconds": 0.7810000000172295, "active_seconds": 0.0019936000171583146, "valid": true}
+{"event": "render_started", "image_seconds": 0.7810000000172295}
+{"event": "render_finished", "image_seconds": 0.7810000000172295, "active_seconds": 0.0007894000154919922, "valid": true}
+{"event": "render_started", "image_seconds": 0.7810000000172295}
+{"event": "render_finished", "image_seconds": 0.7810000000172295, "active_seconds": 0.0007295999967027456, "valid": true}
+{"event": "render_started", "image_seconds": 0.7810000000172295}
+{"event": "render_finished", "image_seconds": 0.7810000000172295, "active_seconds": 0.0007206999871414155, "valid": true}
+{"event": "render_started", "image_seconds": 0.7810000000172295}
+{"event": "render_finished", "image_seconds": 0.7810000000172295, "active_seconds": 0.0010925999958999455, "valid": true}
+{"event": "render_started", "image_seconds": 0.7810000000172295}
+{"event": "render_finished", "image_seconds": 0.7810000000172295, "active_seconds": 0.0008771000138949603, "valid": true}
+{"event": "render_started", "image_seconds": 0.7810000000172295}
+{"event": "render_finished", "image_seconds": 0.7810000000172295, "active_seconds": 0.0008201999880839139, "valid": true}
+{"event": "render_started", "image_seconds": 0.7810000000172295}
+{"event": "render_finished", "image_seconds": 0.7970000000204891, "active_seconds": 0.011890199995832518, "valid": true}
+{"event": "render_started", "image_seconds": 0.7970000000204891}
+{"event": "render_finished", "image_seconds": 0.7970000000204891, "active_seconds": 0.0007729000062681735, "valid": true}
+{"event": "render_started", "image_seconds": 0.7970000000204891}
+{"event": "render_finished", "image_seconds": 0.7970000000204891, "active_seconds": 0.0005064999859314412, "valid": true}
+{"event": "render_started", "image_seconds": 0.7970000000204891}
+{"event": "render_finished", "image_seconds": 0.7970000000204891, "active_seconds": 0.00045349998981691897, "valid": true}
+{"event": "render_started", "image_seconds": 0.8120000000053551}
+{"event": "render_finished", "image_seconds": 0.8120000000053551, "active_seconds": 0.0008065000001806766, "valid": true}
+{"event": "render_started", "image_seconds": 0.8120000000053551}
+{"event": "render_finished", "image_seconds": 0.8120000000053551, "active_seconds": 0.0004989000153727829, "valid": true}
+{"event": "render_started", "image_seconds": 0.8120000000053551}
+{"event": "render_finished", "image_seconds": 0.8120000000053551, "active_seconds": 0.00043539999751374125, "valid": true}
+{"event": "render_started", "image_seconds": 0.8120000000053551}
+{"event": "render_finished", "image_seconds": 0.8120000000053551, "active_seconds": 0.0004416000156197697, "valid": true}
+{"event": "render_started", "image_seconds": 0.8120000000053551}
+{"event": "render_finished", "image_seconds": 0.8120000000053551, "active_seconds": 0.0004057000041939318, "valid": true}
+{"event": "render_started", "image_seconds": 0.8120000000053551}
+{"event": "render_finished", "image_seconds": 0.8120000000053551, "active_seconds": 0.0008160999859683216, "valid": true}
+{"event": "render_started", "image_seconds": 0.8120000000053551}
+{"event": "render_finished", "image_seconds": 0.8120000000053551, "active_seconds": 0.0004658999969251454, "valid": true}
+{"event": "render_started", "image_seconds": 0.8120000000053551}
+{"event": "render_finished", "image_seconds": 0.8120000000053551, "active_seconds": 0.0008001000096555799, "valid": true}
+{"event": "render_started", "image_seconds": 0.8120000000053551}
+{"event": "render_finished", "image_seconds": 0.8280000000086147, "active_seconds": 0.000753100001020357, "valid": true}
+{"event": "render_started", "image_seconds": 0.8280000000086147}
+{"event": "render_finished", "image_seconds": 0.8280000000086147, "active_seconds": 0.0005428000004030764, "valid": true}
+{"event": "render_started", "image_seconds": 0.8280000000086147}
+{"event": "render_finished", "image_seconds": 0.8280000000086147, "active_seconds": 0.0004529000143520534, "valid": true}
+{"event": "render_started", "image_seconds": 0.8280000000086147}
+{"event": "render_finished", "image_seconds": 0.8280000000086147, "active_seconds": 0.0007946999976411462, "valid": true}
+{"event": "render_started", "image_seconds": 0.8280000000086147}
+{"event": "render_finished", "image_seconds": 0.8280000000086147, "active_seconds": 0.0005435000057332218, "valid": true}
+{"event": "render_started", "image_seconds": 0.8280000000086147}
+{"event": "render_finished", "image_seconds": 0.8280000000086147, "active_seconds": 0.00044100001105107367, "valid": true}
+{"event": "render_started", "image_seconds": 0.8280000000086147}
+{"event": "render_finished", "image_seconds": 0.8280000000086147, "active_seconds": 0.00042520000715740025, "valid": true}
+{"event": "render_started", "image_seconds": 0.8280000000086147}
+{"event": "render_finished", "image_seconds": 0.8280000000086147, "active_seconds": 0.00041179999243468046, "valid": true}
+{"event": "render_started", "image_seconds": 0.8280000000086147}
+{"event": "render_finished", "image_seconds": 0.8280000000086147, "active_seconds": 0.00042529997881501913, "valid": true}
+{"event": "render_started", "image_seconds": 0.8280000000086147}
+{"event": "render_finished", "image_seconds": 0.8280000000086147, "active_seconds": 0.00040030002128332853, "valid": true}
+{"event": "render_started", "image_seconds": 0.8440000000118744}
+{"event": "render_finished", "image_seconds": 0.8440000000118744, "active_seconds": 0.0007773000106681138, "valid": true}
+{"event": "render_started", "image_seconds": 0.8440000000118744}
+{"event": "render_finished", "image_seconds": 0.8440000000118744, "active_seconds": 0.0005060999828856438, "valid": true}
+{"event": "render_started", "image_seconds": 0.8440000000118744}
+{"event": "render_finished", "image_seconds": 0.8440000000118744, "active_seconds": 0.0004902000073343515, "valid": true}
+{"event": "render_started", "image_seconds": 0.8440000000118744}
+{"event": "render_finished", "image_seconds": 0.8440000000118744, "active_seconds": 0.009393000014824793, "valid": true}
+{"event": "render_started", "image_seconds": 0.8590000000258442}
+{"event": "render_finished", "image_seconds": 0.8590000000258442, "active_seconds": 0.0010184000129811466, "valid": true}
+{"event": "render_started", "image_seconds": 0.8590000000258442}
+{"event": "render_finished", "image_seconds": 0.8590000000258442, "active_seconds": 0.0006304999988060445, "valid": true}
+{"event": "render_started", "image_seconds": 0.8590000000258442}
+{"event": "render_finished", "image_seconds": 0.8590000000258442, "active_seconds": 0.0008125999884214252, "valid": true}
+{"event": "render_started", "image_seconds": 0.8590000000258442}
+{"event": "render_finished", "image_seconds": 0.8590000000258442, "active_seconds": 0.0009481000015512109, "valid": true}
+{"event": "render_started", "image_seconds": 0.8590000000258442}
+{"event": "render_finished", "image_seconds": 0.8590000000258442, "active_seconds": 0.000895800010766834, "valid": true}
+{"event": "render_started", "image_seconds": 0.875}
+{"event": "render_finished", "image_seconds": 0.875, "active_seconds": 0.0013244999863673002, "valid": true}
+{"event": "render_started", "image_seconds": 0.875}
+{"event": "render_finished", "image_seconds": 0.875, "active_seconds": 0.0008486000006087124, "valid": true}
+{"event": "render_started", "image_seconds": 0.875}
+{"event": "render_finished", "image_seconds": 0.875, "active_seconds": 0.0004902000073343515, "valid": true}
+{"event": "render_started", "image_seconds": 0.875}
+{"event": "render_finished", "image_seconds": 0.875, "active_seconds": 0.0006317000079434365, "valid": true}
+{"event": "render_started", "image_seconds": 0.875}
+{"event": "render_finished", "image_seconds": 0.875, "active_seconds": 0.0005871000175829977, "valid": true}
+{"event": "render_started", "image_seconds": 0.875}
+{"event": "render_finished", "image_seconds": 0.875, "active_seconds": 0.00046320000546984375, "valid": true}
+{"event": "render_started", "image_seconds": 0.875}
+{"event": "render_finished", "image_seconds": 0.875, "active_seconds": 0.0006585000082850456, "valid": true}
+{"event": "render_started", "image_seconds": 0.875}
+{"event": "render_finished", "image_seconds": 0.875, "active_seconds": 0.0014417000056710094, "valid": true}
+{"event": "render_started", "image_seconds": 0.875}
+{"event": "render_finished", "image_seconds": 0.875, "active_seconds": 0.0007815000135451555, "valid": true}
+{"event": "render_started", "image_seconds": 0.875}
+{"event": "render_finished", "image_seconds": 0.8900000000139698, "active_seconds": 0.0008361000218428671, "valid": true}
+{"event": "render_started", "image_seconds": 0.8900000000139698}
+{"event": "render_finished", "image_seconds": 0.8900000000139698, "active_seconds": 0.0005952000210527331, "valid": true}
+{"event": "render_started", "image_seconds": 0.8900000000139698}
+{"event": "render_finished", "image_seconds": 0.8900000000139698, "active_seconds": 0.00043340001138858497, "valid": true}
+{"event": "render_started", "image_seconds": 0.8900000000139698}
+{"event": "render_finished", "image_seconds": 0.8900000000139698, "active_seconds": 0.00040660001104697585, "valid": true}
+{"event": "render_started", "image_seconds": 0.8900000000139698}
+{"event": "render_finished", "image_seconds": 0.8900000000139698, "active_seconds": 0.0004112999886274338, "valid": true}
+{"event": "render_started", "image_seconds": 0.8900000000139698}
+{"event": "render_finished", "image_seconds": 0.8900000000139698, "active_seconds": 0.0004026999813504517, "valid": true}
+{"event": "render_started", "image_seconds": 0.8900000000139698}
+{"event": "render_finished", "image_seconds": 0.8900000000139698, "active_seconds": 0.000398199976189062, "valid": true}
+{"event": "render_started", "image_seconds": 0.8900000000139698}
+{"event": "render_finished", "image_seconds": 0.8900000000139698, "active_seconds": 0.0009657999908085912, "valid": true}
+{"event": "render_started", "image_seconds": 0.8900000000139698}
+{"event": "render_finished", "image_seconds": 0.8900000000139698, "active_seconds": 0.0008507000165991485, "valid": true}
+{"event": "render_started", "image_seconds": 0.8900000000139698}
+{"event": "render_finished", "image_seconds": 0.8900000000139698, "active_seconds": 0.0005223999905865639, "valid": true}
+{"event": "render_started", "image_seconds": 0.8900000000139698}
+{"event": "render_finished", "image_seconds": 0.9060000000172295, "active_seconds": 0.00882160000037402, "valid": true}
+{"event": "render_started", "image_seconds": 0.9060000000172295}
+{"event": "render_finished", "image_seconds": 0.9060000000172295, "active_seconds": 0.0008963000145740807, "valid": true}
+{"event": "render_started", "image_seconds": 0.9060000000172295}
+{"event": "render_finished", "image_seconds": 0.9060000000172295, "active_seconds": 0.0005234999989625067, "valid": true}
+{"event": "render_started", "image_seconds": 0.9060000000172295}
+{"event": "render_finished", "image_seconds": 0.9060000000172295, "active_seconds": 0.0009808999893721193, "valid": true}
+{"event": "render_started", "image_seconds": 0.9220000000204891}
+{"event": "render_finished", "image_seconds": 0.9220000000204891, "active_seconds": 0.0007738000131212175, "valid": true}
+{"event": "render_started", "image_seconds": 0.9220000000204891}
+{"event": "render_finished", "image_seconds": 0.9220000000204891, "active_seconds": 0.0005153999954927713, "valid": true}
+{"event": "render_started", "image_seconds": 0.9220000000204891}
+{"event": "render_finished", "image_seconds": 0.9220000000204891, "active_seconds": 0.0005456999933812767, "valid": true}
+{"event": "render_started", "image_seconds": 0.9220000000204891}
+{"event": "render_finished", "image_seconds": 0.9220000000204891, "active_seconds": 0.0005830999871250242, "valid": true}
+{"event": "render_started", "image_seconds": 0.9220000000204891}
+{"event": "render_finished", "image_seconds": 0.9220000000204891, "active_seconds": 0.00043550002737902105, "valid": true}
+{"event": "render_started", "image_seconds": 0.9220000000204891}
+{"event": "render_finished", "image_seconds": 0.9220000000204891, "active_seconds": 0.0007542000093962997, "valid": true}
+{"event": "render_started", "image_seconds": 0.9220000000204891}
+{"event": "render_finished", "image_seconds": 0.9220000000204891, "active_seconds": 0.0007000999758020043, "valid": true}
+{"event": "render_started", "image_seconds": 0.9220000000204891}
+{"event": "render_finished", "image_seconds": 0.9220000000204891, "active_seconds": 0.00046629999997094274, "valid": true}
+{"event": "render_started", "image_seconds": 0.9220000000204891}
+{"event": "render_finished", "image_seconds": 0.9220000000204891, "active_seconds": 0.0004230999911669642, "valid": true}
+{"event": "render_started", "image_seconds": 0.9220000000204891}
+{"event": "render_finished", "image_seconds": 0.9220000000204891, "active_seconds": 0.0004214999789837748, "valid": true}
+{"event": "render_started", "image_seconds": 0.9220000000204891}
+{"event": "render_finished", "image_seconds": 0.9220000000204891, "active_seconds": 0.000402199977543205, "valid": true}
+{"event": "render_started", "image_seconds": 0.9220000000204891}
+{"event": "render_finished", "image_seconds": 0.9370000000053551, "active_seconds": 0.0005372000159695745, "valid": true}
+{"event": "render_started", "image_seconds": 0.9370000000053551}
+{"event": "render_finished", "image_seconds": 0.9370000000053551, "active_seconds": 0.0004116999916732311, "valid": true}
+{"event": "render_started", "image_seconds": 0.9370000000053551}
+{"event": "render_finished", "image_seconds": 0.9370000000053551, "active_seconds": 0.0009656999900471419, "valid": true}
+{"event": "render_started", "image_seconds": 0.9370000000053551}
+{"event": "render_finished", "image_seconds": 0.9370000000053551, "active_seconds": 0.000530999997863546, "valid": true}
+{"event": "render_started", "image_seconds": 0.9370000000053551}
+{"event": "render_finished", "image_seconds": 0.9370000000053551, "active_seconds": 0.0004675000091083348, "valid": true}
+{"event": "render_started", "image_seconds": 0.9370000000053551}
+{"event": "render_finished", "image_seconds": 0.9370000000053551, "active_seconds": 0.0004788000078406185, "valid": true}
+{"event": "render_started", "image_seconds": 0.9370000000053551}
+{"event": "render_finished", "image_seconds": 0.9370000000053551, "active_seconds": 0.0005617999995592982, "valid": true}
+{"event": "render_started", "image_seconds": 0.9370000000053551}
+{"event": "render_finished", "image_seconds": 0.9370000000053551, "active_seconds": 0.00043590000132098794, "valid": true}
+{"event": "render_started", "image_seconds": 0.9370000000053551}
+{"event": "render_finished", "image_seconds": 0.9370000000053551, "active_seconds": 0.00040859999717213213, "valid": true}
+{"event": "render_started", "image_seconds": 0.9370000000053551}
+{"event": "render_finished", "image_seconds": 0.9370000000053551, "active_seconds": 0.00041370000690221786, "valid": true}
+{"event": "render_started", "image_seconds": 0.9530000000086147}
+{"event": "render_finished", "image_seconds": 0.9530000000086147, "active_seconds": 0.009484100010013208, "valid": true}
+{"event": "render_started", "image_seconds": 0.9530000000086147}
+{"event": "render_finished", "image_seconds": 0.9530000000086147, "active_seconds": 0.0007557999924756587, "valid": true}
+{"event": "render_started", "image_seconds": 0.9530000000086147}
+{"event": "render_finished", "image_seconds": 0.9690000000118744, "active_seconds": 0.0004983000108040869, "valid": true}
+{"event": "render_started", "image_seconds": 0.9690000000118744}
+{"event": "render_finished", "image_seconds": 0.9690000000118744, "active_seconds": 0.0004443999787326902, "valid": true}
+{"event": "render_started", "image_seconds": 0.9690000000118744}
+{"event": "render_finished", "image_seconds": 0.9690000000118744, "active_seconds": 0.00041360000614076853, "valid": true}
+{"event": "render_started", "image_seconds": 0.9690000000118744}
+{"event": "render_finished", "image_seconds": 0.9690000000118744, "active_seconds": 0.0004388999950606376, "valid": true}
+{"event": "render_started", "image_seconds": 0.9690000000118744}
+{"event": "render_finished", "image_seconds": 0.9690000000118744, "active_seconds": 0.00041229999624192715, "valid": true}
+{"event": "render_started", "image_seconds": 0.9690000000118744}
+{"event": "render_finished", "image_seconds": 0.9690000000118744, "active_seconds": 0.0008320999913848937, "valid": true}
+{"event": "render_started", "image_seconds": 0.9690000000118744}
+{"event": "render_finished", "image_seconds": 0.9690000000118744, "active_seconds": 0.0006298999942373484, "valid": true}
+{"event": "render_started", "image_seconds": 0.9690000000118744}
+{"event": "render_finished", "image_seconds": 0.9690000000118744, "active_seconds": 0.00046129999100230634, "valid": true}
+{"event": "render_started", "image_seconds": 0.9690000000118744}
+{"event": "render_finished", "image_seconds": 0.9690000000118744, "active_seconds": 0.00044460000935941935, "valid": true}
+{"event": "render_started", "image_seconds": 0.9690000000118744}
+{"event": "render_finished", "image_seconds": 0.9690000000118744, "active_seconds": 0.00045969997881911695, "valid": true}
+{"event": "render_started", "image_seconds": 0.9690000000118744}
+{"event": "render_finished", "image_seconds": 0.9690000000118744, "active_seconds": 0.0004175000067334622, "valid": true}
+{"event": "render_started", "image_seconds": 0.9690000000118744}
+{"event": "render_finished", "image_seconds": 0.9690000000118744, "active_seconds": 0.00040030002128332853, "valid": true}
+{"event": "render_started", "image_seconds": 0.9690000000118744}
+{"event": "render_finished", "image_seconds": 0.9690000000118744, "active_seconds": 0.00039770000148564577, "valid": true}
+{"event": "render_started", "image_seconds": 0.9840000000258442}
+{"event": "render_finished", "image_seconds": 0.9840000000258442, "active_seconds": 0.0012189999979455024, "valid": true}
+{"event": "render_started", "image_seconds": 0.9840000000258442}
+{"event": "render_finished", "image_seconds": 0.9840000000258442, "active_seconds": 0.0005434000049717724, "valid": true}
+{"event": "render_started", "image_seconds": 0.9840000000258442}
+{"event": "render_finished", "image_seconds": 0.9840000000258442, "active_seconds": 0.00042470000335015357, "valid": true}
+{"event": "render_started", "image_seconds": 0.9840000000258442}
+{"event": "render_finished", "image_seconds": 0.9840000000258442, "active_seconds": 0.0005849000008311123, "valid": true}
+{"event": "render_started", "image_seconds": 0.9840000000258442}
+{"event": "render_finished", "image_seconds": 0.9840000000258442, "active_seconds": 0.0004113999893888831, "valid": true}
+{"event": "render_started", "image_seconds": 0.9840000000258442}
+{"event": "render_finished", "image_seconds": 0.9840000000258442, "active_seconds": 0.0004366000066511333, "valid": true}
+{"event": "render_started", "image_seconds": 1.0}
+{"event": "render_finished", "image_seconds": 1.0, "active_seconds": 0.0007219999970402569, "valid": true}
+{"event": "render_started", "image_seconds": 1.0}
+{"event": "render_finished", "image_seconds": 1.0, "active_seconds": 0.00047420000191777945, "valid": true}
+{"event": "render_started", "image_seconds": 1.0}
+{"event": "render_finished", "image_seconds": 1.0, "active_seconds": 0.00047220001579262316, "valid": true}
+{"event": "render_started", "image_seconds": 1.0}
+{"event": "render_finished", "image_seconds": 1.0, "active_seconds": 0.0004233999934513122, "valid": true}
+{"event": "render_started", "image_seconds": 1.0}
+{"event": "render_finished", "image_seconds": 1.0, "active_seconds": 0.007904900005087256, "valid": true}
+{"event": "render_started", "image_seconds": 1.0}
+{"event": "render_finished", "image_seconds": 1.0, "active_seconds": 0.0007265000022016466, "valid": true}
+{"event": "render_started", "image_seconds": 1.0}
+{"event": "render_finished", "image_seconds": 1.0, "active_seconds": 0.000457199988886714, "valid": true}
+{"event": "render_started", "image_seconds": 1.0}
+{"event": "render_finished", "image_seconds": 1.0, "active_seconds": 0.0004146000137552619, "valid": true}
+{"event": "render_started", "image_seconds": 1.0150000000139698}
+{"event": "render_finished", "image_seconds": 1.0150000000139698, "active_seconds": 0.0006418999982997775, "valid": true}
+{"event": "render_started", "image_seconds": 1.0150000000139698}
+{"event": "render_finished", "image_seconds": 1.0150000000139698, "active_seconds": 0.001199799997266382, "valid": true}
+{"event": "render_started", "image_seconds": 1.0150000000139698}
+{"event": "render_finished", "image_seconds": 1.0150000000139698, "active_seconds": 0.0006544999778270721, "valid": true}
+{"event": "render_started", "image_seconds": 1.0150000000139698}
+{"event": "render_finished", "image_seconds": 1.0150000000139698, "active_seconds": 0.0004208000027574599, "valid": true}
+{"event": "render_started", "image_seconds": 1.0150000000139698}
+{"event": "render_finished", "image_seconds": 1.0150000000139698, "active_seconds": 0.0004482999793253839, "valid": true}
+{"event": "render_started", "image_seconds": 1.0150000000139698}
+{"event": "render_finished", "image_seconds": 1.0310000000172295, "active_seconds": 0.0009722000104375184, "valid": true}
+{"event": "render_started", "image_seconds": 1.0310000000172295}
+{"event": "render_finished", "image_seconds": 1.0310000000172295, "active_seconds": 0.0005506000015884638, "valid": true}
+{"event": "render_started", "image_seconds": 1.0310000000172295}
+{"event": "render_finished", "image_seconds": 1.0310000000172295, "active_seconds": 0.0004746000049635768, "valid": true}
+{"event": "render_started", "image_seconds": 1.0310000000172295}
+{"event": "render_finished", "image_seconds": 1.0310000000172295, "active_seconds": 0.0005572999943979084, "valid": true}
+{"event": "render_started", "image_seconds": 1.0310000000172295}
+{"event": "render_finished", "image_seconds": 1.0310000000172295, "active_seconds": 0.0007565000269096345, "valid": true}
+{"event": "render_started", "image_seconds": 1.0310000000172295}
+{"event": "render_finished", "image_seconds": 1.0310000000172295, "active_seconds": 0.0004785000055562705, "valid": true}
+{"event": "render_started", "image_seconds": 1.0310000000172295}
+{"event": "render_finished", "image_seconds": 1.0310000000172295, "active_seconds": 0.0004918000195175409, "valid": true}
+{"event": "render_started", "image_seconds": 1.0310000000172295}
+{"event": "render_finished", "image_seconds": 1.0310000000172295, "active_seconds": 0.00044070000876672566, "valid": true}
+{"event": "render_started", "image_seconds": 1.0310000000172295}
+{"event": "render_finished", "image_seconds": 1.0310000000172295, "active_seconds": 0.0004037999897263944, "valid": true}
+{"event": "render_started", "image_seconds": 1.0310000000172295}
+{"event": "render_finished", "image_seconds": 1.0310000000172295, "active_seconds": 0.00039319999632425606, "valid": true}
+{"event": "render_started", "image_seconds": 1.0310000000172295}
+{"event": "render_finished", "image_seconds": 1.0310000000172295, "active_seconds": 0.0004149999876972288, "valid": true}
+{"event": "render_started", "image_seconds": 1.0310000000172295}
+{"event": "render_finished", "image_seconds": 1.047000000020489, "active_seconds": 0.00041730000521056354, "valid": true}
+{"event": "render_started", "image_seconds": 1.047000000020489}
+{"event": "render_finished", "image_seconds": 1.047000000020489, "active_seconds": 0.0006589999829884619, "valid": true}
+{"event": "render_started", "image_seconds": 1.047000000020489}
+{"event": "render_finished", "image_seconds": 1.047000000020489, "active_seconds": 0.00047190001350827515, "valid": true}
+{"event": "render_started", "image_seconds": 1.047000000020489}
+{"event": "render_finished", "image_seconds": 1.047000000020489, "active_seconds": 0.00043840002035722136, "valid": true}
+{"event": "render_started", "image_seconds": 1.047000000020489}
+{"event": "render_finished", "image_seconds": 1.047000000020489, "active_seconds": 0.0006353999779094011, "valid": true}
+{"event": "render_started", "image_seconds": 1.047000000020489}
+{"event": "render_finished", "image_seconds": 1.062000000005355, "active_seconds": 0.00944670001626946, "valid": true}
+{"event": "render_started", "image_seconds": 1.062000000005355}
+{"event": "render_finished", "image_seconds": 1.062000000005355, "active_seconds": 0.0006419999990612268, "valid": true}
+{"event": "render_started", "image_seconds": 1.062000000005355}
+{"event": "render_finished", "image_seconds": 1.062000000005355, "active_seconds": 0.0004650999908335507, "valid": true}
+{"event": "render_started", "image_seconds": 1.062000000005355}
+{"event": "render_finished", "image_seconds": 1.062000000005355, "active_seconds": 0.00046949999523349106, "valid": true}
+{"event": "render_started", "image_seconds": 1.062000000005355}
+{"event": "render_finished", "image_seconds": 1.062000000005355, "active_seconds": 0.0009737999935168773, "valid": true}
+{"event": "render_started", "image_seconds": 1.062000000005355}
+{"event": "render_finished", "image_seconds": 1.062000000005355, "active_seconds": 0.0009489000076428056, "valid": true}
+{"event": "render_started", "image_seconds": 1.062000000005355}
+{"event": "render_finished", "image_seconds": 1.062000000005355, "active_seconds": 0.0006053999823052436, "valid": true}
+{"event": "render_started", "image_seconds": 1.062000000005355}
+{"event": "render_finished", "image_seconds": 1.0780000000086147, "active_seconds": 0.00046640000073239207, "valid": true}
+{"event": "render_started", "image_seconds": 1.0780000000086147}
+{"event": "render_finished", "image_seconds": 1.0780000000086147, "active_seconds": 0.0007848000095691532, "valid": true}
+{"event": "render_started", "image_seconds": 1.0780000000086147}
+{"event": "render_finished", "image_seconds": 1.0780000000086147, "active_seconds": 0.0005237000004854053, "valid": true}
+{"event": "render_started", "image_seconds": 1.0780000000086147}
+{"event": "render_finished", "image_seconds": 1.0780000000086147, "active_seconds": 0.00045190000673756003, "valid": true}
+{"event": "render_started", "image_seconds": 1.0780000000086147}
+{"event": "render_finished", "image_seconds": 1.0780000000086147, "active_seconds": 0.0004625000001396984, "valid": true}
+{"event": "render_started", "image_seconds": 1.0940000000118744}
+{"event": "render_finished", "image_seconds": 1.0940000000118744, "active_seconds": 0.0007927000115159899, "valid": true}
+{"event": "render_started", "image_seconds": 1.0940000000118744}
+{"event": "render_finished", "image_seconds": 1.0940000000118744, "active_seconds": 0.0005126000032760203, "valid": true}
+{"event": "render_started", "image_seconds": 1.0940000000118744}
+{"event": "render_finished", "image_seconds": 1.0940000000118744, "active_seconds": 0.0004797000146936625, "valid": true}
+{"event": "render_started", "image_seconds": 1.0940000000118744}
+{"event": "render_finished", "image_seconds": 1.0940000000118744, "active_seconds": 0.0008276999869849533, "valid": true}
+{"event": "render_started", "image_seconds": 1.0940000000118744}
+{"event": "render_finished", "image_seconds": 1.0940000000118744, "active_seconds": 0.0005184999899938703, "valid": true}
+{"event": "render_started", "image_seconds": 1.0940000000118744}
+{"event": "render_finished", "image_seconds": 1.0940000000118744, "active_seconds": 0.0004644000146072358, "valid": true}
+{"event": "render_started", "image_seconds": 1.0940000000118744}
+{"event": "render_finished", "image_seconds": 1.0940000000118744, "active_seconds": 0.0004282000008970499, "valid": true}
+{"event": "render_started", "image_seconds": 1.0940000000118744}
+{"event": "render_finished", "image_seconds": 1.0940000000118744, "active_seconds": 0.00041290000081062317, "valid": true}
+{"event": "render_started", "image_seconds": 1.1090000000258442}
+{"event": "render_finished", "image_seconds": 1.1090000000258442, "active_seconds": 0.0008468999876640737, "valid": true}
+{"event": "render_started", "image_seconds": 1.1090000000258442}
+{"event": "render_finished", "image_seconds": 1.1090000000258442, "active_seconds": 0.0005098999827168882, "valid": true}
+{"event": "render_started", "image_seconds": 1.1090000000258442}
+{"event": "render_finished", "image_seconds": 1.1090000000258442, "active_seconds": 0.0004632999771274626, "valid": true}
+{"event": "render_started", "image_seconds": 1.1090000000258442}
+{"event": "render_finished", "image_seconds": 1.1090000000258442, "active_seconds": 0.00044949998846277595, "valid": true}
+{"event": "render_started", "image_seconds": 1.1090000000258442}
+{"event": "render_finished", "image_seconds": 1.1090000000258442, "active_seconds": 0.00042299999040551484, "valid": true}
+{"event": "render_started", "image_seconds": 1.1090000000258442}
+{"event": "render_finished", "image_seconds": 1.125, "active_seconds": 0.008955099998274818, "valid": true}
+{"event": "render_started", "image_seconds": 1.125}
+{"event": "render_finished", "image_seconds": 1.125, "active_seconds": 0.000704299978679046, "valid": true}
+{"event": "render_started", "image_seconds": 1.125}
+{"event": "render_finished", "image_seconds": 1.125, "active_seconds": 0.0004803999909199774, "valid": true}
+{"event": "render_started", "image_seconds": 1.125}
+{"event": "render_finished", "image_seconds": 1.125, "active_seconds": 0.0007148000004235655, "valid": true}
+{"event": "render_started", "image_seconds": 1.125}
+{"event": "render_finished", "image_seconds": 1.125, "active_seconds": 0.0004954999894835055, "valid": true}
+{"event": "render_started", "image_seconds": 1.125}
+{"event": "render_finished", "image_seconds": 1.125, "active_seconds": 0.00045689998660236597, "valid": true}
+{"event": "render_started", "image_seconds": 1.125}
+{"event": "render_finished", "image_seconds": 1.125, "active_seconds": 0.0004831999831367284, "valid": true}
+{"event": "render_started", "image_seconds": 1.1400000000139698}
+{"event": "render_finished", "image_seconds": 1.1400000000139698, "active_seconds": 0.00042810000013560057, "valid": true}
+{"event": "render_started", "image_seconds": 1.1400000000139698}
+{"event": "render_finished", "image_seconds": 1.1400000000139698, "active_seconds": 0.0004385999927762896, "valid": true}
+{"event": "render_started", "image_seconds": 1.1400000000139698}
+{"event": "render_finished", "image_seconds": 1.1400000000139698, "active_seconds": 0.0022207000001799315, "valid": true}
+{"event": "render_started", "image_seconds": 1.1400000000139698}
+{"event": "render_finished", "image_seconds": 1.1400000000139698, "active_seconds": 0.0008885999850463122, "valid": true}
+{"event": "render_started", "image_seconds": 1.1400000000139698}
+{"event": "render_finished", "image_seconds": 1.1400000000139698, "active_seconds": 0.0007875000010244548, "valid": true}
+{"event": "render_started", "image_seconds": 1.1400000000139698}
+{"event": "render_finished", "image_seconds": 1.1400000000139698, "active_seconds": 0.0007116000051610172, "valid": true}
+{"event": "render_started", "image_seconds": 1.1400000000139698}
+{"event": "render_finished", "image_seconds": 1.1400000000139698, "active_seconds": 0.00046949999523349106, "valid": true}
+{"event": "render_started", "image_seconds": 1.1400000000139698}
+{"event": "render_finished", "image_seconds": 1.1400000000139698, "active_seconds": 0.00040499999886378646, "valid": true}
+{"event": "render_started", "image_seconds": 1.1400000000139698}
+{"event": "render_finished", "image_seconds": 1.1400000000139698, "active_seconds": 0.0004068000125698745, "valid": true}
+{"event": "render_started", "image_seconds": 1.1560000000172295}
+{"event": "render_finished", "image_seconds": 1.1560000000172295, "active_seconds": 0.0007049000123515725, "valid": true}
+{"event": "render_started", "image_seconds": 1.1560000000172295}
+{"event": "render_finished", "image_seconds": 1.1560000000172295, "active_seconds": 0.0004765999910887331, "valid": true}
+{"event": "render_started", "image_seconds": 1.1560000000172295}
+{"event": "render_finished", "image_seconds": 1.1560000000172295, "active_seconds": 0.00042699999175965786, "valid": true}
+{"event": "render_started", "image_seconds": 1.1560000000172295}
+{"event": "render_finished", "image_seconds": 1.1560000000172295, "active_seconds": 0.0008402999956160784, "valid": true}
+{"event": "render_started", "image_seconds": 1.1560000000172295}
+{"event": "render_finished", "image_seconds": 1.1560000000172295, "active_seconds": 0.0004288000054657459, "valid": true}
+{"event": "render_started", "image_seconds": 1.1560000000172295}
+{"event": "render_finished", "image_seconds": 1.1560000000172295, "active_seconds": 0.0003968999953940511, "valid": true}
+{"event": "render_started", "image_seconds": 1.1560000000172295}
+{"event": "render_finished", "image_seconds": 1.1560000000172295, "active_seconds": 0.0004351999959908426, "valid": true}
+{"event": "render_started", "image_seconds": 1.1560000000172295}
+{"event": "render_finished", "image_seconds": 1.1560000000172295, "active_seconds": 0.0003892000240739435, "valid": true}
+{"event": "render_started", "image_seconds": 1.172000000020489}
+{"event": "render_finished", "image_seconds": 1.172000000020489, "active_seconds": 0.0005694999999832362, "valid": true}
+{"event": "render_started", "image_seconds": 1.172000000020489}
+{"event": "render_finished", "image_seconds": 1.172000000020489, "active_seconds": 0.0089014999975916, "valid": true}
+{"event": "render_started", "image_seconds": 1.172000000020489}
+{"event": "render_finished", "image_seconds": 1.172000000020489, "active_seconds": 0.0006633999873884022, "valid": true}
+{"event": "render_started", "image_seconds": 1.172000000020489}
+{"event": "render_finished", "image_seconds": 1.172000000020489, "active_seconds": 0.0004467999970074743, "valid": true}
+{"event": "render_started", "image_seconds": 1.172000000020489}
+{"event": "render_finished", "image_seconds": 1.172000000020489, "active_seconds": 0.000443900004029274, "valid": true}
+{"event": "render_started", "image_seconds": 1.172000000020489}
+{"event": "render_finished", "image_seconds": 1.172000000020489, "active_seconds": 0.0004090000002179295, "valid": true}
+{"event": "render_started", "image_seconds": 1.172000000020489}
+{"event": "render_finished", "image_seconds": 1.187000000005355, "active_seconds": 0.0003991000121459365, "valid": true}
+{"event": "render_started", "image_seconds": 1.187000000005355}
+{"event": "render_finished", "image_seconds": 1.187000000005355, "active_seconds": 0.00039159998414106667, "valid": true}
+{"event": "render_started", "image_seconds": 1.187000000005355}
+{"event": "render_finished", "image_seconds": 1.187000000005355, "active_seconds": 0.0006102999905124307, "valid": true}
+{"event": "render_started", "image_seconds": 1.187000000005355}
+{"event": "render_finished", "image_seconds": 1.187000000005355, "active_seconds": 0.000446999998530373, "valid": true}
+{"event": "render_started", "image_seconds": 1.187000000005355}
+{"event": "render_finished", "image_seconds": 1.187000000005355, "active_seconds": 0.00043650000588968396, "valid": true}
+{"event": "render_started", "image_seconds": 1.187000000005355}
+{"event": "render_finished", "image_seconds": 1.187000000005355, "active_seconds": 0.0005785000103060156, "valid": true}
+{"event": "render_started", "image_seconds": 1.187000000005355}
+{"event": "render_finished", "image_seconds": 1.187000000005355, "active_seconds": 0.0004262000147718936, "valid": true}
+{"event": "render_started", "image_seconds": 1.187000000005355}
+{"event": "render_finished", "image_seconds": 1.187000000005355, "active_seconds": 0.00042189998202957213, "valid": true}
+{"event": "render_started", "image_seconds": 1.187000000005355}
+{"event": "render_finished", "image_seconds": 1.187000000005355, "active_seconds": 0.0004571000172290951, "valid": true}
+{"event": "render_started", "image_seconds": 1.2030000000086147}
+{"event": "render_finished", "image_seconds": 1.2030000000086147, "active_seconds": 0.000760800001444295, "valid": true}
+{"event": "render_started", "image_seconds": 1.2030000000086147}
+{"event": "render_finished", "image_seconds": 1.2030000000086147, "active_seconds": 0.0005278000026009977, "valid": true}
+{"event": "render_started", "image_seconds": 1.2030000000086147}
+{"event": "render_finished", "image_seconds": 1.2030000000086147, "active_seconds": 0.0004621999978553504, "valid": true}
+{"event": "render_started", "image_seconds": 1.2030000000086147}
+{"event": "render_finished", "image_seconds": 1.2030000000086147, "active_seconds": 0.000427800026955083, "valid": true}
+{"event": "render_started", "image_seconds": 1.2030000000086147}
+{"event": "render_finished", "image_seconds": 1.2030000000086147, "active_seconds": 0.0004409999819472432, "valid": true}
+{"event": "render_started", "image_seconds": 1.2030000000086147}
+{"event": "render_finished", "image_seconds": 1.2030000000086147, "active_seconds": 0.0004545999981928617, "valid": true}
+{"event": "render_started", "image_seconds": 1.2030000000086147}
+{"event": "render_finished", "image_seconds": 1.2030000000086147, "active_seconds": 0.0004144999838899821, "valid": true}
+{"event": "render_started", "image_seconds": 1.2030000000086147}
+{"event": "render_finished", "image_seconds": 1.2030000000086147, "active_seconds": 0.0004060999781358987, "valid": true}
+{"event": "render_started", "image_seconds": 1.2190000000118744}
+{"event": "render_finished", "image_seconds": 1.2190000000118744, "active_seconds": 0.0007944999961182475, "valid": true}
+{"event": "render_started", "image_seconds": 1.2190000000118744}
+{"event": "render_finished", "image_seconds": 1.2190000000118744, "active_seconds": 0.0005201000021770597, "valid": true}
+{"event": "render_started", "image_seconds": 1.2190000000118744}
+{"event": "render_finished", "image_seconds": 1.2190000000118744, "active_seconds": 0.0004616999940481037, "valid": true}
+{"event": "render_started", "image_seconds": 1.2190000000118744}
+{"event": "render_finished", "image_seconds": 1.2190000000118744, "active_seconds": 0.008417399978497997, "valid": true}
+{"event": "render_started", "image_seconds": 1.2190000000118744}
+{"event": "render_finished", "image_seconds": 1.2190000000118744, "active_seconds": 0.0007317999843508005, "valid": true}
+{"event": "render_started", "image_seconds": 1.2340000000258442}
+{"event": "render_finished", "image_seconds": 1.2340000000258442, "active_seconds": 0.000760800001444295, "valid": true}
+{"event": "render_started", "image_seconds": 1.2340000000258442}
+{"event": "render_finished", "image_seconds": 1.2340000000258442, "active_seconds": 0.000506900018081069, "valid": true}
+{"event": "render_started", "image_seconds": 1.2340000000258442}
+{"event": "render_finished", "image_seconds": 1.2340000000258442, "active_seconds": 0.0004953999887220562, "valid": true}
+{"event": "render_started", "image_seconds": 1.2340000000258442}
+{"event": "render_finished", "image_seconds": 1.2340000000258442, "active_seconds": 0.0004565000126603991, "valid": true}
+{"event": "render_started", "image_seconds": 1.2340000000258442}
+{"event": "render_finished", "image_seconds": 1.2340000000258442, "active_seconds": 0.0004385000211186707, "valid": true}
+{"event": "render_started", "image_seconds": 1.2340000000258442}
+{"event": "render_finished", "image_seconds": 1.2340000000258442, "active_seconds": 0.0004154999915044755, "valid": true}
+{"event": "render_started", "image_seconds": 1.2340000000258442}
+{"event": "render_finished", "image_seconds": 1.2340000000258442, "active_seconds": 0.00041149999015033245, "valid": true}
+{"event": "render_started", "image_seconds": 1.25}
+{"event": "render_finished", "image_seconds": 1.25, "active_seconds": 0.0008864999981597066, "valid": true}
+{"event": "render_started", "image_seconds": 1.25}
+{"event": "render_finished", "image_seconds": 1.25, "active_seconds": 0.0006360000115819275, "valid": true}
+{"event": "render_started", "image_seconds": 1.25}
+{"event": "render_finished", "image_seconds": 1.25, "active_seconds": 0.00047129997983574867, "valid": true}
+{"event": "render_started", "image_seconds": 1.25}
+{"event": "render_finished", "image_seconds": 1.25, "active_seconds": 0.00045339998905546963, "valid": true}
+{"event": "render_started", "image_seconds": 1.25}
+{"event": "render_finished", "image_seconds": 1.25, "active_seconds": 0.0004154999915044755, "valid": true}
+{"event": "render_started", "image_seconds": 1.25}
+{"event": "render_finished", "image_seconds": 1.25, "active_seconds": 0.00040580000495538116, "valid": true}
+{"event": "render_started", "image_seconds": 1.25}
+{"event": "render_finished", "image_seconds": 1.25, "active_seconds": 0.00040800002170726657, "valid": true}
+{"event": "render_started", "image_seconds": 1.25}
+{"event": "render_finished", "image_seconds": 1.25, "active_seconds": 0.0007217999955173582, "valid": true}
+{"event": "render_started", "image_seconds": 1.2650000000139698}
+{"event": "render_finished", "image_seconds": 1.2650000000139698, "active_seconds": 0.00046290000318549573, "valid": true}
+{"event": "render_started", "image_seconds": 1.2650000000139698}
+{"event": "render_finished", "image_seconds": 1.2650000000139698, "active_seconds": 0.000555099977646023, "valid": true}
+{"event": "render_started", "image_seconds": 1.2650000000139698}
+{"event": "render_finished", "image_seconds": 1.2650000000139698, "active_seconds": 0.00042990001384168863, "valid": true}
+{"event": "render_started", "image_seconds": 1.2650000000139698}
+{"event": "render_finished", "image_seconds": 1.2650000000139698, "active_seconds": 0.00040160000207833946, "valid": true}
+{"event": "render_started", "image_seconds": 1.2650000000139698}
+{"event": "render_finished", "image_seconds": 1.2650000000139698, "active_seconds": 0.0004084999964106828, "valid": true}
+{"event": "render_started", "image_seconds": 1.2650000000139698}
+{"event": "render_finished", "image_seconds": 1.2650000000139698, "active_seconds": 0.0003938000008929521, "valid": true}
+{"event": "render_started", "image_seconds": 1.2650000000139698}
+{"event": "render_finished", "image_seconds": 1.2650000000139698, "active_seconds": 0.0007768000068608671, "valid": true}
+{"event": "render_started", "image_seconds": 1.2650000000139698}
+{"event": "render_finished", "image_seconds": 1.2650000000139698, "active_seconds": 0.0005846999993082136, "valid": true}
+{"event": "render_started", "image_seconds": 1.2650000000139698}
+{"event": "render_finished", "image_seconds": 1.2810000000172295, "active_seconds": 0.008170200017048046, "valid": true}
+{"event": "render_started", "image_seconds": 1.2810000000172295}
+{"event": "render_finished", "image_seconds": 1.2810000000172295, "active_seconds": 0.0007033000001683831, "valid": true}
+{"event": "render_started", "image_seconds": 1.2810000000172295}
+{"event": "render_finished", "image_seconds": 1.2810000000172295, "active_seconds": 0.00047050000284798443, "valid": true}
+{"event": "render_started", "image_seconds": 1.2810000000172295}
+{"event": "render_finished", "image_seconds": 1.2810000000172295, "active_seconds": 0.0004926999972667545, "valid": true}
+{"event": "render_started", "image_seconds": 1.2810000000172295}
+{"event": "render_finished", "image_seconds": 1.2810000000172295, "active_seconds": 0.000440500007243827, "valid": true}
+{"event": "render_started", "image_seconds": 1.2810000000172295}
+{"event": "render_finished", "image_seconds": 1.2810000000172295, "active_seconds": 0.0004079999926034361, "valid": true}
+{"event": "render_started", "image_seconds": 1.2810000000172295}
+{"event": "render_finished", "image_seconds": 1.2810000000172295, "active_seconds": 0.00038800001493655145, "valid": true}
+{"event": "render_started", "image_seconds": 1.297000000020489}
+{"event": "render_finished", "image_seconds": 1.297000000020489, "active_seconds": 0.0006228999991435558, "valid": true}
+{"event": "render_started", "image_seconds": 1.297000000020489}
+{"event": "render_finished", "image_seconds": 1.297000000020489, "active_seconds": 0.0004552000027615577, "valid": true}
+{"event": "render_started", "image_seconds": 1.297000000020489}
+{"event": "render_finished", "image_seconds": 1.297000000020489, "active_seconds": 0.0005776000034529716, "valid": true}
+{"event": "render_started", "image_seconds": 1.297000000020489}
+{"event": "render_finished", "image_seconds": 1.297000000020489, "active_seconds": 0.0005756999889854342, "valid": true}
+{"event": "render_started", "image_seconds": 1.297000000020489}
+{"event": "render_finished", "image_seconds": 1.297000000020489, "active_seconds": 0.0005055000074207783, "valid": true}
+{"event": "render_started", "image_seconds": 1.297000000020489}
+{"event": "render_finished", "image_seconds": 1.297000000020489, "active_seconds": 0.00046109998947940767, "valid": true}
+{"event": "render_started", "image_seconds": 1.297000000020489}
+{"event": "render_finished", "image_seconds": 1.297000000020489, "active_seconds": 0.0004138000076636672, "valid": true}
+{"event": "render_started", "image_seconds": 1.297000000020489}
+{"event": "render_finished", "image_seconds": 1.297000000020489, "active_seconds": 0.00040520000038668513, "valid": true}
+{"event": "render_started", "image_seconds": 1.297000000020489}
+{"event": "render_finished", "image_seconds": 1.297000000020489, "active_seconds": 0.00039159998414106667, "valid": true}
+{"event": "render_started", "image_seconds": 1.312000000005355}
+{"event": "render_finished", "image_seconds": 1.312000000005355, "active_seconds": 0.0006181999924592674, "valid": true}
+{"event": "render_started", "image_seconds": 1.312000000005355}
+{"event": "render_finished", "image_seconds": 1.312000000005355, "active_seconds": 0.00045369999133981764, "valid": true}
+{"event": "render_started", "image_seconds": 1.312000000005355}
+{"event": "render_finished", "image_seconds": 1.312000000005355, "active_seconds": 0.0004394999996293336, "valid": true}
+{"event": "render_started", "image_seconds": 1.312000000005355}
+{"event": "render_finished", "image_seconds": 1.312000000005355, "active_seconds": 0.0004425000224728137, "valid": true}
+{"event": "render_started", "image_seconds": 1.3280000000086147}
+{"event": "render_finished", "image_seconds": 1.3280000000086147, "active_seconds": 0.0006385000015143305, "valid": true}
+{"event": "render_started", "image_seconds": 1.3280000000086147}
+{"event": "render_finished", "image_seconds": 1.3280000000086147, "active_seconds": 0.0007270000060088933, "valid": true}
+{"event": "render_started", "image_seconds": 1.3280000000086147}
+{"event": "render_finished", "image_seconds": 1.3280000000086147, "active_seconds": 0.00045870000030845404, "valid": true}
+{"event": "render_started", "image_seconds": 1.3280000000086147}
+{"event": "render_finished", "image_seconds": 1.3280000000086147, "active_seconds": 0.0008271999831777066, "valid": true}
+{"event": "render_started", "image_seconds": 1.3280000000086147}
+{"event": "render_finished", "image_seconds": 1.3280000000086147, "active_seconds": 0.0006374999938998371, "valid": true}
+{"event": "render_started", "image_seconds": 1.3280000000086147}
+{"event": "render_finished", "image_seconds": 1.3440000000118744, "active_seconds": 0.007905400008894503, "valid": true}
+{"event": "render_started", "image_seconds": 1.3440000000118744}
+{"event": "render_finished", "image_seconds": 1.3440000000118744, "active_seconds": 0.0006942999898456037, "valid": true}
+{"event": "render_started", "image_seconds": 1.3440000000118744}
+{"event": "render_finished", "image_seconds": 1.3440000000118744, "active_seconds": 0.00046370000927709043, "valid": true}
+{"event": "render_started", "image_seconds": 1.3440000000118744}
+{"event": "render_finished", "image_seconds": 1.3440000000118744, "active_seconds": 0.0004600000102072954, "valid": true}
+{"event": "render_started", "image_seconds": 1.3440000000118744}
+{"event": "render_finished", "image_seconds": 1.3440000000118744, "active_seconds": 0.0004194999928586185, "valid": true}
+{"event": "render_started", "image_seconds": 1.3440000000118744}
+{"event": "render_finished", "image_seconds": 1.3440000000118744, "active_seconds": 0.0004194999928586185, "valid": true}
+{"event": "render_started", "image_seconds": 1.3440000000118744}
+{"event": "render_finished", "image_seconds": 1.3440000000118744, "active_seconds": 0.00039859997923485935, "valid": true}
+{"event": "render_started", "image_seconds": 1.3440000000118744}
+{"event": "render_finished", "image_seconds": 1.3590000000258442, "active_seconds": 0.000547699979506433, "valid": true}
+{"event": "render_started", "image_seconds": 1.3590000000258442}
+{"event": "render_finished", "image_seconds": 1.3590000000258442, "active_seconds": 0.00042940001003444195, "valid": true}
+{"event": "render_started", "image_seconds": 1.3590000000258442}
+{"event": "render_finished", "image_seconds": 1.3590000000258442, "active_seconds": 0.00043569999979808927, "valid": true}
+{"event": "render_started", "image_seconds": 1.3590000000258442}
+{"event": "render_finished", "image_seconds": 1.3590000000258442, "active_seconds": 0.0004064000095240772, "valid": true}
+{"event": "render_started", "image_seconds": 1.3590000000258442}
+{"event": "render_finished", "image_seconds": 1.3590000000258442, "active_seconds": 0.0003954000130761415, "valid": true}
+{"event": "render_started", "image_seconds": 1.3590000000258442}
+{"event": "render_finished", "image_seconds": 1.3590000000258442, "active_seconds": 0.000391999987186864, "valid": true}
+{"event": "render_started", "image_seconds": 1.3590000000258442}
+{"event": "render_finished", "image_seconds": 1.3590000000258442, "active_seconds": 0.00040699998498894274, "valid": true}
+{"event": "render_started", "image_seconds": 1.3590000000258442}
+{"event": "render_finished", "image_seconds": 1.3590000000258442, "active_seconds": 0.0004230999911669642, "valid": true}
+{"event": "render_started", "image_seconds": 1.3590000000258442}
+{"event": "render_finished", "image_seconds": 1.3590000000258442, "active_seconds": 0.0007889999833423644, "valid": true}
+{"event": "render_started", "image_seconds": 1.3590000000258442}
+{"event": "render_finished", "image_seconds": 1.3590000000258442, "active_seconds": 0.000541499990504235, "valid": true}
+{"event": "render_started", "image_seconds": 1.3590000000258442}
+{"event": "render_finished", "image_seconds": 1.375, "active_seconds": 0.0005424999981187284, "valid": true}
+{"event": "render_started", "image_seconds": 1.375}
+{"event": "render_finished", "image_seconds": 1.375, "active_seconds": 0.0004687999899033457, "valid": true}
+{"event": "render_started", "image_seconds": 1.375}
+{"event": "render_finished", "image_seconds": 1.375, "active_seconds": 0.0004326000052969903, "valid": true}
+{"event": "render_started", "image_seconds": 1.375}
+{"event": "render_finished", "image_seconds": 1.375, "active_seconds": 0.00042070000199601054, "valid": true}
+{"event": "render_started", "image_seconds": 1.375}
+{"event": "render_finished", "image_seconds": 1.375, "active_seconds": 0.0007615000067744404, "valid": true}
+{"event": "render_started", "image_seconds": 1.375}
+{"event": "render_finished", "image_seconds": 1.375, "active_seconds": 0.0004862999776378274, "valid": true}
+{"event": "render_started", "image_seconds": 1.375}
+{"event": "render_finished", "image_seconds": 1.375, "active_seconds": 0.00044609999167732894, "valid": true}
+{"event": "render_started", "image_seconds": 1.375}
+{"event": "render_finished", "image_seconds": 1.375, "active_seconds": 0.001043500000378117, "valid": true}
+{"event": "render_started", "image_seconds": 1.375}
+{"event": "render_finished", "image_seconds": 1.3900000000139698, "active_seconds": 0.008593100006692111, "valid": true}
+{"event": "render_started", "image_seconds": 1.3900000000139698}
+{"event": "render_finished", "image_seconds": 1.3900000000139698, "active_seconds": 0.0007984999974723905, "valid": true}
+{"event": "render_started", "image_seconds": 1.3900000000139698}
+{"event": "render_finished", "image_seconds": 1.3900000000139698, "active_seconds": 0.0005317000031936914, "valid": true}
+{"event": "render_started", "image_seconds": 1.4060000000172295}
+{"event": "render_finished", "image_seconds": 1.4060000000172295, "active_seconds": 0.0007957000052556396, "valid": true}
+{"event": "render_started", "image_seconds": 1.4060000000172295}
+{"event": "render_finished", "image_seconds": 1.4060000000172295, "active_seconds": 0.000510300014866516, "valid": true}
+{"event": "render_started", "image_seconds": 1.4060000000172295}
+{"event": "render_finished", "image_seconds": 1.4060000000172295, "active_seconds": 0.00046499999007210135, "valid": true}
+{"event": "render_started", "image_seconds": 1.422000000020489}
+{"event": "render_finished", "image_seconds": 1.422000000020489, "active_seconds": 0.000901699997484684, "valid": true}
+{"event": "render_started", "image_seconds": 1.422000000020489}
+{"event": "render_finished", "image_seconds": 1.422000000020489, "active_seconds": 0.000548899988643825, "valid": true}
+{"event": "render_started", "image_seconds": 1.422000000020489}
+{"event": "render_finished", "image_seconds": 1.422000000020489, "active_seconds": 0.00041149999015033245, "valid": true}
+{"event": "render_started", "image_seconds": 1.422000000020489}
+{"event": "render_finished", "image_seconds": 1.422000000020489, "active_seconds": 0.0003866999759338796, "valid": true}
+{"event": "render_started", "image_seconds": 1.422000000020489}
+{"event": "render_finished", "image_seconds": 1.422000000020489, "active_seconds": 0.0004128999717067927, "valid": true}
+{"event": "render_started", "image_seconds": 1.422000000020489}
+{"event": "render_finished", "image_seconds": 1.422000000020489, "active_seconds": 0.0004515000036917627, "valid": true}
+{"event": "render_started", "image_seconds": 1.422000000020489}
+{"event": "render_finished", "image_seconds": 1.422000000020489, "active_seconds": 0.0003889000217895955, "valid": true}
+{"event": "render_started", "image_seconds": 1.422000000020489}
+{"event": "render_finished", "image_seconds": 1.422000000020489, "active_seconds": 0.0003814000228885561, "valid": true}
+{"event": "render_started", "image_seconds": 1.437000000005355}
+{"event": "render_finished", "image_seconds": 1.437000000005355, "active_seconds": 0.0006778000097256154, "valid": true}
+{"event": "render_started", "image_seconds": 1.437000000005355}
+{"event": "render_finished", "image_seconds": 1.437000000005355, "active_seconds": 0.00047179998364299536, "valid": true}
+{"event": "render_started", "image_seconds": 1.437000000005355}
+{"event": "render_finished", "image_seconds": 1.437000000005355, "active_seconds": 0.0004062000080011785, "valid": true}
+{"event": "render_started", "image_seconds": 1.437000000005355}
+{"event": "render_finished", "image_seconds": 1.437000000005355, "active_seconds": 0.00043250000453554094, "valid": true}
+{"event": "render_started", "image_seconds": 1.437000000005355}
+{"event": "render_finished", "image_seconds": 1.437000000005355, "active_seconds": 0.0004147999861743301, "valid": true}
+{"event": "render_started", "image_seconds": 1.437000000005355}
+{"event": "render_finished", "image_seconds": 1.437000000005355, "active_seconds": 0.00040260000969283283, "valid": true}
+{"event": "render_started", "image_seconds": 1.437000000005355}
+{"event": "render_finished", "image_seconds": 1.437000000005355, "active_seconds": 0.00041480001527816057, "valid": true}
+{"event": "render_started", "image_seconds": 1.437000000005355}
+{"event": "render_finished", "image_seconds": 1.437000000005355, "active_seconds": 0.0006934000120963901, "valid": true}
+{"event": "render_started", "image_seconds": 1.437000000005355}
+{"event": "render_finished", "image_seconds": 1.437000000005355, "active_seconds": 0.0004904999805148691, "valid": true}
+{"event": "render_started", "image_seconds": 1.437000000005355}
+{"event": "render_finished", "image_seconds": 1.437000000005355, "active_seconds": 0.00042550000944174826, "valid": true}
+{"event": "render_started", "image_seconds": 1.437000000005355}
+{"event": "render_finished", "image_seconds": 1.437000000005355, "active_seconds": 0.0003910000086762011, "valid": true}
+{"event": "render_started", "image_seconds": 1.437000000005355}
+{"event": "render_finished", "image_seconds": 1.4530000000086147, "active_seconds": 0.008744999999180436, "valid": true}
+{"event": "render_started", "image_seconds": 1.4530000000086147}
+{"event": "render_finished", "image_seconds": 1.4530000000086147, "active_seconds": 0.000600500003201887, "valid": true}
+{"event": "render_started", "image_seconds": 1.4530000000086147}
+{"event": "render_finished", "image_seconds": 1.4530000000086147, "active_seconds": 0.0004853999998886138, "valid": true}
+{"event": "render_started", "image_seconds": 1.4690000000118744}
+{"event": "render_finished", "image_seconds": 1.4690000000118744, "active_seconds": 0.000661700003547594, "valid": true}
+{"event": "render_started", "image_seconds": 1.4690000000118744}
+{"event": "render_finished", "image_seconds": 1.4690000000118744, "active_seconds": 0.0005471000040415674, "valid": true}
+{"event": "render_started", "image_seconds": 1.4690000000118744}
+{"event": "render_finished", "image_seconds": 1.4690000000118744, "active_seconds": 0.00045059999683871865, "valid": true}
+{"event": "render_started", "image_seconds": 1.4690000000118744}
+{"event": "render_finished", "image_seconds": 1.4690000000118744, "active_seconds": 0.0004188999882899225, "valid": true}
+{"event": "render_started", "image_seconds": 1.4690000000118744}
+{"event": "render_finished", "image_seconds": 1.4690000000118744, "active_seconds": 0.00042119997669942677, "valid": true}
+{"event": "render_started", "image_seconds": 1.4690000000118744}
+{"event": "render_finished", "image_seconds": 1.4690000000118744, "active_seconds": 0.0004139999800827354, "valid": true}
+{"event": "render_started", "image_seconds": 1.4690000000118744}
+{"event": "render_finished", "image_seconds": 1.4690000000118744, "active_seconds": 0.00039519998244941235, "valid": true}
+{"event": "render_started", "image_seconds": 1.4690000000118744}
+{"event": "render_finished", "image_seconds": 1.4690000000118744, "active_seconds": 0.00039080000715330243, "valid": true}
+{"event": "render_started", "image_seconds": 1.4690000000118744}
+{"event": "render_finished", "image_seconds": 1.4690000000118744, "active_seconds": 0.0006590000120922923, "valid": true}
+{"event": "render_started", "image_seconds": 1.4690000000118744}
+{"event": "render_finished", "image_seconds": 1.4840000000258442, "active_seconds": 0.0005363000091165304, "valid": true}
+{"event": "render_started", "image_seconds": 1.4840000000258442}
+{"event": "render_finished", "image_seconds": 1.4840000000258442, "active_seconds": 1.0800024028867483e-05, "valid": true}
+{"event": "render_started", "image_seconds": 1.4840000000258442}
+{"event": "render_finished", "image_seconds": 1.4840000000258442, "active_seconds": 1.8400023691356182e-05, "valid": true}
+{"event": "render_started", "image_seconds": 1.547000000020489}
+{"event": "render_finished", "image_seconds": 1.547000000020489, "active_seconds": 2.0400009816512465e-05, "valid": true}
+{"event": "render_started", "image_seconds": 1.562000000005355}
+{"event": "render_finished", "image_seconds": 1.562000000005355, "active_seconds": 1.960000372491777e-05, "valid": true}

@@ -1,0 +1,19 @@
+# Getrennte Abnahme nach vollständiger Initialisierungsabschaltung
+
+27 echte überwachte Konvertierungen: neue kWh-, mPa- und dB-Raster mit anderen
+Größen, Farben und Zeichenabständen; vollständiges Portfolio, ohne
+Feinregistrierung und ohne Bots; jeweils drei Seeds und fünf Sekunden Bildbudget.
+
+Alle 27 SVGs bestehen die unabhängig erneut gerenderten Pixel-/Komplexitäts-
+und Text-/Strukturprüfungen. Die 377 Archivpaare bleiben unverändert.
+
+Die vorgelagerten Registrierungen genügen hier bereits. Kein zusätzlicher Bot
+erzeugt Vorschläge. Das belegt Bestandsschutz, aber weder die Entbehrlichkeit
+noch eine seltene notwendige Fähigkeit der Bots. Die drei Familien reichen
+auch statistisch nicht für eine Gleichwertigkeitsaussage. Die Entscheidung
+bleibt Beibehaltung aller sechs Bots bei unklarer Beitragsbewertung.
+
+```powershell
+.venv/Scripts/python.exe -m tools.run_component_value --suite retention --output-dir .tmp/retention-replay --work-dir .tmp/retention-replay-work
+.venv/Scripts/python.exe -m tools.run_component_value --verify-only --output-dir artifacts/evaluation/component_retention_v1
+```

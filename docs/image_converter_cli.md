@@ -8,6 +8,19 @@ python -m src.imageCompositeConverter --help
 
 ## Häufige Aufrufe
 
+### Tatsächlichen Komponentenbeitrag messen
+
+`--disable-search-bot fine_coordinates` schaltet genau diesen Bot im adaptiven
+Portfolio ab. Der Schalter ist für mehrere Bots wiederholbar; die sechs Namen
+stehen in `--help`. `--no-component-observation` deaktiviert die zusätzlichen
+Detailzähler. Der überwachte Worker dokumentiert die tatsächlich angewendeten
+Schalter in `reports/<name>_components.jsonl`. Qualitätsprüfungen bleiben aktiv.
+
+`python -m tools.run_component_value --output-dir .tmp/component-study --work-dir .tmp/component-study-work`
+startet echte gepaarte Konvertierungen mit unabhängiger SVG-Prüfung statt einer
+Bewertung mit Ersatzscores. Protokoll, Grenzen und Abnahme:
+[COMPONENT-VALUE-01](next_arbeitspaket_2026-10-18_component_value.md).
+
 ### Durchgängiges Bildbudget
 
 Die reguläre `semantic-only`-CLI führt Bildversuche einschließlich der finalen

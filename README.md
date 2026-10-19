@@ -1,5 +1,11 @@
 # ImageConverter
 
+Die [Komponentenmessung](docs/next_arbeitspaket_2026-10-18_component_value.md)
+vergleicht die sechs Such-Bots einzeln und in ausgewählten Kombinationen
+über echte CLI-Konvertierungen. Runtime-Schalter und Arbeitszähler,
+unabhängige SVG-Prüfungen und regelmäßige CI-Gegenproben bilden den Nachweis;
+unklare Evidenz führt zur Beibehaltung der vorhandenen Verfahren.
+
 ImageConverter converts badge/source images into composite SVG outputs and also
 provides annotation/debugging helpers for the source raster files.
 

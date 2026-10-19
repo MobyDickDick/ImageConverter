@@ -1,0 +1,34 @@
+{
+  "cases": [
+    {
+      "case_id": "retention_00",
+      "image": "sources/retention_00.png",
+      "input_sha256": "bdbab772b33a239006ceb2b21afce8558703cf93ec626c6e2eb4fee946b6523d",
+      "kind": "label",
+      "label": "kWh",
+      "family": "kWh_symbol",
+      "split": "holdout",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Dunkle serifenlose Beschriftung \"kWh\". Keine Anschlüsse. Weißer Hintergrund."
+    },
+    {
+      "case_id": "retention_01",
+      "image": "sources/retention_01.png",
+      "input_sha256": "98648e914a5b2fe3a185e80b726f41e276e2d75281045f862cd5e90e911d73de",
+      "kind": "label",
+      "label": "mPa",
+      "family": "mPa_symbol",
+      "split": "holdout",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Dunkle serifenlose Beschriftung \"mPa\". Keine Anschlüsse. Weißer Hintergrund."
+    },
+    {
+      "case_id": "retention_02",
+      "image": "sources/retention_02.png",
+      "input_sha256": "2252bc4898feb2a79975fc44029df286196f51149d47c98c963927b6968611bf",
+      "kind": "label",
+      "label": "dB",
+      "family": "dB_symbol",
+      "split": "holdout",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Dunkle serifenlose Beschriftung \"dB\". Keine Anschlüsse. Weißer Hintergrund."
+    }
+  ]
+}

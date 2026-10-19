@@ -28,6 +28,15 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def result_provenance(row):
+    params = row.get('params') or {}
+    return dict(mode=params.get('mode'),
+                registrations={name:{key:value[key] for key in
+                    ('source','error','evaluations','model_attempts','search') if key in value}
+                    for name,value in params.items() if name.endswith('_registration') and isinstance(value,dict)},
+                checkpoint_proof=row.get('checkpoint_proof'))
+
+
 def write_json(path, data):
     temporary = path.with_suffix('.tmp')
     temporary.write_text(json.dumps(data, indent=2, ensure_ascii=False, allow_nan=False)+'\n', encoding='utf-8')
@@ -207,12 +216,17 @@ def freeze_parent(work, ref):
     return commit, hashes
 
 
-def run_cell(output, work, cases, mode, budget, seed):
+def run_cell(output, work, cases, mode, budget, seed, *, cli_args=(), env_overrides=None, bootstrap_hook='', recover=False):
     from tools.anytime_observer import summarize as render_summary
     import cv2
     from tools.run_plan_b_variations import measure_quality
     cell_id = f'{mode}-{budget:g}s-{seed}'
     cell = work/cell_id
+    if recover and cell.exists():
+        metadata_path=cell/'cli_execution.json'
+        metadata=json.loads(metadata_path.read_text(encoding='utf-8')) if metadata_path.exists() else dict(cli_seconds=None,cli_returncode=None)
+        return collect_cell(output,work,cases,mode,budget,seed,**metadata,
+                            component_evaluation=bool(env_overrides and env_overrides.get('ICC_COMPONENT_EVALUATION')))
     inputs, conversion, telemetry, bootstrap = (cell/n for n in ('inputs','conversion','telemetry','bootstrap'))
     inputs.mkdir(parents=True)
     bootstrap.mkdir()
@@ -227,12 +241,13 @@ def run_cell(output, work, cases, mode, budget, seed):
     # Applies identically in the CLI process and every Windows spawn child.
     (bootstrap/'sitecustomize.py').write_text(
         'import src.iCCModules\n'+ ('src.iCCModules.__path__ = ['+repr(str(work/'parent_modules'))+'] + list(src.iCCModules.__path__)\n' if mode == 'before' else '')+
-        'from tools.anytime_observer import install\ninstall()\n', encoding='utf-8')
+        'from tools.anytime_observer import install\ninstall()\n'+bootstrap_hook, encoding='utf-8')
     env = dict(os.environ, IMAGE_CONVERTER_ISOLATE_SVG_RENDER='0', TINY_ICC_OUTPUT_VARIATION='0',
                PYTHONHASHSEED='0', PYTHONIOENCODING='utf-8', ICC_ANYTIME_TELEMETRY=str(telemetry),
                PYTHONPATH=str(bootstrap)+os.pathsep+str(ROOT))
     # Do not allow an inherited external cap or profiling setting to skew one arm.
     env.pop('ICC_CONVERSION_TIMEOUT_SEC', None)
+    env.update(env_overrides or {})
     # Python only prints sitecustomize errors and otherwise continues. Fail closed
     # if that bootstrap failed, rather than comparing the current code to itself.
     launcher = ('from src.iCCModules.imageCompositeConverterDeadline import ImageDeadline; '
@@ -243,22 +258,37 @@ def run_cell(output, work, cases, mode, budget, seed):
         '--descriptions-path', str(descriptions), '--output-dir', str(conversion), '--start', cases[0]['case_id'],
         '--end', cases[-1]['case_id'], '--execution-mode', 'semantic-only', '--deterministic-order',
         '--search-seed', str(seed), '--search-seconds', str(budget), '--search-max-seconds', str(budget)]
+    command.extend(cli_args)
     started = time.monotonic()
     with (cell/'cli.log').open('w', encoding='utf-8') as log:
         completed = subprocess.run(command, cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT,
                                    timeout=len(cases)*(budget+12)+60)
     cli_seconds = time.monotonic()-started
+    write_json(cell/'cli_execution.json',dict(cli_seconds=cli_seconds,cli_returncode=completed.returncode))
+    return collect_cell(output,work,cases,mode,budget,seed,cli_seconds=cli_seconds,
+                        cli_returncode=completed.returncode,
+                        component_evaluation=bool(env_overrides and env_overrides.get('ICC_COMPONENT_EVALUATION')))
+
+
+def collect_cell(output,work,cases,mode,budget,seed,*,cli_seconds,cli_returncode,component_evaluation=False):
+    """Recollect completed native artifacts without rerunning measured conversions."""
+    import cv2
+    from tools.run_plan_b_variations import measure_quality
+    from tools.anytime_observer import summarize as render_summary
+    cell_id=f'{mode}-{budget:g}s-{seed}'
+    cell=work/cell_id
+    conversion,telemetry=cell/'conversion',cell/'telemetry'
     reports = conversion/'reports'
     rows_path = reports/'conversion_result_map.json'
     if not rows_path.exists():
-        raise RuntimeError(f'CLI infrastructure failure: {cell}/cli.log (exit {completed.returncode})')
+        raise RuntimeError(f'CLI infrastructure failure: {cell}/cli.log (exit {cli_returncode})')
     rows = json.loads(rows_path.read_text(encoding='utf-8'))
     access = json.loads((cell/'reference_access.json').read_text(encoding='utf-8'))
     if access['blocked_svg_reads']:
         raise ValueError('Forbidden reference SVG read')
     saved_telemetry = output/'telemetry'/cell_id
     if telemetry.exists():
-        shutil.copytree(telemetry, saved_telemetry)
+        shutil.copytree(telemetry, saved_telemetry,dirs_exist_ok=True)
     records = []
     for case in cases:
         name = case['case_id']
@@ -272,11 +302,32 @@ def run_cell(output, work, cases, mode, budget, seed):
         if json.loads(worker_access.read_text(encoding='utf-8'))['blocked_svg_reads']:
             raise ValueError('Forbidden worker SVG read')
         record = dict(case_id=name, split=case['split'], family=case['family'], mode=mode, seed=seed,
-            budget_seconds=budget, cli_returncode=completed.returncode, cli_batch_seconds=cli_seconds,
+            budget_seconds=budget, cli_returncode=cli_returncode, cli_batch_seconds=cli_seconds,
+            cli_metadata_complete=cli_seconds is not None and cli_returncode is not None,
             image_seconds=control.get('elapsed_seconds', row.get('elapsed_seconds')),
             search_control=control, runtime_satisfactory=bool(row.get('search_satisfactory')),
             telemetry=render_summary(sorted(saved_telemetry.glob(name+'-*.jsonl'))),
             satisfactory=False, status='missing_output', quality=None, structure=None)
+        if component_evaluation:
+            record['result_provenance'] = result_provenance(row)
+            component_path = reports/(name+'_components.jsonl')
+            if not component_path.exists() and control.get('stop_reason')!='time_limit':
+                raise ValueError('Missing runtime component switches: '+name)
+            if component_path.exists():
+                saved = output/'telemetry'/cell_id/component_path.name
+                saved.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(component_path, saved)
+                events = [json.loads(line) for line in saved.read_text(encoding='utf-8').splitlines()]
+                record['components'] = dict(path=saved.relative_to(output).as_posix(),
+                                           sha256=digest(saved), events=events)
+            else:
+                record['components'] = dict(path=None,sha256=None,events=[])
+                record['observation_censored'] = True
+            observed_events = [json.loads(line) for p in sorted(saved_telemetry.glob(name+'-*.jsonl'))
+                               for line in p.read_text(encoding='utf-8').splitlines() if line.startswith('{')
+                               and line.endswith('}')]
+            record['observed_controls'] = [e.get('applied_controls') for e in observed_events
+                                          if e['event']=='worker_observed']
         paths = [p for folder in ('converted_svgs','converted_svg_failed') for p in (conversion/folder).glob(name+'.svg')]
         if len(paths) > 1:
             raise ValueError('Ambiguous output: '+name)

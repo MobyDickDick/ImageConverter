@@ -41,9 +41,12 @@ def observed_worker(connection, payload):
         names = ('imageCompositeConverter.py', 'iCCModules/imageCompositeConverterAdaptiveSearch.py',
                  'iCCModules/imageCompositeConverterFilledSymbols.py', 'iCCModules/imageCompositeConverterSearchBots.py',
                  'iCCModules/imageCompositeConverterShortLabelDisk.py')
+        if os.environ.get('ICC_COMPONENT_EVALUATION'):
+            names += tuple('iCCModules/imageCompositeConverter'+suffix+'.py' for suffix in
+                           ('Cli','Components','Deadline','SearchPortfolio','SearchScheduler'))
         emit('worker_observed', source_sha256={
             'src/'+name: hashlib.sha256(Path(importlib.import_module('src.'+name[:-3].replace('/','.')).__file__).read_bytes()).hexdigest()
-            for name in names})
+            for name in names}, applied_controls=getattr(render,'_component_controls',None))
         try:
             conversion_worker(connection, payload)
         finally:
