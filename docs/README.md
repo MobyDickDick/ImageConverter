@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [COMPONENT-VALUE-01: Runtime-Schalter, echte Bot-Gegenproben und unabhängige Abnahme (2026-10-18)](next_arbeitspaket_2026-10-18_component_value.md)
+
 - [BENCHMARK-ANYTIME-01: echte Qualitätskurven, drei Seeds und unabhängige Objektprüfungen (2026-10-18)](next_arbeitspaket_2026-10-18_benchmark_anytime.md)
 
 - [SEARCH-SCHEDULER-02: gemeinsame Modellzeitscheiben und gemessener Fortschritt (2026-10-18)](next_arbeitspaket_2026-10-18_search_scheduler.md)

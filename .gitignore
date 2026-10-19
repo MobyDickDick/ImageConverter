@@ -53,3 +53,17 @@ htmlcov/
 /artifacts/evaluation/checkbox_checkmark_recheck_v1/*
 !/artifacts/evaluation/checkbox_checkmark_recheck_v1/manifest.json
 !/artifacts/evaluation/checkbox_checkmark_recheck_v1/summary_2026-10-08.json
+
+# Component studies: commit compact evidence; keep generated runs locally or in CI artifacts.
+/artifacts/evaluation/component_value_v*/*
+!/artifacts/evaluation/component_value_v*/README.md
+!/artifacts/evaluation/component_value_v*/summary.json
+!/artifacts/evaluation/component_value_v*/checks.json
+!/artifacts/evaluation/component_value_v*/manifest.json
+/artifacts/evaluation/component_retention_v*/*
+!/artifacts/evaluation/component_retention_v*/README.md
+!/artifacts/evaluation/component_retention_v*/summary.json
+!/artifacts/evaluation/component_retention_v*/checks.json
+!/artifacts/evaluation/component_retention_v*/manifest.json
+/artifacts/evaluation/component_*probe_v*/
+/artifacts/evaluation/component_control_render_delay_v*/

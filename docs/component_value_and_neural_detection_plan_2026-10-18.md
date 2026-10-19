@@ -1,8 +1,13 @@
 # Neuronale Elementerkennung und messbarer Komponentenbeitrag
 
-Status: geplante Folgepakete auf Nutzerwunsch vom 18. Oktober 2026.
-Dieses Dokument beschreibt eine überprüfbare Umsetzung. Es aktiviert weder
-ein neuronales Netz noch eine automatische Komponentenbewertung.
+Stand 19. Oktober 2026: Der erste integrierte Nachweisrahmen für die sechs
+Such-Bots ist umgesetzt und mit 375 echten Konvertierungen unabhängig geprüft.
+Die konkrete Entscheidung ist die Beibehaltung des vollständigen Portfolios;
+eine allgemeine Gleichwertigkeit oder Entbehrlichkeit ist nicht nachgewiesen.
+Umfang, Kontrollen, Unsicherheit und Grenzen stehen unter
+[COMPONENT-VALUE-01](next_arbeitspaket_2026-10-18_component_value.md).
+Neuronale Erkennung bleibt geplant. Dieses Dokument aktiviert kein Netz und
+keine automatische Entfernung von Komponenten.
 
 ## Kleines neuronales Netz als zusätzlicher Erkennungs-Bot
 
@@ -146,5 +151,7 @@ benötigen zusätzlich eigene Ausfall-/Wiederherstellungsszenarien.
 
 Empfohlene Reihenfolge: zuerst echte Komponenten-Gegenproben aufbauen, dann
 die neuronale Erkennung daran messen. So entscheidet derselbe Nachweis über
-vorhandene Software und neue Erweiterungen. Beide Pakete bleiben bis zu ihren
-tatsächlichen Abnahmen offen.
+vorhandene Software und neue Erweiterungen. Der erste Komponenten-Nachweisrahmen
+ist für die sechs Bots abgenommen; breitere reale Familien, weitere Komponenten
+und die positive Prüfung seltener Fähigkeiten bleiben Folgearbeit.
+NEURAL-ELEMENTS-01 bleibt bis zur tatsächlichen End-to-End-Abnahme offen.

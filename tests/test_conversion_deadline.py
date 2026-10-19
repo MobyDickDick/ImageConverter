@@ -33,6 +33,14 @@ def crashing_worker(connection, payload):
     raise RuntimeError('controlled worker failure')
 
 
+def no_result_worker(connection, payload):
+    import pickle
+    stage = Path(payload['stage'])
+    session = pickle.loads(payload['session'])
+    _atomic_pickle(stage/'completed.pickle', dict(result=(None,True), failures=[], session=session))
+    connection.send(('done','completed.pickle'))
+
+
 def forbidden_reference_worker(connection, payload):
     from src import imageCompositeConverter as app
     from src.iCCModules.imageCompositeConverterDeadline import conversion_worker
@@ -92,6 +100,15 @@ def spec(tmp_path):
 
 def run(deadline, spec, worker, **action):
     return deadline.run(spec, config={}, action=action, worker=worker)
+
+
+def test_completed_failure_without_result_keeps_real_supervision_evidence(spec):
+    deadline = ImageDeadline(SearchPolicy(seconds=2.,max_seconds=2.))
+    (row,failed),_ = run(deadline,spec,no_result_worker)
+    assert row is None and failed
+    report = json.loads((Path(spec['reports_out_dir'])/'sample_deadline.json').read_text(encoding='utf-8'))
+    assert report['isolated'] and report['max_seconds']==2.
+    assert report['stop_reason']=='no_result' and 0<report['elapsed_seconds']<2.
 
 
 def test_blocked_worker_is_killed_without_publishing_partial_or_old_outputs(spec):

@@ -83,6 +83,11 @@ def parseArgsImpl(
                         help='Seed für wiederholbare alternative Suchwege')
     parser.add_argument('--search-budget', type=int, default=384,
                         help='Basis zusätzlicher Prüfungen je Modell (32..10000); adaptiv bei spätem Fortschritt bis zum Vierfachen')
+    from src.iCCModules.imageCompositeConverterComponents import BOT_NAMES
+    parser.add_argument('--disable-search-bot', action='append', default=[], choices=BOT_NAMES,
+                        help='Komponentenvergleich: Bot in der adaptiven Parametersuche abschalten; wiederholbar')
+    parser.add_argument('--component-observation', action=argparse.BooleanOptionalAction, default=True,
+                        help='Leichte Bot-Arbeitszähler erfassen (Default: aktiv)')
     parser.add_argument('--search-policy',choices=('adaptive','fixed'),default='adaptive',
                         help='adaptive: Erfolg/Stagnation/Fortschritt steuern die Suche; fixed: bisheriges Suchbudget')
     parser.add_argument('--search-seconds',type=float,default=60.,
@@ -257,6 +262,8 @@ def parseArgsImpl(
     args = parser.parse_args(argv)
     if not 32 <= args.search_budget <= 10000:
         parser.error('--search-budget muss zwischen 32 und 10000 liegen')
+    if args.disable_search_bot and (args.search_mode != 'portfolio' or args.search_policy != 'adaptive'):
+        parser.error('--disable-search-bot benötigt --search-mode portfolio --search-policy adaptive')
     import math
     if (not math.isfinite(args.search_seconds) or not math.isfinite(args.search_max_seconds)
             or not 0 < args.search_seconds <= args.search_max_seconds):
@@ -572,6 +579,8 @@ def runMainImpl(
         adaptive=getattr(args,'search_policy','fixed')=='adaptive',
         seconds=getattr(args,'search_seconds',60.),max_seconds=getattr(args,'search_max_seconds',120.),
         isolate=getattr(args,'isolate_conversion',True) and getattr(args,'execution_mode','semantic-only')=='semantic-only',
+        disabled_bots=getattr(args,'disable_search_bot', ()),
+        component_observation=getattr(args,'component_observation', True),
     ):
         try:
             if args.ac08_regression_set:
