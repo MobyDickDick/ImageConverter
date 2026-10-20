@@ -293,7 +293,7 @@ def write_cases(cases: list[dict], output: Path) -> None:
 
 
 def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
-             keep_debug_artifacts: bool = True) -> dict:
+             keep_debug_artifacts: bool = True, extra_cli_args: tuple[str, ...] = ()) -> dict:
     cv2 = import_with_vendored_fallback("cv2")
     np = import_with_vendored_fallback("numpy")
     fitz = import_with_vendored_fallback("fitz")
@@ -314,7 +314,7 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
                str(case_dir / "conversion"), str(inputs),
                "--descriptions-path", str(inputs / "descriptions.xml"),
                "--output-dir", str(case_dir / "conversion"), "--start", name, "--end", name,
-               "--execution-mode", "semantic-only", "--deterministic-order", "--iterations", str(iterations)]
+               "--execution-mode", "semantic-only", "--deterministic-order", "--iterations", str(iterations), *extra_cli_args]
     environment = dict(os.environ, TINY_ICC_OUTPUT_VARIATION="0", PYTHONHASHSEED="0",
                        ICC_SEARCH_SEED=os.environ.get('ICC_SEARCH_SEED', '0'),
                        ICC_FORCE_RECONVERT="1", PYTHONIOENCODING="utf-8")
