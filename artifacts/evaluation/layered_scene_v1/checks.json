@@ -1,0 +1,579 @@
+{
+  "parent_commit": "e533c430758abc7b6bcddf54f9351dad83b46b9e",
+  "toolchain": {
+    "numpy": "2.2.6",
+    "opencv": "4.14.0",
+    "pymupdf": "1.26.7"
+  },
+  "targeted_regression": {
+    "status": "passed",
+    "tests": 153,
+    "passed": 153,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0,
+    "xml": ".tmp\\general-scene-final-boundaries.xml",
+    "xml_sha256": "2afcd8647786a8c57348debfb59b2429ff76d03e8f70f6f30088caaa500e9eef"
+  },
+  "standard_profile": {
+    "status": "passed",
+    "tests": 3626,
+    "passed": 3596,
+    "skipped": 30,
+    "failures": 0,
+    "errors": 0,
+    "xml": ".tmp\\general-scene-full-tests.xml",
+    "xml_sha256": "e6282c981a9fa491b43c26784e8daeddd3091577a7b4c1752509665a40506987",
+    "log": ".tmp/general-scene-full-tests.log",
+    "note": "Collected before final localized localized scene refinements; final affected code covered by release regression"
+  },
+  "ci_smoke": {
+    "local_passed": 6,
+    "remote_run_started": false,
+    "independent_verification": true,
+    "log": ".tmp/layered-ci-complete.log",
+    "seed": 197323,
+    "wide_nesting": true
+  },
+  "hardcoding_occurrences": 0,
+  "compileall_passed": true,
+  "cli_help_passed": true,
+  "archive": {
+    "pairs": 377,
+    "unchanged": true,
+    "index_sha256": "3cdfd0311b6acfe79df525aaeeac8bde79fb879daebac16e5f635a88892f053b",
+    "reconverted": 377,
+    "absolute_pixel_gate_passed": 377,
+    "higher_than_saved_best": [
+      {
+        "variant": "AC0232_L",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 568.2378540039062,
+        "baseline_mean_delta2": 282.161865234375
+      },
+      {
+        "variant": "AC0232_M",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 1613.0762939453125,
+        "baseline_mean_delta2": 419.30963134765625
+      },
+      {
+        "variant": "AC0232_S",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 1351.7083740234375,
+        "baseline_mean_delta2": 324.5816650390625
+      },
+      {
+        "variant": "AC0411_S",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 100.26000213623047,
+        "baseline_mean_delta2": 91.34500122070312
+      },
+      {
+        "variant": "AC0840_L",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 948.1766967773438,
+        "baseline_mean_delta2": 464.7366638183594
+      },
+      {
+        "variant": "AC0840_M",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 1235.54248046875,
+        "baseline_mean_delta2": 228.52499389648438
+      },
+      {
+        "variant": "AC0840_S",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 1302.38671875,
+        "baseline_mean_delta2": 447.3333435058594
+      },
+      {
+        "variant": "AC0850_L",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 897.163330078125,
+        "baseline_mean_delta2": 347.36334228515625
+      },
+      {
+        "variant": "AC0850_M",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 1087.6424560546875,
+        "baseline_mean_delta2": 248.46749877929688
+      },
+      {
+        "variant": "AC0850_S",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 1088.52001953125,
+        "baseline_mean_delta2": 450.8133239746094
+      },
+      {
+        "variant": "AC0910_S",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 1262.22216796875,
+        "baseline_mean_delta2": 656.8622436523438
+      },
+      {
+        "variant": "AC0920_L",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 618.3359985351562,
+        "baseline_mean_delta2": 506.66400146484375
+      },
+      {
+        "variant": "AC0920_M",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 1364.0250244140625,
+        "baseline_mean_delta2": 438.4200134277344
+      },
+      {
+        "variant": "AC0920_S",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 1694.7467041015625,
+        "baseline_mean_delta2": 1418.199951171875
+      },
+      {
+        "variant": "AC0921_L",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 842.9733276367188,
+        "baseline_mean_delta2": 271.0826721191406
+      },
+      {
+        "variant": "AC0921_M",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 796.0842895507812,
+        "baseline_mean_delta2": 619.8728637695312
+      },
+      {
+        "variant": "AC0921_S",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 569.89599609375,
+        "baseline_mean_delta2": 418.0159912109375
+      },
+      {
+        "variant": "AC1000_L",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 1084.8233642578125,
+        "baseline_mean_delta2": 685.4166870117188
+      },
+      {
+        "variant": "AC1000_S",
+        "execution_mode": "semantic-only",
+        "mean_delta2": 715.4666748046875,
+        "baseline_mean_delta2": 496.1199951171875
+      },
+      {
+        "variant": "AC0800_S",
+        "execution_mode": "standard",
+        "mean_delta2": 899.7733154296875,
+        "baseline_mean_delta2": 893.7999877929688
+      },
+      {
+        "variant": "AC0811_L",
+        "execution_mode": "standard",
+        "mean_delta2": 3245.50927734375,
+        "baseline_mean_delta2": 541.8319702148438
+      },
+      {
+        "variant": "AC0811_M",
+        "execution_mode": "standard",
+        "mean_delta2": 4173.2314453125,
+        "baseline_mean_delta2": 1168.22998046875
+      },
+      {
+        "variant": "AC0811_S",
+        "execution_mode": "standard",
+        "mean_delta2": 2136.77587890625,
+        "baseline_mean_delta2": 1066.4560546875
+      },
+      {
+        "variant": "AC0813_L",
+        "execution_mode": "standard",
+        "mean_delta2": 3212.789306640625,
+        "baseline_mean_delta2": 899.5973510742188
+      },
+      {
+        "variant": "AC0813_M",
+        "execution_mode": "standard",
+        "mean_delta2": 4166.29736328125,
+        "baseline_mean_delta2": 2135.357177734375
+      },
+      {
+        "variant": "AC0813_S",
+        "execution_mode": "standard",
+        "mean_delta2": 2770.927978515625,
+        "baseline_mean_delta2": 740.7520141601562
+      },
+      {
+        "variant": "AC0814_L",
+        "execution_mode": "standard",
+        "mean_delta2": 1422.6319580078125,
+        "baseline_mean_delta2": 483.64801025390625
+      },
+      {
+        "variant": "AC0814_M",
+        "execution_mode": "standard",
+        "mean_delta2": 1679.704345703125,
+        "baseline_mean_delta2": 1168.48291015625
+      },
+      {
+        "variant": "AC0831_L",
+        "execution_mode": "standard",
+        "mean_delta2": 6159.4375,
+        "baseline_mean_delta2": 4602.1572265625
+      },
+      {
+        "variant": "AC0831_M",
+        "execution_mode": "standard",
+        "mean_delta2": 7415.72998046875,
+        "baseline_mean_delta2": 5450.80712890625
+      },
+      {
+        "variant": "AC0831_S",
+        "execution_mode": "standard",
+        "mean_delta2": 4794.7998046875,
+        "baseline_mean_delta2": 3908.719970703125
+      },
+      {
+        "variant": "AC0832_S",
+        "execution_mode": "standard",
+        "mean_delta2": 3143.152099609375,
+        "baseline_mean_delta2": 2578.0400390625
+      },
+      {
+        "variant": "AC0834_M",
+        "execution_mode": "standard",
+        "mean_delta2": 4654.8427734375,
+        "baseline_mean_delta2": 3353.935791015625
+      },
+      {
+        "variant": "AC0834_S",
+        "execution_mode": "standard",
+        "mean_delta2": 3501.8798828125,
+        "baseline_mean_delta2": 2949.199951171875
+      },
+      {
+        "variant": "AC0835_L",
+        "execution_mode": "standard",
+        "mean_delta2": 7894.5791015625,
+        "baseline_mean_delta2": 7044.01416015625
+      },
+      {
+        "variant": "AC0835_S",
+        "execution_mode": "standard",
+        "mean_delta2": 6373.21337890625,
+        "baseline_mean_delta2": 5818.533203125
+      },
+      {
+        "variant": "AC0836_L",
+        "execution_mode": "standard",
+        "mean_delta2": 5204.05322265625,
+        "baseline_mean_delta2": 5102.861328125
+      },
+      {
+        "variant": "AC0836_M",
+        "execution_mode": "standard",
+        "mean_delta2": 6418.4228515625,
+        "baseline_mean_delta2": 5446.5986328125
+      },
+      {
+        "variant": "AC0838_M",
+        "execution_mode": "standard",
+        "mean_delta2": 8000.2373046875,
+        "baseline_mean_delta2": 7789.17431640625
+      },
+      {
+        "variant": "AC0839_M",
+        "execution_mode": "standard",
+        "mean_delta2": 5271.8271484375,
+        "baseline_mean_delta2": 3988.645751953125
+      },
+      {
+        "variant": "AC0881_M",
+        "execution_mode": "standard",
+        "mean_delta2": 4613.94873046875,
+        "baseline_mean_delta2": 2780.935791015625
+      }
+    ],
+    "semantic_parent_comparison": [
+      {
+        "variant": "AC0232_L",
+        "byte_equal": true,
+        "parent_mean_delta2": 568.2378540039062
+      },
+      {
+        "variant": "AC0232_M",
+        "byte_equal": true,
+        "parent_mean_delta2": 1613.0762939453125
+      },
+      {
+        "variant": "AC0232_S",
+        "byte_equal": true,
+        "parent_mean_delta2": 1351.7083740234375
+      },
+      {
+        "variant": "AC0411_S",
+        "byte_equal": true,
+        "parent_mean_delta2": 100.26000213623047
+      },
+      {
+        "variant": "AC0840_L",
+        "byte_equal": true,
+        "parent_mean_delta2": 948.1766967773438
+      },
+      {
+        "variant": "AC0840_M",
+        "byte_equal": false,
+        "parent_mean_delta2": 713.8499755859375
+      },
+      {
+        "variant": "AC0840_S",
+        "byte_equal": true,
+        "parent_mean_delta2": 1302.38671875
+      },
+      {
+        "variant": "AC0850_L",
+        "byte_equal": true,
+        "parent_mean_delta2": 897.163330078125
+      },
+      {
+        "variant": "AC0850_M",
+        "byte_equal": true,
+        "parent_mean_delta2": 1087.6424560546875
+      },
+      {
+        "variant": "AC0850_S",
+        "byte_equal": true,
+        "parent_mean_delta2": 1088.52001953125
+      },
+      {
+        "variant": "AC0910_S",
+        "byte_equal": true,
+        "parent_mean_delta2": 1262.22216796875
+      },
+      {
+        "variant": "AC0920_L",
+        "byte_equal": true,
+        "parent_mean_delta2": 618.3359985351562
+      },
+      {
+        "variant": "AC0920_M",
+        "byte_equal": true,
+        "parent_mean_delta2": 1364.0250244140625
+      },
+      {
+        "variant": "AC0920_S",
+        "byte_equal": true,
+        "parent_mean_delta2": 1694.7467041015625
+      },
+      {
+        "variant": "AC0921_L",
+        "byte_equal": true,
+        "parent_mean_delta2": 842.9733276367188
+      },
+      {
+        "variant": "AC0921_M",
+        "byte_equal": true,
+        "parent_mean_delta2": 796.0842895507812
+      },
+      {
+        "variant": "AC0921_S",
+        "byte_equal": true,
+        "parent_mean_delta2": 569.89599609375
+      },
+      {
+        "variant": "AC1000_L",
+        "byte_equal": true,
+        "parent_mean_delta2": 1084.8233642578125
+      },
+      {
+        "variant": "AC1000_S",
+        "byte_equal": true,
+        "parent_mean_delta2": 715.4666748046875
+      }
+    ],
+    "neutral_paired_controls": [
+      {
+        "arm": "parent",
+        "trial": 0,
+        "output_sha256": "c71803927f27e280303bb6cbc0dba20b7722dbf282f79ab0356b619db84e9e38",
+        "metrics": {
+          "normalized_mse": 0.003659361507743597,
+          "foreground_mse": 0.006693277973681688,
+          "edge_alignment": 0.8700078725814819,
+          "foreground_iou": 0.8578431372549019
+        }
+      },
+      {
+        "arm": "current",
+        "trial": 0,
+        "output_sha256": "c71803927f27e280303bb6cbc0dba20b7722dbf282f79ab0356b619db84e9e38",
+        "metrics": {
+          "normalized_mse": 0.003659361507743597,
+          "foreground_mse": 0.006693277973681688,
+          "edge_alignment": 0.8700078725814819,
+          "foreground_iou": 0.8578431372549019
+        }
+      },
+      {
+        "arm": "current",
+        "trial": 1,
+        "output_sha256": "c71803927f27e280303bb6cbc0dba20b7722dbf282f79ab0356b619db84e9e38",
+        "metrics": {
+          "normalized_mse": 0.003659361507743597,
+          "foreground_mse": 0.006693277973681688,
+          "edge_alignment": 0.8700078725814819,
+          "foreground_iou": 0.8578431372549019
+        }
+      },
+      {
+        "arm": "parent",
+        "trial": 1,
+        "output_sha256": "c71803927f27e280303bb6cbc0dba20b7722dbf282f79ab0356b619db84e9e38",
+        "metrics": {
+          "normalized_mse": 0.003659361507743597,
+          "foreground_mse": 0.006693277973681688,
+          "edge_alignment": 0.8700078725814819,
+          "foreground_iou": 0.8578431372549019
+        }
+      },
+      {
+        "arm": "parent",
+        "trial": 2,
+        "output_sha256": "c71803927f27e280303bb6cbc0dba20b7722dbf282f79ab0356b619db84e9e38",
+        "metrics": {
+          "normalized_mse": 0.003659361507743597,
+          "foreground_mse": 0.006693277973681688,
+          "edge_alignment": 0.8700078725814819,
+          "foreground_iou": 0.8578431372549019
+        }
+      },
+      {
+        "arm": "current",
+        "trial": 2,
+        "output_sha256": "c71803927f27e280303bb6cbc0dba20b7722dbf282f79ab0356b619db84e9e38",
+        "metrics": {
+          "normalized_mse": 0.003659361507743597,
+          "foreground_mse": 0.006693277973681688,
+          "edge_alignment": 0.8700078725814819,
+          "foreground_iou": 0.8578431372549019
+        }
+      }
+    ],
+    "large_batch_error": "Existing Windows CSV OSError in batch 3; completed remainder using smaller family batches"
+  },
+  "release_source_matches_measured": true,
+  "large_child_cli_control": {
+    "before": {
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "foreground_mse_outside_limit",
+        "edge_alignment_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.032898902893066406,
+        "foreground_mse": 0.06405320018529892,
+        "edge_alignment": 0.23246261477470398,
+        "foreground_iou": 0.9086205584721905
+      },
+      "output_sha256": "e5bbf806e8665d96a0af9740636bc234c4590e126c15c0bcfd214e576d09fb3d"
+    },
+    "after": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.00146154360845685,
+        "foreground_mse": 0.0031321432907134295,
+        "edge_alignment": 0.7731013298034668,
+        "foreground_iou": 1.0
+      },
+      "output_sha256": "3eff6832168ab9fe9458a7e339ab415a2b744c77ce538d010f3541c6937a1b9e"
+    }
+  },
+  "intermediate_geometry_trials": [
+    {
+      "folder": ".tmp/general-scene-after",
+      "cases": 18,
+      "accepted": 17,
+      "failures": [
+        {
+          "case_id": "layer_04",
+          "failures": [
+            "normalized_mse_outside_limit",
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "folder": ".tmp/general-scene-complete-holdout-after",
+      "cases": 18,
+      "accepted": 17,
+      "failures": [
+        {
+          "case_id": "layer_15",
+          "failures": [
+            "normalized_mse_outside_limit",
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "folder": ".tmp/general-scene-abnahme-holdout",
+      "cases": 18,
+      "accepted": 17,
+      "failures": [
+        {
+          "case_id": "layer_09",
+          "failures": [
+            "normalized_mse_outside_limit",
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ]
+        }
+      ]
+    }
+  ],
+  "interrupted_development_trials": [
+    {
+      "folder": ".tmp/general-scene-final2-development",
+      "case_id": "layer_13",
+      "observed_elapsed_seconds": 51.468,
+      "configured_seconds": 5,
+      "not_counted_as_success": true
+    },
+    {
+      "folder": ".tmp/general-scene-final2-holdout",
+      "case_id": "layer_13",
+      "observed_elapsed_seconds": 53.015,
+      "configured_seconds": 5,
+      "not_counted_as_success": true
+    },
+    {
+      "folder": ".tmp/general-scene-final2-plan-b",
+      "case_id": "probe_13",
+      "observed_elapsed_seconds": 51.5,
+      "configured_seconds": 5,
+      "not_counted_as_success": true
+    }
+  ],
+  "current_test_coverage": {
+    "collected": 3644,
+    "covered": 3644,
+    "missing": [],
+    "note": "Union of standard profile and final affected-module regression"
+  },
+  "default_profile_excludes_heavy_modules": [
+    "test_image_composite_converter.py",
+    "test_satisfactory_regression_battery.py",
+    "test_conversion_regression_smoke.py"
+  ],
+  "generator_seeds": {
+    "development": 20261020,
+    "final_holdout": 197323,
+    "final_plan_b": 77426
+  }
+}

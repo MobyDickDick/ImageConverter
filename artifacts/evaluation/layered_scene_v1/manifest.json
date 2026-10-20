@@ -1,0 +1,1989 @@
+{
+  "schema_version": "layered_scene_inputs_v1",
+  "datasets": {
+    "development": [
+      {
+        "case_id": "layer_00",
+        "width": 240,
+        "height": 190,
+        "description": "ein Kreis. Alle Formen sind einfarbig gefüllt. Die Formen liegen getrennt nebeneinander. Keine Beschriftung.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              80.62344916537499,
+              61.352146887438366,
+              78.75310166925001,
+              78.75310166925001
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "8e3c8332c51edd5fe74e9c1444d2b13607ad9f1aacef4f29a669bd86b9dd421c",
+        "reference_svg_sha256": "006b7078746e044dc497a99ba75cbbd4b8d3359563bc63bc0a78490444e8bc34",
+        "image": "sources/development/layer_00.png"
+      },
+      {
+        "case_id": "layer_01",
+        "width": 240,
+        "height": 190,
+        "description": "ein Kreis und ein Rechteck. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              51.60000000000001,
+              26.60000000000001,
+              136.79999999999998,
+              136.79999999999998
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              87.9,
+              60.62421027072474,
+              68.39999999999999,
+              65.15157945855053
+            ],
+            "parent": 0
+          }
+        ],
+        "input_sha256": "e146248d224d33d378ee589c33b88f6bee906a80d95964358e841b164f977999",
+        "reference_svg_sha256": "b331b62752b96416a6e4c030625972892d0a5e1eb122882b5846c391287ef517",
+        "image": "sources/development/layer_01.png"
+      },
+      {
+        "case_id": "layer_02",
+        "width": 200,
+        "height": 160,
+        "description": "zwei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen liegen getrennt nebeneinander. Keine Beschriftung. Jede Form hat eine dunkle Kontur.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              18.30137723894371,
+              52.45600424516245,
+              63.39724552211258,
+              63.39724552211258
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              121.05082235880565,
+              36.29867639089558,
+              57.89835528238871,
+              57.89835528238871
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "c2ca54655510b391a146d1d500aa07041b144234372a7913a21d84b2a82b485b",
+        "reference_svg_sha256": "5fc31709c61af46e3cf3ddc531729dc726ccfe85558c29329c1680bb00a7a5c9",
+        "image": "sources/development/layer_02.png"
+      },
+      {
+        "case_id": "layer_03",
+        "width": 200,
+        "height": 160,
+        "description": "ein Kreis und zwei Rechtecke. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              42.400000000000006,
+              16.70996899122806,
+              115.19999999999999,
+              126.58006201754388
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              73.3,
+              49.400000000000006,
+              57.599999999999994,
+              57.599999999999994
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              93.0,
+              64.35549034954076,
+              22.400000000000002,
+              24.08901930091849
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "30a8221498c86251dcd3985f987537592689633a072eae38e56022001b4a57d5",
+        "reference_svg_sha256": "48d68604f87d3d308b8f04f9f32743bbad4d0b2d2238075a0bbe5980b2cd2456",
+        "image": "sources/development/layer_03.png"
+      },
+      {
+        "case_id": "layer_04",
+        "width": 180,
+        "height": 180,
+        "description": "zwei Kreise und ein Rechteck. Alle Formen sind einfarbig gefüllt. Die Formen liegen getrennt nebeneinander. Keine Beschriftung.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              11.085567736531829,
+              74.0871557069069,
+              37.82886452693634,
+              37.82886452693634
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              69.93258684732056,
+              59.69588235444637,
+              40.134826305358864,
+              40.134826305358864
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              133.31393940835403,
+              74.38795736262615,
+              33.37212118329196,
+              36.18319180595564
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "4820b5e3686579a5cd8151aaa8458a4c30023a77db30cfbddd5b38a05f40aed5",
+        "reference_svg_sha256": "25f290e6c4f7732b801118003a056bc2e4e1bfb04616d03aa9f2721fc9e81fab",
+        "image": "sources/development/layer_04.png"
+      },
+      {
+        "case_id": "layer_05",
+        "width": 200,
+        "height": 160,
+        "description": "zwei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              41.150000000000006,
+              21.150000000000006,
+              117.69999999999999,
+              117.69999999999999
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              72.05,
+              48.150000000000006,
+              60.099999999999994,
+              60.099999999999994
+            ],
+            "parent": 0
+          }
+        ],
+        "input_sha256": "31e7574bd4c5da94ad731661de5867fb8d0228454b2e9356fdc84418748189bb",
+        "reference_svg_sha256": "4b2f89a9c8a0accdaa7eff3a663a3418d3083e7ca9d70bdd661f3e68d03aa3b2",
+        "image": "sources/development/layer_05.png"
+      },
+      {
+        "case_id": "layer_06",
+        "width": 180,
+        "height": 180,
+        "description": "ein Rechteck. Alle Formen sind einfarbig gefüllt. Die Formen liegen getrennt nebeneinander. Keine Beschriftung.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              50.89393340472004,
+              41.11890910077863,
+              78.21213319055992,
+              75.51038591402876
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "60df8f9e3e9debdf87dbcc73e5e8f6b55ee064d0d43709c99fef7dce20cc7037",
+        "reference_svg_sha256": "7114b42c535250df372dcd65286653b68cff5243237b7ae73c42548675bbcb53",
+        "image": "sources/development/layer_06.png"
+      },
+      {
+        "case_id": "layer_07",
+        "width": 240,
+        "height": 190,
+        "description": "zwei Kreise und ein Rechteck. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              51.60000000000001,
+              26.60000000000001,
+              136.79999999999998,
+              136.79999999999998
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              87.9,
+              61.80393294402981,
+              68.39999999999999,
+              62.79213411194038
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              110.9,
+              78.10000000000001,
+              26.6,
+              26.6
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "b3dd404b34f4880cce3c70aeb0a724e9fbd676b82be9b6f7d22eb6140d79bb87",
+        "reference_svg_sha256": "f62cdb51e993a5805bb933f99920852177faeeacc7a83616b51fabd02979cadc",
+        "image": "sources/development/layer_07.png"
+      },
+      {
+        "case_id": "layer_08",
+        "width": 240,
+        "height": 190,
+        "description": "ein Kreis und ein Rechteck. Alle Formen sind einfarbig gefüllt. Die Formen liegen getrennt nebeneinander. Keine Beschriftung. Jede Form hat eine dunkle Kontur.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              23.316156877838253,
+              75.39334333580524,
+              73.3676862443235,
+              64.26600915254686
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              139.7379645991598,
+              55.5380404241704,
+              80.5240708016804,
+              80.5240708016804
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "19b409e19432123f8face48a871cc98b3b146ac05996cc18dd1f2042070e0078",
+        "reference_svg_sha256": "f58994b878375f4eda95f3f99b8957fda6bfe077fc513399f99a75b196c85cf2",
+        "image": "sources/development/layer_08.png"
+      },
+      {
+        "case_id": "layer_09",
+        "width": 200,
+        "height": 160,
+        "description": "zwei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              42.400000000000006,
+              22.400000000000006,
+              115.19999999999999,
+              115.19999999999999
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              73.3,
+              49.400000000000006,
+              57.599999999999994,
+              57.599999999999994
+            ],
+            "parent": 0
+          }
+        ],
+        "input_sha256": "6466db76d65cd78818b58a0470cfc413891eb9fd68fe056d91a5ff707512bbf2",
+        "reference_svg_sha256": "504287b120934025599ffd6362d86931523e849c0640a8a657fde60bd48efbd8",
+        "image": "sources/development/layer_09.png"
+      },
+      {
+        "case_id": "layer_10",
+        "width": 200,
+        "height": 160,
+        "description": "zwei Kreise und ein Rechteck. Alle Formen sind einfarbig gefüllt. Die Formen liegen getrennt nebeneinander. Keine Beschriftung.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              14.256870043531318,
+              76.50774944590653,
+              38.152926579604035,
+              38.152926579604035
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              80.98247850540744,
+              66.26481976493174,
+              38.0350429891851,
+              38.16412918307162
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              147.17542400791703,
+              55.13901714581942,
+              38.982485317499275,
+              38.982485317499275
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "f1a0dd0f9a9e65f02d447bf4667ce5fa91de1a30ca041f650d6ce85f2a43d7ba",
+        "reference_svg_sha256": "da7142d61ea2556649e9aad91f4a56086815a4ccb8b27e5d5869b92213c2e50c",
+        "image": "sources/development/layer_10.png"
+      },
+      {
+        "case_id": "layer_11",
+        "width": 240,
+        "height": 190,
+        "description": "ein Kreis und zwei Rechtecke. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              50.35000000000001,
+              36.76641141873971,
+              139.29999999999998,
+              116.46717716252058
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              86.65,
+              57.75000000000001,
+              70.89999999999999,
+              70.89999999999999
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              109.65,
+              77.27345210452631,
+              29.1,
+              28.25309579094737
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "bb26aa3d9bed3f19291af453b0a320e9a677f1dbea77df7e7f73521b6f19b9b6",
+        "reference_svg_sha256": "8dace579f5abcb3ccf87412e0dbbc9757289e73e495c5830d02f72889ab56ac2",
+        "image": "sources/development/layer_11.png"
+      },
+      {
+        "case_id": "layer_12",
+        "width": 240,
+        "height": 190,
+        "description": "ein Kreis. Alle Formen sind einfarbig gefüllt. Die Formen liegen getrennt nebeneinander. Keine Beschriftung.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              82.92386768174906,
+              55.97096980742468,
+              74.15226463650188,
+              74.15226463650188
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "ad40451e5cbcb21321c5b775cfc4a35927c169c80af7b74aaf78817fc00cc9a5",
+        "reference_svg_sha256": "b14b76117d2c4200bd231cbd8ba16851dd7cde1466341182b0e4a2ac7686bbf7",
+        "image": "sources/development/layer_12.png"
+      },
+      {
+        "case_id": "layer_13",
+        "width": 200,
+        "height": 160,
+        "description": "zwei Rechtecke. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              42.400000000000006,
+              25.316855767720035,
+              115.19999999999999,
+              109.36628846455993
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              73.3,
+              51.788122421347154,
+              57.599999999999994,
+              52.82375515730569
+            ],
+            "parent": 0
+          }
+        ],
+        "input_sha256": "45e6f2863542c0a26f4778333d69857dd26a853c67a1774055eb1cf1408b97c2",
+        "reference_svg_sha256": "ca24c090cacb81c522438b3d3c8ca1e39ff15a839de303730da0ef295e5a34c7",
+        "image": "sources/development/layer_13.png"
+      },
+      {
+        "case_id": "layer_14",
+        "width": 200,
+        "height": 160,
+        "description": "ein Kreis und ein Rechteck. Alle Formen sind einfarbig gefüllt. Die Formen liegen getrennt nebeneinander. Keine Beschriftung. Jede Form hat eine dunkle Kontur.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              16.941056287593742,
+              61.91263709903723,
+              66.11788742481252,
+              66.11788742481252
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              118.63489440804827,
+              59.14914920707881,
+              62.73021118390345,
+              65.18630474013855
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "6fb61ff970cd97a5f84288a658cc36ec44b004bad6d14367528be17775357ee0",
+        "reference_svg_sha256": "a5b9b3d2a3c585247fb4fffaa7379ce17d3c679dbf3c1260befa7122d6bb656c",
+        "image": "sources/development/layer_14.png"
+      },
+      {
+        "case_id": "layer_15",
+        "width": 180,
+        "height": 180,
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              25.200000000000003,
+              25.200000000000003,
+              129.6,
+              129.6
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              59.699999999999996,
+              55.800000000000004,
+              64.8,
+              64.8
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              81.6,
+              73.80000000000001,
+              25.200000000000003,
+              25.200000000000003
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "885b762bc6d71febc2a93ba76023d70a9ee9529307e203fb205208814ded0fe6",
+        "reference_svg_sha256": "b653afca0968aa6c405c13031e333b4bdc9a4f57eb803d778597af44f0130052",
+        "image": "sources/development/layer_15.png"
+      },
+      {
+        "case_id": "layer_16",
+        "width": 240,
+        "height": 190,
+        "description": "zwei Kreise und ein Rechteck. Alle Formen sind einfarbig gefüllt. Die Formen liegen getrennt nebeneinander. Keine Beschriftung.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              15.934587475128975,
+              86.82747505500049,
+              48.13082504974205,
+              48.13082504974205
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              94.78330930270123,
+              55.66722200987442,
+              50.433381394597546,
+              48.54055320984151
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              177.8636948946651,
+              86.27559516707845,
+              44.27261021066981,
+              44.27261021066981
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "b1cb7e919d97d52bf65d4e672dd9e5338ad87c674ffe4f6dcb01c8ab803c43f7",
+        "reference_svg_sha256": "838d27a327602eb1631b2c0118497579dd2dbeb448bf90630b6e850ac60a88a7",
+        "image": "sources/development/layer_16.png"
+      },
+      {
+        "case_id": "layer_17",
+        "width": 240,
+        "height": 190,
+        "description": "zwei Rechtecke. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              50.35000000000001,
+              21.627826341144214,
+              139.29999999999998,
+              146.74434731771157
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              86.65,
+              64.20973941310693,
+              70.89999999999999,
+              57.98052117378615
+            ],
+            "parent": 0
+          }
+        ],
+        "input_sha256": "1fd5d76513b4ad77e1b1494b2e1fe7d29ff3a24a3b76cbd5401485768bc311cc",
+        "reference_svg_sha256": "2d5c29623f78fed1b66b5fb44c17fb28864002158d7879e758a62c7ea48f08bc",
+        "image": "sources/development/layer_17.png"
+      }
+    ],
+    "holdout": [
+      {
+        "case_id": "layer_00",
+        "width": 180,
+        "height": 180,
+        "description": "ein Kreis. Die Formen besitzen eine einfarbige Füllung. Die Formen liegen getrennt untereinander. Ohne Text oder Zeichen.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              36.99370866022424,
+              54.89837806630432,
+              70.20324386739136,
+              70.20324386739136
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "90afb14b59957b3701e45f1e00a5e9640f92ce03d8bef8ba204af0af61330538",
+        "reference_svg_sha256": "bc3df911399ec5b2cabf152146d30552614563a2622067f0db12eeee7b0ad827",
+        "image": "sources/holdout/layer_00.png"
+      },
+      {
+        "case_id": "layer_01",
+        "width": 160,
+        "height": 200,
+        "description": "zwei Kreise. Die Formen besitzen eine einfarbige Füllung. Die Formen sind ineinander angeordnet. Ohne Text oder Zeichen.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              22.400000000000006,
+              42.400000000000006,
+              115.19999999999999,
+              115.19999999999999
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              42.56,
+              62.56,
+              74.88,
+              74.88
+            ],
+            "parent": 0
+          }
+        ],
+        "input_sha256": "3c52de8d34bdf28472868fc6436780c520eb96190baaa2d17dcdd1cf5afdd1ff",
+        "reference_svg_sha256": "e954f932b6480f36015e01f3a2568e2695e77eec9365ad5eccb34fb8a04946b4",
+        "image": "sources/holdout/layer_01.png"
+      },
+      {
+        "case_id": "layer_02",
+        "width": 160,
+        "height": 200,
+        "description": "ein Kreis und ein Rechteck. Die Formen besitzen eine einfarbige Füllung. Die Formen liegen getrennt untereinander. Ohne Text oder Zeichen. Jede Form hat eine dunkle Kontur.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              50.75637025328963,
+              18.893361054079946,
+              67.35927651074776,
+              62.21327789184011
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              51.38170777005003,
+              119.73853426617428,
+              60.52293146765143,
+              60.52293146765143
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "b5d85ca2ec2182ac8a0c25d96d76b4827ec81051373d12a5642bd404d44a7183",
+        "reference_svg_sha256": "e3e60e9a4953986af86a391fba9e9dd2ab5b8181738bd86906a9d0eec90dd125",
+        "image": "sources/holdout/layer_02.png"
+      },
+      {
+        "case_id": "layer_03",
+        "width": 180,
+        "height": 180,
+        "description": "drei Kreise. Die Formen besitzen eine einfarbige Füllung. Die Formen sind ineinander angeordnet. Ohne Text oder Zeichen.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              25.200000000000017,
+              25.200000000000003,
+              129.6,
+              129.6
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              47.88000000000001,
+              47.88,
+              84.24,
+              84.24
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              77.39999999999999,
+              77.4,
+              25.200000000000003,
+              25.200000000000003
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "aa5dd88d85130fc7b6ffcd171034dd403c05182fa5275d71b9c6c3acfd8ef064",
+        "reference_svg_sha256": "18d80530af36b504da56d146e9582499369a488fd821515af5a88d326339d560",
+        "image": "sources/holdout/layer_03.png"
+      },
+      {
+        "case_id": "layer_04",
+        "width": 190,
+        "height": 240,
+        "description": "drei Rechtecke. Die Formen besitzen eine einfarbige Füllung. Die Formen liegen getrennt untereinander. Ohne Text oder Zeichen.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              88.55041994507965,
+              15.012467364231664,
+              48.32074644602981,
+              49.97506527153667
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              78.77716717410978,
+              98.13042714726294,
+              46.54120142311493,
+              43.739145705474144
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              63.13402173885488,
+              175.77098207084796,
+              49.860400085999224,
+              48.45803585830408
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "14cb5f74623c3958d5a03aef29d4d3cc5276f058cc47133cdee45b256cfcc75d",
+        "reference_svg_sha256": "6df323e6d8d16b15c4b417fdd4a86b36151f5c8463f8283de4f27dd2a36847c6",
+        "image": "sources/holdout/layer_04.png"
+      },
+      {
+        "case_id": "layer_05",
+        "width": 160,
+        "height": 200,
+        "description": "zwei Rechtecke. Die Formen besitzen eine einfarbige Füllung. Die Formen sind ineinander angeordnet. Ohne Text oder Zeichen. Jede Form hat eine dunkle Kontur.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              15.525742439107916,
+              41.150000000000006,
+              128.94851512178417,
+              117.69999999999999
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              46.9613036754166,
+              61.31,
+              66.0773926491668,
+              77.38
+            ],
+            "parent": 0
+          }
+        ],
+        "input_sha256": "409efb45a553f4c421a8d3aff50597113de311ea868a951f9dbdac5010f3be8f",
+        "reference_svg_sha256": "32455ed77ffa19e0c7b29e3943f6e9f35d45f10673e7f165b31f4fb9ea70ef86",
+        "image": "sources/holdout/layer_05.png"
+      },
+      {
+        "case_id": "layer_06",
+        "width": 180,
+        "height": 180,
+        "description": "ein Kreis. Die Formen besitzen eine einfarbige Füllung. Die Formen liegen getrennt untereinander. Ohne Text oder Zeichen.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              57.6990176369397,
+              50.51548126423689,
+              78.96903747152622,
+              78.96903747152622
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "06f356e3d33ba241421e9d6bfbbee7b17241025055bff017f64e8b788105c8bb",
+        "reference_svg_sha256": "a55f9a389ba28c390721fa148618eed54f2c571142f4e39164d3eb0bc3a90c03",
+        "image": "sources/holdout/layer_06.png"
+      },
+      {
+        "case_id": "layer_07",
+        "width": 180,
+        "height": 180,
+        "description": "drei Rechtecke. Die Formen besitzen eine einfarbige Füllung. Die Formen sind ineinander angeordnet. Ohne Text oder Zeichen.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              19.013224666835782,
+              25.200000000000003,
+              141.97355066632846,
+              129.6
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              53.65717226516006,
+              47.88,
+              72.68565546967989,
+              84.24
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              77.79852412303757,
+              77.4,
+              24.40295175392486,
+              25.200000000000003
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "9c18f204af2b9222aef1109cfb6b8a302905efc4221869fd7aefb07f342172c0",
+        "reference_svg_sha256": "fe2efdd99080464ec1b45369b8ea91e8a48143db24599db305a56aa740a130b2",
+        "image": "sources/holdout/layer_07.png"
+      },
+      {
+        "case_id": "layer_08",
+        "width": 160,
+        "height": 200,
+        "description": "ein Kreis und ein Rechteck. Die Formen besitzen eine einfarbige Füllung. Die Formen liegen getrennt untereinander. Ohne Text oder Zeichen. Jede Form hat eine dunkle Kontur.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              38.49051211649265,
+              16.55802374561054,
+              67.63397685305955,
+              66.88395250877892
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              63.14534974426623,
+              118.77585408199216,
+              62.44829183601567,
+              62.44829183601567
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "48df028226b969594eef3845729ea72c67b8d9d1f02f69f1ee7726b87c8dc0fb",
+        "reference_svg_sha256": "ec60411168eed33e9bd95421815a7f02454c7fd46166fb685f7f03c75181f5fd",
+        "image": "sources/holdout/layer_08.png"
+      },
+      {
+        "case_id": "layer_09",
+        "width": 160,
+        "height": 200,
+        "description": "ein Kreis und ein Rechteck. Die Formen besitzen eine einfarbige Füllung. Die Formen sind ineinander angeordnet. Ohne Text oder Zeichen.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              22.400000000000006,
+              42.400000000000006,
+              115.19999999999999,
+              115.19999999999999
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              48.261622357751904,
+              66.59200000000001,
+              63.47675528449621,
+              66.81599999999999
+            ],
+            "parent": 0
+          }
+        ],
+        "input_sha256": "95de120563060e55c0a192d535a942b74f131dc2cd3ffeb77d83ca7446edd4ad",
+        "reference_svg_sha256": "02776a9f685bd8ee9cd54ca446653d512e51c0f329057f17c322fe016026e6cf",
+        "image": "sources/holdout/layer_09.png"
+      },
+      {
+        "case_id": "layer_10",
+        "width": 180,
+        "height": 180,
+        "description": "ein Kreis und zwei Rechtecke. Die Formen besitzen eine einfarbige Füllung. Die Formen liegen getrennt untereinander. Ohne Text oder Zeichen.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              75.14643517476678,
+              10.917632344135104,
+              35.97696318625151,
+              38.16473531172979
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              60.30947590429259,
+              70.22060195718949,
+              39.15607049465425,
+              39.558796085621026
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              79.97416079859774,
+              133.95836179797675,
+              32.083276404046515,
+              32.083276404046515
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "2c840d1ac9fb98347b0da3ce44d0d3aeae23ab357724d0db04922b9bbba851d7",
+        "reference_svg_sha256": "f3a35921e1042c34a2ddcf5302f5f4d9a9d7ecb675d5735cd0a35bfbe4023059",
+        "image": "sources/holdout/layer_10.png"
+      },
+      {
+        "case_id": "layer_11",
+        "width": 180,
+        "height": 180,
+        "description": "drei Kreise. Die Formen besitzen eine einfarbige Füllung. Die Formen sind ineinander angeordnet. Ohne Text oder Zeichen. Jede Form hat eine dunkle Kontur.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              23.950000000000017,
+              23.950000000000003,
+              132.1,
+              132.1
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              46.63000000000001,
+              46.63,
+              86.74,
+              86.74
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              76.14999999999999,
+              76.15,
+              27.700000000000003,
+              27.700000000000003
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "42c745182689b89f4cb6d8211672967f6c35c260b818b9d65d6066122a6cf195",
+        "reference_svg_sha256": "49a410f966b74f8c659f0df453148cd2694d0b304f535609c7c911fce6b97871",
+        "image": "sources/holdout/layer_11.png"
+      },
+      {
+        "case_id": "layer_12",
+        "width": 160,
+        "height": 200,
+        "description": "ein Kreis. Die Formen besitzen eine einfarbige Füllung. Die Formen liegen getrennt untereinander. Ohne Text oder Zeichen.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              52.82418395588706,
+              70.4092794846795,
+              59.18144103064099,
+              59.18144103064099
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "b637aa44cd90e3d7ed409ece2a7e5e2a2b8297fdb2ee7ef4ecd25973ec5d3c2e",
+        "reference_svg_sha256": "7821cc71b38a7ea9976a5473ed8b4cd9361c4520dbc6a67b966e1f66de319643",
+        "image": "sources/holdout/layer_12.png"
+      },
+      {
+        "case_id": "layer_13",
+        "width": 160,
+        "height": 200,
+        "description": "zwei Rechtecke. Die Formen besitzen eine einfarbige Füllung. Die Formen sind ineinander angeordnet. Ohne Text oder Zeichen.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              31.340104704074392,
+              42.400000000000006,
+              97.31979059185123,
+              115.19999999999999
+            ],
+            "parent": null
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              49.330858594486635,
+              68.37106805764834,
+              61.33828281102674,
+              63.257863884703305
+            ],
+            "parent": 0
+          }
+        ],
+        "input_sha256": "a0e49c6b3a9ce5655eed3e88cab5711ee41cf132c253d5e0d74bcd598b004325",
+        "reference_svg_sha256": "57d0a2d79fc3401af69340b5b6b76694827b6d1c6bf183bf6025d99487a806ca",
+        "image": "sources/holdout/layer_13.png"
+      },
+      {
+        "case_id": "layer_14",
+        "width": 180,
+        "height": 180,
+        "description": "zwei Kreise. Die Formen besitzen eine einfarbige Füllung. Die Formen liegen getrennt untereinander. Ohne Text oder Zeichen. Jede Form hat eine dunkle Kontur.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              56.64053574184191,
+              17.855860565195673,
+              54.288278869608654,
+              54.288278869608654
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              68.13964038295478,
+              109.7497118726589,
+              50.50057625468218,
+              50.50057625468218
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "1c9863d9b63ecf341cec4fe69e0d13f654ab7ab42f65af948a3108e0e267f138",
+        "reference_svg_sha256": "a72bc53788a64c6ffa7c63d5deb7dd22a194602078ba02d54c35ec716d54e1c7",
+        "image": "sources/holdout/layer_14.png"
+      },
+      {
+        "case_id": "layer_15",
+        "width": 190,
+        "height": 240,
+        "description": "zwei Kreise und ein Rechteck. Die Formen besitzen eine einfarbige Füllung. Die Formen sind ineinander angeordnet. Ohne Text oder Zeichen.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              26.599999999999994,
+              51.60000000000001,
+              136.79999999999998,
+              136.79999999999998
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              50.53999999999999,
+              75.54,
+              88.91999999999999,
+              88.91999999999999
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "rectangle",
+            "bbox": [
+              82.09798615588281,
+              106.7,
+              25.804027688234402,
+              26.6
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "52690b8141375c135464ad3bebdb644596886a1b0ee20b3d5eecca5c51b1f151",
+        "reference_svg_sha256": "0db4b2a049debaa1e609538896f0b585abdfa9183c0206c087e1a89e0b6455c8",
+        "image": "sources/holdout/layer_15.png"
+      },
+      {
+        "case_id": "layer_16",
+        "width": 180,
+        "height": 180,
+        "description": "zwei Kreise und ein Rechteck. Die Formen besitzen eine einfarbige Füllung. Die Formen liegen getrennt untereinander. Ohne Text oder Zeichen.",
+        "expected_objects": [
+          {
+            "kind": "rectangle",
+            "bbox": [
+              63.16223219814464,
+              13.733039705120756,
+              33.04429587628554,
+              32.53392058975849
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              78.92088146729498,
+              72.71649649235405,
+              34.56700701529189,
+              34.56700701529189
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              67.08706495334282,
+              132.60514298187744,
+              34.789714036245115,
+              34.789714036245115
+            ],
+            "parent": null
+          }
+        ],
+        "input_sha256": "19719399312a2640369e27b8c227774c5d975d47c798106be61c100c8aa14d1d",
+        "reference_svg_sha256": "6777a15e485c6bef48915d2dd90683a13252fff8a9cdeedbf662a0bd37600727",
+        "image": "sources/holdout/layer_16.png"
+      },
+      {
+        "case_id": "layer_17",
+        "width": 160,
+        "height": 200,
+        "description": "zwei Kreise. Die Formen besitzen eine einfarbige Füllung. Die Formen sind ineinander angeordnet. Ohne Text oder Zeichen. Jede Form hat eine dunkle Kontur.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              21.150000000000006,
+              41.150000000000006,
+              117.69999999999999,
+              117.69999999999999
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              41.31,
+              61.31,
+              77.38,
+              77.38
+            ],
+            "parent": 0
+          }
+        ],
+        "input_sha256": "9b0ea30cf8d4d363fbb8d15e854b6b927d80e1240d1c2cee3410a56103d6f01c",
+        "reference_svg_sha256": "29d0b4e9e41eaca63a3e6a77d7e630bb2d0d04000ad46ee48ef4665b50e957d7",
+        "image": "sources/holdout/layer_17.png"
+      }
+    ],
+    "plan_b": [
+      {
+        "case_id": "original",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 1.0,
+          "relative_x": 0.0,
+          "relative_y": 0.0
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              23.950000000000003,
+              23.950000000000003,
+              132.1,
+              132.1
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              46.63,
+              46.63,
+              86.74,
+              86.74
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              76.15,
+              76.15,
+              27.700000000000003,
+              27.700000000000003
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "bbe904a883e801c8aa07a021dc154f2a1b583e21f3534c450ff976279e8e8578",
+        "reference_svg_sha256": "1b8847831ec23f1ce57c9e082e554df1cbe9c9005b4341fb24f0e1bcd8e3a562",
+        "image": "sources/plan_b/original.png"
+      },
+      {
+        "case_id": "probe_01",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 0.98180159,
+          "relative_x": 0.00729817,
+          "relative_y": 0.00943507
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Das Motiv ist geringfügig kleiner dargestellt und geringfügig nach rechts und unten versetzt.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              26.465675580499997,
+              26.850317580499997,
+              129.695990039,
+              129.695990039
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              48.7329356417,
+              49.1175776417,
+              85.1614699166,
+              85.1614699166
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              77.7157185785,
+              78.1003605785,
+              27.195904043000002,
+              27.195904043000002
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "ca1ade3b0b0a92b92beae1047aae714312823ce6d8ad25ac3a27a01449ea7c9e",
+        "reference_svg_sha256": "7a303e271c99011c89ce9e378a50180c0a08aecf209e2cc0bb6bbe27f2e1e315",
+        "image": "sources/plan_b/probe_01.png"
+      },
+      {
+        "case_id": "probe_02",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 1.00811041,
+          "relative_x": 0.00906008,
+          "relative_y": -0.00979768
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Das gesamte Motiv ist etwas größer dargestellt und etwas nach rechts und oben versetzt.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              25.045121819500004,
+              21.650725019500005,
+              133.171385161,
+              133.171385161
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              47.9090659183,
+              44.514669118300006,
+              87.4434969634,
+              87.4434969634
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              77.6684852215,
+              74.2740884215,
+              27.924658357000002,
+              27.924658357000002
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "2ddbb007944bd4ac2752258813061751b8603077760886375684a72575670202",
+        "reference_svg_sha256": "cebd4d9192573497a5f9083277743ecd95873a04dc0194f504ab1d64f606247b",
+        "image": "sources/plan_b/probe_02.png"
+      },
+      {
+        "case_id": "probe_03",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 0.99485823,
+          "relative_x": 0.02474842,
+          "relative_y": -0.0049206
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Die gesamte Darstellung ist etwas kleiner dargestellt und ein wenig nach rechts und oben verschoben.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              28.7443295085,
+              23.4039059085,
+              131.420772183,
+              131.420772183
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              51.307714164900005,
+              45.967290564900004,
+              86.29400287019999,
+              86.29400287019999
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              80.67592911450001,
+              75.33550551450001,
+              27.557572971000003,
+              27.557572971000003
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "f26a930157e95084a4d558a0c2140fa376d7af4a14e6be789ab1256a0a16d2d3",
+        "reference_svg_sha256": "512fac252b9e5b31a38d5cd39e292108aa50b721b63367f6b42fe1d9071b84df",
+        "image": "sources/plan_b/probe_03.png"
+      },
+      {
+        "case_id": "probe_04",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 0.97709662,
+          "relative_x": -0.00823719,
+          "relative_y": -0.02006824
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Die gesamte Darstellung ist leicht kleiner dargestellt und ein wenig nach links und oben versetzt.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              23.980074049000006,
+              21.850485049000007,
+              129.074463502,
+              129.074463502
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              46.14062539060001,
+              44.011036390600005,
+              84.75336081879999,
+              84.75336081879999
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              74.98451761300001,
+              72.854928613,
+              27.065576374000003,
+              27.065576374000003
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "a56c784e645d63a130e1185d923bb20811ebe9ab9dc154322405e8867ac8b8bc",
+        "reference_svg_sha256": "43d18a7f350f9d4c257f5cf4a4acc19ebe38a73035360c1c6cb89e79081b5a27",
+        "image": "sources/plan_b/probe_04.png"
+      },
+      {
+        "case_id": "probe_05",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 0.99843945,
+          "relative_x": 0.0081767,
+          "relative_y": -0.01201874
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Die Darstellung ist ein wenig kleiner dargestellt und leicht nach rechts und oben verschoben.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              25.5248803275,
+              21.8897011275,
+              131.893851345,
+              131.893851345
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              48.169487053500006,
+              44.5343078535,
+              86.60463789299999,
+              86.60463789299999
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              77.6434196175,
+              74.0082404175,
+              27.656772765000003,
+              27.656772765000003
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "eefde900a3111a9c476f71ab89f82ba6b6c0ef5f38f75c0637dccdff16da14ac",
+        "reference_svg_sha256": "ac0c2b4587e58798205989b149b65a7174dc9e2a2ce937dd7374b85ec38638ec",
+        "image": "sources/plan_b/probe_05.png"
+      },
+      {
+        "case_id": "probe_06",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 0.97438219,
+          "relative_x": -0.00407946,
+          "relative_y": -0.01927294
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Die gesamte Darstellung ist leicht kleiner dargestellt und geringfügig nach links und oben versetzt.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              24.907753550499997,
+              22.172927150499998,
+              128.715887299,
+              128.715887299
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              47.0067416197,
+              44.271915219700006,
+              84.5179111606,
+              84.5179111606
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              75.77050386850001,
+              73.03567746850001,
+              26.990386663000002,
+              26.990386663000002
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "cc8615ebfe75fe05e9e4bd62493ec6a323ed676f79c69046d477b632e74f23ed",
+        "reference_svg_sha256": "ac62546e2f8b6ca75ce71c03ed05f9823e28ea666777269b4ad3bcb71d936370",
+        "image": "sources/plan_b/probe_06.png"
+      },
+      {
+        "case_id": "probe_07",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 1.0244851,
+          "relative_x": 0.00270301,
+          "relative_y": 0.01338003
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Die gesamte Darstellung ist ein wenig größer dargestellt und etwas nach rechts und unten versetzt.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              22.819300945000013,
+              24.74116454500001,
+              135.33448170999998,
+              135.33448170999998
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              46.054623013000004,
+              47.976486613000006,
+              88.86383757399999,
+              88.86383757399999
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              76.297423165,
+              78.219286765,
+              28.37823727,
+              28.37823727
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "60970c748096404e2cd002ef3ce09c842e1eae5e07510d0255721ddb71449ff0",
+        "reference_svg_sha256": "02359db306adfaa2e4a30c52f780c8d47a5719db0fc91505b97f44a66973494e",
+        "image": "sources/plan_b/probe_07.png"
+      },
+      {
+        "case_id": "probe_08",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 0.95223227,
+          "relative_x": -0.02179492,
+          "relative_y": 0.01957463
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Die gesamte Darstellung ist geringfügig kleiner dargestellt und geringfügig nach links und unten verschoben.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              23.181972966500005,
+              30.628491966500007,
+              125.78988286699999,
+              125.78988286699999
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              44.778600850100005,
+              52.22511985010001,
+              82.59662709979999,
+              82.59662709979999
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              72.8884974605,
+              80.3350164605,
+              26.376833879000003,
+              26.376833879000003
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "f966de3f221aa11e69ffd5eccd2c594c18cbeec712f823bbc7267555bf6ab6ef",
+        "reference_svg_sha256": "35640067cfdc7d3f3b3ffd1de19fb316a55b585670a55677b5f53429a746da25",
+        "image": "sources/plan_b/probe_08.png"
+      },
+      {
+        "case_id": "probe_09",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 0.9668615,
+          "relative_x": 0.01058353,
+          "relative_y": 0.01698268
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Die gesamte Darstellung ist etwas kleiner dargestellt und geringfügig nach rechts und unten versetzt.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              28.043833324999998,
+              29.195680324999998,
+              127.72240415,
+              127.72240415
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              49.972252145000006,
+              51.124099145,
+              83.86556651,
+              83.86556651
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              78.51400362500002,
+              79.66585062500002,
+              26.782063550000004,
+              26.782063550000004
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "da6efd77ac66b39fbfc87e1da4ab40f864d2a97ccf9236e3757ef73c5c08a94a",
+        "reference_svg_sha256": "cfa70a7fcc9f3d18f609352a251cbd4e9c7d58f0f0e4f154eb08adb94d813938",
+        "image": "sources/plan_b/probe_09.png"
+      },
+      {
+        "case_id": "probe_10",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 0.99824884,
+          "relative_x": 0.02255071,
+          "relative_y": 0.00883615
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Das Motiv ist ein wenig kleiner dargestellt und etwas nach rechts und unten versetzt.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              28.124791918,
+              25.656171118,
+              131.868671764,
+              131.868671764
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              50.765075609200004,
+              48.29645480920001,
+              86.58810438159999,
+              86.58810438159999
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              80.233381366,
+              77.764760566,
+              27.651492868000002,
+              27.651492868000002
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "219a223b1fd33aa745016e92bd5284decfc5f1ba80af82099587a08413c61486",
+        "reference_svg_sha256": "900be50dd2fa0e229dfb1ac0e48e621e561528302cf3d7495b14777ec6fdf23d",
+        "image": "sources/plan_b/probe_10.png"
+      },
+      {
+        "case_id": "probe_11",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 0.97564418,
+          "relative_x": 0.00884857,
+          "relative_y": -0.01206873
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Die gesamte Darstellung ist geringfügig kleiner dargestellt und leicht nach rechts und oben verschoben.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              27.151444511,
+              23.386330511,
+              128.882596178,
+              128.882596178
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              49.279054513400006,
+              45.5139405134,
+              84.62737617319999,
+              84.62737617319999
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              78.080070707,
+              74.31495670700001,
+              27.025343786,
+              27.025343786
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "b09690a746f4c9b5c3359d442b2a7c2cc802073e7d10b32639a2a8577192bc55",
+        "reference_svg_sha256": "f9d188f168763fbd1b460a99419e7b033170fa4ad71a82229aeb013e3eccd71c",
+        "image": "sources/plan_b/probe_11.png"
+      },
+      {
+        "case_id": "probe_12",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 0.98531067,
+          "relative_x": 0.00820624,
+          "relative_y": -0.00654617
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Das gesamte Motiv ist leicht kleiner dargestellt und ein wenig nach rechts und oben versetzt.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              26.3973534465,
+              23.741919646499998,
+              130.159539507,
+              130.159539507
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              48.744199442100005,
+              46.0887656421,
+              85.4658475158,
+              85.4658475158
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              77.8305704205,
+              75.1751366205,
+              27.293105559000004,
+              27.293105559000004
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "c039ae8da6d99f880d9221fd629037b079aa67215a70c985c0a639b73631d7b6",
+        "reference_svg_sha256": "3f56766b6056df5598d2a00449efab53649f40a370e496e607ebaab59b323e63",
+        "image": "sources/plan_b/probe_12.png"
+      },
+      {
+        "case_id": "probe_13",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 0.96636204,
+          "relative_x": 0.00938687,
+          "relative_y": 0.02402457
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Das Motiv ist geringfügig kleiner dargestellt und leicht nach rechts und unten versetzt.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              27.861423858000002,
+              30.496209858,
+              127.656425484,
+              127.656425484
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              49.7785149252,
+              52.4133009252,
+              83.8222433496,
+              83.8222433496
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              78.305522346,
+              80.94030834600001,
+              26.768228508000004,
+              26.768228508000004
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "8fcd4697043e1436c392d4d7904a6afe737282cec70c00cfc7745a31e31276df",
+        "reference_svg_sha256": "165d9abab48bf8d9a36867aa30b03d2e679e0c3733ec5c3799bc3158d9de70cf",
+        "image": "sources/plan_b/probe_13.png"
+      },
+      {
+        "case_id": "probe_14",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 0.99784567,
+          "relative_x": 0.00313431,
+          "relative_y": 0.01502933
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Das Motiv ist etwas kleiner dargestellt und leicht nach rechts und unten versetzt.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              24.656469296500006,
+              26.797572896500007,
+              131.815413007,
+              131.815413007
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              47.287609092100006,
+              49.42871269210001,
+              86.55313341579999,
+              86.55313341579999
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              76.7440132705,
+              78.8851168705,
+              27.640325059000002,
+              27.640325059000002
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "ee6e166869559242804440c13d721f6d2eb0c0ea09eef2fe29457b99a22175b0",
+        "reference_svg_sha256": "f231f18e4e5067956cddf03b18a7288740d84270e5907e98d177d3a5a97b9595",
+        "image": "sources/plan_b/probe_14.png"
+      },
+      {
+        "case_id": "probe_15",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 1.00179088,
+          "relative_x": 0.01852883,
+          "relative_y": -0.0218783
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Das Motiv ist leicht größer dargestellt und leicht nach rechts und oben verschoben.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              27.166901776000014,
+              19.893618376000013,
+              132.33657524799997,
+              132.33657524799997
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              49.8875189344,
+              42.6142355344,
+              86.8953409312,
+              86.8953409312
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              79.46038571200002,
+              72.18710231200001,
+              27.749607376,
+              27.749607376
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "60edcb252a109e25a651dbbb0ca141312f397453b4a11975ad7089e457743f65",
+        "reference_svg_sha256": "400a33f524e5d831962359ab60b9cea4f65023e496ae17eeb8a36c78aaa3a71d",
+        "image": "sources/plan_b/probe_15.png"
+      },
+      {
+        "case_id": "probe_16",
+        "width": 180,
+        "height": 180,
+        "variation": {
+          "scale": 0.94062259,
+          "relative_x": -0.01811449,
+          "relative_y": 0.00584832
+        },
+        "description": "drei Kreise. Alle Formen sind einfarbig gefüllt. Die Formen sind ineinander verschachtelt. Keine Beschriftung. Jede Form hat eine dunkle Kontur. Die gesamte Darstellung ist geringfügig kleiner dargestellt und ein wenig nach links und unten versetzt.",
+        "expected_objects": [
+          {
+            "kind": "circle",
+            "bbox": [
+              24.6112697305,
+              28.924575530499997,
+              124.256244139,
+              124.256244139
+            ],
+            "parent": null
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              45.9445900717,
+              50.2578958717,
+              81.5896034566,
+              81.5896034566
+            ],
+            "parent": 0
+          },
+          {
+            "kind": "circle",
+            "bbox": [
+              73.71176892849999,
+              78.0250747285,
+              26.055245743000004,
+              26.055245743000004
+            ],
+            "parent": 1
+          }
+        ],
+        "input_sha256": "e2aff6491864f4f677f40011714ac5116360a5e7d03c10d95212b36e04ce611b",
+        "reference_svg_sha256": "352b1971c95700654cf69a5076c0a79f74e58662149ed39ddcc32259e933a29e",
+        "image": "sources/plan_b/probe_16.png"
+      }
+    ]
+  }
+}

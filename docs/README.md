@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [GENERAL-SCENE-FILLED-02: gefüllte und verschachtelte Grundformszenen (2026-10-20)](next_arbeitspaket_2026-10-20_layered_scene.md)
+
 - [NEURAL-ELEMENTS-REAL-02: reale Trainingsregionen, getrennte Familien und zweiter optionaler Detektor (2026-10-19)](next_arbeitspaket_2026-10-19_neural_real_regions.md)
 
 - [Recovery-Merge: Belege bestätigt, unnötige Rohdatenversionierung und Grenzen (2026-10-19)](merge_audit_2026-10-19.md)

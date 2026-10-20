@@ -109,6 +109,18 @@ def _local_quality(reference, output):
 
 
 def fit_primitive_scene(width, height, *, description, image, render_fn, error_fn):
+    # Keep established outline scenes byte-identical; flat colored/nested
+    # scenes share the same CLI registration and supervised image budget.
+    fitted = _fit_outline_scene(width, height, description=description, image=image,
+                                render_fn=render_fn, error_fn=error_fn)
+    if fitted is not None:
+        return fitted
+    from src.iCCModules.imageCompositeConverterLayeredScene import fit_layered_scene
+    return fit_layered_scene(width, height, description=description, image=image,
+                             render_fn=render_fn, error_fn=error_fn)
+
+
+def _fit_outline_scene(width, height, *, description, image, render_fn, error_fn):
     counts = description_counts(description)
     if counts is None:
         return None

@@ -1,5 +1,11 @@
 # ImageConverter
 
+Das [Szenenfolgepaket GENERAL-SCENE-FILLED-02](docs/next_arbeitspaket_2026-10-20_layered_scene.md)
+ergänzt gefüllte und vollständig verschachtelte Kreis-/Rechteckinstanzen.
+Unabhängige Objekt- und Regionsprüfungen bestehen bei 36 echten CLI-Vergleichen
+und einer erweiterten 17-Fälle-Vorlage. Allgemeine Fusion und partielle
+Überdeckungen bleiben Folgearbeit; die bestehenden Qualitätsgrenzen gelten weiter.
+
 Das [reale CNN-Folgepaket NEURAL-ELEMENTS-REAL-02](docs/next_arbeitspaket_2026-10-19_neural_real_regions.md)
 ergänzt unabhängig markierte Regionen, getrennte reale Trainings-/Prüffamilien
 und einen zweiten optionalen Detektor. Mehrstufige Vorschläge verbessern die

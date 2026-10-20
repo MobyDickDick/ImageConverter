@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="190" viewBox="0 0 240 190">
+  <defs>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="40.724" y1="21.384" x2="199.276" y2="21.384">
+      <stop offset="0%" stop-color="#787878"/>
+      <stop offset="50%" stop-color="#d88079"/>
+      <stop offset="100%" stop-color="#787878"/>
+    </linearGradient>
+  <clipPath id="innerRect"><rect x="40.7237" y="21.3845" width="158.55259999999998" height="147.231"/></clipPath>
+  </defs>
+  <rect x="0" y="0" width="240" height="190" fill="#ffffff" stroke="none"/>
+  <rect x="40.724" y="21.384" width="158.553" height="147.231" fill="url(#panelGradient)" stroke="none"/>
+  <rect x="40.7237" y="21.3845" width="158.55259999999998" height="147.231" fill="none" stroke="#bebebe" stroke-width="0.80"/>
+</svg>
