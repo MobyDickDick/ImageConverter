@@ -132,11 +132,6 @@
       ".tmp/fusion-layered-compat-holdout/report.json"
     ]
   },
-  "compact_evidence": {
-    "manifest_sha256": "3d4bf86871c75e7f5f7ddd4a1e61ce50d4dc28df41b0611967552feceb15567c",
-    "summary_sha256": "ec7f414618dcc5953430e491ad16501a4dc3b3a0b993d3371ce8fb2e5e1b24d5",
-    "verified": true
-  },
   "compileall_passed": true,
   "cli_help_passed": true,
   "whitespace_check": "git -c core.whitespace=cr-at-eol diff --check",
@@ -199,5 +194,22 @@
     "covered_test_ids": 3689,
     "missing_test_ids": [],
     "known_failed_attempt_retained": true
+  },
+  "local_full_evidence": {
+    "directory": ".tmp/fusion-full-evidence",
+    "manifest_sha256": "3d4bf86871c75e7f5f7ddd4a1e61ce50d4dc28df41b0611967552feceb15567c",
+    "summary_sha256": "ec7f414618dcc5953430e491ad16501a4dc3b3a0b993d3371ce8fb2e5e1b24d5",
+    "verified": true,
+    "archive": ".tmp/fusion-evidence-d73eb727c.zip",
+    "archive_sha256": "bbacfde938f7c88977ca7c9163604b54eed7c03b6934dfe6747e07ab80ae9ecc",
+    "versioned": false
+  },
+  "history_slimming": {
+    "original_commit": "d73eb727c224197b52478673f7ab8232f00d09ff",
+    "git_backup": ".tmp/fusion-before-slim-d73eb727c.bundle",
+    "published_base": "2cefc41b7e4d674937fdb00e3d5ba0fd3ac4ffdd",
+    "original_new_objects": 149,
+    "original_thin_pack_bytes": 265785,
+    "runtime_source_unchanged": true
   }
 }

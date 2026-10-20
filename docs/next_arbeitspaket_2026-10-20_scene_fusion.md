@@ -1,7 +1,9 @@
 # Gemeinsame Szenenauswahl und partielle Überdeckungen – GENERAL-SCENE-01
 
 Branch: `codex/general-scene-fusion-2026-10-20`.
-Elternstand: `1f234c9c976cfd76a52448bf0c92a6bcdf80e993`.
+Messbaseline: `1f234c9c976cfd76a52448bf0c92a6bcdf80e993`.
+Der schlanke Arbeitscommit baut auf `main` mit Stand `2cefc41b7` auf; dessen
+Dateibaum ist mit der Messbaseline identisch.
 
 Das in `open_tasks.md` als nächste Architekturarbeit bezeichnete Paket
 ergänzt die vorhandenen getrennten und vollständig verschachtelten Szenen um
@@ -79,11 +81,20 @@ Die endgültige erweiterte Vorlage verwendet Seed 593187. Beide wurden nach
 dem letzten Runtime-Code-Freeze erzeugt; ihre Ergebnisse ändern keine Geometrie
 oder Qualitätsgrenze.
 
-Die kompakten Raster-/SVG-Paare und beobachteten Runtime-Nachweise liegen unter
-`artifacts/evaluation/fused_scene_v1/`. Sie lassen sich ohne vorherigen lokalen
-Konvertierungslauf erneut prüfen. Vollständige Protokolle bleiben unter
-`.tmp/fusion-*`; der neue CI-Job lädt seinen eigenen vollständigen Lauf hoch.
-Die synthetischen Nachweise werden nicht dem abgenommenen Katalog hinzugefügt.
+Versioniert sind nur die kleinen Ergebniszusammenfassungen und Prüfzahlen unter
+`artifacts/evaluation/fused_scene_v1/`. Die vollständigen 123 Nachweisdateien
+mit Raster-/SVG-Paaren, Manifest und Runtime-Einzelmessungen bleiben lokal unter
+`.tmp/fusion-full-evidence/`; zusätzlich liegen sie in
+`.tmp/fusion-evidence-d73eb727c.zip`. Der ursprüngliche Commit ist im lokalen
+Git-Bundle `.tmp/fusion-before-slim-d73eb727c.bundle` gesichert.
+
+Der schlanke Commit enthält keine erzeugten PNGs, SVGs oder Rohmanifeste.
+Die `.gitignore` verhindert ihre erneute versehentliche Aufnahme. Nach einem
+frischen Clone sind die lokalen Rohdaten nicht vorhanden: Neue Szenen mit den
+unten angegebenen CLI-Befehlen erzeugen, konvertieren und deren eigene Ausgaben
+erneut prüfen. Die kompakte Zusammenfassung allein ist kein Ersatz für eine
+unabhängige Raster-/SVG-Prüfung. CI lädt seinen eigenen vollständigen Lauf als
+Artefakt hoch. Die synthetischen Szenen gehören nicht zum abgenommenen Katalog.
 
 ## Ergebnisse und Bestandsschutz
 
@@ -102,7 +113,7 @@ Ein Erfolg verlangt zusätzlich sämtliche Objekt-/Regionsprüfungen.
 Die Laufzeiten unter paralleler lokaler Testlast begründen keine allgemeine
 Beschleunigungsquote. Ein entfernter CI-Lauf wurde nicht gestartet.
 
-![Quelle, Elternausgabe und neue gemeinsame Szenenauswahl](../artifacts/evaluation/fused_scene_v1/comparison.png)
+Die Vergleichsgrafik `comparison.png` ist im lokalen vollständigen Nachweis enthalten.
 
 Alle **377 Archivpaare** und ihr Index bleiben hashgleich. Aus geschützten
 Kopien erneut konvertiert bestehen **377/377** die bestehende absolute
@@ -149,6 +160,7 @@ Prüfzahlen, XML-Prüfsummen und der Wiederholungslauf stehen in `checks.json`.
 .venv/Scripts/python.exe -m tools.evaluate_fused_scene --inputs .tmp/fused-inputs --output .tmp/fused-cli --verify-only --require-all
 .venv/Scripts/python.exe -m tools.evaluate_fused_scene --prepare .tmp/fused-plan-b-inputs --seed 593187 --count 12 --rotate --paraphrase --variations
 .venv/Scripts/python.exe -m tools.evaluate_fused_scene --inputs .tmp/fused-plan-b-inputs --output .tmp/fused-plan-b-cli --require-all
+# Optional: vorhandenen vollstaendigen lokalen Nachweis pruefen
 .venv/Scripts/python.exe -m tools.summarize_fused_scene_evaluation --verify-only
 .venv/Scripts/python.exe -m pytest -q tests/test_scene_fusion.py tests/test_layered_scene_runtime.py tests/test_primitive_scene_runtime.py
 ```

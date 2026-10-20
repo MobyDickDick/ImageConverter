@@ -1,4 +1,4 @@
-"""Retain independently replayable compact evidence for native scene fusion."""
+"""Build or verify local full scene-fusion evidence (generated files stay out of Git)."""
 import argparse
 from pathlib import Path
 
@@ -18,10 +18,12 @@ RUNS = [('development_before', 'development', 'fusion-baseline'),
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--work-dir', type=Path, default=Path('.tmp'))
-    parser.add_argument('--output', type=Path, default=Path('artifacts/evaluation/fused_scene_v1'))
+    parser.add_argument('--output', type=Path, default=Path('.tmp/fusion-full-evidence'))
     parser.add_argument('--verify-only', action='store_true')
     args = parser.parse_args()
     if args.verify_only:
+        if not (args.output/'manifest.json').is_file():
+            parser.error('Full local evidence is missing. Use --output with a generated full evidence directory; Git contains compact summaries only.')
         verify(args.output)
     else:
         build(args.work_dir, args.output, datasets=DATASETS, runs=RUNS)
