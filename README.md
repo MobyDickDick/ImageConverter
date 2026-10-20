@@ -1,5 +1,10 @@
 # ImageConverter
 
+Die [gemeinsame Szenenauswahl GENERAL-SCENE-01](docs/next_arbeitspaket_2026-10-20_scene_fusion.md)
+führt vollständige Formgrenzen und sichtbare Kreisbögen/Rechteckseiten zusammen.
+Sie ergänzt partielle Überdeckungen und prüft konkurrierende Zeichenreihenfolgen
+an Raster und Beschreibung unter den bestehenden Qualitätsgrenzen.
+
 Das [Szenenfolgepaket GENERAL-SCENE-FILLED-02](docs/next_arbeitspaket_2026-10-20_layered_scene.md)
 ergänzt gefüllte und vollständig verschachtelte Kreis-/Rechteckinstanzen.
 Unabhängige Objekt- und Regionsprüfungen bestehen bei 36 echten CLI-Vergleichen

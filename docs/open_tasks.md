@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-20)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `486` · Erledigt `446` · Offen `40`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `487` · Erledigt `447` · Offen `40`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -38,7 +38,9 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 - [x] **GENERAL-SCENE-FILLED-02:** Nächsten gefüllten/verschachtelten Teilumfang abgeschlossen: ein bis drei native Kreis-/Rechteckinstanzen, farbbasierte Formalternativen, räumliche Deduplizierung, Anzahl-/Negations-/Beziehungsabgleich und gemeinsame Rasterverfeinerung im überwachten CLI-Pfad. 18 eingefrorene Entwicklungs- und 18 neue finale Prüfszenen verbessern sich von 0/18 auf jeweils 18/18; 18 Umbenennungen sind bytegleich, eine unabhängige verschachtelte Plan-B-Vorlage besteht 17/17. Unabhängige Objekt-/Regionsprüfung und beschädigte Gegenproben, unveränderte Qualitätsgrenzen und CI-Smoke. Allgemeine Fusion/partielle Überdeckungen verbleiben bei GENERAL-SCENE-01; keine CNN-Standardübernahme. Details: `docs/next_arbeitspaket_2026-10-20_layered_scene.md`.
 
-- [ ] **GENERAL-SCENE-01:** Allgemeinen Szenenweg für ein bis drei getrennte Kreise/Rechtecke einschließlich gemischter Anordnungen aufbauen. Instanzen erhalten und doppelte Erkennungen deduplizieren, Beschreibung einschließlich Anzahl/Negationen mit Rasterkandidaten abgleichen, alternative Szenen bei gleichem Budget vergleichen und gemeinsam verfeinern. Echte eingefrorene CLI-Baseline und unabhängige Objektzahl-/Positionsprüfung vor der Umsetzung; unbekannte Anordnungen und Formulierungen, unveränderte Gates und Bestandsschutz für alle 343 Archivpaare. Umfang und Schritte: `docs/reconstruction_bottleneck_audit_2026-10-17.md`. **Teilergebnis 2026-10-17:** Gemeinsamer Rasterfit für ein bis drei getrennte Kreis-/Rechteckkonturen, 24 echte CLI-Vergleiche mit Objektprüfung und nachgewiesene Fehlfreigabe einer absichtlich beschädigten Szene: `docs/primitive_scene_improvement_2026-10-17.md`. Der gefüllte/verschachtelte Folgeumfang ist als GENERAL-SCENE-FILLED-02 abgeschlossen (2026-10-20). Allgemeine Detektorfusion, partielle Überdeckungen und weitere Topologien bleiben offen; die begrenzten Szenenwege ersetzen nicht pauschal den historischen Perception-IR-Merge.
+- [x] **GENERAL-SCENE-01:** Begrenzten allgemeinen Szenenweg für ein bis drei Kreis-/Rechteckinstanzen einschließlich gemischter Anordnungen abgeschlossen. Gemeinsame Instanzgruppen führen vollständige Vordergrund-/Farbgrenzen, sichtbare Kreisbögen und Rechteckseiten zusammen; Formalternativen und Zeichenreihenfolgen konkurrieren im gemeinsamen überwachten Rasterfit. Beschreibung, Anzahl, Negationen und tatsächliche native Beziehungen bleiben verbindlich. Bestehende getrennte Kontur-/Flächen- und vollständig verschachtelte Szenen behalten Vorrang. Zwölf vorab eingefrorene und zwölf nach endgültigem Code-Freeze erzeugte CLI-Szenen verbessern sich von jeweils 0/12 auf 12/12; unabhängige native Objekt-/Regionsprüfung, bytegleiche Umbenennungen und 17/17 erweiterte Varianten. 377/377 Archiv-Neukonvertierungen bestehen; alle gespeicherten Paare bleiben hashgleich. Umfang und Nachweise: `docs/next_arbeitspaket_2026-10-20_scene_fusion.md`. Der historische Perception-IR-Merge anderer Detektoren bleibt bestehen; der Abschluss gilt für den beschriebenen begrenzten Kreis-/Rechteckvertrag.
+
+- [ ] **GENERAL-SCENE-VISIBILITY-04:** Den gemeinsamen Szenenweg auf Überdeckung mit eigenen Konturen, kombinierte Verschachtelung/Teilüberdeckung und explizite sprachliche Tiefenreihenfolgen ausdehnen. Nicht beobachtbare Geometrie weiterhin als unsicher behandeln; weitere Detektorfamilien/Formarten erst mit eigenen unbekannten Szenen und unveränderten unabhängigen Objekt-/Regionsgates übernehmen. Grenzen und Ausgangsstand: `docs/next_arbeitspaket_2026-10-20_scene_fusion.md`.
 
 ## Katalog-CI (2026-10-11)
 
@@ -52,11 +54,11 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 - [x] **AC0232 – Dreiwegeventil mit angeschlossener M-Scheibe:** eigenständige Beschreibungen, vollständiger Rasterfit und diagonale Pfadverläufe. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. 377 Archivpaare; alle 374 bisherigen Datensätze bleiben unverändert. Die gefilterte reguläre Rotation ist anschließend leer. Nächstes Architekturpaket: SEARCH-DEADLINE-01. Details: `docs/next_arbeitspaket_2026-10-18_ac0232_m.md`.
 
-**Neuester Architekturabschluss:** GENERAL-SCENE-FILLED-02 mit gemeinsamem Rasterfit für gefüllte und vollständig verschachtelte Kreis-/Rechteckinstanzen. 36 echte CLI-Vergleiche verbessern sich von jeweils 0/18 auf 18/18; eine unabhängige erweiterte Vorlage besteht 17/17. Details: `docs/next_arbeitspaket_2026-10-20_layered_scene.md`.
+**Neuester Architekturabschluss:** GENERAL-SCENE-01 mit gemeinsamer Detektorfusion und partiellen Überdeckungen im begrenzten Kreis-/Rechteckumfang. Vollständige Grenzen und sichtbare Kreisbögen/Rechteckseiten liefern gemeinsame Instanzgruppen; alternative Zeichenreihenfolgen werden unter unveränderten Gates geprüft. Details: `docs/next_arbeitspaket_2026-10-20_scene_fusion.md`. Der vorherige gefüllte/verschachtelte Umfang bleibt als GENERAL-SCENE-FILLED-02 dokumentiert.
 
 **Vorherige Architekturarbeit:** COMPONENT-VALUE-01 hat die sechs Such-Bots mit echten Runtime-Schaltern und unabhängigen Gegenproben vermessen; bei unklarer Evidenz bleiben alle erhalten. NEURAL-ELEMENTS-01 und NEURAL-ELEMENTS-REAL-02 sind als begrenzte Experimente ohne belastbaren End-to-End-Nutzen abgeschlossen. Die produktive Netzabnahme bleibt offen. Nachweise: `docs/next_arbeitspaket_2026-10-18_component_value.md`, `docs/next_arbeitspaket_2026-10-19_neural_elements.md` und `docs/next_arbeitspaket_2026-10-19_neural_real_regions.md`.
 
-**Nächste Architekturarbeit:** GENERAL-SCENE-01 für übergreifende Detektorfusion und partielle Überdeckungen. Breitere reale Familien und weitere Komponenten bleiben Folgearbeit; IDO-19/IDO-21 und historische Kompatibilitätsaufsicht bleiben offen.
+**Nächste Architekturarbeit:** GENERAL-SCENE-VISIBILITY-04 für eigene Konturen bei Überdeckung, kombinierte Topologien und sprachliche Tiefenreihenfolgen. Breitere reale Familien und weitere Komponenten bleiben Folgearbeit; IDO-19/IDO-21 und historische Kompatibilitätsaufsicht bleiben offen.
 
 **Neuester Familienabschluss:** AC0232 M/L/S. Keine weiteren Kandidaten in der bisherigen gefilterten Rotation; offene Architektur- und Bestandsaufgaben bleiben bestehen.
 

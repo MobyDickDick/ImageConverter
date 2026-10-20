@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [GENERAL-SCENE-01: Detektorfusion, partielle Überdeckungen und unabhängige Szenenprüfung (2026-10-20)](next_arbeitspaket_2026-10-20_scene_fusion.md)
+
 - [GENERAL-SCENE-FILLED-02: gefüllte und verschachtelte Grundformszenen (2026-10-20)](next_arbeitspaket_2026-10-20_layered_scene.md)
 
 - [NEURAL-ELEMENTS-REAL-02: reale Trainingsregionen, getrennte Familien und zweiter optionaler Detektor (2026-10-19)](next_arbeitspaket_2026-10-19_neural_real_regions.md)

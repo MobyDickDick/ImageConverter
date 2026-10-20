@@ -222,3 +222,6 @@ Detektorfamilien, partielle Überdeckungen und den Anschluss weiterer Topologien
 offen. Der historische allgemeine Perception-IR-Merge wird in diesem Paket
 nicht pauschal umgestellt. NEURAL-ELEMENTS-01, IDO-19/IDO-21 und
 SEARCH-DEADLINE-COMPAT behalten ihren bisherigen offenen Status.
+
+Das nachfolgende begrenzte Fusions-/Überdeckungspaket ist separat dokumentiert:
+[GENERAL-SCENE-01](next_arbeitspaket_2026-10-20_scene_fusion.md).

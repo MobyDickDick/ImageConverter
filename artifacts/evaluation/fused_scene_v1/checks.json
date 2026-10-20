@@ -1,0 +1,203 @@
+{
+  "parent_commit": "1f234c9c976cfd76a52448bf0c92a6bcdf80e993",
+  "toolchain": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "opencv": "4.14.0",
+    "pymupdf": "1.26.7"
+  },
+  "frozen_runtime": {
+    "src/iCCModules/imageCompositeConverterSceneFusion.py": "567c18a77f906df3dcdcdf1300dc3a892b24843c844e3aa50737432db70e6af6",
+    "src/iCCModules/imageCompositeConverterLayeredScene.py": "982e4fbe8c626b8473281968ba4070328b82decc80f961b25f373c107f09f479",
+    "src/iCCModules/imageCompositeConverterPrimitiveScene.py": "96793a12014df46f575e0c3a9852514649a9db3ac0faf690193f88e9dc2dea8a",
+    "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "b579d4f83b26a0970f62af11990628693d269f1c75d27e1274bd1727bb1a5e24"
+  },
+  "targeted_regression": {
+    "tests": 198,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 198,
+    "xml": ".tmp/fusion-targeted-complete.xml",
+    "xml_sha256": "d1b3826fb1cb16de12fdf8a347c4762a320643006366d0f76d445727276507fc"
+  },
+  "first_targeted_attempt": {
+    "tests": 153,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 152,
+    "xml": ".tmp/fusion-existing-tests.xml",
+    "xml_sha256": "71f05aeb95e2d643f85b13907b3c18e0ccd1a16ca7b7ec44f9ec51cdfd50f66f",
+    "note": "Initial worker integration failure retained; isolated retry and two subsequent targeted runs passed; cause not independently established."
+  },
+  "worker_retry": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 1,
+    "xml": ".tmp/fusion-worker-retest.xml",
+    "xml_sha256": "11f34d40bb3777b64361ee5c48a0ed1b484ef8fff000adfd388df1275bd90b31"
+  },
+  "ci_smoke": {
+    "local_passed": 6,
+    "remote_run_started": false,
+    "independent_verification": true,
+    "report": ".tmp/fusion-complete-ci/report.json",
+    "report_sha256": "dbc2c4e54f59f4cfe764b00a9d470b5ad4daf94cf89a330d49fc518a651db617"
+  },
+  "archive": {
+    "pairs": 377,
+    "reconverted": 377,
+    "passed": 377,
+    "unchanged": true,
+    "index_sha256": "3cdfd0311b6acfe79df525aaeeac8bde79fb879daebac16e5f635a88892f053b",
+    "report": ".tmp/fusion-archive/report.json",
+    "report_sha256": "bf56849ff9b14d8f9cdd4ad027dcb13563f54d44764674f4b207e9d87569a1f1",
+    "fusion_contract_matches": 0,
+    "worse_than_stored_best": [
+      "AC0232_L",
+      "AC0232_M",
+      "AC0232_S",
+      "AC0411_S",
+      "AC0840_L",
+      "AC0840_M",
+      "AC0840_S",
+      "AC0850_L",
+      "AC0850_M",
+      "AC0850_S",
+      "AC0910_S",
+      "AC0920_L",
+      "AC0920_M",
+      "AC0920_S",
+      "AC0921_L",
+      "AC0921_M",
+      "AC0921_S",
+      "AC1000_L",
+      "AC1000_S",
+      "AC0800_S",
+      "AC0811_L",
+      "AC0811_M",
+      "AC0811_S",
+      "AC0813_L",
+      "AC0813_M",
+      "AC0813_S",
+      "AC0814_L",
+      "AC0814_M",
+      "AC0831_L",
+      "AC0831_M",
+      "AC0831_S",
+      "AC0832_S",
+      "AC0834_M",
+      "AC0834_S",
+      "AC0835_L",
+      "AC0835_S",
+      "AC0836_L",
+      "AC0836_M",
+      "AC0838_M",
+      "AC0839_M",
+      "AC0881_M"
+    ],
+    "differences_from_previous_reconversion": [
+      {
+        "variant": "AC0413_S",
+        "current": 92.73750305175781,
+        "previous": 92.33499908447266
+      },
+      {
+        "variant": "AC0414_L",
+        "current": 63.00062561035156,
+        "previous": 61.979373931884766
+      },
+      {
+        "variant": "AC0421_S",
+        "current": 96.55999755859375,
+        "previous": 95.46749877929688
+      },
+      {
+        "variant": "AC0840_M",
+        "current": 713.8499755859375,
+        "previous": 1235.54248046875
+      }
+    ],
+    "note": "Absolute archive gate passed. This is not equality with stored best vectors. Fusion contract matches none; final local geometry guards do not apply to archived descriptions."
+  },
+  "prior_layered_scenes": {
+    "cases": 36,
+    "passed": 36,
+    "byte_identical": 36,
+    "reports": [
+      ".tmp/fusion-layered-compat-development/report.json",
+      ".tmp/fusion-layered-compat-holdout/report.json"
+    ]
+  },
+  "compact_evidence": {
+    "manifest_sha256": "3d4bf86871c75e7f5f7ddd4a1e61ce50d4dc28df41b0611967552feceb15567c",
+    "summary_sha256": "ec7f414618dcc5953430e491ad16501a4dc3b3a0b993d3371ce8fb2e5e1b24d5",
+    "verified": true
+  },
+  "compileall_passed": true,
+  "cli_help_passed": true,
+  "whitespace_check": "git -c core.whitespace=cr-at-eol diff --check",
+  "standard_deadline_retry": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 1,
+    "xml": ".tmp/fusion-deadline-retry.xml",
+    "xml_sha256": "47516044256a13eaa687456385de494188ec896d3bcf39dd058e426c6e29f4a3"
+  },
+  "white_background_development_regression": {
+    "tests": 198,
+    "failures": 3,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 195,
+    "xml": ".tmp/fusion-targeted-background-final.xml",
+    "xml_sha256": "27a714878af771e124937da55732bfe80fac4996a64a2d3a8c83d1dd3d3b23e8"
+  },
+  "white_background_correction": {
+    "tests": 45,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 45,
+    "xml": ".tmp/fusion-white-tests.xml",
+    "xml_sha256": "154d08e334c3dcccae921fb2de35a9c340832a03ef536e1239f6c9f1efa5ab77"
+  },
+  "white_background_development_cli": {
+    "report": ".tmp\\fusion-delivery-holdout\\report.json",
+    "report_sha256": "14f6b1722a2f46029ff6874186527079d8107ef28f9c2b74a682ba8044aba25a",
+    "completed": 12,
+    "accepted": 0,
+    "note": "Development failure: casefold turns sharp s into ss; fixed before the new final datasets, without geometry or quality-limit tuning."
+  },
+  "interrupted_development_rename": {
+    "report": ".tmp\\fusion-delivery-renamed\\report.json",
+    "report_sha256": "6f3153b4b76f06118399b916a3d81a839876b84ed2b636467c1af34275d1fb2f",
+    "completed": 3,
+    "matrix_complete": false,
+    "counted_in_final_matrix": false
+  },
+  "standard_profile": {
+    "tests": 3679,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 30,
+    "passed": 3648,
+    "xml": ".tmp/fusion-standard-final.xml",
+    "xml_sha256": "634fbe9bd6c3e22ebdc5c09f842b715e6d20db94a259eb05844f0712dae23035",
+    "failed_nodes": [
+      "tests/test_neural_elements.py::test_blocked_real_inference_is_inside_the_process_deadline"
+    ],
+    "note": "Collected before the last local relation/language guards. Final affected modules passed all 198 release tests. One existing two-second startup probe lacked its inference-entry marker; isolated retry and final targeted run passed without changing its budget or assertion."
+  },
+  "current_profile_coverage": {
+    "current_test_ids": 3689,
+    "covered_test_ids": 3689,
+    "missing_test_ids": [],
+    "known_failed_attempt_retained": true
+  }
+}
