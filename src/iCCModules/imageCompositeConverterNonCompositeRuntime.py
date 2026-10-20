@@ -1498,6 +1498,10 @@ def runNonCompositeIterationImpl(
                         key: fitted[key] for key in ('source', 'initial_error', 'error',
                             'evaluations', 'object_kinds', 'object_quality', 'neural_scene_selected')
                     }
+                    params['primitive_scene_registration'].update({
+                        key: fitted[key] for key in ('scene_detectors', 'scene_hypotheses', 'instance_groups')
+                        if key in fitted
+                    })
                 if status in {"non_composite_raster_circle_linework", "non_composite_raster_alarm_bell", "non_composite_raster_zigzag_panel", "non_composite_raster_checkbox_checkmark", "non_composite_raster_chevron_panel", "non_composite_raster_three_way_valve"}:
                     params[fitted['source']] = {
                         'initial_error': fitted['initial_error'], 'final_error': fitted['error'],

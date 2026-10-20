@@ -73,10 +73,10 @@ def verify(output):
     print('Compact evidence verified:', {name: run['accepted'] for name, run in summary['runs'].items()})
 
 
-def build(work, output):
+def build(work, output, *, datasets=DATASETS, runs=RUNS):
     output.mkdir(parents=True, exist_ok=False)
     manifest = dict(schema_version='layered_scene_inputs_v1', datasets={})
-    for dataset, folder in DATASETS.items():
+    for dataset, folder in datasets.items():
         cases = read(work/folder/'manifest.json')
         retained = []
         for case in cases:
@@ -91,9 +91,9 @@ def build(work, output):
     write(output/'manifest.json', manifest)
     summary = dict(schema_version='layered_scene_evidence_v1', evidence_kind='real_cli',
                    budget_seconds=5, search_seed=17, iterations=64, runs={})
-    for name, dataset, folder in RUNS:
+    for name, dataset, folder in runs:
         directory = work/folder
-        verify_report(work/DATASETS[dataset], directory, require_all='before' not in name)
+        verify_report(work/datasets[dataset], directory, require_all='before' not in name)
         report = read(directory/'report.json')
         retained = []
         for original, result in zip(manifest['datasets'][dataset], report['cases']):

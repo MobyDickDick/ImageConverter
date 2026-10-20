@@ -191,102 +191,134 @@ def fit_layered_scene(width, height, *, description, image, render_fn, error_fn)
     if np.max(abs(border.astype(float)-255)) > 3:
         return None
     groups = detect_instances(pixels)
+    return fit_scene_groups(width, height, contract=contract, groups=groups, image=pixels,
+                            render_fn=render_fn, error_fn=error_fn)
+
+
+def fit_scene_groups(width, height, *, contract, groups, image, render_fn, error_fn,
+                     compatible_fn=_compatible, all_orders=False, source='primitive_layered_scene_v1'):
+    """Fit complete native scenes from fused instance alternatives at one budget."""
+    pixels = np.asarray(image)
     n = sum(contract['counts'].values())
     # Unexplained analytic instances are not discarded even if a global score
     # could hide them. A count mismatch must return to the broader converter.
     if len(groups) != n:
         return None
     best, tried = None, 0
-    for selection in itertools.combinations(groups, n):
-        for scene in itertools.product(*selection):
-            # The foreground can supply an enclosing blob already represented
-            # by a color region. Only complete, nonduplicated scenes survive.
-            if not _compatible(scene, contract):
-                continue
-            tried += 1
-            if tried > 24:
-                return best
-            scene = sorted(scene, key=lambda c: -float(np.prod(_box(c)[2:]-_box(c)[:2])))
-            kinds = [c['kind'] for c in scene]
-            filled = [c['fill'] is not None for c in scene]
-            stroked = [c['geometry'][4] > 0 for c in scene]
-            geometry_parameters = []
-            # Independent centers/diameters and rectangle sides avoid an
-            # artificial local minimum when only one visible edge must move.
+    scenes = itertools.product(*groups)
+    if all_orders:
+        # Bound proposal expansion before rendering/ranking; no detector can
+        # create an exponential unbudgeted scene queue.
+        scenes = list(itertools.islice(scenes, 64))
+        scenes = [order for scene in scenes for order in itertools.permutations(scene)]
+        # Cheap analytic color raster ranking reserves the image budget for
+        # plausible painter orders. Final decisions use the real SVG renderer.
+        yy, xx = np.indices((height, width), dtype=float)
+        def order_loss(scene):
+            from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
+            session = current_search()
+            if session and session.time_reason():
+                return float('inf')
+            raster = np.full(pixels.shape, 255., dtype=float)
             for c in scene:
-                g = np.array(c['geometry'], dtype=float)
-                if c['kind'] == 'circle':
-                    g[:2] += g[2:4]/2
-                else:
-                    g[2:4] += g[:2]
-                geometry_parameters.append(g)
-            parameters = np.r_[np.concatenate(geometry_parameters),
-                               np.concatenate([np.r_[c['stroke'], c['fill'] if c['fill'] is not None else [255]*3] for c in scene])]
-            regions = [(max(0, int(_box(c)[0])-3), max(0, int(_box(c)[1])-3),
-                        min(width, int(np.ceil(_box(c)[2]))+3), min(height, int(np.ceil(_box(c)[3]))+3)) for c in scene]
-
-            def build(p):
-                shapes = []
-                for i, kind in enumerate(kinds):
-                    x, y, w, h, sw = p[5*i:5*i+5]
-                    if kind == 'circle':
-                        h = w
-                    else:
-                        w, h = w-x, h-y
-                    stroke, fill = p[5*n+6*i:5*n+6*i+6].reshape(2, 3)
-                    style = f'fill="{_hex(fill) if filled[i] else "none"}" stroke="{_hex(stroke) if stroked[i] else "none"}" stroke-width="{sw:.4f}"'
-                    if kind == 'circle':
-                        shapes.append(f'<circle cx="{x:.4f}" cy="{y:.4f}" r="{w/2:.4f}" {style}/>')
-                    else:
-                        shapes.append(f'<rect x="{x:.4f}" y="{y:.4f}" width="{w:.4f}" height="{h:.4f}" {style}/>')
-                return f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"><rect width="{width}" height="{height}" fill="#ffffff"/>' + ''.join(shapes) + '</svg>'
-
-            def valid(p):
-                adjusted = []
-                for i, kind in enumerate(kinds):
-                    geometry = p[5*i:5*i+5].copy()
-                    if kind == 'circle':
-                        geometry[3] = geometry[2]
-                        geometry[:2] -= geometry[2]/2
-                    else:
-                        geometry[2:4] -= geometry[:2]
-                    x, y, w, h, sw = geometry
-                    if min(w, h) < 5 or (stroked[i] and not .7 <= sw <= min(w, h)/4):
-                        return False
-                    if not stroked[i]:
-                        if sw != 0:
-                            return False
-                    if x-sw/2 < 1 or y-sw/2 < 1 or x+w+sw/2 > width-1 or y+h+sw/2 > height-1:
-                        return False
-                    # A circle has one radius, so height follows width.
-                    if kind == 'circle':
-                        geometry[3] = geometry[2]
-                    adjusted.append(dict(scene[i], geometry=geometry))
-                return _compatible(adjusted, contract)
-
-            def loss(a, b):
-                # Use the production MAE metric in every object region. A
-                # squared surrogate can improve while MAE regresses, causing
-                # _register to restore an inadmissible initial contour fit.
-                return float(np.mean([np.mean(np.abs(a[y:Y, x:X].astype(float)-b[y:Y, x:X].astype(float))) for x, y, X, Y in regions]))
-
-            def local_pass(p, measured):
-                return all(q is not None and q['passed'] for q in
-                           (_local_quality(pixels[y:Y, x:X], measured[3][y:Y, x:X]) for x, y, X, Y in regions))
-
-            fitted = _register(parameters, 5*n, build, valid, pixels, render_fn, error_fn,
-                               'primitive_layered_scene_v1', loss_fn=loss, preserve_initial_error=True,
-                               satisfactory_fn=local_pass)
-            if fitted is None:
-                continue
-            quality = _local_quality(pixels, fitted['rendered'])
-            qualities = [_local_quality(pixels[y:Y, x:X], fitted['rendered'][y:Y, x:X]) for x, y, X, Y in regions]
-            if not quality or not quality['passed'] or any(not q or not q['passed'] for q in qualities):
-                continue
-            fitted.update(object_kinds=kinds, object_quality=qualities, neural_scene_selected=False,
-                          scene_hypotheses=tried, instance_groups=len(groups))
-            if best is None or fitted['error'] < best['error']:
-                best = fitted
-            # Every object and the whole raster passed; no extra search is needed.
+                x, y, w, h, _ = c['geometry']
+                mask = ((xx+.5-x-w/2)**2+(yy+.5-y-h/2)**2 <= (w/2)**2 if c['kind'] == 'circle' else
+                        (xx+.5 >= x) & (xx+.5 <= x+w) & (yy+.5 >= y) & (yy+.5 <= y+h))
+                if c['fill'] is not None:
+                    raster[mask] = c['fill']
+            return float(np.abs(pixels.astype(float)-raster).mean())
+        scenes.sort(key=order_loss)
+    for scene in scenes:
+        # The foreground can supply an enclosing blob already represented
+        # by a color region. Only complete, nonduplicated scenes survive.
+        if not compatible_fn(scene, contract):
+            continue
+        tried += 1
+        if tried > 24:
             return best
+        if not all_orders:
+            scene = sorted(scene, key=lambda c: -float(np.prod(_box(c)[2:]-_box(c)[:2])))
+        kinds = [c['kind'] for c in scene]
+        filled = [c['fill'] is not None for c in scene]
+        stroked = [c['geometry'][4] > 0 for c in scene]
+        geometry_parameters = []
+        # Independent centers/diameters and rectangle sides avoid an
+        # artificial local minimum when only one visible edge must move.
+        for c in scene:
+            g = np.array(c['geometry'], dtype=float)
+            if c['kind'] == 'circle':
+                g[:2] += g[2:4]/2
+            else:
+                g[2:4] += g[:2]
+            geometry_parameters.append(g)
+        parameters = np.r_[np.concatenate(geometry_parameters),
+                           np.concatenate([np.r_[c['stroke'], c['fill'] if c['fill'] is not None else [255]*3] for c in scene])]
+        regions = [(max(0, int(_box(c)[0])-3), max(0, int(_box(c)[1])-3),
+                    min(width, int(np.ceil(_box(c)[2]))+3), min(height, int(np.ceil(_box(c)[3]))+3)) for c in scene]
+
+        def build(p):
+            shapes = []
+            for i, kind in enumerate(kinds):
+                x, y, w, h, sw = p[5*i:5*i+5]
+                if kind == 'circle':
+                    h = w
+                else:
+                    w, h = w-x, h-y
+                stroke, fill = p[5*n+6*i:5*n+6*i+6].reshape(2, 3)
+                style = f'fill="{_hex(fill) if filled[i] else "none"}" stroke="{_hex(stroke) if stroked[i] else "none"}" stroke-width="{sw:.4f}"'
+                if kind == 'circle':
+                    shapes.append(f'<circle cx="{x:.4f}" cy="{y:.4f}" r="{w/2:.4f}" {style}/>')
+                else:
+                    shapes.append(f'<rect x="{x:.4f}" y="{y:.4f}" width="{w:.4f}" height="{h:.4f}" {style}/>')
+            return f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"><rect width="{width}" height="{height}" fill="#ffffff"/>' + ''.join(shapes) + '</svg>'
+
+        def valid(p):
+            adjusted = []
+            for i, kind in enumerate(kinds):
+                geometry = p[5*i:5*i+5].copy()
+                if kind == 'circle':
+                    geometry[3] = geometry[2]
+                    geometry[:2] -= geometry[2]/2
+                else:
+                    geometry[2:4] -= geometry[:2]
+                x, y, w, h, sw = geometry
+                if min(w, h) < 5 or (stroked[i] and not .7 <= sw <= min(w, h)/4):
+                    return False
+                if not stroked[i]:
+                    if sw != 0:
+                        return False
+                if x-sw/2 < 1 or y-sw/2 < 1 or x+w+sw/2 > width-1 or y+h+sw/2 > height-1:
+                    return False
+                # A circle has one radius, so height follows width.
+                if kind == 'circle':
+                    geometry[3] = geometry[2]
+                adjusted.append(dict(scene[i], geometry=geometry))
+            return compatible_fn(adjusted, contract)
+
+        def loss(a, b):
+            # Use the production MAE metric in every object region. A
+            # squared surrogate can improve while MAE regresses, causing
+            # _register to restore an inadmissible initial contour fit.
+            return float(np.mean([np.mean(np.abs(a[y:Y, x:X].astype(float)-b[y:Y, x:X].astype(float))) for x, y, X, Y in regions]))
+
+        def local_pass(p, measured):
+            return all(q is not None and q['passed'] for q in
+                       (_local_quality(pixels[y:Y, x:X], measured[3][y:Y, x:X]) for x, y, X, Y in regions))
+
+        fitted = _register(parameters, 5*n, build, valid, pixels, render_fn, error_fn,
+                           source, loss_fn=loss, preserve_initial_error=True,
+                           satisfactory_fn=local_pass)
+        if fitted is None:
+            continue
+        quality = _local_quality(pixels, fitted['rendered'])
+        qualities = [_local_quality(pixels[y:Y, x:X], fitted['rendered'][y:Y, x:X]) for x, y, X, Y in regions]
+        if not quality or not quality['passed'] or any(not q or not q['passed'] for q in qualities):
+            continue
+        fitted.update(object_kinds=kinds, object_quality=qualities, neural_scene_selected=False,
+                      scene_hypotheses=tried, instance_groups=len(groups),
+                      scene_detectors=sorted({d for c in scene for d in c.get('detectors', [])}))
+        if best is None or fitted['error'] < best['error']:
+            best = fitted
+        # Every object and the whole raster passed; no extra search is needed.
+        return best
     return best

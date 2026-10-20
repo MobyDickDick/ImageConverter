@@ -235,35 +235,40 @@ def main():
         summary = verify_report(args.inputs, args.output, require_all=args.require_all)
         print(f"Verified: {summary['accepted']}/{summary['completed']} accepted")
         return 0
-    cases = json.loads((args.inputs/'manifest.json').read_text(encoding='utf-8'))
-    args.output.mkdir(parents=True, exist_ok=False)
+    evaluate_cases(args.inputs, args.output, rename=args.rename, require_all=args.require_all)
+    return 0
+
+
+def evaluate_cases(inputs, output, *, rename=False, require_all=False):
+    """Shared audited CLI runner; fixtures and object oracles remain external."""
+    cases = json.loads((inputs/'manifest.json').read_text(encoding='utf-8'))
+    output.mkdir(parents=True, exist_ok=False)
     report = dict(evidence_kind='real_cli', budget_seconds=5, seed=17,
                   commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
                   source_sha256={str(p.relative_to(ROOT)):sha256(p.read_bytes()) for p in (ROOT/'src').rglob('*.py')}, cases=[])
     for i, case in enumerate(cases):
         old_name = case['case_id']
-        name = f'anonymous_{i:02d}' if args.rename else old_name
+        name = f'anonymous_{i:02d}' if rename else old_name
         case['case_id'] = name
-        folder = args.output/name/'input'
+        folder = output/name/'input'
         folder.mkdir(parents=True)
-        original = args.inputs/old_name/'input'
+        original = inputs/old_name/'input'
         shutil.copyfile(original/(old_name+'.png'), folder/(name+'.png'))
         assert sha256((folder/(name+'.png')).read_bytes()) == case['input_sha256']
         (folder/'descriptions.xml').write_text((original/'descriptions.xml').read_text(encoding='utf-8').replace(old_name, name), encoding='utf-8')
-        result = run_case(case, args.output, timeout=30, iterations=64,
+        result = run_case(case, output, timeout=30, iterations=64,
                           extra_cli_args=('--search-seconds', '5', '--search-max-seconds', '5'))
         if result.get('output_svg'):
-            svg = (args.output/result['output_svg']).read_text(encoding='utf-8')
+            svg = (output/result['output_svg']).read_text(encoding='utf-8')
             result['object_check'] = check_objects(svg, case['expected_objects'])
             reference = cv2.imread(str(original/(old_name+'.png')))
             result['local_checks'] = local_checks(reference, svg, case['expected_objects'])
         result['accepted'] = bool(result['satisfactory'] and result.get('object_check', {}).get('passed')
                                   and all(q['passed'] for q in result.get('local_checks', [])))
         report['cases'].append(result)
-        (args.output/'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+        (output/'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
         print(name, result['accepted'], result.get('failures'), flush=True)
-    verify_report(args.inputs, args.output, require_all=args.require_all)
-    return 0
+    return verify_report(inputs, output, require_all=require_all)
 
 
 if __name__ == '__main__':

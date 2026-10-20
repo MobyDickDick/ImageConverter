@@ -116,8 +116,13 @@ def fit_primitive_scene(width, height, *, description, image, render_fn, error_f
     if fitted is not None:
         return fitted
     from src.iCCModules.imageCompositeConverterLayeredScene import fit_layered_scene
-    return fit_layered_scene(width, height, description=description, image=image,
-                             render_fn=render_fn, error_fn=error_fn)
+    fitted = fit_layered_scene(width, height, description=description, image=image,
+                               render_fn=render_fn, error_fn=error_fn)
+    if fitted is not None:
+        return fitted
+    from src.iCCModules.imageCompositeConverterSceneFusion import fit_fused_scene
+    return fit_fused_scene(width, height, description=description, image=image,
+                           render_fn=render_fn, error_fn=error_fn)
 
 
 def _fit_outline_scene(width, height, *, description, image, render_fn, error_fn):
