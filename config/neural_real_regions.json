@@ -1,0 +1,844 @@
+{
+  "schema": "real_element_annotations_v2",
+  "annotation_method": "Manually marked on nearest-neighbour enlarged original raster contact sheets before training or detector evaluation; no detector, fitted SVG or reference SVG used. Boxes are approximate visible extents, include nested regions; text is a region, not an OCR transcript. Unknown denotes compound shapes outside the six-class vocabulary. One-pixel lines are retained as small objects.",
+  "family_policy": "All size, colour and orientation descendants of a selected source topology belong to the same partition. Square letter paddles are one training group; all six previously evaluated source families are development only. New holdout topologies are never used for training, threshold selection or candidate revision.",
+  "cases": [
+    {
+      "variant": "AC0800_L",
+      "split": "train",
+      "family": "plain_disk",
+      "image": "images/AC0800_L.jpg",
+      "input_sha256": "a8bd677ee9d38c7c6f09fabb192487f366791b24d804ae8edeb6d172b46eb530",
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            1,
+            1,
+            28,
+            28
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "AC0811_L",
+      "split": "train",
+      "family": "empty_round_paddle",
+      "image": "images/AC0811_L.jpg",
+      "input_sha256": "21c24c5222318989942e222eadf1f60dd91aa8f9397db552d09fcae7cf356e02",
+      "description": "Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            4,
+            25,
+            25
+          ]
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            11,
+            27,
+            3,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "AC0721_1_L",
+      "split": "train",
+      "family": "square_letter_paddle",
+      "image": "images/AC0721_1_L.jpg",
+      "input_sha256": "303322d79a15df0a62ff69448dd967ad147ffd57a9e105b6821b9633a5d9ce8e",
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"T\" im Quadrat. Ein gefülltes Quadrat mit Kontur und einem mittigen senkrechten Griff von der unteren Quadratseite nach unten. Der Buchstabe T kontrastiert mit der Quadratfüllung. Weisser Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            1,
+            4,
+            23,
+            23
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            6,
+            9,
+            13,
+            15
+          ]
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            11,
+            27,
+            3,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "AC0731_1_L",
+      "split": "train",
+      "family": "square_letter_paddle",
+      "image": "images/AC0731_1_L.jpg",
+      "input_sha256": "134a29e123cad290b76e710b5a6dfe020c3450ce35c159f17a1943cb57c22cd6",
+      "description": "Kelle mit Quadrat oben, mittigem Griff nach unten und Text \"P\" im Quadrat.",
+      "elements": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            1,
+            4,
+            23,
+            23
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            6,
+            9,
+            13,
+            15
+          ]
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            11,
+            27,
+            3,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "SE0081",
+      "split": "train",
+      "family": "square_letter_paddle",
+      "image": "images/SE0081.jpg",
+      "input_sha256": "9f182529b849e93d4cef4abf41dfe8f14471d8d37cb54a76d983050b29ec1fb9",
+      "description": "Kelle mit gefülltem Quadrat oben, mittigem senkrechtem Griff nach unten und waagerechtem Text \"M\" im Quadrat. Weißer Hintergrund. Lage, Abmessungen, Kontur, Schriftgröße und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            0,
+            0,
+            25,
+            25
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            6,
+            6,
+            13,
+            16
+          ]
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            11,
+            25,
+            3,
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "GE0280",
+      "split": "train",
+      "family": "radial_disk",
+      "image": "images/GE0280.jpg",
+      "input_sha256": "70e1c67451a3d0e8edc69b574128c2c0e7b425803dfac280fc2ee8df96840219",
+      "description": "Blaue Kugelform (blauer Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            1,
+            1,
+            19,
+            19
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "GE0300",
+      "split": "train",
+      "family": "cross_badge",
+      "image": "images/GE0300.jpg",
+      "input_sha256": "bd5c85e1449dd1e18d62a381b11508105b5908fc8de3252936c277e51f223bff",
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte gefüllte Rechteckfläche mit feiner Randkontur. Mittig in dieser Fläche steht ein helles gefülltes rechtwinkliges Kreuz aus einem senkrechten und einem waagerechten Balken mit vier freien Armen. Das Kreuz bleibt vollständig innerhalb des Rechtecks, das Rechteck vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            3,
+            3,
+            69,
+            69
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            15,
+            22,
+            45,
+            33
+          ]
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            26,
+            29,
+            24,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "GE0305",
+      "split": "train",
+      "family": "flag_badge",
+      "image": "images/GE0305.jpg",
+      "input_sha256": "bb22ce94c64ce6031fa18c76a941b5e8dd156ee0df52f810eb6b810d4eb9c0cc",
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Im Inneren liegt eine waagerechte rechteckige Flaggenfläche aus genau drei lückenlos aneinanderliegenden senkrechten gefüllten Streifen. Die Streifen haben dieselbe Höhe und unterschiedliche einfarbige Füllungen; links grün, mittig hell, rechts rot. Die gesamte Rechteckfläche bleibt vollständig innerhalb des Kreises. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Streifenbreiten und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            3,
+            3,
+            69,
+            69
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            15,
+            21,
+            45,
+            34
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "GE0022",
+      "split": "train",
+      "family": "arrow_badge",
+      "image": "images/GE0022.jpg",
+      "input_sha256": "c7bc67075e52b305b157aba28d4730d9696f03d9ff77f153b2f3abd17fc05280",
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und waagerechtem Farbverlauf, links dunkler und rechts heller. Mittig liegt ein dunkler gefüllter Pfeil nach rechts: ein waagerechter rechteckiger Schaft geht ohne Lücke in eine breitere dreieckige Spitze über. Der Pfeil hat eine helle Randkontur und liegt vollständig innerhalb des Kreises. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            3,
+            3,
+            67,
+            67
+          ]
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            14,
+            15,
+            45,
+            44
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "GE0017",
+      "split": "train",
+      "family": "cross_disk",
+      "image": "images/GE0017.jpg",
+      "input_sha256": "56c478e7f9a2ed0d4d8f8e781092c88053619b7a604aecc7174f1d9940c01c9d",
+      "description": "Eine einfarbig gefüllte Kreisscheibe. Darin liegt ein diagonales Kreuz aus zwei geraden Strichen mit abgerundeten Enden. Die beiden Striche schneiden sich mittig und liegen vollständig innerhalb des Kreises. Gleichmäßiger heller Hintergrund. Keine Schriftzeichen und keine weiteren Objekte. Position, Radius, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            2,
+            2,
+            68,
+            68
+          ]
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            17,
+            17,
+            38,
+            38
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "DLG0010",
+      "split": "train",
+      "family": "rectangular_panel",
+      "image": "images/DLG0010.jpg",
+      "input_sha256": "d5685743426f5506250de75d4a38217c1973bc3d178407c766a510827e71af67",
+      "description": "RechteckflÃ¤che mit heller rechteckiger InnenflÃ¤che.",
+      "elements": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            0,
+            0,
+            90,
+            25
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            1,
+            1,
+            66,
+            22
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "AC0840_M",
+      "split": "development",
+      "family": "rf_disk",
+      "image": "images/AC0840_M.jpg",
+      "input_sha256": "3919d16fb5fc08eaf63afbc4db3c71a79de4055c35b4d5908fdebfe1437164ec",
+      "description": "Eine einfarbige hellgraue Kreisscheibe mit dunkler Randkontur auf weißem Hintergrund. In der Mitte steht die dunkle serifenlose Beschriftung \"rF\". Keine Anschlüsse.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            3,
+            5,
+            14,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "AC0910_L",
+      "split": "development",
+      "family": "lux_disk",
+      "image": "images/AC0910_L.jpg",
+      "input_sha256": "e49e4cfd64b3a525f64293da155b650c54d516886ea1386b7c206e9e36a209a6",
+      "description": "Eine einfarbige Kreisscheibe mit dunkler Randkontur. Die dunkle serifenlose Beschriftung \"Lux\" steht mittig. Keine Anschlüsse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            25,
+            25
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            4,
+            10,
+            17,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "AC1000_M",
+      "split": "development",
+      "family": "m_disk",
+      "image": "images/AC1000_M.jpg",
+      "input_sha256": "dcd4593327fb1890092dc5b244ff9274b53a9513eabde2bf312e28ad79b2a140",
+      "description": "Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Großbuchstabe \"M\" in fetter serifenloser Schrift. Weißer Hintergrund. Keine Anschlüsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgröße und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            5,
+            4,
+            11,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "AC0920_M",
+      "split": "development",
+      "family": "q_disk",
+      "image": "images/AC0920_M.jpg",
+      "input_sha256": "5f48a13643a1685b3030f2de7fbba3f98e98b7b55e27e90eed9539b7f42f75ae",
+      "description": "Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Großbuchstabe \"Q\" in fetter serifenloser Schrift. Weißer Hintergrund. Keine Anschlüsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgröße und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            5,
+            4,
+            11,
+            13
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "AC0850_L",
+      "split": "development",
+      "family": "p_disk",
+      "image": "images/AC0850_L.jpg",
+      "input_sha256": "6b78ab3be03efff71cea248825e0913ab9db3c1efc0129c8ec8860844fd0356b",
+      "description": "Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Im Inneren steht mittig der einzelne dunkle Großbuchstabe \"P\" in fetter serifenloser Schrift. Weißer Hintergrund. Keine Anschlüsse und keine weiteren Objekte. Lage, Radius, Konturbreite, Schriftgröße und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            30,
+            30
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            8,
+            7,
+            15,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "AC0232_M",
+      "split": "development",
+      "family": "motor_valve",
+      "image": "images/AC0232_M.jpg",
+      "input_sha256": "d225bc585b03756f96a537a015cbee74d1ee71e37e0c5be2ffee9c067dcc4957",
+      "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Großbuchstabe \"M\" aufrecht in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            24,
+            5,
+            20,
+            20
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            29,
+            10,
+            11,
+            12
+          ]
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            0,
+            9,
+            17,
+            20
+          ]
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            8,
+            0,
+            17,
+            15
+          ]
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            8,
+            15,
+            17,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "AC0252",
+      "split": "real_holdout",
+      "family": "pump",
+      "image": "images/AC0252.jpg",
+      "input_sha256": "2b2ba3005aa9f54f991e629a9647fc20be8dc40d702e79609e430b9791c43d03",
+      "description": "Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach rechts zeigt.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            31,
+            31
+          ]
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            6,
+            5,
+            23,
+            22
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "AC0411_1_L",
+      "split": "real_holdout",
+      "family": "chord_T_disk",
+      "image": "images/AC0411_1_L.jpg",
+      "input_sha256": "19216df3e84318a844106c9caf8dc4ba95f9f45e72566ae5c9c5542dcaabb192",
+      "description": "Ein gefüllter Kreis mit Kontur enthält zwei schräge Linien, die bis an den Kreisrand reichen und sich nach oben annähern. Dazwischen liegt ein umgekehrtes T aus einem waagerechten unteren Querstrich und einem mittigen senkrechten Strich nach oben; der Strich endet vor dem Kreisrand. Die Linien kontrastieren mit der Kreisfüllung. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            1,
+            1,
+            38,
+            38
+          ]
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            5,
+            4,
+            30,
+            29
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "AC0424_1_L",
+      "split": "real_holdout",
+      "family": "spiral_disk",
+      "image": "images/AC0424_1_L.jpg",
+      "input_sha256": "73fdf632e2b2ec4a6bbdba7166c6b26a2aeee0e76fe9bf08ccc5ba46666fc004",
+      "description": "Eine gefüllte Kreisscheibe mit dünnem Rand auf hellem Hintergrund. Zwei schräge Linien durchqueren den Kreis von nahe dem linken Rand zu den rechten oberen und unteren Randbereichen und laufen nach links aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom linken Bereich gegen den Uhrzeigersinn nach innen läuft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichstärken und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            1,
+            1,
+            38,
+            38
+          ]
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            4,
+            4,
+            33,
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "GE0001_1_L",
+      "split": "real_holdout",
+      "family": "warning_badge",
+      "image": "images/GE0001_1_L.jpg",
+      "input_sha256": "33feb1f205f66dbeae5837db0d139b47d94e481790d7503f1cbc01b5cd0de1d7",
+      "description": "Eine Kreisscheibe mit vertikalem Farbverlauf und hellem Rand. Innerhalb des Kreises liegt ein aufrechtes Warndreieck mit abgerundeten Ecken, dunklem breitem Rand und heller Innenfläche. Im Dreieck steht ein dunkles Ausrufezeichen aus einem senkrechten gerundeten Strich und einem getrennten runden Punkt darunter. Gleichmäßiger heller Hintergrund. Keine weiteren Objekte. Positionen, Größen, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            2,
+            2,
+            66,
+            66
+          ]
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            16,
+            11,
+            44,
+            43
+          ]
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            31,
+            26,
+            8,
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "GE0204_L",
+      "split": "real_holdout",
+      "family": "nested_flame",
+      "image": "images/GE0204_L.jpg",
+      "input_sha256": "511752b42b7a826ccad8806a625313c8a382cb590a45c7b187296a4a149fad67",
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht eine aufrechte gefüllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Eine kleinere helle gefüllte Flamme mit mehreren spitzen Zungen liegt vollständig im unteren Inneren der äußeren Flamme. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            2,
+            2,
+            66,
+            66
+          ]
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            14,
+            8,
+            43,
+            54
+          ]
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            24,
+            35,
+            25,
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "GE0346",
+      "split": "real_holdout",
+      "family": "house_badge",
+      "image": "images/GE0346.jpg",
+      "input_sha256": "541cd57453aa19afaa63af3bdb4fb8049fdce7dddd98b15046db2246779363fe",
+      "description": "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Innerhalb des Kreises steht ein gefülltes Haus mit dreieckigem Satteldach, seitlichen Dachüberständen und rechteckiger Fassade. Links in der Fassade liegt eine helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit einem Kreuz aus einem waagerechten und einem senkrechten Steg in der Hausfarbe. Die Tür liegt vollständig in der Fassade. Heller Hintergrund, keine Schriftzeichen. Lage, Abmessungen, Konturen und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "circle",
+          "bbox": [
+            3,
+            3,
+            69,
+            69
+          ]
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            12,
+            11,
+            51,
+            46
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            22,
+            38,
+            9,
+            15
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            37,
+            34,
+            13,
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "GE9011_1M",
+      "split": "real_holdout",
+      "family": "free_arrow",
+      "image": "images/GE9011_1M.jpg",
+      "input_sha256": "1c3ef7c1b8242bd0cedd623a6abb6a4c88e1126c2d03cb7d0f0a2e6062da2b9b",
+      "description": "Nach oben gerichteter Pfeil: gefüllte dreieckige Spitze über einem schmaleren rechteckigen vertikalen Schaft. Zwischen Spitze und Schaft liegt ein weißer Abstand. Schaft mit horizontalem Farbverlauf, in der Mitte hell und zu beiden Seiten dunkler. Weißer Hintergrund.",
+      "elements": [
+        {
+          "kind": "triangle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ]
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            5,
+            21,
+            10,
+            39
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "GE9021_1M",
+      "split": "real_holdout",
+      "family": "arc_shaft",
+      "image": "images/GE9021_1M.jpg",
+      "input_sha256": "9df7b0891d9fe2e24bcdaf2718401f727561f818371b1b20f93a8ffd84078907",
+      "description": "Ein unten offener U-Bogen in Form eines oberen Halbkreises liegt unter einem schmaleren senkrechten rechteckigen Schaft. Ein weißer Abstand trennt Bogen und Schaft. Der Schaft hat einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            5,
+            0,
+            10,
+            48
+          ]
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            0,
+            48,
+            20,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "GE9031_1M",
+      "split": "real_holdout",
+      "family": "T_branch",
+      "image": "images/GE9031_1M.jpg",
+      "input_sha256": "b0dee9440555b369a38c33ec5f9483f2e0f4af6edbe11117c046fefae9df325c",
+      "description": "Eine T-Verzweigung aus einem waagerechten rechteckigen Balken und einem mittig nach oben anschließenden senkrechten rechteckigen Schaft. Beide Arme sind verbunden und haben quer zu ihrer Längsrichtung einen Farbverlauf mit heller Mitte und dunkleren Rändern. Der Übergang ist auf Gehrung verbunden. Weißer Hintergrund, keine Schriftzeichen. Lage, Abmessungen und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "unknown",
+          "bbox": [
+            0,
+            0,
+            40,
+            40
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "GE1411_L",
+      "split": "real_holdout",
+      "family": "curve_chart",
+      "image": "images/GE1411_L.jpg",
+      "input_sha256": "4e32964707e8efbd8ad5a7204fdcfdd37bd9e2d2e84ae738d0d57c7001f34ffa",
+      "description": "Ein Achsendiagramm auf weißem Hintergrund: eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten treffen sich rechtwinklig. Darüber verläuft eine dünne farbige Sinuskurve mit einem Tal und einem Berg von links nach rechts. Keine Pfeilspitzen und keine Schriftzeichen. Lage, Amplitude, Wellenlänge, Strichbreiten und Farben ergeben sich aus dem Bild.",
+      "elements": [
+        {
+          "kind": "line",
+          "bbox": [
+            0,
+            0,
+            1,
+            25
+          ]
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            0,
+            24,
+            25,
+            1
+          ]
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            1,
+            8,
+            24,
+            9
+          ]
+        }
+      ]
+    }
+  ]
+}

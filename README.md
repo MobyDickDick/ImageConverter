@@ -1,9 +1,12 @@
 # ImageConverter
 
-Der [optionale CNN-Versuch](docs/next_arbeitspaket_2026-10-19_neural_elements.md)
-ist mit drei Trainingsseeds und 84 echten CLI-Gegenproben untersucht.
-Es gibt keinen nachgewiesenen End-to-End-Gewinn; die analytische Erkennung
-bleibt Standard. Der [Recovery-Merge-Audit](docs/merge_audit_2026-10-19.md)
+Das [reale CNN-Folgepaket NEURAL-ELEMENTS-REAL-02](docs/next_arbeitspaket_2026-10-19_neural_real_regions.md)
+ergänzt unabhängig markierte Regionen, getrennte reale Trainings-/Prüffamilien
+und einen zweiten optionalen Detektor. Mehrstufige Vorschläge verbessern die
+Regionsabdeckung; ein belastbarer End-to-End-Gewinn ist weiterhin nicht
+nachgewiesen. Die analytische Erkennung bleibt Standard. Der
+[erste CNN-Versuch](docs/next_arbeitspaket_2026-10-19_neural_elements.md)
+mit 84 CLI-Gegenproben bleibt dokumentiert. Der [Recovery-Merge-Audit](docs/merge_audit_2026-10-19.md)
 bestätigt die wiedergefundenen Nachweise und erläutert deren Ablage.
 
 Die [Komponentenmessung](docs/next_arbeitspaket_2026-10-18_component_value.md)

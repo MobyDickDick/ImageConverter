@@ -144,6 +144,9 @@ def prepare_cases(output):
 
 
 def structure(case, svg, image):
+    if case['kind'] == 'regions':
+        from tools.run_real_neural_elements import check_regions
+        return check_regions(case, svg, image)
     if case['kind'] == 'label':
         from tools.evaluate_short_label_search import symbol_semantics
         return dict(passed=symbol_semantics(svg, case['label']) == 1., expected_text=case['label'])

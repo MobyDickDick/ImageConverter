@@ -1,0 +1,1901 @@
+[
+  {
+    "case_id": "case_00",
+    "split": "train",
+    "family": "plain_disk",
+    "original": {
+      "proposals": 1,
+      "expected": 1,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            1,
+            1,
+            28,
+            28
+          ],
+          "small": false,
+          "best_iou": 0.8711111111111111
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 25,
+      "expected": 1,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            1,
+            1,
+            28,
+            28
+          ],
+          "small": false,
+          "best_iou": 0.8711111111111111
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_01",
+    "split": "train",
+    "family": "empty_round_paddle",
+    "original": {
+      "proposals": 1,
+      "expected": 2,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            4,
+            25,
+            25
+          ],
+          "small": false,
+          "best_iou": 0.6097560975609756
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            11,
+            27,
+            3,
+            18
+          ],
+          "small": true,
+          "best_iou": 0.05268292682926829
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 26,
+      "expected": 2,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            4,
+            25,
+            25
+          ],
+          "small": false,
+          "best_iou": 0.8464
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            11,
+            27,
+            3,
+            18
+          ],
+          "small": true,
+          "best_iou": 0.05268292682926829
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_02",
+    "split": "train",
+    "family": "square_letter_paddle",
+    "original": {
+      "proposals": 1,
+      "expected": 3,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            1,
+            4,
+            23,
+            23
+          ],
+          "small": false,
+          "best_iou": 0.5160975609756098
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            6,
+            9,
+            13,
+            15
+          ],
+          "small": false,
+          "best_iou": 0.1902439024390244
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            11,
+            27,
+            3,
+            18
+          ],
+          "small": true,
+          "best_iou": 0.05268292682926829
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 35,
+      "expected": 3,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            1,
+            4,
+            23,
+            23
+          ],
+          "small": false,
+          "best_iou": 0.9166666666666666
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            6,
+            9,
+            13,
+            15
+          ],
+          "small": false,
+          "best_iou": 0.9375
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            11,
+            27,
+            3,
+            18
+          ],
+          "small": true,
+          "best_iou": 0.05268292682926829
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_03",
+    "split": "train",
+    "family": "square_letter_paddle",
+    "original": {
+      "proposals": 1,
+      "expected": 3,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            1,
+            4,
+            23,
+            23
+          ],
+          "small": false,
+          "best_iou": 0.5160975609756098
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            6,
+            9,
+            13,
+            15
+          ],
+          "small": false,
+          "best_iou": 0.1902439024390244
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            11,
+            27,
+            3,
+            18
+          ],
+          "small": true,
+          "best_iou": 0.05268292682926829
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 30,
+      "expected": 3,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            1,
+            4,
+            23,
+            23
+          ],
+          "small": false,
+          "best_iou": 0.9166666666666666
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            6,
+            9,
+            13,
+            15
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            11,
+            27,
+            3,
+            18
+          ],
+          "small": true,
+          "best_iou": 0.05268292682926829
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_04",
+    "split": "train",
+    "family": "square_letter_paddle",
+    "original": {
+      "proposals": 2,
+      "expected": 3,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            0,
+            0,
+            25,
+            25
+          ],
+          "small": false,
+          "best_iou": 0.6410256410256411
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            6,
+            6,
+            13,
+            16
+          ],
+          "small": false,
+          "best_iou": 0.874439461883408
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            11,
+            25,
+            3,
+            14
+          ],
+          "small": true,
+          "best_iou": 0.043076923076923075
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 46,
+      "expected": 3,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            0,
+            0,
+            25,
+            25
+          ],
+          "small": false,
+          "best_iou": 0.92
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            6,
+            6,
+            13,
+            16
+          ],
+          "small": false,
+          "best_iou": 0.874439461883408
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            11,
+            25,
+            3,
+            14
+          ],
+          "small": true,
+          "best_iou": 0.043076923076923075
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_05",
+    "split": "train",
+    "family": "radial_disk",
+    "original": {
+      "proposals": 1,
+      "expected": 1,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            1,
+            1,
+            19,
+            19
+          ],
+          "small": false,
+          "best_iou": 0.81859410430839
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 13,
+      "expected": 1,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            1,
+            1,
+            19,
+            19
+          ],
+          "small": false,
+          "best_iou": 0.81859410430839
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_06",
+    "split": "train",
+    "family": "cross_badge",
+    "original": {
+      "proposals": 1,
+      "expected": 3,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            3,
+            3,
+            69,
+            69
+          ],
+          "small": false,
+          "best_iou": 0.8695890410958904
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            15,
+            22,
+            45,
+            33
+          ],
+          "small": false,
+          "best_iou": 0.27123287671232876
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            26,
+            29,
+            24,
+            20
+          ],
+          "small": false,
+          "best_iou": 0.08767123287671233
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 98,
+      "expected": 3,
+      "covered": 3,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            3,
+            3,
+            69,
+            69
+          ],
+          "small": false,
+          "best_iou": 0.8578378378378378
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            15,
+            22,
+            45,
+            33
+          ],
+          "small": false,
+          "best_iou": 0.781578947368421
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            26,
+            29,
+            24,
+            20
+          ],
+          "small": false,
+          "best_iou": 0.7111111111111111
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_07",
+    "split": "train",
+    "family": "flag_badge",
+    "original": {
+      "proposals": 1,
+      "expected": 2,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            3,
+            3,
+            69,
+            69
+          ],
+          "small": false,
+          "best_iou": 0.8940845070422535
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            15,
+            21,
+            45,
+            34
+          ],
+          "small": false,
+          "best_iou": 0.28732394366197184
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 118,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            3,
+            3,
+            69,
+            69
+          ],
+          "small": false,
+          "best_iou": 0.8578378378378378
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            15,
+            21,
+            45,
+            34
+          ],
+          "small": false,
+          "best_iou": 0.7984707809939924
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_08",
+    "split": "train",
+    "family": "arrow_badge",
+    "original": {
+      "proposals": 1,
+      "expected": 2,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            3,
+            3,
+            67,
+            67
+          ],
+          "small": false,
+          "best_iou": 0.9043110394842868
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            14,
+            15,
+            45,
+            44
+          ],
+          "small": false,
+          "best_iou": 0.3988718775181305
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 128,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            3,
+            3,
+            67,
+            67
+          ],
+          "small": false,
+          "best_iou": 0.8540715372907154
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            14,
+            15,
+            45,
+            44
+          ],
+          "small": false,
+          "best_iou": 0.8484848484848485
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_09",
+    "split": "train",
+    "family": "cross_disk",
+    "original": {
+      "proposals": 1,
+      "expected": 2,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            2,
+            2,
+            68,
+            68
+          ],
+          "small": false,
+          "best_iou": 0.8919753086419753
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            17,
+            17,
+            38,
+            38
+          ],
+          "small": false,
+          "best_iou": 0.2785493827160494
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 128,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            2,
+            2,
+            68,
+            68
+          ],
+          "small": false,
+          "best_iou": 0.8919753086419753
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            17,
+            17,
+            38,
+            38
+          ],
+          "small": false,
+          "best_iou": 0.9025
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_10",
+    "split": "train",
+    "family": "rectangular_panel",
+    "original": {
+      "proposals": 1,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            0,
+            0,
+            90,
+            25
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            1,
+            1,
+            66,
+            22
+          ],
+          "small": false,
+          "best_iou": 0.6453333333333333
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 10,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            0,
+            0,
+            90,
+            25
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            1,
+            1,
+            66,
+            22
+          ],
+          "small": false,
+          "best_iou": 0.6453333333333333
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_11",
+    "split": "development",
+    "family": "rf_disk",
+    "original": {
+      "proposals": 1,
+      "expected": 2,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            3,
+            5,
+            14,
+            10
+          ],
+          "small": true,
+          "best_iou": 0.35
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 25,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            3,
+            5,
+            14,
+            10
+          ],
+          "small": true,
+          "best_iou": 0.8571428571428571
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_12",
+    "split": "development",
+    "family": "lux_disk",
+    "original": {
+      "proposals": 1,
+      "expected": 2,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            25,
+            25
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            4,
+            10,
+            17,
+            9
+          ],
+          "small": true,
+          "best_iou": 0.2448
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 32,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            25,
+            25
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            4,
+            10,
+            17,
+            9
+          ],
+          "small": true,
+          "best_iou": 0.5032679738562091
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_13",
+    "split": "development",
+    "family": "m_disk",
+    "original": {
+      "proposals": 1,
+      "expected": 2,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            5,
+            4,
+            11,
+            12
+          ],
+          "small": true,
+          "best_iou": 0.33
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 21,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            5,
+            4,
+            11,
+            12
+          ],
+          "small": true,
+          "best_iou": 0.7575757575757576
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_14",
+    "split": "development",
+    "family": "q_disk",
+    "original": {
+      "proposals": 1,
+      "expected": 2,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            5,
+            4,
+            11,
+            13
+          ],
+          "small": true,
+          "best_iou": 0.3575
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 14,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            5,
+            4,
+            11,
+            13
+          ],
+          "small": true,
+          "best_iou": 0.7692307692307693
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_15",
+    "split": "development",
+    "family": "p_disk",
+    "original": {
+      "proposals": 2,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            30,
+            30
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            8,
+            7,
+            15,
+            18
+          ],
+          "small": false,
+          "best_iou": 0.7703703703703704
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 38,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            30,
+            30
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            8,
+            7,
+            15,
+            18
+          ],
+          "small": false,
+          "best_iou": 0.7703703703703704
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_16",
+    "split": "development",
+    "family": "motor_valve",
+    "original": {
+      "proposals": 1,
+      "expected": 5,
+      "covered": 0,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            24,
+            5,
+            20,
+            20
+          ],
+          "small": false,
+          "best_iou": 0.2962962962962963
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            29,
+            10,
+            11,
+            12
+          ],
+          "small": true,
+          "best_iou": 0.09777777777777778
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            0,
+            9,
+            17,
+            20
+          ],
+          "small": false,
+          "best_iou": 0.2518518518518518
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            8,
+            0,
+            17,
+            15
+          ],
+          "small": false,
+          "best_iou": 0.18888888888888888
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            8,
+            15,
+            17,
+            15
+          ],
+          "small": false,
+          "best_iou": 0.18888888888888888
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 21,
+      "expected": 5,
+      "covered": 3,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            24,
+            5,
+            20,
+            20
+          ],
+          "small": false,
+          "best_iou": 0.95
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            29,
+            10,
+            11,
+            12
+          ],
+          "small": true,
+          "best_iou": 0.7575757575757576
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            0,
+            9,
+            17,
+            20
+          ],
+          "small": false,
+          "best_iou": 0.2518518518518518
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            8,
+            0,
+            17,
+            15
+          ],
+          "small": false,
+          "best_iou": 0.38823529411764707
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            8,
+            15,
+            17,
+            15
+          ],
+          "small": false,
+          "best_iou": 0.5176470588235295
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_17",
+    "split": "real_holdout",
+    "family": "pump",
+    "original": {
+      "proposals": 1,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            31,
+            31
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            6,
+            5,
+            23,
+            22
+          ],
+          "small": false,
+          "best_iou": 0.5265348595213319
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 65,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            31,
+            31
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            6,
+            5,
+            23,
+            22
+          ],
+          "small": false,
+          "best_iou": 0.9166666666666666
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_18",
+    "split": "real_holdout",
+    "family": "chord_T_disk",
+    "original": {
+      "proposals": 1,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            1,
+            1,
+            38,
+            38
+          ],
+          "small": false,
+          "best_iou": 0.9025
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            5,
+            4,
+            30,
+            29
+          ],
+          "small": false,
+          "best_iou": 0.54375
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 109,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            1,
+            1,
+            38,
+            38
+          ],
+          "small": false,
+          "best_iou": 0.9025
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            5,
+            4,
+            30,
+            29
+          ],
+          "small": false,
+          "best_iou": 0.8267716535433071
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_19",
+    "split": "real_holdout",
+    "family": "spiral_disk",
+    "original": {
+      "proposals": 1,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            1,
+            1,
+            38,
+            38
+          ],
+          "small": false,
+          "best_iou": 0.9025
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            4,
+            4,
+            33,
+            32
+          ],
+          "small": false,
+          "best_iou": 0.66
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 128,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            1,
+            1,
+            38,
+            38
+          ],
+          "small": false,
+          "best_iou": 0.9025
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            4,
+            4,
+            33,
+            32
+          ],
+          "small": false,
+          "best_iou": 0.8227146814404432
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_20",
+    "split": "real_holdout",
+    "family": "warning_badge",
+    "original": {
+      "proposals": 1,
+      "expected": 3,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            2,
+            2,
+            66,
+            66
+          ],
+          "small": false,
+          "best_iou": 0.915126050420168
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            16,
+            11,
+            44,
+            43
+          ],
+          "small": false,
+          "best_iou": 0.39747899159663863
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            31,
+            26,
+            8,
+            27
+          ],
+          "small": true,
+          "best_iou": 0.0453781512605042
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 128,
+      "expected": 3,
+      "covered": 3,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            2,
+            2,
+            66,
+            66
+          ],
+          "small": false,
+          "best_iou": 0.8889795918367347
+        },
+        {
+          "kind": "triangle",
+          "bbox": [
+            16,
+            11,
+            44,
+            43
+          ],
+          "small": false,
+          "best_iou": 0.8226086956521739
+        },
+        {
+          "kind": "text",
+          "bbox": [
+            31,
+            26,
+            8,
+            27
+          ],
+          "small": true,
+          "best_iou": 0.5526315789473685
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_21",
+    "split": "real_holdout",
+    "family": "nested_flame",
+    "original": {
+      "proposals": 1,
+      "expected": 3,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            2,
+            2,
+            66,
+            66
+          ],
+          "small": false,
+          "best_iou": 0.9158716392020815
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            14,
+            8,
+            43,
+            54
+          ],
+          "small": false,
+          "best_iou": 0.5183035714285714
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            24,
+            35,
+            25,
+            23
+          ],
+          "small": false,
+          "best_iou": 0.12834821428571427
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 128,
+      "expected": 3,
+      "covered": 3,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            2,
+            2,
+            66,
+            66
+          ],
+          "small": false,
+          "best_iou": 0.8889795918367347
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            14,
+            8,
+            43,
+            54
+          ],
+          "small": false,
+          "best_iou": 0.9209650582362728
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            24,
+            35,
+            25,
+            23
+          ],
+          "small": false,
+          "best_iou": 0.7887517146776406
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_22",
+    "split": "real_holdout",
+    "family": "house_badge",
+    "original": {
+      "proposals": 1,
+      "expected": 4,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            3,
+            3,
+            69,
+            69
+          ],
+          "small": false,
+          "best_iou": 0.8695890410958904
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            12,
+            11,
+            51,
+            46
+          ],
+          "small": false,
+          "best_iou": 0.4284931506849315
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            22,
+            38,
+            9,
+            15
+          ],
+          "small": true,
+          "best_iou": 0.024657534246575342
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            37,
+            34,
+            13,
+            14
+          ],
+          "small": false,
+          "best_iou": 0.03324200913242009
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 128,
+      "expected": 4,
+      "covered": 4,
+      "regions": [
+        {
+          "kind": "circle",
+          "bbox": [
+            3,
+            3,
+            69,
+            69
+          ],
+          "small": false,
+          "best_iou": 0.8694302410518627
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            12,
+            11,
+            51,
+            46
+          ],
+          "small": false,
+          "best_iou": 0.9398976982097187
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            22,
+            38,
+            9,
+            15
+          ],
+          "small": true,
+          "best_iou": 0.5806451612903226
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            37,
+            34,
+            13,
+            14
+          ],
+          "small": false,
+          "best_iou": 0.7137254901960784
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_23",
+    "split": "real_holdout",
+    "family": "free_arrow",
+    "original": {
+      "proposals": 3,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "triangle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            5,
+            21,
+            10,
+            39
+          ],
+          "small": true,
+          "best_iou": 0.8878504672897196
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 14,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "triangle",
+          "bbox": [
+            0,
+            0,
+            20,
+            20
+          ],
+          "small": false,
+          "best_iou": 1.0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            5,
+            21,
+            10,
+            39
+          ],
+          "small": true,
+          "best_iou": 0.8333333333333334
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_24",
+    "split": "real_holdout",
+    "family": "arc_shaft",
+    "original": {
+      "proposals": 3,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            5,
+            0,
+            10,
+            48
+          ],
+          "small": true,
+          "best_iou": 0.9791666666666666
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            0,
+            48,
+            20,
+            12
+          ],
+          "small": true,
+          "best_iou": 1.0
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 11,
+      "expected": 2,
+      "covered": 2,
+      "regions": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            5,
+            0,
+            10,
+            48
+          ],
+          "small": true,
+          "best_iou": 0.9090909090909091
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            0,
+            48,
+            20,
+            12
+          ],
+          "small": true,
+          "best_iou": 1.0
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_25",
+    "split": "real_holdout",
+    "family": "T_branch",
+    "original": {
+      "proposals": 1,
+      "expected": 1,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "unknown",
+          "bbox": [
+            0,
+            0,
+            40,
+            40
+          ],
+          "small": false,
+          "best_iou": 0.65
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 5,
+      "expected": 1,
+      "covered": 1,
+      "regions": [
+        {
+          "kind": "unknown",
+          "bbox": [
+            0,
+            0,
+            40,
+            40
+          ],
+          "small": false,
+          "best_iou": 0.65
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "case_26",
+    "split": "real_holdout",
+    "family": "curve_chart",
+    "original": {
+      "proposals": 1,
+      "expected": 3,
+      "covered": 0,
+      "regions": [
+        {
+          "kind": "line",
+          "bbox": [
+            0,
+            0,
+            1,
+            25
+          ],
+          "small": true,
+          "best_iou": 0.04
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            0,
+            24,
+            25,
+            1
+          ],
+          "small": true,
+          "best_iou": 0.04
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            1,
+            8,
+            24,
+            9
+          ],
+          "small": true,
+          "best_iou": 0.3456
+        }
+      ]
+    },
+    "multilevel": {
+      "proposals": 2,
+      "expected": 3,
+      "covered": 0,
+      "regions": [
+        {
+          "kind": "line",
+          "bbox": [
+            0,
+            0,
+            1,
+            25
+          ],
+          "small": true,
+          "best_iou": 0.04
+        },
+        {
+          "kind": "line",
+          "bbox": [
+            0,
+            24,
+            25,
+            1
+          ],
+          "small": true,
+          "best_iou": 0.04
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            1,
+            8,
+            24,
+            9
+          ],
+          "small": true,
+          "best_iou": 0.3456
+        }
+      ]
+    }
+  }
+]

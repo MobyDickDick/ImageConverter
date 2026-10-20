@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [NEURAL-ELEMENTS-REAL-02: reale Trainingsregionen, getrennte Familien und zweiter optionaler Detektor (2026-10-19)](next_arbeitspaket_2026-10-19_neural_real_regions.md)
+
 - [Recovery-Merge: Belege bestätigt, unnötige Rohdatenversionierung und Grenzen (2026-10-19)](merge_audit_2026-10-19.md)
 - [NEURAL-ELEMENTS-01: optionales CNN, 84 CLI-Gegenproben und negatives Ergebnis (2026-10-19)](next_arbeitspaket_2026-10-19_neural_elements.md)
 

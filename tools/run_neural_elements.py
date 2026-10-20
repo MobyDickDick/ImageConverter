@@ -166,7 +166,20 @@ def decision(records, cases):
             'No demonstrated independent real end-to-end benefit; retain analytic default.')
 
 
-def verify(output):
+def censored_startup(record):
+    """No startup evidence is never evidence of a zero-cost disabled model."""
+    return bool(record.get('observation_censored') is True
+        and record.get('search_control', {}).get('stop_reason') == 'time_limit'
+        and record.get('search_control', {}).get('isolated') is True
+        and record.get('image_seconds', -1) >= record.get('budget_seconds', float('inf'))
+        and record.get('components') == dict(path=None, sha256=None, events=[])
+        and record.get('observed_controls') == []
+        and not record.get('svg') and not record.get('svg_sha256')
+        and record.get('quality') is None and record.get('structure') is None
+        and record.get('satisfactory') is False and record.get('runtime_satisfactory') is False)
+
+
+def verify(output, *, allow_unobserved_timeouts=False):
     from tools.run_plan_b_variations import measure_quality
     from tools.anytime_observer import summarize as render_summary
     report=json.loads((output/'report.json').read_text(encoding='utf-8'))
@@ -186,7 +199,7 @@ def verify(output):
     actual=[(r['mode'],r['seed'],r['case_id']) for r in report['records']]
     if set(actual)!=expected or len(set(actual))!=len(actual):
         raise ValueError('Incomplete/duplicated paired matrix')
-    observed=0
+    observed=unobserved=0
     for r in report['records']:
         if (r['budget_seconds']!=report['budget_seconds'] or not r['search_control'].get('isolated')
                 or r['search_control'].get('max_seconds')!=report['budget_seconds']):
@@ -196,9 +209,11 @@ def verify(output):
             raise ValueError('Changed partition')
         events=r['components']['events']
         component_path=r['components']['path']
-        if not component_path or anytime.digest(output/component_path)!=r['components']['sha256']:
+        censored = allow_unobserved_timeouts and censored_startup(r)
+        unobserved += bool(censored)
+        if not censored and (not component_path or anytime.digest(output/component_path)!=r['components']['sha256']):
             raise ValueError('Missing/changed worker configuration')
-        if [json.loads(l) for l in (output/component_path).read_text(encoding='utf-8').splitlines()]!=events:
+        if not censored and [json.loads(l) for l in (output/component_path).read_text(encoding='utf-8').splitlines()]!=events:
             raise ValueError('Changed worker observations')
         for event in events:
             if event['neural_elements']['enabled']!=(r['mode']=='neural'):
@@ -214,8 +229,10 @@ def verify(output):
                 raise ValueError('Analytic baseline executed the model')
         # Missing completion after a hard deadline is censored, not zero work.
         telemetry=render_summary(sorted((output/'telemetry'/f'{r["mode"]}-{r["budget_seconds"]:g}s-{r["seed"]}').glob(r['case_id']+'-*.jsonl')))
-        if telemetry!=r['telemetry'] or not telemetry['workers_observed'] or any(
-                report['source_sha256'].get(p)!=h for p,h in telemetry['source_sha256'].items()):
+        if (telemetry!=r['telemetry'] or (not censored and not telemetry['workers_observed'])
+                or (censored and (telemetry['workers_observed'] or telemetry['render_started'])) or any(
+                report['source_sha256'].get(p)!=h for p,h in telemetry['source_sha256'].items())
+            ):
             raise ValueError('Changed worker implementation/telemetry')
         passed=False
         if r.get('svg'):
@@ -239,9 +256,12 @@ def verify(output):
     if (summarize(report['records'])!=report['summary'] or decision(report['records'],list(cases.values()))!=report['decision']
             or anytime.archive_snapshot()!=report['archive_before']):
         raise ValueError('Changed summary/archive')
-    return dict(attempts=len(actual),outputs=sum(bool(r.get('svg')) for r in report['records']),
+    result = dict(attempts=len(actual),outputs=sum(bool(r.get('svg')) for r in report['records']),
         accepted=sum(r['satisfactory'] for r in report['records']),neural_observations=observed,
         archive_pairs_unchanged=report['archive_before']['cases'])
+    if allow_unobserved_timeouts:
+        result['unobserved_startup_timeouts'] = unobserved
+    return result
 
 
 def run(output,work,seeds,budget,smoke):
