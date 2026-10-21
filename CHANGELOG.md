@@ -1,3 +1,4 @@
+- Keep the real-region CNN CI measurement and independent replay on one OpenBLAS thread so exact probabilities remain reproducible across steps; preserve the strict integrity guard (2026-10-21).
 - Add conservative raster-grounded color/position references to native overlap scenes, freeze four independently marked real families and retain their negative full-scene results; validate named language through independent CLI/CI object and region checks without claiming new catalog acceptances (2026-10-21).
 - Fuse complete analytic boundaries with visible arcs/sides, compare native scene painter orders for partial occlusions, preserve strict local/global gates and add independent CLI/CI evidence (2026-10-20).
 - Add a family-separated real-region CNN experiment with nested multilevel proposals, three training/search seeds, independent local region gates and CI evidence; retain the analytic default without demonstrated end-to-end benefit (2026-10-19).
