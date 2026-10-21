@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [BENCHMARK-PRACTICAL-01: Entwicklungskandidaten, Prüfprotokoll und zwei echte CLI-Piloten (2026-10-21)](next_arbeitspaket_2026-10-21_practical_benchmark.md)
+
 - [Praktische Aufgaben aus der Projekteinschätzung: Nutzenvergleich, Generalisierung, Sprachrobustheit, Komponentenbeitrag und Runtime-Kopplung (2026-10-21)](quality_review_tasks_2026-10-21.md)
 
 - [GENERAL-SCENE-VISIBILITY-04: Konturen, kombinierte Topologien und Tiefenbedingungen (2026-10-21)](next_arbeitspaket_2026-10-21_scene_visibility.md)

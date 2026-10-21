@@ -1,0 +1,82 @@
+{
+  "status": "development_preparation_only",
+  "task": "BENCHMARK-PRACTICAL-01",
+  "study_complete": false,
+  "preparation": {
+    "candidate_cases": 20,
+    "provisional_families": 20,
+    "independently_reviewed_families": 0,
+    "sealed_test_families": 0,
+    "study_ready": false,
+    "blockers": [
+      "independent_taxonomy_and_object_annotations",
+      "new_sealed_real_families",
+      "two_versioned_external_methods_and_development_only_settings",
+      "measured_human_editing_and_redraw_times"
+    ]
+  },
+  "pilot": {
+    "attempts": 2,
+    "pixel_passes": 2,
+    "accepted": 0,
+    "semantic_review": "pending",
+    "study_ready": false
+  },
+  "selection_sha256": "babe38c3b2e05aa9180755cd1206ac6172c4bff6b406f05e30ef5895ddf4b2f0",
+  "manifest_sha256": "96011714f27cc443f8a62dac30b32d7969fe1ff1c3c8befa402f30547c5c813e",
+  "freeze_sha256": "a55692926be85db973bb54ca2b358573dead2a9871d18b876e3bbd4fcbde4076",
+  "pilot_report_sha256": "10d74372cdb433873728eecac126e3dd40771e3b205e81c377450a219bfd3924",
+  "runtime_map_sha256": "17ad4502541db5fad345002715457dbd0de045e8303a6686fc242116c9c19a04",
+  "environment": {
+    "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 181 Stepping 0, GenuineIntel",
+    "cpu_count": 14,
+    "packages": {
+      "numpy": "2.2.6",
+      "opencv-python-headless": "4.14.0.94",
+      "Pillow": "12.3.0",
+      "PyMuPDF": "1.26.7"
+    }
+  },
+  "records": [
+    {
+      "case_id": "case_00",
+      "family": "motor_valve_disk",
+      "split": "known_development",
+      "source_sha256": "33bb73a6341bd15ceb64e6b3b1f2ba2860101ad3a386bc9b2b8a1a6d031a3677",
+      "input_sha256": "c900ed864b3c6e9eec47256840307700b4136e4832e934ac9dadd04f95660b85",
+      "output_sha256": "b9350797b7de6e5846a43006612b6b20623ae531547faea94f7e9aa473b925aa",
+      "elapsed_seconds": 2.297,
+      "pixel_satisfactory": true,
+      "accepted": false,
+      "semantic_review": "pending",
+      "metrics": {
+        "normalized_mse": 0.0029129202011972666,
+        "foreground_mse": 0.005941798910498619,
+        "edge_alignment": 0.7883577346801758,
+        "foreground_iou": 0.9301552106430155
+      }
+    },
+    {
+      "case_id": "case_07",
+      "family": "labeled_disk",
+      "split": "known_development",
+      "source_sha256": "e87a4c61e5e2146fce76150e0883bddcd3039df2ae39e7846c81e5411bf1e114",
+      "input_sha256": "784f7ca24d4a1e0819673828c641e4dca0ae75db321865a818bd498b0042528a",
+      "output_sha256": "75071e0a0997e589784acd8dbb337d7b4388e5e0690f3b1ceee0f42ade005a22",
+      "elapsed_seconds": 2.016,
+      "pixel_satisfactory": true,
+      "accepted": false,
+      "semantic_review": "pending",
+      "metrics": {
+        "normalized_mse": 0.004860574845224619,
+        "foreground_mse": 0.010956944897770882,
+        "edge_alignment": 0.8861314058303833,
+        "foreground_iou": 0.8623376623376623
+      }
+    }
+  ],
+  "raw_data": ".tmp/practical01/",
+  "raw_data_committed": false
+}
