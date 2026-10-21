@@ -1,0 +1,28 @@
+{
+  "schema": "practical_benchmark_candidates_v1",
+  "status": "development_candidates_only",
+  "selection_basis": "One representative per provisional topology from the existing acceptance archive. All are exposed development data. No claim of independent annotation or unseen-family coverage.",
+  "cases": [
+    {"variant": "AC0232_L", "family": "motor_valve_disk", "outside_scene_contract": true},
+    {"variant": "AC0252", "family": "triangle_disk", "outside_scene_contract": true},
+    {"variant": "AC0411_1_L", "family": "chords_and_t_disk", "outside_scene_contract": true},
+    {"variant": "AC0421_1_L", "family": "chords_and_spiral_disk", "outside_scene_contract": true},
+    {"variant": "AC0711_1_L", "family": "marked_square_stem", "outside_scene_contract": true},
+    {"variant": "AC0800_L", "family": "plain_disk", "outside_scene_contract": false},
+    {"variant": "AC0811_L", "family": "disk_stem", "outside_scene_contract": true},
+    {"variant": "AC0840_L", "family": "labeled_disk", "outside_scene_contract": true},
+    {"variant": "DLG0010", "family": "nested_panel", "outside_scene_contract": false},
+    {"variant": "GE0001_L", "family": "warning_disk", "outside_scene_contract": true},
+    {"variant": "GE0017", "family": "diagonal_cross_disk", "outside_scene_contract": true},
+    {"variant": "GE0022", "family": "arrow_disk", "outside_scene_contract": true},
+    {"variant": "GE0204_L", "family": "flame_disk", "outside_scene_contract": true},
+    {"variant": "GE0300", "family": "cross_panel_disk", "outside_scene_contract": true},
+    {"variant": "GE0305", "family": "striped_panel_disk", "outside_scene_contract": true},
+    {"variant": "GE0346", "family": "house_disk", "outside_scene_contract": true},
+    {"variant": "GE1003_L", "family": "checkmark", "outside_scene_contract": true},
+    {"variant": "GE1411_L", "family": "axes_sine", "outside_scene_contract": true},
+    {"variant": "GE9011_1M", "family": "arrow_shaft", "outside_scene_contract": true},
+    {"variant": "GE9021_1M", "family": "arc_shaft", "outside_scene_contract": true}
+  ],
+  "manual_time_subset": ["motor_valve_disk", "triangle_disk", "chords_and_spiral_disk", "marked_square_stem", "labeled_disk", "warning_disk", "flame_disk", "house_disk", "axes_sine", "arc_shaft"]
+}
