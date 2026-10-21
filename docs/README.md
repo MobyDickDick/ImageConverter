@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [GENERAL-SCENE-VISIBILITY-04: Konturen, kombinierte Topologien und Tiefenbedingungen (2026-10-21)](next_arbeitspaket_2026-10-21_scene_visibility.md)
+
 - [GENERAL-SCENE-01: Detektorfusion, partielle Überdeckungen und unabhängige Szenenprüfung (2026-10-20)](next_arbeitspaket_2026-10-20_scene_fusion.md)
 
 - [GENERAL-SCENE-FILLED-02: gefüllte und verschachtelte Grundformszenen (2026-10-20)](next_arbeitspaket_2026-10-20_layered_scene.md)

@@ -1,5 +1,11 @@
 # ImageConverter
 
+Das [Sichtbarkeitspaket GENERAL-SCENE-VISIBILITY-04](docs/next_arbeitspaket_2026-10-21_scene_visibility.md)
+ergänzt eigene dunkle Konturen bei Überdeckung, kombinierte Verschachtelung und
+Teilüberdeckung sowie eindeutige sprachliche Tiefenbedingungen. Neue gedrehte
+Prüfszenen bestehen 12/12 und eine erweiterte Vorlage 17/17 unter unveränderten
+Qualitätsgrenzen. Die belegte Katalogzahl bleibt 377 von 1.785 Bildern (21,1 %).
+
 Die [gemeinsame Szenenauswahl GENERAL-SCENE-01](docs/next_arbeitspaket_2026-10-20_scene_fusion.md)
 führt vollständige Formgrenzen und sichtbare Kreisbögen/Rechteckseiten zusammen.
 Sie ergänzt partielle Überdeckungen und prüft konkurrierende Zeichenreihenfolgen

@@ -37,6 +37,10 @@ htmlcov/
 /.tmp/
 
 # Generated scene-fusion evidence stays local; version only compact results.
+/artifacts/evaluation/visibility_scene_v1/*
+!/artifacts/evaluation/visibility_scene_v1/README.md
+!/artifacts/evaluation/visibility_scene_v1/summary.json
+!/artifacts/evaluation/visibility_scene_v1/checks.json
 /artifacts/evaluation/fused_scene_v1/*
 !/artifacts/evaluation/fused_scene_v1/README.md
 !/artifacts/evaluation/fused_scene_v1/summary.json

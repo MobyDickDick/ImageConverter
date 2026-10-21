@@ -10,6 +10,28 @@ on:
   workflow_dispatch:
 
 jobs:
+  visible-primitive-scenes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Generate outlined overlap, containment and explicit depth scenes
+        run: python -m tools.evaluate_visibility_scene --prepare .tmp/visibility-inputs --seed 731829 --count 6 --rotate --paraphrase
+      - name: Convert and independently check native shapes, outlines and regions
+        run: python -m tools.evaluate_visibility_scene --inputs .tmp/visibility-inputs --output .tmp/visibility-cli --require-all
+      - name: Re-render saved results and verify worker budgets and reference guards
+        run: python -m tools.evaluate_visibility_scene --inputs .tmp/visibility-inputs --output .tmp/visibility-cli --verify-only --require-all
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: visibility-scene-evidence
+          path: .tmp/visibility-cli
+          retention-days: 7
+
   fused-primitive-scenes:
     runs-on: ubuntu-latest
     timeout-minutes: 5
