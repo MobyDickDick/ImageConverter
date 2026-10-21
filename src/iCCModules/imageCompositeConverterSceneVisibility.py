@@ -11,26 +11,23 @@ from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
 from src.iCCModules.imageCompositeConverterSceneFusion import _arc, fusion_contract
 
 
-ROLE = r'(kleinere|größere|kleinste|größte|mittelgroße)'.casefold()
-RELATION = re.compile(r'\bdie '+ROLE+r' form liegt (vor|hinter|innerhalb) der '+ROLE+r'(?:n)? form\.')
+from src.iCCModules.imageCompositeConverterSceneReferences import (
+    parse_references, resolve_references, position_agrees)
 
 
 def requested(description):
     text = str(description or '').casefold()
     text = re.sub(r'\b(?:(?:auf|vor)\s+(?:einem\s+)?)?weiss\w*\s+hintergrund\b', '', text)
+    text = text.replace('eine form liegt getrennt.', '')
     return bool(re.search(r'überdeck|überlapp', text) and
-                re.search(r'kontur|umriss|rand|innerhalb|verschachtel|vordergrund|hintergrund|vorne|hinten|davor|dahinter|\bvor\b|\bhinter\b', text))
+                re.search(r'kontur|umriss|rand|innerhalb|verschachtel|vordergrund|hintergrund|vorne|hinten|davor|dahinter|\bvor\b|\bhinter\b|\bform\b', text))
 
 
 def visibility_contract(description):
-    text = str(description or '').casefold()
-    relations = []
-    for m in RELATION.finditer(text):
-        a, relation, b = m.groups()
-        if a == b:
-            return None
-        relations.append((a, relation, b))
-    text = RELATION.sub('', text)
+    parsed = parse_references(description)
+    if parsed is None:
+        return None
+    text, relations = parsed
     outlined = 'jede form hat eine dunkle kontur.' in text
     if outlined:
         text = text.replace('jede form hat eine dunkle kontur.', '')
@@ -39,12 +36,14 @@ def visibility_contract(description):
         return None
     n = sum(contract['counts'].values())
     allowed = {r.casefold() for r in (('kleinere', 'größere') if n == 2 else ('kleinste', 'größte', 'mittelgroße'))}
-    if any(a not in allowed or b not in allowed for a, _, b in relations):
+    from src.iCCModules.imageCompositeConverterSceneReferences import SIZE_ROLES
+    if any(role in SIZE_ROLES and role not in allowed for a, _, b in relations for role in (a, b)):
         return None
     # Only explicitly named containment pairs can coexist with partial overlap.
     if n == 2 and any(r == 'innerhalb' for _, r, _ in relations):
         return None
-    edges = {(b, a) if r in ('vor', 'innerhalb') else (a, b) for a, r, b in relations}
+    edges = {(b, a) if r in ('vor', 'innerhalb') else (a, b) for a, r, b in relations
+             if r in ('vor', 'hinter', 'innerhalb')}
     closure = set(edges)
     for _ in range(n):
         closure |= {(a, d) for a, b in closure for c, d in closure if b == c}
@@ -170,20 +169,21 @@ def compatible(scene, contract):
         return False
     if any(c['fill'] is None or bool(c['geometry'][4]) != contract['outlined'] for c in scene):
         return False
-    areas = np.array([np.prod(_box(c)[2:]-_box(c)[:2]) for c in scene])
-    ordered = np.argsort(areas)
-    if contract['relations'] and any(areas[b] < areas[a]*1.12 for a, b in zip(ordered, ordered[1:])):
-        return False  # A size reference must uniquely identify an instance.
-    names = ['kleinere', 'größere'] if len(scene) == 2 else ['kleinste', 'mittelgroße', 'größte']
-    roles = dict(zip((name.casefold() for name in names), ordered))
+    roles = resolve_references(scene, contract['relations'])
+    if roles is None:
+        return False
     nested = set()
     for a, relation, b in contract['relations']:
         i, j = roles[a], roles[b]
+        if i == j:
+            return False  # Different names can still refer to the same object.
         if relation == 'innerhalb':
             if not _contains(scene[j], scene[i]) or j >= i:
                 return False
             nested.add((j, i))
         elif (relation == 'vor' and i <= j) or (relation == 'hinter' and i >= j):
+            return False
+        elif relation in ('links von', 'rechts von', 'oberhalb', 'unterhalb') and not position_agrees(scene[i], relation, scene[j]):
             return False
     overlaps, observed_nested = 0, set()
     for i, j in itertools.combinations(range(len(scene)), 2):

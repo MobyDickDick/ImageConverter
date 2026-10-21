@@ -54,7 +54,7 @@ def test_explicit_depth_contradicting_the_raster_is_not_silently_ignored(i):
     'Zwei gefüllte Kreise überlappen teilweise. Die kleinste Form liegt innerhalb der größten Form.',
     'Zwei gefüllte Kreise überlappen teilweise. Mit Text.',
     'Zwei gefüllte Kreise überlappen teilweise. Schwarzer Hintergrund.',
-    'Zwei gefüllte Kreise überlappen teilweise. Die linke Form liegt hinter der rechten Form.',
+    'Zwei gefüllte Kreise überlappen teilweise. Die mittlere Form liegt hinter der rechten Form.',
 ])
 def test_unmodelled_ambiguous_or_contradictory_language_is_rejected(text):
     assert visibility_contract(text) is None

@@ -1,0 +1,145 @@
+{
+  "schema": "real_scene_families_v1",
+  "annotation_method": "Manual marks on original raster and nearest-neighbour contact sheet before runtime development. No runtime detector, fitted output or reference SVG used. Approximate visible bounds; unknown content is retained and prevents complete native-scene acceptance.",
+  "family_policy": "Three new scene topologies plus one previously exposed spiral family used only as development control. All size, colour and orientation descendants stay together. Original pixels, descriptions and object marks were frozen before runtime work. A post-freeze lineage audit corrected the spiral split without changing any oracle or tuning runtime on real holdouts.",
+  "cases": [
+    {
+      "file": "AC0160.JPG",
+      "family": "pressure_display",
+      "split": "development",
+      "source_sha256": "2076d326d127a2c4ff31997bae4df0a1f0d532fc1205a1546b38ab81487498d7",
+      "catalog_description": "Differenzdruckmessung oben kleines graues Rechteck mit \"dp\" geschrieben, vor halbem Rechteck mit doppelten grauen Rand",
+      "description": "Offener doppelter Rechteckrahmen hinter einer kleinen rechteckigen Anzeige mit dp. Schrift und offene Seiten sind zusätzlicher Inhalt.",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            35,
+            0,
+            40,
+            28
+          ],
+          "parent": null
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            5,
+            9,
+            99,
+            50
+          ],
+          "parent": 0
+        }
+      ],
+      "unsupported_content": true
+    },
+    {
+      "file": "DLG0011.JPG",
+      "family": "nested_rounded_panel",
+      "split": "development",
+      "source_sha256": "5615e96ebbc223e5a8ef5fa7ae33c6a2ff46d07b04cab7f009f279efb8c104cf",
+      "catalog_description": "Hintergrund: Siehe DLG0012. Links: Weisses rechteck vor Hintergrund",
+      "description": "Zwei verschachtelte Rechteckflächen mit leicht gerundeten Ecken. Die innere linke Fläche ist weiss; die äussere Fläche hat einen blaugrauen horizontalen Verlauf.",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            0,
+            0,
+            90,
+            25
+          ],
+          "parent": null
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            2,
+            2,
+            65,
+            21
+          ],
+          "parent": 0
+        }
+      ],
+      "unsupported_content": true
+    },
+    {
+      "file": "AC0422_L.jpg",
+      "family": "spiral_disk",
+      "split": "development",
+      "source_sha256": "2f5149697f8897ee717fb39af270ce9f64d7c04810b60f0dee271fd58ef2ffb3",
+      "catalog_description": "Unzugeordnete Wurzelform aus der Serie AC0422. Dokumentiert ist die große Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell prüfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Eine graue Kreisscheibe mit dunklem Rand enthält eine offene Spirale und weitere schräge Linien. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            0,
+            0,
+            40,
+            40
+          ],
+          "parent": null
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            3,
+            3,
+            34,
+            34
+          ],
+          "parent": 0
+        }
+      ],
+      "unsupported_content": true,
+      "previous_exposure": "config/neural_real_regions.json: AC0424_1_L / spiral_disk"
+    },
+    {
+      "file": "GE0360.jpg",
+      "family": "overlaid_emblems",
+      "split": "holdout",
+      "source_sha256": "4dbc65271cdd920edb764a26b5b28da15b8fbd3f1b91196fb2a360cd6d97f1b6",
+      "catalog_description": "Hintergrund: GE0999. Die Symbole von GE0202 (Scharubenschlüssel und Schraubendreher) und GE0349 (Schneeflocken) sind kombiniert. GE0202 ist oben links, GE0349 unten rechts. Der Hintergrund von von GE0349 überdeckt das Sybmol von GE0202",
+      "description": "Eine blaue Kreisscheibe mit Verlauf. Oben links liegen gekreuzte Werkzeuge, unten rechts liegt davor ein Schneeflockensymbol mit eigenem blauem Hintergrund. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            1,
+            1,
+            71,
+            71
+          ],
+          "parent": null
+        },
+        {
+          "kind": "unknown",
+          "bbox": [
+            10,
+            9,
+            55,
+            55
+          ],
+          "parent": 0
+        }
+      ],
+      "unsupported_content": true
+    }
+  ],
+  "selection_audit": {
+    "frozen_annotation_sha256": "aa17cf72b3e41d42b25965ff952a5d6a75e516a29db79afedcfcbe1eaae61589",
+    "correction": "AC0422_L belongs to the spiral_disk family already exposed as AC0424_1_L in config/neural_real_regions.json. It is development only, never new-family evidence. DLG0011 adds an inner white panel to the previously seen single-panel topology; it is a distinct nested-panel topology, not a colour/size/orientation holdout of the single panel.",
+    "new_topologies": [
+      "pressure_display",
+      "nested_rounded_panel",
+      "overlaid_emblems"
+    ],
+    "new_holdout_topologies": [
+      "overlaid_emblems"
+    ],
+    "runtime_tuned_on_real_holdouts": false
+  }
+}

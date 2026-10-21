@@ -1,0 +1,430 @@
+{
+  "schema": "real_scene_evaluation_v1",
+  "groups": {
+    "parent-language": {
+      "accepted": 0,
+      "count": 12,
+      "input_manifest_sha256": "ecc96b1d31c5f30b73b891b247b6f7d875e27232d58f3b1fc892a82d8f0cdf12",
+      "report_sha256": "c90d08e2220fcb1a383ac3a7371f6975d7d6dd1c0895355ae3a1d4258635fab3",
+      "runtime_sha256": {
+        "src\\iCCModules\\imageCompositeConverterLayeredScene.py": "982e4fbe8c626b8473281968ba4070328b82decc80f961b25f373c107f09f479",
+        "src\\iCCModules\\imageCompositeConverterSceneVisibility.py": "2699f30876a47e9d09c740e76624b5f1d35623679a0f09617d798a30d0ad003d"
+      },
+      "all_source_sha256": "54222defe7d4870cf8d94f890f8a0e2f0ef5932410d1a4ce44127a0295e4b785",
+      "output_sha256": [
+        "8e9d3162ddd9018058fb220f65c77bdf3ee0214e634c282601fbf74bb8b8f969",
+        "e10f4487976657ef47b6adfb31e371237b975680343ae9ae3bda8f81a5471f19",
+        "1f6a3fadafb3f72d327e8435e19742fbcd4b35f992a18f768fe1220006abe5cb",
+        "0df0926c833d1c6d86b8eb248e3a2ad68b3678fcd59cf0781ec80e17d16ca958",
+        "1802a75aa7b62f62938ff85f28da277082a2b00151830eeafb3bbe8df06f0264",
+        "9102627d840383d2a6cb7d9fd04b428295bc2f4df2494e96d2f837bb96997ec4",
+        "0defee69d6ed0a32b88053c53bcd92f33838c804d7bde329d48d96c5d82aa0ab",
+        "00838cb778f4c474eb9aa64c11fb02fdf6614ac77bee7ef94861c1994d2f0357",
+        "772521666d9c64a61c790cc80049a82f11169b0f94953d73d480c73f90a37543",
+        "41b9f7e5466acdeb417a876d6b3ea1a42ab5011496fadf14774f6e1502c1d22d",
+        "5cf1c87ad92c7c0fb4ab292473db3b972658bc2348efa998fedae3d589f9b19d",
+        "5fcec620b0b88e42dea6ed12479da9850a8cbc77996a7605b0119084841b7f42"
+      ]
+    },
+    "parent-real": {
+      "accepted": 0,
+      "count": 4,
+      "input_manifest_sha256": "c9b2f6dd268eeb3ccedbc4f7c001d893178c82c2492c1028601ef9c5d899dde4",
+      "report_sha256": "26579220ac8531a30edfcdec69a89a94e47ab20489d882a28c08842e570fde63",
+      "runtime_sha256": {
+        "src\\iCCModules\\imageCompositeConverterLayeredScene.py": "982e4fbe8c626b8473281968ba4070328b82decc80f961b25f373c107f09f479",
+        "src\\iCCModules\\imageCompositeConverterSceneVisibility.py": "2699f30876a47e9d09c740e76624b5f1d35623679a0f09617d798a30d0ad003d"
+      },
+      "all_source_sha256": "54222defe7d4870cf8d94f890f8a0e2f0ef5932410d1a4ce44127a0295e4b785",
+      "output_sha256": [
+        "26f178f81db1bc0caf89f210ee27c65417335e941fe76e7dec74318bf4eef28a",
+        "df56fca1dc0c0f93beb2c2387d8f9196019e1e112d9569a08697a9195a6e8d0c",
+        "8a77bfaded277cf93ca488b0d32117789e1263289869eb66d771108f71d32030",
+        "148b5e965b44f47b4a43233bfc98a3f74f9e03d6d45c5c9e55330ae0260cc9db"
+      ],
+      "global_pixel_passes": 0
+    },
+    "final-language": {
+      "accepted": 12,
+      "count": 12,
+      "input_manifest_sha256": "ecc96b1d31c5f30b73b891b247b6f7d875e27232d58f3b1fc892a82d8f0cdf12",
+      "report_sha256": "a4501484941f878609b47b204a84bdba58190ed66944817f31849a904bee27fd",
+      "runtime_sha256": {
+        "src\\iCCModules\\imageCompositeConverterLayeredScene.py": "a0f50546b29baaa06fd07f3176fba561c970747c3192a08a2b77479f2b8199a9",
+        "src\\iCCModules\\imageCompositeConverterSceneReferences.py": "fe13944808688eee191989a6f002817c2308d891d4c32171c3c2d779f6e221e5",
+        "src\\iCCModules\\imageCompositeConverterSceneVisibility.py": "241d2f645911559c1d33a9c5031992579d5479a7beb00c1fcba37af44902a4e6"
+      },
+      "all_source_sha256": "484ed13e9e8c6ccdf727c9b35dc2cafd7e7f4879f1e0af1c024a53f7c8995f9f",
+      "output_sha256": [
+        "3ed568a696ecdb874499aa2c0642a6ad6bdd6676b8ad5e5e4a0128f02b6a8635",
+        "2820f8cbe6a510fa1731827a5d171ba9a7073ceba16bc2d6e27fcbbdd8a20cad",
+        "e59dedae6c96bbf3024d34209e1bd0df869e64394a3744af79f9e8339efeb40f",
+        "cad80b9509eb64e9d4b98c02dcdb7c2e88444c475fd9666af7d2caa59c7587b4",
+        "9e551a84b5702516d9d9b3584acf1e11bb49a76d6c3197c3d0ac8acead968e60",
+        "1ff510037d260fbc5cd7e7741eaf73512dbfcaf64dc9b174129adecd10cc4a49",
+        "68ad04630070bca298583dbf61be807f70ea55df5b389f03fab7c696e4f93482",
+        "a8d278aa16046227fffa87e6b9b578f2a8833d9ee2ae6a0650c18d72dd15745a",
+        "5ff3833a0cb71b5d931bdcd25925b9dbb59df7be8062a49440fc74403070e7b8",
+        "8fd9b32e80365845d26eed7003dd902c948e8e33ad313225d0b8c1c34e53295f",
+        "b613aad344b162cf86a7afbb1b499b5fa6e31862579fb6b24068788b48db8c08",
+        "7704374eaa57e39a33b0706c87f1091ad8135d4bc2d81862a56a58ea997d0bf1"
+      ]
+    },
+    "final-holdout": {
+      "accepted": 12,
+      "count": 12,
+      "input_manifest_sha256": "61a43d2a68181188eb7f30d69589e118be7dfe21eaee9ea9895ede412280f6d0",
+      "report_sha256": "da9b3d78982f9fc68de916de7e213eed5d518a321eee24549fbde570d6611888",
+      "runtime_sha256": {
+        "src\\iCCModules\\imageCompositeConverterLayeredScene.py": "a0f50546b29baaa06fd07f3176fba561c970747c3192a08a2b77479f2b8199a9",
+        "src\\iCCModules\\imageCompositeConverterSceneReferences.py": "fe13944808688eee191989a6f002817c2308d891d4c32171c3c2d779f6e221e5",
+        "src\\iCCModules\\imageCompositeConverterSceneVisibility.py": "241d2f645911559c1d33a9c5031992579d5479a7beb00c1fcba37af44902a4e6"
+      },
+      "all_source_sha256": "484ed13e9e8c6ccdf727c9b35dc2cafd7e7f4879f1e0af1c024a53f7c8995f9f",
+      "output_sha256": [
+        "9432eb8a3425d9c845697be2bef9e6e772d3e065ddca7a266e4b542928529b74",
+        "543948dfbd245cdbd6c08fc2c4d551cadef58e86e8298de606709c1ab9b4e7a7",
+        "5e5b2c5857b4d7b70cfe1f7fb5d87cf20a043d1ccf262ca5e3fa77fff8e05b1f",
+        "43b657fecb1eccb206c2e97dec463733a47483fa9b0c41b758119f057a25744f",
+        "2c2e68432f46736a998d70fc4531fa21cc0c7e37c917e4cbb41fa3f414b45257",
+        "2c7274f198b5210a589e5cc5ec33be42fc8031f5e9cc92ee29c16f032e3e5917",
+        "3e2f4e14380161d7fa1baf079473fde1704a624fc34ce77eaffff61139f30803",
+        "944af0f47926aec14d6f1d85eac5c7fc41b7a23fd334f40fb061505e1884fec5",
+        "9330ec7425bf16407c51a1cd089a642d6f6026bd79a0dcaa301f3b3a0d1a5fc4",
+        "8e9c6075b101922716c14560209de78b2b5dd682c2073a87872f8a709271e15c",
+        "f6314a04fff9199baacddfa5e6195c85f26e47908025bea68392f82481fc008e",
+        "971c63aec3ed96bd2b4523fe896efb2f9a83c2d5b320e152bdace8ae58080b4e"
+      ]
+    },
+    "final-rename": {
+      "accepted": 12,
+      "count": 12,
+      "input_manifest_sha256": "61a43d2a68181188eb7f30d69589e118be7dfe21eaee9ea9895ede412280f6d0",
+      "report_sha256": "655468e74b25ba0c53e138a68707273caee5e6fc79a97424fab4b6d667f8afdc",
+      "runtime_sha256": {
+        "src\\iCCModules\\imageCompositeConverterLayeredScene.py": "a0f50546b29baaa06fd07f3176fba561c970747c3192a08a2b77479f2b8199a9",
+        "src\\iCCModules\\imageCompositeConverterSceneReferences.py": "fe13944808688eee191989a6f002817c2308d891d4c32171c3c2d779f6e221e5",
+        "src\\iCCModules\\imageCompositeConverterSceneVisibility.py": "241d2f645911559c1d33a9c5031992579d5479a7beb00c1fcba37af44902a4e6"
+      },
+      "all_source_sha256": "484ed13e9e8c6ccdf727c9b35dc2cafd7e7f4879f1e0af1c024a53f7c8995f9f",
+      "output_sha256": [
+        "9432eb8a3425d9c845697be2bef9e6e772d3e065ddca7a266e4b542928529b74",
+        "543948dfbd245cdbd6c08fc2c4d551cadef58e86e8298de606709c1ab9b4e7a7",
+        "5e5b2c5857b4d7b70cfe1f7fb5d87cf20a043d1ccf262ca5e3fa77fff8e05b1f",
+        "43b657fecb1eccb206c2e97dec463733a47483fa9b0c41b758119f057a25744f",
+        "2c2e68432f46736a998d70fc4531fa21cc0c7e37c917e4cbb41fa3f414b45257",
+        "2c7274f198b5210a589e5cc5ec33be42fc8031f5e9cc92ee29c16f032e3e5917",
+        "3e2f4e14380161d7fa1baf079473fde1704a624fc34ce77eaffff61139f30803",
+        "944af0f47926aec14d6f1d85eac5c7fc41b7a23fd334f40fb061505e1884fec5",
+        "9330ec7425bf16407c51a1cd089a642d6f6026bd79a0dcaa301f3b3a0d1a5fc4",
+        "8e9c6075b101922716c14560209de78b2b5dd682c2073a87872f8a709271e15c",
+        "f6314a04fff9199baacddfa5e6195c85f26e47908025bea68392f82481fc008e",
+        "971c63aec3ed96bd2b4523fe896efb2f9a83c2d5b320e152bdace8ae58080b4e"
+      ]
+    },
+    "final-sealed": {
+      "accepted": 12,
+      "count": 12,
+      "input_manifest_sha256": "6b0a4fe2300e712d20d6886dd693a47f7852ab511438247046f6e00ad88a8842",
+      "report_sha256": "b1628943de2d7ec4607697644315a979abd189c3d429f60afb41bd5aedaa71db",
+      "runtime_sha256": {
+        "src\\iCCModules\\imageCompositeConverterLayeredScene.py": "a0f50546b29baaa06fd07f3176fba561c970747c3192a08a2b77479f2b8199a9",
+        "src\\iCCModules\\imageCompositeConverterSceneReferences.py": "fe13944808688eee191989a6f002817c2308d891d4c32171c3c2d779f6e221e5",
+        "src\\iCCModules\\imageCompositeConverterSceneVisibility.py": "241d2f645911559c1d33a9c5031992579d5479a7beb00c1fcba37af44902a4e6"
+      },
+      "all_source_sha256": "484ed13e9e8c6ccdf727c9b35dc2cafd7e7f4879f1e0af1c024a53f7c8995f9f",
+      "output_sha256": [
+        "77248f59d4220b14912ba2aed1a7749daa62ae658237d08415b7f205c9655048",
+        "83e147c29e850681c97e85ddff98f40dda0db4a96b3a544b713467e36a8b4f74",
+        "7b125263fe2ceba9b3e0e7d73fcb539872a0c926f87ac3dc8b40aa5f71b0fe0e",
+        "f8f2159fac31b2b3d9dc35dc356747538e29d90757696ade14558b9e083dc2c5",
+        "e8715d2bcdc086e2942597ea6d1813d42d981103beefc848d16257c225ade35e",
+        "ee1cbc4ff0c4cc6548366771b3d89b6477d84b14702197b961a047e66a4f3292",
+        "79738749f4b98a53f203dbad838a7977161ea9a5023aeb000a88b1480a3200b5",
+        "5aeeed7cbdd8268f94f9e89a183dbd809c0d7963aa664da4dd20a62418307bda",
+        "e350cde5a54f8e280f9715bcac3dbd8bcd7e4570c72ebcaa12c9a22586389518",
+        "9a7f623657d63235ee8455e467722f0a180d5b4e0fa23d653177bb1d89fb1b1d",
+        "c8a223b0d69178feb6131c2d3e158bbd6e3726ded122a30dcffdf94dee38c1eb",
+        "54367a0492c3e9b39750e7806a0d5dcda0123a7dd29aa53d8615782084927584"
+      ]
+    },
+    "final-sealed-rename": {
+      "accepted": 12,
+      "count": 12,
+      "input_manifest_sha256": "6b0a4fe2300e712d20d6886dd693a47f7852ab511438247046f6e00ad88a8842",
+      "report_sha256": "436aaceedfb607fe5c6c8d42b1dfc01d78cecf2257ab2a5482c0c2d7098a6825",
+      "runtime_sha256": {
+        "src\\iCCModules\\imageCompositeConverterLayeredScene.py": "a0f50546b29baaa06fd07f3176fba561c970747c3192a08a2b77479f2b8199a9",
+        "src\\iCCModules\\imageCompositeConverterSceneReferences.py": "fe13944808688eee191989a6f002817c2308d891d4c32171c3c2d779f6e221e5",
+        "src\\iCCModules\\imageCompositeConverterSceneVisibility.py": "241d2f645911559c1d33a9c5031992579d5479a7beb00c1fcba37af44902a4e6"
+      },
+      "all_source_sha256": "484ed13e9e8c6ccdf727c9b35dc2cafd7e7f4879f1e0af1c024a53f7c8995f9f",
+      "output_sha256": [
+        "77248f59d4220b14912ba2aed1a7749daa62ae658237d08415b7f205c9655048",
+        "83e147c29e850681c97e85ddff98f40dda0db4a96b3a544b713467e36a8b4f74",
+        "7b125263fe2ceba9b3e0e7d73fcb539872a0c926f87ac3dc8b40aa5f71b0fe0e",
+        "f8f2159fac31b2b3d9dc35dc356747538e29d90757696ade14558b9e083dc2c5",
+        "e8715d2bcdc086e2942597ea6d1813d42d981103beefc848d16257c225ade35e",
+        "ee1cbc4ff0c4cc6548366771b3d89b6477d84b14702197b961a047e66a4f3292",
+        "79738749f4b98a53f203dbad838a7977161ea9a5023aeb000a88b1480a3200b5",
+        "5aeeed7cbdd8268f94f9e89a183dbd809c0d7963aa664da4dd20a62418307bda",
+        "e350cde5a54f8e280f9715bcac3dbd8bcd7e4570c72ebcaa12c9a22586389518",
+        "9a7f623657d63235ee8455e467722f0a180d5b4e0fa23d653177bb1d89fb1b1d",
+        "c8a223b0d69178feb6131c2d3e158bbd6e3726ded122a30dcffdf94dee38c1eb",
+        "54367a0492c3e9b39750e7806a0d5dcda0123a7dd29aa53d8615782084927584"
+      ]
+    },
+    "final-plan-b": {
+      "accepted": 17,
+      "count": 17,
+      "input_manifest_sha256": "d1f0612e7a58391cd87ef3770461690365440aa80f4aed60ea7898efca06e39f",
+      "report_sha256": "44e31c3dc27ed2a93fcc759d50b73757faad2065cbb7bb6fc8ca897b0c423489",
+      "runtime_sha256": {
+        "src\\iCCModules\\imageCompositeConverterLayeredScene.py": "a0f50546b29baaa06fd07f3176fba561c970747c3192a08a2b77479f2b8199a9",
+        "src\\iCCModules\\imageCompositeConverterSceneReferences.py": "fe13944808688eee191989a6f002817c2308d891d4c32171c3c2d779f6e221e5",
+        "src\\iCCModules\\imageCompositeConverterSceneVisibility.py": "241d2f645911559c1d33a9c5031992579d5479a7beb00c1fcba37af44902a4e6"
+      },
+      "all_source_sha256": "484ed13e9e8c6ccdf727c9b35dc2cafd7e7f4879f1e0af1c024a53f7c8995f9f",
+      "output_sha256": [
+        "3ce0300a6c089d5cf2f1a247b7295f99745f7c450ffc782abd5d5c58142bd372",
+        "acd59cec847512d4b26d05944dc21a25f62a2822a6008bbeb1e2ff71d9d746a2",
+        "39e0ddcfeb11262ae7fef3dd10b58946ffde2f8e4e97bcb03c4625989a442188",
+        "b64c9cb4342f3e2c36fcd2377c049637cbf7ecccc9711f985fc20aafcc6c237e",
+        "2015a27e038772fb6add9e3d04e9630bb02b4e6ce53fbd8c69d85cc86890c850",
+        "2bed180fc8d000b17f36caef9298ad97f3779dfbfb8cc27d231d6c3af5d4e128",
+        "b4b47b57b6b30aaf3c65b82d060d88b174732a271887bdeda243a51829640e43",
+        "b775059a5377d9511f2f2e9cfb2efc28ee1afbe20e9452d67a091d6701c28ee2",
+        "ac987fd6cd4bf3335c9654af4c18f07a0eec6e8b34d53f8239f082c5f0809168",
+        "8a4678738080d377e1570554efc468c39b96ae45c9541e391b99c202bf88ba35",
+        "23d0aa76da00ec0210d70254d9f05acf332ee45dec1e69a0a488ced4a827b6f6",
+        "89a8d5fac5c59400a1b4993e1a7c70e4187dba0748a297ee784db7d6271b76af",
+        "588fbaa0eb259d35c5a94526d9c11aaaf2cae1ab5166b2850bedcffe992ae32d",
+        "e78b5072217cdf20be20a936260f8388265418e40e9464bf990d7e0c2b021122",
+        "0dd84e43a65f9614e4981834ab5fb8678c2398c8296f950793e1bb3a1c4ac26d",
+        "3dd20752b1df66861c0d8d4b0203b850bf42cc0103671f77f931512c5be7ec2b",
+        "54b3898347631302adbf0c4480c386ac06394f0f16bc8c484984e47af8ec465a"
+      ]
+    },
+    "final-negative": {
+      "accepted": 0,
+      "count": 6,
+      "input_manifest_sha256": "900e3f59af3ee52f34fb97e61c612bb6f6aceeebb1d8fe402d687c5a4bef0129",
+      "report_sha256": "0611e9b257d3b3af4bdd3e8aef61c41c7a1bb4e3acdc017600952600bc95b634",
+      "runtime_sha256": {
+        "src\\iCCModules\\imageCompositeConverterLayeredScene.py": "a0f50546b29baaa06fd07f3176fba561c970747c3192a08a2b77479f2b8199a9",
+        "src\\iCCModules\\imageCompositeConverterSceneReferences.py": "fe13944808688eee191989a6f002817c2308d891d4c32171c3c2d779f6e221e5",
+        "src\\iCCModules\\imageCompositeConverterSceneVisibility.py": "241d2f645911559c1d33a9c5031992579d5479a7beb00c1fcba37af44902a4e6"
+      },
+      "all_source_sha256": "484ed13e9e8c6ccdf727c9b35dc2cafd7e7f4879f1e0af1c024a53f7c8995f9f",
+      "output_sha256": [
+        "938c18e4e026f6ab5b90b2743cfc2956b215c89130bbb0a67fffb1e11c49b5ca",
+        "c31039c929006a83fe740f2ef8858850e15286d59217efd95afc7fba14ec9f5f",
+        "b3aa9c40b42ccd4e9e44fb3d9ce4297d8c6acc58c8a6c3de6b74e51d4d62a124",
+        "e7f142a28b776b0a4f9c25ba3785425367f4f6cdc8d8b9cb21dea414d38c5d2b",
+        "4da70b5c15554bda09242a17aeecbef80533377082b6291d6dbc00496ab4a5e7",
+        "78f91bb73eef852f113a5cd937a90b42b0400123d5a6e0bc59c3a30e2c445531"
+      ]
+    },
+    "final-challenge": {
+      "accepted": 0,
+      "count": 4,
+      "input_manifest_sha256": "c9b2f6dd268eeb3ccedbc4f7c001d893178c82c2492c1028601ef9c5d899dde4",
+      "report_sha256": "6b5d4d503d369a76118437f432a97011e844605b33179af02b5896bb3885f355",
+      "runtime_sha256": {
+        "src\\iCCModules\\imageCompositeConverterLayeredScene.py": "a0f50546b29baaa06fd07f3176fba561c970747c3192a08a2b77479f2b8199a9",
+        "src\\iCCModules\\imageCompositeConverterSceneReferences.py": "fe13944808688eee191989a6f002817c2308d891d4c32171c3c2d779f6e221e5",
+        "src\\iCCModules\\imageCompositeConverterSceneVisibility.py": "241d2f645911559c1d33a9c5031992579d5479a7beb00c1fcba37af44902a4e6"
+      },
+      "all_source_sha256": "484ed13e9e8c6ccdf727c9b35dc2cafd7e7f4879f1e0af1c024a53f7c8995f9f",
+      "output_sha256": [
+        "26f178f81db1bc0caf89f210ee27c65417335e941fe76e7dec74318bf4eef28a",
+        "df56fca1dc0c0f93beb2c2387d8f9196019e1e112d9569a08697a9195a6e8d0c",
+        "8a77bfaded277cf93ca488b0d32117789e1263289869eb66d771108f71d32030",
+        "148b5e965b44f47b4a43233bfc98a3f74f9e03d6d45c5c9e55330ae0260cc9db"
+      ],
+      "global_pixel_passes": 0
+    },
+    "final-ci": {
+      "accepted": 6,
+      "count": 6,
+      "input_manifest_sha256": "ab719a82e471a091464aaad09d73de814d535328855488f0487a7407666ab168",
+      "report_sha256": "58264cd1bba661b9ce7430655d633ef8bd5c923a18f9985dcf2214561121c20b",
+      "runtime_sha256": {
+        "src\\iCCModules\\imageCompositeConverterLayeredScene.py": "a0f50546b29baaa06fd07f3176fba561c970747c3192a08a2b77479f2b8199a9",
+        "src\\iCCModules\\imageCompositeConverterSceneReferences.py": "fe13944808688eee191989a6f002817c2308d891d4c32171c3c2d779f6e221e5",
+        "src\\iCCModules\\imageCompositeConverterSceneVisibility.py": "241d2f645911559c1d33a9c5031992579d5479a7beb00c1fcba37af44902a4e6"
+      },
+      "all_source_sha256": "484ed13e9e8c6ccdf727c9b35dc2cafd7e7f4879f1e0af1c024a53f7c8995f9f",
+      "output_sha256": [
+        "404a6a39d1a24a71525d87d47e92b42724ccd04fd893932ce50eb54c2a09ee4d",
+        "8c9e1d462689edc001afb24760620713a6b11f08465a9861b9bb1846a9a83e8f",
+        "8e0a0cfa848d8b02214680f2b4450de9aa05575bfc97a9d54605c33a4be36d3a",
+        "64f017e2e0b60a6f35406998bff70df8eb9a60da5a856c78d76fa86da47124f1",
+        "75d958c12fe82c93a1f77e629ca4c391ad04b80e6a3d190ab6d46be806429f67",
+        "af493616d11b5c670d1599b019e8ffaa26d2e93da7e02142d2fa3305e1dff8a4"
+      ]
+    },
+    "plan-b-cli": {
+      "accepted": 1,
+      "count": 17,
+      "input_manifest_sha256": "d1f0612e7a58391cd87ef3770461690365440aa80f4aed60ea7898efca06e39f",
+      "report_sha256": "08d44649c19ca6a4e979ec33804ef0f71ce0fe3a2bb5029288a2a0e21c5cbce9",
+      "runtime_sha256": {
+        "src\\iCCModules\\imageCompositeConverterLayeredScene.py": "a0f50546b29baaa06fd07f3176fba561c970747c3192a08a2b77479f2b8199a9",
+        "src\\iCCModules\\imageCompositeConverterSceneReferences.py": "288a17b11ceb4a5f4ceaeba62242ba61fd8f2b7b77af20539e7bd0d11d869f94",
+        "src\\iCCModules\\imageCompositeConverterSceneVisibility.py": "6960f74a4aaed8a6fe00df38f706de3a5c88d5cfab2e58eca0981be40568a440"
+      },
+      "all_source_sha256": "01da568608ae8eea4993f5f587a0a95cdc31b7653a76e92023744a7d4edeaed6",
+      "output_sha256": [
+        "3ce0300a6c089d5cf2f1a247b7295f99745f7c450ffc782abd5d5c58142bd372",
+        "f815f46a2f2eb2dc9749e159f0d2bf66daaf80d435431e01d4b0e3e521784cfa",
+        "bbc8dc7bc292f73f64c8520201443e10fb3359aedd90ca4902dcfc58fdb88c65",
+        "16c8fdaefe88a92c9e40f45c7f964b1c9cd2130bb640b3b0688313cd70f3d4dd",
+        "351664b42f6ff512686e2c6debb3e033a5e30243d44fe5762e35345941f8fd79",
+        "88f00de451ee4f19585cefbe19881e9229af5b2c2d51cadf05ea924e35a895fc",
+        "91923d06ad0232765f95369c3fbe95ca3325cdb36dbf3c4cd9bbe3a10c18a031",
+        "ad77c0f0a2725a8df4fbf2762230723709143cd4d63e84f5061cfb5094e03174",
+        "564ddfd620f095aa44ff354a4821e9b63cbf300344822e18dd82872e3aee6f34",
+        "c08f477035357f1d5f59240472161b779cab16a8880813dc7bf19e403857ddc6",
+        "5b956a94ffde460469226172e3894ccb34bc9bfd9b6d6d5a404fb1a24a754474",
+        "30b7c9a7d1c1798049ef0b6bf546e5801594c7d4132c8e606e37551be0fbf151",
+        "8a8bd4577eaef220e0ec4589d6c6d571d460d38d6f9a4353a02f59a3ed826d85",
+        "d526561edd65780b547c4be3365a88183a73d1c956f1882fd111e83f2b730bf0",
+        "1baa8ec485cea74aaec8da09a4c397ea65639de0e89b6d859061ecb8a6d45ff3",
+        "33514356bb83b1cd707acc5c8067379b864502012a8d023c14731c1a2a3d5123",
+        "680a9f8ef353e4b19a50d2509f25b599d166f03261df049d1137f96aa1c7e1c7"
+      ]
+    }
+  },
+  "annotations_sha256": "b855e5e3ccf4f3542526e80cdd42cdc831c7cb92f6acd1b56744e3248a475d64",
+  "toolchain": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "opencv": "4.14.0",
+    "pymupdf": "1.26.7"
+  },
+  "static_checks": [
+    {
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "tests",
+        "tools"
+      ],
+      "returncode": 0,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "tools/check_no_new_image_id_hardcoding.py"
+      ],
+      "returncode": 0,
+      "output_sha256": "7b254e91fbb84b0f932de777f46a53fff9cd9ecdca7f76b78719629995cae770"
+    },
+    {
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "src.imageCompositeConverter",
+        "--help"
+      ],
+      "returncode": 0,
+      "output_sha256": "29b1728bc3b69c47ebb94385e1b66148bae00278c316b75d697338b15eda4c3e"
+    },
+    {
+      "command": [
+        "git",
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "frozen_annotations_sha256": "aa17cf72b3e41d42b25965ff952a5d6a75e516a29db79afedcfcbe1eaae61589",
+  "family_selection_audit": {
+    "frozen_annotation_sha256": "aa17cf72b3e41d42b25965ff952a5d6a75e516a29db79afedcfcbe1eaae61589",
+    "correction": "AC0422_L belongs to the spiral_disk family already exposed as AC0424_1_L in config/neural_real_regions.json. It is development only, never new-family evidence. DLG0011 adds an inner white panel to the previously seen single-panel topology; it is a distinct nested-panel topology, not a colour/size/orientation holdout of the single panel.",
+    "new_topologies": [
+      "pressure_display",
+      "nested_rounded_panel",
+      "overlaid_emblems"
+    ],
+    "new_holdout_topologies": [
+      "overlaid_emblems"
+    ],
+    "runtime_tuned_on_real_holdouts": false
+  },
+  "effective_real_partitions": {
+    "AC0160.JPG": "development",
+    "DLG0011.JPG": "development",
+    "AC0422_L.jpg": "development",
+    "GE0360.jpg": "holdout"
+  },
+  "previous_neural_annotations_sha256": "ec00bf7bf7c5af2393b61c958c4508dccf28ffae944d6506d07e29dcbb9b4820",
+  "collected_test_count": 3752,
+  "collected_manifest_sha256": "af9d35a9fce366582a44a540e253d2cb9ec8cd766cece342a6dfa04859fe12df",
+  "tests": {
+    "scene-accepted": {
+      "tests": 181,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_sha256": "7de2798b91526309d508209642363a3b58488feba7f5d56ae09a715c15c4df72",
+      "seconds": 82.894
+    },
+    "standard": {
+      "tests": 3752,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 30,
+      "xml_sha256": "6083abf1e04a1616e3526b7fa24ba348ff05031bf3b2cebd6437e6e047f3dc34",
+      "seconds": 19222.131
+    }
+  },
+  "archive": {
+    "passed": 377,
+    "count": 377,
+    "preserved_files": 764,
+    "higher_than_stored_best": 42,
+    "new_route_activations": 0,
+    "previous_report_sha256": "3c1483e7d79ebe01f8668817a261feb62b00e6f39cc016b1b9196f17586fd699",
+    "differences_from_previous": [
+      {
+        "variant": "AC0413_S",
+        "before_mean_delta2": 92.73750305175781,
+        "after_mean_delta2": 91.85749816894531
+      },
+      {
+        "variant": "AC0414_L",
+        "before_mean_delta2": 62.334373474121094,
+        "after_mean_delta2": 61.985626220703125
+      },
+      {
+        "variant": "AC0424_M",
+        "before_mean_delta2": 139.18333435058594,
+        "after_mean_delta2": 130.03111267089844
+      },
+      {
+        "variant": "AC0424_S",
+        "before_mean_delta2": 148.8625030517578,
+        "after_mean_delta2": 151.4600067138672
+      },
+      {
+        "variant": "AC0910_M",
+        "before_mean_delta2": 570.08251953125,
+        "after_mean_delta2": 667.9199829101562
+      }
+    ],
+    "report_sha256": "5e6cf96a36ec70a62bb8052c4343ce8ab2ef54ee45df958984ad9add46c2c712"
+  },
+  "catalog_accepted": 377,
+  "catalog_total": 1785,
+  "new_real_acceptances": 0
+}

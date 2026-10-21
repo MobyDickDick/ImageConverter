@@ -292,7 +292,9 @@ def fit_scene_groups(width, height, *, contract, groups, image, render_fn, error
                 # A circle has one radius, so height follows width.
                 if kind == 'circle':
                     geometry[3] = geometry[2]
-                adjusted.append(dict(scene[i], geometry=geometry))
+                stroke, fill = p[5*n+6*i:5*n+6*i+6].reshape(2, 3)
+                adjusted.append(dict(scene[i], geometry=geometry, stroke=stroke,
+                                     fill=fill if filled[i] else None))
             return compatible_fn(adjusted, contract)
 
         def loss(a, b):

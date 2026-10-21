@@ -1,5 +1,12 @@
 # ImageConverter
 
+Das [reale Szenenpaket GENERAL-SCENE-REAL-05](docs/next_arbeitspaket_2026-10-21_scene_real.md)
+ergänzt eindeutige Farb-/Lagebezüge mit konservativer Mehrdeutigkeitsprüfung.
+Neue Sprachkontrollen und 17/17 erweiterte Varianten bestehen die unabhängigen
+Objekt-/Regionsgates. Vier vorab markierte reale Familien erreichen im
+Versuch keine vollständige Abnahme; die belegte Katalogzahl
+bleibt 377/1.785. Verlauf und gerundete Panelkonturen sind Folgearbeit.
+
 Das [Sichtbarkeitspaket GENERAL-SCENE-VISIBILITY-04](docs/next_arbeitspaket_2026-10-21_scene_visibility.md)
 ergänzt eigene dunkle Konturen bei Überdeckung, kombinierte Verschachtelung und
 Teilüberdeckung sowie eindeutige sprachliche Tiefenbedingungen. Neue gedrehte
