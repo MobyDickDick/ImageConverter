@@ -6,9 +6,22 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-21)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `488` · Erledigt `448` · Offen `40`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `492` · Erledigt `448` · Offen `44`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
+
+## Praktische Folgen der Projekteinschätzung (2026-10-21)
+
+Umfang, Reihenfolge und überprüfbare Abnahmekriterien stehen in
+[Praktische Aufgaben aus der Projekteinschätzung](quality_review_tasks_2026-10-21.md).
+GENERAL-SCENE-REAL-05 wird dort präzisiert; IDO-19/IDO-21 und die offene
+produktive Netzabnahme werden weiterverwendet. Die Roadmap bleibt maßgeblich:
+Konvertierungsqualität vor größerer Produktbereinigung.
+
+- [ ] **BENCHMARK-PRACTICAL-01:** Nutzen auf mindestens 20 vorab abgegrenzten realen Familien gegen zwei bestehende Verfahren messen, einschließlich Formen außerhalb des Kreis-/Rechteckumfangs. Echte Ausgaben unabhängig prüfen; Eingaben, Budgets, Familienaggregation und Fehlversuche offenlegen. An mindestens zehn Familien aktive Prüf-/Beschreibungs-/Korrekturzeit und manuelles Nachzeichnen vergleichen. Reproduzierbarer Ergebnisbericht mit Einsatzgrenzen ist die Abnahme, auch bei negativem Ergebnis.
+- [ ] **SEMANTIC-ROBUSTNESS-01:** Für mindestens zehn reale Familien je fünf unabhängige bedeutungsgleiche Beschreibungen und drei gezielte Widerspruchs-/Mehrdeutigkeitsfälle durch die echte CLI prüfen. Entwicklungs- und neue Prüfformulierungen trennen; gleiche Bedeutung muss denselben fachlichen Vertrag und dieselbe Qualitätsabnahme erreichen. Sprachbedingte Modellwechsel beheben, widersprüchliche Angaben dürfen keinen stillen Erfolg erhalten.
+- [ ] **COMPONENT-VALUE-02:** Das vorhandene Bot-Experiment mit tatsächlich aktiven schwierigen Registrierungen und neuen gesperrten realen Familien fortsetzen. Vollständiges, abgeschaltetes und begründet verkleinertes Portfolio bei gleichen Gesamtbudgets und mindestens drei Seeds vergleichen. Aktivität, unabhängige SVG-Qualität und Aufwand belegen; konkrete Entscheidung oder verbleibende Unsicherheit dokumentieren. Keine automatische Entfernung aus schwacher Evidenz; CNN-Folgearbeit bleibt NEURAL-ELEMENTS-01.
+- [ ] **ARCH-RUNTIME-CONTEXT-01:** Nach der Qualitätsphase eine produktive Rendering-/Reporting-Grenze von globaler Namespace-Übernahme und `_syncRemainingRuntimeBindings` auf explizite Abhängigkeiten umstellen. Globale Synchronisierung für diesen Pfad entfernen; getrennte Konvertierungskontexte, öffentliche Kompatibilität und reale Qualitätsregressionen prüfen. Inventar entfernter und verbleibender Kopplung statt bloßer Dateiaufteilung liefern.
 
 ## Übergreifende Rekonstruktion (Audit 2026-10-17)
 
@@ -42,7 +55,7 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 - [x] **GENERAL-SCENE-VISIBILITY-04:** Begrenzten Sichtbarkeitsumfang für zwei bis drei gefüllte Kreis-/Rechteckinstanzen mit eigenen dunklen Konturen, kombinierter Verschachtelung/Teilüberdeckung und eindeutigen sprachlichen Größen-/Tiefenrollen abgeschlossen. Sichtbare Normalenbänder liefern Konturbreiten; verborgene Rechteckseiten bleiben unbekannt. Reihenfolgen benötigen beobachtete gemeinsame Innenflächen. Zwölf eingefrorene CLI-Szenen verbessern sich von 0/12 auf 12/12, zwölf neue gedrehte/umformulierte Szenen bestehen 12/12, neutrale Dateinamen sind bytegleich und eine erweiterte Vorlage besteht 17/17. Unabhängige native Objekt-, Konturbreiten- und Regionsprüfungen bei unveränderten Qualitätsgrenzen. Umfang und Nachweise: `docs/next_arbeitspaket_2026-10-21_scene_visibility.md`.
 
-- [ ] **GENERAL-SCENE-REAL-05:** Neue reale Kreis-/Rechteckfamilien vor Entwicklung unabhängig markieren und sperren; Szenen mit sichtbaren Überdeckungen, Konturen und Verschachtelung prüfen. Eindeutige Farb-/Lagebezüge zusätzlich zu Größenrollen typisieren, unbekannte und mehrdeutige Beziehungen konservativ behandeln. Echte CLI-Vorher-/Nachher-Vergleiche mit unveränderten unabhängigen Objekt-/Regionsgates; Kataloggewinne nur anhand neuer abgenommener Originalbild-/SVG-Paare zählen.
+- [ ] **GENERAL-SCENE-REAL-05:** Neue reale Kreis-/Rechteckfamilien vor Entwicklung unabhängig markieren und sperren; Szenen mit sichtbaren Überdeckungen, Konturen und Verschachtelung prüfen. Eindeutige Farb-/Lagebezüge zusätzlich zu Größenrollen typisieren, unbekannte und mehrdeutige Beziehungen konservativ behandeln. Echte CLI-Vorher-/Nachher-Vergleiche mit unveränderten unabhängigen Objekt-/Regionsgates; Kataloggewinne nur anhand neuer abgenommener Originalbild-/SVG-Paare zählen. Übertragung auf mindestens zwei neue reale Familien mit anderen Kombinationen bereits unterstützter Primitive über denselben Szenenweg ohne neue Familienvorlage oder Familien-Dispatch belegen; Varianten und unabhängige Familien getrennt zählen. Präzisierte Abnahme: [Projekteinschätzung](quality_review_tasks_2026-10-21.md#general-scene-real-05--übertragung-statt-weiterer-einzelfallpfade).
 
 ## Katalog-CI (2026-10-11)
 
