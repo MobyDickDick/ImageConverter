@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-21)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `488` · Erledigt `448` · Offen `40`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `489` · Erledigt `449` · Offen `40`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -42,7 +42,9 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 - [x] **GENERAL-SCENE-VISIBILITY-04:** Begrenzten Sichtbarkeitsumfang für zwei bis drei gefüllte Kreis-/Rechteckinstanzen mit eigenen dunklen Konturen, kombinierter Verschachtelung/Teilüberdeckung und eindeutigen sprachlichen Größen-/Tiefenrollen abgeschlossen. Sichtbare Normalenbänder liefern Konturbreiten; verborgene Rechteckseiten bleiben unbekannt. Reihenfolgen benötigen beobachtete gemeinsame Innenflächen. Zwölf eingefrorene CLI-Szenen verbessern sich von 0/12 auf 12/12, zwölf neue gedrehte/umformulierte Szenen bestehen 12/12, neutrale Dateinamen sind bytegleich und eine erweiterte Vorlage besteht 17/17. Unabhängige native Objekt-, Konturbreiten- und Regionsprüfungen bei unveränderten Qualitätsgrenzen. Umfang und Nachweise: `docs/next_arbeitspaket_2026-10-21_scene_visibility.md`.
 
-- [ ] **GENERAL-SCENE-REAL-05:** Neue reale Kreis-/Rechteckfamilien vor Entwicklung unabhängig markieren und sperren; Szenen mit sichtbaren Überdeckungen, Konturen und Verschachtelung prüfen. Eindeutige Farb-/Lagebezüge zusätzlich zu Größenrollen typisieren, unbekannte und mehrdeutige Beziehungen konservativ behandeln. Echte CLI-Vorher-/Nachher-Vergleiche mit unveränderten unabhängigen Objekt-/Regionsgates; Kataloggewinne nur anhand neuer abgenommener Originalbild-/SVG-Paare zählen.
+- [x] **GENERAL-SCENE-REAL-05:** Begrenzte Farb-/Lagebezüge mit eindeutiger Rasterzuordnung und konservativer Mehrdeutigkeitsprüfung umgesetzt. Vier Originale vor Entwicklung visuell markiert; der spätere Familienaudit stuft die bereits bekannte Spiraltopologie ausdrücklich als Entwicklungskontrolle ein. Drei neue Szenentopologien, davon eine neue gesperrte reale Prüffamilie. Echte CLI-Vorher-/Nachher-Ergebnisse: Sprachkontrollen 0/12 → 12/12, neue umformulierte Prüfszenen 12/12, erweiterte Vorlage 17/17; reale Gesamtprüfung unverändert 0/4. 377/377 Archiv-Neukonvertierungen bestehen das absolute Archivgate; 764 Archivdateien hashgleich. 181 Szenentests und die vollständige normale Standardsuite mit 3.722 bestandenen / 30 regulär übersprungenen Tests bestehen; alle 3.752 gesammelten IDs im XML nachgewiesen. Kein neuer realer Katalogerfolg. Details und Grenzen: `docs/next_arbeitspaket_2026-10-21_scene_real.md`.
+
+- [ ] **GENERAL-SCENE-REAL-06:** Reale verschachtelte Rechteckpanels mit Verlauf und gerundeter Kontur als nächsten begrenzten Szenenumfang bearbeiten. Füllung, Kontur und innere helle Fläche getrennt beobachten und prüfen; sichtbare Farb-/Lagebezüge erhalten. Die vier jetzt untersuchten Familien sind Entwicklung. Vor weiterer Runtime-Entwicklung neue reale Prüf- und Negativfamilien unabhängig markieren und sperren. Echte CLI-Gegenproben mit unveränderten Pixel-/Objekt-/Regionsgates; Kataloggewinn nur durch neue abgenommene Originalbild-/SVG-Paare.
 
 ## Katalog-CI (2026-10-11)
 
@@ -56,11 +58,11 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 - [x] **AC0232 – Dreiwegeventil mit angeschlossener M-Scheibe:** eigenständige Beschreibungen, vollständiger Rasterfit und diagonale Pfadverläufe. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. 377 Archivpaare; alle 374 bisherigen Datensätze bleiben unverändert. Die gefilterte reguläre Rotation ist anschließend leer. Nächstes Architekturpaket: SEARCH-DEADLINE-01. Details: `docs/next_arbeitspaket_2026-10-18_ac0232_m.md`.
 
-**Neuester Architekturabschluss:** GENERAL-SCENE-VISIBILITY-04 mit sichtbaren eigenen Konturen bei Überdeckung, kombinierter Verschachtelung/Teilüberdeckung und verbindlichen Größen-/Tiefenrollen im begrenzten Kreis-/Rechteckumfang. Details: `docs/next_arbeitspaket_2026-10-21_scene_visibility.md`. GENERAL-SCENE-01 bleibt als vorheriger Fusionsabschluss dokumentiert.
+**Neuester Architekturabschluss:** GENERAL-SCENE-REAL-05 ergänzt typisierte Farb-/Lagebezüge und einen begrenzten realen Versuch ohne neue Katalogabnahme; vollständige normale Standardsuite und unabhängige CLI-/Archivprüfungen bestehen. Details: `docs/next_arbeitspaket_2026-10-21_scene_real.md`. Der vorherige Sichtbarkeitsabschluss bleibt unter `docs/next_arbeitspaket_2026-10-21_scene_visibility.md` dokumentiert.
 
 **Vorherige Architekturarbeit:** COMPONENT-VALUE-01 hat die sechs Such-Bots mit echten Runtime-Schaltern und unabhängigen Gegenproben vermessen; bei unklarer Evidenz bleiben alle erhalten. NEURAL-ELEMENTS-01 und NEURAL-ELEMENTS-REAL-02 sind als begrenzte Experimente ohne belastbaren End-to-End-Nutzen abgeschlossen. Die produktive Netzabnahme bleibt offen. Nachweise: `docs/next_arbeitspaket_2026-10-18_component_value.md`, `docs/next_arbeitspaket_2026-10-19_neural_elements.md` und `docs/next_arbeitspaket_2026-10-19_neural_real_regions.md`.
 
-**Nächste Architekturarbeit:** GENERAL-SCENE-REAL-05 für neue unabhängig markierte reale Familien und eindeutige Farb-/Lagebezüge. Breitere Formarten und weitere Komponenten bleiben Folgearbeit; IDO-19/IDO-21 und historische Kompatibilitätsaufsicht bleiben offen.
+**Nächste Architekturarbeit:** GENERAL-SCENE-REAL-06 für reale verschachtelte Verlaufspanels mit gerundeter Kontur und neue gesperrte reale Familien. Breitere Formarten und weitere Komponenten bleiben Folgearbeit; IDO-19/IDO-21 und historische Kompatibilitätsaufsicht bleiben offen.
 
 **Neuester Familienabschluss:** AC0232 M/L/S. Keine weiteren Kandidaten in der bisherigen gefilterten Rotation; offene Architektur- und Bestandsaufgaben bleiben bestehen.
 

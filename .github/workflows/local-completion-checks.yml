@@ -10,6 +10,38 @@ on:
   workflow_dispatch:
 
 jobs:
+  named-scene-references:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Generate independent named-reference controls
+        run: python -m tools.evaluate_real_scene --prepare .tmp/named-inputs --seed 762915 --count 6 --paraphrase
+      - name: Convert and independently verify native objects and regions
+        run: python -m tools.evaluate_real_scene --inputs .tmp/named-inputs --output .tmp/named-cli --require-all
+      - name: Replay saved outputs and verify worker guards
+        run: python -m tools.evaluate_real_scene --inputs .tmp/named-inputs --output .tmp/named-cli --verify-only --require-all
+      - name: Prepare independently annotated real-family challenge set
+        run: python -m tools.evaluate_real_scene --prepare .tmp/real-inputs --real
+      - name: Record real-family outcomes without claiming unsupported content as success
+        run: python -m tools.evaluate_real_scene --inputs .tmp/real-inputs --output .tmp/real-cli
+      - name: Verify real outputs and budget evidence independently
+        run: python -m tools.evaluate_real_scene --inputs .tmp/real-inputs --output .tmp/real-cli --verify-only
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: named-and-real-scene-evidence
+          path: |
+            .tmp/named-inputs
+            .tmp/named-cli
+            .tmp/real-inputs
+            .tmp/real-cli
+          retention-days: 7
+
   visible-primitive-scenes:
     runs-on: ubuntu-latest
     timeout-minutes: 5
