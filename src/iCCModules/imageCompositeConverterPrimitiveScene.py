@@ -109,6 +109,10 @@ def _local_quality(reference, output):
 
 
 def fit_primitive_scene(width, height, *, description, image, render_fn, error_fn):
+    from src.iCCModules.imageCompositeConverterSceneVisibility import requested, fit_visibility_scene
+    if requested(description):
+        return fit_visibility_scene(width, height, description=description, image=image,
+                                    render_fn=render_fn, error_fn=error_fn)
     # Keep established outline scenes byte-identical; flat colored/nested
     # scenes share the same CLI registration and supervised image budget.
     fitted = _fit_outline_scene(width, height, description=description, image=image,

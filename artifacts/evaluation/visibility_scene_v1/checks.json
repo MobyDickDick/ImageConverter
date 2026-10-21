@@ -1,0 +1,157 @@
+{
+  "parent_commit": "a11cbb791",
+  "branch": "codex/general-scene-visibility-04-2026-10-21",
+  "toolchain": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "opencv": "4.14.0",
+    "pymupdf": "1.26.7"
+  },
+  "frozen_runtime": {
+    "src/iCCModules/imageCompositeConverterLayeredScene.py": "982e4fbe8c626b8473281968ba4070328b82decc80f961b25f373c107f09f479",
+    "src/iCCModules/imageCompositeConverterPrimitiveScene.py": "76318ef22889a5f23d9c2e3835bbb58286b9b16039005cd6cdd9e28b7f1011a6",
+    "src/iCCModules/imageCompositeConverterSceneFusion.py": "567c18a77f906df3dcdcdf1300dc3a892b24843c844e3aa50737432db70e6af6",
+    "src/iCCModules/imageCompositeConverterSceneVisibility.py": "2699f30876a47e9d09c740e76624b5f1d35623679a0f09617d798a30d0ad003d"
+  },
+  "standard_profile": {
+    "tests": 3719,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 30,
+    "passed": 3689,
+    "seconds": 6052.87,
+    "xml": ".tmp/visibility-standard-tests.xml",
+    "xml_sha256": "07c45b37789c9f475cd1f0377d06a4fe1ba17bf332a1e565831bd080709618ad"
+  },
+  "targeted_regression": {
+    "tests": 146,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 146,
+    "seconds": 57.168,
+    "xml": ".tmp/visibility-regression.xml",
+    "xml_sha256": "eb7101e65b7851b0e3f6db61e69f2a2854b93c26691bd0f55b92d5034c4ae12a"
+  },
+  "final_visibility_tests": {
+    "tests": 30,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 30,
+    "seconds": 12.891,
+    "xml": ".tmp/visibility-last-tests-2.xml",
+    "xml_sha256": "4020df8f897ddd0030da52e27a0d04e4dfb19e46c68fc74d900e08256e813b40"
+  },
+  "targeted_unique_test_ids": 148,
+  "first_standalone_extra_tests_attempt": {
+    "tests": 30,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 29,
+    "seconds": 13.74,
+    "xml": ".tmp/visibility-last-tests.xml",
+    "xml_sha256": "c46408efc8f2a09c6afc4c28e29b6119d233fdb849101f48e88f65b8bcc0d95c",
+    "note": "Test-only missing SVG namespace registration fixed; subsequent 30-test run and complete standard suite pass. Runtime unchanged."
+  },
+  "collected_tests": 3719,
+  "collected_list_sha256": "81e047e4a27fd90bc6e2377ccbe1f1f0279f63c785ff87522361b880e35b729d",
+  "default_profile_excluded_heavy_modules": [
+    "test_image_composite_converter.py",
+    "test_satisfactory_regression_battery.py",
+    "test_conversion_regression_smoke.py"
+  ],
+  "archive": {
+    "pairs": 377,
+    "catalog_unique_jpg_names": 1785,
+    "catalog_share_percent": 21.12044817927171,
+    "modes": {
+      "semantic-only": 329,
+      "standard": 48
+    },
+    "reconverted": 377,
+    "passed": 377,
+    "unchanged_files": 764,
+    "index_sha256": "3cdfd0311b6acfe79df525aaeeac8bde79fb879daebac16e5f635a88892f053b",
+    "report": ".tmp/visibility-archive-recheck/report.json",
+    "report_sha256": "3c1483e7d79ebe01f8668817a261feb62b00e6f39cc016b1b9196f17586fd699",
+    "visibility_dispatch_matches": 0,
+    "unchanged": true,
+    "files": 764,
+    "higher_than_stored_best": [
+      "AC0232_L",
+      "AC0232_M",
+      "AC0232_S",
+      "AC0411_S",
+      "AC0840_L",
+      "AC0840_M",
+      "AC0840_S",
+      "AC0850_L",
+      "AC0850_M",
+      "AC0850_S",
+      "AC0910_S",
+      "AC0920_L",
+      "AC0920_M",
+      "AC0920_S",
+      "AC0921_L",
+      "AC0921_M",
+      "AC0921_S",
+      "AC1000_L",
+      "AC1000_S",
+      "AC0800_S",
+      "AC0811_L",
+      "AC0811_M",
+      "AC0811_S",
+      "AC0813_L",
+      "AC0813_M",
+      "AC0813_S",
+      "AC0814_L",
+      "AC0814_M",
+      "AC0831_L",
+      "AC0831_M",
+      "AC0831_S",
+      "AC0832_S",
+      "AC0834_M",
+      "AC0834_S",
+      "AC0835_L",
+      "AC0835_S",
+      "AC0836_L",
+      "AC0836_M",
+      "AC0838_M",
+      "AC0839_M",
+      "AC0881_M"
+    ],
+    "differences_from_previous": [
+      {
+        "variant": "AC0414_L",
+        "current": 62.334373474121094,
+        "previous": 63.00062561035156
+      },
+      {
+        "variant": "AC0421_S",
+        "current": 95.07499694824219,
+        "previous": 96.55999755859375
+      },
+      {
+        "variant": "AC0424_M",
+        "current": 139.18333435058594,
+        "previous": 126.2844467163086
+      }
+    ]
+  },
+  "ci_smoke": {
+    "local_passed": 6,
+    "remote_run_started": false,
+    "independent_verification": true
+  },
+  "prior_fusion": {
+    "passed": 12,
+    "byte_identical": 12
+  },
+  "syntax_compileall": true,
+  "cli_help": true,
+  "image_id_hardcoding_occurrences": 0,
+  "whitespace_command": "git -c core.whitespace=cr-at-eol diff --check",
+  "summary_sha256": "b87a66bd4965de2641d107f2bdb5e21b58c481aaa1c1bfd6cb8b94eb995381be"
+}

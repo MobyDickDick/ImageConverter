@@ -4,11 +4,24 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-10-20)
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-21)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `487` · Erledigt `447` · Offen `40`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `492` · Erledigt `448` · Offen `44`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
+
+## Praktische Folgen der Projekteinschätzung (2026-10-21)
+
+Umfang, Reihenfolge und überprüfbare Abnahmekriterien stehen in
+[Praktische Aufgaben aus der Projekteinschätzung](quality_review_tasks_2026-10-21.md).
+GENERAL-SCENE-REAL-05 wird dort präzisiert; IDO-19/IDO-21 und die offene
+produktive Netzabnahme werden weiterverwendet. Die Roadmap bleibt maßgeblich:
+Konvertierungsqualität vor größerer Produktbereinigung.
+
+- [ ] **BENCHMARK-PRACTICAL-01:** Nutzen auf mindestens 20 vorab abgegrenzten realen Familien gegen zwei bestehende Verfahren messen, einschließlich Formen außerhalb des Kreis-/Rechteckumfangs. Echte Ausgaben unabhängig prüfen; Eingaben, Budgets, Familienaggregation und Fehlversuche offenlegen. An mindestens zehn Familien aktive Prüf-/Beschreibungs-/Korrekturzeit und manuelles Nachzeichnen vergleichen. Reproduzierbarer Ergebnisbericht mit Einsatzgrenzen ist die Abnahme, auch bei negativem Ergebnis.
+- [ ] **SEMANTIC-ROBUSTNESS-01:** Für mindestens zehn reale Familien je fünf unabhängige bedeutungsgleiche Beschreibungen und drei gezielte Widerspruchs-/Mehrdeutigkeitsfälle durch die echte CLI prüfen. Entwicklungs- und neue Prüfformulierungen trennen; gleiche Bedeutung muss denselben fachlichen Vertrag und dieselbe Qualitätsabnahme erreichen. Sprachbedingte Modellwechsel beheben, widersprüchliche Angaben dürfen keinen stillen Erfolg erhalten.
+- [ ] **COMPONENT-VALUE-02:** Das vorhandene Bot-Experiment mit tatsächlich aktiven schwierigen Registrierungen und neuen gesperrten realen Familien fortsetzen. Vollständiges, abgeschaltetes und begründet verkleinertes Portfolio bei gleichen Gesamtbudgets und mindestens drei Seeds vergleichen. Aktivität, unabhängige SVG-Qualität und Aufwand belegen; konkrete Entscheidung oder verbleibende Unsicherheit dokumentieren. Keine automatische Entfernung aus schwacher Evidenz; CNN-Folgearbeit bleibt NEURAL-ELEMENTS-01.
+- [ ] **ARCH-RUNTIME-CONTEXT-01:** Nach der Qualitätsphase eine produktive Rendering-/Reporting-Grenze von globaler Namespace-Übernahme und `_syncRemainingRuntimeBindings` auf explizite Abhängigkeiten umstellen. Globale Synchronisierung für diesen Pfad entfernen; getrennte Konvertierungskontexte, öffentliche Kompatibilität und reale Qualitätsregressionen prüfen. Inventar entfernter und verbleibender Kopplung statt bloßer Dateiaufteilung liefern.
 
 ## Übergreifende Rekonstruktion (Audit 2026-10-17)
 
@@ -40,7 +53,9 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 - [x] **GENERAL-SCENE-01:** Begrenzten allgemeinen Szenenweg für ein bis drei Kreis-/Rechteckinstanzen einschließlich gemischter Anordnungen abgeschlossen. Gemeinsame Instanzgruppen führen vollständige Vordergrund-/Farbgrenzen, sichtbare Kreisbögen und Rechteckseiten zusammen; Formalternativen und Zeichenreihenfolgen konkurrieren im gemeinsamen überwachten Rasterfit. Beschreibung, Anzahl, Negationen und tatsächliche native Beziehungen bleiben verbindlich. Bestehende getrennte Kontur-/Flächen- und vollständig verschachtelte Szenen behalten Vorrang. Zwölf vorab eingefrorene und zwölf nach endgültigem Code-Freeze erzeugte CLI-Szenen verbessern sich von jeweils 0/12 auf 12/12; unabhängige native Objekt-/Regionsprüfung, bytegleiche Umbenennungen und 17/17 erweiterte Varianten. 377/377 Archiv-Neukonvertierungen bestehen; alle gespeicherten Paare bleiben hashgleich. Umfang und Nachweise: `docs/next_arbeitspaket_2026-10-20_scene_fusion.md`. Der historische Perception-IR-Merge anderer Detektoren bleibt bestehen; der Abschluss gilt für den beschriebenen begrenzten Kreis-/Rechteckvertrag.
 
-- [ ] **GENERAL-SCENE-VISIBILITY-04:** Den gemeinsamen Szenenweg auf Überdeckung mit eigenen Konturen, kombinierte Verschachtelung/Teilüberdeckung und explizite sprachliche Tiefenreihenfolgen ausdehnen. Nicht beobachtbare Geometrie weiterhin als unsicher behandeln; weitere Detektorfamilien/Formarten erst mit eigenen unbekannten Szenen und unveränderten unabhängigen Objekt-/Regionsgates übernehmen. Grenzen und Ausgangsstand: `docs/next_arbeitspaket_2026-10-20_scene_fusion.md`.
+- [x] **GENERAL-SCENE-VISIBILITY-04:** Begrenzten Sichtbarkeitsumfang für zwei bis drei gefüllte Kreis-/Rechteckinstanzen mit eigenen dunklen Konturen, kombinierter Verschachtelung/Teilüberdeckung und eindeutigen sprachlichen Größen-/Tiefenrollen abgeschlossen. Sichtbare Normalenbänder liefern Konturbreiten; verborgene Rechteckseiten bleiben unbekannt. Reihenfolgen benötigen beobachtete gemeinsame Innenflächen. Zwölf eingefrorene CLI-Szenen verbessern sich von 0/12 auf 12/12, zwölf neue gedrehte/umformulierte Szenen bestehen 12/12, neutrale Dateinamen sind bytegleich und eine erweiterte Vorlage besteht 17/17. Unabhängige native Objekt-, Konturbreiten- und Regionsprüfungen bei unveränderten Qualitätsgrenzen. Umfang und Nachweise: `docs/next_arbeitspaket_2026-10-21_scene_visibility.md`.
+
+- [ ] **GENERAL-SCENE-REAL-05:** Neue reale Kreis-/Rechteckfamilien vor Entwicklung unabhängig markieren und sperren; Szenen mit sichtbaren Überdeckungen, Konturen und Verschachtelung prüfen. Eindeutige Farb-/Lagebezüge zusätzlich zu Größenrollen typisieren, unbekannte und mehrdeutige Beziehungen konservativ behandeln. Echte CLI-Vorher-/Nachher-Vergleiche mit unveränderten unabhängigen Objekt-/Regionsgates; Kataloggewinne nur anhand neuer abgenommener Originalbild-/SVG-Paare zählen. Übertragung auf mindestens zwei neue reale Familien mit anderen Kombinationen bereits unterstützter Primitive über denselben Szenenweg ohne neue Familienvorlage oder Familien-Dispatch belegen; Varianten und unabhängige Familien getrennt zählen. Präzisierte Abnahme: [Projekteinschätzung](quality_review_tasks_2026-10-21.md#general-scene-real-05--übertragung-statt-weiterer-einzelfallpfade).
 
 ## Katalog-CI (2026-10-11)
 
@@ -54,11 +69,11 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 - [x] **AC0232 – Dreiwegeventil mit angeschlossener M-Scheibe:** eigenständige Beschreibungen, vollständiger Rasterfit und diagonale Pfadverläufe. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. 377 Archivpaare; alle 374 bisherigen Datensätze bleiben unverändert. Die gefilterte reguläre Rotation ist anschließend leer. Nächstes Architekturpaket: SEARCH-DEADLINE-01. Details: `docs/next_arbeitspaket_2026-10-18_ac0232_m.md`.
 
-**Neuester Architekturabschluss:** GENERAL-SCENE-01 mit gemeinsamer Detektorfusion und partiellen Überdeckungen im begrenzten Kreis-/Rechteckumfang. Vollständige Grenzen und sichtbare Kreisbögen/Rechteckseiten liefern gemeinsame Instanzgruppen; alternative Zeichenreihenfolgen werden unter unveränderten Gates geprüft. Details: `docs/next_arbeitspaket_2026-10-20_scene_fusion.md`. Der vorherige gefüllte/verschachtelte Umfang bleibt als GENERAL-SCENE-FILLED-02 dokumentiert.
+**Neuester Architekturabschluss:** GENERAL-SCENE-VISIBILITY-04 mit sichtbaren eigenen Konturen bei Überdeckung, kombinierter Verschachtelung/Teilüberdeckung und verbindlichen Größen-/Tiefenrollen im begrenzten Kreis-/Rechteckumfang. Details: `docs/next_arbeitspaket_2026-10-21_scene_visibility.md`. GENERAL-SCENE-01 bleibt als vorheriger Fusionsabschluss dokumentiert.
 
 **Vorherige Architekturarbeit:** COMPONENT-VALUE-01 hat die sechs Such-Bots mit echten Runtime-Schaltern und unabhängigen Gegenproben vermessen; bei unklarer Evidenz bleiben alle erhalten. NEURAL-ELEMENTS-01 und NEURAL-ELEMENTS-REAL-02 sind als begrenzte Experimente ohne belastbaren End-to-End-Nutzen abgeschlossen. Die produktive Netzabnahme bleibt offen. Nachweise: `docs/next_arbeitspaket_2026-10-18_component_value.md`, `docs/next_arbeitspaket_2026-10-19_neural_elements.md` und `docs/next_arbeitspaket_2026-10-19_neural_real_regions.md`.
 
-**Nächste Architekturarbeit:** GENERAL-SCENE-VISIBILITY-04 für eigene Konturen bei Überdeckung, kombinierte Topologien und sprachliche Tiefenreihenfolgen. Breitere reale Familien und weitere Komponenten bleiben Folgearbeit; IDO-19/IDO-21 und historische Kompatibilitätsaufsicht bleiben offen.
+**Nächste Architekturarbeit:** GENERAL-SCENE-REAL-05 für neue unabhängig markierte reale Familien und eindeutige Farb-/Lagebezüge. Breitere Formarten und weitere Komponenten bleiben Folgearbeit; IDO-19/IDO-21 und historische Kompatibilitätsaufsicht bleiben offen.
 
 **Neuester Familienabschluss:** AC0232 M/L/S. Keine weiteren Kandidaten in der bisherigen gefilterten Rotation; offene Architektur- und Bestandsaufgaben bleiben bestehen.
 

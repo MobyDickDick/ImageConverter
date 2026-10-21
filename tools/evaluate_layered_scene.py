@@ -94,12 +94,15 @@ def check_objects(svg, expected):
                 continue
         else:
             return dict(passed=False, reason='non_native_scene_element')
-        actual.append(dict(kind='rectangle' if kind == 'rect' else kind, bbox=box))
+        actual.append(dict(kind='rectangle' if kind == 'rect' else kind, bbox=box, stroke_width=sw))
     if len(actual) != len(expected):
         return dict(passed=False, detected_count=len(actual), expected_count=len(expected))
     best = float('inf')
     for order in itertools.permutations(range(len(actual))):
         if any(actual[a]['kind'] != obj['kind'] for a, obj in zip(order, expected)):
+            continue
+        if any('stroke_width' in obj and abs(actual[a]['stroke_width']-obj['stroke_width']) > .85
+               for a, obj in zip(order, expected)):
             continue
         if any(obj['parent'] is not None and order[obj['parent']] >= order[i] for i, obj in enumerate(expected)):
             continue
