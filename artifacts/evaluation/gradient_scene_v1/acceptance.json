@@ -1,0 +1,274 @@
+{
+  "baseline": {
+    "baseline_sha256": "29c96b9d5e47f5c53db5b05e1170bf47ed42fab40894d1471a4d730022592963",
+    "cases": {
+      "DLG0011": {
+        "dimensions": {
+          "height": 25,
+          "width": 90
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.2627778649330139,
+          "error_per_pixel": 0.012968074178200692,
+          "object_mask_iou": 0.2440677966101695,
+          "semantic_score": 0.0
+        }
+      },
+      "DLG0018": {
+        "dimensions": {
+          "height": 25,
+          "width": 90
+        },
+        "metrics": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.32134169340133667,
+          "error_per_pixel": 0.004755877834947296,
+          "object_mask_iou": 0.4656652360515021,
+          "semantic_score": 0.0
+        }
+      }
+    },
+    "provenance": {
+      "after_report_sha256": "99369f560f29782b2b71789acae463e0136d4eb8d1eeba0810f767d1c3c9ae54",
+      "before_report_sha256": "e35768890eb24467c7d928d965adc946d7dbcd6a09652175397279ce8b1d6ff3",
+      "commit": "631b058016e06b36165e27401324cc214abaab40",
+      "input_hashes": {
+        "DLG0011": "5615e96ebbc223e5a8ef5fa7ae33c6a2ff46d07b04cab7f009f279efb8c104cf",
+        "DLG0018": "f2cc70afe2d162d90c31d8b042012948183d58a94a86efeb2284de5684f48db3"
+      },
+      "seed": 17,
+      "toolchain": "Python 3.10, Pillow, OpenCV, PyMuPDF; same decoded JPEG pixels in neutral-name PNG CLI; original JPEG re-rendered for this gate"
+    },
+    "schema_version": "semantic_only_baseline_manifest_v1"
+  },
+  "evidence": [
+    {
+      "after_mean_delta2": 87.69110870361328,
+      "after_svg": "svgs/DLG0011_after.svg",
+      "after_svg_sha256": "90884936a3472a432c93746dfcada28b447f1c8baa6919e539e95d82fb9c7e5a",
+      "before_mean_delta2": 2529.7470703125,
+      "before_svg_sha256": "df56fca1dc0c0f93beb2c2387d8f9196019e1e112d9569a08697a9195a6e8d0c",
+      "case_id": "DLG0011",
+      "input_sha256": "5615e96ebbc223e5a8ef5fa7ae33c6a2ff46d07b04cab7f009f279efb8c104cf"
+    },
+    {
+      "after_mean_delta2": 87.56133270263672,
+      "after_svg": "svgs/DLG0018_after.svg",
+      "after_svg_sha256": "5d9a2c1885c47c49218985ef3f2d652a6355233aac277e1268240f64bcd22bcd",
+      "before_mean_delta2": 927.7528686523438,
+      "before_svg_sha256": "27ea9c6cd0c36926892563189f25bbd9cb26d47cc8134e88aa30f63addf0568f",
+      "case_id": "DLG0018",
+      "input_sha256": "f2cc70afe2d162d90c31d8b042012948183d58a94a86efeb2284de5684f48db3"
+    }
+  ],
+  "satisfaction_gate": {
+    "baseline_sha256": "29c96b9d5e47f5c53db5b05e1170bf47ed42fab40894d1471a4d730022592963",
+    "cases": [
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.8904094696044922,
+          "error_per_pixel": 0.0004495250990829849,
+          "object_mask_iou": 0.9931662870159453,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.2627778649330139,
+          "error_per_pixel": 0.012968074178200692,
+          "object_mask_iou": 0.2440677966101695,
+          "semantic_score": 0.0
+        },
+        "case_id": "DLG0011",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.0004495250990829849,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9708,
+            "edge_alignment": 0.8904,
+            "pixel_similarity": 0.9996,
+            "semantic_score": 1.0,
+            "structure_score": 0.9932
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      },
+      {
+        "after": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.875901460647583,
+          "error_per_pixel": 0.00044885983699929113,
+          "object_mask_iou": 0.9848156182212582,
+          "semantic_score": 1.0
+        },
+        "before": {
+          "dimension_match": 1.0,
+          "edge_alignment": 0.32134169340133667,
+          "error_per_pixel": 0.004755877834947296,
+          "object_mask_iou": 0.4656652360515021,
+          "semantic_score": 0.0
+        },
+        "case_id": "DLG0018",
+        "good_solution_gate": {
+          "decision_tier": "all",
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "metrics": {
+            "dimension_match": 1.0,
+            "error_per_pixel": 0.00044885983699929113,
+            "semantic_score": 1.0
+          },
+          "reachability": null,
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_dimension_match": 0.99,
+            "min_semantic_score": 0.85
+          }
+        },
+        "hard_rejections": [],
+        "improved": true,
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "quality_complexity_gate": {
+          "complexity": {
+            "embedded_raster_count": 0,
+            "parse_error": null,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0,
+            "path_count": 0,
+            "vector_element_count": 3
+          },
+          "failures": [],
+          "metrics": {
+            "combined_score": 0.9651,
+            "edge_alignment": 0.8759,
+            "pixel_similarity": 0.9996,
+            "semantic_score": 1.0,
+            "structure_score": 0.9848
+          },
+          "passed": true,
+          "thresholds": {
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0,
+            "max_svg_element_count": 80,
+            "min_combined_score": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_pixel_similarity": 0.78,
+            "min_semantic_score": 0.85,
+            "min_structure_score": 0.72
+          }
+        },
+        "regressed_metrics": [],
+        "satisfactory": true,
+        "technically_completed": true
+      }
+    ],
+    "provenance": {
+      "after_report_sha256": "99369f560f29782b2b71789acae463e0136d4eb8d1eeba0810f767d1c3c9ae54",
+      "before_report_sha256": "e35768890eb24467c7d928d965adc946d7dbcd6a09652175397279ce8b1d6ff3",
+      "commit": "631b058016e06b36165e27401324cc214abaab40",
+      "input_hashes": {
+        "DLG0011": "5615e96ebbc223e5a8ef5fa7ae33c6a2ff46d07b04cab7f009f279efb8c104cf",
+        "DLG0018": "f2cc70afe2d162d90c31d8b042012948183d58a94a86efeb2284de5684f48db3"
+      },
+      "seed": 17,
+      "toolchain": "Python 3.10, Pillow, OpenCV, PyMuPDF; same decoded JPEG pixels in neutral-name PNG CLI; original JPEG re-rendered for this gate"
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 2,
+      "improved": 2,
+      "satisfactory": 2,
+      "technically_completed": 2
+    }
+  },
+  "schema": "gradient_scene_catalogue_acceptance_v1",
+  "semantic_contract": "Native rounded rectangles; outer axial gradient, inner white rectangle, bounds and painter order from frozen raster annotation; strict pixel and per-object region gates."
+}

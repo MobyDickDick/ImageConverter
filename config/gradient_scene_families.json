@@ -1,0 +1,102 @@
+{
+  "schema": "gradient_scene_development_v1",
+  "annotation_method": "Visual marks on original raster, before runtime work. Outer bounds coincide with clipped image; inner white bounds approximate. All families known, no new real holdout or family claim.",
+  "cases": [
+    {
+      "file": "DLG0011.JPG",
+      "family": "nested_rounded_panel",
+      "split": "development",
+      "source_sha256": "5615e96ebbc223e5a8ef5fa7ae33c6a2ff46d07b04cab7f009f279efb8c104cf",
+      "description": "Zwei gefüllte Rechtecke mit leicht gerundeten Ecken. Die Formen sind ineinander verschachtelt. Die äußere Form hat einen horizontalen Farbverlauf. Die innere Form ist weiß. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            0,
+            0,
+            90,
+            25
+          ],
+          "parent": null
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            2,
+            2,
+            65,
+            21
+          ],
+          "parent": 0
+        }
+      ]
+    },
+    {
+      "file": "DLG0018.JPG",
+      "family": "nested_rounded_panel",
+      "split": "development",
+      "source_sha256": "f2cc70afe2d162d90c31d8b042012948183d58a94a86efeb2284de5684f48db3",
+      "description": "Zwei gefüllte Rechtecke mit leicht gerundeten Ecken. Die Formen sind ineinander verschachtelt. Die äußere Form hat einen horizontalen Farbverlauf. Die innere Form ist weiß. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            0,
+            0,
+            90,
+            25
+          ],
+          "parent": null
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            2,
+            2,
+            85,
+            21
+          ],
+          "parent": 0
+        }
+      ]
+    },
+    {
+      "file": "DLG0012.JPG",
+      "family": "single_rounded_panel",
+      "split": "development",
+      "source_sha256": "c76699d1ea4d4075c7fc1441f222668bbb20edddd82434a5845db734dd8291fc",
+      "description": "Ein gefülltes Rechteck mit leicht gerundeten Ecken und horizontalem Farbverlauf. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            0,
+            0,
+            95,
+            25
+          ],
+          "parent": null
+        }
+      ]
+    },
+    {
+      "file": "DLG0017.JPG",
+      "family": "single_rounded_panel",
+      "split": "development",
+      "source_sha256": "f41174f8dff49c52c43909cec7b72c9531738adeaf54151aa307c38f37f59960",
+      "description": "Ein gefülltes Rechteck mit leicht gerundeten Ecken und vertikalem Farbverlauf. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            0,
+            0,
+            90,
+            25
+          ],
+          "parent": null
+        }
+      ]
+    }
+  ]
+}

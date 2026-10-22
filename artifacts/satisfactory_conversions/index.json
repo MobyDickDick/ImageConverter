@@ -1,5 +1,5 @@
 {
-  "case_count": 377,
+  "case_count": 379,
   "cases": [
     {
       "description": "Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze f\u00fchrt ein waagerechter gerader Griff nach rechts zur linken Seite einer hellen Kreisscheibe mit dunkler Randkontur. Darin steht der einzelne dunkle Gro\u00dfbuchstabe \"M\" aufrecht in fetter serifenloser Schrift. Wei\u00dfer Hintergrund. Keine weiteren Objekte. Ma\u00dfe und Farben ergeben sich aus dem Bild.",
@@ -2992,6 +2992,40 @@
       "svg": "svgs/DLG0010_1.svg",
       "svg_sha256": "569513d71cc1fc5947fd323ad087fac4e851f03fa1cc1b6ae26a0ca6ee758f4e",
       "variant": "DLG0010_1"
+    },
+    {
+      "description": "Zwei gef\u00fcllte Rechtecke mit leicht gerundeten Ecken. Die Formen sind ineinander verschachtelt. Die \u00e4u\u00dfere Form hat einen horizontalen Farbverlauf. Die innere Form ist wei\u00df. Keine Beschriftung.",
+      "evidence": "artifacts/evaluation/gradient_scene_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/DLG0011.jpg",
+      "image_sha256": "5615e96ebbc223e5a8ef5fa7ae33c6a2ff46d07b04cab7f009f279efb8c104cf",
+      "mean_delta2": 87.69110870361328,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.8904094696044922,
+        "error_per_pixel": 0.0004495250990829849,
+        "object_mask_iou": 0.9931662870159453
+      },
+      "svg": "svgs/DLG0011.svg",
+      "svg_sha256": "90884936a3472a432c93746dfcada28b447f1c8baa6919e539e95d82fb9c7e5a",
+      "variant": "DLG0011"
+    },
+    {
+      "description": "Zwei gef\u00fcllte Rechtecke mit leicht gerundeten Ecken. Die Formen sind ineinander verschachtelt. Die \u00e4u\u00dfere Form hat einen horizontalen Farbverlauf. Die innere Form ist wei\u00df. Keine Beschriftung.",
+      "evidence": "artifacts/evaluation/gradient_scene_v1/acceptance.json",
+      "execution_mode": "semantic-only",
+      "image": "images/DLG0018.jpg",
+      "image_sha256": "f2cc70afe2d162d90c31d8b042012948183d58a94a86efeb2284de5684f48db3",
+      "mean_delta2": 87.56133270263672,
+      "metrics": {
+        "dimension_match": 1.0,
+        "edge_alignment": 0.875901460647583,
+        "error_per_pixel": 0.00044885983699929113,
+        "object_mask_iou": 0.9848156182212582
+      },
+      "svg": "svgs/DLG0018.svg",
+      "svg_sha256": "5d9a2c1885c47c49218985ef3f2d652a6355233aac277e1268240f64bcd22bcd",
+      "variant": "DLG0018"
     },
     {
       "description": "Eine Kreisscheibe mit vertikalem Farbverlauf und hellem Rand. Innerhalb des Kreises liegt ein aufrechtes Warndreieck mit abgerundeten Ecken, dunklem breitem Rand und heller Innenfl\u00e4che. Im Dreieck steht ein dunkles Ausrufezeichen aus einem senkrechten gerundeten Strich und einem getrennten runden Punkt darunter. Gleichm\u00e4\u00dfiger heller Hintergrund. Keine weiteren Objekte. Positionen, Gr\u00f6\u00dfen, Strichbreiten und Farben ergeben sich aus dem Bild.",

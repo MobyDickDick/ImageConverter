@@ -1,0 +1,1402 @@
+{
+  "schema": "gradient_scene_checks_v1",
+  "standard_suite": {
+    "collected": 3838,
+    "covered": 3838,
+    "passed": 3808,
+    "skipped": 30,
+    "failed": 0,
+    "collected_nodeids_sha256": "a5536e2ece976487f932c856cc9907322f9602926efc34e988b82e3cf678ac7b",
+    "execution": "269 separate module processes; up to six concurrent; OpenCV one thread. One 9-test timing-module rerun replaces its original result in final unique coverage. All standard-profile node IDs verified exactly once. Heavy modules retain their standard exclusion.",
+    "modules": [
+      {
+        "path": "tests/detailtests/test_ac0223_runtime_helpers.py",
+        "cases": 2,
+        "junit_sha256": "73019f95750d505e4469771882da299a5113317eebba3afed35807575b31065f"
+      },
+      {
+        "path": "tests/detailtests/test_ac0223_semantic_helpers.py",
+        "cases": 4,
+        "junit_sha256": "5fe489fb1e1bc7017f1113fff67a3b0767a8be3205047ec22d7079ec5848807b"
+      },
+      {
+        "path": "tests/detailtests/test_ac08_segment_contract.py",
+        "cases": 2,
+        "junit_sha256": "ac1afc7a1e0ea26276d74442f73c7e3f1776aa85e12ee768ed63ed6c2d0334a6"
+      },
+      {
+        "path": "tests/detailtests/test_automate_function_extraction_tool.py",
+        "cases": 3,
+        "junit_sha256": "08e8756908557fe119173d0b867c4da5677d7cb971ba6e425fcc33eacc46d48a"
+      },
+      {
+        "path": "tests/detailtests/test_batch_reporting_helpers.py",
+        "cases": 22,
+        "junit_sha256": "80075bf928a0eaf31b2da3c464010ed1bd921751cc62a3979f1e8ffc26934a77"
+      },
+      {
+        "path": "tests/detailtests/test_batch_run_state_helpers.py",
+        "cases": 3,
+        "junit_sha256": "324044d38f1d6d7ed38d1ae6e165df3188ce2de1e8e46c3091299cf616ed788a"
+      },
+      {
+        "path": "tests/detailtests/test_blocker_inventory_tool.py",
+        "cases": 2,
+        "junit_sha256": "6a11151ff173af56bb49cd348bf1edb129a50b1d3184f2201544ac3f65657248"
+      },
+      {
+        "path": "tests/detailtests/test_chain_telemetry_helpers.py",
+        "cases": 3,
+        "junit_sha256": "f30ef8d8b2c94009955c1e6c7313368bbf4d37d9d8c21333ed9809b2d561d0fd"
+      },
+      {
+        "path": "tests/detailtests/test_check_optimization_telemetry_alias_verification.py",
+        "cases": 14,
+        "junit_sha256": "4e20cded437407ac7d391bbe409db27681ef23ceb6bdf51168cae06f825a8d3c"
+      },
+      {
+        "path": "tests/detailtests/test_circle_geometry_optimization_helpers.py",
+        "cases": 2,
+        "junit_sha256": "1d72ff6e1edbdbfa90b972e6350d74c4238c6a5574d445d8befe008a306d73d1"
+      },
+      {
+        "path": "tests/detailtests/test_circle_radius_optimization_helpers.py",
+        "cases": 2,
+        "junit_sha256": "ad1ce220bff759b6a7fd8f342d2c2412fdb2f94e665a41209577727005ab441a"
+      },
+      {
+        "path": "tests/detailtests/test_cli_helpers.py",
+        "cases": 35,
+        "junit_sha256": "e5401ed638b85af704949958256608850747b3d519cab2382cc03032f95a1663"
+      },
+      {
+        "path": "tests/detailtests/test_color_utils_helpers.py",
+        "cases": 5,
+        "junit_sha256": "3407489741f13b2de430556a509aa38334a33514e3749dec892b7894f82c83a7"
+      },
+      {
+        "path": "tests/detailtests/test_compact_image_subset.py",
+        "cases": 4,
+        "junit_sha256": "d63f7c7e3f0dc162e4c2b815b05a7b8dedf44945186f3d10cae2c749c3436a2e"
+      },
+      {
+        "path": "tests/detailtests/test_composite_svg_helpers.py",
+        "cases": 2,
+        "junit_sha256": "61ccb1dcba1a165215047287f633091e467616b194d49f8ced45d64641cb78c2"
+      },
+      {
+        "path": "tests/detailtests/test_constraint_fusion_beam.py",
+        "cases": 5,
+        "junit_sha256": "9c98049384335aa932b8018cae3a89cfac60e19f6edad64f9d1ec241a85c65cf"
+      },
+      {
+        "path": "tests/detailtests/test_conversion_bestlist_helpers.py",
+        "cases": 14,
+        "junit_sha256": "d419dc4b9b801c167939c0ab0388ccc02dee630719809e546d9afd0d8af81774"
+      },
+      {
+        "path": "tests/detailtests/test_conversion_composite_helpers.py",
+        "cases": 2,
+        "junit_sha256": "8eaa68a56504766c5a9b4d2efe415a10cc3c27f521cad39ee3ee69cdceeed448"
+      },
+      {
+        "path": "tests/detailtests/test_conversion_execution_helpers.py",
+        "cases": 25,
+        "junit_sha256": "e9bee04b27e63033718e1e2b943a9677b2924f7611c516b63fb805e4ae91b600"
+      },
+      {
+        "path": "tests/detailtests/test_conversion_finalization_helpers.py",
+        "cases": 25,
+        "junit_sha256": "8534bc55b39ca9c523bab05923ac52959085085be35a482cc9081aecfdaccfe8"
+      },
+      {
+        "path": "tests/detailtests/test_conversion_initial_pass_helpers.py",
+        "cases": 4,
+        "junit_sha256": "2d3884b220c9204e849cf6470a38e9931a3e5c7007928de9ccfab6c56d4bc2e2"
+      },
+      {
+        "path": "tests/detailtests/test_conversion_inputs_helpers.py",
+        "cases": 4,
+        "junit_sha256": "e29a817bd512e2df25166eb3167623c70565e784a7ca0bc3607a0130c07ac94f"
+      },
+      {
+        "path": "tests/detailtests/test_conversion_quality_pass_helpers.py",
+        "cases": 11,
+        "junit_sha256": "4b682fe7d8c6672cec9d78b12d99bb9ad81ee6ef21e2a24223b1332cd07f82f2"
+      },
+      {
+        "path": "tests/detailtests/test_conversion_random_helpers.py",
+        "cases": 2,
+        "junit_sha256": "34d8931562b6f1ccf464ab4921f4876a3d881cdcc81c47252d8946a95c3cd277"
+      },
+      {
+        "path": "tests/detailtests/test_conversion_reporting_helpers.py",
+        "cases": 2,
+        "junit_sha256": "1e65c78a3ae7cc4d75a50158eedea2837afa3f5cbd86a4972dfee8bc6a948d49"
+      },
+      {
+        "path": "tests/detailtests/test_core_class_helpers.py",
+        "cases": 1,
+        "junit_sha256": "eb20556c0e1efbacd8994529491e4cbee89bfde5fea6c3f3c92857e1a3c9935c"
+      },
+      {
+        "path": "tests/detailtests/test_debug_trace_helpers.py",
+        "cases": 3,
+        "junit_sha256": "1249576ddea6cd0cf7bec72be2ff457f64df6deaec95fe3c596676d6d24cb6cd"
+      },
+      {
+        "path": "tests/detailtests/test_dependency_bootstrap_runtime_helpers.py",
+        "cases": 2,
+        "junit_sha256": "67be011ce9ae390ffa6b200324aedcdeb8b68dd70c86f3207be8cf2a108e51ca"
+      },
+      {
+        "path": "tests/detailtests/test_dependency_helpers.py",
+        "cases": 4,
+        "junit_sha256": "a275a26ab2b44333f81d93f6e8f54a7f58431897602ec75b915639f9c9a58386"
+      },
+      {
+        "path": "tests/detailtests/test_description_contract_helpers.py",
+        "cases": 52,
+        "junit_sha256": "985a4d3767bfd0db4450c70729eadfc6f25129f3bbe914ef3e25bfa3b4e4aa61"
+      },
+      {
+        "path": "tests/detailtests/test_diff_error_distribution_helpers.py",
+        "cases": 2,
+        "junit_sha256": "d32b1d4c4c895ce667454c9f64b60cfc9048432e4f3d1cbecaa3a903f6f0f25c"
+      },
+      {
+        "path": "tests/detailtests/test_diffing_helpers.py",
+        "cases": 8,
+        "junit_sha256": "9e9d3cc059e22278c833ed3c3814e74b9632f22e75c5bc58e0c61a7bee96c9fd"
+      },
+      {
+        "path": "tests/detailtests/test_dual_arrow_runtime_helpers.py",
+        "cases": 3,
+        "junit_sha256": "0d702e4a3a86e1da2934f228dc6494a437286b1c2960c580160f6b15a9cf165a"
+      },
+      {
+        "path": "tests/detailtests/test_early_quality_gate_helpers.py",
+        "cases": 6,
+        "junit_sha256": "4ef37fd733e25c68e6cc2bedf8b25dfb4822e1b20f60f07f0ae15ffb0a7ffbd0"
+      },
+      {
+        "path": "tests/detailtests/test_element_mask_helpers.py",
+        "cases": 2,
+        "junit_sha256": "50c7e5cd9d7d8dd2c22141e283ee422b5fdd58227ff66a399231282cc49aab49"
+      },
+      {
+        "path": "tests/detailtests/test_element_validation_helpers.py",
+        "cases": 6,
+        "junit_sha256": "60685153c58d4a426ecb8795c5b6c359619e3cc94ec62a147c557fa6fdc26840"
+      },
+      {
+        "path": "tests/detailtests/test_error_metric_helpers.py",
+        "cases": 9,
+        "junit_sha256": "08659c4dc682825801eb51283a2b94c91c7d2f1829f3a91d272cd2b5336bcba3"
+      },
+      {
+        "path": "tests/detailtests/test_extract_remaining_functions_batch_tool.py",
+        "cases": 1,
+        "junit_sha256": "3a4fb5eb5d7bf65085be25881242a3d0a50f863d339d61b5b69c42550010a211"
+      },
+      {
+        "path": "tests/detailtests/test_fallback_helpers.py",
+        "cases": 1,
+        "junit_sha256": "e4b4dbc69fbabb2353515b75722265d20be90dd99f6136bcbe02add35ceb0879"
+      },
+      {
+        "path": "tests/detailtests/test_filename_invariance.py",
+        "cases": 2,
+        "junit_sha256": "787a47b8e3607facc9e094c4cc3b95d381741678b698c6f61313ee74fc61e256"
+      },
+      {
+        "path": "tests/detailtests/test_fill_missing_parameters_tool.py",
+        "cases": 1,
+        "junit_sha256": "3c5dda316e49a6089f378bd4b8822cda741e43ce00d29f0a45c1c2a56e6c76ea"
+      },
+      {
+        "path": "tests/detailtests/test_filling_parameter_tool.py",
+        "cases": 1,
+        "junit_sha256": "e5c87907a83133cad61b7b4d348bc570b9cfc7fd4d4542fa78bec3fe9989061f"
+      },
+      {
+        "path": "tests/detailtests/test_forms_symmetric_chords_helpers.py",
+        "cases": 3,
+        "junit_sha256": "a28fdba03377a41965d729a9fabf82aae26797d8663d62454351ba769e69d6e7"
+      },
+      {
+        "path": "tests/detailtests/test_generalization_guardrails.py",
+        "cases": 1,
+        "junit_sha256": "f50d251fc7011037bfc85785af518e7fcced68563f2078ea8e44ec9c8fb2f95d"
+      },
+      {
+        "path": "tests/detailtests/test_generate_function_modularization_plan_tool.py",
+        "cases": 1,
+        "junit_sha256": "3a4e2091b2c7afdf45454be098645235886a97b2e963d89db19105292bb88853"
+      },
+      {
+        "path": "tests/detailtests/test_geometry_brackets_helpers.py",
+        "cases": 2,
+        "junit_sha256": "fa02810d36a6dd6611e59251653aff7bf799117f9775a9b9ca95892191f3b065"
+      },
+      {
+        "path": "tests/detailtests/test_geometry_ir_helpers.py",
+        "cases": 64,
+        "junit_sha256": "7b0669f2be7ab6cca033c56ec2c20d93d2a0de2da50aa98e76497c6f6401e6af"
+      },
+      {
+        "path": "tests/detailtests/test_geometry_ir_multi_objective_optimizer.py",
+        "cases": 5,
+        "junit_sha256": "077eea3bbfd6ccad9138c3234f237f43ec7cbca1f050f08cdee4bfcda60fea19"
+      },
+      {
+        "path": "tests/detailtests/test_geometry_ir_optimizer_helpers.py",
+        "cases": 288,
+        "junit_sha256": "ee63182f221704a92d29481e24248e121b19426844be29ea64341a4de8ca7c79"
+      },
+      {
+        "path": "tests/detailtests/test_geometry_optimization_helpers.py",
+        "cases": 2,
+        "junit_sha256": "ec34d792b8f8b1c8a81e3b9e40926e046bed43f3dd3bccb00256822528781d77"
+      },
+      {
+        "path": "tests/detailtests/test_global_search_optimization_helpers.py",
+        "cases": 25,
+        "junit_sha256": "f64b83e0372dfc4e0634ba5041e1da880e598b8cb270e297595be7fd2f41ffa2"
+      },
+      {
+        "path": "tests/detailtests/test_global_vector_bounds_helpers.py",
+        "cases": 3,
+        "junit_sha256": "fc873d4dd2e6c0c396d0f0cf3c5cc8d3cf3b80aa5c969bc6acfc50d884a94f4f"
+      },
+      {
+        "path": "tests/detailtests/test_global_vector_helpers.py",
+        "cases": 1,
+        "junit_sha256": "6189cd7dbd6f6e816b11ff2b4035f7f118dc0dbb0adbc1d87f7ee3092633d5f1"
+      },
+      {
+        "path": "tests/detailtests/test_good_solution_gate.py",
+        "cases": 10,
+        "junit_sha256": "988c77a879b8114ecdc3fec42cc55c6eee41fee07aed4da6423255add2306e83"
+      },
+      {
+        "path": "tests/detailtests/test_gradient_stripe_strategy_helpers.py",
+        "cases": 6,
+        "junit_sha256": "8479a822eba1d537498aa9924152bd9d35db649a3edff80679e04a2b089aec6e"
+      },
+      {
+        "path": "tests/detailtests/test_image_backend_helpers.py",
+        "cases": 3,
+        "junit_sha256": "8b9114fda86738f2f30203eeab67910b018d50b871f039152e32b4dc37dccca5"
+      },
+      {
+        "path": "tests/detailtests/test_image_loading_helpers.py",
+        "cases": 3,
+        "junit_sha256": "a9e22cde91fc51c672435ccc31814de82c859b1c23abb713bedae777aefb7b0a"
+      },
+      {
+        "path": "tests/detailtests/test_incremental_conversion_helpers.py",
+        "cases": 7,
+        "junit_sha256": "65991d7253fdbdcd7a2b3a20745742d27480feaf312e451389467c46d508ebc7"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_artifacts_helpers.py",
+        "cases": 7,
+        "junit_sha256": "d6eddc194be0e2bfabd2aee7573302fc8d5af9c48b7748660b2b34d9d374a858"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_bindings_helpers.py",
+        "cases": 7,
+        "junit_sha256": "a86fcdb83caeed74f652c2ca7e72237d28ccea130795a52df898a0c125d917d7"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_context_helpers.py",
+        "cases": 3,
+        "junit_sha256": "5faf502d907afacf6d8032f25e3d0de56a35dccd13eaec6ebf0934959f42ad19"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_dispatch_helpers.py",
+        "cases": 4,
+        "junit_sha256": "ff30d037944b18a5235ca7484bacd4400edecf674d67296028fdce008c16c912"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_execution_context_helpers.py",
+        "cases": 13,
+        "junit_sha256": "c88dfbc993aab923fb3d694f1fd70f51b85b5925194a1d5cb14deeaa37bea0a7"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_execution_helpers.py",
+        "cases": 2,
+        "junit_sha256": "0995f2951d5300c40e0f391ed396546d20f4cd45f5e568c5c1e083aa2712b373"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_finalization_helpers.py",
+        "cases": 3,
+        "junit_sha256": "31d570b130adc99368f8329f6fa3561aed64c2a8bdfa524041096863f6d78649"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_initialization_helpers.py",
+        "cases": 2,
+        "junit_sha256": "ff16d2cfda78b38d4a06a55afb681c9cb64b98ea30688af6e57311bab279d555"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_log_helpers.py",
+        "cases": 2,
+        "junit_sha256": "b6033cdd3795626ae5f61af344eff3092d0eb2496efdd8105529d30c1e2db0ee"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_mode_dependencies_helpers.py",
+        "cases": 1,
+        "junit_sha256": "fefab93c48b3bb7c3e6b41a8deb20e146c84acec6532b77a90f5fe1adf84e630"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_mode_dependency_setup_helpers.py",
+        "cases": 1,
+        "junit_sha256": "78c6b72d60158ba819037f0df296d2bd9e0e53407d639d568096cf2c374d78ae"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_mode_preparation_helpers.py",
+        "cases": 1,
+        "junit_sha256": "6ec05776288c9ad235bc74a46ac95e7b41d9ebc5d4bc2cce28e74719df837df7"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_mode_runtime_helpers.py",
+        "cases": 3,
+        "junit_sha256": "f218b0fb49401fd95b5f8b2b003b5eed44b8f7bd29b6ec4cdf82befce3753741"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_mode_runtime_preparation_helpers.py",
+        "cases": 4,
+        "junit_sha256": "4c5367bbd2d12af16152fb7e55dc32055726b03394aa38b9a8d3cdb9b5d7dd94"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_mode_setup_helpers.py",
+        "cases": 1,
+        "junit_sha256": "e3c8cca5ff5d929f3412fae14b7413570b9816fa03fee8c1ea492f3544274dde"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_orchestration_helpers.py",
+        "cases": 22,
+        "junit_sha256": "d3bb7b7576e1a0409c2461d552deff76c9b150f4e5b329c0b38efebabcb3fa1e"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_pipeline_helpers.py",
+        "cases": 109,
+        "junit_sha256": "a988ae6536f5f424121a8957423ece517c2ebb60e1408ec768c97ace3b8c46d9"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_preparation_helpers.py",
+        "cases": 2,
+        "junit_sha256": "9ecdea0e243dc41e65e847b6548311dd85856064ea34624b97edc846cfdd1931"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_run_preparation_helpers.py",
+        "cases": 9,
+        "junit_sha256": "c4ed48bf2c96b213eacdc473a5df611cbe03b10419117e4859d6535cb8d168c2"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_runtime_helpers.py",
+        "cases": 3,
+        "junit_sha256": "004dec4e2af9943628829d37545044a574870c0bae596489c768668a97a29cca"
+      },
+      {
+        "path": "tests/detailtests/test_iteration_setup_helpers.py",
+        "cases": 4,
+        "junit_sha256": "c0b3cceb77e3fad027a57dd47adcbe673d80229f9e5579174b153cf573ffbe31"
+      },
+      {
+        "path": "tests/detailtests/test_legacy_api_vtracer_helpers.py",
+        "cases": 2,
+        "junit_sha256": "fd9ec7eebecc303f492b4bf01f799127f20b2a6764a8a3410645d3f768bd3e2d"
+      },
+      {
+        "path": "tests/detailtests/test_local_completion_checks_tool.py",
+        "cases": 29,
+        "junit_sha256": "d693cc693a668e87fe79ea4e6fc0af4b44f26c82ceddb45d415794218d7fb6d4"
+      },
+      {
+        "path": "tests/detailtests/test_mask_metrics_helpers.py",
+        "cases": 1,
+        "junit_sha256": "c28cb3563c984fc6d18a0f1375145f1eecb652b8cd665dc1df5152aca077cc09"
+      },
+      {
+        "path": "tests/detailtests/test_multi_objective_prototype_tool.py",
+        "cases": 1,
+        "junit_sha256": "169e1289c28e198645254ae5db0949275e428aa4fc7ca7f853ebe944795212bf"
+      },
+      {
+        "path": "tests/detailtests/test_non_composite_runtime_helpers.py",
+        "cases": 84,
+        "junit_sha256": "680fa5b6b82d733cf55c533034a0968c2dbc233486e07272c42bacf31401ebc2"
+      },
+      {
+        "path": "tests/detailtests/test_nonconvertable_move_helpers.py",
+        "cases": 1,
+        "junit_sha256": "e2e6b4600a98994d05dcf55d8aaecfcb5a1360da79484e6589610cf4e8f2157d"
+      },
+      {
+        "path": "tests/detailtests/test_optimization_color_budget_helpers.py",
+        "cases": 3,
+        "junit_sha256": "d0bb6737405e0d80b0e26b43b99df366b9cee1ed02bdab8bf26e1a525c94efdf"
+      },
+      {
+        "path": "tests/detailtests/test_optimization_element_alignment_helpers.py",
+        "cases": 2,
+        "junit_sha256": "36d340bb6322220efe55e157b9834f2857cdf2c8589d814b2608254b52312a6a"
+      },
+      {
+        "path": "tests/detailtests/test_optimization_element_search_helpers.py",
+        "cases": 3,
+        "junit_sha256": "999463ae13d96c84dd5c5c211760ce0abbff7337d477e70040e4acac1055e465"
+      },
+      {
+        "path": "tests/detailtests/test_optimization_facade_helpers.py",
+        "cases": 1,
+        "junit_sha256": "50dae312db8b95b8e970ba73371de3633618e8e2c1abac8494c3fed8823ccb8d"
+      },
+      {
+        "path": "tests/detailtests/test_optimization_pass_helpers.py",
+        "cases": 6,
+        "junit_sha256": "4e776742a1fa2ceb210f9d13f800d4d537cb51aa6bd7d8a3b304ba93eafc0f7c"
+      },
+      {
+        "path": "tests/detailtests/test_optimization_pass_reporting_helpers.py",
+        "cases": 2,
+        "junit_sha256": "39a1bdb5c352052cdab666b900d0ae6e3ea35257b8183893b9b8cc52015815d9"
+      },
+      {
+        "path": "tests/detailtests/test_optimization_quantization_helpers.py",
+        "cases": 2,
+        "junit_sha256": "00ed0c64d4486a3e24fbc0d227e6ddde935fd47681e417b1e71ac83566c995bb"
+      },
+      {
+        "path": "tests/detailtests/test_optimization_telemetry_alias_verification.py",
+        "cases": 10,
+        "junit_sha256": "b7fda0d58f1bfc930864646f89b6844bb125352216ba7152217bced0a802fdf5"
+      },
+      {
+        "path": "tests/detailtests/test_optimization_telemetry_alias_verification_workflow.py",
+        "cases": 1,
+        "junit_sha256": "72e476f362ad63a5eefe8e6b4253deabda89e0dc7ccf86d7c1a73d469e4e0eae"
+      },
+      {
+        "path": "tests/detailtests/test_optimization_telemetry_baseline_alias.py",
+        "cases": 6,
+        "junit_sha256": "7c9446d627b329ea67fb2692a874f1ba96124243b04159dcc8b7dc0af70635a5"
+      },
+      {
+        "path": "tests/detailtests/test_optimization_telemetry_baseline_alias_manifest.py",
+        "cases": 8,
+        "junit_sha256": "9562bb01557a4e8a11f323351e0ad54c122380d0df0f386b609663a46918194b"
+      },
+      {
+        "path": "tests/detailtests/test_optimization_tool_helpers.py",
+        "cases": 2,
+        "junit_sha256": "db592cfdfdeae391a66e9c0514b15c2755bf88c2df54dd63507b98f6598a16e3"
+      },
+      {
+        "path": "tests/detailtests/test_output_paths_helpers.py",
+        "cases": 2,
+        "junit_sha256": "fb94cce2bea5c950954000a892a9ac0ee1a987da85e37fc040ad59b74a2c8264"
+      },
+      {
+        "path": "tests/detailtests/test_overview_tiles_helpers.py",
+        "cases": 2,
+        "junit_sha256": "84980659d6fe687c892e3eb058271f13a08efb89e36ff65a3e48f5495df76c3d"
+      },
+      {
+        "path": "tests/detailtests/test_perception_geometry_helpers.py",
+        "cases": 2,
+        "junit_sha256": "df624506faf0081f08994c1c2477dbcd14e3b294ffebb3bfb4c7bb0d183516d4"
+      },
+      {
+        "path": "tests/detailtests/test_perception_reflection_reference_inheritance.py",
+        "cases": 2,
+        "junit_sha256": "527adf1d99bdcc3ae3e72300a40704a42cbe7f9de6541d4848cd742c6b530cdd"
+      },
+      {
+        "path": "tests/detailtests/test_plan_b_failure_tasks.py",
+        "cases": 14,
+        "junit_sha256": "09aa5ddf790df6c64b312aa05cfed8e2afa66c06e097f644700965596a1623b1"
+      },
+      {
+        "path": "tests/detailtests/test_plan_b_pilot.py",
+        "cases": 3,
+        "junit_sha256": "f7a10dd6a761a7a590d246f65e59b43a659a32960420ae01ab67b3d056da1b50"
+      },
+      {
+        "path": "tests/detailtests/test_plan_b_roundtrip_helpers.py",
+        "cases": 2,
+        "junit_sha256": "3c6dd257c602bb5085a0246c6f4ef168366a1aeef6a382faa082fa3590e3eba7"
+      },
+      {
+        "path": "tests/detailtests/test_plan_b_variations.py",
+        "cases": 45,
+        "junit_sha256": "d89f275b83673b598abcdc8b4e2cd834bf1a12bcec0afa5cbb1243748799331f"
+      },
+      {
+        "path": "tests/detailtests/test_policy_phase_helpers.py",
+        "cases": 3,
+        "junit_sha256": "2006a1f9d3b8e02784e894a916955d92b909724aa46110034b4548f987c0138f"
+      },
+      {
+        "path": "tests/detailtests/test_pytest_timeouts.py",
+        "cases": 10,
+        "junit_sha256": "96c870ce10a198523a8d6773009cd63a087c31927b6adf77a4e8176560b40b4b"
+      },
+      {
+        "path": "tests/detailtests/test_quality_config_helpers.py",
+        "cases": 9,
+        "junit_sha256": "ba04fabbadede30632f083a7ea9d3ef0949bd920d8f51c8ca7c398022f294ca8"
+      },
+      {
+        "path": "tests/detailtests/test_quality_pass_policy_helpers.py",
+        "cases": 5,
+        "junit_sha256": "ce73533139d07f53a32207aeac0e2b5b3ec0363f1efad26d5cffccdb5c48d26d"
+      },
+      {
+        "path": "tests/detailtests/test_quality_queue.py",
+        "cases": 2,
+        "junit_sha256": "316cb6ed4b299128f0ee56e64fa062fb9130f1d3ca15dee2d314294bcd198358"
+      },
+      {
+        "path": "tests/detailtests/test_quality_threshold_helpers.py",
+        "cases": 3,
+        "junit_sha256": "85ae7f530fe584f4b55dc810fb47eb7a1115e3a21e54a4b030dc8d1f2efcf4f9"
+      },
+      {
+        "path": "tests/detailtests/test_range_helpers.py",
+        "cases": 5,
+        "junit_sha256": "b361753869c2a39f9ac5026693d6d616c7032055418e5b42656f5bdfd1af9a86"
+      },
+      {
+        "path": "tests/detailtests/test_ranking_helpers.py",
+        "cases": 1,
+        "junit_sha256": "97ec938626c424f29c74a0ac3ee371659aaa3a9dbc8f2775b2282107af8c05ea"
+      },
+      {
+        "path": "tests/detailtests/test_reachability_classification.py",
+        "cases": 2,
+        "junit_sha256": "e81b8b7c25db5f73aa249b5a6804017bd602e42d2b0f7fb683d29c3d9853fa4d"
+      },
+      {
+        "path": "tests/detailtests/test_remaining_geometry_helpers.py",
+        "cases": 2,
+        "junit_sha256": "c9d11fdf0479aa44ae9e74c2405fea66e8a9b4b3df5f99d7e2c9e3b353dff34b"
+      },
+      {
+        "path": "tests/detailtests/test_render_dispatch_helpers.py",
+        "cases": 6,
+        "junit_sha256": "058c414c64e6b9710f1b2486fd77c1900c84dd2c711b52dd103bfdd8ca723f67"
+      },
+      {
+        "path": "tests/detailtests/test_render_worker.py",
+        "cases": 6,
+        "junit_sha256": "2b1f9c02dfa804143581ab56da926ea56a69d4835e3ff5f20d3aba0f0c6ae70c"
+      },
+      {
+        "path": "tests/detailtests/test_rendering_gradient_compatibility.py",
+        "cases": 42,
+        "junit_sha256": "2b58ac5829de077f488436799ed626fb051e81eabc5a617f78e65596ae89c647"
+      },
+      {
+        "path": "tests/detailtests/test_report_consistency_gate.py",
+        "cases": 4,
+        "junit_sha256": "fd7965daea91d4c18fa9c0692eda1be50806c63f06d9ec92f897ee92fc41d6be"
+      },
+      {
+        "path": "tests/detailtests/test_satisfactory_regression_battery_helpers.py",
+        "cases": 4,
+        "junit_sha256": "03f643f605f4151e4bd54ad34ddee88b84ebfbce5e60f1233ff90b3b8e6f5863"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_ac0050_helpers.py",
+        "cases": 7,
+        "junit_sha256": "6df8759d66096c8a067d7aab13edf205edf9010ca9df3c77d81fce727ccfd0d7"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_ac0811_helpers.py",
+        "cases": 1,
+        "junit_sha256": "795952c8bbfb94565246d39d1db410c4f6caad235cd896bc7c1a517f66072ce8"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_ac08_family_helpers.py",
+        "cases": 5,
+        "junit_sha256": "0859bd76d34016615f6bb8138fd4a21810c5a3bed552a1b4bd27409f338ef35c"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_ac08_params_helpers.py",
+        "cases": 7,
+        "junit_sha256": "269d94537f4d3f181244c6ec86459d6f6519663f8b1b43dcc8c5b7fc76b87650"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_ar0100_params_helpers.py",
+        "cases": 1,
+        "junit_sha256": "9953ce78096b928bfeebdf6475884b959b03af50b68d6e5d6537337426180f2c"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_audit_bootstrap_helpers.py",
+        "cases": 3,
+        "junit_sha256": "c96e19a3f8762d339fa145e04630416c823dc76f26a539f01a193ea4969cf0f5"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_audit_helpers.py",
+        "cases": 3,
+        "junit_sha256": "4ffb7527839992d9e7200a28d729474490d1c86a52088793f11b7904c17856ca"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_audit_logging_helpers.py",
+        "cases": 2,
+        "junit_sha256": "1eef149fd399ba55da273f07c137689f31e0ef4fb15b1a6d7037a74fc526d9f8"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_audit_runtime_helpers.py",
+        "cases": 2,
+        "junit_sha256": "9fd9c7cb87e074e926c1726e1747155053019191d48d0d1b68cc6d5cd276aab3"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_badge_geometry_helpers.py",
+        "cases": 5,
+        "junit_sha256": "c2738b0cd3a23c31b6581a6c4f0770e2134a532dab3db0417615cc9dd3b53256"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_badge_runtime_helpers.py",
+        "cases": 3,
+        "junit_sha256": "9d2183a8c27e75b9afdca1d5f0c54f7b478654f5e42ef147d0b66c325026e8ac"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_badge_svg_helpers.py",
+        "cases": 11,
+        "junit_sha256": "4e1fbd52e452502920cc449112b052f16442d74a3c9e9b5a8c6a1dcfff049b22"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_circle_style_helpers.py",
+        "cases": 4,
+        "junit_sha256": "1ecd728597830c975a08b7312d7c2ab83e3d5dec8d76336130ee4c17301fcd3e"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_connector_helpers.py",
+        "cases": 4,
+        "junit_sha256": "b535ad700cd300069648408f86a15eeba36232eacf397445b3dd3049c2bb65c4"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_family_rules_helpers.py",
+        "cases": 19,
+        "junit_sha256": "2bfee7b7dc89edf2266e398154b854164ec4dcd56819a654ce1fa48ac0467d50"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_fitting_helpers.py",
+        "cases": 2,
+        "junit_sha256": "4e68e17264be266f29a32154309dc025ce770e8a909a18c8bab21c1ec2bc9aba"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_harmonization_helpers.py",
+        "cases": 10,
+        "junit_sha256": "0526fe6c2253ed3677b9d7d4ea5c5a27058baaa8c69ea67846023b9f4e0307d1"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_iteration_finalization_helpers.py",
+        "cases": 2,
+        "junit_sha256": "e640e67fc0740ad27bd678f5daa8d149e0d2bde32afa2a01ac4795398ff923ec"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_label_helpers.py",
+        "cases": 6,
+        "junit_sha256": "23dbc0945dfba1fb793bbaed429f4ba15be6f15794df4f2c2749c97e50451997"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_mismatch_reporting_helpers.py",
+        "cases": 2,
+        "junit_sha256": "614721d4c349754dba84db1dc42961f38cfb575514a05853acadb61a4dfb514f"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_mismatch_runtime_helpers.py",
+        "cases": 2,
+        "junit_sha256": "6c9fd27425dfa30857b1464610b905b9d38b32e93ea906009295d60fa7f5bd17"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_only_benchmark_runner.py",
+        "cases": 4,
+        "junit_sha256": "2fb84aef42815ce8cbb2d6320191498cbe33eb307cf3040641aedbb648a2a261"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_only_quality.py",
+        "cases": 5,
+        "junit_sha256": "a692d02e9bc924fc4dc8967e43dcd26e3e28166d2bc8601720ec2c167a74c90b"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_only_satisfaction_gate.py",
+        "cases": 6,
+        "junit_sha256": "7011309f6e3ea9ceafbf07485a444f0ba37d94020569de2b073ce95c138bb903"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_params_helpers.py",
+        "cases": 4,
+        "junit_sha256": "0cb3fa2b6139f52958493e7b76fe362d747497791979fac83e421c2d1f69daba"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_post_validation_helpers.py",
+        "cases": 1,
+        "junit_sha256": "02175bec390e1e397c2d04fc56ff1b0dad7361de9ad67292a7d7d8d549fa622a"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_quality_flags.py",
+        "cases": 5,
+        "junit_sha256": "2fe904ce698350a62e802d7a12a72cfbee2f6e74a8e900a7df241f25d33fa965"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_validation_context_helpers.py",
+        "cases": 3,
+        "junit_sha256": "e53baa1af538fe62dd998e3c1b6173b5a7e81f65ff00e53319b371d7b3ee1956"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_validation_finalization_helpers.py",
+        "cases": 2,
+        "junit_sha256": "dc8510f4b6f341e1935012a206735e1b32300d91572654d4c39db8207b05d835"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_validation_helpers.py",
+        "cases": 3,
+        "junit_sha256": "280f77cc4c8a1fb01b4b28650bcd77c552398047cb5d85c640da738ff05bb211"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_validation_logging_helpers.py",
+        "cases": 2,
+        "junit_sha256": "18d2184e95befab0cf1e5e7523c0d6917a5a6dbfd0c4437a7d98b12fc8c8ca98"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_validation_runtime_helpers.py",
+        "cases": 5,
+        "junit_sha256": "870615f40e7093ad7f4fb1ccc2495d67f8597f6cd69cb25156beb3d624cf44c2"
+      },
+      {
+        "path": "tests/detailtests/test_semantic_visual_override_helpers.py",
+        "cases": 2,
+        "junit_sha256": "d3759e74044885b41ab387efd7f1a14cb946e0f1ba214ef24b9c2a099b31b3ab"
+      },
+      {
+        "path": "tests/detailtests/test_successful_conversion_helpers.py",
+        "cases": 7,
+        "junit_sha256": "9580555f3c642ced13b8aad324ac9a4a2f1a0ade456d4f19fa3acb2b09d7247f"
+      },
+      {
+        "path": "tests/detailtests/test_successful_conversion_quality_helpers.py",
+        "cases": 4,
+        "junit_sha256": "e4be448afec2d16cbdd628c286f7cdbf34fcc57824c4c2cb0a48710016f41c61"
+      },
+      {
+        "path": "tests/detailtests/test_svg_render_timeout_defaults.py",
+        "cases": 5,
+        "junit_sha256": "3c3de1cd62de6f9d785030f478e024fc4acea2e5a87e6264784708328ca459a9"
+      },
+      {
+        "path": "tests/detailtests/test_target_alignment_taskboard.py",
+        "cases": 2,
+        "junit_sha256": "2c9144166b0666797d5fe0d6bafbb1f4b40fcd8ebf7ea368174922c4cc7055e3"
+      },
+      {
+        "path": "tests/detailtests/test_template_transfer_helpers.py",
+        "cases": 1,
+        "junit_sha256": "75cfacdbaa1730c1cf6a4478d1e1083384b2ab20cbefd9a1bf3ea387e174e599"
+      },
+      {
+        "path": "tests/detailtests/test_width_optimization_helpers.py",
+        "cases": 4,
+        "junit_sha256": "5df2767168b82a7796e2cfc29aa31be1cad1148ad473780311a4649a9c57b2bc"
+      },
+      {
+        "path": "tests/test_adaptive_conversion_search.py",
+        "cases": 24,
+        "junit_sha256": "25623f7f2211775bd73809bbf4652c832bcd48a89957b91f534f4b496069047e"
+      },
+      {
+        "path": "tests/test_alarm_bell_runtime.py",
+        "cases": 25,
+        "junit_sha256": "0b93aada3eec2b95a62eb96124755f2b5bb87f35343bf7925124164de2863967"
+      },
+      {
+        "path": "tests/test_anytime_benchmark.py",
+        "cases": 13,
+        "junit_sha256": "702cc02ba400a411a1593c3bc7cbdeef2c714b771f92b24a14ecdb36c11933be"
+      },
+      {
+        "path": "tests/test_arc_shaft_runtime.py",
+        "cases": 40,
+        "junit_sha256": "7bd530f2f4d930d44f1d218c7181bac1714466eeb9a56f90d0875c974e5085d3"
+      },
+      {
+        "path": "tests/test_bottom_stem_letter_disk_runtime.py",
+        "cases": 25,
+        "junit_sha256": "fdaa252f415ed057232ef566c4a0b3d238519fe6b7fd6ab67bb153c9c6450301"
+      },
+      {
+        "path": "tests/test_bottom_stem_marked_square_runtime.py",
+        "cases": 18,
+        "junit_sha256": "fa2e560995d7e5888ecdbcca1fc554fd00b6385da3568f0af4b7dcdd921998aa"
+      },
+      {
+        "path": "tests/test_checkbox_checkmark_runtime.py",
+        "cases": 19,
+        "junit_sha256": "5c45df33171ef094886b236310bcbc8853b5f8762bf8c19a5d942fd5976a0218"
+      },
+      {
+        "path": "tests/test_checkmark_disk_runtime.py",
+        "cases": 20,
+        "junit_sha256": "91266f6d3adb51d93cd8fd94f1fd4fde8550b9feeb3a6f768946280df2b6841e"
+      },
+      {
+        "path": "tests/test_chevron_panel_runtime.py",
+        "cases": 19,
+        "junit_sha256": "59f9b07aaebf3e21afc99f0004b2afd74ef711edd1b76a7828302f0d10300a47"
+      },
+      {
+        "path": "tests/test_circle_linework_runtime.py",
+        "cases": 35,
+        "junit_sha256": "a7db1abf29fa1734c3d0e64bc077b58b65675fed433f37b1b44f37382dbb065b"
+      },
+      {
+        "path": "tests/test_component_value.py",
+        "cases": 28,
+        "junit_sha256": "0431cb27bd464c43b8e6fd1008461d20be0c6683a4ff908adbb45911e664a477"
+      },
+      {
+        "path": "tests/test_conversion_deadline.py",
+        "cases": 18,
+        "junit_sha256": "854f24083848e02966d4d29de99011cf3658eee991fc9a80f9165157a619b5a0"
+      },
+      {
+        "path": "tests/test_conversion_search_bots.py",
+        "cases": 11,
+        "junit_sha256": "37888c9b65bcd7cd4037c15c240123e208d631f886f9a1d40ad81b29d5eba2d1"
+      },
+      {
+        "path": "tests/test_conversion_search_scheduler.py",
+        "cases": 11,
+        "junit_sha256": "95e494177790e59e2b772e6153e63aa3c2df53606d73599ca133ebf68a3de941"
+      },
+      {
+        "path": "tests/test_conversion_timing.py",
+        "cases": 9,
+        "junit_sha256": "79fc4be1cb6f8441ec484b0e7075992ea1fadcccee9b1fa087b8b6ba0eb7977e"
+      },
+      {
+        "path": "tests/test_convert_one_image.py",
+        "cases": 4,
+        "junit_sha256": "08958ede87d082e9013cacc69e12c6b745965c9e999b329c80373be91c79bd0c"
+      },
+      {
+        "path": "tests/test_cross_panel_disk_runtime.py",
+        "cases": 43,
+        "junit_sha256": "18b244418000b3c00b5d677e53ac066afaff50b12660e787e7a0d0cd4da0e7c2"
+      },
+      {
+        "path": "tests/test_description_language.py",
+        "cases": 17,
+        "junit_sha256": "179b4d20a4252560990042bbdbe474054675aef9f5dc9c4724bb6eccc6c18cfc"
+      },
+      {
+        "path": "tests/test_description_perception_fusion.py",
+        "cases": 7,
+        "junit_sha256": "edb54c9405180071086cb56957252a925f3027aad6ef2561392e5cafbf24f7aa"
+      },
+      {
+        "path": "tests/test_diagonal_cross_disk_runtime.py",
+        "cases": 40,
+        "junit_sha256": "d00ddc48914f2c4622eb474fa84fef2969837879a50c2b61ddbfc18f3ad7e1a8"
+      },
+      {
+        "path": "tests/test_diagonal_square_kelle_runtime.py",
+        "cases": 16,
+        "junit_sha256": "983ee6a06dc1306dc2b18042e9d35a460a95db0cfac48c9e722c5be36e8fe4e6"
+      },
+      {
+        "path": "tests/test_diagonal_stripe_panel_geometry_ir.py",
+        "cases": 3,
+        "junit_sha256": "be3c58bc8c029ed4c341d602a160837890a5ca618ee7e93dd4fd21d89feb67f6"
+      },
+      {
+        "path": "tests/test_disk_arrow_runtime.py",
+        "cases": 28,
+        "junit_sha256": "31a1f087f56d6db2a17aba25a8cc1011e8171003b88746266a2f786d2e0e8575"
+      },
+      {
+        "path": "tests/test_down_gradient_junction_family.py",
+        "cases": 45,
+        "junit_sha256": "02e815b11459ba047e81905590d59e8b10f92706e3933911624cad9f4ac5598c"
+      },
+      {
+        "path": "tests/test_down_pump_recheck.py",
+        "cases": 20,
+        "junit_sha256": "a5d3831d86750189dcb9c2ceb9bd734fc74d22eb81a117d5bb76215c2f19879d"
+      },
+      {
+        "path": "tests/test_downward_gradient_arrow_runtime.py",
+        "cases": 38,
+        "junit_sha256": "0029763c1e9fc4b2b6deb31a6968f724148aeaa4230d2eb475cb66bacc1de950"
+      },
+      {
+        "path": "tests/test_end_to_end_holdout_acceptance.py",
+        "cases": 3,
+        "junit_sha256": "643efb1c6c707682c6956c62f5717b99ba733ec7ed74e079bb6773b046628ac4"
+      },
+      {
+        "path": "tests/test_filled_symbols_runtime.py",
+        "cases": 38,
+        "junit_sha256": "7085e389663e1eb28ed064af6fdd9649e9298b7a65a79134a086bcac6f0b274c"
+      },
+      {
+        "path": "tests/test_flame_disk_runtime.py",
+        "cases": 43,
+        "junit_sha256": "a26fca8655c60521a1d23241157734eb8d3d279015fc57b2592c742220346d5c"
+      },
+      {
+        "path": "tests/test_generate_form_code_inventory.py",
+        "cases": 3,
+        "junit_sha256": "c4e329fc9b2f7aaf903b064360e5f205931c14bd882e3ee82c10e029b8bca075"
+      },
+      {
+        "path": "tests/test_gradient_arrow_runtime.py",
+        "cases": 37,
+        "junit_sha256": "5c263ded06a82c7b273855d8c384cdd24631c75854d985684b02c5ebf71a219c"
+      },
+      {
+        "path": "tests/test_gradient_junction_runtime.py",
+        "cases": 54,
+        "junit_sha256": "d8c37a9575c159c9d725e57e2b2a8b5d0700cbfc7d7d7cf16c71450afb261ff9"
+      },
+      {
+        "path": "tests/test_gradient_scene_acceptance.py",
+        "cases": 5,
+        "junit_sha256": "d6d5e67fbd96a0795d91065ebdb8344f0ebcaa2ce36ba74aa558f72dcc311252"
+      },
+      {
+        "path": "tests/test_gradient_scene_runtime.py",
+        "cases": 36,
+        "junit_sha256": "01eddc535c9ce2a691f93666360c2b338c456ead4936e69110f798c56813ef6f"
+      },
+      {
+        "path": "tests/test_holdout_ablation_matrix.py",
+        "cases": 3,
+        "junit_sha256": "2ddf73932ed3de3bc225c2653d47b7c26bd62b1d2ee17a19a484790ae3da76e7"
+      },
+      {
+        "path": "tests/test_holdout_rename_protocol.py",
+        "cases": 3,
+        "junit_sha256": "1d79223342ad7e90dfbe64907aad0e297278b3660e5f78e456b8e343f7a6e9d8"
+      },
+      {
+        "path": "tests/test_horizontal_gradient_arrow_runtime.py",
+        "cases": 74,
+        "junit_sha256": "aba705be211017c694095b3d1a9997c001925612141632482740f2210f49a0a1"
+      },
+      {
+        "path": "tests/test_house_disk_runtime.py",
+        "cases": 49,
+        "junit_sha256": "02903de55fb955da3dd327dc94a9a72ae6b9ef6f818a97516573b76a376c35fa"
+      },
+      {
+        "path": "tests/test_image_composite_converter_element_decomposition.py",
+        "cases": 2,
+        "junit_sha256": "b6cf7c2a3722273f089c34e76ef990c985c97f491987f9333784141964e2765b"
+      },
+      {
+        "path": "tests/test_image_composite_converter_naming.py",
+        "cases": 2,
+        "junit_sha256": "afeca88b7484d28d11d8b352cd2271441c838622f81f2ffc80471f72747b309d"
+      },
+      {
+        "path": "tests/test_inverted_arc_shaft_runtime.py",
+        "cases": 57,
+        "junit_sha256": "db048b11d9db38f64d71e84330d49093ce1f8a87a84733626900461c2690a467"
+      },
+      {
+        "path": "tests/test_labeled_disk_runtime.py",
+        "cases": 45,
+        "junit_sha256": "2648e80346b506a2161add256b1f1e4080ab0953dda7ef9c741d00b8363b2d32"
+      },
+      {
+        "path": "tests/test_labeled_square_runtime.py",
+        "cases": 43,
+        "junit_sha256": "9a83b502225c5f2849969412465b44d61f286572d2c12c93fc9b3dd2f6e9f8fb"
+      },
+      {
+        "path": "tests/test_labeled_t_square_runtime.py",
+        "cases": 24,
+        "junit_sha256": "1bdb538bf1d8e05169d8e13388faef34ec0056dfddae498f9057da4728dbe00b"
+      },
+      {
+        "path": "tests/test_layered_scene_runtime.py",
+        "cases": 48,
+        "junit_sha256": "30200f2e152757d75c3fccbfdc4535cd14542057deb8e1a4f0c4f6ef2c0d216f"
+      },
+      {
+        "path": "tests/test_left_stem_labeled_square_runtime.py",
+        "cases": 44,
+        "junit_sha256": "4299430b55bb967f1f4cd148e0de400d29ac37e2503f3f5192f3862f1bd4bc61"
+      },
+      {
+        "path": "tests/test_left_stem_marked_square_runtime.py",
+        "cases": 18,
+        "junit_sha256": "0f623b4f03c7ef4f5b9505a9065efa2986280290de91675fb8c59ec41160494b"
+      },
+      {
+        "path": "tests/test_marked_square_runtime.py",
+        "cases": 19,
+        "junit_sha256": "82a6cff578b05490cfc0f06308d6a7d43c877f3607368bf6e7e91b8c481a3ff0"
+      },
+      {
+        "path": "tests/test_motor_valve_runtime.py",
+        "cases": 15,
+        "junit_sha256": "7e9b09d828b25f4c87c6fdd73ff8656318a67c92ebbad1f88bc5d3ca69b83b47"
+      },
+      {
+        "path": "tests/test_nested_panel_quality_gate.py",
+        "cases": 2,
+        "junit_sha256": "a174f91130f460cde8d735196ac641d3ecdbb0651e1281c0e4de7debb5379230"
+      },
+      {
+        "path": "tests/test_nested_panel_runtime.py",
+        "cases": 6,
+        "junit_sha256": "dbbb3c6393598d9473cf7542addab78b66156b4c27b3585fb4ab05d7f31a5a04"
+      },
+      {
+        "path": "tests/test_neural_elements.py",
+        "cases": 15,
+        "junit_sha256": "729fd77567a029654d62e41ce7bb86742b3e0534d5f294e8c66e3a16ee2fc037"
+      },
+      {
+        "path": "tests/test_no_new_image_id_hardcoding.py",
+        "cases": 2,
+        "junit_sha256": "edb2a89b36860cdd63d5a224c709c2cb4f09cbbbddbd3d35f6e080c9d6b7132b"
+      },
+      {
+        "path": "tests/test_non_composite_sample_candidates.py",
+        "cases": 2,
+        "junit_sha256": "35962cb86fc296ebcd9b939a76213e09f84fd0be8d63ff6368b1e5f7ab8ba7dc"
+      },
+      {
+        "path": "tests/test_oriented_circle_linework_runtime.py",
+        "cases": 47,
+        "junit_sha256": "6000ebeb2564b7a6aca9bdf2b7f6c3e4ce10162b95567cd5495abef5629a39ac"
+      },
+      {
+        "path": "tests/test_oriented_spiral_disk_runtime.py",
+        "cases": 51,
+        "junit_sha256": "1a09d4401c3b94617225d2cff738376c598ca96b3e68848959e40df7beaca615"
+      },
+      {
+        "path": "tests/test_partitioned_archive_recheck.py",
+        "cases": 4,
+        "junit_sha256": "fe336a6f9f80cab74808a73ddbc6e024f493e497859f5b2430b2601aadc74120"
+      },
+      {
+        "path": "tests/test_perception_circle_ring_seed.py",
+        "cases": 4,
+        "junit_sha256": "011fa62d5e747475b2ea3d47be8526c26c85b9fbee6689db16b9e77711a03fcc"
+      },
+      {
+        "path": "tests/test_perception_detection_contract.py",
+        "cases": 2,
+        "junit_sha256": "9c11a89eba7816e77f82295a40be0e5b0479dd57d6326e18fbfaef8c82c293f2"
+      },
+      {
+        "path": "tests/test_perception_diagram_family_seed.py",
+        "cases": 36,
+        "junit_sha256": "6839857d28b143cb42d80d61bc4bf1e32b3c28a5c681d48d5f95ca5998bbb233"
+      },
+      {
+        "path": "tests/test_perception_geometry_ir_roundtrip.py",
+        "cases": 8,
+        "junit_sha256": "6c6087149dfb3e9482da28d35fbfcea14c2d86da6adffb2fc65b0e72f82bb082"
+      },
+      {
+        "path": "tests/test_perception_minus_roi.py",
+        "cases": 3,
+        "junit_sha256": "8459f5ca274c4ca67e64dc54c6b3e32d2c7f4ba35733a93eccceb107fdaf2b51"
+      },
+      {
+        "path": "tests/test_perception_seed_evaluation.py",
+        "cases": 2,
+        "junit_sha256": "d5ad15ea485f5cd0b68d1fd6f8d159d8d992adaaaedcd86eacb55b67bf7d4f8d"
+      },
+      {
+        "path": "tests/test_perception_seeded_geometry_ir.py",
+        "cases": 3,
+        "junit_sha256": "efb8bff4b4f59eab30e11ecb299933d9f66e3330bd23230b771a0e03d524e0ac"
+      },
+      {
+        "path": "tests/test_perception_telemetry_report.py",
+        "cases": 2,
+        "junit_sha256": "9163f6e0ae3e8830b3e57ba306a0d2db2c465f8aaba0c0fd740fb7d40be6e5c6"
+      },
+      {
+        "path": "tests/test_perception_text_glyph_eval.py",
+        "cases": 5,
+        "junit_sha256": "0d25e42449b53b0ebf901a803fb2d972f7c0d1df1304134cc890f3dc02f4e43e"
+      },
+      {
+        "path": "tests/test_plan_b_perception_linkage.py",
+        "cases": 2,
+        "junit_sha256": "0398050c98fea1a25df6e8dcbe5fb69f88a8e061ee621beda71beab6e8f9b3ee"
+      },
+      {
+        "path": "tests/test_practical_benchmark_preparation.py",
+        "cases": 12,
+        "junit_sha256": "8c4cdccd99ee43071385564b2b249becbd4a50467b5be23e4d0389a7f32506b8"
+      },
+      {
+        "path": "tests/test_primitive_scene_runtime.py",
+        "cases": 25,
+        "junit_sha256": "65adbf36dc319873e7fe6a86f554a3ff51df700fc2ef5e917a84a5e5a6c0a09b"
+      },
+      {
+        "path": "tests/test_pump_runtime.py",
+        "cases": 51,
+        "junit_sha256": "19a818e0f6a74ffc087ff087c12f19d2bd008471e68dc0651eaf532e434e6808"
+      },
+      {
+        "path": "tests/test_quality_complexity_gate.py",
+        "cases": 5,
+        "junit_sha256": "0d6946351cb4b834a27fc370ba67d35901281e5c336f8202d31e3f528ff88b70"
+      },
+      {
+        "path": "tests/test_radial_disk_runtime.py",
+        "cases": 34,
+        "junit_sha256": "d08e9d1361f65345c63f96788ec151d479e01e30f14e56d2e1075611609f8a2e"
+      },
+      {
+        "path": "tests/test_real_neural_elements.py",
+        "cases": 20,
+        "junit_sha256": "49090ccb8e7e58210c85a9070338970b7dea33e0d500990afc04a1ad6de6e0d5"
+      },
+      {
+        "path": "tests/test_retry_failed_image_conversions.py",
+        "cases": 3,
+        "junit_sha256": "9f26c26a4bb5136fa562522c39c9026be2cc8193e1f385262abb74641027a93b"
+      },
+      {
+        "path": "tests/test_review_conversion_quality.py",
+        "cases": 32,
+        "junit_sha256": "e506526bf92e75e0cbd647a03b5bd08cbc7f666582375ebee312514d688a6f2c"
+      },
+      {
+        "path": "tests/test_right_arc_shaft_runtime.py",
+        "cases": 57,
+        "junit_sha256": "53b8fef96fa13fa78f31ba0770f88e9407562170683c52bea1318cce2275a07f"
+      },
+      {
+        "path": "tests/test_right_disk_arrow_runtime.py",
+        "cases": 23,
+        "junit_sha256": "40dcbe5b28808a1ac3226ed7e5c0d2ce3b1749f884b173ae29a16cda1eae5aab"
+      },
+      {
+        "path": "tests/test_right_gradient_junction_family.py",
+        "cases": 45,
+        "junit_sha256": "69d683080fc0a82d3553f31eb084c485d505dabb27258df3f3c31d40e225e9b0"
+      },
+      {
+        "path": "tests/test_right_pump_recheck.py",
+        "cases": 24,
+        "junit_sha256": "f3576e23beb8c00e2e2220bb7a8b5b404d4e50e23420b11b1340766f3903ec29"
+      },
+      {
+        "path": "tests/test_right_stem_labeled_square_runtime.py",
+        "cases": 50,
+        "junit_sha256": "0cdc558781cadc8916b16ed30e5bad47f9e24385cbfd26fac48949cbaa36fbfa"
+      },
+      {
+        "path": "tests/test_right_stem_square_runtime.py",
+        "cases": 24,
+        "junit_sha256": "3f07d6dc85bc956bdd6654e53437f5e7237a4da90bf6017927e4bf0667ca67fd"
+      },
+      {
+        "path": "tests/test_rotated_square_kelle_runtime.py",
+        "cases": 4,
+        "junit_sha256": "cd7308e3a215ffb01419b120cd49c2c3fd3f8416304ee9f13d93c39f72b4ef1d"
+      },
+      {
+        "path": "tests/test_run_catalog_conversion.py",
+        "cases": 13,
+        "junit_sha256": "1344ed8383c76b11c9d36c7030b50db03234327776c8ef07d4257ee200b2d2f6"
+      },
+      {
+        "path": "tests/test_runtime_image_id_dependency_report.py",
+        "cases": 2,
+        "junit_sha256": "3d7e7e64e30cf7c45e4e321e0a9755b29ef82c3cf6a4afb554759fe674b57b2a"
+      },
+      {
+        "path": "tests/test_satisfactory_archive.py",
+        "cases": 5,
+        "junit_sha256": "b8152e0fc754549171c9ab028488d0a5cda37d94995288eb0e1f791c44d0eb75"
+      },
+      {
+        "path": "tests/test_scene_fusion.py",
+        "cases": 45,
+        "junit_sha256": "4fb4849e3a0eea16001c596c93a9fbde1e07e4866d3d5bb3176b88275cdfb6c3"
+      },
+      {
+        "path": "tests/test_scene_references.py",
+        "cases": 33,
+        "junit_sha256": "773c6f7d3b0b486f69f551ae675682887a11ad678237bccef9a88c5381fbf1d7"
+      },
+      {
+        "path": "tests/test_scene_visibility.py",
+        "cases": 30,
+        "junit_sha256": "1d384f135d86a2dddf6a3dbb2d9a19daf0be092e5d21aa4d1c0daf2e771a1e4c"
+      },
+      {
+        "path": "tests/test_search_portfolio.py",
+        "cases": 9,
+        "junit_sha256": "820abe5c9360548e3abcb52e9b89b3b53abf257de98b7038131cfa6080f9d56e"
+      },
+      {
+        "path": "tests/test_semantic_description_vocabulary_schema.py",
+        "cases": 3,
+        "junit_sha256": "368002777f28492563f63f404fee54f148fad9b53b16ed89e0d05c36c11345f6"
+      },
+      {
+        "path": "tests/test_semantic_only_benchmark.py",
+        "cases": 1,
+        "junit_sha256": "24b9fb854697b3bb408524486c9b77eda09f0f132d1bc4b7a11c6c8d410e0217"
+      },
+      {
+        "path": "tests/test_semantic_robustness_evaluation.py",
+        "cases": 5,
+        "junit_sha256": "9f7dc106181b20401c280578d10ac5c7860bf8c8385c7959eac32a834a2b082d"
+      },
+      {
+        "path": "tests/test_shape_detection_classification.py",
+        "cases": 3,
+        "junit_sha256": "e13f4b01c35efec38322f019ed10bbd99c852e48a401200bacd706df54eaf421"
+      },
+      {
+        "path": "tests/test_shape_detection_colors.py",
+        "cases": 1,
+        "junit_sha256": "e79ee3539ea910120ad32666933409d9ce0802eaeecfae5fa85fe0bbc324583b"
+      },
+      {
+        "path": "tests/test_shape_detection_eval.py",
+        "cases": 1,
+        "junit_sha256": "47843d32766b9da06f492765d768e6fa88f223e394705c7cbbd42e444f6d8294"
+      },
+      {
+        "path": "tests/test_shape_detection_vertical_lines.py",
+        "cases": 2,
+        "junit_sha256": "1049df46dedd9a014c4c1ed8257c3a298755e96887b5b67e0eaa0ee9d9d11357"
+      },
+      {
+        "path": "tests/test_short_label_disk_runtime.py",
+        "cases": 17,
+        "junit_sha256": "7a9b2d7c2bfa61be4093f349d105260214b9c0421cc8adac0a315afb479d0a86"
+      },
+      {
+        "path": "tests/test_side_arc_shaft_runtime.py",
+        "cases": 59,
+        "junit_sha256": "02a68a0881fcabcd4929d612fba358c263eb3b38eb5a879a2a0af9365991e2c7"
+      },
+      {
+        "path": "tests/test_side_gradient_junction_runtime.py",
+        "cases": 49,
+        "junit_sha256": "4c233626b37c798733993a0a27531e2378779301dcb7bc18e56143d9f4e01a69"
+      },
+      {
+        "path": "tests/test_sine_diagram_runtime.py",
+        "cases": 36,
+        "junit_sha256": "13feb667640b0160ed635a98500e2055986c3f4b9929f32ed8fabf24a8255811"
+      },
+      {
+        "path": "tests/test_spiral_disk_runtime.py",
+        "cases": 41,
+        "junit_sha256": "90581d851c88fca7160fabf51b241b495a9c78c8e78cab8747b12b7ce3c1e488"
+      },
+      {
+        "path": "tests/test_striped_panel_disk_runtime.py",
+        "cases": 42,
+        "junit_sha256": "be52e18029e5ed526bbb43f5bab17e17b5b810f86cf536d6a9362af29429c7e5"
+      },
+      {
+        "path": "tests/test_successful_source_archive.py",
+        "cases": 8,
+        "junit_sha256": "634b3c68687d0fa0d33b0ef2b63ce6345661e96f508df5d1e703358b99ea8dab"
+      },
+      {
+        "path": "tests/test_three_way_valve_runtime.py",
+        "cases": 11,
+        "junit_sha256": "3a24c65d72dc63290ad3e957e9dcd0f33ca91c1de93e68385944b452bbcc0789"
+      },
+      {
+        "path": "tests/test_top_stem_marked_square_runtime.py",
+        "cases": 17,
+        "junit_sha256": "f6bc7ef73d5cf6036b17ef156793080805b83e1ff39fa2f7f9e5fbb0a7d18898"
+      },
+      {
+        "path": "tests/test_upward_circle_linework_catalog.py",
+        "cases": 9,
+        "junit_sha256": "9df42f3221cabc4709c343e2ac9aa1ceb8aff34b705c82b54b17ddc27efbca09"
+      },
+      {
+        "path": "tests/test_vertical_striped_panel_disk_runtime.py",
+        "cases": 43,
+        "junit_sha256": "3eeecb2be8db7e25e373b4877be291455e7cedfe9bb66eb67525093df19aa906"
+      },
+      {
+        "path": "tests/test_warning_disk_runtime.py",
+        "cases": 48,
+        "junit_sha256": "0502d10a0c1039555406f84cb488de3e52aadef6d850b9798a9a58b34b41a598"
+      },
+      {
+        "path": "tests/test_weak_family_pipeline.py",
+        "cases": 2,
+        "junit_sha256": "8e8730e372ad1da7305d1b91a29023e800ced9d194f9103091609e6ca2fb2f56"
+      },
+      {
+        "path": "tests/test_zigzag_panel_runtime.py",
+        "cases": 21,
+        "junit_sha256": "2b9f17bb32c04904a445d4aadea54e153176ff0f65c59fea70a8d77235cdb457"
+      }
+    ],
+    "tests_source_manifest_sha256": "77567ce51d7e9e0d258f065d8c7f715b5d5bfcae0626b297e9318eab8b261701"
+  },
+  "targeted_scenes": {
+    "passed": 217,
+    "junit_sha256": "261e409f5d757712843e2f344bb208a86b2e64b454451c56b1a6acd5685c7c6c"
+  },
+  "saved_acceptance_tests": {
+    "passed": 5,
+    "junit_sha256": "4fb5880a16f1674304541d45493c89e39f49d90cae2d260d4cf7081e7b146100"
+  },
+  "archive": {
+    "before_count": 377,
+    "after_count": 379,
+    "previous_reconverted_passed": 377,
+    "new_reconverted_passed": 2,
+    "preserved_records": 377,
+    "preserved_image_vector_files": 754,
+    "previous_higher_error_than_stored_best": 41,
+    "old_recheck_sha256": "072d4c96617509a244e590197e5eecdb0c403543857d1b539d3ed00a30ca4a89",
+    "new_recheck_sha256": "8c364161ee3b7cda6931c1e725369404aab289d30e3896ffe3013a18585f8eb4",
+    "new_strict_sha256": "ab308824304fcffd1bee889fe7361f50152991a7fb97d433c9788aad4b9a6134",
+    "new_vectors_byte_identical": true,
+    "index_sha256": "8a142fd0e6ae89e99900c7466fa7d4e3efc719d31cd2867806be878b8bf83b5f"
+  },
+  "runtime_source_manifest_sha256": "68b5bbf703594ab0af52c5fc76cbf9e181a4395e0b974d07129bca5a9aaddef6",
+  "execution_history": [
+    "Initial monolithic suite interrupted at roughly 54% after long existing conversion tests; no final JUnit, not counted as a complete pass.",
+    "An initial temporary module launcher used an incorrect cwd; corrected before the final module run. The two-worker trial was interrupted to use six workers.",
+    "The first reduction used bare Python import names rather than JUnit path-qualified classnames; final reduction uses canonical collected node IDs and verifies every module XML exactly. Test verdicts were not changed.",
+    "The initial complete module matrix contained 3807 passed, 30 skipped and one failed test. A sleep(50ms) produced a 47ms observation on GetTickCount64 (15.625ms resolution). The unit test now uses a controlled clock; production timing code/limits are unchanged. All 9 timing-module tests pass on rerun. The original failure remains preserved."
+  ],
+  "timing_module_rerun": {
+    "original_passed": 8,
+    "original_failed": 1,
+    "final_passed": 9,
+    "original_junit_sha256": "4f6a2ee9b3c6d76a4d4297de546ae5151e59e4c3ac52ef721ff02765720c4dab",
+    "final_junit_sha256": "79fc4be1cb6f8441ec484b0e7075992ea1fadcccee9b1fa087b8b6ba0eb7977e"
+  },
+  "verification": {
+    "compileall": true,
+    "cli_help": true,
+    "no_runtime_image_ids": true,
+    "whitespace": "pass with repository CRLF handling: git -c core.whitespace=cr-at-eol diff --check"
+  }
+}

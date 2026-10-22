@@ -1,0 +1,71 @@
+{
+  "schema": "gradient_scene_evaluation_v1",
+  "groups": {
+    "parent-real": {
+      "accepted": 0,
+      "completed": 4,
+      "input_manifest_sha256": "925d9e36e54b8945d53983866436adf5de549aae3c664a621a9e8f447f982ea3",
+      "report_sha256": "e35768890eb24467c7d928d965adc946d7dbcd6a09652175397279ce8b1d6ff3",
+      "source_manifest_sha256": "b1e469bb204138ba7fdbba70a26749af307caaf4bd347ca625565aa80329957e"
+    },
+    "first-plan-b": {
+      "accepted": 8,
+      "completed": 17,
+      "input_manifest_sha256": "dcd21b83c1495e0a14882fa690b0866090f9fb4520b65fb2132593e24c6f895d",
+      "report_sha256": "96118b9c14297bdac2f24bd47bfcfeec14fba314d66315b9d4acd0db19d179d2",
+      "source_manifest_sha256": "a2c58f9dac19b022d8dac768c6c52d618c0da52934be915b4c567b7f6c7a3cfb"
+    },
+    "wording-corrected-plan-b": {
+      "accepted": 14,
+      "completed": 17,
+      "input_manifest_sha256": "dcd21b83c1495e0a14882fa690b0866090f9fb4520b65fb2132593e24c6f895d",
+      "report_sha256": "9103806c2e02380a2113a5a749473212c5d5df60a8f0054f260c6422d3e7d87e",
+      "source_manifest_sha256": "6ba51d6e4ce11418c1bd6cd536f25e12b60a52ea31be8c5d0b0be07721ab60de"
+    },
+    "refined-plan-b": {
+      "accepted": 17,
+      "completed": 17,
+      "input_manifest_sha256": "dcd21b83c1495e0a14882fa690b0866090f9fb4520b65fb2132593e24c6f895d",
+      "report_sha256": "05fc67b1bcce56a067755d4ff301e03c94e5606c003e425ade7d9ca2ef710a70",
+      "source_manifest_sha256": "68b5bbf703594ab0af52c5fc76cbf9e181a4395e0b974d07129bca5a9aaddef6"
+    },
+    "real": {
+      "accepted": 2,
+      "completed": 4,
+      "input_manifest_sha256": "bb28c43b430bdd0207862349d5ef0aeacf090169e62384b93bbadb53df55f596",
+      "report_sha256": "99369f560f29782b2b71789acae463e0136d4eb8d1eeba0810f767d1c3c9ae54",
+      "source_manifest_sha256": "68b5bbf703594ab0af52c5fc76cbf9e181a4395e0b974d07129bca5a9aaddef6"
+    },
+    "independent": {
+      "accepted": 12,
+      "completed": 12,
+      "input_manifest_sha256": "8bd7685d48b96c57375fcb5e715b655c964f610a12dcedad8d218c2ae3d98649",
+      "report_sha256": "4371c40ac63d2eaf9c7187d036ca487435c9f53e094c1eddcec617e2aea35ff6",
+      "source_manifest_sha256": "68b5bbf703594ab0af52c5fc76cbf9e181a4395e0b974d07129bca5a9aaddef6"
+    },
+    "independent-rename": {
+      "accepted": 12,
+      "completed": 12,
+      "input_manifest_sha256": "8bd7685d48b96c57375fcb5e715b655c964f610a12dcedad8d218c2ae3d98649",
+      "report_sha256": "69c925afcaa1d89ccdcf14eae0052a0c52ca7e3bd5e5cc6c3397cbbba899ee7e",
+      "source_manifest_sha256": "68b5bbf703594ab0af52c5fc76cbf9e181a4395e0b974d07129bca5a9aaddef6"
+    },
+    "sealed-plan-b": {
+      "accepted": 17,
+      "completed": 17,
+      "input_manifest_sha256": "67032c16ea666784cd481bea262c00d67eba9f2b5a1de2eb0de646b535815d94",
+      "report_sha256": "66f445d6214d2d42e1309c8f9cdfc2bb4a99a7bee9cb30257e362739a5316b3c",
+      "source_manifest_sha256": "68b5bbf703594ab0af52c5fc76cbf9e181a4395e0b974d07129bca5a9aaddef6"
+    },
+    "negative": {
+      "accepted": 0,
+      "completed": 3,
+      "input_manifest_sha256": "4845e3d380b05a3195d49d2d1ba1b26ca8406b16efe689f096b7506eab481e87",
+      "report_sha256": "b5e4f8ee27b4de4e5dae852a6fc51e18a8dcfd04445a7d98df89763146468dfe",
+      "source_manifest_sha256": "68b5bbf703594ab0af52c5fc76cbf9e181a4395e0b974d07129bca5a9aaddef6"
+    }
+  },
+  "renamed_vectors_byte_identical": true,
+  "real_family_status": "Known development families only; two catalogue variants of one nested-panel topology are not two new real families.",
+  "source_inputs": "Raster pixels and independent descriptions; reference SVG reads forbidden in conversion workers."
+}

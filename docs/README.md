@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [Native Rechteckszenen: Verlauf, gerundete Konturen und bekannte Panelvarianten (2026-10-22)](next_arbeitspaket_2026-10-22_gradient_scene.md)
+
 - [SEARCH-DEADLINE-OVERRUN-AUDIT: Standbyursache, getrennte Zeitbelege und verspätete Prozessabschlüsse (2026-10-22)](next_arbeitspaket_2026-10-22_deadline_overrun_audit.md)
 
 - [SEMANTIC-ROBUSTNESS-01: reale Formulierungen, Negationen und verbindliche Kandidatenprüfungen (2026-10-22)](next_arbeitspaket_2026-10-22_semantic_robustness.md)

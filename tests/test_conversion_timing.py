@@ -80,15 +80,19 @@ def test_successful_process_keeps_its_output_and_exit_status(tmp_path):
     assert records[-1]['phase'] == 'process_attempt_finished'
 
 
-def test_trace_retains_prior_attempts_and_observation_gaps(tmp_path):
+def test_trace_retains_prior_attempts_and_observation_gaps(tmp_path, monkeypatch):
+    # Verify the recorded interval, independently of Windows' coarse monotonic
+    # clock: sleeping 50 ms can span only 47 ms on that clock.
+    observed = [100.]
+    monkeypatch.setattr(timing.time, 'monotonic', lambda: observed[0])
     path = tmp_path/'trace.jsonl'
     first = timing.TimingTrace(path)
     first.mark('before_pause')
-    time.sleep(.05)
+    observed[0] += .25
     first.mark('after_pause')
     timing.TimingTrace(path).mark('new_attempt')
     records = read_trace(path)
-    assert records[1]['observation_gap_seconds'] >= .05
+    assert records[1]['observation_gap_seconds'] == pytest.approx(.25)
     assert records[0]['attempt'] == records[1]['attempt'] != records[2]['attempt']
 
 

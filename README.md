@@ -1,17 +1,23 @@
 # ImageConverter
 
+Der [native Rechteckszenenweg](docs/next_arbeitspaket_2026-10-22_gradient_scene.md)
+ergänzt axiale Farbverläufe, gerundete Ecken und weiße Innenflächen.
+Die bekannten verschachtelten Panelvarianten bestehen beide regulären Gates;
+das Erfolgsarchiv wächst auf 379 Paare. Die Übertragungsabnahme an neuen realen
+Familien bleibt offen.
+
 Das [reale Szenenpaket GENERAL-SCENE-REAL-05](docs/next_arbeitspaket_2026-10-21_scene_real.md)
 ergänzt eindeutige Farb-/Lagebezüge mit konservativer Mehrdeutigkeitsprüfung.
 Neue Sprachkontrollen und 17/17 erweiterte Varianten bestehen die unabhängigen
 Objekt-/Regionsgates. Vier vorab markierte reale Familien erreichen im
-Versuch keine vollständige Abnahme; die belegte Katalogzahl
-bleibt 377/1.785. Verlauf und gerundete Panelkonturen sind Folgearbeit.
+Versuch keine vollständige Abnahme; die damalige belegte Katalogzahl
+betrug 377/1.785. Die Übertragung auf neue reale Familien bleibt Folgearbeit.
 
 Das [Sichtbarkeitspaket GENERAL-SCENE-VISIBILITY-04](docs/next_arbeitspaket_2026-10-21_scene_visibility.md)
 ergänzt eigene dunkle Konturen bei Überdeckung, kombinierte Verschachtelung und
 Teilüberdeckung sowie eindeutige sprachliche Tiefenbedingungen. Neue gedrehte
 Prüfszenen bestehen 12/12 und eine erweiterte Vorlage 17/17 unter unveränderten
-Qualitätsgrenzen. Die belegte Katalogzahl bleibt 377 von 1.785 Bildern (21,1 %).
+Qualitätsgrenzen. Die damalige belegte Katalogzahl betrug 377 von 1.785 Bildern (21,1 %).
 
 Die [gemeinsame Szenenauswahl GENERAL-SCENE-01](docs/next_arbeitspaket_2026-10-20_scene_fusion.md)
 führt vollständige Formgrenzen und sichtbare Kreisbögen/Rechteckseiten zusammen.
@@ -43,7 +49,7 @@ ImageConverter converts badge/source images into composite SVG outputs and also
 provides annotation/debugging helpers for the source raster files.
 
 Die [Erfolgsübersicht](artifacts/satisfactory_conversions/README.md) enthält
-377 ausdrücklich abgenommene Paare. Der [Projektstand vom 17. Oktober](docs/project_status_2026-10-17.md)
+379 ausdrücklich abgenommene Paare. Der [Projektstand vom 17. Oktober](docs/project_status_2026-10-17.md)
 dokumentiert die Katalogbasis von 1.785 Bildern und die Grenzen älterer
 Pixelprüfungen. Eine sortierte Prüfliste unterstützt die persönliche Sichtprüfung.
 
@@ -93,7 +99,7 @@ SVGs, Checkpoints oder andere Bilder werden im voreingestellten
 ## Main entry point
 
 Die [Erfolgsübersicht](artifacts/satisfactory_conversions/README.md) enthält
-377 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
+379 geprüfte Originalbild-/SVG-Paare in separaten Ordnern. Mit
 `python -m tools.refresh_satisfactory_archive` wird sie aus den dokumentierten
 Abnahmen aktualisiert. `python -m tools.run_pytest_profile extended`
 aktualisiert die Sammlung einschließlich späterer erfolgreicher Batches,
