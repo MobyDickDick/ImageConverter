@@ -1,0 +1,585 @@
+{
+  "schema": "mixed_gradient_scene_verified_v1",
+  "evidence_kind": "stored_real_cli_development",
+  "executes_converter": false,
+  "measures_raster_quality": true,
+  "new_heldout_real_families_after_tuning": 0,
+  "summary": {
+    "before": {
+      "accepted": 0,
+      "total": 2
+    },
+    "first_transfer": {
+      "accepted": 0,
+      "total": 2
+    },
+    "after_development": {
+      "accepted": 2,
+      "total": 2
+    }
+  },
+  "satisfaction_gate": {
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "baseline_sha256": "047ace0f7fb788479f3ebe3b7e53fa12cc47b42040acf1713a6cfef371231b2d",
+    "provenance": {
+      "source_commit": "26cbde874",
+      "branch": "codex/concept-audit-real-scenes-2026-10-22",
+      "execution_mode": "semantic-only",
+      "image_budget_seconds": 5,
+      "search_seed": 17,
+      "iterations": 64,
+      "scope": "First frozen transfer failed 0/2; subsequent original-based development is not new family holdout evidence.",
+      "commit": "26cbde874",
+      "seed": 17,
+      "toolchain": {
+        "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+        "platform": "Windows-10-10.0.26300-SP0"
+      },
+      "input_hashes": {
+        "GE0026.jpg": "df42ebcf0b3feebf9dd1cb642adebdcc171dca3dc7b159427839fe75de3cd913",
+        "GE0027.jpg": "00cbcb62d869f5a2a14966101fdea50ad588cd47dbd22aa9ef541a3af3f07c4f"
+      }
+    },
+    "summary": {
+      "case_count": 2,
+      "technically_completed": 2,
+      "improved": 2,
+      "satisfactory": 2
+    },
+    "cases": [
+      {
+        "case_id": "GE0026.jpg",
+        "before": {
+          "error_per_pixel": 0.04318978377707292,
+          "edge_alignment": 0.17079991102218628,
+          "object_mask_iou": 0.7770318868376888,
+          "semantic_score": 0.0,
+          "dimension_match": 1.0
+        },
+        "after": {
+          "error_per_pixel": 0.00159168439447368,
+          "edge_alignment": 0.7291115522384644,
+          "object_mask_iou": 0.9671348314606741,
+          "semantic_score": 1.0,
+          "dimension_match": 1.0
+        },
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "regressed_metrics": [],
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "technically_completed": true,
+        "improved": true,
+        "satisfactory": true,
+        "hard_rejections": [],
+        "good_solution_gate": {
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "metrics": {
+            "error_per_pixel": 0.00159168439447368,
+            "semantic_score": 1.0,
+            "dimension_match": 1.0
+          },
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_semantic_score": 0.85,
+            "min_dimension_match": 0.99
+          },
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "decision_tier": "all",
+          "reachability": null
+        },
+        "quality_complexity_gate": {
+          "passed": true,
+          "failures": [],
+          "metrics": {
+            "pixel_similarity": 0.9984,
+            "edge_alignment": 0.7291,
+            "structure_score": 0.9671,
+            "semantic_score": 1.0,
+            "combined_score": 0.9237
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          },
+          "thresholds": {
+            "min_pixel_similarity": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_structure_score": 0.72,
+            "min_semantic_score": 0.85,
+            "min_combined_score": 0.78,
+            "max_svg_element_count": 80,
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0
+          }
+        }
+      },
+      {
+        "case_id": "GE0027.jpg",
+        "before": {
+          "error_per_pixel": 0.02531583655725362,
+          "edge_alignment": 0.16496041417121887,
+          "object_mask_iou": 0.7694363459669582,
+          "semantic_score": 0.0,
+          "dimension_match": 1.0
+        },
+        "after": {
+          "error_per_pixel": 0.0021589157102536683,
+          "edge_alignment": 0.7236709594726562,
+          "object_mask_iou": 0.9644357322878745,
+          "semantic_score": 1.0,
+          "dimension_match": 1.0
+        },
+        "metric_classification": {
+          "dimension_match": "unchanged",
+          "edge_alignment": "improved",
+          "error_per_pixel": "improved",
+          "object_mask_iou": "improved",
+          "semantic_score": "improved"
+        },
+        "regressed_metrics": [],
+        "improved_metrics": [
+          "edge_alignment",
+          "error_per_pixel",
+          "object_mask_iou",
+          "semantic_score"
+        ],
+        "technically_completed": true,
+        "improved": true,
+        "satisfactory": true,
+        "hard_rejections": [],
+        "good_solution_gate": {
+          "schema_version": "good_solution_gate_v1",
+          "status": "good",
+          "reasons": [
+            "all_thresholds_satisfied"
+          ],
+          "metrics": {
+            "error_per_pixel": 0.0021589157102536683,
+            "semantic_score": 1.0,
+            "dimension_match": 1.0
+          },
+          "thresholds": {
+            "max_error_per_pixel": 0.05,
+            "min_semantic_score": 0.85,
+            "min_dimension_match": 0.99
+          },
+          "metric_hierarchy": {
+            "primary": [
+              "semantic_score",
+              "dimension_match"
+            ],
+            "secondary": [
+              "error_per_pixel"
+            ]
+          },
+          "decision_tier": "all",
+          "reachability": null
+        },
+        "quality_complexity_gate": {
+          "passed": true,
+          "failures": [],
+          "metrics": {
+            "pixel_similarity": 0.9978,
+            "edge_alignment": 0.7237,
+            "structure_score": 0.9644,
+            "semantic_score": 1.0,
+            "combined_score": 0.9215
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          },
+          "thresholds": {
+            "min_pixel_similarity": 0.78,
+            "min_edge_alignment": 0.72,
+            "min_structure_score": 0.72,
+            "min_semantic_score": 0.85,
+            "min_combined_score": 0.78,
+            "max_svg_element_count": 80,
+            "max_path_command_count": 160,
+            "max_path_complexity_ratio": 4.0
+          }
+        }
+      }
+    ]
+  },
+  "cases": [
+    {
+      "file": "GE0026.jpg",
+      "phases": {
+        "before": {
+          "accepted": false,
+          "strict_quality": {
+            "satisfactory": false,
+            "failures": [
+              "normalized_mse_outside_limit",
+              "foreground_mse_outside_limit",
+              "edge_alignment_outside_limit",
+              "foreground_iou_outside_limit"
+            ],
+            "metrics": {
+              "normalized_mse": 0.04318979009985924,
+              "foreground_mse": 0.05107296630740166,
+              "edge_alignment": 0.17079991102218628,
+              "foreground_iou": 0.7881488081978169
+            },
+            "limits": {
+              "max_normalized_mse": 0.01,
+              "max_foreground_mse": 0.04,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85,
+              "max_svg_elements": 80,
+              "max_path_commands": 160
+            },
+            "complexity": {
+              "parse_error": null,
+              "embedded_raster_count": 0,
+              "vector_element_count": 4,
+              "path_count": 0,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0
+            }
+          },
+          "objects": {
+            "passed": false,
+            "reason": "non_native_scene_definition"
+          },
+          "regions": [
+            {
+              "normalized_mse": 0.04318978797339351,
+              "foreground_mse": 0.05098153524539108,
+              "foreground_iou": 0.7999110715873722,
+              "edge_alignment": 0.17079991102218628,
+              "passed": false
+            },
+            {
+              "normalized_mse": 0.11248095948087508,
+              "foreground_mse": 0.11248095948087508,
+              "foreground_iou": 1.0,
+              "edge_alignment": 0.0,
+              "passed": false
+            }
+          ]
+        },
+        "first_transfer": {
+          "accepted": false,
+          "strict_quality": {
+            "satisfactory": false,
+            "failures": [
+              "normalized_mse_outside_limit",
+              "foreground_mse_outside_limit",
+              "edge_alignment_outside_limit",
+              "foreground_iou_outside_limit"
+            ],
+            "metrics": {
+              "normalized_mse": 0.04318979009985924,
+              "foreground_mse": 0.05107296630740166,
+              "edge_alignment": 0.17079991102218628,
+              "foreground_iou": 0.7881488081978169
+            },
+            "limits": {
+              "max_normalized_mse": 0.01,
+              "max_foreground_mse": 0.04,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85,
+              "max_svg_elements": 80,
+              "max_path_commands": 160
+            },
+            "complexity": {
+              "parse_error": null,
+              "embedded_raster_count": 0,
+              "vector_element_count": 4,
+              "path_count": 0,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0
+            }
+          },
+          "objects": {
+            "passed": false,
+            "reason": "non_native_scene_definition"
+          },
+          "regions": [
+            {
+              "normalized_mse": 0.04318978797339351,
+              "foreground_mse": 0.05098153524539108,
+              "foreground_iou": 0.7999110715873722,
+              "edge_alignment": 0.17079991102218628,
+              "passed": false
+            },
+            {
+              "normalized_mse": 0.11248095948087508,
+              "foreground_mse": 0.11248095948087508,
+              "foreground_iou": 1.0,
+              "edge_alignment": 0.0,
+              "passed": false
+            }
+          ]
+        },
+        "after_development": {
+          "accepted": true,
+          "strict_quality": {
+            "satisfactory": true,
+            "failures": [],
+            "metrics": {
+              "normalized_mse": 0.0015916844131425023,
+              "foreground_mse": 0.0018102215835824609,
+              "edge_alignment": 0.7291115522384644,
+              "foreground_iou": 0.97758095765292
+            },
+            "limits": {
+              "max_normalized_mse": 0.01,
+              "max_foreground_mse": 0.04,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85,
+              "max_svg_elements": 80,
+              "max_path_commands": 160
+            },
+            "complexity": {
+              "parse_error": null,
+              "embedded_raster_count": 0,
+              "vector_element_count": 3,
+              "path_count": 0,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0
+            }
+          },
+          "objects": {
+            "passed": true,
+            "detected_count": 2,
+            "expected_count": 2,
+            "max_bbox_error_px": 1.877200000000002
+          },
+          "regions": [
+            {
+              "normalized_mse": 0.0015916844393008957,
+              "foreground_mse": 0.0018123209211823334,
+              "foreground_iou": 0.9810907097835023,
+              "edge_alignment": 0.7291115522384644,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.002786204805531331,
+              "foreground_mse": 0.002786204805531331,
+              "foreground_iou": 1.0,
+              "edge_alignment": 0.7724848985671997,
+              "passed": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "GE0027.jpg",
+      "phases": {
+        "before": {
+          "accepted": false,
+          "strict_quality": {
+            "satisfactory": false,
+            "failures": [
+              "normalized_mse_outside_limit",
+              "edge_alignment_outside_limit",
+              "foreground_iou_outside_limit"
+            ],
+            "metrics": {
+              "normalized_mse": 0.02531583420932293,
+              "foreground_mse": 0.03011249005794525,
+              "edge_alignment": 0.16496041417121887,
+              "foreground_iou": 0.7894263217097863
+            },
+            "limits": {
+              "max_normalized_mse": 0.01,
+              "max_foreground_mse": 0.04,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85,
+              "max_svg_elements": 80,
+              "max_path_commands": 160
+            },
+            "complexity": {
+              "parse_error": null,
+              "embedded_raster_count": 0,
+              "vector_element_count": 4,
+              "path_count": 0,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0
+            }
+          },
+          "objects": {
+            "passed": false,
+            "reason": "non_native_scene_definition"
+          },
+          "regions": [
+            {
+              "normalized_mse": 0.025315837283883123,
+              "foreground_mse": 0.029817754986281333,
+              "foreground_iou": 0.8013348164627364,
+              "edge_alignment": 0.16496041417121887,
+              "passed": false
+            },
+            {
+              "normalized_mse": 0.08600207612456746,
+              "foreground_mse": 0.08600207612456746,
+              "foreground_iou": 1.0,
+              "edge_alignment": 0.0,
+              "passed": false
+            },
+            {
+              "normalized_mse": 0.05539329317783758,
+              "foreground_mse": 0.05539329317783758,
+              "foreground_iou": 1.0,
+              "edge_alignment": 0.0,
+              "passed": false
+            }
+          ]
+        },
+        "first_transfer": {
+          "accepted": false,
+          "strict_quality": {
+            "satisfactory": false,
+            "failures": [
+              "normalized_mse_outside_limit",
+              "edge_alignment_outside_limit",
+              "foreground_iou_outside_limit"
+            ],
+            "metrics": {
+              "normalized_mse": 0.02531583420932293,
+              "foreground_mse": 0.03011249005794525,
+              "edge_alignment": 0.16496041417121887,
+              "foreground_iou": 0.7894263217097863
+            },
+            "limits": {
+              "max_normalized_mse": 0.01,
+              "max_foreground_mse": 0.04,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85,
+              "max_svg_elements": 80,
+              "max_path_commands": 160
+            },
+            "complexity": {
+              "parse_error": null,
+              "embedded_raster_count": 0,
+              "vector_element_count": 4,
+              "path_count": 0,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0
+            }
+          },
+          "objects": {
+            "passed": false,
+            "reason": "non_native_scene_definition"
+          },
+          "regions": [
+            {
+              "normalized_mse": 0.025315837283883123,
+              "foreground_mse": 0.029817754986281333,
+              "foreground_iou": 0.8013348164627364,
+              "edge_alignment": 0.16496041417121887,
+              "passed": false
+            },
+            {
+              "normalized_mse": 0.08600207612456746,
+              "foreground_mse": 0.08600207612456746,
+              "foreground_iou": 1.0,
+              "edge_alignment": 0.0,
+              "passed": false
+            },
+            {
+              "normalized_mse": 0.05539329317783758,
+              "foreground_mse": 0.05539329317783758,
+              "foreground_iou": 1.0,
+              "edge_alignment": 0.0,
+              "passed": false
+            }
+          ]
+        },
+        "after_development": {
+          "accepted": true,
+          "strict_quality": {
+            "satisfactory": true,
+            "failures": [],
+            "metrics": {
+              "normalized_mse": 0.002158915624022484,
+              "foreground_mse": 0.002610286697745323,
+              "edge_alignment": 0.7236709594726562,
+              "foreground_iou": 0.9745786128764852
+            },
+            "limits": {
+              "max_normalized_mse": 0.01,
+              "max_foreground_mse": 0.04,
+              "min_edge_alignment": 0.72,
+              "min_foreground_iou": 0.85,
+              "max_svg_elements": 80,
+              "max_path_commands": 160
+            },
+            "complexity": {
+              "parse_error": null,
+              "embedded_raster_count": 0,
+              "vector_element_count": 4,
+              "path_count": 0,
+              "path_command_count": 0,
+              "path_complexity_ratio": 0.0
+            }
+          },
+          "objects": {
+            "passed": true,
+            "detected_count": 3,
+            "expected_count": 3,
+            "max_bbox_error_px": 1.9585000000000008
+          },
+          "regions": [
+            {
+              "normalized_mse": 0.0021589157876664832,
+              "foreground_mse": 0.002610451119046834,
+              "foreground_iou": 0.9773347897323866,
+              "edge_alignment": 0.7236709594726562,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.006883523431158955,
+              "foreground_mse": 0.006883523431158955,
+              "foreground_iou": 1.0,
+              "edge_alignment": 0.7253627777099609,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.005285804605066428,
+              "foreground_mse": 0.005285804605066428,
+              "foreground_iou": 1.0,
+              "edge_alignment": 0.8310315608978271,
+              "passed": true
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "schema": "mixed_gradient_scene_trials_v1",
+  "groups": [
+    {
+      "folder": "before",
+      "report_sha256": "ec8d61fcf8ab1a524c10202308a7139c0bbd0859cbea2538759953676dfa3ebc",
+      "runtime_is_final": false,
+      "attempts": 2,
+      "accepted": 0,
+      "failures": [
+        {
+          "case_id": "real_00",
+          "failures": [
+            "normalized_mse_outside_limit",
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "returncode": 0
+        },
+        {
+          "case_id": "real_01",
+          "failures": [
+            "normalized_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "folder": "after-real",
+      "report_sha256": "687bffee4ad8b3b7daf8d77788d5728dc5406b3186592603e58837af9472fbb7",
+      "runtime_is_final": false,
+      "attempts": 2,
+      "accepted": 0,
+      "failures": [
+        {
+          "case_id": "real_00",
+          "failures": [
+            "normalized_mse_outside_limit",
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "returncode": 0
+        },
+        {
+          "case_id": "real_01",
+          "failures": [
+            "normalized_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "folder": "cli-dev",
+      "report_sha256": "2f3cdeb61ea744294cddd08bea7833c4d7fcd03f296ad0975d340fe9f31f3fce",
+      "runtime_is_final": false,
+      "attempts": 12,
+      "accepted": 11,
+      "failures": [
+        {
+          "case_id": "mixed_04",
+          "failures": [
+            "normalized_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "folder": "cli-dev-final",
+      "report_sha256": "8528a61c25b86c26cafc0500be435096692fe12d790b6087e71876ceed2c6fda",
+      "runtime_is_final": false,
+      "attempts": 12,
+      "accepted": 11,
+      "failures": [
+        {
+          "case_id": "mixed_08",
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "folder": "cli-dev-accepted",
+      "report_sha256": "c87cd11d76bb45ff624cec0e9eb6cf9db0dbd80aacc704f0265940e753a540de",
+      "runtime_is_final": false,
+      "attempts": 12,
+      "accepted": 11,
+      "failures": [
+        {
+          "case_id": "mixed_08",
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "folder": "cli-dev-freeze",
+      "report_sha256": "97eaaeebdbdee942d31660466ba27a329da2aedb1c1256e785dfa12252d4b4d5",
+      "runtime_is_final": false,
+      "attempts": 12,
+      "accepted": 11,
+      "failures": [
+        {
+          "case_id": "mixed_10",
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "folder": "cli-dev-serial",
+      "report_sha256": "0ad10e6becd8e303bcd46e880aa6076ec8be363e04dbf3b7b7f4da2bd2e0d61d",
+      "runtime_is_final": false,
+      "attempts": 12,
+      "accepted": 11,
+      "failures": [
+        {
+          "case_id": "mixed_10",
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "folder": "after-real-development",
+      "report_sha256": "8a51e8cf4ee9b754cf11fe28358cecfb370764a8ff2b9e043d7e167cafc35c37",
+      "runtime_is_final": true,
+      "attempts": 2,
+      "accepted": 2,
+      "failures": []
+    },
+    {
+      "folder": "cli-dev-complete",
+      "report_sha256": "f29829d23fc0ef7b05ee7a84b5831ea005c88db3aa890508e78cdb5f975968b9",
+      "runtime_is_final": true,
+      "attempts": 12,
+      "accepted": 11,
+      "failures": [
+        {
+          "case_id": "mixed_10",
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "folder": "cli-final",
+      "report_sha256": "6d46a6c84f98eb541527ba0078cf5c62dece91befcb0e3a3aab6770d33a81e8a",
+      "runtime_is_final": true,
+      "attempts": 12,
+      "accepted": 12,
+      "failures": []
+    },
+    {
+      "folder": "renamed-real-development",
+      "report_sha256": "c111c5c60525422fc3c36d741a328ad85b82010b40dee411d7059eb7c37e9e2a",
+      "runtime_is_final": true,
+      "attempts": 2,
+      "accepted": 2,
+      "failures": []
+    }
+  ],
+  "interpretation": "Before and initial frozen real transfer each failed 0/2. Original-based development is not new-family holdout acceptance. Diagnostic and timeout attempts are retained in the group denominators. Raw local outputs under .tmp/concept-audit must be regenerated on a fresh checkout."
+}

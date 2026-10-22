@@ -1,0 +1,30 @@
+{
+  "schema": "mixed_gradient_real_families_v1",
+  "annotation_method": "Visible bounds marked by the implementing agent on original nearest-neighbour enlarged JPEG pixels before runtime development. No detector proposals, output SVG or reference SVG used. This is not an independent human annotation audit.",
+  "family_policy": "Two previously untested compositions: one rectangle within a gradient circle and two separate rectangles within a gradient circle. Freeze before runtime edits; all descendants of either composition remain together. Develop only on independently generated synthetic geometry, then evaluate these originals once without tuning to results.",
+  "cases": [
+    {
+      "file": "GE0026.jpg",
+      "family": "single_rectangle_in_gradient_circle",
+      "split": "holdout",
+      "source_sha256": "df42ebcf0b3feebf9dd1cb642adebdcc171dca3dc7b159427839fe75de3cd913",
+      "description": "Ein gefüllter Kreis und ein gefülltes Rechteck. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises. Die Formen haben helle Konturen. Keine Beschriftung.",
+      "expected_objects": [
+        {"kind": "circle", "bbox": [3, 3, 67, 67], "parent": null, "gradient_axis": 1},
+        {"kind": "rectangle", "bbox": [19, 20, 35, 34], "parent": 0}
+      ]
+    },
+    {
+      "file": "GE0027.jpg",
+      "family": "two_rectangles_in_gradient_circle",
+      "split": "holdout",
+      "source_sha256": "00cbcb62d869f5a2a14966101fdea50ad588cd47dbd22aa9ef541a3af3f07c4f",
+      "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Die Formen haben helle Konturen. Keine Beschriftung.",
+      "expected_objects": [
+        {"kind": "circle", "bbox": [3, 3, 67, 67], "parent": null, "gradient_axis": 1},
+        {"kind": "rectangle", "bbox": [24, 20, 9, 34], "parent": 0},
+        {"kind": "rectangle", "bbox": [39, 20, 9, 34], "parent": 0}
+      ]
+    }
+  ]
+}
