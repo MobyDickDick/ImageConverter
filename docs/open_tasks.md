@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-22)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `493` · Erledigt `450` · Offen `43`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `494` · Erledigt `451` · Offen `43`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -61,6 +61,8 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 - [ ] **GENERAL-SCENE-REAL-05:** Neue reale Kreis-/Rechteckfamilien vor Entwicklung unabhängig markieren und sperren; Szenen mit sichtbaren Überdeckungen, Konturen und Verschachtelung prüfen. Eindeutige Farb-/Lagebezüge zusätzlich zu Größenrollen typisieren, unbekannte und mehrdeutige Beziehungen konservativ behandeln. Echte CLI-Vorher-/Nachher-Vergleiche mit unveränderten unabhängigen Objekt-/Regionsgates; Kataloggewinne nur anhand neuer abgenommener Originalbild-/SVG-Paare zählen. Übertragung auf mindestens zwei neue reale Familien mit anderen Kombinationen bereits unterstützter Primitive über denselben Szenenweg ohne neue Familienvorlage oder Familien-Dispatch belegen; Varianten und unabhängige Familien getrennt zählen. Präzisierte Abnahme: [Projekteinschätzung](quality_review_tasks_2026-10-21.md#general-scene-real-05--übertragung-statt-weiterer-einzelfallpfade).
 
+- [x] **GENERAL-SCENE-GRADIENT-06 (begrenzter Entwicklungsschritt):** Native Rechteckszenen mit axialen Verläufen, gerundeten Ecken, optionalen dunklen Konturen und weißer Innenfläche. Die bekannten Varianten DLG0011/DLG0018 verbessern sich von 0/2 auf 2/2 unter beiden regulären und strengeren unabhängigen Gates; eigenständige Beschreibungen in beiden Katalogen. Neue synthetische CLI-Fälle bestehen 12/12, Umbenennungen sind bytegleich und eine abschließende Plan-B-Vorlage besteht 17/17. Archiv 379 Paare, alle 377 bisherigen Datensätze und Bild-/SVG-Paare unverändert. Zwei Einzelpanel-IoU-Fehler bleiben sichtbar. Keine zwei neuen realen Familien; GENERAL-SCENE-REAL-05 bleibt offen. [Nachweise und Grenzen](next_arbeitspaket_2026-10-22_gradient_scene.md).
+
 ## Katalog-CI (2026-10-11)
 
 - [x] **CATALOG-TIMEOUT:** Budget im Workflow von 60 auf 180 Sekunden erhöhen, Fehler bei Wiederaufnahme erneut versuchen und gepufferte Abbruchdiagnostik erhalten. Details und Abnahme: `docs/catalog_timeout_fix_2026-10-11.md`.
@@ -78,6 +80,11 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 **Vorherige Architekturarbeit:** COMPONENT-VALUE-01 hat die sechs Such-Bots mit echten Runtime-Schaltern und unabhängigen Gegenproben vermessen; bei unklarer Evidenz bleiben alle erhalten. NEURAL-ELEMENTS-01 und NEURAL-ELEMENTS-REAL-02 sind als begrenzte Experimente ohne belastbaren End-to-End-Nutzen abgeschlossen. Die produktive Netzabnahme bleibt offen. Nachweise: `docs/next_arbeitspaket_2026-10-18_component_value.md`, `docs/next_arbeitspaket_2026-10-19_neural_elements.md` und `docs/next_arbeitspaket_2026-10-19_neural_real_regions.md`.
 
 **Nächste Architekturarbeit:** GENERAL-SCENE-REAL-05 für neue unabhängig markierte reale Familien und eindeutige Farb-/Lagebezüge. Breitere Formarten und weitere Komponenten bleiben Folgearbeit; IDO-19/IDO-21 und historische Kompatibilitätsaufsicht bleiben offen.
+
+Der konkrete Verlaufs-/Rundungsschritt für bekannte verschachtelte Panels ist
+als GENERAL-SCENE-GRADIENT-06 abgeschlossen. Als Nächstes vor weiteren
+Runtime-Änderungen neue reale Familien unabhängig markieren und sperren;
+keine weitere Größen-/Farbvariante als neue Familie zählen.
 
 **Neuester Familienabschluss:** AC0232 M/L/S. Keine weiteren Kandidaten in der bisherigen gefilterten Rotation; offene Architektur- und Bestandsaufgaben bleiben bestehen.
 

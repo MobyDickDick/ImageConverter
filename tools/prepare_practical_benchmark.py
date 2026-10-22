@@ -43,6 +43,8 @@ def runtime_hashes() -> dict:
 
 
 def prepare(output: Path, selection_path: Path = DEFAULT_SELECTION, *, archive: Path | None = None) -> dict:
+    if output.exists() or output.is_symlink():
+        raise FileExistsError("Preparation output already exists: " + str(output))
     from PIL import Image
     archive = archive or ROOT / "artifacts/satisfactory_conversions"
     selection = json.loads(selection_path.read_text(encoding="utf-8"))
@@ -55,6 +57,9 @@ def prepare(output: Path, selection_path: Path = DEFAULT_SELECTION, *, archive: 
     subset = selection["manual_time_subset"]
     if len(set(subset)) != len(subset) or not set(subset) <= {c["family"] for c in chosen}:
         raise ValueError("Invalid manual-time subset")
+    missing = sorted({choice["variant"] for choice in chosen} - by_variant.keys())
+    if missing:
+        raise ValueError("Benchmark candidates missing from archive index: " + ", ".join(missing))
     # Check all sources before creating any study files. Never read archive SVGs.
     for choice in chosen:
         row = by_variant[choice["variant"]]

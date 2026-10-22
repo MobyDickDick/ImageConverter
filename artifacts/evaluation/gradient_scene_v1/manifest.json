@@ -1,0 +1,86 @@
+{
+  "schema": "gradient_scene_catalogue_v1",
+  "provenance": {
+    "commit": "631b058016e06b36165e27401324cc214abaab40",
+    "seed": 17,
+    "toolchain": "Python 3.10, Pillow, OpenCV, PyMuPDF; same decoded JPEG pixels in neutral-name PNG CLI; original JPEG re-rendered for this gate",
+    "input_hashes": {
+      "DLG0011": "5615e96ebbc223e5a8ef5fa7ae33c6a2ff46d07b04cab7f009f279efb8c104cf",
+      "DLG0018": "f2cc70afe2d162d90c31d8b042012948183d58a94a86efeb2284de5684f48db3"
+    },
+    "before_report_sha256": "e35768890eb24467c7d928d965adc946d7dbcd6a09652175397279ce8b1d6ff3",
+    "after_report_sha256": "99369f560f29782b2b71789acae463e0136d4eb8d1eeba0810f767d1c3c9ae54"
+  },
+  "cases": [
+    {
+      "case_id": "DLG0011",
+      "image": "images/DLG0011.JPG",
+      "source_sha256": "5615e96ebbc223e5a8ef5fa7ae33c6a2ff46d07b04cab7f009f279efb8c104cf",
+      "description": "Zwei gefüllte Rechtecke mit leicht gerundeten Ecken. Die Formen sind ineinander verschachtelt. Die äußere Form hat einen horizontalen Farbverlauf. Die innere Form ist weiß. Keine Beschriftung.",
+      "catalog_variant": "DLG0011",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            0,
+            0,
+            90,
+            25
+          ],
+          "parent": null,
+          "gradient_axis": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            2,
+            2,
+            65,
+            21
+          ],
+          "parent": 0,
+          "fill": "#ffffff"
+        }
+      ],
+      "before_svg": "svgs/DLG0011_before.svg",
+      "before_svg_sha256": "df56fca1dc0c0f93beb2c2387d8f9196019e1e112d9569a08697a9195a6e8d0c",
+      "after_svg": "svgs/DLG0011_after.svg",
+      "after_svg_sha256": "90884936a3472a432c93746dfcada28b447f1c8baa6919e539e95d82fb9c7e5a"
+    },
+    {
+      "case_id": "DLG0018",
+      "image": "images/DLG0018.JPG",
+      "source_sha256": "f2cc70afe2d162d90c31d8b042012948183d58a94a86efeb2284de5684f48db3",
+      "description": "Zwei gefüllte Rechtecke mit leicht gerundeten Ecken. Die Formen sind ineinander verschachtelt. Die äußere Form hat einen horizontalen Farbverlauf. Die innere Form ist weiß. Keine Beschriftung.",
+      "catalog_variant": "DLG0018",
+      "expected_objects": [
+        {
+          "kind": "rectangle",
+          "bbox": [
+            0,
+            0,
+            90,
+            25
+          ],
+          "parent": null,
+          "gradient_axis": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            2,
+            2,
+            85,
+            21
+          ],
+          "parent": 0,
+          "fill": "#ffffff"
+        }
+      ],
+      "before_svg": "svgs/DLG0018_before.svg",
+      "before_svg_sha256": "27ea9c6cd0c36926892563189f25bbd9cb26d47cc8134e88aa30f63addf0568f",
+      "after_svg": "svgs/DLG0018_after.svg",
+      "after_svg_sha256": "5d9a2c1885c47c49218985ef3f2d652a6355233aac277e1268240f64bcd22bcd"
+    }
+  ]
+}

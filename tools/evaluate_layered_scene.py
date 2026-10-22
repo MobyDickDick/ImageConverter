@@ -80,8 +80,22 @@ def check_objects(svg, expected):
     """Native object count, shape, bounds and painter order; no production fitter."""
     root = ET.fromstring(svg)
     actual = []
+    gradients = {g.get('id'): g for defs in root if defs.tag.rsplit('}', 1)[-1] == 'defs' for g in defs}
     for element in root:
         kind = element.tag.rsplit('}', 1)[-1]
+        if kind == 'defs':
+            # Native paint definitions do not count as scene objects. Accept
+            # only the bounded axial, two-stop gradient model used here.
+            for gradient in element:
+                if (gradient.tag.rsplit('}', 1)[-1] != 'linearGradient'
+                        or set(gradient.attrib) - {'id', 'x1', 'y1', 'x2', 'y2'}
+                        or len(gradient) != 2):
+                    return dict(passed=False, reason='non_native_scene_definition')
+                for stop in gradient:
+                    if (stop.tag.rsplit('}', 1)[-1] != 'stop' or len(stop)
+                            or set(stop.attrib) != {'offset', 'stop-color'}):
+                        return dict(passed=False, reason='non_native_scene_definition')
+            continue
         sw = float(element.get('stroke-width', '0')) if element.get('stroke', 'none') != 'none' else 0.
         if kind == 'circle':
             r = float(element.get('r', '0'))
@@ -94,7 +108,15 @@ def check_objects(svg, expected):
                 continue
         else:
             return dict(passed=False, reason='non_native_scene_element')
-        actual.append(dict(kind='rectangle' if kind == 'rect' else kind, bbox=box, stroke_width=sw))
+        fill = element.get('fill', '')
+        gradient = gradients.get(fill[5:-1]) if fill.startswith('url(#') and fill.endswith(')') else None
+        gradient_axis = None
+        if gradient is not None:
+            if (gradient.get('x1'), gradient.get('y1')) == ('0%', '0%'):
+                gradient_axis = {("100%", "0%"): 0, ("0%", "100%"): 1}.get((gradient.get('x2'), gradient.get('y2')))
+        actual.append(dict(kind='rectangle' if kind == 'rect' else kind, bbox=box, stroke_width=sw,
+                           corner_radius=float(element.get('rx', '0')), gradient_axis=gradient_axis,
+                           fill=fill))
     if len(actual) != len(expected):
         return dict(passed=False, detected_count=len(actual), expected_count=len(expected))
     best = float('inf')
@@ -103,6 +125,14 @@ def check_objects(svg, expected):
             continue
         if any('stroke_width' in obj and abs(actual[a]['stroke_width']-obj['stroke_width']) > .85
                for a, obj in zip(order, expected)):
+            continue
+        if any('corner_radius' in obj and abs(actual[a]['corner_radius']-obj['corner_radius']) > 1.25
+               for a, obj in zip(order, expected)):
+            continue
+        if any('gradient_axis' in obj and actual[a]['gradient_axis'] != obj['gradient_axis']
+               for a, obj in zip(order, expected)):
+            continue
+        if any('fill' in obj and actual[a]['fill'] != obj['fill'] for a, obj in zip(order, expected)):
             continue
         if any(obj['parent'] is not None and order[obj['parent']] >= order[i] for i, obj in enumerate(expected)):
             continue

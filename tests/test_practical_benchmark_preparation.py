@@ -73,6 +73,46 @@ def test_preparation_never_overwrites_existing_evidence(preparation):
         benchmark.prepare(preparation)
 
 
+@pytest.mark.parametrize("kind", ["directory", "file"])
+def test_existing_output_is_rejected_before_reading_sources(preparation, kind):
+    output = preparation if kind == "directory" else preparation.parent / "existing-file"
+    if kind == "file":
+        output.write_bytes(b"keep existing evidence")
+    if output.is_dir():
+        original = {p: p.read_bytes() for p in output.rglob("*") if p.is_file()}
+    else:
+        original = {output: output.read_bytes()}
+    missing = preparation.parent / "missing-sources"
+    with pytest.raises(FileExistsError):
+        benchmark.prepare(output, missing / "selection.json", archive=missing / "archive")
+    assert all(path.read_bytes() == data for path, data in original.items())
+
+
+def test_existing_evidence_survives_missing_archive_candidate(preparation):
+    selection = preparation.parent / "selection.json"
+    choices = json.loads(selection.read_text(encoding="utf-8"))
+    choices["cases"][0]["variant"] = "AC0840_L"
+    benchmark.write_json(selection, choices)
+    original = {p: p.read_bytes() for p in preparation.rglob("*") if p.is_file()}
+    with pytest.raises(FileExistsError):
+        benchmark.prepare(preparation, selection, archive=preparation.parent / "archive")
+    assert {p: p.read_bytes() for p in preparation.rglob("*") if p.is_file()} == original
+
+
+def test_missing_candidates_are_reported_before_creating_any_output(preparation):
+    selection = preparation.parent / "selection.json"
+    choices = json.loads(selection.read_text(encoding="utf-8"))
+    choices["cases"].extend([
+        dict(variant="AC0840_L", family="label", outside_scene_contract=True),
+        dict(variant="missing_other", family="other", outside_scene_contract=True),
+    ])
+    benchmark.write_json(selection, choices)
+    output = preparation.parent / "not-created" / "prepared"
+    with pytest.raises(ValueError, match="missing from archive index: AC0840_L, missing_other"):
+        benchmark.prepare(output, selection, archive=preparation.parent / "archive")
+    assert not output.parent.exists()
+
+
 def test_data_paths_must_stay_in_their_declared_root(tmp_path):
     with pytest.raises(ValueError, match="escapes"):
         benchmark.contained(tmp_path, "../reference.svg")
