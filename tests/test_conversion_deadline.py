@@ -220,6 +220,49 @@ def test_session_serialization_preserves_identity_and_bot_state_without_callback
     assert restored.on_validated is None
 
 
+def test_supervisor_pause_is_visible_without_publishing_a_late_handoff(spec, monkeypatch):
+    from src.iCCModules import imageCompositeConverterDeadline as supervision
+    original = supervision.queue.Queue.get
+
+    def paused_get(mailbox, *args, **kwargs):
+        message = original(mailbox, *args, **kwargs)
+        if message[0] == 'worker_started':
+            time.sleep(1.2)
+        return message
+
+    monkeypatch.setattr(supervision.queue.Queue, 'get', paused_get)
+    deadline = ImageDeadline(SearchPolicy(seconds=1., max_seconds=1.))
+    (row, failed), failures = run(deadline, spec, completed_worker)
+    assert row is None and failed and failures[0]['reason'] == 'TimeoutError'
+    assert not (Path(spec['svg_out_dir'])/'sample.svg').exists()
+    path = Path(spec['reports_out_dir'])/'sample_timing.jsonl'
+    records = [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines()]
+    resumed = next(record for record in records if record['phase'] == 'worker_started')
+    assert resumed['observation_gap_seconds'] >= 1.2
+    assert resumed['monotonic_seconds']-resumed['worker_observation']['monotonic_seconds'] >= 1.2
+    phases = [record['phase'] for record in records]
+    assert phases.index('deadline_observed') < phases.index('termination_finished') < phases.index('attempt_finished')
+    assert not next(record for record in records if record['phase'] == 'termination_finished')['worker_alive']
+
+
+def test_expired_containment_never_releases_worker(spec, monkeypatch):
+    from src.iCCModules import imageCompositeConverterDeadline as supervision
+    original = supervision.ProcessTree
+
+    class SlowContainment(original):
+        def __init__(self, process):
+            super().__init__(process)
+            time.sleep(1.1)
+
+    monkeypatch.setattr(supervision, 'ProcessTree', SlowContainment)
+    deadline = ImageDeadline(SearchPolicy(seconds=1., max_seconds=1.))
+    assert run(deadline, spec, completed_worker)[0] == (None, True)
+    path = Path(spec['reports_out_dir'])/'sample_timing.jsonl'
+    records = [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines()]
+    assert 'worker_released' not in [record['phase'] for record in records]
+    assert next(record for record in records if record['phase'] == 'containment_installed')['observation_gap_seconds'] >= 1.1
+
+
 def test_production_cli_does_not_render_in_parent_reporting(tmp_path, monkeypatch):
     import shutil
     from xml.etree import ElementTree as ET

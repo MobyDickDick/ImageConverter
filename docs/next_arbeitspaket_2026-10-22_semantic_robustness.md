@@ -3,6 +3,12 @@
 Branch: `codex/semantic-robustness-01-2026-10-21`.
 Ausgangsstand: `7ed646e5f` auf `main`.
 
+**Nachtrag 2026-10-22:** Die nachfolgend als offen bezeichnete Zeitauffälligkeit
+ist inzwischen im [SEARCH-DEADLINE-OVERRUN-AUDIT](next_arbeitspaket_2026-10-22_deadline_overrun_audit.md)
+mit Windows-Standbyereignissen korreliert und durch getrennte neue Phasenbelege
+untersucht. Die ursprünglichen Versuche, Nenner und Qualitätsaussagen bleiben
+erhalten; eine von Standby unabhängige Echtzeitgarantie wird nicht behauptet.
+
 ## Umfang
 
 Zehn bereits bekannte reale Topologien werden mit unveränderten Originalpixeln

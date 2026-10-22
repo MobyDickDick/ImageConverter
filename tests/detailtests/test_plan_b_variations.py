@@ -308,7 +308,7 @@ def test_real_cli_boundary_failure_paths_and_metrics(tmp_path, monkeypatch, fail
             (result_dir / (case["case_id"].upper() + ".svg")).write_text(
                 svg if failure != "bad" else SVG.replace('fill="green"', 'fill="red"'), encoding="utf-8")
         return subprocess.CompletedProcess(command, 2 if failure == "error" else 0)
-    monkeypatch.setattr(battery.subprocess, "run", invoke)
+    monkeypatch.setattr(battery, "run_timed_process", invoke)
     if failure == "measurement_error":
         def broken_metric(*args, **kwargs):
             raise RuntimeError("Renderer failed")
@@ -454,7 +454,7 @@ def test_original_uses_real_independent_quality_gate_before_variants(tmp_path, m
         result_svg = reference.replace('fill="green"', 'fill="red"') if name == 'original' and not original_passes else reference
         (result_dir / (name.upper() + '.svg')).write_text(result_svg, encoding='utf-8')
         return subprocess.CompletedProcess(command, 0)
-    monkeypatch.setattr(battery.subprocess, 'run', invoke)
+    monkeypatch.setattr(battery, 'run_timed_process', invoke)
     report = battery.run_battery(source, DESCRIPTION, output, seed=123)
     assert report['original_satisfactory'] == original_passes
     assert report['summary']['satisfactory'] == original_passes

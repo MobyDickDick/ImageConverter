@@ -1,0 +1,511 @@
+{
+  "schema": "deadline_overrun_audit_evidence_v1",
+  "task": "SEARCH-DEADLINE-OVERRUN-AUDIT",
+  "base_revision": "49c5de54f",
+  "diagnosis": "Modern standby coincides with the original 261.734-second overrun and the separately observed supervisor gap; the historical worker phase is unavailable.",
+  "historical": {
+    "report_sha256": "c18aacca24ee80c478824b48be99377df15b85fea9f716caf941276a7f80c4bc",
+    "summary": {
+      "attempts": 80,
+      "positive_passes": 49,
+      "positives": 50,
+      "safe_rejections": 30,
+      "negatives": 30,
+      "accepted_families": 9
+    },
+    "case_id": "item04p2",
+    "passed": false,
+    "raw_elapsed_seconds": 263.313,
+    "returncode": 0,
+    "failures": [
+      "missing_or_ambiguous_output"
+    ],
+    "control": {
+      "elapsed_seconds": 261.734,
+      "limit_seconds": 10,
+      "max_seconds": 10,
+      "time_extensions": 0,
+      "candidate_evaluations": 0,
+      "stop_reason": "time_limit",
+      "isolated": true,
+      "external_max_seconds": null,
+      "recovered_checkpoint": false,
+      "retained_output": false
+    },
+    "control_sha256": "3ef5ce1dd69b0cf181474c453396709019dc3f5a18f1c3fd0bfc5c5e9f36ad39",
+    "cause": "undetermined"
+  },
+  "historical_control_written_utc": "2026-10-22T07:11:13.785676+00:00",
+  "separate_unchanged_full_repetition": {
+    "attempts": 80,
+    "positive_passes": 50,
+    "positives": 50,
+    "safe_rejections": 30,
+    "negatives": 30,
+    "accepted_families": 10
+  },
+  "targeted_replays": [
+    {
+      "directory": "replay-01",
+      "passed": true,
+      "raw_elapsed_seconds": 5.14,
+      "output_sha256": "ad4de030d64c4a85e247f6acc4992370cf348316db058fe5098f404a3dc4f37b",
+      "checks": {
+        "quality": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.0025892145931720734,
+            "foreground_mse": 0.0034268340095877647,
+            "edge_alignment": 0.8234420418739319,
+            "foreground_iou": 0.989963503649635
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 6,
+            "path_count": 2,
+            "path_command_count": 12,
+            "path_complexity_ratio": 2
+          }
+        },
+        "regions": [
+          {
+            "name": "outer_flame",
+            "normalized_mse": 0.00469427541131395,
+            "edge_score": 0.8053040504455566,
+            "passed": true
+          },
+          {
+            "name": "inner_flame",
+            "normalized_mse": 0.0011115812686214603,
+            "edge_score": 0.8367868661880493,
+            "passed": true
+          }
+        ],
+        "structure": {
+          "circles": 1,
+          "text": "",
+          "passed": true
+        },
+        "passed": true
+      },
+      "timing": {
+        "item04p2/converter.timing.jsonl": {
+          "records": 9,
+          "phases": [
+            "process_creation_started",
+            "process_created",
+            "supervisor_poll",
+            "supervisor_poll",
+            "supervisor_poll",
+            "supervisor_poll",
+            "supervisor_poll",
+            "process_exit_observed",
+            "process_attempt_finished"
+          ],
+          "elapsed_seconds": 5.10899999999674,
+          "largest_observation_gap": {
+            "from_phase": "process_created",
+            "to_phase": "supervisor_poll",
+            "seconds": 1.0160000000032596,
+            "observer_cpu_seconds": 0,
+            "unix_seconds": 1.0121614933013916
+          },
+          "spawn_seconds": null,
+          "readiness_seconds": null,
+          "teardown_seconds": null,
+          "outer_creation_seconds": 0.015000000013969839,
+          "outer_reap_seconds": null,
+          "cause": "undetermined; phase observations do not distinguish sleep, scheduling, I/O or suspension"
+        },
+        "item04p2/conversion/reports/item04p2_timing.jsonl": {
+          "records": 21,
+          "phases": [
+            "attempt_started",
+            "source_hashed",
+            "spawn_started",
+            "spawn_finished",
+            "worker_ready",
+            "containment_installed",
+            "worker_released",
+            "worker_started",
+            "worker_phase",
+            "worker_phase",
+            "worker_phase",
+            "supervisor_poll",
+            "supervisor_poll",
+            "supervisor_poll",
+            "supervisor_poll",
+            "worker_phase",
+            "handoff_received",
+            "termination_requested",
+            "termination_finished",
+            "outputs_published",
+            "attempt_finished"
+          ],
+          "elapsed_seconds": 4.186999999976251,
+          "largest_observation_gap": {
+            "from_phase": "supervisor_poll",
+            "to_phase": "supervisor_poll",
+            "seconds": 1.0160000000032596,
+            "observer_cpu_seconds": 0.015625,
+            "unix_seconds": 1.0216073989868164
+          },
+          "spawn_seconds": 0.125,
+          "readiness_seconds": 0.09399999998277053,
+          "teardown_seconds": 0.01600000000325963,
+          "outer_creation_seconds": null,
+          "outer_reap_seconds": null,
+          "cause": "undetermined; phase observations do not distinguish sleep, scheduling, I/O or suspension"
+        }
+      }
+    },
+    {
+      "directory": "replay-02",
+      "passed": true,
+      "raw_elapsed_seconds": 4.937,
+      "output_sha256": "ad4de030d64c4a85e247f6acc4992370cf348316db058fe5098f404a3dc4f37b",
+      "checks": {
+        "quality": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.0025892145931720734,
+            "foreground_mse": 0.0034268340095877647,
+            "edge_alignment": 0.8234420418739319,
+            "foreground_iou": 0.989963503649635
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 6,
+            "path_count": 2,
+            "path_command_count": 12,
+            "path_complexity_ratio": 2
+          }
+        },
+        "regions": [
+          {
+            "name": "outer_flame",
+            "normalized_mse": 0.00469427541131395,
+            "edge_score": 0.8053040504455566,
+            "passed": true
+          },
+          {
+            "name": "inner_flame",
+            "normalized_mse": 0.0011115812686214603,
+            "edge_score": 0.8367868661880493,
+            "passed": true
+          }
+        ],
+        "structure": {
+          "circles": 1,
+          "text": "",
+          "passed": true
+        },
+        "passed": true
+      },
+      "timing": {
+        "item04p2/converter.timing.jsonl": {
+          "records": 8,
+          "phases": [
+            "process_creation_started",
+            "process_created",
+            "supervisor_poll",
+            "supervisor_poll",
+            "supervisor_poll",
+            "supervisor_poll",
+            "process_exit_observed",
+            "process_attempt_finished"
+          ],
+          "elapsed_seconds": 4.920999999972992,
+          "largest_observation_gap": {
+            "from_phase": "supervisor_poll",
+            "to_phase": "supervisor_poll",
+            "seconds": 1.0309999999590218,
+            "observer_cpu_seconds": 0,
+            "unix_seconds": 1.0187618732452393
+          },
+          "spawn_seconds": null,
+          "readiness_seconds": null,
+          "teardown_seconds": null,
+          "outer_creation_seconds": 0.015000000013969839,
+          "outer_reap_seconds": null,
+          "cause": "undetermined; phase observations do not distinguish sleep, scheduling, I/O or suspension"
+        },
+        "item04p2/conversion/reports/item04p2_timing.jsonl": {
+          "records": 20,
+          "phases": [
+            "attempt_started",
+            "source_hashed",
+            "spawn_started",
+            "spawn_finished",
+            "worker_ready",
+            "containment_installed",
+            "worker_released",
+            "worker_started",
+            "worker_phase",
+            "worker_phase",
+            "worker_phase",
+            "supervisor_poll",
+            "supervisor_poll",
+            "supervisor_poll",
+            "worker_phase",
+            "handoff_received",
+            "termination_requested",
+            "termination_finished",
+            "outputs_published",
+            "attempt_finished"
+          ],
+          "elapsed_seconds": 4.0310000000172295,
+          "largest_observation_gap": {
+            "from_phase": "supervisor_poll",
+            "to_phase": "supervisor_poll",
+            "seconds": 1,
+            "observer_cpu_seconds": 0,
+            "unix_seconds": 1.0071420669555664
+          },
+          "spawn_seconds": 0.125,
+          "readiness_seconds": 0.0779999999795109,
+          "teardown_seconds": 0.014999999955762178,
+          "outer_creation_seconds": null,
+          "outer_reap_seconds": null,
+          "cause": "undetermined; phase observations do not distinguish sleep, scheduling, I/O or suspension"
+        }
+      }
+    },
+    {
+      "directory": "replay-03",
+      "passed": true,
+      "raw_elapsed_seconds": 4.891,
+      "output_sha256": "ad4de030d64c4a85e247f6acc4992370cf348316db058fe5098f404a3dc4f37b",
+      "checks": {
+        "quality": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.0025892145931720734,
+            "foreground_mse": 0.0034268340095877647,
+            "edge_alignment": 0.8234420418739319,
+            "foreground_iou": 0.989963503649635
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 6,
+            "path_count": 2,
+            "path_command_count": 12,
+            "path_complexity_ratio": 2
+          }
+        },
+        "regions": [
+          {
+            "name": "outer_flame",
+            "normalized_mse": 0.00469427541131395,
+            "edge_score": 0.8053040504455566,
+            "passed": true
+          },
+          {
+            "name": "inner_flame",
+            "normalized_mse": 0.0011115812686214603,
+            "edge_score": 0.8367868661880493,
+            "passed": true
+          }
+        ],
+        "structure": {
+          "circles": 1,
+          "text": "",
+          "passed": true
+        },
+        "passed": true
+      },
+      "timing": {
+        "item04p2/converter.timing.jsonl": {
+          "records": 8,
+          "phases": [
+            "process_creation_started",
+            "process_created",
+            "supervisor_poll",
+            "supervisor_poll",
+            "supervisor_poll",
+            "supervisor_poll",
+            "process_exit_observed",
+            "process_attempt_finished"
+          ],
+          "elapsed_seconds": 4.85899999999674,
+          "largest_observation_gap": {
+            "from_phase": "supervisor_poll",
+            "to_phase": "supervisor_poll",
+            "seconds": 1.047000000020489,
+            "observer_cpu_seconds": 0,
+            "unix_seconds": 1.0407264232635498
+          },
+          "spawn_seconds": null,
+          "readiness_seconds": null,
+          "teardown_seconds": null,
+          "outer_creation_seconds": 0.01600000000325963,
+          "outer_reap_seconds": null,
+          "cause": "undetermined; phase observations do not distinguish sleep, scheduling, I/O or suspension"
+        },
+        "item04p2/conversion/reports/item04p2_timing.jsonl": {
+          "records": 20,
+          "phases": [
+            "attempt_started",
+            "source_hashed",
+            "spawn_started",
+            "spawn_finished",
+            "worker_ready",
+            "containment_installed",
+            "worker_released",
+            "worker_started",
+            "worker_phase",
+            "worker_phase",
+            "worker_phase",
+            "supervisor_poll",
+            "supervisor_poll",
+            "supervisor_poll",
+            "worker_phase",
+            "handoff_received",
+            "termination_requested",
+            "termination_finished",
+            "outputs_published",
+            "attempt_finished"
+          ],
+          "elapsed_seconds": 4.01600000000326,
+          "largest_observation_gap": {
+            "from_phase": "supervisor_poll",
+            "to_phase": "supervisor_poll",
+            "seconds": 1.0160000000032596,
+            "observer_cpu_seconds": 0,
+            "unix_seconds": 1.008974552154541
+          },
+          "spawn_seconds": 0.125,
+          "readiness_seconds": 0.0940000000409782,
+          "teardown_seconds": 0.015000000013969839,
+          "outer_creation_seconds": null,
+          "outer_reap_seconds": null,
+          "cause": "undetermined; phase observations do not distinguish sleep, scheduling, I/O or suspension"
+        }
+      }
+    }
+  ],
+  "spontaneous_observer_gap": {
+    "records": 13,
+    "phases": [
+      "attempt_started",
+      "source_hashed",
+      "spawn_started",
+      "spawn_finished",
+      "worker_ready",
+      "containment_installed",
+      "worker_released",
+      "worker_started",
+      "supervisor_poll",
+      "deadline_observed",
+      "termination_requested",
+      "termination_finished",
+      "attempt_finished"
+    ],
+    "elapsed_seconds": 968.375,
+    "largest_observation_gap": {
+      "from_phase": "supervisor_poll",
+      "to_phase": "deadline_observed",
+      "seconds": 967,
+      "observer_cpu_seconds": 0.015625,
+      "unix_seconds": 967.0035371780396
+    },
+    "spawn_seconds": 0,
+    "readiness_seconds": 0.39100000000325963,
+    "teardown_seconds": 0.18699999997625127,
+    "outer_creation_seconds": null,
+    "outer_reap_seconds": null,
+    "cause": "undetermined; phase observations do not distinguish sleep, scheduling, I/O or suspension"
+  },
+  "historical_standby": {
+    "start_utc": "2026-10-22T07:06:52.3864462Z",
+    "end_utc": "2026-10-22T07:11:13.9641895Z",
+    "seconds": 261.577743,
+    "entry_record_id": 62845,
+    "exit_record_id": 62853
+  },
+  "observed_standby": {
+    "start_utc": "2026-10-22T12:45:31.5173564Z",
+    "end_utc": "2026-10-22T13:01:43.4147918Z",
+    "seconds": 971.897435,
+    "entry_record_id": 62909,
+    "exit_record_id": 62916
+  },
+  "tests": {
+    "initial_sandbox_temp": {
+      "tests": 68,
+      "errors": 0,
+      "failures": 10,
+      "skipped": 0
+    },
+    "debug_workspace": {
+      "tests": 2,
+      "failures": 1,
+      "standby_gap_retained": true
+    },
+    "workspace_repeat": {
+      "tests": 68,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final_workspace": {
+      "tests": 77,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  },
+  "real_quality_controls": {
+    "cases": 8,
+    "byte_identical": true,
+    "strict_pixels_and_semantics": true,
+    "actual_blocked_final_render_recovered": true
+  },
+  "archive_unchanged": true,
+  "runtime_inventory_sha256": "d1732405f05c35ed3be8a90b146f809b2859fa53051b9e13f5f1b418e6afbf55",
+  "raw_evidence_sha256": {
+    ".tmp/deadline-audit-replay/report.json": "e391a0ae07e29c9f6b16df97c683617fc4b75d94ef91c437d24408753e1abec9",
+    ".tmp/semantic01/replayed-after-dev/report.json": "b512bb79693ad60b840782fd80cd4d4fc6e601808958822f6bac08c0b28f8da9",
+    ".tmp/semantic01/accepted-after-dev/report.json": "c18aacca24ee80c478824b48be99377df15b85fea9f716caf941276a7f80c4bc",
+    ".tmp/semantic01/accepted-after-dev/item04p2/conversion/reports/item04p2_deadline.json": "3ef5ce1dd69b0cf181474c453396709019dc3f5a18f1c3fd0bfc5c5e9f36ad39",
+    ".tmp/deadline-audit-tests.xml": "59c3a4351c1ba1cca1d7eb3dca52530d70929d02d8477245bde69266e355c138",
+    ".tmp/deadline-audit-final-tests.xml": "8dbe17832722e9159572423eb239059ae8b96e27f9bf306a62d0caf902e35b02",
+    ".tmp/deadline-audit-acceptance-tests.xml": "1514b3c40f9e4e4f3211f91eee0cd8a20cb5c6f43b8e924090541c6d511e2324",
+    ".tmp/deadline-audit-quality/report.json": "97123e4560a82d6542cef893268e98ba6833a5248d24258afcc96c3bfd69fe98"
+  },
+  "compact_evidence_sha256": {
+    "historical-power-events.json": "e188122cdd808f51275ad934a3cd0342d0f4820ad9b15e3153e1cb871fcd4533",
+    "observer-gap-power-events.json": "a6c3cf81d4e7b654c75441968f993123afcd8d9c3c9f86c1e2dfbad423ffa181",
+    "observer-gap.jsonl": "aa3a68e6c09217fcd4870341ab11b8e9c9e74a270cfae03b536cd6c31d58ed05"
+  }
+}
