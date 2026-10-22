@@ -293,7 +293,8 @@ def write_cases(cases: list[dict], output: Path) -> None:
 
 
 def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
-             keep_debug_artifacts: bool = True, extra_cli_args: tuple[str, ...] = ()) -> dict:
+             keep_debug_artifacts: bool = True, extra_cli_args: tuple[str, ...] = (),
+             runtime_root: Path | None = None) -> dict:
     cv2 = import_with_vendored_fallback("cv2")
     np = import_with_vendored_fallback("numpy")
     fitz = import_with_vendored_fallback("fitz")
@@ -306,7 +307,8 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
     # discovers an old virtualenv built for a different Python ABI.
     dependency_paths = list(dict.fromkeys(str(Path(module.__file__).resolve().parents[1])
                                          for module in (np, cv2, fitz, Image)))
-    worker_paths = [*dependency_paths, str(ROOT), *sys.path]
+    working_root = (runtime_root or ROOT).resolve()
+    worker_paths = [*dependency_paths, str(working_root), *sys.path]
     bootstrap = ('import sys, runpy; sys.path[:0] = ' + repr(worker_paths)
                  + "; import numpy, cv2, fitz; from PIL import Image; "
                  + "runpy.run_module('tools.run_plan_b_variations', run_name='__main__')")
@@ -318,12 +320,12 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
     environment = dict(os.environ, TINY_ICC_OUTPUT_VARIATION="0", PYTHONHASHSEED="0",
                        ICC_SEARCH_SEED=os.environ.get('ICC_SEARCH_SEED', '0'),
                        ICC_FORCE_RECONVERT="1", PYTHONIOENCODING="utf-8")
-    environment["PYTHONPATH"] = os.pathsep.join([str(ROOT), *sys.path])
+    environment["PYTHONPATH"] = os.pathsep.join([str(working_root), *sys.path])
     result = {**case, "satisfactory": False, "failures": [], "command": command}
     started = time.monotonic()
     try:
         with (case_dir / "converter.log").open("w", encoding="utf-8") as log:
-            completed = subprocess.run(command, cwd=ROOT, env=environment,
+            completed = subprocess.run(command, cwd=working_root, env=environment,
                                        stdout=log, stderr=subprocess.STDOUT, timeout=timeout, check=False)
         result["returncode"] = completed.returncode
         access_report = case_dir / "reference_access.json"

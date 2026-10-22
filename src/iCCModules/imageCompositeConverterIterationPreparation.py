@@ -27,6 +27,10 @@ def prepareIterationInputsImpl(
     height, width = perception.img.shape[:2]
     reflection = reflection_cls(perception.raw_desc)
     description, params = reflection.parse_description(perception.base_name, filename)
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
+    session = current_search()
+    if session is not None:
+        session.description_assertions = params.get('language_assertions', {})
     stripe_strategy = detect_gradient_stripe_strategy_fn(
         perception.img,
         np_module=np_module,

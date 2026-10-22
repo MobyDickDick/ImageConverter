@@ -1,0 +1,452 @@
+{
+  "schema": "semantic_robustness_v1",
+  "annotation_origin": "Raster inspection, independent of runtime detector proposals and SVG references; authored by the implementing agent, not an independent human review.",
+  "scope": "Two new manually authored formulations per known real family after final runtime freeze. Separate language validation, not unseen families or an independent human linguistic audit.",
+  "region_limits": {
+    "normalized_mse": 0.03,
+    "edge_score": 0.55
+  },
+  "families": [
+    {
+      "family": "labeled_disk",
+      "variant": "AC0840_L",
+      "split": "known_real_development",
+      "descriptions": [
+        "Eine einfarbig hellgraue Kreisscheibe hat eine dunkle Randkontur und die mittige dunkle serifenlose Aufschrift \"rF\". Der Hintergrund ist weiß. Anschlussfrei.",
+        "Auf weißem Hintergrund eine einfarbige hellgraue Kreisscheibe. Dunkle Randkontur außen; zentral die dunkle serifenlose Beschriftung \"rF\". Ohne Anschlüsse."
+      ],
+      "expected_text": "rF",
+      "regions": [
+        {
+          "name": "label",
+          "box": [
+            0.2,
+            0.2,
+            0.6,
+            0.6
+          ]
+        }
+      ],
+      "negatives": [
+        {
+          "kind": "object_count",
+          "description": "Eine einfarbig hellgraue Kreisscheibe hat eine dunkle Randkontur und die mittige dunkle serifenlose Aufschrift \"rF\". Der Hintergrund ist weiß. Anschlussfrei. Es gibt genau zwei Kreise."
+        },
+        {
+          "kind": "text_conflict",
+          "description": "Eine einfarbig hellgraue Kreisscheibe hat eine dunkle Randkontur und die mittige dunkle serifenlose Aufschrift \"rF\". Der Hintergrund ist weiß. Anschlussfrei. Schriftzeichen fehlen."
+        },
+        {
+          "kind": "unresolved_relation",
+          "description": "Eine einfarbig hellgraue Kreisscheibe hat eine dunkle Randkontur und die mittige dunkle serifenlose Aufschrift \"rF\". Der Hintergrund ist weiß. Anschlussfrei. Die hintere Form liegt rechts von der vorderen Form."
+        }
+      ],
+      "expected_circles": 1
+    },
+    {
+      "family": "warning_disk",
+      "variant": "GE0001_L",
+      "split": "known_real_development",
+      "descriptions": [
+        "Die Kreisscheibe mit hellem Rand und vertikalem Helligkeitsverlauf enthält ein aufrechtes Warndreieck mit heller Innenfläche und breitem dunklem Rand. Seine Ecken sind abgerundet. Ein dunkles Ausrufezeichen besteht innen aus einem senkrechten gerundeten Strich und einem getrennten runden Punkt darunter. Keine weiteren Objekte. Heller Hintergrund.",
+        "Heller Hintergrund und keine weiteren Objekte. Im Inneren der Kreisscheibe mit hellem Rand und vertikalem Farbverlauf steht ein aufrechtes Warndreieck, abgerundete Ecken und dunkler breiter Rand um die helle Innenfläche. Ein dunkles Ausrufezeichen steht darin, aus senkrechtem gerundetem Strich und getrenntem rundem Punkt darunter."
+      ],
+      "expected_text": "!",
+      "regions": [
+        {
+          "name": "triangle",
+          "box": [
+            0.16,
+            0.12,
+            0.68,
+            0.74
+          ]
+        },
+        {
+          "name": "exclamation",
+          "box": [
+            0.44,
+            0.34,
+            0.13,
+            0.4
+          ]
+        }
+      ],
+      "negatives": [
+        {
+          "kind": "object_count",
+          "description": "Die Kreisscheibe mit hellem Rand und vertikalem Helligkeitsverlauf enthält ein aufrechtes Warndreieck mit heller Innenfläche und breitem dunklem Rand. Seine Ecken sind abgerundet. Ein dunkles Ausrufezeichen besteht innen aus einem senkrechten gerundeten Strich und einem getrennten runden Punkt darunter. Keine weiteren Objekte. Heller Hintergrund. Es gibt genau drei Kreise."
+        },
+        {
+          "kind": "text_conflict",
+          "description": "Die Kreisscheibe mit hellem Rand und vertikalem Helligkeitsverlauf enthält ein aufrechtes Warndreieck mit heller Innenfläche und breitem dunklem Rand. Seine Ecken sind abgerundet. Ein dunkles Ausrufezeichen besteht innen aus einem senkrechten gerundeten Strich und einem getrennten runden Punkt darunter. Keine weiteren Objekte. Heller Hintergrund. Schriftzeichen fehlen."
+        },
+        {
+          "kind": "unresolved_relation",
+          "description": "Die Kreisscheibe mit hellem Rand und vertikalem Helligkeitsverlauf enthält ein aufrechtes Warndreieck mit heller Innenfläche und breitem dunklem Rand. Seine Ecken sind abgerundet. Ein dunkles Ausrufezeichen besteht innen aus einem senkrechten gerundeten Strich und einem getrennten runden Punkt darunter. Keine weiteren Objekte. Heller Hintergrund. Die hintere Form liegt rechts von der vorderen Form."
+        }
+      ],
+      "expected_circles": 2
+    },
+    {
+      "family": "diagonal_cross_disk",
+      "variant": "GE0017",
+      "split": "known_real_development",
+      "descriptions": [
+        "Innerhalb einer einfarbig gefüllten Kreisscheibe befindet sich mittig ein diagonales Kreuz. Zwei gerade Striche mit abgerundeten Enden bilden es. Heller Hintergrund. Schriftzeichen fehlen und weitere Objekte fehlen.",
+        "Einfarbige Kreisscheibe mit einem diagonalen Kreuz innerhalb des Kreises: zwei gerade Striche, mittig gekreuzt, mit runden Enden. Ohne Beschriftung und ohne weitere Objekte auf hellem Hintergrund."
+      ],
+      "expected_text": "",
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            0.22,
+            0.22,
+            0.56,
+            0.56
+          ]
+        }
+      ],
+      "negatives": [
+        {
+          "kind": "object_count",
+          "description": "Innerhalb einer einfarbig gefüllten Kreisscheibe befindet sich mittig ein diagonales Kreuz. Zwei gerade Striche mit abgerundeten Enden bilden es. Heller Hintergrund. Schriftzeichen fehlen und weitere Objekte fehlen. Es gibt genau zwei Kreise."
+        },
+        {
+          "kind": "text_conflict",
+          "description": "Innerhalb einer einfarbig gefüllten Kreisscheibe befindet sich mittig ein diagonales Kreuz. Zwei gerade Striche mit abgerundeten Enden bilden es. Heller Hintergrund. Schriftzeichen fehlen und weitere Objekte fehlen. Die Beschriftung lautet \"Z9\"."
+        },
+        {
+          "kind": "unresolved_relation",
+          "description": "Innerhalb einer einfarbig gefüllten Kreisscheibe befindet sich mittig ein diagonales Kreuz. Zwei gerade Striche mit abgerundeten Enden bilden es. Heller Hintergrund. Schriftzeichen fehlen und weitere Objekte fehlen. Die hintere Form liegt rechts von der vorderen Form."
+        }
+      ],
+      "expected_circles": 1
+    },
+    {
+      "family": "arrow_disk",
+      "variant": "GE0022",
+      "split": "known_real_development",
+      "descriptions": [
+        "Die gefüllte Kreisscheibe mit hellem Rand hat einen waagerechten Farbverlauf von dunkler links nach heller rechts. Innerhalb liegt ein dunkler gefüllter Rechtspfeil mit heller Randkontur, waagerechtem rechteckigem Schaft und breiterer dreieckiger Spitze, lückenlos verbunden. Weißer Hintergrund ohne Beschriftung.",
+        "Keine Schriftzeichen. Ein dunkler gefüllter Pfeil nach rechts mit heller Randkontur liegt mittig innerhalb einer gefüllten Kreisscheibe. Sein waagerechter rechteckiger Schaft schließt ohne Lücke an die breitere dreieckige Spitze an. Die Scheibe hat einen hellen Rand und waagerechten Farbverlauf, links dunkler und rechts heller. Weißer Hintergrund."
+      ],
+      "expected_text": "",
+      "regions": [
+        {
+          "name": "arrow",
+          "box": [
+            0.17,
+            0.25,
+            0.66,
+            0.5
+          ]
+        }
+      ],
+      "negatives": [
+        {
+          "kind": "object_count",
+          "description": "Die gefüllte Kreisscheibe mit hellem Rand hat einen waagerechten Farbverlauf von dunkler links nach heller rechts. Innerhalb liegt ein dunkler gefüllter Rechtspfeil mit heller Randkontur, waagerechtem rechteckigem Schaft und breiterer dreieckiger Spitze, lückenlos verbunden. Weißer Hintergrund ohne Beschriftung. Es gibt genau zwei Kreise."
+        },
+        {
+          "kind": "text_conflict",
+          "description": "Die gefüllte Kreisscheibe mit hellem Rand hat einen waagerechten Farbverlauf von dunkler links nach heller rechts. Innerhalb liegt ein dunkler gefüllter Rechtspfeil mit heller Randkontur, waagerechtem rechteckigem Schaft und breiterer dreieckiger Spitze, lückenlos verbunden. Weißer Hintergrund ohne Beschriftung. Die Beschriftung lautet \"Z9\"."
+        },
+        {
+          "kind": "unresolved_relation",
+          "description": "Die gefüllte Kreisscheibe mit hellem Rand hat einen waagerechten Farbverlauf von dunkler links nach heller rechts. Innerhalb liegt ein dunkler gefüllter Rechtspfeil mit heller Randkontur, waagerechtem rechteckigem Schaft und breiterer dreieckiger Spitze, lückenlos verbunden. Weißer Hintergrund ohne Beschriftung. Die hintere Form liegt rechts von der vorderen Form."
+        }
+      ],
+      "expected_circles": 1
+    },
+    {
+      "family": "flame_disk",
+      "variant": "GE0204_L",
+      "split": "known_real_development",
+      "descriptions": [
+        "Innerhalb einer gefüllten Kreisscheibe mit vertikalem Helligkeitsverlauf und hellem Umriss steht die aufrechte gefüllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Ihr unteres Inneres enthält vollständig die kleinere helle gefüllte Flamme mit mehreren spitzen Zungen. Heller Hintergrund ohne Schriftzeichen.",
+        "Keine Schriftzeichen auf hellem Hintergrund. Die gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf zeigt eine aufrechte gefüllte Flamme mit rundem Bauch und mehreren asymmetrischen spitzen Zungen. Im unteren Inneren der äußeren Flamme liegt vollständig eine kleinere helle gefüllte Flamme mit mehreren spitzen Zungen."
+      ],
+      "expected_text": "",
+      "regions": [
+        {
+          "name": "outer_flame",
+          "box": [
+            0.22,
+            0.08,
+            0.56,
+            0.82
+          ]
+        },
+        {
+          "name": "inner_flame",
+          "box": [
+            0.34,
+            0.48,
+            0.35,
+            0.35
+          ]
+        }
+      ],
+      "negatives": [
+        {
+          "kind": "object_count",
+          "description": "Innerhalb einer gefüllten Kreisscheibe mit vertikalem Helligkeitsverlauf und hellem Umriss steht die aufrechte gefüllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Ihr unteres Inneres enthält vollständig die kleinere helle gefüllte Flamme mit mehreren spitzen Zungen. Heller Hintergrund ohne Schriftzeichen. Es gibt genau zwei Kreise."
+        },
+        {
+          "kind": "text_conflict",
+          "description": "Innerhalb einer gefüllten Kreisscheibe mit vertikalem Helligkeitsverlauf und hellem Umriss steht die aufrechte gefüllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Ihr unteres Inneres enthält vollständig die kleinere helle gefüllte Flamme mit mehreren spitzen Zungen. Heller Hintergrund ohne Schriftzeichen. Die Beschriftung lautet \"Z9\"."
+        },
+        {
+          "kind": "unresolved_relation",
+          "description": "Innerhalb einer gefüllten Kreisscheibe mit vertikalem Helligkeitsverlauf und hellem Umriss steht die aufrechte gefüllte Flamme mit mehreren asymmetrischen spitzen Zungen und rundem Bauch. Ihr unteres Inneres enthält vollständig die kleinere helle gefüllte Flamme mit mehreren spitzen Zungen. Heller Hintergrund ohne Schriftzeichen. Die hintere Form liegt rechts von der vorderen Form."
+        }
+      ],
+      "expected_circles": 1
+    },
+    {
+      "family": "cross_panel_disk",
+      "variant": "GE0300",
+      "split": "known_real_development",
+      "descriptions": [
+        "Das helle gefüllte rechtwinklige Kreuz aus senkrechtem und waagerechtem Balken mit vier freien Armen steht mittig innerhalb der waagerechten gefüllten Rechteckfläche mit feiner Randkontur. Diese liegt innerhalb der gefüllten Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Heller Hintergrund ohne Schriftzeichen.",
+        "Eine gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf von heller oben nach dunkler unten. Innerhalb eine horizontale gefüllte Rechteckfläche mit feinem Umriss, darin mittig das helle gefüllte rechtwinklige Kreuz aus vertikalem und horizontalem Balken mit vier freien Armen. Kein Text. Heller Hintergrund."
+      ],
+      "expected_text": "",
+      "regions": [
+        {
+          "name": "panel",
+          "box": [
+            0.17,
+            0.26,
+            0.65,
+            0.48
+          ]
+        },
+        {
+          "name": "cross",
+          "box": [
+            0.31,
+            0.36,
+            0.36,
+            0.3
+          ]
+        }
+      ],
+      "negatives": [
+        {
+          "kind": "object_count",
+          "description": "Das helle gefüllte rechtwinklige Kreuz aus senkrechtem und waagerechtem Balken mit vier freien Armen steht mittig innerhalb der waagerechten gefüllten Rechteckfläche mit feiner Randkontur. Diese liegt innerhalb der gefüllten Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Heller Hintergrund ohne Schriftzeichen. Es gibt genau zwei Kreise."
+        },
+        {
+          "kind": "text_conflict",
+          "description": "Das helle gefüllte rechtwinklige Kreuz aus senkrechtem und waagerechtem Balken mit vier freien Armen steht mittig innerhalb der waagerechten gefüllten Rechteckfläche mit feiner Randkontur. Diese liegt innerhalb der gefüllten Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Heller Hintergrund ohne Schriftzeichen. Die Beschriftung lautet \"Z9\"."
+        },
+        {
+          "kind": "unresolved_relation",
+          "description": "Das helle gefüllte rechtwinklige Kreuz aus senkrechtem und waagerechtem Balken mit vier freien Armen steht mittig innerhalb der waagerechten gefüllten Rechteckfläche mit feiner Randkontur. Diese liegt innerhalb der gefüllten Kreisscheibe mit hellem Rand und vertikalem Farbverlauf, oben heller und unten dunkler. Heller Hintergrund ohne Schriftzeichen. Die hintere Form liegt rechts von der vorderen Form."
+        }
+      ],
+      "expected_circles": 1
+    },
+    {
+      "family": "striped_panel_disk",
+      "variant": "GE0305",
+      "split": "known_real_development",
+      "descriptions": [
+        "Die gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf enthält innerhalb eine waagerechte rechteckige Flaggenfläche aus drei senkrechten gefüllten Streifen gleicher Höhe. Lückenlos nebeneinander, grün links, hell mittig, rot rechts. Die Scheibe ist oben heller und unten dunkler. Heller Hintergrund ohne Beschriftung.",
+        "Keine Schriftzeichen. Innerhalb einer gefüllten Kreisscheibe mit hellem Rand und vertikalem Helligkeitsverlauf liegt die horizontale rechteckige Flaggenfläche. Drei vertikale gefüllte Streifen gleicher Höhe liegen ohne Lücke nebeneinander: links grün, mittig hell, rechts rot. Oben heller und unten dunkler. Heller Hintergrund."
+      ],
+      "expected_text": "",
+      "regions": [
+        {
+          "name": "left_band",
+          "box": [
+            0.18,
+            0.27,
+            0.22,
+            0.46
+          ]
+        },
+        {
+          "name": "middle_band",
+          "box": [
+            0.4,
+            0.27,
+            0.2,
+            0.46
+          ]
+        },
+        {
+          "name": "right_band",
+          "box": [
+            0.6,
+            0.27,
+            0.22,
+            0.46
+          ]
+        }
+      ],
+      "negatives": [
+        {
+          "kind": "object_count",
+          "description": "Die gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf enthält innerhalb eine waagerechte rechteckige Flaggenfläche aus drei senkrechten gefüllten Streifen gleicher Höhe. Lückenlos nebeneinander, grün links, hell mittig, rot rechts. Die Scheibe ist oben heller und unten dunkler. Heller Hintergrund ohne Beschriftung. Es gibt genau zwei Kreise."
+        },
+        {
+          "kind": "text_conflict",
+          "description": "Die gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf enthält innerhalb eine waagerechte rechteckige Flaggenfläche aus drei senkrechten gefüllten Streifen gleicher Höhe. Lückenlos nebeneinander, grün links, hell mittig, rot rechts. Die Scheibe ist oben heller und unten dunkler. Heller Hintergrund ohne Beschriftung. Die Beschriftung lautet \"Z9\"."
+        },
+        {
+          "kind": "unresolved_relation",
+          "description": "Die gefüllte Kreisscheibe mit hellem Rand und vertikalem Farbverlauf enthält innerhalb eine waagerechte rechteckige Flaggenfläche aus drei senkrechten gefüllten Streifen gleicher Höhe. Lückenlos nebeneinander, grün links, hell mittig, rot rechts. Die Scheibe ist oben heller und unten dunkler. Heller Hintergrund ohne Beschriftung. Die hintere Form liegt rechts von der vorderen Form."
+        }
+      ],
+      "expected_circles": 1
+    },
+    {
+      "family": "house_disk",
+      "variant": "GE0346",
+      "split": "known_real_development",
+      "descriptions": [
+        "Im Inneren der gefüllten Kreisscheibe mit hellem Rand und vertikalem Helligkeitsverlauf steht ein gefülltes Haus. Dreieckiges Satteldach mit seitlichen Dachüberständen, rechteckige Fassade. Links in der Fassade liegt die helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit Kreuz aus vertikalem und horizontalem Steg in Hausfarbe. Ohne Beschriftung auf hellem Hintergrund.",
+        "Heller Hintergrund ohne Schriftzeichen. Das gefüllte Haus mit rechteckiger Fassade und dreieckigem Satteldach mit seitlichen Dachüberständen liegt innerhalb einer gefüllten Kreisscheibe mit hellem Rand und vertikalem Farbverlauf. Links in der Fassade ist die helle hochkant rechteckige Tür; rechts ein helles rechteckiges Fenster mit Kreuz aus senkrechtem und waagerechtem Steg in Hausfarbe."
+      ],
+      "expected_text": "",
+      "regions": [
+        {
+          "name": "house",
+          "box": [
+            0.17,
+            0.17,
+            0.67,
+            0.67
+          ]
+        },
+        {
+          "name": "door",
+          "box": [
+            0.3,
+            0.56,
+            0.17,
+            0.23
+          ]
+        },
+        {
+          "name": "window",
+          "box": [
+            0.51,
+            0.54,
+            0.21,
+            0.2
+          ]
+        }
+      ],
+      "negatives": [
+        {
+          "kind": "object_count",
+          "description": "Im Inneren der gefüllten Kreisscheibe mit hellem Rand und vertikalem Helligkeitsverlauf steht ein gefülltes Haus. Dreieckiges Satteldach mit seitlichen Dachüberständen, rechteckige Fassade. Links in der Fassade liegt die helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit Kreuz aus vertikalem und horizontalem Steg in Hausfarbe. Ohne Beschriftung auf hellem Hintergrund. Es gibt genau zwei Kreise."
+        },
+        {
+          "kind": "text_conflict",
+          "description": "Im Inneren der gefüllten Kreisscheibe mit hellem Rand und vertikalem Helligkeitsverlauf steht ein gefülltes Haus. Dreieckiges Satteldach mit seitlichen Dachüberständen, rechteckige Fassade. Links in der Fassade liegt die helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit Kreuz aus vertikalem und horizontalem Steg in Hausfarbe. Ohne Beschriftung auf hellem Hintergrund. Die Beschriftung lautet \"Z9\"."
+        },
+        {
+          "kind": "unresolved_relation",
+          "description": "Im Inneren der gefüllten Kreisscheibe mit hellem Rand und vertikalem Helligkeitsverlauf steht ein gefülltes Haus. Dreieckiges Satteldach mit seitlichen Dachüberständen, rechteckige Fassade. Links in der Fassade liegt die helle hochkant rechteckige Tür, rechts ein helles rechteckiges Fenster mit Kreuz aus vertikalem und horizontalem Steg in Hausfarbe. Ohne Beschriftung auf hellem Hintergrund. Die hintere Form liegt rechts von der vorderen Form."
+        }
+      ],
+      "expected_circles": 1
+    },
+    {
+      "family": "axes_sine",
+      "variant": "GE1411_L",
+      "split": "known_real_development",
+      "descriptions": [
+        "Das Diagramm zeigt eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten, rechtwinklig verbunden. Darüber verläuft von links nach rechts die dünne farbige Sinuskurve mit einem Tal und einem Berg. Weißer Hintergrund ohne Beschriftung und ohne Pfeilspitzen.",
+        "Keine Pfeilspitzen und keine Schriftzeichen. Im Achsendiagramm treffen die dunkle senkrechte y-Achse links und die dunkle waagerechte x-Achse unten rechtwinklig aufeinander. Über ihnen verläuft von links nach rechts eine dünne farbige Sinuskurve mit einem Tal und einem Berg. Weißer Hintergrund."
+      ],
+      "expected_text": "",
+      "regions": [
+        {
+          "name": "axes",
+          "box": [
+            0.02,
+            0.02,
+            0.96,
+            0.96
+          ]
+        },
+        {
+          "name": "sine",
+          "box": [
+            0.08,
+            0.24,
+            0.9,
+            0.45
+          ]
+        }
+      ],
+      "negatives": [
+        {
+          "kind": "object_count",
+          "description": "Das Diagramm zeigt eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten, rechtwinklig verbunden. Darüber verläuft von links nach rechts die dünne farbige Sinuskurve mit einem Tal und einem Berg. Weißer Hintergrund ohne Beschriftung und ohne Pfeilspitzen. Es gibt genau einen Kreis."
+        },
+        {
+          "kind": "text_conflict",
+          "description": "Das Diagramm zeigt eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten, rechtwinklig verbunden. Darüber verläuft von links nach rechts die dünne farbige Sinuskurve mit einem Tal und einem Berg. Weißer Hintergrund ohne Beschriftung und ohne Pfeilspitzen. Die Beschriftung lautet \"Z9\"."
+        },
+        {
+          "kind": "unresolved_relation",
+          "description": "Das Diagramm zeigt eine dunkle senkrechte y-Achse links und eine dunkle waagerechte x-Achse unten, rechtwinklig verbunden. Darüber verläuft von links nach rechts die dünne farbige Sinuskurve mit einem Tal und einem Berg. Weißer Hintergrund ohne Beschriftung und ohne Pfeilspitzen. Die hintere Form liegt rechts von der vorderen Form."
+        }
+      ],
+      "expected_circles": 0
+    },
+    {
+      "family": "arc_shaft",
+      "variant": "GE9021_1M",
+      "split": "known_real_development",
+      "descriptions": [
+        "Ein schmalerer senkrechter rechteckiger Schaft steht oberhalb eines unten offenen U-Bogens in Form eines oberen Halbkreises. Weißer Abstand zwischen beiden Formen. Am Schaft ein horizontaler Helligkeitsverlauf mit heller Mitte und dunkleren Seiten. Weißer Hintergrund ohne Schriftzeichen.",
+        "Unter dem schmaleren senkrechten rechteckigen Schaft liegt ein unten offener U-Bogen in Form eines oberen Halbkreises. Der Schaft zeigt einen horizontalen Farbverlauf mit heller Mitte und dunkleren Seiten. Ein weißer Abstand trennt ihn vom Bogen. Weißer Hintergrund ohne Beschriftung."
+      ],
+      "expected_text": "",
+      "regions": [
+        {
+          "name": "shaft",
+          "box": [
+            0.23,
+            0.0,
+            0.57,
+            0.79
+          ]
+        },
+        {
+          "name": "arc",
+          "box": [
+            0.0,
+            0.79,
+            1.0,
+            0.21
+          ]
+        }
+      ],
+      "negatives": [
+        {
+          "kind": "object_count",
+          "description": "Ein schmalerer senkrechter rechteckiger Schaft steht oberhalb eines unten offenen U-Bogens in Form eines oberen Halbkreises. Weißer Abstand zwischen beiden Formen. Am Schaft ein horizontaler Helligkeitsverlauf mit heller Mitte und dunkleren Seiten. Weißer Hintergrund ohne Schriftzeichen. Es gibt genau zwei Kreise."
+        },
+        {
+          "kind": "text_conflict",
+          "description": "Ein schmalerer senkrechter rechteckiger Schaft steht oberhalb eines unten offenen U-Bogens in Form eines oberen Halbkreises. Weißer Abstand zwischen beiden Formen. Am Schaft ein horizontaler Helligkeitsverlauf mit heller Mitte und dunkleren Seiten. Weißer Hintergrund ohne Schriftzeichen. Die Beschriftung lautet \"Z9\"."
+        },
+        {
+          "kind": "unresolved_relation",
+          "description": "Ein schmalerer senkrechter rechteckiger Schaft steht oberhalb eines unten offenen U-Bogens in Form eines oberen Halbkreises. Weißer Abstand zwischen beiden Formen. Am Schaft ein horizontaler Helligkeitsverlauf mit heller Mitte und dunkleren Seiten. Weißer Hintergrund ohne Schriftzeichen. Die hintere Form liegt rechts von der vorderen Form."
+        }
+      ],
+      "expected_circles": 0
+    }
+  ]
+}

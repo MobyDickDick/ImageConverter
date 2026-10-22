@@ -1,6 +1,8 @@
 """Compare native and separately positioned glyph models for short disk labels."""
 from __future__ import annotations
 
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
+
 from html import escape
 import re
 from xml.etree import ElementTree as ET
@@ -16,11 +18,11 @@ from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search,
 
 
 def fit_short_label_disk(width, height, *, description, image, render_fn, error_fn):
-    text = str(description or '')
+    text = normalize_description(description)
     words = text.casefold()
     labels = re.findall(r'(?:["„])([A-Za-z0-9]{2,4})(?:["“])', text)
     if (len(labels) != 1 or not all(token in words for token in
-            ('kreisscheibe', 'einfarbig', 'randkontur', 'serifenlos', 'keine anschlüsse'))
+            ('kreisscheibe', 'einfarbig', 'rand', 'serifenlos', 'keine anschlüsse'))
             or any(token in words for token in ('zusätzlich', 'verlauf', 'griff', 'dreieck', 'ohne beschriftung'))):
         return None
     label = escape(labels[0])

@@ -1,6 +1,8 @@
 """Register a three-band rectangular panel enclosed by a gradient disk."""
 from __future__ import annotations
 
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description, gradient_direction
+
 import re
 import cv2
 import numpy as np
@@ -9,17 +11,19 @@ from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _image, _r
 
 
 def fit_striped_panel_disk(width, height, *, description, image, render_fn, error_fn):
-    text = str(description or '').casefold()
+    text = normalize_description(description, orientations=True).casefold()
+    if not gradient_direction(text, 'senkrecht'):
+        return None
     # The disk gradient and panel orientation are independent of the bands.
     vertical = bool(re.search(r'senkrecht\w* (?:gefüllt\w* )?streifen', text))
     horizontal = bool(re.search(r'waagerecht\w* (?:gefüllt\w* )?streifen', text))
     if vertical == horizontal:
         return None
-    if not all(word in text for word in ('kreis', 'verlauf', 'vertikal', 'rechteck',
+    if not all(word in text for word in ('kreis', 'verlauf', 'senkrecht', 'rechteck',
                                          'drei', 'waagerecht', 'streifen', 'gefüllt', 'innerhalb')):
         return None
     if re.search(r'\b(?:ohne|kein|keine|nicht|zwei|vier|zusätzlich|dreieck|diagonal|schriftzeichen)\b',
-                 text.replace('keine schriftzeichen', '')):
+                 text.replace('keine schriftzeichen', '').replace('ohne lücke', '')):
         return None
     pixels = _image(width, height, image)
     if pixels is None:

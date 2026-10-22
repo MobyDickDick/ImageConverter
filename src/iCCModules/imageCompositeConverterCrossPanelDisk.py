@@ -1,6 +1,8 @@
 """Register an enclosed rectilinear cross, rectangular panel and gradient disk."""
 from __future__ import annotations
 
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description, gradient_direction
+
 import re
 import cv2
 import numpy as np
@@ -9,8 +11,10 @@ from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _image, _r
 
 
 def fit_cross_panel_disk(width, height, *, description, image, render_fn, error_fn):
-    text = str(description or '').casefold()
-    if not all(word in text for word in ('kreis', 'verlauf', 'vertikal', 'rechteck',
+    text = normalize_description(description, orientations=True).casefold()
+    if not gradient_direction(text, 'senkrecht'):
+        return None
+    if not all(word in text for word in ('kreis', 'verlauf', 'senkrecht', 'rechteck',
                                          'kreuz', 'gefüllt', 'balken', 'innerhalb')):
         return None
     if re.search(r'\b(?:ohne|kein|keine|nicht|zwei|zusätzlich|dreieck|diagonal|schriftzeichen)\b',

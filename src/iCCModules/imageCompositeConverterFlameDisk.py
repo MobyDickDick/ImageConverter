@@ -5,6 +5,8 @@ model has a bounded number of tongues, independent of raster resolution.
 """
 from __future__ import annotations
 
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description, gradient_direction
+
 import re
 import cv2
 import numpy as np
@@ -142,8 +144,10 @@ def _model_outline(model, count):
 
 
 def fit_flame_disk(width, height, *, description, image, render_fn, error_fn):
-    text = str(description or '').casefold()
-    if not all(word in text for word in ('kreis', 'vertikal', 'verlauf', 'flamme', 'aufrecht',
+    text = normalize_description(description, orientations=True).casefold()
+    if not gradient_direction(text, 'senkrecht'):
+        return None
+    if not all(word in text for word in ('kreis', 'senkrecht', 'verlauf', 'flamme', 'aufrecht',
                                          'gefüllt', 'zungen', 'spitz', 'rund', 'inner', 'kleinere', 'helle')):
         return None
     if re.search(r'\b(?:ohne|kein\w*|nicht|zusätzlich|diagonal|umgekehrt|dreieck|schriftzeichen)\b',

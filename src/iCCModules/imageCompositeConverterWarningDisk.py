@@ -1,6 +1,8 @@
 """Register a rounded warning triangle and exclamation mark on a gradient disk."""
 from __future__ import annotations
 
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description, gradient_direction
+
 import re
 import cv2
 import numpy as np
@@ -34,8 +36,12 @@ def _triangle(mask):
 
 
 def fit_warning_disk(width, height, *, description, image, render_fn, error_fn):
-    text = str(description or '').casefold()
-    if not all(word in text for word in ('kreis', 'vertikal', 'verlauf', 'warndreieck',
+    text = normalize_description(description, orientations=True).casefold()
+    if not gradient_direction(text, 'senkrecht'):
+        return None
+    if not re.search(r'\bsenkrecht\w* (?:gerundet\w* )?strich\b', text):
+        return None
+    if not all(word in text for word in ('kreis', 'senkrecht', 'verlauf', 'warndreieck',
                                          'aufrecht', 'abgerundet', 'rand', 'innenfläche',
                                          'ausrufezeichen', 'senkrecht', 'strich', 'punkt', 'darunter')):
         return None
