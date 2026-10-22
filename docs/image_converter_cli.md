@@ -36,6 +36,14 @@ Der historische `standard`-Kompatibilitätsmodus hat weiterhin keine neue harte
 Prozessgarantie. Geltungsbereich, Bereinigungszeit und Nachweise:
 [Überwachte Bildbudgets](next_arbeitspaket_2026-10-18_search_deadline.md).
 
+`reports/<name>_timing.jsonl` trennt Prozessstart, Workerbereitschaft, laufende
+Aufsicht und Prozessabbau durch monotone Zeit, UTC-Zeit und Prozess-CPU-Zeit.
+Die Zeitaufsicht benötigt einen laufenden und eingeplanten Hauptprozess;
+Standby oder blockierende Betriebssystem-/Dateioperationen können die
+verstrichene Gesamtzeit über das Budget hinaus verlängern. Nach Wiederaufnahme
+wird das abgelaufene Budget geprüft. Diagnose und nachgewiesene Standbyfälle:
+[Zeitüberlauf-Audit](next_arbeitspaket_2026-10-22_deadline_overrun_audit.md).
+
 ### Alternative Suchwege und Fortschritt
 
 `--search-mode portfolio --search-policy adaptive` ist voreingestellt. Unterstützte analytische Modelle

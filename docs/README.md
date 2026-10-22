@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [SEARCH-DEADLINE-OVERRUN-AUDIT: Standbyursache, getrennte Zeitbelege und verspätete Prozessabschlüsse (2026-10-22)](next_arbeitspaket_2026-10-22_deadline_overrun_audit.md)
+
 - [SEMANTIC-ROBUSTNESS-01: reale Formulierungen, Negationen und verbindliche Kandidatenprüfungen (2026-10-22)](next_arbeitspaket_2026-10-22_semantic_robustness.md)
 
 - [BENCHMARK-PRACTICAL-01: Entwicklungskandidaten, Prüfprotokoll und zwei echte CLI-Piloten (2026-10-21)](next_arbeitspaket_2026-10-21_practical_benchmark.md)

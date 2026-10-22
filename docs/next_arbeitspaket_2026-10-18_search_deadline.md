@@ -28,6 +28,13 @@ Batchberichte benötigen zusätzlich Zeit: Die 60/120 Sekunden sind die Grenze
 für die Bildbearbeitung, keine millisekundengenaue Gesamtlaufzeitgarantie für
 einen CLI-Aufruf.
 
+**Präzisierung 2026-10-22:** Die Aufsicht benötigt einen laufenden,
+eingeplanten Hauptprozess. Moderne Standbyintervalle erklären den später
+beobachteten 261,734-Sekunden-Überlauf; eine von solchen Unterbrechungen
+unabhängige Echtzeitgarantie besteht auch im regulären Pfad nicht.
+Getrennte Zeitbelege und Betriebsgrenzen:
+[SEARCH-DEADLINE-OVERRUN-AUDIT](next_arbeitspaket_2026-10-22_deadline_overrun_audit.md).
+
 ## Sichere Ergebnisübergabe
 
 Jeder Versuch schreibt zunächst in einen eigenen temporären Ausgabebereich.

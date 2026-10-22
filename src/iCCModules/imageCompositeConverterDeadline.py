@@ -22,6 +22,7 @@ import threading
 import time
 
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import ImageSearch, image_search
+from src.iCCModules.imageCompositeConverterTiming import TimingTrace, clock_observation
 
 
 class ProcessTree:
@@ -65,7 +66,9 @@ class ProcessTree:
                     self.job = None
                 raise OSError(error, 'Cannot contain conversion worker in a Windows job')
 
-    def close(self):
+    def close(self, trace=None):
+        if trace:
+            trace.mark('termination_requested', worker_pid=self.process.pid)
         if self.job:
             self.kernel.CloseHandle(self.job)
             self.job = None
@@ -77,6 +80,9 @@ class ProcessTree:
         if self.process.is_alive():
             self.process.kill()
         self.process.join(timeout=1.)
+        if trace:
+            trace.mark('termination_finished', worker_pid=self.process.pid,
+                       worker_alive=self.process.is_alive(), exitcode=self.process.exitcode)
 
 
 def _atomic_pickle(path, value):
@@ -90,9 +96,10 @@ def _entry(connection, payload, worker):
     if os.name != 'nt':
         os.setsid()
     # No conversion or renderer may start until containment is installed.
-    connection.send(('ready', None))
+    connection.send(('ready', clock_observation()))
     connection.recv()
     try:
+        connection.send(('worker_started', clock_observation()))
         worker(connection, payload)
     except BaseException as exc:
         connection.send(('error', f'{type(exc).__name__}: {exc}'[:1000]))
@@ -126,6 +133,7 @@ def _checkpoint_row(app, spec, result, image):
 
 
 def conversion_worker(connection, payload):
+    connection.send(('worker_phase', dict(phase='runtime_import_started', **clock_observation())))
     spec, stage = payload['spec'], Path(payload['stage'])
     blocked_reads = []
     if payload.get('semantic_only', True):
@@ -145,6 +153,7 @@ def conversion_worker(connection, payload):
     from src import imageCompositeConverter as app
     from src.iCCModules import imageCompositeConverterSearchPortfolio as portfolio
     from src.iCCModules.imageCompositeConverterConversionExecution import convertOneImpl
+    connection.send(('worker_phase', dict(phase='runtime_import_finished', **clock_observation())))
 
     for name, value in payload['action'].items():
         setattr(app.Action, name, value)
@@ -201,6 +210,7 @@ def conversion_worker(connection, payload):
         with component_path.open('w', encoding='utf-8', buffering=1) as component_log:
             component_log.write(json.dumps(dict(event='configured', **snapshot(session, portfolio.settings())))+'\n')
             try:
+                connection.send(('worker_phase', dict(phase='conversion_started', **clock_observation())))
                 result = convertOneImpl(
                     **spec, run_iteration_pipeline_fn=app.runIterationPipeline,
                     read_validation_log_details_fn=app._readValidationLogDetails,
@@ -211,6 +221,7 @@ def conversion_worker(connection, payload):
                     render_embedded_raster_svg_fn=app._renderEmbeddedRasterSvg,
                     append_batch_failure_fn=failures.append,
                 )
+                connection.send(('worker_phase', dict(phase='conversion_finished', **clock_observation())))
             finally:
                 component_log.write(json.dumps(dict(event='finished', **snapshot(session, portfolio.settings())),
                                                 allow_nan=False)+'\n')
@@ -234,7 +245,21 @@ class ImageDeadline:
         return self.session.time_reason()
 
     def run(self, spec, *, config, action, render_isolated=False, render_timeout=20., worker=conversion_worker):
+        root = Path(spec['reports_out_dir'])
+        root.mkdir(parents=True, exist_ok=True)
+        self.trace = TimingTrace(root/(Path(spec['filename']).stem+'_timing.jsonl'))
+        self.trace.mark('attempt_started', image_budget_seconds=self.session.policy.seconds,
+                        maximum_seconds=self.session.policy.max_seconds,
+                        external_max_seconds=self.hard_seconds if math.isfinite(self.hard_seconds) else None)
+        try:
+            return self._run(spec, config=config, action=action, render_isolated=render_isolated,
+                             render_timeout=render_timeout, worker=worker)
+        finally:
+            self.trace.mark('attempt_finished')
+
+    def _run(self, spec, *, config, action, render_isolated, render_timeout, worker):
         current_hash = self._source_hash(spec)
+        self.trace.mark('source_hashed')
         if self.source_file_hash is not None and current_hash != self.source_file_hash:
             self.best_row = None
             self.closed = True
@@ -279,17 +304,26 @@ class ImageDeadline:
                 try:
                     if not self._reason():
                         process = ctx.Process(target=_entry, args=(child, payload, worker))
+                        self.trace.mark('spawn_started')
                         process.start()
+                        self.trace.mark('spawn_finished', worker_pid=process.pid)
                         child.close()
                         threading.Thread(target=_read_messages, args=(parent, mailbox), daemon=True).start()
                         while True:
+                            self.trace.heartbeat()
                             try:
                                 event, value = mailbox.get(timeout=.02)
                             except queue.Empty:
                                 event, value = None, None
                             if event == 'ready':
+                                self.trace.mark('worker_ready', worker_observation=value)
                                 tree = ProcessTree(process)
-                                parent.send('go')
+                                self.trace.mark('containment_installed')
+                                if not self._reason():
+                                    parent.send('go')
+                                    self.trace.mark('worker_released')
+                            elif event in {'worker_started', 'worker_phase'}:
+                                self.trace.mark(event, worker_observation=value)
                             elif event == 'progress':
                                 sent, error = value
                                 # A late or backlogged event cannot purchase time retroactively.
@@ -308,6 +342,7 @@ class ImageDeadline:
                                 if checked is None or self._score(candidate['row']) < self._score(checked['row']):
                                     checked = candidate
                             elif event == 'done' and not self._reason():
+                                self.trace.mark('handoff_received')
                                 with (stage/value).open('rb') as handle:
                                     completed = pickle.load(handle)
                                 break
@@ -317,17 +352,21 @@ class ImageDeadline:
                                     str(value or f'Worker exited without handoff (exitcode={process.exitcode})'), encoding='utf-8')
                                 break
                             if self._reason():
+                                self.trace.mark('deadline_observed', charged_seconds=self.session.elapsed)
                                 break
                 except (OSError, ValueError, EOFError, pickle.UnpicklingError) as exc:
                     failure = 'worker_error'
                     (stage/'supervisor_error.log').write_text(str(exc), encoding='utf-8')
                 finally:
                     if tree:
-                        tree.close()
+                        tree.close(self.trace)
                     elif process is not None and process.pid:
+                        self.trace.mark('termination_requested', worker_pid=process.pid)
                         if process.is_alive():
                             process.kill()
                         process.join(timeout=1.)
+                        self.trace.mark('termination_finished', worker_pid=process.pid,
+                                        worker_alive=process.is_alive(), exitcode=process.exitcode)
                     parent.close()
                     child.close()
             (root/(Path(spec['filename']).stem+'_reference_access.json')).write_text(
@@ -343,6 +382,7 @@ class ImageDeadline:
                 # Completed unsupported inputs may have no result row. Preserve
                 # real timing/supervision evidence for those failures as well.
                 control = dict(self.session.report(), isolated=True,
+                               timing_trace=self.trace.path.name,
                                stop_reason='completed' if row is not None else 'no_result')
                 (root/(Path(spec['filename']).stem+'_deadline.json')).write_text(
                     json.dumps(control, indent=2)+'\n', encoding='utf-8')
@@ -357,6 +397,7 @@ class ImageDeadline:
                 if not failed and row is not None:
                     self.best_row = row
                 self._publish(staged, spec)
+                self.trace.mark('outputs_published')
                 return (row, failed), completed['failures']
             self.closed = True
             if (stage/'supervisor_error.log').exists():
@@ -425,6 +466,7 @@ class ImageDeadline:
 
     def _expired(self, spec, reason='time_limit'):
         control = dict(self.session.report(), stop_reason=reason, isolated=True,
+                       timing_trace=self.trace.path.name,
                        external_max_seconds=self.hard_seconds if math.isfinite(self.hard_seconds) else None,
                        recovered_checkpoint=bool(self.best_row and self.best_row.get('checkpoint_proof')),
                        retained_output=bool(self.best_row))

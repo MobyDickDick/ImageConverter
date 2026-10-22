@@ -24,6 +24,7 @@ from src.iCCModules.imageCompositeConverterRendering import render_svg_to_numpy_
 from tools.evaluate_quality_complexity_gate import analyze_svg_complexity
 from src.iCCModules.imageCompositeConverterDescriptions import loadDescriptionMappingImpl
 from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
+from src.iCCModules.imageCompositeConverterTiming import run_timed_process
 
 CASE_COUNT = 16
 MAX_ADDITIONAL_SVGS = 8
@@ -325,8 +326,8 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
     started = time.monotonic()
     try:
         with (case_dir / "converter.log").open("w", encoding="utf-8") as log:
-            completed = subprocess.run(command, cwd=working_root, env=environment,
-                                       stdout=log, stderr=subprocess.STDOUT, timeout=timeout, check=False)
+            completed = run_timed_process(command, cwd=working_root, env=environment,
+                                          stdout=log, stderr=subprocess.STDOUT, timeout=timeout, check=False)
         result["returncode"] = completed.returncode
         access_report = case_dir / "reference_access.json"
         blocked = json.loads(access_report.read_text(encoding="utf-8"))["blocked_svg_reads"] if access_report.exists() else []
