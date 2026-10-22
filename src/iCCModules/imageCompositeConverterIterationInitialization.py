@@ -62,6 +62,17 @@ def prepareIterationRuntimeImpl(
         create_diff_image_fn=create_diff_image_fn,
         cv2_module=cv2_module,
     )
+    assertions = params.get('language_assertions') or {}
+    if assertions.get('counts') or assertions.get('no_text'):
+        write_artifacts = artifact_callbacks['write_attempt_artifacts']
+
+        def write_checked_artifacts(svg_content, *args, **kwargs):
+            if not kwargs.get('failed', False):
+                from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
+                validate_svg_assertions(svg_content, assertions)
+            return write_artifacts(svg_content, *args, **kwargs)
+
+        artifact_callbacks['write_attempt_artifacts'] = write_checked_artifacts
     return IterationInitializationResult(
         base_name=base_name,
         log_path=log_path,

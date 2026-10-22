@@ -10,6 +10,7 @@ from src.iCCModules import imageCompositeConverterDescriptions as description_ma
 from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_badge_helpers
 from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
 from src.iCCModules import imageCompositeConverterSemantic as semantic_helpers
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description, description_assertions
 
 
 def _get_base_name_from_file(filename: str) -> str:
@@ -115,6 +116,8 @@ class Reflection:
         _visited.add(canonical_base)
         description_fragments = _collect_description_fragments(self.raw_desc, base_name, img_filename)
         desc_raw = " ".join(fragment["text"] for fragment in description_fragments)
+        assertions = description_assertions(desc_raw)
+        desc_raw = normalize_description(desc_raw)
         desc = desc_raw.lower().strip()
         base_upper = canonical_base or base_name.upper()
         symbol_upper = canonical_base or base_upper
@@ -128,6 +131,7 @@ class Reflection:
             "variant_name": os.path.splitext(str(img_filename))[0].upper(),
             "documented_alias_refs": sorted(Reflection._extractDocumentedAliasRefs(desc)),
             "description_fragments": description_fragments,
+            "language_assertions": assertions,
             "semantic_priority_order": ["family_rule", "layout_override", "description_heuristic"],
             "semantic_conflicts": [],
             "semantic_sources": {},
@@ -205,6 +209,12 @@ class Reflection:
                 inherited_params["documented_alias_refs"] = sorted(Reflection._extractDocumentedAliasRefs(desc))
                 inherited_params["description_fragments"] = description_fragments
                 inherited_params["variant_name"] = os.path.splitext(str(img_filename))[0].upper()
+                parent_assertions = inherited_params.get('language_assertions') or {}
+                child_kinds = {c['kind'] for c in assertions['counts']}
+                inherited_params['language_assertions'] = dict(
+                    counts=[c for c in parent_assertions.get('counts', []) if c['kind'] not in child_kinds]
+                           + assertions['counts'],
+                    no_text=bool(parent_assertions.get('no_text') or assertions['no_text']))
                 inherited_params["badge_param_source_ref"] = reference_symbol
                 if "viereckig" in desc and ("anstatt rund" in desc or "statt rund" in desc):
                     inherited_params["head_style"] = "square_badge"

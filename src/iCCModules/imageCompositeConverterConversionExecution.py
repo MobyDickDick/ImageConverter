@@ -559,6 +559,8 @@ def convertOneImpl(
                 badge_validation_rounds=effective_badge_rounds,
             )
     except Exception as exc:  # noqa: BLE001 - keeps batch execution resilient per image.
+        from src.iCCModules.imageCompositeConverterDescriptionLanguage import DescriptionRejected
+        rejected_description = isinstance(exc, DescriptionRejected)
         failed_svg_path = _writeFailedEmbeddedSvgArtifact(
             svg_out_dir=svg_out_dir,
             filename=filename,
@@ -583,7 +585,8 @@ def convertOneImpl(
         with open(log_file, "w", encoding="utf-8") as f:
             if prior_log_text:
                 f.write(prior_log_text.rstrip() + "\n")
-            f.write(f"status=batch_error\nfilename={filename}\nreason={type(exc).__name__}\ndetails={exc}\n")
+            failure_status = 'description_rejected' if rejected_description else 'batch_error'
+            f.write(f"status={failure_status}\nfilename={filename}\nreason={type(exc).__name__}\ndetails={exc}\n")
             if failure_telemetry:
                 f.write(f"failure_telemetry={failure_telemetry}\n")
             if failure_telemetry_json:

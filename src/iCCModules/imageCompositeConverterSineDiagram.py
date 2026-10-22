@@ -1,12 +1,14 @@
 """Register perpendicular axes and an analytic sinusoid from raster evidence."""
 from __future__ import annotations
 
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
+
 import cv2
 import numpy as np
 
 
 def fit_sine_diagram(width, height, *, description, image, render_fn, error_fn):
-    text = str(description or '').casefold()
+    text = normalize_description(description, orientations=True).casefold()
     if not all(word in text for word in ('sinus', 'achse', 'diagramm')):
         return None
     if any(word in text for word in ('zusätzlich', 'weitere kurve', 'pfeilspitzen vorhanden')):

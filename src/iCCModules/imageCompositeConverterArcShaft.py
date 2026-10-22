@@ -1,6 +1,8 @@
 """Infer an open lower elliptical arc and a detached gradient shaft from pixels."""
 from __future__ import annotations
 
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
+
 import cv2
 import numpy as np
 import re
@@ -68,7 +70,7 @@ def mirror_side_arc_shaft_svg(svg):
 
 def fit_arc_shaft(width, height, *, description, image, render_fn, error_fn):
     """Normalize explicitly described directions to the upper-opening fit."""
-    text = str(description or '').casefold()
+    text = normalize_description(description, orientations=True).casefold()
     right = 'rechts offen' in text
     if right:
         if ('linker halbkreis' not in text or 'rechts neben' not in text
@@ -77,8 +79,9 @@ def fit_arc_shaft(width, height, *, description, image, render_fn, error_fn):
         text = text.replace('rechts offen', 'links offen').replace('linker halbkreis', 'rechter halbkreis').replace('rechts neben', 'links neben')
     if 'links offen' in text:
         if ('rechter halbkreis' not in text or 'links neben' not in text
-                or 'waagerecht' not in text or 'vertikal' not in text
-                or any(token in text for token in ('oben offen', 'unten offen', 'rechts offen', 'horizontal'))):
+                or 'waagerecht' not in text or 'senkrecht' not in text
+                or any(token in text for token in ('oben offen', 'unten offen', 'rechts offen'))
+                or re.search(r'waagerecht\w* (?:farb)?verlauf', text)):
             return None
         arr = np.asarray(image)
         if arr.shape != (height, width, 3):
@@ -94,7 +97,7 @@ def fit_arc_shaft(width, height, *, description, image, render_fn, error_fn):
                 return None
             return np.rot90(np.fliplr(raster) if right else raster, -1)
 
-        normalized = text.replace('links offen', 'oben offen').replace('vertikal', 'horizontal')
+        normalized = text.replace('links offen', 'oben offen').replace('senkrecht', 'waagerecht')
         result = _fit_upper_open_arc_shaft(height, width, description=normalized,
                                          image=np.rot90(np.fliplr(arr) if right else arr, -1), render_fn=normalized_render,
                                          error_fn=error_fn, preserve_initial_error=True,
@@ -114,7 +117,12 @@ def fit_arc_shaft(width, height, *, description, image, render_fn, error_fn):
     if not lower:
         return _fit_upper_open_arc_shaft(width, height, description=text,
                                        image=image, render_fn=render_fn, error_fn=error_fn)
-    if 'oben offen' in text or 'unter' not in text or 'oberen halbkreis' not in text:
+    lower_relation = bool(re.search(
+        r'(?:bogen|halbkreis)[^.]*\bunter\b[^.]*schaft|'
+        r'schaft[^.]*\b(?:über|oberhalb)\b[^.]*(?:bogen|halbkreis)|'
+        r'\bunter\b[^.]*schaft[^.]*(?:bogen|halbkreis)|'
+        r'\büber\b[^.]*(?:bogen|halbkreis)[^.]*schaft', text))
+    if 'oben offen' in text or not lower_relation or 'oberen halbkreis' not in text:
         return None
     arr = np.asarray(image)
     if arr.shape != (height, width, 3):
@@ -141,8 +149,9 @@ def fit_arc_shaft(width, height, *, description, image, render_fn, error_fn):
 
 def _fit_upper_open_arc_shaft(width, height, *, description, image, render_fn, error_fn,
                             preserve_initial_error=False, preserve_foreground=False):
-    text = str(description or '').casefold()
-    if not all(token in text for token in ('u-bogen', 'oben offen', 'schaft', 'horizontal', 'verlauf')):
+    text = normalize_description(description, orientations=True).casefold()
+    if (not all(token in text for token in ('bogen', 'oben offen', 'schaft', 'waagerecht', 'verlauf'))
+            or not any(token in text for token in ('u-bogen', 'halbkreis'))):
         return None
     if any(token in text for token in ('kreis geschlossen', 'dreieck', 'beschrift', 'zusätzlich', 'zwei bögen')):
         return None

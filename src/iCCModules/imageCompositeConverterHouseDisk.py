@@ -1,6 +1,8 @@
 """Register an analytic gabled house, door and cross-window on a gradient disk."""
 from __future__ import annotations
 
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description, gradient_direction
+
 import re
 import cv2
 import numpy as np
@@ -9,14 +11,16 @@ from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _image, _r
 
 
 def fit_house_disk(width, height, *, description, image, render_fn, error_fn):
-    text = str(description or '').casefold()
-    if not all(word in text for word in ('kreis', 'vertikal', 'verlauf', 'haus', 'satteldach',
+    text = normalize_description(description, orientations=True).casefold()
+    if not gradient_direction(text, 'senkrecht'):
+        return None
+    if not all(word in text for word in ('kreis', 'senkrecht', 'verlauf', 'haus', 'satteldach',
                                          'dachüberst', 'fassade', 'tür', 'fenster', 'kreuz', 'links', 'rechts')):
         return None
     if re.search(r'\b(?:ohne|kein|keine|nicht|zwei|zusätzlich|diagonal|schriftzeichen)\b',
                  text.replace('keine schriftzeichen', '')):
         return None
-    if 'links in der fassade' not in text or 'rechts ein' not in text:
+    if not re.search(r'links in der fassade', text) or not re.search(r'rechts (?:ein|liegt ein|ist ein)', text):
         return None
     pixels = _image(width, height, image)
     if pixels is None:

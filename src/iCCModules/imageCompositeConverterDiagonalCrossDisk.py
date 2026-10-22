@@ -1,6 +1,8 @@
 """Register two crossing diagonal capsules inside a solid disk from pixels."""
 from __future__ import annotations
 
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
+
 import re
 import cv2
 import numpy as np
@@ -9,7 +11,7 @@ from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _image, _r
 
 
 def fit_diagonal_cross_disk(width, height, *, description, image, render_fn, error_fn):
-    text = str(description or '').casefold()
+    text = normalize_description(description, orientations=True).casefold()
     if not all(word in text for word in ('kreis', 'einfarbig', 'diagonal', 'kreuz',
                                          'zwei', 'strich', 'abgerundet', 'innerhalb')):
         return None

@@ -10,6 +10,32 @@ on:
   workflow_dispatch:
 
 jobs:
+  semantic-wording-robustness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Check polarity, labels, assertions and evaluation integrity
+        run: python -m pytest -q tests/test_description_language.py tests/test_semantic_robustness_evaluation.py
+      - name: Freeze real rasters and predeclared descriptions
+        run: python -m tools.evaluate_semantic_robustness --prepare .tmp/wording-inputs
+      - name: Exercise three real families through the supervised CLI
+        run: python -m tools.evaluate_semantic_robustness --run .tmp/wording-inputs --output .tmp/wording-cli --families labeled_disk warning_disk arc_shaft --budget 10 --require-all
+      - name: Independently re-render saved outputs and verify evidence
+        run: python -m tools.evaluate_semantic_robustness --verify .tmp/wording-cli --prepared .tmp/wording-inputs --require-all
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: semantic-wording-evidence
+          path: |
+            .tmp/wording-inputs
+            .tmp/wording-cli
+          retention-days: 7
+
   named-scene-references:
     runs-on: ubuntu-latest
     timeout-minutes: 5

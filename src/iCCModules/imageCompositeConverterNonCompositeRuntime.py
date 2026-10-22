@@ -1487,8 +1487,14 @@ def runNonCompositeIterationImpl(
             (fit_sine_diagram, "non_composite_raster_sine_diagram"),
             (fit_radial_disk, "non_composite_raster_radial_disk"),
         ):
+            fit_description = description
+            if fit_fn is fit_short_label_disk:
+                # Dispatch is case-insensitive; labels are not. Recover the
+                # original spelling for auto-mode short labels as in badge mode.
+                fit_description = ' '.join(str(f.get('text', '')) for f in
+                    params.get('description_fragments', []) if isinstance(f, dict)) or description
             fitted = fit_fn(
-                width, height, description=description, image=perc_img,
+                width, height, description=fit_description, image=perc_img,
                 render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
             )
             if fitted is not None:

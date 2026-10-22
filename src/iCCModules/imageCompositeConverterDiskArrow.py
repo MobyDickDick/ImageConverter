@@ -1,6 +1,8 @@
 """Fit a horizontal arrow inside a gradient disk from description and raster evidence."""
 from __future__ import annotations
 
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description, gradient_direction
+
 import cv2
 import numpy as np
 import re
@@ -9,7 +11,9 @@ from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _image, _r
 
 
 def fit_disk_arrow(width, height, *, description, image, render_fn, error_fn):
-    text = str(description or '').casefold()
+    text = normalize_description(description, orientations=True).casefold()
+    if not gradient_direction(text, 'waagerecht'):
+        return None
     text = re.sub(r'\bnach (?:links|rechts|oben|unten)(?: und (?:links|rechts|oben|unten))?\s+'
                   r'(?:verschoben|versetzt)\b', 'verschoben', text)
     directions = re.findall(r'pfeil\s+nach\s+(links|rechts|oben|unten)\b', text)

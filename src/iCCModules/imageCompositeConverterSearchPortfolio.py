@@ -66,6 +66,8 @@ def validated_result(result, image):
     session = current_search()
     if session is None:
         return False
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
+    validate_svg_assertions(result['svg'], getattr(session, 'description_assertions', None))
     quality = pixel_quality(image,result['rendered'])
     if not quality or not quality['passed']:
         return False
