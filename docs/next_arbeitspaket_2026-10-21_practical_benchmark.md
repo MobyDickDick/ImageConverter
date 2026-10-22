@@ -9,6 +9,11 @@ Das Arbeitspaket ist **begonnen, nicht abgenommen**. Es gibt jetzt eine
 reproduzierbare Vorbereitung mit 20 realen Entwicklungskandidaten, eingefrorenen
 Originalrasterkopien, Beschreibungen und Runtime-/Konfigurationsprüfsummen.
 Eine neue Ausführung überschreibt keine vorhandenen Belege.
+Seit der Korrektur vom 22. Oktober wird ein vorhandenes Ziel bereits vor dem
+Lesen von Auswahl und Archiv abgelehnt. Bei einem neuen Ziel meldet die
+Vorprüfung sämtliche ausgewählten Varianten, die im Archivindex fehlen,
+ohne Verzeichnisse oder Teilbelege anzulegen. Kandidaten werden dabei nicht
+stillschweigend ausgelassen.
 `tools.prepare_practical_benchmark` prüft Eingaben und erneut gerenderte
 Pilotausgaben; geänderte Beschreibungen, Raster, SVGs und unvollständige
 Pilotberichte werden zurückgewiesen.

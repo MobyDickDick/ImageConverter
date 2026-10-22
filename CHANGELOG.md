@@ -1,3 +1,4 @@
+- Reject existing benchmark preparation outputs before reading source metadata, and report missing archive candidates before creating any evidence (2026-10-22).
 - Add native rounded-rectangle gradient scenes with white nested children, standalone panel descriptions, independent geometry/paint checks and supervised CLI evidence; retain the open new-real-family acceptance and single-panel IoU failures (2026-10-22).
 - Normalize bounded equivalent German descriptions while preserving quoted label case; bind gradient directions to gradients and reject explicit text/count contradictions before saved artifacts and early checkpoints. Add paired real-family CLI evidence and CI replay (2026-10-22).
 - Keep the real-region CNN CI measurement and independent replay on one OpenBLAS thread so exact probabilities remain reproducible across steps; preserve the strict integrity guard (2026-10-21).
