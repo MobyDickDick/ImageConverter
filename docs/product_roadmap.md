@@ -4,6 +4,14 @@ Die vom Nutzer vorgegebene Reihenfolge gilt für die nächsten Arbeitspakete.
 Die konkrete nächste Aufgabe und ihr Abschluss stehen in `open_tasks.md`
 und `../PLAN_B_KANDIDATEN.md`.
 
+Aktueller Fokus am 22.10.2026: `GENERAL-SCENE-REAL-05` bleibt offen.
+Der [gemischte Szenenschritt](next_arbeitspaket_2026-10-22_mixed_gradient_scene.md)
+verbessert zwei nach negativem Erstversuch bekannte Originale; die unabhängige
+Übertragung auf zwei weitere reale Familien fehlt weiterhin. Der
+[Konzeptaudit](concept_audit_2026-10-22.md) präzisiert die früheren Vision-Häkchen.
+Die unten genannten Kandidaten und Zwischenzahlen beschreiben historische
+Pakete; maßgeblich für die aktuelle Auswahl ist `open_tasks.md`.
+
 ## 1. Möglichst viele gute Konvertierungen
 
 Den Katalog von ungefähr 1.700 Bildern schrittweise erschließen. Pro Familie

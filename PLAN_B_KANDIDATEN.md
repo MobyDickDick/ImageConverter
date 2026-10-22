@@ -2,6 +2,16 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
+## Aktueller Fokus (2026-10-22)
+
+`BENCHMARK-ANYTIME-01` ist inzwischen abgeschlossen. Der aktuelle Qualitätsfokus
+bleibt `GENERAL-SCENE-REAL-05`: Der gemischte Szenenschritt rekonstruiert nun die
+bekannten Entwicklungsoriginale GE0026/GE0027; der erste eingefrorene reale
+Übertragungsversuch scheiterte und wird nicht nachträglich als Holdout-Erfolg
+gezählt. Zwei weitere neue reale Familien müssen ohne Nachstimmen bestehen.
+Das Archiv bleibt bei 379 Paaren. [Nachweise und Restaufgabe](docs/next_arbeitspaket_2026-10-22_mixed_gradient_scene.md).
+Die folgenden Rotationen und Zahlen sind historische Zwischenstände.
+
 ## Aktuelle Kandidaten (Stand: 2026-10-18, nach AC0232-Abnahme)
 
 AC0232 M/L/S bestehen beide regulären und die strengeren Pixelgates. Die

@@ -23,23 +23,41 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _identified_cases(rows):
+    """Other evaluation schemas need not use the archive's case identifiers."""
+    if isinstance(rows, list):
+        for case in rows:
+            if isinstance(case, dict) and isinstance(case.get('case_id'), str) and case['case_id'].strip():
+                yield case
+
+
 def candidates(root: Path):
     """Use explicit acceptance decisions; technical completion alone is insufficient."""
     catalog=root/'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml'
     descriptions=loadDescriptionMappingImpl(str(catalog),get_base_name_from_file_fn=getBaseNameFromFileImpl) if catalog.exists() else {}
     for manifest_path in sorted((root/'artifacts/evaluation').glob('*/manifest.json')):
         manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+        if not isinstance(manifest, dict):
+            continue
+        # Nested development manifests retain their own verification contract;
+        # do not reinterpret their file/phase records as archive admissions.
+        cases = [case for case in _identified_cases(manifest.get('cases'))
+                 if isinstance(case.get('image'), str) and case['image']]
+        if not cases:
+            continue
         for report_path in sorted(manifest_path.parent.glob('*.json')):
             report = json.loads(report_path.read_text(encoding='utf-8'))
             if not isinstance(report, dict):
                 continue
             gate = report.get('satisfaction_gate', {})
-            accepted = {c['case_id'] for c in gate.get('cases', []) if c.get('satisfactory') is True}
+            if not isinstance(gate, dict):
+                continue
+            accepted = {c['case_id'] for c in _identified_cases(gate.get('cases')) if c.get('satisfactory') is True}
             if not accepted:
                 continue
-            evidence = {c['case_id']:c for c in report.get('evidence', [])}
-            for case in manifest.get('cases', []):
-                if case['case_id'] not in accepted or not case.get('image'):
+            evidence = {c['case_id']:c for c in _identified_cases(report.get('evidence'))}
+            for case in cases:
+                if case['case_id'] not in accepted:
                     continue
                 image = (manifest_path.parent/case['image']).resolve()
                 variant = Path(case.get('source') or case.get('catalog_variant') or case.get('variant') or case['image']).stem

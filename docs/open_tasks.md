@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-22)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `494` · Erledigt `451` · Offen `43`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `495` · Erledigt `446` · Offen `49`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -60,6 +60,8 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 - [x] **GENERAL-SCENE-VISIBILITY-04:** Begrenzten Sichtbarkeitsumfang für zwei bis drei gefüllte Kreis-/Rechteckinstanzen mit eigenen dunklen Konturen, kombinierter Verschachtelung/Teilüberdeckung und eindeutigen sprachlichen Größen-/Tiefenrollen abgeschlossen. Sichtbare Normalenbänder liefern Konturbreiten; verborgene Rechteckseiten bleiben unbekannt. Reihenfolgen benötigen beobachtete gemeinsame Innenflächen. Zwölf eingefrorene CLI-Szenen verbessern sich von 0/12 auf 12/12, zwölf neue gedrehte/umformulierte Szenen bestehen 12/12, neutrale Dateinamen sind bytegleich und eine erweiterte Vorlage besteht 17/17. Unabhängige native Objekt-, Konturbreiten- und Regionsprüfungen bei unveränderten Qualitätsgrenzen. Umfang und Nachweise: `docs/next_arbeitspaket_2026-10-21_scene_visibility.md`.
 
 - [ ] **GENERAL-SCENE-REAL-05:** Neue reale Kreis-/Rechteckfamilien vor Entwicklung unabhängig markieren und sperren; Szenen mit sichtbaren Überdeckungen, Konturen und Verschachtelung prüfen. Eindeutige Farb-/Lagebezüge zusätzlich zu Größenrollen typisieren, unbekannte und mehrdeutige Beziehungen konservativ behandeln. Echte CLI-Vorher-/Nachher-Vergleiche mit unveränderten unabhängigen Objekt-/Regionsgates; Kataloggewinne nur anhand neuer abgenommener Originalbild-/SVG-Paare zählen. Übertragung auf mindestens zwei neue reale Familien mit anderen Kombinationen bereits unterstützter Primitive über denselben Szenenweg ohne neue Familienvorlage oder Familien-Dispatch belegen; Varianten und unabhängige Familien getrennt zählen. Präzisierte Abnahme: [Projekteinschätzung](quality_review_tasks_2026-10-21.md#general-scene-real-05--übertragung-statt-weiterer-einzelfallpfade).
+
+- [x] **GENERAL-SCENE-MIXED-07 (begrenzter Entwicklungsschritt):** Gemeinsame Rasterregistrierung für eine Verlaufsscheibe und ein bis zwei eingeschlossene flächige Rechtecke. Erster eingefrorener Realtransfer GE0026/GE0027: 0/2. Nach ausdrücklich anschließender Entwicklung: 2/2 unter beiden regulären und den unabhängigen strengen Form-/Regions-/Pixelgates; neutrale Umbenennung bytegleich. Endgültiger Code: Entwicklung 11/12 mit einem Fünf-Sekunden-Budgetabbruch, danach erzeugte synthetische Szenen 12/12. Kein neuer unberührter realer Holdout, keine Katalogzahlerhöhung; GENERAL-SCENE-REAL-05 bleibt offen. [Ergebnisse, Fehlversuche und Restabnahme](next_arbeitspaket_2026-10-22_mixed_gradient_scene.md).
 
 - [x] **GENERAL-SCENE-GRADIENT-06 (begrenzter Entwicklungsschritt):** Native Rechteckszenen mit axialen Verläufen, gerundeten Ecken, optionalen dunklen Konturen und weißer Innenfläche. Die bekannten Varianten DLG0011/DLG0018 verbessern sich von 0/2 auf 2/2 unter beiden regulären und strengeren unabhängigen Gates; eigenständige Beschreibungen in beiden Katalogen. Neue synthetische CLI-Fälle bestehen 12/12, Umbenennungen sind bytegleich und eine abschließende Plan-B-Vorlage besteht 17/17. Archiv 379 Paare, alle 377 bisherigen Datensätze und Bild-/SVG-Paare unverändert. Zwei Einzelpanel-IoU-Fehler bleiben sichtbar. Keine zwei neuen realen Familien; GENERAL-SCENE-REAL-05 bleibt offen. [Nachweise und Grenzen](next_arbeitspaket_2026-10-22_gradient_scene.md).
 
@@ -828,32 +830,38 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
   - Deliverable: maschinenlesbares Schema (z. B. JSON) inkl. Parameter pro Primitive und Confidence.
   - Akzeptanz: Für einen Test-Batch wird je Elementtyp Precision/Recall ausgewiesen.
 
-- [x] **V2 – Bezierkurven-Erkennung ergänzen** (2026-05-14: Fitting-Strategie inkl. Pixel-/Kurvenraum-Fehlerschranke und Evaluationsprotokoll dokumentiert in `docs/v2_bezier_detection_strategy_2026-05-14.md`.)
+- [ ] **V2 – Bezierkurven-Erkennung ergänzen** (2026-05-14: Fitting-Strategie inkl. Pixel-/Kurvenraum-Fehlerschranke und Evaluationsprotokoll dokumentiert in `docs/v2_bezier_detection_strategy_2026-05-14.md`.)
+  **Wieder geöffnet 2026-10-22: Strategie vorhanden; keine Abnahme des geforderten adaptiven quadratischen/kubischen Fits mit Pixel-/Kurvenfehlern gegenüber Polyline-Baseline gefunden. Bestehende Bézier-Ausgabe ist kein solcher Nachweis.** Siehe [Konzeptaudit](concept_audit_2026-10-22.md).
   - Scope: kubische und quadratische Beziersegmente aus Konturen/Pfaden extrahieren.
   - Deliverable: Fitting-Strategie inkl. Fehlerschranke (Pixel- und Kurvenraum).
   - Akzeptanz: Bezier-lastige Referenzen werden mit sinkender Restabweichung rekonstruiert.
 
-- [x] **V3 – Farbfüllungen und Verläufe robust modellieren** (2026-05-14: Gradient-Parameterisierung inkl. Stop-Positionen und DeltaE-/Pixeldelta-Metrik in `docs/v3_color_gradient_modeling_2026-05-14.md` spezifiziert; maschinenlesbare Spezifikation unter `artifacts/evaluation/gradient_model_v1/spec.json` angelegt.)
+- [ ] **V3 – Farbfüllungen und Verläufe robust modellieren** (2026-05-14: Gradient-Parameterisierung inkl. Stop-Positionen und DeltaE-/Pixeldelta-Metrik in `docs/v3_color_gradient_modeling_2026-05-14.md` spezifiziert; maschinenlesbare Spezifikation unter `artifacts/evaluation/gradient_model_v1/spec.json` angelegt.)
+  **Wieder geöffnet 2026-10-22: Lineare Verläufe sind produktiv und begrenzt abgenommen. Die ursprüngliche allgemeine Solid-/Linear-/Radial-Abnahme mit DeltaE-Vergleich zur Flat-Fill-Baseline ist damit nicht vollständig nachgewiesen.** Siehe [Konzeptaudit](concept_audit_2026-10-22.md).
   - Scope: flächige Füllungen, lineare/radiale Verläufe, Übergänge an Objektgrenzen.
   - Deliverable: Gradient-Parameterisierung pro Shape inkl. Stop-Positionen.
   - Akzeptanz: Gradient-Metrik (DeltaE/Pixeldelta) verbessert sich gegenüber Flat-Fill-Baseline.
 
-- [x] **V4 – Überdeckungen/Z-Order explizit erkennen** (2026-05-14: Layer-Graph-Schema + Baseline-Artefakt in `docs/v4_occlusion_zorder_model_2026-05-14.md`, `docs/vision/occlusion_layer_graph_v1.schema.json` und `artifacts/evaluation/occlusion_layer_graph_v1/baseline_scene_graph.json` dokumentiert.)
+- [ ] **V4 – Überdeckungen/Z-Order explizit erkennen** (2026-05-14: Layer-Graph-Schema + Baseline-Artefakt in `docs/v4_occlusion_zorder_model_2026-05-14.md`, `docs/vision/occlusion_layer_graph_v1.schema.json` und `artifacts/evaluation/occlusion_layer_graph_v1/baseline_scene_graph.json` dokumentiert.)
+  **Wieder geöffnet 2026-10-22: Begrenzte native Überdeckungen und Tiefenrollen sind produktiv abgenommen. Der ursprünglich geforderte allgemeine Layer-Graph mit verdeckten Fortsetzungen und unabhängiger realer Griff-/Verbindungsabnahme fehlt weiterhin.** Siehe [Konzeptaudit](concept_audit_2026-10-22.md).
   - Scope: Vorder-/Hintergrundbeziehungen, partielle Verdeckung, verdeckte Fortsetzungen.
   - Deliverable: Layer-Graph mit Occlusion-Relationen (`covers`, `behind`, `continues_behind`).
   - Akzeptanz: Szenen mit teilverdeckteten Griffen/Verbindungen werden konsistent rekonstruiert.
 
-- [x] **V5 – Semantische Textrepräsentation + Bedingungen einführen** (2026-05-14: DSL- und JSON-Layer als v1 spezifiziert; siehe `docs/v5_semantic_text_representation_2026-05-14.md`, `docs/vision/semantic_scene_description_v1.schema.json` und `artifacts/evaluation/semantic_scene_description_v1/example_scene.json`.)
+- [ ] **V5 – Semantische Textrepräsentation + Bedingungen einführen** (2026-05-14: DSL- und JSON-Layer als v1 spezifiziert; siehe `docs/v5_semantic_text_representation_2026-05-14.md`, `docs/vision/semantic_scene_description_v1.schema.json` und `artifacts/evaluation/semantic_scene_description_v1/example_scene.json`.)
+  **Wieder geöffnet 2026-10-22: Schema, Geometry-IR und begrenzte produktive Sprachverträge vorhanden. Der vollständige allgemeine V5-Objekt-/Relations-/Constraint-Vertrag ist kein durchgängiger CLI-Eingabe-/Rekonstruktionsnachweis.** Siehe [Konzeptaudit](concept_audit_2026-10-22.md).
   - Scope: textuelle Szenenbeschreibung inkl. Relationen (z. B. „Kelle mit horizontalem Griff links und Beschriftung rF“).
   - Deliverable: DSL/JSON-Layer für Objekte + Relationen + Constraints.
   - Akzeptanz: Beschreibung kann deterministisch wieder in eine rekonstruktive SVG-Szene übersetzt werden.
 
-- [x] **V6 – Iterativen Nachzeichnungsalgorithmus auf Semantik umstellen** (2026-05-14: Mehrziel-Optimierungsrahmen, Semantik-Konsistenzscore, Konvergenzkriterien und Artefaktformat in `docs/v6_semantic_iterative_redraw_algorithm_2026-05-14.md` spezifiziert.)
+- [ ] **V6 – Iterativen Nachzeichnungsalgorithmus auf Semantik umstellen** (2026-05-14: Mehrziel-Optimierungsrahmen, Semantik-Konsistenzscore, Konvergenzkriterien und Artefaktformat in `docs/v6_semantic_iterative_redraw_algorithm_2026-05-14.md` spezifiziert.)
+  **Wieder geöffnet 2026-10-22: Rasterverfeinerung, adaptive Suche und begrenzte harte Semantikbedingungen greifen. Die spezifizierte gemeinsame Mehrziel-/Pareto-Semantikoptimierung samt dreifacher Familienabnahme ist nicht als vollständiger V6-Vertrag belegt.** Siehe [Konzeptaudit](concept_audit_2026-10-22.md).
   - Scope: Initiale Primitive-Schätzung → Render → Fehleranalyse → Parameterupdate.
   - Deliverable: Mehrziel-Optimierung (Geometrie, Farbe, Semantik-Konsistenz) pro Iteration.
   - Akzeptanz: Konvergenzplots zeigen reproduzierbare Verbesserung in mindestens 3 Referenzfamilien.
 
-- [x] **V7 – Rückwärts-Training (Text → SVG → Raster → Rücktransformation)** (2026-05-14: Closed-Loop-Gap-Report-v1 mit Tool `tools/evaluate_semantic_roundtrip.py` und Baseline-Artefakt `artifacts/evaluation/semantic_roundtrip_v1/report_2026-05-14.json` dokumentiert in `docs/v7_roundtrip_training_pipeline_2026-05-14.md`.)
+- [ ] **V7 – Rückwärts-Training (Text → SVG → Raster → Rücktransformation)** (2026-05-14: Closed-Loop-Gap-Report-v1 mit Tool `tools/evaluate_semantic_roundtrip.py` und Baseline-Artefakt `artifacts/evaluation/semantic_roundtrip_v1/report_2026-05-14.json` dokumentiert in `docs/v7_roundtrip_training_pipeline_2026-05-14.md`.)
+  **Wieder geöffnet 2026-10-22: Der JSON-Gap-Vergleicher führt keinen Text/SVG/Raster/Erkennungs-Kreislauf oder Trainingsschritt aus. Eine Gegenprobe mit geänderter Geometrie, geändertem Typ und Zusatzobjekt meldet weiterhin passed=true.** Siehe [Konzeptaudit](concept_audit_2026-10-22.md).
   - Scope: generierte Szenen zur Selbstvalidierung und Schwachstellenanalyse.
   - Deliverable: Closed-Loop-Evaluationspipeline mit Gap-Reports pro Relationstyp.
   - Akzeptanz: Pipeline markiert systematisch nicht-invertierbare Fälle (z. B. vollständig verdeckte Griffe ohne Constraints).

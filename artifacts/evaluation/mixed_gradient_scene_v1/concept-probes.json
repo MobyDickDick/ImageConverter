@@ -1,0 +1,57 @@
+{
+  "source_commit": "26cbde874",
+  "scope": "Local repository concepts and present source/evidence; no cross-chat reconstruction.",
+  "roundtrip_counterexample": {
+    "reference": {
+      "objects": [
+        {
+          "id": "a",
+          "type": "circle",
+          "geometry": {
+            "r": 10
+          }
+        }
+      ],
+      "relations": []
+    },
+    "candidate": {
+      "objects": [
+        {
+          "id": "a",
+          "type": "rectangle",
+          "geometry": {
+            "width": 900
+          }
+        },
+        {
+          "id": "extra",
+          "type": "text"
+        }
+      ],
+      "relations": []
+    },
+    "reported": {
+      "summary": {
+        "passed": true,
+        "reference_objects": 1,
+        "candidate_objects": 2,
+        "missing_object_count": 0,
+        "extra_object_count": 1,
+        "missing_relation_count": 0,
+        "extra_relation_count": 0
+      },
+      "gaps": {
+        "missing_objects": [],
+        "extra_objects": [
+          "extra"
+        ],
+        "missing_relations": [],
+        "extra_relations": []
+      },
+      "invertibility_failures": []
+    }
+  },
+  "image_id_violations": [],
+  "archive_cases": 379,
+  "archive_descriptions_requesting_new_path": 0
+}

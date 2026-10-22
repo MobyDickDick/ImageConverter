@@ -1,0 +1,56 @@
+{
+  "schema": "mixed_gradient_scene_checks_v1",
+  "tests": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_mixed_gradient_scene_runtime.py tests/test_gradient_scene_runtime.py tests/test_layered_scene_runtime.py tests/test_scene_references.py tests/test_scene_visibility.py tests/test_scene_fusion.py tests/test_primitive_scene_runtime.py tests/test_no_new_image_id_hardcoding.py -q --basetemp=.tmp/concept-audit/regression-final --junitxml=.tmp/concept-audit/regression-final.xml",
+      "exit_code": 0,
+      "tests": 250,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 205.445,
+      "xml_sha256": "3873784ee4d3be46115e9cde1356f8ffc1980c95d17b07f5da7febcb40564b21"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_mixed_gradient_scene_evidence.py -q --basetemp=.tmp/concept-audit/evidence-tests --junitxml=.tmp/concept-audit/evidence-tests.xml",
+      "exit_code": 0,
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.102,
+      "xml_sha256": "67459add03aa5f13b2b9fe85537db14c9da624a35d8e10c82dc93dae34ceb57e"
+    }
+  ],
+  "total_distinct_tests": 256,
+  "full_standard_suite_executed": false,
+  "source_id_check": {
+    "command": ".venv/Scripts/python.exe -m tools.check_no_new_image_id_hardcoding",
+    "exit_code": 0,
+    "occurrences": 0
+  },
+  "syntax_check": {
+    "command": ".venv/Scripts/python.exe -m compileall -q src/iCCModules/imageCompositeConverterMixedGradientScene.py tools/evaluate_mixed_gradient_scene.py tools/verify_mixed_gradient_scene_evidence.py tests/test_mixed_gradient_scene_runtime.py tests/test_mixed_gradient_scene_evidence.py",
+    "exit_code": 0
+  },
+  "archive": {
+    "cases": 379,
+    "verified_file_hashes": 758,
+    "index_sha256": "8a142fd0e6ae89e99900c7466fa7d4e3efc719d31cd2867806be878b8bf83b5f",
+    "index_and_tracked_files_equal_parent": true,
+    "reconverted_all_archive_cases": false,
+    "descriptions_activating_new_path": 0
+  },
+  "saved_original_gate_verification": {
+    "command": ".venv/Scripts/python.exe -m tools.verify_mixed_gradient_scene_evidence artifacts/evaluation/mixed_gradient_scene_v1/manifest.json --output .tmp/concept-audit/reverified-acceptance.json",
+    "exit_code": 0,
+    "regular_gates_satisfactory": 2,
+    "initial_transfer_satisfactory": 0,
+    "after_development_satisfactory": 2,
+    "new_real_holdout_acceptance": false
+  },
+  "whitespace_check": {
+    "command": "git -c core.whitespace=cr-at-eol diff --check",
+    "exit_code": 0
+  }
+}
