@@ -115,3 +115,19 @@ Familien über denselben Szenenweg prüfen, ohne ihn auf diese Ergebnisse
 nachzutunen. Der fehlgeschlagene erste reale Übertragungsversuch bleibt als
 Beleg erhalten. BENCHMARK-PRACTICAL-01, IDO-19/IDO-21, produktive Netzabnahme
 und historische Kompatibilitätsaufsicht behalten ihren offenen Status.
+
+## CI-Korrektur: Archiv-Refresh
+
+Der erweiterte Testprofil-Einstieg scheiterte vor pytest: Der Archivsammler
+interpretierte auch das verschachtelte Entwicklungsmanifest als Archivschema
+mit `case_id` und einfachem Bildpfad. Die neue Eingrenzung überspringt fremde
+Manifest-/Berichtszeilen; gültige Archivfälle, explizite Freigaben und harte
+Quell-/SVG-Prüfsummenprüfungen bleiben erhalten. Das tatsächliche neue Manifest
+reproduziert den ursprünglichen `KeyError` in einem Regressionstest.
+
+Nach der Korrektur: 24 gezielte Tests bestanden, eine regulär ausgeschaltete
+vollständige Archiv-Neukonvertierung übersprungen. Der echte Aufruf
+`.venv/Scripts/python.exe -m tools.refresh_satisfactory_archive --output-dir .tmp/archive-refresh-fix/refreshed-archive`
+endet mit Exit 0 und denselben 379 Varianten sowie 758 Bild-/SVG-Prüfsummen.
+Das bestehende Archiv bleibt unverändert; neue Entwicklungsfälle werden nicht
+automatisch aufgenommen. Ein entfernter Workflow-Neulauf wurde nicht ausgelöst.
