@@ -1,5 +1,11 @@
 # ImageConverter
 
+Die [fortsetzbare Struktursuche](docs/next_arbeitspaket_2026-10-23_structure_scheduler.md)
+verteilt das gemeinsame Bildbudget jetzt zwischen alternativen Restbildzerlegungen.
+Eine schlechte erste Anpassung blockiert weitere Vorschläge nicht mehr;
+die echte CLI-Wiederholung besteht weiterhin 7/9 bekannte Entwicklungsfälle.
+Allgemeine Strukturoperatoren und unabhängige reale Übertragung bleiben offen.
+
 Die [Schwächenprüfung vom 23. Oktober](docs/weakness_review_2026-10-23.md)
 priorisiert strukturelle Exploration und Komposition vor weiteren
 Einzelfallpfaden. Der erste Entwicklungsschritt probiert alternative

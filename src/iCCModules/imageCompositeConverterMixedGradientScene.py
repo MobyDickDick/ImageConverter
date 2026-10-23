@@ -11,10 +11,11 @@ import cv2
 import numpy as np
 
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
-from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _register
+from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _register_steps
 from src.iCCModules.imageCompositeConverterGradientScene import _gradient
 from src.iCCModules.imageCompositeConverterPrimitiveScene import _circle, _local_quality
 from src.iCCModules.imageCompositeConverterSearchPortfolio import progress
+from src.iCCModules.imageCompositeConverterSearchScheduler import drain, schedule_models
 
 
 # Bound complexity without encoding a family layout. Other scene contracts
@@ -203,32 +204,60 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
         return None
     attempts, seen = [], set()
     session = current_search()
-    # A failed segmentation is a hypothesis failure, not proof that the scene
-    # is unsupported. Only proposal thresholds change; acceptance stays fixed.
-    for threshold in (25, 16, 36):
+
+    def hypothesis(threshold):
         if session and session.time_reason():
-            break
+            return None
         objects = detect_instances(pixels, contract, residual_threshold=threshold)
         attempt = dict(residual_threshold=threshold, outcome='no_complete_scene')
         attempts.append(attempt)
-        if objects is not None:
-            key = tuple(np.round(np.concatenate([np.r_[o['geometry'], o['colors']] for o in objects]), 3))
-            if key in seen:
-                attempt['outcome'] = 'duplicate'
-            else:
-                seen.add(key)
-                fitted = _fit_instances(width, height, pixels=pixels, contract=contract,
-                                        objects=objects, render_fn=render_fn, error_fn=error_fn)
-                attempt['outcome'] = 'accepted' if fitted is not None else 'quality_or_geometry_rejected'
+        try:
+            if objects is not None:
+                key = tuple((obj['kind'], *np.round(np.r_[obj['geometry'], obj['colors']], 3))
+                            for obj in objects)
+                if key in seen:
+                    attempt['outcome'] = 'duplicate'
+                else:
+                    seen.add(key)
+                    attempt['outcome'] = 'optimizing'
+                    yield None
+                    fitted = yield from _fit_instances_steps(
+                        width, height, pixels=pixels, contract=contract,
+                        objects=objects, render_fn=render_fn, error_fn=error_fn)
+                    attempt['outcome'] = 'accepted' if fitted is not None else 'quality_or_geometry_rejected'
+                    return fitted
+            return None
+        finally:
+            if attempt['outcome'] == 'optimizing':
+                attempt['outcome'] = 'time_limit' if session and session.time_reason() else 'cancelled'
+            progress('primitive_mixed_gradient_scene_v1', event='scene_hypothesis', **attempt)
+
+    jobs = {threshold: hypothesis(threshold) for threshold in (25, 16, 36)}
+    if session:
+        scheduled = schedule_models(jobs, session, source='primitive_mixed_gradient_scene_v1',
+                                    emit=progress, slice_steps=1)
+        try:
+            for threshold, fitted in scheduled:
+                if fitted is not None:
+                    scheduled.close()
+                    fitted.update(scene_hypotheses=len(attempts), scene_attempts=attempts)
+                    return fitted
+        finally:
+            scheduled.close()
+    else:
+        try:
+            for job in jobs.values():
+                fitted = drain(job)
                 if fitted is not None:
                     fitted.update(scene_hypotheses=len(attempts), scene_attempts=attempts)
-                    progress('primitive_mixed_gradient_scene_v1', event='scene_hypothesis', **attempt)
                     return fitted
-        progress('primitive_mixed_gradient_scene_v1', event='scene_hypothesis', **attempt)
+        finally:
+            for job in jobs.values():
+                job.close()
     return None
 
 
-def _fit_instances(width, height, *, pixels, contract, objects, render_fn, error_fn):
+def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn, error_fn):
     n = len(objects)
     boxes = [np.r_[o['geometry'][:2], o['geometry'][:2]+o['geometry'][2:4], o['geometry'][4]]
              for o in objects]
@@ -313,7 +342,7 @@ def _fit_instances(width, height, *, pixels, contract, objects, render_fn, error
             errors += 4*np.mean((reference-gradient)**2, axis=2)
         return float(np.mean([errors[y:Y, x:X].mean() for x, y, X, Y in regions]))
 
-    fitted = _register(parameters, 5*n, build, valid, pixels, render_fn, error_fn,
+    fitted = yield from _register_steps(parameters, 5*n, build, valid, pixels, render_fn, error_fn,
                        'primitive_mixed_gradient_scene_v1', preserve_initial_error=True,
                        loss_fn=loss,
                        satisfactory_fn=lambda p, m: all(q and q['passed'] for q in qualities(m[3])))
