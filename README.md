@@ -1,10 +1,16 @@
 # ImageConverter
 
+Die [nativen Strukturoperatoren](docs/next_arbeitspaket_2026-10-23_structure_operators.md)
+kombinieren jetzt Instanzen aus mehreren Restbildzerlegungen und prüfen
+Add/Remove/Replace unter demselben Bildbudget. Acht vorab festgelegte synthetische
+CLI-Fälle verbessern sich von 0/8 auf 5/8; unabhängige reale Übertragung und
+die breitere Rundungs-/Überdeckungskomposition bleiben offen.
+
 Die [fortsetzbare Struktursuche](docs/next_arbeitspaket_2026-10-23_structure_scheduler.md)
 verteilt das gemeinsame Bildbudget jetzt zwischen alternativen Restbildzerlegungen.
 Eine schlechte erste Anpassung blockiert weitere Vorschläge nicht mehr;
 die echte CLI-Wiederholung besteht weiterhin 7/9 bekannte Entwicklungsfälle.
-Allgemeine Strukturoperatoren und unabhängige reale Übertragung bleiben offen.
+Die breitere Komposition und unabhängige reale Übertragung bleiben offen.
 
 Die [Schwächenprüfung vom 23. Oktober](docs/weakness_review_2026-10-23.md)
 priorisiert strukturelle Exploration und Komposition vor weiteren

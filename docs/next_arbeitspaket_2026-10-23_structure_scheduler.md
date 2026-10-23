@@ -75,9 +75,14 @@ Syntaxprüfung und Whitespace-Prüfung mit der bestehenden CRLF-Konvention beste
 
 ## Restumfang
 
-SEARCH-STRUCTURE-01 bleibt offen für Add/Remove/Replace von Instanzen und
-Formklassen, gemeinsame negative Evidenz über Registrierungen und unabhängige
-reale Übertragung. Danach folgt GENERAL-SCENE-COMPOSITION-09 mit gemeinsamen
+Nachtrag: [Begrenzte native Add/Remove/Replace-Operatoren und bildgebundene
+negative Evidenz](next_arbeitspaket_2026-10-23_structure_operators.md) sind im
+Restbildszenenweg umgesetzt. Die nachfolgenden breiteren und realen Abnahmen
+bleiben offen.
+
+SEARCH-STRUCTURE-01 bleibt offen für unabhängige reale Übertragung und
+Strukturänderungen außerhalb des begrenzten Verlaufskreis-/Kindervertrags.
+Danach folgt GENERAL-SCENE-COMPOSITION-09 mit gemeinsamen
 Rundungs-/Überdeckungsoperatoren. Vor dieser realen Entwicklung müssen andere
 reale Prüffamilien gesperrt werden; GE0018/GE0307 bleiben Entwicklung.
 Eine vollständige Archiv-Neukonvertierung und Standardsuite gehören nicht zu

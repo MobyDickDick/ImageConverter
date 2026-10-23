@@ -1,0 +1,210 @@
+{
+  "edit_05.png": {
+    "actual_iterations": 64,
+    "base": "EDIT_05",
+    "best_error": 17.830974658869394,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+    "diff_error_distribution_status": "structured",
+    "elapsed_seconds": 1.4839999999385327,
+    "error_per_pixel": 0.0005213735280371167,
+    "error_pixel_cluster_count": 47.0,
+    "error_pixel_cluster_excess": 0.5135294565739665,
+    "error_pixel_count": 4491.0,
+    "filename": "edit_05.png",
+    "h": 180,
+    "largest_error_pixel_cluster_fraction": 0.6448452460476508,
+    "localized_error_fraction": 0.692378142869569,
+    "mean_delta2": 3141.01904296875,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 1.484,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      },
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "constraint": "inside_rect_border",
+            "id": "description_element_1",
+            "kind": "HorizontalGradient",
+            "source": "description",
+            "stops": [
+              "#8f8f8f",
+              "#dedede",
+              "#8f8f8f"
+            ]
+          }
+        ],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.75,
+          "reasons": [],
+          "status": "ok"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": false,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "edit_05",
+          "source": "base_name",
+          "text": "Ein gefüllter Kreis und 2 gefüllte Kreise. Der äußere Kreis hat einen vertikalen Farbverlauf. Die inneren Formen liegen innerhalb des äußeren Kreises und getrennt voneinander. Keine Beschriftung."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [],
+      "geometry_ir": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        }
+      ],
+      "geometry_ir_optimizer_result": {
+        "element_refinement": {
+          "final_error": 22.826959064327486,
+          "initial_error": 22.826959064327486,
+          "mode": "right_rotated_valve_geometry",
+          "steps": []
+        },
+        "final_error": 22.826959064327486,
+        "generic_element_refinement": {
+          "final_error": 22.826959064327486,
+          "initial_error": 22.826959064327486,
+          "mode": "elementwise_geometry_ir",
+          "steps": [
+            {
+              "accepted": false,
+              "best_delta": 0.0,
+              "element": "background_gradient",
+              "error_after": 22.826959064327486,
+              "error_before": 22.826959064327486,
+              "step_index": 0
+            }
+          ]
+        },
+        "initial_error": 23.51712475633528,
+        "mode": "geometry_ir_raster_registration",
+        "parameters": {
+          "scale_x": 0.98,
+          "scale_y": 1.17,
+          "stroke_scale": 1.0,
+          "translate_x": 0.0,
+          "translate_y": 0.0
+        },
+        "steps": [
+          {
+            "best_delta": 0.6459649122807001,
+            "parameter": "scale_y",
+            "stage": 0,
+            "value": 1.15
+          },
+          {
+            "best_delta": 0.032076023391812925,
+            "parameter": "scale_x",
+            "stage": 3,
+            "value": 0.98
+          },
+          {
+            "best_delta": 0.012124756335282427,
+            "parameter": "scale_y",
+            "stage": 3,
+            "value": 1.17
+          }
+        ]
+      },
+      "label": "M",
+      "language_assertions": {
+        "counts": [],
+        "no_text": false
+      },
+      "mode": "auto",
+      "optimized_geometry_ir": [
+        {
+          "bbox": [
+            0.1864,
+            0.19580000000000003,
+            0.6272,
+            0.6552
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        }
+      ],
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "EDIT_05"
+    },
+    "reference_access": {
+      "blocked_svg_reads": []
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 32.35747746126465,
+    "search_control": {
+      "candidate_evaluations": 0,
+      "elapsed_seconds": 2.89,
+      "external_max_seconds": null,
+      "isolated": true,
+      "limit_seconds": 5.0,
+      "max_seconds": 5.0,
+      "stop_reason": "stagnation",
+      "time_extensions": 0
+    },
+    "search_satisfactory": false,
+    "spatial_quality_score": 9031.89375923851,
+    "std_delta2": 7394.79443359375,
+    "tile_std_delta2": 4473.874371158114,
+    "variant": "EDIT_05",
+    "w": 190
+  }
+}

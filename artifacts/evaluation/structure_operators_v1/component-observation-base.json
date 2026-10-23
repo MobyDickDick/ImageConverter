@@ -1,0 +1,58 @@
+{
+  "mode": "base",
+  "repetitions": 200,
+  "failed": 3,
+  "failures": [
+    {
+      "repeat": 9,
+      "on_parameters": [
+        1.0,
+        1.0,
+        0.75,
+        0.75
+      ],
+      "off_parameters": [
+        1.0,
+        1.0,
+        2.0,
+        0.0
+      ],
+      "on_evaluations": 64,
+      "off_evaluations": 32
+    },
+    {
+      "repeat": 123,
+      "on_parameters": [
+        1.0,
+        1.0,
+        2.0,
+        0.0
+      ],
+      "off_parameters": [
+        1.0,
+        1.0,
+        0.75,
+        0.75
+      ],
+      "on_evaluations": 32,
+      "off_evaluations": 64
+    },
+    {
+      "repeat": 168,
+      "on_parameters": [
+        1.0,
+        1.0,
+        2.0,
+        0.0
+      ],
+      "off_parameters": [
+        1.0,
+        1.0,
+        0.75,
+        0.75
+      ],
+      "on_evaluations": 32,
+      "off_evaluations": 64
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 # Dokumentationsindex
 
+- [Native Add/Remove/Replace-Strukturoperatoren und negative Evidenz (2026-10-23)](next_arbeitspaket_2026-10-23_structure_operators.md)
 - [Schwächenprüfung, neu priorisierte Arbeitspakete und begonnene strukturelle Exploration (2026-10-23)](weakness_review_2026-10-23.md)
 
 - [Reale Szenenübertragung: zwei eingefrorene negative Gegenproben und fehlende Komposition (2026-10-22)](next_arbeitspaket_2026-10-22_real_scene_transfer.md)
