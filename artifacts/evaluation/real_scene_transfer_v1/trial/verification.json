@@ -1,0 +1,36 @@
+{
+  "cases": [
+    {
+      "case_id": "real_00",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.203,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "real_01",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 1.453,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    }
+  ],
+  "completed": 2,
+  "accepted": 0
+}

@@ -1,0 +1,15 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\residual_scene_v1\before\residual_00\conversion\reports\.image-worker-rnrdqkpv\reports_out_dir\residual_00_worker.log
+[INFO] Konvertiere residual_00.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite residual_00.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 2 gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "residual_00", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 2.249, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "supported_models_exhausted"}
+[WARN] residual_00.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.698740, localized_error_fraction=0.702924).
+[INFO] Konvertiert residual_00.png | Parameter: mode=auto, label=M, variant_name=RESIDUAL_00 | Qualität: Optimierungsfehler/Pixel=0.000557, Mean-Delta²=2883.151367, RGB-RMSE/Kanal=31.000814, Raumscore=8212.978167, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.7s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\residual_scene_v1\before\residual_00\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\residual_scene_v1\before\residual_00\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\residual_scene_v1\before\residual_00\conversion
+[WARN] Mindestens eine Datei konnte nicht erfolgreich konvertiert werden (siehe batch_failure_summary.csv).

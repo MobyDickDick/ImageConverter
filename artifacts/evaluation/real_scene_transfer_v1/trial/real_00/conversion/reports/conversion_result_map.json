@@ -1,0 +1,402 @@
+{
+  "real_00.png": {
+    "actual_iterations": 64,
+    "base": "REAL_00",
+    "best_error": 31.744292237442924,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+    "diff_error_distribution_status": "structured",
+    "elapsed_seconds": 2.202999999979511,
+    "error_per_pixel": 0.00595689477152241,
+    "error_pixel_cluster_count": 38.0,
+    "error_pixel_cluster_excess": 0.5218022463957142,
+    "error_pixel_count": 1333.0,
+    "filename": "real_00.png",
+    "h": 73,
+    "largest_error_pixel_cluster_fraction": 0.7719429857464366,
+    "localized_error_fraction": 0.6864822716671947,
+    "mean_delta2": 5853.328125,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.203,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      },
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "constraint": "inside_rect_border",
+            "id": "description_element_1",
+            "kind": "HorizontalGradient",
+            "source": "description",
+            "stops": [
+              "#8f8f8f",
+              "#dedede",
+              "#8f8f8f"
+            ]
+          },
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "fill": "none",
+            "id": "description_element_2",
+            "kind": "RectBorder",
+            "source": "description",
+            "stroke": "#666666",
+            "stroke_width": 0.035
+          },
+          {
+            "clip_to": "main_rect",
+            "confidence": 0.75,
+            "direction": "tl_br",
+            "id": "description_element_3",
+            "kind": "DiagonalBand",
+            "rect_ref": "main_rect",
+            "source": "description",
+            "stroke": "#707070",
+            "stroke_width": 0.045
+          },
+          {
+            "clip_to": "main_rect",
+            "confidence": 0.75,
+            "direction": "tr_bl",
+            "id": "description_element_4",
+            "kind": "DiagonalBand",
+            "rect_ref": "main_rect",
+            "source": "description",
+            "stroke": "#707070",
+            "stroke_width": 0.045
+          }
+        ],
+        "relations": [
+          {
+            "confidence": 0.75,
+            "object": "main_rect",
+            "source": "description",
+            "subject": "description_element_3",
+            "type": "rect"
+          },
+          {
+            "confidence": 0.75,
+            "object": "main_rect",
+            "source": "description",
+            "subject": "description_element_4",
+            "type": "rect"
+          }
+        ],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.75,
+          "reasons": [],
+          "status": "ok"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": true,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "real_00",
+          "source": "base_name",
+          "text": "Ein gefüllter Kreis und zwei gefüllte Rechtecke mit gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich mittig als aufrechtes Kreuz. Die Formen haben helle Konturen. Keine Beschriftung."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [],
+      "geometry_ir": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "fill": "none",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        },
+        {
+          "clip_to": "main_rect",
+          "direction": "tl_br",
+          "id": "diagonal_1_tl_br",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "stroke": "#707070",
+          "stroke_width": 0.045
+        },
+        {
+          "clip_to": "main_rect",
+          "direction": "tr_bl",
+          "id": "diagonal_2_tr_bl",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "stroke": "#707070",
+          "stroke_width": 0.045
+        }
+      ],
+      "geometry_ir_optimizer_result": {
+        "element_refinement": {
+          "final_error": 41.29398886595359,
+          "initial_error": 41.29398886595359,
+          "mode": "right_rotated_valve_geometry",
+          "steps": []
+        },
+        "final_error": 40.247013198223556,
+        "generic_element_refinement": {
+          "final_error": 40.247013198223556,
+          "initial_error": 41.29398886595359,
+          "mode": "elementwise_geometry_ir",
+          "steps": [
+            {
+              "accepted": true,
+              "best_delta": 0.5259273159442017,
+              "element": "background_gradient",
+              "error_after": 40.768061550009385,
+              "error_before": 41.29398886595359,
+              "step_index": 0
+            },
+            {
+              "accepted": true,
+              "best_delta": 0.4987802589604087,
+              "element": "main_rect",
+              "error_after": 40.269281291048976,
+              "error_before": 40.768061550009385,
+              "step_index": 1
+            },
+            {
+              "accepted": true,
+              "best_delta": 0.012134859573400547,
+              "element": "diagonal_1_tl_br",
+              "error_after": 40.257146431475576,
+              "error_before": 40.269281291048976,
+              "step_index": 2
+            },
+            {
+              "accepted": true,
+              "best_delta": 0.01013323325202009,
+              "element": "diagonal_2_tr_bl",
+              "error_after": 40.247013198223556,
+              "error_before": 40.257146431475576,
+              "step_index": 3
+            }
+          ]
+        },
+        "initial_error": 45.99799837367861,
+        "mode": "geometry_ir_raster_registration",
+        "parameters": {
+          "scale_x": 0.9999999999999999,
+          "scale_y": 1.3399999999999999,
+          "stroke_scale": 0.25,
+          "translate_x": 0.0,
+          "translate_y": 0.0
+        },
+        "steps": [
+          {
+            "best_delta": 0.8796522174266599,
+            "parameter": "translate_x",
+            "stage": 0,
+            "value": 0.08
+          },
+          {
+            "best_delta": 0.9135547632451377,
+            "parameter": "translate_y",
+            "stage": 0,
+            "value": 0.08
+          },
+          {
+            "best_delta": 0.34884593732407154,
+            "parameter": "stroke_scale",
+            "stage": 0,
+            "value": 0.75
+          },
+          {
+            "best_delta": 0.676674798273595,
+            "parameter": "translate_x",
+            "stage": 0,
+            "value": 0.0
+          },
+          {
+            "best_delta": 0.6049290048164195,
+            "parameter": "stroke_scale",
+            "stage": 0,
+            "value": 0.5
+          },
+          {
+            "best_delta": 0.09051104022017853,
+            "parameter": "stroke_scale",
+            "stage": 0,
+            "value": 0.25
+          },
+          {
+            "best_delta": 0.013698630136985912,
+            "parameter": "scale_x",
+            "stage": 0,
+            "value": 1.15
+          },
+          {
+            "best_delta": 0.06630387189591147,
+            "parameter": "scale_y",
+            "stage": 0,
+            "value": 1.15
+          },
+          {
+            "best_delta": 0.1862137987114565,
+            "parameter": "translate_y",
+            "stage": 0,
+            "value": 0.0
+          },
+          {
+            "best_delta": 0.36298242321886676,
+            "parameter": "scale_y",
+            "stage": 0,
+            "value": 1.2999999999999998
+          },
+          {
+            "best_delta": 0.4688184149621506,
+            "parameter": "scale_x",
+            "stage": 0,
+            "value": 0.9999999999999999
+          },
+          {
+            "best_delta": 0.09182460749359223,
+            "parameter": "scale_y",
+            "stage": 2,
+            "value": 1.3399999999999999
+          }
+        ]
+      },
+      "label": "M",
+      "language_assertions": {
+        "counts": [],
+        "no_text": false
+      },
+      "mode": "auto",
+      "optimized_geometry_ir": [
+        {
+          "bbox": [
+            0.20000000000000004,
+            0.1516,
+            0.6399999999999999,
+            0.7504
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.18000000000000005,
+            0.1516,
+            0.6399999999999999,
+            0.7504
+          ],
+          "fill": "none",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#b8b8b8",
+          "stroke_width": 0.00875
+        },
+        {
+          "clip_to": "main_rect",
+          "direction": "tl_br",
+          "id": "diagonal_1_tl_br",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "stroke": "#707070",
+          "stroke_width": 0.0095625
+        },
+        {
+          "clip_to": "main_rect",
+          "direction": "tr_bl",
+          "id": "diagonal_2_tr_bl",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "stroke": "#707070",
+          "stroke_width": 0.0095625
+        }
+      ],
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "REAL_00"
+    },
+    "reference_access": {
+      "blocked_svg_reads": []
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 44.171363743946145,
+    "search_control": {
+      "candidate_evaluations": 0,
+      "elapsed_seconds": 3.719,
+      "external_max_seconds": null,
+      "isolated": true,
+      "limit_seconds": 5.0,
+      "max_seconds": 5.0,
+      "stop_reason": "stagnation",
+      "time_extensions": 0
+    },
+    "search_satisfactory": false,
+    "spatial_quality_score": 15917.564877313722,
+    "std_delta2": 9769.1884765625,
+    "tile_std_delta2": 7001.228882206863,
+    "variant": "REAL_00",
+    "w": 73
+  }
+}

@@ -1,0 +1,9 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\residual_scene_v1\before\residual_01\conversion\reports\.image-worker-ozrq7x_x\reports_out_dir\residual_01_worker.log
+[INFO] Konvertiere residual_01.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite residual_01.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 3 gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "residual_01", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 4.562, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "stagnation"}
+[INFO] Konvertiert residual_01.png | Parameter: mode=auto, label=M, variant_name=RESIDUAL_01 | Qualität: Optimierungsfehler/Pixel=0.000604, Mean-Delta²=3034.151123, RGB-RMSE/Kanal=31.802259, Raumscore=6834.511599, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.9s

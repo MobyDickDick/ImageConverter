@@ -2,7 +2,24 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktueller Fokus (2026-10-22)
+## Aktueller Fokus (2026-10-23)
+
+Die [neue Schwächenprüfung](docs/weakness_review_2026-10-23.md) priorisiert
+SEARCH-STRUCTURE-01 vor weiteren Einzelfamilien: nach gescheiterten Zerlegungen
+andere Strukturvorschläge prüfen. Der erste produktive Teil erweitert den
+vorhandenen Verlaufsszenenweg um alternative Restbildzerlegungen und generische
+getrennte Rechteckgruppen. Gekoppelte Plan-B-Aufgabe ist ein synthetischer
+Antialiasing-Repro; neue reale Familien sind damit nicht abgenommen.
+Danach folgen Komposition, vollständige Semantikabnahme und reale Übertragung.
+Die offenen Aufgaben und historischen Nachweise bleiben erhalten.
+
+## Vorheriger Fokus (2026-10-22)
+
+Die [eingefrorene Folgeprüfung](docs/next_arbeitspaket_2026-10-22_real_scene_transfer.md)
+auf GE0018/GE0307 besteht mit unverändertem Algorithmus 0/2; beide Fälle gelten
+künftig als bekannt. GENERAL-SCENE-REAL-05 bleibt offen. Nächster Schritt ist
+GENERAL-SCENE-COMPOSITION-09 für die gemeinsame Komposition vorhandener Primitive;
+andere reale Prüffamilien vor Entwicklung sperren. Keine Katalogzahlerhöhung.
 
 `BENCHMARK-ANYTIME-01` ist inzwischen abgeschlossen. Der aktuelle Qualitätsfokus
 bleibt `GENERAL-SCENE-REAL-05`: Der gemischte Szenenschritt rekonstruiert nun die

@@ -1,10 +1,22 @@
 # Roadmap: Konvertierungsqualität, danach Produkt (2026-10-09)
 
+Aktuelle Gewichtung vom 23.10.2026: [Struktursuche und Komposition zuerst](weakness_review_2026-10-23.md).
+SEARCH-STRUCTURE-01 ist mit alternativen Restbildzerlegungen im bestehenden
+Verlaufsszenenweg begonnen. Danach vollständige Semantikabnahme und unabhängige
+reale Übertragung; neue Netze und größere Produktbereinigung folgen später.
+Der begrenzte synthetische Entwicklungsschritt schließt GENERAL-SCENE-REAL-05
+und GENERAL-SCENE-COMPOSITION-09 nicht ab.
+
 Die vom Nutzer vorgegebene Reihenfolge gilt für die nächsten Arbeitspakete.
 Die konkrete nächste Aufgabe und ihr Abschluss stehen in `open_tasks.md`
 und `../PLAN_B_KANDIDATEN.md`.
 
-Aktueller Fokus am 22.10.2026: `GENERAL-SCENE-REAL-05` bleibt offen.
+Vorheriger Fokus am 22.10.2026: `GENERAL-SCENE-REAL-05` bleibt offen.
+Die [eingefrorene Folgeprüfung](next_arbeitspaket_2026-10-22_real_scene_transfer.md)
+ergibt 0/2 für Kreuz- und Vierfelderkompositionen bei unverändertem Algorithmus.
+Als Nächstes folgt GENERAL-SCENE-COMPOSITION-09: vorhandene Rundungs-/Überdeckungs-
+und Kinderanzahlfähigkeiten gemeinsam anschließen und vor Entwicklung andere
+reale Prüffamilien sperren. Die zwei jetzt offengelegten Fälle sind Entwicklung.
 Der [gemischte Szenenschritt](next_arbeitspaket_2026-10-22_mixed_gradient_scene.md)
 verbessert zwei nach negativem Erstversuch bekannte Originale; die unabhängige
 Übertragung auf zwei weitere reale Familien fehlt weiterhin. Der

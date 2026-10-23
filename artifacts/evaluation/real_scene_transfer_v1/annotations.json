@@ -1,0 +1,109 @@
+{
+  "schema": "real_scene_transfer_families_v1",
+  "annotation_method": "Implementing agent manually marked original JPEG pixels on nearest-neighbour grids before any trial. No runtime proposals or SVGs used. No independent human annotation audit.",
+  "family_policy": "Freeze two previously unannotated real compositions before running the unchanged converter. All descendants remain together. GE0019 and DLG0071 excluded as orientation/panel variants of known families. GE0018 is a connected overlapping cross, not a single or disjoint rectangle; GE0307 contains four separated outlined panels, not the three contiguous stripe panels of known flags. No runtime or description tuning after the first trial. Historical catalogue exposure limits independence claims.",
+  "cases": [
+    {
+      "file": "GE0018.jpg",
+      "family": "overlapping_rounded_cross_in_gradient_circle",
+      "split": "holdout",
+      "source_sha256": "f6072dfdfe018e5b905be884139e23247c83acdf962bf65c6ab57def9aa7a573",
+      "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke mit gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich mittig als aufrechtes Kreuz. Die Formen haben helle Konturen. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            3,
+            3,
+            67,
+            67
+          ],
+          "parent": null,
+          "gradient_axis": 1
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            29,
+            16,
+            13,
+            43
+          ],
+          "parent": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            14,
+            30,
+            44,
+            13
+          ],
+          "parent": 0
+        }
+      ],
+      "previous_exposure": "Present in the historical catalogue; no targeted runtime development or annotated family experiment found by repository search. This is not proof of never having appeared in any historical batch."
+    },
+    {
+      "file": "GE0307.jpg",
+      "family": "four_separated_flag_panels_in_gradient_circle",
+      "split": "holdout",
+      "source_sha256": "b0bde06f25eff1b4aed7594582f44b93204fcc580f0bc624656f0bc7be252660",
+      "description": "Ein gefüllter Kreis und vier gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises, getrennt in zwei Reihen und zwei Spalten. Zwischen den vier roten Rechtecken bleibt ein blaues Kreuz sichtbar. Die Formen haben helle Konturen. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            2,
+            2,
+            71,
+            71
+          ],
+          "parent": null,
+          "gradient_axis": 1
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            14,
+            19,
+            14,
+            15
+          ],
+          "parent": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            33,
+            19,
+            28,
+            15
+          ],
+          "parent": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            14,
+            38,
+            14,
+            18
+          ],
+          "parent": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            33,
+            38,
+            28,
+            18
+          ],
+          "parent": 0
+        }
+      ],
+      "previous_exposure": "Present in the historical catalogue; no targeted runtime development or annotated family experiment found by repository search. This is not proof of never having appeared in any historical batch."
+    }
+  ]
+}

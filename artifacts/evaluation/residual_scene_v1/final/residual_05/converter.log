@@ -1,0 +1,16 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\residual_scene_v1\final\residual_05\conversion\reports\.image-worker-fmvbaq1g\reports_out_dir\residual_05_worker.log
+[INFO] Konvertiere residual_05.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite residual_05.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 6 gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_finished", "evaluations": 1, "best_error": 0.28175438596491226}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 25, "outcome": "accepted"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "candidate_satisfactory", "elapsed_seconds": 0.97, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 1}
+[Search] {"source": "residual_05", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 0.985, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 1, "stop_reason": "satisfactory"}
+[INFO] Konvertiert residual_05.png | Parameter: mode=auto, label=M, variant_name=RESIDUAL_05 | Qualität: Optimierungsfehler/Pixel=0.000008, Mean-Delta²=10.893041, RGB-RMSE/Kanal=1.905522, Raumscore=33.756297, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\residual_scene_v1\final\residual_05\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\residual_scene_v1\final\residual_05\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\residual_scene_v1\final\residual_05\conversion

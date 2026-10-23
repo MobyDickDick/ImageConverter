@@ -1,0 +1,18 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\residual_scene_v1\final\residual_06\conversion\reports\.image-worker-6qd6kslf\reports_out_dir\residual_06_worker.log
+[INFO] Konvertiere residual_06.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite residual_06.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 2 gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 25, "outcome": "no_complete_scene"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registering", "evaluations": 64, "current_error": 0.232953216374269}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registering", "evaluations": 128, "current_error": 0.1442690058479532}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registering", "evaluations": 192, "current_error": 0.04269005847953217}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_finished", "evaluations": 200, "best_error": 0.04204678362573099}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 16, "outcome": "quality_or_geometry_rejected"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 36, "outcome": "no_complete_scene"}
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\residual_scene_v1\final\residual_06\conversion
+[WARN] Mindestens eine Datei konnte nicht erfolgreich konvertiert werden (siehe batch_failure_summary.csv).

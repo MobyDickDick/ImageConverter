@@ -1,0 +1,69 @@
+{
+  "schema": "weakness_review_checks_v1",
+  "targeted_scene_regressions": {
+    "passed": 270,
+    "failed": 0
+  },
+  "final_residual_and_evidence_tests": {
+    "passed": 47,
+    "failed": 0
+  },
+  "remaining_deadline_tests": {
+    "passed": 2,
+    "failed": 0
+  },
+  "standard_suite_attempt": {
+    "passed": 1688,
+    "skipped": 29,
+    "failed": 1,
+    "failed_test": "tests/test_conversion_deadline.py::test_expired_containment_never_releases_worker",
+    "failure": "observation_gap_seconds 1.0939999999245629 < 1.1; independently reproduced; functional no-release assertions pass"
+  },
+  "syntax_compileall": "passed",
+  "cli_help": "passed",
+  "runtime_image_id_scan": "0 occurrences",
+  "portable_cli_evidence": {
+    "before_accepted": 0,
+    "before_total": 8,
+    "final_accepted": 7,
+    "final_total": 9,
+    "paired_final_accepted": 6,
+    "paired_total": 8
+  },
+  "unchanged_deadline_sources": {
+    "src/iCCModules/imageCompositeConverterDeadline.py": "420fa79833e488b86d6f453c33c8581a38eb631171ea918ddf12fd8799b4b2b1",
+    "tests/test_conversion_deadline.py": "45ab021d5507099976ede9f685c1c4e4fc099b049c2deaa7da1ef13b0558808b"
+  },
+  "archive_integrity": {
+    "pairs": 379,
+    "unchanged_file_hashes": 758
+  },
+  "standard_suite_continuation": "Interrupted without a complete result; not a full-suite pass.",
+  "archive_recheck": {
+    "passed": 378,
+    "total": 379,
+    "failures": [
+      {
+        "execution_mode": "semantic-only",
+        "passed": false,
+        "reason": "missing_svg",
+        "variant": "AC0910_S"
+      }
+    ],
+    "repeat_passed": 1,
+    "repeat_total": 1
+  },
+  "archive_failure_deadline": {
+    "elapsed_seconds": 3435.594,
+    "limit_seconds": 60.0,
+    "max_seconds": 120.0,
+    "time_extensions": 0,
+    "candidate_evaluations": 0,
+    "stop_reason": "time_limit",
+    "isolated": true,
+    "timing_trace": "AC0910_S_timing.jsonl",
+    "external_max_seconds": null,
+    "recovered_checkpoint": false,
+    "retained_output": false
+  }
+}

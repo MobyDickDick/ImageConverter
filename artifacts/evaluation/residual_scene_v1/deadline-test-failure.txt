@@ -1,0 +1,29 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_______________ test_expired_containment_never_releases_worker ________________
+
+spec = {'badge_rounds': 2, 'csv_path': 'unused', 'debug_ac0811_dir': None, 'debug_element_diff_dir': None, ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002CD11A72DD0>
+
+    def test_expired_containment_never_releases_worker(spec, monkeypatch):
+        from src.iCCModules import imageCompositeConverterDeadline as supervision
+        original = supervision.ProcessTree
+
+        class SlowContainment(original):
+            def __init__(self, process):
+                super().__init__(process)
+                time.sleep(1.1)
+
+        monkeypatch.setattr(supervision, 'ProcessTree', SlowContainment)
+        deadline = ImageDeadline(SearchPolicy(seconds=1., max_seconds=1.))
+        assert run(deadline, spec, completed_worker)[0] == (None, True)
+        path = Path(spec['reports_out_dir'])/'sample_timing.jsonl'
+        records = [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines()]
+        assert 'worker_released' not in [record['phase'] for record in records]
+>       assert next(record for record in records if record['phase'] == 'containment_installed')['observation_gap_seconds'] >= 1.1
+E       assert 1.0939999999245629 >= 1.1
+
+tests\test_conversion_deadline.py:263: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_conversion_deadline.py::test_expired_containment_never_releases_worker
+1 failed in 1.86s

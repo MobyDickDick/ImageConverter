@@ -1,0 +1,17 @@
+<svg width="75" height="75" viewBox="0 0 75 75" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8f8f8f"/>
+      <stop offset="50%" stop-color="#dedede"/>
+      <stop offset="100%" stop-color="#8f8f8f"/>
+    </linearGradient>
+  </defs>
+  <ellipse id="perception_circle_background" cx="37" cy="38" rx="35" ry="35" fill="#A49CB9" stroke="#CBE1EF" stroke-width="2.8"/>
+  <rect id="background_gradient" x="13.5" y="18" width="48" height="42" fill="url(#geometry-ir-horizontal-gradient)" stroke="none"/>
+  <rect id="main_rect" x="13.5" y="18" width="48" height="42" fill="none" stroke="#666666" stroke-width="2.625"/>
+  <path id="diagonal_1_tl_br" d="M 15.188 19.688 L 59.812 58.313" stroke="#707070" stroke-width="3.375" fill="none" stroke-linecap="butt"/>
+  <path id="diagonal_2_tr_bl" d="M 59.812 19.688 L 15.188 58.313" stroke="#707070" stroke-width="3.375" fill="none" stroke-linecap="butt"/>
+  <path id="perception_horizontal_rule" d="M 29 4.5 L 44 4.5" stroke="#BEDEEF" stroke-width="1" fill="none" stroke-linecap="square"/>
+  <path id="perception_line" d="M 32.38 22.48 L 32.38 57.76" stroke="#4f4f4f" stroke-width="5" fill="none" stroke-linejoin="round" stroke-linecap="butt"/>
+  <text id="perception_text_glyph" x="66.5" y="53.45" fill="#BCD5E9" font-family="Arial, Helvetica, sans-serif" font-size="17.1" font-weight="600" text-anchor="middle" dominant-baseline="middle">F</text>
+</svg>
