@@ -1,0 +1,181 @@
+{
+  "base_commit": "6bd8e2406",
+  "branch": "codex/search-structure-overlap-2026-10-23",
+  "cli": {
+    "before": {
+      "accepted": 0,
+      "total": 12,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_matches_final_runtime": false
+    },
+    "after": {
+      "accepted": 12,
+      "total": 12,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "additional_cli": {
+      "accepted": 12,
+      "total": 12,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "plan_b_cli": {
+      "accepted": 17,
+      "total": 17,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "existing_outlined_cli": {
+      "accepted": 12,
+      "total": 12,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "existing_rounded_cli": {
+      "accepted": 12,
+      "total": 12,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "existing_split_cli": {
+      "accepted": 20,
+      "total": 20,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "existing_residual_cli": {
+      "accepted": 7,
+      "total": 9,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_matches_final_runtime": true
+    }
+  },
+  "targeted_tests": {
+    "status": "passed",
+    "seconds": 3.149,
+    "tests": 36,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 36
+  },
+  "regression_tests": {
+    "status": "passed",
+    "seconds": 45.268,
+    "tests": 183,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 183
+  },
+  "full_suite": {
+    "status": "passed",
+    "seconds": 5520.39,
+    "tests": 4094,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 30,
+    "passed": 4064
+  },
+  "syntax": "passed",
+  "cli_help": "passed",
+  "runtime_image_ids": 0,
+  "whitespace": "passed_with_cr_at_eol",
+  "saved_archive": {
+    "kind": "stored_archive_hash_check_not_reconversion",
+    "total": 379,
+    "hashes_checked": 758,
+    "passed": 379
+  },
+  "regression_comparison": [
+    {
+      "cohort": "existing_outlined_cli",
+      "accepted": 12,
+      "total": 12,
+      "successful_outputs_byte_identical": 12
+    },
+    {
+      "cohort": "existing_rounded_cli",
+      "accepted": 12,
+      "total": 12,
+      "successful_outputs_byte_identical": 12
+    },
+    {
+      "cohort": "existing_split_cli",
+      "accepted": 20,
+      "total": 20,
+      "successful_outputs_byte_identical": 20
+    },
+    {
+      "cohort": "existing_residual_cli",
+      "accepted": 7,
+      "total": 9,
+      "successful_outputs_byte_identical": 7
+    }
+  ],
+  "package_verification": {
+    "kind": "independent_replay_from_git_eligible_files",
+    "files_copied": 1162,
+    "results": {
+      "before": {
+        "accepted": 0,
+        "total": 12
+      },
+      "after": {
+        "accepted": 12,
+        "total": 12
+      },
+      "additional_cli": {
+        "accepted": 12,
+        "total": 12
+      },
+      "plan_b_cli": {
+        "accepted": 17,
+        "total": 17
+      },
+      "existing_outlined_cli": {
+        "accepted": 12,
+        "total": 12
+      },
+      "existing_rounded_cli": {
+        "accepted": 12,
+        "total": 12
+      },
+      "existing_split_cli": {
+        "accepted": 20,
+        "total": 20
+      },
+      "existing_residual_cli": {
+        "accepted": 7,
+        "total": 9
+      }
+    }
+  },
+  "ci_seed_smoke": {
+    "seed": 391827,
+    "accepted": 12,
+    "total": 12
+  },
+  "execution_observation": {
+    "requested_wait_seconds": 60,
+    "observed_wait_seconds": 2996.9858,
+    "note": "Local execution interruption during the full suite; wall duration is not active test CPU time."
+  },
+  "collection_note": "The full suite collected 4094 cases. Five negative controls added after collection passed in the final 36-test run and the 183-test regression run.",
+  "wrong_order_audit": {
+    "kind": "independent_damage_control_not_a_conversion",
+    "total": 12,
+    "wrong_orders_passing_old_production_region_gates": 7,
+    "wrong_orders_rejected_by_native_order_oracle": 12
+  },
+  "scope": "synthetic_development_only_no_new_real_family_acceptance"
+}

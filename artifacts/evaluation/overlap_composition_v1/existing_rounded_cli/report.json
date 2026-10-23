@@ -1,0 +1,2141 @@
+{
+  "evidence_kind": "real_cli",
+  "budget_seconds": 5,
+  "seed": 17,
+  "commit": "6bd8e240698919ee6e293d3191b4afc42d46272a",
+  "source_sha256": {
+    "src\\imageCompositeConverter.py": "16a920f099279fe03703d95f3df2d5a0eb929b36a7532e3a4a89d5b3e12b894a",
+    "src\\imageCompositeConverterThresholding.py": "7fe1c180adbd61369639a18f70e202ecfbd5cbbd656658f371254e40b401f4ae",
+    "src\\overviewTiles.py": "ec2d53a3f9d29126c17ed4af34c0753da57dfc09314f1776216075de0b0353ad",
+    "src\\successfulConversions.py": "f241c6ff9d98b6fd04d6a38a3a5a275ed005ddd327b6f5a1e9ff81c275be6052",
+    "src\\weak_family_pipeline.py": "61085fc1736a844bf267c3456641c4b00b4e85f8f2d73d48768923c6eae5c6d2",
+    "src\\iCCModules\\imageCompositeConverterAc08Gate.py": "09819b8427bbe332b9ca6d716d7794fee4a7eb0df32a1a7f49ad2b6402f1e133",
+    "src\\iCCModules\\imageCompositeConverterAc08Reporting.py": "fd7e81484237072e97650d525e57a5f3a4157a0861150be875c375352867fb29",
+    "src\\iCCModules\\imageCompositeConverterAdaptiveSearch.py": "6675a8f2eb05be7622886d59b3e456202d443d2c80287c61512079d657912f7f",
+    "src\\iCCModules\\imageCompositeConverterAlarmBell.py": "c5e8ffeaa7abbd3561473f0fffd4ba04b7fa7147ec0bbb8c3713677c3325df17",
+    "src\\iCCModules\\imageCompositeConverterArcShaft.py": "4bad809c89efe30f736f97f3470ea596f9cb2291a0de8b07fad8ad4ef74f3804",
+    "src\\iCCModules\\imageCompositeConverterAudit.py": "4bbc1c2f6ab82961b4064092049b3984bff3ff195363a864a3ca75c813a5deca",
+    "src\\iCCModules\\imageCompositeConverterBatchReporting.py": "af0f5722b715f4046d3edfd5782d5d98480a3b405010b045628031db19f6f8b1",
+    "src\\iCCModules\\imageCompositeConverterBatchRunState.py": "c85d13b5a572360af0d1e54819d8fdfd59313874eccda1db29e3c8a5de7b8e97",
+    "src\\iCCModules\\imageCompositeConverterBestlist.py": "2d3b4cdbb0f1dd00be794c01fa99dded736bd57d9ca2e54732e7393ea810cb9e",
+    "src\\iCCModules\\imageCompositeConverterChainTelemetry.py": "ef923d375a5817118b47e3bc281615e6a09dc536cbee27b4a51cda9f8f11c12d",
+    "src\\iCCModules\\imageCompositeConverterCheckboxCheckmark.py": "6dba3e57aca26f5f364b1813fcce874512f3c735ef430d073dbd8639272df414",
+    "src\\iCCModules\\imageCompositeConverterCheckmark.py": "1e48db04d77efdea5bd9b28530972e5fcf924cfe76feea7349b02ec54cd644b6",
+    "src\\iCCModules\\imageCompositeConverterChevronPanel.py": "0a333ad0a9b6aacea34bf12ee859967f66e811cdcc3683c3b34ce64019a1a6c9",
+    "src\\iCCModules\\imageCompositeConverterCircleLinework.py": "403bb55b27f8a3e6d0ac1ac82162665999341eea74e8756699b32b761fd1dc5c",
+    "src\\iCCModules\\imageCompositeConverterCli.py": "1becb0f5d493ba77287aaaa720adc0499697045397c8e6eb6550df80cecd1534",
+    "src\\iCCModules\\imageCompositeConverterColorUtils.py": "ff69f8250d04c07f97cfa8c95666f305ec891d5e5c32f70a3d10f5df42a001fd",
+    "src\\iCCModules\\imageCompositeConverterComponents.py": "be20ca1fb653d79f963c2880d81f47621fab22942757060993ea5aa78196ab25",
+    "src\\iCCModules\\imageCompositeConverterCompositeSvg.py": "3c705b86489245b999db94f6bad3b5de2c13883af1573590e95335193a31e166",
+    "src\\iCCModules\\imageCompositeConverterConversionComposite.py": "d61cee446cf11532265691ac30ed0ad5b6a2dcdb6d73826ea2ce5d51cafaa665",
+    "src\\iCCModules\\imageCompositeConverterConversionExecution.py": "58d16690ae9b844a01bc0d16dde8c852b7b2b732cf853efd4f15f1ddf5167942",
+    "src\\iCCModules\\imageCompositeConverterConversionFinalization.py": "cce3b7c31c718a4c24f636204404968785ade253a6737fe3db0fd70a3b006be6",
+    "src\\iCCModules\\imageCompositeConverterConversionInitialPass.py": "1a8ec4dca7178f0871211b64c977f0f19c3268b4422408804e8574b1dc68115b",
+    "src\\iCCModules\\imageCompositeConverterConversionInputs.py": "27cd79f365648328f4db4adf1b2db8ae9fc6a3c23a9c291fb214e1e364886630",
+    "src\\iCCModules\\imageCompositeConverterConversionQualityPass.py": "b05dd327fcadf07a8838c2b453876cb7237cc0c061e7ec33f5ebdfaef8e0b54c",
+    "src\\iCCModules\\imageCompositeConverterConversionReporting.py": "cf8e645153705626a442136f42c66be5f5c6030c00fca1612be6b89066d7f801",
+    "src\\iCCModules\\imageCompositeConverterConversionRows.py": "c42a57030e966584a9870bf85b63424c61fb38a7dd8fb20e212d3ba62415aeec",
+    "src\\iCCModules\\imageCompositeConverterCoreClasses.py": "1ecee60b8950bc04ce3d05daad678a76b8cc5bf541bc8b815e055aa961f558ef",
+    "src\\iCCModules\\imageCompositeConverterCrossPanelDisk.py": "ba7a04627f1c49adb392263b14619b7f197ce0026e07fc93b2b45f3f7a1d1cc1",
+    "src\\iCCModules\\imageCompositeConverterDeadline.py": "420fa79833e488b86d6f453c33c8581a38eb631171ea918ddf12fd8799b4b2b1",
+    "src\\iCCModules\\imageCompositeConverterDebugTrace.py": "e51a0ca100fb9709faeff49d365f01f66a215e368dc3ff577533a0af9e0ee244",
+    "src\\iCCModules\\imageCompositeConverterDependencies.py": "c1339144c00dabefe5b659bc4257a18ac802b03340538868407cecc5e60264fe",
+    "src\\iCCModules\\imageCompositeConverterDependencyBootstrapRuntime.py": "f7b4f1384641ea9e68b25c931d096525acecd9306767e915e7ba2f0d10cef949",
+    "src\\iCCModules\\imageCompositeConverterDescriptionLanguage.py": "06638a92cf49b311a5795319d2f433509b3f407c527649aaf758da9f37cd139e",
+    "src\\iCCModules\\imageCompositeConverterDescriptions.py": "cd9eee93b44d0343e8dafb295cccbaf13cc3c30009a5b2f9c0df39996778c1cc",
+    "src\\iCCModules\\imageCompositeConverterDiagonalCrossDisk.py": "a308ce1bd023d4a7c9ce3b97293730445bcf0a4ef8fe7fde6a555f12e182a649",
+    "src\\iCCModules\\imageCompositeConverterDiffing.py": "249a0cb8747470dbd522fd134457bd8f741a95753d56f38e0d57f4ef7ee1fb01",
+    "src\\iCCModules\\imageCompositeConverterDiskArrow.py": "3145d25369318c2c2c9b4dfc1175781d2fd6d71f8a5ceabe2fc686562d29005d",
+    "src\\iCCModules\\imageCompositeConverterDotPanel.py": "dcec6ac361819f7d176da0e03165799ad50e913583f5fe6957731b0acb5d97e0",
+    "src\\iCCModules\\imageCompositeConverterDualArrowBadge.py": "d80d34880993112d86eb2041af2bb8c1fb22cd8d5d3085cf4c3780f607463460",
+    "src\\iCCModules\\imageCompositeConverterDualArrowRuntime.py": "84a68131d95967cd3c15c6dae56764b79cd03e46815f70968096ce43a61c8c3d",
+    "src\\iCCModules\\imageCompositeConverterEarlyQualityGate.py": "23a096cec7ecce698d85d6253f221288c2e5f3ee6b7b994c937e5801fc17889d",
+    "src\\iCCModules\\imageCompositeConverterElementDecomposition.py": "758f56d645fcc60fd1436db308ac713997337537d4df7bd1e73636fe3e726102",
+    "src\\iCCModules\\imageCompositeConverterElementErrorMetrics.py": "d679cbcd7ecaa9b4f9bdb38b1c8f215fe291e7cfa0570477dbd323c243498fc3",
+    "src\\iCCModules\\imageCompositeConverterElementMasks.py": "51f298380224a3931043eb76744f84f79da453a9f5e9ed572492d553b8c65262",
+    "src\\iCCModules\\imageCompositeConverterElementValidation.py": "4f62e9c08a2f41c2b2af4a71735cf9d1d943f5c1b4daf0ccb9cd75c05efb265c",
+    "src\\iCCModules\\imageCompositeConverterFallback.py": "c9741d2b4062ce1b2c2e0385aeeedadff00fdc21848963669d20ea5a39c23df9",
+    "src\\iCCModules\\imageCompositeConverterFilledSymbols.py": "9e691db61527db67836c8167cdc3be81e9f9668e49a13e24079b57314e0e9f8b",
+    "src\\iCCModules\\imageCompositeConverterFlameDisk.py": "b8935929380b3458d0323bfc7b471104deaaddaf5cfd4c6e5982ed12c3cbf608",
+    "src\\iCCModules\\imageCompositeConverterForms.py": "ff9309dd4120aafa8bee74a661417928eaaa6c54c0527da7254a4bacd1dc135d",
+    "src\\iCCModules\\imageCompositeConverterFormsSymmetricChords.py": "9a05843e4a02ac95fe981ee56390dca455dfa8199e168653377293fee79f6596",
+    "src\\iCCModules\\imageCompositeConverterGeometryBrackets.py": "e7cde23b860a75aa711b0e16361eabee97632e51d56d542fbafba6805f8e6f61",
+    "src\\iCCModules\\imageCompositeConverterGeometryIrOptimizer.py": "c34de0e9bd669fbe0cba5aa121042802005a04135195bbbe03b2485629a25656",
+    "src\\iCCModules\\imageCompositeConverterGradientArrow.py": "0640931104c0f8be2bcb96efa87afdce65a60dc466ed20e2bafa47c4dcfbbd09",
+    "src\\iCCModules\\imageCompositeConverterGradientJunction.py": "32916b58f4b4bbb27c1b259f9f8724b7ab76be2eeae4b0b4dcf293aab95649b9",
+    "src\\iCCModules\\imageCompositeConverterGradientScene.py": "377e9bbb949ffc71a3b0348b3f831d3f1d72c8397ae89a0115ed864e369f15d5",
+    "src\\iCCModules\\imageCompositeConverterGradientStripeStrategy.py": "92994da258bad41155f4e273b8132216357c838e154c7e38c4a516507930c034",
+    "src\\iCCModules\\imageCompositeConverterHouseDisk.py": "edce0eca4c33b943401fcbae95ee6367f48205a4a312dbcf9754e202902ad4c7",
+    "src\\iCCModules\\imageCompositeConverterImageBackend.py": "ceb4b3b0301015b01e72f454e3dbecd5de5f3fd45805e61f9df3d1f55e80d7f3",
+    "src\\iCCModules\\imageCompositeConverterImageLoading.py": "3c889b22848e478ad0d470c3a9489932f5e161d120b59f1dd614cf0b016b28af",
+    "src\\iCCModules\\imageCompositeConverterIncremental.py": "06ec9f2a2dfadb6a437118680be9ab643082cc92f566bbbaee45bb11c2a42bce",
+    "src\\iCCModules\\imageCompositeConverterInteriorMark.py": "07043143474e2229484fc35f97be58e1a69f155fd19e6ac98ce0a87ea35f9fb3",
+    "src\\iCCModules\\imageCompositeConverterIterationArtifacts.py": "22b4b0d1511faf84aeabddb648424f28783e1f98695edf3fc28d28671c9c93fd",
+    "src\\iCCModules\\imageCompositeConverterIterationBindings.py": "dcb70facf3ec02be6bb594592345c08cada595b4a46b47ce3e9ce5a9e74c22ff",
+    "src\\iCCModules\\imageCompositeConverterIterationContext.py": "0b4c0ef6eb166a7f2ae0a0d2a1b4a7af0fb17205316541e6d6bf7b816f5494e3",
+    "src\\iCCModules\\imageCompositeConverterIterationDispatch.py": "7f042fb2f651ebdf8f1b602dd41320be3e6584bb339a65f31438521da3445ac3",
+    "src\\iCCModules\\imageCompositeConverterIterationExecution.py": "d6df655686a6a027f6144eeda5917641e7fe1957e5a2f0649e02de8a8b678176",
+    "src\\iCCModules\\imageCompositeConverterIterationExecutionContext.py": "129ae73d516480386869d3d3526976f727178bc7eab4f8d31fd4f93b5437a577",
+    "src\\iCCModules\\imageCompositeConverterIterationFinalization.py": "a4c290022ea4f26a00fe641f646f4bd80973446f57f849d72548c597b4406a5c",
+    "src\\iCCModules\\imageCompositeConverterIterationInitialization.py": "c7a33193cd360821f2fdf07d73a6bebb437c77564a1d4a67ac990a283e820d34",
+    "src\\iCCModules\\imageCompositeConverterIterationLog.py": "5889e5f650131da898c6c896bcceadefa43dbf132ca7362c473280061cf1e269",
+    "src\\iCCModules\\imageCompositeConverterIterationModeDependencies.py": "ddddafdb46ae03cc041d9724b853307e8f29a5b955af72c0f9115e3a94bea0d4",
+    "src\\iCCModules\\imageCompositeConverterIterationModeDependencySetup.py": "30ae0f45ed72b4cdaa94bda5334cfd2826853d0f29433c6def8e4e3edfeb521c",
+    "src\\iCCModules\\imageCompositeConverterIterationModePreparation.py": "2851e4df0258b0676a3d13e408aaec6cc5ed197cf6884e395b1961fa9fb63c12",
+    "src\\iCCModules\\imageCompositeConverterIterationModeRuntime.py": "778397958504ff370ef083f89aed7a075d515c156a378102f36fe129f69b22ba",
+    "src\\iCCModules\\imageCompositeConverterIterationModeRuntimePreparation.py": "da519c915906dfc62a44be8a14384302864b8d7660bbc453e9658570b2b962eb",
+    "src\\iCCModules\\imageCompositeConverterIterationModeSetup.py": "3be8ae0ce9db4af604dd7e0596f0309240492a3986a8964d1be7672f94445517",
+    "src\\iCCModules\\imageCompositeConverterIterationOrchestration.py": "293b07b633e470d2a5165b72d7791f1742f57ac47de70ac9d6cb6bdc4917954d",
+    "src\\iCCModules\\imageCompositeConverterIterationPipeline.py": "3aa693f761b538209b9a8909eed1c9f6bdc224d350d97c8a05164242393fe0ea",
+    "src\\iCCModules\\imageCompositeConverterIterationPreparation.py": "13a9e2ba1f2d488b925fdb1b37ea7a81bb621231536fdf81182d889c656300be",
+    "src\\iCCModules\\imageCompositeConverterIterationRunPreparation.py": "91f333f3b6fb5de0173aa47f568fc13b1e51dcf75ddb2ed5774abd58beaa8047",
+    "src\\iCCModules\\imageCompositeConverterIterationRuntime.py": "c53a37cec386a6fde18ecfa13830b67e6c77490adf5f582e1cb27842ff785a2d",
+    "src\\iCCModules\\imageCompositeConverterIterationSetup.py": "1c5f4c628c594378df34bf8fd064bae999df9e3ae48edd141971c7aa8a31f97c",
+    "src\\iCCModules\\imageCompositeConverterLabeledDisk.py": "ae93e936bbbcbcbae0bf0cb15490ab091353da5affd27d76b3c4c80689f3587c",
+    "src\\iCCModules\\imageCompositeConverterLabeledSquare.py": "97a0201e2f5826075393cd407a2cc3598833508c89f508d109d7fa89cc9b27f1",
+    "src\\iCCModules\\imageCompositeConverterLayeredScene.py": "a0f50546b29baaa06fd07f3176fba561c970747c3192a08a2b77479f2b8199a9",
+    "src\\iCCModules\\imageCompositeConverterLegacyApi.py": "4defc4a5c0d07f70bdecf8f45693b0642571b936692fdf085ab156c08d12d7d0",
+    "src\\iCCModules\\imageCompositeConverterMaskGeometry.py": "81355bf804e8a50da17898679b79fbcaea9a0a88cdde808dab1df6267c100fda",
+    "src\\iCCModules\\imageCompositeConverterMaskMetrics.py": "cd80b7f5d4f22a4a0dd0e79acb4159f5d592f8b4372f6138c52cdcef9199fea3",
+    "src\\iCCModules\\imageCompositeConverterMixedGradientScene.py": "2aa084cd23fc550fc28b48c2e820da5b36517909ba3b3a29f654d18003740527",
+    "src\\iCCModules\\imageCompositeConverterMotorValve.py": "02d73ef83269088d4d993b4cffbcb8cf8422056040d5d293d47a91ae6420b153",
+    "src\\iCCModules\\imageCompositeConverterNaming.py": "c9909706d2523e9e040421c174562eed744484086dfdd43bcb3de64280b7968c",
+    "src\\iCCModules\\imageCompositeConverterNestedPanel.py": "269567b9181867e88bbdb94cf6e7460d92b7e2e51db1869b1bd411d6c28fee8a",
+    "src\\iCCModules\\imageCompositeConverterNeuralElements.py": "a5a80d5d91122bad928b5b207664ca09dfc70d619c7b0f7996ec97ac5e9405be",
+    "src\\iCCModules\\imageCompositeConverterNonCompositeRuntime.py": "1e78df8d1783aa05cf0b7ca472d9406c3fc9a0f12b386b3de4f757f57b554296",
+    "src\\iCCModules\\imageCompositeConverterOptimizationCircleGeometry.py": "8aa0605201b063401e007f0821d95b7dcd2d4516f0e41c1ea081525476a46c05",
+    "src\\iCCModules\\imageCompositeConverterOptimizationCirclePose.py": "152017dcf431570f93887aa7484df14d74e37c74c389e0909083ff3e20e104d6",
+    "src\\iCCModules\\imageCompositeConverterOptimizationCircleRadius.py": "6ce88633f9412c2919fda78f278693dd1f8d1aea5c549a1b7822634e2417763d",
+    "src\\iCCModules\\imageCompositeConverterOptimizationCircleSearch.py": "0f7258278e5a6d7e7c0623266a1e1e4314385e73c5026434b1dd25ec0929efb5",
+    "src\\iCCModules\\imageCompositeConverterOptimizationColor.py": "440a857b0c0d88a9e339fabaaa114819f00d9b26fce0e3508115aa958c86e495",
+    "src\\iCCModules\\imageCompositeConverterOptimizationElementAlignment.py": "16913e862b790ec899d34855b4724940653ce3a00d330911bbb391ee3a17477d",
+    "src\\iCCModules\\imageCompositeConverterOptimizationElementSearch.py": "7a102230439b05738ba4d4924518d4ef43497452ce4ea8e33cd052551c36285e",
+    "src\\iCCModules\\imageCompositeConverterOptimizationFacade.py": "39fb7d9c8eb6047c9ae3d339bf390dd1c347c31eb2408be54c2e745d4193818d",
+    "src\\iCCModules\\imageCompositeConverterOptimizationGeometry.py": "a3fb88d6f1e74d58a446009415f32ffa07d4a2c4c8cc85a5c4bd4f7dbf880238",
+    "src\\iCCModules\\imageCompositeConverterOptimizationGlobalSearch.py": "4317b63bed92071297aa7b9640600cb0ed61678a5f3e05c13ad39a487205e74d",
+    "src\\iCCModules\\imageCompositeConverterOptimizationGlobalVector.py": "30281a93b128cd7c076f02efcb06316723886f44bd3926ac23b17216525d0e68",
+    "src\\iCCModules\\imageCompositeConverterOptimizationPasses.py": "4bf8a10c5e2215801f08c150db05e9e5efb50f7c3d9ab0899e371aac097d5d65",
+    "src\\iCCModules\\imageCompositeConverterOptimizationPassReporting.py": "4cb75102d264c6bf8a1c9bbe13fee085cb9c26d07b7f88dcc330e2bbcd691616",
+    "src\\iCCModules\\imageCompositeConverterOptimizationQuantization.py": "f1c9b34f03182258b76fc2f61b104690e6cfc93af128d9043141025df575fe04",
+    "src\\iCCModules\\imageCompositeConverterOptimizationScalars.py": "2f717c625f4704fb8d0201c9360ca91608cee9bec2bfacd4fc76cf463b5928ce",
+    "src\\iCCModules\\imageCompositeConverterOptimizationTool.py": "05527d3d45ad4ccda99a421e83a42745a7ebffd2d3a4c1ec36cc507d434f33be",
+    "src\\iCCModules\\imageCompositeConverterOptimizationWidth.py": "861da80e9e93c9e2233bb95295c28ed0603da85f944540ba4fa9ce83fce8189f",
+    "src\\iCCModules\\imageCompositeConverterOutputPaths.py": "b8cc76001b425456d4448c67c88649f1340f3681049ba4d695a3c1945d62a92c",
+    "src\\iCCModules\\imageCompositeConverterPerceptionGeometry.py": "6546d9d61b78f4334795bdf7862f1096cde688d1a488ed0f3769bfcec3959144",
+    "src\\iCCModules\\imageCompositeConverterPerceptionReflection.py": "38c78504700caa046ea5ead0e5982a26beca1dca003309e6ac249939466e9d89",
+    "src\\iCCModules\\imageCompositeConverterPolicyPhase.py": "4f0b48e12b6cf4d0e1760baf6d92a07b283b755b3f24b76bafefb45f46b494b9",
+    "src\\iCCModules\\imageCompositeConverterPrimitiveScene.py": "0d6982e50b73a87fa7b13a3b11f45df485ae88ff3545c60b7c5628e57c9db429",
+    "src\\iCCModules\\imageCompositeConverterPump.py": "e786fb0c003100a810ad2072f6f4ba8b10bdf2cd41b58be35e7b9074d8b28a83",
+    "src\\iCCModules\\imageCompositeConverterQuality.py": "055d4ec5acb8c9b4e8f2ab5b044fafd3924397bc07200e9502b5875886771af0",
+    "src\\iCCModules\\imageCompositeConverterQualityConfig.py": "7311b8f6b8afe4261d75b6fd2b271e8090ac5a9c3ac776c79b81cc0f6280ddf3",
+    "src\\iCCModules\\imageCompositeConverterQualityPassPolicy.py": "a6f2ba827e46ca0f4634f4d2ccf49f22fea09e97a8cbc2afeec849c97f0cb47e",
+    "src\\iCCModules\\imageCompositeConverterQualityThreshold.py": "a35d4374991c6de4bf039a3b758658993de0217d1a5db3d309f0b3984d7f7ddf",
+    "src\\iCCModules\\imageCompositeConverterRadialDisk.py": "76c8a25955d855308fe2c6be261f2ea8093e230bb8de4d27c97b3a4627dbb0ae",
+    "src\\iCCModules\\imageCompositeConverterRandom.py": "e63330235376477e78e6fdd2f23b6fb0dbb77c24a1015f7e3bd90026d5d20095",
+    "src\\iCCModules\\imageCompositeConverterRange.py": "8e3c98f08a198d54292d799ca7471388e68158164905588728f986ff4c3b4cee",
+    "src\\iCCModules\\imageCompositeConverterRanking.py": "e0da81c2986a2a6ac0d2abe579cec8941c18db73854ef5495669a7400f70b9d7",
+    "src\\iCCModules\\imageCompositeConverterReachability.py": "9fe4972148c187f8c0d6a6a48de059fd0a7eae1f5aeac316051cddd4988bd492",
+    "src\\iCCModules\\imageCompositeConverterRegions.py": "1001f6425fa08db02d9694068b6ca97d5201bf63a3029337da808cd99815bee6",
+    "src\\iCCModules\\imageCompositeConverterRemaining.py": "1e03670ca69e909a3db109c56cbac55ce450fe369df754a6b7d8f0d66424fb5c",
+    "src\\iCCModules\\imageCompositeConverterRenderDispatch.py": "808a5aaa8fe824d50a895573bed1e508840c765818187cc1b6326be328be127d",
+    "src\\iCCModules\\imageCompositeConverterRendering.py": "8e1e39c146a6524fea4e1411f08d7474230cebb4c3e2a2e3b066e74ce9e986fc",
+    "src\\iCCModules\\imageCompositeConverterRenderRuntime.py": "977a5eaae553b39f2dfc7b2af953e910a187160ded9fb0c323bf1a3ac32eafb0",
+    "src\\iCCModules\\imageCompositeConverterRenderWorker.py": "5d2b7901fc7bc995a5795892d1e62c5e58dd8587f8d0090e684dc3cf7976f33c",
+    "src\\iCCModules\\imageCompositeConverterSceneFusion.py": "567c18a77f906df3dcdcdf1300dc3a892b24843c844e3aa50737432db70e6af6",
+    "src\\iCCModules\\imageCompositeConverterSceneReferences.py": "fe13944808688eee191989a6f002817c2308d891d4c32171c3c2d779f6e221e5",
+    "src\\iCCModules\\imageCompositeConverterSceneVisibility.py": "241d2f645911559c1d33a9c5031992579d5479a7beb00c1fcba37af44902a4e6",
+    "src\\iCCModules\\imageCompositeConverterSearchBots.py": "18cd78492a1e17dc16c8dca271873a69af5d5cfff64531659ce485cfce0a7544",
+    "src\\iCCModules\\imageCompositeConverterSearchPortfolio.py": "ea7539fa20408611e6c6926d91705034046186ba24704f52eb64b6b04df082f5",
+    "src\\iCCModules\\imageCompositeConverterSearchScheduler.py": "17d537a2e8201779e8787efda32c15b342ca7d831d87dd429a508fd746ff8616",
+    "src\\iCCModules\\imageCompositeConverterSemantic.py": "858ef5001ba03e92e36c24fa45b8443bbb00306350c768bb8988253a94d3a01c",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc0050.py": "b5baf684440ccdf703e893912a158b4c6c3fbf59bab4478f44292e10d37e8d28",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc0223.py": "f44241bed8964e42751540fe9ba036219d1092cfd4291173ef95548e8944eabf",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc0223Runtime.py": "488b9eb74c60639f39289b20450b1dff519da6e7a5490d7df048613de1410d65",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc0811.py": "d80d2d6d059f3de4ae761590a03eb3652c8fd5c1e55ae5a74159a566e3e59819",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc0812.py": "90b7f91f704901c5d193fd8e17d4821e13f3148e8f87993a6cf426a7b2268b61",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc0813.py": "0cb6d300c132aa4c3b33e683adc9fe5286f420511f1dfa0af04a048ccc1580b5",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc08Families.py": "8e4e331a52aa5be409e5d8b68ec1e9814d604e97de9cc05ceb92ffe5bc9b663e",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc08Finalization.py": "d211c10901306ae6c87f041b2e01739c1cf828287bdff1f7305b3fb765034fe7",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc08Params.py": "ae40b053b29bc7c351cacb637a37f726f12fec15fff9fea600cdc809d1b6041a",
+    "src\\iCCModules\\imageCompositeConverterSemanticAc08SmallVariants.py": "1ea878d31315c5706fa3bfa02bd9825de045440a4d005dcb39f58eaaf8ea21ec",
+    "src\\iCCModules\\imageCompositeConverterSemanticAdaptiveLocks.py": "4c0ff5385afe53265eb2d144a76dab89ee12bf6efe402d95648365f9eeb8a5df",
+    "src\\iCCModules\\imageCompositeConverterSemanticAr0100.py": "484022b8fae6dad39c05c7fec3fe71dfeaed4721e1b8efa31e7fc6d26bfe6a7c",
+    "src\\iCCModules\\imageCompositeConverterSemanticAuditBootstrap.py": "ece1ae8a92b88c5196875d5720afd8e161f90564ded71b8954426c0f9a17d7c3",
+    "src\\iCCModules\\imageCompositeConverterSemanticAuditLogging.py": "f982d89ab84211560781cf91e292b9a9ed85d724f6b75f168ed28e9465a5e941",
+    "src\\iCCModules\\imageCompositeConverterSemanticAuditRuntime.py": "262add2a8917e2e3d92a76e8e192a655434a1d9063ae248eb68a7703800bbce3",
+    "src\\iCCModules\\imageCompositeConverterSemanticBadgeGeometry.py": "561931b1201b4225f4a9d699f82b0e714a42c6b678671f825117439b362a611d",
+    "src\\iCCModules\\imageCompositeConverterSemanticBadgeRuntime.py": "e57eaf9d7572e8720364162474188aca932590827b94cbc82b1ff19ab5a31171",
+    "src\\iCCModules\\imageCompositeConverterSemanticBadgeSvg.py": "14a81229a61655db2543e94618eb7869ba0763b01cdf94695ca293f4ecb16dfe",
+    "src\\iCCModules\\imageCompositeConverterSemanticChecks.py": "e5ee5ed7a884b1dc54e8a43516cc4957cc61ed346d247aea97b1b5d537699ba7",
+    "src\\iCCModules\\imageCompositeConverterSemanticCircleStyle.py": "d34f36ae5bb002f52d3637103948fb4657dd58070d7859a8d05badb1b45ac1a6",
+    "src\\iCCModules\\imageCompositeConverterSemanticConnectors.py": "3680c36dca2d3b6f25d853451d1f6940d927ea6524e292bee506d386e1b51bd7",
+    "src\\iCCModules\\imageCompositeConverterSemanticDefaults.py": "ffe832c6638f4b5aca92a28108caf6b7c25726545c989e8ddea9defb048e0942",
+    "src\\iCCModules\\imageCompositeConverterSemanticFitting.py": "0eb7ae12b1d37d6a9478a97291e8daa0a59189cd2b2a54103f3a6f1829bb30ce",
+    "src\\iCCModules\\imageCompositeConverterSemanticGeometry.py": "21bbff4c2772ddf26196a9494c245f05d0492a103cbfa3d562974ec1f61a298b",
+    "src\\iCCModules\\imageCompositeConverterSemanticHarmonization.py": "8da26e6f9f4985753cc879ddf2ab83c69a1cb32a96ad6d5309c83e0f4095ae33",
+    "src\\iCCModules\\imageCompositeConverterSemanticIterationFinalization.py": "6e0a5d52422279a25a759ce629f257fd007dd47a33134dc08616502128b959f5",
+    "src\\iCCModules\\imageCompositeConverterSemanticLabels.py": "ff3f0cff3edbbd3c5012428ea06cdbd2fb544f09406d01c57914ee6204abac66",
+    "src\\iCCModules\\imageCompositeConverterSemanticMismatchReporting.py": "51364d1bab5561de03c15f30ad9bfb01d1dca17ce2eb12af7f660b12681b3244",
+    "src\\iCCModules\\imageCompositeConverterSemanticMismatchRuntime.py": "e8e8cb2c6284a84c842ef08116eed5b0093186829f30e2415e9bf4211f4743a5",
+    "src\\iCCModules\\imageCompositeConverterSemanticParams.py": "925d651596aa1fbb25895891c3c915fdeab082b95f45de546cd3c19ca7ba7f7a",
+    "src\\iCCModules\\imageCompositeConverterSemanticPostValidation.py": "036676d932b87118b5925b869f8348a08ed878e335af7e93537bf4c0f5a744f9",
+    "src\\iCCModules\\imageCompositeConverterSemanticRedrawVariation.py": "759833c9a89da556667c2a6cdc39977bde1ec0a9eab55f187b23d1a7dcde0b14",
+    "src\\iCCModules\\imageCompositeConverterSemanticValidation.py": "5032101f2001fc1fb13e3fc2c3ad8449f3295df8940463878841259ad5c39919",
+    "src\\iCCModules\\imageCompositeConverterSemanticValidationContext.py": "0150ad8444737f6f2ff0d8b851e315ee9897c0681737be680d44ae42a616c6f8",
+    "src\\iCCModules\\imageCompositeConverterSemanticValidationFinalization.py": "ea6fb9ceb2b9804a64fcd03ae0ab21671d6c8599351082b9564e53bd04750ae2",
+    "src\\iCCModules\\imageCompositeConverterSemanticValidationLogging.py": "3cbf9b46e6b6e83ffc7f7ffadd567a2244ff8fe691336b3c39a797ffce725de0",
+    "src\\iCCModules\\imageCompositeConverterSemanticValidationRuntime.py": "769bdbed652e81e7444225edb811f34fcd72780659641078c135a1d69bba55cc",
+    "src\\iCCModules\\imageCompositeConverterSemanticVisualOverride.py": "2a2f796b8b5aa38b83f940067ac5e243c22e61cade43e84a8be1185faf2a6f42",
+    "src\\iCCModules\\imageCompositeConverterShortLabelDisk.py": "303f34e908bccddf307311854a08f0e243deb96637abb8355702f36154caeda8",
+    "src\\iCCModules\\imageCompositeConverterSineDiagram.py": "80ef04e45cdde6e380fceb43a164c05077fd074c08c96f275761876b3a6b0fb4",
+    "src\\iCCModules\\imageCompositeConverterSpiralDisk.py": "7d149b9b558d5c1fd50d7c386a4018498442ab7a74a9cd0d810f110a1fbac3d0",
+    "src\\iCCModules\\imageCompositeConverterSquareStem.py": "a99b47ed63a9429a6183527412e35eb1285553e43bfd7048ff070247e5c66d92",
+    "src\\iCCModules\\imageCompositeConverterStepDiagram.py": "4379c408662c99ca737ddefecbda57d57f9f27a3d3e1523251b57ff8a013b440",
+    "src\\iCCModules\\imageCompositeConverterStripedPanelDisk.py": "07385ec6e7d8325089a500b7d88da1259b0ef2cfb053bc07b619f29b5e95912b",
+    "src\\iCCModules\\imageCompositeConverterStructureSearch.py": "19502ef270e8ff9df07dd6dd53c5ddda7fb834a0adb8f622a0851af3a2d80a40",
+    "src\\iCCModules\\imageCompositeConverterSuccessfulConversionQuality.py": "c5df36c6ec117a7297d312a7e07401a4b23b2f1d1e8710a2758e596e86968903",
+    "src\\iCCModules\\imageCompositeConverterSuccessfulConversionReport.py": "727052a4a04970e77ee31fc9fe2abd25f6444d3fd1806363013d3560a40c7626",
+    "src\\iCCModules\\imageCompositeConverterSuccessfulConversions.py": "ea459327043f2a685e391765a840786731a1559357088baffa9c74767665e7a7",
+    "src\\iCCModules\\imageCompositeConverterTemplateTransfer.py": "1352210339a5eaf30afcf9e5844c050fb7acfebc8f24818f53c6af0388cd837e",
+    "src\\iCCModules\\imageCompositeConverterThreeWayValve.py": "336a00d130f23e33484b8b0bb80ca1749b9cd12869487e7316c5539024e49b20",
+    "src\\iCCModules\\imageCompositeConverterThresholding.py": "6244a62d00e4b17e629c36231138ac8ff5d79fd346dc5720aaf03f4097b7ac7d",
+    "src\\iCCModules\\imageCompositeConverterTiming.py": "625bc7db40291f65b2616fe4d88e5cd0829abe240167f2fae5ea3a12abcbed80",
+    "src\\iCCModules\\imageCompositeConverterTransfer.py": "3ac5982905d6867a361ee5a9e9d6175d8e08563c1b7f81f712320e5b9bb9ace3",
+    "src\\iCCModules\\imageCompositeConverterTriangleStem.py": "69912f9d815fb6dbd4a658da5510fa249554cf57f7a070a13daaa743964790f4",
+    "src\\iCCModules\\imageCompositeConverterValidationRounds.py": "c813b8df9bb24d8b49b3bebeab7d9bbbc52624afbf77604d05e4de106e150712",
+    "src\\iCCModules\\imageCompositeConverterVendorInstall.py": "9cac63330c8e9a98300230b1103d96fa1e72bdc353a03572e1d8d04f88d94082",
+    "src\\iCCModules\\imageCompositeConverterWarningDisk.py": "de5398518ed70758cd2b8aaf09cfe4683a11dd9dceae44c729f798e8e091a6da",
+    "src\\iCCModules\\imageCompositeConverterZigzagPanel.py": "d8cf38fadeacfe151f25d0fbaae7d740183dcef37c9b7f3a26cc4e3de41814a8",
+    "src\\iCCModules\\__init__.py": "252b6d8fc8ec83dcb514f335d03e5e19f98e7b76fc59a28a25b102b4b943b4da",
+    "src\\iCCModules\\imageCompositeConverterGeometryIr\\runtime.py": "fbb347feaeae893686fd72efa46d0faa22dd2dea8bc3d641757c938a2d09386a",
+    "src\\iCCModules\\imageCompositeConverterGeometryIr\\__init__.py": "adf4ac0439e11cacf3732647d6781ec1fc45b33c833628c46a038c0371ffdfce"
+  },
+  "cases": [
+    {
+      "case_id": "rounded_00",
+      "width": 210,
+      "height": 200,
+      "description": "Ein gefüllter Kreis und 1 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            20.0,
+            15.0,
+            170.0,
+            170.0
+          ],
+          "parent": null,
+          "gradient_axis": 0,
+          "stroke_width": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            94.54830515240029,
+            87.90045654304014,
+            21.444886342703533,
+            24.541455424577087
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.320018707662939
+        }
+      ],
+      "reference_svg": "references/rounded_00.svg",
+      "input_sha256": "ede69d95d317870c70edacaa37a9699c982d8daeb72808fe1f3acb8a48729ba4",
+      "reference_svg_sha256": "f1c009a9e8d29134143f55e1621a1f3aa29a90ea59573b433cfe1e6ee35cd57e",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_00\\conversion",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_00\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_00\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_00\\conversion",
+        "--start",
+        "rounded_00",
+        "--end",
+        "rounded_00",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 7.880912744440138e-05,
+        "foreground_mse": 0.00013183958071749657,
+        "edge_alignment": 0.8694051504135132,
+        "foreground_iou": 0.9936375603334796
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "rounded_00/conversion/converted_svgs/rounded_00.svg",
+      "output_sha256": "7c2936fcfe0ce0da6a4a2ddb7e6348804ee8cb1208ca37f1beac03705ddd006e",
+      "elapsed_seconds": 1.985,
+      "object_check": {
+        "passed": true,
+        "detected_count": 2,
+        "expected_count": 2,
+        "max_bbox_error_px": 0.5634000000000015
+      },
+      "local_checks": [
+        {
+          "normalized_mse": 0.00010685638364350223,
+          "foreground_mse": 0.0001318395727343985,
+          "foreground_iou": 0.9936375603334796,
+          "edge_alignment": 0.8694051504135132,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00017587100199556945,
+          "foreground_mse": 0.00017587100199556945,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9617863893508911,
+          "passed": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "case_id": "rounded_01",
+      "width": 210,
+      "height": 200,
+      "description": "Ein gefüllter Kreis und 1 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            20.0,
+            15.0,
+            170.0,
+            170.0
+          ],
+          "parent": null,
+          "gradient_axis": 1,
+          "stroke_width": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            93.3498850303019,
+            87.54139900745348,
+            23.781213765376865,
+            25.800901363094933
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.935622946534014
+        }
+      ],
+      "reference_svg": "references/rounded_01.svg",
+      "input_sha256": "f316f87fb32ab89daa42dcc5620e4123223554beec4732f45548a1e47c742493",
+      "reference_svg_sha256": "30da9791fa9f9dd0603e448aa925c3ac6d349c6639382c4bea084bd7158ba2fc",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_01\\conversion",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_01\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_01\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_01\\conversion",
+        "--start",
+        "rounded_01",
+        "--end",
+        "rounded_01",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 7.813283446012065e-05,
+        "foreground_mse": 0.00013087202387396246,
+        "edge_alignment": 0.8717514276504517,
+        "foreground_iou": 0.9937694704049844
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "rounded_01/conversion/converted_svgs/rounded_01.svg",
+      "output_sha256": "a1bebdd2997837af1e18341d9273b38e5df80e674506875d25ebf6ce9b4606bd",
+      "elapsed_seconds": 1.969,
+      "object_check": {
+        "passed": true,
+        "detected_count": 2,
+        "expected_count": 2,
+        "max_bbox_error_px": 0.5592000000000041
+      },
+      "local_checks": [
+        {
+          "normalized_mse": 0.00010593940082379843,
+          "foreground_mse": 0.000130872014750174,
+          "foreground_iou": 0.9937694704049844,
+          "edge_alignment": 0.8717514276504517,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00021841863714096478,
+          "foreground_mse": 0.00021841863714096478,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9487342834472656,
+          "passed": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "case_id": "rounded_02",
+      "width": 210,
+      "height": 200,
+      "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            20.0,
+            15.0,
+            170.0,
+            170.0
+          ],
+          "parent": null,
+          "gradient_axis": 0,
+          "stroke_width": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            75.88947950007622,
+            88.26154444944632,
+            24.28194843883555,
+            24.14018741682365
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.485471049814921
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            109.82003625884788,
+            87.11512838978273,
+            24.07171336907112,
+            25.177441945638886
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 5.788454831119234
+        }
+      ],
+      "reference_svg": "references/rounded_02.svg",
+      "input_sha256": "b230edd692eef3efe571ef4ee14c486213e4d4d6c25a15c43cd76ad7fabcca3b",
+      "reference_svg_sha256": "e9751b9429d25d8f1b88d66ed42a55a02d36724a84a6c2f6a81267b400e6ba42",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_02\\conversion",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_02\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_02\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_02\\conversion",
+        "--start",
+        "rounded_02",
+        "--end",
+        "rounded_02",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.506935460492969e-05,
+        "foreground_mse": 0.0001122844623751007,
+        "edge_alignment": 0.8912583589553833,
+        "foreground_iou": 0.9953545446577263
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "rounded_02/conversion/converted_svgs/rounded_02.svg",
+      "output_sha256": "4051b94dd4ae259272ffb21de9cc20c8d2dfaeb3009678796e8a13096b0d17b2",
+      "elapsed_seconds": 2.172,
+      "object_check": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.4603999999999928
+      },
+      "local_checks": [
+        {
+          "normalized_mse": 8.822678790632549e-05,
+          "foreground_mse": 0.00011228446322940108,
+          "foreground_iou": 0.9953545446577263,
+          "edge_alignment": 0.8912583589553833,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00011037938261958801,
+          "foreground_mse": 0.00011037938261958801,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9700889587402344,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.0002415479158140169,
+          "foreground_mse": 0.0002415479158140169,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9018317461013794,
+          "passed": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "case_id": "rounded_03",
+      "width": 210,
+      "height": 200,
+      "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            20.0,
+            15.0,
+            170.0,
+            170.0
+          ],
+          "parent": null,
+          "gradient_axis": 1,
+          "stroke_width": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            75.37303040017916,
+            88.37264494890324,
+            24.693822057861293,
+            24.09698018631587
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.882525159497126
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            110.00667167058243,
+            86.2875073192444,
+            23.86030067705816,
+            26.95287021744426
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 5.554387305649433
+        }
+      ],
+      "reference_svg": "references/rounded_03.svg",
+      "input_sha256": "be8ce0101d18134ae29e009283cb45bf643b19df7e76ca92c890646b26ea0968",
+      "reference_svg_sha256": "1c319fc5ecc4c725191939a1c0c9838aa7ddb6f8dbc3dfe7a82e0d312ed45ffc",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_03\\conversion",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_03\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_03\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_03\\conversion",
+        "--start",
+        "rounded_03",
+        "--end",
+        "rounded_03",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 8.397710917051882e-05,
+        "foreground_mse": 0.00014164204185362905,
+        "edge_alignment": 0.8841552734375,
+        "foreground_iou": 0.9937694704049844
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "rounded_03/conversion/converted_svgs/rounded_03.svg",
+      "output_sha256": "39e9c92449909dabf49e1b2fa704b7bd06842a23a0f0f324db5ad3f508069b2c",
+      "elapsed_seconds": 2.063,
+      "object_check": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.5592000000000041
+      },
+      "local_checks": [
+        {
+          "normalized_mse": 0.00011386358208275478,
+          "foreground_mse": 0.00014164203092662225,
+          "foreground_iou": 0.9937694704049844,
+          "edge_alignment": 0.8841552734375,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00021206690561529268,
+          "foreground_mse": 0.00021206690561529268,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9546703100204468,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00025438682457476134,
+          "foreground_mse": 0.00025438682457476134,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9686128497123718,
+          "passed": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "case_id": "rounded_04",
+      "width": 210,
+      "height": 200,
+      "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            20.0,
+            15.0,
+            170.0,
+            170.0
+          ],
+          "parent": null,
+          "gradient_axis": 0,
+          "stroke_width": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            94.43180693002863,
+            70.79417883892349,
+            21.44360871413974,
+            24.130802634899663
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.819897585845374
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            93.32785120475732,
+            105.63762465755461,
+            24.271618706222895,
+            24.70070207657943
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 5.6860818656996015
+        }
+      ],
+      "reference_svg": "references/rounded_04.svg",
+      "input_sha256": "1bb7113a5e5880453a6800eaa160bb353051548e2114ff49e64afe9b58a469e3",
+      "reference_svg_sha256": "9f8b549d96c0f6545a0d2c2e3cb417570d88c9636bdfe08b8cd0ccb58d4af7dd",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_04\\conversion",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_04\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_04\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_04\\conversion",
+        "--start",
+        "rounded_04",
+        "--end",
+        "rounded_04",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.68680586386472e-05,
+        "foreground_mse": 0.00011559524136828259,
+        "edge_alignment": 0.8944416046142578,
+        "foreground_iou": 0.9953545446577263
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "rounded_04/conversion/converted_svgs/rounded_04.svg",
+      "output_sha256": "0a0d2719151068a12cf2ab4c410aacb87534d1618b35ed4c9ccca13bf7bd3084",
+      "elapsed_seconds": 1.985,
+      "object_check": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.4603999999999928
+      },
+      "local_checks": [
+        {
+          "normalized_mse": 9.066562129632278e-05,
+          "foreground_mse": 0.00011559523994465024,
+          "foreground_iou": 0.9953545446577263,
+          "edge_alignment": 0.8944416046142578,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00018278447790670137,
+          "foreground_mse": 0.00018278447790670137,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9575731754302979,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00026848131198505123,
+          "foreground_mse": 0.00026848131198505123,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9446814060211182,
+          "passed": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "case_id": "rounded_05",
+      "width": 210,
+      "height": 200,
+      "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            20.0,
+            15.0,
+            170.0,
+            170.0
+          ],
+          "parent": null,
+          "gradient_axis": 1,
+          "stroke_width": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            94.16082257842612,
+            69.45160332184527,
+            21.697481747295768,
+            25.74409956283143
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 5.7838407973475885
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            92.88040847475934,
+            103.94091906873257,
+            24.102384634059003,
+            26.55837058508982
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.082980451243304
+        }
+      ],
+      "reference_svg": "references/rounded_05.svg",
+      "input_sha256": "7f5b6da31b7e9c5ae4d581cb8236fa69e4bc2647c8de022703858fbd4bd53774",
+      "reference_svg_sha256": "98f86997706d7a276aea80e392a16a3ea3327150e3da606a77af3947ddf3232d",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_05\\conversion",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_05\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_05\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_05\\conversion",
+        "--start",
+        "rounded_05",
+        "--end",
+        "rounded_05",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.462423334596679e-05,
+        "foreground_mse": 0.00010970513540087268,
+        "edge_alignment": 0.8814190626144409,
+        "foreground_iou": 0.9935062085911105
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "rounded_05/conversion/converted_svgs/rounded_05.svg",
+      "output_sha256": "db9233f844a6bff6688880df8991cb98301e8054e24a5fb13e201bd30aacf6ba",
+      "elapsed_seconds": 1.969,
+      "object_check": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.5600000000000023
+      },
+      "local_checks": [
+        {
+          "normalized_mse": 8.762324407967692e-05,
+          "foreground_mse": 0.00010970513063019379,
+          "foreground_iou": 0.9935062085911105,
+          "edge_alignment": 0.8814190626144409,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.0002926613307236144,
+          "foreground_mse": 0.0002926613307236144,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9392242431640625,
+          "passed": true
+        },
+        {
+          "normalized_mse": 8.684442635185563e-05,
+          "foreground_mse": 8.684442635185563e-05,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9842417240142822,
+          "passed": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "case_id": "rounded_06",
+      "width": 210,
+      "height": 200,
+      "description": "Ein gefüllter Kreis und 4 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            20.0,
+            15.0,
+            170.0,
+            170.0
+          ],
+          "parent": null,
+          "gradient_axis": 0,
+          "stroke_width": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            76.58573355821284,
+            71.2723968359171,
+            22.12249072465857,
+            23.194065573706492
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.853743221355824
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            110.05134294325171,
+            69.29021287941104,
+            24.76623416060616,
+            26.341056269181237
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.60475731212499
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            75.79812346925254,
+            105.12447584997693,
+            24.710520287258657,
+            23.845213303638634
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 5.467837661363946
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            110.92235887427083,
+            105.5905116524281,
+            22.1918784618339,
+            24.09439367559503
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 5.466007289636454
+        }
+      ],
+      "reference_svg": "references/rounded_06.svg",
+      "input_sha256": "6d23581ea8b6f10c62c0c4658a615276c90679aca4008bb4e3bda0bb019ac7db",
+      "reference_svg_sha256": "214ece4281287545be43e3449701ee51b67126097b6c6568628d89fa071b1a10",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_06\\conversion",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_06\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_06\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_06\\conversion",
+        "--start",
+        "rounded_06",
+        "--end",
+        "rounded_06",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 7.272135553648695e-05,
+        "foreground_mse": 0.00012636913743335754,
+        "edge_alignment": 0.9072226285934448,
+        "foreground_iou": 0.9953545446577263
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 6,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "rounded_06/conversion/converted_svgs/rounded_06.svg",
+      "output_sha256": "118777a8e268afcc3c84c6f5f7faffd8ff497b07f6cdeb9650af13f91fd318e9",
+      "elapsed_seconds": 2.344,
+      "object_check": {
+        "passed": true,
+        "detected_count": 5,
+        "expected_count": 5,
+        "max_bbox_error_px": 0.4603999999999928
+      },
+      "local_checks": [
+        {
+          "normalized_mse": 9.860204885173429e-05,
+          "foreground_mse": 0.00012636913686622214,
+          "foreground_iou": 0.9953545446577263,
+          "edge_alignment": 0.9072226285934448,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00020090121541817838,
+          "foreground_mse": 0.00020090121541817838,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9827935695648193,
+          "passed": true
+        },
+        {
+          "normalized_mse": 8.140839632449559e-05,
+          "foreground_mse": 8.140839632449559e-05,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9815443158149719,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00024376842240164039,
+          "foreground_mse": 0.00024376842240164039,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9008358716964722,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.000192988911075007,
+          "foreground_mse": 0.000192988911075007,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9585990905761719,
+          "passed": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "case_id": "rounded_07",
+      "width": 210,
+      "height": 200,
+      "description": "Ein gefüllter Kreis und 4 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            20.0,
+            15.0,
+            170.0,
+            170.0
+          ],
+          "parent": null,
+          "gradient_axis": 1,
+          "stroke_width": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            76.45949941967572,
+            70.5207189450116,
+            23.602611053166207,
+            23.081009707724203
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 5.381787083880145
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            110.11314278488386,
+            71.43165421248608,
+            24.60750550555543,
+            23.00745982836363
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.81140424805927
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            76.21887806388476,
+            105.54394388956906,
+            23.242741961322068,
+            24.731273763741893
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.595428867338747
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            110.35517012040799,
+            103.9953054439959,
+            22.890184142246206,
+            26.868691005531197
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.752086880356248
+        }
+      ],
+      "reference_svg": "references/rounded_07.svg",
+      "input_sha256": "be4d14f62729c8f87e5bde87c4d2beed5e5661398c0a3aaf572fa0d145459a79",
+      "reference_svg_sha256": "4b96bbcea2b455a964d942eb7cbab06562c3201b2d0bbb1c42d31e4993bc3082",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_07\\conversion",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_07\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_07\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_07\\conversion",
+        "--start",
+        "rounded_07",
+        "--end",
+        "rounded_07",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.38473647995852e-05,
+        "foreground_mse": 0.0001117036008508876,
+        "edge_alignment": 0.9131954312324524,
+        "foreground_iou": 0.9951369112814896
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 6,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "rounded_07/conversion/converted_svgs/rounded_07.svg",
+      "output_sha256": "7f6a3433e70e1d5595f8027df62e4cd18908f9abd467e2215120af088401b752",
+      "elapsed_seconds": 2.453,
+      "object_check": {
+        "passed": true,
+        "detected_count": 5,
+        "expected_count": 5,
+        "max_bbox_error_px": 0.43319999999999936
+      },
+      "local_checks": [
+        {
+          "normalized_mse": 8.65698970940399e-05,
+          "foreground_mse": 0.00011170360376180196,
+          "foreground_iou": 0.9951369112814896,
+          "edge_alignment": 0.9131954312324524,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.0002633450878418695,
+          "foreground_mse": 0.0002633450878418695,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9658228754997253,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00020448159585712144,
+          "foreground_mse": 0.00020448159585712144,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.899758517742157,
+          "passed": true
+        },
+        {
+          "normalized_mse": 7.863428595839208e-05,
+          "foreground_mse": 7.863428595839208e-05,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.967194676399231,
+          "passed": true
+        },
+        {
+          "normalized_mse": 7.37775566461366e-05,
+          "foreground_mse": 7.37775566461366e-05,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9840785264968872,
+          "passed": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "case_id": "rounded_08",
+      "width": 210,
+      "height": 200,
+      "description": "Ein gefüllter Kreis und 6 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            20.0,
+            15.0,
+            170.0,
+            170.0
+          ],
+          "parent": null,
+          "gradient_axis": 0,
+          "stroke_width": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            59.411791863425506,
+            70.70173057582734,
+            24.155753596735202,
+            23.455689467943134
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.653391714822786
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            94.1391938981166,
+            69.99229873824089,
+            21.753063864340472,
+            24.503171922532886
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.952496020217076
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            126.81908175544223,
+            69.66286093780298,
+            24.47975233400691,
+            26.20139116877816
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.673713552736257
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            59.79977005093971,
+            104.5619221707287,
+            21.93077597147003,
+            25.979511012228176
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 5.390386713663834
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            93.4178878769766,
+            106.38430583250546,
+            22.839004437878806,
+            23.095653789632724
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.5030951270162465
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            128.3826814863089,
+            104.37096597082558,
+            21.21552338377065,
+            26.25895151651379
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.929274481482167
+        }
+      ],
+      "reference_svg": "references/rounded_08.svg",
+      "input_sha256": "84c389117e4b9c64912f9fb551ff68f0e5d7c3ddbba9fef37786b585e6330f6c",
+      "reference_svg_sha256": "2764c00fa81cf9e7b1e309ae37e41a8699b976b7c315ef6635fd0769f340712e",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_08\\conversion",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_08\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_08\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_08\\conversion",
+        "--start",
+        "rounded_08",
+        "--end",
+        "rounded_08",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 7.689130870858207e-05,
+        "foreground_mse": 0.0001319491129834205,
+        "edge_alignment": 0.9137041568756104,
+        "foreground_iou": 0.9934620447564722
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 8,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "rounded_08/conversion/converted_svgs/rounded_08.svg",
+      "output_sha256": "dd8f47ff2c949c8a651a4fe5eaa597a45c9b63e42d584ff63bd1d002eacd2654",
+      "elapsed_seconds": 2.406,
+      "object_check": {
+        "passed": true,
+        "detected_count": 7,
+        "expected_count": 7,
+        "max_bbox_error_px": 0.5652000000000044
+      },
+      "local_checks": [
+        {
+          "normalized_mse": 0.00010425603153269085,
+          "foreground_mse": 0.00013194911532827603,
+          "foreground_iou": 0.9934620447564722,
+          "edge_alignment": 0.9137041568756104,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00018734489776404736,
+          "foreground_mse": 0.00018734489776404736,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9899697303771973,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00015060027278885412,
+          "foreground_mse": 0.00015060027278885412,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9965822696685791,
+          "passed": true
+        },
+        {
+          "normalized_mse": 9.155375360681012e-05,
+          "foreground_mse": 9.155375360681012e-05,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9807753562927246,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.0002570348113839344,
+          "foreground_mse": 0.0002570348113839344,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9598789811134338,
+          "passed": true
+        },
+        {
+          "normalized_mse": 7.504236262406198e-05,
+          "foreground_mse": 7.504236262406198e-05,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9726582765579224,
+          "passed": true
+        },
+        {
+          "normalized_mse": 6.741218967285865e-05,
+          "foreground_mse": 6.741218967285865e-05,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9704087376594543,
+          "passed": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "case_id": "rounded_09",
+      "width": 210,
+      "height": 200,
+      "description": "Ein gefüllter Kreis und 6 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            20.0,
+            15.0,
+            170.0,
+            170.0
+          ],
+          "parent": null,
+          "gradient_axis": 1,
+          "stroke_width": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            59.673978648090646,
+            70.5012944416555,
+            22.083456565224974,
+            23.57736675480766
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.6321664521943955
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            93.20288459890907,
+            69.83132360597541,
+            22.78962095927851,
+            24.41517068508946
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 5.1889781593750826
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            126.57820328750957,
+            69.70587068279313,
+            24.275332382240208,
+            26.23554456018914
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.676897761838594
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            60.03226275521668,
+            104.60377433396827,
+            21.206258269682753,
+            26.524829381038014
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.568549006005339
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            93.81538015285831,
+            105.54480401707553,
+            22.02487577315698,
+            23.36368685721242
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.289786248649211
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            127.60358560629389,
+            103.94574751273736,
+            23.73605284435688,
+            26.60440992775412
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.451309689404377
+        }
+      ],
+      "reference_svg": "references/rounded_09.svg",
+      "input_sha256": "d051ad8997b2f9511654c4af008213819e87b1732fe4f006ae5f9791467eb044",
+      "reference_svg_sha256": "d8531460623db57f285f17f527a1bd0e5e9462fbee9a8c8134cdeeed38beb434",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_09\\conversion",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_09\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_09\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_09\\conversion",
+        "--start",
+        "rounded_09",
+        "--end",
+        "rounded_09",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 9.577476157573983e-05,
+        "foreground_mse": 0.0001633831561775878,
+        "edge_alignment": 0.9120438098907471,
+        "foreground_iou": 0.9937694704049844
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 8,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "rounded_09/conversion/converted_svgs/rounded_09.svg",
+      "output_sha256": "d870525b472df353865e3161eca89bb49f40710c2208e6cff4caae1369b235af",
+      "elapsed_seconds": 2.157,
+      "object_check": {
+        "passed": true,
+        "detected_count": 7,
+        "expected_count": 7,
+        "max_bbox_error_px": 0.5592000000000041
+      },
+      "local_checks": [
+        {
+          "normalized_mse": 0.0001298598931010853,
+          "foreground_mse": 0.00016338314496741935,
+          "foreground_iou": 0.9937694704049844,
+          "edge_alignment": 0.9120438098907471,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.0001224308781725519,
+          "foreground_mse": 0.0001224308781725519,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9790276885032654,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.0002506827612721897,
+          "foreground_mse": 0.0002506827612721897,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9726582765579224,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00022366012320248287,
+          "foreground_mse": 0.00022366012320248287,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9746313691139221,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.0001438899281358064,
+          "foreground_mse": 0.0001438899281358064,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9422369003295898,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00015189560160327372,
+          "foreground_mse": 0.00015189560160327372,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9720368981361389,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00012038866966215738,
+          "foreground_mse": 0.00012038866966215738,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9807753562927246,
+          "passed": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "case_id": "rounded_10",
+      "width": 210,
+      "height": 200,
+      "description": "Ein gefüllter Kreis und 6 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            20.0,
+            15.0,
+            170.0,
+            170.0
+          ],
+          "parent": null,
+          "gradient_axis": 0,
+          "stroke_width": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            76.99593845745765,
+            53.041215246969614,
+            21.326365539171785,
+            23.961283506954956
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 5.194848917657621
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            110.38784450157874,
+            52.323306434383284,
+            22.875943588946743,
+            25.628206365843145
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.530984637641025
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            75.96885648275219,
+            86.13340325927332,
+            24.850614685077147,
+            26.97932343437893
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.775629830188425
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            109.64003012471248,
+            86.32041610523025,
+            24.03328344000742,
+            26.85781183886173
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 5.546899673050444
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            77.81054570018811,
+            121.5749118688618,
+            21.131353513294872,
+            26.77637666199863
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.291667696315818
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            109.79477689293995,
+            122.58101868040252,
+            24.811894692519065,
+            25.83316800214326
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.6619678646319054
+        }
+      ],
+      "reference_svg": "references/rounded_10.svg",
+      "input_sha256": "80aa578e10f21e5ee5648f3f8d25ab36e83d59fc16c4c5fce8d4ae3f5694e914",
+      "reference_svg_sha256": "2fbefc2df540136ae52859e98f3822b71532eda79fb5f276518da8556503770a",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_10\\conversion",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_10\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_10\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_10\\conversion",
+        "--start",
+        "rounded_10",
+        "--end",
+        "rounded_10",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 7.701165304752067e-05,
+        "foreground_mse": 0.00013217091327533126,
+        "edge_alignment": 0.9093630313873291,
+        "foreground_iou": 0.9934620447564722
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 8,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "rounded_10/conversion/converted_svgs/rounded_10.svg",
+      "output_sha256": "f03e332d47fc2f12906326e3b0280b220f25e7275327e7872d7186b0d84b1bf5",
+      "elapsed_seconds": 2.047,
+      "object_check": {
+        "passed": true,
+        "detected_count": 7,
+        "expected_count": 7,
+        "max_bbox_error_px": 0.5652000000000044
+      },
+      "local_checks": [
+        {
+          "normalized_mse": 0.00010441920515843133,
+          "foreground_mse": 0.00013217089971752293,
+          "foreground_iou": 0.9934620447564722,
+          "edge_alignment": 0.9093630313873291,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.0002087158229122965,
+          "foreground_mse": 0.0002087158229122965,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9570798873901367,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00013534858387799568,
+          "foreground_mse": 0.00013534858387799568,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9704087376594543,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00015169504941538322,
+          "foreground_mse": 0.00015169504941538322,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9876962304115295,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00014903040503324149,
+          "foreground_mse": 0.00014903040503324149,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9560579657554626,
+          "passed": true
+        },
+        {
+          "normalized_mse": 8.945600539331457e-05,
+          "foreground_mse": 8.945600539331457e-05,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9630386829376221,
+          "passed": true
+        },
+        {
+          "normalized_mse": 6.361189752193213e-05,
+          "foreground_mse": 6.361189752193213e-05,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9686128497123718,
+          "passed": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "case_id": "rounded_11",
+      "width": 210,
+      "height": 200,
+      "description": "Ein gefüllter Kreis und 6 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "kind": "circle",
+          "bbox": [
+            20.0,
+            15.0,
+            170.0,
+            170.0
+          ],
+          "parent": null,
+          "gradient_axis": 1,
+          "stroke_width": 0
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            75.24122110888264,
+            52.635851942062175,
+            24.911863940765834,
+            24.29817001977346
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 4.64643447062087
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            111.0059682884479,
+            52.88140365264818,
+            22.930087654309965,
+            24.23702629724302
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.463016160726829
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            76.51848205971235,
+            88.17411450088376,
+            23.803541832373078,
+            23.87544656094251
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.8852812350990806
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            111.82867481270046,
+            86.60822856491886,
+            21.285426321417845,
+            26.838657221368692
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.639622016649356
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            77.66633956864527,
+            122.47091618887,
+            21.35259801914359,
+            25.890034638567833
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.9529347852980097
+        },
+        {
+          "kind": "rectangle",
+          "bbox": [
+            110.41216028397899,
+            123.15451243379809,
+            23.394042995262026,
+            24.3140136729531
+          ],
+          "parent": 0,
+          "stroke_width": 0,
+          "corner_radius": 3.9009450952187192
+        }
+      ],
+      "reference_svg": "references/rounded_11.svg",
+      "input_sha256": "a8ddf89d5ece1a5c6041d9471e58e395ce2ef8034444de4f94b5bd2e1cee385c",
+      "reference_svg_sha256": "8a3b423be9952e76e99451eb51762fbe2928fd6fda35a02609ccbb26fe54b6c2",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_11\\conversion",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_11\\input",
+        "--descriptions-path",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_11\\input\\descriptions.xml",
+        "--output-dir",
+        "artifacts\\evaluation\\overlap_composition_v1\\existing_rounded_cli\\rounded_11\\conversion",
+        "--start",
+        "rounded_11",
+        "--end",
+        "rounded_11",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.445335748139769e-05,
+        "foreground_mse": 0.0001128186922869645,
+        "edge_alignment": 0.9300631284713745,
+        "foreground_iou": 0.9951369112814896
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 8,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "rounded_11/conversion/converted_svgs/rounded_11.svg",
+      "output_sha256": "cfc41900ec8679f495a2f38c1db2009ef07926487c3b7303c6e299b7f165d065",
+      "elapsed_seconds": 2.078,
+      "object_check": {
+        "passed": true,
+        "detected_count": 7,
+        "expected_count": 7,
+        "max_bbox_error_px": 0.43319999999999936
+      },
+      "local_checks": [
+        {
+          "normalized_mse": 8.739155738998457e-05,
+          "foreground_mse": 0.00011281868587909361,
+          "foreground_iou": 0.9951369112814896,
+          "edge_alignment": 0.9300631284713745,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00021291438776649182,
+          "foreground_mse": 0.00021291438776649182,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9642115831375122,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.0001012817793333245,
+          "foreground_mse": 0.0001012817793333245,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9863291382789612,
+          "passed": true
+        },
+        {
+          "normalized_mse": 0.00010253533853878074,
+          "foreground_mse": 0.00010253533853878074,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9966925382614136,
+          "passed": true
+        },
+        {
+          "normalized_mse": 8.370941742643843e-05,
+          "foreground_mse": 8.370941742643843e-05,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9459853172302246,
+          "passed": true
+        },
+        {
+          "normalized_mse": 6.405381420296108e-05,
+          "foreground_mse": 6.405381420296108e-05,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9762262105941772,
+          "passed": true
+        },
+        {
+          "normalized_mse": 7.044437003137752e-05,
+          "foreground_mse": 7.044437003137752e-05,
+          "foreground_iou": 1.0,
+          "edge_alignment": 0.9901479482650757,
+          "passed": true
+        }
+      ],
+      "accepted": true
+    }
+  ]
+}

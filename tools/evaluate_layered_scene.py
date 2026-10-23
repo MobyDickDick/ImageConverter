@@ -148,6 +148,8 @@ def check_objects(svg, expected):
             continue
         if any(obj['parent'] is not None and order[obj['parent']] >= order[i] for i, obj in enumerate(expected)):
             continue
+        if any('behind' in obj and order[i] >= order[obj['behind']] for i, obj in enumerate(expected)):
+            continue
         best = min(best, max(abs(v-w) for a, obj in zip(order, expected)
                              for v, w in zip(actual[a]['bbox'], obj['bbox'])))
     return dict(passed=best <= 2.5, detected_count=len(actual), expected_count=len(expected),

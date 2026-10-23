@@ -1,0 +1,325 @@
+{
+  "overlap_01.png": {
+    "actual_iterations": 64,
+    "base": "OVERLAP_01",
+    "best_error": 24.539246031746032,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+    "diff_error_distribution_status": "random_like",
+    "elapsed_seconds": 2.452999999979511,
+    "error_per_pixel": 0.0005842677626606198,
+    "error_pixel_cluster_count": 11.0,
+    "error_pixel_cluster_excess": 0.23303205042540873,
+    "error_pixel_count": 7483.0,
+    "filename": "overlap_01.png",
+    "h": 200,
+    "largest_error_pixel_cluster_fraction": 0.4111987170920754,
+    "localized_error_fraction": 0.6073999043530115,
+    "mean_delta2": 4009.983642578125,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.453,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      },
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "constraint": "inside_rect_border",
+            "id": "description_element_1",
+            "kind": "HorizontalGradient",
+            "source": "description",
+            "stops": [
+              "#8f8f8f",
+              "#dedede",
+              "#8f8f8f"
+            ]
+          },
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "fill": "none",
+            "id": "description_element_2",
+            "kind": "RectBorder",
+            "source": "description",
+            "stroke": "#666666",
+            "stroke_width": 0.035
+          }
+        ],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.75,
+          "reasons": [],
+          "status": "ok"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": false,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "overlap_01",
+          "source": "base_name",
+          "text": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [],
+      "geometry_ir": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "fill": "none",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "geometry_ir_optimizer_result": {
+        "element_refinement": {
+          "final_error": 29.375920634920636,
+          "initial_error": 29.375920634920636,
+          "mode": "right_rotated_valve_geometry",
+          "steps": []
+        },
+        "final_error": 28.544071428571428,
+        "generic_element_refinement": {
+          "final_error": 28.544071428571428,
+          "initial_error": 29.375920634920636,
+          "mode": "elementwise_geometry_ir",
+          "steps": [
+            {
+              "accepted": false,
+              "best_delta": 0.0,
+              "element": "background_gradient",
+              "error_after": 29.375920634920636,
+              "error_before": 29.375920634920636,
+              "step_index": 0
+            },
+            {
+              "accepted": true,
+              "best_delta": 0.831849206349208,
+              "element": "main_rect",
+              "error_after": 28.544071428571428,
+              "error_before": 29.375920634920636,
+              "step_index": 1
+            }
+          ]
+        },
+        "initial_error": 32.79897619047619,
+        "mode": "geometry_ir_raster_registration",
+        "parameters": {
+          "scale_x": 1.04,
+          "scale_y": 1.21,
+          "stroke_scale": 0.21,
+          "translate_x": 0.0,
+          "translate_y": -0.01
+        },
+        "steps": [
+          {
+            "best_delta": 0.48364285714285415,
+            "parameter": "scale_y",
+            "stage": 0,
+            "value": 1.15
+          },
+          {
+            "best_delta": 0.7994047619047642,
+            "parameter": "stroke_scale",
+            "stage": 0,
+            "value": 0.75
+          },
+          {
+            "best_delta": 0.725642857142855,
+            "parameter": "stroke_scale",
+            "stage": 0,
+            "value": 0.5
+          },
+          {
+            "best_delta": 0.7698333333333345,
+            "parameter": "stroke_scale",
+            "stage": 0,
+            "value": 0.25
+          },
+          {
+            "best_delta": 0.3407777777777774,
+            "parameter": "scale_x",
+            "stage": 1,
+            "value": 1.08
+          },
+          {
+            "best_delta": 0.04989682539682505,
+            "parameter": "scale_y",
+            "stage": 2,
+            "value": 1.19
+          },
+          {
+            "best_delta": 0.009134920634920718,
+            "parameter": "scale_x",
+            "stage": 2,
+            "value": 1.04
+          },
+          {
+            "best_delta": 0.030992063492064403,
+            "parameter": "scale_x",
+            "stage": 3,
+            "value": 1.02
+          },
+          {
+            "best_delta": 0.03049999999999997,
+            "parameter": "scale_y",
+            "stage": 3,
+            "value": 1.21
+          },
+          {
+            "best_delta": 0.06861904761904825,
+            "parameter": "stroke_scale",
+            "stage": 3,
+            "value": 0.21
+          },
+          {
+            "best_delta": 0.008134920634919496,
+            "parameter": "translate_x",
+            "stage": 3,
+            "value": -0.01
+          },
+          {
+            "best_delta": 0.0022539682539672867,
+            "parameter": "translate_y",
+            "stage": 3,
+            "value": -0.01
+          },
+          {
+            "best_delta": 0.05880952380952564,
+            "parameter": "scale_x",
+            "stage": 3,
+            "value": 1.04
+          },
+          {
+            "best_delta": 0.04541269841269724,
+            "parameter": "translate_x",
+            "stage": 3,
+            "value": 0.0
+          }
+        ]
+      },
+      "label": "M",
+      "language_assertions": {
+        "counts": [],
+        "no_text": false
+      },
+      "mode": "auto",
+      "optimized_geometry_ir": [
+        {
+          "bbox": [
+            0.16719999999999996,
+            0.1754,
+            0.6656000000000001,
+            0.6776000000000001
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.16719999999999996,
+            0.1754,
+            0.6656000000000001,
+            0.6776000000000001
+          ],
+          "fill": "none",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#b8b8b8",
+          "stroke_width": 0.007350000000000001
+        }
+      ],
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "OVERLAP_01"
+    },
+    "reference_access": {
+      "blocked_svg_reads": []
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 36.56037765385785,
+    "search_control": {
+      "candidate_evaluations": 0,
+      "elapsed_seconds": 2.453,
+      "external_max_seconds": null,
+      "isolated": true,
+      "limit_seconds": 5.0,
+      "max_seconds": 5.0,
+      "stop_reason": "supported_models_exhausted",
+      "time_extensions": 0
+    },
+    "search_satisfactory": false,
+    "spatial_quality_score": 9292.078501074593,
+    "std_delta2": 6076.69091796875,
+    "tile_std_delta2": 3831.0367739122917,
+    "variant": "OVERLAP_01",
+    "w": 210
+  }
+}
