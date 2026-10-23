@@ -1,0 +1,21 @@
+# Retain frozen inputs, actual vectors and independently verifiable CLI evidence.
+/after/
+/additional_cli/
+/plan_b_cli/
+/existing_rounded_cli/
+/existing_split_cli/
+/existing_residual_cli/
+**/*.png
+!/inputs/**/*.png
+!/additional/**/*.png
+!/plan_b/**/*.png
+**/input/*.xml
+!/inputs/**/*.xml
+!/additional/**/*.xml
+!/plan_b/**/*.xml
+**/conversion/reports/*
+!**/conversion/reports/conversion_result_map.json
+!**/conversion/reports/*_deadline.json
+!**/conversion/reports/*_reference_access.json
+!**/conversion/reports/*_worker.log
+**/converter.timing.jsonl

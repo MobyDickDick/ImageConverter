@@ -48,7 +48,6 @@ def test_rounding_cannot_erase_objects_relations_or_observed_marks(damage):
     ' Mit Text.', ' Die Formen überlappen.', ' Die Ecken sind nicht gerundet.',
     ' Die Kreise haben leicht gerundete Ecken.', ' Mit radialem Verlauf.',
     ' Die Rechtecke haben spitze Ecken.', ' Ein weiterer Kreis.',
-    ' Die Formen haben helle Konturen.',
 ])
 def test_rounded_vocabulary_consumes_all_assertions(claim):
     assert mixed.scene_contract(make_cases()[3]['description']+claim) is None

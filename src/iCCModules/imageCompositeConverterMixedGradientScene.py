@@ -71,7 +71,7 @@ def scene_contract(description):
     rounded = rounded_clause in text
     # The qualifier belongs to the quantified rectangle inventory. A free
     # clause must not attach rounding to circles or silently discard a claim.
-    if rounded and (outlined or text.count(rounded_clause) != 1
+    if rounded and (text.count(rounded_clause) != 1
             or sum(m[2].startswith('rechteck') for m in matches) != 1 or not any(
             m[2].startswith('rechteck') and text[m.end():].startswith(' '+rounded_clause)
             for m in matches)):
@@ -279,8 +279,46 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
             x, y, w, h = cv2.boundingRect(flat)
             horizontal = np.median(pixels[y+h//3:y+2*h//3].astype(float), axis=0)
             vertical = np.median(pixels[:, x+w//3:x+2*w//3].astype(float), axis=1)
-            left_right = _flat_edge(horizontal, fill, stroke, x, x+w)
-            top_bottom = _flat_edge(vertical, fill, stroke, y, y+h)
+            if contract.get('rounded'):
+                # Parent paint next to a dark rim must not be selected as
+                # the claimed highlight. Require an observed light band
+                # above that same local parent, not just above the fill.
+                light = np.mean(pixels.astype(float)-predicted, axis=2) > 8
+                if np.count_nonzero(band & light) < (w+h)/2:
+                    return None
+                # Separate fill and rim coverage against the local parent
+                # paint. Projecting only on fill/rim mistakes the darker
+                # gradient outside a rounded corner for additional fill.
+                delta, rim = fill-predicted, stroke-predicted
+                observed = pixels.astype(float)-predicted
+                dd = np.sum(delta*delta, axis=2)
+                rr = np.sum(rim*rim, axis=2)
+                dr = np.sum(delta*rim, axis=2)
+                determinant = dd*rr-dr*dr
+                if np.any(determinant[component.astype(bool)] < .002*dd[component.astype(bool)]*rr[component.astype(bool)]):
+                    return None
+                od, ort = np.sum(observed*delta, axis=2), np.sum(observed*rim, axis=2)
+                coverage = np.clip((od*rr-ort*dr)/np.maximum(1., determinant), 0, 1)
+                rim_coverage = np.clip((ort*dd-od*dr)/np.maximum(1., determinant), 0, 1)
+                if np.count_nonzero(band & (rim_coverage > .4)) < (w+h)/2:
+                    return None
+                left_right = _rounded_coverage_edges(
+                    np.median(coverage[y+h//3:y+2*h//3], axis=0), x, x+w)
+                top_bottom = _rounded_coverage_edges(
+                    np.median(coverage[:, x+w//3:x+2*w//3], axis=1), y, y+h)
+                # Each central section crosses two rims. Their integrated
+                # coverage gives the observed width, rather than a fixed
+                # width which trades against the rounded fill geometry.
+                horizontal_rim = np.median(rim_coverage[y+h//3:y+2*h//3], axis=0)
+                vertical_rim = np.median(rim_coverage[:, x+w//3:x+2*w//3], axis=1)
+                sw = float(np.median([
+                    horizontal_rim[max(0, x-3):x+w+3].sum()/2,
+                    vertical_rim[max(0, y-3):y+h+3].sum()/2]))
+                if not .5 <= sw <= min(w, h)/4:
+                    return None
+            else:
+                left_right = _flat_edge(horizontal, fill, stroke, x, x+w)
+                top_bottom = _flat_edge(vertical, fill, stroke, y, y+h)
             if left_right is None or top_bottom is None:
                 return None
             left, right = left_right
@@ -307,17 +345,21 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
             # Integrate the antialias coverage missing from a native
             # rectangle. Four round corners remove (4-pi)*r^2 area.
             # This is a proposal from pixels, not a reference radius.
-            cx = np.clip(np.minimum(xx+1, x+w)-np.maximum(xx, x), 0, 1)
-            cy = np.clip(np.minimum(yy+1, y+h)-np.maximum(yy, y), 0, 1)
-            window = ((xx >= np.floor(x)-1) & (xx <= np.ceil(x+w))
-                      & (yy >= np.floor(y)-1) & (yy <= np.ceil(y+h)))
+            # A rim is painted over the fill. Its inner boundary has radius
+            # rx-sw/2; measure the exposed fill, then recover the centerline.
+            inset = sw/2
+            left, top, right, bottom = x+inset, y+inset, x+w-inset, y+h-inset
+            cx = np.clip(np.minimum(xx+1, right)-np.maximum(xx, left), 0, 1)
+            cy = np.clip(np.minimum(yy+1, bottom)-np.maximum(yy, top), 0, 1)
+            window = ((xx >= np.floor(left)-1) & (xx <= np.ceil(right))
+                      & (yy >= np.floor(top)-1) & (yy <= np.ceil(bottom)))
             missing = float(np.sum((cx*cy-coverage)[window]))
             corner = np.sqrt(max(0., missing)/(4-np.pi))
             # A square silhouette cannot earn an explicit rounding claim
             # just by fitting an imperceptibly small positive radius.
             if corner < 1.25:
                 return None
-            child['radius'] = min(float(corner), min(w, h)/3)
+            child['radius'] = min(float(corner)+inset, min(w, h)/3)
         children.append(child)
     if len(children) > 16:
         return None
@@ -325,6 +367,34 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
     band = (distance >= radius-1) & (distance < radius)
     stroke = np.median(pixels[band], axis=0)
     geometry[4] = 1. if contract['outlined'] else 0.
+    if contract.get('rounded') and contract['outlined']:
+        # A dark outer rim is visible just inside its foreground contour.
+        # Sampling white antialias pixels beyond it must not turn it into a
+        # claimed light rim merely because global pixel error stays small.
+        if np.percentile(np.mean(pixels[band]-predicted[band], axis=1), 20) < -15:
+            return None
+        # The foreground contour follows the dark fill inside a pale rim.
+        # Seed the native centerline outside that contour, and sample the
+        # exposed rim instead of assigning the parent's gradient to it.
+        band = (distance >= radius+.4) & (distance < radius+.9)
+        stroke = np.median(pixels[band], axis=0)
+        delta, rim = predicted-255., stroke-255.
+        observed = pixels.astype(float)-255.
+        dd = np.sum(delta*delta, axis=2)
+        rr = float(rim@rim)
+        dr = delta@rim
+        determinant = dd*rr-dr*dr
+        ring = (distance >= radius-2) & (distance < radius+4)
+        if np.any(determinant[ring] < .002*dd[ring]*rr):
+            return None
+        rim_coverage = np.clip(((observed@rim)*dd-np.sum(observed*delta, axis=2)*dr)
+                               / np.maximum(1., determinant), 0, 1)
+        sw = float(rim_coverage[ring].sum()/(2*np.pi*radius))
+        if not .5 <= sw <= radius/2:
+            return None
+        geometry[:2] -= sw/2
+        geometry[2:4] += sw
+        geometry[4] = sw
     return [dict(kind='circle', geometry=geometry, colors=np.r_[colors, stroke]), *children]
 
 

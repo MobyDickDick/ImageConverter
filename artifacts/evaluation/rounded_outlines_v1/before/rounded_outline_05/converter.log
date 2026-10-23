@@ -1,0 +1,24 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\rounded_outlines_v1\before\rounded_outline_05\conversion\reports\.image-worker-k2rtpu4q\reports_out_dir\rounded_outline_05_worker.log
+[INFO] Konvertiere rounded_outline_05.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite rounded_outline_05.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung. Die Formen haben helle Konturen.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "rounded_outline_05", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 2.297, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "supported_models_exhausted"}
+[WARN] rounded_outline_05.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.676393, localized_error_fraction=0.712755).
+[INFO] Konvertiert rounded_outline_05.png | Parameter: mode=auto, label=M, variant_name=ROUNDED_OUTLINE_05 | Qualität: Optimierungsfehler/Pixel=0.000478, Mean-Delta²=3187.931396, RGB-RMSE/Kanal=32.598218, Raumscore=8921.784593, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.8s
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\rounded_outlines_v1\before\rounded_outline_05\conversion\reports\.image-worker-d4at6l96\reports_out_dir\rounded_outline_05_worker.log
+[INFO] Konvertiere rounded_outline_05.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite rounded_outline_05.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung. Die Formen haben helle Konturen.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "rounded_outline_05", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 4.844, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "stagnation"}
+[WARN] rounded_outline_05.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.676393, localized_error_fraction=0.712755).
+[INFO] Konvertiert rounded_outline_05.png | Parameter: mode=auto, label=M, variant_name=ROUNDED_OUTLINE_05 | Qualität: Optimierungsfehler/Pixel=0.000478, Mean-Delta²=3187.931396, RGB-RMSE/Kanal=32.598218, Raumscore=8921.784593, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=2.0s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\rounded_outlines_v1\before\rounded_outline_05\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\rounded_outlines_v1\before\rounded_outline_05\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\rounded_outlines_v1\before\rounded_outline_05\conversion
