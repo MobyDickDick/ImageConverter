@@ -152,3 +152,11 @@ verbrauchen. Anschließend die vorhandenen Form-/Rundungs-/Sichtbarkeitsoperator
 über einen gemeinsamen vollständigen Szenenvertrag zusammensetzen. Vor diesem
 realen Entwicklungsschritt andere reale Familien festschreiben; die bereits
 offengelegten GE0018/GE0307 sind ausschließlich Entwicklung.
+
+**Weiterer P0-Teilabschluss:** Die
+[Aufteilung verbundener Restbildkomponenten](next_arbeitspaket_2026-10-23_component_splits.md)
+ergänzt Split und Split plus Edit im bestehenden begrenzten Szenenvertrag.
+Zwanzig eingefrorene synthetische CLI-Fälle verbessern sich von 8/20 auf 20/20,
+zwölf zusätzliche Fälle bestehen 12/12 und eine gekoppelte Plan-B-Vorlage
+17/17 Varianten nach dokumentiertem Sprachfehler. Die unabhängige reale
+Abnahme und breitere Komposition bleiben offen; die Rangfolge bleibt bestehen.

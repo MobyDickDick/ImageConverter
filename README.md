@@ -1,6 +1,13 @@
 # ImageConverter
 
-Die [nativen Strukturoperatoren](docs/next_arbeitspaket_2026-10-23_structure_operators.md)
+Die [Aufteilung verbundener Restbildkomponenten](docs/next_arbeitspaket_2026-10-23_component_splits.md)
+ergänzt Split als weitere Strukturhypothese: Die echte CLI verbessert sich
+auf 20 unveränderten synthetischen Entwicklungsfällen von 8/20 auf 20/20.
+Zwölf zusätzliche Fälle bestehen 12/12, eine gekoppelte Plan-B-Vorlage mit
+16 Varianten 17/17. Die Qualitätsgrenzen und 379 Archivpaare bleiben erhalten.
+Breitere Komposition und unabhängige reale Familienabnahme bleiben offen.
+
+Die zuvor eingeführten [nativen Strukturoperatoren](docs/next_arbeitspaket_2026-10-23_structure_operators.md)
 kombinieren jetzt Instanzen aus mehreren Restbildzerlegungen und prüfen
 Add/Remove/Replace unter demselben Bildbudget. Acht vorab festgelegte synthetische
 CLI-Fälle verbessern sich von 0/8 auf 5/8; unabhängige reale Übertragung und

@@ -1,0 +1,261 @@
+{
+  "cases": [
+    {
+      "case_id": "original",
+      "accepted": true,
+      "source": "primitive_mixed_gradient_scene_v1",
+      "adaptive_search": {
+        "candidate_evaluations": 1,
+        "elapsed_seconds": 0.891,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_01",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.625,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_02",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.609,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_03",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.61,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_04",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.938,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_05",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.563,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_06",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 3.016,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_07",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 3.094,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_08",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 3.25,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_09",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 3.046,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_10",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 3.015,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_11",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 3.062,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_12",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.875,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_13",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.64,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_14",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.672,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_15",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.453,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "probe_16",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.578,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    }
+  ],
+  "completed": 17,
+  "accepted": 1
+}

@@ -1,0 +1,337 @@
+{
+  "probe_07.png": {
+    "actual_iterations": 64,
+    "base": "PROBE_07",
+    "best_error": 18.755142857142857,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+    "diff_error_distribution_status": "structured",
+    "elapsed_seconds": 3.094000000040978,
+    "error_per_pixel": 0.0004465510204081633,
+    "error_pixel_cluster_count": 6.0,
+    "error_pixel_cluster_excess": 0.6590292914416626,
+    "error_pixel_count": 6984.0,
+    "filename": "probe_07.png",
+    "h": 200,
+    "largest_error_pixel_cluster_fraction": 0.8253150057273768,
+    "localized_error_fraction": 0.6959073190540996,
+    "mean_delta2": 2756.13037109375,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 3.094,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      },
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "constraint": "inside_rect_border",
+            "id": "description_element_1",
+            "kind": "HorizontalGradient",
+            "source": "description",
+            "stops": [
+              "#8f8f8f",
+              "#dedede",
+              "#8f8f8f"
+            ]
+          },
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "fill": "none",
+            "id": "description_element_2",
+            "kind": "RectBorder",
+            "source": "description",
+            "stroke": "#666666",
+            "stroke_width": 0.035
+          }
+        ],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.75,
+          "reasons": [],
+          "status": "ok"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": false,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "probe_07",
+          "source": "base_name",
+          "text": "Ein gefüllter Kreis und 2 gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Die Darstellung ist geringfügig kleiner dargestellt und etwas nach links und oben verschoben."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [],
+      "geometry_ir": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "fill": "none",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "geometry_ir_optimizer_result": {
+        "element_refinement": {
+          "final_error": 21.378396825396827,
+          "initial_error": 21.378396825396827,
+          "mode": "right_rotated_valve_geometry",
+          "steps": []
+        },
+        "final_error": 20.72523015873016,
+        "generic_element_refinement": {
+          "final_error": 20.72523015873016,
+          "initial_error": 21.378396825396827,
+          "mode": "elementwise_geometry_ir",
+          "steps": [
+            {
+              "accepted": true,
+              "best_delta": 0.02646825396825392,
+              "element": "background_gradient",
+              "error_after": 21.351928571428573,
+              "error_before": 21.378396825396827,
+              "step_index": 0
+            },
+            {
+              "accepted": true,
+              "best_delta": 0.6266984126984134,
+              "element": "main_rect",
+              "error_after": 20.72523015873016,
+              "error_before": 21.351928571428573,
+              "step_index": 1
+            }
+          ]
+        },
+        "initial_error": 25.38818253968254,
+        "mode": "geometry_ir_raster_registration",
+        "parameters": {
+          "scale_x": 0.92,
+          "scale_y": 1.21,
+          "stroke_scale": 0.21,
+          "translate_x": 0.01,
+          "translate_y": -0.04
+        },
+        "steps": [
+          {
+            "best_delta": 0.021484126984127272,
+            "parameter": "scale_x",
+            "stage": 0,
+            "value": 0.85
+          },
+          {
+            "best_delta": 0.26239682539682363,
+            "parameter": "scale_y",
+            "stage": 0,
+            "value": 1.15
+          },
+          {
+            "best_delta": 0.8133174603174602,
+            "parameter": "stroke_scale",
+            "stage": 0,
+            "value": 0.75
+          },
+          {
+            "best_delta": 0.20914285714285796,
+            "parameter": "translate_y",
+            "stage": 0,
+            "value": -0.08
+          },
+          {
+            "best_delta": 0.6424047619047606,
+            "parameter": "stroke_scale",
+            "stage": 0,
+            "value": 0.5
+          },
+          {
+            "best_delta": 0.533214285714287,
+            "parameter": "stroke_scale",
+            "stage": 0,
+            "value": 0.25
+          },
+          {
+            "best_delta": 0.33727777777777845,
+            "parameter": "scale_x",
+            "stage": 0,
+            "value": 1.0
+          },
+          {
+            "best_delta": 0.5429841269841269,
+            "parameter": "translate_y",
+            "stage": 1,
+            "value": -0.04
+          },
+          {
+            "best_delta": 0.23577777777777698,
+            "parameter": "scale_x",
+            "stage": 1,
+            "value": 0.92
+          },
+          {
+            "best_delta": 0.11619841269841302,
+            "parameter": "scale_y",
+            "stage": 1,
+            "value": 1.23
+          },
+          {
+            "best_delta": 0.033095238095238955,
+            "parameter": "scale_y",
+            "stage": 2,
+            "value": 1.19
+          },
+          {
+            "best_delta": 0.001396825396824397,
+            "parameter": "scale_x",
+            "stage": 3,
+            "value": 0.9
+          },
+          {
+            "best_delta": 0.06067460317460416,
+            "parameter": "scale_y",
+            "stage": 3,
+            "value": 1.21
+          },
+          {
+            "best_delta": 0.08679365079364842,
+            "parameter": "stroke_scale",
+            "stage": 3,
+            "value": 0.21
+          },
+          {
+            "best_delta": 0.09318253968254098,
+            "parameter": "scale_x",
+            "stage": 3,
+            "value": 0.92
+          },
+          {
+            "best_delta": 0.020444444444443377,
+            "parameter": "translate_x",
+            "stage": 3,
+            "value": 0.01
+          }
+        ]
+      },
+      "label": "M",
+      "language_assertions": {
+        "counts": [],
+        "no_text": false
+      },
+      "mode": "auto",
+      "optimized_geometry_ir": [
+        {
+          "bbox": [
+            0.2156,
+            0.1454,
+            0.5688,
+            0.6776000000000001
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.2156,
+            0.1454,
+            0.5888,
+            0.6776000000000001
+          ],
+          "fill": "none",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#b8b8b8",
+          "stroke_width": 0.007350000000000001
+        }
+      ],
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "PROBE_07"
+    },
+    "reference_access": {
+      "blocked_svg_reads": []
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 30.310231336925106,
+    "search_control": {
+      "candidate_evaluations": 0,
+      "elapsed_seconds": 3.094,
+      "external_max_seconds": null,
+      "isolated": true,
+      "limit_seconds": 5.0,
+      "max_seconds": 5.0,
+      "stop_reason": "supported_models_exhausted",
+      "time_extensions": 0
+    },
+    "search_satisfactory": false,
+    "spatial_quality_score": 7922.019487124475,
+    "std_delta2": 5236.4794921875,
+    "tile_std_delta2": 3645.9955272703032,
+    "variant": "PROBE_07",
+    "w": 210
+  }
+}

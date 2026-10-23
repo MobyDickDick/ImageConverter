@@ -1,0 +1,46 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\component_splits_v1\cli-before\split_06\conversion\reports\.image-worker-nwp32c0n\reports_out_dir\split_06_worker.log
+[INFO] Konvertiere split_06.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite split_06.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 2 gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 25, "operator": "segmentation", "outcome": "inventory_rejected"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 0, "completed": true, "turns": 1, "last_turn": 0, "seconds": 0.03200000000651926, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 16, "operator": "segmentation", "outcome": "inventory_rejected"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "16", "steps": 0, "completed": true, "turns": 1, "last_turn": 1, "seconds": 0.015000000013969839, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 36, "operator": "segmentation", "outcome": "inventory_rejected"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "36", "steps": 0, "completed": true, "turns": 1, "last_turn": 2, "seconds": 0.015999999945051968, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 1, "last_turn": 3, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 2, "last_turn": 4, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "structure_search_finished", "outcome": "agenda_exhausted", "states": 2, "state_limit_reached": false, "candidate_limit_reached": false}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 0, "completed": true, "turns": 3, "last_turn": 5, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_schedule_finished", "slices": 6, "stop_reason": "models_exhausted", "models": {"25": {"turns": 1, "last_turn": 0, "seconds": 0.03200000000651926, "rate": 0.0, "best": null}, "16": {"turns": 1, "last_turn": 1, "seconds": 0.015000000013969839, "rate": 0.0, "best": null}, "36": {"turns": 1, "last_turn": 2, "seconds": 0.015999999945051968, "rate": 0.0, "best": null}, "edits": {"turns": 3, "last_turn": 5, "seconds": 0.0, "rate": 0.0, "best": null}}}
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "split_06", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 2.328, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "supported_models_exhausted"}
+[WARN] split_06.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.682363, localized_error_fraction=0.684895).
+[INFO] Konvertiert split_06.png | Parameter: mode=auto, label=M, variant_name=SPLIT_06 | Qualität: Optimierungsfehler/Pixel=0.000462, Mean-Delta²=2871.036865, RGB-RMSE/Kanal=30.935615, Raumscore=7999.112657, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.8s
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\component_splits_v1\cli-before\split_06\conversion\reports\.image-worker-9vifdq0v\reports_out_dir\split_06_worker.log
+[INFO] Konvertiere split_06.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite split_06.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 2 gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 25, "operator": "segmentation", "outcome": "inventory_rejected"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 0, "completed": true, "turns": 1, "last_turn": 0, "seconds": 0.015999999945051968, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 16, "operator": "segmentation", "outcome": "inventory_rejected"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "16", "steps": 0, "completed": true, "turns": 1, "last_turn": 1, "seconds": 0.01600000006146729, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 36, "operator": "segmentation", "outcome": "inventory_rejected"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "36", "steps": 0, "completed": true, "turns": 1, "last_turn": 2, "seconds": 0.015999999945051968, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 1, "last_turn": 3, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 2, "last_turn": 4, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "structure_search_finished", "outcome": "agenda_exhausted", "states": 2, "state_limit_reached": false, "candidate_limit_reached": false}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 0, "completed": true, "turns": 3, "last_turn": 5, "seconds": 0.015999999945051968, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_schedule_finished", "slices": 6, "stop_reason": "models_exhausted", "models": {"25": {"turns": 1, "last_turn": 0, "seconds": 0.015999999945051968, "rate": 0.0, "best": null}, "16": {"turns": 1, "last_turn": 1, "seconds": 0.01600000006146729, "rate": 0.0, "best": null}, "36": {"turns": 1, "last_turn": 2, "seconds": 0.015999999945051968, "rate": 0.0, "best": null}, "edits": {"turns": 3, "last_turn": 5, "seconds": 0.015999999945051968, "rate": 0.0, "best": null}}}
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "split_06", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 4.89, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "stagnation"}
+[WARN] split_06.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.682363, localized_error_fraction=0.684895).
+[INFO] Konvertiert split_06.png | Parameter: mode=auto, label=M, variant_name=SPLIT_06 | Qualität: Optimierungsfehler/Pixel=0.000462, Mean-Delta²=2871.036865, RGB-RMSE/Kanal=30.935615, Raumscore=7999.112657, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=2.0s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\component_splits_v1\cli-before\split_06\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\component_splits_v1\cli-before\split_06\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\component_splits_v1\cli-before\split_06\conversion

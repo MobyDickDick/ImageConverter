@@ -70,6 +70,12 @@ def scene_contract(description):
     rest = re.sub(direction_clause, '', rest)
     for clause in ('die formen haben helle konturen', 'keine beschriftung', 'ohne text oder zeichen'):
         rest = rest.replace(clause, '')
+    # The existing scene vocabulary permits a whole-motif scale/translation
+    # qualifier. It changes no instance or relation; geometry comes from pixels.
+    extent = r'(?:geringfügig|etwas|ein wenig|leicht)'
+    rest = re.sub(r'\b(?:das (?:gesamte )?motiv|die (?:gesamte )?darstellung) ist '+extent+
+                  r' (?:grösser|kleiner) dargestellt und '+extent+
+                  r' nach (?:links|rechts) und (?:oben|unten) (?:versetzt|verschoben)', '', rest)
     if re.sub(r'[\s.,;]+|\bund\b', '', rest):
         return None
     return dict(count=sum(counts.values()), axis=0 if direction[0] == 'horizontal' else 1,
@@ -110,7 +116,55 @@ def _coverage_edges(coverage, low, high):
     return crossing(first-1, first), crossing(last, last+1)
 
 
-def detect_instances(pixels, contract, *, residual_threshold=25):
+def _split_flat_component(pixels, predicted, component):
+    """Propose separate flat cores where antialias fringes join rectangles.
+
+    The confidence mask proposes topology only. Registration still checks the
+    original raster, including the seam, under the unchanged acceptance gates.
+    """
+    core = cv2.erode(component, np.ones((5, 5), 'uint8')).astype(bool)
+    if not core.any():
+        return [component]
+    fill = np.median(pixels[core], axis=0)
+    delta = fill-predicted
+    coverage = np.clip(np.sum((pixels.astype(float)-predicted)*delta, axis=2)
+                       / np.maximum(1., np.sum(delta*delta, axis=2)), 0, 1)
+    confident = ((coverage >= .9) & component.astype(bool)).astype('uint8')
+    number, labels, stats, _ = cv2.connectedComponentsWithStats(confident)
+    parts = []
+    for index in range(1, number):
+        x, y, w, h, area = stats[index]
+        if area < 12:
+            continue
+        # A split proposal is limited to observed rectangular flat cores.
+        # Curves, texture and rims keep the original conservative detector.
+        if min(w, h) < 5 or area < .94*w*h:
+            return [component]
+        parts.append((labels == index).astype('uint8'))
+        if len(parts) > 8:
+            return [component]
+    return parts if 2 <= len(parts) <= 8 else [component]
+
+
+def _split_coverage_edges(coverage, low, high):
+    """Use boundary pixel coverage around one separately observed flat core.
+
+    Two objects can contribute to the same pixel. Its individual edge positions
+    are then ambiguous: divide the observed coverage equally as a proposal,
+    and let joint registration and the raster gates assess it.
+    """
+    if low < 2 or high+1 >= len(coverage):
+        return None
+    left = float(coverage[low-1])
+    right = float(coverage[high])
+    if coverage[low-2] >= .9:
+        left /= 2
+    if coverage[high+1] >= .9:
+        right /= 2
+    return low-left, high+right
+
+
+def detect_instances(pixels, contract, *, residual_threshold=25, split_components=False):
     """Fit background paint first, then explain contrasting interior regions."""
     foreground = (np.max(255-pixels.astype(float), axis=2) > 25).astype('uint8')
     contours = cv2.findContours(foreground, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[0]
@@ -141,12 +195,20 @@ def detect_instances(pixels, contract, *, residual_threshold=25):
     mask = ((np.max(abs(pixels.astype(float)-predicted), axis=2) > residual_threshold)
             & interior.astype(bool)).astype('uint8')
     number, labels, stats, _ = cv2.connectedComponentsWithStats(mask)
-    children = []
+    components = []
     for index in range(1, number):
-        x, y, w, h, area = stats[index]
-        if area < 12:
+        if stats[index, cv2.CC_STAT_AREA] < 12:
             continue
         component = (labels == index).astype('uint8')
+        parts = (_split_flat_component(pixels, predicted, component)
+                 if split_components and not contract['outlined'] else [component])
+        components.extend((part, len(parts) > 1) for part in parts)
+        if len(components) > 16:
+            return None
+    children = []
+    for component, was_split in components:
+        x, y, w, h = cv2.boundingRect(component)
+        area = cv2.countNonZero(component)
         contour = max(cv2.findContours(component, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[0], key=cv2.contourArea)
         hull = cv2.convexHull(contour)
         polygon = cv2.approxPolyDP(hull, .025*cv2.arcLength(hull, True), True)
@@ -200,8 +262,9 @@ def detect_instances(pixels, contract, *, residual_threshold=25):
             delta = fill-predicted
             coverage = np.clip(np.sum((pixels.astype(float)-predicted)*delta, axis=2)
                                / np.maximum(1., np.sum(delta*delta, axis=2)), 0, 1)
-            left_right = _coverage_edges(np.median(coverage[y+h//3:y+2*h//3], axis=0), x, x+w)
-            top_bottom = _coverage_edges(np.median(coverage[:, x+w//3:x+2*w//3], axis=1), y, y+h)
+            edges = _split_coverage_edges if was_split else _coverage_edges
+            left_right = edges(np.median(coverage[y+h//3:y+2*h//3], axis=0), x, x+w)
+            top_bottom = edges(np.median(coverage[:, x+w//3:x+2*w//3], axis=1), y, y+h)
             if left_right is None or top_bottom is None:
                 return None
             left, right = left_right
@@ -274,7 +337,7 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
     def repairs():
         # Initial jobs each yield after detection. This job starts only after
         # those slices, so all observed instances are available to the agenda.
-        stats, outcome = {}, 'cancelled'
+        stats, split_stats, outcome = {}, {}, 'cancelled'
         try:
             for proposal in edit_proposals(seeds, contract['children'], stats=stats):
                 if session and session.time_reason():
@@ -287,10 +350,52 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
                 if fitted is not None:
                     outcome = 'accepted'
                     return fitted
-            outcome = ('state_limit' if stats.get('state_limit_reached')
-                       or stats.get('candidate_limit_reached') else 'agenda_exhausted')
+            # Keep established segmentations and Add/Remove/Replace first.
+            # An exhausted agenda may still lack an observed instance because
+            # antialiasing joined its core to a neighbour at every threshold.
+            # Splitting is another raster-derived proposal, never permission
+            # to remove object, relation, region or full-image checks.
+            remaining = max(0, 96-stats.get('states', 0))
+            changed = False
+            if not contract['outlined'] and contract['children'].get('rectangle', 0) >= 2:
+                seed_keys = {scene_key(seed) for seed in seeds}
+                for threshold in (25, 16, 36):
+                    if session and session.time_reason():
+                        return None
+                    objects = detect_instances(pixels, contract, residual_threshold=threshold,
+                                               split_components=True)
+                    yield None
+                    if objects is not None and scene_key(objects) not in seed_keys:
+                        seed_keys.add(scene_key(objects))
+                        seeds.append(objects)
+                        changed = True
+                    fitted = yield from register(objects, dict(operator='split',
+                        residual_threshold=threshold, outcome='no_complete_scene'))
+                    if fitted is not None:
+                        outcome = 'accepted'
+                        return fitted
+            if changed and remaining:
+                for proposal in edit_proposals(seeds, contract['children'],
+                                               max_states=remaining, stats=split_stats):
+                    if session and session.time_reason():
+                        return None
+                    yield None
+                    if proposal is None:
+                        continue
+                    fitted = yield from register(proposal['objects'], dict(operator='split_edit',
+                        edits=proposal['edits'], outcome='no_complete_scene'))
+                    if fitted is not None:
+                        outcome = 'accepted'
+                        return fitted
+            outcome = ('state_limit' if any(s.get(name) for s in (stats, split_stats)
+                       for name in ('state_limit_reached', 'candidate_limit_reached')) else 'agenda_exhausted')
             return None
         finally:
+            # Include work performed before acceptance, cancellation or expiry.
+            if split_stats:
+                stats['states'] += split_stats['states']
+                for name in ('state_limit_reached', 'candidate_limit_reached'):
+                    stats[name] |= split_stats[name]
             if session and session.time_reason():
                 outcome = 'time_limit'
             progress('primitive_mixed_gradient_scene_v1', event='structure_search_finished',

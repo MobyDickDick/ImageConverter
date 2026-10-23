@@ -1,0 +1,108 @@
+{
+  "base_commit": "628da4bd0218eaa80caa2217564562bb1da1ed60",
+  "branch": "codex/search-structure-component-splits-2026-10-23",
+  "final_tests": {
+    "tests": 372,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 243.477,
+    "passed": 372
+  },
+  "standard_full_suite_rerun": false,
+  "new_tests": 32,
+  "syntax": "passed",
+  "cli_help": "passed",
+  "runtime_image_ids": 0,
+  "whitespace": "passed_with_cr_at_eol",
+  "cli": {
+    "cli-before": {
+      "accepted": 8,
+      "total": 20,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": false
+    },
+    "proof-cli": {
+      "accepted": 20,
+      "total": 20,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "proof-new-cli": {
+      "accepted": 12,
+      "total": 12,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "plan-b-cli": {
+      "accepted": 1,
+      "total": 17,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": false
+    },
+    "proof-plan-b": {
+      "accepted": 17,
+      "total": 17,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "proof-residual": {
+      "accepted": 7,
+      "total": 9,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    }
+  },
+  "byte_identical_existing_successes": {
+    "residual": 7,
+    "operators": 5
+  },
+  "saved_archive": {
+    "kind": "saved_archive_pixel_and_hash_check_not_reconversion",
+    "total": 379,
+    "passed": 379,
+    "hashes_checked": 758
+  },
+  "compact_evidence": {
+    "files": 953,
+    "verification": {
+      "cli-before": {
+        "accepted": 8,
+        "completed": 20
+      },
+      "proof-cli": {
+        "accepted": 20,
+        "completed": 20
+      },
+      "proof-new-cli": {
+        "accepted": 12,
+        "completed": 12
+      },
+      "plan-b-cli": {
+        "accepted": 1,
+        "completed": 17
+      },
+      "proof-plan-b": {
+        "accepted": 17,
+        "completed": 17
+      },
+      "proof-residual": {
+        "accepted": 7,
+        "completed": 9
+      }
+    }
+  },
+  "real_family_acceptance": false,
+  "parent_task_complete": false,
+  "source_sha256": {
+    "src/iCCModules/imageCompositeConverterMixedGradientScene.py": "9e3646718d0446fe7b98c4c249f6ed8e627e129c81d98be599bd3edb5471317c",
+    "tests/test_component_splits.py": "e2eba42f68d5df36e2c6033c3c15f5c2d20d4a1863b1e5ae1fb621a65eaa5dd9",
+    "tools/evaluate_component_splits.py": "d9780f758bfb7962a057035b3db96de2df65426f90e6328d1802de9f8e97504e"
+  }
+}

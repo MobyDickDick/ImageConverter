@@ -16,6 +16,17 @@ bleiben erhalten; ältere Nächster-Schritt-Hinweise sind historisch.
 - [ ] **SEARCH-STRUCTURE-01 (P0, begonnen):** Nach gescheiterten Bildzerlegungen andere Strukturhypothesen unter demselben Bildbudget untersuchen; Instanzen/Formen/Schichten statt ausschließlich Parameter verändern. Abgelehnte und doppelte Vorschläge sichtbar machen, vollständige Objekt-/Relations-/Rastergates beibehalten. Erster produktiver Teil: alternative Restbildzerlegungen und generische getrennte Rechteckgruppen im vorhandenen Verlaufsszenenweg; synthetische CLI-Vorher-/Nachher-Prüfung. Faire fortsetzbare Strukturzeitscheiben sind jetzt umgesetzt, mit serieller Gegenprobe und echter CLI-Wiederholung (7/9) geprüft. Begrenzte native Add/Remove/Replace-Operatoren und bildgebundene negative Evidenz sind jetzt umgesetzt; acht synthetische CLI-Fälle verbessern sich von 0/8 auf 5/8, die bisherigen neun bleiben bei 7/9. Breitere Komposition und unabhängige reale Abnahme bleiben offen. [Operatoren, Nachweis und Grenzen](next_arbeitspaket_2026-10-23_structure_operators.md). Genau eine gekoppelte Plan-B-Aufgabe: synthetischer Repro zweier durch Antialiasing verbundener Restbildkomponenten. [Scheduler-Nachweis und Restumfang](next_arbeitspaket_2026-10-23_structure_scheduler.md), [Umfang und Rangfolge](weakness_review_2026-10-23.md).
 - [ ] **SEMANTIC-COMPLETENESS-02 (P1):** Erfolgreiche Produktionsausgaben an alle verbrauchten Beschreibungsaussagen, native Instanzen und Relationen binden. Parser-/Fallbackstatus allein darf keinen vollständigen Erfolg bedeuten. Unpassende Ersatzmodelle und beschädigte SVGs als echte CLI-Negativkontrollen; Sucherschöpfung und nicht unterstützte Struktur ausdrücklich ausweisen. V5/V6 und vorhandene unabhängige Gates verwenden.
 
+**SEARCH-STRUCTURE-01, weiterer P0-Teilabschluss 2026-10-23:**
+[Verbundene Restbildkomponenten aufteilen](next_arbeitspaket_2026-10-23_component_splits.md)
+ergänzt native Split-Vorschläge und Split plus Edit unter demselben Budget.
+Zwanzig vorab eingefrorene synthetische CLI-Eingaben verbessern sich von 8/20
+auf 20/20, darunter die bisherigen drei Operatorfehler (jetzt 8/8 statt 5/8).
+Zwölf zusätzliche synthetische Fälle bestehen 12/12. Genau eine gekoppelte
+Plan-B-Vorlage besteht nach einem dokumentierten Sprachfehler 17/17 Varianten.
+Die bekannten Restbildfälle bleiben bei 7/9; 379 Archivpaare und 758 Prüfsummen
+sind unverändert. Breitere Rundungs-/Überdeckungs-/Schichtenkomposition und
+unabhängige reale Abnahme bleiben offen; die übergeordnete Checkbox bleibt leer.
+
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-23)
 
 **Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `499` · Erledigt `447` · Offen `52`
@@ -4093,7 +4104,7 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 - [x] **FP-RCV-1:** Root Cause der vier Exit-0-Segmente ohne Iteration-Datensatz beheben. (`AC0811_L/M/S` und `AC0831_L` lagen unter `nonconvertable/`; der segmentierte Runner löst nun je Variante den tatsächlichen Quellordner auf.)
 - [x] **FP-RCV-2:** Segmentvollständigkeit zusätzlich am erwarteten `Iteration_Log.csv`-Datensatz prüfen. (Exit `0` ohne passende Zeile wird `BLOCKER_MISSING_REPORT`; die Finalisierung validiert dieselbe Invariante unabhängig.)
 - [x] **FP-RCV-3:** Die vier fehlenden Varianten real über den korrigierten Segmentpfad verifizieren. (Run OB mit Ein-Iterations-Budget: 4/4 Exit `0`, 4/4 `PASS`, 4/4 erwartete Reportzeilen; Details in `docs/next_arbeitspaket_2026-06-05_runOB.md`.)
-- [x] **FP-RCV-4:** Vollständigen festen 14er-Satz mit regulärem Budget wiederholen und die FP-D14-Schwellen (`14/14`, `6/6`, mindestens eine Verbesserung, `overall_success=1`) neu bewerten. (2026-06-05 Run OD: `14/14` Variantendatensätze, `6/6` Previously-Good-Anker, 3 akzeptierte Verbesserungen, 0 akzeptierte Regressionen und `overall_success=1`; vollständige Evidenz in `docs/next_arbeitspaket_2026-06-05_runOD.md`.)
+- [x] **FP-RCV-4:** Vollständigen festen 14er-Satz mit regulärem Budget wiederholen und die FP-D14-Schwellen (`14/14`, `6/6`, mindestens eine Verbesserung, `overall_success=1`) neu bewerten. (2026-06-05 Run OD: `14/14` Variantendatensätze, `6/6` Previously-Good-Anker, 3 akzeptierte Verbesserungen, 0 akzeptierte Regressionen und `overall_success=1`; vollständige Evidenz in `docs/history/next_arbeitspaket_2026-06-05_runOD.md`.)
 
 - **Fortschritt:** Der konkrete Reportvollständigkeitsfehler ist reproduziert und geschlossen; die vier ehemals fehlenden Varianten erscheinen im echten Recovery-Smoke wieder in `Iteration_Log.csv`.
 - **No silent success:** Weder ein bloßer Prozess-Exit `0` noch ein isolierter `.segment-complete`-Marker genügt künftig zur Aggregation.
