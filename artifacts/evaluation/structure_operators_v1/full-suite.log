@@ -1,0 +1,153 @@
+........................................................................ [  1%]
+........................................................................ [  3%]
+........................................................................ [  5%]
+........................................................................ [  7%]
+........................................................................ [  9%]
+........................................................................ [ 10%]
+........................................................................ [ 12%]
+........................................................................ [ 14%]
+........................................................................ [ 16%]
+........................................................................ [ 18%]
+........................................................................ [ 19%]
+........................................................................ [ 21%]
+....................................................................ssss [ 23%]
+sssssssssssssssssssssssss............................................... [ 25%]
+........................................................................ [ 27%]
+........................................................................ [ 29%]
+........................................................................ [ 30%]
+........................................................................ [ 32%]
+........................................................................ [ 34%]
+........................................................................ [ 36%]
+........................................................................ [ 38%]
+........................................................................ [ 39%]
+........................................................................ [ 41%]
+.........................F.............................................. [ 43%]
+........................................................................ [ 45%]
+........................................................................ [ 47%]
+........................................................................ [ 49%]
+........................................................................ [ 50%]
+........................................................................ [ 52%]
+........................................................................ [ 54%]
+........................................................................ [ 56%]
+........................................................................ [ 58%]
+........................................................................ [ 59%]
+........................................................................ [ 61%]
+........................................................................ [ 63%]
+........................................................................ [ 65%]
+........................................................................ [ 67%]
+........................................................................ [ 69%]
+F....................................................................... [ 70%]
+........................................................................ [ 72%]
+........................................................................ [ 74%]
+........................................................................ [ 76%]
+........................................................................ [ 78%]
+........................................................................ [ 79%]
+........................................................................ [ 81%]
+........................................................................ [ 83%]
+........................................................................ [ 85%]
+.......................s................................................ [ 87%]
+........................................................................ [ 89%]
+........................................................................ [ 90%]
+........................................................................ [ 92%]
+........................................................................ [ 94%]
+........................................................................ [ 96%]
+........................................................................ [ 98%]
+........................................................................ [ 99%]
+...                                                                      [100%]
+================================== FAILURES ===================================
+_____ test_observation_changes_neither_candidates_nor_measurement_budget ______
+
+    def test_observation_changes_neither_candidates_nor_measurement_budget():
+        on,off = run_search(),run_search(observed=False)
+>       assert np.array_equal(on[0],off[0]) and on[1][:3]==off[1][:3]
+E       assert (False)
+E        +  where False = <function array_equal at 0x000001987F327530>(array([1.  , 1.  , 0.75, 0.75]), array([1., 1., 2., 0.]))
+E        +    where <function array_equal at 0x000001987F327530> = np.array_equal
+
+tests\test_component_value.py:52: AssertionError
+---------------------------- Captured stdout call -----------------------------
+[Search] {"source": "model", "event": "strategy_started", "strategy": "fine_coordinates", "proposals": 0, "budget": 32, "seed": 17, "best_error": 10.0}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "fine_coordinates", "proposals": 5, "error": 3.28125, "improved": true, "active": true, "stop_reason": null, "received_messages": 0, "best_error": 3.28125}
+[Search] {"source": "model", "event": "bot_message", "sender": "fine_coordinates", "recipient": "joint_restart", "message": "adopt_best", "best_error": 3.28125}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "joint_restart", "proposals": 5, "budget": 32, "seed": 17, "best_error": 3.28125}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 5, "error": 2.5, "improved": true, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 2.5}
+[Search] {"source": "model", "event": "bot_message", "sender": "joint_restart", "recipient": "geometry_pair", "message": "adopt_best", "best_error": 2.5}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "geometry_pair", "proposals": 10, "budget": 32, "seed": 17, "best_error": 2.5}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "geometry_pair", "proposals": 5, "error": 2.0, "improved": true, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 2.0}
+[Search] {"source": "model", "event": "bot_message", "sender": "geometry_pair", "recipient": "color_pair", "message": "adopt_best", "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "color_pair", "proposals": 15, "budget": 32, "seed": 17, "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "color_pair", "proposals": 5, "error": 2.0, "improved": false, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 2.0}
+[Search] {"source": "model", "event": "bot_message", "sender": "geometry_pair", "recipient": "reverse_coordinates", "message": "adopt_best", "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 20, "budget": 32, "seed": 17, "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 5, "error": 2.0, "improved": false, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 2.0}
+[Search] {"source": "model", "event": "bot_message", "sender": "geometry_pair", "recipient": "shuffled_coordinates", "message": "adopt_best", "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 25, "budget": 32, "seed": 17, "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 5, "error": 2.0, "improved": false, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 2.0}
+[Search] {"source": "model", "event": "bot_message", "sender": "geometry_pair", "recipient": "fine_coordinates", "message": "adopt_best", "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "fine_coordinates", "proposals": 30, "budget": 32, "seed": 17, "best_error": 2.0}
+[Search] {"source": "one", "event": "proposal_budget_extended", "model": "model", "previous_budget": 32, "budget": 48, "proposals": 32}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "fine_coordinates", "proposals": 10, "error": 1.25, "improved": true, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 1.25}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "fine_coordinates", "proposals": 35, "budget": 48, "seed": 17, "best_error": 1.25}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "fine_coordinates", "proposals": 15, "error": 0.625, "improved": true, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 0.625}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "fine_coordinates", "proposals": 40, "budget": 48, "seed": 17, "best_error": 0.625}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "fine_coordinates", "proposals": 20, "error": 0.125, "improved": true, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 0.125}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "fine_coordinates", "proposals": 45, "budget": 48, "seed": 17, "best_error": 0.125}
+[Search] {"source": "one", "event": "proposal_budget_extended", "model": "model", "previous_budget": 48, "budget": 64, "proposals": 48}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "fine_coordinates", "proposals": 25, "error": 0.125, "improved": true, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 0.125}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "fine_coordinates", "proposals": 50, "budget": 64, "seed": 17, "best_error": 0.125}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "fine_coordinates", "proposals": 30, "error": 0.125, "improved": true, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 0.125}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "fine_coordinates", "proposals": 55, "budget": 64, "seed": 17, "best_error": 0.125}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "fine_coordinates", "proposals": 35, "error": 0.125, "improved": true, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 0.125}
+[Search] {"source": "model", "event": "bot_message", "sender": "fine_coordinates", "recipient": "joint_restart", "message": "adopt_best", "best_error": 0.125}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "joint_restart", "proposals": 60, "budget": 64, "seed": 17, "best_error": 0.125}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 9, "error": 0.125, "improved": true, "active": true, "stop_reason": null, "received_messages": 2, "best_error": 0.125}
+[Search] {"source": "model", "event": "search_finished", "stop_reason": "proposal_limit", "proposals": 64, "budget": 64, "best_error": 0.125, "messages": 7}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "fine_coordinates", "proposals": 0, "budget": 32, "seed": 17, "best_error": 10.0}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "fine_coordinates", "proposals": 5, "error": 3.28125, "improved": true, "active": true, "stop_reason": null, "received_messages": 0, "best_error": 3.28125}
+[Search] {"source": "model", "event": "bot_message", "sender": "fine_coordinates", "recipient": "joint_restart", "message": "adopt_best", "best_error": 3.28125}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "joint_restart", "proposals": 5, "budget": 32, "seed": 17, "best_error": 3.28125}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 5, "error": 2.5, "improved": true, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 2.5}
+[Search] {"source": "model", "event": "bot_message", "sender": "joint_restart", "recipient": "geometry_pair", "message": "adopt_best", "best_error": 2.5}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "geometry_pair", "proposals": 10, "budget": 32, "seed": 17, "best_error": 2.5}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "geometry_pair", "proposals": 5, "error": 2.0, "improved": true, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 2.0}
+[Search] {"source": "model", "event": "bot_message", "sender": "geometry_pair", "recipient": "color_pair", "message": "adopt_best", "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "color_pair", "proposals": 15, "budget": 32, "seed": 17, "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "color_pair", "proposals": 5, "error": 2.0, "improved": false, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 2.0}
+[Search] {"source": "model", "event": "bot_message", "sender": "geometry_pair", "recipient": "reverse_coordinates", "message": "adopt_best", "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "reverse_coordinates", "proposals": 20, "budget": 32, "seed": 17, "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "reverse_coordinates", "proposals": 5, "error": 2.0, "improved": false, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 2.0}
+[Search] {"source": "model", "event": "bot_message", "sender": "geometry_pair", "recipient": "shuffled_coordinates", "message": "adopt_best", "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "shuffled_coordinates", "proposals": 25, "budget": 32, "seed": 17, "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "shuffled_coordinates", "proposals": 5, "error": 2.0, "improved": false, "active": true, "stop_reason": null, "received_messages": 1, "best_error": 2.0}
+[Search] {"source": "model", "event": "bot_message", "sender": "geometry_pair", "recipient": "joint_restart", "message": "adopt_best", "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_started", "strategy": "joint_restart", "proposals": 30, "budget": 32, "seed": 17, "best_error": 2.0}
+[Search] {"source": "model", "event": "strategy_finished", "strategy": "joint_restart", "proposals": 7, "error": 2.0, "improved": true, "active": true, "stop_reason": null, "received_messages": 2, "best_error": 2.0}
+[Search] {"source": "model", "event": "search_finished", "stop_reason": "proposal_limit", "proposals": 32, "budget": 32, "best_error": 2.0, "messages": 6}
+_________ test_blocked_real_inference_is_inside_the_process_deadline __________
+
+tmp_path = WindowsPath('C:/Users/marku/myCloud/imageConverter/.tmp/sop/.tmp/full-suite-ready/test_blocked_real_inference_is0')
+
+    def test_blocked_real_inference_is_inside_the_process_deadline(tmp_path):
+        from src.iCCModules.imageCompositeConverterAdaptiveSearch import SearchPolicy
+        from src.iCCModules.imageCompositeConverterDeadline import ImageDeadline
+        path=constant_model(tmp_path/'model.json')
+        (tmp_path/'input.png').write_bytes(b'source identity')
+        spec=dict(filename='input.png',folder_path=str(tmp_path))
+        for name in ('svg_out_dir','diff_out_dir','png_out_dir','reports_out_dir'):
+            spec[name]=str(tmp_path/name)
+            Path(spec[name]).mkdir()
+        deadline=ImageDeadline(SearchPolicy(seconds=2.,max_seconds=2.))
+        started=time.monotonic()
+        (row,failed),failures=deadline.run(spec,config={},action={'model':str(path)},worker=blocked_inference_worker)
+        assert time.monotonic()-started<4.
+>       assert (tmp_path/'entered-neural').exists()
+E       AssertionError: assert False
+E        +  where False = exists()
+E        +    where exists = (WindowsPath('C:/Users/marku/myCloud/imageConverter/.tmp/sop/.tmp/full-suite-ready/test_blocked_real_inference_is0') / 'entered-neural').exists
+
+tests\test_neural_elements.py:177: AssertionError
+- generated xml file: C:\Users\marku\myCloud\imageConverter\.tmp\sop\.tmp\full-suite-ready.xml -
+=========================== short test summary info ===========================
+FAILED tests/test_component_value.py::test_observation_changes_neither_candidates_nor_measurement_budget
+FAILED tests/test_neural_elements.py::test_blocked_real_inference_is_inside_the_process_deadline
+2 failed, 3931 passed, 30 skipped in 4238.97s (1:10:38)

@@ -49,6 +49,7 @@ class ImageSearch:
         self.bot_searches = {}
         self.scheduler_history = []
         self.registration_rasters = {}
+        self.structure_rejections = {}
         self.on_progress = None
         self.on_validated = None
 

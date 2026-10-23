@@ -1,0 +1,24 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\structure_operators_v1\before\edit_04\conversion\reports\.image-worker-gh2ineiv\reports_out_dir\edit_04_worker.log
+[INFO] Konvertiere edit_04.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite edit_04.png ---
+Bildbeschreibung: Ein gefüllter Kreis und ein gefüllter Kreis und ein gefülltes Rechteck. Der äußere Kreis hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äußeren Kreises und getrennt voneinander. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "edit_04", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 2.125, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "supported_models_exhausted"}
+[WARN] edit_04.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.857841, localized_error_fraction=0.821491).
+[INFO] Konvertiert edit_04.png | Parameter: mode=auto, label=M, variant_name=EDIT_04 | Qualität: Optimierungsfehler/Pixel=0.000599, Mean-Delta²=3907.484863, RGB-RMSE/Kanal=36.090095, Raumscore=12736.617523, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.6s
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\structure_operators_v1\before\edit_04\conversion\reports\.image-worker-3hrgbtsj\reports_out_dir\edit_04_worker.log
+[INFO] Konvertiere edit_04.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite edit_04.png ---
+Bildbeschreibung: Ein gefüllter Kreis und ein gefüllter Kreis und ein gefülltes Rechteck. Der äußere Kreis hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äußeren Kreises und getrennt voneinander. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "edit_04", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 4.203, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "stagnation"}
+[WARN] edit_04.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.857841, localized_error_fraction=0.821491).
+[INFO] Konvertiert edit_04.png | Parameter: mode=auto, label=M, variant_name=EDIT_04 | Qualität: Optimierungsfehler/Pixel=0.000599, Mean-Delta²=3907.484863, RGB-RMSE/Kanal=36.090095, Raumscore=12736.617523, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.6s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\structure_operators_v1\before\edit_04\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\structure_operators_v1\before\edit_04\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\structure_operators_v1\before\edit_04\conversion

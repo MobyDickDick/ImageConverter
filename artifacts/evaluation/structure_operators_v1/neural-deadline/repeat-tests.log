@@ -1,0 +1,10 @@
+============================= test session starts =============================
+platform win32 -- Python 3.10.11, pytest-8.4.2, pluggy-1.6.0 -- C:\Users\marku\myCloud\imageConverter\.tmp\sop\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\marku\myCloud\imageConverter\.tmp\sop
+configfile: pytest.ini
+collecting ... collected 1 item
+
+tests/test_neural_elements.py::test_blocked_real_inference_is_inside_the_process_deadline PASSED [100%]
+
+============================== 1 passed in 2.37s ==============================

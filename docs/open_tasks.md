@@ -13,7 +13,7 @@ Operatoren und gemeinsame Fehlerursachen → 5. Komponenten-/Netzversuche →
 6. größere Runtime-/Betriebsbereinigung.** Die bestehenden Aufgaben darunter
 bleiben erhalten; ältere Nächster-Schritt-Hinweise sind historisch.
 
-- [ ] **SEARCH-STRUCTURE-01 (P0, begonnen):** Nach gescheiterten Bildzerlegungen andere Strukturhypothesen unter demselben Bildbudget untersuchen; Instanzen/Formen/Schichten statt ausschließlich Parameter verändern. Abgelehnte und doppelte Vorschläge sichtbar machen, vollständige Objekt-/Relations-/Rastergates beibehalten. Erster produktiver Teil: alternative Restbildzerlegungen und generische getrennte Rechteckgruppen im vorhandenen Verlaufsszenenweg; synthetische CLI-Vorher-/Nachher-Prüfung. Faire fortsetzbare Strukturzeitscheiben sind jetzt umgesetzt, mit serieller Gegenprobe und echter CLI-Wiederholung (7/9) geprüft. Add/Remove/Replace und unabhängige reale Abnahme fehlen weiterhin. Genau eine gekoppelte Plan-B-Aufgabe: synthetischer Repro zweier durch Antialiasing verbundener Restbildkomponenten. [Scheduler-Nachweis und Restumfang](history/next_arbeitspaket_2026-10-23_structure_scheduler.md), [Umfang und Rangfolge](weakness_review_2026-10-23.md).
+- [ ] **SEARCH-STRUCTURE-01 (P0, begonnen):** Nach gescheiterten Bildzerlegungen andere Strukturhypothesen unter demselben Bildbudget untersuchen; Instanzen/Formen/Schichten statt ausschließlich Parameter verändern. Abgelehnte und doppelte Vorschläge sichtbar machen, vollständige Objekt-/Relations-/Rastergates beibehalten. Erster produktiver Teil: alternative Restbildzerlegungen und generische getrennte Rechteckgruppen im vorhandenen Verlaufsszenenweg; synthetische CLI-Vorher-/Nachher-Prüfung. Faire fortsetzbare Strukturzeitscheiben sind jetzt umgesetzt, mit serieller Gegenprobe und echter CLI-Wiederholung (7/9) geprüft. Begrenzte native Add/Remove/Replace-Operatoren und bildgebundene negative Evidenz sind jetzt umgesetzt; acht synthetische CLI-Fälle verbessern sich von 0/8 auf 5/8, die bisherigen neun bleiben bei 7/9. Breitere Komposition und unabhängige reale Abnahme bleiben offen. [Operatoren, Nachweis und Grenzen](next_arbeitspaket_2026-10-23_structure_operators.md). Genau eine gekoppelte Plan-B-Aufgabe: synthetischer Repro zweier durch Antialiasing verbundener Restbildkomponenten. [Scheduler-Nachweis und Restumfang](next_arbeitspaket_2026-10-23_structure_scheduler.md), [Umfang und Rangfolge](weakness_review_2026-10-23.md).
 - [ ] **SEMANTIC-COMPLETENESS-02 (P1):** Erfolgreiche Produktionsausgaben an alle verbrauchten Beschreibungsaussagen, native Instanzen und Relationen binden. Parser-/Fallbackstatus allein darf keinen vollständigen Erfolg bedeuten. Unpassende Ersatzmodelle und beschädigte SVGs als echte CLI-Negativkontrollen; Sucherschöpfung und nicht unterstützte Struktur ausdrücklich ausweisen. V5/V6 und vorhandene unabhängige Gates verwenden.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-23)
@@ -31,9 +31,9 @@ produktive Netzabnahme werden weiterverwendet. Die Roadmap bleibt maßgeblich:
 Konvertierungsqualität vor größerer Produktbereinigung.
 
 - [ ] **BENCHMARK-PRACTICAL-01:** Nutzen auf mindestens 20 vorab abgegrenzten realen Familien gegen zwei bestehende Verfahren messen, einschließlich Formen außerhalb des Kreis-/Rechteckumfangs. Echte Ausgaben unabhängig prüfen; Eingaben, Budgets, Familienaggregation und Fehlversuche offenlegen. An mindestens zehn Familien aktive Prüf-/Beschreibungs-/Korrekturzeit und manuelles Nachzeichnen vergleichen. Reproduzierbarer Ergebnisbericht mit Einsatzgrenzen ist die Abnahme, auch bei negativem Ergebnis.
-  **Begonnen 2026-10-21:** [Vorbereitung und Entwicklungspilot](history/next_arbeitspaket_2026-10-21_practical_benchmark.md): 20 bekannte, noch nicht unabhängig annotierte Topologiekandidaten, Prüfsummen, Messvorlagen und zwei echte CLI-Pixelgegenproben. Keine neue Familien-/Katalogabnahme; gesperrte reale Prüffamilien, externe Vergleichsverfahren und menschliche Zeitmessungen fehlen weiterhin.
+  **Begonnen 2026-10-21:** [Vorbereitung und Entwicklungspilot](next_arbeitspaket_2026-10-21_practical_benchmark.md): 20 bekannte, noch nicht unabhängig annotierte Topologiekandidaten, Prüfsummen, Messvorlagen und zwei echte CLI-Pixelgegenproben. Keine neue Familien-/Katalogabnahme; gesperrte reale Prüffamilien, externe Vergleichsverfahren und menschliche Zeitmessungen fehlen weiterhin.
 - [x] **SEMANTIC-ROBUSTNESS-01:** Für mindestens zehn reale Familien je fünf unabhängige bedeutungsgleiche Beschreibungen und drei gezielte Widerspruchs-/Mehrdeutigkeitsfälle durch die echte CLI prüfen. Entwicklungs- und neue Prüfformulierungen trennen; gleiche Bedeutung muss denselben fachlichen Vertrag und dieselbe Qualitätsabnahme erreichen. Sprachbedingte Modellwechsel beheben, widersprüchliche Angaben dürfen keinen stillen Erfolg erhalten.
-  **Abnahme 2026-10-22, begrenzter Sprachumfang:** Zehn bekannte reale Familien, fünf Entwicklungsformulierungen und zwei neue Prüfformulierungen je Familie. Endstände 50/50 und 20/20 positive Fälle sowie jeweils 30/30 explizite Zurückweisungen. Ein vorausgehender unveränderter Entwicklungslauf enthält einen Zeitabbruch (261,734 Sekunden, null Suchauswertungen); einschließlich vollständiger Wiederholung 119/120 positive und 90/90 negative Versuche des endgültigen Codes. 901 verschiedene Test-IDs und 377/377 absolute Archiv-Pixelprüfungen; Archiv unverändert. Keine neue Familien-/Katalogabnahme oder unabhängige menschliche Sprachprüfung. Zeitauffälligkeit im abgeschlossenen SEARCH-DEADLINE-OVERRUN-AUDIT untersucht. [Umfang, Ergebnisse und Reproduktion](history/next_arbeitspaket_2026-10-22_semantic_robustness.md).
+  **Abnahme 2026-10-22, begrenzter Sprachumfang:** Zehn bekannte reale Familien, fünf Entwicklungsformulierungen und zwei neue Prüfformulierungen je Familie. Endstände 50/50 und 20/20 positive Fälle sowie jeweils 30/30 explizite Zurückweisungen. Ein vorausgehender unveränderter Entwicklungslauf enthält einen Zeitabbruch (261,734 Sekunden, null Suchauswertungen); einschließlich vollständiger Wiederholung 119/120 positive und 90/90 negative Versuche des endgültigen Codes. 901 verschiedene Test-IDs und 377/377 absolute Archiv-Pixelprüfungen; Archiv unverändert. Keine neue Familien-/Katalogabnahme oder unabhängige menschliche Sprachprüfung. Zeitauffälligkeit im abgeschlossenen SEARCH-DEADLINE-OVERRUN-AUDIT untersucht. [Umfang, Ergebnisse und Reproduktion](next_arbeitspaket_2026-10-22_semantic_robustness.md).
 - [ ] **COMPONENT-VALUE-02:** Das vorhandene Bot-Experiment mit tatsächlich aktiven schwierigen Registrierungen und neuen gesperrten realen Familien fortsetzen. Vollständiges, abgeschaltetes und begründet verkleinertes Portfolio bei gleichen Gesamtbudgets und mindestens drei Seeds vergleichen. Aktivität, unabhängige SVG-Qualität und Aufwand belegen; konkrete Entscheidung oder verbleibende Unsicherheit dokumentieren. Keine automatische Entfernung aus schwacher Evidenz; CNN-Folgearbeit bleibt NEURAL-ELEMENTS-01.
 - [ ] **ARCH-RUNTIME-CONTEXT-01:** Nach der Qualitätsphase eine produktive Rendering-/Reporting-Grenze von globaler Namespace-Übernahme und `_syncRemainingRuntimeBindings` auf explizite Abhängigkeiten umstellen. Globale Synchronisierung für diesen Pfad entfernen; getrennte Konvertierungskontexte, öffentliche Kompatibilität und reale Qualitätsregressionen prüfen. Inventar entfernter und verbleibender Kopplung statt bloßer Dateiaufteilung liefern.
 
@@ -41,20 +41,20 @@ Konvertierungsqualität vor größerer Produktbereinigung.
 
 - [x] **SEARCH-ADAPTIVE-01:** Frühe geprüfte Erfolge beenden angeschlossene Registrierungen und Wiederholungen. Stagnation führt zum Suchwegwechsel und anschließendem Abbruch; deutlicher später Fortschritt erlaubt begrenzte zusätzliche Zeit und Vorschläge. Gemeinsamer aktiver Bildkontext über Modelle und Wiederholungen, strenge unveränderte Pixel-/Semantikprüfungen, Source-/SVG-gebundene Freigabe und kontrollierte schlechte Vorprobe. Details und echte CLI-Nachweise: `docs/adaptive_conversion_search_2026-10-18.md`.
 
-- [x] **SEARCH-DEADLINE-01:** Reguläre `semantic-only`-CLI mit durchgängigem Bildbudget einschließlich Prozessstart, älterer Optimierer und Abschlussprüfung. Überwachter Worker mit Windows-Jobobjekt bzw. Unix-Prozessgruppe; 60 Sekunden regulär, begrenzt bis 120 Sekunden bei spätem Fortschritt. Atomare Übergaben und quellen-/SVG-gebundene geprüfte Zwischenstände erhalten gültige Ausgaben nach Abbruch. Rankings und Übersichten verwenden die bereits gemessenen Werte und PNGs. Acht bytegleiche CLI-Gegenproben, echte blockierte Abschlussprüfung mit gerettetem Ventilfit und 377/377 bestandene Archiv-Pixelprüfungen. Geltungsbereich und Nachweise: `docs/history/next_arbeitspaket_2026-10-18_search_deadline.md`.
-- [x] **SEARCH-DEADLINE-OVERRUN-AUDIT:** Den 261,734-Sekunden-Versuch mit Windows-Standbyereignissen von 09:06:52 bis 09:11:13 korreliert; eine weitere echte 967-Sekunden-Beobachtungslücke fällt ebenfalls mit Standby zusammen. Dauerhafte getrennte Phasen-/CPU-/UTC-Belege für Start, Bereitschaft, Aufsicht und Abbau ergänzt. Äußeres CLI-Budget zählt Prozessstart mit und weist verspätet beobachtete Prozessabschlüsse zurück; abgelaufene Eindämmung gibt keinen Worker frei. Historisch 79/80 Versuche und getrennt 80/80 vollständige Wiederholung erneut geprüft; drei neue Zielwiederholungen bestehen. 77/77 Tests, acht bytegleiche direkte/überwachte Qualitätsgegenproben und echte Zwischenstandsrettung; Archiv unverändert. Keine von Standby und Systemplanung unabhängige Echtzeitgarantie; alte interne Workerphase bleibt unbekannt. [Ursache, Reproduktion und Grenzen](history/next_arbeitspaket_2026-10-22_deadline_overrun_audit.md).
+- [x] **SEARCH-DEADLINE-01:** Reguläre `semantic-only`-CLI mit durchgängigem Bildbudget einschließlich Prozessstart, älterer Optimierer und Abschlussprüfung. Überwachter Worker mit Windows-Jobobjekt bzw. Unix-Prozessgruppe; 60 Sekunden regulär, begrenzt bis 120 Sekunden bei spätem Fortschritt. Atomare Übergaben und quellen-/SVG-gebundene geprüfte Zwischenstände erhalten gültige Ausgaben nach Abbruch. Rankings und Übersichten verwenden die bereits gemessenen Werte und PNGs. Acht bytegleiche CLI-Gegenproben, echte blockierte Abschlussprüfung mit gerettetem Ventilfit und 377/377 bestandene Archiv-Pixelprüfungen. Geltungsbereich und Nachweise: `docs/next_arbeitspaket_2026-10-18_search_deadline.md`.
+- [x] **SEARCH-DEADLINE-OVERRUN-AUDIT:** Den 261,734-Sekunden-Versuch mit Windows-Standbyereignissen von 09:06:52 bis 09:11:13 korreliert; eine weitere echte 967-Sekunden-Beobachtungslücke fällt ebenfalls mit Standby zusammen. Dauerhafte getrennte Phasen-/CPU-/UTC-Belege für Start, Bereitschaft, Aufsicht und Abbau ergänzt. Äußeres CLI-Budget zählt Prozessstart mit und weist verspätet beobachtete Prozessabschlüsse zurück; abgelaufene Eindämmung gibt keinen Worker frei. Historisch 79/80 Versuche und getrennt 80/80 vollständige Wiederholung erneut geprüft; drei neue Zielwiederholungen bestehen. 77/77 Tests, acht bytegleiche direkte/überwachte Qualitätsgegenproben und echte Zwischenstandsrettung; Archiv unverändert. Keine von Standby und Systemplanung unabhängige Echtzeitgarantie; alte interne Workerphase bleibt unbekannt. [Ursache, Reproduktion und Grenzen](next_arbeitspaket_2026-10-22_deadline_overrun_audit.md).
 
 - [ ] **SEARCH-DEADLINE-COMPAT:** Die neue Prozessaufsicht auf den ausdrücklich gewählten historischen `standard`-Kompatibilitätsmodus einschließlich bildübergreifender Transfers, Harmonisierung und Bestandsrückübernahme ausdehnen. Dessen 48 Archivfälle bleiben erhalten und bestehen die bisherige Pixelprüfung; die harte Bildzeitgarantie gilt derzeit für den regulären `semantic-only`-Pfad. Keine unüberwachte Nachoptimierung oder Änderung bereits geprüfter Ausgaben einführen.
-- [x] **SEARCH-SCHEDULER-02:** Fortsetzbare Registrierungen und gemeinsame Zeitscheiben für Modellhypothesen; Runtime-Anschluss für native/getrennte Kurztexte und ihre Zeichenverfeinerungen. Lokale/gekoppelte/globalere Parameter-Bots erhalten Anteile nach relativem Fortschritt pro aktiver Sekunde, mit reservierter Erkundung, Stagnationsabschaltung und bildgebundenem Rendercache. Deadline und unabhängige Qualitätsfreigabe bleiben erhalten. Umfang, Elternvergleich und Grenzen: `docs/history/next_arbeitspaket_2026-10-18_search_scheduler.md`. Allgemeiner Szenenaufbau bleibt GENERAL-SCENE-01; vollständige Qualitätskurven bleiben BENCHMARK-ANYTIME-01.
-- [x] **BENCHMARK-ANYTIME-01:** 192 echte überwachte Bildversuche mit 1/5/15/60 Sekunden, drei Seeds, eingefrorenem Elternstand, neuen Szenen/Formfamilien und identischem Raster mit umformulierter Beschreibung. 185 SVGs unabhängig erneut geprüft, 113 vollständige Freigaben; Fehlversuche bleiben im Nenner. Bildzeit-Median/p95, Renderzahlen und Rohtelemetrie einschließlich einer auffälligen Batchunterbrechung dokumentiert. Ab fünf Sekunden erreichen beide Stände dieselben 5/8 Fälle; Umformulierungs- und Strukturfehler bleiben Folgearbeit. Alle 377 Archivpaare unverändert. Details: `docs/history/next_arbeitspaket_2026-10-18_benchmark_anytime.md`.
-- [x] **COMPONENT-VALUE-01:** Komponentenbeitrag als integrierten Runtime-/CLI-/CI-Modus messen: echte Schaltpunkte und leichte Laufzeitbeobachtung, gepaarte Produktionskonvertierungen mit/ohne Komponenten bei gleichem Budget, isolierte Caches, Wechselwirkungen und seltene Fähigkeiten berücksichtigen. Nutzen, Schaden, nachgewiesene Gleichwertigkeit und unklare Evidenz unterscheiden; Qualitätsprüfungen bleiben der feste Maßstab. Abnahme verlangt tatsächliche Ausgaben statt Ersatzscores, nachweislich wirksame Schalter, Kontrollfälle und mindestens eine anhand unabhängiger Gegenproben begründete Vereinfachung oder Beibehaltung. Mit den sechs Such-Bots beginnen; keine automatische Codeentfernung aus schwacher Evidenz. IDO-19/IDO-21 und BENCHMARK-ANYTIME-01 einbeziehen. Konzept und Abnahmekriterien: [Komponentenbeitrag und neuronale Erkennung](component_value_and_neural_detection_plan_2026-10-18.md). **Abnahme 2026-10-19:** Erster Umfang für sechs Bots mit vollständiger Initialisierungsabschaltung, 375 echten Versuchen, unabhängigen SVG-Prüfungen, kontrollierten Eingriffen und CI-Anschluss. Alle sechs Bots bleiben bei unklarer Evidenz erhalten; 377 Archivpaare unverändert. Umfang und Grenzen: `docs/history/next_arbeitspaket_2026-10-18_component_value.md`.
-- [ ] **NEURAL-ELEMENTS-01:** Kleines neuronales Netz als optionalen Erkennungs-Bot für Grundformen/Textbereiche und Positionen gegen die vorhandene analytische Erkennung prüfen. Synthetische und reale Daten, familienweise Trennung vor Augmentation, unbekannte Formen und Konfidenzfehler berücksichtigen; Bildklassifikation nicht mit Mehrinstanzdetektion verwechseln. Tatsächlicher Anschluss an die Szenenbildung und CLI-Vergleich mit/ohne Netz einschließlich Initialisierung, Inferenz und Speicher sind Pflicht. Erst bei belastbarem End-to-End-Nutzen auf unabhängigen realen Familien in den Standardpfad übernehmen; unabhängige Qualitätsprüfungen unverändert. COMPONENT-VALUE-01 als Nachweisrahmen nutzen. Konzept und Abnahmekriterien: [Neuronale Erkennung und Komponentenbeitrag](component_value_and_neural_detection_plan_2026-10-18.md). **Versuch 2026-10-19 abgeschlossen, produktive Abnahme offen:** optionales kleines CNN, drei Trainingsseeds, 84 echte CLI-Gegenproben und unabhängige Instanzprüfung. Kein zusätzlicher Erfolg; analytischer Standard bleibt aktiv. Erster Versuch: docs/next_arbeitspaket_2026-10-19_neural_elements.md. Das reale Folgeexperiment ist ebenfalls ohne belastbaren End-to-End-Nutzen abgeschlossen: `docs/history/next_arbeitspaket_2026-10-19_neural_real_regions.md`; produktive Abnahme bleibt offen.
+- [x] **SEARCH-SCHEDULER-02:** Fortsetzbare Registrierungen und gemeinsame Zeitscheiben für Modellhypothesen; Runtime-Anschluss für native/getrennte Kurztexte und ihre Zeichenverfeinerungen. Lokale/gekoppelte/globalere Parameter-Bots erhalten Anteile nach relativem Fortschritt pro aktiver Sekunde, mit reservierter Erkundung, Stagnationsabschaltung und bildgebundenem Rendercache. Deadline und unabhängige Qualitätsfreigabe bleiben erhalten. Umfang, Elternvergleich und Grenzen: `docs/next_arbeitspaket_2026-10-18_search_scheduler.md`. Allgemeiner Szenenaufbau bleibt GENERAL-SCENE-01; vollständige Qualitätskurven bleiben BENCHMARK-ANYTIME-01.
+- [x] **BENCHMARK-ANYTIME-01:** 192 echte überwachte Bildversuche mit 1/5/15/60 Sekunden, drei Seeds, eingefrorenem Elternstand, neuen Szenen/Formfamilien und identischem Raster mit umformulierter Beschreibung. 185 SVGs unabhängig erneut geprüft, 113 vollständige Freigaben; Fehlversuche bleiben im Nenner. Bildzeit-Median/p95, Renderzahlen und Rohtelemetrie einschließlich einer auffälligen Batchunterbrechung dokumentiert. Ab fünf Sekunden erreichen beide Stände dieselben 5/8 Fälle; Umformulierungs- und Strukturfehler bleiben Folgearbeit. Alle 377 Archivpaare unverändert. Details: `docs/next_arbeitspaket_2026-10-18_benchmark_anytime.md`.
+- [x] **COMPONENT-VALUE-01:** Komponentenbeitrag als integrierten Runtime-/CLI-/CI-Modus messen: echte Schaltpunkte und leichte Laufzeitbeobachtung, gepaarte Produktionskonvertierungen mit/ohne Komponenten bei gleichem Budget, isolierte Caches, Wechselwirkungen und seltene Fähigkeiten berücksichtigen. Nutzen, Schaden, nachgewiesene Gleichwertigkeit und unklare Evidenz unterscheiden; Qualitätsprüfungen bleiben der feste Maßstab. Abnahme verlangt tatsächliche Ausgaben statt Ersatzscores, nachweislich wirksame Schalter, Kontrollfälle und mindestens eine anhand unabhängiger Gegenproben begründete Vereinfachung oder Beibehaltung. Mit den sechs Such-Bots beginnen; keine automatische Codeentfernung aus schwacher Evidenz. IDO-19/IDO-21 und BENCHMARK-ANYTIME-01 einbeziehen. Konzept und Abnahmekriterien: [Komponentenbeitrag und neuronale Erkennung](component_value_and_neural_detection_plan_2026-10-18.md). **Abnahme 2026-10-19:** Erster Umfang für sechs Bots mit vollständiger Initialisierungsabschaltung, 375 echten Versuchen, unabhängigen SVG-Prüfungen, kontrollierten Eingriffen und CI-Anschluss. Alle sechs Bots bleiben bei unklarer Evidenz erhalten; 377 Archivpaare unverändert. Umfang und Grenzen: `docs/next_arbeitspaket_2026-10-18_component_value.md`.
+- [ ] **NEURAL-ELEMENTS-01:** Kleines neuronales Netz als optionalen Erkennungs-Bot für Grundformen/Textbereiche und Positionen gegen die vorhandene analytische Erkennung prüfen. Synthetische und reale Daten, familienweise Trennung vor Augmentation, unbekannte Formen und Konfidenzfehler berücksichtigen; Bildklassifikation nicht mit Mehrinstanzdetektion verwechseln. Tatsächlicher Anschluss an die Szenenbildung und CLI-Vergleich mit/ohne Netz einschließlich Initialisierung, Inferenz und Speicher sind Pflicht. Erst bei belastbarem End-to-End-Nutzen auf unabhängigen realen Familien in den Standardpfad übernehmen; unabhängige Qualitätsprüfungen unverändert. COMPONENT-VALUE-01 als Nachweisrahmen nutzen. Konzept und Abnahmekriterien: [Neuronale Erkennung und Komponentenbeitrag](component_value_and_neural_detection_plan_2026-10-18.md). **Versuch 2026-10-19 abgeschlossen, produktive Abnahme offen:** optionales kleines CNN, drei Trainingsseeds, 84 echte CLI-Gegenproben und unabhängige Instanzprüfung. Kein zusätzlicher Erfolg; analytischer Standard bleibt aktiv. Erster Versuch: docs/next_arbeitspaket_2026-10-19_neural_elements.md. Das reale Folgeexperiment ist ebenfalls ohne belastbaren End-to-End-Nutzen abgeschlossen: `docs/next_arbeitspaket_2026-10-19_neural_real_regions.md`; produktive Abnahme bleibt offen.
 - [x] **NEURAL-ELEMENTS-01-EXPERIMENT:** Ersten optionalen CNN-Kandidaten an die echte Szenenbildung angeschlossen, mit drei Seeds und sechs realen Familien untersucht und als negatives Ergebnis dokumentiert. Keine Standardaktivierung, keine Entfernung vorhandener Erkenner; alle 377 Archivpaare unverändert.
-- [x] **NEURAL-ELEMENTS-REAL-02:** Begrenztes reales Folgeexperiment abgeschlossen: 27 visuell unabhängig markierte Raster, neun reale Trainingsfamilien, die sechs alten Familien nur als Entwicklung und zehn neue gesperrte Abnahmefamilien. Zweiter optionaler CNN-Kandidat mit mehrstufigen Regionen; drei Trainings- × drei Suchseeds, 180 echte CLI-Versuche, lokale Regionsprüfungen und CI-Smoke. 71/90 analytisch und 72/90 mit Netz; ein regulärer Timeout und ein unbeobachteter unterbrochener Start bleiben im Nenner. Kein belastbarer End-to-End-Nutzen, keine Standardübernahme; 377 Archivpaare hashgleich. Details und Grenzen: `docs/history/next_arbeitspaket_2026-10-19_neural_real_regions.md`. Diese zehn Abnahmefamilien künftig nur für Entwicklung verwenden; neue Netzabnahme benötigt neue gesperrte Familien.
+- [x] **NEURAL-ELEMENTS-REAL-02:** Begrenztes reales Folgeexperiment abgeschlossen: 27 visuell unabhängig markierte Raster, neun reale Trainingsfamilien, die sechs alten Familien nur als Entwicklung und zehn neue gesperrte Abnahmefamilien. Zweiter optionaler CNN-Kandidat mit mehrstufigen Regionen; drei Trainings- × drei Suchseeds, 180 echte CLI-Versuche, lokale Regionsprüfungen und CI-Smoke. 71/90 analytisch und 72/90 mit Netz; ein regulärer Timeout und ein unbeobachteter unterbrochener Start bleiben im Nenner. Kein belastbarer End-to-End-Nutzen, keine Standardübernahme; 377 Archivpaare hashgleich. Details und Grenzen: `docs/next_arbeitspaket_2026-10-19_neural_real_regions.md`. Diese zehn Abnahmefamilien künftig nur für Entwicklung verwenden; neue Netzabnahme benötigt neue gesperrte Familien.
 - [x] **SEARCH-RETRY-01:** Geprüfte zufriedenstellende SVGs werden im adaptiven Modus nicht erneut mit größeren Iterationszahlen gesucht. Ein vollständiger Wiederholungsversuch ohne relevante Verbesserung beendet weitere Wiederholungen auch bei strukturiertem Restfehler; bessere SVGs und Messwerte bleiben erhalten. `docs/adaptive_conversion_search_2026-10-18.md`.
 
 - [x] **PB-LEARN-PROCESS:** Ursachenanalyse, Gruppierung gemeinsamer Fehler, mindestens zwei Lösungshypothesen, begrenzter Vergleich, unveränderte Gates und dauerhafte Regressionen nach jedem erweiterten Plan-B-Fehlschlag dokumentiert und in die erzeugten Fehleraufgaben aufgenommen. `docs/plan_b_learning_workflow.md`.
-- [x] **SEARCH-PORTFOLIO-01:** Vier alternative Kurztextmodelle, drei zusätzliche Parametersuchwege, Seeds, Rendercache, Budget, Fortschrittsbelege und gespeicherte geprüfte Varianten. Standardmodus kann erfolgreiche Modellarten priorisieren; semantic-only bleibt unabhängig. Keine allgemeine neue Topologiesuche. `docs/history/next_arbeitspaket_2026-10-17_ac0840_search.md`.
+- [x] **SEARCH-PORTFOLIO-01:** Vier alternative Kurztextmodelle, drei zusätzliche Parametersuchwege, Seeds, Rendercache, Budget, Fortschrittsbelege und gespeicherte geprüfte Varianten. Standardmodus kann erfolgreiche Modellarten priorisieren; semantic-only bleibt unabhängig. Keine allgemeine neue Topologiesuche. `docs/next_arbeitspaket_2026-10-17_ac0840_search.md`.
 - [x] **UML-CONVERSION:** Sequenz-, Klassen- und Zustandsdiagramm für Konvertierung, Suchportfolio und Fehlernachbearbeitung ergänzt. `docs/conversion_search_uml.md`.
 - [ ] **PB-LEARN-INVENTORY:** Historische gescheiterte erweiterte Plan-B-Aufgaben vollständig inventarisieren, Belege sichern und nach reproduzierten gemeinsamen Ursachen priorisieren. Die vermutete Zahl von etwa 20 Fällen ist noch nicht verifiziert. Verfahren: `docs/plan_b_learning_workflow.md`.
 
@@ -65,21 +65,21 @@ fehlende gemeinsame Szenenauswahl nach. IDO-19 und IDO-21 sind wieder offen:
 ihre bisherigen Werkzeuge prüfen Berichtsverträge mit Ersatzwerten und keine
 echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gültig.
 
-- [x] **GENERAL-SCENE-FILLED-02:** Nächsten gefüllten/verschachtelten Teilumfang abgeschlossen: ein bis drei native Kreis-/Rechteckinstanzen, farbbasierte Formalternativen, räumliche Deduplizierung, Anzahl-/Negations-/Beziehungsabgleich und gemeinsame Rasterverfeinerung im überwachten CLI-Pfad. 18 eingefrorene Entwicklungs- und 18 neue finale Prüfszenen verbessern sich von 0/18 auf jeweils 18/18; 18 Umbenennungen sind bytegleich, eine unabhängige verschachtelte Plan-B-Vorlage besteht 17/17. Unabhängige Objekt-/Regionsprüfung und beschädigte Gegenproben, unveränderte Qualitätsgrenzen und CI-Smoke. Allgemeine Fusion/partielle Überdeckungen verbleiben bei GENERAL-SCENE-01; keine CNN-Standardübernahme. Details: `docs/history/next_arbeitspaket_2026-10-20_layered_scene.md`.
+- [x] **GENERAL-SCENE-FILLED-02:** Nächsten gefüllten/verschachtelten Teilumfang abgeschlossen: ein bis drei native Kreis-/Rechteckinstanzen, farbbasierte Formalternativen, räumliche Deduplizierung, Anzahl-/Negations-/Beziehungsabgleich und gemeinsame Rasterverfeinerung im überwachten CLI-Pfad. 18 eingefrorene Entwicklungs- und 18 neue finale Prüfszenen verbessern sich von 0/18 auf jeweils 18/18; 18 Umbenennungen sind bytegleich, eine unabhängige verschachtelte Plan-B-Vorlage besteht 17/17. Unabhängige Objekt-/Regionsprüfung und beschädigte Gegenproben, unveränderte Qualitätsgrenzen und CI-Smoke. Allgemeine Fusion/partielle Überdeckungen verbleiben bei GENERAL-SCENE-01; keine CNN-Standardübernahme. Details: `docs/next_arbeitspaket_2026-10-20_layered_scene.md`.
 
-- [x] **GENERAL-SCENE-01:** Begrenzten allgemeinen Szenenweg für ein bis drei Kreis-/Rechteckinstanzen einschließlich gemischter Anordnungen abgeschlossen. Gemeinsame Instanzgruppen führen vollständige Vordergrund-/Farbgrenzen, sichtbare Kreisbögen und Rechteckseiten zusammen; Formalternativen und Zeichenreihenfolgen konkurrieren im gemeinsamen überwachten Rasterfit. Beschreibung, Anzahl, Negationen und tatsächliche native Beziehungen bleiben verbindlich. Bestehende getrennte Kontur-/Flächen- und vollständig verschachtelte Szenen behalten Vorrang. Zwölf vorab eingefrorene und zwölf nach endgültigem Code-Freeze erzeugte CLI-Szenen verbessern sich von jeweils 0/12 auf 12/12; unabhängige native Objekt-/Regionsprüfung, bytegleiche Umbenennungen und 17/17 erweiterte Varianten. 377/377 Archiv-Neukonvertierungen bestehen; alle gespeicherten Paare bleiben hashgleich. Umfang und Nachweise: `docs/history/next_arbeitspaket_2026-10-20_scene_fusion.md`. Der historische Perception-IR-Merge anderer Detektoren bleibt bestehen; der Abschluss gilt für den beschriebenen begrenzten Kreis-/Rechteckvertrag.
+- [x] **GENERAL-SCENE-01:** Begrenzten allgemeinen Szenenweg für ein bis drei Kreis-/Rechteckinstanzen einschließlich gemischter Anordnungen abgeschlossen. Gemeinsame Instanzgruppen führen vollständige Vordergrund-/Farbgrenzen, sichtbare Kreisbögen und Rechteckseiten zusammen; Formalternativen und Zeichenreihenfolgen konkurrieren im gemeinsamen überwachten Rasterfit. Beschreibung, Anzahl, Negationen und tatsächliche native Beziehungen bleiben verbindlich. Bestehende getrennte Kontur-/Flächen- und vollständig verschachtelte Szenen behalten Vorrang. Zwölf vorab eingefrorene und zwölf nach endgültigem Code-Freeze erzeugte CLI-Szenen verbessern sich von jeweils 0/12 auf 12/12; unabhängige native Objekt-/Regionsprüfung, bytegleiche Umbenennungen und 17/17 erweiterte Varianten. 377/377 Archiv-Neukonvertierungen bestehen; alle gespeicherten Paare bleiben hashgleich. Umfang und Nachweise: `docs/next_arbeitspaket_2026-10-20_scene_fusion.md`. Der historische Perception-IR-Merge anderer Detektoren bleibt bestehen; der Abschluss gilt für den beschriebenen begrenzten Kreis-/Rechteckvertrag.
 
-- [x] **GENERAL-SCENE-VISIBILITY-04:** Begrenzten Sichtbarkeitsumfang für zwei bis drei gefüllte Kreis-/Rechteckinstanzen mit eigenen dunklen Konturen, kombinierter Verschachtelung/Teilüberdeckung und eindeutigen sprachlichen Größen-/Tiefenrollen abgeschlossen. Sichtbare Normalenbänder liefern Konturbreiten; verborgene Rechteckseiten bleiben unbekannt. Reihenfolgen benötigen beobachtete gemeinsame Innenflächen. Zwölf eingefrorene CLI-Szenen verbessern sich von 0/12 auf 12/12, zwölf neue gedrehte/umformulierte Szenen bestehen 12/12, neutrale Dateinamen sind bytegleich und eine erweiterte Vorlage besteht 17/17. Unabhängige native Objekt-, Konturbreiten- und Regionsprüfungen bei unveränderten Qualitätsgrenzen. Umfang und Nachweise: `docs/history/next_arbeitspaket_2026-10-21_scene_visibility.md`.
+- [x] **GENERAL-SCENE-VISIBILITY-04:** Begrenzten Sichtbarkeitsumfang für zwei bis drei gefüllte Kreis-/Rechteckinstanzen mit eigenen dunklen Konturen, kombinierter Verschachtelung/Teilüberdeckung und eindeutigen sprachlichen Größen-/Tiefenrollen abgeschlossen. Sichtbare Normalenbänder liefern Konturbreiten; verborgene Rechteckseiten bleiben unbekannt. Reihenfolgen benötigen beobachtete gemeinsame Innenflächen. Zwölf eingefrorene CLI-Szenen verbessern sich von 0/12 auf 12/12, zwölf neue gedrehte/umformulierte Szenen bestehen 12/12, neutrale Dateinamen sind bytegleich und eine erweiterte Vorlage besteht 17/17. Unabhängige native Objekt-, Konturbreiten- und Regionsprüfungen bei unveränderten Qualitätsgrenzen. Umfang und Nachweise: `docs/next_arbeitspaket_2026-10-21_scene_visibility.md`.
 
 - [ ] **GENERAL-SCENE-REAL-05:** Neue reale Kreis-/Rechteckfamilien vor Entwicklung unabhängig markieren und sperren; Szenen mit sichtbaren Überdeckungen, Konturen und Verschachtelung prüfen. Eindeutige Farb-/Lagebezüge zusätzlich zu Größenrollen typisieren, unbekannte und mehrdeutige Beziehungen konservativ behandeln. Echte CLI-Vorher-/Nachher-Vergleiche mit unveränderten unabhängigen Objekt-/Regionsgates; Kataloggewinne nur anhand neuer abgenommener Originalbild-/SVG-Paare zählen. Übertragung auf mindestens zwei neue reale Familien mit anderen Kombinationen bereits unterstützter Primitive über denselben Szenenweg ohne neue Familienvorlage oder Familien-Dispatch belegen; Varianten und unabhängige Familien getrennt zählen. Präzisierte Abnahme: [Projekteinschätzung](quality_review_tasks_2026-10-21.md#general-scene-real-05--übertragung-statt-weiterer-einzelfallpfade).
 
-- [x] **GENERAL-SCENE-MIXED-07 (begrenzter Entwicklungsschritt):** Gemeinsame Rasterregistrierung für eine Verlaufsscheibe und ein bis zwei eingeschlossene flächige Rechtecke. Erster eingefrorener Realtransfer GE0026/GE0027: 0/2. Nach ausdrücklich anschließender Entwicklung: 2/2 unter beiden regulären und den unabhängigen strengen Form-/Regions-/Pixelgates; neutrale Umbenennung bytegleich. Endgültiger Code: Entwicklung 11/12 mit einem Fünf-Sekunden-Budgetabbruch, danach erzeugte synthetische Szenen 12/12. Kein neuer unberührter realer Holdout, keine Katalogzahlerhöhung; GENERAL-SCENE-REAL-05 bleibt offen. [Ergebnisse, Fehlversuche und Restabnahme](history/next_arbeitspaket_2026-10-22_mixed_gradient_scene.md).
+- [x] **GENERAL-SCENE-MIXED-07 (begrenzter Entwicklungsschritt):** Gemeinsame Rasterregistrierung für eine Verlaufsscheibe und ein bis zwei eingeschlossene flächige Rechtecke. Erster eingefrorener Realtransfer GE0026/GE0027: 0/2. Nach ausdrücklich anschließender Entwicklung: 2/2 unter beiden regulären und den unabhängigen strengen Form-/Regions-/Pixelgates; neutrale Umbenennung bytegleich. Endgültiger Code: Entwicklung 11/12 mit einem Fünf-Sekunden-Budgetabbruch, danach erzeugte synthetische Szenen 12/12. Kein neuer unberührter realer Holdout, keine Katalogzahlerhöhung; GENERAL-SCENE-REAL-05 bleibt offen. [Ergebnisse, Fehlversuche und Restabnahme](next_arbeitspaket_2026-10-22_mixed_gradient_scene.md).
 
-- [x] **GENERAL-SCENE-GRADIENT-06 (begrenzter Entwicklungsschritt):** Native Rechteckszenen mit axialen Verläufen, gerundeten Ecken, optionalen dunklen Konturen und weißer Innenfläche. Die bekannten Varianten DLG0011/DLG0018 verbessern sich von 0/2 auf 2/2 unter beiden regulären und strengeren unabhängigen Gates; eigenständige Beschreibungen in beiden Katalogen. Neue synthetische CLI-Fälle bestehen 12/12, Umbenennungen sind bytegleich und eine abschließende Plan-B-Vorlage besteht 17/17. Archiv 379 Paare, alle 377 bisherigen Datensätze und Bild-/SVG-Paare unverändert. Zwei Einzelpanel-IoU-Fehler bleiben sichtbar. Keine zwei neuen realen Familien; GENERAL-SCENE-REAL-05 bleibt offen. [Nachweise und Grenzen](history/next_arbeitspaket_2026-10-22_gradient_scene.md).
+- [x] **GENERAL-SCENE-GRADIENT-06 (begrenzter Entwicklungsschritt):** Native Rechteckszenen mit axialen Verläufen, gerundeten Ecken, optionalen dunklen Konturen und weißer Innenfläche. Die bekannten Varianten DLG0011/DLG0018 verbessern sich von 0/2 auf 2/2 unter beiden regulären und strengeren unabhängigen Gates; eigenständige Beschreibungen in beiden Katalogen. Neue synthetische CLI-Fälle bestehen 12/12, Umbenennungen sind bytegleich und eine abschließende Plan-B-Vorlage besteht 17/17. Archiv 379 Paare, alle 377 bisherigen Datensätze und Bild-/SVG-Paare unverändert. Zwei Einzelpanel-IoU-Fehler bleiben sichtbar. Keine zwei neuen realen Familien; GENERAL-SCENE-REAL-05 bleibt offen. [Nachweise und Grenzen](next_arbeitspaket_2026-10-22_gradient_scene.md).
 
-- [x] **GENERAL-SCENE-REAL-TRANSFER-08 (begrenzte Untersuchung):** Zwei zuvor fixierte reale Zusammensetzungen GE0018/GE0307 mit unveränderter Runtime und festen Budgets durch die echte CLI geprüft: 0/2. Originale, SVGs, Oracle, Logs und Freeze dauerhaft gesichert; schreibfreier Nachprüfer und neun Evidenztests. Historische Katalogexposition und fehlender menschlicher Annotationsaudit begrenzen Unabhängigkeit. Keine positive Fähigkeitsabnahme, kein Kataloggewinn; GENERAL-SCENE-REAL-05 bleibt offen. [Ergebnisse und Ursachen](history/next_arbeitspaket_2026-10-22_real_scene_transfer.md).
+- [x] **GENERAL-SCENE-REAL-TRANSFER-08 (begrenzte Untersuchung):** Zwei zuvor fixierte reale Zusammensetzungen GE0018/GE0307 mit unveränderter Runtime und festen Budgets durch die echte CLI geprüft: 0/2. Originale, SVGs, Oracle, Logs und Freeze dauerhaft gesichert; schreibfreier Nachprüfer und neun Evidenztests. Historische Katalogexposition und fehlender menschlicher Annotationsaudit begrenzen Unabhängigkeit. Keine positive Fähigkeitsabnahme, kein Kataloggewinn; GENERAL-SCENE-REAL-05 bleibt offen. [Ergebnisse und Ursachen](next_arbeitspaket_2026-10-22_real_scene_transfer.md).
 
-- [ ] **GENERAL-SCENE-COMPOSITION-09:** Vorhandene Rundungs-/Überdeckungsbausteine und mehr als zwei Rechteckkinder in einem gemeinsamen Verlaufsszenenvertrag verbinden. Alle Beschreibungsaussagen und Instanz-/Auswahlbelege erhalten, unpassende Ersatzmodelle nicht als semantische Abnahme zählen. GE0018/GE0307 künftig nur Entwicklung. Zwei andere reale Prüffamilien vor Runtime-Entwicklung markieren und sperren; unabhängige Objekt-/Regions-/Pixelgates ohne Nachstimmung bestehen. Übergeordnete Abnahme bleibt GENERAL-SCENE-REAL-05; keine neue Symbolvorlage oder Familienkennung. [Lücke und Abnahme](history/next_arbeitspaket_2026-10-22_real_scene_transfer.md#ursache-und-nächste-entwicklung).
+- [ ] **GENERAL-SCENE-COMPOSITION-09:** Vorhandene Rundungs-/Überdeckungsbausteine und mehr als zwei Rechteckkinder in einem gemeinsamen Verlaufsszenenvertrag verbinden. Alle Beschreibungsaussagen und Instanz-/Auswahlbelege erhalten, unpassende Ersatzmodelle nicht als semantische Abnahme zählen. GE0018/GE0307 künftig nur Entwicklung. Zwei andere reale Prüffamilien vor Runtime-Entwicklung markieren und sperren; unabhängige Objekt-/Regions-/Pixelgates ohne Nachstimmung bestehen. Übergeordnete Abnahme bleibt GENERAL-SCENE-REAL-05; keine neue Symbolvorlage oder Familienkennung. [Lücke und Abnahme](next_arbeitspaket_2026-10-22_real_scene_transfer.md#ursache-und-nächste-entwicklung).
 
 ## Katalog-CI (2026-10-11)
 
@@ -91,11 +91,11 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 ### Aktueller Plan-B-Stand (2026-10-18)
 
-- [x] **AC0232 – Dreiwegeventil mit angeschlossener M-Scheibe:** eigenständige Beschreibungen, vollständiger Rasterfit und diagonale Pfadverläufe. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. 377 Archivpaare; alle 374 bisherigen Datensätze bleiben unverändert. Die gefilterte reguläre Rotation ist anschließend leer. Nächstes Architekturpaket: SEARCH-DEADLINE-01. Details: `docs/history/next_arbeitspaket_2026-10-18_ac0232_m.md`.
+- [x] **AC0232 – Dreiwegeventil mit angeschlossener M-Scheibe:** eigenständige Beschreibungen, vollständiger Rasterfit und diagonale Pfadverläufe. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. 377 Archivpaare; alle 374 bisherigen Datensätze bleiben unverändert. Die gefilterte reguläre Rotation ist anschließend leer. Nächstes Architekturpaket: SEARCH-DEADLINE-01. Details: `docs/next_arbeitspaket_2026-10-18_ac0232_m.md`.
 
-**Neuester Architekturabschluss:** GENERAL-SCENE-VISIBILITY-04 mit sichtbaren eigenen Konturen bei Überdeckung, kombinierter Verschachtelung/Teilüberdeckung und verbindlichen Größen-/Tiefenrollen im begrenzten Kreis-/Rechteckumfang. Details: `docs/history/next_arbeitspaket_2026-10-21_scene_visibility.md`. GENERAL-SCENE-01 bleibt als vorheriger Fusionsabschluss dokumentiert.
+**Neuester Architekturabschluss:** GENERAL-SCENE-VISIBILITY-04 mit sichtbaren eigenen Konturen bei Überdeckung, kombinierter Verschachtelung/Teilüberdeckung und verbindlichen Größen-/Tiefenrollen im begrenzten Kreis-/Rechteckumfang. Details: `docs/next_arbeitspaket_2026-10-21_scene_visibility.md`. GENERAL-SCENE-01 bleibt als vorheriger Fusionsabschluss dokumentiert.
 
-**Vorherige Architekturarbeit:** COMPONENT-VALUE-01 hat die sechs Such-Bots mit echten Runtime-Schaltern und unabhängigen Gegenproben vermessen; bei unklarer Evidenz bleiben alle erhalten. NEURAL-ELEMENTS-01 und NEURAL-ELEMENTS-REAL-02 sind als begrenzte Experimente ohne belastbaren End-to-End-Nutzen abgeschlossen. Die produktive Netzabnahme bleibt offen. Nachweise: `docs/history/next_arbeitspaket_2026-10-18_component_value.md`, `docs/history/next_arbeitspaket_2026-10-19_neural_elements.md` und `docs/history/next_arbeitspaket_2026-10-19_neural_real_regions.md`.
+**Vorherige Architekturarbeit:** COMPONENT-VALUE-01 hat die sechs Such-Bots mit echten Runtime-Schaltern und unabhängigen Gegenproben vermessen; bei unklarer Evidenz bleiben alle erhalten. NEURAL-ELEMENTS-01 und NEURAL-ELEMENTS-REAL-02 sind als begrenzte Experimente ohne belastbaren End-to-End-Nutzen abgeschlossen. Die produktive Netzabnahme bleibt offen. Nachweise: `docs/next_arbeitspaket_2026-10-18_component_value.md`, `docs/next_arbeitspaket_2026-10-19_neural_elements.md` und `docs/next_arbeitspaket_2026-10-19_neural_real_regions.md`.
 
 **Nächste Architekturarbeit:** GENERAL-SCENE-COMPOSITION-09 als Entwicklungsschritt innerhalb von GENERAL-SCENE-REAL-05: vorhandene Primitive, Rundung und Überdeckung im Verlaufsszenenweg gemeinsam anschließen; andere reale Prüffamilien vor Entwicklung sperren. IDO-19/IDO-21 und historische Kompatibilitätsaufsicht bleiben offen.
 
@@ -106,26 +106,26 @@ keine weitere Größen-/Farbvariante als neue Familie zählen.
 
 **Neuester Familienabschluss:** AC0232 M/L/S. Keine weiteren Kandidaten in der bisherigen gefilterten Rotation; offene Architektur- und Bestandsaufgaben bleiben bestehen.
 
-- [x] **AC0921 – Kreisscheibe mit Q und unterem Griff:** eigenständige Beschreibungen und allgemeine Erweiterung der Rasterregistrierung um einen mittigen unteren Griff. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression; eine unabhängige R-Vorlage besteht 17/17 echte CLI-Fälle. 374 Archivpaare, alle 371 bisherigen Datensätze unverändert. Nächste Rotation: `AC0232_M`. Details: `docs/history/next_arbeitspaket_2026-10-18_ac0921_m.md`.
+- [x] **AC0921 – Kreisscheibe mit Q und unterem Griff:** eigenständige Beschreibungen und allgemeine Erweiterung der Rasterregistrierung um einen mittigen unteren Griff. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression; eine unabhängige R-Vorlage besteht 17/17 echte CLI-Fälle. 374 Archivpaare, alle 371 bisherigen Datensätze unverändert. Nächste Rotation: `AC0232_M`. Details: `docs/next_arbeitspaket_2026-10-18_ac0921_m.md`.
 
 **Vorheriger Abschluss:** AC0921 M/L/S. Damalige nächste Rotation: `AC0232_M`.
 
 
-- [x] **GE0204 – zwei verschachtelte Flammen auf Verlaufsscheibe:** Eigenständige Beschreibung in beiden XML-Katalogen aktiviert den unveränderten allgemeinen Flammenfit. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. 371 Archivpaare, alle 368 bisherigen Datensätze unverändert. Nächste Rotation: `AC0921_M`, `AC0232_M`. Details: `docs/history/next_arbeitspaket_2026-10-18_ge0204_m.md`.
+- [x] **GE0204 – zwei verschachtelte Flammen auf Verlaufsscheibe:** Eigenständige Beschreibung in beiden XML-Katalogen aktiviert den unveränderten allgemeinen Flammenfit. M/L/S bestehen beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. 371 Archivpaare, alle 368 bisherigen Datensätze unverändert. Nächste Rotation: `AC0921_M`, `AC0232_M`. Details: `docs/next_arbeitspaket_2026-10-18_ge0204_m.md`.
 
 **Vorheriger Abschluss:** GE0204 M/L/S. Nächste Rotation: `AC0921_M`, `AC0232_M`.
 
 ### Vorheriger Plan-B-Stand (2026-10-17)
 
-- [x] **AC0910 – Kreisscheibe mit Lux:** eigenständige Beschreibungen und begrenzte Verfeinerung von Zeichenpositionen und Konturstärke. L/M/S bestehen beide regulären und die strengen Pixelgates; zwei unabhängige CLI-Batterien mit mPa bestehen jeweils 17/17. 368 Archivpaare, alle 365 bisherigen Datensätze unverändert. Nächste Rotation: `GE0204_M`, `AC0921_M`, `AC0232_M`. Details: `docs/history/next_arbeitspaket_2026-10-17_ac0910_l.md`.
+- [x] **AC0910 – Kreisscheibe mit Lux:** eigenständige Beschreibungen und begrenzte Verfeinerung von Zeichenpositionen und Konturstärke. L/M/S bestehen beide regulären und die strengen Pixelgates; zwei unabhängige CLI-Batterien mit mPa bestehen jeweils 17/17. 368 Archivpaare, alle 365 bisherigen Datensätze unverändert. Nächste Rotation: `GE0204_M`, `AC0921_M`, `AC0232_M`. Details: `docs/next_arbeitspaket_2026-10-17_ac0910_l.md`.
 
 **Vorheriger Abschluss:** AC0910 L/M/S; beide regulären und die strengen Gates bestanden. Nächste Rotation: `GE0204_M`, `AC0921_M`, `AC0232_M`.
 
-- [x] **SE0082 – Quadrat mit linkem Griff und horizontalem M:** eigenständige Beschreibung, allgemeine linke Quadrat-/Textregistrierung, lokale Zeichenprüfung und tatsächlicher Renderzähler. Beide regulären und die strengeren Pixelgates bestehen ohne Pflichtmetrikregression; zwei unabhängige CLI-Batterien bestehen jeweils 17/17. 356 archivierte Paare; alle 355 bisherigen Einträge unverändert. Nächste Rotation: `AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`, `AC0232_M`. Details: `docs/history/next_arbeitspaket_2026-10-17_se0082.md`.
+- [x] **SE0082 – Quadrat mit linkem Griff und horizontalem M:** eigenständige Beschreibung, allgemeine linke Quadrat-/Textregistrierung, lokale Zeichenprüfung und tatsächlicher Renderzähler. Beide regulären und die strengeren Pixelgates bestehen ohne Pflichtmetrikregression; zwei unabhängige CLI-Batterien bestehen jeweils 17/17. 356 archivierte Paare; alle 355 bisherigen Einträge unverändert. Nächste Rotation: `AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`, `AC0232_M`. Details: `docs/next_arbeitspaket_2026-10-17_se0082.md`.
 
-- [x] **AC0840 – Kurztext auf Kreisscheibe und alternative Suchmodelle:** S/M/L bestehen beide regulären und die strengen Pixelgates. Unabhängige Vorlage mit anderer Beschriftung, Palette und Lage besteht 17/17 echte CLI-Fälle. 355 archivierte Paare; alle 352 bisherigen Einträge unverändert. Nächste Rotation: `SE0082`, `AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`. Details: `docs/history/next_arbeitspaket_2026-10-17_ac0840_search.md`.
+- [x] **AC0840 – Kurztext auf Kreisscheibe und alternative Suchmodelle:** S/M/L bestehen beide regulären und die strengen Pixelgates. Unabhängige Vorlage mit anderer Beschriftung, Palette und Lage besteht 17/17 echte CLI-Fälle. 355 archivierte Paare; alle 352 bisherigen Einträge unverändert. Nächste Rotation: `SE0082`, `AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`. Details: `docs/next_arbeitspaket_2026-10-17_ac0840_search.md`.
 
-- [x] **AC0411 – aufwärts gerichtete Sehnen und Innen-T:** Eigenständige Beschreibungen in beiden XML-Katalogen aktivieren den unveränderten allgemeinen Rasterfit. Alle neun Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression; die sechs farbigen JPGs zusätzlich das strenge Pixelgate. Zwei unabhängige CLI-Batterien bestehen jeweils 17/17. Details: `docs/history/next_arbeitspaket_2026-10-17_ac0411_1_m.md`.
+- [x] **AC0411 – aufwärts gerichtete Sehnen und Innen-T:** Eigenständige Beschreibungen in beiden XML-Katalogen aktivieren den unveränderten allgemeinen Rasterfit. Alle neun Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression; die sechs farbigen JPGs zusätzlich das strenge Pixelgate. Zwei unabhängige CLI-Batterien bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-17_ac0411_1_m.md`.
 - [ ] **AC0411-PB-GREY:** Die grauen JPGs `AC0411_{L,M,S}` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.750923`, `0.611628`, `0.809524 < 0.85`). Beide regulären Gates bestehen. Helle JPEG-Flächen an der unveränderten Vordergrundschwelle separat untersuchen; Quellen, akzeptierte SVGs und Grenzen erhalten.
 
 **Vorheriger Abschluss:** `AC0411_1_M` und acht Farb-/Größen-Holdouts.
@@ -136,7 +136,7 @@ unverändert, neun neue AC0411-Paare und der wiederhergestellte SE0082-Eintrag.
 Nächste reguläre Rotation: `AC0910_L`, `GE0204_M`, `AC0921_M`, `AC0232_M`.
 Die übrigen offenen Aufgaben bleiben erhalten.
 
-- [x] **AC0424 – gerichtete Sehnen und Spirale auf Kreisscheibe:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung des vorhandenen Rasterfits; alle neun Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression. Die sechs farbigen JPGs bestehen zusätzlich die strengeren Pixelgrenzen. Details: `docs/history/next_arbeitspaket_2026-10-17_ac0424_2_m.md`.
+- [x] **AC0424 – gerichtete Sehnen und Spirale auf Kreisscheibe:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung des vorhandenen Rasterfits; alle neun Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression. Die sechs farbigen JPGs bestehen zusätzlich die strengeren Pixelgrenzen. Details: `docs/next_arbeitspaket_2026-10-17_ac0424_2_m.md`.
 - [ ] **AC0424-PB-GREY:** Die drei grauen JPGs `AC0424_{L,M,S}` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.711278`, `0.734266`, `0.696203 < 0.85`). Beide regulären Gates bestehen. JPEG-Abweichungen an der unveränderten Vordergrundschwelle getrennt untersuchen; Quellen, akzeptierte SVGs und Grenzen erhalten.
 
 **Vorheriger Abschluss:** `AC0424_2_M` und acht Farb-/Größen-Holdouts.
@@ -147,7 +147,7 @@ alle 343 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
 Nur die neun regulär abgenommenen Varianten sind zusätzlich ausgeschlossen;
 der strengere graue IoU-Folgepunkt bleibt offen.
 
-- [x] **GE9033 – T-Verzweigung mit Schaft nach unten:** eigenständige Beschreibungen; die unveränderte allgemeine Registrierung besteht mit allen 14 Farb-/Größenvarianten beide regulären Gates ohne Pflichtmetrikregression. 13 JPGs bestehen zusätzlich die strengeren Pixelgrenzen. Details: `docs/history/next_arbeitspaket_2026-10-17_ge9033_6m.md`.
+- [x] **GE9033 – T-Verzweigung mit Schaft nach unten:** eigenständige Beschreibungen; die unveränderte allgemeine Registrierung besteht mit allen 14 Farb-/Größenvarianten beide regulären Gates ohne Pflichtmetrikregression. 13 JPGs bestehen zusätzlich die strengeren Pixelgrenzen. Details: `docs/next_arbeitspaket_2026-10-17_ge9033_6m.md`.
 - [ ] **GE9033-PB-GREY:** `GE9033_4M.jpg` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.8490196078431372 < 0.85`). Beide regulären Gates bestehen. Sehr helle graue Fläche und JPEG-Abweichungen nahe der unveränderten Vordergrundschwelle untersuchen; Quellen, akzeptierte SVGs und Grenzen erhalten.
 
 **Vorheriger Abschluss:** `GE9033_6M` und 13 Farb-/Größen-Holdouts auf
@@ -158,9 +158,9 @@ unverändert. Nächste reguläre Rotation: `AC0424_2_M`, `AC0840_S`,
 `AC0840_M`, `SE0082`, `AC0411_1_M`. Nur die 14 regulär abgenommenen
 GE9033-Varianten sind zusätzlich ausgeschlossen; der strengere graue
 IoU-Folgepunkt bleibt offen. Bestandszahlen und persönliche Prüfliste:
-`docs/history/project_status_2026-10-17.md`. Bestehende offene Aufgaben bleiben erhalten.
+`docs/project_status_2026-10-17.md`. Bestehende offene Aufgaben bleiben erhalten.
 
-- [x] **AC0414 – Kreis mit gerichteten Sehnen und Innen-T:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung der Kreis-/T-Registrierung. Alle neun Farb-/Größen-/Richtungsvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression; die sechs farbigen JPGs zusätzlich die strengeren Pixelgrenzen. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/history/next_arbeitspaket_2026-10-17_ac0414_2_l.md`.
+- [x] **AC0414 – Kreis mit gerichteten Sehnen und Innen-T:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung der Kreis-/T-Registrierung. Alle neun Farb-/Größen-/Richtungsvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression; die sechs farbigen JPGs zusätzlich die strengeren Pixelgrenzen. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-17_ac0414_2_l.md`.
 - [ ] **AC0414-PB-GREY:** die drei grauen JPGs `AC0414_{L,M,S}` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.748614`, `0.718310`, `0.821256 < 0.85`). Beide regulären Gates bestehen. Füllfarbe um RGB 230 und JPEG-Abweichungen an der unveränderten Schwelle von mehr als 25 Abstand zum Hintergrund untersuchen. Quellen, akzeptierte SVGs und Grenzen erhalten.
 
 **Vorheriger Abschluss:** `AC0414_2_L` und acht Farb-/Größen-/Richtungs-Holdouts
@@ -172,7 +172,7 @@ unverändert. Nächste reguläre Rotation: `GE9033_6M`, `AC0424_2_M`,
 AC0414-Varianten sind zusätzlich ausgeschlossen; der strengere graue
 IoU-Folgepunkt bleibt offen. Bestehende offene Aufgaben bleiben erhalten.
 
-- [x] **GE9032 – T-Verzweigung mit Schaft nach rechts:** eigenständige Beschreibungen, robuste Messung der JPEG-Übergangszeile und zusätzliche Kantenverfeinerung im ursprünglichen Bildrahmen. Alle 14 Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/history/next_arbeitspaket_2026-10-16_ge9032_6m.md`.
+- [x] **GE9032 – T-Verzweigung mit Schaft nach rechts:** eigenständige Beschreibungen, robuste Messung der JPEG-Übergangszeile und zusätzliche Kantenverfeinerung im ursprünglichen Bildrahmen. Alle 14 Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-16_ge9032_6m.md`.
 
 **Vorheriger Abschluss:** `GE9032_6M` und 13 Farb-/Größen-Holdouts auf
 `codex/ge9032-quality-2026-10-16`. Frische neutrale Zielmetrik
@@ -183,7 +183,7 @@ unverändert. Nächste reguläre Rotation: `AC0414_2_L`, `GE9033_6M`,
 GE9032-Varianten sind zusätzlich ausgeschlossen. Bestehende offene Aufgaben
 bleiben erhalten.
 
-- [x] **GE0305 – senkrechte Flaggenstreifen auf Verlaufsscheibe:** eigenständige Beschreibung ausschließlich für das tatsächliche Flaggenbild und allgemeine Erweiterung der Streifenregistrierung. Beide regulären und strengeren Pixelgates bestehen ohne Pflichtmetrikregression; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/history/next_arbeitspaket_2026-10-16_ge0305.md`.
+- [x] **GE0305 – senkrechte Flaggenstreifen auf Verlaufsscheibe:** eigenständige Beschreibung ausschließlich für das tatsächliche Flaggenbild und allgemeine Erweiterung der Streifenregistrierung. Beide regulären und strengeren Pixelgates bestehen ohne Pflichtmetrikregression; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-16_ge0305.md`.
 - [ ] **GE0305-TOOLS-SOURCE:** Die drei Raster `GE0305_{L,M,S}` zeigen gekreuzte Werkzeuge und Tropfen statt der im gemeinsamen XML-Eintrag genannten italienischen Flagge. Quellen-/Beschreibungszuordnung eigenständig prüfen und die Werkzeugtopologie separat abnehmen. Sie sind keine Flaggen-Holdouts; bisherige Beschreibungen und Raster erhalten, Gates unverändert lassen. Hashes und Abmessungen: `artifacts/evaluation/vertical_striped_panel_disk_recheck_v1/source_inventory.json`.
 
 **Vorheriger Abschluss:** `GE0305.jpg` auf `codex/ge0305-quality-2026-10-16`.
@@ -194,7 +194,7 @@ alle 305 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
 Ausschließlich das tatsächliche Flaggenbild ist zusätzlich ausgeschlossen.
 Bestehende offene Aufgaben bleiben erhalten.
 
-- [x] **GE1411 – Achsendiagramm mit Sinuskurve:** eigenständige Beschreibungen und allgemeine Rasterregistrierung für rechtwinklige Achsen und analytische Sinuskurve. L/M/S bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/history/next_arbeitspaket_2026-10-16_ge1411_l.md`.
+- [x] **GE1411 – Achsendiagramm mit Sinuskurve:** eigenständige Beschreibungen und allgemeine Rasterregistrierung für rechtwinklige Achsen und analytische Sinuskurve. L/M/S bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-16_ge1411_l.md`.
 
 **Vorheriger Abschluss:** `GE1411_L` und beide Größen-Holdouts auf
 `codex/ge1411-quality-2026-10-16`. Frische neutrale Zielmetrik
@@ -204,7 +204,7 @@ Indexeinträge unverändert. Nächste reguläre Rotation: `GE0305`, `GE9032_6M`,
 `AC0414_2_L`, `GE9033_6M`, `AC0424_2_M`. Ausschließlich die drei abgenommenen
 GE1411-Größen sind zusätzlich ausgeschlossen. Bestehende offene Aufgaben bleiben erhalten.
 
-- [x] **GE9034 – seitliche T-Verzweigung mit Farbverlauf:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; alle 14 Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/history/next_arbeitspaket_2026-10-16_ge9034_6m.md`.
+- [x] **GE9034 – seitliche T-Verzweigung mit Farbverlauf:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; alle 14 Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-16_ge9034_6m.md`.
 
 **Vorheriger Abschluss:** `GE9034_6M` und 13 Farb-/Größen-Holdouts auf
 `codex/ge9034-quality-2026-10-16`. Frische neutrale Zielmetrik
@@ -215,7 +215,7 @@ Indexeinträge unverändert. Nächste reguläre Rotation: `GE1411_L`, `GE0305`,
 GE9034-Varianten sind zusätzlich ausgeschlossen. Bestehende offene Aufgaben
 bleiben erhalten.
 
-- [x] **GE9031 – T-Verzweigung mit querliegenden Farbverläufen:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; alle 14 Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Details und Abnahme: `docs/history/next_arbeitspaket_2026-10-16_ge9031_6m.md`.
+- [x] **GE9031 – T-Verzweigung mit querliegenden Farbverläufen:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; alle 14 Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Details und Abnahme: `docs/next_arbeitspaket_2026-10-16_ge9031_6m.md`.
 
 **Vorheriger Abschluss:** `GE9031_6M` und 13 Farb-/Größen-Holdouts auf
 `codex/ge9031-quality-2026-10-16`. Frische neutrale Zielmetrik
@@ -225,7 +225,7 @@ unverändert. Nächste reguläre Rotation: `GE9034_6M`, `GE1411_L`, `GE0305`,
 `GE9032_6M`, `AC0414_2_L`. Ausschließlich die 14 abgenommenen GE9031-Varianten
 sind zusätzlich ausgeschlossen. Bestehende offene Aufgaben bleiben erhalten.
 
-- [x] **GE0001 – Warndreieck mit Ausrufezeichen auf Verlaufsscheibe:** eigenständige Beschreibungen und allgemeine Rasterregistrierung für Verlaufskreis, gerundeten Dreiecksrand, Innenfläche sowie getrennten Strich und Punkt. Alle sechs Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Details: `docs/history/next_arbeitspaket_2026-10-15_ge0001_l.md`.
+- [x] **GE0001 – Warndreieck mit Ausrufezeichen auf Verlaufsscheibe:** eigenständige Beschreibungen und allgemeine Rasterregistrierung für Verlaufskreis, gerundeten Dreiecksrand, Innenfläche sowie getrennten Strich und Punkt. Alle sechs Farb-/Größenvarianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Details: `docs/next_arbeitspaket_2026-10-15_ge0001_l.md`.
 
 **Vorheriger Abschluss:** `GE0001_L` und fünf Farb-/Größen-Holdouts auf
 `codex/ge0001-quality-2026-10-15`. Frische neutrale Zielmetrik
@@ -235,7 +235,7 @@ unverändert. Nächste reguläre Rotation: `GE9031_6M`, `GE9034_6M`, `GE1411_L`,
 `GE0305`, `GE9032_6M`. Nur die sechs abgenommenen GE0001-Varianten sind zusätzlich
 ausgeschlossen. Bestehende offene Aufgaben bleiben erhalten.
 
-- [x] **GE0017 – diagonales Kreuz auf Kreisscheibe:** eigenständige Beschreibungen und allgemeine Rasterregistrierung für Kreis und zwei gerundete Kreuzstriche. Beide regulären und strengeren Pixelgates bestehen ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/history/next_arbeitspaket_2026-10-15_ge0017.md`.
+- [x] **GE0017 – diagonales Kreuz auf Kreisscheibe:** eigenständige Beschreibungen und allgemeine Rasterregistrierung für Kreis und zwei gerundete Kreuzstriche. Beide regulären und strengeren Pixelgates bestehen ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-15_ge0017.md`.
 
 **Vorheriger Abschluss:** `GE0017.jpg` auf `codex/ge0017-quality-2026-10-15`.
 Frische neutrale Zielmetrik `10078.861328 → 490.495758`; finale Ausgabe im
@@ -244,7 +244,7 @@ alle 267 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
 `GE0001_L`, `GE9031_6M`, `GE9034_6M`, `GE1411_L`, `GE0305`.
 Ausschließlich das abgenommene Kreuzbild ist zusätzlich ausgeschlossen.
 
-- [x] **AC0850 – Kreisscheibe mit P:** Die drei Raster zeigen P statt des ursprünglich beschriebenen rF. Beide Kataloge eigenständig korrigiert; die unveränderte allgemeine Kreis-/Textregistrierung besteht mit L/M/S beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/history/next_arbeitspaket_2026-10-15_ac0850_l.md`.
+- [x] **AC0850 – Kreisscheibe mit P:** Die drei Raster zeigen P statt des ursprünglich beschriebenen rF. Beide Kataloge eigenständig korrigiert; die unveränderte allgemeine Kreis-/Textregistrierung besteht mit L/M/S beide regulären und die strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-15_ac0850_l.md`.
 
 **Vorheriger Abschluss:** `AC0850_L` und beide Größen-Holdouts auf
 `codex/ac0850-quality-2026-10-15`. Frische neutrale Zielmetrik
@@ -254,7 +254,7 @@ unverändert. Nächste reguläre Rotation: `GE0017`, `GE0001_L`, `GE9031_6M`,
 `GE9034_6M`, `GE1411_L`. Nur die drei abgenommenen AC0850-Größen sind zusätzlich
 ausgeschlossen. Runtime und Qualitätsgrenzen bleiben unverändert.
 
-- [x] **GE0346 – Haus auf Verlaufsscheibe:** eigenständige Beschreibung und allgemeine Rasterregistrierung für Satteldach, Fassade, linke Tür und rechtes Kreuzfenster. Beide unveränderten regulären Gates und strengeren Pixelgrenzen bestehen ohne Pflichtmetrikregression. Details und Abschlussbelege: `docs/history/next_arbeitspaket_2026-10-15_ge0346.md`.
+- [x] **GE0346 – Haus auf Verlaufsscheibe:** eigenständige Beschreibung und allgemeine Rasterregistrierung für Satteldach, Fassade, linke Tür und rechtes Kreuzfenster. Beide unveränderten regulären Gates und strengeren Pixelgrenzen bestehen ohne Pflichtmetrikregression. Details und Abschlussbelege: `docs/next_arbeitspaket_2026-10-15_ge0346.md`.
 
 **Vorheriger Abschluss:** `GE0346.jpg` auf `codex/ge0346-quality-2026-10-15`.
 Frische neutrale Zielmetrik `10410.204102 → 316.769409`; finale Ausgabe
@@ -263,7 +263,7 @@ alle 263 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
 `AC0850_L`, `GE0017`, `GE0001_L`, `GE9031_6M`, `GE9034_6M`.
 Ausschließlich das abgenommene Hausbild ist zusätzlich ausgeschlossen.
 
-- [x] **GE0306 – drei waagerechte Streifen auf Verlaufsscheibe:** eigenständige Beschreibung für das tatsächliche Flaggenbild und allgemeine Rasterregistrierung; beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/history/next_arbeitspaket_2026-10-15_ge0306.md`.
+- [x] **GE0306 – drei waagerechte Streifen auf Verlaufsscheibe:** eigenständige Beschreibung für das tatsächliche Flaggenbild und allgemeine Rasterregistrierung; beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-15_ge0306.md`.
 - [ ] **GE0306-TOOLS-SOURCE:** Die im ursprünglichen Eintrag zugeordneten Bilder `GE0306_{L,M,S}` zeigen gekreuzte Werkzeuge und Tropfen auf Verlaufsscheiben. Quellen-/Beschreibungszuordnung eigenständig aufarbeiten und diese Topologie separat abnehmen; sie sind keine Flaggen-Holdouts. Ursprüngliche Beschreibungen, Rasterhashes und Abmessungen: `artifacts/evaluation/striped_panel_disk_recheck_v1/source_inventory.json`. Quellen und Grenzen erhalten.
 
 **Vorheriger Abschluss:** `GE0306.jpg` auf `codex/ge0306-quality-2026-10-15`.
@@ -273,7 +273,7 @@ alle 262 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
 `GE0346`, `AC0850_L`, `GE0017`, `GE0001_L`, `GE9031_6M`.
 Ausschließlich das tatsächliche Flaggenbild ist zusätzlich ausgeschlossen.
 
-- [x] **AC0421 – Kreis mit zwei schrägen Linien und Spirale:** eigenständige Beschreibungen und allgemeine logarithmische Spiralregistrierung; alle neun Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression. Die sechs farbigen JPGs bestehen zusätzlich die strengeren Pixelgrenzen; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/history/next_arbeitspaket_2026-10-15_ac0421_1_s.md`.
+- [x] **AC0421 – Kreis mit zwei schrägen Linien und Spirale:** eigenständige Beschreibungen und allgemeine logarithmische Spiralregistrierung; alle neun Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression. Die sechs farbigen JPGs bestehen zusätzlich die strengeren Pixelgrenzen; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-15_ac0421_1_s.md`.
 - [ ] **AC0421-PB-GREY:** die drei grauen JPGs `AC0421_{L,M,S}` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.649231..0.721198 < 0.85`). Beide regulären Gates bestehen bereits. Die annähernd einfarbige Fläche liegt an der unveränderten Vordergrundschwelle; JPEG-Abweichungen und Vektorregistrierung eigenständig untersuchen. Quellen, akzeptierte SVGs und Grenzen erhalten.
 
 **Vorheriger Abschluss:** `AC0421_1_S` und acht Farb-/Größen-Holdouts auf
@@ -284,7 +284,7 @@ Indexeinträge unverändert. Nächste reguläre Rotation: `GE0306`, `GE0346`,
 `AC0850_L`, `GE0017`, `GE0001_L`. Die neun regulär abgenommenen AC0421-Varianten
 sind zusätzlich ausgeschlossen; der strengere graue IoU-Folgepunkt bleibt offen.
 
-- [x] **b_heating1 – verschachtelte Flammen auf Verlaufsscheibe:** eigenständige Beschreibung und allgemeine Rasterregistrierung mit Geradenregression, spitzen Kronen und kubischen Bäuchen; Ziel besteht beide regulären und strengeren Gates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage zweimal 17/17. Details: `docs/history/next_arbeitspaket_2026-10-14_b_heating1.md`.
+- [x] **b_heating1 – verschachtelte Flammen auf Verlaufsscheibe:** eigenständige Beschreibung und allgemeine Rasterregistrierung mit Geradenregression, spitzen Kronen und kubischen Bäuchen; Ziel besteht beide regulären und strengeren Gates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage zweimal 17/17. Details: `docs/next_arbeitspaket_2026-10-14_b_heating1.md`.
 
 **Vorheriger Abschluss:** `b_heating1` auf `codex/b-heating1-quality-2026-10-14`.
 Frische neutrale Zielmetrik `10226.132812 → 726.417908`; bytegleiche finale
@@ -293,7 +293,7 @@ alle 252 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
 `AC0421_1_S`, `GE0306`, `GE0346`, `AC0850_L`, `GE0017`.
 Ausschließlich das tatsächliche b_heating1-Bild ist zusätzlich ausgeschlossen.
 
-- [x] **GE0300 – Kreuz auf Rechteckfläche vor Verlaufsscheibe:** eigenständige Beschreibung und allgemeine Rasterregistrierung; Ziel besteht beide regulären und strengeren Gates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage zweimal 17/17. Details: `docs/history/next_arbeitspaket_2026-10-14_ge0300.md`.
+- [x] **GE0300 – Kreuz auf Rechteckfläche vor Verlaufsscheibe:** eigenständige Beschreibung und allgemeine Rasterregistrierung; Ziel besteht beide regulären und strengeren Gates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage zweimal 17/17. Details: `docs/next_arbeitspaket_2026-10-14_ge0300.md`.
 
 **Vorheriger Abschluss:** `GE0300` auf `codex/ge0300-quality-2026-10-14`.
 Frische neutrale Zielmetrik `10814.927734 → 284.043915`; identischer finaler
@@ -302,7 +302,7 @@ alle 251 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
 `b_heating1`, `AC0421_1_S`, `GE0306`, `GE0346`, `AC0850_L`.
 Nur das tatsächliche GE0300-Bild ist zusätzlich ausgeschlossen.
 
-- [x] **GE9024 – rechts offener Bogen neben Verlaufsschaft:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Details und Wiederholungsnachweise: `docs/history/next_arbeitspaket_2026-10-14_ge9024_1m.md`.
+- [x] **GE9024 – rechts offener Bogen neben Verlaufsschaft:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Details und Wiederholungsnachweise: `docs/next_arbeitspaket_2026-10-14_ge9024_1m.md`.
 
 **Vorheriger Abschluss:** `GE9024_1M` und 13 Farb-/Größen-Holdouts auf
 `codex/ge9024-quality-2026-10-14`. Frische neutrale Zielmetrik
@@ -312,7 +312,7 @@ alle 237 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
 `GE0300`, `b_heating1`, `AC0421_1_S`, `GE0306`, `GE0346`.
 Alle 14 erledigten GE9024-Varianten sind zusätzlich ausgeschlossen.
 
-- [x] **GE0022 – Rechtspfeil auf Verlaufsscheibe:** eigenständige Beschreibung ausschließlich für das tatsächliche Pfeilbild und allgemeine horizontale Richtungsnormalisierung; Ziel besteht beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Prüfungen bestehen jeweils 17/17. Details: `docs/history/next_arbeitspaket_2026-10-13_ge0022.md`.
+- [x] **GE0022 – Rechtspfeil auf Verlaufsscheibe:** eigenständige Beschreibung ausschließlich für das tatsächliche Pfeilbild und allgemeine horizontale Richtungsnormalisierung; Ziel besteht beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Prüfungen bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-13_ge0022.md`.
 - [ ] **GE0022-BELL-SOURCE:** Die neun im selben XML-Eintrag verzeichneten Bilder `GE0022_{L,M,S}`, `GE0022_1_{L,M,S}` und `GE0022_2_{L,M,S}` zeigen Glocken mit Schallbögen auf Verlaufsscheiben. Quellen-/Beschreibungszuordnung eigenständig prüfen und diese Topologie separat abnehmen; sie sind keine Pfeil-Holdouts. Quellhashes und Abmessungen: `artifacts/evaluation/right_disk_arrow_recheck_v1/source_inventory.json`. Bisherige Raster und Beschreibungen erhalten; Gates unverändert lassen.
 
 **Vorheriger Abschluss:** `GE0022.jpg` auf `codex/ge0022-quality-2026-10-13`.
@@ -322,7 +322,7 @@ alle 236 bisherigen Indexeinträge unverändert. Nächste reguläre Rotation:
 `GE9024_1M`, `GE0300`, `b_heating1`, `AC0421_1_S`, `GE0306`.
 Nur das tatsächliche Pfeilbild ist zusätzlich ausgeschlossen.
 
-- [x] **AC1000 – Kreisscheibe mit M:** eigenständige Beschreibungen und allgemeine Konturberücksichtigung beim Startkandidaten; alle drei Größen bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Prüfungen bestehen jeweils 17/17. Details: `docs/history/next_arbeitspaket_2026-10-13_ac1000_s.md`.
+- [x] **AC1000 – Kreisscheibe mit M:** eigenständige Beschreibungen und allgemeine Konturberücksichtigung beim Startkandidaten; alle drei Größen bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Prüfungen bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-13_ac1000_s.md`.
 
 **Vorheriger Abschluss:** `AC1000_S` und beide Größen-Holdouts auf
 `codex/ac1000-quality-2026-10-13`. Frische neutrale Zielmetrik
@@ -331,7 +331,7 @@ Nur das tatsächliche Pfeilbild ist zusätzlich ausgeschlossen.
 Nächste reguläre Rotation: `GE0022`, `GE9024_1M`, `GE0300`, `b_heating1`, `AC0421_1_S`.
 Die drei erledigten AC1000-Größen sind ausgeschlossen.
 
-- [x] **AC0920 – Kreisscheibe mit Q:** eigenständige Beschreibungen und allgemeine Kreis-/Textregistrierung; alle drei Größen bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17; alle sechs neutralen und Katalog-SVGs sowie die Gates sind reproduziert. Details: `docs/history/next_arbeitspaket_2026-10-13_ac0920_l.md`.
+- [x] **AC0920 – Kreisscheibe mit Q:** eigenständige Beschreibungen und allgemeine Kreis-/Textregistrierung; alle drei Größen bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17; alle sechs neutralen und Katalog-SVGs sowie die Gates sind reproduziert. Details: `docs/next_arbeitspaket_2026-10-13_ac0920_l.md`.
 
 **Vorheriger Abschluss:** `AC0920_L` und beide Größen-Holdouts auf
 `codex/ac0920-quality-2026-10-13`. Frische neutrale Zielmetrik
@@ -340,7 +340,7 @@ Die drei erledigten AC1000-Größen sind ausgeschlossen.
 Nächste reguläre Rotation: `AC1000_S`, `GE0022`, `GE9024_1M`, `GE0300`, `b_heating1`.
 Die drei erledigten AC0920-Größen sind ausgeschlossen.
 
-- [x] **GE9022 – links offener Bogen neben Verlaufsschaft:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17, beide neutralen Abnahmen reproduzieren alle 28 SVGs und Gates. Details: `docs/history/next_arbeitspaket_2026-10-12_ge9022_2m.md`.
+- [x] **GE9022 – links offener Bogen neben Verlaufsschaft:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17, beide neutralen Abnahmen reproduzieren alle 28 SVGs und Gates. Details: `docs/next_arbeitspaket_2026-10-12_ge9022_2m.md`.
 
 **Vorheriger Abschluss:** `GE9022_2M` und 13 Farb-/Größen-Holdouts auf
 `codex/ge9022-quality-2026-10-12`. Frische neutrale Zielmetrik
@@ -352,7 +352,7 @@ Nächste reguläre Rotation: `AC0920_L`, `AC1000_S`, `GE0022`, `GE9024_1M`, `GE0
 Die 14 erledigten GE9022-Varianten sind ausgeschlossen.
 
 
-- [x] **GE0039 – Linkspfeil auf Verlaufsscheibe:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; alle drei Größen bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage zweimal 17/17, acht neutrale SVGs und sämtliche Gates reproduziert. Details: `docs/history/next_arbeitspaket_2026-10-12_ge0039_m.md`.
+- [x] **GE0039 – Linkspfeil auf Verlaufsscheibe:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; alle drei Größen bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage zweimal 17/17, acht neutrale SVGs und sämtliche Gates reproduziert. Details: `docs/next_arbeitspaket_2026-10-12_ge0039_m.md`.
 
 **Vorheriger Abschluss:** `GE0039_M` und zwei Größen-Holdouts auf
 `codex/ge0039-quality-2026-10-11`. Frische Zielmetrik `10712.346680 → 148.783890`;
@@ -365,7 +365,7 @@ Windows-I/O-Fehler des größeren Laufes bleibt separat offen.
 Nächste reguläre Rotation: `GE9022_2M`, `AC0920_L`, `AC1000_S`, `GE0022`,
 `GE9024_1M`. Die drei erledigten GE0039-Varianten sind ausgeschlossen.
 
-- [x] **SE0081 – Quadrat mit unterem Stiel und M:** eigenständige Beschreibungen aktivieren die vorhandene Raster-/Textregistrierung ohne Runtime-Änderung. Ziel und unabhängiger Holdout bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; zwei unabhängige CLI-Batterien bestehen jeweils 17/17. Details: `docs/history/next_arbeitspaket_2026-10-11_se0081.md`.
+- [x] **SE0081 – Quadrat mit unterem Stiel und M:** eigenständige Beschreibungen aktivieren die vorhandene Raster-/Textregistrierung ohne Runtime-Änderung. Ziel und unabhängiger Holdout bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; zwei unabhängige CLI-Batterien bestehen jeweils 17/17. Details: `docs/next_arbeitspaket_2026-10-11_se0081.md`.
 
 **Vorheriger Abschluss:** `SE0081` auf `codex/se0081-quality-2026-10-11`.
 Frische Zielmetrik mit vollständigem Originalkatalog `11891.464844 → 702.781555`;
@@ -375,7 +375,7 @@ alle 212 bisherigen Indexeinträge bleiben unverändert. Der neue Eintrag besteh
 die erneute Archivkonvertierung; es wird kein neuer Vollarchivlauf behauptet.
 Nächste reguläre Rotation: `GE0039_M`, `GE9022_2M`, `AC0920_L`, `AC1000_S`, `GE0022`.
 
-- [x] **GE9021 – unten offener Bogen unter Verlaufsschaft:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; 14 Varianten bestehen beide regulären Gates und die strengeren Pixelgrenzen ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage 17/17, alle 28 Katalog-SVGs und sämtliche Plan-B-Hashes/Metriken reproduziert. Details: `docs/history/next_arbeitspaket_2026-10-11_ge9021_1m.md`.
+- [x] **GE9021 – unten offener Bogen unter Verlaufsschaft:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung; 14 Varianten bestehen beide regulären Gates und die strengeren Pixelgrenzen ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage 17/17, alle 28 Katalog-SVGs und sämtliche Plan-B-Hashes/Metriken reproduziert. Details: `docs/next_arbeitspaket_2026-10-11_ge9021_1m.md`.
 
 **Vorheriger Abschluss:** `GE9021_1M` und 13 Holdouts auf
 `codex/ge9021-quality-2026-10-11`. Frische Zielmetrik `12463.036133 → 194.409164`.
@@ -386,7 +386,7 @@ maschinenlesbaren Nachweis des Pakets. Nächste reguläre Rotation: `SE0081`,
 `GE0039_M`, `GE9022_2M`, `AC0920_L`, `AC1000_S`.
 Die 14 erledigten Varianten sind ausgeschlossen.
 
-- [x] **AC0734 – rechter Griff mit horizontalem P:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung der Textregistrierung; sechs Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage 17/17, zwölf SVGs und sämtliche Gates reproduziert. Details: `docs/history/next_arbeitspaket_2026-10-11_ac0734_1_s.md`.
+- [x] **AC0734 – rechter Griff mit horizontalem P:** eigenständige Beschreibungen und allgemeine Richtungsnormalisierung der Textregistrierung; sechs Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage 17/17, zwölf SVGs und sämtliche Gates reproduziert. Details: `docs/next_arbeitspaket_2026-10-11_ac0734_1_s.md`.
 
 **Vorheriger Abschluss:** `AC0734_1_S` und fünf Holdouts auf
 `codex/ac0734-quality-2026-10-11`. Frische Zielmetrik `18331.007812 → 601.298645`.
@@ -399,7 +399,7 @@ Historische Testvorlagen sind von der handbearbeiteten Sammlung getrennt.
 Nächste reguläre Rotation: `GE9021_1M`, `SE0081`, `GE0039_M`, `GE9022_2M`, `AC0920_L`.
 Die sechs erledigten Varianten sind ausgeschlossen.
 
-- [x] **AC0712 – linker Griff mit Strich und Punkt:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; sechs Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage 17/17, zwei Abnahmen reproduzieren sämtliche SVGs und Gates. Details: `docs/history/next_arbeitspaket_2026-10-11_ac0712_1_s.md`.
+- [x] **AC0712 – linker Griff mit Strich und Punkt:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; sechs Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression. Unabhängige CLI-Vorlage 17/17, zwei Abnahmen reproduzieren sämtliche SVGs und Gates. Details: `docs/next_arbeitspaket_2026-10-11_ac0712_1_s.md`.
 
 **Vorheriger Abschluss:** `AC0712_1_S` und fünf Holdouts auf
 `codex/ac0712-quality-2026-10-11`. Frische Zielmetrik `3822.055908 → 261.666656`.
@@ -410,7 +410,7 @@ Standardtestlauf: 2.245 bestanden, 30 bestehende Skips, null Fehler;
 Nächste reguläre Rotation: `AC0734_1_S`, `GE9021_1M`, `SE0081`, `GE0039_M`,
 `GE9022_2M`. Die sechs erledigten Varianten sind ausgeschlossen.
 
-- [x] **GE9012 – Rechtspfeil mit Verlaufsschaft:** eigenständige Beschreibungen aktivieren die vorhandene allgemeine Rasterregistrierung ohne Runtime-Änderung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression, unabhängige CLI-Vorlage 17/17. Details: `docs/history/next_arbeitspaket_2026-10-10_ge9012_1m.md`.
+- [x] **GE9012 – Rechtspfeil mit Verlaufsschaft:** eigenständige Beschreibungen aktivieren die vorhandene allgemeine Rasterregistrierung ohne Runtime-Änderung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression, unabhängige CLI-Vorlage 17/17. Details: `docs/next_arbeitspaket_2026-10-10_ge9012_1m.md`.
 
 **Vorheriger Abschluss:** `GE9012_1M` und 13 Holdouts auf
 `codex/ge9012-quality-2026-10-10`. Zielmetrik `13193.511719 → 18.595833`;
@@ -422,8 +422,8 @@ Standardtestlauf: 2.222 bestanden, 30 bestehende Skips, null Fehler.
 Nächste reguläre Rotation: `AC0712_1_S`, `AC0734_1_S`, `GE9021_1M`,
 `SE0081`, `GE0039_M`. Die 14 erledigten GE9012-Varianten sind ausgeschlossen.
 
-- [x] **GE9014 – Links-Pfeil mit Verlaufsschaft:** eigenständige XML-Beschreibungen und allgemeine horizontale Rasterregistrierung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression, unabhängige CLI-Vorlage 17/17. Die 28 bisherigen vertikalen Pfeile behalten ihre SVGs. Details: `docs/history/next_arbeitspaket_2026-10-10_ge9014_1m.md`.
-- [x] **AC0711 – unterer Griff mit Strich und Punkt:** sechs Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; unabhängige CLI-Vorlage 17/17. Details: `docs/history/next_arbeitspaket_2026-10-10_ac0711_1_m.md`.
+- [x] **GE9014 – Links-Pfeil mit Verlaufsschaft:** eigenständige XML-Beschreibungen und allgemeine horizontale Rasterregistrierung; 14 Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression, unabhängige CLI-Vorlage 17/17. Die 28 bisherigen vertikalen Pfeile behalten ihre SVGs. Details: `docs/next_arbeitspaket_2026-10-10_ge9014_1m.md`.
+- [x] **AC0711 – unterer Griff mit Strich und Punkt:** sechs Varianten bestehen beide regulären und strengeren Pixelgates ohne Pflichtmetrikregression; unabhängige CLI-Vorlage 17/17. Details: `docs/next_arbeitspaket_2026-10-10_ac0711_1_m.md`.
 
 **Vorheriger Abschluss:** `GE9014_1M` und 13 Holdouts auf
 `codex/ge9014-quality-2026-10-10`. Zielmetrik `13053.991211 → 19.939167`;
@@ -436,7 +436,7 @@ Erfolgsübersicht: 172/172 Review-Pässe. Standardtestlauf: 2.207 bestanden,
 - [ ] **AC0721-PB-GREY:** große graue JPG-Variante `AC0721_L` durch die zusätzliche strengere Vordergrund-IoU-Prüfung bringen (`0.799373 < 0.85`); beide regulären Gates und die übrigen fünf JPGs bestehen. Grenzen unverändert beibehalten.
 - [x] **AC0713 – oberer Griff mit Strich und Punkt:** eigenständige Beschreibungen und allgemeine Rasterregistrierung; sechs Farb-/Größenvarianten bestehen beide regulären Gates ohne Pflichtmetrikregression, unabhängige Plan-B-Vorlage 17/17.
 - [x] **Erfolgsübersicht mit erneuter Prüfung:** inzwischen 186 nachgewiesene Bild-/SVG-Paare separat abgelegt; das erweiterte Profil konvertiert sämtliche archivierten Eingaben neu. Quellenauflösung und Regressionsauswahl berücksichtigen auch die ursprüngliche Erfolgsablage.
-- [ ] **ARCHIVE-WINDOWS-IO:** Drei große Archivreprüfungen scheitern unter Windows beim Schreiben von CSV-Berichten mit `OSError: [Errno 22]`, auch im normalen Prozess. Ursache im Langlauf untersuchen; für die vollständige Qualitätsabnahme Familien mit `tools.recheck_satisfactory_archive --max-cases-per-worker 48` in getrennten Prozessen prüfen. Quellen, angenommene SVGs und Grenzen erhalten. Belege: `docs/history/next_arbeitspaket_2026-10-11_ge9021_1m.md`.
+- [ ] **ARCHIVE-WINDOWS-IO:** Drei große Archivreprüfungen scheitern unter Windows beim Schreiben von CSV-Berichten mit `OSError: [Errno 22]`, auch im normalen Prozess. Ursache im Langlauf untersuchen; für die vollständige Qualitätsabnahme Familien mit `tools.recheck_satisfactory_archive --max-cases-per-worker 48` in getrennten Prozessen prüfen. Quellen, angenommene SVGs und Grenzen erhalten. Belege: `docs/next_arbeitspaket_2026-10-11_ge9021_1m.md`.
 - [ ] **ARCHIVE-DRIFT-2026-10-10:** 22 ältere Bestenlisteneinträge erzeugen bei erneuter Konvertierung höhere Mean-Delta²-Werte als ihre archivierten Vektoren. Die Reviewgrenze besteht weiterhin; Ursachen und Budgets je Fall anhand von `artifacts/satisfactory_conversions/recheck_2026-10-10.json` prüfen, akzeptierte SVGs erhalten und Qualitätsgrenzen unverändert lassen.
 
 **Vorheriger Abschluss:** `AC0721_1_S` und alle fünf Holdouts auf
@@ -447,7 +447,7 @@ Pflichtmetrikregression. Die frische Zielmetrik sinkt von `3282.783936` auf
 17/17 strengen Plan-B-Prüfungen bestehen. Der große graue JPG-IoU-Fall bleibt
 separat offen. Nächste Rotation: `AC0711_1_M`, `GE9014_1M`, `GE9012_1M`,
 `AC0712_1_S`, `AC0734_1_S`.
-Details: `docs/history/next_arbeitspaket_2026-10-10_ac0721_1_s.md`.
+Details: `docs/next_arbeitspaket_2026-10-10_ac0721_1_s.md`.
 Der Standard-Gesamtlauf besteht mit 2.116 Tests und 30 bestehenden Profil-/
 Windows-Skips. Alle 152 archivierten Bilder bestehen die erneute Reviewprüfung;
 31 Bestandsschutzvarianten haben null Regressionen.
@@ -456,7 +456,7 @@ Windows-Skips. Alle 152 archivierten Bilder bestehen die erneute Reviewprüfung;
 `codex/successful-images-ac0713-2026-10-10`. Die fehlende Innenmarkierung ist
 enthalten. Die Zielmetrik sinkt von `1972.475586` auf `120.847115`.
 Nächste Rotation: `AC0721_1_S`, `AC0711_1_M`, `GE9014_1M`, `GE9012_1M`,
-`AC0712_1_S`. Details: `docs/history/next_arbeitspaket_2026-10-10_ac0713_1_l.md`.
+`AC0712_1_S`. Details: `docs/next_arbeitspaket_2026-10-10_ac0713_1_l.md`.
 
 - [x] **AC0413 – Kreis mit schrägen Linien und T:** Originalbeschreibung-CLI einfrieren, eigenständige Beschreibungen und rastergestützte Kreis-/Linienregistrierung umsetzen; neun Farb-/Größenvarianten durch beide regulären Gates ohne Pflichtmetrikregression abnehmen.
 - [x] **AC0413-PB:** unabhängige Geometrie-, Farb-, Lage- und Auflösungsfälle, neutrale Namen, fehlende/zusätzliche Linien und zwei echte CLI-Seeds mit jeweils Original plus 16 Zufallsvarianten prüfen (17/17 je Seed).
@@ -477,9 +477,9 @@ besteht mit 2.050 Tests und 29 bestehenden Windows-Skips; 149 Tests prüfen die
 finale Fassung nach der Linienannahmekorrektur. Alle 48 bisherigen Erfolgsvarianten
 bleiben im erneuerten Review unter der Grenze. Nächste reguläre Rotation:
 `AC0713_1_L`, `AC0721_1_S`, `AC0711_1_M`, `GE9014_1M`, `GE9012_1M`.
-Details: `docs/history/next_arbeitspaket_2026-10-10_ac0413_1_m.md`.
+Details: `docs/next_arbeitspaket_2026-10-10_ac0413_1_m.md`.
 Der ehrliche Gesamtstand mit Katalog- und Beschreibungsinventar steht in
-`docs/history/project_status_2026-10-10.md`; eine frische Gesamtquote der autonomen
+`docs/project_status_2026-10-10.md`; eine frische Gesamtquote der autonomen
 Konvertierung ist weiterhin nicht belegt.
 
 **Roadmap-Priorität des Nutzers:** Zuerst möglichst viele der ungefähr 1.700
@@ -507,7 +507,7 @@ Die zusätzliche synthetische Stressprüfung bleibt mit 12/17 offen; die vier
 unabhängigen synthetischen Geometrieprüfungen und Negativfälle bestehen.
 `PB-POOL-2026-10-07` bleibt ebenfalls offen. Nächste reguläre Rotation:
 `AC0413_1_M`, `AC0713_1_L`, `AC0721_1_S`, `AC0711_1_M`, `GE9014_1M`.
-Details: `docs/history/next_arbeitspaket_2026-10-09_ge9023_6m.md`.
+Details: `docs/next_arbeitspaket_2026-10-09_ge9023_6m.md`.
 
 **Vorheriger Abschluss 2026-10-09: `GE0032` und drei Größenvarianten.**
 Das Grundbild zeigt einen Abwärtspfeil; die Größenvarianten zeigen dagegen
@@ -523,7 +523,7 @@ Windows-Skips bleiben sichtbar. Die 31 Bestandsschutzvarianten haben null
 Regressionen. Vier Ergebnis-SVGs und kompakter Nachweis sind gespeichert; `PB-POOL-2026-10-07` bleibt offen. Alle 48 bisherigen
 Erfolgsvarianten bleiben im Review unter der Grenze. Nächste Rotation:
 `GE9023_6M`, `AC0413_1_M`, `AC0713_1_L`, `AC0721_1_S`, `AC0711_1_M`.
-Details: `docs/history/next_arbeitspaket_2026-10-09_ge0032.md`.
+Details: `docs/next_arbeitspaket_2026-10-09_ge0032.md`.
 
 **Vorheriger Abschluss 2026-10-09: `AC0714_L` (Quadrat, rechter Griff, Strich und Punkt).**
 Alle sechs Farb-/Größenvarianten bestehen beide regulären Qualitätsgates ohne
@@ -537,7 +537,7 @@ Die sechs Abnahme-SVGs sind gespeichert. `PB-POOL-2026-10-07` bleibt offen.
 Der Review über 1.000 Einträge erhält alle 48 bisherigen Erfolgsvarianten unter
 der Reviewgrenze. Nächste Rotation: `GE0032`, `GE9023_6M`, `AC0413_1_M`,
 `AC0713_1_L`, `AC0721_1_S`. Details und Testabschluss:
-`docs/history/next_arbeitspaket_2026-10-09_ac0714_l.md`.
+`docs/next_arbeitspaket_2026-10-09_ac0714_l.md`.
 
 **Vorheriger Abschluss 2026-10-09: `AC0403_1_L` (Abwärts-Dreieck im Kreis).**
 Alle 18 Farb-/Größen-/SIA-Varianten bestehen bereits mit der frischen
@@ -552,7 +552,7 @@ Plan-B-JPG-Prüfung besteht 11/18 Fälle; der volle strenge Nachweis und
 993 renderbare Paare und 104 Einträge über der Reviewgrenze. Alle 48 bisherigen
 Erfolgsvarianten bleiben darunter. Nächste Rotation: `AC0714_L`, `GE0032`,
 `GE9023_6M`, `AC0413_1_M`, `AC0713_1_L`.
-Details: `docs/history/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
+Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
 **Vorheriger Abschluss 2026-10-08: `AC0402_1_S` (gefülltes Rechts-Dreieck im Kreis).**
 Das Paket auf `codex/ac0402-quality-2026-10-08` besteht mit allen 18 gefüllten
@@ -570,7 +570,7 @@ Vordergrund-IoU-Grenze. `PB-POOL-2026-10-07` bleibt offen. Der Review über
 `AC0413_1_M`, `AC0713_1_L` und `AC0721_1_S`.
 Die vollständige Suite einschließlich Heavy-Modulen und Bestandsschutz
 besteht mit 2.285 Tests und 29 bestehenden Windows-Skips; 92 fokussierte
-Tests bestehen ebenfalls. Details: `docs/history/next_arbeitspaket_2026-10-08_ac0402_1_s.md`.
+Tests bestehen ebenfalls. Details: `docs/next_arbeitspaket_2026-10-08_ac0402_1_s.md`.
 
 **Vorheriger Abschluss 2026-10-08: `AC0704_1_L` (Quadrat mit rechtem Griff).**
 Das Paket auf `codex/ac0704-quality-2026-10-08` besteht mit allen sechs roten
@@ -585,7 +585,7 @@ alle sechs Varianten bestehen zusätzlich die strengeren Plan-B-Pixelgrenzen.
 44 fokussierte Tests bestehen. `PB-POOL-2026-10-07` bleibt offen.
 Der Review über 956 Einträge setzt die Rotation mit `AC0402_1_S` fort,
 gefolgt von `AC0403_1_L`, `GE0032`, `AC0413_1_M` und `AC0713_1_L`.
-Details und Testabschluss: `docs/history/next_arbeitspaket_2026-10-08_ac0704_1_l.md`.
+Details und Testabschluss: `docs/next_arbeitspaket_2026-10-08_ac0704_1_l.md`.
 
 **Vorheriger Abschluss 2026-10-08: `GE1420_S` (Alarmglocke).** Das Paket auf
 `codex/ge1420-quality-2026-10-08` besteht mit M-/L-Holdouts und neutraler
@@ -602,7 +602,7 @@ verfehlt weiterhin die separate, strengere Plan-B-Vordergrund-IoU-Grenze;
 die drei farbigen Größen bestehen sie. `PB-POOL-2026-10-07` bleibt offen.
 Der Review über 956 Einträge führt die reguläre Rotation mit `AC0704_1_L`
 fort, gefolgt von `AC0402_1_S`, `AC0403_1_L`, `GE0032` und `AC0413_1_M`.
-Details und Testabschluss: `docs/history/next_arbeitspaket_2026-10-08_ge1420_s.md`.
+Details und Testabschluss: `docs/next_arbeitspaket_2026-10-08_ge1420_s.md`.
 
 **Vorheriger Abschluss 2026-10-08: `AC0130_S` (Luftbefeuchter).** Das Paket auf
 `codex/ac0130-quality-2026-10-08` besteht mit M-/L-Holdouts beide unveränderten
@@ -618,7 +618,7 @@ SVGs und Qualitätsmetriken. 21 fokussierte Tests bestehen. Der Review über 956
 Einträge führt die reguläre Rotation mit `GE1420_S` fort, gefolgt von
 `AC0704_1_L`, `AC0402_1_S`, `AC0403_1_L` und `GE0032`. Der Gesamtpool-Nachweis
 `PB-POOL-2026-10-07` bleibt offen. Details und vollständiger Testabschluss:
-`docs/history/next_arbeitspaket_2026-10-08_ac0130_s.md`.
+`docs/next_arbeitspaket_2026-10-08_ac0130_s.md`.
 
 **Vorheriger Abschluss 2026-10-08: `DLG0031`.** Das reguläre Checkboxpaket auf
 `codex/dlg0031-quality-2026-10-08` besteht beide unveränderten Qualitätsgates.
@@ -635,7 +635,7 @@ Tests sind grün. Der Review über 956 Einträge setzt die reguläre Rotation mi
 `AC0130_S` fort, gefolgt von `GE1420_S`, `AC0704_1_L`, `AC0402_1_S` und
 `AC0403_1_L`. Der Gesamtpool-Nachweis `PB-POOL-2026-10-07` bleibt offen.
 Details und vollständiger Testabschluss:
-`docs/history/next_arbeitspaket_2026-10-08_dlg0031.md`.
+`docs/next_arbeitspaket_2026-10-08_dlg0031.md`.
 
 **Fortschreibung 2026-10-08:** Das nächste reguläre Paket `AC0554_1_L`
 auf `codex/ac0554-quality-2026-10-08` besteht mit allen neun Farb-/Größenvarianten
@@ -651,7 +651,7 @@ Die allgemeine Registrierung erkennt drei Ventilflügel, Verbindung und den
 quadratischen Antrieb mit Diagonalen. Dieser Nachweis schließt den gesamten
 zufälligen Aufgabenpool ausdrücklich nicht. Der erneuerte Review über 956
 Einträge setzt die reguläre Rotation mit `DLG0031` fort. Details und Repro:
-`docs/history/next_arbeitspaket_2026-10-08_ac0554_1_l.md`.
+`docs/next_arbeitspaket_2026-10-08_ac0554_1_l.md`.
 
 Das Pfeilpaket für `GE9013_6M` besteht die deterministische Abnahme auf
 `codex/ge9013-quality-2026-10-07`: Die XML beschreibt den Pfeil nach unten
@@ -661,7 +661,7 @@ aus dem Raster. Das gespeicherte Ziel-CLI-SVG verbessert sich von
 harten Gates ohne Pflichtmetrikregression. Zwei unabhängige CLI-Läufe
 reproduzieren sämtliche 28 SVG-Bytes und Gateentscheidungen. 90 fokussierte
 Tests sind grün; das vollständige Defaultprofil meldet `1681 passed, 29 skipped`
-mit bestehenden Windows-Skips. Details: `docs/history/next_arbeitspaket_2026-10-07_ge9013_6m.md`.
+mit bestehenden Windows-Skips. Details: `docs/next_arbeitspaket_2026-10-07_ge9013_6m.md`.
 
 Die gekoppelte zufällige Plan-B-Auswahl (`AC0538_1L_sia`, Seed
 `3948009396310964094`) besteht nach eigenständiger Beschreibung und katalogfreier
@@ -705,7 +705,7 @@ Zwei unabhängige CLI-Läufe reproduzieren alle zwölf SVG-Bytes und Gateentsche
 76 fokussierte Tests und vier Unterprozess-Umgebungstests sind grün.
 Der Review-Snapshot über 806 Einträge (802 renderbare Paare) setzt die Rotation
 mit `GE9013_6M` fort. Details und Abschlussprofil:
-`docs/history/next_arbeitspaket_2026-10-06_ge0281.md`.
+`docs/next_arbeitspaket_2026-10-06_ge0281.md`.
 
 Das Paket für `GE9011_6M` ist abgeschlossen: Die XML beschreibt eigenständig
 Dreieckspitze, weißen Abstand und den schmaleren Schaft mit horizontalem Verlauf.
@@ -717,7 +717,7 @@ alle 28 SVG-Bytes und Gateentscheidungen. 37 fokussierte Tests sind grün;
 das vollständige Defaultprofil meldet `1593 passed, 29 skipped` mit bestehenden
 Windows-Skips. Der Review über 688 Einträge (684 renderbare Paare)
 setzt die Rotation mit `GE0281` fort.
-Details: `docs/history/next_arbeitspaket_2026-10-06_ge9011_6m.md`.
+Details: `docs/next_arbeitspaket_2026-10-06_ge9011_6m.md`.
 
 
 Das Paket für `AC0404_1_L` ist abgeschlossen: Der aktuelle CLI-Vorlauf besteht
@@ -731,7 +731,7 @@ CLI-Läufe reproduzieren alle 36 SVGs und Gateentscheidungen. `471` fokussierte
 Regressionstests sowie `1556` Tests im vollständigen Defaultprofil sind grün;
 die `29` bestehenden Windows-Skips bleiben dokumentiert. Der Review über `688` Einträge (`684` renderbare
 Paare) setzt die Rotation mit `GE9011_6M` fort.
-Details: `docs/history/next_arbeitspaket_2026-10-05_ac0404_1_l.md`.
+Details: `docs/next_arbeitspaket_2026-10-05_ac0404_1_l.md`.
 
 Das Paket für `GE1003_M` ist abgeschlossen: Die eigenständige XML beschreibt
 jetzt einen grünen Haken vor einer grauen Kreisscheibe. Die katalogfreie
@@ -744,7 +744,7 @@ reproduzieren sämtliche SVG-Bytes und Gateentscheidungen. `268` fokussierte
 Tests und `1532` Tests im vollständigen Defaultprofil sind grün; die `29`
 bestehenden Windows-Skips bleiben dokumentiert. Die erneuerte Rotation über
 `688` Paare beginnt mit `AC0404_1_L`.
-Details: `docs/history/next_arbeitspaket_2026-10-05_ge1003_m.md`.
+Details: `docs/next_arbeitspaket_2026-10-05_ge1003_m.md`.
 
 Das Paket für `AC0731_1_L` ist abgeschlossen: Der aufrechte Quadratpfad
 rendert ausdrücklich beschriebenen Text und erhält dessen Groß-/Kleinschreibung.
@@ -756,7 +756,7 @@ Zwei unabhängige CLI-Läufe reproduzieren alle zwölf SVG-Bytes und Gateentsche
 `283` fokussierte Tests sowie `1509` Tests im vollständigen Defaultprofil sind
 grün; dessen `29` bestehende Windows-Skips bleiben dokumentiert. Der erneuerte
 Review über `688` Paare führt die Rotation mit `GE1003_M` fort.
-Details: `docs/history/next_arbeitspaket_2026-10-05_ac0731_1_l.md`.
+Details: `docs/next_arbeitspaket_2026-10-05_ac0731_1_l.md`.
 
 Das Paket für `AC0252_1` ist abgeschlossen: Die katalogfreie Registrierung
 ermittelt Kreis, Dreieck und Farben aus dem Raster. Die widersprüchliche XML
@@ -767,7 +767,7 @@ CLI-Läufe reproduzieren alle sechs SVG-Bytes und Gate-Records exakt.
 `267` fokussierte Tests sind ohne Skips/Warnungen grün; das vollständige
 Defaultprofil meldet `1466 passed, 29 skipped`. Die Runtime-ID-Nullprüfung ist
 grün. Der erneuerte Review über `688` Paare führt die Rotation mit `AC0731_1_L`
-fort. Details: `docs/history/next_arbeitspaket_2026-10-05_ac0252_1.md`.
+fort. Details: `docs/next_arbeitspaket_2026-10-05_ac0252_1.md`.
 
 Das Paket für `AC0724_1_S` ist abgeschlossen: Der Beschreibungspfad spiegelt
 die bestehende Quadrat-/Griff-Topologie an der Hauptdiagonale. Die helle
@@ -777,7 +777,7 @@ gespeicherte S-CLI-SVG erreicht `mean_delta2=569.914673`; Ziel und M-/L-Holdouts
 bestehen beide harten Gates ohne Regression. `230` Tests sind grün. Die
 bestehenden Restfehlerwarnungen bleiben sichtbar. Der erneuerte Review über
 `688` Paare führt die Rotation jetzt mit `AC0252_1` fort. Details und Repro
-stehen in `docs/history/next_arbeitspaket_2026-10-04_ac0724_1_s.md`.
+stehen in `docs/next_arbeitspaket_2026-10-04_ac0724_1_s.md`.
 
 Das Rechteckflächen-Paket für `DLG0010_1` ist abgeschlossen: Der katalogfreie
 Rasterregistrierer erhält die helle Innenfläche und das breite Außenfeld.
@@ -787,7 +787,7 @@ Rechteckbeschreibung; die falsche XML-Farbangabe für das rote Raster bleibt als
 Datenqualitätsfolge dokumentiert. `222` Regressionstests sind grün, und ein
 erneuter CLI-Lauf reproduziert alle vier SVG-Hashes. Der Review über `688`
 Paare führte die Rotation anschließend mit `AC0724_1_S` fort. Details und Repro stehen
-in `docs/history/next_arbeitspaket_2026-10-04_dlg0010_1.md`.
+in `docs/next_arbeitspaket_2026-10-04_dlg0010_1.md`.
 
 Das Runtime-Registrierungspaket für die 180°-Quadrat-Kelle ist abgeschlossen:
 `Rotated180SquareKelleGlyph` wird jetzt in beiden Runtime-Kind-Sets geführt.
@@ -798,7 +798,7 @@ und den Verzicht auf Sample-SVGs. Der vollständige Review über `688` Paare
 führte die Rotation anschließend mit `DLG0010_1` fort. Die nicht beschriebene helle
 Innenmarkierung bleibt als visueller Folgepunkt dokumentiert; die bestehende
 CLI-Restfehlerwarnung bleibt sichtbar. Details und Repro stehen in
-`docs/history/next_arbeitspaket_2026-10-04_ac0713_1_s.md`.
+`docs/next_arbeitspaket_2026-10-04_ac0713_1_s.md`.
 
 Das detaillierte Backlog mit Definition of Done, Abhängigkeiten und
 Akzeptanzkriterien steht in `docs/image_description_only_tasks.md`.
@@ -1081,14 +1081,14 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 ### Neue Zusatzaufgabe (Session 2026-05-14)
 
 - [x] **N8 – Plan-B-Syntheseprobe (Beschreibung → SVG → JPG → Rauschen → Konvertierung)** (2026-05-14: Tool `tools/plan_b_synthetic_probe.py` ergänzt und Beispielausführung mit `variant=AC0080_L` dokumentiert; Ergebnisartefakt unter `artifacts/converted_images/converted_svgs/AC0080_L.svg` aktualisiert.)
-- [x] **N9 – Plan-B-Einzelprobe für `AC0212_L.svg` anlegen** (2026-05-14: isolierter `AC0212`-Kurzlauf + gekoppelte Plan-B-Syntheseprobe mit Exit `0` dokumentiert; siehe `docs/history/n9_ac0212_planb_single_2026-05-14_runDF_summary.md` sowie Logs `artifacts/converted_images/reports/AC0212_single_planbprobe_2026-05-14_runDF.log` und `artifacts/converted_images/reports/AC0212_planb_synthetic_2026-05-14_runDF_PB.log`.)
+- [x] **N9 – Plan-B-Einzelprobe für `AC0212_L.svg` anlegen** (2026-05-14: isolierter `AC0212`-Kurzlauf + gekoppelte Plan-B-Syntheseprobe mit Exit `0` dokumentiert; siehe `docs/n9_ac0212_planb_single_2026-05-14_runDF_summary.md` sowie Logs `artifacts/converted_images/reports/AC0212_single_planbprobe_2026-05-14_runDF.log` und `artifacts/converted_images/reports/AC0212_planb_synthetic_2026-05-14_runDF_PB.log`.)
 
-- [x] **N10 – Plan-B-Einzelprobe für `AC0223_L_sia.svg` anlegen** (2026-05-15: isolierter `AC0223`-Kurzlauf dokumentiert und anschließend auf den tatsächlichen Trefferpfad `artifacts/images_to_convert/nonconvertable` korrigiert (`Run DN2`, Exit `0`); gekoppelte Plan-B-Aufgabe `N10-PB` aus neuer Sample-Datei `artifacts/images_to_convert/samples/AC0223_L_sia.svg` abgeleitet; siehe `docs/history/n10_ac0223_planb_single_2026-05-15_runDN_summary.md` sowie Logs `artifacts/converted_images/reports/AC0223_single_2026-05-15_runDN.log` und `artifacts/converted_images/reports/AC0223_single_nonconvertable_retry_2026-05-15_runDN2.log`.)
+- [x] **N10 – Plan-B-Einzelprobe für `AC0223_L_sia.svg` anlegen** (2026-05-15: isolierter `AC0223`-Kurzlauf dokumentiert und anschließend auf den tatsächlichen Trefferpfad `artifacts/images_to_convert/nonconvertable` korrigiert (`Run DN2`, Exit `0`); gekoppelte Plan-B-Aufgabe `N10-PB` aus neuer Sample-Datei `artifacts/images_to_convert/samples/AC0223_L_sia.svg` abgeleitet; siehe `docs/n10_ac0223_planb_single_2026-05-15_runDN_summary.md` sowie Logs `artifacts/converted_images/reports/AC0223_single_2026-05-15_runDN.log` und `artifacts/converted_images/reports/AC0223_single_nonconvertable_retry_2026-05-15_runDN2.log`.)
 
 
 ### Fortschritt vs. Blocker (Session 2026-05-15, N10 AC0223-Plan-B + Einzelrun Run DN)
 
-- **Fortschritt:** Aus der neu hinzugefügten Sample-Datei `artifacts/images_to_convert/samples/AC0223_L_sia.svg` wurde eine gekoppelte Plan-B-Aufgabe (`N10-PB`) abgeleitet und der nächste dokumentierte leichtgewichtige Umsetzungsschritt als AC0223-Einzelrun ausgeführt (`--start AC0223 --end AC0223`, Exit `0`; Log: `artifacts/converted_images/reports/AC0223_single_2026-05-15_runDN.log`, Summary: `docs/history/n10_ac0223_planb_single_2026-05-15_runDN_summary.md`).
+- **Fortschritt:** Aus der neu hinzugefügten Sample-Datei `artifacts/images_to_convert/samples/AC0223_L_sia.svg` wurde eine gekoppelte Plan-B-Aufgabe (`N10-PB`) abgeleitet und der nächste dokumentierte leichtgewichtige Umsetzungsschritt als AC0223-Einzelrun ausgeführt (`--start AC0223 --end AC0223`, Exit `0`; Log: `artifacts/converted_images/reports/AC0223_single_2026-05-15_runDN.log`, Summary: `docs/n10_ac0223_planb_single_2026-05-15_runDN_summary.md`).
 - **Blocker:** Für die schweren Vollbereichsaufgaben N1/N2 bleibt der bekannte Timeout-/Laufzeitblocker unverändert bestehen.
 - **Nächster sinnvoller Schritt:** Die gekoppelte Plan-B-Syntheseprobe `N10-PB` für `AC0223` ausführen und danach wieder auf den nächsten priorisierten Kurzlaufpfad (T5/N5/N6/N7) rotieren.
 
@@ -1153,9 +1153,9 @@ bis **schwierig/zeitintensiv**):
 ### Abgeleitete Lightweight-Aufgaben aus Laufzeitfaktoren (2026-05-09)
 
 - [x] **LW1:** `AC0836_L` isoliert konvertieren und 6-Runden/global-search-Zeit erneut messen. (2026-05-09: Repro in Python `3.10.20` ausgeführt; `max_round=6`, `global_search_samples=6`, `global_search_sum=3.37s`, kein `stagnation_detected`; Log: `artifacts/converted_images/reports/LW1_ac0836L_isolation_2026-05-09_runCQ.log`.)
-- [x] **LW2:** `AC0838_M` isoliert konvertieren und Stagnationsrunde + Rundendauern protokollieren. (2026-05-10: Python `3.10.20`-Isolationslauf erfolgreich, Exit `0`; `stagnation_detected` in Runde `3`; `global_search_elapsed` R1..R5 = `0.70s/0.77s/0.02s/0.67s/0.47s`; Artefakte: `artifacts/converted_images/reports/LW2_ac0838M_isolation_2026-05-10_runCR_py310.log`, `artifacts/converted_images/reports/AC0838_M_element_validation.log`, Summary: `docs/history/lw2_ac0838M_isolation_2026-05-10_runCR_summary.md`.)
-- [x] **LW3:** `AC0831_L` isoliert in 3 Wiederholungen laufen lassen (min/median/max global-search). (2026-05-10: 3x Python `3.10.20`-Isolationsläufe erfolgreich, jeweils Exit `0`; kumulierte `global_search_elapsed` pro Lauf: `2.40s/2.40s/2.40s` ⇒ `min=2.40s`, `median=2.40s`, `max=2.40s`; Artefakte: `artifacts/converted_images/reports/LW3_ac0831L_isolation_2026-05-10_runCS1_py310.log`, `...runCS2...`, `...runCS3...`, Element-Logs: `AC0831_L_element_validation_runCS1.log` bis `runCS3.log`, Summary: `docs/history/lw3_ac0831L_isolation_2026-05-10_runCS_summary.md`.)
-- [x] **LW4:** Offener Microbatch-Rest nur noch für `AC0836_L` als schneller N1/N2-Proxy dokumentieren. (`AC0838_M` und `AC0831_L` liefen einwandfrei mit Exit `0` und sind deshalb aus der offenen Aufgabenliste entfernt sowie in der separaten Bestenliste `successed_conversions.txt` geführt. 2026-05-10: Run CT mit `AC0836` Exit `139`, siehe `docs/history/lw4_microbatch_2026-05-10_runCT_summary.md` und Logs `artifacts/converted_images/reports/LW4_microbatch_2026-05-10_runCT_*.log`; 2026-05-11: gezielter AC0836-Re-Run in Python `3.10.20` erneut mit Exit `139`, siehe `docs/history/lw4_ac0836_rerun_2026-05-11_runCU_summary.md` und `artifacts/converted_images/reports/LW4_microbatch_2026-05-11_runCU_ac0836_py310.log`; 2026-05-13: erneuter AC0836-Isolationslauf (Run CZ) erfolgreich mit Exit `0`, siehe `docs/history/lw4_ac0836_rerun_2026-05-13_runCZ_summary.md` und `artifacts/converted_images/reports/LW4_microbatch_2026-05-13_runCZ_ac0836_py310.log`; LW4 damit abgeschlossen.)
+- [x] **LW2:** `AC0838_M` isoliert konvertieren und Stagnationsrunde + Rundendauern protokollieren. (2026-05-10: Python `3.10.20`-Isolationslauf erfolgreich, Exit `0`; `stagnation_detected` in Runde `3`; `global_search_elapsed` R1..R5 = `0.70s/0.77s/0.02s/0.67s/0.47s`; Artefakte: `artifacts/converted_images/reports/LW2_ac0838M_isolation_2026-05-10_runCR_py310.log`, `artifacts/converted_images/reports/AC0838_M_element_validation.log`, Summary: `docs/lw2_ac0838M_isolation_2026-05-10_runCR_summary.md`.)
+- [x] **LW3:** `AC0831_L` isoliert in 3 Wiederholungen laufen lassen (min/median/max global-search). (2026-05-10: 3x Python `3.10.20`-Isolationsläufe erfolgreich, jeweils Exit `0`; kumulierte `global_search_elapsed` pro Lauf: `2.40s/2.40s/2.40s` ⇒ `min=2.40s`, `median=2.40s`, `max=2.40s`; Artefakte: `artifacts/converted_images/reports/LW3_ac0831L_isolation_2026-05-10_runCS1_py310.log`, `...runCS2...`, `...runCS3...`, Element-Logs: `AC0831_L_element_validation_runCS1.log` bis `runCS3.log`, Summary: `docs/lw3_ac0831L_isolation_2026-05-10_runCS_summary.md`.)
+- [x] **LW4:** Offener Microbatch-Rest nur noch für `AC0836_L` als schneller N1/N2-Proxy dokumentieren. (`AC0838_M` und `AC0831_L` liefen einwandfrei mit Exit `0` und sind deshalb aus der offenen Aufgabenliste entfernt sowie in der separaten Bestenliste `successed_conversions.txt` geführt. 2026-05-10: Run CT mit `AC0836` Exit `139`, siehe `docs/lw4_microbatch_2026-05-10_runCT_summary.md` und Logs `artifacts/converted_images/reports/LW4_microbatch_2026-05-10_runCT_*.log`; 2026-05-11: gezielter AC0836-Re-Run in Python `3.10.20` erneut mit Exit `139`, siehe `docs/lw4_ac0836_rerun_2026-05-11_runCU_summary.md` und `artifacts/converted_images/reports/LW4_microbatch_2026-05-11_runCU_ac0836_py310.log`; 2026-05-13: erneuter AC0836-Isolationslauf (Run CZ) erfolgreich mit Exit `0`, siehe `docs/lw4_ac0836_rerun_2026-05-13_runCZ_summary.md` und `artifacts/converted_images/reports/LW4_microbatch_2026-05-13_runCZ_ac0836_py310.log`; LW4 damit abgeschlossen.)
 
 ### Anti-Deadlock-Regel (ab 2026-05-07 verbindlich)
 
@@ -1224,7 +1224,7 @@ Deadlock-/Stagnationsschleifen.
 - **Nächster sinnvoller Schritt:** Einen weiteren kurzen T5.x-Reprolauf mit identischem Python-`3.10.20`-Pfad durchführen und Ergebnis direkt danach hier dokumentieren.
 ### Fortschritt vs. Blocker (Session 2026-05-07, N1-Vollbereich Run CJ)
 
-- **Fortschritt:** Der nächste dokumentierte N1-Vollbereichsversuch wurde in derselben Python-`3.10.20`-Toolchain wie die erfolgreichen T5-Kurzläufe ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-07_runCJ.log` (Summary: `docs/history/ac0800_ac0899_runCJ_2026-05-07_summary.md`).
+- **Fortschritt:** Der nächste dokumentierte N1-Vollbereichsversuch wurde in derselben Python-`3.10.20`-Toolchain wie die erfolgreichen T5-Kurzläufe ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-07_runCJ.log` (Summary: `docs/ac0800_ac0899_runCJ_2026-05-07_summary.md`).
 - **Blocker:** Der äußere Zeitrahmen (`timeout 420`) endete erneut mit Exit `124`; damit bleibt der Vollbereichsnachweis bis `AC0899` weiterhin offen.
 - **Nächster sinnvoller Schritt:** Gemäß Anti-Deadlock-Regel wieder auf eine leichtere/orthogonale Aufgabe (z. B. weiterer T5-/N5-Schritt mit zusätzlicher Diagnosemetrik) rotieren, bevor der nächste N1-Versuch erfolgt.
 
@@ -1236,20 +1236,20 @@ Deadlock-/Stagnationsschleifen.
 
 ### Fortschritt vs. Blocker (Session 2026-05-08, N5-Kurzbatch Run 03)
 
-- **Fortschritt:** Der als nächster Schritt dokumentierte N5-Sample-Pair-Kurzbatch wurde erneut ausgeführt; Ergebnis weiterhin stabil mit `svg_count=15`, `jpeg_count=15`, `pair_validation=ok` und Exit `0` (Artefakte: `artifacts/converted_images/reports/sample_pair_validation_2026-05-08_run03.csv`, `artifacts/converted_images/reports/sample_pair_validation_2026-05-08_run03.log`, Summary: `docs/history/sample_pair_validation_2026-05-08_run03.md`; binäre JPEG-Zwischendateien werden nicht versioniert).
+- **Fortschritt:** Der als nächster Schritt dokumentierte N5-Sample-Pair-Kurzbatch wurde erneut ausgeführt; Ergebnis weiterhin stabil mit `svg_count=15`, `jpeg_count=15`, `pair_validation=ok` und Exit `0` (Artefakte: `artifacts/converted_images/reports/sample_pair_validation_2026-05-08_run03.csv`, `artifacts/converted_images/reports/sample_pair_validation_2026-05-08_run03.log`, Summary: `docs/sample_pair_validation_2026-05-08_run03.md`; binäre JPEG-Zwischendateien werden nicht versioniert).
 - **Blocker:** N1/N2 bleiben unverändert offen, da weiterhin kein Vollbereichslauf bis `AC0899` mit finalem Exit `0` nachgewiesen ist.
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung auf den nächsten noch offenen schweren Pfad rotieren (N2/N1), idealerweise mit klarer Timeout-Grenze und unmittelbarer Run-Dokumentation.
 
 
 ### Fortschritt vs. Blocker (Session 2026-05-08, N1/N2-Vollbereich Run CL)
 
-- **Fortschritt:** Der als nächster schwerer Anschluss dokumentierte Vollbereichslauf wurde in Python `3.10.20` mit fixer Timeout-Grenze ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-08_runCL.log` (Summary: `docs/history/ac0800_ac0899_runCL_2026-05-08_summary.md`).
+- **Fortschritt:** Der als nächster schwerer Anschluss dokumentierte Vollbereichslauf wurde in Python `3.10.20` mit fixer Timeout-Grenze ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-08_runCL.log` (Summary: `docs/ac0800_ac0899_runCL_2026-05-08_summary.md`).
 - **Blocker:** Der Lauf endete erneut per äußerem `timeout 420` mit Exit `124`; damit bleibt der Abschlussnachweis bis `AC0899` weiterhin offen.
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung wieder auf eine leichtere/orthogonale Aufgabe rotieren (z. B. T5/N6/N7 mit neuem Diagnoseartefakt), bevor der nächste N1-Vollbereichsversuch erfolgt.
 
 ### Fortschritt vs. Blocker (Session 2026-05-08, N1/N2-Vollbereich Run CM)
 
-- **Fortschritt:** Der Vollbereichslauf `AC0800..AC0899` wurde erneut in Python `3.10.20` mit `timeout 420` ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-08_runCM.log` (Summary: `docs/history/ac0800_ac0899_runCM_2026-05-08_summary.md`).
+- **Fortschritt:** Der Vollbereichslauf `AC0800..AC0899` wurde erneut in Python `3.10.20` mit `timeout 420` ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-08_runCM.log` (Summary: `docs/ac0800_ac0899_runCM_2026-05-08_summary.md`).
 - **Blocker:** Der Lauf endete erneut mit Exit `124`; der Vollbereichsnachweis bis `AC0899` bleibt weiterhin offen.
 - **Nächster sinnvoller Schritt:** Auf eine leichtere/orthogonale Diagnoseaufgabe rotieren und erst danach erneut N1 starten.
 
@@ -1268,7 +1268,7 @@ Deadlock-/Stagnationsschleifen.
 
 ### Fortschritt vs. Blocker (Session 2026-05-09, N1/N2-Vollbereich Run CP)
 
-- **Fortschritt:** Der nächste schwere N1/N2-Vollbereichslauf wurde in Python `3.10.20` mit fixer Timeout-Grenze ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-09_runCP.log` (Summary: `docs/history/ac0800_ac0899_runCP_2026-05-09_summary.md`).
+- **Fortschritt:** Der nächste schwere N1/N2-Vollbereichslauf wurde in Python `3.10.20` mit fixer Timeout-Grenze ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-09_runCP.log` (Summary: `docs/ac0800_ac0899_runCP_2026-05-09_summary.md`).
 - **Blocker:** Der Lauf endete erneut per äußerem `timeout 420` mit Exit `124`; der Vollbereichsnachweis bis `AC0899` mit finalem Exit `0` bleibt offen.
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung wieder auf eine leichtere/orthogonale Aufgabe (T5/N5/N6/N7) mit neuem Diagnoseartefakt rotieren, bevor der nächste N1-Versuch erfolgt.
 
@@ -1280,7 +1280,7 @@ Deadlock-/Stagnationsschleifen.
 
 ### Fortschritt vs. Blocker (Session 2026-05-10, LW4-Microbatch Run CT)
 
-- **Fortschritt:** Die nächste offene Lightweight-Aufgabe (LW4) wurde gestartet; der 3er-Microbatch-Proxylauf wurde für `AC0836`, `AC0838` und `AC0831` in Python `3.10.20` ausgeführt (Logs: `artifacts/converted_images/reports/LW4_microbatch_2026-05-10_runCT_ac0836.log`, `...ac0838.log`, `...ac0831.log`; Summary: `docs/history/lw4_microbatch_2026-05-10_runCT_summary.md`).
+- **Fortschritt:** Die nächste offene Lightweight-Aufgabe (LW4) wurde gestartet; der 3er-Microbatch-Proxylauf wurde für `AC0836`, `AC0838` und `AC0831` in Python `3.10.20` ausgeführt (Logs: `artifacts/converted_images/reports/LW4_microbatch_2026-05-10_runCT_ac0836.log`, `...ac0838.log`, `...ac0831.log`; Summary: `docs/lw4_microbatch_2026-05-10_runCT_summary.md`).
 - **Blocker:** Der Teilpfad `AC0836` brach im Microbatch-Lauf mit Exit `139` (`MuPDF error: exception stack overflow!`) ab; damit ist der gewünschte vollständige 3er-Proxylauf noch nicht als stabil abgeschlossen nachgewiesen.
 - **Nächster sinnvoller Schritt:** LW4 mit einem gezielten Re-Run des AC0836-Teils (gleiche Toolchain/Kommandostruktur) vervollständigen und erst danach erneut auf schwere N1/N2-Läufe rotieren.
 
@@ -1292,7 +1292,7 @@ Deadlock-/Stagnationsschleifen.
 
 ### Fortschritt vs. Blocker (Session 2026-05-11, LW4 AC0836-Re-Run Run CU)
 
-- **Fortschritt:** Der als nächster LW4-Schritt dokumentierte gezielte Re-Run für `AC0836` wurde im identischen Microbatch-Schema in Python `3.10.20` durchgeführt; neues Artefakt: `artifacts/converted_images/reports/LW4_microbatch_2026-05-11_runCU_ac0836_py310.log` (Summary: `docs/history/lw4_ac0836_rerun_2026-05-11_runCU_summary.md`).
+- **Fortschritt:** Der als nächster LW4-Schritt dokumentierte gezielte Re-Run für `AC0836` wurde im identischen Microbatch-Schema in Python `3.10.20` durchgeführt; neues Artefakt: `artifacts/converted_images/reports/LW4_microbatch_2026-05-11_runCU_ac0836_py310.log` (Summary: `docs/lw4_ac0836_rerun_2026-05-11_runCU_summary.md`).
 - **Blocker:** Der Teilpfad `AC0836` reproduziert weiterhin den bekannten Abbruch (`MuPDF error: exception stack overflow!`, Exit `139`), daher bleibt LW4 weiterhin offen.
 - **Nächster sinnvoller Schritt:** Den AC0836-Langläuferpfad isoliert weiter eingrenzen (z. B. mit zusätzlicher MuPDF-/Render-Telemetrie pro Runde/Element) und erst nach stabiler AC0836-Teilprobe den kompletten LW4-Proxy erneut fahren.
 
@@ -1339,8 +1339,8 @@ Deadlock-/Stagnationsschleifen.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
   - Ziel: erklären, **warum** gerade `AC0811_L` zuerst über Budget läuft (Pfad/Element/Runde) und eine minimal-invasive Gegenmaßnahme mit messbarer Wirkung liefern.
   - Akzeptanzkriterium: isolierter Repro-Lauf + Kurzbericht mit identifizierter Ursache + Patch, der den ersten Overrun entweder vermeidet oder deutlich nach hinten verschiebt.
-  - 2026-05-02: AC0811-Only-Repro ohne explizites Zeitlimit ausgeführt (`docs/history/ac0811_only_2026-05-02_runB_summary.md`); Lauf endet mit Exit `0` und ohne `validation_time_budget_exceeded`, zeigt jedoch wiederholte Verarbeitung von `AC0811_M`/`AC0811_S` als neuen Analysehinweis.
-  - 2026-05-02: Fast-Path für Single-Base-Scopes ergänzt (`max_quality_passes=1`, overridebar via `ICC_MAX_QUALITY_PASSES`); AC0811-Only-Run C zeigt Laufzeitverbesserung von `395.59s` auf `363.78s` (~8.0%) bei weiter Exit `0` ohne Budget-Timeout-Marker (`docs/history/ac0811_only_2026-05-02_runC_summary.md`).
+  - 2026-05-02: AC0811-Only-Repro ohne explizites Zeitlimit ausgeführt (`docs/ac0811_only_2026-05-02_runB_summary.md`); Lauf endet mit Exit `0` und ohne `validation_time_budget_exceeded`, zeigt jedoch wiederholte Verarbeitung von `AC0811_M`/`AC0811_S` als neuen Analysehinweis.
+  - 2026-05-02: Fast-Path für Single-Base-Scopes ergänzt (`max_quality_passes=1`, overridebar via `ICC_MAX_QUALITY_PASSES`); AC0811-Only-Run C zeigt Laufzeitverbesserung von `395.59s` auf `363.78s` (~8.0%) bei weiter Exit `0` ohne Budget-Timeout-Marker (`docs/ac0811_only_2026-05-02_runC_summary.md`).
   - 2026-05-03: Abschlussnotiz ergänzt (`docs/n0_ac0811_root_cause_closure_2026-05-03.md`); Root-Cause (zu enger 18s-Budgetrahmen für AC0811_L im Vollbereich) dokumentiert und Gegenmaßnahme mit messbarer Wirkung referenziert.
 
 - [x] N1: B2 vollständig abschließen: Vollbereichslauf `AC0800..AC0899` mit Exit-Code `0` nachweisen. (2026-05-14: Auf Wunsch als erledigt markiert und als wiederholt timeout-anfälliger Langläufer in N2/Plan-B-Pfad überführt.)
@@ -1362,151 +1362,151 @@ Deadlock-/Stagnationsschleifen.
   - 2026-04-23: Run V erneut ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0800_S`, danach ohne weiteren sichtbaren Fortschritt manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`).
   - 2026-04-23: Run W ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_S`, danach ohne weiteren sichtbaren Fortschritt manuell per `pkill` beendet (kein finaler Exit-`0` dokumentiert).
   - 2026-04-23: Run X ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `pkill` beendet (kein finaler Exit-`0` dokumentiert).
-  - 2026-04-23: Run Y mit `timeout 420` gestartet; sichtbarer Fortschritt bis `AC0811_L`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runY_2026-04-23_summary.md`).
-  - 2026-04-23: Run Z ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `pkill` beendet (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runZ_2026-04-23_summary.md`).
-  - 2026-04-23: Run AA mit `timeout 600` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAA_2026-04-23_summary.md`).
-  - 2026-04-24: Run AB mit `timeout 300` gestartet; sichtbarer Fortschritt bis `AC0811_L`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAB_2026-04-24_summary.md`).
-  - 2026-04-24: Run AC mit `timeout 300` gestartet; sichtbarer Fortschritt bis `AC0811_L`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAC_2026-04-24_summary.md`).
-  - 2026-04-24: Run AD ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAD_2026-04-24_summary.md`).
-  - 2026-04-24: Run AE ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_S`, danach manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAE_2026-04-24_summary.md`).
-  - 2026-04-24: Run AF ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt per `pkill -f src.imageCompositeConverter` beendet (Prozess durch Signal beendet, kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAF_2026-04-24_summary.md`).
-  - 2026-04-24: Run AG ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt per `pkill -f src.imageCompositeConverter` beendet (Prozess durch Signal beendet, kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAG_2026-04-24_summary.md`).
-  - 2026-04-24: Run AH ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAH_2026-04-24_summary.md`).
-  - 2026-04-24: Run AI ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0812_S`, danach manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAI_2026-04-24_summary.md`).
-  - 2026-04-24: Run AJ ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAJ_2026-04-24_summary.md`).
-  - 2026-04-24: Run AK ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAK_2026-04-24_summary.md`).
-  - 2026-04-24: Run AL mit `timeout 900` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt per `pkill -f src.imageCompositeConverter` beendet (Prozessstatus signalbedingt `-1`, kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAL_2026-04-24_summary.md`).
-  - 2026-04-24: Run AM ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt per `pkill` beendet (Prozessstatus signalbedingt `-1`, kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAM_2026-04-24_summary.md`).
-  - 2026-04-25: Run AN mit `timeout 420` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAN_2026-04-25_summary.md`).
-  - 2026-04-26: Run AP mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAP_2026-04-26_summary.md`).
-  - 2026-04-26: Run AQ mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAQ_2026-04-26_summary.md`).
-  - 2026-04-26: Run AR mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAR_2026-04-26_summary.md`).
-  - 2026-04-27: Run AS mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAS_2026-04-27_summary.md`).
-  - 2026-04-27: Run AT mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAT_2026-04-27_summary.md`).
-  - 2026-04-27: Run AU mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runAU_2026-04-27_summary.md`).
-  - 2026-04-28: Run AV mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runAV_2026-04-28_summary.md`).
-  - 2026-04-28: Run AW mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runAW_2026-04-28_summary.md`).
-  - 2026-04-28: Run AX mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runAX_2026-04-28_summary.md`).
-  - 2026-04-28: Run AY mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runAY_2026-04-28_summary.md`).
-  - 2026-04-28: Run AZ mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runAZ_2026-04-28_summary.md`).
-  - 2026-04-28: Run BA mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBA_2026-04-28_summary.md`).
-  - 2026-04-28: Run BB mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBB_2026-04-28_summary.md`).
-  - 2026-04-28: Run BC mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBC_2026-04-28_summary.md`).
-  - 2026-04-29: Run BD mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBD_2026-04-29_summary.md`).
-  - 2026-04-29: Run BE mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBE_2026-04-29_summary.md`).
-  - 2026-04-29: Run BF mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBF_2026-04-29_summary.md`).
-  - 2026-04-29: Run BG mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBG_2026-04-29_summary.md`).
-  - 2026-04-30: Run BH mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBH_2026-04-30_summary.md`).
-  - 2026-05-01: Run BI mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBI_2026-05-01_summary.md`).
-  - 2026-05-01: Run BJ mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBJ_2026-05-01_summary.md`).
-  - 2026-05-02: Run BK mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBK_2026-05-02_summary.md`).
-  - 2026-05-02: Run BL mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBL_2026-05-02_summary.md`).
-  - 2026-05-02: Run BM mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBM_2026-05-02_summary.md`).
-  - 2026-05-02: Run BN mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis Start `AC0812_S`, Prozessende mit Timeout-Exit `124` (Summary: `docs/history/ac0800_ac0899_runBN_2026-05-02_summary.md`).
-  - 2026-05-03: Run BO mit `timeout 120` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0881_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runBO_2026-05-03_summary.md`).
-  - 2026-05-03: Run BP ohne `timeout` gestartet; wegen ausbleibender sichtbarer Log-Fortschrittszeilen in der Beobachtungsphase manuell per `pkill` beendet (signalbedingter Prozessstatus `-1`, kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runBP_2026-05-03_summary.md`).
-  - 2026-05-03: Run BQ mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0832_L`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runBQ_2026-05-03_summary.md`).
-  - 2026-05-03: Run BR mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0838_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runBR_2026-05-03_summary.md`).
-  - 2026-05-03: Run BS mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0870_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runBS_2026-05-03_summary.md`).
-  - 2026-05-03: Run BT mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0882_S`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runBT_2026-05-03_summary.md`).
-  - 2026-05-06: Run BU mit `timeout 300` + unbuffered Output gestartet; Prozessende mit Exit `0`, aber ohne AC08-Variantenfortschritt (Log enthält nur `OpenCV bindings requires "numpy" package` + Abschlussmeldung), daher kein Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBU_2026-05-06_summary.md`).
-  - 2026-05-06: Run BV mit `timeout 300` + explizitem `PYTHONPATH=vendor/linux-py310/site-packages` gestartet; Prozessende mit Exit `0`, aber weiterhin ohne AC08-Variantenfortschritt (erneut nur `OpenCV bindings requires "numpy" package` + Abschlussmeldung), daher weiterhin kein Vollbereichsnachweis bis `AC0899` (Summary: `docs/history/ac0800_ac0899_runBV_2026-05-06_summary.md`).
-  - 2026-05-07: Run CB mit `timeout 300` + Python `3.10.20` gestartet; sichtbarer Fortschritt bis mindestens `AC0884_L`/`AC0881_S` (letzter Logeintrag: `AC0836_M`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runCB_2026-05-07_summary.md`).
-  - 2026-05-07: Run CC mit `timeout 300` + Python `3.10.20` gestartet; erneut sichtbarer Fortschritt bis mindestens `AC0884_L`/`AC0881_S` (letzter Varianten-Logeintrag: `AC0836_M`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runCC_2026-05-07_summary.md`).
-  - 2026-05-07: Run CD mit `timeout 300` + Python `3.10.20` gestartet; sichtbarer Fortschritt bis mindestens `AC0842_L`/`AC0849_S`/`AC0831_S` (letzter Varianten-Logeintrag: `AC0835_S`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runCD_2026-05-07_summary.md`).
-  - 2026-05-07: Run CE mit `timeout 600` + Python `3.10.20` gestartet; sichtbarer Fortschritt bis mindestens `AC0838_L` (u. a. `AC0862_M`, `AC0841_S`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runCE_2026-05-07_summary.md`).
+  - 2026-04-23: Run Y mit `timeout 420` gestartet; sichtbarer Fortschritt bis `AC0811_L`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runY_2026-04-23_summary.md`).
+  - 2026-04-23: Run Z ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `pkill` beendet (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runZ_2026-04-23_summary.md`).
+  - 2026-04-23: Run AA mit `timeout 600` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAA_2026-04-23_summary.md`).
+  - 2026-04-24: Run AB mit `timeout 300` gestartet; sichtbarer Fortschritt bis `AC0811_L`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAB_2026-04-24_summary.md`).
+  - 2026-04-24: Run AC mit `timeout 300` gestartet; sichtbarer Fortschritt bis `AC0811_L`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAC_2026-04-24_summary.md`).
+  - 2026-04-24: Run AD ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAD_2026-04-24_summary.md`).
+  - 2026-04-24: Run AE ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_S`, danach manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAE_2026-04-24_summary.md`).
+  - 2026-04-24: Run AF ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt per `pkill -f src.imageCompositeConverter` beendet (Prozess durch Signal beendet, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAF_2026-04-24_summary.md`).
+  - 2026-04-24: Run AG ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt per `pkill -f src.imageCompositeConverter` beendet (Prozess durch Signal beendet, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAG_2026-04-24_summary.md`).
+  - 2026-04-24: Run AH ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAH_2026-04-24_summary.md`).
+  - 2026-04-24: Run AI ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0812_S`, danach manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAI_2026-04-24_summary.md`).
+  - 2026-04-24: Run AJ ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAJ_2026-04-24_summary.md`).
+  - 2026-04-24: Run AK ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAK_2026-04-24_summary.md`).
+  - 2026-04-24: Run AL mit `timeout 900` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt per `pkill -f src.imageCompositeConverter` beendet (Prozessstatus signalbedingt `-1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAL_2026-04-24_summary.md`).
+  - 2026-04-24: Run AM ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt per `pkill` beendet (Prozessstatus signalbedingt `-1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAM_2026-04-24_summary.md`).
+  - 2026-04-25: Run AN mit `timeout 420` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAN_2026-04-25_summary.md`).
+  - 2026-04-26: Run AP mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAP_2026-04-26_summary.md`).
+  - 2026-04-26: Run AQ mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAQ_2026-04-26_summary.md`).
+  - 2026-04-26: Run AR mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAR_2026-04-26_summary.md`).
+  - 2026-04-27: Run AS mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAS_2026-04-27_summary.md`).
+  - 2026-04-27: Run AT mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAT_2026-04-27_summary.md`).
+  - 2026-04-27: Run AU mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAU_2026-04-27_summary.md`).
+  - 2026-04-28: Run AV mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runAV_2026-04-28_summary.md`).
+  - 2026-04-28: Run AW mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runAW_2026-04-28_summary.md`).
+  - 2026-04-28: Run AX mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runAX_2026-04-28_summary.md`).
+  - 2026-04-28: Run AY mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runAY_2026-04-28_summary.md`).
+  - 2026-04-28: Run AZ mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runAZ_2026-04-28_summary.md`).
+  - 2026-04-28: Run BA mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBA_2026-04-28_summary.md`).
+  - 2026-04-28: Run BB mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBB_2026-04-28_summary.md`).
+  - 2026-04-28: Run BC mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBC_2026-04-28_summary.md`).
+  - 2026-04-29: Run BD mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBD_2026-04-29_summary.md`).
+  - 2026-04-29: Run BE mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBE_2026-04-29_summary.md`).
+  - 2026-04-29: Run BF mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBF_2026-04-29_summary.md`).
+  - 2026-04-29: Run BG mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBG_2026-04-29_summary.md`).
+  - 2026-04-30: Run BH mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBH_2026-04-30_summary.md`).
+  - 2026-05-01: Run BI mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBI_2026-05-01_summary.md`).
+  - 2026-05-01: Run BJ mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBJ_2026-05-01_summary.md`).
+  - 2026-05-02: Run BK mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBK_2026-05-02_summary.md`).
+  - 2026-05-02: Run BL mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBL_2026-05-02_summary.md`).
+  - 2026-05-02: Run BM mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBM_2026-05-02_summary.md`).
+  - 2026-05-02: Run BN mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis Start `AC0812_S`, Prozessende mit Timeout-Exit `124` (Summary: `docs/ac0800_ac0899_runBN_2026-05-02_summary.md`).
+  - 2026-05-03: Run BO mit `timeout 120` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0881_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBO_2026-05-03_summary.md`).
+  - 2026-05-03: Run BP ohne `timeout` gestartet; wegen ausbleibender sichtbarer Log-Fortschrittszeilen in der Beobachtungsphase manuell per `pkill` beendet (signalbedingter Prozessstatus `-1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBP_2026-05-03_summary.md`).
+  - 2026-05-03: Run BQ mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0832_L`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBQ_2026-05-03_summary.md`).
+  - 2026-05-03: Run BR mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0838_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBR_2026-05-03_summary.md`).
+  - 2026-05-03: Run BS mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0870_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBS_2026-05-03_summary.md`).
+  - 2026-05-03: Run BT mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0882_S`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBT_2026-05-03_summary.md`).
+  - 2026-05-06: Run BU mit `timeout 300` + unbuffered Output gestartet; Prozessende mit Exit `0`, aber ohne AC08-Variantenfortschritt (Log enthält nur `OpenCV bindings requires "numpy" package` + Abschlussmeldung), daher kein Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBU_2026-05-06_summary.md`).
+  - 2026-05-06: Run BV mit `timeout 300` + explizitem `PYTHONPATH=vendor/linux-py310/site-packages` gestartet; Prozessende mit Exit `0`, aber weiterhin ohne AC08-Variantenfortschritt (erneut nur `OpenCV bindings requires "numpy" package` + Abschlussmeldung), daher weiterhin kein Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBV_2026-05-06_summary.md`).
+  - 2026-05-07: Run CB mit `timeout 300` + Python `3.10.20` gestartet; sichtbarer Fortschritt bis mindestens `AC0884_L`/`AC0881_S` (letzter Logeintrag: `AC0836_M`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runCB_2026-05-07_summary.md`).
+  - 2026-05-07: Run CC mit `timeout 300` + Python `3.10.20` gestartet; erneut sichtbarer Fortschritt bis mindestens `AC0884_L`/`AC0881_S` (letzter Varianten-Logeintrag: `AC0836_M`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runCC_2026-05-07_summary.md`).
+  - 2026-05-07: Run CD mit `timeout 300` + Python `3.10.20` gestartet; sichtbarer Fortschritt bis mindestens `AC0842_L`/`AC0849_S`/`AC0831_S` (letzter Varianten-Logeintrag: `AC0835_S`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runCD_2026-05-07_summary.md`).
+  - 2026-05-07: Run CE mit `timeout 600` + Python `3.10.20` gestartet; sichtbarer Fortschritt bis mindestens `AC0838_L` (u. a. `AC0862_M`, `AC0841_S`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runCE_2026-05-07_summary.md`).
   - 2026-05-07: Timeout-Blockeranalyse ergänzt (`docs/ac0800_ac0899_timeout_blocker_analysis_2026-05-07.md`): kein einzelner Deadlock; Hauptverzögerung ist kumulative Laufzeit in wiederholten `global-search`-Runden (u. a. AC0836_L/AC0838_M/AC0831_L mit Mehrfachrunden und Stagnationsmustern).
 
-  - 2026-05-14: Run DA mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runDA_2026-05-14_summary.md`).
-  - 2026-05-14: N1-PB direkt nach Run DA ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDA_PB.log` (Summary: `docs/history/ac0800_ac0809_planb_runDA_2026-05-14_summary.md`).
-  - 2026-05-14: Run DB mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runDB_2026-05-14_summary.md`).
-  - 2026-05-14: N1-PB direkt nach Run DB ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDB_PB.log` (Summary: `docs/history/ac0800_ac0809_planb_runDB_2026-05-14_summary.md`).
-  - 2026-05-14: Run DC mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runDC_2026-05-14_summary.md`).
-  - 2026-05-14: N1-PB direkt nach Run DC ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDC_PB.log` (Summary: `docs/history/ac0800_ac0809_planb_runDC_2026-05-14_summary.md`).
-  - 2026-05-14: Run DE mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runDE_2026-05-14_summary.md`).
-  - 2026-05-14: N1-PB direkt nach Run DE ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDE_PB.log` (Summary: `docs/history/ac0800_ac0809_planb_runDE_2026-05-14_summary.md`).
-  - 2026-05-14: Run DG mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runDG_2026-05-14_summary.md`).
-  - 2026-05-14: N1-PB direkt nach Run DG ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDG_PB.log` (Summary: `docs/history/ac0800_ac0809_planb_runDG_2026-05-14_summary.md`).
-  - 2026-05-14: Run DH mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/history/ac0800_ac0899_runDH_2026-05-14_summary.md`).
-  - 2026-05-14: N1-PB direkt nach Run DH ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDH_PB.log` (Summary: `docs/history/ac0800_ac0809_planb_runDH_2026-05-14_summary.md`).
+  - 2026-05-14: Run DA mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runDA_2026-05-14_summary.md`).
+  - 2026-05-14: N1-PB direkt nach Run DA ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDA_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDA_2026-05-14_summary.md`).
+  - 2026-05-14: Run DB mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runDB_2026-05-14_summary.md`).
+  - 2026-05-14: N1-PB direkt nach Run DB ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDB_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDB_2026-05-14_summary.md`).
+  - 2026-05-14: Run DC mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runDC_2026-05-14_summary.md`).
+  - 2026-05-14: N1-PB direkt nach Run DC ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDC_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDC_2026-05-14_summary.md`).
+  - 2026-05-14: Run DE mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runDE_2026-05-14_summary.md`).
+  - 2026-05-14: N1-PB direkt nach Run DE ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDE_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDE_2026-05-14_summary.md`).
+  - 2026-05-14: Run DG mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runDG_2026-05-14_summary.md`).
+  - 2026-05-14: N1-PB direkt nach Run DG ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDG_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDG_2026-05-14_summary.md`).
+  - 2026-05-14: Run DH mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runDH_2026-05-14_summary.md`).
+  - 2026-05-14: N1-PB direkt nach Run DH ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDH_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDH_2026-05-14_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [x] N2: Stabilitätsnachweis für den Vollbereich dokumentieren. (2026-05-16: Auf Wunsch als erledigt/abgeschlossen markiert; wiederholte Vollbereichs-Re-Runs ohne neuen Erkenntnisgewinn werden beendet und der Fokus auf alternative Lösungswege gelegt.)
   - Prüfen und dokumentieren, ob im vollständigen Lauf weiterhin kein MuPDF-`stack overflow`/Segfault auftritt.
   - Bei Abbruch: letzte verarbeitete Variante, Exit-Code und vermutete Ursache im Summary festhalten.
-  - 2026-04-23: In Run T bis einschließlich `AC0811_M` kein MuPDF-`stack overflow`/Segfault; Abbruchursache und Status in `docs/history/ac0800_ac0899_runT_2026-04-23_summary.md` dokumentiert.
-  - 2026-04-23: Run U bestätigt erneut keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruchursache und Status in `docs/history/ac0800_ac0899_runU_2026-04-23_summary.md` dokumentiert.
-  - 2026-04-23: Run V zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0800_S`; Abbruchursache und Status in `docs/history/ac0800_ac0899_runV_2026-04-23_summary.md` dokumentiert.
-  - 2026-04-23: Run W zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_S`; Abbruchursache und Status in `docs/history/ac0800_ac0899_runW_2026-04-23_summary.md` dokumentiert.
-  - 2026-04-23: Run X zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruchursache und Status in `docs/history/ac0800_ac0899_runX_2026-04-23_summary.md` dokumentiert.
-  - 2026-04-23: Run Y zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Timeout-Status in `docs/history/ac0800_ac0899_runY_2026-04-23_summary.md` dokumentiert.
-  - 2026-04-23: Run Z zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruchursache und Status in `docs/history/ac0800_ac0899_runZ_2026-04-23_summary.md` dokumentiert.
-  - 2026-04-23: Run AA zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/history/ac0800_ac0899_runAA_2026-04-23_summary.md` dokumentiert.
-  - 2026-04-24: Run AB zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Timeout-Status in `docs/history/ac0800_ac0899_runAB_2026-04-24_summary.md` dokumentiert.
-  - 2026-04-24: Run AC zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Timeout-Status in `docs/history/ac0800_ac0899_runAC_2026-04-24_summary.md` dokumentiert.
-  - 2026-04-24: Run AD zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; manueller Abbruch/Status in `docs/history/ac0800_ac0899_runAD_2026-04-24_summary.md` dokumentiert.
-  - 2026-04-24: Run AE zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_S`; manueller Abbruch/Status in `docs/history/ac0800_ac0899_runAE_2026-04-24_summary.md` dokumentiert.
-  - 2026-04-24: Run AF zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruch per `pkill`/Status in `docs/history/ac0800_ac0899_runAF_2026-04-24_summary.md` dokumentiert.
-  - 2026-04-24: Run AG zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruch per `pkill`/Status in `docs/history/ac0800_ac0899_runAG_2026-04-24_summary.md` dokumentiert.
-  - 2026-04-24: Run AH zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; manueller Abbruch/Status in `docs/history/ac0800_ac0899_runAH_2026-04-24_summary.md` dokumentiert.
-  - 2026-04-24: Run AI zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0812_S`; manueller Abbruch/Status in `docs/history/ac0800_ac0899_runAI_2026-04-24_summary.md` dokumentiert.
-  - 2026-04-24: Run AJ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; manueller Abbruch/Status in `docs/history/ac0800_ac0899_runAJ_2026-04-24_summary.md` dokumentiert.
-  - 2026-04-24: Run AK zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; manueller Abbruch/Status in `docs/history/ac0800_ac0899_runAK_2026-04-24_summary.md` dokumentiert.
-  - 2026-04-24: Run AL zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruch per `pkill`/Status in `docs/history/ac0800_ac0899_runAL_2026-04-24_summary.md` dokumentiert.
-  - 2026-04-24: Run AM zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruch per `pkill`/Status in `docs/history/ac0800_ac0899_runAM_2026-04-24_summary.md` dokumentiert.
-  - 2026-04-25: Run AN zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/history/ac0800_ac0899_runAN_2026-04-25_summary.md` dokumentiert.
-  - 2026-04-26: Run AP zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/history/ac0800_ac0899_runAP_2026-04-26_summary.md` dokumentiert.
-  - 2026-04-26: Run AQ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Timeout-Status in `docs/history/ac0800_ac0899_runAQ_2026-04-26_summary.md` dokumentiert.
-  - 2026-04-26: Run AR zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Timeout-Status in `docs/history/ac0800_ac0899_runAR_2026-04-26_summary.md` dokumentiert.
-  - 2026-04-27: Run AS zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/history/ac0800_ac0899_runAS_2026-04-27_summary.md` dokumentiert.
-  - 2026-04-27: Run AT zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/history/ac0800_ac0899_runAT_2026-04-27_summary.md` dokumentiert.
-  - 2026-04-27: Run AU zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/history/ac0800_ac0899_runAU_2026-04-27_summary.md` dokumentiert.
-  - 2026-04-28: Run AV zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runAV_2026-04-28_summary.md` dokumentiert.
-  - 2026-04-28: Run AW zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runAW_2026-04-28_summary.md` dokumentiert.
-  - 2026-04-28: Run AX zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runAX_2026-04-28_summary.md` dokumentiert.
-  - 2026-04-28: Run AY zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runAY_2026-04-28_summary.md` dokumentiert.
-  - 2026-04-28: Run AZ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runAZ_2026-04-28_summary.md` dokumentiert.
-  - 2026-04-28: Run BA zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runBA_2026-04-28_summary.md` dokumentiert.
-  - 2026-04-28: Run BB zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runBB_2026-04-28_summary.md` dokumentiert.
-  - 2026-04-28: Run BC zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runBC_2026-04-28_summary.md` dokumentiert.
-  - 2026-04-29: Run BD zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runBD_2026-04-29_summary.md` dokumentiert.
-  - 2026-04-29: Run BE zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runBE_2026-04-29_summary.md` dokumentiert.
-  - 2026-04-29: Run BF zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runBF_2026-04-29_summary.md` dokumentiert.
-  - 2026-04-29: Run BG zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runBG_2026-04-29_summary.md` dokumentiert.
-  - 2026-04-30: Run BH zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runBH_2026-04-30_summary.md` dokumentiert.
-  - 2026-05-01: Run BI zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runBI_2026-05-01_summary.md` dokumentiert.
-  - 2026-05-01: Run BJ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runBJ_2026-05-01_summary.md` dokumentiert.
-  - 2026-05-02: Run BK zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runBK_2026-05-02_summary.md` dokumentiert.
-  - 2026-05-02: Run BL zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runBL_2026-05-02_summary.md` dokumentiert.
-  - 2026-05-02: Run BM zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/history/ac0800_ac0899_runBM_2026-05-02_summary.md` dokumentiert.
-  - 2026-05-02: Run BN zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis mindestens `AC0812_S`; Status (Timeout-Exit `124` mit erweitertem Fortschritt) in `docs/history/ac0800_ac0899_runBN_2026-05-02_summary.md` dokumentiert.
-  - 2026-05-03: Run BO zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis mindestens `AC0881_M`; Status (Timeout-Exit `124`) in `docs/history/ac0800_ac0899_runBO_2026-05-03_summary.md` dokumentiert.
-  - 2026-05-03: Run BP endet signalbedingt nach manuellem `pkill`; kein zusätzlicher Segfault-/Stackoverflow-Hinweis, aber auch kein neuer belastbarer Stabilitätsnachweis bis Laufende (Summary: `docs/history/ac0800_ac0899_runBP_2026-05-03_summary.md`).
-  - 2026-05-03: Run BQ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0832_L`; Status (Timeout-Exit `124`) in `docs/history/ac0800_ac0899_runBQ_2026-05-03_summary.md` dokumentiert.
-  - 2026-05-03: Run BR zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0838_M`; Status (Timeout-Exit `124`) in `docs/history/ac0800_ac0899_runBR_2026-05-03_summary.md` dokumentiert.
-  - 2026-05-03: Run BS zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0870_M`; Status (Timeout-Exit `124`) in `docs/history/ac0800_ac0899_runBS_2026-05-03_summary.md` dokumentiert.
-  - 2026-05-03: Run BT bestätigt weiterhin keinen MuPDF-`stack overflow`/Segfault bis mindestens `AC0882_S`; Timeout-Status in `docs/history/ac0800_ac0899_runBT_2026-05-03_summary.md` dokumentiert.
-  - 2026-05-06: Run BV zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault; wegen fehlendem Variantenfortschritt (nur `OpenCV`/`numpy`-Hinweis) bleibt der Stabilitätsnachweis ohne neue Laufabdeckung (Summary: `docs/history/ac0800_ac0899_runBV_2026-05-06_summary.md`).
-  - 2026-05-07: Run CB zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und liefert wieder Variantenfortschritt bis mindestens `AC0884_L`/`AC0881_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/history/ac0800_ac0899_runCB_2026-05-07_summary.md`).
-  - 2026-05-07: Run CC zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und bestätigt den Variantenfortschritt bis mindestens `AC0884_L`/`AC0881_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/history/ac0800_ac0899_runCC_2026-05-07_summary.md`).
-  - 2026-05-07: Run CD zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und bestätigt weiteren Variantenfortschritt bis mindestens `AC0842_L`/`AC0849_S`/`AC0831_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/history/ac0800_ac0899_runCD_2026-05-07_summary.md`).
-  - 2026-05-15: Run DK zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault; Vollbereich endet erneut per Timeout-Exit `124` (Summary: `docs/history/ac0800_ac0899_runDK_2026-05-15_summary.md`).
-  - 2026-05-15: N2-PB direkt nach Run DK ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-15_runDK_PB.log` (Summary: `docs/history/ac0800_ac0809_planb_runDK_2026-05-15_summary.md`).
-  - 2026-05-15: Run DL zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault; Vollbereich endet erneut per Timeout-Exit `124` (Summary: `docs/history/ac0800_ac0899_runDL_2026-05-15_summary.md`).
-  - 2026-05-15: N2-PB direkt nach Run DL ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-15_runDL_PB.log` (Summary: `docs/history/ac0800_ac0809_planb_runDL_2026-05-15_summary.md`).
-  - 2026-05-15: Run DM zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault; Vollbereich endet erneut per Timeout-Exit `124` (Summary: `docs/history/ac0800_ac0899_runDM_2026-05-15_summary.md`).
-  - 2026-05-15: N2-PB direkt nach Run DM ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-15_runDM_PB.log` (Summary: `docs/history/ac0800_ac0809_planb_runDM_2026-05-15_summary.md`).
+  - 2026-04-23: In Run T bis einschließlich `AC0811_M` kein MuPDF-`stack overflow`/Segfault; Abbruchursache und Status in `docs/ac0800_ac0899_runT_2026-04-23_summary.md` dokumentiert.
+  - 2026-04-23: Run U bestätigt erneut keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruchursache und Status in `docs/ac0800_ac0899_runU_2026-04-23_summary.md` dokumentiert.
+  - 2026-04-23: Run V zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0800_S`; Abbruchursache und Status in `docs/ac0800_ac0899_runV_2026-04-23_summary.md` dokumentiert.
+  - 2026-04-23: Run W zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_S`; Abbruchursache und Status in `docs/ac0800_ac0899_runW_2026-04-23_summary.md` dokumentiert.
+  - 2026-04-23: Run X zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruchursache und Status in `docs/ac0800_ac0899_runX_2026-04-23_summary.md` dokumentiert.
+  - 2026-04-23: Run Y zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Timeout-Status in `docs/ac0800_ac0899_runY_2026-04-23_summary.md` dokumentiert.
+  - 2026-04-23: Run Z zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruchursache und Status in `docs/ac0800_ac0899_runZ_2026-04-23_summary.md` dokumentiert.
+  - 2026-04-23: Run AA zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/ac0800_ac0899_runAA_2026-04-23_summary.md` dokumentiert.
+  - 2026-04-24: Run AB zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Timeout-Status in `docs/ac0800_ac0899_runAB_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-24: Run AC zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Timeout-Status in `docs/ac0800_ac0899_runAC_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-24: Run AD zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; manueller Abbruch/Status in `docs/ac0800_ac0899_runAD_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-24: Run AE zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_S`; manueller Abbruch/Status in `docs/ac0800_ac0899_runAE_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-24: Run AF zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruch per `pkill`/Status in `docs/ac0800_ac0899_runAF_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-24: Run AG zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruch per `pkill`/Status in `docs/ac0800_ac0899_runAG_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-24: Run AH zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; manueller Abbruch/Status in `docs/ac0800_ac0899_runAH_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-24: Run AI zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0812_S`; manueller Abbruch/Status in `docs/ac0800_ac0899_runAI_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-24: Run AJ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; manueller Abbruch/Status in `docs/ac0800_ac0899_runAJ_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-24: Run AK zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; manueller Abbruch/Status in `docs/ac0800_ac0899_runAK_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-24: Run AL zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruch per `pkill`/Status in `docs/ac0800_ac0899_runAL_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-24: Run AM zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruch per `pkill`/Status in `docs/ac0800_ac0899_runAM_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-25: Run AN zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/ac0800_ac0899_runAN_2026-04-25_summary.md` dokumentiert.
+  - 2026-04-26: Run AP zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/ac0800_ac0899_runAP_2026-04-26_summary.md` dokumentiert.
+  - 2026-04-26: Run AQ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Timeout-Status in `docs/ac0800_ac0899_runAQ_2026-04-26_summary.md` dokumentiert.
+  - 2026-04-26: Run AR zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Timeout-Status in `docs/ac0800_ac0899_runAR_2026-04-26_summary.md` dokumentiert.
+  - 2026-04-27: Run AS zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/ac0800_ac0899_runAS_2026-04-27_summary.md` dokumentiert.
+  - 2026-04-27: Run AT zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/ac0800_ac0899_runAT_2026-04-27_summary.md` dokumentiert.
+  - 2026-04-27: Run AU zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/ac0800_ac0899_runAU_2026-04-27_summary.md` dokumentiert.
+  - 2026-04-28: Run AV zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runAV_2026-04-28_summary.md` dokumentiert.
+  - 2026-04-28: Run AW zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runAW_2026-04-28_summary.md` dokumentiert.
+  - 2026-04-28: Run AX zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runAX_2026-04-28_summary.md` dokumentiert.
+  - 2026-04-28: Run AY zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runAY_2026-04-28_summary.md` dokumentiert.
+  - 2026-04-28: Run AZ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runAZ_2026-04-28_summary.md` dokumentiert.
+  - 2026-04-28: Run BA zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBA_2026-04-28_summary.md` dokumentiert.
+  - 2026-04-28: Run BB zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBB_2026-04-28_summary.md` dokumentiert.
+  - 2026-04-28: Run BC zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBC_2026-04-28_summary.md` dokumentiert.
+  - 2026-04-29: Run BD zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBD_2026-04-29_summary.md` dokumentiert.
+  - 2026-04-29: Run BE zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBE_2026-04-29_summary.md` dokumentiert.
+  - 2026-04-29: Run BF zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBF_2026-04-29_summary.md` dokumentiert.
+  - 2026-04-29: Run BG zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBG_2026-04-29_summary.md` dokumentiert.
+  - 2026-04-30: Run BH zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBH_2026-04-30_summary.md` dokumentiert.
+  - 2026-05-01: Run BI zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBI_2026-05-01_summary.md` dokumentiert.
+  - 2026-05-01: Run BJ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBJ_2026-05-01_summary.md` dokumentiert.
+  - 2026-05-02: Run BK zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBK_2026-05-02_summary.md` dokumentiert.
+  - 2026-05-02: Run BL zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBL_2026-05-02_summary.md` dokumentiert.
+  - 2026-05-02: Run BM zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBM_2026-05-02_summary.md` dokumentiert.
+  - 2026-05-02: Run BN zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis mindestens `AC0812_S`; Status (Timeout-Exit `124` mit erweitertem Fortschritt) in `docs/ac0800_ac0899_runBN_2026-05-02_summary.md` dokumentiert.
+  - 2026-05-03: Run BO zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis mindestens `AC0881_M`; Status (Timeout-Exit `124`) in `docs/ac0800_ac0899_runBO_2026-05-03_summary.md` dokumentiert.
+  - 2026-05-03: Run BP endet signalbedingt nach manuellem `pkill`; kein zusätzlicher Segfault-/Stackoverflow-Hinweis, aber auch kein neuer belastbarer Stabilitätsnachweis bis Laufende (Summary: `docs/ac0800_ac0899_runBP_2026-05-03_summary.md`).
+  - 2026-05-03: Run BQ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0832_L`; Status (Timeout-Exit `124`) in `docs/ac0800_ac0899_runBQ_2026-05-03_summary.md` dokumentiert.
+  - 2026-05-03: Run BR zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0838_M`; Status (Timeout-Exit `124`) in `docs/ac0800_ac0899_runBR_2026-05-03_summary.md` dokumentiert.
+  - 2026-05-03: Run BS zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0870_M`; Status (Timeout-Exit `124`) in `docs/ac0800_ac0899_runBS_2026-05-03_summary.md` dokumentiert.
+  - 2026-05-03: Run BT bestätigt weiterhin keinen MuPDF-`stack overflow`/Segfault bis mindestens `AC0882_S`; Timeout-Status in `docs/ac0800_ac0899_runBT_2026-05-03_summary.md` dokumentiert.
+  - 2026-05-06: Run BV zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault; wegen fehlendem Variantenfortschritt (nur `OpenCV`/`numpy`-Hinweis) bleibt der Stabilitätsnachweis ohne neue Laufabdeckung (Summary: `docs/ac0800_ac0899_runBV_2026-05-06_summary.md`).
+  - 2026-05-07: Run CB zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und liefert wieder Variantenfortschritt bis mindestens `AC0884_L`/`AC0881_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCB_2026-05-07_summary.md`).
+  - 2026-05-07: Run CC zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und bestätigt den Variantenfortschritt bis mindestens `AC0884_L`/`AC0881_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCC_2026-05-07_summary.md`).
+  - 2026-05-07: Run CD zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und bestätigt weiteren Variantenfortschritt bis mindestens `AC0842_L`/`AC0849_S`/`AC0831_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCD_2026-05-07_summary.md`).
+  - 2026-05-15: Run DK zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault; Vollbereich endet erneut per Timeout-Exit `124` (Summary: `docs/ac0800_ac0899_runDK_2026-05-15_summary.md`).
+  - 2026-05-15: N2-PB direkt nach Run DK ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-15_runDK_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDK_2026-05-15_summary.md`).
+  - 2026-05-15: Run DL zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault; Vollbereich endet erneut per Timeout-Exit `124` (Summary: `docs/ac0800_ac0899_runDL_2026-05-15_summary.md`).
+  - 2026-05-15: N2-PB direkt nach Run DL ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-15_runDL_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDL_2026-05-15_summary.md`).
+  - 2026-05-15: Run DM zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault; Vollbereich endet erneut per Timeout-Exit `124` (Summary: `docs/ac0800_ac0899_runDM_2026-05-15_summary.md`).
+  - 2026-05-15: N2-PB direkt nach Run DM ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-15_runDM_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDM_2026-05-15_summary.md`).
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
-  - 2026-04-23: Run-T-Summary ergänzt: `docs/history/ac0800_ac0899_runT_2026-04-23_summary.md`.
+  - 2026-04-23: Run-T-Summary ergänzt: `docs/ac0800_ac0899_runT_2026-04-23_summary.md`.
 
 - [x] N5: Neue JPEG-Samples aus `artifacts/images_to_convert/samples` automatisch mit gleichnamigen SVG/JPEG-Paaren validieren. (2026-05-06: Run 02 erfolgreich mit `pair_validation=ok`, CSV-Report geschrieben.)
   - Für jedes neue Sample in `artifacts/images_to_convert/samples` sicherstellen, dass ein gleichnamiges `.jpeg` konvertiert wird und das Ergebnis gegen das Referenzbild verglichen wird (Diff/Fehlerwert im Report).
   - 2026-05-06: Basis-Checkskript `python -m tools.validate_sample_pairs --strict` ergänzt; aktueller Ist-Stand zeigt `svg_count=15`, `jpeg_count=0` und damit fehlende JPEG-Paare für alle vorhandenen SVG-Samples. N5 bleibt offen bis automatischer Konvertierungs-/Vergleichslauf inkl. Report ergänzt ist.
   - 2026-05-06: `tools.validate_sample_pairs` um `--render-missing-jpeg`, `--reference-dir` und `--report-csv` erweitert; Importpfade für `fitz`/`Pillow` werden jetzt automatisch inkl. Repo-`vendor/*/site-packages` aufgelöst, damit die häufige Fehlannahme "Pakete fehlen" vermieden wird.
-  - 2026-05-06: Repro-Lauf `python -m tools.validate_sample_pairs artifacts/images_to_convert/samples --render-missing-jpeg --reference-dir artifacts/images_to_convert --report-csv artifacts/converted_images/reports/sample_pair_validation_2026-05-06.csv` dokumentiert (`docs/history/sample_pair_validation_2026-05-06_run01.md`); Render-Schritt erzeugt `jpeg_count=15`, der anschließende Diff-Schritt bricht jedoch mit `ImportError: cannot import name '_imaging' from 'PIL'` (vendored `linux-py310`-Wheel inkompatibel zur aktiven Python-ABI) ab.
-  - 2026-05-06: Nach Fallback-Umstellung auf MuPDF-basierten Diff (`tools.validate_sample_pairs`) erfolgreicher Repro-Lauf mit Exit `0`, `pair_validation=ok` und Report `artifacts/converted_images/reports/sample_pair_validation_2026-05-06_run02.csv` (`docs/history/sample_pair_validation_2026-05-06_run02.md`).
+  - 2026-05-06: Repro-Lauf `python -m tools.validate_sample_pairs artifacts/images_to_convert/samples --render-missing-jpeg --reference-dir artifacts/images_to_convert --report-csv artifacts/converted_images/reports/sample_pair_validation_2026-05-06.csv` dokumentiert (`docs/sample_pair_validation_2026-05-06_run01.md`); Render-Schritt erzeugt `jpeg_count=15`, der anschließende Diff-Schritt bricht jedoch mit `ImportError: cannot import name '_imaging' from 'PIL'` (vendored `linux-py310`-Wheel inkompatibel zur aktiven Python-ABI) ab.
+  - 2026-05-06: Nach Fallback-Umstellung auf MuPDF-basierten Diff (`tools.validate_sample_pairs`) erfolgreicher Repro-Lauf mit Exit `0`, `pair_validation=ok` und Report `artifacts/converted_images/reports/sample_pair_validation_2026-05-06_run02.csv` (`docs/sample_pair_validation_2026-05-06_run02.md`).
   - Akzeptanzkriterium: reproduzierbarer Batch-Check (inkl. Log/Report), der neu hinzugefügte Samples ohne manuelle Einzelschritte abdeckt.
 
 - [x] N6: Generative SVG-Variationssuite für Algorithmus-Verbesserung ergänzen. (2026-05-06: Run 02 mit automatischem Metrik-Report erfolgreich, Akzeptanzkriterium erfüllt.)
@@ -1521,12 +1521,12 @@ Deadlock-/Stagnationsschleifen.
   - Dokumentierte Fehlerliste: `docs/ac08_timeout_failures_2026-04-28.md` (inkl. betroffener Tests und Varianten).
   - Für die dort gelisteten Referenzen (`AC0811`, `AC0812`, `AC0820`, `AC0835`, `AC0837`, `AC0838`) jeweils Einzel-Läufe `--start <REF> --end <REF>` durchführen und Exit/Artefakte dokumentieren.
   - Akzeptanzkriterium: Pro Referenz mindestens ein reproduzierbarer Diagnoselauf mit Log und kurzem Ergebnisvermerk in den Run-Notizen.
-  - 2026-04-29: AC0811-Einzellauf (Run BE) mit `--start AC0811 --end AC0811` durchgeführt; Log: `artifacts/converted_images/reports/AC0811_single_2026-04-29_runBE.log`, Summary: `docs/history/ac0811_single_runBE_2026-04-29_summary.md` (Exit `0`, weiterhin `validation_time_budget_exceeded` bei `AC0811_L`).
-  - 2026-05-06: AC0812-Einzellauf (Run BW) mit `--start AC0812 --end AC0812` durchgeführt; Log: `artifacts/converted_images/reports/AC0812_single_2026-05-06_runBW.log`, Summary: `docs/history/ac0812_single_2026-05-06_runBW_summary.md` (Exit `0`, jedoch ohne Variantenfortschritt; Lauf zeigt nur `OpenCV bindings requires "numpy" package` und bleibt damit als N7-Diagnoselauf inhaltlich blockiert).
-  - 2026-05-06: AC0820-Einzellauf (Run BX) mit `--start AC0820 --end AC0820` durchgeführt; Log: `artifacts/converted_images/reports/AC0820_single_2026-05-06_runBX.log`, Summary: `docs/history/ac0820_single_2026-05-06_runBX_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
-  - 2026-05-06: AC0835-Einzellauf (Run BY) mit `--start AC0835 --end AC0835` durchgeführt; Log: `artifacts/converted_images/reports/AC0835_single_2026-05-06_runBY.log`, Summary: `docs/history/ac0835_single_2026-05-06_runBY_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
-  - 2026-05-06: AC0837-Einzellauf (Run BZ) mit `--start AC0837 --end AC0837` durchgeführt; Log: `artifacts/converted_images/reports/AC0837_single_2026-05-06_runBZ.log`, Summary: `docs/history/ac0837_single_2026-05-06_runBZ_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
-  - 2026-05-06: AC0838-Einzellauf (Run CA) mit `--start AC0838 --end AC0838` durchgeführt; Log: `artifacts/converted_images/reports/AC0838_single_2026-05-06_runCA.log`, Summary: `docs/history/ac0838_single_2026-05-06_runCA_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
+  - 2026-04-29: AC0811-Einzellauf (Run BE) mit `--start AC0811 --end AC0811` durchgeführt; Log: `artifacts/converted_images/reports/AC0811_single_2026-04-29_runBE.log`, Summary: `docs/ac0811_single_runBE_2026-04-29_summary.md` (Exit `0`, weiterhin `validation_time_budget_exceeded` bei `AC0811_L`).
+  - 2026-05-06: AC0812-Einzellauf (Run BW) mit `--start AC0812 --end AC0812` durchgeführt; Log: `artifacts/converted_images/reports/AC0812_single_2026-05-06_runBW.log`, Summary: `docs/ac0812_single_2026-05-06_runBW_summary.md` (Exit `0`, jedoch ohne Variantenfortschritt; Lauf zeigt nur `OpenCV bindings requires "numpy" package` und bleibt damit als N7-Diagnoselauf inhaltlich blockiert).
+  - 2026-05-06: AC0820-Einzellauf (Run BX) mit `--start AC0820 --end AC0820` durchgeführt; Log: `artifacts/converted_images/reports/AC0820_single_2026-05-06_runBX.log`, Summary: `docs/ac0820_single_2026-05-06_runBX_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
+  - 2026-05-06: AC0835-Einzellauf (Run BY) mit `--start AC0835 --end AC0835` durchgeführt; Log: `artifacts/converted_images/reports/AC0835_single_2026-05-06_runBY.log`, Summary: `docs/ac0835_single_2026-05-06_runBY_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
+  - 2026-05-06: AC0837-Einzellauf (Run BZ) mit `--start AC0837 --end AC0837` durchgeführt; Log: `artifacts/converted_images/reports/AC0837_single_2026-05-06_runBZ.log`, Summary: `docs/ac0837_single_2026-05-06_runBZ_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
+  - 2026-05-06: AC0838-Einzellauf (Run CA) mit `--start AC0838 --end AC0838` durchgeführt; Log: `artifacts/converted_images/reports/AC0838_single_2026-05-06_runCA.log`, Summary: `docs/ac0838_single_2026-05-06_runCA_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
 
 - [x] N4: Rückpflege in diese Aufgabenliste nach Abschluss. (2026-05-03: Prioritätsmatrix ergänzt und Liste konsolidiert; Aufgabe vollständig abgeschlossen, daher aus aktiver Priorisierung entfernt.)
   - Rotationsstand 2026-05-03: Nach Bearbeitung von N4 wurden offene Prioritäten rotiert (N1→60, N2→100, N5→90, N6→80, N7→70, T6→40, A1→30).
@@ -1667,13 +1667,13 @@ Deadlock-/Stagnationsschleifen.
     - Akzeptanzkriterium: isoliert <= `45s`, Unlock-Verhalten bleibt testbar erhalten.
     - 2026-06-14 (Run PS): Der unveränderte fokussierte Stagnationstest wurde auf der aktuellen vendorten Python-3.10-Toolchain mit aktiviertem Heavy-Test-Pfad, einem äußeren 45-Sekunden-Guard und demselben pytest-Einzeltest-Timeout ausgeführt. Der Test durchläuft weiterhin vier Validierungsrunden und prüft, dass die nicht freigeschaltete AC0831-Familie keinen `adaptive_unlock_applied`-Marker erhält. Der Lauf endet mit Exit `0`, `1 passed in 4.27s` (auf ganze Sekunden gemessene Wandzeit `6s`); eine Verkürzung des fachlichen Testpfads oder Änderung am Produktionscode ist nicht erforderlich. Log: `artifacts/converted_images/reports/T6_9_adaptive_unlock_2026-06-14_runPS.log`.
   - [x] T6.10 (mittel-hohe Priorität): `tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements` reduzieren (historisch `51.61s`, abgeschlossen in Run PT).
-    - 2026-05-14: Run 02 als timeout-gesicherter Isolationslauf erneut ausgeführt (`timeout 180 ...::test_validate_badge_logs_extent_bracketing_for_line_elements`), Ergebnis weiterhin `skipped` bei Exit `0`; siehe `docs/history/t6_10_isolation_2026-05-14_run02_summary.md` und `artifacts/converted_images/reports/t6_10_isolation_2026-05-14_run02.log`.
-    - 2026-05-14: Run 03 erneut timeout-gesichert ausgeführt; Ergebnis unverändert `skipped` bei Exit `0` in `2.55s`; siehe `docs/history/t6_10_isolation_2026-05-14_run03_summary.md` und `artifacts/converted_images/reports/t6_10_isolation_2026-05-14_run03.log`.
-    - 2026-05-16: Run 04 timeout-gesichert ausgeführt; Ergebnis weiterhin `skipped` bei Exit `0` in `3.84s`; gekoppelte Plan-B-Aufgabe (`T6-PB`) erneut grün mit Exit `0` (`1 passed in 0.17s`); siehe `docs/history/t6_10_isolation_2026-05-16_run04_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run04.log` und `artifacts/converted_images/reports/t6_planb_singletest_2026-05-16_run04.log`.
-    - 2026-05-16: Run 05 timeout-gesichert ausgeführt; Ergebnis weiterhin `skipped` bei Exit `0` in `5.59s`; gekoppelte Plan-B-Aufgabe wurde aus `artifacts/images_to_convert/samples/AC0831_L.svg` abgeleitet und als Syntheseprobe mit Exit `0` (`status=ok`, `variant=AC0831_L`) dokumentiert; siehe `docs/history/t6_10_isolation_2026-05-16_run05_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run05.log` und `artifacts/converted_images/reports/t6_planb_ac0831_synthetic_2026-05-16_run05.log`.
-    - 2026-05-16: Run 06 timeout-gesichert ausgeführt; Ergebnis weiterhin `skipped` bei Exit `0` in `2.51s`; gekoppelte Plan-B-Aufgabe explizit als SVG+Bildbeschreibung-Flow (`Beschreibung -> SVG -> JPEG -> Rückkonvertierung`) ausgeführt und mit Exit `0` (`status=ok`, `variant=AC0831_L`) dokumentiert; siehe `docs/history/t6_10_isolation_2026-05-16_run06_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run06.log` und `artifacts/converted_images/reports/t6_planb_svg_jpeg_roundtrip_2026-05-16_run06.log`.
-    - 2026-05-16: Run 07 timeout-gesichert ausgeführt; Ergebnis weiterhin `skipped` bei Exit `0` in `3.44s`; gekoppelte Plan-B-Aufgabe erneut als SVG+Bildbeschreibung-Flow ausgeführt und mit Exit `0` (`status=ok`, `variant=AC0831_L`) dokumentiert; siehe `docs/history/t6_10_isolation_2026-05-16_run07_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run07.log` und `artifacts/converted_images/reports/t6_planb_svg_jpeg_roundtrip_2026-05-16_run07.log`.
-    - 2026-05-16: Run 08 timeout-gesichert ausgeführt; Ergebnis diesmal `passed` bei Exit `0` in `58.50s` (statt `skipped`), gekoppelte Plan-B-Aufgabe (`T6-PB`) erneut grün mit Exit `0` (`1 passed in 0.14s`); siehe `docs/history/t6_10_isolation_2026-05-16_run08_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run08.log` und `artifacts/converted_images/reports/t6_planb_singletest_2026-05-16_run08.log`.
+    - 2026-05-14: Run 02 als timeout-gesicherter Isolationslauf erneut ausgeführt (`timeout 180 ...::test_validate_badge_logs_extent_bracketing_for_line_elements`), Ergebnis weiterhin `skipped` bei Exit `0`; siehe `docs/t6_10_isolation_2026-05-14_run02_summary.md` und `artifacts/converted_images/reports/t6_10_isolation_2026-05-14_run02.log`.
+    - 2026-05-14: Run 03 erneut timeout-gesichert ausgeführt; Ergebnis unverändert `skipped` bei Exit `0` in `2.55s`; siehe `docs/t6_10_isolation_2026-05-14_run03_summary.md` und `artifacts/converted_images/reports/t6_10_isolation_2026-05-14_run03.log`.
+    - 2026-05-16: Run 04 timeout-gesichert ausgeführt; Ergebnis weiterhin `skipped` bei Exit `0` in `3.84s`; gekoppelte Plan-B-Aufgabe (`T6-PB`) erneut grün mit Exit `0` (`1 passed in 0.17s`); siehe `docs/t6_10_isolation_2026-05-16_run04_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run04.log` und `artifacts/converted_images/reports/t6_planb_singletest_2026-05-16_run04.log`.
+    - 2026-05-16: Run 05 timeout-gesichert ausgeführt; Ergebnis weiterhin `skipped` bei Exit `0` in `5.59s`; gekoppelte Plan-B-Aufgabe wurde aus `artifacts/images_to_convert/samples/AC0831_L.svg` abgeleitet und als Syntheseprobe mit Exit `0` (`status=ok`, `variant=AC0831_L`) dokumentiert; siehe `docs/t6_10_isolation_2026-05-16_run05_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run05.log` und `artifacts/converted_images/reports/t6_planb_ac0831_synthetic_2026-05-16_run05.log`.
+    - 2026-05-16: Run 06 timeout-gesichert ausgeführt; Ergebnis weiterhin `skipped` bei Exit `0` in `2.51s`; gekoppelte Plan-B-Aufgabe explizit als SVG+Bildbeschreibung-Flow (`Beschreibung -> SVG -> JPEG -> Rückkonvertierung`) ausgeführt und mit Exit `0` (`status=ok`, `variant=AC0831_L`) dokumentiert; siehe `docs/t6_10_isolation_2026-05-16_run06_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run06.log` und `artifacts/converted_images/reports/t6_planb_svg_jpeg_roundtrip_2026-05-16_run06.log`.
+    - 2026-05-16: Run 07 timeout-gesichert ausgeführt; Ergebnis weiterhin `skipped` bei Exit `0` in `3.44s`; gekoppelte Plan-B-Aufgabe erneut als SVG+Bildbeschreibung-Flow ausgeführt und mit Exit `0` (`status=ok`, `variant=AC0831_L`) dokumentiert; siehe `docs/t6_10_isolation_2026-05-16_run07_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run07.log` und `artifacts/converted_images/reports/t6_planb_svg_jpeg_roundtrip_2026-05-16_run07.log`.
+    - 2026-05-16: Run 08 timeout-gesichert ausgeführt; Ergebnis diesmal `passed` bei Exit `0` in `58.50s` (statt `skipped`), gekoppelte Plan-B-Aufgabe (`T6-PB`) erneut grün mit Exit `0` (`1 passed in 0.14s`); siehe `docs/t6_10_isolation_2026-05-16_run08_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run08.log` und `artifacts/converted_images/reports/t6_planb_singletest_2026-05-16_run08.log`.
     - 2026-05-16: **Nächstes Arbeitspaket** ausgeführt (Run FA):
     - 2026-05-17: **Nächstes Arbeitspaket** ausgeführt (Run FB):
       1) nächste dokumentierte Aufgabe `T6.10` als timeout-gesicherter Isolationslauf (`PYENV_VERSION=3.10.20 timeout 180 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements -q`) mit Exit `0`, Ergebnis `1 passed` in `59.78s`, Log `artifacts/converted_images/reports/t6_10_isolation_2026-05-17_runFB.log`;
@@ -1846,7 +1846,7 @@ Abarbeitungsregel: Nach jedem Bearbeitungsschritt wird bei weiterhin offenen Auf
     - Mindestziel: reproduzierbarer Abschluss dieses Tests mit Exit `0` innerhalb eines festen Timeouts (z. B. `timeout 240`).
     - Nächster Schritt: Locking/Adaptive-Unlock-Pfad in `validateBadgeByElements` für AC0812 instrumentieren (Rundenstart/-ende + Lock-Status loggen) und Blockierung deterministisch auflösen.
     - 2026-04-29: Reproduktion mit `timeout 240 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius -q` endet reproduzierbar mit Exit `0` (`1 passed`, ~125s); kein Blockieren im AC0812-Pfad mehr beobachtet.
-    - 2026-06-01: AC0812-Laufzeitpfad erneut optimiert: einfache line/circle-SVGs nutzen im impliziten pytest-Isolationsmodus wieder den schnellen Inprocess-Renderer, der Render-Subprozess erbt den Runtime-`PYTHONPATH`, und AC0812_L/M/S überspringen den globalen Sampler zugunsten einer lokalen Arm-/Kreis-Runde. Gezielter Repro `RUN_HEAVY_CONVERSION_TESTS=1 pytest tests/test_image_composite_converter.py::test_finalize_ac0812_plain_left_arm_disables_expensive_global_search tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q` endet mit `2 passed` in `0.84s`; echter AC0812_L/M/S-Kurzlauf liegt bei ca. `0.29–0.31s` pro Variante mit `status=semantic_ok`. Siehe `docs/history/next_arbeitspaket_2026-06-01_runNJ.md`.
+    - 2026-06-01: AC0812-Laufzeitpfad erneut optimiert: einfache line/circle-SVGs nutzen im impliziten pytest-Isolationsmodus wieder den schnellen Inprocess-Renderer, der Render-Subprozess erbt den Runtime-`PYTHONPATH`, und AC0812_L/M/S überspringen den globalen Sampler zugunsten einer lokalen Arm-/Kreis-Runde. Gezielter Repro `RUN_HEAVY_CONVERSION_TESTS=1 pytest tests/test_image_composite_converter.py::test_finalize_ac0812_plain_left_arm_disables_expensive_global_search tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q` endet mit `2 passed` in `0.84s`; echter AC0812_L/M/S-Kurzlauf liegt bei ca. `0.29–0.31s` pro Variante mit `status=semantic_ok`. Siehe `docs/next_arbeitspaket_2026-06-01_runNJ.md`.
   - [x] T5.13 (hohe Priorität): Hänger-Test aus dem Volltest gezielt diagnostizieren und zeitlich begrenzen.
   - [x] T5.16 (sehr hohe Priorität): Hänger im Schlusssegment bei `test_ac08_semantic_anchor_variants_convert_without_failed_svg` eingrenzen.
     - 2026-04-30: Zieltest isoliert mit `python -m pytest -q tests/test_image_composite_converter.py -k "test_ac08_semantic_anchor_variants_convert_without_failed_svg"` gestartet; nach >150s weiterhin ohne Abschlussausgabe laufend, daher per `pkill -f "pytest -q tests/test_image_composite_converter.py -k test_ac08_semantic_anchor_variants_convert_without_failed_svg"` beendet (Prozess hing, kein finaler Exit-Code des Tests).
@@ -1883,8 +1883,8 @@ Abarbeitungsregel: Nach jedem Bearbeitungsschritt wird bei weiterhin offenen Auf
     - Ziel: reproduzierbaren Abschluss mit dokumentiertem Exit-Code (`0` oder kontrollierter Timeout `124`) und klarer Ursachenhypothese in den Run-Notizen festhalten.
     - 2026-04-29: Reproduktion mit `timeout 300 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation -vv` erfolgreich abgeschlossen; Test endet reproduzierbar mit Exit `0` (`1 passed`, `129.96s`). Log: `artifacts/converted_images/reports/T5_13_hanger_test_2026-04-29.log`.
   - 2026-05-01: T5.16-Folgeprobe des Kandidaten `test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation` mit `timeout 300 ... -vv` durchgeführt; Log: `artifacts/converted_images/reports/T5_16_adaptive_unlock_probe_2026-05-01.log`, Ergebnis `EXIT:0` (`1 passed in 52.38s`), daher aktuell kein Hänger-Root-Cause.
-  - 2026-05-02: Erweiterte Anchor-Debugprobe ausgeführt (`timeout 420 ... test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0`); Log: `artifacts/converted_images/reports/T5_16_anchor_debug_2026-05-02_run01.log`, Summary: `docs/history/t5_16_anchor_debug_2026-05-02_summary.md`. Neue Evidenz: kein Render-Timeout (`render_probe_aggregate` bis `calls=475`, `timeouts=0`), aber auffälliger Varianten-Wiederanlauf (`AC0811_S` startet nach abgeschlossenem `AC0811_L` erneut) und wiederholte Budget-Heartbeats im AC08-Steuerpfad.
-  - 2026-05-02: Steuerfluss-Diagnose mit neuem `context`-Feld in `variant_start`/`variant_done` ergänzt und per Run 02 verifiziert (`artifacts/converted_images/reports/T5_16_anchor_debug_2026-05-02_run02.log`, Summary: `docs/history/t5_16_anchor_debug_2026-05-02_run02_summary.md`). Ergebnis: Re-Start ist der reguläre Übergang in den Quality-Pass (`quality_pass:1;candidate=AC0811_M;candidates=2`) und nicht derselbe Initial-Pass-Loop.
+  - 2026-05-02: Erweiterte Anchor-Debugprobe ausgeführt (`timeout 420 ... test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0`); Log: `artifacts/converted_images/reports/T5_16_anchor_debug_2026-05-02_run01.log`, Summary: `docs/t5_16_anchor_debug_2026-05-02_summary.md`. Neue Evidenz: kein Render-Timeout (`render_probe_aggregate` bis `calls=475`, `timeouts=0`), aber auffälliger Varianten-Wiederanlauf (`AC0811_S` startet nach abgeschlossenem `AC0811_L` erneut) und wiederholte Budget-Heartbeats im AC08-Steuerpfad.
+  - 2026-05-02: Steuerfluss-Diagnose mit neuem `context`-Feld in `variant_start`/`variant_done` ergänzt und per Run 02 verifiziert (`artifacts/converted_images/reports/T5_16_anchor_debug_2026-05-02_run02.log`, Summary: `docs/t5_16_anchor_debug_2026-05-02_run02_summary.md`). Ergebnis: Re-Start ist der reguläre Übergang in den Quality-Pass (`quality_pass:1;candidate=AC0811_M;candidates=2`) und nicht derselbe Initial-Pass-Loop.
   - 2026-05-03: Priorisierter T5-Volltest erneut angestoßen (`python -m pytest --maxfail=5 -q`); sichtbarer Fortschritt bis `95%` ohne Fehlermeldung, danach längere Inaktivität ohne Abschlussausgabe. Lauf zur Entblockung mit `pkill -f "python -m pytest --maxfail=5 -q"` beendet; T5 bleibt offen bis ein vollständiger Lauf mit finalem Exit `0` dokumentiert ist.
   - 2026-05-03: Volltest-Isolation mit `set -o pipefail; timeout 1800 python -m pytest --maxfail=1 -vv --durations=20 | tee artifacts/converted_images/reports/T5_blocker_probe_2026-05-03_run01.log` erfolgreich abgeschlossen; Ergebnis `EXIT:0` mit `829 passed, 1 skipped` in `1574.93s`. Die zuvor als „blockierend“ wahrgenommenen Tests waren reproduzierbar **Langläufer** (kein Hänger), v. a. `test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout` (`168.27s`), `test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]` (`168.27s`), `test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width` (`165.26s`) und `test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` (`133.60s`).
   - 2026-05-01: Weitere T5.16-Isolationsprobe des Zieltests mit Laufzeittelemetrie ausgeführt (`set -o pipefail; timeout 240 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0 | tee artifacts/converted_images/reports/T5_16_anchor_hang_probe_2026-05-01_run22.log`). Ergebnis erneut `EXIT:124`; sichtbarer Fortschritt bis `AC0811_L` mit Heartbeats bis Runde 3, danach kein Testabschluss innerhalb des Timeouts.
@@ -2549,10 +2549,10 @@ Abarbeitungsregel: Nach jedem Bearbeitungsschritt wird bei weiterhin offenen Auf
     Der Lauf blieb aber semantisch nicht vollständig erfolgreich (`batch_failure_summary.csv`: `AC0838_S` als `semantic_mismatch`).
   - 2026-03-29 (Lauf E, erneute Verifikation mit Log-Mitschnitt): gleicher Vollbereichs-Befehl per `tee` erneut ausgeführt;
     reproduzierbarer Abbruch mit `MuPDF error: exception stack overflow!` und Exit-Code `139` (`Segmentation fault`).
-  - Dokumentation für Lauf E: `docs/history/ac0800_ac0899_runE_2026-03-29_summary.md`
+  - Dokumentation für Lauf E: `docs/ac0800_ac0899_runE_2026-03-29_summary.md`
     (inkl. Kommando, Exit-Code und letzter sichtbarer Datei vor dem Crash).
   - 2026-03-29 (Lauf F, erneuter Vollbereichscheck): gleicher Vollbereichs-Befehl per `tee` erneut ausgeführt; diesmal Exit-Code `0` ohne MuPDF-Segfault, aber semantischer Stop bei `AC0838_M.jpg` (`semantic_mismatch`).
-  - Dokumentation für Lauf F: `docs/history/ac0800_ac0899_runF_2026-03-29_summary.md`
+  - Dokumentation für Lauf F: `docs/ac0800_ac0899_runF_2026-03-29_summary.md`
     (inkl. Kommando, Exit-Code und Verweis auf `batch_failure_summary.csv`).
   - Qualitätsvergleich gegen den vorherigen Commit-Stand (`pixel_delta2_ranking.csv`, nur `AC08*`):
     `51` gemeinsame Varianten, davon `50` unverändert und `1` verbessert (`AC0800_S`: `4980.680176` -> `1429.839966`),
@@ -2561,71 +2561,71 @@ Abarbeitungsregel: Nach jedem Bearbeitungsschritt wird bei weiterhin offenen Auf
     gleicher Vollbereichs-Befehl mit `--isolate-svg-render --deterministic-order` per `tee` ausgeführt;
     Prozess endet mit Exit-Code `0` ohne MuPDF-Segfault, aber der gesamte Batch ist durch einen Runtime-Fehler blockiert
     (`TypeError: prepareRunIterationPipelineLocalsForRunImpl() got an unexpected keyword argument 'prepare_iteration_input_runtime_for_run_fn'`).
-  - Dokumentation für Lauf G: `docs/history/ac0800_ac0899_runG_2026-04-16_summary.md`
+  - Dokumentation für Lauf G: `docs/ac0800_ac0899_runG_2026-04-16_summary.md`
     (inkl. Kommando, Exit-Code, Logpfad und Blocker-Fehlerbild).
   - 2026-04-16 (Lauf H, Verifikation nach C1.78-Fix):
     gleicher Vollbereichs-Befehl mit `--isolate-svg-render --deterministic-order` per `tee` ausgeführt;
     Prozess endet erneut mit Exit-Code `0` ohne MuPDF-Segfault, der Batch bleibt aber weiterhin durch denselben Runtime-Fehler blockiert.
-  - Dokumentation für Lauf H: `docs/history/ac0800_ac0899_runH_2026-04-16_summary.md`
+  - Dokumentation für Lauf H: `docs/ac0800_ac0899_runH_2026-04-16_summary.md`
     (inkl. Kommando, Exit-Code, Logpfad und bestätigtem Blocker-Fehlerbild).
   - 2026-04-16 (Lauf I, Verifikation nach zusätzlicher Run-Preparation-Verdrahtung):
     gleicher Vollbereichs-Befehl mit `--isolate-svg-render --deterministic-order` per `tee` ausgeführt;
     Prozess endet mit Exit-Code `0` ohne MuPDF-Segfault, der ursprüngliche `prepare_iteration_input_runtime_for_run_fn`-Fehler tritt nicht mehr auf,
     stattdessen blockiert ein nachgelagerter Fehler (`TypeError: prepareRunIterationPipelineLocalsImpl() got an unexpected keyword argument 'img_path'`).
-  - Dokumentation für Lauf I: `docs/history/ac0800_ac0899_runI_2026-04-16_summary.md`
+  - Dokumentation für Lauf I: `docs/ac0800_ac0899_runI_2026-04-16_summary.md`
     (inkl. Kommando, Exit-Code, Logpfad und aktualisiertem Blocker-Fehlerbild).
   - 2026-04-20 (Lauf J, Verifikation nach C1.140-Fix):
     gleicher Vollbereichs-Befehl mit `--isolate-svg-render --deterministic-order` per `tee` ausgeführt;
     Prozess endet mit Exit-Code `0` ohne MuPDF-Segfault, aber weiterhin mit Runtime-Blocker direkt zu Laufbeginn
     (`TypeError: runIterationPipelineImplOrchestrationDispatchForRunCallSequenceForRunImpl() got an unexpected keyword argument 'run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_kwargs'`).
-  - Dokumentation für Lauf J: `docs/history/ac0800_ac0899_runJ_2026-04-20_summary.md`
+  - Dokumentation für Lauf J: `docs/ac0800_ac0899_runJ_2026-04-20_summary.md`
     (inkl. Kommando, Exit-Code, Logpfad und Blocker-Fehlerbild).
   - 2026-04-20 (Lauf K, Smoke-Verifikation nach Signatur-Fix):
     gleicher Vollbereichs-Befehl erneut gestartet; AC0800-L/M/S und AC0811_L liefen sichtbar an,
     der Lauf wurde in dieser Session aus Zeitgründen manuell gestoppt (kein Segfault bis zum Abbruch beobachtet).
-  - Dokumentation für Lauf K: `docs/history/ac0800_ac0899_runK_2026-04-20_summary.md`
+  - Dokumentation für Lauf K: `docs/ac0800_ac0899_runK_2026-04-20_summary.md`
     (inkl. Kommando, Teilfortschritt und Hinweis auf manuellen Abbruch).
   - 2026-04-20 (Lauf L, erneuter Vollbereichs-Start mit identischer Konfiguration):
     gleicher Vollbereichs-Befehl mit `--isolate-svg-render --deterministic-order` per `tee` erneut ausgeführt;
     der Lauf verarbeitete erneut `AC0800_L/M/S` sowie `AC0811_L` und startete `AC0811_M`, ohne bis dahin einen MuPDF-Segfault zu zeigen.
     Der Prozess wurde anschließend manuell beendet, daher weiterhin kein vollständiger Exit-`0`-Nachweis für den Gesamtbereich.
-  - Dokumentation für Lauf L: `docs/history/ac0800_ac0899_runL_2026-04-20_summary.md`
+  - Dokumentation für Lauf L: `docs/ac0800_ac0899_runL_2026-04-20_summary.md`
     (inkl. Kommando, Logpfad, sichtbarem Teilfortschritt und Hinweis auf manuellen Abbruch).
   - 2026-04-21 (Lauf M, Wiederholung auf Anfrage):
     gleicher Vollbereichs-Befehl mit `--isolate-svg-render --deterministic-order` per `tee` erneut ausgeführt;
     der Lauf verarbeitete sichtbar `AC0800_L/M/S`, `AC0811_L/M/S` und startete `AC0812_L`.
     Kein MuPDF-Segfault bis zum beobachteten Stand; der Lauf wurde anschließend manuell mit `Ctrl+C` beendet (KeyboardInterrupt).
-  - Dokumentation für Lauf M: `docs/history/ac0800_ac0899_runM_2026-04-21_summary.md`
+  - Dokumentation für Lauf M: `docs/ac0800_ac0899_runM_2026-04-21_summary.md`
     (inkl. Kommando, Logpfad, Teilfortschritt und Hinweis auf manuellen Abbruch).
   - 2026-04-21 (Lauf N, erneuter B2-Follow-up):
     gleicher Vollbereichs-Befehl mit `--isolate-svg-render --deterministic-order` per `tee` erneut ausgeführt;
     im Log wurden `AC0800_L`, `AC0800_M` und `AC0800_S` sichtbar verarbeitet.
     Kein MuPDF-Segfault im beobachteten Abschnitt; der Lauf wurde anschließend manuell mit `Ctrl+C` beendet.
-  - Dokumentation für Lauf N: `docs/history/ac0800_ac0899_runN_2026-04-21_summary.md`
+  - Dokumentation für Lauf N: `docs/ac0800_ac0899_runN_2026-04-21_summary.md`
     (inkl. Kommando, Logpfad, Teilfortschritt und Hinweis auf manuellen Abbruch).
   - 2026-04-21 (Lauf O, zusätzlicher Timeout-Follow-up):
     gleicher Vollbereichs-Befehl erneut mit `--isolate-svg-render --deterministic-order` gestartet,
     diesmal mit `timeout 180` und `tee`; im Log wurden erneut `AC0800_L`, `AC0800_M` und `AC0800_S` sichtbar verarbeitet.
     Kein MuPDF-Segfault bis zum beobachteten Stand; der Prozess endete durch das gesetzte Timeout mit Exit-Code `124`.
-  - Dokumentation für Lauf O: `docs/history/ac0800_ac0899_runO_2026-04-21_summary.md`
+  - Dokumentation für Lauf O: `docs/ac0800_ac0899_runO_2026-04-21_summary.md`
     (inkl. Kommando, Logpfad, sichtbarem Teilfortschritt und Timeout-Hinweis).
   - 2026-04-22 (Lauf P, nächster Timeout-Follow-up):
     gleicher Vollbereichs-Befehl erneut mit `--isolate-svg-render --deterministic-order` per `tee` ausgeführt,
     wieder mit `timeout 180`; im Log wurden `AC0800_L`, `AC0800_M` und `AC0800_S` sichtbar verarbeitet.
     Kein MuPDF-Segfault bis zum beobachteten Stand; der Prozess endete durch den gesetzten Timeout mit Exit-Code `124`.
-  - Dokumentation für Lauf P: `docs/history/ac0800_ac0899_runP_2026-04-22_summary.md`
+  - Dokumentation für Lauf P: `docs/ac0800_ac0899_runP_2026-04-22_summary.md`
     (inkl. Kommando, Logpfad, sichtbarem Teilfortschritt und Timeout-Hinweis).
   - 2026-04-22 (Lauf Q, Timeout-Follow-up mit längerem Zeitfenster):
     gleicher Vollbereichs-Befehl erneut mit `--isolate-svg-render --deterministic-order` per `tee` ausgeführt,
     diesmal mit `timeout 240`; im Log wurden `AC0800_L`, `AC0800_M`, `AC0800_S` und der Start von `AC0811_L` sichtbar verarbeitet.
     Kein MuPDF-Segfault bis zum beobachteten Stand; der Prozess endete durch den gesetzten Timeout mit Exit-Code `124`.
-  - Dokumentation für Lauf Q: `docs/history/ac0800_ac0899_runQ_2026-04-22_summary.md`
+  - Dokumentation für Lauf Q: `docs/ac0800_ac0899_runQ_2026-04-22_summary.md`
     (inkl. Kommando, Logpfad, erweitertem Teilfortschritt und Timeout-Hinweis).
   - 2026-04-22 (Lauf R, weiterer Timeout-Follow-up):
     gleicher Vollbereichs-Befehl erneut mit `--isolate-svg-render --deterministic-order` per `tee` ausgeführt,
     diesmal mit `timeout 300`; im Log wurden erneut `AC0800_L`, `AC0800_M`, `AC0800_S` und der Start von `AC0811_L` sichtbar verarbeitet.
     Kein MuPDF-Segfault bis zum beobachteten Stand; der Prozess endete durch den gesetzten Timeout mit Exit-Code `124`.
-  - Dokumentation für Lauf R: `docs/history/ac0800_ac0899_runR_2026-04-22_summary.md`
+  - Dokumentation für Lauf R: `docs/ac0800_ac0899_runR_2026-04-22_summary.md`
     (inkl. Kommando, Logpfad, Teilfortschritt und Timeout-Hinweis).
   - Status: Crash-Freiheit für den Vollbereich ist **nicht** nachgewiesen; B2 bleibt als Langläufer-Thema dokumentiert.
   - 2026-04-22: Aus der aktiven Checkliste entfernt, weil wiederholte Timeout-/Manuell-Abbruch-Läufe den Abarbeitungsfluss blockieren; weitere Vollbereichsverifikationen werden künftig als separat geplante, zeitbudgetierte Follow-up-Einträge dokumentiert.
@@ -2812,20 +2812,20 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 
 ### Fortschritt vs. Blocker (Session 2026-05-09, N1/N2-Vollbereich Run CP)
 
-- **Fortschritt:** Der als nächster Schritt dokumentierte N1/N2-Vollbereichslauf wurde auf Python `3.10.20` mit fixer Timeout-Grenze ausgeführt; neues Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-09_runCP.log` (Summary: `docs/history/ac0800_ac0899_runCP_2026-05-09_summary.md`).
+- **Fortschritt:** Der als nächster Schritt dokumentierte N1/N2-Vollbereichslauf wurde auf Python `3.10.20` mit fixer Timeout-Grenze ausgeführt; neues Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-09_runCP.log` (Summary: `docs/ac0800_ac0899_runCP_2026-05-09_summary.md`).
 - **Blocker:** Der Lauf endete erneut durch den äußeren `timeout` (Exit `124`); der Vollbereichsnachweis bis `AC0899` mit finalem Exit `0` bleibt offen.
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung auf eine leichtere/orthogonale Aufgabe mit neuem Diagnoseartefakt rotieren (T5/N5/N6/N7), bevor der nächste N1-Lauf gestartet wird.
 
 
 ### Fortschritt vs. Blocker (Session 2026-05-10, LW2 AC0838_M-Isolation)
 
-- **Fortschritt:** LW2 wurde abgeschlossen: `AC0838_M` isoliert in Python `3.10.20` ausgeführt (`--start AC0838 --end AC0838`), Exit `0`; Stagnation wurde in Runde `3` bestätigt und Rundendauern dokumentiert (Summary: `docs/history/lw2_ac0838M_isolation_2026-05-10_runCR_summary.md`).
+- **Fortschritt:** LW2 wurde abgeschlossen: `AC0838_M` isoliert in Python `3.10.20` ausgeführt (`--start AC0838 --end AC0838`), Exit `0`; Stagnation wurde in Runde `3` bestätigt und Rundendauern dokumentiert (Summary: `docs/lw2_ac0838M_isolation_2026-05-10_runCR_summary.md`).
 - **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` ist durch den Einzelrepro erwartungsgemäß nicht ersetzt.
 - **Nächster sinnvoller Schritt:** Mit LW3 (`AC0831_L` in drei Wiederholungen mit min/median/max global-search) unmittelbar fortfahren.
 
 ### Fortschritt vs. Blocker (Session 2026-05-10, LW3-Isolation Run CS1–CS3)
 
-- **Fortschritt:** Die nächste offene Lightweight-Aufgabe (LW3) wurde abgeschlossen: `AC0831_L` lief dreimal isoliert in Python `3.10.20` mit Exit `0`; die kumulierte `global_search`-Zeit ist in allen Wiederholungen identisch (`2.40s`), damit `min=2.40s`, `median=2.40s`, `max=2.40s` (Artefakte: `artifacts/converted_images/reports/LW3_ac0831L_isolation_2026-05-10_runCS1_py310.log` bis `runCS3`, sowie `AC0831_L_element_validation_runCS1.log` bis `runCS3`; Summary: `docs/history/lw3_ac0831L_isolation_2026-05-10_runCS_summary.md`).
+- **Fortschritt:** Die nächste offene Lightweight-Aufgabe (LW3) wurde abgeschlossen: `AC0831_L` lief dreimal isoliert in Python `3.10.20` mit Exit `0`; die kumulierte `global_search`-Zeit ist in allen Wiederholungen identisch (`2.40s`), damit `min=2.40s`, `median=2.40s`, `max=2.40s` (Artefakte: `artifacts/converted_images/reports/LW3_ac0831L_isolation_2026-05-10_runCS1_py310.log` bis `runCS3`, sowie `AC0831_L_element_validation_runCS1.log` bis `runCS3`; Summary: `docs/lw3_ac0831L_isolation_2026-05-10_runCS_summary.md`).
 - **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` mit finalem Exit `0` ist durch LW3 erwartungsgemäß noch nicht erbracht.
 - **Nächster sinnvoller Schritt:** LW4 als 3er-Microbatch (`AC0836_L`, `AC0838_M`, `AC0831_L`) ausführen und als schnellen N1/N2-Proxy dokumentieren.
 
@@ -2844,13 +2844,13 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 
 ### Fortschritt vs. Blocker (Session 2026-05-13, N1/N2-Vollbereich Run CY)
 
-- **Fortschritt:** Der als nächster Schritt dokumentierte N1/N2-Vollbereichslauf wurde auf Python `3.10.20` mit fixer Timeout-Grenze erneut ausgeführt; neues Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-13_runCY.log` (Summary: `docs/history/ac0800_ac0899_runCY_2026-05-13_summary.md`).
+- **Fortschritt:** Der als nächster Schritt dokumentierte N1/N2-Vollbereichslauf wurde auf Python `3.10.20` mit fixer Timeout-Grenze erneut ausgeführt; neues Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-13_runCY.log` (Summary: `docs/ac0800_ac0899_runCY_2026-05-13_summary.md`).
 - **Blocker:** Der Lauf endete erneut durch den äußeren `timeout` (Exit `124`); der Vollbereichsnachweis bis `AC0899` mit finalem Exit `0` bleibt offen.
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung auf eine leichtere/orthogonale Aufgabe mit neuem Diagnoseartefakt rotieren (T5/N5/N6/N7), bevor der nächste N1-Lauf gestartet wird.
 
 ### Fortschritt vs. Blocker (Session 2026-05-13, LW4 AC0836-Re-Run Run CZ)
 
-- **Fortschritt:** Die nächste offene dokumentierte Lightweight-Aufgabe wurde abgeschlossen: Der AC0836-Teilpfad lief im isolierten Microbatch-Re-Run unter Python `3.10.20` mit Exit `0` durch (Artefakt: `artifacts/converted_images/reports/LW4_microbatch_2026-05-13_runCZ_ac0836_py310.log`; Summary: `docs/history/lw4_ac0836_rerun_2026-05-13_runCZ_summary.md`).
+- **Fortschritt:** Die nächste offene dokumentierte Lightweight-Aufgabe wurde abgeschlossen: Der AC0836-Teilpfad lief im isolierten Microbatch-Re-Run unter Python `3.10.20` mit Exit `0` durch (Artefakt: `artifacts/converted_images/reports/LW4_microbatch_2026-05-13_runCZ_ac0836_py310.log`; Summary: `docs/lw4_ac0836_rerun_2026-05-13_runCZ_summary.md`).
 - **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` mit finalem Exit `0` ist durch den isolierten LW4-Abschluss erwartungsgemäß noch nicht ersetzt.
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung auf den nächsten offenen, leichtgewichtigen Erkenntnisschritt (z. B. N5/N6/N7) rotieren, bevor erneut ein schwerer N1-Lauf erfolgt.
 
@@ -2961,7 +2961,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Ergebnis T6.10:** Exit `0`, Teststatus `1 skipped, 5 warnings in 3.94s`; kein Timeout und kein Fail, aber weiterhin kein aktiver PASS-Nachweis für diesen Node in der aktuellen Umgebung.
 - **Gekoppelte Plan-B-Aufgabe (T6-PB):** Historischen Einzeltest-Blocker erneut als Schnellrepro gefahren: `PYTHONPATH=. timeout 120 python3 -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`.
 - **Ergebnis T6-PB:** Exit `0`, `1 passed in 0.17s`; der historische Detailtest bleibt aktuell unauffällig.
-- **Dokuartefakte:** `docs/history/t6_10_isolation_2026-05-14_run01_summary.md`, `artifacts/converted_images/reports/t6_10_isolation_2026-05-14_run01.log`, `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run01.log`.
+- **Dokuartefakte:** `docs/t6_10_isolation_2026-05-14_run01_summary.md`, `artifacts/converted_images/reports/t6_10_isolation_2026-05-14_run01.log`, `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run01.log`.
 - **Nächster sinnvoller Schritt:** T6.9 analog isoliert mit enger Timeout-Grenze fahren und danach entscheiden, ob T6.10 als erledigt markiert werden kann oder ein expliziter Nicht-Skip-Repro in der Zielumgebung benötigt wird.
 
 
@@ -3028,9 +3028,9 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 
 ### Fortschritt vs. Blocker (Session 2026-05-14, N1/N2-Vollbereich Run DJ + Plan-B DJ_PB)
 
-- **Fortschritt:** Der nächste dokumentierte N1-Vollbereichslauf wurde in Python `3.10.20` mit fixer Timeout-Grenze ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-14_runDJ.log` (Summary: `docs/history/ac0800_ac0899_runDJ_2026-05-14_summary.md`).
+- **Fortschritt:** Der nächste dokumentierte N1-Vollbereichslauf wurde in Python `3.10.20` mit fixer Timeout-Grenze ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-14_runDJ.log` (Summary: `docs/ac0800_ac0899_runDJ_2026-05-14_summary.md`).
 - **Blocker:** Der Lauf endete erneut per äußerem `timeout 420` mit Exit `124`; der Abschlussnachweis bis `AC0899` mit finalem Exit `0` bleibt offen.
-- **Plan-B-Ergebnis:** Der gekoppelte Microbatch `AC0800..AC0809` lief direkt im Anschluss mit Exit `0` (Log: `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDJ_PB.log`, Summary: `docs/history/ac0800_ac0809_planb_runDJ_2026-05-14_summary.md`).
+- **Plan-B-Ergebnis:** Der gekoppelte Microbatch `AC0800..AC0809` lief direkt im Anschluss mit Exit `0` (Log: `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDJ_PB.log`, Summary: `docs/ac0800_ac0809_planb_runDJ_2026-05-14_summary.md`).
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung wieder auf eine leichtere/orthogonale Aufgabe (T5/N5/N6/N7) rotieren, bevor der nächste N1-Versuch erfolgt.
 
 ### Aufgabenliste – Blockweise Abarbeitung der Plan-B-Chunks (Stand 2026-05-14)
@@ -3172,7 +3172,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
     sichern sowohl fehlende als auch nicht auffindbare `semantic_description`
     ab; Analyse-/Annotate-Pfade bleiben davon unberührt.
 
-- [x] **ZG2 (P0): Bildspezifische Logik aus Hauptpfad entfernen** (2026-10-02: Die bereits abgeschlossene IDO-P2/P3-Migration wurde gegen die ZG2-Akzeptanzkriterien revalidiert. Die absolute Runtime-Nullprüfung findet keine Katalog-ID in `src/`; Filename-Invarianz- und umbenannte Holdout-Referenztests bleiben grün. Details: `docs/history/next_arbeitspaket_2026-10-02_zg2.md`.)
+- [x] **ZG2 (P0): Bildspezifische Logik aus Hauptpfad entfernen** (2026-10-02: Die bereits abgeschlossene IDO-P2/P3-Migration wurde gegen die ZG2-Akzeptanzkriterien revalidiert. Die absolute Runtime-Nullprüfung findet keine Katalog-ID in `src/`; Filename-Invarianz- und umbenannte Holdout-Referenztests bleiben grün. Details: `docs/next_arbeitspaket_2026-10-02_zg2.md`.)
   - Inventur aller dateiname-/familienabhängigen Heuristiken, danach Migration auf beschreibungsgetriebete Regeln.
   - Akzeptanz: Hauptpfad funktioniert auf Referenzset ohne filename-spezifische Sonderfälle.
   - Exit-Bedingung: Runtime-ID-Nullprüfung, Filename-Invarianz und umbenannter
@@ -3185,7 +3185,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   versionierte Report enthält pro Datei Metriken, angewandte Schwellen und
   maschinenlesbare Gründe; fehlende Pflichtmetriken und terminale
   Konvertierungsstatus werden explizit als nicht erreichbar ausgewiesen.
-  Details: `docs/history/next_arbeitspaket_2026-10-03_zg3.md`.)
+  Details: `docs/next_arbeitspaket_2026-10-03_zg3.md`.)
   - Einheitliche Statusklassifikation `good` / `suboptimal` / `not_reachable` via versionierter Schwellenwerte.
   - Akzeptanz: Status + Schwellen + Gründe stehen pro Datei im Report.
   - Exit-Bedingung: Positive, suboptimale und nicht erreichbare Fixtures liefern
@@ -3196,7 +3196,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   Höhe und Seitenverhältnis direkt aus den Artefakten. Der schlechteste
   Übereinstimmungswert ersetzt einen eventuell veralteten Reportwert, sodass
   Dimensionsabweichungen oberhalb der Toleranz nie als `good` passieren.
-  Details: `docs/history/next_arbeitspaket_2026-10-03_zg4.md`.)
+  Details: `docs/next_arbeitspaket_2026-10-03_zg4.md`.)
   - Width/Height/Aspect-Ratio-Abweichung über Toleranz => kein `good`.
   - Akzeptanz: Regressionstest mit absichtlich falscher Dimension liefert `suboptimal` oder `not_reachable`.
   - Exit-Bedingung: Artefaktbasierte Breiten-, Höhen- und
@@ -3208,7 +3208,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   Resultate, Checkpoint-Resume und Template-Donoren sind darin deaktiviert;
   der bisherige inkrementelle Ablauf bleibt ausschließlich als expliziter
   `standard`-Kompatibilitätsmodus verfügbar. Details:
-  `docs/history/next_arbeitspaket_2026-10-03_zg5.md`.)
+  `docs/next_arbeitspaket_2026-10-03_zg5.md`.)
   - Feature-Flag `--execution-mode semantic-only` ohne zusätzliche Artefaktquellen.
   - Akzeptanz: CLI-Tests belegen den sicheren Default und den expliziten Opt-in für `standard`.
   - Exit-Bedingung: `semantic-only` ist CLI-Default und deaktiviert Resume,
@@ -3218,7 +3218,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - [x] **ZG6 (P1): Nicht-Erreichbarkeit robust machen** (2026-10-03:
   Stagnation, Budgetüberschreitung, Dimensionsverletzung und Semantikkonflikt
   besitzen nun einheitliche Report- und Exit-Codes. Details:
-  `docs/history/next_arbeitspaket_2026-10-03_zg6.md`.)
+  `docs/next_arbeitspaket_2026-10-03_zg6.md`.)
   - Akzeptanz: Gründe und Codes werden in Batchreport und Good-Solution-Gate reproduzierbar ausgegeben.
   - Exit-Bedingung: Alle vier terminalen Gründe besitzen stabile Reportcodes,
     werden vom Gate als `not_reachable` klassifiziert und sind durch Tests
@@ -3228,7 +3228,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   versionierte Sechs-Sample-Manifest und der isolierende Benchmark-Runner
   verwenden ausschließlich JPEG + Beschreibungstabelle im `semantic-only`-
   Modus und prüfen zwei unabhängige SVG-Ergebnisse per SHA-256. Details:
-  `docs/history/next_arbeitspaket_2026-10-03_zg7.md`.)
+  `docs/next_arbeitspaket_2026-10-03_zg7.md`.)
   - Akzeptanz: Der Report weist je Sample erfolgreiche, byteidentische Wiederholungen aus und schlägt bei Abweichungen fehl.
   - Exit-Bedingung: Das versionierte Manifest enthält mindestens drei
     Formfamilien; der isolierte Zweifachlauf ist stabil und ein absichtlich
@@ -3239,7 +3239,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   kompensierbare Primärmetriken sowie den Pixel-/Farbfehler als Sekundärmetrik
   aus. `decision_tier` macht je Ergebnis sichtbar, welche Ebene die
   Entscheidung bestimmt hat. Details:
-  `docs/history/next_arbeitspaket_2026-10-03_zg8.md`.)
+  `docs/next_arbeitspaket_2026-10-03_zg8.md`.)
   - Akzeptanz: Ein sehr guter Pixelwert kann eine verletzte Semantik- oder
     Dimensionsschwelle nicht kompensieren; Pixelabweichung wird erst nach
     bestandenen Primärmetriken als sekundärer Grund bewertet.
@@ -3251,7 +3251,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   Leitaufgaben ZG1 bis ZG8 besitzen im zentralen Taskboard ein prüfbares
   Akzeptanzkriterium und eine explizite Exit-Bedingung. Ein Dokumentationstest
   schützt die Struktur vor versehentlichem Rückbau. Details:
-  `docs/history/next_arbeitspaket_2026-10-03_zg9.md`.)
+  `docs/next_arbeitspaket_2026-10-03_zg9.md`.)
   - Akzeptanz: `docs/open_tasks.md` führt ZG1 bis ZG8 lückenlos und nennt in
     jedem Aufgabenblock sowohl `Akzeptanz` als auch `Exit-Bedingung`.
   - Exit-Bedingung: Der Taskboard-Vertrag ist automatisiert geprüft, ZG1 bis
@@ -3263,7 +3263,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   `semantic-only`-Sandboxes ausgeführt; der letzte Lauf verwendet einen
   neutralen Dateinamen. Manifest, Provenienz und normalisierte SVG-Hashes
   bilden den maschinenlesbaren Abnahmebeleg. Details:
-  `docs/history/next_arbeitspaket_2026-10-03_zg7_1.md`.)
+  `docs/next_arbeitspaket_2026-10-03_zg7_1.md`.)
   - Akzeptanz: Alle Fälle erzeugen dreimal ein parsebares, normalisiert
     identisches SVG; ausschließlich PNG und Beschreibung sind Eingaben.
   - Exit-Bedingung: Fremde Wissensquellen und Nicht-PNG-Eingaben werden
@@ -3275,7 +3275,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   Qualitätsvertrag mit Pixel-, Kanten-, Objektmasken-, Kontinuitäts-,
   Semantik- und Dimensionsmetriken sowie Objekt- und Fehlerregionen. Nicht
   messbare Pflichtwerte werden als `not_reachable` und `null` ausgewiesen.
-  Details: `docs/history/next_arbeitspaket_2026-10-03_zg7_2.md`.)
+  Details: `docs/next_arbeitspaket_2026-10-03_zg7_2.md`.)
   - Akzeptanz: Ein aus demselben synthetischen SVG gerastertes PNG erreicht
     in allen Metriken den Idealwert; falsche Dimension, fehlendes Textprimitiv
     und getrennter Anschluss schlagen gezielt fehl.
@@ -3288,7 +3288,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   Anschlussrichtung mit katalogfreien Perception-Kandidaten fusioniert. Der
   versionierte Record hält mindestens drei zulässige Hypothesen, Konflikte und
   Ablehnungsgründe deterministisch fest. Details:
-  `docs/history/next_arbeitspaket_2026-10-03_zg7_3.md`.)
+  `docs/next_arbeitspaket_2026-10-03_zg7_3.md`.)
   - Akzeptanz: Umbenennung verändert die Hypothesenreihenfolge nicht; ein
     pixelnäherer Kandidat mit falschem Typ oder falscher Anschlussrichtung kann
     keine semantisch zulässige Hypothese verdrängen.
@@ -3378,14 +3378,14 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 
 ### Fortschritt vs. Blocker (Session 2026-05-15, N2 Run DP + N2-PB Run DP_PB)
 
-- **Fortschritt:** Die nächste dokumentierte Primäraufgabe (`N2`) wurde erneut mit standardisierter Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; der Vollbereichslauf `AC0800..AC0899` endet weiterhin mit Timeout-Exit `124` (Log: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-15_runDP.log`, Summary: `docs/history/ac0800_ac0899_runDP_2026-05-15_summary.md`).
-- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Direkt anschließend wurde gemäß Kopplungsregel `N2-PB` als Microbatch `AC0800..AC0809` ausgeführt und erfolgreich mit Exit `0` abgeschlossen (Log: `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-15_runDP_PB.log`, Summary: `docs/history/ac0800_ac0809_planb_runDP_2026-05-15_summary.md`).
+- **Fortschritt:** Die nächste dokumentierte Primäraufgabe (`N2`) wurde erneut mit standardisierter Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; der Vollbereichslauf `AC0800..AC0899` endet weiterhin mit Timeout-Exit `124` (Log: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-15_runDP.log`, Summary: `docs/ac0800_ac0899_runDP_2026-05-15_summary.md`).
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Direkt anschließend wurde gemäß Kopplungsregel `N2-PB` als Microbatch `AC0800..AC0809` ausgeführt und erfolgreich mit Exit `0` abgeschlossen (Log: `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-15_runDP_PB.log`, Summary: `docs/ac0800_ac0809_planb_runDP_2026-05-15_summary.md`).
 - **Blocker:** Der Vollbereichsnachweis bis `AC0899` bleibt offen, da weiterhin kein reproduzierbarer Exit `0` für den vollständigen Bereich vorliegt.
 
 ### Fortschritt vs. Blocker (Session 2026-05-16, N2 Run DQ + N2-PB Run DQ_PB)
 
-- **Fortschritt:** Die nächste dokumentierte Primäraufgabe (`N2`) wurde erneut mit standardisierter Python-`3.10.20`-Toolchain ausgeführt; der Vollbereichslauf `AC0800..AC0899` endet weiterhin mit Timeout-Exit `124` (Log: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-16_runDQ.log`, Summary: `docs/history/ac0800_ac0899_runDQ_2026-05-16_summary.md`).
-- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Direkt anschließend wurde gemäß Kopplungsregel `N2-PB` als Microbatch `AC0800..AC0809` ausgeführt und erfolgreich mit Exit `0` abgeschlossen (Log: `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-16_runDQ_PB.log`, Summary: `docs/history/ac0800_ac0809_planb_runDQ_2026-05-16_summary.md`).
+- **Fortschritt:** Die nächste dokumentierte Primäraufgabe (`N2`) wurde erneut mit standardisierter Python-`3.10.20`-Toolchain ausgeführt; der Vollbereichslauf `AC0800..AC0899` endet weiterhin mit Timeout-Exit `124` (Log: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-16_runDQ.log`, Summary: `docs/ac0800_ac0899_runDQ_2026-05-16_summary.md`).
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Direkt anschließend wurde gemäß Kopplungsregel `N2-PB` als Microbatch `AC0800..AC0809` ausgeführt und erfolgreich mit Exit `0` abgeschlossen (Log: `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-16_runDQ_PB.log`, Summary: `docs/ac0800_ac0809_planb_runDQ_2026-05-16_summary.md`).
 - **Blocker:** Der Vollbereichsnachweis bis `AC0899` bleibt offen, da weiterhin kein reproduzierbarer Exit `0` für den vollständigen Bereich vorliegt.
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung erneut auf einen kurzen T5-/N5-Rotationspfad mit neuem Diagnoseartefakt wechseln, bevor der nächste N1/N2-Vollbereichslauf angesetzt wird.
 
@@ -3471,7 +3471,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 
 ### Fortschritt vs. Blocker (Session 2026-05-16, N5 + gekoppelte Plan-B-Aufgabe Run EV)
 
-- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte N5-Sample-Pair-Kurzbatch wurde erneut ausgeführt (`python -m tools.validate_sample_pairs artifacts/images_to_convert/samples --render-missing-jpeg --reference-dir artifacts/images_to_convert --report-csv artifacts/converted_images/reports/sample_pair_validation_2026-05-16_runEV.csv`), Ergebnis: `pair_validation=ok`, Exit `0`; Artefakte: `artifacts/converted_images/reports/sample_pair_validation_2026-05-16_runEV.csv`, `artifacts/converted_images/reports/sample_pair_validation_2026-05-16_runEV.log`, Summary: `docs/history/sample_pair_validation_2026-05-16_runEV.md`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte N5-Sample-Pair-Kurzbatch wurde erneut ausgeführt (`python -m tools.validate_sample_pairs artifacts/images_to_convert/samples --render-missing-jpeg --reference-dir artifacts/images_to_convert --report-csv artifacts/converted_images/reports/sample_pair_validation_2026-05-16_runEV.csv`), Ergebnis: `pair_validation=ok`, Exit `0`; Artefakte: `artifacts/converted_images/reports/sample_pair_validation_2026-05-16_runEV.csv`, `artifacts/converted_images/reports/sample_pair_validation_2026-05-16_runEV.log`, Summary: `docs/sample_pair_validation_2026-05-16_runEV.md`.
 - **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde direkt danach für `AC0223` im formalisierten Beschreibungsstil ausgeführt (`python -m tools.plan_b_synthetic_probe "Bildbeschreibung: Kelle (Kreis mit einem vertikalen Strich nach unten, der Strich ist in der vertikalen Symmetrieachse des Kreises), der Strich reicht hinter die Kelle. In der Kreisscheibe ist die Beschriftung CO^2 (mit hochgestelltem 2) eingefügt." --variant AC0223 --output-dir artifacts/converted_images/reports`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0223_planb_synthetic_2026-05-16_runEV.log`.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen N5-/Plan-B-Kurzläufen bestehen.
 - **Nächster sinnvoller Schritt:** Als nächste leichte Rotation einen weiteren T5- oder T6.x-Isolationslauf mit neuem Diagnoseartefakt durchführen und danach den Session-Stand direkt nachpflegen.
@@ -3521,7 +3521,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 ### Fortschritt vs. Blocker (Session 2026-05-16, nächstes Arbeitspaket Run EW)
 
 - **Definition (neu):** Als **nächstes Arbeitspaket** gilt ab sofort die feste Kombination aus **(1) nächster dokumentierter Aufgabe**, **(2) genau einer gekoppelten Plan-B-Aufgabe** und **(3) dem nächsten Bild aus** `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv`.
-- **Fortschritt (1/3 – nächste dokumentierte Aufgabe):** T5.x-Kurzlauf erneut erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `144.05s`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runEW.log`, Summary: `docs/history/t5_ac0812_timeoutpath_probe_2026-05-16_runEW_summary.md`.
+- **Fortschritt (1/3 – nächste dokumentierte Aufgabe):** T5.x-Kurzlauf erneut erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `144.05s`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runEW.log`, Summary: `docs/t5_ac0812_timeoutpath_probe_2026-05-16_runEW_summary.md`.
 - **Fortschritt (2/3 – Plan B):** Gekoppelte Plan-B-Syntheseprobe für `AC0020_M` erfolgreich ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_M --output-dir artifacts/converted_images/reports`), Exit `0`; Log: `artifacts/converted_images/reports/AC0020_M_planb_synthetic_2026-05-16_runEW.log`.
 - **Fortschritt (3/3 – nächstes Bild):** Nächster Bildpfad anhand der CSV-Liste praktisch abgearbeitet über Einzelbereichslauf `--start AC0020 --end AC0020` (inkl. `AC0020_M`), Exit `0`; Log: `artifacts/converted_images/reports/AC0020_single_2026-05-16_runEW.log`.
 - **Blocker:** Kein neuer technischer Blocker in diesem Arbeitspaket; der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig davon bestehen.
@@ -3538,7 +3538,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 
 ### Fortschritt vs. Blocker (Session 2026-05-16, Arbeitspaket-Definition + N5/Plan-B/CSV Run EX)
 
-- **Fortschritt (Arbeitspaket-Definition):** Der Begriff **„nächstes Arbeitspaket“** wurde für Folgesessions eindeutig dokumentiert als feste 3er-Kombination aus *(1) nächster dokumentierter Aufgabe*, *(2) gekoppelter Plan-B-Aufgabe* und *(3) nächstem Bild aus `not_satisfactory_converted_images.csv`*; siehe `docs/history/sample_pair_validation_2026-05-16_runEX.md`.
+- **Fortschritt (Arbeitspaket-Definition):** Der Begriff **„nächstes Arbeitspaket“** wurde für Folgesessions eindeutig dokumentiert als feste 3er-Kombination aus *(1) nächster dokumentierter Aufgabe*, *(2) gekoppelter Plan-B-Aufgabe* und *(3) nächstem Bild aus `not_satisfactory_converted_images.csv`*; siehe `docs/sample_pair_validation_2026-05-16_runEX.md`.
 - **Fortschritt (nächste dokumentierte Aufgabe):** `N5` wurde als priorisierter mittlerer Kurzbatch ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.validate_sample_pairs ... --report-csv artifacts/converted_images/reports/sample_pair_validation_2026-05-16_runEX.csv`), Exit `0`; Artefakte: `artifacts/converted_images/reports/sample_pair_validation_2026-05-16_runEX.log` und `...runEX.csv`.
 - **Fortschritt (Plan B + nächstes Bild):** Als nächstes unbearbeitetes CSV-Bild wurde `AC0020_M` bearbeitet und direkt mit der gekoppelten Plan-B-Syntheseprobe ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_M ...`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0020_M_planb_synthetic_2026-05-16_runEX.log`.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert und ist von diesem Arbeitspaket unabhängig.
@@ -3546,7 +3546,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 
 ### Fortschritt vs. Blocker (Session 2026-05-16, nächstes Arbeitspaket Run GK)
 
-- **Fortschritt (Arbeitspaket-Definition):** Das **„nächste Arbeitspaket“** bleibt die feste 3er-Kombination aus **(1) nächster dokumentierter Aufgabe + (2) genau einer gekoppelten Plan-B-Aufgabe + (3) nächstes Bild aus** `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv`; dieser Lauf ist zusätzlich in `docs/history/next_arbeitspaket_2026-05-16_runGK.md` zusammengefasst.
+- **Fortschritt (Arbeitspaket-Definition):** Das **„nächste Arbeitspaket“** bleibt die feste 3er-Kombination aus **(1) nächster dokumentierter Aufgabe + (2) genau einer gekoppelten Plan-B-Aufgabe + (3) nächstes Bild aus** `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv`; dieser Lauf ist zusätzlich in `docs/next_arbeitspaket_2026-05-16_runGK.md` zusammengefasst.
 - **Fortschritt (1/3 – nächste dokumentierte Aufgabe):** Der priorisierte T5.x-Kurzlauf wurde erneut timeout-gesichert ausgeführt (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 240 pyenv exec python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis stabil: `1 passed`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runGK.log`.
 - **Fortschritt (2/3 – gekoppelte Plan-B-Aufgabe):** Für das nächste CSV-Bild wurde die gekoppelte Plan-B-Syntheseprobe ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0023 --output-dir artifacts/converted_images/reports`), Ergebnis `status=ok`, Exit `0`; Log: `artifacts/converted_images/reports/AC0023_planb_synthetic_2026-05-16_runGK.log`.
 - **Fortschritt (3/3 – nächstes Bild aus CSV):** Das nächste Bild aus der CSV-Liste wurde als Einzelbereichslauf praktisch abgearbeitet (`PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0023 --end AC0023`), Exit `0`; Log: `artifacts/converted_images/reports/AC0023_single_2026-05-16_runGK.log`.
@@ -3622,7 +3622,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 
 - **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5.x-Kurzlauf wurde erneut erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `100.49s`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-17_runGQ.log`.
 - **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde im selben Arbeitspaket mit formalisiertem Beschreibungstext für das nächste CSV-Bild `AC0020_M` ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_M --output-dir artifacts/converted_images/reports`), Exit `0` (`status=ok`); Log-Artefakt: `artifacts/converted_images/reports/AC0020_M_planb_synthetic_2026-05-17_runGQ.log`.
-- **Fortschritt (nächstes Bild):** Als nächstes Bild aus `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` wurde `AC0020_M` abgearbeitet; die 3er-Kombination ist in `docs/history/next_arbeitspaket_2026-05-17_runGQ.md` dokumentiert.
+- **Fortschritt (nächstes Bild):** Als nächstes Bild aus `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` wurde `AC0020_M` abgearbeitet; die 3er-Kombination ist in `docs/next_arbeitspaket_2026-05-17_runGQ.md` dokumentiert.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert.
 - **Nächster sinnvoller Schritt:** Im nächsten Arbeitspaket das nächste Bild (`AC0020_S`) aus der CSV aufnehmen und erneut mit genau einer Plan-B-Aufgabe koppeln.
 
@@ -3740,49 +3740,49 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut in Python `3.10.20` ausgeführt; Ergebnis `1 passed`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-21_runHI.log`.
 - **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde für `AC0030` erfolgreich ausgeführt (`status=ok`, Exit `0`); Log: `artifacts/converted_images/reports/AC0030_planb_synthetic_2026-05-21_runHI.log`.
 - **Fortschritt (nächstes CSV-Bild):** Das nächste Bild aus der Liste der nicht zufriedenstellenden Konvertierungen wurde als Einzelkonvertierung bearbeitet (`AC0030`, Exit `0`); Log: `artifacts/converted_images/reports/AC0030_single_2026-05-21_runHI.log`.
-- **Fortschritt (Dokumentation):** Das komplette Arbeitspaket ist in `docs/history/next_arbeitspaket_2026-05-21_runHI.md` nachgeführt.
+- **Fortschritt (Dokumentation):** Das komplette Arbeitspaket ist in `docs/next_arbeitspaket_2026-05-21_runHI.md` nachgeführt.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
 - **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_L`).
 
 ### Fortschritt vs. Blocker (Session 2026-05-21, nächste dokumentierte Aufgabe Run HL)
 
 - **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut in Python `3.10.20` ausgeführt; Ergebnis `1 passed`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-21_runHL.log`.
-- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/history/next_aufgabe_2026-05-21_runHL.md` dokumentiert.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-21_runHL.md` dokumentiert.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
 - **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_L`).
 
 ### Fortschritt vs. Blocker (Session 2026-05-21, nächste dokumentierte Aufgabe Run HM)
 
 - **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut in Python `3.10.20` ausgeführt; Ergebnis `1 passed, 5 warnings`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-21_runHM.log`.
-- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/history/next_aufgabe_2026-05-21_runHM.md` dokumentiert.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-21_runHM.md` dokumentiert.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
 - **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_L`).
 
 ### Fortschritt vs. Blocker (Session 2026-05-22, nächste dokumentierte Aufgabe Run HU)
 
 - **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte Lauf `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` wurde in Python `3.10.20` erneut ausgeführt; Ergebnis `1 xfailed, 5 warnings`, Exit `0`, Laufzeit `104.61s`.
-- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/history/next_aufgabe_2026-05-22_runHU.md` dokumentiert.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-22_runHU.md` dokumentiert.
 - **Blocker:** Die Aufgabe bleibt inhaltlich offen, da der Test weiterhin als erwarteter Fehler (`xfail`) markiert ist.
 - **Nächster sinnvoller Schritt:** Den zugrundeliegenden XFail-Fall aus `docs/test_followup_tasks_2026-05-20.md` gezielt entblocken oder in ein stabiles, kleineres Repro aufteilen.
 
 ### Fortschritt vs. Blocker (Session 2026-05-22, nächste dokumentierte Aufgabe Run HV)
 
 - **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte Lauf `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` wurde in Python `3.10.20` erneut ausgeführt; Ergebnis `1 xfailed, 5 warnings`, Exit `0`, Laufzeit `223.79s`.
-- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/history/next_aufgabe_2026-05-22_runHV.md` dokumentiert.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-22_runHV.md` dokumentiert.
 - **Blocker:** Die Aufgabe bleibt inhaltlich offen, da der Test weiterhin als erwarteter Fehler (`xfail`) markiert ist.
 - **Nächster sinnvoller Schritt:** A3 gezielt fortführen: die im XFail-Text berichtete Qualitätsdrift in ein kleineres Repro je Variante aufteilen und Akzeptanzkriterium für Rückführung auf normalen Assert definieren.
 
 ### Fortschritt vs. Blocker (Session 2026-05-22, nächste dokumentierte Aufgabe Run HW)
 
 - **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte Lauf `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` wurde in Python `3.10.20` erneut ausgeführt; Ergebnis `1 xfailed, 5 warnings`, Exit `0`, Laufzeit `101.01s`.
-- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/history/next_aufgabe_2026-05-22_runHW.md` dokumentiert.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-22_runHW.md` dokumentiert.
 - **Blocker:** Die Aufgabe bleibt inhaltlich offen, da der Test weiterhin als erwarteter Fehler (`xfail`) markiert ist.
 - **Nächster sinnvoller Schritt:** A3 weiter eingrenzen: xfail-Ursache pro betroffener Variante in kleinere Repros aufspalten und Akzeptanzkriterium für Rückführung auf normalen Assert definieren.
 
 ### Fortschritt vs. Blocker (Session 2026-05-22, nächste dokumentierte Aufgabe Run HX)
 
 - **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte Lauf `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` wurde in Python `3.10.20` erneut ausgeführt; Ergebnis `1 passed, 5 warnings`, Exit `0`, Laufzeit `111.05s`.
-- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/history/next_aufgabe_2026-05-22_runHX.md` dokumentiert.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-22_runHX.md` dokumentiert.
 - **Einordnung:** Der zuvor beobachtete `xfail` trat in diesem Lauf nicht mehr auf; der Test war grün.
 - **Nächster sinnvoller Schritt:** Einen direkten Wiederholungslauf zur Stabilitätsprüfung durchführen und danach A3 in `docs/test_followup_tasks_2026-05-20.md` neu bewerten (Rückführung oder präziser Rest-Blocker).
 
@@ -3955,7 +3955,7 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 ### Tag 6 (2026-05-29) – Top-Engpass #1 beheben
 
 - [x] **FP-D6-1:** Für Engpass #1 genau eine Gegenmaßnahme implementieren. (2026-06-04 Run NQ: AC0811-only-Batches überspringen den generischen Middle-/Lower-Tercile-Qualitätsretry und bleiben initial-pass-only, sofern `ICC_MAX_QUALITY_PASSES` nicht gesetzt ist.)
-- [x] **FP-D6-2:** Vorher/Nachher-Reprolauf mit identischem Batch durchführen. (2026-06-04 Run NQ: identischer `AC0811..AC0811`-Batch mit `timeout 180`, vendorter Python-3.10-Toolchain und `/tmp`-Output; siehe `docs/history/next_arbeitspaket_2026-06-04_runNQ.md`.)
+- [x] **FP-D6-2:** Vorher/Nachher-Reprolauf mit identischem Batch durchführen. (2026-06-04 Run NQ: identischer `AC0811..AC0811`-Batch mit `timeout 180`, vendorter Python-3.10-Toolchain und `/tmp`-Output; siehe `docs/next_arbeitspaket_2026-06-04_runNQ.md`.)
 - [x] **FP-D6-EXIT:** Messbarer Effekt dokumentiert (Laufzeit, Timeout-Rate oder semantische Qualität). (2026-06-04 Run NQ: Laufzeit `3.70s -> 3.16s`, Verarbeitungseinträge `5 -> 3`, Exit jeweils `0`, keine sichtbare Bestlist-Regression.)
 
 
@@ -3985,7 +3985,7 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 - [x] **FP-D8-1:** Fokusfamilie aus AC08-Prioritäten wählen (z. B. kleine Kreisvarianten). (2026-06-04 Run NS: Fokusfamilie `AC08_SMALL_CIRCLE_FALLBACK_FAMILIES` gewählt; Startbelege sind `AC0811_S`, `AC0814_S` und `AC0870_S` aus Priorität 2 des AC08-Plans.)
 - [x] **FP-D8-2:** Pro bearbeiteter Familie mindestens einen gezielten Regressionstest ergänzen/aktualisieren. (2026-06-04 Run NS: Fallback-Quellen-Test für die drei Startvarianten parametrisiert und die Familie im Semantic-Primitive-Check zentralisiert.)
-- [x] **FP-D8-EXIT:** Familienänderung + zugehöriger grüner Test sind gemeinsam dokumentiert. (2026-06-04 Run NS: `PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/test_image_composite_converter.py::test_detect_semantic_primitives_reports_small_circle_family_fallback_source tests/detailtests/test_semantic_family_rules_helpers.py tests/detailtests/test_semantic_ac08_family_helpers.py` lief grün mit `12 passed`; Abschlussnotiz siehe `docs/history/next_arbeitspaket_2026-06-04_runNS.md`.)
+- [x] **FP-D8-EXIT:** Familienänderung + zugehöriger grüner Test sind gemeinsam dokumentiert. (2026-06-04 Run NS: `PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/test_image_composite_converter.py::test_detect_semantic_primitives_reports_small_circle_family_fallback_source tests/detailtests/test_semantic_family_rules_helpers.py tests/detailtests/test_semantic_ac08_family_helpers.py` lief grün mit `12 passed`; Abschlussnotiz siehe `docs/next_arbeitspaket_2026-06-04_runNS.md`.)
 
 ### Fortschritt vs. Blocker (Session 2026-06-04, Semantik-Fokusfamilien Teil 1 FP-D8 Run NS)
 
@@ -4064,7 +4064,7 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 - [x] **FP-D13-1:** Finalen End-to-End-Lauf mit vollständiger Artefaktkette ausführen. (2026-06-05 Run NZ: Kernsuite und alle 14 isolierten AC08-Segmente mit 600s Segmentbudget ausgeführt; alle Segmentprozesse Exit `0`, die Aggregation deckte jedoch vier Varianten ohne Iteration-Report auf und das Gate blieb `FAIL/BLOCKER`.)
 - [x] **FP-D13-2:** Ergebnis gegen Baseline quantitativ vergleichen. (2026-06-05 Run NZ: `14` erwartet, `10` reportseitig konvertiert, `4` fehlend; `3/6` Previously-Good-Anker erhalten, `3/6` fehlend; `0` akzeptierte Regressionen, aber auch `0` gemessene Verbesserungen; `overall_success=0`.)
-- [x] **FP-D13-EXIT:** Abschlusslauf reproduzierbar und vollständig dokumentiert. (2026-06-05 Run NZ: explizites `FAIL/BLOCKER` mit Kommandos, Gate-/Segmentstatus, quantitativer Metrik und Recovery-Punkten in `docs/history/next_arbeitspaket_2026-06-05_runNZ.md`; keine Release-Freigabe.)
+- [x] **FP-D13-EXIT:** Abschlusslauf reproduzierbar und vollständig dokumentiert. (2026-06-05 Run NZ: explizites `FAIL/BLOCKER` mit Kommandos, Gate-/Segmentstatus, quantitativer Metrik und Recovery-Punkten in `docs/next_arbeitspaket_2026-06-05_runNZ.md`; keine Release-Freigabe.)
 
 ### Fortschritt vs. Blocker (Session 2026-06-05, Abschlusslauf FP-D13 Run NZ)
 
@@ -4092,8 +4092,8 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 - [x] **FP-RCV-1:** Root Cause der vier Exit-0-Segmente ohne Iteration-Datensatz beheben. (`AC0811_L/M/S` und `AC0831_L` lagen unter `nonconvertable/`; der segmentierte Runner löst nun je Variante den tatsächlichen Quellordner auf.)
 - [x] **FP-RCV-2:** Segmentvollständigkeit zusätzlich am erwarteten `Iteration_Log.csv`-Datensatz prüfen. (Exit `0` ohne passende Zeile wird `BLOCKER_MISSING_REPORT`; die Finalisierung validiert dieselbe Invariante unabhängig.)
-- [x] **FP-RCV-3:** Die vier fehlenden Varianten real über den korrigierten Segmentpfad verifizieren. (Run OB mit Ein-Iterations-Budget: 4/4 Exit `0`, 4/4 `PASS`, 4/4 erwartete Reportzeilen; Details in `docs/history/next_arbeitspaket_2026-06-05_runOB.md`.)
-- [x] **FP-RCV-4:** Vollständigen festen 14er-Satz mit regulärem Budget wiederholen und die FP-D14-Schwellen (`14/14`, `6/6`, mindestens eine Verbesserung, `overall_success=1`) neu bewerten. (2026-06-05 Run OD: `14/14` Variantendatensätze, `6/6` Previously-Good-Anker, 3 akzeptierte Verbesserungen, 0 akzeptierte Regressionen und `overall_success=1`; vollständige Evidenz in `docs/history/next_arbeitspaket_2026-06-05_runOD.md`.)
+- [x] **FP-RCV-3:** Die vier fehlenden Varianten real über den korrigierten Segmentpfad verifizieren. (Run OB mit Ein-Iterations-Budget: 4/4 Exit `0`, 4/4 `PASS`, 4/4 erwartete Reportzeilen; Details in `docs/next_arbeitspaket_2026-06-05_runOB.md`.)
+- [x] **FP-RCV-4:** Vollständigen festen 14er-Satz mit regulärem Budget wiederholen und die FP-D14-Schwellen (`14/14`, `6/6`, mindestens eine Verbesserung, `overall_success=1`) neu bewerten. (2026-06-05 Run OD: `14/14` Variantendatensätze, `6/6` Previously-Good-Anker, 3 akzeptierte Verbesserungen, 0 akzeptierte Regressionen und `overall_success=1`; vollständige Evidenz in `docs/next_arbeitspaket_2026-06-05_runOD.md`.)
 
 - **Fortschritt:** Der konkrete Reportvollständigkeitsfehler ist reproduziert und geschlossen; die vier ehemals fehlenden Varianten erscheinen im echten Recovery-Smoke wieder in `Iteration_Log.csv`.
 - **No silent success:** Weder ein bloßer Prozess-Exit `0` noch ein isolierter `.segment-complete`-Marker genügt künftig zur Aggregation.
@@ -4325,7 +4325,7 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 
 ### Fortschritt vs. Blocker (Session 2026-05-29, CI-Pflichtjob-Bootstrap Run LZ)
 
-- **Fortschritt:** Das dokumentierte Arbeitspaket aus `docs/history/next_arbeitspaket_2026-05-29_runLZ.md` ist im Aufgabenlog zurückgeführt: Der separate CI-Pflichtjob `batch-artifact-drift-gate` bootstrapped die Testabhängigkeit `pytest` ebenso wie das normale Abschlussprofil, bevor das repräsentative Drift-Summary angelegt und das Pflicht-Gate ausgeführt wird.
+- **Fortschritt:** Das dokumentierte Arbeitspaket aus `docs/next_arbeitspaket_2026-05-29_runLZ.md` ist im Aufgabenlog zurückgeführt: Der separate CI-Pflichtjob `batch-artifact-drift-gate` bootstrapped die Testabhängigkeit `pytest` ebenso wie das normale Abschlussprofil, bevor das repräsentative Drift-Summary angelegt und das Pflicht-Gate ausgeführt wird.
 - **Sicherung:** Der Workflow-Dokumentationstest lief erneut grün (`PYENV_VERSION=3.10.20 PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/test_image_composite_converter.py::test_local_workflow_doc_tracks_current_commands`, `1 passed`, Exit `0`); das lokale Abschlussprofil lief erneut vollständig grün (`PYENV_VERSION=3.10.20 PYTHONPATH=vendor/linux-py310/site-packages:. timeout 300 ./tools/run_local_completion_checks.sh`, Exit `0`, inkl. `compileall`, Pytest-Suite, CLI-Help-Smoke und bewusstem Drift-Gate-`SKIP` mangels lokalem Summary-Artefakt).
 - **Blocker:** Keine neuen Blocker. Der Pflichtjob ist nun auch im Aufgabenlog als vollständig gebootstrappter CI-Pfad nachvollziehbar.
 - **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder einen echten Batchlauf so zuschneiden, dass er ein produktives `chain_phase_telemetry_summary.txt` für das Pflicht-Gate liefert.

@@ -1,4 +1,4 @@
-"""Raster-derived gradient circles containing disjoint flat rectangles.
+"""Raster-derived gradient circles containing disjoint flat native shapes.
 
 The closed description contract controls topology; raster residuals supply
 instances. No catalogue keys, saved geometry or reference vectors are read.
@@ -10,12 +10,13 @@ import re
 import cv2
 import numpy as np
 
-from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, raster_identity
 from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _register_steps
 from src.iCCModules.imageCompositeConverterGradientScene import _gradient
 from src.iCCModules.imageCompositeConverterPrimitiveScene import _circle, _local_quality
 from src.iCCModules.imageCompositeConverterSearchPortfolio import progress
 from src.iCCModules.imageCompositeConverterSearchScheduler import drain, schedule_models
+from src.iCCModules.imageCompositeConverterStructureSearch import complete, edit_proposals, scene_key
 
 
 # Bound complexity without encoding a family layout. Other scene contracts
@@ -29,8 +30,10 @@ SHAPES = re.compile(r'\b(ein(?:e|en|em)?|[1-8]|'+ '|'.join(NUMBERS) +r')\s+'
 
 def requested(description):
     text = str(description or '').casefold()
-    return ('der kreis hat einen' in text
-            and 'die rechtecke liegen innerhalb des kreises' in text)
+    return (('der kreis hat einen' in text
+             and 'die rechtecke liegen innerhalb des kreises' in text)
+            or ('der äussere kreis hat einen' in text
+                and 'die inneren formen liegen innerhalb des äusseren kreises' in text))
 
 
 def scene_contract(description):
@@ -41,14 +44,19 @@ def scene_contract(description):
     for m in matches:
         number = int(m[1]) if m[1].isdigit() else NUMBERS.get(m[1], 1)
         counts['circle' if m[2].startswith('kreis') else 'rectangle'] += number
-    if counts['circle'] != 1 or not 1 <= counts['rectangle'] <= 8:
+    inner_forms = 'die inneren formen liegen innerhalb des äusseren kreises' in text
+    if (counts['circle'] < 1 or not 2 <= sum(counts.values()) <= 9
+            or (not inner_forms and counts['circle'] != 1)):
         return None
-    direction = re.findall(r'der kreis hat einen (horizontal|vertikal)en farbverlauf', text)
+    subject = 'der äussere kreis' if inner_forms else 'der kreis'
+    direction_clause = subject+r' hat einen (horizontal|vertikal)en farbverlauf'
+    direction = re.findall(direction_clause, text)
     if len(direction) != 1:
         return None
-    relation = 'die rechtecke liegen innerhalb des kreises'
+    relation = ('die inneren formen liegen innerhalb des äusseren kreises' if inner_forms
+                else 'die rechtecke liegen innerhalb des kreises')
     layout_axis = None
-    if counts['rectangle'] > 1:
+    if sum(counts.values()) > 2:
         layouts = [name for name in ('nebeneinander', 'untereinander', 'voneinander')
                    if relation+' und getrennt '+name in text]
         if len(layouts) != 1:
@@ -59,13 +67,15 @@ def scene_contract(description):
         return None
     outlined = 'die formen haben helle konturen' in text
     rest = SHAPES.sub('', text).replace(relation, '')
-    rest = re.sub(r'der kreis hat einen (?:horizontal|vertikal)en farbverlauf', '', rest)
+    rest = re.sub(direction_clause, '', rest)
     for clause in ('die formen haben helle konturen', 'keine beschriftung', 'ohne text oder zeichen'):
         rest = rest.replace(clause, '')
     if re.sub(r'[\s.,;]+|\bund\b', '', rest):
         return None
-    return dict(count=1+counts['rectangle'], axis=0 if direction[0] == 'horizontal' else 1,
-                outlined=outlined, layout_axis=layout_axis)
+    return dict(count=sum(counts.values()), axis=0 if direction[0] == 'horizontal' else 1,
+                outlined=outlined, layout_axis=layout_axis,
+                children={kind: number for kind, number in
+                          (('circle', counts['circle']-1), ('rectangle', counts['rectangle'])) if number})
 
 
 def _flat_edge(profile, fill, stroke, low, high):
@@ -137,11 +147,18 @@ def detect_instances(pixels, contract, *, residual_threshold=25):
         if area < 12:
             continue
         component = (labels == index).astype('uint8')
-        contour = max(cv2.findContours(component, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0], key=cv2.contourArea)
+        contour = max(cv2.findContours(component, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[0], key=cv2.contourArea)
         hull = cv2.convexHull(contour)
         polygon = cv2.approxPolyDP(hull, .025*cv2.arcLength(hull, True), True)
-        if (len(polygon) != 4 or min(w, h) < 5 or area < .75*w*h):
+        if min(w, h) < 5:
             return None
+        kind = 'rectangle'
+        child_center, child_radius, circle_residual = _circle(contour)
+        if len(polygon) != 4 or area < .75*w*h:
+            if abs(w-h) <= 2 and circle_residual < .7:
+                kind = 'circle'
+            else:
+                return None
         core = cv2.erode(component, np.ones((5, 5), 'uint8')).astype(bool)
         if not core.any():
             core = cv2.erode(component, np.ones((3, 3), 'uint8')).astype(bool)
@@ -156,7 +173,12 @@ def detect_instances(pixels, contract, *, residual_threshold=25):
         samples = pixels[band]
         bright = samples.mean(axis=1) >= np.percentile(samples.mean(axis=1), 90)
         stroke = np.median(samples[bright], axis=0)
-        if contract['outlined']:
+        if kind == 'circle':
+            # Pixel centers lie just inside the antialiased silhouette.
+            # Registration refines this raster-derived radius independently.
+            r = child_radius+.4
+            x, y, w, h = child_center[0]-r, child_center[1]-r, 2*r, 2*r
+        elif contract['outlined']:
             # A light rim can have the same color as the parent at one side
             # and strong contrast at the other. Seed its centerline from the
             # flat interior instead of this asymmetric residual silhouette.
@@ -185,9 +207,9 @@ def detect_instances(pixels, contract, *, residual_threshold=25):
             left, right = left_right
             top, bottom = top_bottom
             x, y, w, h = left, top, right-left, bottom-top
-        children.append(dict(kind='rectangle', geometry=np.array([x, y, w, h, sw]),
+        children.append(dict(kind=kind, geometry=np.array([x, y, w, h, sw]),
                              colors=np.r_[fill, fill, stroke]))
-    if len(children) != contract['count']-1:
+    if len(children) > 16:
         return None
     children.sort(key=lambda obj: obj['geometry'][0])
     band = (distance >= radius-1) & (distance < radius)
@@ -202,20 +224,22 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
     if (contract is None or pixels.shape != (height, width, 3) or min(width, height) < 24
             or not np.isfinite(pixels).all()):
         return None
-    attempts, seen = [], set()
+    attempts, seen, seeds = [], set(), []
     session = current_search()
+    rejection_scope = (raster_identity(pixels), tuple(sorted(contract['children'].items())),
+                       contract['axis'], contract['outlined'], contract['layout_axis'])
+    rejected = session.structure_rejections.setdefault(rejection_scope, {}) if session else {}
 
-    def hypothesis(threshold):
-        if session and session.time_reason():
-            return None
-        objects = detect_instances(pixels, contract, residual_threshold=threshold)
-        attempt = dict(residual_threshold=threshold, outcome='no_complete_scene')
+    def register(objects, attempt):
         attempts.append(attempt)
         try:
             if objects is not None:
-                key = tuple((obj['kind'], *np.round(np.r_[obj['geometry'], obj['colors']], 3))
-                            for obj in objects)
-                if key in seen:
+                key = scene_key(objects)
+                if not complete(objects, contract['children']):
+                    attempt['outcome'] = 'inventory_rejected'
+                elif key in rejected:
+                    attempt.update(outcome='previously_rejected', previous_outcome=rejected[key])
+                elif key in seen:
                     attempt['outcome'] = 'duplicate'
                 else:
                     seen.add(key)
@@ -223,8 +247,14 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
                     yield None
                     fitted = yield from _fit_instances_steps(
                         width, height, pixels=pixels, contract=contract,
-                        objects=objects, render_fn=render_fn, error_fn=error_fn)
+                        objects=objects, render_fn=render_fn, error_fn=error_fn,
+                        evidence_objects=[obj for seed in seeds for obj in seed[1:]])
+                    if session and session.time_reason():
+                        attempt['outcome'] = 'time_limit'
+                        return None
                     attempt['outcome'] = 'accepted' if fitted is not None else 'quality_or_geometry_rejected'
+                    if fitted is None and len(rejected) < 96:
+                        rejected[key] = attempt['outcome']
                     return fitted
             return None
         finally:
@@ -232,7 +262,42 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
                 attempt['outcome'] = 'time_limit' if session and session.time_reason() else 'cancelled'
             progress('primitive_mixed_gradient_scene_v1', event='scene_hypothesis', **attempt)
 
+    def hypothesis(threshold):
+        if session and session.time_reason():
+            return None
+        objects = detect_instances(pixels, contract, residual_threshold=threshold)
+        if objects is not None:
+            seeds.append(objects)
+        return (yield from register(objects, dict(residual_threshold=threshold,
+                                                 operator='segmentation', outcome='no_complete_scene')))
+
+    def repairs():
+        # Initial jobs each yield after detection. This job starts only after
+        # those slices, so all observed instances are available to the agenda.
+        stats, outcome = {}, 'cancelled'
+        try:
+            for proposal in edit_proposals(seeds, contract['children'], stats=stats):
+                if session and session.time_reason():
+                    return None
+                yield None
+                if proposal is None:
+                    continue
+                fitted = yield from register(proposal['objects'], dict(operator='edit',
+                    edits=proposal['edits'], outcome='no_complete_scene'))
+                if fitted is not None:
+                    outcome = 'accepted'
+                    return fitted
+            outcome = ('state_limit' if stats.get('state_limit_reached')
+                       or stats.get('candidate_limit_reached') else 'agenda_exhausted')
+            return None
+        finally:
+            if session and session.time_reason():
+                outcome = 'time_limit'
+            progress('primitive_mixed_gradient_scene_v1', event='structure_search_finished',
+                     outcome=outcome, **stats)
+
     jobs = {threshold: hypothesis(threshold) for threshold in (25, 16, 36)}
+    jobs['edits'] = repairs()
     if session:
         scheduled = schedule_models(jobs, session, source='primitive_mixed_gradient_scene_v1',
                                     emit=progress, slice_steps=1)
@@ -257,7 +322,10 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
     return None
 
 
-def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn, error_fn):
+def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn, error_fn,
+                         evidence_objects=()):
+    if not complete(objects, contract['children']):
+        return None
     n = len(objects)
     boxes = [np.r_[o['geometry'][:2], o['geometry'][:2]+o['geometry'][2:4], o['geometry'][4]]
              for o in objects]
@@ -269,7 +337,7 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
     def geometry(p, index):
         x, y, X, Y, sw = p[5*index:5*index+5]
         w, h = X-x, Y-y
-        if index == 0:
+        if objects[index]['kind'] == 'circle':
             y, h = (y+Y-w)/2, w
         return np.array([x, y, w, h, sw])
 
@@ -325,7 +393,9 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
 
     regions = [(max(0, int(o['geometry'][0])-3), max(0, int(o['geometry'][1])-3),
                 min(width, int(np.ceil(o['geometry'][0]+o['geometry'][2]))+3),
-                min(height, int(np.ceil(o['geometry'][1]+o['geometry'][3]))+3)) for o in objects]
+                min(height, int(np.ceil(o['geometry'][1]+o['geometry'][3]))+3))
+               for o in [*objects, *evidence_objects]]
+    regions = list(dict.fromkeys(regions))
 
     def qualities(raster):
         return [_local_quality(pixels[y:Y, x:X], raster[y:Y, x:X]) for x, y, X, Y in regions]
@@ -352,8 +422,9 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
     global_quality = _local_quality(pixels, fitted['rendered'])
     if not global_quality or not global_quality['passed'] or any(not q or not q['passed'] for q in quality):
         return None
-    fitted.update(object_kinds=[o['kind'] for o in objects], object_quality=quality,
+    fitted.update(object_kinds=[o['kind'] for o in objects], object_quality=quality[:n],
+                  evidence_quality=quality[n:],
                   scene_hypotheses=1, instance_groups=n,
-                  scene_detectors=['gradient_boundary', 'flat_residual_rectangles'],
+                  scene_detectors=['gradient_boundary', 'flat_residual_shapes'],
                   neural_scene_selected=False)
     return fitted
