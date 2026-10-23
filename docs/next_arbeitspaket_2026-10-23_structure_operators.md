@@ -85,7 +85,35 @@ Diese Archivprüfung ist keine erneute Konvertierung aller 379 Eingaben.
 Reproduzierbare Eingaben, Vorher-/Nachher-Ausgaben, Workerlogs, Prüf- und
 Zugriffsbelege stehen unter
 [`artifacts/evaluation/structure_operators_v1/`](../artifacts/evaluation/structure_operators_v1/README.md).
-Die finalen Testresultate werden dort in `checks.json` festgehalten.
+Die finalen Testresultate stehen dort in `checks.json` und `full-suite.log`:
+**3.931 bestanden, 30 übersprungen, zwei fehlgeschlagen** nach 70 Minuten und
+38 Sekunden. Alle 19 neuen Tests bestehen auch in diesem vollständigen Lauf.
+Syntaxprüfung, CLI-Hilfe, Runtime-ID-Nullprüfung und Whitespace-Prüfung bestehen.
+Es gibt ausdrücklich keine grüne Gesamtsuite; die beiden folgenden
+unveränderten, zeitabhängigen Tests bleiben negative Beobachtungen.
+
+Die 78 gezielten Struktur-/Restbild-/Mischszenentests bestehen auch im isolierten
+Worktree. Ein im breiten Lauf auffälliger unveränderter Test,
+`test_observation_changes_neither_candidates_nor_measurement_budget`, besteht
+einzeln und im vollständigen Komponentenmodul (28/28). Ein separater
+200-facher Versuch reproduziert unterschiedliche Kandidaten/Budgets bereits
+mit dem ursprünglichen `ImageSearch` aus `dd832bd22` in 3/200 Fällen. Der
+entsprechende Versuch mit dem neuen Stand beobachtet 0/200 Abweichungen; daraus
+wird keine Verbesserung abgeleitet. Die tatsächlichen Laufzeiten bestimmen
+die Fortschrittsraten des vorhandenen Bot-Schedulers, während der Test gleiche
+Kandidaten und Messbudgets erwartet. Bot-, Scheduler-, Portfolio- und Testcode
+sind gegenüber der Basis unverändert. Probe und Rohabweichungen sind erhalten;
+die Wiederholungen ersetzen keinen grünen vollständigen Erstlauf.
+
+Auch `test_blocked_real_inference_is_inside_the_process_deadline` fällt im
+breiten Lauf auf: Sein Zwei-Sekunden-Budget endet nach 2,016 Sekunden, bevor
+der Worker den Inferenzmarker schreibt oder seine Bereitschaft meldet. Die
+Zeitspur belegt den Abbruch und vollständigen Prozessabbau; der breite Lauf
+belegt an dieser Stelle keine tatsächlich betretene blockierte Inferenz.
+Die gezielte Wiederholung besteht in 2,37 Sekunden einschließlich Testaufbau.
+Deadline-, Netz- und Testcode sind gegenüber `dd832bd22` unverändert.
+Zeitspur, Deadlinebericht und Wiederholungslog stehen unter
+`structure_operators_v1/neural-deadline/`.
 
 ## Restumfang
 

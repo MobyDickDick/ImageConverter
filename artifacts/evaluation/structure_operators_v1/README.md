@@ -23,3 +23,30 @@ erhalten. Die unabhängige Nachprüfung benötigt keine abgeleiteten PNG-Verglei
 `archive-preservation.json` belegt 379/379 Pixelprüfungen und 758 unveränderte
 Prüfsummen gespeicherter Archivpaare. Es ist keine Archiv-Neukonvertierung.
 `checks.json` fasst die abschließenden Testläufe und ihre Grenzen zusammen.
+
+Vollständiger isolierter Standardlauf: **3.931 bestanden, 30 übersprungen,
+zwei fehlgeschlagen**, 70:38 Minuten. Alle 19 neuen Tests bestehen darin.
+Die gezielte Szenengruppe besteht separat 78/78. Das vollständige Original-Log
+steht in `full-suite.log`; die beiden unveränderten zeitabhängigen Fehler sind
+unten getrennt untersucht. Die gezielten Wiederholungen ersetzen diese
+Fehlschläge nicht.
+
+`residual-repeat.json` dokumentiert die echte neue 7/9-CLI-Wiederholung. Die
+sieben erfolgreichen SVGs sind bytegleich zu den bereits versionierten
+Scheduler-Ausgaben, die im Bericht jeweils verlinkt sind.
+
+`component-observation-base.json`, `component-observation-current.json` und die
+zugehörige Probe untersuchen einen unveränderten, zeitabhängigen Bot-Test.
+Die 200 Wiederholungen zeigen 3 Abweichungen mit dem ursprünglichen
+`ImageSearch` und 0 mit dem neuen Stand. Das belegt eine schon vorhandene
+Schwankung, keinen Komponenten- oder Qualitätsgewinn. Kandidaten und Budgets
+unterscheiden sich in den gespeicherten negativen Beobachtungen. Das ganze
+Komponentenmodul besteht separat 28/28; diese Wiederholung ersetzt den breiten
+Lauf nicht. Der vollständige Abschlussstand steht in `checks.json`.
+
+`neural-deadline/` enthält die zweite zeitabhängige Testauffälligkeit:
+Das Zwei-Sekunden-Budget läuft im breiten Lauf vor dem Eintritt in die
+Netzinferenz ab (2,016 Sekunden); die gezielte Wiederholung besteht.
+Die gesicherte Zeitspur unterscheidet diesen Startabbruch von einer
+tatsächlich betretenen blockierten Inferenz. Test- und Deadlinecode bleiben
+unverändert; auch diese Wiederholung ersetzt keinen grünen breiten Erstlauf.

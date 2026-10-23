@@ -9,8 +9,23 @@
     "time": "124.886"
   },
   "standard_suite": {
-    "status": "running",
-    "known_failure": "tests/test_component_value.py::test_observation_changes_neither_candidates_nor_measurement_budget"
+    "tests": 3963,
+    "failures": 2,
+    "errors": 0,
+    "skipped": 30,
+    "passed": 3931,
+    "seconds": 4238.706,
+    "status": "failed",
+    "failed_tests": [
+      {
+        "test": "tests.test_component_value::test_observation_changes_neither_candidates_nor_measurement_budget",
+        "message": "assert (False)\n +  where False = <function array_equal at 0x000001987F327530>(array([1.  , 1.  , 0.75, 0.75]), array([1., 1., 2., 0.]))\n +    where <function array_equal at 0x000001987F327530> = np.array_equal"
+      },
+      {
+        "test": "tests.test_neural_elements::test_blocked_real_inference_is_inside_the_process_deadline",
+        "message": "AssertionError: assert False\n +  where False = exists()\n +    where exists = (WindowsPath('C:/Users/marku/myCloud/imageConverter/.tmp/sop/.tmp/full-suite-ready/test_blocked_real_inference_is0') / 'entered-neural').exists"
+      }
+    ]
   },
   "syntax": "passed",
   "cli_help": "passed",
@@ -40,5 +55,20 @@
     "src/iCCModules/imageCompositeConverterAdaptiveSearch.py": "6675a8f2eb05be7622886d59b3e456202d443d2c80287c61512079d657912f7f",
     "src/iCCModules/imageCompositeConverterMixedGradientScene.py": "8073da82144d6592eb6ba8391ec4aa03d69e23fd41887952a958c224649af78f",
     "src/iCCModules/imageCompositeConverterStructureSearch.py": "3552d5d2c22ebc21748896e119bbe45838f480793b5e40264ddef13a2a76f808"
+  },
+  "new_tests_in_standard_suite": {
+    "passed": 19,
+    "total": 19
+  },
+  "component_module_repeat": {
+    "passed": 28,
+    "total": 28
+  },
+  "neural_deadline_repeat": {
+    "passed": 1,
+    "total": 1,
+    "initial_marker_entered": false,
+    "initial_deadline_elapsed_seconds": 2.016,
+    "initial_worker_terminated": true
   }
 }
