@@ -117,7 +117,48 @@ Die gemeinsame Szenenprüfung erhält dafür einen optionalen schreibfreien Modu
 .venv/Scripts/python.exe -m tools.evaluate_real_scene --inputs .tmp/transfer-input-new --output .tmp/transfer-cli-new
 ```
 
-Alle Produktionsdateien unter `src/` sind hashgleich zum Freeze. Alle 758
+Im isolierten Abschlusscheckout sind alle Produktionsdateien unter `src/`
+hashgleich zum Freeze. Alle 758
 Bild-/SVG-Prüfsummen stimmen mit dem Archivindex überein: **379 Paare**, kein
 Kataloggewinn. Eine erneute vollständige Archivkonvertierung erfolgte für diese
 Untersuchung ohne Runtime-Änderung nicht.
+
+## Abschlussprüfungen am 23. Oktober
+
+Im isolierten Checkout des Aufgabenbranches bestehen abschließend **84 Tests**:
+27 gezielte Szenenbeleg-/Archivtests und sämtliche 57 zuvor fehlgeschlagenen
+Fälle der Gesamtsuite. Eine regulär deaktivierte vollständige
+Archiv-Neukonvertierung wird übersprungen. Syntax-, CLI-Hilfe- und
+Runtime-ID-Nullprüfung sowie die normale Evidenzprüfung bestehen.
+
+Ohne checkoutlokale `.venv` lud der bestehende Bootstrap im frischen Checkout
+das inkompatible Linux-Vendorpaket; zwei CLI-Unterprozesstests scheiterten
+dadurch zunächst (55/57 bestanden). Die vorhandene Windows-Umgebung wurde über
+eine lokale Verzeichnisverknüpfung bereitgestellt. Danach bestehen der normale
+Aufruf ohne Vorlade-Workaround und der gesamte isolierte 85-Fälle-Lauf
+(84 bestanden, eine Überspringung). Die Runtime wurde dafür nicht geändert.
+
+Der vollständige Standardlauf im gemeinsamen Checkout endet mit **3.815
+bestanden, 30 übersprungen, 36 fehlgeschlagen und 21 Fehlern**. Alle 57
+gemeldeten Fälle bestehen anschließend mit `--basetemp` in einem Projektordner.
+Ein separater reproduzierter `os.replace`-Fehler belegt `WinError 5` im
+voreingestellten Sandbox-Tempverzeichnis. Während des langen Laufs wurden der
+gemeinsame Branch und Runtime-/Werkzeugdateien von paralleler Arbeit verändert.
+Der Lauf wird deshalb ausdrücklich **nicht als grüne Prüfung eines unveränderten
+Snapshots** gewertet. Seine unterbrochene Gesamtzeit ist keine Laufzeitmessung.
+
+`checks.json` und `validation/` im Belegordner bewahren die Zusammenfassung,
+die genaue Fehlerliste, die gezielten JUnit-Berichte und den isolierten
+Temp-Fehler. Vollständiges Standardlog und JUnit-Bericht bleiben lokal unter
+`.tmp/real-holdouts/`; ihre Prüfsummen stehen in `checks.json`. Der isolierte
+Abschluss übernimmt keine parallelen Runtime-Änderungen.
+
+Eine zusätzliche Gegenprobe des Archiv-Refreshs im frischen Checkout endet
+zwar mit Exit 0, erzeugt aber nur **362/379 Paare**: Für drei AC0840- und 14
+GE9013-Varianten fehlen zwei ältere, nicht versionierte Abnahmeberichte.
+Im ursprünglichen Checkout mit diesen lokalen Berichten ergab derselbe Aufruf
+379 Paare. Die fehlenden Varianten und Belegpfade stehen in `checks.json`.
+Das vorhandene Archiv mit 379 Paaren und sämtlichen 758 korrekten Prüfsummen
+bleibt erhalten; der Refresh verwendete ausschließlich neue temporäre Ordner.
+Der Paketabschluss behauptet daher keine vollständige Reproduzierbarkeit der
+historischen Archiv-Neuerzeugung aus einem frischen Checkout.
