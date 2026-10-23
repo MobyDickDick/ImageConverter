@@ -5,13 +5,13 @@ Such-Bots ist umgesetzt und mit 375 echten Konvertierungen unabhängig geprüft.
 Die konkrete Entscheidung ist die Beibehaltung des vollständigen Portfolios;
 eine allgemeine Gleichwertigkeit oder Entbehrlichkeit ist nicht nachgewiesen.
 Umfang, Kontrollen, Unsicherheit und Grenzen stehen unter
-[COMPONENT-VALUE-01](next_arbeitspaket_2026-10-18_component_value.md).
-Der erste [neuronale Versuch](next_arbeitspaket_2026-10-19_neural_elements.md)
+[COMPONENT-VALUE-01](history/next_arbeitspaket_2026-10-18_component_value.md).
+Der erste [neuronale Versuch](history/next_arbeitspaket_2026-10-19_neural_elements.md)
 ist optional umgesetzt und mit 84 echten CLI-Versuchen untersucht. Er zeigt
 keinen zusätzlichen Erfolg und bleibt außerhalb des Standardpfads.
 Die produktive Netzabnahme bleibt offen; vorhandene Erkenner werden erhalten.
 
-Auch das [reale Folgeexperiment NEURAL-ELEMENTS-REAL-02](next_arbeitspaket_2026-10-19_neural_real_regions.md)
+Auch das [reale Folgeexperiment NEURAL-ELEMENTS-REAL-02](history/next_arbeitspaket_2026-10-19_neural_real_regions.md)
 ist inzwischen abgeschlossen: neun reale Trainingsfamilien, sechs bisherige
 Entwicklungsfamilien, zehn neue Abnahmefamilien und 180 echte CLI-Versuche.
 Bessere Regionsabdeckung führt noch nicht zu belastbarem End-to-End-Nutzen;

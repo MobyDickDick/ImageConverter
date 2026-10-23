@@ -1,6 +1,12 @@
 # ImageConverter
 
-Die [fortsetzbare Struktursuche](docs/next_arbeitspaket_2026-10-23_structure_scheduler.md)
+Bedienung, Architektur und Planung stehen in der
+[Dokumentation](docs/README.md); abgeschlossene Arbeitspakete und Laufberichte
+im getrennten [Verlauf](docs/history/README.md). Die
+[Bereinigungsübersicht](docs/repository_cleanup.md) erläutert die Ablage und
+die entfernten Ausgaben.
+
+Die [fortsetzbare Struktursuche](docs/history/next_arbeitspaket_2026-10-23_structure_scheduler.md)
 verteilt das gemeinsame Bildbudget jetzt zwischen alternativen Restbildzerlegungen.
 Eine schlechte erste Anpassung blockiert weitere Vorschläge nicht mehr;
 die echte CLI-Wiederholung besteht weiterhin 7/9 bekannte Entwicklungsfälle.
@@ -13,52 +19,52 @@ Restbildzerlegungen im vorhandenen Verlaufsszenenweg und erlaubt generische
 getrennte Rechteckgruppen. Vollständige Struktursuche und neue unabhängige
 reale Familienabnahmen bleiben offen; die Arbeitspakete sind neu gewichtet.
 
-Die [erneute reale Übertragungsprüfung](docs/next_arbeitspaket_2026-10-22_real_scene_transfer.md)
+Die [erneute reale Übertragungsprüfung](docs/history/next_arbeitspaket_2026-10-22_real_scene_transfer.md)
 scheitert mit unverändertem Algorithmus an zwei neuen Zusammensetzungen (0/2).
 Der gemeinsame Verlaufsszenenweg unterstützt noch keine überlappenden gerundeten
 Rechtecke oder vier getrennte Kinder. Die positive Familienabnahme bleibt offen;
 beide Fehlversuche und ein unabhängiger Nachprüfer sind dauerhaft gesichert.
 
-Der [native Rechteckszenenweg](docs/next_arbeitspaket_2026-10-22_gradient_scene.md)
+Der [native Rechteckszenenweg](docs/history/next_arbeitspaket_2026-10-22_gradient_scene.md)
 ergänzt axiale Farbverläufe, gerundete Ecken und weiße Innenflächen.
 Die bekannten verschachtelten Panelvarianten bestehen beide regulären Gates;
 das Erfolgsarchiv wächst auf 379 Paare. Die Übertragungsabnahme an neuen realen
 Familien bleibt offen.
 
-Das [reale Szenenpaket GENERAL-SCENE-REAL-05](docs/next_arbeitspaket_2026-10-21_scene_real.md)
+Das [reale Szenenpaket GENERAL-SCENE-REAL-05](docs/history/next_arbeitspaket_2026-10-21_scene_real.md)
 ergänzt eindeutige Farb-/Lagebezüge mit konservativer Mehrdeutigkeitsprüfung.
 Neue Sprachkontrollen und 17/17 erweiterte Varianten bestehen die unabhängigen
 Objekt-/Regionsgates. Vier vorab markierte reale Familien erreichen im
 Versuch keine vollständige Abnahme; die damalige belegte Katalogzahl
 betrug 377/1.785. Die Übertragung auf neue reale Familien bleibt Folgearbeit.
 
-Das [Sichtbarkeitspaket GENERAL-SCENE-VISIBILITY-04](docs/next_arbeitspaket_2026-10-21_scene_visibility.md)
+Das [Sichtbarkeitspaket GENERAL-SCENE-VISIBILITY-04](docs/history/next_arbeitspaket_2026-10-21_scene_visibility.md)
 ergänzt eigene dunkle Konturen bei Überdeckung, kombinierte Verschachtelung und
 Teilüberdeckung sowie eindeutige sprachliche Tiefenbedingungen. Neue gedrehte
 Prüfszenen bestehen 12/12 und eine erweiterte Vorlage 17/17 unter unveränderten
 Qualitätsgrenzen. Die damalige belegte Katalogzahl betrug 377 von 1.785 Bildern (21,1 %).
 
-Die [gemeinsame Szenenauswahl GENERAL-SCENE-01](docs/next_arbeitspaket_2026-10-20_scene_fusion.md)
+Die [gemeinsame Szenenauswahl GENERAL-SCENE-01](docs/history/next_arbeitspaket_2026-10-20_scene_fusion.md)
 führt vollständige Formgrenzen und sichtbare Kreisbögen/Rechteckseiten zusammen.
 Sie ergänzt partielle Überdeckungen und prüft konkurrierende Zeichenreihenfolgen
 an Raster und Beschreibung unter den bestehenden Qualitätsgrenzen.
 
-Das [Szenenfolgepaket GENERAL-SCENE-FILLED-02](docs/next_arbeitspaket_2026-10-20_layered_scene.md)
+Das [Szenenfolgepaket GENERAL-SCENE-FILLED-02](docs/history/next_arbeitspaket_2026-10-20_layered_scene.md)
 ergänzt gefüllte und vollständig verschachtelte Kreis-/Rechteckinstanzen.
 Unabhängige Objekt- und Regionsprüfungen bestehen bei 36 echten CLI-Vergleichen
 und einer erweiterten 17-Fälle-Vorlage. Allgemeine Fusion und partielle
 Überdeckungen bleiben Folgearbeit; die bestehenden Qualitätsgrenzen gelten weiter.
 
-Das [reale CNN-Folgepaket NEURAL-ELEMENTS-REAL-02](docs/next_arbeitspaket_2026-10-19_neural_real_regions.md)
+Das [reale CNN-Folgepaket NEURAL-ELEMENTS-REAL-02](docs/history/next_arbeitspaket_2026-10-19_neural_real_regions.md)
 ergänzt unabhängig markierte Regionen, getrennte reale Trainings-/Prüffamilien
 und einen zweiten optionalen Detektor. Mehrstufige Vorschläge verbessern die
 Regionsabdeckung; ein belastbarer End-to-End-Gewinn ist weiterhin nicht
 nachgewiesen. Die analytische Erkennung bleibt Standard. Der
-[erste CNN-Versuch](docs/next_arbeitspaket_2026-10-19_neural_elements.md)
-mit 84 CLI-Gegenproben bleibt dokumentiert. Der [Recovery-Merge-Audit](docs/merge_audit_2026-10-19.md)
+[erste CNN-Versuch](docs/history/next_arbeitspaket_2026-10-19_neural_elements.md)
+mit 84 CLI-Gegenproben bleibt dokumentiert. Der [Recovery-Merge-Audit](docs/history/merge_audit_2026-10-19.md)
 bestätigt die wiedergefundenen Nachweise und erläutert deren Ablage.
 
-Die [Komponentenmessung](docs/next_arbeitspaket_2026-10-18_component_value.md)
+Die [Komponentenmessung](docs/history/next_arbeitspaket_2026-10-18_component_value.md)
 vergleicht die sechs Such-Bots einzeln und in ausgewählten Kombinationen
 über echte CLI-Konvertierungen. Runtime-Schalter und Arbeitszähler,
 unabhängige SVG-Prüfungen und regelmäßige CI-Gegenproben bilden den Nachweis;
@@ -68,16 +74,16 @@ ImageConverter converts badge/source images into composite SVG outputs and also
 provides annotation/debugging helpers for the source raster files.
 
 Die [Erfolgsübersicht](artifacts/satisfactory_conversions/README.md) enthält
-379 ausdrücklich abgenommene Paare. Der [Projektstand vom 17. Oktober](docs/project_status_2026-10-17.md)
+379 ausdrücklich abgenommene Paare. Der [Projektstand vom 17. Oktober](docs/history/project_status_2026-10-17.md)
 dokumentiert die Katalogbasis von 1.785 Bildern und die Grenzen älterer
 Pixelprüfungen. Eine sortierte Prüfliste unterstützt die persönliche Sichtprüfung.
 
-Die reguläre `semantic-only`-CLI verwendet jetzt [überwachte Bildbudgets](docs/next_arbeitspaket_2026-10-18_search_deadline.md):
+Die reguläre `semantic-only`-CLI verwendet jetzt [überwachte Bildbudgets](docs/history/next_arbeitspaket_2026-10-18_search_deadline.md):
 60 Sekunden einschließlich Abschlussprüfung, bei spätem Fortschritt begrenzt
 verlängerbar bis 120 Sekunden. Blockierte Worker und Renderkinder werden beendet;
 bereits geprüfte Zwischenstände bleiben erhalten.
 
-Der [Suchscheduler](docs/next_arbeitspaket_2026-10-18_search_scheduler.md)
+Der [Suchscheduler](docs/history/next_arbeitspaket_2026-10-18_search_scheduler.md)
 verteilt gemeinsame Zeitscheiben zwischen Kurztext-Modellalternativen und
 priorisiert die sechs Parameterverfahren nach Fortschritt pro aktiver Sekunde.
 Regelmäßige Erkundung, Stagnationsabschaltung und ein bildgebundener Rendercache
@@ -124,7 +130,7 @@ Abnahmen aktualisiert. `python -m tools.run_pytest_profile extended`
 aktualisiert die Sammlung einschließlich späterer erfolgreicher Batches,
 konvertiert alle Einträge erneut und prüft deren Qualität; Quellen und
 gespeicherte gute SVGs bleiben dabei erhalten. Details zur Sammlung und zur
-[jüngsten Ventil-Abnahme](docs/next_arbeitspaket_2026-10-18_ac0232_m.md).
+[jüngsten Ventil-Abnahme](docs/history/next_arbeitspaket_2026-10-18_ac0232_m.md).
 
 Run the converter via:
 
@@ -132,7 +138,7 @@ Run the converter via:
 python -m src.imageCompositeConverter
 ```
 
-The detailed CLI reference lives in [docs/image_converter_cli.md](docs/image_converter_cli.md), and all repository documentation is reachable via [docs/README.md](docs/README.md).
+The detailed CLI reference lives in [docs/image_converter_cli.md](docs/image_converter_cli.md), and all repository documentation is reachable via [docs/README.md](docs/history/README.md).
 The recommended local verification workflow lives in
 [docs/image_converter_workflow.md](docs/image_converter_workflow.md).
 
@@ -148,7 +154,7 @@ Die [Fehlererfassung](docs/plan_b_failure_tasks_2026-10-10.md) zeigt die
 fehlgeschlagenen Fälle in der GitHub-Laufübersicht und führt wiederholte
 Fehlschläge in GitHub-Aufgaben zusammen. Das reguläre Plan-B-Paket
 `AC0711_1_M` ist mit fünf Holdouts und einer unabhängigen 17-Fälle-Prüfung
-[abgenommen](docs/next_arbeitspaket_2026-10-10_ac0711_1_m.md).
+[abgenommen](docs/history/next_arbeitspaket_2026-10-10_ac0711_1_m.md).
 
 ## Repository layout
 

@@ -2,7 +2,7 @@
 
 ## Anlass
 
-`nextPrompt.txt` meldet erneut, dass die AC0100-Familie nur in der großen
+`docs/history/notes/nextPrompt.txt` meldet erneut, dass die AC0100-Familie nur in der großen
 Variante plausibel wirke und dass Basis-, M- und S-Variante nicht über fest
 abgelegte Daten gelöst werden dürfen. Geprüft wurden deshalb erneut das
 Basissymbol `AC0010` und die real vorhandenen Varianten `AC0100_L`,
@@ -55,7 +55,7 @@ Der temporäre Output-Ordner wurde nach der Auswertung wieder entfernt.
 
 ## Schlussfolgerung
 
-Für die in `nextPrompt.txt` beschriebene AC0100-Aufgabe ist keine weitere
+Für die in `docs/history/notes/nextPrompt.txt` beschriebene AC0100-Aufgabe ist keine weitere
 bildnamenspezifische Korrektur erforderlich. Die vorhandene allgemeine
 algorithmische Korrektur bleibt wirksam; die nächste echte Folgearbeit sollte
 erst ansetzen, wenn ein neuer Repro mit abweichenden Metriken oder einem

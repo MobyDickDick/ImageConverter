@@ -2,7 +2,7 @@
 
 ## Anlass
 
-Die in `nextPrompt.txt` beschriebene Aufgabe wurde erneut auf dem aktuellen
+Die in `docs/history/notes/nextPrompt.txt` beschriebene Aufgabe wurde erneut auf dem aktuellen
 Stand ausgeführt. Geprüft wurden das Basissymbol `AC0010` (in der Anfrage als
 `AC010` bezeichnet) und die drei real vorhandenen Größenvarianten
 `AC0100_L`, `AC0100_M` und `AC0100_S`.

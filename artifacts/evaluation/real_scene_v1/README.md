@@ -10,5 +10,5 @@ finalen Prüfungen neu ausführen. Historische Vorher-Läufe erfordern die
 damalige Runtime. Die Zusammenfassung ersetzt keine unabhängige Prüfung.
 
 Anleitung und Grenzen:
-[GENERAL-SCENE-REAL-05](../../../docs/next_arbeitspaket_2026-10-21_scene_real.md).
+[GENERAL-SCENE-REAL-05](../../../docs/history/next_arbeitspaket_2026-10-21_scene_real.md).
 Keine neue reale Katalogabnahme; weiterhin 377/1.785 archivierte Paare.

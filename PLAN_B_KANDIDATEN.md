@@ -13,14 +13,14 @@ Antialiasing-Repro; neue reale Familien sind damit nicht abgenommen.
 Danach folgen Komposition, vollständige Semantikabnahme und reale Übertragung.
 Die offenen Aufgaben und historischen Nachweise bleiben erhalten.
 
-Der [nächste Scheduler-Schritt](docs/next_arbeitspaket_2026-10-23_structure_scheduler.md)
+Der [nächste Scheduler-Schritt](docs/history/next_arbeitspaket_2026-10-23_structure_scheduler.md)
 ist umgesetzt: fortsetzbare Strukturhypothesen teilen das Bildbudget und geben
 Alternativen eine Chance vor Sucherschöpfung. Die bestehende synthetische
 CLI-Matrix bleibt bei 7/9; Add/Remove/Replace und reale Abnahme bleiben offen.
 
 ## Vorheriger Fokus (2026-10-22)
 
-Die [eingefrorene Folgeprüfung](docs/next_arbeitspaket_2026-10-22_real_scene_transfer.md)
+Die [eingefrorene Folgeprüfung](docs/history/next_arbeitspaket_2026-10-22_real_scene_transfer.md)
 auf GE0018/GE0307 besteht mit unverändertem Algorithmus 0/2; beide Fälle gelten
 künftig als bekannt. GENERAL-SCENE-REAL-05 bleibt offen. Nächster Schritt ist
 GENERAL-SCENE-COMPOSITION-09 für die gemeinsame Komposition vorhandener Primitive;
@@ -31,7 +31,7 @@ bleibt `GENERAL-SCENE-REAL-05`: Der gemischte Szenenschritt rekonstruiert nun di
 bekannten Entwicklungsoriginale GE0026/GE0027; der erste eingefrorene reale
 Übertragungsversuch scheiterte und wird nicht nachträglich als Holdout-Erfolg
 gezählt. Zwei weitere neue reale Familien müssen ohne Nachstimmen bestehen.
-Das Archiv bleibt bei 379 Paaren. [Nachweise und Restaufgabe](docs/next_arbeitspaket_2026-10-22_mixed_gradient_scene.md).
+Das Archiv bleibt bei 379 Paaren. [Nachweise und Restaufgabe](docs/history/next_arbeitspaket_2026-10-22_mixed_gradient_scene.md).
 Die folgenden Rotationen und Zahlen sind historische Zwischenstände.
 
 ## Aktuelle Kandidaten (Stand: 2026-10-18, nach AC0232-Abnahme)
@@ -48,37 +48,37 @@ Pixelgrenze; ihre Originale und gespeicherten Bestresultate bleiben erhalten.
 und fortschrittsabhängige Bot-Anteile mit reservierter Erkundung.
 Nächstes Architekturpaket: `BENCHMARK-ANYTIME-01`. Die vollständige Aufsicht
 über den historischen Kompatibilitätsmodus bleibt separat offen.
-Details: `docs/next_arbeitspaket_2026-10-18_search_deadline.md`.
-Scheduler: `docs/next_arbeitspaket_2026-10-18_search_scheduler.md`.
-Details: `docs/next_arbeitspaket_2026-10-18_ac0232_m.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-18_search_deadline.md`.
+Scheduler: `docs/history/next_arbeitspaket_2026-10-18_search_scheduler.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-18_ac0232_m.md`.
 Review: `artifacts/evaluation/motor_valve_recheck_v1/review_args.json`.
 
 ## Vorheriger Abschluss: AC0921
 
 AC0921 M/L/S bestehen beide regulären und die strengen Pixelgates. Die allgemeine Kreis-/Buchstabenregistrierung unterstützt nun einen aus dem Raster bestimmten unteren Griff; eine unabhängige R-Vorlage besteht 17/17 echte CLI-Fälle. 374 Paare sind archiviert, alle 371 bisherigen Datensätze unverändert.
 Aktive Rotation: `AC0232_M`.
-Details: `docs/next_arbeitspaket_2026-10-18_ac0921_m.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-18_ac0921_m.md`.
 Review: `artifacts/evaluation/bottom_stem_letter_disk_recheck_v1/review_args.json`.
 
 ## Vorheriger Abschluss: GE0204
 
 GE0204 M/L/S bestehen beide regulären und die strengen Pixelgates. Der vorhandene allgemeine Flammenfit benötigt nur eine eigenständige Beschreibung. 371 Paare sind archiviert, alle 368 bisherigen Datensätze unverändert.
 Aktive Rotation: `AC0921_M`, `AC0232_M`.
-Details: `docs/next_arbeitspaket_2026-10-18_ge0204_m.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-18_ge0204_m.md`.
 Review: `artifacts/evaluation/nested_flame_disk_recheck_v1/review_args.json`.
 
 ## Vorheriger Abschluss: AC0910
 
 AC0910 L/M/S bestehen beide regulären und die strengen Pixelgates; zwei unabhängige CLI-Batterien mit mPa bestehen jeweils 17/17. 368 Paare sind archiviert, alle 365 bisherigen Datensätze bleiben unverändert.
 Aktive Rotation: `GE0204_M`, `AC0921_M`, `AC0232_M`.
-Details: `docs/next_arbeitspaket_2026-10-17_ac0910_l.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-17_ac0910_l.md`.
 Review: `artifacts/evaluation/short_label_lux_recheck_v1/review_args.json`.
 
 ## Vorheriger Abschluss: AC0411
 
 AC0411 ist mit neun Varianten regulär abgenommen; sechs bestehen auch das strenge Pixelgate. Der graue IoU-Folgepunkt bleibt offen. 365 Paare sind archiviert.
 Aktive Rotation: `AC0910_L`, `GE0204_M`, `AC0921_M`, `AC0232_M`.
-Details: `docs/next_arbeitspaket_2026-10-17_ac0411_1_m.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-17_ac0411_1_m.md`.
 
 ## Vorheriger Abschluss: SE0082
 
@@ -87,7 +87,7 @@ Quadrat-/Griff-/Textfit ist verallgemeinert; zwei unabhängige CLI-Batterien
 bestehen jeweils 17/17. 356 Paare sind archiviert, alle 355 bisherigen
 Einträge unverändert. Aktive Rotation:
 `AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`, `AC0232_M`.
-Details: `docs/next_arbeitspaket_2026-10-17_se0082.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-17_se0082.md`.
 Review: `artifacts/evaluation/left_stem_labeled_square_recheck_v1/review_args.json`.
 
 ## Vorheriger Abschluss: AC0840
@@ -96,7 +96,7 @@ AC0840 besteht mit S/M/L beide regulären und die strengeren Pixelgates.
 Eine unabhängige Kurztextvorlage besteht 17/17. 355 Paare sind archiviert;
 alle 352 bisherigen Einträge bleiben unverändert. Aktive Rotation:
 `SE0082`, `AC0411_1_M`, `AC0910_L`, `GE0204_M`, `AC0921_M`.
-Details: `docs/next_arbeitspaket_2026-10-17_ac0840_search.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-17_ac0840_search.md`.
 Review: `artifacts/evaluation/conversion_search_2026-10-17/review_args.json`.
 Die folgenden Abschnitte halten frühere Abnahmen und Rotationen fest.
 
@@ -105,7 +105,7 @@ ohne Pflichtmetrikregression (`AC0424_2_M: mean_delta2=128.702225`). Die sechs
 farbigen JPGs bestehen zusätzlich das strengere Pixelgate; die drei grauen
 IoU-Fälle bleiben separat offen. 352 Paare sind archiviert, alle 343 bisherigen
 Einträge unverändert. GE9033 ist bereits abgenommen und bleibt ausgeschlossen.
-Details: `docs/next_arbeitspaket_2026-10-17_ac0424_2_m.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-17_ac0424_2_m.md`.
 Reproduzierbarer Review: `artifacts/evaluation/oriented_spiral_disk_recheck_v1/review_args.json`.
 
 AC0414 besteht nach eigenständigen Beschreibungen und allgemeiner
@@ -116,7 +116,7 @@ zusätzlich die strengeren Pixelgrenzen; die drei grauen IoU-Fälle bleiben
 separat offen. Zwei unabhängige CLI-Läufe bestehen jeweils 17/17.
 Nur diese neun Varianten werden zusätzlich ausgeschlossen. 329 Paare
 stehen in der Erfolgsübersicht; alle 320 bisherigen Einträge bleiben unverändert.
-Details: `docs/next_arbeitspaket_2026-10-17_ac0414_2_l.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-17_ac0414_2_l.md`.
 Reproduzierbarer Review: `artifacts/evaluation/oriented_circle_linework_recheck_v1/review_args.json`.
 
 GE0305 besteht nach eigenständiger Beschreibung und allgemeiner Registrierung
@@ -124,7 +124,7 @@ senkrechter Flaggenstreifen beide regulären und strengeren Pixelgates ohne
 Pflichtmetrikregression (`mean_delta2=246.678757`). Zwei unabhängige CLI-Läufe
 bestehen jeweils 17/17. Nur das tatsächliche Flaggenbild wird zusätzlich
 ausgeschlossen; die drei Werkzeug-Raster bleiben als Quellenfolgepunkt offen.
-Details: `docs/next_arbeitspaket_2026-10-16_ge0305.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-16_ge0305.md`.
 Reproduzierbarer Review: `artifacts/evaluation/vertical_striped_panel_disk_recheck_v1/review_args.json`.
 
 GE1411 besteht nach eigenständiger Beschreibung und allgemeiner Registrierung
@@ -132,7 +132,7 @@ rechtwinkliger Achsen und einer analytischen Sinuskurve beide regulären und
 strengeren Pixelgates ohne Pflichtmetrikregression. Alle drei Größen sind
 abgenommen; zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Die Rotation
 erhält alle bisherigen Ausschlüsse und ergänzt nur diese drei Varianten.
-Details: `docs/next_arbeitspaket_2026-10-16_ge1411_l.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-16_ge1411_l.md`.
 Reproduzierbarer Review: `artifacts/evaluation/sine_diagram_recheck_v1/review_args.json`.
 
 GE9034 besteht nach eigenständiger Beschreibung und allgemeiner
@@ -141,7 +141,7 @@ Pixelgates ohne Pflichtmetrikregression (`GE9034_6M: mean_delta2=83.588753`).
 Alle 14 Farb-/Größenvarianten sind abgenommen. Zwei unabhängige CLI-Läufe
 bestehen jeweils 17/17. Bisherige Ausschlüsse bleiben erhalten;
 ausschließlich diese 14 Varianten kommen hinzu. Details:
-`docs/next_arbeitspaket_2026-10-16_ge9034_6m.md`.
+`docs/history/next_arbeitspaket_2026-10-16_ge9034_6m.md`.
 Reproduzierbarer Review: `artifacts/evaluation/side_gradient_junction_recheck_v1/review_args.json`.
 
 GE9031 besteht nach eigenständiger Beschreibung und allgemeiner Registrierung
@@ -149,7 +149,7 @@ der T-Verzweigung mit zwei nativen Farbverläufen beide regulären und strengere
 Pixelgates ohne Pflichtmetrikregression (`GE9031_6M: mean_delta2=95.981873`).
 Alle 14 Farb-/Größenvarianten sind abgenommen. Bisherige Ausschlüsse bleiben
 erhalten; ausschließlich diese 14 Varianten kommen hinzu. Details:
-`docs/next_arbeitspaket_2026-10-16_ge9031_6m.md`.
+`docs/history/next_arbeitspaket_2026-10-16_ge9031_6m.md`.
 Reproduzierbarer Review: `artifacts/evaluation/gradient_junction_recheck_v1/review_args.json`.
 
 GE0001 besteht nach eigenständiger Beschreibung und allgemeiner Registrierung
@@ -159,7 +159,7 @@ Alle sechs roten und blauen Größenvarianten sind abgenommen. Zwei unabhängige
 CLI-Läufe bestehen jeweils 17/17; die Archivprüfung besteht mit 274/274.
 Die Rotation
 erhält sämtliche Ausschlüsse und ergänzt nur diese sechs Varianten. Details:
-`docs/next_arbeitspaket_2026-10-15_ge0001_l.md`.
+`docs/history/next_arbeitspaket_2026-10-15_ge0001_l.md`.
 Reproduzierbarer Review: `artifacts/evaluation/warning_disk_recheck_v1/review_args.json`.
 
 GE0017 besteht nach eigenständiger Beschreibung und allgemeiner Registrierung
@@ -167,7 +167,7 @@ von Kreisscheibe und zwei gerundeten diagonalen Kreuzstrichen beide regulären
 und strengeren Pixelgates ohne Regression (`mean_delta2=490.495758`). Zwei
 unabhängige CLI-Läufe bestehen jeweils 17/17. Sämtliche Ausschlüsse bleiben
 erhalten; ausschließlich GE0017 kommt hinzu. Details:
-`docs/next_arbeitspaket_2026-10-15_ge0017.md`.
+`docs/history/next_arbeitspaket_2026-10-15_ge0017.md`.
 Reproduzierbarer Review: `artifacts/evaluation/diagonal_cross_disk_recheck_v1/review_args.json`.
 
 AC0850 zeigt in allen drei Größen einen P-Kreis. Die Korrektur beider
@@ -175,7 +175,7 @@ Katalogbeschreibungen aktiviert den unveränderten allgemeinen Registrierer;
 L/M/S bestehen beide regulären und alle strengeren Pixelgates ohne Regression.
 Zwei unabhängige CLI-Läufe bestehen jeweils 17/17. Die Rotation erhält sämtliche
 bisherigen Ausschlüsse und ergänzt nur diese drei Größen. Details:
-`docs/next_arbeitspaket_2026-10-15_ac0850_l.md`.
+`docs/history/next_arbeitspaket_2026-10-15_ac0850_l.md`.
 Reproduzierbarer Review: `artifacts/evaluation/p_letter_disk_recheck_v1/review_args.json`.
 
 `b_heating1` besteht nach eigenständiger Beschreibung und allgemeiner
@@ -183,7 +183,7 @@ Rasterregistrierung verschachtelter Flammen vor einer Verlaufsscheibe beide
 regulären und strengeren Gates (`mean_delta2=726.417908`). Eine unabhängig
 konstruierte Vorlage mit anderer Palette, Geometrie und Zungenanordnung
 besteht zweimal 17/17 echte CLI-Fälle.
-Details: `docs/next_arbeitspaket_2026-10-14_b_heating1.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-14_b_heating1.md`.
 
 Der erneuerte Review enthält 1.000 Einträge und 993 renderbare Paare. Alle 48
 Bestenlisteneinträge bleiben unter der unveränderten Reviewgrenze. Frühere
@@ -194,13 +194,13 @@ ausgeschlossen. Aufruf und Tabellen:
 `GE0300` besteht nach eigenständiger Beschreibung und allgemeiner Rasterregistrierung
 von Verlaufsscheibe, Rechteckfläche und rechtwinkligem Kreuz beide regulären
 und strengeren Gates (`mean_delta2=284.043915`). Eine unabhängige Vorlage besteht
-17/17 echte CLI-Fälle. Details: `docs/next_arbeitspaket_2026-10-14_ge0300.md`.
+17/17 echte CLI-Fälle. Details: `docs/history/next_arbeitspaket_2026-10-14_ge0300.md`.
 
 `GE0022.jpg` besteht nach allgemeiner horizontaler Pfeilregistrierung beide
 regulären und strengeren Gates (`mean_delta2=198.207550`), mit wiederholten
 17/17 unabhängigen CLI-Fällen. Die neun gleichnamigen Größen-/Farbvarianten
 zeigen Glocken und bleiben als eigener Quellenfolgepunkt offen. Details:
-`docs/next_arbeitspaket_2026-10-13_ge0022.md`.
+`docs/history/next_arbeitspaket_2026-10-13_ge0022.md`.
 
 Der reproduzierbare Review über `688` renderbare Paare zeigte am 2026-10-03,
 dass die damalige Plan-B-Spitze **nicht zufriedenstellend** war. Details und
@@ -220,14 +220,14 @@ Rechteckflächen beide Gates (`mean_delta2=468.700897`, `edge_alignment=0.903612
 Der graue, fremd benannte Holdout besteht ebenfalls ohne Regression. Die Abnahme
 verwendet eine zutreffende Beschreibung der sichtbaren Rechteckstruktur; die
 alte XML-Farbangabe „hellgraues Quadrat“ für das rote Raster bleibt als
-Datenqualitätsfolge dokumentiert. Details: `docs/next_arbeitspaket_2026-10-04_dlg0010_1.md`.
+Datenqualitätsfolge dokumentiert. Details: `docs/history/next_arbeitspaket_2026-10-04_dlg0010_1.md`.
 
 `AC0724_1_S` besteht nach der allgemeinen Hauptdiagonalspiegelung der
 Quadrat-/Griff-Topologie und rastergestützter Innenmarkierung beide Gates
 (`mean_delta2=569.914673`, `edge_alignment=0.842189`). M-/L-Holdouts bestehen
 ebenfalls ohne Regression. Die Innenkontur wird geometrisch erkannt; es wird
 kein T-Label im Parser vorausgesetzt. Details:
-`docs/next_arbeitspaket_2026-10-04_ac0724_1_s.md`.
+`docs/history/next_arbeitspaket_2026-10-04_ac0724_1_s.md`.
 
 `AC0252_1` besteht nach rastergestützter Kreis-/Dreieck-/Farbregistrierung
 beide Gates (`mean_delta2=458.776276`, `edge_alignment=0.939825`). Grüne und
@@ -235,14 +235,14 @@ graue Holdouts bestehen ebenfalls ohne Regression; drei unabhängige CLI-Läufe
 reproduzieren alle SVG-Bytes und Gate-Records. Die gemeinsame XML beschreibt
 jetzt zutreffend ein nach rechts zeigendes Dreieck und enthält keine falschen
 Farbangaben oder Griffreferenz. Details:
-`docs/next_arbeitspaket_2026-10-05_ac0252_1.md`.
+`docs/history/next_arbeitspaket_2026-10-05_ac0252_1.md`.
 
 `AC0731_1_L` besteht nach katalogfreier Quadrat-/Griff-/Textregistrierung
 beide Gates (`mean_delta2=920.249756`, `edge_alignment=0.964218`). Alle fünf
 Farb-/Größen-Holdouts bestehen ebenfalls ohne Regression. Der explizite Text
 bleibt einschließlich Groß-/Kleinschreibung erhalten; die gemeinsame XML
 beschreibt jetzt eigenständig Quadrat, unteren Griff und `P`. Details:
-`docs/next_arbeitspaket_2026-10-05_ac0731_1_l.md`.
+`docs/history/next_arbeitspaket_2026-10-05_ac0731_1_l.md`.
 
 `GE1003_M` besteht nach katalogfreier Haken-/Scheibenregistrierung beide
 Gates (`mean_delta2=401.955200`, `edge_alignment=0.922646`). L-/S-Holdouts
@@ -250,7 +250,7 @@ bestehen ebenfalls ohne Regression; zwei unabhängige CLI-Läufe reproduzieren
 alle SVG-Bytes und Gateentscheidungen. Die XML beschreibt die Topologie jetzt
 eigenständig. Native Radialverläufe bleiben im SVG erhalten; ein privater
 Renderadapter verhindert die schwarzen PyMuPDF-Artefakte. Details:
-`docs/next_arbeitspaket_2026-10-05_ge1003_m.md`.
+`docs/history/next_arbeitspaket_2026-10-05_ge1003_m.md`.
 
 `AC0404_1_L` besteht im aktuellen CLI bereits vor der Änderung beide Gates
 (`mean_delta2=89.825623`); der bisherige hohe Kandidatenwert stammt aus einer
@@ -258,21 +258,21 @@ alten Sammelausgabe. Alle 18 Farb-/Größen-/SIA-Varianten bestehen jetzt beide
 Gates ohne Metrikregression. Eine katalogfreie Flächenprüfung verwirft die
 fälschlich als Dreieck vereinfachten Kreissegmente und verbessert vier SIA-Fälle.
 Die XML beschreibt das Links-Dreieck eigenständig. Details:
-`docs/next_arbeitspaket_2026-10-05_ac0404_1_l.md`.
+`docs/history/next_arbeitspaket_2026-10-05_ac0404_1_l.md`.
 
 `GE9011_6M` besteht nach katalogfreier Dreieck-/Verlaufsschaft-Registrierung
 beide Gates (`mean_delta2=500.660004`, frische CLI-Baseline `15406.099609`).
 Alle 14 Farb-/Größenvarianten bestehen ohne Metrikregression; zwei unabhängige
 CLI-Läufe reproduzieren sämtliche 28 SVG-Bytes und Gateentscheidungen.
 Die gemeinsame XML beschreibt die Pfeiltopologie jetzt eigenständig. Details:
-`docs/next_arbeitspaket_2026-10-06_ge9011_6m.md`.
+`docs/history/next_arbeitspaket_2026-10-06_ge9011_6m.md`.
 
 `GE0281` besteht nach katalogfreier Kreis-/Radialverlauf-Registrierung beide
 Gates (`mean_delta2=308.333344`, frische CLI-Baseline `14981.222656`).
 Alle sechs Farbvarianten bestehen ohne Metrikregression; zwei unabhängige
 CLI-Läufe reproduzieren alle zwölf SVG-Bytes und Gateentscheidungen.
 Die XML für das Ziel und den grauen Holdout beschreibt die Kreisstruktur
-jetzt eigenständig. Details: `docs/next_arbeitspaket_2026-10-06_ge0281.md`.
+jetzt eigenständig. Details: `docs/history/next_arbeitspaket_2026-10-06_ge0281.md`.
 
 `GE9013_6M` besteht nach katalogfreier Richtungsnormalisierung der
 Dreieck-/Verlaufsschaft-Registrierung beide Gates (`mean_delta2=488.706665`,
@@ -280,7 +280,7 @@ frische CLI-Baseline `15279.816406`). Alle 14 Farb-/Größenvarianten bestehen
 ohne Pflichtmetrikregression; zwei unabhängige CLI-Läufe reproduzieren
 sämtliche 28 SVG-Bytes und Gateentscheidungen. Die gemeinsame XML beschreibt
 die Pfeilstruktur jetzt eigenständig. Details:
-`docs/next_arbeitspaket_2026-10-07_ge9013_6m.md`.
+`docs/history/next_arbeitspaket_2026-10-07_ge9013_6m.md`.
 
 Das Checkboxpaket `DLG0031` / `DLG0021` und das Dachlinienpaket `AC0554`
 sind inzwischen abgeschlossen. Das folgende Luftbefeuchterpaket `AC0130_S`
@@ -288,15 +288,15 @@ besteht mit M-/L-Holdouts beide Gates ohne Regression. Die vorhandene
 SVG-Vorlage hat eine abweichende Liniengruppen-/Balkenstruktur und besteht
 mit zwei Seeds jeweils 16/16 unveränderte Roundtrip-Gates. Alle CLI-SVG-Bytes
 und Gateentscheidungen sind reproduzierbar. Details:
-`docs/next_arbeitspaket_2026-10-08_ac0130_s.md`.
+`docs/history/next_arbeitspaket_2026-10-08_ac0130_s.md`.
 
 Die Alarmglocke `GE1420_S` ist mit M-/L- und neutraler Variante abgeschlossen;
 alle vier bestehen die regulären Gates. Details:
-`docs/next_arbeitspaket_2026-10-08_ge1420_s.md`.
+`docs/history/next_arbeitspaket_2026-10-08_ge1420_s.md`.
 Das folgende Quadrat-/Griffpaket `AC0704_1_L` besteht mit allen sechs roten
 und hellgrauen Größenvarianten beide regulären Gates und die strengeren
 Plan-B-Pixelgrenzen. Zwei CLI-Läufe reproduzieren alle zwölf SVGs und
-Gateentscheidungen. Details: `docs/next_arbeitspaket_2026-10-08_ac0704_1_l.md`.
+Gateentscheidungen. Details: `docs/history/next_arbeitspaket_2026-10-08_ac0704_1_l.md`.
 
 `AC0402_1_S` besteht mit allen 18 gefüllten Farb-/Größen-/SIA-Varianten beide
 regulären Gates ohne Pflichtmetrikregression. Die frische Ziel-CLI-Baseline
@@ -305,7 +305,7 @@ vorhandene Kreis-/Dreieckregistrierung ohne Runtime-Algorithmusänderung.
 Die SVG-Vorlage besteht mit zwei Seeds jeweils 16/16 strengere Plan-B-Gates.
 Fünf JPG-Varianten verfehlen die separate strengere IoU-Grenze; drei ungefüllte
 Konturdreieck-Raster sind separat beschrieben und nicht Teil dieser Abnahme.
-Details: `docs/next_arbeitspaket_2026-10-08_ac0402_1_s.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-08_ac0402_1_s.md`.
 
 `AC0403_1_L` und alle 18 Farb-/Größen-/SIA-Varianten bestehen bereits mit
 der frischen CLI-Baseline beide regulären Gates. Das historische Ziel-SVG
@@ -314,7 +314,7 @@ Die XML-Präzisierung mit absoluter Richtung nach unten verändert keine
 SVG-Bytes; die Runtime bleibt unverändert. Zwei unabhängige Abnahmen
 reproduzieren alle SVGs und Gates. 11/18 JPG-Varianten bestehen zusätzlich
 die strengere Plan-B-Prüfung; deren vollständiger Nachweis bleibt offen.
-Details: `docs/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-09_ac0403_1_l.md`.
 
 1. `SE0082` – `mean_delta2=9194.764648`, `normalized_mse=0.047135`.
 2. `AC0411_1_M` – `mean_delta2=9132.411133`, `normalized_mse=0.046815`.
@@ -329,7 +329,7 @@ Die frische Zielmetrik mit vollständigem Originalkatalog sinkt von
 konstruiertes M-Quadrat und zwei identische 17/17-CLI-Batterien sichern den
 vorhandenen allgemeinen Registrierer ab. Alle Vorher-/Nachher-SVGs und
 Gateentscheidungen sind reproduziert. Details:
-`docs/next_arbeitspaket_2026-10-11_se0081.md`.
+`docs/history/next_arbeitspaket_2026-10-11_se0081.md`.
 
 `GE9021_1M` und alle 13 Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und allgemeiner Richtungsnormalisierung beide regulären Gates
@@ -337,7 +337,7 @@ sowie sämtliche strengeren Pixelgrenzen ohne Pflichtmetrikregression.
 Die frische Zielmetrik sinkt von `12463.036133` auf `194.409164`; die unabhängige
 Vorlage besteht 17/17 echte CLI-Fälle. Alle 28 Katalog-SVGs und die 17 Plan-B-
 Ausgaben samt Metriken sind reproduziert. Details:
-`docs/next_arbeitspaket_2026-10-11_ge9021_1m.md`.
+`docs/history/next_arbeitspaket_2026-10-11_ge9021_1m.md`.
 
 `AC0734_1_S` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und allgemeiner Rechtsgriff-/Textregistrierung beide regulären
@@ -345,28 +345,28 @@ Gates ohne Pflichtmetrikregression und sämtliche strengeren Pixelgrenzen.
 Die frische Zielmetrik sinkt von `18331.007812` auf `601.298645`; eine unabhängige
 Vorlage besteht 17/17 echte CLI-Fälle. Alle zwölf Katalog-SVGs und die
 17 Plan-B-Ausgaben samt Metriken sind reproduziert. Details:
-`docs/next_arbeitspaket_2026-10-11_ac0734_1_s.md`.
+`docs/history/next_arbeitspaket_2026-10-11_ac0734_1_s.md`.
 
 `AC0712_1_S` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und allgemeiner Linksgriff-/Strich-/Punktregistrierung beide
 regulären Gates ohne Pflichtmetrikregression und die strengeren Pixelgrenzen.
 Die frische Zielmetrik sinkt von `3822.055908` auf `261.666656`; eine unabhängige
 Vorlage besteht 17/17 echte CLI-Fälle. Details:
-`docs/next_arbeitspaket_2026-10-11_ac0712_1_s.md`.
+`docs/history/next_arbeitspaket_2026-10-11_ac0712_1_s.md`.
 
 `GE9014_1M` und alle 13 Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und allgemeiner horizontaler Pfeilregistrierung beide regulären
 Gates ohne Pflichtmetrikregression sowie die strengeren Plan-B-Pixelgrenzen.
 Die frische Zielmetrik sinkt von `13053.991211` auf `19.939167`; eine unabhängige
 Vorlage besteht 17/17 strenge CLI-Fälle. Die 28 bisherigen vertikalen Pfeile
-behalten exakt ihre SVGs. Details: `docs/next_arbeitspaket_2026-10-10_ge9014_1m.md`.
+behalten exakt ihre SVGs. Details: `docs/history/next_arbeitspaket_2026-10-10_ge9014_1m.md`.
 
 `AC0711_1_M` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und allgemeiner Registrierung des unteren Griffs mit Strich und
 Punkt beide regulären Gates ohne Pflichtmetrikregression sowie die strengeren
 Plan-B-Pixelgrenzen. Die frische Zielmetrik sinkt von `1859.969971` auf
 `45.307144`; eine unabhängige SVG-Vorlage besteht **17/17** strenge CLI-Fälle.
-Details: `docs/next_arbeitspaket_2026-10-10_ac0711_1_m.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-10_ac0711_1_m.md`.
 Der jüngste gekoppelte CI-Lauf ist mit zwei offenen Aufgaben dokumentiert:
 [#1908](https://github.com/MobyDickDick/ImageConverter/issues/1908) und
 [#1909](https://github.com/MobyDickDick/ImageConverter/issues/1909).
@@ -378,35 +378,35 @@ Ziel-CLI-Baseline sinkt von `3282.783936` auf `481.410675`. Eine unabhängige
 SVG-Vorlage besteht mit zwei Seeds jeweils 17/17 strenge Plan-B-Prüfungen.
 Die sechs Paare sind zusätzlich in der Erfolgsübersicht abgelegt; der große
 graue JPG-IoU-Fall bleibt separat offen. Details und erneuerter Review-Aufruf:
-`docs/next_arbeitspaket_2026-10-10_ac0721_1_s.md`.
+`docs/history/next_arbeitspaket_2026-10-10_ac0721_1_s.md`.
 
 `AC0714_L` und alle fünf Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung und rastergestützter Strich-/Punktregistrierung beide regulären
 Gates ohne Pflichtmetrikregression sowie die strengeren Plan-B-Pixelgrenzen.
 Die frische Ziel-CLI-Baseline verbessert sich von `33066.082031` auf `24.314667`.
 Zwei unabhängige Läufe reproduzieren sämtliche SVGs und Gateentscheidungen.
-Details: `docs/next_arbeitspaket_2026-10-09_ac0714_l.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-09_ac0714_l.md`.
 
 `GE0032` (Abwärtspfeil) und die drei Kreisscheiben-Größenvarianten bestehen
 nach eigenständigen Beschreibungen, allgemeiner Rasterregistrierung und
 nativer Verlaufsdarstellung beide regulären und die strengeren Plan-B-Gates.
 Alle acht CLI-SVGs und Gateentscheidungen sind reproduzierbar; die originalen
 Vorher-Ausgaben bleiben bytegleich. Details:
-`docs/next_arbeitspaket_2026-10-09_ge0032.md`.
+`docs/history/next_arbeitspaket_2026-10-09_ge0032.md`.
 `GE9023_6M` und alle 13 Farb-/Größen-Holdouts bestehen nach eigenständiger
 Beschreibung, U-Bogen-/Verlaufsschaftregistrierung und nativer Rechteck-
 Verlaufsmaske beide regulären Gates ohne Pflichtmetrikregression sowie die
 strengeren Plan-B-Pixelgrenzen. Zwei CLI-Abnahmen reproduzieren alle 28 SVGs
 und Gate-Fallrecords. 178 fokussierte Tests bestehen. Die zusätzliche synthetische
 Stressprüfung bleibt mit 12/17 Fällen offen; vier unabhängige Geometrieprüfungen
-und Negativfälle bestehen. Details: `docs/next_arbeitspaket_2026-10-09_ge9023_6m.md`.
+und Negativfälle bestehen. Details: `docs/history/next_arbeitspaket_2026-10-09_ge9023_6m.md`.
 `AC0413_1_M` und alle acht Farb-/Größenvarianten bestehen nach eigenständiger
 Beschreibung und rastergestützter Kreis-/Linienregistrierung beide regulären
 Gates ohne Pflichtmetrikregression. Die frische CLI-Baseline sinkt von
 `9107.812500` auf `257.785553`. Drei CLI-Abnahmen reproduzieren alle 18 SVG-Bytes;
 ein unabhängiges synthetisches SVG besteht mit zwei Seeds jeweils 17/17 strenge
 Plan-B-Prüfungen. Die drei grauen JPG-IoU-Fälle bleiben separat offen.
-Details: `docs/next_arbeitspaket_2026-10-10_ac0413_1_m.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-10_ac0413_1_m.md`.
 Die nächste reguläre Rotation beginnt mit `GE9014_1M`; vor Änderungen ist eine
 frische CLI-Baseline erforderlich. Der Review über 1.000 Einträge (993 renderbare
 Paare) und sein exakter Aufruf stehen im kompakten Nachweis
@@ -433,18 +433,18 @@ dem eingefrorenen Vorlauf. Der Beleg steht in
 `artifacts/evaluation/rotated_square_kelle_recheck_v1/report_2026-10-04.json`.
 Die helle Innenmarkierung bleibt eine dokumentierte visuelle Qualitätsfolge;
 das CLI meldet dafür weiterhin konzentrierten Restfehler. Details stehen in
-`docs/next_arbeitspaket_2026-10-04_ac0713_1_s.md`.
+`docs/history/next_arbeitspaket_2026-10-04_ac0713_1_s.md`.
 
 ## Ad-hoc Plan-B-Aufgabe (2026-07-05)
 
-- `AC0512_1_L` – vom Nutzer angefragte Generalisierungsaufgabe für ein querformatiges rotes/oranges Rechteck-Icon mit grauem Rand und drei parallelen weissen Diagonalstreifen. Die Aufgabe ist als separater Plan-B-Contract dokumentiert in `docs/next_arbeitspaket_2026-07-05_runVI.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
-- `AC0832` – vom Nutzer angefragte Generalisierungsaufgabe für eine linke Kelle mit runder CO²-Scheibe und hochgestellter `2`. Die Aufgabe ist als separater Plan-B-Contract dokumentiert in `docs/next_arbeitspaket_2026-07-05_runVJ.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
-- `AC0840_L` – vom Nutzer angefragte Plan-B-Aufgabe für ein 28×28-AC08-`rF`-Kreisbadge, bei dem die bisherige Konvertierung den Text zu klein und gegenüber der Vorlage versetzt rendert. Die Aufgabe ist als separater Textregistrierungs-Contract dokumentiert in `docs/next_arbeitspaket_2026-07-08_runVX.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
-- `AC0213_L` – aus dem neu hinzugefügten Sample `artifacts/images_to_convert/samples/AC0213_L.svg` abgeleitete Generalisierungsaufgabe für ein linksorientiertes Ventilsymbol mit grauem Verlaufskörper, Leitungsanschlüssen und `M`-Glyph. Die Aufgabe ist als sample-basierter Roundtrip-Contract dokumentiert in `docs/next_arbeitspaket_2026-07-11_runXJ.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
-- `AC0552_2_L` – aus dem neu hinzugefügten Sample `artifacts/images_to_convert/samples/AC0552_2_L.svg` abgeleitete Generalisierungsaufgabe für ein flaches grünes Chevron-/Pfeilsegment mit mehrstufigem Vertikalgradienten und beschnittener Innenkontur. Die Aufgabe ist als sample-basierter Roundtrip-Contract dokumentiert in `docs/next_arbeitspaket_2026-07-11_runXJ.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
-- `AC0502_1L_sia` – sample-basierte Plan-B-Aufgabe für die 80×40-Variante aus grauer Diagonalverbindung, Kreis und rotem Diagrammfeld mit weissem Kreuz; Roundtrip-Baseline `delta2=497.845640`. Der Contract und die Abgrenzung zur fachlich anders beschriebenen AC0502-Familie stehen in `docs/next_arbeitspaket_2026-07-31_runABH.md`.
-- `AC0502_1M_sia` – Skalierungs-/Generalisierungsaufgabe derselben Primitive auf 60×30 statt eine zweite ID-spezifische Nachzeichnung; Roundtrip-Baseline `delta2=465.142682`. Der gemeinsame Familien-Contract steht in `docs/next_arbeitspaket_2026-07-31_runABH.md`.
-- `AC0538_1L_sia` – sample-basierte Plan-B-Aufgabe für die verwandte Diagrammvariante mit grauer Rahmenkontur und weisser Stufenkurve; Historische Roundtrip-Baseline `delta2=1629.625242`; die aktuelle Parametervariation besteht 32/32 Qualitätsgates, siehe `docs/plan_b_variation_acceptance.md`. Der Klassifikations-/Perception-Contract steht in `docs/next_arbeitspaket_2026-07-31_runABH.md`.
+- `AC0512_1_L` – vom Nutzer angefragte Generalisierungsaufgabe für ein querformatiges rotes/oranges Rechteck-Icon mit grauem Rand und drei parallelen weissen Diagonalstreifen. Die Aufgabe ist als separater Plan-B-Contract dokumentiert in `docs/history/next_arbeitspaket_2026-07-05_runVI.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
+- `AC0832` – vom Nutzer angefragte Generalisierungsaufgabe für eine linke Kelle mit runder CO²-Scheibe und hochgestellter `2`. Die Aufgabe ist als separater Plan-B-Contract dokumentiert in `docs/history/next_arbeitspaket_2026-07-05_runVJ.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
+- `AC0840_L` – vom Nutzer angefragte Plan-B-Aufgabe für ein 28×28-AC08-`rF`-Kreisbadge, bei dem die bisherige Konvertierung den Text zu klein und gegenüber der Vorlage versetzt rendert. Die Aufgabe ist als separater Textregistrierungs-Contract dokumentiert in `docs/history/next_arbeitspaket_2026-07-08_runVX.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
+- `AC0213_L` – aus dem neu hinzugefügten Sample `artifacts/images_to_convert/samples/AC0213_L.svg` abgeleitete Generalisierungsaufgabe für ein linksorientiertes Ventilsymbol mit grauem Verlaufskörper, Leitungsanschlüssen und `M`-Glyph. Die Aufgabe ist als sample-basierter Roundtrip-Contract dokumentiert in `docs/history/next_arbeitspaket_2026-07-11_runXJ.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
+- `AC0552_2_L` – aus dem neu hinzugefügten Sample `artifacts/images_to_convert/samples/AC0552_2_L.svg` abgeleitete Generalisierungsaufgabe für ein flaches grünes Chevron-/Pfeilsegment mit mehrstufigem Vertikalgradienten und beschnittener Innenkontur. Die Aufgabe ist als sample-basierter Roundtrip-Contract dokumentiert in `docs/history/next_arbeitspaket_2026-07-11_runXJ.md` und soll nicht die fünf automatisch triagierten aktiven Kandidaten verdrängen.
+- `AC0502_1L_sia` – sample-basierte Plan-B-Aufgabe für die 80×40-Variante aus grauer Diagonalverbindung, Kreis und rotem Diagrammfeld mit weissem Kreuz; Roundtrip-Baseline `delta2=497.845640`. Der Contract und die Abgrenzung zur fachlich anders beschriebenen AC0502-Familie stehen in `docs/history/next_arbeitspaket_2026-07-31_runABH.md`.
+- `AC0502_1M_sia` – Skalierungs-/Generalisierungsaufgabe derselben Primitive auf 60×30 statt eine zweite ID-spezifische Nachzeichnung; Roundtrip-Baseline `delta2=465.142682`. Der gemeinsame Familien-Contract steht in `docs/history/next_arbeitspaket_2026-07-31_runABH.md`.
+- `AC0538_1L_sia` – sample-basierte Plan-B-Aufgabe für die verwandte Diagrammvariante mit grauer Rahmenkontur und weisser Stufenkurve; Historische Roundtrip-Baseline `delta2=1629.625242`; die aktuelle Parametervariation besteht 32/32 Qualitätsgates, siehe `docs/plan_b_variation_acceptance.md`. Der Klassifikations-/Perception-Contract steht in `docs/history/next_arbeitspaket_2026-07-31_runABH.md`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -454,14 +454,14 @@ dem Raster bestimmt, ohne Katalogkennung oder Referenzvektor. Ein neutraler
 Bildname, unabhängige Geometrie-/Farb-/Lage-/Auflösungstests und die echte
 17-Fälle-CLI-Abnahme sichern die Übertragung ab. Fehlende Primitive, zusätzliche
 Objekte und widersprüchliche Beschreibungen werden ausgeschlossen. Details:
-`docs/next_arbeitspaket_2026-10-14_ge0300.md`.
+`docs/history/next_arbeitspaket_2026-10-14_ge0300.md`.
 
 Aktueller Recheck: Quadrat, rechter Griff und beschriebener schräger Strich mit
 quadratischem Punkt sind für die geprüften Raster `generalisiert`. Alle sechs
 echten Varianten bestehen beide regulären und die strengeren Plan-B-Gates.
 Unabhängige Geometrie-, Farb-/Kontrast-, Lage- und Auflösungstests sowie
 Umbenennung sind abgesichert. Fehlende oder zusätzliche Innenbefunde werden
-verworfen. Details: `docs/next_arbeitspaket_2026-10-09_ac0714_l.md`.
+verworfen. Details: `docs/history/next_arbeitspaket_2026-10-09_ac0714_l.md`.
 
 Vorheriger Recheck: Die vorhandene Kreis-/Dreieckregistrierung ist für 18
 gefüllte Rechts-Dreieck-Raster `generalisiert`. Eine eigenständige Beschreibung
@@ -469,7 +469,7 @@ aktiviert den bestehenden Algorithmus; es gibt keine neue Runtime-Regel.
 Alle 18 bestehen die regulären Gates, die SVG-Vorlage mit zwei Seeds jeweils
 16/16 strengere Plan-B-Gates. Die fünf strengeren JPG-IoU-Folgen und drei
 Konturdreieck-Raster bleiben außerhalb dieses engeren Nachweises.
-Details: `docs/next_arbeitspaket_2026-10-08_ac0402_1_s.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-08_ac0402_1_s.md`.
 
 Vorheriger Recheck: Die unbeschriftete Quadrat-/Griff-Topologie ist für die
 geprüften Raster `generalisiert`. Lage, Größe, Rand-/Griffbreite und Farben
@@ -477,7 +477,7 @@ stammen aus den Pixeln; alle sechs echten Fälle bestehen beide regulären und
 die strengeren Plan-B-Gates. Unabhängige Farb-/Lage-/Auflösungstests und
 Umbenennung sind abgesichert. Fehlender Griff, zusätzliche Objekte und
 kontrastreiche Innenmarkierungen werden verworfen. Details:
-`docs/next_arbeitspaket_2026-10-08_ac0704_1_l.md`.
+`docs/history/next_arbeitspaket_2026-10-08_ac0704_1_l.md`.
 
 Vorheriger Recheck: Zickzack-/Innenrahmen- und Liniengruppen-/Balkenregistrierung
 sind für die geprüften Luftbefeuchterstrukturen `generalisiert`. Die drei
@@ -487,48 +487,48 @@ Wiederholungsperiode, Lage, Strichbreiten und Verlauf stammen aus den Pixeln.
 Synthetische Farb-/Lage-/Auflösungstests, neutrale Namen und verbotener
 Sample-Zugriff sind abgesichert. Die Andreaskreuz-Variante ist separat und
 gehört nicht zu diesem Generalisierungsnachweis. Details:
-`docs/next_arbeitspaket_2026-10-08_ac0130_s.md`.
+`docs/history/next_arbeitspaket_2026-10-08_ac0130_s.md`.
 
 Aktueller Recheck: Vertikale Pfeile mit Dreieck und getrenntem Verlaufsschaft
 sind für beide Richtungen `generalisiert`. Alle 14 nach unten gerichteten
 Farb-/Größenvarianten sowie zusätzliche Lage-, Größen- und Farbtests bestehen;
 Umbenennung, Negativfälle und verbotener Sample-Zugriff sind abgesichert.
 Die zufällige Diagramm-/Stufenkurvenaufgabe ist für die geprüften Varianten `generalisiert`.
-Details: `docs/next_arbeitspaket_2026-10-07_ge9013_6m.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-07_ge9013_6m.md`.
 
 Aktueller Recheck: Die Unterscheidung zwischen einem Dreieck und dem gekrümmten
 Kreissegment ist `generalisiert`. Sie verwendet das Verhältnis der beobachteten
 Fläche zur vereinfachten Dreiecksfläche ohne Katalogkennung. Alle 18 Varianten
 bestehen beide Gates; explizite Richtungen, Größen-/Farbvariation, Umbenennung
 und falsche Topologien sind abgesichert. Details:
-`docs/next_arbeitspaket_2026-10-05_ac0404_1_l.md`.
+`docs/history/next_arbeitspaket_2026-10-05_ac0404_1_l.md`.
 
 Vorheriger Recheck: Haken-/Scheibenregistrierung sind `generalisiert`;
 Ziel und zwei Größen-Holdouts bestehen beide Gates. Umbenennung, verschobene
 Lage, doppelte Größe, zwei Grüntöne und Negativfälle sind abgesichert. Der
 Renderadapter erhält native Radialverläufe in den gespeicherten SVGs.
-Details: `docs/next_arbeitspaket_2026-10-05_ge1003_m.md`.
+Details: `docs/history/next_arbeitspaket_2026-10-05_ge1003_m.md`.
 
 Vorheriger Recheck: Quadrat-/Griff-/Textregistrierung sind `generalisiert`;
 Ziel und fünf Farb-/Größen-Holdouts bestehen beide Gates. Umbenennung, exaktes
 beschriebenes `P`, andere Farben, verschobene Lage, doppelte Größe und die
 Einzelbuchstaben `P`, `M`, `T` sind abgesichert. Details stehen in
-`docs/next_arbeitspaket_2026-10-05_ac0731_1_l.md`.
+`docs/history/next_arbeitspaket_2026-10-05_ac0731_1_l.md`.
 
 Vorheriger Recheck: Kreis-/Dreieck-/Farbregistrierung sind `generalisiert`;
 Ziel sowie zwei Farb-Holdouts bestehen beide Gates. Umbenennung, andere Farben,
 verschobene Lage, doppelte Größe und vier Richtungen sind abgesichert.
-Details stehen in `docs/next_arbeitspaket_2026-10-05_ac0252_1.md`.
+Details stehen in `docs/history/next_arbeitspaket_2026-10-05_ac0252_1.md`.
 
 Vorheriger Recheck: Hauptdiagonalspiegelung und rastergestützte Innenmarkierung
 sind `generalisiert`; Ziel und zwei Größen-Holdouts bestehen beide Gates,
 Umbenennung und synthetische Farb-/Lage-/Größenvariationen sind abgesichert.
-Details stehen in `docs/next_arbeitspaket_2026-10-04_ac0724_1_s.md`.
+Details stehen in `docs/history/next_arbeitspaket_2026-10-04_ac0724_1_s.md`.
 
 Vorheriger Recheck: Die Erkennung verschachtelter Rechteckflächen ist
 `generalisiert`; sie überträgt Lage, Farben und Größen aus dem Raster auf zwei
 SVG-Primitive und besteht Ziel-/Holdout-Gates sowie Farb-/Größenvariationen.
-Der Beleg steht in `docs/next_arbeitspaket_2026-10-04_dlg0010_1.md`.
+Der Beleg steht in `docs/history/next_arbeitspaket_2026-10-04_dlg0010_1.md`.
 Die folgenden Run-SR-/PF8-Notizen dokumentieren den historischen Verlauf.
 
 Die Run-SR-Triage ersetzt die erledigte `GE1001_M`/`GE9021_7M`-Rotation durch fünf kleinere Diff-Fälle. Vor der konkreten Nachzeichnung ist für `DLG0021` zu prüfen, ob die dominanten grafischen Primitive bereits als katalogfreie Perception-Kandidaten (`color_patch`, `polygon_path`, `line`, `rectangle` oder `text_glyph`) auftauchen. Der Lerneffekt wird pro Kandidat im nächsten Arbeitspaket als `generalisiert`, `nur Sonderfall` oder `noch nicht erkannt` dokumentiert.

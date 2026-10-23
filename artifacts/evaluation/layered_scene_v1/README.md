@@ -29,5 +29,5 @@ Runtime-Metadaten sind aufbewahrte Beobachtungen der ursprünglichen Versuche;
 der kompakte Prüfer erzeugt keine neuen Laufzeitmessungen. Vollständige
 ursprüngliche CLI-Berichte und -Protokolle liegen lokal unter
 `.tmp/general-scene-*`. CI erzeugt einen eigenen Lauf und lädt dessen
-vollständige Ausgaben hoch. Siehe [Arbeitspaket](../../../docs/next_arbeitspaket_2026-10-20_layered_scene.md)
+vollständige Ausgaben hoch. Siehe [Arbeitspaket](../../../docs/history/next_arbeitspaket_2026-10-20_layered_scene.md)
 für reproduzierbare neue CLI-Versuche, Prüftrennung und Grenzen.

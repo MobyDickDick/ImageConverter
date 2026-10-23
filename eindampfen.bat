@@ -83,7 +83,7 @@ rem Nicht nur dem Exitcode vertrauen: Diese versionierten Beispieldateien muesse
 rem nach einem wirksamen Sparse-Checkout physisch aus der Arbeitskopie fehlen.
 if exist "docs\README.md" goto :sparse_failed
 if exist "vendor\linux-py310\site-packages\PIL\AvifImagePlugin.py" goto :sparse_failed
-if exist "artifacts\converted_images\commented_diff_images\AC0020_M_commented_diff.png" goto :sparse_failed
+if exist "artifacts\converted_images\reports\conversion_bestlist.csv" goto :sparse_failed
 if exist "artifacts\images_to_convert\AC0010.jpg" goto :sparse_failed
 
 echo.

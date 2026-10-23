@@ -25,7 +25,7 @@ Abnahmebeleg vorliegt.
 ## ZG7.1 – Echtes Zwei-Quellen-Fixture und Runner
 
 **Status:** Abgeschlossen am 2026-10-03; Abnahmebeleg und Reproduktionsbefehl
-stehen in `docs/next_arbeitspaket_2026-10-03_zg7_1.md`.
+stehen in `docs/history/next_arbeitspaket_2026-10-03_zg7_1.md`.
 
 **Ziel:** Den bisherigen Description-Render-Smoke durch einen echten
 End-to-End-Aufruf des `semantic-only`-Konverters ergänzen.
@@ -57,7 +57,7 @@ End-to-End-Aufruf des `semantic-only`-Konverters ergänzen.
 **Abhängigkeit:** ZG7.1
 
 **Status:** Abgeschlossen am 2026-10-03; Vertrag, Kalibrierung und Messbefund
-stehen in `docs/next_arbeitspaket_2026-10-03_zg7_2.md`.
+stehen in `docs/history/next_arbeitspaket_2026-10-03_zg7_2.md`.
 
 **Ziel:** Qualität statt bloßer Deterministik messen.
 
@@ -89,7 +89,7 @@ stehen in `docs/next_arbeitspaket_2026-10-03_zg7_2.md`.
 **Abhängigkeit:** ZG7.2
 
 **Status:** Abgeschlossen am 2026-10-03; Vertrag, Konfliktprotokoll und
-Abnahmebeleg stehen in `docs/next_arbeitspaket_2026-10-03_zg7_3.md`.
+Abnahmebeleg stehen in `docs/history/next_arbeitspaket_2026-10-03_zg7_3.md`.
 
 **Ziel:** Beschreibung und Bildbefund gemeinsam zur richtigen Topologie führen.
 
@@ -120,7 +120,7 @@ Abnahmebeleg stehen in `docs/next_arbeitspaket_2026-10-03_zg7_3.md`.
 
 **Status:** Abgeschlossen am 2026-10-03; Optimierungsvertrag,
 Konvergenzprotokoll und Abnahmebeleg stehen in
-`docs/next_arbeitspaket_2026-10-03_zg7_4.md`.
+`docs/history/next_arbeitspaket_2026-10-03_zg7_4.md`.
 
 **Ziel:** Geometrie, Kontur, Farbe und Semantik verbessern, ohne die Topologie
 zu beschädigen.
@@ -151,7 +151,7 @@ zu beschädigen.
 
 **Status:** Abgeschlossen am 2026-10-03; versiegelte Baseline,
 Vorher-/Nachher-Report und Gateentscheidungen stehen in
-`docs/next_arbeitspaket_2026-10-03_zg7_5.md`.
+`docs/history/next_arbeitspaket_2026-10-03_zg7_5.md`.
 
 **Ziel:** Eine Verbesserung und ein zufriedenstellendes Resultat getrennt und
 ehrlich ausweisen.
@@ -184,7 +184,7 @@ ehrlich ausweisen.
 **Status:** Abgeschlossen am 2026-10-04; der katalogfreie Pilot, der fremd
 benannte Holdout und die positive Gateentscheidung nach allgemeinem
 Polyline-Kantenfit stehen in
-`docs/next_arbeitspaket_2026-10-04_zg7_6.md`.
+`docs/history/next_arbeitspaket_2026-10-04_zg7_6.md`.
 
 **Ziel:** Den neuen Pfad an einem echten, bislang unzufriedenstellenden
 Plan-B-Fall prüfen, ohne dafür katalogspezifischen Code hinzuzufügen.

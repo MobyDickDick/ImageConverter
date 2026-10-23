@@ -14,7 +14,7 @@ A clean checkout regenerates a run before verification; compact summaries
 alone do not replace independently rerendering outputs.
 
 Protocol, limitations, results and next work:
-[NEURAL-ELEMENTS-REAL-02](../../../docs/next_arbeitspaket_2026-10-19_neural_real_regions.md).
+[NEURAL-ELEMENTS-REAL-02](../../../docs/history/next_arbeitspaket_2026-10-19_neural_real_regions.md).
 
 ```powershell
 .venv/Scripts/python.exe -m tools.run_real_neural_elements --output-dir .tmp/neural-real-study --work-dir .tmp/neural-real-work

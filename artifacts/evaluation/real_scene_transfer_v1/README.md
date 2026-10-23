@@ -17,4 +17,4 @@ paths; verification uses retained files relative to here.
 
 Exit 0 verifies consistent evidence without rerunning the converter. Add
 `--require-all` to demand positive acceptance: this experiment must return 1.
-See [scope, causes and next development](../../../docs/next_arbeitspaket_2026-10-22_real_scene_transfer.md).
+See [scope, causes and next development](../../../docs/history/next_arbeitspaket_2026-10-22_real_scene_transfer.md).

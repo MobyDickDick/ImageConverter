@@ -29,7 +29,7 @@ IMAGE_DIRS = (
 )
 SVG_DIRS = (
     Path("artifacts/converted_images/converted_svgs"),
-    Path("src/artifacts/converted_images/converted_svgs"),
+    Path("artifacts/regression_baseline/legacy_ac08/svgs"),
     Path("artifacts/regression_baseline/satisfactory/svgs"),
     Path("artifacts/converted_images/reports/conversion_bestlist_snapshots"),
 )

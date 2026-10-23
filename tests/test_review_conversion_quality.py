@@ -368,7 +368,7 @@ def test_ac0835_l_committed_svg_is_below_review_threshold() -> None:
     record = review_variant(
         "AC0835_L",
         source="successful_conversion",
-        svg_dirs=(Path("src/artifacts/converted_images/converted_svgs"),),
+        svg_dirs=(Path("artifacts/regression_baseline/legacy_ac08/svgs"),),
     )
 
     assert record.status == "ok"

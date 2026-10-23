@@ -25,4 +25,4 @@ Die Aufgabe ist als Ursachenuntersuchung abgeschlossen, nicht als Zusage
 einer von Standby und Systemplanung unabhängigen Echtzeitgarantie.
 
 Reproduktion, Änderungen und Grenzen:
-[Paketdokumentation](../../../docs/next_arbeitspaket_2026-10-22_deadline_overrun_audit.md).
+[Paketdokumentation](../../../docs/history/next_arbeitspaket_2026-10-22_deadline_overrun_audit.md).

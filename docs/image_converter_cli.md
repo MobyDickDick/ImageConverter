@@ -19,7 +19,7 @@ Schalter in `reports/<name>_components.jsonl`. Qualitätsprüfungen bleiben akti
 `python -m tools.run_component_value --output-dir .tmp/component-study --work-dir .tmp/component-study-work`
 startet echte gepaarte Konvertierungen mit unabhängiger SVG-Prüfung statt einer
 Bewertung mit Ersatzscores. Protokoll, Grenzen und Abnahme:
-[COMPONENT-VALUE-01](next_arbeitspaket_2026-10-18_component_value.md).
+[COMPONENT-VALUE-01](history/next_arbeitspaket_2026-10-18_component_value.md).
 
 ### Durchgängiges Bildbudget
 
@@ -34,7 +34,7 @@ vollständig geprüfte Zwischenstände können erhalten bleiben. Rankings und
 `--no-isolate-conversion` aktiviert den bisherigen direkten Entwicklungsablauf.
 Der historische `standard`-Kompatibilitätsmodus hat weiterhin keine neue harte
 Prozessgarantie. Geltungsbereich, Bereinigungszeit und Nachweise:
-[Überwachte Bildbudgets](next_arbeitspaket_2026-10-18_search_deadline.md).
+[Überwachte Bildbudgets](history/next_arbeitspaket_2026-10-18_search_deadline.md).
 
 `reports/<name>_timing.jsonl` trennt Prozessstart, Workerbereitschaft, laufende
 Aufsicht und Prozessabbau durch monotone Zeit, UTC-Zeit und Prozess-CPU-Zeit.
@@ -42,7 +42,7 @@ Die Zeitaufsicht benötigt einen laufenden und eingeplanten Hauptprozess;
 Standby oder blockierende Betriebssystem-/Dateioperationen können die
 verstrichene Gesamtzeit über das Budget hinaus verlängern. Nach Wiederaufnahme
 wird das abgelaufene Budget geprüft. Diagnose und nachgewiesene Standbyfälle:
-[Zeitüberlauf-Audit](next_arbeitspaket_2026-10-22_deadline_overrun_audit.md).
+[Zeitüberlauf-Audit](history/next_arbeitspaket_2026-10-22_deadline_overrun_audit.md).
 
 ### Alternative Suchwege und Fortschritt
 

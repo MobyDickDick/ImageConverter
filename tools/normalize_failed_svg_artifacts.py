@@ -130,7 +130,6 @@ def parse_args() -> argparse.Namespace:
         nargs="*",
         default=[
             "artifacts/converted_images/converted_svgs",
-            "src/artifacts/converted_images/converted_svgs",
         ],
         help="Directories containing SVG conversion artifacts.",
     )

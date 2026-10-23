@@ -1,18 +1,27 @@
+# Python caches and local environments
 __pycache__/
 .pytest_cache/
-.tinylanguage/
-.tinylanguage
-.vens
 # Virtual environments
 .venv/
 venv/
-dist/*
-!dist/tinylanguage_bundle.zip
-__pycache__
+dist/
 *.pyc
-vscode-extension/tinylanguage-vscode-0.1.0.vsix
-/vscode-extension/node_modules
-/.pytest_cache
+*.pyo
+
+# Generated outputs belong outside the source tree.
+/src/artifacts/
+/artifacts/annotated_images/
+/artifacts/converted_images/commented_diff_images/
+/artifacts/converted_images/converted_images_png/
+/artifacts/converted_images/converted_images_png_failed/
+/artifacts/evaluation/**/commented_diff_images/
+/artifacts/evaluation/**/converted_images_png/
+/artifacts/evaluation/**/converted_images_png_failed/
+/artifacts/evaluation/**/diff_pngs/
+/artifacts/evaluation/**/archive_previous_cli_svgs/
+/artifacts/evaluation/**/archive_reconverted_svgs/
+/artifacts/evaluation/**/archive_outputs/
+/tests.txt
 
 # Profiling artifacts
 artifacts/perf/**/*.prof

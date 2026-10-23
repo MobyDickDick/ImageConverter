@@ -57,7 +57,7 @@ Dateistand aus und eignet sich deshalb nicht für gleichzeitig laufende Arbeiten
 
 ## Nachgewiesenes Beispiel
 
-Die [seitliche T-Verzweigung GE9034](next_arbeitspaket_2026-10-16_ge9034_6m.md)
+Die [seitliche T-Verzweigung GE9034](history/next_arbeitspaket_2026-10-16_ge9034_6m.md)
 wurde als Familie mit 14 Farb-/Größenvarianten abgenommen. Die gemeinsame
 Verarbeitung bestimmt Arme, Verlaufsprofile und Übergänge aus jedem Raster
 neu. Alle 14 Varianten bestehen laut dokumentierter Abnahme die regulären

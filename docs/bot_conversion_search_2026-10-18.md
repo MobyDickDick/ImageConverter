@@ -3,7 +3,7 @@
 Die adaptive Parametersuche verwendet sechs Bots je angeschlossenem Modell.
 Sie laufen in Abschnitten mit höchstens acht neuen Vorschlägen beziehungsweise
 50 Millisekunden aktiver Rechenzeit. Der
-[Suchscheduler](next_arbeitspaket_2026-10-18_search_scheduler.md) verteilt weitere
+[Suchscheduler](history/next_arbeitspaket_2026-10-18_search_scheduler.md) verteilt weitere
 Abschnitte nach relativem Fortschritt pro aktiver Sekunde und reserviert
 regelmäßig Erkundung für alle noch aktiven Verfahren.
 Jeder besitzt einen eigenen Suchzustand. Das sind algorithmische Sucharbeiter

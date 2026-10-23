@@ -7323,17 +7323,17 @@ def test_open_tasks_marks_fp_recovery_complete_with_run_od_evidence() -> None:
     open_tasks = Path("docs/open_tasks.md").read_text(encoding="utf-8")
 
     assert "- [x] **FP-RCV-4:**" in open_tasks
-    assert "docs/next_arbeitspaket_2026-06-05_runOD.md" in open_tasks
+    assert "docs/history/next_arbeitspaket_2026-06-05_runOD.md" in open_tasks
     assert "3 akzeptierte Verbesserungen" in open_tasks
     assert "0 akzeptierte Regressionen" in open_tasks
     assert "`overall_success=1`" in open_tasks
     assert "FP-RCV-4 als vollständigen Release-Candidate-Gate-Lauf ausführen" not in open_tasks
 
-    completion = Path("docs/next_arbeitspaket_2026-06-13_runPJ.md").read_text(
+    completion = Path("docs/history/next_arbeitspaket_2026-06-13_runPJ.md").read_text(
         encoding="utf-8"
     )
     assert "FP-RCV-4-Abschluss" in completion
-    assert "docs/next_arbeitspaket_2026-06-05_runOD.md" in completion
+    assert "docs/history/next_arbeitspaket_2026-06-05_runOD.md" in completion
     assert "`14/14`" in completion
     assert "`6/6`" in completion
     assert "`overall_success=1`" in completion

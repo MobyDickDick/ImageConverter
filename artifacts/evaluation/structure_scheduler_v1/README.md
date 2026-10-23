@@ -1,7 +1,7 @@
 # Fortsetzbare Strukturhypothesen
 
 Basis `b0e6cf8ab`, Branch `codex/search-structure-scheduling-2026-10-23`.
-[Umsetzung, Gegenprobe und Restumfang](../../../docs/next_arbeitspaket_2026-10-23_structure_scheduler.md).
+[Umsetzung, Gegenprobe und Restumfang](../../../docs/history/next_arbeitspaket_2026-10-23_structure_scheduler.md).
 
 `cli/` enthält die echte neue CLI-Wiederholung aller neun bekannten synthetischen
 Entwicklungseingaben aus `../residual_scene_v1/final-input`, mit fünf Sekunden

@@ -218,4 +218,4 @@ behalten jeweils ihren gemeinsamen Batch-Kontext.
 
 Zusammenfassung und XML-Nachweise:
 [`validation.json`](../artifacts/evaluation/primitive_scene_2026-10-17/validation.json),
-[`checks/`](../artifacts/evaluation/primitive_scene_2026-10-17/checks/).
+[`checks/`](../artifacts/evaluation/primitive_scene_2026-10-17/checks).

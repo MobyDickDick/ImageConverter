@@ -13,7 +13,7 @@ import src.imageCompositeConverter as converter
 
 BASE = Path("artifacts/regression_baseline/satisfactory")
 SOURCE_IMAGES = Path("artifacts/images_to_convert")
-SOURCE_SVGS = Path("src/artifacts/converted_images/converted_svgs")
+SOURCE_SVGS = Path("artifacts/regression_baseline/legacy_ac08/svgs")
 FALLBACK_VARIANTS: tuple[str, ...] = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L", "AC0811_M", "AC0811_S")
 
 

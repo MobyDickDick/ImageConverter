@@ -2,11 +2,11 @@
 
 **Suchscheduler:** Fortsetzbare Modellregistrierungen, gemeinsame Zeitscheiben,
 Fortschritt pro aktiver Sekunde und reservierte Erkundung sind jetzt als
-[SEARCH-SCHEDULER-02](next_arbeitspaket_2026-10-18_search_scheduler.md)
+[SEARCH-SCHEDULER-02](history/next_arbeitspaket_2026-10-18_search_scheduler.md)
 angeschlossen. Die folgenden Zahlen beschreiben den damaligen Ausgangsstand.
 
 **Folgepaket:** Die reguläre `semantic-only`-CLI umfasst jetzt die kooperative
-Suche mit einer [durchgängigen Prozessaufsicht](next_arbeitspaket_2026-10-18_search_deadline.md)
+Suche mit einer [durchgängigen Prozessaufsicht](history/next_arbeitspaket_2026-10-18_search_deadline.md)
 einschließlich Abschlussprüfung und gesicherter Zwischenstandübergabe. Die weiter
 unten beschriebene rein kooperative Grenze gilt für den ausdrücklich gewählten
 direkten Ablauf und historische Kompatibilitätspfade.
@@ -121,7 +121,7 @@ Unverbundene ältere Optimierer erhalten damit noch keine neue harte
 Unterbrechung. Der bestehende Renderer-Timeout und ein externer Prozesswächter
 bleiben im direkten Ablauf für diese Fälle erforderlich. Im regulären
 `semantic-only`-CLI-Pfad übernimmt inzwischen SEARCH-DEADLINE-01 diese
-[Prozessaufsicht samt Zwischenstandübergabe](next_arbeitspaket_2026-10-18_search_deadline.md).
+[Prozessaufsicht samt Zwischenstandübergabe](history/next_arbeitspaket_2026-10-18_search_deadline.md).
 
 Der Katalogrunner kann die adaptive Suche mit einer harten Prozessgrenze
 absichern:

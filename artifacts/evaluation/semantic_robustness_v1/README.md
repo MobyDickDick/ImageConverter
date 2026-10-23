@@ -16,6 +16,6 @@ nicht behauptet. Es gibt keine neue Katalog- oder allgemeine Sprachabnahme.
 Ausgaben erneut, erzeugt Löschkontrollen und prüft Tests, Originalarchiv,
 Archiv-Neukonvertierungen sowie Provenienz. Die Rohdaten unter
 `.tmp/semantic01/` werden nicht versioniert. Ein frischer Checkout muss sie
-anhand der [Paketdokumentation](../../../docs/next_arbeitspaket_2026-10-22_semantic_robustness.md)
+anhand der [Paketdokumentation](../../../docs/history/next_arbeitspaket_2026-10-22_semantic_robustness.md)
 neu erzeugen; diese kompakte Zusammenfassung ersetzt die vollständige Prüfung
 nicht. Laufzeiten und Rohbericht-Prüfsummen können bei Wiederholung abweichen.

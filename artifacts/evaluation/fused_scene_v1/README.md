@@ -34,4 +34,4 @@ CI uploads its own full run as an artifact. Aggregate counts alone do not replac
 independent raster/vector checks. No production code or quality limit changed
 when shrinking this commit.
 
-See [implementation and limits](../../../docs/next_arbeitspaket_2026-10-20_scene_fusion.md).
+See [implementation and limits](../../../docs/history/next_arbeitspaket_2026-10-20_scene_fusion.md).

@@ -9,6 +9,6 @@ Die vollständigen Raster, SVGs und Runtime-Berichte bleiben lokal unter
 Die Zusammenfassung allein ersetzt keine erneute unabhängige Raster-/SVG-Prüfung.
 
 Reproduktion, Grenzen und Ausgangszahl 377/1.785:
-[Arbeitspaket GENERAL-SCENE-VISIBILITY-04](../../../docs/next_arbeitspaket_2026-10-21_scene_visibility.md).
+[Arbeitspaket GENERAL-SCENE-VISIBILITY-04](../../../docs/history/next_arbeitspaket_2026-10-21_scene_visibility.md).
 
 Synthetische Prüfszenen erhöhen die Zahl abgenommener Katalogbilder nicht.

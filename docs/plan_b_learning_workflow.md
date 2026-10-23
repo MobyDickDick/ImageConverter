@@ -104,4 +104,4 @@ unerklärte Rasterbereiche gezielt behandeln. Die jetzige Erweiterung vergleicht
 neue Textmodelle und andere Parametersuchwege innerhalb unterstützter Modelle.
 
 Siehe [UML-Ablauf](conversion_search_uml.md) und
-[AC0840-Arbeitspaket](next_arbeitspaket_2026-10-17_ac0840_search.md).
+[AC0840-Arbeitspaket](history/next_arbeitspaket_2026-10-17_ac0840_search.md).

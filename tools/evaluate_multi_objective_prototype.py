@@ -196,8 +196,8 @@ def _write_markdown(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--bestlist", type=Path, default=Path("src/artifacts/converted_images/reports/conversion_bestlist.csv"))
-    parser.add_argument("--logs", type=Path, default=Path("src/artifacts/converted_images/reports"))
+    parser.add_argument("--bestlist", type=Path, default=Path("artifacts/converted_images/reports/conversion_bestlist.csv"))
+    parser.add_argument("--logs", type=Path, default=Path("artifacts/converted_images/reports"))
     parser.add_argument("--output-csv", type=Path, default=Path("docs/multi_objective_prototype_2026-04-12.csv"))
     parser.add_argument("--output-md", type=Path, default=Path("docs/multi_objective_prototype_2026-04-12.md"))
     parser.add_argument("--weight-pixel-error", type=float, default=1.0)

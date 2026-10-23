@@ -12,7 +12,7 @@ lassen sich unabhängig erneut ausführen:
 `summary.json` enthält vollständige lokale CLI-Prüfgruppen einschließlich
 gescheiterter Variantenversuche. Deren Rohdaten liegen unter `.tmp/real06/`;
 ein frischer Checkout erzeugt finale Gegenproben gemäß
-[Paketdokumentation](../../../docs/next_arbeitspaket_2026-10-22_gradient_scene.md).
+[Paketdokumentation](../../../docs/history/next_arbeitspaket_2026-10-22_gradient_scene.md).
 `checks.json` dokumentiert Tests, Archivregressionen und erhaltene Prüfsummen.
 Die beiden Einzelpanel-Fehler und die fehlende neue reale Familienabnahme
 bleiben offen. GENERAL-SCENE-REAL-05 wird damit nicht abgeschlossen.

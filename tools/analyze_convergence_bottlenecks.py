@@ -10,7 +10,6 @@ from statistics import mean, median
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIRS = [
-    ROOT / "src/artifacts/converted_images/reports",
     ROOT / "artifacts/converted_images/reports",
 ]
 
@@ -115,9 +114,6 @@ def main() -> int:
             if not match:
                 continue
             variant = match.group("name")
-            # prefer src/artifacts snapshot if both exist
-            if variant in all_logs and "/src/artifacts/" in str(all_logs[variant].get("path", "")):
-                continue
             payload = parse_validation_log(path)
             payload["path"] = str(path)
             all_logs[variant] = payload

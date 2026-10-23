@@ -11,7 +11,7 @@ locally in this directory and ignored by Git. CI uploads its own full evidence.
 This summary does not replace independent verification of raw outputs.
 
 Full protocol, observations, limitations and next work:
-[NEURAL-ELEMENTS-01](../../../docs/next_arbeitspaket_2026-10-19_neural_elements.md).
+[NEURAL-ELEMENTS-01](../../../docs/history/next_arbeitspaket_2026-10-19_neural_elements.md).
 
 Reproduce from a fresh checkout:
 

@@ -11,8 +11,9 @@ Die Parametersuchwege sind ein Teilbaustein. Die
 [adaptive Steuerung](adaptive_conversion_search_2026-10-18.md) führt sie nun in
 kurzen Abschnitten aus: früher geprüfter Erfolg, Stagnation und später
 Fortschritt steuern Ende und begrenzte Verlängerungen. Eine durchgängige harte
-Unterbrechung und erweiterbare Struktursuche bleiben offen. `mermaid-diagram.png`
-im Projektstamm zeigt den älteren festen Ablauf dieses Sequenzdiagramms.
+Unterbrechung und erweiterbare Struktursuche bleiben offen. Die
+[historische Abbildung](history/images/conversion_search_legacy.png) zeigt
+den älteren festen Ablauf dieses Sequenzdiagramms.
 Im adaptiven Modus verwendet die zusätzliche Suche jetzt
 [sechs kooperierende Bots](bot_conversion_search_2026-10-18.md).
 
