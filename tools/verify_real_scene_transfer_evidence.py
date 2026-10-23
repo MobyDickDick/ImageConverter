@@ -95,6 +95,7 @@ def main():
     if args.output.resolve().is_relative_to(args.manifest.resolve().parent):
         parser.error('--output must be outside the sealed evidence folder')
     report = verify(args.manifest)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')
     print(f"Evidence verified: {report['accepted']}/{report['total']} accepted")
     return int(args.require_all and report['accepted'] != report['total'])

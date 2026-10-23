@@ -3,6 +3,7 @@
   "task": "GENERAL-SCENE-REAL-05",
   "files": {
     "annotations.json": "7a88c205b2e24fb02b157db8756adaff0d87371472d1f4a26e292837a0d80cfb",
+    "checks.json": "a0edb2f34ae1a37d23c79ae10d67d6ff00fc827f4fa7c2542d9dc2a7e663d33f",
     "freeze.json": "68d306b713163c2aa90bd301356db37950597a8b10fe8a01efa49ae0dacc4f47",
     "inputs/annotations.sha256": "ba995239b6fbd624a16fe4c16411b3c9cdf1316b512562de5203989d06e2c457",
     "inputs/manifest.json": "bb43fdc1a034268d9d81d1346af3588000627f316612babfb9d4955d0145a4d8",
@@ -35,7 +36,12 @@
     "trial/real_01/converter.log": "fb1e17ee86acd0455b864a6e1d2d3105dd464bd297cb023bbdb283a07040dd54",
     "trial/real_01/reference_access.json": "304659eb42a7b7094dcf6db6f557bc84cf49e6ac317845d8ef654b5713c87e46",
     "trial/report.json": "4d0516c852c5b468c0b3ca12b90b602c02d657413bf58839b11720e71c050b89",
-    "trial/verification.json": "2c51c1d685792a90061066a1956b300304186e267b450a07576170c582d9f709"
+    "trial/verification.json": "2c51c1d685792a90061066a1956b300304186e267b450a07576170c582d9f709",
+    "validation/default-temp-probe.log": "1e5593e9a7ccf813e2695e5548fe76857db94ae0322c05eb46225f90abeb1a3f",
+    "validation/isolated-before-environment-link.xml": "b454df3a5b601ffdef3d96a8915d150aed488b10445bd750d0db983ed6f132c4",
+    "validation/isolated-final-all.xml": "b275187fc9a54333aca931e2b4b5cc0bbd40fc25bc440d543ed4518bd7c3f54a",
+    "validation/isolated-targeted.xml": "6b26f79bb903787177d8911786fd21aae4e5b75f4e8fad94f87e9addc4e90298",
+    "validation/workspace-temp-recheck.xml": "d290821255aefd2c72c8c2988dac17724d12f86a53834d203dc0ef8dc8bb2802"
   },
   "accepted": 0,
   "total": 2,

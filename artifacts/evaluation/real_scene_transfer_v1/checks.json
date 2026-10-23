@@ -1,0 +1,216 @@
+{
+  "schema": "real_scene_transfer_checks_v1",
+  "isolated_branch": "codex/general-scene-real-holdouts-2026-10-22",
+  "runtime_matches_trial_freeze": true,
+  "compileall_exit_code": 0,
+  "hardcoding_exit_code": 0,
+  "isolated_targeted": {
+    "tests": 28,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 27
+  },
+  "initial_shared_cli_help_exit_code": 0,
+  "isolated_plain_cli_help_exit_code": 1,
+  "isolated_plain_cli_help_failure": "Fresh checkout discovers Linux-only vendored NumPy without a local .venv.",
+  "isolated_cli_help_with_preloaded_windows_dependencies_exit_code": 0,
+  "archive_pairs": 379,
+  "archive_file_hashes_verified": 758,
+  "full_suite": {
+    "counts": {
+      "tests": 3902,
+      "failures": 36,
+      "errors": 21,
+      "skipped": 30,
+      "passed": 3815
+    },
+    "exit_code": 1,
+    "clean_snapshot": false,
+    "concurrent_checkout_branch_change": true,
+    "concurrent_runtime_and_tool_edits": true,
+    "performance_claim": false,
+    "failed_nodeids": [
+      "tests/detailtests/test_automate_function_extraction_tool.py::test_inserts_import_after_multiline_import_block",
+      "tests/detailtests/test_batch_run_state_helpers.py::test_atomic_json_write_replaces_complete_document",
+      "tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_non_composite_success_renames_svg_to_failed_prefix",
+      "tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_embedded_svg_uses_failed_prefix_independent_of_status",
+      "tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_skipped_status_with_result_marks_embedded_svg_as_failed",
+      "tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_trivial_placeholder_svg_is_marked_failed",
+      "tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_marks_image_only_svg_without_raster_extension_as_failed",
+      "tests/detailtests/test_conversion_execution_helpers.py::test_record_early_quality_abort_preserves_probe_as_failed_artifact",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_svg_when_embedded_png_detected",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_svg_when_embedded_jpeg_detected",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_detects_embedded_raster_even_without_result_row",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_detects_embedded_raster_for_lowercase_variant_names",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_marks_skipped_manual_review_embedded_svg_as_failed",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_trivial_white_fallback_svg",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_image_only_svg_without_detectable_raster_href",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_low_information_blank_frame_svg",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_canonicalize_failed_attempt_svg_names_from_suffix_format",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_canonicalize_failed_attempt_svg_names_from_lowercase_prefix",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_archive_successful_conversion_artifacts_moves_image_and_copies_svg",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_move_failed_conversion_artifacts_to_failed_dirs_moves_svg_and_png",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_run_conversion_finalization_quarantines_unsatisfactory_artifacts_before_archive",
+      "tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_svg_when_error_per_pixel_exceeds_fallback_gate",
+      "tests/detailtests/test_extract_remaining_functions_batch_tool.py::test_extracts_only_non_delegating_functions_and_writes_logs",
+      "tests/detailtests/test_nonconvertable_move_helpers.py::test_move_nonconvertable_sources_moves_failed_files",
+      "tests/detailtests/test_plan_b_variations.py::test_real_worker_preserves_parent_toolchain_with_incompatible_pythonpath",
+      "tests/test_anytime_benchmark.py::test_verify_remeasures_saved_outputs",
+      "tests/test_anytime_benchmark.py::test_verify_rejects_incomplete_or_tampered_evidence[missing]",
+      "tests/test_anytime_benchmark.py::test_verify_rejects_incomplete_or_tampered_evidence[duplicate]",
+      "tests/test_anytime_benchmark.py::test_verify_rejects_incomplete_or_tampered_evidence[forged_acceptance]",
+      "tests/test_anytime_benchmark.py::test_verify_rejects_incomplete_or_tampered_evidence[source]",
+      "tests/test_anytime_benchmark.py::test_verify_rejects_incomplete_or_tampered_evidence[output]",
+      "tests/test_anytime_benchmark.py::test_paraphrases_keep_identical_frozen_pixels",
+      "tests/test_anytime_benchmark.py::test_object_oracle_checks_multiple_positions",
+      "tests/test_component_value.py::test_verification_remeasures_actual_vectors",
+      "tests/test_component_value.py::test_rotated_arm_before_baseline_is_unpaired_until_baseline_arrives",
+      "tests/test_component_value.py::test_resume_rejects_changed_runtime_before_starting_more_conversions",
+      "tests/test_component_value.py::test_startup_timeout_without_observation_stays_a_failure_in_the_denominator",
+      "tests/test_component_value.py::test_verification_rejects_invalid_or_tampered_evidence[duplicate]",
+      "tests/test_component_value.py::test_verification_rejects_invalid_or_tampered_evidence[missing]",
+      "tests/test_component_value.py::test_verification_rejects_invalid_or_tampered_evidence[disabled_ran]",
+      "tests/test_component_value.py::test_verification_rejects_invalid_or_tampered_evidence[switch_ignored]",
+      "tests/test_component_value.py::test_verification_rejects_invalid_or_tampered_evidence[output]",
+      "tests/test_component_value.py::test_verification_rejects_invalid_or_tampered_evidence[input]",
+      "tests/test_component_value.py::test_verification_rejects_invalid_or_tampered_evidence[budget]",
+      "tests/test_component_value.py::test_verification_rejects_invalid_or_tampered_evidence[forged_gate]",
+      "tests/test_component_value.py::test_verification_rejects_invalid_or_tampered_evidence[source]",
+      "tests/test_component_value.py::test_verification_rejects_invalid_or_tampered_evidence[counts]",
+      "tests/test_component_value.py::test_verification_rejects_invalid_or_tampered_evidence[disabled_winner]",
+      "tests/test_conversion_deadline.py::test_completed_failure_without_result_keeps_real_supervision_evidence",
+      "tests/test_conversion_deadline.py::test_blocked_worker_is_killed_without_publishing_partial_or_old_outputs",
+      "tests/test_conversion_deadline.py::test_only_bound_validated_checkpoints_survive_blocked_finalization[None]",
+      "tests/test_conversion_deadline.py::test_completed_handoff_then_timeout_preserves_best_and_cumulative_budget",
+      "tests/test_conversion_deadline.py::test_checked_checkpoint_takes_priority_over_an_unvalidated_lower_score",
+      "tests/test_conversion_deadline.py::test_real_late_progress_can_extend_but_never_beyond_maximum",
+      "tests/test_conversion_deadline.py::test_crash_is_recorded_and_a_new_image_can_still_complete",
+      "tests/test_conversion_deadline.py::test_changed_input_cannot_reuse_a_previous_output_or_search_state",
+      "tests/test_conversion_deadline.py::test_production_cli_does_not_render_in_parent_reporting"
+    ]
+  },
+  "full_suite_failed_cases_rechecked_with_workspace_temp": {
+    "tests": 57,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 57
+  },
+  "full_suite_failed_cases_recheck_exit_code": 0,
+  "raw_full_suite_log_retained_locally": ".tmp/real-holdouts/full-suite.log",
+  "raw_full_suite_log_sha256": "3ed0772b4f3d21ab71b4cb6aa74b145bd5f29937b7ce00baf7644afbf075b0e7",
+  "raw_full_suite_xml_retained_locally": ".tmp/real-holdouts/full-suite.xml",
+  "raw_full_suite_xml_sha256": "263cd0f3f39697e9128b2d30a0b2b7d532b538ede9f1857a6623e95554dc202c",
+  "isolated_final_combined": {
+    "tests": 85,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 84
+  },
+  "isolated_final_combined_includes_all_57_initial_failures": true,
+  "isolated_before_environment_link": {
+    "tests": 57,
+    "failures": 2,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 55
+  },
+  "isolated_windows_environment_provided_as_local_venv_junction": true,
+  "isolated_normal_cli_help_after_environment_setup_exit_code": 0,
+  "isolated_normal_evidence_verification_after_environment_setup_exit_code": 0,
+  "isolated_archive_refresh": {
+    "exit_code": 0,
+    "pairs": 362,
+    "expected_pairs": 379,
+    "complete": false,
+    "missing": [
+      {
+        "variant": "AC0840_L",
+        "evidence": "artifacts/evaluation/conversion_search_2026-10-17/acceptance.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "AC0840_M",
+        "evidence": "artifacts/evaluation/conversion_search_2026-10-17/acceptance.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "AC0840_S",
+        "evidence": "artifacts/evaluation/conversion_search_2026-10-17/acceptance.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_1M",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_1S",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_2M",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_2S",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_3M",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_3S",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_4M",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_4S",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_5M",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_5S",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_6M",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_6S",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_7M",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      },
+      {
+        "variant": "GE9013_7S",
+        "evidence": "artifacts/evaluation/downward_gradient_arrow_recheck_v1/report_2026-10-07.json",
+        "evidence_exists": false
+      }
+    ]
+  }
+}

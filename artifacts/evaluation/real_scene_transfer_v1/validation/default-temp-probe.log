@@ -1,0 +1,13 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+______________ test_atomic_json_write_replaces_complete_document ______________
+tests\detailtests\test_batch_run_state_helpers.py:11: in test_atomic_json_write_replaces_complete_document
+    helpers.atomicWriteJsonImpl(target, {"new": [1, 2]})
+src\iCCModules\imageCompositeConverterBatchRunState.py:38: in atomicWriteJsonImpl
+    atomicWriteTextImpl(path, json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+src\iCCModules\imageCompositeConverterBatchRunState.py:32: in atomicWriteTextImpl
+    os.replace(temporary, target)
+E   PermissionError: [WinError 5] Zugriff verweigert: 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{bd8eb217-7a94-4bd4-a24c-91d25b9efefc}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_atomic_json_write_replace0\\.state.json.37840.tmp' -> 'C:\\Users\\marku\\AppData\\Local\\Packages\\sandbox.{bd8eb217-7a94-4bd4-a24c-91d25b9efefc}\\AC\\Temp\\pytest-of-marku\\pytest-0\\test_atomic_json_write_replace0\\state.json'
+=========================== short test summary info ===========================
+FAILED tests/detailtests/test_batch_run_state_helpers.py::test_atomic_json_write_replaces_complete_document
+1 failed in 0.36s
