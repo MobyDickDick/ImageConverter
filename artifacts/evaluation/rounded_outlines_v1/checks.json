@@ -1,0 +1,86 @@
+{
+  "base_commit": "00dfb2cc736a7e24db5a1279e81829786c8b705f",
+  "branch": "codex/search-structure-rounded-outlines-2026-10-23",
+  "cli": {
+    "before": {
+      "accepted": 0,
+      "total": 12,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": false
+    },
+    "final_cli": {
+      "accepted": 12,
+      "total": 12,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "final_additional_cli": {
+      "accepted": 12,
+      "total": 12,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "final_plan_b_cli": {
+      "accepted": 17,
+      "total": 17,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "final_existing_rounded_cli": {
+      "accepted": 12,
+      "total": 12,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "final_existing_split_cli": {
+      "accepted": 20,
+      "total": 20,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "final_existing_residual_cli": {
+      "accepted": 7,
+      "total": 9,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    }
+  },
+  "byte_identical_existing_successes": {
+    "final_existing_rounded_cli": 12,
+    "final_existing_split_cli": 20,
+    "final_existing_residual_cli": 7
+  },
+  "targeted_tests": {
+    "passed": 422,
+    "seconds": 172.45,
+    "summary": "422 passed in 172.45s (0:02:52)",
+    "new_tests": 35
+  },
+  "syntax": "passed",
+  "cli_help": "passed",
+  "runtime_image_ids": 0,
+  "full_suite": "not_run",
+  "whitespace": "passed_with_cr_at_eol",
+  "saved_archive": {
+    "kind": "stored_archive_hash_check_not_reconversion",
+    "total": 379,
+    "hashes_checked": 758,
+    "passed": 379
+  },
+  "compact_evidence": {
+    "files": 896,
+    "verification": "all CLI cohorts independently verified from staged files copied into a fresh folder"
+  },
+  "ci_seed_smoke": {
+    "seed": 942817,
+    "accepted": 12,
+    "total": 12
+  }
+}

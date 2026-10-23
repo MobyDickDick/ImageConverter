@@ -1,0 +1,782 @@
+[
+  {
+    "case_id": "rounded_outline_00",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und 1 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.5,
+          14.5,
+          171.0,
+          171.0
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          93.79830515240029,
+          87.15045654304014,
+          22.944886342703533,
+          26.041455424577087
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 4.320018707662939
+      }
+    ],
+    "reference_svg": "references/rounded_outline_00.svg",
+    "input_sha256": "a826b065f9d3dc55e0fd6bbb24625eb88558b124375c513da10bc5c53ff3262c",
+    "reference_svg_sha256": "21605b3e3c2e3769de2fd3eb025d4cbd110a0f849486176dfbf85794e3a290e7"
+  },
+  {
+    "case_id": "rounded_outline_01",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und 1 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.375,
+          14.375,
+          171.25,
+          171.25
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.25
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          92.4748850303019,
+          86.66639900745348,
+          25.531213765376865,
+          27.550901363094933
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 4.935622946534014
+      }
+    ],
+    "reference_svg": "references/rounded_outline_01.svg",
+    "input_sha256": "e4dab1aaf323fdd2f7d4a3254529292d39a47de4006fe2065b3bb27cf9b3a041",
+    "reference_svg_sha256": "315391dbceffc7f57ea263483e36a80ec94b166821e284273173c4897dc7ca99"
+  },
+  {
+    "case_id": "rounded_outline_02",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.25,
+          14.25,
+          171.5,
+          171.5
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.5
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          74.88947950007622,
+          87.26154444944632,
+          26.28194843883555,
+          26.14018741682365
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 3.485471049814921
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          108.82003625884788,
+          86.11512838978273,
+          26.07171336907112,
+          27.177441945638886
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 5.788454831119234
+      }
+    ],
+    "reference_svg": "references/rounded_outline_02.svg",
+    "input_sha256": "73abc2f4e74e3cb502f929acfe5d8dfeb5d979314c9091cc6d5e3f4a85c0d134",
+    "reference_svg_sha256": "2a403256087d5d584a63c1dfdac3951cc63dd9d1426513043cf7eb504b5b1e64"
+  },
+  {
+    "case_id": "rounded_outline_03",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.5,
+          14.5,
+          171.0,
+          171.0
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          74.62303040017916,
+          87.62264494890324,
+          26.193822057861293,
+          25.59698018631587
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 4.882525159497126
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          109.25667167058243,
+          85.5375073192444,
+          25.36030067705816,
+          28.45287021744426
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 5.554387305649433
+      }
+    ],
+    "reference_svg": "references/rounded_outline_03.svg",
+    "input_sha256": "9cd38af8a5d2478398401907c4b4c616a42a8210b0e9435d197321d187de62c3",
+    "reference_svg_sha256": "f41eb6882e91e6540fb2302a9db23cdcae8c2a651e159070037e59539c379deb"
+  },
+  {
+    "case_id": "rounded_outline_04",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.375,
+          14.375,
+          171.25,
+          171.25
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.25
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          93.55680693002863,
+          69.91917883892349,
+          23.19360871413974,
+          25.880802634899663
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 4.819897585845374
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          92.45285120475732,
+          104.76262465755461,
+          26.021618706222895,
+          26.45070207657943
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 5.6860818656996015
+      }
+    ],
+    "reference_svg": "references/rounded_outline_04.svg",
+    "input_sha256": "5599e75785a0347aa61270dd1d6fe7191209b34d8a54667cd6915213a2d57853",
+    "reference_svg_sha256": "93d4a72d2a1794e8e9b38e7b7f91354165e6f21c532de7cc86a4f20d5b30a6b3"
+  },
+  {
+    "case_id": "rounded_outline_05",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.25,
+          14.25,
+          171.5,
+          171.5
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.5
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          93.16082257842612,
+          68.45160332184527,
+          23.697481747295768,
+          27.74409956283143
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 5.7838407973475885
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          91.88040847475934,
+          102.94091906873257,
+          26.102384634059003,
+          28.55837058508982
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 4.082980451243304
+      }
+    ],
+    "reference_svg": "references/rounded_outline_05.svg",
+    "input_sha256": "ab87615d676450918b1ab874b0ff5160606874e7ca81e2b569fc54516cb0b336",
+    "reference_svg_sha256": "2e3167abef1fe6984a7c2afb340395c9bebdb41c1c50adc980575e1d02349db6"
+  },
+  {
+    "case_id": "rounded_outline_06",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und 4 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.5,
+          14.5,
+          171.0,
+          171.0
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          75.83573355821284,
+          70.5223968359171,
+          23.62249072465857,
+          24.694065573706492
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 4.853743221355824
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          109.30134294325171,
+          68.54021287941104,
+          26.26623416060616,
+          27.841056269181237
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 3.60475731212499
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          75.04812346925254,
+          104.37447584997693,
+          26.210520287258657,
+          25.345213303638634
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 5.467837661363946
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          110.17235887427083,
+          104.8405116524281,
+          23.6918784618339,
+          25.59439367559503
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 5.466007289636454
+      }
+    ],
+    "reference_svg": "references/rounded_outline_06.svg",
+    "input_sha256": "9943b3f1d2b83936dbdc957ec90873fa8c13a86bdde3cacdd25097f45cbe9b41",
+    "reference_svg_sha256": "03edc76772f8a466c16bd0415600782b812a95fe0c8c183c849c690256de42cf"
+  },
+  {
+    "case_id": "rounded_outline_07",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und 4 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.375,
+          14.375,
+          171.25,
+          171.25
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.25
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          75.58449941967572,
+          69.6457189450116,
+          25.352611053166207,
+          24.831009707724203
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 5.381787083880145
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          109.23814278488386,
+          70.55665421248608,
+          26.35750550555543,
+          24.75745982836363
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 4.81140424805927
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          75.34387806388476,
+          104.66894388956906,
+          24.992741961322068,
+          26.481273763741893
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 3.595428867338747
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          109.48017012040799,
+          103.1203054439959,
+          24.640184142246206,
+          28.618691005531197
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 3.752086880356248
+      }
+    ],
+    "reference_svg": "references/rounded_outline_07.svg",
+    "input_sha256": "8e288d5bcc85c4f40ca9a27245a478b2091264695539171329fd604aed6c9f3a",
+    "reference_svg_sha256": "b243f9eadf4e9fa2b43a3b25c92ca9d4c6f02a85ebc8f49a550ec9544f04a568"
+  },
+  {
+    "case_id": "rounded_outline_08",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und 6 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.25,
+          14.25,
+          171.5,
+          171.5
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.5
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          58.411791863425506,
+          69.70173057582734,
+          26.155753596735202,
+          25.455689467943134
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 4.653391714822786
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          93.1391938981166,
+          68.99229873824089,
+          23.753063864340472,
+          26.503171922532886
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 4.952496020217076
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          125.81908175544223,
+          68.66286093780298,
+          26.47975233400691,
+          28.20139116877816
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 4.673713552736257
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          58.79977005093971,
+          103.5619221707287,
+          23.93077597147003,
+          27.979511012228176
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 5.390386713663834
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          92.4178878769766,
+          105.38430583250546,
+          24.839004437878806,
+          25.095653789632724
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 3.5030951270162465
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          127.38268148630891,
+          103.37096597082558,
+          23.21552338377065,
+          28.25895151651379
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 3.929274481482167
+      }
+    ],
+    "reference_svg": "references/rounded_outline_08.svg",
+    "input_sha256": "f8e55661de8ff7ebccdee1c27352bd400e772a05252c3658a32c1a43edfe057d",
+    "reference_svg_sha256": "841d1a98dfabfb5afeb9ec5e558f5fc6fa518e51b326dfc2d79b46b9193667dc"
+  },
+  {
+    "case_id": "rounded_outline_09",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und 6 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.5,
+          14.5,
+          171.0,
+          171.0
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          58.923978648090646,
+          69.7512944416555,
+          23.583456565224974,
+          25.07736675480766
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 3.6321664521943955
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          92.45288459890907,
+          69.08132360597541,
+          24.28962095927851,
+          25.91517068508946
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 5.1889781593750826
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          125.82820328750957,
+          68.95587068279313,
+          25.775332382240208,
+          27.73554456018914
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 4.676897761838594
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          59.28226275521668,
+          103.85377433396827,
+          22.706258269682753,
+          28.024829381038014
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 4.568549006005339
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          93.06538015285831,
+          104.79480401707553,
+          23.52487577315698,
+          24.86368685721242
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 4.289786248649211
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          126.85358560629389,
+          103.19574751273736,
+          25.23605284435688,
+          28.10440992775412
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 4.451309689404377
+      }
+    ],
+    "reference_svg": "references/rounded_outline_09.svg",
+    "input_sha256": "5508f8c4417d467d18e6e6bb6434c84cec75f71028114579f9583853ea46c2e0",
+    "reference_svg_sha256": "268b4a5fc66dbb02fbaea27e259d298980ff7d1020fe18b78e2b7063cdb2b613"
+  },
+  {
+    "case_id": "rounded_outline_10",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und 6 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.375,
+          14.375,
+          171.25,
+          171.25
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.25
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          76.12093845745765,
+          52.166215246969614,
+          23.076365539171785,
+          25.711283506954956
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 5.194848917657621
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          109.51284450157874,
+          51.448306434383284,
+          24.625943588946743,
+          27.378206365843145
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 4.530984637641025
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          75.09385648275219,
+          85.25840325927332,
+          26.600614685077147,
+          28.72932343437893
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 4.775629830188425
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          108.76503012471248,
+          85.44541610523025,
+          25.78328344000742,
+          28.60781183886173
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 5.546899673050444
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          76.93554570018811,
+          120.6999118688618,
+          22.881353513294872,
+          28.52637666199863
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 3.291667696315818
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          108.91977689293995,
+          121.70601868040252,
+          26.561894692519065,
+          27.58316800214326
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 3.6619678646319054
+      }
+    ],
+    "reference_svg": "references/rounded_outline_10.svg",
+    "input_sha256": "758a90283efbf947fa281b15599e0975fc82e66f5d27b92a8fe0ec6a3d866e97",
+    "reference_svg_sha256": "07fb3df13c22c1b026ae35e28109154d43bba437bfa65e95dbe6207f3d003edc"
+  },
+  {
+    "case_id": "rounded_outline_11",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und 6 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.25,
+          14.25,
+          171.5,
+          171.5
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.5
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          74.24122110888264,
+          51.635851942062175,
+          26.911863940765834,
+          26.29817001977346
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 4.64643447062087
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          110.0059682884479,
+          51.88140365264818,
+          24.930087654309965,
+          26.23702629724302
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 3.463016160726829
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          75.51848205971235,
+          87.17411450088376,
+          25.803541832373078,
+          25.87544656094251
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 3.8852812350990806
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          110.82867481270046,
+          85.60822856491886,
+          23.285426321417845,
+          28.838657221368692
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 3.639622016649356
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          76.66633956864527,
+          121.47091618887,
+          23.35259801914359,
+          27.890034638567833
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 3.9529347852980097
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          109.41216028397899,
+          122.15451243379809,
+          25.394042995262026,
+          26.3140136729531
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 3.9009450952187192
+      }
+    ],
+    "reference_svg": "references/rounded_outline_11.svg",
+    "input_sha256": "89f1d837efb2ca49ed670a19ee8fd1fcd1ec907993cb9389a01b28f87d0f403a",
+    "reference_svg_sha256": "6f2731f0b728888c778780ad511d548e87d88440de5dee0e2d68ed5e2a3714cc"
+  }
+]

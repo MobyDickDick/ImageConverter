@@ -10,6 +10,32 @@ on:
   workflow_dispatch:
 
 jobs:
+  rounded-outlines:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Check combined geometry, contradictory rasters and shared deadline
+        run: python -m pytest -q tests/test_rounded_outlines.py
+      - name: Generate synthetic rounded objects with light outlines
+        run: python -m tools.evaluate_rounded_composition --prepare .tmp/outlined-inputs --outlines --seed 942817
+      - name: Exercise and independently verify the supervised CLI
+        run: |
+          python -m tools.evaluate_rounded_composition --inputs .tmp/outlined-inputs --output .tmp/outlined-cli --require-all
+          python -m tools.evaluate_rounded_composition --inputs .tmp/outlined-inputs --output .tmp/outlined-cli --verify-only --require-all
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rounded-outlines-evidence
+          path: |
+            .tmp/outlined-inputs
+            .tmp/outlined-cli
+          retention-days: 7
+
   rounded-composition:
     runs-on: ubuntu-latest
     timeout-minutes: 5

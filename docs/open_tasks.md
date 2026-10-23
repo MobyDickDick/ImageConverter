@@ -36,9 +36,11 @@ mit 17/17 Varianten bestehen. Gemischte Kreis-/Rechteckinventare und Rundung
 plus Remove sind geprüft. Überdeckung, weitere Schichten, Rundung mit Konturen
 und unabhängige reale Abnahme bleiben offen; die übergeordnete Checkbox bleibt leer.
 
+- [x] **SEARCH-STRUCTURE-ROUNDED-OUTLINES (P0, extrahierter Teil von SEARCH-STRUCTURE-01):** Gerundete Rechteckkinder mit beobachteten hellen Konturen im gemeinsamen Verlaufskreis-/Struktursuchweg verbinden. Zwölf vorab eingefrorene synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12; zwölf zusätzliche Fälle und genau eine gekoppelte Plan-B-Vorlage mit 17/17 Varianten bestehen. Einzelne fehlende/dunkle Konturen, eckige Ersatzformen und falsche Inventare bleiben Negativkontrollen. Bekannte Rundungs-/Split-/Restbildfälle bleiben 12/12, 20/20 und 7/9. Überdeckung, weitere Schichten und unabhängige reale Abnahme bleiben beim übergeordneten P0-Paket offen. [Umsetzung und Nachweise](next_arbeitspaket_2026-10-23_rounded_outlines.md).
+
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-23)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `499` · Erledigt `447` · Offen `52`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `500` · Erledigt `448` · Offen `52`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
