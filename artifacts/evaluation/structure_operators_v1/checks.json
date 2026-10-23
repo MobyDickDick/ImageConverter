@@ -1,0 +1,44 @@
+{
+  "base_commit": "dd832bd228f2c24f4a757f1a8b05e008476b2e12",
+  "branch": "codex/search-structure-operators-isolated-2026-10-23",
+  "focused_tests": {
+    "tests": "78",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "124.886"
+  },
+  "standard_suite": {
+    "status": "running",
+    "known_failure": "tests/test_component_value.py::test_observation_changes_neither_candidates_nor_measurement_budget"
+  },
+  "syntax": "passed",
+  "cli_help": "passed",
+  "image_id_ratchet": "passed_0_occurrences",
+  "whitespace": "passed_cr_at_eol",
+  "cli": {
+    "before": 0,
+    "after": 5,
+    "total": 8,
+    "budget_seconds": 5,
+    "seed": 17,
+    "independently_reverified": true
+  },
+  "residual_cli": {
+    "accepted": 7,
+    "total": 9,
+    "byte_identical_successful_svgs": 7
+  },
+  "saved_archive": {
+    "passed": 379,
+    "total": 379,
+    "unchanged_hashes": 758,
+    "reconversion": false
+  },
+  "real_family_acceptance": false,
+  "source_sha256": {
+    "src/iCCModules/imageCompositeConverterAdaptiveSearch.py": "6675a8f2eb05be7622886d59b3e456202d443d2c80287c61512079d657912f7f",
+    "src/iCCModules/imageCompositeConverterMixedGradientScene.py": "8073da82144d6592eb6ba8391ec4aa03d69e23fd41887952a958c224649af78f",
+    "src/iCCModules/imageCompositeConverterStructureSearch.py": "3552d5d2c22ebc21748896e119bbe45838f480793b5e40264ddef13a2a76f808"
+  }
+}
