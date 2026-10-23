@@ -13,7 +13,7 @@ je Original; keine nachträgliche Anpassung von Beschreibung, Objektmarkierung
 oder Qualitätsgrenzen. Die Untersuchung ist abgeschlossen;
 GENERAL-SCENE-REAL-05 bleibt offen.
 
-| Original und Zusammensetzung | Native Prüfung | Normierte MSE | Kantenabgleich | Vordergrund-IoU | CLI-Zeit |
+| Original und Zusammensetzung | Native Prüfung | Normierte MSE | Kantenabgleich | Vordergrund-IoU | Gemessene Versuchszeit |
 | --- | --- | ---: | ---: | ---: | ---: |
 | GE0018: überlappendes gerundetes Rechteckkreuz in Verlaufsscheibe | durchgefallen | 0,030006 | 0,142071 | 0,785921 | 5,031 s |
 | GE0307: vier getrennte umrandete Flaggenfelder in Verlaufsscheibe | durchgefallen | 0,070807 | 0,341890 | 0,919324 | 3,781 s |
@@ -26,10 +26,15 @@ die weiteren Pixel-/Regionsfehler bleiben im Bericht. Hoher IoU allein genügt
 nicht. Beide CLI-Prozesse enden im regulären Batchbetrieb mit Exit 0; das ist
 kein Qualitätssignal.
 
+Die Versuchszeit aus `run_case` enthält Prozessstart, Konvertierung und die erste
+Pixel-/Debugnachprüfung. Die späteren zusätzlichen Objekt-/Regionsprüfungen
+sind darin nicht enthalten; dieser Wert ist keine reine CLI-Prozesszeit.
+
 Je Versuch: Seed 17, 64 angeforderte Iterationen, festes überwachtes Bildbudget
-5 Sekunden, äußerer Notabbruch 30 Sekunden. Die Bildaufsicht endet nach 2,203
+5 Sekunden, äußerer Notabbruch 30 Sekunden. Die interne Suchtelemetrie endet nach 2,203
 bzw. 1,453 Sekunden mit `supported_models_exhausted` und null adaptiven
-Suchauswertungen. Kein Timeout und keine Budgetverlängerung.
+Suchauswertungen. Die gesonderten Aufsichtsberichte messen 3,719 bzw. 2,735
+Sekunden und enden mit `completed`. Kein Timeout und keine Budgetverlängerung.
 
 ## Auswahl und Grenzen
 
@@ -55,10 +60,14 @@ Flaggen zählen zur selben neuen Familie. Dies ist kein allgemeiner
 Familienannotationsaudit. Beide geprüften Fälle sind künftig bekannte
 Entwicklungsdaten; das historische Freeze behält den damaligen Prüfstatus.
 Spätere Verbesserungen an ihnen sind keine neuen unabhängigen Familien.
+Der Vierfelderfall benötigt einschließlich Kreis fünf Objekte und liegt damit
+außerhalb der bisherigen Szenenanzahl. Die Versuche untersuchen neue
+Zusammensetzungen bekannter Primitive; sie belegen keine Regression zuvor
+unterstützter Szenenverträge und ersetzen keine erfolgreiche Übertragungsabnahme.
 
 ## Ursache und nächste Entwicklung
 
-Der gemeinsame Szeneneinstieg erreicht den gemischten Verlaufsvertrag, der
+Die Codepfadprüfung ergibt: Der gemeinsame Szeneneinstieg erreicht den gemischten Verlaufsvertrag, der
 beide vollständigen Beschreibungen ablehnt. Er unterstützt eine Verlaufsscheibe
 mit einem bzw. zwei getrennten, nicht gerundeten Rechtecken. Überlappung,
 Rundung in diesem gemischten Weg und vier Kinder fehlen. Einzelfähigkeiten
@@ -85,6 +94,10 @@ fixierte CLI-Eingaben, Markierungen, Runtime-Hashes, tatsächliche SVGs,
 Vergleichsbilder, vollständige Ergebniszeilen, Worker-/Aufsichtslogs,
 Zugriffsbelege und negative Entscheidungen. `manifest.json` inventarisiert
 sämtliche Dateien mit Prüfsummen.
+
+Vergleichsbilder, jeweils links Original, mittig Ausgabe und rechts Differenz:
+[Kreuz](../artifacts/evaluation/real_scene_transfer_v1/trial/real_00/comparison.png),
+[Vierfelderflagge](../artifacts/evaluation/real_scene_transfer_v1/trial/real_01/comparison.png).
 
 Der neue Prüfer rendert gespeicherte SVGs und prüft Originalpixel, Objekt-/
 Regionsgates, Runtime-Freeze, Budget, Zugriffssperren und Vollständigkeit erneut.
