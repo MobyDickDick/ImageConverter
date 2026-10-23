@@ -1,0 +1,10 @@
+[INFO] Schreibe Konsolen-Output nach: .tmp\real-holdouts\trial\real_00\conversion\reports\.image-worker-q1yovmcm\reports_out_dir\real_00_worker.log
+[INFO] Konvertiere real_00.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite real_00.png ---
+Bildbeschreibung: Ein gefüllter Kreis und zwei gefüllte Rechtecke mit gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich mittig als aufrechtes Kreuz. Die Formen haben helle Konturen. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "real_00", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 3.657, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "stagnation"}
+[WARN] real_00.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.771943, localized_error_fraction=0.686482).
+[INFO] Konvertiert real_00.png | Parameter: mode=auto, label=M, variant_name=REAL_00 | Qualität: Optimierungsfehler/Pixel=0.005957, Mean-Delta²=5853.328125, RGB-RMSE/Kanal=44.171364, Raumscore=15917.564877, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=0.8s

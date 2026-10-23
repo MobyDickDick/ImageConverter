@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-22)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `495` · Erledigt `446` · Offen `49`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `497` · Erledigt `447` · Offen `50`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -65,6 +65,10 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 - [x] **GENERAL-SCENE-GRADIENT-06 (begrenzter Entwicklungsschritt):** Native Rechteckszenen mit axialen Verläufen, gerundeten Ecken, optionalen dunklen Konturen und weißer Innenfläche. Die bekannten Varianten DLG0011/DLG0018 verbessern sich von 0/2 auf 2/2 unter beiden regulären und strengeren unabhängigen Gates; eigenständige Beschreibungen in beiden Katalogen. Neue synthetische CLI-Fälle bestehen 12/12, Umbenennungen sind bytegleich und eine abschließende Plan-B-Vorlage besteht 17/17. Archiv 379 Paare, alle 377 bisherigen Datensätze und Bild-/SVG-Paare unverändert. Zwei Einzelpanel-IoU-Fehler bleiben sichtbar. Keine zwei neuen realen Familien; GENERAL-SCENE-REAL-05 bleibt offen. [Nachweise und Grenzen](next_arbeitspaket_2026-10-22_gradient_scene.md).
 
+- [x] **GENERAL-SCENE-REAL-TRANSFER-08 (begrenzte Untersuchung):** Zwei zuvor fixierte reale Zusammensetzungen GE0018/GE0307 mit unveränderter Runtime und festen Budgets durch die echte CLI geprüft: 0/2. Originale, SVGs, Oracle, Logs und Freeze dauerhaft gesichert; schreibfreier Nachprüfer und neun Evidenztests. Historische Katalogexposition und fehlender menschlicher Annotationsaudit begrenzen Unabhängigkeit. Keine positive Fähigkeitsabnahme, kein Kataloggewinn; GENERAL-SCENE-REAL-05 bleibt offen. [Ergebnisse und Ursachen](next_arbeitspaket_2026-10-22_real_scene_transfer.md).
+
+- [ ] **GENERAL-SCENE-COMPOSITION-09:** Vorhandene Rundungs-/Überdeckungsbausteine und mehr als zwei Rechteckkinder in einem gemeinsamen Verlaufsszenenvertrag verbinden. Alle Beschreibungsaussagen und Instanz-/Auswahlbelege erhalten, unpassende Ersatzmodelle nicht als semantische Abnahme zählen. GE0018/GE0307 künftig nur Entwicklung. Zwei andere reale Prüffamilien vor Runtime-Entwicklung markieren und sperren; unabhängige Objekt-/Regions-/Pixelgates ohne Nachstimmung bestehen. Übergeordnete Abnahme bleibt GENERAL-SCENE-REAL-05; keine neue Symbolvorlage oder Familienkennung. [Lücke und Abnahme](next_arbeitspaket_2026-10-22_real_scene_transfer.md#ursache-und-nächste-entwicklung).
+
 ## Katalog-CI (2026-10-11)
 
 - [x] **CATALOG-TIMEOUT:** Budget im Workflow von 60 auf 180 Sekunden erhöhen, Fehler bei Wiederaufnahme erneut versuchen und gepufferte Abbruchdiagnostik erhalten. Details und Abnahme: `docs/catalog_timeout_fix_2026-10-11.md`.
@@ -81,7 +85,7 @@ echten Produktionskonvertierungen. Die jüngeren echten CLI-Abnahmen bleiben gü
 
 **Vorherige Architekturarbeit:** COMPONENT-VALUE-01 hat die sechs Such-Bots mit echten Runtime-Schaltern und unabhängigen Gegenproben vermessen; bei unklarer Evidenz bleiben alle erhalten. NEURAL-ELEMENTS-01 und NEURAL-ELEMENTS-REAL-02 sind als begrenzte Experimente ohne belastbaren End-to-End-Nutzen abgeschlossen. Die produktive Netzabnahme bleibt offen. Nachweise: `docs/next_arbeitspaket_2026-10-18_component_value.md`, `docs/next_arbeitspaket_2026-10-19_neural_elements.md` und `docs/next_arbeitspaket_2026-10-19_neural_real_regions.md`.
 
-**Nächste Architekturarbeit:** GENERAL-SCENE-REAL-05 für neue unabhängig markierte reale Familien und eindeutige Farb-/Lagebezüge. Breitere Formarten und weitere Komponenten bleiben Folgearbeit; IDO-19/IDO-21 und historische Kompatibilitätsaufsicht bleiben offen.
+**Nächste Architekturarbeit:** GENERAL-SCENE-COMPOSITION-09 als Entwicklungsschritt innerhalb von GENERAL-SCENE-REAL-05: vorhandene Primitive, Rundung und Überdeckung im Verlaufsszenenweg gemeinsam anschließen; andere reale Prüffamilien vor Entwicklung sperren. IDO-19/IDO-21 und historische Kompatibilitätsaufsicht bleiben offen.
 
 Der konkrete Verlaufs-/Rundungsschritt für bekannte verschachtelte Panels ist
 als GENERAL-SCENE-GRADIENT-06 abgeschlossen. Als Nächstes vor weiteren

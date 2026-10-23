@@ -1,0 +1,112 @@
+[
+  {
+    "file": "GE0018.jpg",
+    "family": "overlapping_rounded_cross_in_gradient_circle",
+    "split": "holdout",
+    "source_sha256": "f6072dfdfe018e5b905be884139e23247c83acdf962bf65c6ab57def9aa7a573",
+    "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke mit gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich mittig als aufrechtes Kreuz. Die Formen haben helle Konturen. Keine Beschriftung.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          3,
+          3,
+          67,
+          67
+        ],
+        "parent": null,
+        "gradient_axis": 1
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          29,
+          16,
+          13,
+          43
+        ],
+        "parent": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          14,
+          30,
+          44,
+          13
+        ],
+        "parent": 0
+      }
+    ],
+    "previous_exposure": "Present in the historical catalogue; no targeted runtime development or annotated family experiment found by repository search. This is not proof of never having appeared in any historical batch.",
+    "case_id": "real_00",
+    "width": 73,
+    "height": 73,
+    "input_sha256": "4d02702e4deab20ccd7630d1cee7cc1988555d0e0d901a1d0c7758989958b13a"
+  },
+  {
+    "file": "GE0307.jpg",
+    "family": "four_separated_flag_panels_in_gradient_circle",
+    "split": "holdout",
+    "source_sha256": "b0bde06f25eff1b4aed7594582f44b93204fcc580f0bc624656f0bc7be252660",
+    "description": "Ein gefüllter Kreis und vier gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises, getrennt in zwei Reihen und zwei Spalten. Zwischen den vier roten Rechtecken bleibt ein blaues Kreuz sichtbar. Die Formen haben helle Konturen. Keine Beschriftung.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          2,
+          2,
+          71,
+          71
+        ],
+        "parent": null,
+        "gradient_axis": 1
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          14,
+          19,
+          14,
+          15
+        ],
+        "parent": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          33,
+          19,
+          28,
+          15
+        ],
+        "parent": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          14,
+          38,
+          14,
+          18
+        ],
+        "parent": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          33,
+          38,
+          28,
+          18
+        ],
+        "parent": 0
+      }
+    ],
+    "previous_exposure": "Present in the historical catalogue; no targeted runtime development or annotated family experiment found by repository search. This is not proof of never having appeared in any historical batch.",
+    "case_id": "real_01",
+    "width": 75,
+    "height": 75,
+    "input_sha256": "1e082c73ca1a6bee8f7e6d66b05b74a11b37b35bf296856a11f13470356ca80f"
+  }
+]

@@ -1,5 +1,11 @@
 # ImageConverter
 
+Die [erneute reale Übertragungsprüfung](docs/next_arbeitspaket_2026-10-22_real_scene_transfer.md)
+scheitert mit unverändertem Algorithmus an zwei neuen Zusammensetzungen (0/2).
+Der gemeinsame Verlaufsszenenweg unterstützt noch keine überlappenden gerundeten
+Rechtecke oder vier getrennte Kinder. Die positive Familienabnahme bleibt offen;
+beide Fehlversuche und ein unabhängiger Nachprüfer sind dauerhaft gesichert.
+
 Der [native Rechteckszenenweg](docs/next_arbeitspaket_2026-10-22_gradient_scene.md)
 ergänzt axiale Farbverläufe, gerundete Ecken und weiße Innenflächen.
 Die bekannten verschachtelten Panelvarianten bestehen beide regulären Gates;

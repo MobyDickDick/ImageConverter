@@ -5,6 +5,11 @@ Die konkrete nächste Aufgabe und ihr Abschluss stehen in `open_tasks.md`
 und `../PLAN_B_KANDIDATEN.md`.
 
 Aktueller Fokus am 22.10.2026: `GENERAL-SCENE-REAL-05` bleibt offen.
+Die [eingefrorene Folgeprüfung](next_arbeitspaket_2026-10-22_real_scene_transfer.md)
+ergibt 0/2 für Kreuz- und Vierfelderkompositionen bei unverändertem Algorithmus.
+Als Nächstes folgt GENERAL-SCENE-COMPOSITION-09: vorhandene Rundungs-/Überdeckungs-
+und Kinderanzahlfähigkeiten gemeinsam anschließen und vor Entwicklung andere
+reale Prüffamilien sperren. Die zwei jetzt offengelegten Fälle sind Entwicklung.
 Der [gemischte Szenenschritt](next_arbeitspaket_2026-10-22_mixed_gradient_scene.md)
 verbessert zwei nach negativem Erstversuch bekannte Originale; die unabhängige
 Übertragung auf zwei weitere reale Familien fehlt weiterhin. Der

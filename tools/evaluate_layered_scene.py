@@ -171,7 +171,7 @@ def local_checks(reference, svg, objects):
     return checks
 
 
-def verify_report(inputs, output, *, require_all=False):
+def verify_report(inputs, output, *, require_all=False, write_verification=True):
     report = json.loads((output/'report.json').read_text(encoding='utf-8'))
     manifest = json.loads((inputs/'manifest.json').read_text(encoding='utf-8'))
     if not manifest or len(report['cases']) != len(manifest):
@@ -213,7 +213,8 @@ def verify_report(inputs, output, *, require_all=False):
                              source=row.get('params', {}).get('primitive_scene_registration', {}).get('source'),
                              adaptive_search=control))
     summary = dict(cases=verified, completed=len(verified), accepted=sum(c['accepted'] for c in verified))
-    (output/'verification.json').write_text(json.dumps(summary, indent=2)+'\n', encoding='utf-8')
+    if write_verification:
+        (output/'verification.json').write_text(json.dumps(summary, indent=2)+'\n', encoding='utf-8')
     if require_all and summary['accepted'] != summary['completed']:
         raise ValueError('One or more CLI scenes failed independent acceptance')
     return summary

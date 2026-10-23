@@ -4,6 +4,12 @@ Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstell
 
 ## Aktueller Fokus (2026-10-22)
 
+Die [eingefrorene Folgeprüfung](docs/next_arbeitspaket_2026-10-22_real_scene_transfer.md)
+auf GE0018/GE0307 besteht mit unverändertem Algorithmus 0/2; beide Fälle gelten
+künftig als bekannt. GENERAL-SCENE-REAL-05 bleibt offen. Nächster Schritt ist
+GENERAL-SCENE-COMPOSITION-09 für die gemeinsame Komposition vorhandener Primitive;
+andere reale Prüffamilien vor Entwicklung sperren. Keine Katalogzahlerhöhung.
+
 `BENCHMARK-ANYTIME-01` ist inzwischen abgeschlossen. Der aktuelle Qualitätsfokus
 bleibt `GENERAL-SCENE-REAL-05`: Der gemischte Szenenschritt rekonstruiert nun die
 bekannten Entwicklungsoriginale GE0026/GE0027; der erste eingefrorene reale
