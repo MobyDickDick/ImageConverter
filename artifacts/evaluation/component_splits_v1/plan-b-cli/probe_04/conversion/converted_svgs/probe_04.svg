@@ -1,0 +1,13 @@
+<svg width="210" height="200" viewBox="0 0 210 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8f8f8f"/>
+      <stop offset="50%" stop-color="#dedede"/>
+      <stop offset="100%" stop-color="#8f8f8f"/>
+    </linearGradient>
+  </defs>
+  <ellipse id="perception_circle_background" cx="103.999" cy="103" rx="87" ry="87" fill="#A1C3AB" stroke="#DCE9DF" stroke-width="6.96"/>
+  <rect id="background_gradient" x="37.8" y="48" width="134.4" height="112" fill="url(#geometry-ir-horizontal-gradient)" stroke="none"/>
+  <rect id="main_rect" x="37.8" y="48" width="134.4" height="112" fill="none" stroke="#666666" stroke-width="7"/>
+  <text id="perception_text_glyph" x="37.501" y="138.55" fill="#C3DBC4" font-family="Arial, Helvetica, sans-serif" font-size="36.9" font-weight="600" text-anchor="middle" dominant-baseline="middle">I</text>
+</svg>

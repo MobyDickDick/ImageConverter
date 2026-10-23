@@ -1,0 +1,31 @@
+# Keep immutable inputs, compact CLI evidence and final checks. Local development
+# repeats and derived preview images can be reproduced from those files.
+/cli-after/
+/cli-final/
+/cli-new/
+/final-cli/
+/final-new-cli/
+/plan-b-final/
+/residual-cli/
+/new-tests.xml
+/new-tests-final.xml
+/focused-tests.xml
+/focused-tests.log
+/focused-tests-final.xml
+/focused-tests-final.log
+/tests-current.xml
+/tests-current.log
+**/*.png
+!/input/**/*.png
+!/new-input/**/*.png
+!/plan-b-input/**/*.png
+**/input/*.xml
+!/input/**/*.xml
+!/new-input/**/*.xml
+!/plan-b-input/**/*.xml
+**/conversion/reports/*
+!**/conversion/reports/conversion_result_map.json
+!**/conversion/reports/*_deadline.json
+!**/conversion/reports/*_reference_access.json
+!**/conversion/reports/*_worker.log
+**/converter.timing.jsonl

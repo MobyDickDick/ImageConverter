@@ -16,7 +16,13 @@ Die offenen Aufgaben und historischen Nachweise bleiben erhalten.
 Der [nächste Scheduler-Schritt](docs/history/next_arbeitspaket_2026-10-23_structure_scheduler.md)
 ist umgesetzt: fortsetzbare Strukturhypothesen teilen das Bildbudget und geben
 Alternativen eine Chance vor Sucherschöpfung. Die bestehende synthetische
-CLI-Matrix bleibt bei 7/9; Add/Remove/Replace und reale Abnahme bleiben offen.
+Restbild-CLI-Matrix bleibt bei 7/9. Add/Remove/Replace und anschließend
+[Split verbundener Komponenten](docs/next_arbeitspaket_2026-10-23_component_splits.md)
+sind im begrenzten Szenenvertrag umgesetzt: der neue Vergleichsbestand steigt
+von 8/20 auf 20/20, die bisherigen Operatorfälle von 5/8 auf 8/8. Genau eine
+gekoppelte synthetische Plan-B-Vorlage mit Antialiasing-Lücke besteht nach
+einem dokumentierten Sprachfehler 17/17 Varianten. Breitere Komposition und
+unabhängige reale Abnahme bleiben offen.
 
 ## Vorheriger Fokus (2026-10-22)
 

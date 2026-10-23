@@ -2,7 +2,10 @@
 
 Aktuelle Gewichtung vom 23.10.2026: [Struktursuche und Komposition zuerst](weakness_review_2026-10-23.md).
 SEARCH-STRUCTURE-01 ist mit alternativen Restbildzerlegungen im bestehenden
-Verlaufsszenenweg begonnen. Danach vollständige Semantikabnahme und unabhängige
+Verlaufsszenenweg begonnen. Add/Remove/Replace und die
+[Aufteilung verbundener Komponenten](next_arbeitspaket_2026-10-23_component_splits.md)
+sind im begrenzten Szenenvertrag umgesetzt; der nächste offene Umfang bleibt
+breitere Komposition. Danach vollständige Semantikabnahme und unabhängige
 reale Übertragung; neue Netze und größere Produktbereinigung folgen später.
 Der begrenzte synthetische Entwicklungsschritt schließt GENERAL-SCENE-REAL-05
 und GENERAL-SCENE-COMPOSITION-09 nicht ab.

@@ -16,6 +16,17 @@ bleiben erhalten; ältere Nächster-Schritt-Hinweise sind historisch.
 - [ ] **SEARCH-STRUCTURE-01 (P0, begonnen):** Nach gescheiterten Bildzerlegungen andere Strukturhypothesen unter demselben Bildbudget untersuchen; Instanzen/Formen/Schichten statt ausschließlich Parameter verändern. Abgelehnte und doppelte Vorschläge sichtbar machen, vollständige Objekt-/Relations-/Rastergates beibehalten. Erster produktiver Teil: alternative Restbildzerlegungen und generische getrennte Rechteckgruppen im vorhandenen Verlaufsszenenweg; synthetische CLI-Vorher-/Nachher-Prüfung. Faire fortsetzbare Strukturzeitscheiben sind jetzt umgesetzt, mit serieller Gegenprobe und echter CLI-Wiederholung (7/9) geprüft. Begrenzte native Add/Remove/Replace-Operatoren und bildgebundene negative Evidenz sind jetzt umgesetzt; acht synthetische CLI-Fälle verbessern sich von 0/8 auf 5/8, die bisherigen neun bleiben bei 7/9. Breitere Komposition und unabhängige reale Abnahme bleiben offen. [Operatoren, Nachweis und Grenzen](next_arbeitspaket_2026-10-23_structure_operators.md). Genau eine gekoppelte Plan-B-Aufgabe: synthetischer Repro zweier durch Antialiasing verbundener Restbildkomponenten. [Scheduler-Nachweis und Restumfang](next_arbeitspaket_2026-10-23_structure_scheduler.md), [Umfang und Rangfolge](weakness_review_2026-10-23.md).
 - [ ] **SEMANTIC-COMPLETENESS-02 (P1):** Erfolgreiche Produktionsausgaben an alle verbrauchten Beschreibungsaussagen, native Instanzen und Relationen binden. Parser-/Fallbackstatus allein darf keinen vollständigen Erfolg bedeuten. Unpassende Ersatzmodelle und beschädigte SVGs als echte CLI-Negativkontrollen; Sucherschöpfung und nicht unterstützte Struktur ausdrücklich ausweisen. V5/V6 und vorhandene unabhängige Gates verwenden.
 
+**SEARCH-STRUCTURE-01, weiterer P0-Teilabschluss 2026-10-23:**
+[Verbundene Restbildkomponenten aufteilen](next_arbeitspaket_2026-10-23_component_splits.md)
+ergänzt native Split-Vorschläge und Split plus Edit unter demselben Budget.
+Zwanzig vorab eingefrorene synthetische CLI-Eingaben verbessern sich von 8/20
+auf 20/20, darunter die bisherigen drei Operatorfehler (jetzt 8/8 statt 5/8).
+Zwölf zusätzliche synthetische Fälle bestehen 12/12. Genau eine gekoppelte
+Plan-B-Vorlage besteht nach einem dokumentierten Sprachfehler 17/17 Varianten.
+Die bekannten Restbildfälle bleiben bei 7/9; 379 Archivpaare und 758 Prüfsummen
+sind unverändert. Breitere Rundungs-/Überdeckungs-/Schichtenkomposition und
+unabhängige reale Abnahme bleiben offen; die übergeordnete Checkbox bleibt leer.
+
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-23)
 
 **Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `499` · Erledigt `447` · Offen `52`
