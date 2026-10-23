@@ -13,6 +13,11 @@ Antialiasing-Repro; neue reale Familien sind damit nicht abgenommen.
 Danach folgen Komposition, vollständige Semantikabnahme und reale Übertragung.
 Die offenen Aufgaben und historischen Nachweise bleiben erhalten.
 
+Der [nächste Scheduler-Schritt](docs/next_arbeitspaket_2026-10-23_structure_scheduler.md)
+ist umgesetzt: fortsetzbare Strukturhypothesen teilen das Bildbudget und geben
+Alternativen eine Chance vor Sucherschöpfung. Die bestehende synthetische
+CLI-Matrix bleibt bei 7/9; Add/Remove/Replace und reale Abnahme bleiben offen.
+
 ## Vorheriger Fokus (2026-10-22)
 
 Die [eingefrorene Folgeprüfung](docs/next_arbeitspaket_2026-10-22_real_scene_transfer.md)

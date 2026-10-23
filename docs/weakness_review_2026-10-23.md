@@ -141,6 +141,11 @@ Lauf verwendet einen separaten Tempordner im Workspace.
 
 ### Nächster Schritt im selben Paket
 
+**Nachtrag:** Die [fortsetzbaren Strukturzeitscheiben](next_arbeitspaket_2026-10-23_structure_scheduler.md)
+sind umgesetzt und mit kontrollierter serieller Gegenprobe sowie echter
+CLI-Wiederholung (7/9) geprüft. Der folgende Scheduler-Schritt ist damit erledigt;
+die anschließenden Struktur-/Kompositions- und realen Abnahmen bleiben offen.
+
 Strukturvorschläge als fortsetzbare Arbeitseinheiten in den vorhandenen Scheduler
 bringen. Eine schlechte erste Zerlegung darf nicht das gesamte Optimierungsbudget
 verbrauchen. Anschließend die vorhandenen Form-/Rundungs-/Sichtbarkeitsoperatoren
