@@ -1,0 +1,15 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\rounded_composition_v1\before\rounded_04\conversion\reports\.image-worker-6s01b3io\reports_out_dir\rounded_04_worker.log
+[INFO] Konvertiere rounded_04.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite rounded_04.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "rounded_04", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 2.36, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "supported_models_exhausted"}
+[WARN] rounded_04.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.767739, localized_error_fraction=0.734344).
+[INFO] Konvertiert rounded_04.png | Parameter: mode=auto, label=M, variant_name=ROUNDED_04 | Qualität: Optimierungsfehler/Pixel=0.000528, Mean-Delta²=3923.604248, RGB-RMSE/Kanal=36.164459, Raumscore=11463.353031, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.8s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\rounded_composition_v1\before\rounded_04\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\rounded_composition_v1\before\rounded_04\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\rounded_composition_v1\before\rounded_04\conversion
+[WARN] Mindestens eine Datei konnte nicht erfolgreich konvertiert werden (siehe batch_failure_summary.csv).

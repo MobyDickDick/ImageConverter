@@ -1,7 +1,8 @@
 """Raster-derived gradient circles containing disjoint flat native shapes.
 
 The closed description contract controls topology; raster residuals supply
-instances. No catalogue keys, saved geometry or reference vectors are read.
+instances, including rounded rectangles. No catalogue keys, saved geometry
+or reference vectors are read.
 """
 from __future__ import annotations
 
@@ -66,7 +67,18 @@ def scene_contract(description):
     if text.count(relation) != 1:
         return None
     outlined = 'die formen haben helle konturen' in text
+    rounded_clause = 'mit leicht gerundeten ecken'
+    rounded = rounded_clause in text
+    # The qualifier belongs to the quantified rectangle inventory. A free
+    # clause must not attach rounding to circles or silently discard a claim.
+    if rounded and (outlined or text.count(rounded_clause) != 1
+            or sum(m[2].startswith('rechteck') for m in matches) != 1 or not any(
+            m[2].startswith('rechteck') and text[m.end():].startswith(' '+rounded_clause)
+            for m in matches)):
+        return None
     rest = SHAPES.sub('', text).replace(relation, '')
+    if rounded:
+        rest = rest.replace(rounded_clause, '')
     rest = re.sub(direction_clause, '', rest)
     for clause in ('die formen haben helle konturen', 'keine beschriftung', 'ohne text oder zeichen'):
         rest = rest.replace(clause, '')
@@ -79,7 +91,7 @@ def scene_contract(description):
     if re.sub(r'[\s.,;]+|\bund\b', '', rest):
         return None
     return dict(count=sum(counts.values()), axis=0 if direction[0] == 'horizontal' else 1,
-                outlined=outlined, layout_axis=layout_axis,
+                outlined=outlined, layout_axis=layout_axis, rounded=rounded,
                 children={kind: number for kind, number in
                           (('circle', counts['circle']-1), ('rectangle', counts['rectangle'])) if number})
 
@@ -164,6 +176,19 @@ def _split_coverage_edges(coverage, low, high):
     return low-left, high+right
 
 
+def _rounded_coverage_edges(coverage, low, high):
+    """Integrate the straight central span without interpolating its AA ramp."""
+    bounds = _coverage_edges(coverage, low, high)
+    if bounds is None:
+        return None
+    left, right = bounds
+    middle = int((left+right)/2)
+    if not left < middle < right or coverage[middle] < .9:
+        return None
+    return (middle-float(np.sum(coverage[max(0, int(left)-2):middle])),
+            middle+float(np.sum(coverage[middle:min(len(coverage), int(right)+3)])))
+
+
 def detect_instances(pixels, contract, *, residual_threshold=25, split_components=False):
     """Fit background paint first, then explain contrasting interior regions."""
     foreground = (np.max(255-pixels.astype(float), axis=2) > 25).astype('uint8')
@@ -217,7 +242,12 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
         kind = 'rectangle'
         child_center, child_radius, circle_residual = _circle(contour)
         if len(polygon) != 4 or area < .75*w*h:
-            if abs(w-h) <= 2 and circle_residual < .7:
+            if (contract.get('rounded') and contract['children'].get('circle')
+                    and abs(w-h) <= 2 and circle_residual < .7):
+                kind = 'circle'
+            elif contract.get('rounded') and area >= .7*w*h:
+                pass  # The observed corner deficit supplies a radius below.
+            elif abs(w-h) <= 2 and circle_residual < .7:
                 kind = 'circle'
             else:
                 return None
@@ -262,7 +292,8 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
             delta = fill-predicted
             coverage = np.clip(np.sum((pixels.astype(float)-predicted)*delta, axis=2)
                                / np.maximum(1., np.sum(delta*delta, axis=2)), 0, 1)
-            edges = _split_coverage_edges if was_split else _coverage_edges
+            edges = (_split_coverage_edges if was_split else
+                     _rounded_coverage_edges if contract.get('rounded') else _coverage_edges)
             left_right = edges(np.median(coverage[y+h//3:y+2*h//3], axis=0), x, x+w)
             top_bottom = edges(np.median(coverage[:, x+w//3:x+2*w//3], axis=1), y, y+h)
             if left_right is None or top_bottom is None:
@@ -270,8 +301,24 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
             left, right = left_right
             top, bottom = top_bottom
             x, y, w, h = left, top, right-left, bottom-top
-        children.append(dict(kind=kind, geometry=np.array([x, y, w, h, sw]),
-                             colors=np.r_[fill, fill, stroke]))
+        child = dict(kind=kind, geometry=np.array([x, y, w, h, sw]),
+                     colors=np.r_[fill, fill, stroke])
+        if contract.get('rounded') and kind == 'rectangle':
+            # Integrate the antialias coverage missing from a native
+            # rectangle. Four round corners remove (4-pi)*r^2 area.
+            # This is a proposal from pixels, not a reference radius.
+            cx = np.clip(np.minimum(xx+1, x+w)-np.maximum(xx, x), 0, 1)
+            cy = np.clip(np.minimum(yy+1, y+h)-np.maximum(yy, y), 0, 1)
+            window = ((xx >= np.floor(x)-1) & (xx <= np.ceil(x+w))
+                      & (yy >= np.floor(y)-1) & (yy <= np.ceil(y+h)))
+            missing = float(np.sum((cx*cy-coverage)[window]))
+            corner = np.sqrt(max(0., missing)/(4-np.pi))
+            # A square silhouette cannot earn an explicit rounding claim
+            # just by fitting an imperceptibly small positive radius.
+            if corner < 1.25:
+                return None
+            child['radius'] = min(float(corner), min(w, h)/3)
+        children.append(child)
     if len(children) > 16:
         return None
     children.sort(key=lambda obj: obj['geometry'][0])
@@ -290,7 +337,7 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
     attempts, seen, seeds = [], set(), []
     session = current_search()
     rejection_scope = (raster_identity(pixels), tuple(sorted(contract['children'].items())),
-                       contract['axis'], contract['outlined'], contract['layout_axis'])
+                       contract['axis'], contract['outlined'], contract['layout_axis'], contract['rounded'])
     rejected = session.structure_rejections.setdefault(rejection_scope, {}) if session else {}
 
     def register(objects, attempt):
@@ -432,11 +479,14 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
     if not complete(objects, contract['children']):
         return None
     n = len(objects)
+    rounded = contract.get('rounded', False)
+    geometry_count = 5*n+(n if rounded else 0)
     boxes = [np.r_[o['geometry'][:2], o['geometry'][:2]+o['geometry'][2:4], o['geometry'][4]]
              for o in objects]
     paint = [objects[0]['colors'], *[np.r_[o['colors'][:3], o['colors'][6:]] for o in objects[1:]]]
-    offsets = [5*n, *[5*n+9+6*i for i in range(n-1)]]
+    offsets = [geometry_count, *[geometry_count+9+6*i for i in range(n-1)]]
     parameters = np.r_[np.concatenate(boxes),
+                       [o.get('radius', 0.) for o in objects] if rounded else [],
                        np.concatenate(paint)]
 
     def geometry(p, index):
@@ -448,7 +498,7 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
 
     def build(p):
         shapes = []
-        colors = p[5*n:5*n+9]
+        colors = p[geometry_count:geometry_count+9]
         end = 'x2="100%" y2="0%"' if contract['axis'] == 0 else 'x2="0%" y2="100%"'
         definition = f'<defs><linearGradient id="scene_paint" x1="0%" y1="0%" {end}><stop offset="0" stop-color="{_hex(colors[:3])}"/><stop offset="1" stop-color="{_hex(colors[3:6])}"/></linearGradient></defs>'
         for i, obj in enumerate(objects):
@@ -460,7 +510,8 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
             if obj['kind'] == 'circle':
                 shapes.append(f'<circle cx="{x+w/2:.4f}" cy="{y+h/2:.4f}" r="{w/2:.4f}" {style}/>')
             else:
-                shapes.append(f'<rect x="{x:.4f}" y="{y:.4f}" width="{w:.4f}" height="{h:.4f}" {style}/>')
+                radius = f' rx="{p[5*n+i]:.4f}"' if rounded else ''
+                shapes.append(f'<rect x="{x:.4f}" y="{y:.4f}" width="{w:.4f}" height="{h:.4f}"{radius} {style}/>')
         return f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">'+definition+f'<rect width="{width}" height="{height}" fill="#ffffff"/>'+''.join(shapes)+'</svg>'
 
     def valid(p):
@@ -475,6 +526,11 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                 return False
             if i and not _contains(scene[0], obj):
                 return False
+            if rounded:
+                radius = p[5*n+i]
+                if ((obj['kind'] == 'rectangle' and not 1. <= radius <= min(w, h)/3)
+                        or (obj['kind'] == 'circle' and radius != 0)):
+                    return False
             if contract['outlined']:
                 c = np.clip(p[offsets[i]:offsets[i]+(9 if i == 0 else 6)], 0, 255)
                 if c[-3:].mean() < 180 or (i and c[-3:].mean() < c[:3].mean()+15):
@@ -491,7 +547,7 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                 axis = contract['layout_axis']
                 if not (any(separate) if axis is None else separate[axis]):
                     return False
-        c = np.clip(np.rint(p[5*n:5*n+6]), 0, 255)
+        c = np.clip(np.rint(p[geometry_count:geometry_count+6]), 0, 255)
         if np.max(abs(c[3:]-c[:3])) < 8:
             return False
         return True
@@ -517,7 +573,7 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
             errors += 4*np.mean((reference-gradient)**2, axis=2)
         return float(np.mean([errors[y:Y, x:X].mean() for x, y, X, Y in regions]))
 
-    fitted = yield from _register_steps(parameters, 5*n, build, valid, pixels, render_fn, error_fn,
+    fitted = yield from _register_steps(parameters, geometry_count, build, valid, pixels, render_fn, error_fn,
                        'primitive_mixed_gradient_scene_v1', preserve_initial_error=True,
                        loss_fn=loss,
                        satisfactory_fn=lambda p, m: all(q and q['passed'] for q in qualities(m[3])))

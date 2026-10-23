@@ -1,5 +1,11 @@
 # ImageConverter
 
+Die [gerundete Restbildkomposition](docs/next_arbeitspaket_2026-10-23_rounded_composition.md)
+verbindet native Eckradien mit mehreren Rechteckkindern und der vorhandenen
+Struktursuche im Verlaufskreis. Zwölf eingefrorene synthetische CLI-Fälle
+verbessern sich von 0/12 auf 12/12; zwölf zusätzliche Fälle und 17/17 gekoppelte
+Plan-B-Varianten bestehen. Überdeckung und unabhängige reale Abnahme bleiben offen.
+
 Die [Aufteilung verbundener Restbildkomponenten](docs/next_arbeitspaket_2026-10-23_component_splits.md)
 ergänzt Split als weitere Strukturhypothese: Die echte CLI verbessert sich
 auf 20 unveränderten synthetischen Entwicklungsfällen von 8/20 auf 20/20.

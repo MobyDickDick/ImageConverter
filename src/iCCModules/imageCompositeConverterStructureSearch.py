@@ -12,7 +12,7 @@ import numpy as np
 
 
 def object_key(obj):
-    return (obj['kind'], *np.round(np.r_[obj['geometry'], obj['colors']], 3))
+    return (obj['kind'], *np.round(np.r_[obj['geometry'], obj.get('radius', 0.), obj['colors']], 3))
 
 
 def scene_key(objects):

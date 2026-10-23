@@ -1,0 +1,257 @@
+{
+  "rounded_08.png": {
+    "actual_iterations": 64,
+    "base": "ROUNDED_08",
+    "best_error": 0.3334920634920635,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+    "diff_error_distribution_status": "structured",
+    "elapsed_seconds": 1.1099999999860302,
+    "error_per_pixel": 7.940287226001513e-06,
+    "error_pixel_cluster_count": 18.0,
+    "error_pixel_cluster_excess": 0.6271288515406163,
+    "error_pixel_count": 1190.0,
+    "filename": "rounded_08.png",
+    "h": 200,
+    "largest_error_pixel_cluster_fraction": 0.6554621848739496,
+    "localized_error_fraction": 0.5474357455880611,
+    "mean_delta2": 14.875761985778809,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "adaptive_search": {
+        "candidate_evaluations": 2,
+        "elapsed_seconds": 1.11,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      },
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "constraint": "inside_rect_border",
+            "id": "description_element_1",
+            "kind": "HorizontalGradient",
+            "source": "description",
+            "stops": [
+              "#8f8f8f",
+              "#dedede",
+              "#8f8f8f"
+            ]
+          },
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "fill": "none",
+            "id": "description_element_2",
+            "kind": "RectBorder",
+            "source": "description",
+            "stroke": "#666666",
+            "stroke_width": 0.035
+          }
+        ],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.75,
+          "reasons": [],
+          "status": "ok"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": true,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "rounded_08",
+          "source": "base_name",
+          "text": "Ein gefüllter Kreis und 6 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [],
+      "geometry_ir": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "fill": "none",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "label": "M",
+      "language_assertions": {
+        "counts": [],
+        "no_text": false
+      },
+      "mode": "auto",
+      "primitive_scene_registration": {
+        "error": 0.3334920634920635,
+        "evaluations": 1,
+        "initial_error": 0.3334920634920635,
+        "instance_groups": 7,
+        "neural_scene_selected": false,
+        "object_kinds": [
+          "circle",
+          "rectangle",
+          "rectangle",
+          "rectangle",
+          "rectangle",
+          "rectangle",
+          "rectangle"
+        ],
+        "object_quality": [
+          {
+            "edge_alignment": 0.9052351117134094,
+            "foreground_iou": 0.9934620447564722,
+            "foreground_mse": 0.00013077946134847497,
+            "normalized_mse": 0.00010339548097097641,
+            "passed": true
+          },
+          {
+            "edge_alignment": 0.9837419390678406,
+            "foreground_iou": 1.0,
+            "foreground_mse": 8.257783400098391e-05,
+            "normalized_mse": 8.257783400098391e-05,
+            "passed": true
+          },
+          {
+            "edge_alignment": 0.9930092096328735,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00019920222991157247,
+            "normalized_mse": 0.00019920222991157247,
+            "passed": true
+          },
+          {
+            "edge_alignment": 0.9875719547271729,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00010875284952562922,
+            "normalized_mse": 0.00010875284952562922,
+            "passed": true
+          },
+          {
+            "edge_alignment": 0.9609031677246094,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00011643031489509633,
+            "normalized_mse": 0.00011643031489509633,
+            "passed": true
+          },
+          {
+            "edge_alignment": 0.9398186206817627,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00015129864581998377,
+            "normalized_mse": 0.00015129864581998377,
+            "passed": true
+          },
+          {
+            "edge_alignment": 0.8951385021209717,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00014514311471715123,
+            "normalized_mse": 0.00014514311471715123,
+            "passed": true
+          }
+        ],
+        "scene_attempts": [
+          {
+            "operator": "segmentation",
+            "outcome": "accepted",
+            "residual_threshold": 25
+          },
+          {
+            "operator": "segmentation",
+            "outcome": "cancelled",
+            "residual_threshold": 16
+          },
+          {
+            "operator": "segmentation",
+            "outcome": "cancelled",
+            "residual_threshold": 36
+          }
+        ],
+        "scene_detectors": [
+          "gradient_boundary",
+          "flat_residual_shapes"
+        ],
+        "scene_hypotheses": 3,
+        "source": "primitive_mixed_gradient_scene_v1"
+      },
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "ROUNDED_08"
+    },
+    "reference_access": {
+      "blocked_svg_reads": []
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 2.2267885684529944,
+    "search_control": {
+      "candidate_evaluations": 2,
+      "elapsed_seconds": 1.11,
+      "external_max_seconds": null,
+      "isolated": true,
+      "limit_seconds": 5.0,
+      "max_seconds": 5.0,
+      "stop_reason": "satisfactory",
+      "time_extensions": 0
+    },
+    "search_satisfactory": true,
+    "spatial_quality_score": 45.66243758295051,
+    "std_delta2": 126.17367553710938,
+    "tile_std_delta2": 13.301804467522688,
+    "variant": "ROUNDED_08",
+    "w": 210
+  }
+}

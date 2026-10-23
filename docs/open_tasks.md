@@ -27,6 +27,15 @@ Die bekannten Restbildfälle bleiben bei 7/9; 379 Archivpaare und 758 Prüfsumme
 sind unverändert. Breitere Rundungs-/Überdeckungs-/Schichtenkomposition und
 unabhängige reale Abnahme bleiben offen; die übergeordnete Checkbox bleibt leer.
 
+**SEARCH-STRUCTURE-01, Rundungsbaustein 2026-10-23:**
+[Rundung mit Restbildinstanzen kombinieren](next_arbeitspaket_2026-10-23_rounded_composition.md)
+verbindet native Eckradien mit dem vorhandenen Instanz-/Edit-Suchweg.
+Zwölf vorab gespeicherte synthetische CLI-Fälle verbessern sich von 0/12
+auf 12/12; zwölf zusätzliche Fälle und genau eine gekoppelte Plan-B-Vorlage
+mit 17/17 Varianten bestehen. Gemischte Kreis-/Rechteckinventare und Rundung
+plus Remove sind geprüft. Überdeckung, weitere Schichten, Rundung mit Konturen
+und unabhängige reale Abnahme bleiben offen; die übergeordnete Checkbox bleibt leer.
+
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-23)
 
 **Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `499` · Erledigt `447` · Offen `52`

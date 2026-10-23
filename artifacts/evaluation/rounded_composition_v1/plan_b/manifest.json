@@ -1,0 +1,886 @@
+[
+  {
+    "case_id": "original",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 1.0,
+      "relative_x": 0.0,
+      "relative_y": 0.0
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          20.0,
+          15.0,
+          170.0,
+          170.0
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          75.37303040017916,
+          88.37264494890324,
+          24.693822057861293,
+          24.09698018631587
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 4.882525159497126
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          110.00667167058243,
+          86.2875073192444,
+          23.86030067705816,
+          26.95287021744426
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.554387305649433
+      }
+    ],
+    "reference_svg": "references/original.svg",
+    "input_sha256": "be8ce0101d18134ae29e009283cb45bf643b19df7e76ca92c890646b26ea0968",
+    "reference_svg_sha256": "1c319fc5ecc4c725191939a1c0c9838aa7ddb6f8dbc3dfe7a82e0d312ed45ffc"
+  },
+  {
+    "case_id": "probe_01",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 1.03132807,
+      "relative_x": -0.00042209,
+      "relative_y": 0.00169872
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Das Motiv ist leicht größer dargestellt und geringfügig nach links und unten verschoben.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          17.248475149999997,
+          12.676858049999996,
+          175.3257719,
+          175.3257719
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          74.35623572266809,
+          88.34812635594763,
+          25.46743184385752,
+          24.85189206838139
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.0354852494706135
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          110.07488213114546,
+          86.19766538866719,
+          24.607797846890087,
+          27.797251622317273
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.72839553996793
+      }
+    ],
+    "reference_svg": "references/probe_01.svg",
+    "input_sha256": "ab7687414a5b535d66c130a397fe585735a14a8a107d0c1101db1a416f5150da",
+    "reference_svg_sha256": "58dae326d5fe323ee18c24eb7fca40a77c00521a172473a2e869e3949ef3ac9f"
+  },
+  {
+    "case_id": "probe_02",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 1.02343641,
+      "relative_x": 0.01001127,
+      "relative_y": 0.0120246
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Die Darstellung ist etwas größer dargestellt und geringfügig nach rechts und unten verschoben.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          20.11027185,
+          15.41282515,
+          173.9841897,
+          173.9841897
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          76.78104729358023,
+          90.50506148871017,
+          25.272556596076374,
+          24.661726893724246
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 4.996954020970416
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          112.22637678058959,
+          88.37105571865621,
+          24.41950046644897,
+          27.584548734537073
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.684562203843428
+      }
+    ],
+    "reference_svg": "references/probe_02.svg",
+    "input_sha256": "e11cc2a81451d9957818cffeb3db63bf30a9620b100d0ada1b881978e0e4ab41",
+    "reference_svg_sha256": "5ff41ebe5c780ca999f080645286ac37022ca50bd073d483457ff4ff561e4d6d"
+  },
+  {
+    "case_id": "probe_03",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 0.95740779,
+      "relative_x": -0.02301839,
+      "relative_y": -0.02170872
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Die gesamte Darstellung ist ein wenig kleiner dargestellt und ein wenig nach links und oben versetzt.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          18.78647595,
+          14.278593849999998,
+          162.7593243,
+          162.7593243
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          71.80104661103834,
+          84.52613569698411,
+          23.64205760307023,
+          23.070636545854466
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 4.674567622573541
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          104.95956455938793,
+          82.5298086871266,
+          22.844037739957756,
+          25.80488790904013
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.317813675105878
+      }
+    ],
+    "reference_svg": "references/probe_03.svg",
+    "input_sha256": "05271b0ed7bcedf91a8edd69daf93f3908f583b30185195f9677f809c9f88d28",
+    "reference_svg_sha256": "e8dc93a4859376d9deab6009795f85ef3ae6d5ebb9443d8649abccadbacaaf7f"
+  },
+  {
+    "case_id": "probe_04",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 0.97632548,
+      "relative_x": 0.02237399,
+      "relative_y": 0.02117278
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Die gesamte Darstellung ist geringfügig kleiner dargestellt und geringfügig nach rechts und unten verschoben.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          26.710872099999996,
+          21.246890199999996,
+          165.9753316,
+          165.9753316
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          80.77297258450952,
+          92.88247299860754,
+          24.109207673676014,
+          23.52649574695533
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 4.766933719958108
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          114.5866790219838,
+          90.8467000014648,
+          23.29541951147313,
+          26.31477395242397
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.422889852294089
+      }
+    ],
+    "reference_svg": "references/probe_04.svg",
+    "input_sha256": "108ef57c462b8a908ce17818498ca67856b49cd4b6f9e930c6f8777535ccfa1c",
+    "reference_svg_sha256": "ac66196c7d141812d2bb4c0e8bd576b703068d81511a7d025f6562dedff840c3"
+  },
+  {
+    "case_id": "probe_05",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 1.02580902,
+      "relative_x": 0.02441088,
+      "relative_y": -0.0031589
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Die gesamte Darstellung ist geringfügig größer dargestellt und leicht nach rechts und oben versetzt.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          22.93251809999999,
+          12.174453299999989,
+          174.38753340000002,
+          174.38753340000002
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          79.73467214923798,
+          87.44077430984238,
+          25.33114540522908,
+          24.718899629884103
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.008538348989091
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          115.26217375986192,
+          85.30182132139691,
+          24.47611165443837,
+          27.648497383943685
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.697740598708686
+      }
+    ],
+    "reference_svg": "references/probe_05.svg",
+    "input_sha256": "abb202d15f03fbee07f6e04985166f36272023c0f428815bd16f05f364aeb70e",
+    "reference_svg_sha256": "e2e080647956cd259e3df8f9d2fa9c291bc8870baff3094593ea5d283a366a1d"
+  },
+  {
+    "case_id": "probe_06",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 0.99198512,
+      "relative_x": -0.01909192,
+      "relative_y": 0.02247586
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Das Motiv ist leicht kleiner dargestellt und etwas nach links und unten versetzt.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          16.671961599999996,
+          20.176436799999994,
+          168.6374704,
+          168.6374704
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          71.60118380628536,
+          92.96100880435517,
+          24.495904037326184,
+          23.90384578176017
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 4.843392306246776
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          105.95724059794331,
+          90.89258330258153,
+          23.66906323036762,
+          26.736846196995874
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.50986955792113
+      }
+    ],
+    "reference_svg": "references/probe_06.svg",
+    "input_sha256": "bb02fe0d887c41e3c38b41b825bed512848147141752ae003eafaf3ed571c77a",
+    "reference_svg_sha256": "0d5bea44255356768a1c9f61bf73adba9d62067a666d67f7392cbf5aed5f16d8"
+  },
+  {
+    "case_id": "probe_07",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 1.05563927,
+      "relative_x": 0.02439878,
+      "relative_y": 0.02280927
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Das Motiv ist etwas größer dargestellt und ein wenig nach rechts und unten versetzt.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          20.394405850000012,
+          14.832516050000013,
+          179.45867589999997,
+          179.45867589999997
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          78.84835123933294,
+          92.28756140182941,
+          26.067768290670593,
+          25.437718573086947
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.154185295128179
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          115.40898302746332,
+          90.08640823660681,
+          25.187870388710177,
+          28.452508240747598
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.863429360633034
+      }
+    ],
+    "reference_svg": "references/probe_07.svg",
+    "input_sha256": "d109c3e3b4ccc79d92ed70dce8eee025cbfeaa95cbd929f0e670abc821d9584e",
+    "reference_svg_sha256": "f2a1cf0bc7d5d4d3d493f1993750d9b51b07e5f0910edcedd1636c1e95db8ad3"
+  },
+  {
+    "case_id": "probe_08",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 1.05925419,
+      "relative_x": 0.01377981,
+      "relative_y": 0.01947963
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Die Darstellung ist etwas größer dargestellt und ein wenig nach rechts und unten verschoben.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          17.85715394999999,
+          13.859319849999988,
+          180.07321230000002,
+          180.07321230000002
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          76.51126841438715,
+          91.5796014435081,
+          26.157034481904,
+          25.52482722870207
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.17183523297775
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          113.19709804501873,
+          89.3709106725653,
+          25.274123466833693,
+          28.549940710354047
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.883508026391973
+      }
+    ],
+    "reference_svg": "references/probe_08.svg",
+    "input_sha256": "c02cbfa8289cd837b0d970a2f5e4e2dd24cc332ae4c45737e5a1a6b0cdfe136d",
+    "reference_svg_sha256": "2979b9a1b85d0aaadc47ef7ab06956f79bb7c4f9dbb09ee01834be2f1bd9a073"
+  },
+  {
+    "case_id": "probe_09",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 0.9600442,
+      "relative_x": -0.01096887,
+      "relative_y": -0.02257418
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Das Motiv ist leicht kleiner dargestellt und leicht nach links und oben verschoben.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          21.092780299999998,
+          13.881407,
+          163.207514,
+          163.207514
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          74.25333697211569,
+          84.32238922185385,
+          23.7071606424818,
+          23.134166065387472
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 4.687439960729291
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          107.50316339864698,
+          82.32056493429813,
+          22.90694327526576,
+          25.875946725610103
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.3324573173423655
+      }
+    ],
+    "reference_svg": "references/probe_09.svg",
+    "input_sha256": "066230e98574bf508b35fc22a98fd7e96837e74d7216dcbe0bf756a785f5fb98",
+    "reference_svg_sha256": "2065549e2a39b681d90851bd454c383e9ddb955af827ff4e2e0f39972001102a"
+  },
+  {
+    "case_id": "probe_10",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 1.0521352,
+      "relative_x": -0.00196295,
+      "relative_y": -0.01721621
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Das Motiv ist ein wenig größer dargestellt und leicht nach links und oben versetzt.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          15.156288500000008,
+          7.125266000000009,
+          178.86298399999998,
+          178.86298399999998
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          73.41620291469857,
+          84.3232084678433,
+          25.981239409612304,
+          25.353281067725487
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.13707658519254
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          109.85547599946258,
+          82.12936177083468,
+          25.10426222491672,
+          28.35806349680476
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.843966398706927
+      }
+    ],
+    "reference_svg": "references/probe_10.svg",
+    "input_sha256": "f17056de54285b325219ba0668530f2c1d4b1facdf9fd27394ae04e07f20fa9e",
+    "reference_svg_sha256": "b0111d29998f6881d9179de6714ad3a7559aa15cc7442c77111b1bcaa266f98f"
+  },
+  {
+    "case_id": "probe_11",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 0.99035782,
+      "relative_x": -0.0099788,
+      "relative_y": 0.01499351
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Das Motiv ist geringfügig kleiner dargestellt und etwas nach links und unten versetzt.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          18.7240373,
+          18.8182873,
+          168.3608294,
+          168.3608294
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          73.56315097391517,
+          91.48345999922982,
+          24.455719780691425,
+          23.864632765902982
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 4.835446973054726
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          107.86284844113378,
+          89.41842764192091,
+          23.630235363075844,
+          26.692985791291026
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.500830903458646
+      }
+    ],
+    "reference_svg": "references/probe_11.svg",
+    "input_sha256": "da7cd662a497c50789f455d725bccf8936633cde40d163055f2420881f337154",
+    "reference_svg_sha256": "57e807228d842928a342765e6567d9065834e2e9bf5f9bbd960c322013044ce4"
+  },
+  {
+    "case_id": "probe_12",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 1.01807833,
+      "relative_x": -0.02398738,
+      "relative_y": 0.01304025
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Das gesamte Motiv ist etwas größer dargestellt und geringfügig nach links und unten versetzt.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          13.42599215,
+          16.07139195,
+          173.0733161,
+          173.0733161
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          69.80007446685363,
+          90.77049178726236,
+          25.14024512198459,
+          24.53261334612755
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 4.9707930605638175
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          105.05983413324488,
+          88.64765835143912,
+          24.29165506659724,
+          27.44013309968239
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.654801352308774
+      }
+    ],
+    "reference_svg": "references/probe_12.svg",
+    "input_sha256": "12369ec127be7073067a713583dda4240a49938943119a55e12745a738022632",
+    "reference_svg_sha256": "441d4c9a365aa0bafd7dad063b8638941651f6b9fdd8842c3b6bf853aab3a0a3"
+  },
+  {
+    "case_id": "probe_13",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 0.97642709,
+      "relative_x": 0.01891377,
+      "relative_y": -0.01056854
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Die gesamte Darstellung ist leicht kleiner dargestellt und ein wenig nach rechts und oben versetzt.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          25.975589049999996,
+          14.889989349999997,
+          165.9926053,
+          165.9926053
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          80.04331598812847,
+          86.5330275430608,
+          24.111716812935317,
+          23.528944241112065
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 4.767429833339564
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          113.86054154989225,
+          84.4970426750835,
+          23.29784395662493,
+          26.317512633566768
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.423454233588217
+      }
+    ],
+    "reference_svg": "references/probe_13.svg",
+    "input_sha256": "84484bf5477ece92023dfe5fe808b204460d4224c0ba9089887ae4b2d6a55dc4",
+    "reference_svg_sha256": "d646551ac2ab7f4d1f5e5c0392c9f543ad35055ac46462242d1be9eda6de0b89"
+  },
+  {
+    "case_id": "probe_14",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 0.97506862,
+      "relative_x": -0.01157607,
+      "relative_y": -0.01129459
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Das Motiv ist leicht kleiner dargestellt und geringfügig nach links und oben versetzt.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.6881926,
+          14.860249300000001,
+          165.7616654,
+          165.7616654
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          73.68069693752074,
+          86.40361295607707,
+          24.078170996484374,
+          23.496209216438363
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 4.760797069386142
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          107.4508737366279,
+          84.37046068501554,
+          23.265430453964168,
+          26.280897967962478
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.415908765065111
+      }
+    ],
+    "reference_svg": "references/probe_14.svg",
+    "input_sha256": "4498992c272bdc8897ab5bc5fdad6e47f250a94129c891bf06c7dbf4d901354c",
+    "reference_svg_sha256": "e57b4442719ffddc161eff66e355ec0793e4a7f6954d850fe18ba996bbd37d17"
+  },
+  {
+    "case_id": "probe_15",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 1.03673434,
+      "relative_x": 0.01444692,
+      "relative_y": -0.01930388
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Die gesamte Darstellung ist leicht größer dargestellt und leicht nach rechts und oben verschoben.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.9114343,
+          8.016805100000001,
+          176.2448378,
+          176.2448378
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          77.31855642572968,
+          84.08474573515554,
+          25.60093331323427,
+          24.98216684945326
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.061881498764648
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          113.22444164999797,
+          81.923011950862,
+          24.736793074631443,
+          27.94296611598773
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.7584240574268435
+      }
+    ],
+    "reference_svg": "references/probe_15.svg",
+    "input_sha256": "3c2e2f0881bda6257fe79a9ca60433de4c94cd7e50aab35b45e09b66bc09b4f0",
+    "reference_svg_sha256": "9fce5d4ed16d57a6e91452533f2b4c2961fd8966a29599d3b816ed54c0a92b94"
+  },
+  {
+    "case_id": "probe_16",
+    "width": 210,
+    "height": 200,
+    "variation": {
+      "scale": 0.96259192,
+      "relative_x": -0.00621035,
+      "relative_y": 0.00078629
+    },
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung. Das Motiv ist ein wenig kleiner dargestellt und etwas nach links und unten versetzt.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          21.875513299999998,
+          18.336944799999998,
+          163.6406264,
+          163.6406264
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          75.17714494912683,
+          88.96485997684307,
+          23.770073586815055,
+          23.195558423747755
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 4.699879267728645
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          108.51520819619554,
+          86.95772334244552,
+          22.967732640506714,
+          25.94461509212049
+        ],
+        "parent": 0,
+        "stroke_width": 0,
+        "corner_radius": 5.346608340968715
+      }
+    ],
+    "reference_svg": "references/probe_16.svg",
+    "input_sha256": "4d2f7f898a0930bc35b5a5a382b581eb88696a691dff688d4db60d726229776a",
+    "reference_svg_sha256": "e1684f5c7b47b8730faf8ab3234e25b4ec82061854a7fbf2c5c29be1ca9e17b1"
+  }
+]

@@ -1,0 +1,238 @@
+{
+  "split_10.png": {
+    "actual_iterations": 64,
+    "base": "SPLIT_10",
+    "best_error": 0.282531746031746,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+    "diff_error_distribution_status": "structured",
+    "elapsed_seconds": 0.9059999999590218,
+    "error_per_pixel": 6.726946334089191e-06,
+    "error_pixel_cluster_count": 1.0,
+    "error_pixel_cluster_excess": 0.8857619047619048,
+    "error_pixel_count": 4798.0,
+    "filename": "split_10.png",
+    "h": 200,
+    "largest_error_pixel_cluster_fraction": 1.0,
+    "localized_error_fraction": 0.7867124406675435,
+    "mean_delta2": 13.087071418762207,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "adaptive_search": {
+        "candidate_evaluations": 1,
+        "elapsed_seconds": 0.906,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      },
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "constraint": "inside_rect_border",
+            "id": "description_element_1",
+            "kind": "HorizontalGradient",
+            "source": "description",
+            "stops": [
+              "#8f8f8f",
+              "#dedede",
+              "#8f8f8f"
+            ]
+          },
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "fill": "none",
+            "id": "description_element_2",
+            "kind": "RectBorder",
+            "source": "description",
+            "stroke": "#666666",
+            "stroke_width": 0.035
+          }
+        ],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.75,
+          "reasons": [],
+          "status": "ok"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": false,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "split_10",
+          "source": "base_name",
+          "text": "Ein gefüllter Kreis und 3 gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [],
+      "geometry_ir": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "fill": "none",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "label": "M",
+      "language_assertions": {
+        "counts": [],
+        "no_text": false
+      },
+      "mode": "auto",
+      "primitive_scene_registration": {
+        "error": 0.282531746031746,
+        "evaluations": 1,
+        "initial_error": 0.282531746031746,
+        "instance_groups": 4,
+        "neural_scene_selected": false,
+        "object_kinds": [
+          "circle",
+          "rectangle",
+          "rectangle",
+          "rectangle"
+        ],
+        "object_quality": [
+          {
+            "edge_alignment": 0.9190406799316406,
+            "foreground_iou": 0.9933075690451504,
+            "foreground_mse": 0.00011940393776537991,
+            "normalized_mse": 9.74972362240235e-05,
+            "passed": true
+          },
+          {
+            "edge_alignment": 0.9944577217102051,
+            "foreground_iou": 1.0,
+            "foreground_mse": 6.1015322837698846e-05,
+            "normalized_mse": 6.1015322837698846e-05,
+            "passed": true
+          },
+          {
+            "edge_alignment": 0.9955421090126038,
+            "foreground_iou": 1.0,
+            "foreground_mse": 6.29212301645981e-05,
+            "normalized_mse": 6.29212301645981e-05,
+            "passed": true
+          },
+          {
+            "edge_alignment": 0.9972288608551025,
+            "foreground_iou": 1.0,
+            "foreground_mse": 3.9294551405278046e-05,
+            "normalized_mse": 3.9294551405278046e-05,
+            "passed": true
+          }
+        ],
+        "scene_attempts": [
+          {
+            "operator": "segmentation",
+            "outcome": "inventory_rejected",
+            "residual_threshold": 25
+          },
+          {
+            "operator": "segmentation",
+            "outcome": "inventory_rejected",
+            "residual_threshold": 16
+          },
+          {
+            "operator": "segmentation",
+            "outcome": "inventory_rejected",
+            "residual_threshold": 36
+          },
+          {
+            "operator": "split",
+            "outcome": "accepted",
+            "residual_threshold": 25
+          }
+        ],
+        "scene_detectors": [
+          "gradient_boundary",
+          "flat_residual_shapes"
+        ],
+        "scene_hypotheses": 4,
+        "source": "primitive_mixed_gradient_scene_v1"
+      },
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "SPLIT_10"
+    },
+    "reference_access": {
+      "blocked_svg_reads": []
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 2.088625658079351,
+    "search_control": {
+      "candidate_evaluations": 1,
+      "elapsed_seconds": 0.906,
+      "external_max_seconds": null,
+      "isolated": true,
+      "limit_seconds": 5.0,
+      "max_seconds": 5.0,
+      "stop_reason": "satisfactory",
+      "time_extensions": 0
+    },
+    "search_satisfactory": true,
+    "spatial_quality_score": 51.37573470074001,
+    "std_delta2": 122.82271575927734,
+    "tile_std_delta2": 17.606825621492817,
+    "variant": "SPLIT_10",
+    "w": 210
+  }
+}

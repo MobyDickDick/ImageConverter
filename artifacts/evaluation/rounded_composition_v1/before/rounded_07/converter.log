@@ -1,0 +1,14 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\rounded_composition_v1\before\rounded_07\conversion\reports\.image-worker-pqtbv8h8\reports_out_dir\rounded_07_worker.log
+[INFO] Konvertiere rounded_07.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite rounded_07.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 4 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "rounded_07", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 3.953, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "supported_models_exhausted"}
+[INFO] Konvertiert rounded_07.png | Parameter: mode=auto, label=M, variant_name=ROUNDED_07 | Qualität: Optimierungsfehler/Pixel=0.000581, Mean-Delta²=4398.925293, RGB-RMSE/Kanal=38.292407, Raumscore=10994.154209, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=3.4s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\rounded_composition_v1\before\rounded_07\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\rounded_composition_v1\before\rounded_07\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\rounded_composition_v1\before\rounded_07\conversion
+[WARN] Mindestens eine Datei konnte nicht erfolgreich konvertiert werden (siehe batch_failure_summary.csv).

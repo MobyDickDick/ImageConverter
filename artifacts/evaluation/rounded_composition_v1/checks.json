@@ -1,0 +1,75 @@
+{
+  "base_commit": "985ee019cde2332d646e0e8f68a9f247728d7c5a",
+  "branch": "codex/search-structure-rounded-composition-2026-10-23",
+  "cli": {
+    "before": {
+      "accepted": 0,
+      "total": 12,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": false
+    },
+    "final_cli": {
+      "accepted": 12,
+      "total": 12,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "additional_cli": {
+      "accepted": 12,
+      "total": 12,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "plan_b_cli": {
+      "accepted": 17,
+      "total": 17,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "existing_split_cli": {
+      "accepted": 20,
+      "total": 20,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    },
+    "existing_residual_cli": {
+      "accepted": 7,
+      "total": 9,
+      "budget_seconds": 5,
+      "seed": 17,
+      "source_matches_final_runtime": true
+    }
+  },
+  "byte_identical_existing_successes": {
+    "existing_split_cli": 20,
+    "existing_residual_cli": 7
+  },
+  "syntax": "passed",
+  "cli_help": "passed",
+  "runtime_image_ids": 0,
+  "new_targeted_tests": 34,
+  "compact_evidence": {
+    "files": 886,
+    "verification": "all cohorts independently verified from selected versionable files"
+  },
+  "saved_archive": {
+    "kind": "stored_archive_pixel_and_hash_check_not_reconversion",
+    "total": 379,
+    "passed": 379,
+    "hashes_checked": 758,
+    "threshold": 0.045945679012345676
+  },
+  "full_suite": {
+    "command": "python -m pytest -q --basetemp=.tmp/rounded-full-suite",
+    "summary": "3999 passed, 30 skipped in 2783.37s (0:46:23)",
+    "seconds": 2783.37,
+    "passed": 3999,
+    "skipped": 30
+  },
+  "whitespace": "passed_with_cr_at_eol"
+}
