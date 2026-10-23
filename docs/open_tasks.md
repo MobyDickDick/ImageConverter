@@ -4,9 +4,21 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-10-22)
+## Neue Ausführungsreihenfolge (2026-10-23)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `497` · Erledigt `447` · Offen `50`
+Maßgeblich ist jetzt die [Schwächenprüfung mit priorisierten Arbeitspaketen](weakness_review_2026-10-23.md).
+Reihenfolge: **1. Strukturelle Exploration/Komposition → 2. vollständige produktive
+Semantikabnahme → 3. unabhängige reale Übertragung/Nutzenmessung → 4. fehlende
+Operatoren und gemeinsame Fehlerursachen → 5. Komponenten-/Netzversuche →
+6. größere Runtime-/Betriebsbereinigung.** Die bestehenden Aufgaben darunter
+bleiben erhalten; ältere Nächster-Schritt-Hinweise sind historisch.
+
+- [ ] **SEARCH-STRUCTURE-01 (P0, begonnen):** Nach gescheiterten Bildzerlegungen andere Strukturhypothesen unter demselben Bildbudget untersuchen; Instanzen/Formen/Schichten statt ausschließlich Parameter verändern. Abgelehnte und doppelte Vorschläge sichtbar machen, vollständige Objekt-/Relations-/Rastergates beibehalten. Erster produktiver Teil: alternative Restbildzerlegungen und generische getrennte Rechteckgruppen im vorhandenen Verlaufsszenenweg; synthetische CLI-Vorher-/Nachher-Prüfung. Faire Strukturzeitscheiben, Add/Remove/Replace und unabhängige reale Abnahme fehlen. Genau eine gekoppelte Plan-B-Aufgabe: synthetischer Repro zweier durch Antialiasing verbundener Restbildkomponenten. [Umfang, Rangfolge und Nachweise](weakness_review_2026-10-23.md).
+- [ ] **SEMANTIC-COMPLETENESS-02 (P1):** Erfolgreiche Produktionsausgaben an alle verbrauchten Beschreibungsaussagen, native Instanzen und Relationen binden. Parser-/Fallbackstatus allein darf keinen vollständigen Erfolg bedeuten. Unpassende Ersatzmodelle und beschädigte SVGs als echte CLI-Negativkontrollen; Sucherschöpfung und nicht unterstützte Struktur ausdrücklich ausweisen. V5/V6 und vorhandene unabhängige Gates verwenden.
+
+## Aufgaben-Gesamtzähler (Snapshot 2026-10-23)
+
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `499` · Erledigt `447` · Offen `52`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 

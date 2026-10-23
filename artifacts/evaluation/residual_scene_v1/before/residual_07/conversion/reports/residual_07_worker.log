@@ -1,0 +1,10 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\residual_scene_v1\before\residual_07\conversion\reports\.image-worker-i2aimr8d\reports_out_dir\residual_07_worker.log
+[INFO] Konvertiere residual_07.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite residual_07.png ---
+Bildbeschreibung: Ein gefüllter Kreis und ein gefülltes Rechteck. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "residual_07", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 4.5, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "stagnation"}
+[WARN] residual_07.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.648057, localized_error_fraction=0.626203).
+[INFO] Konvertiert residual_07.png | Parameter: mode=auto, label=M, variant_name=RESIDUAL_07 | Qualität: Optimierungsfehler/Pixel=0.000556, Mean-Delta²=3582.161621, RGB-RMSE/Kanal=34.555085, Raumscore=9487.064201, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.6s

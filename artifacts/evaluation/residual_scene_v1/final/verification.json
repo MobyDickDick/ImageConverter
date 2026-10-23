@@ -1,0 +1,145 @@
+{
+  "cases": [
+    {
+      "case_id": "residual_00",
+      "accepted": true,
+      "source": "primitive_mixed_gradient_scene_v1",
+      "adaptive_search": {
+        "candidate_evaluations": 1,
+        "elapsed_seconds": 1.235,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "residual_01",
+      "accepted": true,
+      "source": "primitive_mixed_gradient_scene_v1",
+      "adaptive_search": {
+        "candidate_evaluations": 1,
+        "elapsed_seconds": 1.094,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "residual_02",
+      "accepted": true,
+      "source": "primitive_mixed_gradient_scene_v1",
+      "adaptive_search": {
+        "candidate_evaluations": 1,
+        "elapsed_seconds": 1.297,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "residual_03",
+      "accepted": true,
+      "source": "primitive_mixed_gradient_scene_v1",
+      "adaptive_search": {
+        "candidate_evaluations": 1,
+        "elapsed_seconds": 1.062,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "residual_04",
+      "accepted": true,
+      "source": "primitive_mixed_gradient_scene_v1",
+      "adaptive_search": {
+        "candidate_evaluations": 1,
+        "elapsed_seconds": 1.218,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "residual_05",
+      "accepted": true,
+      "source": "primitive_mixed_gradient_scene_v1",
+      "adaptive_search": {
+        "candidate_evaluations": 1,
+        "elapsed_seconds": 1.063,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "residual_06",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "elapsed_seconds": 5.047,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 0,
+        "stop_reason": "time_limit",
+        "isolated": true,
+        "timing_trace": "residual_06_timing.jsonl",
+        "external_max_seconds": null,
+        "recovered_checkpoint": false,
+        "retained_output": false
+      },
+      "absence_reason": "time_limit_no_output"
+    },
+    {
+      "case_id": "residual_07",
+      "accepted": false,
+      "source": null,
+      "adaptive_search": {
+        "candidate_evaluations": 136,
+        "elapsed_seconds": 4.891,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      }
+    },
+    {
+      "case_id": "residual_08",
+      "accepted": true,
+      "source": "primitive_mixed_gradient_scene_v1",
+      "adaptive_search": {
+        "candidate_evaluations": 1,
+        "elapsed_seconds": 1.109,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      }
+    }
+  ],
+  "completed": 9,
+  "accepted": 7
+}

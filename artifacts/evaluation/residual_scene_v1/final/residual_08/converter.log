@@ -1,0 +1,18 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\residual_scene_v1\final\residual_08\conversion\reports\.image-worker-s4u9e2ri\reports_out_dir\residual_08_worker.log
+[INFO] Konvertiere residual_08.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite residual_08.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 2 gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 25, "outcome": "no_complete_scene"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 16, "outcome": "no_complete_scene"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_finished", "evaluations": 1, "best_error": 0.2932066276803119}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 36, "outcome": "accepted"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "candidate_satisfactory", "elapsed_seconds": 1.016, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 1}
+[Search] {"source": "residual_08", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 1.047, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 1, "stop_reason": "satisfactory"}
+[INFO] Konvertiert residual_08.png | Parameter: mode=auto, label=M, variant_name=RESIDUAL_08 | Qualität: Optimierungsfehler/Pixel=0.000009, Mean-Delta²=14.381374, RGB-RMSE/Kanal=2.189473, Raumscore=55.895238, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.2s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\residual_scene_v1\final\residual_08\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\residual_scene_v1\final\residual_08\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\residual_scene_v1\final\residual_08\conversion

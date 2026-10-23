@@ -1,0 +1,18 @@
+# Retain inputs, outputs, runtime rows, guards, logs and comparisons used by
+# independent verification; omit disposable renderer/report duplicates.
+**/conversion/*
+!**/conversion/converted_svgs/
+!**/conversion/converted_svg_failed/
+!**/conversion/reports/
+**/conversion/reports/*
+!**/conversion/reports/conversion_result_map.json
+!**/conversion/reports/*_worker.log
+!**/conversion/reports/*_deadline.json
+!**/conversion/reports/*_reference_access.json
+before/*/input/
+after/*/input/
+after/
+final/*/input/
+**/difference.png
+**/output.png
+**/converter.timing.jsonl

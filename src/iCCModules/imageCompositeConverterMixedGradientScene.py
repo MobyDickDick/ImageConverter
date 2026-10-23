@@ -1,4 +1,4 @@
-"""Raster-derived gradient circles containing one or two flat rectangles.
+"""Raster-derived gradient circles containing disjoint flat rectangles.
 
 The closed description contract controls topology; raster residuals supply
 instances. No catalogue keys, saved geometry or reference vectors are read.
@@ -10,9 +10,20 @@ import re
 import cv2
 import numpy as np
 
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
 from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _register
 from src.iCCModules.imageCompositeConverterGradientScene import _gradient
 from src.iCCModules.imageCompositeConverterPrimitiveScene import _circle, _local_quality
+from src.iCCModules.imageCompositeConverterSearchPortfolio import progress
+
+
+# Bound complexity without encoding a family layout. Other scene contracts
+# retain their existing vocabulary and supported instance counts.
+NUMBERS = {'zwei': 2, 'drei': 3, 'vier': 4, 'fünf': 5, 'sechs': 6, 'sieben': 7, 'acht': 8}
+SHAPES = re.compile(r'\b(ein(?:e|en|em)?|[1-8]|'+ '|'.join(NUMBERS) +r')\s+'
+                    r'(?:(?:voneinander|getrennt\w*|unbeschriftet\w*|einzeln\w*|'
+                    r'gefüllt\w*|einfarbig\w*|farbig\w*|klein\w*|groß\w*|dunk\w*|hell\w*)\s+)*'
+                    r'(kreis(?:e|en)?|rechteck(?:e|en)?)\b')
 
 
 def requested(description):
@@ -24,20 +35,25 @@ def requested(description):
 def scene_contract(description):
     """Consume all assertions, rather than silently dropping extra content."""
     text = str(description or '').casefold()
-    from src.iCCModules.imageCompositeConverterLayeredScene import SHAPES
     matches = list(SHAPES.finditer(text))
     counts = {'circle': 0, 'rectangle': 0}
     for m in matches:
-        counts['circle' if m[3].startswith('kreis') else 'rectangle'] += {
-            'zwei': 2, '2': 2, 'drei': 3, '3': 3}.get(m[1], 1)
-    if counts['circle'] != 1 or counts['rectangle'] not in (1, 2):
+        number = int(m[1]) if m[1].isdigit() else NUMBERS.get(m[1], 1)
+        counts['circle' if m[2].startswith('kreis') else 'rectangle'] += number
+    if counts['circle'] != 1 or not 1 <= counts['rectangle'] <= 8:
         return None
     direction = re.findall(r'der kreis hat einen (horizontal|vertikal)en farbverlauf', text)
     if len(direction) != 1:
         return None
     relation = 'die rechtecke liegen innerhalb des kreises'
-    if counts['rectangle'] == 2:
-        relation += ' und getrennt nebeneinander'
+    layout_axis = None
+    if counts['rectangle'] > 1:
+        layouts = [name for name in ('nebeneinander', 'untereinander', 'voneinander')
+                   if relation+' und getrennt '+name in text]
+        if len(layouts) != 1:
+            return None
+        relation += ' und getrennt '+layouts[0]
+        layout_axis = {'nebeneinander': 0, 'untereinander': 1}.get(layouts[0])
     if text.count(relation) != 1:
         return None
     outlined = 'die formen haben helle konturen' in text
@@ -48,7 +64,7 @@ def scene_contract(description):
     if re.sub(r'[\s.,;]+|\bund\b', '', rest):
         return None
     return dict(count=1+counts['rectangle'], axis=0 if direction[0] == 'horizontal' else 1,
-                outlined=outlined)
+                outlined=outlined, layout_axis=layout_axis)
 
 
 def _flat_edge(profile, fill, stroke, low, high):
@@ -58,8 +74,13 @@ def _flat_edge(profile, fill, stroke, low, high):
     if denominator < 100:
         return None
     coverage = np.clip((profile-stroke)@delta/denominator, 0, 1)
-    inside = np.flatnonzero((coverage >= .5) & (np.arange(len(profile)) >= low-2)
-                           & (np.arange(len(profile)) <= high+2))
+    return _coverage_edges(coverage, low, high)
+
+
+def _coverage_edges(coverage, low, high):
+    """Recover a contiguous subpixel interval from compositing coverage."""
+    inside = np.flatnonzero((coverage >= .5) & (np.arange(len(coverage)) >= low-2)
+                           & (np.arange(len(coverage)) <= high+2))
     if not len(inside):
         return None
     # JPEG shadows can form a second dark stripe beyond a light rim. Only
@@ -68,9 +89,9 @@ def _flat_edge(profile, fill, stroke, low, high):
     first = last = int(middle)
     while first > 0 and coverage[first-1] >= .5:
         first -= 1
-    while last+1 < len(profile) and coverage[last+1] >= .5:
+    while last+1 < len(coverage) and coverage[last+1] >= .5:
         last += 1
-    if first < 1 or last+1 >= len(profile):
+    if first < 1 or last+1 >= len(coverage):
         return None
     def crossing(a, b):
         difference = coverage[b]-coverage[a]
@@ -78,7 +99,7 @@ def _flat_edge(profile, fill, stroke, low, high):
     return crossing(first-1, first), crossing(last, last+1)
 
 
-def detect_instances(pixels, contract):
+def detect_instances(pixels, contract, *, residual_threshold=25):
     """Fit background paint first, then explain contrasting interior regions."""
     foreground = (np.max(255-pixels.astype(float), axis=2) > 25).astype('uint8')
     contours = cv2.findContours(foreground, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[0]
@@ -106,7 +127,7 @@ def detect_instances(pixels, contract):
     coordinate = xx if contract['axis'] == 0 else yy
     t = (coordinate+.5-bounds[contract['axis']])/(2*radius)
     predicted = colors[:3] + t[..., None]*(colors[3:]-colors[:3])
-    mask = ((np.max(abs(pixels.astype(float)-predicted), axis=2) > 25)
+    mask = ((np.max(abs(pixels.astype(float)-predicted), axis=2) > residual_threshold)
             & interior.astype(bool)).astype('uint8')
     number, labels, stats, _ = cv2.connectedComponentsWithStats(mask)
     children = []
@@ -151,7 +172,18 @@ def detect_instances(pixels, contract):
             top, bottom = top_bottom
             x, y, w, h = left-sw/2, top-sw/2, right-left+sw, bottom-top+sw
         else:
-            x, y, w, h = x+.25, y+.25, w-.5, h-.5
+            # Estimate subpixel edges against the varying parent paint, rather
+            # than keeping a threshold-dependent integer bounding rectangle.
+            delta = fill-predicted
+            coverage = np.clip(np.sum((pixels.astype(float)-predicted)*delta, axis=2)
+                               / np.maximum(1., np.sum(delta*delta, axis=2)), 0, 1)
+            left_right = _coverage_edges(np.median(coverage[y+h//3:y+2*h//3], axis=0), x, x+w)
+            top_bottom = _coverage_edges(np.median(coverage[:, x+w//3:x+2*w//3], axis=1), y, y+h)
+            if left_right is None or top_bottom is None:
+                return None
+            left, right = left_right
+            top, bottom = top_bottom
+            x, y, w, h = left, top, right-left, bottom-top
         children.append(dict(kind='rectangle', geometry=np.array([x, y, w, h, sw]),
                              colors=np.r_[fill, fill, stroke]))
     if len(children) != contract['count']-1:
@@ -169,9 +201,34 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
     if (contract is None or pixels.shape != (height, width, 3) or min(width, height) < 24
             or not np.isfinite(pixels).all()):
         return None
-    objects = detect_instances(pixels, contract)
-    if objects is None:
-        return None
+    attempts, seen = [], set()
+    session = current_search()
+    # A failed segmentation is a hypothesis failure, not proof that the scene
+    # is unsupported. Only proposal thresholds change; acceptance stays fixed.
+    for threshold in (25, 16, 36):
+        if session and session.time_reason():
+            break
+        objects = detect_instances(pixels, contract, residual_threshold=threshold)
+        attempt = dict(residual_threshold=threshold, outcome='no_complete_scene')
+        attempts.append(attempt)
+        if objects is not None:
+            key = tuple(np.round(np.concatenate([np.r_[o['geometry'], o['colors']] for o in objects]), 3))
+            if key in seen:
+                attempt['outcome'] = 'duplicate'
+            else:
+                seen.add(key)
+                fitted = _fit_instances(width, height, pixels=pixels, contract=contract,
+                                        objects=objects, render_fn=render_fn, error_fn=error_fn)
+                attempt['outcome'] = 'accepted' if fitted is not None else 'quality_or_geometry_rejected'
+                if fitted is not None:
+                    fitted.update(scene_hypotheses=len(attempts), scene_attempts=attempts)
+                    progress('primitive_mixed_gradient_scene_v1', event='scene_hypothesis', **attempt)
+                    return fitted
+        progress('primitive_mixed_gradient_scene_v1', event='scene_hypothesis', **attempt)
+    return None
+
+
+def _fit_instances(width, height, *, pixels, contract, objects, render_fn, error_fn):
     n = len(objects)
     boxes = [np.r_[o['geometry'][:2], o['geometry'][:2]+o['geometry'][2:4], o['geometry'][4]]
              for o in objects]
@@ -220,10 +277,18 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
                 c = np.clip(p[offsets[i]:offsets[i]+(9 if i == 0 else 6)], 0, 255)
                 if c[-3:].mean() < 180 or (i and c[-3:].mean() < c[:3].mean()+15):
                     return False
-        if len(scene) == 3:
-            a, b = [s['geometry'] for s in scene[1:]]
-            if a[0]+a[2]+a[4]/2 >= b[0]-b[4]/2:
-                return False
+        # Every pair must be disjoint, in any arrangement. An explicitly
+        # named row/column imposes its stronger interval-separation rule.
+        for i, a in enumerate(scene[1:]):
+            ax, ay, aw, ah, ast = a['geometry']
+            for b in scene[i+2:]:
+                bx, by, bw, bh, bst = b['geometry']
+                gap = (ast+bst)/2
+                separate = (ax+aw+gap < bx or bx+bw+gap < ax,
+                            ay+ah+gap < by or by+bh+gap < ay)
+                axis = contract['layout_axis']
+                if not (any(separate) if axis is None else separate[axis]):
+                    return False
         c = np.clip(np.rint(p[5*n:5*n+6]), 0, 255)
         if np.max(abs(c[3:]-c[:3])) < 8:
             return False
@@ -255,7 +320,8 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
     if fitted is None:
         return None
     quality = qualities(fitted['rendered'])
-    if any(not q or not q['passed'] for q in quality):
+    global_quality = _local_quality(pixels, fitted['rendered'])
+    if not global_quality or not global_quality['passed'] or any(not q or not q['passed'] for q in quality):
         return None
     fitted.update(object_kinds=[o['kind'] for o in objects], object_quality=quality,
                   scene_hypotheses=1, instance_groups=n,

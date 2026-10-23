@@ -1,0 +1,22 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\residual_scene_v1\final\residual_07\conversion\reports\.image-worker-ntqzizi9\reports_out_dir\residual_07_worker.log
+[INFO] Konvertiere residual_07.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite residual_07.png ---
+Bildbeschreibung: Ein gefüllter Kreis und ein gefülltes Rechteck. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 25, "outcome": "no_complete_scene"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registering", "evaluations": 64, "current_error": 0.20067251461988303}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registering", "evaluations": 128, "current_error": 0.0824561403508772}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_finished", "evaluations": 136, "best_error": 0.05739766081871345}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 16, "outcome": "quality_or_geometry_rejected"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 36, "outcome": "no_complete_scene"}
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "residual_07", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 4.766, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 136, "stop_reason": "supported_models_exhausted"}
+[WARN] residual_07.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.648057, localized_error_fraction=0.626203).
+[INFO] Konvertiert residual_07.png | Parameter: mode=auto, label=M, variant_name=RESIDUAL_07 | Qualität: Optimierungsfehler/Pixel=0.000556, Mean-Delta²=3582.161621, RGB-RMSE/Kanal=34.555085, Raumscore=9487.064201, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=3.9s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\residual_scene_v1\final\residual_07\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\residual_scene_v1\final\residual_07\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\residual_scene_v1\final\residual_07\conversion
+[WARN] Mindestens eine Datei konnte nicht erfolgreich konvertiert werden (siehe batch_failure_summary.csv).

@@ -188,6 +188,24 @@ def verify_report(inputs, output, *, require_all=False, write_verification=True)
         if access['blocked_svg_reads']:
             raise ValueError('Forbidden vector access')
         rows = json.loads((folder/'conversion/reports/conversion_result_map.json').read_text(encoding='utf-8'))
+        if not rows and not result.get('output_svg') and result.get('accepted') is False:
+            # A supervised timeout without any retained SVG is a negative
+            # observation, not a missing successful row. Keep it in the
+            # denominator, but require independent containment/access evidence.
+            control = json.loads((folder/f'conversion/reports/{result["case_id"]}_deadline.json').read_text(encoding='utf-8'))
+            worker_access = json.loads((folder/f'conversion/reports/{result["case_id"]}_reference_access.json').read_text(encoding='utf-8'))
+            outputs = [p for name in ('converted_svgs', 'converted_svg_failed')
+                       for p in (folder/'conversion'/name).glob('*.svg')]
+            if (outputs or worker_access.get('blocked_svg_reads') != []
+                    or control.get('stop_reason') != 'time_limit'
+                    or control.get('isolated') is not True
+                    or control.get('limit_seconds') != 5. or control.get('max_seconds') != 5.
+                    or control.get('elapsed_seconds', -1) < 5.
+                    or control.get('retained_output') is not False):
+                raise ValueError('Unverified missing-output timeout')
+            verified.append(dict(case_id=result['case_id'], accepted=False, source=None,
+                                 adaptive_search=control, absence_reason='time_limit_no_output'))
+            continue
         if len(rows) != 1:
             raise ValueError('Missing or ambiguous runtime row')
         row = next(iter(rows.values()))

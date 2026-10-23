@@ -1,0 +1,528 @@
+[
+  {
+    "case_id": "residual_00",
+    "width": 190,
+    "height": 180,
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          21.011791892778845,
+          18.115441536965392,
+          146.0,
+          146.0
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          86.03036478095598,
+          67.38144618840914,
+          15.962854223645726,
+          18.46799069711249
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          85.69735292273572,
+          95.36664499350958,
+          16.628877940086248,
+          20.49759308691161
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      }
+    ],
+    "reference_svg": "references\\residual_00.svg",
+    "input_sha256": "6c16df33f89f9a5e67ef94a1a0b9f274ad285d01ecd64b1586ca967feb2fb5c9",
+    "reference_svg_sha256": "8da96726c6a5907ce2c37cd1a8a62d960c71eca9a69558ada60465f8ac989dbb"
+  },
+  {
+    "case_id": "residual_01",
+    "width": 190,
+    "height": 180,
+    "description": "Ein gefüllter Kreis und 3 gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt untereinander. Keine Beschriftung.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          23.168083107598633,
+          16.24794961054282,
+          146.0,
+          146.0
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          86.6902218285079,
+          51.228921742972666,
+          18.955722558181453,
+          18.038055735140308
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          86.76620248756014,
+          80.03774217739016,
+          18.803761240077005,
+          18.420414866305332
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          87.53345446296456,
+          109.70831652803182,
+          17.269257289268147,
+          17.07926616502202
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      }
+    ],
+    "reference_svg": "references\\residual_01.svg",
+    "input_sha256": "e00815fe58fbcad72bc471c0f6cb0c07d20679be5dedab875e365fbc62dd09be",
+    "reference_svg_sha256": "a3300b6f9c348809822804c380a0a105e5b0da0d18b4019880f62017de05a26c"
+  },
+  {
+    "case_id": "residual_02",
+    "width": 190,
+    "height": 180,
+    "description": "Ein gefüllter Kreis und 3 gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          21.824902739080983,
+          18.55195956219073,
+          146.0,
+          146.0
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          58.029206342080364,
+          81.57663846368129,
+          15.59139279400124,
+          19.95064219701888
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          87.21654798754119,
+          82.601648235589,
+          15.2167095030796,
+          17.900622653203463
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          115.50906526252194,
+          81.36772972962072,
+          16.63167495311808,
+          20.368459665140023
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      }
+    ],
+    "reference_svg": "references\\residual_02.svg",
+    "input_sha256": "e7ba49560ada03709b0ee3bc61b7b8f542fb67b0cef66a41999e21b697f34aaf",
+    "reference_svg_sha256": "6ae5ec3ec534d967b0f7f566390298fd041d4883a4789c04f8bbf189ca68cccc"
+  },
+  {
+    "case_id": "residual_03",
+    "width": 190,
+    "height": 180,
+    "description": "Ein gefüllter Kreis und 4 gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          21.49532171220025,
+          16.315367282630035,
+          146.0,
+          146.0
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          71.06472689765545,
+          64.4339459658786,
+          17.861189629089594,
+          20.76284263350285
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          100.99286965361318,
+          64.54064113283667,
+          16.00490411717415,
+          20.549452299586722
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          70.6588284322633,
+          93.95095503221582,
+          18.672986559873895,
+          19.728824500828445
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          100.05143436643198,
+          94.06392352853294,
+          17.887774691536556,
+          19.50288750819419
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      }
+    ],
+    "reference_svg": "references\\residual_03.svg",
+    "input_sha256": "8a4762ec213ea6c7092a92922bf9814a3031ecd7c1635f3f78f8591aec474987",
+    "reference_svg_sha256": "f99dafdf93f9dbc7055550834af7d7a800465e1767fa950df5cf74fef5110937"
+  },
+  {
+    "case_id": "residual_04",
+    "width": 190,
+    "height": 180,
+    "description": "Ein gefüllter Kreis und 6 gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          23.778884008620096,
+          17.43457197298744,
+          146.0,
+          146.0
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          59.635626412581246,
+          65.94551581386504,
+          16.2865151920777,
+          19.978112318244786
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          88.67600535217304,
+          66.02257785321387,
+          16.205757312894118,
+          19.82398823954714
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          118.23598503658495,
+          65.88872685630457,
+          15.085797944070306,
+          20.091690233365725
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          59.979689311036566,
+          94.55938511501198,
+          15.598389395167056,
+          20.750373715950936
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          88.82488964218301,
+          96.24153541772237,
+          15.90798873287417,
+          17.386073110530138
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          118.20559126423387,
+          94.60894629534386,
+          15.146585488772448,
+          20.651251355287158
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      }
+    ],
+    "reference_svg": "references\\residual_04.svg",
+    "input_sha256": "2e3f3d25c9bd499003fe5793f427b885f5b22b8a7076bc27eb3f6e48e5ea2b76",
+    "reference_svg_sha256": "dfb7250c21ebcbec98d4473811f1167226ccb4dcfafa9dda8c9b9b61c77252e4"
+  },
+  {
+    "case_id": "residual_05",
+    "width": 190,
+    "height": 180,
+    "description": "Ein gefüllter Kreis und 6 gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          23.243952560543917,
+          17.418061613471593,
+          146.0,
+          146.0
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          72.95017366531833,
+          51.7186972636237,
+          17.587557790451175,
+          19.398728699695777
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          101.79083075609469,
+          52.553645937931265,
+          17.906243608898446,
+          17.728831351080665
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          72.56942412216121,
+          80.62391059526195,
+          18.349056876765427,
+          19.588302036419286
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          103.07773877013084,
+          81.64617624334647,
+          15.332427580826163,
+          17.543770740250224
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          73.69499379728997,
+          109.3519648797176,
+          16.097917526507903,
+          20.132193467507992
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          102.68169619390225,
+          110.02020878429681,
+          16.124512733283314,
+          18.795705658349572
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      }
+    ],
+    "reference_svg": "references\\residual_05.svg",
+    "input_sha256": "41c0c2157ad6f52f92d7699e6af66d440f1550ffe3f5e82d8137834c6a34681d",
+    "reference_svg_sha256": "af957a061cd1e055ba392493eba71b61f0164bcc34039dd0e6b1b27b07048378"
+  },
+  {
+    "case_id": "residual_06",
+    "width": 190,
+    "height": 180,
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          21.997679394308022,
+          17.046092819489417,
+          146.0,
+          146.0
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          72.83976385296253,
+          79.856892746775,
+          15.31583108269099,
+          20.378400145428838
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          101.64522066929149,
+          80.91501674964755,
+          15.704917450033054,
+          18.262152139683742
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      }
+    ],
+    "reference_svg": "references\\residual_06.svg",
+    "input_sha256": "08490ed9a438c45b191375e0cfe03967bfbea1fab9800896219b666993a35559",
+    "reference_svg_sha256": "2e586332a4bbbd37432b64dbe94f0b5cb4e88ad4911333d4497463abdf64ab38"
+  },
+  {
+    "case_id": "residual_07",
+    "width": 190,
+    "height": 180,
+    "description": "Ein gefüllter Kreis und ein gefülltes Rechteck. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises. Keine Beschriftung.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          20.750850572233503,
+          16.023576659734857,
+          146.0,
+          146.0
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          85.21689665899038,
+          78.84514140178757,
+          17.067907826486255,
+          20.356870515894578
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      }
+    ],
+    "reference_svg": "references\\residual_07.svg",
+    "input_sha256": "1418ee9e7205526f755a49d780e3db6256297d628e600a0bffd6cef466700936",
+    "reference_svg_sha256": "c18ff53640e25ba6338ed30fe72e01b5ade5ae0ef740bb05b1248f8e0bdb75e8"
+  },
+  {
+    "case_id": "residual_08",
+    "width": 190,
+    "height": 180,
+    "description": "Ein gefüllter Kreis und 2 gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt nebeneinander. Keine Beschriftung.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          20.083433265173966,
+          17.76392108770561,
+          146.0,
+          146.0
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          75.3,
+          80.2,
+          18.0,
+          20.0
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          94.0,
+          80.2,
+          18.0,
+          20.0
+        ],
+        "parent": 0,
+        "stroke_width": 0
+      }
+    ],
+    "reference_svg": "references\\residual_08.svg",
+    "input_sha256": "8dc420b5cc4fa0abd33ee0ffd7d525f410ebd04dc818cd2d7b51199700c22282",
+    "reference_svg_sha256": "d525bd9ffaca9df20155e5ddf6856684278531a541a39ba8a2fcdddbacde8955"
+  }
+]

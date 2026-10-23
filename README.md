@@ -1,5 +1,12 @@
 # ImageConverter
 
+Die [Schwächenprüfung vom 23. Oktober](docs/weakness_review_2026-10-23.md)
+priorisiert strukturelle Exploration und Komposition vor weiteren
+Einzelfallpfaden. Der erste Entwicklungsschritt probiert alternative
+Restbildzerlegungen im vorhandenen Verlaufsszenenweg und erlaubt generische
+getrennte Rechteckgruppen. Vollständige Struktursuche und neue unabhängige
+reale Familienabnahmen bleiben offen; die Arbeitspakete sind neu gewichtet.
+
 Die [erneute reale Übertragungsprüfung](docs/next_arbeitspaket_2026-10-22_real_scene_transfer.md)
 scheitert mit unverändertem Algorithmus an zwei neuen Zusammensetzungen (0/2).
 Der gemeinsame Verlaufsszenenweg unterstützt noch keine überlappenden gerundeten

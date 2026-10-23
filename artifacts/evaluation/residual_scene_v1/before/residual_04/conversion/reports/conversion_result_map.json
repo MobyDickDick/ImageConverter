@@ -1,0 +1,313 @@
+{
+  "residual_04.png": {
+    "actual_iterations": 64,
+    "base": "RESIDUAL_04",
+    "best_error": 23.814892787524368,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+    "diff_error_distribution_status": "structured",
+    "elapsed_seconds": 2.3910000000614673,
+    "error_per_pixel": 0.0006963418943720576,
+    "error_pixel_cluster_count": 13.0,
+    "error_pixel_cluster_excess": 0.5002250106502459,
+    "error_pixel_count": 5738.0,
+    "filename": "residual_04.png",
+    "h": 180,
+    "largest_error_pixel_cluster_fraction": 0.6680027884280237,
+    "localized_error_fraction": 0.7980043596219966,
+    "mean_delta2": 5178.67724609375,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "adaptive_search": {
+        "candidate_evaluations": 0,
+        "elapsed_seconds": 2.391,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "supported_models_exhausted",
+        "time_extensions": 0
+      },
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "constraint": "inside_rect_border",
+            "id": "description_element_1",
+            "kind": "HorizontalGradient",
+            "source": "description",
+            "stops": [
+              "#8f8f8f",
+              "#dedede",
+              "#8f8f8f"
+            ]
+          },
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "fill": "none",
+            "id": "description_element_2",
+            "kind": "RectBorder",
+            "source": "description",
+            "stroke": "#666666",
+            "stroke_width": 0.035
+          }
+        ],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.75,
+          "reasons": [],
+          "status": "ok"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": false,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "residual_04",
+          "source": "base_name",
+          "text": "Ein gefüllter Kreis und 6 gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [],
+      "geometry_ir": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "fill": "none",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "geometry_ir_optimizer_result": {
+        "element_refinement": {
+          "final_error": 25.955838206627682,
+          "initial_error": 25.955838206627682,
+          "mode": "right_rotated_valve_geometry",
+          "steps": []
+        },
+        "final_error": 25.161364522417156,
+        "generic_element_refinement": {
+          "final_error": 25.161364522417156,
+          "initial_error": 25.955838206627682,
+          "mode": "elementwise_geometry_ir",
+          "steps": [
+            {
+              "accepted": false,
+              "best_delta": 0.0,
+              "element": "background_gradient",
+              "error_after": 25.955838206627682,
+              "error_before": 25.955838206627682,
+              "step_index": 0
+            },
+            {
+              "accepted": true,
+              "best_delta": 0.7944736842105264,
+              "element": "main_rect",
+              "error_after": 25.161364522417156,
+              "error_before": 25.955838206627682,
+              "step_index": 1
+            }
+          ]
+        },
+        "initial_error": 30.107465886939572,
+        "mode": "geometry_ir_raster_registration",
+        "parameters": {
+          "scale_x": 0.8899999999999999,
+          "scale_y": 1.19,
+          "stroke_scale": 0.25,
+          "translate_x": 0.04,
+          "translate_y": -0.02
+        },
+        "steps": [
+          {
+            "best_delta": 1.069697855750487,
+            "parameter": "stroke_scale",
+            "stage": 0,
+            "value": 0.75
+          },
+          {
+            "best_delta": 0.046949317738793184,
+            "parameter": "scale_y",
+            "stage": 0,
+            "value": 1.15
+          },
+          {
+            "best_delta": 1.1292007797270962,
+            "parameter": "stroke_scale",
+            "stage": 0,
+            "value": 0.5
+          },
+          {
+            "best_delta": 0.09623781676413046,
+            "parameter": "scale_x",
+            "stage": 0,
+            "value": 0.85
+          },
+          {
+            "best_delta": 0.631793372319688,
+            "parameter": "stroke_scale",
+            "stage": 0,
+            "value": 0.25
+          },
+          {
+            "best_delta": 0.5139376218323584,
+            "parameter": "translate_x",
+            "stage": 0,
+            "value": 0.08
+          },
+          {
+            "best_delta": 0.02836257309941459,
+            "parameter": "translate_x",
+            "stage": 1,
+            "value": 0.04
+          },
+          {
+            "best_delta": 0.010136452241717109,
+            "parameter": "translate_y",
+            "stage": 1,
+            "value": -0.04
+          },
+          {
+            "best_delta": 0.19003898635477512,
+            "parameter": "scale_x",
+            "stage": 1,
+            "value": 0.9299999999999999
+          },
+          {
+            "best_delta": 0.21023391812865455,
+            "parameter": "translate_y",
+            "stage": 2,
+            "value": -0.02
+          },
+          {
+            "best_delta": 0.1475828460038997,
+            "parameter": "scale_x",
+            "stage": 2,
+            "value": 0.8899999999999999
+          },
+          {
+            "best_delta": 0.07745614035087556,
+            "parameter": "scale_y",
+            "stage": 2,
+            "value": 1.19
+          }
+        ]
+      },
+      "label": "M",
+      "language_assertions": {
+        "counts": [],
+        "no_text": false
+      },
+      "mode": "auto",
+      "optimized_geometry_ir": [
+        {
+          "bbox": [
+            0.2552,
+            0.1706,
+            0.5696,
+            0.6664
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.2552,
+            0.1706,
+            0.5696,
+            0.6664
+          ],
+          "fill": "none",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#b8b8b8",
+          "stroke_width": 0.00875
+        }
+      ],
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "RESIDUAL_04"
+    },
+    "reference_access": {
+      "blocked_svg_reads": []
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 41.5478729744125,
+    "search_control": {
+      "candidate_evaluations": 0,
+      "elapsed_seconds": 4.641,
+      "external_max_seconds": null,
+      "isolated": true,
+      "limit_seconds": 5.0,
+      "max_seconds": 5.0,
+      "stop_reason": "stagnation",
+      "time_extensions": 0
+    },
+    "search_satisfactory": false,
+    "spatial_quality_score": 15910.686580876143,
+    "std_delta2": 11358.0712890625,
+    "tile_std_delta2": 7500.213856332018,
+    "variant": "RESIDUAL_04",
+    "w": 190
+  }
+}

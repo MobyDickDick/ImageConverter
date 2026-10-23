@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [Schwächenprüfung, neu priorisierte Arbeitspakete und begonnene strukturelle Exploration (2026-10-23)](weakness_review_2026-10-23.md)
+
 - [Reale Szenenübertragung: zwei eingefrorene negative Gegenproben und fehlende Komposition (2026-10-22)](next_arbeitspaket_2026-10-22_real_scene_transfer.md)
 
 - [Konzeptaudit: was inzwischen greift, negative Versuche und sechs wieder geöffnete Vision-Aufgaben (2026-10-22)](concept_audit_2026-10-22.md)
