@@ -7,6 +7,7 @@ import shutil
 import pytest
 
 from tools.verify_real_scene_transfer_evidence import verify
+from tools.evaluate_layered_scene import evidence_path
 
 
 EVIDENCE = Path(__file__).resolve().parents[1]/'artifacts/evaluation/real_scene_transfer_v1'
@@ -42,7 +43,7 @@ def test_corrupt_or_falsely_positive_transfer_evidence_is_rejected(tmp_path, dam
     report = json.loads(report_path.read_text(encoding='utf-8'))
     case = report['cases'][0]
     if damage == 'svg':
-        (root/'trial'/case['output_svg']).write_text('<svg/>', encoding='utf-8')
+        evidence_path(root/'trial', case['output_svg']).write_text('<svg/>', encoding='utf-8')
         # The file seal catches output replacement before attempting rendering.
         with pytest.raises(ValueError, match='changed evidence'):
             verify(path)

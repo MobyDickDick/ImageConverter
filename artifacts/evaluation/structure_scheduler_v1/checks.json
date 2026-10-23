@@ -1,0 +1,40 @@
+{
+  "base_commit": "b0e6cf8ab1acaf8d11f88e92c1cfaa473c53adef",
+  "branch": "codex/search-structure-scheduling-2026-10-23",
+  "targeted_regression": {
+    "passed": 339,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 100.18,
+    "modules": [
+      "tests/test_residual_scene_search.py",
+      "tests/test_residual_scene_evidence.py",
+      "tests/test_mixed_gradient_scene_runtime.py",
+      "tests/test_mixed_gradient_scene_evidence.py",
+      "tests/test_conversion_search_scheduler.py",
+      "tests/test_gradient_scene_runtime.py",
+      "tests/test_gradient_scene_acceptance.py",
+      "tests/test_primitive_scene_runtime.py",
+      "tests/test_layered_scene_runtime.py",
+      "tests/test_scene_fusion.py",
+      "tests/test_scene_visibility.py",
+      "tests/test_scene_references.py",
+      "tests/test_adaptive_conversion_search.py",
+      "tests/test_conversion_search_bots.py"
+    ]
+  },
+  "real_cli": {
+    "known_synthetic_cases": 9,
+    "accepted": 7,
+    "negative_cases": ["residual_06", "residual_07"],
+    "seconds_per_image": 5,
+    "seed": 17,
+    "saved_evidence_independently_verified": true
+  },
+  "syntax_check": "passed",
+  "whitespace_check_cr_at_eol": "passed",
+  "full_standard_suite": "not_run",
+  "archive_reconversion": "not_run",
+  "new_real_family_acceptance": false,
+  "search_structure_01_complete": false
+}

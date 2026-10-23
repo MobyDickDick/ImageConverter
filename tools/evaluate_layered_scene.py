@@ -9,7 +9,7 @@ import argparse
 import itertools
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import random
 import shutil
 import subprocess
@@ -22,6 +22,18 @@ from tools.run_plan_b_variations import (render, run_case, sha256, write_cases,
                                         measure_quality, make_original_case, make_variations)
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def evidence_path(root, name):
+    """Resolve portable and historical Windows paths inside an evidence folder."""
+    portable = str(name).replace('\\', '/')
+    relative = Path(portable)
+    root = root.resolve()
+    target = (root/relative).resolve()
+    if (relative.is_absolute() or PureWindowsPath(portable).drive
+            or not target.is_relative_to(root)):
+        raise ValueError('Evidence path must stay inside its folder: '+str(name))
+    return target
 
 
 def make_cases(seed=20261020, count=18, wide_nesting=False):
@@ -216,7 +228,7 @@ def verify_report(inputs, output, *, require_all=False, write_verification=True)
             raise ValueError('Supervised five-second budget was not observed')
         accepted = False
         if result.get('output_svg'):
-            path = output/result['output_svg']
+            path = evidence_path(output, result['output_svg'])
             if sha256(path.read_bytes()) != result['output_sha256']:
                 raise ValueError('Output hash mismatch')
             svg = path.read_text(encoding='utf-8')
@@ -311,7 +323,7 @@ def evaluate_cases(inputs, output, *, rename=False, require_all=False):
         result = run_case(case, output, timeout=30, iterations=64,
                           extra_cli_args=('--search-seconds', '5', '--search-max-seconds', '5'))
         if result.get('output_svg'):
-            svg = (output/result['output_svg']).read_text(encoding='utf-8')
+            svg = evidence_path(output, result['output_svg']).read_text(encoding='utf-8')
             result['object_check'] = check_objects(svg, case['expected_objects'])
             reference = cv2.imread(str(original/(old_name+'.png')))
             result['local_checks'] = local_checks(reference, svg, case['expected_objects'])

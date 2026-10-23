@@ -5,9 +5,33 @@ import shutil
 
 import pytest
 
-from tools.evaluate_layered_scene import verify_report
+from tools.evaluate_layered_scene import evidence_path, verify_report
 
 ROOT = Path(__file__).resolve().parents[1]/'artifacts/evaluation/residual_scene_v1'
+
+
+@pytest.mark.parametrize('separator', ['/', '\\'])
+def test_saved_output_paths_accept_either_platform_separator(tmp_path, separator):
+    output = tmp_path/'trial'
+    shutil.copytree(ROOT/'final', output)
+    path = output/'report.json'
+    report = json.loads(path.read_text(encoding='utf-8'))
+    for case in report['cases']:
+        if case.get('output_svg'):
+            case['output_svg'] = case['output_svg'].replace('\\', '/').replace('/', separator)
+            resolved = evidence_path(output, case['output_svg'])
+            assert resolved.is_file()
+            assert resolved.relative_to(output).as_posix() == case['output_svg'].replace('\\', '/')
+    path.write_text(json.dumps(report), encoding='utf-8')
+    result = verify_report(ROOT/'final-input', output, write_verification=False)
+    assert (result['accepted'], result['completed']) == (7, 9)
+
+
+@pytest.mark.parametrize('name', ['../outside.svg', '..\\outside.svg', '/outside.svg',
+                               'C:\\outside.svg', 'C:outside.svg', '\\\\server\\share\\outside.svg'])
+def test_saved_output_paths_cannot_escape_the_evidence_folder(tmp_path, name):
+    with pytest.raises(ValueError, match='Evidence path'):
+        evidence_path(tmp_path, name)
 
 
 def test_saved_final_outputs_include_the_failed_timeout_in_the_denominator():

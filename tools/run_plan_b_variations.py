@@ -289,7 +289,7 @@ def write_cases(cases: list[dict], output: Path) -> None:
         ET.SubElement(entry, "beschreibung").text = case["description"]
         ET.SubElement(ET.SubElement(entry, "bilder"), "bild").text = image_path.name
         ET.ElementTree(description_root).write(inputs / "descriptions.xml", encoding="utf-8", xml_declaration=True)
-        case.update(reference_svg=str(source.relative_to(output)), input_sha256=sha256(image_path.read_bytes()),
+        case.update(reference_svg=source.relative_to(output).as_posix(), input_sha256=sha256(image_path.read_bytes()),
                     reference_svg_sha256=sha256(source.read_bytes()))
 
 
@@ -348,7 +348,7 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
         svg_path = candidates[0]
         svg = svg_path.read_text(encoding="utf-8")
         result.update(measure_quality(reference, svg))
-        result.update(output_svg=str(svg_path.relative_to(output)), output_sha256=sha256(svg_path.read_bytes()))
+        result.update(output_svg=svg_path.relative_to(output).as_posix(), output_sha256=sha256(svg_path.read_bytes()))
         # Batch acceptance is based on independently measured saved vectors, not
         # the converter's historical success/failed labels or checkpoints.
         if keep_debug_artifacts:
