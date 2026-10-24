@@ -1,5 +1,10 @@
 # ImageConverter
 
+Der [P0-Teil für gemischte Instanz-/Inselgruppierungen](docs/next_arbeitspaket_2026-10-24_island_groups.md)
+rekonstruiert mehrere gleichfarbige Objekte, deren Füllungen durch Überdeckung
+jeweils in sichtbare Inseln zerfallen. Zwölf unveränderte synthetische CLI-Fälle
+verbessern sich von 0/12 auf 12/12. Die unabhängige reale Gesamtaufgabe bleibt offen.
+
 Der [P0-Teil für wiederholte Füllfarben](docs/next_arbeitspaket_2026-10-24_repeated_fill.md)
 ergänzt alternative Instanzzerlegungen im gemeinsamen Kreis-/Rechtecksuchweg.
 Zwölf synthetische CLI-Fälle mit sechs Kindern, Rundung und hellen Konturen

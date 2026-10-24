@@ -6,6 +6,7 @@ or reference vectors are read.
 """
 from __future__ import annotations
 
+import heapq
 import re
 
 import cv2
@@ -197,7 +198,8 @@ def _rounded_coverage_edges(coverage, low, high):
             middle+float(np.sum(coverage[middle:min(len(coverage), int(right)+3)])))
 
 
-def _exposed_corner_radius(data, predicted, fill, coverage, box, *, reconstructed=None, foreign_mask=None):
+def _exposed_corner_radius(data, predicted, fill, coverage, box, *, reconstructed=None, foreign_mask=None,
+                           rim_inset=0.):
     """Measure round-corner deficits only where the parent paint is exposed.
 
     Occluding paint cannot supply a hidden corner's radius. At least two
@@ -231,7 +233,10 @@ def _exposed_corner_radius(data, predicted, fill, coverage, box, *, reconstructe
                 if radius+2 <= extent:
                     radii.append(radius)
                 break
-    if len(radii) < 2 or min(radii) < 1.25 or max(radii)-min(radii) > 1.5:
+    # A rim reduces the observed inner radius. Apply the native rounding
+    # threshold to the centerline, retaining a positive measured inner deficit.
+    if (len(radii) < 2 or min(radii) < .75 or min(radii)+rim_inset < 1.25
+            or max(radii)-min(radii) > 1.5):
         return None
     radius = float(np.median(radii))
     return radius if radius <= min(w, h)/3 else None
@@ -285,15 +290,8 @@ def _overlap_circle(component, background, coverage, reconstruction_error, shape
     return np.array(geometry)
 
 
-def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False, circles=False,
-                       split_components=False):
-    """Propose flat native instances from color groups and exposed bounds.
-
-    Color separates touching residuals. Each of four sides needs a straight
-    exposed segment against the measured parent paint. Fully hidden sides or
-    indistinguishable fills cannot justify a native rectangle proposal. Circles
-    require a measured exposed arc spanning at least half their circumference.
-    """
+def _paint_components(pixels, mask, *, outlined=False):
+    """Keep observed islands separate until a structure hypothesis groups them."""
     data = pixels.astype(float)
     high = cv2.dilate(data, np.ones((3, 3), 'uint8'))
     low = cv2.erode(data, np.ones((3, 3), 'uint8'))
@@ -307,27 +305,43 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
             np.max(abs(a.astype(float)-b)) < 25
             for i, a in enumerate(colors) for b in colors[i+1:]):
         return None
-    groups = []
+    paints = []
     for color in colors:
         visible = ((np.max(abs(data-color.astype(float)), axis=2) <= 3) & mask.astype(bool)).astype('uint8')
         number, labels, stats, _ = cv2.connectedComponentsWithStats(visible)
         parts = [i for i in range(1, number) if stats[i, cv2.CC_STAT_AREA] >= 12]
         if not parts:
             return None
-        # Keep the established union hypothesis for occlusion islands. The
-        # alternate segmentation allows several same-paint instances, each
-        # with its own observed arc/sides. Neither grouping implies acceptance.
-        selections = [[part] for part in parts] if split_components else [parts]
-        groups.extend((color, np.isin(labels, selection)) for selection in selections)
-        if len(groups) > 8:
+        paints.append((color, labels, parts))
+    return paints
+
+
+def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False, circles=False,
+                       split_components=False, groups=None):
+    """Propose native instances, each with independently exposed arcs or sides.
+
+    Grouping does not supply hidden bounds: four observed rectangle sides or
+    at least half a circle's observed circumference are still required.
+    """
+    data = pixels.astype(float)
+    if groups is None:
+        paints = _paint_components(pixels, mask, outlined=outlined)
+        if paints is None:
             return None
+        if sum(len(parts) if split_components else 1 for _, _, parts in paints) > 8:
+            return None  # Bound allocations before expanding full-image masks.
+        groups = [(color, np.isin(labels, selection)) for color, labels, parts in paints
+                  for selection in ([[part] for part in parts] if split_components else [parts])]
+    if len(groups) > 8:
+        return None
+    color_count = len({tuple(color) for color, _ in groups})
     children = []
     for color, component in groups:
         fill = color.astype(float)
         x, y, w, h = cv2.boundingRect(component.astype('uint8'))
         area = np.count_nonzero(component)
-        margin = 5 if outlined else 2
-        if min(w, h) < 8 or x <= margin or y <= margin or x+w+margin >= pixels.shape[1] or y+h+margin >= pixels.shape[0]:
+        margin = 5 if outlined else 3
+        if min(w, h) < 5 or x <= margin or y <= margin or x+w+margin >= pixels.shape[1] or y+h+margin >= pixels.shape[0]:
             return None
         delta = fill-predicted
         coverage = np.clip(np.sum((data-predicted)*delta, axis=2)
@@ -397,7 +411,7 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
         right = component[:, x+w-1] & component[:, x+w-3] & background[:, x+w+margin-1]
         top = component[y] & component[y+2] & background[y-margin]
         bottom = component[y+h-1] & component[y+h-3] & background[y+h+margin-1]
-        if len(colors) > 4:
+        if color_count > 4:
             # A blend at an occlusion can happen to match another fill and
             # extend its component by a pixel. Search just inside that bound
             # for the same required five parent-facing straight-edge samples.
@@ -431,20 +445,23 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
         b = y-float(np.median(coverage[y-1, top]))
         X = x+w+float(np.median(coverage[right, x+w]))
         Y = y+h+float(np.median(coverage[y+h, bottom]))
-        if outlined:
+        if outlined or rounded:
             # Integrate the narrow AA ramp, including the first nearly pure
             # fill pixel; its fractional coverage is not necessarily one.
             a = x+2-float(np.median(coverage[left, x-3:x+2].sum(axis=1)))
             X = x+w-2+float(np.median(coverage[right, x+w-2:x+w+3].sum(axis=1)))
             b = y+2-float(np.median(coverage[y-3:y+2, top].sum(axis=0)))
             Y = y+h-2+float(np.median(coverage[y+h-2:y+h+3, bottom].sum(axis=0)))
+        if outlined:
             widths = [np.median(rim_coverage[left, x-5:x+1].sum(axis=1)),
                       np.median(rim_coverage[right, x+w-1:x+w+5].sum(axis=1)),
                       np.median(rim_coverage[y-5:y+1, top].sum(axis=0)),
                       np.median(rim_coverage[y+h-1:y+h+5, bottom].sum(axis=0))]
-            if min(widths) < .5 or max(widths) > min(w, h)/4 or max(widths)-min(widths) > .75:
-                return None
             sw = float(np.median(widths))
+            # The width bound refers to the native centerline box, not the
+            # integer pure-fill core, which excludes the rim and AA pixels.
+            if min(widths) < .5 or max(widths) > (min(X-a, Y-b)+sw)/4 or max(widths)-min(widths) > .75:
+                return None
         child = dict(kind='rectangle', geometry=np.array([a-sw/2, b-sw/2, X-a+sw, Y-b+sw, sw]),
                      colors=np.r_[fill, fill, stroke])
         if rounded:
@@ -458,6 +475,7 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
                     other_paint[max(0, oy-3):oy+oh+3, max(0, ox-3):ox+ow+3] = 1
             radius = _exposed_corner_radius(data, predicted, fill, coverage, [a, b, X-a, Y-b],
                                             reconstructed=reconstructed,
+                                            rim_inset=sw/2,
                                             foreign_mask=cv2.dilate(other_paint, np.ones((5, 5), 'uint8')).astype(bool))
             if radius is None:
                 return None
@@ -466,8 +484,8 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
     return children
 
 
-def detect_instances(pixels, contract, *, residual_threshold=25, split_components=False):
-    """Fit background paint first, then explain contrasting interior regions."""
+def _gradient_context(pixels, contract, residual_threshold):
+    """Measure the shared parent once for all island grouping hypotheses."""
     foreground = (np.max(255-pixels.astype(float), axis=2) > 25).astype('uint8')
     contours = cv2.findContours(foreground, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[0]
     contours = [c for c in contours if cv2.contourArea(c) >= 12]
@@ -496,6 +514,16 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
     predicted = colors[:3] + t[..., None]*(colors[3:]-colors[:3])
     mask = ((np.max(abs(pixels.astype(float)-predicted), axis=2) > residual_threshold)
             & interior.astype(bool)).astype('uint8')
+    return geometry, colors, predicted, mask, distance
+
+
+def detect_instances(pixels, contract, *, residual_threshold=25, split_components=False):
+    """Fit background paint first, then explain contrasting interior regions."""
+    context = _gradient_context(pixels, contract, residual_threshold)
+    if context is None:
+        return None
+    geometry, colors, predicted, mask, distance = context
+    yy, xx = np.indices(mask.shape)
     number, labels, stats, _ = cv2.connectedComponentsWithStats(mask)
     components = []
     children = []
@@ -647,6 +675,13 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
     if len(children) > 16:
         return None
     children.sort(key=lambda obj: obj['geometry'][0])
+    parent = _gradient_parent(pixels, contract, geometry, colors, predicted, distance)
+    return [parent, *children] if parent is not None else None
+
+
+def _gradient_parent(pixels, contract, geometry, colors, predicted, distance):
+    geometry = geometry.copy()
+    radius = geometry[2]/2
     band = (distance >= radius-1) & (distance < radius)
     stroke = np.median(pixels[band], axis=0)
     geometry[4] = 1. if contract['outlined'] else 0.
@@ -688,7 +723,94 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
         geometry[:2] -= sw/2
         geometry[2:4] += sw
         geometry[4] = sw
-    return [dict(kind='circle', geometry=geometry, colors=np.r_[colors, stroke]), *children]
+    return dict(kind='circle', geometry=geometry, colors=np.r_[colors, stroke])
+
+
+def _island_partitions(paints, target, *, max_states, stats):
+    """Bounded exact covers: every observed island belongs to exactly one child.
+
+    Nearby components are merged first, but distance only ranks proposals.
+    Native boundary evidence and full registration decide their validity.
+    """
+    stats.update(states=0, state_limit_reached=False, candidate_limit_reached=False)
+    initial = tuple(tuple((part,) for part in parts) for _, _, parts in paints)
+    total = sum(map(len, initial))
+    if total > 16:
+        stats['candidate_limit_reached'] = True
+        return
+    if not len(paints) < target < total or max_states <= 0:
+        return  # Union and individual-component hypotheses have already run.
+    boxes = [{part: cv2.boundingRect((labels == part).astype('uint8')) for part in parts}
+             for _, labels, parts in paints]
+
+    def bounds(color, group):
+        b = np.array([boxes[color][part] for part in group])
+        low = b[:, :2].min(axis=0)
+        return low, (b[:, :2]+b[:, 2:]).max(axis=0)
+
+    queue, seen, serial = [(0., 0, initial)], {initial}, 0
+    while queue:
+        session = current_search()
+        if session and session.time_reason():
+            return
+        score, _, state = heapq.heappop(queue)
+        stats['states'] += 1
+        count = sum(map(len, state))
+        if count == target:
+            yield [(color, np.isin(labels, group))
+                   for (color, labels, _), groups in zip(paints, state) for group in groups]
+            continue
+        yield None  # Resume through the existing scheduler between states.
+        for color, groups in enumerate(state):
+            for i, a in enumerate(groups):
+                for j in range(i+1, len(groups)):
+                    merged = tuple(sorted((*a, *groups[j])))
+                    replacement = tuple(sorted((merged, *(g for k, g in enumerate(groups) if k not in (i, j)))))
+                    proposal = (*state[:color], replacement, *state[color+1:])
+                    if proposal in seen:
+                        continue
+                    if len(seen) >= max_states:
+                        stats['state_limit_reached'] = True
+                        continue
+                    al, ah = bounds(color, a)
+                    bl, bh = bounds(color, groups[j])
+                    gap = np.maximum(0, np.maximum(al-bh, bl-ah))
+                    cost = float(gap@gap)
+                    serial += 1
+                    seen.add(proposal)
+                    heapq.heappush(queue, (score+cost, serial, proposal))
+
+
+def grouped_overlap_instances(pixels, contract, *, max_states, stats):
+    """Explore mixed instance/island covers under the remaining edit budget."""
+    stats.update(states=0, state_limit_reached=False, candidate_limit_reached=False)
+    session = current_search()
+    if session and session.time_reason():
+        return
+    context = _gradient_context(pixels, contract, 25)
+    if context is None:
+        return
+    geometry, colors, predicted, mask, distance = context
+    paints = _paint_components(pixels, mask, outlined=contract['outlined'])
+    if paints is None:
+        return
+    parent = _gradient_parent(pixels, contract, geometry, colors, predicted, distance)
+    if parent is None:
+        return
+    for groups in _island_partitions(paints, sum(contract['children'].values()),
+                                     max_states=max_states, stats=stats):
+        if session and session.time_reason():
+            return
+        if groups is None:
+            yield None
+            continue
+        children = _overlap_instances(pixels, predicted, mask, rounded=contract['rounded'],
+                                     outlined=contract['outlined'], circles=bool(contract['children'].get('circle')),
+                                     groups=groups)
+        progress('primitive_mixed_gradient_scene_v1', event='island_partition',
+                 grouping_state=stats['states'], groups=len(groups),
+                 outcome='proposed' if children is not None else 'native_boundaries_rejected')
+        yield [parent, *children] if children is not None else None
 
 
 def _native_fill_mask(obj, xx, yy, inset=.5):
@@ -814,7 +936,7 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
     def repairs():
         # Initial jobs each yield after detection. This job starts only after
         # those slices, so all observed instances are available to the agenda.
-        stats, split_stats, outcome = {}, {}, 'cancelled'
+        stats, split_stats, group_stats, outcome = {}, {}, {}, 'cancelled'
         try:
             for proposal in edit_proposals(seeds, contract['children'], stats=stats,
                                            ordered=contract.get('overlap', False)):
@@ -860,6 +982,24 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
                     if fitted is not None:
                         outcome = 'accepted'
                         return fitted
+            if contract.get('overlap') and remaining:
+                for objects in grouped_overlap_instances(pixels, contract, max_states=remaining, stats=group_stats):
+                    if session and session.time_reason():
+                        return None
+                    yield None
+                    if objects is None:
+                        continue
+                    ordered = observed_painter_order(pixels, objects)
+                    if ordered is not None:
+                        objects = ordered
+                    fitted = yield from register(objects, dict(operator='group_islands',
+                        residual_threshold=25, grouping_state=group_stats['states'],
+                        painter_order='observed_depth' if ordered is not None else 'bounded_agenda',
+                        outcome='no_complete_scene'))
+                    if fitted is not None:
+                        outcome = 'accepted'
+                        return fitted
+                remaining -= group_stats['states']
             if changed and remaining:
                 for proposal in edit_proposals(seeds, contract['children'],
                                                max_states=remaining, stats=split_stats,
@@ -879,14 +1019,15 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
             return None
         finally:
             # Include work performed before acceptance, cancellation or expiry.
-            if split_stats:
-                stats['states'] += split_stats['states']
-                for name in ('state_limit_reached', 'candidate_limit_reached'):
-                    stats[name] |= split_stats[name]
+            for extra in (group_stats, split_stats):
+                if extra:
+                    stats['states'] += extra['states']
+                    for name in ('state_limit_reached', 'candidate_limit_reached'):
+                        stats[name] |= extra[name]
             if session and session.time_reason():
                 outcome = 'time_limit'
             progress('primitive_mixed_gradient_scene_v1', event='structure_search_finished',
-                     outcome=outcome, **stats)
+                     outcome=outcome, grouping_states=group_stats.get('states', 0), **stats)
 
     jobs = {threshold: hypothesis(threshold) for threshold in (25, 16, 36)}
     jobs['edits'] = repairs()

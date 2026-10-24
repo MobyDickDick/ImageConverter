@@ -8,6 +8,16 @@ focused on the actual project scope.
 
 Alle 52 offenen Checkboxen sind in der [vollständigen Rangliste vom 24.10.2026](task_priority_2026-10-24.md) absteigend nach Wichtigkeit geordnet.
 
+**SEARCH-STRUCTURE-01, Instanz-/Inselkomposition 2026-10-24:**
+[Gemischte Instanz- und Inselgruppierungen](next_arbeitspaket_2026-10-24_island_groups.md)
+ergänzen die fehlenden Zwischenhypothesen zwischen einer Instanz je Farbe und
+einer Instanz je sichtbarer Komponente. Zwölf unveränderte synthetische
+CLI-Fälle verbessern sich von 0/12 auf 12/12. Jede beobachtete Insel wird genau
+einer Gruppe zugeordnet; native Randbelege, negative Evidenz, vollständige
+Abnahme und das gemeinsame Bild-/96-Zustände-Budget bleiben verbindlich.
+Die übergeordnete Checkbox bleibt wegen breiterer Komposition und unabhängiger
+realer Abnahme offen.
+
 **SEARCH-STRUCTURE-01, weiterer P0-Teilabschluss 2026-10-24:**
 [Wiederholte Füllfarben als alternative Instanzzerlegung](next_arbeitspaket_2026-10-24_repeated_fill.md)
 verbindet mehrere gleichfarbige Kreis-/Rechteckinstanzen mit der bestehenden

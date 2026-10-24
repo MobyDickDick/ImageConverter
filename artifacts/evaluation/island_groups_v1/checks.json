@@ -1,0 +1,105 @@
+{
+  "python": "3.10.11",
+  "configured_python": "3.10.20",
+  "full_standard_suite_run": false,
+  "final_module_sha256": "5e6621da5fa1ca6c41776d14b548d5daa2e4b1ca5736e1a791ca7572fb0b07de",
+  "signals": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_island_group_search.py tests/test_repeated_fill_overlap.py tests/test_mixed_overlap_composition.py tests/test_mixed_overlap_outlines.py tests/test_residual_scene_search.py tests/test_structure_search_operators.py tests/test_component_splits.py tests/test_rounded_composition.py tests/test_rounded_outlines.py tests/test_overlap_composition.py tests/test_rounded_overlap_composition.py tests/test_overlap_outlines.py tests/test_multilayer_overlap.py tests/test_observed_depth_order.py tests/test_conversion_search_scheduler.py tests/test_test_data_lifecycle.py --basetemp=.tmp/pytest-island-groups",
+      "exit_code": 0,
+      "passed": 591,
+      "skipped": 1,
+      "elapsed_seconds": 437.42,
+      "scope": "Before the final native corner-radius correction",
+      "source_module_sha256": "b30445d75d5cf76ef0659acaadd14623537f1a44c53df2219a7b7c06b93b5eb2"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_island_group_search.py tests/test_mixed_overlap_outlines.py tests/test_rounded_outlines.py tests/test_overlap_outlines.py tests/test_repeated_fill_overlap.py tests/test_multilayer_overlap.py tests/test_observed_depth_order.py --basetemp=.tmp/pytest-island-groups-final",
+      "exit_code": 0,
+      "passed": 352,
+      "elapsed_seconds": 335.0,
+      "scope": "All affected contour/rounding regressions on final code",
+      "source_module_sha256": "5e6621da5fa1ca6c41776d14b548d5daa2e4b1ca5736e1a791ca7572fb0b07de"
+    },
+    {
+      "command": ".venv/Scripts/python.exe tools/run_pytest_profile.py core-green",
+      "exit_code": 0,
+      "passed": 42,
+      "elapsed_seconds": 1.43,
+      "source_module_sha256": "5e6621da5fa1ca6c41776d14b548d5daa2e4b1ca5736e1a791ca7572fb0b07de"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m py_compile src/iCCModules/imageCompositeConverterMixedGradientScene.py tools/evaluate_island_groups.py",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "baseline_signal": {
+    "command": ".venv/Scripts/python.exe -m tools.evaluate_island_groups --inputs .tmp/island-groups-v1/inputs --output .tmp/island-groups-v1/baseline",
+    "exit_code": 0,
+    "accepted": 0,
+    "completed": 12
+  },
+  "development_cli_signals": [
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_island_groups --inputs C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\island-groups-v1\\inputs --output C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\island-groups-v1\\final3 --require-all",
+      "exit_code": 0,
+      "elapsed_seconds": 37.453
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_island_groups --prepare C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\island-groups-v1\\additional_inputs --seed 418267 --children 3 --rounded --outlines",
+      "exit_code": 0,
+      "elapsed_seconds": 0.828
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_island_groups --inputs C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\island-groups-v1\\additional_inputs --output C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\island-groups-v1\\additional --require-all",
+      "exit_code": 1,
+      "elapsed_seconds": 46.078
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_island_groups --prepare C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\island-groups-v1\\three_circles_inputs --seed 392841 --children 4 --rounded --outlines",
+      "exit_code": 0,
+      "elapsed_seconds": 0.75
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_island_groups --inputs C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\island-groups-v1\\three_circles_inputs --output C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\island-groups-v1\\three_circles --require-all",
+      "exit_code": 1,
+      "elapsed_seconds": 47.454
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_island_groups --prepare C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\island-groups-v1\\plan_b_inputs --seed 962731 --children 3 --rounded --outlines --variations",
+      "exit_code": 0,
+      "elapsed_seconds": 1.094
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_island_groups --inputs C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\island-groups-v1\\plan_b_inputs --output C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\island-groups-v1\\plan_b --require-all",
+      "exit_code": 0,
+      "elapsed_seconds": 61.578
+    }
+  ],
+  "final_cli_signals": [
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_island_groups --inputs .tmp/island-groups-v1/inputs --output .tmp/island-groups-v1/final_primary --require-all",
+      "exit_code": 0,
+      "elapsed_seconds": 41.484
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_island_groups --inputs .tmp/island-groups-v1/additional_inputs --output .tmp/island-groups-v1/final_additional",
+      "exit_code": 0,
+      "elapsed_seconds": 44.375
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_island_groups --inputs .tmp/island-groups-v1/three_circles_inputs --output .tmp/island-groups-v1/final_three_circles --require-all",
+      "exit_code": 0,
+      "elapsed_seconds": 43.562
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_island_groups --inputs .tmp/island-groups-v1/plan_b_inputs --output .tmp/island-groups-v1/final_plan_b --require-all",
+      "exit_code": 0,
+      "elapsed_seconds": 61.344
+    }
+  ]
+}
