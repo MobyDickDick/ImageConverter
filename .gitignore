@@ -7,6 +7,11 @@ venv/
 dist/
 *.pyc
 *.pyo
+.tox/
+.nox/
+.hypothesis/
+*.egg-info/
+build/
 
 # Generated outputs belong outside the source tree.
 /src/artifacts/
@@ -14,6 +19,10 @@ dist/
 /artifacts/converted_images/commented_diff_images/
 /artifacts/converted_images/converted_images_png/
 /artifacts/converted_images/converted_images_png_failed/
+# New batch products stay local. Previously committed regression evidence is
+# retained; ignore rules do not remove existing fixtures from Git.
+/artifacts/converted_images/*
+/artifacts/pytest/
 /artifacts/evaluation/**/commented_diff_images/
 /artifacts/evaluation/**/converted_images_png/
 /artifacts/evaluation/**/converted_images_png_failed/
@@ -44,6 +53,17 @@ htmlcov/
 
 # Disposable local test data and Plan-B acceptance runs (CI uploads artifacts)
 /.tmp/
+
+# Default for EVERY evaluation, including newly named studies: only compact
+# review/replay metadata is added to Git. Raw CLI trees, rasters, vectors and
+# logs remain disposable, without needing another rule for each experiment.
+/artifacts/evaluation/*/*
+!/artifacts/evaluation/*/README.md
+!/artifacts/evaluation/*/.gitignore
+!/artifacts/evaluation/*/summary.json
+!/artifacts/evaluation/*/checks.json
+!/artifacts/evaluation/*/generation.json
+!/artifacts/evaluation/*/manifest.json
 
 # Full cleanup inventories are temporary review aids; keep seed journals instead.
 /config/cleanup_*inventory.json

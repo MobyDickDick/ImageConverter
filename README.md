@@ -1,5 +1,11 @@
 # ImageConverter
 
+Die [beobachtete Überdeckungsreihenfolge](docs/next_arbeitspaket_2026-10-24_depth_graph.md)
+erweitert den vorhandenen P0-Strukturweg auf fünf bis acht unterscheidbare
+Rechteckkinder. Zwölf unveränderte synthetische Sechs-Kinder-Fälle verbessern
+sich über die echte CLI von 0/12 auf 12/12. Die gekoppelte Plan-B-Prüfung
+besteht 17/17; weitere Primitive und unabhängige reale Übertragung bleiben offen.
+
 Die [P0-Erweiterung auf drei und vier Schichten](docs/next_arbeitspaket_2026-10-24_multilayer_cleanup.md)
 verbindet weitere beobachtete Rechteckinstanzen mit Rundung und hellen Konturen
 im vorhandenen Struktursuchweg. Reproduzierbare Szenentests laufen über

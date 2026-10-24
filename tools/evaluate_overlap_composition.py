@@ -13,12 +13,14 @@ from tools.run_plan_b_variations import make_original_case, make_variations, wri
 
 
 def make_cases(seed=713849, *, rounded=False, outlined=False, children=2):
-    if children not in (2, 3, 4):
-        raise ValueError('Overlap scenes support two to four children')
+    if children not in range(2, 9):
+        raise ValueError('Overlap scenes support two to eight children')
     rng = random.Random(seed)
     cases = []
     for index in range(12):
-        width, height = 210, 200
+        width, height = (210, 200) if children <= 4 else (300, 300)
+        parent_radius = 85 if children <= 4 else 130
+        parent_x, parent_y = width/2, height/2
         axis = index % 2
         first, last = rng.choice([('#bbd9eb', '#6198b3'), ('#cee2cc', '#76a68b')])
         palette = rng.sample(['#284d79', '#a04753', '#486d31', '#7851a3'], 2)
@@ -35,22 +37,27 @@ def make_cases(seed=713849, *, rounded=False, outlined=False, children=2):
         if children > 2:
             # Independent reference geometry, including chain and triple
             # intersections. Paint order is deliberately unrelated to x.
-            step = 23 if children == 4 else (18 if index % 2 else 29)
-            size = 42 if children == 4 else 57
-            start = 105-(size+(children-1)*step)/2
+            step = (120/(children-1) if children > 4 else
+                    23 if children == 4 else (18 if index % 2 else 29))
+            size = 50 if children > 4 else 42 if children == 4 else 57
+            start = parent_x-(size+(children-1)*step)/2
             boxes = [[start+i*step, start-5+i*step, size, size] for i in range(children)]
             if index % 3 == 1:
-                boxes = [[210-a-c, b, c, d] for a, b, c, d in boxes]
+                boxes = [[width-a-c, b, c, d] for a, b, c, d in boxes]
             if index % 3 == 2:
-                boxes = [[a, 200-b-d, c, d] for a, b, c, d in boxes]
+                boxes = [[a, height-b-d, c, d] for a, b, c, d in boxes]
             if index % 4 >= 2:
                 boxes.reverse()
             if index % 4 == 1:
                 boxes = boxes[1:]+boxes[:1]
-            palette = rng.sample(['#284d79', '#a04753', '#486d31', '#7851a3'], children)
-        objects = [dict(kind='circle', bbox=[20., 15., 170., 170.], parent=None,
+            paints = ['#284d79', '#a04753', '#486d31', '#7851a3']
+            if children > 4:
+                paints += ['#997b21', '#277c83', '#9c386f', '#4a3e28']
+            palette = rng.sample(paints, children)
+        objects = [dict(kind='circle', bbox=[parent_x-parent_radius, parent_y-parent_radius,
+                                           2.*parent_radius, 2.*parent_radius], parent=None,
                         gradient_axis=axis, stroke_width=0)]
-        shapes = ['<circle cx="105" cy="100" r="85" fill="url(#fixture)"/>']
+        shapes = [f'<circle cx="{parent_x:g}" cy="{parent_y:g}" r="{parent_radius}" fill="url(#fixture)"/>']
         for i, (box, fill) in enumerate(zip(boxes, palette)):
             a, b, c, d = box
             corner = rng.uniform(4., 9.) if rounded else 0.
@@ -74,7 +81,8 @@ def make_cases(seed=713849, *, rounded=False, outlined=False, children=2):
                        'Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. '
                        'Keine Beschriftung.')
         if children > 2:
-            description = description.replace('zwei', {3: 'drei', 4: 'vier'}[children])
+            description = description.replace('zwei', {3: 'drei', 4: 'vier', 5: 'fünf',
+                6: 'sechs', 7: 'sieben', 8: 'acht'}[children])
         if rounded:
             description = description.replace('Rechtecke.', 'Rechtecke mit leicht gerundeten Ecken.')
         cases.append(dict(case_id=f'{"multi"+str(children)+"_" if children > 2 else ""}{"rounded_" if rounded else ""}overlap_{index:02d}', width=width, height=height,
@@ -119,7 +127,7 @@ def main():
     parser.add_argument('--variations', action='store_true')
     parser.add_argument('--rounded', action='store_true')
     parser.add_argument('--outlines', action='store_true')
-    parser.add_argument('--children', type=int, choices=(2, 3, 4), default=2)
+    parser.add_argument('--children', type=int, choices=range(2, 9), default=2)
     parser.add_argument('--inputs', type=Path)
     parser.add_argument('--output', type=Path)
     parser.add_argument('--rename', action='store_true')

@@ -1,0 +1,150 @@
+{
+  "schema": "observed_depth_order_v1",
+  "base": "72e0a5113",
+  "generator": "tools.evaluate_overlap_composition",
+  "search_seed": 17,
+  "budget_seconds": 5,
+  "comparison": {
+    "seed": 814295,
+    "children": 6,
+    "required": 12,
+    "before_accepted": 0,
+    "after_accepted": 12,
+    "unchanged_native_annotations": true,
+    "cases": [
+      {
+        "case_id": "multi6_overlap_00",
+        "input_sha256": "9fdf3a4904c652dc895d3a48e2106a193afde4664c4a442919c551c71f8e22c5",
+        "reference_svg_sha256": "9b58507584fe2d34cc299583b456cfe241d4d11101f2e36c8daf4920ae8a2c59",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "ef3485a13102510b4d575dbf12ba7b9a45aa14bedf6d5e8431b67256f5b09624"
+      },
+      {
+        "case_id": "multi6_overlap_01",
+        "input_sha256": "ebd5c6083f4ac70b768a152b481854726f17b63dd943ab334a4f0303b105f905",
+        "reference_svg_sha256": "b2733820bb827f0a208d0c7b7dbc0e6649532d5de86456acb590549042776ca2",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "8d66b10f373c306ac883af4da4b3c7c162ea44349af2d0f4173437cb2d515a07"
+      },
+      {
+        "case_id": "multi6_overlap_02",
+        "input_sha256": "8c178be19a394a26c00e48b76ea9d838fe5fb727791861ed38eea46dc4b55163",
+        "reference_svg_sha256": "139e65ef1b976096fee5f9fb3fa840cbf12db5a159b91f109f4be8acc00ce8d9",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "039c61601d9fbc8805c20bc576646651631c350a1f4e6be4c8fee615ae6c7884"
+      },
+      {
+        "case_id": "multi6_overlap_03",
+        "input_sha256": "62647c90e87c1ec91b60485237cfb2c2f6c0c73d54e4f7e1c6d47c0832150ca0",
+        "reference_svg_sha256": "122472e97103a6dba2de1cb7fc5731bd5f8ac4da23116d22c476c9e79cfff351",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "a269dd25285ea934af88907411c9e978bed01694c221e158b6f95a17d7339d25"
+      },
+      {
+        "case_id": "multi6_overlap_04",
+        "input_sha256": "57cd1f3a13f85975d08fc203d68d0abd41c4eda035ea5b8f5979c8795379d4b5",
+        "reference_svg_sha256": "989e7876d6ca66a7f421a8641e5ff65f7d2d84a3abec6d7e338b947e40b54fb1",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "996dea8e0e53d2d919cbee0730a9cb9279140f3452e73f09e0c9705692dca5db"
+      },
+      {
+        "case_id": "multi6_overlap_05",
+        "input_sha256": "f8fa6777ce66fe8429215894bfb76ba53cb2d909e6c76338cb9f0bcaa9b4d5ee",
+        "reference_svg_sha256": "dc34b2a711c580a50901322133bbfc5d336ac143d25a934d63925b7da3bac6b2",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "27d0917a491295c213562cc4437c5efb9429d4c7e6b3931e7cd15b33e774ed4f"
+      },
+      {
+        "case_id": "multi6_overlap_06",
+        "input_sha256": "33f07b6ad42bc2e7fd92aeb0d71c6f4e4659408e60b2b62e5b597c13f71c78aa",
+        "reference_svg_sha256": "956682efa2443f1be27078bbc22a62b143067df0e79866b1b8bc0314baf777a9",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "e4d021cf9a3507ab6b401bb3eef36c69baf8b8dc2cb650be553ebdd7209da107"
+      },
+      {
+        "case_id": "multi6_overlap_07",
+        "input_sha256": "7231d3e43f007926ffc0c775af74e5f1037a7f30482615259c8f684362bfc37d",
+        "reference_svg_sha256": "2a3bcfe6ddc4b0335fdbaae6a094a2fc35dd8bd71f14483fb783bb450efecd8e",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "d787e0e81d39fe71d35c6aedeeddbf9d6a00a9212012bd335781095fc3081f0b"
+      },
+      {
+        "case_id": "multi6_overlap_08",
+        "input_sha256": "b1cecedb561fe8feaa70b440714eaee8e0320981556f1d5672e58a1c831a699e",
+        "reference_svg_sha256": "3b1aadb95417a9ffcfe69762739fab62a5b356623618004c861affcde1b893c2",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "2b3d3ac371de8fdcd4b6e385ce5a5ab3db472108f4a0c57d6200d61e9d778cec"
+      },
+      {
+        "case_id": "multi6_overlap_09",
+        "input_sha256": "44a6d8afcf7e3f6c763b073be721299ad841d8138662a8754402f164c0cce468",
+        "reference_svg_sha256": "018890be307358e536aa4f0c4ee0788dbba2a6066772cf6e492db569371a7d9a",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "25e5e345d4fa4e22d96bf3fee31d8f573ea008e2d40426e2eadb46c85c77527e"
+      },
+      {
+        "case_id": "multi6_overlap_10",
+        "input_sha256": "8a5aee74f88cd62752e6bb76c6509b48fb6446e675f901932847f5f255a05271",
+        "reference_svg_sha256": "42d3dacc4dd2148896fd9e5be6ba827d845e32c18109d2ac4b2e0d2aea9e7d46",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "fbebecedd2b5e6b4d75179f15d0185df021d2572f96b766f1138a64fd70b7521"
+      },
+      {
+        "case_id": "multi6_overlap_11",
+        "input_sha256": "df333fe546b2ac6d89d64bcddd367efd8d664b0f1a86848d0a673b6cea0ee426",
+        "reference_svg_sha256": "9d8b8f31f6244a98e0b4868e847276210a768279844d57d90c9f4fd616aded14",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "296acf240b4f962cffe17ceb2399be171ecbaf15f91f5cc05802e72baaa6743c"
+      }
+    ]
+  },
+  "additional": {
+    "seed": 962431,
+    "children": 8,
+    "required": 12,
+    "initial_accepted": 9,
+    "final_accepted": 12
+  },
+  "coupled_plan_b": {
+    "seed": 713849,
+    "children": 6,
+    "required": 17,
+    "initial_accepted": 8,
+    "final_accepted": 17
+  },
+  "limits": [
+    "synthetic development cases, not independent real-family acceptance",
+    "three crowded rounded cases remain conservatively rejected",
+    "maximum eight distinguishable rectangles; existing 96-state agenda and gates retained"
+  ],
+  "oracle_equivalence_checks": 24,
+  "validation": {
+    "affected_ci_tests": {
+      "passed": 288,
+      "skipped": 1
+    },
+    "adjacent_scene_evidence_archive_tests": {
+      "passed": 181,
+      "skipped": 1
+    },
+    "core_green": {
+      "passed": 42
+    },
+    "archive_cases_with_unchanged_hashes": 379,
+    "unchanged_archive_file_hashes": 758,
+    "full_suite_run": false
+  },
+  "generator_sha256": "40b90bf0fc28061439b05cd455cbee43b0a8c9719cab21dc2bbdad2845fea253"
+}

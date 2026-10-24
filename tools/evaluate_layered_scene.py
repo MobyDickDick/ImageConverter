@@ -6,7 +6,6 @@ of production proposals. References are forbidden to the conversion workers.
 from __future__ import annotations
 
 import argparse
-import itertools
 import json
 import os
 from pathlib import Path, PureWindowsPath
@@ -131,29 +130,48 @@ def check_objects(svg, expected):
                            fill=fill))
     if len(actual) != len(expected):
         return dict(passed=False, detected_count=len(actual), expected_count=len(expected))
+    # Exact branch-and-bound assignment retains every native/order check and
+    # the minimum maximum box error. Prune impossible types and worse partial
+    # assignments instead of visiting all 9! permutations for eight children.
+    choices, edges = [], []
+    for i, obj in enumerate(expected):
+        candidates = []
+        for a, item in enumerate(actual):
+            if item['kind'] != obj['kind']:
+                continue
+            if 'stroke_width' in obj and abs(item['stroke_width']-obj['stroke_width']) > .85:
+                continue
+            if 'corner_radius' in obj and abs(item['corner_radius']-obj['corner_radius']) > 1.25:
+                continue
+            if 'gradient_axis' in obj and item['gradient_axis'] != obj['gradient_axis']:
+                continue
+            if 'fill' in obj and item['fill'] != obj['fill']:
+                continue
+            candidates.append((max(abs(v-w) for v, w in zip(item['bbox'], obj['bbox'])), a))
+        choices.append(sorted(candidates))
+        if obj['parent'] is not None:
+            edges.append((obj['parent'], i))
+        if 'behind' in obj:
+            edges.append((i, obj['behind']))
+        edges.extend((i, j) for j in obj.get('behind_all', []))
     best = float('inf')
-    for order in itertools.permutations(range(len(actual))):
-        if any(actual[a]['kind'] != obj['kind'] for a, obj in zip(order, expected)):
-            continue
-        if any('stroke_width' in obj and abs(actual[a]['stroke_width']-obj['stroke_width']) > .85
-               for a, obj in zip(order, expected)):
-            continue
-        if any('corner_radius' in obj and abs(actual[a]['corner_radius']-obj['corner_radius']) > 1.25
-               for a, obj in zip(order, expected)):
-            continue
-        if any('gradient_axis' in obj and actual[a]['gradient_axis'] != obj['gradient_axis']
-               for a, obj in zip(order, expected)):
-            continue
-        if any('fill' in obj and actual[a]['fill'] != obj['fill'] for a, obj in zip(order, expected)):
-            continue
-        if any(obj['parent'] is not None and order[obj['parent']] >= order[i] for i, obj in enumerate(expected)):
-            continue
-        if any('behind' in obj and order[i] >= order[obj['behind']] for i, obj in enumerate(expected)):
-            continue
-        if any(order[i] >= order[j] for i, obj in enumerate(expected) for j in obj.get('behind_all', [])):
-            continue
-        best = min(best, max(abs(v-w) for a, obj in zip(order, expected)
-                             for v, w in zip(actual[a]['bbox'], obj['bbox'])))
+
+    def assign(order, used, error):
+        nonlocal best
+        if len(order) == len(expected):
+            best = error
+            return
+        for cost, a in choices[len(order)]:
+            score = max(error, cost)
+            if score >= best or a in used:
+                continue
+            trial = [*order, a]
+            if any(back < len(trial) and front < len(trial) and trial[back] >= trial[front]
+                   for back, front in edges):
+                continue
+            assign(trial, used | {a}, score)
+
+    assign([], set(), 0.)
     return dict(passed=best <= 2.5, detected_count=len(actual), expected_count=len(expected),
                 max_bbox_error_px=best if np.isfinite(best) else None)
 

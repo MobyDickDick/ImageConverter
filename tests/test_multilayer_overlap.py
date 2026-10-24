@@ -53,6 +53,6 @@ def test_independent_oracle_catches_later_layer_swap():
     assert not check_objects(ET.tostring(root, encoding='unicode'), case['expected_objects'])['passed']
 
 
-def test_more_than_four_overlap_children_remain_unsupported():
-    text = make_cases(children=4)[0]['description'].replace('vier', 'fünf')
+def test_more_than_eight_overlap_children_remain_unsupported():
+    text = make_cases(children=4)[0]['description'].replace('vier', 'neun')
     assert mixed.scene_contract(text) is None
