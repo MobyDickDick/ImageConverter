@@ -1,0 +1,217 @@
+{
+  "schema": "mixed_overlap_composition_v1",
+  "base": "0927496bb",
+  "generator": "tools.evaluate_mixed_overlap",
+  "search_seed": 17,
+  "budget_seconds": 5,
+  "final_runtime_sha256": "8576b723bb63012df06977a64bb22dd4d70b0bad1ab27c189a6c281d51a9568f",
+  "comparison": {
+    "seed": 486213,
+    "required": 12,
+    "before_accepted": 0,
+    "initial_after_accepted": 12,
+    "final_after_accepted": 12,
+    "unchanged_native_annotations": true,
+    "cases": [
+      {
+        "case_id": "mixed_overlap_00",
+        "input_sha256": "d50da37cc553dce7cea6460f049cbd458d7094b3ad46783ba7093c8210b78809",
+        "reference_svg_sha256": "0f87819ca6ad85e53b0de1cef1a8a113e4e278ca76c8e019bb1b1e39155a56bf",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "ab498c0bc53b2466772a3c1abe097bd37844f382ba59e95212b05e37c08bdaf9",
+        "object_check": {
+          "passed": true,
+          "detected_count": 3,
+          "expected_count": 3,
+          "max_bbox_error_px": 0.4895999999999958
+        }
+      },
+      {
+        "case_id": "mixed_overlap_01",
+        "input_sha256": "7af9ef398b5eff85a9b4816df16b59357260c1faa65fada4edda2097d6c5dee1",
+        "reference_svg_sha256": "671c54cfc02f0248688c9302c74282f0e543f90bd167a728b2b95be81b5fda00",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "f328ff62110028e7d84ea6b83b1e39bf70b46d4648a6102ebbd15da24e8e8486",
+        "object_check": {
+          "passed": true,
+          "detected_count": 3,
+          "expected_count": 3,
+          "max_bbox_error_px": 0.4864000000000033
+        }
+      },
+      {
+        "case_id": "mixed_overlap_02",
+        "input_sha256": "664e5c440c2c2be5f3d54ddb1a2a81d1610081f217b6a5ef6a27c2da7424ed9d",
+        "reference_svg_sha256": "a5fe32623ef15bc3d977cea7fd17faf50602e4ea1472e14b15517f95479d77d2",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "88e7db6c8c4e3a3c81a50a7262169b2db28bb500583339bcca70d42736747208",
+        "object_check": {
+          "passed": true,
+          "detected_count": 3,
+          "expected_count": 3,
+          "max_bbox_error_px": 0.4895999999999958
+        }
+      },
+      {
+        "case_id": "mixed_overlap_03",
+        "input_sha256": "5a7edee6502d950d0e9fbb14e4c8f5c0ccc80176bf038220834d8042bb180bea",
+        "reference_svg_sha256": "78004db4758b3d20e3575ef8630678efc002a7a08c705472060d43d5ab84f276",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "1e0f9d7534f5b86c4db9b88f20704d5e05c4f2d171b9c5ca17ff51de98fd755f",
+        "object_check": {
+          "passed": true,
+          "detected_count": 3,
+          "expected_count": 3,
+          "max_bbox_error_px": 0.4864000000000033
+        }
+      },
+      {
+        "case_id": "mixed_overlap_04",
+        "input_sha256": "a38d9be979c264685b42ebdc77337fbaf4ef25a72442928ebb76ddc21b93bb0c",
+        "reference_svg_sha256": "5a436d4ba19faa69540ade992c5f803a4426c0c3411107d1fa1cbab988dcf75a",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "76c99ccadd9fab33018ab4641db69fcaa374c12ce67359643ad5ac23fb4f76e5",
+        "object_check": {
+          "passed": true,
+          "detected_count": 4,
+          "expected_count": 4,
+          "max_bbox_error_px": 0.4895999999999958
+        }
+      },
+      {
+        "case_id": "mixed_overlap_05",
+        "input_sha256": "27be0b5283027adc49ac21db76a77a9f1a3c15a039d7bce95f12af0afd79e967",
+        "reference_svg_sha256": "9f5cdfbf9d984366a41e99e292308993d63c5ff24d2392abfcef1fa749586916",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "0fb55ee78ef1375c4b9b6523ec30811e22643b1a0f26a1652254262fc3861ed4",
+        "object_check": {
+          "passed": true,
+          "detected_count": 4,
+          "expected_count": 4,
+          "max_bbox_error_px": 0.4864000000000033
+        }
+      },
+      {
+        "case_id": "mixed_overlap_06",
+        "input_sha256": "f72e11e164d6d53d66da47aa631bebe8eb0d48d6b6ba289571c7e0c551aac662",
+        "reference_svg_sha256": "2b1e8162a1102fed73865e489e104d2d5ce1ae5739b45557220b6be910255486",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "8613a0d2b9c5dfc480c9f41c7e19db676c0d6e0b75cb8d2a5e9672b8789ca374",
+        "object_check": {
+          "passed": true,
+          "detected_count": 4,
+          "expected_count": 4,
+          "max_bbox_error_px": 0.4895999999999958
+        }
+      },
+      {
+        "case_id": "mixed_overlap_07",
+        "input_sha256": "6fb2e40ed3fb86f3611230ff502c7655656def9d21b3ac0f1a14e826497f1e15",
+        "reference_svg_sha256": "b448edc1ab0e291de908fdaf4c5ed7f1b1cad5500c4accb8e407186659126315",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "70ea66d04bd25c44f9d7140f1e5bec7072d4e2940f635efd30d4d31fc63574d4",
+        "object_check": {
+          "passed": true,
+          "detected_count": 4,
+          "expected_count": 4,
+          "max_bbox_error_px": 0.4864000000000033
+        }
+      },
+      {
+        "case_id": "mixed_overlap_08",
+        "input_sha256": "6e48724eba4ad2e1e127ec4a4d3ba4f8f603243fa7c4decdf42d8c5d1c959205",
+        "reference_svg_sha256": "427ab18df2d48d5701e5c7a2c7cae67984fd7c13776f13adbb8eb9e1ed72530d",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "dc6916593c826a2abf3d58773422c372920bc0c9f5d30f4893171cf80f2a1c98",
+        "object_check": {
+          "passed": true,
+          "detected_count": 5,
+          "expected_count": 5,
+          "max_bbox_error_px": 0.4895999999999958
+        }
+      },
+      {
+        "case_id": "mixed_overlap_09",
+        "input_sha256": "45c68d105b0adfa83eaed36785e85ae7bb0181c3341694b461288028feb7b840",
+        "reference_svg_sha256": "91962908cabc380fb68b2036b36a0833f3a1a347d03c31d10c691590b2eed9fc",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "4fd1ed9a49935b109acd966d6b30fc84ec196fb32b79d7bfaa90919facae5839",
+        "object_check": {
+          "passed": true,
+          "detected_count": 5,
+          "expected_count": 5,
+          "max_bbox_error_px": 0.4864000000000033
+        }
+      },
+      {
+        "case_id": "mixed_overlap_10",
+        "input_sha256": "cd04f6307180084c432386c97136c00e56210614c0687ca4c99bef6329ed274f",
+        "reference_svg_sha256": "658d22e8d6b178c9d948db4acd00982de9b5a1a1f65946e81dd2aed3a5428e67",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "57772d80af5cc48540da15589f9107502ba43a7b26c4ebe4f0b7e8f69035dd67",
+        "object_check": {
+          "passed": true,
+          "detected_count": 5,
+          "expected_count": 5,
+          "max_bbox_error_px": 0.4895999999999958
+        }
+      },
+      {
+        "case_id": "mixed_overlap_11",
+        "input_sha256": "e2fdcae275c2febd5def010fce9d3171e5ed2c17570d81582ae1f6db57fec331",
+        "reference_svg_sha256": "6fb261f3017f132932b5ef58e5cae4d53d9e94841e81b9478927ff850ede1dc8",
+        "before_accepted": false,
+        "after_accepted": true,
+        "after_output_sha256": "89da971aaa9eb1dcf207b82304934951301ccc4feb7bc252383b87be707fad89",
+        "object_check": {
+          "passed": true,
+          "detected_count": 5,
+          "expected_count": 5,
+          "max_bbox_error_px": 0.4864000000000033
+        }
+      }
+    ]
+  },
+  "additional_cli": {
+    "initial_rounded": {
+      "seed": 983147,
+      "accepted": 11,
+      "completed": 12,
+      "failed_case": "rounded_mixed_overlap_10",
+      "failure": "no_output_within_five_second_budget_while_regression_tests_running"
+    },
+    "frozen_comparison": {
+      "accepted": 12,
+      "completed": 12
+    },
+    "rounded_repeat": {
+      "accepted": 12,
+      "completed": 12
+    },
+    "coupled_plan_b": {
+      "accepted": 17,
+      "completed": 17
+    }
+  },
+  "limits": [
+    "Synthetic development evidence only; no independent real family acceptance",
+    "Mixed two-to-four-child scenes tested; shared eight-child cap is not acceptance of every larger mixed inventory",
+    "Occluded inner-circle outlines remain unsupported"
+  ],
+  "archive": {
+    "pairs": 379,
+    "file_hashes": 758,
+    "unchanged": true
+  }
+}

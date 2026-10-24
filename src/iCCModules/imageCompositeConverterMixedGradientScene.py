@@ -75,7 +75,10 @@ def scene_contract(description):
     rounded = rounded_clause in text
     # Larger inventories use observed pairwise depth as an ordering proposal;
     # the fallback agenda still has 96 states, never a factorial expansion.
-    if overlap and (counts['circle'] != 1 or not 2 <= counts['rectangle'] <= 8):
+    if overlap and not 2 <= sum(counts.values())-1 <= 8:
+        return None
+    # Occluded circular rims do not yet provide independent fill/rim radii.
+    if overlap and outlined and counts['circle'] > 1:
         return None
     # The qualifier belongs to the quantified rectangle inventory. A free
     # clause must not attach rounding to circles or silently discard a claim.
@@ -237,12 +240,59 @@ def _exposed_corner_radius(data, predicted, fill, coverage, box, *, reconstructe
     return radius if radius <= min(w, h)/3 else None
 
 
-def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False):
-    """Complete visible, differently colored rectangles, never hidden extents.
+def _overlap_circle(component, background, coverage, reconstruction_error, shape):
+    """Reuse visible-arc fitting, supported only by parent-facing boundaries."""
+    from src.iCCModules.imageCompositeConverterSceneFusion import _arc
+    contours = cv2.findContours(component.astype('uint8'), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[0]
+    # A later shape may split the visible fill. Keep every exposed arc, while
+    # excluding cut edges next to foreign paint from the radius measurement.
+    points = np.concatenate(contours)
+    near_parent = cv2.dilate(background.astype('uint8'), np.ones((5, 5), 'uint8')).astype(bool)
+    points = points[near_parent[points[:, 0, 1], points[:, 0, 0]]]
+    if len(points) < 12:
+        return None
+    geometry = _arc(points, shape)
+    if geometry is None:
+        return None
+    x, y, w, h, _ = geometry
+    center = np.array([x+w/2, y+h/2])
+    radius = w/2
+    yy, xx = np.indices(shape)
+    # Pure-fill contours lie inside the true circle. Measure its subpixel
+    # boundary from exposed antialias coverage against the fitted parent,
+    # rather than spending registration steps correcting this quantization.
+    edge = ((abs(np.hypot(xx+.5-center[0], yy+.5-center[1])-radius) < 2)
+            & (coverage > .05) & (coverage < .95) & near_parent
+            & (reconstruction_error <= 4))
+    samples = np.c_[xx[edge]+.5, yy[edge]+.5]
+    if len(samples) >= 12:
+        angles = np.sort(np.arctan2(samples[:, 1]-center[1], samples[:, 0]-center[0]))
+        span = 2*np.pi-np.diff(np.r_[angles, angles[0]+2*np.pi]).max()
+        if span >= np.pi:
+            proposal, r = center.copy(), radius
+            for _ in range(3):
+                distances = np.linalg.norm(samples-proposal, axis=1)
+                jacobian = np.c_[(proposal-samples)/distances[:, None], -np.ones(len(samples))]
+                step = np.linalg.lstsq(jacobian, distances+coverage[edge]-.5-r, rcond=None)[0]
+                proposal -= step[:2]
+                r -= step[2]
+            if (np.isfinite(np.r_[proposal, r]).all() and r >= 5
+                    and np.linalg.norm(proposal-center) <= 1.5 and abs(r-radius) <= 1.5):
+                geometry = [*(proposal-r), 2*r, 2*r, 0.]
+                x, y, w, h, _ = geometry
+    yy, xx = np.where(component)
+    if np.mean(np.hypot(xx+.5-x-w/2, yy+.5-y-h/2) <= w/2+1) < .995:
+        return None
+    return np.array(geometry)
+
+
+def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False, circles=False):
+    """Complete visible, differently colored native shapes from exposed bounds.
 
     Color separates touching residuals. Each of four sides needs a straight
     exposed segment against the measured parent paint. Fully hidden sides or
-    indistinguishable fills cannot justify a native rectangle proposal.
+    indistinguishable fills cannot justify a native rectangle proposal. Circles
+    require a measured exposed arc spanning at least half their circumference.
     """
     data = pixels.astype(float)
     high = cv2.dilate(data, np.ones((3, 3), 'uint8'))
@@ -277,6 +327,14 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
         delta = fill-predicted
         coverage = np.clip(np.sum((data-predicted)*delta, axis=2)
                            / np.maximum(1., np.sum(delta*delta, axis=2)), 0, 1)
+        if circles and not outlined:
+            background = np.max(abs(data-predicted), axis=2) <= 4
+            reconstruction_error = np.max(abs(data-predicted-coverage[..., None]*delta), axis=2)
+            geometry = _overlap_circle(component, background, coverage, reconstruction_error, pixels.shape[:2])
+            if geometry is not None:
+                children.append(dict(kind='circle', geometry=geometry,
+                                     colors=np.r_[fill, fill, fill]))
+                continue
         stroke, sw, rim_coverage = fill, 0., None
         reconstructed = None
         if outlined:
@@ -413,7 +471,7 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
     children = []
     if contract.get('overlap'):
         children = _overlap_instances(pixels, predicted, mask, rounded=contract.get('rounded', False),
-                                      outlined=contract['outlined'])
+                                      outlined=contract['outlined'], circles=bool(contract['children'].get('circle')))
         if children is None:
             return None
     for index in (() if contract.get('overlap') else range(1, number)):
@@ -602,6 +660,21 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
     return [dict(kind='circle', geometry=geometry, colors=np.r_[colors, stroke]), *children]
 
 
+def _native_fill_mask(obj, xx, yy, inset=.5):
+    """Analytic interior support, excluding rims and antialiased boundaries."""
+    x, y, w, h, sw = obj['geometry']
+    if obj['kind'] == 'circle':
+        return (xx-x-w/2)**2+(yy-y-h/2)**2 <= max(0., w/2-sw/2-inset)**2
+    left, top, right, bottom = x+sw/2, y+sw/2, x+w-sw/2, y+h-sw/2
+    mask = (xx >= left+inset) & (xx <= right-inset) & (yy >= top+inset) & (yy <= bottom-inset)
+    radius = max(0., obj.get('radius', 0.)-sw/2)
+    if radius:
+        dx = np.maximum(0, np.maximum(left+radius-xx, xx-(right-radius)))
+        dy = np.maximum(0, np.maximum(top+radius-yy, yy-(bottom-radius)))
+        mask &= dx*dx+dy*dy <= max(0., radius-inset)**2
+    return mask
+
+
 def observed_painter_order(pixels, objects):
     """Propose a depth DAG from flat paint inside observed intersections.
 
@@ -613,21 +686,7 @@ def observed_painter_order(pixels, objects):
     children = objects[1:]
     yy, xx = np.indices(pixels.shape[:2], dtype=float)
     xx, yy = xx+.5, yy+.5
-    masks = []
-    for obj in children:
-        if obj['kind'] != 'rectangle':
-            return None
-        x, y, w, h, sw = obj['geometry']
-        left, top, right, bottom = x+sw/2, y+sw/2, x+w-sw/2, y+h-sw/2
-        # Pixel centers at least half a pixel inside the fill exclude its AA
-        # boundary without discarding a narrow but visible intersection.
-        mask = (xx >= left+.5) & (xx <= right-.5) & (yy >= top+.5) & (yy <= bottom-.5)
-        radius = max(0., obj.get('radius', 0.)-sw/2)
-        if radius:
-            dx = np.maximum(0, np.maximum(left+radius-xx, xx-(right-radius)))
-            dy = np.maximum(0, np.maximum(top+radius-yy, yy-(bottom-radius)))
-            mask &= dx*dx+dy*dy <= max(0., radius-.5)**2
-        masks.append(mask)
+    masks = [_native_fill_mask(obj, xx, yy) for obj in children]
     paints = [np.max(abs(pixels.astype(float)-obj['colors'][:3]), axis=2) <= 12
               for obj in children]
     successors = [set() for _ in children]
@@ -712,7 +771,7 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
         objects = detect_instances(pixels, contract, residual_threshold=threshold)
         ordering = 'bounded_agenda'
         if objects is not None:
-            if contract.get('overlap') and len(objects) > 5:
+            if contract.get('overlap') and (len(objects) > 5 or contract['children'].get('circle')):
                 ordered = observed_painter_order(pixels, objects)
                 if ordered is not None:
                     objects = ordered
@@ -857,7 +916,8 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
 
     def valid(p):
         from src.iCCModules.imageCompositeConverterLayeredScene import _contains
-        scene = [dict(kind=o['kind'], geometry=geometry(p, i)) for i, o in enumerate(objects)]
+        scene = [dict(kind=o['kind'], geometry=geometry(p, i),
+                      radius=p[5*n+i] if rounded else 0.) for i, o in enumerate(objects)]
         for i, obj in enumerate(scene):
             x, y, w, h, sw = obj['geometry']
             if min(w, h) < 4 or not (0 <= x < x+w <= width and 0 <= y < y+h <= height):
@@ -897,16 +957,28 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                     right, bottom = np.floor(np.minimum(a[:2]+a[2:4], b[:2]+b[2:4])-1).astype(int)
                     if right-left < 2 or bottom-top < 2:
                         continue
+                    mixed_primitives = bool(contract['children'].get('circle'))
+                    yy, xx = np.mgrid[top:bottom, left:right]
+                    visible = np.ones((bottom-top, right-left), dtype=bool)
+                    if mixed_primitives:
+                        # Bounding boxes of circles may intersect outside
+                        # their actual fills. Only native silhouette pixels
+                        # can establish a depth edge or supply front paint.
+                        visible &= (_native_fill_mask(scene[i], xx+.5, yy+.5, 1.)
+                                    & _native_fill_mask(scene[j], xx+.5, yy+.5, 1.))
+                        if not visible.any():
+                            continue
                     neighbours[i].add(j)
                     neighbours[j].add(i)
-                    visible = np.ones((bottom-top, right-left), dtype=bool)
                     # A later layer owns its pixels, including a rim/rounded
                     # boundary. It cannot serve as evidence for this pair.
                     for later in scene[j+1:]:
                         x, y, w, h, sw = later['geometry']
-                        yy, xx = np.mgrid[top:bottom, left:right]
-                        visible &= ~((xx+.5 >= x-sw/2-1) & (xx+.5 <= x+w+sw/2+1)
-                                     & (yy+.5 >= y-sw/2-1) & (yy+.5 <= y+h+sw/2+1))
+                        if mixed_primitives:
+                            visible &= ~_native_fill_mask(later, xx+.5, yy+.5, -sw-1.)
+                        else:
+                            visible &= ~((xx+.5 >= x-sw/2-1) & (xx+.5 <= x+w+sw/2+1)
+                                         & (yy+.5 >= y-sw/2-1) & (yy+.5 <= y+h+sw/2+1))
                     if not visible.any():
                         continue
                     front = np.clip(p[offsets[j]:offsets[j]+3], 0, 255)

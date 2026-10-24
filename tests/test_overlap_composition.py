@@ -120,7 +120,7 @@ def test_ordered_edits_preserve_observed_instances():
         np.testing.assert_array_equal(a['colors'], b['colors'])
 
 
-@pytest.mark.parametrize('change', ['count', 'circles'])
+@pytest.mark.parametrize('change', ['count', 'outlined_circles'])
 def test_unimplemented_overlap_combinations_remain_explicitly_unsupported(change):
     description = make_cases()[0]['description']
     if change == 'count':
@@ -130,6 +130,7 @@ def test_unimplemented_overlap_combinations_remain_explicitly_unsupported(change
             'Der Kreis', 'Der äussere Kreis').replace(
             'Die Rechtecke liegen innerhalb des Kreises',
             'Die inneren Formen liegen innerhalb des äusseren Kreises')
+        description += ' Die Formen haben helle Konturen.'
     assert mixed.scene_contract(description) is None
 
 
