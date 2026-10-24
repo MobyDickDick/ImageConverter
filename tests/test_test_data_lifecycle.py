@@ -74,7 +74,18 @@ def test_incomplete_metadata_preserves_its_entire_run_but_other_runs_are_cleaned
     assert seeds['.tmp/good/report.json'] == {'seed': 19}
 
 
-def test_cleanup_protects_checkouts_and_runs_changed_after_inventory(tmp_path):
+@pytest.mark.parametrize('has_rg', [True, False])
+def test_cleanup_protects_checkouts_and_runs_changed_after_inventory(tmp_path, monkeypatch, has_rg):
+    if not has_rg:
+        run_command = cleanup.subprocess.run
+
+        def without_rg(command, **kwargs):
+            if command[0] == 'rg':
+                raise FileNotFoundError('rg is not installed')
+            return run_command(command, **kwargs)
+
+        monkeypatch.setattr(cleanup.shutil, 'which', lambda name: None)
+        monkeypatch.setattr(cleanup.subprocess, 'run', without_rg)
     checkout, run = tmp_path/'.tmp/checkout', tmp_path/'.tmp/run'
     checkout.mkdir(parents=True)
     run.mkdir()
@@ -89,6 +100,21 @@ def test_cleanup_protects_checkouts_and_runs_changed_after_inventory(tmp_path):
     assert (run/'new.png').exists()
     assert any('Protected Git' in row['reason'] for row in result['skipped'])
     assert any('Files changed' in row['reason'] for row in result['skipped'])
+
+
+def test_inventory_cleanup_without_rg_removes_reviewed_hidden_files_and_saves_seeds(tmp_path, monkeypatch):
+    monkeypatch.setattr(cleanup.shutil, 'which', lambda name: None)
+    run = tmp_path/'.tmp/run/.hidden'
+    run.mkdir(parents=True)
+    (run/'replays.jsonl').write_text('{"seed": 91}\n')
+    (run/'image.png').write_bytes(b'generated')
+    inventory = tmp_path/'inventory.json'
+    cleanup.clean(tmp_path, inventory_path=inventory)
+    result = cleanup.clean(tmp_path, apply=True, from_inventory=inventory)
+    assert result['paths'] == 1 and result['skipped'] == []
+    assert not (tmp_path/'.tmp').exists()
+    seeds = json.loads((tmp_path/'config/preserved_test_seeds.json').read_text())
+    assert seeds['.tmp/run/.hidden/replays.jsonl'] == {'seed': 91}
 
 
 @pytest.mark.parametrize('failure', [None, 'prepare', 'evaluate', 'interrupt'])

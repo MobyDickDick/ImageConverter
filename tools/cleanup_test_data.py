@@ -150,18 +150,9 @@ def clean(root=ROOT, *, apply=False, inventory_path=None, from_inventory=None):
                         records.append((path.relative_to(root).as_posix(), values))
             # Inventory every file, including files that contain no metadata.
             files = []
-            if prior is not None:
-                if target.is_dir():
-                    listed = subprocess.run(['rg', '--files', '--hidden', '--no-ignore', str(target)],
-                                            capture_output=True, text=True, check=False)
-                    if listed.returncode not in (0, 1):
-                        raise RuntimeError(listed.stderr)
-                    files = [Path(p).relative_to(root).as_posix() for p in listed.stdout.splitlines()]
-                else:
-                    files = [relative]
-                if set(files) != set(prior[relative]['files']):
-                    raise ValueError('Files changed since the read-only inventory; preserved for review')
-            elif target.is_dir():
+            # Use the same portable walker for review and application. rg is
+            # optional for metadata discovery, never a cleanup prerequisite.
+            if target.is_dir():
                 def failed(error):
                     raise error
                 for base, dirs, names in os.walk(target, followlinks=False, onerror=failed):
@@ -172,6 +163,8 @@ def clean(root=ROOT, *, apply=False, inventory_path=None, from_inventory=None):
                         files.append(file.relative_to(root).as_posix())
             else:
                 files = [target.relative_to(root).as_posix()]
+            if prior is not None and set(files) != set(prior[relative]['files']):
+                raise ValueError('Files changed since the read-only inventory; preserved for review')
             # Also inspect differently named metadata and replay journals.
             # The common names above are a fast first pass, not an allowlist
             # that could discard a seed held in e.g. trial-settings.json.
