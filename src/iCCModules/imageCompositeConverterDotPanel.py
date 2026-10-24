@@ -135,7 +135,12 @@ def fit_dot_panel(*, width, height, image, descending, render_fn, error_fn):
     # Geometry and colors have separate units. Revisit each primitive after
     # its neighbours improve, including a fine subpixel registration pass.
     alternatives = []
-    for schedule in ((1., .5, .25, .125), (2., 1., .5, .25, .125)):
+    search_log = []
+    # A coarse first move can push a partially clipped frame outside the
+    # canvas. Fine steps at the end then stay in that basin. Restart from
+    # the measured raster seed with subpixel steps as a separate hypothesis.
+    for schedule in ((1., .5, .25, .125), (2., 1., .5, .25, .125), (.5, .25, .125)):
+        started = evaluations
         best = initial
         for step in schedule:
             for _ in range(5):
@@ -153,6 +158,8 @@ def fit_dot_panel(*, width, height, image, descending, render_fn, error_fn):
                 if not changed:
                     break
         alternatives.append(best)
+        search_log.append(f'dot_registration_start={schedule[0]:g} '
+                          f'evaluations={evaluations-started} loss={best[0]:.8f}')
     target_edges = cv2.Canny(arr, 50, 140) > 0
     target_distance = cv2.distanceTransform((~target_edges).astype(np.uint8), cv2.DIST_L2, 3)
 
@@ -176,4 +183,4 @@ def fit_dot_panel(*, width, height, image, descending, render_fn, error_fn):
     return float(error_fn(arr, best[2])), best[1], best[2], {
         'center_dot_radius': p['radius'], 'center_dot_x_ratio': p['cx']/w,
         'center_dot_y_ratio': p['cy']/h,
-    }, [f'dot_registration_evaluations={evaluations}']
+    }, [*search_log, f'dot_registration_evaluations={evaluations}']
