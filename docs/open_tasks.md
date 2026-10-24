@@ -8,6 +8,15 @@ focused on the actual project scope.
 
 Alle 52 offenen Checkboxen sind in der [vollständigen Rangliste vom 24.10.2026](task_priority_2026-10-24.md) absteigend nach Wichtigkeit geordnet.
 
+**SEARCH-STRUCTURE-01, weiterer P0-Teilabschluss 2026-10-24:**
+[Wiederholte Füllfarben als alternative Instanzzerlegung](next_arbeitspaket_2026-10-24_repeated_fill.md)
+verbindet mehrere gleichfarbige Kreis-/Rechteckinstanzen mit der bestehenden
+Überdeckungs-, Rundungs- und Konturprüfung. Zwölf unveränderte synthetische
+Sechs-Kinder-CLI-Fälle verbessern sich von 0/12 auf 12/12. 32 neue Gegenproben
+prüfen den begrenzten Umfang und erhalten die Vereinigung der sichtbaren
+Inseln eines einzelnen verdeckten Kreises. Die übergeordnete Checkbox bleibt
+wegen breiterer Komposition und unabhängiger realer Abnahme offen.
+
 - [x] **SEARCH-STRUCTURE-CIRCLE-RIMS (P0, Teil von SEARCH-STRUCTURE-01):** Teilweise verdeckte innere Kreisränder aus unabhängig beobachteter Füll-/Randdeckung mit Rechteckkindern verbinden. Zwölf unveränderte synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12; Zusatzseed und gekoppelte Plan-B-Vorlage bestehen 12/12 und 17/17. Gegenproben, Objekt-/Relations-/Pixelgates und Fünf-Sekunden-Budget bleiben erhalten. [Umsetzung und Grenzen](next_arbeitspaket_2026-10-24_circle_rims.md). Die [CI-Diagnose](plan_b_ci_diagnostics_2026-10-24.md) belegt einen identischen lokalen Katalogfehler und ergänzt vollständige GitHub-Debug-Artefakte. SEARCH-STRUCTURE-01 bleibt insgesamt offen.
 
 - [x] **SEARCH-STRUCTURE-MIXED-OVERLAP (P0, Teil von SEARCH-STRUCTURE-01):** Teilweise überlappende Kreis- und Rechteckkinder im gemeinsamen Verlaufskreis-/Struktursuchweg verbinden, einschließlich gerundeter Rechtecke. Kreisvorschläge benötigen sichtbare Bögen; native Silhouetten tragen Tiefenbelege und Kantenglättung liefert Subpixelstartwerte. Zwölf vorab gesicherte synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12. Verdeckte Kreiskonturen, weitere gemischte Inventare und unabhängige reale Abnahme bleiben beim übergeordneten P0-Paket offen. [Umsetzung, Lernschritte und Grenzen](next_arbeitspaket_2026-10-24_mixed_overlap.md).
