@@ -120,18 +120,27 @@ def test_ordered_edits_preserve_observed_instances():
         np.testing.assert_array_equal(a['colors'], b['colors'])
 
 
-@pytest.mark.parametrize('change', ['count', 'outlined_circles'])
-def test_unimplemented_overlap_combinations_remain_explicitly_unsupported(change):
-    description = make_cases()[0]['description']
-    if change == 'count':
-        description = description.replace('zwei gefüllte', 'neun gefüllte')
-    else:
-        description = description.replace('Ein gefüllter Kreis', 'Zwei gefüllte Kreise').replace(
-            'Der Kreis', 'Der äussere Kreis').replace(
-            'Die Rechtecke liegen innerhalb des Kreises',
-            'Die inneren Formen liegen innerhalb des äusseren Kreises')
-        description += ' Die Formen haben helle Konturen.'
+@pytest.mark.parametrize('count', ['neun', '9'])
+def test_overlap_inventory_above_eight_children_remains_unsupported(count):
+    description = make_cases()[0]['description'].replace('zwei gefüllte', count+' gefüllte')
     assert mixed.scene_contract(description) is None
+
+
+def test_outlined_circle_overlap_contract_preserves_claimed_inventory():
+    # Circle rims became supported in #2058; this exact description used to
+    # be an unsupported-combination control in this suite.
+    description = make_cases()[0]['description'].replace(
+        'Ein gefüllter Kreis', 'Zwei gefüllte Kreise').replace(
+        'Der Kreis', 'Der äussere Kreis').replace(
+        'Die Rechtecke liegen innerhalb des Kreises',
+        'Die inneren Formen liegen innerhalb des äusseren Kreises')
+    description += ' Die Formen haben helle Konturen.'
+    contract = mixed.scene_contract(description)
+    assert contract is not None
+    assert contract['count'] == 4
+    assert contract['children'] == {'circle': 1, 'rectangle': 2}
+    assert contract['outlined'] is True
+    assert contract['overlap'] is True
 
 
 def test_rejected_painter_order_does_not_poison_the_other_order(monkeypatch):

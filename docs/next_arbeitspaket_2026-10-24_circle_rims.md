@@ -72,3 +72,32 @@ lokale Entwicklungsnachweise rote zufällige Katalogläufe nicht ersetzen.
 - Blocker: unabhängige reale Übertragung und breitere Komposition bleiben offen.
 - Nächster Schritt: neue CI-Debug-Artefakte zur Ursachenanalyse der Katalogfehler verwenden.
 - Startbefehl: `python -m tools.run_seeded_scene_check evaluate_mixed_overlap --seed 918527 --rounded --outlines`.
+
+## Nachtrag: veraltete Ablehnung in der Überdeckungssuite
+
+PR #2058 entfernt in `5e4d1b3c9` absichtlich den Vertragsausschluss für
+überlappende innere Kreise mit hellen Konturen. Der ältere Test
+`test_unimplemented_overlap_combinations_remain_explicitly_unsupported[outlined_circles]`
+in `tests/test_overlap_composition.py` erwartete weiterhin `None`. Der Fehler
+ist damit neu seit diesem Commit (Merge `3471af866`), die Testannahme ist
+veraltet. Dieselbe Beschreibung liefert mit dem Vertragsparser des direkten
+Vorgängers `None`, ab `5e4d1b3c9` das vollständige Inventar aus Elternkreis,
+einem inneren Kreis und zwei Rechtecken. Der gemeldete AssertionError wurde
+vor der Testkorrektur lokal reproduziert.
+
+Die Gegenprobe bleibt als positiver Regressionstest mit genau dieser
+Beschreibung erhalten und verlangt vollständiges Inventar, Überdeckung und
+helle Konturen. Mehr als acht Kinder bleiben eine separate Ablehnung für
+ausgeschriebene und numerische Anzahlen. Die bestehenden Rastertests in
+`tests/test_mixed_overlap_outlines.py` prüfen weiterhin beobachtete Kreisränder
+und die Ablehnung fehlender oder widersprüchlicher Bildevidenz. Die Runtime
+benötigt für diesen CI-Fehler keine Änderung.
+
+Die vollständige `overlap-composition`-CI-Testgruppe und beide gemischten
+Überdeckungssuiten bestehen nach der Korrektur gemeinsam mit **369 bestanden,
+einem Skip** (Exit 0, 115,23 Sekunden). Eine vollständige Standardsuite wurde
+für diese Testkorrektur nicht ausgeführt.
+
+```powershell
+.venv/Scripts/python.exe -m pytest -q tests/test_multilayer_overlap.py tests/test_observed_depth_order.py tests/test_overlap_composition.py tests/test_rounded_overlap_composition.py tests/test_overlap_outlines.py tests/test_test_data_lifecycle.py tests/test_mixed_overlap_composition.py tests/test_mixed_overlap_outlines.py
+```
