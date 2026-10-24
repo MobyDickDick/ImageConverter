@@ -1,9 +1,0 @@
-[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\overlap_composition_v1\before\overlap_09\conversion\reports\.image-worker-1ztiuw3w\reports_out_dir\overlap_09_worker.log
-[INFO] Konvertiere overlap_09.png | Parameter: Iterationen=65, max. Validierungsrunden=7
-
---- Verarbeite overlap_09.png ---
-Bildbeschreibung: Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-[Search] {"source": "overlap_09", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 4.765, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "stagnation"}
-[INFO] Konvertiert overlap_09.png | Parameter: mode=auto, label=M, variant_name=OVERLAP_09 | Qualität: Optimierungsfehler/Pixel=0.000649, Mean-Delta²=4894.819824, RGB-RMSE/Kanal=40.393151, Raumscore=10360.110777, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.8s

@@ -124,7 +124,7 @@ def test_ordered_edits_preserve_observed_instances():
 def test_unimplemented_overlap_combinations_remain_explicitly_unsupported(change):
     description = make_cases()[0]['description']
     if change == 'count':
-        description = description.replace('zwei gefüllte', 'drei gefüllte')
+        description = description.replace('zwei gefüllte', 'fünf gefüllte')
     else:
         description = description.replace('Ein gefüllter Kreis', 'Zwei gefüllte Kreise').replace(
             'Der Kreis', 'Der äussere Kreis').replace(

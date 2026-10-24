@@ -399,8 +399,7 @@ def run_battery(svg_path: Path, description: str, output: Path, *, seed: int,
                 "source_svg_sha256": sha256(svg.encode("utf-8")),
                 "source_description_sha256": sha256(description.encode("utf-8")),
                 "source_description": description,
-                "source_image": "source.png",
-                "artifact_retention": "debug" if keep_debug_artifacts else "summary_and_source_image",
+                "artifact_retention": "debug" if keep_debug_artifacts else "seed_and_summary",
                 "selection": selection or {"mode": "explicit", "source_svg": str(svg_path.resolve())},
                 "cases": cases}
     if not keep_debug_artifacts:
@@ -419,7 +418,9 @@ def run_battery(svg_path: Path, description: str, output: Path, *, seed: int,
     try:
         write_cases(cases, output)
         # Keep the original pixels even if the CLI moves its input after success.
-        shutil.copyfile(output / "original/input/original.png", output / "source.png")
+        if keep_debug_artifacts:
+            shutil.copyfile(output / "original/input/original.png", output / "source.png")
+            report['source_image'] = 'source.png'
         report["source_image_sha256"] = cases[0]["input_sha256"]
         save_report()
         for case in cases:
@@ -428,7 +429,7 @@ def run_battery(svg_path: Path, description: str, output: Path, *, seed: int,
                               keep_debug_artifacts=keep_debug_artifacts)
             if not keep_debug_artifacts:
                 result = {key: value for key, value in result.items()
-                          if key not in {"command", "output_svg", "reference_svg", "description", "limits"}}
+                          if key not in {"command", "output_svg", "reference_svg", "description", "limits", "svg", "expected_objects"}}
             report["cases"].append(result)
             report["summary"] = summarize(report["cases"])
             if case["case_id"] == "original":
@@ -562,7 +563,7 @@ def main(argv: list[str] | None = None) -> int:
                         default=MAX_ADDITIONAL_SVGS,
                         help="Try up to this many other SVGs after original failure (default 8; pool mode only)")
     parser.add_argument("--keep-debug-artifacts", action="store_true",
-                        help="Keep reference SVGs, rasters, converter outputs and logs; default keeps report.json and source.png")
+                        help="Keep reference SVGs, rasters, converter outputs and logs; default keeps seeds and compact report.json only")
     args = parser.parse_args(argv)
     if bool(args.svg) != bool(args.description_file):
         parser.error("--svg and --description-file must be supplied together")

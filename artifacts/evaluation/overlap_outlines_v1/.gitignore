@@ -1,30 +1,5 @@
-# Retain frozen inputs, actual native outputs and independent verification data.
-**/*.png
-!/inputs/**/*.png
-!/rounded_inputs/**/*.png
-!/additional/**/*.png
-!/rounded_additional/**/*.png
-!/plan_b/**/*.png
-**/input/*.xml
-!/inputs/**/*.xml
-!/rounded_inputs/**/*.xml
-!/additional/**/*.xml
-!/rounded_additional/**/*.xml
-!/plan_b/**/*.xml
-**/conversion/reports/*
-!**/conversion/reports/conversion_result_map.json
-!**/conversion/reports/*_deadline.json
-!**/conversion/reports/*_reference_access.json
-!**/conversion/reports/*_worker.log
-**/converter.timing.jsonl
-/*.xml
-# Intermediate successful runs were repeated after the thin-rim correction.
-/after/
-/rounded_after/
-/additional_cli/
-/rounded_additional_cli/
-/existing_overlap_cli/
-/existing_outlines_cli/
-/existing_rounded_cli/
-/existing_split_cli/
-/existing_residual_cli/
+/*
+!/.gitignore
+!/README.md
+!/checks.json
+!/summary.json

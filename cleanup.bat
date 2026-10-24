@@ -23,22 +23,13 @@ echo.
 
 if /I "%MODE%"=="history" goto :history
 
-set "APPLY=$false"
-if /I "%MODE%"=="apply" set "APPLY=$true"
-powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-  "$ErrorActionPreference = 'Stop';" ^
-  "$apply = %APPLY%;" ^
-  "$root = (Get-Location).Path;" ^
-  "$dirs = @('.venv', '.venv-py314', 'venv', '.pytest_cache', '.mypy_cache', '.ruff_cache', '.coverage', 'htmlcov');" ^
-  "$files = @('imageCompositeConverter.local.log', 'artifacts/pytest_test_image_composite_converter_2026-04-27.log');" ^
-  "$targets = @();" ^
-  "foreach ($item in $dirs + $files) { $p = Join-Path $root $item; if (Test-Path -LiteralPath $p) { $targets += Get-Item -Force -LiteralPath $p } };" ^
-  "$targets += Get-ChildItem -Force -Recurse -Directory -Filter '__pycache__' -ErrorAction SilentlyContinue | Where-Object { $_.FullName -notlike (Join-Path $root '.git\*') };" ^
-  "$targets += Get-ChildItem -Force -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.FullName -notlike (Join-Path $root '.git\*') -and ($_.Extension -in @('.pyc', '.pyo', '.tmp') -or $_.Name -like '*.prof') };" ^
-  "$targets = $targets | Sort-Object FullName -Unique;" ^
-  "if (-not $targets) { Write-Host 'Keine entbehrlichen Dateien gefunden.'; exit 0 };" ^
-  "$targets | ForEach-Object { $prefix = if ($apply) { 'LOESCHE ' } else { 'WUERDE LOESCHEN ' }; Write-Host ($prefix + $_.FullName) };" ^
-  "if ($apply) { $targets | Sort-Object { $_.FullName.Length } -Descending | Remove-Item -Recurse -Force; Write-Host 'Bereinigung abgeschlossen.' } else { Write-Host ''; Write-Host 'Nur Vorschau. Zum Loeschen cleanup.bat --apply ausfuehren.' }"
+set "CLEANUP_ARGS="
+if /I "%MODE%"=="apply" set "CLEANUP_ARGS=--apply"
+if exist ".venv\Scripts\python.exe" (
+  ".venv\Scripts\python.exe" -m tools.cleanup_test_data %CLEANUP_ARGS%
+) else (
+  python -m tools.cleanup_test_data %CLEANUP_ARGS%
+)
 exit /b %ERRORLEVEL%
 
 :history

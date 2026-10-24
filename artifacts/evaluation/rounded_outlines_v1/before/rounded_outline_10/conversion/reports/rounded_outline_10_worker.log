@@ -1,9 +1,0 @@
-[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\rounded_outlines_v1\before\rounded_outline_10\conversion\reports\.image-worker-irapy3u4\reports_out_dir\rounded_outline_10_worker.log
-[INFO] Konvertiere rounded_outline_10.png | Parameter: Iterationen=65, max. Validierungsrunden=7
-
---- Verarbeite rounded_outline_10.png ---
-Bildbeschreibung: Ein gefüllter Kreis und 6 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-[Search] {"source": "rounded_outline_10", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 4.844, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "stagnation"}
-[INFO] Konvertiert rounded_outline_10.png | Parameter: mode=auto, label=M, variant_name=ROUNDED_OUTLINE_10 | Qualität: Optimierungsfehler/Pixel=0.000540, Mean-Delta²=3579.617432, RGB-RMSE/Kanal=34.542811, Raumscore=8683.884292, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=2.0s
