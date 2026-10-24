@@ -15,9 +15,10 @@ def object_key(obj):
     return (obj['kind'], *np.round(np.r_[obj['geometry'], obj.get('radius', 0.), obj['colors']], 3))
 
 
-def scene_key(objects):
-    # The parent has a fixed painter role. Disjoint children are unordered.
-    return (object_key(objects[0]), *sorted(object_key(obj) for obj in objects[1:]))
+def scene_key(objects, *, ordered=False):
+    # Overlapping children have distinct painter roles; disjoint ones do not.
+    children = [object_key(obj) for obj in objects[1:]]
+    return (object_key(objects[0]), *(children if ordered else sorted(children)))
 
 
 def complete(objects, counts):
@@ -30,7 +31,7 @@ def _overlap(a, b):
     return min(ax+aw, bx+bw) > max(ax, bx) and min(ay+ah, by+bh) > max(ay, by)
 
 
-def edit_proposals(seeds, counts, *, max_states=96, stats=None):
+def edit_proposals(seeds, counts, *, max_states=96, stats=None, ordered=False):
     """Yield one bounded agenda step at a time, including rejected structures.
 
     Every new instance is observed in a segmentation. Missing classes can be
@@ -45,7 +46,7 @@ def edit_proposals(seeds, counts, *, max_states=96, stats=None):
     for objects in seeds:
         if not objects:
             continue
-        key = scene_key(objects)
+        key = scene_key(objects, ordered=ordered)
         if key not in seen:
             seen.add(key)
             queue.append((objects, ()))
@@ -72,7 +73,8 @@ def edit_proposals(seeds, counts, *, max_states=96, stats=None):
                 successors.append((objects[:i]+objects[i+1:], 'remove'))
         for candidate in candidates:
             if inventory[candidate['kind']] < target[candidate['kind']]:
-                if not any(_overlap(candidate, obj) for obj in objects[1:]):
+                if not any(object_key(candidate) == object_key(obj) or
+                           (not ordered and _overlap(candidate, obj)) for obj in objects[1:]):
                     successors.append(([*objects, candidate], 'add'))
         for i, obj in enumerate(objects[1:], 1):
             alternatives = list(candidates)
@@ -98,11 +100,19 @@ def edit_proposals(seeds, counts, *, max_states=96, stats=None):
                 if not _overlap(candidate, obj):
                     continue
                 others = objects[1:i]+objects[i+1:]
-                if any(_overlap(candidate, other) for other in others):
+                if any(object_key(candidate) == object_key(other) or
+                       (not ordered and _overlap(candidate, other)) for other in others):
                     continue
                 successors.append((objects[:i]+[candidate]+objects[i+1:], 'replace'))
+        if ordered:
+            # Adjacent swaps explore painter order within the same bounded
+            # agenda and shared registration scheduler, without new objects.
+            for i in range(1, len(objects)-1):
+                proposal = list(objects)
+                proposal[i], proposal[i+1] = proposal[i+1], proposal[i]
+                successors.append((proposal, 'reorder'))
         for proposal, operation in successors:
-            key = scene_key(proposal)
+            key = scene_key(proposal, ordered=ordered)
             if key in seen:
                 continue
             if len(seen) >= max_states:

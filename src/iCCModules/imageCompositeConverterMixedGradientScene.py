@@ -1,4 +1,4 @@
-"""Raster-derived gradient circles containing disjoint flat native shapes.
+"""Raster-derived gradient circles containing flat native shapes.
 
 The closed description contract controls topology; raster residuals supply
 instances, including rounded rectangles. No catalogue keys, saved geometry
@@ -57,18 +57,26 @@ def scene_contract(description):
     relation = ('die inneren formen liegen innerhalb des äusseren kreises' if inner_forms
                 else 'die rechtecke liegen innerhalb des kreises')
     layout_axis = None
+    overlap = relation+' und überlappen sich teilweise' in text
     if sum(counts.values()) > 2:
         layouts = [name for name in ('nebeneinander', 'untereinander', 'voneinander')
                    if relation+' und getrennt '+name in text]
-        if len(layouts) != 1:
+        if overlap and not layouts:
+            relation += ' und überlappen sich teilweise'
+        elif len(layouts) != 1 or overlap:
             return None
-        relation += ' und getrennt '+layouts[0]
-        layout_axis = {'nebeneinander': 0, 'untereinander': 1}.get(layouts[0])
+        else:
+            relation += ' und getrennt '+layouts[0]
+            layout_axis = {'nebeneinander': 0, 'untereinander': 1}.get(layouts[0])
     if text.count(relation) != 1:
         return None
     outlined = 'die formen haben helle konturen' in text
     rounded_clause = 'mit leicht gerundeten ecken'
     rounded = rounded_clause in text
+    # Initially require two distinguishable flat rectangles, with every side
+    # observed. Other overlap inventories and paint remain unsupported.
+    if overlap and (counts != {'circle': 1, 'rectangle': 2} or outlined or rounded):
+        return None
     # The qualifier belongs to the quantified rectangle inventory. A free
     # clause must not attach rounding to circles or silently discard a claim.
     if rounded and (text.count(rounded_clause) != 1
@@ -91,7 +99,7 @@ def scene_contract(description):
     if re.sub(r'[\s.,;]+|\bund\b', '', rest):
         return None
     return dict(count=sum(counts.values()), axis=0 if direction[0] == 'horizontal' else 1,
-                outlined=outlined, layout_axis=layout_axis, rounded=rounded,
+                outlined=outlined, layout_axis=layout_axis, rounded=rounded, overlap=overlap,
                 children={kind: number for kind, number in
                           (('circle', counts['circle']-1), ('rectangle', counts['rectangle'])) if number})
 
@@ -189,6 +197,54 @@ def _rounded_coverage_edges(coverage, low, high):
             middle+float(np.sum(coverage[middle:min(len(coverage), int(right)+3)])))
 
 
+def _overlap_instances(pixels, predicted, mask):
+    """Complete visible, differently colored rectangles, never hidden extents.
+
+    Color separates touching residuals. Each of four sides needs a straight
+    exposed segment against the measured parent paint. Fully hidden sides or
+    indistinguishable fills cannot justify a native rectangle proposal.
+    """
+    data = pixels.astype(float)
+    high = cv2.dilate(data, np.ones((3, 3), 'uint8'))
+    low = cv2.erode(data, np.ones((3, 3), 'uint8'))
+    flat = (np.max(high-low, axis=2) <= 1) & mask.astype(bool)
+    colors, counts = np.unique(pixels[flat], axis=0, return_counts=True)
+    colors = colors[counts >= 12]
+    if len(colors) != 2 or np.max(abs(colors[0].astype(float)-colors[1])) < 25:
+        return None
+    children = []
+    for color in colors:
+        fill = color.astype(float)
+        visible = ((np.max(abs(data-fill), axis=2) <= 3) & mask.astype(bool)).astype('uint8')
+        number, labels, stats, _ = cv2.connectedComponentsWithStats(visible)
+        parts = [i for i in range(1, number) if stats[i, cv2.CC_STAT_AREA] >= 12]
+        if len(parts) != 1:
+            return None
+        component = labels == parts[0]
+        x, y, w, h, area = stats[parts[0]]
+        if min(w, h) < 8 or area < .35*w*h or x < 3 or y < 3 or x+w+2 >= pixels.shape[1] or y+h+2 >= pixels.shape[0]:
+            return None
+        delta = fill-predicted
+        coverage = np.clip(np.sum((data-predicted)*delta, axis=2)
+                           / np.maximum(1., np.sum(delta*delta, axis=2)), 0, 1)
+        background = np.max(abs(data-predicted), axis=2) <= 4
+        # Pure fill begins at an integer pixel; the adjacent pixel may carry
+        # fractional coverage. Only parent-facing spans supply that fraction.
+        left = component[:, x] & component[:, x+2] & background[:, x-2]
+        right = component[:, x+w-1] & component[:, x+w-3] & background[:, x+w+1]
+        top = component[y] & component[y+2] & background[y-2]
+        bottom = component[y+h-1] & component[y+h-3] & background[y+h+1]
+        if any(np.count_nonzero(side) < 5 for side in (left, right, top, bottom)):
+            return None
+        a = x-float(np.median(coverage[left, x-1]))
+        b = y-float(np.median(coverage[y-1, top]))
+        X = x+w+float(np.median(coverage[right, x+w]))
+        Y = y+h+float(np.median(coverage[y+h, bottom]))
+        children.append(dict(kind='rectangle', geometry=np.array([a, b, X-a, Y-b, 0.]),
+                             colors=np.r_[fill, fill, fill]))
+    return children
+
+
 def detect_instances(pixels, contract, *, residual_threshold=25, split_components=False):
     """Fit background paint first, then explain contrasting interior regions."""
     foreground = (np.max(255-pixels.astype(float), axis=2) > 25).astype('uint8')
@@ -221,7 +277,12 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
             & interior.astype(bool)).astype('uint8')
     number, labels, stats, _ = cv2.connectedComponentsWithStats(mask)
     components = []
-    for index in range(1, number):
+    children = []
+    if contract.get('overlap'):
+        children = _overlap_instances(pixels, predicted, mask)
+        if children is None:
+            return None
+    for index in (() if contract.get('overlap') else range(1, number)):
         if stats[index, cv2.CC_STAT_AREA] < 12:
             continue
         component = (labels == index).astype('uint8')
@@ -230,7 +291,6 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
         components.extend((part, len(parts) > 1) for part in parts)
         if len(components) > 16:
             return None
-    children = []
     for component, was_split in components:
         x, y, w, h = cv2.boundingRect(component)
         area = cv2.countNonZero(component)
@@ -407,14 +467,15 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
     attempts, seen, seeds = [], set(), []
     session = current_search()
     rejection_scope = (raster_identity(pixels), tuple(sorted(contract['children'].items())),
-                       contract['axis'], contract['outlined'], contract['layout_axis'], contract['rounded'])
+                       contract['axis'], contract['outlined'], contract['layout_axis'], contract['rounded'],
+                       contract.get('overlap', False))
     rejected = session.structure_rejections.setdefault(rejection_scope, {}) if session else {}
 
     def register(objects, attempt):
         attempts.append(attempt)
         try:
             if objects is not None:
-                key = scene_key(objects)
+                key = scene_key(objects, ordered=contract.get('overlap', False))
                 if not complete(objects, contract['children']):
                     attempt['outcome'] = 'inventory_rejected'
                 elif key in rejected:
@@ -456,7 +517,8 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
         # those slices, so all observed instances are available to the agenda.
         stats, split_stats, outcome = {}, {}, 'cancelled'
         try:
-            for proposal in edit_proposals(seeds, contract['children'], stats=stats):
+            for proposal in edit_proposals(seeds, contract['children'], stats=stats,
+                                           ordered=contract.get('overlap', False)):
                 if session and session.time_reason():
                     return None
                 yield None
@@ -474,7 +536,7 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
             # to remove object, relation, region or full-image checks.
             remaining = max(0, 96-stats.get('states', 0))
             changed = False
-            if not contract['outlined'] and contract['children'].get('rectangle', 0) >= 2:
+            if not contract['outlined'] and not contract.get('overlap') and contract['children'].get('rectangle', 0) >= 2:
                 seed_keys = {scene_key(seed) for seed in seeds}
                 for threshold in (25, 16, 36):
                     if session and session.time_reason():
@@ -605,9 +667,25 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                 c = np.clip(p[offsets[i]:offsets[i]+(9 if i == 0 else 6)], 0, 255)
                 if c[-3:].mean() < 180 or (i and c[-3:].mean() < c[:3].mean()+15):
                     return False
-        # Every pair must be disjoint, in any arrangement. An explicitly
+        if contract.get('overlap'):
+            from src.iCCModules.imageCompositeConverterSceneFusion import compatible
+            if not compatible([dict(o, fill=True) for o in scene[1:]],
+                              dict(overlap=True, counts=contract['children'])):
+                return False
+            # Global/local area metrics alone can tolerate a wrong painter
+            # order at a small intersection. Bind the front role to its own
+            # observed flat paint inside that intersection as well.
+            a, b = scene[1]['geometry'], scene[2]['geometry']
+            left, top = np.ceil(np.maximum(a[:2], b[:2])+1).astype(int)
+            right, bottom = np.floor(np.minimum(a[:2]+a[2:4], b[:2]+b[2:4])-1).astype(int)
+            if right-left < 2 or bottom-top < 2:
+                return False
+            front = np.clip(p[offsets[2]:offsets[2]+3], 0, 255)
+            if np.percentile(np.max(abs(pixels[top:bottom, left:right].astype(float)-front), axis=2), 80) > 12:
+                return False
+        # Every other pair must be disjoint, in any arrangement. An explicitly
         # named row/column imposes its stronger interval-separation rule.
-        for i, a in enumerate(scene[1:]):
+        for i, a in enumerate([] if contract.get('overlap') else scene[1:]):
             ax, ay, aw, ah, ast = a['geometry']
             for b in scene[i+2:]:
                 bx, by, bw, bh, bst = b['geometry']

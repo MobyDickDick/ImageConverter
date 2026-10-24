@@ -1,5 +1,6 @@
 # Dokumentationsindex
 
+- [Überdeckung als geordnete Strukturhypothese: 12/12 synthetische CLI-Fälle und 17/17 Plan-B-Varianten (2026-10-23)](next_arbeitspaket_2026-10-23_overlap_composition.md)
 - [Rundung mit Restbildinstanzen kombinieren: 12/12 synthetische CLI-Fälle und 17/17 Plan-B-Varianten (2026-10-23)](next_arbeitspaket_2026-10-23_rounded_composition.md)
 - [Verbundene Restbildkomponenten aufteilen: 20/20 synthetische CLI-Fälle und 17/17 Plan-B-Varianten (2026-10-23)](next_arbeitspaket_2026-10-23_component_splits.md)
 - [Native Add/Remove/Replace-Strukturoperatoren und negative Evidenz (2026-10-23)](next_arbeitspaket_2026-10-23_structure_operators.md)

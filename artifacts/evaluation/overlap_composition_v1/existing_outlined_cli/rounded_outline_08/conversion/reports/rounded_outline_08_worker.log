@@ -1,0 +1,23 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\overlap_composition_v1\existing_outlined_cli\rounded_outline_08\conversion\reports\.image-worker-ohqyl7pe\reports_out_dir\rounded_outline_08_worker.log
+[INFO] Konvertiere rounded_outline_08.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite rounded_outline_08.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 6 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 1, "completed": false, "turns": 1, "last_turn": 0, "seconds": 0.09399999992456287, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 16, "operator": "segmentation", "outcome": "duplicate"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "16", "steps": 0, "completed": true, "turns": 1, "last_turn": 1, "seconds": 0.062000000034458935, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 36, "operator": "segmentation", "outcome": "duplicate"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "36", "steps": 0, "completed": true, "turns": 1, "last_turn": 2, "seconds": 0.0779999999795109, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 1, "last_turn": 3, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 1, "completed": false, "turns": 2, "last_turn": 4, "seconds": 0.12499999988358468, "rate": 0.0, "best": 82.14436979328751}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "structure_search_finished", "outcome": "agenda_exhausted", "states": 1, "state_limit_reached": false, "candidate_limit_reached": false}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 0, "completed": true, "turns": 2, "last_turn": 5, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_finished", "evaluations": 1, "best_error": 0.3221984126984127}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 25, "operator": "segmentation", "outcome": "accepted"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 0, "completed": true, "turns": 3, "last_turn": 6, "seconds": 0.1559999999590218, "rate": 0.0, "best": 82.14436979328751}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_schedule_finished", "slices": 7, "stop_reason": "caller_stopped", "models": {"25": {"turns": 3, "last_turn": 6, "seconds": 0.1559999999590218, "rate": 0.0, "best": 82.14436979328751}, "16": {"turns": 1, "last_turn": 1, "seconds": 0.062000000034458935, "rate": 0.0, "best": null}, "36": {"turns": 1, "last_turn": 2, "seconds": 0.0779999999795109, "rate": 0.0, "best": null}, "edits": {"turns": 2, "last_turn": 5, "seconds": 0.0, "rate": 0.0, "best": null}}}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "candidate_satisfactory", "elapsed_seconds": 0.938, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 1}
+[Search] {"source": "rounded_outline_08", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 0.969, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 1, "stop_reason": "satisfactory"}
+[INFO] Konvertiert rounded_outline_08.png | Parameter: mode=auto, label=M, variant_name=ROUNDED_OUTLINE_08 | Qualität: Optimierungsfehler/Pixel=0.000008, Mean-Delta²=12.927643, RGB-RMSE/Kanal=2.075865, Raumscore=62.271661, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s

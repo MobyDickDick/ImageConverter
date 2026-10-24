@@ -1,0 +1,22 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\overlap_composition_v1\before\overlap_07\conversion\reports\.image-worker-cfj_1dsh\reports_out_dir\overlap_07_worker.log
+[INFO] Konvertiere overlap_07.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite overlap_07.png ---
+Bildbeschreibung: Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "overlap_07", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 2.453, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "supported_models_exhausted"}
+[INFO] Konvertiert overlap_07.png | Parameter: mode=auto, label=M, variant_name=OVERLAP_07 | Qualität: Optimierungsfehler/Pixel=0.000615, Mean-Delta²=4545.744141, RGB-RMSE/Kanal=38.926187, Raumscore=9607.981131, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=2.0s
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\overlap_composition_v1\before\overlap_07\conversion\reports\.image-worker-gpt3jau9\reports_out_dir\overlap_07_worker.log
+[INFO] Konvertiere overlap_07.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite overlap_07.png ---
+Bildbeschreibung: Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "overlap_07", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 4.922, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "stagnation"}
+[INFO] Konvertiert overlap_07.png | Parameter: mode=auto, label=M, variant_name=OVERLAP_07 | Qualität: Optimierungsfehler/Pixel=0.000615, Mean-Delta²=4545.744141, RGB-RMSE/Kanal=38.926187, Raumscore=9607.981131, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.9s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\overlap_composition_v1\before\overlap_07\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\overlap_composition_v1\before\overlap_07\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\overlap_composition_v1\before\overlap_07\conversion
