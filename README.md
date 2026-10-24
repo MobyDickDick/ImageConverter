@@ -1,5 +1,12 @@
 # ImageConverter
 
+Die [CI-Diagnose](docs/plan_b_ci_diagnostics_2026-10-24.md) reproduziert einen
+aktuellen GitHub-Originalfehler lokal mit identischen Messwerten. Künftige
+Plan-B-Läufe bewahren vollständige Debug-Artefakte und die Toolchain 14 Tage.
+Der neue [P0-Teil für helle Kreisränder](docs/next_arbeitspaket_2026-10-24_circle_rims.md)
+verbessert zwölf synthetische CLI-Fälle von 0/12 auf 12/12; zusätzliche 12/12
+und 17/17 gekoppelte Plan-B-Fälle bestehen. Die reale Gesamtaufgabe bleibt offen.
+
 Die [gemischte Überdeckungskomposition](docs/next_arbeitspaket_2026-10-24_mixed_overlap.md)
 verbindet native Kreis- und Rechteckkinder im gemeinsamen P0-Struktursuchweg.
 Zwölf vorab gesicherte synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12.

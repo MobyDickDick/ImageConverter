@@ -27,9 +27,8 @@ def test_mixed_native_overlap_earns_independent_acceptance(index, rounded):
 
 @pytest.mark.parametrize('claim', [' Mit Text.', ' Die Formen sind getrennt.',
     ' Der innere Kreis ist nicht gefüllt.', ' Der innere Kreis liegt vorne.',
-    ' Ein zusätzlicher Kreis.', ' Die Kreise haben gerundete Ecken.',
-    ' Die Formen haben helle Konturen.'])
-def test_unmodelled_claims_and_occluded_circle_rims_remain_unsupported(claim):
+    ' Ein zusätzlicher Kreis.', ' Die Kreise haben gerundete Ecken.'])
+def test_unmodelled_claims_remain_unsupported(claim):
     assert mixed.scene_contract(make_cases()[0]['description']+claim) is None
 
 

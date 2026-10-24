@@ -77,9 +77,6 @@ def scene_contract(description):
     # the fallback agenda still has 96 states, never a factorial expansion.
     if overlap and not 2 <= sum(counts.values())-1 <= 8:
         return None
-    # Occluded circular rims do not yet provide independent fill/rim radii.
-    if overlap and outlined and counts['circle'] > 1:
-        return None
     # The qualifier belongs to the quantified rectangle inventory. A free
     # clause must not attach rounding to circles or silently discard a claim.
     if rounded and (text.count(rounded_clause) != 1
@@ -244,6 +241,8 @@ def _overlap_circle(component, background, coverage, reconstruction_error, shape
     """Reuse visible-arc fitting, supported only by parent-facing boundaries."""
     from src.iCCModules.imageCompositeConverterSceneFusion import _arc
     contours = cv2.findContours(component.astype('uint8'), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[0]
+    if not contours:
+        return None
     # A later shape may split the visible fill. Keep every exposed arc, while
     # excluding cut edges next to foreign paint from the radius measurement.
     points = np.concatenate(contours)
@@ -359,6 +358,32 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
             coverage = np.clip((od*rr-ort*dr)/np.maximum(1., determinant), 0, 1)
             rim_coverage = np.clip((ort*dd-od*dr)/np.maximum(1., determinant), 0, 1)
             reconstructed = predicted+coverage[..., None]*delta+rim_coverage[..., None]*rim
+            if circles:
+                # Measure both parent-facing boundaries independently. A rim
+                # must explain an observed annulus, never a fixed assumed width.
+                error = np.max(abs(data-reconstructed), axis=2)
+                # At the inner boundary the adjacent paint is the rim, not
+                # the parent. Foreign fill does not provide arc support.
+                rim_background = (rim_coverage > .1) & (coverage < .05) & (error <= 4)
+                inner = _overlap_circle(component, background=rim_background,
+                                        coverage=coverage, reconstruction_error=error, shape=pixels.shape[:2])
+                outer_coverage = np.clip(coverage+rim_coverage, 0, 1)
+                outer_component = ((outer_coverage >= .95) & (error <= 4)
+                                   & cv2.dilate(component.astype('uint8'), np.ones((9, 9), 'uint8')).astype(bool))
+                outer = (_overlap_circle(outer_component, np.max(abs(data-predicted), axis=2) <= 4,
+                                         outer_coverage, error, pixels.shape[:2])
+                         if inner is not None else None)
+                if inner is not None and outer is not None:
+                    ic = inner[:2]+inner[2:4]/2
+                    oc = outer[:2]+outer[2:4]/2
+                    sw = (outer[2]-inner[2])/2
+                    if np.linalg.norm(ic-oc) <= .6 and .5 <= sw <= inner[2]/4:
+                        center = (ic+oc)/2
+                        radius = (inner[2]+outer[2])/4
+                        children.append(dict(kind='circle',
+                            geometry=np.r_[center-radius, 2*radius, 2*radius, sw],
+                            colors=np.r_[fill, fill, stroke]))
+                        continue
         background = np.max(abs(data-predicted), axis=2) <= 4
         # Pure fill begins at an integer pixel; the adjacent pixel may carry
         # fractional coverage. Only parent-facing spans supply that fraction.

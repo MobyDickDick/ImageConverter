@@ -90,6 +90,6 @@ Die 52 Checkboxen enthalten auch Arbeitsregeln und Sitzungsabläufe. Diese bleib
 
 ## Bearbeitung des höchsten Rangs
 
-Branch: `codex/search-structure-mixed-primitives-2026-10-24`.
+Branch: `codex/search-structure-circle-rims-2026-10-24`.
 
-Der nächste abgegrenzte Lieferumfang von SEARCH-STRUCTURE-01 verbindet teilweise überlappende Kreis- und Rechteckkinder im bestehenden Verlaufskreis-/Struktursuchweg. Native Instanzen, beobachtbare Grenzen, Zeichenreihenfolge, gemeinsames Bildbudget und unabhängige Objekt-/Regions-/Pixelprüfungen bleiben erforderlich. Die Gesamtaufgabe bleibt bis zur breiteren Komposition und unabhängigen realen Abnahme offen.
+Der nächste abgegrenzte Lieferumfang von SEARCH-STRUCTURE-01 ergänzt helle Konturen bei teilweise verdeckten inneren Kreisen im bestehenden gemischten Struktursuchweg. Zwei unabhängig beobachtete Radien verbinden Füllung und Rand. Der kontrollierte CLI-Vergleich verbessert sich von 0/12 auf 12/12; weitere 12/12 und 17/17 gekoppelte Fälle bestehen. [Umsetzung und Grenzen](next_arbeitspaket_2026-10-24_circle_rims.md). Die Gesamtaufgabe bleibt bis zur breiteren Komposition und unabhängigen realen Abnahme offen.

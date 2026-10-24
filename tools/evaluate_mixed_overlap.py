@@ -6,12 +6,13 @@ import json
 import os
 from pathlib import Path
 import random
+from xml.etree import ElementTree as ET
 
 from tools.evaluate_layered_scene import evaluate_cases, verify_report
 from tools.run_plan_b_variations import make_original_case, make_variations, write_cases
 
 
-def make_cases(seed=486213, *, rounded=False):
+def make_cases(seed=486213, *, rounded=False, outlined=False):
     rng = random.Random(seed)
     cases = []
     for index in range(12):
@@ -64,11 +65,23 @@ def make_cases(seed=486213, *, rounded=False):
         cases.append(dict(case_id=f'{"rounded_" if rounded else ""}mixed_overlap_{index:02d}',
                           width=width, height=height, svg=svg, description=description,
                           expected_objects=objects))
+    if outlined:
+        for index, case in enumerate(cases):
+            root = ET.fromstring(case['svg'])
+            for element, obj in zip(list(root)[2:], case['expected_objects']):
+                sw = (1. if obj['parent'] is None else 1.5) + .25*(index % 3)
+                element.set('stroke', '#f3f0ed')
+                element.set('stroke-width', str(sw))
+                x, y, w, h = obj['bbox']
+                obj.update(bbox=[x-sw/2, y-sw/2, w+sw, h+sw], stroke_width=sw)
+            case.update(case_id='outlined_'+case['case_id'],
+                        svg=ET.tostring(root, encoding='unicode'),
+                        description=case['description']+' Die Formen haben helle Konturen.')
     return cases
 
 
-def make_variation_cases(seed=486213, *, rounded=False):
-    source = make_cases(seed, rounded=rounded)[3]
+def make_variation_cases(seed=486213, *, rounded=False, outlined=False):
+    source = make_cases(seed, rounded=rounded, outlined=outlined)[3]
     cases = [make_original_case(source['svg'], source['description']),
              *make_variations(source['svg'], source['description'], seed)]
     for case in cases:
@@ -90,6 +103,7 @@ def main():
     parser.add_argument('--prepare', type=Path)
     parser.add_argument('--seed', type=int, default=486213)
     parser.add_argument('--rounded', action='store_true')
+    parser.add_argument('--outlines', action='store_true')
     parser.add_argument('--variations', action='store_true')
     parser.add_argument('--inputs', type=Path)
     parser.add_argument('--output', type=Path)
@@ -99,11 +113,12 @@ def main():
     args = parser.parse_args()
     os.environ.update(IMAGE_CONVERTER_ISOLATE_SVG_RENDER='0', ICC_SEARCH_SEED='17')
     if args.prepare:
-        cases = (make_variation_cases if args.variations else make_cases)(args.seed, rounded=args.rounded)
+        cases = (make_variation_cases if args.variations else make_cases)(
+            args.seed, rounded=args.rounded, outlined=args.outlines)
         args.prepare.mkdir(parents=True, exist_ok=False)
         write_cases(cases, args.prepare)
         (args.prepare/'manifest.json').write_text(json.dumps(cases, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
-        (args.prepare/'generation.json').write_text(json.dumps(dict(seed=args.seed, rounded=args.rounded,
+        (args.prepare/'generation.json').write_text(json.dumps(dict(seed=args.seed, rounded=args.rounded, outlines=args.outlines,
                                                                   variations=args.variations), indent=2)+'\n', encoding='utf-8')
         return 0
     if not args.inputs or not args.output:
