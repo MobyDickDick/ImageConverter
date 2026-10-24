@@ -1,0 +1,225 @@
+{
+  "anonymous_09.png": {
+    "actual_iterations": 64,
+    "base": "ANONYMOUS_09",
+    "best_error": 0.14282539682539683,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+    "diff_error_distribution_status": "random_like",
+    "elapsed_seconds": 0.9529999999795109,
+    "error_per_pixel": 3.4006046863189722e-06,
+    "error_pixel_cluster_count": 186.0,
+    "error_pixel_cluster_excess": 0.1336200753682768,
+    "error_pixel_count": 834.0,
+    "filename": "anonymous_09.png",
+    "h": 200,
+    "largest_error_pixel_cluster_fraction": 0.15347721822541965,
+    "localized_error_fraction": 0.6892156239066128,
+    "mean_delta2": 2.9941904544830322,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "adaptive_search": {
+        "candidate_evaluations": 1,
+        "elapsed_seconds": 0.953,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      },
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "constraint": "inside_rect_border",
+            "id": "description_element_1",
+            "kind": "HorizontalGradient",
+            "source": "description",
+            "stops": [
+              "#8f8f8f",
+              "#dedede",
+              "#8f8f8f"
+            ]
+          },
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "fill": "none",
+            "id": "description_element_2",
+            "kind": "RectBorder",
+            "source": "description",
+            "stroke": "#666666",
+            "stroke_width": 0.035
+          }
+        ],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.75,
+          "reasons": [],
+          "status": "ok"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": false,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "anonymous_09",
+          "source": "base_name",
+          "text": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [],
+      "geometry_ir": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "fill": "none",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "label": "M",
+      "language_assertions": {
+        "counts": [],
+        "no_text": false
+      },
+      "mode": "auto",
+      "primitive_scene_registration": {
+        "error": 0.14282539682539683,
+        "evaluations": 1,
+        "initial_error": 0.14282539682539683,
+        "instance_groups": 3,
+        "neural_scene_selected": false,
+        "object_kinds": [
+          "circle",
+          "rectangle",
+          "rectangle"
+        ],
+        "object_quality": [
+          {
+            "edge_alignment": 0.957891047000885,
+            "foreground_iou": 0.9960243009023497,
+            "foreground_mse": 2.6981996205840694e-05,
+            "normalized_mse": 2.0693843734525612e-05,
+            "passed": true
+          },
+          {
+            "edge_alignment": 0.9924407005310059,
+            "foreground_iou": 0.9849427168576105,
+            "foreground_mse": 3.746261509642206e-05,
+            "normalized_mse": 3.676008143925341e-05,
+            "passed": true
+          },
+          {
+            "edge_alignment": 0.9668843746185303,
+            "foreground_iou": 1.0,
+            "foreground_mse": 3.377790895412323e-05,
+            "normalized_mse": 3.2153971023636534e-05,
+            "passed": true
+          }
+        ],
+        "scene_attempts": [
+          {
+            "operator": "segmentation",
+            "outcome": "accepted",
+            "residual_threshold": 25
+          },
+          {
+            "operator": "segmentation",
+            "outcome": "duplicate",
+            "residual_threshold": 16
+          },
+          {
+            "operator": "segmentation",
+            "outcome": "duplicate",
+            "residual_threshold": 36
+          }
+        ],
+        "scene_detectors": [
+          "gradient_boundary",
+          "flat_residual_shapes"
+        ],
+        "scene_hypotheses": 3,
+        "source": "primitive_mixed_gradient_scene_v1"
+      },
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "ANONYMOUS_09"
+    },
+    "reference_access": {
+      "blocked_svg_reads": []
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 0.9990312731980303,
+    "search_control": {
+      "candidate_evaluations": 1,
+      "elapsed_seconds": 0.953,
+      "external_max_seconds": null,
+      "isolated": true,
+      "limit_seconds": 5.0,
+      "max_seconds": 5.0,
+      "stop_reason": "satisfactory",
+      "time_extensions": 0
+    },
+    "search_satisfactory": true,
+    "spatial_quality_score": 9.848248463115187,
+    "std_delta2": 27.640586853027344,
+    "tile_std_delta2": 3.5993339688855555,
+    "variant": "ANONYMOUS_09",
+    "w": 210
+  }
+}

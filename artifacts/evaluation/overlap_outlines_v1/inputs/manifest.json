@@ -1,0 +1,554 @@
+[
+  {
+    "case_id": "outlined_overlap_00",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.5,
+          14.5,
+          171.0,
+          171.0
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          62.50040831659866,
+          61.65218372990201,
+          55.95155867767274,
+          49.72251154676152
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "behind": 2
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          90.26230538784743,
+          85.70524140300195,
+          50.95155867767274,
+          53.72251154676152
+        ],
+        "parent": 0,
+        "stroke_width": 1.5
+      }
+    ],
+    "reference_svg": "references/outlined_overlap_00.svg",
+    "input_sha256": "261ecdbc81d53a9a35f8b98101ebd0dae67f141b9cebfbe4b339b754a88b16b8",
+    "reference_svg_sha256": "5be94ca5eb93fc22d27113d96f3f7452a23c0c6c752048467f84576aa5e909fc"
+  },
+  {
+    "case_id": "outlined_overlap_01",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.375,
+          14.375,
+          171.25,
+          171.25
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.25
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          94.29868754453912,
+          56.66727654678723,
+          53.95837044436829,
+          47.19373895822688
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind": 2
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          71.02050593704425,
+          76.03377133924647,
+          48.95837044436829,
+          51.19373895822688
+        ],
+        "parent": 0,
+        "stroke_width": 1.75
+      }
+    ],
+    "reference_svg": "references/outlined_overlap_01.svg",
+    "input_sha256": "ac4b0020fd4aeea2e6976aedeae80193cc9b7b16befe004a0b3a92a73e7f4154",
+    "reference_svg_sha256": "fa936ca54349240a0e38c94cd017ae8a9ff2f86190d191c2bbd294922b18abd2"
+  },
+  {
+    "case_id": "outlined_overlap_02",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.25,
+          14.25,
+          171.5,
+          171.5
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.5
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          94.06163014139125,
+          63.93708228968083,
+          50.9322418726148,
+          52.81133728610436
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "behind": 2
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          65.73585129582273,
+          92.11294840569894,
+          55.9322418726148,
+          48.81133728610436
+        ],
+        "parent": 0,
+        "stroke_width": 2.0
+      }
+    ],
+    "reference_svg": "references/outlined_overlap_02.svg",
+    "input_sha256": "ced3678e1bfd81f4892e976bfea28fab59f3176f488289e40b927bbd38f5d609",
+    "reference_svg_sha256": "7ece97bbfdf9328c47fb79677352fa9e3cd79aaf68d8ce394fbcade0b646fe84"
+  },
+  {
+    "case_id": "outlined_overlap_03",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.5,
+          14.5,
+          171.0,
+          171.0
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          90.59509504926399,
+          79.82375538549121,
+          51.186939611419575,
+          48.68267055348607
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "behind": 2
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          65.70703850351539,
+          59.14050974208168,
+          56.186939611419575,
+          44.68267055348607
+        ],
+        "parent": 0,
+        "stroke_width": 1.5
+      }
+    ],
+    "reference_svg": "references/outlined_overlap_03.svg",
+    "input_sha256": "8626b2756a74ab6dc223202038d7c8ab37c8aa535b602800f569f79b1fd580ed",
+    "reference_svg_sha256": "fc9dae58944973a5caec98cf0f214ed103d7c010848528e96b714fe109310a60"
+  },
+  {
+    "case_id": "outlined_overlap_04",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.375,
+          14.375,
+          171.25,
+          171.25
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.25
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          88.05256353644057,
+          60.13543427992858,
+          54.959364554288925,
+          49.3095579823289
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind": 2
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          68.1448248679587,
+          83.7565667185892,
+          49.959364554288925,
+          53.3095579823289
+        ],
+        "parent": 0,
+        "stroke_width": 1.75
+      }
+    ],
+    "reference_svg": "references/outlined_overlap_04.svg",
+    "input_sha256": "7296d29a7922cd430cd849508e858d32837d823771da13ed234fd24424764f25",
+    "reference_svg_sha256": "b38c549319f71070316cce0d93fabaab827e19b15586c683f18cb676e049e380"
+  },
+  {
+    "case_id": "outlined_overlap_05",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.25,
+          14.25,
+          171.5,
+          171.5
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.5
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          66.45534968779214,
+          93.29888998778121,
+          52.04823848088651,
+          46.12747492537265
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "behind": 2
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          92.76398907115119,
+          69.46239009003752,
+          47.04823848088651,
+          50.12747492537265
+        ],
+        "parent": 0,
+        "stroke_width": 2.0
+      }
+    ],
+    "reference_svg": "references/outlined_overlap_05.svg",
+    "input_sha256": "f3fab26ac245e7ff755e7c7989a88c6680cfb6bd30ab993f25c368f7bbbf7f14",
+    "reference_svg_sha256": "19284b2fd424eac8a4940ef3ea43370c13eaf3aad950c1a5792acaf2da2c57c0"
+  },
+  {
+    "case_id": "outlined_overlap_06",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.5,
+          14.5,
+          171.0,
+          171.0
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          93.91150409337357,
+          75.8798837644091,
+          49.60416710129791,
+          53.32186999824977
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "behind": 2
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          66.53855627899709,
+          56.64020343441736,
+          54.60416710129791,
+          49.32186999824977
+        ],
+        "parent": 0,
+        "stroke_width": 1.5
+      }
+    ],
+    "reference_svg": "references/outlined_overlap_06.svg",
+    "input_sha256": "b672279ecd56892e59d923a9b0f3eb4802ebb6004b46d671754a05e35f1f2761",
+    "reference_svg_sha256": "35cbc0675eab8a9b3ed6ccb39d42a2b14fd513529dfba780a50e43b701c5ff2e"
+  },
+  {
+    "case_id": "outlined_overlap_07",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.375,
+          14.375,
+          171.25,
+          171.25
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.25
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          70.07062740126514,
+          83.41165078692461,
+          46.35944107145764,
+          52.107118989557236
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind": 2
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          93.99281718484934,
+          59.395044445499764,
+          51.35944107145764,
+          48.107118989557236
+        ],
+        "parent": 0,
+        "stroke_width": 1.75
+      }
+    ],
+    "reference_svg": "references/outlined_overlap_07.svg",
+    "input_sha256": "aae063c73c42ae3afa653be7565edcaa79e9b73d0224ef9195340d966f75a240",
+    "reference_svg_sha256": "0e749bd311543964c7dfa22494f467451678d4a9d4563b0dd62e306dcc14529d"
+  },
+  {
+    "case_id": "outlined_overlap_08",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.25,
+          14.25,
+          171.5,
+          171.5
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.5
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          64.696652265199,
+          94.37994414155054,
+          54.05071448467386,
+          46.472527096498446
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "behind": 2
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          90.5099929407022,
+          70.93278152539338,
+          49.05071448467386,
+          50.472527096498446
+        ],
+        "parent": 0,
+        "stroke_width": 2.0
+      }
+    ],
+    "reference_svg": "references/outlined_overlap_08.svg",
+    "input_sha256": "61a67d612208cd8df0f126343b99ee0e1487a6711d0ee6228effdc7c777c9662",
+    "reference_svg_sha256": "00122d1ff39f68b7d25cb6256731ce672f7d1decb0aa0fc0a72418240727db6a"
+  },
+  {
+    "case_id": "outlined_overlap_09",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.5,
+          14.5,
+          171.0,
+          171.0
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.0
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          64.52712091315489,
+          62.29931655685037,
+          51.87015117876887,
+          50.14655199444093
+        ],
+        "parent": 0,
+        "stroke_width": 1.5,
+        "behind": 2
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          94.4185979920484,
+          86.90497130525512,
+          46.87015117876887,
+          54.14655199444093
+        ],
+        "parent": 0,
+        "stroke_width": 1.5
+      }
+    ],
+    "reference_svg": "references/outlined_overlap_09.svg",
+    "input_sha256": "a8844f3c23bb3f5000d52f217a2b9b6985cf20d4bcaa3ec3e3ecbe4997a39d23",
+    "reference_svg_sha256": "6b794e1e85727b1a8d24ff68102b7895b516d7efe74741626a838b5d878c04b2"
+  },
+  {
+    "case_id": "outlined_overlap_10",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.375,
+          14.375,
+          171.25,
+          171.25
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.25
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          72.13349743637012,
+          79.66665245782384,
+          48.11744107596455,
+          53.95527043510962
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind": 2
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          92.73797591865856,
+          57.78179164804515,
+          53.11744107596455,
+          49.95527043510962
+        ],
+        "parent": 0,
+        "stroke_width": 1.75
+      }
+    ],
+    "reference_svg": "references/outlined_overlap_10.svg",
+    "input_sha256": "130bfe877b93356cfd6f8d58d8b66ba0c95512ba77dc92f099daf9d5f3c52959",
+    "reference_svg_sha256": "d77ca787e8753f772c4149d8cc9bbbad2823b141ebb29cdae31e753bf49abd2d"
+  },
+  {
+    "case_id": "outlined_overlap_11",
+    "width": 210,
+    "height": 200,
+    "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "circle",
+        "bbox": [
+          19.25,
+          14.25,
+          171.5,
+          171.5
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.5
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          92.59535700032909,
+          69.6068907996962,
+          47.69773546053919,
+          49.108312138657915
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "behind": 2
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          67.9114055658062,
+          96.69709315689252,
+          52.69773546053919,
+          45.108312138657915
+        ],
+        "parent": 0,
+        "stroke_width": 2.0
+      }
+    ],
+    "reference_svg": "references/outlined_overlap_11.svg",
+    "input_sha256": "4e32f5aadf660278cf79cb7f09315efcd9e6a0c5ed69247bdd7024cf5f612766",
+    "reference_svg_sha256": "c2d376c659765acf6fb530efef4eec93f7ef3df6711539e224900b7ad7592fd2"
+  }
+]

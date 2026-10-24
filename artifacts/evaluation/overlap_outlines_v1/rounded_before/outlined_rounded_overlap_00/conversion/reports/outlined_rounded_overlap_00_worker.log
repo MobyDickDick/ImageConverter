@@ -1,0 +1,9 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\overlap_outlines_v1\rounded_before\outlined_rounded_overlap_00\conversion\reports\.image-worker-15rrwlja\reports_out_dir\outlined_rounded_overlap_00_worker.log
+[INFO] Konvertiere outlined_rounded_overlap_00.png | Parameter: Iterationen=65, max. Validierungsrunden=7
+
+--- Verarbeite outlined_rounded_overlap_00.png ---
+Bildbeschreibung: Ein gefüllter Kreis und zwei gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "outlined_rounded_overlap_00", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 4.595, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "stagnation"}
+[INFO] Konvertiert outlined_rounded_overlap_00.png | Parameter: mode=auto, label=M, variant_name=OUTLINED_ROUNDED_OVERLAP_00 | Qualität: Optimierungsfehler/Pixel=0.000627, Mean-Delta²=4843.051758, RGB-RMSE/Kanal=40.178982, Raumscore=11793.165753, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=65/65 | Dauer=1.9s

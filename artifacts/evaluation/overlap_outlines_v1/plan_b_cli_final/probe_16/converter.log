@@ -1,0 +1,31 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\overlap_outlines_v1\plan_b_cli_final\probe_16\conversion\reports\.image-worker-bvnxjwwm\reports_out_dir\probe_16_worker.log
+[INFO] Konvertiere probe_16.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite probe_16.png ---
+Bildbeschreibung: Ein gefüllter Kreis und zwei gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen. Das Motiv ist leicht kleiner dargestellt und geringfügig nach links und unten versetzt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 1, "completed": false, "turns": 1, "last_turn": 0, "seconds": 0.06299999996554106, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 16, "operator": "segmentation", "outcome": "duplicate"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "16", "steps": 0, "completed": true, "turns": 1, "last_turn": 1, "seconds": 0.045999999972991645, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 36, "operator": "segmentation", "outcome": "duplicate"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "36", "steps": 0, "completed": true, "turns": 1, "last_turn": 2, "seconds": 0.06299999996554106, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 1, "last_turn": 3, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 25, "operator": "segmentation", "outcome": "quality_or_geometry_rejected"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 0, "completed": true, "turns": 2, "last_turn": 4, "seconds": 0.0779999999795109, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 2, "last_turn": 5, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 3, "last_turn": 6, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 4, "last_turn": 7, "seconds": 0.015000000013969839, "rate": 0.0, "best": 73.20425992987559}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_finished", "evaluations": 1, "best_error": 0.23742857142857143}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "operator": "edit", "edits": ["reorder"], "outcome": "accepted"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "structure_search_finished", "outcome": "accepted", "states": 2, "state_limit_reached": false, "candidate_limit_reached": false}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 0, "completed": true, "turns": 5, "last_turn": 8, "seconds": 0.030999999959021807, "rate": 0.0, "best": 73.20425992987559}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_schedule_finished", "slices": 9, "stop_reason": "caller_stopped", "models": {"25": {"turns": 2, "last_turn": 4, "seconds": 0.0779999999795109, "rate": 0.0, "best": null}, "16": {"turns": 1, "last_turn": 1, "seconds": 0.045999999972991645, "rate": 0.0, "best": null}, "36": {"turns": 1, "last_turn": 2, "seconds": 0.06299999996554106, "rate": 0.0, "best": null}, "edits": {"turns": 5, "last_turn": 8, "seconds": 0.030999999959021807, "rate": 0.0, "best": 73.20425992987559}}}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "candidate_satisfactory", "elapsed_seconds": 1.047, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 1}
+[Search] {"source": "probe_16", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 1.063, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 1, "stop_reason": "satisfactory"}
+[INFO] Konvertiert probe_16.png | Parameter: mode=auto, label=M, variant_name=PROBE_16 | Qualität: Optimierungsfehler/Pixel=0.000006, Mean-Delta²=11.911190, RGB-RMSE/Kanal=1.992585, Raumscore=63.234091, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\overlap_outlines_v1\plan_b_cli_final\probe_16\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\overlap_outlines_v1\plan_b_cli_final\probe_16\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\overlap_outlines_v1\plan_b_cli_final\probe_16\conversion

@@ -1,0 +1,15 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\overlap_outlines_v1\before\outlined_overlap_04\conversion\reports\.image-worker-383so32d\reports_out_dir\outlined_overlap_04_worker.log
+[INFO] Konvertiere outlined_overlap_04.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite outlined_overlap_04.png ---
+Bildbeschreibung: Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "outlined_overlap_04", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 2.499, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "supported_models_exhausted"}
+[WARN] outlined_overlap_04.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (error_energy_concentrated_in_worst_tiles; largest_cluster_fraction=0.353617, localized_error_fraction=0.702236).
+[INFO] Konvertiert outlined_overlap_04.png | Parameter: mode=auto, label=M, variant_name=OUTLINED_OVERLAP_04 | Qualität: Optimierungsfehler/Pixel=0.000604, Mean-Delta²=4740.730469, RGB-RMSE/Kanal=39.752277, Raumscore=12184.398118, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=1.9s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\overlap_outlines_v1\before\outlined_overlap_04\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\overlap_outlines_v1\before\outlined_overlap_04\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\overlap_outlines_v1\before\outlined_overlap_04\conversion
+[WARN] Mindestens eine Datei konnte nicht erfolgreich konvertiert werden (siehe batch_failure_summary.csv).

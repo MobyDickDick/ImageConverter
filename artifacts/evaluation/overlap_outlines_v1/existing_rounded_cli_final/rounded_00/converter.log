@@ -1,0 +1,27 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\overlap_outlines_v1\existing_rounded_cli_final\rounded_00\conversion\reports\.image-worker-r9li27an\reports_out_dir\rounded_00_worker.log
+[INFO] Konvertiere rounded_00.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite rounded_00.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 1 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 1, "completed": false, "turns": 1, "last_turn": 0, "seconds": 0.0470000000204891, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 16, "operator": "segmentation", "outcome": "duplicate"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "16", "steps": 0, "completed": true, "turns": 1, "last_turn": 1, "seconds": 0.015999999945051968, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 36, "operator": "segmentation", "outcome": "duplicate"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "36", "steps": 0, "completed": true, "turns": 1, "last_turn": 2, "seconds": 0.03100000007543713, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 1, "last_turn": 3, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 1, "completed": false, "turns": 2, "last_turn": 4, "seconds": 0.0779999999795109, "rate": 0.0, "best": 25.306992513600676}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "structure_search_finished", "outcome": "agenda_exhausted", "states": 1, "state_limit_reached": false, "candidate_limit_reached": false}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 0, "completed": true, "turns": 2, "last_turn": 5, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_finished", "evaluations": 1, "best_error": 0.2992936507936508}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 25, "operator": "segmentation", "outcome": "accepted"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 0, "completed": true, "turns": 3, "last_turn": 6, "seconds": 0.09399999992456287, "rate": 0.0, "best": 25.306992513600676}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_schedule_finished", "slices": 7, "stop_reason": "caller_stopped", "models": {"25": {"turns": 3, "last_turn": 6, "seconds": 0.09399999992456287, "rate": 0.0, "best": 25.306992513600676}, "16": {"turns": 1, "last_turn": 1, "seconds": 0.015999999945051968, "rate": 0.0, "best": null}, "36": {"turns": 1, "last_turn": 2, "seconds": 0.03100000007543713, "rate": 0.0, "best": null}, "edits": {"turns": 2, "last_turn": 5, "seconds": 0.0, "rate": 0.0, "best": null}}}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "candidate_satisfactory", "elapsed_seconds": 1.156, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 1}
+[Search] {"source": "rounded_00", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 1.171, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 1, "stop_reason": "satisfactory"}
+[INFO] Konvertiert rounded_00.png | Parameter: mode=auto, label=M, variant_name=ROUNDED_00 | Qualität: Optimierungsfehler/Pixel=0.000007, Mean-Delta²=15.373691, RGB-RMSE/Kanal=2.263750, Raumscore=56.077024, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\overlap_outlines_v1\existing_rounded_cli_final\rounded_00\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\overlap_outlines_v1\existing_rounded_cli_final\rounded_00\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\overlap_outlines_v1\existing_rounded_cli_final\rounded_00\conversion

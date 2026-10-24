@@ -1,5 +1,12 @@
 # ImageConverter
 
+Die [Konturen bei Überdeckung](docs/next_arbeitspaket_2026-10-24_overlap_outlines.md)
+verbinden helle Konturen mit zwei teilweise überlappenden Rechteckkindern,
+wahlweise mit gerundeten Ecken. 24 vorab gesicherte synthetische CLI-Fälle
+verbessern sich von 0/24 auf 24/24; weitere 24 Fälle und die gekoppelte
+17-Fälle-Plan-B-Prüfung bestehen. Weitere Instanzen/Schichten und unabhängige
+reale Familienabnahme bleiben im übergeordneten P0-Paket offen.
+
 Die [Kombination von Rundung und Überdeckung](docs/next_arbeitspaket_2026-10-24_rounded_overlap.md)
 ergänzt zwei teilweise überlappende gerundete Rechteckkinder im vorhandenen
 Verlaufskreis-/Struktursuchweg. Zwölf eingefrorene synthetische CLI-Fälle

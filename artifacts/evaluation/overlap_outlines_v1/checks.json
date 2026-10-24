@@ -1,0 +1,138 @@
+{
+  "baseline_commit": "4c1e52ba20cf649beb75f01ed3910bcfe2a7c453",
+  "tests": {
+    "structure_and_composition": 241,
+    "additional_contracts_scheduler_evidence": 268,
+    "total_distinct_tests": 509,
+    "new_tests": 65,
+    "full_default_suite_run": false
+  },
+  "independent_verification": {
+    "cohorts": {
+      "before": {
+        "accepted": 0,
+        "total": 12
+      },
+      "rounded_before": {
+        "accepted": 0,
+        "total": 12
+      },
+      "plan_b_cli": {
+        "accepted": 16,
+        "total": 17
+      },
+      "after_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "rounded_after_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "additional_cli_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "rounded_additional_cli_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "plan_b_cli_final": {
+        "accepted": 17,
+        "total": 17
+      },
+      "existing_overlap_cli_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "existing_outlines_cli_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "existing_rounded_cli_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "existing_split_cli_final": {
+        "accepted": 20,
+        "total": 20
+      },
+      "existing_residual_cli_final": {
+        "accepted": 7,
+        "total": 9
+      }
+    },
+    "archive_pairs": 379
+  },
+  "git_visible_package_verification": {
+    "cohorts": {
+      "before": {
+        "accepted": 0,
+        "total": 12
+      },
+      "rounded_before": {
+        "accepted": 0,
+        "total": 12
+      },
+      "plan_b_cli": {
+        "accepted": 16,
+        "total": 17
+      },
+      "after_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "rounded_after_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "additional_cli_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "rounded_additional_cli_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "plan_b_cli_final": {
+        "accepted": 17,
+        "total": 17
+      },
+      "existing_overlap_cli_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "existing_outlines_cli_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "existing_rounded_cli_final": {
+        "accepted": 12,
+        "total": 12
+      },
+      "existing_split_cli_final": {
+        "accepted": 20,
+        "total": 20
+      },
+      "existing_residual_cli_final": {
+        "accepted": 7,
+        "total": 9
+      }
+    },
+    "archive_pairs": 379
+  },
+  "archive": {
+    "pairs": 379,
+    "hashes": 758,
+    "unchanged": true
+  },
+  "syntax_check": true,
+  "cli_help": true,
+  "whitespace_check_with_cr_at_eol": true,
+  "limitations": [
+    "synthetic development only",
+    "SEARCH-STRUCTURE-01 remains open",
+    "no new real family or catalogue acceptance"
+  ],
+  "production_source_sha256": "51b3976b80d6e4869d59a192949caceebf978d6fb59251bfc59f19b82288f26b"
+}
