@@ -1,5 +1,10 @@
 # ImageConverter
 
+Der [P0-Teil für wiederholte Füllfarben](docs/next_arbeitspaket_2026-10-24_repeated_fill.md)
+ergänzt alternative Instanzzerlegungen im gemeinsamen Kreis-/Rechtecksuchweg.
+Zwölf synthetische CLI-Fälle mit sechs Kindern, Rundung und hellen Konturen
+verbessern sich von 0/12 auf 12/12. Die unabhängige reale Gesamtaufgabe bleibt offen.
+
 Die [CI-Diagnose](docs/plan_b_ci_diagnostics_2026-10-24.md) reproduziert einen
 aktuellen GitHub-Originalfehler lokal mit identischen Messwerten. Künftige
 Plan-B-Läufe bewahren vollständige Debug-Artefakte und die Toolchain 14 Tage.

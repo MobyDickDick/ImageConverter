@@ -285,8 +285,9 @@ def _overlap_circle(component, background, coverage, reconstruction_error, shape
     return np.array(geometry)
 
 
-def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False, circles=False):
-    """Complete visible, differently colored native shapes from exposed bounds.
+def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False, circles=False,
+                       split_components=False):
+    """Propose flat native instances from color groups and exposed bounds.
 
     Color separates touching residuals. Each of four sides needs a straight
     exposed segment against the measured parent paint. Fully hidden sides or
@@ -306,18 +307,23 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
             np.max(abs(a.astype(float)-b)) < 25
             for i, a in enumerate(colors) for b in colors[i+1:]):
         return None
-    children = []
+    groups = []
     for color in colors:
-        fill = color.astype(float)
-        visible = ((np.max(abs(data-fill), axis=2) <= 3) & mask.astype(bool)).astype('uint8')
+        visible = ((np.max(abs(data-color.astype(float)), axis=2) <= 3) & mask.astype(bool)).astype('uint8')
         number, labels, stats, _ = cv2.connectedComponentsWithStats(visible)
         parts = [i for i in range(1, number) if stats[i, cv2.CC_STAT_AREA] >= 12]
         if not parts:
             return None
-        # Several later paints can split one visible fill into islands. Their
-        # union is only a proposal: all four parent-facing sides, inventory,
-        # native topology and the original raster still have to establish it.
-        component = np.isin(labels, parts)
+        # Keep the established union hypothesis for occlusion islands. The
+        # alternate segmentation allows several same-paint instances, each
+        # with its own observed arc/sides. Neither grouping implies acceptance.
+        selections = [[part] for part in parts] if split_components else [parts]
+        groups.extend((color, np.isin(labels, selection)) for selection in selections)
+        if len(groups) > 8:
+            return None
+    children = []
+    for color, component in groups:
+        fill = color.astype(float)
         x, y, w, h = cv2.boundingRect(component.astype('uint8'))
         area = np.count_nonzero(component)
         margin = 5 if outlined else 2
@@ -443,10 +449,9 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
                      colors=np.r_[fill, fill, stroke])
         if rounded:
             other_paint = np.zeros(mask.shape, dtype='uint8')
-            for other in colors:
-                if not np.array_equal(color, other):
-                    observed = (np.max(abs(data-other), axis=2) <= 3).astype('uint8')
-                    ox, oy, ow, oh = cv2.boundingRect(observed)
+            for _, other_component in groups:
+                if other_component is not component:
+                    ox, oy, ow, oh = cv2.boundingRect(other_component.astype('uint8'))
                     # Identical bright rims do not reveal which instance
                     # painted them. Exclude the whole observed foreign box,
                     # including its rim, from this corner measurement.
@@ -496,7 +501,8 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
     children = []
     if contract.get('overlap'):
         children = _overlap_instances(pixels, predicted, mask, rounded=contract.get('rounded', False),
-                                      outlined=contract['outlined'], circles=bool(contract['children'].get('circle')))
+                                      outlined=contract['outlined'], circles=bool(contract['children'].get('circle')),
+                                      split_components=split_components)
         if children is None:
             return None
     for index in (() if contract.get('overlap') else range(1, number)):
@@ -829,26 +835,35 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
             # to remove object, relation, region or full-image checks.
             remaining = max(0, 96-stats.get('states', 0))
             changed = False
-            if not contract['outlined'] and not contract.get('overlap') and contract['children'].get('rectangle', 0) >= 2:
-                seed_keys = {scene_key(seed) for seed in seeds}
+            if (contract.get('overlap') or
+                    (not contract['outlined'] and contract['children'].get('rectangle', 0) >= 2)):
+                seed_keys = {scene_key(seed, ordered=contract.get('overlap', False)) for seed in seeds}
                 for threshold in (25, 16, 36):
                     if session and session.time_reason():
                         return None
                     objects = detect_instances(pixels, contract, residual_threshold=threshold,
                                                split_components=True)
                     yield None
-                    if objects is not None and scene_key(objects) not in seed_keys:
-                        seed_keys.add(scene_key(objects))
+                    ordering = 'bounded_agenda'
+                    if objects is not None and contract.get('overlap'):
+                        ordered = observed_painter_order(pixels, objects)
+                        if ordered is not None:
+                            objects = ordered
+                            ordering = 'observed_depth'
+                    key = scene_key(objects, ordered=contract.get('overlap', False)) if objects is not None else None
+                    if key is not None and key not in seed_keys:
+                        seed_keys.add(key)
                         seeds.append(objects)
                         changed = True
                     fitted = yield from register(objects, dict(operator='split',
-                        residual_threshold=threshold, outcome='no_complete_scene'))
+                        residual_threshold=threshold, painter_order=ordering, outcome='no_complete_scene'))
                     if fitted is not None:
                         outcome = 'accepted'
                         return fitted
             if changed and remaining:
                 for proposal in edit_proposals(seeds, contract['children'],
-                                               max_states=remaining, stats=split_stats):
+                                               max_states=remaining, stats=split_stats,
+                                               ordered=contract.get('overlap', False)):
                     if session and session.time_reason():
                         return None
                     yield None
