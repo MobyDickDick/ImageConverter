@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [Gleichfarbige Instanzen mit mehreren Sichtbarkeitsinseln im P0-Struktursuchweg (2026-10-24)](next_arbeitspaket_2026-10-24_island_groups.md)
+
 - [Wiederholte Füllfarben: alternative Instanzzerlegung im P0-Struktursuchweg (2026-10-24)](next_arbeitspaket_2026-10-24_repeated_fill.md)
 
 - [Überdeckung als geordnete Strukturhypothese: 12/12 synthetische CLI-Fälle und 17/17 Plan-B-Varianten (2026-10-23)](next_arbeitspaket_2026-10-23_overlap_composition.md)

@@ -1,0 +1,4956 @@
+{
+  "base_commit": "40c84e83ea064169042325972da7c5c14d55287a",
+  "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+  "same_baseline_and_final_inputs": true,
+  "groups": {
+    "baseline": {
+      "seed": 731529,
+      "children": 3,
+      "rounded": true,
+      "outlines": true,
+      "variations": false,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_module_sha256": "02bb77750b5b3273dabf93560a1ff56a99301503a61faaa0003654466c46e4f3",
+      "accepted": 0,
+      "completed": 12,
+      "cases": [
+        {
+          "case_id": "islands_3_00",
+          "input_sha256": "757e914dead80d59c24ad372ed45c28ed877b95ab963f5cdc8a56949f0c0cd12",
+          "reference_svg_sha256": "83261e1e25c503475de46efeb8cc87939abfefc9dc2bd352d2b3df67b8b4c90f",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "elapsed_seconds": 5.906,
+          "adaptive_search": {
+            "elapsed_seconds": 5.047,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_00_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_01",
+          "input_sha256": "ae4960ce66ab0058cb3cfee15d22b9a2feef9c750ddcc46ad76a04f5639703d2",
+          "reference_svg_sha256": "d32857b5b52538d0c2cf9458a36db14c09259b5c8cbfbcb8613b9a13d954c02d",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "elapsed_seconds": 5.906,
+          "adaptive_search": {
+            "elapsed_seconds": 5.047,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_01_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_02",
+          "input_sha256": "d449ac2d67b88c57e0f54783a6f14654da2ca0e4b92be51038bd3850a55b34a8",
+          "reference_svg_sha256": "482f659e5c7fa827d27e8f8567db3f156d1c330d93387241cd1f0a4e6a8b88bf",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "elapsed_seconds": 5.844,
+          "adaptive_search": {
+            "elapsed_seconds": 5.031,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_02_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_03",
+          "input_sha256": "a8d6b4b6e082ceb93a8fb0730bc9f168bfa7de05b167771780f46758fd6f212e",
+          "reference_svg_sha256": "e675ab1aee99d8177caf84c7b8c842c5d9ac1b2846a28b6d2f24f7bba48b3000",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "elapsed_seconds": 5.859,
+          "adaptive_search": {
+            "elapsed_seconds": 5.031,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_03_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_04",
+          "input_sha256": "91cbe0d31476e5fbae2fb9eb5d2cda59e3da28002f296f91fc42d33e52d770bd",
+          "reference_svg_sha256": "74c658600e359cf4ba339114ce27f94fca2892f5cd2f90d07cb60e19870b1449",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "elapsed_seconds": 5.891,
+          "adaptive_search": {
+            "elapsed_seconds": 5.047,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_04_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_05",
+          "input_sha256": "c0cec8e0ab646f6b6ebef607ba5ff6b0cdc9b1fe2b9172440a63f35fc0933f45",
+          "reference_svg_sha256": "5841a045dbbc3900dbd9174db2807b78c18212a4e62772e365d6426f0b4e44af",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "elapsed_seconds": 5.922,
+          "adaptive_search": {
+            "elapsed_seconds": 5.031,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_05_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_06",
+          "input_sha256": "3d69c49387c2cc03045408ad6a718ebec7e8eb53c1584d49101c48b40acb2583",
+          "reference_svg_sha256": "e928a571a4a7b22d1fb037e46f3986b1f0032e7eddc7805cb5104c12f40bb6e3",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "elapsed_seconds": 5.813,
+          "adaptive_search": {
+            "elapsed_seconds": 5.032,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_06_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_07",
+          "input_sha256": "df6e32c07c084055c7a8a4d4d17a4ec3f8fd3235db23c9b7ac7aa92b237d0149",
+          "reference_svg_sha256": "fd947413de713edad13f776881e222bc9b9a272471a80f4a29bfcfac52a8330d",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "elapsed_seconds": 5.891,
+          "adaptive_search": {
+            "elapsed_seconds": 5.047,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_07_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_08",
+          "input_sha256": "f5c1de4c0a81763d7253cbf29a25401e294d6edb7bb917a9f0b49828980b4a53",
+          "reference_svg_sha256": "be306efc0f988b630f295cc49a0d569cd110f22228a19ff72006f397337f0f9c",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "elapsed_seconds": 5.938,
+          "adaptive_search": {
+            "elapsed_seconds": 5.047,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_08_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_09",
+          "input_sha256": "2eb09a3f241146808b33441f5e6c58f5fa93e85622805a60ca2348c73fbaa444",
+          "reference_svg_sha256": "f6ac42e161946f44a6a49f980b593d6efabdd9a538826f9aa2045bd0ffe6fa5c",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "elapsed_seconds": 6.031,
+          "adaptive_search": {
+            "elapsed_seconds": 5.047,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_09_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_10",
+          "input_sha256": "cf094d7659cdca3fedbbdf6120c7aafd5775cd30f6e0e644b32714d463ebd55d",
+          "reference_svg_sha256": "bf0a9974dda5faf358a2e6ceb1ca25a59bbaa8f5d82561fc64235a01d9ae3e3b",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "elapsed_seconds": 5.906,
+          "adaptive_search": {
+            "elapsed_seconds": 5.031,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_10_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_11",
+          "input_sha256": "7781dee80905f97005c95036a32d7319fe8c0e18f3ff150bde29d93f9e602670",
+          "reference_svg_sha256": "28fee4908088ca739286f52a4ea0ee61ade76a980acc3b3628a06c37508e4388",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "elapsed_seconds": 5.891,
+          "adaptive_search": {
+            "elapsed_seconds": 5.032,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_11_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        }
+      ]
+    },
+    "final_primary": {
+      "seed": 731529,
+      "children": 3,
+      "rounded": true,
+      "outlines": true,
+      "variations": false,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_module_sha256": "5e6621da5fa1ca6c41776d14b548d5daa2e4b1ca5736e1a791ca7572fb0b07de",
+      "accepted": 12,
+      "completed": 12,
+      "cases": [
+        {
+          "case_id": "islands_3_00",
+          "input_sha256": "757e914dead80d59c24ad372ed45c28ed877b95ab963f5cdc8a56949f0c0cd12",
+          "reference_svg_sha256": "83261e1e25c503475de46efeb8cc87939abfefc9dc2bd352d2b3df67b8b4c90f",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.984,
+          "output_sha256": "d5f29554a07f9b838a6870c445453c2f9c98eae575012830bff79d1e6876190b",
+          "metrics": {
+            "normalized_mse": 1.3081757060717791e-05,
+            "foreground_mse": 1.954516483237967e-05,
+            "edge_alignment": 0.9659762978553772,
+            "foreground_iou": 0.9983808389087465
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.07196167488119443
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.5084590328169402e-05,
+              "foreground_mse": 1.9545164898092228e-05,
+              "foreground_iou": 0.9983808389087465,
+              "edge_alignment": 0.9659762978553772,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.042178057748992e-05,
+              "foreground_mse": 6.228283497207215e-05,
+              "foreground_iou": 0.9979889391654098,
+              "edge_alignment": 0.9764343500137329,
+              "passed": true
+            },
+            {
+              "normalized_mse": 4.927475915340821e-05,
+              "foreground_mse": 5.05911826910569e-05,
+              "foreground_iou": 0.9954061390686991,
+              "edge_alignment": 0.9851807355880737,
+              "passed": true
+            },
+            {
+              "normalized_mse": 8.50729164034861e-05,
+              "foreground_mse": 8.967914140525727e-05,
+              "foreground_iou": 0.9968424376381434,
+              "edge_alignment": 0.9922939538955688,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.954,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_01",
+          "input_sha256": "ae4960ce66ab0058cb3cfee15d22b9a2feef9c750ddcc46ad76a04f5639703d2",
+          "reference_svg_sha256": "d32857b5b52538d0c2cf9458a36db14c09259b5c8cbfbcb8613b9a13d954c02d",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.265,
+          "output_sha256": "01ae547a128b5bf3f2483164c1bbf733621d3d3496f7e9ffee91e87f01b3ac52",
+          "metrics": {
+            "normalized_mse": 2.2132762751425616e-05,
+            "foreground_mse": 3.38719692081213e-05,
+            "edge_alignment": 0.953535795211792,
+            "foreground_iou": 0.9978508159223838
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.14589999999998327
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.552131634038072e-05,
+              "foreground_mse": 3.3871968928576764e-05,
+              "foreground_iou": 0.9978508159223838,
+              "edge_alignment": 0.953535795211792,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00019201957477445926,
+              "foreground_mse": 0.000203978655086701,
+              "foreground_iou": 0.9953476983349657,
+              "edge_alignment": 0.9607386589050293,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00014396172412320046,
+              "foreground_mse": 0.0001527934045875136,
+              "foreground_iou": 0.9952337721289151,
+              "edge_alignment": 0.9738961458206177,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00020006334244219144,
+              "foreground_mse": 0.0002230109330557498,
+              "foreground_iou": 0.9969808788996981,
+              "edge_alignment": 0.9899490475654602,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.109,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_02",
+          "input_sha256": "d449ac2d67b88c57e0f54783a6f14654da2ca0e4b92be51038bd3850a55b34a8",
+          "reference_svg_sha256": "482f659e5c7fa827d27e8f8567db3f156d1c330d93387241cd1f0a4e6a8b88bf",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.734,
+          "output_sha256": "66b03f8630fd1ef853d1a9e564edc8349772f7fa4f8fe92e5a8c685a5ef7914b",
+          "metrics": {
+            "normalized_mse": 2.948690416815225e-05,
+            "foreground_mse": 4.5223012421047315e-05,
+            "edge_alignment": 0.9524343013763428,
+            "foreground_iou": 0.9963925631301452
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.07570000000000476
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 3.40013871263204e-05,
+              "foreground_mse": 4.5223011408185056e-05,
+              "foreground_iou": 0.9963925631301452,
+              "edge_alignment": 0.9524343013763428,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0002724742470993913,
+              "foreground_mse": 0.00029301078771371214,
+              "foreground_iou": 0.9815376833586241,
+              "edge_alignment": 0.9666610956192017,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00024405056140103102,
+              "foreground_mse": 0.00026124587242467624,
+              "foreground_iou": 0.9823710885852799,
+              "edge_alignment": 0.9666858911514282,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001930993281338222,
+              "foreground_mse": 0.00021934707386791035,
+              "foreground_iou": 0.9576086956521739,
+              "edge_alignment": 0.9905871748924255,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.359,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_03",
+          "input_sha256": "a8d6b4b6e082ceb93a8fb0730bc9f168bfa7de05b167771780f46758fd6f212e",
+          "reference_svg_sha256": "e675ab1aee99d8177caf84c7b8c842c5d9ac1b2846a28b6d2f24f7bba48b3000",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.985,
+          "output_sha256": "a0e3080e8479dee0903e2da5a3b4ee8d79211781ec6f6b32f03875754b1d6dc4",
+          "metrics": {
+            "normalized_mse": 1.861979217210319e-05,
+            "foreground_mse": 2.8247137379366904e-05,
+            "edge_alignment": 0.9324175119400024,
+            "foreground_iou": 0.995555216129525
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.07344706409429591
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.1470504331636714e-05,
+              "foreground_mse": 2.8247136053717475e-05,
+              "foreground_iou": 0.995555216129525,
+              "edge_alignment": 0.9324175119400024,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00010375222064587166,
+              "foreground_mse": 0.00010710057692374119,
+              "foreground_iou": 0.979442667884879,
+              "edge_alignment": 0.9109770059585571,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00011451776106013572,
+              "foreground_mse": 0.00011759343395335557,
+              "foreground_iou": 0.9783253479352042,
+              "edge_alignment": 0.9174258708953857,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00013989145632549855,
+              "foreground_mse": 0.00014859406375489933,
+              "foreground_iou": 0.9426092759426092,
+              "edge_alignment": 0.8993856906890869,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.828,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_04",
+          "input_sha256": "91cbe0d31476e5fbae2fb9eb5d2cda59e3da28002f296f91fc42d33e52d770bd",
+          "reference_svg_sha256": "74c658600e359cf4ba339114ce27f94fca2892f5cd2f90d07cb60e19870b1449",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.891,
+          "output_sha256": "6114598498bb61eb2373d3a04471de4984f991dd32bf42960454c75bb0ac36e0",
+          "metrics": {
+            "normalized_mse": 1.967517709999811e-05,
+            "foreground_mse": 3.003694291692227e-05,
+            "edge_alignment": 0.953109860420227,
+            "foreground_iou": 0.9977428369621963
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.1498999999999917
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.268746814684379e-05,
+              "foreground_mse": 3.0036945033873532e-05,
+              "foreground_iou": 0.9977428369621963,
+              "edge_alignment": 0.953109860420227,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00011251544815558656,
+              "foreground_mse": 0.00011954054454824396,
+              "foreground_iou": 0.993517825978559,
+              "edge_alignment": 0.9725315570831299,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00014513205150889087,
+              "foreground_mse": 0.0001539393746113246,
+              "foreground_iou": 0.9953917050691244,
+              "edge_alignment": 0.9812396168708801,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.000133920678052987,
+              "foreground_mse": 0.00014987239711916086,
+              "foreground_iou": 0.9971446700507615,
+              "edge_alignment": 0.9894002079963684,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.922,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_05",
+          "input_sha256": "c0cec8e0ab646f6b6ebef607ba5ff6b0cdc9b1fe2b9172440a63f35fc0933f45",
+          "reference_svg_sha256": "5841a045dbbc3900dbd9174db2807b78c18212a4e62772e365d6426f0b4e44af",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.843,
+          "output_sha256": "aeb95d804e85245c52d7db4fb7e6641444982fb0dd3617fe953ed254a118823a",
+          "metrics": {
+            "normalized_mse": 1.78521586349234e-05,
+            "foreground_mse": 2.722721910686232e-05,
+            "edge_alignment": 0.9617499113082886,
+            "foreground_iou": 0.9977210784842092
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.1156000000000077
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.058534527925149e-05,
+              "foreground_mse": 2.722722005913489e-05,
+              "foreground_iou": 0.9977210784842092,
+              "edge_alignment": 0.9617499113082886,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00012918084883412902,
+              "foreground_mse": 0.00013816607030764946,
+              "foreground_iou": 0.9955467590301831,
+              "edge_alignment": 0.9875914454460144,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00012930662461062856,
+              "foreground_mse": 0.00013649172453971398,
+              "foreground_iou": 0.9936445321060706,
+              "edge_alignment": 0.9798218011856079,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001494556256812779,
+              "foreground_mse": 0.00016682353313463716,
+              "foreground_iou": 0.9955794126934007,
+              "edge_alignment": 0.9983418583869934,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.625,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_06",
+          "input_sha256": "3d69c49387c2cc03045408ad6a718ebec7e8eb53c1584d49101c48b40acb2583",
+          "reference_svg_sha256": "e928a571a4a7b22d1fb037e46f3986b1f0032e7eddc7805cb5104c12f40bb6e3",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 4.375,
+          "output_sha256": "cab87647ad00481394f85a2ca66d4b0351cfe70496a6527abbec78ffadd05622",
+          "metrics": {
+            "normalized_mse": 2.2538357370649464e-05,
+            "foreground_mse": 3.0638169846497476e-05,
+            "edge_alignment": 0.939807653427124,
+            "foreground_iou": 0.9985443959243085
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.08857346621196882
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.5989006352277494e-05,
+              "foreground_mse": 3.063816982742672e-05,
+              "foreground_iou": 0.9985443959243085,
+              "edge_alignment": 0.939807653427124,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00014917862569864548,
+              "foreground_mse": 0.00013459237874152295,
+              "foreground_iou": 0.9971958584987057,
+              "edge_alignment": 0.9308439493179321,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001373211716795712,
+              "foreground_mse": 0.0001220148323605438,
+              "foreground_iou": 0.9974457215836526,
+              "edge_alignment": 0.9295382499694824,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00029367921919369746,
+              "foreground_mse": 0.00024951596558355215,
+              "foreground_iou": 0.9990151017728168,
+              "edge_alignment": 0.9153093099594116,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.594,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_07",
+          "input_sha256": "df6e32c07c084055c7a8a4d4d17a4ec3f8fd3235db23c9b7ac7aa92b237d0149",
+          "reference_svg_sha256": "fd947413de713edad13f776881e222bc9b9a272471a80f4a29bfcfac52a8330d",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.453,
+          "output_sha256": "14ffb1f2aef17b96733d9cd528f6af419bebb98fb385a9b43654294fd17a97aa",
+          "metrics": {
+            "normalized_mse": 1.941375739988871e-05,
+            "foreground_mse": 2.9592009013867937e-05,
+            "edge_alignment": 0.9555341005325317,
+            "foreground_iou": 0.9980384644854801
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.14589999999998327
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.23860268678849e-05,
+              "foreground_mse": 2.9592008708273113e-05,
+              "foreground_iou": 0.9980384644854801,
+              "edge_alignment": 0.9555341005325317,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00011565917231570303,
+              "foreground_mse": 0.00012114713093639414,
+              "foreground_iou": 0.9954006293875575,
+              "edge_alignment": 0.9686172008514404,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00015021562285992353,
+              "foreground_mse": 0.0001566677253453243,
+              "foreground_iou": 0.9978260869565218,
+              "edge_alignment": 0.9783743619918823,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001627899125836393,
+              "foreground_mse": 0.0001759694259764589,
+              "foreground_iou": 0.9969512195121951,
+              "edge_alignment": 0.9886083602905273,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.515,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_08",
+          "input_sha256": "f5c1de4c0a81763d7253cbf29a25401e294d6edb7bb917a9f0b49828980b4a53",
+          "reference_svg_sha256": "be306efc0f988b630f295cc49a0d569cd110f22228a19ff72006f397337f0f9c",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.766,
+          "output_sha256": "cf75742e052125b4d54feacdaa32752dd8ed1354b8c3bb34874769f5b14f3809",
+          "metrics": {
+            "normalized_mse": 1.9126408005831763e-05,
+            "foreground_mse": 2.9187909603933804e-05,
+            "edge_alignment": 0.9540613889694214,
+            "foreground_iou": 0.9979972886369238
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.07570000000000476
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.2054683907098982e-05,
+              "foreground_mse": 2.9187910542108045e-05,
+              "foreground_iou": 0.9979972886369238,
+              "edge_alignment": 0.9540613889694214,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00015824569189348229,
+              "foreground_mse": 0.00016984464559812988,
+              "foreground_iou": 0.9928719245803633,
+              "edge_alignment": 0.9607334733009338,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00010937603799689811,
+              "foreground_mse": 0.00011674971496640638,
+              "foreground_iou": 0.9960517657381005,
+              "edge_alignment": 0.9821333885192871,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0002026246410980258,
+              "foreground_mse": 0.00023070044687777393,
+              "foreground_iou": 0.9946958981612447,
+              "edge_alignment": 0.991169810295105,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.532,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_09",
+          "input_sha256": "2eb09a3f241146808b33441f5e6c58f5fa93e85622805a60ca2348c73fbaa444",
+          "reference_svg_sha256": "f6ac42e161946f44a6a49f980b593d6efabdd9a538826f9aa2045bd0ffe6fa5c",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.016,
+          "output_sha256": "8be3f3c34dbe51be43305059b344c08429df0a22116d4c4a537931c1da8f7646",
+          "metrics": {
+            "normalized_mse": 1.415766564605292e-05,
+            "foreground_mse": 2.1258252672851086e-05,
+            "edge_alignment": 0.9512255787849426,
+            "foreground_iou": 0.9978308357392726
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.0774589285804268
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.6325221497718327e-05,
+              "foreground_mse": 2.1258250625461786e-05,
+              "foreground_iou": 0.9978308357392726,
+              "edge_alignment": 0.9512255787849426,
+              "passed": true
+            },
+            {
+              "normalized_mse": 5.5123748845943616e-05,
+              "foreground_mse": 5.625799154748188e-05,
+              "foreground_iou": 0.9966036934833369,
+              "edge_alignment": 0.9506826400756836,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.625033083388261e-05,
+              "foreground_mse": 6.788178773005883e-05,
+              "foreground_iou": 0.9954512808235576,
+              "edge_alignment": 0.9508579969406128,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00013687285963267704,
+              "foreground_mse": 0.00014428758960074436,
+              "foreground_iou": 0.9852154765649576,
+              "edge_alignment": 0.9289169907569885,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.687,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_10",
+          "input_sha256": "cf094d7659cdca3fedbbdf6120c7aafd5775cd30f6e0e644b32714d463ebd55d",
+          "reference_svg_sha256": "bf0a9974dda5faf358a2e6ceb1ca25a59bbaa8f5d82561fc64235a01d9ae3e3b",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.391,
+          "output_sha256": "a54328c93ee372e162f03807d97368559435917a190311ce86641d97f2dbd648",
+          "metrics": {
+            "normalized_mse": 1.6619709640508518e-05,
+            "foreground_mse": 2.5260205802624114e-05,
+            "edge_alignment": 0.9560597538948059,
+            "foreground_iou": 0.9981110053137574
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.1498999999999917
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.916420723890508e-05,
+              "foreground_mse": 2.526020561357681e-05,
+              "foreground_iou": 0.9981110053137574,
+              "edge_alignment": 0.9560597538948059,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.699359482355033e-05,
+              "foreground_mse": 7.079635770198212e-05,
+              "foreground_iou": 0.9973935708079931,
+              "edge_alignment": 0.9839891195297241,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00011361150328680299,
+              "foreground_mse": 0.00012104180372920897,
+              "foreground_iou": 0.9980353634577603,
+              "edge_alignment": 0.9825775027275085,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00015458057922278687,
+              "foreground_mse": 0.00017455514857908576,
+              "foreground_iou": 0.9978753541076487,
+              "edge_alignment": 0.9934269785881042,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.218,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_11",
+          "input_sha256": "7781dee80905f97005c95036a32d7319fe8c0e18f3ff150bde29d93f9e602670",
+          "reference_svg_sha256": "28fee4908088ca739286f52a4ea0ee61ade76a980acc3b3628a06c37508e4388",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.547,
+          "output_sha256": "4a3a33c38cb890e6751ada752fe13ad29a60748e8706c9da9947c5390a196e5a",
+          "metrics": {
+            "normalized_mse": 2.352084993617609e-05,
+            "foreground_mse": 3.6295983591116965e-05,
+            "edge_alignment": 0.9521504640579224,
+            "foreground_iou": 0.9977673072185267
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.1156000000000077
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.7121922196943758e-05,
+              "foreground_mse": 3.6295981195222576e-05,
+              "foreground_iou": 0.9977673072185267,
+              "edge_alignment": 0.9521504640579224,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001624053742083938,
+              "foreground_mse": 0.0001738988082702039,
+              "foreground_iou": 0.9965034965034965,
+              "edge_alignment": 0.9648133516311646,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00021069551370314052,
+              "foreground_mse": 0.00022576975199613283,
+              "foreground_iou": 0.9934974454249884,
+              "edge_alignment": 0.9686042666435242,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001868922876332345,
+              "foreground_mse": 0.00021114349974242266,
+              "foreground_iou": 0.9973217274857716,
+              "edge_alignment": 0.9935405850410461,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.593,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        }
+      ]
+    },
+    "additional_seed": {
+      "seed": 418267,
+      "children": 3,
+      "rounded": true,
+      "outlines": true,
+      "variations": false,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_module_sha256": "5e6621da5fa1ca6c41776d14b548d5daa2e4b1ca5736e1a791ca7572fb0b07de",
+      "accepted": 11,
+      "completed": 12,
+      "cases": [
+        {
+          "case_id": "islands_3_00",
+          "input_sha256": "7282784758fe666588c85cc22ba53dac16bca7aea92048a21bd174a05cb1e6d5",
+          "reference_svg_sha256": "d128785f87700517f907077c2c3f3c4090d8b5c9da01fc398e78d0a3bc0aceea",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.922,
+          "output_sha256": "d59289e957d8a9a30dcc59a06306d57bec6b4d42ea622dbcd36dbea443fecfde",
+          "metrics": {
+            "normalized_mse": 1.9281294953543693e-05,
+            "foreground_mse": 2.8754542654496618e-05,
+            "edge_alignment": 0.9617078304290771,
+            "foreground_iou": 0.996477638340373
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.07781640657762523
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.2233285844498227e-05,
+              "foreground_mse": 2.875454223001979e-05,
+              "foreground_iou": 0.996477638340373,
+              "edge_alignment": 0.9617078304290771,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001298334525441409,
+              "foreground_mse": 0.0001315625189885294,
+              "foreground_iou": 0.9828326180257511,
+              "edge_alignment": 0.9664744138717651,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00011054621716072996,
+              "foreground_mse": 0.00011151815755485736,
+              "foreground_iou": 0.9832307365739757,
+              "edge_alignment": 0.9763244986534119,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00019277151755205964,
+              "foreground_mse": 0.00018860936176345704,
+              "foreground_iou": 0.9600638977635783,
+              "edge_alignment": 0.9952808022499084,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.688,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_01",
+          "input_sha256": "3f7bdf3b3e2bc90af7837a244f61a17d00236ca4bda25b931b17f6429e3eca58",
+          "reference_svg_sha256": "31add099d7da5c367a9c6f2d97e7bfcf1ecd326d1b1edac2c235edcdeb36675e",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.984,
+          "output_sha256": "ff6185e0ba2356fc6134c7738b548b934fcefd7da43d1aedcc15a88afa32844c",
+          "metrics": {
+            "normalized_mse": 1.4306745470094029e-05,
+            "foreground_mse": 2.1346711946534924e-05,
+            "edge_alignment": 0.962191641330719,
+            "foreground_iou": 0.9964758519244913
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.14589999999998327
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.6497127305596452e-05,
+              "foreground_mse": 2.1346712689661764e-05,
+              "foreground_iou": 0.9964758519244913,
+              "edge_alignment": 0.962191641330719,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.631179426386173e-05,
+              "foreground_mse": 7.905801733634449e-05,
+              "foreground_iou": 0.9852330410706045,
+              "edge_alignment": 0.9856199026107788,
+              "passed": true
+            },
+            {
+              "normalized_mse": 8.41427215898573e-05,
+              "foreground_mse": 8.737245446522846e-05,
+              "foreground_iou": 0.9840656687590535,
+              "edge_alignment": 0.9867962002754211,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00017471622894569741,
+              "foreground_mse": 0.00018219063527777766,
+              "foreground_iou": 0.9648210461914959,
+              "edge_alignment": 0.9931958913803101,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.968,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_02",
+          "input_sha256": "ce5010b0f8262247c05965a1ae35ef1cfc4fc2f2733646c6b5bfcfbf5c154655",
+          "reference_svg_sha256": "1345394510b543cc8f95ea1e620ce67ac969c3c433ff1e4abf95640cffae92fa",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.297,
+          "output_sha256": "f9425d3602666ca295084db88cb8e74145ecdf2f68009f74effdb632abf0f086",
+          "metrics": {
+            "normalized_mse": 3.201407889719121e-05,
+            "foreground_mse": 4.9467795179225504e-05,
+            "edge_alignment": 0.9505334496498108,
+            "foreground_iou": 0.9976135488837568
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.07570000000000476
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 3.691547342360166e-05,
+              "foreground_mse": 4.946779810808835e-05,
+              "foreground_iou": 0.9976135488837568,
+              "edge_alignment": 0.9505334496498108,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0003248085576560639,
+              "foreground_mse": 0.0003486281787789755,
+              "foreground_iou": 0.9903703703703703,
+              "edge_alignment": 0.9636715054512024,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0002545996528539147,
+              "foreground_mse": 0.000272561576883904,
+              "foreground_iou": 0.9922125515345854,
+              "edge_alignment": 0.9610131978988647,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00018989798940143983,
+              "foreground_mse": 0.00021366494085105767,
+              "foreground_iou": 0.997131931166348,
+              "edge_alignment": 0.9874380826950073,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.11,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_03",
+          "input_sha256": "9f275fa14d14526a0d178cfd4b05b32b02eeed733e6430a1212e550d1122197a",
+          "reference_svg_sha256": "18a380020c0bdf3f9dc8eefff03c907bbfc69f18620b9cd69d754428cba9c3b4",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.063,
+          "output_sha256": "425612c9f0a49c038513847adc2178421111067689046b1ec6313bc971dbbb57",
+          "metrics": {
+            "normalized_mse": 1.9139422875014134e-05,
+            "foreground_mse": 2.909055183408782e-05,
+            "edge_alignment": 0.9610073566436768,
+            "foreground_iou": 0.9982126489459212
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.07158972797231833
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.206969247326699e-05,
+              "foreground_mse": 2.9090552847367807e-05,
+              "foreground_iou": 0.9982126489459212,
+              "edge_alignment": 0.9610073566436768,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00010914550866231854,
+              "foreground_mse": 0.00011320479830281186,
+              "foreground_iou": 0.9971078976640712,
+              "edge_alignment": 0.9686613082885742,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00011456146058222183,
+              "foreground_mse": 0.00011828209298349517,
+              "foreground_iou": 0.993488605058853,
+              "edge_alignment": 0.9809540510177612,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00026465313133902137,
+              "foreground_mse": 0.0002816628526694394,
+              "foreground_iou": 0.9979770734996628,
+              "edge_alignment": 0.9861027598381042,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.0,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_04",
+          "input_sha256": "5c86840918579f5e3181f062543f74bc79453650358a446580f80fe96aed7eea",
+          "reference_svg_sha256": "a2182c88a61cd8464247916092f2b187234372f430588dd7e4ee7d52bf4c4144",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.406,
+          "output_sha256": "950dd8519468b08408da1a9f22489c1af5365ac0dcdb9826329815d3844e265c",
+          "metrics": {
+            "normalized_mse": 1.89576021512039e-05,
+            "foreground_mse": 2.880581268982496e-05,
+            "edge_alignment": 0.9531404376029968,
+            "foreground_iou": 0.9980641295496797
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.1498999999999917
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.1860034348950883e-05,
+              "foreground_mse": 2.880581404838238e-05,
+              "foreground_iou": 0.9980641295496797,
+              "edge_alignment": 0.9531404376029968,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00010691544591692886,
+              "foreground_mse": 0.00011312030177933175,
+              "foreground_iou": 0.997601395551679,
+              "edge_alignment": 0.9701887369155884,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00011660005481779715,
+              "foreground_mse": 0.00012321175442739387,
+              "foreground_iou": 0.9969101743544472,
+              "edge_alignment": 0.9801152944564819,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00015082359902728135,
+              "foreground_mse": 0.00016930785096875062,
+              "foreground_iou": 0.9985959985959986,
+              "edge_alignment": 0.9920230507850647,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.141,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_05",
+          "input_sha256": "07cbb3f7550306c3d750fa5670737d745da4674e6d22a2ef34c32a615ac41635",
+          "reference_svg_sha256": "8e26f2605129671f4ac96831261f29e4bf0fcba43e447ca2e832a8bf01d5de87",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.156,
+          "output_sha256": "4e0cd398be281273577d53e4b471280c0694947e8cfc9520541bc845f713d7f7",
+          "metrics": {
+            "normalized_mse": 2.2202799300430343e-05,
+            "foreground_mse": 3.417481275391765e-05,
+            "edge_alignment": 0.9305622577667236,
+            "foreground_iou": 0.9977958630044083
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.1156000000000077
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.560207397141548e-05,
+              "foreground_mse": 3.417481098613991e-05,
+              "foreground_iou": 0.9977958630044083,
+              "edge_alignment": 0.9305622577667236,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001746001338319438,
+              "foreground_mse": 0.00018707224775623403,
+              "foreground_iou": 0.9946349428504782,
+              "edge_alignment": 0.9227139353752136,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00016449560216243357,
+              "foreground_mse": 0.00017579282258524208,
+              "foreground_iou": 0.9964804223493181,
+              "edge_alignment": 0.9277795553207397,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00013745118651166028,
+              "foreground_mse": 0.00015764857122699187,
+              "foreground_iou": 0.9959445758702264,
+              "edge_alignment": 0.9128807783126831,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.109,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_06",
+          "input_sha256": "8ed550d64673141e11cc9d69383f49df48a6ef82498ee8b10bd556b15c419946",
+          "reference_svg_sha256": "71c6c9d9878c6cd73ad51e5b523db43e93fd33f80ef3d5ac41575fcdf4ed1d53",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "elapsed_seconds": 5.922,
+          "adaptive_search": {
+            "elapsed_seconds": 5.031,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_06_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_07",
+          "input_sha256": "f95085b84b1bc0aa173dad359834d1306c0efc6c9504ffd529f11df60c4eb696",
+          "reference_svg_sha256": "245b13a38cb895e3c902317fcd08ee02da9d5620f79518dac1e263c65f3ffe7e",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 4.172,
+          "output_sha256": "6e5acd6026bdd30435f17ca098e11aaa5ca7f3a13dca5d5b8315f00a8760e10c",
+          "metrics": {
+            "normalized_mse": 2.2821652237325907e-05,
+            "foreground_mse": 3.4992117434740067e-05,
+            "edge_alignment": 0.9312183856964111,
+            "foreground_iou": 0.9976811683226093
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.14589999999998327
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.6315673567449532e-05,
+              "foreground_mse": 3.499211905265002e-05,
+              "foreground_iou": 0.9976811683226093,
+              "edge_alignment": 0.9312183856964111,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001587848173275183,
+              "foreground_mse": 0.0001683651207652911,
+              "foreground_iou": 0.9924895074000442,
+              "edge_alignment": 0.9133495092391968,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00016915107840493124,
+              "foreground_mse": 0.00017907882183565627,
+              "foreground_iou": 0.9957894736842106,
+              "edge_alignment": 0.9379590749740601,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00016395355747001762,
+              "foreground_mse": 0.00018457165507942041,
+              "foreground_iou": 0.9976744186046511,
+              "edge_alignment": 0.9154211282730103,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.594,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_08",
+          "input_sha256": "f2addbfe3ba3f2d29715813252dbcaf7b3c05ace6f2abca6929c7d85ea487064",
+          "reference_svg_sha256": "ea18592e0fd335ac0b3cbb403f24008f21eb78208bb191af7dad186d1b5d5de4",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.562,
+          "output_sha256": "e24a137b2044e63a6a3a8db236985024b752a613829e40e7cfa98a10e0d2fcc6",
+          "metrics": {
+            "normalized_mse": 9.913004760164768e-06,
+            "foreground_mse": 1.4704488421557471e-05,
+            "edge_alignment": 0.9629217982292175,
+            "foreground_iou": 0.9960882153637651
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.07570000000000476
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.1430697169314572e-05,
+              "foreground_mse": 1.4704486951950735e-05,
+              "foreground_iou": 0.9960882153637651,
+              "edge_alignment": 0.9629217982292175,
+              "passed": true
+            },
+            {
+              "normalized_mse": 3.3513396152901006e-05,
+              "foreground_mse": 3.5806198948192904e-05,
+              "foreground_iou": 0.9842468709538196,
+              "edge_alignment": 0.9908554553985596,
+              "passed": true
+            },
+            {
+              "normalized_mse": 4.693019239663182e-05,
+              "foreground_mse": 5.0223588342825024e-05,
+              "foreground_iou": 0.983418678371129,
+              "edge_alignment": 0.9903334379196167,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00010303665336949855,
+              "foreground_mse": 0.00011656767458480486,
+              "foreground_iou": 0.939297124600639,
+              "edge_alignment": 0.9939785599708557,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.265,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_09",
+          "input_sha256": "2848241471d102127eb7e8e96fcf44747a84d8e4381200c35940047f92c32115",
+          "reference_svg_sha256": "48c7c47c594cebff0cab491e348b47f0c62a67298c8768c1b0d796c3dac4e4df",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.609,
+          "output_sha256": "8ff8c144c5fcce69c36e3edfbdeb9378a59c575d09c40ae3ae2814e3a121cc67",
+          "metrics": {
+            "normalized_mse": 1.895039349619765e-05,
+            "foreground_mse": 2.8883947379654273e-05,
+            "edge_alignment": 0.9627697467803955,
+            "foreground_iou": 0.998254371726947
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.05457796147471328
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.185172191230399e-05,
+              "foreground_mse": 2.888394657057424e-05,
+              "foreground_iou": 0.998254371726947,
+              "edge_alignment": 0.9627697467803955,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.831887135833778e-05,
+              "foreground_mse": 8.195599356671116e-05,
+              "foreground_iou": 0.9969458987783595,
+              "edge_alignment": 0.9760764241218567,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00015710564101043288,
+              "foreground_mse": 0.00016527619451141802,
+              "foreground_iou": 0.9944120505344995,
+              "edge_alignment": 0.9723267555236816,
+              "passed": true
+            },
+            {
+              "normalized_mse": 9.375855472214263e-05,
+              "foreground_mse": 0.00010520166288073717,
+              "foreground_iou": 0.9982369534555712,
+              "edge_alignment": 0.9932489395141602,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.578,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_10",
+          "input_sha256": "03a597fccee5d971770f0e589daf99e6c5357b84f4276ae121b4ea1e57d56558",
+          "reference_svg_sha256": "4ab7478aecd06fc23a01d60000ce461c225b05c690ac1365a72d6e90b964f210",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.406,
+          "output_sha256": "bcf818291c3dc6f8afb1869bff695db7ca3c4a37a1b083596eeaef26705862d8",
+          "metrics": {
+            "normalized_mse": 1.6076297470135614e-05,
+            "foreground_mse": 2.4348231818294153e-05,
+            "edge_alignment": 0.9557602405548096,
+            "foreground_iou": 0.9978194772887811
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.1498999999999917
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.8537599601390954e-05,
+              "foreground_mse": 2.4348231570470503e-05,
+              "foreground_iou": 0.9978194772887811,
+              "edge_alignment": 0.9557602405548096,
+              "passed": true
+            },
+            {
+              "normalized_mse": 9.312657524883591e-05,
+              "foreground_mse": 9.854053116825353e-05,
+              "foreground_iou": 0.995343137254902,
+              "edge_alignment": 0.9795774817466736,
+              "passed": true
+            },
+            {
+              "normalized_mse": 8.512803401843719e-05,
+              "foreground_mse": 8.96496144771551e-05,
+              "foreground_iou": 0.9952229299363057,
+              "edge_alignment": 0.9738699197769165,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00013275915012969644,
+              "foreground_mse": 0.00015012202168798112,
+              "foreground_iou": 0.997864768683274,
+              "edge_alignment": 0.994351863861084,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.281,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_3_11",
+          "input_sha256": "d2fbb8ad33c5a1294b0b2ed8db3e7d2c310048a7a9bcaf24f4502d220a0de915",
+          "reference_svg_sha256": "232269e083a03775936a27de8e635bd0e288a877c13c04f17409085f2a0d2513",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.61,
+          "output_sha256": "a48fb9e8479cdc150441e046ee9c738e19b6238eaa85fa62c0d08edd243aba64",
+          "metrics": {
+            "normalized_mse": 2.581198714324273e-05,
+            "foreground_mse": 3.9883354475023225e-05,
+            "edge_alignment": 0.9495439529418945,
+            "foreground_iou": 0.9976426722544065
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.1156000000000077
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.9763833919293733e-05,
+              "foreground_mse": 3.988335086018031e-05,
+              "foreground_iou": 0.9976426722544065,
+              "edge_alignment": 0.9495439529418945,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00023259918346423537,
+              "foreground_mse": 0.0002491257136692278,
+              "foreground_iou": 0.992311072056239,
+              "edge_alignment": 0.9612410068511963,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00016922324485349696,
+              "foreground_mse": 0.00018135442476511625,
+              "foreground_iou": 0.9958324193902172,
+              "edge_alignment": 0.9736782312393188,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001999500034016673,
+              "foreground_mse": 0.0002271749886111335,
+              "foreground_iou": 0.9971771347918137,
+              "edge_alignment": 0.9805439710617065,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.563,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        }
+      ]
+    },
+    "three_circles": {
+      "seed": 392841,
+      "children": 4,
+      "rounded": true,
+      "outlines": true,
+      "variations": false,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_module_sha256": "5e6621da5fa1ca6c41776d14b548d5daa2e4b1ca5736e1a791ca7572fb0b07de",
+      "accepted": 12,
+      "completed": 12,
+      "cases": [
+        {
+          "case_id": "islands_4_00",
+          "input_sha256": "63c38a9764850b74bd191d66dea0ad4d6be027ab2caa7fb4bf61267c1810bc64",
+          "reference_svg_sha256": "8f0178dbc2e9ee1dbb41853f96d78a3e05f927d26320fb8465d0a38ad7f62821",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.032,
+          "output_sha256": "5136e684d6f54fed4039ed01beeb0707ed1a39aea2708bcd5c126e216981351d",
+          "metrics": {
+            "normalized_mse": 2.1741598175140098e-05,
+            "foreground_mse": 3.240256410208531e-05,
+            "edge_alignment": 0.9279191493988037,
+            "foreground_iou": 0.9984181324518947
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 5,
+            "expected_count": 5,
+            "max_bbox_error_px": 0.09679999999999822
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.4663974797295954e-05,
+              "foreground_mse": 3.24025643088973e-05,
+              "foreground_iou": 0.9984181324518947,
+              "edge_alignment": 0.9279191493988037,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00014250615278791254,
+              "foreground_mse": 0.00014761286741251948,
+              "foreground_iou": 0.9972375690607734,
+              "edge_alignment": 0.9136894345283508,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00010154793241369229,
+              "foreground_mse": 0.00010509688388000838,
+              "foreground_iou": 0.9980035492457853,
+              "edge_alignment": 0.9247837066650391,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00012169752264907975,
+              "foreground_mse": 0.00012568632131008476,
+              "foreground_iou": 0.9959979989994997,
+              "edge_alignment": 0.9332619309425354,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001721355766170198,
+              "foreground_mse": 0.00018256044456442012,
+              "foreground_iou": 0.997872340425532,
+              "edge_alignment": 0.9094022512435913,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.016,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_4_01",
+          "input_sha256": "63fdbf00c07593d3d6200e899e3568291b05a987712d8a287beacb6f64ca5d48",
+          "reference_svg_sha256": "3e6fae86952a7428ebdd82b0819d835ae27f5f661af7e25a3f7a56fc6bec04db",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.39,
+          "output_sha256": "a7133c768a927da5e2bd6178d33b5beba6acf7d48e417d1baf024df263a27dbe",
+          "metrics": {
+            "normalized_mse": 1.7046979337465018e-05,
+            "foreground_mse": 2.535916974011343e-05,
+            "edge_alignment": 0.9678968787193298,
+            "foreground_iou": 0.9979551310843715
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 5,
+            "expected_count": 5,
+            "max_bbox_error_px": 0.12590000000000146
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.9338334924388886e-05,
+              "foreground_mse": 2.5359168466781895e-05,
+              "foreground_iou": 0.9979551310843715,
+              "edge_alignment": 0.9678968787193298,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.944831218536983e-05,
+              "foreground_mse": 7.117470165198309e-05,
+              "foreground_iou": 0.9970360237118103,
+              "edge_alignment": 0.9885438680648804,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.803655704964566e-05,
+              "foreground_mse": 7.978417762884349e-05,
+              "foreground_iou": 0.9952667814113597,
+              "edge_alignment": 0.9695475101470947,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.505922630490105e-05,
+              "foreground_mse": 6.706089843344746e-05,
+              "foreground_iou": 0.9928042328042328,
+              "edge_alignment": 0.9798285961151123,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00013517781017944238,
+              "foreground_mse": 0.0001392373925041095,
+              "foreground_iou": 0.9979353062629044,
+              "edge_alignment": 0.996252715587616,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.313,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_4_02",
+          "input_sha256": "104afceb547b22f5a855cd14165c1dc3ff0cec0650b5ef91e3040d7301f72494",
+          "reference_svg_sha256": "5d88ac76d7a6f8291914cc68445ea06efea1ba6cb3680026f97b543ac1ed7125",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.453,
+          "output_sha256": "fbfa781a74d1a309eb506fbbf17b921fb0c72bbac8d02459fce078283a39a86f",
+          "metrics": {
+            "normalized_mse": 2.8591844966285862e-05,
+            "foreground_mse": 4.346610512584448e-05,
+            "edge_alignment": 0.9578098058700562,
+            "foreground_iou": 0.9981968857470386
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 5,
+            "expected_count": 5,
+            "max_bbox_error_px": 0.1147499999999777
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 3.243499012343914e-05,
+              "foreground_mse": 4.3466106600681834e-05,
+              "foreground_iou": 0.9981968857470386,
+              "edge_alignment": 0.9578098058700562,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0003010341787735098,
+              "foreground_mse": 0.00032904806309450545,
+              "foreground_iou": 0.9951394218470196,
+              "edge_alignment": 0.970453143119812,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00018348644366609487,
+              "foreground_mse": 0.00020052155483599575,
+              "foreground_iou": 0.9952092788703983,
+              "edge_alignment": 0.9670221209526062,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00015038067514587536,
+              "foreground_mse": 0.0001629532313432171,
+              "foreground_iou": 0.9977718360071302,
+              "edge_alignment": 0.9712535738945007,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00017572066197088962,
+              "foreground_mse": 0.00021017434741904228,
+              "foreground_iou": 0.9980865821573787,
+              "edge_alignment": 0.993810772895813,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.219,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_4_03",
+          "input_sha256": "865ce85352667e341b0ee70f08eea4660c776cb104a4e1051711f97483d37e9a",
+          "reference_svg_sha256": "1d668fc5477200a23bd8ad13c30571a6f6c1df4a381a7bb4c083106febea1a1d",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.547,
+          "output_sha256": "684325747e1876df6ba8bdd0109687d7e43abbd6502bbbf45a2643c4815fa8c7",
+          "metrics": {
+            "normalized_mse": 2.2235037249629386e-05,
+            "foreground_mse": 3.300666867289692e-05,
+            "edge_alignment": 0.9540618658065796,
+            "foreground_iou": 0.9980904333066151
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 5,
+            "expected_count": 5,
+            "max_bbox_error_px": 0.1098596148853872
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.5223739536903286e-05,
+              "foreground_mse": 3.300666918531046e-05,
+              "foreground_iou": 0.9980904333066151,
+              "edge_alignment": 0.9540618658065796,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00013943888377946463,
+              "foreground_mse": 0.0001427194632810785,
+              "foreground_iou": 0.9948634134952137,
+              "edge_alignment": 0.9715093374252319,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001321163226725813,
+              "foreground_mse": 0.00013521944768628958,
+              "foreground_iou": 0.9953937266944506,
+              "edge_alignment": 0.9602354764938354,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00015430513504421377,
+              "foreground_mse": 0.0001570179761124739,
+              "foreground_iou": 0.9957243460764588,
+              "edge_alignment": 0.9667942523956299,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00011002525090092354,
+              "foreground_mse": 0.00011333992428585961,
+              "foreground_iou": 0.9973492379058979,
+              "edge_alignment": 0.9881705045700073,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.234,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_4_04",
+          "input_sha256": "95231cb6fb8e168dbe0615a0296140eb410a03f211750262d9818fa62e449f87",
+          "reference_svg_sha256": "893d9c510b5af4f10c771f0e8703dd4f7258ab1e6d777f633fdb6a0cb6f301c0",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.968,
+          "output_sha256": "0bef7899ab3ded9401053b2be455ad60d6b627d8c0b95edb2aa0091cb614a99f",
+          "metrics": {
+            "normalized_mse": 2.2647389414487407e-05,
+            "foreground_mse": 3.408189513720572e-05,
+            "edge_alignment": 0.9587205648422241,
+            "foreground_iou": 0.9980410314859667
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 5,
+            "expected_count": 5,
+            "max_bbox_error_px": 0.1331000000000131
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.5691518888438874e-05,
+              "foreground_mse": 3.408189378943008e-05,
+              "foreground_iou": 0.9980410314859667,
+              "edge_alignment": 0.9587205648422241,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00010092736535743406,
+              "foreground_mse": 0.0001066710422938993,
+              "foreground_iou": 0.9959137343927356,
+              "edge_alignment": 0.9652166962623596,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00011577022966049164,
+              "foreground_mse": 0.00012261616212270643,
+              "foreground_iou": 0.996304347826087,
+              "edge_alignment": 0.9753797650337219,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00015160465895760014,
+              "foreground_mse": 0.00016088304726920145,
+              "foreground_iou": 0.9946167649320687,
+              "edge_alignment": 0.9724132418632507,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00015140193681623725,
+              "foreground_mse": 0.00016896394571949225,
+              "foreground_iou": 0.9974331550802139,
+              "edge_alignment": 0.9922620058059692,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.937,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_4_05",
+          "input_sha256": "76e3c572df9780eb65c204ca1e63047fd04d5e72cb9a123cc7da849da66402b1",
+          "reference_svg_sha256": "72097324ebe54cd67422a73a49e2f11be6add9d43c58c77c0b49e73760f1b5ad",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.516,
+          "output_sha256": "7d1a82ee96c17efbde094a0da29d7aabab4901b5b6e590c30e5bb0d0cc08fc72",
+          "metrics": {
+            "normalized_mse": 1.6107409464893863e-05,
+            "foreground_mse": 2.418756776023656e-05,
+            "edge_alignment": 0.9640246033668518,
+            "foreground_iou": 0.9984114091875492
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 5,
+            "expected_count": 5,
+            "max_bbox_error_px": 0.12020000000001296
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.8272471066702898e-05,
+              "foreground_mse": 2.4187565970475944e-05,
+              "foreground_iou": 0.9984114091875492,
+              "edge_alignment": 0.9640246033668518,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00010277470465310307,
+              "foreground_mse": 0.00011134499194275535,
+              "foreground_iou": 0.9964325529542921,
+              "edge_alignment": 0.9831331968307495,
+              "passed": true
+            },
+            {
+              "normalized_mse": 8.060255349759387e-05,
+              "foreground_mse": 8.783462676284781e-05,
+              "foreground_iou": 0.9984646878198568,
+              "edge_alignment": 0.9840786457061768,
+              "passed": true
+            },
+            {
+              "normalized_mse": 8.340968488328573e-05,
+              "foreground_mse": 9.07932127829137e-05,
+              "foreground_iou": 0.9990076903994046,
+              "edge_alignment": 0.9900570511817932,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00018937120041958265,
+              "foreground_mse": 0.0002270478887939245,
+              "foreground_iou": 0.9992805755395684,
+              "edge_alignment": 0.9928849339485168,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.078,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_4_06",
+          "input_sha256": "2e0c7f2c4c3aea8b6d5afee51311f223a44ceb5e435254af324bb6374016882b",
+          "reference_svg_sha256": "243072186b89eb5eaf0143661f6a537df73449b494208da94546d18e85399128",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.969,
+          "output_sha256": "97f7ad7fbb906b27f0cbfcf65b18f6b346b89e9def404b519452e3ad94134d14",
+          "metrics": {
+            "normalized_mse": 1.70179864653619e-05,
+            "foreground_mse": 2.507664066797588e-05,
+            "edge_alignment": 0.9498716592788696,
+            "foreground_iou": 0.9984180577526975
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 5,
+            "expected_count": 5,
+            "max_bbox_error_px": 0.10580541161245094
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.9305444539288114e-05,
+              "foreground_mse": 2.5076641520883384e-05,
+              "foreground_iou": 0.9984180577526975,
+              "edge_alignment": 0.9498716592788696,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.625429256669988e-05,
+              "foreground_mse": 7.80124872829663e-05,
+              "foreground_iou": 0.9961815867628341,
+              "edge_alignment": 0.9813826084136963,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.200027961273635e-05,
+              "foreground_mse": 7.388347095289361e-05,
+              "foreground_iou": 0.9974081055607917,
+              "edge_alignment": 0.9695929288864136,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00010960774455584144,
+              "foreground_mse": 0.00011263545717824029,
+              "foreground_iou": 0.9967336683417085,
+              "edge_alignment": 0.978171706199646,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00010978304413265813,
+              "foreground_mse": 0.00011644862855935519,
+              "foreground_iou": 0.9981981981981982,
+              "edge_alignment": 0.9526066184043884,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.937,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_4_07",
+          "input_sha256": "465f350e8910940be9b8a1bb851b8ea7b933893355cf1c8e97143189627d8763",
+          "reference_svg_sha256": "70b6d49b3194e7e776026719395f9f949ec2d603af833d52ba73d6f3c23f8ac5",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.282,
+          "output_sha256": "d93ce3a6200fb75298ae532b5122b959b6b2e1a1d17f9eacdf5136a695baf18d",
+          "metrics": {
+            "normalized_mse": 2.766852776403539e-05,
+            "foreground_mse": 4.160705066169612e-05,
+            "edge_alignment": 0.9686135053634644,
+            "foreground_iou": 0.9979447579447579
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 5,
+            "expected_count": 5,
+            "max_bbox_error_px": 0.12590000000000146
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 3.138756821428852e-05,
+              "foreground_mse": 4.16070506035904e-05,
+              "foreground_iou": 0.9979447579447579,
+              "edge_alignment": 0.9686135053634644,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00014592612476959537,
+              "foreground_mse": 0.00015393897999351475,
+              "foreground_iou": 0.9931584948688712,
+              "edge_alignment": 0.9798130393028259,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00017890554914776368,
+              "foreground_mse": 0.00018783345995353442,
+              "foreground_iou": 0.9962962962962963,
+              "edge_alignment": 0.9759474992752075,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001789104270516131,
+              "foreground_mse": 0.0001890984307766953,
+              "foreground_iou": 0.9942343173431735,
+              "edge_alignment": 0.9855300188064575,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001298149593676955,
+              "foreground_mse": 0.00014629953777684017,
+              "foreground_iou": 0.9971271247306679,
+              "edge_alignment": 0.9943757653236389,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.156,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_4_08",
+          "input_sha256": "16b4f083cc5d3288ec744ab5b070841ee0f6d1127487804b10b52b72e9f78616",
+          "reference_svg_sha256": "4e2a9629b5a3dbbac209cf95894cbbe57938ab10cc96fa7611cf6c481c59f0ae",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.14,
+          "output_sha256": "689662e04970a696da3cff3be452a1a917bccd72877b1ea3c20c9eb39577e43b",
+          "metrics": {
+            "normalized_mse": 1.533716931589879e-05,
+            "foreground_mse": 2.2972146325628273e-05,
+            "edge_alignment": 0.963985025882721,
+            "foreground_iou": 0.9982499791664187
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 5,
+            "expected_count": 5,
+            "max_bbox_error_px": 0.1147499999999777
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.7398699621863327e-05,
+              "foreground_mse": 2.297214632293098e-05,
+              "foreground_iou": 0.9982499791664187,
+              "edge_alignment": 0.963985025882721,
+              "passed": true
+            },
+            {
+              "normalized_mse": 9.57661853820674e-05,
+              "foreground_mse": 0.00010275450608083101,
+              "foreground_iou": 0.9952935348030716,
+              "edge_alignment": 0.9784995317459106,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.60350046587291e-05,
+              "foreground_mse": 8.125764645242317e-05,
+              "foreground_iou": 0.9981091940439613,
+              "edge_alignment": 0.9797804355621338,
+              "passed": true
+            },
+            {
+              "normalized_mse": 9.021345811637736e-05,
+              "foreground_mse": 9.609556955224298e-05,
+              "foreground_iou": 0.9965450226732887,
+              "edge_alignment": 0.9826998710632324,
+              "passed": true
+            },
+            {
+              "normalized_mse": 9.090888651381578e-05,
+              "foreground_mse": 0.00010243796104235958,
+              "foreground_iou": 0.9986468200270636,
+              "edge_alignment": 0.9967502355575562,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.032,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_4_09",
+          "input_sha256": "f8f6d93ef6fde9eb51a2a21b4826b7fc7e1a73398b7f388c72043d5c2d56f0ce",
+          "reference_svg_sha256": "7d3bec2105f3d74c0122e57163bf11014a0d0f8f4ee5c5e1d6fe438ffaae448c",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.859,
+          "output_sha256": "042bf9e213c71490732a1bedf1b9ded03334f4f469990564824a7d501f37a0fd",
+          "metrics": {
+            "normalized_mse": 2.7474039598018862e-05,
+            "foreground_mse": 3.974272112827748e-05,
+            "edge_alignment": 0.9508768320083618,
+            "foreground_iou": 0.9961722035820614
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 5,
+            "expected_count": 5,
+            "max_bbox_error_px": 0.09204999999997909
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 3.116693789567935e-05,
+              "foreground_mse": 3.97427234467824e-05,
+              "foreground_iou": 0.9961722035820614,
+              "edge_alignment": 0.9508768320083618,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00016159497030884525,
+              "foreground_mse": 0.0001643499249488048,
+              "foreground_iou": 0.9840737636211232,
+              "edge_alignment": 0.9587607383728027,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00022376639317378324,
+              "foreground_mse": 0.00022799656647930105,
+              "foreground_iou": 0.9830663615560641,
+              "edge_alignment": 0.9531577825546265,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00013945447460029766,
+              "foreground_mse": 0.00014104975079237952,
+              "foreground_iou": 0.9847198641765704,
+              "edge_alignment": 0.9616180658340454,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00020550272867461756,
+              "foreground_mse": 0.00019554686657882433,
+              "foreground_iou": 0.9592054677488253,
+              "edge_alignment": 0.9886984825134277,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.828,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_4_10",
+          "input_sha256": "60a1349bff18f7cd3bc68119905e78cee9a426d4511b3cdd3ba011777a8ed0e6",
+          "reference_svg_sha256": "e57a1f0ed86fe0b0ea63a6de4676f711e4c4f7ae3d19ebe1ccabbcb0077e6b72",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.671,
+          "output_sha256": "771c526c99acc6deacf56f57ba5c6c24cc3e3f0e212b17c8db64d2ea55f8181f",
+          "metrics": {
+            "normalized_mse": 1.737887941999361e-05,
+            "foreground_mse": 2.5662329790065996e-05,
+            "edge_alignment": 0.9646158218383789,
+            "foreground_iou": 0.9964330576161923
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 5,
+            "expected_count": 5,
+            "max_bbox_error_px": 0.1331000000000131
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.9714846822588893e-05,
+              "foreground_mse": 2.5662330936570413e-05,
+              "foreground_iou": 0.9964330576161923,
+              "edge_alignment": 0.9646158218383789,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.218632528434853e-05,
+              "foreground_mse": 7.46663792055983e-05,
+              "foreground_iou": 0.9838416021847974,
+              "edge_alignment": 0.9807608723640442,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.947546569569774e-05,
+              "foreground_mse": 8.221438833969536e-05,
+              "foreground_iou": 0.9852205547976353,
+              "edge_alignment": 0.9880468249320984,
+              "passed": true
+            },
+            {
+              "normalized_mse": 5.71568383555788e-05,
+              "foreground_mse": 5.92272640888952e-05,
+              "foreground_iou": 0.985876993166287,
+              "edge_alignment": 0.9831991195678711,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00012640437438591993,
+              "foreground_mse": 0.00013090683217557497,
+              "foreground_iou": 0.9641687141687142,
+              "edge_alignment": 0.9941807985305786,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.469,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "islands_4_11",
+          "input_sha256": "5e0a34c1e584b0377535568976229a0b7fd0dcaf9a791c4af13cf647987ee96c",
+          "reference_svg_sha256": "51c10f64b6582df0d011f6f631be9a90fed01c6dcb837cd6d347e641ddbff889",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 4.016,
+          "output_sha256": "01e6c4e0ad0d394cac9cbfb99109103102e03d8952dd804461ecf123f550b874",
+          "metrics": {
+            "normalized_mse": 1.6520158169441856e-05,
+            "foreground_mse": 2.477498674124945e-05,
+            "edge_alignment": 0.9651306867599487,
+            "foreground_iou": 0.998107187924097
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 5,
+            "expected_count": 5,
+            "max_bbox_error_px": 0.12020000000001296
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.8740699127448598e-05,
+              "foreground_mse": 2.4774984837313226e-05,
+              "foreground_iou": 0.998107187924097,
+              "edge_alignment": 0.9651306867599487,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.592809257685567e-05,
+              "foreground_mse": 7.061211433102653e-05,
+              "foreground_iou": 0.996826171875,
+              "edge_alignment": 0.9848713278770447,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00012166140822674963,
+              "foreground_mse": 0.0001300005552915273,
+              "foreground_iou": 0.9955135773317592,
+              "edge_alignment": 0.981802225112915,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001027530445880322,
+              "foreground_mse": 0.0001102009127245639,
+              "foreground_iou": 0.99581589958159,
+              "edge_alignment": 0.982574462890625,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.614770066704895e-05,
+              "foreground_mse": 8.567585265977694e-05,
+              "foreground_iou": 0.9968261165268647,
+              "edge_alignment": 0.9981971979141235,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.531,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        }
+      ]
+    },
+    "plan_b": {
+      "seed": 962731,
+      "children": 3,
+      "rounded": true,
+      "outlines": true,
+      "variations": true,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_module_sha256": "5e6621da5fa1ca6c41776d14b548d5daa2e4b1ca5736e1a791ca7572fb0b07de",
+      "accepted": 17,
+      "completed": 17,
+      "cases": [
+        {
+          "case_id": "original",
+          "input_sha256": "222ea82e7b96a13354ac66ecc7a39d3c8583d28337aae05b908364ff6327d397",
+          "reference_svg_sha256": "7df58353ed3728b005996fc79f96c5eb49fe386d96fee756b44d1479eeedaade",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.328,
+          "output_sha256": "209ed0e9434d4ed0f29acfa6b08f9e67c7da500c20f9ddc912fd873b2e87e872",
+          "metrics": {
+            "normalized_mse": 1.4446065506490413e-05,
+            "foreground_mse": 2.177563146688044e-05,
+            "edge_alignment": 0.9626902341842651,
+            "foreground_iou": 0.9982588774341352
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.06294229510798033
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.6657776688848575e-05,
+              "foreground_mse": 2.177562922240822e-05,
+              "foreground_iou": 0.9982588774341352,
+              "edge_alignment": 0.9626902341842651,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.13118391633648e-05,
+              "foreground_mse": 7.364185139088394e-05,
+              "foreground_iou": 0.99568655643422,
+              "edge_alignment": 0.9743258953094482,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.359895248784139e-05,
+              "foreground_mse": 6.536253865876252e-05,
+              "foreground_iou": 0.9949832775919732,
+              "edge_alignment": 0.9831994771957397,
+              "passed": true
+            },
+            {
+              "normalized_mse": 9.657216859912179e-05,
+              "foreground_mse": 0.00010200846414754954,
+              "foreground_iou": 0.9987293519695044,
+              "edge_alignment": 0.9811734557151794,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.031,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_01",
+          "input_sha256": "f80ef21b5b369b11cc3e5968fc320a01dc3f674f13b9722f3652f0e27645526b",
+          "reference_svg_sha256": "03cb019aa46e13fda20a27dfe0fdb9bd41f7fb812c1901e22fcec087ee48504f",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.657,
+          "output_sha256": "e24f910c3767d4b341c7f07c576bbb9baffcb73a7e9851fe80115edea9432417",
+          "metrics": {
+            "normalized_mse": 1.490497470513219e-05,
+            "foreground_mse": 2.4375101929763332e-05,
+            "edge_alignment": 0.9577282667160034,
+            "foreground_iou": 0.9981481175283983
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.09431230499996524
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.860193042712945e-05,
+              "foreground_mse": 2.4375100861085213e-05,
+              "foreground_iou": 0.9981481175283983,
+              "edge_alignment": 0.9577282667160034,
+              "passed": true
+            },
+            {
+              "normalized_mse": 5.484043597013969e-05,
+              "foreground_mse": 5.4956616613906826e-05,
+              "foreground_iou": 0.9954864593781344,
+              "edge_alignment": 0.9644571542739868,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.869102829040112e-05,
+              "foreground_mse": 6.897452367143512e-05,
+              "foreground_iou": 0.9957457457457457,
+              "edge_alignment": 0.977357804775238,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.210231694027518e-05,
+              "foreground_mse": 7.209382401966949e-05,
+              "foreground_iou": 0.9980092899800929,
+              "edge_alignment": 0.9899924397468567,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.329,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_02",
+          "input_sha256": "5ebc6c81e733dd079bfcf3b4eb8132731edd53c69c98aa85b723288de9c28685",
+          "reference_svg_sha256": "820e2b7a7988c221bdf6de4b4bf6451b56dbe130ed2d595f86fe68c4667a1137",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.86,
+          "output_sha256": "35909d70e115cdfe3df6077e72b46e9b00fbb4de9f83ec9d0d4c6baaf03c8980",
+          "metrics": {
+            "normalized_mse": 1.5553863704553805e-05,
+            "foreground_mse": 2.1969368390273303e-05,
+            "edge_alignment": 0.936761200428009,
+            "foreground_iou": 0.9983226688202771
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.05816409070547479
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.8128503261340045e-05,
+              "foreground_mse": 2.196936741898052e-05,
+              "foreground_iou": 0.9983226688202771,
+              "edge_alignment": 0.936761200428009,
+              "passed": true
+            },
+            {
+              "normalized_mse": 5.039362363468476e-05,
+              "foreground_mse": 3.834268110674173e-05,
+              "foreground_iou": 0.9973255531242402,
+              "edge_alignment": 0.9363040924072266,
+              "passed": true
+            },
+            {
+              "normalized_mse": 4.530761931761547e-05,
+              "foreground_mse": 3.3172775310754915e-05,
+              "foreground_iou": 0.9973690504663956,
+              "edge_alignment": 0.946011483669281,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00011594075538712216,
+              "foreground_mse": 8.343539664231706e-05,
+              "foreground_iou": 0.99776,
+              "edge_alignment": 0.9221385717391968,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.907,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_03",
+          "input_sha256": "fa514d10b9f26874c887741e39f7cf09efb9858d3d66d9339216f6752c011ddf",
+          "reference_svg_sha256": "7768a05b393a8fbdfb4fcfb81a9a7e3599d4f8e6433507b5a312f3108264b8e0",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.671,
+          "output_sha256": "8fd12a5db14644b87e24ef010f60b0c40786c92afde289b746ba5a7e580a3bea",
+          "metrics": {
+            "normalized_mse": 1.4846604244667105e-05,
+            "foreground_mse": 2.399856566626113e-05,
+            "edge_alignment": 0.9551863670349121,
+            "foreground_iou": 0.9977555701179555
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.08785189999998622
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.8329140086196664e-05,
+              "foreground_mse": 2.3998566267065678e-05,
+              "foreground_iou": 0.9977555701179555,
+              "edge_alignment": 0.9551863670349121,
+              "passed": true
+            },
+            {
+              "normalized_mse": 5.860771194814314e-05,
+              "foreground_mse": 5.905640402698553e-05,
+              "foreground_iou": 0.9941634241245136,
+              "edge_alignment": 0.9753736853599548,
+              "passed": true
+            },
+            {
+              "normalized_mse": 8.01047920425083e-05,
+              "foreground_mse": 8.100914289893811e-05,
+              "foreground_iou": 0.996057171020207,
+              "edge_alignment": 0.9728678464889526,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.531877717552909e-05,
+              "foreground_mse": 7.524239422227376e-05,
+              "foreground_iou": 0.9950396825396826,
+              "edge_alignment": 0.9918490052223206,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.328,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_04",
+          "input_sha256": "3a6f84f5da534d26f3ffa3394872687eeb73f743fd2b6159c6be8e245c8bdcd8",
+          "reference_svg_sha256": "10183df5e5fcec2e61638591328c470712000a5ea2f02c8604400ce7fa590334",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.968,
+          "output_sha256": "1840b43d03331fbec7e42d1311860e555d784f18e0e3232895264293e9c4c643",
+          "metrics": {
+            "normalized_mse": 1.83914144145092e-05,
+            "foreground_mse": 2.667732405825518e-05,
+            "edge_alignment": 0.9555379152297974,
+            "foreground_iou": 0.9982054798517698
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.058012817751176726
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.024488889481278e-05,
+              "foreground_mse": 2.6677325391149127e-05,
+              "foreground_iou": 0.9982054798517698,
+              "edge_alignment": 0.9555379152297974,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.597808402145036e-05,
+              "foreground_mse": 6.750853411901607e-05,
+              "foreground_iou": 0.9963849977406236,
+              "edge_alignment": 0.9700329303741455,
+              "passed": true
+            },
+            {
+              "normalized_mse": 5.897607476851021e-05,
+              "foreground_mse": 6.074360897665204e-05,
+              "foreground_iou": 0.996611700926135,
+              "edge_alignment": 0.9814349412918091,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.534717953000608e-05,
+              "foreground_mse": 6.894322664578627e-05,
+              "foreground_iou": 0.9978274363749224,
+              "edge_alignment": 0.9933512210845947,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.907,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_05",
+          "input_sha256": "affe70f3550450a4a7f77351b3a61c5eda6f78023d1373b55e902927ed15313d",
+          "reference_svg_sha256": "f0b0cbeabc6de6f93a54c91eb1da6efee305e1552c4039eabc4a1fbd5d7624ae",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.907,
+          "output_sha256": "c6eef3f1d6353f5b1edfa991c879ad7a577ed37c739c66ab02f6b1740cf2cb9a",
+          "metrics": {
+            "normalized_mse": 1.9280794731457718e-05,
+            "foreground_mse": 2.8799899155274034e-05,
+            "edge_alignment": 0.9586558938026428,
+            "foreground_iou": 0.9980662983425415
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.1043527250000178
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.2307566196640007e-05,
+              "foreground_mse": 2.879989728651845e-05,
+              "foreground_iou": 0.9980662983425415,
+              "edge_alignment": 0.9586558938026428,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.2439783526079e-05,
+              "foreground_mse": 5.911518382372149e-05,
+              "foreground_iou": 0.9968824940047961,
+              "edge_alignment": 0.9777953624725342,
+              "passed": true
+            },
+            {
+              "normalized_mse": 4.817523418291206e-05,
+              "foreground_mse": 4.453920794622923e-05,
+              "foreground_iou": 0.9950553331763597,
+              "edge_alignment": 0.9869637489318848,
+              "passed": true
+            },
+            {
+              "normalized_mse": 9.15003553411858e-05,
+              "foreground_mse": 8.229859759299411e-05,
+              "foreground_iou": 0.9946272666218939,
+              "edge_alignment": 0.9909399747848511,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.844,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_06",
+          "input_sha256": "a4bc4c5a0d6b4bdeeb156078a52b5a6e50a099e239475439b77ff7dc9802b9ae",
+          "reference_svg_sha256": "5b9883ef67afb095a72e7fd799a27d3d566fc5e0c854a8ae67376e9f507b5c28",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.39,
+          "output_sha256": "13b0c3b6d9c5d8b42859070907cbef19a6d89e7cf178f27d94362877d066b99a",
+          "metrics": {
+            "normalized_mse": 1.815948235162068e-05,
+            "foreground_mse": 3.103642302448861e-05,
+            "edge_alignment": 0.9585210084915161,
+            "foreground_iou": 0.9982742553411798
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.08052003965090648
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.354999239668641e-05,
+              "foreground_mse": 3.103642182001379e-05,
+              "foreground_iou": 0.9982742553411798,
+              "edge_alignment": 0.9585210084915161,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00010842128216339128,
+              "foreground_mse": 0.00011163402384683077,
+              "foreground_iou": 0.9938650306748467,
+              "edge_alignment": 0.9646480083465576,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00012148230550188282,
+              "foreground_mse": 0.00012485193556057808,
+              "foreground_iou": 0.9950078822911192,
+              "edge_alignment": 0.9743002653121948,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001281456054954042,
+              "foreground_mse": 0.00013625123507964254,
+              "foreground_iou": 0.9975080099679601,
+              "edge_alignment": 0.9822752475738525,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.266,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_07",
+          "input_sha256": "c9feb502f0454d3028ce2fc8807e61e75e25b87950192a53a437d3a49e9a0dfe",
+          "reference_svg_sha256": "e5a8320ba043fc6666511ee5465ce0ff1e158cb521f8fb4d7027e20c9c9bf355",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.859,
+          "output_sha256": "259dfb868929309d44755e06b8b208aed77d804de2250737bf488120bb6d7f76",
+          "metrics": {
+            "normalized_mse": 1.894693741633091e-05,
+            "foreground_mse": 2.7166448489879258e-05,
+            "edge_alignment": 0.9487033486366272,
+            "foreground_iou": 0.9983412664070388
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.07810637000003418
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.0652813465635687e-05,
+              "foreground_mse": 2.716644966313943e-05,
+              "foreground_iou": 0.9983412664070388,
+              "edge_alignment": 0.9487033486366272,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.681730520645285e-05,
+              "foreground_mse": 6.883716579487125e-05,
+              "foreground_iou": 0.9966124661246613,
+              "edge_alignment": 0.9696943759918213,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.552822964083284e-05,
+              "foreground_mse": 7.772020580088845e-05,
+              "foreground_iou": 0.9964989059080963,
+              "edge_alignment": 0.9782555103302002,
+              "passed": true
+            },
+            {
+              "normalized_mse": 8.38397799371608e-05,
+              "foreground_mse": 8.889608025307876e-05,
+              "foreground_iou": 0.9987585350713842,
+              "edge_alignment": 0.9847484827041626,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.859,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_08",
+          "input_sha256": "2bb9aa9ce7b7656642989d47755324459e90c3839ba0888eca1ccf09ec70f20c",
+          "reference_svg_sha256": "b4fb4d7c512ccecce007c0f26fca356efc28759eabed6ef26fe4a5b1c59d75e0",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.656,
+          "output_sha256": "48025b97d09296b3fdb1a0c064f42a47d3354c5c7c3ba746b7604e582850131a",
+          "metrics": {
+            "normalized_mse": 2.0156810933258384e-05,
+            "foreground_mse": 2.852588841051329e-05,
+            "edge_alignment": 0.9486171007156372,
+            "foreground_iou": 0.9962366507611906
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.0913468599999927
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.175806853827795e-05,
+              "foreground_mse": 2.852588493120018e-05,
+              "foreground_iou": 0.9962366507611906,
+              "edge_alignment": 0.9486171007156372,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001104148273369941,
+              "foreground_mse": 0.00011425449292701765,
+              "foreground_iou": 0.9826335458342493,
+              "edge_alignment": 0.9658697843551636,
+              "passed": true
+            },
+            {
+              "normalized_mse": 8.935182317247645e-05,
+              "foreground_mse": 9.197019057610693e-05,
+              "foreground_iou": 0.9824366385060027,
+              "edge_alignment": 0.9802578687667847,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.0001436996625745627,
+              "foreground_mse": 0.00015205753878308063,
+              "foreground_iou": 0.9601990049751243,
+              "edge_alignment": 0.9973908066749573,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.328,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_09",
+          "input_sha256": "3ce7afca083717b43f73c5a6b55e1b9ca694521d0c92f743af5803058bb80011",
+          "reference_svg_sha256": "2b7a440803823bbc5868bac495a489c32c00b2e1c302bb81e426de1eb6a6413f",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.765,
+          "output_sha256": "4b7119bdc8c5b5c1da99fec80947d2625d60d7e27e8d8654a6196bde82831cb6",
+          "metrics": {
+            "normalized_mse": 1.6660009350744076e-05,
+            "foreground_mse": 2.7209307518205605e-05,
+            "edge_alignment": 0.9573915004730225,
+            "foreground_iou": 0.9980076729290501
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.10880642499999382
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.0581899444156926e-05,
+              "foreground_mse": 2.7209307682912812e-05,
+              "foreground_iou": 0.9980076729290501,
+              "edge_alignment": 0.9573915004730225,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.302413735101884e-05,
+              "foreground_mse": 6.609004174043262e-05,
+              "foreground_iou": 0.9987049987049987,
+              "edge_alignment": 0.9792137145996094,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.535162757913622e-05,
+              "foreground_mse": 7.855995788532891e-05,
+              "foreground_iou": 0.9958752255736014,
+              "edge_alignment": 0.972862958908081,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00011725489959410219,
+              "foreground_mse": 0.00013076855153171024,
+              "foreground_iou": 0.9979267449896337,
+              "edge_alignment": 0.9919761419296265,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.547,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_10",
+          "input_sha256": "13d0989fc6a109a7ab28902f36261cf7de2145e43611042603aa5d7dfb75b77b",
+          "reference_svg_sha256": "eab2540c5d519e0d42fbbe5c353716e298f337edf9d930ecc73612d3e194084f",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 4.015,
+          "output_sha256": "8e871973c00be94c50f4a6cec63bd44b862880d98b0bf0c61c4c33a5a4fbf34c",
+          "metrics": {
+            "normalized_mse": 1.4191055925039109e-05,
+            "foreground_mse": 2.2529053239850327e-05,
+            "edge_alignment": 0.9548594951629639,
+            "foreground_iou": 0.9977708998187854
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.08763360500000594
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.7160451194811536e-05,
+              "foreground_mse": 2.252905512865339e-05,
+              "foreground_iou": 0.9977708998187854,
+              "edge_alignment": 0.9548594951629639,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.551882260426311e-05,
+              "foreground_mse": 7.687479361765221e-05,
+              "foreground_iou": 0.9939172749391727,
+              "edge_alignment": 0.9667679667472839,
+              "passed": true
+            },
+            {
+              "normalized_mse": 3.907585233110919e-05,
+              "foreground_mse": 3.905535937423895e-05,
+              "foreground_iou": 0.9951491632306573,
+              "edge_alignment": 0.9858975410461426,
+              "passed": true
+            },
+            {
+              "normalized_mse": 4.362730899656448e-05,
+              "foreground_mse": 4.341089040953642e-05,
+              "foreground_iou": 0.9963768115942029,
+              "edge_alignment": 0.9935926198959351,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.047,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_11",
+          "input_sha256": "fec6712360bd5a1616defe1dd038b1adda51d47f0ef3b3983fef9601535ed119",
+          "reference_svg_sha256": "65d4fe0682c9c75c42f0d3fa5ff8d6feac953930357d7e86648822346b2e1de6",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 2.937,
+          "output_sha256": "0d0d2302774a553641abfbea4cb1cbaa05d266a40f41d50cdb069255c00e1e8c",
+          "metrics": {
+            "normalized_mse": 1.8525328414398246e-05,
+            "foreground_mse": 3.084019408561289e-05,
+            "edge_alignment": 0.9580191969871521,
+            "foreground_iou": 0.9981370902014272
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.06837376796283934
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.3191763216444422e-05,
+              "foreground_mse": 3.084019358005228e-05,
+              "foreground_iou": 0.9981370902014272,
+              "edge_alignment": 0.9580191969871521,
+              "passed": true
+            },
+            {
+              "normalized_mse": 8.435757881584006e-05,
+              "foreground_mse": 8.832761876463017e-05,
+              "foreground_iou": 0.9958559958559958,
+              "edge_alignment": 0.9724425077438354,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00011870684752659233,
+              "foreground_mse": 0.00012429494849263686,
+              "foreground_iou": 0.9958688355280144,
+              "edge_alignment": 0.9756733179092407,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00014540410550994715,
+              "foreground_mse": 0.00016259621543383824,
+              "foreground_iou": 0.9968717413972888,
+              "edge_alignment": 0.9926554560661316,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 1.969,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_12",
+          "input_sha256": "ff29dc86ad5cf8c8a2219f60ec5dd0345579be4356f9c631ac0788ea69adc998",
+          "reference_svg_sha256": "e671923cf7ac57dcec1fd143ec207e9f32d767cf6e48d6c4ac16e601fa3da362",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.266,
+          "output_sha256": "910a7290ee6e5a17fac02bc779217000151b2e9e244d9cef73c8fe19552e61cb",
+          "metrics": {
+            "normalized_mse": 1.5592358977301046e-05,
+            "foreground_mse": 2.1711288354708813e-05,
+            "edge_alignment": 0.953738808631897,
+            "foreground_iou": 0.9980930212992695
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.09810837500000691
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.6614717070500648e-05,
+              "foreground_mse": 2.1711288400930283e-05,
+              "foreground_iou": 0.9980930212992695,
+              "edge_alignment": 0.953738808631897,
+              "passed": true
+            },
+            {
+              "normalized_mse": 5.382922024696418e-05,
+              "foreground_mse": 5.641825270219009e-05,
+              "foreground_iou": 0.9942093541202672,
+              "edge_alignment": 0.9735456705093384,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.779096563525848e-05,
+              "foreground_mse": 7.067204659060171e-05,
+              "foreground_iou": 0.996220542463317,
+              "edge_alignment": 0.9823499917984009,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.896071187781734e-05,
+              "foreground_mse": 8.775042685916381e-05,
+              "foreground_iou": 0.9969687784177024,
+              "edge_alignment": 0.9907129406929016,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.156,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_13",
+          "input_sha256": "88a85d20d65cb8a9210a4ae8b225eda66a8e390835cc2370b648b78c5a806830",
+          "reference_svg_sha256": "e011bfb38e3d777efb2e5c3d6d4958ced01cf826f2ac167071c5808818d1f0c2",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.313,
+          "output_sha256": "96d6e92d409d56ca019035044d4e1ef0cf8e5853f68b318bccc766a16a4e2d7c",
+          "metrics": {
+            "normalized_mse": 1.725348010950256e-05,
+            "foreground_mse": 2.5874518541968428e-05,
+            "edge_alignment": 0.9473937749862671,
+            "foreground_iou": 0.9981642468101892
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.09185027473958485
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.9762154514523502e-05,
+              "foreground_mse": 2.5874518350366112e-05,
+              "foreground_iou": 0.9981642468101892,
+              "edge_alignment": 0.9473937749862671,
+              "passed": true
+            },
+            {
+              "normalized_mse": 9.91558697836995e-05,
+              "foreground_mse": 0.00010208022688639232,
+              "foreground_iou": 0.9957476966690291,
+              "edge_alignment": 0.9649111032485962,
+              "passed": true
+            },
+            {
+              "normalized_mse": 9.411303356286904e-05,
+              "foreground_mse": 9.713640783475234e-05,
+              "foreground_iou": 0.9962825278810409,
+              "edge_alignment": 0.9688918590545654,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00016865506374276248,
+              "foreground_mse": 0.0001786594510309736,
+              "foreground_iou": 0.9965211891208097,
+              "edge_alignment": 0.9574425220489502,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.141,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_14",
+          "input_sha256": "9163f71db9d91589f07411d96e95af49395183c7279432ec64ae0c445b8619d0",
+          "reference_svg_sha256": "33688e433734b718bb39b4f708cc51eba90e7a26107563155caaba55b7ba8283",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.719,
+          "output_sha256": "908b0ba65dc04a4529758f4910923614f269fa1393c3b71c3b4a054fa01c6a4d",
+          "metrics": {
+            "normalized_mse": 1.7119718904723413e-05,
+            "foreground_mse": 2.8568341804202646e-05,
+            "edge_alignment": 0.9536781311035156,
+            "foreground_iou": 0.9980104659522178
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.09323109012044739
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 2.152500555480019e-05,
+              "foreground_mse": 2.8568340827824058e-05,
+              "foreground_iou": 0.9980104659522178,
+              "edge_alignment": 0.9536781311035156,
+              "passed": true
+            },
+            {
+              "normalized_mse": 7.967813861655773e-05,
+              "foreground_mse": 8.070291713843593e-05,
+              "foreground_iou": 0.9957478739369685,
+              "edge_alignment": 0.9736288785934448,
+              "passed": true
+            },
+            {
+              "normalized_mse": 8.859022571446881e-05,
+              "foreground_mse": 8.938245218029202e-05,
+              "foreground_iou": 0.9962518740629686,
+              "edge_alignment": 0.9874207377433777,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00017793018295783502,
+              "foreground_mse": 0.00017946254069715754,
+              "foreground_iou": 0.9966711051930759,
+              "edge_alignment": 0.9752030372619629,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.485,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_15",
+          "input_sha256": "6dbcea429def77f482069482f9262840804a9363e24bfe037877e227d8b7757b",
+          "reference_svg_sha256": "cd2ed3354ce95becf13fe174d21ec82f1de0df6a78f91f9b55821e49ddde498a",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.031,
+          "output_sha256": "13ae70749105dd1bbe7ab7f673e933a553f5991958aa8e865ad25fa7720119b6",
+          "metrics": {
+            "normalized_mse": 1.2273974789422937e-05,
+            "foreground_mse": 1.7623962776269764e-05,
+            "edge_alignment": 0.9693797826766968,
+            "foreground_iou": 0.9983680843933499
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.09162902999997513
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.3458036781379743e-05,
+              "foreground_mse": 1.762396253894567e-05,
+              "foreground_iou": 0.9983680843933499,
+              "edge_alignment": 0.9693797826766968,
+              "passed": true
+            },
+            {
+              "normalized_mse": 4.038090300245837e-05,
+              "foreground_mse": 4.2276839531178855e-05,
+              "foreground_iou": 0.9969802555168409,
+              "edge_alignment": 0.9878737926483154,
+              "passed": true
+            },
+            {
+              "normalized_mse": 4.036198725237271e-05,
+              "foreground_mse": 4.217649617319969e-05,
+              "foreground_iou": 0.998422712933754,
+              "edge_alignment": 0.9864141941070557,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00011066791327006183,
+              "foreground_mse": 0.00012375163231168838,
+              "foreground_iou": 0.9990196078431373,
+              "edge_alignment": 0.9949760437011719,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.031,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        },
+        {
+          "case_id": "probe_16",
+          "input_sha256": "6a67e534faa03707fb46e39d12db9dbc4896b889883eae4186557e528cb24080",
+          "reference_svg_sha256": "6764317ea9a443a1ebe4d916a798a51cbee74a40a169cee21233f5441e264aec",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "elapsed_seconds": 3.609,
+          "output_sha256": "2f2fc98e1af2e0e906ab6ab7a024e7e3a4deb9f96fe660036f71edc307dcc837",
+          "metrics": {
+            "normalized_mse": 1.6251813576673158e-05,
+            "foreground_mse": 2.088723522319924e-05,
+            "edge_alignment": 0.9521750211715698,
+            "foreground_iou": 0.998399505812321
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "object_check": {
+            "passed": true,
+            "detected_count": 4,
+            "expected_count": 4,
+            "max_bbox_error_px": 0.09472717500002137
+          },
+          "local_checks": [
+            {
+              "normalized_mse": 1.73736331236971e-05,
+              "foreground_mse": 2.0887235234534215e-05,
+              "foreground_iou": 0.998399505812321,
+              "edge_alignment": 0.9521750211715698,
+              "passed": true
+            },
+            {
+              "normalized_mse": 5.6032176294195627e-05,
+              "foreground_mse": 4.609048429363966e-05,
+              "foreground_iou": 0.9979977753058954,
+              "edge_alignment": 0.9846431016921997,
+              "passed": true
+            },
+            {
+              "normalized_mse": 6.228002236226497e-05,
+              "foreground_mse": 5.165043035978887e-05,
+              "foreground_iou": 0.9980250164581962,
+              "edge_alignment": 0.9756525754928589,
+              "passed": true
+            },
+            {
+              "normalized_mse": 0.00013897107578467587,
+              "foreground_mse": 0.00011549029364323335,
+              "foreground_iou": 0.9975735517136791,
+              "edge_alignment": 0.978541374206543,
+              "passed": true
+            }
+          ],
+          "adaptive_search": {
+            "candidate_evaluations": 1,
+            "elapsed_seconds": 2.438,
+            "external_max_seconds": null,
+            "isolated": true,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          }
+        }
+      ]
+    }
+  },
+  "full_standard_suite_run": false,
+  "independent_real_family_acceptance": false,
+  "development_attempts": [
+    {
+      "seed": 731529,
+      "children": 3,
+      "rounded": true,
+      "outlines": true,
+      "variations": false,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_module_sha256": "4c142340b64194db2913e59c5911a3d42e8216f741ad97c68ddec29faf7a7da4",
+      "accepted": 6,
+      "completed": 12,
+      "label": "intermediate_before_native_rim_extent_fix",
+      "cases": [
+        {
+          "case_id": "islands_3_00",
+          "input_sha256": "757e914dead80d59c24ad372ed45c28ed877b95ab963f5cdc8a56949f0c0cd12",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "d5f29554a07f9b838a6870c445453c2f9c98eae575012830bff79d1e6876190b"
+        },
+        {
+          "case_id": "islands_3_01",
+          "input_sha256": "ae4960ce66ab0058cb3cfee15d22b9a2feef9c750ddcc46ad76a04f5639703d2",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "adaptive_search": {
+            "elapsed_seconds": 5.015,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_01_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_02",
+          "input_sha256": "d449ac2d67b88c57e0f54783a6f14654da2ca0e4b92be51038bd3850a55b34a8",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "adaptive_search": {
+            "elapsed_seconds": 5.063,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_02_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_03",
+          "input_sha256": "a8d6b4b6e082ceb93a8fb0730bc9f168bfa7de05b167771780f46758fd6f212e",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "a0e3080e8479dee0903e2da5a3b4ee8d79211781ec6f6b32f03875754b1d6dc4"
+        },
+        {
+          "case_id": "islands_3_04",
+          "input_sha256": "91cbe0d31476e5fbae2fb9eb5d2cda59e3da28002f296f91fc42d33e52d770bd",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "6114598498bb61eb2373d3a04471de4984f991dd32bf42960454c75bb0ac36e0"
+        },
+        {
+          "case_id": "islands_3_05",
+          "input_sha256": "c0cec8e0ab646f6b6ebef607ba5ff6b0cdc9b1fe2b9172440a63f35fc0933f45",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "adaptive_search": {
+            "elapsed_seconds": 5.047,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_05_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_06",
+          "input_sha256": "3d69c49387c2cc03045408ad6a718ebec7e8eb53c1584d49101c48b40acb2583",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "cab87647ad00481394f85a2ca66d4b0351cfe70496a6527abbec78ffadd05622"
+        },
+        {
+          "case_id": "islands_3_07",
+          "input_sha256": "df6e32c07c084055c7a8a4d4d17a4ec3f8fd3235db23c9b7ac7aa92b237d0149",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "14ffb1f2aef17b96733d9cd528f6af419bebb98fb385a9b43654294fd17a97aa"
+        },
+        {
+          "case_id": "islands_3_08",
+          "input_sha256": "f5c1de4c0a81763d7253cbf29a25401e294d6edb7bb917a9f0b49828980b4a53",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "adaptive_search": {
+            "elapsed_seconds": 5.031,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_08_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_09",
+          "input_sha256": "2eb09a3f241146808b33441f5e6c58f5fa93e85622805a60ca2348c73fbaa444",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "8be3f3c34dbe51be43305059b344c08429df0a22116d4c4a537931c1da8f7646"
+        },
+        {
+          "case_id": "islands_3_10",
+          "input_sha256": "cf094d7659cdca3fedbbdf6120c7aafd5775cd30f6e0e644b32714d463ebd55d",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "adaptive_search": {
+            "elapsed_seconds": 5.062,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_10_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_11",
+          "input_sha256": "7781dee80905f97005c95036a32d7319fe8c0e18f3ff150bde29d93f9e602670",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "adaptive_search": {
+            "elapsed_seconds": 5.062,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_11_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        }
+      ]
+    },
+    {
+      "seed": 731529,
+      "children": 3,
+      "rounded": true,
+      "outlines": true,
+      "variations": false,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_module_sha256": "c6acf650a84cd762db6495a42a1df741cf2d9a81392a0eb340d6b9bc8fd91b64",
+      "accepted": 12,
+      "completed": 12,
+      "label": "development_pass_before_telemetry_and_allocation_guard",
+      "cases": [
+        {
+          "case_id": "islands_3_00",
+          "input_sha256": "757e914dead80d59c24ad372ed45c28ed877b95ab963f5cdc8a56949f0c0cd12",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "d5f29554a07f9b838a6870c445453c2f9c98eae575012830bff79d1e6876190b"
+        },
+        {
+          "case_id": "islands_3_01",
+          "input_sha256": "ae4960ce66ab0058cb3cfee15d22b9a2feef9c750ddcc46ad76a04f5639703d2",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "01ae547a128b5bf3f2483164c1bbf733621d3d3496f7e9ffee91e87f01b3ac52"
+        },
+        {
+          "case_id": "islands_3_02",
+          "input_sha256": "d449ac2d67b88c57e0f54783a6f14654da2ca0e4b92be51038bd3850a55b34a8",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "66b03f8630fd1ef853d1a9e564edc8349772f7fa4f8fe92e5a8c685a5ef7914b"
+        },
+        {
+          "case_id": "islands_3_03",
+          "input_sha256": "a8d6b4b6e082ceb93a8fb0730bc9f168bfa7de05b167771780f46758fd6f212e",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "a0e3080e8479dee0903e2da5a3b4ee8d79211781ec6f6b32f03875754b1d6dc4"
+        },
+        {
+          "case_id": "islands_3_04",
+          "input_sha256": "91cbe0d31476e5fbae2fb9eb5d2cda59e3da28002f296f91fc42d33e52d770bd",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "6114598498bb61eb2373d3a04471de4984f991dd32bf42960454c75bb0ac36e0"
+        },
+        {
+          "case_id": "islands_3_05",
+          "input_sha256": "c0cec8e0ab646f6b6ebef607ba5ff6b0cdc9b1fe2b9172440a63f35fc0933f45",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "aeb95d804e85245c52d7db4fb7e6641444982fb0dd3617fe953ed254a118823a"
+        },
+        {
+          "case_id": "islands_3_06",
+          "input_sha256": "3d69c49387c2cc03045408ad6a718ebec7e8eb53c1584d49101c48b40acb2583",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "cab87647ad00481394f85a2ca66d4b0351cfe70496a6527abbec78ffadd05622"
+        },
+        {
+          "case_id": "islands_3_07",
+          "input_sha256": "df6e32c07c084055c7a8a4d4d17a4ec3f8fd3235db23c9b7ac7aa92b237d0149",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "14ffb1f2aef17b96733d9cd528f6af419bebb98fb385a9b43654294fd17a97aa"
+        },
+        {
+          "case_id": "islands_3_08",
+          "input_sha256": "f5c1de4c0a81763d7253cbf29a25401e294d6edb7bb917a9f0b49828980b4a53",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "cf75742e052125b4d54feacdaa32752dd8ed1354b8c3bb34874769f5b14f3809"
+        },
+        {
+          "case_id": "islands_3_09",
+          "input_sha256": "2eb09a3f241146808b33441f5e6c58f5fa93e85622805a60ca2348c73fbaa444",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "8be3f3c34dbe51be43305059b344c08429df0a22116d4c4a537931c1da8f7646"
+        },
+        {
+          "case_id": "islands_3_10",
+          "input_sha256": "cf094d7659cdca3fedbbdf6120c7aafd5775cd30f6e0e644b32714d463ebd55d",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "a54328c93ee372e162f03807d97368559435917a190311ce86641d97f2dbd648"
+        },
+        {
+          "case_id": "islands_3_11",
+          "input_sha256": "7781dee80905f97005c95036a32d7319fe8c0e18f3ff150bde29d93f9e602670",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "4a3a33c38cb890e6751ada752fe13ad29a60748e8706c9da9947c5390a196e5a"
+        }
+      ]
+    },
+    {
+      "seed": 731529,
+      "children": 3,
+      "rounded": true,
+      "outlines": true,
+      "variations": false,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_module_sha256": "b30445d75d5cf76ef0659acaadd14623537f1a44c53df2219a7b7c06b93b5eb2",
+      "accepted": 12,
+      "completed": 12,
+      "label": "final3",
+      "cases": [
+        {
+          "case_id": "islands_3_00",
+          "input_sha256": "757e914dead80d59c24ad372ed45c28ed877b95ab963f5cdc8a56949f0c0cd12",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "d5f29554a07f9b838a6870c445453c2f9c98eae575012830bff79d1e6876190b"
+        },
+        {
+          "case_id": "islands_3_01",
+          "input_sha256": "ae4960ce66ab0058cb3cfee15d22b9a2feef9c750ddcc46ad76a04f5639703d2",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "01ae547a128b5bf3f2483164c1bbf733621d3d3496f7e9ffee91e87f01b3ac52"
+        },
+        {
+          "case_id": "islands_3_02",
+          "input_sha256": "d449ac2d67b88c57e0f54783a6f14654da2ca0e4b92be51038bd3850a55b34a8",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "66b03f8630fd1ef853d1a9e564edc8349772f7fa4f8fe92e5a8c685a5ef7914b"
+        },
+        {
+          "case_id": "islands_3_03",
+          "input_sha256": "a8d6b4b6e082ceb93a8fb0730bc9f168bfa7de05b167771780f46758fd6f212e",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "a0e3080e8479dee0903e2da5a3b4ee8d79211781ec6f6b32f03875754b1d6dc4"
+        },
+        {
+          "case_id": "islands_3_04",
+          "input_sha256": "91cbe0d31476e5fbae2fb9eb5d2cda59e3da28002f296f91fc42d33e52d770bd",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "6114598498bb61eb2373d3a04471de4984f991dd32bf42960454c75bb0ac36e0"
+        },
+        {
+          "case_id": "islands_3_05",
+          "input_sha256": "c0cec8e0ab646f6b6ebef607ba5ff6b0cdc9b1fe2b9172440a63f35fc0933f45",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "aeb95d804e85245c52d7db4fb7e6641444982fb0dd3617fe953ed254a118823a"
+        },
+        {
+          "case_id": "islands_3_06",
+          "input_sha256": "3d69c49387c2cc03045408ad6a718ebec7e8eb53c1584d49101c48b40acb2583",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "cab87647ad00481394f85a2ca66d4b0351cfe70496a6527abbec78ffadd05622"
+        },
+        {
+          "case_id": "islands_3_07",
+          "input_sha256": "df6e32c07c084055c7a8a4d4d17a4ec3f8fd3235db23c9b7ac7aa92b237d0149",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "14ffb1f2aef17b96733d9cd528f6af419bebb98fb385a9b43654294fd17a97aa"
+        },
+        {
+          "case_id": "islands_3_08",
+          "input_sha256": "f5c1de4c0a81763d7253cbf29a25401e294d6edb7bb917a9f0b49828980b4a53",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "cf75742e052125b4d54feacdaa32752dd8ed1354b8c3bb34874769f5b14f3809"
+        },
+        {
+          "case_id": "islands_3_09",
+          "input_sha256": "2eb09a3f241146808b33441f5e6c58f5fa93e85622805a60ca2348c73fbaa444",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "8be3f3c34dbe51be43305059b344c08429df0a22116d4c4a537931c1da8f7646"
+        },
+        {
+          "case_id": "islands_3_10",
+          "input_sha256": "cf094d7659cdca3fedbbdf6120c7aafd5775cd30f6e0e644b32714d463ebd55d",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "a54328c93ee372e162f03807d97368559435917a190311ce86641d97f2dbd648"
+        },
+        {
+          "case_id": "islands_3_11",
+          "input_sha256": "7781dee80905f97005c95036a32d7319fe8c0e18f3ff150bde29d93f9e602670",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "4a3a33c38cb890e6751ada752fe13ad29a60748e8706c9da9947c5390a196e5a"
+        }
+      ]
+    },
+    {
+      "seed": 418267,
+      "children": 3,
+      "rounded": true,
+      "outlines": true,
+      "variations": false,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_module_sha256": "b30445d75d5cf76ef0659acaadd14623537f1a44c53df2219a7b7c06b93b5eb2",
+      "accepted": 10,
+      "completed": 12,
+      "label": "additional",
+      "cases": [
+        {
+          "case_id": "islands_3_00",
+          "input_sha256": "7282784758fe666588c85cc22ba53dac16bca7aea92048a21bd174a05cb1e6d5",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "d59289e957d8a9a30dcc59a06306d57bec6b4d42ea622dbcd36dbea443fecfde"
+        },
+        {
+          "case_id": "islands_3_01",
+          "input_sha256": "3f7bdf3b3e2bc90af7837a244f61a17d00236ca4bda25b931b17f6429e3eca58",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "ff6185e0ba2356fc6134c7738b548b934fcefd7da43d1aedcc15a88afa32844c"
+        },
+        {
+          "case_id": "islands_3_02",
+          "input_sha256": "ce5010b0f8262247c05965a1ae35ef1cfc4fc2f2733646c6b5bfcfbf5c154655",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "f9425d3602666ca295084db88cb8e74145ecdf2f68009f74effdb632abf0f086"
+        },
+        {
+          "case_id": "islands_3_03",
+          "input_sha256": "9f275fa14d14526a0d178cfd4b05b32b02eeed733e6430a1212e550d1122197a",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "425612c9f0a49c038513847adc2178421111067689046b1ec6313bc971dbbb57"
+        },
+        {
+          "case_id": "islands_3_04",
+          "input_sha256": "5c86840918579f5e3181f062543f74bc79453650358a446580f80fe96aed7eea",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "adaptive_search": {
+            "elapsed_seconds": 5.047,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_04_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_05",
+          "input_sha256": "07cbb3f7550306c3d750fa5670737d745da4674e6d22a2ef34c32a615ac41635",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "4e0cd398be281273577d53e4b471280c0694947e8cfc9520541bc845f713d7f7"
+        },
+        {
+          "case_id": "islands_3_06",
+          "input_sha256": "8ed550d64673141e11cc9d69383f49df48a6ef82498ee8b10bd556b15c419946",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "adaptive_search": {
+            "elapsed_seconds": 5.063,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_3_06_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        },
+        {
+          "case_id": "islands_3_07",
+          "input_sha256": "f95085b84b1bc0aa173dad359834d1306c0efc6c9504ffd529f11df60c4eb696",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "6e5acd6026bdd30435f17ca098e11aaa5ca7f3a13dca5d5b8315f00a8760e10c"
+        },
+        {
+          "case_id": "islands_3_08",
+          "input_sha256": "f2addbfe3ba3f2d29715813252dbcaf7b3c05ace6f2abca6929c7d85ea487064",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "e24a137b2044e63a6a3a8db236985024b752a613829e40e7cfa98a10e0d2fcc6"
+        },
+        {
+          "case_id": "islands_3_09",
+          "input_sha256": "2848241471d102127eb7e8e96fcf44747a84d8e4381200c35940047f92c32115",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "8ff8c144c5fcce69c36e3edfbdeb9378a59c575d09c40ae3ae2814e3a121cc67"
+        },
+        {
+          "case_id": "islands_3_10",
+          "input_sha256": "03a597fccee5d971770f0e589daf99e6c5357b84f4276ae121b4ea1e57d56558",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "bcf818291c3dc6f8afb1869bff695db7ca3c4a37a1b083596eeaef26705862d8"
+        },
+        {
+          "case_id": "islands_3_11",
+          "input_sha256": "d2fbb8ad33c5a1294b0b2ed8db3e7d2c310048a7a9bcaf24f4502d220a0de915",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "a48fb9e8479cdc150441e046ee9c738e19b6238eaa85fa62c0d08edd243aba64"
+        }
+      ]
+    },
+    {
+      "seed": 392841,
+      "children": 4,
+      "rounded": true,
+      "outlines": true,
+      "variations": false,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_module_sha256": "b30445d75d5cf76ef0659acaadd14623537f1a44c53df2219a7b7c06b93b5eb2",
+      "accepted": 11,
+      "completed": 12,
+      "label": "three_circles",
+      "cases": [
+        {
+          "case_id": "islands_4_00",
+          "input_sha256": "63c38a9764850b74bd191d66dea0ad4d6be027ab2caa7fb4bf61267c1810bc64",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "5136e684d6f54fed4039ed01beeb0707ed1a39aea2708bcd5c126e216981351d"
+        },
+        {
+          "case_id": "islands_4_01",
+          "input_sha256": "63fdbf00c07593d3d6200e899e3568291b05a987712d8a287beacb6f64ca5d48",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "a7133c768a927da5e2bd6178d33b5beba6acf7d48e417d1baf024df263a27dbe"
+        },
+        {
+          "case_id": "islands_4_02",
+          "input_sha256": "104afceb547b22f5a855cd14165c1dc3ff0cec0650b5ef91e3040d7301f72494",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "fbfa781a74d1a309eb506fbbf17b921fb0c72bbac8d02459fce078283a39a86f"
+        },
+        {
+          "case_id": "islands_4_03",
+          "input_sha256": "865ce85352667e341b0ee70f08eea4660c776cb104a4e1051711f97483d37e9a",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "684325747e1876df6ba8bdd0109687d7e43abbd6502bbbf45a2643c4815fa8c7"
+        },
+        {
+          "case_id": "islands_4_04",
+          "input_sha256": "95231cb6fb8e168dbe0615a0296140eb410a03f211750262d9818fa62e449f87",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "0bef7899ab3ded9401053b2be455ad60d6b627d8c0b95edb2aa0091cb614a99f"
+        },
+        {
+          "case_id": "islands_4_05",
+          "input_sha256": "76e3c572df9780eb65c204ca1e63047fd04d5e72cb9a123cc7da849da66402b1",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "7d1a82ee96c17efbde094a0da29d7aabab4901b5b6e590c30e5bb0d0cc08fc72"
+        },
+        {
+          "case_id": "islands_4_06",
+          "input_sha256": "2e0c7f2c4c3aea8b6d5afee51311f223a44ceb5e435254af324bb6374016882b",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "97f7ad7fbb906b27f0cbfcf65b18f6b346b89e9def404b519452e3ad94134d14"
+        },
+        {
+          "case_id": "islands_4_07",
+          "input_sha256": "465f350e8910940be9b8a1bb851b8ea7b933893355cf1c8e97143189627d8763",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "d93ce3a6200fb75298ae532b5122b959b6b2e1a1d17f9eacdf5136a695baf18d"
+        },
+        {
+          "case_id": "islands_4_08",
+          "input_sha256": "16b4f083cc5d3288ec744ab5b070841ee0f6d1127487804b10b52b72e9f78616",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "689662e04970a696da3cff3be452a1a917bccd72877b1ea3c20c9eb39577e43b"
+        },
+        {
+          "case_id": "islands_4_09",
+          "input_sha256": "f8f6d93ef6fde9eb51a2a21b4826b7fc7e1a73398b7f388c72043d5c2d56f0ce",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "042bf9e213c71490732a1bedf1b9ded03334f4f469990564824a7d501f37a0fd"
+        },
+        {
+          "case_id": "islands_4_10",
+          "input_sha256": "60a1349bff18f7cd3bc68119905e78cee9a426d4511b3cdd3ba011777a8ed0e6",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "771c526c99acc6deacf56f57ba5c6c24cc3e3f0e212b17c8db64d2ea55f8181f"
+        },
+        {
+          "case_id": "islands_4_11",
+          "input_sha256": "5e0a34c1e584b0377535568976229a0b7fd0dcaf9a791c4af13cf647987ee96c",
+          "accepted": false,
+          "failures": [
+            "missing_or_ambiguous_output"
+          ],
+          "returncode": 0,
+          "adaptive_search": {
+            "elapsed_seconds": 5.031,
+            "limit_seconds": 5.0,
+            "max_seconds": 5.0,
+            "time_extensions": 0,
+            "candidate_evaluations": 0,
+            "stop_reason": "time_limit",
+            "isolated": true,
+            "timing_trace": "islands_4_11_timing.jsonl",
+            "external_max_seconds": null,
+            "recovered_checkpoint": false,
+            "retained_output": false
+          }
+        }
+      ]
+    },
+    {
+      "seed": 962731,
+      "children": 3,
+      "rounded": true,
+      "outlines": true,
+      "variations": true,
+      "budget_seconds": 5,
+      "search_seed": 17,
+      "source_module_sha256": "b30445d75d5cf76ef0659acaadd14623537f1a44c53df2219a7b7c06b93b5eb2",
+      "accepted": 17,
+      "completed": 17,
+      "label": "plan_b",
+      "cases": [
+        {
+          "case_id": "original",
+          "input_sha256": "222ea82e7b96a13354ac66ecc7a39d3c8583d28337aae05b908364ff6327d397",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "209ed0e9434d4ed0f29acfa6b08f9e67c7da500c20f9ddc912fd873b2e87e872"
+        },
+        {
+          "case_id": "probe_01",
+          "input_sha256": "f80ef21b5b369b11cc3e5968fc320a01dc3f674f13b9722f3652f0e27645526b",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "e24f910c3767d4b341c7f07c576bbb9baffcb73a7e9851fe80115edea9432417"
+        },
+        {
+          "case_id": "probe_02",
+          "input_sha256": "5ebc6c81e733dd079bfcf3b4eb8132731edd53c69c98aa85b723288de9c28685",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "35909d70e115cdfe3df6077e72b46e9b00fbb4de9f83ec9d0d4c6baaf03c8980"
+        },
+        {
+          "case_id": "probe_03",
+          "input_sha256": "fa514d10b9f26874c887741e39f7cf09efb9858d3d66d9339216f6752c011ddf",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "8fd12a5db14644b87e24ef010f60b0c40786c92afde289b746ba5a7e580a3bea"
+        },
+        {
+          "case_id": "probe_04",
+          "input_sha256": "3a6f84f5da534d26f3ffa3394872687eeb73f743fd2b6159c6be8e245c8bdcd8",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "1840b43d03331fbec7e42d1311860e555d784f18e0e3232895264293e9c4c643"
+        },
+        {
+          "case_id": "probe_05",
+          "input_sha256": "affe70f3550450a4a7f77351b3a61c5eda6f78023d1373b55e902927ed15313d",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "c6eef3f1d6353f5b1edfa991c879ad7a577ed37c739c66ab02f6b1740cf2cb9a"
+        },
+        {
+          "case_id": "probe_06",
+          "input_sha256": "a4bc4c5a0d6b4bdeeb156078a52b5a6e50a099e239475439b77ff7dc9802b9ae",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "13b0c3b6d9c5d8b42859070907cbef19a6d89e7cf178f27d94362877d066b99a"
+        },
+        {
+          "case_id": "probe_07",
+          "input_sha256": "c9feb502f0454d3028ce2fc8807e61e75e25b87950192a53a437d3a49e9a0dfe",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "259dfb868929309d44755e06b8b208aed77d804de2250737bf488120bb6d7f76"
+        },
+        {
+          "case_id": "probe_08",
+          "input_sha256": "2bb9aa9ce7b7656642989d47755324459e90c3839ba0888eca1ccf09ec70f20c",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "48025b97d09296b3fdb1a0c064f42a47d3354c5c7c3ba746b7604e582850131a"
+        },
+        {
+          "case_id": "probe_09",
+          "input_sha256": "3ce7afca083717b43f73c5a6b55e1b9ca694521d0c92f743af5803058bb80011",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "4b7119bdc8c5b5c1da99fec80947d2625d60d7e27e8d8654a6196bde82831cb6"
+        },
+        {
+          "case_id": "probe_10",
+          "input_sha256": "13d0989fc6a109a7ab28902f36261cf7de2145e43611042603aa5d7dfb75b77b",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "8e871973c00be94c50f4a6cec63bd44b862880d98b0bf0c61c4c33a5a4fbf34c"
+        },
+        {
+          "case_id": "probe_11",
+          "input_sha256": "fec6712360bd5a1616defe1dd038b1adda51d47f0ef3b3983fef9601535ed119",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "0d0d2302774a553641abfbea4cb1cbaa05d266a40f41d50cdb069255c00e1e8c"
+        },
+        {
+          "case_id": "probe_12",
+          "input_sha256": "ff29dc86ad5cf8c8a2219f60ec5dd0345579be4356f9c631ac0788ea69adc998",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "910a7290ee6e5a17fac02bc779217000151b2e9e244d9cef73c8fe19552e61cb"
+        },
+        {
+          "case_id": "probe_13",
+          "input_sha256": "88a85d20d65cb8a9210a4ae8b225eda66a8e390835cc2370b648b78c5a806830",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "96d6e92d409d56ca019035044d4e1ef0cf8e5853f68b318bccc766a16a4e2d7c"
+        },
+        {
+          "case_id": "probe_14",
+          "input_sha256": "9163f71db9d91589f07411d96e95af49395183c7279432ec64ae0c445b8619d0",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "908b0ba65dc04a4529758f4910923614f269fa1393c3b71c3b4a054fa01c6a4d"
+        },
+        {
+          "case_id": "probe_15",
+          "input_sha256": "6dbcea429def77f482069482f9262840804a9363e24bfe037877e227d8b7757b",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "13ae70749105dd1bbe7ab7f673e933a553f5991958aa8e865ad25fa7720119b6"
+        },
+        {
+          "case_id": "probe_16",
+          "input_sha256": "6a67e534faa03707fb46e39d12db9dbc4896b889883eae4186557e528cb24080",
+          "accepted": true,
+          "failures": [],
+          "returncode": 0,
+          "output_sha256": "2f2fc98e1af2e0e906ab6ab7a024e7e3a4deb9f96fe660036f71edc307dcc837"
+        }
+      ]
+    }
+  ],
+  "known_conservative_rejection": {
+    "group": "additional_seed",
+    "case_id": "islands_3_06",
+    "reason": "Only four observed pure-fill samples at one rounded bridge side; five are required"
+  },
+  "final_module_sha256": "5e6621da5fa1ca6c41776d14b548d5daa2e4b1ca5736e1a791ca7572fb0b07de",
+  "generator_sha256": "34c5933a223e2ecd732ed461181e9aaa8761bb5c9c77058b6e1a030976a48255"
+}

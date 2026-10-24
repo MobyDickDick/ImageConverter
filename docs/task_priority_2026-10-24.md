@@ -90,11 +90,12 @@ Die 52 Checkboxen enthalten auch Arbeitsregeln und Sitzungsabläufe. Diese bleib
 
 ## Bearbeitung des höchsten Rangs
 
-Branch: `codex/search-structure-mixed-inventories-2026-10-24`.
+Branch: `codex/search-structure-island-groups-2026-10-24`.
 
-Der jüngste abgegrenzte Lieferumfang von SEARCH-STRUCTURE-01 ergänzt alternative
-Instanzzerlegungen bei wiederholten Füllfarben im bestehenden gemischten
-Struktursuchweg. Zwölf unveränderte synthetische Sechs-Kinder-CLI-Fälle mit Rundung
-und hellen Konturen verbessern sich von 0/12 auf 12/12.
-[Umsetzung und Grenzen](next_arbeitspaket_2026-10-24_repeated_fill.md).
+Der jüngste abgegrenzte Lieferumfang von SEARCH-STRUCTURE-01 kombiniert mehrere
+gleichfarbige Instanzen mit jeweils mehreren sichtbaren Inseln. Begrenzte
+Gruppierungshypothesen teilen sich das bestehende Bild-/96-Zustände-Budget mit
+der Edit-Suche. Zwölf unveränderte synthetische CLI-Fälle mit Rundung und hellen
+Konturen verbessern sich von 0/12 auf 12/12.
+[Umsetzung und Grenzen](next_arbeitspaket_2026-10-24_island_groups.md).
 Die Gesamtaufgabe bleibt bis zur breiteren Komposition und unabhängigen realen Abnahme offen.
