@@ -1,0 +1,33 @@
+overlap_00 True []
+overlap_01 True []
+overlap_02 True []
+overlap_03 True []
+overlap_04 True []
+overlap_05 True []
+overlap_06 True []
+overlap_07 True []
+overlap_08 True []
+overlap_09 True []
+overlap_10 True []
+overlap_11 True []
+rounded_outline_00 True []
+rounded_outline_01 True []
+rounded_outline_02 True []
+rounded_outline_03 True []
+rounded_outline_04 True []
+rounded_outline_05 True []
+rounded_outline_06 True []
+rounded_outline_07 True []
+rounded_outline_08 True []
+rounded_outline_09 True []
+rounded_outline_10 True []
+rounded_outline_11 True []
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File ".tmp/check_rounded_overlap.py", line 26, in <module>
+    old = json.loads((old_output/'report.json').read_text(encoding='utf-8'))
+  File "C:\Users\marku\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py", line 1134, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+  File "C:\Users\marku\AppData\Local\Python\pythoncore-3.10-64\lib\pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\evaluation\\overlap_composition_v1\\existing_outlines_cli\\report.json'

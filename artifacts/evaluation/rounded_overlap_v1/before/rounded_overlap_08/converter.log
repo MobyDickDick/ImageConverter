@@ -1,0 +1,15 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\rounded_overlap_v1\before\rounded_overlap_08\conversion\reports\.image-worker-bd2xnlr2\reports_out_dir\rounded_overlap_08_worker.log
+[INFO] Konvertiere rounded_overlap_08.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite rounded_overlap_08.png ---
+Bildbeschreibung: Ein gefüllter Kreis und zwei gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[Search] {"source": "rounded_overlap_08", "event": "image_search_finished", "satisfactory": false, "elapsed_seconds": 2.672, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 0, "stop_reason": "supported_models_exhausted"}
+[WARN] rounded_overlap_08.png: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet (upper_quartile_error_pixels_form_large_connected_component; largest_cluster_fraction=0.513399, localized_error_fraction=0.694917).
+[INFO] Konvertiert rounded_overlap_08.png | Parameter: mode=auto, label=M, variant_name=ROUNDED_OVERLAP_08 | Qualität: Optimierungsfehler/Pixel=0.000565, Mean-Delta²=4189.365723, RGB-RMSE/Kanal=37.369175, Raumscore=11023.338282, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=2.1s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\rounded_overlap_v1\before\rounded_overlap_08\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\rounded_overlap_v1\before\rounded_overlap_08\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\rounded_overlap_v1\before\rounded_overlap_08\conversion
+[WARN] Mindestens eine Datei konnte nicht erfolgreich konvertiert werden (siehe batch_failure_summary.csv).

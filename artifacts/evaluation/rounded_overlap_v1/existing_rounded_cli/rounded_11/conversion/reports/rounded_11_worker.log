@@ -1,0 +1,27 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\rounded_overlap_v1\existing_rounded_cli\rounded_11\conversion\reports\.image-worker-jcpofa2f\reports_out_dir\rounded_11_worker.log
+[INFO] Konvertiere rounded_11.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite rounded_11.png ---
+Bildbeschreibung: Ein gefüllter Kreis und 6 gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und getrennt voneinander. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 1, "completed": false, "turns": 1, "last_turn": 0, "seconds": 0.0470000000204891, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "16", "steps": 1, "completed": false, "turns": 1, "last_turn": 1, "seconds": 0.030999999959021807, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "36", "steps": 1, "completed": false, "turns": 1, "last_turn": 2, "seconds": 0.0470000000204891, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 1, "last_turn": 3, "seconds": 0.015999999945051968, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 1, "completed": false, "turns": 2, "last_turn": 4, "seconds": 0.07800000009592623, "rate": 0.0, "best": 19.06649974124957}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "16", "steps": 1, "completed": false, "turns": 2, "last_turn": 5, "seconds": 0.046999999904073775, "rate": 0.0, "best": 19.06649974124957}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "36", "steps": 1, "completed": false, "turns": 2, "last_turn": 6, "seconds": 0.07800000009592623, "rate": 0.0, "best": 19.06649974124957}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 2, "last_turn": 7, "seconds": 0.015999999945051968, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_finished", "evaluations": 1, "best_error": 0.2886984126984127}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 25, "operator": "segmentation", "outcome": "accepted"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 0, "completed": true, "turns": 3, "last_turn": 8, "seconds": 0.15600000007543713, "rate": 0.0, "best": 19.06649974124957}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 16, "operator": "segmentation", "outcome": "cancelled"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 36, "operator": "segmentation", "outcome": "cancelled"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "structure_search_finished", "outcome": "cancelled", "states": 2, "state_limit_reached": false, "candidate_limit_reached": false}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_schedule_finished", "slices": 9, "stop_reason": "caller_stopped", "models": {"25": {"turns": 3, "last_turn": 8, "seconds": 0.15600000007543713, "rate": 0.0, "best": 19.06649974124957}, "16": {"turns": 2, "last_turn": 5, "seconds": 0.046999999904073775, "rate": 0.0, "best": 19.06649974124957}, "36": {"turns": 2, "last_turn": 6, "seconds": 0.07800000009592623, "rate": 0.0, "best": 19.06649974124957}, "edits": {"turns": 2, "last_turn": 7, "seconds": 0.015999999945051968, "rate": 0.0, "best": null}}}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "candidate_satisfactory", "elapsed_seconds": 1.0, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 2}
+[Search] {"source": "rounded_11", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 1.016, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 2, "stop_reason": "satisfactory"}
+[INFO] Konvertiert rounded_11.png | Parameter: mode=auto, label=M, variant_name=ROUNDED_11 | Qualität: Optimierungsfehler/Pixel=0.000007, Mean-Delta²=12.573238, RGB-RMSE/Kanal=2.047213, Raumscore=35.660303, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.4s
