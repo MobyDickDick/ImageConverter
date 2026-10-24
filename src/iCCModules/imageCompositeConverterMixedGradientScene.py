@@ -301,7 +301,9 @@ def _paint_components(pixels, mask, *, outlined=False):
     if outlined:
         # Pale rims are paint around an instance, not additional flat objects.
         colors = colors[colors.mean(axis=1) < 180]
-    if not 2 <= len(colors) <= 8 or any(
+    # A visible rim can separate instances even when all fills are identical.
+    # The unoutlined single-paint union supplies no such instance boundary.
+    if not (1 if outlined else 2) <= len(colors) <= 8 or any(
             np.max(abs(a.astype(float)-b)) < 25
             for i, a in enumerate(colors) for b in colors[i+1:]):
         return None
@@ -828,6 +830,48 @@ def _native_fill_mask(obj, xx, yy, inset=.5):
     return mask
 
 
+def _rim_front(pixels, objects, i, j):
+    """Equal fills cannot identify depth; require a visible native rim instead.
+
+    Sample each candidate rim inside the other's fill, away from all third
+    objects. One must be observed and the other covered by flat paint.
+    """
+    a, b = objects[i]['geometry'], objects[j]['geometry']
+    low = np.maximum(0, np.floor(np.maximum(a[:2], b[:2])-2)).astype(int)
+    high = np.minimum(pixels.shape[1::-1],
+                      np.ceil(np.minimum(a[:2]+a[2:4], b[:2]+b[2:4])+2)).astype(int)
+    left, top = low
+    right, bottom = high
+    if right <= left or bottom <= top:
+        return None
+    yy, xx = np.mgrid[top:bottom, left:right].astype(float)+.5
+    data = pixels[top:bottom, left:right].astype(float)
+    foreign = np.zeros(xx.shape, dtype=bool)
+    for k, obj in enumerate(objects):
+        if k not in (i, j):
+            foreign |= _native_fill_mask(obj, xx, yy, -obj['geometry'][4]-1.)
+    support = []
+    for k, other in ((i, j), (j, i)):
+        obj = objects[k]
+        sw = obj['geometry'][4]
+        band = (_native_fill_mask(obj, xx, yy, -sw+.3)
+                & ~_native_fill_mask(obj, xx, yy, -.3)
+                & _native_fill_mask(objects[other], xx, yy, 1.) & ~foreign)
+        fill, stroke = obj['colors'][:3], obj['colors'][6:]
+        delta = stroke-fill
+        if sw < .5 or np.count_nonzero(band) < 5 or delta@delta < 100:
+            return None
+        coverage = (data-fill)@delta/(delta@delta)
+        error = np.max(abs(data-fill-coverage[..., None]*delta), axis=2)
+        supported = (coverage >= .5) & (error <= 12)
+        support.append(float(np.mean(supported[band])))
+    if support[0] >= .7 and support[1] <= .2:
+        return i
+    if support[1] >= .7 and support[0] <= .2:
+        return j
+    return None
+
+
 def observed_painter_order(pixels, objects):
     """Propose a depth DAG from flat paint inside observed intersections.
 
@@ -847,6 +891,16 @@ def observed_painter_order(pixels, objects):
     for i in range(len(children)):
         for j in range(i+1, len(children)):
             intersection = masks[i] & masks[j]
+            if not intersection.any():
+                continue
+            if np.max(abs(children[i]['colors'][:3]-children[j]['colors'][:3])) <= 12:
+                front = _rim_front(pixels, children, i, j)
+                if front is None:
+                    return None
+                back = j if front == i else i
+                successors[back].add(front)
+                incoming[front] += 1
+                continue
             a, b = (np.count_nonzero(intersection & paints[k]) for k in (i, j))
             # Subpixel boundary estimates may include a few pixels of the
             # rear fill. Use a dominant observed paint as a proposal; balanced
@@ -1098,6 +1152,8 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
     def valid(p):
         from src.iCCModules.imageCompositeConverterLayeredScene import _contains
         scene = [dict(kind=o['kind'], geometry=geometry(p, i),
+                      colors=(p[offsets[i]:offsets[i]+9] if i == 0 else
+                              np.r_[p[offsets[i]:offsets[i]+3], p[offsets[i]:offsets[i]+6]]),
                       radius=p[5*n+i] if rounded else 0.) for i, o in enumerate(objects)]
         for i, obj in enumerate(scene):
             x, y, w, h, sw = obj['geometry']
@@ -1162,6 +1218,12 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                                          & (yy+.5 >= y-sw/2-1) & (yy+.5 <= y+h+sw/2+1))
                     if not visible.any():
                         continue
+                    if np.max(abs(scene[i]['colors'][:3]-scene[j]['colors'][:3])) <= 12:
+                        # Matching flat fills are no proof of the claimed
+                        # front role. Preserve the observed rim order as the
+                        # geometry changes during registration as well.
+                        if _rim_front(pixels, scene[1:], i-1, j-1) != j-1:
+                            return False
                     front = np.clip(p[offsets[j]:offsets[j]+3], 0, 255)
                     error = np.max(abs(pixels[top:bottom, left:right].astype(float)-front), axis=2)
                     if np.percentile(error[visible], 80) > 12:

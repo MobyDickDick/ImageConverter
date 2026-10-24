@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [Gleichfarbige überlappende Instanzen mit beobachteter Konturreihenfolge (2026-10-24)](next_arbeitspaket_2026-10-24_same_paint.md)
+
 - [Gleichfarbige Instanzen mit mehreren Sichtbarkeitsinseln im P0-Struktursuchweg (2026-10-24)](next_arbeitspaket_2026-10-24_island_groups.md)
 
 - [Wiederholte Füllfarben: alternative Instanzzerlegung im P0-Struktursuchweg (2026-10-24)](next_arbeitspaket_2026-10-24_repeated_fill.md)

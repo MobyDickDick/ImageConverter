@@ -6,6 +6,10 @@ Die Reihenfolge zwischen den sechs Gruppen ist verbindlich. Innerhalb einer Grup
 
 Die 52 Checkboxen enthalten auch Arbeitsregeln und Sitzungsabläufe. Diese bleiben unten sichtbar, sind jedoch keine zusätzlichen Produktfunktionen. IDO-19/IDO-21 dienen bei Rang 3 weiterhin als Nachweisrahmen; sie haben keine eigene offene Checkbox in dieser Momentaufnahme.
 
+Nachtrag: Der Nutzerwunsch nach einem Film der Konvertierungsschritte ergänzt
+die ursprüngliche Momentaufnahme als Rang 53/P3. Er besitzt ausdrücklich
+keine höchste Priorität. SEARCH-STRUCTURE-01 bleibt Rang 1/P0.
+
 ## 1 / P0: Struktursuche und gemeinsame Komposition
 
 | Rang | Aufgabe / Arbeitsregel | Quelle |
@@ -87,8 +91,16 @@ Die 52 Checkboxen enthalten auch Arbeitsregeln und Sitzungsabläufe. Diese bleib
 | 50 | QR-2026-05-30-2: `AC0838_M.jpg` erneut konvertieren bzw. per Plan B verbessern, weil das vorhandene SVG-Paar die Review-Grenze überschreitet (`normalized_mse=0.04729276` > `0.045945679012345676`). | [Zeile 4433](open_tasks.md) |
 | 51 | QR-2026-05-30-3: `AC0881_M.jpg` erneut konvertieren oder das fehlende SVG-Artefakt rekonstruieren, weil beim Review kein passendes SVG in den geprüften Konvertierungs-/Baseline-Pfaden gefunden wurde. | [Zeile 4434](open_tasks.md) |
 | 52 | QR-2026-05-30-4: `AC0835_S.jpg` nach der nächsten AC08-/Plan-B-Rotation erneut beobachten, weil der Messwert knapp unterhalb der Review-Grenze liegt (`normalized_mse=0.04467485`). | [Zeile 4435](open_tasks.md) |
+| 53 | CONVERSION-FILM-01: optionaler Film der Konvertierungsschritte zur besseren Beurteilung des Prozesses | [Nutzerwunsch vom 24.10.2026](open_tasks.md) |
 
 ## Bearbeitung des höchsten Rangs
+
+Aktueller Teilabschluss: [Gleichfarbige überlappende Instanzen](next_arbeitspaket_2026-10-24_same_paint.md)
+werden anhand sichtbarer heller Konturen getrennt; dieselben zwölf synthetischen
+CLI-Eingaben verbessern sich von 0/12 auf 12/12. Ein zweiter Seed besteht 12/12,
+die gekoppelte Variantenprüfung 16/17. Zeichenreihenfolge, native Geometrie,
+lokale/globale Rastergates und gemeinsames Bildbudget bleiben verbindlich.
+Die allgemeine Strukturkomposition und unabhängige reale Abnahme bleiben offen.
 
 Branch: `codex/search-structure-island-groups-2026-10-24`.
 

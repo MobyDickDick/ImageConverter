@@ -19,7 +19,7 @@ def run(generator, seed, options=(), *, journal=None):
     # The caller may choose generation parameters, never override ownership of
     # the temporary paths or ask a generator to read unrelated input folders.
     allowed = {'--rounded', '--outlines', '--variations', '--rotate', '--paraphrase',
-               '--wide-nesting', '--include-edits', '--children', '--count', '--repeat-fill'}
+               '--wide-nesting', '--include-edits', '--children', '--count', '--repeat-fill', '--same-fill'}
     if any(arg.startswith('-') and arg not in allowed for arg in options):
         raise ValueError('Unsupported generation option')
     journal = journal or ROOT/'config/test_run_seeds.jsonl'
