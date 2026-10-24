@@ -22,7 +22,7 @@ def test_observed_circle_and_rectangle_rims_earn_native_acceptance(index, rounde
 
 
 @pytest.mark.parametrize('damage', ['missing_rim', 'dark_rim', 'missing_parent_rim',
-    'ellipse', 'square', 'extra', 'same_color', 'hidden_arc', 'texture', 'disjoint'])
+    'ellipse', 'square', 'extra', 'hidden_arc', 'texture', 'disjoint'])
 def test_circle_rims_cannot_excuse_missing_or_contradictory_evidence(damage):
     case = deepcopy(make_cases(731921, rounded=True, outlined=True)[0])
     root = ET.fromstring(case['svg'])
@@ -43,8 +43,6 @@ def test_circle_rims_cannot_excuse_missing_or_contradictory_evidence(damage):
         root.insert(len(root)-1, replacement)
     elif damage == 'extra':
         ET.SubElement(root, 'circle', cx='160', cy='68', r='12', fill='#765232')
-    elif damage == 'same_color':
-        rectangle.set('fill', circle.get('fill'))
     elif damage == 'hidden_arc':
         rectangle.attrib.update(x=str(cx-4), y=str(cy-radius-5),
             width=str(radius+14), height=str(2*radius+10))

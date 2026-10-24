@@ -25,7 +25,7 @@ def test_visible_outlines_compose_with_overlap_and_rounding(rounded, index):
 @pytest.mark.parametrize('rounded', [False, True])
 @pytest.mark.parametrize('damage', ['parent_no_rim', 'back_no_rim', 'front_no_rim',
     'parent_dark_rim', 'back_dark_rim', 'front_dark_rim', 'missing', 'extra',
-    'texture', 'same_color', 'hidden_side', 'outside'])
+    'texture', 'hidden_side', 'outside'])
 def test_rims_cannot_replace_inventory_visible_sides_or_light_paint(rounded, damage):
     case = deepcopy(make_cases(rounded=rounded, outlined=True)[0])
     root = ET.fromstring(case['svg'])
@@ -40,8 +40,6 @@ def test_rims_cannot_replace_inventory_visible_sides_or_light_paint(rounded, dam
     elif damage == 'texture':
         ET.SubElement(root, 'rect', x=str(float(front.get('x'))+10),
                       y=str(float(front.get('y'))+12), width='12', height='7', fill='white')
-    elif damage == 'same_color':
-        front.set('fill', back.get('fill'))
     elif damage == 'hidden_side':
         front.set('x', str(float(back.get('x'))-8))
         front.set('y', str(float(back.get('y'))+20))
@@ -51,6 +49,15 @@ def test_rims_cannot_replace_inventory_visible_sides_or_light_paint(rounded, dam
         front.set('x', '175')
     case['svg'] = ET.tostring(root, encoding='unicode')
     assert fit(case)[1] is None
+
+
+@pytest.mark.parametrize('rounded', [False, True])
+def test_equal_fill_with_observed_rims_is_now_a_complete_native_scene(rounded):
+    # Promote the former same_color rejection to full acceptance, retaining
+    # its original seed, boxes, raster gates and paint-order oracle.
+    case = make_cases(rounded=rounded, outlined=True, same_fill=True)[0]
+    image, result = fit(case)
+    assert_accepted(case, image, result)
 
 
 @pytest.mark.parametrize('claim', [' Mit Text.', ' Die Formen haben dunkle Konturen.',

@@ -6,7 +6,11 @@ focused on the actual project scope.
 
 ## Neue Ausführungsreihenfolge (2026-10-23)
 
-Alle 52 offenen Checkboxen sind in der [vollständigen Rangliste vom 24.10.2026](task_priority_2026-10-24.md) absteigend nach Wichtigkeit geordnet.
+Die 52 bisherigen offenen Checkboxen sind in der [vollständigen Rangliste vom 24.10.2026](task_priority_2026-10-24.md) absteigend nach Wichtigkeit geordnet. Der nachrangige Filmwunsch ergänzt diese Liste als Rang 53.
+
+- [x] **SEARCH-STRUCTURE-SAME-PAINT (P0, Teil von SEARCH-STRUCTURE-01):** Gleichfarbige überlappende Instanzen anhand eigener heller Konturen trennen und ihre Zeichenreihenfolge aus beobachteten Rändern prüfen. Zwölf unveränderte synthetische CLI-Eingaben verbessern sich von 0/12 auf 12/12; Zusatzseed 12/12, gekoppelte Variantenprüfung 16/17 mit konservativer Rundungsgrenze. Unkonturierte Vereinigungen und nicht beobachtbare Grenzen bleiben Ablehnungen. [Umsetzung und Grenzen](next_arbeitspaket_2026-10-24_same_paint.md). Die übergeordnete P0-Aufgabe bleibt offen.
+
+- [ ] **CONVERSION-FILM-01 (P3, nachrangiger Nutzerwunsch vom 24.10.2026):** Optional einen Film der einzelnen Konvertierungsschritte erzeugen, damit die Entwicklung des Ergebnisses und verworfene beziehungsweise angenommene Zwischenstände besser beurteilbar werden. Nach Konvertierungsqualität und den höher priorisierten Abnahmen bearbeiten; keine Verzögerung des regulären Konvertierungslaufs bei deaktivierter Aufzeichnung.
 
 **SEARCH-STRUCTURE-01, Instanz-/Inselkomposition 2026-10-24:**
 [Gemischte Instanz- und Inselgruppierungen](next_arbeitspaket_2026-10-24_island_groups.md)

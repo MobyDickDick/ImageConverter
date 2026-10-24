@@ -12,7 +12,7 @@ from tools.evaluate_layered_scene import evaluate_cases, verify_report
 from tools.run_plan_b_variations import make_original_case, make_variations, write_cases
 
 
-def make_cases(seed=713849, *, rounded=False, outlined=False, children=2):
+def make_cases(seed=713849, *, rounded=False, outlined=False, children=2, same_fill=False):
     if children not in range(2, 9):
         raise ValueError('Overlap scenes support two to eight children')
     rng = random.Random(seed)
@@ -99,11 +99,20 @@ def make_cases(seed=713849, *, rounded=False, outlined=False, children=2):
             case.update(case_id='outlined_'+case['case_id'],
                         svg=ET.tostring(root, encoding='unicode'),
                         description=case['description']+' Die Formen haben helle Konturen.')
+    if same_fill:
+        for case in cases:
+            root = ET.fromstring(case['svg'])
+            children_elements = list(root)[3:]
+            fill = children_elements[0].get('fill')
+            for element in children_elements:
+                element.set('fill', fill)
+            case.update(case_id='same_paint_'+case['case_id'],
+                        svg=ET.tostring(root, encoding='unicode'))
     return cases
 
 
-def make_variation_cases(seed=713849, *, rounded=False, outlined=False, children=2):
-    source = make_cases(seed, rounded=rounded, outlined=outlined, children=children)[3]
+def make_variation_cases(seed=713849, *, rounded=False, outlined=False, children=2, same_fill=False):
+    source = make_cases(seed, rounded=rounded, outlined=outlined, children=children, same_fill=same_fill)[3]
     cases = [make_original_case(source['svg'], source['description']),
              *make_variations(source['svg'], source['description'], seed)]
     for case in cases:
@@ -127,6 +136,7 @@ def main():
     parser.add_argument('--variations', action='store_true')
     parser.add_argument('--rounded', action='store_true')
     parser.add_argument('--outlines', action='store_true')
+    parser.add_argument('--same-fill', action='store_true')
     parser.add_argument('--children', type=int, choices=range(2, 9), default=2)
     parser.add_argument('--inputs', type=Path)
     parser.add_argument('--output', type=Path)
@@ -137,15 +147,16 @@ def main():
     os.environ.update(IMAGE_CONVERTER_ISOLATE_SVG_RENDER='0', ICC_SEARCH_SEED='17')
     if args.prepare:
         args.prepare.mkdir(parents=True, exist_ok=False)
-        cases = make_cases(args.seed, rounded=args.rounded, outlined=args.outlines, children=args.children)
+        cases = make_cases(args.seed, rounded=args.rounded, outlined=args.outlines, children=args.children,
+                           same_fill=args.same_fill)
         if args.variations:
             cases = make_variation_cases(args.seed, rounded=args.rounded,
-                                         outlined=args.outlines, children=args.children)
+                                         outlined=args.outlines, children=args.children, same_fill=args.same_fill)
         write_cases(cases, args.prepare)
         (args.prepare/'manifest.json').write_text(json.dumps(cases, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
         (args.prepare/'generation.json').write_text(json.dumps(dict(
             seed=args.seed, children=args.children, rounded=args.rounded,
-            outlines=args.outlines, variations=args.variations), indent=2)+'\n', encoding='utf-8')
+            outlines=args.outlines, variations=args.variations, same_fill=args.same_fill), indent=2)+'\n', encoding='utf-8')
         return 0
     if not args.inputs or not args.output:
         parser.error('--inputs and --output required')

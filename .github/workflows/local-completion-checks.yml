@@ -10,6 +10,26 @@ on:
   workflow_dispatch:
 
 jobs:
+  same-paint-overlap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Check equal paint, observed rim order and conservative boundaries
+        run: python -m pytest -q tests/test_same_paint_overlap.py
+      - name: Independently verify another equal-paint scene seed
+        run: python -m tools.run_seeded_scene_check evaluate_overlap_composition --seed 915463 --rounded --outlines --same-fill
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: same-paint-overlap-seeds
+          path: config/test_run_seeds.jsonl
+          retention-days: 7
+
   island-group-search:
     runs-on: ubuntu-latest
     timeout-minutes: 8

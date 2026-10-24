@@ -1,5 +1,11 @@
 # ImageConverter
 
+Der [P0-Teil für gleichfarbige überlappende Instanzen](docs/next_arbeitspaket_2026-10-24_same_paint.md)
+nutzt sichtbare helle Konturen zur Instanztrennung und Prüfung der Zeichenreihenfolge.
+Zwölf identische synthetische CLI-Eingaben verbessern sich von 0/12 auf 12/12;
+ein weiterer Seed besteht 12/12, die Variantenprüfung 16/17.
+Die allgemeine Struktursuche und unabhängige reale Abnahme bleiben offen.
+
 Der [P0-Teil für gemischte Instanz-/Inselgruppierungen](docs/next_arbeitspaket_2026-10-24_island_groups.md)
 rekonstruiert mehrere gleichfarbige Objekte, deren Füllungen durch Überdeckung
 jeweils in sichtbare Inseln zerfallen. Zwölf unveränderte synthetische CLI-Fälle
@@ -20,7 +26,7 @@ und 17/17 gekoppelte Plan-B-Fälle bestehen. Die reale Gesamtaufgabe bleibt offe
 Die [gemischte Überdeckungskomposition](docs/next_arbeitspaket_2026-10-24_mixed_overlap.md)
 verbindet native Kreis- und Rechteckkinder im gemeinsamen P0-Struktursuchweg.
 Zwölf vorab gesicherte synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12.
-Alle 52 offenen Aufgaben stehen in der [absteigenden Rangliste](docs/task_priority_2026-10-24.md).
+Die offenen Aufgaben stehen in der [absteigenden Rangliste](docs/task_priority_2026-10-24.md).
 Die unabhängige reale Gesamtaufgabe bleibt offen.
 
 Die [beobachtete Überdeckungsreihenfolge](docs/next_arbeitspaket_2026-10-24_depth_graph.md)

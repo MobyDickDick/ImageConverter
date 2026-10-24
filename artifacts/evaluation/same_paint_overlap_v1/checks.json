@@ -1,0 +1,119 @@
+{
+  "python": "3.10.11",
+  "configured_python": "3.10.20",
+  "full_standard_suite_run": false,
+  "final_module_sha256": "268220a65935adbf8f036e281968bce50044ef6e3c4ab37ef33f470632314d25",
+  "signals": [
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_overlap_composition --prepare .tmp/same-paint-inputs --seed 648217 --rounded --outlines --same-fill",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_overlap_composition --inputs .tmp/same-paint-inputs --output .tmp/same-paint-before",
+      "exit_code": 0,
+      "accepted": 0,
+      "completed": 12,
+      "scope": "Unmodified baseline runtime"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_overlap_composition --inputs .tmp/same-paint-inputs --output .tmp/same-paint-after --require-all",
+      "exit_code": 0,
+      "accepted": 12,
+      "completed": 12
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_overlap_composition --prepare .tmp/same-paint-extra-inputs --seed 915463 --rounded --outlines --same-fill",
+      "exit_code": 0,
+      "elapsed_seconds": 0.531
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_overlap_composition --inputs .tmp/same-paint-extra-inputs --output .tmp/same-paint-extra --require-all",
+      "exit_code": 0,
+      "elapsed_seconds": 28.328
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_overlap_composition --prepare .tmp/same-paint-variation-inputs --seed 372851 --rounded --outlines --same-fill --variations",
+      "exit_code": 0,
+      "elapsed_seconds": 0.953
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_overlap_composition --inputs .tmp/same-paint-variation-inputs --output .tmp/same-paint-variations --require-all",
+      "exit_code": 1,
+      "elapsed_seconds": 46.266
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_same_paint_overlap.py --basetemp .tmp/same-paint-targeted --junitxml .tmp/same-paint-targeted.xml",
+      "exit_code": 0,
+      "passed": 28,
+      "elapsed_seconds": 12.65,
+      "scope": "Before adding the final conservative shifted-rounding control; final suite covered by broad regression"
+    },
+    {
+      "command": ".venv/Scripts/python.exe tools/run_pytest_profile.py core-green --basetemp .tmp/same-paint-core --junitxml .tmp/same-paint-core.xml",
+      "exit_code": 0,
+      "passed": 42,
+      "elapsed_seconds": 1.01
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m py_compile src/iCCModules/imageCompositeConverterMixedGradientScene.py tools/evaluate_overlap_composition.py tools/run_seeded_scene_check.py tests/test_same_paint_overlap.py",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe tools/check_no_new_image_id_hardcoding.py",
+      "exit_code": 0,
+      "runtime_image_id_occurrences": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m src.imageCompositeConverter --help",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_same_paint_overlap.py tests/test_island_group_search.py tests/test_repeated_fill_overlap.py tests/test_mixed_overlap_composition.py tests/test_mixed_overlap_outlines.py tests/test_residual_scene_search.py tests/test_structure_search_operators.py tests/test_component_splits.py tests/test_rounded_composition.py tests/test_rounded_outlines.py tests/test_overlap_composition.py tests/test_rounded_overlap_composition.py tests/test_overlap_outlines.py tests/test_multilayer_overlap.py tests/test_observed_depth_order.py tests/test_conversion_search_scheduler.py tests/test_test_data_lifecycle.py --basetemp .tmp/same-paint-regression --junitxml .tmp/same-paint-regression.xml",
+      "exit_code": 1,
+      "passed": 620,
+      "failed": 2,
+      "skipped": 1,
+      "elapsed_seconds": 338.528,
+      "failed_test_names": [
+        "test_rims_cannot_replace_inventory_visible_sides_or_light_paint[same_color-False]",
+        "test_rims_cannot_replace_inventory_visible_sides_or_light_paint[same_color-True]"
+      ],
+      "skip_details": [
+        {
+          "name": "test_cleanup_refuses_a_workspace_link_to_outside_before_any_removal",
+          "reason": "Creating symlinks requires Windows developer privileges"
+        }
+      ],
+      "scope": "Production module unchanged. Only failures were obsolete same_color rejection expectations in test_overlap_outlines; promoted to full positive native/raster checks afterwards."
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_overlap_outlines.py tests/test_same_paint_overlap.py --basetemp .tmp/same-paint-final-expectations --junitxml .tmp/same-paint-final-expectations.xml",
+      "exit_code": 0,
+      "passed": 94,
+      "elapsed_seconds": 23.45,
+      "scope": "Final contour suite and all new cases, including both promoted original same_color controls. Same production module as broad regression and final CLI groups."
+    }
+  ],
+  "known_non_acceptances": {
+    "plan_b": "16/17; --require-all exits 1, missing clean rounding evidence in probe_04",
+    "mixed_controls": "4/8; same-paint circle-in-front configurations retain conservative outer-rim rejection"
+  },
+  "development_notes": [
+    "The first positive smoke test failed on baseline runtime as intended.",
+    "A first minimal color-count change still failed reverse-order cases; observed-rim ordering and registration gates were added.",
+    "The existing same_color circle-rim negative control is now a positive control with full native/region/pixel gates.",
+    "Mixed circle-in-front controls were initially assumed positive; their four rejections are retained explicitly, without tuning runtime."
+  ],
+  "final_files_sha256": {
+    "src/iCCModules/imageCompositeConverterMixedGradientScene.py": "268220a65935adbf8f036e281968bce50044ef6e3c4ab37ef33f470632314d25",
+    "tests/test_same_paint_overlap.py": "3e581246b925e0561f38e44e99a8256b42ead607abcbaddc02f452fca9c02fd4",
+    "tests/test_overlap_outlines.py": "9a183fb908757e907f9c129178cecc9bfd20b9aa9014afdd2dff08d13bab942e",
+    "tests/test_mixed_overlap_outlines.py": "9adfb418a855f64d25186bd7c0d4a0fb31a8c52dcad8a524c68618e1894cf4c0",
+    "tools/evaluate_overlap_composition.py": "5873b4d44491add461a4da081f94aca429c36cb28aaf9e64e9d0324f58e8d7fb",
+    "tools/run_seeded_scene_check.py": "813c3b3eb87f0181803b5ea61a4b6016310542729bfe076f4b727909af41d765"
+  }
+}
