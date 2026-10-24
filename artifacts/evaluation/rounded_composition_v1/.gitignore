@@ -1,16 +1,5 @@
-# Preserve inputs, actual vectors and compact independent CLI evidence.
-/after/
-**/*.png
-!/development/**/*.png
-!/additional/**/*.png
-!/plan_b/**/*.png
-**/input/*.xml
-!/development/**/*.xml
-!/additional/**/*.xml
-!/plan_b/**/*.xml
-**/conversion/reports/*
-!**/conversion/reports/conversion_result_map.json
-!**/conversion/reports/*_deadline.json
-!**/conversion/reports/*_reference_access.json
-!**/conversion/reports/*_worker.log
-**/converter.timing.jsonl
+/*
+!/.gitignore
+!/README.md
+!/checks.json
+!/summary.json

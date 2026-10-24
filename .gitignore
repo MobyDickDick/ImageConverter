@@ -45,6 +45,9 @@ htmlcov/
 # Disposable local test data and Plan-B acceptance runs (CI uploads artifacts)
 /.tmp/
 
+# Full cleanup inventories are temporary review aids; keep seed journals instead.
+/config/cleanup_*inventory.json
+
 # Generated scene-fusion evidence stays local; version only compact results.
 /artifacts/evaluation/visibility_scene_v1/*
 !/artifacts/evaluation/visibility_scene_v1/README.md

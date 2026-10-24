@@ -150,6 +150,8 @@ def check_objects(svg, expected):
             continue
         if any('behind' in obj and order[i] >= order[obj['behind']] for i, obj in enumerate(expected)):
             continue
+        if any(order[i] >= order[j] for i, obj in enumerate(expected) for j in obj.get('behind_all', [])):
+            continue
         best = min(best, max(abs(v-w) for a, obj in zip(order, expected)
                              for v, w in zip(actual[a]['bbox'], obj['bbox'])))
     return dict(passed=best <= 2.5, detected_count=len(actual), expected_count=len(expected),

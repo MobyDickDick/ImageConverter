@@ -1,5 +1,11 @@
 # ImageConverter
 
+Die [P0-Erweiterung auf drei und vier Schichten](docs/next_arbeitspaket_2026-10-24_multilayer_cleanup.md)
+verbindet weitere beobachtete Rechteckinstanzen mit Rundung und hellen Konturen
+im vorhandenen Struktursuchweg. Reproduzierbare Szenentests laufen über
+`python -m tools.run_seeded_scene_check evaluate_overlap_composition --seed 927381 --children 4 --rounded --outlines`.
+Sie bewahren den Seed und entfernen ihre Arbeitsdaten auch nach Fehlern.
+
 Die [Konturen bei Überdeckung](docs/next_arbeitspaket_2026-10-24_overlap_outlines.md)
 verbinden helle Konturen mit zwei teilweise überlappenden Rechteckkindern,
 wahlweise mit gerundeten Ecken. 24 vorab gesicherte synthetische CLI-Fälle
@@ -378,10 +384,13 @@ Das schnelle Profil ist fuer die taegliche Iteration gedacht. Vor Releases oder
 groesseren Integrationen bleiben die weiter unten beschriebenen erweiterten und
 vollstaendigen Pruefungen erforderlich.
 
-Unter Windows zeigt `cleanup.bat` ohne Argumente zunächst nur entbehrliche lokale
-Dateien an (virtuelle Umgebungen, Python-/Test-Caches, Profiler-Ausgaben und
-lokale Logs). Erst `cleanup.bat --apply` löscht diese Dateien. Projektartefakte,
-Quelldaten und die vendorten Linux-Abhängigkeiten bleiben dabei erhalten.
+Unter Windows prüft `cleanup.bat` ohne Argumente entbehrliche Testdaten.
+`cleanup.bat --apply` sichert vorhandene Seed-Metadaten nach
+`config/preserved_test_seeds.json` und entfernt temporäre Läufe, reproduzierbare
+synthetische Rohdaten, Caches und lokale Logs. Quelldaten, notwendige
+Regressionsfixtures, akzeptierte Bild-/SVG-Paare und die Python-Umgebung bleiben
+erhalten. Pytest entfernt seine automatisch angelegten Arbeitsverzeichnisse am
+Sitzungsende; ein ausdrücklich angegebenes `--basetemp` verwaltet der Aufrufer.
 
 Bereits in Git-Commits enthaltene entbehrliche Dateien können mit
 `cleanup.bat --purge-history` und dem separat zu installierenden

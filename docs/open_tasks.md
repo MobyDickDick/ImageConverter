@@ -6,6 +6,8 @@ focused on the actual project scope.
 
 ## Neue Ausführungsreihenfolge (2026-10-23)
 
+- [x] **SEARCH-STRUCTURE-MULTILAYER (P0, Teil von SEARCH-STRUCTURE-01):** Drei und vier unterscheidbare, teilweise überlappende Rechteckkinder im vorhandenen Verlaufskreis-/Struktursuchweg, mit Rundung und hellen Konturen. Geteilte sichtbare Flächen, begrenzte Suche der Zeichenreihenfolge und von späteren Schichten bereinigte Tiefenbelege sind umgesetzt. Zwölf unveränderte echte CLI-Fälle verbessern sich von 0/12 auf 12/12; zusätzliche Vier-Schichten-Fälle bestehen 12/12 und eine gekoppelte Plan-B-Aufgabe 17/17. Beliebige Schichten, andere Überdeckungsprimitive und unabhängige reale Übertragung bleiben beim übergeordneten P0-Paket offen. [Umfang, Prüfung und Testdatenbereinigung](next_arbeitspaket_2026-10-24_multilayer_cleanup.md).
+
 Maßgeblich ist jetzt die [Schwächenprüfung mit priorisierten Arbeitspaketen](weakness_review_2026-10-23.md).
 Reihenfolge: **1. Strukturelle Exploration/Komposition → 2. vollständige produktive
 Semantikabnahme → 3. unabhängige reale Übertragung/Nutzenmessung → 4. fehlende

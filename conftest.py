@@ -2,8 +2,28 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import pytest
+
+
+def pytest_configure(config: pytest.Config) -> None:
+    # pytest normally retains the last three complete temporary test trees.
+    # Own the default directory so failures also release their generated data.
+    # An explicitly supplied --basetemp remains under the caller's control.
+    if config.option.basetemp is None:
+        parent = Path(__file__).resolve().parent/'.tmp'
+        parent.mkdir(exist_ok=True)
+        work = TemporaryDirectory(prefix='pytest-', dir=parent)
+        config._imageconverter_temp = work
+        config.option.basetemp = str(Path(work.name)/'tests')
+
+
+@pytest.hookimpl(trylast=True)
+def pytest_unconfigure(config: pytest.Config) -> None:
+    work = getattr(config, '_imageconverter_temp', None)
+    if work is not None:
+        work.cleanup()
 
 
 HEAVY_TEST_MODULES = {

@@ -1,7 +1,5 @@
 """Rims, visible extents and painter order compose under one raster contract."""
 from copy import deepcopy
-import json
-from pathlib import Path
 from xml.etree import ElementTree as ET
 
 import numpy as np
@@ -12,7 +10,7 @@ from src.iCCModules.imageCompositeConverterAdaptiveSearch import ImageSearch, Se
 from tests.test_residual_scene_search import fit
 from tests.test_structure_search_operators import assert_accepted
 from tools.evaluate_layered_scene import check_objects
-from tools.evaluate_overlap_composition import make_cases
+from tools.evaluate_overlap_composition import make_cases, make_variation_cases
 from tools.run_plan_b_variations import render
 
 
@@ -80,9 +78,11 @@ def test_each_rounded_child_needs_its_own_corner_evidence(which):
 
 
 def test_shifted_thin_rims_do_not_average_away_the_exposed_corner_paint():
-    base = Path(__file__).resolve().parents[1]/'artifacts/evaluation/overlap_outlines_v1/plan_b'
-    case = json.loads((base/'manifest.json').read_text(encoding='utf-8'))[8]
-    case['svg'] = (base/'references'/f"{case['case_id']}.svg").read_text(encoding='utf-8')
+    case = make_variation_cases(927381, rounded=True, outlined=True)[8]
+    # The same frozen probe is regenerated from its seed, without a stored
+    # raster/reference tree. This digest predates the cleanup.
+    from tools.run_plan_b_variations import sha256
+    assert sha256(case['svg'].encode('utf-8')) == 'c293ab5b804ea46e2b17943919275e058f93764566bfb2cd873c4efc2f5e3f99'
     image, result = fit(case)
     assert_accepted(case, image, result)
 

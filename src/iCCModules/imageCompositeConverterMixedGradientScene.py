@@ -73,9 +73,9 @@ def scene_contract(description):
     outlined = 'die formen haben helle konturen' in text
     rounded_clause = 'mit leicht gerundeten ecken'
     rounded = rounded_clause in text
-    # Require two distinguishable flat rectangles, with every side observed.
-    # Other overlap inventories remain unsupported.
-    if overlap and counts != {'circle': 1, 'rectangle': 2}:
+    # Up to four distinguishable rectangles bound painter-order search to 24
+    # permutations within the existing 96-state agenda and shared deadline.
+    if overlap and (counts['circle'] != 1 or not 2 <= counts['rectangle'] <= 4):
         return None
     # The qualifier belongs to the quantified rectangle inventory. A free
     # clause must not attach rounding to circles or silently discard a claim.
@@ -197,7 +197,7 @@ def _rounded_coverage_edges(coverage, low, high):
             middle+float(np.sum(coverage[middle:min(len(coverage), int(right)+3)])))
 
 
-def _exposed_corner_radius(data, predicted, fill, coverage, box, *, reconstructed=None):
+def _exposed_corner_radius(data, predicted, fill, coverage, box, *, reconstructed=None, foreign_mask=None):
     """Measure round-corner deficits only where the parent paint is exposed.
 
     Occluding paint cannot supply a hidden corner's radius. At least two
@@ -211,18 +211,26 @@ def _exposed_corner_radius(data, predicted, fill, coverage, box, *, reconstructe
     if reconstructed is None:
         reconstructed = predicted+coverage[..., None]*(fill-predicted)
     foreign = np.max(abs(data-reconstructed), axis=2) > 4
+    if foreign_mask is not None:
+        foreign |= foreign_mask
     span = min(w, h)/3+2
     radii = []
     for left in (True, False):
         for top in (True, False):
-            window = ((xx >= np.floor(a)-1) & (xx <= np.ceil(X))
-                      & (yy >= np.floor(b)-1) & (yy <= np.ceil(Y))
-                      & (xx < a+span if left else xx >= X-span)
-                      & (yy < b+span if top else yy >= Y-span))
-            if np.any(foreign & window):
-                continue
-            missing = float(np.sum((ideal-coverage)[window]))
-            radii.append(np.sqrt(max(0., missing)/(1-np.pi/4)))
+            for extent in np.arange(span, 4., -1.):
+                window = ((xx >= np.floor(a)-1) & (xx <= np.ceil(X))
+                          & (yy >= np.floor(b)-1) & (yy <= np.ceil(Y))
+                          & (xx < a+extent if left else xx >= X-extent)
+                          & (yy < b+extent if top else yy >= Y-extent))
+                if np.any(foreign & window):
+                    continue
+                missing = float(np.sum((ideal-coverage)[window]))
+                radius = np.sqrt(max(0., missing)/(1-np.pi/4))
+                # Shrinking an observation window is valid only when the
+                # entire rounded corner still fits inside the exposed area.
+                if radius+2 <= extent:
+                    radii.append(radius)
+                break
     if len(radii) < 2 or min(radii) < 1.25 or max(radii)-min(radii) > 1.5:
         return None
     radius = float(np.median(radii))
@@ -245,7 +253,9 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
     if outlined:
         # Pale rims are paint around an instance, not additional flat objects.
         colors = colors[colors.mean(axis=1) < 180]
-    if len(colors) != 2 or np.max(abs(colors[0].astype(float)-colors[1])) < 25:
+    if not 2 <= len(colors) <= 4 or any(
+            np.max(abs(a.astype(float)-b)) < 25
+            for i, a in enumerate(colors) for b in colors[i+1:]):
         return None
     children = []
     for color in colors:
@@ -253,12 +263,16 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
         visible = ((np.max(abs(data-fill), axis=2) <= 3) & mask.astype(bool)).astype('uint8')
         number, labels, stats, _ = cv2.connectedComponentsWithStats(visible)
         parts = [i for i in range(1, number) if stats[i, cv2.CC_STAT_AREA] >= 12]
-        if len(parts) != 1:
+        if not parts:
             return None
-        component = labels == parts[0]
-        x, y, w, h, area = stats[parts[0]]
+        # Several later paints can split one visible fill into islands. Their
+        # union is only a proposal: all four parent-facing sides, inventory,
+        # native topology and the original raster still have to establish it.
+        component = np.isin(labels, parts)
+        x, y, w, h = cv2.boundingRect(component.astype('uint8'))
+        area = np.count_nonzero(component)
         margin = 5 if outlined else 2
-        if min(w, h) < 8 or area < .35*w*h or x <= margin or y <= margin or x+w+margin >= pixels.shape[1] or y+h+margin >= pixels.shape[0]:
+        if min(w, h) < 8 or x <= margin or y <= margin or x+w+margin >= pixels.shape[1] or y+h+margin >= pixels.shape[0]:
             return None
         delta = fill-predicted
         coverage = np.clip(np.sum((data-predicted)*delta, axis=2)
@@ -317,8 +331,18 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
         child = dict(kind='rectangle', geometry=np.array([a-sw/2, b-sw/2, X-a+sw, Y-b+sw, sw]),
                      colors=np.r_[fill, fill, stroke])
         if rounded:
+            other_paint = np.zeros(mask.shape, dtype='uint8')
+            for other in colors:
+                if not np.array_equal(color, other):
+                    observed = (np.max(abs(data-other), axis=2) <= 3).astype('uint8')
+                    ox, oy, ow, oh = cv2.boundingRect(observed)
+                    # Identical bright rims do not reveal which instance
+                    # painted them. Exclude the whole observed foreign box,
+                    # including its rim, from this corner measurement.
+                    other_paint[max(0, oy-3):oy+oh+3, max(0, ox-3):ox+ow+3] = 1
             radius = _exposed_corner_radius(data, predicted, fill, coverage, [a, b, X-a, Y-b],
-                                            reconstructed=reconstructed)
+                                            reconstructed=reconstructed,
+                                            foreign_mask=cv2.dilate(other_paint, np.ones((5, 5), 'uint8')).astype(bool))
             if radius is None:
                 return None
             child['radius'] = radius+sw/2
@@ -772,14 +796,38 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
             # Global/local area metrics alone can tolerate a wrong painter
             # order at a small intersection. Bind the front role to its own
             # observed flat paint inside that intersection as well.
-            a, b = scene[1]['geometry'], scene[2]['geometry']
-            left, top = np.ceil(np.maximum(a[:2], b[:2])+1).astype(int)
-            right, bottom = np.floor(np.minimum(a[:2]+a[2:4], b[:2]+b[2:4])-1).astype(int)
-            if right-left < 2 or bottom-top < 2:
-                return False
-            front = np.clip(p[offsets[2]:offsets[2]+3], 0, 255)
-            if np.percentile(np.max(abs(pixels[top:bottom, left:right].astype(float)-front), axis=2), 80) > 12:
-                return False
+            neighbours = {i: set() for i in range(1, n)}
+            for i in range(1, n):
+                for j in range(i+1, n):
+                    a, b = scene[i]['geometry'], scene[j]['geometry']
+                    left, top = np.ceil(np.maximum(a[:2], b[:2])+1).astype(int)
+                    right, bottom = np.floor(np.minimum(a[:2]+a[2:4], b[:2]+b[2:4])-1).astype(int)
+                    if right-left < 2 or bottom-top < 2:
+                        continue
+                    neighbours[i].add(j)
+                    neighbours[j].add(i)
+                    visible = np.ones((bottom-top, right-left), dtype=bool)
+                    # A later layer owns its pixels, including a rim/rounded
+                    # boundary. It cannot serve as evidence for this pair.
+                    for later in scene[j+1:]:
+                        x, y, w, h, sw = later['geometry']
+                        yy, xx = np.mgrid[top:bottom, left:right]
+                        visible &= ~((xx+.5 >= x-sw/2-1) & (xx+.5 <= x+w+sw/2+1)
+                                     & (yy+.5 >= y-sw/2-1) & (yy+.5 <= y+h+sw/2+1))
+                    if not visible.any():
+                        continue
+                    front = np.clip(p[offsets[j]:offsets[j]+3], 0, 255)
+                    error = np.max(abs(pixels[top:bottom, left:right].astype(float)-front), axis=2)
+                    if np.percentile(error[visible], 80) > 12:
+                        return False
+            reached, pending = set(), [1]
+            while pending:
+                node = pending.pop()
+                if node not in reached:
+                    reached.add(node)
+                    pending.extend(neighbours[node]-reached)
+            if len(reached) != n-1:
+                return False  # Every claimed overlapping child participates.
         # Every other pair must be disjoint, in any arrangement. An explicitly
         # named row/column imposes its stronger interval-separation rule.
         for i, a in enumerate([] if contract.get('overlap') else scene[1:]):

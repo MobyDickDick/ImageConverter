@@ -1,0 +1,218 @@
+[
+  {
+    "cohort": "artifacts/evaluation/overlap_outlines_v1/additional",
+    "generator": "evaluate_overlap_composition",
+    "options": {
+      "rounded": false,
+      "outlined": true
+    },
+    "cases": 12,
+    "generation_seed": 927381,
+    "source_index": 0
+  },
+  {
+    "cohort": "artifacts/evaluation/overlap_outlines_v1/inputs",
+    "generator": "evaluate_overlap_composition",
+    "options": {
+      "rounded": false,
+      "outlined": true
+    },
+    "cases": 12,
+    "generation_seed": 713849,
+    "source_index": 0
+  },
+  {
+    "cohort": "artifacts/evaluation/overlap_outlines_v1/plan_b",
+    "generator": "evaluate_overlap_composition",
+    "options": {
+      "rounded": true,
+      "outlined": true
+    },
+    "cases": 17,
+    "generation_seed": 927381,
+    "source_index": 3,
+    "variation_seed": 927381
+  },
+  {
+    "cohort": "artifacts/evaluation/overlap_outlines_v1/rounded_additional",
+    "generator": "evaluate_overlap_composition",
+    "options": {
+      "rounded": true,
+      "outlined": true
+    },
+    "cases": 12,
+    "generation_seed": 927381,
+    "source_index": 0
+  },
+  {
+    "cohort": "artifacts/evaluation/overlap_outlines_v1/rounded_inputs",
+    "generator": "evaluate_overlap_composition",
+    "options": {
+      "rounded": true,
+      "outlined": true
+    },
+    "cases": 12,
+    "generation_seed": 713849,
+    "source_index": 0
+  },
+  {
+    "cohort": "artifacts/evaluation/rounded_overlap_v1/additional",
+    "generator": "evaluate_overlap_composition",
+    "options": {
+      "rounded": true,
+      "outlined": false
+    },
+    "cases": 12,
+    "generation_seed": 381217,
+    "source_index": 0
+  },
+  {
+    "cohort": "artifacts/evaluation/rounded_overlap_v1/inputs",
+    "generator": "evaluate_overlap_composition",
+    "options": {
+      "rounded": true,
+      "outlined": false
+    },
+    "cases": 12,
+    "generation_seed": 713849,
+    "source_index": 0
+  },
+  {
+    "cohort": "artifacts/evaluation/rounded_overlap_v1/plan_b",
+    "generator": "evaluate_overlap_composition",
+    "options": {
+      "rounded": true,
+      "outlined": false
+    },
+    "cases": 17,
+    "generation_seed": 713849,
+    "source_index": 3,
+    "variation_seed": 713849
+  },
+  {
+    "cohort": "artifacts/evaluation/overlap_composition_v1/additional",
+    "generator": "evaluate_overlap_composition",
+    "options": {
+      "rounded": false,
+      "outlined": false
+    },
+    "cases": 12,
+    "generation_seed": 381217,
+    "source_index": 0
+  },
+  {
+    "cohort": "artifacts/evaluation/overlap_composition_v1/inputs",
+    "generator": "evaluate_overlap_composition",
+    "options": {
+      "rounded": false,
+      "outlined": false
+    },
+    "cases": 12,
+    "generation_seed": 713849,
+    "source_index": 0,
+    "legacy_svg_syntax": "implicit gradient origin"
+  },
+  {
+    "cohort": "artifacts/evaluation/overlap_composition_v1/plan_b",
+    "generator": "evaluate_overlap_composition",
+    "options": {
+      "rounded": false,
+      "outlined": false
+    },
+    "cases": 17,
+    "generation_seed": 713849,
+    "source_index": 3,
+    "variation_seed": 713849
+  },
+  {
+    "cohort": "artifacts/evaluation/rounded_outlines_v1/additional",
+    "generator": "evaluate_rounded_composition",
+    "options": {
+      "outlined": true
+    },
+    "cases": 12,
+    "generation_seed": null,
+    "source_index": 0,
+    "historical_seed_status": "Not recorded in historical evidence; exact historical replay unavailable"
+  },
+  {
+    "cohort": "artifacts/evaluation/rounded_outlines_v1/inputs",
+    "generator": "evaluate_rounded_composition",
+    "options": {
+      "outlined": true
+    },
+    "cases": 12,
+    "generation_seed": 624731,
+    "source_index": 0
+  },
+  {
+    "cohort": "artifacts/evaluation/rounded_outlines_v1/plan_b",
+    "generator": "evaluate_rounded_composition",
+    "options": {
+      "outlined": true
+    },
+    "cases": 17,
+    "generation_seed": 624731,
+    "source_index": 3,
+    "variation_seed": 624731
+  },
+  {
+    "cohort": "artifacts/evaluation/rounded_composition_v1/additional",
+    "generator": "evaluate_rounded_composition",
+    "options": {
+      "outlined": false
+    },
+    "cases": 12,
+    "generation_seed": null,
+    "source_index": 0,
+    "historical_seed_status": "Not recorded in historical evidence; exact historical replay unavailable"
+  },
+  {
+    "cohort": "artifacts/evaluation/rounded_composition_v1/development",
+    "generator": "evaluate_rounded_composition",
+    "options": {
+      "outlined": false
+    },
+    "cases": 12,
+    "generation_seed": 624731,
+    "source_index": 0
+  },
+  {
+    "cohort": "artifacts/evaluation/rounded_composition_v1/plan_b",
+    "generator": "evaluate_rounded_composition",
+    "options": {
+      "outlined": false
+    },
+    "cases": 17,
+    "generation_seed": 624731,
+    "source_index": 3,
+    "variation_seed": 624731
+  },
+  {
+    "cohort": "artifacts/evaluation/component_splits_v1/input",
+    "generator": "evaluate_component_splits",
+    "options": {
+      "include_edits": true
+    },
+    "cases": 20,
+    "generation_seed": 731902,
+    "source_index": 0
+  },
+  {
+    "cohort": "artifacts/evaluation/component_splits_v1/new-input",
+    "generator": "evaluate_component_splits",
+    "options": {},
+    "cases": 12,
+    "generation_seed": 918373,
+    "source_index": 0
+  },
+  {
+    "cohort": "artifacts/evaluation/component_splits_v1/plan-b-input",
+    "generator": "evaluate_component_splits",
+    "options": {},
+    "cases": 17,
+    "generation_seed": 731902,
+    "source_index": 0,
+    "variation_seed": 731902
+  }
+]

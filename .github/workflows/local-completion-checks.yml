@@ -19,40 +19,21 @@ jobs:
         with:
           python-version: '3.10'
       - run: python -m pip install -r requirements-dev.txt
-      - name: Check observed sides, painter order, negative controls and deadline
-        run: python -m pytest -q tests/test_overlap_composition.py tests/test_rounded_overlap_composition.py tests/test_overlap_outlines.py
-      - name: Generate independent synthetic overlap scenes
-        run: python -m tools.evaluate_overlap_composition --prepare .tmp/overlap-inputs --seed 391827
-      - name: Exercise and independently verify the supervised CLI
+      - name: Check observed sides, layer order, negative controls and cleanup
+        run: python -m pytest -q tests/test_multilayer_overlap.py tests/test_overlap_composition.py tests/test_rounded_overlap_composition.py tests/test_overlap_outlines.py tests/test_test_data_lifecycle.py
+      - name: Independently verify seeded CLI scenes and release temporary data
         run: |
-          python -m tools.evaluate_overlap_composition --inputs .tmp/overlap-inputs --output .tmp/overlap-cli --require-all
-          python -m tools.evaluate_overlap_composition --inputs .tmp/overlap-inputs --output .tmp/overlap-cli --verify-only --require-all
-      - name: Compose rounding with overlap through the supervised CLI
-        run: |
-          python -m tools.evaluate_overlap_composition --prepare .tmp/rounded-overlap-inputs --rounded --seed 391827
-          python -m tools.evaluate_overlap_composition --inputs .tmp/rounded-overlap-inputs --output .tmp/rounded-overlap-cli --require-all
-          python -m tools.evaluate_overlap_composition --inputs .tmp/rounded-overlap-inputs --output .tmp/rounded-overlap-cli --verify-only --require-all
-      - name: Compose light outlines with square and rounded overlapping children
-        run: |
-          python -m tools.evaluate_overlap_composition --prepare .tmp/outlined-overlap-inputs --outlines --seed 391827
-          python -m tools.evaluate_overlap_composition --inputs .tmp/outlined-overlap-inputs --output .tmp/outlined-overlap-cli --require-all
-          python -m tools.evaluate_overlap_composition --inputs .tmp/outlined-overlap-inputs --output .tmp/outlined-overlap-cli --verify-only --require-all
-          python -m tools.evaluate_overlap_composition --prepare .tmp/outlined-rounded-overlap-inputs --outlines --rounded --seed 391827
-          python -m tools.evaluate_overlap_composition --inputs .tmp/outlined-rounded-overlap-inputs --output .tmp/outlined-rounded-overlap-cli --require-all
-          python -m tools.evaluate_overlap_composition --inputs .tmp/outlined-rounded-overlap-inputs --output .tmp/outlined-rounded-overlap-cli --verify-only --require-all
+          python -m tools.run_seeded_scene_check evaluate_overlap_composition --seed 391827
+          python -m tools.run_seeded_scene_check evaluate_overlap_composition --seed 391827 --rounded
+          python -m tools.run_seeded_scene_check evaluate_overlap_composition --seed 391827 --outlines
+          python -m tools.run_seeded_scene_check evaluate_overlap_composition --seed 391827 --outlines --rounded
+          python -m tools.run_seeded_scene_check evaluate_overlap_composition --seed 391827 --children 3 --rounded --outlines
+          python -m tools.run_seeded_scene_check evaluate_overlap_composition --seed 391827 --children 4 --rounded --outlines
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: overlap-composition-evidence
-          path: |
-            .tmp/overlap-inputs
-            .tmp/overlap-cli
-            .tmp/rounded-overlap-inputs
-            .tmp/rounded-overlap-cli
-            .tmp/outlined-overlap-inputs
-            .tmp/outlined-overlap-cli
-            .tmp/outlined-rounded-overlap-inputs
-            .tmp/outlined-rounded-overlap-cli
+          name: overlap-composition-seeds
+          path: config/test_run_seeds.jsonl
           retention-days: 7
 
   rounded-outlines:

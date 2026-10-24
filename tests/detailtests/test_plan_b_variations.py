@@ -150,7 +150,7 @@ def test_failed_original_retries_another_svg_and_runs_its_full_task(tmp_path, mo
     assert len({a["source_svg"] for a in report["attempts"]}) == 2
     for index, attempt in enumerate(report["attempts"]):
         directory = (output / attempt["report"]).parent
-        assert {p.name for p in directory.iterdir()} == {"report.json", "source.png"}
+        assert {p.name for p in directory.iterdir()} == {"report.json"}
         detail = json.loads((output / attempt["report"]).read_text(encoding="utf-8"))
         assert detail["selection"]["source_svg"] == attempt["source_svg"]
         assert detail["source_description"] == Path(attempt["source_svg"]).with_suffix(".txt").read_text(encoding="utf-8")
@@ -218,7 +218,7 @@ def test_search_stops_on_interruption_or_preparation_error_and_preserves_reports
     assert len(report["attempts"]) == 2 and not report["summary"]["satisfactory"]
     for attempt in report["attempts"]:
         directory = (output / attempt["report"]).parent
-        assert {p.name for p in directory.iterdir()} == {"report.json", "source.png"}
+        assert {p.name for p in directory.iterdir()} == {"report.json"}
         assert json.loads((output / attempt["report"]).read_text(encoding="utf-8"))["status"] == attempt["status"]
     before = (output / "report.json").read_bytes()
     with pytest.raises(FileExistsError):
@@ -344,8 +344,11 @@ def test_all_sixteen_run_even_after_failure_and_overall_exit_is_red(tmp_path, mo
     assert report["original_satisfactory"] and report["variations_started"]
     assert report["status"] == "completed"
     assert json.loads((output / "report.json").read_text(encoding="utf-8")) == report
-    assert {p.name for p in output.iterdir()} == {"report.json", "source.png"}
-    assert battery.sha256((output / "source.png").read_bytes()) == report["source_image_sha256"]
+    assert {p.name for p in output.iterdir()} == {"report.json"}
+    assert len(report["source_image_sha256"]) == 64
+    assert report["artifact_retention"] == "seed_and_summary"
+    assert "source_image" not in report
+    assert all("svg" not in case for case in report["cases"])
     assert report['source_description'] == DESCRIPTION
     assert 'reference_svg' not in report['cases'][0]
     monkeypatch.setattr(battery, "run_battery", lambda *args, **kwargs: report)
@@ -380,7 +383,7 @@ def test_original_failure_prevents_generation_and_execution_of_variations(tmp_pa
     assert report["summary"] == {"required": 17, "completed": 1, "passed": 0, "failed": 1, "satisfactory": False}
     assert report["cases"][0]["failures"] == [failure]
     assert json.loads((output / "report.json").read_text(encoding="utf-8")) == report
-    assert {p.name for p in output.iterdir()} == {"report.json", "source.png"}
+    assert {p.name for p in output.iterdir()} == {"report.json"}
     monkeypatch.setattr(battery, "run_battery", lambda *args, **kwargs: report)
     description = tmp_path / "description.txt"
     description.write_text(DESCRIPTION, encoding="utf-8")
@@ -418,7 +421,7 @@ def test_interruption_removes_only_the_fresh_run_work_files(tmp_path, monkeypatc
     output = tmp_path / 'run'
     with pytest.raises(KeyboardInterrupt):
         battery.run_battery(source, DESCRIPTION, output, seed=12)
-    assert {p.name for p in output.iterdir()} == {'report.json', 'source.png'}
+    assert {p.name for p in output.iterdir()} == {'report.json'}
     report = json.loads((output / 'report.json').read_text(encoding='utf-8'))
     assert report['status'] == 'interrupted'
     assert report['summary']['completed'] == (0 if interrupt_case == 'original' else 2)
@@ -480,7 +483,7 @@ def test_variant_preparation_error_retains_original_result_and_cleans_work_files
     report = json.loads((output / 'report.json').read_text(encoding='utf-8'))
     assert report['status'] == 'preparation_error' and report['original_satisfactory']
     assert report['summary']['completed'] == 1 and not report['summary']['satisfactory']
-    assert {p.name for p in output.iterdir()} == {'report.json', 'source.png'}
+    assert {p.name for p in output.iterdir()} == {'report.json'}
 
 
 def test_worker_blocks_external_svg_reads_even_when_catalog_references_are_in_description(tmp_path):

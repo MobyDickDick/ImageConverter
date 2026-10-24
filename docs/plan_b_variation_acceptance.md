@@ -109,8 +109,8 @@ Erfolgsmarkierung ersetzt die Abnahme nicht.
 Jeder Start legt einen neuen Lauf unter `artifacts/evaluation/plan_b_variations`
 an. Im Poolmodus enthält es einen **Gesamtbericht `report.json`** und pro
 versuchtem SVG ein Verzeichnis `attempt_01`, `attempt_02` usw., jeweils mit
-**`report.json` und dem Ursprungsbild `source.png`**. Bei einer expliziten
-Wiederholung mit `--svg` stehen diese beiden Dateien direkt im Laufverzeichnis.
+**`report.json` mit Seed und kompakten Messwerten**. Bei einer expliziten
+Wiederholung mit `--svg` steht der Bericht direkt im Laufverzeichnis.
 
 Der Gesamtbericht (Schema `plan_b_search_v1`) verlinkt unter `attempts` jeden
 Versuch mit Quelle, Seed, Status und Abnahmeergebnis. Seine `summary` beschreibt
@@ -120,9 +120,9 @@ Versuche (`retry_limit_reached`) und einen vollständig versuchten kleineren Poo
 (`pool_exhausted`). Abbruch und Vorbereitungsfehler beenden die Suche und werden
 ebenfalls protokolliert.
 
-Das PNG ist die unveränderte, verlustfrei rasterisierte Quelle, die der
-Original-Vorprüfung übergeben wurde. Sein SHA-256 steht in `source_image_sha256`;
-`source_image` verweist auf die Datei relativ zum Bericht.
+Der Hash der unveränderten, verlustfrei rasterisierten Prüfquelle steht in
+`source_image_sha256`. Das PNG wird standardmäßig anschließend entfernt;
+nur `--keep-debug-artifacts` behält es als `source.png`.
 Jeder Einzelbericht (Schema `plan_b_variations_v2`) enthält Quelle,
 Beschreibung, Seed, Quell-Hashes, Varianten, feste Grenzen, Einzelmetriken und
 Fehlergründe sowie den Status der Vorprüfung. `cases` beginnt mit `original`,
@@ -134,9 +134,9 @@ Der Bericht wird vor der ersten Konvertierung und nach jedem Fall fortgeschriebe
 Referenzen, Variantenraster,
 Konverterausgaben und Logs sind Arbeitsdateien und werden anschließend auch bei
 Fehlschlägen oder einem abgefangenen Abbruch entfernt. Diese Laufverzeichnisse
-sind in `.gitignore` ausgeschlossen; CI lädt den Ergebnisbericht und das
-Ursprungsbild hoch. Bei einem abgefangenen Abbruch steht `status: interrupted`
-im Bericht; das Ursprungsbild bleibt ebenfalls erhalten.
+sind in `.gitignore` ausgeschlossen; CI lädt den Ergebnisbericht hoch.
+Bei einem abgefangenen Abbruch steht `status: interrupted` im Bericht.
+Auch das Ursprungsbild und eingebettete Referenz-SVGs werden standardmäßig entfernt.
 
 Nur bei ausdrücklichem Diagnosebedarf behält `--keep-debug-artifacts` pro Versuch außerdem
 `manifest.json`, `source.svg`, `source_description.txt`, sämtliche Eingaben,
@@ -190,13 +190,15 @@ die Rekonstruktionsalgorithmen liegen unter `src/iCCModules`.
 Der echte CLI-Lauf mit `AR0030.svg`, Originalbeschreibung und dem eingefrorenen
 Seed `2870690750133000144` besteht **17/17**: zuerst das unveränderte Original,
 danach dieselben 16 Varianten wie zuvor. Es gab keine verbotenen SVG-Zugriffe.
-`source.png` bleibt beim Bericht erhalten; sein Hash entspricht exakt dem
-Rastereingang des Originalfalls.
+Beim damaligen Lauf blieb `source.png` erhalten; sein Hash entsprach dem
+Rastereingang des Originalfalls. Seit der Bereinigung vom 24. Oktober werden
+solche Raster standardmäßig nach der Prüfung gelöscht.
 
 Eine zusätzliche Probe mit einem grünen Kreis und einem Suchbudget von einer
 Iteration verfehlt die Vordergrundfehler- und Konturgrenze bereits beim Original.
 Der Runner beendet diesen Lauf nach einem Fall mit `original_not_convertible`,
-ohne die 16 Varianten zu starten, und behält Bericht und Ursprungsbild.
+ohne die 16 Varianten zu starten. Heute bleibt davon standardmäßig nur der
+Bericht mit Seed und Messwerten erhalten.
 Die 26 gezielten Tests sichern beide Abläufe, Prozessfehler, Timeout,
 Unterbrechungen, Artefaktaufbewahrung und den echten Original-Unterprozess ab.
 
