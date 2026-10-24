@@ -1,5 +1,11 @@
 # ImageConverter
 
+Die [gemischte Überdeckungskomposition](docs/next_arbeitspaket_2026-10-24_mixed_overlap.md)
+verbindet native Kreis- und Rechteckkinder im gemeinsamen P0-Struktursuchweg.
+Zwölf vorab gesicherte synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12.
+Alle 52 offenen Aufgaben stehen in der [absteigenden Rangliste](docs/task_priority_2026-10-24.md).
+Die unabhängige reale Gesamtaufgabe bleibt offen.
+
 Die [beobachtete Überdeckungsreihenfolge](docs/next_arbeitspaket_2026-10-24_depth_graph.md)
 erweitert den vorhandenen P0-Strukturweg auf fünf bis acht unterscheidbare
 Rechteckkinder. Zwölf unveränderte synthetische Sechs-Kinder-Fälle verbessern
