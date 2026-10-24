@@ -75,7 +75,7 @@ def scene_contract(description):
     rounded = rounded_clause in text
     # Initially require two distinguishable flat rectangles, with every side
     # observed. Other overlap inventories and paint remain unsupported.
-    if overlap and (counts != {'circle': 1, 'rectangle': 2} or outlined or rounded):
+    if overlap and (counts != {'circle': 1, 'rectangle': 2} or outlined):
         return None
     # The qualifier belongs to the quantified rectangle inventory. A free
     # clause must not attach rounding to circles or silently discard a claim.
@@ -197,7 +197,38 @@ def _rounded_coverage_edges(coverage, low, high):
             middle+float(np.sum(coverage[middle:min(len(coverage), int(right)+3)])))
 
 
-def _overlap_instances(pixels, predicted, mask):
+def _exposed_corner_radius(data, predicted, fill, coverage, box):
+    """Measure round-corner deficits only where the parent paint is exposed.
+
+    Occluding paint cannot supply a hidden corner's radius. At least two
+    independently visible corners must support the same native rounding.
+    """
+    a, b, w, h = box
+    X, Y = a+w, b+h
+    yy, xx = np.indices(coverage.shape)
+    ideal = (np.clip(np.minimum(xx+1, X)-np.maximum(xx, a), 0, 1)
+             * np.clip(np.minimum(yy+1, Y)-np.maximum(yy, b), 0, 1))
+    reconstructed = predicted+coverage[..., None]*(fill-predicted)
+    foreign = np.max(abs(data-reconstructed), axis=2) > 4
+    span = min(w, h)/3+2
+    radii = []
+    for left in (True, False):
+        for top in (True, False):
+            window = ((xx >= np.floor(a)-1) & (xx <= np.ceil(X))
+                      & (yy >= np.floor(b)-1) & (yy <= np.ceil(Y))
+                      & (xx < a+span if left else xx >= X-span)
+                      & (yy < b+span if top else yy >= Y-span))
+            if np.any(foreign & window):
+                continue
+            missing = float(np.sum((ideal-coverage)[window]))
+            radii.append(np.sqrt(max(0., missing)/(1-np.pi/4)))
+    if len(radii) < 2 or min(radii) < 1.25 or max(radii)-min(radii) > 1.5:
+        return None
+    radius = float(np.median(radii))
+    return radius if radius <= min(w, h)/3 else None
+
+
+def _overlap_instances(pixels, predicted, mask, *, rounded=False):
     """Complete visible, differently colored rectangles, never hidden extents.
 
     Color separates touching residuals. Each of four sides needs a straight
@@ -240,8 +271,14 @@ def _overlap_instances(pixels, predicted, mask):
         b = y-float(np.median(coverage[y-1, top]))
         X = x+w+float(np.median(coverage[right, x+w]))
         Y = y+h+float(np.median(coverage[y+h, bottom]))
-        children.append(dict(kind='rectangle', geometry=np.array([a, b, X-a, Y-b, 0.]),
-                             colors=np.r_[fill, fill, fill]))
+        child = dict(kind='rectangle', geometry=np.array([a, b, X-a, Y-b, 0.]),
+                     colors=np.r_[fill, fill, fill])
+        if rounded:
+            radius = _exposed_corner_radius(data, predicted, fill, coverage, [a, b, X-a, Y-b])
+            if radius is None:
+                return None
+            child['radius'] = radius
+        children.append(child)
     return children
 
 
@@ -279,7 +316,7 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
     components = []
     children = []
     if contract.get('overlap'):
-        children = _overlap_instances(pixels, predicted, mask)
+        children = _overlap_instances(pixels, predicted, mask, rounded=contract.get('rounded', False))
         if children is None:
             return None
     for index in (() if contract.get('overlap') else range(1, number)):

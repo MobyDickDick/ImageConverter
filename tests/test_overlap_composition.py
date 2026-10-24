@@ -120,13 +120,11 @@ def test_ordered_edits_preserve_observed_instances():
         np.testing.assert_array_equal(a['colors'], b['colors'])
 
 
-@pytest.mark.parametrize('change', ['count', 'rounded', 'circles'])
+@pytest.mark.parametrize('change', ['count', 'circles'])
 def test_unimplemented_overlap_combinations_remain_explicitly_unsupported(change):
     description = make_cases()[0]['description']
     if change == 'count':
         description = description.replace('zwei gefüllte', 'drei gefüllte')
-    elif change == 'rounded':
-        description = description.replace('Rechtecke.', 'Rechtecke mit leicht gerundeten Ecken.')
     else:
         description = description.replace('Ein gefüllter Kreis', 'Zwei gefüllte Kreise').replace(
             'Der Kreis', 'Der äussere Kreis').replace(

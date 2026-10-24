@@ -11,7 +11,7 @@ from tools.evaluate_layered_scene import evaluate_cases, verify_report
 from tools.run_plan_b_variations import make_original_case, make_variations, write_cases
 
 
-def make_cases(seed=713849):
+def make_cases(seed=713849, *, rounded=False):
     rng = random.Random(seed)
     cases = []
     for index in range(12):
@@ -34,8 +34,11 @@ def make_cases(seed=713849):
         shapes = ['<circle cx="105" cy="100" r="85" fill="url(#fixture)"/>']
         for i, (box, fill) in enumerate(zip(boxes, palette)):
             a, b, c, d = box
-            shapes.append(f'<rect x="{a}" y="{b}" width="{c}" height="{d}" fill="{fill}"/>')
+            corner = rng.uniform(4., 9.) if rounded else 0.
+            radius = f' rx="{corner}"' if rounded else ''
+            shapes.append(f'<rect x="{a}" y="{b}" width="{c}" height="{d}"{radius} fill="{fill}"/>')
             objects.append(dict(kind='rectangle', bbox=box, parent=0, stroke_width=0,
+                                **({'corner_radius': corner} if rounded else {}),
                                 **({'behind': 2} if i == 0 else {})))
         end = 'x2="0%" y2="100%"' if axis else 'x2="100%" y2="0%"'
         defs = f'<defs><linearGradient id="fixture" x1="0%" y1="0%" {end}><stop offset="0" stop-color="{first}"/><stop offset="1" stop-color="{last}"/></linearGradient></defs>'
@@ -44,7 +47,9 @@ def make_cases(seed=713849):
                        f'Der Kreis hat einen {"vertikalen" if axis else "horizontalen"} Farbverlauf. '
                        'Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. '
                        'Keine Beschriftung.')
-        cases.append(dict(case_id=f'overlap_{index:02d}', width=width, height=height,
+        if rounded:
+            description = description.replace('Rechtecke.', 'Rechtecke mit leicht gerundeten Ecken.')
+        cases.append(dict(case_id=f'{"rounded_" if rounded else ""}overlap_{index:02d}', width=width, height=height,
                           svg=svg, description=description, expected_objects=objects))
     return cases
 
@@ -54,6 +59,7 @@ def main():
     parser.add_argument('--prepare', type=Path)
     parser.add_argument('--seed', type=int, default=713849)
     parser.add_argument('--variations', action='store_true')
+    parser.add_argument('--rounded', action='store_true')
     parser.add_argument('--inputs', type=Path)
     parser.add_argument('--output', type=Path)
     parser.add_argument('--rename', action='store_true')
@@ -63,7 +69,7 @@ def main():
     os.environ.update(IMAGE_CONVERTER_ISOLATE_SVG_RENDER='0', ICC_SEARCH_SEED='17')
     if args.prepare:
         args.prepare.mkdir(parents=True, exist_ok=False)
-        cases = make_cases(args.seed)
+        cases = make_cases(args.seed, rounded=args.rounded)
         if args.variations:
             source = cases[3]
             cases = [make_original_case(source['svg'], source['description']),
@@ -75,7 +81,9 @@ def main():
                 case['expected_objects'] = [dict(obj, bbox=[
                     w/2+scale*(obj['bbox'][0]-w/2)+dx*w,
                     h/2+scale*(obj['bbox'][1]-h/2)+dy*h,
-                    scale*obj['bbox'][2], scale*obj['bbox'][3]]) for obj in source['expected_objects']]
+                    scale*obj['bbox'][2], scale*obj['bbox'][3]],
+                    **({'corner_radius': scale*obj['corner_radius']} if 'corner_radius' in obj else {}))
+                    for obj in source['expected_objects']]
         write_cases(cases, args.prepare)
         (args.prepare/'manifest.json').write_text(json.dumps(cases, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
         return 0

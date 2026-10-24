@@ -1,5 +1,12 @@
 # ImageConverter
 
+Die [Kombination von Rundung und Überdeckung](docs/next_arbeitspaket_2026-10-24_rounded_overlap.md)
+ergänzt zwei teilweise überlappende gerundete Rechteckkinder im vorhandenen
+Verlaufskreis-/Struktursuchweg. Zwölf eingefrorene synthetische CLI-Fälle
+verbessern sich von 0/12 auf 12/12; zwölf zusätzliche Fälle und 17/17 gekoppelte
+Plan-B-Varianten bestehen. Konturen bei Überdeckung, weitere Schichten und die
+unabhängige reale Familienabnahme bleiben offen.
+
 Die [geordnete Überdeckungssuche](docs/next_arbeitspaket_2026-10-23_overlap_composition.md)
 verbindet zwei teilweise überlappende native Rechteckkinder mit dem vorhandenen
 Verlaufskreis-/Struktursuchweg. Zwölf eingefrorene synthetische CLI-Fälle

@@ -1,3 +1,4 @@
+- Compose observed round corners with two overlapping native rectangle children in gradient-circle scenes; retain ordered structure search, strict quality gates, frozen CLI comparisons and negative controls (2026-10-24).
 - Compose two observed overlapping rectangle children with gradient-circle scenes using ordered native structure identities, bounded reorder edits and explicit intersection-paint checks; preserve existing quality gates and add frozen real-CLI comparisons and negative controls (2026-10-23).
 - Reject existing benchmark preparation outputs before reading source metadata, and report missing archive candidates before creating any evidence (2026-10-22).
 - Add native rounded-rectangle gradient scenes with white nested children, standalone panel descriptions, independent geometry/paint checks and supervised CLI evidence; retain the open new-real-family acceptance and single-panel IoU failures (2026-10-22).
