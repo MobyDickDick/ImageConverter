@@ -28,7 +28,7 @@ def run(generator, seed, options=(), *, journal=None):
                   budget_seconds=5, started=datetime.now(timezone.utc).isoformat())
     # Save the seed before preparing anything: a failed or interrupted run is
     # reproducible even when its temporary directory has already disappeared.
-    with journal.open('a', encoding='utf-8') as stream:
+    with journal.open('a', encoding='utf-8', newline='\n') as stream:
         stream.write(json.dumps(recipe, ensure_ascii=False)+'\n')
     os.environ.update(IMAGE_CONVERTER_ISOLATE_SVG_RENDER='0', ICC_SEARCH_SEED='17')
     parent = ROOT/'.tmp'

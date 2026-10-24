@@ -73,9 +73,9 @@ def scene_contract(description):
     outlined = 'die formen haben helle konturen' in text
     rounded_clause = 'mit leicht gerundeten ecken'
     rounded = rounded_clause in text
-    # Up to four distinguishable rectangles bound painter-order search to 24
-    # permutations within the existing 96-state agenda and shared deadline.
-    if overlap and (counts['circle'] != 1 or not 2 <= counts['rectangle'] <= 4):
+    # Larger inventories use observed pairwise depth as an ordering proposal;
+    # the fallback agenda still has 96 states, never a factorial expansion.
+    if overlap and (counts['circle'] != 1 or not 2 <= counts['rectangle'] <= 8):
         return None
     # The qualifier belongs to the quantified rectangle inventory. A free
     # clause must not attach rounding to circles or silently discard a claim.
@@ -253,7 +253,7 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
     if outlined:
         # Pale rims are paint around an instance, not additional flat objects.
         colors = colors[colors.mean(axis=1) < 180]
-    if not 2 <= len(colors) <= 4 or any(
+    if not 2 <= len(colors) <= 8 or any(
             np.max(abs(a.astype(float)-b)) < 25
             for i, a in enumerate(colors) for b in colors[i+1:]):
         return None
@@ -308,6 +308,34 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
         right = component[:, x+w-1] & component[:, x+w-3] & background[:, x+w+margin-1]
         top = component[y] & component[y+2] & background[y-margin]
         bottom = component[y+h-1] & component[y+h-3] & background[y+h+margin-1]
+        if len(colors) > 4:
+            # A blend at an occlusion can happen to match another fill and
+            # extend its component by a pixel. Search just inside that bound
+            # for the same required five parent-facing straight-edge samples.
+            # No hidden extent is extrapolated; registration checks the
+            # proposed subpixel sides against the original raster as before.
+            L, R, T, B = x, x+w-1, y, y+h-1
+            for edge in range(x, x+3):
+                side = component[:, edge] & component[:, edge+2] & background[:, edge-margin]
+                if np.count_nonzero(side) >= 5:
+                    L, left = edge, side
+                    break
+            for edge in range(x+w-1, x+w-4, -1):
+                side = component[:, edge] & component[:, edge-2] & background[:, edge+margin]
+                if np.count_nonzero(side) >= 5:
+                    R, right = edge, side
+                    break
+            for edge in range(y, y+3):
+                side = component[edge] & component[edge+2] & background[edge-margin]
+                if np.count_nonzero(side) >= 5:
+                    T, top = edge, side
+                    break
+            for edge in range(y+h-1, y+h-4, -1):
+                side = component[edge] & component[edge-2] & background[edge+margin]
+                if np.count_nonzero(side) >= 5:
+                    B, bottom = edge, side
+                    break
+            x, y, w, h = L, T, R-L+1, B-T+1
         if any(np.count_nonzero(side) < 5 for side in (left, right, top, bottom)):
             return None
         a = x-float(np.median(coverage[left, x-1]))
@@ -574,6 +602,65 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
     return [dict(kind='circle', geometry=geometry, colors=np.r_[colors, stroke]), *children]
 
 
+def observed_painter_order(pixels, objects):
+    """Propose a depth DAG from flat paint inside observed intersections.
+
+    Third-party paint supplies no evidence for either member of a pair.
+    Rounded corners, rims and antialias edges are excluded. Unobserved pairs
+    impose no edge; balanced conflicting paint or a cycle cannot justify an order.
+    This only proposes topology: registration retains every existing gate.
+    """
+    children = objects[1:]
+    yy, xx = np.indices(pixels.shape[:2], dtype=float)
+    xx, yy = xx+.5, yy+.5
+    masks = []
+    for obj in children:
+        if obj['kind'] != 'rectangle':
+            return None
+        x, y, w, h, sw = obj['geometry']
+        left, top, right, bottom = x+sw/2, y+sw/2, x+w-sw/2, y+h-sw/2
+        # Pixel centers at least half a pixel inside the fill exclude its AA
+        # boundary without discarding a narrow but visible intersection.
+        mask = (xx >= left+.5) & (xx <= right-.5) & (yy >= top+.5) & (yy <= bottom-.5)
+        radius = max(0., obj.get('radius', 0.)-sw/2)
+        if radius:
+            dx = np.maximum(0, np.maximum(left+radius-xx, xx-(right-radius)))
+            dy = np.maximum(0, np.maximum(top+radius-yy, yy-(bottom-radius)))
+            mask &= dx*dx+dy*dy <= max(0., radius-.5)**2
+        masks.append(mask)
+    paints = [np.max(abs(pixels.astype(float)-obj['colors'][:3]), axis=2) <= 12
+              for obj in children]
+    successors = [set() for _ in children]
+    incoming = [0]*len(children)
+    for i in range(len(children)):
+        for j in range(i+1, len(children)):
+            intersection = masks[i] & masks[j]
+            a, b = (np.count_nonzero(intersection & paints[k]) for k in (i, j))
+            # Subpixel boundary estimates may include a few pixels of the
+            # rear fill. Use a dominant observed paint as a proposal; balanced
+            # contradictory evidence remains unresolved. Final depth and
+            # raster gates still decide whether this order can be accepted.
+            if a and b and max(a, b) < 4*min(a, b):
+                return None
+            if not (a or b):
+                continue
+            back, front = (j, i) if a > b else (i, j)
+            successors[back].add(front)
+            incoming[front] += 1
+    order = []
+    ready = [i for i, count in enumerate(incoming) if count == 0]
+    while ready:
+        node = ready.pop(0)
+        order.append(node)
+        for front in sorted(successors[node]):
+            incoming[front] -= 1
+            if incoming[front] == 0:
+                ready.append(front)
+    if len(order) != len(children):
+        return None
+    return [objects[0], *(children[i] for i in order)]
+
+
 def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, error_fn):
     contract = scene_contract(description)
     pixels = np.asarray(image)
@@ -623,10 +710,16 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
         if session and session.time_reason():
             return None
         objects = detect_instances(pixels, contract, residual_threshold=threshold)
+        ordering = 'bounded_agenda'
         if objects is not None:
+            if contract.get('overlap') and len(objects) > 5:
+                ordered = observed_painter_order(pixels, objects)
+                if ordered is not None:
+                    objects = ordered
+                    ordering = 'observed_depth'
             seeds.append(objects)
         return (yield from register(objects, dict(residual_threshold=threshold,
-                                                 operator='segmentation', outcome='no_complete_scene')))
+            operator='segmentation', painter_order=ordering, outcome='no_complete_scene')))
 
     def repairs():
         # Initial jobs each yield after detection. This job starts only after
