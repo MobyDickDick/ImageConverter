@@ -5,6 +5,11 @@ on:
   push:
     branches: [main, master, work]
   workflow_dispatch:
+    inputs:
+      seed:
+        description: 'Optional selection and variation seed for replay'
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -22,11 +27,25 @@ jobs:
         run: python -m pip install -r requirements-dev.txt
       - name: Try up to nine originals, then require original plus 16 satisfactory variations
         id: acceptance
-        run: >-
-          python -m tools.run_plan_b_variations
-          --svg-dir artifacts/samples
-          --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml
-          --output-dir artifacts/plan-b-acceptance
+        env:
+          PLAN_B_SEED: ${{ inputs.seed }}
+          PYTHONUNBUFFERED: '1'
+        run: |
+          args=()
+          if [ -n "$PLAN_B_SEED" ]; then args+=(--seed "$PLAN_B_SEED"); fi
+          python -m tools.run_plan_b_variations \
+            --svg-dir artifacts/samples \
+            --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml \
+            --output-dir artifacts/plan-b-acceptance \
+            --keep-debug-artifacts "${args[@]}"
+      - name: Record toolchain and algorithm revision
+        if: always()
+        run: |
+          mkdir -p artifacts/plan-b-diagnostics
+          git rev-parse HEAD > artifacts/plan-b-diagnostics/commit.txt
+          python -VV > artifacts/plan-b-diagnostics/python.txt 2>&1
+          python -m pip freeze > artifacts/plan-b-diagnostics/packages.txt
+          uname -a > artifacts/plan-b-diagnostics/platform.txt
       - name: Document every failure as a reproducible task
         if: always()
         env:
@@ -43,5 +62,13 @@ jobs:
         with:
           name: plan-b-acceptance
           path: artifacts/plan-b-acceptance
+          if-no-files-found: error
+          retention-days: 14
+      - name: Save toolchain diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: plan-b-diagnostics
+          path: artifacts/plan-b-diagnostics
           if-no-files-found: error
           retention-days: 14

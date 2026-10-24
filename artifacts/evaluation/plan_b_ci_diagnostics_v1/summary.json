@@ -1,0 +1,35 @@
+{
+  "run": "https://github.com/MobyDickDick/ImageConverter/actions/runs/40097155375",
+  "issue": 2025,
+  "seed": 209704809607928206,
+  "source_svg": "artifacts/samples/AC0050_L.svg",
+  "source_svg_sha256": "97bdcef874a7b4218bcaff7ac57a439ece5925e51a9385912b114b4f9e5a242e",
+  "source_description": "Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.",
+  "source_description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+  "source_hash_matches": true,
+  "description_hash_matches": true,
+  "iterations": 64,
+  "timeout_seconds": 60,
+  "github_metrics": {
+    "normalized_mse": 0.012214812450110912,
+    "foreground_mse": 0.07406366616487503,
+    "edge_alignment": 0.8447351455688477,
+    "foreground_iou": 0.6451612903225806
+  },
+  "local_metrics": {
+    "normalized_mse": 0.012214812450110912,
+    "foreground_mse": 0.07406366616487503,
+    "edge_alignment": 0.8447351455688477,
+    "foreground_iou": 0.6451612903225806
+  },
+  "metrics_identical": true,
+  "failures": [
+    "normalized_mse_outside_limit",
+    "foreground_mse_outside_limit",
+    "foreground_iou_outside_limit"
+  ],
+  "github_output_sha256": "1d4dbd0edc36b6ac7aa1b01293683a89b2cad12bb44dedb3161ce646748144a4",
+  "local_output_sha256": "8fccfd92c02504e1f85467e67a86dd18ae094f99008df4d2ef3bb8e665e28573",
+  "original_satisfactory": false,
+  "variations_started": false
+}
