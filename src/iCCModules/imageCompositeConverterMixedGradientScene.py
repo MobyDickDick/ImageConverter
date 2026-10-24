@@ -73,9 +73,9 @@ def scene_contract(description):
     outlined = 'die formen haben helle konturen' in text
     rounded_clause = 'mit leicht gerundeten ecken'
     rounded = rounded_clause in text
-    # Initially require two distinguishable flat rectangles, with every side
-    # observed. Other overlap inventories and paint remain unsupported.
-    if overlap and (counts != {'circle': 1, 'rectangle': 2} or outlined):
+    # Require two distinguishable flat rectangles, with every side observed.
+    # Other overlap inventories remain unsupported.
+    if overlap and counts != {'circle': 1, 'rectangle': 2}:
         return None
     # The qualifier belongs to the quantified rectangle inventory. A free
     # clause must not attach rounding to circles or silently discard a claim.
@@ -197,7 +197,7 @@ def _rounded_coverage_edges(coverage, low, high):
             middle+float(np.sum(coverage[middle:min(len(coverage), int(right)+3)])))
 
 
-def _exposed_corner_radius(data, predicted, fill, coverage, box):
+def _exposed_corner_radius(data, predicted, fill, coverage, box, *, reconstructed=None):
     """Measure round-corner deficits only where the parent paint is exposed.
 
     Occluding paint cannot supply a hidden corner's radius. At least two
@@ -208,7 +208,8 @@ def _exposed_corner_radius(data, predicted, fill, coverage, box):
     yy, xx = np.indices(coverage.shape)
     ideal = (np.clip(np.minimum(xx+1, X)-np.maximum(xx, a), 0, 1)
              * np.clip(np.minimum(yy+1, Y)-np.maximum(yy, b), 0, 1))
-    reconstructed = predicted+coverage[..., None]*(fill-predicted)
+    if reconstructed is None:
+        reconstructed = predicted+coverage[..., None]*(fill-predicted)
     foreign = np.max(abs(data-reconstructed), axis=2) > 4
     span = min(w, h)/3+2
     radii = []
@@ -228,7 +229,7 @@ def _exposed_corner_radius(data, predicted, fill, coverage, box):
     return radius if radius <= min(w, h)/3 else None
 
 
-def _overlap_instances(pixels, predicted, mask, *, rounded=False):
+def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False):
     """Complete visible, differently colored rectangles, never hidden extents.
 
     Color separates touching residuals. Each of four sides needs a straight
@@ -241,6 +242,9 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False):
     flat = (np.max(high-low, axis=2) <= 1) & mask.astype(bool)
     colors, counts = np.unique(pixels[flat], axis=0, return_counts=True)
     colors = colors[counts >= 12]
+    if outlined:
+        # Pale rims are paint around an instance, not additional flat objects.
+        colors = colors[colors.mean(axis=1) < 180]
     if len(colors) != 2 or np.max(abs(colors[0].astype(float)-colors[1])) < 25:
         return None
     children = []
@@ -253,31 +257,71 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False):
             return None
         component = labels == parts[0]
         x, y, w, h, area = stats[parts[0]]
-        if min(w, h) < 8 or area < .35*w*h or x < 3 or y < 3 or x+w+2 >= pixels.shape[1] or y+h+2 >= pixels.shape[0]:
+        margin = 5 if outlined else 2
+        if min(w, h) < 8 or area < .35*w*h or x <= margin or y <= margin or x+w+margin >= pixels.shape[1] or y+h+margin >= pixels.shape[0]:
             return None
         delta = fill-predicted
         coverage = np.clip(np.sum((data-predicted)*delta, axis=2)
                            / np.maximum(1., np.sum(delta*delta, axis=2)), 0, 1)
+        stroke, sw, rim_coverage = fill, 0., None
+        reconstructed = None
+        if outlined:
+            band = cv2.dilate(component.astype('uint8'), np.ones((9, 9), 'uint8')).astype(bool) & ~component
+            light = band & (np.mean(data-predicted, axis=2) > 8) & (data.mean(axis=2) >= 180)
+            samples = data[light]
+            if len(samples) < (w+h)/2:
+                return None
+            # Subpixel translation can leave most straight rim pixels mixed
+            # with the fill or parent. The brightest exposed corner samples
+            # still identify the paint; averaging the broad band biases it.
+            stroke = np.median(samples[samples.mean(axis=1) >= np.percentile(samples.mean(axis=1), 95)], axis=0)
+            # Solve independent fill/rim coverages against the varying parent.
+            # A collinear palette cannot identify these two contributions.
+            rim, observed = stroke-predicted, data-predicted
+            dd, rr = np.sum(delta*delta, axis=2), np.sum(rim*rim, axis=2)
+            dr = np.sum(delta*rim, axis=2)
+            determinant = dd*rr-dr*dr
+            if np.any(determinant[band] < .002*dd[band]*rr[band]):
+                return None
+            od, ort = np.sum(observed*delta, axis=2), np.sum(observed*rim, axis=2)
+            coverage = np.clip((od*rr-ort*dr)/np.maximum(1., determinant), 0, 1)
+            rim_coverage = np.clip((ort*dd-od*dr)/np.maximum(1., determinant), 0, 1)
+            reconstructed = predicted+coverage[..., None]*delta+rim_coverage[..., None]*rim
         background = np.max(abs(data-predicted), axis=2) <= 4
         # Pure fill begins at an integer pixel; the adjacent pixel may carry
         # fractional coverage. Only parent-facing spans supply that fraction.
-        left = component[:, x] & component[:, x+2] & background[:, x-2]
-        right = component[:, x+w-1] & component[:, x+w-3] & background[:, x+w+1]
-        top = component[y] & component[y+2] & background[y-2]
-        bottom = component[y+h-1] & component[y+h-3] & background[y+h+1]
+        left = component[:, x] & component[:, x+2] & background[:, x-margin]
+        right = component[:, x+w-1] & component[:, x+w-3] & background[:, x+w+margin-1]
+        top = component[y] & component[y+2] & background[y-margin]
+        bottom = component[y+h-1] & component[y+h-3] & background[y+h+margin-1]
         if any(np.count_nonzero(side) < 5 for side in (left, right, top, bottom)):
             return None
         a = x-float(np.median(coverage[left, x-1]))
         b = y-float(np.median(coverage[y-1, top]))
         X = x+w+float(np.median(coverage[right, x+w]))
         Y = y+h+float(np.median(coverage[y+h, bottom]))
-        child = dict(kind='rectangle', geometry=np.array([a, b, X-a, Y-b, 0.]),
-                     colors=np.r_[fill, fill, fill])
+        if outlined:
+            # Integrate the narrow AA ramp, including the first nearly pure
+            # fill pixel; its fractional coverage is not necessarily one.
+            a = x+2-float(np.median(coverage[left, x-3:x+2].sum(axis=1)))
+            X = x+w-2+float(np.median(coverage[right, x+w-2:x+w+3].sum(axis=1)))
+            b = y+2-float(np.median(coverage[y-3:y+2, top].sum(axis=0)))
+            Y = y+h-2+float(np.median(coverage[y+h-2:y+h+3, bottom].sum(axis=0)))
+            widths = [np.median(rim_coverage[left, x-5:x+1].sum(axis=1)),
+                      np.median(rim_coverage[right, x+w-1:x+w+5].sum(axis=1)),
+                      np.median(rim_coverage[y-5:y+1, top].sum(axis=0)),
+                      np.median(rim_coverage[y+h-1:y+h+5, bottom].sum(axis=0))]
+            if min(widths) < .5 or max(widths) > min(w, h)/4 or max(widths)-min(widths) > .75:
+                return None
+            sw = float(np.median(widths))
+        child = dict(kind='rectangle', geometry=np.array([a-sw/2, b-sw/2, X-a+sw, Y-b+sw, sw]),
+                     colors=np.r_[fill, fill, stroke])
         if rounded:
-            radius = _exposed_corner_radius(data, predicted, fill, coverage, [a, b, X-a, Y-b])
+            radius = _exposed_corner_radius(data, predicted, fill, coverage, [a, b, X-a, Y-b],
+                                            reconstructed=reconstructed)
             if radius is None:
                 return None
-            child['radius'] = radius
+            child['radius'] = radius+sw/2
         children.append(child)
     return children
 
@@ -316,7 +360,8 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
     components = []
     children = []
     if contract.get('overlap'):
-        children = _overlap_instances(pixels, predicted, mask, rounded=contract.get('rounded', False))
+        children = _overlap_instances(pixels, predicted, mask, rounded=contract.get('rounded', False),
+                                      outlined=contract['outlined'])
         if children is None:
             return None
     for index in (() if contract.get('overlap') else range(1, number)):
@@ -464,7 +509,17 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
     band = (distance >= radius-1) & (distance < radius)
     stroke = np.median(pixels[band], axis=0)
     geometry[4] = 1. if contract['outlined'] else 0.
-    if contract.get('rounded') and contract['outlined']:
+    if contract['outlined'] and (contract.get('rounded') or contract.get('overlap')):
+        # White AA around an unoutlined circle is not an observed light rim.
+        # Require color evidence outside the parent/white compositing line.
+        delta = predicted-255.
+        observed = pixels.astype(float)-255.
+        plain_coverage = np.clip(np.sum(observed*delta, axis=2)
+                                 / np.maximum(1., np.sum(delta*delta, axis=2)), 0, 1)
+        rim_evidence = np.max(abs(observed-plain_coverage[..., None]*delta), axis=2) > 4
+        ring = (distance >= radius-2) & (distance < radius+3)
+        if np.count_nonzero(rim_evidence & ring) < .3*2*np.pi*radius:
+            return None
         # A dark outer rim is visible just inside its foreground contour.
         # Sampling white antialias pixels beyond it must not turn it into a
         # claimed light rim merely because global pixel error stays small.
@@ -706,7 +761,12 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                     return False
         if contract.get('overlap'):
             from src.iCCModules.imageCompositeConverterSceneFusion import compatible
-            if not compatible([dict(o, fill=True) for o in scene[1:]],
+            # This path measures each exposed rim separately. Reuse the
+            # filled-scene topology check on centerlines; full outlined
+            # containment and raster quality are checked independently here.
+            topology = [dict(o, fill=True, geometry=np.r_[o['geometry'][:4], 0.])
+                        for o in scene[1:]]
+            if not compatible(topology,
                               dict(overlap=True, counts=contract['children'])):
                 return False
             # Global/local area metrics alone can tolerate a wrong painter

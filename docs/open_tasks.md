@@ -42,9 +42,11 @@ und unabhängige reale Abnahme bleiben offen; die übergeordnete Checkbox bleibt
 
 - [x] **SEARCH-STRUCTURE-ROUNDED-OVERLAP (P0, extrahierter Teil von SEARCH-STRUCTURE-01):** Gerundete native Rechteckkinder mit teilweise überlappender Anordnung im vorhandenen Verlaufskreis-/Struktursuchweg verbinden. Radien benötigen mindestens zwei konsistente freiliegende Ecken je Kind; vier Seiten bleiben beobachtbar und die geordnete Suche erhält beide Zeichenreihenfolgen. Zwölf vor der Runtime-Änderung gespeicherte synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12; zwölf zusätzliche Fälle und genau eine gekoppelte Plan-B-Vorlage bestehen 12/12 und 17/17. Konturen bei Überdeckung, weitere Instanzen/Schichten und unabhängige reale Familienabnahme bleiben beim übergeordneten P0-Paket offen. [Umsetzung und Nachweise](next_arbeitspaket_2026-10-24_rounded_overlap.md).
 
+- [x] **SEARCH-STRUCTURE-OVERLAP-OUTLINES (P0, extrahierter Teil von SEARCH-STRUCTURE-01):** Beobachtete helle Konturen mit zwei teilweise überlappenden nativen Rechteckkindern, wahlweise mit Rundung, im gemeinsamen Verlaufskreis-/Struktursuchweg verbinden. 24 vorab gesicherte synthetische CLI-Fälle verbessern sich von 0/24 auf 24/24; 24 zusätzliche Fälle bestehen. Genau eine gekoppelte Plan-B-Vorlage mit 16 Varianten verbessert sich nach dokumentierter Konturfarbkorrektur von 16/17 auf 17/17. Fehlende/dunkle Konturen, verdeckte Seiten, falsche Radien und mehrdeutige Farben bleiben Negativkontrollen. 63 erfolgreiche Bestandsausgaben sind bytegleich; weitere Instanzen/Schichten und unabhängige reale Familienabnahme bleiben beim übergeordneten P0-Paket offen. [Umsetzung und Nachweise](next_arbeitspaket_2026-10-24_overlap_outlines.md).
+
 ## Aufgaben-Gesamtzähler (Snapshot 2026-10-24)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `502` · Erledigt `450` · Offen `52`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `503` · Erledigt `451` · Offen `52`
 
 > Zählregel: Gezählt werden alle Markdown-Aufgabenzeilen mit Checkbox in `docs/open_tasks.md`, einschließlich eingerückter Aufgaben. Inline-Beispiele zählen nicht.
 

@@ -6,12 +6,13 @@ import json
 import os
 from pathlib import Path
 import random
+from xml.etree import ElementTree as ET
 
 from tools.evaluate_layered_scene import evaluate_cases, verify_report
 from tools.run_plan_b_variations import make_original_case, make_variations, write_cases
 
 
-def make_cases(seed=713849, *, rounded=False):
+def make_cases(seed=713849, *, rounded=False, outlined=False):
     rng = random.Random(seed)
     cases = []
     for index in range(12):
@@ -51,6 +52,18 @@ def make_cases(seed=713849, *, rounded=False):
             description = description.replace('Rechtecke.', 'Rechtecke mit leicht gerundeten Ecken.')
         cases.append(dict(case_id=f'{"rounded_" if rounded else ""}overlap_{index:02d}', width=width, height=height,
                           svg=svg, description=description, expected_objects=objects))
+    if outlined:
+        for index, case in enumerate(cases):
+            root = ET.fromstring(case['svg'])
+            for element, obj in zip(list(root)[2:], case['expected_objects']):
+                sw = (1. if obj['kind'] == 'circle' else 1.5) + .25*(index % 3)
+                element.set('stroke', '#f3f0ed')
+                element.set('stroke-width', str(sw))
+                x, y, w, h = obj['bbox']
+                obj.update(bbox=[x-sw/2, y-sw/2, w+sw, h+sw], stroke_width=sw)
+            case.update(case_id='outlined_'+case['case_id'],
+                        svg=ET.tostring(root, encoding='unicode'),
+                        description=case['description']+' Die Formen haben helle Konturen.')
     return cases
 
 
@@ -60,6 +73,7 @@ def main():
     parser.add_argument('--seed', type=int, default=713849)
     parser.add_argument('--variations', action='store_true')
     parser.add_argument('--rounded', action='store_true')
+    parser.add_argument('--outlines', action='store_true')
     parser.add_argument('--inputs', type=Path)
     parser.add_argument('--output', type=Path)
     parser.add_argument('--rename', action='store_true')
@@ -69,7 +83,7 @@ def main():
     os.environ.update(IMAGE_CONVERTER_ISOLATE_SVG_RENDER='0', ICC_SEARCH_SEED='17')
     if args.prepare:
         args.prepare.mkdir(parents=True, exist_ok=False)
-        cases = make_cases(args.seed, rounded=args.rounded)
+        cases = make_cases(args.seed, rounded=args.rounded, outlined=args.outlines)
         if args.variations:
             source = cases[3]
             cases = [make_original_case(source['svg'], source['description']),
@@ -82,6 +96,7 @@ def main():
                     w/2+scale*(obj['bbox'][0]-w/2)+dx*w,
                     h/2+scale*(obj['bbox'][1]-h/2)+dy*h,
                     scale*obj['bbox'][2], scale*obj['bbox'][3]],
+                    stroke_width=scale*obj['stroke_width'],
                     **({'corner_radius': scale*obj['corner_radius']} if 'corner_radius' in obj else {}))
                     for obj in source['expected_objects']]
         write_cases(cases, args.prepare)

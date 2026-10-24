@@ -1,0 +1,31 @@
+[INFO] Schreibe Konsolen-Output nach: artifacts\evaluation\rounded_overlap_v1\after\anonymous_01\conversion\reports\.image-worker-osjaze3j\reports_out_dir\anonymous_01_worker.log
+[INFO] Konvertiere anonymous_01.png | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite anonymous_01.png ---
+Bildbeschreibung: Ein gefüllter Kreis und zwei gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 1, "completed": false, "turns": 1, "last_turn": 0, "seconds": 0.0470000000204891, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 16, "operator": "segmentation", "outcome": "duplicate"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "16", "steps": 0, "completed": true, "turns": 1, "last_turn": 1, "seconds": 0.03100000007543713, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 36, "operator": "segmentation", "outcome": "duplicate"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "36", "steps": 0, "completed": true, "turns": 1, "last_turn": 2, "seconds": 0.030999999959021807, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 1, "last_turn": 3, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "residual_threshold": 25, "operator": "segmentation", "outcome": "quality_or_geometry_rejected"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "25", "steps": 0, "completed": true, "turns": 2, "last_turn": 4, "seconds": 0.062000000034458935, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 2, "last_turn": 5, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 3, "last_turn": 6, "seconds": 0.0, "rate": 0.0, "best": null}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_started", "evaluations": 0}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 1, "completed": false, "turns": 4, "last_turn": 7, "seconds": 0.03200000000651926, "rate": 0.0, "best": 13.657084341174496}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "registration_finished", "evaluations": 1, "best_error": 0.2526904761904762}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "scene_hypothesis", "operator": "edit", "edits": ["reorder"], "outcome": "accepted"}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "structure_search_finished", "outcome": "accepted", "states": 2, "state_limit_reached": false, "candidate_limit_reached": false}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_slice", "model": "edits", "steps": 0, "completed": true, "turns": 5, "last_turn": 8, "seconds": 0.06300000008195639, "rate": 0.0, "best": 13.657084341174496}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "model_schedule_finished", "slices": 9, "stop_reason": "caller_stopped", "models": {"25": {"turns": 2, "last_turn": 4, "seconds": 0.062000000034458935, "rate": 0.0, "best": null}, "16": {"turns": 1, "last_turn": 1, "seconds": 0.03100000007543713, "rate": 0.0, "best": null}, "36": {"turns": 1, "last_turn": 2, "seconds": 0.030999999959021807, "rate": 0.0, "best": null}, "edits": {"turns": 5, "last_turn": 8, "seconds": 0.06300000008195639, "rate": 0.0, "best": 13.657084341174496}}}
+[Search] {"source": "primitive_mixed_gradient_scene_v1", "event": "candidate_satisfactory", "elapsed_seconds": 0.766, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 1}
+[Search] {"source": "anonymous_01", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 0.781, "limit_seconds": 5.0, "max_seconds": 5.0, "time_extensions": 0, "candidate_evaluations": 1, "stop_reason": "satisfactory"}
+[INFO] Konvertiert anonymous_01.png | Parameter: mode=auto, label=M, variant_name=ANONYMOUS_01 | Qualität: Optimierungsfehler/Pixel=0.000006, Mean-Delta²=11.669214, RGB-RMSE/Kanal=1.972242, Raumscore=35.415800, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgeführt=64/64 | Dauer=0.3s
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\evaluation\rounded_overlap_v1\after\anonymous_01\conversion\reports\overview_diff_tiles.png, svg=artifacts\evaluation\rounded_overlap_v1\after\anonymous_01\conversion\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts\evaluation\rounded_overlap_v1\after\anonymous_01\conversion

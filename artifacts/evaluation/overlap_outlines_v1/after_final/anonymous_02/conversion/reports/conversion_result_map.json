@@ -1,0 +1,232 @@
+{
+  "anonymous_02.png": {
+    "actual_iterations": 64,
+    "base": "ANONYMOUS_02",
+    "best_error": 0.19188095238095237,
+    "best_iter": 1,
+    "convergence": "",
+    "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+    "diff_error_distribution_status": "structured",
+    "elapsed_seconds": 0.9690000000409782,
+    "error_per_pixel": 4.56859410430839e-06,
+    "error_pixel_cluster_count": 22.0,
+    "error_pixel_cluster_excess": 0.47500573723465284,
+    "error_pixel_count": 9960.0,
+    "filename": "anonymous_02.png",
+    "h": 200,
+    "largest_error_pixel_cluster_fraction": 0.71214859437751,
+    "localized_error_fraction": 0.7268348111530879,
+    "mean_delta2": 2.4515953063964844,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "params": {
+      "adaptive_search": {
+        "candidate_evaluations": 1,
+        "elapsed_seconds": 0.969,
+        "external_max_seconds": null,
+        "isolated": true,
+        "limit_seconds": 5.0,
+        "max_seconds": 5.0,
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      },
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "constraint": "inside_rect_border",
+            "id": "description_element_1",
+            "kind": "HorizontalGradient",
+            "source": "description",
+            "stops": [
+              "#8f8f8f",
+              "#dedede",
+              "#8f8f8f"
+            ]
+          },
+          {
+            "bbox": [
+              0.18,
+              0.24,
+              0.64,
+              0.56
+            ],
+            "confidence": 0.75,
+            "fill": "none",
+            "id": "description_element_2",
+            "kind": "RectBorder",
+            "source": "description",
+            "stroke": "#666666",
+            "stroke_width": 0.035
+          }
+        ],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.75,
+          "reasons": [],
+          "status": "ok"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": false,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "anonymous_02",
+          "source": "base_name",
+          "text": "Ein gefüllter Kreis und zwei gefüllte Rechtecke. Der Kreis hat einen horizontalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen."
+        }
+      ],
+      "documented_alias_refs": [],
+      "elements": [],
+      "geometry_ir": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "constraint": "inside_rect_border",
+          "id": "background_gradient",
+          "kind": "HorizontalGradient",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "fill": "none",
+          "id": "main_rect",
+          "kind": "RectBorder",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "label": "M",
+      "language_assertions": {
+        "counts": [],
+        "no_text": false
+      },
+      "mode": "auto",
+      "primitive_scene_registration": {
+        "error": 0.19188095238095237,
+        "evaluations": 1,
+        "initial_error": 0.19188095238095237,
+        "instance_groups": 3,
+        "neural_scene_selected": false,
+        "object_kinds": [
+          "circle",
+          "rectangle",
+          "rectangle"
+        ],
+        "object_quality": [
+          {
+            "edge_alignment": 0.9464031457901001,
+            "foreground_iou": 0.9977758612863692,
+            "foreground_mse": 2.2820127287581847e-05,
+            "normalized_mse": 1.7040059555394568e-05,
+            "passed": true
+          },
+          {
+            "edge_alignment": 0.941085696220398,
+            "foreground_iou": 1.0,
+            "foreground_mse": 7.004204332585544e-05,
+            "normalized_mse": 6.59966406297393e-05,
+            "passed": true
+          },
+          {
+            "edge_alignment": 0.9668780565261841,
+            "foreground_iou": 0.9983311081441922,
+            "foreground_mse": 5.601727588598203e-05,
+            "normalized_mse": 5.207574600630854e-05,
+            "passed": true
+          }
+        ],
+        "scene_attempts": [
+          {
+            "operator": "segmentation",
+            "outcome": "quality_or_geometry_rejected",
+            "residual_threshold": 25
+          },
+          {
+            "operator": "segmentation",
+            "outcome": "duplicate",
+            "residual_threshold": 16
+          },
+          {
+            "operator": "segmentation",
+            "outcome": "duplicate",
+            "residual_threshold": 36
+          },
+          {
+            "edits": [
+              "reorder"
+            ],
+            "operator": "edit",
+            "outcome": "accepted"
+          }
+        ],
+        "scene_detectors": [
+          "gradient_boundary",
+          "flat_residual_shapes"
+        ],
+        "scene_hypotheses": 4,
+        "source": "primitive_mixed_gradient_scene_v1"
+      },
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {},
+      "top_source_ref": null,
+      "variant_name": "ANONYMOUS_02"
+    },
+    "reference_access": {
+      "blocked_svg_reads": []
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 0.9039902850503952,
+    "search_control": {
+      "candidate_evaluations": 1,
+      "elapsed_seconds": 0.969,
+      "external_max_seconds": null,
+      "isolated": true,
+      "limit_seconds": 5.0,
+      "max_seconds": 5.0,
+      "stop_reason": "satisfactory",
+      "time_extensions": 0
+    },
+    "search_satisfactory": true,
+    "spatial_quality_score": 8.70218860578049,
+    "std_delta2": 20.51774787902832,
+    "tile_std_delta2": 3.6529874960700157,
+    "variant": "ANONYMOUS_02",
+    "w": 210
+  }
+}

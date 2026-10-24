@@ -24,7 +24,7 @@ def test_overlap_composes_with_parent_gradient_and_both_painter_orders(case):
 @pytest.mark.parametrize('claim', [
     ' Die Formen sind getrennt.', ' Mit Text.', ' Die Rechtecke sind nicht gefüllt.',
     ' Die Rechtecke liegen außerhalb des Kreises.', ' Das kleinere Rechteck liegt vorne.',
-    ' Ein weiterer Kreis.', ' Die Formen haben helle Konturen.',
+    ' Ein weiterer Kreis.', ' Die Formen haben keine Konturen.',
 ])
 def test_unsupported_or_conflicting_assertions_fail_closed(claim):
     assert mixed.scene_contract(make_cases()[0]['description']+claim) is None
