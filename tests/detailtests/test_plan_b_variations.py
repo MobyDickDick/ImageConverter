@@ -269,7 +269,13 @@ def test_defs_viewbox_and_existing_transforms_survive():
     assert root.get("viewBox") == "10 20 40 40"
 
 
-def test_tiny_issue_source_replaces_only_duplicate_rasters_and_replays(tmp_path):
+def test_tiny_issue_source_replaces_only_duplicate_rasters_and_replays(tmp_path, monkeypatch):
+    # Freeze the historical renderer for the duplicate-preparation regression.
+    # Correct pink rendering produces distinct rasters for this seed, and has
+    # separate live-renderer coverage in test_svg_gradient_references.
+    from src.iCCModules import imageCompositeConverterRendering as rendering
+    monkeypatch.setattr(rendering, 'inline_simple_svg_styles', lambda svg: svg)
+    monkeypatch.setattr(rendering, '_resolve_local_gradient_references', lambda svg: svg)
     source = battery.ROOT / 'artifacts/samples/z_201.svg'
     svg = source.read_text(encoding='utf-8')
     assert battery.sha256(source.read_bytes()) == 'f5897e9666731f6c26269235857f2a9b37ad52728e676eaec3857bc39311c05f'

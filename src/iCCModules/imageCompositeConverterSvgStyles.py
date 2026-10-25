@@ -11,7 +11,7 @@ import xml.etree.ElementTree as ET
 
 
 def inline_simple_svg_styles(svg: str) -> str:
-    if '<style' not in svg and ':style' not in svg:
+    if '<style' not in svg and ':style' not in svg and not re.search(r'\bstyle\s*=', svg):
         return svg
     try:
         root = ET.fromstring(svg)

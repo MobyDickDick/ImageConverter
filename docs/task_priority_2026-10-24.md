@@ -16,6 +16,10 @@ ergänzen Gruppe 4/P2 (Quellenprüfung und gemeinsame Fehlerursachen):
 Die ersten beiden Aufgaben sind Voraussetzung für jede neue Abnahme dieser
 Quelle. Die historische 52-Aufgaben-Momentaufnahme wird dadurch nicht umnummeriert.
 
+Abnahmenachtrag: Diese drei Teilaufgaben sind inzwischen lokal abgeschlossen;
+beide Seeds bestehen 17/17, unabhängige CLI-Fälle 8/8. Die Übernahme steht noch
+aus. [Nachweis und Grenzen](../artifacts/evaluation/axial_panel_issue_v1/README.md).
+
 ## 1 / P0: Struktursuche und gemeinsame Komposition
 
 | Rang | Aufgabe / Arbeitsregel | Quelle |

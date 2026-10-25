@@ -1,9 +1,10 @@
 # ImageConverter
 
-Die [Reparatur für GitHub-Issue #1980](artifacts/evaluation/raster_variations_issue_v1/README.md)
-ersetzt doppelte Rastervarianten mit begrenzter, reproduzierbarer Neuauswahl.
-Original und alle 16 Varianten werden jetzt technisch vollständig geprüft;
-die verbleibenden Qualitätsfehler und das offene Issue bleiben ausgewiesen.
+Die [vollständige Korrektur für GitHub-Issue #1980](artifacts/evaluation/axial_panel_issue_v1/README.md)
+repariert den rosa Referenzverlauf, hinterlegt eine eigenständige Beschreibung
+und rekonstruiert konturlose Rechtecke mit einem begrenzten nativen Verlaufsmodell.
+Beide Seeds bestehen 17/17 CLI-Fälle; acht unabhängige Farb-/Größen-/Achsenfälle
+bestehen ebenfalls. Die ursprüngliche Vorbereitungsevidenz bleibt erhalten.
 
 Die [Korrektur für GitHub-Issue #2004](artifacts/evaluation/arrow_pair_issue_v1/README.md)
 erhält CSS-definierte Schäfte im Prüfraster und rekonstruiert zwei beobachtete

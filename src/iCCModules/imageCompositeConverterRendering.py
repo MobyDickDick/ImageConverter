@@ -27,6 +27,62 @@ _SUBPROCESS_RENDER_AGG = {
 }
 
 
+def _resolve_local_gradient_references(svg: str) -> str:
+    """Materialize inherited paint attributes/stops in the private render input.
+
+    SVG2 href wins over xlink:href. Only local, same-kind, acyclic references
+    are resolved; external resources and invalid chains are left untouched.
+    """
+    if 'Gradient' not in svg or 'href' not in svg:
+        return svg
+    try:
+        root = ET.fromstring(svg)
+    except ET.ParseError:
+        return svg
+    gradients = {e.get('id'): e for e in root.iter()
+                 if e.tag.rsplit('}', 1)[-1] in {'linearGradient', 'radialGradient'} and e.get('id')}
+    xlink = '{http://www.w3.org/1999/xlink}href'
+
+    def resolve(element, visiting):
+        if id(element) in visiting:
+            return None
+        result = copy.deepcopy(element)
+        href = element.get('href', element.get(xlink))
+        if href is not None:
+            target = gradients.get(href[1:]) if href.startswith('#') else None
+            if target is None or target.tag != element.tag:
+                return None
+            base = resolve(target, visiting | {id(element)})
+            if base is None:
+                return None
+            for key, value in base.attrib.items():
+                if key not in {'id', 'href', xlink} and key not in result.attrib:
+                    result.set(key, value)
+            if not any(e.tag.rsplit('}', 1)[-1] == 'stop' for e in element):
+                result.extend(copy.deepcopy(e) for e in base if e.tag.rsplit('}', 1)[-1] == 'stop')
+            result.attrib.pop('href', None)
+            result.attrib.pop(xlink, None)
+        # Opaque stop declarations are equivalent to the default. The existing
+        # mask adapters intentionally decline genuinely translucent gradients.
+        for stop in result:
+            if stop.get('stop-opacity') == '1':
+                stop.attrib.pop('stop-opacity')
+            # Editor metadata is not paint data.
+            if stop.tag.rsplit('}', 1)[-1] == 'stop':
+                stop.attrib.pop('id', None)
+        return result
+
+    changed = False
+    for gradient in gradients.values():
+        resolved = resolve(gradient, set())
+        if resolved is not None and ET.tostring(resolved) != ET.tostring(gradient):
+            gradient.attrib.clear()
+            gradient.attrib.update(resolved.attrib)
+            gradient[:] = list(resolved)
+            changed = True
+    return ET.tostring(root, encoding='unicode') if changed else svg
+
+
 def _expand_axis_aligned_linear_gradients_for_fitz(svg_string: str) -> str:
     """Expand gradient-filled rectangles only in the PyMuPDF render input.
 
@@ -601,6 +657,7 @@ def render_svg_to_numpy_inprocess(
         return None
 
     renderer_svg = inline_simple_svg_styles(svg_string)
+    renderer_svg = _resolve_local_gradient_references(renderer_svg)
     renderer_svg = _expand_rect_linear_gradients_for_fitz(renderer_svg,fitz_module=fitz_module,size_w=size_w,size_h=size_h)
     renderer_svg = _expand_axis_aligned_linear_gradients_for_fitz(renderer_svg)
     renderer_svg = _expand_bezier_linear_gradients_for_fitz(renderer_svg,fitz_module=fitz_module,size_w=size_w,size_h=size_h)

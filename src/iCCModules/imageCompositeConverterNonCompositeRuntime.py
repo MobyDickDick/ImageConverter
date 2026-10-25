@@ -45,6 +45,7 @@ from src.iCCModules.imageCompositeConverterGradientJunction import fit_gradient_
 from src.iCCModules.imageCompositeConverterCircleLinework import fit_circle_linework
 from src.iCCModules.imageCompositeConverterPrimitiveScene import fit_primitive_scene
 from src.iCCModules.imageCompositeConverterShortLabelDisk import fit_short_label_disk
+from src.iCCModules.imageCompositeConverterAxialPanel import fit_axial_panel
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1461,6 +1462,7 @@ def runNonCompositeIterationImpl(
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in (
+            (fit_axial_panel, "non_composite_raster_axial_panel"),
             (fit_short_label_disk, "non_composite_raster_short_label_disk"),
             (fit_primitive_scene, "non_composite_raster_primitive_scene"),
             (fit_circle_linework, "non_composite_raster_circle_linework"),
@@ -1499,6 +1501,10 @@ def runNonCompositeIterationImpl(
             )
             if fitted is not None:
                 validated_result(fitted,perc_img)
+                if status == "non_composite_raster_axial_panel":
+                    params['axial_panel_registration'] = {
+                        key: value for key, value in fitted.items() if key not in {'svg', 'rendered'}
+                    }
                 if status == "non_composite_raster_primitive_scene":
                     params['primitive_scene_registration'] = {
                         key: fitted[key] for key in ('source', 'initial_error', 'error',
