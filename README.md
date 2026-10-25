@@ -1,5 +1,10 @@
 # ImageConverter
 
+Die [Reparatur für GitHub-Issue #1980](artifacts/evaluation/raster_variations_issue_v1/README.md)
+ersetzt doppelte Rastervarianten mit begrenzter, reproduzierbarer Neuauswahl.
+Original und alle 16 Varianten werden jetzt technisch vollständig geprüft;
+die verbleibenden Qualitätsfehler und das offene Issue bleiben ausgewiesen.
+
 Die [Korrektur für GitHub-Issue #2004](artifacts/evaluation/arrow_pair_issue_v1/README.md)
 erhält CSS-definierte Schäfte im Prüfraster und rekonstruiert zwei beobachtete
 Pfeile mit optionaler Querlinie als native SVG-Formen. Die widersprüchliche

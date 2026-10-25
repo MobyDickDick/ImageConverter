@@ -1,0 +1,24 @@
+{
+  "schema_version": "plan_b_raster_variations_issue_v1",
+  "base_commit": "ffca4a44454b3fa77be3f1c6ab6b8d7bfc5480c2",
+  "issue_url": "https://github.com/MobyDickDick/ImageConverter/issues/1980",
+  "selection": {
+    "priority_labels_present": false,
+    "reason": "A preparation failure prevents the extended quality battery from running. Fix deterministic raster uniqueness before changing conversion models."
+  },
+  "replays": [
+    {
+      "issue": 1980,
+      "source_svg": "artifacts/samples/z_201.svg",
+      "source_svg_sha256": "f5897e9666731f6c26269235857f2a9b37ad52728e676eaec3857bc39311c05f",
+      "source_description": "z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke.",
+      "source_description_sha256": "9866c6af83325854cef94862d7fb2358433891c8de34057e8e4bf7d6c882b014",
+      "seed": 347146220485913939,
+      "iterations": 64,
+      "timeout_seconds": 60
+    }
+  ],
+  "holdout_seed": 817263,
+  "preparation_candidate_limit": 256,
+  "quality_acceptance": "All seventeen cases must still pass the unchanged gates. Runner completion alone is not acceptance."
+}

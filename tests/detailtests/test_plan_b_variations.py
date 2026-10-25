@@ -269,6 +269,81 @@ def test_defs_viewbox_and_existing_transforms_survive():
     assert root.get("viewBox") == "10 20 40 40"
 
 
+def test_tiny_issue_source_replaces_only_duplicate_rasters_and_replays(tmp_path):
+    source = battery.ROOT / 'artifacts/samples/z_201.svg'
+    svg = source.read_text(encoding='utf-8')
+    assert battery.sha256(source.read_bytes()) == 'f5897e9666731f6c26269235857f2a9b37ad52728e676eaec3857bc39311c05f'
+    seed = 347146220485913939
+    legacy = battery._make_variation_candidates(svg, DESCRIPTION, seed)
+    hashes = [battery.sha256(battery.render(c['svg'], c['width'], c['height']).tobytes()) for c in legacy]
+    assert len(set(hashes)) < 16  # The actual preparation error from #1980.
+    cases = battery.make_variations(svg, DESCRIPTION, seed)
+    assert cases == battery.make_variations(svg, DESCRIPTION, seed)
+    assert cases != battery.make_variations(svg, DESCRIPTION, seed + 1)
+    seen = {battery.sha256(battery.render(svg, cases[0]['width'], cases[0]['height']).tobytes())}
+    for old, case, digest in zip(legacy, cases, hashes):
+        if digest not in seen:
+            assert case['svg'] == old['svg']
+            assert case['description'] == old['description']
+        assert case['case_id'] == old['case_id']
+        assert case['width'] == old['width'] and case['height'] == old['height']
+        seen.add(battery.sha256(battery.render(case['svg'], case['width'], case['height']).tobytes()))
+        v = case['variation']
+        assert .94 <= v['scale'] <= 1.06
+        assert abs(v['relative_x']) <= .025 and abs(v['relative_y']) <= .025
+        assert ('kleiner' if v['scale'] < 1 else 'größer') in case['description']
+        assert ('links' if v['relative_x'] < 0 else 'rechts') in case['description']
+        assert ('oben' if v['relative_y'] < 0 else 'unten') in case['description']
+    assert len(seen) == 17
+    assert len({c['description'] for c in cases}) == 16
+    assert sum(c['variation_generation']['rejected_duplicates'] for c in cases) > 0
+    prepared = battery.prepare_cases(svg, DESCRIPTION, tmp_path / 'run', seed)
+    assert len({c['input_sha256'] for c in prepared}) == 16
+
+
+def test_original_raster_is_excluded_even_when_probe_rasters_differ(monkeypatch):
+    legacy = battery._make_variation_candidates(SVG, DESCRIPTION, 123)
+    render = battery.render
+    original = render(SVG, 80, 80)
+    monkeypatch.setattr(battery, 'render', lambda svg, w, h:
+                        original if svg == legacy[0]['svg'] else render(svg, w, h))
+    cases = battery.make_variations(SVG, DESCRIPTION, 123)
+    assert cases[0]['svg'] != legacy[0]['svg']
+    assert cases[0]['variation_generation']['rejected_duplicates'] == 1
+    assert cases[1]['svg'] == legacy[1]['svg']
+
+
+def test_invisible_source_exhausts_bounded_variations_without_creating_output(tmp_path, monkeypatch):
+    svg = '<svg width="8" height="8"><rect x="100" y="100" width="1" height="1"/></svg>'
+    render = battery.render
+    calls = []
+    def counted(*args):
+        calls.append(args)
+        return render(*args)
+    monkeypatch.setattr(battery, 'render', counted)
+    output = tmp_path / 'run'
+    with pytest.raises(battery.VariationSpaceExhausted, match=r'256 candidates: 0/16 distinct probes; canvas=8x8; seed=42'):
+        battery.prepare_cases(svg, DESCRIPTION, output, 42)
+    assert len(calls) == 1 + battery.MAX_VARIATION_CANDIDATES
+    assert not output.exists()
+
+
+def test_variation_exhaustion_retains_original_and_never_accepts_partial_battery(tmp_path, monkeypatch):
+    source = tmp_path / 'source.svg'
+    source.write_text('<svg width="8" height="8"><rect x="100" y="100" width="1" height="1"/></svg>')
+    monkeypatch.setattr(battery, 'run_case', lambda case, output, **kwargs:
+                        {**case, 'satisfactory': True, 'failures': [], 'elapsed_seconds': 0})
+    output = tmp_path / 'run'
+    with pytest.raises(battery.VariationSpaceExhausted):
+        battery.run_battery(source, DESCRIPTION, output, seed=42)
+    report = json.loads((output / 'report.json').read_text())
+    assert report['status'] == 'preparation_error'
+    assert report['original_satisfactory'] and not report['variations_started']
+    assert report['summary']['completed'] == 1 and not report['summary']['satisfactory']
+    assert '256 candidates' in report['error']
+    assert {p.name for p in output.iterdir()} == {'report.json'}
+
+
 def test_quality_checks_saved_pixels_not_success_labels():
     reference = battery.render(SVG, 80, 80)
     good = battery.measure_quality(reference, SVG)
