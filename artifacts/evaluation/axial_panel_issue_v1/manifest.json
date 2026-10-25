@@ -1,0 +1,39 @@
+{
+  "schema_version": "plan_b_axial_panel_issue_v1",
+  "base_commit": "6c32fa7ae6ea471f6ca176e83f056cf25045fd3a",
+  "historical_manifest": "artifacts/evaluation/raster_variations_issue_v1/manifest.json",
+  "replays": [
+    {
+      "issue": 1980,
+      "source_svg": "artifacts/samples/z_201.svg",
+      "source_svg_sha256": "f5897e9666731f6c26269235857f2a9b37ad52728e676eaec3857bc39311c05f",
+      "source_description": "Ein einzelnes waagerechtes, sehr flaches Rechteck ohne Kontur. Die rosa Füllung hat einen vertikalen Farbverlauf: oben gedämpftes Rosa, darunter ein hellerer rosafarbener Glanz, im unteren Bereich dunkleres Altrosa und am unteren Rand wieder ein kräftigeres Rosa.",
+      "source_description_sha256": "2294268ec8bd40e7e52af1afdb19b920e9e4318ee099c271f7ac79455900b836",
+      "seed": 347146220485913939,
+      "iterations": 64,
+      "timeout_seconds": 60
+    }
+  ],
+  "holdout_seed": 817263,
+  "reference_audit": {
+    "renderer": "sharp 0.35.5 / librsvg 2.63.2",
+    "scales": [
+      1,
+      10
+    ]
+  },
+  "model_limits": {
+    "native_rectangles": 1,
+    "max_continuous_stops": 4,
+    "max_candidate_renders": 5
+  },
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "corrected_source_image_sha256": "7fc68c866dc04e1ea439a9e13be9cc15fb26b874a1156a8c6cfbb5dc09a07643"
+}

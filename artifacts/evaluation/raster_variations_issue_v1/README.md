@@ -1,5 +1,10 @@
 # Reproduzierbare Rastervarianten für GitHub-Issue #1980
 
+**Historischer Nachweis der Vorbereitungskorrektur.** Die nachfolgende
+[Quellen-, Beschreibungs- und Qualitätskorrektur](../axial_panel_issue_v1/README.md)
+ist separat belegt und besteht mit korrigierten Eingaben 34/34 Quellenfälle
+sowie 8/8 unabhängige CLI-Fälle. Die alten Messwerte unten bleiben unverändert.
+
 Der technische Fehler aus [#1980](https://github.com/MobyDickDick/ImageConverter/issues/1980)
 ist mit unveränderter Quelle, Beschreibung, vollständigem Seed und Budget
 reproduziert. Die Quelle misst im Prüfraster 51 × 5 Pixel. Die ursprünglichen

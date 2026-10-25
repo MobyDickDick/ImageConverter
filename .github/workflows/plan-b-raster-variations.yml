@@ -1,13 +1,23 @@
-name: Plan B raster variation infrastructure
+name: Plan B raster preparation and axial panel quality
 
 on:
   pull_request:
     paths:
       - 'tools/run_plan_b_variations.py'
       - 'src/iCCModules/imageCompositeConverterRendering.py'
+      - 'src/iCCModules/imageCompositeConverterSvgStyles.py'
+      - 'src/iCCModules/imageCompositeConverterAxialPanel.py'
+      - 'src/iCCModules/imageCompositeConverterNonCompositeRuntime.py'
       - 'tests/detailtests/test_plan_b_variations.py'
+      - 'tests/detailtests/test_svg_gradient_references.py'
+      - 'tests/test_axial_panel_runtime.py'
+      - 'tools/evaluate_axial_panel.py'
+      - 'tools/audit_plan_b_svg_reference.py'
+      - 'tools/verify_axial_panel_acceptance.py'
       - 'artifacts/samples/z_201.svg'
+      - 'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml'
       - 'artifacts/evaluation/raster_variations_issue_v1/**'
+      - 'artifacts/evaluation/axial_panel_issue_v1/**'
       - '.github/workflows/plan-b-raster-variations.yml'
   workflow_dispatch:
 
@@ -21,9 +31,22 @@ jobs:
         with:
           python-version: '3.10'
       - run: python -m pip install -r requirements-dev.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Independently compare the reference and sixteen transforms with librsvg
+        run: |
+          npm install --prefix .tmp/reference-renderer --no-package-lock sharp@0.35.5
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('artifacts/evaluation/axial_panel_issue_v1/manifest.json').read_text())
+          Path('.tmp/reference-description.txt').write_text(data['replays'][0]['source_description'], encoding='utf-8')
+          PY
+          python -m tools.audit_plan_b_svg_reference --svg artifacts/samples/z_201.svg --description-file .tmp/reference-description.txt --seed 347146220485913939 --node "$(command -v node)" --sharp-module "$GITHUB_WORKSPACE/.tmp/reference-renderer/node_modules/sharp" --output-dir .tmp/raster-variations/reference
       - name: Check uniqueness, bounded exhaustion and unchanged quality rejection
-        run: python -m pytest -q tests/detailtests/test_plan_b_variations.py tests/detailtests/test_plan_b_failure_tasks.py tests/test_plan_b_issue_inventory.py
-      - name: Exercise all seventeen CLI cases and preserve their quality results
+        run: python -m pytest -q tests/detailtests/test_plan_b_variations.py tests/detailtests/test_plan_b_failure_tasks.py tests/test_plan_b_issue_inventory.py tests/detailtests/test_svg_gradient_references.py tests/detailtests/test_rendering_gradient_compatibility.py tests/test_axial_panel_runtime.py
+      - name: Require seventeen satisfactory CLI cases for each recorded seed
         env:
           PYTHONUNBUFFERED: '1'
         run: |
@@ -33,7 +56,7 @@ jobs:
           from pathlib import Path
           from tools.run_plan_b_variations import run_battery
 
-          manifest = json.loads(Path('artifacts/evaluation/raster_variations_issue_v1/manifest.json').read_text())
+          manifest = json.loads(Path('artifacts/evaluation/axial_panel_issue_v1/manifest.json').read_text())
           entry = manifest['replays'][0]
           source = Path(entry['source_svg'])
           assert hashlib.sha256(source.read_bytes()).hexdigest() == entry['source_svg_sha256']
@@ -46,11 +69,13 @@ jobs:
               assert report['summary']['completed'] == 17
               assert len({case['input_sha256'] for case in report['cases']}) == 17
               assert all(case['returncode'] == 0 and not case['blocked_svg_reads'] for case in report['cases'])
-              # This checks infrastructure, not source quality. Do not turn a
-              # completed runner into a satisfactory conversion or erase failures.
-              assert report['summary']['satisfactory'] == all(case['satisfactory'] for case in report['cases'])
+              assert report['summary']['satisfactory'], report['summary']
               print(label, report['summary'])
           PY
+      - name: Check unrelated colors, sizes, axes and independently inspected output objects
+        run: |
+          python -m tools.evaluate_axial_panel --output-dir .tmp/raster-variations/independent
+          python -m tools.verify_axial_panel_acceptance --run .tmp/raster-variations/frozen --run .tmp/raster-variations/holdout --independent .tmp/raster-variations/independent
       - uses: actions/upload-artifact@v4
         if: always()
         with:
