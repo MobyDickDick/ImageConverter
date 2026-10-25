@@ -6,6 +6,8 @@ focused on the actual project scope.
 
 ## Neue Ausführungsreihenfolge (2026-10-23)
 
+- [x] **SEARCH-STRUCTURE-OWNED-RIMS (P0, Teil von SEARCH-STRUCTURE-01):** Bei getrennt beobachteten gleichfarbigen Instanzen die Kreisfüllung von Fremdpixeln in der erweiterten Randsuche unterscheiden. Die zwölf unveränderten gerundeten Kreis-/Rechteck-CLI-Fälle verbessern sich von 6/12 auf 12/12. Native Innen-/Außenbögen, beobachtete Tiefenreihenfolge und vollständige Gates bleiben erforderlich. [Umsetzung und Grenzen](next_arbeitspaket_2026-10-25_owned_circle_rims.md). Die übergeordnete Aufgabe und ihre unabhängige reale Abnahme bleiben offen.
+
 Die 52 bisherigen offenen Checkboxen sind in der [vollständigen Rangliste vom 24.10.2026](task_priority_2026-10-24.md) absteigend nach Wichtigkeit geordnet. Der nachrangige Filmwunsch ergänzt diese Liste als Rang 53.
 
 - [x] **SEARCH-STRUCTURE-SAME-PAINT (P0, Teil von SEARCH-STRUCTURE-01):** Gleichfarbige überlappende Instanzen anhand eigener heller Konturen trennen und ihre Zeichenreihenfolge aus beobachteten Rändern prüfen. Zwölf unveränderte synthetische CLI-Eingaben verbessern sich von 0/12 auf 12/12; Zusatzseed 12/12, gekoppelte Variantenprüfung 16/17 mit konservativer Rundungsgrenze. Unkonturierte Vereinigungen und nicht beobachtbare Grenzen bleiben Ablehnungen. [Umsetzung und Grenzen](next_arbeitspaket_2026-10-24_same_paint.md). Die übergeordnete P0-Aufgabe bleibt offen.

@@ -58,12 +58,6 @@ def test_same_paint_circle_and_rectangle_share_the_observed_rim_order(rounded, i
     root[-1].set('fill', root[-2].get('fill'))
     case['svg'] = ET.tostring(root, encoding='unicode')
     image, result = fit(case)
-    if index >= 2:
-        # With the circle in front, adjoining equal paint contaminates the
-        # outer-rim reconstruction. Keep this known limitation in the cohort;
-        # do not infer its hidden boundary or weaken circle evidence.
-        assert result is None
-        return
     assert_accepted(case, image, result)
     accepted = next(a for a in result['scene_attempts'] if a['outcome'] == 'accepted')
     assert accepted['painter_order'] == 'observed_depth'
