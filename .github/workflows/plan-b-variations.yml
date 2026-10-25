@@ -1,9 +1,8 @@
 name: Plan B random task acceptance
 
 on:
-  pull_request:
-  push:
-    branches: [main, master, work]
+  # Automatic random acceptance is paused while the issue backlog is resolved.
+  # Re-enable PR/push triggers explicitly after that work is complete.
   workflow_dispatch:
     inputs:
       seed:

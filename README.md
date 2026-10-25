@@ -235,6 +235,11 @@ verschiedene SVGs aus dem Pool. Die Abnahme verlangt Original plus Varianten
 (17/17) für die erste Aufgabe mit bestandener Vorprüfung:
 `python -m tools.run_plan_b_variations`. Jeder Versuch behält seinen Bericht
 und das Ursprungsbild als `source.png`; der Gesamtbericht verlinkt alle Versuche.
+Die automatischen Zufallsläufe bei Pull Requests und Pushes sind bis zur
+Abarbeitung der offenen Issues pausiert. Der Workflow bleibt ausschließlich
+manuell startbar; feste Quellen mit gespeicherten Varianten-Seeds werden
+weiterhin als Regressionen geprüft. Die Zufallsläufe werden anschließend
+ausdrücklich wieder aktiviert, nicht automatisch anhand der Issue-Anzahl.
 Die [Fehlererfassung](docs/plan_b_failure_tasks_2026-10-10.md) zeigt die
 fehlgeschlagenen Fälle in der GitHub-Laufübersicht und führt wiederholte
 Fehlschläge in GitHub-Aufgaben zusammen. Das reguläre Plan-B-Paket

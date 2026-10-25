@@ -52,9 +52,12 @@ identisch; es gibt keine neue Referenz oder gelockerte Grenzwerte.
 .venv/Scripts/python.exe -m pytest -q tests/test_zigzag_panel_runtime.py tests/detailtests/test_plan_b_variations.py
 ```
 
-Ausgabeverzeichnisse müssen neu sein. Der neue CI-Job führt dieselbe vollständige
-Zufallsauswahl mit dem gesicherten Auswahlseed und einen zusätzlichen Seed aus;
-der reguläre zufällige Plan-B-Job bleibt bestehen. Die Nachweise ersetzen keine
+Ausgabeverzeichnisse müssen neu sein. Seit der vom Nutzer gewünschten Pause der
+automatischen Zufallsläufe prüft der CI-Job die feste Quelle aus `manifest.json`
+mit dem ursprünglichen und einem zusätzlichen Varianten-Seed, ohne Poolauswahl.
+Die vollständige frühere Auswahl bleibt mit obigem CLI-Befehl manuell
+reproduzierbar. Der zufällige Plan-B-Workflow ist nur manuell startbar.
+Die Nachweise ersetzen keine
 Abnahme aller 77 Motive des Pools und keine vollständige Katalogabnahme.
 
 Lokale Abnahme: dieselbe vollständige Auswahl verbessert sich von **8/17 auf
