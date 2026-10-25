@@ -1,0 +1,690 @@
+{
+  "hypothesis_comparison": [
+    {
+      "experiment": 2,
+      "issue": 1966,
+      "case": "probe_02",
+      "hypothesis": "baseline",
+      "seconds": 0.5309999999590218,
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0014390625292435288,
+        "foreground_mse": 0.0020450749434530735,
+        "edge_alignment": 0.6974421143531799,
+        "foreground_iou": 0.9683544303797469
+      },
+      "evaluations": 323
+    },
+    {
+      "experiment": 2,
+      "issue": 1966,
+      "case": "probe_02",
+      "hypothesis": "fine",
+      "seconds": 1.2030000000959262,
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.001401851186528802,
+        "foreground_mse": 0.0020704336930066347,
+        "edge_alignment": 0.6941040754318237,
+        "foreground_iou": 0.9696202531645569
+      },
+      "evaluations": 586
+    },
+    {
+      "experiment": 2,
+      "issue": 1966,
+      "case": "probe_02",
+      "hypothesis": "canvas_fine",
+      "seconds": 1.0469999999040738,
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0014457181096076965,
+        "foreground_mse": 0.00207310076802969,
+        "edge_alignment": 0.6929211020469666,
+        "foreground_iou": 0.9696202531645569
+      },
+      "evaluations": 481
+    },
+    {
+      "experiment": 2,
+      "issue": 1966,
+      "case": "probe_02",
+      "hypothesis": "profile",
+      "seconds": 1.640999999945052,
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0012741406681016088,
+        "foreground_mse": 0.00203234376385808,
+        "edge_alignment": 0.7003467679023743,
+        "foreground_iou": 0.9696202531645569
+      },
+      "evaluations": 311
+    },
+    {
+      "experiment": 2,
+      "issue": 1966,
+      "case": "probe_02",
+      "hypothesis": "profile_canvas",
+      "seconds": 2.75,
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0012934915721416473,
+        "foreground_mse": 0.0020745713263750076,
+        "edge_alignment": 0.6865177154541016,
+        "foreground_iou": 0.9684343434343434
+      },
+      "evaluations": 484
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_01",
+      "hypothesis": "baseline",
+      "seconds": 1.452999999979511,
+      "satisfactory": false,
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0008320268825627863,
+        "foreground_mse": 0.0005510448245331645,
+        "edge_alignment": 0.7786384224891663,
+        "foreground_iou": 0.8138006571741512
+      },
+      "evaluations": 311
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_01",
+      "hypothesis": "fine",
+      "seconds": 3.327999999979511,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0008632494718767703,
+        "foreground_mse": 0.0006026733899489045,
+        "edge_alignment": 0.7734044790267944,
+        "foreground_iou": 0.8532110091743119
+      },
+      "evaluations": 635
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_01",
+      "hypothesis": "canvas_fine",
+      "seconds": 2.812000000034459,
+      "satisfactory": false,
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.00017415187903679907,
+        "foreground_mse": 0.0003024692996405065,
+        "edge_alignment": 0.9739033579826355,
+        "foreground_iou": 0.8497899159663865
+      },
+      "evaluations": 587
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_01",
+      "hypothesis": "profile",
+      "seconds": 1.5940000000409782,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0008744457154534757,
+        "foreground_mse": 0.0011987390462309122,
+        "edge_alignment": 0.8199393153190613,
+        "foreground_iou": 0.8520642201834863
+      },
+      "evaluations": 286
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_01",
+      "hypothesis": "profile_canvas",
+      "seconds": 2.7030000000959262,
+      "satisfactory": false,
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.00014980083506088704,
+        "foreground_mse": 0.0002663290360942483,
+        "edge_alignment": 0.9062963128089905,
+        "foreground_iou": 0.8411633109619687
+      },
+      "evaluations": 542
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_04",
+      "hypothesis": "baseline",
+      "seconds": 1.5309999999590218,
+      "satisfactory": false,
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0013384259073063731,
+        "foreground_mse": 0.002438206924125552,
+        "edge_alignment": 0.8173817992210388,
+        "foreground_iou": 0.8327566320645905
+      },
+      "evaluations": 314
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_04",
+      "hypothesis": "fine",
+      "seconds": 3.172000000020489,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0013141896342858672,
+        "foreground_mse": 0.0024131950922310352,
+        "edge_alignment": 0.8178446888923645,
+        "foreground_iou": 0.9025522041763341
+      },
+      "evaluations": 654
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_04",
+      "hypothesis": "canvas_fine",
+      "seconds": 3.094000000040978,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.000451537111075595,
+        "foreground_mse": 0.0010042240610346198,
+        "edge_alignment": 0.9743605852127075,
+        "foreground_iou": 0.9775561097256857
+      },
+      "evaluations": 645
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_04",
+      "hypothesis": "profile",
+      "seconds": 1.625,
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0009131139959208667,
+        "foreground_mse": 0.001776531687937677,
+        "edge_alignment": 0.7136964797973633,
+        "foreground_iou": 0.761795166858458
+      },
+      "evaluations": 304
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_04",
+      "hypothesis": "profile_canvas",
+      "seconds": 3.530999999959022,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.00041869276901707053,
+        "foreground_mse": 0.0009268000721931458,
+        "edge_alignment": 0.9006474018096924,
+        "foreground_iou": 0.9800498753117207
+      },
+      "evaluations": 648
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_07",
+      "hypothesis": "baseline",
+      "seconds": 1.5619999999180436,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0007487522670999169,
+        "foreground_mse": 0.0009018529672175646,
+        "edge_alignment": 0.9071991443634033,
+        "foreground_iou": 0.9318181818181818
+      },
+      "evaluations": 308
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_07",
+      "hypothesis": "fine",
+      "seconds": 3.437000000034459,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0006264313706196845,
+        "foreground_mse": 0.0007892068824730814,
+        "edge_alignment": 0.9096968173980713,
+        "foreground_iou": 0.9318181818181818
+      },
+      "evaluations": 645
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_07",
+      "hypothesis": "canvas_fine",
+      "seconds": 2.797000000020489,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0006223051459528506,
+        "foreground_mse": 0.0007849071407690644,
+        "edge_alignment": 0.9050496816635132,
+        "foreground_iou": 0.9303977272727273
+      },
+      "evaluations": 611
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_07",
+      "hypothesis": "profile",
+      "seconds": 1.5939999999245629,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.000612668925896287,
+        "foreground_mse": 0.000772375613451004,
+        "edge_alignment": 0.8566060662269592,
+        "foreground_iou": 0.8899147727272727
+      },
+      "evaluations": 311
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_07",
+      "hypothesis": "profile_canvas",
+      "seconds": 2.530999999959022,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0006166886887513101,
+        "foreground_mse": 0.0007816413417458534,
+        "edge_alignment": 0.8535608053207397,
+        "foreground_iou": 0.8899147727272727
+      },
+      "evaluations": 565
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_10",
+      "hypothesis": "baseline",
+      "seconds": 1.5,
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0013176464708521962,
+        "foreground_mse": 0.0021894769743084908,
+        "edge_alignment": 0.6314813494682312,
+        "foreground_iou": 0.9872262773722628
+      },
+      "evaluations": 291
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_10",
+      "hypothesis": "fine",
+      "seconds": 2.60999999998603,
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0011903310660272837,
+        "foreground_mse": 0.0019731230568140745,
+        "edge_alignment": 0.6357072591781616,
+        "foreground_iou": 0.9908759124087592
+      },
+      "evaluations": 511
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_10",
+      "hypothesis": "canvas_fine",
+      "seconds": 2.6089999999385327,
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0011322336504235864,
+        "foreground_mse": 0.001882221084088087,
+        "edge_alignment": 0.649482250213623,
+        "foreground_iou": 0.9908759124087592
+      },
+      "evaluations": 504
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_10",
+      "hypothesis": "profile",
+      "seconds": 1.4059999999590218,
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0012885893229395151,
+        "foreground_mse": 0.0021438319236040115,
+        "edge_alignment": 0.6367461681365967,
+        "foreground_iou": 0.9872262773722628
+      },
+      "evaluations": 292
+    },
+    {
+      "experiment": 2,
+      "issue": 1969,
+      "case": "probe_10",
+      "hypothesis": "profile_canvas",
+      "seconds": 2.827999999979511,
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0011735768057405949,
+        "foreground_mse": 0.0019572812598198652,
+        "edge_alignment": 0.6557806730270386,
+        "foreground_iou": 0.9908759124087592
+      },
+      "evaluations": 545
+    },
+    {
+      "experiment": 2,
+      "issue": 2030,
+      "case": "probe_02",
+      "hypothesis": "baseline",
+      "seconds": 1.265999999945052,
+      "satisfactory": false,
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0003295860078651458,
+        "foreground_mse": 0.001661357469856739,
+        "edge_alignment": 0.9802858829498291,
+        "foreground_iou": 0.521613832853026
+      },
+      "evaluations": 294
+    },
+    {
+      "experiment": 2,
+      "issue": 2030,
+      "case": "probe_02",
+      "hypothesis": "fine",
+      "seconds": 3.140999999945052,
+      "satisfactory": false,
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.00031894975109025836,
+        "foreground_mse": 0.0016165899578481913,
+        "edge_alignment": 0.9738222360610962,
+        "foreground_iou": 0.6925287356321839
+      },
+      "evaluations": 600
+    },
+    {
+      "experiment": 2,
+      "issue": 2030,
+      "case": "probe_02",
+      "hypothesis": "canvas_fine",
+      "seconds": 3.172000000020489,
+      "satisfactory": false,
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0003236586053390056,
+        "foreground_mse": 0.0016572758322581649,
+        "edge_alignment": 0.9722367525100708,
+        "foreground_iou": 0.8160919540229885
+      },
+      "evaluations": 599
+    },
+    {
+      "experiment": 2,
+      "issue": 2030,
+      "case": "probe_02",
+      "hypothesis": "profile",
+      "seconds": 1.5309999999590218,
+      "satisfactory": false,
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0003315272624604404,
+        "foreground_mse": 0.0016849400708451867,
+        "edge_alignment": 0.9802858829498291,
+        "foreground_iou": 0.8132183908045977
+      },
+      "evaluations": 294
+    },
+    {
+      "experiment": 2,
+      "issue": 2030,
+      "case": "probe_02",
+      "hypothesis": "profile_canvas",
+      "seconds": 3.172000000020489,
+      "satisfactory": false,
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0002796010230667889,
+        "foreground_mse": 0.001410215045325458,
+        "edge_alignment": 0.9769916534423828,
+        "foreground_iou": 0.8189655172413793
+      },
+      "evaluations": 616
+    },
+    {
+      "experiment": 6,
+      "issue": 1966,
+      "case": "probe_02",
+      "hypothesis": "canvas_edge_grid",
+      "seconds": 0.7969999999040738,
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0014978264225646853,
+        "foreground_mse": 0.00219367747195065,
+        "edge_alignment": 0.6962766647338867,
+        "foreground_iou": 0.9455696202531646
+      },
+      "evaluations": 407
+    },
+    {
+      "experiment": 6,
+      "issue": 1966,
+      "case": "probe_02",
+      "hypothesis": "canvas_edge_grid_fine",
+      "seconds": 1.2809999999590218,
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.001525732222944498,
+        "foreground_mse": 0.0022584497928619385,
+        "edge_alignment": 0.6929211020469666,
+        "foreground_iou": 0.9455696202531646
+      },
+      "evaluations": 580
+    },
+    {
+      "experiment": 6,
+      "issue": 1966,
+      "case": "probe_02",
+      "hypothesis": "canvas_edge_grid_mse",
+      "seconds": 0.9690000000409782,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0005701633053831756,
+        "foreground_mse": 0.0001685427560005337,
+        "edge_alignment": 0.7830893993377686,
+        "foreground_iou": 0.9860759493670886
+      },
+      "evaluations": 388
+    },
+    {
+      "experiment": 6,
+      "issue": 1966,
+      "case": "probe_02",
+      "hypothesis": "canvas_edge_grid_fine_mse",
+      "seconds": 3.3429999999934807,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0005291281850077212,
+        "foreground_mse": 0.00011999280104646459,
+        "edge_alignment": 0.7941961884498596,
+        "foreground_iou": 0.8658227848101265
+      },
+      "evaluations": 724
+    },
+    {
+      "experiment": 6,
+      "issue": 2030,
+      "case": "probe_02",
+      "hypothesis": "canvas_edge_grid",
+      "seconds": 1.4839999999385327,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0008494085050188005,
+        "foreground_mse": 0.00426050228998065,
+        "edge_alignment": 0.8514722585678101,
+        "foreground_iou": 0.9770773638968482
+      },
+      "evaluations": 320
+    },
+    {
+      "experiment": 6,
+      "issue": 2030,
+      "case": "probe_02",
+      "hypothesis": "canvas_edge_grid_fine",
+      "seconds": 2.5929999999934807,
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0008505849982611835,
+        "foreground_mse": 0.004268527030944824,
+        "edge_alignment": 0.8359665870666504,
+        "foreground_iou": 0.9771428571428571
+      },
+      "evaluations": 544
+    },
+    {
+      "experiment": 6,
+      "issue": 2030,
+      "case": "probe_02",
+      "hypothesis": "canvas_edge_grid_mse",
+      "seconds": 1.6559999999590218,
+      "satisfactory": false,
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0007051540305837989,
+        "foreground_mse": 0.003415341954678297,
+        "edge_alignment": 0.8465591669082642,
+        "foreground_iou": 0.5244956772334294
+      },
+      "evaluations": 349
+    },
+    {
+      "experiment": 6,
+      "issue": 2030,
+      "case": "probe_02",
+      "hypothesis": "canvas_edge_grid_fine_mse",
+      "seconds": 2.859000000054948,
+      "satisfactory": false,
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.0005321982316672802,
+        "foreground_mse": 0.002497503999620676,
+        "edge_alignment": 0.8604980111122131,
+        "foreground_iou": 0.5329512893982808
+      },
+      "evaluations": 599
+    }
+  ],
+  "holdout": {
+    "seed": 942817,
+    "summary": {
+      "required": 17,
+      "completed": 17,
+      "passed": 17,
+      "failed": 0,
+      "satisfactory": true
+    },
+    "source_svg_sha256": "c5bc093c553416bf68b3bed5ced448e7c2f257ce691e7b7d5a1bed246df6b27b",
+    "source_description_sha256": "f1e6abbc035156d4cd9d9d3f14e3c4a338ee4c64ffddcbd862394b9c7803f5fd"
+  },
+  "tests": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_chevron_panel_runtime.py tests/test_plan_b_issue_inventory.py",
+      "exit_code": 0,
+      "passed": 27
+    },
+    {
+      "command": ".venv/Scripts/python.exe tools/run_pytest_profile.py core-green",
+      "exit_code": 0,
+      "passed": 42
+    },
+    {
+      "command": ".venv/Scripts/python.exe tools/check_no_new_image_id_hardcoding.py",
+      "exit_code": 0
+    }
+  ],
+  "limits_changed": false
+}

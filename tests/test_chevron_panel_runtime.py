@@ -147,3 +147,36 @@ def test_baseline_archiving_cannot_remove_an_after_input(tmp_path,monkeypatch):
     assert runner.main() == 0
     assert seen[0] != seen[1]
     assert source.read_bytes() == b'original raster bytes'
+
+
+@pytest.mark.parametrize('number,index', [(1966,2), (1969,1), (1969,4), (1969,7), (1969,10), (2030,2)])
+def test_shifted_cropped_frames_pass_the_independent_gates(number, index):
+    import json
+    from tools.run_plan_b_variations import make_variations, measure_quality
+    entries = json.loads((ROOT/'artifacts/evaluation/issue_backlog_v1/replays.json').read_text(encoding='utf-8'))['replays']
+    entry = next(row for row in entries if row['issue'] == number)
+    svg = (ROOT/entry['source_svg']).read_text(encoding='utf-8')
+    case = make_variations(svg, entry['source_description'], entry['seed'])[index-1]
+    image = render(case['svg'], case['width'], case['height'])
+    calls = []
+    def counted_render(content, width, height):
+        calls.append(content)
+        return render(content, width, height)
+    result = fit(image, case['description'], render_fn=counted_render,
+                 error_fn=lambda a,b:float(cv2.absdiff(a,b).mean()))
+    assert result is not None
+    assert measure_quality(image, result['svg'])['satisfactory']
+    assert chevron_panel_semantics(result['svg']) == 1.
+    assert result['error'] == pytest.approx(cv2.absdiff(image, result['rendered']).mean())
+    assert result['evaluations'] == len(calls) <= 1800
+
+
+def test_expired_search_does_not_start_an_alternative_frame_search(monkeypatch):
+    from src.iCCModules import imageCompositeConverterChevronPanel as module
+    class Expired:
+        evaluations = 0
+        def time_reason(self):
+            return 'time_limit'
+    monkeypatch.setattr(module, 'current_search', lambda:Expired())
+    _, image = synthetic()
+    assert fit(image, render_fn=lambda *args:pytest.fail('render after deadline')) is None
