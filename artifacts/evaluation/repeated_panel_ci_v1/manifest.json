@@ -1,0 +1,21 @@
+{
+  "schema_version": "repeated_panel_ci_v1",
+  "failed_run": "https://github.com/MobyDickDick/ImageConverter/actions/runs/40176687737",
+  "base_commit": "0b2eeb368072de7bda697107a42bfed7a3f8c12a",
+  "selection_seed": 6906637802001409049,
+  "additional_seed": 20261025,
+  "source_description_before": "Luftbefeuchter: Hochkantiges Rechteck mit grauem Rahmen und horizontalem Farbverlauf dunkel-hell-dunkel. Im linken Innenbereich verläuft eine dünne regelmäßige Zickzacklinie von oben nach unten. Rechts daneben steht ein schmales hohes ungefülltes Rechteck mit grauer Kontur. Lage, Anzahl der Zacken, Farben und Abmessungen ergeben sich aus dem Bild. Keine Schriftzeichen.",
+  "source_description_sha256_before": "9c2c7543c1e2a321a1a2510403c39dc58d4ff92b6872a610fcf87e87163cd953",
+  "replays": [
+    {
+      "issue": 2009,
+      "source_svg": "artifacts/samples/AC0130_L.svg",
+      "source_svg_sha256": "8eb61a0f3e6dbbcef5700ea36bf0c865e9b421fdcf362771a0dec1f304f873c9",
+      "source_description": "Luftbefeuchter: Hochkantiges Rechteck mit grauem Rahmen und horizontalem Farbverlauf dunkel-hell-dunkel. Links steht ein senkrechter grauer Balken mit kurzen horizontalen Queranschlüssen. Daneben wiederholt sich eine Liniengruppe von oben nach unten: je eine schräge Linie nach rechts oben, eine horizontale Linie und eine schräge Linie nach rechts unten. Rechts steht ein schmales hohes ungefülltes Rechteck mit grauer Kontur. Lage, Anzahl der Liniengruppen, Farben und Abmessungen ergeben sich aus dem Bild. Keine Schriftzeichen.",
+      "source_description_sha256": "536ca0361b8e835fe245987a92034c3bfe3ce698189946284a27c5632287c40a",
+      "seed": 1237139773188156879,
+      "iterations": 64,
+      "timeout_seconds": 60
+    }
+  ]
+}

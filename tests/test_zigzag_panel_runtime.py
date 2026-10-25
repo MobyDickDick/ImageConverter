@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+from xml.etree import ElementTree as ET
 
 import cv2
 import fitz
@@ -12,6 +13,7 @@ from src.iCCModules.imageCompositeConverterDiffing import calculateErrorImpl
 from src.iCCModules.imageCompositeConverterRendering import render_svg_to_numpy_inprocess
 from tools.evaluate_zigzag_panel_recheck import zigzag_panel_semantics
 from tools.run_plan_b_variations import measure_quality, make_variations
+from tools.run_plan_b_variations import select_task
 from tools.review_conversion_quality import normalized_mse
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -109,3 +111,29 @@ def test_supplied_template_is_rasterized_and_varied_before_reconstruction(index)
     assert result is not None and result['source']=='raster_repeated_line_panel_v1'
     assert result['evaluations'] <= 681 and '<image' not in result['svg']
     assert measure_quality(image,result['svg'])['satisfactory']
+
+
+def test_catalog_sample_uses_its_source_bound_sidecar_instead_of_the_jpeg_description():
+    # These are the exact third-attempt seed/exclusions from CI run 40176687737.
+    path, description, _ = select_task(ROOT/'artifacts/samples',
+        ROOT/'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml',1237139773188156879,
+        excluded_svg_paths={ROOT/'artifacts/samples/AC0838_M.svg', ROOT/'artifacts/samples/AC0814_L.svg'})
+    assert path.name == 'AC0130_L.svg'
+    assert path.read_bytes() == (ROOT/'tests/fixtures/plan_b_templates/AC0130_L.svg').read_bytes()
+    assert description == TEMPLATE_DESCRIPTION.strip()
+    assert 'Liniengruppe' in description and 'Balken' in description
+
+
+@pytest.mark.parametrize('seed,index',[(1237139773188156879,3),(1237139773188156879,11),
+                                      (20261025,1)])
+def test_exact_ci_crop_and_nearby_frame_edges_preserve_observed_structure(seed,index):
+    svg = (ROOT/'tests/fixtures/plan_b_templates/AC0130_L.svg').read_text(encoding='utf-8')
+    case = make_variations(svg,TEMPLATE_DESCRIPTION.strip(),seed)[index]
+    image = render(case['svg'],case['width'],case['height'])
+    result = fit(image,case['description'])
+    assert result is not None and result['source']=='raster_repeated_line_panel_v1'
+    assert measure_quality(image,result['svg'])['satisfactory']
+    root = ET.fromstring(result['svg'])
+    shapes = [e.tag.rsplit('}',1)[-1] for e in root.iter()]
+    assert shapes.count('rect') == 3 and 'polyline' not in shapes
+    assert 12 <= shapes.count('path') <= 24
