@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [P0: eigene Kreisfüllungen von angrenzender gleicher Farbe trennen (2026-10-25)](next_arbeitspaket_2026-10-25_owned_circle_rims.md)
+
 - [Gleichfarbige überlappende Instanzen mit beobachteter Konturreihenfolge (2026-10-24)](next_arbeitspaket_2026-10-24_same_paint.md)
 
 - [Gleichfarbige Instanzen mit mehreren Sichtbarkeitsinseln im P0-Struktursuchweg (2026-10-24)](next_arbeitspaket_2026-10-24_island_groups.md)

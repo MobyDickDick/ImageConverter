@@ -12,7 +12,8 @@ from tools.evaluate_layered_scene import evaluate_cases, verify_report
 from tools.run_plan_b_variations import make_original_case, make_variations, write_cases
 
 
-def make_cases(seed=486213, *, rounded=False, outlined=False, children=None, repeat_fill=False):
+def make_cases(seed=486213, *, rounded=False, outlined=False, children=None, repeat_fill=False,
+               same_fill=False):
     if children is not None and children not in range(2, 9):
         raise ValueError('Mixed overlap scenes support two to eight children')
     rng = random.Random(seed)
@@ -89,11 +90,23 @@ def make_cases(seed=486213, *, rounded=False, outlined=False, children=None, rep
             case.update(case_id='outlined_'+case['case_id'],
                         svg=ET.tostring(root, encoding='unicode'),
                         description=case['description']+' Die Formen haben helle Konturen.')
+    if same_fill:
+        if repeat_fill:
+            raise ValueError('Choose repeated or identical child paints')
+        for case in cases:
+            root = ET.fromstring(case['svg'])
+            elements = list(root)[3:]
+            for element in elements:
+                element.set('fill', elements[0].get('fill'))
+            case.update(case_id='same_paint_'+case['case_id'],
+                        svg=ET.tostring(root, encoding='unicode'))
     return cases
 
 
-def make_variation_cases(seed=486213, *, rounded=False, outlined=False, children=None, repeat_fill=False):
-    source = make_cases(seed, rounded=rounded, outlined=outlined, children=children, repeat_fill=repeat_fill)[3]
+def make_variation_cases(seed=486213, *, rounded=False, outlined=False, children=None, repeat_fill=False,
+                         same_fill=False):
+    source = make_cases(seed, rounded=rounded, outlined=outlined, children=children,
+                        repeat_fill=repeat_fill, same_fill=same_fill)[3]
     cases = [make_original_case(source['svg'], source['description']),
              *make_variations(source['svg'], source['description'], seed)]
     for case in cases:
@@ -118,6 +131,7 @@ def main():
     parser.add_argument('--outlines', action='store_true')
     parser.add_argument('--children', type=int, choices=range(2, 9))
     parser.add_argument('--repeat-fill', action='store_true')
+    parser.add_argument('--same-fill', action='store_true')
     parser.add_argument('--variations', action='store_true')
     parser.add_argument('--inputs', type=Path)
     parser.add_argument('--output', type=Path)
@@ -129,13 +143,13 @@ def main():
     if args.prepare:
         cases = (make_variation_cases if args.variations else make_cases)(
             args.seed, rounded=args.rounded, outlined=args.outlines, children=args.children,
-            repeat_fill=args.repeat_fill)
+            repeat_fill=args.repeat_fill, same_fill=args.same_fill)
         args.prepare.mkdir(parents=True, exist_ok=False)
         write_cases(cases, args.prepare)
         (args.prepare/'manifest.json').write_text(json.dumps(cases, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
         (args.prepare/'generation.json').write_text(json.dumps(dict(seed=args.seed, rounded=args.rounded, outlines=args.outlines,
                                                                   variations=args.variations, children=args.children,
-                                                                  repeat_fill=args.repeat_fill), indent=2)+'\n', encoding='utf-8')
+                                                                  repeat_fill=args.repeat_fill, same_fill=args.same_fill), indent=2)+'\n', encoding='utf-8')
         return 0
     if not args.inputs or not args.output:
         parser.error('--inputs and --output required')

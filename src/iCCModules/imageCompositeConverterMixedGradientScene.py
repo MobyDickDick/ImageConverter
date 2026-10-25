@@ -242,7 +242,7 @@ def _exposed_corner_radius(data, predicted, fill, coverage, box, *, reconstructe
     return radius if radius <= min(w, h)/3 else None
 
 
-def _overlap_circle(component, background, coverage, reconstruction_error, shape):
+def _overlap_circle(component, background, coverage, reconstruction_error, shape, *, owned_fill=None):
     """Reuse visible-arc fitting, supported only by parent-facing boundaries."""
     from src.iCCModules.imageCompositeConverterSceneFusion import _arc
     contours = cv2.findContours(component.astype('uint8'), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[0]
@@ -284,7 +284,11 @@ def _overlap_circle(component, background, coverage, reconstruction_error, shape
                     and np.linalg.norm(proposal-center) <= 1.5 and abs(r-radius) <= 1.5):
                 geometry = [*(proposal-r), 2*r, 2*r, 0.]
                 x, y, w, h, _ = geometry
-    yy, xx = np.where(component)
+    # Expanding a rim search can reach an adjacent instance of the same
+    # paint. Its pixels are not owned by this circle. The independently
+    # separated fill must fit inside the measured outer arc; registration
+    # still verifies every native instance and the complete original raster.
+    yy, xx = np.where(component if owned_fill is None else owned_fill)
     if np.mean(np.hypot(xx+.5-x-w/2, yy+.5-y-h/2) <= w/2+1) < .995:
         return None
     return np.array(geometry)
@@ -395,6 +399,17 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
                 outer = (_overlap_circle(outer_component, np.max(abs(data-predicted), axis=2) <= 4,
                                          outer_coverage, error, pixels.shape[:2])
                          if inner is not None else None)
+                if inner is not None and outer is None and any(
+                        other is not component and np.array_equal(color, other_color)
+                        and np.any(outer_component & other)
+                        for other_color, other in groups):
+                    # A separately observed instance of the same paint can
+                    # contaminate this expanded search region. Preserve the
+                    # original proposal first and only retry containment on
+                    # this circle's independently observed fill in that case.
+                    outer = _overlap_circle(outer_component,
+                        np.max(abs(data-predicted), axis=2) <= 4,
+                        outer_coverage, error, pixels.shape[:2], owned_fill=component)
                 if inner is not None and outer is not None:
                     ic = inner[:2]+inner[2:4]/2
                     oc = outer[:2]+outer[2:4]/2

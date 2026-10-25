@@ -1,0 +1,81 @@
+{
+  "python": "3.10.11",
+  "tests": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_owned_circle_rims.py tests/test_same_paint_overlap.py tests/test_mixed_overlap_outlines.py tests/test_island_group_search.py",
+      "exit_code": 0,
+      "tests": 138,
+      "seconds": 230.866
+    },
+    {
+      "command": ".venv/Scripts/python.exe tools/run_pytest_profile.py core-green",
+      "passed": 42,
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe .tmp/run-isolated-circle-baseline-final.py",
+      "exit_code": 0,
+      "accepted": 6,
+      "completed": 12
+    },
+    {
+      "command": ".venv/Scripts/python.exe .tmp/run-final-circle-cli.py",
+      "exit_code": 0,
+      "accepted": [
+        12,
+        12,
+        17
+      ],
+      "completed": [
+        12,
+        12,
+        17
+      ]
+    }
+  ],
+  "runtime_sha256": "2f57cad0f9a5413cc2269ddc98c29c0a4a958ed9e7a208e780c6af69f1afa1f6",
+  "broader_intermediate": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": [
+      "test_repeated_fill_instances_require_separate_observed_bounds[0-False-False-8]",
+      "test_repeated_fill_instances_require_separate_observed_bounds[0-False-True-6]",
+      "test_repeated_fill_instances_require_separate_observed_bounds[0-False-True-8]",
+      "test_repeated_fill_instances_require_separate_observed_bounds[1-False-False-8]",
+      "test_repeated_fill_instances_require_separate_observed_bounds[1-False-True-8]"
+    ],
+    "skipped": "0",
+    "tests": "170",
+    "time": "350.569",
+    "timestamp": "2026-10-25T07:45:01.165204+01:00",
+    "hostname": "MarkusLaptop"
+  },
+  "baseline_dense_controls": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": [
+      "test_repeated_fill_instances_require_separate_observed_bounds[0-False-True-8]",
+      "test_repeated_fill_instances_require_separate_observed_bounds[1-False-False-8]",
+      "test_repeated_fill_instances_require_separate_observed_bounds[1-False-True-8]"
+    ],
+    "skipped": "0",
+    "tests": "5",
+    "time": "22.887",
+    "timestamp": "2026-10-25T07:55:02.619271+01:00",
+    "hostname": "MarkusLaptop"
+  },
+  "current_dense_controls": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": [
+      "test_repeated_fill_instances_require_separate_observed_bounds[0-False-True-8]",
+      "test_repeated_fill_instances_require_separate_observed_bounds[1-False-False-8]",
+      "test_repeated_fill_instances_require_separate_observed_bounds[1-False-True-8]"
+    ],
+    "skipped": "0",
+    "tests": "5",
+    "time": "23.151",
+    "timestamp": "2026-10-25T07:55:54.263278+01:00",
+    "hostname": "MarkusLaptop"
+  }
+}

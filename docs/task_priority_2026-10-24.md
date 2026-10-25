@@ -95,6 +95,15 @@ keine höchste Priorität. SEARCH-STRUCTURE-01 bleibt Rang 1/P0.
 
 ## Bearbeitung des höchsten Rangs
 
+Nachtrag 25.10.2026: Der separate Branch
+`codex/search-structure-owned-circle-rims-2026-10-24` bearbeitet die bekannte
+Grenze gleichfarbiger Kreis-/Rechtecküberdeckungen. Die unabhängige Kreisfüllung
+begrenzt einen zusätzlichen Randvorschlag, wenn die erweiterte Suchregion ein
+anderes gleichfarbiges Objekt erreicht. Die zwölf unveränderten gerundeten
+CLI-Fälle verbessern sich von 6/12 auf 12/12; Zusatzseed und Varianten bleiben
+gesondert ausgewiesen. [Umsetzung und Grenzen](next_arbeitspaket_2026-10-25_owned_circle_rims.md).
+SEARCH-STRUCTURE-01 bleibt als Gesamtaufgabe offen.
+
 Aktueller Teilabschluss: [Gleichfarbige überlappende Instanzen](next_arbeitspaket_2026-10-24_same_paint.md)
 werden anhand sichtbarer heller Konturen getrennt; dieselben zwölf synthetischen
 CLI-Eingaben verbessern sich von 0/12 auf 12/12. Ein zweiter Seed besteht 12/12,
