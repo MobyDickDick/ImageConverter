@@ -2521,6 +2521,7 @@ def _fit_dot_symbol_for_quality(svg, description, width, height):
 
 
 @pytest.mark.parametrize('seed,probe_index', [
+    (113996966622973259, 6),
     (2870690750133000144, 7), (2870690750133000144, 11),
     (2870690750133000144, 14), (20261007, 11),
 ])

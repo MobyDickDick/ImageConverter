@@ -1,0 +1,17 @@
+{
+  "python": "3.10.11",
+  "tests": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/detailtests/test_non_composite_runtime_helpers.py",
+      "exit_code": 0,
+      "passed": 85,
+      "seconds": 68.23
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.run_plan_b_variations --svg artifacts/samples/AR0030.svg --description-file .tmp/ar0030-description.txt --seed 113996966622973259 --keep-debug-artifacts",
+      "before_exit": 1,
+      "after_exit": 0
+    }
+  ],
+  "runtime_sha256": "36ad405c95beaf9925b89442ffc1a3c3e59666cecf5392d5a486a0ceac445e79"
+}
