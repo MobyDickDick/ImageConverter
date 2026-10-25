@@ -1,11 +1,57 @@
 """Register a framed vertical gradient and an open upward chevron from pixels."""
 from __future__ import annotations
 
+from itertools import product
+
 import cv2
 import numpy as np
 
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, pixel_quality
+
 
 def fit_chevron_panel(width, height, *, description, image, render_fn, error_fn):
+    evaluations, render_cache = 0, {}
+    session = current_search()
+
+    def cached_render(content, width, height):
+        nonlocal evaluations
+        if content not in render_cache:
+            evaluations += 1
+            if session:
+                session.evaluations += 1
+            if len(render_cache) >= 256:
+                render_cache.clear()
+            render_cache[content] = render_fn(content, width, height)
+        return render_cache[content]
+
+    def finish(candidate):
+        if candidate is not None:
+            candidate['evaluations'] = evaluations
+        return candidate
+
+    arguments = dict(description=description, image=image, render_fn=cached_render, error_fn=error_fn)
+    incumbent = _fit_chevron_panel(width, height, **arguments)
+    if incumbent is not None and pixel_quality(image, incumbent['rendered'])['passed']:
+        return finish(incumbent)
+    # Alternate photometric losses address different local minima. Keep the
+    # original result unless an alternative passes the unchanged local gates.
+    attempts = []
+    for squared_loss in (False, True):
+        if session and session.time_reason():
+            break
+        rendered_before = evaluations
+        candidate = _fit_chevron_panel(width, height, refine_frame=True,
+                                      squared_loss=squared_loss, **arguments)
+        attempts.append({'loss': 'squared' if squared_loss else 'absolute',
+                         'evaluations': evaluations-rendered_before})
+        if candidate is not None and pixel_quality(image, candidate['rendered'])['passed']:
+            candidate['frame_search'] = attempts
+            return finish(candidate)
+    return finish(incumbent)
+
+
+def _fit_chevron_panel(width, height, *, description, image, render_fn, error_fn,
+                       refine_frame=False, squared_loss=False):
     text = str(description or '').casefold()
     if not all(token in text for token in ('rechteck', 'rahm', 'vertikal', 'verlauf', 'dachlinie', 'oben')):
         return None
@@ -20,7 +66,7 @@ def fit_chevron_panel(width, height, *, description, image, render_fn, error_fn)
     if len(xs) < 30:
         return None
     x, y, w, h = cv2.boundingRect(np.column_stack((xs, ys)).astype(np.int32))
-    if min(w, h) < 8 or mask[y:y+h, x:x+w].mean() < .75:
+    if min(w, h) < 8 or mask[y:y+h, x:x+w].mean() < (.5 if refine_frame else .75):
         return None
     pixels = arr.astype(float)
     profile = np.median(pixels[y+2:y+h-2, x+2:x+w-2], axis=1)
@@ -72,6 +118,13 @@ def fit_chevron_panel(width, height, *, description, image, render_fn, error_fn)
     shade = np.median(values[supported & (strengths > np.percentile(strengths[supported], 65))], axis=0)
     rim_samples = np.concatenate((pixels[y+2:y+h-2, x], pixels[y+2:y+h-2, x+w-1]))
     rim = np.median(rim_samples, axis=0)
+    if refine_frame:
+        # The outermost column can be antialiased background after a shift.
+        # Estimate the thin dark frame from a narrow band inside each side.
+        band = max(2, int(round(w*.06)))
+        rim_samples = np.concatenate((pixels[y+2:y+h-2, x:x+band].reshape(-1, 3),
+                                      pixels[y+2:y+h-2, x+w-band:x+w].reshape(-1, 3)))
+        rim = np.percentile(rim_samples, 15, axis=0)
     # A bounded number of native gradient stops describes a continuous profile;
     # no per-pixel paths or reference vectors enter the runtime.
     indices = np.unique(np.rint(np.linspace(0, len(profile)-1, min(9, len(profile)))).astype(int))
@@ -83,25 +136,34 @@ def fit_chevron_panel(width, height, *, description, image, render_fn, error_fn)
     # Rectangle, left endpoint, join, right endpoint, mark width and colors.
     p = [x+.5, y+.5, w-1., h-1., 1., *endpoints[:2], px, py, *endpoints[2:], stroke,
          *rim, *shade, 0., 0., 0.]
+    if refine_frame:
+        p[2:4] = [x+w-.5, y+h-.5]
 
     def color(value):
         return '#' + ''.join(f'{int(round(v)):02x}' for v in np.clip(value[::-1], 0, 255))
 
     def svg(values):
         rx, ry, rw, rh, bw, ax, ay, cx, cy, bx, by, sw = values[:12]
+        if refine_frame:
+            rw, rh = rw-rx, rh-ry
         gradient = ''.join(f'<stop offset="{offset:.6f}" stop-color="{color(shade+values[18:21])}"/>'
                            for offset, shade in stops)
+        coordinates = (f'gradientUnits="userSpaceOnUse" x1="0" y1="{y}" x2="0" y2="{y+h}"'
+                       if refine_frame else 'x1="0" y1="0" x2="0" y2="1"')
         return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
-                f'<defs><linearGradient id="panel_fill" x1="0" y1="0" x2="0" y2="1">{gradient}</linearGradient></defs>'
+                f'<defs><linearGradient id="panel_fill" {coordinates}>{gradient}</linearGradient></defs>'
                 f'<rect x="{rx:.6f}" y="{ry:.6f}" width="{rw:.6f}" height="{rh:.6f}" fill="url(#panel_fill)" '
                 f'stroke="{color(values[12:15])}" stroke-width="{bw:.6f}"/>'
                 f'<polyline points="{ax:.6f},{ay:.6f} {cx:.6f},{cy:.6f} {bx:.6f},{by:.6f}" fill="none" '
                 f'stroke="{color(values[15:18])}" stroke-width="{sw:.6f}" stroke-linejoin="miter"/></svg>\n')
 
     evaluations, cache = 0, {}
+    session = current_search()
 
     def measure(values):
         nonlocal evaluations
+        if session and session.time_reason():
+            return None
         content = svg(values)
         if content in cache:
             return cache[content]
@@ -110,7 +172,8 @@ def fit_chevron_panel(width, height, *, description, image, render_fn, error_fn)
         if rendered is None:
             return None
         error = float(error_fn(image, rendered))
-        result = (error, content, rendered) if np.isfinite(error) else None
+        loss = float(np.mean((pixels-rendered.astype(float))**2)) if squared_loss else error
+        result = (loss, content, rendered, error) if np.isfinite(error) and np.isfinite(loss) else None
         if len(cache) >= 256:
             cache.clear()
         cache[content] = result
@@ -118,6 +181,8 @@ def fit_chevron_panel(width, height, *, description, image, render_fn, error_fn)
 
     def valid(values):
         rx, ry, rw, rh, bw, ax, ay, cx, cy, bx, by, sw = values[:12]
+        if refine_frame:
+            rw, rh = rw-rx, rh-ry
         return (min(rw, rh) > 4 and .1 <= min(bw, sw) and max(bw, sw) < rh*.3
                 and rx-2 <= ax < cx < bx <= rx+rw+2 and cy < min(ay, by)
                 and ry-2 < cy < ry+rh*.4 and max(ay, by) < ry+rh)
@@ -125,7 +190,18 @@ def fit_chevron_panel(width, height, *, description, image, render_fn, error_fn)
     best = measure(p)
     if best is None:
         return None
-    initial_error = best[0]
+    initial_error = best[3]
+    if refine_frame:
+        # Move the four sides jointly before fitting color. Otherwise a bright
+        # rim can hide misplaced sides and trap subsequent single-value steps.
+        seed = p.copy()
+        for shifts in product((-1.5, 0., 1.5), repeat=4):
+            candidate = seed.copy()
+            candidate[:4] = [value+shift for value, shift in zip(seed[:4], shifts)]
+            if valid(candidate):
+                measured = measure(candidate)
+                if measured is not None and measured[0] < best[0]-1e-9:
+                    p, best = candidate, measured
     for step in (1., .5, .25, .125):
         for _ in range(2):
             for index in range(len(p)):
@@ -137,10 +213,13 @@ def fit_chevron_panel(width, height, *, description, image, render_fn, error_fn)
                     measured = measure(candidate)
                     if measured is not None and measured[0] < best[0]-1e-9:
                         p, best = candidate, measured
-    if best[0] > initial_error or not valid(p):
+    if best[3] > initial_error or not valid(p):
         return None
     residual = np.max(np.abs(pixels-best[2].astype(float)), axis=2) > 65
     if residual.mean() > .04:
         return None
-    return {'svg': best[1], 'rendered': best[2], 'error': best[0], 'initial_error': initial_error,
-            'parameters': p, 'evaluations': evaluations, 'source': 'raster_chevron_panel_v1'}
+    reported_parameters = p.copy()
+    if refine_frame:
+        reported_parameters[2:4] = [p[2]-p[0], p[3]-p[1]]
+    return {'svg': best[1], 'rendered': best[2], 'error': best[3], 'initial_error': initial_error,
+            'parameters': reported_parameters, 'evaluations': evaluations, 'source': 'raster_chevron_panel_v1'}

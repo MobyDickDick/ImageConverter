@@ -1,5 +1,10 @@
 # ImageConverter
 
+Die [Issue-Bearbeitung vom 25. Oktober](artifacts/evaluation/issue_backlog_v1/README.md)
+inventarisiert 92 offene GitHub-Issues und korrigiert verschobene, eng beschnittene
+Verlaufspanels aus #1966, #1969 und #2030. Die unveränderten CLI-Grenzen werden
+bei allen drei Originalen und ihren 48 Varianten bestanden (51/51 statt 45/51).
+
 Der [P0-Teil für gleichfarbige überlappende Instanzen](docs/next_arbeitspaket_2026-10-24_same_paint.md)
 nutzt sichtbare helle Konturen zur Instanztrennung und Prüfung der Zeichenreihenfolge.
 Zwölf identische synthetische CLI-Eingaben verbessern sich von 0/12 auf 12/12;

@@ -1,0 +1,1672 @@
+{
+  "issue_count": 92,
+  "phase_counts": {
+    "original": 68,
+    "variations": 20,
+    "execution": 4
+  },
+  "investigation_group_count": 80,
+  "grouping_note": "Same source and description, separated by phase; shared causes require reproduction.",
+  "groups": [
+    {
+      "source": "",
+      "description_sha256": null,
+      "phase": "execution",
+      "issues": [
+        {
+          "issue": 1925,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1925",
+          "seed": null,
+          "source_svg_sha256": null,
+          "passed": null,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "source": "AC0010.svg",
+      "description_sha256": "ece50f3d4f014b2a392dea310b2e58b2729afae8624824b9bc7d271185c7b252",
+      "phase": "execution",
+      "issues": [
+        {
+          "issue": 1989,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1989",
+          "seed": 7251545664787153267,
+          "source_svg_sha256": "876b18a90d4c8993f2a8f69b0f07a47c70941e709a289714a52ef4a241c2153f",
+          "passed": 0,
+          "failures": [
+            "converter_error"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0010.svg",
+      "description_sha256": "ece50f3d4f014b2a392dea310b2e58b2729afae8624824b9bc7d271185c7b252",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 1952,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1952",
+          "seed": 7269942143418566905,
+          "source_svg_sha256": "876b18a90d4c8993f2a8f69b0f07a47c70941e709a289714a52ef4a241c2153f",
+          "passed": 8,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0011.svg",
+      "description_sha256": "299127912a8321fccc49106a78e9b6b2a856ab4cd15cf20c04fddd45168302eb",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 1915,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1915",
+          "seed": 3894636356651210335,
+          "source_svg_sha256": "1a8a71f97914e7b86d860acb66f4bf8ce7ac6367c4a379cd40a7463b0a2f5dbd",
+          "passed": 4,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        },
+        {
+          "issue": 1973,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1973",
+          "seed": 1339920020816404371,
+          "source_svg_sha256": "b9753addc35023b6b6785df904bdee4dba4e5a8e2e987b2f6c14c77ebea1b49c",
+          "passed": 8,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0020_L.svg",
+      "description_sha256": "365360718fed0e91f7441283dbb9d9dd561f9c35f32ff6571e0a4a94209ca572",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2013,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2013",
+          "seed": 8847105123120303769,
+          "source_svg_sha256": "403e5b5308af56155acf32dbc1cf0b2c58817fe871a914c890d9dab3f4e82c69",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "excessive_svg_elements",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0020_M.svg",
+      "description_sha256": "365360718fed0e91f7441283dbb9d9dd561f9c35f32ff6571e0a4a94209ca572",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1995,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1995",
+          "seed": 6980058105215859088,
+          "source_svg_sha256": "50159466000511117f782510bfb2442694443ef7acef2d9ade2d3626e6134faf",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0020_S.svg",
+      "description_sha256": "365360718fed0e91f7441283dbb9d9dd561f9c35f32ff6571e0a4a94209ca572",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2035,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2035",
+          "seed": 706284723999746462,
+          "source_svg_sha256": "946dd181f36972af35b98c33b693ef07d48c342c745141b9603e6fccd4285371",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0021.svg",
+      "description_sha256": "5225d376783b0cdc75804c251c3cdc0eae5bf725a2bc58517dbd7c340432cbad",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1986,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1986",
+          "seed": 7988587314867699274,
+          "source_svg_sha256": "48ae4b4d8a27b621a25cd7b15b422726ade2c45609fd94835beef83ef0c3b449",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0022.svg",
+      "description_sha256": "b36ec223a95a2313d1b0d74ffe3766d7bf74a62b13ee49119eb9667213362715",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2004,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2004",
+          "seed": 3088499142329342898,
+          "source_svg_sha256": "a2ab313d2d54aeca82c9385bb30137e7bdcacada6ef031a49de22a65dd0a0365",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0023.svg",
+      "description_sha256": "c798148721f230e9e6f80fa1f78224af267282b42886c5c4c48c46a50beec83c",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1985,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1985",
+          "seed": 7521201433447397004,
+          "source_svg_sha256": "3675f6e9ef6f3e6f95b261552af7baa702dee6beaa3162e51a3a01fd90ea938a",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0024.svg",
+      "description_sha256": "7dbf57a486cd023812cc9a2437f212956cc9eb338f22bbd05cc4031397a6ad30",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2015,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2015",
+          "seed": 1459701381324347703,
+          "source_svg_sha256": "4ecf6ae20e2883d102ae15cf0c5e00a0d247483ce65b8105ac1edb30e683b692",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0025.svg",
+      "description_sha256": "e7f0aea9118db24b01cf7333632202637e07ecbd8276f4a1f86c6f786c5dab0d",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1987,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1987",
+          "seed": 8032826214701489102,
+          "source_svg_sha256": "2d7b78a9acb92175475b5a122ea5ce2175d114ae91a83056ab13234ffd7bb41f",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0026.svg",
+      "description_sha256": "15103f0c896d3198c6e042d91ac784d3fbe56930ea93bd520341afa4063bb8af",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1997,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1997",
+          "seed": 6839313503776265967,
+          "source_svg_sha256": "959efc40eabce3a381a1d2d846974ad52500a0f7ea0098c5684b4cf42456ee1d",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0030.svg",
+      "description_sha256": "85fbb2eb0f5bf7ab7d562711729ee6c174a57e4cb2d119f2704fe8a509466686",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1958,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1958",
+          "seed": 7826912489806781115,
+          "source_svg_sha256": "232b6f86f1dd227bc1c05bbf95f7cb6d7b38f46455b794f5c832f6aa9e0fc895",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0030_L.svg",
+      "description_sha256": "85fbb2eb0f5bf7ab7d562711729ee6c174a57e4cb2d119f2704fe8a509466686",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1957,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1957",
+          "seed": 3655157092393825781,
+          "source_svg_sha256": "1fa19ffe084d35a328f9e63808595df4fee423e5b2185d1f322b23acf19974cb",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0030_M.svg",
+      "description_sha256": "85fbb2eb0f5bf7ab7d562711729ee6c174a57e4cb2d119f2704fe8a509466686",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2041,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2041",
+          "seed": 1589860777985484022,
+          "source_svg_sha256": "ad0baa2165dfa16cdd060200324bc80fefe53dc8d2508c495e57b83330358c60",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0030_S.svg",
+      "description_sha256": "85fbb2eb0f5bf7ab7d562711729ee6c174a57e4cb2d119f2704fe8a509466686",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1978,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1978",
+          "seed": 3948467413299280102,
+          "source_svg_sha256": "86c88796ee7b90768333325451b63d58af6543f55038f8a06abedcaffb09b146",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0040_L.svg",
+      "description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1920,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1920",
+          "seed": 28642889754455831,
+          "source_svg_sha256": "053ee063d7b9f71b6536bb43388e71dfc48f793f48efe2f26b5147f93108a4a4",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        },
+        {
+          "issue": 2005,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2005",
+          "seed": 9013471638120407803,
+          "source_svg_sha256": "46f0953f54e089943800e5a44cdccd3baa4005344022471d03be3dfbdbcbd381",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0040_M.svg",
+      "description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1914,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1914",
+          "seed": 5179499181331817237,
+          "source_svg_sha256": "4e40417b32dbf5c5848ac103f836a71eee8a804c55208fc6991a6ec1d13bc384",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        },
+        {
+          "issue": 2049,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2049",
+          "seed": 1988917130584471034,
+          "source_svg_sha256": "9e00876356ce0e7dc66b1221b4a8c0d5145f3ece2fa86277aa58a7b5c0babcc1",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0040_S.svg",
+      "description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2011,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2011",
+          "seed": 1845397925067363440,
+          "source_svg_sha256": "d8539861ab726a3389f5ff3a1b1abad5af057079cd735e39e12170012707c66d",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "excessive_svg_elements",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0050_L.svg",
+      "description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2025,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2025",
+          "seed": 2593117257596889295,
+          "source_svg_sha256": "97bdcef874a7b4218bcaff7ac57a439ece5925e51a9385912b114b4f9e5a242e",
+          "passed": 0,
+          "failures": [
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0050_M.svg",
+      "description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1961,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1961",
+          "seed": 2161445626769369742,
+          "source_svg_sha256": "b7a2517d70b69e55debf7a5b210668eb21788c9b5fe5e8a11619c5fa119c7555",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0050_S.svg",
+      "description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1996,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1996",
+          "seed": 3553694800005103399,
+          "source_svg_sha256": "72c532dcce29ebe7a1587e225ab67478669e342bbf91a1f18de3c1033d4ed94e",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0060_L.svg",
+      "description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1954,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1954",
+          "seed": 6340155927268462133,
+          "source_svg_sha256": "5fef1cc7ec29bd9ece108a1b42244f7128e7008792e56e79f4d15b652245a849",
+          "passed": 0,
+          "failures": [
+            "excessive_svg_elements"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0060_M.svg",
+      "description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1963,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1963",
+          "seed": 1049023809323127787,
+          "source_svg_sha256": "01c54df96f8ade35b7a6545e5d6c420d9ef056014c27662321acfa9878fcf785",
+          "passed": 0,
+          "failures": [
+            "embedded_raster",
+            "no_vectors"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0060_S.svg",
+      "description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2017,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2017",
+          "seed": 1264419043408502515,
+          "source_svg_sha256": "7b3d1c99e968cd1aef701cbf0493c4b572ce9845bda14ad7917898f5a7cb3ec0",
+          "passed": 0,
+          "failures": [
+            "embedded_raster",
+            "no_vectors"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0070_L.svg",
+      "description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1962,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1962",
+          "seed": 8391421415684509196,
+          "source_svg_sha256": "0d5484b7a15701538d40dd0a162efd85d7fe845715bb9f339b3441f9cee06cd5",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "excessive_svg_elements",
+            "foreground_iou_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0070_M.svg",
+      "description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2032,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2032",
+          "seed": 7474465867783927225,
+          "source_svg_sha256": "e3dc28fc19c1815119992b5c56ca898a3448755c887983095998621beaec9d25",
+          "passed": 0,
+          "failures": [
+            "excessive_svg_elements",
+            "foreground_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0080_L.svg",
+      "description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1919,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1919",
+          "seed": 5251253178987757765,
+          "source_svg_sha256": "604016ee02d6cec2e0bd5ab3f6ad8f4d1bdf1a3c7db1dba4fa9b55a4cff6a5f3",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        },
+        {
+          "issue": 1955,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1955",
+          "seed": 1892154302977917172,
+          "source_svg_sha256": "604016ee02d6cec2e0bd5ab3f6ad8f4d1bdf1a3c7db1dba4fa9b55a4cff6a5f3",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0100_L.svg",
+      "description_sha256": "059105ee0e50402892414ed97c677487726bd3e7b8a536c3b71f8fc3960ccd0b",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 1964,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1964",
+          "seed": 2586510048359759908,
+          "source_svg_sha256": "e52d5a205bc153870866714785d74431dd0323417e28ade9f1fae1981c4a58b2",
+          "passed": 3,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0110_L.svg",
+      "description_sha256": "70959d0ad084ed236fec49e65ff7995c6ff057ffb6869293928bfa135b00be43",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1972,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1972",
+          "seed": 8940818581681680370,
+          "source_svg_sha256": "cfec6d96fc6aba5439bf51044adcffb2e434fe78269f4ebb3848fa560070c9e0",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0120_L.svg",
+      "description_sha256": "8d52d300148e9cfb79217dc38226c5aecf572c54c9521d03e4e1645a82a0c671",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2046,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2046",
+          "seed": 4137552546700916470,
+          "source_svg_sha256": "0e421c5f2b931c4e37f756a9f2fee33e75e0f1550d84cee1f22a2cccf006a1d1",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0130_L.svg",
+      "description_sha256": "9c2c7543c1e2a321a1a2510403c39dc58d4ff92b6872a610fcf87e87163cd953",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 2009,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2009",
+          "seed": 8773423858047252988,
+          "source_svg_sha256": "8eb61a0f3e6dbbcef5700ea36bf0c865e9b421fdcf362771a0dec1f304f873c9",
+          "passed": 7,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0151_L.svg",
+      "description_sha256": "ec5dbd64f1ce0a2b09ce878f46b64296dbbf2a0abecc2dd1fd975056cf532bcc",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1921,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1921",
+          "seed": 943990239486184258,
+          "source_svg_sha256": "8622539cfef21403f732b448ca265b819f18b58f0182c0ba556b5bff82bda51c",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        },
+        {
+          "issue": 2040,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2040",
+          "seed": 7924647832119293185,
+          "source_svg_sha256": "8622539cfef21403f732b448ca265b819f18b58f0182c0ba556b5bff82bda51c",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0153_L.svg",
+      "description_sha256": "35340179f5341f622001e3f7dc859ad1e8a29eea49f794d57069d4dc356f6300",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2054,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2054",
+          "seed": 1593420818107279988,
+          "source_svg_sha256": "021462295f2f7a973c4f396dd4a60f57af75f6b98cc2f110349837645580823b",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0202_2.svg",
+      "description_sha256": "de5d5fac4c7b54da1f4908d8440cee15a86e2a6bfaf605e8754f1885655c48b2",
+      "phase": "execution",
+      "issues": [
+        {
+          "issue": 1992,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1992",
+          "seed": 7015221707762885603,
+          "source_svg_sha256": "5dd849a0e506d1a6d8b463eaa6407123998d36ec4193a3e24e732998628862c9",
+          "passed": 0,
+          "failures": [
+            "converter_error"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0202_2.svg",
+      "description_sha256": "de5d5fac4c7b54da1f4908d8440cee15a86e2a6bfaf605e8754f1885655c48b2",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 1911,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1911",
+          "seed": 8120411260921138529,
+          "source_svg_sha256": "5dd849a0e506d1a6d8b463eaa6407123998d36ec4193a3e24e732998628862c9",
+          "passed": 7,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0212_L.svg",
+      "description_sha256": "60b8050615c509df351145c3f94da4f4b0d3adf9154895114b758c0318319cfe",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2006,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2006",
+          "seed": 4839127565665558835,
+          "source_svg_sha256": "95c996ed7f198dd1188cafe9288d98d82bbc32cb2f263fd6671a5862b583ab8e",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0213_L.svg",
+      "description_sha256": "592ec289163735d2908e79b28b09edcda9da9f824b0cb7c5189178cb2058a9f3",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2024,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2024",
+          "seed": 7020455667387118137,
+          "source_svg_sha256": "1b2cc9d5904e18ce5ec994a842db149a81e5ded217184675389e6c0e8c666b7e",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0223_L.svg",
+      "description_sha256": "dcd299e699c4a1e1c076832a5ccf2edb40e982147cc2a5c58865721f6cbc497d",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1979,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1979",
+          "seed": 763572254472387629,
+          "source_svg_sha256": "4e360351a400477eebebe2e29d0244cefad377884f123e5fcd368dcc61b3c0b7",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0223_L_sia.svg",
+      "description_sha256": "832879cb5f1a365a1a1f27d86be87b23dc91853f4cc832fd48d59e518d6c9458",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 1923,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1923",
+          "seed": 5435630782239329070,
+          "source_svg_sha256": "e5d3ecf1fbdd09c9688618add1b060408890a7468dd586be524ec419fc3b3d86",
+          "passed": 16,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        },
+        {
+          "issue": 2014,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2014",
+          "seed": 4601033047798784696,
+          "source_svg_sha256": "e5d3ecf1fbdd09c9688618add1b060408890a7468dd586be524ec419fc3b3d86",
+          "passed": 16,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0234_S.svg",
+      "description_sha256": "c5f779cd8f0a746d432fa584c0eecc68ea398fdd1e0ee74e5faaa61b05b8270c",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1982,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1982",
+          "seed": 4044927378651176914,
+          "source_svg_sha256": "586970be0a3b2c489e6819cb10ad596881f4554d4a2de926d692185e4f99efc1",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0302_L.svg",
+      "description_sha256": "58ba459d4b83e22e200847a46d23819b165c59c0334ec5974524d158a532bbb0",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2001,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2001",
+          "seed": 8194208814548564791,
+          "source_svg_sha256": "cf23fdd869599f1e632dadad21a4cad76a606c506b4fff76d7e7768f73c1b8a5",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0402_L.svg",
+      "description_sha256": "a207b65426e4ec4dfb28dba7d9596326f3257d145244c2c37b5a1788282bf1fa",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 1967,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1967",
+          "seed": 1647681808724990912,
+          "source_svg_sha256": "62a5206bc0a54d0c63a29d02294f40834cc91b3225988af824f0cf8271b2c299",
+          "passed": 15,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0502_1L_sia.svg",
+      "description_sha256": "3b4b22a3ebde72a32de5f0ec240ddb33c19f82bc279846600b97a4ccf0eed23c",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2028,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2028",
+          "seed": 5487544191791254895,
+          "source_svg_sha256": "dbfde800a8839a13b3bfa3e67dbecad9e43ad33e22d2d99f649426e3e1d10321",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0502_1M_sia.svg",
+      "description_sha256": "3b4b22a3ebde72a32de5f0ec240ddb33c19f82bc279846600b97a4ccf0eed23c",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1981,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1981",
+          "seed": 8540271892314221728,
+          "source_svg_sha256": "0bc958c80a11e1b5c98b2012105d2006b6c50e39e20e50446191cc50cc84d99e",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0511_L.svg",
+      "description_sha256": "fd254fbb6ccf86ce8b5c0f78a0494ac222a8a81e070a349cb7ff1d0caacc3ca8",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1990,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1990",
+          "seed": 9035676738295867710,
+          "source_svg_sha256": "2b7eefe9a32598f3984ac6ae61d4dcc51d8569eba435e838ef8c4e1d8230052b",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0511_zu.svg",
+      "description_sha256": "fd254fbb6ccf86ce8b5c0f78a0494ac222a8a81e070a349cb7ff1d0caacc3ca8",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1991,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1991",
+          "seed": 4030458745502634259,
+          "source_svg_sha256": "c7af89a8f03d515be3d59ed6e21f0b65824ec54704412002e5ed661efd0572f9",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0512_L.svg",
+      "description_sha256": "abd23c64963be77bf47b5553d84b780578fb10726012741ae89de9fbeb34ee66",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1922,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1922",
+          "seed": 826585187472615501,
+          "source_svg_sha256": "139499af2cc18c3b8f96b25a386f766cbe00e66a582cbb425287ae520e285efd",
+          "passed": 0,
+          "failures": [
+            "normalized_mse_outside_limit"
+          ]
+        },
+        {
+          "issue": 1993,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1993",
+          "seed": 5192663669662514178,
+          "source_svg_sha256": "139499af2cc18c3b8f96b25a386f766cbe00e66a582cbb425287ae520e285efd",
+          "passed": 0,
+          "failures": [
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0552_2_L.svg",
+      "description_sha256": "751d6e045ffba57611882e402c6c7c9faae2648d73ea593c5600e45f5edb9c26",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 1909,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1909",
+          "seed": 2820021284389229367,
+          "source_svg_sha256": "3e45042edf152f0551758470fa49cac7b2ffe5d33a266f09227bc8579524512f",
+          "passed": 12,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ]
+        },
+        {
+          "issue": 1999,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1999",
+          "seed": 7262616060025015007,
+          "source_svg_sha256": "3e45042edf152f0551758470fa49cac7b2ffe5d33a266f09227bc8579524512f",
+          "passed": 14,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0554_1_L.svg",
+      "description_sha256": "f1e6abbc035156d4cd9d9d3f14e3c4a338ee4c64ffddcbd862394b9c7803f5fd",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 2030,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2030",
+          "seed": 4573027242291195631,
+          "source_svg_sha256": "5b974b760d47368609fce9e53afae5e6e0c579017546463cebb8706bfff49786",
+          "passed": 16,
+          "failures": [
+            "foreground_iou_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0554_L.svg",
+      "description_sha256": "f1e6abbc035156d4cd9d9d3f14e3c4a338ee4c64ffddcbd862394b9c7803f5fd",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 1969,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1969",
+          "seed": 6329305985306020792,
+          "source_svg_sha256": "c5bc093c553416bf68b3bed5ced448e7c2f257ce691e7b7d5a1bed246df6b27b",
+          "passed": 13,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0554_L_PlanB.svg",
+      "description_sha256": "f1e6abbc035156d4cd9d9d3f14e3c4a338ee4c64ffddcbd862394b9c7803f5fd",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 1966,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1966",
+          "seed": 4263954452271046129,
+          "source_svg_sha256": "d8dac587ddd838b28c5dafc699d049593158faa20ab9b59b4506adda02291521",
+          "passed": 16,
+          "failures": [
+            "edge_alignment_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0800.svg",
+      "description_sha256": "9d45dba5f1e30bed2ea8f42afa3d75ef633d72a60208e3fdc5d42e8e09930905",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1953,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1953",
+          "seed": 8325787685985887230,
+          "source_svg_sha256": "b64d74897ee7d6ce09fdc290947f0f3056aa6e836f4ce408a3bbe11349a2c879",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0814_L.svg",
+      "description_sha256": "498c26aec0019365b61e766a80fd5af85149fed306092e1e554071dff1d72d04",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1913,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1913",
+          "seed": 46061123138360731,
+          "source_svg_sha256": "79fb4a117ca5e634c587d48de40765aa2528957569bcd5353d00ae5c5894f66b",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        },
+        {
+          "issue": 1984,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1984",
+          "seed": 4933841461052106114,
+          "source_svg_sha256": "79fb4a117ca5e634c587d48de40765aa2528957569bcd5353d00ae5c5894f66b",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0814_M.svg",
+      "description_sha256": "498c26aec0019365b61e766a80fd5af85149fed306092e1e554071dff1d72d04",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1951,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1951",
+          "seed": 2607418039833207797,
+          "source_svg_sha256": "a5042e01a5a63b9bc00443d37585e00a7f0e450f0a57f378fcf59ae4e63cfedb",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0831_L.svg",
+      "description_sha256": "664d4748f5f9ced88afbd1e610dbb56bae83cbefe2e893d98260f0e548071522",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2002,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2002",
+          "seed": 1431409029515138121,
+          "source_svg_sha256": "24f585ae7db76b42a33f45cb352b6eb191f3028a696179ba366080e60fb436a2",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0837_L.svg",
+      "description_sha256": "10953f522faa3902802e5bf6b72bde8ede4874221fb620695bd019c97eb3a573",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1971,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1971",
+          "seed": 7178373866990694081,
+          "source_svg_sha256": "2ea0a219c162573635ea56f89b52e0d7132a072f767bbcd8013790d8e467113b",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0838_M.svg",
+      "description_sha256": "0827ded30437622adf09327a782a5665c42da38a7bbf6d9be3beed63a076b615",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1960,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1960",
+          "seed": 5701493269828857657,
+          "source_svg_sha256": "8af544f9c03781e65c51959ade695a9e8791a173287c45c4e298a6510cea6516",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0882_L.svg",
+      "description_sha256": "556dddd7242aae5e75391bd2ce19e85a03d4fecd6a120ae5c631740852da9e52",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2020,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2020",
+          "seed": 8144837423817796894,
+          "source_svg_sha256": "d7f6d5a06e29315bce118f053d97b28ae8c85a3ea19e93e2df78f47d9df43514",
+          "passed": 0,
+          "failures": [
+            "foreground_iou_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0VR2_AB_M.svg",
+      "description_sha256": "5c2a8e3918723dab23f1a970a55ee89a04feb8ab88f986f0aa275f17471bb102",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2023,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2023",
+          "seed": 6518500078023561436,
+          "source_svg_sha256": "6b60f660804fd3fc851d4fad764da7b4126b9048e7f68b921e764e2357298918",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0VR2_M.svg",
+      "description_sha256": "fe9855fafa99cf8577fd6a16c92b066f295a513b8fbc1fbaab233c3365766244",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2027,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2027",
+          "seed": 5407348563680179276,
+          "source_svg_sha256": "944a02ed3f939fa27b8ab07ccbca5a12fcc504e39d71fb59a3c00e1d8ec81922",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0VR2_M4.svg",
+      "description_sha256": "d6aa5945e365397687e622e67baaf6271e60bbf86215b47a4b2fddc92829fac4",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2010,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2010",
+          "seed": 4111482401137333677,
+          "source_svg_sha256": "e27ed68091d4be6a6a5ef4484327e0b0228e05db9c68031d2ef6f6539752662e",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AC0VR2_ZL_M.svg",
+      "description_sha256": "f638c0b0df89b4b3f9d4c1b958b73e19285f5ca0b5f820dfc908d3c4201b483e",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1977,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1977",
+          "seed": 3129339257213387134,
+          "source_svg_sha256": "0162b26da51a471006030e68f17f144ed5c95eb2af49a2ec84692aabfbef8fd4",
+          "passed": 0,
+          "failures": [
+            "foreground_iou_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AR0030.svg",
+      "description_sha256": "e43774307a6001270c3f95149df6e9e2d4ceaf31c0ff61821635c97b2a5d675a",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 2050,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2050",
+          "seed": 113996966622973259,
+          "source_svg_sha256": "df34f8082fc3d734bae545bffee22444e94813db690ca7aba54418514f275161",
+          "passed": 16,
+          "failures": [
+            "foreground_iou_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AR0030_1.svg",
+      "description_sha256": "e43774307a6001270c3f95149df6e9e2d4ceaf31c0ff61821635c97b2a5d675a",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1959,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1959",
+          "seed": 3700976991791896927,
+          "source_svg_sha256": "57275fcae2bc1d53201b183866a3ab5e8fd7cfb056366463433d2a261c96df5e",
+          "passed": 0,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AR0030_zu.svg",
+      "description_sha256": "e43774307a6001270c3f95149df6e9e2d4ceaf31c0ff61821635c97b2a5d675a",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1968,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1968",
+          "seed": 297008521113594947,
+          "source_svg_sha256": "f43342c1eb032d512b74cd7604588c34f03c0b124caccceeba437b8deb2e0b80",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AR0140.svg",
+      "description_sha256": "a425d1d60565851c74b4b3aee4fe92ed3c261e2bd20e646c6b27532297bd94f1",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 1998,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1998",
+          "seed": 3674203993609373335,
+          "source_svg_sha256": "0e53caf0c553eb4ffa8c8f124b51f1b848172dfdee51c71e4d9d5cd8927fc4c8",
+          "passed": 6,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "AR0140_zu.svg",
+      "description_sha256": "a425d1d60565851c74b4b3aee4fe92ed3c261e2bd20e646c6b27532297bd94f1",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 2044,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2044",
+          "seed": 941030078360271216,
+          "source_svg_sha256": "c88fa136a2dd0502615d7ab32b3ff3040aab6d33d2d71787248ddf3c603d9fa0",
+          "passed": 3,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "DLG0010.svg",
+      "description_sha256": "6cb04502624bf22adb7070c2059744070841357e1e94df7220776c5b162fd3b2",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 1974,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1974",
+          "seed": 6625789333737341898,
+          "source_svg_sha256": "ca14d734022830e0d83f06c62d6d6d22e521d1c39c123aaf9e061884eeb2be87",
+          "passed": 2,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "DLG0011.svg",
+      "description_sha256": "90cebf5a3540de53c79ba1b3cc0b569a1f3b8de0603fe06e10567000b8ac7396",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2043,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2043",
+          "seed": 9008795273847373806,
+          "source_svg_sha256": "0a5d8a65a5d153a78ff08ee337db15e9725e7d7e4aa0e7e0e074c6b64931a868",
+          "passed": 0,
+          "failures": [
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "DLG0011.svg",
+      "description_sha256": "9836087c0b020611cd23a51661e3621a57c1563048cca8abe88fceff3bba1978",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2012,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2012",
+          "seed": 3698581717560541758,
+          "source_svg_sha256": "0a5d8a65a5d153a78ff08ee337db15e9725e7d7e4aa0e7e0e074c6b64931a868",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "DLG0014.svg",
+      "description_sha256": "299127912a8321fccc49106a78e9b6b2a856ab4cd15cf20c04fddd45168302eb",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1917,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1917",
+          "seed": 3913302750361798716,
+          "source_svg_sha256": "5aa76c16f8e5ac736e2a9c912395611bea3ce71e9fbfbf7f765ff15e57eb8346",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        },
+        {
+          "issue": 2034,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2034",
+          "seed": 5271654384555134406,
+          "source_svg_sha256": "5aa76c16f8e5ac736e2a9c912395611bea3ce71e9fbfbf7f765ff15e57eb8346",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "DLG0016.svg",
+      "description_sha256": "8a2de3bbfc198fca4b5484a3cc930dd3154092dfd96bad1213e4bf1f182c2669",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 2021,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2021",
+          "seed": 5195955822303668787,
+          "source_svg_sha256": "87c5a70d5ef1073ed08770660963f766ff8dba5468208e341c6a9d7eb15317fa",
+          "passed": 0,
+          "failures": [
+            "embedded_raster",
+            "no_vectors"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "DLG0071.svg",
+      "description_sha256": "9836087c0b020611cd23a51661e3621a57c1563048cca8abe88fceff3bba1978",
+      "phase": "variations",
+      "issues": [
+        {
+          "issue": 1918,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1918",
+          "seed": 5567174180733911761,
+          "source_svg_sha256": "b4f8c2979f45e91a398be08e0879ada7fbed9de3b57d14a146e9c30404417b72",
+          "passed": 2,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        },
+        {
+          "issue": 2007,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2007",
+          "seed": 4767790930347660982,
+          "source_svg_sha256": "b4f8c2979f45e91a398be08e0879ada7fbed9de3b57d14a146e9c30404417b72",
+          "passed": 2,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "GE9034_2M.svg",
+      "description_sha256": "6c144833cafc43040985049b7acf357d1b891e21dd1d2dad456e70ebb9f70227",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1956,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1956",
+          "seed": 4740773821499227641,
+          "source_svg_sha256": "4ec5ea37253e0a256750dda62bbbcbf37d809a6fd23004c3cb13668093c582a5",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "GE9041_6M.svg",
+      "description_sha256": "6cb04502624bf22adb7070c2059744070841357e1e94df7220776c5b162fd3b2",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1994,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1994",
+          "seed": 7195368765112077330,
+          "source_svg_sha256": "570fcf37dce0555904554c6d936694d55d1bf826c878e69dc0550903c243e731",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "z_111.svg",
+      "description_sha256": "1daa4350e1c61f59ed40cada655dab982eba1da94206ccdd115df95df1330735",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1908,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1908",
+          "seed": 5431263462732241740,
+          "source_svg_sha256": "42aee85d16c5662ce8c563ec91335a8b7399bafb44e28e965e78ed4ae76a2281",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        },
+        {
+          "issue": 2037,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/2037",
+          "seed": 1473689138468355328,
+          "source_svg_sha256": "42aee85d16c5662ce8c563ec91335a8b7399bafb44e28e965e78ed4ae76a2281",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "z_201.svg",
+      "description_sha256": "9866c6af83325854cef94862d7fb2358433891c8de34057e8e4bf7d6c882b014",
+      "phase": "execution",
+      "issues": [
+        {
+          "issue": 1980,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1980",
+          "seed": 347146220485913939,
+          "source_svg_sha256": "f5897e9666731f6c26269235857f2a9b37ad52728e676eaec3857bc39311c05f",
+          "passed": 1,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "source": "z_207.svg",
+      "description_sha256": "9866c6af83325854cef94862d7fb2358433891c8de34057e8e4bf7d6c882b014",
+      "phase": "original",
+      "issues": [
+        {
+          "issue": 1976,
+          "url": "https://github.com/MobyDickDick/ImageConverter/issues/1976",
+          "seed": 5418342414630686471,
+          "source_svg_sha256": "b40598a576ed45bbf523ff44ab66cc7be16e250297da9c0b056561c99d04e113",
+          "passed": 0,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit",
+            "foreground_mse_outside_limit",
+            "normalized_mse_outside_limit"
+          ]
+        }
+      ]
+    }
+  ]
+}
