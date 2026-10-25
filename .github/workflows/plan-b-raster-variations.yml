@@ -1,0 +1,61 @@
+name: Plan B raster variation infrastructure
+
+on:
+  pull_request:
+    paths:
+      - 'tools/run_plan_b_variations.py'
+      - 'src/iCCModules/imageCompositeConverterRendering.py'
+      - 'tests/detailtests/test_plan_b_variations.py'
+      - 'artifacts/samples/z_201.svg'
+      - 'artifacts/evaluation/raster_variations_issue_v1/**'
+      - '.github/workflows/plan-b-raster-variations.yml'
+  workflow_dispatch:
+
+jobs:
+  distinct-raster-preparation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Check uniqueness, bounded exhaustion and unchanged quality rejection
+        run: python -m pytest -q tests/detailtests/test_plan_b_variations.py tests/detailtests/test_plan_b_failure_tasks.py tests/test_plan_b_issue_inventory.py
+      - name: Exercise all seventeen CLI cases and preserve their quality results
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          from tools.run_plan_b_variations import run_battery
+
+          manifest = json.loads(Path('artifacts/evaluation/raster_variations_issue_v1/manifest.json').read_text())
+          entry = manifest['replays'][0]
+          source = Path(entry['source_svg'])
+          assert hashlib.sha256(source.read_bytes()).hexdigest() == entry['source_svg_sha256']
+          assert hashlib.sha256(entry['source_description'].encode()).hexdigest() == entry['source_description_sha256']
+          for label, seed in [('frozen', entry['seed']), ('holdout', manifest['holdout_seed'])]:
+              report = run_battery(source, entry['source_description'], Path('.tmp/raster-variations') / label,
+                                   seed=seed, iterations=entry['iterations'], timeout=entry['timeout_seconds'],
+                                   keep_debug_artifacts=True)
+              assert report['status'] == 'completed', report.get('error')
+              assert report['summary']['completed'] == 17
+              assert len({case['input_sha256'] for case in report['cases']}) == 17
+              assert all(case['returncode'] == 0 and not case['blocked_svg_reads'] for case in report['cases'])
+              # This checks infrastructure, not source quality. Do not turn a
+              # completed runner into a satisfactory conversion or erase failures.
+              assert report['summary']['satisfactory'] == all(case['satisfactory'] for case in report['cases'])
+              print(label, report['summary'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: raster-variation-cli-quality-results
+          path: .tmp/raster-variations
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14

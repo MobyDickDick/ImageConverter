@@ -27,6 +27,7 @@ from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
 from src.iCCModules.imageCompositeConverterTiming import run_timed_process
 
 CASE_COUNT = 16
+MAX_VARIATION_CANDIDATES = CASE_COUNT * 16
 MAX_ADDITIONAL_SVGS = 8
 REQUIRED_COUNT = CASE_COUNT + 1  # Original plus all variations.
 DEFAULT_SVG_DIR = ROOT / "artifacts/samples"
@@ -154,7 +155,7 @@ def make_original_case(svg: str, description: str) -> dict:
             "svg": svg, "description": description}
 
 
-def make_variations(svg: str, description: str, seed: int) -> list[dict]:
+def _make_variation_candidates(svg: str, description: str, seed: int) -> list[dict]:
     """Change geometry and wording together; never expose numeric geometry in text."""
     make_original_case(svg, description)
     x, y, w, h, width, height = viewport(svg)
@@ -197,6 +198,52 @@ def make_variations(svg: str, description: str, seed: int) -> list[dict]:
                       "description": varied_description})
     if len({case["svg"] for case in cases}) != CASE_COUNT:
         raise ValueError("Variations are not unique")
+    return cases
+
+
+class VariationSpaceExhausted(ValueError):
+    """The bounded geometry search could not supply distinct raster inputs."""
+
+
+def make_variations(svg: str, description: str, seed: int) -> list[dict]:
+    """Keep the seeded probes; replace only raster duplicates within a fixed budget.
+
+    Tiny or tightly cropped sources can quantize different transforms to the same
+    pixels. A separate retry stream preserves every unaffected legacy probe and
+    never selects candidates using conversion quality.
+    """
+    original = make_original_case(svg, description)
+    width, height = original['width'], original['height']
+    seen = {sha256(render(svg, width, height).tobytes())}
+    descriptions = set()
+    cases = _make_variation_candidates(svg, description, seed)
+    retry_rng = random.Random(seed)
+    replacements = iter(())
+    checked = 0
+    for index, initial in enumerate(cases):
+        candidate = initial
+        rejected = 0
+        while True:
+            if checked >= MAX_VARIATION_CANDIDATES:
+                raise VariationSpaceExhausted(
+                    f'Raster variation space exhausted after {checked} candidates: '
+                    f'{index}/{CASE_COUNT} distinct probes; canvas={width}x{height}; seed={seed}')
+            checked += 1
+            digest = sha256(render(candidate['svg'], width, height).tobytes())
+            if digest not in seen and candidate['description'] not in descriptions:
+                break
+            rejected += 1
+            try:
+                candidate = next(replacements)
+            except StopIteration:
+                replacements = iter(_make_variation_candidates(svg, description, retry_rng.getrandbits(63)))
+                candidate = next(replacements)
+        candidate['case_id'] = initial['case_id']
+        candidate['variation_generation'] = {'candidates_checked': rejected + 1,
+                                             'rejected_duplicates': rejected}
+        cases[index] = candidate
+        seen.add(digest)
+        descriptions.add(candidate['description'])
     return cases
 
 

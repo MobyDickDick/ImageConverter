@@ -10,6 +10,12 @@ Nachtrag: Der Nutzerwunsch nach einem Film der Konvertierungsschritte ergänzt
 die ursprüngliche Momentaufnahme als Rang 53/P3. Er besitzt ausdrücklich
 keine höchste Priorität. SEARCH-STRUCTURE-01 bleibt Rang 1/P0.
 
+Nachtrag 25.10.2026: Die [drei Folgeaufgaben zu GitHub-Issue #1980](plan_b_issue_1980_followup.md)
+ergänzen Gruppe 4/P2 (Quellenprüfung und gemeinsame Fehlerursachen):
+**PB-1980-REFERENCE → PB-1980-DESCRIPTION → PB-1980-QUALITY**.
+Die ersten beiden Aufgaben sind Voraussetzung für jede neue Abnahme dieser
+Quelle. Die historische 52-Aufgaben-Momentaufnahme wird dadurch nicht umnummeriert.
+
 ## 1 / P0: Struktursuche und gemeinsame Komposition
 
 | Rang | Aufgabe / Arbeitsregel | Quelle |
