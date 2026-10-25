@@ -1,5 +1,11 @@
 # ImageConverter
 
+Die [Korrektur für GitHub-Issues #1909 und #1999](artifacts/evaluation/valley_panel_issue_v1/README.md)
+beschreibt grüne V-Panels eigenständig und erweitert den vorhandenen Dachlinien-Fit
+um die Spitze unten. Beide ursprünglichen Seeds und ein Zusatzseed bestehen
+jeweils 17/17 CLI-Fälle; sechs unabhängige Farb-/Größenfälle und drei Katalog-JPEGs
+bestehen ebenfalls bei unveränderten Qualitätsgrenzen.
+
 Die [vollständige Korrektur für GitHub-Issue #1980](artifacts/evaluation/axial_panel_issue_v1/README.md)
 repariert den rosa Referenzverlauf, hinterlegt eine eigenständige Beschreibung
 und rekonstruiert konturlose Rechtecke mit einem begrenzten nativen Verlaufsmodell.

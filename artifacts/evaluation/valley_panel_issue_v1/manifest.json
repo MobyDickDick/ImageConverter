@@ -1,0 +1,384 @@
+{
+  "schema_version": "valley_panel_issue_v1",
+  "base_commit": "d2f110bd1",
+  "issues": [
+    1909,
+    1999
+  ],
+  "original_evidence": [
+    {
+      "issue": 1909,
+      "source_svg": "artifacts/samples/AC0552_2_L.svg",
+      "phase": "variations",
+      "seed": 2820021284389229367,
+      "status": "completed",
+      "source_svg_sha256": "3e45042edf152f0551758470fa49cac7b2ffe5d33a266f09227bc8579524512f",
+      "source_description_sha256": "751d6e045ffba57611882e402c6c7c9faae2648d73ea593c5600e45f5edb9c26",
+      "source_description": "Wie AC0551: Wie AC0150. Geometrische Variante: 90Â° nach rechts gedreht.",
+      "source_image": "source.png",
+      "source_image_sha256": "dce75b515548e875b5e39eb17118796f20a398cab382dac2101f1c3eef7f2634",
+      "original_satisfactory": true,
+      "variations_started": true,
+      "iterations": 64,
+      "timeout_seconds": 60,
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "summary": {
+        "required": 17,
+        "completed": 17,
+        "passed": 12,
+        "failed": 5,
+        "satisfactory": false
+      },
+      "failures": [
+        {
+          "case_id": "probe_04",
+          "width": 61,
+          "height": 30,
+          "variation": {
+            "scale": 1.03590681,
+            "relative_x": 0.0048506,
+            "relative_y": -0.02288262
+          },
+          "input_sha256": "502fde35c791d3ccdf5d7c6d6a5c7907c13e27e8dc7bdfa5dc733a40bb9c7e9f",
+          "reference_svg_sha256": "b6e2f2442e830789874103661c6492066bc6b549e480c2fe795af10e87b942d9",
+          "satisfactory": false,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "returncode": 0,
+          "blocked_svg_reads": [],
+          "metrics": {
+            "normalized_mse": 0.0019730227068066597,
+            "foreground_mse": 0.00642751669511199,
+            "edge_alignment": 0.6630864143371582,
+            "foreground_iou": 0.3890063424947146
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0
+          },
+          "output_sha256": "a735923c081a636e156f73409dbc06d60c48b25f758995b55d72b87216ff7ba1",
+          "elapsed_seconds": 0.625
+        },
+        {
+          "case_id": "probe_05",
+          "width": 61,
+          "height": 30,
+          "variation": {
+            "scale": 1.03345499,
+            "relative_x": 0.0024787,
+            "relative_y": -0.01897175
+          },
+          "input_sha256": "5ec3a5a12b41361de75f386040b22d585dfee32c4551f22caad989a3b95d2366",
+          "reference_svg_sha256": "f5eb0005eb1ba219b6967dfea87eb292a4ba019f19a6a1376e6452d518f15fde",
+          "satisfactory": false,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "returncode": 0,
+          "blocked_svg_reads": [],
+          "metrics": {
+            "normalized_mse": 0.0019812248647212982,
+            "foreground_mse": 0.00665938900783658,
+            "edge_alignment": 0.6747928261756897,
+            "foreground_iou": 0.3890063424947146
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0
+          },
+          "output_sha256": "a735923c081a636e156f73409dbc06d60c48b25f758995b55d72b87216ff7ba1",
+          "elapsed_seconds": 0.675
+        },
+        {
+          "case_id": "probe_06",
+          "width": 61,
+          "height": 30,
+          "variation": {
+            "scale": 1.05020544,
+            "relative_x": 0.00946083,
+            "relative_y": 0.0021634
+          },
+          "input_sha256": "d7116e32ddb7f174fa45f730b4fd32d4f077bcf4b911d058779400ccbd323313",
+          "reference_svg_sha256": "de3596c117ed356b5b0e41930c00ff0c09e52d028a8e684c8afe6593da99eff7",
+          "satisfactory": false,
+          "failures": [
+            "foreground_iou_outside_limit"
+          ],
+          "returncode": 0,
+          "blocked_svg_reads": [],
+          "metrics": {
+            "normalized_mse": 0.0009121642215177417,
+            "foreground_mse": 0.0008790184510871768,
+            "edge_alignment": 1,
+            "foreground_iou": 0.5368821292775665
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 2,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 1
+          },
+          "output_sha256": "45122458a9fad459c9005d241a5951eb2407bd5d4533c0982b182e498af0266e",
+          "elapsed_seconds": 0.671
+        },
+        {
+          "case_id": "probe_10",
+          "width": 61,
+          "height": 30,
+          "variation": {
+            "scale": 1.05158619,
+            "relative_x": 0.01685727,
+            "relative_y": 0.00220905
+          },
+          "input_sha256": "73e4902300e2b8f1d42e481e2c25f1b5186ac4758cf3c6876367b9d54b358731",
+          "reference_svg_sha256": "af410f95a240c88dc743d61c0a8b1a4d5826af6044153e16aee5e0aed5f67a5c",
+          "satisfactory": false,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "returncode": 0,
+          "blocked_svg_reads": [],
+          "metrics": {
+            "normalized_mse": 0.0009463278693147004,
+            "foreground_mse": 0.0007844454958103597,
+            "edge_alignment": 0,
+            "foreground_iou": 0.6535859269282814
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 2,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 1
+          },
+          "output_sha256": "9bfb80cec89e74fab6dc4361ac3e18cb4f640d3d33e6dce90006f60df2dce002",
+          "elapsed_seconds": 0.673
+        },
+        {
+          "case_id": "probe_14",
+          "width": 61,
+          "height": 30,
+          "variation": {
+            "scale": 0.95089467,
+            "relative_x": 0.02481014,
+            "relative_y": 0.01452947
+          },
+          "input_sha256": "b9cef3081b887a281d2cd361372be6119500edf5c28ecd0cb5830c3d2f7cfbfe",
+          "reference_svg_sha256": "86c8deabf5bb73af563504a74ca55206ed6ebece1540dcfca491393c946d884f",
+          "satisfactory": false,
+          "failures": [
+            "edge_alignment_outside_limit"
+          ],
+          "returncode": 0,
+          "blocked_svg_reads": [],
+          "metrics": {
+            "normalized_mse": 0.007268103305250406,
+            "foreground_mse": 0.007514479570090771,
+            "edge_alignment": 0.6914383172988892,
+            "foreground_iou": 0.9502824858757062
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 2,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 1
+          },
+          "output_sha256": "9b1c619dfc1805fe87dcb89f432352bda31384f1ae96828eecdab73cfd52e42a",
+          "elapsed_seconds": 0.674
+        }
+      ],
+      "error": null,
+      "report": "attempt_04/report.json",
+      "run_url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/38127364941"
+    },
+    {
+      "issue": 1999,
+      "source_svg": "artifacts/samples/AC0552_2_L.svg",
+      "phase": "variations",
+      "seed": 7262616060025015007,
+      "status": "completed",
+      "source_svg_sha256": "3e45042edf152f0551758470fa49cac7b2ffe5d33a266f09227bc8579524512f",
+      "source_description_sha256": "751d6e045ffba57611882e402c6c7c9faae2648d73ea593c5600e45f5edb9c26",
+      "source_description": "Wie AC0551: Wie AC0150. Geometrische Variante: 90Â° nach rechts gedreht.",
+      "source_image": "source.png",
+      "source_image_sha256": "dce75b515548e875b5e39eb17118796f20a398cab382dac2101f1c3eef7f2634",
+      "original_satisfactory": true,
+      "variations_started": true,
+      "iterations": 64,
+      "timeout_seconds": 60,
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "summary": {
+        "required": 17,
+        "completed": 17,
+        "passed": 14,
+        "failed": 3,
+        "satisfactory": false
+      },
+      "input_pool": null,
+      "failures": [
+        {
+          "case_id": "probe_05",
+          "width": 61,
+          "height": 30,
+          "variation": {
+            "scale": 0.96123703,
+            "relative_x": -0.02467081,
+            "relative_y": -0.0014138
+          },
+          "input_sha256": "0c395332c017b73ca86d799008f610e1aa6d7d4463e4a89bab8d5b284e5b8d20",
+          "reference_svg_sha256": "69d3656cc4d944156247e8a2b59a2e9f6b7c5ff4e8b8c5b530ff6c63a2b9cbca",
+          "satisfactory": false,
+          "failures": [
+            "normalized_mse_outside_limit"
+          ],
+          "returncode": 0,
+          "blocked_svg_reads": [],
+          "metrics": {
+            "normalized_mse": 0.010025887750089169,
+            "foreground_mse": 0.01015856396406889,
+            "edge_alignment": 0.8062906265258789,
+            "foreground_iou": 0.9799054373522459
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0
+          },
+          "output_sha256": "95a19648d0787efe32a1087377f510acc85eacdad6a3be1e9283f74d48bde1c2",
+          "elapsed_seconds": 1.374
+        },
+        {
+          "case_id": "probe_12",
+          "width": 61,
+          "height": 30,
+          "variation": {
+            "scale": 1.03073419,
+            "relative_x": 0.00089816,
+            "relative_y": 0.02423093
+          },
+          "input_sha256": "363be20c21b96b7b1928081565f8ab4d3d415183444291c6226d3c898f2cec24",
+          "reference_svg_sha256": "262b2404ca0f020d445b4b29f4a7e8458faaa014e1052d9b42b7077c167621f5",
+          "satisfactory": false,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "returncode": 0,
+          "blocked_svg_reads": [],
+          "metrics": {
+            "normalized_mse": 0.0018461780855432153,
+            "foreground_mse": 0.003641274990513921,
+            "edge_alignment": 0.28301697969436646,
+            "foreground_iou": 0.7315598548972189
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0
+          },
+          "output_sha256": "93ea059f384cbd34d4f7c1e793973a7777e33580c9e24b5aca61fba44de782d9",
+          "elapsed_seconds": 1.374
+        },
+        {
+          "case_id": "probe_16",
+          "width": 61,
+          "height": 30,
+          "variation": {
+            "scale": 1.04446425,
+            "relative_x": -0.00072214,
+            "relative_y": -0.01809189
+          },
+          "input_sha256": "b3ca91c76498a2d04bc45be8c243a798127916e766ba05007a3af2dee20cc4be",
+          "reference_svg_sha256": "97baf1bf71446f4aed1fefe3528f3064c995952ead3de84445d2ebfeceee67ce",
+          "satisfactory": false,
+          "failures": [
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "returncode": 0,
+          "blocked_svg_reads": [],
+          "metrics": {
+            "normalized_mse": 0.0021448691841214895,
+            "foreground_mse": 0.007515675388276577,
+            "edge_alignment": 0.6790359616279602,
+            "foreground_iou": 0.39957716701902746
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0
+          },
+          "output_sha256": "a735923c081a636e156f73409dbc06d60c48b25f758995b55d72b87216ff7ba1",
+          "elapsed_seconds": 1.374
+        }
+      ],
+      "error": null,
+      "report": "attempt_03/report.json",
+      "run_url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/40108376907"
+    }
+  ],
+  "replays": [
+    {
+      "issue": 1909,
+      "source_svg": "artifacts/samples/AC0552_2_L.svg",
+      "source_svg_sha256": "3e45042edf152f0551758470fa49cac7b2ffe5d33a266f09227bc8579524512f",
+      "seed": 2820021284389229367,
+      "iterations": 64,
+      "timeout_seconds": 60,
+      "source_description": "Rechteckiges Feld mit dünnem grauem Rahmen und vertikalem grünem Farbverlauf. Eine weiße offene V-Linie besteht aus zwei geraden Schenkeln, die sich unten in einer Spitze treffen.",
+      "source_description_sha256": "96c4935d4b146d9a98585d71a3add4ae40562d4cbcb64ddec17e67b2a33d829a"
+    },
+    {
+      "issue": 1999,
+      "source_svg": "artifacts/samples/AC0552_2_L.svg",
+      "source_svg_sha256": "3e45042edf152f0551758470fa49cac7b2ffe5d33a266f09227bc8579524512f",
+      "seed": 7262616060025015007,
+      "iterations": 64,
+      "timeout_seconds": 60,
+      "source_description": "Rechteckiges Feld mit dünnem grauem Rahmen und vertikalem grünem Farbverlauf. Eine weiße offene V-Linie besteht aus zwei geraden Schenkeln, die sich unten in einer Spitze treffen.",
+      "source_description_sha256": "96c4935d4b146d9a98585d71a3add4ae40562d4cbcb64ddec17e67b2a33d829a"
+    }
+  ],
+  "holdout_seed": 817263,
+  "reference_note": "SVG bytes unchanged. Inline style priority was repaired before this package; historical raster hashes differ. New baseline is .tmp/issue-1909-baseline."
+}
