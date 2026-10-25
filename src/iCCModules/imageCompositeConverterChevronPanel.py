@@ -36,13 +36,14 @@ def fit_chevron_panel(width, height, *, description, image, render_fn, error_fn)
     # Alternate photometric losses address different local minima. Keep the
     # original result unless an alternative passes the unchanged local gates.
     attempts = []
-    for squared_loss in (False, True):
+    for refine_frame, squared_loss, preserve_peak in (
+            (True, False, False), (True, True, False), (False, False, True)):
         if session and session.time_reason():
             break
         rendered_before = evaluations
-        candidate = _fit_chevron_panel(width, height, refine_frame=True,
-                                      squared_loss=squared_loss, **arguments)
-        attempts.append({'loss': 'squared' if squared_loss else 'absolute',
+        candidate = _fit_chevron_panel(width, height, refine_frame=refine_frame,
+                                      squared_loss=squared_loss, preserve_peak=preserve_peak, **arguments)
+        attempts.append({'loss': 'observed_peak' if preserve_peak else ('squared' if squared_loss else 'absolute'),
                          'evaluations': evaluations-rendered_before})
         if candidate is not None and pixel_quality(image, candidate['rendered'])['passed']:
             candidate['frame_search'] = attempts
@@ -51,7 +52,7 @@ def fit_chevron_panel(width, height, *, description, image, render_fn, error_fn)
 
 
 def _fit_chevron_panel(width, height, *, description, image, render_fn, error_fn,
-                       refine_frame=False, squared_loss=False):
+                       refine_frame=False, squared_loss=False, preserve_peak=False):
     text = str(description or '').casefold()
     if not all(token in text for token in ('rechteck', 'rahm', 'vertikal', 'verlauf', 'dachlinie', 'oben')):
         return None
@@ -128,6 +129,13 @@ def _fit_chevron_panel(width, height, *, description, image, render_fn, error_fn
     # A bounded number of native gradient stops describes a continuous profile;
     # no per-pixel paths or reference vectors enter the runtime.
     indices = np.unique(np.rint(np.linspace(0, len(profile)-1, min(9, len(profile)))).astype(int))
+    # Uniform subsampling can move a narrow near-white highlight by a row.
+    # Preserve its observed peak within the same bounded stop count, rather
+    # than letting a global fill shift create foreground in the adjacent row.
+    peak = int(np.argmax(profile.mean(axis=1)))
+    if preserve_peak and peak not in indices and len(indices) > 2:
+        indices[1+int(np.argmin(abs(indices[1:-1]-peak)))] = peak
+        indices.sort()
     stops = [(float((i+2.5)/h), profile[i]) for i in indices]
     endpoints = (float(x), float(left[0]*x+left[1]),
                  float(x+w), float(right[0]*(x+w)+right[1]))

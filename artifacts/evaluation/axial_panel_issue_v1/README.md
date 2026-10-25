@@ -69,9 +69,42 @@ geteilte Fläche, widersprüchliche Sprache, fehlende Verlaufszonen und Timeout.
 Die Erfolgsarchivzahl bleibt unverändert. Das Issue wird erst beim Merge des
 Korrektur-PRs geschlossen; die historische Evidenz bleibt erhalten.
 
-Lokale Regression: 185 gezielte Tests, 267 breitere Verlaufssymbol-/Renderprüfungen
-und 42 Kernprüfungen bestehen. Die vollständige GitHub-CI ist ein separater
+Lokale Regression: 185 gezielte Basistests, zwei neue Glanzstreifen-/Bestandsschutztests,
+25 zusätzliche Metallpaneltests, 267 breitere Verlaufssymbol-/Renderprüfungen
+und 42 Kernprüfungen bestehen (521 unterschiedliche Tests). Die vollständige GitHub-CI ist ein separater
 Nachweis am Pull Request.
+
+### Zusätzlich gefundene Metallpanel-Regression
+
+Die CI des ersten Korrekturstands zeigte einen zuvor bestandenen eng
+beschnittenen Wiederholungsfall mit IoU 0,783270. Die jetzt korrekt vorrangige
+Inline-Stilfarbe des äußeren Rahmens verschiebt den beobachteten Hintergrund
+und damit die Vordergrundmaske. Der Suchweg blieb bei ähnlicher Pixelenergie
+in einer Kombination heller/breiter statt dunkler/schmaler Striche stecken.
+
+Nur nach verfehlten vollständigen Gates vergleicht die Registrierung jetzt
+höchstens neun gekoppelte Farb-/Breitenhypothesen und 25 gemeinsame Perioden-/
+Phasenlagen. Beobachtete Farben und Geometrie begrenzen diese Kandidaten; Cache
+und bestehendes Bildbudget bleiben verbindlich. Vollständig bestandene
+Zwischenstände bleiben erhalten. Der unveränderte Prüffall besteht danach mit
+IoU 0,871571 und Kontur 0,803430. Alle 25 vorhandenen Familientests bestehen.
+Die beiden vollständigen 17-Fälle-Replays ergänzen diese Gegenprobe; ihre
+kompakten Resultate stehen in `checks.json`. Qualitätsgrenzen und Vorlagen
+werden dafür nicht verändert.
+
+Eine zweite CI-Gegenprobe betraf eine fast weiße Verlaufsspitze im verschobenen
+Dachlinienpanel. Die gleichmäßige Auswahl der neun Stopps ließ die tatsächlich
+hellste Rasterzeile aus und erzeugte den Vordergrund eine Zeile zu spät.
+Nach gescheiterten bisherigen Modellen ersetzt eine zusätzliche Hypothese den
+nächsten inneren Stopp durch das beobachtete Maximum; die Höchstzahl neun bleibt
+erhalten. Bereits bestandene Fits bleiben erhalten. Ein immer angewendeter
+Peak-Ersatz verschlechterte zwei zuvor bestandene Varianten auf 16/17 und
+wurde deshalb verworfen; diese negativen Gegenproben stehen in `checks.json`.
+Der unveränderte Fehlerfall
+verbessert sich bei praktisch gleichem RGB-MSE von IoU 0,733728 auf 0,955457.
+Ein neuer fachlicher Test prüft zusätzlich dieselbe Lage der hellsten Zeile.
+Die drei ursprünglichen 17-Fälle-Batterien und der zusätzliche 17-Fälle-Seed
+bilden die vollständige CLI-Regressionsprüfung dieser Änderung.
 
 ## Wiederholung
 

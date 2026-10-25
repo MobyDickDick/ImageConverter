@@ -25,6 +25,35 @@ def fit(image, description=DESCRIPTION, render_fn=render, error_fn=None):
         render_fn=render_fn, error_fn=error_fn or (lambda a,b: normalized_mse(a,b)[0]))
 
 
+def test_shifted_near_white_highlight_keeps_its_observed_peak_row():
+    import json
+    from xml.etree import ElementTree as ET
+    from tools.run_plan_b_variations import make_variations, measure_quality
+
+    entry = json.loads((ROOT/'artifacts/evaluation/issue_backlog_v1/replays.json').read_text())['replays'][1]
+    svg = (ROOT/entry['source_svg']).read_text(encoding='utf-8')
+    case = make_variations(svg, entry['source_description'], 942817)[3]
+    image = render(case['svg'], case['width'], case['height'])
+    result = fit(image, case['description'])
+    assert result is not None and measure_quality(image, result['svg'])['satisfactory']
+    assert len(ET.fromstring(result['svg']).findall('.//{*}stop')) <= 9
+    assert np.argmax(np.median(image, axis=1).mean(axis=1)) == np.argmax(
+        np.median(result['rendered'], axis=1).mean(axis=1))
+
+
+def test_peak_alternative_preserves_an_already_satisfactory_panel_fit():
+    import json
+    from tools.run_plan_b_variations import make_variations, measure_quality
+
+    entry = json.loads((ROOT/'artifacts/evaluation/issue_backlog_v1/replays.json').read_text(encoding='utf-8'))['replays'][2]
+    case = make_variations((ROOT/entry['source_svg']).read_text(encoding='utf-8'),
+                           entry['source_description'], entry['seed'])[2]
+    image = render(case['svg'], case['width'], case['height'])
+    result = fit(image, case['description'])
+    assert result is not None and measure_quality(image, result['svg'])['satisfactory']
+    assert 'frame_search' not in result
+
+
 @pytest.mark.parametrize('name', ['AC0554_1_L', 'AC0554_1_M', 'AC0554_1_S',
                                  'AC0554_2_L', 'AC0554_2_M', 'AC0554_2_S',
                                  'AC0554_L', 'AC0554_M', 'AC0554_S'])

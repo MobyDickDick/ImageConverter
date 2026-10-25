@@ -203,6 +203,17 @@ def fit_zigzag_panel(width, height, *, description, image, render_fn, error_fn):
     border = np.concatenate((pixels[0], pixels[-1], pixels[:, 0], pixels[:, -1]))
     background = np.median(border, axis=0)
     reference_contrast = np.max(np.abs(pixels-background), axis=2) > 25
+    collect_satisfactory = False
+    satisfactory = None
+
+    def retain_satisfactory(v, result):
+        nonlocal satisfactory
+        if collect_satisfactory:
+            quality = pixel_quality(arr, result[2])
+            if quality and quality['passed'] and (satisfactory is None or result[0] < satisfactory[1][0]):
+                satisfactory = v.copy(), result
+        return result
+
     def measure(v):
         nonlocal evaluations
         if not valid(v):
@@ -211,7 +222,7 @@ def fit_zigzag_panel(width, height, *, description, image, render_fn, error_fn):
             return None
         content = svg(v)
         if content in render_cache:
-            return render_cache[content]
+            return retain_satisfactory(v, render_cache[content])
         evaluations += 1
         if session:
             session.evaluations += 1
@@ -229,7 +240,7 @@ def fit_zigzag_panel(width, height, *, description, image, render_fn, error_fn):
         if len(render_cache) >= 1024:
             render_cache.clear()
         render_cache[content] = result
-        return result
+        return retain_satisfactory(v, result)
 
     best = measure(p)
     if best is None:
@@ -259,6 +270,23 @@ def fit_zigzag_panel(width, height, *, description, image, render_fn, error_fn):
                         shades[index] = old
         quality = pixel_quality(arr, best[2])
         if quality and not quality['passed']:
+            collect_satisfactory = True
+            # Antialiasing admits a pale wide stroke and a dark thin stroke
+            # with similar pixel energy. Single-coordinate refinement cannot
+            # cross that valley. Compare coupled ink/width hypotheses against
+            # the independently observed solid rail, retaining only improvements.
+            fill_level = float(np.max(clean.mean(axis=1)))
+            for ink_index, width_index in ((21, 14), (18, 9), (15, 4)):
+                incumbent = np.array(p[ink_index:ink_index+3])
+                observed = np.array(p[35:38])
+                for fraction in (1., .75, .5):
+                    candidate = p.copy()
+                    ink = incumbent+fraction*(observed-incumbent)
+                    candidate[ink_index:ink_index+3] = ink.tolist()
+                    candidate[width_index] *= max(1., fill_level-incumbent.mean())/max(1., fill_level-ink.mean())
+                    result = measure(candidate)
+                    if result is not None and result[0] < best[0]-1e-9:
+                        p, best = candidate, result
             # Thin frame edges can cross the foreground threshold within a
             # fraction of the old 1/8-pixel grid. Keep successful fits intact.
             for step in (.0625, .03125):
@@ -270,6 +298,18 @@ def fit_zigzag_panel(width, height, *, description, image, render_fn, error_fn):
                             result = measure(candidate)
                             if result is not None and result[0] < best[0]-1e-9:
                                 p, best = candidate, result
+            if satisfactory is None:
+                # Period and phase move the whole observed repeated group.
+                # Probe them jointly around the best registration instead of
+                # requiring either isolated move to improve the loss first.
+                for delta_period in (-.125, -.0625, 0., .0625, .125):
+                    for delta_phase in (-.25, -.125, 0., .125, .25):
+                        candidate = p.copy()
+                        candidate[12] += delta_period
+                        candidate[13] += delta_phase
+                        measure(candidate)
+            if satisfactory is not None:
+                p, best = satisfactory
     if best[3] >= initial_error-1e-9:
         return None
     if (np.max(np.abs(pixels-best[2].astype(float)), axis=2) > 65).mean() > .04:
