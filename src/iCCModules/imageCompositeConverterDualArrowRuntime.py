@@ -30,6 +30,17 @@ def runDualArrowBadgeIterationImpl(
     write_attempt_artifacts_fn,
     calculate_error_fn,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
+    from src.iCCModules.imageCompositeConverterArrowPair import fit_arrow_pair
+    fitted = fit_arrow_pair(width, height, description=description, image=perc_img,
+                            render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn)
+    if fitted is not None:
+        from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
+        validated_result(fitted, perc_img)
+        params[fitted['source']] = {key: fitted[key] for key in
+                                   ('initial_error', 'error', 'evaluations', 'parameters', 'quality')}
+        write_validation_log_fn(['status=dual_arrow_observed_primitives'])
+        write_attempt_artifacts_fn(fitted['svg'], fitted['rendered'])
+        return base_name, description, params, 1, fitted['error']
     badge_params = detect_dual_arrow_badge_params_fn(perc_img)
     if badge_params is None:
         # Fallback to embedded raster if detection cannot robustly isolate

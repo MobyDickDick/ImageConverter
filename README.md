@@ -1,5 +1,10 @@
 # ImageConverter
 
+Die [Korrektur für GitHub-Issue #2004](artifacts/evaluation/arrow_pair_issue_v1/README.md)
+erhält CSS-definierte Schäfte im Prüfraster und rekonstruiert zwei beobachtete
+Pfeile mit optionaler Querlinie als native SVG-Formen. Die widersprüchliche
+AC0022-Beschreibung ist anhand des SVGs und Katalog-JPEGs korrigiert.
+
 Die [Issue-Bearbeitung vom 25. Oktober](artifacts/evaluation/issue_backlog_v1/README.md)
 inventarisiert 92 offene GitHub-Issues und korrigiert verschobene, eng beschnittene
 Verlaufspanels aus #1966, #1969 und #2030. Die unveränderten CLI-Grenzen werden

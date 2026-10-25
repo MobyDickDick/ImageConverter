@@ -4,6 +4,14 @@ on:
   pull_request:
     paths:
       - 'src/iCCModules/imageCompositeConverterChevronPanel.py'
+      - 'src/iCCModules/imageCompositeConverterArrowPair.py'
+      - 'src/iCCModules/imageCompositeConverterDualArrowRuntime.py'
+      - 'src/iCCModules/imageCompositeConverterFilledSymbols.py'
+      - 'src/iCCModules/imageCompositeConverterRendering.py'
+      - 'src/iCCModules/imageCompositeConverterSvgStyles.py'
+      - 'tests/test_arrow_pair_runtime.py'
+      - 'artifacts/evaluation/arrow_pair_issue_v1/**'
+      - 'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml'
       - 'src/iCCModules/imageCompositeConverterAdaptiveSearch.py'
       - 'tools/run_plan_b_variations.py'
       - 'tools/replay_plan_b_issue_batch.py'
@@ -15,6 +23,32 @@ on:
   workflow_dispatch:
 
 jobs:
+  native-arrow-pair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Check native inventory, CSS cascade, JPEG and negative controls
+        run: python -m pytest -q tests/test_arrow_pair_runtime.py tests/detailtests/test_dual_arrow_runtime_helpers.py tests/detailtests/test_rendering_gradient_compatibility.py tests/test_filled_symbols_runtime.py
+      - name: Replay corrected description with the full original issue seed
+        run: python -m tools.replay_plan_b_issue_batch --manifest artifacts/evaluation/arrow_pair_issue_v1/manifest.json --output-dir .tmp/arrow-pair-frozen
+      - name: Replay an additional variation seed
+        run: python -m tools.replay_plan_b_issue_batch --manifest artifacts/evaluation/arrow_pair_issue_v1/manifest.json --output-dir .tmp/arrow-pair-holdout --seed 817263
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-arrow-pair-replays
+          path: |
+            .tmp/arrow-pair-frozen
+            .tmp/arrow-pair-holdout
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14
+
   cropped-gradient-frames:
     runs-on: ubuntu-latest
     timeout-minutes: 12

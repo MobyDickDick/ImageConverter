@@ -1,0 +1,37 @@
+{
+  "schema_version": "arrow_pair_issue_v1",
+  "base_commit": "19911195e0a7bdc13060734a17393bd4bd651e30",
+  "issue_url": "https://github.com/MobyDickDick/ImageConverter/issues/2004",
+  "selection": {
+    "priority_labels_present": false,
+    "reason": "Structural line/triangle reconstruction affects multiple open AC0020/AC0040-family issues; only #2004 is accepted in this package."
+  },
+  "original_evidence": {
+    "source_svg": "artifacts/samples/AC0022.svg",
+    "source_svg_sha256": "a2ab313d2d54aeca82c9385bb30137e7bdcacada6ef031a49de22a65dd0a0365",
+    "source_description": "Wie AC0021: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie. Geometrische Variante: identisch zur Referenz.",
+    "source_description_sha256": "b36ec223a95a2313d1b0d74ffe3766d7bf74a62b13ee49119eb9667213362715",
+    "source_image_sha256": "ac81cbd7490bd5e2b7f3616d8e5a917a0ad6f15761bf70b2137bfa42641586e4",
+    "seed": 2913486205284857784,
+    "metrics": {
+      "normalized_mse": 0.04085015133023262,
+      "foreground_mse": 0.3450581133365631,
+      "edge_alignment": 0.22892849147319794,
+      "foreground_iou": 0.08405172413793104
+    }
+  },
+  "replays": [
+    {
+      "issue": 2004,
+      "source_svg": "artifacts/samples/AC0022.svg",
+      "source_svg_sha256": "a2ab313d2d54aeca82c9385bb30137e7bdcacada6ef031a49de22a65dd0a0365",
+      "source_description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche.",
+      "source_description_sha256": "c59e284ed180ec5baaebe6b2e10039f3d7e8c6badead3b7aa434a9e3eefacd12",
+      "seed": 2913486205284857784,
+      "iterations": 64,
+      "timeout_seconds": 60
+    }
+  ],
+  "holdout_seed": 817263,
+  "reference_correction": "Embedded simple CSS rules are resolved in the renderer's private input. Source SVG bytes remain unchanged; the old raster hash is intentionally not reused because it omits CSS-only stems."
+}
