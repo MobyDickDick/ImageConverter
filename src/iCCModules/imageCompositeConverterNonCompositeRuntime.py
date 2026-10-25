@@ -1519,6 +1519,10 @@ def runNonCompositeIterationImpl(
                         'initial_error': fitted['initial_error'], 'final_error': fitted['error'],
                         'parameters': fitted['parameters'], 'evaluations': fitted['evaluations'],
                     }
+                    if status == "non_composite_raster_chevron_panel":
+                        params[fitted['source']].update({
+                            key: fitted[key] for key in ('direction','hypotheses') if key in fitted
+                        })
                 write_validation_log_fn([f"status={status}"])
                 write_attempt_artifacts_fn(fitted['svg'], fitted['rendered'])
                 return base_name, description, params, 1, fitted['error']

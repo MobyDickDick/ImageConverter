@@ -1,0 +1,303 @@
+{
+  "schema_version": "valley_panel_issue_summary_v1",
+  "base_commit": "d2f110bd1",
+  "baseline": [
+    {
+      "issue": 1909,
+      "metadata": {
+        "seed": 2820021284389229367,
+        "source_svg_sha256": "3e45042edf152f0551758470fa49cac7b2ffe5d33a266f09227bc8579524512f",
+        "source_description_sha256": "751d6e045ffba57611882e402c6c7c9faae2648d73ea593c5600e45f5edb9c26",
+        "source_image_sha256": "0723d1a137c0ea38a385a9a55d0b34d73c8c8f213bb769d43ef1b548291091dd",
+        "summary": {
+          "required": 17,
+          "completed": 1,
+          "passed": 0,
+          "failed": 1,
+          "satisfactory": false
+        }
+      },
+      "cases": [
+        {
+          "case_id": "original",
+          "metrics": {
+            "normalized_mse": 0.01855848915874958,
+            "foreground_mse": 0.020487332716584206,
+            "edge_alignment": 0.7217268943786621,
+            "foreground_iou": 1.0
+          },
+          "failures": [
+            "normalized_mse_outside_limit"
+          ],
+          "output_sha256": "9c2f7f2c4fc86c2f9b9990daceb1c77526ad6e12e6247aeec5a8ab2a4b3081c1",
+          "elapsed_seconds": 3.672
+        }
+      ]
+    },
+    {
+      "issue": 1999,
+      "metadata": {
+        "seed": 7262616060025015007,
+        "source_svg_sha256": "3e45042edf152f0551758470fa49cac7b2ffe5d33a266f09227bc8579524512f",
+        "source_description_sha256": "751d6e045ffba57611882e402c6c7c9faae2648d73ea593c5600e45f5edb9c26",
+        "source_image_sha256": "0723d1a137c0ea38a385a9a55d0b34d73c8c8f213bb769d43ef1b548291091dd",
+        "summary": {
+          "required": 17,
+          "completed": 1,
+          "passed": 0,
+          "failed": 1,
+          "satisfactory": false
+        }
+      },
+      "cases": [
+        {
+          "case_id": "original",
+          "metrics": {
+            "normalized_mse": 0.01855848915874958,
+            "foreground_mse": 0.020487332716584206,
+            "edge_alignment": 0.7217268943786621,
+            "foreground_iou": 1.0
+          },
+          "failures": [
+            "normalized_mse_outside_limit"
+          ],
+          "output_sha256": "9c2f7f2c4fc86c2f9b9990daceb1c77526ad6e12e6247aeec5a8ab2a4b3081c1",
+          "elapsed_seconds": 3.797
+        }
+      ]
+    }
+  ],
+  "description_only": {
+    "metadata": {
+      "seed": 2820021284389229367,
+      "source_svg_sha256": "3e45042edf152f0551758470fa49cac7b2ffe5d33a266f09227bc8579524512f",
+      "source_description_sha256": "96c4935d4b146d9a98585d71a3add4ae40562d4cbcb64ddec17e67b2a33d829a",
+      "source_image_sha256": "0723d1a137c0ea38a385a9a55d0b34d73c8c8f213bb769d43ef1b548291091dd",
+      "summary": {
+        "required": 17,
+        "completed": 1,
+        "passed": 0,
+        "failed": 1,
+        "satisfactory": false
+      }
+    },
+    "cases": [
+      {
+        "case_id": "original",
+        "metrics": {
+          "normalized_mse": 0.01855848915874958,
+          "foreground_mse": 0.020487332716584206,
+          "edge_alignment": 0.7217268943786621,
+          "foreground_iou": 1.0
+        },
+        "failures": [
+          "normalized_mse_outside_limit"
+        ],
+        "output_sha256": "9c2f7f2c4fc86c2f9b9990daceb1c77526ad6e12e6247aeec5a8ab2a4b3081c1",
+        "elapsed_seconds": 3.219
+      }
+    ]
+  },
+  "initial_native_attempt": [
+    {
+      "issue": 1909,
+      "summary": {
+        "required": 17,
+        "completed": 17,
+        "passed": 11,
+        "failed": 6,
+        "satisfactory": false
+      }
+    },
+    {
+      "issue": 1999,
+      "summary": {
+        "required": 17,
+        "completed": 17,
+        "passed": 14,
+        "failed": 3,
+        "satisfactory": false
+      }
+    }
+  ],
+  "accepted": [
+    {
+      "seed": 2820021284389229367,
+      "summary": {
+        "required": 17,
+        "completed": 17,
+        "passed": 17,
+        "failed": 0,
+        "satisfactory": true
+      },
+      "max_render_evaluations": 292,
+      "max_elapsed_seconds": 3.078
+    },
+    {
+      "seed": 7262616060025015007,
+      "summary": {
+        "required": 17,
+        "completed": 17,
+        "passed": 17,
+        "failed": 0,
+        "satisfactory": true
+      },
+      "max_render_evaluations": 295,
+      "max_elapsed_seconds": 2.985
+    },
+    {
+      "seed": 817263,
+      "summary": {
+        "required": 17,
+        "completed": 17,
+        "passed": 17,
+        "failed": 0,
+        "satisfactory": true
+      },
+      "max_render_evaluations": 286,
+      "max_elapsed_seconds": 3.297
+    }
+  ],
+  "independent": {
+    "required": 9,
+    "passed": 9,
+    "max_render_evaluations": 1182,
+    "cases": [
+      {
+        "case_id": "foreign_0_100",
+        "metrics": {
+          "normalized_mse": 0.00012142338528065011,
+          "foreground_mse": 0.0001732642122078687,
+          "edge_alignment": 0.9877946376800537,
+          "foreground_iou": 0.9975757575757576
+        },
+        "elapsed_seconds": 2.938,
+        "input_sha256": "fb9592ee6a96345c9a511351a6b9f121a41bcce3ba54eac32dbef75f2d131e41",
+        "output_sha256": "54d141d11bd7e0df49e044e3ed83c1ddecf4672c2ad5504165ee04e84911b0dc"
+      },
+      {
+        "case_id": "foreign_1_100",
+        "metrics": {
+          "normalized_mse": 0.00014189243665896356,
+          "foreground_mse": 0.00020539840625133365,
+          "edge_alignment": 0.8886160850524902,
+          "foreground_iou": 0.9978192391567725
+        },
+        "elapsed_seconds": 2.86,
+        "input_sha256": "b275215c8382cd2cb272f207a6ba5a982554b94377319de48d9e3f97ab663c64",
+        "output_sha256": "ea0dcb9cd7467ca09bfb9f73e4a138c1875c076c94f6b127fb863f54d886617f"
+      },
+      {
+        "case_id": "foreign_2_100",
+        "metrics": {
+          "normalized_mse": 0.0001864898222265765,
+          "foreground_mse": 0.0002695894509088248,
+          "edge_alignment": 0.9844498634338379,
+          "foreground_iou": 0.9983034415899176
+        },
+        "elapsed_seconds": 3.078,
+        "input_sha256": "631f332537462690f29f0de86bd2a027d6e7eeb2f8ba4bf41dc87516976de9e2",
+        "output_sha256": "81dcfdc114cd126fc114958092b2f5d84d7312209652aa6509ac87b55a9b08ec"
+      },
+      {
+        "case_id": "foreign_0_150",
+        "metrics": {
+          "normalized_mse": 0.0002120601129718125,
+          "foreground_mse": 0.0002723625220824033,
+          "edge_alignment": 0.8797194957733154,
+          "foreground_iou": 0.998671096345515
+        },
+        "elapsed_seconds": 3.468,
+        "input_sha256": "015c36db6252aa71ff8220872615244a7e85afe4b139f4753b403242c18f71fe",
+        "output_sha256": "d29dc532d2338ae9eff4bede6b17572b1e79eaa5b5b5750e4ce3a33a0aadb1a9"
+      },
+      {
+        "case_id": "foreign_1_150",
+        "metrics": {
+          "normalized_mse": 0.00022513658041134477,
+          "foreground_mse": 0.00029110745526850224,
+          "edge_alignment": 0.8738241195678711,
+          "foreground_iou": 0.999113475177305
+        },
+        "elapsed_seconds": 3.156,
+        "input_sha256": "4b53264aa073ec101634acfa281ea239e41d4516843a37fc743b19bb71f7abc9",
+        "output_sha256": "bcf52acbbd1f44625a10f232d8c0c06518cb2a275cc64d09ce6204ee8d338c65"
+      },
+      {
+        "case_id": "foreign_2_150",
+        "metrics": {
+          "normalized_mse": 0.0002804953546728939,
+          "foreground_mse": 0.0003704934206325561,
+          "edge_alignment": 0.8830052614212036,
+          "foreground_iou": 0.9990032118728541
+        },
+        "elapsed_seconds": 3.812,
+        "input_sha256": "cd1dd2544569dcbedcb726a9fb50b256f41528820fbcf0420bc375901d3c7194",
+        "output_sha256": "949871c6923197e51c4cd6011a2fc126c953c8a6ca45bfcfda1126a5007391a4"
+      },
+      {
+        "case_id": "unrelated_jpeg_L",
+        "metrics": {
+          "normalized_mse": 0.0009861319558694959,
+          "foreground_mse": 0.0010381531901657581,
+          "edge_alignment": 0.9422551393508911,
+          "foreground_iou": 0.9889705882352942
+        },
+        "elapsed_seconds": 2.938,
+        "input_sha256": "6e47552de826362074d61ca0c3ee8aa43d454b00e7189135471fdcf4f6e20d7f",
+        "output_sha256": "0510aebc7a6c7d50209fc57c055da75dce79ffe5b75a1e0a9fd68a9265e0e83a"
+      },
+      {
+        "case_id": "unrelated_jpeg_M",
+        "metrics": {
+          "normalized_mse": 0.00034902532934211195,
+          "foreground_mse": 0.00035619232221506536,
+          "edge_alignment": 0.9341605305671692,
+          "foreground_iou": 0.9940440738534843
+        },
+        "elapsed_seconds": 3.203,
+        "input_sha256": "b4f0e837fd653f08de9223eac9ff5ff5ca2adf4159d62e622dd9602758f49b61",
+        "output_sha256": "3af0c1a1a1b480845d41a0b396e6d92397816dce47e3ea7c1d0aa6b0fd1b8ca3"
+      },
+      {
+        "case_id": "unrelated_jpeg_S",
+        "metrics": {
+          "normalized_mse": 0.0005602012388408184,
+          "foreground_mse": 0.0005947071476839483,
+          "edge_alignment": 0.8016366958618164,
+          "foreground_iou": 0.9875
+        },
+        "elapsed_seconds": 6.484,
+        "input_sha256": "8adf2cddd17878d7f7ae0ba6a2f3bbf4499ce44e210216fd34fd1979b52fe166",
+        "output_sha256": "66d2bd6e58878cadf962781cd6b90cdd345849a1c55ea09bae1e41e398d029e0"
+      }
+    ]
+  },
+  "tests": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_valley_panel_runtime.py tests/test_chevron_panel_runtime.py tests/test_plan_b_issue_inventory.py tests/detailtests/test_plan_b_variations.py tests/detailtests/test_description_contract_helpers.py tests/detailtests/test_non_composite_runtime_helpers.py",
+      "passed": 236,
+      "exit_code": 0,
+      "note": "Before five additional negative/verifier tests; final valley suite is recorded separately."
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_valley_panel_runtime.py",
+      "passed": 26,
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe tools/run_pytest_profile.py core-green",
+      "passed": 42,
+      "exit_code": 0
+    }
+  ],
+  "scope": "Two issue seeds and an independent seed accepted; source bytes and quality limits unchanged. Success archive count unchanged. Issues close only when the PR is merged.",
+  "local_artifacts": {
+    "before": ".tmp/issue-1909-baseline",
+    "description_only": ".tmp/issue-1909-description-alone",
+    "unsuccessful_native": ".tmp/issue-1909-after",
+    "after": ".tmp/issue-1909-accepted",
+    "holdout": ".tmp/issue-1909-accepted-holdout",
+    "independent": ".tmp/issue-1909-accepted-independent"
+  }
+}

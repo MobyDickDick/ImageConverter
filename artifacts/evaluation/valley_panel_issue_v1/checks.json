@@ -1,0 +1,4764 @@
+{
+  "runs": [
+    {
+      "seed": 2820021284389229367,
+      "summary": {
+        "required": 17,
+        "completed": 17,
+        "passed": 17,
+        "failed": 0,
+        "satisfactory": true
+      },
+      "cases": [
+        {
+          "bounds": [
+            0.5,
+            0.5,
+            60.0,
+            29.0
+          ],
+          "points": [
+            [
+              0.625,
+              14.249253
+            ],
+            [
+              30.434433,
+              28.48744
+            ],
+            [
+              59.875,
+              14.497695
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "original",
+          "metrics": {
+            "normalized_mse": 9.949935338227078e-05,
+            "foreground_mse": 9.954495180863887e-05,
+            "edge_alignment": 0.8587055206298828,
+            "foreground_iou": 0.9981873111782478
+          },
+          "input_sha256": "0723d1a137c0ea38a385a9a55d0b34d73c8c8f213bb769d43ef1b548291091dd",
+          "output_sha256": "ccacbc0160ab55c9756809588c43212bf3e875dad2d10c1b18a27b68fa3359a7",
+          "elapsed_seconds": 2.016,
+          "registration": {
+            "direction": "down",
+            "evaluations": 279,
+            "final_error": 0.9519125683060109,
+            "hypotheses": [
+              {
+                "error": 0.9519125683060109,
+                "evaluations": 279,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8587055206298828,
+                  "foreground_iou": 0.9981873111782478,
+                  "foreground_mse": 9.954495180863887e-05,
+                  "normalized_mse": 9.949935338227078e-05,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 3.172313296903461,
+            "parameters": [
+              0.5,
+              0.5,
+              60.0,
+              29.0,
+              1.125,
+              0.625,
+              14.249253056817894,
+              30.43443289847219,
+              28.48743978832956,
+              59.875,
+              14.497694685238814,
+              2.1039767745749702,
+              155.0,
+              155.0,
+              155.0,
+              254.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              -1.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.625,
+            0.5,
+            60.25,
+            29.25
+          ],
+          "points": [
+            [
+              0.5,
+              14.15465
+            ],
+            [
+              30.642141,
+              28.542204
+            ],
+            [
+              60.625,
+              14.341152
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_01",
+          "metrics": {
+            "normalized_mse": 0.00022034678841009736,
+            "foreground_mse": 0.00017797960026655346,
+            "edge_alignment": 0.9801747798919678,
+            "foreground_iou": 0.996378998189499
+          },
+          "input_sha256": "08bc7bd87efe9313fb2a0f277488099f03ef73c488f60ab7ff46a9a947e3502b",
+          "output_sha256": "a917032eab7d295bca54b774460ea6ef7a98328e10c821111df97f8b330a291d",
+          "elapsed_seconds": 2.172,
+          "registration": {
+            "direction": "down",
+            "evaluations": 263,
+            "final_error": 1.1797814207650272,
+            "hypotheses": [
+              {
+                "error": 1.1797814207650272,
+                "evaluations": 263,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9801747798919678,
+                  "foreground_iou": 0.996378998189499,
+                  "foreground_mse": 0.00017797960026655346,
+                  "normalized_mse": 0.00022034678841009736,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 2.843169398907104,
+            "parameters": [
+              0.625,
+              0.5,
+              60.25,
+              29.25,
+              1.5,
+              0.5,
+              14.154649812385882,
+              30.64214109975003,
+              28.542203883197324,
+              60.625,
+              14.341152240485794,
+              1.9387894746158263,
+              157.0,
+              157.0,
+              156.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            1.25,
+            0.25,
+            60.25,
+            29.25
+          ],
+          "points": [
+            [
+              1.125,
+              14.058457
+            ],
+            [
+              31.705403,
+              28.442068
+            ],
+            [
+              60.875,
+              14.764666
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_02",
+          "metrics": {
+            "normalized_mse": 0.0002297644823556766,
+            "foreground_mse": 0.00019374182738829404,
+            "edge_alignment": 0.8259180784225464,
+            "foreground_iou": 0.9976275207591934
+          },
+          "input_sha256": "61ef1ed18c2702568095aaf7a460e5e13f2f004f855c2c0dee0e35a8f4a41b69",
+          "output_sha256": "9ba53901b8cfb75e4bd77bac03632406465704a9e4a6fbee137d4ce42a00792c",
+          "elapsed_seconds": 2.156,
+          "registration": {
+            "direction": "down",
+            "evaluations": 286,
+            "final_error": 1.4989071038251367,
+            "hypotheses": [
+              {
+                "error": 1.4989071038251367,
+                "evaluations": 286,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8259180784225464,
+                  "foreground_iou": 0.9976275207591934,
+                  "foreground_mse": 0.00019374182738829404,
+                  "normalized_mse": 0.0002297644823556766,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 5.763205828779599,
+            "parameters": [
+              1.25,
+              0.25,
+              60.25,
+              29.25,
+              0.875,
+              1.125,
+              14.058456999802189,
+              31.70540323125408,
+              28.4420679126476,
+              60.875,
+              14.764666064981958,
+              1.9628501253367838,
+              145.0,
+              157.0,
+              145.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              -1.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.375,
+            0.5,
+            59.0,
+            28.5
+          ],
+          "points": [
+            [
+              0.625,
+              14.110757
+            ],
+            [
+              29.824828,
+              27.959501
+            ],
+            [
+              59.75,
+              13.85769
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_03",
+          "metrics": {
+            "normalized_mse": 0.00019037372840102762,
+            "foreground_mse": 0.00018768552399706095,
+            "edge_alignment": 0.8661966323852539,
+            "foreground_iou": 0.9943052391799544
+          },
+          "input_sha256": "99d260610c51a781081b2bc7b6a16d6d081a424955446a289b93caaf10c53b4b",
+          "output_sha256": "ecf4c0f3af203af054b083e14686c514520c25ff481b732c7cc031c43ef3a0b9",
+          "elapsed_seconds": 2.313,
+          "registration": {
+            "direction": "down",
+            "evaluations": 227,
+            "final_error": 1.0577413479052824,
+            "hypotheses": [
+              {
+                "error": 1.0577413479052824,
+                "evaluations": 227,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8661966323852539,
+                  "foreground_iou": 0.9943052391799544,
+                  "foreground_mse": 0.00018768552399706095,
+                  "normalized_mse": 0.00019037372840102762,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.417304189435337,
+            "parameters": [
+              0.375,
+              0.5,
+              59.0,
+              28.5,
+              1.0,
+              0.625,
+              14.110756927430213,
+              29.82482840438752,
+              27.9595006829011,
+              59.75,
+              13.857690423501182,
+              1.9399243276741573,
+              153.0,
+              158.5,
+              153.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.125,
+            -0.5,
+            61.75,
+            30.0
+          ],
+          "points": [
+            [
+              0.125,
+              13.73023
+            ],
+            [
+              30.748173,
+              28.247502
+            ],
+            [
+              60.375,
+              14.317143
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_04",
+          "metrics": {
+            "normalized_mse": 0.0002745084057096392,
+            "foreground_mse": 0.000756194582208991,
+            "edge_alignment": 0.9513694047927856,
+            "foreground_iou": 0.9871794871794872
+          },
+          "input_sha256": "2fd6391d5a79f2cb8d28302fef53c82912a4f5da829b3fc3473e31055894b66e",
+          "output_sha256": "777d6261600441170960cad48d25b61a3ae751404bed1f5262eed124422c0df6",
+          "elapsed_seconds": 2.282,
+          "registration": {
+            "direction": "down",
+            "evaluations": 275,
+            "final_error": 1.052823315118397,
+            "hypotheses": [
+              {
+                "error": 1.052823315118397,
+                "evaluations": 275,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9513694047927856,
+                  "foreground_iou": 0.9871794871794872,
+                  "foreground_mse": 0.000756194582208991,
+                  "normalized_mse": 0.0002745084057096392,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 6.312021857923497,
+            "parameters": [
+              -0.125,
+              -0.5,
+              61.75,
+              30.0,
+              1.25,
+              0.125,
+              13.7302295279142,
+              30.7481728852351,
+              28.247501972591323,
+              60.375,
+              14.31714282943482,
+              2.064451562682831,
+              154.0,
+              163.0,
+              153.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.125,
+            -0.5,
+            61.75,
+            30.0
+          ],
+          "points": [
+            [
+              0.75,
+              14.094179
+            ],
+            [
+              30.576586,
+              28.422137
+            ],
+            [
+              60.625,
+              14.107785
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_05",
+          "metrics": {
+            "normalized_mse": 0.0002755364403128624,
+            "foreground_mse": 0.0007415733998641372,
+            "edge_alignment": 0.9262588024139404,
+            "foreground_iou": 0.9818511796733213
+          },
+          "input_sha256": "9b836ea4e3646348425cec704f3ac709819033a4b9d9f86683af83d53642514c",
+          "output_sha256": "9d37b3ad11f11c8e89a969d9cbb89d52fba4210adcb76b1971b18d345c19c18b",
+          "elapsed_seconds": 2.563,
+          "registration": {
+            "direction": "down",
+            "evaluations": 276,
+            "final_error": 1.0005464480874318,
+            "hypotheses": [
+              {
+                "error": 1.0005464480874318,
+                "evaluations": 276,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9262588024139404,
+                  "foreground_iou": 0.9818511796733213,
+                  "foreground_mse": 0.0007415733998641372,
+                  "normalized_mse": 0.0002755364403128624,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.7081967213114755,
+            "parameters": [
+              -0.125,
+              -0.5,
+              61.75,
+              30.0,
+              1.25,
+              0.75,
+              14.094178699982379,
+              30.576585528142942,
+              28.42213718044145,
+              60.625,
+              14.107785380507332,
+              2.11246545531104,
+              153.0,
+              160.0,
+              152.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -1.5,
+            -1.5,
+            64.0,
+            33.0
+          ],
+          "points": [
+            [
+              -0.125,
+              14.388789
+            ],
+            [
+              31.240624,
+              29.336858
+            ],
+            [
+              61.375,
+              14.767696
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_06",
+          "metrics": {
+            "normalized_mse": 0.00037259311648085713,
+            "foreground_mse": 0.00017941817350219935,
+            "edge_alignment": 0.9638193845748901,
+            "foreground_iou": 0.9917355371900827
+          },
+          "input_sha256": "ba0e9faa1b4d92522d977385ae90307e9a54a509148e3c5600a607bba6d49dfc",
+          "output_sha256": "9cb5ee9540d86c3925b6a1f056405f08ffba862042e7466eaee5f7b65cd1c07f",
+          "elapsed_seconds": 2.406,
+          "registration": {
+            "direction": "down",
+            "evaluations": 243,
+            "final_error": 1.8959927140255008,
+            "hypotheses": [
+              {
+                "error": 1.8959927140255008,
+                "evaluations": 243,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9638193845748901,
+                  "foreground_iou": 0.9917355371900827,
+                  "foreground_mse": 0.00017941817350219935,
+                  "normalized_mse": 0.00037259311648085713,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 3.509471766848816,
+            "parameters": [
+              -1.5,
+              -1.5,
+              64.0,
+              33.0,
+              1.0,
+              -0.125,
+              14.388788575535957,
+              31.24062382624279,
+              29.336857740556013,
+              61.375,
+              14.767695722356741,
+              2.097125572498363,
+              123.33333333333333,
+              123.33333333333333,
+              123.33333333333333,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.375,
+            1.25,
+            57.0,
+            27.375
+          ],
+          "points": [
+            [
+              0.875,
+              14.372759
+            ],
+            [
+              29.128537,
+              27.75402
+            ],
+            [
+              57.0,
+              14.43777
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_07",
+          "metrics": {
+            "normalized_mse": 0.00023740064352750778,
+            "foreground_mse": 0.00013704686716664582,
+            "edge_alignment": 0.9728518128395081,
+            "foreground_iou": 0.9980519480519481
+          },
+          "input_sha256": "f6c8f0a2addac3a6d447f1f3f32476fa18fb1deab96d938213bc80a17b4378d3",
+          "output_sha256": "1eabfb89372e8d63c04afd210f8a778637f5cca89df77148b5e534ca65ec05ea",
+          "elapsed_seconds": 2.937,
+          "registration": {
+            "direction": "down",
+            "evaluations": 262,
+            "final_error": 1.509471766848816,
+            "hypotheses": [
+              {
+                "error": 1.509471766848816,
+                "evaluations": 262,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9728518128395081,
+                  "foreground_iou": 0.9980519480519481,
+                  "foreground_mse": 0.00013704686716664582,
+                  "normalized_mse": 0.00023740064352750778,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 7.092896174863388,
+            "parameters": [
+              0.375,
+              1.25,
+              57.0,
+              27.375,
+              1.125,
+              0.875,
+              14.372759268219616,
+              29.128537130468068,
+              27.75402007577548,
+              57.0,
+              14.437769500250791,
+              1.8615536985759522,
+              146.0,
+              157.0,
+              144.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.375,
+            0.5,
+            58.875,
+            29.0
+          ],
+          "points": [
+            [
+              0.75,
+              14.316423
+            ],
+            [
+              30.160617,
+              28.158268
+            ],
+            [
+              59.375,
+              14.300658
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_08",
+          "metrics": {
+            "normalized_mse": 0.00041489998693577945,
+            "foreground_mse": 0.00035210239002481103,
+            "edge_alignment": 0.9770908355712891,
+            "foreground_iou": 0.9963811821471653
+          },
+          "input_sha256": "2ad072b9e16f657123372e8797b46c4107dfc385ce43b61972a9a9a67c9237e2",
+          "output_sha256": "2285c7d294373a10c4be9de75e893e2c7cb5f1911b3526dca1bf94e5f26aacf3",
+          "elapsed_seconds": 2.812,
+          "registration": {
+            "direction": "down",
+            "evaluations": 219,
+            "final_error": 1.966120218579235,
+            "hypotheses": [
+              {
+                "error": 1.966120218579235,
+                "evaluations": 219,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9770908355712891,
+                  "foreground_iou": 0.9963811821471653,
+                  "foreground_mse": 0.00035210239002481103,
+                  "normalized_mse": 0.00041489998693577945,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.111657559198543,
+            "parameters": [
+              0.375,
+              0.5,
+              58.875,
+              29.0,
+              1.5,
+              0.75,
+              14.316423415833697,
+              30.16061712049107,
+              28.15826793453632,
+              59.375,
+              14.300657513053574,
+              1.933837318905084,
+              166.0,
+              176.0,
+              164.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.25,
+            0.5,
+            60.75,
+            29.0
+          ],
+          "points": [
+            [
+              0.375,
+              14.367748
+            ],
+            [
+              30.581069,
+              28.800328
+            ],
+            [
+              60.25,
+              14.674578
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_09",
+          "metrics": {
+            "normalized_mse": 0.00017335072334390134,
+            "foreground_mse": 0.00017741756164468825,
+            "edge_alignment": 0.8478832244873047,
+            "foreground_iou": 0.9958481613285883
+          },
+          "input_sha256": "a98e480eca26a8ffad3d713f0c4172baa69adb13d1e3f366674243cdf4297a51",
+          "output_sha256": "bc3ecb83383bbc6695d998198f77c4d3a10fc4b3813f484e0a0c1a5b6a62b300",
+          "elapsed_seconds": 2.563,
+          "registration": {
+            "direction": "down",
+            "evaluations": 235,
+            "final_error": 0.9500910746812387,
+            "hypotheses": [
+              {
+                "error": 0.9500910746812387,
+                "evaluations": 235,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8478832244873047,
+                  "foreground_iou": 0.9958481613285883,
+                  "foreground_mse": 0.00017741756164468825,
+                  "normalized_mse": 0.00017335072334390134,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 2.781056466302368,
+            "parameters": [
+              0.25,
+              0.5,
+              60.75,
+              29.0,
+              1.0,
+              0.375,
+              14.367747641123882,
+              30.581068804567295,
+              28.800327656507285,
+              60.25,
+              14.674577900802865,
+              2.0671366298658507,
+              145.0,
+              158.0,
+              143.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              -1.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -1.5,
+            -1.5,
+            64.0,
+            33.0
+          ],
+          "points": [
+            [
+              0.625,
+              14.551249
+            ],
+            [
+              31.407948,
+              29.220297
+            ],
+            [
+              60.375,
+              15.687736
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_10",
+          "metrics": {
+            "normalized_mse": 0.0007108572172001004,
+            "foreground_mse": 0.0005398875218816102,
+            "edge_alignment": 0.7429191470146179,
+            "foreground_iou": 0.9827197595792637
+          },
+          "input_sha256": "e79d9f6fc4b6b138b3b1544a69a80138ef712190e63f7e4d665ea17e40f29533",
+          "output_sha256": "667c16b9b471b1be718a83c0f4395892dfb6208fcab106af3f640be0fa9d86ef",
+          "elapsed_seconds": 2.781,
+          "registration": {
+            "direction": "down",
+            "evaluations": 209,
+            "final_error": 2.3295081967213114,
+            "hypotheses": [
+              {
+                "error": 2.3295081967213114,
+                "evaluations": 209,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.7429191470146179,
+                  "foreground_iou": 0.9827197595792637,
+                  "foreground_mse": 0.0005398875218816102,
+                  "normalized_mse": 0.0007108572172001004,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 3.7316939890710383,
+            "parameters": [
+              -1.5,
+              -1.5,
+              64.0,
+              33.0,
+              1.0,
+              0.625,
+              14.551248809220327,
+              31.407947519281475,
+              29.220297297327917,
+              60.375,
+              15.687735740404822,
+              2.1934016490977473,
+              126.66666666666666,
+              126.66666666666666,
+              126.66666666666666,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            2.0,
+            0.625,
+            59.125,
+            28.875
+          ],
+          "points": [
+            [
+              1.5,
+              14.060989
+            ],
+            [
+              31.433605,
+              28.330136
+            ],
+            [
+              61.25,
+              14.073006
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_11",
+          "metrics": {
+            "normalized_mse": 0.00027915003011003137,
+            "foreground_mse": 0.00030023514409549534,
+            "edge_alignment": 0.9703026413917542,
+            "foreground_iou": 0.9756242568370987
+          },
+          "input_sha256": "f9d9578e08d6ea1cab53a894c64a205e0c46f8017964dba153802fa11b19a01e",
+          "output_sha256": "28eb14125ddbc397b626087dcf6c7299bba7438c6f4b1564df52a80e518395a7",
+          "elapsed_seconds": 2.75,
+          "registration": {
+            "direction": "down",
+            "evaluations": 217,
+            "final_error": 1.337887067395264,
+            "hypotheses": [
+              {
+                "error": 1.337887067395264,
+                "evaluations": 217,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9703026413917542,
+                  "foreground_iou": 0.9756242568370987,
+                  "foreground_mse": 0.00030023514409549534,
+                  "normalized_mse": 0.00027915003011003137,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 2.8233151183970855,
+            "parameters": [
+              2.0,
+              0.625,
+              59.125,
+              28.875,
+              1.5,
+              1.5,
+              14.060989197200264,
+              31.433605427168004,
+              28.330135756302766,
+              61.25,
+              14.073006233877908,
+              2.0396829726653842,
+              158.0,
+              169.0,
+              157.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.25,
+            -0.5,
+            60.75,
+            30.0
+          ],
+          "points": [
+            [
+              1.5,
+              15.136291
+            ],
+            [
+              29.502086,
+              28.328917
+            ],
+            [
+              59.875,
+              13.89483
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_12",
+          "metrics": {
+            "normalized_mse": 0.0005514034419320524,
+            "foreground_mse": 0.0005695985746569932,
+            "edge_alignment": 0.9212630391120911,
+            "foreground_iou": 0.9982748706152962
+          },
+          "input_sha256": "4469fa4a27f617518320f119029baa8e2fe2d43a556d8c8c39a2cb7efb90b705",
+          "output_sha256": "cebb8056282d2cb0a83aa6ad05285ce76cf081fb0cb2fb4a862fe396c22284ae",
+          "elapsed_seconds": 2.907,
+          "registration": {
+            "direction": "down",
+            "evaluations": 266,
+            "final_error": 1.478688524590164,
+            "hypotheses": [
+              {
+                "error": 1.478688524590164,
+                "evaluations": 266,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9212630391120911,
+                  "foreground_iou": 0.9982748706152962,
+                  "foreground_mse": 0.0005695985746569932,
+                  "normalized_mse": 0.0005514034419320524,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 6.174681238615665,
+            "parameters": [
+              -0.25,
+              -0.5,
+              60.75,
+              30.0,
+              1.5,
+              1.5,
+              15.13629144772014,
+              29.502086325016734,
+              28.328917464642174,
+              59.875,
+              13.894829618755267,
+              1.9768832350635428,
+              154.0,
+              160.0,
+              152.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.25,
+            0.125,
+            59.0,
+            28.5
+          ],
+          "points": [
+            [
+              0.75,
+              14.110207
+            ],
+            [
+              29.539942,
+              27.873681
+            ],
+            [
+              58.5,
+              14.090662
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_13",
+          "metrics": {
+            "normalized_mse": 0.00029768291278742254,
+            "foreground_mse": 0.00029978176462464035,
+            "edge_alignment": 0.8543440103530884,
+            "foreground_iou": 0.9959862385321101
+          },
+          "input_sha256": "e71cb566545c2cee1c290fa766479dae411cf750182aef96552de97544c200bf",
+          "output_sha256": "1cd71cdb6982ab589982c3d18bc8c281aa9a506333fc7919dfd281d4c7353ab6",
+          "elapsed_seconds": 2.812,
+          "registration": {
+            "direction": "down",
+            "evaluations": 282,
+            "final_error": 1.2792349726775956,
+            "hypotheses": [
+              {
+                "error": 1.2792349726775956,
+                "evaluations": 282,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8543440103530884,
+                  "foreground_iou": 0.9959862385321101,
+                  "foreground_mse": 0.00029978176462464035,
+                  "normalized_mse": 0.00029768291278742254,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 7.266120218579235,
+            "parameters": [
+              0.25,
+              0.125,
+              59.0,
+              28.5,
+              1.375,
+              0.75,
+              14.11020746516109,
+              29.53994217708862,
+              27.87368056757979,
+              58.5,
+              14.090661765354836,
+              1.9720214748672005,
+              137.0,
+              159.0,
+              133.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            3.5,
+            1.5,
+            57.0,
+            28.125
+          ],
+          "points": [
+            [
+              3.125,
+              14.429634
+            ],
+            [
+              31.99541,
+              28.338941
+            ],
+            [
+              60.0,
+              14.860523
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_14",
+          "metrics": {
+            "normalized_mse": 0.00032720217132009566,
+            "foreground_mse": 0.00036736519541591406,
+            "edge_alignment": 0.9838870763778687,
+            "foreground_iou": 0.9956494717215661
+          },
+          "input_sha256": "cbc67860fce80952b0080d12f59e6c95285d783fdbc57e974cbe506e17090213",
+          "output_sha256": "e569772501702d80c26ad7c30c582a201ad41eb6836409d1c552b7ad1f3c06e1",
+          "elapsed_seconds": 3.078,
+          "registration": {
+            "direction": "down",
+            "evaluations": 265,
+            "final_error": 1.7579234972677595,
+            "hypotheses": [
+              {
+                "error": 1.7579234972677595,
+                "evaluations": 265,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9838870763778687,
+                  "foreground_iou": 0.9956494717215661,
+                  "foreground_mse": 0.00036736519541591406,
+                  "normalized_mse": 0.00032720217132009566,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 3.0591985428051003,
+            "parameters": [
+              3.5,
+              1.5,
+              57.0,
+              28.125,
+              1.0,
+              3.125,
+              14.429634261273018,
+              31.995409940895193,
+              28.33894122170157,
+              60.0,
+              14.86052280827427,
+              1.8830284904530632,
+              155.0,
+              160.0,
+              155.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.0,
+            0.125,
+            61.0,
+            29.5
+          ],
+          "points": [
+            [
+              1.0,
+              14.739909
+            ],
+            [
+              30.562429,
+              28.590065
+            ],
+            [
+              60.5,
+              14.428386
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_15",
+          "metrics": {
+            "normalized_mse": 0.00015889081987552345,
+            "foreground_mse": 0.00016747033805586398,
+            "edge_alignment": 0.8459404706954956,
+            "foreground_iou": 0.9969879518072289
+          },
+          "input_sha256": "55a545995f65286009153be6680d23ba9cc1843a3b55e11202744316382f4868",
+          "output_sha256": "95cdaa174a321afe3098ef1cd51aedb5083703d0bfc9fe40aef3ab8a2c4ab124",
+          "elapsed_seconds": 3.016,
+          "registration": {
+            "direction": "down",
+            "evaluations": 292,
+            "final_error": 1.0608378870673953,
+            "hypotheses": [
+              {
+                "error": 1.0608378870673953,
+                "evaluations": 292,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8459404706954956,
+                  "foreground_iou": 0.9969879518072289,
+                  "foreground_mse": 0.00016747033805586398,
+                  "normalized_mse": 0.00015889081987552345,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 3.4923497267759562,
+            "parameters": [
+              0.0,
+              0.125,
+              61.0,
+              29.5,
+              1.375,
+              1.0,
+              14.739908514565444,
+              30.562428574709145,
+              28.59006515326658,
+              60.5,
+              14.428386248463836,
+              2.088568173720743,
+              149.0,
+              157.0,
+              147.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              -1.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.625,
+            0.5,
+            60.5,
+            29.0
+          ],
+          "points": [
+            [
+              0.0,
+              14.517133
+            ],
+            [
+              29.60877,
+              28.591133
+            ],
+            [
+              59.625,
+              14.319713
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_16",
+          "metrics": {
+            "normalized_mse": 9.148225944954902e-05,
+            "foreground_mse": 8.352995791938156e-05,
+            "edge_alignment": 0.8565298914909363,
+            "foreground_iou": 0.997628927089508
+          },
+          "input_sha256": "38fe3d8462904f75497ceae5beb802a6105edd2b995b89f5e8fa0112285c840d",
+          "output_sha256": "5ffcff5cc6d03029f254df5959f84cf078238243a6ebdc4b71ed063e44c2f810",
+          "elapsed_seconds": 2.859,
+          "registration": {
+            "direction": "down",
+            "evaluations": 258,
+            "final_error": 0.9424408014571949,
+            "hypotheses": [
+              {
+                "error": 0.9424408014571949,
+                "evaluations": 258,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8565298914909363,
+                  "foreground_iou": 0.997628927089508,
+                  "foreground_mse": 8.352995791938156e-05,
+                  "normalized_mse": 9.148225944954902e-05,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 5.147358834244081,
+            "parameters": [
+              -0.625,
+              0.5,
+              60.5,
+              29.0,
+              1.0,
+              0.0,
+              14.517132501568272,
+              29.60877036532983,
+              28.591132665689422,
+              59.625,
+              14.319712826203416,
+              1.9973565134603977,
+              151.0,
+              157.0,
+              151.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              -1.0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "seed": 7262616060025015007,
+      "summary": {
+        "required": 17,
+        "completed": 17,
+        "passed": 17,
+        "failed": 0,
+        "satisfactory": true
+      },
+      "cases": [
+        {
+          "bounds": [
+            0.5,
+            0.5,
+            60.0,
+            29.0
+          ],
+          "points": [
+            [
+              0.625,
+              14.249253
+            ],
+            [
+              30.434433,
+              28.48744
+            ],
+            [
+              59.875,
+              14.497695
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "original",
+          "metrics": {
+            "normalized_mse": 9.949935338227078e-05,
+            "foreground_mse": 9.954495180863887e-05,
+            "edge_alignment": 0.8587055206298828,
+            "foreground_iou": 0.9981873111782478
+          },
+          "input_sha256": "0723d1a137c0ea38a385a9a55d0b34d73c8c8f213bb769d43ef1b548291091dd",
+          "output_sha256": "ccacbc0160ab55c9756809588c43212bf3e875dad2d10c1b18a27b68fa3359a7",
+          "elapsed_seconds": 2.969,
+          "registration": {
+            "direction": "down",
+            "evaluations": 279,
+            "final_error": 0.9519125683060109,
+            "hypotheses": [
+              {
+                "error": 0.9519125683060109,
+                "evaluations": 279,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8587055206298828,
+                  "foreground_iou": 0.9981873111782478,
+                  "foreground_mse": 9.954495180863887e-05,
+                  "normalized_mse": 9.949935338227078e-05,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 3.172313296903461,
+            "parameters": [
+              0.5,
+              0.5,
+              60.0,
+              29.0,
+              1.125,
+              0.625,
+              14.249253056817894,
+              30.43443289847219,
+              28.48743978832956,
+              59.875,
+              14.497694685238814,
+              2.1039767745749702,
+              155.0,
+              155.0,
+              155.0,
+              254.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              -1.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.0,
+            0.375,
+            59.0,
+            28.125
+          ],
+          "points": [
+            [
+              0.0,
+              13.670329
+            ],
+            [
+              29.523782,
+              27.791194
+            ],
+            [
+              59.375,
+              13.773956
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_01",
+          "metrics": {
+            "normalized_mse": 0.0002939936821348965,
+            "foreground_mse": 0.0002890288596972823,
+            "edge_alignment": 0.9763141870498657,
+            "foreground_iou": 0.9895893580104106
+          },
+          "input_sha256": "9feb615ecedcc3fbd2f91910c9480b82cfa91db637b40785273418ecf9eafe80",
+          "output_sha256": "61fbacbb5ab12333035e1fc981b050cb68e85b0e54f729dca0e2f132b187641d",
+          "elapsed_seconds": 2.782,
+          "registration": {
+            "direction": "down",
+            "evaluations": 265,
+            "final_error": 1.6316939890710382,
+            "hypotheses": [
+              {
+                "error": 1.6316939890710382,
+                "evaluations": 265,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9763141870498657,
+                  "foreground_iou": 0.9895893580104106,
+                  "foreground_mse": 0.0002890288596972823,
+                  "normalized_mse": 0.0002939936821348965,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 5.924225865209472,
+            "parameters": [
+              0.0,
+              0.375,
+              59.0,
+              28.125,
+              1.5,
+              0.0,
+              13.67032880241073,
+              29.523781941044454,
+              27.79119406605834,
+              59.375,
+              13.773955556342834,
+              1.9374611689526828,
+              138.0,
+              158.0,
+              134.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.125,
+            0.5,
+            60.5,
+            29.0
+          ],
+          "points": [
+            [
+              0.125,
+              14.283524
+            ],
+            [
+              30.02362,
+              28.544695
+            ],
+            [
+              59.5,
+              14.647999
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_02",
+          "metrics": {
+            "normalized_mse": 0.00013653146743308753,
+            "foreground_mse": 0.0001387527008773759,
+            "edge_alignment": 0.8569210171699524,
+            "foreground_iou": 0.9988109393579072
+          },
+          "input_sha256": "692adf2f3df392562df7a22ecaefcbde3b4f196dfca713c5cea07bd828688d15",
+          "output_sha256": "006671923b2518354ff004715461cf43745dbff4dce3c32bcadf9e47819fbc78",
+          "elapsed_seconds": 2.64,
+          "registration": {
+            "direction": "down",
+            "evaluations": 295,
+            "final_error": 1.0510018214936248,
+            "hypotheses": [
+              {
+                "error": 1.0510018214936248,
+                "evaluations": 295,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8569210171699524,
+                  "foreground_iou": 0.9988109393579072,
+                  "foreground_mse": 0.0001387527008773759,
+                  "normalized_mse": 0.00013653146743308753,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 3.530054644808743,
+            "parameters": [
+              -0.125,
+              0.5,
+              60.5,
+              29.0,
+              1.125,
+              0.125,
+              14.28352359624209,
+              30.023619820590856,
+              28.54469531639932,
+              59.5,
+              14.647999464063162,
+              2.0414541241395456,
+              149.0,
+              157.0,
+              147.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              -1.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.5,
+            0.625,
+            60.125,
+            29.0
+          ],
+          "points": [
+            [
+              0.375,
+              14.503165
+            ],
+            [
+              30.498452,
+              28.81464
+            ],
+            [
+              60.25,
+              14.575365
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_03",
+          "metrics": {
+            "normalized_mse": 0.0001898303016787395,
+            "foreground_mse": 0.0001567904546391219,
+            "edge_alignment": 0.9738011956214905,
+            "foreground_iou": 0.9957805907172996
+          },
+          "input_sha256": "8d78364623ec2006881eff3a8ac0e36567ffd116bd9ac9e6c37cde0b34145dd4",
+          "output_sha256": "68563162e093888e2f3fa364073a2f5a32507bf99fae2d41c55529c581cf7e77",
+          "elapsed_seconds": 2.328,
+          "registration": {
+            "direction": "down",
+            "evaluations": 248,
+            "final_error": 1.1947176684881602,
+            "hypotheses": [
+              {
+                "error": 1.1947176684881602,
+                "evaluations": 248,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9738011956214905,
+                  "foreground_iou": 0.9957805907172996,
+                  "foreground_mse": 0.0001567904546391219,
+                  "normalized_mse": 0.0001898303016787395,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 2.5214936247723134,
+            "parameters": [
+              0.5,
+              0.625,
+              60.125,
+              29.0,
+              1.125,
+              0.375,
+              14.503165460346828,
+              30.498451607198003,
+              28.814639718653304,
+              60.25,
+              14.575364682970818,
+              1.9541452572953386,
+              151.0,
+              158.0,
+              150.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -1.5,
+            -1.5,
+            64.0,
+            33.0
+          ],
+          "points": [
+            [
+              -0.125,
+              15.402446
+            ],
+            [
+              29.434969,
+              29.483758
+            ],
+            [
+              60.75,
+              14.686751
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_04",
+          "metrics": {
+            "normalized_mse": 0.000677741423714906,
+            "foreground_mse": 0.0006807864992879331,
+            "edge_alignment": 0.7711310386657715,
+            "foreground_iou": 0.9493112947658402
+          },
+          "input_sha256": "313a387750cfbafbcbfa302b22351efa01a447c7ad9b69075d0cb018e48b3434",
+          "output_sha256": "c96e7443ecaed9d62261dd124ceb36c4a23daf1b1bc30cc851a6b8ce169fbee6",
+          "elapsed_seconds": 2.985,
+          "registration": {
+            "direction": "down",
+            "evaluations": 220,
+            "final_error": 2.0737704918032787,
+            "hypotheses": [
+              {
+                "error": 2.0737704918032787,
+                "evaluations": 220,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.7711310386657715,
+                  "foreground_iou": 0.9493112947658402,
+                  "foreground_mse": 0.0006807864992879331,
+                  "normalized_mse": 0.000677741423714906,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.729143897996357,
+            "parameters": [
+              -1.5,
+              -1.5,
+              64.0,
+              33.0,
+              1.0,
+              -0.125,
+              15.402446455102417,
+              29.4349692814899,
+              29.483758125974333,
+              60.75,
+              14.686750591180969,
+              2.1277876144834673,
+              121.66666666666667,
+              121.66666666666667,
+              121.66666666666667,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.375,
+            0.5,
+            58.75,
+            29.0
+          ],
+          "points": [
+            [
+              0.625,
+              14.612496
+            ],
+            [
+              29.05009,
+              27.851961
+            ],
+            [
+              59.5,
+              13.389784
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_05",
+          "metrics": {
+            "normalized_mse": 0.0005887437146157026,
+            "foreground_mse": 0.0005057409289292991,
+            "edge_alignment": 0.9543522000312805,
+            "foreground_iou": 0.9903498190591074
+          },
+          "input_sha256": "2bba5077088c365949ac49d0f8459319b62104be6d56c040e1a5838c0ce2e5d0",
+          "output_sha256": "d5d358270c103776b004019b12835c20aba41f8ab22e17db97b96ba455572fc3",
+          "elapsed_seconds": 2.531,
+          "registration": {
+            "direction": "down",
+            "evaluations": 285,
+            "final_error": 2.4076502732240437,
+            "hypotheses": [
+              {
+                "error": 2.4076502732240437,
+                "evaluations": 285,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9543522000312805,
+                  "foreground_iou": 0.9903498190591074,
+                  "foreground_mse": 0.0005057409289292991,
+                  "normalized_mse": 0.0005887437146157026,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 5.71511839708561,
+            "parameters": [
+              -0.375,
+              0.5,
+              58.75,
+              29.0,
+              1.5,
+              0.625,
+              14.61249617900593,
+              29.05008955037365,
+              27.85196114668057,
+              59.5,
+              13.389783935600875,
+              1.8158609960595133,
+              221.0,
+              209.0,
+              222.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.25,
+            1.0,
+            58.5,
+            28.375
+          ],
+          "points": [
+            [
+              0.25,
+              14.628058
+            ],
+            [
+              30.690274,
+              27.720963
+            ],
+            [
+              60.0,
+              13.753831
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_06",
+          "metrics": {
+            "normalized_mse": 0.0018090953817591071,
+            "foreground_mse": 0.001870574546046555,
+            "edge_alignment": 0.9372501373291016,
+            "foreground_iou": 0.9892106757524134
+          },
+          "input_sha256": "2a7b4f125813be5d689931e6a956a3f94add3447a12cd2116b74139306ad53c6",
+          "output_sha256": "227790fcd909dbd907e2a2e66eaf9bbb997d7dde92d290f97f25ae74ec826159",
+          "elapsed_seconds": 2.312,
+          "registration": {
+            "direction": "down",
+            "evaluations": 251,
+            "final_error": 3.5799635701275045,
+            "hypotheses": [
+              {
+                "error": 3.5799635701275045,
+                "evaluations": 251,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9372501373291016,
+                  "foreground_iou": 0.9892106757524134,
+                  "foreground_mse": 0.001870574546046555,
+                  "normalized_mse": 0.0018090953817591071,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 6.207468123861567,
+            "parameters": [
+              0.25,
+              1.0,
+              58.5,
+              28.375,
+              1.0,
+              0.25,
+              14.62805807555027,
+              30.690273842541178,
+              27.720963286606533,
+              60.0,
+              13.753830600051383,
+              1.9139063669686458,
+              175.0,
+              179.0,
+              175.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.25,
+            1.0,
+            57.875,
+            28.0
+          ],
+          "points": [
+            [
+              1.625,
+              14.622666
+            ],
+            [
+              29.595633,
+              27.883103
+            ],
+            [
+              58.25,
+              14.126942
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_07",
+          "metrics": {
+            "normalized_mse": 0.0006062961765564978,
+            "foreground_mse": 0.0006762456032447517,
+            "edge_alignment": 0.9658743143081665,
+            "foreground_iou": 0.9973958333333334
+          },
+          "input_sha256": "fe22018510dad1e5324a23f648769c67b91b72620882340a738a3d09b7b8ace5",
+          "output_sha256": "d15e0fddb0513f380db8c7935902bd755f8098a8dfd747eec6feb88ee394fba0",
+          "elapsed_seconds": 2.563,
+          "registration": {
+            "direction": "down",
+            "evaluations": 284,
+            "final_error": 2.3799635701275044,
+            "hypotheses": [
+              {
+                "error": 2.3799635701275044,
+                "evaluations": 284,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9658743143081665,
+                  "foreground_iou": 0.9973958333333334,
+                  "foreground_mse": 0.0006762456032447517,
+                  "normalized_mse": 0.0006062961765564978,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 8.62167577413479,
+            "parameters": [
+              0.25,
+              1.0,
+              57.875,
+              28.0,
+              0.875,
+              1.625,
+              14.622666271538039,
+              29.595632765158186,
+              27.883102668011013,
+              58.25,
+              14.126942401473217,
+              1.9132627898905212,
+              196.0,
+              198.0,
+              196.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.25,
+            0.5,
+            59.0,
+            28.5
+          ],
+          "points": [
+            [
+              0.625,
+              14.495176
+            ],
+            [
+              29.318363,
+              28.050936
+            ],
+            [
+              59.5,
+              13.843955
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_08",
+          "metrics": {
+            "normalized_mse": 0.0003008847124874592,
+            "foreground_mse": 0.0003056901041418314,
+            "edge_alignment": 0.9630261063575745,
+            "foreground_iou": 0.9937712344280861
+          },
+          "input_sha256": "d7a468c7f69a1c9ea9732fc9b0ff1a6a83be96e16beb5ee9a31d916c6a4b1fef",
+          "output_sha256": "c2143cb4624049988c7830f877f3e0d6a6ccd55300ba3d8d5bd81a0bf7feb4df",
+          "elapsed_seconds": 2.375,
+          "registration": {
+            "direction": "down",
+            "evaluations": 276,
+            "final_error": 1.5001821493624772,
+            "hypotheses": [
+              {
+                "error": 1.5001821493624772,
+                "evaluations": 276,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9630261063575745,
+                  "foreground_iou": 0.9937712344280861,
+                  "foreground_mse": 0.0003056901041418314,
+                  "normalized_mse": 0.0003008847124874592,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 6.104735883424408,
+            "parameters": [
+              -0.25,
+              0.5,
+              59.0,
+              28.5,
+              1.25,
+              0.625,
+              14.495175550590488,
+              29.318362772317588,
+              28.05093564672115,
+              59.5,
+              13.843955014058103,
+              1.9330830650744573,
+              154.0,
+              158.0,
+              154.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              -1.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            1.25,
+            1.625,
+            58.75,
+            27.875
+          ],
+          "points": [
+            [
+              0.125,
+              14.270726
+            ],
+            [
+              30.635597,
+              28.812579
+            ],
+            [
+              60.5,
+              14.672946
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_09",
+          "metrics": {
+            "normalized_mse": 0.00032692484091967344,
+            "foreground_mse": 0.0002978301199618727,
+            "edge_alignment": 0.9828120470046997,
+            "foreground_iou": 0.9939135727328059
+          },
+          "input_sha256": "7de797e6efb62c7094a6fda308f9306f74669c1cda9381f0b87ec8036244e229",
+          "output_sha256": "ebdb4d94d2025aae6d7223abc9be2d392bcb9602fcd79f5f9f37348722e687bf",
+          "elapsed_seconds": 2.438,
+          "registration": {
+            "direction": "down",
+            "evaluations": 221,
+            "final_error": 1.4863387978142077,
+            "hypotheses": [
+              {
+                "error": 1.4863387978142077,
+                "evaluations": 221,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9828120470046997,
+                  "foreground_iou": 0.9939135727328059,
+                  "foreground_mse": 0.0002978301199618727,
+                  "normalized_mse": 0.00032692484091967344,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.8096539162112935,
+            "parameters": [
+              1.25,
+              1.625,
+              58.75,
+              27.875,
+              1.0,
+              0.125,
+              14.270726348330397,
+              30.635597433434064,
+              28.812578987620697,
+              60.5,
+              14.672946364475438,
+              2.0000671814139803,
+              145.0,
+              157.0,
+              145.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.375,
+            0.5,
+            58.5,
+            28.125
+          ],
+          "points": [
+            [
+              1.875,
+              14.498449
+            ],
+            [
+              29.69093,
+              27.660734
+            ],
+            [
+              59.375,
+              13.602991
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_10",
+          "metrics": {
+            "normalized_mse": 0.00042460617260076106,
+            "foreground_mse": 0.0004672555660363287,
+            "edge_alignment": 0.861580491065979,
+            "foreground_iou": 0.9805825242718447
+          },
+          "input_sha256": "a95cfb2e1c4c916d20ebe95ac948799e3961a027c8abc84635a1516bfccfb053",
+          "output_sha256": "ad083a86ba22a0f7a25a58d727b83bef60a3508295bcf94c8beeb460dccc1038",
+          "elapsed_seconds": 2.422,
+          "registration": {
+            "direction": "down",
+            "evaluations": 272,
+            "final_error": 1.1375227686703095,
+            "hypotheses": [
+              {
+                "error": 1.1375227686703095,
+                "evaluations": 272,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.861580491065979,
+                  "foreground_iou": 0.9805825242718447,
+                  "foreground_mse": 0.0004672555660363287,
+                  "normalized_mse": 0.00042460617260076106,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 5.364663023679417,
+            "parameters": [
+              0.375,
+              0.5,
+              58.5,
+              28.125,
+              1.125,
+              1.875,
+              14.49844858156028,
+              29.690929772194554,
+              27.660733930594944,
+              59.375,
+              13.602991249005576,
+              1.978247024010473,
+              152.0,
+              157.0,
+              152.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.25,
+            0.375,
+            59.0,
+            28.125
+          ],
+          "points": [
+            [
+              0.125,
+              13.457613
+            ],
+            [
+              30.103079,
+              27.662747
+            ],
+            [
+              59.625,
+              13.645153
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_11",
+          "metrics": {
+            "normalized_mse": 0.00034545210655778646,
+            "foreground_mse": 0.00036206154618412256,
+            "edge_alignment": 0.867583155632019,
+            "foreground_iou": 0.9951603145795523
+          },
+          "input_sha256": "a536f9a028efa8237b24cf71d7072bc789950f0602f0ee4a131da1cdc2d980b6",
+          "output_sha256": "caa589b944af13c57c3df8062fd0e537c07daec59980d1808becde1ef7901ca8",
+          "elapsed_seconds": 2.515,
+          "registration": {
+            "direction": "down",
+            "evaluations": 228,
+            "final_error": 1.5850637522768671,
+            "hypotheses": [
+              {
+                "error": 1.5850637522768671,
+                "evaluations": 228,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.867583155632019,
+                  "foreground_iou": 0.9951603145795523,
+                  "foreground_mse": 0.00036206154618412256,
+                  "normalized_mse": 0.00034545210655778646,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 2.6273224043715846,
+            "parameters": [
+              0.25,
+              0.375,
+              59.0,
+              28.125,
+              1.375,
+              0.125,
+              13.457613431490373,
+              30.10307871046482,
+              27.662746642285462,
+              59.625,
+              13.645153287630066,
+              1.9063280118381696,
+              150.0,
+              158.0,
+              148.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.375,
+            0.875,
+            61.875,
+            29.0
+          ],
+          "points": [
+            [
+              -0.625,
+              14.86974
+            ],
+            [
+              30.605783,
+              29.621965
+            ],
+            [
+              61.0,
+              15.158408
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_12",
+          "metrics": {
+            "normalized_mse": 0.00045988758211024106,
+            "foreground_mse": 0.0009308592998422682,
+            "edge_alignment": 0.877765417098999,
+            "foreground_iou": 0.923337091319053
+          },
+          "input_sha256": "567b4d761def02009d6898d31d22ce68c2914cbb46ffba8a16e10bf13a1059ef",
+          "output_sha256": "77c17666c7795857c79dc714ef5a31ef89b2769808ca1db4303267d403578d00",
+          "elapsed_seconds": 2.469,
+          "registration": {
+            "direction": "down",
+            "evaluations": 277,
+            "final_error": 1.6076502732240436,
+            "hypotheses": [
+              {
+                "error": 1.6076502732240436,
+                "evaluations": 277,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.877765417098999,
+                  "foreground_iou": 0.923337091319053,
+                  "foreground_mse": 0.0009308592998422682,
+                  "normalized_mse": 0.00045988758211024106,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.149726775956284,
+            "parameters": [
+              -0.375,
+              0.875,
+              61.875,
+              29.0,
+              1.25,
+              -0.625,
+              14.869739687292078,
+              30.605783225220968,
+              29.621965407671382,
+              61.0,
+              15.158408059103847,
+              2.1203216106359575,
+              136.0,
+              161.0,
+              137.0,
+              254.0,
+              255.0,
+              254.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            1.0,
+            0.125,
+            61.0,
+            29.875
+          ],
+          "points": [
+            [
+              0.375,
+              14.112242
+            ],
+            [
+              31.783426,
+              28.956338
+            ],
+            [
+              60.625,
+              15.538454
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_13",
+          "metrics": {
+            "normalized_mse": 0.0003151344717480242,
+            "foreground_mse": 0.0003171115240547806,
+            "edge_alignment": 0.8187305927276611,
+            "foreground_iou": 0.9952522255192878
+          },
+          "input_sha256": "86ff87200dac9cdd7f48caa27fd0f104e1dcaf10496dc71ef7ac9b707fd2fc81",
+          "output_sha256": "837f87a7b91e579e6b3e30cd36afe4217b479445e6eec4e5ac831ec4e3397e63",
+          "elapsed_seconds": 2.281,
+          "registration": {
+            "direction": "down",
+            "evaluations": 280,
+            "final_error": 1.4173041894353369,
+            "hypotheses": [
+              {
+                "error": 1.4173041894353369,
+                "evaluations": 280,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8187305927276611,
+                  "foreground_iou": 0.9952522255192878,
+                  "foreground_mse": 0.0003171115240547806,
+                  "normalized_mse": 0.0003151344717480242,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 5.212021857923498,
+            "parameters": [
+              1.0,
+              0.125,
+              61.0,
+              29.875,
+              1.375,
+              0.375,
+              14.112242055956454,
+              31.783425665291137,
+              28.956337541912106,
+              60.625,
+              15.538454210888265,
+              2.0497847826871007,
+              139.0,
+              159.0,
+              138.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.5,
+            -0.25,
+            62.0,
+            29.75
+          ],
+          "points": [
+            [
+              0.625,
+              13.705514
+            ],
+            [
+              31.12801,
+              28.351265
+            ],
+            [
+              61.625,
+              13.860301
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_14",
+          "metrics": {
+            "normalized_mse": 0.00010214649955742061,
+            "foreground_mse": 9.952847176464275e-05,
+            "edge_alignment": 0.9681556820869446,
+            "foreground_iou": 0.9977011494252873
+          },
+          "input_sha256": "9d0819eab7bf8f3304b12a917b520c3d32aa1b0829d9a2457cfdfe91a39bd2a3",
+          "output_sha256": "7e43282c5b9c5ba3a341349e273acd736c11d26411710fc49dba2cc31125791d",
+          "elapsed_seconds": 2.562,
+          "registration": {
+            "direction": "down",
+            "evaluations": 294,
+            "final_error": 0.9852459016393442,
+            "hypotheses": [
+              {
+                "error": 0.9852459016393442,
+                "evaluations": 294,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9681556820869446,
+                  "foreground_iou": 0.9977011494252873,
+                  "foreground_mse": 9.952847176464275e-05,
+                  "normalized_mse": 0.00010214649955742061,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.065573770491803,
+            "parameters": [
+              0.5,
+              -0.25,
+              62.0,
+              29.75,
+              1.5,
+              0.625,
+              13.705514036401283,
+              31.128010271686,
+              28.35126534262443,
+              61.625,
+              13.860301108589244,
+              1.9875087176834358,
+              152.0,
+              163.0,
+              151.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.375,
+            0.25,
+            59.0,
+            29.0
+          ],
+          "points": [
+            [
+              0.75,
+              14.692731
+            ],
+            [
+              29.309119,
+              28.288307
+            ],
+            [
+              58.625,
+              14.332565
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_15",
+          "metrics": {
+            "normalized_mse": 0.0005970072816126049,
+            "foreground_mse": 0.0006288830190896988,
+            "edge_alignment": 0.8200862407684326,
+            "foreground_iou": 0.9839381320642475
+          },
+          "input_sha256": "86b3c8869ec2a276944ac330b23682c55334890fd9ebadd72a19b248fe0c38ea",
+          "output_sha256": "f4eb669201bfcab8139fff81447e1e552ad2669439b23d5c732274df36cb962e",
+          "elapsed_seconds": 2.109,
+          "registration": {
+            "direction": "down",
+            "evaluations": 287,
+            "final_error": 1.6907103825136611,
+            "hypotheses": [
+              {
+                "error": 1.6907103825136611,
+                "evaluations": 287,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8200862407684326,
+                  "foreground_iou": 0.9839381320642475,
+                  "foreground_mse": 0.0006288830190896988,
+                  "normalized_mse": 0.0005970072816126049,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.904553734061931,
+            "parameters": [
+              0.375,
+              0.25,
+              59.0,
+              29.0,
+              1.125,
+              0.75,
+              14.692730747121967,
+              29.309119332354005,
+              28.288307104616305,
+              58.625,
+              14.33256452511994,
+              1.95672289336504,
+              142.0,
+              159.0,
+              140.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.5,
+            -0.375,
+            62.0,
+            30.0
+          ],
+          "points": [
+            [
+              0.25,
+              14.112066
+            ],
+            [
+              30.439673,
+              28.567081
+            ],
+            [
+              60.375,
+              14.396467
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_16",
+          "metrics": {
+            "normalized_mse": 0.00028227618895471096,
+            "foreground_mse": 0.0008889742894098163,
+            "edge_alignment": 0.9674677848815918,
+            "foreground_iou": 0.9873188405797102
+          },
+          "input_sha256": "06eed75e56ba9d9abc7ca17497e63ec5a944b798bd5ddf129f4da31d166bcdaa",
+          "output_sha256": "c7aa44f7fdaa6546023b879f3a48fa9c1a59142d7c5a2b4efdde2a299df4adf4",
+          "elapsed_seconds": 2.078,
+          "registration": {
+            "direction": "down",
+            "evaluations": 276,
+            "final_error": 0.8661202185792349,
+            "hypotheses": [
+              {
+                "error": 0.8661202185792349,
+                "evaluations": 276,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9674677848815918,
+                  "foreground_iou": 0.9873188405797102,
+                  "foreground_mse": 0.0008889742894098163,
+                  "normalized_mse": 0.00028227618895471096,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 5.62040072859745,
+            "parameters": [
+              -0.5,
+              -0.375,
+              62.0,
+              30.0,
+              1.0,
+              0.25,
+              14.112065712371633,
+              30.439673105927287,
+              28.56708105600115,
+              60.375,
+              14.39646732541222,
+              2.085724710200413,
+              153.0,
+              155.0,
+              152.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "seed": 817263,
+      "summary": {
+        "required": 17,
+        "completed": 17,
+        "passed": 17,
+        "failed": 0,
+        "satisfactory": true
+      },
+      "cases": [
+        {
+          "bounds": [
+            0.5,
+            0.5,
+            60.0,
+            29.0
+          ],
+          "points": [
+            [
+              0.625,
+              14.249253
+            ],
+            [
+              30.434433,
+              28.48744
+            ],
+            [
+              59.875,
+              14.497695
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "original",
+          "metrics": {
+            "normalized_mse": 9.949935338227078e-05,
+            "foreground_mse": 9.954495180863887e-05,
+            "edge_alignment": 0.8587055206298828,
+            "foreground_iou": 0.9981873111782478
+          },
+          "input_sha256": "0723d1a137c0ea38a385a9a55d0b34d73c8c8f213bb769d43ef1b548291091dd",
+          "output_sha256": "ccacbc0160ab55c9756809588c43212bf3e875dad2d10c1b18a27b68fa3359a7",
+          "elapsed_seconds": 2.359,
+          "registration": {
+            "direction": "down",
+            "evaluations": 279,
+            "final_error": 0.9519125683060109,
+            "hypotheses": [
+              {
+                "error": 0.9519125683060109,
+                "evaluations": 279,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8587055206298828,
+                  "foreground_iou": 0.9981873111782478,
+                  "foreground_mse": 9.954495180863887e-05,
+                  "normalized_mse": 9.949935338227078e-05,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 3.172313296903461,
+            "parameters": [
+              0.5,
+              0.5,
+              60.0,
+              29.0,
+              1.125,
+              0.625,
+              14.249253056817894,
+              30.43443289847219,
+              28.48743978832956,
+              59.875,
+              14.497694685238814,
+              2.1039767745749702,
+              155.0,
+              155.0,
+              155.0,
+              254.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              -1.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.0,
+            0.0,
+            60.0,
+            29.5
+          ],
+          "points": [
+            [
+              0.625,
+              15.112579
+            ],
+            [
+              29.398573,
+              28.742042
+            ],
+            [
+              60.875,
+              13.610877
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_01",
+          "metrics": {
+            "normalized_mse": 0.0004552459577098489,
+            "foreground_mse": 0.0004716309194918722,
+            "edge_alignment": 0.8217828273773193,
+            "foreground_iou": 0.9932011331444759
+          },
+          "input_sha256": "a4bf26ef99a2fa8b693de26be2e7de5cf3df76a3e96e7a7722757d4a757378c2",
+          "output_sha256": "beef512d68af6e29de1e298cdf7a3d5e50784d352bf1f9d39a5fb836bf7335bc",
+          "elapsed_seconds": 2.797,
+          "registration": {
+            "direction": "down",
+            "evaluations": 277,
+            "final_error": 1.441712204007286,
+            "hypotheses": [
+              {
+                "error": 1.441712204007286,
+                "evaluations": 277,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8217828273773193,
+                  "foreground_iou": 0.9932011331444759,
+                  "foreground_mse": 0.0004716309194918722,
+                  "normalized_mse": 0.0004552459577098489,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.276684881602915,
+            "parameters": [
+              0.0,
+              0.0,
+              60.0,
+              29.5,
+              1.125,
+              0.625,
+              15.112579198379425,
+              29.3985731073414,
+              28.742042243083944,
+              60.875,
+              13.610877243566634,
+              2.0318355473282095,
+              149.0,
+              156.0,
+              147.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              -1.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            1.625,
+            1.5,
+            56.875,
+            28.5
+          ],
+          "points": [
+            [
+              1.75,
+              14.413685
+            ],
+            [
+              30.126056,
+              28.037984
+            ],
+            [
+              59.375,
+              13.97271
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_02",
+          "metrics": {
+            "normalized_mse": 0.004086795728653669,
+            "foreground_mse": 0.004340184386819601,
+            "edge_alignment": 0.9590833187103271,
+            "foreground_iou": 0.9423076923076923
+          },
+          "input_sha256": "c0cd3df210ea9b9941c0b0335e1a8992efcfd05609974d06ea78173128268947",
+          "output_sha256": "345f5e6d53de787359de735d4429f925b1577cb95f0a4d396ea82aa2f8a1b806",
+          "elapsed_seconds": 2.735,
+          "registration": {
+            "direction": "down",
+            "evaluations": 275,
+            "final_error": 5.0615664845173045,
+            "hypotheses": [
+              {
+                "error": 5.0615664845173045,
+                "evaluations": 275,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9590833187103271,
+                  "foreground_iou": 0.9423076923076923,
+                  "foreground_mse": 0.004340184386819601,
+                  "normalized_mse": 0.004086795728653669,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 9.912568306010929,
+            "parameters": [
+              1.625,
+              1.5,
+              56.875,
+              28.5,
+              1.5,
+              1.75,
+              14.41368549923752,
+              30.126055894801635,
+              28.037983592136992,
+              59.375,
+              13.972709516403235,
+              1.9457462718906946,
+              139.0,
+              161.0,
+              135.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.75,
+            0.75,
+            61.5,
+            29.375
+          ],
+          "points": [
+            [
+              0.25,
+              14.551444
+            ],
+            [
+              31.774968,
+              29.646807
+            ],
+            [
+              60.75,
+              15.868218
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_03",
+          "metrics": {
+            "normalized_mse": 0.000430452375439927,
+            "foreground_mse": 0.0004484263190533966,
+            "edge_alignment": 0.9377352595329285,
+            "foreground_iou": 0.9954102122776821
+          },
+          "input_sha256": "ed47f0f1c7b006d77e750f07fbc07b5f05e3aae760d76b815385a4dadd65cfbb",
+          "output_sha256": "6a2e815647066a8a208823801707da253bd6d78adafebfbe4ea36b60de145874",
+          "elapsed_seconds": 2.969,
+          "registration": {
+            "direction": "down",
+            "evaluations": 261,
+            "final_error": 1.4018214936247724,
+            "hypotheses": [
+              {
+                "error": 1.4018214936247724,
+                "evaluations": 261,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9377352595329285,
+                  "foreground_iou": 0.9954102122776821,
+                  "foreground_mse": 0.0004484263190533966,
+                  "normalized_mse": 0.000430452375439927,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.096357012750455,
+            "parameters": [
+              0.75,
+              0.75,
+              61.5,
+              29.375,
+              1.25,
+              0.25,
+              14.551444043321295,
+              31.774967729302446,
+              29.646806956928906,
+              60.75,
+              15.868217993520906,
+              2.0931464428327042,
+              153.0,
+              163.0,
+              152.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            0.375,
+            1.125,
+            58.0,
+            28.5
+          ],
+          "points": [
+            [
+              1.375,
+              15.06593
+            ],
+            [
+              29.250143,
+              28.217608
+            ],
+            [
+              57.25,
+              15.030894
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_04",
+          "metrics": {
+            "normalized_mse": 0.0004650782502721995,
+            "foreground_mse": 0.0004722799640148878,
+            "edge_alignment": 0.9669867753982544,
+            "foreground_iou": 0.9914089347079038
+          },
+          "input_sha256": "497adfd39db9a370da5e76af5594d1ecfc61d65cc09ce2f78380a3f409557b6a",
+          "output_sha256": "46f093ec417c61f7cc873f4c122961e068625f4bb0b86580cee4edea7a7b1e41",
+          "elapsed_seconds": 2.719,
+          "registration": {
+            "direction": "down",
+            "evaluations": 272,
+            "final_error": 2.009289617486339,
+            "hypotheses": [
+              {
+                "error": 2.009289617486339,
+                "evaluations": 272,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9669867753982544,
+                  "foreground_iou": 0.9914089347079038,
+                  "foreground_mse": 0.0004722799640148878,
+                  "normalized_mse": 0.0004650782502721995,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 8.247540983606557,
+            "parameters": [
+              0.375,
+              1.125,
+              58.0,
+              28.5,
+              1.0,
+              1.375,
+              15.065930462619221,
+              29.250143390152655,
+              28.21760780900715,
+              57.25,
+              15.030894258767816,
+              2.007998804603167,
+              164.0,
+              173.0,
+              162.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            2.25,
+            1.5,
+            58.125,
+            28.125
+          ],
+          "points": [
+            [
+              2.375,
+              14.945511
+            ],
+            [
+              31.232463,
+              28.623599
+            ],
+            [
+              60.25,
+              14.920277
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_05",
+          "metrics": {
+            "normalized_mse": 0.00015580389299429953,
+            "foreground_mse": 0.00016515843162778765,
+            "edge_alignment": 0.975253701210022,
+            "foreground_iou": 0.9969933854479855
+          },
+          "input_sha256": "0f2c8d04818ba8495370d8f0474ced31a8274025cfbc11a2a6ee0aa71bd1b6b8",
+          "output_sha256": "11ba2acb0a85bf0ee1e9c00b31b5967b6dacc117626da241ad39cbc4062d1498",
+          "elapsed_seconds": 2.875,
+          "registration": {
+            "direction": "down",
+            "evaluations": 282,
+            "final_error": 1.1887067395264117,
+            "hypotheses": [
+              {
+                "error": 1.1887067395264117,
+                "evaluations": 282,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.975253701210022,
+                  "foreground_iou": 0.9969933854479855,
+                  "foreground_mse": 0.00016515843162778765,
+                  "normalized_mse": 0.00015580389299429953,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 5.1429872495446265,
+            "parameters": [
+              2.25,
+              1.5,
+              58.125,
+              28.125,
+              1.0,
+              2.375,
+              14.945510635494426,
+              31.232463366097136,
+              28.623598732690997,
+              60.25,
+              14.920277265463689,
+              1.8822876619626148,
+              149.0,
+              155.0,
+              148.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            1.75,
+            0.0,
+            59.5,
+            29.5
+          ],
+          "points": [
+            [
+              1.0,
+              13.588214
+            ],
+            [
+              31.233346,
+              28.030843
+            ],
+            [
+              60.25,
+              14.55944
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_06",
+          "metrics": {
+            "normalized_mse": 0.0007811007089912891,
+            "foreground_mse": 0.0007924459641799331,
+            "edge_alignment": 0.7937746047973633,
+            "foreground_iou": 0.9779036827195468
+          },
+          "input_sha256": "ca655fcd02117432ff6ae7126a0437140d8a21cbaf679147afc90988f9336117",
+          "output_sha256": "f30c9d37220230bf7b7b025db1682b734a22f45f4ef46cd996f22e1f1d74c1a0",
+          "elapsed_seconds": 2.782,
+          "registration": {
+            "direction": "down",
+            "evaluations": 262,
+            "final_error": 2.6020036429872495,
+            "hypotheses": [
+              {
+                "error": 2.6020036429872495,
+                "evaluations": 262,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.7937746047973633,
+                  "foreground_iou": 0.9779036827195468,
+                  "foreground_mse": 0.0007924459641799331,
+                  "normalized_mse": 0.0007811007089912891,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 5.133151183970856,
+            "parameters": [
+              1.75,
+              0.0,
+              59.5,
+              29.5,
+              1.5,
+              1.0,
+              13.588214295855494,
+              31.233346078782706,
+              28.030842719775926,
+              60.25,
+              14.5594397783523,
+              1.9401177929582076,
+              183.0,
+              183.0,
+              181.5,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.25,
+            -0.125,
+            59.5,
+            28.625
+          ],
+          "points": [
+            [
+              1.5,
+              14.427682
+            ],
+            [
+              29.623737,
+              27.621496
+            ],
+            [
+              60.125,
+              13.123301
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_07",
+          "metrics": {
+            "normalized_mse": 0.0005106345051899552,
+            "foreground_mse": 0.0005261736805550754,
+            "edge_alignment": 0.8509730100631714,
+            "foreground_iou": 0.992696287279367
+          },
+          "input_sha256": "19c7dfbd3acec0172540b7cd1431abb0302fa87ce6e37203ba75e0a9e4bfce07",
+          "output_sha256": "98fa216d04e6bbd9f4aba09ab8436e630d617609d38930ac99268ce2b877a15e",
+          "elapsed_seconds": 3.125,
+          "registration": {
+            "direction": "down",
+            "evaluations": 272,
+            "final_error": 1.458287795992714,
+            "hypotheses": [
+              {
+                "error": 1.458287795992714,
+                "evaluations": 272,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8509730100631714,
+                  "foreground_iou": 0.992696287279367,
+                  "foreground_mse": 0.0005261736805550754,
+                  "normalized_mse": 0.0005106345051899552,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.67103825136612,
+            "parameters": [
+              -0.25,
+              -0.125,
+              59.5,
+              28.625,
+              1.25,
+              1.5,
+              14.427682213222253,
+              29.623737376990068,
+              27.621496451412813,
+              60.125,
+              13.123300941677833,
+              2.076796262677063,
+              149.0,
+              158.0,
+              148.0,
+              254.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.25,
+            1.125,
+            57.875,
+            27.5
+          ],
+          "points": [
+            [
+              0.625,
+              13.993185
+            ],
+            [
+              29.2584,
+              27.67869
+            ],
+            [
+              58.375,
+              13.884156
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_08",
+          "metrics": {
+            "normalized_mse": 0.0006964450585655868,
+            "foreground_mse": 0.0007760535227134824,
+            "edge_alignment": 0.9563882350921631,
+            "foreground_iou": 0.9975046787273861
+          },
+          "input_sha256": "4366a87b11acb749c8ba1e3ab4bf21ce009d3f75c9a4aaea72783df104b2dacc",
+          "output_sha256": "c9b4dab7f0030a03709cee9648803a12dffbc739e8bb54c602d33f36e8f090b7",
+          "elapsed_seconds": 2.781,
+          "registration": {
+            "direction": "down",
+            "evaluations": 272,
+            "final_error": 1.648087431693989,
+            "hypotheses": [
+              {
+                "error": 1.648087431693989,
+                "evaluations": 272,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9563882350921631,
+                  "foreground_iou": 0.9975046787273861,
+                  "foreground_mse": 0.0007760535227134824,
+                  "normalized_mse": 0.0006964450585655868,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 6.7249544626593805,
+            "parameters": [
+              -0.25,
+              1.125,
+              57.875,
+              27.5,
+              1.0,
+              0.625,
+              13.993185061260647,
+              29.25839989227116,
+              27.678689770659368,
+              58.375,
+              13.884156182440549,
+              1.8401060912605331,
+              149.0,
+              155.0,
+              148.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.125,
+            0.75,
+            61.625,
+            29.0
+          ],
+          "points": [
+            [
+              0.25,
+              15.321624
+            ],
+            [
+              30.270058,
+              29.719827
+            ],
+            [
+              60.75,
+              15.177872
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_09",
+          "metrics": {
+            "normalized_mse": 0.0006279413355514407,
+            "foreground_mse": 0.0012424095766618848,
+            "edge_alignment": 0.8702365159988403,
+            "foreground_iou": 0.9289740698985344
+          },
+          "input_sha256": "847abdc4f9c7a17b52b8d93500ef67a695bd01deff0ef8ae01581c429b669ca8",
+          "output_sha256": "8a59936bd7c980adf3ada24dafe145f0b95eb2d0dd47450c3209be0877d833e0",
+          "elapsed_seconds": 3.297,
+          "registration": {
+            "direction": "down",
+            "evaluations": 281,
+            "final_error": 1.881056466302368,
+            "hypotheses": [
+              {
+                "error": 1.881056466302368,
+                "evaluations": 281,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8702365159988403,
+                  "foreground_iou": 0.9289740698985344,
+                  "foreground_mse": 0.0012424095766618848,
+                  "normalized_mse": 0.0006279413355514407,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.168306010928962,
+            "parameters": [
+              -0.125,
+              0.75,
+              61.625,
+              29.0,
+              0.875,
+              0.25,
+              15.321623813862525,
+              30.270057734796907,
+              29.71982686964412,
+              60.75,
+              15.177871579702021,
+              2.0775251344889503,
+              132.0,
+              159.0,
+              131.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.125,
+            1.125,
+            59.625,
+            28.875
+          ],
+          "points": [
+            [
+              0.5,
+              15.56891
+            ],
+            [
+              29.320175,
+              29.078065
+            ],
+            [
+              59.0,
+              14.981214
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_10",
+          "metrics": {
+            "normalized_mse": 0.00034034825512208045,
+            "foreground_mse": 0.0003415598184801638,
+            "edge_alignment": 0.8707647323608398,
+            "foreground_iou": 0.9936268829663963
+          },
+          "input_sha256": "31204e3cd0d4b81384d35458911a5f640c970fb0780eed271cf979917ea1a58e",
+          "output_sha256": "8f7595b625b7fa879d7734d8a726f31d48d51810ff9cf0f230601325aa8f0d60",
+          "elapsed_seconds": 2.984,
+          "registration": {
+            "direction": "down",
+            "evaluations": 286,
+            "final_error": 1.614207650273224,
+            "hypotheses": [
+              {
+                "error": 1.614207650273224,
+                "evaluations": 286,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8707647323608398,
+                  "foreground_iou": 0.9936268829663963,
+                  "foreground_mse": 0.0003415598184801638,
+                  "normalized_mse": 0.00034034825512208045,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 7.461384335154827,
+            "parameters": [
+              -0.125,
+              1.125,
+              59.625,
+              28.875,
+              0.75,
+              0.5,
+              15.568909639114327,
+              29.320174660830357,
+              29.078064686755525,
+              59.0,
+              14.981214363997061,
+              2.0127918199571675,
+              163.0,
+              157.0,
+              162.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            2.625,
+            0.75,
+            58.0,
+            28.0
+          ],
+          "points": [
+            [
+              3.25,
+              14.304258
+            ],
+            [
+              31.637943,
+              27.775539
+            ],
+            [
+              60.25,
+              14.250588
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_11",
+          "metrics": {
+            "normalized_mse": 9.0132059995085e-05,
+            "foreground_mse": 9.83330755843781e-05,
+            "edge_alignment": 0.9819017052650452,
+            "foreground_iou": 0.9987639060568603
+          },
+          "input_sha256": "bcf635de6229a556e9ebe0d9e3d1ecf76592b1e7ea38beb9b61abad548e350b6",
+          "output_sha256": "533b2bd0dac95a0166d30a6b2512fd190c37a2182d84cf7716253a793fc81088",
+          "elapsed_seconds": 2.89,
+          "registration": {
+            "direction": "down",
+            "evaluations": 266,
+            "final_error": 0.8375227686703096,
+            "hypotheses": [
+              {
+                "error": 0.8375227686703096,
+                "evaluations": 266,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9819017052650452,
+                  "foreground_iou": 0.9987639060568603,
+                  "foreground_mse": 9.83330755843781e-05,
+                  "normalized_mse": 9.0132059995085e-05,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 7.1145719489981785,
+            "parameters": [
+              2.625,
+              0.75,
+              58.0,
+              28.0,
+              1.0,
+              3.25,
+              14.304257645844777,
+              31.637942626020028,
+              27.775539356201584,
+              60.25,
+              14.25058833509378,
+              1.9447708234260963,
+              146.0,
+              154.0,
+              144.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            2.125,
+            1.0,
+            57.25,
+            27.875
+          ],
+          "points": [
+            [
+              2.375,
+              14.18973
+            ],
+            [
+              30.699928,
+              27.557761
+            ],
+            [
+              58.375,
+              14.541187
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_12",
+          "metrics": {
+            "normalized_mse": 0.000697481504175812,
+            "foreground_mse": 0.0005541348946280777,
+            "edge_alignment": 0.9668096303939819,
+            "foreground_iou": 0.9969418960244648
+          },
+          "input_sha256": "9448994459709bde46ebf8501f777757451e262729f0582763ffb7c9d3070607",
+          "output_sha256": "d8a8483d7028f493a78f3b905e0cc14b677cec528b8a3e8345c4c5fe5a31a1cb",
+          "elapsed_seconds": 2.937,
+          "registration": {
+            "direction": "down",
+            "evaluations": 285,
+            "final_error": 2.7016393442622952,
+            "hypotheses": [
+              {
+                "error": 2.7016393442622952,
+                "evaluations": 285,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9668096303939819,
+                  "foreground_iou": 0.9969418960244648,
+                  "foreground_mse": 0.0005541348946280777,
+                  "normalized_mse": 0.000697481504175812,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 8.92167577413479,
+            "parameters": [
+              2.125,
+              1.0,
+              57.25,
+              27.875,
+              0.875,
+              2.375,
+              14.189730465245956,
+              30.699928236680655,
+              27.557760987372017,
+              58.375,
+              14.541186624449558,
+              1.9473854564156678,
+              178.0,
+              186.0,
+              178.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            1.5,
+            1.5,
+            59.0,
+            28.0
+          ],
+          "points": [
+            [
+              1.625,
+              14.937936
+            ],
+            [
+              31.086209,
+              29.029141
+            ],
+            [
+              60.25,
+              15.12471
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_13",
+          "metrics": {
+            "normalized_mse": 0.00031321565620601177,
+            "foreground_mse": 0.0003249846340622753,
+            "edge_alignment": 0.974328875541687,
+            "foreground_iou": 0.9969788519637462
+          },
+          "input_sha256": "c5d588ed0631bf003ee9bcdfef35bd4ca92ffe1e7b4f5e23c99510d758de979e",
+          "output_sha256": "39bbb8edbbeaa3990114c7dd271b6417348c5eaaa05510c12513589c850b597e",
+          "elapsed_seconds": 2.719,
+          "registration": {
+            "direction": "down",
+            "evaluations": 248,
+            "final_error": 1.5122040072859746,
+            "hypotheses": [
+              {
+                "error": 1.5122040072859746,
+                "evaluations": 248,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.974328875541687,
+                  "foreground_iou": 0.9969788519637462,
+                  "foreground_mse": 0.0003249846340622753,
+                  "normalized_mse": 0.00031321565620601177,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 2.9918032786885247,
+            "parameters": [
+              1.5,
+              1.5,
+              59.0,
+              28.0,
+              1.0,
+              1.625,
+              14.937936024936917,
+              31.086208635902995,
+              29.029141362432213,
+              60.25,
+              15.124709999920261,
+              1.9792820996488145,
+              152.0,
+              157.0,
+              151.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            2.625,
+            0.25,
+            58.25,
+            28.25
+          ],
+          "points": [
+            [
+              2.625,
+              13.673923
+            ],
+            [
+              31.78414,
+              27.506359
+            ],
+            [
+              60.5,
+              13.833438
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_14",
+          "metrics": {
+            "normalized_mse": 0.00011014678602805361,
+            "foreground_mse": 0.00011782489309553057,
+            "edge_alignment": 0.8723900318145752,
+            "foreground_iou": 0.9963257807715861
+          },
+          "input_sha256": "13feaf5211c1edaa22b859080c30f7c12cc6ddcaa7ab4eb3be8132967d83679d",
+          "output_sha256": "e92500c4640f85c9dbaf24e247b4bb3a71783eae04167adb621788249f91d29f",
+          "elapsed_seconds": 2.516,
+          "registration": {
+            "direction": "down",
+            "evaluations": 226,
+            "final_error": 0.9408014571948998,
+            "hypotheses": [
+              {
+                "error": 0.9408014571948998,
+                "evaluations": 226,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8723900318145752,
+                  "foreground_iou": 0.9963257807715861,
+                  "foreground_mse": 0.00011782489309553057,
+                  "normalized_mse": 0.00011014678602805361,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 2.4329690346083788,
+            "parameters": [
+              2.625,
+              0.25,
+              58.25,
+              28.25,
+              1.125,
+              2.625,
+              13.673922603342131,
+              31.78413979167558,
+              27.506359204611663,
+              60.5,
+              13.833437818016307,
+              1.992769482765508,
+              150.5,
+              156.0,
+              152.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            -0.5,
+            0.0,
+            60.75,
+            29.625
+          ],
+          "points": [
+            [
+              1.0,
+              15.328717
+            ],
+            [
+              29.524177,
+              28.828808
+            ],
+            [
+              60.125,
+              14.094179
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_15",
+          "metrics": {
+            "normalized_mse": 0.00044034060556441545,
+            "foreground_mse": 0.00046749418834224343,
+            "edge_alignment": 0.8564337491989136,
+            "foreground_iou": 0.9928571428571429
+          },
+          "input_sha256": "64585eb111ca4193cbdbac87dc5f3aebc4bbccca7a3668e2958d530a1a642832",
+          "output_sha256": "d1b9ac3daa741bded3d8f3afb41cfeb967c6df64f34e7411c7f8862587595efe",
+          "elapsed_seconds": 2.235,
+          "registration": {
+            "direction": "down",
+            "evaluations": 269,
+            "final_error": 1.381056466302368,
+            "hypotheses": [
+              {
+                "error": 1.381056466302368,
+                "evaluations": 269,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.8564337491989136,
+                  "foreground_iou": 0.9928571428571429,
+                  "foreground_mse": 0.00046749418834224343,
+                  "normalized_mse": 0.00044034060556441545,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.504918032786885,
+            "parameters": [
+              -0.5,
+              0.0,
+              60.75,
+              29.625,
+              1.25,
+              1.0,
+              15.32871687261988,
+              29.52417708130519,
+              28.828808399148407,
+              60.125,
+              14.094178699982375,
+              1.9310078733440035,
+              139.5,
+              159.0,
+              134.5,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "bounds": [
+            1.5,
+            0.875,
+            57.0,
+            27.5
+          ],
+          "points": [
+            [
+              1.0,
+              13.562626
+            ],
+            [
+              29.528695,
+              27.456297
+            ],
+            [
+              57.75,
+              14.416692
+            ]
+          ],
+          "stop_count": 9,
+          "case_id": "probe_16",
+          "metrics": {
+            "normalized_mse": 0.0004118074430152774,
+            "foreground_mse": 0.00045965544995851815,
+            "edge_alignment": 0.9626368284225464,
+            "foreground_iou": 0.9900682805710739
+          },
+          "input_sha256": "56a6274c51bf7e2b1ba426259085fdbcbd0629820bf752e4b491bb40ff35e216",
+          "output_sha256": "21cb070477d3db6337fd95fbb7ff8797d0317b907f5af4935acea874a714ce79",
+          "elapsed_seconds": 3.25,
+          "registration": {
+            "direction": "down",
+            "evaluations": 260,
+            "final_error": 1.6877959927140256,
+            "hypotheses": [
+              {
+                "error": 1.6877959927140256,
+                "evaluations": 260,
+                "geometry": "size",
+                "loss": "absolute",
+                "profile": "uniform",
+                "quality": {
+                  "edge_alignment": 0.9626368284225464,
+                  "foreground_iou": 0.9900682805710739,
+                  "foreground_mse": 0.00045965544995851815,
+                  "normalized_mse": 0.0004118074430152774,
+                  "passed": true
+                }
+              }
+            ],
+            "initial_error": 4.2923497267759565,
+            "parameters": [
+              1.5,
+              0.875,
+              57.0,
+              27.5,
+              1.0,
+              1.0,
+              13.562625835254302,
+              29.528695362541757,
+              27.456297183709367,
+              57.75,
+              14.41669150521609,
+              1.9718858471986305,
+              152.0,
+              155.0,
+              151.0,
+              255.0,
+              255.0,
+              255.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "independent": [
+    {
+      "bounds": [
+        7.75,
+        5.75,
+        84.625,
+        48.625
+      ],
+      "points": [
+        [
+          7.25,
+          27.549424
+        ],
+        [
+          47.017052,
+          51.014532
+        ],
+        [
+          92.25,
+          27.867278
+        ]
+      ],
+      "stop_count": 9,
+      "case_id": "foreign_0_100",
+      "metrics": {
+        "normalized_mse": 0.00012142338528065011,
+        "foreground_mse": 0.0001732642122078687,
+        "edge_alignment": 0.9877946376800537,
+        "foreground_iou": 0.9975757575757576
+      },
+      "input_sha256": "fb9592ee6a96345c9a511351a6b9f121a41bcce3ba54eac32dbef75f2d131e41",
+      "output_sha256": "54d141d11bd7e0df49e044e3ed83c1ddecf4672c2ad5504165ee04e84911b0dc",
+      "elapsed_seconds": 2.938,
+      "registration": {
+        "direction": "down",
+        "evaluations": 262,
+        "final_error": 0.8592222222222222,
+        "hypotheses": [
+          {
+            "error": 0.8592222222222222,
+            "evaluations": 262,
+            "geometry": "size",
+            "loss": "absolute",
+            "profile": "uniform",
+            "quality": {
+              "edge_alignment": 0.9877946376800537,
+              "foreground_iou": 0.9975757575757576,
+              "foreground_mse": 0.0001732642122078687,
+              "normalized_mse": 0.00012142338528065011,
+              "passed": true
+            }
+          }
+        ],
+        "initial_error": 2.559833333333333,
+        "parameters": [
+          7.75,
+          5.75,
+          84.625,
+          48.625,
+          1.375,
+          7.25,
+          27.549423959791426,
+          47.017052295779116,
+          51.0145315826358,
+          92.25,
+          27.867277576594063,
+          2.429340989335248,
+          194.0,
+          194.0,
+          194.0,
+          255.0,
+          255.0,
+          255.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "bounds": [
+        7.75,
+        5.75,
+        84.5,
+        48.625
+      ],
+      "points": [
+        [
+          8.0,
+          28.033534
+        ],
+        [
+          46.97098,
+          50.931603
+        ],
+        [
+          92.25,
+          27.873207
+        ]
+      ],
+      "stop_count": 9,
+      "case_id": "foreign_1_100",
+      "metrics": {
+        "normalized_mse": 0.00014189243665896356,
+        "foreground_mse": 0.00020539840625133365,
+        "edge_alignment": 0.8886160850524902,
+        "foreground_iou": 0.9978192391567725
+      },
+      "input_sha256": "b275215c8382cd2cb272f207a6ba5a982554b94377319de48d9e3f97ab663c64",
+      "output_sha256": "ea0dcb9cd7467ca09bfb9f73e4a138c1875c076c94f6b127fb863f54d886617f",
+      "elapsed_seconds": 2.86,
+      "registration": {
+        "direction": "down",
+        "evaluations": 259,
+        "final_error": 0.9171111111111111,
+        "hypotheses": [
+          {
+            "error": 0.9171111111111111,
+            "evaluations": 259,
+            "geometry": "size",
+            "loss": "absolute",
+            "profile": "uniform",
+            "quality": {
+              "edge_alignment": 0.8886160850524902,
+              "foreground_iou": 0.9978192391567725,
+              "foreground_mse": 0.00020539840625133365,
+              "normalized_mse": 0.00014189243665896356,
+              "passed": true
+            }
+          }
+        ],
+        "initial_error": 2.8705,
+        "parameters": [
+          7.75,
+          5.75,
+          84.5,
+          48.625,
+          1.375,
+          8.0,
+          28.03353436343605,
+          46.97098005716944,
+          50.931602585702535,
+          92.25,
+          27.873206729420488,
+          2.5391578563850468,
+          189.0,
+          194.0,
+          194.0,
+          255.0,
+          255.0,
+          255.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "bounds": [
+        7.75,
+        5.75,
+        84.5,
+        48.625
+      ],
+      "points": [
+        [
+          8.125,
+          28.033534
+        ],
+        [
+          46.97098,
+          51.056603
+        ],
+        [
+          92.125,
+          27.873207
+        ]
+      ],
+      "stop_count": 9,
+      "case_id": "foreign_2_100",
+      "metrics": {
+        "normalized_mse": 0.0001864898222265765,
+        "foreground_mse": 0.0002695894509088248,
+        "edge_alignment": 0.9844498634338379,
+        "foreground_iou": 0.9983034415899176
+      },
+      "input_sha256": "631f332537462690f29f0de86bd2a027d6e7eeb2f8ba4bf41dc87516976de9e2",
+      "output_sha256": "81dcfdc114cd126fc114958092b2f5d84d7312209652aa6509ac87b55a9b08ec",
+      "elapsed_seconds": 3.078,
+      "registration": {
+        "direction": "down",
+        "evaluations": 297,
+        "final_error": 0.9422777777777778,
+        "hypotheses": [
+          {
+            "error": 0.9422777777777778,
+            "evaluations": 297,
+            "geometry": "size",
+            "loss": "absolute",
+            "profile": "uniform",
+            "quality": {
+              "edge_alignment": 0.9844498634338379,
+              "foreground_iou": 0.9983034415899176,
+              "foreground_mse": 0.0002695894509088248,
+              "normalized_mse": 0.0001864898222265765,
+              "passed": true
+            }
+          }
+        ],
+        "initial_error": 3.2465555555555556,
+        "parameters": [
+          7.75,
+          5.75,
+          84.5,
+          48.625,
+          1.375,
+          8.125,
+          28.03353436343605,
+          46.97098005716944,
+          51.056602585702535,
+          92.125,
+          27.873206729420488,
+          2.5391578563850468,
+          194.0,
+          194.0,
+          194.0,
+          255.0,
+          255.0,
+          255.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "bounds": [
+        11.75,
+        8.875,
+        126.5,
+        72.5
+      ],
+      "points": [
+        [
+          12.125,
+          42.115925
+        ],
+        [
+          70.517929,
+          76.489407
+        ],
+        [
+          137.875,
+          42.104463
+        ]
+      ],
+      "stop_count": 9,
+      "case_id": "foreign_0_150",
+      "metrics": {
+        "normalized_mse": 0.0002120601129718125,
+        "foreground_mse": 0.0002723625220824033,
+        "edge_alignment": 0.8797194957733154,
+        "foreground_iou": 0.998671096345515
+      },
+      "input_sha256": "015c36db6252aa71ff8220872615244a7e85afe4b139f4753b403242c18f71fe",
+      "output_sha256": "d29dc532d2338ae9eff4bede6b17572b1e79eaa5b5b5750e4ce3a33a0aadb1a9",
+      "elapsed_seconds": 3.468,
+      "registration": {
+        "direction": "down",
+        "evaluations": 289,
+        "final_error": 1.1131111111111112,
+        "hypotheses": [
+          {
+            "error": 1.1131111111111112,
+            "evaluations": 289,
+            "geometry": "size",
+            "loss": "absolute",
+            "profile": "uniform",
+            "quality": {
+              "edge_alignment": 0.8797194957733154,
+              "foreground_iou": 0.998671096345515,
+              "foreground_mse": 0.0002723625220824033,
+              "normalized_mse": 0.0002120601129718125,
+              "passed": true
+            }
+          }
+        ],
+        "initial_error": 2.9789135802469136,
+        "parameters": [
+          11.75,
+          8.875,
+          126.5,
+          72.5,
+          1.625,
+          12.125,
+          42.11592490234176,
+          70.51792929353648,
+          76.48940700365208,
+          137.875,
+          42.10446250246735,
+          3.6899207194444745,
+          166.0,
+          164.0,
+          166.0,
+          255.0,
+          255.0,
+          255.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "bounds": [
+        11.75,
+        8.875,
+        126.5,
+        72.5
+      ],
+      "points": [
+        [
+          11.875,
+          41.951937
+        ],
+        [
+          70.545948,
+          76.530742
+        ],
+        [
+          137.5,
+          42.227507
+        ]
+      ],
+      "stop_count": 9,
+      "case_id": "foreign_1_150",
+      "metrics": {
+        "normalized_mse": 0.00022513658041134477,
+        "foreground_mse": 0.00029110745526850224,
+        "edge_alignment": 0.8738241195678711,
+        "foreground_iou": 0.999113475177305
+      },
+      "input_sha256": "4b53264aa073ec101634acfa281ea239e41d4516843a37fc743b19bb71f7abc9",
+      "output_sha256": "bcf52acbbd1f44625a10f232d8c0c06518cb2a275cc64d09ce6204ee8d338c65",
+      "elapsed_seconds": 3.156,
+      "registration": {
+        "direction": "down",
+        "evaluations": 287,
+        "final_error": 1.0649382716049383,
+        "hypotheses": [
+          {
+            "error": 1.0649382716049383,
+            "evaluations": 287,
+            "geometry": "size",
+            "loss": "absolute",
+            "profile": "uniform",
+            "quality": {
+              "edge_alignment": 0.8738241195678711,
+              "foreground_iou": 0.999113475177305,
+              "foreground_mse": 0.00029110745526850224,
+              "normalized_mse": 0.00022513658041134477,
+              "passed": true
+            }
+          }
+        ],
+        "initial_error": 2.8498024691358026,
+        "parameters": [
+          11.75,
+          8.875,
+          126.5,
+          72.5,
+          1.625,
+          11.875,
+          41.95193734744886,
+          70.54594821965689,
+          76.53074202749744,
+          137.5,
+          42.227506823306626,
+          3.810391094661034,
+          159.0,
+          166.0,
+          166.0,
+          255.0,
+          255.0,
+          255.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "bounds": [
+        11.75,
+        8.875,
+        126.5,
+        72.5
+      ],
+      "points": [
+        [
+          12.125,
+          42.088381
+        ],
+        [
+          70.599795,
+          76.451991
+        ],
+        [
+          138.0,
+          42.017866
+        ]
+      ],
+      "stop_count": 9,
+      "case_id": "foreign_2_150",
+      "metrics": {
+        "normalized_mse": 0.0002804953546728939,
+        "foreground_mse": 0.0003704934206325561,
+        "edge_alignment": 0.8830052614212036,
+        "foreground_iou": 0.9990032118728541
+      },
+      "input_sha256": "cd1dd2544569dcbedcb726a9fb50b256f41528820fbcf0420bc375901d3c7194",
+      "output_sha256": "949871c6923197e51c4cd6011a2fc126c953c8a6ca45bfcfda1126a5007391a4",
+      "elapsed_seconds": 3.812,
+      "registration": {
+        "direction": "down",
+        "evaluations": 286,
+        "final_error": 1.1577283950617283,
+        "hypotheses": [
+          {
+            "error": 1.1577283950617283,
+            "evaluations": 286,
+            "geometry": "size",
+            "loss": "absolute",
+            "profile": "uniform",
+            "quality": {
+              "edge_alignment": 0.8830052614212036,
+              "foreground_iou": 0.9990032118728541,
+              "foreground_mse": 0.0003704934206325561,
+              "normalized_mse": 0.0002804953546728939,
+              "passed": true
+            }
+          }
+        ],
+        "initial_error": 3.028716049382716,
+        "parameters": [
+          11.75,
+          8.875,
+          126.5,
+          72.5,
+          1.625,
+          12.125,
+          42.08838078066225,
+          70.59979497221437,
+          76.45199061974981,
+          138.0,
+          42.01786647578495,
+          3.769847244680929,
+          165.0,
+          165.0,
+          159.0,
+          255.0,
+          255.0,
+          255.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "bounds": [
+        -0.125,
+        0.625,
+        80.375,
+        38.875
+      ],
+      "points": [
+        [
+          2.5,
+          19.693297
+        ],
+        [
+          42.885846,
+          36.972706
+        ],
+        [
+          79.0,
+          18.747676
+        ]
+      ],
+      "stop_count": 9,
+      "case_id": "unrelated_jpeg_L",
+      "metrics": {
+        "normalized_mse": 0.0009861319558694959,
+        "foreground_mse": 0.0010381531901657581,
+        "edge_alignment": 0.9422551393508911,
+        "foreground_iou": 0.9889705882352942
+      },
+      "input_sha256": "6e47552de826362074d61ca0c3ee8aa43d454b00e7189135471fdcf4f6e20d7f",
+      "output_sha256": "0510aebc7a6c7d50209fc57c055da75dce79ffe5b75a1e0a9fd68a9265e0e83a",
+      "elapsed_seconds": 2.938,
+      "registration": {
+        "direction": "down",
+        "evaluations": 300,
+        "final_error": 3.2740625,
+        "hypotheses": [
+          {
+            "error": 3.2740625,
+            "evaluations": 300,
+            "geometry": "size",
+            "loss": "absolute",
+            "profile": "uniform",
+            "quality": {
+              "edge_alignment": 0.9422551393508911,
+              "foreground_iou": 0.9889705882352942,
+              "foreground_mse": 0.0010381531901657581,
+              "normalized_mse": 0.0009861319558694959,
+              "passed": true
+            }
+          }
+        ],
+        "initial_error": 7.149166666666667,
+        "parameters": [
+          -0.125,
+          0.625,
+          80.375,
+          38.875,
+          1.625,
+          2.5,
+          19.693297395346395,
+          42.885846165778965,
+          36.972706069118004,
+          79.0,
+          18.747675510242402,
+          3.4367757287378002,
+          203.0,
+          202.0,
+          203.0,
+          230.0,
+          230.0,
+          229.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "bounds": [
+        0.0,
+        0.5,
+        60.125,
+        29.0
+      ],
+      "points": [
+        [
+          0.625,
+          14.182197
+        ],
+        [
+          32.050115,
+          27.685511
+        ],
+        [
+          59.75,
+          13.883582
+        ]
+      ],
+      "stop_count": 9,
+      "case_id": "unrelated_jpeg_M",
+      "metrics": {
+        "normalized_mse": 0.00034902532934211195,
+        "foreground_mse": 0.00035619232221506536,
+        "edge_alignment": 0.9341605305671692,
+        "foreground_iou": 0.9940440738534843
+      },
+      "input_sha256": "b4f0e837fd653f08de9223eac9ff5ff5ca2adf4159d62e622dd9602758f49b61",
+      "output_sha256": "3af0c1a1a1b480845d41a0b396e6d92397816dce47e3ea7c1d0aa6b0fd1b8ca3",
+      "elapsed_seconds": 3.203,
+      "registration": {
+        "direction": "down",
+        "evaluations": 269,
+        "final_error": 2.8053703703703703,
+        "hypotheses": [
+          {
+            "error": 2.8053703703703703,
+            "evaluations": 269,
+            "geometry": "size",
+            "loss": "absolute",
+            "profile": "uniform",
+            "quality": {
+              "edge_alignment": 0.9341605305671692,
+              "foreground_iou": 0.9940440738534843,
+              "foreground_mse": 0.00035619232221506536,
+              "normalized_mse": 0.00034902532934211195,
+              "passed": true
+            }
+          }
+        ],
+        "initial_error": 4.631296296296297,
+        "parameters": [
+          0.0,
+          0.5,
+          60.125,
+          29.0,
+          1.375,
+          0.625,
+          14.182196996157883,
+          32.05011514883126,
+          27.685510747446052,
+          59.75,
+          13.883582253287145,
+          2.6007319241977602,
+          176.0,
+          176.0,
+          177.0,
+          230.0,
+          230.0,
+          230.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "bounds": [
+        -0.125,
+        0.5,
+        40.375,
+        19.0
+      ],
+      "points": [
+        [
+          1.5,
+          9.948249
+        ],
+        [
+          21.352773,
+          18.483615
+        ],
+        [
+          39.375,
+          9.51105
+        ]
+      ],
+      "stop_count": 9,
+      "case_id": "unrelated_jpeg_S",
+      "metrics": {
+        "normalized_mse": 0.0005602012388408184,
+        "foreground_mse": 0.0005947071476839483,
+        "edge_alignment": 0.8016366958618164,
+        "foreground_iou": 0.9875
+      },
+      "input_sha256": "8adf2cddd17878d7f7ae0ba6a2f3bbf4499ce44e210216fd34fd1979b52fe166",
+      "output_sha256": "66d2bd6e58878cadf962781cd6b90cdd345849a1c55ea09bae1e41e398d029e0",
+      "elapsed_seconds": 6.484,
+      "registration": {
+        "direction": "down",
+        "evaluations": 1182,
+        "final_error": 2.972916666666667,
+        "hypotheses": [
+          {
+            "error": 3.5941666666666667,
+            "evaluations": 296,
+            "geometry": "size",
+            "loss": "absolute",
+            "profile": "uniform",
+            "quality": {
+              "edge_alignment": 0.689363956451416,
+              "foreground_iou": 0.9875173370319001,
+              "foreground_mse": 0.000971709203440696,
+              "normalized_mse": 0.000900294806342572,
+              "passed": false
+            }
+          },
+          {
+            "error": 3.171666666666667,
+            "evaluations": 333,
+            "geometry": "sides",
+            "loss": "absolute",
+            "profile": "uniform",
+            "quality": {
+              "edge_alignment": 0.6903902888298035,
+              "foreground_iou": 0.9875173370319001,
+              "foreground_mse": 0.000613868236541748,
+              "normalized_mse": 0.0005778418271802366,
+              "passed": false
+            }
+          },
+          {
+            "error": 3.1704166666666667,
+            "evaluations": 258,
+            "geometry": "sides",
+            "loss": "squared",
+            "profile": "uniform",
+            "quality": {
+              "edge_alignment": 0.68177330493927,
+              "foreground_iou": 0.9888888888888889,
+              "foreground_mse": 0.0003414214006625116,
+              "normalized_mse": 0.00033528771018609405,
+              "passed": false
+            }
+          },
+          {
+            "error": 2.972916666666667,
+            "evaluations": 295,
+            "geometry": "size",
+            "loss": "observed_peak",
+            "profile": "adaptive",
+            "quality": {
+              "edge_alignment": 0.8016366958618164,
+              "foreground_iou": 0.9875,
+              "foreground_mse": 0.0005947071476839483,
+              "normalized_mse": 0.0005602012388408184,
+              "passed": true
+            }
+          }
+        ],
+        "initial_error": 9.345833333333333,
+        "parameters": [
+          -0.125,
+          0.5,
+          40.375,
+          19.0,
+          1.0,
+          1.5,
+          9.9482486377699,
+          21.35277300479205,
+          18.48361514876167,
+          39.375,
+          9.511050328227572,
+          1.9166175580172604,
+          175.0,
+          178.0,
+          176.0,
+          230.0,
+          230.0,
+          229.0,
+          0.0,
+          -1.0,
+          0.0
+        ]
+      }
+    }
+  ]
+}
