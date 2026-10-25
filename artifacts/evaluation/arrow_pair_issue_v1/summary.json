@@ -1,0 +1,2868 @@
+{
+  "baseline_commit": "19911195e0a7bdc13060734a17393bd4bd651e30",
+  "baseline": {
+    "status": "original_not_convertible",
+    "completed": 1,
+    "metrics": {
+      "normalized_mse": 0.04085015133023262,
+      "foreground_mse": 0.3450581133365631,
+      "edge_alignment": 0.22892849147319794,
+      "foreground_iou": 0.08405172413793104
+    },
+    "source_image_sha256": "ac81cbd7490bd5e2b7f3616d8e5a917a0ad6f15761bf70b2137bfa42641586e4",
+    "note": "Only the original ran; its rendering is independent of the variation seed."
+  },
+  "css_only": {
+    "status": "original_not_convertible",
+    "metrics": {
+      "normalized_mse": 0.013988178223371506,
+      "foreground_mse": 0.077477365732193,
+      "edge_alignment": 0.5899002552032471,
+      "foreground_iou": 0.8567375886524823
+    },
+    "failures": [
+      "excessive_svg_elements",
+      "normalized_mse_outside_limit",
+      "foreground_mse_outside_limit",
+      "edge_alignment_outside_limit"
+    ],
+    "source_image_sha256": "24034061ef1190c99794687eb015a502555ecfc3e8550a3960c18d68ae92cc1e"
+  },
+  "frozen": {
+    "seed": 2913486205284857784,
+    "summary": {
+      "required": 17,
+      "completed": 17,
+      "passed": 17,
+      "failed": 0,
+      "satisfactory": true
+    },
+    "source_image_sha256": "24034061ef1190c99794687eb015a502555ecfc3e8550a3960c18d68ae92cc1e",
+    "source_description_sha256": "c59e284ed180ec5baaebe6b2e10039f3d7e8c6badead3b7aa434a9e3eefacd12",
+    "elapsed_seconds_median": 3.016,
+    "elapsed_seconds_max": 3.938,
+    "cases": [
+      {
+        "case_id": "original",
+        "variation": {
+          "scale": 1.0,
+          "relative_x": 0.0,
+          "relative_y": 0.0
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche.",
+        "input_sha256": "24034061ef1190c99794687eb015a502555ecfc3e8550a3960c18d68ae92cc1e",
+        "reference_svg_sha256": "e01cc7d5ba526f991c94a089850e0b39b93d35d4429b9ac0e6723be920035533",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.4081449990044348e-05,
+          "foreground_mse": 7.518717757193372e-05,
+          "edge_alignment": 0.9968904256820679,
+          "foreground_iou": 0.9957507082152974
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "6f06b2a05ce78425ded5123d14f685b4838e2c4984f2424728b2b29124694577",
+        "elapsed_seconds": 2.922,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.923738\" y=\"0.000000\" width=\"1.403922\" height=\"106.022727\" fill=\"#006fb0\"/><polygon points=\"29.825081,111.576705 24.679248,100.250000 34.970915,100.250000\" fill=\"#006fb0\"/><rect x=\"4.678129\" y=\"0.000000\" width=\"1.407843\" height=\"105.977273\" fill=\"#ff0000\"/><polygon points=\"5.143669,100.767045 -0.377165,112.750000 10.664502,112.750000\" fill=\"#ff0000\"/><rect x=\"5.000000\" y=\"67.866422\" width=\"23.968750\" height=\"1.392157\" fill=\"#ff0000\"/></svg>",
+        "registration": {
+          "error": 0.08537414965986395,
+          "evaluations": 523,
+          "initial_error": 1.7943027210884355,
+          "parameters": [
+            29.625698324022345,
+            0.0,
+            106.02272727272725,
+            1.403921568627451,
+            29.825081168831186,
+            111.57670454545452,
+            100.25,
+            5.145833333333359,
+            5.382050835654596,
+            0.0,
+            105.97727272727278,
+            1.407843137254902,
+            5.1436688311688386,
+            100.76704545454554,
+            112.75,
+            5.5208333333333215,
+            5.0,
+            67.86642156862744,
+            28.96875,
+            1.392156862745098,
+            176.0,
+            111.0,
+            0.0,
+            0.5,
+            0.5,
+            258.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9968904256820679,
+            "foreground_iou": 0.9957507082152974,
+            "foreground_mse": 7.518717757193372e-05,
+            "normalized_mse": 1.4081449990044348e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "original",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.578,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 523,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_01",
+        "variation": {
+          "scale": 1.05634406,
+          "relative_x": -0.00938483,
+          "relative_y": 0.02295439
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die Darstellung ist geringfügig größer dargestellt und etwas nach links und unten verschoben.",
+        "input_sha256": "dff36ff8a927612025892cb8777d87c5cfd51d9c2ee918e24adddc3a19a75aef",
+        "reference_svg_sha256": "97f8e6def5d0bfbee763d495e2bf8d878097179e47347262fad3460a622986bf",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 2.151187254639808e-05,
+          "foreground_mse": 0.00012538237206172198,
+          "edge_alignment": 0.9981420636177063,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "2bd106d19fd78791edf7baa7627c09e340dc5714e34270a1d6a5f470b44777f7",
+        "elapsed_seconds": 2.593,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.201103\" y=\"0.000000\" width=\"1.478431\" height=\"112.650000\" fill=\"#026fb0\"/><polygon points=\"30.180357,117.550000 24.716071,105.250000 35.644643,105.250000\" fill=\"#026fb0\"/><rect x=\"3.666065\" y=\"0.000000\" width=\"1.466667\" height=\"108.312500\" fill=\"#ff0303\"/><polygon points=\"4.166667,105.750000 0.916667,113.000000 7.416667,113.000000\" fill=\"#ff0303\"/><rect x=\"4.000000\" y=\"71.014108\" width=\"25.125000\" height=\"1.537010\" fill=\"#ff0303\"/></svg>",
+        "registration": {
+          "error": 0.20782312925170068,
+          "evaluations": 479,
+          "initial_error": 1.1477891156462585,
+          "parameters": [
+            29.94031830238727,
+            0.0,
+            112.65000000000003,
+            1.4784313725490197,
+            30.18035714285715,
+            117.55000000000008,
+            105.25,
+            5.4642857142856744,
+            4.399398395721925,
+            0.0,
+            108.3125,
+            1.4666666666666668,
+            4.166666666666657,
+            105.75000000000001,
+            113.0,
+            3.2500000000000036,
+            4.0,
+            71.0141076333642,
+            29.125,
+            1.5370098039215687,
+            176.0,
+            111.0,
+            2.0,
+            3.0,
+            3.0,
+            258.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9981420636177063,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00012538237206172198,
+            "normalized_mse": 2.151187254639808e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_01",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.484,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 479,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_02",
+        "variation": {
+          "scale": 1.00977629,
+          "relative_x": 0.01650325,
+          "relative_y": 0.01160492
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die Darstellung ist ein wenig größer dargestellt und ein wenig nach rechts und unten versetzt.",
+        "input_sha256": "12e7e0caebad6ef929c8b822bba4bcd061aa1e9d9a965d467fb7f33479f6e585",
+        "reference_svg_sha256": "5ef9551fc70b25cc3965d013ff361c2f46f306e3646b579f8bc53909f51be632",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 2.595547994133085e-05,
+          "foreground_mse": 0.00015366109437309206,
+          "edge_alignment": 0.9974941611289978,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "15df1bb58228eadf6603bb56c9a0813295f8a0ce2b2194a814ac31cd3f054e5c",
+        "elapsed_seconds": 2.812,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.569706\" y=\"0.750000\" width=\"1.470588\" height=\"107.716418\" fill=\"#0270ae\"/><polygon points=\"30.528451,113.651586 25.370713,102.000000 35.686190,102.000000\" fill=\"#0270ae\"/><rect x=\"5.165887\" y=\"0.750000\" width=\"1.419608\" height=\"105.626437\" fill=\"#ff0000\"/><polygon points=\"5.604885,102.565374 0.945361,112.500000 10.264409,112.500000\" fill=\"#ff0000\"/><rect x=\"5.875000\" y=\"69.274498\" width=\"23.750000\" height=\"1.407843\" fill=\"#ff0000\"/></svg>",
+        "registration": {
+          "error": 0.17891156462585034,
+          "evaluations": 474,
+          "initial_error": 1.761139455782313,
+          "parameters": [
+            30.305,
+            0.75,
+            108.46641791044777,
+            1.4705882352941178,
+            30.52845149253732,
+            113.65158582089556,
+            102.0,
+            5.157738095238091,
+            5.875690607734806,
+            0.75,
+            106.37643678160917,
+            1.4196078431372547,
+            5.604885057471257,
+            102.56537356321834,
+            112.5,
+            4.659523809523819,
+            5.875,
+            69.27449768294558,
+            29.625,
+            1.4078431372549018,
+            173.5,
+            112.0,
+            2.0,
+            0.0,
+            0.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9974941611289978,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00015366109437309206,
+            "normalized_mse": 2.595547994133085e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_02",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.579,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 474,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_03",
+        "variation": {
+          "scale": 0.94061994,
+          "relative_x": 0.01060899,
+          "relative_y": -0.02300721
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das Motiv ist leicht kleiner dargestellt und leicht nach rechts und oben verschoben.",
+        "input_sha256": "77878cfd14fae621b0324c8f4733792a561dd13be240cbd4f033b6022bdf4e1e",
+        "reference_svg_sha256": "6c34093012a475d53e8300d4971b22029d7b1ed6d143d3041b8c5869b37959b4",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.6423562556155957e-05,
+          "foreground_mse": 0.00010040818597190082,
+          "edge_alignment": 0.9928245544433594,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "6ab771de94cc73a660f21f6b9d71a1c4593b880cbe3788c83226c5aabf24bd0b",
+        "elapsed_seconds": 3.094,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.537248\" y=\"0.750000\" width=\"1.356863\" height=\"100.750000\" fill=\"#016eb1\"/><polygon points=\"29.464286,105.625000 24.571429,95.000000 34.357143,95.000000\" fill=\"#016eb1\"/><rect x=\"5.873631\" y=\"0.750000\" width=\"1.286275\" height=\"99.636364\" fill=\"#ff0000\"/><polygon points=\"6.277192,95.522727 1.381358,106.125000 11.173025,106.125000\" fill=\"#ff0000\"/><rect x=\"6.000000\" y=\"64.594786\" width=\"22.562500\" height=\"1.333333\" fill=\"#ff0000\"/></svg>",
+        "registration": {
+          "error": 0.10977891156462585,
+          "evaluations": 508,
+          "initial_error": 2.0485544217687073,
+          "parameters": [
+            29.21567919075144,
+            0.75,
+            101.5,
+            1.3568627450980393,
+            29.464285714285698,
+            105.625,
+            95.0,
+            4.892857142857158,
+            6.516768292682926,
+            0.75,
+            100.3863636363636,
+            1.2862745098039217,
+            6.277191558441551,
+            95.52272727272721,
+            106.125,
+            4.89583333333335,
+            6.0,
+            64.59478617277894,
+            28.5625,
+            1.3333333333333335,
+            177.0,
+            110.0,
+            1.0,
+            0.0,
+            0.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9928245544433594,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00010040818597190082,
+            "normalized_mse": 1.6423562556155957e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_03",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.577,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 508,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_04",
+        "variation": {
+          "scale": 1.05288908,
+          "relative_x": -0.00283731,
+          "relative_y": -0.0228037
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das Motiv ist geringfügig größer dargestellt und etwas nach links und oben verschoben.",
+        "input_sha256": "944d5ef1dd47bf09ee5ecb1b0cb26f5ccb6edcee9fddf26ec4bfae3ae56e91ed",
+        "reference_svg_sha256": "af97d747dfe4876a1d569bc16e21694ee5fddaa3b9a7eba6ec424803f55e0f09",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 2.3903679903014563e-05,
+          "foreground_mse": 0.00012923429312650114,
+          "edge_alignment": 0.9913552403450012,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "b9450357b1cfc087d392d64e4d231bac98c8871e85d58be455b75a1a6f8f8e52",
+        "elapsed_seconds": 3.657,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.382966\" y=\"0.000000\" width=\"1.478431\" height=\"106.779851\" fill=\"#016fb0\"/><polygon points=\"30.364739,111.747201 24.894501,100.000000 35.834977,100.000000\" fill=\"#016fb0\"/><rect x=\"3.929768\" y=\"0.000000\" width=\"1.466667\" height=\"104.419355\" fill=\"#ff0100\"/><polygon points=\"4.387097,100.526210 -0.964094,112.125000 9.738287,112.125000\" fill=\"#ff0100\"/><rect x=\"4.000000\" y=\"65.890856\" width=\"25.312500\" height=\"1.529412\" fill=\"#ff0100\"/></svg>",
+        "registration": {
+          "error": 0.11845238095238095,
+          "evaluations": 486,
+          "initial_error": 1.6308673469387756,
+          "parameters": [
+            30.122181697612728,
+            0.0,
+            106.77985074626864,
+            1.4784313725490197,
+            30.364738805970163,
+            111.74720149253727,
+            100.0,
+            5.470238095238113,
+            4.663101604278075,
+            0.0,
+            104.41935483870972,
+            1.4666666666666668,
+            4.387096774193537,
+            100.52620967741946,
+            112.125,
+            5.351190476190471,
+            4.0,
+            65.89085594712192,
+            29.3125,
+            1.5294117647058822,
+            176.0,
+            111.0,
+            1.0,
+            0.0,
+            1.0,
+            258.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9913552403450012,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00012923429312650114,
+            "normalized_mse": 2.3903679903014563e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_04",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.688,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 486,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_05",
+        "variation": {
+          "scale": 0.94918958,
+          "relative_x": 0.02356774,
+          "relative_y": -0.00744534
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das gesamte Motiv ist leicht kleiner dargestellt und leicht nach rechts und oben versetzt.",
+        "input_sha256": "2a140cd96ceacd10a38940f193493b95014a7200dbc35167109db3163273c065",
+        "reference_svg_sha256": "07e5135ee029faa098ed2101a78b90346c653b32bc398b33e98c5b5ec0a9bf91",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 2.4016142560867593e-05,
+          "foreground_mse": 0.0001661139540374279,
+          "edge_alignment": 0.9980641007423401,
+          "foreground_iou": 0.9982014388489209
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "a0bb2bff3cb4c214a3d550254269fd58de36365aeabcb139b84f8395c09ee58f",
+        "elapsed_seconds": 3.016,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.168389\" y=\"2.000000\" width=\"1.356863\" height=\"100.675000\" fill=\"#0270b0\"/><polygon points=\"30.031250,107.912500 25.063988,97.125000 34.998512,97.125000\" fill=\"#0270b0\"/><rect x=\"6.168389\" y=\"2.000000\" width=\"1.356863\" height=\"100.083333\" fill=\"#ff0202\"/><polygon points=\"6.636905,97.291667 1.761905,108.312500 11.511905,108.312500\" fill=\"#ff0202\"/><rect x=\"6.812500\" y=\"66.436593\" width=\"22.187500\" height=\"1.341176\" fill=\"#ff0202\"/></svg>",
+        "registration": {
+          "error": 0.16828231292517007,
+          "evaluations": 489,
+          "initial_error": 1.2482142857142857,
+          "parameters": [
+            29.846820809248555,
+            2.0,
+            102.67500000000001,
+            1.3568627450980393,
+            30.03125000000001,
+            107.91250000000004,
+            97.125,
+            4.9672619047619,
+            6.846820809248554,
+            2.0,
+            102.08333333333334,
+            1.3568627450980393,
+            6.636904761904752,
+            97.29166666666669,
+            108.3125,
+            4.874999999999998,
+            6.8125,
+            66.43659261576971,
+            29.0,
+            1.3411764705882354,
+            176.0,
+            112.0,
+            2.0,
+            2.0,
+            2.0,
+            258.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9980641007423401,
+            "foreground_iou": 0.9982014388489209,
+            "foreground_mse": 0.0001661139540374279,
+            "normalized_mse": 2.4016142560867593e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_05",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.484,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 489,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_06",
+        "variation": {
+          "scale": 0.94341881,
+          "relative_x": 0.00018631,
+          "relative_y": 0.01145161
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die Darstellung ist ein wenig kleiner dargestellt und geringfügig nach rechts und unten verschoben.",
+        "input_sha256": "4ac3fb241a8c71b83a3e307b7022421dc4b5d281df055219535acc8bdb3e4482",
+        "reference_svg_sha256": "9dd2d7506437712237eac5ae89f2fcb94cf5add06305919a2c133ca64b1e48ca",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 3.439676947891712e-05,
+          "foreground_mse": 0.00024658688926137984,
+          "edge_alignment": 0.9973653554916382,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "24b1b763366e31631a9b53e67310edaa0ddb825dd5254bb43f4d1f8d29e285ee",
+        "elapsed_seconds": 2.735,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.258658\" y=\"4.437500\" width=\"1.301961\" height=\"100.176136\" fill=\"#046fb0\"/><polygon points=\"29.120942,109.789773 24.287608,99.000000 33.954275,99.000000\" fill=\"#046fb0\"/><rect x=\"5.456700\" y=\"4.437500\" width=\"1.301961\" height=\"99.731419\" fill=\"#ff0202\"/><polygon points=\"5.898649,99.494088 0.980494,110.125000 10.816803,110.125000\" fill=\"#ff0202\"/><rect x=\"6.062500\" y=\"68.374295\" width=\"22.062500\" height=\"1.403676\" fill=\"#ff0202\"/></svg>",
+        "registration": {
+          "error": 0.256547619047619,
+          "evaluations": 521,
+          "initial_error": 1.297108843537415,
+          "parameters": [
+            28.90963855421687,
+            4.4375,
+            104.61363636363637,
+            1.3019607843137255,
+            29.12094155844158,
+            109.78977272727275,
+            99.0,
+            4.8333333333333535,
+            6.107680722891566,
+            4.4375,
+            104.1689189189189,
+            1.3019607843137255,
+            5.898648648648653,
+            99.49408783783782,
+            110.125,
+            4.918154761904759,
+            6.0625,
+            68.37429539972621,
+            28.125,
+            1.4036764705882354,
+            176.0,
+            111.0,
+            4.0,
+            2.0,
+            2.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9973653554916382,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00024658688926137984,
+            "normalized_mse": 3.439676947891712e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_06",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.437,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 521,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_07",
+        "variation": {
+          "scale": 1.00316032,
+          "relative_x": -0.00659339,
+          "relative_y": 0.01313813
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das gesamte Motiv ist etwas größer dargestellt und leicht nach links und unten verschoben.",
+        "input_sha256": "c61cb4b9f724c1fa3969f5c47c867f60fb6de4bb1a7b2828908a019536f1a752",
+        "reference_svg_sha256": "454efb36717f4982ef832f337794d05d9a2e95fa441dc72273202f79a498e795",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.7858123101177625e-05,
+          "foreground_mse": 0.00012119880557293072,
+          "edge_alignment": 0.9968777894973755,
+          "foreground_iou": 0.9965156794425087
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "17d08a7b04a38b1360ca9007485676257e2eeef154ae5bcc3e063f4490f72af0",
+        "elapsed_seconds": 3.047,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.678129\" y=\"1.312500\" width=\"1.407843\" height=\"106.381944\" fill=\"#016faf\"/><polygon points=\"29.620370,113.013889 24.379299,101.812500 34.861442,101.812500\" fill=\"#016faf\"/><rect x=\"4.435569\" y=\"1.312500\" width=\"1.419608\" height=\"103.837500\" fill=\"#ff0101\"/><polygon points=\"4.908036,102.300000 0.131250,112.750000 9.684821,112.750000\" fill=\"#ff0101\"/><rect x=\"5.000000\" y=\"69.379846\" width=\"23.750000\" height=\"1.407843\" fill=\"#ff0101\"/></svg>",
+        "registration": {
+          "error": 0.11785714285714285,
+          "evaluations": 512,
+          "initial_error": 2.313775510204082,
+          "parameters": [
+            29.382050835654596,
+            1.3125,
+            107.69444444444446,
+            1.407843137254902,
+            29.620370370370363,
+            113.0138888888889,
+            101.8125,
+            5.241071428571429,
+            5.145372928176796,
+            1.3125,
+            105.14999999999992,
+            1.4196078431372547,
+            4.908035714285717,
+            102.29999999999984,
+            112.75,
+            4.776785714285722,
+            5.0,
+            69.379845697323,
+            28.75,
+            1.4078431372549018,
+            174.625,
+            111.0,
+            1.0,
+            1.0,
+            1.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9968777894973755,
+            "foreground_iou": 0.9965156794425087,
+            "foreground_mse": 0.00012119880557293072,
+            "normalized_mse": 1.7858123101177625e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_07",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.485,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 512,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_08",
+        "variation": {
+          "scale": 1.05400735,
+          "relative_x": -0.01621945,
+          "relative_y": -0.01914467
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die gesamte Darstellung ist leicht größer dargestellt und leicht nach links und oben verschoben.",
+        "input_sha256": "032cd920cab981d6d76a0972e003775e90b405d084dde7488888e4fac93319db",
+        "reference_svg_sha256": "2265d1581989db157f9be3b44bcebd9bdff8cd7c6eaebe5062f2ec265a21294b",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.5079233889991883e-05,
+          "foreground_mse": 8.353834709851071e-05,
+          "edge_alignment": 0.9950685501098633,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "ce81d68282937e1bceef1eb84172f663def2037f4544759d75fa6584ca21f6bb",
+        "elapsed_seconds": 2.765,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.932515\" y=\"0.000000\" width=\"1.521569\" height=\"107.040698\" fill=\"#026fb0\"/><polygon points=\"29.937403,112.331395 24.432858,100.500000 35.441949,100.500000\" fill=\"#026fb0\"/><rect x=\"3.422754\" y=\"0.000000\" width=\"1.478431\" height=\"105.416667\" fill=\"#ff0101\"/><polygon points=\"3.916171,100.833333 -1.115079,112.000000 8.947421,112.000000\" fill=\"#ff0101\"/><rect x=\"4.000000\" y=\"66.366174\" width=\"24.968750\" height=\"1.474510\" fill=\"#ff0101\"/></svg>",
+        "registration": {
+          "error": 0.11113945578231292,
+          "evaluations": 533,
+          "initial_error": 1.8434523809523808,
+          "parameters": [
+            29.693298969072167,
+            0.0,
+            107.0406976744186,
+            1.5215686274509803,
+            29.937403100775185,
+            112.3313953488372,
+            100.5,
+            5.504545454545404,
+            4.16196949602122,
+            0.0,
+            105.41666666666671,
+            1.4784313725490197,
+            3.9161706349206185,
+            100.83333333333343,
+            112.0,
+            5.031249999999993,
+            4.0,
+            66.36617430157904,
+            28.96875,
+            1.4745098039215687,
+            176.0,
+            111.0,
+            2.0,
+            1.25,
+            1.25,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9950685501098633,
+            "foreground_iou": 1.0,
+            "foreground_mse": 8.353834709851071e-05,
+            "normalized_mse": 1.5079233889991883e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_08",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.344,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 533,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_09",
+        "variation": {
+          "scale": 1.042575,
+          "relative_x": 0.0162558,
+          "relative_y": -0.01093531
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das Motiv ist etwas größer dargestellt und etwas nach rechts und oben versetzt.",
+        "input_sha256": "2adf3a18a0c48ace7f4fb3a5736b57e7523c5ee06e462bc4db9d336a1b043cdc",
+        "reference_svg_sha256": "775f693d68b248b64ceda1a98046579e62fca0a3bf04126f7008a4bb536e792a",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 3.813551666098647e-05,
+          "foreground_mse": 0.00021472974913194776,
+          "edge_alignment": 0.9981433153152466,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "438dfeaf2edfb5cfb522b72fef6ec198cc16fce81bce72958b54def24ab840fc",
+        "elapsed_seconds": 3.046,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.978664\" y=\"0.000000\" width=\"1.462745\" height=\"107.718085\" fill=\"#0570b2\"/><polygon points=\"30.940307,112.561170 25.552807,100.875000 36.327807,100.875000\" fill=\"#0570b2\"/><rect x=\"4.750698\" y=\"0.000000\" width=\"1.462745\" height=\"106.027778\" fill=\"#ff0606\"/><polygon points=\"5.223611,101.118056 0.104563,112.687500 10.342659,112.687500\" fill=\"#ff0606\"/><rect x=\"5.000000\" y=\"67.068394\" width=\"25.000000\" height=\"1.541176\" fill=\"#ff0606\"/></svg>",
+        "registration": {
+          "error": 0.40595238095238095,
+          "evaluations": 489,
+          "initial_error": 2.1991496598639455,
+          "parameters": [
+            30.71003686327078,
+            0.0,
+            107.71808510638297,
+            1.4627450980392156,
+            30.94030732860519,
+            112.56117021276593,
+            100.875,
+            5.387500000000012,
+            5.482071045576407,
+            0.0,
+            106.02777777777774,
+            1.4627450980392158,
+            5.223611111111111,
+            101.1180555555555,
+            112.6875,
+            5.119047619047624,
+            5.0,
+            67.06839440224002,
+            30.0,
+            1.5411764705882351,
+            178.0,
+            112.5,
+            5.0,
+            6.0,
+            6.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9981433153152466,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00021472974913194776,
+            "normalized_mse": 3.813551666098647e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_09",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.437,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 489,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_10",
+        "variation": {
+          "scale": 1.01414114,
+          "relative_x": 0.02410712,
+          "relative_y": 0.00117663
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die Darstellung ist leicht größer dargestellt und geringfügig nach rechts und unten verschoben.",
+        "input_sha256": "f37622cc4a29423a74d8ed9ffac0ec5f57201272f500743bf765d20831f9b643",
+        "reference_svg_sha256": "1af2c3260293022d504e5bcd1b652a9940784255e461d0ef14f83618ee81e9f7",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 9.981769835576415e-06,
+          "foreground_mse": 5.571366273215972e-05,
+          "edge_alignment": 0.9993760585784912,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "34971b76b23c06d4965f21516576249b0fc3a8c54b888fe067e72cf8f538619e",
+        "elapsed_seconds": 3.016,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.923738\" y=\"0.000000\" width=\"1.403922\" height=\"108.807413\" fill=\"#006fb0\"/><polygon points=\"30.852875,112.427326 25.594541,100.937500 36.111208,100.937500\" fill=\"#006fb0\"/><rect x=\"5.394133\" y=\"0.000000\" width=\"1.419608\" height=\"106.168919\" fill=\"#ff0101\"/><polygon points=\"5.836149,101.525338 0.667994,112.750000 11.004303,112.750000\" fill=\"#ff0101\"/><rect x=\"6.062500\" y=\"68.189355\" width=\"23.906250\" height=\"1.407843\" fill=\"#ff0101\"/></svg>",
+        "registration": {
+          "error": 0.07134353741496599,
+          "evaluations": 492,
+          "initial_error": 1.3071428571428572,
+          "parameters": [
+            30.625698324022345,
+            0.0,
+            108.80741279069767,
+            1.403921568627451,
+            30.852874677002582,
+            112.42732558139534,
+            100.9375,
+            5.2583333333333435,
+            6.103936464088397,
+            0.0,
+            106.16891891891896,
+            1.419607843137255,
+            5.83614864864866,
+            101.52533783783792,
+            112.75,
+            5.168154761904752,
+            6.0625,
+            68.18935519377465,
+            29.96875,
+            1.4078431372549018,
+            176.0,
+            111.0,
+            0.0,
+            1.0,
+            1.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9993760585784912,
+            "foreground_iou": 1.0,
+            "foreground_mse": 5.571366273215972e-05,
+            "normalized_mse": 9.981769835576415e-06,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_10",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.516,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 492,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_11",
+        "variation": {
+          "scale": 0.95828578,
+          "relative_x": -0.01773135,
+          "relative_y": -0.02250829
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die Darstellung ist ein wenig kleiner dargestellt und ein wenig nach links und oben versetzt.",
+        "input_sha256": "fb43e28712bac7d8164b1e6a8e75d125f6bca7e2c39d59edf27d4029de3acbbf",
+        "reference_svg_sha256": "a73eeecfcf658010e41326547f5f4f5d54e9659c93fcc7177166c817f136fbfc",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 7.43826967664063e-05,
+          "foreground_mse": 0.00042283543734811246,
+          "edge_alignment": 0.9980802536010742,
+          "foreground_iou": 0.9985358711566618
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "52eedcf0e9c14267795b1d06d06e1c44e7b940123851c8f8f1ba78235c255bff",
+        "elapsed_seconds": 3.938,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"27.802487\" y=\"0.000000\" width=\"1.345098\" height=\"101.250000\" fill=\"#0372b2\"/><polygon points=\"28.660714,106.687500 23.723214,95.812500 33.598214,95.812500\" fill=\"#0372b2\"/><rect x=\"4.678330\" y=\"0.000000\" width=\"1.290441\" height=\"100.901515\" fill=\"#ff0202\"/><polygon points=\"5.031250,96.209280 0.044444,107.187500 10.018056,107.187500\" fill=\"#ff0202\"/><rect x=\"4.937500\" y=\"64.857226\" width=\"22.937500\" height=\"1.325490\" fill=\"#ff0202\"/></svg>",
+        "registration": {
+          "error": 0.4630952380952381,
+          "evaluations": 518,
+          "initial_error": 2.681547619047619,
+          "parameters": [
+            28.475036443148685,
+            0.0,
+            101.25000000000001,
+            1.3450980392156864,
+            28.66071428571429,
+            106.68750000000003,
+            95.8125,
+            4.937499999999984,
+            5.3235507246376805,
+            0.0,
+            100.90151515151521,
+            1.2904411764705883,
+            5.03125,
+            96.20928030303041,
+            107.1875,
+            4.986805555555545,
+            4.9375,
+            64.8572261663286,
+            27.875,
+            1.3254901960784313,
+            178.0,
+            114.5,
+            3.0,
+            2.0,
+            2.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9980802536010742,
+            "foreground_iou": 0.9985358711566618,
+            "foreground_mse": 0.00042283543734811246,
+            "normalized_mse": 7.43826967664063e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_11",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 2.032,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 518,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_12",
+        "variation": {
+          "scale": 0.95318482,
+          "relative_x": 0.01817315,
+          "relative_y": 0.01777083
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die gesamte Darstellung ist ein wenig kleiner dargestellt und geringfügig nach rechts und unten verschoben.",
+        "input_sha256": "6405226359072e3640e4c8b11d9f9940971c62255db21aa71290e35dd1546e0e",
+        "reference_svg_sha256": "dee87dce69ac608f9f866b3d266a8c661099016370e5d6e55113c4c15e8c9cc4",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.7063033737940714e-05,
+          "foreground_mse": 9.823584696277976e-05,
+          "edge_alignment": 0.9941035509109497,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "a30a0a66a93ca7918f441815c3fe6d52c1c86f91582af01a7a6ae46452017d40",
+        "elapsed_seconds": 3.391,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.971128\" y=\"4.625000\" width=\"1.345098\" height=\"101.225000\" fill=\"#0270b0\"/><polygon points=\"29.885417,110.825000 24.912202,100.125000 34.858631,100.125000\" fill=\"#0270b0\"/><rect x=\"5.914915\" y=\"4.625000\" width=\"1.345098\" height=\"100.875000\" fill=\"#ff0101\"/><polygon points=\"6.348214,100.562500 1.431548,111.375000 11.264881,111.375000\" fill=\"#ff0101\"/><rect x=\"6.000000\" y=\"69.284825\" width=\"22.968750\" height=\"1.341176\" fill=\"#ff0101\"/></svg>",
+        "registration": {
+          "error": 0.14948979591836734,
+          "evaluations": 510,
+          "initial_error": 1.4151360544217686,
+          "parameters": [
+            29.64367711370262,
+            4.625,
+            105.84999999999997,
+            1.3450980392156864,
+            29.88541666666667,
+            110.82499999999995,
+            100.125,
+            4.973214285714306,
+            6.587463556851312,
+            4.625,
+            105.50000000000006,
+            1.3450980392156864,
+            6.348214285714292,
+            100.56250000000011,
+            111.375,
+            4.916666666666654,
+            6.0,
+            69.2848250078185,
+            28.96875,
+            1.3411764705882354,
+            176.0,
+            112.0,
+            2.0,
+            1.0,
+            1.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9941035509109497,
+            "foreground_iou": 1.0,
+            "foreground_mse": 9.823584696277976e-05,
+            "normalized_mse": 1.7063033737940714e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_12",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.89,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 510,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_13",
+        "variation": {
+          "scale": 1.03817278,
+          "relative_x": -0.00072482,
+          "relative_y": -0.01074722
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das Motiv ist leicht größer dargestellt und geringfügig nach links und oben verschoben.",
+        "input_sha256": "62dce5a6382eb8f485de0edaadf35e441fc5023921a38f927dcf185e07a1a0ca",
+        "reference_svg_sha256": "4d69eb3f4902d58d35bb09a83e00c9d403805af04d063f2cb45f7c7fb4505369",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 2.0820092686335556e-05,
+          "foreground_mse": 0.0001370941026834771,
+          "edge_alignment": 0.9981470108032227,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "ab3fd55c556e8e81405ebf7a254ea956703412de35ae8cc9d5adf8224017018a",
+        "elapsed_seconds": 3.547,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.343178\" y=\"0.000000\" width=\"1.478431\" height=\"106.943878\" fill=\"#0471b2\"/><polygon points=\"30.307611,112.512755 24.918027,100.687500 35.697194,100.687500\" fill=\"#0471b2\"/><rect x=\"4.201103\" y=\"0.000000\" width=\"1.478431\" height=\"106.027027\" fill=\"#ff0101\"/><polygon points=\"4.656250,101.241554 -0.605655,112.750000 9.918155,112.750000\" fill=\"#ff0101\"/><rect x=\"4.937500\" y=\"67.076630\" width=\"24.312500\" height=\"1.474510\" fill=\"#ff0101\"/></svg>",
+        "registration": {
+          "error": 0.2039965986394558,
+          "evaluations": 503,
+          "initial_error": 1.5687074829931973,
+          "parameters": [
+            30.08239389920425,
+            0.0,
+            106.94387755102038,
+            1.4784313725490197,
+            30.307610544217678,
+            112.51275510204076,
+            100.6875,
+            5.389583333333354,
+            4.940318302387268,
+            0.0,
+            106.02702702702706,
+            1.4784313725490197,
+            4.656249999999993,
+            101.24155405405413,
+            112.75,
+            5.261904761904756,
+            4.9375,
+            67.07662999750578,
+            29.25,
+            1.4745098039215687,
+            178.0,
+            113.0,
+            4.0,
+            1.0,
+            1.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9981470108032227,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.0001370941026834771,
+            "normalized_mse": 2.0820092686335556e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_13",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.844,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 503,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_14",
+        "variation": {
+          "scale": 0.99931696,
+          "relative_x": -0.01064901,
+          "relative_y": 0.01185953
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die Darstellung ist leicht kleiner dargestellt und leicht nach links und unten versetzt.",
+        "input_sha256": "f4c694c66da768001c4af424cbb9c4ee46818d9f92a3c90e0cfff26f1b929e91",
+        "reference_svg_sha256": "3b012871cdb68ce1590571e98a4dd74e116d86b0385851e10a8e686cec26653b",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 3.94680755562149e-05,
+          "foreground_mse": 0.00026804147637449205,
+          "edge_alignment": 0.9984504580497742,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "b21c98cc02312eca2823b85e0f944de370c482ca5e3bf2f0f4ff8d45adb0b735",
+        "elapsed_seconds": 2.86,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.477005\" y=\"1.375000\" width=\"1.419608\" height=\"106.035000\" fill=\"#026faf\"/><polygon points=\"29.450000,112.820000 24.226786,101.500000 34.673214,101.500000\" fill=\"#026faf\"/><rect x=\"4.321446\" y=\"1.375000\" width=\"1.419608\" height=\"105.182692\" fill=\"#ff0808\"/><polygon points=\"4.780907,101.990385 -0.241415,112.875000 9.803228,112.875000\" fill=\"#ff0808\"/><rect x=\"4.937500\" y=\"69.188327\" width=\"23.562500\" height=\"1.407843\" fill=\"#ff0808\"/></svg>",
+        "registration": {
+          "error": 0.36947278911564624,
+          "evaluations": 515,
+          "initial_error": 1.6549319727891156,
+          "parameters": [
+            29.186809392265197,
+            1.375,
+            107.41000000000001,
+            1.4196078431372547,
+            29.450000000000003,
+            112.82000000000002,
+            101.5,
+            5.223214285714295,
+            5.03125,
+            1.375,
+            106.55769230769224,
+            1.419607843137255,
+            4.780906593406598,
+            101.99038461538449,
+            112.875,
+            5.022321428571434,
+            4.9375,
+            69.1883270113926,
+            28.5,
+            1.4078431372549018,
+            175.0,
+            111.0,
+            2.0,
+            8.0,
+            8.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9984504580497742,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00026804147637449205,
+            "normalized_mse": 3.94680755562149e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_14",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.625,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 515,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_15",
+        "variation": {
+          "scale": 1.05672644,
+          "relative_x": -0.00101662,
+          "relative_y": 0.01216458
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die Darstellung ist geringfügig größer dargestellt und geringfügig nach links und unten versetzt.",
+        "input_sha256": "abe848677f8c6d9c95476072c974eca51c5d52448480be32e80c7d0e167d1cf1",
+        "reference_svg_sha256": "0b11d026e58fadfaf0d1f31d52cbf885a83e1efaf6cb92c45731c9c41ddf24af",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 2.67701852862956e-05,
+          "foreground_mse": 0.00015199618064798415,
+          "edge_alignment": 0.9925905466079712,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "f527e4df84fced3073e9757b2f62636977058fb056e8b42c496e7e3fd0652f03",
+        "elapsed_seconds": 2.954,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.493792\" y=\"0.125000\" width=\"1.478431\" height=\"110.661765\" fill=\"#016eb1\"/><polygon points=\"30.496324,116.323529 25.064776,104.000000 35.927871,104.000000\" fill=\"#016eb1\"/><rect x=\"3.932515\" y=\"0.000000\" width=\"1.521569\" height=\"105.875000\" fill=\"#ff0000\"/><polygon points=\"4.437500,104.250000 0.637500,113.000000 8.237500,113.000000\" fill=\"#ff0000\"/><rect x=\"4.000000\" y=\"69.890487\" width=\"25.500000\" height=\"1.458824\" fill=\"#ff0000\"/></svg>",
+        "registration": {
+          "error": 0.13018707482993197,
+          "evaluations": 505,
+          "initial_error": 1.7543367346938776,
+          "parameters": [
+            30.233007294429704,
+            0.125,
+            110.78676470588235,
+            1.4784313725490197,
+            30.49632352941176,
+            116.32352941176468,
+            104.0,
+            5.431547619047638,
+            4.693298969072165,
+            0.0,
+            105.87500000000006,
+            1.5215686274509803,
+            4.4375,
+            104.2500000000001,
+            113.0,
+            3.8000000000000114,
+            4.0,
+            69.89048669262667,
+            29.5,
+            1.4588235294117646,
+            177.375,
+            110.0,
+            1.375,
+            0.0,
+            0.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9925905466079712,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00015199618064798415,
+            "normalized_mse": 2.67701852862956e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_15",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.672,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 505,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_16",
+        "variation": {
+          "scale": 0.98792394,
+          "relative_x": -0.00473868,
+          "relative_y": -0.01757586
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das gesamte Motiv ist leicht kleiner dargestellt und leicht nach links und oben versetzt.",
+        "input_sha256": "0199d94be743671651ccffc0c13f579b7422648b3eddc4e1c732828864abbd8b",
+        "reference_svg_sha256": "ac4ed2e63471420d70417347a012dc315cecc24106e21b402dce0b33baedc357",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 2.7141577447764575e-05,
+          "foreground_mse": 0.00017314616707153618,
+          "edge_alignment": 0.9962790608406067,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "f60c2c1677518123ccc59fcbb7c7d045a12f139ccf4c66f9a6b03d4524501a56",
+        "elapsed_seconds": 2.984,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.553497\" y=\"0.125000\" width=\"1.415686\" height=\"103.806818\" fill=\"#026eae\"/><polygon points=\"29.500000,108.863636 24.303571,97.687500 34.696429,97.687500\" fill=\"#026eae\"/><rect x=\"4.678129\" y=\"0.000000\" width=\"1.407843\" height=\"103.192177\" fill=\"#ff0101\"/><polygon points=\"5.158447,98.134354 0.036224,109.375000 10.280669,109.375000\" fill=\"#ff0101\"/><rect x=\"5.000000\" y=\"65.781101\" width=\"23.625000\" height=\"1.396078\" fill=\"#ff0101\"/></svg>",
+        "registration": {
+          "error": 0.20280612244897958,
+          "evaluations": 516,
+          "initial_error": 3.577125850340136,
+          "parameters": [
+            29.261340027700832,
+            0.125,
+            103.9318181818182,
+            1.4156862745098038,
+            29.499999999999993,
+            108.8636363636364,
+            97.6875,
+            5.196428571428569,
+            5.382050835654596,
+            0.0,
+            103.19217687074831,
+            1.407843137254902,
+            5.15844671201814,
+            98.13435374149664,
+            109.375,
+            5.122222222222218,
+            5.0,
+            65.78110090324756,
+            28.625,
+            1.396078431372549,
+            173.5,
+            109.5,
+            2.0,
+            1.0,
+            1.0,
+            256.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9962790608406067,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00017314616707153618,
+            "normalized_mse": 2.7141577447764575e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_16",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.656,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 516,
+          "stop_reason": "satisfactory"
+        }
+      }
+    ]
+  },
+  "additional_seed": {
+    "seed": 817263,
+    "summary": {
+      "required": 17,
+      "completed": 17,
+      "passed": 17,
+      "failed": 0,
+      "satisfactory": true
+    },
+    "source_image_sha256": "24034061ef1190c99794687eb015a502555ecfc3e8550a3960c18d68ae92cc1e",
+    "source_description_sha256": "c59e284ed180ec5baaebe6b2e10039f3d7e8c6badead3b7aa434a9e3eefacd12",
+    "elapsed_seconds_median": 3.046,
+    "elapsed_seconds_max": 3.984,
+    "cases": [
+      {
+        "case_id": "original",
+        "variation": {
+          "scale": 1.0,
+          "relative_x": 0.0,
+          "relative_y": 0.0
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche.",
+        "input_sha256": "24034061ef1190c99794687eb015a502555ecfc3e8550a3960c18d68ae92cc1e",
+        "reference_svg_sha256": "e01cc7d5ba526f991c94a089850e0b39b93d35d4429b9ac0e6723be920035533",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.4081449990044348e-05,
+          "foreground_mse": 7.518717757193372e-05,
+          "edge_alignment": 0.9968904256820679,
+          "foreground_iou": 0.9957507082152974
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "6f06b2a05ce78425ded5123d14f685b4838e2c4984f2424728b2b29124694577",
+        "elapsed_seconds": 3.407,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.923738\" y=\"0.000000\" width=\"1.403922\" height=\"106.022727\" fill=\"#006fb0\"/><polygon points=\"29.825081,111.576705 24.679248,100.250000 34.970915,100.250000\" fill=\"#006fb0\"/><rect x=\"4.678129\" y=\"0.000000\" width=\"1.407843\" height=\"105.977273\" fill=\"#ff0000\"/><polygon points=\"5.143669,100.767045 -0.377165,112.750000 10.664502,112.750000\" fill=\"#ff0000\"/><rect x=\"5.000000\" y=\"67.866422\" width=\"23.968750\" height=\"1.392157\" fill=\"#ff0000\"/></svg>",
+        "registration": {
+          "error": 0.08537414965986395,
+          "evaluations": 523,
+          "initial_error": 1.7943027210884355,
+          "parameters": [
+            29.625698324022345,
+            0.0,
+            106.02272727272725,
+            1.403921568627451,
+            29.825081168831186,
+            111.57670454545452,
+            100.25,
+            5.145833333333359,
+            5.382050835654596,
+            0.0,
+            105.97727272727278,
+            1.407843137254902,
+            5.1436688311688386,
+            100.76704545454554,
+            112.75,
+            5.5208333333333215,
+            5.0,
+            67.86642156862744,
+            28.96875,
+            1.392156862745098,
+            176.0,
+            111.0,
+            0.0,
+            0.5,
+            0.5,
+            258.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9968904256820679,
+            "foreground_iou": 0.9957507082152974,
+            "foreground_mse": 7.518717757193372e-05,
+            "normalized_mse": 1.4081449990044348e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "original",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.922,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 523,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_01",
+        "variation": {
+          "scale": 1.02459971,
+          "relative_x": -0.01939064,
+          "relative_y": -0.00495494
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das Motiv ist ein wenig größer dargestellt und leicht nach links und oben verschoben.",
+        "input_sha256": "d99f5549ba4ea2a4618b78ab5754613f0789e9ac0ecbcdc579ab7438f33cdd92",
+        "reference_svg_sha256": "bf2de9f14f387018c5d874542be51772592aafd855105358a5a0a49bb7be5d1a",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 2.8485905204433948e-05,
+          "foreground_mse": 0.0001575091009726748,
+          "edge_alignment": 0.9942100048065186,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "bf4d65adc381612b26910ab5bdae21f0baca31a61aaf30726ecc5c738014c05e",
+        "elapsed_seconds": 3.203,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.477005\" y=\"0.000000\" width=\"1.419608\" height=\"106.833333\" fill=\"#016db1\"/><polygon points=\"29.451389,112.291667 24.172222,100.750000 34.730556,100.750000\" fill=\"#016db1\"/><rect x=\"3.666065\" y=\"0.000000\" width=\"1.466667\" height=\"103.166667\" fill=\"#ff0202\"/><polygon points=\"4.180556,100.958333 -0.788194,112.125000 9.149306,112.125000\" fill=\"#ff0202\"/><rect x=\"4.000000\" y=\"67.561202\" width=\"24.500000\" height=\"1.462745\" fill=\"#ff0202\"/></svg>",
+        "registration": {
+          "error": 0.20671768707482993,
+          "evaluations": 526,
+          "initial_error": 2.3849489795918366,
+          "parameters": [
+            29.186809392265197,
+            0.0,
+            106.8333333333333,
+            1.4196078431372547,
+            29.45138888888888,
+            112.2916666666666,
+            100.75,
+            5.279166666666693,
+            4.399398395721925,
+            0.0,
+            103.16666666666671,
+            1.4666666666666668,
+            4.18055555555555,
+            100.95833333333343,
+            112.125,
+            4.968749999999993,
+            4.0,
+            67.56120209739211,
+            28.5,
+            1.4627450980392158,
+            177.0,
+            109.0,
+            1.0,
+            2.5,
+            2.5,
+            258.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9942100048065186,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.0001575091009726748,
+            "normalized_mse": 2.8485905204433948e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_01",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.718,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 526,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_02",
+        "variation": {
+          "scale": 0.95576862,
+          "relative_x": -0.00629843,
+          "relative_y": 0.00189312
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die gesamte Darstellung ist ein wenig kleiner dargestellt und geringfügig nach links und unten versetzt.",
+        "input_sha256": "0101917ab4ff058cb18038a486e9936d7cd279396227ecb605682ac8abdbe6e5",
+        "reference_svg_sha256": "bef9f33531191db1f8bbd4dbbe21b97cc487b8cc790c3573b237389875bc012b",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.8021588402916677e-05,
+          "foreground_mse": 0.0001216340169776231,
+          "edge_alignment": 0.9980854988098145,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "0add46d36dd4d4ef00c01828da1a5786e0537f360bc651162f261ad83cbb453a",
+        "elapsed_seconds": 2.938,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.168389\" y=\"2.687500\" width=\"1.356863\" height=\"101.302500\" fill=\"#026fb0\"/><polygon points=\"29.050000,109.292500 24.076786,98.500000 34.023214,98.500000\" fill=\"#026fb0\"/><rect x=\"5.021899\" y=\"2.687500\" width=\"1.352941\" height=\"101.197635\" fill=\"#ff0000\"/><polygon points=\"5.500000,98.801520 0.519345,109.812500 10.480655,109.812500\" fill=\"#ff0000\"/><rect x=\"5.000000\" y=\"67.595704\" width=\"23.062500\" height=\"1.333333\" fill=\"#ff0000\"/></svg>",
+        "registration": {
+          "error": 0.11862244897959184,
+          "evaluations": 500,
+          "initial_error": 1.6280612244897958,
+          "parameters": [
+            28.846820809248552,
+            2.6875,
+            103.98999999999998,
+            1.3568627450980393,
+            29.05,
+            109.29249999999996,
+            98.5,
+            4.973214285714251,
+            5.698369565217392,
+            2.6875,
+            103.88513513513513,
+            1.3529411764705883,
+            5.499999999999993,
+            98.80152027027026,
+            109.8125,
+            4.980654761904759,
+            5.0,
+            67.5957039967539,
+            28.0625,
+            1.3333333333333335,
+            176.0,
+            111.0,
+            2.0,
+            0.0,
+            0.0,
+            258.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9980854988098145,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.0001216340169776231,
+            "normalized_mse": 1.8021588402916677e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_02",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.406,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 500,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_03",
+        "variation": {
+          "scale": 1.0304503,
+          "relative_x": 0.02065477,
+          "relative_y": 0.02313464
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das Motiv ist etwas größer dargestellt und leicht nach rechts und unten verschoben.",
+        "input_sha256": "0bcb69b08bbb2ab9a1b41e81d7642790223aecd88395f8d009691e7c0642f710",
+        "reference_svg_sha256": "02d0e5c520be797f9c5f692c5ddda1ca6b4f9ade208f5838d4952cc7adbe749d",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 2.0504932763287798e-05,
+          "foreground_mse": 0.0001347720535704866,
+          "edge_alignment": 0.9981193542480469,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "c078d849764436b49690d8e7018d1c896a65a06b955d55a6c29153222c88e953",
+        "elapsed_seconds": 2.984,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.978664\" y=\"0.875000\" width=\"1.462745\" height=\"110.375000\" fill=\"#0570b2\"/><polygon points=\"30.875000,116.500000 25.657738,104.125000 36.092262,104.125000\" fill=\"#0570b2\"/><rect x=\"5.022206\" y=\"0.875000\" width=\"1.470588\" height=\"106.000000\" fill=\"#ff0202\"/><polygon points=\"5.500000,104.562500 1.700000,113.000000 9.300000,113.000000\" fill=\"#ff0202\"/><rect x=\"5.000000\" y=\"70.866422\" width=\"25.000000\" height=\"1.392157\" fill=\"#ff0202\"/></svg>",
+        "registration": {
+          "error": 0.2336734693877551,
+          "evaluations": 484,
+          "initial_error": 2.03843537414966,
+          "parameters": [
+            30.71003686327078,
+            0.875,
+            111.24999999999997,
+            1.4627450980392156,
+            30.874999999999986,
+            116.49999999999994,
+            104.125,
+            5.21726190476193,
+            5.757499999999999,
+            0.875,
+            106.87500000000006,
+            1.4705882352941178,
+            5.5,
+            104.5625000000001,
+            113.0,
+            3.8000000000000185,
+            5.0,
+            70.86642156862744,
+            30.0,
+            1.392156862745098,
+            178.0,
+            112.0,
+            5.0,
+            2.0,
+            2.0,
+            258.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9981193542480469,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.0001347720535704866,
+            "normalized_mse": 2.0504932763287798e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_03",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.672,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 484,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_04",
+        "variation": {
+          "scale": 0.96671769,
+          "relative_x": -0.02082955,
+          "relative_y": 0.00731432
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das Motiv ist leicht kleiner dargestellt und etwas nach links und unten versetzt.",
+        "input_sha256": "20b4b729866330683a05677f518cdbc20a108ed27cb85b0bcda1dbcb6da709ae",
+        "reference_svg_sha256": "2fbafa2492344625db9d45a74f8d1d6375e3a43623f1203f5dab71d78675a995",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 2.1322251996025443e-05,
+          "foreground_mse": 0.00012358021922409534,
+          "edge_alignment": 0.9974761605262756,
+          "foreground_iou": 0.9984871406959153
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "e0238b3102abf55968851f3c5be802cc7b782b2b0d5f86319cbed6452ff1b9bb",
+        "elapsed_seconds": 3.046,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"27.802487\" y=\"2.687500\" width=\"1.345098\" height=\"102.541667\" fill=\"#0372b2\"/><polygon points=\"28.694444,110.333333 23.636409,99.562500 33.752480,99.562500\" fill=\"#0372b2\"/><rect x=\"4.403722\" y=\"2.687500\" width=\"1.360784\" height=\"102.322500\" fill=\"#ff0303\"/><polygon points=\"4.856250,100.020000 -0.179464,110.937500 9.891964,110.937500\" fill=\"#ff0303\"/><rect x=\"5.000000\" y=\"68.285015\" width=\"22.875000\" height=\"1.341176\" fill=\"#ff0303\"/></svg>",
+        "registration": {
+          "error": 0.2543367346938776,
+          "evaluations": 511,
+          "initial_error": 1.9188775510204081,
+          "parameters": [
+            28.475036443148685,
+            2.6875,
+            105.22916666666669,
+            1.3450980392156864,
+            28.694444444444464,
+            110.33333333333336,
+            99.5625,
+            5.058035714285737,
+            5.084113832853026,
+            2.6875,
+            105.01000000000005,
+            1.3607843137254902,
+            4.856250000000003,
+            100.02000000000011,
+            110.9375,
+            5.035714285714292,
+            5.0,
+            68.28501480364224,
+            27.875,
+            1.3411764705882354,
+            178.0,
+            114.5,
+            3.0,
+            3.0,
+            3.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9974761605262756,
+            "foreground_iou": 0.9984871406959153,
+            "foreground_mse": 0.00012358021922409534,
+            "normalized_mse": 2.1322251996025443e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_04",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.422,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 511,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_05",
+        "variation": {
+          "scale": 0.96970737,
+          "relative_x": 0.01283752,
+          "relative_y": 0.01981486
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die gesamte Darstellung ist ein wenig kleiner dargestellt und ein wenig nach rechts und unten verschoben.",
+        "input_sha256": "ae0e340c7623e83e755763d855d5a74453d4f89fa7ebd87b5a015954d47302cc",
+        "reference_svg_sha256": "d85f18486957be81f1dd542a69ee76a66ac4dc2cf2a4f056e1a3e3b23e88e89a",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 3.39312209689524e-05,
+          "foreground_mse": 0.00023464832338504493,
+          "edge_alignment": 0.9955168962478638,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "5ab53e080ab9f0e4fa38f9f1b2e85a27af063dce8d752ee7bea372110eaff33c",
+        "elapsed_seconds": 3.047,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.945278\" y=\"3.875000\" width=\"1.407843\" height=\"102.800000\" fill=\"#0371b2\"/><polygon points=\"29.906250,112.256250 24.876488,101.125000 34.936012,101.125000\" fill=\"#0371b2\"/><rect x=\"5.537248\" y=\"3.875000\" width=\"1.356863\" height=\"102.075000\" fill=\"#ff0101\"/><polygon points=\"5.968750,101.743750 0.927083,112.375000 11.010417,112.375000\" fill=\"#ff0101\"/><rect x=\"6.000000\" y=\"69.748965\" width=\"23.000000\" height=\"1.329412\" fill=\"#ff0101\"/></svg>",
+        "registration": {
+          "error": 0.2572278911564626,
+          "evaluations": 519,
+          "initial_error": 1.950595238095238,
+          "parameters": [
+            29.6491991643454,
+            3.875,
+            106.67500000000001,
+            1.407843137254902,
+            29.906249999999996,
+            112.25625000000001,
+            101.125,
+            5.029761904761907,
+            6.2156791907514455,
+            3.875,
+            105.95000000000005,
+            1.3568627450980393,
+            5.96875,
+            101.74375000000008,
+            112.375,
+            5.041666666666664,
+            6.0,
+            69.74896458583433,
+            29.0,
+            1.3294117647058823,
+            178.0,
+            113.0,
+            3.0,
+            1.0,
+            1.0,
+            258.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9955168962478638,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00023464832338504493,
+            "normalized_mse": 3.39312209689524e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_05",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.484,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 519,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_06",
+        "variation": {
+          "scale": 0.97689617,
+          "relative_x": 0.0164078,
+          "relative_y": -0.0016518
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das Motiv ist ein wenig kleiner dargestellt und ein wenig nach rechts und oben versetzt.",
+        "input_sha256": "6f67d37d9c95b8d707d71919e6604a3c67bceeda296d7e323acb2835b4997634",
+        "reference_svg_sha256": "fcdd5da2345af98df7578a6934e3ee46dc3653b47856789121d60bddc6cb2a97",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.8225591702503152e-05,
+          "foreground_mse": 0.00012291329039726406,
+          "edge_alignment": 0.9968587160110474,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "6d7ddaf15ca3aaf6369cf0aba7f2a48389673719d4d9d468c2e5dd5fa8d31829",
+        "elapsed_seconds": 2.937,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.211539\" y=\"1.125000\" width=\"1.360784\" height=\"103.550000\" fill=\"#016fb0\"/><polygon points=\"30.093750,110.037500 25.001488,99.000000 35.186012,99.000000\" fill=\"#016fb0\"/><rect x=\"5.553497\" y=\"1.187500\" width=\"1.415686\" height=\"103.229167\" fill=\"#ff0202\"/><polygon points=\"6.036111,99.583333 0.925000,110.500000 11.147222,110.500000\" fill=\"#ff0202\"/><rect x=\"6.000000\" y=\"67.379977\" width=\"23.125000\" height=\"1.407843\" fill=\"#ff0202\"/></svg>",
+        "registration": {
+          "error": 0.13171768707482992,
+          "evaluations": 500,
+          "initial_error": 2.0804421768707484,
+          "parameters": [
+            29.891930835734865,
+            1.125,
+            104.67500000000001,
+            1.3607843137254902,
+            30.093750000000007,
+            110.03750000000001,
+            99.0,
+            5.092261904761912,
+            6.261340027700831,
+            1.1875,
+            104.41666666666664,
+            1.4156862745098038,
+            6.036111111111111,
+            99.58333333333329,
+            110.5,
+            5.111111111111121,
+            6.0,
+            67.37997700101724,
+            29.125,
+            1.4078431372549018,
+            176.0,
+            111.0,
+            1.0,
+            2.0,
+            2.0,
+            258.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9968587160110474,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00012291329039726406,
+            "normalized_mse": 1.8225591702503152e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_06",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.547,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 500,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_07",
+        "variation": {
+          "scale": 0.98951724,
+          "relative_x": -0.01612445,
+          "relative_y": -0.02340291
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das Motiv ist leicht kleiner dargestellt und ein wenig nach links und oben verschoben.",
+        "input_sha256": "abb0cf344665d0be08b79d02ae59d00278a9c2be42ba2a030c98ff4c9d6d1ab8",
+        "reference_svg_sha256": "99da8b36cf207efefae4d4788718b162cfe43938c9694e8b5ed2f5fd1d86d0a1",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 2.2657428417005576e-05,
+          "foreground_mse": 0.0001421085762558505,
+          "edge_alignment": 0.9981116652488708,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "562696f90dd2ef9d251d75b7c4297f21b7aadb5b796407282c713db159d64563",
+        "elapsed_seconds": 3.984,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.207323\" y=\"0.000000\" width=\"1.419608\" height=\"103.114865\" fill=\"#026fb0\"/><polygon points=\"29.168919,108.417230 24.094514,97.125000 34.243324,97.125000\" fill=\"#026fb0\"/><rect x=\"4.248760\" y=\"0.000000\" width=\"1.419608\" height=\"102.977273\" fill=\"#ff0202\"/><polygon points=\"4.700081,97.860795 -0.508252,108.812500 9.908415,108.812500\" fill=\"#ff0202\"/><rect x=\"4.968750\" y=\"65.084234\" width=\"23.156250\" height=\"1.400000\" fill=\"#ff0202\"/></svg>",
+        "registration": {
+          "error": 0.1782312925170068,
+          "evaluations": 509,
+          "initial_error": 0.8681122448979591,
+          "parameters": [
+            28.917127071823206,
+            0.0,
+            103.11486486486487,
+            1.4196078431372547,
+            29.168918918918916,
+            108.41722972972975,
+            97.125,
+            5.074404761904761,
+            4.958563535911602,
+            0.0,
+            102.97727272727275,
+            1.419607843137255,
+            4.7000811688311686,
+            97.86079545454548,
+            108.8125,
+            5.2083333333333215,
+            4.96875,
+            65.08423423423422,
+            28.125,
+            1.4,
+            176.5,
+            111.0,
+            2.0,
+            2.0,
+            2.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9981116652488708,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.0001421085762558505,
+            "normalized_mse": 2.2657428417005576e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_07",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 2.172,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 509,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_08",
+        "variation": {
+          "scale": 0.94854227,
+          "relative_x": -0.01989591,
+          "relative_y": -0.00452392
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das Motiv ist leicht kleiner dargestellt und etwas nach links und oben verschoben.",
+        "input_sha256": "757cc0aef5ea82883918ba63a6fb7bd2feec1672f39bf102319d101172097e0f",
+        "reference_svg_sha256": "bff6ee8bb7976dcf0475c866cc2520a827b45458b226e5f595cafd039e4f6703",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 5.910861000302248e-05,
+          "foreground_mse": 0.00041496724588796496,
+          "edge_alignment": 0.9961736798286438,
+          "foreground_iou": 0.9982046678635548
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "b818c73b377230dbee03610adeca8892d7cada690307e57390bf20e3f268e027",
+        "elapsed_seconds": 3.578,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"27.678330\" y=\"2.375000\" width=\"1.290441\" height=\"101.011364\" fill=\"#026eae\"/><polygon points=\"28.500000,108.210227 23.544643,97.375000 33.455357,97.375000\" fill=\"#026eae\"/><rect x=\"4.672827\" y=\"2.437500\" width=\"1.298039\" height=\"100.447635\" fill=\"#ff0000\"/><polygon points=\"5.168919,97.832770 0.282014,108.625000 10.055824,108.625000\" fill=\"#ff0000\"/><rect x=\"5.000000\" y=\"66.749011\" width=\"22.687500\" height=\"1.329167\" fill=\"#ff0000\"/></svg>",
+        "registration": {
+          "error": 0.3501700680272109,
+          "evaluations": 489,
+          "initial_error": 3.2628401360544217,
+          "parameters": [
+            28.323550724637677,
+            2.375,
+            103.38636363636363,
+            1.2904411764705883,
+            28.499999999999993,
+            108.21022727272725,
+            97.375,
+            4.955357142857142,
+            5.32184667673716,
+            2.4375,
+            102.88513513513513,
+            1.2980392156862746,
+            5.168918918918926,
+            97.83277027027025,
+            108.625,
+            4.886904761904766,
+            5.0,
+            66.74901119165712,
+            27.6875,
+            1.3291666666666666,
+            174.0,
+            110.0,
+            1.5,
+            0.0,
+            0.0,
+            256.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9961736798286438,
+            "foreground_iou": 0.9982046678635548,
+            "foreground_mse": 0.00041496724588796496,
+            "normalized_mse": 5.910861000302248e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_08",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.89,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 489,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_09",
+        "variation": {
+          "scale": 1.0424186,
+          "relative_x": -0.00347211,
+          "relative_y": 0.01859515
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das Motiv ist etwas größer dargestellt und leicht nach links und unten versetzt.",
+        "input_sha256": "dec4900ff01d43f030cabfd42f7570ddf343cb6c2cb7f1c9071dc47ac1995843",
+        "reference_svg_sha256": "7f264f436b28f5851a8cac6866d3c0a2b7b11cda375d32d9c25fd8d48886f3d1",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.2344807146291714e-05,
+          "foreground_mse": 8.533670916222036e-05,
+          "edge_alignment": 0.9968954920768738,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "df8eeffd0f78107ac2b93838d01139cdc17d5fb5409d9447712c66c9c5c80dcf",
+        "elapsed_seconds": 3.344,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.240890\" y=\"0.000000\" width=\"1.478431\" height=\"110.926923\" fill=\"#0170b0\"/><polygon points=\"30.230769,116.228846 24.870650,104.125000 35.590888,104.125000\" fill=\"#0170b0\"/><rect x=\"4.022206\" y=\"0.000000\" width=\"1.470588\" height=\"107.267857\" fill=\"#ff0202\"/><polygon points=\"4.526786,104.723214 0.951786,112.500000 8.101786,112.500000\" fill=\"#ff0202\"/><rect x=\"4.000000\" y=\"70.407633\" width=\"25.187500\" height=\"1.474510\" fill=\"#ff0202\"/></svg>",
+        "registration": {
+          "error": 0.13707482993197279,
+          "evaluations": 482,
+          "initial_error": 1.3401360544217686,
+          "parameters": [
+            29.98010610079576,
+            0.0,
+            110.92692307692306,
+            1.4784313725490197,
+            30.23076923076922,
+            116.22884615384612,
+            104.125,
+            5.360119047619062,
+            4.757499999999999,
+            0.0,
+            107.26785714285717,
+            1.4705882352941178,
+            4.526785714285701,
+            104.72321428571433,
+            112.5,
+            3.57500000000001,
+            4.0,
+            70.4076334931766,
+            29.1875,
+            1.4745098039215687,
+            176.0,
+            112.0,
+            1.0,
+            2.0,
+            2.0,
+            258.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9968954920768738,
+            "foreground_iou": 1.0,
+            "foreground_mse": 8.533670916222036e-05,
+            "normalized_mse": 1.2344807146291714e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_09",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.766,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 482,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_10",
+        "variation": {
+          "scale": 0.9960565,
+          "relative_x": -0.02024324,
+          "relative_y": 0.0230164
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das gesamte Motiv ist ein wenig kleiner dargestellt und geringfügig nach links und unten versetzt.",
+        "input_sha256": "270c91737c0d855680d6d4b3daf58bc3904c352bb0c20d8ac99bc75f41a53aee",
+        "reference_svg_sha256": "e65f7873d6fa019c33ed9e45f56a471e07894b40803648801189f12e640517e2",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.316605084866751e-05,
+          "foreground_mse": 8.922763663576916e-05,
+          "edge_alignment": 0.9987316131591797,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "e6b159fa096a7db1aa3488b1a50d6a610b15293908b3db22446c275707604f59",
+        "elapsed_seconds": 3.188,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.165887\" y=\"2.750000\" width=\"1.419608\" height=\"105.730769\" fill=\"#026fb0\"/><polygon points=\"29.031250,113.711538 23.820833,102.625000 34.241667,102.625000\" fill=\"#026fb0\"/><rect x=\"4.023272\" y=\"2.750000\" width=\"1.407843\" height=\"104.700000\" fill=\"#ff0000\"/><polygon points=\"4.500000,103.087500 -0.050000,113.000000 9.050000,113.000000\" fill=\"#ff0000\"/><rect x=\"4.000000\" y=\"70.380037\" width=\"24.000000\" height=\"1.407843\" fill=\"#ff0000\"/></svg>",
+        "registration": {
+          "error": 0.09761904761904762,
+          "evaluations": 500,
+          "initial_error": 1.4652210884353742,
+          "parameters": [
+            28.87569060773481,
+            2.75,
+            108.48076923076923,
+            1.4196078431372547,
+            29.031249999999996,
+            113.71153846153844,
+            102.625,
+            5.2104166666666405,
+            4.727193593314763,
+            2.75,
+            107.4499999999999,
+            1.4078431372549018,
+            4.500000000000007,
+            103.08749999999982,
+            113.0,
+            4.550000000000008,
+            4.0,
+            70.38003718165051,
+            28.0,
+            1.4078431372549018,
+            176.0,
+            111.0,
+            2.0,
+            0.5,
+            0.5,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9987316131591797,
+            "foreground_iou": 1.0,
+            "foreground_mse": 8.922763663576916e-05,
+            "normalized_mse": 1.316605084866751e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_10",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.531,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 500,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_11",
+        "variation": {
+          "scale": 0.96568922,
+          "relative_x": 0.01881204,
+          "relative_y": -0.00812645
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die Darstellung ist ein wenig kleiner dargestellt und ein wenig nach rechts und oben versetzt.",
+        "input_sha256": "01f11b5c86654785b7e60a36552ebfcf8455c030c6b1ef4bd7a6d4946bd94442",
+        "reference_svg_sha256": "a383294eaf7eba4b246d4a7e4bec9f3b8637c4ee2a9a07d8065b827f90ba9509",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 2.9490229280781932e-05,
+          "foreground_mse": 0.00017111672786995769,
+          "edge_alignment": 0.9974709749221802,
+          "foreground_iou": 0.9985074626865672
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "194fd3c456b51230b38db1c427528a8d0e4ea27b99cc0020d0a3f872176e6c6d",
+        "elapsed_seconds": 3.344,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.168389\" y=\"1.000000\" width=\"1.356863\" height=\"102.887681\" fill=\"#0270b0\"/><polygon points=\"30.053593,108.681612 25.023037,97.750000 35.084149,97.750000\" fill=\"#0270b0\"/><rect x=\"5.802487\" y=\"1.000000\" width=\"1.345098\" height=\"100.966270\" fill=\"#ff0404\"/><polygon points=\"6.262070,97.870040 1.325959,109.187500 11.198181,109.187500\" fill=\"#ff0404\"/><rect x=\"6.000000\" y=\"66.595859\" width=\"23.062500\" height=\"1.333333\" fill=\"#ff0404\"/></svg>",
+        "registration": {
+          "error": 0.24141156462585034,
+          "evaluations": 498,
+          "initial_error": 2.3714285714285714,
+          "parameters": [
+            29.846820809248555,
+            1.0,
+            103.88768115942028,
+            1.3568627450980393,
+            30.053592995169073,
+            108.68161231884056,
+            97.75,
+            5.03055555555556,
+            6.475036443148687,
+            1.0,
+            101.96626984126985,
+            1.3450980392156864,
+            6.262070105820104,
+            97.87003968253971,
+            109.1875,
+            4.93611111111111,
+            6.0,
+            66.59585895735358,
+            29.0625,
+            1.3333333333333335,
+            176.0,
+            112.0,
+            2.0,
+            4.0,
+            4.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9974709749221802,
+            "foreground_iou": 0.9985074626865672,
+            "foreground_mse": 0.00017111672786995769,
+            "normalized_mse": 2.9490229280781932e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_11",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.797,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 498,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_12",
+        "variation": {
+          "scale": 0.94892627,
+          "relative_x": 0.00306431,
+          "relative_y": -0.00572951
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das gesamte Motiv ist geringfügig kleiner dargestellt und ein wenig nach rechts und oben versetzt.",
+        "input_sha256": "b731ab938bf220a4acad14dae3df540b82001431c9d5f7fb593e50a08dd1c794",
+        "reference_svg_sha256": "774f5a29b0b3f35f553a21f07db06a91424252dafc20c4034487ad82ec90b93d",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 3.52232382283546e-05,
+          "foreground_mse": 0.00024482372100465,
+          "edge_alignment": 0.9961416721343994,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "d8e457bcec4e3cd6e74ee3d3cf305a6486c2f7f096c3c5082b0676950efacf9f",
+        "elapsed_seconds": 2.938,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.456700\" y=\"2.250000\" width=\"1.301961\" height=\"101.073529\" fill=\"#0472b1\"/><polygon points=\"29.250000,108.022059 24.255952,97.250000 34.244048,97.250000\" fill=\"#0472b1\"/><rect x=\"5.446949\" y=\"2.250000\" width=\"1.360784\" height=\"100.366667\" fill=\"#ff0404\"/><polygon points=\"5.907361,97.952083 0.900417,108.500000 10.914306,108.500000\" fill=\"#ff0404\"/><rect x=\"6.000000\" y=\"66.637845\" width=\"22.437500\" height=\"1.337255\" fill=\"#ff0404\"/></svg>",
+        "registration": {
+          "error": 0.3320578231292517,
+          "evaluations": 506,
+          "initial_error": 2.3087585034013607,
+          "parameters": [
+            29.107680722891562,
+            2.25,
+            103.32352941176471,
+            1.3019607843137255,
+            29.249999999999986,
+            108.02205882352942,
+            97.25,
+            4.994047619047624,
+            6.127341498559078,
+            2.25,
+            102.6166666666667,
+            1.3607843137254902,
+            5.907361111111108,
+            97.95208333333342,
+            108.5,
+            5.0069444444444535,
+            6.0,
+            66.63784494165765,
+            28.4375,
+            1.3372549019607844,
+            177.0,
+            114.0,
+            4.0,
+            4.0,
+            4.0,
+            258.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9961416721343994,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00024482372100465,
+            "normalized_mse": 3.52232382283546e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_12",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.593,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 506,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_13",
+        "variation": {
+          "scale": 0.98363189,
+          "relative_x": 0.00993942,
+          "relative_y": 0.02376841
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die gesamte Darstellung ist ein wenig kleiner dargestellt und etwas nach rechts und unten verschoben.",
+        "input_sha256": "dd4d02f5b9397c5a75b7082a5bcf5a7b830409880b2796ba584e2cdf5921d6e1",
+        "reference_svg_sha256": "6b6b3d0adbcd14c675c091d4487192fa0e8723764b56e03ff2244233fd9f0e9e",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.030085240927292e-05,
+          "foreground_mse": 7.06147839082405e-05,
+          "edge_alignment": 0.9987263679504395,
+          "foreground_iou": 0.9982014388489209
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "57d28c81f60c29797c8f18d273b3661f8029067f07aaddd4f23bc464bd3cadb5",
+        "elapsed_seconds": 2.25,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.023272\" y=\"3.562500\" width=\"1.407843\" height=\"104.754167\" fill=\"#006fb0\"/><polygon points=\"29.996389,113.133333 24.857500,102.187500 35.135278,102.187500\" fill=\"#006fb0\"/><rect x=\"5.254766\" y=\"3.562500\" width=\"1.360784\" height=\"103.687500\" fill=\"#ff0101\"/><polygon points=\"5.716071,102.593750 0.966071,112.937500 10.466071,112.937500\" fill=\"#ff0101\"/><rect x=\"5.968750\" y=\"70.274676\" width=\"23.031250\" height=\"1.407843\" fill=\"#ff0101\"/></svg>",
+        "registration": {
+          "error": 0.0788265306122449,
+          "evaluations": 531,
+          "initial_error": 1.1504251700680272,
+          "parameters": [
+            29.727193593314766,
+            3.5625,
+            108.31666666666666,
+            1.4078431372549018,
+            29.996388888888887,
+            113.13333333333331,
+            102.1875,
+            5.138888888888864,
+            5.935158501440922,
+            3.5625,
+            107.24999999999997,
+            1.3607843137254902,
+            5.716071428571432,
+            102.59374999999996,
+            112.9375,
+            4.750000000000007,
+            5.96875,
+            70.2746763417197,
+            29.0,
+            1.4078431372549018,
+            175.5,
+            110.75,
+            0.5,
+            1.0,
+            1.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9987263679504395,
+            "foreground_iou": 0.9982014388489209,
+            "foreground_mse": 7.06147839082405e-05,
+            "normalized_mse": 1.030085240927292e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_13",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.343,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 531,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_14",
+        "variation": {
+          "scale": 0.96926369,
+          "relative_x": 0.02076481,
+          "relative_y": -0.01920964
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das Motiv ist leicht kleiner dargestellt und geringfügig nach rechts und oben verschoben.",
+        "input_sha256": "935fc9d8abca89f0f1e8d17afe7c29f5f7010ceb4a9248bcb1efa3064f187ab4",
+        "reference_svg_sha256": "123371b11856c85d8858a27b10b0727bf10353ac4ea35340edd97dc3d919b514",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 3.918561196769588e-05,
+          "foreground_mse": 0.00023051010794006288,
+          "edge_alignment": 0.9973483085632324,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "c74ab36b0be23e99f3801b62a2fbb7162abcbd49f17ed25b6fafc8eee2c57f30",
+        "elapsed_seconds": 2.515,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"29.254766\" y=\"0.000000\" width=\"1.360784\" height=\"102.555556\" fill=\"#046fb0\"/><polygon points=\"30.153935,107.611111 25.096991,96.687500 35.210880,96.687500\" fill=\"#046fb0\"/><rect x=\"5.818640\" y=\"0.000000\" width=\"1.403922\" height=\"101.522727\" fill=\"#ff0707\"/><polygon points=\"6.279627,97.201705 1.252841,108.125000 11.306412,108.125000\" fill=\"#ff0707\"/><rect x=\"6.000000\" y=\"65.391912\" width=\"23.187500\" height=\"1.341176\" fill=\"#ff0707\"/></svg>",
+        "registration": {
+          "error": 0.36947278911564624,
+          "evaluations": 514,
+          "initial_error": 1.7157312925170067,
+          "parameters": [
+            29.93515850144092,
+            0.0,
+            102.55555555555557,
+            1.3607843137254902,
+            30.15393518518517,
+            107.61111111111116,
+            96.6875,
+            5.056944444444422,
+            6.5206005586592175,
+            0.0,
+            101.52272727272722,
+            1.403921568627451,
+            6.279626623376636,
+            97.20170454545443,
+            108.125,
+            5.026785714285715,
+            6.0,
+            65.39191176470588,
+            29.1875,
+            1.3411764705882352,
+            176.0,
+            111.0,
+            4.0,
+            7.0,
+            7.0,
+            255.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9973483085632324,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00023051010794006288,
+            "normalized_mse": 3.918561196769588e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_14",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.578,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 514,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_15",
+        "variation": {
+          "scale": 1.03030369,
+          "relative_x": -0.01873347,
+          "relative_y": -0.00242224
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Das gesamte Motiv ist geringfügig größer dargestellt und geringfügig nach links und oben verschoben.",
+        "input_sha256": "35203736502372c77d10882776fd50efb4fb8c593f5387dc092de8a36ef877fd",
+        "reference_svg_sha256": "486029aec083e549775ee1628c78ce1fa1dfba9b31bee990a14dea346b2724ab",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 2.3394979507429525e-05,
+          "foreground_mse": 0.00015547523798886687,
+          "edge_alignment": 0.997539222240448,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "e1db6f22b91217586ee0d02c99d07cabd63363cb24be7581e8178df432b3f672",
+        "elapsed_seconds": 2.282,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.569706\" y=\"0.000000\" width=\"1.470588\" height=\"107.200000\" fill=\"#026fae\"/><polygon points=\"29.531250,112.900000 24.126488,101.250000 34.936012,101.250000\" fill=\"#026fae\"/><rect x=\"3.678129\" y=\"0.000000\" width=\"1.407843\" height=\"106.163043\" fill=\"#ff0000\"/><polygon points=\"4.099573,101.982337 -0.632570,112.000000 8.831716,112.000000\" fill=\"#ff0000\"/><rect x=\"4.000000\" y=\"67.985042\" width=\"24.625000\" height=\"1.391912\" fill=\"#ff0000\"/></svg>",
+        "registration": {
+          "error": 0.14965986394557823,
+          "evaluations": 517,
+          "initial_error": 2.923979591836735,
+          "parameters": [
+            29.305,
+            0.0,
+            107.19999999999999,
+            1.4705882352941178,
+            29.531249999999986,
+            112.89999999999999,
+            101.25,
+            5.404761904761909,
+            4.382050835654596,
+            0.0,
+            106.16304347826079,
+            1.407843137254902,
+            4.099572981366457,
+            101.98233695652159,
+            112.0,
+            4.732142857142861,
+            4.0,
+            67.98504159239454,
+            28.625,
+            1.3919117647058823,
+            173.5,
+            111.0,
+            2.0,
+            0.5,
+            0.0,
+            256.0
+          ],
+          "quality": {
+            "edge_alignment": 0.997539222240448,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.00015547523798886687,
+            "normalized_mse": 2.3394979507429525e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_15",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.391,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 517,
+          "stop_reason": "satisfactory"
+        }
+      },
+      {
+        "case_id": "probe_16",
+        "variation": {
+          "scale": 0.94878637,
+          "relative_x": -0.00857138,
+          "relative_y": -0.01035947
+        },
+        "description": "Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. Im unteren Drittel verbindet eine rote horizontale Linie die Striche. Die Darstellung ist geringfügig kleiner dargestellt und leicht nach links und oben verschoben.",
+        "input_sha256": "aedc7a4c389fa0377c75beccbfb6dd612b639a8dd9367160986fe366e9404cdd",
+        "reference_svg_sha256": "37cf7a1c4e28b5e41a10b57b126b4e2e4d295702665b70840245aac338d4042b",
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 4.859067848883569e-05,
+          "foreground_mse": 0.0002426786522846669,
+          "edge_alignment": 0.9974259734153748,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "output_sha256": "1706b15e557c6f91d3ebe362b4e08994f2fec536c1c37e0d88ba479802dbe6f5",
+        "elapsed_seconds": 2.406,
+        "blocked_svg_reads": [],
+        "native_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"112\" viewBox=\"0 0 35 112\"><rect x=\"28.017326\" y=\"1.687500\" width=\"1.290196\" height=\"100.926136\" fill=\"#016fae\"/><polygon points=\"28.879058,107.414773 23.983225,96.812500 33.774892,96.812500\" fill=\"#016fae\"/><rect x=\"5.021899\" y=\"1.687500\" width=\"1.352941\" height=\"100.776786\" fill=\"#ff0101\"/><polygon points=\"5.500000,97.366071 0.526786,108.000000 10.473214,108.000000\" fill=\"#ff0101\"/><rect x=\"5.000000\" y=\"65.963717\" width=\"22.968750\" height=\"1.462255\" fill=\"#ff0101\"/></svg>",
+        "registration": {
+          "error": 0.28579931972789113,
+          "evaluations": 511,
+          "initial_error": 1.9164965986394558,
+          "parameters": [
+            28.662424012158056,
+            1.6875,
+            102.61363636363637,
+            1.2901960784313726,
+            28.879058441558445,
+            107.41477272727276,
+            96.8125,
+            4.8958333333333375,
+            5.698369565217392,
+            1.6875,
+            102.46428571428567,
+            1.3529411764705883,
+            5.499999999999993,
+            97.36607142857135,
+            108.0,
+            4.973214285714292,
+            5.0,
+            65.96371700156548,
+            27.96875,
+            1.4622549019607844,
+            174.0,
+            110.75,
+            1.0,
+            1.0,
+            1.0,
+            258.0
+          ],
+          "quality": {
+            "edge_alignment": 0.9974259734153748,
+            "foreground_iou": 1.0,
+            "foreground_mse": 0.0002426786522846669,
+            "normalized_mse": 4.859067848883569e-05,
+            "passed": true
+          }
+        },
+        "search": {
+          "source": "probe_16",
+          "event": "image_search_finished",
+          "satisfactory": true,
+          "elapsed_seconds": 1.375,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "time_extensions": 0,
+          "candidate_evaluations": 511,
+          "stop_reason": "satisfactory"
+        }
+      }
+    ]
+  },
+  "validation": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_arrow_pair_runtime.py tests/detailtests/test_dual_arrow_runtime_helpers.py tests/detailtests/test_rendering_gradient_compatibility.py tests/test_filled_symbols_runtime.py",
+      "exit_code": 0,
+      "passed": 101
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_chevron_panel_runtime.py tests/test_plan_b_issue_inventory.py tests/detailtests/test_render_worker.py tests/detailtests/test_render_dispatch_helpers.py",
+      "exit_code": 0,
+      "passed": 39
+    },
+    {
+      "command": ".venv/Scripts/python.exe tools/run_pytest_profile.py core-green",
+      "exit_code": 0,
+      "passed": 42
+    }
+  ]
+}

@@ -14,6 +14,8 @@ import sys
 import time
 import xml.etree.ElementTree as ET
 
+from src.iCCModules.imageCompositeConverterSvgStyles import inline_simple_svg_styles
+
 _INPROCESS_RENDER_COUNT = 0
 _INPROCESS_GC_PERIOD = 25
 _SUBPROCESS_RENDER_CALL_ID = 0
@@ -598,7 +600,8 @@ def render_svg_to_numpy_inprocess(
     if re.search(r"(?<![A-Za-z])(nan|inf)(?![A-Za-z])", svg_string, flags=re.IGNORECASE):
         return None
 
-    renderer_svg = _expand_rect_linear_gradients_for_fitz(svg_string,fitz_module=fitz_module,size_w=size_w,size_h=size_h)
+    renderer_svg = inline_simple_svg_styles(svg_string)
+    renderer_svg = _expand_rect_linear_gradients_for_fitz(renderer_svg,fitz_module=fitz_module,size_w=size_w,size_h=size_h)
     renderer_svg = _expand_axis_aligned_linear_gradients_for_fitz(renderer_svg)
     renderer_svg = _expand_bezier_linear_gradients_for_fitz(renderer_svg,fitz_module=fitz_module,size_w=size_w,size_h=size_h)
     renderer_svg = _expand_polygon_linear_gradients_for_fitz(renderer_svg)

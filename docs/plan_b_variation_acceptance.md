@@ -1,5 +1,13 @@
 # Plan-B-Abnahmetest mit neuer Auswahl und bis zu acht weiteren SVGs
 
+Seit dem 25.10.2026 sind die automatischen Zufallsläufe bei Pull Requests und
+Pushes bis zur Abarbeitung der offenen Issues pausiert. Der Workflow
+`Plan B random task acceptance` kann weiterhin bewusst über **Run workflow**
+gestartet werden. Die CLI bleibt ebenfalls verfügbar. Feste Regressionen
+verwenden explizite Quellen und protokollierte Varianten-Seeds ohne Auswahl
+aus dem Pool. Nach Abschluss des Backlogs werden die PR-/Push-Auslöser
+ausdrücklich wieder aktiviert; es gibt keine automatische Reaktivierung.
+
 Fehlschläge werden zusätzlich als lesbare Laufübersicht und reproduzierbare
 Aufgaben dokumentiert. Der Folgeworkflow erstellt oder aktualisiert dazu
 GitHub-Issues; fehlen Schreibrechte, bleiben Aufgabenentwürfe als Artefakt

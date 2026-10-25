@@ -4,6 +4,8 @@ from __future__ import annotations
 import cv2
 import numpy as np
 
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, pixel_quality
+
 
 def fit_zigzag_panel(width, height, *, description, image, render_fn, error_fn):
     text = str(description or '').casefold()
@@ -27,6 +29,8 @@ def fit_zigzag_panel(width, height, *, description, image, render_fn, error_fn):
     profile = np.median(pixels[y+2:y+h-2, x:x+w], axis=0)
     gray = profile.mean(axis=1)
     smooth = cv2.GaussianBlur(gray[:, None], (1, 0), max(2, w*.06)).ravel()
+    # A translated crop can leave the inner frame one column from the edge.
+    # Its two neighbours still provide an independent trough observation.
     candidates = [i for i in range(3, w-2) if gray[i] <= min(gray[i-1], gray[i+1])
                and gray[i] < max(gray[i-1], gray[i+1])
                and gray[i]-smooth[i] < -8 and i > w*.3]
@@ -37,6 +41,14 @@ def fit_zigzag_panel(width, height, *, description, image, render_fn, error_fn):
         else:
             groups.append([i])
     troughs = [int(round(np.mean(group))) for group in groups]
+    if repeated and len(troughs) == 1:
+        # Retry only a missing second edge. Otherwise the adjacent outer rim
+        # must not displace an independently observed pair of inner sides.
+        edge = w-2
+        if (gray[edge] <= min(gray[edge-1], gray[edge+1])
+                and gray[edge] < max(gray[edge-1], gray[edge+1])
+                and gray[edge]-smooth[edge] < -8):
+            troughs.append(edge)
     if len(troughs) != 2:
         return None
     left, right = troughs
@@ -95,6 +107,12 @@ def fit_zigzag_panel(width, height, *, description, image, render_fn, error_fn):
         spacing = float(np.median(np.diff(centers)))
         lattice = np.rint((centers-centers[0])/spacing)
         period, origin = np.polyfit(lattice, centers, 1)
+        if not 4 < period < h/3 or np.max(np.abs(centers-(origin+lattice*period))) > period*.15:
+            # Clipping or antialiasing can hide a repetition peak. A doubled
+            # gap must not shift the period to the median of two spacings.
+            spacing = float(np.min(np.diff(centers)))
+            lattice = np.rint((centers-centers[0])/spacing)
+            period, origin = np.polyfit(lattice, centers, 1)
         if not 4 < period < h/3 or np.max(np.abs(centers-(origin+lattice*period))) > period*.15:
             return None
         phase = float(y+2+origin)
@@ -180,6 +198,8 @@ def fit_zigzag_panel(width, height, *, description, image, render_fn, error_fn):
                 f'{mark_svg}</svg>\n')
 
     evaluations = 0
+    session = current_search()
+    render_cache = {}
     border = np.concatenate((pixels[0], pixels[-1], pixels[:, 0], pixels[:, -1]))
     background = np.median(border, axis=0)
     reference_contrast = np.max(np.abs(pixels-background), axis=2) > 25
@@ -187,8 +207,14 @@ def fit_zigzag_panel(width, height, *, description, image, render_fn, error_fn):
         nonlocal evaluations
         if not valid(v):
             return None
-        evaluations += 1
+        if session and session.time_reason():
+            return None
         content = svg(v)
+        if content in render_cache:
+            return render_cache[content]
+        evaluations += 1
+        if session:
+            session.evaluations += 1
         raster = render_fn(content, width, height)
         if raster is None:
             return None
@@ -199,7 +225,11 @@ def fit_zigzag_panel(width, height, *, description, image, render_fn, error_fn):
         if repeated:
             contrast = np.max(np.abs(raster.astype(float)-background), axis=2) > 25
             score += 1000*float((contrast != reference_contrast).mean())
-        return score, content, raster, error
+        result = score, content, raster, error
+        if len(render_cache) >= 1024:
+            render_cache.clear()
+        render_cache[content] = result
+        return result
 
     best = measure(p)
     if best is None:
@@ -227,6 +257,19 @@ def fit_zigzag_panel(width, height, *, description, image, render_fn, error_fn):
                         best = result
                     else:
                         shades[index] = old
+        quality = pixel_quality(arr, best[2])
+        if quality and not quality['passed']:
+            # Thin frame edges can cross the foreground threshold within a
+            # fraction of the old 1/8-pixel grid. Keep successful fits intact.
+            for step in (.0625, .03125):
+                for _ in range(2):
+                    for index in range(len(p)):
+                        for sign in (-1, 1):
+                            candidate = p.copy()
+                            candidate[index] += sign*step*(8 if 15 <= index < 27 or index >= 35 else 1)
+                            result = measure(candidate)
+                            if result is not None and result[0] < best[0]-1e-9:
+                                p, best = candidate, result
     if best[3] >= initial_error-1e-9:
         return None
     if (np.max(np.abs(pixels-best[2].astype(float)), axis=2) > 65).mean() > .04:

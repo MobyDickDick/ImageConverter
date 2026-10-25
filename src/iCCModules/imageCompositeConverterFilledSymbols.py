@@ -13,14 +13,16 @@ def _hex(bgr):
 
 
 def _register(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
-              *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None):
+              *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None,
+              refinement_steps=(1., .5, .25, .125)):
     return drain(_register_steps(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
         preserve_initial_error=preserve_initial_error, loss_fn=loss_fn,
-        initial_error_bound=initial_error_bound, satisfactory_fn=satisfactory_fn))
+        initial_error_bound=initial_error_bound, satisfactory_fn=satisfactory_fn, refinement_steps=refinement_steps))
 
 
 def _register_steps(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
-              *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None):
+              *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None,
+              refinement_steps=(1., .5, .25, .125)):
     """Bounded coordinate descent; optionally retain the best admissible iterate.
 
     A custom search loss does not override the caller's initial error bound.
@@ -99,7 +101,7 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     if satisfactory(parameters,best):
         stop_reason = 'satisfactory'
     yield best[0] if best[1] <= initial_error+1e-9 else None
-    for step in (1., .5, .25, .125):
+    for step in refinement_steps:
         if stop_reason:
             break
         for _ in range(2):

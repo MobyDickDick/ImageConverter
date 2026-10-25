@@ -1,5 +1,10 @@
 # ImageConverter
 
+Die [Korrektur für GitHub-Issue #2004](artifacts/evaluation/arrow_pair_issue_v1/README.md)
+erhält CSS-definierte Schäfte im Prüfraster und rekonstruiert zwei beobachtete
+Pfeile mit optionaler Querlinie als native SVG-Formen. Die widersprüchliche
+AC0022-Beschreibung ist anhand des SVGs und Katalog-JPEGs korrigiert.
+
 Die [Issue-Bearbeitung vom 25. Oktober](artifacts/evaluation/issue_backlog_v1/README.md)
 inventarisiert 92 offene GitHub-Issues und korrigiert verschobene, eng beschnittene
 Verlaufspanels aus #1966, #1969 und #2030. Die unveränderten CLI-Grenzen werden
@@ -230,6 +235,11 @@ verschiedene SVGs aus dem Pool. Die Abnahme verlangt Original plus Varianten
 (17/17) für die erste Aufgabe mit bestandener Vorprüfung:
 `python -m tools.run_plan_b_variations`. Jeder Versuch behält seinen Bericht
 und das Ursprungsbild als `source.png`; der Gesamtbericht verlinkt alle Versuche.
+Die automatischen Zufallsläufe bei Pull Requests und Pushes sind bis zur
+Abarbeitung der offenen Issues pausiert. Der Workflow bleibt ausschließlich
+manuell startbar; feste Quellen mit gespeicherten Varianten-Seeds werden
+weiterhin als Regressionen geprüft. Die Zufallsläufe werden anschließend
+ausdrücklich wieder aktiviert, nicht automatisch anhand der Issue-Anzahl.
 Die [Fehlererfassung](docs/plan_b_failure_tasks_2026-10-10.md) zeigt die
 fehlgeschlagenen Fälle in der GitHub-Laufübersicht und führt wiederholte
 Fehlschläge in GitHub-Aufgaben zusammen. Das reguläre Plan-B-Paket
