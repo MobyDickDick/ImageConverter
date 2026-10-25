@@ -52,6 +52,13 @@ Render-/Konvertierungsbefund und die wenig eigenständige Rohr-Familienbeschreib
 benötigen eine getrennte Quellen- und Qualitätskorrektur; die Generatorreparatur
 kopiert dafür keine Vektorvorlagen in die Runtime.
 
+Die drei [offenen Folgeaufgaben mit Abnahmekriterien](../../../docs/plan_b_issue_1980_followup.md)
+legen die Reihenfolge fest: unabhängige Referenzprüfung und Rendererreparatur,
+eigenständige Bildbeschreibung, anschließend neue Baseline und allgemeine
+Qualitätskorrektur. GitHub-Issue #1980 bleibt als Aufgabenanker mit historischer
+Evidenz erhalten. Die alte Prüfkette wird nicht nachträglich als gültige
+visuelle Referenz oder als erfolgreiche Abnahme dargestellt.
+
 ## Wiederholung
 
 `manifest.json` bewahrt SHA-256, Beschreibung, vollständigen Seed, Iterations-
