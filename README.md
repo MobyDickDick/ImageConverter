@@ -1,5 +1,13 @@
 # ImageConverter
 
+Der [P0-Teil für getrennte Überdeckungsgruppen](docs/next_arbeitspaket_2026-10-28_overlap_groups.md)
+verbindet zwei bis vier Gruppen im gemeinsamen Kreis-/Rechtecksuchweg. Zwölf
+identische synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12;
+Drei-/Vier-Gruppen-Kohorten bestehen jeweils 12/12, Varianten 14/17.
+Angeschnittene Elternformen und die unabhängige reale Gesamt-Abnahme bleiben offen.
+Die [AC0721-Textdiagnose](docs/known_issue_2026-10-28_svg_text_baseline.md)
+weist zusätzlich eine noch offene Abweichung zwischen Prüfrenderer und SVG-Anzeige nach.
+
 Der [P0-Teil für dünne Kontur-Tiefenbelege](docs/next_arbeitspaket_2026-10-27_thin_rim_depth.md)
 nutzt die geometrische Randdeckung vorhandener Rasterpixel, wenn ein schmaler
 Prüfstreifen zwischen Pixelzentren liegt. Zwölf identische synthetische

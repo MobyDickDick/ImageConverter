@@ -1,0 +1,67 @@
+{
+  "python": "3.10.11",
+  "base_commit": "50e4009d11cda92da68bc1823eae2ff7fac8cbd1",
+  "commands": [
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --inputs .tmp\\overlap-groups-20261028-inputs --output .tmp\\overlap-groups-20261028-before",
+      "exit_code": 0,
+      "accepted": 0,
+      "completed": 12
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --inputs .tmp\\overlap-groups-20261028-inputs --output .tmp\\overlap-groups-20261028-after-final --require-all",
+      "exit_code": 0,
+      "accepted": 12,
+      "completed": 12
+    },
+    {
+      "prepare_command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --prepare <new-inputs> --seed 962713 --groups 3 --rounded --outlines",
+      "evaluate_command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --inputs <new-inputs> --output <new-output> --require-all",
+      "exit_code": 0,
+      "accepted": 12,
+      "completed": 12
+    },
+    {
+      "prepare_command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --prepare <new-inputs> --seed 482391 --groups 4 --rounded --outlines",
+      "evaluate_command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --inputs <new-inputs> --output <new-output> --require-all",
+      "exit_code": 0,
+      "accepted": 12,
+      "completed": 12
+    },
+    {
+      "prepare_command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --prepare <new-inputs> --seed 853197 --groups 2 --rounded --outlines --variations",
+      "evaluate_command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --inputs <new-inputs> --output <new-output> --require-all",
+      "exit_code": 1,
+      "accepted": 14,
+      "completed": 17
+    }
+  ],
+  "test_blocks": [
+    {
+      "name": "regression",
+      "exit_code": 0,
+      "passed": 236,
+      "tests": 237,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "seconds": 154.486,
+      "junit_sha256": "9dc1b8974d0218e552dd6dee131e727701506e02a4476b0c29ca3cef0aa36e0c",
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_overlap_groups.py tests/test_mixed_overlap_composition.py tests/test_mixed_overlap_outlines.py tests/test_same_paint_overlap.py tests/test_owned_circle_rims.py tests/test_thin_rim_depth.py tests/test_structure_search_operators.py tests/test_test_data_lifecycle.py -q --tb=short --junitxml=.tmp/overlap-groups-regressions.xml"
+    },
+    {
+      "name": "core",
+      "exit_code": 0,
+      "passed": 42,
+      "tests": 42,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.913,
+      "junit_sha256": "fcf65cb8eeef1c08b96b4694f050ab77106e61f35159de06cf239007131b4142",
+      "command": ".venv/Scripts/python.exe -m tools.run_pytest_profile core-green --junitxml=.tmp/overlap-groups-core.xml"
+    }
+  ],
+  "full_standard_suite_run": false,
+  "archive_reconversion_run": false
+}
