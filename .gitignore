@@ -37,6 +37,7 @@ artifacts/perf/**/*.prof
 /.venv-py314
 
 # Local analysis and runtime output
+/artifacts/gui/
 .coverage
 htmlcov/
 .mypy_cache/

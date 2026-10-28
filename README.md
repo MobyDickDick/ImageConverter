@@ -290,6 +290,40 @@ Fehlschläge in GitHub-Aufgaben zusammen. Das reguläre Plan-B-Paket
 
 ## Quick start
 
+### Kleine lokale GUI (wie bei Primitives)
+
+Unter Windows **`startWebServer.cmd` doppelklicken**. Der lokale Server nutzt
+`.venv` und öffnet `http://127.0.0.1:8766`. Alternativ:
+`python -m src.imageConverterGui` (Abhängigkeiten: `requirements-dev.txt`).
+`--port 8767` wählt einen anderen Port, `--no-browser` unterdrückt den Browserstart;
+Strg+C beendet den Server.
+
+1. Bild auswählen oder ins Uploadfeld ziehen: PNG, JPG, BMP, WebP oder TIFF,
+   maximal 25 MB / 20 Megapixel. EXIF-Drehung wird berücksichtigt, Transparenz
+   auf Weiss gelegt. Die Vorschau zeigt die tatsächliche Konvertierungseingabe.
+2. Bildbeschreibung prüfen oder Formen, Farben und Anordnung beschreiben.
+   Bekannte Dateinamen übernehmen die Katalogbeschreibung einschliesslich Referenzen.
+3. Suchdauer wählen und **In SVG konvertieren** starten. Original und SVG lassen
+   sich nebeneinander betrachten und gemeinsam vergrössern. **Speichern unter …**
+   öffnet unter Windows den Speicherdialog mit frei wählbarem Namen und Ordner;
+   **Browser-Download** bleibt als Alternative verfügbar.
+
+Optional ein gespeichertes **Sample-SVG** hinzufügen (eigenständige SVG-Formen,
+maximal 2 MB). **Sample weiter verbessern** optimiert dessen vorhandene Formen
+und Farben am Original und zeigt Original, Sample und Ergebnis nebeneinander.
+Nur messbare Verbesserungen werden übernommen; ohne Gewinn bleibt der Sample-Stand
+erhalten. **Entfernen** wechselt zurück zur normalen `semantic-only`-Konvertierung.
+Ergebnisse mit offenen Qualitätsprüfungen erscheinen als **Entwurf**.
+
+Die Suche läuft im Hintergrund und lässt sich abbrechen. Profile: 15–30, 60–120
+oder 120–240 Sekunden, zuzüglich bis zu 30 Sekunden für Start und Abschluss;
+der Sample-Modus nutzt jeweils das Basisbudget. Zusätzliche Qualitätsrunden
+entfallen (`ICC_MAX_QUALITY_PASSES=0`), die Qualitätsgrenzen bleiben unverändert.
+Bilder, Beschreibungen, Ergebnisse und Protokolle bleiben lokal unter
+`artifacts/gui/` (von Git ausgeschlossen); letzte Aufträge überstehen Neustarts.
+Jeder Versuch hat einen eigenen Arbeitsordner, Originaldateien bleiben erhalten.
+Der Server ist ausschliesslich an `127.0.0.1` gebunden.
+
 ### Convert images into SVG outputs
 
 ```bash

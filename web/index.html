@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ImageConverter · Bild zu SVG</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <a class="brand" href="/" aria-label="ImageConverter Startseite"><span class="brand-icon" aria-hidden="true">◈</span><span>IMAGECONVERTER<small>Vom Bild zur Vektorgrafik</small></span></a>
+    <span class="local"><span class="dot"></span> Läuft lokal auf deinem Computer</span>
+  </header>
+  <main>
+    <div class="intro"><div><p class="eyebrow">DEINE KLEINE BILDWERKSTATT</p><h1>Bild rein. SVG raus.</h1><p>Bild laden, Formen beschreiben und das Ergebnis direkt vergleichen.</p></div><span class="intro-mark" aria-hidden="true">▧ <span>→</span> ◇</span></div>
+    <div id="notice" role="alert" hidden></div>
+    <div class="workspace">
+      <aside>
+        <section class="card">
+          <h2><span class="number">01</span> Bild auswählen</h2>
+          <label class="drop-zone" id="drop-zone" tabindex="0" role="button" aria-label="Bild auswählen oder hier ablegen">
+            <input id="file" type="file" accept="image/png,image/jpeg,image/bmp,image/webp,image/tiff" hidden>
+            <span class="upload-icon" aria-hidden="true">↥</span><strong>Bild hier ablegen</strong><span>oder klicken zum Auswählen</span><small>PNG, JPG, BMP, WebP, TIFF · bis 25 MB</small>
+          </label>
+          <p id="file-info" class="hint">Noch kein Bild ausgewählt.</p>
+          <div class="sample-upload">
+            <label class="field-label" for="sample-file">Sample-SVG <span class="optional">optional</span></label>
+            <input id="sample-file" type="file" accept=".svg,image/svg+xml" disabled>
+            <div class="sample-info"><span id="sample-info" class="hint">Gespeichertes SVG zusammen mit dem Original laden und weiter verbessern.</span><button id="remove-sample" class="text-button" hidden>Entfernen</button></div>
+          </div>
+          <h2 class="section-gap"><span class="number">02</span> Formen beschreiben</h2>
+          <label for="description" class="sr-only">Bildbeschreibung</label>
+          <textarea id="description" rows="5" maxlength="12000" placeholder="Zum Beispiel: Ein blauer Kreis mit schwarzer Kontur auf weissem Hintergrund."></textarea>
+          <p id="description-hint" class="hint">Beschreibe Formen, Farben und ihre Anordnung. Bei bekannten Katalogbildern wird die Beschreibung ergänzt.</p>
+          <label class="field-label" for="profile">Suchdauer</label>
+          <select id="profile"><option value="quick">Schnell · 15–30 Sekunden</option><option value="normal" selected>Normal · 1–2 Minuten</option><option value="thorough">Gründlich · 2–4 Minuten</option></select>
+          <p class="hint">Bei komplexen Bildern kann die Suche bis zur Obergrenze dauern. Start und Abschluss kommen hinzu.</p>
+          <button id="convert" class="primary full" disabled><span>In SVG konvertieren</span><span aria-hidden="true">→</span></button>
+          <button id="cancel" class="secondary full" hidden>Konvertierung abbrechen</button>
+        </section>
+        <section class="card history-card"><h2>Letzte Bilder <span id="history-count" class="count">0</span></h2><div id="history"><p class="hint">Deine letzten Bilder erscheinen hier.</p></div></section>
+      </aside>
+      <div class="content">
+        <section class="card preview-card">
+          <div class="preview-heading"><h2><span class="number">03</span> Direkt vergleichen</h2><div class="zoom-controls"><button id="zoom-out" class="icon-button" aria-label="Verkleinern" disabled>−</button><output id="zoom-label">100 %</output><button id="zoom-in" class="icon-button" aria-label="Vergrössern" disabled>+</button><button id="fit" class="secondary" disabled>Einpassen</button></div></div>
+          <div class="comparison">
+            <figure><figcaption><span>Original</span><span id="source-meta" class="caption-meta">Rasterbild</span></figcaption><div class="image-stage" id="source-stage"><div class="placeholder" id="source-empty"><span aria-hidden="true">▧</span><strong>Hier beginnt dein Bild</strong><p>Wähle links ein Bild aus.</p></div><img id="source-image" alt="Originalbild" hidden></div></figure>
+            <figure id="sample-figure" hidden><figcaption><span>Sample</span><span class="caption-meta">Ausgangspunkt · SVG</span></figcaption><div class="image-stage" id="sample-stage"><img id="sample-image" alt="Hochgeladenes Sample als Ausgangspunkt" hidden></div></figure>
+            <figure><figcaption><span>Ergebnis</span><span id="result-meta" class="caption-meta">Vektorgrafik · SVG</span></figcaption><div class="image-stage" id="result-stage"><div class="placeholder" id="result-empty"><span aria-hidden="true">◇</span><strong>Platz für dein SVG</strong><p>Nach der Konvertierung siehst du hier das Ergebnis.</p></div><img id="result-image" alt="Konvertierte SVG-Vektorgrafik" hidden></div></figure>
+          </div>
+          <div class="status-bar" role="status" aria-live="polite"><span id="status-dot" class="status-dot"></span><span id="status">Bereit, wenn du es bist.</span><span id="elapsed"></span></div>
+          <div class="result-actions"><span id="quality" class="hint">Original und Ergebnis lassen sich gemeinsam vergrössern.</span><div id="save-actions" class="save-actions" hidden><a id="download" class="browser-download">Browser-Download</a><button id="save-as" class="primary">Speichern unter … <span aria-hidden="true">↓</span></button></div></div>
+          <p id="sample-metrics" class="hint" hidden></p>
+          <p id="save-status" class="hint save-status" role="status" hidden></p>
+        </section>
+        <details class="card log-card" id="log-details"><summary>Konvertierungsprotokoll <span>Details zur laufenden Suche</span></summary><pre id="log">Das Protokoll erscheint nach dem Start der Konvertierung.</pre></details>
+        <p class="privacy-note"><span aria-hidden="true">◉</span> Deine Bilder bleiben auf diesem Computer. Ergebnisse werden lokal gespeichert.</p>
+      </div>
+    </div>
+    <footer>IMAGECONVERTER <span>Lokale Bildkonvertierung · SVG-Vorschau im Browser</span></footer>
+  </main>
+</body>
+</html>
