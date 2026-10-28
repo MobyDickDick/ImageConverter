@@ -13,13 +13,17 @@ from tools.run_plan_b_variations import make_original_case, make_variations, wri
 
 
 def make_cases(seed=486213, *, rounded=False, outlined=False, children=None, repeat_fill=False,
-               same_fill=False):
+               same_fill=False, groups=None):
+    if groups is not None:
+        if groups not in (2, 3, 4) or children not in (None, 2*groups):
+            raise ValueError('Use two to four groups with two children per group')
+        children = 2*groups
     if children is not None and children not in range(2, 9):
         raise ValueError('Mixed overlap scenes support two to eight children')
     rng = random.Random(seed)
     cases = []
     for index in range(12):
-        width = height = 360 if children and children > 4 else 240
+        width = height = 360 if groups or (children and children > 4) else 240
         count = children or 2 + index // 4
         axis = index % 2
         boxes = [[65+i*22+rng.uniform(-1, 1), 60+i*20+rng.uniform(-1, 1),
@@ -28,6 +32,14 @@ def make_cases(seed=486213, *, rounded=False, outlined=False, children=None, rep
             start = (width-52-(count-1)*24)/2
             boxes = [[start+i*24+rng.uniform(-1, 1), start-5+i*24+rng.uniform(-1, 1),
                       rng.uniform(49, 53), rng.uniform(49, 53)] for i in range(count)]
+        if groups:
+            centers = {2: [(110, 170), (245, 170)],
+                       3: [(110, 110), (240, 110), (175, 240)],
+                       4: [(115, 115), (240, 115), (115, 240), (240, 240)]}[groups]
+            boxes = [[cx-36+(i % 2)*22+rng.uniform(-1, 1),
+                      cy-36+(i % 2)*20+rng.uniform(-1, 1),
+                      rng.uniform(49, 53), rng.uniform(49, 53)]
+                     for i in range(count) for cx, cy in [centers[i//2]]]
         kinds = ['circle' if i % 2 == 0 else 'rectangle' for i in range(count)]
         for box, kind in zip(boxes, kinds):
             if kind == 'circle':
@@ -60,11 +72,12 @@ def make_cases(seed=486213, *, rounded=False, outlined=False, children=None, rep
                 shapes.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{radius}" fill="{fill}"/>')
                 obj['corner_radius'] = radius
             objects.append(obj)
-        # Every adjacent pair intersects in this independent diagonal chain;
-        # nonadjacent bounding boxes may meet without their silhouettes meeting.
+        # Adjacent members within each independent group intersect. Other
+        # bounding boxes may meet without their native silhouettes meeting.
         for i, original in enumerate(order):
             objects[i+1]['behind_all'] = [j+1 for j in range(i+1, count)
-                                         if abs(order[j]-original) == 1]
+                                         if abs(order[j]-original) == 1
+                                         and (not groups or order[j]//2 == original//2)]
         end = 'x2="0%" y2="100%"' if axis else 'x2="100%" y2="0%"'
         defs = f'<defs><linearGradient id="fixture" {end}><stop stop-color="#bbd9eb"/><stop offset="1" stop-color="#6198b3"/></linearGradient></defs>'
         svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">{defs}<rect width="{width}" height="{height}" fill="white"/>'+''.join(shapes)+'</svg>'
@@ -75,7 +88,10 @@ def make_cases(seed=486213, *, rounded=False, outlined=False, children=None, rep
                        f'Der äussere Kreis hat einen {"vertikalen" if axis else "horizontalen"} Farbverlauf. '
                        'Die inneren Formen liegen innerhalb des äusseren Kreises und überlappen sich teilweise. '
                        'Keine Beschriftung.')
-        cases.append(dict(case_id=f'{"multi"+str(children)+"_" if children else ""}{"rounded_" if rounded else ""}mixed_overlap_{index:02d}',
+        if groups:
+            description = description.replace('und überlappen sich teilweise',
+                f'und bilden {groups} getrennte Gruppen mit teilweisen Überdeckungen')
+        cases.append(dict(case_id=f'{"groups"+str(groups)+"_" if groups else ""}{"multi"+str(children)+"_" if children else ""}{"rounded_" if rounded else ""}mixed_overlap_{index:02d}',
                           width=width, height=height, svg=svg, description=description,
                           expected_objects=objects))
     if outlined:
@@ -104,9 +120,9 @@ def make_cases(seed=486213, *, rounded=False, outlined=False, children=None, rep
 
 
 def make_variation_cases(seed=486213, *, rounded=False, outlined=False, children=None, repeat_fill=False,
-                         same_fill=False):
+                         same_fill=False, groups=None):
     source = make_cases(seed, rounded=rounded, outlined=outlined, children=children,
-                        repeat_fill=repeat_fill, same_fill=same_fill)[3]
+                        repeat_fill=repeat_fill, same_fill=same_fill, groups=groups)[3]
     cases = [make_original_case(source['svg'], source['description']),
              *make_variations(source['svg'], source['description'], seed)]
     for case in cases:
@@ -130,6 +146,7 @@ def main():
     parser.add_argument('--rounded', action='store_true')
     parser.add_argument('--outlines', action='store_true')
     parser.add_argument('--children', type=int, choices=range(2, 9))
+    parser.add_argument('--groups', type=int, choices=(2, 3, 4))
     parser.add_argument('--repeat-fill', action='store_true')
     parser.add_argument('--same-fill', action='store_true')
     parser.add_argument('--variations', action='store_true')
@@ -143,13 +160,14 @@ def main():
     if args.prepare:
         cases = (make_variation_cases if args.variations else make_cases)(
             args.seed, rounded=args.rounded, outlined=args.outlines, children=args.children,
-            repeat_fill=args.repeat_fill, same_fill=args.same_fill)
+            repeat_fill=args.repeat_fill, same_fill=args.same_fill, groups=args.groups)
         args.prepare.mkdir(parents=True, exist_ok=False)
         write_cases(cases, args.prepare)
         (args.prepare/'manifest.json').write_text(json.dumps(cases, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
         (args.prepare/'generation.json').write_text(json.dumps(dict(seed=args.seed, rounded=args.rounded, outlines=args.outlines,
                                                                   variations=args.variations, children=args.children,
-                                                                  repeat_fill=args.repeat_fill, same_fill=args.same_fill), indent=2)+'\n', encoding='utf-8')
+                                                                  repeat_fill=args.repeat_fill, same_fill=args.same_fill,
+                                                                  groups=args.groups), indent=2)+'\n', encoding='utf-8')
         return 0
     if not args.inputs or not args.output:
         parser.error('--inputs and --output required')

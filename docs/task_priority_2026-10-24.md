@@ -105,6 +105,16 @@ aus. [Nachweis und Grenzen](../artifacts/evaluation/axial_panel_issue_v1/README.
 
 ## Bearbeitung des höchsten Rangs
 
+Nachtrag 28.10.2026: Der Branch `codex/search-structure-composition-2026-10-28`
+verbindet mehrere getrennte Überdeckungsgruppen im gemeinsamen Szenenweg.
+Zwölf identische synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12;
+Zusatzkohorten bestehen 12/12 und 12/12, Varianten 14/17 mit offener
+Bildrandgrenze. [Umsetzung und Grenzen](next_arbeitspaket_2026-10-28_overlap_groups.md).
+Die vom Nutzer anschließend gezeigte T-Verschiebung bei AC0721 ist als
+[SVG-TEXT-BASELINE-01](known_issue_2026-10-28_svg_text_baseline.md) mit zwei
+Renderern reproduziert. Sie rückt nach der bestehenden Regel für reproduzierte
+Fehler vor; ihre Korrektur ist noch offen. SEARCH-STRUCTURE-01 bleibt insgesamt offen.
+
 Nachtrag 27.10.2026: Der separate Branch
 `codex/search-structure-thin-depth-evidence-2026-10-27` bearbeitet die zuletzt
 dokumentierte Grenze dünner Kontur-Tiefenbelege. Geometrische Flächenabtastung

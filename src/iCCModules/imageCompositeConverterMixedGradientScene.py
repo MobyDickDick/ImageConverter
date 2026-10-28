@@ -59,11 +59,23 @@ def scene_contract(description):
                 else 'die rechtecke liegen innerhalb des kreises')
     layout_axis = None
     overlap = relation+' und überlappen sich teilweise' in text
+    group_matches = list(re.finditer(re.escape(relation)+
+        r' und bilden (2|3|4|zwei|drei|vier) getrennte gruppen mit teilweisen überdeckungen', text))
+    overlap_groups = 1
+    if group_matches:
+        if len(group_matches) != 1 or overlap:
+            return None
+        number = group_matches[0][1]
+        overlap_groups = int(number) if number.isdigit() else NUMBERS[number]
+        if sum(counts.values())-1 < 2*overlap_groups:
+            return None  # Every claimed group needs an overlapping pair.
+        overlap = True
     if sum(counts.values()) > 2:
         layouts = [name for name in ('nebeneinander', 'untereinander', 'voneinander')
                    if relation+' und getrennt '+name in text]
         if overlap and not layouts:
-            relation += ' und überlappen sich teilweise'
+            relation = (group_matches[0][0] if group_matches else
+                        relation+' und überlappen sich teilweise')
         elif len(layouts) != 1 or overlap:
             return None
         else:
@@ -101,6 +113,7 @@ def scene_contract(description):
         return None
     return dict(count=sum(counts.values()), axis=0 if direction[0] == 'horizontal' else 1,
                 outlined=outlined, layout_axis=layout_axis, rounded=rounded, overlap=overlap,
+                overlap_groups=overlap_groups,
                 children={kind: number for kind, number in
                           (('circle', counts['circle']-1), ('rectangle', counts['rectangle'])) if number})
 
@@ -963,6 +976,45 @@ def observed_painter_order(pixels, objects):
     return [objects[0], *(children[i] for i in order)]
 
 
+def _overlap_groups_match(scene, neighbours, expected):
+    """Require the stated connected groups, each with observed overlap.
+
+    Native rims of different groups must remain separated as well. Expanded
+    silhouettes conservatively retain a one-pixel uncertainty gap; bounding
+    boxes only limit the work and never establish a group or separation.
+    """
+    remaining = set(neighbours)
+    groups = []
+    while remaining:
+        reached, pending = set(), [min(remaining)]
+        while pending:
+            node = pending.pop()
+            if node not in reached:
+                reached.add(node)
+                pending.extend(neighbours[node]-reached)
+        if len(reached) < 2:
+            return False
+        groups.append(reached)
+        remaining -= reached
+    if len(groups) != expected:
+        return False
+    for index, group in enumerate(groups):
+        for other in groups[index+1:]:
+            for i in group:
+                for j in other:
+                    a, b = scene[i]['geometry'], scene[j]['geometry']
+                    left, top = np.floor(np.maximum(a[:2]-a[4]/2, b[:2]-b[4]/2)-1).astype(int)
+                    right, bottom = np.ceil(np.minimum(a[:2]+a[2:4]+a[4]/2,
+                                                      b[:2]+b[2:4]+b[4]/2)+1).astype(int)
+                    if right <= left or bottom <= top:
+                        continue
+                    yy, xx = np.mgrid[top:bottom, left:right].astype(float)+.5
+                    if np.any(_native_fill_mask(scene[i], xx, yy, -a[4]-1.)
+                              & _native_fill_mask(scene[j], xx, yy, -b[4]-1.)):
+                        return False
+    return True
+
+
 def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, error_fn):
     contract = scene_contract(description)
     pixels = np.asarray(image)
@@ -973,7 +1025,7 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
     session = current_search()
     rejection_scope = (raster_identity(pixels), tuple(sorted(contract['children'].items())),
                        contract['axis'], contract['outlined'], contract['layout_axis'], contract['rounded'],
-                       contract.get('overlap', False))
+                       contract.get('overlap', False), contract['overlap_groups'])
     rejected = session.structure_rejections.setdefault(rejection_scope, {}) if session else {}
 
     def register(objects, attempt):
@@ -1014,7 +1066,8 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
         objects = detect_instances(pixels, contract, residual_threshold=threshold)
         ordering = 'bounded_agenda'
         if objects is not None:
-            if contract.get('overlap') and (len(objects) > 5 or contract['children'].get('circle')):
+            if contract.get('overlap') and (len(objects) > 5 or contract['children'].get('circle')
+                                          or contract['overlap_groups'] > 1):
                 ordered = observed_painter_order(pixels, objects)
                 if ordered is not None:
                     objects = ordered
@@ -1230,10 +1283,11 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                     right, bottom = np.floor(np.minimum(a[:2]+a[2:4], b[:2]+b[2:4])-1).astype(int)
                     if right-left < 2 or bottom-top < 2:
                         continue
-                    mixed_primitives = bool(contract['children'].get('circle'))
+                    native_silhouettes = (bool(contract['children'].get('circle'))
+                                          or contract.get('overlap_groups', 1) > 1)
                     yy, xx = np.mgrid[top:bottom, left:right]
                     visible = np.ones((bottom-top, right-left), dtype=bool)
-                    if mixed_primitives:
+                    if native_silhouettes:
                         # Bounding boxes of circles may intersect outside
                         # their actual fills. Only native silhouette pixels
                         # can establish a depth edge or supply front paint.
@@ -1247,7 +1301,7 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                     # boundary. It cannot serve as evidence for this pair.
                     for later in scene[j+1:]:
                         x, y, w, h, sw = later['geometry']
-                        if mixed_primitives:
+                        if native_silhouettes:
                             visible &= ~_native_fill_mask(later, xx+.5, yy+.5, -sw-1.)
                         else:
                             visible &= ~((xx+.5 >= x-sw/2-1) & (xx+.5 <= x+w+sw/2+1)
@@ -1264,14 +1318,8 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                     error = np.max(abs(pixels[top:bottom, left:right].astype(float)-front), axis=2)
                     if np.percentile(error[visible], 80) > 12:
                         return False
-            reached, pending = set(), [1]
-            while pending:
-                node = pending.pop()
-                if node not in reached:
-                    reached.add(node)
-                    pending.extend(neighbours[node]-reached)
-            if len(reached) != n-1:
-                return False  # Every claimed overlapping child participates.
+            if not _overlap_groups_match(scene, neighbours, contract.get('overlap_groups', 1)):
+                return False
         # Every other pair must be disjoint, in any arrangement. An explicitly
         # named row/column imposes its stronger interval-separation rule.
         for i, a in enumerate([] if contract.get('overlap') else scene[1:]):
