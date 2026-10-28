@@ -283,6 +283,8 @@ def generateBadgeSvgImpl(
         elements.append(f'    <ellipse cx="25" cy="25.153" rx="2.5" ry="2.500001" fill="{head_hub_fill}" stroke="{head_stroke}" stroke-width="1"/>')
         elements.append("  </g>")
 
+    # All fitted y coordinates below are alphabetic baselines, including the
+    # CO2 subscript. Keep that convention explicit across SVG renderers.
     if p.get("draw_text", True):
         if p.get("text_mode") == "path_t":
             elements.append(
@@ -302,7 +304,7 @@ def generateBadgeSvgImpl(
                 (
                     f'  <text x="{float(layout["co_x"]):.4f}" y="{y_text:.4f}" fill="{grayhex_fn(p["text_gray"])}" '
                     f'font-family="Arial, Helvetica, sans-serif" font-size="{font_size:.4f}px" '
-                    f'font-style="normal" font-weight="600" text-anchor="middle" dominant-baseline="middle" '
+                    f'font-style="normal" font-weight="600" text-anchor="middle" dominant-baseline="alphabetic" '
                     f'transform="translate({float(layout["co_x"]):.4f} {y_text:.4f}) scale({width_scale:.4f} 1) '
                     f'translate({-float(layout["co_x"]):.4f} {-y_text:.4f})">CO</text>'
                 )
@@ -311,7 +313,7 @@ def generateBadgeSvgImpl(
                 (
                     f'  <text x="{float(layout["subscript_x"]):.4f}" y="{float(layout["subscript_y"]):.4f}" fill="{grayhex_fn(p["text_gray"])}" '
                     f'font-family="Arial, Helvetica, sans-serif" font-size="{float(layout["sub_font_px"]):.4f}px" '
-                    f'font-style="normal" font-weight="600" text-anchor="start" dominant-baseline="middle" '
+                    f'font-style="normal" font-weight="600" text-anchor="start" dominant-baseline="alphabetic" '
                     f'transform="translate({float(layout["subscript_x"]):.4f} {float(layout["subscript_y"]):.4f}) scale({width_scale:.4f} 1) '
                     f'translate({-float(layout["subscript_x"]):.4f} {-float(layout["subscript_y"]):.4f})">2</text>'
                 )
@@ -326,7 +328,7 @@ def generateBadgeSvgImpl(
                     f'  <text x="{p["cx"]:.4f}" y="{(p["cy"] + voc_dy):.4f}" fill="{grayhex_fn(p["text_gray"])}" '
                     f'font-family="Arial, Helvetica, sans-serif" font-size="{font_size:.4f}px" '
                     f'font-style="normal" font-weight="{voc_weight}" letter-spacing="0.01em" '
-                    f'text-anchor="middle" dominant-baseline="middle">VOC</text>'
+                    f'text-anchor="middle" dominant-baseline="alphabetic">VOC</text>'
                 )
             )
         elif p.get("text_mode") == "rf":
@@ -340,7 +342,7 @@ def generateBadgeSvgImpl(
                     f'  <text x="{p["cx"]:.4f}" y="{(p["cy"] + rf_dy):.4f}" fill="{grayhex_fn(p["text_gray"])}" '
                     f'font-family="Arial, Helvetica, sans-serif" font-size="{font_size:.4f}px" '
                     f'font-style="normal" font-weight="{rf_weight}" letter-spacing="0.00em" '
-                    f'text-anchor="middle" dominant-baseline="middle">{rf_label}</text>'
+                    f'text-anchor="middle" dominant-baseline="alphabetic">{rf_label}</text>'
                 )
             )
         else:

@@ -1,0 +1,35 @@
+{
+  "schema_version": "svg_text_baseline_migration_v1",
+  "archive_migrations": [
+    {
+      "variant": "AC0721_1_L",
+      "before_sha256": "2317410ef4ad0ed00147055bd7964da45542d886af9fe0e09e3669c1f44ca25c",
+      "after_sha256": "5bb514df416306c9f65ac47819a3ae5e3d62ac6719d10fc9bd0f1213b765fcb7"
+    },
+    {
+      "variant": "AC0721_1_M",
+      "before_sha256": "949f4928a748debb32006a4c7e4601913f142701113d3eb82e8582b0bb1a071e",
+      "after_sha256": "395ce26625960072facb80abc3cc12ff14076f0f51540a382c99f5a38add650a"
+    },
+    {
+      "variant": "AC0721_1_S",
+      "before_sha256": "554c54dd701f38cf0ea50d69f5309aff5ad59a482c97274c6bdf1b3c71cf8ef6",
+      "after_sha256": "430cca24f5a5c0e41fa56ae550d0b700db024e3818e5be9d6d25f4fd34157f1c"
+    },
+    {
+      "variant": "AC0721_L",
+      "before_sha256": "26ac4638a0f42d3b39627cf95d1b17cbabbc18885b934edb4eb04cf5b3e642a1",
+      "after_sha256": "03c0001f2bc2291accfe3e1d48a458b45e73c6f07c178443c185301aa451ea7f"
+    },
+    {
+      "variant": "AC0721_M",
+      "before_sha256": "e41b780a5d229b5c57769483ca63aa09cf7dcb81488e00d5d0a734bf6c0a25bf",
+      "after_sha256": "1fb19c81ea690b7cd4fd78c035f4c4974293b027c7043f82e4b4dc34883e6fb4"
+    },
+    {
+      "variant": "AC0721_S",
+      "before_sha256": "b302b101a29852990e9cb0f6955d7f0db961c31e94f251eed47563a8a5fe7bf9",
+      "after_sha256": "480e2b0358bdef7e3068eaa07991966379d8654303e003b0017465d9356cdb63"
+    }
+  ]
+}

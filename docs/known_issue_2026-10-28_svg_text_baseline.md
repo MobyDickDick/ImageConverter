@@ -1,5 +1,11 @@
 # AC0721: Textprüfung und sichtbare SVG-Darstellung widersprechen sich
 
+**Korrektur abgeschlossen:** Alle nativen Textausgaben verwenden jetzt eine
+explizite alphabetische Baseline; sechs AC0721-CLI-Ausgaben und reparierte
+Archivpaare sind mit librsvg und tatsächlichen Glyphengrenzen geprüft.
+[Umsetzung und verbleibende Bestandsgrenzen](next_arbeitspaket_2026-10-28_svg_text_baseline.md).
+Der folgende Diagnosebefund beschreibt den ursprünglichen Stand.
+
 Am 28.10.2026 anhand der vom Nutzer gezeigten Original-/Ausgabebilder und
 des bestehenden Archiv-SVGs `AC0721_1_L.svg` reproduziert. Reiner Diagnosebefund;
 der Branch `codex/search-structure-composition-2026-10-28` ändert diesen

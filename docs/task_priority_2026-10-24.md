@@ -105,6 +105,13 @@ aus. [Nachweis und Grenzen](../artifacts/evaluation/axial_panel_issue_v1/README.
 
 ## Bearbeitung des höchsten Rangs
 
+Nachtrag 28.10.2026: SVG-TEXT-BASELINE-01 ist für die neuen Textausgaben und
+sechs AC0721-Archivpaare abgeschlossen. Echte CLI und unabhängige librsvg-Abnahme
+bestehen 6/6; die separate interne Plan-B-Prüfung bleibt wegen des bekannten
+AC0721_L-IoU-Folgepunkts 5/6. Das 60er-Textinventar begründet
+ARCHIVE-TEXT-REVALIDATION in Gruppe 4/P2. SEARCH-STRUCTURE-01 bleibt die nächste
+übergeordnete P0-Aufgabe. [Nachweise und Grenzen](next_arbeitspaket_2026-10-28_svg_text_baseline.md).
+
 Nachtrag 28.10.2026: Der Branch `codex/search-structure-composition-2026-10-28`
 verbindet mehrere getrennte Überdeckungsgruppen im gemeinsamen Szenenweg.
 Zwölf identische synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12;
@@ -113,7 +120,8 @@ Bildrandgrenze. [Umsetzung und Grenzen](next_arbeitspaket_2026-10-28_overlap_gro
 Die vom Nutzer anschließend gezeigte T-Verschiebung bei AC0721 ist als
 [SVG-TEXT-BASELINE-01](known_issue_2026-10-28_svg_text_baseline.md) mit zwei
 Renderern reproduziert. Sie rückt nach der bestehenden Regel für reproduzierte
-Fehler vor; ihre Korrektur ist noch offen. SEARCH-STRUCTURE-01 bleibt insgesamt offen.
+Fehler vor; die inzwischen erfolgte Korrektur ist im obigen Nachtrag verlinkt.
+SEARCH-STRUCTURE-01 bleibt insgesamt offen.
 
 Nachtrag 27.10.2026: Der separate Branch
 `codex/search-structure-thin-depth-evidence-2026-10-27` bearbeitet die zuletzt

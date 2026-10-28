@@ -1,0 +1,145 @@
+{
+  "schema_version": "svg_text_baseline_cli_compact_v1",
+  "renderer": "rsvg-convert version 2.62.3\n\nlibraries used:\n  cairo 1.18.4\n  pango 1.57.1\n  harfbuzz 14.2.1",
+  "summary": {
+    "cases": 6,
+    "independent_passed": 6,
+    "production_plan_b_passed": 5
+  },
+  "regular_satisfaction_gate": {
+    "baseline_sha256": "7ef108aeb8bdb8036c1539a134ca3a5c1644d0f471749a7e2f617ca7de89192a",
+    "provenance": {
+      "baseline_kind": "fresh_original_description_cli",
+      "commit": "531a28ac998fc6c2dbebac639c19650862f3561d",
+      "execution_mode": "semantic-only",
+      "input_hashes": {
+        "anonymous_square_00": "07afeeb295ecce0596745dcd4d0de5b51e5528f175b92ef74b552cd8a070a4ce",
+        "anonymous_square_01": "303322d79a15df0a62ff69448dd967ad147ffd57a9e105b6821b9633a5d9ce8e",
+        "anonymous_square_02": "bb4c6836db304a40c042c10e0c4438d1c1e92a3924ba528482d1f52f83d92271",
+        "anonymous_square_03": "63ed5447dd54aba7d66aa341bedbd5a32f48a91420237a94b3ab4d05296ade44",
+        "anonymous_square_04": "fc5d948de62597e8c7eb5f3105397a88898991e785841a17ad8232213cd9fb0e",
+        "anonymous_square_05": "476d33250c0cb371734a844d18251d32497a02c762d16cb431638a6362fca936"
+      },
+      "seed": 0,
+      "toolchain": {
+        "numpy": "2.2.6",
+        "opencv": "4.14.0",
+        "pymupdf": "1.26.7",
+        "python": "3.10.11"
+      }
+    },
+    "schema_version": "semantic_only_satisfaction_report_v1",
+    "summary": {
+      "case_count": 6,
+      "improved": 6,
+      "satisfactory": 6,
+      "technically_completed": 6
+    },
+    "gate_definitions": {
+      "good_solution_gate": {
+        "decision_tier": "all",
+        "metric_hierarchy": {
+          "primary": [
+            "semantic_score",
+            "dimension_match"
+          ],
+          "secondary": [
+            "error_per_pixel"
+          ]
+        },
+        "reachability": null,
+        "reasons": [
+          "all_thresholds_satisfied"
+        ],
+        "schema_version": "good_solution_gate_v1",
+        "status": "good",
+        "thresholds": {
+          "max_error_per_pixel": 0.05,
+          "min_dimension_match": 0.99,
+          "min_semantic_score": 0.85
+        }
+      },
+      "quality_complexity_gate": {
+        "failures": [],
+        "passed": true,
+        "thresholds": {
+          "max_path_command_count": 160,
+          "max_path_complexity_ratio": 4.0,
+          "max_svg_element_count": 80,
+          "min_combined_score": 0.78,
+          "min_edge_alignment": 0.72,
+          "min_pixel_similarity": 0.78,
+          "min_semantic_score": 0.85,
+          "min_structure_score": 0.72
+        }
+      }
+    }
+  },
+  "reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "validation": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_svg_text_baseline.py tests/test_satisfactory_archive.py tests/test_labeled_t_square_runtime.py tests/test_labeled_square_runtime.py tests/test_right_stem_labeled_square_runtime.py tests/test_left_stem_labeled_square_runtime.py tests/test_labeled_disk_runtime.py tests/test_short_label_disk_runtime.py tests/detailtests/test_semantic_badge_svg_helpers.py tests/detailtests/test_semantic_badge_runtime_helpers.py tests/detailtests/test_geometry_ir_helpers.py tests/test_perception_geometry_ir_roundtrip.py -q",
+      "exit_code": 0,
+      "passed": 341,
+      "skipped": 1
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.run_pytest_profile core-green",
+      "exit_code": 0,
+      "passed": 42
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/detailtests/test_semantic_badge_svg_helpers.py -q",
+      "exit_code": 0,
+      "passed": 11
+    }
+  ],
+  "runtime_sha256": {
+    "src/iCCModules/imageCompositeConverterGeometryIr/runtime.py": "0140c64ea1a859db4c4b5cb0e5cd5b08296a5f0ecc1b16a71ec0852850b63ddc",
+    "src/iCCModules/imageCompositeConverterSemanticBadgeSvg.py": "65be766f194b4e39e0456de8e679fe553cd26a05283be9eb764e3ea937035176",
+    "tools/evaluate_labeled_square_recheck.py": "20f00abe135dcc01d47a114af9d9ec6cbc27beede08b02b9c52a16dcbd6af485",
+    "tools/evaluate_svg_text_baseline.py": "e4c1c876bb72dd2f510d8cd3709a745b5a0dc6b44fc2962a963c0c526f0ced0c",
+    "tools/refresh_satisfactory_archive.py": "82cae0ff3daba4e3699a34aa7b6b831d153f9e38a6878ceaed7b03888021ab26",
+    "tools/run_plan_b_variations.py": "523c950d53257409ea84553a2fdeef0c5ed0f91ffde014bf431621078f4a3302"
+  },
+  "base_commit": "ee2b3acfcaa4712aed540cbc72ae49e349ca0a92",
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "complexity": {
+    "parse_error": null,
+    "embedded_raster_count": 0,
+    "vector_element_count": 3,
+    "path_count": 1,
+    "path_command_count": 2,
+    "path_complexity_ratio": 0.6667
+  },
+  "regular_satisfaction_cases": [
+    {"after":{"dimension_match":1.0,"edge_alignment":0.9140672087669373,"error_per_pixel":0.002467823529662069,"object_mask_iou":0.9953271028037384,"semantic_score":1.0},"before":{"dimension_match":1.0,"edge_alignment":0.718242883682251,"error_per_pixel":0.01682831698345188,"object_mask_iou":0.9594594594594594,"semantic_score":0.0},"case_id":"anonymous_square_00","good_solution_gate":{"metrics":{"dimension_match":1.0,"error_per_pixel":0.002467823529662069,"semantic_score":1.0}},"hard_rejections":[],"improved":true,"improved_metrics":["edge_alignment","error_per_pixel","object_mask_iou","semantic_score"],"metric_classification":{"dimension_match":"unchanged","edge_alignment":"improved","error_per_pixel":"improved","object_mask_iou":"improved","semantic_score":"improved"},"quality_complexity_gate":{"complexity":{"embedded_raster_count":0,"parse_error":null,"path_command_count":2,"path_complexity_ratio":0.6667,"path_count":1,"vector_element_count":3},"metrics":{"combined_score":0.9767,"edge_alignment":0.9141,"pixel_similarity":0.9975,"semantic_score":1.0,"structure_score":0.9953}},"regressed_metrics":[],"satisfactory":true,"technically_completed":true},
+    {"after":{"dimension_match":1.0,"edge_alignment":0.988836944103241,"error_per_pixel":0.0043906712437323785,"object_mask_iou":0.8939393939393939,"semantic_score":1.0},"before":{"dimension_match":1.0,"edge_alignment":0.7719466090202332,"error_per_pixel":0.017804561596901834,"object_mask_iou":0.8613251155624037,"semantic_score":0.0},"case_id":"anonymous_square_01","good_solution_gate":{"metrics":{"dimension_match":1.0,"error_per_pixel":0.0043906712437323785,"semantic_score":1.0}},"hard_rejections":[],"improved":true,"improved_metrics":["edge_alignment","error_per_pixel","object_mask_iou","semantic_score"],"metric_classification":{"dimension_match":"unchanged","edge_alignment":"improved","error_per_pixel":"improved","object_mask_iou":"improved","semantic_score":"improved"},"quality_complexity_gate":{"complexity":{"embedded_raster_count":0,"parse_error":null,"path_command_count":2,"path_complexity_ratio":0.6667,"path_count":1,"vector_element_count":3},"metrics":{"combined_score":0.9696,"edge_alignment":0.9888,"pixel_similarity":0.9956,"semantic_score":1.0,"structure_score":0.8939}},"regressed_metrics":[],"satisfactory":true,"technically_completed":true},
+    {"after":{"dimension_match":1.0,"edge_alignment":0.9540108442306519,"error_per_pixel":0.0027444757199754904,"object_mask_iou":0.9947643979057592,"semantic_score":1.0},"before":{"dimension_match":1.0,"edge_alignment":0.8314294219017029,"error_per_pixel":0.015961128732538767,"object_mask_iou":0.9408866995073891,"semantic_score":0.0},"case_id":"anonymous_square_02","good_solution_gate":{"metrics":{"dimension_match":1.0,"error_per_pixel":0.0027444757199754904,"semantic_score":1.0}},"hard_rejections":[],"improved":true,"improved_metrics":["edge_alignment","error_per_pixel","object_mask_iou","semantic_score"],"metric_classification":{"dimension_match":"unchanged","edge_alignment":"improved","error_per_pixel":"improved","object_mask_iou":"improved","semantic_score":"improved"},"quality_complexity_gate":{"complexity":{"embedded_raster_count":0,"parse_error":null,"path_command_count":2,"path_complexity_ratio":0.6667,"path_count":1,"vector_element_count":3},"metrics":{"combined_score":0.9865,"edge_alignment":0.954,"pixel_similarity":0.9973,"semantic_score":1.0,"structure_score":0.9948}},"regressed_metrics":[],"satisfactory":true,"technically_completed":true},
+    {"after":{"dimension_match":1.0,"edge_alignment":0.7650896906852722,"error_per_pixel":0.006698004773804947,"object_mask_iou":0.8984375,"semantic_score":1.0},"before":{"dimension_match":1.0,"edge_alignment":0.4602658152580261,"error_per_pixel":0.03445293727172241,"object_mask_iou":0.21453287197231835,"semantic_score":0.0},"case_id":"anonymous_square_03","good_solution_gate":{"metrics":{"dimension_match":1.0,"error_per_pixel":0.006698004773804947,"semantic_score":1.0}},"hard_rejections":[],"improved":true,"improved_metrics":["edge_alignment","error_per_pixel","object_mask_iou","semantic_score"],"metric_classification":{"dimension_match":"unchanged","edge_alignment":"improved","error_per_pixel":"improved","object_mask_iou":"improved","semantic_score":"improved"},"quality_complexity_gate":{"complexity":{"embedded_raster_count":0,"parse_error":null,"path_command_count":2,"path_complexity_ratio":0.6667,"path_count":1,"vector_element_count":3},"metrics":{"combined_score":0.9142,"edge_alignment":0.7651,"pixel_similarity":0.9933,"semantic_score":1.0,"structure_score":0.8984}},"regressed_metrics":[],"satisfactory":true,"technically_completed":true},
+    {"after":{"dimension_match":1.0,"edge_alignment":0.791628360748291,"error_per_pixel":0.001997100036143951,"object_mask_iou":0.8431372549019608,"semantic_score":1.0},"before":{"dimension_match":1.0,"edge_alignment":0.43265366554260254,"error_per_pixel":0.03343145765250544,"object_mask_iou":0.18134715025906736,"semantic_score":0.0},"case_id":"anonymous_square_04","good_solution_gate":{"metrics":{"dimension_match":1.0,"error_per_pixel":0.001997100036143951,"semantic_score":1.0}},"hard_rejections":[],"improved":true,"improved_metrics":["edge_alignment","error_per_pixel","object_mask_iou","semantic_score"],"metric_classification":{"dimension_match":"unchanged","edge_alignment":"improved","error_per_pixel":"improved","object_mask_iou":"improved","semantic_score":"improved"},"quality_complexity_gate":{"complexity":{"embedded_raster_count":0,"parse_error":null,"path_command_count":2,"path_complexity_ratio":0.6667,"path_count":1,"vector_element_count":3},"metrics":{"combined_score":0.9082,"edge_alignment":0.7916,"pixel_similarity":0.998,"semantic_score":1.0,"structure_score":0.8431}},"regressed_metrics":[],"satisfactory":true,"technically_completed":true},
+    {"after":{"dimension_match":1.0,"edge_alignment":0.7605592608451843,"error_per_pixel":0.002776573187996604,"object_mask_iou":0.8556701030927835,"semantic_score":1.0},"before":{"dimension_match":1.0,"edge_alignment":0.5480256080627441,"error_per_pixel":0.031101459374599513,"object_mask_iou":0.33653846153846156,"semantic_score":0.0},"case_id":"anonymous_square_05","good_solution_gate":{"metrics":{"dimension_match":1.0,"error_per_pixel":0.002776573187996604,"semantic_score":1.0}},"hard_rejections":[],"improved":true,"improved_metrics":["edge_alignment","error_per_pixel","object_mask_iou","semantic_score"],"metric_classification":{"dimension_match":"unchanged","edge_alignment":"improved","error_per_pixel":"improved","object_mask_iou":"improved","semantic_score":"improved"},"quality_complexity_gate":{"complexity":{"embedded_raster_count":0,"parse_error":null,"path_command_count":2,"path_complexity_ratio":0.6667,"path_count":1,"vector_element_count":3},"metrics":{"combined_score":0.9034,"edge_alignment":0.7606,"pixel_similarity":0.9972,"semantic_score":1.0,"structure_score":0.8557}},"regressed_metrics":[],"satisfactory":true,"technically_completed":true}
+  ],
+  "cases": [
+    {"case_id":"anonymous_square_00","source":"AC0721_1_S.jpg","input_sha256":"07afeeb295ecce0596745dcd4d0de5b51e5528f175b92ef74b552cd8a070a4ce","svg_sha256":"430cca24f5a5c0e41fa56ae550d0b700db024e3818e5be9d6d25f4fd34157f1c","semantic":true,"production":{"quality":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.0024678236804902554,"foreground_mse":0.002704542363062501,"edge_alignment":0.9140672087669373,"foreground_iou":0.9579579579579579}},"glyph":{"passed":true,"observed_bounds":[4.0,4.0,11.0,12.0],"rendered_bounds":[4.375,4.125,10.625,12.0],"max_bound_error":0.375,"tolerance_pixels":1.5}},"independent":{"quality":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.002799729583784938,"foreground_mse":0.003079188521951437,"edge_alignment":0.9082378149032593,"foreground_iou":0.9579579579579579}},"glyph":{"passed":true,"observed_bounds":[4.0,4.0,11.0,12.0],"rendered_bounds":[4.375,4.375,10.625,12.0],"max_bound_error":0.375,"tolerance_pixels":1.5}},"passed":true},
+    {"case_id":"anonymous_square_01","source":"AC0721_1_L.jpg","input_sha256":"303322d79a15df0a62ff69448dd967ad147ffd57a9e105b6821b9633a5d9ce8e","svg_sha256":"5bb514df416306c9f65ac47819a3ae5e3d62ac6719d10fc9bd0f1213b765fcb7","semantic":true,"production":{"quality":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.0043906718492507935,"foreground_mse":0.007180326152592897,"edge_alignment":0.988836944103241,"foreground_iou":0.9640718562874252}},"glyph":{"passed":true,"observed_bounds":[7.0,10.0,18.0,24.0],"rendered_bounds":[7.0,9.75,18.0,23.5],"max_bound_error":0.5,"tolerance_pixels":1.5}},"independent":{"quality":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.004505923017859459,"foreground_mse":0.007377379108220339,"edge_alignment":0.988836944103241,"foreground_iou":0.9670658682634731}},"glyph":{"passed":true,"observed_bounds":[7.0,10.0,18.0,24.0],"rendered_bounds":[7.125,10.0,17.875,23.5],"max_bound_error":0.5,"tolerance_pixels":1.5}},"passed":true},
+    {"case_id":"anonymous_square_02","source":"AC0721_1_M.jpg","input_sha256":"bb4c6836db304a40c042c10e0c4438d1c1e92a3924ba528482d1f52f83d92271","svg_sha256":"395ce26625960072facb80abc3cc12ff14076f0f51540a382c99f5a38add650a","semantic":true,"production":{"quality":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.00274447537958622,"foreground_mse":0.0044914474710822105,"edge_alignment":0.9540108442306519,"foreground_iou":0.9882629107981221}},"glyph":{"passed":true,"observed_bounds":[5.0,7.0,14.0,18.0],"rendered_bounds":[5.625,7.25,14.25,18.0],"max_bound_error":0.625,"tolerance_pixels":1.5}},"independent":{"quality":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.003169081639498472,"foreground_mse":0.005164992529898882,"edge_alignment":0.9485801458358765,"foreground_iou":0.9882629107981221}},"glyph":{"passed":true,"observed_bounds":[5.0,7.0,14.0,18.0],"rendered_bounds":[5.75,7.5,14.25,18.0],"max_bound_error":0.75,"tolerance_pixels":1.5}},"passed":true},
+    {"case_id":"anonymous_square_03","source":"AC0721_L.jpg","input_sha256":"63ed5447dd54aba7d66aa341bedbd5a32f48a91420237a94b3ab4d05296ade44","svg_sha256":"03c0001f2bc2291accfe3e1d48a458b45e73c6f07c178443c185301aa451ea7f","semantic":true,"production":{"quality":{"satisfactory":false,"failures":["foreground_iou_outside_limit"],"metrics":{"normalized_mse":0.006698004901409149,"foreground_mse":0.023561615496873856,"edge_alignment":0.7650896906852722,"foreground_iou":0.799373040752351}},"glyph":{"passed":true,"observed_bounds":[7.0,10.0,18.0,23.0],"rendered_bounds":[7.0,9.75,18.0,23.5],"max_bound_error":0.5,"tolerance_pixels":1.5}},"independent":{"quality":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.006773572880774736,"foreground_mse":0.023828115314245224,"edge_alignment":0.8113105297088623,"foreground_iou":0.8620689655172413}},"glyph":{"passed":true,"observed_bounds":[7.0,10.0,18.0,23.0],"rendered_bounds":[7.125,10.0,17.875,23.5],"max_bound_error":0.5,"tolerance_pixels":1.5}},"passed":true},
+    {"case_id":"anonymous_square_04","source":"AC0721_M.jpg","input_sha256":"fc5d948de62597e8c7eb5f3105397a88898991e785841a17ad8232213cd9fb0e","svg_sha256":"1fb19c81ea690b7cd4fd78c035f4c4974293b027c7043f82e4b4dc34883e6fb4","semantic":true,"production":{"quality":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.00199709995649755,"foreground_mse":0.005639232229441404,"edge_alignment":0.791628360748291,"foreground_iou":0.8943089430894309}},"glyph":{"passed":true,"observed_bounds":[6.0,7.0,14.0,18.0],"rendered_bounds":[5.625,7.25,14.25,18.0],"max_bound_error":0.375,"tolerance_pixels":1.5}},"independent":{"quality":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.002319196006283164,"foreground_mse":0.006556327920407057,"edge_alignment":0.7886150479316711,"foreground_iou":0.8536585365853658}},"glyph":{"passed":true,"observed_bounds":[6.0,7.0,14.0,18.0],"rendered_bounds":[5.75,7.5,14.25,18.0],"max_bound_error":0.5,"tolerance_pixels":1.5}},"passed":true},
+    {"case_id":"anonymous_square_05","source":"AC0721_S.jpg","input_sha256":"476d33250c0cb371734a844d18251d32497a02c762d16cb431638a6362fca936","svg_sha256":"480e2b0358bdef7e3068eaa07991966379d8654303e003b0017465d9356cdb63","semantic":true,"production":{"quality":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.0027765731792896986,"foreground_mse":0.003967704717069864,"edge_alignment":0.7605592608451843,"foreground_iou":0.9074074074074074}},"glyph":{"passed":true,"observed_bounds":[4.0,4.0,11.0,12.0],"rendered_bounds":[4.375,4.125,10.625,12.0],"max_bound_error":0.375,"tolerance_pixels":1.5}},"independent":{"quality":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.002878400729969144,"foreground_mse":0.00418848916888237,"edge_alignment":0.7783677577972412,"foreground_iou":0.8796296296296297}},"glyph":{"passed":true,"observed_bounds":[4.0,4.0,11.0,12.0],"rendered_bounds":[4.375,4.375,10.625,12.0],"max_bound_error":0.375,"tolerance_pixels":1.5}},"passed":true}
+  ]
+}

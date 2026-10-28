@@ -38,7 +38,8 @@ def test_real_rasters_reproduce_accepted_vector_and_explicit_label(case):
     image = cv2.imread(str(PACKAGE / case['image']))
     svg = fit(image)
     assert labeled_square_semantics(svg, 'T') == 1
-    assert svg.replace('\r\n', '\n') == (PACKAGE / case['after_svg']).read_text(encoding='utf-8')
+    expected = (PACKAGE / case['after_svg']).read_text(encoding='utf-8')
+    assert svg.replace('\r\n', '\n') == expected.replace('dominant-baseline="middle"', 'dominant-baseline="alphabetic"')
 
 
 def synthetic(phase=0, scale=1, fill='#327aad', text='#f4eddf', label='T', stem_offset=0):
@@ -75,7 +76,8 @@ P_MANIFEST = json.loads((P_PACKAGE / 'manifest.json').read_text(encoding='utf-8'
 @pytest.mark.parametrize('case', P_MANIFEST['cases'], ids=lambda c: Path(c['image']).stem)
 def test_previously_accepted_labels_keep_their_exact_vector(case):
     image = cv2.imread(str(P_PACKAGE / case['image']))
-    assert fit(image, P_MANIFEST['description']) == (P_PACKAGE / case['after_svg']).read_text(encoding='utf-8')
+    expected = (P_PACKAGE / case['after_svg']).read_text(encoding='utf-8')
+    assert fit(image, P_MANIFEST['description']) == expected.replace('dominant-baseline="middle"', 'dominant-baseline="alphabetic"')
 
 
 @pytest.mark.parametrize('label, offset', [('', 0), ('T', 12)])

@@ -23,6 +23,26 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def archived_svg_bytes(root: Path, source: Path) -> bytes:
+    """Replay only hash-pinned, independently checked historical baseline repairs.
+
+    Original acceptance sources and their hashes remain unchanged. An authored
+    middle baseline in any other SVG must never be normalized automatically.
+    """
+    data = source.read_bytes()
+    manifest = root/'artifacts/evaluation/svg_text_baseline_v1/manifest.json'
+    if not manifest.exists():
+        return data
+    migrations = json.loads(manifest.read_text(encoding='utf-8'))['archive_migrations']
+    for case in migrations:
+        if hashlib.sha256(data).hexdigest() == case['before_sha256']:
+            corrected = data.replace(b'dominant-baseline="middle"', b'dominant-baseline="alphabetic"')
+            if hashlib.sha256(corrected).hexdigest() != case['after_sha256']:
+                raise ValueError('Baseline migration hash mismatch')
+            return corrected
+    return data
+
+
 def _identified_cases(rows):
     """Other evaluation schemas need not use the archive's case identifiers."""
     if isinstance(rows, list):
@@ -132,7 +152,7 @@ def refresh(root: Path = ROOT, output: Path | None = None) -> dict:
         image_target=output/'images'/image.name
         svg_target=output/'svgs'/(variant+'.svg')
         shutil.copyfile(image,image_target)
-        shutil.copyfile(svg,svg_target)
+        svg_target.write_bytes(archived_svg_bytes(root, svg))
         records.append({**row,'image':image_target.relative_to(output).as_posix(),
             'svg':svg_target.relative_to(output).as_posix(),'image_sha256':digest(image_target),
             'svg_sha256':digest(svg_target)})
