@@ -290,6 +290,50 @@ Fehlschläge in GitHub-Aufgaben zusammen. Das reguläre Plan-B-Paket
 
 ## Quick start
 
+### Kleine lokale GUI (wie bei Primitives)
+
+Unter Windows **`startWebServer.cmd` doppelklicken**. Das startet den lokalen
+Server mit der vorhandenen `.venv` und öffnet `http://127.0.0.1:8766` im Browser.
+Alternativ: `python -m src.imageConverterGui` (Abhängigkeiten aus
+`requirements-dev.txt`; Installation bei Bedarf mit `python -m pip install -r requirements-dev.txt`).
+Mit `--port 8767` lässt sich ein anderer Port wählen, mit `--no-browser`
+der automatische Browserstart unterdrücken. Beenden im Serverfenster mit Strg+C.
+
+1. Bild auswählen oder in das Uploadfeld ziehen (PNG, JPG, BMP, WebP oder TIFF;
+   maximal 25 MB / 20 Megapixel). EXIF-Drehung wird berücksichtigt, Transparenz
+   für die Konvertierung auf Weiss gelegt; die Vorschau zeigt diese Eingabe.
+2. Die Bildbeschreibung prüfen oder Formen, Farben und Anordnung kurz beschreiben.
+   Bei bekannten Dateinamen wird die vorhandene Katalogbeschreibung übernommen.
+3. Suchdauer wählen und **In SVG konvertieren** anklicken. Original und Ergebnis
+   erscheinen nebeneinander, mit gemeinsamer Vergrösserung. **Speichern unter …**
+   öffnet unter Windows den normalen Speicherdialog: Dateiname und Ordner sind
+   frei wählbar, als Vorschlag wird der ursprüngliche Bildname mit `.svg` verwendet.
+   Der Link **Browser-Download** bleibt zusätzlich verfügbar.
+
+Optional lässt sich unter **Sample-SVG** ein zuvor gespeichertes SVG hochladen
+(bis 2 MB, eigenständige SVG-Formen). **Sample weiter verbessern** verwendet es
+als Ausgangspunkt: vorhandene Geometrieparameter und Farben werden direkt am
+Original optimiert. Original, Sample und neues Ergebnis erscheinen nebeneinander.
+Die Suche übernimmt ausschliesslich Anpassungen, die den gemessenen Bildfehler
+verbessern; ohne messbaren Gewinn bleibt der Sample-Stand erhalten. Der Vergleich
+zeigt die Verbesserung in Prozent. Dieser zusätzliche Modus prüft die strengen
+Pixelgrenzen sowie explizite Beschreibungsbedingungen; die vorhandene Formstruktur
+bleibt erhalten. **Entfernen** wechselt zurück zur normalen Neukonvertierung.
+
+Ohne Sample verwendet die GUI die bestehende `semantic-only`-CLI mit einem isolierten
+Eingabeordner pro Versuch. Das Original auf der Festplatte bleibt erhalten.
+Die Suche läuft im Hintergrund und lässt sich abbrechen; das Protokoll zeigt
+Details. Für eine schnelle Einzelprüfung entfallen zusätzliche Qualitätsrunden
+(`ICC_MAX_QUALITY_PASSES=0`); die Qualitätsgrenzen bleiben unverändert.
+Ein nicht bestandenes Ergebnis wird ausdrücklich als **Entwurf** angezeigt.
+Die Profile verwenden 15–30, 60–120 bzw. 120–240 Sekunden Suchbudget plus bis
+zu 30 Sekunden für Start und Abschluss.
+
+Bilder, Beschreibungen, Ergebnisse und Protokolle bleiben lokal unter
+`artifacts/gui/` (von Git ausgeschlossen). Die letzten Aufträge sind nach einem
+Serverneustart wieder verfügbar. Erneutes Konvertieren legt einen neuen Versuch
+an. Der Server ist ausschliesslich an `127.0.0.1` gebunden.
+
 ### Convert images into SVG outputs
 
 ```bash
