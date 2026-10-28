@@ -6,6 +6,8 @@ focused on the actual project scope.
 
 ## Neue Ausführungsreihenfolge (2026-10-23)
 
+- [x] **SEARCH-STRUCTURE-THIN-RIM-DEPTH (P0, Teil von SEARCH-STRUCTURE-01):** Dünne Konturen liefern jetzt auch dann beobachtete Tiefenbelege, wenn der konservative Randstreifen zwischen Pixelzentren liegt. Geometrische Flächenabtastung wählt mindestens fünf verschiedene Originalpixel; Farb-, Objekt-, Relations- und Rastergates bleiben erforderlich. Zwölf unveränderte synthetische CLI-Fälle verbessern sich von 11/12 auf 12/12, Zusatzseed 12/12 und Varianten 17/17. [Umsetzung, Keras-Einordnung und Grenzen](next_arbeitspaket_2026-10-27_thin_rim_depth.md). Allgemeine Komposition und unabhängige reale Gesamt-Abnahme bleiben offen.
+
 - [x] **PB-1980-RASTER-PREPARATION:** Rasterduplikate in der Variantenprüfung einschließlich Original mit begrenzter, deterministischer Neuauswahl ersetzen. Der damalige Lauf mit schwarzer Referenz erreichte 3/17 bzw. 2/17. Die anschließende Quellen- und Qualitätskorrektur steht in den drei erledigten Folgeaufgaben. [Historische Reproduktion](../artifacts/evaluation/raster_variations_issue_v1/README.md).
 
 - [x] **PB-1980-REFERENCE (P2):** Inline-Stile und lokale Gradientenverweise allgemein korrigiert. Unabhängiges librsvg bestätigt Original und 16 Transformationen in zwei Auflösungen (34 Vergleiche); analytische Fremd-/Negativkontrollen bestehen. [Nachweis](../artifacts/evaluation/axial_panel_issue_v1/README.md).

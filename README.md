@@ -1,5 +1,11 @@
 # ImageConverter
 
+Der [P0-Teil für dünne Kontur-Tiefenbelege](docs/next_arbeitspaket_2026-10-27_thin_rim_depth.md)
+nutzt die geometrische Randdeckung vorhandener Rasterpixel, wenn ein schmaler
+Prüfstreifen zwischen Pixelzentren liegt. Zwölf identische synthetische
+CLI-Fälle verbessern sich von 11/12 auf 12/12; Zusatzseed und Varianten bestehen
+12/12 und 17/17. Die allgemeine Struktursuche und reale Gesamt-Abnahme bleiben offen.
+
 Die [Korrektur für GitHub-Issues #1909 und #1999](artifacts/evaluation/valley_panel_issue_v1/README.md)
 beschreibt grüne V-Panels eigenständig und erweitert den vorhandenen Dachlinien-Fit
 um die Spitze unten. Beide ursprünglichen Seeds und ein Zusatzseed bestehen

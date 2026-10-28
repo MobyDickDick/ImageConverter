@@ -1,0 +1,190 @@
+{
+  "evidence_kind": "real_cli",
+  "seed": 529713,
+  "options": [
+    "--children",
+    "2",
+    "--outlines",
+    "--same-fill"
+  ],
+  "budget_seconds": 5,
+  "search_seed": 17,
+  "base_commit": "76087bcdbb769cdcdf5d51275b0155d04abc3f55",
+  "runtime_sha256_before": "2f57cad0f9a5413cc2269ddc98c29c0a4a958ed9e7a208e780c6af69f1afa1f6",
+  "runtime_sha256_after": "2e4fd6feeba8e19f3c0d47b354348f81031f82ab86a6201ee64a79298e49da36",
+  "accepted_before": 11,
+  "accepted_after": 12,
+  "completed": 12,
+  "cases": [
+    {
+      "case_id": "same_paint_outlined_multi2_mixed_overlap_00",
+      "input_sha256": "db342081fecd2a61bb6f8ce3562542726765dcb9a4c8e73fe6ae16cbc84e8852",
+      "accepted_before": true,
+      "accepted_after": true,
+      "object_check_after": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.12506371156247553
+      },
+      "local_checks_passed_after": true
+    },
+    {
+      "case_id": "same_paint_outlined_multi2_mixed_overlap_01",
+      "input_sha256": "096f89e1b41c5bff530635b2583d2053922d3a8cc1d76bd002f2d42b756e5d52",
+      "accepted_before": true,
+      "accepted_after": true,
+      "object_check_after": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.1641786184880587
+      },
+      "local_checks_passed_after": true
+    },
+    {
+      "case_id": "same_paint_outlined_multi2_mixed_overlap_02",
+      "input_sha256": "97525dd8564948c06de3537b7dbce511d4404e3d6fa82e75fe039a86aaf58065",
+      "accepted_before": true,
+      "accepted_after": true,
+      "object_check_after": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.08387411199182537
+      },
+      "local_checks_passed_after": true
+    },
+    {
+      "case_id": "same_paint_outlined_multi2_mixed_overlap_03",
+      "input_sha256": "e36226f74e68efdafaeff2cf200156834b6e848f50306f83fd693c398b8a62ce",
+      "accepted_before": true,
+      "accepted_after": true,
+      "object_check_after": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.08043579350228924
+      },
+      "local_checks_passed_after": true
+    },
+    {
+      "case_id": "same_paint_outlined_multi2_mixed_overlap_04",
+      "input_sha256": "1c865d0f07cd21a691bc9a6cbd1d953e2b7fd921008e676bd0c601b890cede93",
+      "accepted_before": true,
+      "accepted_after": true,
+      "object_check_after": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.14887643128134442
+      },
+      "local_checks_passed_after": true
+    },
+    {
+      "case_id": "same_paint_outlined_multi2_mixed_overlap_05",
+      "input_sha256": "fbc97bbf7f17dfbfdb533b2efed03b4e2ec806155b3e9f4ab47e17606ec99d71",
+      "accepted_before": true,
+      "accepted_after": true,
+      "object_check_after": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.11174759297249182
+      },
+      "local_checks_passed_after": true
+    },
+    {
+      "case_id": "same_paint_outlined_multi2_mixed_overlap_06",
+      "input_sha256": "3bb71bba0c8999e52219ad36cbd3aa12b4c5a9e8169dce009e780933d33f9dae",
+      "accepted_before": false,
+      "accepted_after": true,
+      "object_check_after": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.13252205043439602
+      },
+      "local_checks_passed_after": true
+    },
+    {
+      "case_id": "same_paint_outlined_multi2_mixed_overlap_07",
+      "input_sha256": "e1ad3181913d3c6bc57905956590910cfa0b0b511c2ed31c8d1f1be86af94bb4",
+      "accepted_before": true,
+      "accepted_after": true,
+      "object_check_after": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.1524499999999982
+      },
+      "local_checks_passed_after": true
+    },
+    {
+      "case_id": "same_paint_outlined_multi2_mixed_overlap_08",
+      "input_sha256": "9886b99706b2207370ccdeb1508b8ba86227c58a3d18f69f2aa67347914eb46f",
+      "accepted_before": true,
+      "accepted_after": true,
+      "object_check_after": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.1742489664227591
+      },
+      "local_checks_passed_after": true
+    },
+    {
+      "case_id": "same_paint_outlined_multi2_mixed_overlap_09",
+      "input_sha256": "9f63ec7359cfb45bd43e2461680aafa3bf0a975d4a44af61375c6d9700d70664",
+      "accepted_before": true,
+      "accepted_after": true,
+      "object_check_after": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.0974253588406171
+      },
+      "local_checks_passed_after": true
+    },
+    {
+      "case_id": "same_paint_outlined_multi2_mixed_overlap_10",
+      "input_sha256": "2955d0e736d14ddd38e2923eacde8a92cb2edbf949e5c443bba5cd576f1e9a64",
+      "accepted_before": true,
+      "accepted_after": true,
+      "object_check_after": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.11400000000000787
+      },
+      "local_checks_passed_after": true
+    },
+    {
+      "case_id": "same_paint_outlined_multi2_mixed_overlap_11",
+      "input_sha256": "20b7482ba4444e6c8c8d7bb9a604e14c647653c8a6c367248bf5e2441bfaa4e4",
+      "accepted_before": true,
+      "accepted_after": true,
+      "object_check_after": {
+        "passed": true,
+        "detected_count": 3,
+        "expected_count": 3,
+        "max_bbox_error_px": 0.11988070148940722
+      },
+      "local_checks_passed_after": true
+    }
+  ],
+  "additional": [
+    {
+      "seed": 853197,
+      "variations": false,
+      "accepted": 12,
+      "completed": 12
+    },
+    {
+      "seed": 529713,
+      "variations": true,
+      "accepted": 17,
+      "completed": 17
+    }
+  ]
+}

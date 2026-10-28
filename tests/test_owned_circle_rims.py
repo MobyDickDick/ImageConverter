@@ -14,12 +14,6 @@ from tools.evaluate_mixed_overlap import make_cases
 def test_independent_equal_paint_circle_rectangle_scenes(rounded, index):
     case = make_cases(529713, children=2, rounded=rounded, outlined=True, same_fill=True)[index]
     image, result = fit(case)
-    if index == 6 and not rounded:
-        # This valid scene has no pixel centers in the square rectangle's
-        # conservative rim-depth band. Preserve the required five observed
-        # samples; the new outer-circle proposal cannot supply depth evidence.
-        assert result is None
-        return
     assert_accepted(case, image, result)
 
 

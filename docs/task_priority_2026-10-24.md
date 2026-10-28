@@ -105,6 +105,15 @@ aus. [Nachweis und Grenzen](../artifacts/evaluation/axial_panel_issue_v1/README.
 
 ## Bearbeitung des höchsten Rangs
 
+Nachtrag 27.10.2026: Der separate Branch
+`codex/search-structure-thin-depth-evidence-2026-10-27` bearbeitet die zuletzt
+dokumentierte Grenze dünner Kontur-Tiefenbelege. Geometrische Flächenabtastung
+nutzt mindestens fünf verschiedene Originalpixel bei unveränderten Farbgates.
+Die zwölf unveränderten eckigen Kreis-/Rechteck-CLI-Fälle verbessern sich von
+11/12 auf 12/12; Zusatzseed und Varianten bestehen 12/12 und 17/17.
+[Umsetzung und Grenzen](next_arbeitspaket_2026-10-27_thin_rim_depth.md).
+SEARCH-STRUCTURE-01 bleibt als Gesamtaufgabe offen.
+
 Nachtrag 25.10.2026: Der separate Branch
 `codex/search-structure-owned-circle-rims-2026-10-24` bearbeitet die bekannte
 Grenze gleichfarbiger Kreis-/Rechtecküberdeckungen. Die unabhängige Kreisfüllung
