@@ -874,7 +874,28 @@ def _rim_front(pixels, objects, i, j):
                 & _native_fill_mask(objects[other], xx, yy, 1.) & ~foreign)
         fill, stroke = obj['colors'][:3], obj['colors'][6:]
         delta = stroke-fill
-        if sw < .5 or np.count_nonzero(band) < 5 or delta@delta < 100:
+        if sw < .5 or delta@delta < 100:
+            return None
+        if np.count_nonzero(band) < 5:
+            # A narrow, axis-aligned rim can straddle pixel centres along its
+            # entire length. Measure its pixel footprints instead of widening
+            # the rim or interpolating new observations. Each selected pixel
+            # must have at least half its area in the native stroke, entirely
+            # inside the other fill and clear of every third object.
+            area = np.zeros(xx.shape, dtype=float)
+            clean = np.ones(xx.shape, dtype=bool)
+            for dy in (-.4375, -.3125, -.1875, -.0625, .0625, .1875, .3125, .4375):
+                for dx in (-.4375, -.3125, -.1875, -.0625, .0625, .1875, .3125, .4375):
+                    sx, sy = xx+dx, yy+dy
+                    area += (_native_fill_mask(obj, sx, sy, -sw)
+                             & ~_native_fill_mask(obj, sx, sy, 0.))
+                    clean &= _native_fill_mask(objects[other], sx, sy, 1.)
+                    for third, foreign_obj in enumerate(objects):
+                        if third not in (i, j):
+                            clean &= ~_native_fill_mask(foreign_obj, sx, sy,
+                                                       -foreign_obj['geometry'][4]-1.)
+            band = (area >= 32) & clean
+        if np.count_nonzero(band) < 5:
             return None
         coverage = (data-fill)@delta/(delta@delta)
         error = np.max(abs(data-fill-coverage[..., None]*delta), axis=2)
