@@ -230,6 +230,40 @@ def test_retry_keeps_previous_result_and_original(jobs, monkeypatch):
     jobs.cancel(retry["id"])
 
 
+def test_each_explicit_gui_attempt_gets_a_fresh_saved_search_seed(jobs, monkeypatch):
+    monkeypatch.setattr(jobs, 'run', lambda job_id: None)
+    seeds = iter([1001, 2002])
+    monkeypatch.setattr(gui.secrets, 'randbits', lambda _: next(seeds))
+    uploaded = jobs.upload('image.png', image_bytes())
+    first = jobs.start(uploaded['id'], 'Ein Kreis', 'quick')
+    jobs.cancel(first['id'])
+    retry = jobs.start(first['id'], 'Ein Kreis', 'quick')
+    assert (first['search_seed'], retry['search_seed']) == (1001, 2002)
+    assert retry['previous_job_id'] == first['id']
+    saved = json.loads((jobs.folder(retry['id'])/'job.json').read_text(encoding='utf-8'))
+    assert saved['search_seed'] == 2002
+    jobs.cancel(retry['id'])
+
+
+@pytest.mark.parametrize('evaluations', [0, 123])
+def test_draft_reports_whether_additional_model_search_actually_ran(jobs, job, monkeypatch, evaluations):
+    folder = jobs.folder(job['id'])
+    output = folder/'output'
+    (output/'converted_svgs').mkdir(parents=True)
+    (output/'converted_svgs'/'UPLOAD.svg').write_text('<svg/>')
+    (output/'search').mkdir()
+    event = dict(event='image_search_finished', candidate_evaluations=evaluations,
+                 stop_reason='supported_models_exhausted', satisfactory=False)
+    (output/'search'/'progress.jsonl').write_text('incomplete record\n'+json.dumps(event)+'\n')
+    monkeypatch.setattr(gui, 'saved_svg_quality', lambda *args: dict(passed=False,
+        observed_foreground_pixels=10, output_foreground_pixels=9))
+    gui.collect_result(folder, job, 0)
+    assert job['quality'] == 'warning'
+    assert job['search_summary']['candidate_evaluations'] == evaluations
+    assert ('keine zusätzliche Modellsuche' in job['message']) == (evaluations == 0)
+    assert ('123 Kandidaten' in job['message']) == (evaluations == 123)
+
+
 def test_cancel_stops_a_real_background_process(jobs, job):
     options = {"creationflags": subprocess.CREATE_NO_WINDOW} if sys.platform == "win32" else {"start_new_session": True}
     process = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(60)"], **options)

@@ -72,3 +72,25 @@ def test_glyph_refinement_rejects_wrong_three_character_label(label):
     image = cv2.imread(str(Path(__file__).resolve().parents[1]/'artifacts/images_to_convert/AC0910_L.jpg'))
     with search_configuration(mode='portfolio',seed=20261017):
         assert fit(image, DESCRIPTION.replace('rF', label)) is None
+
+
+@pytest.mark.parametrize('size', ['L', 'M', 'S'])
+def test_plain_circle_description_uses_raster_colors_and_font(size):
+    # No magic words such as "einfarbig", "Kreisscheibe" or "serifenlos".
+    description = ('Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. '
+                   'Text im Kreis: "VOC". Kein Griff, keine Kelle und keine weiteren Anbauteile.')
+    image = cv2.imread(str(Path(__file__).resolve().parents[1]/f'artifacts/images_to_convert/AC0835_{size}.jpg'))
+    with search_configuration(mode='portfolio', seed=42):
+        result = fit(image, description)
+    assert result is not None
+    assert measure_quality(image, result['svg'])['satisfactory']
+    assert ''.join(e.text for e in ET.fromstring(result['svg']).iter() if e.tag.endswith('text')) == 'VOC'
+
+
+def test_condensed_unseen_label_fits_width_separately_from_height():
+    source = synthetic('NO', 80, 700).replace('<text ', '<text transform="translate(40 0) scale(.75 1) translate(-40 0)" ')
+    image = render(source, 80, 80)
+    with search_configuration(mode='portfolio', seed=42):
+        result = fit(image, DESCRIPTION.replace('rF', 'NO'))
+    assert result is not None
+    assert measure_quality(image, result['svg'])['satisfactory']

@@ -1,0 +1,692 @@
+{
+  "family": "AC0835",
+  "cases": [
+    {
+      "variant": "AC0835_L",
+      "neutral": "PROBE_L",
+      "source_sha256": "c8c7deaa3e56d3e17de1a864b5cd6fda7bf49824faf29d66bda58f75d700928b",
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile."
+    },
+    {
+      "variant": "AC0835_M",
+      "neutral": "PROBE_M",
+      "source_sha256": "59bed43a01f7477b0cd3bba57136bd1e84d14e7d5164ad7cf654498b47e7dc53",
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile."
+    },
+    {
+      "variant": "AC0835_S",
+      "neutral": "PROBE_S",
+      "source_sha256": "f4a3aed05e5d5b1a3dc51bbebf112a7400f2dc2ca876c9f57ead14bcd117e147",
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile."
+    }
+  ],
+  "records": [
+    {
+      "variant": "AC0835_L",
+      "seed": 42,
+      "run": 0,
+      "cli_exit": 0,
+      "source_sha256": "c8c7deaa3e56d3e17de1a864b5cd6fda7bf49824faf29d66bda58f75d700928b",
+      "svg": "run-0-42\\converted_svgs\\PROBE_L.svg",
+      "svg_sha256": "c843852d54fb359f004cf2425962f81fb562a8842a7edea0edf259ad42de3a22",
+      "internal": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0027202090714126825,
+          "foreground_mse": 0.0061066062189638615,
+          "edge_alignment": 0.9004536867141724,
+          "foreground_iou": 0.8880597014925373
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "independent": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.002587952185422182,
+          "foreground_mse": 0.0058004772290587425,
+          "edge_alignment": 0.9124784469604492,
+          "foreground_iou": 0.8614232209737828
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "variant": "AC0835_M",
+      "seed": 42,
+      "run": 0,
+      "cli_exit": 0,
+      "source_sha256": "59bed43a01f7477b0cd3bba57136bd1e84d14e7d5164ad7cf654498b47e7dc53",
+      "svg": "run-0-42\\converted_svgs\\PROBE_M.svg",
+      "svg_sha256": "32bf2f40dc72a604c73a9ad5fc1c942f64964b8dc6d9c40e75913c480bf60e2f",
+      "internal": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.002748365979641676,
+          "foreground_mse": 0.005199709441512823,
+          "edge_alignment": 0.9055514931678772,
+          "foreground_iou": 0.873015873015873
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "independent": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0025185314007103443,
+          "foreground_mse": 0.004813286941498518,
+          "edge_alignment": 0.9187859892845154,
+          "foreground_iou": 0.8609625668449198
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "variant": "AC0835_S",
+      "seed": 42,
+      "run": 0,
+      "cli_exit": 0,
+      "source_sha256": "f4a3aed05e5d5b1a3dc51bbebf112a7400f2dc2ca876c9f57ead14bcd117e147",
+      "svg": "run-0-42\\converted_svgs\\PROBE_S.svg",
+      "svg_sha256": "af3876ba3ec384342bd1a173f790fa3bfea21ca5b7a5bf7327a34fe2fd75cbfe",
+      "internal": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0029011748265475035,
+          "foreground_mse": 0.004127197433263063,
+          "edge_alignment": 0.8872864246368408,
+          "foreground_iou": 0.9032258064516129
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "independent": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.002922431565821171,
+          "foreground_mse": 0.004210762679576874,
+          "edge_alignment": 0.8923431634902954,
+          "foreground_iou": 0.9105691056910569
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "variant": "AC0835_L",
+      "seed": 314159,
+      "run": 1,
+      "cli_exit": 0,
+      "source_sha256": "c8c7deaa3e56d3e17de1a864b5cd6fda7bf49824faf29d66bda58f75d700928b",
+      "svg": "run-1-314159\\converted_svgs\\PROBE_L.svg",
+      "svg_sha256": "c843852d54fb359f004cf2425962f81fb562a8842a7edea0edf259ad42de3a22",
+      "internal": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0027202090714126825,
+          "foreground_mse": 0.0061066062189638615,
+          "edge_alignment": 0.9004536867141724,
+          "foreground_iou": 0.8880597014925373
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "independent": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.002587952185422182,
+          "foreground_mse": 0.0058004772290587425,
+          "edge_alignment": 0.9124784469604492,
+          "foreground_iou": 0.8614232209737828
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "variant": "AC0835_M",
+      "seed": 314159,
+      "run": 1,
+      "cli_exit": 0,
+      "source_sha256": "59bed43a01f7477b0cd3bba57136bd1e84d14e7d5164ad7cf654498b47e7dc53",
+      "svg": "run-1-314159\\converted_svgs\\PROBE_M.svg",
+      "svg_sha256": "32bf2f40dc72a604c73a9ad5fc1c942f64964b8dc6d9c40e75913c480bf60e2f",
+      "internal": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.002748365979641676,
+          "foreground_mse": 0.005199709441512823,
+          "edge_alignment": 0.9055514931678772,
+          "foreground_iou": 0.873015873015873
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "independent": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0025185314007103443,
+          "foreground_mse": 0.004813286941498518,
+          "edge_alignment": 0.9187859892845154,
+          "foreground_iou": 0.8609625668449198
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "variant": "AC0835_S",
+      "seed": 314159,
+      "run": 1,
+      "cli_exit": 0,
+      "source_sha256": "f4a3aed05e5d5b1a3dc51bbebf112a7400f2dc2ca876c9f57ead14bcd117e147",
+      "svg": "run-1-314159\\converted_svgs\\PROBE_S.svg",
+      "svg_sha256": "af3876ba3ec384342bd1a173f790fa3bfea21ca5b7a5bf7327a34fe2fd75cbfe",
+      "internal": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0029011748265475035,
+          "foreground_mse": 0.004127197433263063,
+          "edge_alignment": 0.8872864246368408,
+          "foreground_iou": 0.9032258064516129
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "independent": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.002922431565821171,
+          "foreground_mse": 0.004210762679576874,
+          "edge_alignment": 0.8923431634902954,
+          "foreground_iou": 0.9105691056910569
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "scope": "Fresh semantic-only CLI, neutral filenames, original descriptions; MuPDF and librsvg pixel gates",
+  "before_archive": [
+    {
+      "variant": "AC0835_L",
+      "svg_sha256": "790ce63a8b02383fd14982757a9b2bbcd0c6b9163c1694852c3cac7e783aa889",
+      "internal": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.03610926494002342,
+          "foreground_mse": 0.0779196098446846,
+          "edge_alignment": 0.5578801035881042,
+          "foreground_iou": 0.4
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "independent": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.058327991515398026,
+          "foreground_mse": 0.1100798025727272,
+          "edge_alignment": 0.4504978060722351,
+          "foreground_iou": 0.21951219512195122
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "variant": "AC0835_M",
+      "svg_sha256": "a0e3cbf27c3e2aa86fbb6890bdc26b2aeabab893303abe9365295785208667f2",
+      "internal": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.038057323545217514,
+          "foreground_mse": 0.06616601347923279,
+          "edge_alignment": 0.6411895751953125,
+          "foreground_iou": 0.40611353711790393
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "independent": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.03086639940738678,
+          "foreground_mse": 0.05683198571205139,
+          "edge_alignment": 0.6734126806259155,
+          "foreground_iou": 0.4861111111111111
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "variant": "AC0835_S",
+      "svg_sha256": "9606f8376cbd603651ae8158c6830c738c885032d1085c2f0d3a2c79a27e3eaa",
+      "internal": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.029827160760760307,
+          "foreground_mse": 0.049984127283096313,
+          "edge_alignment": 0.6385955810546875,
+          "foreground_iou": 0.5037593984962406
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "independent": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.04748772084712982,
+          "foreground_mse": 0.0712868869304657,
+          "edge_alignment": 0.5750997066497803,
+          "foreground_iou": 0.31543624161073824
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    }
+  ],
+  "satisfaction_gate": {
+    "cases": [
+      {
+        "case_id": "AC0835_L",
+        "satisfactory": true,
+        "scope": "Both strict renderers plus label/primitive semantics; two fresh neutral-name CLI runs"
+      },
+      {
+        "case_id": "AC0835_M",
+        "satisfactory": true,
+        "scope": "Both strict renderers plus label/primitive semantics; two fresh neutral-name CLI runs"
+      },
+      {
+        "case_id": "AC0835_S",
+        "satisfactory": true,
+        "scope": "Both strict renderers plus label/primitive semantics; two fresh neutral-name CLI runs"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "case_id": "AC0835_L",
+      "input_sha256": "c8c7deaa3e56d3e17de1a864b5cd6fda7bf49824faf29d66bda58f75d700928b",
+      "after_svg_sha256": "c843852d54fb359f004cf2425962f81fb562a8842a7edea0edf259ad42de3a22"
+    },
+    {
+      "case_id": "AC0835_M",
+      "input_sha256": "59bed43a01f7477b0cd3bba57136bd1e84d14e7d5164ad7cf654498b47e7dc53",
+      "after_svg_sha256": "32bf2f40dc72a604c73a9ad5fc1c942f64964b8dc6d9c40e75913c480bf60e2f"
+    },
+    {
+      "case_id": "AC0835_S",
+      "input_sha256": "f4a3aed05e5d5b1a3dc51bbebf112a7400f2dc2ca876c9f57ead14bcd117e147",
+      "after_svg_sha256": "af3876ba3ec384342bd1a173f790fa3bfea21ca5b7a5bf7327a34fe2fd75cbfe"
+    }
+  ],
+  "reference_access": [
+    {
+      "variant": "AC0835_L",
+      "seed": 42,
+      "blocked_svg_reads": []
+    },
+    {
+      "variant": "AC0835_M",
+      "seed": 42,
+      "blocked_svg_reads": []
+    },
+    {
+      "variant": "AC0835_S",
+      "seed": 42,
+      "blocked_svg_reads": []
+    },
+    {
+      "variant": "AC0835_L",
+      "seed": 314159,
+      "blocked_svg_reads": []
+    },
+    {
+      "variant": "AC0835_M",
+      "seed": 314159,
+      "blocked_svg_reads": []
+    },
+    {
+      "variant": "AC0835_S",
+      "seed": 314159,
+      "blocked_svg_reads": []
+    }
+  ],
+  "baseline_actual_cli_L": {
+    "satisfactory": false,
+    "failures": [
+      "normalized_mse_outside_limit",
+      "foreground_mse_outside_limit",
+      "edge_alignment_outside_limit",
+      "foreground_iou_outside_limit"
+    ],
+    "metrics": {
+      "normalized_mse": 0.04118942469358444,
+      "foreground_mse": 0.086313895881176,
+      "edge_alignment": 0.5544244647026062,
+      "foreground_iou": 0.40816326530612246
+    },
+    "limits": {
+      "max_normalized_mse": 0.01,
+      "max_foreground_mse": 0.04,
+      "min_edge_alignment": 0.72,
+      "min_foreground_iou": 0.85,
+      "max_svg_elements": 80,
+      "max_path_commands": 160
+    },
+    "complexity": {
+      "parse_error": null,
+      "embedded_raster_count": 0,
+      "vector_element_count": 2,
+      "path_count": 0,
+      "path_command_count": 0,
+      "path_complexity_ratio": 0.0
+    }
+  }
+}

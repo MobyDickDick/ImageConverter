@@ -21,9 +21,16 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
     text = normalize_description(description)
     words = text.casefold()
     labels = re.findall(r'(?:["„])([A-Za-z0-9]{2,4})(?:["“])', text)
-    if (len(labels) != 1 or not all(token in words for token in
-            ('kreisscheibe', 'einfarbig', 'rand', 'serifenlos', 'keine anschlüsse'))
-            or any(token in words for token in ('zusätzlich', 'verlauf', 'griff', 'dreieck', 'ohne beschriftung'))):
+    # Description constrains the hypothesis; raster evidence determines paint,
+    # font and pose. A missing font adjective must not force a preset redraw.
+    # Remove explicit negative attachment claims before looking for additions.
+    content = re.sub(r'\b(?:kein(?:e[nrms]?)?|ohne)\s+(?:griff|kelle|anschlüsse|anbauteile)\b', '', words)
+    detached = ('keine anschlüsse' in words or bool(re.search(
+        r'\bkein griff\b.*\bkeine weiteren anbauteile\b', words)))
+    if (len(labels) != 1 or not re.search(r'\b(?:kreis|kreisscheibe)\b', words)
+            or 'rand' not in words or not detached
+            or not re.search(r'\b(?:text|beschriftung)\b', words)
+            or any(token in content for token in ('zusätzlich', 'verlauf', 'griff', 'dreieck', 'ohne beschriftung'))):
         return None
     label = escape(labels[0])
     pixels = _image(width, height, image)
@@ -61,7 +68,8 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
     if len(xs) < 4:
         return None
     gx,gy,gw,gh = xs.min(),ys.min(),xs.max()-xs.min()+1,ys.max()-ys.min()+1
-    if gw > radius*1.65 or gh > radius*1.6:
+    # Pixel bounding boxes round outward; allow one source pixel at the limit.
+    if gw > radius*1.65+1 or gh > radius*1.6+1:
         return None
     rim = np.percentile(pixels[(radial>radius*.92)&(radial<radius*1.03)],15,axis=0)
     color = np.percentile(pixels[observed],15,axis=0)
@@ -105,24 +113,32 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
         if current_search() and current_search().time_reason():
             return None
         model = f'{"separate" if separate else "native"}_{weight}'
+        geometry_count = 8 if separate else 9
         progress('short_label_disk',event='model_started',model=model)
 
         def build(p, blank=False):
             p = np.asarray(p)
             cx,cy,r,sw,tx,ty,size,spacing = p[:8]
-            fill,rim,color = p[8:].reshape(-1,3)
+            fill,rim,color = p[geometry_count:].reshape(-1,3)
             style = f'font-family="Arial" font-weight="{weight}" font-size="{size:.4f}" text-anchor="middle" fill="{_hex(color)}"'
+            def glyph(x, value):
+                # A source can use a condensed font. Fit width independently
+                # of height instead of compensating with overlapping letters.
+                transform = (f' transform="translate({x:.4f} 0) scale({p[8]/100:.6f} 1) translate({-x:.4f} 0)"'
+                             if not separate and abs(p[8]-100)>1e-6 else '')
+                return f'<text x="{x:.4f}" y="{ty:.4f}" {style}{transform}>{value}</text>'
             if separate:
-                glyphs = ''.join(f'<text x="{tx+(i-(len(label)-1)/2)*spacing:.4f}" y="{ty:.4f}" {style}>{char}</text>'
-                                 for i,char in enumerate(label))
+                glyphs = ''.join(glyph(tx+(i-(len(label)-1)/2)*spacing,char) for i,char in enumerate(label))
             else:
-                glyphs = f'<text x="{tx:.4f}" y="{ty:.4f}" {style}>{label}</text>'
+                glyphs = glyph(tx,label)
             return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">'
                     f'<rect width="{width}" height="{height}" fill="#ffffff"/>'
                     f'<circle cx="{cx:.4f}" cy="{cy:.4f}" r="{r:.4f}" fill="{_hex(fill)}" stroke="{_hex(rim)}" stroke-width="{sw:.4f}"/>'
                     +('' if blank else glyphs)+'</svg>')
 
         p = np.r_[cx,cy,radius-.6,max(.5,radius*.08),gx+gw/2,gy+gh,gh*1.35,gw/len(label),fill,rim,color]
+        if not separate:
+            p = np.r_[p[:8],100.,p[8:]]
         p[2] = min(p[2],cx,width-cx,cy,height-cy)-p[3]/2-1e-4
         for _ in range(3):
             drawn = render_fn(build(p),width,height)
@@ -140,13 +156,16 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
             p[6] *= factor
             if separate:
                 p[7] *= gw/(tx.max()-tx.min()+1)
+            else:
+                p[8] *= gw/(tx.max()-tx.min()+1)
 
         def valid(p):
             cx,cy,r,sw,tx,ty,size,spacing = p[:8]
             return (np.isfinite(p).all() and r>4 and .15<=sw<=r*.25
                     and 0<=cx-r-sw/2 and cx+r+sw/2<=width and 0<=cy-r-sw/2 and cy+r+sw/2<=height
                     and abs(tx-cx)<r*.35 and cy<ty<cy+r*.9 and 3<=size<r*1.9
-                    and .5<spacing<r and np.all((p[8:]>=0)&(p[8:]<=255)))
+                    and .5<spacing<r and (separate or 60<=p[8]<=140)
+                    and np.all((p[geometry_count:]>=0)&(p[geometry_count:]<=255)))
 
         semantic_evaluations = 0
         def satisfactory(parameters, measured):
@@ -155,7 +174,7 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
             semantic_evaluations += 1
             return blank is not None and validate_glyphs({'rendered':measured[3]},blank)[1]
 
-        fitted = yield from _register_steps(p,8,build,valid,np.asarray(image),render_fn,error_fn,'short_label_disk_'+model,
+        fitted = yield from _register_steps(p,geometry_count,build,valid,np.asarray(image),render_fn,error_fn,'short_label_disk_'+model,
                                            satisfactory_fn=satisfactory)
         if fitted is None:
             return None

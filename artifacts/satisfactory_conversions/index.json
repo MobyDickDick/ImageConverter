@@ -2281,53 +2281,53 @@
     },
     {
       "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile.",
-      "evidence": "successed_conversions.txt",
-      "execution_mode": "standard",
+      "evidence": "artifacts/evaluation/short_label_retry_v1/summary.json",
+      "execution_mode": "semantic-only",
       "image": "images/AC0835_L.jpg",
       "image_sha256": "c8c7deaa3e56d3e17de1a864b5cd6fda7bf49824faf29d66bda58f75d700928b",
-      "mean_delta2": 7044.01416015625,
+      "mean_delta2": 530.644775390625,
       "metrics": {
         "dimension_match": 1.0,
-        "edge_alignment": 0.5578801035881042,
-        "error_per_pixel": 0.03610926136181597,
-        "object_mask_iou": 0.3877551020408163
+        "edge_alignment": 0.9004536867141724,
+        "error_per_pixel": 0.002720209024173395,
+        "object_mask_iou": 0.8986175115207373
       },
       "svg": "svgs/AC0835_L.svg",
-      "svg_sha256": "790ce63a8b02383fd14982757a9b2bbcd0c6b9163c1694852c3cac7e783aa889",
+      "svg_sha256": "c843852d54fb359f004cf2425962f81fb562a8842a7edea0edf259ad42de3a22",
       "variant": "AC0835_L"
     },
     {
       "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile.",
-      "evidence": "successed_conversions.txt",
-      "execution_mode": "standard",
+      "evidence": "artifacts/evaluation/short_label_retry_v1/summary.json",
+      "execution_mode": "semantic-only",
       "image": "images/AC0835_M.jpg",
       "image_sha256": "59bed43a01f7477b0cd3bba57136bd1e84d14e7d5164ad7cf654498b47e7dc53",
-      "mean_delta2": 7424.03271484375,
+      "mean_delta2": 536.1375122070312,
       "metrics": {
         "dimension_match": 1.0,
-        "edge_alignment": 0.6411895751953125,
-        "error_per_pixel": 0.03805732520745226,
-        "object_mask_iou": 0.35353535353535354
+        "edge_alignment": 0.9055514931678772,
+        "error_per_pixel": 0.002748366075647988,
+        "object_mask_iou": 0.8780487804878049
       },
       "svg": "svgs/AC0835_M.svg",
-      "svg_sha256": "a0e3cbf27c3e2aa86fbb6890bdc26b2aeabab893303abe9365295785208667f2",
+      "svg_sha256": "32bf2f40dc72a604c73a9ad5fc1c942f64964b8dc6d9c40e75913c480bf60e2f",
       "variant": "AC0835_M"
     },
     {
       "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile.",
-      "evidence": "successed_conversions.txt",
-      "execution_mode": "standard",
+      "evidence": "artifacts/evaluation/short_label_retry_v1/summary.json",
+      "execution_mode": "semantic-only",
       "image": "images/AC0835_S.jpg",
       "image_sha256": "f4a3aed05e5d5b1a3dc51bbebf112a7400f2dc2ca876c9f57ead14bcd117e147",
-      "mean_delta2": 5818.533203125,
+      "mean_delta2": 565.9466552734375,
       "metrics": {
         "dimension_match": 1.0,
-        "edge_alignment": 0.6385955810546875,
-        "error_per_pixel": 0.02982715982634884,
-        "object_mask_iou": 0.42735042735042733
+        "edge_alignment": 0.8872864246368408,
+        "error_per_pixel": 0.002901174703439382,
+        "object_mask_iou": 0.94
       },
       "svg": "svgs/AC0835_S.svg",
-      "svg_sha256": "9606f8376cbd603651ae8158c6830c738c885032d1085c2f0d3a2c79a27e3eaa",
+      "svg_sha256": "af3876ba3ec384342bd1a173f790fa3bfea21ca5b7a5bf7327a34fe2fd75cbfe",
       "variant": "AC0835_S"
     },
     {

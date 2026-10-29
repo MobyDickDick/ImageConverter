@@ -77,6 +77,16 @@ Verlängerung bei spätem Fortschritt. Identische SVGs werden innerhalb eines Fi
 einem Rendercache bewertet. `[Search]` und `AUSGABE/search/progress.jsonl`
 zeigen Suchweg, Vorschläge, tatsächliche Renderprüfungen und Fehlerwerte.
 
+Unterschiedliche Seeds können zum gleichen besten SVG führen. Sichtbare Abweichung
+zwischen Ergebnissen ist kein Nachweis für eine bessere Suche; massgeblich sind
+geprüfte Alternativen und die Messung am Original. Ältere Zeichenpfade besitzen
+teilweise keine zusätzliche Portfoliosuche. Die GUI meldet diese Einschränkung bei
+Entwürfen ausdrücklich, speichert einen frischen Seed je Start und erkennt identische
+Wiederholungsergebnisse. Die Kurztextsuche akzeptiert auch gewöhnliche Beschreibungen
+wie „Kreis mit Rand, Text …, kein Griff und keine weiteren Anbauteile“; Farben,
+Schriftgewicht, Position und begrenzte horizontale Schriftstreckung werden am Raster
+angepasst. [Prüfung und Wiederholungsbefehl](../artifacts/evaluation/short_label_retry_v1/README.md).
+
 Geprüfte Kurztextvarianten liegen unter `AUSGABE/search/validated/` mit ihren
 Semantik- und Pixelstatus. Nur `--execution-mode standard` darf erfolgreiche
 Strategien anhand von `strategy_memory.json` für spätere Suchen priorisieren.

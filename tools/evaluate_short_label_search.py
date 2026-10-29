@@ -5,6 +5,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
@@ -19,7 +20,8 @@ def symbol_semantics(svg, label):
     try:
         root = ET.fromstring(svg)
         allowed = {'svg','rect','circle','text'}
-        if any(e.tag.rsplit('}',1)[-1] not in allowed or e.get('transform') for e in root.iter()):
+        if any(e.tag.rsplit('}',1)[-1] not in allowed or
+               (e.get('transform') and not e.tag.endswith('text')) for e in root.iter()):
             return 0.
         disks = [e for e in root.iter() if e.tag.endswith('circle')]
         texts = [e for e in root.iter() if e.tag.endswith('text')]
@@ -39,6 +41,15 @@ def symbol_semantics(svg, label):
         positions = []
         for text in texts:
             x,y,size = [float(text.get(k,0)) for k in ('x','y','font-size')]
+            if text.get('transform'):
+                # Only bounded horizontal glyph scaling around its own anchor.
+                # This cannot move a label off canvas or alter the disk.
+                match = re.fullmatch(r'translate\(([-\d.]+) 0\) scale\(([-\d.]+) 1\) translate\(([-\d.]+) 0\)', text.get('transform'))
+                if not match:
+                    return 0.
+                anchor, stretch, inverse = map(float, match.groups())
+                if not (abs(anchor-x)<1e-4 and abs(anchor+inverse)<1e-4 and .6<=stretch<=1.4):
+                    return 0.
             values.extend([x,y,size])
             if (abs(x-cx)>=r*.8 or not cy<y<cy+r*.95 or not 3<=size<r*1.9
                     or text.get('font-family')!='Arial' or text.get('font-weight') not in {'400','700'}

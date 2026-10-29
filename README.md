@@ -1,5 +1,12 @@
 # ImageConverter
 
+Die [AC0835- und Wiederholungsprüfung](artifacts/evaluation/short_label_retry_v1/README.md)
+aktiviert die rastergestützte Kurztextsuche auch für gewöhnliche Kreis-/Textbeschreibungen
+und passt die Schriftbreite unabhängig von der Höhe an. Alle drei Grössen bestehen
+zwei frische CLI-Läufe unter neutralen Dateinamen und die unabhängige librsvg-Prüfung.
+Die GUI speichert für jeden neuen Versuch einen frischen Suchseed und meldet bei
+Entwürfen, ob zusätzliche Kandidaten geprüft wurden oder dieselbe Lösung wiederkehrt.
+
 Der [SVG-Textbaselinefehler](docs/next_arbeitspaket_2026-10-28_svg_text_baseline.md)
 ist für neue Textausgaben und die sechs AC0721-Archivpaare korrigiert.
 Echte CLI und unabhängige librsvg-Abnahme bestehen jeweils 6/6; tatsächliche

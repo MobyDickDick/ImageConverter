@@ -13,6 +13,7 @@ import json
 import os
 from pathlib import Path
 import re
+import secrets
 import shutil
 import signal
 import subprocess
@@ -209,6 +210,7 @@ class Jobs:
             job_id = job["id"]
             job.update(description=description.strip(), profile=profile, status="running",
                        description_origin='user',
+                       search_seed=secrets.randbits(64),
                        started=time.time(), message="Sample wird am Original verbessert …" if job.get("sample") else "Bild wird konvertiert …")
             self.save(job)
             thread = threading.Thread(target=self.run, args=(job_id,), daemon=True)
@@ -227,6 +229,7 @@ class Jobs:
             if previous.get("sample"):
                 shutil.copyfile(folder / "sample.svg", self.folder(job["id"]) / "sample.svg")
                 job.update(sample=True, sample_name=previous["sample_name"])
+            job['previous_job_id'] = previous['id']
         return job
 
     def run(self, job_id: str) -> None:
@@ -245,6 +248,7 @@ class Jobs:
                        "--descriptions-path", str(descriptions), "--output-dir", str(output),
                        "--start", "UPLOAD", "--end", "UPLOAD", "--execution-mode", "semantic-only",
                        "--search-seconds", str(seconds), "--search-max-seconds", str(maximum),
+                       "--search-seed", str(job["search_seed"]),
                        "--fail-on-batch-failures", "--log-file", str(folder / "converter.local.log")]
             if job.get("sample"):
                 description_file = folder / "description.txt"
@@ -280,6 +284,14 @@ class Jobs:
                 if job["status"] == "running":
                     collect = collect_sample_result if job.get("sample") else collect_result
                     collect(folder, job, process.returncode)
+                    previous = self.jobs.get(job.get('previous_job_id'))
+                    if (job.get('result') and previous and previous.get('result')
+                            and previous['description'] == job['description']):
+                        same = ((folder / 'result.svg').read_bytes() ==
+                                (self.folder(previous['id']) / 'result.svg').read_bytes())
+                        job['same_as_previous'] = same
+                        if same and job['quality'] == 'warning':
+                            job['message'] += ' Die erneute Suche hat denselben besten Entwurf ergeben.'
         except Exception as exc:
             if process is not None:
                 stop_process_tree(process)
@@ -397,9 +409,35 @@ def collect_result(folder: Path, job: dict, returncode: int) -> None:
         job.update(status="done", result=True, quality="passed" if passed else "warning",
                    message=("SVG erstellt. Qualitätsprüfung bestanden." if passed else
                             "Entwurf erstellt. Die Qualitätsprüfung wurde nicht bestanden; bitte das Ergebnis prüfen."))
+        summary = search_summary(output)
+        if summary is not None:
+            job['search_summary'] = summary
+            if not passed:
+                if summary['candidate_evaluations'] == 0:
+                    job['message'] += ' Für dieses Motiv wurde keine zusätzliche Modellsuche ausgeführt; Wiederholen allein erschliesst keine neue Lösung.'
+                else:
+                    job['message'] += f" Die Modellsuche hat {summary['candidate_evaluations']} Kandidaten geprüft."
     else:
         job.update(status="error", quality="unknown", result=False,
                    message="Kein verwendbares SVG erzeugt. Beschreibung prüfen; Details stehen im Protokoll.")
+
+
+def search_summary(output: Path) -> dict | None:
+    """Expose actual search work; a different seed alone is no exploration."""
+    path = output / 'search' / 'progress.jsonl'
+    if not path.is_file():
+        return None
+    result = None
+    with path.open(encoding='utf-8') as stream:
+        for line in stream:
+            try:
+                event = json.loads(line)
+                if event.get('event') == 'image_search_finished':
+                    result = {key: event.get(key) for key in
+                              ('candidate_evaluations', 'stop_reason', 'satisfactory')}
+            except (ValueError, AttributeError):
+                continue
+    return result if result and isinstance(result['candidate_evaluations'], int) else None
 
 
 def saved_svg_quality(source: Path, svg: Path) -> dict | None:

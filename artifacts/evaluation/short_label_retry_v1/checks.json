@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-29",
+  "tests": {
+    "passed": 122,
+    "skipped": 1,
+    "skip_reason": "Complete 379-pair archive reconversion belongs to the extended profile",
+    "log": "final-tests.log"
+  },
+  "fresh_neutral_filename_cli": {
+    "seeds": [42, 314159],
+    "saved_outputs": 6,
+    "internal_pixel_passes": 6,
+    "independent_librsvg_passes": 6,
+    "semantic_passes": 6,
+    "forbidden_svg_reads": 0,
+    "same_svg_per_size_across_seeds": true
+  },
+  "recheck_tool_final_replay": {
+    "seed": 42,
+    "cli_exit": 0,
+    "passed_outputs": 3,
+    "gates": "MuPDF, librsvg, label/primitive semantics and reference access audit"
+  },
+  "live_gui_retry": {
+    "status": "done",
+    "quality": "passed",
+    "candidate_evaluations": 844,
+    "fresh_saved_seed": true,
+    "same_as_previous": true,
+    "stop_reason": "satisfactory"
+  }
+}

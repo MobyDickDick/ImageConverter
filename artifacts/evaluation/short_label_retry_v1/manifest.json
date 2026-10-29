@@ -1,0 +1,32 @@
+{
+  "schema_version": "short_label_family_repair_v1",
+  "cases": [
+    {
+      "case_id": "AC0835_L",
+      "source": "AC0835_L.jpg",
+      "image": "../../images_to_convert/AC0835_L.jpg",
+      "source_sha256": "c8c7deaa3e56d3e17de1a864b5cd6fda7bf49824faf29d66bda58f75d700928b",
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile.",
+      "before_sha256": "790ce63a8b02383fd14982757a9b2bbcd0c6b9163c1694852c3cac7e783aa889",
+      "after_svg": "../../satisfactory_conversions/svgs/AC0835_L.svg"
+    },
+    {
+      "case_id": "AC0835_M",
+      "source": "AC0835_M.jpg",
+      "image": "../../images_to_convert/AC0835_M.jpg",
+      "source_sha256": "59bed43a01f7477b0cd3bba57136bd1e84d14e7d5164ad7cf654498b47e7dc53",
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile.",
+      "before_sha256": "a0e3cbf27c3e2aa86fbb6890bdc26b2aeabab893303abe9365295785208667f2",
+      "after_svg": "../../satisfactory_conversions/svgs/AC0835_M.svg"
+    },
+    {
+      "case_id": "AC0835_S",
+      "source": "AC0835_S.jpg",
+      "image": "../../images_to_convert/AC0835_S.jpg",
+      "source_sha256": "f4a3aed05e5d5b1a3dc51bbebf112a7400f2dc2ca876c9f57ead14bcd117e147",
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile.",
+      "before_sha256": "9606f8376cbd603651ae8158c6830c738c885032d1085c2f0d3a2c79a27e3eaa",
+      "after_svg": "../../satisfactory_conversions/svgs/AC0835_S.svg"
+    }
+  ]
+}
