@@ -1,0 +1,96 @@
+{
+  "schema_version": "svg_text_coverage_v1",
+  "ci_failure": {
+    "run_id": 40750577862,
+    "job_id": 123035867289,
+    "commit": "c212f514b19986a06270da133e73d1364d0cc5be"
+  },
+  "windows_renderer": "rsvg-convert version 2.62.3\n\nlibraries used:\n  cairo 1.18.4\n  pango 1.57.1\n  harfbuzz 14.2.1",
+  "windows_cli": {
+    "cases": 6,
+    "independent_passed": 6,
+    "production_plan_b_passed": 5
+  },
+  "regular_gate": {
+    "case_count": 6,
+    "improved": 6,
+    "satisfactory": 6,
+    "technically_completed": 6
+  },
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "note": "Detailed raw outputs are disposable under .tmp; the original baseline-only audit remains historical.",
+  "validation": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_svg_text_baseline.py tests/test_labeled_t_square_runtime.py tests/test_labeled_square_runtime.py tests/test_right_stem_labeled_square_runtime.py tests/test_left_stem_labeled_square_runtime.py tests/test_satisfactory_archive.py tests/test_image_converter_gui.py -q",
+      "result": "217 passed, 1 skipped; 2 GUI tests blocked by local sandbox"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_image_converter_gui.py -q",
+      "result": "18 passed outside sandbox"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_labeled_t_square_runtime.py -q",
+      "result": "24 passed with final bounded-outline assertions"
+    },
+    {
+      "command": "Ubuntu 26.04 / Python 3.14.4: python -m pytest tests/test_svg_text_baseline.py tests/test_labeled_t_square_runtime.py tests/test_satisfactory_archive.py -q",
+      "result": "64 passed, 1 skipped"
+    },
+    {
+      "command": ".venv/Scripts/python.exe tools/check_no_new_image_id_hardcoding.py",
+      "result": "PASS, zero occurrences"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.run_pytest_profile core-green",
+      "result": "42 passed"
+    },
+    {
+      "command": "Ubuntu 26.04 / Python 3.10.22: python -m pytest tests/test_svg_text_baseline.py tests/test_satisfactory_archive.py -q",
+      "result": "40 passed, 1 skipped"
+    },
+    {
+      "command": "Ubuntu 26.04 / Python 3.10.22: python -m tools.run_labeled_description_recheck artifacts/evaluation/labeled_t_square_recheck_v1/manifest.json --output-dir .tmp/svg-text-linux310-coverage-cli && python -m tools.evaluate_svg_text_baseline --manifest .tmp/svg-text-linux310-coverage-cli/manifest.json --output-dir .tmp/svg-text-linux310-coverage-independent",
+      "result": "exit 0; regular gates 6/6, independent gates 6/6; production Plan-B 5/6"
+    }
+  ],
+  "runtime_sha256": {
+    "src/iCCModules/imageCompositeConverterLabeledSquare.py": "c1a794064f50fa8311a2094f54a0b62423dfb337235fd2bee6dcf93bb1b9316b",
+    "src/iCCModules/imageCompositeConverterGeometryIr/runtime.py": "256b9330f583ca80363f33d58246770abad8d80f4ba9425c166593f74f5afa0d",
+    "tools/refresh_satisfactory_archive.py": "400f3eac07adfbc69ebae389c83f9031c659bce525fa69213a900cb76654c5a9"
+  },
+  "linux_renderer": "rsvg-convert version 2.61.3\n\nlibraries used:\n  cairo 1.18.4\n  pango 1.57.0\n  harfbuzz 12.3.2\n  fontconfig 2.17.1",
+  "linux_cli": {
+    "cases": 6,
+    "independent_passed": 6,
+    "production_plan_b_passed": 5
+  },
+  "linux_regular_gate": {
+    "case_count": 6,
+    "improved": 6,
+    "satisfactory": 6,
+    "technically_completed": 6
+  },
+  "linux_reference_access": {
+    "after": {
+      "blocked_svg_reads": []
+    },
+    "before": {
+      "blocked_svg_reads": []
+    }
+  },
+  "cases": [
+    {"variant":"AC0721_1_L","svg_sha256":"5bb514df416306c9f65ac47819a3ae5e3d62ac6719d10fc9bd0f1213b765fcb7","before":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.004274002742022276,"foreground_mse":0.006986795924603939,"edge_alignment":0.988836944103241,"foreground_iou":0.9640718562874252}},"after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.004274002742022276,"foreground_mse":0.006986795924603939,"edge_alignment":0.988836944103241,"foreground_iou":0.9640718562874252}},"production_before":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.0043906718492507935,"foreground_mse":0.007180326152592897,"edge_alignment":0.988836944103241,"foreground_iou":0.9640718562874252}},"production_after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.0043906718492507935,"foreground_mse":0.007180326152592897,"edge_alignment":0.988836944103241,"foreground_iou":0.9640718562874252}},"glyph":{"passed":true,"observed_bounds":[7.0,10.0,18.0,24.0],"rendered_bounds":[6.875,10.5,18.125,23.5],"max_bound_error":0.5,"tolerance_pixels":1.5},"image_sha256":"303322d79a15df0a62ff69448dd967ad147ffd57a9e105b6821b9633a5d9ce8e","linux_after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.004270767793059349,"foreground_mse":0.006981347221881151,"edge_alignment":0.988836944103241,"foreground_iou":0.9640718562874252}},"linux_glyph":{"passed":true,"observed_bounds":[7.0,10.0,18.0,24.0],"rendered_bounds":[6.875,10.5,18.125,23.5],"max_bound_error":0.5,"tolerance_pixels":1.5}},
+    {"variant":"AC0721_1_M","svg_sha256":"9babe418c0833cd7d040570ba4bd767a67f6ac95832a54b44f6aed90e03e2839","before":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.004844239447265863,"foreground_mse":0.007917599752545357,"edge_alignment":0.9536593556404114,"foreground_iou":0.9882629107981221}},"after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.004188023507595062,"foreground_mse":0.00683931028470397,"edge_alignment":0.948093831539154,"foreground_iou":0.9882629107981221}},"production_before":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.00274447537958622,"foreground_mse":0.0044914474710822105,"edge_alignment":0.9540108442306519,"foreground_iou":0.9882629107981221}},"production_after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.00251732487231493,"foreground_mse":0.004118194803595543,"edge_alignment":0.9462103843688965,"foreground_iou":0.9882629107981221}},"glyph":{"passed":true,"observed_bounds":[5.0,7.0,14.0,18.0],"rendered_bounds":[5.625,7.875,14.375,18.125],"max_bound_error":0.875,"tolerance_pixels":1.5},"image_sha256":"bb4c6836db304a40c042c10e0c4438d1c1e92a3924ba528482d1f52f83d92271","linux_after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.004177542869001627,"foreground_mse":0.00682209013029933,"edge_alignment":0.9456643462181091,"foreground_iou":0.9882629107981221}},"linux_glyph":{"passed":true,"observed_bounds":[5.0,7.0,14.0,18.0],"rendered_bounds":[5.625,7.875,14.375,18.125],"max_bound_error":0.875,"tolerance_pixels":1.5}},
+    {"variant":"AC0721_1_S","svg_sha256":"430cca24f5a5c0e41fa56ae550d0b700db024e3818e5be9d6d25f4fd34157f1c","before":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.003527258522808552,"foreground_mse":0.003921568393707275,"edge_alignment":0.9186409115791321,"foreground_iou":0.9637462235649547}},"after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.003527258522808552,"foreground_mse":0.003921568393707275,"edge_alignment":0.9186409115791321,"foreground_iou":0.9637462235649547}},"production_before":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.0024678236804902554,"foreground_mse":0.002704542363062501,"edge_alignment":0.9140672087669373,"foreground_iou":0.9579579579579579}},"production_after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.0024678236804902554,"foreground_mse":0.002704542363062501,"edge_alignment":0.9140672087669373,"foreground_iou":0.9579579579579579}},"glyph":{"passed":true,"observed_bounds":[4.0,4.0,11.0,12.0],"rendered_bounds":[4.375,4.625,10.75,12.0],"max_bound_error":0.625,"tolerance_pixels":1.5},"image_sha256":"07afeeb295ecce0596745dcd4d0de5b51e5528f175b92ef74b552cd8a070a4ce","linux_after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.003489078488200903,"foreground_mse":0.003878375282511115,"edge_alignment":0.9186409115791321,"foreground_iou":0.9637462235649547}},"linux_glyph":{"passed":true,"observed_bounds":[4.0,4.0,11.0,12.0],"rendered_bounds":[4.375,4.625,10.75,12.0],"max_bound_error":0.625,"tolerance_pixels":1.5}},
+    {"variant":"AC0721_L","svg_sha256":"03c0001f2bc2291accfe3e1d48a458b45e73c6f07c178443c185301aa451ea7f","before":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.006549467332661152,"foreground_mse":0.023031892254948616,"edge_alignment":0.8113105297088623,"foreground_iou":0.8620689655172413}},"after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.006549467332661152,"foreground_mse":0.023031892254948616,"edge_alignment":0.8113105297088623,"foreground_iou":0.8620689655172413}},"production_before":{"satisfactory":false,"failures":["foreground_iou_outside_limit"],"metrics":{"normalized_mse":0.006698004901409149,"foreground_mse":0.023561615496873856,"edge_alignment":0.7650896906852722,"foreground_iou":0.799373040752351}},"production_after":{"satisfactory":false,"failures":["foreground_iou_outside_limit"],"metrics":{"normalized_mse":0.006698004901409149,"foreground_mse":0.023561615496873856,"edge_alignment":0.7650896906852722,"foreground_iou":0.799373040752351}},"glyph":{"passed":true,"observed_bounds":[7.0,10.0,18.0,23.0],"rendered_bounds":[6.875,10.5,18.125,23.5],"max_bound_error":0.5,"tolerance_pixels":1.5},"image_sha256":"63ed5447dd54aba7d66aa341bedbd5a32f48a91420237a94b3ab4d05296ade44","linux_after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.006549946032464504,"foreground_mse":0.023032423108816147,"edge_alignment":0.8113105297088623,"foreground_iou":0.8620689655172413}},"linux_glyph":{"passed":true,"observed_bounds":[7.0,10.0,18.0,23.0],"rendered_bounds":[6.875,10.5,18.125,23.5],"max_bound_error":0.5,"tolerance_pixels":1.5}},
+    {"variant":"AC0721_M","svg_sha256":"a1cb4b677f0720f853a854e896b7172bc2368dc2af37c321c8dd427e3572eb89","before":{"satisfactory":false,"failures":["foreground_iou_outside_limit"],"metrics":{"normalized_mse":0.0038987204898148775,"foreground_mse":0.010961851105093956,"edge_alignment":0.7860825657844543,"foreground_iou":0.8145161290322581}},"after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.0033278411719948053,"foreground_mse":0.009338096715509892,"edge_alignment":0.7830458879470825,"foreground_iou":0.9112903225806451}},"production_before":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.00199709995649755,"foreground_mse":0.005639232229441404,"edge_alignment":0.791628360748291,"foreground_iou":0.8943089430894309}},"production_after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.0018352940678596497,"foreground_mse":0.005124890245497227,"edge_alignment":0.7871402502059937,"foreground_iou":0.9193548387096774}},"glyph":{"passed":true,"observed_bounds":[6.0,7.0,14.0,18.0],"rendered_bounds":[5.625,7.875,14.375,18.125],"max_bound_error":0.875,"tolerance_pixels":1.5},"image_sha256":"fc5d948de62597e8c7eb5f3105397a88898991e785841a17ad8232213cd9fb0e","linux_after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.003330433275550604,"foreground_mse":0.00934541318565607,"edge_alignment":0.7815600633621216,"foreground_iou":0.9112903225806451}},"linux_glyph":{"passed":true,"observed_bounds":[6.0,7.0,14.0,18.0],"rendered_bounds":[5.625,7.875,14.375,18.125],"max_bound_error":0.875,"tolerance_pixels":1.5}},
+    {"variant":"AC0721_S","svg_sha256":"7775723f05e1b8ec2be5bb528a27add04fc908ba6967ff16a69a7d8a7f476b61","before":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.003548830049112439,"foreground_mse":0.005352428648620844,"edge_alignment":0.790277361869812,"foreground_iou":0.8703703703703703}},"after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.002898741513490677,"foreground_mse":0.004213763866573572,"edge_alignment":0.7766807079315186,"foreground_iou":0.9351851851851852}},"production_before":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.0027765731792896986,"foreground_mse":0.003967704717069864,"edge_alignment":0.7605592608451843,"foreground_iou":0.9074074074074074}},"production_after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.0024034243542701006,"foreground_mse":0.0033093395177274942,"edge_alignment":0.7661147117614746,"foreground_iou":0.9351851851851852}},"glyph":{"passed":true,"observed_bounds":[4.0,4.0,11.0,12.0],"rendered_bounds":[4.25,4.5,10.75,12.125],"max_bound_error":0.5,"tolerance_pixels":1.5},"image_sha256":"476d33250c0cb371734a844d18251d32497a02c762d16cb431638a6362fca936","linux_after":{"satisfactory":true,"failures":[],"metrics":{"normalized_mse":0.0028606841806322336,"foreground_mse":0.004147692583501339,"edge_alignment":0.7766807079315186,"foreground_iou":0.9351851851851852}},"linux_glyph":{"passed":true,"observed_bounds":[4.0,4.0,11.0,12.0],"rendered_bounds":[4.25,4.5,10.75,12.125],"max_bound_error":0.5,"tolerance_pixels":1.5}}
+  ]
+}

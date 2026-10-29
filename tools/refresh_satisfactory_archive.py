@@ -37,6 +37,9 @@ def archived_svg_bytes(root: Path, source: Path) -> bytes:
     for case in migrations:
         if hashlib.sha256(data).hexdigest() == case['before_sha256']:
             corrected = data.replace(b'dominant-baseline="middle"', b'dominant-baseline="alphabetic"')
+            if case.get('text_outline_attributes'):
+                corrected = corrected.replace(b'dominant-baseline="alphabetic"',
+                    b'dominant-baseline="alphabetic"'+case['text_outline_attributes'].encode('ascii'))
             if hashlib.sha256(corrected).hexdigest() != case['after_sha256']:
                 raise ValueError('Baseline migration hash mismatch')
             return corrected

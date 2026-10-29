@@ -52,7 +52,7 @@ function renderJob(job, select = false) {
   if (select) {
     $("description").value = job.description;
     $("profile").value = job.profile;
-    $("description-hint").textContent = job.description ? "Beschreibung geladen. Du kannst sie vor der Konvertierung anpassen." : "Beschreibe Formen, Farben und ihre Anordnung, damit der Konverter das passende Modell suchen kann.";
+    $("description-hint").textContent = job.description_origin === "user" ? "Deine zuletzt verwendete Beschreibung dieses Bildes wurde übernommen." : job.description ? "Katalogbeschreibung geladen. Du kannst sie vor der Konvertierung anpassen." : "Beschreibe Formen, Farben und ihre Anordnung, damit der Konverter das passende Modell suchen kann.";
     scale = 1;
   }
   const sourceUrl = `/api/jobs/${job.id}/source`;

@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [AC0501-SIA: vorlagengestützte Nachzeichnung, richtige Bildbeschreibung und GUI-Pixelprüfung (2026-10-29)](ac0501_sia_redraw_and_gui_2026-10-29.md)
+
 - [SVG-Textbaseline korrigiert: echte Glyphengrenzen, sechs unabhängige CLI-Abnahmen und Archivinventar (2026-10-28)](next_arbeitspaket_2026-10-28_svg_text_baseline.md)
 
 - [GitHub-Issue #1980: geprüfte rosa Referenz, eigenständige Beschreibung und 42/42 CLI-Abnahmen (2026-10-25)](../artifacts/evaluation/axial_panel_issue_v1/README.md)

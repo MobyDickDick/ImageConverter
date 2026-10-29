@@ -8,6 +8,42 @@ Quadratbeschriftungen, Ventilbeschriftungen, allgemeine `TextGlyph`-Elemente
 sowie CO, die tiefgestellte 2, VOC und rF im Badge-Emitter.
 Die Registrierung, Schriftgrößen und Textkoordinaten bleiben erhalten.
 
+## CI-Nachtrag: Linux-Schriftrückfall und Buchstabendeckung
+
+Der erste Linux-CI-Lauf von PR #2073 widerlegt eine plattformübergreifende
+Abnahme der ursprünglichen Ausgabe: Bei AC0721_M bestehen beide
+Glyphengrenzenprüfungen, aber das globale Foreground-IoU-Gate scheitert.
+Arial wird unter Ubuntu durch Liberation Sans ersetzt. Der Fehler ist mit
+unveränderten Originalpixeln lokal unter Ubuntu 26.04 reproduziert.
+Ein expliziter Liberation-Vergleich unter Windows ergibt ebenfalls
+0,814516 IoU bei unveränderter Mindestgrenze 0,85.
+
+Die allgemeine Quadratbeschriftungsregistrierung prüft jetzt zusätzlich
+fünf dünne Textkonturen von 1/32 bis 1/4 Originalpixel. Eine Kontur in der
+Textfarbe wird nur übernommen, wenn der bisherige Registrierungsfehler und
+der quadratische Pixelfehler sinken, die globale Vordergrunddeckung nicht
+abnimmt, die lokale Buchstabendeckung steigt und das Kantengate 0,72 besteht.
+Das erhält die beobachtete Geometrie und verfeinert die diskrete Normal-/Fett-
+Wahl kontinuierlich. Kein unabhängiger Renderer im Runtime-Fit, keine
+Bildkennung und keine gelockerte Abnahmegrenze. Die Kantenausrichtung kann
+dabei gegenüber der unmittelbar vorherigen Ausgabe leicht sinken; sie wird
+nicht als durchgehend monotone Verbesserung aller Einzelmetriken dargestellt.
+
+AC0721_M erreicht mit einer aus dem Raster gewählten Kontur von 0,125 Pixeln
+im expliziten Liberation-Vergleich 0,911290 IoU. Drei AC0721-Archiv-SVGs
+erhalten die geprüfte Verfeinerung samt aktuellen Messwerten und Hashes.
+Die Migration bleibt hashgebunden; historische Quellen und Berichte bleiben
+erhalten. Die nachfolgenden Angaben zur Pixelgleichheit dokumentieren die
+ursprüngliche reine Baselineänderung, nicht diese spätere Deckungskorrektur.
+
+Die Regression prüft Systemschriften und Liberation getrennt sowie den
+reproduzierten negativen Ausgangsfall. Vergleiche mit historischen Vektoren
+erhalten die gesamte bisherige Geometrie; nur die zusätzliche dünne
+Textkontur ist erlaubt und muss Pixelabweichung und Vordergrunddeckung
+verbessern. Zusätzlich wurde die Bildkennung aus einem GUI-Kommentar
+entfernt, an der drei andere CI-Jobs scheiterten. Die Scannerregeln bleiben
+unverändert. [Kompakte Folgeevidenz](../artifacts/evaluation/svg_text_coverage_v1/README.md).
+
 ## Tatsächliche Position statt Textanker
 
 Der Beschriftungsprüfer ermittelt die sichtbaren Glyphengrenzen durch

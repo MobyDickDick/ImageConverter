@@ -1,5 +1,12 @@
 # SVG-Textbaseline: unabhängige Bestandsprüfung und sechs reparierte Archivpaare
 
+Nachtrag: Die ursprünglichen Windows-Messungen unten bestanden den ersten
+Linux-CI-Lauf für AC0721_M nicht. Die aus Originalpixeln bestimmte dünne
+Textkontur und die explizite Liberation-Gegenprobe stehen in der
+[Folgeevidenz](../svg_text_coverage_v1/README.md). `manifest.json` erhält
+zusätzlich die drei geprüften Textkonturen; `summary.json` und `checks.json`
+bewahren die ursprüngliche Baseline-Messung.
+
 - `summary.json`: ursprüngliches 60er-Textinventar mit Vorher-/Nachher-Hashes,
   unveränderten Pixelgrenzen, beiden unabhängigen Messungen, tatsächlichen
   Glyphengrenzen und dem Nachweis pixelgleicher Produktionsrenderings.

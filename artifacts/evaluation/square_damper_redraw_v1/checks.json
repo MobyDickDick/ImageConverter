@@ -1,0 +1,161 @@
+{
+  "schema_version": "user_guided_square_damper_redraw_v1",
+  "method": "Native structural redraw guided by the user SVG; shared geometry fitted to original pixels. No automatic family acceptance.",
+  "image_sha256": "ce3b4ef2d50a8d4c47b3a1f41c14ff83e02136c748428a81e13eeec4aec6b07b",
+  "user_template_sha256": "75cdb1f192ceea063a50ee02e026703a9dfb9d33f31c239f39146364a96657b6",
+  "output_svg_sha256": "29f5662c7bfa6e1aa5bc8a1d2b44acc2fdbf9afbb94790847a4e954069252eab",
+  "dimensions": [
+    20,
+    40
+  ],
+  "user_template_unchanged": true,
+  "catalog_count_unchanged": true,
+  "description_overrides": {
+    "mode": "ersetzen",
+    "image_variants": 9,
+    "catalogs": 2
+  },
+  "checks": [
+    {
+      "renderer": "MuPDF",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0004220491973683238,
+          "foreground_mse": 0.0018459499115124345,
+          "edge_alignment": 0.913549542427063,
+          "foreground_iou": 0.8618421052631579
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 3,
+          "path_command_count": 8,
+          "path_complexity_ratio": 1.6
+        }
+      }
+    },
+    {
+      "renderer": "librsvg",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0004238369583617896,
+          "foreground_mse": 0.0014403648674488068,
+          "edge_alignment": 0.8990679979324341,
+          "foreground_iou": 0.8958333333333334
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 3,
+          "path_command_count": 8,
+          "path_complexity_ratio": 1.6
+        }
+      }
+    }
+  ],
+  "gui": {
+    "job_id": "7707cdf38a014979a7593a57c1095ece",
+    "status": "done",
+    "quality": "passed",
+    "sample_report": {
+      "initial_mse": 0.0004051326250191778,
+      "final_mse": 0.0004051326250191778,
+      "initial_quality": {
+        "normalized_mse": 0.0004051326250191778,
+        "foreground_mse": 0.0017719905590638518,
+        "foreground_iou": 0.9144736842105263,
+        "edge_alignment": 0.9145572185516357,
+        "passed": true
+      },
+      "final_quality": {
+        "normalized_mse": 0.0004051326250191778,
+        "foreground_mse": 0.0017719905590638518,
+        "foreground_iou": 0.9144736842105263,
+        "edge_alignment": 0.9145572185516357,
+        "passed": true
+      },
+      "improved": false,
+      "evaluations": 1,
+      "accepted": 0,
+      "description_error": "",
+      "stop_reason": "quality_target_reached",
+      "passed": true,
+      "elapsed": 0.0
+    }
+  },
+  "original_template_refinement": {
+    "quality": "warning",
+    "sample_report": {
+      "initial_mse": 0.004226758610457182,
+      "final_mse": 0.0007490965654142201,
+      "initial_quality": {
+        "normalized_mse": 0.004226758610457182,
+        "foreground_mse": 0.01899128034710884,
+        "foreground_iou": 0.6494252873563219,
+        "edge_alignment": 0.7416554093360901,
+        "passed": false
+      },
+      "final_quality": {
+        "normalized_mse": 0.0007490965654142201,
+        "foreground_mse": 0.0034838172141462564,
+        "foreground_iou": 0.7253521126760564,
+        "edge_alignment": 0.8566744327545166,
+        "passed": false
+      },
+      "improved": true,
+      "evaluations": 2737,
+      "accepted": 256,
+      "description_error": "",
+      "passed": false,
+      "elapsed": 1.45
+    }
+  },
+  "validation": [
+    {
+      "command": "python -m pytest tests/test_image_converter_gui.py tests/test_image_converter_sample.py tests/test_square_damper_redraw.py -q",
+      "passed": 41,
+      "exit_code": 0
+    },
+    {
+      "command": "python -m pytest tests/detailtests/test_plan_b_variations.py -q -k \"matching_image_description or sidecar_pairs\"",
+      "passed": 2,
+      "exit_code": 0
+    },
+    {
+      "command": "python -m pytest tests/test_image_composite_converter.py -q -k load_description_mapping_from_xml",
+      "passed": 6,
+      "exit_code": 0
+    },
+    {
+      "command": "python -m tools.run_pytest_profile core-green",
+      "passed": 42,
+      "exit_code": 0
+    },
+    {
+      "command": "python tools/check_no_new_image_id_hardcoding.py",
+      "exit_code": 0
+    }
+  ]
+}

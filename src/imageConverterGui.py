@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import io
 import json
 import os
@@ -67,7 +68,7 @@ def stop_process_tree(process: subprocess.Popen) -> None:
 
 
 def write_description_table(path: Path, description: str, catalog: dict[str, str]) -> None:
-    # Keep referenced descriptions (e.g. "Wie AC0401") available to the existing parser.
+    # Keep referenced catalog descriptions available to the existing parser.
     with path.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.writer(stream)
         writer.writerow(["Wurzelform", "Beschreibung"])
@@ -115,6 +116,14 @@ class Jobs:
                 if job["status"] == "running":
                     job.update(status="interrupted", message="Der Server wurde während der Konvertierung beendet.")
                 self.jobs[job["id"]] = job
+                if job.get('quality') == 'passed' and job.get('result') and 'pixel_quality' not in job:
+                    quality = saved_svg_quality(path.parent/'source.png', path.parent/'result.svg')
+                    job['pixel_quality'] = quality
+                    if quality and not quality['passed']:
+                        job.update(quality='warning', message='Das gespeicherte SVG besteht die erneute Pixelprüfung nicht. Bitte den Entwurf prüfen oder ein Sample-SVG laden.')
+                        if quality['observed_foreground_pixels'] and not quality['output_foreground_pixels']:
+                            job.update(status='error', result=False)
+                    self.save(job)
             except (OSError, ValueError, KeyError):
                 continue
 
@@ -167,6 +176,14 @@ class Jobs:
         description = next((self.descriptions[key.upper()] for key in keys
                             if key.upper() in self.descriptions), "")
         with self.lock:
+            source_sha256 = hashlib.sha256(
+                f'{background.width}x{background.height}:'.encode()+background.tobytes()).hexdigest()
+            previous = next((job for job in sorted(self.jobs.values(), key=lambda j:j['created'], reverse=True)
+                             if job.get('source_sha256') == source_sha256
+                             and job.get('description_origin') == 'user'), None)
+            origin = 'user' if previous else ('catalog' if description else 'empty')
+            if previous:
+                description = previous['description']
             job_id = uuid.uuid4().hex
             folder = self.directory / job_id
             folder.mkdir()
@@ -174,7 +191,8 @@ class Jobs:
             job = dict(id=job_id, name=name, width=background.width, height=background.height,
                        description=description, status="ready", created=time.time(),
                        message="Bild geladen. Beschreibung prüfen und Konvertierung starten.",
-                       result=False, quality="unknown", profile="normal", elapsed=0)
+                       result=False, quality="unknown", profile="normal", elapsed=0,
+                       source_sha256=source_sha256, description_origin=origin)
             self.jobs[job_id] = job
             self.save(job)
             return self.snapshot(job_id)
@@ -190,6 +208,7 @@ class Jobs:
             job = self.editable(job_id)
             job_id = job["id"]
             job.update(description=description.strip(), profile=profile, status="running",
+                       description_origin='user',
                        started=time.time(), message="Sample wird am Original verbessert …" if job.get("sample") else "Bild wird konvertiert …")
             self.save(job)
             thread = threading.Thread(target=self.run, args=(job_id,), daemon=True)
@@ -343,6 +362,8 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
     report = json.loads(report_path.read_text(encoding="utf-8"))
     shutil.copyfile(result, folder / "result.svg")
     message = "Sample am Original verbessert." if report["improved"] else "Keine messbare Verbesserung gefunden. Der Sample-Stand bleibt erhalten."
+    if report.get('stop_reason') == 'quality_target_reached':
+        message = 'Das Sample erfüllt die Pixelprüfung bereits; seine Formen bleiben erhalten.'
     message += " Pixelprüfung bestanden." if report["passed"] else " Bitte den Entwurf prüfen; die Pixel- oder explizite Beschreibungsprüfung ist noch offen."
     job.update(status="done", result=True, quality="passed" if report["passed"] else "warning",
                message=message, sample_report=report)
@@ -363,13 +384,45 @@ def collect_result(folder: Path, job: dict, returncode: int) -> None:
             has_failures = bool(list(csv.DictReader(stream, delimiter=";")))
     if result:
         shutil.copyfile(result, folder / "result.svg")
-        passed = returncode == 0 and not has_failures and result == candidates[0]
+        # A model can be shifted off-canvas and still receive a successful CLI
+        # status. Re-render the saved vector against the actual uploaded image.
+        quality = saved_svg_quality(folder / 'source.png', result)
+        job['pixel_quality'] = quality
+        if quality and quality['observed_foreground_pixels'] and not quality['output_foreground_pixels']:
+            job.update(status='error', result=False, quality='warning',
+                       message='Das SVG ist leer oder liegt ausserhalb der Zeichenfläche. Bitte die Beschreibung prüfen oder ein Sample-SVG laden.')
+            return
+        passed = (returncode == 0 and not has_failures and result == candidates[0]
+                  and quality is not None and quality['passed'])
         job.update(status="done", result=True, quality="passed" if passed else "warning",
                    message=("SVG erstellt. Qualitätsprüfung bestanden." if passed else
                             "Entwurf erstellt. Die Qualitätsprüfung wurde nicht bestanden; bitte das Ergebnis prüfen."))
     else:
         job.update(status="error", quality="unknown", result=False,
                    message="Kein verwendbares SVG erzeugt. Beschreibung prüfen; Details stehen im Protokoll.")
+
+
+def saved_svg_quality(source: Path, svg: Path) -> dict | None:
+    from PIL import Image
+    import numpy as np
+    from src.imageConverterSample import prepare_sample, render_svg
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
+    try:
+        with Image.open(source) as image:
+            target = np.asarray(image.convert('RGB'))
+        h, w = target.shape[:2]
+        prepared = prepare_sample(svg.read_bytes(), w, h)
+        rendered = render_svg(prepared, w, h)
+        quality = pixel_quality(target, rendered)
+        border = np.concatenate((target[0], target[-1], target[:, 0], target[:, -1]))
+        background = np.median(border.astype(float), axis=0)
+        quality.update(observed_foreground_pixels=int(np.count_nonzero(
+            np.max(abs(target.astype(float)-background), axis=2) > 25)),
+            output_foreground_pixels=int(np.count_nonzero(
+                np.max(abs(rendered.astype(float)-background), axis=2) > 25)))
+        return quality
+    except (ValueError, SyntaxError, OSError, RuntimeError):
+        return None
 
 
 class GuiServer(ThreadingHTTPServer):

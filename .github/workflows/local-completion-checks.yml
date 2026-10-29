@@ -23,6 +23,7 @@ jobs:
       - name: Require independent renderer and verify actual glyph bounds
         run: |
           rsvg-convert --version
+          fc-match Arial
           python -m pytest -q tests/test_svg_text_baseline.py tests/test_satisfactory_archive.py
       - name: Accept freshly saved CLI vectors with librsvg against original pixels
         run: |

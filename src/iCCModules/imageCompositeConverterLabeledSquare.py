@@ -374,6 +374,36 @@ def fit_labeled_square(geometry_ir, *, image, render_fn, error_fn, _refine_conto
                         and (_squared_contour or
                              (metrics[1] >= old_metrics[1]-1e-9 and metrics[2] >= old_metrics[2]-1e-9))):
                     best = refined
+    # Discrete normal/bold font choices can under-cover the observed letter.
+    # Fit a bounded continuous outline from original interior contrast pixels;
+    # do not use the independent audit renderer or any image/family identity.
+    blank = copy.deepcopy(best[1])
+    blank['label'] = ''
+    background = render_fn([blank])
+    if background is not None:
+        interior = np.zeros((height, width), dtype=bool)
+        x, y, rw, rh = best[1]['body_bbox']
+        margin = max(2., best[1]['body_stroke_width']*scale*1.5)
+        interior[max(0, math.ceil(y*height+margin)):min(height, math.floor((y+rh)*height-margin)),
+                 max(0, math.ceil(x*width+margin)):min(width, math.floor((x+rw)*width-margin))] = True
+        observed_label = (np.max(np.abs(arr.astype(float)-background.astype(float)), axis=2) > 45) & interior
+
+        def label_iou(raster):
+            predicted = (np.max(np.abs(raster.astype(float)-background.astype(float)), axis=2) > 45) & interior
+            return np.count_nonzero(predicted & observed_label)/max(1, np.count_nonzero(predicted | observed_label))
+
+        for stroke in (1/32, 1/16, 1/8, 3/16, 1/4):
+            candidate = copy.deepcopy(best[1])
+            candidate['label_stroke_width'] = stroke/scale
+            measured = measure(candidate)
+            evaluations += 1
+            if measured is not None and measured[0] < best[0]-1e-9:
+                before_metrics = _contour_metrics(arr, best[2])
+                after_metrics = _contour_metrics(arr, measured[2])
+                if (after_metrics[0] <= before_metrics[0]+1e-9 and after_metrics[1] >= .72
+                        and after_metrics[2] >= before_metrics[2]-1e-9
+                        and label_iou(measured[2]) > label_iou(best[2])):
+                    best = measured
     if best[0] >= initial_error-1e-9:
         return None
     return {'geometry_ir': [best[1]], 'rendered': best[2], 'initial_error': initial_error,

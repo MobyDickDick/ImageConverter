@@ -19,13 +19,17 @@ T_CASES = [c for c in json.loads((ARCHIVE/'index.json').read_text())['cases']
            if c['variant'].startswith('AC0721')]
 
 
-@pytest.fixture(scope='module')
-def independent():
+@pytest.fixture(scope='module', params=[None, 'Liberation Sans'], ids=['system-fonts', 'liberation-fallback'])
+def independent(request):
     try:
         executable = find_librsvg()
     except FileNotFoundError as error:
         pytest.skip(str(error))
-    return lambda s, w, h: render_librsvg(s, w, h, executable=executable)
+    def renderer(svg, width, height):
+        if request.param:
+            svg = svg.replace('Arial, Helvetica, sans-serif', request.param)
+        return render_librsvg(svg, width, height, executable=executable)
+    return renderer
 
 
 @pytest.mark.parametrize('case', T_CASES, ids=lambda c:c['variant'])
@@ -41,11 +45,35 @@ def test_fresh_registered_t_matches_original_pixels_in_both_renderers(case, inde
     svg = geometry.renderGeometryIrToSvgImpl(w, h, fitted['geometry_ir'])
     assert 'dominant-baseline="alphabetic"' in svg
     for renderer in (render, independent):
-        assert square_glyph_evidence(image, svg, renderer)['passed']
-    assert measure_quality(image, svg, render_fn=independent)['satisfactory']
-    # Baseline repair preserves the fitted production raster exactly.
+        evidence = square_glyph_evidence(image, svg, renderer)
+        assert evidence['passed'], evidence
+    quality = measure_quality(image, svg, render_fn=independent)
+    assert quality['satisfactory'], quality
+    # The archive contains the independently checked coverage refinement too.
     old = (ARCHIVE/case['svg']).read_text()
     np.testing.assert_array_equal(render(old, w, h), render(svg, w, h))
+
+
+def test_linux_font_fallback_reproduces_prior_failure_and_retains_strict_gates():
+    evidence = ROOT/'artifacts/evaluation/labeled_t_square_recheck_v1'
+    manifest = json.loads((evidence/'manifest.json').read_text())
+    case = next(c for c in manifest['cases'] if c['source'] == 'AC0721_M.jpg')
+    image = cv2.imread(str(evidence/case['image']))
+    original = (evidence/case['after_svg']).read_text().replace(
+        'dominant-baseline="middle"', 'dominant-baseline="alphabetic"')
+    try:
+        executable = find_librsvg()
+    except FileNotFoundError as error:
+        pytest.skip(str(error))
+    fallback = lambda s, w, h: render_librsvg(
+        s.replace('Arial, Helvetica, sans-serif', 'Liberation Sans'), w, h, executable=executable)
+    old = measure_quality(image, original, render_fn=fallback)
+    assert not old['satisfactory']
+    assert old['failures'] == ['foreground_iou_outside_limit']
+    fixed = (ARCHIVE/'svgs/AC0721_M.svg').read_text()
+    new = measure_quality(image, fixed, render_fn=fallback)
+    assert new['limits'] == old['limits']
+    assert new['satisfactory'], new
 
 
 def test_shifted_glyph_fails_despite_valid_anchor_and_exact_letter(independent, tmp_path):

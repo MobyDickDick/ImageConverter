@@ -18,6 +18,8 @@ TAGS = {"svg", "g", "defs", "circle", "ellipse", "rect", "path", "line", "polyli
 SCALARS = {"x", "y", "cx", "cy", "x1", "y1", "x2", "y2", "r", "rx", "ry", "width", "height",
            "stroke-width", "font-size", "opacity", "fill-opacity", "stroke-opacity", "stop-opacity"}
 POSITIVE = {"r", "rx", "ry", "width", "height", "stroke-width", "font-size"}
+EDITOR_NAMESPACES = {"http://www.inkscape.org/namespaces/inkscape",
+                     "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"}
 
 
 def prepare_sample(data: bytes, width: int, height: int) -> str:
@@ -39,6 +41,14 @@ def prepare_sample(data: bytes, width: int, height: int) -> str:
         if depth > 64:
             raise ValueError("Das Sample enthält zu tief verschachtelte Gruppen.")
         stack.extend((child, depth + 1) for child in element)
+    # Editor views, guides and RDF metadata are not rendered SVG geometry.
+    # Discard them, while retaining the strict validation of all visual nodes.
+    for parent in list(root.iter()):
+        for child in list(parent):
+            namespace = child.tag[1:].split('}', 1)[0] if child.tag.startswith('{') else ''
+            if namespace in EDITOR_NAMESPACES or child.tag.rsplit('}', 1)[-1] == 'metadata':
+                parent.remove(child)
+    elements = list(root.iter())
     for element in elements:
         tag = element.tag.rsplit("}", 1)[-1]
         if tag not in TAGS or (element.tag.startswith("{") and not element.tag.startswith("{" + SVG_NS + "}")):
@@ -55,6 +65,9 @@ def prepare_sample(data: bytes, width: int, height: int) -> str:
         for resource in re.findall(r"url\s*\((.*?)\)", content, re.I):
             if not resource.strip(" \t\r\n\"'").startswith("#"):
                 raise ValueError("Das Sample darf keine externen Ressourcen laden.")
+        for key in list(element.attrib):
+            if key.startswith('{') and key[1:].split('}', 1)[0] in EDITOR_NAMESPACES:
+                del element.attrib[key]
     from src.iCCModules.imageCompositeConverterSvgStyles import inline_simple_svg_styles
     root = ET.fromstring(inline_simple_svg_styles(ET.tostring(root, encoding="unicode")))
     if not root.get("viewBox"):
@@ -158,7 +171,10 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     initial_mse = best_mse
     initial_quality = pixel_quality(target, rendered)
     started = time.monotonic()
-    deadline = started + seconds
+    # Preserve an already accepted assembly instead of trading its square,
+    # alignment and shared paint for tiny improvements in a few raster pixels.
+    accepted_input = bool(initial_quality and initial_quality['passed'])
+    deadline = started if accepted_input else started + seconds
     accepted = 0
     print(f"Sample geladen: {len(params)} Parameter, mittlerer Pixelfehler={best_mse:.8f}", flush=True)
     # Coarse-to-fine coordinate descent retains the uploaded primitive structure.
@@ -204,6 +220,7 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
                   initial_quality=initial_quality, final_quality=quality,
                   improved=best_mse < initial_mse - 1e-10, evaluations=evaluations,
                   accepted=accepted, description_error=description_error,
+                  stop_reason='quality_target_reached' if accepted_input else 'search_complete',
                   passed=bool(quality and quality["passed"] and not description_error),
                   elapsed=round(time.monotonic() - started, 2))
     output.parent.mkdir(parents=True, exist_ok=True)

@@ -2109,12 +2109,15 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             label_fill = html.escape(str(element.get("label_fill", "#dedede")))
             font_size = float(element.get("font_size", 0.440)) * min(w, h)
             font_weight = html.escape(str(element.get("font_weight", "600")))
+            label_sw = max(0., float(element.get("label_stroke_width", 0.))) * min(w, h)
+            label_stroke = (f' stroke="{label_fill}" stroke-width="{_fmt(label_sw)}"'
+                            if label_sw else '')
             if label:
                 svg.append(
                     f'  <text id="{element_id}_label" x="{_fmt(float(raw_label_center[0]) * w)}" '
                     f'y="{_fmt(float(raw_label_center[1]) * h)}" fill="{label_fill}" '
                     f'font-family="Arial, Helvetica, sans-serif" font-size="{_fmt(font_size)}" '
-                    f'font-weight="{font_weight}" text-anchor="middle" dominant-baseline="alphabetic">{label}</text>'
+                    f'font-weight="{font_weight}" text-anchor="middle" dominant-baseline="alphabetic"{label_stroke}>{label}</text>'
                 )
         elif kind in valve_gradient_kinds:
             stroke = html.escape(str(element.get("stroke", "#969696")))
