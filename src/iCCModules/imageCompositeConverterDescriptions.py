@@ -186,7 +186,8 @@ def loadDescriptionMappingFromXmlImpl(path: str, *, get_base_name_from_file_fn) 
             image_name = (image_tag.text or "").strip()
             image_stem = os.path.splitext(image_name)[0].strip()
             image_specific_desc = _extract_image_specific_description(entry, image_name)
-            merged_desc = _merge_entry_and_image_desc(desc, image_specific_desc)
+            merged_desc = (image_specific_desc if image_tag.get('beschreibung_modus') == 'ersetzen'
+                           and image_specific_desc else _merge_entry_and_image_desc(desc, image_specific_desc))
             if merged_desc:
                 _register_description(image_name, merged_desc, include_base_aliases=False)
                 _register_description(image_stem, merged_desc, include_base_aliases=False)

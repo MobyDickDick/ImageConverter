@@ -1,6 +1,7 @@
 """Labeled-square acceptance with independent geometry and unchanged quality gates."""
 from pathlib import Path
 import json
+import re
 from xml.etree import ElementTree as ET
 
 import cv2
@@ -33,12 +34,31 @@ def fit(image, description=DESCRIPTION):
     return None if result is None else geometry.renderGeometryIrToSvgImpl(w, h, result['geometry_ir'])
 
 
+def without_fitted_outline(svg):
+    """Only the new bounded text-weight degree of freedom may differ."""
+    for text in ET.fromstring(svg).iter('{http://www.w3.org/2000/svg}text'):
+        if text.get('stroke'):
+            assert text.get('stroke') == text.get('fill')
+            assert 0 < float(text.get('stroke-width')) <= .25
+    return re.sub(r'(<text\b[^>]*?) stroke="[^"]+" stroke-width="[^"]+"', r'\1', svg)
+
+
+def assert_saved_geometry_and_improved_coverage(image, actual, expected):
+    assert without_fitted_outline(actual) == expected.replace(
+        'dominant-baseline="middle"', 'dominant-baseline="alphabetic"')
+    before = measure_quality(image, expected)['metrics']
+    after = measure_quality(image, actual)['metrics']
+    assert after['normalized_mse'] <= before['normalized_mse']+1e-9
+    assert after['foreground_iou'] >= before['foreground_iou']-1e-9
+
+
 @pytest.mark.parametrize('case', MANIFEST['cases'], ids=lambda c: c['source'])
 def test_real_rasters_reproduce_accepted_vector_and_explicit_label(case):
     image = cv2.imread(str(PACKAGE / case['image']))
     svg = fit(image)
     assert labeled_square_semantics(svg, 'T') == 1
-    assert svg.replace('\r\n', '\n') == (PACKAGE / case['after_svg']).read_text(encoding='utf-8')
+    expected = (PACKAGE / case['after_svg']).read_text(encoding='utf-8')
+    assert_saved_geometry_and_improved_coverage(image, svg.replace('\r\n', '\n'), expected)
 
 
 def synthetic(phase=0, scale=1, fill='#327aad', text='#f4eddf', label='T', stem_offset=0):
@@ -73,9 +93,10 @@ P_MANIFEST = json.loads((P_PACKAGE / 'manifest.json').read_text(encoding='utf-8'
 
 
 @pytest.mark.parametrize('case', P_MANIFEST['cases'], ids=lambda c: Path(c['image']).stem)
-def test_previously_accepted_labels_keep_their_exact_vector(case):
+def test_previously_accepted_labels_keep_geometry_and_improve_coverage(case):
     image = cv2.imread(str(P_PACKAGE / case['image']))
-    assert fit(image, P_MANIFEST['description']) == (P_PACKAGE / case['after_svg']).read_text(encoding='utf-8')
+    expected = (P_PACKAGE / case['after_svg']).read_text(encoding='utf-8')
+    assert_saved_geometry_and_improved_coverage(image, fit(image, P_MANIFEST['description']), expected)
 
 
 @pytest.mark.parametrize('label, offset', [('', 0), ('T', 12)])

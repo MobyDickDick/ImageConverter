@@ -31,6 +31,7 @@ def test_generate_badge_svg_impl_renders_co2_with_subscript() -> None:
 
     assert ">CO</text>" in svg
     assert ">2</text>" in svg
+    assert svg.count('dominant-baseline="alphabetic"') == 2
 
 
 def test_generate_badge_svg_impl_renders_voc_text() -> None:
@@ -52,6 +53,7 @@ def test_generate_badge_svg_impl_renders_voc_text() -> None:
     )
 
     assert ">VOC</text>" in svg
+    assert 'dominant-baseline="alphabetic"' in svg
 
 
 def test_generate_badge_svg_impl_strips_stale_connectors_from_connector_free_badge() -> None:
@@ -151,6 +153,7 @@ def test_generate_badge_svg_impl_renders_rf_text() -> None:
     )
 
     assert ">rF</text>" in svg
+    assert 'dominant-baseline="alphabetic"' in svg
 
 
 def test_generate_badge_svg_impl_honors_square_badge_stem_geometry() -> None:

@@ -10,6 +10,30 @@ from tools.refresh_satisfactory_archive import ARCHIVE, ROOT, digest, refresh
 from tools.recheck_satisfactory_archive import recheck
 
 
+def test_baseline_repair_replays_only_hash_pinned_sources(tmp_path):
+    import hashlib
+    from tools.refresh_satisfactory_archive import archived_svg_bytes
+    old = b'<svg><text dominant-baseline="middle">T</text></svg>\r\n'
+    fixed = old.replace(b'"middle"', b'"alphabetic"')
+    source = tmp_path/'old.svg'
+    source.write_bytes(old)
+    manifest = tmp_path/'artifacts/evaluation/svg_text_baseline_v1/manifest.json'
+    manifest.parent.mkdir(parents=True)
+    row = dict(before_sha256=hashlib.sha256(old).hexdigest(), after_sha256=hashlib.sha256(fixed).hexdigest())
+    manifest.write_text(json.dumps({'archive_migrations':[row]}))
+    assert archived_svg_bytes(tmp_path, source) == fixed
+    assert source.read_bytes() == old  # Historical evidence is immutable.
+    source.write_bytes(fixed)
+    assert archived_svg_bytes(tmp_path, source) == fixed
+    source.write_bytes(old.replace(b'>T<', b'>M<'))
+    assert archived_svg_bytes(tmp_path, source) == source.read_bytes()
+    source.write_bytes(old)
+    row['after_sha256'] = 'wrong'
+    manifest.write_text(json.dumps({'archive_migrations':[row]}))
+    with pytest.raises(ValueError, match='migration hash mismatch'):
+        archived_svg_bytes(tmp_path, source)
+
+
 def test_archive_contains_complete_immutable_pairs():
     archive=ROOT/ARCHIVE
     index=json.loads((archive/'index.json').read_text(encoding='utf-8'))

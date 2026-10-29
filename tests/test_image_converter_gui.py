@@ -88,7 +88,10 @@ def test_result_quality_uses_cli_failures_and_failed_svg_names(jobs, job, filena
     folder = jobs.folder(job["id"])
     svg = folder / "output" / filename
     svg.parent.mkdir(parents=True)
-    svg.write_text('<svg xmlns="http://www.w3.org/2000/svg"><circle r="3"/></svg>')
+    content = '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24"><circle cx="16" cy="12" r="7" fill="#225599"/></svg>'
+    svg.write_text(content)
+    from src.imageConverterSample import render_svg
+    Image.fromarray(render_svg(content, 32, 24)).save(folder/'source.png')
     report = folder / "output" / "reports" / "batch_failure_summary.csv"
     report.parent.mkdir()
     report.write_text("filename;status\n" + ("UPLOAD.png;failed\n" if failures else ""))
@@ -97,6 +100,37 @@ def test_result_quality_uses_cli_failures_and_failed_svg_names(jobs, job, filena
     assert job["result"] is True
     assert (folder / "source.png").exists()
     assert (folder / "result.svg").read_bytes() == svg.read_bytes()
+
+
+@pytest.mark.parametrize('shape', ['<rect width="32" height="24" fill="white"/>',
+                                  '<rect x="-20" y="-20" width="5" height="5" fill="black"/>'])
+def test_successful_cli_cannot_publish_blank_or_off_canvas_svg(jobs, job, shape):
+    folder = jobs.folder(job['id'])
+    from PIL import ImageDraw
+    source = Image.new('RGB', (32, 24), 'white')
+    ImageDraw.Draw(source).rectangle((14, 10, 16, 12), fill='#445599')
+    source.save(folder/'source.png')
+    path = folder/'output/converted_svgs/UPLOAD.svg'
+    path.parent.mkdir(parents=True)
+    path.write_text('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24">'+shape+'</svg>')
+    gui.collect_result(folder, job, 0)
+    assert job['quality'] == 'warning'
+    assert not job['pixel_quality']['passed']
+    assert job['pixel_quality']['normalized_mse'] < .01
+    assert job['status'] == 'error' and not job['result']
+
+
+def test_last_submitted_description_is_reused_by_image_content(jobs, monkeypatch):
+    monkeypatch.setattr(jobs, 'run', lambda job_id: None)
+    content = image_bytes(color='#405060')
+    first = jobs.upload('catalog-name.png', content)
+    submitted = jobs.start(first['id'], 'Mein korrigierter Text.\nEin Quadrat oben.', 'quick')
+    jobs.cancel(submitted['id'])
+    repeated = jobs.upload('neutral-name.png', content)
+    assert repeated['description'] == 'Mein korrigierter Text.\nEin Quadrat oben.'
+    assert repeated['description_origin'] == 'user'
+    other = jobs.upload('catalog-name.png', image_bytes(color='#304050'))
+    assert other['description'] == ''
 
 
 def test_no_svg_is_an_error_even_with_zero_cli_exit(jobs, job):
@@ -165,6 +199,20 @@ def test_restart_recovers_result_and_marks_unfinished_jobs(jobs, job):
     assert restored.snapshot(job["id"])["status"] == "interrupted"
     assert restored.snapshot(job["id"])["description"] == job["description"]
     job["status"] = "ready"
+
+
+def test_restart_rechecks_a_false_positive_blank_result(jobs, job):
+    from PIL import ImageDraw
+    folder = jobs.folder(job['id'])
+    image = Image.new('RGB', (32, 24), 'white')
+    ImageDraw.Draw(image).rectangle((6, 5, 20, 18), fill='black')
+    image.save(folder/'source.png')
+    (folder/'result.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24"/>')
+    job.update(status='done', quality='passed', result=True)
+    jobs.save(job)
+    restored = gui.Jobs(jobs.directory).snapshot(job['id'])
+    assert restored['status'] == 'error' and not restored['result']
+    assert restored['quality'] == 'warning'
 
 
 def test_retry_keeps_previous_result_and_original(jobs, monkeypatch):

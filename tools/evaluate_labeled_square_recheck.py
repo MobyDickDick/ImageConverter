@@ -9,8 +9,11 @@ from pathlib import Path
 import re
 from xml.etree import ElementTree as ET
 
+import cv2
+
 from tools.evaluate_diagonal_square_kelle_recheck import measure as measure_raster
 from tools.evaluate_satisfaction_gate import evaluate_satisfaction, seal_baseline_manifest
+from tools.evaluate_svg_text_baseline import square_glyph_evidence, square_glyph_position
 
 
 def labeled_square_semantics(svg: str, label: str = 'P', stem_direction: str = 'bottom') -> float:
@@ -49,7 +52,8 @@ def labeled_square_semantics(svg: str, label: str = 'P', stem_direction: str = '
                      and connected
                      and x < tx < x+w and y < ty < y+h and 0 < size < h
                      and square.get('fill', 'none') != 'none'
-                     and text.get('fill', 'none') not in ('none', square.get('fill')))
+                     and text.get('fill', 'none') not in ('none', square.get('fill'))
+                     and square_glyph_position(svg))
     except (TypeError, ValueError):
         return 0.
 
@@ -58,6 +62,9 @@ def measure(image_path: Path, svg_path: Path, label: str = 'P', stem_direction: 
     record = measure_raster(image_path, svg_path)
     metrics = record['metrics']
     metrics['semantic_score'] = labeled_square_semantics(record['svg'], label, stem_direction)
+    if metrics['semantic_score']:
+        record['glyph_evidence'] = square_glyph_evidence(cv2.imread(str(image_path)), record['svg'])
+        metrics['semantic_score'] *= float(record['glyph_evidence']['passed'])
     record['combined_score'] = (1-metrics['error_per_pixel']+metrics['edge_alignment']+
                                 metrics['object_mask_iou']+metrics['semantic_score'])/4
     return record

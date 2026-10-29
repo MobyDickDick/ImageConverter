@@ -34,6 +34,28 @@ def test_sample_uses_original_canvas_and_keeps_shapes():
     assert len(list(root)) == 1
 
 
+def test_inkscape_editor_metadata_is_removed_without_losing_geometry_or_styles():
+    from xml.etree import ElementTree as ET
+    content = b'''<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+      xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" width="30" height="40" inkscape:version="1.4">
+      <sodipodi:namedview><inkscape:grid/></sodipodi:namedview>
+      <metadata><foreign xmlns="urn:editor">inert editor metadata</foreign></metadata>
+      <rect x="3" y="4" width="8" height="8" transform="translate(1 2)" style="fill:#123456;stroke:#778899;stroke-width:0.3"/>
+      </svg>'''
+    prepared = prepare_sample(content, 30, 40)
+    root = ET.fromstring(prepared)
+    assert len(root) == 1
+    assert 'inkscape' not in prepared and 'namedview' not in prepared and 'metadata' not in prepared
+    rect = root[0]
+    assert rect.get('transform') == 'translate(1 2)'
+    assert rect.get('fill') == '#123456' and rect.get('stroke-width') == '0.3'
+
+
+def test_foreign_visual_nodes_are_still_rejected():
+    with pytest.raises(ValueError, match='nicht unterstütztes Element'):
+        prepare_sample(b'<svg xmlns="http://www.w3.org/2000/svg"><rect xmlns="urn:unknown"/></svg>', 20, 40)
+
+
 def test_sample_refinement_measurably_improves_pixels_and_preserves_input(tmp_path):
     source, sample, output = (tmp_path / name for name in ("source.png", "sample.svg", "result.svg"))
     target_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><circle cx="32" cy="32" r="20" fill="#287ec4" stroke="black" stroke-width="2"/></svg>'
@@ -56,6 +78,19 @@ def test_matching_sample_never_gets_worse_and_reports_description_conflict(tmp_p
     assert report["final_mse"] <= report["initial_mse"]
     assert report["description_error"]
     assert not report["passed"]
+    assert report['evaluations'] == 1
+    assert report['stop_reason'] == 'quality_target_reached'
+
+
+def test_accepted_redraw_keeps_its_square_and_connected_geometry(tmp_path):
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[1]
+    sample = root/'artifacts/converted_images/converted_svgs/AC0501_S_sia.svg'
+    source = root/'artifacts/images_to_convert/AC0501_S_sia.jpg'
+    output = tmp_path/'result.svg'
+    report = refine(source, sample, output, 'Quadratische Kelle mit beiden Diagonalen und rundem Gelenk.', 2)
+    assert report['passed'] and report['evaluations'] == 1
+    assert output.read_text() == prepare_sample(sample.read_bytes(), 20, 40)
 
 
 def test_gui_attaches_sample_and_carries_it_into_retry(tmp_path, monkeypatch):

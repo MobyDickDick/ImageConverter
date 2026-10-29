@@ -247,7 +247,7 @@ def make_variations(svg: str, description: str, seed: int) -> list[dict]:
     return cases
 
 
-def measure_quality(reference, svg: str, limits: dict | None = None) -> dict:
+def measure_quality(reference, svg: str, limits: dict | None = None, *, render_fn=None) -> dict:
     """Independent raster checks; foreground checks stop white backgrounds hiding errors."""
     np = import_with_vendored_fallback("numpy")
     cv2 = import_with_vendored_fallback("cv2")
@@ -271,7 +271,7 @@ def measure_quality(reference, svg: str, limits: dict | None = None) -> dict:
     _, _, _, _, out_width, out_height = viewport(svg)
     if (width, height) != (out_width, out_height):
         failures.append("dimension_mismatch")
-    output = render(svg, width, height)
+    output = (render_fn or render)(svg, width, height)
     error = np.square(reference.astype(np.float32) - output.astype(np.float32)).mean(axis=2) / 255**2
     # Estimate background from border pixels, allowing non-white input SVGs.
     border = np.concatenate((reference[0], reference[-1], reference[:, 0], reference[:, -1]))

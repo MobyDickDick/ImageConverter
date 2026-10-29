@@ -2094,6 +2094,9 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 "RightRotatedSquareKellePGlyph": [0.460, 0.656],
             }.get(kind, [float(raw_body_bbox[0])+float(raw_body_bbox[2])/2,
                          float(raw_body_bbox[1])+float(raw_body_bbox[3])/2])
+            # Legacy label_center stores an alphabetic baseline after raster
+            # registration. MuPDF ignores dominant-baseline="middle"; emitting
+            # that value shifts the fitted glyph in browsers and librsvg.
             raw_label_center = element.get("label_center", default_label_center)
             if not isinstance(raw_label_center, list) or len(raw_label_center) != 2:
                 raw_label_center = default_label_center
@@ -2106,12 +2109,15 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             label_fill = html.escape(str(element.get("label_fill", "#dedede")))
             font_size = float(element.get("font_size", 0.440)) * min(w, h)
             font_weight = html.escape(str(element.get("font_weight", "600")))
+            label_sw = max(0., float(element.get("label_stroke_width", 0.))) * min(w, h)
+            label_stroke = (f' stroke="{label_fill}" stroke-width="{_fmt(label_sw)}"'
+                            if label_sw else '')
             if label:
                 svg.append(
                     f'  <text id="{element_id}_label" x="{_fmt(float(raw_label_center[0]) * w)}" '
                     f'y="{_fmt(float(raw_label_center[1]) * h)}" fill="{label_fill}" '
                     f'font-family="Arial, Helvetica, sans-serif" font-size="{_fmt(font_size)}" '
-                    f'font-weight="{font_weight}" text-anchor="middle" dominant-baseline="middle">{label}</text>'
+                    f'font-weight="{font_weight}" text-anchor="middle" dominant-baseline="alphabetic"{label_stroke}>{label}</text>'
                 )
         elif kind in valve_gradient_kinds:
             stroke = html.escape(str(element.get("stroke", "#969696")))
@@ -2187,7 +2193,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                     f'  <text id="{element_id}_label" x="{_fmt(float(raw_label_center[0]) * w)}" '
                     f'y="{_fmt(float(raw_label_center[1]) * h)}" fill="{text_fill}" '
                     f'font-family="Arial, Helvetica, sans-serif" font-size="{_fmt(font_size)}" font-weight="{font_weight}" '
-                    f'text-anchor="middle" dominant-baseline="middle">{label}</text>'
+                    f'text-anchor="middle" dominant-baseline="alphabetic">{label}</text>'
                 )
         elif kind == "CircleBackground":
             x, y, bw, bh = _scaled_bbox(element, w, h)
@@ -2363,7 +2369,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             svg.append(
                 f'  <text id="{element_id}" x="{_fmt(text_x)}" y="{_fmt(text_y)}"{transform} '
                 f'fill="{fill}" font-family="Arial, Helvetica, sans-serif" font-size="{_fmt(font_size)}" '
-                f'font-weight="{font_weight}" text-anchor="middle" dominant-baseline="middle">{raw_text}</text>'
+                f'font-weight="{font_weight}" text-anchor="middle" dominant-baseline="alphabetic">{raw_text}</text>'
             )
         elif kind == "HorizontalRule":
             x, y, bw, bh = _scaled_bbox(element, w, h)
