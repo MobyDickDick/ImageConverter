@@ -133,13 +133,17 @@ def render_svg(svg, width, height):
     import fitz
     import numpy as np
     import cv2
-    with fitz.open(stream=svg.encode("utf-8"), filetype="svg") as document:
-        page = document[0]
-        raster = page.get_pixmap(matrix=fitz.Matrix(width / page.rect.width, height / page.rect.height), alpha=False)
-        image = np.frombuffer(raster.samples, dtype=np.uint8).reshape(raster.height, raster.width, raster.n)[:, :, :3]
-        if image.shape[:2] != (height, width):
-            image = cv2.resize(image, (width, height), interpolation=cv2.INTER_AREA)
-        return image.copy()
+    from src.iCCModules.imageCompositeConverterRendering import render_svg_to_numpy_inprocess
+    # Use the same private gradient adapters as the converter: this PyMuPDF
+    # build otherwise paints native SVG gradients black during GUI validation.
+    image = render_svg_to_numpy_inprocess(svg, width, height,
+        fitz_module=fitz, np_module=np, cv2_module=cv2)
+    if image is None:
+        raise ValueError("Das SVG konnte nicht gerendert werden.")
+    if image.shape[:2] != (height, width):
+        image = cv2.resize(image, (width, height), interpolation=cv2.INTER_AREA)
+    # The converter works in BGR; uploaded samples and Pillow sources use RGB.
+    return cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 
 def refine(source: Path, sample: Path, output: Path, description: str, seconds: float) -> dict:

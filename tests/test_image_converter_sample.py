@@ -11,6 +11,16 @@ from src.imageConverterSample import prepare_sample, refine, render_svg
 SAMPLE = b'<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><circle cx="28" cy="33" r="17" fill="#884466" stroke="black" stroke-width="2"/></svg>'
 
 
+def test_sample_renderer_preserves_native_gradient_and_rgb_channels():
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="20">'
+           '<defs><linearGradient id="paint"><stop stop-color="#ff0000"/>'
+           '<stop offset="1" stop-color="#ffffff"/></linearGradient></defs>'
+           '<rect width="40" height="20" fill="url(#paint)"/></svg>')
+    image = render_svg(prepare_sample(svg.encode(), 40, 20), 40, 20)
+    assert image[10, 2, 0] > 240 and image[10, 2, 2] < 60
+    assert image[10, 37].min() > 210
+
+
 @pytest.mark.parametrize("content", [
     b'<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script></svg>',
     b'<svg xmlns="http://www.w3.org/2000/svg" onload="alert(1)"/>',

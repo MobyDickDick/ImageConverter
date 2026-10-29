@@ -33,9 +33,9 @@
           <label for="description" class="sr-only">Bildbeschreibung</label>
           <textarea id="description" rows="5" maxlength="12000" placeholder="Zum Beispiel: Ein blauer Kreis mit schwarzer Kontur auf weissem Hintergrund."></textarea>
           <p id="description-hint" class="hint">Beschreibe Formen, Farben und ihre Anordnung. Bei bekannten Katalogbildern wird die Beschreibung ergänzt.</p>
-          <label class="field-label" for="profile">Suchdauer</label>
-          <select id="profile"><option value="quick">Schnell · 15–30 Sekunden</option><option value="normal" selected>Normal · 1–2 Minuten</option><option value="thorough">Gründlich · 2–4 Minuten</option></select>
-          <p class="hint">Bei komplexen Bildern kann die Suche bis zur Obergrenze dauern. Start und Abschluss kommen hinzu.</p>
+          <label class="field-label" for="profile">Suchbudget</label>
+          <select id="profile"><option value="quick">Schnell · bis zu 30 Sekunden</option><option value="normal" selected>Normal · bis zu 2 Minuten</option><option value="thorough">Gründlich · bis zu 4 Minuten</option></select>
+          <p class="hint">Die Suche endet früher, wenn die Qualität erreicht ist oder keine weiteren passenden Modelle verfügbar sind. Bei messbarem Fortschritt kann sie bis zur Obergrenze dauern. Start und Abschluss kommen hinzu.</p>
           <button id="convert" class="primary full" disabled><span>In SVG konvertieren</span><span aria-hidden="true">→</span></button>
           <button id="cancel" class="secondary full" hidden>Konvertierung abbrechen</button>
         </section>
