@@ -8368,7 +8368,7 @@ def test_update_successful_conversions_manifest_keeps_single_failed_entry(tmp_pa
         ("AC0800_L", "semantic_ok"),
         ("AC0800_M", "semantic_ok"),
         ("AC0820_L", "semantic_ok"),
-        ("AC0835_S", "semantic_ok"),
+        ("AC0835_S", "semantic_raster_labeled_disk"),
         ("AC0837_L", "semantic_ok"),
     ],
 )
@@ -8412,6 +8412,17 @@ def test_ac08_regression_suite_preserves_previously_good_variants(
     assert not (svg_dir / f"{variant}_failed.svg").exists()
     log_text = (reports_dir / f"{variant}_element_validation.log").read_text(encoding="utf-8")
     assert f"status={expected_status}" in log_text
+    if expected_status == "semantic_raster_labeled_disk":
+        # The short-label search replaces the preset badge for this motif.
+        # Verify the saved result as well as the specialized success status.
+        from xml.etree import ElementTree as ET
+        from tools.run_plan_b_variations import measure_quality
+
+        svg = (svg_dir / f"{variant}.svg").read_text(encoding="utf-8")
+        root = ET.fromstring(svg)
+        assert ''.join(node.text or '' for node in root.iter() if node.tag.endswith('text')) == 'VOC'
+        assert len(root.findall('.//{*}circle')) == 1
+        assert measure_quality(image_composite_converter.cv2.imread(str(img_path)), svg)['satisfactory']
     if variant == "AC0820_L":
         assert "validation_time_budget_exceeded" not in log_text
 
