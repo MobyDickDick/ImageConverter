@@ -1,5 +1,10 @@
 # ImageConverter
 
+Die [Korrektur des gerahmten Helligkeitsverlaufs](artifacts/evaluation/framed_panel_brightness_v1/README.md)
+registriert das helle Band und die dunklen Endbereiche anhand des Rasterprofils.
+Bei AC0VR2_M sinkt der quadratische Pixelfehler um 98 Prozent; der vollständige
+GUI-Lauf prüft 178 Kandidaten und besteht auch die unabhängige librsvg-Abnahme.
+
 Der [P0-Teil für angeschnittene Verlaufskreise](docs/next_arbeitspaket_2026-10-30_clipped_parent.md)
 rekonstruiert äußere Kreise aus ausreichend sichtbaren Bögen am Bildrand.
 Die drei bekannten Randfehler verbessern sich auf identischen Rasterbytes

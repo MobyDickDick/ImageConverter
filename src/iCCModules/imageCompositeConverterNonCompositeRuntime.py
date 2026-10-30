@@ -46,6 +46,7 @@ from src.iCCModules.imageCompositeConverterCircleLinework import fit_circle_line
 from src.iCCModules.imageCompositeConverterPrimitiveScene import fit_primitive_scene
 from src.iCCModules.imageCompositeConverterShortLabelDisk import fit_short_label_disk
 from src.iCCModules.imageCompositeConverterAxialPanel import fit_axial_panel
+from src.iCCModules.imageCompositeConverterFramedPanel import fit_framed_panel
 from src.iCCModules.imageCompositeConverterPairedLinePanel import fit_paired_line_panel
 
 
@@ -1464,6 +1465,7 @@ def runNonCompositeIterationImpl(
             return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in (
             (fit_paired_line_panel, "non_composite_raster_paired_line_panel"),
+            (fit_framed_panel, "non_composite_raster_framed_panel"),
             (fit_axial_panel, "non_composite_raster_axial_panel"),
             (fit_short_label_disk, "non_composite_raster_short_label_disk"),
             (fit_primitive_scene, "non_composite_raster_primitive_scene"),
@@ -1503,6 +1505,10 @@ def runNonCompositeIterationImpl(
             )
             if fitted is not None:
                 validated_result(fitted,perc_img)
+                if status == "non_composite_raster_framed_panel":
+                    params['framed_panel_registration'] = {
+                        key: value for key, value in fitted.items() if key not in {'svg', 'rendered'}
+                    }
                 if status == "non_composite_raster_paired_line_panel":
                     params['paired_line_panel_registration'] = {
                         key: value for key, value in fitted.items() if key not in {'svg', 'rendered'}
