@@ -151,6 +151,28 @@ jobs:
           path: config/test_run_seeds.jsonl
           retention-days: 7
 
+  clipped-gradient-parent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Check visible arcs, complete children and negative controls
+        run: python -m pytest -q tests/test_clipped_gradient_parent.py
+      - name: Independently verify frame edges and the previously failing variants
+        run: |
+          python -m tools.run_seeded_scene_check evaluate_mixed_overlap --seed 618293 --groups 2 --rounded --outlines --clipped-parent
+          python -m tools.run_seeded_scene_check evaluate_mixed_overlap --seed 853197 --groups 2 --rounded --outlines --variations
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: clipped-gradient-parent-seeds
+          path: config/test_run_seeds.jsonl
+          retention-days: 7
+
   mixed-overlap-composition:
     runs-on: ubuntu-latest
     timeout-minutes: 8

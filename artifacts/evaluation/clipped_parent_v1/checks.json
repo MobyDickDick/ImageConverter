@@ -1,0 +1,101 @@
+{
+  "python": "3.10.11",
+  "base_commit": "7e6124beacc93205657509e3141bc3d11b1f64ce",
+  "commands": [
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --inputs .tmp/clipped-parent-focus-20261030 --output .tmp/clipped-parent-focus-before-20261030",
+      "exit_code": 0,
+      "accepted": 0,
+      "completed": 3
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --inputs .tmp/clipped-parent-inputs-20261030 --output .tmp/clipped-parent-final-20261030 --require-all",
+      "exit_code": 0,
+      "accepted": 17,
+      "completed": 17
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --prepare .tmp/clipped-parent-extra-inputs-20261030 --seed 618293 --groups 2 --rounded --outlines --clipped-parent",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --inputs .tmp/clipped-parent-extra-inputs-20261030 --output .tmp/clipped-parent-extra-final-20261030 --require-all",
+      "exit_code": 0,
+      "accepted": 12,
+      "completed": 12
+    }
+  ],
+  "test_blocks": [
+    {
+      "name": "regression",
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_clipped_gradient_parent.py tests/test_overlap_groups.py tests/test_mixed_overlap_composition.py tests/test_mixed_overlap_outlines.py tests/test_same_paint_overlap.py tests/test_owned_circle_rims.py tests/test_thin_rim_depth.py tests/test_structure_search_operators.py tests/test_test_data_lifecycle.py tests/test_mixed_gradient_scene_runtime.py -q --tb=short --junitxml=.tmp/clipped-parent-regression-final-20261030.xml",
+      "exit_code": 1,
+      "tests": 298,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 294,
+      "seconds": 518.67,
+      "junit_sha256": "cb96a496bf4d379807303f59ebe353954aca60700c0546faeea580c8cb731238",
+      "failure_cases": [
+        "test_every_disconnected_group_retains_objects_and_observed_depth[0-True-True-4]",
+        "test_every_disconnected_group_retains_objects_and_observed_depth[1-True-True-4]",
+        "test_every_disconnected_group_retains_objects_and_observed_depth[3-True-True-4]"
+      ]
+    },
+    {
+      "name": "baseline-group-control",
+      "command": ".venv/Scripts/python.exe -c \"exec(open('.tmp/check_clipped_parent_baseline_20261030.py').read())\"",
+      "exit_code": 1,
+      "tests": 18,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 15,
+      "seconds": 65.552,
+      "junit_sha256": "13acb7a5c8eab75c67e1b4b82841dbda85cc5003b036afbb51034b7865c60059",
+      "failure_cases": [
+        "test_every_disconnected_group_retains_objects_and_observed_depth[0-True-True-4]",
+        "test_every_disconnected_group_retains_objects_and_observed_depth[1-True-True-4]",
+        "test_every_disconnected_group_retains_objects_and_observed_depth[3-True-True-4]"
+      ],
+      "runner_source": "import hashlib,subprocess,types\nimport pytest\nfrom src.iCCModules import imageCompositeConverterMixedGradientScene as mixed\nsource=subprocess.check_output(['git','show','7e6124bea:src/iCCModules/imageCompositeConverterMixedGradientScene.py'])\nprint('Unmodified baseline production SHA256:',hashlib.sha256(source).hexdigest(),flush=True)\nbaseline=types.ModuleType('baseline_mixed_scene')\nexec(compile(source,'<unmodified-7e6124bea>','exec'),baseline.__dict__)\nmixed.fit_mixed_gradient_scene=baseline.fit_mixed_gradient_scene\nraise SystemExit(pytest.main(['tests/test_overlap_groups.py::test_every_disconnected_group_retains_objects_and_observed_depth','-q','--tb=short','--junitxml=.tmp/clipped-parent-baseline-groups-20261030.xml']))\n"
+    },
+    {
+      "name": "core-green",
+      "command": ".venv/Scripts/python.exe -m tools.run_pytest_profile core-green --junitxml=.tmp/clipped-parent-core-final-20261030.xml",
+      "exit_code": 0,
+      "tests": 42,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 42,
+      "seconds": 1.123,
+      "junit_sha256": "c14947fb46a18f2ec07cd26920016fa4c9c2f75f0f46e6dc51b00f933202a602"
+    },
+    {
+      "name": "new-clipped-parent-tests",
+      "passed": 30,
+      "tests": 30,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "scope": "Subset of the 298-case default-thread regression block; not an extra run"
+    }
+  ],
+  "preliminary_regression": {
+    "passed": 42,
+    "failed": 3,
+    "reason": "Four-group tests exhausted fixed image budget during concurrent conversion work; final block run serially"
+  },
+  "thread_control": {
+    "OPENBLAS_NUM_THREADS": 1,
+    "OMP_NUM_THREADS": 1,
+    "opencv_api": "cv2.setNumThreads(1)",
+    "observed_opencv_threads_default": 14,
+    "observed_opencv_threads_controlled": 1,
+    "completed": false,
+    "terminated_after_same_three_failures": true
+  }
+}
