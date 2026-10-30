@@ -514,6 +514,57 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
     return children
 
 
+def _visible_parent_arc(center, radius, shape):
+    """Exact angular measure inside the canvas, independent of raster sampling."""
+    height, width = shape
+    if np.all(center-radius >= 0) and np.all(center+radius <= [width, height]):
+        return 2*np.pi
+    angles = [0., 2*np.pi]
+    for edge in (0., float(width)):
+        ratio = (edge-center[0])/radius
+        if -1 < ratio < 1:
+            angle = np.arccos(ratio)
+            angles.extend((angle, 2*np.pi-angle))
+    for edge in (0., float(height)):
+        ratio = (edge-center[1])/radius
+        if -1 < ratio < 1:
+            angle = np.arcsin(ratio)
+            angles.extend((angle % (2*np.pi), (np.pi-angle) % (2*np.pi)))
+    angles = np.sort(angles)
+    middle = (angles[:-1]+angles[1:])/2
+    points = center+radius*np.c_[np.cos(middle), np.sin(middle)]
+    visible = ((points[:, 0] >= 0) & (points[:, 0] <= width)
+               & (points[:, 1] >= 0) & (points[:, 1] <= height))
+    return float(np.diff(angles)[visible].sum())
+
+
+def _parent_circle(contour, shape):
+    """Frame cut edges are not circle evidence; require at least a half arc."""
+    height, width = shape
+    points = contour[:, 0]
+    clipped = (np.any(points <= 0) or np.any(points[:, 0] >= width-1)
+               or np.any(points[:, 1] >= height-1))
+    if not clipped:
+        center, radius, residual = _circle(contour)
+        _, _, w, h = cv2.boundingRect(contour)
+        return (center, radius) if abs(w-h) <= 2 and residual <= .85 and radius >= 12 else None
+    # Keep a pixel of clearance from each cut: its AA junction supplies no
+    # curvature constraint. All remaining boundary pixels must fit the arc.
+    keep = ((points[:, 0] > 1) & (points[:, 0] < width-2)
+            & (points[:, 1] > 1) & (points[:, 1] < height-2))
+    if keep.sum() < 24:
+        return None
+    center, radius, residual = _circle(contour[keep])
+    if (not 12 <= radius <= min(shape) or residual > .85
+            or not (0 <= center[0] <= width and 0 <= center[1] <= height)):
+        return None
+    angles = np.sort(np.arctan2(points[keep, 1]+.5-center[1], points[keep, 0]+.5-center[0]))
+    coverage = 2*np.pi-np.diff(np.r_[angles, angles[0]+2*np.pi]).max()
+    if coverage < np.pi or _visible_parent_arc(center, radius, shape) < np.pi:
+        return None
+    return center, radius
+
+
 def _gradient_context(pixels, contract, residual_threshold):
     """Measure the shared parent once for all island grouping hypotheses."""
     foreground = (np.max(255-pixels.astype(float), axis=2) > 25).astype('uint8')
@@ -522,10 +573,10 @@ def _gradient_context(pixels, contract, residual_threshold):
     if len(contours) != 1:
         return None
     contour = contours[0]
-    center, radius, residual = _circle(contour)
-    x, y, w, h = cv2.boundingRect(contour)
-    if abs(w-h) > 2 or residual > .85 or radius < 12:
+    circle = _parent_circle(contour, foreground.shape)
+    if circle is None:
         return None
+    center, radius = circle
     yy, xx = np.indices(foreground.shape)
     distance = np.hypot(xx+.5-center[0], yy+.5-center[1])
     interior = (distance < radius-3).astype('uint8')
@@ -716,6 +767,10 @@ def _gradient_parent(pixels, contract, geometry, colors, predicted, distance):
     stroke = np.median(pixels[band], axis=0)
     geometry[4] = 1. if contract['outlined'] else 0.
     if contract['outlined'] and (contract.get('rounded') or contract.get('overlap')):
+        center = geometry[:2]+radius
+        # A cropped rim contributes only its visible circumference. Its width
+        # must not shrink merely because another part lies outside the canvas.
+        circumference = radius*_visible_parent_arc(center, radius, pixels.shape[:2])
         # White AA around an unoutlined circle is not an observed light rim.
         # Require color evidence outside the parent/white compositing line.
         delta = predicted-255.
@@ -724,7 +779,7 @@ def _gradient_parent(pixels, contract, geometry, colors, predicted, distance):
                                  / np.maximum(1., np.sum(delta*delta, axis=2)), 0, 1)
         rim_evidence = np.max(abs(observed-plain_coverage[..., None]*delta), axis=2) > 4
         ring = (distance >= radius-2) & (distance < radius+3)
-        if np.count_nonzero(rim_evidence & ring) < .3*2*np.pi*radius:
+        if np.count_nonzero(rim_evidence & ring) < .3*circumference:
             return None
         # A dark outer rim is visible just inside its foreground contour.
         # Sampling white antialias pixels beyond it must not turn it into a
@@ -747,7 +802,7 @@ def _gradient_parent(pixels, contract, geometry, colors, predicted, distance):
             return None
         rim_coverage = np.clip(((observed@rim)*dd-np.sum(observed*delta, axis=2)*dr)
                                / np.maximum(1., determinant), 0, 1)
-        sw = float(rim_coverage[ring].sum()/(2*np.pi*radius))
+        sw = float(rim_coverage[ring].sum()/circumference)
         if not .5 <= sw <= radius/2:
             return None
         geometry[:2] -= sw/2
@@ -1246,8 +1301,16 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                       radius=p[5*n+i] if rounded else 0.) for i, o in enumerate(objects)]
         for i, obj in enumerate(scene):
             x, y, w, h, sw = obj['geometry']
-            if min(w, h) < 4 or not (0 <= x < x+w <= width and 0 <= y < y+h <= height):
+            if min(w, h) < 4:
                 return False
+            if not (0 <= x < x+w <= width and 0 <= y < y+h <= height):
+                if i:
+                    return False
+                center, radius = np.array([x+w/2, y+h/2]), w/2
+                if (not 12 <= radius <= min(width, height)
+                        or not (0 <= center[0] <= width and 0 <= center[1] <= height)
+                        or _visible_parent_arc(center, radius, (height, width)) < np.pi):
+                    return False
             if ((contract['outlined'] and not .5 <= sw <= min(w, h)/4)
                     or (not contract['outlined'] and sw != 0)):
                 return False

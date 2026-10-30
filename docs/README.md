@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [P0: angeschnittene Elternkreise, beobachtete Bögen und vollständige Variantenprüfung (2026-10-30)](next_arbeitspaket_2026-10-30_clipped_parent.md)
+
 - [AC0501-SIA: vorlagengestützte Nachzeichnung, richtige Bildbeschreibung und GUI-Pixelprüfung (2026-10-29)](ac0501_sia_redraw_and_gui_2026-10-29.md)
 
 - [SVG-Textbaseline korrigiert: echte Glyphengrenzen, sechs unabhängige CLI-Abnahmen und Archivinventar (2026-10-28)](next_arbeitspaket_2026-10-28_svg_text_baseline.md)

@@ -1,5 +1,11 @@
 # ImageConverter
 
+Der [P0-Teil für angeschnittene Verlaufskreise](docs/next_arbeitspaket_2026-10-30_clipped_parent.md)
+rekonstruiert äußere Kreise aus ausreichend sichtbaren Bögen am Bildrand.
+Die drei bekannten Randfehler verbessern sich auf identischen Rasterbytes
+von 0/3 auf 3/3; die vollständige Variantenkohorte besteht 17/17 und zwölf
+zusätzliche Kanten-/Eckfälle 12/12. Kinder und Qualitätsgrenzen bleiben verbindlich.
+
 Die [AC0835- und Wiederholungsprüfung](artifacts/evaluation/short_label_retry_v1/README.md)
 aktiviert die rastergestützte Kurztextsuche auch für gewöhnliche Kreis-/Textbeschreibungen
 und passt die Schriftbreite unabhängig von der Höhe an. Alle drei Grössen bestehen

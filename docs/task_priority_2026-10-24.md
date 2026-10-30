@@ -105,6 +105,13 @@ aus. [Nachweis und Grenzen](../artifacts/evaluation/axial_panel_issue_v1/README.
 
 ## Bearbeitung des höchsten Rangs
 
+Nachtrag 30.10.2026: Der [Teilumfang für angeschnittene Elternkreise](next_arbeitspaket_2026-10-30_clipped_parent.md)
+bearbeitet die drei bekannten Randfehler der letzten Überdeckungsgruppen-Abnahme.
+Dieselben drei Rastereingaben verbessern sich von 0/3 auf 3/3; die vollständige
+Variantenkohorte mit Seed 853197 besteht 17/17 und zwölf zusätzliche synthetische
+Kanten-/Eckfälle 12/12. Die übergeordnete P0-Aufgabe und unabhängige reale
+Familienabnahme bleiben offen; nächste reale Familien vor weiterer Entwicklung sperren.
+
 Nachtrag 28.10.2026: SVG-TEXT-BASELINE-01 ist für die neuen Textausgaben und
 sechs AC0721-Archivpaare abgeschlossen. Echte CLI und unabhängige librsvg-Abnahme
 bestehen 6/6; die separate interne Plan-B-Prüfung bleibt wegen des bekannten

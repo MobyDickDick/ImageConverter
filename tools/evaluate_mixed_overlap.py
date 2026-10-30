@@ -13,7 +13,7 @@ from tools.run_plan_b_variations import make_original_case, make_variations, wri
 
 
 def make_cases(seed=486213, *, rounded=False, outlined=False, children=None, repeat_fill=False,
-               same_fill=False, groups=None):
+               same_fill=False, groups=None, clipped_parent=False):
     if groups is not None:
         if groups not in (2, 3, 4) or children not in (None, 2*groups):
             raise ValueError('Use two to four groups with two children per group')
@@ -116,13 +116,33 @@ def make_cases(seed=486213, *, rounded=False, outlined=False, children=None, rep
                 element.set('fill', elements[0].get('fill'))
             case.update(case_id='same_paint_'+case['case_id'],
                         svg=ET.tostring(root, encoding='unicode'))
+    if clipped_parent:
+        # Independent fixture geometry crosses each frame edge and each
+        # corner. Children remain complete; only the outer circle is cropped.
+        shifts = [(24, 0), (-24, 0), (0, 24), (0, -24),
+                  (45, 0), (-45, 0), (0, 45), (0, -45),
+                  (30, 30), (-30, 30), (30, -30), (-30, -30)]
+        for case, (dx, dy) in zip(cases, shifts):
+            root = ET.fromstring(case['svg'])
+            for element, obj in zip(list(root)[2:], case['expected_objects']):
+                xkey, ykey = ('cx', 'cy') if obj['kind'] == 'circle' else ('x', 'y')
+                element.set(xkey, str(float(element.get(xkey))+dx))
+                element.set(ykey, str(float(element.get(ykey))+dy))
+                x, y, w, h = obj['bbox']
+                obj['bbox'] = [x+dx, y+dy, w, h]
+                if obj['parent'] is not None and not (
+                        0 <= x+dx < x+dx+w <= case['width']
+                        and 0 <= y+dy < y+dy+h <= case['height']):
+                    raise ValueError('Clipped-parent fixtures require complete children')
+            case.update(case_id='clipped_'+case['case_id'], svg=ET.tostring(root, encoding='unicode'))
     return cases
 
 
 def make_variation_cases(seed=486213, *, rounded=False, outlined=False, children=None, repeat_fill=False,
-                         same_fill=False, groups=None):
+                         same_fill=False, groups=None, clipped_parent=False):
     source = make_cases(seed, rounded=rounded, outlined=outlined, children=children,
-                        repeat_fill=repeat_fill, same_fill=same_fill, groups=groups)[3]
+                        repeat_fill=repeat_fill, same_fill=same_fill, groups=groups,
+                        clipped_parent=clipped_parent)[3]
     cases = [make_original_case(source['svg'], source['description']),
              *make_variations(source['svg'], source['description'], seed)]
     for case in cases:
@@ -147,6 +167,7 @@ def main():
     parser.add_argument('--outlines', action='store_true')
     parser.add_argument('--children', type=int, choices=range(2, 9))
     parser.add_argument('--groups', type=int, choices=(2, 3, 4))
+    parser.add_argument('--clipped-parent', action='store_true')
     parser.add_argument('--repeat-fill', action='store_true')
     parser.add_argument('--same-fill', action='store_true')
     parser.add_argument('--variations', action='store_true')
@@ -160,14 +181,16 @@ def main():
     if args.prepare:
         cases = (make_variation_cases if args.variations else make_cases)(
             args.seed, rounded=args.rounded, outlined=args.outlines, children=args.children,
-            repeat_fill=args.repeat_fill, same_fill=args.same_fill, groups=args.groups)
+            repeat_fill=args.repeat_fill, same_fill=args.same_fill, groups=args.groups,
+            clipped_parent=args.clipped_parent)
         args.prepare.mkdir(parents=True, exist_ok=False)
         write_cases(cases, args.prepare)
         (args.prepare/'manifest.json').write_text(json.dumps(cases, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
         (args.prepare/'generation.json').write_text(json.dumps(dict(seed=args.seed, rounded=args.rounded, outlines=args.outlines,
                                                                   variations=args.variations, children=args.children,
                                                                   repeat_fill=args.repeat_fill, same_fill=args.same_fill,
-                                                                  groups=args.groups), indent=2)+'\n', encoding='utf-8')
+                                                                  groups=args.groups,
+                                                                  clipped_parent=args.clipped_parent), indent=2)+'\n', encoding='utf-8')
         return 0
     if not args.inputs or not args.output:
         parser.error('--inputs and --output required')
