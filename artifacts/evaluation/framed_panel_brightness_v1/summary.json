@@ -1,0 +1,66 @@
+{
+  "image": "AC0VR2_M.jpg",
+  "previous": {
+    "elapsed": 2.7,
+    "search": {
+      "candidate_evaluations": 0,
+      "stop_reason": "supported_models_exhausted",
+      "satisfactory": false
+    }
+  },
+  "current": {
+    "elapsed": 5.1,
+    "search": {
+      "candidate_evaluations": 178,
+      "stop_reason": "satisfactory",
+      "satisfactory": true
+    }
+  },
+  "metrics": {
+    "before": {
+      "mse": 100.01222222222222,
+      "pixel_quality": {
+        "normalized_mse": 0.0015380578115582466,
+        "foreground_mse": 0.0016067438991740346,
+        "foreground_iou": 0.9717791411042945,
+        "edge_alignment": 0.9816908240318298,
+        "passed": true
+      },
+      "profile_quality": {
+        "profile_error_p95": 17.0,
+        "highlight_error": 17.0,
+        "passed": false
+      }
+    },
+    "after": {
+      "mse": 1.991111111111111,
+      "pixel_quality": {
+        "normalized_mse": 3.0620696634287015e-05,
+        "foreground_mse": 2.244535426143557e-05,
+        "foreground_iou": 0.9717791411042945,
+        "edge_alignment": 0.9781797528266907,
+        "passed": true
+      },
+      "profile_quality": {
+        "profile_error_p95": 2.0,
+        "highlight_error": 1.0,
+        "passed": true
+      }
+    },
+    "independent": {
+      "mse": 1.998888888888889,
+      "pixel_quality": {
+        "normalized_mse": 3.074030973948538e-05,
+        "foreground_mse": 2.2888787498231977e-05,
+        "foreground_iou": 0.9717791411042945,
+        "edge_alignment": 0.9781797528266907,
+        "passed": true
+      },
+      "profile_quality": {
+        "profile_error_p95": 2.0,
+        "highlight_error": 1.0,
+        "passed": true
+      }
+    }
+  }
+}
