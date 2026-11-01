@@ -7,7 +7,9 @@ or reference vectors are read.
 from __future__ import annotations
 
 import heapq
+import hashlib
 import re
+from copy import deepcopy
 
 import cv2
 import numpy as np
@@ -335,8 +337,50 @@ def _paint_components(pixels, mask, *, outlined=False):
     return paints
 
 
+class _OverlapProposals:
+    """Reuse exact native measurements within one image's structure search.
+
+    Thresholds and island partitions can produce the same observed paint
+    groups. Their native boundaries depend on those groups and the parent
+    field, not on the threshold that found them. Registration and acceptance
+    still run against the complete scene contract and original raster.
+    """
+    def __init__(self, pixels):
+        self.pixels = pixels
+        self.entries = {}
+        self.hits = 0
+        self.measurements = 0
+
+    def measure(self, pixels, predicted, mask, groups, *, rounded, outlined, circles):
+        if pixels is not self.pixels:
+            raise ValueError('Native proposal cache belongs to one image')
+        key = (predicted.dtype.str, predicted.shape,
+               hashlib.sha256(predicted.tobytes()).digest(), rounded, outlined, circles,
+               tuple((tuple(color), hashlib.sha256(np.packbits(component).tobytes()).digest())
+                     for color, component in groups))
+        if key in self.entries:
+            self.hits += 1
+            result = self.entries[key]
+            outcome = 'cache_hit'
+        else:
+            self.measurements += 1
+            result = _overlap_instances(pixels, predicted, mask, groups=groups,
+                rounded=rounded, outlined=outlined, circles=circles)
+            # Bound retained proposals independently of the structure agenda.
+            # Both successful measurements and native-boundary rejections count.
+            if len(self.entries) >= 96:
+                self.entries.pop(next(iter(self.entries)))
+            self.entries[key] = deepcopy(result)
+            outcome = 'measured'
+        progress('primitive_mixed_gradient_scene_v1', event='native_proposal',
+                 outcome=outcome, groups=len(groups), measurements=self.measurements,
+                 cache_hits=self.hits, native_boundaries=result is not None)
+        # Callers sort and edit candidates. Never expose the retained proposal.
+        return deepcopy(result)
+
+
 def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False, circles=False,
-                       split_components=False, groups=None):
+                       split_components=False, groups=None, proposals=None):
     """Propose native instances, each with independently exposed arcs or sides.
 
     Grouping does not supply hidden bounds: four observed rectangle sides or
@@ -353,6 +397,9 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
                   for selection in ([[part] for part in parts] if split_components else [parts])]
     if len(groups) > 8:
         return None
+    if proposals is not None:
+        return proposals.measure(pixels, predicted, mask, groups,
+                                 rounded=rounded, outlined=outlined, circles=circles)
     color_count = len({tuple(color) for color, _ in groups})
     children = []
     for color, component in groups:
@@ -598,7 +645,8 @@ def _gradient_context(pixels, contract, residual_threshold):
     return geometry, colors, predicted, mask, distance
 
 
-def detect_instances(pixels, contract, *, residual_threshold=25, split_components=False):
+def detect_instances(pixels, contract, *, residual_threshold=25, split_components=False,
+                     overlap_proposals=None):
     """Fit background paint first, then explain contrasting interior regions."""
     context = _gradient_context(pixels, contract, residual_threshold)
     if context is None:
@@ -611,7 +659,7 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
     if contract.get('overlap'):
         children = _overlap_instances(pixels, predicted, mask, rounded=contract.get('rounded', False),
                                       outlined=contract['outlined'], circles=bool(contract['children'].get('circle')),
-                                      split_components=split_components)
+                                      split_components=split_components, proposals=overlap_proposals)
         if children is None:
             return None
     for index in (() if contract.get('overlap') else range(1, number)):
@@ -866,7 +914,7 @@ def _island_partitions(paints, target, *, max_states, stats):
                     heapq.heappush(queue, (score+cost, serial, proposal))
 
 
-def grouped_overlap_instances(pixels, contract, *, max_states, stats):
+def grouped_overlap_instances(pixels, contract, *, max_states, stats, overlap_proposals=None):
     """Explore mixed instance/island covers under the remaining edit budget."""
     stats.update(states=0, state_limit_reached=False, candidate_limit_reached=False)
     session = current_search()
@@ -891,7 +939,7 @@ def grouped_overlap_instances(pixels, contract, *, max_states, stats):
             continue
         children = _overlap_instances(pixels, predicted, mask, rounded=contract['rounded'],
                                      outlined=contract['outlined'], circles=bool(contract['children'].get('circle')),
-                                     groups=groups)
+                                     groups=groups, proposals=overlap_proposals)
         progress('primitive_mixed_gradient_scene_v1', event='island_partition',
                  grouping_state=stats['states'], groups=len(groups),
                  outcome='proposed' if children is not None else 'native_boundaries_rejected')
@@ -1077,6 +1125,8 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
             or not np.isfinite(pixels).all()):
         return None
     attempts, seen, seeds = [], set(), []
+    overlap_proposals = _OverlapProposals(pixels) if contract.get('overlap') else None
+    detector_options = dict(overlap_proposals=overlap_proposals) if overlap_proposals is not None else {}
     session = current_search()
     rejection_scope = (raster_identity(pixels), tuple(sorted(contract['children'].items())),
                        contract['axis'], contract['outlined'], contract['layout_axis'], contract['rounded'],
@@ -1118,7 +1168,7 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
     def hypothesis(threshold):
         if session and session.time_reason():
             return None
-        objects = detect_instances(pixels, contract, residual_threshold=threshold)
+        objects = detect_instances(pixels, contract, residual_threshold=threshold, **detector_options)
         ordering = 'bounded_agenda'
         if objects is not None:
             if contract.get('overlap') and (len(objects) > 5 or contract['children'].get('circle')
@@ -1162,7 +1212,7 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
                     if session and session.time_reason():
                         return None
                     objects = detect_instances(pixels, contract, residual_threshold=threshold,
-                                               split_components=True)
+                                               split_components=True, **detector_options)
                     yield None
                     ordering = 'bounded_agenda'
                     if objects is not None and contract.get('overlap'):
@@ -1181,7 +1231,8 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
                         outcome = 'accepted'
                         return fitted
             if contract.get('overlap') and remaining:
-                for objects in grouped_overlap_instances(pixels, contract, max_states=remaining, stats=group_stats):
+                for objects in grouped_overlap_instances(pixels, contract, max_states=remaining,
+                                                        stats=group_stats, **detector_options):
                     if session and session.time_reason():
                         return None
                     yield None

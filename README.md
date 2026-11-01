@@ -1,5 +1,11 @@
 # ImageConverter
 
+Die [P0-Wiederverwendung nativer Strukturvorschläge](docs/next_arbeitspaket_2026-10-31_proposal_reuse.md)
+vermeidet wiederholte Kreis-/Konturvermessung identischer beobachteter Gruppen.
+Zwölf gepaarte CLI-Ausgaben bleiben bytegleich und bestehen sämtliche Gates;
+die mediane überwachte Prozesszeit sinkt lokal von 2,60 auf 1,84 Sekunden.
+Die allgemeine Strukturkomposition und reale Familienabnahme bleiben offen.
+
 Die [Korrektur des gerahmten Helligkeitsverlaufs](artifacts/evaluation/framed_panel_brightness_v1/README.md)
 registriert das helle Band und die dunklen Endbereiche anhand des Rasterprofils.
 Bei AC0VR2_M sinkt der quadratische Pixelfehler um 98 Prozent; der vollständige

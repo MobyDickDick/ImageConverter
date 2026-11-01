@@ -1,0 +1,96 @@
+{
+  "date": "2026-10-31",
+  "status": "review",
+  "python": "3.10.11",
+  "base_commit": "8cca419533e7d3ca22bde50879d47a452f2d55a8",
+  "regression": {
+    "command": ".venv/Scripts/python.exe -m pytest tests/test_overlap_proposal_reuse.py tests/test_overlap_groups.py tests/test_clipped_gradient_parent.py tests/test_thin_rim_depth.py tests/test_owned_circle_rims.py tests/test_same_paint_overlap.py tests/test_island_group_search.py tests/test_repeated_fill_overlap.py tests/test_mixed_overlap_composition.py tests/test_observed_depth_order.py tests/test_overlap_outlines.py tests/test_rounded_overlap_composition.py tests/test_overlap_composition.py tests/test_rounded_outlines.py tests/test_rounded_composition.py tests/test_component_splits.py tests/test_structure_search_operators.py tests/test_residual_scene_search.py -q --basetemp .tmp/group-cache-regression-final --junitxml .tmp/composition-transfer/regression-final.xml",
+    "exit_code": 0,
+    "tests": 599,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 438.998,
+    "sha256": "3b8f7a2954c9344d9b830c6a0632c541d9980428fb0fb04a3dc4eee400f99275"
+  },
+  "core": {
+    "command": ".venv/Scripts/python.exe tools/run_pytest_profile.py core-green --basetemp .tmp/group-cache-core --junitxml .tmp/composition-transfer/core.xml",
+    "exit_code": 0,
+    "tests": 42,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 1.157,
+    "sha256": "2724aeabda2cf656c91c63741b8722877ff5b81aa355dbc998f09194584547f1"
+  },
+  "baseline_group_regression": {
+    "command": ".venv/Scripts/python.exe -m pytest tests/test_overlap_groups.py -k every_disconnected -q --basetemp .tmp/group-budget-before --junitxml .tmp/composition-transfer/group-before.xml",
+    "exit_code": 0,
+    "tests": 18,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 54.181,
+    "sha256": "fe3a23af275c2d2cfb89a0f777d9e68f862d168e617623de8f88f9684b2fb625"
+  },
+  "cli_commands": [
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --prepare .tmp/composition-transfer/groups4-inputs --seed 731429 --groups 4 --rounded --outlines",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --inputs .tmp/composition-transfer/groups4-inputs --output .tmp/composition-transfer/groups4-before",
+      "exit_code": 0,
+      "accepted": 12,
+      "total": 12
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --inputs .tmp/composition-transfer/groups4-inputs --output .tmp/composition-transfer/groups4-after",
+      "exit_code": 0,
+      "accepted": 12,
+      "total": 12
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --prepare .tmp/composition-transfer/variants-inputs --seed 853197 --groups 2 --rounded --outlines --variations",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_mixed_overlap --inputs .tmp/composition-transfer/variants-inputs --output .tmp/composition-transfer/variants-after --require-all",
+      "exit_code": 0,
+      "accepted": 17,
+      "total": 17
+    }
+  ],
+  "checks": {
+    "python_ast": "passed",
+    "git_diff_check": "passed",
+    "runtime_hashes_match_all_final_cli_reports": true,
+    "full_standard_suite_run": false,
+    "archive_reconversion_run": false
+  },
+  "development_attempts": [
+    {
+      "attempt": "Initial cache tests",
+      "exit_code": 1,
+      "passed": 10,
+      "failed": 1,
+      "reason": "Test modification fell outside the observed component and changed no pixels; corrected the test mask using its actual visible left edge."
+    },
+    {
+      "attempt": "Initial broad test selection",
+      "exit_code": 1,
+      "tests_run": 0,
+      "reason": "Wrong test filename test_rounded_overlap.py; corrected to test_rounded_overlap_composition.py."
+    },
+    {
+      "attempt": "Optional workflow YAML parser check",
+      "result": "not_run",
+      "reason": "PyYAML is absent in the local environment; only an existing CI pytest command was extended."
+    }
+  ],
+  "files_sha256": {
+    "src/iCCModules/imageCompositeConverterMixedGradientScene.py": "8a793c9bc479664674765d8002d1d8adc4f409ffdea07ff7d8cc6e26e5df6883",
+    "tests/test_overlap_proposal_reuse.py": "dfd7c58a4c22ce766d0dc1641d629a786c049275a3a2aec0bf01d9d5e669c66f",
+    ".github/workflows/local-completion-checks.yml": "c4ff487408a19b66d95a20dbacc854a3edd0653616ead0a0844555034826550c"
+  }
+}

@@ -105,6 +105,12 @@ aus. [Nachweis und Grenzen](../artifacts/evaluation/axial_panel_issue_v1/README.
 
 ## Bearbeitung des höchsten Rangs
 
+Nachtrag 31.10.2026: Die [Wiederverwendung identischer nativer Strukturvorschläge](next_arbeitspaket_2026-10-31_proposal_reuse.md)
+vermeidet deren erneute Vermessung über Schwellwerte und Inselpartitionen.
+Zwölf gepaarte CLI-Fälle bleiben bytegleich und bestehen 12/12; die mediane
+überwachte Prozesszeit sinkt lokal von 2,6015 auf 1,8360 Sekunden.
+SEARCH-STRUCTURE-01 und die neue reale Familienabnahme bleiben offen.
+
 Nachtrag 30.10.2026: Der [Teilumfang für angeschnittene Elternkreise](next_arbeitspaket_2026-10-30_clipped_parent.md)
 bearbeitet die drei bekannten Randfehler der letzten Überdeckungsgruppen-Abnahme.
 Dieselben drei Rastereingaben verbessern sich von 0/3 auf 3/3; die vollständige
