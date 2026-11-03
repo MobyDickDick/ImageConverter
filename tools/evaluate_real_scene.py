@@ -45,6 +45,8 @@ def make_cases(seed=871209, count=12):
 
 def prepare_real(output, annotations):
     manifest = json.loads(annotations.read_text(encoding='utf-8'))
+    if manifest.get('evaluation_policy', {}).get('status') == 'sealed_unrun':
+        raise ValueError('Sealed real families must remain unrun until the frozen release protocol is satisfied')
     cases = []
     output.mkdir(parents=True, exist_ok=False)
     files = list((ROOT/'artifacts/images_to_convert').rglob('*'))

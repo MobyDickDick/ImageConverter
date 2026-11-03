@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [Reale Kompositionskandidaten vor Entwicklung reservieren: Originalmarkierungen, Sperre und Abnahmegrenzen (2026-11-03)](next_arbeitspaket_2026-11-03_real_family_freeze.md)
+
 - [P0: identische native Strukturvorschläge unter gemeinsamem Budget wiederverwenden (2026-10-31)](next_arbeitspaket_2026-10-31_proposal_reuse.md)
 
 - [P0: angeschnittene Elternkreise, beobachtete Bögen und vollständige Variantenprüfung (2026-10-30)](next_arbeitspaket_2026-10-30_clipped_parent.md)
