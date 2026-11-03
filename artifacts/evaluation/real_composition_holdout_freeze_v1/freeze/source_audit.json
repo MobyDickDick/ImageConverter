@@ -1,0 +1,44 @@
+{
+  "revision": "147e864059c686720d159b5bc00b9cf0c2844efe",
+  "searches": [
+    {
+      "command": [
+        "git",
+        "grep",
+        "-n",
+        "-I",
+        "-i",
+        "-E",
+        "(^|[^[:alnum:]_])([hH][cC]0010|[rR][aA][iI][lL])([^[:alnum:]_]|$)",
+        "147e864059c686720d159b5bc00b9cf0c2844efe",
+        "--",
+        "src",
+        "tests",
+        "tools",
+        "config",
+        "docs"
+      ],
+      "exit_code": 0,
+      "output": "147e864059c686720d159b5bc00b9cf0c2844efe:src/iCCModules/imageCompositeConverterZigzagPanel.py:260:        # A dark rail cannot be allowed to stand in for the hidden panel fill.\n147e864059c686720d159b5bc00b9cf0c2844efe:src/iCCModules/imageCompositeConverterZigzagPanel.py:277:            # the independently observed solid rail, retaining only improvements.\n"
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "147e864059c686720d159b5bc00b9cf0c2844efe",
+        "--format=%h %s",
+        "-G",
+        "(^|[^[:alnum:]_])([hH][cC]0010|[rR][aA][iI][lL])([^[:alnum:]_]|$)",
+        "--",
+        "src",
+        "tests",
+        "tools",
+        "config",
+        "docs"
+      ],
+      "exit_code": 0,
+      "output": "7ab31d915 Preserve validated panel fits after SVG style normalization\n17178082f Reconstruct humidifier panel variants from pixels\n"
+    }
+  ],
+  "limitation": "Tracked source/history search only; historical catalogue and batch exposure is not excluded. Generic word matches require manual interpretation."
+}

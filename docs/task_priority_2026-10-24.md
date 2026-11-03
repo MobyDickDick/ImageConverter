@@ -105,6 +105,12 @@ aus. [Nachweis und Grenzen](../artifacts/evaluation/axial_panel_issue_v1/README.
 
 ## Bearbeitung des höchsten Rangs
 
+Nachtrag 03.11.2026: Das [Vorbereitungspaket für reale Kompositionskandidaten](next_arbeitspaket_2026-11-03_real_family_freeze.md)
+reserviert HC0010 und Rail vor weiterer Runtime-Entwicklung. Null Versuche,
+keine positive Familienabnahme; beide Kandidaten überschreiten die heutige
+Grammatik und benötigen vollständige unabhängige Prüfer vor Offenlegung.
+Rang 1/P0 und die übergeordneten realen Abnahmen bleiben offen.
+
 Nachtrag 31.10.2026: Die [Wiederverwendung identischer nativer Strukturvorschläge](next_arbeitspaket_2026-10-31_proposal_reuse.md)
 vermeidet deren erneute Vermessung über Schwellwerte und Inselpartitionen.
 Zwölf gepaarte CLI-Fälle bleiben bytegleich und bestehen 12/12; die mediane

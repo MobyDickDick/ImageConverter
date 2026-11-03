@@ -1,0 +1,702 @@
+{
+  "schema": "real_composition_holdout_families_v1",
+  "annotation_method": "Implementing agent marked nearest-neighbour enlarged original JPEG pixels before any conversion or detector call. Bounds describe visible pixels, not inferred hidden geometry. No SVG inspected. No independent human audit.",
+  "evaluation_policy": {
+    "status": "sealed_unrun",
+    "converter_trials": 0,
+    "positive_acceptance": null,
+    "release_requirement": "Commit final development runtime and a complete independent oracle covering every listed gap before the first trial. Run once with predeclared budgets and gates; no tuning on results. Exposed families become development after that trial.",
+    "baseline_revision": "147e86405",
+    "historical_catalogue_exposure": true
+  },
+  "family_policy": "Two reserved candidate composition families, distinct from the gradient-circle families. These are future tests of broader composition, not proof that the present circle/rectangle contract supports either family. Family counts and transformed sample counts stay separate.",
+  "cases": [
+    {
+      "file": "HC0010.JPG",
+      "family": "repeated_shaded_radiator_panels_with_occluded_connectors",
+      "split": "holdout",
+      "family_members": [
+        "HC0010.JPG"
+      ],
+      "descendant_policy": "All crops, recolorings, scales, renames and synthetic descendants remain in this family; never split by file name.",
+      "source_sha256": "e4594b8a5828c92b705a281bd73388cf76fcd1ebfd6d5551d50b229d96910b2f",
+      "size": [
+        83,
+        56
+      ],
+      "description": "Neun nebeneinander stehende schmale, weiß bis hellgrau schattierte Heizkörperglieder mit gerundeten oberen und unteren Enden. Das erste und das neunte Glied sind am linken beziehungsweise rechten Bildrand angeschnitten. Zwei hellgraue waagrechte Verbindungsrohre liegen dahinter und sind nur in den Zwischenräumen sichtbar. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "id": "upper_connector",
+          "kind": "rectangle",
+          "visible_bbox": [
+            0,
+            5,
+            83,
+            4
+          ],
+          "boundary_tolerance_px": 1.5,
+          "fill": "light grey",
+          "occluded_by": [
+            "panel_0",
+            "panel_1",
+            "panel_2",
+            "panel_3",
+            "panel_4",
+            "panel_5",
+            "panel_6",
+            "panel_7",
+            "panel_8"
+          ]
+        },
+        {
+          "id": "lower_connector",
+          "kind": "rectangle",
+          "visible_bbox": [
+            0,
+            44,
+            83,
+            5
+          ],
+          "boundary_tolerance_px": 1.5,
+          "fill": "light grey",
+          "occluded_by": [
+            "panel_0",
+            "panel_1",
+            "panel_2",
+            "panel_3",
+            "panel_4",
+            "panel_5",
+            "panel_6",
+            "panel_7",
+            "panel_8"
+          ]
+        },
+        {
+          "id": "panel_0",
+          "kind": "rounded_rectangle",
+          "visible_bbox": [
+            0,
+            0,
+            8,
+            56
+          ],
+          "clipped_edges": [
+            "left"
+          ],
+          "boundary_tolerance_px": 1.5,
+          "fill": "white/light-grey with horizontal shading",
+          "rounding": "Visible top and bottom arcs; do not replace by square corners."
+        },
+        {
+          "id": "panel_1",
+          "kind": "rounded_rectangle",
+          "visible_bbox": [
+            9,
+            0,
+            9,
+            56
+          ],
+          "clipped_edges": [],
+          "boundary_tolerance_px": 1.5,
+          "fill": "white/light-grey with horizontal shading",
+          "rounding": "Visible top and bottom arcs; do not replace by square corners."
+        },
+        {
+          "id": "panel_2",
+          "kind": "rounded_rectangle",
+          "visible_bbox": [
+            19,
+            0,
+            9,
+            56
+          ],
+          "clipped_edges": [],
+          "boundary_tolerance_px": 1.5,
+          "fill": "white/light-grey with horizontal shading",
+          "rounding": "Visible top and bottom arcs; do not replace by square corners."
+        },
+        {
+          "id": "panel_3",
+          "kind": "rounded_rectangle",
+          "visible_bbox": [
+            29,
+            0,
+            9,
+            56
+          ],
+          "clipped_edges": [],
+          "boundary_tolerance_px": 1.5,
+          "fill": "white/light-grey with horizontal shading",
+          "rounding": "Visible top and bottom arcs; do not replace by square corners."
+        },
+        {
+          "id": "panel_4",
+          "kind": "rounded_rectangle",
+          "visible_bbox": [
+            39,
+            0,
+            9,
+            56
+          ],
+          "clipped_edges": [],
+          "boundary_tolerance_px": 1.5,
+          "fill": "white/light-grey with horizontal shading",
+          "rounding": "Visible top and bottom arcs; do not replace by square corners."
+        },
+        {
+          "id": "panel_5",
+          "kind": "rounded_rectangle",
+          "visible_bbox": [
+            49,
+            0,
+            9,
+            56
+          ],
+          "clipped_edges": [],
+          "boundary_tolerance_px": 1.5,
+          "fill": "white/light-grey with horizontal shading",
+          "rounding": "Visible top and bottom arcs; do not replace by square corners."
+        },
+        {
+          "id": "panel_6",
+          "kind": "rounded_rectangle",
+          "visible_bbox": [
+            59,
+            0,
+            9,
+            56
+          ],
+          "clipped_edges": [],
+          "boundary_tolerance_px": 1.5,
+          "fill": "white/light-grey with horizontal shading",
+          "rounding": "Visible top and bottom arcs; do not replace by square corners."
+        },
+        {
+          "id": "panel_7",
+          "kind": "rounded_rectangle",
+          "visible_bbox": [
+            69,
+            0,
+            9,
+            56
+          ],
+          "clipped_edges": [],
+          "boundary_tolerance_px": 1.5,
+          "fill": "white/light-grey with horizontal shading",
+          "rounding": "Visible top and bottom arcs; do not replace by square corners."
+        },
+        {
+          "id": "panel_8",
+          "kind": "rounded_rectangle",
+          "visible_bbox": [
+            79,
+            0,
+            4,
+            56
+          ],
+          "clipped_edges": [
+            "right"
+          ],
+          "boundary_tolerance_px": 1.5,
+          "fill": "white/light-grey with horizontal shading",
+          "rounding": "Visible top and bottom arcs; do not replace by square corners."
+        }
+      ],
+      "relations": [
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_0",
+            "upper_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_0",
+            "lower_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_1",
+            "upper_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_1",
+            "lower_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_2",
+            "upper_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_2",
+            "lower_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_3",
+            "upper_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_3",
+            "lower_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_4",
+            "upper_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_4",
+            "lower_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_5",
+            "upper_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_5",
+            "lower_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_6",
+            "upper_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_6",
+            "lower_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_7",
+            "upper_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_7",
+            "lower_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_8",
+            "upper_connector"
+          ]
+        },
+        {
+          "kind": "in_front_of",
+          "objects": [
+            "panel_8",
+            "lower_connector"
+          ]
+        }
+      ],
+      "acceptance_gaps": [
+        "Eleven objects exceed the current eight-child search bound; do not silently omit the clipped ninth panel or either connector.",
+        "Shared horizontal shading and weak grey boundaries require original-region and contour checks, not just boxes.",
+        "Current independent circle/rectangle checker does not validate rounded ends, occluded connectors or clipped visible bounds for this inventory. Complete that oracle before any acceptance claim."
+      ]
+    },
+    {
+      "file": "Rail.jpg",
+      "family": "textured_metal_strip_with_repeated_chamfered_holes",
+      "split": "holdout",
+      "family_members": [
+        "Rail.jpg"
+      ],
+      "descendant_policy": "All crops, recolorings, scales, renames and synthetic descendants remain in this family; never split by file name.",
+      "source_sha256": "9bbe11b1bb8d9bb07b3443847ebbddaf898b615c6fc8c810284426479a81b02a",
+      "size": [
+        258,
+        70
+      ],
+      "description": "Ein das Bild ausfüllender grauer Metallstreifen mit dunkler waagrechter Rille im oberen Bereich und mehreren helleren horizontalen Kanten unten. In einer Reihe liegen fünf getrennte weiße Langlöcher mit abgeschrägten Ecken und dunklen oberen und seitlichen Rändern. Der Metalluntergrund ist sichtbar strukturiert. Keine Beschriftung.",
+      "expected_objects": [
+        {
+          "id": "strip",
+          "kind": "textured_rectangle",
+          "visible_bbox": [
+            0,
+            0,
+            258,
+            70
+          ],
+          "clipped_edges": [
+            "left",
+            "right",
+            "top",
+            "bottom"
+          ],
+          "boundary_tolerance_px": 0
+        },
+        {
+          "id": "upper_groove",
+          "kind": "shaded_band",
+          "visible_bbox": [
+            0,
+            4,
+            258,
+            11
+          ],
+          "boundary_tolerance_px": 2
+        },
+        {
+          "id": "lower_ridges",
+          "kind": "textured_band",
+          "visible_bbox": [
+            0,
+            55,
+            258,
+            15
+          ],
+          "boundary_tolerance_px": 2
+        },
+        {
+          "id": "hole_0",
+          "kind": "chamfered_hole",
+          "visible_bbox": [
+            12,
+            27,
+            37,
+            14
+          ],
+          "boundary_tolerance_px": 1.5,
+          "interior": "white",
+          "contour": "dark upper/side boundary, light lower edge",
+          "polygon": [
+            [
+              17,
+              27
+            ],
+            [
+              44,
+              27
+            ],
+            [
+              49,
+              32
+            ],
+            [
+              49,
+              36
+            ],
+            [
+              44,
+              41
+            ],
+            [
+              17,
+              41
+            ],
+            [
+              12,
+              36
+            ],
+            [
+              12,
+              32
+            ]
+          ]
+        },
+        {
+          "id": "hole_1",
+          "kind": "chamfered_hole",
+          "visible_bbox": [
+            59,
+            27,
+            38,
+            14
+          ],
+          "boundary_tolerance_px": 1.5,
+          "interior": "white",
+          "contour": "dark upper/side boundary, light lower edge",
+          "polygon": [
+            [
+              64,
+              27
+            ],
+            [
+              92,
+              27
+            ],
+            [
+              97,
+              32
+            ],
+            [
+              97,
+              36
+            ],
+            [
+              92,
+              41
+            ],
+            [
+              64,
+              41
+            ],
+            [
+              59,
+              36
+            ],
+            [
+              59,
+              32
+            ]
+          ]
+        },
+        {
+          "id": "hole_2",
+          "kind": "chamfered_hole",
+          "visible_bbox": [
+            109,
+            27,
+            39,
+            14
+          ],
+          "boundary_tolerance_px": 1.5,
+          "interior": "white",
+          "contour": "dark upper/side boundary, light lower edge",
+          "polygon": [
+            [
+              114,
+              27
+            ],
+            [
+              143,
+              27
+            ],
+            [
+              148,
+              32
+            ],
+            [
+              148,
+              36
+            ],
+            [
+              143,
+              41
+            ],
+            [
+              114,
+              41
+            ],
+            [
+              109,
+              36
+            ],
+            [
+              109,
+              32
+            ]
+          ]
+        },
+        {
+          "id": "hole_3",
+          "kind": "chamfered_hole",
+          "visible_bbox": [
+            160,
+            27,
+            39,
+            14
+          ],
+          "boundary_tolerance_px": 1.5,
+          "interior": "white",
+          "contour": "dark upper/side boundary, light lower edge",
+          "polygon": [
+            [
+              165,
+              27
+            ],
+            [
+              194,
+              27
+            ],
+            [
+              199,
+              32
+            ],
+            [
+              199,
+              36
+            ],
+            [
+              194,
+              41
+            ],
+            [
+              165,
+              41
+            ],
+            [
+              160,
+              36
+            ],
+            [
+              160,
+              32
+            ]
+          ]
+        },
+        {
+          "id": "hole_4",
+          "kind": "chamfered_hole",
+          "visible_bbox": [
+            210,
+            27,
+            39,
+            14
+          ],
+          "boundary_tolerance_px": 1.5,
+          "interior": "white",
+          "contour": "dark upper/side boundary, light lower edge",
+          "polygon": [
+            [
+              215,
+              27
+            ],
+            [
+              244,
+              27
+            ],
+            [
+              249,
+              32
+            ],
+            [
+              249,
+              36
+            ],
+            [
+              244,
+              41
+            ],
+            [
+              215,
+              41
+            ],
+            [
+              210,
+              36
+            ],
+            [
+              210,
+              32
+            ]
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "kind": "hole_in",
+          "objects": [
+            "hole_0",
+            "strip"
+          ]
+        },
+        {
+          "kind": "hole_in",
+          "objects": [
+            "hole_1",
+            "strip"
+          ]
+        },
+        {
+          "kind": "hole_in",
+          "objects": [
+            "hole_2",
+            "strip"
+          ]
+        },
+        {
+          "kind": "hole_in",
+          "objects": [
+            "hole_3",
+            "strip"
+          ]
+        },
+        {
+          "kind": "hole_in",
+          "objects": [
+            "hole_4",
+            "strip"
+          ]
+        },
+        {
+          "kind": "left_of",
+          "objects": [
+            "hole_0",
+            "hole_1"
+          ]
+        },
+        {
+          "kind": "left_of",
+          "objects": [
+            "hole_1",
+            "hole_2"
+          ]
+        },
+        {
+          "kind": "left_of",
+          "objects": [
+            "hole_2",
+            "hole_3"
+          ]
+        },
+        {
+          "kind": "left_of",
+          "objects": [
+            "hole_3",
+            "hole_4"
+          ]
+        }
+      ],
+      "acceptance_gaps": [
+        "Chamfered holes are not rounded rectangles; the current native oracle must reject a rectangle-only surrogate.",
+        "Texture, groove and lower ridges are required visible content. A solid grey rectangle is not a complete reconstruction.",
+        "This family goes beyond the present circle/rectangle scene contract and requires hole/contour and texture-region validation before first acceptance."
+      ]
+    }
+  ]
+}
