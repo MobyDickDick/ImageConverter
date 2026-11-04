@@ -1,5 +1,10 @@
 # ImageConverter
 
+Die [P0-Komposition von Überdeckungsgruppen und einzelnen Formen](docs/next_arbeitspaket_2026-11-04_mixed_topology.md)
+verbindet beide Anordnungen im gemeinsamen Verlaufsszenenweg. Zwölf identische
+synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12; ein Zusatzseed besteht
+12/12 und die gekoppelte Variantenprüfung 17/17. Die reale Gesamtabnahme bleibt offen.
+
 Die [P0-Wiederverwendung nativer Strukturvorschläge](docs/next_arbeitspaket_2026-10-31_proposal_reuse.md)
 vermeidet wiederholte Kreis-/Konturvermessung identischer beobachteter Gruppen.
 Zwölf gepaarte CLI-Ausgaben bleiben bytegleich und bestehen sämtliche Gates;

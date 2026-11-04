@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [P0: Überdeckungsgruppen und einzelne Formen gemeinsam komponieren (2026-11-04)](next_arbeitspaket_2026-11-04_mixed_topology.md)
+
 - [Reale Kompositionskandidaten vor Entwicklung reservieren: Originalmarkierungen, Sperre und Abnahmegrenzen (2026-11-03)](next_arbeitspaket_2026-11-03_real_family_freeze.md)
 
 - [P0: identische native Strukturvorschläge unter gemeinsamem Budget wiederverwenden (2026-10-31)](next_arbeitspaket_2026-10-31_proposal_reuse.md)

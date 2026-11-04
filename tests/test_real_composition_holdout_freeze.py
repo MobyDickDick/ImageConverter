@@ -18,11 +18,13 @@ def inventory(root):
     return {p.relative_to(root).as_posix(): digest(p) for p in root.rglob('*') if p.is_file()}
 
 
-def test_reserved_evidence_is_read_only_unrun_and_matches_current_runtime():
+def test_reserved_historical_evidence_is_read_only_and_unrun():
     before = inventory(EVIDENCE)
-    result = verify(EVIDENCE/'manifest.json', check_current=True)
+    # Runtime development may proceed after sealing. The historical snapshot
+    # stays immutable; checking it must not silently rebase or release families.
+    result = verify(EVIDENCE/'manifest.json')
     assert result == dict(status='sealed_unrun', families=2, converter_executed=False,
-                          accepted=None, current_runtime_checked=True)
+                          accepted=None, current_runtime_checked=False)
     assert inventory(EVIDENCE) == before
     assert (EVIDENCE/'annotations.json').read_bytes() == ANNOTATIONS.read_bytes()
 
@@ -129,9 +131,20 @@ def test_new_freeze_preserves_existing_evidence_and_refuses_overwrite(tmp_path, 
     output = tmp_path/'fresh-freeze'
     result = freeze(ANNOTATIONS, output)
     assert result['converter_executed'] is False
+    assert result['current_runtime_checked'] is True
     assert all(b'\r\n' not in path.read_bytes() for path in output.rglob('*')
                if path.suffix in ('.json', '.txt'))
     before = inventory(output)
     with pytest.raises(FileExistsError):
         freeze(ANNOTATIONS, output)
+    assert inventory(output) == before
+    # An explicit current-runtime comparison must still reject source drift;
+    # only the historical integrity mode may ignore subsequent development.
+    original_digest = digest
+    with monkeypatch.context() as changed:
+        changed.setattr(module, 'digest', lambda path:
+                        '0'*64 if path.is_relative_to(ROOT/'src') else original_digest(path))
+        with pytest.raises(ValueError, match='Runtime changed since freeze'):
+            verify(output/'manifest.json', check_current=True)
+        assert verify(output/'manifest.json')['status'] == 'sealed_unrun'
     assert inventory(output) == before
