@@ -1,5 +1,11 @@
 # ImageConverter
 
+Der [gemeinsame P0-Struktursuchweg unterstützt jetzt auch rechteckige Verlaufsflächen](docs/next_arbeitspaket_2026-11-05_rectangular_parent.md)
+mit gemischten Kreis-/Rechteckkindern, Überdeckungsgruppen und einzelnen Formen.
+Zwölf identische synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12;
+ein Zusatzseed besteht 12/12 und die gekoppelte Variantenkohorte 17/17.
+Angeschnittene und gerundete Elternrechtecke sowie die reale Gesamtabnahme bleiben offen.
+
 Die [P0-Komposition von Überdeckungsgruppen und einzelnen Formen](docs/next_arbeitspaket_2026-11-04_mixed_topology.md)
 verbindet beide Anordnungen im gemeinsamen Verlaufsszenenweg. Zwölf identische
 synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12; ein Zusatzseed besteht

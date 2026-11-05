@@ -105,6 +105,14 @@ aus. [Nachweis und Grenzen](../artifacts/evaluation/axial_panel_issue_v1/README.
 
 ## Bearbeitung des höchsten Rangs
 
+Nachtrag 05.11.2026: [Rechteckige Verlaufsflächen](next_arbeitspaket_2026-11-05_rectangular_parent.md)
+verwenden jetzt die gemeinsame P0-Komposition mit gemischten Kindern,
+Überdeckungsgruppen, Einzelobjekten und optionalen Konturen/Kindrundungen.
+Zwölf identische synthetische CLI-Eingaben verbessern sich von 0/12 auf 12/12;
+Zusatzseed 12/12, eine gekoppelte Variantenkohorte 17/17. Vollständige
+Elternkanten, lokale Eck-/Restbildbelege und bisherige Gates bleiben erforderlich.
+Die reservierten Familien bleiben ungetestet; Rang 1/P0 und reale Abnahmen bleiben offen.
+
 Nachtrag 04.11.2026: [Überdeckungsgruppen und einzelne Formen](next_arbeitspaket_2026-11-04_mixed_topology.md)
 werden im gemeinsamen P0-Szenenweg komponiert. Zwölf unveränderte synthetische
 CLI-Fälle verbessern sich von 0/12 auf 12/12; Zusatzseed und gekoppelte
