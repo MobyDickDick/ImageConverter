@@ -105,6 +105,30 @@ aus. [Nachweis und Grenzen](../artifacts/evaluation/axial_panel_issue_v1/README.
 
 ## Bearbeitung des höchsten Rangs
 
+Nachtrag 06.11.2026: [Gerundete äußere Verlaufsrechtecke](next_arbeitspaket_2026-11-06_rounded_parent.md)
+werden anhand vier sichtbarer Ecken und eines gemessenen nativen Radius mit
+den vorhandenen gemischten Kindern und Topologien verbunden. Die zusätzliche
+librsvg-Gegenprobe weist eine vorhandene lokale Eckabweichung nach: 121/164
+statt 164/164 Eckgates. Deshalb folgt zuerst
+[SVG-ROUNDED-RENDERER-01](next_arbeitspaket_2026-11-06_rounded_renderer.md), danach
+die Komposition angeschnittener Elternrechtecke. Die allgemeine Komposition und
+unabhängige reale Abnahme bleiben offen.
+
+Nachtrag 05.11.2026: [Rechteckige Verlaufsflächen](next_arbeitspaket_2026-11-05_rectangular_parent.md)
+verwenden jetzt die gemeinsame P0-Komposition mit gemischten Kindern,
+Überdeckungsgruppen, Einzelobjekten und optionalen Konturen/Kindrundungen.
+Zwölf identische synthetische CLI-Eingaben verbessern sich von 0/12 auf 12/12;
+Zusatzseed 12/12, eine gekoppelte Variantenkohorte 17/17. Vollständige
+Elternkanten, lokale Eck-/Restbildbelege und bisherige Gates bleiben erforderlich.
+Die reservierten Familien bleiben ungetestet; Rang 1/P0 und reale Abnahmen bleiben offen.
+
+Nachtrag 04.11.2026: [Überdeckungsgruppen und einzelne Formen](next_arbeitspaket_2026-11-04_mixed_topology.md)
+werden im gemeinsamen P0-Szenenweg komponiert. Zwölf unveränderte synthetische
+CLI-Fälle verbessern sich von 0/12 auf 12/12; Zusatzseed und gekoppelte
+Varianten bestehen 12/12 und 17/17. Gruppen, Einzelobjekte, native Abstände,
+beobachtete Tiefe und alle bisherigen Gates bleiben verbindlich. HC0010 und
+Rail bleiben ungetestet versiegelt; Rang 1/P0 und die realen Abnahmen bleiben offen.
+
 Nachtrag 03.11.2026: Das [Vorbereitungspaket für reale Kompositionskandidaten](next_arbeitspaket_2026-11-03_real_family_freeze.md)
 reserviert HC0010 und Rail vor weiterer Runtime-Entwicklung. Null Versuche,
 keine positive Familienabnahme; beide Kandidaten überschreiten die heutige

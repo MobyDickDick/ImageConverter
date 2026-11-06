@@ -1,5 +1,12 @@
 # Dokumentationsindex
 
+- [P0: gerundete Verlaufsrechtecke mit gemischten Kindern und gemessenen Elternradien (2026-11-06)](next_arbeitspaket_2026-11-06_rounded_parent.md)
+- [Nächstes P0-Paket: native Rundungen im MuPDF-SVG-Weg gegen analytische und librsvg-Ecken korrigieren (2026-11-06)](next_arbeitspaket_2026-11-06_rounded_renderer.md)
+
+- [P0: rechteckige Verlaufsflächen mit gemischten Kindern im gemeinsamen Struktursuchweg (2026-11-05)](next_arbeitspaket_2026-11-05_rectangular_parent.md)
+
+- [P0: Überdeckungsgruppen und einzelne Formen gemeinsam komponieren (2026-11-04)](next_arbeitspaket_2026-11-04_mixed_topology.md)
+
 - [Reale Kompositionskandidaten vor Entwicklung reservieren: Originalmarkierungen, Sperre und Abnahmegrenzen (2026-11-03)](next_arbeitspaket_2026-11-03_real_family_freeze.md)
 
 - [P0: identische native Strukturvorschläge unter gemeinsamem Budget wiederverwenden (2026-10-31)](next_arbeitspaket_2026-10-31_proposal_reuse.md)

@@ -1,5 +1,27 @@
 # ImageConverter
 
+Der [gemeinsame P0-Struktursuchweg verbindet jetzt gerundete äußere Verlaufsrechtecke](docs/next_arbeitspaket_2026-11-06_rounded_parent.md)
+mit gemischten Kindern, Überdeckungsgruppen und einzelnen Formen. Zwölf
+unveränderte synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12;
+Zusatzseed und gekoppelte Variantenkohorte bestehen 12/12 beziehungsweise 17/17.
+Elternradien und vier lokale Ecken werden am Originalraster geprüft.
+Die zusätzliche librsvg-Gegenprobe besteht 41/41 Gesamtbilder, aber nur 121/164
+lokale Ecken; die [vorhandene Rendererabweichung](docs/next_arbeitspaket_2026-11-06_rounded_renderer.md)
+ist der nächste P0-Schritt. Angeschnittene Elternrechtecke und die reale
+Gesamtabnahme bleiben offen.
+
+Der [gemeinsame P0-Struktursuchweg unterstützt jetzt auch rechteckige Verlaufsflächen](docs/next_arbeitspaket_2026-11-05_rectangular_parent.md)
+mit gemischten Kreis-/Rechteckkindern, Überdeckungsgruppen und einzelnen Formen.
+Zwölf identische synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12;
+ein Zusatzseed besteht 12/12 und die gekoppelte Variantenkohorte 17/17.
+Gerundete Elternrechtecke sind im Folgepaket ergänzt; angeschnittene
+Elternrechtecke sowie die reale Gesamtabnahme bleiben offen.
+
+Die [P0-Komposition von Überdeckungsgruppen und einzelnen Formen](docs/next_arbeitspaket_2026-11-04_mixed_topology.md)
+verbindet beide Anordnungen im gemeinsamen Verlaufsszenenweg. Zwölf identische
+synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12; ein Zusatzseed besteht
+12/12 und die gekoppelte Variantenprüfung 17/17. Die reale Gesamtabnahme bleibt offen.
+
 Die [P0-Wiederverwendung nativer Strukturvorschläge](docs/next_arbeitspaket_2026-10-31_proposal_reuse.md)
 vermeidet wiederholte Kreis-/Konturvermessung identischer beobachteter Gruppen.
 Zwölf gepaarte CLI-Ausgaben bleiben bytegleich und bestehen sämtliche Gates;
