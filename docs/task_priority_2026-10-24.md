@@ -105,6 +105,15 @@ aus. [Nachweis und Grenzen](../artifacts/evaluation/axial_panel_issue_v1/README.
 
 ## Bearbeitung des höchsten Rangs
 
+Nachtrag 06.11.2026: [Gerundete äußere Verlaufsrechtecke](next_arbeitspaket_2026-11-06_rounded_parent.md)
+werden anhand vier sichtbarer Ecken und eines gemessenen nativen Radius mit
+den vorhandenen gemischten Kindern und Topologien verbunden. Die zusätzliche
+librsvg-Gegenprobe weist eine vorhandene lokale Eckabweichung nach: 121/164
+statt 164/164 Eckgates. Deshalb folgt zuerst
+[SVG-ROUNDED-RENDERER-01](next_arbeitspaket_2026-11-06_rounded_renderer.md), danach
+die Komposition angeschnittener Elternrechtecke. Die allgemeine Komposition und
+unabhängige reale Abnahme bleiben offen.
+
 Nachtrag 05.11.2026: [Rechteckige Verlaufsflächen](next_arbeitspaket_2026-11-05_rectangular_parent.md)
 verwenden jetzt die gemeinsame P0-Komposition mit gemischten Kindern,
 Überdeckungsgruppen, Einzelobjekten und optionalen Konturen/Kindrundungen.

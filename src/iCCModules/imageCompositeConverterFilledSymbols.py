@@ -22,7 +22,7 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
 
 def _register_steps(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
               *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None,
-              refinement_steps=(1., .5, .25, .125)):
+              refinement_steps=(1., .5, .25, .125), initial_candidates=()):
     """Bounded coordinate descent; optionally retain the best admissible iterate.
 
     A custom search loss does not override the caller's initial error bound.
@@ -86,6 +86,19 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     accepted = (parameters.copy(), best)
     if session and best[1] <= initial_error+1e-9:
         session.observe(best[1],evaluation=False)
+    # Raster-derived alternate seeds share this registration's cache, counters,
+    # error bound and image deadline; yield between them for the fair scheduler.
+    for candidate in initial_candidates:
+        if session and session.time_reason():
+            break
+        measured = measure(candidate)
+        if measured is not None and measured[0] < best[0]-1e-9:
+            parameters, best = np.asarray(candidate, dtype=float), measured
+            if best[1] <= initial_error+1e-9:
+                accepted = (parameters.copy(), best)
+                if session:
+                    session.observe(best[1], evaluation=False)
+        yield best[0] if best[1] <= initial_error+1e-9 else None
     satisfactory_cache = {}
 
     def satisfactory(p, measured):
