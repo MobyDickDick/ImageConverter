@@ -30,7 +30,8 @@ ROOT = Path(__file__).resolve().parents[1]
 WEB = ROOT / "web"
 MAX_UPLOAD = 25 * 1024 * 1024
 MAX_PIXELS = 20_000_000
-PROFILES = {"quick": (15, 30), "normal": (60, 120), "thorough": (120, 240)}
+# Leave room after the 30-second effort floor for model comparison/finalization.
+PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240)}
 
 
 class RequestError(ValueError):
@@ -412,6 +413,11 @@ def collect_result(folder: Path, job: dict, returncode: int) -> None:
         summary = search_summary(output)
         if summary is not None:
             job['search_summary'] = summary
+            if passed and summary['satisfactory'] is False:
+                passed = False
+                job.update(quality='warning', message=(
+                    'SVG erstellt. Pixelprüfung bestanden; die vollständige Modell- und Beschreibungsprüfung '
+                    'ist noch offen. Bitte den Entwurf prüfen.'))
             if not passed:
                 if summary['candidate_evaluations'] == 0:
                     job['message'] += ' Für dieses Motiv wurde keine zusätzliche Modellsuche ausgeführt; Wiederholen allein erschliesst keine neue Lösung.'
@@ -434,7 +440,8 @@ def search_summary(output: Path) -> dict | None:
                 event = json.loads(line)
                 if event.get('event') == 'image_search_finished':
                     result = {key: event.get(key) for key in
-                              ('candidate_evaluations', 'stop_reason', 'satisfactory')}
+                              ('candidate_evaluations', 'stop_reason', 'satisfactory',
+                               'elapsed_seconds', 'minimum_seconds', 'limit_seconds')}
             except (ValueError, AttributeError):
                 continue
     return result if result and isinstance(result['candidate_evaluations'], int) else None

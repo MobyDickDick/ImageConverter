@@ -186,6 +186,7 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
 
     models = ranked_models(((False,400),(False,700),(True,400),(True,700)))
     session = current_search()
+    finish_models_before = session.finish_model_searches if session else False
     schedule_start = len(session.scheduler_history) if session else 0
     if session:
         completed = schedule_models({model: model_steps(*model) for model in models}, session,
@@ -210,11 +211,19 @@ def fit_short_label_disk(width, height, *, description, image, render_fn, error_
             elif separate and not accepted:
                 rejected_glyph_models.append((weight, fitted))
             if accepted and validated_result(fitted,np.asarray(image)):
-                break
+                from src.iCCModules.imageCompositeConverterAdaptiveSearch import preferred_quality
+                if not session or not session.policy.minimum_seconds or preferred_quality(pixel_quality(image, fitted['rendered'])):
+                    break
+                # At the effort floor compare every already running hypothesis.
+                # Completion order must not let a weaker font hide a better fit
+                # that is still suspended inside its registration generator.
+                session.finish_model_searches = True
             if current_search() and separate and accepted:
                 rejected_glyph_models.append((weight,fitted))
     finally:
         completed.close()
+        if session:
+            session.finish_model_searches = finish_models_before
     # Keep established successful fits unchanged. Unequal glyph advances and
     # intermediate stroke weights matter at small sizes; explore them only
     # when none of the original four models passes the same silhouette test.

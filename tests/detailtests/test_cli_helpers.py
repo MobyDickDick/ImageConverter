@@ -16,6 +16,7 @@ from src.iCCModules import imageCompositeConverterCli as cli_helpers
 @pytest.mark.parametrize('arguments',[
     ['--search-seconds','0'],['--search-seconds','nan'],['--search-max-seconds','inf'],
     ['--search-seconds','120','--search-max-seconds','60'],
+    ['--search-min-seconds','-1'],['--search-min-seconds','nan'],['--search-min-seconds','inf'],
 ])
 def test_adaptive_search_time_limits_require_finite_positive_ordered_values(arguments):
     with pytest.raises(SystemExit):
@@ -36,6 +37,7 @@ def test_parse_args_impl_applies_named_iterations_override() -> None:
     assert args.fail_on_batch_failures is False
     assert args.fail_on_optimization_render_regression is False
     assert args.execution_mode == "semantic-only"
+    assert args.search_min_seconds == 30.
 
 
 def test_parse_args_impl_accepts_semantic_only_execution_mode() -> None:

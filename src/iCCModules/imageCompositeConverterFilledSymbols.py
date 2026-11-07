@@ -100,16 +100,21 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
                     session.observe(best[1], evaluation=False)
         yield best[0] if best[1] <= initial_error+1e-9 else None
     satisfactory_cache = {}
+    semantic_incumbent = None
 
     def satisfactory(p, measured):
+        nonlocal semantic_incumbent
         if not session or satisfactory_fn is None or measured[1] > initial_error+1e-9:
             return False
-        if measured[2] in satisfactory_cache:
-            return satisfactory_cache[measured[2]]
-        quality = pixel_quality(image,measured[3])
-        passed = bool(quality and quality['passed'] and satisfactory_fn(p,measured))
-        satisfactory_cache[measured[2]] = passed
-        return passed
+        from src.iCCModules.imageCompositeConverterAdaptiveSearch import preferred_quality
+        if measured[2] not in satisfactory_cache:
+            quality = pixel_quality(image,measured[3])
+            passed = bool(quality and quality['passed'] and satisfactory_fn(p,measured))
+            satisfactory_cache[measured[2]] = (passed, preferred_quality(quality))
+        passed, preferred = satisfactory_cache[measured[2]]
+        if passed and (semantic_incumbent is None or measured[1] < semantic_incumbent[1][1]-1e-9):
+            semantic_incumbent = p.copy(), measured
+        return passed and (not session.minimum_pending or preferred)
 
     if satisfactory(parameters,best):
         stop_reason = 'satisfactory'
@@ -127,6 +132,8 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
                 for sign in (-1., 1.):
                     if session:
                         stop_reason = session.time_reason()
+                        if not stop_reason and session.finish_model_searches and not session.minimum_pending:
+                            stop_reason = 'candidate_comparison'
                         if stop_reason:
                             break
                     candidate = parameters.copy()
@@ -148,12 +155,14 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     search = None
     # Keep already accurate incumbent fits byte-identical. Alternative searches
     # address poor fits, rather than introducing random changes to good output.
-    mse = float(np.mean((image.astype(float)-np.asarray(best[3], dtype=float))**2))/255**2
-    if not stop_reason and mse > .0001 and settings() and settings()['mode'] == 'portfolio':
+    if not stop_reason and settings() and settings()['mode'] == 'portfolio':
         from src.iCCModules.imageCompositeConverterPrimitiveScene import _local_quality
         quality = (pixel_quality(image,best[3]) if session else
                    _local_quality(np.asarray(image, dtype=np.uint8), np.asarray(best[3], dtype=np.uint8)))
-        if quality is None or not quality['passed']:
+        from src.iCCModules.imageCompositeConverterAdaptiveSearch import preferred_quality
+        needs_semantics = satisfactory_fn is not None and not satisfactory_cache.get(best[2], (False, False))[0]
+        if quality is None or not quality['passed'] or (session and session.minimum_pending
+                and (not preferred_quality(quality) or needs_semantics)):
             rendered_before_search = evaluations
             if session:
                 from src.iCCModules.imageCompositeConverterSearchBots import explore_bots_steps
@@ -164,6 +173,10 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
                 parameters, best, search = explore_parameters(parameters, geometry_count, measure, best,
                                                              source=source, image=image,satisfactory_fn=satisfactory)
             search['additional_renderings'] = evaluations-rendered_before_search
+    # Longer exploration must not discard an already valid font/object fit in
+    # favor of a lower pixel error that fails the model's semantic checks.
+    if semantic_incumbent is not None and not satisfactory_cache.get(best[2], (False, False))[0]:
+        parameters, best = semantic_incumbent
     if best[1] > initial_error+1e-9:
         return None
     progress(source, event='registration_finished', evaluations=evaluations, best_error=best[1])

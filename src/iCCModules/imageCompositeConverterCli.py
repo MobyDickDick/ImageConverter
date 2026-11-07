@@ -96,6 +96,8 @@ def parseArgsImpl(
                         help='Reguläre aktive Suchzeit je Bild für angeschlossene Registrierer (Default 60)')
     parser.add_argument('--search-max-seconds',type=float,default=120.,
                         help='Äußerste aktive Suchzeit bei deutlichem spätem Fortschritt (Default 120)')
+    parser.add_argument('--search-min-seconds',type=float,default=30.,
+                        help='Mindestaufwand bei schlechtem Fit (Default 30); höchstens --search-seconds, 0 deaktiviert')
     parser.add_argument('--isolate-conversion', action=argparse.BooleanOptionalAction, default=True,
                         help='semantic-only: Bildversuche einschließlich Abschlussprüfung in überwachten Prozessen ausführen')
     parser.add_argument(
@@ -269,6 +271,8 @@ def parseArgsImpl(
     if args.neural_elements_model and not Path(args.neural_elements_model).is_file():
         parser.error('--neural-elements-model muss eine vorhandene JSON-Modelldatei sein')
     import math
+    if not math.isfinite(args.search_min_seconds) or args.search_min_seconds < 0:
+        parser.error('--search-min-seconds muss endlich und nicht negativ sein')
     if (not math.isfinite(args.search_seconds) or not math.isfinite(args.search_max_seconds)
             or not 0 < args.search_seconds <= args.search_max_seconds):
         parser.error('--search-seconds und --search-max-seconds müssen endlich, positiv und aufsteigend sein')
@@ -582,6 +586,7 @@ def runMainImpl(
         allow_memory=getattr(args, 'execution_mode', 'semantic-only') == 'standard',
         adaptive=getattr(args,'search_policy','fixed')=='adaptive',
         seconds=getattr(args,'search_seconds',60.),max_seconds=getattr(args,'search_max_seconds',120.),
+        minimum_seconds=getattr(args,'search_min_seconds',30.),
         isolate=getattr(args,'isolate_conversion',True) and getattr(args,'execution_mode','semantic-only')=='semantic-only',
         disabled_bots=getattr(args,'disable_search_bot', ()),
         component_observation=getattr(args,'component_observation', True),

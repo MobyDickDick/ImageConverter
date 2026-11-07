@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [Mindestens 30 Sekunden für ungenügende Fits: Suchneustarts, native Nachoptimierung und Messungen (2026-11-07)](search_minimum_effort_2026-11-07.md)
+
 - [P0: gerundete Verlaufsrechtecke mit gemischten Kindern und gemessenen Elternradien (2026-11-06)](next_arbeitspaket_2026-11-06_rounded_parent.md)
 - [Nächstes P0-Paket: native Rundungen im MuPDF-SVG-Weg gegen analytische und librsvg-Ecken korrigieren (2026-11-06)](next_arbeitspaket_2026-11-06_rounded_renderer.md)
 

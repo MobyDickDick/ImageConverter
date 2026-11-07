@@ -63,13 +63,27 @@ def prepareIterationRuntimeImpl(
         cv2_module=cv2_module,
     )
     assertions = params.get('language_assertions') or {}
-    if assertions.get('counts') or assertions.get('no_text'):
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
+    session = current_search()
+    if assertions.get('counts') or assertions.get('no_text') or (session and session.policy.minimum_seconds):
         write_artifacts = artifact_callbacks['write_attempt_artifacts']
 
         def write_checked_artifacts(svg_content, *args, **kwargs):
             if not kwargs.get('failed', False):
                 from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
                 validate_svg_assertions(svg_content, assertions)
+                if session and session.minimum_pending:
+                    from src.iCCModules.imageCompositeConverterVectorPolish import polish_generated_svg
+                    fitted = polish_generated_svg(svg_content, target_img, render_svg_to_numpy_fn,
+                                                  assertions=assertions)
+                    if fitted is not None:
+                        params['vector_continuation'] = {key: fitted[key] for key in
+                            ('improved', 'error', 'initial_error', 'evaluations', 'search_control')}
+                        if fitted['improved']:
+                            svg_content = fitted['svg']
+                            # Supplied render/diff belong to the previous vector.
+                            args = ()
+                            kwargs.update(rendered_img=fitted['rendered'], diff_img=None)
             return write_artifacts(svg_content, *args, **kwargs)
 
         artifact_callbacks['write_attempt_artifacts'] = write_checked_artifacts

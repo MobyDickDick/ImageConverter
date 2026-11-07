@@ -367,10 +367,16 @@ Nur messbare Verbesserungen werden übernommen; ohne Gewinn bleibt der Sample-St
 erhalten. **Entfernen** wechselt zurück zur normalen `semantic-only`-Konvertierung.
 Ergebnisse mit offenen Qualitätsprüfungen erscheinen als **Entwurf**.
 
-Die Suche läuft im Hintergrund und lässt sich abbrechen. Profile: 15–30, 60–120
+Die Suche läuft im Hintergrund und lässt sich abbrechen. Profile: 35–45, 60–120
 oder 120–240 Sekunden, zuzüglich bis zu 30 Sekunden für Start und Abschluss;
 der Sample-Modus nutzt jeweils das Basisbudget. Zusätzliche Qualitätsrunden
 entfallen (`ICC_MAX_QUALITY_PASSES=0`), die Qualitätsgrenzen bleiben unverändert.
+Bei ungenügendem Fit investiert die adaptive Suche mindestens 30 Sekunden in
+neue Kandidaten, sofern ein bearbeitbares Vektormodell vorliegt. Sehr genaue
+Ergebnisse können früher fertig sein. Die CLI-Option `--search-min-seconds`
+(Default 30, 0 deaktiviert) begrenzt diesen Mindestaufwand auf das reguläre
+Suchbudget. Details und Vorher/Nachher-Messungen stehen unter
+[Mindestaufwand und Suchneustarts](docs/search_minimum_effort_2026-11-07.md).
 Bilder, Beschreibungen, Ergebnisse und Protokolle bleiben lokal unter
 `artifacts/gui/` (von Git ausgeschlossen); letzte Aufträge überstehen Neustarts.
 Jeder Versuch hat einen eigenen Arbeitsordner, Originaldateien bleiben erhalten.

@@ -22,11 +22,13 @@ class SearchPolicy:
     patience: int = 128
     relative_gain: float = .01
     extension_seconds: float = 15.
+    minimum_seconds: float = 0.
 
     def __post_init__(self):
-        numbers = (self.seconds,self.max_seconds,self.relative_gain,self.extension_seconds)
+        numbers = (self.seconds,self.max_seconds,self.relative_gain,self.extension_seconds,self.minimum_seconds)
         if (not all(math.isfinite(v) for v in numbers) or not 0 < self.seconds <= self.max_seconds
-                or not 0 < self.relative_gain < 1 or self.extension_seconds <= 0 or self.patience < 1):
+                or not 0 < self.relative_gain < 1 or self.extension_seconds <= 0 or self.patience < 1
+                or not 0 <= self.minimum_seconds <= self.seconds):
             raise ValueError('Invalid adaptive search policy')
 
 
@@ -50,6 +52,7 @@ class ImageSearch:
         self.scheduler_history = []
         self.registration_rasters = {}
         self.structure_rejections = {}
+        self.finish_model_searches = False
         self.on_progress = None
         self.on_validated = None
 
@@ -78,11 +81,17 @@ class ImageSearch:
             self.progress_anchor = error
             if self.on_progress:
                 self.on_progress(error)
+
         elif self.progress_anchor-error >= max(1e-9,abs(self.progress_anchor)*self.policy.relative_gain):
             self.progress_anchor = error
             self.last_progress = self.elapsed
             if self.on_progress:
                 self.on_progress(error)
+
+    @property
+    def minimum_pending(self):
+        """Poor fits earn real exploration before proposal/stagnation cutoffs."""
+        return self.elapsed < self.policy.minimum_seconds
 
     def time_reason(self):
         elapsed = self.elapsed
@@ -121,6 +130,7 @@ class ImageSearch:
 
     def report(self):
         return dict(elapsed_seconds=round(self.elapsed,6),limit_seconds=self.limit,
+            minimum_seconds=self.policy.minimum_seconds,
             max_seconds=self.policy.max_seconds,time_extensions=self.extensions,candidate_evaluations=self.evaluations)
 
 
@@ -152,6 +162,12 @@ class SearchRun:
         reason = self.session.time_reason()
         if reason:
             return reason
+        if self.session.minimum_pending:
+            return None
+        if self.session.finish_model_searches:
+            return 'candidate_comparison'
+        if self.proposals >= self.maximum:
+            return 'proposal_limit'
         if self.proposals >= self.limit:
             window = max(8,int(self.limit*.2))
             if (self.last_progress is not None and self.last_progress >= self.limit-window
@@ -211,6 +227,13 @@ def pixel_quality(reference, output):
     mse = float(error.mean())
     return dict(normalized_mse=mse,foreground_mse=foreground,foreground_iou=iou,edge_alignment=edge,
                 passed=bool(mse<=.01 and foreground<=.04 and iou>=.85 and edge>=.72))
+
+
+def preferred_quality(quality):
+    """A stricter early-exit target, never a replacement for acceptance gates."""
+    return bool(quality and quality['passed'] and quality['normalized_mse'] <= .0005
+                and quality['foreground_mse'] <= .005 and quality['foreground_iou'] >= .97
+                and quality['edge_alignment'] >= .90)
 
 
 def current_search():
