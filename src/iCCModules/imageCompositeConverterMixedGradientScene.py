@@ -486,7 +486,13 @@ def _overlap_instances(pixels, predicted, mask, *, rounded=False, outlined=False
             # Subpixel translation can leave most straight rim pixels mixed
             # with the fill or parent. The brightest exposed corner samples
             # still identify the paint; averaging the broad band biases it.
-            stroke = np.median(samples[samples.mean(axis=1) >= np.percentile(samples.mean(axis=1), 95)], axis=0)
+            strength = samples.mean(axis=1)
+            strongest = samples[strength >= strength.max()-1.]
+            # Prefer a directly observed paint cluster only with five distinct
+            # pixels. A broad percentile can include parent/fill mixtures when
+            # subpixel placement leaves very little fully exposed bright rim.
+            stroke = np.median(strongest if len(strongest) >= 5 else
+                               samples[strength >= np.percentile(strength, 95)], axis=0)
             # Solve independent fill/rim coverages against the varying parent.
             # A collinear palette cannot identify these two contributions.
             rim, observed = stroke-predicted, data-predicted
@@ -1692,10 +1698,9 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
 
     def corner_seeds():
         if contract.get('parent_rounded'):
-            # Area deficit gives a conservative radius seed. Different native
-            # renderers approximate corner arcs differently; compare a bounded
-            # interval against all observed corners before ordinary refinement.
-            for radius in np.linspace(.75*parameters[5*n], 1.05*parameters[5*n], 13):
+            # Corrected native corners match the analytic area deficit. Keep
+            # seeds close to that measured radius, sharing all image budgets.
+            for radius in np.linspace(.95*parameters[5*n], 1.05*parameters[5*n], 5):
                 candidate = parameters.copy()
                 candidate[5*n] = radius
                 yield candidate

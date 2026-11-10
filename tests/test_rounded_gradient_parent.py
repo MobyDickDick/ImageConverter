@@ -96,6 +96,18 @@ def test_independent_native_oracle_rejects_wrong_parent_radius(radius):
     assert not check_objects(ET.tostring(root, encoding='unicode'), case['expected_objects'])['passed']
 
 
+def test_good_global_pixels_cannot_excuse_a_compensating_native_radius():
+    from tools.run_plan_b_variations import measure_quality
+
+    case = make_cases()[0]
+    root = ET.fromstring(case['svg'])
+    root[2].set('rx', str(case['expected_objects'][0]['corner_radius']+2.))
+    altered = ET.tostring(root, encoding='unicode')
+    image = render(case['svg'], case['width'], case['height'])
+    assert measure_quality(image, altered)['satisfactory']
+    assert not check_objects(altered, case['expected_objects'])['passed']
+
+
 def test_detected_radius_is_measured_from_pixels():
     case = make_cases()[0]
     contract = mixed.scene_contract(case['description'])
@@ -107,10 +119,10 @@ def test_detected_radius_is_measured_from_pixels():
         objects = mixed.detect_instances(pixels, contract)
         assert objects is not None
         estimates.append(objects[0]['radius'])
-    # Detection supplies an area-derived proposal; registration resolves the
-    # native renderer's arc approximation against the original corner pixels.
+    # Correct circular corners bind the area-derived proposal directly to the
+    # native radius; registration only refines pixel quantization and bounds.
     assert estimates[1]-estimates[0] > 12
-    assert all(.75*estimate <= radius <= 1.05*estimate
+    assert all(.95*estimate <= radius <= 1.05*estimate
                for estimate, radius in zip(estimates, (13., 29.)))
 
 

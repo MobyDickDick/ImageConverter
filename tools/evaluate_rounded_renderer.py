@@ -196,6 +196,7 @@ def main():
     if not args.report or not (args.controls or args.inputs and args.output):
         parser.error('--report and either --controls or --inputs/--output required')
     result = check(args.controls) if args.controls else audit_scenes(args.inputs, args.output, historical=args.historical)
+    args.report.parent.mkdir(parents=True, exist_ok=True)
     with args.report.open('x', encoding='utf-8') as stream:
         stream.write(json.dumps(result, indent=2)+'\n')
     print(json.dumps(result['summary']))

@@ -174,6 +174,41 @@ jobs:
           path: config/test_run_seeds.jsonl
           retention-days: 7
 
+  rounded-svg-renderer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Verify analytic geometry, frozen pixels, rim paint and render workers
+        run: >-
+          python -m pytest -q
+          tests/detailtests/test_rounded_renderer.py
+          tests/detailtests/test_rendering_gradient_compatibility.py
+          tests/test_same_paint_overlap.py
+          tests/test_rounded_gradient_parent.py::test_good_global_pixels_cannot_excuse_a_compensating_native_radius
+          tests/test_rounded_gradient_parent.py::test_detected_radius_is_measured_from_pixels
+      - name: Check frozen control hashes and every corner
+        run: python -m tools.evaluate_rounded_renderer --controls tests/fixtures/rounded_renderer --report .tmp/rounded-renderer-controls.json --require-all
+      - name: Prepare new scenes with the independent renderer
+        run: python -m tools.evaluate_rounded_parent --prepare .tmp/rounded-independent-inputs --seed 392741 --independent-reference
+      - name: Require native geometry, relations and both renderers at all four corners
+        run: |
+          python -m tools.evaluate_rounded_parent --inputs .tmp/rounded-independent-inputs --output .tmp/rounded-independent-cli --require-all
+          python -m tools.evaluate_rounded_renderer --inputs .tmp/rounded-independent-inputs --output .tmp/rounded-independent-cli --report .tmp/rounded-independent-audit.json --require-all
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rounded-svg-renderer-evidence
+          path: |
+            .tmp/rounded-renderer-controls.json
+            .tmp/rounded-independent-*
+          retention-days: 7
+
   rounded-gradient-parent:
     runs-on: ubuntu-latest
     timeout-minutes: 8

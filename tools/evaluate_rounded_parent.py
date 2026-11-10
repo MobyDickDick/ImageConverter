@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import random
+import subprocess
 from xml.etree import ElementTree as ET
 
 from tools.evaluate_layered_scene import evaluate_cases, verify_report
@@ -48,6 +49,8 @@ def main():
     parser.add_argument('--prepare', type=Path)
     parser.add_argument('--seed', type=int, default=624873)
     parser.add_argument('--variations', action='store_true')
+    parser.add_argument('--independent-reference', action='store_true',
+                        help='Prepare reference PNGs with librsvg instead of the production renderer')
     parser.add_argument('--inputs', type=Path)
     parser.add_argument('--output', type=Path)
     parser.add_argument('--verify-only', action='store_true')
@@ -56,11 +59,17 @@ def main():
     os.environ.update(IMAGE_CONVERTER_ISOLATE_SVG_RENDER='0', ICC_SEARCH_SEED='17')
     if args.prepare:
         cases = (make_variation_cases if args.variations else make_cases)(args.seed)
+        reference_options = {}
+        generation = dict(seed=args.seed, variations=args.variations)
+        if args.independent_reference:
+            from tools.evaluate_svg_text_baseline import find_librsvg, render_librsvg
+            generation['reference_renderer'] = subprocess.check_output(
+                [find_librsvg(), '--version'], text=True).strip()
+            reference_options['render_fn'] = render_librsvg
         args.prepare.mkdir(parents=True, exist_ok=False)
-        write_cases(cases, args.prepare)
+        write_cases(cases, args.prepare, **reference_options)
         (args.prepare/'manifest.json').write_text(json.dumps(cases, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
-        (args.prepare/'generation.json').write_text(json.dumps(dict(seed=args.seed,
-            variations=args.variations), indent=2)+'\n', encoding='utf-8')
+        (args.prepare/'generation.json').write_text(json.dumps(generation, indent=2)+'\n', encoding='utf-8')
         return 0
     if not args.inputs or not args.output:
         parser.error('--inputs and --output required')

@@ -3,7 +3,8 @@
 - [Mindestens 30 Sekunden für ungenügende Fits: Suchneustarts, native Nachoptimierung und Messungen (2026-11-07)](search_minimum_effort_2026-11-07.md)
 
 - [P0: gerundete Verlaufsrechtecke mit gemischten Kindern und gemessenen Elternradien (2026-11-06)](next_arbeitspaket_2026-11-06_rounded_parent.md)
-- [Nächstes P0-Paket: native Rundungen im MuPDF-SVG-Weg gegen analytische und librsvg-Ecken korrigieren (2026-11-06)](next_arbeitspaket_2026-11-06_rounded_renderer.md)
+- [P0-Abschluss: native Rundungen mit analytischer und unabhängiger librsvg-Abnahme; CI-Absicherung vom 10.11.2026](next_arbeitspaket_2026-11-06_rounded_renderer.md)
+- [Nächstes P0-Paket: angeschnittene äußere Verlaufsrechtecke aus sichtbaren Seiten und Ecken (2026-11-07)](next_arbeitspaket_2026-11-07_clipped_rectangular_parent.md)
 
 - [P0: rechteckige Verlaufsflächen mit gemischten Kindern im gemeinsamen Struktursuchweg (2026-11-05)](next_arbeitspaket_2026-11-05_rectangular_parent.md)
 

@@ -2,6 +2,46 @@
 
 Paket **SVG-ROUNDED-RENDERER-01**, Ausgangscommit `409b451f7`.
 [Umsetzung, Reproduktion und Grenzen](../../../docs/next_arbeitspaket_2026-11-06_rounded_renderer.md).
+
+## Nachprüfung und Korrektur vom 10.11.2026
+
+Beim Zusammenführen wurden die belegte helle Konturfarbmessung und die nahen
+Radiusstartwerte zurückgesetzt. Der eingefrorene historische Konturfall
+scheitert mit dem unveränderten Modul aus `4ff3b5ffb` nach 0,33 Sekunden;
+nach Wiederherstellung bestehen er, der frisch gerenderte Fall und die
+Budgetgegenprobe 3/3. Seine Originalpixel bleiben unverändert.
+
+Die aktuelle CLI besteht die drei unveränderten unabhängigen Kohorten
+12/12, 12/12 und 17/17 sowie eine zusätzliche CI-Kohorte mit Seed `392741`
+12/12. Insgesamt 53/53 native Objekt-/Relationsabnahmen und je 212/212
+Elternecken mit MuPDF und librsvg. Größter nativer Elternradiusfehler:
+0,4177 Pixel bei unveränderter Grenze 1,25; höchste überwachte Prozesszeit
+lokal 3,891 Sekunden bei fünf Sekunden Bildbudget. Die Eingabe- und
+Beschreibungsprüfsummen stimmen mit dem Stand vor der Runtimekorrektur überein.
+28/28 Renderkontrollen und 96/96 Kontrollecken bleiben bestanden.
+
+Endgültige Szenen-/Registrierungs-/Rendererregression: 1.206/1.206 in
+912,37 Sekunden; Kernprofil 42/42, jeweils Exit 0 ohne Fehler oder
+Überspringung. Beim Vergleich der JUnit-Knoten fiel zusätzlich eine beim
+Merge entfernte Radiusgegenprobe auf. Diese und die wieder verschärfte
+Fünf-Prozent-Radiusmessprüfung bestehen anschließend 2/2; ein Fall war schon
+im großen Lauf enthalten. Die Knotenvereinigung deckt genau alle 1.207
+ursprünglichen verschiedenen Prüffälle ab. Die Produktionsquellen wurden
+nach der endgültigen Abnahme nicht verändert.
+Zusätzliche Datenhygiene: 12 bestanden, ein Symlinktest mangels
+Windows-Entwicklerrechten übersprungen. Rohdaten bleiben lokal; nur dieser
+kompakte Nachweis erhält eine gezielte Ausnahme in `.gitignore`.
+
+Der neue CI-Job prüft unabhängige Kontrollen, historische Konturpixel und
+eine neue librsvg-Szenenkohorte samt nativen Gates und beiden Renderern.
+Die Szenenvorbereitung verwendet dafür `--independent-reference`; der
+GitHub-Job selbst wurde hier nicht ausgeführt.
+Der aktuelle [maschinenlesbare Nachweis](revalidation_2026-11-10.json)
+enthält Quell-/Artefakthashes, alle Fälle und Eckmetriken, Testberichte,
+Befehle und den separat aufbewahrten negativen Vorlauf.
+
+## Ursprünglicher Prüfstand vom 07.11.2026
+
 Status: **Review**, synthetischer Abschluss mit dokumentiertem
 zeitabhängigen Bestandsnachlauf. Der endgültige Prüfstand steht in `checks.json`.
 

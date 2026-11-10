@@ -3,7 +3,11 @@
 Teilpaket **SEARCH-STRUCTURE-ROUNDED-PARENT** von **SEARCH-STRUCTURE-01**,
 Rang 1/P0. Ausgangscommit `fbb86fa59`. Fortsetzung des
 [rechteckigen Elternteils](next_arbeitspaket_2026-11-05_rectangular_parent.md#sitzungslog).
-Status: **Review**, synthetischer Teilabschluss mit gesondert offenem Rendererfehler.
+Status des ursprünglichen Prüfstands: **Review**, synthetischer Teilabschluss
+mit gesondertem Rendererfehler. **Nachtrag 10.11.2026:** Der Rendererfehler ist
+im [separaten Folgepaket korrigiert und unabhängig geprüft](next_arbeitspaket_2026-11-06_rounded_renderer.md).
+Die folgenden Zahlen beschreiben weiterhin die unveränderten historischen
+MuPDF-Eingaben; sie werden nicht als aktuelle rendererübergreifende Abnahme verwendet.
 
 ## Umfang und Umsetzung
 

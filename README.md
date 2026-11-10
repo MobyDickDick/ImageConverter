@@ -5,10 +5,12 @@ mit gemischten Kindern, Überdeckungsgruppen und einzelnen Formen. Zwölf
 unveränderte synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12;
 Zusatzseed und gekoppelte Variantenkohorte bestehen 12/12 beziehungsweise 17/17.
 Elternradien und vier lokale Ecken werden am Originalraster geprüft.
-Die zusätzliche librsvg-Gegenprobe besteht 41/41 Gesamtbilder, aber nur 121/164
-lokale Ecken; die [vorhandene Rendererabweichung](docs/next_arbeitspaket_2026-11-06_rounded_renderer.md)
-ist der nächste P0-Schritt. Angeschnittene Elternrechtecke und die reale
-Gesamtabnahme bleiben offen.
+Die dabei entdeckte [Rendererabweichung ist korrigiert und unabhängig abgesichert](docs/next_arbeitspaket_2026-11-06_rounded_renderer.md).
+Die Nachprüfung vom 10.11.2026 besteht 41/41 unabhängige synthetische CLI-Fälle
+und weitere 12/12 für den neuen CI-Job; beide Renderer bestätigen alle
+212 Elternecken. Historische MuPDF-Raster bleiben als eigener Prüfstand erhalten.
+Als Nächstes folgen [angeschnittene Elternrechtecke](docs/next_arbeitspaket_2026-11-07_clipped_rectangular_parent.md);
+die reale Gesamtabnahme bleibt offen.
 
 Der [gemeinsame P0-Struktursuchweg unterstützt jetzt auch rechteckige Verlaufsflächen](docs/next_arbeitspaket_2026-11-05_rectangular_parent.md)
 mit gemischten Kreis-/Rechteckkindern, Überdeckungsgruppen und einzelnen Formen.
