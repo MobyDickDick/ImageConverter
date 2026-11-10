@@ -1,0 +1,296 @@
+{
+  "schema": "search_minimum_effort_v1",
+  "date": "2026-11-07",
+  "scope": "four_development_inputs_not_catalog_acceptance",
+  "controls": {
+    "seed": 551421329,
+    "seconds": 35,
+    "max_seconds": 45,
+    "minimum_seconds": [
+      0,
+      30
+    ],
+    "extra_quality_passes": 0,
+    "execution_mode": "semantic-only",
+    "isolated": true
+  },
+  "cases": [
+    {
+      "case": "AC0VR2_M",
+      "job_id": "41c530af87e5440c912b7dfc05b1d546",
+      "comparisons": [
+        {
+          "name": "baseline",
+          "returncode": 0,
+          "elapsed": 5.375,
+          "quality": {
+            "normalized_mse": 3.0620696634287015e-05,
+            "foreground_mse": 2.244535426143557e-05,
+            "foreground_iou": 0.9717791411042945,
+            "edge_alignment": 0.9781797528266907,
+            "passed": true,
+            "observed_foreground_pixels": 1590,
+            "output_foreground_pixels": 1624
+          },
+          "search": [
+            {
+              "source": "UPLOAD",
+              "event": "image_search_finished",
+              "satisfactory": true,
+              "elapsed_seconds": 3.984,
+              "limit_seconds": 35.0,
+              "minimum_seconds": 0.0,
+              "max_seconds": 45.0,
+              "time_extensions": 0,
+              "candidate_evaluations": 178,
+              "stop_reason": "satisfactory"
+            }
+          ],
+          "svg_sha256": "b8e5cd25090ca677b6beb0460a13eec44306e5c902bb15b5bae3e6422bdad013",
+          "raw_output": ".tmp/search_effort/41c530af87e5440c912b7dfc05b1d546/final/baseline"
+        },
+        {
+          "name": "continued",
+          "returncode": 0,
+          "elapsed": 5.640000000130385,
+          "quality": {
+            "normalized_mse": 3.0620696634287015e-05,
+            "foreground_mse": 2.244535426143557e-05,
+            "foreground_iou": 0.9717791411042945,
+            "edge_alignment": 0.9781797528266907,
+            "passed": true,
+            "observed_foreground_pixels": 1590,
+            "output_foreground_pixels": 1624
+          },
+          "search": [
+            {
+              "source": "UPLOAD",
+              "event": "image_search_finished",
+              "satisfactory": true,
+              "elapsed_seconds": 4.328,
+              "limit_seconds": 35.0,
+              "minimum_seconds": 30.0,
+              "max_seconds": 45.0,
+              "time_extensions": 0,
+              "candidate_evaluations": 178,
+              "stop_reason": "satisfactory"
+            }
+          ],
+          "svg_sha256": "b8e5cd25090ca677b6beb0460a13eec44306e5c902bb15b5bae3e6422bdad013",
+          "raw_output": ".tmp/search_effort/41c530af87e5440c912b7dfc05b1d546/final/continued"
+        }
+      ],
+      "source_sha256": "bf618b211a6592b4852016a16f6fec0e2fd19c228fb31f90f0d42233c7f362df",
+      "description": "Liegendes Rechteck mit Farbverlauf in vertikaler Richtung und dunkelgrauer Umrandung. Der Farbverlauf ist von oben nach unten grau / fast weiss / fast weiss / grau. Die zwei fast-weissen Bereiche deuten auf ein kleines helles, horizontales Band hin; der helle Bereich liegt oberhalb der Mitte.",
+      "mse_reduction_fraction": 0.0
+    },
+    {
+      "case": "AC0VR2_AB_M",
+      "job_id": "63c879594ae94b3a914e69cb692bc6c0",
+      "comparisons": [
+        {
+          "name": "baseline",
+          "returncode": 0,
+          "elapsed": 2.640000000130385,
+          "quality": {
+            "normalized_mse": 0.000703447381965816,
+            "foreground_mse": 0.0005409370642155409,
+            "foreground_iou": 0.9587217043941412,
+            "edge_alignment": 0.95765221118927,
+            "passed": true,
+            "observed_foreground_pixels": 1464,
+            "output_foreground_pixels": 1478
+          },
+          "search": [
+            {
+              "source": "UPLOAD",
+              "event": "image_search_finished",
+              "satisfactory": true,
+              "elapsed_seconds": 1.469,
+              "limit_seconds": 35.0,
+              "minimum_seconds": 0.0,
+              "max_seconds": 45.0,
+              "time_extensions": 0,
+              "candidate_evaluations": 1,
+              "stop_reason": "satisfactory"
+            }
+          ],
+          "svg_sha256": "f36472fa84b90c616e1f8cee327866308fd27b38fffbf90bc8399ac3594e09a6",
+          "raw_output": ".tmp/search_effort/63c879594ae94b3a914e69cb692bc6c0/final/baseline"
+        },
+        {
+          "name": "continued",
+          "returncode": 0,
+          "elapsed": 32.343000000109896,
+          "quality": {
+            "normalized_mse": 0.00048090904601849616,
+            "foreground_mse": 0.0003953863924834877,
+            "foreground_iou": 0.96,
+            "edge_alignment": 0.9478609561920166,
+            "passed": true,
+            "observed_foreground_pixels": 1464,
+            "output_foreground_pixels": 1476
+          },
+          "search": [
+            {
+              "source": "UPLOAD",
+              "event": "image_search_finished",
+              "satisfactory": true,
+              "elapsed_seconds": 30.608,
+              "limit_seconds": 35.0,
+              "minimum_seconds": 30.0,
+              "max_seconds": 45.0,
+              "time_extensions": 0,
+              "candidate_evaluations": 1546,
+              "stop_reason": "satisfactory"
+            }
+          ],
+          "svg_sha256": "05a2a6b2d4210aed3ec3887e3d8a2eab43c9ebd7e1877f0337108a9ecfc0736f",
+          "raw_output": ".tmp/search_effort/63c879594ae94b3a914e69cb692bc6c0/final/continued"
+        }
+      ],
+      "source_sha256": "a8be3b524c62a8aaf867bb0e2a12f4d0d304b826498c3ae894f0a230aa5cae21",
+      "description": "Es ist ein graues Rechteck. Es gibt zwei schräge Linien welche bezüglich der horizontalen Mittellinie der symmetrisch ist. Es gibt eine Abstufung der Grauwerte. In der horizontalen Mittellinie ist der Farrbwert ein wenig dunkler oben und unterhalb ein wenig heller.\n\nAuf der rechten Seite gibt es zwei kurze horizontale graue Striche.",
+      "mse_reduction_fraction": 0.31635391878981234
+    },
+    {
+      "case": "AC0835_L",
+      "job_id": "a77ee710a2864170a44062f6ce5e8f92",
+      "comparisons": [
+        {
+          "name": "baseline",
+          "returncode": 0,
+          "elapsed": 15.296999999787658,
+          "quality": {
+            "normalized_mse": 0.0027202090714126825,
+            "foreground_mse": 0.0061066062189638615,
+            "foreground_iou": 0.8880597014925373,
+            "edge_alignment": 0.9004536867141724,
+            "passed": true,
+            "observed_foreground_pixels": 249,
+            "output_foreground_pixels": 257
+          },
+          "search": [
+            {
+              "source": "UPLOAD",
+              "event": "image_search_finished",
+              "satisfactory": true,
+              "elapsed_seconds": 14.031,
+              "limit_seconds": 35.0,
+              "minimum_seconds": 0.0,
+              "max_seconds": 45.0,
+              "time_extensions": 0,
+              "candidate_evaluations": 778,
+              "stop_reason": "satisfactory"
+            }
+          ],
+          "svg_sha256": "c843852d54fb359f004cf2425962f81fb562a8842a7edea0edf259ad42de3a22",
+          "raw_output": ".tmp/search_effort/a77ee710a2864170a44062f6ce5e8f92/final/baseline"
+        },
+        {
+          "name": "continued",
+          "returncode": 0,
+          "elapsed": 32.235000000102445,
+          "quality": {
+            "normalized_mse": 0.002669881796464324,
+            "foreground_mse": 0.005963314790278673,
+            "foreground_iou": 0.8921933085501859,
+            "edge_alignment": 0.9007953405380249,
+            "passed": true,
+            "observed_foreground_pixels": 249,
+            "output_foreground_pixels": 260
+          },
+          "search": [
+            {
+              "source": "UPLOAD",
+              "event": "image_search_finished",
+              "satisfactory": true,
+              "elapsed_seconds": 31.0,
+              "limit_seconds": 35.0,
+              "minimum_seconds": 30.0,
+              "max_seconds": 45.0,
+              "time_extensions": 0,
+              "candidate_evaluations": 1776,
+              "stop_reason": "satisfactory"
+            }
+          ],
+          "svg_sha256": "f3d88e17704c76e5f694d11de40be9739b62b1ba45980fb0be137fbb098cc055",
+          "raw_output": ".tmp/search_effort/a77ee710a2864170a44062f6ce5e8f92/final/continued"
+        }
+      ],
+      "source_sha256": "85dc85fb796c82c4896aca596e618be91524c04da409c99f4f33f3e42e0544c4",
+      "description": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile.",
+      "mse_reduction_fraction": 0.018501252524028233
+    },
+    {
+      "case": "AC0501_S_sia_old_description",
+      "job_id": "20649bd9e93c4b758b44658a1006c1d3",
+      "comparisons": [
+        {
+          "name": "baseline",
+          "returncode": 0,
+          "elapsed": 6.609999999869615,
+          "quality": {
+            "normalized_mse": 0.009985005483031273,
+            "foreground_mse": 0.04464760050177574,
+            "foreground_iou": 0.3806818181818182,
+            "edge_alignment": 0.5706814527511597,
+            "passed": false,
+            "observed_foreground_pixels": 141,
+            "output_foreground_pixels": 102
+          },
+          "search": [
+            {
+              "source": "UPLOAD",
+              "event": "image_search_finished",
+              "satisfactory": false,
+              "elapsed_seconds": 5.405,
+              "limit_seconds": 35.0,
+              "minimum_seconds": 0.0,
+              "max_seconds": 45.0,
+              "time_extensions": 0,
+              "candidate_evaluations": 0,
+              "stop_reason": "supported_models_exhausted"
+            }
+          ],
+          "svg_sha256": "0dc1a218da4d7c647f3d152c4b45c7be84da799adfcd856e618d47e2fc4dea19",
+          "raw_output": ".tmp/search_effort/20649bd9e93c4b758b44658a1006c1d3/final/baseline"
+        },
+        {
+          "name": "continued",
+          "returncode": 0,
+          "elapsed": 31.765999999828637,
+          "quality": {
+            "normalized_mse": 0.0097726508975029,
+            "foreground_mse": 0.042167779058218,
+            "foreground_iou": 0.41530054644808745,
+            "edge_alignment": 0.5988262295722961,
+            "passed": false,
+            "observed_foreground_pixels": 141,
+            "output_foreground_pixels": 118
+          },
+          "search": [
+            {
+              "source": "UPLOAD",
+              "event": "image_search_finished",
+              "satisfactory": false,
+              "elapsed_seconds": 30.36,
+              "limit_seconds": 35.0,
+              "minimum_seconds": 30.0,
+              "max_seconds": 45.0,
+              "time_extensions": 0,
+              "candidate_evaluations": 1409,
+              "stop_reason": "supported_models_exhausted"
+            }
+          ],
+          "svg_sha256": "5107da4ef9ae30b3c5a53b6249f402df9ea9d56ffd9705f3a23480718afebda0",
+          "raw_output": ".tmp/search_effort/20649bd9e93c4b758b44658a1006c1d3/final/continued"
+        }
+      ],
+      "source_sha256": "9bde20e8aa9c6d6f0f802040821b8f87de2aab537ec0efeafa03ad4f46c979f6",
+      "description": "Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau",
+      "mse_reduction_fraction": 0.02126734791375462
+    }
+  ],
+  "reserved_real_families_used": false
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "search_minimum_effort_checks_v1",
+  "date": "2026-11-07",
+  "checks": [
+    {"scope": "minimum effort, adaptive search, bots, portfolio, scheduler, CLI, initialization, GUI and samples", "passed": 146, "deselected": 2, "result": "passed"},
+    {"scope": "short labels, paired-line panels, framed panels, primitive scenes, components and description language", "passed": 117, "result": "passed"},
+    {"scope": "core-green profile", "passed": 42, "result": "passed"},
+    {"scope": "real GUI cancellation and local HTTP routes", "passed": 2, "result": "passed", "environment": "outside sandbox; local sockets and own-process termination require host permissions"},
+    {"scope": "production finalization in the worker and two GUI/CLI panel seeds", "passed": 3, "result": "passed", "environment": "IMAGE_CONVERTER_REUSE_RENDER_WORKER=1, matching GUI; the two panel cases also occur in the model group"},
+    {"scope": "Python compilation and git diff whitespace check", "result": "passed"}
+  ],
+  "diagnostics": [
+    "Earlier integration runs without renderer reuse exhausted their short test timeouts on repeated interpreter startup. Integration fixtures now use the GUI's existing persistent renderer configuration; unchanged success assertions and timeouts pass.",
+    "An intermediate font-selection regression selected the first completed acceptable model. The final implementation compares pending models after the minimum phase and retains semantically valid incumbents. The final four-case comparison in summary.json includes this correction."
+  ],
+  "full_catalog_rerun": false,
+  "reserved_real_families_used": false
+}

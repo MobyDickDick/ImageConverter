@@ -289,6 +289,9 @@ def test_production_cli_does_not_render_in_parent_reporting(tmp_path, monkeypatc
     monkeypatch.setattr(overviews, '_renderSvg', forbidden)
     monkeypatch.setattr(app, 'SVG_RENDER_SUBPROCESS_ENABLED', False)
     monkeypatch.setenv('IMAGE_CONVERTER_ISOLATE_SVG_RENDER', '0')
+    # Compare supervised conversion/finalization, not a fresh interpreter per
+    # raster probe. The GUI uses this same bounded persistent render worker.
+    monkeypatch.setenv('IMAGE_CONVERTER_REUSE_RENDER_WORKER', '1')
     out = tmp_path/'out'
     assert app.main([str(tmp_path), '--descriptions-path', str(descriptions), '--output-dir', str(out),
                      '--start', 'sample', '--end', 'sample', '--search-seed', '42',

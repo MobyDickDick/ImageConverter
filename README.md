@@ -1,22 +1,14 @@
 # ImageConverter
 
-Die [vollständige Katalogübersicht](artifacts/catalog_inventory/index.html)
-verbindet alle Bitmaps mit Beschreibungen, gespeicherten SVGs, historischen
-Abnahmen und aktueller Rasterqualität. Sie lässt sich durchsuchen und filtern.
-[Einordnung und Nachführung](docs/catalog_inventory.md).
-
-Die [Korrektur des Rundungsrenderers](docs/next_arbeitspaket_2026-11-06_rounded_renderer.md)
-richtet native Rechtecke, ihre Füllungen, Verläufe und Konturen an beobachteten
-Kreisecken aus. Vorab gesicherte unabhängige Kontrollraster bestehen 28/28
-globale und 96/96 lokale Eckprüfungen. Die echte CLI besteht 41/41 neue
-librsvg-Szenen einschließlich nativer Radius-/Objekt-/Relationsprüfung und
-164/164 Elternecken mit beiden Renderern. Die historischen MuPDF-Raster und
-ihre abweichenden Prüfergebnisse bleiben gesondert erhalten.
-
-Der [gemeinsame P0-Struktursuchweg für gerundete äußere Verlaufsrechtecke](docs/next_arbeitspaket_2026-11-06_rounded_parent.md)
-verbindet gemischte Kinder, Überdeckungsgruppen und einzelne Formen.
-Als nächstes folgt die [Komposition angeschnittener Elternrechtecke](docs/next_arbeitspaket_2026-11-07_clipped_rectangular_parent.md).
-Die unabhängige reale Gesamtabnahme bleibt offen.
+Der [gemeinsame P0-Struktursuchweg verbindet jetzt gerundete äußere Verlaufsrechtecke](docs/next_arbeitspaket_2026-11-06_rounded_parent.md)
+mit gemischten Kindern, Überdeckungsgruppen und einzelnen Formen. Zwölf
+unveränderte synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12;
+Zusatzseed und gekoppelte Variantenkohorte bestehen 12/12 beziehungsweise 17/17.
+Elternradien und vier lokale Ecken werden am Originalraster geprüft.
+Die zusätzliche librsvg-Gegenprobe besteht 41/41 Gesamtbilder, aber nur 121/164
+lokale Ecken; die [vorhandene Rendererabweichung](docs/next_arbeitspaket_2026-11-06_rounded_renderer.md)
+ist der nächste P0-Schritt. Angeschnittene Elternrechtecke und die reale
+Gesamtabnahme bleiben offen.
 
 Der [gemeinsame P0-Struktursuchweg unterstützt jetzt auch rechteckige Verlaufsflächen](docs/next_arbeitspaket_2026-11-05_rectangular_parent.md)
 mit gemischten Kreis-/Rechteckkindern, Überdeckungsgruppen und einzelnen Formen.

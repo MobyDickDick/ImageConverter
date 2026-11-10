@@ -38,6 +38,7 @@ class Bot:
         self.improved = False
         self.active = True
         self.stop_reason = None
+        self.epoch = 0
         self.observation = dict(generated=0, cache_hits=0, valid=0, rejected=0,
                                 improvements=0, active_seconds=0.)
 
@@ -45,6 +46,32 @@ class Bot:
         cursor = self.cursor
         self.cursor += 1
         probe = self.parameters.copy()
+        if self.epoch:
+            # New trust regions, rather than replaying the same exhausted grid.
+            # Correlated moves can cross plateaus where every single-coordinate
+            # step loses (translations, shared widths and coupled paint).
+            pool = list(range(len(probe)))
+            if self.name == 'geometry_pair':
+                pool = pool[:geometry_count]
+            elif self.name == 'color_pair':
+                pool = pool[geometry_count:]
+            if not pool:
+                return None
+            if self.name == 'joint_restart' and cursor % 3 == 0:
+                probe = seed.copy()
+            fraction = (.002, .01, .04, .12, .3)[self.epoch % 5]
+            span = max(1., float(np.ptp(seed[:geometry_count]))) if geometry_count else 1.
+            count = 1 if self.name.endswith('coordinates') else min(len(pool), rng.randint(2, 5))
+            direction = rng.choice((-1, 1))
+            for index in rng.sample(pool, count):
+                scale = 255. if index >= geometry_count else span
+                # Keep subpixel neighborhoods even for large canvases or
+                # tightly bounded model parameters. Other turns jump farther.
+                step = (4 if index >= geometry_count else 1) * (.03125, .125, .5, 1., 4.)[self.epoch % 5]
+                if self.name != 'fine_coordinates' and cursor % 2:
+                    step = max(.03125, scale*fraction)
+                probe[index] += direction * step * rng.uniform(.5, 1.5)
+            return probe
         if self.name in {'joint_restart', 'geometry_pair', 'color_pair'}:
             pool = list(range(len(probe)))
             if self.name == 'geometry_pair':
@@ -68,6 +95,7 @@ class Bot:
 
     def record(self):
         return dict(strategy=self.name, proposals=self.proposals, error=self.best[1],
+                    restarts=self.epoch,
                     improved=self.improved, active=self.active, stop_reason=self.stop_reason,
                     received_messages=self.received)
 
@@ -126,11 +154,20 @@ def explore_bots_steps(parameters, geometry_count, measure, incumbent, *, source
         bot.active, bot.stop_reason = False, reason
         emit(source, event='bot_deactivated', **bot.record())
 
-    while board.reason is None and board.generated < monitor.maximum*8:
+    while board.reason is None and (session.minimum_pending or board.generated < monitor.maximum*8):
         active = [bot for bot in board.bots if bot.active]
         if not active:
-            board.reason = 'all_bots_inactive'
-            break
+            if session.minimum_pending and len(parameters) and board.bots:
+                for bot in board.bots:
+                    bot.epoch += 1
+                    bot.active, bot.stop_reason, bot.stale = True, None, 0
+                    bot.parameters, bot.best = board.best_p.copy(), board.best
+                active = list(board.bots)
+                emit(source, event='search_restarted', restart=max(b.epoch for b in active),
+                     **session.report())
+            else:
+                board.reason = 'all_bots_inactive'
+                break
         selected = board.selector.choose([bot.name for bot in active])
         bot = next(bot for bot in active if bot.name == selected)
         board.reason = monitor.reason(alternatives_tried=all(b.proposals or not b.active for b in board.bots))
@@ -148,7 +185,7 @@ def explore_bots_steps(parameters, geometry_count, measure, incumbent, *, source
         used = generated = 0
         slice_elapsed, slice_loss = 0., board.best[0]
         # A slice counts unique measurements; duplicate generation is bounded too.
-        while used < slice_size and generated < 64 and board.generated < monitor.maximum*8:
+        while used < slice_size and generated < 64 and (session.minimum_pending or board.generated < monitor.maximum*8):
             board.reason = monitor.reason(alternatives_tried=all(b.proposals or not b.active for b in board.bots))
             if board.reason:
                 break
@@ -217,11 +254,13 @@ def explore_bots_steps(parameters, geometry_count, measure, incumbent, *, source
         board.selector.record(bot.name, slice_elapsed, slice_loss, board.best[0])
         if board.reason:
             break
-    board.reason = board.reason or 'search_exhausted'
+    board.reason = board.reason or monitor.reason(alternatives_tried=True) or 'search_exhausted'
     records = [bot.record() for bot in board.bots]
     report = dict(seed=config['seed'], additional_evaluations=monitor.proposals-start_proposals,
         total_evaluations=monitor.proposals, winning_strategy=board.winning,
         budget=config['budget'], effective_budget=monitor.limit, max_budget=monitor.maximum,
+        minimum_seconds=session.policy.minimum_seconds,
+        proposals_beyond_budget=max(0, monitor.proposals-monitor.maximum),
         budget_extensions=monitor.extensions, stop_reason=board.reason, attempts=records,
         elapsed_seconds=round(session.elapsed-started, 6), reused_blackboard=reused,
         remembered_candidates=len(board.seen), duplicate_proposals=board.cache_hits,

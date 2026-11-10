@@ -105,16 +105,6 @@ aus. [Nachweis und Grenzen](../artifacts/evaluation/axial_panel_issue_v1/README.
 
 ## Bearbeitung des höchsten Rangs
 
-Nachtrag 07.11.2026: Die [Korrektur nativer Rechteckrundungen](next_arbeitspaket_2026-11-06_rounded_renderer.md)
-ist synthetisch in Review: 28/28 unabhängige Kontrollbilder, 96/96
-Kontrollecken, 41/41 neue echte CLI-Fälle und je 164/164 Elternecken mit
-beiden Renderern. Historische Raster bleiben unverändert; falsche native
-Radien bleiben Ablehnungen. Gemeinsame Regression 1.206/1.207, ein
-zeitabhängiger Bestandfall besteht isoliert und im Modulnachlauf 32/32;
-Kernprofil 42/42. Als nächstes folgt
-[SEARCH-STRUCTURE-CLIPPED-RECTANGULAR-PARENT](next_arbeitspaket_2026-11-07_clipped_rectangular_parent.md).
-Rang 1/P0 und die übergeordnete reale Abnahme bleiben offen.
-
 Nachtrag 06.11.2026: [Gerundete äußere Verlaufsrechtecke](next_arbeitspaket_2026-11-06_rounded_parent.md)
 werden anhand vier sichtbarer Ecken und eines gemessenen nativen Radius mit
 den vorhandenen gemischten Kindern und Topologien verbunden. Die zusätzliche

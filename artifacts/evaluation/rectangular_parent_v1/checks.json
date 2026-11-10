@@ -1,0 +1,161 @@
+{
+  "schema": "rectangular_parent_checks_v1",
+  "date": "2026-11-05",
+  "status": "review",
+  "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+  "base_commit": "b5781dd76c9c6826fa842f3fa4adf0455404c97d",
+  "cli": [
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_rectangular_parent --inputs .tmp/rectangular-parent/inputs --output .tmp/rectangular-parent/before",
+      "exit_code": 0,
+      "accepted": 0,
+      "completed": 12
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_rectangular_parent --inputs .tmp/rectangular-parent/inputs --output .tmp/rectangular-parent/after --require-all",
+      "exit_code": 0,
+      "accepted": 12,
+      "completed": 12
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_rectangular_parent --inputs .tmp/rectangular-parent/additional-inputs --output .tmp/rectangular-parent/additional-cli --require-all",
+      "exit_code": 0,
+      "accepted": 12,
+      "completed": 12
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_rectangular_parent --inputs .tmp/rectangular-parent/variation-inputs --output .tmp/rectangular-parent/variation-cli",
+      "exit_code": 0,
+      "accepted": 17,
+      "completed": 17
+    }
+  ],
+  "regression": {
+    "command": [
+      "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pytest",
+      "tests/test_mixed_topology.py",
+      "tests/test_overlap_proposal_reuse.py",
+      "tests/test_overlap_groups.py",
+      "tests/test_clipped_gradient_parent.py",
+      "tests/test_thin_rim_depth.py",
+      "tests/test_owned_circle_rims.py",
+      "tests/test_same_paint_overlap.py",
+      "tests/test_island_group_search.py",
+      "tests/test_repeated_fill_overlap.py",
+      "tests/test_mixed_overlap_composition.py",
+      "tests/test_observed_depth_order.py",
+      "tests/test_overlap_outlines.py",
+      "tests/test_rounded_overlap_composition.py",
+      "tests/test_overlap_composition.py",
+      "tests/test_rounded_outlines.py",
+      "tests/test_rounded_composition.py",
+      "tests/test_component_splits.py",
+      "tests/test_structure_search_operators.py",
+      "tests/test_residual_scene_search.py",
+      "tests/test_real_composition_holdout_freeze.py",
+      "tests/test_real_scene_transfer_evidence.py",
+      "tests/test_mixed_gradient_scene_evidence.py",
+      "tests/test_residual_scene_evidence.py",
+      "tests/test_rectangular_gradient_parent.py",
+      "tests/test_gradient_scene_runtime.py",
+      "tests/test_mixed_gradient_scene_runtime.py",
+      "tests/test_mixed_overlap_outlines.py",
+      "tests/test_multilayer_overlap.py",
+      "-q",
+      "--tb=short",
+      "--basetemp",
+      ".tmp\\rectangular-parent\\regression-temp",
+      "--junitxml",
+      ".tmp\\rectangular-parent\\regression.xml"
+    ],
+    "exit_code": 0,
+    "outer_guard_seconds": 1200,
+    "seconds": 745.326,
+    "junit": ".tmp/rectangular-parent/regression.xml",
+    "sha256": "9187227476255efd53d36a37e2ec46f9a1e158e15b3d47b748e7d342e326cbc6",
+    "tests": 972,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "core": {
+    "command": ".venv/Scripts/python.exe tools/run_pytest_profile.py core-green --basetemp .tmp/rectangular-parent/core-temp --junitxml .tmp/rectangular-parent/core.xml",
+    "exit_code": 0,
+    "junit": ".tmp/rectangular-parent/core.xml",
+    "sha256": "da0e112fe56afde0e767652bde32f27c7cf0f1fb7a92acb12fc4d79a15a22794",
+    "tests": 42,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 0.901
+  },
+  "freeze": {
+    "command": [
+      "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+      "-m",
+      "tools.freeze_real_composition_holdouts",
+      "--verify",
+      "artifacts/evaluation/real_composition_holdout_freeze_v1/freeze/manifest.json"
+    ],
+    "exit_code": 0,
+    "result": {
+      "status": "sealed_unrun",
+      "families": 2,
+      "converter_executed": false,
+      "accepted": null,
+      "current_runtime_checked": false
+    },
+    "manifest_sha256": "1a76bc25f89717d235f9ec86340280a165b7b4f82367da033c42e4848025a06d"
+  },
+  "static_checks": {
+    "python_ast": "passed",
+    "git_diff_check": "passed",
+    "comparison_inputs_unchanged": true,
+    "final_cli_snapshots_match_current": true,
+    "full_standard_suite_run": false,
+    "archive_reconversion_run": false
+  },
+  "development_attempts": [
+    {
+      "label": "Initial development tests",
+      "exit_code": 1,
+      "junit": ".tmp/rectangular-parent/initial.xml",
+      "sha256": "9a2090bcd73ce1e61e78ff6d6dabc6e882fc10c500c66429a8057e118b30ea91",
+      "tests": 47,
+      "failures": 8,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 21.363
+    },
+    {
+      "label": "First corrected targeted block",
+      "exit_code": 0,
+      "junit": ".tmp/rectangular-parent/targeted.xml",
+      "sha256": "af458567dddf404d4c643f6532613c53656cb4f20b5641df12ed37356a8bf5b4",
+      "tests": 47,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 51.058
+    },
+    {
+      "label": "Additional inventory/topology controls",
+      "exit_code": 0,
+      "junit": ".tmp/rectangular-parent/additional-tests.xml",
+      "sha256": "6f4cf48e110555ee195eab4d7983a987c70e782bbcb4a8cd89225fb5b9e43f62",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 6.336
+    }
+  ],
+  "files_sha256": {
+    "src/iCCModules/imageCompositeConverterMixedGradientScene.py": "4b9f83af34199c0c15b8a7e17e68cbd71c52154950d07de263f9296770dafa97",
+    "tools/evaluate_rectangular_parent.py": "35760868121420797fe90f298d4306a1d93b55e8f89c981f2ffe493334bbb3a7",
+    "tests/test_rectangular_gradient_parent.py": "78b58ec2baa02d6d95923352b05056488fc3016a95ae0e41b2ca457a2e8ddce4",
+    ".github/workflows/local-completion-checks.yml": "e35afa297c4c199f51c0d85aa7d5ba9c2844e344653898c48add961e1a1c7c6f"
+  }
+}

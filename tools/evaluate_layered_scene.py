@@ -176,10 +176,10 @@ def check_objects(svg, expected):
                 max_bbox_error_px=best if np.isfinite(best) else None)
 
 
-def local_checks(reference, svg, objects):
+def local_checks(reference, svg, objects, *, render_fn=None):
     # Use the independent global evaluator on each crop, including internal
     # color boundaries: small children cannot hide behind a large parent.
-    raster = render(svg, reference.shape[1], reference.shape[0])
+    raster = (render_fn or render)(svg, reference.shape[1], reference.shape[0])
     checks = []
     for obj in objects:
         x, y, w, h = obj['bbox']

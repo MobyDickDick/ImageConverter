@@ -102,6 +102,24 @@ def test_result_quality_uses_cli_failures_and_failed_svg_names(jobs, job, filena
     assert (folder / "result.svg").read_bytes() == svg.read_bytes()
 
 
+def test_pixel_pass_without_model_confirmation_remains_a_draft(jobs, job):
+    folder = jobs.folder(job['id'])
+    output = folder/'output'
+    (output/'converted_svgs').mkdir(parents=True)
+    svg = '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24"><circle cx="16" cy="12" r="7" fill="#225599"/></svg>'
+    (output/'converted_svgs/UPLOAD.svg').write_text(svg)
+    from src.imageConverterSample import render_svg
+    Image.fromarray(render_svg(svg, 32, 24)).save(folder/'source.png')
+    (output/'search').mkdir()
+    event = dict(event='image_search_finished', candidate_evaluations=1400, satisfactory=False,
+                 stop_reason='supported_models_exhausted', elapsed_seconds=30.2, minimum_seconds=30.)
+    (output/'search/progress.jsonl').write_text(json.dumps(event)+'\n')
+    gui.collect_result(folder, job, 0)
+    assert job['pixel_quality']['passed'] and job['quality'] == 'warning'
+    assert 'Pixelprüfung bestanden' in job['message'] and 'noch offen' in job['message']
+    assert job['search_summary']['elapsed_seconds'] == 30.2
+
+
 @pytest.mark.parametrize('shape', ['<rect width="32" height="24" fill="white"/>',
                                   '<rect x="-20" y="-20" width="5" height="5" fill="black"/>'])
 def test_successful_cli_cannot_publish_blank_or_off_canvas_svg(jobs, job, shape):

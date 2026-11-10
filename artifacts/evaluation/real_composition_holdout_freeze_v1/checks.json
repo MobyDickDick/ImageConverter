@@ -1,0 +1,73 @@
+{
+  "schema": "real_composition_holdout_checks_v1",
+  "date": "2026-11-03",
+  "baseline_revision": "147e864059c686720d159b5bc00b9cf0c2844efe",
+  "branch": "codex/freeze-real-composition-families-2026-11-03",
+  "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+  "freeze_manifest_sha256": "1a76bc25f89717d235f9ec86340280a165b7b4f82367da033c42e4848025a06d",
+  "tests": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_real_composition_holdout_freeze.py tests/test_real_scene_transfer_evidence.py tests/test_mixed_gradient_scene_evidence.py tests/test_residual_scene_evidence.py -q --basetemp .tmp/composition-freeze/pytest-portable --junitxml .tmp/composition-freeze/regression-portable.xml",
+      "exit_code": 0,
+      "junit": ".tmp/composition-freeze/regression-portable.xml",
+      "junit_sha256": "34962b9726a290eb01c169d9ba6d112c120234ea44654cbd39fc7756ab6d33d5",
+      "tests": 55,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe tools/run_pytest_profile.py core-green --basetemp .tmp/composition-freeze/pytest-core --junitxml .tmp/composition-freeze/core.xml",
+      "exit_code": 0,
+      "junit": ".tmp/composition-freeze/core.xml",
+      "junit_sha256": "d0fd541cb7da3204953caac45a32be2a18f0e970a898cba45cfb352c6fa3d74e",
+      "tests": 42,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  ],
+  "verification": [
+    {
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "tools.freeze_real_composition_holdouts",
+        "--verify",
+        "artifacts/evaluation/real_composition_holdout_freeze_v1/freeze/manifest.json",
+        "--check-current-runtime"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"sealed_unrun\",\n  \"families\": 2,\n  \"converter_executed\": false,\n  \"accepted\": null,\n  \"current_runtime_checked\": true\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "tools/freeze_real_composition_holdouts.py",
+        "tools/evaluate_real_scene.py",
+        "tests/test_real_composition_holdout_freeze.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "limitations": [
+    "No converter trial on reserved candidates",
+    "No positive family-transfer claim",
+    "No full standard suite or archive reconversion"
+  ]
+}

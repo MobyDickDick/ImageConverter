@@ -191,6 +191,7 @@ def conversion_worker(connection, payload):
     settings = {key: config[key] for key in
                 ('mode', 'seed', 'budget', 'directory', 'allow_memory', 'adaptive')}
     settings.update(seconds=config['policy'].seconds, max_seconds=config['policy'].max_seconds)
+    settings.update(minimum_seconds=config['policy'].minimum_seconds)
     settings.update(disabled_bots=config.get('disabled_bots', ()),
                     component_observation=config.get('component_observation', True),
                     neural_model=config.get('neural_model'))

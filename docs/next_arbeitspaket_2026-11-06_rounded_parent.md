@@ -5,12 +5,6 @@ Rang 1/P0. Ausgangscommit `fbb86fa59`. Fortsetzung des
 [rechteckigen Elternteils](next_arbeitspaket_2026-11-05_rectangular_parent.md#sitzungslog).
 Status: **Review**, synthetischer Teilabschluss mit gesondert offenem Rendererfehler.
 
-Nachtrag 07.11.2026: Der separate
-[Rendererteil](next_arbeitspaket_2026-11-06_rounded_renderer.md) korrigiert die
-Eckgeometrie und besteht neue, vorab mit librsvg vorbereitete Referenzbilder.
-Die hier berichteten Zahlen bleiben der unveränderte historische
-MuPDF-Prüfstand; sie werden nicht in die neue Abnahme übernommen.
-
 ## Umfang und Umsetzung
 
 Der gemeinsame Szenenvertrag verbraucht zusätzlich die ausdrückliche Aussage

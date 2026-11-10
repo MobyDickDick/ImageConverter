@@ -26,10 +26,10 @@ _SETTINGS = ContextVar('conversion_search_settings', default=None)
 @contextmanager
 def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, allow_memory=False,
                          adaptive=False, seconds=60., max_seconds=120., isolate=False,
-                         disabled_bots=(), component_observation=True, neural_model=None):
+                         disabled_bots=(), component_observation=True, neural_model=None, minimum_seconds=0.):
     if mode not in {'legacy', 'portfolio'} or not 32 <= budget <= 10000:
         raise ValueError('Search mode or render budget is invalid')
-    policy = SearchPolicy(seconds=seconds,max_seconds=max_seconds)
+    policy = SearchPolicy(seconds=seconds,max_seconds=max_seconds,minimum_seconds=min(minimum_seconds,seconds))
     from src.iCCModules.imageCompositeConverterComponents import registry
     registry(disabled_bots)
     if disabled_bots and (mode != 'portfolio' or not adaptive):

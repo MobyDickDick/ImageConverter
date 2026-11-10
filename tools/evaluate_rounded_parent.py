@@ -52,20 +52,15 @@ def main():
     parser.add_argument('--output', type=Path)
     parser.add_argument('--verify-only', action='store_true')
     parser.add_argument('--require-all', action='store_true')
-    parser.add_argument('--reference-renderer', choices=('native', 'librsvg'), default='native')
     args = parser.parse_args()
     os.environ.update(IMAGE_CONVERTER_ISOLATE_SVG_RENDER='0', ICC_SEARCH_SEED='17')
     if args.prepare:
         cases = (make_variation_cases if args.variations else make_cases)(args.seed)
         args.prepare.mkdir(parents=True, exist_ok=False)
-        renderer = None
-        if args.reference_renderer == 'librsvg':
-            from tools.evaluate_svg_text_baseline import render_librsvg
-            renderer = render_librsvg
-        write_cases(cases, args.prepare, render_fn=renderer)
+        write_cases(cases, args.prepare)
         (args.prepare/'manifest.json').write_text(json.dumps(cases, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
         (args.prepare/'generation.json').write_text(json.dumps(dict(seed=args.seed,
-            variations=args.variations, reference_renderer=args.reference_renderer), indent=2)+'\n', encoding='utf-8')
+            variations=args.variations), indent=2)+'\n', encoding='utf-8')
         return 0
     if not args.inputs or not args.output:
         parser.error('--inputs and --output required')

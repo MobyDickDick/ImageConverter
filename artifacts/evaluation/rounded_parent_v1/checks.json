@@ -1,0 +1,264 @@
+{
+  "schema": "rounded_parent_checks_v1",
+  "date": "2026-11-06",
+  "status": "review",
+  "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+  "base_commit": "fbb86fa59c0dd193cd9e8735d81451e0bf07f97b",
+  "commands": [
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_rounded_parent --inputs .tmp/rounded-parent/inputs --output .tmp/rounded-parent/before",
+      "exit_code": 0,
+      "accepted": 0,
+      "completed": 12
+    },
+    {
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        ".tmp\\rounded-parent\\inputs",
+        "--output",
+        ".tmp\\rounded-parent\\after",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 47.937,
+      "outer_guard_seconds": 480
+    },
+    {
+      "label": "additional-prepare",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--prepare",
+        ".tmp\\rounded-parent\\additional-inputs",
+        "--seed",
+        "981347"
+      ],
+      "exit_code": 0,
+      "outer_guard_seconds": 60,
+      "seconds": 0.766
+    },
+    {
+      "label": "additional-cli",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        ".tmp\\rounded-parent\\additional-inputs",
+        "--output",
+        ".tmp\\rounded-parent\\additional-cli",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "outer_guard_seconds": 600,
+      "seconds": 47.656
+    },
+    {
+      "label": "variation-prepare",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--prepare",
+        ".tmp\\rounded-parent\\variation-inputs",
+        "--seed",
+        "853291",
+        "--variations"
+      ],
+      "exit_code": 0,
+      "outer_guard_seconds": 60,
+      "seconds": 1.094
+    },
+    {
+      "label": "variation-cli",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        ".tmp\\rounded-parent\\variation-inputs",
+        "--output",
+        ".tmp\\rounded-parent\\variation-cli",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "outer_guard_seconds": 600,
+      "seconds": 66.656
+    },
+    {
+      "label": "regression",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_mixed_topology.py",
+        "tests/test_overlap_proposal_reuse.py",
+        "tests/test_overlap_groups.py",
+        "tests/test_clipped_gradient_parent.py",
+        "tests/test_thin_rim_depth.py",
+        "tests/test_owned_circle_rims.py",
+        "tests/test_same_paint_overlap.py",
+        "tests/test_island_group_search.py",
+        "tests/test_repeated_fill_overlap.py",
+        "tests/test_mixed_overlap_composition.py",
+        "tests/test_observed_depth_order.py",
+        "tests/test_overlap_outlines.py",
+        "tests/test_rounded_overlap_composition.py",
+        "tests/test_overlap_composition.py",
+        "tests/test_rounded_outlines.py",
+        "tests/test_rounded_composition.py",
+        "tests/test_component_splits.py",
+        "tests/test_structure_search_operators.py",
+        "tests/test_residual_scene_search.py",
+        "tests/test_real_composition_holdout_freeze.py",
+        "tests/test_real_scene_transfer_evidence.py",
+        "tests/test_mixed_gradient_scene_evidence.py",
+        "tests/test_residual_scene_evidence.py",
+        "tests/test_rectangular_gradient_parent.py",
+        "tests/test_gradient_scene_runtime.py",
+        "tests/test_mixed_gradient_scene_runtime.py",
+        "tests/test_mixed_overlap_outlines.py",
+        "tests/test_multilayer_overlap.py",
+        "tests/test_rounded_gradient_parent.py",
+        "tests/test_filled_symbols_runtime.py",
+        "tests/test_conversion_search_scheduler.py",
+        "-q",
+        "--tb=short",
+        "--basetemp",
+        ".tmp\\rounded-parent\\regression-temp",
+        "--junitxml",
+        ".tmp\\rounded-parent\\regression.xml"
+      ],
+      "exit_code": 0,
+      "outer_guard_seconds": 1500,
+      "seconds": 754.219
+    },
+    {
+      "label": "core",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "tools/run_pytest_profile.py",
+        "core-green",
+        "--basetemp",
+        ".tmp\\rounded-parent\\core-temp",
+        "--junitxml",
+        ".tmp\\rounded-parent\\core.xml"
+      ],
+      "exit_code": 0,
+      "outer_guard_seconds": 120,
+      "seconds": 1.437
+    },
+    {
+      "label": "freeze",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.freeze_real_composition_holdouts",
+        "--verify",
+        "artifacts/evaluation/real_composition_holdout_freeze_v1/freeze/manifest.json"
+      ],
+      "exit_code": 0,
+      "outer_guard_seconds": 120,
+      "seconds": 0.157
+    }
+  ],
+  "renderer_audits": [
+    {
+      "command": ".venv/Scripts/python.exe -m tools.audit_rounded_parent_renderers --inputs .tmp/rounded-parent/inputs --output .tmp/rounded-parent/after --report .tmp/rounded-parent/after-renderers.json",
+      "exit_code": 0,
+      "completed": 12,
+      "globals_passed": 12,
+      "native_corners_passed": 48,
+      "independent_corners_passed": 27,
+      "corners": 48
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.audit_rounded_parent_renderers --inputs .tmp/rounded-parent/additional-inputs --output .tmp/rounded-parent/additional-cli --report .tmp/rounded-parent/additional-renderers.json",
+      "exit_code": 0,
+      "completed": 12,
+      "globals_passed": 12,
+      "native_corners_passed": 48,
+      "independent_corners_passed": 28,
+      "corners": 48
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.audit_rounded_parent_renderers --inputs .tmp/rounded-parent/variation-inputs --output .tmp/rounded-parent/variation-cli --report .tmp/rounded-parent/variation-renderers.json",
+      "exit_code": 0,
+      "completed": 17,
+      "globals_passed": 17,
+      "native_corners_passed": 68,
+      "independent_corners_passed": 66,
+      "corners": 68
+    }
+  ],
+  "regression": {
+    "path": ".tmp/rounded-parent/regression.xml",
+    "sha256": "7eea5230277aba6da5c2eff6a63c2c35b2ffe83eb73a94d7fd28446dd92b2538",
+    "tests": 1070,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "core": {
+    "path": ".tmp/rounded-parent/core.xml",
+    "sha256": "64531c975e97a53f6a9867da46e2a71a270dd6b1b32acf85a01f14cdf8603690",
+    "tests": 42,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "supplementary_deadline": {
+    "command": ".venv/Scripts/python.exe -m pytest tests/test_rounded_gradient_parent.py -k alternate_radius_seeds -q --tb=short --basetemp .tmp/rounded-parent/seed-budget-temp --junitxml .tmp/rounded-parent/seed-budget.xml",
+    "exit_code": 0,
+    "sha256": "e248227e1c86d413ef1b62c2562856638b97653cd9ade90501e2aaf484846fb1",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "freeze": {
+    "status": "sealed_unrun",
+    "families": 2,
+    "converter_executed": false,
+    "accepted": null,
+    "current_runtime_checked": false,
+    "manifest_sha256": "1a76bc25f89717d235f9ec86340280a165b7b4f82367da033c42e4848025a06d"
+  },
+  "sources": {
+    "src/iCCModules/imageCompositeConverterMixedGradientScene.py": "beedb8ea922fee4547838865c8708ddda09a28cfc89da2e1869e7eedc8907af6",
+    "src/iCCModules/imageCompositeConverterFilledSymbols.py": "5d0f253e5b743e39bca398ca87a6b4fe22ed7d13d064c7092624b67a00e347a2",
+    "tools/evaluate_rounded_parent.py": "9a771753fff9bec5545bf1be3d75d6c54899673d8ba8abbf904875526c9225b8",
+    "tests/test_rounded_gradient_parent.py": "743ab6531a238a9b704135d16d894733c03471547ba6ebe80e45c2838d12dd3d",
+    "tools/evaluate_layered_scene.py": "c365520cb9f659bea53121a85813289d9d0572ac971642522f0033e88fc6263b",
+    "tools/audit_rounded_parent_renderers.py": "412df9e3e32269e107ec1e59672072b980c639cba21281cc6ea757dbb3e882f2"
+  },
+  "static": {
+    "compile": {
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "src/iCCModules/imageCompositeConverterFilledSymbols.py",
+        "src/iCCModules/imageCompositeConverterMixedGradientScene.py",
+        "tools/evaluate_layered_scene.py",
+        "tools/evaluate_rounded_parent.py",
+        "tools/audit_rounded_parent_renderers.py",
+        "tests/test_rounded_gradient_parent.py"
+      ],
+      "exit_code": 0
+    },
+    "diff": {
+      "command": "git diff --check",
+      "exit_code": 0
+    },
+    "new_document_links": {
+      "checked": 8,
+      "broken": 0
+    }
+  }
+}
