@@ -1,5 +1,11 @@
 # Adaptive Konvertierungssuche (2026-10-18)
 
+**Aktualisierung 2026-11-07:** Die Standard-CLI reserviert bei ungenügendem Fit
+jetzt 30 Sekunden Mindestaufwand mit neuen Suchregionen und einer Nachoptimierung
+der schnellen nativen Ausgaben. Die unten beschriebenen vorzeitigen
+Stagnations-/Vorschlagsabbrüche greifen erst danach. Siehe
+[Regeln und Vorher/Nachher-Messungen](search_minimum_effort_2026-11-07.md).
+
 **Suchscheduler:** Fortsetzbare Modellregistrierungen, gemeinsame Zeitscheiben,
 Fortschritt pro aktiver Sekunde und reservierte Erkundung sind jetzt als
 [SEARCH-SCHEDULER-02](history/next_arbeitspaket_2026-10-18_search_scheduler.md)

@@ -97,12 +97,13 @@ def test_catalogs_supply_matching_geometry_instead_of_manual_review():
 
 
 @pytest.mark.parametrize('seed', [273, 1947])
-def test_gui_cli_upload_with_user_description_passes_saved_result_check(tmp_path, seed):
+def test_gui_cli_upload_with_user_description_passes_saved_result_check(tmp_path, seed, monkeypatch):
     import shutil
     import subprocess
     import sys
     from PIL import Image
     from src.imageConverterGui import collect_result, write_description_table
+    monkeypatch.setenv('IMAGE_CONVERTER_REUSE_RENDER_WORKER', '1')
 
     inputs = tmp_path/'input'
     inputs.mkdir()

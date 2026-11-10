@@ -1,4 +1,4 @@
-"""Raster-derived gradient circles containing flat native shapes.
+"""Raster-derived gradient parents containing flat native shapes.
 
 The closed description contract controls topology; raster residuals supply
 instances, including rounded rectangles. No catalogue keys, saved geometry
@@ -37,7 +37,9 @@ def requested(description):
     return (('der kreis hat einen' in text
              and 'die rechtecke liegen innerhalb des kreises' in text)
             or ('der äussere kreis hat einen' in text
-                and 'die inneren formen liegen innerhalb des äusseren kreises' in text))
+                and 'die inneren formen liegen innerhalb des äusseren kreises' in text)
+            or ('das äussere rechteck hat einen' in text
+                and 'die inneren formen liegen innerhalb des äusseren rechtecks' in text))
 
 
 def scene_contract(description):
@@ -48,23 +50,42 @@ def scene_contract(description):
     for m in matches:
         number = int(m[1]) if m[1].isdigit() else NUMBERS.get(m[1], 1)
         counts['circle' if m[2].startswith('kreis') else 'rectangle'] += number
-    inner_forms = 'die inneren formen liegen innerhalb des äusseren kreises' in text
-    if (counts['circle'] < 1 or not 2 <= sum(counts.values()) <= 9
+    rectangular_parent = 'das äussere rechteck hat einen' in text
+    parent_kind = 'rectangle' if rectangular_parent else 'circle'
+    parent_name = 'des äusseren rechtecks' if rectangular_parent else 'des äusseren kreises'
+    inner_forms = 'die inneren formen liegen innerhalb '+parent_name in text
+    if (counts[parent_kind] < 1 or (rectangular_parent and not inner_forms)
+            or not 2 <= sum(counts.values()) <= 9
             or (not inner_forms and counts['circle'] != 1)):
         return None
-    subject = 'der äussere kreis' if inner_forms else 'der kreis'
+    subject = ('das äussere rechteck' if rectangular_parent else
+               'der äussere kreis' if inner_forms else 'der kreis')
     direction_clause = subject+r' hat einen (horizontal|vertikal)en farbverlauf'
     direction = re.findall(direction_clause, text)
     if len(direction) != 1:
         return None
-    relation = ('die inneren formen liegen innerhalb des äusseren kreises' if inner_forms
+    relation = ('die inneren formen liegen innerhalb '+parent_name if inner_forms
                 else 'die rechtecke liegen innerhalb des kreises')
     layout_axis = None
     overlap = relation+' und überlappen sich teilweise' in text
     group_matches = list(re.finditer(re.escape(relation)+
         r' und bilden (2|3|4|zwei|drei|vier) getrennte gruppen mit teilweisen überdeckungen', text))
+    mixed_groups = list(re.finditer(re.escape(relation)+
+        r' und bilden (1|2|3|4|ein|eine|zwei|drei|vier) überdeckungsgruppen?'
+        r' sowie (1|2|3|4|5|6|ein|eine|zwei|drei|vier|fünf|sechs) einzelne form(?:en)?\b', text))
     overlap_groups = 1
-    if group_matches:
+    isolated_children = 0
+    separation_clause = 'die gruppen und einzelnen formen liegen getrennt voneinander'
+    if mixed_groups:
+        if len(mixed_groups) != 1 or group_matches or overlap or text.count(separation_clause) != 1:
+            return None
+        def number(token):
+            return int(token) if token.isdigit() else NUMBERS.get(token, 1)
+        overlap_groups, isolated_children = (number(mixed_groups[0][i]) for i in (1, 2))
+        if sum(counts.values())-1 < 2*overlap_groups+isolated_children:
+            return None
+        overlap = True
+    elif group_matches:
         if len(group_matches) != 1 or overlap:
             return None
         number = group_matches[0][1]
@@ -76,7 +97,7 @@ def scene_contract(description):
         layouts = [name for name in ('nebeneinander', 'untereinander', 'voneinander')
                    if relation+' und getrennt '+name in text]
         if overlap and not layouts:
-            relation = (group_matches[0][0] if group_matches else
+            relation = (mixed_groups[0][0] if mixed_groups else group_matches[0][0] if group_matches else
                         relation+' und überlappen sich teilweise')
         elif len(layouts) != 1 or overlap:
             return None
@@ -87,21 +108,34 @@ def scene_contract(description):
         return None
     outlined = 'die formen haben helle konturen' in text
     rounded_clause = 'mit leicht gerundeten ecken'
-    rounded = rounded_clause in text
+    child_rounding = 'die inneren rechtecke haben leicht gerundete ecken'
+    parent_rounding = 'das äussere rechteck hat gerundete ecken'
+    parent_rounded = rectangular_parent and parent_rounding in text
+    if parent_rounded and text.count(parent_rounding) != 1:
+        return None
+    scoped_rounding = rectangular_parent and child_rounding in text
+    rounded = rounded_clause in text or scoped_rounding
     # Larger inventories use observed pairwise depth as an ordering proposal;
     # the fallback agenda still has 96 states, never a factorial expansion.
     if overlap and not 2 <= sum(counts.values())-1 <= 8:
         return None
     # The qualifier belongs to the quantified rectangle inventory. A free
     # clause must not attach rounding to circles or silently discard a claim.
-    if rounded and (text.count(rounded_clause) != 1
+    if scoped_rounding and (text.count(child_rounding) != 1 or rounded_clause in text
+                            or counts['rectangle'] < 2):
+        return None
+    if rounded and not scoped_rounding and (rectangular_parent or text.count(rounded_clause) != 1
             or sum(m[2].startswith('rechteck') for m in matches) != 1 or not any(
             m[2].startswith('rechteck') and text[m.end():].startswith(' '+rounded_clause)
             for m in matches)):
         return None
     rest = SHAPES.sub('', text).replace(relation, '')
+    if mixed_groups:
+        rest = rest.replace(separation_clause, '')
     if rounded:
-        rest = rest.replace(rounded_clause, '')
+        rest = rest.replace(child_rounding if scoped_rounding else rounded_clause, '')
+    if parent_rounded:
+        rest = rest.replace(parent_rounding, '')
     rest = re.sub(direction_clause, '', rest)
     for clause in ('die formen haben helle konturen', 'keine beschriftung', 'ohne text oder zeichen'):
         rest = rest.replace(clause, '')
@@ -114,10 +148,13 @@ def scene_contract(description):
     if re.sub(r'[\s.,;]+|\bund\b', '', rest):
         return None
     return dict(count=sum(counts.values()), axis=0 if direction[0] == 'horizontal' else 1,
+                parent_kind=parent_kind,
+                parent_rounded=parent_rounded,
                 outlined=outlined, layout_axis=layout_axis, rounded=rounded, overlap=overlap,
-                overlap_groups=overlap_groups,
+                overlap_groups=overlap_groups, isolated_children=isolated_children,
                 children={kind: number for kind, number in
-                          (('circle', counts['circle']-1), ('rectangle', counts['rectangle'])) if number})
+                          ((kind, counts[kind]-int(kind == parent_kind))
+                           for kind in ('circle', 'rectangle')) if number})
 
 
 def _flat_edge(profile, fill, stroke, low, high):
@@ -214,7 +251,7 @@ def _rounded_coverage_edges(coverage, low, high):
 
 
 def _exposed_corner_radius(data, predicted, fill, coverage, box, *, reconstructed=None, foreign_mask=None,
-                           rim_inset=0.):
+                           rim_inset=0., minimum_corners=2, tight_window=False):
     """Measure round-corner deficits only where the parent paint is exposed.
 
     Occluding paint cannot supply a hidden corner's radius. At least two
@@ -234,23 +271,41 @@ def _exposed_corner_radius(data, predicted, fill, coverage, box, *, reconstructe
     radii = []
     for left in (True, False):
         for top in (True, False):
+            x0, x1 = (max(0, int(np.floor(a))-1), min(coverage.shape[1], int(np.ceil(a+span))+1)) if left else (
+                max(0, int(np.floor(X-span))), min(coverage.shape[1], int(np.ceil(X))+1))
+            y0, y1 = (max(0, int(np.floor(b))-1), min(coverage.shape[0], int(np.ceil(b+span))+1)) if top else (
+                max(0, int(np.floor(Y-span))), min(coverage.shape[0], int(np.ceil(Y))+1))
+            cx, cy = xx[y0:y1, x0:x1], yy[y0:y1, x0:x1]
+            deficit = (ideal-coverage)[y0:y1, x0:x1]
+            hidden = foreign[y0:y1, x0:x1]
+            measured = None
             for extent in np.arange(span, 4., -1.):
-                window = ((xx >= np.floor(a)-1) & (xx <= np.ceil(X))
-                          & (yy >= np.floor(b)-1) & (yy <= np.ceil(Y))
-                          & (xx < a+extent if left else xx >= X-extent)
-                          & (yy < b+extent if top else yy >= Y-extent))
-                if np.any(foreign & window):
+                window = ((cx >= np.floor(a)-1) & (cx <= np.ceil(X))
+                          & (cy >= np.floor(b)-1) & (cy <= np.ceil(Y))
+                          & (cx < a+extent if left else cx >= X-extent)
+                          & (cy < b+extent if top else cy >= Y-extent))
+                if np.any(hidden & window):
                     continue
-                missing = float(np.sum((ideal-coverage)[window]))
+                missing = float(np.sum(deficit[window]))
                 radius = np.sqrt(max(0., missing)/(1-np.pi/4))
                 # Shrinking an observation window is valid only when the
                 # entire rounded corner still fits inside the exposed area.
                 if radius+2 <= extent:
-                    radii.append(radius)
+                    measured = radius
+                    if tight_window:
+                        # Re-measure close to the observed arc so quantized
+                        # straight fill cannot accumulate a large area bias.
+                        extent = radius+3
+                        window &= ((cx < a+extent if left else cx >= X-extent)
+                                   & (cy < b+extent if top else cy >= Y-extent))
+                        missing = float(np.sum(deficit[window]))
+                        measured = np.sqrt(max(0., missing)/(1-np.pi/4))
                 break
+            if measured is not None:
+                radii.append(measured)
     # A rim reduces the observed inner radius. Apply the native rounding
     # threshold to the centerline, retaining a positive measured inner deficit.
-    if (len(radii) < 2 or min(radii) < .75 or min(radii)+rim_inset < 1.25
+    if (len(radii) < minimum_corners or min(radii) < .75 or min(radii)+rim_inset < 1.25
             or max(radii)-min(radii) > 1.5):
         return None
     radius = float(np.median(radii))
@@ -620,6 +675,8 @@ def _gradient_context(pixels, contract, residual_threshold):
     if len(contours) != 1:
         return None
     contour = contours[0]
+    if contract.get('parent_kind') == 'rectangle':
+        return _rectangular_gradient_context(pixels, contract, foreground, contour, residual_threshold)
     circle = _parent_circle(contour, foreground.shape)
     if circle is None:
         return None
@@ -643,6 +700,131 @@ def _gradient_context(pixels, contract, residual_threshold):
     mask = ((np.max(abs(pixels.astype(float)-predicted), axis=2) > residual_threshold)
             & interior.astype(bool)).astype('uint8')
     return geometry, colors, predicted, mask, distance
+
+
+def _rectangular_gradient_context(pixels, contract, foreground, contour, threshold):
+    """Measure a complete parent from exposed sides and, when claimed, arcs.
+
+    Cropped rectangular parents remain unsupported. A frame edge
+    cannot substitute for an observed parent boundary. Child proposals and
+    registration reuse the common search after this boundary measurement.
+    """
+    x, y, w, h = cv2.boundingRect(contour)
+    height, width = foreground.shape
+    rounded = contract.get('parent_rounded', False)
+    if (min(w, h) < 24 or x < 4 or y < 4 or x+w > width-4 or y+h > height-4
+            or cv2.contourArea(contour) < (.85 if rounded else .95)*(w-1)*(h-1)):
+        return None
+    yy, xx = np.indices(foreground.shape)
+    # Keep the exposed border of the fill; central children are outliers.
+    edge_distance = np.minimum.reduce([xx+.5-x, x+w-xx-.5, yy+.5-y, y+h-yy-.5])
+    exposed = (edge_distance > 3) & (edge_distance < min(w, h)*.12)
+    if rounded:
+        # The middle third of each side is outside every supported corner.
+        # White corner cutouts must not bias the axial paint estimate.
+        exposed &= (((xx >= x+w/3) & (xx <= x+2*w/3))
+                    | ((yy >= y+h/3) & (yy <= y+2*h/3)))
+    bounds = np.array([x, y, x+w, y+h], dtype=float)
+    colors = _gradient(pixels, exposed, bounds, contract['axis'])
+    if colors is None:
+        return None
+    t = ((xx if contract['axis'] == 0 else yy)+.5-bounds[contract['axis']])/(w if contract['axis'] == 0 else h)
+    predicted = colors[:3]+t[..., None]*(colors[3:]-colors[:3])
+    observed, delta = pixels.astype(float)-255., predicted-255.
+    plain = np.clip(np.sum(observed*delta, axis=2)/np.maximum(1., np.sum(delta*delta, axis=2)), 0, 1)
+    ring = (edge_distance >= -4) & (edge_distance < 4)
+    if rounded:
+        kernel = np.ones((9, 9), 'uint8')
+        silhouette = np.zeros_like(foreground)
+        cv2.drawContours(silhouette, [contour], -1, 1, cv2.FILLED)
+        ring = (cv2.dilate(silhouette, kernel) != cv2.erode(silhouette, kernel))
+    stroke, sw = np.zeros(3), 0.
+    coverage = plain
+    if contract['outlined']:
+        # A uniform bright rim is separated from parent/white antialiasing
+        # by the residual perpendicular to their compositing line.
+        residual = np.max(abs(observed-plain[..., None]*delta), axis=2)
+        samples = pixels[ring & (residual > 4) & (pixels.mean(axis=2) >= 180)]
+        if len(samples) < .3*2*(w+h):
+            return None
+        stroke = np.median(samples, axis=0)
+        if rounded:
+            strength = residual[ring & (residual > 4) & (pixels.mean(axis=2) >= 180)]
+            stroke = np.median(samples[strength >= np.percentile(strength, 95)], axis=0)
+        rim = stroke-255.
+        dd, rr, dr = np.sum(delta*delta, axis=2), float(rim@rim), delta@rim
+        determinant = dd*rr-dr*dr
+        if np.any(determinant[ring] < .002*dd[ring]*rr):
+            return None
+        od, ort = np.sum(observed*delta, axis=2), observed@rim
+        coverage = np.clip((od*rr-ort*dr)/np.maximum(1., determinant), 0, 1)
+        rim_coverage = np.clip((ort*dd-od*dr)/np.maximum(1., determinant), 0, 1)
+        sw = float(rim_coverage[ring].sum()/(2*(w+h)))
+        if not .5 <= sw <= min(w, h)/4:
+            return None
+    if rounded:
+        # Quantized gradient colors can project a pure fill pixel onto a
+        # spurious rim, especially for two nearly parallel paint vectors.
+        # Preserve mixed boundary pixels, but anchor observed pure paints.
+        pure_fill = np.max(abs(pixels.astype(float)-predicted), axis=2) <= 2
+        pure_white = np.min(pixels, axis=2) >= 254
+        coverage[pure_fill], coverage[pure_white] = 1., 0.
+        if contract['outlined']:
+            rim_coverage[pure_fill | pure_white] = 0.
+    horizontal = np.median(coverage[y+h//3:y+2*h//3], axis=0)
+    vertical = np.median(coverage[:, x+w//3:x+2*w//3], axis=1)
+    # Central children need not project onto the gradient/white paint line.
+    # Only the exposed edge strips measure the parent boundary.
+    horizontal[x+5:x+w-5] = 1.
+    vertical[y+5:y+h-5] = 1.
+    edges = _rounded_coverage_edges if rounded else _coverage_edges
+    lr, tb = edges(horizontal, x, x+w), edges(vertical, y, y+h)
+    if lr is None or tb is None:
+        return None
+    left, right = lr
+    top, bottom = tb
+    radius = 0.
+    if rounded:
+        # Only foreign paint inside the observed silhouette hides a corner.
+        # Color quantization in a boundary blend is not foreign evidence.
+        foreign = ((np.max(abs(pixels.astype(float)-predicted), axis=2) > 4)
+                   & cv2.erode(silhouette if contract['outlined'] else foreground,
+                               np.ones((9, 9), 'uint8')).astype(bool))
+        inner_radius = _exposed_corner_radius(pixels.astype(float), 255., predicted,
+            coverage, [left, top, right-left, bottom-top], reconstructed=pixels.astype(float),
+            foreign_mask=foreign, minimum_corners=4, tight_window=True)
+        if inner_radius is None:
+            return None
+        if contract['outlined']:
+            # Integrating the rim area gives its width against the measured
+            # rounded perimeter, including all four arcs. The centerline is
+            # offset half a stroke from the inner fill boundary.
+            perimeter = 2*(right-left+bottom-top)-(8-2*np.pi)*inner_radius
+            area = float(rim_coverage[ring].sum())
+            sw = 2*area/(perimeter+np.sqrt(perimeter**2+4*np.pi*area))
+            if not .5 <= sw <= min(w, h)/4:
+                return None
+        radius = inner_radius+sw/2
+    else:
+        # Local evidence prevents globally small corner cutouts earning a
+        # sharp-parent assertion.
+        for cx in (int(np.ceil(left))+1, int(np.floor(right))-4):
+            for cy in (int(np.ceil(top))+1, int(np.floor(bottom))-4):
+                if np.mean(coverage[cy:cy+3, cx:cx+3]) < .85:
+                    return None
+    geometry = np.array([left-sw/2, top-sw/2, right-left+sw, bottom-top+sw, sw])
+    # Re-express the fitted gradient at the measured native centerline bounds.
+    low = geometry[contract['axis']]
+    span = geometry[2+contract['axis']]
+    slope = (colors[3:]-colors[:3])/(w if contract['axis'] == 0 else h)
+    start = colors[:3]+(low-bounds[contract['axis']])*slope
+    colors = np.r_[start, start+span*slope]
+    interior = (xx+.5 > left+3) & (xx+.5 < right-3) & (yy+.5 > top+3) & (yy+.5 < bottom-3)
+    if rounded:
+        interior &= _native_fill_mask(dict(kind='rectangle', geometry=geometry, radius=radius),
+                                      xx+.5, yy+.5, inset=3)
+    mask = ((np.max(abs(pixels.astype(float)-predicted), axis=2) > threshold) & interior).astype('uint8')
+    return geometry, colors, predicted, mask, dict(stroke=stroke, radius=radius)
 
 
 def detect_instances(pixels, contract, *, residual_threshold=25, split_components=False,
@@ -809,6 +991,9 @@ def detect_instances(pixels, contract, *, residual_threshold=25, split_component
 
 
 def _gradient_parent(pixels, contract, geometry, colors, predicted, distance):
+    if contract.get('parent_kind') == 'rectangle':
+        return dict(kind='rectangle', geometry=geometry.copy(), colors=np.r_[colors, distance['stroke']],
+                    radius=distance['radius'])
     geometry = geometry.copy()
     radius = geometry[2]/2
     band = (distance >= radius-1) & (distance < radius)
@@ -1079,8 +1264,8 @@ def observed_painter_order(pixels, objects):
     return [objects[0], *(children[i] for i in order)]
 
 
-def _overlap_groups_match(scene, neighbours, expected):
-    """Require the stated connected groups, each with observed overlap.
+def _overlap_groups_match(scene, neighbours, expected, *, isolated=0):
+    """Require the stated overlap groups and singleton components.
 
     Native rims of different groups must remain separated as well. Expanded
     silhouettes conservatively retain a one-pixel uncertainty gap; bounding
@@ -1095,11 +1280,10 @@ def _overlap_groups_match(scene, neighbours, expected):
             if node not in reached:
                 reached.add(node)
                 pending.extend(neighbours[node]-reached)
-        if len(reached) < 2:
-            return False
         groups.append(reached)
         remaining -= reached
-    if len(groups) != expected:
+    if (sum(len(group) > 1 for group in groups) != expected
+            or sum(len(group) == 1 for group in groups) != isolated):
         return False
     for index, group in enumerate(groups):
         for other in groups[index+1:]:
@@ -1130,7 +1314,9 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
     session = current_search()
     rejection_scope = (raster_identity(pixels), tuple(sorted(contract['children'].items())),
                        contract['axis'], contract['outlined'], contract['layout_axis'], contract['rounded'],
-                       contract.get('overlap', False), contract['overlap_groups'])
+                       contract.get('overlap', False), contract['overlap_groups'],
+                       contract.get('isolated_children', 0), contract.get('parent_kind', 'circle'),
+                       contract.get('parent_rounded', False))
     rejected = session.structure_rejections.setdefault(rejection_scope, {}) if session else {}
 
     def register(objects, attempt):
@@ -1172,7 +1358,8 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
         ordering = 'bounded_agenda'
         if objects is not None:
             if contract.get('overlap') and (len(objects) > 5 or contract['children'].get('circle')
-                                          or contract['overlap_groups'] > 1):
+                                          or contract['overlap_groups'] > 1
+                                          or contract.get('isolated_children', 0)):
                 ordered = observed_painter_order(pixels, objects)
                 if ordered is not None:
                     objects = ordered
@@ -1306,10 +1493,11 @@ def fit_mixed_gradient_scene(width, height, *, description, image, render_fn, er
 
 def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn, error_fn,
                          evidence_objects=()):
-    if not complete(objects, contract['children']):
+    if (not complete(objects, contract['children'])
+            or objects[0]['kind'] != contract.get('parent_kind', 'circle')):
         return None
     n = len(objects)
-    rounded = contract.get('rounded', False)
+    rounded = contract.get('rounded', False) or contract.get('parent_rounded', False)
     geometry_count = 5*n+(n if rounded else 0)
     boxes = [np.r_[o['geometry'][:2], o['geometry'][:2]+o['geometry'][2:4], o['geometry'][4]]
              for o in objects]
@@ -1355,7 +1543,7 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
             if min(w, h) < 4:
                 return False
             if not (0 <= x < x+w <= width and 0 <= y < y+h <= height):
-                if i:
+                if i or obj['kind'] != 'circle':
                     return False
                 center, radius = np.array([x+w/2, y+h/2]), w/2
                 if (not 12 <= radius <= min(width, height)
@@ -1367,10 +1555,20 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                 return False
             if i and not _contains(scene[0], obj):
                 return False
+            if i and contract.get('parent_rounded'):
+                # Strict corner support in the measured rounded parent;
+                # bounding-box containment alone admits shapes in cutouts.
+                cx, cy, cw, ch, cs = obj['geometry']
+                if not np.all(_native_fill_mask(scene[0],
+                        np.array([cx-cs/2, cx+cw+cs/2])[:, None],
+                        np.array([cy-cs/2, cy+ch+cs/2])[None, :], inset=1)):
+                    return False
             if rounded:
                 radius = p[5*n+i]
-                if ((obj['kind'] == 'rectangle' and not 1. <= radius <= min(w, h)/3)
-                        or (obj['kind'] == 'circle' and radius != 0)):
+                required = (contract.get('rounded', False) if i else contract.get('parent_rounded', False))
+                required = required and obj['kind'] == 'rectangle'
+                if ((required and not 1. <= radius <= min(w, h)/3)
+                        or (not required and radius != 0)):
                     return False
             if contract['outlined']:
                 c = np.clip(p[offsets[i]:offsets[i]+(9 if i == 0 else 6)], 0, 255)
@@ -1398,7 +1596,8 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                     if right-left < 2 or bottom-top < 2:
                         continue
                     native_silhouettes = (bool(contract['children'].get('circle'))
-                                          or contract.get('overlap_groups', 1) > 1)
+                                          or contract.get('overlap_groups', 1) > 1
+                                          or bool(contract.get('isolated_children', 0)))
                     yy, xx = np.mgrid[top:bottom, left:right]
                     visible = np.ones((bottom-top, right-left), dtype=bool)
                     if native_silhouettes:
@@ -1432,7 +1631,8 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                     error = np.max(abs(pixels[top:bottom, left:right].astype(float)-front), axis=2)
                     if np.percentile(error[visible], 80) > 12:
                         return False
-            if not _overlap_groups_match(scene, neighbours, contract.get('overlap_groups', 1)):
+            if not _overlap_groups_match(scene, neighbours, contract.get('overlap_groups', 1),
+                                         isolated=contract.get('isolated_children', 0)):
                 return False
         # Every other pair must be disjoint, in any arrangement. An explicitly
         # named row/column imposes its stronger interval-separation rule.
@@ -1455,6 +1655,24 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                 min(width, int(np.ceil(o['geometry'][0]+o['geometry'][2]))+3),
                 min(height, int(np.ceil(o['geometry'][1]+o['geometry'][3]))+3))
                for o in [*objects, *evidence_objects]]
+    if contract.get('parent_kind') == 'rectangle':
+        context = _gradient_context(pixels, contract, 25)
+        if context is None:
+            return None
+        if contract.get('parent_rounded'):
+            x, y, w, h, sw = objects[0]['geometry']
+            extent = objects[0]['radius']+sw/2+3
+            for left in (x-sw/2, x+w+sw/2-extent):
+                for top in (y-sw/2, y+h+sw/2-extent):
+                    regions.append((max(0, int(left)-1), max(0, int(top)-1),
+                                    min(width, int(np.ceil(left+extent))+1),
+                                    min(height, int(np.ceil(top+extent))+1)))
+        # Bright residual patches are not flat dark child proposals. Preserve
+        # their local evidence too, so a large parent cannot dilute omissions.
+        _, _, stats, _ = cv2.connectedComponentsWithStats(context[3])
+        for x, y, w, h, area in stats[1:]:
+            if area >= 12:
+                regions.append((max(0, x-3), max(0, y-3), min(width, x+w+3), min(height, y+h+3)))
     regions = list(dict.fromkeys(regions))
 
     def qualities(raster):
@@ -1472,9 +1690,19 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
             errors += 4*np.mean((reference-gradient)**2, axis=2)
         return float(np.mean([errors[y:Y, x:X].mean() for x, y, X, Y in regions]))
 
+    def corner_seeds():
+        if contract.get('parent_rounded'):
+            # Area deficit gives a conservative radius seed. Different native
+            # renderers approximate corner arcs differently; compare a bounded
+            # interval against all observed corners before ordinary refinement.
+            for radius in np.linspace(.75*parameters[5*n], 1.05*parameters[5*n], 13):
+                candidate = parameters.copy()
+                candidate[5*n] = radius
+                yield candidate
+
     fitted = yield from _register_steps(parameters, geometry_count, build, valid, pixels, render_fn, error_fn,
                        'primitive_mixed_gradient_scene_v1', preserve_initial_error=True,
-                       loss_fn=loss,
+                       loss_fn=loss, initial_candidates=corner_seeds(),
                        satisfactory_fn=lambda p, m: all(q and q['passed'] for q in qualities(m[3])))
     if fitted is None:
         return None

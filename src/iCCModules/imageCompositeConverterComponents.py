@@ -40,7 +40,7 @@ def registry(disabled=()):
     unknown = set(disabled)-set(BOT_NAMES)
     if unknown:
         raise ValueError('Unknown search components: '+', '.join(sorted(unknown)))
-    return [dict(id=name, version=1, requires=['portfolio', 'adaptive'],
+    return [dict(id=name, version=2, requires=['portfolio', 'adaptive'],
                  switch='--disable-search-bot '+name, enabled=name not in disabled)
             for name in BOT_NAMES]
 

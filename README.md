@@ -1,5 +1,27 @@
 # ImageConverter
 
+Der [gemeinsame P0-Struktursuchweg verbindet jetzt gerundete äußere Verlaufsrechtecke](docs/next_arbeitspaket_2026-11-06_rounded_parent.md)
+mit gemischten Kindern, Überdeckungsgruppen und einzelnen Formen. Zwölf
+unveränderte synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12;
+Zusatzseed und gekoppelte Variantenkohorte bestehen 12/12 beziehungsweise 17/17.
+Elternradien und vier lokale Ecken werden am Originalraster geprüft.
+Die zusätzliche librsvg-Gegenprobe besteht 41/41 Gesamtbilder, aber nur 121/164
+lokale Ecken; die [vorhandene Rendererabweichung](docs/next_arbeitspaket_2026-11-06_rounded_renderer.md)
+ist der nächste P0-Schritt. Angeschnittene Elternrechtecke und die reale
+Gesamtabnahme bleiben offen.
+
+Der [gemeinsame P0-Struktursuchweg unterstützt jetzt auch rechteckige Verlaufsflächen](docs/next_arbeitspaket_2026-11-05_rectangular_parent.md)
+mit gemischten Kreis-/Rechteckkindern, Überdeckungsgruppen und einzelnen Formen.
+Zwölf identische synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12;
+ein Zusatzseed besteht 12/12 und die gekoppelte Variantenkohorte 17/17.
+Gerundete Elternrechtecke sind im Folgepaket ergänzt; angeschnittene
+Elternrechtecke sowie die reale Gesamtabnahme bleiben offen.
+
+Die [P0-Komposition von Überdeckungsgruppen und einzelnen Formen](docs/next_arbeitspaket_2026-11-04_mixed_topology.md)
+verbindet beide Anordnungen im gemeinsamen Verlaufsszenenweg. Zwölf identische
+synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12; ein Zusatzseed besteht
+12/12 und die gekoppelte Variantenprüfung 17/17. Die reale Gesamtabnahme bleibt offen.
+
 Die [P0-Wiederverwendung nativer Strukturvorschläge](docs/next_arbeitspaket_2026-10-31_proposal_reuse.md)
 vermeidet wiederholte Kreis-/Konturvermessung identischer beobachteter Gruppen.
 Zwölf gepaarte CLI-Ausgaben bleiben bytegleich und bestehen sämtliche Gates;
@@ -345,10 +367,16 @@ Nur messbare Verbesserungen werden übernommen; ohne Gewinn bleibt der Sample-St
 erhalten. **Entfernen** wechselt zurück zur normalen `semantic-only`-Konvertierung.
 Ergebnisse mit offenen Qualitätsprüfungen erscheinen als **Entwurf**.
 
-Die Suche läuft im Hintergrund und lässt sich abbrechen. Profile: 15–30, 60–120
+Die Suche läuft im Hintergrund und lässt sich abbrechen. Profile: 35–45, 60–120
 oder 120–240 Sekunden, zuzüglich bis zu 30 Sekunden für Start und Abschluss;
 der Sample-Modus nutzt jeweils das Basisbudget. Zusätzliche Qualitätsrunden
 entfallen (`ICC_MAX_QUALITY_PASSES=0`), die Qualitätsgrenzen bleiben unverändert.
+Bei ungenügendem Fit investiert die adaptive Suche mindestens 30 Sekunden in
+neue Kandidaten, sofern ein bearbeitbares Vektormodell vorliegt. Sehr genaue
+Ergebnisse können früher fertig sein. Die CLI-Option `--search-min-seconds`
+(Default 30, 0 deaktiviert) begrenzt diesen Mindestaufwand auf das reguläre
+Suchbudget. Details und Vorher/Nachher-Messungen stehen unter
+[Mindestaufwand und Suchneustarts](docs/search_minimum_effort_2026-11-07.md).
 Bilder, Beschreibungen, Ergebnisse und Protokolle bleiben lokal unter
 `artifacts/gui/` (von Git ausgeschlossen); letzte Aufträge überstehen Neustarts.
 Jeder Versuch hat einen eigenen Arbeitsordner, Originaldateien bleiben erhalten.

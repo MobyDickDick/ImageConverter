@@ -214,6 +214,24 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
         if time.monotonic() >= deadline:
             break
     final_svg = svg()
+    continuation = None
+    # The finite coordinate schedule can finish well before the requested
+    # effort. Explore coupled assembly/paint moves with the remaining time.
+    if not accepted_input and params and time.monotonic()-started < min(30., seconds):
+        from src.iCCModules.imageCompositeConverterSearchPortfolio import search_configuration, configured_image_search
+        from src.iCCModules.imageCompositeConverterVectorPolish import polish_generated_svg
+        with search_configuration(mode='portfolio', adaptive=True, seconds=seconds,
+                                  max_seconds=seconds, minimum_seconds=min(30., seconds)):
+            with configured_image_search(str(source.resolve())) as session:
+                session.spent = time.monotonic()-started
+                fitted = polish_generated_svg(final_svg, target, render_svg,
+                                               assertions=description_assertions(description))
+                if fitted is not None:
+                    evaluations += fitted['evaluations']
+                    continuation = fitted['search_control']
+                    if fitted['improved']:
+                        final_svg, rendered, best_mse = fitted['svg'], fitted['rendered'], fitted['error']
+                        accepted += 1
     quality = pixel_quality(target, rendered)
     description_error = ""
     try:
@@ -225,6 +243,7 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
                   improved=best_mse < initial_mse - 1e-10, evaluations=evaluations,
                   accepted=accepted, description_error=description_error,
                   stop_reason='quality_target_reached' if accepted_input else 'search_complete',
+                  continuation=continuation,
                   passed=bool(quality and quality["passed"] and not description_error),
                   elapsed=round(time.monotonic() - started, 2))
     output.parent.mkdir(parents=True, exist_ok=True)
