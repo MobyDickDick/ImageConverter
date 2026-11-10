@@ -1,13 +1,14 @@
-<svg width="20" height="25" viewBox="0 0 20 25" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(10.000 12.500) rotate(180) scale(1.0000) translate(-10.000 -12.500)">
-<g transform="translate(10.000 12.500) rotate(180) scale(1.1000) translate(-10.000 -12.500)">
-<g transform="translate(14.000 5.500) rotate(180) scale(1.0000) translate(-14.000 -5.500)">
-<g transform="translate(17.000 6.000) rotate(0) scale(1.0825) translate(-17.000 -6.000)">
-<g data-output-variation="1" transform="translate(0.0261 0.0712) rotate(-0.1543 15.0000 5.0000)">
-  <rect id="backbottom_light_grey_square" x="0" y="1.972" width="29.954" height="6.087" fill="#c8dcc2" stroke="none" stroke-width="0.012"/>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" viewBox="0 0 20 25">
+  <defs>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="1.260" y1="1.460" x2="18.740" y2="1.460">
+      <stop offset="3.608346%" stop-color="#c6d4d0" />
+      <stop offset="62.871678%" stop-color="#e0ccd1" />
+      <stop offset="99.464757%" stop-color="#c6d4d0" />
+    </linearGradient>
+  <clipPath id="innerRect"><rect x="1.26" y="1.46" width="17.48" height="22.080000000000002" /></clipPath>
+  </defs>
+  <g transform="translate(-0.275000 -0.343750) scale(1.027500)"><rect x="0" y="0" width="20" height="25" fill="#ffffff" stroke="none" />
+  <rect x="1.260" y="1.460" width="17.480" height="22.080" fill="url(#panelGradient)" stroke="none" />
+  <rect x="1.26" y="1.46" width="17.48" height="22.080000000000002" fill="none" stroke="#d4c5d0" stroke-width="1.300000" />
+  <line x1="16.3138" y1="4.5247" x2="3.68622" y2="20.4753" stroke="#d7dbe1" stroke-width="1.300000" clip-path="url(#innerRect)" />
+</g></svg>

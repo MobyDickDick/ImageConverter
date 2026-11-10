@@ -1,39 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   width="60"
-   height="30"
-   viewBox="0 0 60 30"
-   version="1.1"
-   id="svg1"
-   xml:space="preserve"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"><defs
-     id="defs1"><linearGradient
-       id="verticalGrey"
-       x1="0"
-       y1="0"
-       x2="0"
-       y2="30"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(0.22509214,-0.10701103)"><stop
-         offset="0"
-         stop-color="#b4b4b4"
-         id="stop1" /><stop
-         offset="0.30453876"
-         stop-color="#fbfbfb"
-         id="stop3" /><stop
-         offset="0.36996627"
-         stop-color="#fbfbfb"
-         id="stop5" /><stop
-         offset="1"
-         stop-color="#b4b4b4"
-         id="stop7" /></linearGradient></defs><rect
-     x="0.72509217"
-     y="0.39298898"
-     width="59"
-     height="29"
-     fill="url(#verticalGrey)"
-     stroke="#adadad"
-     stroke-width="1"
-     id="rect7"
-     style="fill:url(#verticalGrey)" /></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="30" viewBox="0 0 60 30">
+  <defs>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="0.500" y1="0.500" x2="0.500" y2="29.500">
+      <stop offset="1.000000%" stop-color="#c9c9c9" />
+      <stop offset="39.000000%" stop-color="#fcfcfc" />
+      <stop offset="99.000000%" stop-color="#c9c9c9" />
+    </linearGradient>
+  <clipPath id="innerRect"><rect x="0.5" y="0.5" width="59.0" height="29.0" /></clipPath>
+  </defs>
+  <g transform="translate(-0.300000 -0.150000) scale(1.010000)"><rect x="0" y="0" width="60" height="30" fill="#ffffff" stroke="none" />
+  <rect x="0.500" y="0.500" width="59.000" height="29.000" fill="url(#panelGradient)" stroke="none" />
+  <rect x="0.5" y="0.5" width="59.0" height="29.0" fill="none" stroke="#aeaeae" stroke-width="1.400000" />
+</g></svg>

@@ -1,4 +1,4 @@
-run-meta: run_seed=330102219 pass_seed_offset=230 trace_id=333073162201
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=manual_review_elementwise_symbol_fit
 iteration_001_key=border_thickness
 iteration_001_value=0.8
@@ -207,7 +207,7 @@ step_glyph_gray=55.0
 step_diag_gray=#f9fbfa
 step_border_gray=190.0
 step_gradient_edge=#cecece
-step_gradient_mid=#ececec
+step_gradient_mid=#ecedef
 fit_border_gray=190.0
 fit_border_thickness=0.8
 fit_center_dot_gray=180.0
@@ -225,7 +225,7 @@ fit_glyph_gray=55.0
 fit_glyph_y_ratio=0.05
 fit_gradient_center=40.0
 fit_gradient_edge=#cecece
-fit_gradient_mid=#ececec
+fit_gradient_mid=#ecedef
 fit_gradient_vertical=True
 fit_minus_gap_ratio=1.5
 fit_minus_width=0.0

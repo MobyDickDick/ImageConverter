@@ -1,9 +1,9 @@
-run-meta: run_seed=272455108 pass_seed_offset=57 trace_id=274907209729
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=semantic_ok
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:text=132.860
 quality_elevated_elements=arm,circle,text
-redraw_variation: seed=274907209729 changed_params=cx:27.000->26.853 | cy:12.500->12.641 | r:12.000->12.058 | stroke_circle:1.000->1.095 | arm_stroke:2.000->2.002
+redraw_variation: seed=0 changed_params=cx:27.000->27.107 | cy:12.500->12.380 | r:12.000->11.809 | stroke_circle:1.000->0.884 | arm_stroke:2.000->2.075
 semantic-guard: Textmodus aktiv (path_t).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=88.496

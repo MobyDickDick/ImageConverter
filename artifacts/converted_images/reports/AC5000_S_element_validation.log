@@ -1,4 +1,4 @@
-run-meta: run_seed=529189183 pass_seed_offset=18 trace_id=533951887465
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=non_composite_elementwise_symbol_fit
 iteration_001_key=border_thickness
 iteration_001_value=0.8
@@ -213,7 +213,7 @@ step_glyph_gray=55.0
 step_diag_gray=#dcdcdc
 step_border_gray=190.0
 step_gradient_edge=#f2f2f2
-step_gradient_mid=#dcdcdc
+step_gradient_mid=#f2f2f2
 fit_border_gray=190.0
 fit_border_thickness=1.8
 fit_center_dot_gray=156.0
@@ -231,7 +231,7 @@ fit_glyph_gray=55.0
 fit_glyph_y_ratio=0.05
 fit_gradient_center=40.0
 fit_gradient_edge=#f2f2f2
-fit_gradient_mid=#dcdcdc
+fit_gradient_mid=#f2f2f2
 fit_gradient_vertical=False
 fit_minus_gap_ratio=1.5
 fit_minus_width=0.0
@@ -243,6 +243,6 @@ fit_rect_y_inset_ratio=0.0
 non_composite_selection=best_pixel_error
 non_composite_candidate_error_non_composite_perception_seeded_geometry_ir=43.731250
 non_composite_candidate_error_non_composite_description_geometry_ir=29.373333
-non_composite_candidate_error_non_composite_elementwise_symbol_fit=26.112500
+non_composite_candidate_error_non_composite_elementwise_symbol_fit=25.770000
 description_driven_algorithm_available=1
 sample_svg_lookup=skipped_description_driven_algorithm

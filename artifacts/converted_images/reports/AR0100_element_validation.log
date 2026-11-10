@@ -1,15 +1,15 @@
-run-meta: run_seed=330102219 pass_seed_offset=394 trace_id=333073178765
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=semantic_ok
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:circle=103.531
 quality_elevated_elements=circle,text
-redraw_variation: seed=333073178765 changed_params=cx:12.500->12.725 | cy:12.000->11.798 | r:12.000->11.866 | stroke_circle:1.000->1.079
+redraw_variation: seed=0 changed_params=cx:12.500->12.568 | cy:12.000->11.885 | r:12.000->11.816 | stroke_circle:1.000->0.884
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=107.349
 circle: Breiten-Bracketing stroke_circle 1.618->1.000; Kandidaten=1.000->103.531, 1.500->107.349, 2.000->107.349, 3.000->132.082, 4.500->152.034, 5.500->157.753
 circle: Mittelpunkt-Bracketing cx 12.654->12.500, cy 12.065->12.000 (best_err=103.531)
-perf_probe: circle_center_elapsed round=1 elapsed=0.02s
+perf_probe: circle_center_elapsed round=1 elapsed=0.03s
 circle: Radius-Bracketing r 11.280->12.000 (best_err=103.531, full_err=18.973); Kandidaten=10.280->131.590, 11.500->103.531, 12.000->103.531
 perf_probe: circle_radius_elapsed round=1 elapsed=0.00s
 text: Fehler=60.383
@@ -29,9 +29,9 @@ Runde 3: elementweise Validierung gestartet
 circle: Fehler=103.531
 circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->103.531, 2.000->107.349, 3.000->132.082, 4.500->152.034, 5.500->157.753
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=12.500, cy=12.000, best_err=103.531)
-perf_probe: circle_center_elapsed round=3 elapsed=0.02s
+perf_probe: circle_center_elapsed round=3 elapsed=0.00s
 circle: Radius-Bracketing r 11.500->12.000 (best_err=103.531, full_err=18.973); Kandidaten=10.500->131.590, 11.500->103.531, 12.000->103.531
-perf_probe: circle_radius_elapsed round=3 elapsed=0.00s
+perf_probe: circle_radius_elapsed round=3 elapsed=0.02s
 text: Fehler=60.383
 perf_probe: global_search_elapsed round=3 elapsed=0.00s
 Runde 3: Gesamtfehler=18.973; Qualität (MAE-basiert, höher=besser): 92.56% -> 92.56% | mittlere Pixelabweichung (MAE, kleiner=besser): 18.973 -> 18.973 | Mean-Delta² (kleiner=besser): 2636.938 -> 2636.938 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert
@@ -39,9 +39,9 @@ Runde 4: elementweise Validierung gestartet
 circle: Fehler=103.531
 circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->103.531, 2.000->107.349, 3.000->132.082, 4.500->152.034, 5.500->157.753
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=12.500, cy=12.000, best_err=103.531)
-perf_probe: circle_center_elapsed round=4 elapsed=0.02s
+perf_probe: circle_center_elapsed round=4 elapsed=0.00s
 circle: Radius-Bracketing r 12.000->11.500 (best_err=103.531, full_err=18.973); Kandidaten=11.000->103.531, 11.500->103.531, 12.000->103.531
-perf_probe: circle_radius_elapsed round=4 elapsed=0.00s
+perf_probe: circle_radius_elapsed round=4 elapsed=0.02s
 text: Fehler=60.383
 perf_probe: global_search_elapsed round=4 elapsed=0.00s
 Runde 4: Gesamtfehler=18.973; Qualität (MAE-basiert, höher=besser): 92.56% -> 92.56% | mittlere Pixelabweichung (MAE, kleiner=besser): 18.973 -> 18.973 | Mean-Delta² (kleiner=besser): 2636.938 -> 2636.938 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert
@@ -61,7 +61,7 @@ circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kan
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=12.500, cy=12.000, best_err=103.531)
 perf_probe: circle_center_elapsed round=6 elapsed=0.02s
 circle: Radius-Bracketing r 12.000->11.500 (best_err=103.531, full_err=18.973); Kandidaten=11.000->103.531, 11.500->103.531, 12.000->103.531
-perf_probe: circle_radius_elapsed round=6 elapsed=0.02s
+perf_probe: circle_radius_elapsed round=6 elapsed=0.01s
 text: Fehler=60.383
 perf_probe: global_search_elapsed round=6 elapsed=0.00s
 Runde 6: Gesamtfehler=18.973; Qualität (MAE-basiert, höher=besser): 92.56% -> 92.56% | mittlere Pixelabweichung (MAE, kleiner=besser): 18.973 -> 18.973 | Mean-Delta² (kleiner=besser): 2636.938 -> 2636.938 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert
@@ -69,9 +69,9 @@ Runde 7: elementweise Validierung gestartet
 circle: Fehler=103.531
 circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->103.531, 2.000->107.349, 3.000->132.082, 4.500->152.034, 5.500->157.753
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=12.500, cy=12.000, best_err=103.531)
-perf_probe: circle_center_elapsed round=7 elapsed=0.00s
+perf_probe: circle_center_elapsed round=7 elapsed=0.03s
 circle: Radius-Bracketing r 11.500->12.000 (best_err=103.531, full_err=18.973); Kandidaten=10.500->131.590, 11.500->103.531, 12.000->103.531
-perf_probe: circle_radius_elapsed round=7 elapsed=0.02s
+perf_probe: circle_radius_elapsed round=7 elapsed=0.00s
 text: Fehler=60.383
 perf_probe: global_search_elapsed round=7 elapsed=0.00s
 Runde 7: Gesamtfehler=18.973; Qualität (MAE-basiert, höher=besser): 92.56% -> 92.56% | mittlere Pixelabweichung (MAE, kleiner=besser): 18.973 -> 18.973 | Mean-Delta² (kleiner=besser): 2636.938 -> 2636.938 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert
@@ -79,9 +79,9 @@ Runde 8: elementweise Validierung gestartet
 circle: Fehler=103.531
 circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->103.531, 2.000->107.349, 3.000->132.082, 4.500->152.034, 5.500->157.753
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=12.500, cy=12.000, best_err=103.531)
-perf_probe: circle_center_elapsed round=8 elapsed=0.00s
+perf_probe: circle_center_elapsed round=8 elapsed=0.03s
 circle: Radius-Bracketing r 12.000->11.500 (best_err=103.531, full_err=18.973); Kandidaten=11.000->103.531, 11.500->103.531, 12.000->103.531
-perf_probe: circle_radius_elapsed round=8 elapsed=0.01s
+perf_probe: circle_radius_elapsed round=8 elapsed=0.00s
 text: Fehler=60.383
 perf_probe: global_search_elapsed round=8 elapsed=0.00s
 Runde 8: Gesamtfehler=18.973; Qualität (MAE-basiert, höher=besser): 92.56% -> 92.56% | mittlere Pixelabweichung (MAE, kleiner=besser): 18.973 -> 18.973 | Mean-Delta² (kleiner=besser): 2636.938 -> 2636.938 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert

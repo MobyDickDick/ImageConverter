@@ -1,0 +1,1146 @@
+{
+  "schema": "rounded_renderer_controls_v1",
+  "renderer": "rsvg-convert version 2.62.3\n\nlibraries used:\n  cairo 1.18.4\n  pango 1.57.1\n  harfbuzz 14.2.1",
+  "cases": [
+    {
+      "case_id": "rounded_00",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            30.0,
+            40.0,
+            33.0,
+            33.0
+          ]
+        },
+        {
+          "bbox": [
+            30.0,
+            287.0,
+            33.0,
+            33.0
+          ]
+        },
+        {
+          "bbox": [
+            297.0,
+            40.0,
+            33.0,
+            33.0
+          ]
+        },
+        {
+          "bbox": [
+            297.0,
+            287.0,
+            33.0,
+            33.0
+          ]
+        }
+      ],
+      "radius": [
+        30.0,
+        30.0
+      ],
+      "svg_sha256": "114e44748ef57b2bcb02a94fd0746504deb6f3d7533a7bf31fc84970cf9b0c2e",
+      "png_sha256": "25e115d11deb87d6ad74278313a172ee02c7ed3cd3d0d293e93b1068670376c3",
+      "before_png_sha256": "5f9202ee7a7fb8c4332341a51349298d1d77a0e9dcaa55236b19e27e18d6c175"
+    },
+    {
+      "case_id": "rounded_01",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            30.375,
+            40.625,
+            5.5,
+            5.5
+          ]
+        },
+        {
+          "bbox": [
+            30.375,
+            102.375,
+            5.5,
+            5.5
+          ]
+        },
+        {
+          "bbox": [
+            156.375,
+            40.625,
+            5.5,
+            5.5
+          ]
+        },
+        {
+          "bbox": [
+            156.375,
+            102.375,
+            5.5,
+            5.5
+          ]
+        }
+      ],
+      "radius": [
+        2.5,
+        2.5
+      ],
+      "svg_sha256": "c8a6e45a03812078cc2086a5de1ec4d0708ebae6ffe347b86990fb33373c686e",
+      "png_sha256": "f523d42f1c8308da7a3c0988a424c0377bdfdcc47cf4c9887e1511423d467303",
+      "before_png_sha256": "8192daa53ff09060dab260219eaf55702fc68ec5fc65eb46fb50f8bbe39a1942"
+    },
+    {
+      "case_id": "rounded_02",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            30.0,
+            40.0,
+            15.0,
+            15.0
+          ]
+        },
+        {
+          "bbox": [
+            30.0,
+            250.5,
+            15.0,
+            15.0
+          ]
+        },
+        {
+          "bbox": [
+            81.75,
+            40.0,
+            15.0,
+            15.0
+          ]
+        },
+        {
+          "bbox": [
+            81.75,
+            250.5,
+            15.0,
+            15.0
+          ]
+        }
+      ],
+      "radius": [
+        12.0,
+        12.0
+      ],
+      "svg_sha256": "fd7c380bb25991e55525a99922461dfef5eb861daf890995faaf0c9c0a67413c",
+      "png_sha256": "84e3879cda3600b0e6965f7cf8b88f06f4fbc2ab4558bdc1df4108764d5f8c3d",
+      "before_png_sha256": "e5fac21930ded4b5b7b6351b6d6b0baf6efbf58da0961a2cb0e562d560d8305a"
+    },
+    {
+      "case_id": "rounded_03",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            30.0,
+            40.25,
+            49.0,
+            49.0
+          ]
+        },
+        {
+          "bbox": [
+            30.0,
+            272.0,
+            49.0,
+            49.0
+          ]
+        },
+        {
+          "bbox": [
+            281.75,
+            40.25,
+            49.0,
+            49.0
+          ]
+        },
+        {
+          "bbox": [
+            281.75,
+            272.0,
+            49.0,
+            49.0
+          ]
+        }
+      ],
+      "radius": [
+        45.25,
+        45.25
+      ],
+      "svg_sha256": "28d42e185504e2675f11330e4f85708bb585927b1f461a345f00a8e1ba16c0be",
+      "png_sha256": "ed4e53ccaa9f31a790db52380818afa91d01a27e889d32f012bddf76a969162f",
+      "before_png_sha256": "595f3c8090dca2622ab1f6b7b9638fb3955a1a522db093365132664cfc0c64fa"
+    },
+    {
+      "case_id": "rounded_04",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            29.625,
+            39.625,
+            33.625,
+            33.625
+          ]
+        },
+        {
+          "bbox": [
+            29.625,
+            74.0,
+            33.625,
+            33.625
+          ]
+        },
+        {
+          "bbox": [
+            128.25,
+            39.625,
+            33.625,
+            33.625
+          ]
+        },
+        {
+          "bbox": [
+            128.25,
+            74.0,
+            33.625,
+            33.625
+          ]
+        }
+      ],
+      "radius": [
+        30.0,
+        30.0
+      ],
+      "svg_sha256": "e97339778759f4414d727f9018e23239a936a9ed15246204938a5859985b0d53",
+      "png_sha256": "5446494c2f8a1e3c79fcecf45bd883c8942acf1afcce64d4d5097c63b1f46a1c",
+      "before_png_sha256": "cc914688269bb3b1b6dce92aa637b114cc44e29eba449d4c6921d83f7b6c71fc"
+    },
+    {
+      "case_id": "rounded_05",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            30.0,
+            40.25,
+            6.25,
+            6.25
+          ]
+        },
+        {
+          "bbox": [
+            30.0,
+            260.25,
+            6.25,
+            6.25
+          ]
+        },
+        {
+          "bbox": [
+            91.25,
+            40.25,
+            6.25,
+            6.25
+          ]
+        },
+        {
+          "bbox": [
+            91.25,
+            260.25,
+            6.25,
+            6.25
+          ]
+        }
+      ],
+      "radius": [
+        2.5,
+        2.5
+      ],
+      "svg_sha256": "86dbf363642d0b3bc9aac043915dbbd51505b2ae8ee395121cdeae86ddb840bf",
+      "png_sha256": "60f88f46b50b9abe7587e28a0943e54350934dd3bb857b52cc17f3c31590dd53",
+      "before_png_sha256": "c95d89d678f703026b95efdfce6a978b4f9463e7e852f5a32a2558d363c2887d"
+    },
+    {
+      "case_id": "rounded_06",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            28.25,
+            38.25,
+            18.5,
+            18.5
+          ]
+        },
+        {
+          "bbox": [
+            28.25,
+            303.25,
+            18.5,
+            18.5
+          ]
+        },
+        {
+          "bbox": [
+            313.25,
+            38.25,
+            18.5,
+            18.5
+          ]
+        },
+        {
+          "bbox": [
+            313.25,
+            303.25,
+            18.5,
+            18.5
+          ]
+        }
+      ],
+      "radius": [
+        12.0,
+        12.0
+      ],
+      "svg_sha256": "7a22d46be52f62ee5053b93d17f361b3182cd3ddcb9e071a42a5d1032c2b4e69",
+      "png_sha256": "d9ce8dd2850db2cd612e36e1de55abffcd63a32c2036e772463aad83178598d0",
+      "before_png_sha256": "c6542c54d52fe8c10b15447e802b697c6daaf44c282695508dec3a8af53817b0"
+    },
+    {
+      "case_id": "rounded_07",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            28.625,
+            38.875,
+            33.625,
+            33.625
+          ]
+        },
+        {
+          "bbox": [
+            28.625,
+            76.0,
+            33.625,
+            33.625
+          ]
+        },
+        {
+          "bbox": [
+            130.0,
+            38.875,
+            33.625,
+            33.625
+          ]
+        },
+        {
+          "bbox": [
+            130.0,
+            76.0,
+            33.625,
+            33.625
+          ]
+        }
+      ],
+      "radius": [
+        45.25,
+        33.625
+      ],
+      "svg_sha256": "1c22bf67000fff61eea3533375a22df207fadabc62e2cf04881e2774a11d533e",
+      "png_sha256": "7a3dbb46893c15788cfb55194ba9f3f4555c81adeb5d864fb3f5a77c60dfbe2b",
+      "before_png_sha256": "1b66c8232f7d69ea72522025515feec5253647eca54d0967b9ac8440986362fa"
+    },
+    {
+      "case_id": "rounded_08",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            28.25,
+            38.25,
+            33.375,
+            33.375
+          ]
+        },
+        {
+          "bbox": [
+            28.25,
+            233.875,
+            33.375,
+            33.375
+          ]
+        },
+        {
+          "bbox": [
+            65.125,
+            38.25,
+            33.375,
+            33.375
+          ]
+        },
+        {
+          "bbox": [
+            65.125,
+            233.875,
+            33.375,
+            33.375
+          ]
+        }
+      ],
+      "radius": [
+        30.0,
+        30.0
+      ],
+      "svg_sha256": "ec1098cc2d34163003b27927ee5c76dd1d182783a75058185e5fe234faeb574d",
+      "png_sha256": "70f9084c7599babbe758d3c906f214775225aaeb0ea9125abfb89fb2df63e76d",
+      "before_png_sha256": "159effa6404d5df10e0b3bf2e79bce3d10a0be13b08ba17d124ae1b3d7d9989d"
+    },
+    {
+      "case_id": "rounded_09",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            26.875,
+            37.125,
+            12.5,
+            12.5
+          ]
+        },
+        {
+          "bbox": [
+            26.875,
+            311.625,
+            12.5,
+            12.5
+          ]
+        },
+        {
+          "bbox": [
+            321.375,
+            37.125,
+            12.5,
+            12.5
+          ]
+        },
+        {
+          "bbox": [
+            321.375,
+            311.625,
+            12.5,
+            12.5
+          ]
+        }
+      ],
+      "radius": [
+        2.5,
+        2.5
+      ],
+      "svg_sha256": "708432c7f953fb8792407fc04ffff5e91714b1c622d8e27134eac286c0e7c900",
+      "png_sha256": "ded53af2b6d377de5a2871d1b59c7158398ca9e4ac15602e87fb74db265ee110",
+      "before_png_sha256": "b5f0206b7c3cb280b7c44c223b5460b5f6e07df3c8ec99c43a96f7b8402be0e1"
+    },
+    {
+      "case_id": "rounded_10",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            26.5,
+            36.5,
+            22.0,
+            22.0
+          ]
+        },
+        {
+          "bbox": [
+            26.5,
+            88.75,
+            22.0,
+            22.0
+          ]
+        },
+        {
+          "bbox": [
+            143.0,
+            36.5,
+            22.0,
+            22.0
+          ]
+        },
+        {
+          "bbox": [
+            143.0,
+            88.75,
+            22.0,
+            22.0
+          ]
+        }
+      ],
+      "radius": [
+        12.0,
+        12.0
+      ],
+      "svg_sha256": "09b34e21d224a2dd7a6d2ec80afef5080a056bd2533d660eb2b01d009bc8af5a",
+      "png_sha256": "c9a79cf3147a7f7a2f9f39c1d24caf5869a8491188dfbc44143e765e8b5d31a0",
+      "before_png_sha256": "6bd3c2a951e99567bcf084f85678463e5cd23457b850826c476e7f6de3064514"
+    },
+    {
+      "case_id": "rounded_11",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            26.875,
+            37.125,
+            33.375,
+            33.375
+          ]
+        },
+        {
+          "bbox": [
+            26.875,
+            236.25,
+            33.375,
+            33.375
+          ]
+        },
+        {
+          "bbox": [
+            67.25,
+            37.125,
+            33.375,
+            33.375
+          ]
+        },
+        {
+          "bbox": [
+            67.25,
+            236.25,
+            33.375,
+            33.375
+          ]
+        }
+      ],
+      "radius": [
+        33.375,
+        45.25
+      ],
+      "svg_sha256": "114720b110e467b039fe726a6cc973827fbf2351b0ab068e9084bf6e3bea3fa9",
+      "png_sha256": "a22272a489e2a456c5866c3c9e8ff3bb34d2a49ae48964442d61880fe415b63e",
+      "before_png_sha256": "0b696e6a1d8e5317f7fec4db3f583b979ebc0dc0366482f4ddf1ef1ec0a543d1"
+    },
+    {
+      "case_id": "rounded_12",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            30.0,
+            40.0,
+            33.0,
+            33.0
+          ]
+        },
+        {
+          "bbox": [
+            30.0,
+            287.0,
+            33.0,
+            33.0
+          ]
+        },
+        {
+          "bbox": [
+            297.0,
+            40.0,
+            33.0,
+            33.0
+          ]
+        },
+        {
+          "bbox": [
+            297.0,
+            287.0,
+            33.0,
+            33.0
+          ]
+        }
+      ],
+      "radius": [
+        30.0,
+        30.0
+      ],
+      "svg_sha256": "114e44748ef57b2bcb02a94fd0746504deb6f3d7533a7bf31fc84970cf9b0c2e",
+      "png_sha256": "25e115d11deb87d6ad74278313a172ee02c7ed3cd3d0d293e93b1068670376c3",
+      "before_png_sha256": "5f9202ee7a7fb8c4332341a51349298d1d77a0e9dcaa55236b19e27e18d6c175"
+    },
+    {
+      "case_id": "rounded_13",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            30.375,
+            40.625,
+            5.5,
+            5.5
+          ]
+        },
+        {
+          "bbox": [
+            30.375,
+            102.375,
+            5.5,
+            5.5
+          ]
+        },
+        {
+          "bbox": [
+            156.375,
+            40.625,
+            5.5,
+            5.5
+          ]
+        },
+        {
+          "bbox": [
+            156.375,
+            102.375,
+            5.5,
+            5.5
+          ]
+        }
+      ],
+      "radius": [
+        2.5,
+        2.5
+      ],
+      "svg_sha256": "c8a6e45a03812078cc2086a5de1ec4d0708ebae6ffe347b86990fb33373c686e",
+      "png_sha256": "f523d42f1c8308da7a3c0988a424c0377bdfdcc47cf4c9887e1511423d467303",
+      "before_png_sha256": "8192daa53ff09060dab260219eaf55702fc68ec5fc65eb46fb50f8bbe39a1942"
+    },
+    {
+      "case_id": "rounded_14",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            30.0,
+            40.0,
+            15.0,
+            15.0
+          ]
+        },
+        {
+          "bbox": [
+            30.0,
+            250.5,
+            15.0,
+            15.0
+          ]
+        },
+        {
+          "bbox": [
+            81.75,
+            40.0,
+            15.0,
+            15.0
+          ]
+        },
+        {
+          "bbox": [
+            81.75,
+            250.5,
+            15.0,
+            15.0
+          ]
+        }
+      ],
+      "radius": [
+        12.0,
+        12.0
+      ],
+      "svg_sha256": "fd7c380bb25991e55525a99922461dfef5eb861daf890995faaf0c9c0a67413c",
+      "png_sha256": "84e3879cda3600b0e6965f7cf8b88f06f4fbc2ab4558bdc1df4108764d5f8c3d",
+      "before_png_sha256": "e5fac21930ded4b5b7b6351b6d6b0baf6efbf58da0961a2cb0e562d560d8305a"
+    },
+    {
+      "case_id": "rounded_15",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            30.0,
+            40.25,
+            49.0,
+            49.0
+          ]
+        },
+        {
+          "bbox": [
+            30.0,
+            272.0,
+            49.0,
+            49.0
+          ]
+        },
+        {
+          "bbox": [
+            281.75,
+            40.25,
+            49.0,
+            49.0
+          ]
+        },
+        {
+          "bbox": [
+            281.75,
+            272.0,
+            49.0,
+            49.0
+          ]
+        }
+      ],
+      "radius": [
+        45.25,
+        45.25
+      ],
+      "svg_sha256": "28d42e185504e2675f11330e4f85708bb585927b1f461a345f00a8e1ba16c0be",
+      "png_sha256": "ed4e53ccaa9f31a790db52380818afa91d01a27e889d32f012bddf76a969162f",
+      "before_png_sha256": "595f3c8090dca2622ab1f6b7b9638fb3955a1a522db093365132664cfc0c64fa"
+    },
+    {
+      "case_id": "rounded_16",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            29.625,
+            39.625,
+            33.625,
+            33.625
+          ]
+        },
+        {
+          "bbox": [
+            29.625,
+            74.0,
+            33.625,
+            33.625
+          ]
+        },
+        {
+          "bbox": [
+            128.25,
+            39.625,
+            33.625,
+            33.625
+          ]
+        },
+        {
+          "bbox": [
+            128.25,
+            74.0,
+            33.625,
+            33.625
+          ]
+        }
+      ],
+      "radius": [
+        30.0,
+        30.0
+      ],
+      "svg_sha256": "e97339778759f4414d727f9018e23239a936a9ed15246204938a5859985b0d53",
+      "png_sha256": "5446494c2f8a1e3c79fcecf45bd883c8942acf1afcce64d4d5097c63b1f46a1c",
+      "before_png_sha256": "cc914688269bb3b1b6dce92aa637b114cc44e29eba449d4c6921d83f7b6c71fc"
+    },
+    {
+      "case_id": "rounded_17",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            30.0,
+            40.25,
+            6.25,
+            6.25
+          ]
+        },
+        {
+          "bbox": [
+            30.0,
+            260.25,
+            6.25,
+            6.25
+          ]
+        },
+        {
+          "bbox": [
+            91.25,
+            40.25,
+            6.25,
+            6.25
+          ]
+        },
+        {
+          "bbox": [
+            91.25,
+            260.25,
+            6.25,
+            6.25
+          ]
+        }
+      ],
+      "radius": [
+        2.5,
+        2.5
+      ],
+      "svg_sha256": "86dbf363642d0b3bc9aac043915dbbd51505b2ae8ee395121cdeae86ddb840bf",
+      "png_sha256": "60f88f46b50b9abe7587e28a0943e54350934dd3bb857b52cc17f3c31590dd53",
+      "before_png_sha256": "c95d89d678f703026b95efdfce6a978b4f9463e7e852f5a32a2558d363c2887d"
+    },
+    {
+      "case_id": "rounded_18",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            28.25,
+            38.25,
+            18.5,
+            18.5
+          ]
+        },
+        {
+          "bbox": [
+            28.25,
+            303.25,
+            18.5,
+            18.5
+          ]
+        },
+        {
+          "bbox": [
+            313.25,
+            38.25,
+            18.5,
+            18.5
+          ]
+        },
+        {
+          "bbox": [
+            313.25,
+            303.25,
+            18.5,
+            18.5
+          ]
+        }
+      ],
+      "radius": [
+        12.0,
+        6.6000000000000005
+      ],
+      "svg_sha256": "e8a140008260e1e92723950d6de61d16f9d993e54bf97b8525d924526bcdfd1c",
+      "png_sha256": "785bd6acf700b171d3ff82e610d62625a0adea557305126b9f41c8ca9dda1508",
+      "before_png_sha256": "65a2813e84a4721da98b4fc70ccc2340a338f776bd0b011c4e1084382e425fc7"
+    },
+    {
+      "case_id": "rounded_19",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            28.625,
+            38.875,
+            33.625,
+            33.625
+          ]
+        },
+        {
+          "bbox": [
+            28.625,
+            76.0,
+            33.625,
+            33.625
+          ]
+        },
+        {
+          "bbox": [
+            130.0,
+            38.875,
+            33.625,
+            33.625
+          ]
+        },
+        {
+          "bbox": [
+            130.0,
+            76.0,
+            33.625,
+            33.625
+          ]
+        }
+      ],
+      "radius": [
+        45.25,
+        24.887500000000003
+      ],
+      "svg_sha256": "2ee277db4d2d758e2f3afb9a6aa76202415803f5430a29b00eb65c7fafa9321a",
+      "png_sha256": "dac63d295256abd1227a0f2ef24f38f9f212259ce9e2a24933ee73eb08b3c396",
+      "before_png_sha256": "cde1176a32cce907293b4b9e2b47b7b0beb60d0b6ec1572f82b7962bdc79cc53"
+    },
+    {
+      "case_id": "rounded_20",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            28.25,
+            38.25,
+            33.375,
+            33.375
+          ]
+        },
+        {
+          "bbox": [
+            28.25,
+            233.875,
+            33.375,
+            33.375
+          ]
+        },
+        {
+          "bbox": [
+            65.125,
+            38.25,
+            33.375,
+            33.375
+          ]
+        },
+        {
+          "bbox": [
+            65.125,
+            233.875,
+            33.375,
+            33.375
+          ]
+        }
+      ],
+      "radius": [
+        30.0,
+        16.5
+      ],
+      "svg_sha256": "edea7175c90716c6034b4f1a3613c7d58e7dc46f7c2f63117c90c6e2f0b238e6",
+      "png_sha256": "1aea3f89045e5afde9c8d5cfd042278a253dc1ea4a32bc9d3f4897e21e0d2829",
+      "before_png_sha256": "a5b4ef8e82a2b00de3198583fb6cac4dca30b45c2e9963b773ddb9e163922a4e"
+    },
+    {
+      "case_id": "rounded_21",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            26.875,
+            37.125,
+            12.5,
+            12.5
+          ]
+        },
+        {
+          "bbox": [
+            26.875,
+            311.625,
+            12.5,
+            12.5
+          ]
+        },
+        {
+          "bbox": [
+            321.375,
+            37.125,
+            12.5,
+            12.5
+          ]
+        },
+        {
+          "bbox": [
+            321.375,
+            311.625,
+            12.5,
+            12.5
+          ]
+        }
+      ],
+      "radius": [
+        2.5,
+        1.375
+      ],
+      "svg_sha256": "401c9dbb24554b55edfb3cd5e2e304d212420c0f78740b2d397f8770e9d257b7",
+      "png_sha256": "07e791703f5ab1f420d301c0f5c3a1f283f7ef7959f207ed826f9cc03a8088f2",
+      "before_png_sha256": "1f68d7c482860797d22cdc2931cbcce336ed6198e0a15e7614fac923c466c6b1"
+    },
+    {
+      "case_id": "rounded_22",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            26.5,
+            36.5,
+            22.0,
+            22.0
+          ]
+        },
+        {
+          "bbox": [
+            26.5,
+            88.75,
+            22.0,
+            22.0
+          ]
+        },
+        {
+          "bbox": [
+            143.0,
+            36.5,
+            22.0,
+            22.0
+          ]
+        },
+        {
+          "bbox": [
+            143.0,
+            88.75,
+            22.0,
+            22.0
+          ]
+        }
+      ],
+      "radius": [
+        12.0,
+        6.6000000000000005
+      ],
+      "svg_sha256": "c45628ede9714db79787fe87a96c79c9d9de6dee591bdd3eca4cf7ce9fcc9348",
+      "png_sha256": "2ba7c8f27a81c14c42d06939020f43e848a284f551d1601f924e4024c121110b",
+      "before_png_sha256": "57868404ca6e0eed0efdb372695f9625fcfa8dc7608626f1c7d0e464d086391a"
+    },
+    {
+      "case_id": "rounded_23",
+      "width": 380,
+      "height": 360,
+      "corners": [
+        {
+          "bbox": [
+            26.875,
+            37.125,
+            33.375,
+            33.375
+          ]
+        },
+        {
+          "bbox": [
+            26.875,
+            236.25,
+            33.375,
+            33.375
+          ]
+        },
+        {
+          "bbox": [
+            67.25,
+            37.125,
+            33.375,
+            33.375
+          ]
+        },
+        {
+          "bbox": [
+            67.25,
+            236.25,
+            33.375,
+            33.375
+          ]
+        }
+      ],
+      "radius": [
+        33.375,
+        24.887500000000003
+      ],
+      "svg_sha256": "96f35dde97addb477793cdbb0e443dc610a9fd65f9acfdc099b4a8c13a656ed0",
+      "png_sha256": "6c59af4a61845be08abf84457d6531331915fae68e7540d490bc10cb9d0346c7",
+      "before_png_sha256": "3ecc92d76d0a4d758edba4aebd0298ef1a04286e04d2a1ca0f539ef3a5b0972c"
+    },
+    {
+      "case_id": "sharp",
+      "width": 380,
+      "height": 360,
+      "corners": [],
+      "svg_sha256": "e46b1ea7a4321f80ca8cab6d659e1b8ad8094cb04ffb58d559d89c04f8ca09d5",
+      "png_sha256": "3d74960479131061b44d6ec0a0037b33353732b0f9a4d244a126e6c4c4d6029f",
+      "before_png_sha256": "942814a0cb80c248d4387279d3c85f309967e3c35f206dff2e264ac9259a7829"
+    },
+    {
+      "case_id": "circle",
+      "width": 380,
+      "height": 360,
+      "corners": [],
+      "svg_sha256": "85ef1a78f8af6466fb7e0d06e3645f420c21b7b4a3549b6da4b84db7a6df8d62",
+      "png_sha256": "ae8ef24a3e063797db03b4bc2abc01b1b1b369ac08f19daed98ab9bd13d5052e",
+      "before_png_sha256": "b196b9d6aa9995eb38a4d65345ff977fbfa5939022036d10d174dfbe4c18a265"
+    },
+    {
+      "case_id": "ellipse",
+      "width": 380,
+      "height": 360,
+      "corners": [],
+      "svg_sha256": "a799dc36817b58331384f16d337bff46ed306e86aab5d195ffde5e888206ae8d",
+      "png_sha256": "0a69eda139b76d5871410da70b836764147acdae03b5e0287efc44db1708b82d",
+      "before_png_sha256": "d9180f9cd4e2542b4aa7c724db60abee96731c80adcadca85874a07ca3d34a84"
+    },
+    {
+      "case_id": "bezier",
+      "width": 380,
+      "height": 360,
+      "corners": [],
+      "svg_sha256": "810aa5e495a4b560bc562eea35667259f242d969c9ffee016d3856b13783cf35",
+      "png_sha256": "9d620d0a200bac253fbc4c1bf98582ea4b0630a2f3f57220d5eb553dfb6b9d34",
+      "before_png_sha256": "a2f3d25e91d2c9bda10dbda6139bac7eeb2fca5297d1147b6df410b82ff456ec"
+    }
+  ]
+}

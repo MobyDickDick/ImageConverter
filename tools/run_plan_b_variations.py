@@ -310,7 +310,7 @@ def prepare_cases(svg: str, description: str, output: Path, seed: int) -> list[d
     return cases
 
 
-def write_cases(cases: list[dict], output: Path) -> None:
+def write_cases(cases: list[dict], output: Path, *, render_fn=None) -> None:
     """Write cases inside a fresh run directory already owned by this runner."""
     cv2 = import_with_vendored_fallback("cv2")
     references = output / "references"
@@ -323,7 +323,7 @@ def write_cases(cases: list[dict], output: Path) -> None:
         case_dir = output / name
         inputs = case_dir / "input"
         inputs.mkdir(parents=True)
-        image = render(source.read_text(encoding="utf-8"), case["width"], case["height"])
+        image = (render_fn or render)(source.read_text(encoding="utf-8"), case["width"], case["height"])
         digest = sha256(image.tobytes())
         if digest in raster_hashes:
             raise ValueError("Duplicate raster variation; choose a larger reference SVG or a different seed")

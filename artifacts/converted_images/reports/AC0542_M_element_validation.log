@@ -1,12 +1,15 @@
-run-meta: run_seed=272455108 pass_seed_offset=1 trace_id=274907204073
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=non_composite_elementwise_symbol_fit
-dot_registration_evaluations=1112
+dot_registration_start=1 evaluations=479 loss=19.99691762
+dot_registration_start=2 evaluations=603 loss=19.79464991
+dot_registration_start=0.5 evaluations=504 loss=19.78141248
+dot_registration_evaluations=1587
 fit_center_dot_radius=4.22189998626709
 fit_center_dot_x_ratio=0.5
 fit_center_dot_y_ratio=0.5
 non_composite_selection=best_pixel_error
 non_composite_candidate_error_non_composite_perception_seeded_geometry_ir=47.343333
 non_composite_candidate_error_non_composite_description_geometry_ir=38.851111
-non_composite_candidate_error_non_composite_elementwise_symbol_fit=9.737778
+non_composite_candidate_error_non_composite_elementwise_symbol_fit=9.592222
 description_driven_algorithm_available=1
 sample_svg_lookup=skipped_description_driven_algorithm

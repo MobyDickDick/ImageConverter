@@ -1,16 +1,16 @@
-run-meta: run_seed=330102219 pass_seed_offset=416 trace_id=333073180987
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=semantic_ok
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:text=68.087
 quality_elevated_elements=arm,circle,text
-redraw_variation: seed=333073180987 changed_params=cx:8.000->7.773 | cy:7.500->7.370 | r:7.000->7.096 | stroke_circle:1.000->0.989 | arm_stroke:1.000->0.932
+redraw_variation: seed=0 changed_params=cx:8.000->8.068 | cy:7.500->7.431 | r:7.000->6.890 | stroke_circle:1.000->0.884 | arm_stroke:1.000->1.075
 semantic-guard: Textmodus aktiv (rf).
 small_variant_mode_active: reason=min_dim, min_dim=12.420, mask_dilate_px=1, text_mode=rf, arm_min_ratio=0.750, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=66.437
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing cx 9.600->8.000, cy 7.500->7.500 (best_err=51.982)
-perf_probe: circle_center_elapsed round=1 elapsed=0.01s
+perf_probe: circle_center_elapsed round=1 elapsed=0.02s
 circle: Radius-Bracketing r 6.210->6.500 (best_err=53.222, full_err=18.883); Kandidaten=6.417->51.982, 6.500->53.222, 7.200->52.653
 perf_probe: circle_radius_elapsed round=1 elapsed=0.00s
 arm: Fehler=45.508
@@ -24,9 +24,9 @@ Runde 2: elementweise Validierung gestartet
 circle: Fehler=53.222
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=8.000, cy=7.500, best_err=53.222)
-perf_probe: circle_center_elapsed round=2 elapsed=0.02s
+perf_probe: circle_center_elapsed round=2 elapsed=0.03s
 circle: Radius-Bracketing r 6.500->7.000 (best_err=52.653, full_err=19.035); Kandidaten=6.417->52.182, 6.500->53.222, 7.200->52.653
-perf_probe: circle_radius_elapsed round=2 elapsed=0.02s
+perf_probe: circle_radius_elapsed round=2 elapsed=0.00s
 arm: Fehler=41.764
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing keine relevante Änderung (arm_len: 9.500); Kandidaten=7.000->47.987, 9.500->43.876, 11.500->43.876, 16.000->43.876, 20.500->43.876, 25.000->43.876
@@ -39,9 +39,9 @@ Runde 3: elementweise Validierung gestartet
 circle: Fehler=52.653
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=8.000, cy=7.500, best_err=52.653)
-perf_probe: circle_center_elapsed round=3 elapsed=0.02s
+perf_probe: circle_center_elapsed round=3 elapsed=0.00s
 circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=52.653, full_err=17.987); Kandidaten=6.417->52.561, 6.500->53.618, 7.000->52.653, 7.200->52.653
-perf_probe: circle_radius_elapsed round=3 elapsed=0.00s
+perf_probe: circle_radius_elapsed round=3 elapsed=0.02s
 arm: Fehler=41.764
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing keine relevante Änderung (arm_len: 9.500); Kandidaten=7.000->47.987, 9.500->43.876, 11.500->43.876, 16.000->43.876, 20.500->43.876, 25.000->43.876

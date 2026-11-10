@@ -1,9 +1,13 @@
-<svg width="40" height="80" viewBox="0 0 40 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(20.000 40.000) rotate(0) scale(0.8000) translate(-20.000 -40.000)">
-<g data-output-variation="1" transform="translate(-0.0599 0.0344) rotate(-0.0856 17.5000 10.0000)">
-  <path id="right_facing_square_kelle_p_connector" d="M 0.35 10 L 14.07 10" stroke="#808080" stroke-width="2" fill="none" stroke-linecap="butt"/>
-  <rect id="right_facing_square_kelle_p_body" x="14.07" y="0.8" width="18.522" height="18.4" fill="#d92645" stroke="#a0a0a0" stroke-width="0.8"/>
-  <text id="right_facing_square_kelle_p_label" x="22.302" y="10.4" fill="#dedede" font-family="Arial, Helvetica, sans-serif" font-size="7.448" font-weight="600" text-anchor="middle" dominant-baseline="middle">P</text>
-  </g>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="80" viewBox="0 0 40 80">
+  <defs>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="2.060" y1="3.660" x2="2.060" y2="76.340">
+      <stop offset="8.010822%" stop-color="#a3c49d" />
+      <stop offset="85.977631%" stop-color="#ffffff" />
+      <stop offset="100.000000%" stop-color="#a3c49d" />
+    </linearGradient>
+  <clipPath id="innerRect"><rect x="2.06" y="3.66" width="35.88" height="72.68" /></clipPath>
+  </defs>
+  <g transform="translate(7.950000 0.874155) scale(1.008750)"><rect x="0" y="0" width="40" height="80" fill="#ffffff" stroke="none" />
+  <rect x="2.060" y="3.660" width="35.880" height="72.680" fill="url(#panelGradient)" stroke="none" />
+  <rect x="2.06" y="3.66" width="35.88" height="72.68" fill="none" stroke="#aba4b9" stroke-width="0.734915" />
+</g></svg>

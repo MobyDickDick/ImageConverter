@@ -1,14 +1,11 @@
-<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" preserveAspectRatio="xMidYMid meet">
   <defs>
     <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#8f8f8f"/>
-      <stop offset="50%" stop-color="#dedede"/>
-      <stop offset="100%" stop-color="#8f8f8f"/>
+      <stop offset="0.020657%" stop-color="#9c9d9c" />
+      <stop offset="10.151214%" stop-color="#ffffff" />
+      <stop offset="88.791154%" stop-color="#9c9d9c" />
     </linearGradient>
   </defs>
-  <g data-output-variation="1" transform="translate(0.0558 0.0697) rotate(-0.0985 15.0000 15.0000)">
-
-  <rect id="background_gradient" x="3.629" y="16.23" width="17.81" height="14.279" fill="url(#geometry-ir-horizontal-gradient)" stroke="none"/>
-  <rect id="main_rect" x="3.722" y="14.927" width="17.894" height="14.275" fill="none" stroke="#666666" stroke-width="0.376"/>
-  </g>
-</svg>
+  <g transform="translate(-0.021390 0.048763) scale(1.001426)"><rect id="background_gradient" x="3.972" y="16.17" width="17.856" height="14.28" fill="url(#geometry-ir-horizontal-gradient)" stroke="none" />
+  <rect id="main_rect" x="3.972" y="14.97" width="17.856" height="14.28" fill="none" stroke="#5c675d" stroke-width="0.617000" />
+</g></svg>

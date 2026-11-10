@@ -11,13 +11,10 @@ from tests.test_structure_search_operators import assert_accepted
 from tools.evaluate_overlap_composition import make_cases
 
 
-INSUFFICIENT_CORNERS = {(5, True, True, 0), (6, True, True, 0), (8, True, False, 1)}
-
-
 @pytest.mark.parametrize('children,rounded,outlined,index', [
     (n, rounded, outlined, index) for n in (5, 6, 8)
     for rounded, outlined in ((False, False), (True, False), (False, True), (True, True))
-    for index in (0, 1, 3) if (n, rounded, outlined, index) not in INSUFFICIENT_CORNERS])
+    for index in (0, 1, 3)])
 def test_observed_depth_supports_larger_inventories(children, rounded, outlined, index):
     case = make_cases(seed=527183, children=children, rounded=rounded, outlined=outlined)[index]
     image, result = fit(case)
@@ -25,12 +22,9 @@ def test_observed_depth_supports_larger_inventories(children, rounded, outlined,
     assert result['scene_hypotheses'] <= 4
 
 
-@pytest.mark.parametrize('children,rounded,outlined,index', sorted(INSUFFICIENT_CORNERS))
-def test_crowded_rounding_without_two_radius_measurements_remains_rejected(children, rounded, outlined, index):
-    case = make_cases(seed=527183, children=children, rounded=rounded, outlined=outlined)[index]
-    image, result = fit(case)
-    assert mixed.detect_instances(image, mixed.scene_contract(case['description'])) is None
-    assert result is None
+# The former three synthetic corner exclusions are now included above: corrected
+# rendering and supported rim paint expose two consistent measured radii.
+# Direct zero/one-visible-corner rejection is kept in test_rounded_renderer.py.
 
 
 @pytest.mark.parametrize('index', [0, 3, 10])

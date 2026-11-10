@@ -1,16 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="25" height="15" viewBox="0 0 25 15">
-  <defs>
-    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="1.460" y1="1.060" x2="23.540" y2="1.060">
-      <stop offset="0%" stop-color="#f1f1f1"/>
-      <stop offset="40%" stop-color="#e12349"/>
-      <stop offset="100%" stop-color="#f1f1f1"/>
-    </linearGradient>
-  <clipPath id="innerRect"><rect x="1.46" y="1.06" width="22.080000000000002" height="12.88"/></clipPath>
-  </defs>
-  <g data-output-variation="1" transform="translate(-0.0367 0.0389) rotate(-0.0169 12.5000 7.5000)">
-
-  <rect x="0" y="0" width="25" height="15" fill="#ffffff" stroke="none"/>
-  <rect x="1.460" y="1.060" width="22.080" height="12.880" fill="url(#panelGradient)" stroke="none"/>
-  <rect x="1.46" y="1.06" width="22.080000000000002" height="12.88" fill="none" stroke="#9a9a9a" stroke-width="0.80"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="15" viewBox="0 0 25 15" preserveAspectRatio="xMidYMid meet">
+  <g transform="translate(0.056921 0.090600) scale(0.993280)"><path id="right_stem_square_kelle_connector" d="M 15 7.5 L 25 7.5" stroke="#7f7d7e" stroke-width="1.459464" fill="none" stroke-linecap="butt" />
+  <rect id="right_stem_square_kelle_body" x="1" y="0.75" width="14" height="14" fill="#dd1f49" stroke="#78bbaf" stroke-width="0.669994" />
+  <text id="right_stem_square_kelle_label" x="7.75" y="10.5" fill="#e7e8e5" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="600" text-anchor="middle" dominant-baseline="alphabetic" stroke="#e7e8e5" stroke-width="0.229797">P</text>
+</g></svg>

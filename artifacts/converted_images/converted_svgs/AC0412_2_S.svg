@@ -1,7 +1,13 @@
-<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g data-output-variation="1" transform="translate(-0.0043 0.0679) rotate(0.1006 10.0000 10.0000)">
-  <ellipse id="compressor_circle" cx="9.993" cy="9.956" rx="8.255" ry="8.43" fill="#d8d8d8" stroke="#8d8d8d" stroke-width="3.009"/>
-  <path id="upward_compressor_left_line" d="M 6.341 14.7 L 8.651 4.24" stroke="#666666" stroke-width="6.96" fill="none" stroke-linecap="round"/>
-  <path id="upward_compressor_right_line" d="M 13.66 14.718 L 11.291 4.175" stroke="#666666" stroke-width="6.96" fill="none" stroke-linecap="round"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="1.260" y1="1.260" x2="18.740" y2="1.260">
+      <stop offset="1.197158%" stop-color="#7cb47c" />
+      <stop offset="60.758628%" stop-color="#52ac64" />
+      <stop offset="95.684816%" stop-color="#7cb47c" />
+    </linearGradient>
+  <clipPath id="innerRect"><rect x="1.26" y="1.26" width="17.48" height="17.48" /></clipPath>
+  </defs>
+  <g transform="translate(-0.187500 -0.187500) scale(1.018750)"><rect x="0" y="0" width="20" height="20" fill="#ffffff" stroke="none" />
+  <rect x="1.260" y="1.260" width="17.480" height="17.480" fill="url(#panelGradient)" stroke="none" />
+  <rect x="1.26" y="1.26" width="17.48" height="17.48" fill="none" stroke="#9aaba2" stroke-width="0.958984" />
+</g></svg>

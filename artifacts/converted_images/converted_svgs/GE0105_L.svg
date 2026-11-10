@@ -1,5 +1,11 @@
-<svg width="215" height="50" viewBox="0 0 215 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g data-output-variation="1" transform="translate(0.0190 0.0642) rotate(-0.0280 107.5000 25.0000)">
-  <rect id="main_rect" x="0.193" y="18.218" width="214.347" height="36.408" fill="#d8d8d8" stroke="#969696" stroke-width="0.453"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="215" height="50" viewBox="0 0 215 50" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="15.945706%" stop-color="#766185" />
+      <stop offset="50.648721%" stop-color="#dde2e2" />
+      <stop offset="100.000000%" stop-color="#766185" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(-3.279650 -2.809435) scale(0.992377)"><rect id="background_gradient" x="-399.556" y="20.1" width="1082.912" height="36.4" fill="url(#geometry-ir-horizontal-gradient)" stroke="none" />
+  <rect id="main_rect" x="-399.556" y="19.1" width="1082.912" height="36.4" fill="none" stroke="#bcc4cf" stroke-width="0.738634" />
+</g></svg>

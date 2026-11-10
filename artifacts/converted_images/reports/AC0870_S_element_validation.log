@@ -1,9 +1,9 @@
-run-meta: run_seed=221693115 pass_seed_offset=46 trace_id=223688357681
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=semantic_ok
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:circle=53.057
 quality_elevated_elements=circle,text
-redraw_variation: seed=223688357681 changed_params=cx:7.500->7.519 | cy:7.000->7.005 | r:6.000->6.090 | stroke_circle:1.000->1.118
+redraw_variation: seed=0 changed_params=cx:7.500->7.541 | cy:7.000->6.931 | r:6.000->5.890 | stroke_circle:1.000->0.884
 semantic-guard: Textmodus aktiv (path_t).
 small_variant_mode_active: reason=min_dim, min_dim=12.000, mask_dilate_px=1, text_mode=path_t, arm_min_ratio=0.000, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
@@ -11,7 +11,7 @@ circle: Fehler=53.057
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 perf_probe: circle_center_elapsed round=1 elapsed=0.00s
 circle: Radius-Bracketing keine relevante Änderung (r: 6.000, best_err=53.057, full_err=17.804); Kandidaten=5.880->65.767, 6.000->53.057, 6.120->52.479
-perf_probe: circle_radius_elapsed round=1 elapsed=0.01s
+perf_probe: circle_radius_elapsed round=1 elapsed=0.00s
 text: Fehler=43.729
 text: Breiten-Bracketing übersprungen (s: current=0.005, Range=0.005..0.005)
 perf_probe: global_search_elapsed round=1 elapsed=0.00s

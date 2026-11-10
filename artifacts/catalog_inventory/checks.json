@@ -1,0 +1,214 @@
+{
+  "schema": "catalog_inventory_checks_v1",
+  "generated_at": "2026-11-07T12:26:52.713475+00:00",
+  "catalog_files_verified": 1787,
+  "distinct_names_verified": 1787,
+  "current_image_hashes": "passed",
+  "candidate_svg_hashes": "passed",
+  "counts_reconciled": "passed",
+  "embedded_html_data_matches_manifest": true,
+  "sources_unchanged": true,
+  "reserved_families": {
+    "status": "sealed_unrun",
+    "families": 2,
+    "converter_executed": false,
+    "accepted": null,
+    "current_runtime_checked": false
+  },
+  "tests": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "12",
+    "time": "1.718",
+    "timestamp": "2026-11-07T13:11:35.120898+01:00",
+    "hostname": "MarkusLaptop",
+    "report_sha256": "5bb3d5e7130cd5868625031a8d552526ef8e5f73fe7b9377a11e8769c3d5e1b5"
+  },
+  "javascript": {
+    "mode": "offline DOM test of actual report JavaScript",
+    "visual_browser_validation": false,
+    "checks": {
+      "initial_rows": 75,
+      "search": {
+        "shown": "1 Treffer",
+        "passed": true
+      },
+      "archived": {
+        "shown": "379 Treffer",
+        "passed": true
+      },
+      "pixel_pass": {
+        "shown": "345 Treffer",
+        "passed": true
+      },
+      "reserved": {
+        "shown": "2 Treffer",
+        "passed": true
+      },
+      "missing_description": {
+        "shown": "1 Treffer",
+        "passed": true
+      },
+      "sort": {
+        "expected": "AC0554_1_L.jpg",
+        "actual": "AC0554_1_L.jpg",
+        "passed": true
+      },
+      "pagination": {
+        "text": "Seite 2 / 24",
+        "passed": true
+      }
+    }
+  },
+  "browser_visual_validation": {
+    "passed": false,
+    "reason": "Headless Edge unavailable in sandbox; Computer Use blocks local file URLs. No bypass attempted."
+  },
+  "report_sha256": {
+    "index.html": "eaf8cecdaa9fda9989252a8ea78d82e18b8c6729df98207eaf62ec50955b0bbf",
+    "manifest.json": "eb7b8b18229b8f344b63c71a01e4bb29708eac431d05157b5843064d76f38b49",
+    "summary.json": "d57b348bd0bd953b458643ae712266bd80b69cc157d438cc47444fd7e8948d34",
+    "sources.json": "a70a572f0cfbd87578ae8d650009435e7fb2d85adf58cc008899c122b141c54c"
+  },
+  "commands": [
+    {
+      "command": ".venv/Scripts/python.exe -m tools.build_catalog_inventory",
+      "exit_code": 0,
+      "initial_measurements": 2390,
+      "guard_seconds": 600
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.build_catalog_inventory",
+      "exit_code": 0,
+      "cached_measurements": 2393,
+      "new_measurements": 2,
+      "guard_seconds": 180
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_catalog_inventory.py -q --tb=short",
+      "exit_code": 0
+    }
+  ],
+  "interface_update": {
+    "updated_at": "2026-11-07T12:34:39.536632+00:00",
+    "previous_html_sha256": "bd7e7f0f6accc326c18aae096036cbd1e30c90b23669fe10a45c7c2d156e6f2b",
+    "template_sha256": "28b18cdc02f7deea4c9c83e2f007f025719e8eb40b9c3816ccf1af74fa030c2e",
+    "inventory_data_unchanged": true,
+    "embedded_data_matches_manifest": true,
+    "functional_checks": {
+      "mode": "offline DOM execution of actual report JavaScript",
+      "checks": {
+        "all_1787_rows": true,
+        "all_disables_pagination": true,
+        "all_respects_archive_filter": true,
+        "all_combined_filters": true,
+        "empty_filtered_result": true,
+        "reset_restores_75_rows": true,
+        "page_size_25": true,
+        "pagination_25": true,
+        "page_size_change_resets_page": true,
+        "name_ascending": true,
+        "name_ascending_aria": true,
+        "name_sorts_before_paging": true,
+        "name_descending": true,
+        "name_descending_aria": true,
+        "name_dropdown_sync": true,
+        "description_ascending": true,
+        "description_ascending_aria": true,
+        "description_sorts_before_paging": true,
+        "description_descending": true,
+        "description_descending_aria": true,
+        "description_dropdown_sync": true,
+        "archive_ascending": true,
+        "archive_ascending_aria": true,
+        "archive_sorts_before_paging": true,
+        "archive_descending": true,
+        "archive_descending_aria": true,
+        "archive_dropdown_sync": true,
+        "status_ascending": true,
+        "status_ascending_aria": true,
+        "status_sorts_before_paging": true,
+        "status_descending": true,
+        "status_descending_aria": true,
+        "status_dropdown_sync": true,
+        "output_ascending": true,
+        "output_ascending_aria": true,
+        "output_sorts_before_paging": true,
+        "output_descending": true,
+        "output_descending_aria": true,
+        "output_dropdown_sync": true,
+        "legacy_highest_mse_preserved": true,
+        "legacy_lowest_mse_preserved": true
+      }
+    }
+  },
+  "static_render_update": {
+    "updated_at": "2026-11-07T12:45:49.880989+00:00",
+    "previous_html_sha256": "564553e3e5a047a26b3dc043c59ed160d7510f4e59b1f0816bfc3f2a19389972",
+    "current_html_sha256": "eaf8cecdaa9fda9989252a8ea78d82e18b8c6729df98207eaf62ec50955b0bbf",
+    "static_rows_verified": 1787,
+    "all_filenames_and_descriptions_present": true,
+    "data_manifest_unchanged": true,
+    "quality_measurements_repeated": false,
+    "tests": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "16",
+      "time": "1.506",
+      "timestamp": "2026-11-07T13:43:37.425412+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "71459cef4646fa8e0fbd97fc0f815089273bf639235b00ae0a500ec6ff14fddb"
+    },
+    "interactive_checks": {
+      "mode": "offline DOM execution of actual report JavaScript",
+      "checks": {
+        "all_1787_rows": true,
+        "all_disables_pagination": true,
+        "all_respects_archive_filter": true,
+        "all_combined_filters": true,
+        "empty_filtered_result": true,
+        "reset_restores_75_rows": true,
+        "page_size_25": true,
+        "pagination_25": true,
+        "page_size_change_resets_page": true,
+        "name_ascending": true,
+        "name_ascending_aria": true,
+        "name_sorts_before_paging": true,
+        "name_descending": true,
+        "name_descending_aria": true,
+        "name_dropdown_sync": true,
+        "description_ascending": true,
+        "description_ascending_aria": true,
+        "description_sorts_before_paging": true,
+        "description_descending": true,
+        "description_descending_aria": true,
+        "description_dropdown_sync": true,
+        "archive_ascending": true,
+        "archive_ascending_aria": true,
+        "archive_sorts_before_paging": true,
+        "archive_descending": true,
+        "archive_descending_aria": true,
+        "archive_dropdown_sync": true,
+        "status_ascending": true,
+        "status_ascending_aria": true,
+        "status_sorts_before_paging": true,
+        "status_descending": true,
+        "status_descending_aria": true,
+        "status_dropdown_sync": true,
+        "output_ascending": true,
+        "output_ascending_aria": true,
+        "output_sorts_before_paging": true,
+        "output_descending": true,
+        "output_descending_aria": true,
+        "output_dropdown_sync": true,
+        "legacy_highest_mse_preserved": true,
+        "legacy_lowest_mse_preserved": true
+      }
+    },
+    "browser_visual_validation": "Not performed; verification parses the saved HTML without executing scripts."
+  }
+}

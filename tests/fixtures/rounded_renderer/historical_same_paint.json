@@ -1,0 +1,56 @@
+{
+  "case_id": "probe_04",
+  "width": 210,
+  "height": 200,
+  "variation": {
+    "scale": 0.97567815,
+    "relative_x": 0.01191161,
+    "relative_y": 0.02335133
+  },
+  "description": "Ein gefüllter Kreis und zwei gefüllte Rechtecke mit leicht gerundeten Ecken. Der Kreis hat einen vertikalen Farbverlauf. Die Rechtecke liegen innerhalb des Kreises und überlappen sich teilweise. Keine Beschriftung. Die Formen haben helle Konturen. Das gesamte Motiv ist ein wenig kleiner dargestellt und ein wenig nach rechts und unten verschoben.",
+  "expected_objects": [
+    {
+      "kind": "circle",
+      "bbox": [
+        24.080956275000005,
+        21.249784175000002,
+        166.84096365,
+        166.84096365
+      ],
+      "parent": null,
+      "gradient_axis": 1,
+      "stroke_width": 0.97567815
+    },
+    {
+      "kind": "rectangle",
+      "bbox": [
+        97.40856754532183,
+        91.20887599687558,
+        47.77473974674295,
+        48.23118406753202
+      ],
+      "parent": 0,
+      "stroke_width": 1.463517225,
+      "corner_radius": 5.122916399585619,
+      "behind": 2
+    },
+    {
+      "kind": "rectangle",
+      "bbox": [
+        68.18893976550967,
+        67.31906823207272,
+        52.65313049674295,
+        44.32847146753202
+      ],
+      "parent": 0,
+      "stroke_width": 1.463517225,
+      "corner_radius": 6.655597745262426
+    }
+  ],
+  "reference_svg": "historical_same_paint.svg",
+  "input_sha256": "0a41b432a139ddb420dc26b90bfa9717ffef9d170a6a0c625ae74b72ee7c1e7a",
+  "reference_svg_sha256": "c762840c9c40024ddfda23ccae405fded5269ef1233301c9bca8d5b7c5566a8e",
+  "provenance": "Existing frozen MuPDF input from 2026-10-24; never regenerated",
+  "historical_report_sha256": "14103c4b4dd85bc853e41ab7e94f91f2284601d6062bd51f104aa95be8e2a0da",
+  "original_reference_path": "references/probe_04.svg"
+}

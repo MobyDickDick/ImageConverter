@@ -1,25 +1,5 @@
-<svg width="30" height="40" viewBox="0 0 30 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(15.000 20.000) rotate(180) scale(1.0000) translate(-15.000 -20.000)">
-<g transform="translate(15.000 20.000) rotate(0) scale(1.0000) translate(-15.000 -20.000)">
-<defs>
-    <linearGradient id="vertical-two-way-valve-body-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#a8a8a8"/>
-      <stop offset="100%" stop-color="#fbfbfb"/>
-    </linearGradient>
-    <linearGradient id="vertical-two-way-valve-circle-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#f7f7f7"/>
-    </linearGradient>
-  </defs>
-  <g data-output-variation="1" transform="translate(-0.0237 -0.0637) rotate(-0.1242 15.0000 22.5000)">
-
-  <path id="top_kelle_three_way_valve_connector" d="M 15 24.277 L 15 30.109" stroke="#8f8f8f" stroke-width="4.365" fill="none" stroke-linecap="butt"/>
-  <path id="top_kelle_three_way_valve_body_1" d="M 15 30.109 L 1.464 24.46 L 1.464 35.759 Z" fill="#d7d7d7" stroke="#969696" stroke-width="2.344" stroke-linejoin="miter"/>
-  <path id="top_kelle_three_way_valve_body_2" d="M 15 30.109 L 28.536 24.46 L 28.536 35.759 Z" fill="#d7d7d7" stroke="#969696" stroke-width="2.344" stroke-linejoin="miter"/>
-  <path id="top_kelle_three_way_valve_body_3" d="M 15 30.109 L 10.291 42.867 L 19.709 42.867 Z" fill="#d7d7d7" stroke="#969696" stroke-width="2.344" stroke-linejoin="miter"/>
-  <circle id="top_kelle_three_way_valve_circle" cx="15" cy="16.441" r="5.468" fill="#fafafa" stroke="#969696" stroke-width="2.344"/>
-  <text id="top_kelle_three_way_valve_label" x="15" y="16.441" fill="#666666" font-family="Arial, Helvetica, sans-serif" font-size="7.776" font-weight="700" text-anchor="middle" dominant-baseline="middle">M</text>
-  </g>
-  </g>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" viewBox="0 0 30 40" preserveAspectRatio="xMidYMid meet">
+  <g transform="translate(-3.669773 -5.235163) scale(1.249964)"><ellipse id="compressor_circle" cx="15" cy="18.4" rx="3.828" ry="8.448" fill="#d7cdd1" stroke="#fffff8" stroke-width="1.411197" />
+  <path id="mirrored_compressor_left_line" d="M 11.861 13.669 L 14.158 27.017" stroke="#bbc5bd" stroke-width="9.544341" fill="none" stroke-linecap="round" />
+  <path id="mirrored_compressor_right_line" d="M 18.139 13.669 L 15.842 27.017" stroke="#bbc5bd" stroke-width="9.544341" fill="none" stroke-linecap="round" />
+</g></svg>

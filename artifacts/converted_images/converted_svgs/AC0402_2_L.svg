@@ -1,7 +1,4 @@
-<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g data-output-variation="1" transform="translate(-0.0316 0.0836) rotate(-0.0241 20.0000 20.0000)">
-  <ellipse id="compressor_circle" cx="20.026" cy="19.919" rx="17.763" ry="17.952" fill="#45aa5e" stroke="#8d8d8d" stroke-width="3.862"/>
-  <path id="upward_compressor_left_line" d="M 12.203 29.988 L 17.157 7.789" stroke="#d7d7d7" stroke-width="8.944" fill="none" stroke-linecap="round"/>
-  <path id="upward_compressor_right_line" d="M 27.942 29.898 L 22.798 7.639" stroke="#d7d7d7" stroke-width="8.944" fill="none" stroke-linecap="round"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" preserveAspectRatio="xMidYMid meet">
+  <g transform="translate(0.134118 0.196618) scale(0.990169)"><ellipse id="pump_circle" cx="20" cy="20" rx="19.543" ry="19.543" fill="#53a45e" stroke="#8c7989" stroke-width="0.842007" />
+  <polygon id="pump_triangle" points="9.25,5.25 39,20.25 9,34.75" fill="#e8e8e8" />
+</g></svg>

@@ -1,5 +1,11 @@
-<svg width="20" height="60" viewBox="0 0 20 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g data-output-variation="1" transform="translate(0.0778 -0.1420) rotate(0.0751 10.0000 30.0000)">
-  <rect id="backbottom_light_grey_square" x="0" y="5.315" width="17.034" height="59.916" fill="#b8c8d0" stroke="none" stroke-width="0.02"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="60" viewBox="0 0 20 60" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="triangle_stem-stem-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="3.123234%" stop-color="#1d6aac" />
+      <stop offset="49.375000%" stop-color="#fff0f1" />
+      <stop offset="100.000000%" stop-color="#0a5ba7" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(0.000000 0.000000) scale(1.000000)"><polygon id="triangle_stem_triangle" points="10.25,-0.158 0.18,20 20.32,20" fill="#146fb0" stroke="#005b97" stroke-width="0.391290" stroke-linejoin="miter" />
+  <rect id="triangle_stem_stem" x="5" y="22.25" width="10.25" height="37.75" fill="url(#triangle_stem-stem-gradient)" stroke="none" />
+</g></svg>

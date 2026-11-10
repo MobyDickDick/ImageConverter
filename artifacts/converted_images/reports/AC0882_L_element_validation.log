@@ -1,9 +1,9 @@
-run-meta: run_seed=330102219 pass_seed_offset=197 trace_id=333073158868
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=semantic_ok
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:circle=154.191
 quality_elevated_elements=arm,circle,text
-redraw_variation: seed=333073158868 changed_params=cx:26.500->26.720 | cy:12.000->11.866 | r:10.500->10.478 | stroke_circle:1.000->0.932 | arm_stroke:1.000->0.964
+redraw_variation: seed=0 changed_params=cx:26.500->26.623 | cy:12.000->11.885 | r:10.500->10.316 | stroke_circle:1.000->0.884 | arm_stroke:1.000->1.075
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=154.191

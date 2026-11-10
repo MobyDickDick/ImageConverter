@@ -1,6 +1,13 @@
-<svg width="40" height="80" viewBox="0 0 40 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(20.000 40.000) rotate(180) scale(0.8000) translate(-20.000 -40.000)">
-<circle cx="14.0000" cy="9.5000" r="9.0000" fill="#f2f2f2" stroke="#d8d8d8" stroke-width="1.0000"/>
-  <path d="M188 1493H678L1018 694L1360 1493H1849V0H1485V1092L1141 287H897L553 1092V0H188Z" fill="#d7d7d7" transform="translate(15.0000,6.0000) scale(0.006667,-0.006667) translate(-188,-1493)"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="80" viewBox="0 0 40 80">
+  <defs>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="5.960" y1="4.647" x2="5.960" y2="75.352">
+      <stop offset="0.000000%" stop-color="#ded4df" />
+      <stop offset="3.955840%" stop-color="#ffffff" />
+      <stop offset="95.954653%" stop-color="#ded4df" />
+    </linearGradient>
+  <clipPath id="innerRect"><rect x="5.960000000000001" y="4.6475" width="28.08" height="70.705" /></clipPath>
+  </defs>
+  <g transform="translate(-4.005162 0.361594) scale(1.000258)"><rect x="0" y="0" width="40" height="80" fill="#ffffff" stroke="none" />
+  <rect x="5.960" y="4.647" width="28.080" height="70.705" fill="url(#panelGradient)" stroke="none" />
+  <rect x="5.960000000000001" y="4.6475" width="28.08" height="70.705" fill="none" stroke="#b6bcb1" stroke-width="0.591759" />
+</g></svg>

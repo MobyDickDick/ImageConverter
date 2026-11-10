@@ -1,4 +1,4 @@
-run-meta: run_seed=330102219 pass_seed_offset=266 trace_id=333073165837
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=non_composite_elementwise_symbol_fit
 iteration_001_key=border_thickness
 iteration_001_value=0.8
@@ -296,4 +296,4 @@ fit_rect_x_inset_ratio=0.04
 fit_rect_y_inset_ratio=0.04
 non_composite_selection=best_pixel_error
 non_composite_candidate_error_non_composite_perception_seeded_geometry_ir=41.136049
-non_composite_candidate_error_non_composite_elementwise_symbol_fit=39.981471
+non_composite_candidate_error_non_composite_elementwise_symbol_fit=39.897069

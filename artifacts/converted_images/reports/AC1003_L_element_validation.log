@@ -1,15 +1,15 @@
-run-meta: run_seed=330102219 pass_seed_offset=34 trace_id=333073142405
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=semantic_ok
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:text=140.861
 quality_elevated_elements=circle,text
-redraw_variation: seed=333073142405 changed_params=cx:16.000->15.825 | cy:25.500->25.937 | r:11.000->11.193 | stroke_circle:3.000->2.983
+redraw_variation: seed=0 changed_params=cx:16.000->16.068 | cy:25.500->25.293 | r:11.000->10.816 | stroke_circle:3.000->2.884
 semantic-guard: Textmodus aktiv (m).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=147.562
 circle: Breiten-Bracketing stroke_circle 1.125->1.000; Kandidaten=1.000->147.562, 2.000->164.600, 3.000->179.037, 4.500->187.791, 5.500->183.403
 circle: Mittelpunkt-Bracketing cx 12.500->16.000, cy 22.500->25.500 (best_err=120.591)
-perf_probe: circle_center_elapsed round=1 elapsed=0.02s
+perf_probe: circle_center_elapsed round=1 elapsed=0.03s
 circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=120.591, full_err=32.133); Kandidaten=10.000->120.591, 10.500->120.591, 11.000->120.591, 12.000->120.591
 perf_probe: circle_radius_elapsed round=1 elapsed=0.00s
 text: Fehler=140.861
@@ -19,7 +19,7 @@ Runde 2: elementweise Validierung gestartet
 circle: Fehler=120.591
 circle: Breiten-Bracketing stroke_circle 1.000->3.000; Kandidaten=1.000->120.591, 2.000->117.873, 3.000->114.342, 4.500->116.625, 5.500->118.908
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=16.000, cy=25.500, best_err=114.562)
-perf_probe: circle_center_elapsed round=2 elapsed=0.00s
+perf_probe: circle_center_elapsed round=2 elapsed=0.03s
 circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=114.562, full_err=31.641); Kandidaten=10.000->114.562, 10.500->114.562, 11.000->114.562, 12.000->114.562
 perf_probe: circle_radius_elapsed round=2 elapsed=0.02s
 text: Fehler=140.861

@@ -1,7 +1,10 @@
 """Equal fill is not an instance identity or observable depth evidence."""
 from copy import deepcopy
+import json
+from pathlib import Path
 from xml.etree import ElementTree as ET
 
+import cv2
 import pytest
 
 from src.iCCModules import imageCompositeConverterMixedGradientScene as mixed
@@ -11,7 +14,7 @@ from tests.test_residual_scene_search import fit
 from tests.test_structure_search_operators import assert_accepted
 from tools.evaluate_overlap_composition import make_cases, make_variation_cases
 from tools.evaluate_mixed_overlap import make_cases as mixed_cases
-from tools.run_plan_b_variations import render
+from tools.run_plan_b_variations import render, sha256
 
 
 @pytest.mark.parametrize('rounded', [False, True])
@@ -44,9 +47,26 @@ def test_unoutlined_same_paint_union_does_not_supply_hidden_instance_boundaries(
     assert fit(make_cases(648217, same_fill=True)[0])[1] is None
 
 
-def test_shifted_rounding_without_two_clean_corner_observations_is_rejected():
+def test_frozen_shifted_rounding_keeps_all_native_and_raster_gates():
+    # Keep the actual historical pixels. Re-rendering its SVG after correcting
+    # MuPDF creates a different corner profile. Correct rim paint measurement
+    # can now certify these original pixels too, under the complete oracle.
+    folder = Path(__file__).parent/'fixtures/rounded_renderer'
+    case = json.loads((folder/'historical_same_paint.json').read_text(encoding='utf-8'))
+    data = (folder/'historical_same_paint.png').read_bytes()
+    assert sha256(data) == case['input_sha256']
+    image = cv2.imread(str(folder/'historical_same_paint.png'))
+    from src.iCCModules.imageCompositeConverterPrimitiveScene import fit_primitive_scene
+    with image_search(ImageSearch(SearchPolicy(seconds=5, max_seconds=5))):
+        result = fit_primitive_scene(case['width'], case['height'], description=case['description'],
+            image=image, render_fn=render, error_fn=lambda a, b: float(abs(a.astype(float)-b).mean()))
+    assert_accepted(case, image, result)
+
+
+def test_correctly_rendered_shifted_corners_pass_all_native_and_raster_gates():
     case = make_variation_cases(372851, rounded=True, outlined=True, same_fill=True)[4]
-    assert fit(case)[1] is None
+    image, result = fit(case)
+    assert_accepted(case, image, result)
 
 
 @pytest.mark.parametrize('rounded', [False, True])

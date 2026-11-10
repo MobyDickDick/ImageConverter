@@ -1,5 +1,20 @@
 # Dokumentationsindex
 
+- [Mindestens 30 Sekunden für ungenügende Fits: Suchneustarts, native Nachoptimierung und Messungen (2026-11-07)](search_minimum_effort_2026-11-07.md)
+
+- [Vollständige Katalogliste mit Beschreibungen, SVGs und aktueller Qualitätsprüfung](catalog_inventory.md)
+- [P0: native Rundungen gegen analytische Flächen und unabhängige librsvg-Pixel korrigieren (Abnahme 2026-11-07)](next_arbeitspaket_2026-11-06_rounded_renderer.md)
+- [Nächstes P0-Paket: angeschnittene äußere Verlaufsrechtecke (2026-11-07)](next_arbeitspaket_2026-11-07_clipped_rectangular_parent.md)
+- [P0: gerundete Verlaufsrechtecke mit gemischten Kindern und gemessenen Elternradien (2026-11-06)](next_arbeitspaket_2026-11-06_rounded_parent.md)
+
+- [P0: rechteckige Verlaufsflächen mit gemischten Kindern im gemeinsamen Struktursuchweg (2026-11-05)](next_arbeitspaket_2026-11-05_rectangular_parent.md)
+
+- [P0: Überdeckungsgruppen und einzelne Formen gemeinsam komponieren (2026-11-04)](next_arbeitspaket_2026-11-04_mixed_topology.md)
+
+- [Reale Kompositionskandidaten vor Entwicklung reservieren: Originalmarkierungen, Sperre und Abnahmegrenzen (2026-11-03)](next_arbeitspaket_2026-11-03_real_family_freeze.md)
+
+- [P0: identische native Strukturvorschläge unter gemeinsamem Budget wiederverwenden (2026-10-31)](next_arbeitspaket_2026-10-31_proposal_reuse.md)
+
 - [P0: angeschnittene Elternkreise, beobachtete Bögen und vollständige Variantenprüfung (2026-10-30)](next_arbeitspaket_2026-10-30_clipped_parent.md)
 
 - [AC0501-SIA: vorlagengestützte Nachzeichnung, richtige Bildbeschreibung und GUI-Pixelprüfung (2026-10-29)](ac0501_sia_redraw_and_gui_2026-10-29.md)

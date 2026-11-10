@@ -1,0 +1,293 @@
+{
+  "schema": "catalog_inventory_v1",
+  "generated_at": "2026-11-07T12:17:37.986645+00:00",
+  "catalog_bitmaps": 1787,
+  "auxiliary_bitmaps": 0,
+  "unique_catalog_variants": 1787,
+  "catalog_statuses": {
+    "pixel_fail": 1314,
+    "no_svg": 124,
+    "pixel_pass": 345,
+    "measurement_error": 2,
+    "reserved": 2
+  },
+  "descriptions_present": 1786,
+  "missing_descriptions": [
+    "AC0100_from_sample.jpg"
+  ],
+  "archived": 379,
+  "not_archived": 1408,
+  "archive_pinned_pairs_valid": 379,
+  "archive_description_differences": 8,
+  "archive_missing_evidence": 3,
+  "archived_current_pixel_pass": 288,
+  "measurements_computed": 2,
+  "measurements_reused": 2393,
+  "groups": {
+    "AC": {
+      "total": 930,
+      "archived": 174,
+      "statuses": {
+        "pixel_fail": 769,
+        "no_svg": 35,
+        "pixel_pass": 126
+      }
+    },
+    "AL": {
+      "total": 2,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 2
+      }
+    },
+    "AR": {
+      "total": 30,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 27,
+        "no_svg": 3
+      }
+    },
+    "AW": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 1
+      }
+    },
+    "B": {
+      "total": 15,
+      "archived": 1,
+      "statuses": {
+        "pixel_fail": 13,
+        "pixel_pass": 1,
+        "no_svg": 1
+      }
+    },
+    "BA": {
+      "total": 3,
+      "archived": 0,
+      "statuses": {
+        "pixel_pass": 3
+      }
+    },
+    "BG": {
+      "total": 2,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 2
+      }
+    },
+    "BO": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "no_svg": 1
+      }
+    },
+    "BT": {
+      "total": 9,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 9
+      }
+    },
+    "BW": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 1
+      }
+    },
+    "DL": {
+      "total": 27,
+      "archived": 4,
+      "statuses": {
+        "pixel_fail": 16,
+        "pixel_pass": 6,
+        "no_svg": 3,
+        "measurement_error": 2
+      }
+    },
+    "GE": {
+      "total": 610,
+      "archived": 198,
+      "statuses": {
+        "pixel_fail": 347,
+        "pixel_pass": 207,
+        "no_svg": 56
+      }
+    },
+    "HC": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "reserved": 1
+      }
+    },
+    "HW": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "no_svg": 1
+      }
+    },
+    "L6": {
+      "total": 6,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 4,
+        "no_svg": 2
+      }
+    },
+    "L7": {
+      "total": 3,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 3
+      }
+    },
+    "LF": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "no_svg": 1
+      }
+    },
+    "LO": {
+      "total": 2,
+      "archived": 0,
+      "statuses": {
+        "no_svg": 1,
+        "pixel_fail": 1
+      }
+    },
+    "LU": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "no_svg": 1
+      }
+    },
+    "NA": {
+      "total": 11,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 11
+      }
+    },
+    "P": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "no_svg": 1
+      }
+    },
+    "PC": {
+      "total": 3,
+      "archived": 0,
+      "statuses": {
+        "no_svg": 3
+      }
+    },
+    "RA": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "reserved": 1
+      }
+    },
+    "RE": {
+      "total": 2,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 2
+      }
+    },
+    "SE": {
+      "total": 50,
+      "archived": 2,
+      "statuses": {
+        "pixel_fail": 40,
+        "no_svg": 10
+      }
+    },
+    "SH": {
+      "total": 3,
+      "archived": 0,
+      "statuses": {
+        "pixel_pass": 2,
+        "pixel_fail": 1
+      }
+    },
+    "SI": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 1
+      }
+    },
+    "ST": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "no_svg": 1
+      }
+    },
+    "TO": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 1
+      }
+    },
+    "UN": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 1
+      }
+    },
+    "US": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 1
+      }
+    },
+    "WE": {
+      "total": 5,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 5
+      }
+    },
+    "WO": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 1
+      }
+    },
+    "WT": {
+      "total": 1,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 1
+      }
+    },
+    "Z": {
+      "total": 58,
+      "archived": 0,
+      "statuses": {
+        "pixel_fail": 54,
+        "no_svg": 4
+      }
+    }
+  },
+  "fresh_conversion_performed": false,
+  "semantic_revalidation_performed": false,
+  "manual_reviews_systematically_recorded": false,
+  "measurement_signature": "e56c278eac7aa255cf33bc5e4e6f77164834707809c92ff30fdbc30806478d9e",
+  "elapsed_seconds": 29.344
+}

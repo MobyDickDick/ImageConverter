@@ -1,16 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
-  <defs>
-    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="1.460" y1="0.980" x2="1.460" y2="24.020">
-      <stop offset="0%" stop-color="#faf6f6"/>
-      <stop offset="50%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#faf6f6"/>
-    </linearGradient>
-  <clipPath id="innerRect"><rect x="1.46" y="0.98" width="22.080000000000002" height="23.04"/></clipPath>
-  </defs>
-  <g data-output-variation="1" transform="translate(-0.0331 -0.0433) rotate(0.1366 12.5000 12.5000)">
-
-  <rect x="0" y="0" width="25" height="25" fill="#ffffff" stroke="none"/>
-  <rect x="1.460" y="0.980" width="22.080" height="23.040" fill="url(#panelGradient)" stroke="none"/>
-  <rect x="1.46" y="0.98" width="22.080000000000002" height="23.04" fill="none" stroke="#bebebe" stroke-width="0.80"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25"><defs><linearGradient id="bell_shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0.000000%" stop-color="#ffffff" /><stop offset="50.107851%" stop-color="#ffffff" /><stop offset="100.000000%" stop-color="#ffffff" /></linearGradient></defs><g transform="translate(0.015726 0.049622) scale(0.996030)"><path data-role="bell_body" d="M 12.5 3.9375 C 8.65 3.9375 5.5 7.2175 5.5 12.1375 C 5.5 14.5 6.25 14.5 1.3 21.375 L 23.7 21.375 C 18.75 14.5 19.5 14.5 19.5 12.1375 C 19.5 7.2175 16.35 3.9375 12.5 3.9375 Z" fill="#ffffff" stroke="#8f7878" stroke-width="0.875000" /><ellipse data-role="bell_rim" cx="12.5" cy="21.375" rx="11.2" ry="3.125" fill="#ffffff" stroke="#8f7878" stroke-width="0.875000" /><ellipse data-role="clapper" cx="9.809" cy="20.25" rx="1.115" ry="0.9125" fill="#ffffff" stroke="#8f7878" stroke-width="0.625000" /><path data-role="wave_0" d="M 6.65098 0.75 Q 1.24798 3.375 0.155404 9.3125" fill="none" stroke="#a5a19c" stroke-width="0.625000" /><path data-role="wave_1" d="M 9.17497 2.25 Q 0.0623736 6.5 2.43046 9.875" fill="none" stroke="#a5a19c" stroke-width="0.625000" /><path data-role="wave_2" d="M 18.349 0.5 Q 23.4395 3.375 24.9696 9" fill="none" stroke="#a5a19c" stroke-width="0.625000" /><path data-role="wave_3" d="M 15.9382 1.9375 Q 24.6481 5.6875 18.8299 8.6875" fill="none" stroke="#a5a19c" stroke-width="0.625000" /></g></svg>

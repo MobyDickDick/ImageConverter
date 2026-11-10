@@ -1,0 +1,1024 @@
+{
+  "schema": "rounded_renderer_checks_v1",
+  "date": "2026-11-07",
+  "status": "review",
+  "commands": [
+    {
+      "label": "before-primary",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        ".tmp/rounded-renderer/primary-inputs",
+        "--output",
+        ".tmp/rounded-renderer/before-primary"
+      ],
+      "exit_code": 0,
+      "seconds": 47.703,
+      "outer_guard_seconds": 480.0
+    },
+    {
+      "label": "renderer-tests",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/detailtests/test_rounded_renderer.py",
+        "tests/detailtests/test_rendering_gradient_compatibility.py",
+        "-q",
+        "--tb=short",
+        "--junitxml=.tmp/rounded-renderer/renderer-tests.xml"
+      ],
+      "exit_code": 1,
+      "seconds": 3.875,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "renderer-tests-2",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/detailtests/test_rounded_renderer.py",
+        "tests/detailtests/test_rendering_gradient_compatibility.py",
+        "-q",
+        "--tb=short",
+        "--junitxml=.tmp/rounded-renderer/renderer-tests-2.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 3.516,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "after-primary",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        ".tmp/rounded-renderer/primary-inputs",
+        "--output",
+        ".tmp/rounded-renderer/after-primary",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 51.453,
+      "outer_guard_seconds": 480.0
+    },
+    {
+      "label": "scene-tests",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_rounded_gradient_parent.py",
+        "tests/test_rectangular_gradient_parent.py",
+        "tests/test_conversion_search_scheduler.py",
+        "-q",
+        "--tb=short",
+        "--junitxml=.tmp/rounded-renderer/scene-tests.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 146.063,
+      "outer_guard_seconds": 240.0
+    },
+    {
+      "label": "final-primary",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        ".tmp/rounded-renderer/primary-inputs",
+        "--output",
+        ".tmp/rounded-renderer/final-primary",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 39.235,
+      "outer_guard_seconds": 480.0
+    },
+    {
+      "label": "final-additional",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\additional-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\final-additional",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 36.875,
+      "outer_guard_seconds": 600.0
+    },
+    {
+      "label": "final-variations",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\variations-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\final-variations",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 52.172,
+      "outer_guard_seconds": 600.0
+    },
+    {
+      "label": "audit-primary",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\primary-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\final-primary",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\primary-audit.json",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 3.813,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "audit-additional",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\additional-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\final-additional",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\additional-audit.json",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 3.141,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "audit-variations",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\variations-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\final-variations",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\variations-audit.json",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 5.125,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "historical-audit-primary",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\after",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\historical-primary-audit.json",
+        "--historical"
+      ],
+      "exit_code": 0,
+      "seconds": 2.188,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "historical-replay-primary",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\historical-replay-primary"
+      ],
+      "exit_code": 0,
+      "seconds": 39.016,
+      "outer_guard_seconds": 600.0
+    },
+    {
+      "label": "historical-replay-audit-primary",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\historical-replay-primary",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\historical-replay-primary-audit.json"
+      ],
+      "exit_code": 0,
+      "seconds": 3.125,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "final-renderer-tests",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/detailtests/test_rounded_renderer.py",
+        "tests/detailtests/test_rendering_gradient_compatibility.py",
+        "tests/detailtests/test_render_worker.py",
+        "tests/detailtests/test_render_dispatch_helpers.py",
+        "tests/detailtests/test_svg_render_timeout_defaults.py",
+        "-q",
+        "--tb=short",
+        "--junitxml=.tmp/rounded-renderer/final-renderer-tests.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 11.391,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "historical-audit-additional",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\additional-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\additional-cli",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\historical-additional-audit.json",
+        "--historical"
+      ],
+      "exit_code": 0,
+      "seconds": 2.984,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "historical-replay-additional",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\additional-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\historical-replay-additional"
+      ],
+      "exit_code": 0,
+      "seconds": 40.797,
+      "outer_guard_seconds": 600.0
+    },
+    {
+      "label": "historical-replay-audit-additional",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\additional-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\historical-replay-additional",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\historical-replay-additional-audit.json"
+      ],
+      "exit_code": 0,
+      "seconds": 3.109,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "historical-audit-variations",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\variation-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\variation-cli",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\historical-variations-audit.json",
+        "--historical"
+      ],
+      "exit_code": 0,
+      "seconds": 3.219,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "historical-replay-variations",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\variation-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\historical-replay-variations"
+      ],
+      "exit_code": 0,
+      "seconds": 56.516,
+      "outer_guard_seconds": 600.0
+    },
+    {
+      "label": "historical-replay-audit-variations",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\variation-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\historical-replay-variations",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\historical-replay-variations-audit.json"
+      ],
+      "exit_code": 0,
+      "seconds": 5.359,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "radius-countercontrol",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_rounded_gradient_parent.py",
+        "-k",
+        "good_global_pixels",
+        "-q",
+        "--junitxml=.tmp/rounded-renderer/radius-countercontrol.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 1.125,
+      "outer_guard_seconds": 60.0
+    },
+    {
+      "label": "negative-corner-probe",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_same_paint_overlap.py::test_shifted_rounding_without_two_clean_corner_observations_is_rejected",
+        "-q",
+        "--tb=short"
+      ],
+      "exit_code": 1,
+      "seconds": 1.593,
+      "outer_guard_seconds": 60.0
+    },
+    {
+      "label": "preserved-negative-tests",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_same_paint_overlap.py",
+        "-q",
+        "--tb=short",
+        "--junitxml=.tmp/rounded-renderer/preserved-negative-tests.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 10.719,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "depth-probe",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_observed_depth_order.py",
+        "-q",
+        "--tb=short",
+        "--junitxml=.tmp/rounded-renderer/depth-probe.xml"
+      ],
+      "exit_code": 1,
+      "seconds": 59.687,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "rounded-circle-probe",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_rounded_outlines.py::test_rounding_stays_bound_to_rectangles_alongside_an_outlined_circle",
+        "-q",
+        "--tb=short"
+      ],
+      "exit_code": 0,
+      "seconds": 3.625,
+      "outer_guard_seconds": 60.0
+    },
+    {
+      "label": "depth-positive-fix",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_observed_depth_order.py",
+        "-k",
+        "supports_larger",
+        "-q",
+        "--tb=short",
+        "--junitxml=.tmp/rounded-renderer/depth-positive-fix.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 42.234,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "final-depth-tests",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_observed_depth_order.py",
+        "tests/test_same_paint_overlap.py",
+        "-q",
+        "--tb=short",
+        "--junitxml=.tmp/rounded-renderer/final-depth-tests.xml"
+      ],
+      "exit_code": 1,
+      "seconds": 79.157,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "final-observation-tests",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_observed_depth_order.py",
+        "tests/test_same_paint_overlap.py",
+        "tests/detailtests/test_rounded_renderer.py",
+        "-q",
+        "--tb=short",
+        "--junitxml=.tmp/rounded-renderer/final-observation-tests.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 77.64,
+      "outer_guard_seconds": 240.0
+    },
+    {
+      "label": "release-primary",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\primary-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-primary",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 42.843,
+      "outer_guard_seconds": 600.0
+    },
+    {
+      "label": "release-audit-primary",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\primary-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-primary",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-primary-audit.json",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 2.906,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "release-additional",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\additional-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-additional",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 41.203,
+      "outer_guard_seconds": 600.0
+    },
+    {
+      "label": "release-audit-additional",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\additional-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-additional",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-additional-audit.json",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 2.844,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "release-variations",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\variations-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-variations",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 57.953,
+      "outer_guard_seconds": 600.0
+    },
+    {
+      "label": "release-audit-variations",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\variations-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-variations",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-variations-audit.json",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 5.672,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "release-historical-primary",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-historical-primary"
+      ],
+      "exit_code": 0,
+      "seconds": 42.641,
+      "outer_guard_seconds": 600.0
+    },
+    {
+      "label": "release-historical-audit-primary",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-historical-primary",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-historical-primary-audit.json"
+      ],
+      "exit_code": 0,
+      "seconds": 3.516,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "release-controls",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--controls",
+        "tests/fixtures/rounded_renderer",
+        "--report",
+        ".tmp/rounded-renderer/release-controls.json",
+        "--require-all"
+      ],
+      "exit_code": 0,
+      "seconds": 1.922,
+      "outer_guard_seconds": 60.0
+    },
+    {
+      "label": "release-historical-additional",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\additional-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-historical-additional"
+      ],
+      "exit_code": 0,
+      "seconds": 43.062,
+      "outer_guard_seconds": 600.0
+    },
+    {
+      "label": "release-historical-audit-additional",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\additional-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-historical-additional",
+        "--report",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-historical-additional-audit.json"
+      ],
+      "exit_code": 0,
+      "seconds": 2.797,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "release-historical-variations",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-parent\\variation-inputs",
+        "--output",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-historical-variations"
+      ],
+      "exit_code": 1,
+      "seconds": 4280.344,
+      "outer_guard_seconds": 600.0
+    },
+    {
+      "label": "release-historical-variations-retry",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_parent",
+        "--inputs",
+        ".tmp/rounded-parent/variation-inputs",
+        "--output",
+        ".tmp/rounded-renderer/release-historical-variations-retry"
+      ],
+      "exit_code": 0,
+      "seconds": 52.047,
+      "outer_guard_seconds": 600.0
+    },
+    {
+      "label": "release-historical-audit-variations-retry",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "tools.evaluate_rounded_renderer",
+        "--inputs",
+        ".tmp/rounded-parent/variation-inputs",
+        "--output",
+        ".tmp/rounded-renderer/release-historical-variations-retry",
+        "--report",
+        ".tmp/rounded-renderer/release-historical-variations-audit.json"
+      ],
+      "exit_code": 0,
+      "seconds": 4.782,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "validation-pre-final",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        ".tmp/rounded-renderer/validate.py"
+      ],
+      "exit_code": 1,
+      "seconds": 0.625,
+      "outer_guard_seconds": 120.0
+    },
+    {
+      "label": "validation-checked",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        ".tmp/rounded-renderer/validate.py"
+      ],
+      "exit_code": 0,
+      "seconds": 1.468,
+      "outer_guard_seconds": 120.0
+    },
+    {
+      "label": "repeated-fill-probe",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_repeated_fill_overlap.py::test_repeated_fill_instances_require_separate_observed_bounds[0-False-True-8]",
+        "-q",
+        "--tb=short"
+      ],
+      "exit_code": 0,
+      "seconds": 3.234,
+      "outer_guard_seconds": 60.0
+    },
+    {
+      "label": "release-regression",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_mixed_topology.py",
+        "tests/test_overlap_proposal_reuse.py",
+        "tests/test_overlap_groups.py",
+        "tests/test_clipped_gradient_parent.py",
+        "tests/test_thin_rim_depth.py",
+        "tests/test_owned_circle_rims.py",
+        "tests/test_same_paint_overlap.py",
+        "tests/test_island_group_search.py",
+        "tests/test_repeated_fill_overlap.py",
+        "tests/test_mixed_overlap_composition.py",
+        "tests/test_observed_depth_order.py",
+        "tests/test_overlap_outlines.py",
+        "tests/test_rounded_overlap_composition.py",
+        "tests/test_overlap_composition.py",
+        "tests/test_rounded_outlines.py",
+        "tests/test_rounded_composition.py",
+        "tests/test_component_splits.py",
+        "tests/test_structure_search_operators.py",
+        "tests/test_residual_scene_search.py",
+        "tests/test_real_composition_holdout_freeze.py",
+        "tests/test_real_scene_transfer_evidence.py",
+        "tests/test_mixed_gradient_scene_evidence.py",
+        "tests/test_residual_scene_evidence.py",
+        "tests/test_rectangular_gradient_parent.py",
+        "tests/test_gradient_scene_runtime.py",
+        "tests/test_mixed_gradient_scene_runtime.py",
+        "tests/test_mixed_overlap_outlines.py",
+        "tests/test_multilayer_overlap.py",
+        "tests/test_rounded_gradient_parent.py",
+        "tests/test_filled_symbols_runtime.py",
+        "tests/test_conversion_search_scheduler.py",
+        "-q",
+        "--tb=short",
+        "tests/detailtests/test_rounded_renderer.py",
+        "tests/detailtests/test_rendering_gradient_compatibility.py",
+        "tests/detailtests/test_svg_gradient_references.py",
+        "tests/detailtests/test_render_worker.py",
+        "tests/detailtests/test_render_dispatch_helpers.py",
+        "tests/detailtests/test_svg_render_timeout_defaults.py",
+        "--basetemp",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-regression-temp",
+        "--junitxml",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.tmp\\rounded-renderer\\release-regression.xml"
+      ],
+      "exit_code": 1,
+      "seconds": 652.172,
+      "outer_guard_seconds": 2400.0
+    },
+    {
+      "label": "core",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "tools/run_pytest_profile.py",
+        "core-green",
+        "--junitxml=.tmp/rounded-renderer/core.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 1.562,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "release-regression-rerun",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_repeated_fill_overlap.py",
+        "-q",
+        "--tb=short",
+        "--junitxml=.tmp/rounded-renderer/release-regression-rerun.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 36.781,
+      "outer_guard_seconds": 180.0
+    },
+    {
+      "label": "final-validation",
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        ".tmp/rounded-renderer/validate.py"
+      ],
+      "exit_code": 0,
+      "seconds": 1.485,
+      "outer_guard_seconds": 120.0
+    }
+  ],
+  "tests": {
+    "renderer-tests-2": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "93",
+      "time": "2.826",
+      "timestamp": "2026-11-07T10:53:49.931288+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "8143ef0a4ecc55f6de1200180748fb306e9ee81361dfe20437a0361340902bf2"
+    },
+    "final-renderer-tests": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "118",
+      "time": "10.576",
+      "timestamp": "2026-11-07T10:59:47.089108+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "d5d231d1b1f3a2db81a98f9449d3ee005d58196dec939bf4fe01c8db885aa43d"
+    },
+    "scene-tests": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "115",
+      "time": "145.416",
+      "timestamp": "2026-11-07T10:54:05.502580+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "d2444679710fdfb44b651d80087d0eb6def22ccd555663aebeb4580b0d1437c3"
+    },
+    "core": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "42",
+      "time": "0.926",
+      "timestamp": "2026-11-07T12:51:22.074239+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "21ec623b5c334d0faa2c4c56d379dba6b752b4e5f116c6472fd2b9979d55dc48"
+    },
+    "radius-countercontrol": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "1",
+      "time": "0.550",
+      "timestamp": "2026-11-07T11:02:39.982331+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "aa1fa105da4163de7bcf2dba8aa52bb19229b7e3dfc7b9fac17287250bc6cd2e"
+    },
+    "preserved-negative-tests": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "30",
+      "time": "10.091",
+      "timestamp": "2026-11-07T11:06:02.858909+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "7f5b4ab1eb3d49e184a72ac21f6ebaa666453de713b4d4046ac223c3be85141e"
+    },
+    "final-depth-tests": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "2",
+      "skipped": "0",
+      "tests": "76",
+      "time": "78.399",
+      "timestamp": "2026-11-07T11:19:06.095417+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "84f1e52a8aa5d4d14a8bdbf413893384e5d5670738362c922af4c58fc3e3f274"
+    },
+    "final-observation-tests": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "140",
+      "time": "76.801",
+      "timestamp": "2026-11-07T11:21:08.133677+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "a8b60ccbf9b24a02bd1fae36a735c3bc3299da7115dff6b45434b02b0d034902"
+    },
+    "release-regression": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "1",
+      "skipped": "0",
+      "tests": "1207",
+      "time": "651.553",
+      "timestamp": "2026-11-07T12:40:19.857605+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "fc22ae00462ac4ff06fb037b00c7f1c560bcb0c43d6f146663d2074ed34c5538"
+    },
+    "release-regression-rerun": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "32",
+      "time": "36.222",
+      "timestamp": "2026-11-07T12:51:22.020819+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "c8b955417f247840fd56750cce6d59ebbefb65c928583a6d1087f3a0810cce66"
+    }
+  },
+  "excluded_development_commands": {
+    "renderer-tests": "Before namespace serialization and objectBoundingBox projection correction.",
+    "negative-corner-probe": "Located a dynamically regenerated historical negative assumption.",
+    "depth-probe": "Located rim-paint estimation failures and changed synthetic corner observability.",
+    "final-depth-tests": "Before replacing the remaining stale negative assumptions with full oracles.",
+    "validation-pre-final": "Validation also inspected pre-existing archived links; narrowed to new links.",
+    "release-historical-variations": "Execution interruption; original case timed out, access evidence absent; fresh retry required."
+  },
+  "interrupted_development_regressions": [
+    {
+      "label": "regression",
+      "reason": "Stopped after diagnosing renderer-dependent synthetic assumptions and rim-paint estimation; superseded by release-regression."
+    },
+    {
+      "label": "final-regression",
+      "reason": "Stopped before finalizing the observation tests; superseded by release-regression."
+    }
+  ],
+  "regression_followup": {
+    "failed_nodes": [
+      [
+        "tests.test_repeated_fill_overlap",
+        "test_repeated_fill_instances_require_separate_observed_bounds[0-False-True-8]"
+      ]
+    ],
+    "every_failed_node_passed_unchanged_rerun": true,
+    "primary_exit_code": 1,
+    "module_rerun_exit_code": 0,
+    "budgets_changed": false,
+    "failed_case_primary_seconds": 5.149,
+    "isolated_case_passed": true
+  },
+  "acceptance": {
+    "new_cli_completed": 41,
+    "new_cli_accepted": 41,
+    "native_parent_corners_passed": 164,
+    "librsvg_parent_corners_passed": 164,
+    "controls_completed": 28,
+    "controls_passed": 28,
+    "control_corners_passed": 96,
+    "historical_reconverted_completed": 41,
+    "historical_reconverted_accepted": 0,
+    "regression": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "1",
+      "skipped": "0",
+      "tests": "1207",
+      "time": "651.553",
+      "timestamp": "2026-11-07T12:40:19.857605+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "fc22ae00462ac4ff06fb037b00c7f1c560bcb0c43d6f146663d2074ed34c5538"
+    },
+    "regression_module_followup": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "32",
+      "time": "36.222",
+      "timestamp": "2026-11-07T12:51:22.020819+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "c8b955417f247840fd56750cce6d59ebbefb65c928583a6d1087f3a0810cce66"
+    },
+    "core": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "42",
+      "time": "0.926",
+      "timestamp": "2026-11-07T12:51:22.074239+01:00",
+      "hostname": "MarkusLaptop",
+      "report_sha256": "21ec623b5c334d0faa2c4c56d379dba6b752b4e5f116c6472fd2b9979d55dc48"
+    }
+  }
+}

@@ -1,9 +1,9 @@
-run-meta: run_seed=330102219 pass_seed_offset=95 trace_id=333073148566
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=semantic_ok
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:text=111.366
 quality_elevated_elements=circle,text
-redraw_variation: seed=333073148566 changed_params=cx:6.000->5.858 | cy:20.500->20.620 | r:6.000->6.072 | stroke_circle:1.000->0.925 | arm_stroke:1.000->1.023
+redraw_variation: seed=0 changed_params=cx:6.000->6.041 | cy:20.500->20.385 | r:6.000->5.890 | stroke_circle:1.000->0.884 | arm_stroke:1.000->1.075
 semantic-guard: Textmodus aktiv (rf).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=106.306
@@ -19,9 +19,9 @@ Runde 2: elementweise Validierung gestartet
 circle: Fehler=102.189
 circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->102.189, 1.500->103.339, 2.000->103.339, 2.500->103.339, 3.500->112.184
 circle: Mittelpunkt-Bracketing cx 5.000->6.000, cy 20.500->20.500 (best_err=98.506)
-perf_probe: circle_center_elapsed round=2 elapsed=0.00s
+perf_probe: circle_center_elapsed round=2 elapsed=0.02s
 circle: Radius-Bracketing keine relevante Änderung (r: 6.000, best_err=98.506, full_err=32.432); Kandidaten=5.400->98.506, 5.500->98.506, 6.000->98.506, 7.000->98.506
-perf_probe: circle_radius_elapsed round=2 elapsed=0.02s
+perf_probe: circle_radius_elapsed round=2 elapsed=0.00s
 text: Fehler=111.366
 perf_probe: global_search_elapsed round=2 elapsed=0.00s
 Runde 2: Gesamtfehler=32.432; Qualität (MAE-basiert, höher=besser): 86.97% -> 87.28% | mittlere Pixelabweichung (MAE, kleiner=besser): 33.227 -> 32.432 | Mean-Delta² (kleiner=besser): 8665.328 -> 8397.536 | Qualitätsgewinn=+0.795 (+2.39%) | Wirkung=verbessert
@@ -29,7 +29,7 @@ Runde 3: elementweise Validierung gestartet
 circle: Fehler=98.503
 circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->98.503, 1.500->101.230, 2.000->101.230, 2.500->101.230, 3.500->112.785
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=6.000, cy=20.500, best_err=98.506)
-perf_probe: circle_center_elapsed round=3 elapsed=0.02s
+perf_probe: circle_center_elapsed round=3 elapsed=0.01s
 circle: Radius-Bracketing keine relevante Änderung (r: 6.000, best_err=98.506, full_err=32.432); Kandidaten=5.400->98.506, 5.500->98.506, 6.000->98.506, 7.000->98.506
 perf_probe: circle_radius_elapsed round=3 elapsed=0.00s
 text: Fehler=111.366

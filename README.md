@@ -1,5 +1,41 @@
 # ImageConverter
 
+Die [vollständige Katalogübersicht](artifacts/catalog_inventory/index.html)
+verbindet alle Bitmaps mit Beschreibungen, gespeicherten SVGs, historischen
+Abnahmen und aktueller Rasterqualität. Sie lässt sich durchsuchen und filtern.
+[Einordnung und Nachführung](docs/catalog_inventory.md).
+
+Die [Korrektur des Rundungsrenderers](docs/next_arbeitspaket_2026-11-06_rounded_renderer.md)
+richtet native Rechtecke, ihre Füllungen, Verläufe und Konturen an beobachteten
+Kreisecken aus. Vorab gesicherte unabhängige Kontrollraster bestehen 28/28
+globale und 96/96 lokale Eckprüfungen. Die echte CLI besteht 41/41 neue
+librsvg-Szenen einschließlich nativer Radius-/Objekt-/Relationsprüfung und
+164/164 Elternecken mit beiden Renderern. Die historischen MuPDF-Raster und
+ihre abweichenden Prüfergebnisse bleiben gesondert erhalten.
+
+Der [gemeinsame P0-Struktursuchweg für gerundete äußere Verlaufsrechtecke](docs/next_arbeitspaket_2026-11-06_rounded_parent.md)
+verbindet gemischte Kinder, Überdeckungsgruppen und einzelne Formen.
+Als nächstes folgt die [Komposition angeschnittener Elternrechtecke](docs/next_arbeitspaket_2026-11-07_clipped_rectangular_parent.md).
+Die unabhängige reale Gesamtabnahme bleibt offen.
+
+Der [gemeinsame P0-Struktursuchweg unterstützt jetzt auch rechteckige Verlaufsflächen](docs/next_arbeitspaket_2026-11-05_rectangular_parent.md)
+mit gemischten Kreis-/Rechteckkindern, Überdeckungsgruppen und einzelnen Formen.
+Zwölf identische synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12;
+ein Zusatzseed besteht 12/12 und die gekoppelte Variantenkohorte 17/17.
+Gerundete Elternrechtecke sind im Folgepaket ergänzt; angeschnittene
+Elternrechtecke sowie die reale Gesamtabnahme bleiben offen.
+
+Die [P0-Komposition von Überdeckungsgruppen und einzelnen Formen](docs/next_arbeitspaket_2026-11-04_mixed_topology.md)
+verbindet beide Anordnungen im gemeinsamen Verlaufsszenenweg. Zwölf identische
+synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12; ein Zusatzseed besteht
+12/12 und die gekoppelte Variantenprüfung 17/17. Die reale Gesamtabnahme bleibt offen.
+
+Die [P0-Wiederverwendung nativer Strukturvorschläge](docs/next_arbeitspaket_2026-10-31_proposal_reuse.md)
+vermeidet wiederholte Kreis-/Konturvermessung identischer beobachteter Gruppen.
+Zwölf gepaarte CLI-Ausgaben bleiben bytegleich und bestehen sämtliche Gates;
+die mediane überwachte Prozesszeit sinkt lokal von 2,60 auf 1,84 Sekunden.
+Die allgemeine Strukturkomposition und reale Familienabnahme bleiben offen.
+
 Die [Korrektur des gerahmten Helligkeitsverlaufs](artifacts/evaluation/framed_panel_brightness_v1/README.md)
 registriert das helle Band und die dunklen Endbereiche anhand des Rasterprofils.
 Bei AC0VR2_M sinkt der quadratische Pixelfehler um 98 Prozent; der vollständige
@@ -339,10 +375,16 @@ Nur messbare Verbesserungen werden übernommen; ohne Gewinn bleibt der Sample-St
 erhalten. **Entfernen** wechselt zurück zur normalen `semantic-only`-Konvertierung.
 Ergebnisse mit offenen Qualitätsprüfungen erscheinen als **Entwurf**.
 
-Die Suche läuft im Hintergrund und lässt sich abbrechen. Profile: 15–30, 60–120
+Die Suche läuft im Hintergrund und lässt sich abbrechen. Profile: 35–45, 60–120
 oder 120–240 Sekunden, zuzüglich bis zu 30 Sekunden für Start und Abschluss;
 der Sample-Modus nutzt jeweils das Basisbudget. Zusätzliche Qualitätsrunden
 entfallen (`ICC_MAX_QUALITY_PASSES=0`), die Qualitätsgrenzen bleiben unverändert.
+Bei ungenügendem Fit investiert die adaptive Suche mindestens 30 Sekunden in
+neue Kandidaten, sofern ein bearbeitbares Vektormodell vorliegt. Sehr genaue
+Ergebnisse können früher fertig sein. Die CLI-Option `--search-min-seconds`
+(Default 30, 0 deaktiviert) begrenzt diesen Mindestaufwand auf das reguläre
+Suchbudget. Details und Vorher/Nachher-Messungen stehen unter
+[Mindestaufwand und Suchneustarts](docs/search_minimum_effort_2026-11-07.md).
 Bilder, Beschreibungen, Ergebnisse und Protokolle bleiben lokal unter
 `artifacts/gui/` (von Git ausgeschlossen); letzte Aufträge überstehen Neustarts.
 Jeder Versuch hat einen eigenen Arbeitsordner, Originaldateien bleiben erhalten.

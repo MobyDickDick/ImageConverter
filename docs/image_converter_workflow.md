@@ -34,6 +34,19 @@ wird vor Abschluss **jeder** Aufgabe mindestens der vollständige Check-Block au
 Schritt 1 ausgeführt. Bei Änderungen an der Konvertierungslogik sollten
 zusätzlich die Regression-Checks aus Schritt 3 und Schritt 4 laufen.
 
+Nach Änderungen an Katalogbitmaps, Beschreibungen, gespeicherten SVGs,
+Archivdaten oder Runtime außerdem die
+[gemeinsame Katalogübersicht](catalog_inventory.md) nachführen:
+
+```powershell
+.venv/Scripts/python.exe -m tools.build_catalog_inventory
+```
+
+Der Befehl prüft gespeicherte Ausgaben und aktualisiert die vollständige Liste
+mit Beschreibungen, Abnahmenachweisen und Rasterqualität. Unveränderte,
+prüfsummengebundene Messungen werden wiederverwendet; eine neue
+Katalogkonvertierung wird dabei nicht gestartet.
+
 ## 1. Syntax- und Test-Checks
 
 ```bash

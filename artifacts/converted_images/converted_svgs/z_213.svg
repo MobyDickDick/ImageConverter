@@ -1,26 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="6" height="68" viewBox="0 0 6 68">
   <defs>
-    <clipPath id="innerRect"><rect x="0.7" y="0.5" width="4.6000000000000005" height="67.0"/></clipPath>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="0.700" y1="0.500" x2="5.300" y2="0.500">
+      <stop offset="53.794135%" stop-color="#f6e463" />
+      <stop offset="67.471285%" stop-color="#f4edc4" />
+      <stop offset="96.121316%" stop-color="#f6e463" />
+    </linearGradient>
+  <clipPath id="innerRect"><rect x="0.7" y="0.5" width="4.6000000000000005" height="67.0" /></clipPath>
   </defs>
-  <g data-output-variation="1" transform="translate(-0.0027 0.0096) rotate(0.1760 3.0000 34.0000)">
-
-  <rect x="0" y="0" width="6" height="68" fill="#ffffff" stroke="none"/>
-  <rect x="0.700" y="0.500" width="0.308" height="67.000" fill="#f3e68a" stroke="none"/>
-  <rect x="0.988" y="0.500" width="0.308" height="67.000" fill="#f3e68b" stroke="none"/>
-  <rect x="1.275" y="0.500" width="0.308" height="67.000" fill="#f3e68b" stroke="none"/>
-  <rect x="1.562" y="0.500" width="0.308" height="67.000" fill="#f3e68b" stroke="none"/>
-  <rect x="1.850" y="0.500" width="0.308" height="67.000" fill="#f3e68c" stroke="none"/>
-  <rect x="2.138" y="0.500" width="0.308" height="67.000" fill="#f4e68c" stroke="none"/>
-  <rect x="2.425" y="0.500" width="0.308" height="67.000" fill="#f4e68d" stroke="none"/>
-  <rect x="2.713" y="0.500" width="0.308" height="67.000" fill="#f4e68d" stroke="none"/>
-  <rect x="3.000" y="0.500" width="0.308" height="67.000" fill="#f4e68e" stroke="none"/>
-  <rect x="3.288" y="0.500" width="0.308" height="67.000" fill="#f4e68e" stroke="none"/>
-  <rect x="3.575" y="0.500" width="0.308" height="67.000" fill="#f4e68d" stroke="none"/>
-  <rect x="3.863" y="0.500" width="0.308" height="67.000" fill="#f4e68d" stroke="none"/>
-  <rect x="4.150" y="0.500" width="0.308" height="67.000" fill="#f4e68c" stroke="none"/>
-  <rect x="4.438" y="0.500" width="0.308" height="67.000" fill="#f3e68c" stroke="none"/>
-  <rect x="4.725" y="0.500" width="0.308" height="67.000" fill="#f3e68b" stroke="none"/>
-  <rect x="5.013" y="0.500" width="0.308" height="67.000" fill="#f3e68a" stroke="none"/>
-  <rect x="0.7" y="0.5" width="4.6000000000000005" height="67.0" fill="none" stroke="#bebebe" stroke-width="0.80"/>
-  </g>
-</svg>
+  <g transform="translate(-1.104869 -2.455963) scale(1.076623)"><rect x="0" y="0" width="6" height="68" fill="#ffffff" stroke="none" />
+  <rect x="0.700" y="0.500" width="4.600" height="67.000" fill="url(#panelGradient)" stroke="none" />
+  <rect x="0.7" y="0.5" width="4.6000000000000005" height="67.0" fill="none" stroke="#f6ebcf" stroke-width="0.433830" />
+</g></svg>

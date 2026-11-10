@@ -27,6 +27,85 @@ _SUBPROCESS_RENDER_AGG = {
 }
 
 
+def _rounded_rectangle_path(rectangle):
+    """Equivalent ellipse corners for numeric SVG lengths in the private input.
+
+    MuPDF's rect shortcut uses an inaccurate corner curve. Two 45-degree
+    cubics per quarter ellipse keep radial error below 5e-6 of the radius.
+    SVG's omitted-radius copying and half-side clamping happen before building
+    the path. Unresolved units and invalid geometry stay with the SVG reader.
+    """
+    def length(key, default='0'):
+        value = rectangle.get(key, default).strip()
+        if value.endswith('px'):
+            value = value[:-2]
+        number = float(value)
+        if not math.isfinite(number):
+            raise ValueError('nonfinite length')
+        return number
+
+    try:
+        x, y, w, h = (length(k) for k in ('x', 'y', 'width', 'height'))
+        rx = length('rx', rectangle.get('ry', '0'))
+        ry = length('ry', rectangle.get('rx', '0'))
+        if min(w, h, rx, ry) <= 0:
+            return None
+        rx, ry = min(rx, w/2), min(ry, h/2)
+        X, Y = x+w, y+h
+        if not all(math.isfinite(v) for v in (X, Y)):
+            return None
+    except (ValueError, TypeError):
+        return None
+    def point(a, b):
+        return f'{a:.12g} {b:.12g}'
+
+    commands = ['M '+point(x+rx, y)]
+    k = 4/3*math.tan(math.pi/16)
+    for cx, cy, start, edge in (
+        (X-rx, y+ry, -math.pi/2, (X-rx, y)),
+        (X-rx, Y-ry, 0., (X, Y-ry)),
+        (x+rx, Y-ry, math.pi/2, (x+rx, Y)),
+        (x+rx, y+ry, math.pi, (x, y+ry)),
+    ):
+        commands.append('L '+point(*edge))
+        for segment in range(2):
+            a, b = start+segment*math.pi/4, start+(segment+1)*math.pi/4
+            commands.append('C '+point(cx+rx*(math.cos(a)-k*math.sin(a)),
+                                        cy+ry*(math.sin(a)+k*math.cos(a)))+' '+
+                                  point(cx+rx*(math.cos(b)+k*math.sin(b)),
+                                        cy+ry*(math.sin(b)-k*math.cos(b)))+' '+
+                                  point(cx+rx*math.cos(b), cy+ry*math.sin(b)))
+    return ' '.join(commands)+' Z'
+
+
+def _normalize_rounded_rectangles_for_fitz(svg):
+    """Correct fill, contour and gradient masks without rewriting saved SVGs."""
+    if 'rect' not in svg or not ('rx' in svg or 'ry' in svg):
+        return svg
+    try:
+        root = ET.fromstring(svg)
+    except ET.ParseError:
+        return svg
+    # Unresolved selectors could depend on the element kind. Supported styles
+    # have already been materialized by inline_simple_svg_styles.
+    if any(e.tag.rsplit('}', 1)[-1] == 'style' for e in root.iter()):
+        return svg
+    ET.register_namespace('', 'http://www.w3.org/2000/svg')
+    changed = False
+    for rectangle in root.iter():
+        if rectangle.tag.rsplit('}', 1)[-1] != 'rect' or len(rectangle):
+            continue
+        data = _rounded_rectangle_path(rectangle)
+        if data is None:
+            continue
+        rectangle.tag = rectangle.tag[:-4]+'path'
+        for name in ('x', 'y', 'width', 'height', 'rx', 'ry'):
+            rectangle.attrib.pop(name, None)
+        rectangle.set('d', data)
+        changed = True
+    return ET.tostring(root, encoding='unicode') if changed else svg
+
+
 def _resolve_local_gradient_references(svg: str) -> str:
     """Materialize inherited paint attributes/stops in the private render input.
 
@@ -412,7 +491,8 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                     mask_group = ET.SubElement(mask_root, namespace+'g',
                                                transform=f'translate({tx:.12g} {ty:.12g}) scale({scale:.12g})')
                     mask_group.append(native_mask)
-                with fitz_module.open(stream=ET.tostring(mask_root),filetype='svg') as doc:
+                mask_svg = _normalize_rounded_rectangles_for_fitz(ET.tostring(mask_root, encoding='unicode'))
+                with fitz_module.open(stream=mask_svg.encode('utf-8'),filetype='svg') as doc:
                     page = doc[0]
                     w,h = int(size_w or math.ceil(page.rect.width)),int(size_h or math.ceil(page.rect.height))
                     if not 0<w<=2048 or not 0<h<=2048:
@@ -427,7 +507,14 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                     # including diagonal axes and ancestor translation/scale.
                     px = (viewport[0]+(np.arange(w)+.5-padding[0])/zoom-tx)/scale
                     py = (viewport[1]+(np.arange(h)+.5-padding[1])/zoom-ty)/scale
-                    position = ((px[None,:]-x1)*(x2-x1)+(py[:,None]-y1)*(y2-y1))/((x2-x1)**2+(y2-y1)**2)
+                    gx1, gx2, gy1, gy2 = x1, x2, y1, y2
+                    if not user:
+                        # objectBoundingBox defines the gradient in a unit
+                        # square before nonuniform scaling to the shape bounds.
+                        px, py = (px-bx)/bw, (py-by)/bh
+                        gx1, gx2 = (x1-bx)/bw, (x2-bx)/bw
+                        gy1, gy2 = (y1-by)/bh, (y2-by)/bh
+                    position = ((px[None,:]-gx1)*(gx2-gx1)+(py[:,None]-gy1)*(gy2-gy1))/((gx2-gx1)**2+(gy2-gy1)**2)
                     colors = np.stack([np.interp(position,[v[0] for v in stops],[v[1][c] for v in stops]) for c in range(3)],axis=-1)
                 else:
                     axis,low,high = (1,y1,y2) if x1==x2 else (0,x1,x2)
@@ -663,6 +750,7 @@ def render_svg_to_numpy_inprocess(
     renderer_svg = _expand_bezier_linear_gradients_for_fitz(renderer_svg,fitz_module=fitz_module,size_w=size_w,size_h=size_h)
     renderer_svg = _expand_polygon_linear_gradients_for_fitz(renderer_svg)
     renderer_svg = _expand_centered_radial_gradients_for_fitz(renderer_svg)
+    renderer_svg = _normalize_rounded_rectangles_for_fitz(renderer_svg)
     attempts = [renderer_svg]
     normalized_svg = re.sub(r">\s+<", "><", renderer_svg.strip())
     if normalized_svg and normalized_svg != renderer_svg:

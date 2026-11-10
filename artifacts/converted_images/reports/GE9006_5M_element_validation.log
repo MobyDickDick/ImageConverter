@@ -1,6 +1,5 @@
-run-meta: run_seed=330102219 pass_seed_offset=248 trace_id=333073164019
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=non_composite_description_geometry_ir
-output_variation=1
 geometry_ir_raster_registration=1
 geometry_ir_registration_initial_error=35.900000
 geometry_ir_registration_final_error=28.201667
@@ -15,6 +14,6 @@ geometry_ir_element_1=RectBorder
 non_composite_selection=semantic_description_geometry
 non_composite_candidate_error_non_composite_perception_seeded_geometry_ir=28.400000
 non_composite_candidate_error_non_composite_description_geometry_ir=28.201667
-non_composite_candidate_error_non_composite_elementwise_symbol_fit=26.113333
+non_composite_candidate_error_non_composite_elementwise_symbol_fit=26.465000
 description_driven_algorithm_available=1
 sample_svg_lookup=skipped_description_driven_algorithm

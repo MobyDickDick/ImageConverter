@@ -1,6 +1,5 @@
-run-meta: run_seed=330102219 pass_seed_offset=22 trace_id=333073141193
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=non_composite_description_geometry_ir
-output_variation=1
 geometry_ir_raster_registration=1
 geometry_ir_registration_initial_error=28.076711
 geometry_ir_registration_final_error=6.033333
@@ -20,6 +19,6 @@ geometry_ir_handle_shape_1=crossed_square
 non_composite_selection=semantic_description_geometry
 non_composite_candidate_error_non_composite_perception_seeded_geometry_ir=31.262222
 non_composite_candidate_error_non_composite_description_geometry_ir=6.033333
-non_composite_candidate_error_non_composite_elementwise_symbol_fit=32.621956
+non_composite_candidate_error_non_composite_elementwise_symbol_fit=32.423289
 description_driven_algorithm_available=1
 sample_svg_lookup=skipped_description_driven_algorithm

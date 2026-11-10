@@ -1,14 +1,11 @@
-<svg width="20" height="60" viewBox="0 0 20 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="60" viewBox="0 0 20 60" preserveAspectRatio="xMidYMid meet">
   <defs>
     <linearGradient id="triangle_stem-stem-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#fbd923"/>
-      <stop offset="50%" stop-color="#edeef1"/>
-      <stop offset="100%" stop-color="#f8dd50"/>
+      <stop offset="0.640544%" stop-color="#f9db1e" />
+      <stop offset="51.000000%" stop-color="#ebedff" />
+      <stop offset="98.000000%" stop-color="#f7dd31" />
     </linearGradient>
   </defs>
-  <g data-output-variation="1" transform="translate(-0.0437 0.0208) rotate(0.1441 10.0000 30.0000)">
-
-  <polygon id="triangle_stem_triangle" points="10.25,-0.158 0.18,20 20.32,20" fill="#fcdc19" stroke="#f5d911" stroke-width="0.275" stroke-linejoin="miter"/>
-  <rect id="triangle_stem_stem" x="5.5" y="22.25" width="9.5" height="37.75" fill="url(#triangle_stem-stem-gradient)" stroke="none"/>
-  </g>
-</svg>
+  <g transform="translate(0.000000 0.000000) scale(1.000000)"><polygon id="triangle_stem_triangle" points="10.25,-0.158 0.18,20 20.32,20" fill="#fbdc1a" stroke="#f6dc01" stroke-width="0.388169" stroke-linejoin="miter" />
+  <rect id="triangle_stem_stem" x="5" y="22" width="10" height="38" fill="url(#triangle_stem-stem-gradient)" stroke="none" />
+</g></svg>

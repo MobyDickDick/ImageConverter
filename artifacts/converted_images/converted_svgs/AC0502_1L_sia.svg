@@ -1,11 +1,9 @@
-<svg width="80" height="40" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g data-output-variation="1" transform="translate(0.1381 0.0681) rotate(0.1487 40.0000 20.0000)">
-  <path id="diagram_diagonal_connector" d="M 28.5 32 L 52.5 8" stroke="#8a8a8a" stroke-width="1.021" fill="none" stroke-linejoin="round" stroke-linecap="butt"/>
-  <path id="diagram_horizontal_connector" d="M 41.43 20 L 55.8 20" stroke="#8a8a8a" stroke-width="1.036" fill="none" stroke-linejoin="round" stroke-linecap="butt"/>
-  <rect id="diagram_red_field" x="55.894" y="10.071" width="19.948" height="20.064" fill="#df1f48" stroke="none"/>
-  <path id="diagram_cross_falling" d="M 56.068 29.926 L 75.932 10.074" stroke="#ffffff" stroke-width="0.559" fill="none" stroke-linejoin="round" stroke-linecap="butt"/>
-  <path id="diagram_cross_rising" d="M 56.068 10.074 L 75.932 29.926" stroke="#ffffff" stroke-width="0.554" fill="none" stroke-linejoin="round" stroke-linecap="butt"/>
-  <rect id="diagram_field_border" x="55.985" y="10.014" width="19.911" height="19.956" fill="none" stroke="#8a8a8a" stroke-width="0.493"/>
-  <ellipse id="diagram_circle_anchor" cx="40.913" cy="19.984" rx="3.559" ry="3.504" fill="#e6e6e6" stroke="#8a8a8a" stroke-width="0.898"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="40" viewBox="0 0 80 40" preserveAspectRatio="xMidYMid meet">
+  <g transform="translate(0.190872 0.026967) scale(0.995228)"><path id="diagram_diagonal_connector" d="M 28.5 32 L 52.5 8" stroke="#88a09a" stroke-width="1.928108" fill="none" stroke-linejoin="round" stroke-linecap="butt" />
+  <path id="diagram_horizontal_connector" d="M 41.43 20 L 55.8 20" stroke="#88a09a" stroke-width="1.928108" fill="none" stroke-linejoin="round" stroke-linecap="butt" />
+  <rect id="diagram_red_field" x="56" y="10" width="20" height="20" fill="#d9234b" stroke="none" />
+  <path id="diagram_cross_falling" d="M 56.068 29.926 L 75.932 10.074" stroke="#ffffff" stroke-width="1.000000" fill="none" stroke-linejoin="round" stroke-linecap="butt" />
+  <path id="diagram_cross_rising" d="M 56.068 10.074 L 75.932 29.926" stroke="#ffffff" stroke-width="1.000000" fill="none" stroke-linejoin="round" stroke-linecap="butt" />
+  <rect id="diagram_field_border" x="56" y="10" width="20" height="20" fill="none" stroke="#88a09a" stroke-width="1.000000" />
+  <ellipse id="diagram_circle_anchor" cx="41" cy="20" rx="3.5" ry="3.5" fill="#c1bdbd" stroke="#88a09a" stroke-width="1.794169" />
+</g></svg>

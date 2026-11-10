@@ -1,17 +1,17 @@
-run-meta: run_seed=272455108 pass_seed_offset=16 trace_id=274907205588
+run-meta: run_seed=0 pass_seed_offset=0 trace_id=0
 status=semantic_ok
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:arm=1324.100
 quality_elevated_elements=arm,circle
-redraw_variation: seed=274907205588 changed_params=cx:12.000->12.063 | cy:12.000->11.769 | r:12.000->12.055 | stroke_circle:1.000->0.967 | arm_stroke:1.000->1.080
+redraw_variation: seed=0 changed_params=cx:12.000->12.205 | cy:12.000->11.885 | r:12.000->11.816 | stroke_circle:1.000->0.884 | arm_stroke:1.000->1.075
 semantic-guard: Textmodus aktiv (m).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=158.161
 circle: Breiten-Bracketing stroke_circle 1.125->1.000; Kandidaten=1.000->158.161, 2.000->247.183, 3.000->325.125, 4.500->401.387, 5.500->519.106
 circle: Mittelpunkt-Bracketing cx 12.125->12.000, cy 12.500->12.000 (best_err=153.305)
-perf_probe: circle_center_elapsed round=1 elapsed=0.02s
+perf_probe: circle_center_elapsed round=1 elapsed=0.05s
 circle: Radius-Bracketing r 11.000->12.000 (best_err=145.399, full_err=23.526); Kandidaten=9.900->184.585, 11.000->153.305, 11.500->145.399, 12.000->145.399
-perf_probe: circle_radius_elapsed round=1 elapsed=0.00s
+perf_probe: circle_radius_elapsed round=1 elapsed=0.02s
 arm: Fehler=1324.100
 arm: Breiten-Bracketing arm_stroke 1.125->1.000; Kandidaten=1.000->1324.100, 2.000->2067.773, 3.000->2751.056, 4.000->3136.573, 5.000->3369.507
 arm: Längen-Bracketing abgebrochen (arm_len) wegen nicht-finiten Fehlern 38.000->inf, 47.000->1318.000, 50.500->1329.322, 56.500->1329.322, 65.500->1329.322, 75.000->1329.322
@@ -22,9 +22,9 @@ Runde 2: elementweise Validierung gestartet
 circle: Fehler=139.608
 circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->139.608, 2.000->213.522, 3.000->277.468, 4.500->336.618, 5.500->428.518
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=12.000, cy=12.000, best_err=139.608)
-perf_probe: circle_center_elapsed round=2 elapsed=0.02s
+perf_probe: circle_center_elapsed round=2 elapsed=0.05s
 circle: Radius-Bracketing keine relevante Änderung (r: 12.000, best_err=139.608, full_err=23.527); Kandidaten=10.800->149.571, 12.000->139.608
-perf_probe: circle_radius_elapsed round=2 elapsed=0.00s
+perf_probe: circle_radius_elapsed round=2 elapsed=0.28s
 arm: Fehler=1324.100
 arm: Breiten-Bracketing keine relevante Änderung (arm_stroke: 1.000); Kandidaten=1.000->1324.100, 2.000->2067.773, 3.000->2751.056, 4.000->3136.573, 5.000->3369.507
 arm: Längen-Bracketing abgebrochen (arm_len) wegen nicht-finiten Fehlern 38.000->inf, 47.000->1318.000, 50.500->1329.322, 56.500->1329.322, 65.500->1329.322, 75.000->1329.322
