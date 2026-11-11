@@ -1,8 +1,13 @@
-<svg width="30" height="110" viewBox="0 0 30 110" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(15.000 55.000) rotate(180) scale(1.0000) translate(-15.000 -55.000)">
-<line x1="4.5000" y1="0.0000" x2="4.5000" y2="101.0000" stroke="#2f6bff" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="4.5000,107.0000 0.5000,102.0000 8.5000,102.0000" fill="#2f6bff"/>
-  <line x1="24.5000" y1="0.0000" x2="24.5000" y2="101.0000" stroke="#e53935" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="24.5000,102.0000 20.5000,107.0000 28.5000,107.0000" fill="#e53935"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="110" viewBox="0 0 30 110">
+  <defs>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="1.660" y1="4.860" x2="28.340" y2="4.860">
+      <stop offset="2.000000%" stop-color="#fefeff" />
+      <stop offset="65.872195%" stop-color="#ffffff" />
+      <stop offset="100.000000%" stop-color="#fefeff" />
+    </linearGradient>
+  <clipPath id="innerRect"><rect x="1.66" y="4.86" width="26.68" height="100.28" /></clipPath>
+  </defs>
+  <g transform="translate(-2.949395 5.230741) scale(0.988293)"><rect x="0" y="0" width="30" height="110" fill="#ffffff" stroke="none" />
+  <rect x="1.660" y="4.860" width="26.680" height="100.280" fill="url(#panelGradient)" stroke="none" />
+  <rect x="1.66" y="4.86" width="26.68" height="100.28" fill="none" stroke="#8ba8c6" stroke-width="1.550000" />
+</g></svg>

@@ -1,16 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 51 51">
-  <defs>
-    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="0.500" y1="2.500" x2="50.500" y2="2.500">
-      <stop offset="0%" stop-color="#ccdce8"/>
-      <stop offset="50%" stop-color="#e68626"/>
-      <stop offset="100%" stop-color="#ccdce8"/>
-    </linearGradient>
-  <clipPath id="innerRect"><rect x="0.5" y="2.5" width="50.0" height="46.0"/></clipPath>
-  </defs>
-  <g data-output-variation="1" transform="translate(-0.0072 0.1117) rotate(0.0872 25.5000 25.5000)">
-
-  <rect x="0" y="0" width="51" height="51" fill="#ffffff" stroke="none"/>
-  <rect x="0.500" y="2.500" width="50.000" height="46.000" fill="url(#panelGradient)" stroke="none"/>
-  <rect x="0.5" y="2.5" width="50.0" height="46.0" fill="none" stroke="#bebebe" stroke-width="0.80"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 51 51"><defs><linearGradient id="disk_color" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bbe2ff"/><stop offset="1" stop-color="#819fc3"/></linearGradient></defs><rect width="51" height="51" fill="#e4e6e8"/><circle cx="25.4119" cy="25.8904" r="22.5494" fill="url(#disk_color)" stroke="#aad7f5" stroke-width="0.4138"/><polygon points="12.0000,36.3494 12.7380,25.7580 15.6697,25.5952 14.0503,19.5835 19.7500,19.5000 18.2172,14.9344 24.9610,5.6250 26.9456,13.8072 32.2216,15.6483 37.4815,24.0113 40.2500,34.8750" fill="#e3300f"/><path d="M 12.0000 36.1994 L 12.0000 36.3494 C 12.0000 41.3343 17.6522 45.3750 24.6250 45.3750 C 33.2547 45.3750 40.2500 40.6741 40.2500 34.8750 L 40.2500 34.7250 Z" fill="#e3300f"/><polygon points="16.8750,35.8750 17.3750,30.0000 20.0944,35.8278 21.0621,35.5942 21.1000,28.6988 23.9247,32.3523 27.1250,23.3750 27.7139,31.0773 28.8885,31.8885 31.3782,29.0661 31.6250,36.0000" fill="#ff9e28"/><path d="M 16.8750 35.7250 L 16.8750 35.8750 C 16.8750 38.9126 19.8860 41.3750 23.6006 41.3750 C 28.0325 41.3750 31.6250 38.9686 31.6250 36.0000 L 31.6250 35.8500 Z" fill="#ff9e28"/></svg>

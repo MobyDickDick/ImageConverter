@@ -1,6 +1,13 @@
-<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g data-output-variation="1" transform="translate(0.0719 0.0056) rotate(-0.0415 20.0000 20.0000)">
-  <ellipse id="perception_circle_background" cx="19.055" cy="19.047" rx="17.981" ry="18.012" fill="#E0204A" stroke="#DD214B" stroke-width="1.393"/>
-  <text id="perception_text_glyph" x="19.938" y="12.225" fill="#E0274F" font-family="Arial, Helvetica, sans-serif" font-size="32.4" font-weight="600" text-anchor="middle" dominant-baseline="middle">-</text>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <defs>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="2.060" y1="2.060" x2="37.940" y2="2.060">
+      <stop offset="5.358370%" stop-color="#da4566" />
+      <stop offset="51.550896%" stop-color="#e31e47" />
+      <stop offset="97.408109%" stop-color="#da4566" />
+    </linearGradient>
+  <clipPath id="innerRect"><rect x="2.06" y="2.06" width="35.88" height="35.88" /></clipPath>
+  </defs>
+  <g transform="translate(-0.370506 -0.383781) scale(1.023734)"><rect x="0" y="0" width="40" height="40" fill="#ffffff" stroke="none" />
+  <rect x="2.060" y="2.060" width="35.880" height="35.880" fill="url(#panelGradient)" stroke="none" />
+  <rect x="2.06" y="2.06" width="35.88" height="35.88" fill="none" stroke="#c6adad" stroke-width="1.550000" />
+</g></svg>

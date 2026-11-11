@@ -1,18 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="60" height="30" viewBox="0 0 60 30">
-  <defs>
-    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="0.500" y1="1.080" x2="0.500" y2="28.920">
-      <stop offset="0%" stop-color="#4cad59"/>
-      <stop offset="40%" stop-color="#4dcd5c"/>
-      <stop offset="100%" stop-color="#4cad59"/>
-    </linearGradient>
-  <clipPath id="innerRect"><rect x="0.5" y="1.08" width="59.0" height="27.84"/></clipPath>
-  </defs>
-  <g data-output-variation="1" transform="translate(-0.1095 -0.0210) rotate(-0.1463 30.0000 15.0000)">
-
-  <rect x="0" y="0" width="60" height="30" fill="#ffffff" stroke="none"/>
-  <rect x="0.500" y="1.080" width="59.000" height="27.840" fill="url(#panelGradient)" stroke="none"/>
-  <rect x="0.5" y="1.08" width="59.0" height="27.84" fill="none" stroke="#5a5a5a" stroke-width="0.80"/>
-  <line x1="15.0494" y1="7.94534" x2="44.9506" y2="22.0547" stroke="#dcdcdc" stroke-width="2.20" clip-path="url(#innerRect)"/>
-  <circle cx="30.00" cy="15.00" r="3.20" fill="#505050"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="30" viewBox="0 0 60 30"><defs><linearGradient id="panelShade"><stop offset="6.610918%" stop-color="#49b458" /><stop offset="22.420197%" stop-color="#56bc63" /><stop offset="75.480135%" stop-color="#56bc63" /><stop offset="77.733053%" stop-color="#4cba5a" /></linearGradient></defs><g transform="translate(-0.115212 -0.057606) scale(1.003840)"><rect width="60" height="30" fill="white" /><rect x="0.0000" y="0.6250" width="60.0000" height="28.8750" fill="url(#panelShade)" stroke="#afa6b2" stroke-width="1.308622" /><line x1="27.2334" y1="1.7500" x2="32.3077" y2="28.2500" stroke="#4cba5a" stroke-width="6.358069" /><circle cx="29.9904" cy="15.0096" r="4.5188" fill="#4b4b4b" /></g></svg>
