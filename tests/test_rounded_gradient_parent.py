@@ -39,7 +39,7 @@ def test_parent_and_child_rounding_are_separately_consumed(index):
 
 @pytest.mark.parametrize('damage', ['sharp', 'ellipse', 'unequal_corners', 'missing', 'extra',
     'texture', 'wrong_axis', 'wrong_groups', 'wrong_singletons', 'dark_rim', 'missing_rim',
-    'clipped', 'unclaimed_rounding'])
+    'unobservable_clipping', 'unclaimed_rounding'])
 def test_corner_object_relation_and_raster_damage_remains_rejected(damage):
     case = deepcopy(make_cases()[1])
     root = ET.fromstring(case['svg'])
@@ -63,15 +63,30 @@ def test_corner_object_relation_and_raster_damage_remains_rejected(damage):
         case['description'] = case['description'].replace('2 Überdeckungsgruppen', '1 Überdeckungsgruppe')
     elif damage == 'wrong_singletons':
         case['description'] = case['description'].replace('1 einzelne Form', '2 einzelne Formen')
-    elif damage == 'clipped':
-        parent.set('x', '-8')
-        parent.set('width', '344')
+    elif damage == 'unobservable_clipping':
+        # An entirely hidden side and its corner arcs cannot constrain a
+        # native bound, even though shallower observable crops now compose.
+        parent.set('x', '-100')
+        parent.set('width', '436')
     elif damage == 'unclaimed_rounding':
         case['description'] = case['description'].replace(' Das äussere Rechteck hat gerundete Ecken.', '')
     else:
         parent.set('stroke', '#303030' if damage == 'dark_rim' else 'none')
     case['svg'] = ET.tostring(root, encoding='unicode')
     assert fit(case)[1] is None
+
+
+def test_observed_clipped_parent_now_uses_shared_native_gates():
+    case = make_cases()[1]
+    root = ET.fromstring(case['svg'])
+    root[2].set('x', '-8')
+    root[2].set('width', '344')
+    sw = case['expected_objects'][0]['stroke_width']
+    case['expected_objects'][0]['bbox'][0] = -8-sw/2
+    case['expected_objects'][0]['bbox'][2] = 344+sw
+    case['svg'] = ET.tostring(root, encoding='unicode')
+    image, result = fit(case)
+    assert_accepted(case, image, result)
 
 
 @pytest.mark.parametrize('claim', [' Mit Text.', ' Das äussere Rechteck hat gerundete Ecken.',

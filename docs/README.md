@@ -1,10 +1,13 @@
 # Dokumentationsindex
 
+- [Warum der Kataloglauf trotz vieler Versuche wenig befriedigende Ergebnisse liefert: gemessene Suchbreite, fehlendes Lernen und Reportingfehler (2026-11-11)](catalog_search_audit_2026-11-11.md)
+
 - [Mindestens 30 Sekunden für ungenügende Fits: Suchneustarts, native Nachoptimierung und Messungen (2026-11-07)](search_minimum_effort_2026-11-07.md)
 
 - [P0: gerundete Verlaufsrechtecke mit gemischten Kindern und gemessenen Elternradien (2026-11-06)](next_arbeitspaket_2026-11-06_rounded_parent.md)
 - [P0-Abschluss: native Rundungen mit analytischer und unabhängiger librsvg-Abnahme; CI-Absicherung vom 10.11.2026](next_arbeitspaket_2026-11-06_rounded_renderer.md)
-- [Nächstes P0-Paket: angeschnittene äußere Verlaufsrechtecke aus sichtbaren Seiten und Ecken (2026-11-07)](next_arbeitspaket_2026-11-07_clipped_rectangular_parent.md)
+- [P0: angeschnittene äußere Verlaufsrechtecke aus sichtbaren Seiten und Ecken; Umsetzung und separate Renderergrenze (2026-11-11)](next_arbeitspaket_2026-11-07_clipped_rectangular_parent.md)
+- [Nächstes P0-Paket: unabhängige Seitenabnahme dünner Rechteckkonturen (2026-11-11)](next_arbeitspaket_2026-11-11_clipped_side_renderer.md)
 
 - [P0: rechteckige Verlaufsflächen mit gemischten Kindern im gemeinsamen Struktursuchweg (2026-11-05)](next_arbeitspaket_2026-11-05_rectangular_parent.md)
 

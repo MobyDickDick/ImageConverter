@@ -1,0 +1,3608 @@
+{
+  "schema": "catalog_search_run_audit_v1",
+  "date": "2026-11-11",
+  "source_run": {
+    "run_id": "catalog-20261110T201918Z-3a5bfe5a",
+    "run_seed": 913823148,
+    "started_utc": "2026-11-10T20:19:17.431733+00:00",
+    "last_completed_utc": "2026-11-10T20:40:58.260980+00:00",
+    "execution_mode": "semantic-only",
+    "selected_input_count": 1787,
+    "variant_started": 41,
+    "variant_completed": 38,
+    "failures": [
+      {
+        "filename": "SE0113.jpg",
+        "status": "semantic_mismatch",
+        "reason": "semantic_mismatch",
+        "details": "Im Bild ist senkrechter Strich erkennbar, aber nicht in der Beschreibung enthalten",
+        "log_file": "SE0113_element_validation.log",
+        "reachability_reason": "semantic_conflict",
+        "report_code": "NR004",
+        "exit_code": "23"
+      },
+      {
+        "filename": "GE9901_W.jpg",
+        "status": "batch_error",
+        "reason": "TimeoutError",
+        "details": "{\"elapsed_seconds\": 60.078, \"limit_seconds\": 60.0, \"minimum_seconds\": 30.0, \"max_seconds\": 120.0, \"time_extensions\": 0, \"candidate_evaluations\": 0, \"stop_reason\": \"time_limit\", \"isolated\": true, \"timing_trace\": \"GE9901_W_timing.jsonl\", \"external_max_seconds\": null, \"recovered_checkpoint\": false, \"retained_output\": false}",
+        "log_file": "GE9901_W_deadline.json",
+        "reachability_reason": "budget_exceeded",
+        "report_code": "NR002",
+        "exit_code": "21"
+      }
+    ],
+    "phase": "initial_pass",
+    "completed_batch": false,
+    "earlier_overwritten_run_available": false,
+    "sha256": {
+      "conversion_result_map.json": "ce7ff9da5c9251557715409b44865519f22597442fdf8a8d00a8086d71db91a0",
+      "conversion_debug_trace.jsonl": "a6b558d9d3d8633b6bb64af8e22d5b13559cd6b824827bcd25dd95e6e0ca2179",
+      "conversion_checkpoint.json": "fa74abf7dbdb19328c5b7790270651616d71ef07ccadbf94cb1cf13e8878d119",
+      "conversion_bestlist.csv": "9ec38a6d5cf710e3c458946f4c68e3b655f1db6eee6bc1ae137e5d86caf00640",
+      "batch_failure_summary.csv": "c01f27383ba9d306f6a3d760f0ea17debe5e83180f63f295b7810d81193a5e47"
+    }
+  },
+  "totals": {
+    "outputs": 38,
+    "model_confirmed": 10,
+    "independently_pixel_passed": 13,
+    "vector_continuations": 28,
+    "confirmed_vector_continuations": 0,
+    "runtime_seconds": 1218.1240000000107,
+    "median_runtime_seconds": 32.96099999999569,
+    "at_least_30_seconds": 36,
+    "reported_render_evaluations": 60292,
+    "bots": {
+      "generated": 78583,
+      "proposals": 77895,
+      "valid": 41673,
+      "rejected": 36222,
+      "cache_hits": 688,
+      "improvements": 2011,
+      "active_seconds": 371.76406679989304
+    },
+    "search_events": {
+      "registration_started": 43,
+      "registering": 922,
+      "strategy_started": 11943,
+      "strategy_finished": 11943,
+      "bot_message": 2345,
+      "bot_deactivated": 3334,
+      "search_restarted": 544,
+      "search_finished": 37,
+      "registration_finished": 43,
+      "image_search_finished": 38,
+      "proposal_budget_extended": 5,
+      "candidate_satisfactory": 10
+    },
+    "registration_sources": {
+      "native_svg_continuation": 28,
+      "raster_spiral_disk_registration": 1,
+      "raster_solid_arrow_v1": 1,
+      "raster_arc_shaft_v1": 6,
+      "raster_gradient_junction_v1": 6,
+      "raster_flame_disk_registration": 1
+    },
+    "mixed_scene_contracts_accepted": 0,
+    "neural_enabled_images": 0,
+    "blank_bestlist_statuses": 38,
+    "median_within_run_continuation_mse_reduction": 0.28871622507771366
+  },
+  "cases": [
+    {
+      "name": "AC0030.jpg",
+      "seconds": 32.35899999999674,
+      "satisfactory": false,
+      "eval": 1892,
+      "vc": {
+        "error": 0.014801002107560635,
+        "evaluations": 1892,
+        "improved": true,
+        "initial_error": 0.023190336301922798,
+        "search_control": {
+          "candidate_evaluations": 1892,
+          "elapsed_seconds": 32.156,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 14,
+      "blackboards": 1
+    },
+    {
+      "name": "AC0030_M.jpg",
+      "seconds": 32.594000000011874,
+      "satisfactory": false,
+      "eval": 1506,
+      "vc": {
+        "error": 0.016749359667301178,
+        "evaluations": 1506,
+        "improved": true,
+        "initial_error": 0.02448955923318863,
+        "search_control": {
+          "candidate_evaluations": 1506,
+          "elapsed_seconds": 32.407,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 16,
+      "blackboards": 1
+    },
+    {
+      "name": "AC0070_S.jpg",
+      "seconds": 33.84299999999348,
+      "satisfactory": false,
+      "eval": 1538,
+      "vc": {
+        "error": 0.013029325753450394,
+        "evaluations": 1538,
+        "improved": true,
+        "initial_error": 0.03656354174017906,
+        "search_control": {
+          "candidate_evaluations": 1538,
+          "elapsed_seconds": 33.359,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 13,
+      "blackboards": 1
+    },
+    {
+      "name": "AC0120_L.jpg",
+      "seconds": 31.76600000000326,
+      "satisfactory": false,
+      "eval": 918,
+      "vc": {
+        "error": 0.021855028346180916,
+        "evaluations": 918,
+        "improved": true,
+        "initial_error": 0.030193176120519638,
+        "search_control": {
+          "candidate_evaluations": 918,
+          "elapsed_seconds": 31.546,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "stagnation",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 5,
+      "blackboards": 1
+    },
+    {
+      "name": "AC0130.jpg",
+      "seconds": 32.296999999991385,
+      "satisfactory": false,
+      "eval": 1564,
+      "vc": {
+        "error": 0.016155486926436424,
+        "evaluations": 1564,
+        "improved": true,
+        "initial_error": 0.02514427900314331,
+        "search_control": {
+          "candidate_evaluations": 1564,
+          "elapsed_seconds": 32.015,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 8,
+      "blackboards": 1
+    },
+    {
+      "name": "AC0251_2.jpg",
+      "seconds": 33.0,
+      "satisfactory": false,
+      "eval": 1315,
+      "vc": {
+        "error": 0.0015884176827967167,
+        "evaluations": 1315,
+        "improved": true,
+        "initial_error": 0.0016463850624859333,
+        "search_control": {
+          "candidate_evaluations": 1315,
+          "elapsed_seconds": 32.749,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 12,
+      "blackboards": 1
+    },
+    {
+      "name": "AC0421_2_L.jpg",
+      "seconds": 34.530999999988126,
+      "satisfactory": true,
+      "eval": 1923,
+      "vc": {},
+      "search_sources": [
+        "raster_spiral_disk_registration"
+      ],
+      "restarts": 17,
+      "blackboards": 1
+    },
+    {
+      "name": "AC0422_M.jpg",
+      "seconds": 33.078000000008615,
+      "satisfactory": false,
+      "eval": 1633,
+      "vc": {
+        "error": 0.011966975405812263,
+        "evaluations": 1633,
+        "improved": true,
+        "initial_error": 0.014662993140518665,
+        "search_control": {
+          "candidate_evaluations": 1633,
+          "elapsed_seconds": 32.703,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 15,
+      "blackboards": 1
+    },
+    {
+      "name": "AC0531_1_S.jpg",
+      "seconds": 32.5,
+      "satisfactory": false,
+      "eval": 1383,
+      "vc": {
+        "error": 0.010608728043735027,
+        "evaluations": 1383,
+        "improved": true,
+        "initial_error": 0.08919373154640198,
+        "search_control": {
+          "candidate_evaluations": 1383,
+          "elapsed_seconds": 32.266,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 6,
+      "blackboards": 1
+    },
+    {
+      "name": "AC0535_1S_sia.jpg",
+      "seconds": 31.73399999999674,
+      "satisfactory": false,
+      "eval": 1385,
+      "vc": {
+        "error": 0.028861764818429947,
+        "evaluations": 1385,
+        "improved": true,
+        "initial_error": 0.043465763330459595,
+        "search_control": {
+          "candidate_evaluations": 1385,
+          "elapsed_seconds": 31.547,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 8,
+      "blackboards": 1
+    },
+    {
+      "name": "AC0552_1_M.jpg",
+      "seconds": 32.28200000000652,
+      "satisfactory": false,
+      "eval": 1492,
+      "vc": {
+        "error": 0.02062300220131874,
+        "evaluations": 1492,
+        "improved": true,
+        "initial_error": 0.02632497064769268,
+        "search_control": {
+          "candidate_evaluations": 1492,
+          "elapsed_seconds": 32.095,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 14,
+      "blackboards": 1
+    },
+    {
+      "name": "AC0722_1_S.jpg",
+      "seconds": 34.34299999999348,
+      "satisfactory": false,
+      "eval": 1914,
+      "vc": {
+        "error": 0.003003097837790847,
+        "evaluations": 1914,
+        "improved": true,
+        "initial_error": 0.005007906351238489,
+        "search_control": {
+          "candidate_evaluations": 1914,
+          "elapsed_seconds": 34.046,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 14,
+      "blackboards": 1
+    },
+    {
+      "name": "AC0922_L.jpg",
+      "seconds": 32.48399999999674,
+      "satisfactory": false,
+      "eval": 1433,
+      "vc": {
+        "error": 0.028800761327147484,
+        "evaluations": 1433,
+        "improved": true,
+        "initial_error": 0.04464615881443024,
+        "search_control": {
+          "candidate_evaluations": 1433,
+          "elapsed_seconds": 32.281,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 10,
+      "blackboards": 1
+    },
+    {
+      "name": "GE0012.jpg",
+      "seconds": 32.26500000001397,
+      "satisfactory": false,
+      "eval": 1780,
+      "vc": {
+        "error": 0.006848152261227369,
+        "evaluations": 1780,
+        "improved": true,
+        "initial_error": 0.00980089046061039,
+        "search_control": {
+          "candidate_evaluations": 1780,
+          "elapsed_seconds": 32.062,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 15,
+      "blackboards": 1
+    },
+    {
+      "name": "GE0015_S.jpg",
+      "seconds": 32.703000000008615,
+      "satisfactory": false,
+      "eval": 2047,
+      "vc": {
+        "error": 0.026083894073963165,
+        "evaluations": 2047,
+        "improved": true,
+        "initial_error": 0.029552439227700233,
+        "search_control": {
+          "candidate_evaluations": 2047,
+          "elapsed_seconds": 32.5,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 21,
+      "blackboards": 1
+    },
+    {
+      "name": "GE0022_2_L.jpg",
+      "seconds": 32.98499999998603,
+      "satisfactory": false,
+      "eval": 2148,
+      "vc": {
+        "error": 0.01694873720407486,
+        "evaluations": 2148,
+        "improved": true,
+        "initial_error": 0.028708383440971375,
+        "search_control": {
+          "candidate_evaluations": 2148,
+          "elapsed_seconds": 32.688,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 18,
+      "blackboards": 1
+    },
+    {
+      "name": "GE0032.jpg",
+      "seconds": 32.905999999988126,
+      "satisfactory": true,
+      "eval": 2675,
+      "vc": {},
+      "search_sources": [
+        "raster_solid_arrow_v1"
+      ],
+      "restarts": 23,
+      "blackboards": 1
+    },
+    {
+      "name": "GE0043_L.jpg",
+      "seconds": 32.48499999998603,
+      "satisfactory": false,
+      "eval": 1602,
+      "vc": {
+        "error": 0.008828094229102135,
+        "evaluations": 1602,
+        "improved": true,
+        "initial_error": 0.013448960147798061,
+        "search_control": {
+          "candidate_evaluations": 1602,
+          "elapsed_seconds": 32.281,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 14,
+      "blackboards": 1
+    },
+    {
+      "name": "GE0202_S.jpg",
+      "seconds": 33.030999999988126,
+      "satisfactory": false,
+      "eval": 1964,
+      "vc": {
+        "error": 0.007621312979608774,
+        "evaluations": 1964,
+        "improved": true,
+        "initial_error": 0.011201509274542332,
+        "search_control": {
+          "candidate_evaluations": 1964,
+          "elapsed_seconds": 32.844,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 19,
+      "blackboards": 1
+    },
+    {
+      "name": "GE0305_M.jpg",
+      "seconds": 33.203000000008615,
+      "satisfactory": false,
+      "eval": 2227,
+      "vc": {
+        "error": 0.015138035640120506,
+        "evaluations": 2227,
+        "improved": true,
+        "initial_error": 0.01669885404407978,
+        "search_control": {
+          "candidate_evaluations": 2227,
+          "elapsed_seconds": 32.953,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 21,
+      "blackboards": 1
+    },
+    {
+      "name": "GE1100_S.jpg",
+      "seconds": 32.812000000005355,
+      "satisfactory": false,
+      "eval": 1672,
+      "vc": {
+        "error": 0.006508029997348785,
+        "evaluations": 1672,
+        "improved": true,
+        "initial_error": 0.00836933497339487,
+        "search_control": {
+          "candidate_evaluations": 1672,
+          "elapsed_seconds": 32.656,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 23,
+      "blackboards": 1
+    },
+    {
+      "name": "GE9001_1S.jpg",
+      "seconds": 22.40700000000652,
+      "satisfactory": false,
+      "eval": 1062,
+      "vc": {
+        "error": 0.00046506899525411427,
+        "evaluations": 1062,
+        "improved": true,
+        "initial_error": 0.015162630006670952,
+        "search_control": {
+          "candidate_evaluations": 1062,
+          "elapsed_seconds": 22.203,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "satisfactory",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 2,
+      "blackboards": 1
+    },
+    {
+      "name": "GE9021_4S.jpg",
+      "seconds": 1.5929999999934807,
+      "satisfactory": true,
+      "eval": 138,
+      "vc": {},
+      "search_sources": [
+        "raster_arc_shaft_v1"
+      ],
+      "restarts": 0,
+      "blackboards": 0
+    },
+    {
+      "name": "GE9022_2M.jpg",
+      "seconds": 36.594000000011874,
+      "satisfactory": true,
+      "eval": 1495,
+      "vc": {},
+      "search_sources": [
+        "raster_arc_shaft_v1"
+      ],
+      "restarts": 13,
+      "blackboards": 1
+    },
+    {
+      "name": "GE9022_7M.jpg",
+      "seconds": 35.812999999994645,
+      "satisfactory": true,
+      "eval": 1708,
+      "vc": {},
+      "search_sources": [
+        "raster_arc_shaft_v1"
+      ],
+      "restarts": 17,
+      "blackboards": 1
+    },
+    {
+      "name": "GE9023_6S.jpg",
+      "seconds": 33.26500000001397,
+      "satisfactory": true,
+      "eval": 1520,
+      "vc": {},
+      "search_sources": [
+        "raster_arc_shaft_v1"
+      ],
+      "restarts": 21,
+      "blackboards": 1
+    },
+    {
+      "name": "GE9032_6S.jpg",
+      "seconds": 33.219000000011874,
+      "satisfactory": true,
+      "eval": 1255,
+      "vc": {},
+      "search_sources": [
+        "raster_gradient_junction_v1"
+      ],
+      "restarts": 12,
+      "blackboards": 1
+    },
+    {
+      "name": "GE9033_6M.jpg",
+      "seconds": 34.328000000008615,
+      "satisfactory": true,
+      "eval": 1133,
+      "vc": {},
+      "search_sources": [
+        "raster_gradient_junction_v1"
+      ],
+      "restarts": 10,
+      "blackboards": 1
+    },
+    {
+      "name": "GE9034_3M.jpg",
+      "seconds": 34.469000000011874,
+      "satisfactory": true,
+      "eval": 1070,
+      "vc": {},
+      "search_sources": [
+        "raster_gradient_junction_v1"
+      ],
+      "restarts": 10,
+      "blackboards": 1
+    },
+    {
+      "name": "GE9041_4S.jpg",
+      "seconds": 33.03200000000652,
+      "satisfactory": false,
+      "eval": 1435,
+      "vc": {
+        "error": 0.004389273468405008,
+        "evaluations": 1435,
+        "improved": true,
+        "initial_error": 0.004412815440446138,
+        "search_control": {
+          "candidate_evaluations": 1435,
+          "elapsed_seconds": 32.859,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 21,
+      "blackboards": 1
+    },
+    {
+      "name": "GE9043_7M.jpg",
+      "seconds": 32.937000000005355,
+      "satisfactory": false,
+      "eval": 1770,
+      "vc": {
+        "error": 0.01149771548807621,
+        "evaluations": 1770,
+        "improved": true,
+        "initial_error": 0.015351195819675922,
+        "search_control": {
+          "candidate_evaluations": 1770,
+          "elapsed_seconds": 32.75,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 23,
+      "blackboards": 1
+    },
+    {
+      "name": "GE9044_1S.jpg",
+      "seconds": 33.26500000001397,
+      "satisfactory": false,
+      "eval": 1781,
+      "vc": {
+        "error": 0.010665781795978546,
+        "evaluations": 1781,
+        "improved": true,
+        "initial_error": 0.010895924642682076,
+        "search_control": {
+          "candidate_evaluations": 1781,
+          "elapsed_seconds": 33.047,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 22,
+      "blackboards": 1
+    },
+    {
+      "name": "GE9044_7S.jpg",
+      "seconds": 32.562999999994645,
+      "satisfactory": false,
+      "eval": 1682,
+      "vc": {
+        "error": 0.00578820938244462,
+        "evaluations": 1682,
+        "improved": true,
+        "initial_error": 0.01058221235871315,
+        "search_control": {
+          "candidate_evaluations": 1682,
+          "elapsed_seconds": 32.375,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 20,
+      "blackboards": 1
+    },
+    {
+      "name": "L60x_T.jpg",
+      "seconds": 32.389999999984866,
+      "satisfactory": false,
+      "eval": 1556,
+      "vc": {
+        "error": 0.010704969055950642,
+        "evaluations": 1556,
+        "improved": true,
+        "initial_error": 0.011717261746525764,
+        "search_control": {
+          "candidate_evaluations": 1556,
+          "elapsed_seconds": 32.109,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 12,
+      "blackboards": 1
+    },
+    {
+      "name": "NAV0014.JPG",
+      "seconds": 33.98399999999674,
+      "satisfactory": false,
+      "eval": 1927,
+      "vc": {
+        "error": 0.02107101120054722,
+        "evaluations": 1927,
+        "improved": true,
+        "initial_error": 0.027907587587833405,
+        "search_control": {
+          "candidate_evaluations": 1927,
+          "elapsed_seconds": 33.735,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 21,
+      "blackboards": 1
+    },
+    {
+      "name": "b_heating1.JPG",
+      "seconds": 33.687999999994645,
+      "satisfactory": true,
+      "eval": 2025,
+      "vc": {},
+      "search_sources": [
+        "raster_flame_disk_registration"
+      ],
+      "restarts": 9,
+      "blackboards": 1
+    },
+    {
+      "name": "b_trend_online.jpg",
+      "seconds": 33.89100000000326,
+      "satisfactory": false,
+      "eval": 1955,
+      "vc": {
+        "error": 0.015222463756799698,
+        "evaluations": 1955,
+        "improved": true,
+        "initial_error": 0.01983499899506569,
+        "search_control": {
+          "candidate_evaluations": 1955,
+          "elapsed_seconds": 33.609,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 19,
+      "blackboards": 1
+    },
+    {
+      "name": "bottom.gif",
+      "seconds": 31.48499999998603,
+      "satisfactory": false,
+      "eval": 769,
+      "vc": {
+        "error": 0.011326172389090061,
+        "evaluations": 769,
+        "improved": true,
+        "initial_error": 0.015240051783621311,
+        "search_control": {
+          "candidate_evaluations": 769,
+          "elapsed_seconds": 31.203,
+          "limit_seconds": 60.0,
+          "max_seconds": 120.0,
+          "minimum_seconds": 30.0,
+          "stop_reason": "stagnation",
+          "time_extensions": 0
+        }
+      },
+      "search_sources": [
+        "native_svg_continuation"
+      ],
+      "restarts": 6,
+      "blackboards": 1
+    }
+  ],
+  "independent_pixel_checks": [
+    {
+      "filename": "AC0030.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.01480100117623806,
+          "foreground_mse": 0.017968211323022842,
+          "edge_alignment": 0.597597599029541,
+          "foreground_iou": 0.6310304901582401
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "AC0030_M.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.01674935780465603,
+          "foreground_mse": 0.09791592508554459,
+          "edge_alignment": 0.6723400950431824,
+          "foreground_iou": 0.39361702127659576
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "AC0070_S.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.013029325753450394,
+          "foreground_mse": 0.060803089290857315,
+          "edge_alignment": 0.5944637656211853,
+          "foreground_iou": 0.5295275590551181
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "AC0120_L.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.021855028346180916,
+          "foreground_mse": 0.035315752029418945,
+          "edge_alignment": 0.5009446740150452,
+          "foreground_iou": 0.1171960569550931
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 6,
+          "path_count": 4,
+          "path_command_count": 8,
+          "path_complexity_ratio": 1.3333
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "AC0130.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.016155486926436424,
+          "foreground_mse": 0.01927582360804081,
+          "edge_alignment": 0.6273562908172607,
+          "foreground_iou": 0.6296018031555222
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "AC0251_2.jpg",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0015884175663813949,
+          "foreground_mse": 0.0017808652482926846,
+          "edge_alignment": 0.9393176436424255,
+          "foreground_iou": 0.8505747126436781
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "AC0421_2_L.jpg",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0004500000213738531,
+          "foreground_mse": 0.0005591154331341386,
+          "edge_alignment": 0.9658113718032837,
+          "foreground_iou": 0.9983660130718954
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 5,
+          "path_count": 1,
+          "path_command_count": 8,
+          "path_complexity_ratio": 1.6
+        }
+      },
+      "confirmed": true
+    },
+    {
+      "filename": "AC0422_M.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.011966976337134838,
+          "foreground_mse": 0.012961085885763168,
+          "edge_alignment": 0.334525465965271,
+          "foreground_iou": 0.4566831683168317
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "AC0531_1_S.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.010608728043735027,
+          "foreground_mse": 0.010608728043735027,
+          "edge_alignment": 0.47108030319213867,
+          "foreground_iou": 0.9
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "AC0535_1S_sia.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.028861766681075096,
+          "foreground_mse": 0.047226663678884506,
+          "edge_alignment": 0.1567927598953247,
+          "foreground_iou": 0.34024896265560167
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "AC0552_1_M.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.02062300406396389,
+          "foreground_mse": 0.022022707387804985,
+          "edge_alignment": 0.5831316709518433,
+          "foreground_iou": 0.9970238095238095
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "AC0722_1_S.jpg",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.003003097604960203,
+          "foreground_mse": 0.0032261803280562162,
+          "edge_alignment": 0.9091495275497437,
+          "foreground_iou": 0.9147058823529411
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 1,
+          "path_command_count": 2,
+          "path_complexity_ratio": 0.6667
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "AC0922_L.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.028800761327147484,
+          "foreground_mse": 0.041923683136701584,
+          "edge_alignment": 0.21336226165294647,
+          "foreground_iou": 0.3682795698924731
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "GE0012.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.006848151795566082,
+          "foreground_mse": 0.007506573107093573,
+          "edge_alignment": 0.6970658898353577,
+          "foreground_iou": 0.7760814249363868
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "GE0015_S.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.026083892211318016,
+          "foreground_mse": 0.03518202155828476,
+          "edge_alignment": 0.2700200080871582,
+          "foreground_iou": 0.8330605564648118
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "GE0022_2_L.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.01694873720407486,
+          "foreground_mse": 0.023850545287132263,
+          "edge_alignment": 0.5109782218933105,
+          "foreground_iou": 0.9731642583308758
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 1,
+          "path_command_count": 14,
+          "path_complexity_ratio": 7.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "GE0032.jpg",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0010766229825094342,
+          "foreground_mse": 0.0011301639024168253,
+          "edge_alignment": 0.8814579248428345,
+          "foreground_iou": 0.9788306451612904
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": true
+    },
+    {
+      "filename": "GE0043_L.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.008828094229102135,
+          "foreground_mse": 0.01010973285883665,
+          "edge_alignment": 0.5608704090118408,
+          "foreground_iou": 0.772635814889336
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "GE0202_S.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.007621312513947487,
+          "foreground_mse": 0.010267941281199455,
+          "edge_alignment": 0.4398616850376129,
+          "foreground_iou": 0.911504424778761
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 1,
+          "path_command_count": 2,
+          "path_complexity_ratio": 0.6667
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "GE0305_M.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.015138034708797932,
+          "foreground_mse": 0.02079644799232483,
+          "edge_alignment": 0.37926435470581055,
+          "foreground_iou": 0.9232260566110896
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "GE1100_S.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.006508029997348785,
+          "foreground_mse": 0.00872684083878994,
+          "edge_alignment": 0.44359689950942993,
+          "foreground_iou": 0.6942148760330579
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 1,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "GE9001_1S.jpg",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0004650690243579447,
+          "foreground_mse": 0.0007219730177894235,
+          "edge_alignment": 0.9965822696685791,
+          "foreground_iou": 1.0
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "GE9021_4S.jpg",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.00021048315102234483,
+          "foreground_mse": 0.0003058947331737727,
+          "edge_alignment": 0.9574193358421326,
+          "foreground_iou": 0.9885057471264368
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 1,
+          "path_command_count": 2,
+          "path_complexity_ratio": 0.6667
+        }
+      },
+      "confirmed": true
+    },
+    {
+      "filename": "GE9022_2M.jpg",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0007714639650657773,
+          "foreground_mse": 0.0015896394615992904,
+          "edge_alignment": 0.9630173444747925,
+          "foreground_iou": 0.9892086330935251
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 1,
+          "path_command_count": 2,
+          "path_complexity_ratio": 0.6667
+        }
+      },
+      "confirmed": true
+    },
+    {
+      "filename": "GE9022_7M.jpg",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0004346704517956823,
+          "foreground_mse": 0.0008726050145924091,
+          "edge_alignment": 0.9632453322410583,
+          "foreground_iou": 0.9927927927927928
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 1,
+          "path_command_count": 2,
+          "path_complexity_ratio": 0.6667
+        }
+      },
+      "confirmed": true
+    },
+    {
+      "filename": "GE9023_6S.jpg",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0006238796631805599,
+          "foreground_mse": 0.0010123286629095674,
+          "edge_alignment": 0.9790077209472656,
+          "foreground_iou": 0.9942857142857143
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 1,
+          "path_command_count": 2,
+          "path_complexity_ratio": 0.6667
+        }
+      },
+      "confirmed": true
+    },
+    {
+      "filename": "GE9032_6S.jpg",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0004890554118901491,
+          "foreground_mse": 0.0011355556780472398,
+          "edge_alignment": 0.8933675289154053,
+          "foreground_iou": 1.0
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": true
+    },
+    {
+      "filename": "GE9033_6M.jpg",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0005236607394181192,
+          "foreground_mse": 0.0014699893072247505,
+          "edge_alignment": 0.7745428085327148,
+          "foreground_iou": 0.9963636363636363
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": true
+    },
+    {
+      "filename": "GE9034_3M.jpg",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0005985550815239549,
+          "foreground_mse": 0.0015818416140973568,
+          "edge_alignment": 0.9411238431930542,
+          "foreground_iou": 0.9418803418803419
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": true
+    },
+    {
+      "filename": "GE9041_4S.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.004389273002743721,
+          "foreground_mse": 0.0103477593511343,
+          "edge_alignment": 0.48600393533706665,
+          "foreground_iou": 0.6011904761904762
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 1,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "GE9043_7M.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.01149771548807621,
+          "foreground_mse": 0.04244272783398628,
+          "edge_alignment": 0.2984955906867981,
+          "foreground_iou": 0.4733178654292343
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 1,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "GE9044_1S.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.01066578272730112,
+          "foreground_mse": 0.024617154151201248,
+          "edge_alignment": 0.392335444688797,
+          "foreground_iou": 0.630057803468208
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 1,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "GE9044_7S.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.0057882098481059074,
+          "foreground_mse": 0.013484422117471695,
+          "edge_alignment": 0.4187372028827667,
+          "foreground_iou": 0.6491228070175439
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 1,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "L60x_T.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "foreground_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.010704969987273216,
+          "foreground_mse": 0.060779642313718796,
+          "edge_alignment": 0.13201886415481567,
+          "foreground_iou": 0.1603243917654398
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 1,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "NAV0014.JPG",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.02107100933790207,
+          "foreground_mse": 0.02124965749680996,
+          "edge_alignment": 0.4435354769229889,
+          "foreground_iou": 0.6167664670658682
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 1,
+          "path_command_count": 2,
+          "path_complexity_ratio": 0.6667
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "b_heating1.JPG",
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0036730992142111063,
+          "foreground_mse": 0.005316552706062794,
+          "edge_alignment": 0.7938522696495056,
+          "foreground_iou": 0.9661117717003567
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 6,
+          "path_count": 2,
+          "path_command_count": 12,
+          "path_complexity_ratio": 2.0
+        }
+      },
+      "confirmed": true
+    },
+    {
+      "filename": "b_trend_online.jpg",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.015222463756799698,
+          "foreground_mse": 0.020806824788451195,
+          "edge_alignment": 0.36207443475723267,
+          "foreground_iou": 0.9115934356802541
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 1,
+          "path_command_count": 2,
+          "path_complexity_ratio": 0.6667
+        }
+      },
+      "confirmed": false
+    },
+    {
+      "filename": "bottom.gif",
+      "quality": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.011326173320412636,
+          "foreground_mse": 0.013669428415596485,
+          "edge_alignment": 0.05841666832566261,
+          "foreground_iou": 0.22546395823279078
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "confirmed": false
+    }
+  ],
+  "input_and_evidence_hashes": {
+    "AC0030.jpg": {
+      "image": "9674239568249fbc0bede7f4a83c4467cbd86a8a986d69704e852a60727ba4e6",
+      "vector": "239729c33c024ac4d625de8ac75f3b29e1e6aaf44f118593637ab5f5930d1a46",
+      "worker": "6bb1b9d8c17430716cd46fb95ab57342a3f6c9e9192651f2258342db42f1a3b4",
+      "components": "097ada197f1e10b8ac20117ad18614ea02281037efd4ec781d9a1836f706dcb0"
+    },
+    "AC0030_M.jpg": {
+      "image": "61288c0e4e84a13e5ad98ac2aad671b81a37cb2ebe1b1ceb49bfd6e14d954362",
+      "vector": "bc76725b8977daf4d3bbd7a2aa7c6b67c155a07ec1c78bfce06142a3623f8426",
+      "worker": "f5bc9edf13e77ff8ecc3cff2440b1ac3573d19dfe7f9fcc6814db1e0d5fdccad",
+      "components": "e2b19bc20a9adea49b9d6975b088f20867b31964c4ebd31cbbc94272991b495c"
+    },
+    "AC0070_S.jpg": {
+      "image": "b352a3f592024f004ceafbcdd9e108312ed5975bda1f2b217a9de757ec6d3a63",
+      "vector": "bb0baf4b1d96df4f8b23207700a469a87ef5dd835930df002443dd6cd8a90d82",
+      "worker": "3b0b5fd619a0891858d80da249719fdc7f87b702a6c44927638e602b5acb0c7f",
+      "components": "a94097c4d8179293eaf091aae43326aad2444ba7538118a228f0b7bbda9b95d7"
+    },
+    "AC0120_L.jpg": {
+      "image": "c295a1f816de7c922391387329662d31f90a8cc1b8480b46df34b2e86170c520",
+      "vector": "0d2d9153d7c890328f5de98fd28a620fbc76405d7be346aed888c77c12d495a6",
+      "worker": "991f90eab03878b6e1964ec30a1a0dbdbfdfe0c536fe2806c70b8f0133fbde1b",
+      "components": "3b89656e7106b55d34640d2d7627f585a06887c5e4eb2be47374142008b9375d"
+    },
+    "AC0130.jpg": {
+      "image": "f5ebe12a1da351be530698026d5c1619de897a497731cf44cc9b3af2f12d28f8",
+      "vector": "916438506d9b35c432d77165e10c36285ec57ef4abd062c4bef5b6b52426c733",
+      "worker": "27957003c4989c33ce0dfaa982b26b58ee945a01539daacfb7f0e0585f33fe9c",
+      "components": "06b11858f26317ba737a4c87a8c0e059006890032fa368590ef4b5447ecb3b47"
+    },
+    "AC0251_2.jpg": {
+      "image": "7e31dc313371a3ad39555e362a4b3a4f7febfda5d839bb24de3085f9122e8e87",
+      "vector": "aeee94a6d4435dd440c69a73c73ffd15666f78adeb9b3e8556f013bcef52e266",
+      "worker": "f2252a2413edb5d8cd6cbe20f7eb6e9df3a3d328e389f97880ddcf7f441afcf2",
+      "components": "575bc3b736e35cdd3bd0c1ad9696e585e5490a5936ecf1fbbe542e7d0f70e8e5"
+    },
+    "AC0421_2_L.jpg": {
+      "image": "45c8603700500ea772c6557248480b4942e12b007d9089d440a9956e779264ae",
+      "vector": "7fe167878149ba2dd6686ff8933f397b51dc60ad37a02d610174bd37eb9f800a",
+      "worker": "84755b76c61d398afaef6e640af5d0b5d471ad8942aa5bdc746d78f29c64d30d",
+      "components": "38a03885393f8ee7104fe6f0749298f6cfc05c4baa919f44dcb4de1905a1f80e"
+    },
+    "AC0422_M.jpg": {
+      "image": "ad30f2a86c8de785ae82aee7c922cec00a82e23853ba5537c0a2eef19819e1c3",
+      "vector": "a88aec9117bf0c4e76cf0b26c6602eb188318a11dea71949d5f14952b37b04ba",
+      "worker": "b9ce6cce5240ae4f0391c06a8e3acaf7fbd1f7a03619573c9fa44a5ddb5e6b98",
+      "components": "e4e429adb558cc868535b3379ed25cea7705f973e65b121266022efc58c0287e"
+    },
+    "AC0531_1_S.jpg": {
+      "image": "30b61a51df805aaef419332a0df9661c24bd1490ed5a2d2c0c22e2cfe35991a0",
+      "vector": "79b4c9779db9a9acb787531245e8280ed9295fc1ddbed5baaf5b631a175c191d",
+      "worker": "aa7932aecccd80e7ddd6da61e2122931dce5faf51f145300c1f30f80d36dd420",
+      "components": "f2e575be0e46ab8d37fbbb3c2e9b048d70fd98321b1268afa26d5038f9c0008f"
+    },
+    "AC0535_1S_sia.jpg": {
+      "image": "c29c865460a956aebc2726f7c478b1cbaa9c8f1a386db3789dd4e341046cfe1b",
+      "vector": "130fc54ff254c9b69345a15346a8954c69b25b23af89adda6cb5bccbecb8225d",
+      "worker": "3a4b7189c5911bf459b77cc26ca7495fe80b6fe56c6b294b47749d20bd28b022",
+      "components": "14d2c14ab449fe3f4876e2ed72d70c56b8545f3f513dd76c0199104c2a9e1304"
+    },
+    "AC0552_1_M.jpg": {
+      "image": "3f4cd5b0803da8734d50cb0fd1cad2d2142d893f70d35e9f82fce0384dc5b3bd",
+      "vector": "8d5a003a15f4c921f42efcd4b9353671b8a602202e8482ab2654431256a8acdc",
+      "worker": "626e2abfa7db18bbb513e507000e14215c733d2831532bbeae6137f3194bdf7d",
+      "components": "a51ab2658e3b0612abfcaca2da8b5f32f2aba6e6fe1ae404afff0b9a44296727"
+    },
+    "AC0722_1_S.jpg": {
+      "image": "bef4879be475941288d994033eda9afef9b753be17d54b097e00408f7ca7207e",
+      "vector": "a9f66c4631218837377ebc8d51f1d9f84343d0eb762c9eea42b16a74151f77da",
+      "worker": "142ade986486ea6aa72d802e5ebf0f6697db4efad6f55df1d0a5be012c99b76b",
+      "components": "b461db0fd649b596bfdb2739f95ed297ae90b3c073ed74979108d95f9fe79f02"
+    },
+    "AC0922_L.jpg": {
+      "image": "d2a4630b9926d0807b70dd07301cf94cc7d659ea9688f7f7631c0a4c742289e5",
+      "vector": "3fc55365048b6b24f388c26cd750685fc31ee00dbedc7b67927fcf4f873c4d0f",
+      "worker": "a83b39806af0038aa839fe6d8ef831936bc6966d88c11fbd3cb65c9713dc6fd7",
+      "components": "4a6e2ef7fa2b4dc5f21f390d079f273bb3d8d5bbf342a339dade1af4b2d9010d"
+    },
+    "GE0012.jpg": {
+      "image": "5a50bd4be184693ae0c55c33c2ea26a979cb3927f63e0e942cebccbc0d04e887",
+      "vector": "f3d38d5ed83ed0f1dc575e29004131d7e1af72b36f5ecee04d078d3d02f34e97",
+      "worker": "6b78de57bf8d20058e18c51c19f86e5e4c5b96b048f29df1e534a8c95a017bfa",
+      "components": "ec0891e5a02430f0c0c728715af57bd84f36a3d76146dbc055cb60937e15cbeb"
+    },
+    "GE0015_S.jpg": {
+      "image": "5b8bbd607ab343270b9cab628493e43f9ab4350f8cc4695c6f9c24cd076cc5f9",
+      "vector": "246f168b83583c62d94574e0f2a8c9041d939acf02f846532a2c3d5b36c52394",
+      "worker": "dfb1b1441d32334fdc36c8c33577571b086cec1ef4c93ced6ae4aba38b8d58b0",
+      "components": "ba00616c998f11fe0b128c733476883a8205216d8d66cc533bff3274803ddc31"
+    },
+    "GE0022_2_L.jpg": {
+      "image": "065fd55d2663142660971c867f09f87974fba8ffa6876f5a2d0e6574dfaf6029",
+      "vector": "4194f6cb459fc94a45c736a8edd82ffcf71abf7267a3834705e1722300d512dc",
+      "worker": "dc047d8ee7041e7b1d7b675a32aa0c6d6cbd8c96670438fb6b9954d5fa5bd308",
+      "components": "77d755d2ad1f28ac4eb306a0467d4aa0ec0969255233c4129005af9d585bdfb7"
+    },
+    "GE0032.jpg": {
+      "image": "4aa47868884987d9f064c8fca30b26f020eb78fb2e903552f9547c86f2cf83e5",
+      "vector": "b2f8653d5209449c23178c415275eafcb872f4e4d9d19b99dc6e1f4a0723316d",
+      "worker": "9c43ac4cf067fa95e54e12e3873d94dfb42d62fee56053e5b0afb696c311c1c9",
+      "components": "1056298a925ef34fecc440ba0afb26c8c8d9ca5254c7c71bb84c59ada25cfe66"
+    },
+    "GE0043_L.jpg": {
+      "image": "a3b89b2f0208fbffb7b7a68e0862f28785d1980a406e9cc9351cc59744a77427",
+      "vector": "03246896e917ad7b716a46fe60f3d2060c626de1124991b3c2896487c0573095",
+      "worker": "34e5d600cf50bf26bddd71a9843c75218228c24217b4d7d342f072d668947741",
+      "components": "50e662da93db447eeca89c47f6bb15c4b6b09b1a40222a173d0531146fc4e0db"
+    },
+    "GE0202_S.jpg": {
+      "image": "42c142b3b2cef91a3c92cd363e327fa71e83e5bfd8cbc64a2d85bf34329e7dd9",
+      "vector": "9f068cbe50625e8aea8fba192842de53148eb2ae3b87b20c9f2430c8aa23254b",
+      "worker": "18c3aef9ca0d2fd617e37254392354e122237bd480c8cdc2f2d7df84f2a20a40",
+      "components": "7466d247db57e407e6195d8a26715b6574c0e1f0150b04f935c8d94d3986ddfe"
+    },
+    "GE0305_M.jpg": {
+      "image": "5e45be65ee6d2e2b268cae6257018333f124e0d493b055aa7fdf98d274c5f104",
+      "vector": "789a77d806a51329101f428370c7dac2de4c2540cf4d6c711d11cf5cd3bf5837",
+      "worker": "4796b6429638cf497097a60376ee76200f0c36862d36a2423eeac51ce24b2863",
+      "components": "ccb98354ed7908c214ab84ce74909a673ec2f4cffe36b5911d7a6de2fa112d89"
+    },
+    "GE1100_S.jpg": {
+      "image": "3e66b03cc799cd72ae864ed3fb13fd2687a078d48d0bd3ab8fefcc05a94c7492",
+      "vector": "5d483e9f31e5dae66f2f5752873b78d251161ffe2f132bb6eea60f2e571bf810",
+      "worker": "d1db975c2177a8d0f1b93d3a16e7895ae695988a079325e218dd8d89991e0587",
+      "components": "eee85639a1c9cd801ca6c044d2a4c0cfe2d426822a73b73622b5f6a6ddbc88b7"
+    },
+    "GE9001_1S.jpg": {
+      "image": "0322d6a1e7f7fadfc2dc888752c8e14b31d939c9fc9324c2c9e521ddb289a546",
+      "vector": "55507a8a27a2931bd0a9b162e436063a0fc8938c240dc8ca705a3ec0187b3cba",
+      "worker": "a3f4ee49804e3d6ad2618bd97751bf16ec26acb7f8a7e5ef7d2a907b4de5c254",
+      "components": "789916546613e43cb6dcf7edb2ce2aa87d282513d7d2c4c8650bd8cdb5a844d7"
+    },
+    "GE9021_4S.jpg": {
+      "image": "997a19ccbdd87cfb3b81251ac203bf91a65eede56595ac132bab53539816161a",
+      "vector": "ab016796b2772b14efbdc6ee7a2b657cfdc72d18489d2e4bd86c354fae5f33d4",
+      "worker": "795747aca561c7ab4348c8752a413ae45e4d842643edd2d87e03a8b632565457",
+      "components": "aebcfdd0f3cc6094386ffd8e309ee5a010a1306c7f631e549fbb16b252f738b3"
+    },
+    "GE9022_2M.jpg": {
+      "image": "9798f66b3d5953fe176453a36128249f867203be5d46cc4f592b8eb64e953ad8",
+      "vector": "997485d08a7732f50baa5506fbf0c07007e9e9762eda79b3dd43e31ba1ce6478",
+      "worker": "a1ae7aaa1dc379d369727b152d8ae6ed2f73e55d2873e4bbea9db6ef9b91fd7e",
+      "components": "68c60d0bc7e8d9d50c2f2481ba90e010dacb3ca774f5fb28b4de5bf9412ad2f6"
+    },
+    "GE9022_7M.jpg": {
+      "image": "98512eccf2fcbef3736ceca42606f79a3dd989c0b3eb5505f8b482dc609734c0",
+      "vector": "a3e2ae7c11c38e58d3e7e668d9fae2051acc306f45efba143ed4bbf3cd455a8d",
+      "worker": "c235f04c0764b51e3d9a80828e00bc50a82eb4bb9b7e24c82172f61afa17e6de",
+      "components": "dc9dcf7e85cc698c09ba2738c940da28cc16ec614c6a3279c086eb4dd2a499f7"
+    },
+    "GE9023_6S.jpg": {
+      "image": "e5f741af25c3a0f997455afac0c18000a20ade0e48c569160fd762a34ea367c1",
+      "vector": "cf256ee1819444f58ec80243dc6a1f89e8cdd8349a2c3f237e19c45cf83bff7b",
+      "worker": "0e81887c017fef26a943065be3ebafd11d063733c11b20f82bcc20b3caebf71a",
+      "components": "038ac1b2fedb9cf5265775505c9f228505c4acb7755c3b695bacb8ef562c6828"
+    },
+    "GE9032_6S.jpg": {
+      "image": "1ce4281d3aabb5a05c1d826c6c25e5fa89dd2399a11b39b5cfac42474baa6f7f",
+      "vector": "e554165b2da7f0ba32e1486adc7971b19ceed68647f6fba3bc663f48e5dd68bd",
+      "worker": "a2bb3ed72f455085500894b766d6f5b5bafb3842eee3004ec9a5a700593ca50b",
+      "components": "2dfeb0e2decb4c22a7e78b95b88acf59acaa0bd10be523c131f2e3b54e949bd0"
+    },
+    "GE9033_6M.jpg": {
+      "image": "7fed42aa875b00b0e52ee77c11456983afe61449fc72a676f388d8d913b66cac",
+      "vector": "decfb463067e6f5f257f4e8b37cfc926eae3ebb068ff1d122bd1315b748a0778",
+      "worker": "2bb3046b95197c305db3e1d2d86c84ec6d398a69d6cb57fa77119779038bec81",
+      "components": "2805ff66fa8548075c1aa0664864d2212390d67f1f70e69e56424e600a05b2c6"
+    },
+    "GE9034_3M.jpg": {
+      "image": "e1530bd74bd6cbba92e00dc983361d2ac32b16bc8927cf7e0918d38222e3b8cb",
+      "vector": "9cbf10e65b3c06a984844f7f9e02a1ac00f8b1f75220ff0850e16fcb435d617f",
+      "worker": "499d735a02439978c191bf6cdacc55550f196c7f4b0afd624a39f879fce5a29e",
+      "components": "fccbeca08105b8cf304ed5b0fd97f5709246f630a123e5923cf78610e3289d1c"
+    },
+    "GE9041_4S.jpg": {
+      "image": "149edf284a9409d394ff67506421cb89a16cacd996e481fc6fadc5d3eef9fdd2",
+      "vector": "8504b829d31439053e02927c86b5f3bc13d09fa3e3d45a9c63607347ed7c15bf",
+      "worker": "39a232136d3198c2db46f199c51ec3d1217e95fecaeda8762a5a620b145d8653",
+      "components": "16aa769cce8e4f3ae2633cdfdbda506d37f2b924e85d8823b3c059aca5aa3ff9"
+    },
+    "GE9043_7M.jpg": {
+      "image": "9e681fe2d73be173401c8829385b3c1f05c6be045c430ca6a2f7cad1aae6f0fc",
+      "vector": "c0c2d64aafa0e2ea976bac9a4cdf585e54dd022b397d887070a9e13be241cb32",
+      "worker": "7677e11edcdd5b3a9e1fd0d8fdcb42bfac89b86ca5170c3eebe10c57bd677b61",
+      "components": "e06acfa78a7ca885f51e5696ed27c96e7eee6bdb400f7f26d15541e681fcc205"
+    },
+    "GE9044_1S.jpg": {
+      "image": "c37107097335a4996fd245eebf217490e7b28905835717ee3bc90ffa992d7782",
+      "vector": "909fff6606861aebe3ebe248c9e27a47fee4d00529ea377088ec57cc079d8961",
+      "worker": "de2f2729fd7265de87999a169a83e146d6d8a00460da00f98dce6736e7edaafd",
+      "components": "6dc47f7cb7b84a14dae1f5ee7a4593237378da00805a63fe3d54f9e46343de06"
+    },
+    "GE9044_7S.jpg": {
+      "image": "deece6e5aaf7a5bd7d28f48ea7eee908247244215c8b435c092c6692c318fe9f",
+      "vector": "95dbb9557506bd227ffc07b46044289ad3b82d1b417a54dd0768f49a06adafc9",
+      "worker": "6b7ad7b35ecef5ae978ea5404fdf81ef973ff3bed86fa8b5ee70e0b1fafa6283",
+      "components": "484f71a7842b4a764d94bf8502acd9e7ac2afe85635ccd9a3b44c227001d5592"
+    },
+    "L60x_T.jpg": {
+      "image": "875966f4350eeed75030084e0cfb71014817c7823cc974d7924b30f5439f9024",
+      "vector": "72ac9f3e71bd5a6ace88e1df73b29ce5a783ed316d8322641b375b110504c82a",
+      "worker": "656da87ef2bce89add4a2fcdfbe630ee81b4d527b3f77d100e3706c93cb5cc30",
+      "components": "7c7a1b6951c215d8cc5f695626029a115ac09bd592983f6f68a6a1575797c69d"
+    },
+    "NAV0014.JPG": {
+      "image": "feaf02daa6678205f79eeee6aed02cae3a761927766da5106e762796915bdb44",
+      "vector": "26925e114badbca259a796124b4c053d8fae996076a74a7ed1d6b8a93ee20dc1",
+      "worker": "b466a2b1a0064ca0e382ef543c238db00946fc091bdc5d1a5dd0671a1c6238b8",
+      "components": "5f5f4e7806f5dafbfacfdb30c7056f3645d5ccfe5efa60aa046ee57a1f262a20"
+    },
+    "b_heating1.JPG": {
+      "image": "b9383db5768b961942a038e6ad8fa04a08d2b6f26efdfdb17f3271b4b0e54a52",
+      "vector": "84e28a22a30a4418f656be903f0d755c6c016788e8cc9143420f2822fc8ca42d",
+      "worker": "b278a2b4e2454e6d9dbdc8139df3a7732238f55058f0db4f3a41d51d5a958f26",
+      "components": "8566139aba73f60794396b52c4ff18753ed967992cfd8e71d84d1fa58c921307"
+    },
+    "b_trend_online.jpg": {
+      "image": "ae7c2e43ca438f78fce5dfa203caf8a5c3235008558579d7e75e2a6496254756",
+      "vector": "ec55826621fe7dc2c51065e0c07495f4a1a5f5e8cc94ab7d86ac4096904d8c5d",
+      "worker": "373694ace3cf117e67765c3299dfcba0655d0c06ec287aa6025a2a6b0b57c268",
+      "components": "bca1e5e2ee47925ba05675f2d715579cfada9799ca27c8fe1103b32d54d1950d"
+    },
+    "bottom.gif": {
+      "image": "9ad99b0df8d3f5e8cae006766b2cdb757d9953a06eb6f41244823974144ecd69",
+      "vector": "135ea60645bc1c3a2cbe7ab5391207109e097eb985dcc6da7773cc4da35b5e4e",
+      "worker": "488cbc9098055f06b303fd41fa1f97a77ba5f088879de50d72734f404e6d84ef",
+      "components": "5b786e6978196abcd265ec54178a1b74ce2cde6de9b74109d0c0127857c2de05"
+    }
+  },
+  "historical_git_comparison": {
+    "baseline_commit": "21993fc9c7e5fffe2cab6846800cb9f95e4c376a",
+    "limitation": "Historical committed SVGs, not the overwritten immediately previous run",
+    "comparable": 17,
+    "improved": 14,
+    "worse": 2,
+    "unchanged": 1,
+    "cases": [
+      {
+        "filename": "AC0030.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\AC0030.svg",
+        "changed": true,
+        "old_mse": 0.01630752915545303,
+        "new_mse": 0.014801002819428425,
+        "relative_gain": 0.0923822561752613,
+        "initial_old_sha256": "74a6b43209d0fc62c0e60021cb00fee70179faefe6895a6115be20906ac4b0d3",
+        "output_sha256": "239729c33c024ac4d625de8ac75f3b29e1e6aaf44f118593637ab5f5930d1a46"
+      },
+      {
+        "filename": "AC0030_M.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\AC0030_M.svg",
+        "changed": true,
+        "old_mse": 0.017496277655447208,
+        "new_mse": 0.016749359026636997,
+        "relative_gain": 0.042690144927922336,
+        "initial_old_sha256": "2da372da003b319e734e30f6218240d6e076e7bbf3fdf34a5134c2ffd0890e51",
+        "output_sha256": "bc76725b8977daf4d3bbd7a2aa7c6b67c155a07ec1c78bfce06142a3623f8426"
+      },
+      {
+        "filename": "AC0535_1S_sia.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\AC0535_1S_sia.svg",
+        "changed": true,
+        "old_mse": 0.01950647186979367,
+        "new_mse": 0.02886176470588235,
+        "relative_gain": -0.479599432359453,
+        "initial_old_sha256": "a9273738b38662481735ec2d0d3d2abffeba3e7c0cd68bf909a6147008019bc9",
+        "output_sha256": "130fc54ff254c9b69345a15346a8954c69b25b23af89adda6cb5bccbecb8225d"
+      },
+      {
+        "filename": "AC0552_1_M.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\AC0552_1_M.svg",
+        "changed": true,
+        "old_mse": 0.02540955757756988,
+        "new_mse": 0.020623002548877212,
+        "relative_gain": 0.18837616570380455,
+        "initial_old_sha256": "7badde5b342b830c6c471df0a9f1f418944b4953bf50c90049196f2fda5b72f3",
+        "output_sha256": "8d5a003a15f4c921f42efcd4b9353671b8a602202e8482ab2654431256a8acdc"
+      },
+      {
+        "filename": "GE0032.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\GE0032.svg",
+        "changed": true,
+        "old_mse": 0.0708773056723845,
+        "new_mse": 0.0010766229512865423,
+        "relative_gain": 0.9848100468679918,
+        "initial_old_sha256": "ba7d0c9ac811a6d3ceefe76cb4035464bffab34b8be67fb8e6770d800fb99601",
+        "output_sha256": "b2f8653d5209449c23178c415275eafcb872f4e4d9d19b99dc6e1f4a0723316d"
+      },
+      {
+        "filename": "GE0043_L.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\GE0043_L.svg",
+        "changed": true,
+        "old_mse": 0.01265430616691121,
+        "new_mse": 0.008828093851919853,
+        "relative_gain": 0.302364449265202,
+        "initial_old_sha256": "28898bc1099d9c065e3352a64325ab4e73a3047a7c85a1c1542a24298d2ee42c",
+        "output_sha256": "03246896e917ad7b716a46fe60f3d2060c626de1124991b3c2896487c0573095"
+      },
+      {
+        "filename": "GE0202_S.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\GE0202_S.svg",
+        "changed": true,
+        "old_mse": 0.011151524285531206,
+        "new_mse": 0.007621312828399334,
+        "relative_gain": 0.31656761593679383,
+        "initial_old_sha256": "a938c54c104b24e15969c7179f0e1cc95687bea312be5c437512f8e0444d8fbf",
+        "output_sha256": "9f068cbe50625e8aea8fba192842de53148eb2ae3b87b20c9f2430c8aa23254b"
+      },
+      {
+        "filename": "GE9001_1S.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\GE9001_1S.svg",
+        "changed": true,
+        "old_mse": 0.019680242641718994,
+        "new_mse": 0.0004650689905591866,
+        "relative_gain": 0.9763687369599136,
+        "initial_old_sha256": "d874c15b0bef5554a7c1eb3045a250ed8db77f1828c41d723dd2deaad002718b",
+        "output_sha256": "55507a8a27a2931bd0a9b162e436063a0fc8938c240dc8ca705a3ec0187b3cba"
+      },
+      {
+        "filename": "GE9022_2M.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\GE9022_2M.svg",
+        "changed": true,
+        "old_mse": 0.0007833824597377078,
+        "new_mse": 0.0007714639668503566,
+        "relative_gain": 0.015214143154726356,
+        "initial_old_sha256": "b601f65ea8a804a1097e847fe9c15fd5fbb163de0b294c29ca7b2c4e90fe508e",
+        "output_sha256": "997485d08a7732f50baa5506fbf0c07007e9e9762eda79b3dd43e31ba1ce6478"
+      },
+      {
+        "filename": "GE9023_6S.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\GE9023_6S.svg",
+        "changed": true,
+        "old_mse": 0.0008009568969199881,
+        "new_mse": 0.0006238797043872015,
+        "relative_gain": 0.2210820497503947,
+        "initial_old_sha256": "9b7c4ea185e724b405c51bf7031ae41a8db994977108d3c5518fac560c9414ac",
+        "output_sha256": "cf256ee1819444f58ec80243dc6a1f89e8cdd8349a2c3f237e19c45cf83bff7b"
+      },
+      {
+        "filename": "GE9032_6S.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\GE9032_6S.svg",
+        "changed": true,
+        "old_mse": 0.03440501089324619,
+        "new_mse": 0.0004890554914776368,
+        "relative_gain": 0.9857853411819835,
+        "initial_old_sha256": "1ef1f850c905a80ceff06c76b8d3017330c0dc54d59d6fa143e69857416875bd",
+        "output_sha256": "e554165b2da7f0ba32e1486adc7971b19ceed68647f6fba3bc663f48e5dd68bd"
+      },
+      {
+        "filename": "GE9033_6M.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\GE9033_6M.svg",
+        "changed": false,
+        "old_mse": 0.0005236607714981417,
+        "new_mse": 0.0005236607714981417,
+        "relative_gain": 0.0,
+        "initial_old_sha256": "decfb463067e6f5f257f4e8b37cfc926eae3ebb068ff1d122bd1315b748a0778",
+        "output_sha256": "decfb463067e6f5f257f4e8b37cfc926eae3ebb068ff1d122bd1315b748a0778"
+      },
+      {
+        "filename": "GE9041_4S.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\GE9041_4S.svg",
+        "changed": true,
+        "old_mse": 0.005075253107779059,
+        "new_mse": 0.004389273356401384,
+        "relative_gain": 0.13516168293680653,
+        "initial_old_sha256": "efc59e807690c20050ab1e33bd5e0587e870e2ec8e1fc892d9f35b3929f8c2ad",
+        "output_sha256": "8504b829d31439053e02927c86b5f3bc13d09fa3e3d45a9c63607347ed7c15bf"
+      },
+      {
+        "filename": "GE9044_1S.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\GE9044_1S.svg",
+        "changed": true,
+        "old_mse": 0.01066159169550173,
+        "new_mse": 0.010665782391387928,
+        "relative_gain": -0.00039306475110700845,
+        "initial_old_sha256": "3e57a4f4adb1cc22de439324896d862ec7c7fdd7cdb5d199f7fa462d52fc404e",
+        "output_sha256": "909fff6606861aebe3ebe248c9e27a47fee4d00529ea377088ec57cc079d8961"
+      },
+      {
+        "filename": "GE9044_7S.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\GE9044_7S.svg",
+        "changed": true,
+        "old_mse": 0.010587286940920159,
+        "new_mse": 0.005788209662950147,
+        "relative_gain": 0.4532867867613415,
+        "initial_old_sha256": "8e6e1f01240345b9ce03cc6a00a872b749511f2e6a20f4236b4d7ff91fc9faf1",
+        "output_sha256": "95dbb9557506bd227ffc07b46044289ad3b82d1b417a54dd0768f49a06adafc9"
+      },
+      {
+        "filename": "L60x_T.jpg",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\L60x_T.svg",
+        "changed": true,
+        "old_mse": 0.010928734589260542,
+        "new_mse": 0.010704969370754838,
+        "relative_gain": 0.020474943066655982,
+        "initial_old_sha256": "dd4fa173f205c1fbd588cc0cc0c255877eadc1a680b3f5e98112d91ea5cfdd90",
+        "output_sha256": "72ac9f3e71bd5a6ace88e1df73b29ce5a783ed316d8322641b375b110504c82a"
+      },
+      {
+        "filename": "b_heating1.JPG",
+        "current_path": "artifacts\\converted_images\\converted_svgs\\b_heating1.svg",
+        "changed": true,
+        "old_mse": 0.05464566093453838,
+        "new_mse": 0.003673099045147858,
+        "relative_gain": 0.9327833357245332,
+        "initial_old_sha256": "d1ade9a3785b4be6cc01f4f40efae119bb86caae00c2980d9d6e6cb99f89de53",
+        "output_sha256": "84e28a22a30a4418f656be903f0d755c6c016788e8cc9143420f2822fc8ca42d"
+      }
+    ]
+  },
+  "topology_counterfactual": {
+    "kind": "diagnostic topology counterfactual, not production fix or generalization acceptance",
+    "filename": "AC0030.jpg",
+    "pixel_derived_lines": [
+      [
+        5,
+        74,
+        35,
+        5
+      ],
+      [
+        5,
+        6,
+        35,
+        74
+      ]
+    ],
+    "before": {
+      "satisfactory": false,
+      "failures": [
+        "normalized_mse_outside_limit",
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.01480100117623806,
+        "foreground_mse": 0.017968211323022842,
+        "edge_alignment": 0.597597599029541,
+        "foreground_iou": 0.6310304901582401
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      }
+    },
+    "after": {
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit",
+        "foreground_iou_outside_limit"
+      ],
+      "metrics": {
+        "normalized_mse": 0.009739646688103676,
+        "foreground_mse": 0.01171721238642931,
+        "edge_alignment": 0.6806013584136963,
+        "foreground_iou": 0.6310304901582401
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 6,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      }
+    },
+    "mse_reduction": 0.3419602787587115
+  },
+  "reporting_findings": {
+    "actual_iterations_64_rows": 38,
+    "stale_pre_polish_best_error_rows": 28,
+    "stale_best_error_example": {
+      "filename": "GE9001_1S.jpg",
+      "reported_best_error": 19.648888888888887,
+      "measured_saved_svg_mae": 2.7955555555555556
+    },
+    "note": "current mean_delta2 matches saved raster; best_error remains from pre-polish return value"
+  },
+  "code_review": {
+    "memory_allowed_in_semantic_only": false,
+    "permanent_new_algorithms_generated": false,
+    "batch_quality_passes_observed": 0,
+    "selected_batch_quality_pass_limit": 2,
+    "caveat": "Current source reviewed; original run did not record a complete source fingerprint"
+  },
+  "production_changed_by_audit": false,
+  "converter_results_changed_by_audit": false,
+  "concurrent_report_replacement": {
+    "newer_run_id": "catalog-20261111T121521Z-d7a16496",
+    "newer_run_seed": 1007299007,
+    "newer_started_at": "2026-11-11T12:15:21.335302Z",
+    "excluded_from_audit": true,
+    "old_overview_reports_available": false,
+    "note": "The five aggregate reports were overwritten after this audit summary was assembled. Historical hashes and the derived measurements remain recorded; original matching per-case artifacts were copied before further replacements.",
+    "preserved": [
+      {
+        "filename": "AC0030.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/AC0030.jpg",
+        "sha256": "9674239568249fbc0bede7f4a83c4467cbd86a8a986d69704e852a60727ba4e6"
+      },
+      {
+        "filename": "AC0030.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/AC0030.svg",
+        "sha256": "239729c33c024ac4d625de8ac75f3b29e1e6aaf44f118593637ab5f5930d1a46"
+      },
+      {
+        "filename": "AC0030.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/AC0030_worker.log",
+        "sha256": "6bb1b9d8c17430716cd46fb95ab57342a3f6c9e9192651f2258342db42f1a3b4"
+      },
+      {
+        "filename": "AC0030.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/AC0030_components.jsonl",
+        "sha256": "097ada197f1e10b8ac20117ad18614ea02281037efd4ec781d9a1836f706dcb0"
+      },
+      {
+        "filename": "AC0030_M.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/AC0030_M.jpg",
+        "sha256": "61288c0e4e84a13e5ad98ac2aad671b81a37cb2ebe1b1ceb49bfd6e14d954362"
+      },
+      {
+        "filename": "AC0030_M.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/AC0030_M.svg",
+        "sha256": "bc76725b8977daf4d3bbd7a2aa7c6b67c155a07ec1c78bfce06142a3623f8426"
+      },
+      {
+        "filename": "AC0030_M.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/AC0030_M_worker.log",
+        "sha256": "f5bc9edf13e77ff8ecc3cff2440b1ac3573d19dfe7f9fcc6814db1e0d5fdccad"
+      },
+      {
+        "filename": "AC0030_M.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/AC0030_M_components.jsonl",
+        "sha256": "e2b19bc20a9adea49b9d6975b088f20867b31964c4ebd31cbbc94272991b495c"
+      },
+      {
+        "filename": "AC0070_S.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/AC0070_S.jpg",
+        "sha256": "b352a3f592024f004ceafbcdd9e108312ed5975bda1f2b217a9de757ec6d3a63"
+      },
+      {
+        "filename": "AC0070_S.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/AC0070_S.svg",
+        "sha256": "bb0baf4b1d96df4f8b23207700a469a87ef5dd835930df002443dd6cd8a90d82"
+      },
+      {
+        "filename": "AC0070_S.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/AC0070_S_worker.log",
+        "sha256": "3b0b5fd619a0891858d80da249719fdc7f87b702a6c44927638e602b5acb0c7f"
+      },
+      {
+        "filename": "AC0070_S.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/AC0070_S_components.jsonl",
+        "sha256": "a94097c4d8179293eaf091aae43326aad2444ba7538118a228f0b7bbda9b95d7"
+      },
+      {
+        "filename": "AC0120_L.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/AC0120_L.jpg",
+        "sha256": "c295a1f816de7c922391387329662d31f90a8cc1b8480b46df34b2e86170c520"
+      },
+      {
+        "filename": "AC0120_L.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/AC0120_L.svg",
+        "sha256": "0d2d9153d7c890328f5de98fd28a620fbc76405d7be346aed888c77c12d495a6"
+      },
+      {
+        "filename": "AC0120_L.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/AC0120_L_worker.log",
+        "sha256": "991f90eab03878b6e1964ec30a1a0dbdbfdfe0c536fe2806c70b8f0133fbde1b"
+      },
+      {
+        "filename": "AC0120_L.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/AC0120_L_components.jsonl",
+        "sha256": "3b89656e7106b55d34640d2d7627f585a06887c5e4eb2be47374142008b9375d"
+      },
+      {
+        "filename": "AC0130.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/AC0130.jpg",
+        "sha256": "f5ebe12a1da351be530698026d5c1619de897a497731cf44cc9b3af2f12d28f8"
+      },
+      {
+        "filename": "AC0130.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/AC0130.svg",
+        "sha256": "916438506d9b35c432d77165e10c36285ec57ef4abd062c4bef5b6b52426c733"
+      },
+      {
+        "filename": "AC0130.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/AC0130_worker.log",
+        "sha256": "27957003c4989c33ce0dfaa982b26b58ee945a01539daacfb7f0e0585f33fe9c"
+      },
+      {
+        "filename": "AC0130.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/AC0130_components.jsonl",
+        "sha256": "06b11858f26317ba737a4c87a8c0e059006890032fa368590ef4b5447ecb3b47"
+      },
+      {
+        "filename": "AC0251_2.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/AC0251_2.jpg",
+        "sha256": "7e31dc313371a3ad39555e362a4b3a4f7febfda5d839bb24de3085f9122e8e87"
+      },
+      {
+        "filename": "AC0251_2.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/AC0251_2.svg",
+        "sha256": "aeee94a6d4435dd440c69a73c73ffd15666f78adeb9b3e8556f013bcef52e266"
+      },
+      {
+        "filename": "AC0251_2.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/AC0251_2_worker.log",
+        "sha256": "f2252a2413edb5d8cd6cbe20f7eb6e9df3a3d328e389f97880ddcf7f441afcf2"
+      },
+      {
+        "filename": "AC0251_2.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/AC0251_2_components.jsonl",
+        "sha256": "575bc3b736e35cdd3bd0c1ad9696e585e5490a5936ecf1fbbe542e7d0f70e8e5"
+      },
+      {
+        "filename": "AC0421_2_L.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/AC0421_2_L.jpg",
+        "sha256": "45c8603700500ea772c6557248480b4942e12b007d9089d440a9956e779264ae"
+      },
+      {
+        "filename": "AC0421_2_L.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/AC0421_2_L.svg",
+        "sha256": "7fe167878149ba2dd6686ff8933f397b51dc60ad37a02d610174bd37eb9f800a"
+      },
+      {
+        "filename": "AC0421_2_L.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/AC0421_2_L_worker.log",
+        "sha256": "84755b76c61d398afaef6e640af5d0b5d471ad8942aa5bdc746d78f29c64d30d"
+      },
+      {
+        "filename": "AC0421_2_L.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/AC0421_2_L_components.jsonl",
+        "sha256": "38a03885393f8ee7104fe6f0749298f6cfc05c4baa919f44dcb4de1905a1f80e"
+      },
+      {
+        "filename": "AC0422_M.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/AC0422_M.jpg",
+        "sha256": "ad30f2a86c8de785ae82aee7c922cec00a82e23853ba5537c0a2eef19819e1c3"
+      },
+      {
+        "filename": "AC0422_M.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/AC0422_M.svg",
+        "sha256": "a88aec9117bf0c4e76cf0b26c6602eb188318a11dea71949d5f14952b37b04ba"
+      },
+      {
+        "filename": "AC0422_M.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/AC0422_M_worker.log",
+        "sha256": "b9ce6cce5240ae4f0391c06a8e3acaf7fbd1f7a03619573c9fa44a5ddb5e6b98"
+      },
+      {
+        "filename": "AC0422_M.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/AC0422_M_components.jsonl",
+        "sha256": "e4e429adb558cc868535b3379ed25cea7705f973e65b121266022efc58c0287e"
+      },
+      {
+        "filename": "AC0531_1_S.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/AC0531_1_S.jpg",
+        "sha256": "30b61a51df805aaef419332a0df9661c24bd1490ed5a2d2c0c22e2cfe35991a0"
+      },
+      {
+        "filename": "AC0531_1_S.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/AC0531_1_S.svg",
+        "sha256": "79b4c9779db9a9acb787531245e8280ed9295fc1ddbed5baaf5b631a175c191d"
+      },
+      {
+        "filename": "AC0531_1_S.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/AC0531_1_S_worker.log",
+        "sha256": "aa7932aecccd80e7ddd6da61e2122931dce5faf51f145300c1f30f80d36dd420"
+      },
+      {
+        "filename": "AC0531_1_S.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/AC0531_1_S_components.jsonl",
+        "sha256": "f2e575be0e46ab8d37fbbb3c2e9b048d70fd98321b1268afa26d5038f9c0008f"
+      },
+      {
+        "filename": "AC0535_1S_sia.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/AC0535_1S_sia.jpg",
+        "sha256": "c29c865460a956aebc2726f7c478b1cbaa9c8f1a386db3789dd4e341046cfe1b"
+      },
+      {
+        "filename": "AC0535_1S_sia.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/AC0535_1S_sia.svg",
+        "sha256": "130fc54ff254c9b69345a15346a8954c69b25b23af89adda6cb5bccbecb8225d"
+      },
+      {
+        "filename": "AC0535_1S_sia.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/AC0535_1S_sia_worker.log",
+        "sha256": "3a4b7189c5911bf459b77cc26ca7495fe80b6fe56c6b294b47749d20bd28b022"
+      },
+      {
+        "filename": "AC0535_1S_sia.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/AC0535_1S_sia_components.jsonl",
+        "sha256": "14d2c14ab449fe3f4876e2ed72d70c56b8545f3f513dd76c0199104c2a9e1304"
+      },
+      {
+        "filename": "AC0552_1_M.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/AC0552_1_M.jpg",
+        "sha256": "3f4cd5b0803da8734d50cb0fd1cad2d2142d893f70d35e9f82fce0384dc5b3bd"
+      },
+      {
+        "filename": "AC0552_1_M.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/AC0552_1_M.svg",
+        "sha256": "8d5a003a15f4c921f42efcd4b9353671b8a602202e8482ab2654431256a8acdc"
+      },
+      {
+        "filename": "AC0552_1_M.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/AC0552_1_M_worker.log",
+        "sha256": "626e2abfa7db18bbb513e507000e14215c733d2831532bbeae6137f3194bdf7d"
+      },
+      {
+        "filename": "AC0552_1_M.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/AC0552_1_M_components.jsonl",
+        "sha256": "a51ab2658e3b0612abfcaca2da8b5f32f2aba6e6fe1ae404afff0b9a44296727"
+      },
+      {
+        "filename": "AC0722_1_S.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/AC0722_1_S.jpg",
+        "sha256": "bef4879be475941288d994033eda9afef9b753be17d54b097e00408f7ca7207e"
+      },
+      {
+        "filename": "AC0722_1_S.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/AC0722_1_S.svg",
+        "sha256": "a9f66c4631218837377ebc8d51f1d9f84343d0eb762c9eea42b16a74151f77da"
+      },
+      {
+        "filename": "AC0722_1_S.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/AC0722_1_S_worker.log",
+        "sha256": "142ade986486ea6aa72d802e5ebf0f6697db4efad6f55df1d0a5be012c99b76b"
+      },
+      {
+        "filename": "AC0722_1_S.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/AC0722_1_S_components.jsonl",
+        "sha256": "b461db0fd649b596bfdb2739f95ed297ae90b3c073ed74979108d95f9fe79f02"
+      },
+      {
+        "filename": "AC0922_L.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/AC0922_L.jpg",
+        "sha256": "d2a4630b9926d0807b70dd07301cf94cc7d659ea9688f7f7631c0a4c742289e5"
+      },
+      {
+        "filename": "AC0922_L.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/AC0922_L.svg",
+        "sha256": "3fc55365048b6b24f388c26cd750685fc31ee00dbedc7b67927fcf4f873c4d0f"
+      },
+      {
+        "filename": "AC0922_L.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/AC0922_L_worker.log",
+        "sha256": "a83b39806af0038aa839fe6d8ef831936bc6966d88c11fbd3cb65c9713dc6fd7"
+      },
+      {
+        "filename": "AC0922_L.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/AC0922_L_components.jsonl",
+        "sha256": "4a6e2ef7fa2b4dc5f21f390d079f273bb3d8d5bbf342a339dade1af4b2d9010d"
+      },
+      {
+        "filename": "GE0012.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE0012.jpg",
+        "sha256": "5a50bd4be184693ae0c55c33c2ea26a979cb3927f63e0e942cebccbc0d04e887"
+      },
+      {
+        "filename": "GE0012.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE0012.svg",
+        "sha256": "f3d38d5ed83ed0f1dc575e29004131d7e1af72b36f5ecee04d078d3d02f34e97"
+      },
+      {
+        "filename": "GE0012.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE0012_worker.log",
+        "sha256": "6b78de57bf8d20058e18c51c19f86e5e4c5b96b048f29df1e534a8c95a017bfa"
+      },
+      {
+        "filename": "GE0012.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE0012_components.jsonl",
+        "sha256": "ec0891e5a02430f0c0c728715af57bd84f36a3d76146dbc055cb60937e15cbeb"
+      },
+      {
+        "filename": "GE0015_S.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE0015_S.jpg",
+        "sha256": "5b8bbd607ab343270b9cab628493e43f9ab4350f8cc4695c6f9c24cd076cc5f9"
+      },
+      {
+        "filename": "GE0015_S.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE0015_S.svg",
+        "sha256": "246f168b83583c62d94574e0f2a8c9041d939acf02f846532a2c3d5b36c52394"
+      },
+      {
+        "filename": "GE0015_S.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE0015_S_worker.log",
+        "sha256": "dfb1b1441d32334fdc36c8c33577571b086cec1ef4c93ced6ae4aba38b8d58b0"
+      },
+      {
+        "filename": "GE0015_S.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE0015_S_components.jsonl",
+        "sha256": "ba00616c998f11fe0b128c733476883a8205216d8d66cc533bff3274803ddc31"
+      },
+      {
+        "filename": "GE0022_2_L.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE0022_2_L.jpg",
+        "sha256": "065fd55d2663142660971c867f09f87974fba8ffa6876f5a2d0e6574dfaf6029"
+      },
+      {
+        "filename": "GE0022_2_L.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE0022_2_L.svg",
+        "sha256": "4194f6cb459fc94a45c736a8edd82ffcf71abf7267a3834705e1722300d512dc"
+      },
+      {
+        "filename": "GE0022_2_L.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE0022_2_L_worker.log",
+        "sha256": "dc047d8ee7041e7b1d7b675a32aa0c6d6cbd8c96670438fb6b9954d5fa5bd308"
+      },
+      {
+        "filename": "GE0022_2_L.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE0022_2_L_components.jsonl",
+        "sha256": "77d755d2ad1f28ac4eb306a0467d4aa0ec0969255233c4129005af9d585bdfb7"
+      },
+      {
+        "filename": "GE0032.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE0032.jpg",
+        "sha256": "4aa47868884987d9f064c8fca30b26f020eb78fb2e903552f9547c86f2cf83e5"
+      },
+      {
+        "filename": "GE0032.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE0032.svg",
+        "sha256": "b2f8653d5209449c23178c415275eafcb872f4e4d9d19b99dc6e1f4a0723316d"
+      },
+      {
+        "filename": "GE0032.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE0032_worker.log",
+        "sha256": "9c43ac4cf067fa95e54e12e3873d94dfb42d62fee56053e5b0afb696c311c1c9"
+      },
+      {
+        "filename": "GE0032.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE0032_components.jsonl",
+        "sha256": "1056298a925ef34fecc440ba0afb26c8c8d9ca5254c7c71bb84c59ada25cfe66"
+      },
+      {
+        "filename": "GE0043_L.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE0043_L.jpg",
+        "sha256": "a3b89b2f0208fbffb7b7a68e0862f28785d1980a406e9cc9351cc59744a77427"
+      },
+      {
+        "filename": "GE0043_L.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE0043_L.svg",
+        "sha256": "03246896e917ad7b716a46fe60f3d2060c626de1124991b3c2896487c0573095"
+      },
+      {
+        "filename": "GE0043_L.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE0043_L_worker.log",
+        "sha256": "34e5d600cf50bf26bddd71a9843c75218228c24217b4d7d342f072d668947741"
+      },
+      {
+        "filename": "GE0043_L.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE0043_L_components.jsonl",
+        "sha256": "50e662da93db447eeca89c47f6bb15c4b6b09b1a40222a173d0531146fc4e0db"
+      },
+      {
+        "filename": "GE0202_S.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE0202_S.jpg",
+        "sha256": "42c142b3b2cef91a3c92cd363e327fa71e83e5bfd8cbc64a2d85bf34329e7dd9"
+      },
+      {
+        "filename": "GE0202_S.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE0202_S.svg",
+        "sha256": "9f068cbe50625e8aea8fba192842de53148eb2ae3b87b20c9f2430c8aa23254b"
+      },
+      {
+        "filename": "GE0202_S.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE0202_S_worker.log",
+        "sha256": "18c3aef9ca0d2fd617e37254392354e122237bd480c8cdc2f2d7df84f2a20a40"
+      },
+      {
+        "filename": "GE0202_S.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE0202_S_components.jsonl",
+        "sha256": "7466d247db57e407e6195d8a26715b6574c0e1f0150b04f935c8d94d3986ddfe"
+      },
+      {
+        "filename": "GE0305_M.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE0305_M.jpg",
+        "sha256": "5e45be65ee6d2e2b268cae6257018333f124e0d493b055aa7fdf98d274c5f104"
+      },
+      {
+        "filename": "GE0305_M.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE0305_M.svg",
+        "sha256": "789a77d806a51329101f428370c7dac2de4c2540cf4d6c711d11cf5cd3bf5837"
+      },
+      {
+        "filename": "GE0305_M.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE0305_M_worker.log",
+        "sha256": "4796b6429638cf497097a60376ee76200f0c36862d36a2423eeac51ce24b2863"
+      },
+      {
+        "filename": "GE0305_M.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE0305_M_components.jsonl",
+        "sha256": "ccb98354ed7908c214ab84ce74909a673ec2f4cffe36b5911d7a6de2fa112d89"
+      },
+      {
+        "filename": "GE1100_S.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE1100_S.jpg",
+        "sha256": "3e66b03cc799cd72ae864ed3fb13fd2687a078d48d0bd3ab8fefcc05a94c7492"
+      },
+      {
+        "filename": "GE1100_S.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE1100_S.svg",
+        "sha256": "5d483e9f31e5dae66f2f5752873b78d251161ffe2f132bb6eea60f2e571bf810"
+      },
+      {
+        "filename": "GE1100_S.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE1100_S_worker.log",
+        "sha256": "d1db975c2177a8d0f1b93d3a16e7895ae695988a079325e218dd8d89991e0587"
+      },
+      {
+        "filename": "GE1100_S.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE1100_S_components.jsonl",
+        "sha256": "eee85639a1c9cd801ca6c044d2a4c0cfe2d426822a73b73622b5f6a6ddbc88b7"
+      },
+      {
+        "filename": "GE9001_1S.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE9001_1S.jpg",
+        "sha256": "0322d6a1e7f7fadfc2dc888752c8e14b31d939c9fc9324c2c9e521ddb289a546"
+      },
+      {
+        "filename": "GE9001_1S.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE9001_1S.svg",
+        "sha256": "55507a8a27a2931bd0a9b162e436063a0fc8938c240dc8ca705a3ec0187b3cba"
+      },
+      {
+        "filename": "GE9001_1S.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE9001_1S_worker.log",
+        "sha256": "a3f4ee49804e3d6ad2618bd97751bf16ec26acb7f8a7e5ef7d2a907b4de5c254"
+      },
+      {
+        "filename": "GE9001_1S.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE9001_1S_components.jsonl",
+        "sha256": "789916546613e43cb6dcf7edb2ce2aa87d282513d7d2c4c8650bd8cdb5a844d7"
+      },
+      {
+        "filename": "GE9021_4S.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE9021_4S.jpg",
+        "sha256": "997a19ccbdd87cfb3b81251ac203bf91a65eede56595ac132bab53539816161a"
+      },
+      {
+        "filename": "GE9021_4S.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE9021_4S.svg",
+        "sha256": "ab016796b2772b14efbdc6ee7a2b657cfdc72d18489d2e4bd86c354fae5f33d4"
+      },
+      {
+        "filename": "GE9021_4S.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE9021_4S_worker.log",
+        "sha256": "795747aca561c7ab4348c8752a413ae45e4d842643edd2d87e03a8b632565457"
+      },
+      {
+        "filename": "GE9021_4S.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE9021_4S_components.jsonl",
+        "sha256": "aebcfdd0f3cc6094386ffd8e309ee5a010a1306c7f631e549fbb16b252f738b3"
+      },
+      {
+        "filename": "GE9022_2M.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE9022_2M.jpg",
+        "sha256": "9798f66b3d5953fe176453a36128249f867203be5d46cc4f592b8eb64e953ad8"
+      },
+      {
+        "filename": "GE9022_2M.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE9022_2M.svg",
+        "sha256": "997485d08a7732f50baa5506fbf0c07007e9e9762eda79b3dd43e31ba1ce6478"
+      },
+      {
+        "filename": "GE9022_2M.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE9022_2M_worker.log",
+        "sha256": "a1ae7aaa1dc379d369727b152d8ae6ed2f73e55d2873e4bbea9db6ef9b91fd7e"
+      },
+      {
+        "filename": "GE9022_2M.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE9022_2M_components.jsonl",
+        "sha256": "68c60d0bc7e8d9d50c2f2481ba90e010dacb3ca774f5fb28b4de5bf9412ad2f6"
+      },
+      {
+        "filename": "GE9022_7M.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE9022_7M.jpg",
+        "sha256": "98512eccf2fcbef3736ceca42606f79a3dd989c0b3eb5505f8b482dc609734c0"
+      },
+      {
+        "filename": "GE9022_7M.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE9022_7M.svg",
+        "sha256": "a3e2ae7c11c38e58d3e7e668d9fae2051acc306f45efba143ed4bbf3cd455a8d"
+      },
+      {
+        "filename": "GE9022_7M.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE9022_7M_worker.log",
+        "sha256": "c235f04c0764b51e3d9a80828e00bc50a82eb4bb9b7e24c82172f61afa17e6de"
+      },
+      {
+        "filename": "GE9022_7M.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE9022_7M_components.jsonl",
+        "sha256": "dc9dcf7e85cc698c09ba2738c940da28cc16ec614c6a3279c086eb4dd2a499f7"
+      },
+      {
+        "filename": "GE9023_6S.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE9023_6S.jpg",
+        "sha256": "e5f741af25c3a0f997455afac0c18000a20ade0e48c569160fd762a34ea367c1"
+      },
+      {
+        "filename": "GE9023_6S.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE9023_6S.svg",
+        "sha256": "cf256ee1819444f58ec80243dc6a1f89e8cdd8349a2c3f237e19c45cf83bff7b"
+      },
+      {
+        "filename": "GE9023_6S.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE9023_6S_worker.log",
+        "sha256": "0e81887c017fef26a943065be3ebafd11d063733c11b20f82bcc20b3caebf71a"
+      },
+      {
+        "filename": "GE9023_6S.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE9023_6S_components.jsonl",
+        "sha256": "038ac1b2fedb9cf5265775505c9f228505c4acb7755c3b695bacb8ef562c6828"
+      },
+      {
+        "filename": "GE9032_6S.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE9032_6S.jpg",
+        "sha256": "1ce4281d3aabb5a05c1d826c6c25e5fa89dd2399a11b39b5cfac42474baa6f7f"
+      },
+      {
+        "filename": "GE9032_6S.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE9032_6S.svg",
+        "sha256": "e554165b2da7f0ba32e1486adc7971b19ceed68647f6fba3bc663f48e5dd68bd"
+      },
+      {
+        "filename": "GE9032_6S.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE9032_6S_worker.log",
+        "sha256": "a2bb3ed72f455085500894b766d6f5b5bafb3842eee3004ec9a5a700593ca50b"
+      },
+      {
+        "filename": "GE9032_6S.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE9032_6S_components.jsonl",
+        "sha256": "2dfeb0e2decb4c22a7e78b95b88acf59acaa0bd10be523c131f2e3b54e949bd0"
+      },
+      {
+        "filename": "GE9033_6M.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE9033_6M.jpg",
+        "sha256": "7fed42aa875b00b0e52ee77c11456983afe61449fc72a676f388d8d913b66cac"
+      },
+      {
+        "filename": "GE9033_6M.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE9033_6M.svg",
+        "sha256": "decfb463067e6f5f257f4e8b37cfc926eae3ebb068ff1d122bd1315b748a0778"
+      },
+      {
+        "filename": "GE9033_6M.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE9033_6M_worker.log",
+        "sha256": "2bb3046b95197c305db3e1d2d86c84ec6d398a69d6cb57fa77119779038bec81"
+      },
+      {
+        "filename": "GE9033_6M.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE9033_6M_components.jsonl",
+        "sha256": "2805ff66fa8548075c1aa0664864d2212390d67f1f70e69e56424e600a05b2c6"
+      },
+      {
+        "filename": "GE9034_3M.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE9034_3M.jpg",
+        "sha256": "e1530bd74bd6cbba92e00dc983361d2ac32b16bc8927cf7e0918d38222e3b8cb"
+      },
+      {
+        "filename": "GE9034_3M.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE9034_3M.svg",
+        "sha256": "9cbf10e65b3c06a984844f7f9e02a1ac00f8b1f75220ff0850e16fcb435d617f"
+      },
+      {
+        "filename": "GE9034_3M.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE9034_3M_worker.log",
+        "sha256": "499d735a02439978c191bf6cdacc55550f196c7f4b0afd624a39f879fce5a29e"
+      },
+      {
+        "filename": "GE9034_3M.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE9034_3M_components.jsonl",
+        "sha256": "fccbeca08105b8cf304ed5b0fd97f5709246f630a123e5923cf78610e3289d1c"
+      },
+      {
+        "filename": "GE9041_4S.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE9041_4S.jpg",
+        "sha256": "149edf284a9409d394ff67506421cb89a16cacd996e481fc6fadc5d3eef9fdd2"
+      },
+      {
+        "filename": "GE9041_4S.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE9041_4S.svg",
+        "sha256": "8504b829d31439053e02927c86b5f3bc13d09fa3e3d45a9c63607347ed7c15bf"
+      },
+      {
+        "filename": "GE9041_4S.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE9041_4S_worker.log",
+        "sha256": "39a232136d3198c2db46f199c51ec3d1217e95fecaeda8762a5a620b145d8653"
+      },
+      {
+        "filename": "GE9041_4S.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE9041_4S_components.jsonl",
+        "sha256": "16aa769cce8e4f3ae2633cdfdbda506d37f2b924e85d8823b3c059aca5aa3ff9"
+      },
+      {
+        "filename": "GE9043_7M.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE9043_7M.jpg",
+        "sha256": "9e681fe2d73be173401c8829385b3c1f05c6be045c430ca6a2f7cad1aae6f0fc"
+      },
+      {
+        "filename": "GE9043_7M.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE9043_7M.svg",
+        "sha256": "c0c2d64aafa0e2ea976bac9a4cdf585e54dd022b397d887070a9e13be241cb32"
+      },
+      {
+        "filename": "GE9043_7M.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE9043_7M_worker.log",
+        "sha256": "7677e11edcdd5b3a9e1fd0d8fdcb42bfac89b86ca5170c3eebe10c57bd677b61"
+      },
+      {
+        "filename": "GE9043_7M.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE9043_7M_components.jsonl",
+        "sha256": "e06acfa78a7ca885f51e5696ed27c96e7eee6bdb400f7f26d15541e681fcc205"
+      },
+      {
+        "filename": "GE9044_1S.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE9044_1S.jpg",
+        "sha256": "c37107097335a4996fd245eebf217490e7b28905835717ee3bc90ffa992d7782"
+      },
+      {
+        "filename": "GE9044_1S.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE9044_1S.svg",
+        "sha256": "909fff6606861aebe3ebe248c9e27a47fee4d00529ea377088ec57cc079d8961"
+      },
+      {
+        "filename": "GE9044_1S.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE9044_1S_worker.log",
+        "sha256": "de2f2729fd7265de87999a169a83e146d6d8a00460da00f98dce6736e7edaafd"
+      },
+      {
+        "filename": "GE9044_1S.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE9044_1S_components.jsonl",
+        "sha256": "6dc47f7cb7b84a14dae1f5ee7a4593237378da00805a63fe3d54f9e46343de06"
+      },
+      {
+        "filename": "GE9044_7S.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/GE9044_7S.jpg",
+        "sha256": "deece6e5aaf7a5bd7d28f48ea7eee908247244215c8b435c092c6692c318fe9f"
+      },
+      {
+        "filename": "GE9044_7S.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/GE9044_7S.svg",
+        "sha256": "95dbb9557506bd227ffc07b46044289ad3b82d1b417a54dd0768f49a06adafc9"
+      },
+      {
+        "filename": "GE9044_7S.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/GE9044_7S_worker.log",
+        "sha256": "6b7ad7b35ecef5ae978ea5404fdf81ef973ff3bed86fa8b5ee70e0b1fafa6283"
+      },
+      {
+        "filename": "GE9044_7S.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/GE9044_7S_components.jsonl",
+        "sha256": "484f71a7842b4a764d94bf8502acd9e7ac2afe85635ccd9a3b44c227001d5592"
+      },
+      {
+        "filename": "L60x_T.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/L60x_T.jpg",
+        "sha256": "875966f4350eeed75030084e0cfb71014817c7823cc974d7924b30f5439f9024"
+      },
+      {
+        "filename": "L60x_T.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/L60x_T.svg",
+        "sha256": "72ac9f3e71bd5a6ace88e1df73b29ce5a783ed316d8322641b375b110504c82a"
+      },
+      {
+        "filename": "L60x_T.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/L60x_T_worker.log",
+        "sha256": "656da87ef2bce89add4a2fcdfbe630ee81b4d527b3f77d100e3706c93cb5cc30"
+      },
+      {
+        "filename": "L60x_T.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/L60x_T_components.jsonl",
+        "sha256": "7c7a1b6951c215d8cc5f695626029a115ac09bd592983f6f68a6a1575797c69d"
+      },
+      {
+        "filename": "NAV0014.JPG",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/NAV0014.JPG",
+        "sha256": "feaf02daa6678205f79eeee6aed02cae3a761927766da5106e762796915bdb44"
+      },
+      {
+        "filename": "NAV0014.JPG",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/NAV0014.svg",
+        "sha256": "26925e114badbca259a796124b4c053d8fae996076a74a7ed1d6b8a93ee20dc1"
+      },
+      {
+        "filename": "NAV0014.JPG",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/NAV0014_worker.log",
+        "sha256": "b466a2b1a0064ca0e382ef543c238db00946fc091bdc5d1a5dd0671a1c6238b8"
+      },
+      {
+        "filename": "NAV0014.JPG",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/NAV0014_components.jsonl",
+        "sha256": "5f5f4e7806f5dafbfacfdb30c7056f3645d5ccfe5efa60aa046ee57a1f262a20"
+      },
+      {
+        "filename": "b_heating1.JPG",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/b_heating1.JPG",
+        "sha256": "b9383db5768b961942a038e6ad8fa04a08d2b6f26efdfdb17f3271b4b0e54a52"
+      },
+      {
+        "filename": "b_heating1.JPG",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/b_heating1.svg",
+        "sha256": "84e28a22a30a4418f656be903f0d755c6c016788e8cc9143420f2822fc8ca42d"
+      },
+      {
+        "filename": "b_heating1.JPG",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/b_heating1_worker.log",
+        "sha256": "b278a2b4e2454e6d9dbdc8139df3a7732238f55058f0db4f3a41d51d5a958f26"
+      },
+      {
+        "filename": "b_heating1.JPG",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/b_heating1_components.jsonl",
+        "sha256": "8566139aba73f60794396b52c4ff18753ed967992cfd8e71d84d1fa58c921307"
+      },
+      {
+        "filename": "b_trend_online.jpg",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/b_trend_online.jpg",
+        "sha256": "ae7c2e43ca438f78fce5dfa203caf8a5c3235008558579d7e75e2a6496254756"
+      },
+      {
+        "filename": "b_trend_online.jpg",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/b_trend_online.svg",
+        "sha256": "ec55826621fe7dc2c51065e0c07495f4a1a5f5e8cc94ab7d86ac4096904d8c5d"
+      },
+      {
+        "filename": "b_trend_online.jpg",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/b_trend_online_worker.log",
+        "sha256": "373694ace3cf117e67765c3299dfcba0655d0c06ec287aa6025a2a6b0b57c268"
+      },
+      {
+        "filename": "b_trend_online.jpg",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/b_trend_online_components.jsonl",
+        "sha256": "bca1e5e2ee47925ba05675f2d715579cfada9799ca27c8fe1103b32d54d1950d"
+      },
+      {
+        "filename": "bottom.gif",
+        "kind": "image",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/image/bottom.gif",
+        "sha256": "9ad99b0df8d3f5e8cae006766b2cdb757d9953a06eb6f41244823974144ecd69"
+      },
+      {
+        "filename": "bottom.gif",
+        "kind": "vector",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/vector/bottom.svg",
+        "sha256": "135ea60645bc1c3a2cbe7ab5391207109e097eb985dcc6da7773cc4da35b5e4e"
+      },
+      {
+        "filename": "bottom.gif",
+        "kind": "worker",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/worker/bottom_worker.log",
+        "sha256": "488cbc9098055f06b303fd41fa1f97a77ba5f088879de50d72734f404e6d84ef"
+      },
+      {
+        "filename": "bottom.gif",
+        "kind": "components",
+        "path": ".tmp/catalog-run-audit/frozen-20261110T201918Z/components/bottom_components.jsonl",
+        "sha256": "5b786e6978196abcd265ec54178a1b74ce2cde6de9b74109d0c0127857c2de05"
+      }
+    ],
+    "already_replaced": []
+  }
+}

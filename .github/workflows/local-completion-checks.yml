@@ -174,6 +174,30 @@ jobs:
           path: config/test_run_seeds.jsonl
           retention-days: 7
 
+  clipped-rectangular-gradient-parent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Verify visible boundary constraints and negative evidence
+        run: python -m pytest -q tests/test_clipped_rectangular_parent.py tests/test_rectangular_gradient_parent.py tests/test_clipped_gradient_parent.py
+      - name: Independently render the declared primary cohort and accept actual CLI vectors
+        run: |
+          python -m tools.evaluate_clipped_rectangular_parent --prepare .tmp/clipped-rectangle-ci --seed 718293
+          python -m tools.evaluate_clipped_rectangular_parent --inputs .tmp/clipped-rectangle-ci --output .tmp/clipped-rectangle-cli --require-all
+          python -m tools.evaluate_clipped_rectangular_parent --inputs .tmp/clipped-rectangle-ci --output .tmp/clipped-rectangle-cli --audit .tmp/clipped-rectangle-audit.json --require-all
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: clipped-rectangular-parent-evidence
+          path: .tmp/clipped-rectangle-*
+          retention-days: 7
+
   rounded-svg-renderer:
     runs-on: ubuntu-latest
     timeout-minutes: 10

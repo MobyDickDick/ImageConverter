@@ -18,7 +18,7 @@ from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search,
 from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _register_steps
 from src.iCCModules.imageCompositeConverterGradientScene import _gradient
 from src.iCCModules.imageCompositeConverterPrimitiveScene import _circle, _local_quality
-from src.iCCModules.imageCompositeConverterSearchPortfolio import progress
+from src.iCCModules.imageCompositeConverterSearchPortfolio import progress, validated_result
 from src.iCCModules.imageCompositeConverterSearchScheduler import drain, schedule_models
 from src.iCCModules.imageCompositeConverterStructureSearch import complete, edit_proposals, scene_key
 
@@ -711,14 +711,15 @@ def _gradient_context(pixels, contract, residual_threshold):
 def _rectangular_gradient_context(pixels, contract, foreground, contour, threshold):
     """Measure a complete parent from exposed sides and, when claimed, arcs.
 
-    Cropped rectangular parents remain unsupported. A frame edge
-    cannot substitute for an observed parent boundary. Child proposals and
+    A frame edge cannot substitute for an observed parent boundary. Child proposals and
     registration reuse the common search after this boundary measurement.
     """
     x, y, w, h = cv2.boundingRect(contour)
     height, width = foreground.shape
     rounded = contract.get('parent_rounded', False)
-    if (min(w, h) < 24 or x < 4 or y < 4 or x+w > width-4 or y+h > height-4
+    if x < 4 or y < 4 or x+w > width-4 or y+h > height-4:
+        return _clipped_rectangular_context(pixels, contract, foreground, contour, threshold)
+    if (min(w, h) < 24
             or cv2.contourArea(contour) < (.85 if rounded else .95)*(w-1)*(h-1)):
         return None
     yy, xx = np.indices(foreground.shape)
@@ -829,6 +830,206 @@ def _rectangular_gradient_context(pixels, contract, foreground, contour, thresho
     if rounded:
         interior &= _native_fill_mask(dict(kind='rectangle', geometry=geometry, radius=radius),
                                       xx+.5, yy+.5, inset=3)
+    mask = ((np.max(abs(pixels.astype(float)-predicted), axis=2) > threshold) & interior).astype('uint8')
+    return geometry, colors, predicted, mask, dict(stroke=stroke, radius=radius)
+
+
+def _coverage_boundary(coverage, ring):
+    """Subpixel half-coverage crossings, never the boundary of the canvas."""
+    points = []
+    for axis in (0, 1):
+        a, b = ((coverage[:-1], coverage[1:]) if axis == 0 else
+                (coverage[:, :-1], coverage[:, 1:]))
+        allowed = (ring[:-1] & ring[1:]) if axis == 0 else (ring[:, :-1] & ring[:, 1:])
+        valid = allowed & ((a < .5) != (b < .5)) & (abs(b-a) > .1)
+        y, x = np.nonzero(valid)
+        t = (.5-a[valid])/(b[valid]-a[valid])
+        points.append(np.c_[x+.5+(t if axis == 1 else 0), y+.5+(t if axis == 0 else 0)])
+    points = np.concatenate(points)
+    height, width = coverage.shape
+    points = points[(points[:, 0] > 1) & (points[:, 0] < width-1)
+                    & (points[:, 1] > 1) & (points[:, 1] < height-1)]
+    return points[::max(1, len(points)//1200)]
+
+
+def _observed_rectangle(points, shape, rounded):
+    """Fit only observed sides/arcs; reject a rank-deficient hidden boundary.
+
+    The signed-distance Jacobian must independently constrain every bound
+    and radius. In particular a sharp rectangle with a missing side has a
+    zero column and cannot be completed from a generator's aspect ratio.
+    """
+    if len(points) < 32:
+        return None
+    height, width = shape
+    lo, hi = points.min(axis=0), points.max(axis=0)
+    if min(hi-lo) < 24:
+        return None
+
+    def residual(p):
+        left, top, right, bottom = p[:4]
+        radius = p[4] if rounded else 0.
+        q = abs(points-np.array([(left+right)/2, (top+bottom)/2]))
+        q -= np.array([(right-left)/2-radius, (bottom-top)/2-radius])
+        return np.linalg.norm(np.maximum(q, 0), axis=1)+np.minimum(np.max(q, axis=1), 0)-radius
+
+    best = None
+    for radius in ((8., 24., 48.) if rounded else (0.,)):
+        search = current_search()
+        if search is not None and search.time_reason():
+            return None
+        initial = np.r_[lo, hi, radius] if rounded else np.r_[lo, hi]
+        limit = min(shape)/3
+        lower = [-limit, -limit, 1., 1.]+([1.] if rounded else [])
+        upper = [width-1., height-1., width+limit, height+limit]+([limit] if rounded else [])
+        initial = np.clip(initial, np.array(lower)+.001, np.array(upper)-.001)
+        p = initial
+        for _ in range(32):
+            if search is not None and search.time_reason():
+                return None
+            error = residual(p)
+            jac = np.column_stack([(residual(p+np.eye(len(p))[i]*.025)-error)/.025
+                                   for i in range(len(p))])
+            step = np.linalg.solve(jac.T@jac+np.eye(len(p))*.001, -jac.T@error)
+            step *= min(1., 8./max(1e-9, np.max(abs(step))))
+            improved = False
+            for factor in (1., .5, .25, .125):
+                trial = np.clip(p+factor*step, lower, upper)
+                if np.mean(residual(trial)**2) < np.mean(error**2):
+                    p, improved = trial, True
+                    break
+            if not improved or np.max(abs(step)) < .0001:
+                break
+        error = residual(p)
+        if best is None or np.mean(error**2) < np.mean(best[1]**2):
+            jac = np.column_stack([(residual(p+np.eye(len(p))[i]*.025)-error)/.025
+                                   for i in range(len(p))])
+            best = p, error, jac
+    p, error, jac = best
+    singular = np.linalg.svd(jac, compute_uv=False)
+    if (singular[-1] < singular[0]*.015 or np.max(abs(error)) > 1.
+            or np.sqrt(np.mean(error**2)) > .35):
+        return None
+    left, top, right, bottom = p[:4]
+    radius = p[4] if rounded else 0.
+    if min(right-left, bottom-top) < 24 or radius > min(right-left, bottom-top)/3:
+        return None
+    if not rounded:
+        for axis, bound, low, high in ((0, left, top, bottom), (0, right, top, bottom),
+                                      (1, top, left, right), (1, bottom, left, right)):
+            side = (abs(points[:, axis]-bound) < .4) & (points[:, 1-axis] > low+2) & (points[:, 1-axis] < high-2)
+            if side.sum() < 8 or np.ptp(points[side, 1-axis]) < 8:
+                return None
+    # Radius needs independent curved evidence in at least two corners.
+    if rounded:
+        corners = 0
+        for cx in (left+radius, right-radius):
+            for cy in (top+radius, bottom-radius):
+                dx, dy = points[:, 0]-cx, points[:, 1]-cy
+                arc = ((dx < -1 if cx == left+radius else dx > 1)
+                       & (dy < -1 if cy == top+radius else dy > 1)
+                       & (abs(np.hypot(dx, dy)-radius) < 1.))
+                if arc.sum() >= 5:
+                    angles = np.unwrap(np.sort(np.arctan2(dy[arc], dx[arc])))
+                    corners += np.ptp(angles) >= .35
+        if corners < 2:
+            return None
+    return np.array([left, top, right, bottom, radius])
+
+
+def _clipped_rectangular_context(pixels, contract, foreground, contour, threshold):
+    """Explain cropped parent paint from independent visible boundary samples."""
+    height, width = foreground.shape
+    yy, xx = np.indices(foreground.shape)
+    silhouette = np.zeros_like(foreground)
+    cv2.drawContours(silhouette, [contour], -1, 1, cv2.FILLED)
+    distance = cv2.distanceTransform(silhouette, cv2.DIST_L2, 3)
+    # Distance-to-frame is excluded from this exposure estimate as well.
+    frame = np.minimum.reduce([xx, width-1-xx, yy, height-1-yy])
+    exposed = (distance > 4) & (distance < 18) & (frame > 4)
+    bounds = np.array([0., 0., float(width), float(height)])
+    colors = _gradient(pixels, exposed, bounds, contract['axis'])
+    if colors is None:
+        return None
+    coordinate = xx if contract['axis'] == 0 else yy
+    span = width if contract['axis'] == 0 else height
+    predicted = colors[:3]+((coordinate+.5)/span)[..., None]*(colors[3:]-colors[:3])
+    observed, delta = pixels.astype(float)-255., predicted-255.
+    plain = np.clip(np.sum(observed*delta, axis=2)/np.maximum(1., np.sum(delta*delta, axis=2)), 0, 1)
+    kernel = np.ones((13, 13), 'uint8')
+    ring = (cv2.dilate(silhouette, kernel) != cv2.erode(
+        silhouette, kernel, borderType=cv2.BORDER_CONSTANT, borderValue=0)) & (frame > 0)
+    coverage, stroke, sw = plain, np.zeros(3), 0.
+    if contract['outlined']:
+        residual = np.max(abs(observed-plain[..., None]*delta), axis=2)
+        evidence = ring & (residual > 4) & (pixels.mean(axis=2) >= 180)
+        samples, strength = pixels[evidence], residual[evidence]
+        if len(samples) < 24:
+            return None
+        stroke = np.median(samples[strength >= np.percentile(strength, 95)], axis=0)
+        rim = stroke-255.
+        dd, rr, dr = np.sum(delta*delta, axis=2), float(rim@rim), delta@rim
+        determinant = dd*rr-dr*dr
+        if np.any(determinant[ring] < .002*dd[ring]*rr):
+            return None
+        od, ort = np.sum(observed*delta, axis=2), observed@rim
+        coverage = np.clip((od*rr-ort*dr)/np.maximum(1., determinant), 0, 1)
+        rim_coverage = np.clip((ort*dd-od*dr)/np.maximum(1., determinant), 0, 1)
+    pure_fill = np.max(abs(pixels.astype(float)-predicted), axis=2) <= 2
+    pure_white = np.min(pixels, axis=2) >= 254
+    coverage[pure_fill], coverage[pure_white] = 1., 0.
+    points = _coverage_boundary(coverage, ring)
+    measured = _observed_rectangle(points, foreground.shape, contract.get('parent_rounded', False))
+    if measured is None:
+        return None
+    left, top, right, bottom, radius = measured
+    # Integrate antialias coverage on independently exposed straight spans.
+    # Interpolating the half-coverage crossing biases a subpixel edge by up
+    # to a quarter pixel, enough to displace a thin rim in another renderer.
+    edges = [left, top, right, bottom]
+    for index, (axis, bound, low, high) in enumerate((
+            (0, left, top, bottom), (1, top, left, right),
+            (0, right, top, bottom), (1, bottom, left, right))):
+        length = width if axis == 0 else height
+        if not 1 < bound < length-1:
+            continue
+        indices = np.arange(max(1, int(np.ceil(low+radius+4))),
+                            min((height if axis == 0 else width)-1, int(high-radius-4)))
+        a, b = max(0, int(bound)-3), min(length, int(np.ceil(bound))+4)
+        if len(indices) < 8:
+            continue
+        band = coverage[indices, a:b] if axis == 0 else coverage[a:b, indices].T
+        profile = np.median(band, axis=0)
+        rising = index < 2
+        if (profile[0] < .1 and profile[-1] > .9) if rising else (profile[0] > .9 and profile[-1] < .1):
+            edges[index] = a+float(np.sum(1-profile if rising else profile))
+    left, top, right, bottom = edges
+    if contract['outlined']:
+        rim_coverage[pure_fill | pure_white] = 0.
+        # Integrate the rim normal to each independently visible straight
+        # side. A cut edge contributes no samples or fictitious perimeter.
+        widths = []
+        for axis, bound in ((0, left), (0, right), (1, top), (1, bottom)):
+            length = width if axis == 0 else height
+            if not 3 < bound < length-3:
+                continue
+            low, high = (top+radius+4, bottom-radius-4) if axis == 0 else (left+radius+4, right-radius-4)
+            indices = np.arange(max(2, int(np.ceil(low))), min((height if axis == 0 else width)-2, int(high)))
+            a, b = max(0, int(bound)-6), min(length, int(bound)+7)
+            if len(indices) >= 8:
+                band = rim_coverage[indices, a:b] if axis == 0 else rim_coverage[a:b, indices]
+                widths.append(float(np.median(band.sum(axis=1 if axis == 0 else 0))))
+        if len(widths) < 2 or max(widths)-min(widths) > .85:
+            return None
+        sw = float(np.median(widths))
+        if not .5 <= sw <= min(right-left, bottom-top)/4:
+            return None
+    geometry = np.array([left-sw/2, top-sw/2, right-left+sw, bottom-top+sw, sw])
+    radius = radius+sw/2 if contract.get('parent_rounded') else 0.
+    slope = (colors[3:]-colors[:3])/span
+    start = colors[:3]+geometry[contract['axis']]*slope
+    colors = np.r_[start, start+geometry[2+contract['axis']]*slope]
+    interior = _native_fill_mask(dict(kind='rectangle', geometry=geometry, radius=radius), xx+.5, yy+.5, inset=3)
     mask = ((np.max(abs(pixels.astype(float)-predicted), axis=2) > threshold) & interior).astype('uint8')
     return geometry, colors, predicted, mask, dict(stroke=stroke, radius=radius)
 
@@ -1549,13 +1750,21 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
             if min(w, h) < 4:
                 return False
             if not (0 <= x < x+w <= width and 0 <= y < y+h <= height):
-                if i or obj['kind'] != 'circle':
+                if i:
                     return False
-                center, radius = np.array([x+w/2, y+h/2]), w/2
-                if (not 12 <= radius <= min(width, height)
-                        or not (0 <= center[0] <= width and 0 <= center[1] <= height)
-                        or _visible_parent_arc(center, radius, (height, width)) < np.pi):
-                    return False
+                if obj['kind'] == 'rectangle':
+                    # Bounds were independently constrained by visible sides
+                    # and arcs. Registration may refine them locally, never
+                    # replace a missing boundary with the canvas edge.
+                    measured = objects[0]['geometry']
+                    if np.max(abs(obj['geometry'][:4]-measured[:4])) > 2.5:
+                        return False
+                else:
+                    center, radius = np.array([x+w/2, y+h/2]), w/2
+                    if (not 12 <= radius <= min(width, height)
+                            or not (0 <= center[0] <= width and 0 <= center[1] <= height)
+                            or _visible_parent_arc(center, radius, (height, width)) < np.pi):
+                        return False
             if ((contract['outlined'] and not .5 <= sw <= min(w, h)/4)
                     or (not contract['outlined'] and sw != 0)):
                 return False
@@ -1661,9 +1870,12 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                 min(width, int(np.ceil(o['geometry'][0]+o['geometry'][2]))+3),
                 min(height, int(np.ceil(o['geometry'][1]+o['geometry'][3]))+3))
                for o in [*objects, *evidence_objects]]
+    clipped_rectangle = False
     if contract.get('parent_kind') == 'rectangle':
         context = _gradient_context(pixels, contract, 25)
         if context is None:
+            return None
+        if np.max(abs(objects[0]['geometry'][:4]-context[0][:4])) > 2.5:
             return None
         if contract.get('parent_rounded'):
             x, y, w, h, sw = objects[0]['geometry']
@@ -1673,6 +1885,26 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                     regions.append((max(0, int(left)-1), max(0, int(top)-1),
                                     min(width, int(np.ceil(left+extent))+1),
                                     min(height, int(np.ceil(top+extent))+1)))
+        x, y, w, h, sw = objects[0]['geometry']
+        clipped_rectangle = (x-sw/2 < 4 or y-sw/2 < 4 or x+w+sw/2 > width-4 or y+h+sw/2 > height-4)
+        if clipped_rectangle:
+            # Long visible sides need their own edge gate: the parent's large
+            # area and curved corners cannot certify a displaced straight rim.
+            margin = max(5., objects[0].get('radius', 0.)+sw+3)+3
+            for axis, edge, direction in ((0, x-sw/2, 1), (0, x+w+sw/2, -1),
+                                          (1, y-sw/2, 1), (1, y+h+sw/2, -1)):
+                inner = edge+direction*sw
+                if not 1 < inner < (width if axis == 0 else height)-1:
+                    continue
+                low, high = (y-sw/2+margin, y+h+sw/2-margin) if axis == 0 else (
+                    x-sw/2+margin, x+w+sw/2-margin)
+                a, b = (edge-3, edge+4+sw) if direction == 1 else (edge-4-sw, edge+3)
+                region = ((a, low, b, high) if axis == 0 else (low, a, high, b))
+                l, t, r, b = region
+                region = (max(0, int(l)), max(0, int(t)),
+                          min(width, int(np.ceil(r))), min(height, int(np.ceil(b))))
+                if region[2] > region[0] and region[3] > region[1]:
+                    regions.append(region)
         # Bright residual patches are not flat dark child proposals. Preserve
         # their local evidence too, so a large parent cannot dilute omissions.
         _, _, stats, _ = cv2.connectedComponentsWithStats(context[3])
@@ -1697,6 +1929,15 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
         return float(np.mean([errors[y:Y, x:X].mean() for x, y, X, Y in regions]))
 
     def corner_seeds():
+        if clipped_rectangle:
+            # Independent edge integration is accurate to a small fraction of
+            # a pixel. Probe that scale before a full coordinate sweep; thin
+            # rims can straddle a renderer's antialias quantization boundary.
+            for index in range(4):
+                for shift in (-.0625, .0625):
+                    candidate = parameters.copy()
+                    candidate[index] += shift
+                    yield candidate
         if contract.get('parent_rounded'):
             # Corrected native corners match the analytic area deficit. Keep
             # seeds close to that measured radius, sharing all image budgets.
@@ -1705,10 +1946,29 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
                 candidate[5*n] = radius
                 yield candidate
 
+    checkpoint_error = float('inf')
+
+    def satisfactory(p, measured):
+        nonlocal checkpoint_error
+        quality = qualities(measured[3])
+        if not all(q and q['passed'] for q in quality):
+            return False
+        # Preserve a fully checked incumbent while the common minimum-effort
+        # search continues. The supervisor can retain it at the hard deadline;
+        # topology, every visible side/corner, and strict pixels still apply.
+        if clipped_rectangle and measured[1] < checkpoint_error-1e-9:
+            validated_result(dict(svg=measured[2], rendered=measured[3], error=measured[1],
+                source='primitive_mixed_gradient_scene_v1', object_kinds=[o['kind'] for o in objects],
+                object_quality=quality[:n], evidence_quality=quality[n:]), pixels)
+            checkpoint_error = measured[1]
+        return True
+
     fitted = yield from _register_steps(parameters, geometry_count, build, valid, pixels, render_fn, error_fn,
                        'primitive_mixed_gradient_scene_v1', preserve_initial_error=True,
                        loss_fn=loss, initial_candidates=corner_seeds(),
-                       satisfactory_fn=lambda p, m: all(q and q['passed'] for q in qualities(m[3])))
+                       refinement_steps=(.125, .0625) if clipped_rectangle else (1., .5, .25, .125),
+                       eager_satisfactory=clipped_rectangle,
+                       satisfactory_fn=satisfactory)
     if fitted is None:
         return None
     quality = qualities(fitted['rendered'])

@@ -22,7 +22,7 @@ def _register(parameters, geometry_count, build, valid, image, render_fn, error_
 
 def _register_steps(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
               *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None,
-              refinement_steps=(1., .5, .25, .125), initial_candidates=()):
+              refinement_steps=(1., .5, .25, .125), initial_candidates=(), eager_satisfactory=False):
     """Bounded coordinate descent; optionally retain the best admissible iterate.
 
     A custom search loss does not override the caller's initial error bound.
@@ -86,19 +86,6 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     accepted = (parameters.copy(), best)
     if session and best[1] <= initial_error+1e-9:
         session.observe(best[1],evaluation=False)
-    # Raster-derived alternate seeds share this registration's cache, counters,
-    # error bound and image deadline; yield between them for the fair scheduler.
-    for candidate in initial_candidates:
-        if session and session.time_reason():
-            break
-        measured = measure(candidate)
-        if measured is not None and measured[0] < best[0]-1e-9:
-            parameters, best = np.asarray(candidate, dtype=float), measured
-            if best[1] <= initial_error+1e-9:
-                accepted = (parameters.copy(), best)
-                if session:
-                    session.observe(best[1], evaluation=False)
-        yield best[0] if best[1] <= initial_error+1e-9 else None
     satisfactory_cache = {}
     semantic_incumbent = None
 
@@ -116,6 +103,24 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
             semantic_incumbent = p.copy(), measured
         return passed and (not session.minimum_pending or preferred)
 
+    # Raster-derived alternate seeds share this registration's cache, counters,
+    # error bound and image deadline; yield between them for the fair scheduler.
+    for candidate in initial_candidates:
+        if session and session.time_reason():
+            break
+        candidate = np.asarray(candidate, dtype=float)
+        measured = measure(candidate)
+        checked = bool(eager_satisfactory and measured is not None and satisfactory(candidate, measured))
+        if measured is not None and (checked or measured[0] < best[0]-1e-9):
+            parameters, best = candidate, measured
+            if best[1] <= initial_error+1e-9:
+                accepted = (parameters.copy(), best)
+                if session:
+                    session.observe(best[1], evaluation=False)
+        yield best[0] if best[1] <= initial_error+1e-9 else None
+        if checked:
+            stop_reason = 'satisfactory'
+            break
     if satisfactory(parameters,best):
         stop_reason = 'satisfactory'
     yield best[0] if best[1] <= initial_error+1e-9 else None
@@ -139,12 +144,15 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
                     candidate = parameters.copy()
                     candidate[index] += sign*step*(4 if index >= geometry_count else 1)
                     measured = measure(candidate)
-                    if measured is not None and measured[0] < best[0]-1e-9:
+                    checked = bool(eager_satisfactory and measured is not None and satisfactory(candidate, measured))
+                    if measured is not None and (checked or measured[0] < best[0]-1e-9):
                         parameters, best, improved = candidate, measured, True
                         if best[1] <= initial_error+1e-9:
                             accepted = (parameters.copy(), best)
                             if session:
                                 session.observe(best[1],evaluation=False)
+                        if checked:
+                            stop_reason = 'satisfactory'
                     yield best[0] if best[1] <= initial_error+1e-9 else None
             if satisfactory(parameters,best):
                 stop_reason = 'satisfactory'
