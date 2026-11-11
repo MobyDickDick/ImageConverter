@@ -1,0 +1,2030 @@
+[
+  {
+    "case_id": "clipped_rectangle_02",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen. Das äussere Rechteck hat gerundete Ecken.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.6372387106815,
+          -3.4635921527407154,
+          314.72552257863697,
+          330.3705956184554
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 16.757281018271435
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          137.7418995525892,
+          101.63518198603637,
+          54.57190371526708,
+          54.57190371526708
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          202.34730559334437,
+          233.0801314571365,
+          53.851589776851064,
+          53.851589776851064
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          94.3512605438325,
+          213.03061405141702,
+          52.96139853047266,
+          53.116950379394346
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          73.7856941744959,
+          234.90298975097556,
+          51.878746846579354,
+          51.878746846579354
+        ],
+        "parent": 0,
+        "stroke_width": 2.0,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/clipped_rectangle_02.svg",
+    "input_sha256": "f7ef6667b9030ebaeaa97e198c1f3beb09d1f2cbd6db3a09e71222e9f5e63c8d",
+    "reference_svg_sha256": "e520028f9361a306b0a6389568843586bb30ad53848e29e9b099423ef74f940f"
+  },
+  {
+    "case_id": "clipped_rectangle_10",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.00701659193511,
+          -0.7862109612911999,
+          315.9859668161298,
+          325.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 3.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/clipped_rectangle_10.svg",
+    "input_sha256": "95ea76ae1f2463a9ca2e173e18f7117c2c73f60d060abe0153e38ce6d14efc50",
+    "reference_svg_sha256": "fe0cbf0e68aef0217f5e956f458143723d67db8b8226b66110750390889502be"
+  },
+  {
+    "case_id": "control_02",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.75701659193511,
+          -0.03621096129119994,
+          313.9859668161298,
+          323.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_02.svg",
+    "input_sha256": "9e1cf853285ef261b4b951fe1a5d22a1ba070ca6ac268736d8f6b1b6be7c6f7c",
+    "reference_svg_sha256": "405ed0e5ee08300d79eabe43372e491dadfbca5aa6eaf9b258b94c679486c187"
+  },
+  {
+    "case_id": "control_03",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.97576659193511,
+          0.18253903870880006,
+          313.9859668161298,
+          323.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_03.svg",
+    "input_sha256": "a122b78c83103cdf68683e172cd84ea78ce4c8c78700105376c8ca7df761bab2",
+    "reference_svg_sha256": "01254d3acf7b62f36e92c57c4e222248064e884ba4c7ab02f9aabbc397c544cd"
+  },
+  {
+    "case_id": "control_04",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          23.03826659193511,
+          0.24503903870880006,
+          313.9859668161298,
+          323.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_04.svg",
+    "input_sha256": "6f669a76da4950f7b4be2c11e9f91fd127c70b544fd07e200ca68d66377b6bd7",
+    "reference_svg_sha256": "bb9dfcd552b89bd722acd18c76aa25af4fad92e201f487147e26ff28a0503873"
+  },
+  {
+    "case_id": "control_05",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          23.25701659193511,
+          0.46378903870880006,
+          313.9859668161298,
+          323.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_05.svg",
+    "input_sha256": "468d011da610424e7fa2d0d4224c6be2bdf905ab7ef081aebde87b83f879d701",
+    "reference_svg_sha256": "5442c44f21a41dd066542d5e69071d319a0a6b14709dc7c7b26068362d54870a"
+  },
+  {
+    "case_id": "control_06",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.50701659193511,
+          -0.28621096129119994,
+          314.4859668161298,
+          324.30614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_06.svg",
+    "input_sha256": "8dc3174f187c64fea377dde3d152e8206eaa38badb865a6151ff88dcc8d28bce",
+    "reference_svg_sha256": "6769f03107b5baa4e84af2272f31292ac90acf1a21362a9eae3b6bba270057ce"
+  },
+  {
+    "case_id": "control_07",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.72576659193511,
+          -0.06746096129119994,
+          314.4859668161298,
+          324.30614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_07.svg",
+    "input_sha256": "021caff991b27c36658d3a5fee4bfc48ef7cf1ccee22b9746664b7b1bf1fe002",
+    "reference_svg_sha256": "d35e9815460ca823b3d70ae069e5875705cf70a2b66a23dd028a62a8a5ff12cb"
+  },
+  {
+    "case_id": "control_08",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.78826659193511,
+          -0.004960961291199939,
+          314.4859668161298,
+          324.30614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_08.svg",
+    "input_sha256": "702b2c12bf69331015a6cbf0f95ce78930c5f3312fa45e386358071915a94dd7",
+    "reference_svg_sha256": "d4e7d6e6c1be8a173176c7851fdc2b01dde5455399820e55dad087c78d5916d6"
+  },
+  {
+    "case_id": "control_09",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          23.00701659193511,
+          0.21378903870880006,
+          314.4859668161298,
+          324.30614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 1.5,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_09.svg",
+    "input_sha256": "07717218c51a918a89d5aef89a569197b6a9c2734573df0a21240f2eb79e7839",
+    "reference_svg_sha256": "db7af0cc0401ab3ae89ebf58aca901e50618835c62de1ba82e1b057966e3ad28"
+  },
+  {
+    "case_id": "control_10",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          21.75701659193511,
+          -1.0362109612912,
+          315.9859668161298,
+          325.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 3.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_10.svg",
+    "input_sha256": "d6c9fb000ff71bc1f75f6cd07478970ada7d6c5544a958208bb10047f891b7de",
+    "reference_svg_sha256": "1f8e159d06514a65b8309539cb808db9bd51c26f6e9803f2947a36c97a5a31cb"
+  },
+  {
+    "case_id": "control_11",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          21.97576659193511,
+          -0.8174609612911999,
+          315.9859668161298,
+          325.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 3.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_11.svg",
+    "input_sha256": "093db459bdbf8911d888acf03f8f61d875a45e78d4691cce809eca26139c3081",
+    "reference_svg_sha256": "3e8a85a7b819932c735365992744b8111b2204039f06b1dae6f7b53043a95563"
+  },
+  {
+    "case_id": "control_12",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.03826659193511,
+          -0.7549609612911999,
+          315.9859668161298,
+          325.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 3.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_12.svg",
+    "input_sha256": "65d80e26c238ef33fec3ff82ba4c7be0a9bb89117a9b5557fb6e005b7630e440",
+    "reference_svg_sha256": "177f5a1346b89ab120c2a746dbb1250f6a4d3b2e3932abb3d59bd86eb196bb11"
+  },
+  {
+    "case_id": "control_13",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.25701659193511,
+          -0.5362109612911999,
+          315.9859668161298,
+          325.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 0,
+        "stroke_width": 3.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_13.svg",
+    "input_sha256": "5a14cd9893120f2d8c8617e9d27e224f65fc1ec24ca3db825867da2cf351e75b",
+    "reference_svg_sha256": "ecd4fabdb76a5b527294c70849b4bb58f54b49ddc7a8d37a8f723f7b09ecd3d2"
+  },
+  {
+    "case_id": "control_14",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.75701659193511,
+          -0.03621096129119994,
+          313.9859668161298,
+          323.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_14.svg",
+    "input_sha256": "731f1dcc7f510584720913b1780f5ee527c7638a4df2134afca3f8418b759b8b",
+    "reference_svg_sha256": "a98cd44b68bc9aff9bf5c6b4f2dbba5de8f08bf4916814c98d74e2513818ffa7"
+  },
+  {
+    "case_id": "control_15",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.97576659193511,
+          0.18253903870880006,
+          313.9859668161298,
+          323.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_15.svg",
+    "input_sha256": "1dcbcd81a1396a5d6ab2e50f67f9aa615ca053416312fa4a134636c90a3a7f7c",
+    "reference_svg_sha256": "25911fc8e71c92c4bde507bae27a93bcec54f4f80633ac1cc2dafc74d0c701df"
+  },
+  {
+    "case_id": "control_16",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          23.03826659193511,
+          0.24503903870880006,
+          313.9859668161298,
+          323.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_16.svg",
+    "input_sha256": "f3ececc0094eb41861e452529e473850e421f367a2c6640b5808f539d8e1fe6a",
+    "reference_svg_sha256": "334c8de7f39ad610588bb3c33385f1d0fa2f02240ca7420a0cfc1e94c0bf4c6e"
+  },
+  {
+    "case_id": "control_17",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          23.25701659193511,
+          0.46378903870880006,
+          313.9859668161298,
+          323.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_17.svg",
+    "input_sha256": "3bed6ab2683c53379e6c7dcec5f54d1911d6bbfcc1a9ec20bd7bbe8aefadf0f4",
+    "reference_svg_sha256": "c0c02a0f24b1f30d895a9a8153681a94ea1e8a788565437016f690985cce9857"
+  },
+  {
+    "case_id": "control_18",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.50701659193511,
+          -0.28621096129119994,
+          314.4859668161298,
+          324.30614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.5,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_18.svg",
+    "input_sha256": "97d70cf19c304aa183f8379b8171ca529ff9933baee1b9754c971204b9bdae26",
+    "reference_svg_sha256": "99c1fb2480d95447a8acd8f711262f670120c0120220c80188ad74993c00b218"
+  },
+  {
+    "case_id": "control_19",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.72576659193511,
+          -0.06746096129119994,
+          314.4859668161298,
+          324.30614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.5,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_19.svg",
+    "input_sha256": "a0d4968f7464dcf82e3127d054fcc148aca1f751627e3102159384b2625bb95e",
+    "reference_svg_sha256": "19157a3f25cb13ba6d90c1f8710b860a00503b4088951115d07cd292c28846cc"
+  },
+  {
+    "case_id": "control_20",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.78826659193511,
+          -0.004960961291199939,
+          314.4859668161298,
+          324.30614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.5,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_20.svg",
+    "input_sha256": "f2ee912d0d9325107460390f2c21b3a28f5614cbc907766f493bcbfc2831ad84",
+    "reference_svg_sha256": "41afa039565698e697e1fed9bc0e1c82da55a19b349dff036b29b1338c9df716"
+  },
+  {
+    "case_id": "control_21",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          23.00701659193511,
+          0.21378903870880006,
+          314.4859668161298,
+          324.30614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 1.5,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_21.svg",
+    "input_sha256": "19f1663fcfd710fcfbd03a732cc32858ad46236fc4f51cf9165dbf1b95ff94f4",
+    "reference_svg_sha256": "bde0197f795a21f4a1d03258665de3dc48992040bf3f06567418bd88d1af6f24"
+  },
+  {
+    "case_id": "control_22",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          21.75701659193511,
+          -1.0362109612912,
+          315.9859668161298,
+          325.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 3.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_22.svg",
+    "input_sha256": "2394c262f5516547aa33adf7d0b43433968e8424f979c5ca280e4004a0f1ab7a",
+    "reference_svg_sha256": "ee58fb4a0f2e3df2eb061d5ad847ce8377c67c1f4224dccd3b2f1adc58c22e91"
+  },
+  {
+    "case_id": "control_23",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          21.97576659193511,
+          -0.8174609612911999,
+          315.9859668161298,
+          325.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 3.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_23.svg",
+    "input_sha256": "06c02755187e9b90387100336dfe40195cd841e86f670c102c39e34b44991554",
+    "reference_svg_sha256": "58f50b8b663284804ca03d1a09e1aab2380265a86e4fcbab50f48650eab65b40"
+  },
+  {
+    "case_id": "control_24",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.03826659193511,
+          -0.7549609612911999,
+          315.9859668161298,
+          325.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 3.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_24.svg",
+    "input_sha256": "56535d7adc175600a24feed82692e5600ba59e51d856541ad4fa742f5d57fbfd",
+    "reference_svg_sha256": "85c38c6808ac12a28b1236b957f83a9259e78afba18b5428fa37cc63830e759e"
+  },
+  {
+    "case_id": "control_25",
+    "width": 360,
+    "height": 360,
+    "description": "3 gefüllte Kreise und 2 gefüllte Rechtecke. Das äussere Rechteck hat einen horizontalen Farbverlauf. Die inneren Formen liegen innerhalb des äusseren Rechtecks und bilden 1 Überdeckungsgruppe sowie 2 einzelne Formen. Die Gruppen und einzelnen Formen liegen getrennt voneinander. Keine Beschriftung. Die Formen haben helle Konturen.",
+    "expected_objects": [
+      {
+        "kind": "rectangle",
+        "bbox": [
+          22.25701659193511,
+          -0.5362109612911999,
+          315.9859668161298,
+          325.80614679661034
+        ],
+        "parent": null,
+        "gradient_axis": 1,
+        "stroke_width": 3.0,
+        "corner_radius": 0.0
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          138.88237479002765,
+          104.75120568858964,
+          52.422712050812294,
+          52.422712050812294
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          203.46199283766796,
+          231.60867909987076,
+          54.61797383398744,
+          54.61797383398744
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      },
+      {
+        "kind": "rectangle",
+        "bbox": [
+          95.72949327161132,
+          213.47105077231475,
+          54.0023363900616,
+          52.86859315071804
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "corner_radius": 0.0,
+        "behind_all": [
+          4
+        ]
+      },
+      {
+        "kind": "circle",
+        "bbox": [
+          72.23045873171887,
+          235.8568637591977,
+          51.00605385793264,
+          51.00605385793264
+        ],
+        "parent": 0,
+        "stroke_width": 1.75,
+        "behind_all": []
+      }
+    ],
+    "crop_sides": [
+      "top"
+    ],
+    "reference_svg": "references/control_25.svg",
+    "input_sha256": "a027db482957baec9e2820a28aab6c1c07b76cb7afbf0771b298e5da409fc142",
+    "reference_svg_sha256": "38fcdef15baac35fbeffaf891a4aecee5073e2c63316657679af88e402204645"
+  }
+]

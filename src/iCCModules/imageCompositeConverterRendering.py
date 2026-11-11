@@ -523,7 +523,48 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                     position = (coordinates-low)/(high-low)
                     colors = np.stack([np.interp(position,[v[0] for v in stops],[v[1][c] for v in stops]) for c in range(3)],axis=-1)
                     colors = np.broadcast_to(colors[:,None,:] if axis==1 else colors[None,:,:],(h,w,3))
-                rgba = np.concatenate((np.rint(colors*alpha[:,:,None]/255).astype(np.uint8),alpha[:,:,None]),axis=2)
+                analytic_outline = False
+                # MuPDF quantizes straight edges to its scan grid. Near an
+                # integer boundary that loses a real sliver of coverage and
+                # moves Canny's equal-strength maximum by a whole pixel.
+                # Integrate axis-aligned sharp rectangles at the output pixel
+                # grid instead, including the centered solid stroke. Geometry
+                # and the saved vector remain unchanged.
+                stroke = path.get('stroke', 'none')
+                if (kind == 'rect' and float(path.get('rx', path.get('ry', '0'))) == 0
+                        and float(path.get('ry', path.get('rx', '0'))) == 0
+                        and 'stroke' in path.attrib
+                        and (stroke == 'none' or re.fullmatch(r'#[0-9a-fA-F]{6}', stroke))
+                        and path.get('stroke-linejoin', 'miter') == 'miter'
+                        and not any(e.get('stroke-width') or e.get('stroke-linejoin') for e in [root, *chain])):
+                    def coverage(left, top, right, bottom):
+                        xs, ys = np.arange(w), np.arange(h)
+                        left, right = ((v*scale+tx-viewport[0])*zoom+padding[0] for v in (left, right))
+                        top, bottom = ((v*scale+ty-viewport[1])*zoom+padding[1] for v in (top, bottom))
+                        return (np.clip(np.minimum(xs+1, right)-np.maximum(xs, left), 0, 1)[None, :]
+                                * np.clip(np.minimum(ys+1, bottom)-np.maximum(ys, top), 0, 1)[:, None])
+                    fill_alpha = coverage(bx, by, bx+bw, by+bh)
+                    # Quantize each premultiplied source-over operation, rather
+                    # than independently rounding a final float color/alpha
+                    # pair (which creates a one-level fringe on light paint).
+                    opacity = np.rint(fill_alpha*255)
+                    premultiplied = np.rint(np.rint(colors)*opacity[:, :, None]/255)
+                    sw = float(path.get('stroke-width', '1')) if stroke != 'none' else 0.
+                    if not math.isfinite(sw) or sw < 0:
+                        raise ValueError('invalid stroke width')
+                    if sw:
+                        outer = coverage(bx-sw/2, by-sw/2, bx+bw+sw/2, by+bh+sw/2)
+                        inner = coverage(bx+sw/2, by+sw/2, bx+bw-sw/2, by+bh-sw/2)
+                        stroke_alpha = np.rint((outer-inner)*255)
+                        rgb = np.array([int(stroke[i:i+2], 16) for i in (1, 3, 5)])
+                        premultiplied = (np.rint(premultiplied*(255-stroke_alpha[:, :, None])/255)
+                                         + np.rint(rgb*stroke_alpha[:, :, None]/255))
+                        opacity = np.rint(opacity*(255-stroke_alpha)/255)+stroke_alpha
+                    alpha = opacity.astype(np.uint8)
+                    rgba = np.concatenate((premultiplied.astype(np.uint8), alpha[:, :, None]), axis=2)
+                    analytic_outline = True
+                else:
+                    rgba = np.concatenate((np.rint(colors*alpha[:,:,None]/255).astype(np.uint8),alpha[:,:,None]),axis=2)
                 paint = fitz_module.Pixmap(fitz_module.csRGB,w,h,rgba.tobytes(),True)
                 encoded = base64.b64encode(paint.tobytes('png')).decode('ascii')
             except (ValueError,TypeError,IndexError,RuntimeError):
@@ -536,7 +577,8 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
             image.set('href','data:image/png;base64,'+encoded)
             outline = copy.deepcopy(path)
             outline.set('fill','none')
-            group.append(outline)
+            if not analytic_outline:
+                group.append(outline)
             parent.remove(path)
             parent.insert(index,group)
             changed = True

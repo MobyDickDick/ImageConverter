@@ -105,6 +105,16 @@ aus. [Nachweis und Grenzen](../artifacts/evaluation/axial_panel_issue_v1/README.
 
 ## Bearbeitung des höchsten Rangs
 
+Nachtrag 11.11.2026: [SVG-CLIPPED-SIDE-RENDERER-01](next_arbeitspaket_2026-11-11_clipped_side_renderer.md)
+ist synthetisch abgeschlossen. Genaue Pixelabdeckung und einzeln quantisierte
+Überlagerung korrigieren den lokalen Rendererfehler; gekoppelte
+Subpixelstartwerte beheben die separat belegte Registrierungsgrenze.
+Unveränderte Kontrollen verbessern sich von 21/26 auf 26/26, die vollständige
+Zusatzkohorte von 10/12 auf 12/12. Hauptkohorte und Varianten bleiben 12/12
+und 17/17; beide Renderer, alle lokalen Gates und bisherigen Budgets bleiben
+verbindlich. HC0010/Rail bleiben `sealed_unrun`. Rang 1/P0 sowie allgemeine
+Komposition und unabhängige reale Abnahme bleiben offen.
+
 Nachtrag 06.11.2026: [Gerundete äußere Verlaufsrechtecke](next_arbeitspaket_2026-11-06_rounded_parent.md)
 werden anhand vier sichtbarer Ecken und eines gemessenen nativen Radius mit
 den vorhandenen gemischten Kindern und Topologien verbunden. Die zusätzliche

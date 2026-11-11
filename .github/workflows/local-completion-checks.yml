@@ -185,12 +185,19 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin
       - run: python -m pip install -r requirements-dev.txt
       - name: Verify visible boundary constraints and negative evidence
-        run: python -m pytest -q tests/test_clipped_rectangular_parent.py tests/test_rectangular_gradient_parent.py tests/test_clipped_gradient_parent.py
+        run: python -m pytest -q tests/detailtests/test_clipped_side_renderer.py tests/test_clipped_rectangular_parent.py tests/test_rectangular_gradient_parent.py tests/test_clipped_gradient_parent.py
+      - name: Accept frozen independent thin-side renderer controls
+        run: python -m tools.evaluate_clipped_side_renderer --controls tests/fixtures/clipped_side_renderer --report .tmp/clipped-rectangle-renderer-controls.json --require-all
       - name: Independently render the declared primary cohort and accept actual CLI vectors
         run: |
           python -m tools.evaluate_clipped_rectangular_parent --prepare .tmp/clipped-rectangle-ci --seed 718293
           python -m tools.evaluate_clipped_rectangular_parent --inputs .tmp/clipped-rectangle-ci --output .tmp/clipped-rectangle-cli --require-all
           python -m tools.evaluate_clipped_rectangular_parent --inputs .tmp/clipped-rectangle-ci --output .tmp/clipped-rectangle-cli --audit .tmp/clipped-rectangle-audit.json --require-all
+      - name: Keep both previously failing additional cases in the complete cohort
+        run: |
+          python -m tools.evaluate_clipped_rectangular_parent --prepare .tmp/clipped-rectangle-extra --seed 391827
+          python -m tools.evaluate_clipped_rectangular_parent --inputs .tmp/clipped-rectangle-extra --output .tmp/clipped-rectangle-extra-cli --require-all
+          python -m tools.evaluate_clipped_rectangular_parent --inputs .tmp/clipped-rectangle-extra --output .tmp/clipped-rectangle-extra-cli --audit .tmp/clipped-rectangle-extra-audit.json --require-all
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -5,6 +5,12 @@
 Fortsetzung von SEARCH-STRUCTURE-01 nach der
 [Korrektur des Rundungsrenderers](next_arbeitspaket_2026-11-06_rounded_renderer.md).
 
+Nachtrag 11.11.2026: Die unten getrennt dokumentierten Renderer- und
+Registrierungsgrenzen sind im [Folgepaket](next_arbeitspaket_2026-11-11_clipped_side_renderer.md)
+behoben. Dieselben Haupt-/Zusatz-/Variantenraster bestehen jetzt 12/12,
+12/12 und 17/17 mit beiden Renderern. Die ursprünglichen negativen
+Versuche dieses Pakets bleiben erhalten.
+
 ## Ziel und Lieferumfang
 
 Die bestehende gemeinsame Komposition soll angeschnittene äußere Rechtecke

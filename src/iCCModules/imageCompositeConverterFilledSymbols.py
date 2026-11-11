@@ -105,7 +105,9 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
 
     # Raster-derived alternate seeds share this registration's cache, counters,
     # error bound and image deadline; yield between them for the fair scheduler.
-    for candidate in initial_candidates:
+    if eager_satisfactory and satisfactory(parameters, best):
+        stop_reason = 'satisfactory'
+    for candidate in (() if stop_reason else initial_candidates):
         if session and session.time_reason():
             break
         candidate = np.asarray(candidate, dtype=float)

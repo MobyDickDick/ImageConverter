@@ -1,0 +1,168 @@
+{
+  "validation": [
+    {
+      "name": "primary",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "tools.evaluate_clipped_rectangular_parent",
+        "--inputs",
+        ".tmp/clipped-rectangle/primary",
+        "--output",
+        ".tmp/clipped-side/final-primary",
+        "--require-all"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "primary-audit",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "tools.evaluate_clipped_rectangular_parent",
+        "--inputs",
+        ".tmp/clipped-rectangle/primary",
+        "--output",
+        ".tmp/clipped-side/final-primary",
+        "--audit",
+        ".tmp/clipped-side/primary-audit.json",
+        "--require-all"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "additional",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "tools.evaluate_clipped_rectangular_parent",
+        "--inputs",
+        ".tmp/clipped-rectangle/additional",
+        "--output",
+        ".tmp/clipped-side/final-additional",
+        "--require-all"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "additional-audit",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "tools.evaluate_clipped_rectangular_parent",
+        "--inputs",
+        ".tmp/clipped-rectangle/additional",
+        "--output",
+        ".tmp/clipped-side/final-additional",
+        "--audit",
+        ".tmp/clipped-side/additional-audit.json",
+        "--require-all"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "coupled",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "tools.evaluate_clipped_rectangular_parent",
+        "--inputs",
+        ".tmp/clipped-rectangle/coupled",
+        "--output",
+        ".tmp/clipped-side/final-coupled",
+        "--require-all"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "coupled-audit",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "tools.evaluate_clipped_rectangular_parent",
+        "--inputs",
+        ".tmp/clipped-rectangle/coupled",
+        "--output",
+        ".tmp/clipped-side/final-coupled",
+        "--audit",
+        ".tmp/clipped-side/coupled-audit.json",
+        "--require-all"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "regressions",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_clipped_rectangular_parent.py",
+        "tests/test_rectangular_gradient_parent.py",
+        "tests/test_rounded_gradient_parent.py",
+        "tests/test_clipped_gradient_parent.py",
+        "tests/detailtests/test_rounded_renderer.py",
+        "tests/detailtests/test_clipped_side_renderer.py",
+        "tests/detailtests/test_rendering_gradient_compatibility.py",
+        "tests/test_thin_rim_depth.py",
+        "tests/test_same_paint_overlap.py",
+        "tests/test_filled_symbols_runtime.py",
+        "tests/test_search_minimum_effort.py",
+        "-q",
+        "--junitxml=.tmp/clipped-side/regressions.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "core",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "tools/run_pytest_profile.py",
+        "core-green",
+        "--junitxml=.tmp/clipped-side/core.xml"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "tests": {
+    "targeted": {
+      "tests": 63,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 95.888
+    },
+    "regressions": {
+      "tests": 398,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 220.315
+    },
+    "core": {
+      "tests": 42,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.932
+    }
+  },
+  "runtime": {
+    "src/iCCModules/imageCompositeConverterRendering.py": "1cdcb9c1463e285ec8c1cad5a769703956cc4a19e690816c0b27fdef790bdd85",
+    "src/iCCModules/imageCompositeConverterMixedGradientScene.py": "297a386c58cd34b75346eea617710b6cc9fab301dfd287917206ea7a9c3f6d77",
+    "src/iCCModules/imageCompositeConverterFilledSymbols.py": "3684406746ed28bcfda2820ba22fdb4bdac7feafc73c3b6dccd8aebe820d9001"
+  },
+  "renderer_audit_command": ".venv/Scripts/python.exe -m tools.evaluate_clipped_side_renderer --controls tests/fixtures/clipped_side_renderer --report .tmp/clipped-side/renderer-after.json --require-all",
+  "raw_reports": {
+    "renderer-before.json": "9fabb9aeb17a17bde6a5b88a8818acaa17c68e4f6c17c40f2851eedfa2d43b1f",
+    "renderer-after.json": "cd09eb253f2df99d6c208862a591cb009e8829f9a0b023969456c87ccdffe4e8",
+    "primary-audit.json": "f5e77b3e0f9f70d323b4564eac2e4d00959a543b8359d5a71273fd83e5afe567",
+    "additional-audit.json": "01bd15c1aa1fb168c6d8604ddcd6fc3c7ff979671c0bad44e5d3c4f68cd0aebc",
+    "coupled-audit.json": "4c0ae6f74cc1e398cf877483ff0ba056606b64f90660a31abb06038aedd66444",
+    "renderer-final.json": "2f5b8de3119c49fbf52f934acdeaac80b8b38e0de5ac36342a6608a543121347"
+  },
+  "renderer_audit_exit_code": 0,
+  "sealed_verification": {
+    "command": ".venv/Scripts/python.exe -m tools.freeze_real_composition_holdouts --verify artifacts/evaluation/real_composition_holdout_freeze_v1/freeze/manifest.json",
+    "exit_code": 0
+  }
+}

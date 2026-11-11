@@ -3,6 +3,11 @@
 Rekonstruktionspaket vom 11.11.2026. Die unabhängige reale Gesamtabnahme
 und SEARCH-STRUCTURE-01 bleiben offen. HC0010 und Rail wurden nicht konvertiert.
 
+Nachtrag 11.11.2026: Der unten dokumentierte historische Stand bleibt
+unverändert erhalten. Das [anschließende Renderer-/Registrierungspaket](../clipped_side_renderer_v1/README.md)
+behebt beide Zusatzfehler und besteht dieselben Eingaben mit 12/12,
+12/12 und 17/17 unter beiden Renderern und allen lokalen Gates.
+
 ## Eingaben und Verfahren
 
 Hauptseed `718293`, separater Zusatzseed `391827`, gekoppelte Varianten

@@ -168,3 +168,37 @@ def test_checked_alternate_seed_keeps_the_original_error_bound(candidate, expect
             eager_satisfactory=True, preserve_initial_error=True))
     assert result['parameters'] == [expected]
     assert result['error'] <= result['initial_error']
+
+
+@pytest.mark.parametrize('index', [2, 10])
+def test_frozen_additional_registration_keeps_all_sides_and_original_error(index):
+    from pathlib import Path
+    import json
+    import cv2
+    from tools.evaluate_layered_scene import local_checks
+    folder = Path(__file__).parent/'fixtures'/'clipped_side_renderer'
+    case = json.loads((folder/'manifest.json').read_text(encoding='utf-8'))[0 if index == 2 else 1]
+    image = cv2.imread(str(folder/case['case_id']/'input'/(case['case_id']+'.png')))
+    with image_search(ImageSearch(SearchPolicy(seconds=5, max_seconds=5))):
+        result = fit_primitive_scene(case['width'], case['height'], description=case['description'],
+            image=image, render_fn=render, error_fn=lambda a, b: float(abs(a.astype(float)-b).mean()))
+    assert_accepted(case, image, result)
+    assert result['error'] <= result['initial_error']
+    corners, sides = parent_regions(case)
+    regions = case['expected_objects']+sides+[c for c in corners if c['visibility'] != 'hidden']
+    for renderer in (render, render_librsvg):
+        assert all(q['passed'] for q in local_checks(image, result['svg'], regions, render_fn=renderer))
+
+
+def test_eager_registration_checks_the_initial_fit_before_spending_alternate_seeds():
+    from src.iCCModules.imageCompositeConverterFilledSymbols import _register_steps
+    from src.iCCModules.imageCompositeConverterSearchScheduler import drain
+    def unexpected_seed():
+        pytest.fail('An already checked fit needs no alternate seed')
+        yield np.array([1.])
+    with image_search(ImageSearch(SearchPolicy(seconds=5, max_seconds=5))):
+        result = drain(_register_steps(np.array([0.]), 1, lambda p: str(p[0]), lambda p: True,
+            np.zeros((32, 32, 3)), lambda *a: np.zeros((32, 32, 3)),
+            lambda a, b: 0., 'initial_checked', satisfactory_fn=lambda *a: True,
+            initial_candidates=unexpected_seed(), eager_satisfactory=True))
+    assert result['evaluations'] == 1

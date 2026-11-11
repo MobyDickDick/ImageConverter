@@ -1930,11 +1930,21 @@ def _fit_instances_steps(width, height, *, pixels, contract, objects, render_fn,
 
     def corner_seeds():
         if clipped_rectangle:
-            # Independent edge integration is accurate to a small fraction of
-            # a pixel. Probe that scale before a full coordinate sweep; thin
-            # rims can straddle a renderer's antialias quantization boundary.
-            for index in range(4):
-                for shift in (-.0625, .0625):
+            # Edge integration is accurate to fractions of a pixel. Translate
+            # or resize opposite bounds together before individual coordinates:
+            # moving just one bound also changes the gradient's color field and
+            # can violate the original error bound despite fixing a local side.
+            for axis in range(2):
+                for shift in (-.03125, .03125, -.0078125, .0078125, -.0625, .0625):
+                    candidate = parameters.copy()
+                    candidate[[axis, axis+2]] += shift
+                    yield candidate
+                    candidate = parameters.copy()
+                    candidate[axis] += shift
+                    candidate[axis+2] -= shift
+                    yield candidate
+            for index in range(5):
+                for shift in (-.03125, .03125, -.0625, .0625):
                     candidate = parameters.copy()
                     candidate[index] += shift
                     yield candidate
