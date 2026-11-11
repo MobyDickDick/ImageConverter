@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [Katalogaudit-Folgepaket: zeitlich begrenzte Windows-Wachhalteanforderungen, saubere Freigabe und getrennte Unterbrechungsbelege (2026-11-11)](next_arbeitspaket_2026-11-11_conversion_power.md)
+
 - [Zweiter Katalogaudit: automatische Standbyphasen, 32 Ergebnisse und weiterhin fehlende Strukturvielfalt (2026-11-11)](catalog_search_followup_2026-11-11.md)
 
 - [Warum der Kataloglauf trotz vieler Versuche wenig befriedigende Ergebnisse liefert: gemessene Suchbreite, fehlendes Lernen und Reportingfehler (2026-11-11)](catalog_search_audit_2026-11-11.md)

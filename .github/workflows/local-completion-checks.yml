@@ -658,6 +658,30 @@ jobs:
           path: .tmp/component-value-ci
           retention-days: 7
 
+  conversion-power:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Check scoped requests, cancellation and observation gaps
+        run: python -m pytest -q tests/test_conversion_power.py tests/test_conversion_timing.py --junitxml=.tmp/conversion-power-tests.xml
+      - name: Probe real platform API and handle cleanup
+        run: python -m tools.check_conversion_power --report .tmp/conversion-power-native.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: conversion-power-${{ matrix.os }}
+          path: .tmp/conversion-power-*
+          retention-days: 7
+
   image-id-hardcoding-ratchet:
     runs-on: ubuntu-latest
     timeout-minutes: 5

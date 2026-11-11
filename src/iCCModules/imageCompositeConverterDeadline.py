@@ -23,6 +23,7 @@ import time
 
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import ImageSearch, image_search
 from src.iCCModules.imageCompositeConverterTiming import TimingTrace, clock_observation
+from src.iCCModules.imageCompositeConverterPower import conversion_awake
 
 
 class ProcessTree:
@@ -253,8 +254,9 @@ class ImageDeadline:
                         maximum_seconds=self.session.policy.max_seconds,
                         external_max_seconds=self.hard_seconds if math.isfinite(self.hard_seconds) else None)
         try:
-            return self._run(spec, config=config, action=action, render_isolated=render_isolated,
-                             render_timeout=render_timeout, worker=worker)
+            with conversion_awake(event_fn=self.trace.mark):
+                return self._run(spec, config=config, action=action, render_isolated=render_isolated,
+                                 render_timeout=render_timeout, worker=worker)
         finally:
             self.trace.mark('attempt_finished')
 
@@ -384,6 +386,7 @@ class ImageDeadline:
                 # real timing/supervision evidence for those failures as well.
                 control = dict(self.session.report(), isolated=True,
                                timing_trace=self.trace.path.name,
+                               observation_interruptions=list(self.trace.interruptions),
                                stop_reason='completed' if row is not None else 'no_result')
                 (root/(Path(spec['filename']).stem+'_deadline.json')).write_text(
                     json.dumps(control, indent=2)+'\n', encoding='utf-8')
@@ -468,6 +471,7 @@ class ImageDeadline:
     def _expired(self, spec, reason='time_limit'):
         control = dict(self.session.report(), stop_reason=reason, isolated=True,
                        timing_trace=self.trace.path.name,
+                       observation_interruptions=list(self.trace.interruptions),
                        external_max_seconds=self.hard_seconds if math.isfinite(self.hard_seconds) else None,
                        recovered_checkpoint=bool(self.best_row and self.best_row.get('checkpoint_proof')),
                        retained_output=bool(self.best_row))

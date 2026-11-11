@@ -96,6 +96,26 @@ def test_trace_retains_prior_attempts_and_observation_gaps(tmp_path, monkeypatch
     assert records[0]['attempt'] == records[1]['attempt'] != records[2]['attempt']
 
 
+def test_long_observation_gap_is_separate_from_cpu_work_and_has_no_assumed_cause(tmp_path, monkeypatch):
+    observed = dict(monotonic_seconds=100., unix_seconds=1000., process_cpu_seconds=2., pid=1)
+    monkeypatch.setattr(timing.time, 'monotonic', lambda: observed['monotonic_seconds'])
+    monkeypatch.setattr(timing, 'clock_observation', lambda: dict(observed))
+    path = tmp_path/'trace.jsonl'
+    trace = timing.TimingTrace(path)
+    trace.mark('worker_released')
+    observed.update(monotonic_seconds=700., unix_seconds=1600., process_cpu_seconds=2.01)
+    record = trace.mark('deadline_observed')
+    assert record['elapsed_seconds'] == 600.
+    interruption = record['observation_interruption']
+    assert interruption['observation_gap_seconds'] == 600.
+    assert interruption['observer_cpu_seconds'] == pytest.approx(.01)
+    assert interruption['unix_gap_seconds'] == 600.
+    assert interruption['cause'] == 'undetermined'
+    assert interruption['budget_action'] == 'elapsed_time_remains_charged'
+    assert trace.interruptions == [interruption]
+    assert read_trace(path)[-1]['observation_interruption'] == interruption
+
+
 @pytest.mark.parametrize('field,value', [('monotonic_seconds', -1.), ('pid', -1),
                                        ('observation_gap_seconds', 100.), ('elapsed_seconds', 100.)])
 def test_phase_analyzer_rejects_inconsistent_timing_evidence(tmp_path, field, value):

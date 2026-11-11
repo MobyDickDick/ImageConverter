@@ -227,7 +227,7 @@ def test_supervisor_pause_is_visible_without_publishing_a_late_handoff(spec, mon
     def paused_get(mailbox, *args, **kwargs):
         message = original(mailbox, *args, **kwargs)
         if message[0] == 'worker_started':
-            time.sleep(1.2)
+            time.sleep(5.1)
         return message
 
     monkeypatch.setattr(supervision.queue.Queue, 'get', paused_get)
@@ -238,11 +238,18 @@ def test_supervisor_pause_is_visible_without_publishing_a_late_handoff(spec, mon
     path = Path(spec['reports_out_dir'])/'sample_timing.jsonl'
     records = [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines()]
     resumed = next(record for record in records if record['phase'] == 'worker_started')
-    assert resumed['observation_gap_seconds'] >= 1.2
-    assert resumed['monotonic_seconds']-resumed['worker_observation']['monotonic_seconds'] >= 1.2
+    assert resumed['observation_gap_seconds'] >= 5.
+    assert resumed['monotonic_seconds']-resumed['worker_observation']['monotonic_seconds'] >= 5.
+    assert resumed['observation_interruption']['cause'] == 'undetermined'
+    assert resumed['observation_interruption']['observer_cpu_seconds'] < 1.
+    control = json.loads((Path(spec['reports_out_dir'])/'sample_deadline.json').read_text(encoding='utf-8'))
+    assert control['elapsed_seconds'] >= 5.
+    assert control['observation_interruptions'][0]['budget_action'] == 'elapsed_time_remains_charged'
     phases = [record['phase'] for record in records]
     assert phases.index('deadline_observed') < phases.index('termination_finished') < phases.index('attempt_finished')
     assert not next(record for record in records if record['phase'] == 'termination_finished')['worker_alive']
+    assert [record['status'] for record in records if record['phase'] == 'power_request'][-1] in {
+        'released', 'unavailable', 'unsupported'}
 
 
 def test_expired_containment_never_releases_worker(spec, monkeypatch):

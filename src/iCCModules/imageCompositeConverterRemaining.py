@@ -4,6 +4,7 @@ import importlib
 import json
 import os
 from pathlib import Path
+from src.iCCModules.imageCompositeConverterPower import conversion_awake
 
 _DEFAULT_RANGE_START_REF = "AR" + "0102"
 _DEFAULT_RANGE_END_REF = "AR" + "0104"
@@ -1130,6 +1131,7 @@ def _restoreBestlistSnapshotsForSelectedRegressions(
         )
 
 
+@conversion_awake()
 def convertRange(
     folder_path: str,
     csv_path: str,

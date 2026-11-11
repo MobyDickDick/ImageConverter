@@ -8,6 +8,30 @@ python -m src.imageCompositeConverter --help
 
 ## Häufige Aufrufe
 
+### Wachhalteanforderung während der Berechnung
+
+Unter Windows hält eine aktive Bereichskonvertierung eine System-/Ausführungsanforderung;
+einzeln gestartete überwachte Bildversuche verwenden dieselbe Absicherung.
+Der Bildschirm darf abschalten. Nach Abschluss oder Abbruch werden die
+Anforderungen freigegeben; Energiepläne werden nicht geändert. Fehler erscheinen
+als `[POWER] ... unavailable`, beim überwachten Bild zusätzlich in
+`reports/<name>_timing.jsonl`. Andere Betriebssysteme verwenden hier keine
+Windows-Anforderung. Der API-/Freigabetest ist reproduzierbar:
+
+```bash
+python -m tools.check_conversion_power --report .tmp/conversion-power-native.json
+```
+
+Längere Beobachtungslücken ab fünf Sekunden erscheinen getrennt unter
+`observation_interruption` im Timinglog und `observation_interruptions` im
+Deadlinebericht. Die Aufsichts-CPU-Zeit ist keine Worker-Rechenzeit; die Ursache
+bleibt ohne zusätzliche Systembelege unbestimmt. Das Bildbudget läuft weiter:
+Nach Ablauf wird der Worker beendet und ausschließlich ein bereits geprüftes
+Ergebnis gerettet. Weitere Eingaben werden regulär verarbeitet.
+Bewusster Standby und Windows-Energierichtlinien haben Vorrang; insbesondere
+ist dies keine unbegrenzte Modern-Standby-Garantie bei Akkubetrieb.
+[Umfang, native Prüfung und Grenzen](next_arbeitspaket_2026-11-11_conversion_power.md).
+
 ### Tatsächlichen Komponentenbeitrag messen
 
 `--disable-search-bot fine_coordinates` schaltet genau diesen Bot im adaptiven

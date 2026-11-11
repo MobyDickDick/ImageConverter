@@ -22,6 +22,8 @@ class TimingTrace:
         self.previous = self.started
         self.max_gap = 0.
         self.last_heartbeat = self.started
+        self.previous_observation = None
+        self.interruptions = []
 
     def mark(self, phase, **details):
         observation = clock_observation()
@@ -31,9 +33,22 @@ class TimingTrace:
         record = dict(schema='conversion_timing_v1', attempt=self.attempt, phase=phase,
                       **observation, elapsed_seconds=max(0., current-self.started),
                       observation_gap_seconds=gap, **details)
+        # Five missed one-second observations are an interruption signal, not
+        # proof of sleep. Preserve elapsed budgets and keep CPU separate.
+        if gap >= 5. and self.previous_observation is not None:
+            interruption = dict(
+                from_phase=self.previous_observation['phase'], to_phase=phase,
+                observation_gap_seconds=gap,
+                observer_cpu_seconds=max(0., observation['process_cpu_seconds']
+                    - self.previous_observation['process_cpu_seconds']),
+                unix_gap_seconds=observation['unix_seconds']-self.previous_observation['unix_seconds'],
+                cause='undetermined', budget_action='elapsed_time_remains_charged')
+            self.interruptions.append(interruption)
+            record['observation_interruption'] = interruption
         with self.path.open('a', encoding='utf-8') as handle:
             handle.write(json.dumps(record, allow_nan=False)+'\n')
         self.previous = current
+        self.previous_observation = record
         return record
 
     def heartbeat(self):
