@@ -307,6 +307,23 @@ def test_production_cli_does_not_render_in_parent_reporting(tmp_path, monkeypatc
     assert rows['sample.jpg']['search_satisfactory']
     assert rows['sample.jpg']['search_control']['isolated']
     assert (out/'reports/overview_svg_tiles.png').exists()
+    reports = out/'reports'
+    checkpoint = json.loads((reports/'conversion_checkpoint.json').read_text(encoding='utf-8'))
+    from src.iCCModules.imageCompositeConverterBatchReporting import loadConversionCheckpointResultMapImpl
+    frozen = loadConversionCheckpointResultMapImpl(str(reports/'conversion_checkpoint.json'))['sample.jpg']
+    import hashlib
+    assert checkpoint['stage'] == 'complete' and checkpoint['validated_count'] == 1
+    assert frozen['artifact_binding'] == 'verified' and frozen['search_satisfactory']
+    assert frozen['status'] == 'validated'
+    assert hashlib.sha256((reports/frozen['artifacts']['svg']['path']).read_bytes()).hexdigest() == frozen['svg_sha256']
+    run = reports/'runs'/checkpoint['run_id']
+    before = {str(path): path.read_bytes() for path in run.rglob('*') if path.is_file()}
+    assert app.main([str(tmp_path), '--descriptions-path', str(descriptions), '--output-dir', str(out),
+                     '--start', 'sample', '--end', 'sample', '--search-seed', '42',
+                     '--log-file', str(tmp_path/'cli.log'), '--deterministic-order']) == 0
+    second = json.loads((reports/'conversion_checkpoint.json').read_text(encoding='utf-8'))
+    assert second['run_id'] != checkpoint['run_id']
+    assert {name: Path(name).read_bytes() for name in before} == before
 
 
 def test_spawned_production_worker_blocks_and_reports_foreign_reference_svg(spec):

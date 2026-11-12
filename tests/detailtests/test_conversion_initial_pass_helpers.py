@@ -150,4 +150,5 @@ def test_initial_pass_exposes_per_variant_seed_and_checkpoint_hooks() -> None:
 
     assert stop_after_failure is False
     assert hook_calls == [(1, "AC0800_S.jpg"), (2, "AC0801_S.jpg")]
-    assert [row["variant_index"] for row in checkpoints] == [1, 2]
+    assert [row["variant_index"] for row in checkpoints] == [1, 1, 2, 2]
+    assert [row["state"] for row in checkpoints] == ["started", "completed", "started", "completed"]

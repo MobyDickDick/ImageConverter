@@ -1316,11 +1316,14 @@ def convertRange(
     }
     checkpoint_resume_rows: dict[str, dict[str, object]] = {}
     checkpoint_path = Path(reports_out_dir) / "conversion_checkpoint.json"
-    previous_run_id, previous_started_at = batch_run_state_helpers.readCheckpointIdentityImpl(checkpoint_path)
-    run_id = previous_run_id if checkpoint_resume_enabled and previous_run_id else batch_run_state_helpers.newRunIdImpl()
-    started_at = previous_started_at if checkpoint_resume_enabled and previous_started_at else batch_run_state_helpers.utcNowImpl()
+    previous_run_id, _previous_started_at = batch_run_state_helpers.readCheckpointIdentityImpl(checkpoint_path)
+    run_id = batch_run_state_helpers.newRunIdImpl()
+    started_at = batch_run_state_helpers.utcNowImpl()
     if checkpoint_resume_enabled and not force_reconvert:
         checkpoint_result_map = batch_reporting_helpers.loadConversionCheckpointResultMapImpl(str(checkpoint_path))
+        checkpoint_result_map = batch_run_state_helpers.restoreCheckpointRowsImpl(
+            checkpoint_result_map, reports_dir=reports_out_dir, svg_dir=svg_out_dir,
+            input_dir=folder_path, descriptions_path=csv_path)
         process_files, checkpoint_resume_rows = batch_reporting_helpers.partitionCheckpointResumeRowsImpl(
             process_files=process_files,
             checkpoint_result_map=checkpoint_result_map,
@@ -1371,8 +1374,26 @@ def convertRange(
     conversion_timeout_sec = max(0.0, float(os.environ.get("ICC_CONVERSION_TIMEOUT_SEC", "0") or "0"))
     image_deadlines = {}
 
+    batch_run_state_helpers.preserveLegacyRunImpl(
+        reports_out_dir, svg_dir=svg_out_dir, input_dir=folder_path,
+        result_map=batch_reporting_helpers.loadConversionCheckpointResultMapImpl(str(checkpoint_path)))
+    archive = batch_run_state_helpers.RunArchive(
+        reports_out_dir, run_id, svg_dir=svg_out_dir, input_dir=folder_path, descriptions_path=csv_path)
+    batch_run_state_helpers.atomicWriteJsonImpl(archive.root / "run.json", {
+        "run_id": run_id, "started_at": started_at, "files": files,
+        "input_dir": os.path.abspath(folder_path), "descriptions": archive.descriptions,
+        "resumed_from_run_id": previous_run_id if checkpoint_resume_rows else None,
+        "execution_mode": "semantic-only" if semantic_only else "standard",
+        "run_seed": run_seed, "iterations": base_iterations,
+        "search_policy": vars((search_settings() or {}).get("policy")) if (search_settings() or {}).get("policy") else None,
+        "external_timeout_seconds": conversion_timeout_sec,
+    })
+    last_checkpoint_meta = {}
+
     def _writeIncrementalCheckpoint(meta: dict[str, object]) -> None:
-        """Persist resumable batch state after each completed conversion task."""
+        """Publish a sealed revision, then atomically switch its checkpoint."""
+        last_checkpoint_meta.clear()
+        last_checkpoint_meta.update(meta)
         checkpoint_path = Path(reports_out_dir) / "conversion_checkpoint.json"
         result_map_path = Path(reports_out_dir) / "conversion_result_map.json"
         checkpoint_payload = {
@@ -1388,13 +1409,23 @@ def convertRange(
             "run_seed": int(Action.STOCHASTIC_RUN_SEED),
             "pass_seed_offset": int(Action.STOCHASTIC_SEED_OFFSET),
             "result_map_path": result_map_path.name,
-            "last_event": dict(meta),
+            "last_event": {key: value for key, value in meta.items() if key != "completion_manifest"},
+            "state": str(meta.get("state", "")),
+            "active_filename": str(meta.get("filename", "")) if meta.get("state") == "started" else "",
+            "input_count": len(files),
+            "validated_count": sum(row.get("search_satisfactory") is True for row in result_map.values()),
+            "draft_count": sum(row.get("search_satisfactory") is not True for row in result_map.values()),
         }
         _writeConversionBestlistMetrics(conversion_bestlist_path, conversion_bestlist_rows)
         _writeBatchFailureSummary(reports_out_dir, batch_failures)
         _writeQualityPassReport(reports_out_dir, quality_logs)
         batch_run_state_helpers.atomicWriteJsonImpl(result_map_path, result_map)
-        batch_run_state_helpers.atomicWriteJsonImpl(checkpoint_path, checkpoint_payload)
+        manifest = meta.get("completion_manifest") or dict(
+            checkpoint_payload, execution_status=str(meta.get("state", "")))
+        committed = archive.commit(checkpoint_payload, result_map, batch_failures, completion=manifest)
+        batch_run_state_helpers.atomicWriteJsonImpl(
+            Path(reports_out_dir) / "conversion_run_manifest.json",
+            json.loads((Path(reports_out_dir) / committed["completion_manifest_path"]).read_text(encoding="utf-8")))
 
     def _runOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
         search_config = search_settings()
@@ -1491,221 +1522,215 @@ def convertRange(
             variant, svg_out_dir, reports_out_dir
         )
 
-    # Initial conversion pass for all forms.
-    stop_after_failure = conversion_initial_pass_helpers.runInitialConversionPassImpl(
-        process_files=process_files,
-        result_map=result_map,
-        existing_donor_rows=existing_donor_rows,
-        conversion_bestlist_rows=conversion_bestlist_rows,
-        folder_path=folder_path,
-        svg_out_dir=svg_out_dir,
-        diff_out_dir=diff_out_dir,
-        rng=rng,
-        deterministic_order=deterministic_order,
-        base_iterations=base_iterations,
-        convert_one_fn=_convertOne,
-        try_template_transfer_fn=(
-            (lambda **_kwargs: (None, None)) if semantic_only else _tryTemplateTransfer
-        ),
-        is_conversion_bestlist_candidate_better_fn=_isConversionBestlistCandidateBetter,
-        store_conversion_bestlist_snapshot_fn=store_bestlist_snapshot,
-        restore_conversion_bestlist_snapshot_fn=restore_bestlist_snapshot,
-        choose_conversion_bestlist_row_fn=_chooseConversionBestlistRow,
-        should_stop_after_failure_fn=lambda failed_filename: bool(
-            batch_failures
-            and str(batch_failures[-1].get("filename", "")) == failed_filename
-            and str(batch_failures[-1].get("status", "")) in {"render_failure", "batch_error"}
-            and str(batch_failures[-1].get("reason", "")) != "TimeoutError"
-            and "validation_time_budget_exceeded" not in str(batch_failures[-1].get("details", ""))
-        ),
-        before_variant_fn=lambda variant_idx, _filename: setattr(Action, "STOCHASTIC_SEED_OFFSET", variant_idx),
-        checkpoint_fn=_writeIncrementalCheckpoint,
-        debug_event_fn=lambda event, **fields: debug_event(
-            event,
-            **({**fields, "row": debug_trace_helpers.summarizeConversionRowImpl(fields.get("row"))}
-               if "row" in fields else fields),
-        ),
-    )
-
-    current_rows = [
-        row
-        for row in result_map.values()
-        if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
-    ]
-    allowed_error_pp, threshold_source, _successful_threshold, _initial_threshold = _resolveAllowedErrorPerPixel(
-        current_rows,
-        cfg,
-    )
-    debug_event(
-        "quality_threshold_resolved",
-        allowed_error_per_pixel=allowed_error_pp,
-        source=threshold_source,
-        successful_threshold=_successful_threshold,
-        initial_threshold=_initial_threshold,
-    )
-
-    # Newly calculated variants remain eligible for stochastic quality passes.
-    # Reused rows are already fresh relative to their source and description;
-    # retrying them in the same invocation would defeat incremental conversion.
-    skip_variants: set[str] = set(reused_variants)
-    # A fully checked satisfactory result needs no larger-iteration repeat.
-    # Its proof belongs to the actual selected SVG, never just a pixel score.
-    skip_variants.update(str(row.get('variant','')).upper() for row in result_map.values()
-                         if row.get('search_satisfactory') is True)
-
-    _writeQualityConfig(
-        reports_out_dir,
-        allowed_error_per_pixel=allowed_error_pp,
-        skipped_variants=sorted(v for v in skip_variants if v),
-        source=threshold_source,
-    )
-
-    # Iteratively refine unresolved quality cases while preserving all already
-    # successful outputs (replace only when strictly better).
-    strategy_logs: list[dict[str, object]] = []
-    if max_quality_passes > 0:
-        stop_after_failure = conversion_quality_pass_helpers.runQualityPassesImpl(
-            max_quality_passes=max_quality_passes,
-            stop_after_failure=stop_after_failure,
-            deterministic_order=deterministic_order,
-            rng=rng,
-            base_iterations=base_iterations,
-            allowed_error_per_pixel=allowed_error_pp,
-            max_mean_delta2=max_mean_delta2,
-            max_std_delta2=max_std_delta2,
-            skip_variants=skip_variants,
+    _writeIncrementalCheckpoint({"stage": "run", "state": "started"})
+    try:
+        # Initial conversion pass for all forms.
+        stop_after_failure = conversion_initial_pass_helpers.runInitialConversionPassImpl(
+            process_files=process_files,
             result_map=result_map,
-            quality_logs=quality_logs,
+            existing_donor_rows=existing_donor_rows,
             conversion_bestlist_rows=conversion_bestlist_rows,
+            folder_path=folder_path,
+            svg_out_dir=svg_out_dir,
+            diff_out_dir=diff_out_dir,
+            rng=rng,
+            deterministic_order=deterministic_order,
+            base_iterations=base_iterations,
             convert_one_fn=_convertOne,
-            select_open_quality_cases_fn=_selectOpenQualityCases,
-            select_middle_lower_tercile_fn=_selectMiddleLowerTercile,
-            iteration_strategy_for_pass_fn=_iterationStrategyForPass,
-            adaptive_iteration_budget_for_quality_row_fn=_adaptiveIterationBudgetForQualityRow,
-            evaluate_quality_pass_candidate_fn=_evaluateQualityPassCandidate,
+            try_template_transfer_fn=(
+                (lambda **_kwargs: (None, None)) if semantic_only else _tryTemplateTransfer
+            ),
+            is_conversion_bestlist_candidate_better_fn=_isConversionBestlistCandidateBetter,
             store_conversion_bestlist_snapshot_fn=store_bestlist_snapshot,
             restore_conversion_bestlist_snapshot_fn=restore_bestlist_snapshot,
-            before_pass_fn=lambda pass_idx: setattr(Action, "STOCHASTIC_SEED_OFFSET", pass_idx * 100_000),
-            before_candidate_fn=lambda pass_idx, candidate_idx, _filename, _row: setattr(
-                Action,
-                "STOCHASTIC_SEED_OFFSET",
-                (pass_idx * 100_000) + candidate_idx,
+            choose_conversion_bestlist_row_fn=_chooseConversionBestlistRow,
+            should_stop_after_failure_fn=lambda failed_filename: bool(
+                batch_failures
+                and str(batch_failures[-1].get("filename", "")) == failed_filename
+                and str(batch_failures[-1].get("status", "")) in {"render_failure", "batch_error"}
+                and str(batch_failures[-1].get("reason", "")) != "TimeoutError"
+                and "validation_time_budget_exceeded" not in str(batch_failures[-1].get("details", ""))
             ),
+            before_variant_fn=lambda variant_idx, _filename: setattr(Action, "STOCHASTIC_SEED_OFFSET", variant_idx),
             checkpoint_fn=_writeIncrementalCheckpoint,
-            continue_after_max_if_improved=False,
+            debug_event_fn=lambda event, **fields: debug_event(
+                event,
+                **({**fields, "row": debug_trace_helpers.summarizeConversionRowImpl(fields.get("row"))}
+                   if "row" in fields else fields),
+            ),
         )
 
-    if not semantic_only:
-        _restoreBestlistSnapshotsForSelectedRegressions(
-            files=files,
-            result_map=result_map,
-            conversion_bestlist_rows=conversion_bestlist_rows,
-            svg_out_dir=svg_out_dir,
+        current_rows = [
+            row
+            for row in result_map.values()
+            if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
+        ]
+        allowed_error_pp, threshold_source, _successful_threshold, _initial_threshold = _resolveAllowedErrorPerPixel(
+            current_rows,
+            cfg,
+        )
+        debug_event(
+            "quality_threshold_resolved",
+            allowed_error_per_pixel=allowed_error_pp,
+            source=threshold_source,
+            successful_threshold=_successful_threshold,
+            initial_threshold=_initial_threshold,
+        )
+
+        # Newly calculated variants remain eligible for stochastic quality passes.
+        # Reused rows are already fresh relative to their source and description;
+        # retrying them in the same invocation would defeat incremental conversion.
+        skip_variants: set[str] = set(reused_variants)
+        # A fully checked satisfactory result needs no larger-iteration repeat.
+        # Its proof belongs to the actual selected SVG, never just a pixel score.
+        skip_variants.update(str(row.get('variant','')).upper() for row in result_map.values()
+                             if row.get('search_satisfactory') is True)
+
+        _writeQualityConfig(
+            reports_out_dir,
+            allowed_error_per_pixel=allowed_error_pp,
+            skipped_variants=sorted(v for v in skip_variants if v),
+            source=threshold_source,
+        )
+
+        # Iteratively refine unresolved quality cases while preserving all already
+        # successful outputs (replace only when strictly better).
+        strategy_logs: list[dict[str, object]] = []
+        if max_quality_passes > 0:
+            stop_after_failure = conversion_quality_pass_helpers.runQualityPassesImpl(
+                max_quality_passes=max_quality_passes,
+                stop_after_failure=stop_after_failure,
+                deterministic_order=deterministic_order,
+                rng=rng,
+                base_iterations=base_iterations,
+                allowed_error_per_pixel=allowed_error_pp,
+                max_mean_delta2=max_mean_delta2,
+                max_std_delta2=max_std_delta2,
+                skip_variants=skip_variants,
+                result_map=result_map,
+                quality_logs=quality_logs,
+                conversion_bestlist_rows=conversion_bestlist_rows,
+                convert_one_fn=_convertOne,
+                select_open_quality_cases_fn=_selectOpenQualityCases,
+                select_middle_lower_tercile_fn=_selectMiddleLowerTercile,
+                iteration_strategy_for_pass_fn=_iterationStrategyForPass,
+                adaptive_iteration_budget_for_quality_row_fn=_adaptiveIterationBudgetForQualityRow,
+                evaluate_quality_pass_candidate_fn=_evaluateQualityPassCandidate,
+                store_conversion_bestlist_snapshot_fn=store_bestlist_snapshot,
+                restore_conversion_bestlist_snapshot_fn=restore_bestlist_snapshot,
+                before_pass_fn=lambda pass_idx: setattr(Action, "STOCHASTIC_SEED_OFFSET", pass_idx * 100_000),
+                before_candidate_fn=lambda pass_idx, candidate_idx, _filename, _row: setattr(
+                    Action,
+                    "STOCHASTIC_SEED_OFFSET",
+                    (pass_idx * 100_000) + candidate_idx,
+                ),
+                checkpoint_fn=_writeIncrementalCheckpoint,
+                continue_after_max_if_improved=False,
+            )
+
+        if not semantic_only:
+            _restoreBestlistSnapshotsForSelectedRegressions(
+                files=files,
+                result_map=result_map,
+                conversion_bestlist_rows=conversion_bestlist_rows,
+                svg_out_dir=svg_out_dir,
+                reports_out_dir=reports_out_dir,
+            )
+
+        if semantic_only:
+            conversion_bestlist_rows = conversion_bestlist_helpers.mergeConversionReportRowsImpl(
+                previous_report_bestlist_rows,
+                conversion_bestlist_rows,
+            )
+
+        if (search_settings() or {}).get('isolate'):
+            search_settings()['completed_rows'] = result_map
+            policy = search_settings()['policy']
+            batch_run_state_helpers.atomicWriteJsonImpl(Path(reports_out_dir)/'deadline_policy.json', dict(
+                schema_version='image_deadline_policy_v1', scope='semantic-only',
+                seconds=policy.seconds, max_seconds=policy.max_seconds,
+                external_max_seconds=conversion_timeout_sec or None,
+                cross_image_harmonization=False, reporting_uses_measured_rows_and_pngs=True))
+        conversion_finalization_helpers.runConversionFinalizationImpl(
             reports_out_dir=reports_out_dir,
-        )
-
-    if semantic_only:
-        conversion_bestlist_rows = conversion_bestlist_helpers.mergeConversionReportRowsImpl(
-            previous_report_bestlist_rows,
-            conversion_bestlist_rows,
-        )
-
-    if (search_settings() or {}).get('isolate'):
-        search_settings()['completed_rows'] = result_map
-        policy = search_settings()['policy']
-        batch_run_state_helpers.atomicWriteJsonImpl(Path(reports_out_dir)/'deadline_policy.json', dict(
-            schema_version='image_deadline_policy_v1', scope='semantic-only',
-            seconds=policy.seconds, max_seconds=policy.max_seconds,
-            external_max_seconds=conversion_timeout_sec or None,
-            cross_image_harmonization=False, reporting_uses_measured_rows_and_pngs=True))
-    conversion_finalization_helpers.runConversionFinalizationImpl(
-        reports_out_dir=reports_out_dir,
-        quality_logs=quality_logs,
-        conversion_bestlist_path=conversion_bestlist_path,
-        conversion_bestlist_rows=conversion_bestlist_rows,
-        batch_failures=batch_failures,
-        strategy_logs=strategy_logs,
-        files=files,
-        result_map=result_map,
-        folder_path=folder_path,
-        csv_path=csv_path,
-        iterations=iterations,
-        svg_out_dir=svg_out_dir,
-        diff_out_dir=diff_out_dir,
-        normalized_selected_variants=normalized_selected_variants,
-        write_quality_pass_report_fn=_writeQualityPassReport,
-        write_conversion_bestlist_metrics_fn=_writeConversionBestlistMetrics,
-        write_batch_failure_summary_fn=_writeBatchFailureSummary,
-        write_optimization_render_telemetry_summary_fn=_writeOptimizationRenderTelemetrySummary,
-        write_optimization_render_telemetry_comparison_fn=_writeOptimizationRenderTelemetryComparison,
-        write_strategy_switch_template_transfers_report_fn=_writeStrategySwitchTemplateTransfersReport,
-        write_iteration_log_and_collect_semantic_results_fn=_writeIterationLogAndCollectSemanticResults,
-        write_chain_telemetry_batch_report_fn=_writeChainTelemetryBatchReport,
-        harmonize_semantic_size_variants_fn=(
-            (lambda *_args: None) if (search_settings() or {}).get('isolate')
-            else _harmonizeSemanticSizeVariants),
-        run_post_conversion_reporting_fn=_runPostConversionReporting,
-    )
-    if not semantic_only:
-        _restoreSatisfactoryBaselineIfBetter(
-            files=files,
-            folder_path=folder_path,
-            svg_out_dir=svg_out_dir,
-            reports_out_dir=reports_out_dir,
+            quality_logs=quality_logs,
             conversion_bestlist_path=conversion_bestlist_path,
             conversion_bestlist_rows=conversion_bestlist_rows,
-        )
-    if debug_jpeg_load:
-        _writeJpegFailureDiagnostics(
-            folder_path=folder_path,
-            reports_out_dir=reports_out_dir,
             batch_failures=batch_failures,
+            strategy_logs=strategy_logs,
+            files=files,
+            result_map=result_map,
+            folder_path=folder_path,
+            csv_path=csv_path,
+            iterations=iterations,
+            svg_out_dir=svg_out_dir,
+            diff_out_dir=diff_out_dir,
+            normalized_selected_variants=normalized_selected_variants,
+            write_quality_pass_report_fn=_writeQualityPassReport,
+            write_conversion_bestlist_metrics_fn=_writeConversionBestlistMetrics,
+            write_batch_failure_summary_fn=_writeBatchFailureSummary,
+            write_optimization_render_telemetry_summary_fn=_writeOptimizationRenderTelemetrySummary,
+            write_optimization_render_telemetry_comparison_fn=_writeOptimizationRenderTelemetryComparison,
+            write_strategy_switch_template_transfers_report_fn=_writeStrategySwitchTemplateTransfersReport,
+            write_iteration_log_and_collect_semantic_results_fn=_writeIterationLogAndCollectSemanticResults,
+            write_chain_telemetry_batch_report_fn=_writeChainTelemetryBatchReport,
+            harmonize_semantic_size_variants_fn=(
+                (lambda *_args: None) if (search_settings() or {}).get('isolate')
+                else _harmonizeSemanticSizeVariants),
+            run_post_conversion_reporting_fn=_runPostConversionReporting,
         )
-    _moveNonconvertableSources(folder_path=folder_path, batch_failures=batch_failures)
+        if not semantic_only:
+            _restoreSatisfactoryBaselineIfBetter(
+                files=files,
+                folder_path=folder_path,
+                svg_out_dir=svg_out_dir,
+                reports_out_dir=reports_out_dir,
+                conversion_bestlist_path=conversion_bestlist_path,
+                conversion_bestlist_rows=conversion_bestlist_rows,
+            )
+        if debug_jpeg_load:
+            _writeJpegFailureDiagnostics(
+                folder_path=folder_path,
+                reports_out_dir=reports_out_dir,
+                batch_failures=batch_failures,
+            )
+        _moveNonconvertableSources(folder_path=folder_path, batch_failures=batch_failures)
 
-    completion_manifest = batch_run_state_helpers.buildCompletionManifestImpl(
-        run_id=run_id,
-        started_at=started_at,
-        input_count=len(files),
-        result_map=result_map,
-        failures=batch_failures,
-        run_seed=run_seed,
-        resumed_result_count=len(checkpoint_resume_rows),
-    )
-    batch_run_state_helpers.atomicWriteJsonImpl(
-        Path(reports_out_dir) / "conversion_result_map.json",
-        result_map,
-    )
-    batch_run_state_helpers.atomicWriteJsonImpl(
-        Path(reports_out_dir) / "conversion_run_manifest.json",
-        completion_manifest,
-    )
-    batch_run_state_helpers.atomicWriteJsonImpl(
-        checkpoint_path,
-        {
-            "schema_version": "conversion_checkpoint_v1",
-            "run_id": run_id,
-            "started_at": started_at,
-            "stage": "complete",
-            "processed_result_count": len(result_map),
-            "batch_failure_count": len(batch_failures),
-            "run_seed": int(run_seed),
-            "result_map_path": "conversion_result_map.json",
-            "completion_manifest_path": "conversion_run_manifest.json",
-        },
-    )
+        completion_manifest = batch_run_state_helpers.buildCompletionManifestImpl(
+            run_id=run_id,
+            started_at=started_at,
+            input_count=len(files),
+            result_map=result_map,
+            failures=batch_failures,
+            run_seed=run_seed,
+            resumed_result_count=len(checkpoint_resume_rows),
+        )
+        batch_run_state_helpers.atomicWriteJsonImpl(
+            Path(reports_out_dir) / "conversion_result_map.json",
+            result_map,
+        )
+        _writeIncrementalCheckpoint({"stage": "complete", "state": "completed",
+                                     "completion_manifest": completion_manifest})
 
-    debug_event(
-        "run_completed",
-        result_count=len(result_map),
-        failure_count=len(batch_failures),
-        reused_count=len(reused_variants),
-        output_dir=os.path.abspath(out_root),
-    )
+        debug_event(
+            "run_completed",
+            result_count=len(result_map),
+            failure_count=len(batch_failures),
+            reused_count=len(reused_variants),
+            output_dir=os.path.abspath(out_root),
+        )
 
-    Action.STOCHASTIC_SEED_OFFSET = 0
-    Action.STOCHASTIC_RUN_SEED = 0
-    return out_root
+        return out_root
+    except BaseException as exc:
+        meta = dict(last_checkpoint_meta)
+        meta.pop("completion_manifest", None)
+        meta.update(state="failed" if isinstance(exc, Exception) else "interrupted", reason=type(exc).__name__)
+        _writeIncrementalCheckpoint(meta)
+        raise
+    finally:
+        Action.STOCHASTIC_SEED_OFFSET = 0
+        Action.STOCHASTIC_RUN_SEED = 0
+
 
 
 def _writeJpegFailureDiagnostics(*, folder_path: str, reports_out_dir: str, batch_failures: list[dict[str, str]]) -> int:

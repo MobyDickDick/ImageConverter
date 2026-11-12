@@ -31,7 +31,7 @@ def test_completion_manifest_separates_domain_technical_and_timeouts() -> None:
         run_id="run-1",
         started_at="2026-10-01T00:00:00Z",
         input_count=4,
-        result_map={"A.jpg": {}, "B.jpg": {}},
+        result_map={"A.jpg": {"search_satisfactory": True}, "B.jpg": {"search_satisfactory": False}},
         failures=[
             {"status": "semantic_mismatch", "reason": "circle_missing"},
             {"status": "batch_error", "reason": "TimeoutError"},
@@ -41,7 +41,9 @@ def test_completion_manifest_separates_domain_technical_and_timeouts() -> None:
     )
 
     assert manifest["stage"] == "complete"
-    assert manifest["successful_count"] == 2
+    assert manifest["processed_result_count"] == 2
+    assert manifest["successful_count"] == 1
+    assert manifest["draft_count"] == 1
     assert manifest["domain_failure_count"] == 1
     assert manifest["technical_failure_count"] == 1
     assert manifest["timeout_count"] == 1

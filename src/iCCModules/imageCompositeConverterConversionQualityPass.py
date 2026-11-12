@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import os
 
+from .imageCompositeConverterBatchRunState import taskCheckpointImpl
+
 
 def runQualityPassesImpl(
     *,
@@ -84,61 +86,55 @@ def runQualityPassesImpl(
                 os.environ["ICC_ANCHOR_RUN_CONTEXT"] = (
                     f"quality_pass:{pass_idx};candidate={variant};candidates={len(candidates)}"
                 )
-            adaptive_iteration_budget = adaptive_iteration_budget_for_quality_row_fn(row, iteration_budget)
-            new_row, failed = convert_one_fn(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
-            if failed:
-                stop_after_failure = True
-                continue
-            if new_row is None:
-                continue
+            with taskCheckpointImpl(checkpoint_fn, stage="quality_pass", pass_index=pass_idx,
+                                    candidate_index=candidate_idx, filename=filename,
+                                    variant=str(row.get("variant", "")).strip().upper()) as task_state:
+                adaptive_iteration_budget = adaptive_iteration_budget_for_quality_row_fn(row, iteration_budget)
+                new_row, failed = convert_one_fn(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
+                if failed:
+                    task_state["state"] = "failed"
+                    stop_after_failure = True
+                    continue
+                if new_row is None:
+                    task_state["state"] = "skipped"
+                    continue
 
-            improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = evaluate_quality_pass_candidate_fn(
-                row,
-                new_row,
-            )
-            if improved:
-                result_map[filename] = new_row
-                improved_in_pass = True
-                variant = str(new_row.get("variant", "")).strip().upper()
-                if variant:
-                    conversion_bestlist_rows[variant] = dict(new_row)
-                    store_conversion_bestlist_snapshot_fn(variant, new_row)
-            else:
-                variant = str(row.get("variant", "")).strip().upper()
-                if variant:
-                    restore_conversion_bestlist_snapshot_fn(variant)
-                if new_row.get('search_control'):
-                    # Keep the old SVG/metrics and the latest retry decision.
-                    # A failed repeat must not be requeued just because its
-                    # residual is spatially structured.
-                    row['search_control'] = new_row['search_control']
+                improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = evaluate_quality_pass_candidate_fn(
+                    row,
+                    new_row,
+                )
+                if improved:
+                    result_map[filename] = new_row
+                    improved_in_pass = True
+                    variant = str(new_row.get("variant", "")).strip().upper()
+                    if variant:
+                        conversion_bestlist_rows[variant] = dict(new_row)
+                        store_conversion_bestlist_snapshot_fn(variant, new_row)
+                else:
+                    variant = str(row.get("variant", "")).strip().upper()
+                    if variant:
+                        restore_conversion_bestlist_snapshot_fn(variant)
+                    if new_row.get('search_control'):
+                        # Keep the old SVG/metrics and the latest retry decision.
+                        # A failed repeat must not be requeued just because its
+                        # residual is spatially structured.
+                        row['search_control'] = new_row['search_control']
 
-            quality_logs.append(
-                {
-                    "pass": pass_idx,
-                    "filename": filename,
-                    "old_error_per_pixel": prev_error_pp,
-                    "new_error_per_pixel": new_error_pp,
-                    "old_mean_delta2": prev_mean_delta2,
-                    "new_mean_delta2": new_mean_delta2,
-                    "improved": improved,
-                    "decision": decision,
-                    "iteration_budget": adaptive_iteration_budget,
-                    "badge_validation_rounds": badge_rounds,
-                }
-            )
-            if checkpoint_fn is not None:
-                checkpoint_fn(
+                quality_logs.append(
                     {
-                        "stage": "quality_pass",
                         "pass": pass_idx,
-                        "candidate_index": candidate_idx,
                         "filename": filename,
-                        "variant": str(new_row.get("variant", row.get("variant", ""))).strip().upper(),
+                        "old_error_per_pixel": prev_error_pp,
+                        "new_error_per_pixel": new_error_pp,
+                        "old_mean_delta2": prev_mean_delta2,
+                        "new_mean_delta2": new_mean_delta2,
                         "improved": improved,
                         "decision": decision,
+                        "iteration_budget": adaptive_iteration_budget,
+                        "badge_validation_rounds": badge_rounds,
                     }
                 )
+                task_state.update(improved=improved, decision=decision)
 
         if not improved_in_pass and not structured_candidates_in_pass:
             break

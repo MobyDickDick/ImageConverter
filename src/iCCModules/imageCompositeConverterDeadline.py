@@ -449,6 +449,8 @@ class ImageDeadline:
         self.best_row['checkpoint_proof'] = dict(svg_sha256=checked['svg_hash'],
             source_file_sha256=checked['source_file_hash'], source_pixels_sha256=checked.get('source'),
             strict_pixel_gate=checked['quality'], local_semantics_passed=True)
+        self.best_row.update(svg_sha256=hashlib.sha256(target.read_bytes()).hexdigest(),
+                             source_file_sha256=checked['source_file_hash'], status='validated')
 
     @staticmethod
     def _score(row):

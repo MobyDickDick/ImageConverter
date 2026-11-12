@@ -6,6 +6,7 @@ import csv
 import json
 import math
 from pathlib import Path
+from .imageCompositeConverterBatchRunState import atomicTextFileImpl
 
 
 BESTLIST_COLUMNS = (
@@ -102,7 +103,7 @@ def pruneConversionBestlistRowsWithoutSvgImpl(
 
 def writeConversionBestlistMetricsImpl(manifest_path: Path, rows: dict[str, dict[str, object]]) -> None:
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
-    with manifest_path.open("w", encoding="utf-8", newline="") as f:
+    with atomicTextFileImpl(manifest_path, newline="") as f:
         writer = csv.writer(f, delimiter=";")
         writer.writerow(BESTLIST_COLUMNS)
         for variant in sorted(rows):
@@ -186,9 +187,9 @@ def isConversionBestlistCandidateBetterImpl(
 
     prev_status = str(previous_row.get("status", "")).strip().lower()
     cand_status = str(candidate_row.get("status", "")).strip().lower()
-    if prev_status == "semantic_ok" and cand_status != "semantic_ok":
+    if prev_status in {"semantic_ok", "validated"} and cand_status not in {"semantic_ok", "validated"}:
         return False
-    if prev_status != "semantic_ok" and cand_status == "semantic_ok":
+    if prev_status not in {"semantic_ok", "validated"} and cand_status in {"semantic_ok", "validated"}:
         return True
 
     def _has_ac0223_valve_head(row: dict[str, object] | None) -> bool:
@@ -225,9 +226,9 @@ def isConversionBestlistCandidateAtLeastAsGoodImpl(
 
     prev_status = str(previous_row.get("status", "")).strip().lower()
     cand_status = str(candidate_row.get("status", "")).strip().lower()
-    if prev_status == "semantic_ok" and cand_status != "semantic_ok":
+    if prev_status in {"semantic_ok", "validated"} and cand_status not in {"semantic_ok", "validated"}:
         return False
-    if prev_status != "semantic_ok" and cand_status == "semantic_ok":
+    if prev_status not in {"semantic_ok", "validated"} and cand_status in {"semantic_ok", "validated"}:
         return True
 
     def _has_ac0223_valve_head(row: dict[str, object] | None) -> bool:

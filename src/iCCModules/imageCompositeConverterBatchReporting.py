@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import math
 import os
+from .imageCompositeConverterBatchRunState import atomicTextFileImpl, resolveArchivedRowsImpl
 
 from src.iCCModules.imageCompositeConverterIterationLog import optimizationRenderTelemetryImpl
 from src.iCCModules.imageCompositeConverterReachability import classifyNotReachableImpl
@@ -32,7 +34,7 @@ def readValidationLogDetailsImpl(log_path: str) -> dict[str, str]:
 
 def writeBatchFailureSummaryImpl(reports_out_dir: str, failures: list[dict[str, str]]) -> None:
     summary_path = os.path.join(reports_out_dir, "batch_failure_summary.csv")
-    with open(summary_path, "w", encoding="utf-8", newline="") as f:
+    with atomicTextFileImpl(summary_path, newline="") as f:
         writer = csv.writer(f, delimiter=";")
         writer.writerow(
             [
@@ -430,7 +432,7 @@ def loadConversionCheckpointResultMapImpl(checkpoint_path: str) -> dict[str, dic
     try:
         with open(checkpoint_path, "r", encoding="utf-8") as f:
             checkpoint = json.load(f)
-    except (OSError, json.JSONDecodeError):
+    except (OSError, ValueError):
         return {}
     if not isinstance(checkpoint, dict):
         return {}
@@ -443,18 +445,17 @@ def loadConversionCheckpointResultMapImpl(checkpoint_path: str) -> dict[str, dic
         result_map_path = os.path.join(os.path.dirname(checkpoint_path), result_map_path)
 
     try:
-        with open(result_map_path, "r", encoding="utf-8") as f:
-            result_map = json.load(f)
-    except (OSError, json.JSONDecodeError):
+        with open(result_map_path, "rb") as f:
+            data = f.read()
+        if checkpoint.get("result_map_sha256") and hashlib.sha256(data).hexdigest() != checkpoint["result_map_sha256"]:
+            return {}
+        result_map = json.loads(data)
+    except (OSError, ValueError):
         return {}
     if not isinstance(result_map, dict):
         return {}
 
-    normalized: dict[str, dict[str, object]] = {}
-    for filename, row in result_map.items():
-        if isinstance(filename, str) and isinstance(row, dict):
-            normalized[filename] = dict(row)
-    return normalized
+    return resolveArchivedRowsImpl(result_map, os.path.dirname(checkpoint_path))
 
 
 

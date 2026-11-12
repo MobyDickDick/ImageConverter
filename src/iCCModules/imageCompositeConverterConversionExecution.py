@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import math
 import os
 import re
 import signal
 import shutil
 import time
+from pathlib import Path
 from contextlib import contextmanager
 
 from src.iCCModules.imageCompositeConverterValidationRounds import (
@@ -837,6 +839,7 @@ def convertOneImpl(
         _emit_anchor_variant_event("variant_done", status="poor_conversion_placeholder_svg")
         return None, True
 
+    restored_previous_svg = False
     if previous_svg_content.strip() and not copied_plan_b_sample_svg:
         previous_svg_path = os.path.join(svg_out_dir, f"{base}.__previous__.svg")
         try:
@@ -879,6 +882,7 @@ def convertOneImpl(
             # their M/S outputs even though the initial conversion succeeded.
             with open(svg_path, "w", encoding="utf-8") as handle:
                 handle.write(previous_svg_content)
+            restored_previous_svg = previous_svg_content != new_svg_content
     img = cv2_module.imread(image_path)
     pixel_count = 1.0
     width = 0
@@ -892,6 +896,8 @@ def convertOneImpl(
     largest_error_pixel_cluster_fraction = float("inf")
     error_pixel_cluster_excess = float("inf")
     spatial_quality_score = float("inf")
+    current_svg_mae = float("inf")
+    optimizer_best_error = float(best_error)
     if img is not None:
         height, width = img.shape[:2]
         pixel_count = float(max(1, width * height))
@@ -904,6 +910,12 @@ def convertOneImpl(
             if svg_content:
                 rendered = render_svg_to_numpy_fn(svg_content, width, height)
                 mean_delta2, std_delta2 = calculate_delta2_stats_fn(img, rendered)
+                # Fits use several different objectives. Retain the original
+                # objective separately; a replaced SVG needs a freshly measured
+                # error, rather than the old fit's return value.
+                import numpy as np
+                if isinstance(img, np.ndarray) and isinstance(rendered, np.ndarray):
+                    current_svg_mae = float(np.mean(np.abs(img.astype(float) - rendered.astype(float))))
                 if calculate_spatial_delta2_quality_fn is not None:
                     spatial_metrics = calculate_spatial_delta2_quality_fn(img, rendered)
                     tile_std_delta2 = float(spatial_metrics.get("tile_std_delta2", float("inf")))
@@ -929,6 +941,9 @@ def convertOneImpl(
         actual_iterations = int(details.get("actual_iterations", iteration_budget))
     except (TypeError, ValueError):
         actual_iterations = int(iteration_budget)
+    replaced_svg = restored_previous_svg or bool((params.get("vector_continuation") or {}).get("improved"))
+    if replaced_svg:
+        best_error = current_svg_mae
     row = {
         "filename": filename,
         "params": params,
@@ -937,6 +952,11 @@ def convertOneImpl(
         "actual_iterations": max(0, actual_iterations),
         "elapsed_seconds": float(elapsed_sec),
         "best_error": float(best_error),
+        "optimizer_best_error": optimizer_best_error,
+        "best_error_metric": "mean_absolute_error" if replaced_svg else "optimizer_objective",
+        "current_svg_mae": current_svg_mae,
+        "svg_sha256": hashlib.sha256(Path(svg_path).read_bytes()).hexdigest(),
+        "source_file_sha256": hashlib.sha256(Path(image_path).read_bytes()).hexdigest(),
         "convergence": str(details.get("convergence", "")).strip().lower(),
         # This is the optimizer's (mode-dependent) objective normalized by the
         # image area. It is not MSE and must not be interpreted as a colour
@@ -973,6 +993,9 @@ def convertOneImpl(
         params['adaptive_search'] = row['search_control']
         from src.iCCModules.imageCompositeConverterSearchPortfolio import progress
         progress(base,event='image_search_finished',satisfactory=satisfactory,**row['search_control'])
+    else:
+        row['search_satisfactory'] = bool(status == 'semantic_ok' and not replaced_svg)
+    row['status'] = 'validated' if row['search_satisfactory'] else 'draft'
     if not isinstance(raw_render_telemetry, dict):
         raw_render_telemetry = {}
     row["optimization_render_telemetry"] = {

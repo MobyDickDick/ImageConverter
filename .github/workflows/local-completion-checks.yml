@@ -658,6 +658,24 @@ jobs:
           path: .tmp/component-value-ci
           retention-days: 7
 
+  conversion-persistence:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Check durable revisions, current metrics and cancellation
+        run: python -m pytest -q tests/test_conversion_persistence.py tests/detailtests/test_batch_run_state_helpers.py tests/detailtests/test_conversion_initial_pass_helpers.py tests/detailtests/test_conversion_quality_pass_helpers.py tests/detailtests/test_conversion_bestlist_helpers.py
+      - name: Check production CLI and immutable earlier runs
+        run: python -m pytest -q tests/test_conversion_deadline.py::test_production_cli_does_not_render_in_parent_reporting
+
   conversion-power:
     strategy:
       fail-fast: false

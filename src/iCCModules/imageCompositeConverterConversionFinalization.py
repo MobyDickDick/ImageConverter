@@ -336,6 +336,7 @@ def _moveFailedConversionArtifactsToFailedDirs(
             variant = str(row.get("variant", "")).strip().upper()
             if variant in failed_variants:
                 row["status"] = "quality_failed"
+                row["search_satisfactory"] = False
                 row["failure_reason"] = "unsatisfactory_result"
 
     return failed_variants

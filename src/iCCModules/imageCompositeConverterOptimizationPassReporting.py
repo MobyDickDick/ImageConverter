@@ -5,17 +5,15 @@ from __future__ import annotations
 import csv
 import math
 import os
+from .imageCompositeConverterBatchRunState import atomicTextFileImpl
 
 
 def writeQualityPassReportImpl(
     reports_out_dir: str,
     pass_rows: list[dict[str, object]],
 ) -> None:
-    if not pass_rows:
-        return
-
     out_path = os.path.join(reports_out_dir, "quality_tercile_passes.csv")
-    with open(out_path, "w", encoding="utf-8", newline="") as f:
+    with atomicTextFileImpl(out_path, newline="") as f:
         writer = csv.writer(f, delimiter=";")
         writer.writerow([
             "pass",

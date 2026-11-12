@@ -123,7 +123,8 @@ def test_run_quality_passes_exposes_per_candidate_seed_and_checkpoint_hooks() ->
 
     assert stop is False
     assert candidate_hooks == [(1, 1, "AC0800_S.jpg"), (1, 2, "AC0801_S.jpg")]
-    assert [row["candidate_index"] for row in checkpoints] == [1, 2]
+    assert [row["candidate_index"] for row in checkpoints] == [1, 1, 2, 2]
+    assert [row["state"] for row in checkpoints] == ["started", "completed", "started", "completed"]
 
 
 def test_run_quality_passes_restores_snapshot_when_not_improved() -> None:
