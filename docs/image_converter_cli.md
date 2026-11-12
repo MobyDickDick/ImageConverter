@@ -70,6 +70,16 @@ wird das abgelaufene Budget geprüft. Diagnose und nachgewiesene Standbyfälle:
 
 ### Alternative Suchwege und Fortschritt
 
+Der generische native Fallback vergleicht jetzt auch alternative vollständige
+Kreis-/Rechteckkonstruktionen und ergänzt rastergestützte Liniengruppen unter
+dem vorhandenen Bildbudget. `ICC_FALLBACK_STRUCTURE_MODE` erlaubt für gezielte
+Vergleiche `off`, `primitives`, `lines` oder `combined` (Standard). Herkunft und
+Inventare stehen in `structure_probe`-/`structure_search_finished`-Ereignissen
+und in `params.vector_continuation.structure_search`. Pixelpass-Ausgaben dieses
+Pfads bleiben bis zur fachlichen Bestätigung Entwürfe. Explizit hochgeladene
+Sample-SVGs behalten ihre bisherige Geometriestruktur.
+[Vergleich und aktuelle Grenzen](next_arbeitspaket_2026-11-12_fallback_structure.md).
+
 `--search-mode portfolio --search-policy adaptive` ist voreingestellt. Unterstützte analytische Modelle
 probieren bei verfehlter lokaler Pixelprüfung zusätzliche Suchwege aus. Die
 Kurztextregistrierung vergleicht außerdem normale/fette Schrift und gemeinsame/

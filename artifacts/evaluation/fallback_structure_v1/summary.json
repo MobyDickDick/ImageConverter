@@ -1,0 +1,5178 @@
+{
+  "schema": "fallback_structure_study_v1",
+  "manifest": {
+    "schema": "fallback_structure_development_v1",
+    "cases": [
+      {
+        "case_id": "probe_00",
+        "audit_name": "AC0030_S",
+        "width": 30,
+        "height": 80,
+        "role": "known_audit_development",
+        "regions": [
+          {
+            "name": "left_head",
+            "box": [
+              0,
+              69,
+              10,
+              11
+            ]
+          },
+          {
+            "name": "right_head",
+            "box": [
+              19,
+              69,
+              11,
+              11
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "probe_01",
+        "audit_name": "AC0303_1_M",
+        "width": 60,
+        "height": 60,
+        "role": "known_audit_development",
+        "regions": [
+          {
+            "name": "left_chord",
+            "box": [
+              4,
+              11,
+              22,
+              49
+            ]
+          },
+          {
+            "name": "right_chord",
+            "box": [
+              34,
+              11,
+              22,
+              49
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "probe_02",
+        "audit_name": "AC0504_1M_sia",
+        "width": 60,
+        "height": 30,
+        "role": "known_audit_development",
+        "regions": [
+          {
+            "name": "cross",
+            "box": [
+              2,
+              5,
+              17,
+              19
+            ]
+          },
+          {
+            "name": "connector",
+            "box": [
+              19,
+              3,
+              27,
+              24
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "probe_03",
+        "audit_name": "GE0362",
+        "width": 74,
+        "height": 74,
+        "role": "known_audit_development",
+        "regions": [
+          {
+            "name": "tools",
+            "box": [
+              10,
+              8,
+              37,
+              42
+            ]
+          },
+          {
+            "name": "flame",
+            "box": [
+              34,
+              25,
+              30,
+              37
+            ]
+          }
+        ]
+      }
+    ],
+    "sha256": {
+      "baseline.py": "2d7d97ad8e1f8923fe1c384aac65deb84a03a54d6734a5ab3f3016e23675c284",
+      "probe_00/description.txt": "85fbb2eb0f5bf7ab7d562711729ee6c174a57e4cb2d119f2704fe8a509466686",
+      "probe_00/original.jpg": "8d3547e0204a21c759e89f04bccd26869e592396c4c6dcbdf531cc8db5d79391",
+      "probe_00/seed.svg": "ede5e725d56ae2c522fb15150a32ad120a10440c48c706ae17445412f0ebe0b3",
+      "probe_01/description.txt": "58ba459d4b83e22e200847a46d23819b165c59c0334ec5974524d158a532bbb0",
+      "probe_01/original.jpg": "697af003723b482c53900458a30c944fccb707ca7044c363ef227a6befdc7dc1",
+      "probe_01/seed.svg": "e54ce785e5900fd0a61285ba41920d3d041eed522c90630afefb48d01ef3ee4e",
+      "probe_02/description.txt": "59336f1995a067a59e06da3b3f34e9f3f44cc6c1f9514b3b9759348a8bdcca50",
+      "probe_02/original.jpg": "e87025cf9b47abadc3073ff48551ff8cb43230a8784fd7293d56501c0a88e814",
+      "probe_02/seed.svg": "b6c6273d6733581ad62ca907768c2ff6f65ee3c53faddf84e235e5be8fdd81b9",
+      "probe_03/description.txt": "65d68d8e86c92565830981fd500eed662fba5a2012c608af2a6005894cebbb90",
+      "probe_03/original.jpg": "84233894354495a0678441a2e69d0b1c6f7f1aa6584ba3bbdadee695d385c8a2",
+      "probe_03/seed.svg": "f6a95a95a4368d9c11d5072a67b87e8db2540bcc3a3a329ad2f381951f4517b3"
+    },
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "seconds": 5.0,
+    "max_seconds": 5.0,
+    "budget": 384,
+    "snapshot_sha256": "6722898630260e3bf80bc1b5bf2021b8acbc29171bf684351e1cf88d0c9dfa64",
+    "scope": "Continuation from historical generated SVGs; not reference reconstruction or new families"
+  },
+  "source_sha256": {
+    "src/iCCModules/imageCompositeConverterFallbackStructure.py": "fc59f5b93f9289a64764a39f0cb6b06a37007e88d660a48cb96243e76e43c148",
+    "src/iCCModules/imageCompositeConverterVectorPolish.py": "65ec58a4d0f8e40fb21241375a5a4bc2c43e07923a2f56de6a2c7c3bb7a94b09",
+    "src/iCCModules/imageCompositeConverterIterationInitialization.py": "019c0f3063988d8dafb6d8e80ad0485b93762a4adbead35664488f5e382a3832",
+    "src/imageConverterSample.py": "525da98bcededa80f1eedeb763a0dd890e96dc6244270ce22f08dc16cb8ec447",
+    "tools/evaluate_fallback_structure.py": "f8fcea2eac348b7a56fde42df982465a8bf36d5748f9a7e022e6bb13361e44cd",
+    "tests/test_fallback_structure.py": "cf5fcdc7694c91fe2d219b805a356ed2ac83458642f693be374551184b70839e"
+  },
+  "comparisons": [
+    {
+      "stage": "baseline",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "baseline",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.01796124316751957,
+        "foreground_mse": 0.09686841815710068,
+        "edge_alignment": 0.6111007928848267,
+        "foreground_iou": 0.3783783783783784
+      },
+      "regions": [
+        {
+          "name": "left_head",
+          "box": [
+            0,
+            69,
+            10,
+            11
+          ],
+          "normalized_mse": 0.11022692903661761,
+          "edge_recall": 0.3032623529434204,
+          "passed": false
+        },
+        {
+          "name": "right_head",
+          "box": [
+            19,
+            69,
+            11,
+            11
+          ],
+          "normalized_mse": 0.06562294857985326,
+          "edge_recall": 0.5439452528953552,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1599
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {},
+      "model_confirmed": false
+    },
+    {
+      "stage": "baseline",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "baseline",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.01796124316751957,
+        "foreground_mse": 0.09686841815710068,
+        "edge_alignment": 0.6111007928848267,
+        "foreground_iou": 0.3783783783783784
+      },
+      "regions": [
+        {
+          "name": "left_head",
+          "box": [
+            0,
+            69,
+            10,
+            11
+          ],
+          "normalized_mse": 0.11022692903661761,
+          "edge_recall": 0.3032623529434204,
+          "passed": false
+        },
+        {
+          "name": "right_head",
+          "box": [
+            19,
+            69,
+            11,
+            11
+          ],
+          "normalized_mse": 0.06562294857985326,
+          "edge_recall": 0.5439452528953552,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1056
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {},
+      "model_confirmed": false
+    },
+    {
+      "stage": "baseline",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "baseline",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.017916731536388397,
+        "foreground_mse": 0.0965365618467331,
+        "edge_alignment": 0.6296398639678955,
+        "foreground_iou": 0.3783783783783784
+      },
+      "regions": [
+        {
+          "name": "left_head",
+          "box": [
+            0,
+            69,
+            10,
+            11
+          ],
+          "normalized_mse": 0.10931343422692905,
+          "edge_recall": 0.2586856186389923,
+          "passed": false
+        },
+        {
+          "name": "right_head",
+          "box": [
+            19,
+            69,
+            11,
+            11
+          ],
+          "normalized_mse": 0.06577084677116134,
+          "edge_recall": 0.5211617946624756,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1012
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {},
+      "model_confirmed": false
+    },
+    {
+      "stage": "baseline",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "baseline",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.039808861911296844,
+        "foreground_mse": 0.043118223547935486,
+        "edge_alignment": 0.2927708029747009,
+        "foreground_iou": 0.8118603251053582
+      },
+      "regions": [
+        {
+          "name": "left_chord",
+          "box": [
+            4,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.03520184068874133,
+          "edge_recall": 0.09957928955554962,
+          "passed": false
+        },
+        {
+          "name": "right_chord",
+          "box": [
+            34,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.035019103303828965,
+          "edge_recall": 0.10358034074306488,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 845
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {},
+      "model_confirmed": false
+    },
+    {
+      "stage": "baseline",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "baseline",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.03975750878453255,
+        "foreground_mse": 0.04348912462592125,
+        "edge_alignment": 0.2934355139732361,
+        "foreground_iou": 0.8182372674595914
+      },
+      "regions": [
+        {
+          "name": "left_chord",
+          "box": [
+            4,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.03564011463171127,
+          "edge_recall": 0.09957928955554962,
+          "passed": false
+        },
+        {
+          "name": "right_chord",
+          "box": [
+            34,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.0355618515974423,
+          "edge_recall": 0.20470325648784637,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 790
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {},
+      "model_confirmed": false
+    },
+    {
+      "stage": "baseline",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "baseline",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.03986624255776405,
+        "foreground_mse": 0.04269242286682129,
+        "edge_alignment": 0.2921099364757538,
+        "foreground_iou": 0.8072002380243976
+      },
+      "regions": [
+        {
+          "name": "left_chord",
+          "box": [
+            4,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.0358786319043363,
+          "edge_recall": 0.09957928955554962,
+          "passed": false
+        },
+        {
+          "name": "right_chord",
+          "box": [
+            34,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.03570182440177497,
+          "edge_recall": 0.20470325648784637,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 738
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {},
+      "model_confirmed": false
+    },
+    {
+      "stage": "baseline",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "baseline",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.04259970784187317,
+        "foreground_mse": 0.14268553256988525,
+        "edge_alignment": 0.3200177550315857,
+        "foreground_iou": 0.22346368715083798
+      },
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            2,
+            5,
+            17,
+            19
+          ],
+          "normalized_mse": 0.16117146338492497,
+          "edge_recall": 0.3939266800880432,
+          "passed": false
+        },
+        {
+          "name": "connector",
+          "box": [
+            19,
+            3,
+            27,
+            24
+          ],
+          "normalized_mse": 0.02738997979567846,
+          "edge_recall": 0.2066640555858612,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 782
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {},
+      "model_confirmed": false
+    },
+    {
+      "stage": "baseline",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "baseline",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.042547788470983505,
+        "foreground_mse": 0.14252763986587524,
+        "edge_alignment": 0.3200177550315857,
+        "foreground_iou": 0.22346368715083798
+      },
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            2,
+            5,
+            17,
+            19
+          ],
+          "normalized_mse": 0.1605998645436442,
+          "edge_recall": 0.3939266800880432,
+          "passed": false
+        },
+        {
+          "name": "connector",
+          "box": [
+            19,
+            3,
+            27,
+            24
+          ],
+          "normalized_mse": 0.02744409794903195,
+          "edge_recall": 0.2066640555858612,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 782
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {},
+      "model_confirmed": false
+    },
+    {
+      "stage": "baseline",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "baseline",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.04251185059547424,
+        "foreground_mse": 0.14239104092121124,
+        "edge_alignment": 0.3200177550315857,
+        "foreground_iou": 0.22346368715083798
+      },
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            2,
+            5,
+            17,
+            19
+          ],
+          "normalized_mse": 0.16052709742105223,
+          "edge_recall": 0.3939266800880432,
+          "passed": false
+        },
+        {
+          "name": "connector",
+          "box": [
+            19,
+            3,
+            27,
+            24
+          ],
+          "normalized_mse": 0.02734249884897072,
+          "edge_recall": 0.2066640555858612,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 752
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {},
+      "model_confirmed": false
+    },
+    {
+      "stage": "baseline",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "baseline",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.03143792226910591,
+        "foreground_mse": 0.04030616208910942,
+        "edge_alignment": 0.2998419404029846,
+        "foreground_iou": 0.88124410933082
+      },
+      "regions": [
+        {
+          "name": "tools",
+          "box": [
+            10,
+            8,
+            37,
+            42
+          ],
+          "normalized_mse": 0.05116734793782083,
+          "edge_recall": 0.15052232146263123,
+          "passed": false
+        },
+        {
+          "name": "flame",
+          "box": [
+            34,
+            25,
+            30,
+            37
+          ],
+          "normalized_mse": 0.087837461452225,
+          "edge_recall": 0.06936031579971313,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1249
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "g": 2,
+        "ellipse": 1,
+        "path": 1,
+        "text": 1
+      },
+      "structure": {},
+      "model_confirmed": false
+    },
+    {
+      "stage": "baseline",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "baseline",
+      "seed": 29,
+      "elapsed_seconds": 5.014999999999418,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.03144126012921333,
+        "foreground_mse": 0.04025457426905632,
+        "edge_alignment": 0.3103131949901581,
+        "foreground_iou": 0.8797647058823529
+      },
+      "regions": [
+        {
+          "name": "tools",
+          "box": [
+            10,
+            8,
+            37,
+            42
+          ],
+          "normalized_mse": 0.05117936192907358,
+          "edge_recall": 0.14932873845100403,
+          "passed": false
+        },
+        {
+          "name": "flame",
+          "box": [
+            34,
+            25,
+            30,
+            37
+          ],
+          "normalized_mse": 0.08780669019654025,
+          "edge_recall": 0.07050394266843796,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.015,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1322
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "g": 2,
+        "ellipse": 1,
+        "path": 1,
+        "text": 1
+      },
+      "structure": {},
+      "model_confirmed": false
+    },
+    {
+      "stage": "baseline",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "baseline",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.031451061367988586,
+        "foreground_mse": 0.04020155593752861,
+        "edge_alignment": 0.30879008769989014,
+        "foreground_iou": 0.8799624148461358
+      },
+      "regions": [
+        {
+          "name": "tools",
+          "box": [
+            10,
+            8,
+            37,
+            42
+          ],
+          "normalized_mse": 0.05115225292849284,
+          "edge_recall": 0.1453160047531128,
+          "passed": false
+        },
+        {
+          "name": "flame",
+          "box": [
+            34,
+            25,
+            30,
+            37
+          ],
+          "normalized_mse": 0.08781200115917533,
+          "edge_recall": 0.07050394266843796,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1383
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "g": 2,
+        "ellipse": 1,
+        "path": 1,
+        "text": 1
+      },
+      "structure": {},
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "primitives",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.01788272149860859,
+        "foreground_mse": 0.09203781187534332,
+        "edge_alignment": 0.6296398639678955,
+        "foreground_iou": 0.3648068669527897
+      },
+      "regions": [
+        {
+          "name": "left_head",
+          "box": [
+            0,
+            69,
+            10,
+            11
+          ],
+          "normalized_mse": 0.109280533128284,
+          "edge_recall": 0.2586856186389923,
+          "passed": false
+        },
+        {
+          "name": "right_head",
+          "box": [
+            19,
+            69,
+            11,
+            11
+          ],
+          "normalized_mse": 0.06482787400056982,
+          "edge_recall": 0.5211617946624756,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 2299
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {
+        "mode": "primitives",
+        "max_probes": 32,
+        "selected_origin": "incumbent",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "lines",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.006022286135703325,
+        "foreground_mse": 0.03183446452021599,
+        "edge_alignment": 0.5849342346191406,
+        "foreground_iou": 0.7619047619047619
+      },
+      "regions": [
+        {
+          "name": "left_head",
+          "box": [
+            0,
+            69,
+            10,
+            11
+          ],
+          "normalized_mse": 0.06347833583819744,
+          "edge_recall": 0.6312766075134277,
+          "passed": false
+        },
+        {
+          "name": "right_head",
+          "box": [
+            19,
+            69,
+            11,
+            11
+          ],
+          "normalized_mse": 0.029996303604356452,
+          "edge_recall": 0.534420371055603,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 2198
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 6
+      },
+      "structure": {
+        "mode": "lines",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 6
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "combined",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.006155408453196287,
+        "foreground_mse": 0.03203978016972542,
+        "edge_alignment": 0.7176951169967651,
+        "foreground_iou": 0.7438752783964365
+      },
+      "regions": [
+        {
+          "name": "left_head",
+          "box": [
+            0,
+            69,
+            10,
+            11
+          ],
+          "normalized_mse": 0.06465368797548729,
+          "edge_recall": 0.6924059987068176,
+          "passed": false
+        },
+        {
+          "name": "right_head",
+          "box": [
+            19,
+            69,
+            11,
+            11
+          ],
+          "normalized_mse": 0.028708898781248576,
+          "edge_recall": 0.5920942425727844,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1977
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 6
+      },
+      "structure": {
+        "mode": "combined",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 6
+        },
+        "probe_count": 24
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "primitives",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.01796124316751957,
+        "foreground_mse": 0.09686841815710068,
+        "edge_alignment": 0.6111007928848267,
+        "foreground_iou": 0.3783783783783784
+      },
+      "regions": [
+        {
+          "name": "left_head",
+          "box": [
+            0,
+            69,
+            10,
+            11
+          ],
+          "normalized_mse": 0.11022692903661761,
+          "edge_recall": 0.3032623529434204,
+          "passed": false
+        },
+        {
+          "name": "right_head",
+          "box": [
+            19,
+            69,
+            11,
+            11
+          ],
+          "normalized_mse": 0.06562294857985326,
+          "edge_recall": 0.5439452528953552,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1986
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {
+        "mode": "primitives",
+        "max_probes": 32,
+        "selected_origin": "incumbent",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "lines",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.0060657295398414135,
+        "foreground_mse": 0.030937103554606438,
+        "edge_alignment": 0.6956090331077576,
+        "foreground_iou": 0.7396061269146609
+      },
+      "regions": [
+        {
+          "name": "left_head",
+          "box": [
+            0,
+            69,
+            10,
+            11
+          ],
+          "normalized_mse": 0.06355858469353279,
+          "edge_recall": 0.6924059987068176,
+          "passed": false
+        },
+        {
+          "name": "right_head",
+          "box": [
+            19,
+            69,
+            11,
+            11
+          ],
+          "normalized_mse": 0.02928286747097694,
+          "edge_recall": 0.5920942425727844,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 2002
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 6
+      },
+      "structure": {
+        "mode": "lines",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 6
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "combined",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.005924428813159466,
+        "foreground_mse": 0.031111927703022957,
+        "edge_alignment": 0.7053288221359253,
+        "foreground_iou": 0.759009009009009
+      },
+      "regions": [
+        {
+          "name": "left_head",
+          "box": [
+            0,
+            69,
+            10,
+            11
+          ],
+          "normalized_mse": 0.06341588899374367,
+          "edge_recall": 0.6924059987068176,
+          "passed": false
+        },
+        {
+          "name": "right_head",
+          "box": [
+            19,
+            69,
+            11,
+            11
+          ],
+          "normalized_mse": 0.028511178684189065,
+          "edge_recall": 0.611318826675415,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1845
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 6
+      },
+      "structure": {
+        "mode": "combined",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 6
+        },
+        "probe_count": 24
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "primitives",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.017916731536388397,
+        "foreground_mse": 0.0965365618467331,
+        "edge_alignment": 0.6296398639678955,
+        "foreground_iou": 0.3783783783783784
+      },
+      "regions": [
+        {
+          "name": "left_head",
+          "box": [
+            0,
+            69,
+            10,
+            11
+          ],
+          "normalized_mse": 0.10931343422692905,
+          "edge_recall": 0.2586856186389923,
+          "passed": false
+        },
+        {
+          "name": "right_head",
+          "box": [
+            19,
+            69,
+            11,
+            11
+          ],
+          "normalized_mse": 0.06577084677116134,
+          "edge_recall": 0.5211617946624756,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1759
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {
+        "mode": "primitives",
+        "max_probes": 32,
+        "selected_origin": "incumbent",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "lines",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.006222330965101719,
+        "foreground_mse": 0.03296952694654465,
+        "edge_alignment": 0.7233059406280518,
+        "foreground_iou": 0.750561797752809
+      },
+      "regions": [
+        {
+          "name": "left_head",
+          "box": [
+            0,
+            69,
+            10,
+            11
+          ],
+          "normalized_mse": 0.06555618468421236,
+          "edge_recall": 0.6312766075134277,
+          "passed": false
+        },
+        {
+          "name": "right_head",
+          "box": [
+            19,
+            69,
+            11,
+            11
+          ],
+          "normalized_mse": 0.03049392954394527,
+          "edge_recall": 0.6010617613792419,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1512
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 6
+      },
+      "structure": {
+        "mode": "lines",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 6
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "combined",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.00600236002355814,
+        "foreground_mse": 0.030664997175335884,
+        "edge_alignment": 0.708290696144104,
+        "foreground_iou": 0.7439824945295405
+      },
+      "regions": [
+        {
+          "name": "left_head",
+          "box": [
+            0,
+            69,
+            10,
+            11
+          ],
+          "normalized_mse": 0.06460610720818333,
+          "edge_recall": 0.6924059987068176,
+          "passed": false
+        },
+        {
+          "name": "right_head",
+          "box": [
+            19,
+            69,
+            11,
+            11
+          ],
+          "normalized_mse": 0.029148102605164573,
+          "edge_recall": 0.6113188862800598,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1447
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 6
+      },
+      "structure": {
+        "mode": "combined",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 6
+        },
+        "probe_count": 24
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "primitives",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.011269297450780869,
+        "foreground_mse": 0.014890148304402828,
+        "edge_alignment": 0.7278937697410583,
+        "foreground_iou": 0.9893146647015475
+      },
+      "regions": [
+        {
+          "name": "left_chord",
+          "box": [
+            4,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.014883571967111266,
+          "edge_recall": 0.3286231458187103,
+          "passed": false
+        },
+        {
+          "name": "right_chord",
+          "box": [
+            34,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.014872316127877176,
+          "edge_recall": 0.32675671577453613,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1512
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 2,
+        "g": 1,
+        "rect": 1,
+        "circle": 1
+      },
+      "structure": {
+        "mode": "primitives",
+        "max_probes": 32,
+        "selected_origin": "raster_primitive_reconstruction",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 1,
+          "circle": 1
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "lines",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.03620092198252678,
+        "foreground_mse": 0.03868446499109268,
+        "edge_alignment": 0.4278918504714966,
+        "foreground_iou": 0.8055225653206651
+      },
+      "regions": [
+        {
+          "name": "left_chord",
+          "box": [
+            4,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.028726242725254092,
+          "edge_recall": 0.5711607336997986,
+          "passed": false
+        },
+        {
+          "name": "right_chord",
+          "box": [
+            34,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.02953646818204406,
+          "edge_recall": 0.48089542984962463,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1718
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 8
+      },
+      "structure": {
+        "mode": "lines",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 8
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "combined",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.005527984816581011,
+        "foreground_mse": 0.007273992523550987,
+        "edge_alignment": 0.874503493309021,
+        "foreground_iou": 0.9885777450257922
+      },
+      "regions": [
+        {
+          "name": "left_chord",
+          "box": [
+            4,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.006233637840162803,
+          "edge_recall": 0.7780005931854248,
+          "passed": true
+        },
+        {
+          "name": "right_chord",
+          "box": [
+            34,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.00432884264817038,
+          "edge_recall": 0.8369536995887756,
+          "passed": true
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1871
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 2,
+        "g": 1,
+        "rect": 1,
+        "circle": 1,
+        "line": 2
+      },
+      "structure": {
+        "mode": "combined",
+        "max_probes": 32,
+        "selected_origin": "raster_primitive_reconstruction+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "probe_limit",
+        "selected_inventory": {
+          "rect": 1,
+          "circle": 1,
+          "line": 2
+        },
+        "probe_count": 32
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "primitives",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.011264100670814514,
+        "foreground_mse": 0.01488217432051897,
+        "edge_alignment": 0.7268990874290466,
+        "foreground_iou": 0.9878408253500368
+      },
+      "regions": [
+        {
+          "name": "left_chord",
+          "box": [
+            4,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.014889682551570837,
+          "edge_recall": 0.3286231458187103,
+          "passed": false
+        },
+        {
+          "name": "right_chord",
+          "box": [
+            34,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.014864731394637475,
+          "edge_recall": 0.32675671577453613,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1561
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 2,
+        "g": 1,
+        "rect": 1,
+        "circle": 1
+      },
+      "structure": {
+        "mode": "primitives",
+        "max_probes": 32,
+        "selected_origin": "raster_primitive_reconstruction",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 1,
+          "circle": 1
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "lines",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.03613783046603203,
+        "foreground_mse": 0.038618091493844986,
+        "edge_alignment": 0.43364623188972473,
+        "foreground_iou": 0.8055225653206651
+      },
+      "regions": [
+        {
+          "name": "left_chord",
+          "box": [
+            4,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.028709951003574336,
+          "edge_recall": 0.5620908141136169,
+          "passed": false
+        },
+        {
+          "name": "right_chord",
+          "box": [
+            34,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.029212978120541147,
+          "edge_recall": 0.4739152491092682,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1748
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 8
+      },
+      "structure": {
+        "mode": "lines",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 8
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "combined",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0055549051612615585,
+        "foreground_mse": 0.00731145404279232,
+        "edge_alignment": 0.8777801990509033,
+        "foreground_iou": 0.9882092851879145
+      },
+      "regions": [
+        {
+          "name": "left_chord",
+          "box": [
+            4,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.006350694763942416,
+          "edge_recall": 0.7780005931854248,
+          "passed": true
+        },
+        {
+          "name": "right_chord",
+          "box": [
+            34,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.004338367551417477,
+          "edge_recall": 0.8461355566978455,
+          "passed": true
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1878
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 2,
+        "g": 1,
+        "rect": 1,
+        "circle": 1,
+        "line": 2
+      },
+      "structure": {
+        "mode": "combined",
+        "max_probes": 32,
+        "selected_origin": "raster_primitive_reconstruction+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "probe_limit",
+        "selected_inventory": {
+          "rect": 1,
+          "circle": 1,
+          "line": 2
+        },
+        "probe_count": 32
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "primitives",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.011263531632721424,
+        "foreground_mse": 0.01488149631768465,
+        "edge_alignment": 0.7278937697410583,
+        "foreground_iou": 0.9885777450257922
+      },
+      "regions": [
+        {
+          "name": "left_chord",
+          "box": [
+            4,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.01488307265865348,
+          "edge_recall": 0.3286231458187103,
+          "passed": false
+        },
+        {
+          "name": "right_chord",
+          "box": [
+            34,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.014859990341947831,
+          "edge_recall": 0.32675671577453613,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 2166
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 2,
+        "g": 1,
+        "rect": 1,
+        "circle": 1
+      },
+      "structure": {
+        "mode": "primitives",
+        "max_probes": 32,
+        "selected_origin": "raster_primitive_reconstruction",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 1,
+          "circle": 1
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "lines",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.036010146141052246,
+        "foreground_mse": 0.038460809737443924,
+        "edge_alignment": 0.43053847551345825,
+        "foreground_iou": 0.8050445103857566
+      },
+      "regions": [
+        {
+          "name": "left_chord",
+          "box": [
+            4,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.028630147246064202,
+          "edge_recall": 0.565394401550293,
+          "passed": false
+        },
+        {
+          "name": "right_chord",
+          "box": [
+            34,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.029113178248126346,
+          "edge_recall": 0.48044073581695557,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 2019
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 8
+      },
+      "structure": {
+        "mode": "lines",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 8
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "combined",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.005627098027616739,
+        "foreground_mse": 0.007405460346490145,
+        "edge_alignment": 0.874503493309021,
+        "foreground_iou": 0.9885777450257922
+      },
+      "regions": [
+        {
+          "name": "left_chord",
+          "box": [
+            4,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.006374856537980611,
+          "edge_recall": 0.7780005931854248,
+          "passed": true
+        },
+        {
+          "name": "right_chord",
+          "box": [
+            34,
+            11,
+            22,
+            49
+          ],
+          "normalized_mse": 0.004484650663592829,
+          "edge_recall": 0.8369536995887756,
+          "passed": true
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1972
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 2,
+        "g": 1,
+        "rect": 1,
+        "circle": 1,
+        "line": 2
+      },
+      "structure": {
+        "mode": "combined",
+        "max_probes": 32,
+        "selected_origin": "raster_primitive_reconstruction+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "probe_limit",
+        "selected_inventory": {
+          "rect": 1,
+          "circle": 1,
+          "line": 2
+        },
+        "probe_count": 32
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "primitives",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.042348623275756836,
+        "foreground_mse": 0.14185963571071625,
+        "edge_alignment": 0.3200177550315857,
+        "foreground_iou": 0.22346368715083798
+      },
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            2,
+            5,
+            17,
+            19
+          ],
+          "normalized_mse": 0.16038370571928157,
+          "edge_recall": 0.3939266800880432,
+          "passed": false
+        },
+        {
+          "name": "connector",
+          "box": [
+            19,
+            3,
+            27,
+            24
+          ],
+          "normalized_mse": 0.02717405303120199,
+          "edge_recall": 0.2066640555858612,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 2587
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {
+        "mode": "primitives",
+        "max_probes": 32,
+        "selected_origin": "incumbent",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "lines",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.008219652809202671,
+        "foreground_mse": 0.03639493137598038,
+        "edge_alignment": 0.6009305715560913,
+        "foreground_iou": 0.7661691542288557
+      },
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            2,
+            5,
+            17,
+            19
+          ],
+          "normalized_mse": 0.023013614276322238,
+          "edge_recall": 0.5785033702850342,
+          "passed": false
+        },
+        {
+          "name": "connector",
+          "box": [
+            19,
+            3,
+            27,
+            24
+          ],
+          "normalized_mse": 0.009289201842279719,
+          "edge_recall": 0.5380597710609436,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1767
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 10
+      },
+      "structure": {
+        "mode": "lines",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 10
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "combined",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.008370582014322281,
+        "foreground_mse": 0.035229623317718506,
+        "edge_alignment": 0.5572977066040039,
+        "foreground_iou": 0.7341176470588235
+      },
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            2,
+            5,
+            17,
+            19
+          ],
+          "normalized_mse": 0.022689407781162203,
+          "edge_recall": 0.5962027907371521,
+          "passed": false
+        },
+        {
+          "name": "connector",
+          "box": [
+            19,
+            3,
+            27,
+            24
+          ],
+          "normalized_mse": 0.009397145447382536,
+          "edge_recall": 0.5321491956710815,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1758
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 10
+      },
+      "structure": {
+        "mode": "combined",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 10
+        },
+        "probe_count": 24
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "primitives",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.04248584434390068,
+        "foreground_mse": 0.14231957495212555,
+        "edge_alignment": 0.3200177550315857,
+        "foreground_iou": 0.22346368715083798
+      },
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            2,
+            5,
+            17,
+            19
+          ],
+          "normalized_mse": 0.16058873918858707,
+          "edge_recall": 0.3939266800880432,
+          "passed": false
+        },
+        {
+          "name": "connector",
+          "box": [
+            19,
+            3,
+            27,
+            24
+          ],
+          "normalized_mse": 0.027362655705387134,
+          "edge_recall": 0.2066640555858612,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1851
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {
+        "mode": "primitives",
+        "max_probes": 32,
+        "selected_origin": "incumbent",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "lines",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.008561290800571442,
+        "foreground_mse": 0.03617244213819504,
+        "edge_alignment": 0.5648739337921143,
+        "foreground_iou": 0.714622641509434
+      },
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            2,
+            5,
+            17,
+            19
+          ],
+          "normalized_mse": 0.023451534279305925,
+          "edge_recall": 0.6195342540740967,
+          "passed": false
+        },
+        {
+          "name": "connector",
+          "box": [
+            19,
+            3,
+            27,
+            24
+          ],
+          "normalized_mse": 0.008866983733701662,
+          "edge_recall": 0.5388805866241455,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1511
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 10
+      },
+      "structure": {
+        "mode": "lines",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 10
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "combined",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.008411644957959652,
+        "foreground_mse": 0.035935718566179276,
+        "edge_alignment": 0.552253007888794,
+        "foreground_iou": 0.7416267942583732
+      },
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            2,
+            5,
+            17,
+            19
+          ],
+          "normalized_mse": 0.02336707045674661,
+          "edge_recall": 0.5964472889900208,
+          "passed": false
+        },
+        {
+          "name": "connector",
+          "box": [
+            19,
+            3,
+            27,
+            24
+          ],
+          "normalized_mse": 0.009050270313886872,
+          "edge_recall": 0.5492377281188965,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1626
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 10
+      },
+      "structure": {
+        "mode": "combined",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 10
+        },
+        "probe_count": 24
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "primitives",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.04248584434390068,
+        "foreground_mse": 0.14231957495212555,
+        "edge_alignment": 0.3200177550315857,
+        "foreground_iou": 0.22346368715083798
+      },
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            2,
+            5,
+            17,
+            19
+          ],
+          "normalized_mse": 0.16058873918858707,
+          "edge_recall": 0.3939266800880432,
+          "passed": false
+        },
+        {
+          "name": "connector",
+          "box": [
+            19,
+            3,
+            27,
+            24
+          ],
+          "normalized_mse": 0.027362655705387134,
+          "edge_recall": 0.2066640555858612,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 2155
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2
+      },
+      "structure": {
+        "mode": "primitives",
+        "max_probes": 32,
+        "selected_origin": "incumbent",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "lines",
+      "seed": 43,
+      "elapsed_seconds": 5.015999999988708,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.00827081874012947,
+        "foreground_mse": 0.03476069122552872,
+        "edge_alignment": 0.5652077198028564,
+        "foreground_iou": 0.7300469483568075
+      },
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            2,
+            5,
+            17,
+            19
+          ],
+          "normalized_mse": 0.02264979453405434,
+          "edge_recall": 0.5949288606643677,
+          "passed": false
+        },
+        {
+          "name": "connector",
+          "box": [
+            19,
+            3,
+            27,
+            24
+          ],
+          "normalized_mse": 0.009211390680697358,
+          "edge_recall": 0.5446197390556335,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1776
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 10
+      },
+      "structure": {
+        "mode": "lines",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 10
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "combined",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.008679661899805069,
+        "foreground_mse": 0.035956647247076035,
+        "edge_alignment": 0.5589455962181091,
+        "foreground_iou": 0.7106481481481481
+      },
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            2,
+            5,
+            17,
+            19
+          ],
+          "normalized_mse": 0.023122741154172267,
+          "edge_recall": 0.5830112099647522,
+          "passed": false
+        },
+        {
+          "name": "connector",
+          "box": [
+            19,
+            3,
+            27,
+            24
+          ],
+          "normalized_mse": 0.00896556879832543,
+          "edge_recall": 0.5525861978530884,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1515
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "defs": 1,
+        "linearGradient": 1,
+        "stop": 3,
+        "clipPath": 1,
+        "rect": 4,
+        "g": 2,
+        "line": 10
+      },
+      "structure": {
+        "mode": "combined",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "rect": 3,
+          "line": 10
+        },
+        "probe_count": 24
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "primitives",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.03143835440278053,
+        "foreground_mse": 0.0401851125061512,
+        "edge_alignment": 0.3047420084476471,
+        "foreground_iou": 0.878318064364576
+      },
+      "regions": [
+        {
+          "name": "tools",
+          "box": [
+            10,
+            8,
+            37,
+            42
+          ],
+          "normalized_mse": 0.05115317327543395,
+          "edge_recall": 0.15111631155014038,
+          "passed": false
+        },
+        {
+          "name": "flame",
+          "box": [
+            34,
+            25,
+            30,
+            37
+          ],
+          "normalized_mse": 0.0873159803402018,
+          "edge_recall": 0.07050394266843796,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 2153
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "g": 2,
+        "ellipse": 1,
+        "path": 1,
+        "text": 1
+      },
+      "structure": {
+        "mode": "primitives",
+        "max_probes": 32,
+        "selected_origin": "incumbent",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "ellipse": 1,
+          "path": 1,
+          "text": 1
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "lines",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.027956409379839897,
+        "foreground_mse": 0.03599506616592407,
+        "edge_alignment": 0.3604152202606201,
+        "foreground_iou": 0.8851255329227854
+      },
+      "regions": [
+        {
+          "name": "tools",
+          "box": [
+            10,
+            8,
+            37,
+            42
+          ],
+          "normalized_mse": 0.049838096458627024,
+          "edge_recall": 0.34328803420066833,
+          "passed": false
+        },
+        {
+          "name": "flame",
+          "box": [
+            34,
+            25,
+            30,
+            37
+          ],
+          "normalized_mse": 0.07587464742712724,
+          "edge_recall": 0.18933707475662231,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1371
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "g": 1,
+        "ellipse": 1,
+        "path": 1,
+        "text": 1,
+        "line": 8
+      },
+      "structure": {
+        "mode": "lines",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "ellipse": 1,
+          "path": 1,
+          "text": 1,
+          "line": 8
+        },
+        "probe_count": 12,
+        "refinement_reverted_for_local_detail": true
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "combined",
+      "seed": 17,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.027956409379839897,
+        "foreground_mse": 0.03599506616592407,
+        "edge_alignment": 0.3604152202606201,
+        "foreground_iou": 0.8851255329227854
+      },
+      "regions": [
+        {
+          "name": "tools",
+          "box": [
+            10,
+            8,
+            37,
+            42
+          ],
+          "normalized_mse": 0.049838096458627024,
+          "edge_recall": 0.34328803420066833,
+          "passed": false
+        },
+        {
+          "name": "flame",
+          "box": [
+            34,
+            25,
+            30,
+            37
+          ],
+          "normalized_mse": 0.07587464742712724,
+          "edge_recall": 0.18933707475662231,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1380
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "g": 1,
+        "ellipse": 1,
+        "path": 1,
+        "text": 1,
+        "line": 8
+      },
+      "structure": {
+        "mode": "combined",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "ellipse": 1,
+          "path": 1,
+          "text": 1,
+          "line": 8
+        },
+        "probe_count": 24,
+        "refinement_reverted_for_local_detail": true
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "primitives",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.03146720305085182,
+        "foreground_mse": 0.04025312140583992,
+        "edge_alignment": 0.3030087351799011,
+        "foreground_iou": 0.8834038551951104
+      },
+      "regions": [
+        {
+          "name": "tools",
+          "box": [
+            10,
+            8,
+            37,
+            42
+          ],
+          "normalized_mse": 0.05119868921483685,
+          "edge_recall": 0.14693057537078857,
+          "passed": false
+        },
+        {
+          "name": "flame",
+          "box": [
+            34,
+            25,
+            30,
+            37
+          ],
+          "normalized_mse": 0.08782657166970893,
+          "edge_recall": 0.06936031579971313,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1650
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "g": 2,
+        "ellipse": 1,
+        "path": 1,
+        "text": 1
+      },
+      "structure": {
+        "mode": "primitives",
+        "max_probes": 32,
+        "selected_origin": "incumbent",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "ellipse": 1,
+          "path": 1,
+          "text": 1
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "lines",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.027956409379839897,
+        "foreground_mse": 0.03599506616592407,
+        "edge_alignment": 0.3604152202606201,
+        "foreground_iou": 0.8851255329227854
+      },
+      "regions": [
+        {
+          "name": "tools",
+          "box": [
+            10,
+            8,
+            37,
+            42
+          ],
+          "normalized_mse": 0.049838096458627024,
+          "edge_recall": 0.34328803420066833,
+          "passed": false
+        },
+        {
+          "name": "flame",
+          "box": [
+            34,
+            25,
+            30,
+            37
+          ],
+          "normalized_mse": 0.07587464742712724,
+          "edge_recall": 0.18933707475662231,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1306
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "g": 1,
+        "ellipse": 1,
+        "path": 1,
+        "text": 1,
+        "line": 8
+      },
+      "structure": {
+        "mode": "lines",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "ellipse": 1,
+          "path": 1,
+          "text": 1,
+          "line": 8
+        },
+        "probe_count": 12,
+        "refinement_reverted_for_local_detail": true
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "combined",
+      "seed": 29,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.027956409379839897,
+        "foreground_mse": 0.03599506616592407,
+        "edge_alignment": 0.3604152202606201,
+        "foreground_iou": 0.8851255329227854
+      },
+      "regions": [
+        {
+          "name": "tools",
+          "box": [
+            10,
+            8,
+            37,
+            42
+          ],
+          "normalized_mse": 0.049838096458627024,
+          "edge_recall": 0.34328803420066833,
+          "passed": false
+        },
+        {
+          "name": "flame",
+          "box": [
+            34,
+            25,
+            30,
+            37
+          ],
+          "normalized_mse": 0.07587464742712724,
+          "edge_recall": 0.18933707475662231,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1205
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "g": 1,
+        "ellipse": 1,
+        "path": 1,
+        "text": 1,
+        "line": 8
+      },
+      "structure": {
+        "mode": "combined",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "ellipse": 1,
+          "path": 1,
+          "text": 1,
+          "line": 8
+        },
+        "probe_count": 24,
+        "refinement_reverted_for_local_detail": true
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "primitives",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.031453896313905716,
+        "foreground_mse": 0.040162093937397,
+        "edge_alignment": 0.2987973093986511,
+        "foreground_iou": 0.8822149225715626
+      },
+      "regions": [
+        {
+          "name": "tools",
+          "box": [
+            10,
+            8,
+            37,
+            42
+          ],
+          "normalized_mse": 0.05123600450013368,
+          "edge_recall": 0.14098885655403137,
+          "passed": false
+        },
+        {
+          "name": "flame",
+          "box": [
+            34,
+            25,
+            30,
+            37
+          ],
+          "normalized_mse": 0.08784088817768172,
+          "edge_recall": 0.0711490735411644,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1512
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "g": 2,
+        "ellipse": 1,
+        "path": 1,
+        "text": 1
+      },
+      "structure": {
+        "mode": "primitives",
+        "max_probes": 32,
+        "selected_origin": "incumbent",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "ellipse": 1,
+          "path": 1,
+          "text": 1
+        },
+        "probe_count": 12
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "lines",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.027956409379839897,
+        "foreground_mse": 0.03599506616592407,
+        "edge_alignment": 0.3604152202606201,
+        "foreground_iou": 0.8851255329227854
+      },
+      "regions": [
+        {
+          "name": "tools",
+          "box": [
+            10,
+            8,
+            37,
+            42
+          ],
+          "normalized_mse": 0.049838096458627024,
+          "edge_recall": 0.34328803420066833,
+          "passed": false
+        },
+        {
+          "name": "flame",
+          "box": [
+            34,
+            25,
+            30,
+            37
+          ],
+          "normalized_mse": 0.07587464742712724,
+          "edge_recall": 0.18933707475662231,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1227
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "g": 1,
+        "ellipse": 1,
+        "path": 1,
+        "text": 1,
+        "line": 8
+      },
+      "structure": {
+        "mode": "lines",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "ellipse": 1,
+          "path": 1,
+          "text": 1,
+          "line": 8
+        },
+        "probe_count": 12,
+        "refinement_reverted_for_local_detail": true
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "comparison",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "combined",
+      "seed": 43,
+      "elapsed_seconds": 5.0,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.027956409379839897,
+        "foreground_mse": 0.03599506616592407,
+        "edge_alignment": 0.3604152202606201,
+        "foreground_iou": 0.8851255329227854
+      },
+      "regions": [
+        {
+          "name": "tools",
+          "box": [
+            10,
+            8,
+            37,
+            42
+          ],
+          "normalized_mse": 0.049838096458627024,
+          "edge_recall": 0.34328803420066833,
+          "passed": false
+        },
+        {
+          "name": "flame",
+          "box": [
+            34,
+            25,
+            30,
+            37
+          ],
+          "normalized_mse": 0.07587464742712724,
+          "edge_recall": 0.18933707475662231,
+          "passed": false
+        }
+      ],
+      "search": {
+        "elapsed_seconds": 5.0,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 1310
+      },
+      "svg_element_inventory": {
+        "svg": 1,
+        "g": 1,
+        "ellipse": 1,
+        "path": 1,
+        "text": 1,
+        "line": 8
+      },
+      "structure": {
+        "mode": "combined",
+        "max_probes": 32,
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "selected_inventory": {
+          "ellipse": 1,
+          "path": 1,
+          "text": 1,
+          "line": 8
+        },
+        "probe_count": 24,
+        "refinement_reverted_for_local_detail": true
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "cli",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "off",
+      "seed": 17,
+      "elapsed_seconds": 8.344,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.018063409253954887,
+        "foreground_mse": 0.09740054607391357,
+        "edge_alignment": 0.30349594354629517,
+        "foreground_iou": 0.3783783783783784
+      },
+      "regions": null,
+      "search": null,
+      "svg_element_inventory": null,
+      "structure": {
+        "error": 0.018063409253954887,
+        "evaluations": 613,
+        "improved": true,
+        "initial_error": 0.025713898500576704,
+        "search_control": {
+          "candidate_evaluations": 613,
+          "elapsed_seconds": 5.048,
+          "limit_seconds": 8.0,
+          "max_seconds": 10.0,
+          "minimum_seconds": 5.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        }
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "cli",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "off",
+      "seed": 17,
+      "elapsed_seconds": 8.391,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.041861969977617264,
+        "foreground_mse": 0.04717332124710083,
+        "edge_alignment": 0.22997266054153442,
+        "foreground_iou": 0.8305668650172252
+      },
+      "regions": null,
+      "search": null,
+      "svg_element_inventory": null,
+      "structure": {},
+      "model_confirmed": false
+    },
+    {
+      "stage": "cli",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "off",
+      "seed": 17,
+      "elapsed_seconds": 8.203,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.04434055835008621,
+        "foreground_mse": 0.17079606652259827,
+        "edge_alignment": 0.2561953663825989,
+        "foreground_iou": 0.13276231263383298
+      },
+      "regions": null,
+      "search": null,
+      "svg_element_inventory": null,
+      "structure": {
+        "error": 0.04434055835008621,
+        "evaluations": 654,
+        "improved": true,
+        "initial_error": 0.04997856664815527,
+        "search_control": {
+          "candidate_evaluations": 654,
+          "elapsed_seconds": 5.047,
+          "limit_seconds": 8.0,
+          "max_seconds": 10.0,
+          "minimum_seconds": 5.0,
+          "stop_reason": "stagnation",
+          "time_extensions": 0
+        }
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "cli",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "off",
+      "seed": 17,
+      "elapsed_seconds": 8.172,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.03169146180152893,
+        "foreground_mse": 0.0408533550798893,
+        "edge_alignment": 0.2896958291530609,
+        "foreground_iou": 0.8881781568348732
+      },
+      "regions": null,
+      "search": null,
+      "svg_element_inventory": null,
+      "structure": {
+        "error": 0.03169146180152893,
+        "evaluations": 728,
+        "improved": true,
+        "initial_error": 0.035579733853370814,
+        "search_control": {
+          "candidate_evaluations": 728,
+          "elapsed_seconds": 5.047,
+          "limit_seconds": 8.0,
+          "max_seconds": 10.0,
+          "minimum_seconds": 5.0,
+          "stop_reason": "all_bots_inactive",
+          "time_extensions": 0
+        }
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "cli",
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "arm": "combined",
+      "seed": 17,
+      "elapsed_seconds": 8.609,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.004035040270537138,
+        "foreground_mse": 0.02004978619515896,
+        "edge_alignment": 0.6326231956481934,
+        "foreground_iou": 0.7478991596638656
+      },
+      "regions": null,
+      "search": null,
+      "svg_element_inventory": null,
+      "structure": {
+        "error": 0.004035040270537138,
+        "evaluations": 765,
+        "improved": true,
+        "initial_error": 0.025713898500576704,
+        "search_control": {
+          "candidate_evaluations": 765,
+          "elapsed_seconds": 5.046,
+          "limit_seconds": 8.0,
+          "max_seconds": 10.0,
+          "minimum_seconds": 5.0,
+          "stop_reason": "proposal_limit",
+          "time_extensions": 0
+        },
+        "structure_search": {
+          "max_probes": 32,
+          "mode": "combined",
+          "model_confirmed": false,
+          "probe_count": 32,
+          "proposals": [
+            {
+              "accepted": true,
+              "changed_pixels": 317,
+              "error": 0.023113616557734203,
+              "improved_fraction": 0.8801261829652997,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": 0.021496350792848017,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 317,
+              "error": 0.02318109060617711,
+              "improved_fraction": 0.8801261829652997,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": 0.02098550626204998,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 317,
+              "error": 0.023157821777948652,
+              "improved_fraction": 0.8801261829652997,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": 0.021161674046744947,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 300,
+              "error": 0.019550551070101244,
+              "improved_fraction": 0.94,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": 0.051229988465974624,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 300,
+              "error": 0.01955724934854116,
+              "improved_fraction": 0.94,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": 0.0511764022384553,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 300,
+              "error": 0.019553838267333076,
+              "improved_fraction": 0.94,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": 0.051203690888119956,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 317,
+              "error": 0.023110284505959245,
+              "improved_fraction": 0.8801261829652997,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": 0.02152157768325779,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 317,
+              "error": 0.02316836045965227,
+              "improved_fraction": 0.8801261829652997,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": 0.02108188592028222,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 317,
+              "error": 0.02309177880302448,
+              "improved_fraction": 0.8801261829652997,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": 0.021661683951533645,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 300,
+              "error": 0.019529334871203383,
+              "improved_fraction": 0.94,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": 0.051399718057157505,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 300,
+              "error": 0.01953932248280576,
+              "improved_fraction": 0.94,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": 0.0513198171643385,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 300,
+              "error": 0.01953267119483959,
+              "improved_fraction": 0.94,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": 0.051373027468067836,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 236,
+              "error": 0.01713332265368021,
+              "improved_fraction": 0.6991525423728814,
+              "inventory": {
+                "line": 1,
+                "rect": 3
+              },
+              "local_gain": 0.08727768763426498,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 236,
+              "error": 0.00997000085437225,
+              "improved_fraction": 0.7033898305084746,
+              "inventory": {
+                "line": 2,
+                "rect": 3
+              },
+              "local_gain": 0.0728642829680892,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 74,
+              "error": 0.008845627750010679,
+              "improved_fraction": 1.0,
+              "inventory": {
+                "line": 3,
+                "rect": 3
+              },
+              "local_gain": 0.036422512477875806,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 73,
+              "error": 0.007931942842496476,
+              "improved_fraction": 0.9726027397260274,
+              "inventory": {
+                "line": 4,
+                "rect": 3
+              },
+              "local_gain": 0.02992990051244779,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 97,
+              "error": 0.008024928446324063,
+              "improved_fraction": 0.4020618556701031,
+              "inventory": {
+                "line": 5,
+                "rect": 3
+              },
+              "local_gain": -0.002268596138677827,
+              "origin": "incumbent+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 72,
+              "error": 0.00814355803323508,
+              "improved_fraction": 0.4166666666666667,
+              "inventory": {
+                "line": 5,
+                "rect": 3
+              },
+              "local_gain": -0.006920984806413487,
+              "origin": "incumbent+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 60,
+              "error": 0.00848550557477893,
+              "improved_fraction": 0.26666666666666666,
+              "inventory": {
+                "line": 5,
+                "rect": 3
+              },
+              "local_gain": -0.022254346618821814,
+              "origin": "incumbent+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 26,
+              "error": 0.007664938698791063,
+              "improved_fraction": 0.8461538461538461,
+              "inventory": {
+                "line": 5,
+                "rect": 3
+              },
+              "local_gain": 0.024646536342038075,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 50,
+              "error": 0.007690548506984494,
+              "improved_fraction": 0.52,
+              "inventory": {
+                "line": 6,
+                "rect": 3
+              },
+              "local_gain": -0.0012292707932846354,
+              "origin": "incumbent+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 50,
+              "error": 0.006922875816993464,
+              "improved_fraction": 0.56,
+              "inventory": {
+                "line": 6,
+                "rect": 3
+              },
+              "local_gain": 0.03566023324362425,
+              "origin": "incumbent+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 38,
+              "error": 0.007741135887906361,
+              "improved_fraction": 0.5263157894736842,
+              "inventory": {
+                "line": 6,
+                "rect": 3
+              },
+              "local_gain": -0.004795996141834787,
+              "origin": "incumbent+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 15,
+              "error": 0.007468482207697895,
+              "improved_fraction": 1.0,
+              "inventory": {
+                "line": 6,
+                "rect": 3
+              },
+              "local_gain": 0.031433038574907084,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 246,
+              "error": 0.011969522405912255,
+              "improved_fraction": 0.6747967479674797,
+              "inventory": {
+                "circle": 1,
+                "line": 1,
+                "rect": 1
+              },
+              "local_gain": 0.07376727108293768,
+              "origin": "raster_primitive_reconstruction+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 210,
+              "error": 0.004909415182194882,
+              "improved_fraction": 0.7047619047619048,
+              "inventory": {
+                "circle": 1,
+                "line": 2,
+                "rect": 1
+              },
+              "local_gain": 0.08077586764553317,
+              "origin": "raster_primitive_reconstruction+residual_line_group"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 48,
+              "error": 0.005319428424964757,
+              "improved_fraction": 0.375,
+              "inventory": {
+                "circle": 1,
+                "line": 3,
+                "rect": 1
+              },
+              "local_gain": -0.020632662651117094,
+              "origin": "raster_primitive_reconstruction+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 48,
+              "error": 0.005141804434191978,
+              "improved_fraction": 0.3958333333333333,
+              "inventory": {
+                "circle": 1,
+                "line": 3,
+                "rect": 1
+              },
+              "local_gain": -0.011643919005510702,
+              "origin": "raster_primitive_reconstruction+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 54,
+              "error": 0.0050237430048272035,
+              "improved_fraction": 0.5,
+              "inventory": {
+                "circle": 1,
+                "line": 3,
+                "rect": 1
+              },
+              "local_gain": -0.005119493452186006,
+              "origin": "raster_primitive_reconstruction+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 21,
+              "error": 0.005071378529625358,
+              "improved_fraction": 0.2857142857142857,
+              "inventory": {
+                "circle": 1,
+                "line": 3,
+                "rect": 1
+              },
+              "local_gain": -0.0186536313871954,
+              "origin": "raster_primitive_reconstruction+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 22,
+              "error": 0.004979424580289632,
+              "improved_fraction": 0.5,
+              "inventory": {
+                "circle": 1,
+                "line": 3,
+                "rect": 1
+              },
+              "local_gain": -0.007619680076427482,
+              "origin": "raster_primitive_reconstruction+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 26,
+              "error": 0.004035039941902687,
+              "improved_fraction": 0.6538461538461539,
+              "inventory": {
+                "circle": 1,
+                "line": 3,
+                "rect": 1
+              },
+              "local_gain": 0.08028174567966957,
+              "origin": "raster_primitive_reconstruction+residual_line_group"
+            }
+          ],
+          "refinement_reverted_for_local_detail": true,
+          "selected_inventory": {
+            "circle": 1,
+            "line": 3,
+            "rect": 1
+          },
+          "selected_origin": "raster_primitive_reconstruction+residual_line_group",
+          "stop_reason": "probe_limit"
+        }
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "cli",
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "arm": "combined",
+      "seed": 17,
+      "elapsed_seconds": 8.344,
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.005714608356356621,
+        "foreground_mse": 0.007520537357777357,
+        "edge_alignment": 0.8777802586555481,
+        "foreground_iou": 0.9882092851879145
+      },
+      "regions": null,
+      "search": null,
+      "svg_element_inventory": null,
+      "structure": {
+        "error": 0.005714608356356621,
+        "evaluations": 550,
+        "improved": true,
+        "initial_error": 0.04186197046719923,
+        "search_control": {
+          "candidate_evaluations": 550,
+          "elapsed_seconds": 5.094,
+          "limit_seconds": 8.0,
+          "max_seconds": 10.0,
+          "minimum_seconds": 5.0,
+          "stop_reason": "satisfactory",
+          "time_extensions": 0
+        },
+        "structure_search": {
+          "max_probes": 32,
+          "mode": "combined",
+          "model_confirmed": false,
+          "probe_count": 32,
+          "proposals": [
+            {
+              "accepted": true,
+              "changed_pixels": 2880,
+              "error": 0.012650454953223119,
+              "improved_fraction": 0.8927083333333333,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": 0.036492134435473535,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 2880,
+              "error": 0.012423488117105957,
+              "improved_fraction": 0.8934027777777778,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": 0.03678043523146368,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 2828,
+              "error": 0.01238875788514389,
+              "improved_fraction": 0.8914427157001414,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": 0.0374890591711997,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 3052,
+              "error": 0.09627876315377276,
+              "improved_fraction": 0.6523591087811271,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.06420388602763766,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 3052,
+              "error": 0.09526179532088798,
+              "improved_fraction": 0.653997378768021,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.06300190856458912,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 3000,
+              "error": 0.09518477935836643,
+              "improved_fraction": 0.648,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.06401281387500533,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 2873,
+              "error": 0.012613813775328577,
+              "improved_fraction": 0.8900104420466411,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": 0.03663676794992456,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 2871,
+              "error": 0.012497275976476286,
+              "improved_fraction": 0.8899338209683038,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": 0.03680333721193338,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 2871,
+              "error": 0.01249529098494881,
+              "improved_fraction": 0.8899338209683038,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": 0.03680440852509951,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 3052,
+              "error": 0.09570353425320745,
+              "improved_fraction": 0.653997378768021,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.06352360528069236,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 3052,
+              "error": 0.09570395289560994,
+              "improved_fraction": 0.6536697247706422,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.0635241024514381,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 2822,
+              "error": 0.024781857405271477,
+              "improved_fraction": 0.8501063075832743,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": 0.021770247191811323,
+              "origin": "raster_primitive_reconstruction"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 143,
+              "error": 0.04105369729591183,
+              "improved_fraction": 0.9300699300699301,
+              "inventory": {
+                "line": 1,
+                "rect": 3
+              },
+              "local_gain": 0.02010386896200045,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 76,
+              "error": 0.04091847579990602,
+              "improved_fraction": 0.7631578947368421,
+              "inventory": {
+                "line": 2,
+                "rect": 3
+              },
+              "local_gain": 0.0069140074330385735,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 64,
+              "error": 0.04101500277670981,
+              "improved_fraction": 0.671875,
+              "inventory": {
+                "line": 3,
+                "rect": 3
+              },
+              "local_gain": -0.0052649621940279384,
+              "origin": "incumbent+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 69,
+              "error": 0.03962871687527589,
+              "improved_fraction": 0.7391304347826086,
+              "inventory": {
+                "line": 3,
+                "rect": 3
+              },
+              "local_gain": 0.06733181403659314,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 123,
+              "error": 0.03977330941091033,
+              "improved_fraction": 0.8048780487804879,
+              "inventory": {
+                "line": 4,
+                "rect": 3
+              },
+              "local_gain": -0.004379137063189163,
+              "origin": "incumbent+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 121,
+              "error": 0.039320121890441,
+              "improved_fraction": 0.9669421487603306,
+              "inventory": {
+                "line": 4,
+                "rect": 3
+              },
+              "local_gain": 0.008971501742813479,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 126,
+              "error": 0.038206718213792415,
+              "improved_fraction": 0.9682539682539683,
+              "inventory": {
+                "line": 5,
+                "rect": 3
+              },
+              "local_gain": 0.03152019268128457,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 108,
+              "error": 0.037207015820126164,
+              "improved_fraction": 0.8796296296296297,
+              "inventory": {
+                "line": 6,
+                "rect": 3
+              },
+              "local_gain": 0.033083571845586454,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 17,
+              "error": 0.03729570535549005,
+              "improved_fraction": 0.5294117647058824,
+              "inventory": {
+                "line": 7,
+                "rect": 3
+              },
+              "local_gain": -0.018730051036177642,
+              "origin": "incumbent+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 93,
+              "error": 0.03756712802768166,
+              "improved_fraction": 0.12903225806451613,
+              "inventory": {
+                "line": 7,
+                "rect": 3
+              },
+              "local_gain": -0.013501727347766711,
+              "origin": "incumbent+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 61,
+              "error": 0.035977708004044026,
+              "improved_fraction": 0.7377049180327869,
+              "inventory": {
+                "line": 7,
+                "rect": 3
+              },
+              "local_gain": 0.0722802284955555,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 100,
+              "error": 0.03561078217779487,
+              "improved_fraction": 0.88,
+              "inventory": {
+                "line": 8,
+                "rect": 3
+              },
+              "local_gain": 0.012760938100730488,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 108,
+              "error": 0.0096841770259302,
+              "improved_fraction": 0.7222222222222222,
+              "inventory": {
+                "circle": 1,
+                "line": 1,
+                "rect": 1
+              },
+              "local_gain": 0.09010081592549873,
+              "origin": "raster_primitive_reconstruction+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 103,
+              "error": 0.006206212710211172,
+              "improved_fraction": 0.8058252427184466,
+              "inventory": {
+                "circle": 1,
+                "line": 2,
+                "rect": 1
+              },
+              "local_gain": 0.1213448648702453,
+              "origin": "raster_primitive_reconstruction+residual_line_group"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 54,
+              "error": 0.00645758611360303,
+              "improved_fraction": 0.42592592592592593,
+              "inventory": {
+                "circle": 1,
+                "line": 3,
+                "rect": 1
+              },
+              "local_gain": -0.015878508266051517,
+              "origin": "raster_primitive_reconstruction+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 58,
+              "error": 0.006372983325501587,
+              "improved_fraction": 0.3793103448275862,
+              "inventory": {
+                "circle": 1,
+                "line": 3,
+                "rect": 1
+              },
+              "local_gain": -0.010027266259219488,
+              "origin": "raster_primitive_reconstruction+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 47,
+              "error": 0.006642103464479474,
+              "improved_fraction": 0.23404255319148937,
+              "inventory": {
+                "circle": 1,
+                "line": 3,
+                "rect": 1
+              },
+              "local_gain": -0.03324765979260568,
+              "origin": "raster_primitive_reconstruction+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 44,
+              "error": 0.007063593774474204,
+              "improved_fraction": 0.09090909090909091,
+              "inventory": {
+                "circle": 1,
+                "line": 3,
+                "rect": 1
+              },
+              "local_gain": -0.0700905246233966,
+              "origin": "raster_primitive_reconstruction+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 35,
+              "error": 0.006125725148447178,
+              "improved_fraction": 0.5714285714285714,
+              "inventory": {
+                "circle": 1,
+                "line": 3,
+                "rect": 1
+              },
+              "local_gain": 0.007879460280844365,
+              "origin": "raster_primitive_reconstruction+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 36,
+              "error": 0.006245915388668176,
+              "improved_fraction": 0.5555555555555556,
+              "inventory": {
+                "circle": 1,
+                "line": 3,
+                "rect": 1
+              },
+              "local_gain": -0.0038358466117020505,
+              "origin": "raster_primitive_reconstruction+residual_line_group",
+              "rejection": "local_or_global_error"
+            }
+          ],
+          "selected_inventory": {
+            "circle": 1,
+            "line": 2,
+            "rect": 1
+          },
+          "selected_origin": "raster_primitive_reconstruction+residual_line_group",
+          "stop_reason": "probe_limit"
+        }
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "cli",
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "arm": "combined",
+      "seed": 17,
+      "elapsed_seconds": 8.344,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.012042165733873844,
+        "foreground_mse": 0.05171604081988335,
+        "edge_alignment": 0.5443100929260254,
+        "foreground_iou": 0.7681159420289855
+      },
+      "regions": null,
+      "search": null,
+      "svg_element_inventory": null,
+      "structure": {
+        "error": 0.012042166665196419,
+        "evaluations": 745,
+        "improved": true,
+        "initial_error": 0.04997856664815527,
+        "search_control": {
+          "candidate_evaluations": 745,
+          "elapsed_seconds": 5.109,
+          "limit_seconds": 8.0,
+          "max_seconds": 10.0,
+          "minimum_seconds": 5.0,
+          "stop_reason": "all_bots_inactive",
+          "time_extensions": 0
+        },
+        "structure_search": {
+          "max_probes": 32,
+          "mode": "combined",
+          "model_confirmed": false,
+          "probe_count": 24,
+          "proposals": [
+            {
+              "accepted": false,
+              "changed_pixels": 856,
+              "error": 0.0912475287282669,
+              "improved_fraction": 0.4929906542056075,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.08680388324164799,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 856,
+              "error": 0.09487750580261153,
+              "improved_fraction": 0.47897196261682246,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.09443701260358765,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 856,
+              "error": 0.09431061272729863,
+              "improved_fraction": 0.47897196261682246,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.09324494772559322,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 714,
+              "error": 0.07827872470702152,
+              "improved_fraction": 0.49019607843137253,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": -0.07141559789364932,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 714,
+              "error": 0.08084727241659191,
+              "improved_fraction": 0.47759103641456585,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": -0.07787518339387528,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 714,
+              "error": 0.08045259230780184,
+              "improved_fraction": 0.4803921568627451,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": -0.07688019152297598,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 838,
+              "error": 0.08628231591837898,
+              "improved_fraction": 0.49522673031026254,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.07800327087953747,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 838,
+              "error": 0.08772641576601592,
+              "improved_fraction": 0.4904534606205251,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.08110515599379348,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 838,
+              "error": 0.08725818559813178,
+              "improved_fraction": 0.4916467780429594,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.08009941100311152,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 693,
+              "error": 0.07774177168325572,
+              "improved_fraction": 0.48484848484848486,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": -0.0721454563207735,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 693,
+              "error": 0.07880753556324491,
+              "improved_fraction": 0.4805194805194805,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": -0.07490928767360908,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 693,
+              "error": 0.07845826818744928,
+              "improved_fraction": 0.4834054834054834,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": -0.07400209968452952,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 54,
+              "error": 0.04892588605522093,
+              "improved_fraction": 1.0,
+              "inventory": {
+                "line": 1,
+                "rect": 3
+              },
+              "local_gain": 0.03508935309781138,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 54,
+              "error": 0.04765512694547681,
+              "improved_fraction": 1.0,
+              "inventory": {
+                "line": 2,
+                "rect": 3
+              },
+              "local_gain": 0.042358636991470515,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 52,
+              "error": 0.04493503353411081,
+              "improved_fraction": 0.9230769230769231,
+              "inventory": {
+                "line": 3,
+                "rect": 3
+              },
+              "local_gain": 0.09304764439712537,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 55,
+              "error": 0.04374110527290074,
+              "improved_fraction": 0.6545454545454545,
+              "inventory": {
+                "line": 4,
+                "rect": 3
+              },
+              "local_gain": 0.038744725222233885,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 66,
+              "error": 0.03482169535933473,
+              "improved_fraction": 0.8939393939393939,
+              "inventory": {
+                "line": 5,
+                "rect": 3
+              },
+              "local_gain": 0.24212303737101892,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 66,
+              "error": 0.026762658236860467,
+              "improved_fraction": 0.8636363636363636,
+              "inventory": {
+                "line": 6,
+                "rect": 3
+              },
+              "local_gain": 0.21911665676371556,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 41,
+              "error": 0.024678736098651517,
+              "improved_fraction": 0.7317073170731707,
+              "inventory": {
+                "line": 7,
+                "rect": 3
+              },
+              "local_gain": 0.09203051984383744,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 44,
+              "error": 0.02075695387813804,
+              "improved_fraction": 0.8863636363636364,
+              "inventory": {
+                "line": 8,
+                "rect": 3
+              },
+              "local_gain": 0.1595666002586418,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 32,
+              "error": 0.021076876415054038,
+              "improved_fraction": 0.1875,
+              "inventory": {
+                "line": 9,
+                "rect": 3
+              },
+              "local_gain": -0.01769543765218506,
+              "origin": "incumbent+residual_line_group",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 40,
+              "error": 0.01611689236333604,
+              "improved_fraction": 0.875,
+              "inventory": {
+                "line": 9,
+                "rect": 3
+              },
+              "local_gain": 0.20843060361399462,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 52,
+              "error": 0.012042166118444473,
+              "improved_fraction": 0.7692307692307693,
+              "inventory": {
+                "line": 10,
+                "rect": 3
+              },
+              "local_gain": 0.14088871144234466,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 25,
+              "error": 0.011948279151893147,
+              "improved_fraction": 0.32,
+              "inventory": {
+                "line": 11,
+                "rect": 3
+              },
+              "local_gain": 0.00772953992054338,
+              "origin": "incumbent+residual_line_group",
+              "rejection": "local_or_global_error"
+            }
+          ],
+          "refinement_reverted_for_local_detail": true,
+          "selected_inventory": {
+            "line": 10,
+            "rect": 3
+          },
+          "selected_origin": "incumbent+residual_line_group",
+          "stop_reason": "proposals_exhausted"
+        }
+      },
+      "model_confirmed": false
+    },
+    {
+      "stage": "cli",
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "arm": "combined",
+      "seed": 17,
+      "elapsed_seconds": 8.734,
+      "satisfactory": false,
+      "metrics": {
+        "normalized_mse": 0.013889959082007408,
+        "foreground_mse": 0.019285067915916443,
+        "edge_alignment": 0.4806632399559021,
+        "foreground_iou": 0.9720062208398134
+      },
+      "regions": null,
+      "search": null,
+      "svg_element_inventory": null,
+      "structure": {
+        "error": 0.013889958150684834,
+        "evaluations": 1061,
+        "improved": true,
+        "initial_error": 0.035579733853370814,
+        "search_control": {
+          "candidate_evaluations": 1061,
+          "elapsed_seconds": 5.594,
+          "limit_seconds": 8.0,
+          "max_seconds": 10.0,
+          "minimum_seconds": 5.0,
+          "stop_reason": "stagnation",
+          "time_extensions": 0
+        },
+        "structure_search": {
+          "max_probes": 32,
+          "mode": "combined",
+          "model_confirmed": false,
+          "probe_count": 24,
+          "proposals": [
+            {
+              "accepted": false,
+              "changed_pixels": 3930,
+              "error": 0.036504977810504796,
+              "improved_fraction": 0.4776081424936387,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": -0.0015239587827347671,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 3956,
+              "error": 0.038920827682634475,
+              "improved_fraction": 0.4982305358948433,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": -0.004859476281905006,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 3952,
+              "error": 0.03780145243906583,
+              "improved_fraction": 0.6692813765182186,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": -0.003312341977885595,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 4881,
+              "error": 0.05045661110469864,
+              "improved_fraction": 0.34787953288260604,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.016759948940361803,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 4914,
+              "error": 0.05180149287976839,
+              "improved_fraction": 0.36507936507936506,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.01814555217092703,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 4906,
+              "error": 0.052856255675857285,
+              "improved_fraction": 0.49898083978801466,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.01935214481306619,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 3935,
+              "error": 0.03668285324509023,
+              "improved_fraction": 0.4660736975857687,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": -0.001766879157838651,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 3946,
+              "error": 0.03938350021207966,
+              "improved_fraction": 0.4875823618854536,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": -0.005511234940958353,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 3955,
+              "error": 0.03867150981524871,
+              "improved_fraction": 0.6217446270543616,
+              "inventory": {
+                "circle": 1,
+                "rect": 1
+              },
+              "local_gain": -0.00451075755653641,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 4649,
+              "error": 0.04697528820319431,
+              "improved_fraction": 0.39234243923424394,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.013527316448464055,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 4672,
+              "error": 0.04878927838340538,
+              "improved_fraction": 0.4111729452054795,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.015586475345801319,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": false,
+              "changed_pixels": 4662,
+              "error": 0.04964270264840732,
+              "improved_fraction": 0.5287430287430287,
+              "inventory": {
+                "rect": 2
+              },
+              "local_gain": -0.016621978159848214,
+              "origin": "raster_primitive_reconstruction",
+              "rejection": "local_or_global_error"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 136,
+              "error": 0.03160492953441612,
+              "improved_fraction": 0.8970588235294118,
+              "inventory": {
+                "ellipse": 1,
+                "line": 1,
+                "path": 1,
+                "text": 1
+              },
+              "local_gain": 0.15962631265501204,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 106,
+              "error": 0.029104404132927468,
+              "improved_fraction": 0.8773584905660378,
+              "inventory": {
+                "ellipse": 1,
+                "line": 2,
+                "path": 1,
+                "text": 1
+              },
+              "local_gain": 0.12905790951230658,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 116,
+              "error": 0.028757714976736768,
+              "improved_fraction": 0.9827586206896551,
+              "inventory": {
+                "ellipse": 1,
+                "line": 3,
+                "path": 1,
+                "text": 1
+              },
+              "local_gain": 0.01612721897413462,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 105,
+              "error": 0.025583421259096933,
+              "improved_fraction": 0.8571428571428571,
+              "inventory": {
+                "ellipse": 1,
+                "line": 4,
+                "path": 1,
+                "text": 1
+              },
+              "local_gain": 0.16513350786937867,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 87,
+              "error": 0.023725388158194666,
+              "improved_fraction": 0.7701149425287356,
+              "inventory": {
+                "ellipse": 1,
+                "line": 5,
+                "path": 1,
+                "text": 1
+              },
+              "local_gain": 0.11658274668893927,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 105,
+              "error": 0.02352127681782596,
+              "improved_fraction": 0.9333333333333333,
+              "inventory": {
+                "ellipse": 1,
+                "line": 6,
+                "path": 1,
+                "text": 1
+              },
+              "local_gain": 0.010428467683369646,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 40,
+              "error": 0.02345216066154998,
+              "improved_fraction": 0.925,
+              "inventory": {
+                "ellipse": 1,
+                "line": 7,
+                "path": 1,
+                "text": 1
+              },
+              "local_gain": 0.008505831090606175,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 43,
+              "error": 0.022848422161991785,
+              "improved_fraction": 0.8837209302325582,
+              "inventory": {
+                "ellipse": 1,
+                "line": 8,
+                "path": 1,
+                "text": 1
+              },
+              "local_gain": 0.0771609011441634,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 96,
+              "error": 0.02186145932709105,
+              "improved_fraction": 0.7604166666666666,
+              "inventory": {
+                "ellipse": 1,
+                "line": 9,
+                "path": 1,
+                "text": 1
+              },
+              "local_gain": 0.05617572301251654,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 100,
+              "error": 0.020778674494189315,
+              "improved_fraction": 0.72,
+              "inventory": {
+                "ellipse": 1,
+                "line": 10,
+                "path": 1,
+                "text": 1
+              },
+              "local_gain": 0.05852241445597845,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 96,
+              "error": 0.02042383447695334,
+              "improved_fraction": 0.6875,
+              "inventory": {
+                "ellipse": 1,
+                "line": 11,
+                "path": 1,
+                "text": 1
+              },
+              "local_gain": 0.020228170789012772,
+              "origin": "incumbent+residual_line_group"
+            },
+            {
+              "accepted": true,
+              "changed_pixels": 78,
+              "error": 0.019130906835012326,
+              "improved_fraction": 0.7564102564102564,
+              "inventory": {
+                "ellipse": 1,
+                "line": 12,
+                "path": 1,
+                "text": 1
+              },
+              "local_gain": 0.09077015086242306,
+              "origin": "incumbent+residual_line_group"
+            }
+          ],
+          "selected_inventory": {
+            "ellipse": 1,
+            "line": 12,
+            "path": 1,
+            "text": 1
+          },
+          "selected_origin": "incumbent+residual_line_group",
+          "stop_reason": "proposals_exhausted"
+        }
+      },
+      "model_confirmed": false
+    }
+  ]
+}

@@ -95,7 +95,11 @@ def test_matching_sample_never_gets_worse_and_reports_description_conflict(tmp_p
 def test_accepted_redraw_keeps_its_square_and_connected_geometry(tmp_path):
     from pathlib import Path
     root = Path(__file__).resolve().parents[1]
-    sample = root/'artifacts/converted_images/converted_svgs/AC0501_S_sia.svg'
+    # A new catalogue run may overwrite the production draft. Preserve the
+    # hash-pinned accepted redraw rather than testing whichever draft is latest.
+    import hashlib
+    sample = root/'tests/fixtures/accepted_square_damper.svg'
+    assert hashlib.sha256(sample.read_bytes()).hexdigest() == '29f5662c7bfa6e1aa5bc8a1d2b44acc2fdbf9afbb94790847a4e954069252eab'
     source = root/'artifacts/images_to_convert/AC0501_S_sia.jpg'
     output = tmp_path/'result.svg'
     report = refine(source, sample, output, 'Quadratische Kelle mit beiden Diagonalen und rundem Gelenk.', 2)

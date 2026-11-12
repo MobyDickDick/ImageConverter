@@ -79,6 +79,8 @@ def prepareIterationRuntimeImpl(
                     if fitted is not None:
                         params['vector_continuation'] = {key: fitted[key] for key in
                             ('improved', 'error', 'initial_error', 'evaluations', 'search_control')}
+                        if fitted.get('structure_search') is not None:
+                            params['vector_continuation']['structure_search'] = fitted['structure_search']
                         if fitted['improved']:
                             svg_content = fitted['svg']
                             # Supplied render/diff belong to the previous vector.

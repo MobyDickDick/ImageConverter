@@ -225,7 +225,8 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
             with configured_image_search(str(source.resolve())) as session:
                 session.spent = time.monotonic()-started
                 fitted = polish_generated_svg(final_svg, target, render_svg,
-                                               assertions=description_assertions(description))
+                                               assertions=description_assertions(description),
+                                               structure_mode='off', color_order='RGB')
                 if fitted is not None:
                     evaluations += fitted['evaluations']
                     continuation = fitted['search_control']

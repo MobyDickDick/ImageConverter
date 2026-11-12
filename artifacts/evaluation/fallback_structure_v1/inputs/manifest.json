@@ -1,0 +1,138 @@
+{
+  "schema": "fallback_structure_development_v1",
+  "cases": [
+    {
+      "case_id": "probe_00",
+      "audit_name": "AC0030_S",
+      "width": 30,
+      "height": 80,
+      "role": "known_audit_development",
+      "regions": [
+        {
+          "name": "left_head",
+          "box": [
+            0,
+            69,
+            10,
+            11
+          ]
+        },
+        {
+          "name": "right_head",
+          "box": [
+            19,
+            69,
+            11,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "probe_01",
+      "audit_name": "AC0303_1_M",
+      "width": 60,
+      "height": 60,
+      "role": "known_audit_development",
+      "regions": [
+        {
+          "name": "left_chord",
+          "box": [
+            4,
+            11,
+            22,
+            49
+          ]
+        },
+        {
+          "name": "right_chord",
+          "box": [
+            34,
+            11,
+            22,
+            49
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "probe_02",
+      "audit_name": "AC0504_1M_sia",
+      "width": 60,
+      "height": 30,
+      "role": "known_audit_development",
+      "regions": [
+        {
+          "name": "cross",
+          "box": [
+            2,
+            5,
+            17,
+            19
+          ]
+        },
+        {
+          "name": "connector",
+          "box": [
+            19,
+            3,
+            27,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "probe_03",
+      "audit_name": "GE0362",
+      "width": 74,
+      "height": 74,
+      "role": "known_audit_development",
+      "regions": [
+        {
+          "name": "tools",
+          "box": [
+            10,
+            8,
+            37,
+            42
+          ]
+        },
+        {
+          "name": "flame",
+          "box": [
+            34,
+            25,
+            30,
+            37
+          ]
+        }
+      ]
+    }
+  ],
+  "sha256": {
+    "baseline.py": "2d7d97ad8e1f8923fe1c384aac65deb84a03a54d6734a5ab3f3016e23675c284",
+    "probe_00/description.txt": "85fbb2eb0f5bf7ab7d562711729ee6c174a57e4cb2d119f2704fe8a509466686",
+    "probe_00/original.jpg": "8d3547e0204a21c759e89f04bccd26869e592396c4c6dcbdf531cc8db5d79391",
+    "probe_00/seed.svg": "ede5e725d56ae2c522fb15150a32ad120a10440c48c706ae17445412f0ebe0b3",
+    "probe_01/description.txt": "58ba459d4b83e22e200847a46d23819b165c59c0334ec5974524d158a532bbb0",
+    "probe_01/original.jpg": "697af003723b482c53900458a30c944fccb707ca7044c363ef227a6befdc7dc1",
+    "probe_01/seed.svg": "e54ce785e5900fd0a61285ba41920d3d041eed522c90630afefb48d01ef3ee4e",
+    "probe_02/description.txt": "59336f1995a067a59e06da3b3f34e9f3f44cc6c1f9514b3b9759348a8bdcca50",
+    "probe_02/original.jpg": "e87025cf9b47abadc3073ff48551ff8cb43230a8784fd7293d56501c0a88e814",
+    "probe_02/seed.svg": "b6c6273d6733581ad62ca907768c2ff6f65ee3c53faddf84e235e5be8fdd81b9",
+    "probe_03/description.txt": "65d68d8e86c92565830981fd500eed662fba5a2012c608af2a6005894cebbb90",
+    "probe_03/original.jpg": "84233894354495a0678441a2e69d0b1c6f7f1aa6584ba3bbdadee695d385c8a2",
+    "probe_03/seed.svg": "f6a95a95a4368d9c11d5072a67b87e8db2540bcc3a3a329ad2f381951f4517b3"
+  },
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "seconds": 5.0,
+  "max_seconds": 5.0,
+  "budget": 384,
+  "snapshot_sha256": "6722898630260e3bf80bc1b5bf2021b8acbc29171bf684351e1cf88d0c9dfa64",
+  "scope": "Continuation from historical generated SVGs; not reference reconstruction or new families"
+}

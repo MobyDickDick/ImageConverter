@@ -1,0 +1,42 @@
+{
+  "schema": "conversion_power_checks_v1",
+  "date": "2026-11-11",
+  "checks": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_conversion_power.py tests/test_conversion_timing.py tests/test_conversion_deadline.py tests/test_run_catalog_conversion.py --junitxml=.tmp/power-request-regression.xml",
+      "exit_code": 0,
+      "tests": "54",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "60.207",
+      "local_report": ".tmp/power-request-regression.xml",
+      "report_sha256": "f47a87e8acfce6fde6557ec783222e4678cb7fdbc56c9f1fb23488e1b54d2c5a"
+    },
+    {
+      "command": ".venv/Scripts/python.exe tools/run_pytest_profile.py core-green --junitxml=.tmp/power-request-core.xml",
+      "exit_code": 0,
+      "tests": "42",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "1.006",
+      "local_report": ".tmp/power-request-core.xml",
+      "report_sha256": "4706685e9edbb8e96657282edf08aabf907008db707802ee3b134fdeaac2f864"
+    }
+  ],
+  "native_probe_command": ".venv/Scripts/python.exe -m tools.check_conversion_power --report artifacts/evaluation/conversion_power_v1/native_probe.json",
+  "native_probe_exit_code": 0,
+  "native_probe_outside_sandbox": true,
+  "sha256": {
+    "src/iCCModules/imageCompositeConverterPower.py": "36201c3c1ef848b9c4efa58cd1a3f841596bcb1a74d3b5776b02533a30d7ea07",
+    "src/iCCModules/imageCompositeConverterDeadline.py": "a0265fe43cbc6459f29fa016dae630c88287748e2f39d5772d6d312f60699251",
+    "src/iCCModules/imageCompositeConverterTiming.py": "cd8f07c2f4220f48f25d144511e8272129856743a09f6c783ec1db1d690b6ddb",
+    "src/iCCModules/imageCompositeConverterRemaining.py": "857e2d036fc23bef9d8a595b607bf054035fea1682f0d4c0d440f4d14a7c49ef",
+    "tools/check_conversion_power.py": "145322471e0941a0fb08e30b28b1702eebd69c9fa684daad657277a477925426",
+    "tests/test_conversion_power.py": "df73ad4b4dadd6407a3172466b98ce0fd460694afdba3cda254bba03b2ead124",
+    "tests/test_conversion_timing.py": "f7d9ba40f994972cbcba00c38acb8229890c0dd9ad04842d3a3127f47d49cc29",
+    "tests/test_conversion_deadline.py": "bea363d8873caf8c0a9878a2915ee17d1f20f0dbeac0814fb2a6abf79fb0400e",
+    "artifacts/evaluation/conversion_power_v1/native_probe.json": "d14c6277acb518d656e429abfc85908357ef8e21735d1673407566361148e6af"
+  }
+}

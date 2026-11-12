@@ -1,0 +1,107 @@
+{
+  "schema_version": "conversion_persistence_acceptance_v1",
+  "date": "2026-11-12",
+  "platform": "Windows",
+  "python_version": "3.10.11",
+  "checks": [
+    {
+      "name": "targeted",
+      "python_arguments": [
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_conversion_persistence.py",
+        "tests/detailtests/test_batch_run_state_helpers.py",
+        "tests/detailtests/test_conversion_initial_pass_helpers.py",
+        "tests/detailtests/test_conversion_quality_pass_helpers.py",
+        "tests/detailtests/test_conversion_execution_helpers.py",
+        "tests/detailtests/test_iteration_initialization_helpers.py",
+        "tests/detailtests/test_batch_reporting_helpers.py",
+        "tests/detailtests/test_optimization_pass_reporting_helpers.py",
+        "tests/detailtests/test_conversion_bestlist_helpers.py",
+        "tests/detailtests/test_conversion_finalization_helpers.py",
+        "tests/detailtests/test_incremental_conversion_helpers.py",
+        "tests/test_run_catalog_conversion.py"
+      ],
+      "junit": {
+        "tests": 160,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": 4.372,
+      "junit_sha256": "a4c0ec6f55866b8320171be3801c7c286ec6e7e73090b340fa90ced4eafe516e"
+    },
+    {
+      "name": "integration",
+      "python_arguments": [
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_conversion_deadline.py",
+        "tests/test_conversion_timing.py"
+      ],
+      "junit": {
+        "tests": 28,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": 89.747,
+      "junit_sha256": "8583bda95acb00f12907130ba4194169fd2634c1930e19dea3a624231b96d22e"
+    },
+    {
+      "name": "core",
+      "python_arguments": [
+        "tools/run_pytest_profile.py",
+        "core-green"
+      ],
+      "junit": {
+        "tests": 42,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": 0.98,
+      "junit_sha256": "1f3c2ff2df866f86504a0ae95edbf21bcca8df51ba94d7d96a024cb1eb9c37f6"
+    }
+  ],
+  "quality_boundaries_unchanged": true,
+  "new_catalog_acceptances": 0,
+  "github_ci_run_observed": false,
+  "production_cli_invocations_in_test": 2,
+  "prior_run_files_byte_identical": true,
+  "groups_overlap": true,
+  "auxiliary_checks": {
+    "compileall": "passed",
+    "git_diff_check": "passed",
+    "runtime_image_id_ratchet": "passed"
+  },
+  "source_sha256": {
+    ".github/workflows/local-completion-checks.yml": "7de20ca5f360c1c6dd40bf3989e45f2ce74930aaaddb15dd671db57f5f5a81e0",
+    "src/iCCModules/imageCompositeConverterBatchReporting.py": "49d1aa542409e5af085a56f04942c97a8cdf8b1ea89c111ac941296f8b14bb04",
+    "src/iCCModules/imageCompositeConverterBatchRunState.py": "d06613bfa68ced9887d3a1f573bce600cc6b4d60734cebba38bedc8608bb16bc",
+    "src/iCCModules/imageCompositeConverterBestlist.py": "089b33b5e7e1c943d3f23fd01f8c468e45a3e194fa816ee718aff891f4195993",
+    "src/iCCModules/imageCompositeConverterConversionExecution.py": "5f26ccd554601a315ddbbd153db225c16725f0cb74baa7ae9a0547b36103a8de",
+    "src/iCCModules/imageCompositeConverterConversionFinalization.py": "be4999fc64daba03f8501e05db3ed280f1120a453446b31d5e5f66f2b18c4ac5",
+    "src/iCCModules/imageCompositeConverterConversionInitialPass.py": "aeed8ff2b2fb8746f3e1d3f7aa25dc11d02779ce50b50f12e0063a8c28c3dff4",
+    "src/iCCModules/imageCompositeConverterConversionQualityPass.py": "712cc6803467259b39ca6c270de4c24bd73b330eb6393802fc32a3441cda0fa3",
+    "src/iCCModules/imageCompositeConverterDeadline.py": "e277af59ef75d048f0f2a747d2999b6853b92c4d635bc29afb07f658ee4ba466",
+    "src/iCCModules/imageCompositeConverterOptimizationPassReporting.py": "3612f7ddbe46cc0c245c35981f189f19139ed545b920ff68733f585edea26c4f",
+    "src/iCCModules/imageCompositeConverterRemaining.py": "905f96ce0eac9db3e3585ad4e866f68c8a9f818319ec5e23c23b7b6c1774586a",
+    "tests/detailtests/test_batch_reporting_helpers.py": "073b98a27616f31c198dbad3a768e20ead8e6c544e273132f46ac8d1e78ecfcb",
+    "tests/detailtests/test_batch_run_state_helpers.py": "cafc89f27bde76a136ca8b36837d3c34625d29cc6c6f8d60039749477c2e6b69",
+    "tests/detailtests/test_conversion_bestlist_helpers.py": "dddf862ea538c1c1f946a0b1fd6b9d343c55d82f5543ae6bdd1dc7d00773e25b",
+    "tests/detailtests/test_conversion_execution_helpers.py": "a97e836f91d36e2a7b8c090eb3c186d7e2e3155561a0ad1e19d81c73263b9eac",
+    "tests/detailtests/test_conversion_finalization_helpers.py": "572b50c2a33de6f624dbef376fad1f60b4099e7d422b6da2832619651692c7a4",
+    "tests/detailtests/test_conversion_initial_pass_helpers.py": "f2b80aa780d6a598b346a6ff6970060d6ca5ce77510c0f53309e8abcaaa4782d",
+    "tests/detailtests/test_conversion_quality_pass_helpers.py": "211a25e2ff8b2602bab6fd601a12572afcc3cd8255aa693e267b684c747b8b53",
+    "tests/detailtests/test_incremental_conversion_helpers.py": "7c5ffc9401afd076679d17416b575e43208c18e44a84ed12b33a722962922157",
+    "tests/detailtests/test_iteration_initialization_helpers.py": "03a948c5015260236b036f2a034038f14b7a49333935d5a9f5083e46027f3193",
+    "tests/detailtests/test_optimization_pass_reporting_helpers.py": "3396396bc4bc2f3ee17f7eca2dbb932e70cecfe84addccfd562ba14eaf0594c9",
+    "tests/test_conversion_deadline.py": "b2d3dbee695d154f2f2f0512e3b631f59bfc05431728ad6e87dc199177052117",
+    "tests/test_conversion_persistence.py": "25d559ec238e598746377cd4f3f260dfb1b1ff52a1bfd96f24c65c9e7f6125f5",
+    "tests/test_conversion_timing.py": "f7d9ba40f994972cbcba00c38acb8229890c0dd9ad04842d3a3127f47d49cc29",
+    "tests/test_run_catalog_conversion.py": "f8d944ad293793bf943794d6b6fc649ee1af1c40d0ad937d66cf361cc74780da"
+  }
+}

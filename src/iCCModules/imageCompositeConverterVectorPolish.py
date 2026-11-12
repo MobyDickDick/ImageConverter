@@ -1,11 +1,8 @@
-"""Continue fast legacy fits using their own native vector, never a reference SVG.
-
-The assembly stays intact: uniform placement, shared stroke widths/paint and
-ordered gradient stops are fitted together. No contour tracing or new objects.
-"""
+"""Continue generated vectors with bounded native structure and parameter probes."""
 from __future__ import annotations
 
 import copy
+import os
 import xml.etree.ElementTree as ET
 
 import numpy as np
@@ -13,7 +10,12 @@ import numpy as np
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, pixel_quality, preferred_quality
 
 
-def polish_generated_svg(svg, image, render_fn, *, assertions=None):
+def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mode=None, color_order='BGR'):
+    structure_mode = structure_mode or os.environ.get('ICC_FALLBACK_STRUCTURE_MODE', 'combined')
+    if structure_mode not in {'off', 'primitives', 'lines', 'combined'}:
+        raise ValueError('Unknown fallback structure mode')
+    if color_order not in {'BGR', 'RGB'}:
+        raise ValueError('Unknown raster color order')
     session = current_search()
     if session is None or not session.minimum_pending or session.time_reason():
         return None
@@ -30,8 +32,28 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None):
     except (ValueError, SyntaxError):
         return None
     initial = render_fn(svg, w, h)
-    if initial is None or preferred_quality(pixel_quality(image, initial)):
+    if initial is None:
         return None
+    original_svg, original_raster = svg, initial
+    original_error = float(np.square(image.astype(float)-initial.astype(float)).mean()/255**2)
+    structure = None
+    # Even a tiny globally cheap missing line needs exploration. Exact/near-exact
+    # incumbents retain their bytes and the established inexpensive early exit.
+    if preferred_quality(pixel_quality(image, initial)) and (structure_mode == 'off' or np.max(abs(image.astype(float)-initial)) < 35):
+        return None
+    if structure_mode != 'off':
+        from src.iCCModules.imageCompositeConverterFallbackStructure import explore_structures
+        structure_image = image if color_order == 'BGR' else image[:, :, ::-1].copy()
+        structure_initial = initial if color_order == 'BGR' else initial[:, :, ::-1].copy()
+        def render_structure(candidate, width, height):
+            raster = render_fn(candidate, width, height)
+            return raster if raster is None or color_order == 'BGR' else raster[:, :, ::-1].copy()
+        selected, structure = explore_structures(svg, structure_image, structure_initial, render_structure, session, assertions,
+                                                 mode=structure_mode)
+        svg, initial = selected['svg'], selected['rendered']
+        if color_order == 'RGB':
+            initial = initial[:, :, ::-1].copy()
+        root = ET.fromstring(prepare_sample(svg.encode('utf-8'), w, h))
     nodes = list(root.iter())
     widths, colors, gradients = {}, {}, []
     for index, node in enumerate(nodes):
@@ -115,11 +137,37 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None):
                        'native_svg_continuation', loss_fn=lambda a, b: loss(b), satisfactory_fn=satisfactory,
                        preserve_initial_error=True)
     if result is None:
-        return None
+        if structure is None:
+            return None
+        result = dict(svg=svg, rendered=initial, error=error(initial), evaluations=0,
+                      source='native_svg_continuation', search_control=dict(
+                          stop_reason=session.time_reason() or 'schedule_exhausted', **session.report()))
     # Recheck explicit assertions on the selected draft too, including timeouts.
     validate_svg_assertions(result['svg'], assertions)
-    improved = result['error'] < error(initial)-1e-10
+    # Parameter polish must not erase a small newly added feature to improve a
+    # much larger background. Preserve the already measured structural draft.
+    if structure and structure['selected_origin'] != 'incumbent':
+        for node in ET.fromstring(svg).iter():
+            if node.tag.rsplit('}', 1)[-1] != 'line':
+                continue
+            xs = [float(node.get('x1', '0')), float(node.get('x2', '0'))]
+            ys = [float(node.get('y1', '0')), float(node.get('y2', '0'))]
+            x, X = max(0, int(min(xs))-3), min(w, int(max(xs))+4)
+            y, Y = max(0, int(min(ys))-3), min(h, int(max(ys))+4)
+            if X <= x or Y <= y:
+                continue
+            before = np.square(image[y:Y, x:X].astype(float)-initial[y:Y, x:X]).mean()
+            after = np.square(image[y:Y, x:X].astype(float)-result['rendered'][y:Y, x:X]).mean()
+            if after > before+1:
+                result.update(svg=svg, rendered=initial, error=error(initial))
+                structure['refinement_reverted_for_local_detail'] = True
+                break
+    result['initial_error'] = original_error
+    if structure is not None:
+        result['structure_search'] = structure
+        result['evaluations'] += structure['render_evaluations']
+    improved = result['error'] < original_error-1e-10
     result['improved'] = improved
     if not improved:
-        result.update(svg=svg, rendered=initial, error=error(initial))
+        result.update(svg=original_svg, rendered=original_raster, error=original_error)
     return result
