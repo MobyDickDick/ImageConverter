@@ -25,6 +25,7 @@ from urllib.parse import parse_qs, urlsplit
 import uuid
 import warnings
 import webbrowser
+import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 WEB = ROOT / "web"
@@ -51,6 +52,44 @@ def catalog_descriptions() -> dict[str, str]:
             descriptions.update(loadDescriptionMappingImpl(
                 str(path), get_base_name_from_file_fn=getBaseNameFromFileImpl))
     return descriptions
+
+
+def find_svg_description(name: str) -> dict:
+    """Look in the same maintained tables and sidecars as the Plan-B runner."""
+    from src.iCCModules.imageCompositeConverterDescriptions import loadDescriptionMappingImpl
+    from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
+
+    if not isinstance(name, str):
+        raise ValueError('Bitte einen gültigen SVG-Dateinamen angeben.')
+    name = name.replace('\\', '/').rsplit('/', 1)[-1]
+    stem = re.sub(r'_PlanB$', '', Path(name).stem, flags=re.I)
+    sources = [ROOT / 'artifacts' / folder / 'Finale_Wurzelformen_V3.xml'
+               for folder in ('images_to_convert', 'descriptions')]
+    sidecar = ROOT / 'artifacts' / 'samples' / (stem + '.txt')
+    searched = [str(p.relative_to(ROOT)) for p in (sidecar, *sources)]
+    result = dict(description='', description_source=None, description_key=None,
+                  description_searched=searched, description_warnings=[])
+    if sidecar.is_file():
+        text = sidecar.read_text(encoding='utf-8-sig').strip()
+        if text:
+            return dict(result, description=text, description_source=searched[0], description_key=stem)
+    catalogs = []
+    for path in sources:
+        if path.is_file():
+            try:
+                mapping = loadDescriptionMappingImpl(str(path), get_base_name_from_file_fn=getBaseNameFromFileImpl)
+                catalogs.append((path, {key.casefold(): value for key, value in mapping.items()}))
+            except (ValueError, OSError) as exc:
+                result['description_warnings'].append(f'{path.relative_to(ROOT)}: {exc}')
+    # Prefer an image-specific match over a family fallback, even if only the
+    # secondary table has that specific image. Keep Plan-B's primary table first.
+    for key in dict.fromkeys((Path(name).stem, stem, getBaseNameFromFileImpl(stem))):
+        for path, mapping in catalogs:
+            description = mapping.get(key.casefold(), '').strip()
+            if description:
+                return dict(result, description=description,
+                            description_source=str(path.relative_to(ROOT)), description_key=key)
+    return result
 
 
 def stop_process_tree(process: subprocess.Popen) -> None:
@@ -470,12 +509,144 @@ def saved_svg_quality(source: Path, svg: Path) -> dict | None:
         return None
 
 
+class Workbench:
+    """Own one background diagnostic batch; reports and old attempts stay on disk."""
+    def __init__(self, jobs: Jobs):
+        self.jobs = jobs
+        self.directory = jobs.directory / 'workbench'
+        self.directory.mkdir(exist_ok=True)
+        self.process = None
+        self.active_id = None
+        for folder in self.directory.iterdir():
+            if folder.is_dir() and re.fullmatch(r'[0-9a-f]{32}', folder.name):
+                self.finish(folder, 'interrupted')
+
+    def folder(self, run_id):
+        folder = self.directory / run_id
+        if not re.fullmatch(r'[0-9a-f]{32}', run_id) or not (folder / 'report.json').is_file():
+            raise RequestError('Dieser Workbench-Lauf wurde nicht gefunden.', 404)
+        return folder
+
+    def finish(self, folder, status):
+        from tools.plan_b_workbench import read_report, save_report
+        if not (folder / 'report.json').exists():
+            return
+        report = read_report(folder)
+        if report['status'] == 'running':
+            report.update(status=status, active_case=None)
+            for attempt in report['attempts']:
+                if attempt['status'] == 'running':
+                    attempt.update(status=status, finished=time.time())
+            save_report(folder, report)
+
+    def busy(self):
+        if self.process is not None and self.process.poll() is not None:
+            self.finish(self.folder(self.active_id), 'error' if self.process.returncode else 'interrupted')
+            self.process = None
+            self.active_id = None
+        return self.process is not None
+
+    def snapshot(self, run_id):
+        from tools.plan_b_workbench import read_report, summary
+        with self.jobs.lock:
+            self.busy()
+            report = read_report(self.folder(run_id))
+            return dict(report, seed=str(report['seed']), id=run_id, summary=summary(report))
+
+    def prepare(self, payload):
+        from tools.plan_b_workbench import prepare
+        with self.jobs.lock:
+            run_id = uuid.uuid4().hex
+            try:
+                seed = payload.get('seed')
+                if isinstance(seed, str):
+                    if not re.fullmatch(r'[0-9]{1,19}', seed):
+                        raise ValueError('Bitte einen ganzzahligen Seed zwischen 0 und 2^63−1 eingeben.')
+                    seed = int(seed)
+                prepare(payload.get('svg', ''), payload.get('description', ''), self.directory / run_id,
+                        seed=seed, name=payload.get('name', 'Motiv.svg'))
+            except (ValueError, SyntaxError) as exc:
+                raise RequestError(str(exc)) from exc
+            return self.snapshot(run_id)
+
+    def inspect(self, payload):
+        from tools.plan_b_workbench import inspect_svg
+        try:
+            preview = inspect_svg(payload.get('svg', ''))
+            description = find_svg_description(payload.get('name', 'Motiv.svg'))
+            return dict(preview, **description)
+        except (ValueError, SyntaxError) as exc:
+            raise RequestError(str(exc)) from exc
+
+    def start(self, run_id, payload):
+        from tools.plan_b_workbench import read_report, save_report
+        with self.jobs.lock:
+            if self.jobs.closed or self.busy() or any(j['status'] == 'running' for j in self.jobs.jobs.values()):
+                raise RequestError('Es läuft bereits eine Konvertierung. Bitte warten oder abbrechen.', 409)
+            folder = self.folder(run_id)
+            report = read_report(folder)
+            cases = payload.get('cases')
+            known = {c['case_id'] for c in report['cases']}
+            iterations, timeout = payload.get('iterations', 64), payload.get('timeout', 60)
+            if not isinstance(cases, list) or not cases or any(not isinstance(c, str) or c not in known for c in cases) or len(set(cases)) != len(cases):
+                raise RequestError('Bitte mindestens einen gültigen Fall auswählen.')
+            if type(iterations) is not int or not 1 <= iterations <= 4096 or type(timeout) not in (int, float) or not 1 <= timeout <= 600:
+                raise RequestError('Suchbudget: 1–4096 Iterationen; Zeitlimit: 1–600 Sekunden je Fall.')
+            command = [sys.executable, '-m', 'tools.plan_b_workbench', '--run-dir', str(folder),
+                       '--iterations', str(iterations), '--timeout-seconds', str(timeout), '--cases', *cases]
+            environment = dict(os.environ, PYTHONIOENCODING='utf-8', PYTHONHASHSEED='0')
+            report['status'] = 'running'
+            save_report(folder, report)
+            try:
+                with (folder / 'console.log').open('a', encoding='utf-8') as log:
+                    self.process = subprocess.Popen(command, cwd=ROOT, env=environment, stdout=log,
+                                                    stderr=subprocess.STDOUT,
+                                                    **({'creationflags': subprocess.CREATE_NO_WINDOW} if os.name == 'nt' else {'start_new_session': True}))
+            except OSError as exc:
+                self.finish(folder, 'error')
+                raise RequestError(f'Die Rückkonvertierung konnte nicht gestartet werden: {exc}') from exc
+            self.active_id = run_id
+            return dict(self.snapshot(run_id), status='running')
+
+    def cancel(self, run_id):
+        with self.jobs.lock:
+            folder = self.folder(run_id)
+            if self.busy() and self.active_id == run_id:
+                stop_process_tree(self.process)
+                self.process, self.active_id = None, None
+                self.finish(folder, 'cancelled')
+            return self.snapshot(run_id)
+
+    def note(self, run_id, payload):
+        from tools.plan_b_workbench import read_report, save_report
+        with self.jobs.lock:
+            if self.busy() and self.active_id == run_id:
+                raise RequestError('Bitte vor dem Speichern der Notiz den Lauf beenden.', 409)
+            folder = self.folder(run_id)
+            report = read_report(folder)
+            case_id, note = payload.get('case_id'), payload.get('note')
+            if case_id not in {c['case_id'] for c in report['cases']} or not isinstance(note, str) or len(note) > 12000:
+                raise RequestError('Ungültiger Fall oder zu lange Notiz.')
+            report['notes'][case_id] = note
+            save_report(folder, report)
+            return self.snapshot(run_id)
+
+    def close(self):
+        if self.busy():
+            self.cancel(self.active_id)
+
+
 class GuiServer(ThreadingHTTPServer):
     daemon_threads = True
 
     def __init__(self, address: tuple[str, int], jobs: Jobs):
         self.jobs = jobs
+        self.workbench = Workbench(jobs)
         super().__init__(address, Handler)
+
+    def server_close(self):
+        self.workbench.close()
+        super().server_close()
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -516,12 +687,17 @@ class Handler(BaseHTTPRequestHandler):
             name = parse_qs(url.query).get("name", ["Bild"])[0]
             match = re.fullmatch(r"/api/jobs/([0-9a-f]{32})(?:/([a-z]+)(/remove)?)?", path)
             static = {"/": ("index.html", "text/html; charset=utf-8"),
+                      "/workbench": ("workbench.html", "text/html; charset=utf-8"),
+                      "/workbench.js": ("workbench.js", "text/javascript; charset=utf-8"),
+                      "/workbench.css": ("workbench.css", "text/css; charset=utf-8"),
                       "/app.js": ("app.js", "text/javascript; charset=utf-8"),
                       "/style.css": ("style.css", "text/css; charset=utf-8")}
             if self.command == "GET":
                 if path in static:
                     filename, mime = static[path]
                     return self.file(WEB / filename, mime)
+                if path.startswith('/api/workbench'):
+                    return self.workbench_get(path, url.query)
                 if path == "/api/jobs":
                     with jobs.lock:
                         ids = sorted(jobs.jobs, key=lambda key: jobs.jobs[key]["created"], reverse=True)[:20]
@@ -550,6 +726,19 @@ class Handler(BaseHTTPRequestHandler):
                     raise RequestError("Upload unvollständig.")
                 if path == "/api/upload":
                     return self.json(jobs.upload(name, data), 201)
+                if path.startswith('/api/workbench/'):
+                    payload = json.loads(data)
+                    if not isinstance(payload, dict):
+                        raise RequestError('Ungültige Anfrage.')
+                    workbench = self.server.workbench
+                    if path == '/api/workbench/inspect':
+                        return self.json(workbench.inspect(payload))
+                    if path == '/api/workbench/prepare':
+                        return self.json(workbench.prepare(payload), 201)
+                    wb = re.fullmatch(r'/api/workbench/([0-9a-f]{32})/(start|cancel|note)', path)
+                    if wb:
+                        run_id, action = wb.groups()
+                        return self.json(workbench.cancel(run_id) if action == 'cancel' else getattr(workbench, action)(run_id, payload))
                 if match:
                     job_id, action, remove = match.groups()
                     if action == "sample":
@@ -558,7 +747,10 @@ class Handler(BaseHTTPRequestHandler):
                     if not isinstance(payload, dict):
                         raise RequestError("Ungültige Anfrage.")
                     if not remove and action == "start":
-                        return self.json(jobs.start(job_id, payload.get("description", ""), payload.get("profile", "normal")))
+                        with jobs.lock:
+                            if self.server.workbench.busy():
+                                raise RequestError('In der Workbench läuft eine Konvertierung.', 409)
+                            return self.json(jobs.start(job_id, payload.get("description", ""), payload.get("profile", "normal")))
                     if not remove and action in {"cancel", "save"}:
                         operation = jobs.cancel if action == "cancel" else jobs.save_as
                         return self.json(operation(job_id))
@@ -571,6 +763,44 @@ class Handler(BaseHTTPRequestHandler):
             pass
 
     do_GET = do_POST = handle_request
+
+    def workbench_get(self, path, query):
+        workbench = self.server.workbench
+        if path == '/api/workbench':
+            runs = []
+            for report_path in sorted(workbench.directory.glob('*/report.json'), key=lambda p: p.stat().st_mtime, reverse=True)[:30]:
+                report = workbench.snapshot(report_path.parent.name)
+                runs.append({k: report[k] for k in ('id', 'name', 'created', 'seed', 'status', 'summary')})
+            return self.json(runs)
+        match = re.fullmatch(r'/api/workbench/([0-9a-f]{32})(?:/(report|csv|bundle|asset))?', path)
+        if not match:
+            raise RequestError('Nicht gefunden.', 404)
+        run_id, asset = match.groups()
+        report = workbench.snapshot(run_id)
+        folder = workbench.folder(run_id)
+        if asset in (None, 'report'):
+            return self.respond(json.dumps(report, ensure_ascii=False, indent=2).encode('utf-8'),
+                                'application/json; charset=utf-8', download='report.json' if asset else None)
+        if asset == 'csv':
+            from tools.plan_b_workbench import export_csv
+            return self.respond(export_csv(report), 'text/csv; charset=utf-8', download='workbench.csv')
+        if asset == 'bundle':
+            if workbench.busy() and workbench.active_id == run_id:
+                raise RequestError('Bitte den Lauf vor dem Export beenden.', 409)
+            buffer = io.BytesIO()
+            with zipfile.ZipFile(buffer, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
+                for entry in folder.rglob('*'):
+                    if entry.is_file():
+                        archive.write(entry, entry.relative_to(folder).as_posix())
+                from tools.plan_b_workbench import export_csv
+                archive.writestr('workbench.csv', export_csv(report))
+            return self.respond(buffer.getvalue(), 'application/zip', download='plan-b-workbench.zip')
+        relative = parse_qs(query).get('path', [''])[0]
+        target = (folder / relative).resolve()
+        if not target.is_relative_to(folder.resolve()) or target.suffix.lower() not in {'.png', '.svg', '.log', '.json', '.jsonl', '.txt'}:
+            raise RequestError('Unzulässige Artefaktdatei.', 403)
+        mime = {'.png': 'image/png', '.svg': 'image/svg+xml'}.get(target.suffix.lower(), 'text/plain; charset=utf-8')
+        return self.file(target, mime, 'result.svg' if 'download' in parse_qs(query) else None)
 
 
 def main(argv: list[str] | None = None) -> int:

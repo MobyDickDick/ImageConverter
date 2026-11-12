@@ -1,5 +1,19 @@
 # ImageConverter
 
+Der [Fallback erkennt jetzt native Pfeil- und Gelenkgruppen](docs/next_arbeitspaket_2026-11-12_fallback_groups.md)
+mit einzeln geprüften Köpfen, Diagonalen, Anschlüssen und Gelenken. Auf vier
+bekannten Auditfällen steigen die echten CLI-Pixel-/Detailabnahmen bei gleichen
+Budgets von 1/4 auf 3/4; MuPDF und librsvg bestätigen beide neuen Verbesserungen.
+16 synthetische Varianten bestehen und 33 beschädigte Einzelteilkontrollen
+werden zurückgewiesen. Allgemeine Gruppenkomposition und vollständige
+Semantik bleiben offen; neue reale Reserven bleiben gesperrt und ungetestet.
+
+Die [Plan-B-Workbench](docs/plan_b_workbench.md) ergänzt die lokale Weboberfläche:
+SVG laden, Original und 16 Varianten vorbereiten, zurückkonvertieren und
+Eingabe/Ergebnis/Differenz vergleichen. Wiederholbare Versuche, Messdaten,
+Notizen und Diagnoseartefakte bleiben lokal erhalten und sind exportierbar.
+Start über `startWebServer.cmd` → **Plan-B-Workbench**.
+
 Der [gemeinsame P0-Struktursuchweg verbindet jetzt gerundete äußere Verlaufsrechtecke](docs/next_arbeitspaket_2026-11-06_rounded_parent.md)
 mit gemischten Kindern, Überdeckungsgruppen und einzelnen Formen. Zwölf
 unveränderte synthetische CLI-Fälle verbessern sich von 0/12 auf 12/12;

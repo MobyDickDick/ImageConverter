@@ -87,6 +87,14 @@ def test_reserved_inputs_and_conflicting_source_copies_are_never_measured(tmp_pa
     assert rows[0]['status'] == ('reserved' if reserved else 'source_conflict')
 
 
+def test_additional_sealed_family_manifest_also_blocks_catalog_measurement(tmp_path):
+    prepare(tmp_path,reserved=True)
+    source=tmp_path/'config/real_composition_holdout_families.json'
+    source.rename(tmp_path/'config/real_composition_holdout_fallback_groups.json')
+    rows,_,_=build(tmp_path,measure=lambda *args:pytest.fail('Sealed new families must not run'))
+    assert rows[0]['status']=='reserved'
+
+
 def test_missing_svg_means_unknown_and_auxiliary_gifs_do_not_inflate_catalog(tmp_path):
     prepare(tmp_path)
     (tmp_path/'artifacts/converted_images/converted_svgs/aa0010.svg').unlink()

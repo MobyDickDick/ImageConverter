@@ -179,10 +179,11 @@ def discover(root):
                     inside(root, path)
                     candidates[path.stem.casefold()].append(path)
     reserved = set()
-    reservation = read_json(root/'config/real_composition_holdout_families.json', {})
-    if reservation.get('evaluation_policy', {}).get('status') == 'sealed_unrun':
-        for case in reservation.get('cases', []):
-            reserved.update(n.casefold() for n in [case['file'], *case.get('family_members', [])])
+    for path in sorted((root/'config').glob('real_composition_holdout*.json')):
+        reservation = read_json(path, {})
+        if reservation.get('evaluation_policy', {}).get('status') == 'sealed_unrun':
+            for case in reservation.get('cases', []):
+                reserved.update(n.casefold() for n in [case['file'], *case.get('family_members', [])])
     return descriptions_path, descriptions, image_names, copies, archive_root, archive, candidates, reserved
 
 

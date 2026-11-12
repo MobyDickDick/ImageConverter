@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ImageConverter · Plan-B-Workbench</title>
+  <link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
+  <script src="/workbench.js" defer></script>
+</head>
+<body>
+  <header><a class="brand" href="/"><span class="brand-icon" aria-hidden="true">◈</span><span>IMAGECONVERTER<small>Plan-B-Workbench</small></span></a><a href="/">Zur Bildkonvertierung →</a></header>
+  <main>
+    <div class="intro"><div><p class="eyebrow">ERWEITERTE PLAN-B-AUFGABEN</p><h1>Variieren. Prüfen. Lernen.</h1><p>SVG → Rasterbild → neues SVG. Fehler sichtbar machen und reproduzierbare Daten sammeln.</p></div></div>
+    <div id="notice" role="alert" hidden></div>
+    <div class="workspace">
+      <aside>
+        <section class="card">
+          <h2><span class="number">01</span> Aufgabe vorbereiten</h2>
+          <label class="field-label" for="file">Referenz-SVG</label><input id="file" type="file" accept=".svg,image/svg+xml">
+          <p class="hint">Eigenständige Vektorgrafik · bis 2 MB · maximal 4 Megapixel.</p>
+          <div id="source-preview" hidden>
+            <p id="source-info" class="hint"></p>
+            <div class="image-stage source-preview-stage"><img id="source-image" alt="Vorschau des ausgewählten SVGs" hidden><p id="source-loading" class="placeholder" role="status">SVG wird geladen …</p></div>
+          </div>
+          <label class="field-label" for="description">Eigenständige Bildbeschreibung</label>
+          <textarea id="description" rows="5" maxlength="12000" placeholder="Formen, Farben und Lagebeziehungen beschreiben. Keine SVG-Koordinaten abschreiben."></textarea>
+          <p id="description-source" class="hint" role="status">Beim Auswählen des SVGs wird automatisch in den vorhandenen Beschreibungsdateien gesucht.</p>
+          <label class="field-label" for="seed">Varianten- und Suchseed <span class="optional">optional</span></label>
+          <input id="seed" inputmode="numeric" placeholder="Leer = neuer zufälliger Seed">
+          <p class="hint">Original + 16 Varianten: Skalierung ±6 %, Verschiebung ±2,5 %. Die Beschreibung wird passend ergänzt.</p>
+          <button id="prepare" class="primary full" disabled>Varianten vorbereiten →</button>
+        </section>
+        <section class="card">
+          <h2><span class="number">02</span> Rückkonvertieren</h2>
+          <label class="field-label" for="iterations">Iterationen pro Fall</label><input id="iterations" type="number" value="64" min="1" max="4096">
+          <label class="field-label" for="timeout">Zeitlimit pro Fall (Sekunden)</label><input id="timeout" type="number" value="60" min="1" max="600">
+          <button id="run-selected" class="primary full" disabled>Ausgewählte Fälle ausführen</button>
+          <button id="run-all" class="secondary full" disabled>Alle 17 Fälle ausführen</button>
+          <button id="cancel" class="secondary full" hidden>Lauf abbrechen</button>
+          <p class="hint">Der Konverter erhält nur Rasterbild und Beschreibung. Auch bei fehlerhaftem Original lassen sich alle Varianten untersuchen. Jeder Versuch bleibt erhalten.</p>
+        </section>
+        <section class="card history-card"><h2>Gespeicherte Aufgaben</h2><div id="history"><p class="hint">Noch keine Aufgaben vorbereitet.</p></div></section>
+      </aside>
+      <div class="content">
+        <section class="card">
+          <div class="preview-heading"><h2><span class="number">03</span> Varianten und Befunde</h2><span id="run-info" class="hint">Noch keine Aufgabe geladen.</span></div>
+          <p id="summary" role="status" aria-live="polite">Lade ein SVG und bereite seine Varianten vor.</p>
+          <p class="hint">Diagnosemodus · Anzeige des letzten Ergebnisses je Fall. „Bestanden“ bezieht sich auf die festen Pixel- und Vektorprüfungen. Kleine fehlende Objekte und die vollständige Semantik benötigen zusätzlich eine Sichtprüfung.</p>
+          <div class="table-scroll"><table><thead><tr><th><input id="select-all" type="checkbox" aria-label="Alle Fälle auswählen" disabled></th><th>Fall</th><th>Skalierung</th><th>Versatz x / y</th><th>Befund</th><th>MSE</th><th>Vorschau</th></tr></thead><tbody id="cases"></tbody></table></div>
+          <div id="exports" class="exports" hidden><a id="report">Bericht (JSON)</a><a id="csv">Messdaten (CSV)</a><a id="bundle">Gesamte Aufgabe (ZIP)</a></div>
+        </section>
+        <section id="detail" class="card" hidden>
+          <div class="preview-heading"><h2 id="case-title">Fallvergleich</h2><a id="output-download" hidden>Ergebnis-SVG herunterladen ↓</a></div>
+          <p id="case-description"></p>
+          <div class="workbench-comparison">
+            <figure><figcaption>Eingabe · rasterisierte Variante</figcaption><div class="image-stage"><img id="target" alt="Rasterisierte SVG-Variante"></div></figure>
+            <figure><figcaption>Rückkonvertiertes SVG</figcaption><div class="image-stage"><img id="output" alt="Ergebnis der Rückkonvertierung" hidden><p id="output-empty" class="placeholder">Noch kein Ergebnis.</p></div></figure>
+            <figure><figcaption>Absolutes Differenzbild</figcaption><div class="image-stage"><img id="difference" alt="Pixeldifferenz zwischen Eingabe und Ergebnis" hidden></div></figure>
+          </div>
+          <p id="metrics" class="hint"></p><p id="failures" class="quality-warning"></p>
+          <label class="field-label" for="note">Beobachtung und Lösungshypothesen</label>
+          <textarea id="note" maxlength="12000" rows="3" placeholder="Was fehlt oder ist falsch? Welche unterschiedlichen Ursachen und Lösungswege sollten untersucht werden?"></textarea>
+          <button id="save-note" class="secondary">Notiz speichern</button><span id="note-status" class="hint" role="status"></span>
+          <details class="log-card"><summary>Suchprotokoll des Falls</summary><pre id="log">Noch kein Suchprotokoll.</pre></details>
+        </section>
+        <p class="privacy-note">Referenzen, Parameter, Seeds, Raster, Ergebnis-SVGs, Messwerte und Protokolle bleiben lokal gespeichert. Wiederholungen erzeugen eigene Versuche.</p>
+      </div>
+    </div>
+    <footer>IMAGECONVERTER <span>Plan-B-Workbench · Lokale Diagnose</span></footer>
+  </main>
+</body>
+</html>

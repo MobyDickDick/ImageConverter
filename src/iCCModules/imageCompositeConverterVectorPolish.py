@@ -12,7 +12,7 @@ from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search,
 
 def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mode=None, color_order='BGR'):
     structure_mode = structure_mode or os.environ.get('ICC_FALLBACK_STRUCTURE_MODE', 'combined')
-    if structure_mode not in {'off', 'primitives', 'lines', 'combined'}:
+    if structure_mode not in {'off', 'primitives', 'lines', 'combined', 'legacy_combined', 'groups'}:
         raise ValueError('Unknown fallback structure mode')
     if color_order not in {'BGR', 'RGB'}:
         raise ValueError('Unknown raster color order')
@@ -147,6 +147,17 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
     # Parameter polish must not erase a small newly added feature to improve a
     # much larger background. Preserve the already measured structural draft.
     if structure and structure['selected_origin'] != 'incumbent':
+        from src.iCCModules.imageCompositeConverterFallbackGroups import part_regions, check_parts
+        regions = part_regions(svg, w, h)
+        if regions:
+            # Atomic groups protect every part, including heads and joints,
+            # rather than only the long line elements.
+            before_parts = check_parts(image, initial, regions)
+            after_parts = check_parts(image, result['rendered'], regions)
+            if any((a['passed'] and not b['passed']) or b['normalized_mse'] > a['normalized_mse']+1/255**2
+                   for a, b in zip(before_parts, after_parts)):
+                result.update(svg=svg, rendered=initial, error=error(initial))
+                structure['refinement_reverted_for_local_detail'] = True
         for node in ET.fromstring(svg).iter():
             if node.tag.rsplit('}', 1)[-1] != 'line':
                 continue

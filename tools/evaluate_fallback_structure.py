@@ -211,7 +211,7 @@ def review_study(root):
     return passed
 
 
-def evaluate_cli(inputs, output, seconds=8., max_seconds=10.):
+def evaluate_cli(inputs, output, seconds=8., max_seconds=10., modes=('off', 'combined')):
     """Real supervised CLI ablation, using only decoded frozen originals/text."""
     from tools.run_plan_b_variations import run_case
     manifest = json.loads((inputs / 'manifest.json').read_text(encoding='utf-8'))
@@ -222,7 +222,7 @@ def evaluate_cli(inputs, output, seconds=8., max_seconds=10.):
     results = []
     old_mode = os.environ.get('ICC_FALLBACK_STRUCTURE_MODE')
     try:
-        for mode in ('off', 'combined'):
+        for mode in modes:
             os.environ['ICC_FALLBACK_STRUCTURE_MODE'] = mode
             arm = output / mode
             arm.mkdir()
@@ -268,20 +268,24 @@ def evaluate_cli(inputs, output, seconds=8., max_seconds=10.):
 
 
 def validate_cli_results(inputs, output, manifest, results):
-    # Other known audit motifs remain negative. CI requires the narrow circle
-    # improvement, both local chords, explicit draft status and actual outputs.
+    # Require the circle and both new complete native groups through the real
+    # CLI. The tool/flame motif remains negative; pixel passes remain drafts.
     from tools.evaluate_svg_text_baseline import render_librsvg
-    circle = next(r for r in results if r['case_id'] == 'probe_01' and r['arm'] == 'combined')
+    from src.iCCModules.imageCompositeConverterFallbackGroups import check_relations
     if any(r.get('blocked_svg_reads') or 'output_svg' not in r for r in results):
         raise AssertionError('CLI output/reference-access regression')
-    path = output / 'combined' / circle['output_svg']
-    image = cv2.imread(str(inputs / 'probe_01/original.jpg'))
-    svg = path.read_text(encoding='utf-8')
-    raster = render_librsvg(svg, 60, 60)
-    if (not circle['satisfactory'] or circle.get('model_confirmed')
-            or not measure_quality(image, svg, render_fn=render_librsvg)['satisfactory']
-            or not all(r['passed'] for r in local_regions(image, raster, manifest['cases'][1]['regions']))):
-        raise AssertionError('Frozen circle/detail/draft regression')
+    for case in manifest['cases'][:3]:
+        row=next(r for r in results if r['case_id']==case['case_id'] and r['arm']=='combined')
+        path=output/'combined'/row['output_svg']
+        image=cv2.imread(str(inputs/case['case_id']/'original.jpg'))
+        svg=path.read_text(encoding='utf-8')
+        raster=render_librsvg(svg,case['width'],case['height'])
+        relations=check_relations(svg)
+        if (not row['satisfactory'] or row.get('model_confirmed')
+                or not measure_quality(image,svg,render_fn=render_librsvg)['satisfactory']
+                or not all(r['passed'] for r in local_regions(image,raster,case['regions']))
+                or (case['case_id']!='probe_01' and (not relations or not all(r['passed'] for r in relations)))):
+            raise AssertionError('Frozen native group/detail/draft regression: '+case['case_id'])
 
 
 def main():

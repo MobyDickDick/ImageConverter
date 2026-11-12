@@ -1,0 +1,44 @@
+{
+  "revision": "4931af8367ae5ec4047ee2fafaa34e21917b4762",
+  "searches": [
+    {
+      "command": [
+        "git",
+        "grep",
+        "-n",
+        "-I",
+        "-i",
+        "-E",
+        "(^|[^[:alnum:]_])([aA][cC]5041_[mM]|[aA][cC]5050_[mM])([^[:alnum:]_]|$)",
+        "4931af8367ae5ec4047ee2fafaa34e21917b4762",
+        "--",
+        "src",
+        "tests",
+        "tools",
+        "config",
+        "docs"
+      ],
+      "exit_code": 0,
+      "output": "4931af8367ae5ec4047ee2fafaa34e21917b4762:docs/conversion_quality_review_2026-06-19_runRC.md:70:| 12 | `AC5041_M` | `diff_inventory` | 0.14297610 | 27891.062 | `ok` |\n"
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "4931af8367ae5ec4047ee2fafaa34e21917b4762",
+        "--format=%h %s",
+        "-G",
+        "(^|[^[:alnum:]_])([aA][cC]5041_[mM]|[aA][cC]5050_[mM])([^[:alnum:]_]|$)",
+        "--",
+        "src",
+        "tests",
+        "tools",
+        "config",
+        "docs"
+      ],
+      "exit_code": 0,
+      "output": "07816f346 Improve AC0022 quality without PNG artifacts\n"
+    }
+  ],
+  "limitation": "Tracked source/history search only; historical catalogue and batch exposure is not excluded. Generic word matches require manual interpretation."
+}

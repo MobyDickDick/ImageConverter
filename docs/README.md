@@ -1,5 +1,9 @@
 # Dokumentationsindex
 
+- [P0: Native Pfeil- und Gelenkgruppen, 3/4 statt 1/4 echte CLI-Abnahmen unter gleichen Budgets; lokale Gegenproben und gesperrte Familien (2026-11-12)](next_arbeitspaket_2026-11-12_fallback_groups.md)
+
+- [Plan-B-Workbench: SVG-Varianten, echte Rückkonvertierung, Vergleich und exportierbare Lerndaten (2026-11-12)](plan_b_workbench.md)
+
 - [Katalogaudit-Folgepaket: konsistente Fortschrittsrevisionen, unveränderliche Laufbelege und aktuelle SVG-Metriken; nächstes Fallback-Strukturpaket (2026-11-12)](next_arbeitspaket_2026-11-12_conversion_persistence.md)
 
 - [Katalogaudit-Folgepaket: zeitlich begrenzte Windows-Wachhalteanforderungen, saubere Freigabe und getrennte Unterbrechungsbelege (2026-11-11)](next_arbeitspaket_2026-11-11_conversion_power.md)

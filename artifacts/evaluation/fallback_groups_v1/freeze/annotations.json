@@ -1,0 +1,132 @@
+{
+  "schema": "real_composition_holdout_families_v1",
+  "annotation_method": "Original raster inspected before runtime changes; visible bounding boxes, no reference SVG",
+  "evaluation_policy": {
+    "status": "sealed_unrun",
+    "converter_trials": 0,
+    "positive_acceptance": null,
+    "release_requirement": "Freeze final runtime and independent complete oracle before trial; never tune on results",
+    "historical_catalogue_exposure": true
+  },
+  "cases": [
+    {
+      "file": "AC5041_M.jpg",
+      "family": "heater_with_blower_and_shaded_chamber",
+      "split": "holdout",
+      "family_members": [
+        "AC5041_M.jpg"
+      ],
+      "source_sha256": "59d7e21e472f12061683e0c61ab3a13439865e9265921e4e94c62c5caf314047",
+      "size": [
+        150,
+        140
+      ],
+      "description": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Es zeigt eine eingeschaltete Heizung. Links ist ein Gebläse (Motor mit eingebauten Ventilator) Auf der rechten Seite ist aussen ein Behälter schematisch dargestellt, welcher aufgeschnitten ist (Heizraum). Er ist grau mit einem vertikalen Farbverlauf von hell nach dunkel. Es ist eine farbige Fläche dargestellt mit einem vertikalen Farbverlauf von orange nach rot.",
+      "expected_objects": [
+        {
+          "id": "blower",
+          "kind": "composite",
+          "visible_bbox": [
+            0,
+            73,
+            52,
+            67
+          ]
+        },
+        {
+          "id": "chamber",
+          "kind": "composite",
+          "visible_bbox": [
+            50,
+            0,
+            100,
+            140
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "kind": "adjacent",
+          "objects": [
+            "blower",
+            "chamber"
+          ]
+        }
+      ],
+      "acceptance_gaps": [
+        "Independent per-part curved geometry oracle missing",
+        "No human annotation audit",
+        "Catalogue/batch exposure cannot be excluded; not pristine unseen families"
+      ]
+    },
+    {
+      "file": "AC5050_M.jpg",
+      "family": "fan_disk_in_tapered_housing_above_grille",
+      "split": "holdout",
+      "family_members": [
+        "AC5050_L.jpg",
+        "AC5050_M.jpg",
+        "AC5050_S.jpg"
+      ],
+      "source_sha256": "515bb917a2d7665e36644c147c8b7b99c4025c2cc0f5ecd6303a73ea6b888f4a",
+      "size": [
+        150,
+        140
+      ],
+      "description": "Unzugeordnete Wurzelform aus der Serie AC5050. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell prüfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "expected_objects": [
+        {
+          "id": "housing",
+          "kind": "composite",
+          "visible_bbox": [
+            32,
+            14,
+            85,
+            85
+          ]
+        },
+        {
+          "id": "fan",
+          "kind": "composite",
+          "visible_bbox": [
+            54,
+            35,
+            42,
+            43
+          ]
+        },
+        {
+          "id": "grille",
+          "kind": "composite",
+          "visible_bbox": [
+            0,
+            112,
+            150,
+            15
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "kind": "inside",
+          "objects": [
+            "fan",
+            "housing"
+          ]
+        },
+        {
+          "kind": "above",
+          "objects": [
+            "housing",
+            "grille"
+          ]
+        }
+      ],
+      "acceptance_gaps": [
+        "Independent per-part curved geometry oracle missing",
+        "No human annotation audit",
+        "Catalogue/batch exposure cannot be excluded; not pristine unseen families"
+      ]
+    }
+  ]
+}

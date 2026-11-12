@@ -176,7 +176,7 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
     A caller must still treat every result as an unvalidated draft.
     """
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
-    if mode not in {'primitives', 'lines', 'combined'}:
+    if mode not in {'primitives', 'lines', 'combined', 'legacy_combined', 'groups'}:
         raise ValueError('Unknown fallback structure mode')
     reference = image.astype(float)
     error = lambda raster: float(np.square(reference-raster.astype(float)).mean()/255**2)
@@ -188,7 +188,7 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
         return best, report
     h, w = image.shape[:2]
 
-    def probe(candidate, origin, parent):
+    def probe(candidate, origin, parent, regions=None):
         nonlocal best
         if session.time_reason() or len(report['proposals']) >= max_probes:
             return None
@@ -211,13 +211,29 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
         after = np.square(reference-raster.astype(float)).mean(axis=2)
         local_gain = float((before[changed]-after[changed]).mean()/255**2) if changed.any() else 0.
         row.update(error=measured, local_gain=local_gain, changed_pixels=int(changed.sum()))
+        if regions:
+            from src.iCCModules.imageCompositeConverterFallbackGroups import check_parts, check_relations
+            row['parts'] = check_parts(image, raster, regions)
+            row['relations'] = check_relations(candidate)
         # Never accept a mostly unsupported edit just because a tiny part helps.
         support = float((after[changed] < before[changed]).mean()) if changed.any() else 0.
         row['improved_fraction'] = support
         accepted = measured < parent['error']-1e-8 and local_gain > 1e-6 and support >= .6
+        if 'native_object_group:' in parent['origin']:
+            from src.iCCModules.imageCompositeConverterFallbackGroups import part_regions, check_parts
+            protected = part_regions(parent['svg'], w, h)
+            before_parts = check_parts(image, parent['rendered'], protected)
+            after_parts = check_parts(image, raster, protected)
+            if any((a['passed'] and not b['passed']) or b['normalized_mse'] > a['normalized_mse']+1/255**2
+                   for a,b in zip(before_parts,after_parts)):
+                accepted = False
+                row['rejection'] = 'protected_group_part'
+        if regions and not all(p['passed'] for p in row['parts']+row['relations']):
+            accepted = False
+            row['rejection'] = 'group_part_evidence'
         row['accepted'] = accepted
         if not accepted:
-            row['rejection'] = 'local_or_global_error'
+            row.setdefault('rejection', 'local_or_global_error')
         result = dict(svg=candidate, rendered=raster, error=measured, origin=origin)
         if accepted and measured < best['error']-1e-8:
             best = result
@@ -226,14 +242,21 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
         return result if accepted else None
 
     bases = [best]
-    if mode in {'primitives', 'combined'}:
+    if mode in {'groups', 'combined'}:
+        from src.iCCModules.imageCompositeConverterFallbackGroups import group_proposals, part_regions
+        for candidate, family in group_proposals(image, session):
+            if session.time_reason() or len(report['proposals']) >= min(8, max_probes):
+                break
+            regions = part_regions(candidate, w, h)
+            probe(candidate, 'native_object_group:'+family, bases[0], regions)
+    if mode in {'primitives', 'combined', 'legacy_combined'}:
         for candidate in _primitive_scenes(image, session):
             result = probe(candidate, 'raster_primitive_reconstruction', bases[0])
             if result:
                 bases.append(result)
             if session.time_reason() or len(report['proposals']) >= min(12, max_probes):
                 break
-    if mode in {'lines', 'combined'}:
+    if mode in {'lines', 'combined', 'legacy_combined'}:
         # Reserve line work for the original and the best alternate, rather than
         # spending all probes on descendants of the initially chosen topology.
         parents = [bases[0]] + ([best] if best is not bases[0] else [])
