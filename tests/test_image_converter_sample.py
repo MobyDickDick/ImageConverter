@@ -35,6 +35,45 @@ def test_samples_reject_active_external_or_invalid_content(content):
         prepare_sample(content, 64, 64)
 
 
+@pytest.mark.parametrize('attribute', ['href', 'xlink:href'])
+def test_local_gradient_inheritance_preserves_paint(attribute):
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="20">'
+           '<defs><linearGradient id="base"><stop stop-color="#ff0000"/>'
+           '<stop offset="1" stop-color="#ffffff"/></linearGradient>'
+           f'<linearGradient id="paint" {attribute}="#base"/></defs>'
+           '<rect width="40" height="20" fill="url(#paint)"/></svg>')
+    image = render_svg(prepare_sample(svg.encode(), 40, 20), 40, 20)
+    assert image[10, 2, 0] > 240 and image[10, 2, 2] < 60
+    assert image[10, 37].min() > 210
+
+
+@pytest.mark.parametrize('definitions', [
+    '<linearGradient id="paint" href="https://example.org/a.svg#base"/>',
+    '<linearGradient id="paint" href="file:///C:/secret.svg#base"/>',
+    '<linearGradient id="paint" href="data:image/svg+xml,anything"/>',
+    '<linearGradient id="paint" href="#missing"/>',
+    '<linearGradient id="paint" href="#paint"/>',
+    '<linearGradient id="paint" href="#other"/><linearGradient id="other" href="#paint"/>',
+    '<rect id="base"/><linearGradient id="paint" href="#base"/>',
+    '<linearGradient id="base"/><linearGradient id="base"/><linearGradient href="#base"/>',
+    '<linearGradient id="base"/><rect href="#base"/>',
+    '<linearGradient id="base"/><linearGradient xmlns:fake="urn:unknown" fake:href="#base"/>',
+    '<linearGradient id="base"/><linearGradient id="other"/><linearGradient href="#base" xlink:href="#other"/>',
+])
+def test_local_gradient_exceptions_reject_external_invalid_and_cyclic_links(definitions):
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">'
+           f'<defs>{definitions}</defs></svg>')
+    with pytest.raises(ValueError):
+        prepare_sample(svg.encode(), 40, 20)
+
+
+def test_local_gradient_chain_depth_is_bounded_independently_of_xml_nesting():
+    definitions = ''.join(f'<linearGradient id="g{i}" href="#g{i+1}"/>' for i in range(65))
+    svg = f'<svg xmlns="http://www.w3.org/2000/svg"><defs>{definitions}<linearGradient id="g65"/></defs></svg>'
+    with pytest.raises(ValueError, match='maximal 64'):
+        prepare_sample(svg.encode(), 40, 20)
+
+
 def test_sample_uses_original_canvas_and_keeps_shapes():
     import xml.etree.ElementTree as ET
     root = ET.fromstring(prepare_sample(SAMPLE, 128, 96))

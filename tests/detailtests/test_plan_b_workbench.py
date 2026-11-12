@@ -236,3 +236,14 @@ def test_inspect_automatically_finds_description_and_does_not_cache_old_file(ser
     assert json.loads(send(server, '/api/workbench/inspect', payload)[1])['description'] == 'Ein grüner Kreis.'
     description_table(tmp_path, 'images_to_convert', [('AC1234', 'Korrigierte Beschreibung.', '', '')])
     assert json.loads(send(server, '/api/workbench/inspect', payload)[1])['description'] == 'Korrigierte Beschreibung.'
+
+
+def test_inspect_catalog_svg_with_local_inherited_gradient(server):
+    source = Path(__file__).resolve().parents[2] / 'artifacts/samples/AC0213_L.svg'
+    payload = dict(name=source.name, svg=source.read_text(encoding='utf-8-sig'))
+    status, body = send(server, '/api/workbench/inspect', payload)
+    result = json.loads(body)
+    assert status == 200, result
+    assert (result['width'], result['height']) == (47, 61)
+    assert '#swatch11' in result['preview_svg']
+    assert 'linearGradient' in result['preview_svg']

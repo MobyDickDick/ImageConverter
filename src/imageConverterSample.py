@@ -49,14 +49,29 @@ def prepare_sample(data: bytes, width: int, height: int) -> str:
             if namespace in EDITOR_NAMESPACES or child.tag.rsplit('}', 1)[-1] == 'metadata':
                 parent.remove(child)
     elements = list(root.iter())
+    by_id = {}
+    for element in elements:
+        if element.get('id'):
+            by_id.setdefault(element.get('id'), []).append(element)
+    gradient_links = {}
     for element in elements:
         tag = element.tag.rsplit("}", 1)[-1]
         if tag not in TAGS or (element.tag.startswith("{") and not element.tag.startswith("{" + SVG_NS + "}")):
             raise ValueError(f"Das Sample enthält ein nicht unterstütztes Element: {tag}.")
         for key, value in element.attrib.items():
             attribute = key.rsplit("}", 1)[-1].lower()
-            if attribute.startswith("on") or attribute in {"href", "src"}:
+            if attribute.startswith("on") or attribute == "src":
                 raise ValueError("Das Sample muss ausschliesslich eigenständige SVG-Formen enthalten.")
+            if attribute == 'href':
+                targets = by_id.get(value[1:], []) if re.fullmatch(r'#[^\s#]+', value) else []
+                if (key not in {'href', '{http://www.w3.org/1999/xlink}href'}
+                        or tag not in {'linearGradient', 'radialGradient'}
+                        or len(targets) != 1 or targets[0].tag != element.tag):
+                    raise ValueError('Das Sample darf nur lokale Verweise auf eindeutige Farbverläufe desselben Typs enthalten.')
+                target = targets[0]
+                if element in gradient_links and gradient_links[element] is not target:
+                    raise ValueError('Das Sample enthält widersprüchliche Farbverlaufsverweise.')
+                gradient_links[element] = target
             if len(value) > 250000:
                 raise ValueError("Das Sample enthält einen zu komplexen Pfad.")
         content = " ".join(element.attrib.values()) + " " + (element.text or "")
@@ -68,6 +83,17 @@ def prepare_sample(data: bytes, width: int, height: int) -> str:
         for key in list(element.attrib):
             if key.startswith('{') and key[1:].split('}', 1)[0] in EDITOR_NAMESPACES:
                 del element.attrib[key]
+    # Fragment links reuse paint within this document. Check chains without
+    # recursion: XML nesting limits do not bound gradient inheritance depth.
+    for element in gradient_links:
+        visiting = set()
+        while element in gradient_links:
+            if element in visiting:
+                raise ValueError('Das Sample enthält einen zyklischen Farbverlaufsverweis.')
+            if len(visiting) >= 64:
+                raise ValueError('Das Sample enthält eine zu lange Farbverlaufskette (maximal 64 Verweise).')
+            visiting.add(element)
+            element = gradient_links[element]
     from src.iCCModules.imageCompositeConverterSvgStyles import inline_simple_svg_styles
     root = ET.fromstring(inline_simple_svg_styles(ET.tostring(root, encoding="unicode")))
     if not root.get("viewBox"):

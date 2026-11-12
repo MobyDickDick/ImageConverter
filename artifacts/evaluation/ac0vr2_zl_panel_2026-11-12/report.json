@@ -1,0 +1,1213 @@
+{
+  "schema_version": "plan_b_variations_v2",
+  "seed": 4470433890649107824,
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "iterations": 64,
+  "timeout_seconds": 60.0,
+  "source_svg_sha256": "0162b26da51a471006030e68f17f144ed5c95eb2af49a2ec84692aabfbef8fd4",
+  "source_description_sha256": "afe166dda09d1623dd2a15471753d221ea8281ba2a4825cf11dfad16eaac7f9b",
+  "source_description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand.\n",
+  "artifact_retention": "debug",
+  "selection": {
+    "mode": "explicit",
+    "source_svg": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\samples\\AC0VR2_ZL_M.svg"
+  },
+  "cases": [
+    {
+      "case_id": "original",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 1.0,
+        "relative_x": 0.0,
+        "relative_y": 0.0
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand.\n",
+      "reference_svg": "references/original.svg",
+      "input_sha256": "ec4a77af5836fd086354cb4a56ab7a2f64b01948f7112ca73a0028417d677ff5",
+      "reference_svg_sha256": "f4578678330c6d7e5e0482bc32df79dbb1b50138f45606635ee70a05bb9e690b",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\original\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\original\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\original\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\original\\conversion",
+        "--start",
+        "original",
+        "--end",
+        "original",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00017714555724523962,
+        "foreground_mse": 0.00022998146596364677,
+        "edge_alignment": 0.9891590476036072,
+        "foreground_iou": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 1,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "original/conversion/converted_svgs/original.svg",
+      "output_sha256": "89a4d78c89195dab709c6a3942d19c7734290df21af797ceb0e8a68aa40a4611",
+      "elapsed_seconds": 4.406
+    },
+    {
+      "case_id": "probe_01",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 0.98879415,
+        "relative_x": -0.00939296,
+        "relative_y": 0.01268036
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Die gesamte Darstellung ist ein wenig kleiner dargestellt und ein wenig nach links und unten verschoben.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_01.svg",
+      "input_sha256": "1d8a09e2093c38ab3ba5e3a381410a3c253d8c8b75a1789dce289701eba53328",
+      "reference_svg_sha256": "9f9ba7f66c17262fa695c7577bf4c19ab8a021c1b5a613e7a2bca1d9d1f550ca",
+      "satisfactory": false,
+      "failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_01\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_01\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_01\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_01\\conversion",
+        "--start",
+        "probe_01",
+        "--end",
+        "probe_01",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00044986692955717444,
+        "foreground_mse": 0.000818288535811007,
+        "edge_alignment": 0.7503242492675781,
+        "foreground_iou": 0.8363892806770099
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 5,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_01/conversion/converted_svgs/probe_01.svg",
+      "output_sha256": "f3437c168cb5178760bbe2eb304c5377cd21d78ad67b55126515f13c7c35335f",
+      "elapsed_seconds": 34.328
+    },
+    {
+      "case_id": "probe_02",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 1.04433742,
+        "relative_x": 0.01855519,
+        "relative_y": -0.00821446
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Die gesamte Darstellung ist ein wenig größer dargestellt und ein wenig nach rechts und oben verschoben.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_02.svg",
+      "input_sha256": "5b7765c86b5758a5847bedcf87f869a2d86c039ab3f5969f4a202c35cc971d7c",
+      "reference_svg_sha256": "5c69429a5cb045c2591145fdf4e63f518e49c3556072f5410e3dd28f8bc07a3a",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_02\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_02\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_02\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_02\\conversion",
+        "--start",
+        "probe_02",
+        "--end",
+        "probe_02",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00011759009794332087,
+        "foreground_mse": 0.00011026464926544577,
+        "edge_alignment": 0.9326072931289673,
+        "foreground_iou": 0.9896519285042333
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_02/conversion/converted_svgs/probe_02.svg",
+      "output_sha256": "217f565204e23bfdf4fb63f33d12eb541d73afe10fb7bc7e2ff302ef753b50a7",
+      "elapsed_seconds": 6.719
+    },
+    {
+      "case_id": "probe_03",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 1.01015136,
+        "relative_x": 0.00859078,
+        "relative_y": 0.00642945
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Die Darstellung ist leicht größer dargestellt und geringfügig nach rechts und unten verschoben.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_03.svg",
+      "input_sha256": "14dcb01d0e1fc1477914fc7b71fd1ccba895f9db7e7c6aea09c9522b4e6a9b4a",
+      "reference_svg_sha256": "564004d20e9a79d923956b6b9a41304a2b3e70de1fc512a4f52bbcd6d9c42793",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_03\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_03\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_03\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_03\\conversion",
+        "--start",
+        "probe_03",
+        "--end",
+        "probe_03",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.963987834751606e-05,
+        "foreground_mse": 6.983185448916629e-05,
+        "edge_alignment": 0.789704442024231,
+        "foreground_iou": 0.9923469387755102
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_03/conversion/converted_svgs/probe_03.svg",
+      "output_sha256": "e8e5b02a1b292c873b3662b8b6b9f30960e5e1e5d086ce2d1df07920ae60f24b",
+      "elapsed_seconds": 33.75
+    },
+    {
+      "case_id": "probe_04",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 0.9438573,
+        "relative_x": -0.00668558,
+        "relative_y": 0.01700118
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Das Motiv ist leicht kleiner dargestellt und ein wenig nach links und unten verschoben.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_04.svg",
+      "input_sha256": "b8376f28ce03dd8db372169739791621647869fa1c168db1a6c44add5e930422",
+      "reference_svg_sha256": "d55128ab691b399e2dc79e41cfc91cb9e5dd121688132f86623edcfa54e1727e",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_04\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_04\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_04\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_04\\conversion",
+        "--start",
+        "probe_04",
+        "--end",
+        "probe_04",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 7.451834972016513e-05,
+        "foreground_mse": 9.585222142050043e-05,
+        "edge_alignment": 0.8793728351593018,
+        "foreground_iou": 0.9957155098543273
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 8,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_04/conversion/converted_svgs/probe_04.svg",
+      "output_sha256": "568c74c2bd8d218e2e736e68b22533bc95c48804ee044964f04ceab66342ea8d",
+      "elapsed_seconds": 33.109
+    },
+    {
+      "case_id": "probe_05",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 1.03886447,
+        "relative_x": -0.00633187,
+        "relative_y": -0.01008109
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Die Darstellung ist leicht größer dargestellt und leicht nach links und oben verschoben.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_05.svg",
+      "input_sha256": "ba607fee4292c0c780effa55fb547468d974764cfa8f5dd1ba22c800eb9d2504",
+      "reference_svg_sha256": "896b4bfc635ced5e1b03b5d6a79edc243736d130c67f760bfaac12560e4b0c00",
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_05\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_05\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_05\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_05\\conversion",
+        "--start",
+        "probe_05",
+        "--end",
+        "probe_05",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 8.00262059783563e-05,
+        "foreground_mse": 5.0407121307216585e-05,
+        "edge_alignment": 0.0,
+        "foreground_iou": 0.9911154985192497
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_05/conversion/converted_svgs/probe_05.svg",
+      "output_sha256": "11653ba7dbec9059017a9b6275ccf3ecc05137dd6da7b803f33eca89b1545df8",
+      "elapsed_seconds": 34.203
+    },
+    {
+      "case_id": "probe_06",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 1.03106752,
+        "relative_x": 0.01079067,
+        "relative_y": 0.00064616
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Die Darstellung ist etwas größer dargestellt und etwas nach rechts und unten versetzt.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_06.svg",
+      "input_sha256": "b81cdef9ecdae4794543b631c9b0624e89f52cc1a135d27d00a965c25555f221",
+      "reference_svg_sha256": "980757a2268986c42ea9176d96e73f93adf0d8d02f26697c4ef49ae476ab8609",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_06\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_06\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_06\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_06\\conversion",
+        "--start",
+        "probe_06",
+        "--end",
+        "probe_06",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.697709613945335e-05,
+        "foreground_mse": 6.674163887510076e-05,
+        "edge_alignment": 0.7711186408996582,
+        "foreground_iou": 0.9946476360392507
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_06/conversion/converted_svgs/probe_06.svg",
+      "output_sha256": "2fb5a1c92bb8a762d1e19ac20e12bccdb7916a8ca908e987f40036cf7ebff243",
+      "elapsed_seconds": 34.203
+    },
+    {
+      "case_id": "probe_07",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 1.00479144,
+        "relative_x": -0.00995152,
+        "relative_y": 0.01266659
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Die Darstellung ist leicht größer dargestellt und geringfügig nach links und unten versetzt.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_07.svg",
+      "input_sha256": "0d5859466ee6d8ae19916562df053e246da2decbddc5d2a329b452a7cab6f9c7",
+      "reference_svg_sha256": "4c022d4f020052936054e585145aaf3d9a1f5b27896f046f9d96b8b2d9013551",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_07\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_07\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_07\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_07\\conversion",
+        "--start",
+        "probe_07",
+        "--end",
+        "probe_07",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 8.996539690997452e-05,
+        "foreground_mse": 7.96056046965532e-05,
+        "edge_alignment": 0.9444726705551147,
+        "foreground_iou": 0.9605911330049262
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_07/conversion/converted_svgs/probe_07.svg",
+      "output_sha256": "6835053c41cae09c16a5e593cd0e1aae2cf64ed6695dc0f7a01449b960aec645",
+      "elapsed_seconds": 33.891
+    },
+    {
+      "case_id": "probe_08",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 1.03689446,
+        "relative_x": -0.00228495,
+        "relative_y": -0.01434276
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Das gesamte Motiv ist leicht größer dargestellt und leicht nach links und oben verschoben.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_08.svg",
+      "input_sha256": "93746fa2c8af74110f67baf46f1e8251ee4770583495ac02e7c53a4a2d0230d0",
+      "reference_svg_sha256": "d88c3ad612b276b86dc7dbe97526cd774ecb8ec86dbbed3ef879a76d52e18dc1",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_08\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_08\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_08\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_08\\conversion",
+        "--start",
+        "probe_08",
+        "--end",
+        "probe_08",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.831559585407376e-05,
+        "foreground_mse": 3.062039104406722e-05,
+        "edge_alignment": 1.0,
+        "foreground_iou": 0.9944320712694877
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_08/conversion/converted_svgs/probe_08.svg",
+      "output_sha256": "a209eb8063b9276742ff173b3e7adcfbffd59170a2ecb885d944186ff242f960",
+      "elapsed_seconds": 21.719
+    },
+    {
+      "case_id": "probe_09",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 0.95441897,
+        "relative_x": 0.00539374,
+        "relative_y": -0.01256063
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Die gesamte Darstellung ist ein wenig kleiner dargestellt und geringfügig nach rechts und oben versetzt.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_09.svg",
+      "input_sha256": "8ded5d9f136f083270b47f11362a02197790fd9474ac727f982a9d3d3fcc16bd",
+      "reference_svg_sha256": "8cf3fecb79fd275b3e9fd7af53c373118221ef982187d2adef4fb1c8fe1f830a",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_09\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_09\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_09\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_09\\conversion",
+        "--start",
+        "probe_09",
+        "--end",
+        "probe_09",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00011140728747704998,
+        "foreground_mse": 0.0001478968042647466,
+        "edge_alignment": 0.9673923254013062,
+        "foreground_iou": 0.9973544973544973
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 6,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_09/conversion/converted_svgs/probe_09.svg",
+      "output_sha256": "e3596b266e563d38fc4193457860ce911bfa5ac65cc73752b195bc81a1522cd8",
+      "elapsed_seconds": 14.032
+    },
+    {
+      "case_id": "probe_10",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 1.00674436,
+        "relative_x": 0.00645574,
+        "relative_y": -0.01751767
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Das gesamte Motiv ist ein wenig größer dargestellt und etwas nach rechts und oben versetzt.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_10.svg",
+      "input_sha256": "5088890a3b4c95a832a392f8d4ae74a8ccd8cc9d015151def125eb28732062b2",
+      "reference_svg_sha256": "007987c0de36df3929ebd6349efe252839ebf71806ee326b2570b5ded45c9b61",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_10\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_10\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_10\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_10\\conversion",
+        "--start",
+        "probe_10",
+        "--end",
+        "probe_10",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00043874289258383214,
+        "foreground_mse": 0.00022488340619020164,
+        "edge_alignment": 0.801287055015564,
+        "foreground_iou": 0.9395306859205776
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 1,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_10/conversion/converted_svgs/probe_10.svg",
+      "output_sha256": "ed995182b1e611d32a3d51b21b0c32d5c8d284c5d9d314336c9efd4537bdcd64",
+      "elapsed_seconds": 33.0
+    },
+    {
+      "case_id": "probe_11",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 1.0135163,
+        "relative_x": -0.01007315,
+        "relative_y": 0.01842992
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Die Darstellung ist ein wenig größer dargestellt und ein wenig nach links und unten versetzt.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_11.svg",
+      "input_sha256": "447281eb56aeeaca882f41c1dbac3967eec3d58c2bd13830133ced5d1d0f9342",
+      "reference_svg_sha256": "0758b932ae0201c7158ed63c868ef9ac7dbfdf41b6b48bd7df3e82737fc6de9a",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_11\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_11\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_11\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_11\\conversion",
+        "--start",
+        "probe_11",
+        "--end",
+        "probe_11",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 7.745454058749601e-05,
+        "foreground_mse": 6.834250962128863e-05,
+        "edge_alignment": 0.7630167603492737,
+        "foreground_iou": 0.9904255319148936
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_11/conversion/converted_svgs/probe_11.svg",
+      "output_sha256": "d5e4064ca652f1b5d120c80dcb2f7ed82e8a2cdfd1fd99c0482a986e2cd60089",
+      "elapsed_seconds": 34.344
+    },
+    {
+      "case_id": "probe_12",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 1.05695487,
+        "relative_x": -0.02241577,
+        "relative_y": 0.01931056
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Das gesamte Motiv ist ein wenig größer dargestellt und ein wenig nach links und unten verschoben.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_12.svg",
+      "input_sha256": "bfe10c8d7b63417367b2e30db277e77aa400194d145dd367a5c4ab83b3396acb",
+      "reference_svg_sha256": "7798cc09d27c6926f38e866c8d4cd13f3e86cb89160d2167b4b658d38ea48427",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_12\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_12\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_12\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_12\\conversion",
+        "--start",
+        "probe_12",
+        "--end",
+        "probe_12",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 5.7277116866316646e-05,
+        "foreground_mse": 4.756344424095005e-05,
+        "edge_alignment": 0.8301970958709717,
+        "foreground_iou": 0.9448217317487266
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_12/conversion/converted_svgs/probe_12.svg",
+      "output_sha256": "ebde7a95adc1ccb373eeb4efb1e400feb4b59cf7e11864fb7abaa457aaea8cc1",
+      "elapsed_seconds": 33.906
+    },
+    {
+      "case_id": "probe_13",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 1.04092491,
+        "relative_x": 0.0225654,
+        "relative_y": -0.01341085
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Die Darstellung ist leicht größer dargestellt und geringfügig nach rechts und oben versetzt.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_13.svg",
+      "input_sha256": "cd2700cbaaf103439b6b9804854cd2fd42912e50695056ace2ee7778564283e4",
+      "reference_svg_sha256": "b19164d7f9a64021c5330b576007e7d128256b1c93c388f791e5a029d5c58371",
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_13\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_13\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_13\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_13\\conversion",
+        "--start",
+        "probe_13",
+        "--end",
+        "probe_13",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 8.532899664714932e-05,
+        "foreground_mse": 5.954493462922983e-05,
+        "edge_alignment": 0.5376733541488647,
+        "foreground_iou": 0.9428060768543343
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_13/conversion/converted_svgs/probe_13.svg",
+      "output_sha256": "082e5d56cedfd9877ba14491bf093769a742b46cb101974ae63cc3af283adbda",
+      "elapsed_seconds": 33.625
+    },
+    {
+      "case_id": "probe_14",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 0.94584545,
+        "relative_x": 0.02379309,
+        "relative_y": 0.02006612
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Die gesamte Darstellung ist etwas kleiner dargestellt und leicht nach rechts und unten verschoben.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_14.svg",
+      "input_sha256": "a62397d57176cbd11b7a4ca392d641edd9650e78547437c8cad0883911e37aa9",
+      "reference_svg_sha256": "c3f42a2dd6bbd61ee31ab7dc2d7d30012e8db6fc6b573a534e853ca203219b18",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_14\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_14\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_14\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_14\\conversion",
+        "--start",
+        "probe_14",
+        "--end",
+        "probe_14",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00042593307443894446,
+        "foreground_mse": 0.0006112201372161508,
+        "edge_alignment": 0.9245485663414001,
+        "foreground_iou": 0.9358649789029536
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 9,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_14/conversion/converted_svgs/probe_14.svg",
+      "output_sha256": "dc5aaffc68c45f081ebaea01c043f3008b22af79b1c1e7d2ceb5a94f457d0d4f",
+      "elapsed_seconds": 34.593
+    },
+    {
+      "case_id": "probe_15",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 0.99176381,
+        "relative_x": -0.00401537,
+        "relative_y": 0.01682706
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Die gesamte Darstellung ist ein wenig kleiner dargestellt und ein wenig nach links und unten versetzt.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_15.svg",
+      "input_sha256": "84c8f52cd779d025eb6c936c1083c1e8f9e2f40e337cf2da6fdf854411925e4e",
+      "reference_svg_sha256": "9649e9d66bf9b5aa60d26841cbfd9891978e6f83b023da6bdef2bae91dde7140",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_15\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_15\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_15\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_15\\conversion",
+        "--start",
+        "probe_15",
+        "--end",
+        "probe_15",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.00020060662063769996,
+        "foreground_mse": 0.0003049728402402252,
+        "edge_alignment": 0.8192697763442993,
+        "foreground_iou": 0.8931750741839762
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 4,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_15/conversion/converted_svgs/probe_15.svg",
+      "output_sha256": "054fdad2e8e009dfc7e256334b85a20b96ddcd42a229544418ab0aae04f6f7d3",
+      "elapsed_seconds": 34.109
+    },
+    {
+      "case_id": "probe_16",
+      "width": 60,
+      "height": 30,
+      "variation": {
+        "scale": 1.03688637,
+        "relative_x": -0.00768691,
+        "relative_y": -0.01937148
+      },
+      "description": "Es gibt einen vertikalen Graustufenübergang (Farbübergang). Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand.\nDas dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand. Die Darstellung ist geringfügig größer dargestellt und leicht nach links und oben versetzt.",
+      "variation_generation": {
+        "candidates_checked": 1,
+        "rejected_duplicates": 0
+      },
+      "reference_svg": "references/probe_16.svg",
+      "input_sha256": "a284af593cb189583c508e9f4210cd3926eebde1b61e20a4ecb4b835316eb1fb",
+      "reference_svg_sha256": "be4e9baf1ec0c2796a0c680ea7af3fbc9c4377d56094d967af0fbd4c44cef233",
+      "satisfactory": false,
+      "failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_16\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_16\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_16\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\ac0vr2_zl_panel_2026-11-12\\probe_16\\conversion",
+        "--start",
+        "probe_16",
+        "--end",
+        "probe_16",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 0.001359391724690795,
+        "foreground_mse": 0.0005312145221978426,
+        "edge_alignment": 0.1347649246454239,
+        "foreground_iou": 0.9855555555555555
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 2,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      },
+      "output_svg": "probe_16/conversion/converted_svgs/probe_16.svg",
+      "output_sha256": "c534ac35b52b49f7f215874c8f21961287b57d8c38129aefc67657965c2f6777",
+      "elapsed_seconds": 33.906
+    }
+  ],
+  "status": "completed",
+  "original_satisfactory": true,
+  "variations_started": true,
+  "summary": {
+    "required": 17,
+    "completed": 17,
+    "passed": 13,
+    "failed": 4,
+    "satisfactory": false
+  },
+  "source_image": "source.png",
+  "source_image_sha256": "ec4a77af5836fd086354cb4a56ab7a2f64b01948f7112ca73a0028417d677ff5"
+}
