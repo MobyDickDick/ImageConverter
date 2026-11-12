@@ -127,6 +127,55 @@ def test_linear_gradient_tracks_the_analytic_color_profile():
     assert np.max(abs(raster[10].astype(float)-expected)) < 8
 
 
+@pytest.mark.parametrize('axis', ['horizontal', 'vertical', 'diagonal'])
+@pytest.mark.parametrize('transform', ['', 'translate(4 6) scale(1.2)'])
+@pytest.mark.parametrize('resolution', [80, 160])
+def test_translucent_rect_gradient_composites_once_over_another_gradient(axis, transform, resolution):
+    import cv2
+    import fitz
+    import numpy as np
+    coordinates = {'horizontal': 'x2="1" y2="0"', 'vertical': 'x2="0" y2="1"',
+                   'diagonal': 'x2="1" y2="1"'}[axis]
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">'
+           '<defs><linearGradient id="base" x1="0" y1="0" x2="0" y2="1">'
+           '<stop offset="0" stop-color="#204060"/><stop offset="1" stop-color="#80a0c0"/>'
+           f'</linearGradient><linearGradient id="overlay" x1="0" y1="0" {coordinates}>'
+           '<stop offset="0" stop-color="#e08040" stop-opacity="0"/>'
+           '<stop offset="1" stop-color="#40c0e0" stop-opacity="80%"/>'
+           f'</linearGradient></defs><g transform="{transform}">'
+           '<rect x="10" y="10" width="40" height="40" fill="url(#base)"/>'
+           '<rect x="10" y="10" width="40" height="40" fill="url(#overlay)" stroke="none"/>'
+           '</g></svg>')
+    actual = rendering.render_svg_to_numpy_inprocess(svg, resolution, resolution,
+                     fitz_module=fitz, np_module=np, cv2_module=cv2)
+    locations = np.array([[22, 24], [35, 24], [22, 35], [35, 35]]) * (resolution//80)
+    local = (locations+.5)/(resolution/80)
+    if transform:
+        local = (local-[4, 6])/1.2
+    x, y = ((local-10)/40).T
+    t = {'horizontal': x, 'vertical': y, 'diagonal': (x+y)/2}[axis]
+    base = (1-y[:, None])*[32, 64, 96]+y[:, None]*[128, 160, 192]
+    overlay = (1-t[:, None])*[224, 128, 64]+t[:, None]*[64, 192, 224]
+    alpha = .8*t[:, None]
+    expected = (base*(1-alpha)+overlay*alpha)[:, ::-1]
+    assert np.max(abs(actual[locations[:, 1], locations[:, 0]].astype(float)-expected)) <= 4
+    assert np.all(actual[0] == 255)
+
+
+def test_frozen_paired_line_template_keeps_vertical_shading_in_all_workbench_cases():
+    from pathlib import Path
+    import numpy as np
+    from tools.run_plan_b_variations import make_original_case, make_variations, render
+    svg = (Path(__file__).resolve().parents[1]/'fixtures/plan_b_templates/AC0VR2_AB_M.svg').read_text(encoding='utf-8')
+    for case in [make_original_case(svg, 'Rechteck'), *make_variations(svg, 'Rechteck', 64217)]:
+        raster = render(case['svg'], case['width'], case['height']).astype(float).mean(axis=2)
+        # Ignore the border/shifted canvas; the translucent horizontal sheen
+        # must not cover the much stronger vertical paint underneath it.
+        interior = raster[3:-3, 5:-5]
+        assert np.ptp(np.median(interior, axis=1)) > 30
+        assert np.ptp(np.median(interior, axis=1)) > 2*np.ptp(np.median(interior, axis=0))
+
+
 def curved_gradient_svg(paint='#184888', end='#184888', data=None, extra=''):
     data = data or 'M 6 32 C 6 2 34 2 34 32 Q 20 38 6 32 Z'
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">'

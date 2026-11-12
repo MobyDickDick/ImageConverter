@@ -324,7 +324,8 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
     at the requested output resolution, avoiding repeated edge compositing by
     overlapping gradient bands. Flattening is used only for paint bounds.
     Ancestor translation and positive uniform scale preserve the native mask.
-    Unsupported commands, compound paths, other transforms and alpha are untouched.
+    Unsupported commands, compound paths and other transforms are untouched.
+    Rectangles also support translucent stops, composited once through the mask.
     """
     shape_kinds = {'path', 'circle', 'ellipse'} if shape_kinds is None else shape_kinds
     if 'linearGradient' not in svg_string:
@@ -470,14 +471,19 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                     continue
                 stops = []
                 for stop in gradient:
-                    if set(stop.attrib)-{'offset','stop-color'} or stop.tag.rsplit('}',1)[-1]!='stop':
+                    supported = {'offset', 'stop-color'} | ({'stop-opacity'} if kind == 'rect' else set())
+                    if set(stop.attrib)-supported or stop.tag.rsplit('}',1)[-1]!='stop':
                         raise ValueError('unsupported stop')
                     offset = stop.get('offset','0')
                     fraction = float(offset[:-1])/100 if offset.endswith('%') else float(offset)
                     color = stop.get('stop-color','')
                     if not re.fullmatch(r'#[0-9a-fA-F]{6}',color):
                         raise ValueError('unsupported color')
-                    stops.append((fraction,[int(color[i:i+2],16) for i in (1,3,5)]))
+                    opacity = stop.get('stop-opacity', '1')
+                    opacity = float(opacity[:-1])/100 if opacity.endswith('%') else float(opacity)
+                    if not math.isfinite(opacity):
+                        raise ValueError('invalid stop opacity')
+                    stops.append((fraction,[int(color[i:i+2],16) for i in (1,3,5)], min(1., max(0., opacity))))
                 stops.sort(key=lambda v:v[0])
                 if len(stops)<2 or not all(math.isfinite(v[0]) for v in stops):
                     continue
@@ -523,6 +529,10 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                     position = (coordinates-low)/(high-low)
                     colors = np.stack([np.interp(position,[v[0] for v in stops],[v[1][c] for v in stops]) for c in range(3)],axis=-1)
                     colors = np.broadcast_to(colors[:,None,:] if axis==1 else colors[None,:,:],(h,w,3))
+                paint_alpha = np.interp(position, [v[0] for v in stops], [v[2] for v in stops])
+                if paint_alpha.ndim == 1:
+                    paint_alpha = paint_alpha[:, None] if axis == 1 else paint_alpha[None, :]
+                paint_alpha = np.broadcast_to(paint_alpha, (h, w))
                 analytic_outline = False
                 # MuPDF quantizes straight edges to its scan grid. Near an
                 # integer boundary that loses a real sliver of coverage and
@@ -547,7 +557,7 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                     # Quantize each premultiplied source-over operation, rather
                     # than independently rounding a final float color/alpha
                     # pair (which creates a one-level fringe on light paint).
-                    opacity = np.rint(fill_alpha*255)
+                    opacity = np.rint(fill_alpha*paint_alpha*255)
                     premultiplied = np.rint(np.rint(colors)*opacity[:, :, None]/255)
                     sw = float(path.get('stroke-width', '1')) if stroke != 'none' else 0.
                     if not math.isfinite(sw) or sw < 0:
@@ -564,6 +574,7 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                     rgba = np.concatenate((premultiplied.astype(np.uint8), alpha[:, :, None]), axis=2)
                     analytic_outline = True
                 else:
+                    alpha = np.rint(alpha*paint_alpha).astype(np.uint8)
                     rgba = np.concatenate((np.rint(colors*alpha[:,:,None]/255).astype(np.uint8),alpha[:,:,None]),axis=2)
                 paint = fitz_module.Pixmap(fitz_module.csRGB,w,h,rgba.tobytes(),True)
                 encoded = base64.b64encode(paint.tobytes('png')).decode('ascii')
