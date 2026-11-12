@@ -1,0 +1,138 @@
+{
+  "source_sha256": "9e2d7acb3de46fea07c4e764a759511197248814ba1d04412568a9cade8d2ac0",
+  "before": [
+    {
+      "job_id": "d69b3325451d456191a7528e693d4a1a",
+      "search_seed": "6486757667160221770",
+      "search": {
+        "candidate_evaluations": 1917,
+        "stop_reason": "supported_models_exhausted",
+        "satisfactory": false,
+        "elapsed_seconds": 30.125,
+        "minimum_seconds": 30.0,
+        "limit_seconds": 60.0
+      },
+      "quality": {
+        "normalized_mse": 0.005707438103854656,
+        "foreground_mse": 0.0076391133479774,
+        "foreground_iou": 0.7452784503631962,
+        "edge_alignment": 0.8295199275016785,
+        "passed": false,
+        "observed_foreground_pixels": 1559,
+        "output_foreground_pixels": 2045
+      },
+      "svg_sha256": "7b0156a85bdf2f2fbfc2121e1a79bf985a922fdce07a063bf3eafe776522d184"
+    },
+    {
+      "job_id": "e0bada5992634aefb715751fe34e71c7",
+      "search_seed": "10950444237937348185",
+      "search": {
+        "candidate_evaluations": 1833,
+        "stop_reason": "supported_models_exhausted",
+        "satisfactory": false,
+        "elapsed_seconds": 30.25,
+        "minimum_seconds": 30.0,
+        "limit_seconds": 60.0
+      },
+      "quality": {
+        "normalized_mse": 0.0057198465801775455,
+        "foreground_mse": 0.007645351346582174,
+        "foreground_iou": 0.7460009694619486,
+        "edge_alignment": 0.828926146030426,
+        "passed": false,
+        "observed_foreground_pixels": 1559,
+        "output_foreground_pixels": 2043
+      },
+      "svg_sha256": "45f067f074370ba449c5ddda7c85c539ac0bd1aa2fd047dac9d2531a38a9557b"
+    },
+    {
+      "job_id": "2a2744f53b454871aaab276e848d68bf",
+      "search_seed": "1454008181531873803",
+      "search": {
+        "candidate_evaluations": 1832,
+        "stop_reason": "supported_models_exhausted",
+        "satisfactory": false,
+        "elapsed_seconds": 30.219,
+        "minimum_seconds": 30.0,
+        "limit_seconds": 60.0
+      },
+      "quality": {
+        "normalized_mse": 0.005758711136877537,
+        "foreground_mse": 0.007687073666602373,
+        "foreground_iou": 0.745041122399613,
+        "edge_alignment": 0.8284921646118164,
+        "passed": false,
+        "observed_foreground_pixels": 1559,
+        "output_foreground_pixels": 2048
+      },
+      "svg_sha256": "e7fcdd7ff808974c0e91286a241fd8d2170d9a266ac2d3c3c95e03c8373d95b7"
+    }
+  ],
+  "after": [
+    {
+      "search_seed": "42",
+      "svg_sha256": "51c045d1fd06f906a4cecb6b1fcbd553e4a31f8fc56b53c009cf6b976daf8125",
+      "search": {
+        "candidate_evaluations": 1776,
+        "stop_reason": "satisfactory",
+        "satisfactory": true,
+        "elapsed_seconds": 30.125,
+        "minimum_seconds": 30.0,
+        "limit_seconds": 60.0
+      },
+      "quality": {
+        "mupdf": {
+          "normalized_mse": 0.00040505253127776086,
+          "foreground_mse": 0.0003248642897233367,
+          "foreground_iou": 0.930391547545059,
+          "edge_alignment": 0.9581496715545654,
+          "passed": true
+        },
+        "librsvg": {
+          "normalized_mse": 0.0007253683870658278,
+          "foreground_mse": 0.0008349946001544595,
+          "foreground_iou": 0.9211940298507463,
+          "edge_alignment": 0.8907785415649414,
+          "passed": true
+        }
+      }
+    },
+    {
+      "search_seed": "314159",
+      "svg_sha256": "e82ab4b8de71f3415adb25ac55e5aa8bf11c70206e422474988558176cbd080d",
+      "search": {
+        "candidate_evaluations": 1876,
+        "stop_reason": "satisfactory",
+        "satisfactory": true,
+        "elapsed_seconds": 30.109,
+        "minimum_seconds": 30.0,
+        "limit_seconds": 60.0
+      },
+      "quality": {
+        "mupdf": {
+          "normalized_mse": 0.0004049997078254819,
+          "foreground_mse": 0.0003243107639718801,
+          "foreground_iou": 0.931592039800995,
+          "edge_alignment": 0.9608476161956787,
+          "passed": true
+        },
+        "librsvg": {
+          "normalized_mse": 0.000731644919142127,
+          "foreground_mse": 0.0008299360051751137,
+          "foreground_iou": 0.9218377088305489,
+          "edge_alignment": 0.8943452835083008,
+          "passed": true
+        }
+      }
+    }
+  ],
+  "tests": {
+    "passed": 206,
+    "notes": "Two GUI system checks rerun outside sandbox because localhost sockets and taskkill are restricted."
+  },
+  "runtime_sources": {
+    "src/iCCModules/imageCompositeConverterHeatPanel.py": "0355a3be8fd95ef09bbbe3d7a0e584c746001aa05152352f8942f5551bec853f",
+    "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "08a9d680e9b51032dbe7994b74adfe70e1a656c6d4a78dad6204d562b1ff04e7",
+    "src/imageConverterGui.py": "2a8bd6dcf494e607b6498c9c522c17de495dc900bcbbacbb52d51ceefe421d6e"
+  }
+}

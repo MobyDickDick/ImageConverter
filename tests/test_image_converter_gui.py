@@ -280,6 +280,7 @@ def test_draft_reports_whether_additional_model_search_actually_ran(jobs, job, m
     assert job['search_summary']['candidate_evaluations'] == evaluations
     assert ('keine zusätzliche Modellsuche' in job['message']) == (evaluations == 0)
     assert ('123 Kandidaten' in job['message']) == (evaluations == 123)
+    assert ('Modelle sind ausgeschöpft' in job['message']) == (evaluations == 123)
 
 
 def test_cancel_stops_a_real_background_process(jobs, job):

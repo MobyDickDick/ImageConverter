@@ -31,6 +31,9 @@ Differenzbild stehen direkt nebeneinander.
    Iterationen und Zeitlimit gelten je Fall. Während des Laufs erscheinen
    Fortschritt und abgeschlossene Ergebnisse. **Lauf abbrechen** beendet den
    Prozessbaum; abgeschlossene Ergebnisse bleiben bestehen.
+   Oberhalb der Aufgaben zeigt **Ein Vorgang läuft** den aktiven Vorgang mit
+   **Diesen Vorgang abbrechen** an. Das funktioniert auch, wenn eine andere
+   Plan-B-Aufgabe geöffnet ist oder die normale Bildkonvertierung läuft.
 5. Einen Fallnamen anklicken, Vergleich und Messwerte prüfen und Beobachtungen
    beziehungsweise unterschiedliche Lösungshypothesen als Notiz speichern.
 6. JSON-Bericht, CSV-Messdaten oder das gesamte Datenpaket als ZIP herunterladen.

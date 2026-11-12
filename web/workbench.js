@@ -3,6 +3,7 @@ const $ = id => document.getElementById(id);
 let current = null, activeCase = null, selected = new Set(), busy = false, timer = null;
 let logUrl = null;
 let loadedSource = null, previewUrl = null;
+let activity = null;
 const labels = {prepared: "Vorbereitet", running: "Läuft", completed: "Abgeschlossen", cancelled: "Abgebrochen", interrupted: "Unterbrochen", error: "Ausführungsfehler"};
 async function request(path, body) {
   const response = await fetch(path, body === undefined ? {} : {method: "POST", headers: {"Content-Type": "application/json", "X-ImageConverter": "1"}, body: JSON.stringify(body)});
@@ -17,14 +18,32 @@ function controls() {
   const unpreparedSource = loadedSource && loadedSource.preparedId !== current?.id;
   for (const id of ["file", "description", "seed", "iterations", "timeout"]) $(id).disabled = busy || running;
   $("prepare").disabled = busy || running || !loadedSource || !$("description").value.trim();
-  $("run-selected").disabled = busy || running || unpreparedSource || !current || !selected.size;
-  $("run-all").disabled = busy || running || unpreparedSource || !current;
+  $("run-selected").disabled = busy || running || Boolean(activity) || unpreparedSource || !current || !selected.size;
+  $("run-all").disabled = busy || running || Boolean(activity) || unpreparedSource || !current;
   $("select-all").disabled = busy || running || !current;
   $("cancel").hidden = !running; $("cancel").disabled = busy;
+  $("activity-cancel").disabled = busy;
   $("save-note").disabled = busy || running; $("note").disabled = busy || running;
   for (const checkbox of $("cases").querySelectorAll("input")) checkbox.disabled = busy || running;
   for (const button of $("history").querySelectorAll("button")) button.disabled = busy || running;
   $("bundle").hidden = running;
+}
+async function refreshActivity() {
+  const [runs, jobs] = await Promise.all([request("/api/workbench"), request("/api/jobs")]);
+  const run = runs.find(item => item.status === "running");
+  const job = jobs.find(item => item.status === "running");
+  activity = run ? {kind: "workbench", ...run} : job ? {kind: "jobs", ...job} : null;
+  $("activity").hidden = !activity;
+  $("activity-name").textContent = activity
+    ? `${activity.kind === "workbench" ? "Plan B" : "Bildkonvertierung"} · ${activity.name}${activity.active_case ? " · " + activity.active_case : ""}` : "";
+  controls();
+}
+async function pollActivity() {
+  try { await refreshActivity(); }
+  catch (error) {
+    if (activity) $("activity-name").textContent = `${activity.name} · Status momentan nicht erreichbar.`;
+  }
+  setTimeout(pollActivity, 2000);
 }
 function textCell(row, text) { const cell = row.insertCell(); cell.textContent = text; return cell; }
 function thumbnail(caseId, path, label) {
@@ -167,7 +186,7 @@ async function history() {
 async function operation(callback) {
   if (busy) return; busy = true; notice(); controls();
   try { await callback(); } catch (error) { notice(error.message); }
-  finally { busy = false; controls(); }
+  finally { busy = false; controls(); await refreshActivity().catch(() => {}); }
 }
 $("description").addEventListener("input", controls);
 $("file").addEventListener("change", () => operation(loadSource));
@@ -192,5 +211,18 @@ async function run(all) {
 $("run-selected").addEventListener("click", () => operation(() => run(false)));
 $("run-all").addEventListener("click", () => operation(() => run(true)));
 $("cancel").addEventListener("click", () => operation(async () => { render(await request(`/api/workbench/${current.id}/cancel`)); await history(); }));
+$("activity-cancel").addEventListener("click", () => {
+  const target = activity;
+  if (!target) return;
+  return operation(async () => {
+    const result = await request(`/api/${target.kind}/${target.id}/cancel`, {});
+    if (target.kind === "workbench" && current?.id === target.id) render(result);
+    await history();
+    notice(result.status === "cancelled"
+      ? "Der Vorgang wurde abgebrochen. Abgeschlossene Ergebnisse bleiben erhalten."
+      : "Der Vorgang ist bereits beendet.");
+  });
+});
 $("save-note").addEventListener("click", () => operation(async () => { render(await request(`/api/workbench/${current.id}/note`, {case_id: activeCase, note: $("note").value})); $("note-status").textContent = "Gespeichert."; }));
 history().then(async runs => { if (runs.length && !loadedSource && !busy) { const report = await request(`/api/workbench/${runs[0].id}`); if (!loadedSource && !busy) { restoreSource(report); render(report, true); schedule(); } } }).catch(error => notice(error.message));
+pollActivity();

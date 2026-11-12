@@ -462,6 +462,9 @@ def collect_result(folder: Path, job: dict, returncode: int) -> None:
                     job['message'] += ' Für dieses Motiv wurde keine zusätzliche Modellsuche ausgeführt; Wiederholen allein erschliesst keine neue Lösung.'
                 else:
                     job['message'] += f" Die Modellsuche hat {summary['candidate_evaluations']} Kandidaten geprüft."
+                    if summary['stop_reason'] == 'supported_models_exhausted':
+                        job['message'] += (' Die verfügbaren Modelle sind ausgeschöpft; ein weiterer Versuch '
+                                           'kann wieder beim gleichen fehlerhaften Aufbau landen.')
     else:
         job.update(status="error", quality="unknown", result=False,
                    message="Kein verwendbares SVG erzeugt. Beschreibung prüfen; Details stehen im Protokoll.")
