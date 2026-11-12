@@ -46,7 +46,7 @@ from src.iCCModules.imageCompositeConverterCircleLinework import fit_circle_line
 from src.iCCModules.imageCompositeConverterPrimitiveScene import fit_primitive_scene
 from src.iCCModules.imageCompositeConverterShortLabelDisk import fit_short_label_disk
 from src.iCCModules.imageCompositeConverterAxialPanel import fit_axial_panel
-from src.iCCModules.imageCompositeConverterFramedPanel import fit_framed_panel
+from src.iCCModules.imageCompositeConverterFramedPanel import fit_framed_panel, panel_contract
 from src.iCCModules.imageCompositeConverterPairedLinePanel import fit_paired_line_panel
 
 
@@ -1427,7 +1427,11 @@ def runNonCompositeIterationImpl(
     calculate_error_fn,
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
-    if mode in {"non_composite", "auto"}:
+    if mode in {"non_composite", "auto"} or (
+        mode == "insufficient_description" and panel_contract(description) is not None
+    ):
+        # A complete raster-backed gradient contract can describe its frame
+        # implicitly. A missing rectangle noun must not bypass its fitter.
         square_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
         # Preserve quoted text case and register explicit right-handle symbols
         # before the pale framed-panel fallback can discard their foreground.

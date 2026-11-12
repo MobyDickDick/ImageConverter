@@ -30,6 +30,8 @@ def normalize_description(description: str, *, orientations: bool = False) -> st
             (r'\bumriss\b', 'Randkontur'),
             (r'\baufschrift\b', 'Beschriftung'),
             (r'\bhelligkeitsverlauf\b', 'Farbverlauf'),
+            (r'\bfarb(?:en)?(?:übergang|uebergang)\b', 'Farbverlauf'),
+            (r'\bgraustufen(?:übergang|uebergang)\b', 'Graustufenverlauf'),
             (r'\b(?:ohne anschlüsse|anschlussfrei|es sind keine anschlüsse vorhanden)\b', 'keine Anschlüsse'),
             (r'\bweder text noch weitere objekte sind vorhanden\b', 'keine Schriftzeichen und keine weiteren Objekte'),
             (r'\b(?:ohne beschriftung|ohne schriftzeichen|schriftzeichen fehlen|kein text)\b', 'keine Schriftzeichen'),

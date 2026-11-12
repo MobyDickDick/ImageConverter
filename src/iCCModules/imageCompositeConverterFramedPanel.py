@@ -12,23 +12,49 @@ import numpy as np
 
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, pixel_quality
 from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _register
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
 
 
 def panel_contract(description):
-    text = str(description or '').casefold().replace('weiß', 'weiss')
+    original = str(description or '').casefold()
+    text = re.sub(r'\s+', ' ', normalize_description(description).casefold()
+                  .replace('weiß', 'weiss').replace('graustufenverlauf', 'farbverlauf')).strip()
+    # Plan-B wording describes a whole-motif transform, not another object.
+    text = re.sub(r' (?:das gesamte motiv|das motiv|die gesamte darstellung|die darstellung) ist '
+                  r'(?:geringfügig|etwas|ein wenig|leicht) (?:kleiner|größer) dargestellt und '
+                  r'(?:leicht|geringfügig|ein wenig|etwas) nach (?:links|rechts) und (?:oben|unten) '
+                  r'(?:versetzt|verschoben)\.$', '', text)
     match = re.fullmatch(
         r'(liegendes|stehendes) rechteck mit farbverlauf in (vertikaler|horizontaler) '
         r'richtung und dunkelgrauer umrandung\. der farbverlauf ist von '
         r'(oben nach unten|links nach rechts) grau / fast weiss / fast weiss / grau\.'
         r'(?: die zwei fast-weissen bereiche deuten auf ein kleines helles, horizontales band hin; '
         r'der helle bereich liegt oberhalb der mitte\.)?', text.strip())
-    if not match:
+    if match:
+        orientation, direction, order = match.groups()
+        axis = 1 if direction == 'vertikaler' else 0
+        if (order == 'oben nach unten') != bool(axis) or ('oberhalb' in text and not axis):
+            return None
+        return dict(axis=axis, orientation=orientation, upper='oberhalb' in text)
+    # Free grey-gradient prose supplies the axis and highlight relationship;
+    # bounds, paint, stops and stroke still come exclusively from raster data.
+    if (not re.search(r'grau', original) or 'farbverlauf' not in text
+            or not re.search(r'hell(?:igkeit|ste|e[rsn]? (?:bereich|band))', text)
+            or not re.search(r'rand|rahmen', text)
+            or re.search(r'kreis|dreieck|pfeil|beschrift|schrift|text|punkt|linie|diagonal|streifen|'
+                         r'plus|minus|griff|anschl|muster|oval|ohne (?:farb)?verlauf|kein (?:farb)?verlauf', text)):
         return None
-    orientation, direction, order = match.groups()
-    axis = 1 if direction == 'vertikaler' else 0
-    if (order == 'oben nach unten') != bool(axis) or ('oberhalb' in text and not axis):
+    axes = set()
+    for words, axis in ((r'vertikal\w*|senkrecht\w*', 1), (r'horizontal\w*|waagerecht\w*', 0)):
+        if re.search(rf'(?:{words}) farbverlauf|farbverlauf in (?:{words})', text):
+            axes.add(axis)
+    if len(axes) != 1:
         return None
-    return dict(axis=axis, orientation=orientation, upper='oberhalb' in text)
+    orientation = 'liegendes' if 'liegend' in text else 'stehendes' if 'stehend' in text else None
+    axis = axes.pop()
+    return dict(axis=axis, orientation=orientation,
+                upper=bool(re.search(r'oberhalb|oberen (?:bild)?rand', text)) if axis else False,
+                lower=bool(re.search(r'unterhalb|unteren (?:bild)?rand', text)) if axis else False)
 
 
 def profile_quality(reference, rendered, axis, bounds, inset=1):
@@ -60,7 +86,8 @@ def fit_framed_panel(width, height, *, description, image, render_fn, error_fn):
     if len(xx) < 60:
         return None
     x, y, X, Y = int(xx.min()), int(yy.min()), int(xx.max())+1, int(yy.max())+1
-    if min(X-x, Y-y) < 12 or ((X-x > Y-y) != (contract['orientation'] == 'liegendes')):
+    if min(X-x, Y-y) < 12 or (contract['orientation'] is not None and
+                            ((X-x > Y-y) != (contract['orientation'] == 'liegendes'))):
         return None
     bounds = (x, y, X, Y)
     margin = max(2, int((X-x if axis else Y-y)*.2))
@@ -72,9 +99,14 @@ def fit_framed_panel(width, height, *, description, image, render_fn, error_fn):
     trailing = int(np.argmax(~dark[::-1])) if (~dark).any() else len(cross)
     stroke_width = float(max(1, min(leading, trailing)))
     inset = int(np.ceil(stroke_width))
-    if inset*2 >= min(X-x, Y-y)-4:
+    # A partially covered contour pixel can look like a fifth gradient stop.
+    # Fit paint only beyond its antialiasing transition; keep the existing
+    # independent profile and pixel gates on the wider original region.
+    sample_inset = max(2, inset+1)
+    if sample_inset*2 >= min(X-x, Y-y)-4:
         return None
-    core = pixels[y+inset:Y-inset, x+margin:X-margin] if axis else pixels[y+margin:Y-margin, x+inset:X-inset]
+    core = (pixels[y+sample_inset:Y-sample_inset, x+margin:X-margin] if axis else
+            pixels[y+margin:Y-margin, x+sample_inset:X-sample_inset])
     profile = np.median(core, axis=axis)
     expanded = profile[:, None, :] if axis else profile[None, :, :]
     # Marks, a second paint axis and coloured panels are outside this model.
@@ -86,15 +118,20 @@ def fit_framed_panel(width, height, *, description, image, render_fn, error_fn):
         return None
     if contract['upper'] and peak >= len(light)/2:
         return None
+    if contract.get('lower') and peak < len(light)/2:
+        return None
     border = np.concatenate((pixels[y, x:X], pixels[Y-1, x:X], pixels[y:Y, x], pixels[y:Y, X-1]))
-    stroke = np.median(border, axis=0)
-    if light.max()-stroke.mean() < 20 or np.percentile(abs(border-stroke), 95) > 30:
+    # Clipped sides expose the fill or white padding rather than the contour.
+    # Seed the contour from the dark observed tail instead of requiring every
+    # pixel on the raster bounding box to have the same paint.
+    stroke = np.percentile(border, 10, axis=0)
+    if light.max()-stroke.mean() < 20:
         return None
 
     half = stroke_width/2
     geometry = np.array([x+half, y+half, X-half, Y-half])
     low, high = (geometry[1], geometry[3]) if axis else (geometry[0], geometry[2])
-    positions = np.arange(len(profile))+(y if axis else x)+inset+.5
+    positions = np.arange(len(profile))+(y if axis else x)+sample_inset+.5
     # Fit endpoint colours and two free highlight knots to observed interiors.
     # Only a fixed-size analytic model is emitted, never one stop per row.
     models = []
@@ -125,7 +162,8 @@ def fit_framed_panel(width, height, *, description, image, render_fn, error_fn):
     def valid(p):
         left, top, right, bottom, sw, a, b = p[:7]
         lo, hi = (top, bottom) if axis else (left, right)
-        return (np.all(abs(p[:4]-geometry) <= .75)
+        return (np.all(abs(p[:4]-geometry) <= max(2., min(width, height)*.12))
+                and right-left >= 8 and bottom-top >= 8
                 and .5 <= sw <= max(2, stroke_width*1.5) and lo < a < b < hi
                 and np.all((0 <= p[7:]) & (p[7:] <= 255)))
 

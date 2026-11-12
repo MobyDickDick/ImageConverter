@@ -75,3 +75,20 @@ def test_panel_does_not_erase_holes_or_explicit_text(description):
     image[15:25, 20:35] = 0
     assert fit_nested_panel(80, 40, description=description, image=image,
                             render_fn=render, error_fn=lambda a, b: normalized_mse(a, b)[0]) is None
+
+
+@pytest.mark.parametrize('description', ['Rechteckfläche mit heller Innenfläche.',
+    'Ein Rechteck mit einem vertikalen Graustufenübergang.',
+    'Ein Rechteck mit einem vertikalen Farbuebergang.'])
+def test_continuous_highlight_is_not_a_flat_nested_rectangle(description):
+    # A broad highlight occupies a rectangular colour bin; coherent shading
+    # within that region must defeat the flat model even without a text hint.
+    source = ('<svg xmlns="http://www.w3.org/2000/svg" width="86" height="42">'
+              '<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">'
+              '<stop stop-color="#a5a5a5"/><stop offset=".35" stop-color="#fafafa"/>'
+              '<stop offset=".44" stop-color="#fafafa"/><stop offset="1" stop-color="#bbbbbb"/>'
+              '</linearGradient></defs><rect x=".5" y=".5" width="85" height="41" '
+              'fill="url(#g)" stroke="#999999"/></svg>')
+    image = render(source, 86, 42)
+    assert fit_nested_panel(86, 42, description=description, image=image, render_fn=render,
+                            error_fn=lambda a, b: normalized_mse(a, b)[0]) is None

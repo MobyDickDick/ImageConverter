@@ -4,9 +4,11 @@ from __future__ import annotations
 import cv2
 import numpy as np
 
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
+
 
 def fit_nested_panel(width, height, *, description, image, render_fn, error_fn):
-    text = str(description or '').casefold()
+    text = normalize_description(description).casefold()
     if not any(word in text for word in ('quadrat', 'rechteck', 'panel', 'fläche', 'flaeche')):
         return None
     # A panel fit must not erase explicitly described foreground objects.
@@ -48,6 +50,15 @@ def fit_nested_panel(width, height, *, description, image, render_fn, error_fn):
     inner_deviation = np.max(np.abs(pixels[y+1:y+h-1, x+1:x+w-1] - interior_color), axis=2)
     outer_deviation = np.max(np.abs(pixels[exterior_core] - exterior_color), axis=1)
     if np.percentile(inner_deviation, 99) > 20 or np.percentile(outer_deviation, 80) > 25:
+        return None
+    # A broad highlight can occupy a rectangular colour bin while still being
+    # a continuous gradient. Coherent profile changes distinguish it from JPEG
+    # noise on a genuinely flat inner region, even with no gradient in the text.
+    core = pixels[y+1:y+h-1, x+1:x+w-1]
+    if not core.size:
+        return None
+    profiles = (np.median(core, axis=axis) for axis in (0, 1))
+    if any(np.max(np.percentile(p, 90, axis=0)-np.percentile(p, 10, axis=0)) > 6 for p in profiles):
         return None
 
     def color(value):

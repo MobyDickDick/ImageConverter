@@ -21,6 +21,15 @@ def test_quoted_labels_are_never_normalized():
     assert normalize_description(normalized, orientations=True)==normalized
 
 
+@pytest.mark.parametrize('word', ['Farbübergang', 'Farbenübergang', 'Farbuebergang',
+                                 'Graustufenübergang', 'Graustufenuebergang', 'Graustufenverlauf'])
+def test_gradient_synonyms_preserve_label_bytes_and_absence(word):
+    normalized = normalize_description(f'Vertikaler {word}. Kein Text. Die Farbe heisst "{word}".')
+    expected = 'Graustufenverlauf' if word.startswith('Graustufen') else 'Farbverlauf'
+    assert normalized.startswith(f'Vertikaler {expected}. keine Schriftzeichen.')
+    assert f'"{word}"' in normalized
+
+
 @pytest.mark.parametrize('text,reason', [
     ('Die Beschriftung lautet "rF". Keine Schriftzeichen.', 'text_present_and_absent'),
     ('Ein Ausrufezeichen. Ohne Beschriftung.', 'text_present_and_absent'),

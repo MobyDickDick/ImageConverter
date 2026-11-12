@@ -14,6 +14,10 @@ DESCRIPTION = ('Liegendes Rechteck mit Farbverlauf in vertikaler Richtung und du
                'Der Farbverlauf ist von oben nach unten grau / fast weiss / fast weiss / grau. '
                'Die zwei fast-weissen Bereiche deuten auf ein kleines helles, horizontales Band hin; '
                'der helle Bereich liegt oberhalb der Mitte.')
+FREE_DESCRIPTION = ('Es ist ein liegendes Rechteck mit einer grauen Umrandung. '
+                    'Es gibt einen vertikalen Graustufenübergang (Farbübergang). '
+                    'Die maximale Helligkeit ist ca. 1/3 unter dem oberen Bildrand. '
+                    'Das dunkelste Grau dieses Farbübergang ist immer noch leicht heller als der Rand.')
 
 
 def fit(image, description=DESCRIPTION, **kwargs):
@@ -86,6 +90,86 @@ def test_contract_render_error_and_budget_guards():
     session.spent = 120
     with image_search(session):
         assert fit(image, render_fn=lambda *args: pytest.fail('Expired search rendered')) is None
+
+
+@pytest.mark.parametrize('word', ['Graustufenübergang', 'Graustufenverlauf', 'Farbübergang', 'Farbverlauf'])
+def test_free_gradient_description_and_whole_motif_variation(word):
+    description = FREE_DESCRIPTION.replace('Graustufenübergang', word)
+    description += ' Die gesamte Darstellung ist ein wenig größer dargestellt und etwas nach links und unten versetzt.'
+    contract = panel_contract(description)
+    assert contract and contract['axis'] == 1 and contract['upper']
+    image, _ = synthetic(1, 1)
+    result = fit(image, description)
+    assert result is not None and result['profile_quality']['passed']
+    root = ET.fromstring(result['svg'])
+    assert len(root.findall('{*}rect')) == 1 and len(root.findall('.//{*}stop')) == 4
+
+
+@pytest.mark.parametrize('extra', [' Ein Kreis.', ' Eine diagonale Linie.', ' Ein Pfeil.',
+                                 ' Ein horizontaler Farbverlauf.', ' Ein Text im Rechteck.'])
+def test_free_gradient_contract_does_not_suppress_extra_objects_or_axes(extra):
+    assert panel_contract(FREE_DESCRIPTION+extra) is None
+
+
+def test_free_gradient_peak_polarity_is_checked_on_raster():
+    image, _ = synthetic(1, 1)
+    assert fit(image[::-1].copy(), FREE_DESCRIPTION) is None
+    assert fit(image, FREE_DESCRIPTION.replace('oberen Bildrand', 'unteren Bildrand')) is None
+
+
+def test_shared_normalization_preserves_the_only_greyscale_cue():
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
+    description = ('Ein Rechteck mit dunkler Umrandung. Es gibt einen vertikalen '
+                   'Graustufenübergang. Das hellste Band liegt im Inneren.')
+    assert panel_contract(description) is not None
+    assert panel_contract(normalize_description(description)) == panel_contract(description)
+
+
+def test_complete_gradient_prose_is_not_bypassed_by_insufficient_shape_dispatch():
+    from src.iCCModules.imageCompositeConverterNonCompositeRuntime import runNonCompositeIterationImpl
+    description = FREE_DESCRIPTION.split('Es gibt', 1)[1]
+    description = 'Es gibt'+description
+    image, _ = synthetic(1, 1)
+    w, h = image.shape[1], image.shape[0]
+    saved, logs = [], []
+    params = {'mode': 'insufficient_description'}
+    result = runNonCompositeIterationImpl(mode='insufficient_description', params=params,
+        stripe_strategy=None, semantic_mode_visual_override=False, width=w, height=h,
+        base_name='unrelated', description=description, perc_img=image, img_path='unrelated.png',
+        print_fn=lambda *args: None, render_embedded_raster_svg_fn=lambda *args: None,
+        build_gradient_stripe_svg_fn=lambda *args, **kwargs: None,
+        build_gradient_stripe_validation_log_lines_fn=lambda **kwargs: [],
+        write_validation_log_fn=logs.append, render_svg_to_numpy_fn=render,
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, raster: saved.append(svg),
+        calculate_error_fn=lambda a, b: float(np.mean((a.astype(float)-b)**2)))
+    assert result is not None and 'framed_panel_registration' in params
+    assert logs[-1] == ['status=non_composite_raster_framed_panel']
+    assert len(ET.fromstring(saved[-1]).findall('{*}rect')) == 1
+
+
+@pytest.mark.parametrize('axis', [0, 1])
+def test_clipped_frame_is_not_fitted_as_an_extra_paint_transition(axis):
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import search_configuration, configured_image_search
+    from tools.run_plan_b_variations import measure_quality
+    w, h = (92, 46) if axis else (46, 92)
+    x, y, rw, rh = (-1.2, 2.1, 89.4, 45.2) if axis else (2.1, -1.2, 45.2, 89.4)
+    coords = 'x1="0" x2="0" y1="2.1" y2="47.3"' if axis else 'y1="0" y2="0" x1="2.1" x2="47.3"'
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}">'
+           f'<defs><linearGradient id="independent" gradientUnits="userSpaceOnUse" {coords}>'
+           '<stop offset="0" stop-color="#a7a7a7"/><stop offset=".26" stop-color="#ededed"/>'
+           '<stop offset=".41" stop-color="#f1f1f1"/><stop offset="1" stop-color="#b3b3b3"/>'
+           f'</linearGradient></defs><rect x="{x}" y="{y}" width="{rw}" height="{rh}" '
+           'fill="url(#independent)" stroke="#858585" stroke-width="1.4"/></svg>')
+    description = (f'Ein Rechteck mit grauem Rand und {"vertikalem" if axis else "horizontalem"} '
+                   'Graustufenübergang. Das hellste Band liegt im Inneren.')
+    image = render(svg, w, h)
+    with search_configuration(mode='portfolio', adaptive=True, seed=816327,
+                              seconds=20, max_seconds=20, minimum_seconds=20):
+        with configured_image_search('unrelated-clipped-panel'):
+            result = fit(image, description)
+    assert result is not None and result['profile_quality']['passed']
+    assert measure_quality(image, result['svg'])['satisfactory']
 
 
 def test_neutral_gui_upload_runs_registered_model_and_saved_result_check(tmp_path):
