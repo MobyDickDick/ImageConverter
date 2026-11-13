@@ -158,3 +158,8 @@ identischen Eingaben, Beschreibungen, Seed, Budgets und Qualitätsgrenzen.
 Kurzzeitige Windows-Dateisperren beim Speichern des Berichts werden jetzt
 begrenzt erneut versucht. Details und Gegenproben stehen in der
 [Untersuchung des Kreisfehlers](plan_b_plain_disk_2026-11-13.md).
+
+Beim gelben Verlaufskreis wurde zusätzlich `geringfügig` fälschlich als
+Ringbeschreibung erkannt. Die Wortprüfung ist korrigiert; dieselben 17 Fälle
+bestehen jetzt mit unveränderten Qualitätsgrenzen. Details stehen in der
+[Untersuchung des gelben Verlaufskreises](plan_b_yellow_disk_2026-11-13.md).

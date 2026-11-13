@@ -13,7 +13,10 @@ def fit_radial_disk(width, height, *, description, image, render_fn, error_fn):
             and 'hell' in text and 'dunk' in text):
         return None
     if (re.search(r'innen\s+dunk|au(?:ß|ss)en\s+hell', text)
-            or any(word in text for word in ('ellipse', 'ring', 'linearer'))):
+            # Match ring nouns at a word boundary, not the middle of
+            # "geringfügig" in a generated Plan-B pose description.
+            or re.search(r'\b(?:kreis)?ring', text)
+            or any(word in text for word in ('ellipse', 'linearer'))):
         return None
     if any(word in text for word in ('text', 'beschrift', 'haken', 'griff', 'dreieck',
                                      'quadrat', 'loch', 'zwei', 'zusätzlich', 'streifen')):

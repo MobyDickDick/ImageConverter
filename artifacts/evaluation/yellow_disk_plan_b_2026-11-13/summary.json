@@ -1,0 +1,993 @@
+{
+  "source_archive_sha256": "50f46abc62051b74403c4a4449b826efdfd5075bfbbff71c847091e568133843",
+  "source_svg_sha256": "609bcc587074a767a60db57d911ad92930cfac44de6311c3fd419f94bf9a364c",
+  "seed": 4091935898698028088,
+  "iterations": 64,
+  "timeout_seconds": 60.0,
+  "before": {
+    "total": 17,
+    "completed": 17,
+    "passed": 14,
+    "quality_failed": 3,
+    "execution_failed": 0,
+    "failure_counts": {
+      "edge_alignment_outside_limit": 3
+    },
+    "satisfactory": false
+  },
+  "after": {
+    "total": 17,
+    "completed": 17,
+    "passed": 17,
+    "quality_failed": 0,
+    "execution_failed": 0,
+    "failure_counts": {},
+    "satisfactory": true
+  },
+  "root_cause": "Substring ring matches geringfuegig in nine pose descriptions; isolated radial disk rejected before raster inspection.",
+  "identical_inputs": true,
+  "identical_descriptions": true,
+  "quality_limits_unchanged": true,
+  "original_attempt_preserved": true,
+  "before_total_seconds": 333.561,
+  "after_total_seconds": 63.972,
+  "algorithm_provenance": {
+    "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+    "python_executable": "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+    "python_sources_sha256": "9b1bdffb401854431370efa783dfa0d1cc7ba76b2d7a772bf2f3106c45ef597b",
+    "packages": {
+      "numpy": "2.2.6",
+      "opencv-python-headless": "4.14.0.94",
+      "PyMuPDF": "1.26.7",
+      "Pillow": "12.3.0"
+    }
+  },
+  "counterprobe": [
+    {
+      "case_id": "original",
+      "pose_contains_ring": false,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0005960496491752565,
+          "foreground_mse": 0.0007012840360403061,
+          "edge_alignment": 0.9581294059753418,
+          "foreground_iou": 0.9492537313432836
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 137
+    },
+    {
+      "case_id": "probe_01",
+      "pose_contains_ring": false,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0006198188057169318,
+          "foreground_mse": 0.0009162759524770081,
+          "edge_alignment": 0.9300923347473145,
+          "foreground_iou": 0.9940119760479041
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 145
+    },
+    {
+      "case_id": "probe_02",
+      "pose_contains_ring": false,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0006379878614097834,
+          "foreground_mse": 0.0008515209192410111,
+          "edge_alignment": 0.9455742835998535,
+          "foreground_iou": 0.9386503067484663
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 142
+    },
+    {
+      "case_id": "probe_03",
+      "pose_contains_ring": true,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0004522035887930542,
+          "foreground_mse": 0.0006284851697273552,
+          "edge_alignment": 0.9505020976066589,
+          "foreground_iou": 0.9534883720930233
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 145
+    },
+    {
+      "case_id": "probe_04",
+      "pose_contains_ring": false,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0004954894538968801,
+          "foreground_mse": 0.0006415380048565567,
+          "edge_alignment": 0.9461709856987,
+          "foreground_iou": 0.9539473684210527
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 142
+    },
+    {
+      "case_id": "probe_05",
+      "pose_contains_ring": false,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0005806016852147877,
+          "foreground_mse": 0.000823571695946157,
+          "edge_alignment": 0.9664655923843384,
+          "foreground_iou": 0.9462025316455697
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 143
+    },
+    {
+      "case_id": "probe_06",
+      "pose_contains_ring": true,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0006053994875401258,
+          "foreground_mse": 0.0007881792262196541,
+          "edge_alignment": 0.9668309688568115,
+          "foreground_iou": 0.9540540540540541
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 145
+    },
+    {
+      "case_id": "probe_07",
+      "pose_contains_ring": false,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0004969147848896682,
+          "foreground_mse": 0.0006982316845096648,
+          "edge_alignment": 0.9794937372207642,
+          "foreground_iou": 0.9487870619946092
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 143
+    },
+    {
+      "case_id": "probe_08",
+      "pose_contains_ring": false,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0005460747051984072,
+          "foreground_mse": 0.0007047222461551428,
+          "edge_alignment": 0.9830992221832275,
+          "foreground_iou": 0.9667590027700831
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 145
+    },
+    {
+      "case_id": "probe_09",
+      "pose_contains_ring": true,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.000647311971988529,
+          "foreground_mse": 0.0008672277326695621,
+          "edge_alignment": 0.9010725021362305,
+          "foreground_iou": 0.9781931464174455
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 142
+    },
+    {
+      "case_id": "probe_10",
+      "pose_contains_ring": true,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0005203563487157226,
+          "foreground_mse": 0.00077821098966524,
+          "edge_alignment": 0.9488142132759094,
+          "foreground_iou": 0.9821428571428571
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 145
+    },
+    {
+      "case_id": "probe_11",
+      "pose_contains_ring": true,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0004787971847690642,
+          "foreground_mse": 0.0006557701271958649,
+          "edge_alignment": 0.9662294983863831,
+          "foreground_iou": 0.944078947368421
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 143
+    },
+    {
+      "case_id": "probe_12",
+      "pose_contains_ring": false,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.00048672081902623177,
+          "foreground_mse": 0.0007255965028889477,
+          "edge_alignment": 0.9517180919647217,
+          "foreground_iou": 0.9664634146341463
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 145
+    },
+    {
+      "case_id": "probe_13",
+      "pose_contains_ring": true,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0004900737549178302,
+          "foreground_mse": 0.0006597124738618731,
+          "edge_alignment": 0.9505021572113037,
+          "foreground_iou": 0.9656160458452722
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 145
+    },
+    {
+      "case_id": "probe_14",
+      "pose_contains_ring": true,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0004969830042682588,
+          "foreground_mse": 0.0007211058982647955,
+          "edge_alignment": 0.9641331434249878,
+          "foreground_iou": 0.9510703363914373
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 143
+    },
+    {
+      "case_id": "probe_15",
+      "pose_contains_ring": true,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0006216018809936941,
+          "foreground_mse": 0.0009028388885781169,
+          "edge_alignment": 0.9638925790786743,
+          "foreground_iou": 0.9378698224852071
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 145
+    },
+    {
+      "case_id": "probe_16",
+      "pose_contains_ring": true,
+      "fit_with_original_description": true,
+      "quality": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0005005394341424108,
+          "foreground_mse": 0.0006993814022280276,
+          "edge_alignment": 0.9510645866394043,
+          "foreground_iou": 0.9659090909090909
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 2,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "evaluations": 145
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "original",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.0001643533178139478,
+        "foreground_mse": 0.0001831366098485887,
+        "edge_alignment": 0.9102219939231873,
+        "foreground_iou": 0.9880597014925373
+      },
+      "before_seconds": 3.0,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.0001643533178139478,
+        "foreground_mse": 0.0001831366098485887,
+        "edge_alignment": 0.9102219939231873,
+        "foreground_iou": 0.9880597014925373
+      },
+      "after_seconds": 4.282,
+      "input_sha256": "7b7a2f74e62cd512603ff35bb16feba6811d0b48d8a970dc1c0483ddfa711b07",
+      "output_sha256": "0929da1f6f66d436e101138b99d2e2d245a83d7d216504da466327c95502d6c1",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_01",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.0004389567766338587,
+        "foreground_mse": 0.0005793872405774891,
+        "edge_alignment": 0.9646966457366943,
+        "foreground_iou": 0.9940119760479041
+      },
+      "before_seconds": 3.11,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.0004389567766338587,
+        "foreground_mse": 0.0005793872405774891,
+        "edge_alignment": 0.9646966457366943,
+        "foreground_iou": 0.9940119760479041
+      },
+      "after_seconds": 4.234,
+      "input_sha256": "381db0fb43037e829393d51099ebcdcbb988987766f419d136190eaf2fdbffec",
+      "output_sha256": "501f0b9f1f6f75bd943b8478036a26c8b465081a31376c5ac47bc1b099029c66",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_02",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.00015060300938785076,
+        "foreground_mse": 0.00018735913909040391,
+        "edge_alignment": 0.9460552930831909,
+        "foreground_iou": 0.9723926380368099
+      },
+      "before_seconds": 3.312,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.00015060300938785076,
+        "foreground_mse": 0.00018735913909040391,
+        "edge_alignment": 0.9460552930831909,
+        "foreground_iou": 0.9723926380368099
+      },
+      "after_seconds": 4.125,
+      "input_sha256": "16fc33ea0d46ed4f052bc5058bdee16f0017b5975f115f841b06fc2dc4506e41",
+      "output_sha256": "633f2d42f2331f65a0bc8339ebeee10f7125c29e84526b8dedd90e58ef38c487",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_03",
+      "before_passed": false,
+      "before_metrics": {
+        "normalized_mse": 0.0035405410453677177,
+        "foreground_mse": 0.005305813159793615,
+        "edge_alignment": 0.6009093523025513,
+        "foreground_iou": 0.9627507163323782
+      },
+      "before_seconds": 34.531,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.00021438123076222837,
+        "foreground_mse": 0.0002919419785030186,
+        "edge_alignment": 0.9462089538574219,
+        "foreground_iou": 0.9767441860465116
+      },
+      "after_seconds": 4.031,
+      "input_sha256": "cf68c63a8340c2226a9ea16817792bb425a736dd188e542d0d28208a8086731f",
+      "output_sha256": "b8728eb4a4e819115f7861a2593a5a37a08dd527bc780927704fa5f99b08c58a",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_04",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.00021809159079566598,
+        "foreground_mse": 0.0002798181667458266,
+        "edge_alignment": 0.9461710453033447,
+        "foreground_iou": 0.9868421052631579
+      },
+      "before_seconds": 2.859,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.00021809159079566598,
+        "foreground_mse": 0.0002798181667458266,
+        "edge_alignment": 0.9461710453033447,
+        "foreground_iou": 0.9868421052631579
+      },
+      "after_seconds": 3.563,
+      "input_sha256": "51d6034b1c98284d21ee034f4fa17a170123b7b941594adacf4ba336f666ec3c",
+      "output_sha256": "8a03afc60bee1eb7b9768acd0b990274a93bca20ee0807c58f61791fd0f42fcb",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_05",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.00013448137906379998,
+        "foreground_mse": 0.00017987238243222237,
+        "edge_alignment": 0.9662294983863831,
+        "foreground_iou": 0.9841772151898734
+      },
+      "before_seconds": 3.062,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.00013448137906379998,
+        "foreground_mse": 0.00017987238243222237,
+        "edge_alignment": 0.9662294983863831,
+        "foreground_iou": 0.9841772151898734
+      },
+      "after_seconds": 4.438,
+      "input_sha256": "59fde2053dc11e70f40d08944f8be0c5c4ab0895980b94b275027be142bf56dd",
+      "output_sha256": "06113b45cea909a52c8359214d223abe4e143b51c905a75ba28dd368bc185005",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_06",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.0036993282847106457,
+        "foreground_mse": 0.0051010362803936005,
+        "edge_alignment": 0.7282537817955017,
+        "foreground_iou": 0.9523809523809523
+      },
+      "before_seconds": 34.5,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.000344542961101979,
+        "foreground_mse": 0.0004414656723383814,
+        "edge_alignment": 0.9600633978843689,
+        "foreground_iou": 0.9702702702702702
+      },
+      "after_seconds": 3.594,
+      "input_sha256": "bc8705497fd30ccfdfc293c2fb32263cd3746bb336cfedf99c7940b6fab9d9e5",
+      "output_sha256": "6ec14b017b835ac2e420c84a3f4c1e065251a4c05d94b9a54f2b247a5a52be8a",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_07",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.00011293761053821072,
+        "foreground_mse": 0.00015037412231322378,
+        "edge_alignment": 0.9827935695648193,
+        "foreground_iou": 0.9784366576819407
+      },
+      "before_seconds": 2.969,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.00011293761053821072,
+        "foreground_mse": 0.00015037412231322378,
+        "edge_alignment": 0.9827935695648193,
+        "foreground_iou": 0.9784366576819407
+      },
+      "after_seconds": 3.656,
+      "input_sha256": "8a024eb35ea2814258b23a8f27b37b66b2bc941d8a09cd4830fa563e11fa192f",
+      "output_sha256": "b09d0720c1ed5f351c40bc6aa2b7b5207aad009f062d634d6e8122c06bf580cc",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_08",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.00022276342497207224,
+        "foreground_mse": 0.00029689553775824606,
+        "edge_alignment": 0.9348552823066711,
+        "foreground_iou": 0.9833795013850416
+      },
+      "before_seconds": 3.125,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.00022276342497207224,
+        "foreground_mse": 0.00029689553775824606,
+        "edge_alignment": 0.9348552823066711,
+        "foreground_iou": 0.9833795013850416
+      },
+      "after_seconds": 3.375,
+      "input_sha256": "45bb731b8ca4da455e81ee5816cdaa2126332c5befb776a2379cdfa6964b9d59",
+      "output_sha256": "e9d6b4a7508faf77dbaa11a1b85a5919c0ac93974e92e8de1056cb73de74d230",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_09",
+      "before_passed": false,
+      "before_metrics": {
+        "normalized_mse": 0.004691631067544222,
+        "foreground_mse": 0.006293033715337515,
+        "edge_alignment": 0.6825177669525146,
+        "foreground_iou": 0.941717791411043
+      },
+      "before_seconds": 34.437,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.00038606004090979695,
+        "foreground_mse": 0.00047555798664689064,
+        "edge_alignment": 0.9270707368850708,
+        "foreground_iou": 0.9719626168224299
+      },
+      "after_seconds": 3.312,
+      "input_sha256": "bef07bbcac0281517238a3d80325bd8e19638f353cf9d89e03bb092fe93cc045",
+      "output_sha256": "daef8ec3e9a6278b16ab1ec52370a2be0f464091a7b35cc2887de622bd651dc1",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_10",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.004598638508468866,
+        "foreground_mse": 0.0071673160418868065,
+        "edge_alignment": 0.7408487796783447,
+        "foreground_iou": 0.9552238805970149
+      },
+      "before_seconds": 34.031,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.0002618933795019984,
+        "foreground_mse": 0.0003574396832846105,
+        "edge_alignment": 0.9744425415992737,
+        "foreground_iou": 0.9820359281437125
+      },
+      "after_seconds": 3.36,
+      "input_sha256": "e0f3062c30fb0680e2b85fd57cfa5fb744691cee5f5a16329fc5f7da6deac590",
+      "output_sha256": "02e404f47c810f9387c6097f722679ed81bee7a2a5a71953d0406e9f02b261b2",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_11",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.003618725808337331,
+        "foreground_mse": 0.005142413545399904,
+        "edge_alignment": 0.742041826248169,
+        "foreground_iou": 0.9576547231270358
+      },
+      "before_seconds": 33.984,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.00010736029798863456,
+        "foreground_mse": 0.0001441078493371606,
+        "edge_alignment": 0.9355735778808594,
+        "foreground_iou": 0.9769736842105263
+      },
+      "after_seconds": 3.359,
+      "input_sha256": "8b96b5a39e3d5d1f4c455c56a0dab7218c73ab8796b10ead12b4e9c9b59e5242",
+      "output_sha256": "c3e81128fe6242ef491e69274d4d623c9df08b5f7535a3eed0bb06ba93bf772f",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_12",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.00025685434229671955,
+        "foreground_mse": 0.0003652753948699683,
+        "edge_alignment": 0.985352635383606,
+        "foreground_iou": 0.9725609756097561
+      },
+      "before_seconds": 3.078,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.00025685434229671955,
+        "foreground_mse": 0.0003652753948699683,
+        "edge_alignment": 0.985352635383606,
+        "foreground_iou": 0.9725609756097561
+      },
+      "after_seconds": 3.547,
+      "input_sha256": "d2d8326773df73408c7d3e8ade9e09d58d0625e02676a5d3097db02ab871095d",
+      "output_sha256": "3e8c39937f84506281e4a0def024b9a17c7533cdaeb24215f0b90eaa6efe7e33",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_13",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.0034478234592825174,
+        "foreground_mse": 0.0051314327865839005,
+        "edge_alignment": 0.7457116842269897,
+        "foreground_iou": 0.9714285714285714
+      },
+      "before_seconds": 34.219,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.00024763873079791665,
+        "foreground_mse": 0.00031969189876690507,
+        "edge_alignment": 0.94343101978302,
+        "foreground_iou": 0.9828080229226361
+      },
+      "after_seconds": 3.829,
+      "input_sha256": "1d129e87fd3541acec0215ef4a7efbff829d78b78f5189427f9461630bf1c168",
+      "output_sha256": "b80ed1b8fd3c9a137add2cad55fa1a044226965a1c9b08f2a14d5579244f6239",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_14",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.0009032636880874634,
+        "foreground_mse": 0.0014299055328592658,
+        "edge_alignment": 0.8275241851806641,
+        "foreground_iou": 0.9908256880733946
+      },
+      "before_seconds": 34.219,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.00011954104411415756,
+        "foreground_mse": 0.0001712193334242329,
+        "edge_alignment": 0.9390115737915039,
+        "foreground_iou": 0.981651376146789
+      },
+      "after_seconds": 3.985,
+      "input_sha256": "1532615f5d2934b04ef544f92d2ec30dfd55c01e2472332e5f847ea9981381f0",
+      "output_sha256": "6e9578391ed4484931701c09995f79a9607e65471230cc4cabf6a33c70077676",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_15",
+      "before_passed": false,
+      "before_metrics": {
+        "normalized_mse": 0.003188430331647396,
+        "foreground_mse": 0.004907970316708088,
+        "edge_alignment": 0.6910290122032166,
+        "foreground_iou": 0.9530791788856305
+      },
+      "before_seconds": 34.687,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.00021153224224690348,
+        "foreground_mse": 0.0003027055936399847,
+        "edge_alignment": 0.9237263798713684,
+        "foreground_iou": 0.9733727810650887
+      },
+      "after_seconds": 3.688,
+      "input_sha256": "1ec6b716d0e2c1764d2d6dd98534ffaac5a14a10a85a3ba96a7f57bf09bd4943",
+      "output_sha256": "3c10ce9ee168585e9b41d71b67b99f7f08e664c148aae1c6a08ef2e67133bdca",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_16",
+      "before_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.003909203689545393,
+        "foreground_mse": 0.005783593747764826,
+        "edge_alignment": 0.7257864475250244,
+        "foreground_iou": 0.96045197740113
+      },
+      "before_seconds": 34.438,
+      "after_passed": true,
+      "after_metrics": {
+        "normalized_mse": 0.00028617752832360566,
+        "foreground_mse": 0.0003955064166802913,
+        "edge_alignment": 0.9121332168579102,
+        "foreground_iou": 0.9744318181818182
+      },
+      "after_seconds": 3.594,
+      "input_sha256": "8d68290cdb3e22fbd0b5f926fa8ef5d18773d4884f8e1b15bfbff87e4748fa10",
+      "output_sha256": "19a5ec7432f0938257f53b36a2292bc18c6ebcd1aef6afd04cda5693ec50c1f7",
+      "vector_elements": 2,
+      "blocked_svg_reads": []
+    }
+  ],
+  "tests": {
+    "radial_disk_runtime": {
+      "passed": 40
+    },
+    "plan_b_workbench": {
+      "passed": 22,
+      "execution": "outside sandbox; local HTTP and process cancellation require host permissions"
+    }
+  }
+}

@@ -11,6 +11,7 @@ from src.iCCModules.imageCompositeConverterRadialDisk import fit_radial_disk
 from src.iCCModules.imageCompositeConverterRendering import render_svg_to_numpy_inprocess
 from tools.evaluate_radial_disk_recheck import radial_disk_semantics, measure
 from tools.review_conversion_quality import normalized_mse
+from tools.run_plan_b_variations import make_variations, measure_quality
 
 DESCRIPTION = ('Kugelform: ein gefüllter Kreis mit radialem Farbverlauf, innen hell '
                'und außen dunkler, auf weißem Hintergrund.')
@@ -95,6 +96,36 @@ def test_runtime_bypasses_samples_and_embedding_and_is_rename_invariant(monkeypa
                                          DESCRIPTION.replace('außen dunkler', 'außen hell')])
 def test_incompatible_descriptions_reject_disk(description):
     assert fit(render(source_svg(), 60, 50), description) is None
+
+
+@pytest.mark.parametrize('pose', [
+    ' Die Darstellung ist geringfügig größer dargestellt und leicht nach rechts und unten verschoben.',
+    ' Das Motiv ist etwas kleiner dargestellt und geringfügig nach links und oben versetzt.',
+])
+def test_relative_pose_word_is_not_mistaken_for_a_ring(pose):
+    image = render(source_svg(), 60, 50)
+    result = fit(image, DESCRIPTION + pose)
+    assert result is not None
+    assert measure_quality(image, result['svg'])['satisfactory']
+
+
+@pytest.mark.parametrize('extra', [' Ein Ring.', ' Ringförmig.', ' Ein Kreisring.'])
+def test_actual_ring_descriptions_still_reject_disk(extra):
+    assert fit(render(source_svg(), 60, 50), DESCRIPTION + extra) is None
+
+
+def test_pose_words_preserve_fit_for_expanded_independent_radial_variations():
+    for case in make_variations(source_svg(color='#775533'), DESCRIPTION, 47021,
+                                expand_canvas=True):
+        image = render(case['svg'], case['width'], case['height'])
+        result = fit(image, case['description'])
+        assert result is not None, case['case_id']
+        assert radial_disk_semantics(result['svg']) == 1
+        # Wording must preserve the raster-derived fit even on independent
+        # geometry; it does not expand this fitter's existing quality coverage.
+        baseline = fit(image, DESCRIPTION)
+        assert baseline is not None, case['case_id']
+        assert result['svg'] == baseline['svg'], case['case_id']
 
 
 @pytest.mark.parametrize('mutation', ['flat', 'hole', 'second', 'ellipse'])
