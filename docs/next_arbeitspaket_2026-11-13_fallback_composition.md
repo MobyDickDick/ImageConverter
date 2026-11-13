@@ -115,3 +115,11 @@ reservierten Familienprüfung separat einfrieren. Fehlende Kurvenabdeckung und
 der menschliche Annotationsaudit bleiben Voraussetzungen für eine spätere reale
 Abnahme. Bis dahin bleiben die Reserven gesperrt. SEARCH-STRUCTURE-01,
 GENERAL-SCENE-REAL-05 und SEMANTIC-COMPLETENESS-02 bleiben offen.
+
+Fortschreibung vom 13.11.2026: [CHECKER-04 ist als begrenzter nativer
+Einzelprimitivprüfer umgesetzt und separat eingefroren](next_arbeitspaket_2026-11-13_fallback_checker.md).
+Seine vollständige Inventarprüfung zertifiziert die damaligen 18 Ausgaben wegen
+geteilter Gestängelinien und zusätzlicher Restbildstriche nicht. Das verändert
+die obigen Pixel-/Runtime-Detailmessungen nicht und ist kein allgemeiner
+fachlicher Fehlernachweis. Segmentäquivalenz ist das nächste P0-Prüferpaket;
+reale Reserven bleiben gesperrt.

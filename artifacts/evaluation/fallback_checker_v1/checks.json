@@ -1,0 +1,77 @@
+{
+  "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+  "dependencies": {
+    "numpy": "2.2.6",
+    "Pillow": "12.3.0",
+    "librsvg": "rsvg-convert version 2.62.3\n\nlibraries used:\n  cairo 1.18.4\n  pango 1.57.1\n  harfbuzz 14.2.1"
+  },
+  "checks": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_fallback_checker.py tests/test_fallback_composition.py tests/test_fallback_groups.py tests/test_fallback_structure.py tests/test_real_composition_holdout_freeze.py",
+      "exit_code": 0,
+      "passed": 188,
+      "skipped": 0,
+      "seconds": 31.75
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.run_pytest_profile core-green",
+      "exit_code": 0,
+      "passed": 42,
+      "skipped": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m tools.evaluate_fallback_checker --output .tmp/fallback-checker-sealed-replay --historical artifacts/evaluation/fallback_checker_v1/historical",
+      "exit_code": 0,
+      "positive_scenes": 5,
+      "rejected_controls": 60,
+      "historical_uncertified": 18,
+      "identical_to_recorded_summary": true
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m compileall -q tools/check_native_scene.py tools/evaluate_fallback_checker.py tests/test_fallback_checker.py",
+      "exit_code": 0
+    },
+    {
+      "command": "git -c core.whitespace=cr-at-eol diff --check",
+      "exit_code": 0,
+      "note": "Existing repository Markdown uses CRLF, including in Git blobs."
+    }
+  ],
+  "real_reserves_executed": false,
+  "new_cli_conversions": 0,
+  "model_promotions": 0,
+  "github_run_started": false,
+  "runtime_changed": false,
+  "files": {
+    "checker.py": "d5b7223fdcd43e959169103186dd9b3cede39eb74d51c553c0e4cf157ff94782",
+    "evaluator.py": "53d457487d3ba2c07c43a26423f6bb43cb02b6a567586143dcddcb4fedddcc61",
+    "historical/composition_00-17.svg": "6ed27097e231c373cff9029ef104b263530bb1ca0c0d269ed8aa376ef2cb9c2f",
+    "historical/composition_00-29.svg": "6ed27097e231c373cff9029ef104b263530bb1ca0c0d269ed8aa376ef2cb9c2f",
+    "historical/composition_00-43.svg": "6ed27097e231c373cff9029ef104b263530bb1ca0c0d269ed8aa376ef2cb9c2f",
+    "historical/composition_01-17.svg": "cf0567fe9c750aee23c8df944fe89f5ec635731bd5d24d0bd3db4aac1994c0ee",
+    "historical/composition_01-29.svg": "cf0567fe9c750aee23c8df944fe89f5ec635731bd5d24d0bd3db4aac1994c0ee",
+    "historical/composition_01-43.svg": "cf0567fe9c750aee23c8df944fe89f5ec635731bd5d24d0bd3db4aac1994c0ee",
+    "historical/composition_02-17.svg": "82047b9b6428aab055316056e24a3e04f2d50c4b7a719110b5bf0cc70f09905b",
+    "historical/composition_02-29.svg": "82047b9b6428aab055316056e24a3e04f2d50c4b7a719110b5bf0cc70f09905b",
+    "historical/composition_02-43.svg": "82047b9b6428aab055316056e24a3e04f2d50c4b7a719110b5bf0cc70f09905b",
+    "historical/composition_03-17.svg": "6ed27097e231c373cff9029ef104b263530bb1ca0c0d269ed8aa376ef2cb9c2f",
+    "historical/composition_03-29.svg": "6ed27097e231c373cff9029ef104b263530bb1ca0c0d269ed8aa376ef2cb9c2f",
+    "historical/composition_03-43.svg": "6ed27097e231c373cff9029ef104b263530bb1ca0c0d269ed8aa376ef2cb9c2f",
+    "historical/composition_04-17.svg": "78248f17ee4a53dd074d38823814a945380d362052951ecc20e5e2b9ce088718",
+    "historical/composition_04-29.svg": "78248f17ee4a53dd074d38823814a945380d362052951ecc20e5e2b9ce088718",
+    "historical/composition_04-43.svg": "78248f17ee4a53dd074d38823814a945380d362052951ecc20e5e2b9ce088718",
+    "historical/composition_05-17.svg": "f98fa852687a31942e1158ea35b1e94368437f33ac9356b52906a4956ec52be3",
+    "historical/composition_05-29.svg": "f98fa852687a31942e1158ea35b1e94368437f33ac9356b52906a4956ec52be3",
+    "historical/composition_05-43.svg": "f98fa852687a31942e1158ea35b1e94368437f33ac9356b52906a4956ec52be3",
+    "manifest.json": "1b2d449fa54865bde6980f4147975bd17077044ecba3428f63a0149f8be59e76",
+    "README.md": "289122aebd9ca6b0bfbc9cbc4b2818e9fcc2614a77232f0274b6713b487987ff",
+    "seal.json": "4c763befa8f506731d9ecadb0a191c09e53e5a6f911e40d9d4a05c24e4d6e775",
+    "summary.json": "7f4bc124ad657cdf26e02983bfa1b59943abc2f445e5f8090a23d6b8d2e83a97"
+  },
+  "sources": {
+    "tools/check_native_scene.py": "d5b7223fdcd43e959169103186dd9b3cede39eb74d51c553c0e4cf157ff94782",
+    "tools/evaluate_fallback_checker.py": "53d457487d3ba2c07c43a26423f6bb43cb02b6a567586143dcddcb4fedddcc61",
+    "tests/test_fallback_checker.py": "dcb6a47799b186c2d17629c208b6cd8a50225cf97ef64d0bf46269ea611ebb66",
+    ".github/workflows/local-completion-checks.yml": "7584fe983d9c0f040f0f7fe86e5f3ea4b04def7a9e39d7be3c3daf00ab202f53"
+  }
+}

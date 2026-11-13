@@ -1,10 +1,18 @@
 # ImageConverter
 
+Ein [unabhängiger Objekt- und Relationsprüfer](docs/next_arbeitspaket_2026-11-13_fallback_checker.md)
+prüft jetzt vollständige native Einzelprimitivannotationen ohne Runtime-Markierungen.
+Fünf synthetische Transformationsszenen bestehen; alle 60 Fehlerkontrollen werden
+zurückgewiesen, darunter 15 mit unveränderten Rasterbildern. Der Prüfer ist separat
+eingefroren. Frühere Ausgaben mit geteilten Gestängelinien und zusätzlichen Strichen
+bleiben unter diesem strikten Vertrag unzertifiziert; Segmentäquivalenz,
+Kurvenabdeckung und menschlicher Annotationsaudit sind offen. Reale Reserven bleiben gesperrt.
+
 Der [Fallback komponiert native Objektgruppen in vorhandene Szenen](docs/next_arbeitspaket_2026-11-13_fallback_composition.md):
 hinzufügen, entfernen und atomar ersetzen, richtige Kontextobjekte erhalten.
 Sechs eingefrorene synthetische Szenen bestehen mit beiden Renderern, ebenso
 sechs echte CLI-Prüfungen; alle 30 beschädigten Gegenproben werden abgelehnt.
-Vollständige unabhängige Semantik und reale Familienabnahmen bleiben offen.
+Allgemeine unabhängige Semantik und reale Familienabnahmen bleiben offen.
 
 Der [Fallback erkennt jetzt native Pfeil- und Gelenkgruppen](docs/next_arbeitspaket_2026-11-12_fallback_groups.md)
 mit einzeln geprüften Köpfen, Diagonalen, Anschlüssen und Gelenken. Auf vier

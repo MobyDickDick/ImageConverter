@@ -1,0 +1,3166 @@
+{
+  "checker_sha256": "d5b7223fdcd43e959169103186dd9b3cede39eb74d51c553c0e4cf157ff94782",
+  "manifest_sha256": "1b2d449fa54865bde6980f4147975bd17077044ecba3428f63a0149f8be59e76",
+  "evaluator_sha256": "53d457487d3ba2c07c43a26423f6bb43cb02b6a567586143dcddcb4fedddcc61",
+  "positives": [
+    {
+      "case_id": "plain",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "context_circle": 1,
+          "context_line": 2,
+          "panel": 3,
+          "diagonal_a": 4,
+          "diagonal_b": 5,
+          "connector": 6,
+          "linkage": 7,
+          "joint": 8,
+          "shaft": 9,
+          "head": 10,
+          "partly_hidden": 11,
+          "fully_hidden": 12,
+          "cover": 13
+        },
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "quarter_turn",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "context_circle": 1,
+          "context_line": 2,
+          "panel": 3,
+          "diagonal_a": 4,
+          "diagonal_b": 5,
+          "connector": 6,
+          "linkage": 7,
+          "joint": 8,
+          "shaft": 9,
+          "head": 10,
+          "partly_hidden": 11,
+          "fully_hidden": 12,
+          "cover": 13
+        },
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "half_turn",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "context_circle": 1,
+          "context_line": 2,
+          "panel": 3,
+          "diagonal_a": 4,
+          "diagonal_b": 5,
+          "connector": 6,
+          "linkage": 7,
+          "joint": 8,
+          "shaft": 9,
+          "head": 10,
+          "partly_hidden": 11,
+          "fully_hidden": 12,
+          "cover": 13
+        },
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "scaled",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "context_circle": 1,
+          "context_line": 2,
+          "panel": 3,
+          "diagonal_a": 4,
+          "diagonal_b": 5,
+          "connector": 6,
+          "linkage": 7,
+          "joint": 8,
+          "shaft": 9,
+          "head": 10,
+          "partly_hidden": 11,
+          "fully_hidden": 12,
+          "cover": 13
+        },
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "reflected",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "context_circle": 1,
+          "context_line": 2,
+          "panel": 3,
+          "diagonal_a": 4,
+          "diagonal_b": 5,
+          "connector": 6,
+          "linkage": 7,
+          "joint": 8,
+          "shaft": 9,
+          "head": 10,
+          "partly_hidden": 11,
+          "fully_hidden": 12,
+          "cover": 13
+        },
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "passed"
+      }
+    }
+  ],
+  "negatives": [
+    {
+      "case_id": "plain",
+      "damage": "missing_context",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "plain",
+      "damage": "missing_head",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "head"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "plain",
+      "damage": "missing_diagonal",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "diagonal_a"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "plain",
+      "damage": "missing_hidden",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "fully_hidden"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "plain",
+      "damage": "hidden_geometry",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "fully_hidden"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "plain",
+      "damage": "wrong_connection",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": false
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "plain",
+      "damage": "extra_object",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "plain",
+      "damage": "wrong_color",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "plain",
+      "damage": "wrong_width",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_line"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "plain",
+      "damage": "wrong_transform",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle",
+          "context_line",
+          "panel",
+          "diagonal_a",
+          "diagonal_b",
+          "connector",
+          "linkage",
+          "joint",
+          "shaft",
+          "head",
+          "partly_hidden",
+          "fully_hidden",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "plain",
+      "damage": "wrong_depth",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": false
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "plain",
+      "damage": "extra_hidden",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quarter_turn",
+      "damage": "missing_context",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quarter_turn",
+      "damage": "missing_head",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "head"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quarter_turn",
+      "damage": "missing_diagonal",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "diagonal_a"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quarter_turn",
+      "damage": "missing_hidden",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "fully_hidden"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quarter_turn",
+      "damage": "hidden_geometry",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "fully_hidden"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quarter_turn",
+      "damage": "wrong_connection",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": false
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quarter_turn",
+      "damage": "extra_object",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quarter_turn",
+      "damage": "wrong_color",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quarter_turn",
+      "damage": "wrong_width",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_line"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quarter_turn",
+      "damage": "wrong_transform",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle",
+          "context_line",
+          "panel",
+          "diagonal_a",
+          "diagonal_b",
+          "connector",
+          "linkage",
+          "joint",
+          "shaft",
+          "head",
+          "partly_hidden",
+          "fully_hidden",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quarter_turn",
+      "damage": "wrong_depth",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": false
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quarter_turn",
+      "damage": "extra_hidden",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "half_turn",
+      "damage": "missing_context",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "half_turn",
+      "damage": "missing_head",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "head"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "half_turn",
+      "damage": "missing_diagonal",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "diagonal_a"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "half_turn",
+      "damage": "missing_hidden",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "fully_hidden"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "half_turn",
+      "damage": "hidden_geometry",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "fully_hidden"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "half_turn",
+      "damage": "wrong_connection",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": false
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "half_turn",
+      "damage": "extra_object",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "half_turn",
+      "damage": "wrong_color",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "half_turn",
+      "damage": "wrong_width",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_line"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "half_turn",
+      "damage": "wrong_transform",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle",
+          "context_line",
+          "panel",
+          "diagonal_a",
+          "diagonal_b",
+          "connector",
+          "linkage",
+          "joint",
+          "shaft",
+          "head",
+          "partly_hidden",
+          "fully_hidden",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "half_turn",
+      "damage": "wrong_depth",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": false
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "half_turn",
+      "damage": "extra_hidden",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "scaled",
+      "damage": "missing_context",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "scaled",
+      "damage": "missing_head",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "head"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "scaled",
+      "damage": "missing_diagonal",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "diagonal_a"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "scaled",
+      "damage": "missing_hidden",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "fully_hidden"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "scaled",
+      "damage": "hidden_geometry",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "fully_hidden"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "scaled",
+      "damage": "wrong_connection",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": false
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "scaled",
+      "damage": "extra_object",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "scaled",
+      "damage": "wrong_color",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "scaled",
+      "damage": "wrong_width",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_line"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "scaled",
+      "damage": "wrong_transform",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle",
+          "context_line",
+          "panel",
+          "diagonal_a",
+          "diagonal_b",
+          "connector",
+          "linkage",
+          "joint",
+          "shaft",
+          "head",
+          "partly_hidden",
+          "fully_hidden",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "scaled",
+      "damage": "wrong_depth",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": false
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "scaled",
+      "damage": "extra_hidden",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "reflected",
+      "damage": "missing_context",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "reflected",
+      "damage": "missing_head",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "head"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "reflected",
+      "damage": "missing_diagonal",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "diagonal_a"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "reflected",
+      "damage": "missing_hidden",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 13,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "fully_hidden"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "reflected",
+      "damage": "hidden_geometry",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "fully_hidden"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "reflected",
+      "damage": "wrong_connection",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": false
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "reflected",
+      "damage": "extra_object",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "reflected",
+      "damage": "wrong_color",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "reflected",
+      "damage": "wrong_width",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_line"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "reflected",
+      "damage": "wrong_transform",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [
+          "context_circle",
+          "context_line",
+          "panel",
+          "diagonal_a",
+          "diagonal_b",
+          "connector",
+          "linkage",
+          "joint",
+          "shaft",
+          "head",
+          "partly_hidden",
+          "fully_hidden",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "reflected",
+      "damage": "wrong_depth",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 14,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "partly_hidden"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "fully_hidden"
+            ],
+            "passed": false
+          }
+        ],
+        "assignments_visited": 15,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "reflected",
+      "damage": "extra_hidden",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 14,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    }
+  ],
+  "historical": [
+    {
+      "file": "composition_00-17.svg",
+      "output_sha256": "6ed27097e231c373cff9029ef104b263530bb1ca0c0d269ed8aa376ef2cb9c2f",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_00-29.svg",
+      "output_sha256": "6ed27097e231c373cff9029ef104b263530bb1ca0c0d269ed8aa376ef2cb9c2f",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_00-43.svg",
+      "output_sha256": "6ed27097e231c373cff9029ef104b263530bb1ca0c0d269ed8aa376ef2cb9c2f",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_01-17.svg",
+      "output_sha256": "cf0567fe9c750aee23c8df944fe89f5ec635731bd5d24d0bd3db4aac1994c0ee",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 17,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_01-29.svg",
+      "output_sha256": "cf0567fe9c750aee23c8df944fe89f5ec635731bd5d24d0bd3db4aac1994c0ee",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 17,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_01-43.svg",
+      "output_sha256": "cf0567fe9c750aee23c8df944fe89f5ec635731bd5d24d0bd3db4aac1994c0ee",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 17,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_02-17.svg",
+      "output_sha256": "82047b9b6428aab055316056e24a3e04f2d50c4b7a719110b5bf0cc70f09905b",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 16,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_02-29.svg",
+      "output_sha256": "82047b9b6428aab055316056e24a3e04f2d50c4b7a719110b5bf0cc70f09905b",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 16,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_02-43.svg",
+      "output_sha256": "82047b9b6428aab055316056e24a3e04f2d50c4b7a719110b5bf0cc70f09905b",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 16,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_03-17.svg",
+      "output_sha256": "6ed27097e231c373cff9029ef104b263530bb1ca0c0d269ed8aa376ef2cb9c2f",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_03-29.svg",
+      "output_sha256": "6ed27097e231c373cff9029ef104b263530bb1ca0c0d269ed8aa376ef2cb9c2f",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_03-43.svg",
+      "output_sha256": "6ed27097e231c373cff9029ef104b263530bb1ca0c0d269ed8aa376ef2cb9c2f",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_04-17.svg",
+      "output_sha256": "78248f17ee4a53dd074d38823814a945380d362052951ecc20e5e2b9ce088718",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 18,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_04-29.svg",
+      "output_sha256": "78248f17ee4a53dd074d38823814a945380d362052951ecc20e5e2b9ce088718",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 18,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_04-43.svg",
+      "output_sha256": "78248f17ee4a53dd074d38823814a945380d362052951ecc20e5e2b9ce088718",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 18,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_05-17.svg",
+      "output_sha256": "f98fa852687a31942e1158ea35b1e94368437f33ac9356b52906a4956ec52be3",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_05-29.svg",
+      "output_sha256": "f98fa852687a31942e1158ea35b1e94368437f33ac9356b52906a4956ec52be3",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    },
+    {
+      "file": "composition_05-43.svg",
+      "output_sha256": "f98fa852687a31942e1158ea35b1e94368437f33ac9356b52906a4956ec52be3",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 15,
+        "expected_count": 11,
+        "unmatched_expected": [
+          "linkage"
+        ],
+        "mapping": {},
+        "relations": [],
+        "reason": "object_inventory_or_geometry"
+      }
+    }
+  ],
+  "real_reserves_executed": false,
+  "model_promotions": 0,
+  "historical_targets": [
+    {
+      "case_id": "composition_00",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 11,
+        "expected_count": 11,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "context_circle": 1,
+          "context_line": 2,
+          "panel": 3,
+          "diagonal_a": 4,
+          "diagonal_b": 5,
+          "connector": 6,
+          "linkage": 7,
+          "joint": 8,
+          "shaft": 9,
+          "head": 10
+        },
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 1,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 12,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "composition_01",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 11,
+        "expected_count": 11,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "context_circle": 1,
+          "context_line": 2,
+          "panel": 3,
+          "diagonal_a": 4,
+          "diagonal_b": 5,
+          "connector": 6,
+          "linkage": 7,
+          "joint": 8,
+          "shaft": 9,
+          "head": 10
+        },
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 1,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 12,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "composition_02",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 11,
+        "expected_count": 11,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "context_circle": 1,
+          "context_line": 2,
+          "panel": 3,
+          "diagonal_a": 4,
+          "diagonal_b": 5,
+          "connector": 6,
+          "linkage": 7,
+          "joint": 8,
+          "shaft": 9,
+          "head": 10
+        },
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 1,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 12,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "composition_03",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 11,
+        "expected_count": 11,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "context_circle": 1,
+          "context_line": 2,
+          "panel": 3,
+          "diagonal_a": 4,
+          "diagonal_b": 5,
+          "connector": 6,
+          "linkage": 7,
+          "joint": 8,
+          "shaft": 9,
+          "head": 10
+        },
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 1,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 12,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "composition_04",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 11,
+        "expected_count": 11,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "context_circle": 1,
+          "context_line": 2,
+          "panel": 3,
+          "diagonal_a": 4,
+          "diagonal_b": 5,
+          "connector": 6,
+          "linkage": 7,
+          "joint": 8,
+          "shaft": 9,
+          "head": 10
+        },
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 1,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 12,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "composition_05",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 11,
+        "expected_count": 11,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "context_circle": 1,
+          "context_line": 2,
+          "panel": 3,
+          "diagonal_a": 4,
+          "diagonal_b": 5,
+          "connector": 6,
+          "linkage": 7,
+          "joint": 8,
+          "shaft": 9,
+          "head": 10
+        },
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3,
+            "passed": true
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 1,
+            "passed": true
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ],
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ],
+            "passed": true
+          }
+        ],
+        "assignments_visited": 12,
+        "reason": "passed"
+      }
+    }
+  ]
+}

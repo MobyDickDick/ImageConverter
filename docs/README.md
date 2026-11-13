@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [P0: unabhängiger nativer Objekt-/Relationsprüfer mit separatem Freeze; 60 Fehlerkontrollen, verdeckte Geometrie und neue Segmentierungsgrenze (2026-11-13)](next_arbeitspaket_2026-11-13_fallback_checker.md)
+
 - [P0: Gruppen in vorhandenen Szenen hinzufügen, entfernen und ersetzen; 18/18 direkte und 6/6 CLI-Abnahmen, reale Reserven gesperrt (2026-11-13)](next_arbeitspaket_2026-11-13_fallback_composition.md)
 
 - [P0: Native Pfeil- und Gelenkgruppen, 3/4 statt 1/4 echte CLI-Abnahmen unter gleichen Budgets; lokale Gegenproben und gesperrte Familien (2026-11-12)](next_arbeitspaket_2026-11-12_fallback_groups.md)
